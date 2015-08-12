@@ -1335,7 +1335,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLTRANSFORMFEEDBACKVARYINGS)(uint32_t program, int32_t count,
                                                           char **varyings, uint32_t bufferMode);
     typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
-    typedef void(STDCALL *PFNGLBINDVERTEXBUFFER)(uint32_t bindingindex, uint32_t buffer,
+    typedef void(STDCALL *PFNGLBINDVERTEXBUFFER)(uint32_t binding_index, uint32_t buffer,
                                                  int32_t offset, int32_t stride);
     typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(int32_t count, uint32_t *arrays);
     typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(uint32_t location);
@@ -1359,24 +1359,23 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLVERTEXATTRIB4F)(uint32_t location, float value0, float value1,
                                                float value2, float value3);
     typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(uint32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBBINDING)(uint32_t attribindex, uint32_t bindingindex);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBBINDING)(uint32_t index, uint32_t binding_index);
     typedef void(STDCALL *PFNGLVERTEXATTRIBDIVISOR)(uint32_t index, uint32_t divisor);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBFORMAT)(uint32_t attribindex, int32_t size,
-                                                   uint32_t type, uint8_t normalized,
-                                                   uint32_t relativeoffset);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBFORMAT)(uint32_t index, int32_t size, uint32_t type,
+                                                   uint8_t normalized, uint32_t relativeoffset);
     typedef void(STDCALL *PFNGLVERTEXATTRIBI4I)(uint32_t index, int32_t x, int32_t y, int32_t z,
                                                 int32_t w);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBI4IV)(uint32_t index, int32_t *v);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4IV)(uint32_t index, int32_t *values);
     typedef void(STDCALL *PFNGLVERTEXATTRIBI4UI)(uint32_t index, uint32_t x, uint32_t y, uint32_t z,
                                                  uint32_t w);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBI4UIV)(uint32_t index, uint32_t *v);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBIFORMAT)(uint32_t attribindex, int32_t size,
-                                                    uint32_t type, uint32_t relativeoffset);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBIPOINTER)(uint32_t index, int32_t size, uint32_t type,
-                                                     int32_t stride, void *pointer);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4UIV)(uint32_t index, uint32_t *values);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBIFORMAT)(uint32_t index, int32_t size, uint32_t type,
+                                                    uint32_t relativeoffset);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBIPOINTER)(uint32_t location, int32_t size, uint32_t type,
+                                                     int32_t stride, void *data);
     typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(uint32_t location, int32_t size, uint32_t type,
                                                     uint8_t normalized, int32_t stride, void *data);
-    typedef void(STDCALL *PFNGLVERTEXBINDINGDIVISOR)(uint32_t bindingindex, uint32_t divisor);
+    typedef void(STDCALL *PFNGLVERTEXBINDINGDIVISOR)(uint32_t binding_index, uint32_t divisor);
     typedef int(STDCALL *PFNEGLINITIALIZE)(void *dpy, int *major, int *minor);
     typedef void *(STDCALL *PFNEGLCREATECONTEXT)(void *display, void *config, void *share_context,
                                                  int *attrib_list);

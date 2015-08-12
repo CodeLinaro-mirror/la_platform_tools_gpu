@@ -142,15 +142,17 @@ func (t *tweaker) bindOrSaveVertexArray(version *Version, newArray VertexArrayId
 		origArrayBufferID := t.ctx.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
 		for _, location := range locations {
 			location := location
-			origVertexAttrib := *(t.ctx.VertexAttributeArrays[location])
+			vao := t.ctx.Instances.VertexArrays[t.ctx.BoundVertexArray]
+			origVertexAttrib := *(vao.VertexAttributeArrays[location])
+			origVertexBinding := *(vao.VertexBufferBindings[BindingIndex(location)])
 			t.undo = append(t.undo, func() {
-				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexAttrib.Buffer))
+				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexBinding.Buffer))
 				if origVertexAttrib.Enabled {
 					t.out.Write(atom.NoID, NewGlEnableVertexAttribArray(location))
 				} else {
 					t.out.Write(atom.NoID, NewGlDisableVertexAttribArray(location))
 				}
-				t.out.Write(atom.NoID, NewGlVertexAttribPointer(location, GLint(origVertexAttrib.Size), origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
+				t.out.Write(atom.NoID, NewGlVertexAttribPointer(location, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
 				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID))
 			})
 		}

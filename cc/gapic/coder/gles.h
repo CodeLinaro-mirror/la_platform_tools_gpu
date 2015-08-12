@@ -740,57 +740,20 @@ namespace gles {
         uint8_t mSampleCoverageInvert;
     };
 
-    class VertexPointer: public Encodable {
+    class VertexAttributeValue: public Encodable {
     public:
-        VertexPointer() = default;
-        VertexPointer(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        VertexAttributeValue() = default;
+        VertexAttributeValue(U8__S Value) :
+            mValue(Value) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9,  } };
+            static gapic::Id ID{ { 0xc2, 0x52, 0xd9, 0x83, 0xed, 0x00, 0x93, 0x40, 0x35, 0x7d, 0x4d, 0xe8, 0x6e, 0x49, 0x50, 0x01, 0xf6, 0x09, 0xfa, 0x1f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
+            e->Value(this->mValue);
         }
 
-        memory::Pointer mPointer;
-    };
-
-    class VertexAttributeArray: public Encodable {
-    public:
-        VertexAttributeArray() = default;
-        VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, uint32_t Buffer, VertexPointer Pointer, uint32_t Divisor) :
-            mEnabled(Enabled),
-            mSize(Size),
-            mType(Type),
-            mNormalized(Normalized),
-            mStride(Stride),
-            mBuffer(Buffer),
-            mPointer(Pointer),
-            mDivisor(Divisor) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xcb, 0x68, 0xf3, 0x4a, 0x4f, 0x52, 0x58, 0xb4, 0x19, 0xd9, 0xed, 0x71, 0xbf, 0x8e, 0x35, 0x26, 0x23, 0xa0, 0x97, 0x8b,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Bool(this->mEnabled);
-            e->Uint32(this->mSize);
-            e->Uint32(this->mType);
-            e->Uint8(this->mNormalized);
-            e->Int32(this->mStride);
-            e->Uint32(this->mBuffer);
-            e->Value(this->mPointer);
-            e->Uint32(this->mDivisor);
-        }
-
-        bool mEnabled;
-        uint32_t mSize;
-        uint32_t mType;
-        uint8_t mNormalized;
-        int32_t mStride;
-        uint32_t mBuffer;
-        VertexPointer mPointer;
-        uint32_t mDivisor;
+        U8__S mValue;
     };
 
     class TextureUnit: public Encodable {
@@ -1099,16 +1062,104 @@ namespace gles {
         GLchar__S mInfoLog;
     };
 
-    class VertexArray: public Encodable {
+    class VertexBufferBinding: public Encodable {
     public:
-        VertexArray()  {}
+        VertexBufferBinding() = default;
+        VertexBufferBinding(uint32_t Buffer, int32_t Offset, int32_t Stride, uint32_t Divisor) :
+            mBuffer(Buffer),
+            mOffset(Offset),
+            mStride(Stride),
+            mDivisor(Divisor) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33,  } };
+            static gapic::Id ID{ { 0x83, 0xb6, 0xb1, 0x9e, 0xaf, 0x71, 0x93, 0x29, 0x90, 0x96, 0xaf, 0x7c, 0xb1, 0x60, 0x2a, 0x79, 0x56, 0x24, 0x98, 0x48,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
+            e->Uint32(this->mBuffer);
+            e->Int32(this->mOffset);
+            e->Int32(this->mStride);
+            e->Uint32(this->mDivisor);
         }
 
+        uint32_t mBuffer;
+        int32_t mOffset;
+        int32_t mStride;
+        uint32_t mDivisor;
+    };
+
+    class VertexPointer: public Encodable {
+    public:
+        VertexPointer() = default;
+        VertexPointer(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
+    class VertexAttributeArray: public Encodable {
+    public:
+        VertexAttributeArray() = default;
+        VertexAttributeArray(bool Enabled, int32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, VertexPointer Pointer, uint32_t RelativeOffset, bool Integer, uint32_t Binding) :
+            mEnabled(Enabled),
+            mSize(Size),
+            mType(Type),
+            mNormalized(Normalized),
+            mStride(Stride),
+            mPointer(Pointer),
+            mRelativeOffset(RelativeOffset),
+            mInteger(Integer),
+            mBinding(Binding) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x54, 0xe5, 0x9d, 0x6a, 0x34, 0xba, 0x1a, 0x60, 0x4b, 0xd0, 0x95, 0x31, 0x51, 0xa5, 0x59, 0xe6, 0x93, 0x89, 0x2c, 0x9b,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Bool(this->mEnabled);
+            e->Int32(this->mSize);
+            e->Uint32(this->mType);
+            e->Uint8(this->mNormalized);
+            e->Int32(this->mStride);
+            e->Value(this->mPointer);
+            e->Uint32(this->mRelativeOffset);
+            e->Bool(this->mInteger);
+            e->Uint32(this->mBinding);
+        }
+
+        bool mEnabled;
+        int32_t mSize;
+        uint32_t mType;
+        uint8_t mNormalized;
+        int32_t mStride;
+        VertexPointer mPointer;
+        uint32_t mRelativeOffset;
+        bool mInteger;
+        uint32_t mBinding;
+    };
+
+    class VertexArray: public Encodable {
+    public:
+        VertexArray() = default;
+        VertexArray(std::unordered_map<uint32_t,VertexBufferBinding*>* VertexBufferBindings, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays) :
+            mVertexBufferBindings(VertexBufferBindings),
+            mVertexAttributeArrays(VertexAttributeArrays) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x88, 0x2b, 0xd6, 0x76, 0x8c, 0x96, 0x48, 0x20, 0x33, 0xed, 0x96, 0x47, 0x44, 0xe0, 0x6c, 0x81, 0x63, 0xb0, 0x55, 0xd2,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            GAPID_FATAL("C++ map encoding not supported");
+            GAPID_FATAL("C++ map encoding not supported");
+        }
+
+        std::unordered_map<uint32_t,VertexBufferBinding*>* mVertexBufferBindings;
+        std::unordered_map<uint32_t,VertexAttributeArray*>* mVertexAttributeArrays;
     };
 
     class Query: public Encodable {
@@ -1163,7 +1214,7 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint32_t Identifier, ContextCreationInfo Info, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,TextureUnit*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
+        Context(uint32_t Identifier, ContextCreationInfo Info, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeValue>* VertexAttributes, std::unordered_map<uint32_t,TextureUnit*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
             mIdentifier(Identifier),
             mInfo(Info),
             mBlending(Blending),
@@ -1174,7 +1225,7 @@ namespace gles {
             mBoundBuffers(BoundBuffers),
             mBoundProgram(BoundProgram),
             mBoundVertexArray(BoundVertexArray),
-            mVertexAttributeArrays(VertexAttributeArrays),
+            mVertexAttributes(VertexAttributes),
             mTextureUnits(TextureUnits),
             mActiveTextureUnit(ActiveTextureUnit),
             mCapabilities(Capabilities),
@@ -1182,7 +1233,7 @@ namespace gles {
             mPixelStorage(PixelStorage),
             mInstances(Instances) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x92, 0x55, 0x7b, 0x90, 0xd5, 0x4e, 0xb8, 0x01, 0x1b, 0x60, 0x0f, 0x47, 0xad, 0x43, 0x29, 0x41, 0x62, 0x52, 0x54, 0xf3,  } };
+            static gapic::Id ID{ { 0x9f, 0x7a, 0x6d, 0x74, 0xa3, 0x6e, 0xd7, 0xf3, 0x0e, 0x0e, 0xcb, 0x56, 0x21, 0x74, 0xae, 0x0a, 0x9b, 0x3b, 0x78, 0x0b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1215,7 +1266,7 @@ namespace gles {
         std::unordered_map<uint32_t,uint32_t>* mBoundBuffers;
         uint32_t mBoundProgram;
         uint32_t mBoundVertexArray;
-        std::unordered_map<uint32_t,VertexAttributeArray*>* mVertexAttributeArrays;
+        std::unordered_map<uint32_t,VertexAttributeValue>* mVertexAttributes;
         std::unordered_map<uint32_t,TextureUnit*>* mTextureUnits;
         uint32_t mActiveTextureUnit;
         std::unordered_map<uint32_t,bool>* mCapabilities;
@@ -2933,26 +2984,26 @@ namespace gles {
     class GlBindVertexBuffer: public Encodable {
     public:
         GlBindVertexBuffer() = default;
-        GlBindVertexBuffer(atom::Observations observations, uint32_t Bindingindex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
+        GlBindVertexBuffer(atom::Observations observations, uint32_t BindingIndex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
             mobservations(observations),
-            mBindingindex(Bindingindex),
+            mBindingIndex(BindingIndex),
             mBuffer(Buffer),
             mOffset(Offset),
             mStride(Stride) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9d, 0x40, 0xb2, 0xc5, 0x1e, 0xd5, 0x6c, 0x58, 0x27, 0x13, 0x3e, 0x0d, 0xd3, 0x53, 0x7b, 0xba, 0xb7, 0x89, 0xf6, 0x3a,  } };
+            static gapic::Id ID{ { 0x5c, 0x8b, 0x73, 0xe7, 0xa5, 0xc4, 0xcc, 0xbb, 0xe0, 0x72, 0xf7, 0x1a, 0x8e, 0xc8, 0xef, 0xa8, 0xdf, 0x25, 0x44, 0xa8,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mBindingindex);
+            e->Uint32(this->mBindingIndex);
             e->Uint32(this->mBuffer);
             e->Int32(this->mOffset);
             e->Int32(this->mStride);
         }
 
         atom::Observations mobservations;
-        uint32_t mBindingindex;
+        uint32_t mBindingIndex;
         uint32_t mBuffer;
         int32_t mOffset;
         int32_t mStride;
@@ -21580,23 +21631,23 @@ namespace gles {
     class GlVertexAttribBinding: public Encodable {
     public:
         GlVertexAttribBinding() = default;
-        GlVertexAttribBinding(atom::Observations observations, uint32_t Attribindex, uint32_t Bindingindex) :
+        GlVertexAttribBinding(atom::Observations observations, uint32_t Index, uint32_t BindingIndex) :
             mobservations(observations),
-            mAttribindex(Attribindex),
-            mBindingindex(Bindingindex) {}
+            mIndex(Index),
+            mBindingIndex(BindingIndex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x40, 0x5b, 0xc5, 0xdc, 0xeb, 0xe4, 0xdf, 0xa0, 0xc5, 0xad, 0xa8, 0x12, 0x98, 0x07, 0xce, 0xb9, 0x4c, 0x8c, 0x0f, 0xaf,  } };
+            static gapic::Id ID{ { 0xcc, 0xbf, 0x28, 0xb7, 0x7c, 0x71, 0x43, 0xfe, 0x3d, 0x5b, 0x9f, 0x6e, 0x62, 0x40, 0x11, 0x59, 0xa4, 0x24, 0xc1, 0xfe,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mAttribindex);
-            e->Uint32(this->mBindingindex);
+            e->Uint32(this->mIndex);
+            e->Uint32(this->mBindingIndex);
         }
 
         atom::Observations mobservations;
-        uint32_t mAttribindex;
-        uint32_t mBindingindex;
+        uint32_t mIndex;
+        uint32_t mBindingIndex;
     };
 
     class GlVertexAttribDivisor: public Encodable {
@@ -21690,20 +21741,20 @@ namespace gles {
     class GlVertexAttribFormat: public Encodable {
     public:
         GlVertexAttribFormat() = default;
-        GlVertexAttribFormat(atom::Observations observations, uint32_t Attribindex, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
+        GlVertexAttribFormat(atom::Observations observations, uint32_t Index, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
             mobservations(observations),
-            mAttribindex(Attribindex),
+            mIndex(Index),
             mSize(Size),
             mType(Type),
             mNormalized(Normalized),
             mRelativeoffset(Relativeoffset) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc8, 0xf9, 0xcf, 0xaa, 0x14, 0x6c, 0x4d, 0xe6, 0xdd, 0xf2, 0xdc, 0x49, 0xba, 0x33, 0x9a, 0xe6, 0x95, 0xb4, 0x0e, 0x62,  } };
+            static gapic::Id ID{ { 0xe7, 0x45, 0x0e, 0xae, 0xf2, 0x50, 0xf1, 0x2b, 0x95, 0xa1, 0x67, 0xbb, 0xeb, 0x08, 0xfb, 0xcc, 0x13, 0x8b, 0x31, 0x63,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mAttribindex);
+            e->Uint32(this->mIndex);
             e->Int32(this->mSize);
             e->Uint32(this->mType);
             e->Uint8(this->mNormalized);
@@ -21711,7 +21762,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mAttribindex;
+        uint32_t mIndex;
         int32_t mSize;
         uint32_t mType;
         uint8_t mNormalized;
@@ -21752,23 +21803,23 @@ namespace gles {
     class GlVertexAttribI4iv: public Encodable {
     public:
         GlVertexAttribI4iv() = default;
-        GlVertexAttribI4iv(atom::Observations observations, uint32_t Index, GLint__CP V) :
+        GlVertexAttribI4iv(atom::Observations observations, uint32_t Index, GLint__CP Values) :
             mobservations(observations),
             mIndex(Index),
-            mV(V) {}
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x44, 0x96, 0xbb, 0xe2, 0xa2, 0x85, 0xb9, 0x2e, 0x7a, 0x6a, 0xb6, 0xdc, 0x19, 0x45, 0xb4, 0xf4, 0x0d, 0x75, 0xbb, 0xd6,  } };
+            static gapic::Id ID{ { 0x27, 0x13, 0xfb, 0x03, 0x6b, 0xc6, 0xbf, 0xdb, 0xbe, 0x2a, 0xa3, 0xaa, 0x3d, 0xac, 0x92, 0x3f, 0x32, 0x0c, 0x1f, 0x46,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
-            e->Value(this->mV);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
         uint32_t mIndex;
-        GLint__CP mV;
+        GLint__CP mValues;
     };
 
     class GlVertexAttribI4ui: public Encodable {
@@ -21805,48 +21856,48 @@ namespace gles {
     class GlVertexAttribI4uiv: public Encodable {
     public:
         GlVertexAttribI4uiv() = default;
-        GlVertexAttribI4uiv(atom::Observations observations, uint32_t Index, GLuint__CP V) :
+        GlVertexAttribI4uiv(atom::Observations observations, uint32_t Index, GLuint__CP Values) :
             mobservations(observations),
             mIndex(Index),
-            mV(V) {}
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9e, 0x75, 0x6b, 0x92, 0xb6, 0x5b, 0xb9, 0xb8, 0x7a, 0x3e, 0xc4, 0x90, 0x03, 0x7d, 0x31, 0xb2, 0x0a, 0x09, 0x17, 0xae,  } };
+            static gapic::Id ID{ { 0x65, 0xcc, 0xaf, 0x3b, 0xfb, 0x9e, 0x90, 0x25, 0xda, 0x95, 0xfb, 0xcd, 0x53, 0xe7, 0xe4, 0x15, 0x48, 0x20, 0xb7, 0x4c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
-            e->Value(this->mV);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
         uint32_t mIndex;
-        GLuint__CP mV;
+        GLuint__CP mValues;
     };
 
     class GlVertexAttribIFormat: public Encodable {
     public:
         GlVertexAttribIFormat() = default;
-        GlVertexAttribIFormat(atom::Observations observations, uint32_t Attribindex, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
+        GlVertexAttribIFormat(atom::Observations observations, uint32_t Index, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
             mobservations(observations),
-            mAttribindex(Attribindex),
+            mIndex(Index),
             mSize(Size),
             mType(Type),
             mRelativeoffset(Relativeoffset) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6f, 0x9a, 0xbc, 0xe0, 0x7f, 0x44, 0x96, 0xc3, 0xfa, 0xee, 0xc8, 0x98, 0xba, 0x8b, 0x44, 0xf3, 0x87, 0x97, 0x07, 0xb0,  } };
+            static gapic::Id ID{ { 0x07, 0xe8, 0x80, 0x35, 0x7c, 0xfd, 0xf8, 0x1b, 0x14, 0x2e, 0xea, 0x86, 0xed, 0xd8, 0xd0, 0xfa, 0x8e, 0x4f, 0x28, 0x4e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mAttribindex);
+            e->Uint32(this->mIndex);
             e->Int32(this->mSize);
             e->Uint32(this->mType);
             e->Uint32(this->mRelativeoffset);
         }
 
         atom::Observations mobservations;
-        uint32_t mAttribindex;
+        uint32_t mIndex;
         int32_t mSize;
         uint32_t mType;
         uint32_t mRelativeoffset;
@@ -21855,32 +21906,32 @@ namespace gles {
     class GlVertexAttribIPointer: public Encodable {
     public:
         GlVertexAttribIPointer() = default;
-        GlVertexAttribIPointer(atom::Observations observations, uint32_t Index, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlVertexAttribIPointer(atom::Observations observations, uint32_t Location, int32_t Size, uint32_t Type, int32_t Stride, VertexPointer Data) :
             mobservations(observations),
-            mIndex(Index),
+            mLocation(Location),
             mSize(Size),
             mType(Type),
             mStride(Stride),
-            mPointer(Pointer) {}
+            mData(Data) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7f, 0x10, 0x3a, 0xc4, 0x1e, 0xab, 0x53, 0x48, 0x07, 0x47, 0x52, 0xe1, 0xf0, 0xa6, 0x7f, 0xcf, 0x11, 0xa1, 0xff, 0x2e,  } };
+            static gapic::Id ID{ { 0x7c, 0x33, 0x68, 0x5f, 0x35, 0x87, 0xdf, 0xcc, 0x45, 0x21, 0xd9, 0xdd, 0x25, 0xdc, 0xd5, 0x16, 0x4d, 0x8e, 0x9f, 0x82,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mIndex);
+            e->Uint32(this->mLocation);
             e->Int32(this->mSize);
             e->Uint32(this->mType);
             e->Int32(this->mStride);
-            e->Value(this->mPointer);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
-        uint32_t mIndex;
+        uint32_t mLocation;
         int32_t mSize;
         uint32_t mType;
         int32_t mStride;
-        Void__CP mPointer;
+        VertexPointer mData;
     };
 
     class GlVertexAttribPointer: public Encodable {
@@ -21920,22 +21971,22 @@ namespace gles {
     class GlVertexBindingDivisor: public Encodable {
     public:
         GlVertexBindingDivisor() = default;
-        GlVertexBindingDivisor(atom::Observations observations, uint32_t Bindingindex, uint32_t Divisor) :
+        GlVertexBindingDivisor(atom::Observations observations, uint32_t BindingIndex, uint32_t Divisor) :
             mobservations(observations),
-            mBindingindex(Bindingindex),
+            mBindingIndex(BindingIndex),
             mDivisor(Divisor) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x22, 0xb4, 0x64, 0x01, 0x30, 0xcc, 0x39, 0x6c, 0x72, 0x22, 0xc2, 0x5b, 0xc5, 0xfe, 0x55, 0xc8, 0xe4, 0x22, 0x62, 0x8f,  } };
+            static gapic::Id ID{ { 0xe1, 0x64, 0xf1, 0x57, 0xa8, 0xc3, 0x94, 0x46, 0x2c, 0x39, 0xf6, 0x09, 0x18, 0x0b, 0x78, 0x1e, 0xef, 0x56, 0x3a, 0x14,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mBindingindex);
+            e->Uint32(this->mBindingIndex);
             e->Uint32(this->mDivisor);
         }
 
         atom::Observations mobservations;
-        uint32_t mBindingindex;
+        uint32_t mBindingIndex;
         uint32_t mDivisor;
     };
 

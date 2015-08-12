@@ -5737,6 +5737,12 @@ static const uint32_t TEXTURE2D = 1;
 static const uint32_t CUBEMAP = 2;
 }
 
+typedef uint32_t GLuint;
+
+typedef GLuint BindingIndex;
+
+typedef GLuint AttributeLocation;
+
 typedef int32_t GLint;
 
 typedef GLint Vec2i[2];
@@ -5744,8 +5750,6 @@ typedef GLint Vec2i[2];
 typedef GLint Vec3i[3];
 
 typedef GLint Vec4i[4];
-
-typedef uint32_t GLuint;
 
 typedef GLuint Vec2u[2];
 
@@ -5804,8 +5808,6 @@ typedef uint32_t PipelineId;
 typedef uint32_t UniformBlockId;
 
 typedef uint32_t TransformFeedbackId;
-
-typedef uint32_t AttributeLocation;
 
 typedef void* IndicesPointer;
 
@@ -5894,37 +5896,65 @@ typedef void* GLeglImageOES;
 struct VertexAttributeArray {
     inline VertexAttributeArray()
         : mEnabled(false),
-          mSize(4),
+          mSize((GLint)(4)),
           mType(GLenum::GL_FLOAT),
           mNormalized((GLboolean)(0)),
           mStride((GLsizei)(0)),
-          mBuffer((BufferId)(0)),
           mPointer(nullptr),
-          mDivisor(0) {}
-    inline VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, GLboolean Normalized,
-                                GLsizei Stride, BufferId Buffer, VertexPointer Pointer,
-                                uint32_t Divisor)
+          mRelativeOffset((GLuint)(0)),
+          mInteger(false),
+          mBinding(0) {}
+    inline VertexAttributeArray(bool Enabled, GLint Size, uint32_t Type, GLboolean Normalized,
+                                GLsizei Stride, VertexPointer Pointer, GLuint RelativeOffset,
+                                bool Integer, BindingIndex Binding)
         : mEnabled(Enabled),
           mSize(Size),
           mType(Type),
           mNormalized(Normalized),
           mStride(Stride),
-          mBuffer(Buffer),
           mPointer(Pointer),
-          mDivisor(Divisor) {}
+          mRelativeOffset(RelativeOffset),
+          mInteger(Integer),
+          mBinding(Binding) {}
 
     bool mEnabled;
-    uint32_t mSize;
+    GLint mSize;
     uint32_t mType;
     GLboolean mNormalized;
     GLsizei mStride;
-    BufferId mBuffer;
     VertexPointer mPointer;
-    uint32_t mDivisor;
+    GLuint mRelativeOffset;
+    bool mInteger;
+    BindingIndex mBinding;
 };
 
 typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>
         AttributeLocationToVertexAttributeArray__R;
+
+struct VertexAttributeValue {
+    inline VertexAttributeValue() : mValue(Slice<uint8_t>()) {}
+    inline VertexAttributeValue(Slice<uint8_t> Value) : mValue(Value) {}
+
+    Slice<uint8_t> mValue;
+};
+
+typedef std::unordered_map<AttributeLocation, VertexAttributeValue>
+        AttributeLocationToVertexAttributeValue;
+
+struct VertexBufferBinding {
+    inline VertexBufferBinding()
+        : mBuffer(0), mOffset((GLintptr)(0)), mStride((GLsizei)(16)), mDivisor((GLuint)(0)) {}
+    inline VertexBufferBinding(BufferId Buffer, GLintptr Offset, GLsizei Stride, GLuint Divisor)
+        : mBuffer(Buffer), mOffset(Offset), mStride(Stride), mDivisor(Divisor) {}
+
+    BufferId mBuffer;
+    GLintptr mOffset;
+    GLsizei mStride;
+    GLuint mDivisor;
+};
+
+typedef std::unordered_map<BindingIndex, std::shared_ptr<VertexBufferBinding>>
+        BindingIndexToVertexBufferBinding__R;
 
 struct Buffer {
     inline Buffer()
@@ -6334,7 +6364,18 @@ struct Program {
 
 typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramIdToProgram__R;
 
-struct VertexArray {};
+struct VertexArray {
+    inline VertexArray()
+        : mVertexBufferBindings(BindingIndexToVertexBufferBinding__R()),
+          mVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R()) {}
+    inline VertexArray(BindingIndexToVertexBufferBinding__R VertexBufferBindings,
+                       AttributeLocationToVertexAttributeArray__R VertexAttributeArrays)
+        : mVertexBufferBindings(VertexBufferBindings),
+          mVertexAttributeArrays(VertexAttributeArrays) {}
+
+    BindingIndexToVertexBufferBinding__R mVertexBufferBindings;
+    AttributeLocationToVertexAttributeArray__R mVertexAttributeArrays;
+};
 
 typedef std::unordered_map<VertexArrayId, std::shared_ptr<VertexArray>>
         VertexArrayIdToVertexArray__R;
@@ -6388,7 +6429,7 @@ struct Context {
           mBoundBuffers(GLenumToBufferId()),
           mBoundProgram(0),
           mBoundVertexArray(0),
-          mVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R()),
+          mVertexAttributes(AttributeLocationToVertexAttributeValue()),
           mTextureUnits(GLenumToTextureUnit__R()),
           mActiveTextureUnit(GLenum::GL_TEXTURE0),
           mCapabilities(GLenumToBool()),
@@ -6400,7 +6441,7 @@ struct Context {
                    GLenumToFramebufferId BoundFramebuffers,
                    GLenumToRenderbufferId BoundRenderbuffers, GLenumToBufferId BoundBuffers,
                    ProgramId BoundProgram, VertexArrayId BoundVertexArray,
-                   AttributeLocationToVertexAttributeArray__R VertexAttributeArrays,
+                   AttributeLocationToVertexAttributeValue VertexAttributes,
                    GLenumToTextureUnit__R TextureUnits, uint32_t ActiveTextureUnit,
                    GLenumToBool Capabilities, uint32_t GenerateMipmapHint,
                    GLenumToGLint PixelStorage, Objects Instances)
@@ -6414,7 +6455,7 @@ struct Context {
           mBoundBuffers(BoundBuffers),
           mBoundProgram(BoundProgram),
           mBoundVertexArray(BoundVertexArray),
-          mVertexAttributeArrays(VertexAttributeArrays),
+          mVertexAttributes(VertexAttributes),
           mTextureUnits(TextureUnits),
           mActiveTextureUnit(ActiveTextureUnit),
           mCapabilities(Capabilities),
@@ -6432,7 +6473,7 @@ struct Context {
     GLenumToBufferId mBoundBuffers;
     ProgramId mBoundProgram;
     VertexArrayId mBoundVertexArray;
-    AttributeLocationToVertexAttributeArray__R mVertexAttributeArrays;
+    AttributeLocationToVertexAttributeValue mVertexAttributes;
     GLenumToTextureUnit__R mTextureUnits;
     uint32_t mActiveTextureUnit;
     GLenumToBool mCapabilities;

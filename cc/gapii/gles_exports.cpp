@@ -1141,7 +1141,7 @@ EXPORT void STDCALL
 glTransformFeedbackVaryings(uint32_t program, int32_t count, char** varyings, uint32_t bufferMode);
 EXPORT void STDCALL glBindVertexArray(uint32_t array);
 EXPORT void STDCALL
-glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset, int32_t stride);
+glBindVertexBuffer(uint32_t binding_index, uint32_t buffer, int32_t offset, int32_t stride);
 EXPORT void STDCALL glDeleteVertexArrays(int32_t count, uint32_t* arrays);
 EXPORT void STDCALL glDisableVertexAttribArray(uint32_t location);
 EXPORT void STDCALL glEnableVertexAttribArray(uint32_t location);
@@ -1161,22 +1161,22 @@ EXPORT void STDCALL glVertexAttrib3fv(uint32_t location, float* value);
 EXPORT void STDCALL
 glVertexAttrib4f(uint32_t location, float value0, float value1, float value2, float value3);
 EXPORT void STDCALL glVertexAttrib4fv(uint32_t location, float* value);
-EXPORT void STDCALL glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex);
+EXPORT void STDCALL glVertexAttribBinding(uint32_t index, uint32_t binding_index);
 EXPORT void STDCALL glVertexAttribDivisor(uint32_t index, uint32_t divisor);
-EXPORT void STDCALL glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
+EXPORT void STDCALL glVertexAttribFormat(uint32_t index, int32_t size, uint32_t type,
                                          uint8_t normalized, uint32_t relativeoffset);
 EXPORT void STDCALL glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w);
-EXPORT void STDCALL glVertexAttribI4iv(uint32_t index, int32_t* v);
+EXPORT void STDCALL glVertexAttribI4iv(uint32_t index, int32_t* values);
 EXPORT void STDCALL
 glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z, uint32_t w);
-EXPORT void STDCALL glVertexAttribI4uiv(uint32_t index, uint32_t* v);
+EXPORT void STDCALL glVertexAttribI4uiv(uint32_t index, uint32_t* values);
 EXPORT void STDCALL
-glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type, uint32_t relativeoffset);
+glVertexAttribIFormat(uint32_t index, int32_t size, uint32_t type, uint32_t relativeoffset);
 EXPORT void STDCALL
-glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride, void* pointer);
+glVertexAttribIPointer(uint32_t location, int32_t size, uint32_t type, int32_t stride, void* data);
 EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                           uint8_t normalized, int32_t stride, void* data);
-EXPORT void STDCALL glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor);
+EXPORT void STDCALL glVertexBindingDivisor(uint32_t binding_index, uint32_t divisor);
 EXPORT int STDCALL eglInitialize(void* dpy, int* major, int* minor);
 EXPORT void* STDCALL
 eglCreateContext(void* display, void* config, void* share_context, int* attrib_list);
@@ -5945,10 +5945,10 @@ EXPORT void STDCALL glBindVertexArray(uint32_t array) {
     s->glBindVertexArray(array);
 }
 EXPORT void STDCALL
-glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset, int32_t stride) {
+glBindVertexBuffer(uint32_t binding_index, uint32_t buffer, int32_t offset, int32_t stride) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glBindVertexBuffer(bindingindex, buffer, offset, stride);
+    s->glBindVertexBuffer(binding_index, buffer, offset, stride);
 }
 EXPORT void STDCALL glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
     Spy* s = spy();
@@ -6041,31 +6041,31 @@ EXPORT void STDCALL glVertexAttrib4fv(uint32_t location, float* value) {
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttrib4fv(location, value);
 }
-EXPORT void STDCALL glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex) {
+EXPORT void STDCALL glVertexAttribBinding(uint32_t index, uint32_t binding_index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribBinding(attribindex, bindingindex);
+    s->glVertexAttribBinding(index, binding_index);
 }
 EXPORT void STDCALL glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttribDivisor(index, divisor);
 }
-EXPORT void STDCALL glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
+EXPORT void STDCALL glVertexAttribFormat(uint32_t index, int32_t size, uint32_t type,
                                          uint8_t normalized, uint32_t relativeoffset) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+    s->glVertexAttribFormat(index, size, type, normalized, relativeoffset);
 }
 EXPORT void STDCALL glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttribI4i(index, x, y, z, w);
 }
-EXPORT void STDCALL glVertexAttribI4iv(uint32_t index, int32_t* v) {
+EXPORT void STDCALL glVertexAttribI4iv(uint32_t index, int32_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribI4iv(index, v);
+    s->glVertexAttribI4iv(index, values);
 }
 EXPORT void STDCALL
 glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
@@ -6073,22 +6073,22 @@ glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z, uint32_t 
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttribI4ui(index, x, y, z, w);
 }
-EXPORT void STDCALL glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
+EXPORT void STDCALL glVertexAttribI4uiv(uint32_t index, uint32_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribI4uiv(index, v);
+    s->glVertexAttribI4uiv(index, values);
 }
 EXPORT void STDCALL
-glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type, uint32_t relativeoffset) {
+glVertexAttribIFormat(uint32_t index, int32_t size, uint32_t type, uint32_t relativeoffset) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+    s->glVertexAttribIFormat(index, size, type, relativeoffset);
 }
 EXPORT void STDCALL
-glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride, void* pointer) {
+glVertexAttribIPointer(uint32_t location, int32_t size, uint32_t type, int32_t stride, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexAttribIPointer(index, size, type, stride, pointer);
+    s->glVertexAttribIPointer(location, size, type, stride, data);
 }
 EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                           uint8_t normalized, int32_t stride, void* data) {
@@ -6096,10 +6096,10 @@ EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint3
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttribPointer(location, size, type, normalized, stride, data);
 }
-EXPORT void STDCALL glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor) {
+EXPORT void STDCALL glVertexBindingDivisor(uint32_t binding_index, uint32_t divisor) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glVertexBindingDivisor(bindingindex, divisor);
+    s->glVertexBindingDivisor(binding_index, divisor);
 }
 EXPORT int STDCALL eglInitialize(void* dpy, int* major, int* minor) {
     Spy* s = spy();

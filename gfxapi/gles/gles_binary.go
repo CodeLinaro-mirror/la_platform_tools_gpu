@@ -52,8 +52,7 @@ func init() {
 	Namespace.Add((*ContextCreationInfo)(nil).Class())
 	Namespace.Add((*Rect)(nil).Class())
 	Namespace.Add((*RasterizerState)(nil).Class())
-	Namespace.Add((*VertexPointer)(nil).Class())
-	Namespace.Add((*VertexAttributeArray)(nil).Class())
+	Namespace.Add((*VertexAttributeValue)(nil).Class())
 	Namespace.Add((*TextureUnit)(nil).Class())
 	Namespace.Add((*Renderbuffer)(nil).Class())
 	Namespace.Add((*Image)(nil).Class())
@@ -66,6 +65,9 @@ func init() {
 	Namespace.Add((*VertexAttribute)(nil).Class())
 	Namespace.Add((*Uniform)(nil).Class())
 	Namespace.Add((*Program)(nil).Class())
+	Namespace.Add((*VertexBufferBinding)(nil).Class())
+	Namespace.Add((*VertexPointer)(nil).Class())
+	Namespace.Add((*VertexAttributeArray)(nil).Class())
 	Namespace.Add((*VertexArray)(nil).Class())
 	Namespace.Add((*Query)(nil).Class())
 	Namespace.Add((*Objects)(nil).Class())
@@ -1018,8 +1020,7 @@ var (
 	binaryIDContextCreationInfo                              = binary.ID{0x57, 0x4c, 0x3d, 0x13, 0xcd, 0x72, 0x8e, 0x42, 0x9a, 0xb3, 0x20, 0x5d, 0xd8, 0x35, 0xc9, 0xb8, 0x11, 0xb7, 0xfb, 0xbd}
 	binaryIDRect                                             = binary.ID{0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2}
 	binaryIDRasterizerState                                  = binary.ID{0xba, 0xcc, 0xd9, 0x38, 0xef, 0x30, 0x2c, 0x2e, 0x7b, 0xd7, 0x18, 0x82, 0x47, 0x5c, 0x0f, 0xca, 0xd0, 0x70, 0x0c, 0x27}
-	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
-	binaryIDVertexAttributeArray                             = binary.ID{0xcb, 0x68, 0xf3, 0x4a, 0x4f, 0x52, 0x58, 0xb4, 0x19, 0xd9, 0xed, 0x71, 0xbf, 0x8e, 0x35, 0x26, 0x23, 0xa0, 0x97, 0x8b}
+	binaryIDVertexAttributeValue                             = binary.ID{0xc2, 0x52, 0xd9, 0x83, 0xed, 0x00, 0x93, 0x40, 0x35, 0x7d, 0x4d, 0xe8, 0x6e, 0x49, 0x50, 0x01, 0xf6, 0x09, 0xfa, 0x1f}
 	binaryIDTextureUnit                                      = binary.ID{0xbd, 0xaf, 0x42, 0x01, 0x29, 0xb0, 0x1b, 0x44, 0xb0, 0xcb, 0x60, 0x4f, 0x3f, 0x18, 0x2e, 0xa4, 0x44, 0x07, 0x1e, 0x30}
 	binaryIDRenderbuffer                                     = binary.ID{0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd}
 	binaryIDImage                                            = binary.ID{0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb}
@@ -1032,10 +1033,13 @@ var (
 	binaryIDVertexAttribute                                  = binary.ID{0x48, 0xcc, 0xff, 0xa1, 0xa1, 0x9d, 0x30, 0x10, 0xbe, 0x7e, 0x0b, 0x66, 0xae, 0x30, 0xb0, 0x2e, 0x5f, 0x88, 0x12, 0x8c}
 	binaryIDUniform                                          = binary.ID{0x08, 0x78, 0x15, 0x85, 0x85, 0xc7, 0xea, 0x3d, 0xf0, 0xc3, 0x78, 0x69, 0x2b, 0xf3, 0x79, 0x99, 0x8f, 0xbb, 0x00, 0x73}
 	binaryIDProgram                                          = binary.ID{0x31, 0x7d, 0xeb, 0xd6, 0x66, 0xf0, 0xad, 0x10, 0x25, 0xbe, 0x80, 0xcd, 0xa7, 0xc5, 0xf1, 0x13, 0xf9, 0x52, 0xc2, 0x28}
-	binaryIDVertexArray                                      = binary.ID{0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33}
+	binaryIDVertexBufferBinding                              = binary.ID{0x83, 0xb6, 0xb1, 0x9e, 0xaf, 0x71, 0x93, 0x29, 0x90, 0x96, 0xaf, 0x7c, 0xb1, 0x60, 0x2a, 0x79, 0x56, 0x24, 0x98, 0x48}
+	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
+	binaryIDVertexAttributeArray                             = binary.ID{0x54, 0xe5, 0x9d, 0x6a, 0x34, 0xba, 0x1a, 0x60, 0x4b, 0xd0, 0x95, 0x31, 0x51, 0xa5, 0x59, 0xe6, 0x93, 0x89, 0x2c, 0x9b}
+	binaryIDVertexArray                                      = binary.ID{0x88, 0x2b, 0xd6, 0x76, 0x8c, 0x96, 0x48, 0x20, 0x33, 0xed, 0x96, 0x47, 0x44, 0xe0, 0x6c, 0x81, 0x63, 0xb0, 0x55, 0xd2}
 	binaryIDQuery                                            = binary.ID{0x62, 0x44, 0x8a, 0xcf, 0x74, 0x8f, 0xd4, 0xae, 0x50, 0xd3, 0xfd, 0x27, 0xe3, 0x02, 0x90, 0xfe, 0x17, 0x13, 0x0c, 0xa3}
 	binaryIDObjects                                          = binary.ID{0x12, 0x48, 0x34, 0xe0, 0x63, 0x96, 0xd4, 0xef, 0x29, 0xea, 0xb8, 0xa4, 0xe1, 0x96, 0x9f, 0x3f, 0xb0, 0xc8, 0x1b, 0xf7}
-	binaryIDContext                                          = binary.ID{0x92, 0x55, 0x7b, 0x90, 0xd5, 0x4e, 0xb8, 0x01, 0x1b, 0x60, 0x0f, 0x47, 0xad, 0x43, 0x29, 0x41, 0x62, 0x52, 0x54, 0xf3}
+	binaryIDContext                                          = binary.ID{0x9f, 0x7a, 0x6d, 0x74, 0xa3, 0x6e, 0xd7, 0xf3, 0x0e, 0x0e, 0xcb, 0x56, 0x21, 0x74, 0xae, 0x0a, 0x9b, 0x3b, 0x78, 0x0b}
 	binaryIDContextInfo                                      = binary.ID{0xd2, 0x67, 0x34, 0x96, 0xd3, 0x4b, 0x64, 0xb2, 0x96, 0xea, 0x8e, 0xc7, 0xbc, 0x38, 0x93, 0xa1, 0xea, 0x4e, 0xcc, 0x96}
 	binaryIDEGLConfig                                        = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
 	binaryIDEGLContext                                       = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
@@ -1125,7 +1129,7 @@ var (
 	binaryIDGlBindTransformFeedback                          = binary.ID{0xed, 0xb8, 0x97, 0x48, 0x92, 0x72, 0x9a, 0x50, 0x94, 0x6c, 0x07, 0xc1, 0x62, 0x7e, 0x70, 0x1d, 0x8d, 0xcd, 0xb7, 0x45}
 	binaryIDGlBindVertexArray                                = binary.ID{0x23, 0x61, 0xb4, 0x30, 0xbe, 0x1c, 0x45, 0xfe, 0x34, 0x7d, 0xaf, 0x2f, 0xb9, 0xf3, 0x4e, 0xef, 0xa3, 0x25, 0x61, 0x46}
 	binaryIDGlBindVertexArrayOES                             = binary.ID{0x2c, 0x88, 0xbc, 0x5d, 0x79, 0xf5, 0x34, 0x2a, 0x35, 0xca, 0x72, 0x5c, 0xcf, 0x78, 0xee, 0x4b, 0xe5, 0x5f, 0xc8, 0xb4}
-	binaryIDGlBindVertexBuffer                               = binary.ID{0x9d, 0x40, 0xb2, 0xc5, 0x1e, 0xd5, 0x6c, 0x58, 0x27, 0x13, 0x3e, 0x0d, 0xd3, 0x53, 0x7b, 0xba, 0xb7, 0x89, 0xf6, 0x3a}
+	binaryIDGlBindVertexBuffer                               = binary.ID{0x5c, 0x8b, 0x73, 0xe7, 0xa5, 0xc4, 0xcc, 0xbb, 0xe0, 0x72, 0xf7, 0x1a, 0x8e, 0xc8, 0xef, 0xa8, 0xdf, 0x25, 0x44, 0xa8}
 	binaryIDGlBlendBarrier                                   = binary.ID{0x10, 0x69, 0xf8, 0x2b, 0xac, 0x7a, 0xc9, 0xdb, 0xd8, 0x60, 0x93, 0x51, 0x94, 0x51, 0x8d, 0xe0, 0x36, 0xff, 0x74, 0x4c}
 	binaryIDGlBlendBarrierKHR                                = binary.ID{0xad, 0x82, 0x54, 0xb5, 0x44, 0x3d, 0x10, 0x4b, 0xb0, 0x92, 0x87, 0x8a, 0x4d, 0x63, 0x42, 0x1e, 0x5d, 0xe3, 0x83, 0xb5}
 	binaryIDGlBlendBarrierNV                                 = binary.ID{0x88, 0x13, 0x6f, 0x0f, 0xfd, 0x69, 0x5c, 0x6c, 0x59, 0xbb, 0xaf, 0xfc, 0x54, 0xb6, 0x1f, 0xea, 0x5c, 0x3b, 0x58, 0x65}
@@ -1823,20 +1827,20 @@ var (
 	binaryIDGlVertexAttrib3fv                                = binary.ID{0x03, 0xd0, 0xa0, 0x95, 0x75, 0x66, 0x4b, 0x7d, 0x22, 0x05, 0xba, 0xf1, 0x05, 0x43, 0x63, 0xbd, 0x1e, 0x88, 0xf0, 0x2c}
 	binaryIDGlVertexAttrib4f                                 = binary.ID{0xbd, 0xf7, 0x69, 0xbd, 0xce, 0x95, 0x29, 0x1c, 0xfd, 0x43, 0x9c, 0x65, 0xbf, 0x5c, 0xc7, 0x4c, 0x77, 0x3a, 0xb6, 0xfc}
 	binaryIDGlVertexAttrib4fv                                = binary.ID{0x94, 0xea, 0xe9, 0xc2, 0xc0, 0x15, 0x67, 0xc8, 0xaf, 0xe0, 0x26, 0x64, 0x70, 0x2d, 0x93, 0x05, 0xfa, 0xde, 0xc4, 0xc9}
-	binaryIDGlVertexAttribBinding                            = binary.ID{0x40, 0x5b, 0xc5, 0xdc, 0xeb, 0xe4, 0xdf, 0xa0, 0xc5, 0xad, 0xa8, 0x12, 0x98, 0x07, 0xce, 0xb9, 0x4c, 0x8c, 0x0f, 0xaf}
+	binaryIDGlVertexAttribBinding                            = binary.ID{0xcc, 0xbf, 0x28, 0xb7, 0x7c, 0x71, 0x43, 0xfe, 0x3d, 0x5b, 0x9f, 0x6e, 0x62, 0x40, 0x11, 0x59, 0xa4, 0x24, 0xc1, 0xfe}
 	binaryIDGlVertexAttribDivisor                            = binary.ID{0xf8, 0xfa, 0x5c, 0xb5, 0xb1, 0xac, 0x6e, 0xce, 0x66, 0xf1, 0xa8, 0xf0, 0x26, 0x91, 0xe8, 0xf0, 0x56, 0x3a, 0xeb, 0xf1}
 	binaryIDGlVertexAttribDivisorANGLE                       = binary.ID{0x55, 0x7a, 0xbf, 0x43, 0xe7, 0xed, 0x50, 0x87, 0xf2, 0xc5, 0x62, 0x93, 0xe3, 0x38, 0xa9, 0x19, 0x90, 0xf2, 0x94, 0x00}
 	binaryIDGlVertexAttribDivisorEXT                         = binary.ID{0x73, 0x06, 0x91, 0x32, 0x0b, 0x54, 0xb5, 0xee, 0x58, 0x9f, 0x8c, 0x7a, 0xc9, 0xee, 0x88, 0xdd, 0x16, 0x1f, 0xde, 0x4a}
 	binaryIDGlVertexAttribDivisorNV                          = binary.ID{0x7f, 0xc1, 0x7f, 0x62, 0x8a, 0x1e, 0x58, 0xa3, 0x93, 0x74, 0xe2, 0x46, 0x6b, 0xe8, 0x0f, 0xaf, 0x57, 0x19, 0x43, 0x2c}
-	binaryIDGlVertexAttribFormat                             = binary.ID{0xc8, 0xf9, 0xcf, 0xaa, 0x14, 0x6c, 0x4d, 0xe6, 0xdd, 0xf2, 0xdc, 0x49, 0xba, 0x33, 0x9a, 0xe6, 0x95, 0xb4, 0x0e, 0x62}
+	binaryIDGlVertexAttribFormat                             = binary.ID{0xe7, 0x45, 0x0e, 0xae, 0xf2, 0x50, 0xf1, 0x2b, 0x95, 0xa1, 0x67, 0xbb, 0xeb, 0x08, 0xfb, 0xcc, 0x13, 0x8b, 0x31, 0x63}
 	binaryIDGlVertexAttribI4i                                = binary.ID{0x4f, 0x2e, 0xd9, 0x7a, 0xa9, 0x58, 0x21, 0x38, 0xdc, 0xd1, 0xbe, 0x2e, 0xbe, 0xbe, 0x56, 0x05, 0x1f, 0xec, 0xfc, 0x75}
-	binaryIDGlVertexAttribI4iv                               = binary.ID{0x44, 0x96, 0xbb, 0xe2, 0xa2, 0x85, 0xb9, 0x2e, 0x7a, 0x6a, 0xb6, 0xdc, 0x19, 0x45, 0xb4, 0xf4, 0x0d, 0x75, 0xbb, 0xd6}
+	binaryIDGlVertexAttribI4iv                               = binary.ID{0x27, 0x13, 0xfb, 0x03, 0x6b, 0xc6, 0xbf, 0xdb, 0xbe, 0x2a, 0xa3, 0xaa, 0x3d, 0xac, 0x92, 0x3f, 0x32, 0x0c, 0x1f, 0x46}
 	binaryIDGlVertexAttribI4ui                               = binary.ID{0x5e, 0x6f, 0x34, 0x33, 0x1f, 0x46, 0x84, 0xb9, 0x1d, 0x7c, 0x00, 0xc8, 0xf1, 0xef, 0xa6, 0x2d, 0x98, 0x51, 0x3f, 0xd7}
-	binaryIDGlVertexAttribI4uiv                              = binary.ID{0x9e, 0x75, 0x6b, 0x92, 0xb6, 0x5b, 0xb9, 0xb8, 0x7a, 0x3e, 0xc4, 0x90, 0x03, 0x7d, 0x31, 0xb2, 0x0a, 0x09, 0x17, 0xae}
-	binaryIDGlVertexAttribIFormat                            = binary.ID{0x6f, 0x9a, 0xbc, 0xe0, 0x7f, 0x44, 0x96, 0xc3, 0xfa, 0xee, 0xc8, 0x98, 0xba, 0x8b, 0x44, 0xf3, 0x87, 0x97, 0x07, 0xb0}
-	binaryIDGlVertexAttribIPointer                           = binary.ID{0x7f, 0x10, 0x3a, 0xc4, 0x1e, 0xab, 0x53, 0x48, 0x07, 0x47, 0x52, 0xe1, 0xf0, 0xa6, 0x7f, 0xcf, 0x11, 0xa1, 0xff, 0x2e}
+	binaryIDGlVertexAttribI4uiv                              = binary.ID{0x65, 0xcc, 0xaf, 0x3b, 0xfb, 0x9e, 0x90, 0x25, 0xda, 0x95, 0xfb, 0xcd, 0x53, 0xe7, 0xe4, 0x15, 0x48, 0x20, 0xb7, 0x4c}
+	binaryIDGlVertexAttribIFormat                            = binary.ID{0x07, 0xe8, 0x80, 0x35, 0x7c, 0xfd, 0xf8, 0x1b, 0x14, 0x2e, 0xea, 0x86, 0xed, 0xd8, 0xd0, 0xfa, 0x8e, 0x4f, 0x28, 0x4e}
+	binaryIDGlVertexAttribIPointer                           = binary.ID{0x7c, 0x33, 0x68, 0x5f, 0x35, 0x87, 0xdf, 0xcc, 0x45, 0x21, 0xd9, 0xdd, 0x25, 0xdc, 0xd5, 0x16, 0x4d, 0x8e, 0x9f, 0x82}
 	binaryIDGlVertexAttribPointer                            = binary.ID{0xa9, 0xf4, 0x7e, 0x3b, 0x7c, 0x9d, 0x74, 0x34, 0xf5, 0x0b, 0xad, 0xb3, 0xd8, 0x9b, 0x87, 0xf9, 0xef, 0xf5, 0x5f, 0x90}
-	binaryIDGlVertexBindingDivisor                           = binary.ID{0x22, 0xb4, 0x64, 0x01, 0x30, 0xcc, 0x39, 0x6c, 0x72, 0x22, 0xc2, 0x5b, 0xc5, 0xfe, 0x55, 0xc8, 0xe4, 0x22, 0x62, 0x8f}
+	binaryIDGlVertexBindingDivisor                           = binary.ID{0xe1, 0x64, 0xf1, 0x57, 0xa8, 0xc3, 0x94, 0x46, 0x2c, 0x39, 0xf6, 0x09, 0x18, 0x0b, 0x78, 0x1e, 0xef, 0x56, 0x3a, 0x14}
 	binaryIDGlViewport                                       = binary.ID{0x03, 0xfa, 0x0b, 0x41, 0x52, 0x97, 0x87, 0x00, 0x14, 0xd1, 0xf0, 0xff, 0x04, 0x25, 0x0d, 0x5c, 0x62, 0xc5, 0x50, 0xd8}
 	binaryIDGlViewportArrayvNV                               = binary.ID{0x53, 0x50, 0xaf, 0x8d, 0x81, 0x9f, 0xd8, 0xf0, 0xcd, 0xea, 0xaa, 0x5d, 0x76, 0x9f, 0x19, 0x16, 0x7c, 0xea, 0xd0, 0x0c}
 	binaryIDGlViewportIndexedfNV                             = binary.ID{0x33, 0x4a, 0x6f, 0x26, 0x11, 0xde, 0x78, 0x98, 0x9c, 0x91, 0xa6, 0xd0, 0x3f, 0xab, 0xe9, 0xfa, 0x6d, 0xb8, 0x09, 0x8d}
@@ -3352,96 +3356,39 @@ var schemaRasterizerState = &schema.Class{
 	},
 }
 
-type binaryClassVertexPointer struct{}
+type binaryClassVertexAttributeValue struct{}
 
-func (*VertexPointer) Class() binary.Class {
-	return (*binaryClassVertexPointer)(nil)
+func (*VertexAttributeValue) Class() binary.Class {
+	return (*binaryClassVertexAttributeValue)(nil)
 }
-func doEncodeVertexPointer(e binary.Encoder, o *VertexPointer) error {
-	e.Value(&o.Pointer)
+func doEncodeVertexAttributeValue(e binary.Encoder, o *VertexAttributeValue) error {
+	e.Value(&o.Value)
 	return e.Error()
 }
-func doDecodeVertexPointer(d binary.Decoder, o *VertexPointer) error {
-	d.Value(&o.Pointer)
+func doDecodeVertexAttributeValue(d binary.Decoder, o *VertexAttributeValue) error {
+	d.Value(&o.Value)
 	return d.Error()
 }
-func (*binaryClassVertexPointer) ID() binary.ID      { return binaryIDVertexPointer }
-func (*binaryClassVertexPointer) New() binary.Object { return &VertexPointer{} }
-func (*binaryClassVertexPointer) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVertexPointer(e, obj.(*VertexPointer))
+func (*binaryClassVertexAttributeValue) ID() binary.ID      { return binaryIDVertexAttributeValue }
+func (*binaryClassVertexAttributeValue) New() binary.Object { return &VertexAttributeValue{} }
+func (*binaryClassVertexAttributeValue) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexAttributeValue(e, obj.(*VertexAttributeValue))
 }
-func (*binaryClassVertexPointer) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &VertexPointer{}
-	return obj, doDecodeVertexPointer(d, obj)
+func (*binaryClassVertexAttributeValue) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexAttributeValue{}
+	return obj, doDecodeVertexAttributeValue(d, obj)
 }
-func (*binaryClassVertexPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVertexPointer(d, obj.(*VertexPointer))
+func (*binaryClassVertexAttributeValue) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexAttributeValue(d, obj.(*VertexAttributeValue))
 }
-func (*binaryClassVertexPointer) Schema() *schema.Class { return schemaVertexPointer }
+func (*binaryClassVertexAttributeValue) Schema() *schema.Class { return schemaVertexAttributeValue }
 
-var schemaVertexPointer = &schema.Class{
-	TypeID:  binaryIDVertexPointer,
+var schemaVertexAttributeValue = &schema.Class{
+	TypeID:  binaryIDVertexAttributeValue,
 	Package: "gles",
-	Name:    "VertexPointer",
+	Name:    "VertexAttributeValue",
 	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassVertexAttributeArray struct{}
-
-func (*VertexAttributeArray) Class() binary.Class {
-	return (*binaryClassVertexAttributeArray)(nil)
-}
-func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) error {
-	e.Bool(o.Enabled)
-	e.Uint32(o.Size)
-	e.Uint32(uint32(o.Type))
-	e.Uint8(uint8(o.Normalized))
-	e.Int32(int32(o.Stride))
-	e.Uint32(uint32(o.Buffer))
-	e.Value(&o.Pointer)
-	e.Uint32(o.Divisor)
-	return e.Error()
-}
-func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
-	o.Enabled = bool(binary.ReadBool(d))
-	o.Size = uint32(binary.ReadUint32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
-	o.Normalized = GLboolean(binary.ReadUint8(d))
-	o.Stride = GLsizei(binary.ReadInt32(d))
-	o.Buffer = BufferId(binary.ReadUint32(d))
-	d.Value(&o.Pointer)
-	o.Divisor = uint32(binary.ReadUint32(d))
-	return d.Error()
-}
-func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
-func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
-func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
-}
-func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &VertexAttributeArray{}
-	return obj, doDecodeVertexAttributeArray(d, obj)
-}
-func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
-}
-func (*binaryClassVertexAttributeArray) Schema() *schema.Class { return schemaVertexAttributeArray }
-
-var schemaVertexAttributeArray = &schema.Class{
-	TypeID:  binaryIDVertexAttributeArray,
-	Package: "gles",
-	Name:    "VertexAttributeArray",
-	Fields: []schema.Field{
-		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
-		{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
-		{Declared: "Divisor", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 	},
 }
 
@@ -4137,15 +4084,208 @@ var schemaProgram = &schema.Class{
 	},
 }
 
+type binaryClassVertexBufferBinding struct{}
+
+func (*VertexBufferBinding) Class() binary.Class {
+	return (*binaryClassVertexBufferBinding)(nil)
+}
+func doEncodeVertexBufferBinding(e binary.Encoder, o *VertexBufferBinding) error {
+	e.Uint32(uint32(o.Buffer))
+	e.Int32(int32(o.Offset))
+	e.Int32(int32(o.Stride))
+	e.Uint32(uint32(o.Divisor))
+	return e.Error()
+}
+func doDecodeVertexBufferBinding(d binary.Decoder, o *VertexBufferBinding) error {
+	o.Buffer = BufferId(binary.ReadUint32(d))
+	o.Offset = GLintptr(binary.ReadInt32(d))
+	o.Stride = GLsizei(binary.ReadInt32(d))
+	o.Divisor = GLuint(binary.ReadUint32(d))
+	return d.Error()
+}
+func (*binaryClassVertexBufferBinding) ID() binary.ID      { return binaryIDVertexBufferBinding }
+func (*binaryClassVertexBufferBinding) New() binary.Object { return &VertexBufferBinding{} }
+func (*binaryClassVertexBufferBinding) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexBufferBinding(e, obj.(*VertexBufferBinding))
+}
+func (*binaryClassVertexBufferBinding) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexBufferBinding{}
+	return obj, doDecodeVertexBufferBinding(d, obj)
+}
+func (*binaryClassVertexBufferBinding) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexBufferBinding(d, obj.(*VertexBufferBinding))
+}
+func (*binaryClassVertexBufferBinding) Schema() *schema.Class { return schemaVertexBufferBinding }
+
+var schemaVertexBufferBinding = &schema.Class{
+	TypeID:  binaryIDVertexBufferBinding,
+	Package: "gles",
+	Name:    "VertexBufferBinding",
+	Fields: []schema.Field{
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVertexPointer struct{}
+
+func (*VertexPointer) Class() binary.Class {
+	return (*binaryClassVertexPointer)(nil)
+}
+func doEncodeVertexPointer(e binary.Encoder, o *VertexPointer) error {
+	e.Value(&o.Pointer)
+	return e.Error()
+}
+func doDecodeVertexPointer(d binary.Decoder, o *VertexPointer) error {
+	d.Value(&o.Pointer)
+	return d.Error()
+}
+func (*binaryClassVertexPointer) ID() binary.ID      { return binaryIDVertexPointer }
+func (*binaryClassVertexPointer) New() binary.Object { return &VertexPointer{} }
+func (*binaryClassVertexPointer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexPointer(e, obj.(*VertexPointer))
+}
+func (*binaryClassVertexPointer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexPointer{}
+	return obj, doDecodeVertexPointer(d, obj)
+}
+func (*binaryClassVertexPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexPointer(d, obj.(*VertexPointer))
+}
+func (*binaryClassVertexPointer) Schema() *schema.Class { return schemaVertexPointer }
+
+var schemaVertexPointer = &schema.Class{
+	TypeID:  binaryIDVertexPointer,
+	Package: "gles",
+	Name:    "VertexPointer",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVertexAttributeArray struct{}
+
+func (*VertexAttributeArray) Class() binary.Class {
+	return (*binaryClassVertexAttributeArray)(nil)
+}
+func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) error {
+	e.Bool(o.Enabled)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Uint8(uint8(o.Normalized))
+	e.Int32(int32(o.Stride))
+	e.Value(&o.Pointer)
+	e.Uint32(uint32(o.RelativeOffset))
+	e.Bool(o.Integer)
+	e.Uint32(uint32(o.Binding))
+	return e.Error()
+}
+func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
+	o.Enabled = bool(binary.ReadBool(d))
+	o.Size = GLint(binary.ReadInt32(d))
+	o.Type = GLenum(binary.ReadUint32(d))
+	o.Normalized = GLboolean(binary.ReadUint8(d))
+	o.Stride = GLsizei(binary.ReadInt32(d))
+	d.Value(&o.Pointer)
+	o.RelativeOffset = GLuint(binary.ReadUint32(d))
+	o.Integer = bool(binary.ReadBool(d))
+	o.Binding = BindingIndex(binary.ReadUint32(d))
+	return d.Error()
+}
+func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
+func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
+}
+func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexAttributeArray{}
+	return obj, doDecodeVertexAttributeArray(d, obj)
+}
+func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
+}
+func (*binaryClassVertexAttributeArray) Schema() *schema.Class { return schemaVertexAttributeArray }
+
+var schemaVertexAttributeArray = &schema.Class{
+	TypeID:  binaryIDVertexAttributeArray,
+	Package: "gles",
+	Name:    "VertexAttributeArray",
+	Fields: []schema.Field{
+		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
+		{Declared: "RelativeOffset", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Integer", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Binding", Type: &schema.Primitive{Name: "BindingIndex", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassVertexArray struct{}
 
 func (*VertexArray) Class() binary.Class {
 	return (*binaryClassVertexArray)(nil)
 }
 func doEncodeVertexArray(e binary.Encoder, o *VertexArray) error {
+	e.Uint32(uint32(len(o.VertexBufferBindings)))
+	for k, v := range o.VertexBufferBindings {
+		e.Uint32(uint32(k))
+		if v != nil {
+			e.Object(v)
+		} else {
+			e.Object(nil)
+		}
+	}
+	e.Uint32(uint32(len(o.VertexAttributeArrays)))
+	for k, v := range o.VertexAttributeArrays {
+		e.Uint32(uint32(k))
+		if v != nil {
+			e.Object(v)
+		} else {
+			e.Object(nil)
+		}
+	}
 	return e.Error()
 }
 func doDecodeVertexArray(d binary.Decoder, o *VertexArray) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.VertexBufferBindings = make(BindingIndexːVertexBufferBindingʳᵐ, count)
+		m := o.VertexBufferBindings
+		for i := uint32(0); i < count; i++ {
+			var k BindingIndex
+			var v *VertexBufferBinding
+			k = BindingIndex(binary.ReadUint32(d))
+			if obj, err := d.Object(); obj != nil && err == nil {
+				v = obj.(*VertexBufferBinding)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.VertexAttributeArrays = make(AttributeLocationːVertexAttributeArrayʳᵐ, count)
+		m := o.VertexAttributeArrays
+		for i := uint32(0); i < count; i++ {
+			var k AttributeLocation
+			var v *VertexAttributeArray
+			k = AttributeLocation(binary.ReadUint32(d))
+			if obj, err := d.Object(); obj != nil && err == nil {
+				v = obj.(*VertexAttributeArray)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
 	return d.Error()
 }
 func (*binaryClassVertexArray) ID() binary.ID      { return binaryIDVertexArray }
@@ -4166,7 +4306,10 @@ var schemaVertexArray = &schema.Class{
 	TypeID:  binaryIDVertexArray,
 	Package: "gles",
 	Name:    "VertexArray",
-	Fields:  []schema.Field{},
+	Fields: []schema.Field{
+		{Declared: "VertexBufferBindings", Type: &schema.Map{Alias: "BindingIndexːVertexBufferBindingʳᵐ", KeyType: &schema.Primitive{Name: "BindingIndex", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexBufferBinding", ID: (*VertexBufferBinding)(nil).Class().ID()}}}},
+		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray", ID: (*VertexAttributeArray)(nil).Class().ID()}}}},
+	},
 }
 
 type binaryClassQuery struct{}
@@ -4478,14 +4621,10 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 	}
 	e.Uint32(uint32(o.BoundProgram))
 	e.Uint32(uint32(o.BoundVertexArray))
-	e.Uint32(uint32(len(o.VertexAttributeArrays)))
-	for k, v := range o.VertexAttributeArrays {
+	e.Uint32(uint32(len(o.VertexAttributes)))
+	for k, v := range o.VertexAttributes {
 		e.Uint32(uint32(k))
-		if v != nil {
-			e.Object(v)
-		} else {
-			e.Object(nil)
-		}
+		e.Value(&v)
 	}
 	e.Uint32(uint32(len(o.TextureUnits)))
 	for k, v := range o.TextureUnits {
@@ -4561,17 +4700,13 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.VertexAttributeArrays = make(AttributeLocationːVertexAttributeArrayʳᵐ, count)
-		m := o.VertexAttributeArrays
+		o.VertexAttributes = make(AttributeLocationːVertexAttributeValueᵐ, count)
+		m := o.VertexAttributes
 		for i := uint32(0); i < count; i++ {
 			var k AttributeLocation
-			var v *VertexAttributeArray
+			var v VertexAttributeValue
 			k = AttributeLocation(binary.ReadUint32(d))
-			if obj, err := d.Object(); obj != nil && err == nil {
-				v = obj.(*VertexAttributeArray)
-			} else {
-				v = nil
-			}
+			d.Value(&v)
 			m[k] = v
 		}
 	}
@@ -4652,7 +4787,7 @@ var schemaContext = &schema.Class{
 		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "GLenumːBufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
 		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray", ID: (*VertexAttributeArray)(nil).Class().ID()}}}},
+		{Declared: "VertexAttributes", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeValueᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "VertexAttributeValue", ID: (*VertexAttributeValue)(nil).Class().ID()}}},
 		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːTextureUnitʳᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "TextureUnit", ID: (*TextureUnit)(nil).Class().ID()}}}},
 		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Capabilities", Type: &schema.Map{Alias: "GLenumːboolᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
@@ -8184,7 +8319,7 @@ func (*GlBindVertexBuffer) Class() binary.Class {
 }
 func doEncodeGlBindVertexBuffer(e binary.Encoder, o *GlBindVertexBuffer) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Bindingindex))
+	e.Uint32(uint32(o.BindingIndex))
 	e.Uint32(uint32(o.Buffer))
 	e.Int32(int32(o.Offset))
 	e.Int32(int32(o.Stride))
@@ -8192,7 +8327,7 @@ func doEncodeGlBindVertexBuffer(e binary.Encoder, o *GlBindVertexBuffer) error {
 }
 func doDecodeGlBindVertexBuffer(d binary.Decoder, o *GlBindVertexBuffer) error {
 	d.Value(&o.observations)
-	o.Bindingindex = GLuint(binary.ReadUint32(d))
+	o.BindingIndex = BindingIndex(binary.ReadUint32(d))
 	o.Buffer = BufferId(binary.ReadUint32(d))
 	o.Offset = GLintptr(binary.ReadInt32(d))
 	o.Stride = GLsizei(binary.ReadInt32(d))
@@ -8218,7 +8353,7 @@ var schemaGlBindVertexBuffer = &schema.Class{
 	Name:    "GlBindVertexBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Bindingindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "BindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -41655,14 +41790,14 @@ func (*GlVertexAttribBinding) Class() binary.Class {
 }
 func doEncodeGlVertexAttribBinding(e binary.Encoder, o *GlVertexAttribBinding) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Attribindex))
-	e.Uint32(uint32(o.Bindingindex))
+	e.Uint32(uint32(o.Index))
+	e.Uint32(uint32(o.BindingIndex))
 	return e.Error()
 }
 func doDecodeGlVertexAttribBinding(d binary.Decoder, o *GlVertexAttribBinding) error {
 	d.Value(&o.observations)
-	o.Attribindex = GLuint(binary.ReadUint32(d))
-	o.Bindingindex = GLuint(binary.ReadUint32(d))
+	o.Index = AttributeLocation(binary.ReadUint32(d))
+	o.BindingIndex = BindingIndex(binary.ReadUint32(d))
 	return d.Error()
 }
 func (*binaryClassGlVertexAttribBinding) ID() binary.ID      { return binaryIDGlVertexAttribBinding }
@@ -41685,8 +41820,8 @@ var schemaGlVertexAttribBinding = &schema.Class{
 	Name:    "GlVertexAttribBinding",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Attribindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Bindingindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "BindingIndex", Method: schema.Uint32}},
 	},
 }
 
@@ -41875,7 +42010,7 @@ func (*GlVertexAttribFormat) Class() binary.Class {
 }
 func doEncodeGlVertexAttribFormat(e binary.Encoder, o *GlVertexAttribFormat) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Attribindex))
+	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
 	e.Uint8(uint8(o.Normalized))
@@ -41884,7 +42019,7 @@ func doEncodeGlVertexAttribFormat(e binary.Encoder, o *GlVertexAttribFormat) err
 }
 func doDecodeGlVertexAttribFormat(d binary.Decoder, o *GlVertexAttribFormat) error {
 	d.Value(&o.observations)
-	o.Attribindex = GLuint(binary.ReadUint32(d))
+	o.Index = AttributeLocation(binary.ReadUint32(d))
 	o.Size = GLint(binary.ReadInt32(d))
 	o.Type = GLenum(binary.ReadUint32(d))
 	o.Normalized = GLboolean(binary.ReadUint8(d))
@@ -41911,7 +42046,7 @@ var schemaGlVertexAttribFormat = &schema.Class{
 	Name:    "GlVertexAttribFormat",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Attribindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -41978,13 +42113,13 @@ func (*GlVertexAttribI4iv) Class() binary.Class {
 func doEncodeGlVertexAttribI4iv(e binary.Encoder, o *GlVertexAttribI4iv) error {
 	e.Value(&o.observations)
 	e.Uint32(uint32(o.Index))
-	e.Value(&o.V)
+	e.Value(&o.Values)
 	return e.Error()
 }
 func doDecodeGlVertexAttribI4iv(d binary.Decoder, o *GlVertexAttribI4iv) error {
 	d.Value(&o.observations)
 	o.Index = AttributeLocation(binary.ReadUint32(d))
-	d.Value(&o.V)
+	d.Value(&o.Values)
 	return d.Error()
 }
 func (*binaryClassGlVertexAttribI4iv) ID() binary.ID      { return binaryIDGlVertexAttribI4iv }
@@ -42008,7 +42143,7 @@ var schemaGlVertexAttribI4iv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "V", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -42071,13 +42206,13 @@ func (*GlVertexAttribI4uiv) Class() binary.Class {
 func doEncodeGlVertexAttribI4uiv(e binary.Encoder, o *GlVertexAttribI4uiv) error {
 	e.Value(&o.observations)
 	e.Uint32(uint32(o.Index))
-	e.Value(&o.V)
+	e.Value(&o.Values)
 	return e.Error()
 }
 func doDecodeGlVertexAttribI4uiv(d binary.Decoder, o *GlVertexAttribI4uiv) error {
 	d.Value(&o.observations)
 	o.Index = AttributeLocation(binary.ReadUint32(d))
-	d.Value(&o.V)
+	d.Value(&o.Values)
 	return d.Error()
 }
 func (*binaryClassGlVertexAttribI4uiv) ID() binary.ID      { return binaryIDGlVertexAttribI4uiv }
@@ -42101,7 +42236,7 @@ var schemaGlVertexAttribI4uiv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "V", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -42112,7 +42247,7 @@ func (*GlVertexAttribIFormat) Class() binary.Class {
 }
 func doEncodeGlVertexAttribIFormat(e binary.Encoder, o *GlVertexAttribIFormat) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Attribindex))
+	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
 	e.Uint32(uint32(o.Relativeoffset))
@@ -42120,7 +42255,7 @@ func doEncodeGlVertexAttribIFormat(e binary.Encoder, o *GlVertexAttribIFormat) e
 }
 func doDecodeGlVertexAttribIFormat(d binary.Decoder, o *GlVertexAttribIFormat) error {
 	d.Value(&o.observations)
-	o.Attribindex = GLuint(binary.ReadUint32(d))
+	o.Index = AttributeLocation(binary.ReadUint32(d))
 	o.Size = GLint(binary.ReadInt32(d))
 	o.Type = GLenum(binary.ReadUint32(d))
 	o.Relativeoffset = GLuint(binary.ReadUint32(d))
@@ -42146,7 +42281,7 @@ var schemaGlVertexAttribIFormat = &schema.Class{
 	Name:    "GlVertexAttribIFormat",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Attribindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Relativeoffset", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -42160,20 +42295,20 @@ func (*GlVertexAttribIPointer) Class() binary.Class {
 }
 func doEncodeGlVertexAttribIPointer(e binary.Encoder, o *GlVertexAttribIPointer) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Index))
+	e.Uint32(uint32(o.Location))
 	e.Int32(int32(o.Size))
 	e.Uint32(uint32(o.Type))
 	e.Int32(int32(o.Stride))
-	e.Value(&o.Pointer)
+	e.Value(&o.Data)
 	return e.Error()
 }
 func doDecodeGlVertexAttribIPointer(d binary.Decoder, o *GlVertexAttribIPointer) error {
 	d.Value(&o.observations)
-	o.Index = AttributeLocation(binary.ReadUint32(d))
+	o.Location = AttributeLocation(binary.ReadUint32(d))
 	o.Size = GLint(binary.ReadInt32(d))
 	o.Type = GLenum(binary.ReadUint32(d))
 	o.Stride = GLsizei(binary.ReadInt32(d))
-	d.Value(&o.Pointer)
+	d.Value(&o.Data)
 	return d.Error()
 }
 func (*binaryClassGlVertexAttribIPointer) ID() binary.ID      { return binaryIDGlVertexAttribIPointer }
@@ -42196,11 +42331,11 @@ var schemaGlVertexAttribIPointer = &schema.Class{
 	Name:    "GlVertexAttribIPointer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pointer", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Data", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
 	},
 }
 
@@ -42265,13 +42400,13 @@ func (*GlVertexBindingDivisor) Class() binary.Class {
 }
 func doEncodeGlVertexBindingDivisor(e binary.Encoder, o *GlVertexBindingDivisor) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Bindingindex))
+	e.Uint32(uint32(o.BindingIndex))
 	e.Uint32(uint32(o.Divisor))
 	return e.Error()
 }
 func doDecodeGlVertexBindingDivisor(d binary.Decoder, o *GlVertexBindingDivisor) error {
 	d.Value(&o.observations)
-	o.Bindingindex = GLuint(binary.ReadUint32(d))
+	o.BindingIndex = BindingIndex(binary.ReadUint32(d))
 	o.Divisor = GLuint(binary.ReadUint32(d))
 	return d.Error()
 }
@@ -42295,7 +42430,7 @@ var schemaGlVertexBindingDivisor = &schema.Class{
 	Name:    "GlVertexBindingDivisor",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Bindingindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "BindingIndex", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }

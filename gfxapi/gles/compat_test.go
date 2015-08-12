@@ -118,6 +118,60 @@ func (c glShaderSourceCompatTest) run(t *testing.T) {
 	}
 }
 
+func TestGlVertexAttribPointerCompatTest(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	device := &service.Device{Version: OpenGL_3_0}
+	transform, err := compat(device, d, l)
+	if err != nil {
+		log.E(l, "Failed to create compatability transform: %v", err)
+		return
+	}
+
+	positions := []float32{-1., -1., 1., -1., -1., 1., 1., 1.}
+	indices := []uint16{0, 1, 2, 1, 2, 3}
+	mw := &mockWriter{}
+	for _, a := range []atom.Atom{
+		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
+		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
+		NewContextInfo("", "", "", "OpenGL ES 2.0", 64, 64, GLenum_GL_RGB565, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_STENCIL_INDEX8, true, true),
+		NewGlEnableVertexAttribArray(0),
+		NewGlVertexAttribPointer(0, 2, GLenum_GL_FLOAT, GLboolean(0), 8, p(0x100000)).
+			AddRead(atom.Data(a, d, l, p(0x100000), positions)),
+		NewGlDrawElements(GLenum_GL_TRIANGLES, GLsizei(len(indices)), GLenum_GL_UNSIGNED_SHORT, p(0x200000)).
+			AddRead(atom.Data(a, d, l, p(0x200000), indices)),
+	} {
+		transform.Transform(atom.NoID, a, mw)
+	}
+
+	// Find glDrawElements and check it is using a buffer instead of client's memory now
+	s := gfxapi.NewState()
+	for _, a := range mw.atoms {
+		a.Mutate(s, d, l)
+		if _, ok := a.(*GlDrawElements); ok {
+			ctx := getContext(s)
+			vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
+			array := vao.VertexAttributeArrays[0]
+			binding := vao.VertexBufferBindings[array.Binding]
+			if binding.Buffer != 0 && array.Pointer.Address == 0 {
+				return // Success
+			} else {
+				t.Error("glDrawElements does not source vertex data from buffer.")
+				return
+			}
+		}
+	}
+
+	t.Error("glDrawElements atom not found.")
+	return
+}
+
 func TestShaderCompat(t *testing.T) {
 	for _, test := range glslCompatTests {
 		glShaderSourceCompatTest(test).run(t)

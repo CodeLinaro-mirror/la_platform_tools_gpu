@@ -173,19 +173,6 @@ enum TextureKind {
 // Macros
 /////////////////////////////////////////////////////////////////
 
-macro u32 vertexAttribTypeSize(GLenum t) {
-  return switch (t) {
-    case GL_BYTE:           1
-    case GL_UNSIGNED_BYTE:  1
-    case GL_SHORT:          2
-    case GL_UNSIGNED_SHORT: 2
-    case GL_FIXED:          4
-    case GL_FLOAT:          4
-    case GL_HALF_FLOAT_ARB: 2
-    case GL_HALF_FLOAT_OES: 2
-  }
-}
-
 macro s32 min(s32 a, s32 b) {
   return switch (a < b) {
     case true:  a
@@ -440,21 +427,6 @@ class Program {
 }
 
 @internal
-class VertexArray {}
-
-@internal
-class VertexAttributeArray {
-  bool          Enabled    = false
-  u32           Size       = 4        // Number of components. 1, 2, 3 or 4.
-  GLenum        Type       = GL_FLOAT // Type of each component.
-  GLboolean     Normalized = 0
-  GLsizei       Stride     = 0        // Byte offset between each consecutive attribute, or 0 for tight.
-  BufferId      Buffer     = 0
-  VertexPointer Pointer               // Used if Buffer == 0
-  u32           Divisor    = 0
-}
-
-@internal
 class TextureUnit {
   map!(GLenum, TextureId) Bindings
 }
@@ -520,8 +492,6 @@ type u32               PipelineId
 type u32               UniformBlockId
 type u32               TransformFeedbackId
 
-type u32 AttributeLocation
-
 @replay_custom_value type const void* IndicesPointer
 @replay_custom_value type const void* VertexPointer
 @replay_custom_value type const void* TexturePointer
@@ -554,23 +524,23 @@ class ContextCreationInfo {
 
 @internal
 class Context {
-  ContextID                                         Identifier
-  ContextCreationInfo                               Info
-  BlendState                                        Blending
-  RasterizerState                                   Rasterizing
-  ClearState                                        Clearing
-  map!(GLenum, FramebufferId)                       BoundFramebuffers
-  map!(GLenum, RenderbufferId)                      BoundRenderbuffers
-  map!(GLenum, BufferId)                            BoundBuffers
-  ProgramId                                         BoundProgram
-  VertexArrayId                                     BoundVertexArray
-  map!(AttributeLocation, ref!VertexAttributeArray) VertexAttributeArrays
-  map!(GLenum, ref!TextureUnit)                     TextureUnits
-  GLenum                                            ActiveTextureUnit     = GL_TEXTURE0
-  map!(GLenum, bool)                                Capabilities
-  GLenum                                            GenerateMipmapHint    = GL_DONT_CARE
-  map!(GLenum, GLint)                               PixelStorage
-  Objects                                           Instances
+  ContextID                                     Identifier
+  ContextCreationInfo                           Info
+  BlendState                                    Blending
+  RasterizerState                               Rasterizing
+  ClearState                                    Clearing
+  map!(GLenum, FramebufferId)                   BoundFramebuffers
+  map!(GLenum, RenderbufferId)                  BoundRenderbuffers
+  map!(GLenum, BufferId)                        BoundBuffers
+  ProgramId                                     BoundProgram
+  VertexArrayId                                 BoundVertexArray
+  map!(AttributeLocation, VertexAttributeValue) VertexAttributes
+  map!(GLenum, ref!TextureUnit)                 TextureUnits
+  GLenum                                        ActiveTextureUnit  = GL_TEXTURE0
+  map!(GLenum, bool)                            Capabilities
+  GLenum                                        GenerateMipmapHint = GL_DONT_CARE
+  map!(GLenum, GLint)                           PixelStorage
+  Objects                                       Instances
 }
 
 type u64 ThreadID
@@ -641,8 +611,12 @@ macro ref!Context CreateContext() {
   ctx.PixelStorage[GL_PACK_ALIGNMENT] = 4
   ctx.PixelStorage[GL_UNPACK_ALIGNMENT] = 4
 
-  for i in (0 .. 64) {  // TODO: Count
-    ctx.VertexAttributeArrays[as!AttributeLocation(i)] = new!VertexAttributeArray()
+  ctx.Instances.VertexArrays[0] = NewVertexArray()
+
+  for i in (0 .. as!AttributeLocation(MAX_VERTEX_ATTRIBS)) {
+    v := make!Vec4f(1)
+    v[0] = Vec4f(0.0, 0.0, 0.0, 1.0)
+    ctx.VertexAttributes[i] = VertexAttributeValue(Value: as!u8[](v))
   }
 
   for i in (0 .. 64) {  // TODO: Count

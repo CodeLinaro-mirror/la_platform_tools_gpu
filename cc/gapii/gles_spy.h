@@ -1804,7 +1804,7 @@ public:
     inline bool hasGlBindVertexArray() const;
     inline void glBindVertexArray(uint32_t array);
     inline bool hasGlBindVertexBuffer() const;
-    inline void glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset,
+    inline void glBindVertexBuffer(uint32_t binding_index, uint32_t buffer, int32_t offset,
                                    int32_t stride);
     inline bool hasGlDeleteVertexArrays() const;
     inline void glDeleteVertexArrays(int32_t count, uint32_t* arrays);
@@ -1844,31 +1844,31 @@ public:
     inline bool hasGlVertexAttrib4fv() const;
     inline void glVertexAttrib4fv(uint32_t location, float* value);
     inline bool hasGlVertexAttribBinding() const;
-    inline void glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex);
+    inline void glVertexAttribBinding(uint32_t index, uint32_t binding_index);
     inline bool hasGlVertexAttribDivisor() const;
     inline void glVertexAttribDivisor(uint32_t index, uint32_t divisor);
     inline bool hasGlVertexAttribFormat() const;
-    inline void glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
+    inline void glVertexAttribFormat(uint32_t index, int32_t size, uint32_t type,
                                      uint8_t normalized, uint32_t relativeoffset);
     inline bool hasGlVertexAttribI4i() const;
     inline void glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w);
     inline bool hasGlVertexAttribI4iv() const;
-    inline void glVertexAttribI4iv(uint32_t index, int32_t* v);
+    inline void glVertexAttribI4iv(uint32_t index, int32_t* values);
     inline bool hasGlVertexAttribI4ui() const;
     inline void glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z, uint32_t w);
     inline bool hasGlVertexAttribI4uiv() const;
-    inline void glVertexAttribI4uiv(uint32_t index, uint32_t* v);
+    inline void glVertexAttribI4uiv(uint32_t index, uint32_t* values);
     inline bool hasGlVertexAttribIFormat() const;
-    inline void glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type,
+    inline void glVertexAttribIFormat(uint32_t index, int32_t size, uint32_t type,
                                       uint32_t relativeoffset);
     inline bool hasGlVertexAttribIPointer() const;
-    inline void glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride,
-                                       void* pointer);
+    inline void glVertexAttribIPointer(uint32_t location, int32_t size, uint32_t type,
+                                       int32_t stride, void* data);
     inline bool hasGlVertexAttribPointer() const;
     inline void glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                       uint8_t normalized, int32_t stride, void* data);
     inline bool hasGlVertexBindingDivisor() const;
-    inline void glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor);
+    inline void glVertexBindingDivisor(uint32_t binding_index, uint32_t divisor);
     inline bool hasEglInitialize() const;
     inline int eglInitialize(void* dpy, int* major, int* minor);
     inline bool hasEglCreateContext() const;
@@ -5080,12 +5080,17 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
         uint32_t l_ReadVertexArrays_228_instance_count = 1;
         if (l_ReadVertexArrays_228_index_count > 0 && l_ReadVertexArrays_228_instance_count > 0) {
             if (l_ReadVertexArrays_228_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                std::shared_ptr<VertexArray> l_vao3 =
+                        l_ReadVertexArrays_228_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)];
                 for (AttributeLocation l_i = (AttributeLocation)(0);
                      l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                     std::shared_ptr<VertexAttributeArray> l_arr =
-                            l_ReadVertexArrays_228_ctx->mVertexAttributeArrays[l_i];
+                            l_vao3->mVertexAttributeArrays[l_i];
                     if (l_arr->mEnabled) {
-                        if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                        std::shared_ptr<VertexBufferBinding> l_binding =
+                                l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                        if (l_binding->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                            GLsizei l_stride = l_binding->mStride;
                             uint32_t l_VertexAttribTypeSize_229_type = l_arr->mType;
                             GLint l_VertexAttribTypeSize_229_result = /* clang-format off */
                             /* switch(l_VertexAttribTypeSize_229_type) */
@@ -5094,20 +5099,14 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
                                 /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_229_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_229_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_229_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_229_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                 /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_229_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_229_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                 /* default: */ 0 /* clang-format on */;
-                            GLint l_size =
-                                    l_VertexAttribTypeSize_229_result * (GLint)(l_arr->mSize);
-                            GLint l_stride = /* clang-format off */
-                            /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                /* default: */ 0 /* clang-format on */;
-                            uint32_t l_divisor = l_arr->mDivisor;
+                            GLint l_size = l_VertexAttribTypeSize_229_result * l_arr->mSize;
+                            uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                             if (l_divisor == 0) {
                                 for (uint32_t l_v = l_ReadVertexArrays_228_first_index;
                                      l_v < l_ReadVertexArrays_228_first_index +
                                                      l_ReadVertexArrays_228_index_count;
                                      ++l_v) {
-                                    GLint l_offset = l_stride * (GLint)(l_v);
+                                    GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                (uint64_t)(l_offset + l_size)));
                                 }
@@ -5116,7 +5115,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
                                         l_ReadVertexArrays_228_instance_count - 1;
                                 uint32_t l_last_index = l_last_instance / l_divisor;
                                 for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                    GLint l_offset = l_stride * (GLint)(l_v);
+                                    GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                (uint64_t)(l_offset + l_size)));
                                 }
@@ -5264,12 +5263,17 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t draw_mode, int32_t first_ind
         uint32_t l_ReadVertexArrays_247_instance_count = (uint32_t)(instance_count);
         if (l_ReadVertexArrays_247_index_count > 0 && l_ReadVertexArrays_247_instance_count > 0) {
             if (l_ReadVertexArrays_247_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                std::shared_ptr<VertexArray> l_vao3 =
+                        l_ReadVertexArrays_247_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)];
                 for (AttributeLocation l_i = (AttributeLocation)(0);
                      l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                     std::shared_ptr<VertexAttributeArray> l_arr =
-                            l_ReadVertexArrays_247_ctx->mVertexAttributeArrays[l_i];
+                            l_vao3->mVertexAttributeArrays[l_i];
                     if (l_arr->mEnabled) {
-                        if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                        std::shared_ptr<VertexBufferBinding> l_binding =
+                                l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                        if (l_binding->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                            GLsizei l_stride = l_binding->mStride;
                             uint32_t l_VertexAttribTypeSize_248_type = l_arr->mType;
                             GLint l_VertexAttribTypeSize_248_result = /* clang-format off */
                             /* switch(l_VertexAttribTypeSize_248_type) */
@@ -5278,20 +5282,14 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t draw_mode, int32_t first_ind
                                 /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_248_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_248_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_248_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_248_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                 /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_248_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_248_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                 /* default: */ 0 /* clang-format on */;
-                            GLint l_size =
-                                    l_VertexAttribTypeSize_248_result * (GLint)(l_arr->mSize);
-                            GLint l_stride = /* clang-format off */
-                            /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                /* default: */ 0 /* clang-format on */;
-                            uint32_t l_divisor = l_arr->mDivisor;
+                            GLint l_size = l_VertexAttribTypeSize_248_result * l_arr->mSize;
+                            uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                             if (l_divisor == 0) {
                                 for (uint32_t l_v = l_ReadVertexArrays_247_first_index;
                                      l_v < l_ReadVertexArrays_247_first_index +
                                                      l_ReadVertexArrays_247_index_count;
                                      ++l_v) {
-                                    GLint l_offset = l_stride * (GLint)(l_v);
+                                    GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                (uint64_t)(l_offset + l_size)));
                                 }
@@ -5300,7 +5298,7 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t draw_mode, int32_t first_ind
                                         l_ReadVertexArrays_247_instance_count - 1;
                                 uint32_t l_last_index = l_last_instance / l_divisor;
                                 for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                    GLint l_offset = l_stride * (GLint)(l_v);
+                                    GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                (uint64_t)(l_offset + l_size)));
                                 }
@@ -5413,12 +5411,19 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                 if (l_ReadVertexArrays_261_index_count > 0 &&
                     l_ReadVertexArrays_261_instance_count > 0) {
                     if (l_ReadVertexArrays_261_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_261_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_261_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_262_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_262_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_262_type) */
@@ -5427,20 +5432,14 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_262_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_262_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_262_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_262_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_262_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_262_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_262_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_262_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_261_first_index;
                                              l_v < l_ReadVertexArrays_261_first_index +
                                                              l_ReadVertexArrays_261_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5449,7 +5448,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                                                 l_ReadVertexArrays_261_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5474,12 +5473,19 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                 if (l_ReadVertexArrays_263_index_count > 0 &&
                     l_ReadVertexArrays_263_instance_count > 0) {
                     if (l_ReadVertexArrays_263_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_263_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_263_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_264_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_264_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_264_type) */
@@ -5488,20 +5494,14 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_264_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_264_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_264_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_264_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_264_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_264_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_264_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_264_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_263_first_index;
                                              l_v < l_ReadVertexArrays_263_first_index +
                                                              l_ReadVertexArrays_263_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5510,7 +5510,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
                                                 l_ReadVertexArrays_263_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5639,12 +5639,19 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                 if (l_ReadVertexArrays_278_index_count > 0 &&
                     l_ReadVertexArrays_278_instance_count > 0) {
                     if (l_ReadVertexArrays_278_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_278_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_278_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_279_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_279_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_279_type) */
@@ -5653,20 +5660,14 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_279_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_279_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_279_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_279_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_279_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_279_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_279_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_279_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_278_first_index;
                                              l_v < l_ReadVertexArrays_278_first_index +
                                                              l_ReadVertexArrays_278_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5675,7 +5676,7 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                                                 l_ReadVertexArrays_278_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5700,12 +5701,19 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                 if (l_ReadVertexArrays_280_index_count > 0 &&
                     l_ReadVertexArrays_280_instance_count > 0) {
                     if (l_ReadVertexArrays_280_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_280_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_280_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_281_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_281_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_281_type) */
@@ -5714,20 +5722,14 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_281_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_281_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_281_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_281_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_281_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_281_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_281_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_281_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_280_first_index;
                                              l_v < l_ReadVertexArrays_280_first_index +
                                                              l_ReadVertexArrays_280_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5736,7 +5738,7 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                                                 l_ReadVertexArrays_280_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5946,12 +5948,19 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                 if (l_ReadVertexArrays_306_index_count > 0 &&
                     l_ReadVertexArrays_306_instance_count > 0) {
                     if (l_ReadVertexArrays_306_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_306_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_306_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_307_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_307_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_307_type) */
@@ -5960,20 +5969,14 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_307_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_307_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_307_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_307_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_307_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_307_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_307_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_307_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_306_first_index;
                                              l_v < l_ReadVertexArrays_306_first_index +
                                                              l_ReadVertexArrays_306_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -5982,7 +5985,7 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                                                 l_ReadVertexArrays_306_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6007,12 +6010,19 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                 if (l_ReadVertexArrays_308_index_count > 0 &&
                     l_ReadVertexArrays_308_instance_count > 0) {
                     if (l_ReadVertexArrays_308_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_308_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_308_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_309_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_309_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_309_type) */
@@ -6021,20 +6031,14 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_309_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_309_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_309_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_309_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_309_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_309_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_309_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_309_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_308_first_index;
                                              l_v < l_ReadVertexArrays_308_first_index +
                                                              l_ReadVertexArrays_308_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6043,7 +6047,7 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                                                 l_ReadVertexArrays_308_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6176,12 +6180,19 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                 if (l_ReadVertexArrays_323_index_count > 0 &&
                     l_ReadVertexArrays_323_instance_count > 0) {
                     if (l_ReadVertexArrays_323_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_323_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_323_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_324_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_324_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_324_type) */
@@ -6190,20 +6201,14 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_324_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_324_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_324_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_324_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_324_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_324_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_324_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_324_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_323_first_index;
                                              l_v < l_ReadVertexArrays_323_first_index +
                                                              l_ReadVertexArrays_323_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6212,7 +6217,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                                                 l_ReadVertexArrays_323_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6237,12 +6242,19 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                 if (l_ReadVertexArrays_325_index_count > 0 &&
                     l_ReadVertexArrays_325_instance_count > 0) {
                     if (l_ReadVertexArrays_325_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_325_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_325_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_326_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_326_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_326_type) */
@@ -6251,20 +6263,14 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_326_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_326_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_326_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_326_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_326_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_326_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_326_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_326_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_325_first_index;
                                              l_v < l_ReadVertexArrays_325_first_index +
                                                              l_ReadVertexArrays_325_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6273,7 +6279,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                                                 l_ReadVertexArrays_325_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6408,12 +6414,19 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                 if (l_ReadVertexArrays_341_index_count > 0 &&
                     l_ReadVertexArrays_341_instance_count > 0) {
                     if (l_ReadVertexArrays_341_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_341_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_341_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_342_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_342_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_342_type) */
@@ -6422,20 +6435,14 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_342_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_342_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_342_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_342_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_342_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_342_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_342_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_342_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_341_first_index;
                                              l_v < l_ReadVertexArrays_341_first_index +
                                                              l_ReadVertexArrays_341_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6444,7 +6451,7 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                                                 l_ReadVertexArrays_341_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6469,12 +6476,19 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                 if (l_ReadVertexArrays_343_index_count > 0 &&
                     l_ReadVertexArrays_343_instance_count > 0) {
                     if (l_ReadVertexArrays_343_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_343_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_343_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_344_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_344_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_344_type) */
@@ -6483,20 +6497,14 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_344_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_344_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_344_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_344_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_344_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_344_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_344_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_344_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_343_first_index;
                                              l_v < l_ReadVertexArrays_343_first_index +
                                                              l_ReadVertexArrays_343_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6505,7 +6513,7 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
                                                 l_ReadVertexArrays_343_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6639,12 +6647,19 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                 if (l_ReadVertexArrays_359_index_count > 0 &&
                     l_ReadVertexArrays_359_instance_count > 0) {
                     if (l_ReadVertexArrays_359_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_359_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_359_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_360_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_360_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_360_type) */
@@ -6653,20 +6668,14 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_360_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_360_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_360_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_360_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_360_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_360_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_360_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_360_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_359_first_index;
                                              l_v < l_ReadVertexArrays_359_first_index +
                                                              l_ReadVertexArrays_359_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6675,7 +6684,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                                                 l_ReadVertexArrays_359_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6700,12 +6709,19 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                 if (l_ReadVertexArrays_361_index_count > 0 &&
                     l_ReadVertexArrays_361_instance_count > 0) {
                     if (l_ReadVertexArrays_361_ctx->mBoundVertexArray == (VertexArrayId)(0)) {
+                        std::shared_ptr<VertexArray> l_vao3 =
+                                l_ReadVertexArrays_361_ctx->mInstances
+                                        .mVertexArrays[(VertexArrayId)(0)];
                         for (AttributeLocation l_i = (AttributeLocation)(0);
                              l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
                             std::shared_ptr<VertexAttributeArray> l_arr =
-                                    l_ReadVertexArrays_361_ctx->mVertexAttributeArrays[l_i];
+                                    l_vao3->mVertexAttributeArrays[l_i];
                             if (l_arr->mEnabled) {
-                                if (l_arr->mBuffer == (BufferId)(0) && l_arr->mPointer != nullptr) {
+                                std::shared_ptr<VertexBufferBinding> l_binding =
+                                        l_vao3->mVertexBufferBindings[l_arr->mBinding];
+                                if (l_binding->mBuffer == (BufferId)(0) &&
+                                    l_arr->mPointer != nullptr) {
+                                    GLsizei l_stride = l_binding->mStride;
                                     uint32_t l_VertexAttribTypeSize_362_type = l_arr->mType;
                                     GLint l_VertexAttribTypeSize_362_result = /* clang-format off */
                                     /* switch(l_VertexAttribTypeSize_362_type) */
@@ -6714,20 +6730,14 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                                         /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_362_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_362_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_362_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_362_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
                                         /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_362_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_362_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
                                         /* default: */ 0 /* clang-format on */;
-                                    GLint l_size = l_VertexAttribTypeSize_362_result *
-                                                   (GLint)(l_arr->mSize);
-                                    GLint l_stride = /* clang-format off */
-                                    /* switch(l_arr->mStride == (GLsizei)(0)) */
-                                        /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_size) :
-                                        /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((GLint)(l_arr->mStride)) :
-                                        /* default: */ 0 /* clang-format on */;
-                                    uint32_t l_divisor = l_arr->mDivisor;
+                                    GLint l_size = l_VertexAttribTypeSize_362_result * l_arr->mSize;
+                                    uint32_t l_divisor = (uint32_t)(l_binding->mDivisor);
                                     if (l_divisor == 0) {
                                         for (uint32_t l_v = l_ReadVertexArrays_361_first_index;
                                              l_v < l_ReadVertexArrays_361_first_index +
                                                              l_ReadVertexArrays_361_index_count;
                                              ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -6736,7 +6746,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                                                 l_ReadVertexArrays_361_instance_count - 1;
                                         uint32_t l_last_index = l_last_instance / l_divisor;
                                         for (uint32_t l_v = 0; l_v < l_last_index + 1; ++l_v) {
-                                            GLint l_offset = l_stride * (GLint)(l_v);
+                                            GLint l_offset = (GLint)(l_stride) * (GLint)(l_v);
                                             read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                                        (uint64_t)(l_offset + l_size)));
                                         }
@@ -7039,8 +7049,9 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
         std::shared_ptr<Context> l_GetContext_377_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_377_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
-            l_ctx->mInstances.mVertexArrays[array] =
-                    std::shared_ptr<VertexArray>(new VertexArray());
+            l_ctx->mInstances.mVertexArrays[array] = std::shared_ptr<VertexArray>(
+                    new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                    AttributeLocationToVertexAttributeArray__R()));
         }
         l_ctx->mBoundVertexArray = array;
         observe(observations.mReads);
@@ -9761,7 +9772,9 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             VertexArrayId l_id = (VertexArrayId)(
                     slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(new VertexArray());
+            l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(
+                    new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                    AttributeLocationToVertexAttributeArray__R()));
             write(l_a, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -40998,8 +41011,23 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
         std::shared_ptr<Context> l_GetContext_3541_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_3541_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
-            l_ctx->mInstances.mVertexArrays[array] =
-                    std::shared_ptr<VertexArray>(new VertexArray());
+            std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                    new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                    AttributeLocationToVertexAttributeArray__R()));
+            for (BindingIndex l_i = (BindingIndex)(0);
+                 l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+                l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                        new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+            }
+            for (AttributeLocation l_i = (AttributeLocation)(0);
+                 l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+                l_array->mVertexAttributeArrays[l_i] =
+                        std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                                false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                                nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+            }
+            std::shared_ptr<VertexArray> l_NewVertexArray_3543_result = l_array;
+            l_ctx->mInstances.mVertexArrays[array] = l_NewVertexArray_3543_result;
         }
         l_ctx->mBoundVertexArray = array;
         observe(observations.mReads);
@@ -41015,10 +41043,10 @@ inline bool GlesSpy::hasGlBindVertexBuffer() const {
     return mImports.glBindVertexBuffer != nullptr;
 }
 
-inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset,
+inline void GlesSpy::glBindVertexBuffer(uint32_t binding_index, uint32_t buffer, int32_t offset,
                                         int32_t stride) {
     GAPID_INFO("glBindVertexBuffer(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
-               bindingindex, buffer, offset, stride);
+               binding_index, buffer, offset, stride);
 
     if (!hasGlBindVertexBuffer()) {
         GAPID_WARNING("Application called unsupported function glBindVertexBuffer");
@@ -41027,14 +41055,66 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3543_major = 3;
-        uint32_t l_minRequiredVersion_3543_minor = 1;
+        uint32_t l_minRequiredVersion_3544_major = 3;
+        uint32_t l_minRequiredVersion_3544_minor = 1;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3546_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3545_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3545_result;
+        bool l_glErrorInvalidOperationIf_3547_condition =
+                l_ctx->mBoundVertexArray == (VertexArrayId)(0);
+        if (l_glErrorInvalidOperationIf_3547_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_BindVertexBuffer_3548_ctx = l_ctx;
+        BindingIndex l_BindVertexBuffer_3548_binding_index = binding_index;
+        BufferId l_BindVertexBuffer_3548_buffer = buffer;
+        GLintptr l_BindVertexBuffer_3548_offset = offset;
+        GLsizei l_BindVertexBuffer_3548_stride = stride;
+        bool l_glErrorInvalidValueIf_3549_condition =
+                l_BindVertexBuffer_3548_binding_index >=
+                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3549_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3550_condition =
+                l_BindVertexBuffer_3548_offset < (GLintptr)(0);
+        if (l_glErrorInvalidValueIf_3550_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3551_condition = l_BindVertexBuffer_3548_stride < (GLsizei)(0);
+        if (l_glErrorInvalidValueIf_3551_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3552_condition =
+                l_BindVertexBuffer_3548_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+        if (l_glErrorInvalidValueIf_3552_condition) {
+            break;
+        }
+        if (!(l_BindVertexBuffer_3548_ctx->mInstances.mBuffers.count(
+                      l_BindVertexBuffer_3548_buffer) > 0)) {
+            l_BindVertexBuffer_3548_ctx->mInstances.mBuffers[l_BindVertexBuffer_3548_buffer] =
+                    std::shared_ptr<Buffer>(new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0),
+                                                       GLenum::GL_STATIC_DRAW, 0, 0,
+                                                       Slice<uint8_t>()));
+        }
+        std::shared_ptr<VertexArray> l_vao4 =
+                l_BindVertexBuffer_3548_ctx->mInstances
+                        .mVertexArrays[l_BindVertexBuffer_3548_ctx->mBoundVertexArray];
+        std::shared_ptr<VertexBufferBinding> l_binding =
+                l_vao4->mVertexBufferBindings[l_BindVertexBuffer_3548_binding_index];
+        l_binding->mBuffer = l_BindVertexBuffer_3548_buffer;
+        l_binding->mOffset = l_BindVertexBuffer_3548_offset;
+        l_binding->mStride = l_BindVertexBuffer_3548_stride;
         observe(observations.mReads);
-        mImports.glBindVertexBuffer(bindingindex, buffer, offset, stride);
+        mImports.glBindVertexBuffer(binding_index, buffer, offset, stride);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlBindVertexBuffer coder(observations, bindingindex, buffer, offset,
+    gapic::coder::gles::GlBindVertexBuffer coder(observations, binding_index, buffer, offset,
                                                  stride);
     mEncoder->Variant(&coder);
 }
@@ -41053,19 +41133,30 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3544_major = 3;
-        uint32_t l_minRequiredVersion_3544_minor = 0;
-        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3546_msg = "No context bound";
+        uint32_t l_minRequiredVersion_3553_major = 3;
+        uint32_t l_minRequiredVersion_3553_minor = 0;
+        bool l_glErrorInvalidValueIf_3554_condition = count < (GLsizei)(0);
+        if (l_glErrorInvalidValueIf_3554_condition) {
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3545_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3545_result;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3556_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3555_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3555_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
-            l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
-                    std::shared_ptr<VertexArray>();
+            VertexArrayId l_id = read(l_a, (uint64_t)(l_i));
+            if (l_id != (VertexArrayId)(0)) {
+                if (l_ctx->mInstances.mVertexArrays.count(l_id) > 0) {
+                    l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>();
+                    if (l_ctx->mBoundVertexArray == l_id) {
+                        l_ctx->mBoundVertexArray = (VertexArrayId)(0);
+                    }
+                }
+            }
         }
         observe(observations.mReads);
         mImports.glDeleteVertexArrays(count, arrays);
@@ -41093,16 +41184,23 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3547_major = 2;
-        uint32_t l_minRequiredVersion_3547_minor = 0;
-        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3549_msg = "No context bound";
+        uint32_t l_minRequiredVersion_3557_major = 2;
+        uint32_t l_minRequiredVersion_3557_minor = 0;
+        bool l_glErrorInvalidValueIf_3558_condition =
+                location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3558_condition) {
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3548_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3548_result;
-        l_ctx->mVertexAttributeArrays[location]->mEnabled = false;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3560_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3559_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3559_result;
+        std::shared_ptr<VertexArray> l_vao =
+                l_ctx->mInstances.mVertexArrays[l_ctx->mBoundVertexArray];
+        l_vao->mVertexAttributeArrays[location]->mEnabled = false;
         observe(observations.mReads);
         mImports.glDisableVertexAttribArray(location);
     } while (false);
@@ -41126,16 +41224,23 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3550_major = 2;
-        uint32_t l_minRequiredVersion_3550_minor = 0;
-        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3552_msg = "No context bound";
+        uint32_t l_minRequiredVersion_3561_major = 2;
+        uint32_t l_minRequiredVersion_3561_minor = 0;
+        bool l_glErrorInvalidValueIf_3562_condition =
+                location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3562_condition) {
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3551_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3551_result;
-        l_ctx->mVertexAttributeArrays[location]->mEnabled = true;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3564_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3563_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3563_result;
+        std::shared_ptr<VertexArray> l_vao =
+                l_ctx->mInstances.mVertexArrays[l_ctx->mBoundVertexArray];
+        l_vao->mVertexAttributeArrays[location]->mEnabled = true;
         observe(observations.mReads);
         mImports.glEnableVertexAttribArray(location);
     } while (false);
@@ -41157,22 +41262,25 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3553_major = 3;
-        uint32_t l_minRequiredVersion_3553_minor = 0;
+        uint32_t l_minRequiredVersion_3565_major = 3;
+        uint32_t l_minRequiredVersion_3565_minor = 0;
+        bool l_glErrorInvalidValueIf_3566_condition = count < (GLsizei)(0);
+        if (l_glErrorInvalidValueIf_3566_condition) {
+            break;
+        }
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3555_msg = "No context bound";
+            std::string l_error_3568_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3554_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3554_result;
+        std::shared_ptr<Context> l_GetContext_3567_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3567_result;
         observe(observations.mReads);
         mImports.glGenVertexArrays(count, arrays);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             VertexArrayId l_id = (VertexArrayId)(
                     slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(new VertexArray());
             write(l_a, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -41198,28 +41306,49 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3556_major = 3;
-        uint32_t l_minRequiredVersion_3556_minor = 0;
-        switch (pname) {
-            case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:      // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE:            // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE:          // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: {
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_3557_major = 3;
-                uint32_t l_minRequiredVersion_3557_minor = 1;
-                break;
-            }
+        uint32_t l_minRequiredVersion_3569_major = 3;
+        uint32_t l_minRequiredVersion_3569_minor = 0;
+        bool l_glErrorInvalidValueIf_3570_condition =
+                index >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3570_condition) {
+            break;
         }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3572_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3571_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3571_result;
         observe(observations.mReads);
         mImports.glGetVertexAttribIiv(index, pname, params);
+        if (pname == GLenum::GL_CURRENT_VERTEX_ATTRIB) {
+            VertexAttributeValue l_attr = l_ctx->mVertexAttributes[index];
+            write(slice(params, 0, 4));
+        } else {
+            std::shared_ptr<Context> l_GetVertexAttrib_3573_ctx = l_ctx;
+            AttributeLocation l_GetVertexAttrib_3573_index = index;
+            uint32_t l_GetVertexAttrib_3573_pname = pname;
+            std::shared_ptr<VertexArray> l_vao2 =
+                    l_GetVertexAttrib_3573_ctx->mInstances
+                            .mVertexArrays[l_GetVertexAttrib_3573_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexAttributeArray> l_array =
+                    l_vao2->mVertexAttributeArrays[l_GetVertexAttrib_3573_index];
+            uint64_t l_GetVertexAttrib_3573_result = /* clang-format off */
+            /* switch(l_GetVertexAttrib_3573_pname) */
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED))) ? ((uint64_t)(l_array->mEnabled)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE))) ? ((uint64_t)(l_array->mSize)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE))) ? ((uint64_t)(l_array->mType)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED))) ? ((uint64_t)(l_array->mNormalized)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE))) ? ((uint64_t)(l_array->mStride)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mBuffer)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mDivisor)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER))) ? ((uint64_t)(l_array->mInteger)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_BINDING: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_BINDING))) ? ((uint64_t)(l_array->mBinding)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET: */(((l_GetVertexAttrib_3573_pname) == (GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET))) ? ((uint64_t)(l_array->mRelativeOffset)) :
+                /* default: */ 0 /* clang-format on */;
+            write(slice(params, 0, 1), 0, (GLint)(l_GetVertexAttrib_3573_result));
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -41243,28 +41372,49 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3559_major = 3;
-        uint32_t l_minRequiredVersion_3559_minor = 0;
-        switch (pname) {
-            case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:      // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE:            // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE:          // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: {
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_3560_major = 3;
-                uint32_t l_minRequiredVersion_3560_minor = 1;
-                break;
-            }
+        uint32_t l_minRequiredVersion_3574_major = 3;
+        uint32_t l_minRequiredVersion_3574_minor = 0;
+        bool l_glErrorInvalidValueIf_3575_condition =
+                index >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3575_condition) {
+            break;
         }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3577_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3576_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3576_result;
         observe(observations.mReads);
         mImports.glGetVertexAttribIuiv(index, pname, params);
+        if (pname == GLenum::GL_CURRENT_VERTEX_ATTRIB) {
+            VertexAttributeValue l_attr = l_ctx->mVertexAttributes[index];
+            write(slice(params, 0, 4));
+        } else {
+            std::shared_ptr<Context> l_GetVertexAttrib_3578_ctx = l_ctx;
+            AttributeLocation l_GetVertexAttrib_3578_index = index;
+            uint32_t l_GetVertexAttrib_3578_pname = pname;
+            std::shared_ptr<VertexArray> l_vao2 =
+                    l_GetVertexAttrib_3578_ctx->mInstances
+                            .mVertexArrays[l_GetVertexAttrib_3578_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexAttributeArray> l_array =
+                    l_vao2->mVertexAttributeArrays[l_GetVertexAttrib_3578_index];
+            uint64_t l_GetVertexAttrib_3578_result = /* clang-format off */
+            /* switch(l_GetVertexAttrib_3578_pname) */
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED))) ? ((uint64_t)(l_array->mEnabled)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE))) ? ((uint64_t)(l_array->mSize)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE))) ? ((uint64_t)(l_array->mType)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED))) ? ((uint64_t)(l_array->mNormalized)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE))) ? ((uint64_t)(l_array->mStride)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mBuffer)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mDivisor)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER))) ? ((uint64_t)(l_array->mInteger)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_BINDING: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_BINDING))) ? ((uint64_t)(l_array->mBinding)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET: */(((l_GetVertexAttrib_3578_pname) == (GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET))) ? ((uint64_t)(l_array->mRelativeOffset)) :
+                /* default: */ 0 /* clang-format on */;
+            write(slice(params, 0, 1), 0, (GLuint)(l_GetVertexAttrib_3578_result));
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -41288,15 +41438,30 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3562_major = 2;
-        uint32_t l_minRequiredVersion_3562_minor = 0;
-        switch (pname) {
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_POINTER: {
-                break;
-            }
+        uint32_t l_minRequiredVersion_3579_major = 2;
+        uint32_t l_minRequiredVersion_3579_minor = 0;
+        bool l_glErrorInvalidValueIf_3580_condition =
+                index >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3580_condition) {
+            break;
         }
+        bool l_glErrorInvalidEnumIf_3581_condition =
+                pname != GLenum::GL_VERTEX_ATTRIB_ARRAY_POINTER;
+        if (l_glErrorInvalidEnumIf_3581_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3583_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3582_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3582_result;
+        std::shared_ptr<VertexArray> l_vao =
+                l_ctx->mInstances.mVertexArrays[l_ctx->mBoundVertexArray];
         observe(observations.mReads);
         mImports.glGetVertexAttribPointerv(index, pname, pointer);
+        write(slice(pointer, 0, 1), 0, (void*)(l_vao->mVertexAttributeArrays[index]->mPointer));
     } while (false);
     observe(observations.mWrites);
 
@@ -41321,32 +41486,49 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3564_major = 2;
-        uint32_t l_minRequiredVersion_3564_minor = 0;
-        switch (pname) {
-            case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:      // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE:            // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE:          // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: {
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_3565_major = 3;
-                uint32_t l_minRequiredVersion_3565_minor = 0;
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_3566_major = 3;
-                uint32_t l_minRequiredVersion_3566_minor = 1;
-                break;
-            }
+        uint32_t l_minRequiredVersion_3584_major = 2;
+        uint32_t l_minRequiredVersion_3584_minor = 0;
+        bool l_glErrorInvalidValueIf_3585_condition =
+                index >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3585_condition) {
+            break;
         }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3587_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3586_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3586_result;
         observe(observations.mReads);
         mImports.glGetVertexAttribfv(index, pname, params);
+        if (pname == GLenum::GL_CURRENT_VERTEX_ATTRIB) {
+            VertexAttributeValue l_attr = l_ctx->mVertexAttributes[index];
+            write(slice(params, 0, 4));
+        } else {
+            std::shared_ptr<Context> l_GetVertexAttrib_3588_ctx = l_ctx;
+            AttributeLocation l_GetVertexAttrib_3588_index = index;
+            uint32_t l_GetVertexAttrib_3588_pname = pname;
+            std::shared_ptr<VertexArray> l_vao2 =
+                    l_GetVertexAttrib_3588_ctx->mInstances
+                            .mVertexArrays[l_GetVertexAttrib_3588_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexAttributeArray> l_array =
+                    l_vao2->mVertexAttributeArrays[l_GetVertexAttrib_3588_index];
+            uint64_t l_GetVertexAttrib_3588_result = /* clang-format off */
+            /* switch(l_GetVertexAttrib_3588_pname) */
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED))) ? ((uint64_t)(l_array->mEnabled)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE))) ? ((uint64_t)(l_array->mSize)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE))) ? ((uint64_t)(l_array->mType)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED))) ? ((uint64_t)(l_array->mNormalized)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE))) ? ((uint64_t)(l_array->mStride)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mBuffer)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mDivisor)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER))) ? ((uint64_t)(l_array->mInteger)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_BINDING: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_BINDING))) ? ((uint64_t)(l_array->mBinding)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET: */(((l_GetVertexAttrib_3588_pname) == (GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET))) ? ((uint64_t)(l_array->mRelativeOffset)) :
+                /* default: */ 0 /* clang-format on */;
+            write(slice(params, 0, 1), 0, (GLfloat)(l_GetVertexAttrib_3588_result));
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -41371,32 +41553,49 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3568_major = 2;
-        uint32_t l_minRequiredVersion_3568_minor = 0;
-        switch (pname) {
-            case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED:         // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:      // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE:            // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE:          // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: {
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
-            case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_3569_major = 3;
-                uint32_t l_minRequiredVersion_3569_minor = 0;
-                break;
-            }
-            case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_3570_major = 3;
-                uint32_t l_minRequiredVersion_3570_minor = 1;
-                break;
-            }
+        uint32_t l_minRequiredVersion_3589_major = 2;
+        uint32_t l_minRequiredVersion_3589_minor = 0;
+        bool l_glErrorInvalidValueIf_3590_condition =
+                index >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3590_condition) {
+            break;
         }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3592_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3591_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3591_result;
         observe(observations.mReads);
         mImports.glGetVertexAttribiv(index, pname, params);
+        if (pname == GLenum::GL_CURRENT_VERTEX_ATTRIB) {
+            VertexAttributeValue l_attr = l_ctx->mVertexAttributes[index];
+            write(slice(params, 0, 4));
+        } else {
+            std::shared_ptr<Context> l_GetVertexAttrib_3593_ctx = l_ctx;
+            AttributeLocation l_GetVertexAttrib_3593_index = index;
+            uint32_t l_GetVertexAttrib_3593_pname = pname;
+            std::shared_ptr<VertexArray> l_vao2 =
+                    l_GetVertexAttrib_3593_ctx->mInstances
+                            .mVertexArrays[l_GetVertexAttrib_3593_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexAttributeArray> l_array =
+                    l_vao2->mVertexAttributeArrays[l_GetVertexAttrib_3593_index];
+            uint64_t l_GetVertexAttrib_3593_result = /* clang-format off */
+            /* switch(l_GetVertexAttrib_3593_pname) */
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_ENABLED))) ? ((uint64_t)(l_array->mEnabled)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_SIZE))) ? ((uint64_t)(l_array->mSize)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_TYPE))) ? ((uint64_t)(l_array->mType)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_NORMALIZED))) ? ((uint64_t)(l_array->mNormalized)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_STRIDE))) ? ((uint64_t)(l_array->mStride)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mBuffer)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR))) ? ((uint64_t)(l_vao2->mVertexBufferBindings[l_array->mBinding]->mDivisor)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER))) ? ((uint64_t)(l_array->mInteger)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_BINDING: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_BINDING))) ? ((uint64_t)(l_array->mBinding)) :
+                /* case GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET: */(((l_GetVertexAttrib_3593_pname) == (GLenum::GL_VERTEX_ATTRIB_RELATIVE_OFFSET))) ? ((uint64_t)(l_array->mRelativeOffset)) :
+                /* default: */ 0 /* clang-format on */;
+            write(slice(params, 0, 1), 0, (GLint)(l_GetVertexAttrib_3593_result));
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -41420,8 +41619,15 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3572_major = 3;
-        uint32_t l_minRequiredVersion_3572_minor = 0;
+        uint32_t l_minRequiredVersion_3594_major = 3;
+        uint32_t l_minRequiredVersion_3594_minor = 0;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3596_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3595_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3595_result;
         observe(observations.mReads);
         result = mImports.glIsVertexArray(array);
         break;
@@ -41446,10 +41652,28 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3573_major = 2;
-        uint32_t l_minRequiredVersion_3573_minor = 0;
+        uint32_t l_minRequiredVersion_3597_major = 2;
+        uint32_t l_minRequiredVersion_3597_minor = 0;
+        AttributeLocation l_VertexAttribF_3598_location = location;
+        Vec4f l_VertexAttribF_3598_value = {value0, (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3599_condition =
+                l_VertexAttribF_3598_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3599_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3601_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3600_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3600_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib1f(location, value0);
+        write(l_vals, 0, l_VertexAttribF_3598_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3598_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41469,11 +41693,29 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3574_major = 2;
-        uint32_t l_minRequiredVersion_3574_minor = 0;
-        read(slice(value, 0, 1));
+        uint32_t l_minRequiredVersion_3602_major = 2;
+        uint32_t l_minRequiredVersion_3602_minor = 0;
+        Slice<GLfloat> l_v = slice(value, 0, 1);
+        AttributeLocation l_VertexAttribF_3603_location = location;
+        Vec4f l_VertexAttribF_3603_value = {read(l_v, 0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3604_condition =
+                l_VertexAttribF_3603_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3604_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3606_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3605_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3605_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib1fv(location, value);
+        write(l_vals, 0, l_VertexAttribF_3603_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3603_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41495,10 +41737,28 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3575_major = 2;
-        uint32_t l_minRequiredVersion_3575_minor = 0;
+        uint32_t l_minRequiredVersion_3607_major = 2;
+        uint32_t l_minRequiredVersion_3607_minor = 0;
+        AttributeLocation l_VertexAttribF_3608_location = location;
+        Vec4f l_VertexAttribF_3608_value = {value0, value1, (GLfloat)(0), (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3609_condition =
+                l_VertexAttribF_3608_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3609_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3611_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3610_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3610_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib2f(location, value0, value1);
+        write(l_vals, 0, l_VertexAttribF_3608_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3608_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41518,11 +41778,29 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3576_major = 2;
-        uint32_t l_minRequiredVersion_3576_minor = 0;
-        read(slice(value, 0, 2));
+        uint32_t l_minRequiredVersion_3612_major = 2;
+        uint32_t l_minRequiredVersion_3612_minor = 0;
+        Slice<GLfloat> l_v = slice(value, 0, 2);
+        AttributeLocation l_VertexAttribF_3613_location = location;
+        Vec4f l_VertexAttribF_3613_value = {read(l_v, 0), read(l_v, 1), (GLfloat)(0), (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3614_condition =
+                l_VertexAttribF_3613_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3614_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3616_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3615_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3615_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib2fv(location, value);
+        write(l_vals, 0, l_VertexAttribF_3613_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3613_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41544,10 +41822,28 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3577_major = 2;
-        uint32_t l_minRequiredVersion_3577_minor = 0;
+        uint32_t l_minRequiredVersion_3617_major = 2;
+        uint32_t l_minRequiredVersion_3617_minor = 0;
+        AttributeLocation l_VertexAttribF_3618_location = location;
+        Vec4f l_VertexAttribF_3618_value = {value0, value1, value2, (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3619_condition =
+                l_VertexAttribF_3618_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3619_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3621_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3620_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3620_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib3f(location, value0, value1, value2);
+        write(l_vals, 0, l_VertexAttribF_3618_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3618_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41567,11 +41863,29 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3578_major = 2;
-        uint32_t l_minRequiredVersion_3578_minor = 0;
-        read(slice(value, 0, 3));
+        uint32_t l_minRequiredVersion_3622_major = 2;
+        uint32_t l_minRequiredVersion_3622_minor = 0;
+        Slice<GLfloat> l_v = slice(value, 0, 3);
+        AttributeLocation l_VertexAttribF_3623_location = location;
+        Vec4f l_VertexAttribF_3623_value = {read(l_v, 0), read(l_v, 1), read(l_v, 2), (GLfloat)(1)};
+        bool l_glErrorInvalidValueIf_3624_condition =
+                l_VertexAttribF_3623_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3624_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3626_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3625_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3625_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib3fv(location, value);
+        write(l_vals, 0, l_VertexAttribF_3623_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3623_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41595,10 +41909,28 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3579_major = 2;
-        uint32_t l_minRequiredVersion_3579_minor = 0;
+        uint32_t l_minRequiredVersion_3627_major = 2;
+        uint32_t l_minRequiredVersion_3627_minor = 0;
+        AttributeLocation l_VertexAttribF_3628_location = location;
+        Vec4f l_VertexAttribF_3628_value = {value0, value1, value2, value3};
+        bool l_glErrorInvalidValueIf_3629_condition =
+                l_VertexAttribF_3628_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3629_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3631_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3630_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3630_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib4f(location, value0, value1, value2, value3);
+        write(l_vals, 0, l_VertexAttribF_3628_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3628_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41619,11 +41951,29 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3580_major = 2;
-        uint32_t l_minRequiredVersion_3580_minor = 0;
-        read(slice(value, 0, 4));
+        uint32_t l_minRequiredVersion_3632_major = 2;
+        uint32_t l_minRequiredVersion_3632_minor = 0;
+        Slice<GLfloat> l_v = slice(value, 0, 4);
+        AttributeLocation l_VertexAttribF_3633_location = location;
+        Vec4f l_VertexAttribF_3633_value = {read(l_v, 0), read(l_v, 1), read(l_v, 2), read(l_v, 3)};
+        bool l_glErrorInvalidValueIf_3634_condition =
+                l_VertexAttribF_3633_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3634_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3636_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3635_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3635_result;
+        Slice<Vec4f> l_vals = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glVertexAttrib4fv(location, value);
+        write(l_vals, 0, l_VertexAttribF_3633_value);
+        l_ctx->mVertexAttributes[l_VertexAttribF_3633_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41637,8 +41987,8 @@ inline bool GlesSpy::hasGlVertexAttribBinding() const {
     return mImports.glVertexAttribBinding != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex) {
-    GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", attribindex, bindingindex);
+inline void GlesSpy::glVertexAttribBinding(uint32_t index, uint32_t binding_index) {
+    GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", index, binding_index);
 
     if (!hasGlVertexAttribBinding()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribBinding");
@@ -41647,14 +41997,46 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3581_major = 3;
-        uint32_t l_minRequiredVersion_3581_minor = 1;
+        uint32_t l_minRequiredVersion_3637_major = 3;
+        uint32_t l_minRequiredVersion_3637_minor = 1;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3639_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3638_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3638_result;
+        bool l_glErrorInvalidOperationIf_3640_condition =
+                l_ctx->mBoundVertexArray == (VertexArrayId)(0);
+        if (l_glErrorInvalidOperationIf_3640_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_VertexAttribBinding_3641_ctx = l_ctx;
+        AttributeLocation l_VertexAttribBinding_3641_index = index;
+        BindingIndex l_VertexAttribBinding_3641_binding_index = binding_index;
+        bool l_glErrorInvalidValueIf_3642_condition =
+                l_VertexAttribBinding_3641_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3642_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3643_condition =
+                l_VertexAttribBinding_3641_binding_index >=
+                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3643_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao5 =
+                l_VertexAttribBinding_3641_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribBinding_3641_ctx->mBoundVertexArray];
+        l_vao5->mVertexAttributeArrays[l_VertexAttribBinding_3641_index]->mBinding =
+                l_VertexAttribBinding_3641_binding_index;
         observe(observations.mReads);
-        mImports.glVertexAttribBinding(attribindex, bindingindex);
+        mImports.glVertexAttribBinding(index, binding_index);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlVertexAttribBinding coder(observations, attribindex, bindingindex);
+    gapic::coder::gles::GlVertexAttribBinding coder(observations, index, binding_index);
     mEncoder->Variant(&coder);
 }
 
@@ -41672,8 +42054,39 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3582_major = 3;
-        uint32_t l_minRequiredVersion_3582_minor = 0;
+        uint32_t l_minRequiredVersion_3644_major = 3;
+        uint32_t l_minRequiredVersion_3644_minor = 0;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3646_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3645_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3645_result;
+        BindingIndex l_binding_index = (BindingIndex)(index);
+        std::shared_ptr<Context> l_VertexAttribBinding_3647_ctx = l_ctx;
+        AttributeLocation l_VertexAttribBinding_3647_index = index;
+        BindingIndex l_VertexAttribBinding_3647_binding_index = l_binding_index;
+        bool l_glErrorInvalidValueIf_3648_condition =
+                l_VertexAttribBinding_3647_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3648_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3649_condition =
+                l_VertexAttribBinding_3647_binding_index >=
+                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3649_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao5 =
+                l_VertexAttribBinding_3647_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribBinding_3647_ctx->mBoundVertexArray];
+        l_vao5->mVertexAttributeArrays[l_VertexAttribBinding_3647_index]->mBinding =
+                l_VertexAttribBinding_3647_binding_index;
+        std::shared_ptr<VertexArray> l_vao =
+                l_ctx->mInstances.mVertexArrays[l_ctx->mBoundVertexArray];
+        l_vao->mVertexBufferBindings[l_binding_index]->mDivisor = divisor;
         observe(observations.mReads);
         mImports.glVertexAttribDivisor(index, divisor);
     } while (false);
@@ -41687,10 +42100,10 @@ inline bool GlesSpy::hasGlVertexAttribFormat() const {
     return mImports.glVertexAttribFormat != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
+inline void GlesSpy::glVertexAttribFormat(uint32_t index, int32_t size, uint32_t type,
                                           uint8_t normalized, uint32_t relativeoffset) {
-    GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")",
-               attribindex, size, type, normalized, relativeoffset);
+    GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")", index,
+               size, type, normalized, relativeoffset);
 
     if (!hasGlVertexAttribFormat()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribFormat");
@@ -41699,30 +42112,113 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3583_major = 3;
-        uint32_t l_minRequiredVersion_3583_minor = 1;
-        switch (type) {
-            case GLenum::GL_BYTE:                         // fall-through...
-            case GLenum::GL_FIXED:                        // fall-through...
-            case GLenum::GL_FLOAT:                        // fall-through...
-            case GLenum::GL_HALF_FLOAT:                   // fall-through...
-            case GLenum::GL_INT:                          // fall-through...
-            case GLenum::GL_INT_2_10_10_10_REV:           // fall-through...
-            case GLenum::GL_SHORT:                        // fall-through...
-            case GLenum::GL_UNSIGNED_BYTE:                // fall-through...
-            case GLenum::GL_UNSIGNED_INT:                 // fall-through...
-            case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:  // fall-through...
-            case GLenum::GL_UNSIGNED_SHORT: {
-                break;
+        uint32_t l_minRequiredVersion_3650_major = 3;
+        uint32_t l_minRequiredVersion_3650_minor = 1;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3652_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3651_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3651_result;
+        bool l_glErrorInvalidOperationIf_3653_condition =
+                l_ctx->mBoundVertexArray == (VertexArrayId)(0);
+        if (l_glErrorInvalidOperationIf_3653_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_VertexAttribFormat_3654_ctx = l_ctx;
+        AttributeLocation l_VertexAttribFormat_3654_index = index;
+        GLint l_VertexAttribFormat_3654_size = size;
+        uint32_t l_VertexAttribFormat_3654_type = type;
+        GLboolean l_VertexAttribFormat_3654_normalized = normalized;
+        GLuint l_VertexAttribFormat_3654_relativeOffset = relativeoffset;
+        bool l_VertexAttribFormat_3654_integer = false;
+        bool l_glErrorInvalidValueIf_3655_condition =
+                l_VertexAttribFormat_3654_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3655_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3656_condition =
+                !((GLint)(1) <= l_VertexAttribFormat_3654_size &&
+                  l_VertexAttribFormat_3654_size <= (GLint)(4));
+        if (l_glErrorInvalidValueIf_3656_condition) {
+            break;
+        }
+        if (l_VertexAttribFormat_3654_integer) {
+            switch (l_VertexAttribFormat_3654_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_INT:            // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT:   // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3657_major = 3;
+                    uint32_t l_minRequiredVersion_3657_minor = 0;
+                    break;
+                }
+            }
+        } else {
+            switch (l_VertexAttribFormat_3654_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_FIXED:          // fall-through...
+                case GLenum::GL_FLOAT:          // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3659_major = 2;
+                    uint32_t l_minRequiredVersion_3659_minor = 0;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT_OES: {
+                    uint32_t l_requiresExtension_3660_ext = ExtensionId::GL_OES_vertex_half_float;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT:  // fall-through...
+                case GLenum::GL_INT:         // fall-through...
+                case GLenum::GL_UNSIGNED_INT: {
+                    uint32_t l_minRequiredVersion_3661_major = 3;
+                    uint32_t l_minRequiredVersion_3661_minor = 0;
+                    break;
+                }
+                case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
+                    bool l_glErrorInvalidOperationIf_3662_condition =
+                            l_VertexAttribFormat_3654_size != (GLint)(4);
+                    if (l_glErrorInvalidOperationIf_3662_condition) {
+                        break;
+                    }
+                    uint32_t l_minRequiredVersion_3663_major = 3;
+                    uint32_t l_minRequiredVersion_3663_minor = 0;
+                    break;
+                }
             }
         }
+        bool l_glErrorInvalidValueIf_3665_condition =
+                l_VertexAttribFormat_3654_relativeOffset >
+                (GLuint)(Constants::MAX_VERTEX_ATTRIB_RELATIVE_OFFSET);
+        if (l_glErrorInvalidValueIf_3665_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao =
+                l_VertexAttribFormat_3654_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribFormat_3654_ctx->mBoundVertexArray];
+        std::shared_ptr<VertexAttributeArray> l_format =
+                l_vao->mVertexAttributeArrays[l_VertexAttribFormat_3654_index];
+        l_format->mSize = l_VertexAttribFormat_3654_size;
+        l_format->mType = l_VertexAttribFormat_3654_type;
+        if (!(l_VertexAttribFormat_3654_integer)) {
+            l_format->mNormalized = l_VertexAttribFormat_3654_normalized;
+        }
+        l_format->mRelativeOffset = l_VertexAttribFormat_3654_relativeOffset;
+        l_format->mInteger = l_VertexAttribFormat_3654_integer;
         observe(observations.mReads);
-        mImports.glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+        mImports.glVertexAttribFormat(index, size, type, normalized, relativeoffset);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlVertexAttribFormat coder(observations, attribindex, size, type,
-                                                   normalized, relativeoffset);
+    gapic::coder::gles::GlVertexAttribFormat coder(observations, index, size, type, normalized,
+                                                   relativeoffset);
     mEncoder->Variant(&coder);
 }
 
@@ -41739,10 +42235,28 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3585_major = 3;
-        uint32_t l_minRequiredVersion_3585_minor = 0;
+        uint32_t l_minRequiredVersion_3666_major = 3;
+        uint32_t l_minRequiredVersion_3666_minor = 0;
+        AttributeLocation l_VertexAttribI_3667_location = index;
+        Vec4i l_VertexAttribI_3667_value = {x, y, z, w};
+        bool l_glErrorInvalidValueIf_3668_condition =
+                l_VertexAttribI_3667_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3668_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3670_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3669_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3669_result;
+        Slice<Vec4i> l_vals = make<Vec4i>(1);
         observe(observations.mReads);
         mImports.glVertexAttribI4i(index, x, y, z, w);
+        write(l_vals, 0, l_VertexAttribI_3667_value);
+        l_ctx->mVertexAttributes[l_VertexAttribI_3667_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41754,8 +42268,8 @@ inline bool GlesSpy::hasGlVertexAttribI4iv() const {
     return mImports.glVertexAttribI4iv != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
-    GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, v);
+inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* values) {
+    GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, values);
 
     if (!hasGlVertexAttribI4iv()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribI4iv");
@@ -41764,16 +42278,35 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3586_major = 3;
-        uint32_t l_minRequiredVersion_3586_minor = 0;
+        uint32_t l_minRequiredVersion_3671_major = 3;
+        uint32_t l_minRequiredVersion_3671_minor = 0;
+        Slice<GLint> l_v = slice(values, 0, 4);
+        AttributeLocation l_VertexAttribI_3672_location = index;
+        Vec4i l_VertexAttribI_3672_value = {read(l_v, 0), read(l_v, 1), read(l_v, 2), read(l_v, 3)};
+        bool l_glErrorInvalidValueIf_3673_condition =
+                l_VertexAttribI_3672_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3673_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3675_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3674_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3674_result;
+        Slice<Vec4i> l_vals = make<Vec4i>(1);
         observe(observations.mReads);
-        mImports.glVertexAttribI4iv(index, v);
+        mImports.glVertexAttribI4iv(index, values);
+        write(l_vals, 0, l_VertexAttribI_3672_value);
+        l_ctx->mVertexAttributes[l_VertexAttribI_3672_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribI4iv coder(
             observations, index, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
-                                         reinterpret_cast<uintptr_t>(v), 0)));
+                                         reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Variant(&coder);
 }
 
@@ -41794,10 +42327,28 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3587_major = 3;
-        uint32_t l_minRequiredVersion_3587_minor = 0;
+        uint32_t l_minRequiredVersion_3676_major = 3;
+        uint32_t l_minRequiredVersion_3676_minor = 0;
+        AttributeLocation l_VertexAttribI_3677_location = index;
+        Vec4i l_VertexAttribI_3677_value = {(GLint)(x), (GLint)(y), (GLint)(z), (GLint)(w)};
+        bool l_glErrorInvalidValueIf_3678_condition =
+                l_VertexAttribI_3677_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3678_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3680_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3679_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3679_result;
+        Slice<Vec4i> l_vals = make<Vec4i>(1);
         observe(observations.mReads);
         mImports.glVertexAttribI4ui(index, x, y, z, w);
+        write(l_vals, 0, l_VertexAttribI_3677_value);
+        l_ctx->mVertexAttributes[l_VertexAttribI_3677_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
@@ -41809,8 +42360,8 @@ inline bool GlesSpy::hasGlVertexAttribI4uiv() const {
     return mImports.glVertexAttribI4uiv != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
-    GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, v);
+inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* values) {
+    GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, values);
 
     if (!hasGlVertexAttribI4uiv()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribI4uiv");
@@ -41819,16 +42370,36 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3588_major = 3;
-        uint32_t l_minRequiredVersion_3588_minor = 0;
+        uint32_t l_minRequiredVersion_3681_major = 3;
+        uint32_t l_minRequiredVersion_3681_minor = 0;
+        Slice<GLuint> l_v = slice(values, 0, 4);
+        AttributeLocation l_VertexAttribI_3682_location = index;
+        Vec4i l_VertexAttribI_3682_value = {(GLint)(read(l_v, 0)), (GLint)(read(l_v, 1)),
+                                            (GLint)(read(l_v, 2)), (GLint)(read(l_v, 3))};
+        bool l_glErrorInvalidValueIf_3683_condition =
+                l_VertexAttribI_3682_location >= (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3683_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3685_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3684_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3684_result;
+        Slice<Vec4i> l_vals = make<Vec4i>(1);
         observe(observations.mReads);
-        mImports.glVertexAttribI4uiv(index, v);
+        mImports.glVertexAttribI4uiv(index, values);
+        write(l_vals, 0, l_VertexAttribI_3682_value);
+        l_ctx->mVertexAttributes[l_VertexAttribI_3682_location] =
+                VertexAttributeValue(l_vals.as<uint8_t>());
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribI4uiv coder(
             observations, index, gapic::coder::gles::GLuint__CP(gapic::coder::memory::Pointer(
-                                         reinterpret_cast<uintptr_t>(v), 0)));
+                                         reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Variant(&coder);
 }
 
@@ -41836,10 +42407,10 @@ inline bool GlesSpy::hasGlVertexAttribIFormat() const {
     return mImports.glVertexAttribIFormat != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type,
+inline void GlesSpy::glVertexAttribIFormat(uint32_t index, int32_t size, uint32_t type,
                                            uint32_t relativeoffset) {
-    GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", attribindex,
-               size, type, relativeoffset);
+    GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", index, size,
+               type, relativeoffset);
 
     if (!hasGlVertexAttribIFormat()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribIFormat");
@@ -41848,29 +42419,112 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3589_major = 3;
-        uint32_t l_minRequiredVersion_3589_minor = 1;
-        switch (type) {
-            case GLenum::GL_BYTE:                         // fall-through...
-            case GLenum::GL_FIXED:                        // fall-through...
-            case GLenum::GL_FLOAT:                        // fall-through...
-            case GLenum::GL_HALF_FLOAT:                   // fall-through...
-            case GLenum::GL_INT:                          // fall-through...
-            case GLenum::GL_INT_2_10_10_10_REV:           // fall-through...
-            case GLenum::GL_SHORT:                        // fall-through...
-            case GLenum::GL_UNSIGNED_BYTE:                // fall-through...
-            case GLenum::GL_UNSIGNED_INT:                 // fall-through...
-            case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:  // fall-through...
-            case GLenum::GL_UNSIGNED_SHORT: {
-                break;
+        uint32_t l_minRequiredVersion_3686_major = 3;
+        uint32_t l_minRequiredVersion_3686_minor = 1;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3688_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3687_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3687_result;
+        bool l_glErrorInvalidOperationIf_3689_condition =
+                l_ctx->mBoundVertexArray == (VertexArrayId)(0);
+        if (l_glErrorInvalidOperationIf_3689_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_VertexAttribFormat_3690_ctx = l_ctx;
+        AttributeLocation l_VertexAttribFormat_3690_index = index;
+        GLint l_VertexAttribFormat_3690_size = size;
+        uint32_t l_VertexAttribFormat_3690_type = type;
+        GLboolean l_VertexAttribFormat_3690_normalized = (GLboolean)(0);
+        GLuint l_VertexAttribFormat_3690_relativeOffset = relativeoffset;
+        bool l_VertexAttribFormat_3690_integer = true;
+        bool l_glErrorInvalidValueIf_3691_condition =
+                l_VertexAttribFormat_3690_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3691_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3692_condition =
+                !((GLint)(1) <= l_VertexAttribFormat_3690_size &&
+                  l_VertexAttribFormat_3690_size <= (GLint)(4));
+        if (l_glErrorInvalidValueIf_3692_condition) {
+            break;
+        }
+        if (l_VertexAttribFormat_3690_integer) {
+            switch (l_VertexAttribFormat_3690_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_INT:            // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT:   // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3693_major = 3;
+                    uint32_t l_minRequiredVersion_3693_minor = 0;
+                    break;
+                }
+            }
+        } else {
+            switch (l_VertexAttribFormat_3690_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_FIXED:          // fall-through...
+                case GLenum::GL_FLOAT:          // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3695_major = 2;
+                    uint32_t l_minRequiredVersion_3695_minor = 0;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT_OES: {
+                    uint32_t l_requiresExtension_3696_ext = ExtensionId::GL_OES_vertex_half_float;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT:  // fall-through...
+                case GLenum::GL_INT:         // fall-through...
+                case GLenum::GL_UNSIGNED_INT: {
+                    uint32_t l_minRequiredVersion_3697_major = 3;
+                    uint32_t l_minRequiredVersion_3697_minor = 0;
+                    break;
+                }
+                case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
+                    bool l_glErrorInvalidOperationIf_3698_condition =
+                            l_VertexAttribFormat_3690_size != (GLint)(4);
+                    if (l_glErrorInvalidOperationIf_3698_condition) {
+                        break;
+                    }
+                    uint32_t l_minRequiredVersion_3699_major = 3;
+                    uint32_t l_minRequiredVersion_3699_minor = 0;
+                    break;
+                }
             }
         }
+        bool l_glErrorInvalidValueIf_3701_condition =
+                l_VertexAttribFormat_3690_relativeOffset >
+                (GLuint)(Constants::MAX_VERTEX_ATTRIB_RELATIVE_OFFSET);
+        if (l_glErrorInvalidValueIf_3701_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao =
+                l_VertexAttribFormat_3690_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribFormat_3690_ctx->mBoundVertexArray];
+        std::shared_ptr<VertexAttributeArray> l_format =
+                l_vao->mVertexAttributeArrays[l_VertexAttribFormat_3690_index];
+        l_format->mSize = l_VertexAttribFormat_3690_size;
+        l_format->mType = l_VertexAttribFormat_3690_type;
+        if (!(l_VertexAttribFormat_3690_integer)) {
+            l_format->mNormalized = l_VertexAttribFormat_3690_normalized;
+        }
+        l_format->mRelativeOffset = l_VertexAttribFormat_3690_relativeOffset;
+        l_format->mInteger = l_VertexAttribFormat_3690_integer;
         observe(observations.mReads);
-        mImports.glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+        mImports.glVertexAttribIFormat(index, size, type, relativeoffset);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlVertexAttribIFormat coder(observations, attribindex, size, type,
+    gapic::coder::gles::GlVertexAttribIFormat coder(observations, index, size, type,
                                                     relativeoffset);
     mEncoder->Variant(&coder);
 }
@@ -41879,10 +42533,10 @@ inline bool GlesSpy::hasGlVertexAttribIPointer() const {
     return mImports.glVertexAttribIPointer != nullptr;
 }
 
-inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type,
-                                            int32_t stride, void* pointer) {
-    GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)", index, size,
-               type, stride, pointer);
+inline void GlesSpy::glVertexAttribIPointer(uint32_t location, int32_t size, uint32_t type,
+                                            int32_t stride, void* data) {
+    GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)", location,
+               size, type, stride, data);
 
     if (!hasGlVertexAttribIPointer()) {
         GAPID_WARNING("Application called unsupported function glVertexAttribIPointer");
@@ -41891,31 +42545,265 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3591_major = 3;
-        uint32_t l_minRequiredVersion_3591_minor = 0;
-        switch (type) {
-            case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_3592_ext = ExtensionId::GL_OES_vertex_half_float;
-                break;
+        uint32_t l_minRequiredVersion_3702_major = 3;
+        uint32_t l_minRequiredVersion_3702_minor = 0;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3704_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3703_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3703_result;
+        std::shared_ptr<Context> l_VertexAttribPointer_3705_ctx = l_ctx;
+        AttributeLocation l_VertexAttribPointer_3705_index = location;
+        GLint l_VertexAttribPointer_3705_size = size;
+        uint32_t l_VertexAttribPointer_3705_type = type;
+        GLboolean l_VertexAttribPointer_3705_normalized = (GLboolean)(0);
+        GLsizei l_VertexAttribPointer_3705_stride = stride;
+        VertexPointer l_VertexAttribPointer_3705_pointer = data;
+        bool l_VertexAttribPointer_3705_integer = true;
+        BufferId l_boundArrayBuffer =
+                l_VertexAttribPointer_3705_ctx->mBoundBuffers[GLenum::GL_ARRAY_BUFFER];
+        bool l_glErrorInvalidValueIf_3706_condition =
+                l_VertexAttribPointer_3705_stride < (GLsizei)(0);
+        if (l_glErrorInvalidValueIf_3706_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3707_condition =
+                l_VertexAttribPointer_3705_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+        if (l_glErrorInvalidValueIf_3707_condition) {
+            break;
+        }
+        bool l_glErrorInvalidOperationIf_3708_condition =
+                l_VertexAttribPointer_3705_ctx->mBoundVertexArray != (VertexArrayId)(0) &&
+                l_boundArrayBuffer == (BufferId)(0) &&
+                l_VertexAttribPointer_3705_pointer != nullptr;
+        if (l_glErrorInvalidOperationIf_3708_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_VertexAttribFormat_3709_ctx = l_VertexAttribPointer_3705_ctx;
+        AttributeLocation l_VertexAttribFormat_3709_index = l_VertexAttribPointer_3705_index;
+        GLint l_VertexAttribFormat_3709_size = l_VertexAttribPointer_3705_size;
+        uint32_t l_VertexAttribFormat_3709_type = l_VertexAttribPointer_3705_type;
+        GLboolean l_VertexAttribFormat_3709_normalized = l_VertexAttribPointer_3705_normalized;
+        GLuint l_VertexAttribFormat_3709_relativeOffset = (GLuint)(0);
+        bool l_VertexAttribFormat_3709_integer = l_VertexAttribPointer_3705_integer;
+        bool l_glErrorInvalidValueIf_3710_condition =
+                l_VertexAttribFormat_3709_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3710_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3711_condition =
+                !((GLint)(1) <= l_VertexAttribFormat_3709_size &&
+                  l_VertexAttribFormat_3709_size <= (GLint)(4));
+        if (l_glErrorInvalidValueIf_3711_condition) {
+            break;
+        }
+        if (l_VertexAttribFormat_3709_integer) {
+            switch (l_VertexAttribFormat_3709_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_INT:            // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT:   // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3712_major = 3;
+                    uint32_t l_minRequiredVersion_3712_minor = 0;
+                    break;
+                }
             }
-            case GLenum::GL_BYTE:           // fall-through...
-            case GLenum::GL_INT:            // fall-through...
-            case GLenum::GL_SHORT:          // fall-through...
-            case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
-            case GLenum::GL_UNSIGNED_INT:   // fall-through...
-            case GLenum::GL_UNSIGNED_SHORT: {
-                break;
+        } else {
+            switch (l_VertexAttribFormat_3709_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_FIXED:          // fall-through...
+                case GLenum::GL_FLOAT:          // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3714_major = 2;
+                    uint32_t l_minRequiredVersion_3714_minor = 0;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT_OES: {
+                    uint32_t l_requiresExtension_3715_ext = ExtensionId::GL_OES_vertex_half_float;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT:  // fall-through...
+                case GLenum::GL_INT:         // fall-through...
+                case GLenum::GL_UNSIGNED_INT: {
+                    uint32_t l_minRequiredVersion_3716_major = 3;
+                    uint32_t l_minRequiredVersion_3716_minor = 0;
+                    break;
+                }
+                case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
+                    bool l_glErrorInvalidOperationIf_3717_condition =
+                            l_VertexAttribFormat_3709_size != (GLint)(4);
+                    if (l_glErrorInvalidOperationIf_3717_condition) {
+                        break;
+                    }
+                    uint32_t l_minRequiredVersion_3718_major = 3;
+                    uint32_t l_minRequiredVersion_3718_minor = 0;
+                    break;
+                }
             }
         }
+        bool l_glErrorInvalidValueIf_3720_condition =
+                l_VertexAttribFormat_3709_relativeOffset >
+                (GLuint)(Constants::MAX_VERTEX_ATTRIB_RELATIVE_OFFSET);
+        if (l_glErrorInvalidValueIf_3720_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao =
+                l_VertexAttribFormat_3709_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribFormat_3709_ctx->mBoundVertexArray];
+        std::shared_ptr<VertexAttributeArray> l_format =
+                l_vao->mVertexAttributeArrays[l_VertexAttribFormat_3709_index];
+        l_format->mSize = l_VertexAttribFormat_3709_size;
+        l_format->mType = l_VertexAttribFormat_3709_type;
+        if (!(l_VertexAttribFormat_3709_integer)) {
+            l_format->mNormalized = l_VertexAttribFormat_3709_normalized;
+        }
+        l_format->mRelativeOffset = l_VertexAttribFormat_3709_relativeOffset;
+        l_format->mInteger = l_VertexAttribFormat_3709_integer;
+        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribPointer_3705_index);
+        std::shared_ptr<Context> l_VertexAttribBinding_3721_ctx = l_VertexAttribPointer_3705_ctx;
+        AttributeLocation l_VertexAttribBinding_3721_index = l_VertexAttribPointer_3705_index;
+        BindingIndex l_VertexAttribBinding_3721_binding_index = l_binding_index;
+        bool l_glErrorInvalidValueIf_3722_condition =
+                l_VertexAttribBinding_3721_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3722_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3723_condition =
+                l_VertexAttribBinding_3721_binding_index >=
+                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3723_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao5 =
+                l_VertexAttribBinding_3721_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribBinding_3721_ctx->mBoundVertexArray];
+        l_vao5->mVertexAttributeArrays[l_VertexAttribBinding_3721_index]->mBinding =
+                l_VertexAttribBinding_3721_binding_index;
+        uint32_t l_VertexAttribTypeSize_3724_type = l_VertexAttribPointer_3705_type;
+        GLint l_VertexAttribTypeSize_3724_result = /* clang-format off */
+        /* switch(l_VertexAttribTypeSize_3724_type) */
+            /* case GLenum::GL_BYTE, GLenum::GL_UNSIGNED_BYTE: */(((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_BYTE))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_UNSIGNED_BYTE))) ? ((GLint)(1)) :
+            /* case GLenum::GL_SHORT, GLenum::GL_UNSIGNED_SHORT, GLenum::GL_HALF_FLOAT, GLenum::GL_HALF_FLOAT_OES: */(((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_SHORT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_UNSIGNED_SHORT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_HALF_FLOAT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_HALF_FLOAT_OES))) ? ((GLint)(2)) :
+            /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
+            /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_3724_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
+            /* default: */ 0 /* clang-format on */;
+        GLsizei l_effectiveStride = /* clang-format off */
+        /* switch(l_VertexAttribPointer_3705_stride != (GLsizei)(0)) */
+            /* case true: */(((l_VertexAttribPointer_3705_stride != (GLsizei)(0)) == (true))) ? (l_VertexAttribPointer_3705_stride) :
+            /* case false: */(((l_VertexAttribPointer_3705_stride != (GLsizei)(0)) == (false))) ? ((GLsizei)(l_VertexAttribTypeSize_3724_result * l_VertexAttribPointer_3705_size)) :
+            /* default: */ 0 /* clang-format on */;
+        std::shared_ptr<VertexArray> l_vao6 =
+                l_VertexAttribPointer_3705_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribPointer_3705_ctx->mBoundVertexArray];
+        l_vao6->mVertexAttributeArrays[l_VertexAttribPointer_3705_index]->mStride =
+                l_VertexAttribPointer_3705_stride;
+        l_vao6->mVertexAttributeArrays[l_VertexAttribPointer_3705_index]->mPointer =
+                l_VertexAttribPointer_3705_pointer;
+        if (l_VertexAttribPointer_3705_ctx->mBoundVertexArray == (VertexArrayId)(0) &&
+            l_boundArrayBuffer == (BufferId)(0)) {
+            std::shared_ptr<Context> l_BindVertexBuffer_3725_ctx = l_VertexAttribPointer_3705_ctx;
+            BindingIndex l_BindVertexBuffer_3725_binding_index = l_binding_index;
+            BufferId l_BindVertexBuffer_3725_buffer = (BufferId)(0);
+            GLintptr l_BindVertexBuffer_3725_offset = (GLintptr)(0);
+            GLsizei l_BindVertexBuffer_3725_stride = l_effectiveStride;
+            bool l_glErrorInvalidValueIf_3726_condition =
+                    l_BindVertexBuffer_3725_binding_index >=
+                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+            if (l_glErrorInvalidValueIf_3726_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3727_condition =
+                    l_BindVertexBuffer_3725_offset < (GLintptr)(0);
+            if (l_glErrorInvalidValueIf_3727_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3728_condition =
+                    l_BindVertexBuffer_3725_stride < (GLsizei)(0);
+            if (l_glErrorInvalidValueIf_3728_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3729_condition =
+                    l_BindVertexBuffer_3725_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+            if (l_glErrorInvalidValueIf_3729_condition) {
+                break;
+            }
+            if (!(l_BindVertexBuffer_3725_ctx->mInstances.mBuffers.count(
+                          l_BindVertexBuffer_3725_buffer) > 0)) {
+                l_BindVertexBuffer_3725_ctx->mInstances.mBuffers[l_BindVertexBuffer_3725_buffer] =
+                        std::shared_ptr<Buffer>(new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0),
+                                                           GLenum::GL_STATIC_DRAW, 0, 0,
+                                                           Slice<uint8_t>()));
+            }
+            std::shared_ptr<VertexArray> l_vao4 =
+                    l_BindVertexBuffer_3725_ctx->mInstances
+                            .mVertexArrays[l_BindVertexBuffer_3725_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexBufferBinding> l_binding =
+                    l_vao4->mVertexBufferBindings[l_BindVertexBuffer_3725_binding_index];
+            l_binding->mBuffer = l_BindVertexBuffer_3725_buffer;
+            l_binding->mOffset = l_BindVertexBuffer_3725_offset;
+            l_binding->mStride = l_BindVertexBuffer_3725_stride;
+        } else {
+            GLintptr l_offset = (GLintptr)((uint64_t)(l_VertexAttribPointer_3705_pointer));
+            std::shared_ptr<Context> l_BindVertexBuffer_3730_ctx = l_VertexAttribPointer_3705_ctx;
+            BindingIndex l_BindVertexBuffer_3730_binding_index = l_binding_index;
+            BufferId l_BindVertexBuffer_3730_buffer = l_boundArrayBuffer;
+            GLintptr l_BindVertexBuffer_3730_offset = l_offset;
+            GLsizei l_BindVertexBuffer_3730_stride = l_effectiveStride;
+            bool l_glErrorInvalidValueIf_3731_condition =
+                    l_BindVertexBuffer_3730_binding_index >=
+                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+            if (l_glErrorInvalidValueIf_3731_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3732_condition =
+                    l_BindVertexBuffer_3730_offset < (GLintptr)(0);
+            if (l_glErrorInvalidValueIf_3732_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3733_condition =
+                    l_BindVertexBuffer_3730_stride < (GLsizei)(0);
+            if (l_glErrorInvalidValueIf_3733_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3734_condition =
+                    l_BindVertexBuffer_3730_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+            if (l_glErrorInvalidValueIf_3734_condition) {
+                break;
+            }
+            if (!(l_BindVertexBuffer_3730_ctx->mInstances.mBuffers.count(
+                          l_BindVertexBuffer_3730_buffer) > 0)) {
+                l_BindVertexBuffer_3730_ctx->mInstances.mBuffers[l_BindVertexBuffer_3730_buffer] =
+                        std::shared_ptr<Buffer>(new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0),
+                                                           GLenum::GL_STATIC_DRAW, 0, 0,
+                                                           Slice<uint8_t>()));
+            }
+            std::shared_ptr<VertexArray> l_vao4 =
+                    l_BindVertexBuffer_3730_ctx->mInstances
+                            .mVertexArrays[l_BindVertexBuffer_3730_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexBufferBinding> l_binding =
+                    l_vao4->mVertexBufferBindings[l_BindVertexBuffer_3730_binding_index];
+            l_binding->mBuffer = l_BindVertexBuffer_3730_buffer;
+            l_binding->mOffset = l_BindVertexBuffer_3730_offset;
+            l_binding->mStride = l_BindVertexBuffer_3730_stride;
+        }
         observe(observations.mReads);
-        mImports.glVertexAttribIPointer(index, size, type, stride, pointer);
+        mImports.glVertexAttribIPointer(location, size, type, stride, data);
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribIPointer coder(
-            observations, index, size, type, stride,
-            gapic::coder::gles::Void__CP(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pointer), 0)));
+            observations, location, size, type, stride,
+            gapic::coder::gles::VertexPointer(
+                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
     mEncoder->Variant(&coder);
 }
 
@@ -41935,45 +42823,256 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3594_major = 2;
-        uint32_t l_minRequiredVersion_3594_minor = 0;
-        switch (type) {
-            case GLenum::GL_BYTE:           // fall-through...
-            case GLenum::GL_FIXED:          // fall-through...
-            case GLenum::GL_FLOAT:          // fall-through...
-            case GLenum::GL_SHORT:          // fall-through...
-            case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
-            case GLenum::GL_UNSIGNED_SHORT: {
-                break;
-            }
-            case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_3595_ext = ExtensionId::GL_OES_vertex_half_float;
-                break;
-            }
-            case GLenum::GL_HALF_FLOAT:          // fall-through...
-            case GLenum::GL_INT:                 // fall-through...
-            case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
-            case GLenum::GL_UNSIGNED_INT:        // fall-through...
-            case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
-                uint32_t l_minRequiredVersion_3596_major = 3;
-                uint32_t l_minRequiredVersion_3596_minor = 0;
-                break;
-            }
-        }
+        uint32_t l_minRequiredVersion_3735_major = 2;
+        uint32_t l_minRequiredVersion_3735_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3599_msg = "No context bound";
+            std::string l_error_3737_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3598_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3598_result;
-        std::shared_ptr<VertexAttributeArray> l_a = l_ctx->mVertexAttributeArrays[location];
-        l_a->mSize = (uint32_t)(size);
-        l_a->mType = type;
-        l_a->mNormalized = normalized;
-        l_a->mStride = stride;
-        l_a->mPointer = data;
-        l_a->mBuffer = l_ctx->mBoundBuffers[GLenum::GL_ARRAY_BUFFER];
+        std::shared_ptr<Context> l_GetContext_3736_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3736_result;
+        std::shared_ptr<Context> l_VertexAttribPointer_3738_ctx = l_ctx;
+        AttributeLocation l_VertexAttribPointer_3738_index = location;
+        GLint l_VertexAttribPointer_3738_size = size;
+        uint32_t l_VertexAttribPointer_3738_type = type;
+        GLboolean l_VertexAttribPointer_3738_normalized = normalized;
+        GLsizei l_VertexAttribPointer_3738_stride = stride;
+        VertexPointer l_VertexAttribPointer_3738_pointer = data;
+        bool l_VertexAttribPointer_3738_integer = false;
+        BufferId l_boundArrayBuffer =
+                l_VertexAttribPointer_3738_ctx->mBoundBuffers[GLenum::GL_ARRAY_BUFFER];
+        bool l_glErrorInvalidValueIf_3739_condition =
+                l_VertexAttribPointer_3738_stride < (GLsizei)(0);
+        if (l_glErrorInvalidValueIf_3739_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3740_condition =
+                l_VertexAttribPointer_3738_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+        if (l_glErrorInvalidValueIf_3740_condition) {
+            break;
+        }
+        bool l_glErrorInvalidOperationIf_3741_condition =
+                l_VertexAttribPointer_3738_ctx->mBoundVertexArray != (VertexArrayId)(0) &&
+                l_boundArrayBuffer == (BufferId)(0) &&
+                l_VertexAttribPointer_3738_pointer != nullptr;
+        if (l_glErrorInvalidOperationIf_3741_condition) {
+            break;
+        }
+        std::shared_ptr<Context> l_VertexAttribFormat_3742_ctx = l_VertexAttribPointer_3738_ctx;
+        AttributeLocation l_VertexAttribFormat_3742_index = l_VertexAttribPointer_3738_index;
+        GLint l_VertexAttribFormat_3742_size = l_VertexAttribPointer_3738_size;
+        uint32_t l_VertexAttribFormat_3742_type = l_VertexAttribPointer_3738_type;
+        GLboolean l_VertexAttribFormat_3742_normalized = l_VertexAttribPointer_3738_normalized;
+        GLuint l_VertexAttribFormat_3742_relativeOffset = (GLuint)(0);
+        bool l_VertexAttribFormat_3742_integer = l_VertexAttribPointer_3738_integer;
+        bool l_glErrorInvalidValueIf_3743_condition =
+                l_VertexAttribFormat_3742_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3743_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3744_condition =
+                !((GLint)(1) <= l_VertexAttribFormat_3742_size &&
+                  l_VertexAttribFormat_3742_size <= (GLint)(4));
+        if (l_glErrorInvalidValueIf_3744_condition) {
+            break;
+        }
+        if (l_VertexAttribFormat_3742_integer) {
+            switch (l_VertexAttribFormat_3742_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_INT:            // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT:   // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3745_major = 3;
+                    uint32_t l_minRequiredVersion_3745_minor = 0;
+                    break;
+                }
+            }
+        } else {
+            switch (l_VertexAttribFormat_3742_type) {
+                case GLenum::GL_BYTE:           // fall-through...
+                case GLenum::GL_FIXED:          // fall-through...
+                case GLenum::GL_FLOAT:          // fall-through...
+                case GLenum::GL_SHORT:          // fall-through...
+                case GLenum::GL_UNSIGNED_BYTE:  // fall-through...
+                case GLenum::GL_UNSIGNED_SHORT: {
+                    uint32_t l_minRequiredVersion_3747_major = 2;
+                    uint32_t l_minRequiredVersion_3747_minor = 0;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT_OES: {
+                    uint32_t l_requiresExtension_3748_ext = ExtensionId::GL_OES_vertex_half_float;
+                    break;
+                }
+                case GLenum::GL_HALF_FLOAT:  // fall-through...
+                case GLenum::GL_INT:         // fall-through...
+                case GLenum::GL_UNSIGNED_INT: {
+                    uint32_t l_minRequiredVersion_3749_major = 3;
+                    uint32_t l_minRequiredVersion_3749_minor = 0;
+                    break;
+                }
+                case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
+                case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
+                    bool l_glErrorInvalidOperationIf_3750_condition =
+                            l_VertexAttribFormat_3742_size != (GLint)(4);
+                    if (l_glErrorInvalidOperationIf_3750_condition) {
+                        break;
+                    }
+                    uint32_t l_minRequiredVersion_3751_major = 3;
+                    uint32_t l_minRequiredVersion_3751_minor = 0;
+                    break;
+                }
+            }
+        }
+        bool l_glErrorInvalidValueIf_3753_condition =
+                l_VertexAttribFormat_3742_relativeOffset >
+                (GLuint)(Constants::MAX_VERTEX_ATTRIB_RELATIVE_OFFSET);
+        if (l_glErrorInvalidValueIf_3753_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao =
+                l_VertexAttribFormat_3742_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribFormat_3742_ctx->mBoundVertexArray];
+        std::shared_ptr<VertexAttributeArray> l_format =
+                l_vao->mVertexAttributeArrays[l_VertexAttribFormat_3742_index];
+        l_format->mSize = l_VertexAttribFormat_3742_size;
+        l_format->mType = l_VertexAttribFormat_3742_type;
+        if (!(l_VertexAttribFormat_3742_integer)) {
+            l_format->mNormalized = l_VertexAttribFormat_3742_normalized;
+        }
+        l_format->mRelativeOffset = l_VertexAttribFormat_3742_relativeOffset;
+        l_format->mInteger = l_VertexAttribFormat_3742_integer;
+        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribPointer_3738_index);
+        std::shared_ptr<Context> l_VertexAttribBinding_3754_ctx = l_VertexAttribPointer_3738_ctx;
+        AttributeLocation l_VertexAttribBinding_3754_index = l_VertexAttribPointer_3738_index;
+        BindingIndex l_VertexAttribBinding_3754_binding_index = l_binding_index;
+        bool l_glErrorInvalidValueIf_3755_condition =
+                l_VertexAttribBinding_3754_index >=
+                (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
+        if (l_glErrorInvalidValueIf_3755_condition) {
+            break;
+        }
+        bool l_glErrorInvalidValueIf_3756_condition =
+                l_VertexAttribBinding_3754_binding_index >=
+                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3756_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao5 =
+                l_VertexAttribBinding_3754_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribBinding_3754_ctx->mBoundVertexArray];
+        l_vao5->mVertexAttributeArrays[l_VertexAttribBinding_3754_index]->mBinding =
+                l_VertexAttribBinding_3754_binding_index;
+        uint32_t l_VertexAttribTypeSize_3757_type = l_VertexAttribPointer_3738_type;
+        GLint l_VertexAttribTypeSize_3757_result = /* clang-format off */
+        /* switch(l_VertexAttribTypeSize_3757_type) */
+            /* case GLenum::GL_BYTE, GLenum::GL_UNSIGNED_BYTE: */(((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_BYTE))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_UNSIGNED_BYTE))) ? ((GLint)(1)) :
+            /* case GLenum::GL_SHORT, GLenum::GL_UNSIGNED_SHORT, GLenum::GL_HALF_FLOAT, GLenum::GL_HALF_FLOAT_OES: */(((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_SHORT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_UNSIGNED_SHORT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_HALF_FLOAT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_HALF_FLOAT_OES))) ? ((GLint)(2)) :
+            /* case GLenum::GL_INT, GLenum::GL_UNSIGNED_INT, GLenum::GL_FLOAT, GLenum::GL_FIXED: */(((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_INT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_UNSIGNED_INT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_FLOAT))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_FIXED))) ? ((GLint)(4)) :
+            /* case GLenum::GL_INT_2_10_10_10_REV, GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: */(((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_INT_2_10_10_10_REV))|| ((l_VertexAttribTypeSize_3757_type) == (GLenum::GL_UNSIGNED_INT_2_10_10_10_REV))) ? ((GLint)(4)) :
+            /* default: */ 0 /* clang-format on */;
+        GLsizei l_effectiveStride = /* clang-format off */
+        /* switch(l_VertexAttribPointer_3738_stride != (GLsizei)(0)) */
+            /* case true: */(((l_VertexAttribPointer_3738_stride != (GLsizei)(0)) == (true))) ? (l_VertexAttribPointer_3738_stride) :
+            /* case false: */(((l_VertexAttribPointer_3738_stride != (GLsizei)(0)) == (false))) ? ((GLsizei)(l_VertexAttribTypeSize_3757_result * l_VertexAttribPointer_3738_size)) :
+            /* default: */ 0 /* clang-format on */;
+        std::shared_ptr<VertexArray> l_vao6 =
+                l_VertexAttribPointer_3738_ctx->mInstances
+                        .mVertexArrays[l_VertexAttribPointer_3738_ctx->mBoundVertexArray];
+        l_vao6->mVertexAttributeArrays[l_VertexAttribPointer_3738_index]->mStride =
+                l_VertexAttribPointer_3738_stride;
+        l_vao6->mVertexAttributeArrays[l_VertexAttribPointer_3738_index]->mPointer =
+                l_VertexAttribPointer_3738_pointer;
+        if (l_VertexAttribPointer_3738_ctx->mBoundVertexArray == (VertexArrayId)(0) &&
+            l_boundArrayBuffer == (BufferId)(0)) {
+            std::shared_ptr<Context> l_BindVertexBuffer_3758_ctx = l_VertexAttribPointer_3738_ctx;
+            BindingIndex l_BindVertexBuffer_3758_binding_index = l_binding_index;
+            BufferId l_BindVertexBuffer_3758_buffer = (BufferId)(0);
+            GLintptr l_BindVertexBuffer_3758_offset = (GLintptr)(0);
+            GLsizei l_BindVertexBuffer_3758_stride = l_effectiveStride;
+            bool l_glErrorInvalidValueIf_3759_condition =
+                    l_BindVertexBuffer_3758_binding_index >=
+                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+            if (l_glErrorInvalidValueIf_3759_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3760_condition =
+                    l_BindVertexBuffer_3758_offset < (GLintptr)(0);
+            if (l_glErrorInvalidValueIf_3760_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3761_condition =
+                    l_BindVertexBuffer_3758_stride < (GLsizei)(0);
+            if (l_glErrorInvalidValueIf_3761_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3762_condition =
+                    l_BindVertexBuffer_3758_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+            if (l_glErrorInvalidValueIf_3762_condition) {
+                break;
+            }
+            if (!(l_BindVertexBuffer_3758_ctx->mInstances.mBuffers.count(
+                          l_BindVertexBuffer_3758_buffer) > 0)) {
+                l_BindVertexBuffer_3758_ctx->mInstances.mBuffers[l_BindVertexBuffer_3758_buffer] =
+                        std::shared_ptr<Buffer>(new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0),
+                                                           GLenum::GL_STATIC_DRAW, 0, 0,
+                                                           Slice<uint8_t>()));
+            }
+            std::shared_ptr<VertexArray> l_vao4 =
+                    l_BindVertexBuffer_3758_ctx->mInstances
+                            .mVertexArrays[l_BindVertexBuffer_3758_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexBufferBinding> l_binding =
+                    l_vao4->mVertexBufferBindings[l_BindVertexBuffer_3758_binding_index];
+            l_binding->mBuffer = l_BindVertexBuffer_3758_buffer;
+            l_binding->mOffset = l_BindVertexBuffer_3758_offset;
+            l_binding->mStride = l_BindVertexBuffer_3758_stride;
+        } else {
+            GLintptr l_offset = (GLintptr)((uint64_t)(l_VertexAttribPointer_3738_pointer));
+            std::shared_ptr<Context> l_BindVertexBuffer_3763_ctx = l_VertexAttribPointer_3738_ctx;
+            BindingIndex l_BindVertexBuffer_3763_binding_index = l_binding_index;
+            BufferId l_BindVertexBuffer_3763_buffer = l_boundArrayBuffer;
+            GLintptr l_BindVertexBuffer_3763_offset = l_offset;
+            GLsizei l_BindVertexBuffer_3763_stride = l_effectiveStride;
+            bool l_glErrorInvalidValueIf_3764_condition =
+                    l_BindVertexBuffer_3763_binding_index >=
+                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+            if (l_glErrorInvalidValueIf_3764_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3765_condition =
+                    l_BindVertexBuffer_3763_offset < (GLintptr)(0);
+            if (l_glErrorInvalidValueIf_3765_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3766_condition =
+                    l_BindVertexBuffer_3763_stride < (GLsizei)(0);
+            if (l_glErrorInvalidValueIf_3766_condition) {
+                break;
+            }
+            bool l_glErrorInvalidValueIf_3767_condition =
+                    l_BindVertexBuffer_3763_stride > (GLsizei)(Constants::MAX_VERTEX_ATTRIB_STRIDE);
+            if (l_glErrorInvalidValueIf_3767_condition) {
+                break;
+            }
+            if (!(l_BindVertexBuffer_3763_ctx->mInstances.mBuffers.count(
+                          l_BindVertexBuffer_3763_buffer) > 0)) {
+                l_BindVertexBuffer_3763_ctx->mInstances.mBuffers[l_BindVertexBuffer_3763_buffer] =
+                        std::shared_ptr<Buffer>(new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0),
+                                                           GLenum::GL_STATIC_DRAW, 0, 0,
+                                                           Slice<uint8_t>()));
+            }
+            std::shared_ptr<VertexArray> l_vao4 =
+                    l_BindVertexBuffer_3763_ctx->mInstances
+                            .mVertexArrays[l_BindVertexBuffer_3763_ctx->mBoundVertexArray];
+            std::shared_ptr<VertexBufferBinding> l_binding =
+                    l_vao4->mVertexBufferBindings[l_BindVertexBuffer_3763_binding_index];
+            l_binding->mBuffer = l_BindVertexBuffer_3763_buffer;
+            l_binding->mOffset = l_BindVertexBuffer_3763_offset;
+            l_binding->mStride = l_BindVertexBuffer_3763_stride;
+        }
         observe(observations.mReads);
         mImports.glVertexAttribPointer(location, size, type, normalized, stride, data);
     } while (false);
@@ -41990,8 +43089,8 @@ inline bool GlesSpy::hasGlVertexBindingDivisor() const {
     return mImports.glVertexBindingDivisor != nullptr;
 }
 
-inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor) {
-    GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", bindingindex, divisor);
+inline void GlesSpy::glVertexBindingDivisor(uint32_t binding_index, uint32_t divisor) {
+    GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", binding_index, divisor);
 
     if (!hasGlVertexBindingDivisor()) {
         GAPID_WARNING("Application called unsupported function glVertexBindingDivisor");
@@ -42000,14 +43099,34 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_3600_major = 3;
-        uint32_t l_minRequiredVersion_3600_minor = 1;
+        uint32_t l_minRequiredVersion_3768_major = 3;
+        uint32_t l_minRequiredVersion_3768_minor = 1;
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_3770_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_3769_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3769_result;
+        bool l_glErrorInvalidValueIf_3771_condition =
+                binding_index >= (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+        if (l_glErrorInvalidValueIf_3771_condition) {
+            break;
+        }
+        bool l_glErrorInvalidOperationIf_3772_condition =
+                l_ctx->mBoundVertexArray == (VertexArrayId)(0);
+        if (l_glErrorInvalidOperationIf_3772_condition) {
+            break;
+        }
+        std::shared_ptr<VertexArray> l_vao =
+                l_ctx->mInstances.mVertexArrays[l_ctx->mBoundVertexArray];
+        l_vao->mVertexBufferBindings[binding_index]->mDivisor = divisor;
         observe(observations.mReads);
-        mImports.glVertexBindingDivisor(bindingindex, divisor);
+        mImports.glVertexBindingDivisor(binding_index, divisor);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlVertexBindingDivisor coder(observations, bindingindex, divisor);
+    gapic::coder::gles::GlVertexBindingDivisor coder(observations, binding_index, divisor);
     mEncoder->Variant(&coder);
 }
 
@@ -42073,7 +43192,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42112,18 +43231,35 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3774_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3774_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3601_result = l_ctx;
-        this->EGLContexts[l_context] = l_CreateContext_3601_result;
+        std::shared_ptr<Context> l_CreateContext_3773_result = l_ctx;
+        this->EGLContexts[l_context] = l_CreateContext_3773_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -42158,8 +43294,8 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_3602_context = this->EGLContexts[context];
-        this->Contexts[this->CurrentThread] = l_SetContext_3602_context;
+        std::shared_ptr<Context> l_SetContext_3775_context = this->EGLContexts[context];
+        this->Contexts[this->CurrentThread] = l_SetContext_3775_context;
         observe(observations.mReads);
         result = mImports.eglMakeCurrent(display, draw, read, context);
         break;
@@ -42268,7 +43404,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42307,18 +43443,35 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3777_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3777_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3603_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_3603_result;
+        std::shared_ptr<Context> l_CreateContext_3776_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_3776_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -42363,7 +43516,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42402,18 +43555,35 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3779_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3779_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3604_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_3604_result;
+        std::shared_ptr<Context> l_CreateContext_3778_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_3778_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -42448,8 +43618,8 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_3605_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_3605_context;
+        std::shared_ptr<Context> l_SetContext_3780_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3780_context;
         observe(observations.mReads);
         result = mImports.glXMakeContextCurrent(display, draw, read, ctx);
         break;
@@ -42485,8 +43655,8 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_3606_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_3606_context;
+        std::shared_ptr<Context> l_SetContext_3781_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3781_context;
         observe(observations.mReads);
         result = mImports.glXMakeCurrent(display, drawable, ctx);
         break;
@@ -42587,7 +43757,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42626,18 +43796,35 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3783_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3783_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3607_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_3607_result;
+        std::shared_ptr<Context> l_CreateContext_3782_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_3782_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -42676,7 +43863,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42715,18 +43902,35 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3785_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3785_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3608_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_3608_result;
+        std::shared_ptr<Context> l_CreateContext_3784_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_3784_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -42759,8 +43963,8 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_3609_context = this->WGLContexts[hglrc];
-        this->Contexts[this->CurrentThread] = l_SetContext_3609_context;
+        std::shared_ptr<Context> l_SetContext_3786_context = this->WGLContexts[hglrc];
+        this->Contexts[this->CurrentThread] = l_SetContext_3786_context;
         observe(observations.mReads);
         result = mImports.wglMakeCurrent(hdc, hglrc);
         break;
@@ -42823,7 +44027,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
                 new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
-                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            0, 0, AttributeLocationToVertexAttributeValue(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
@@ -42862,18 +44066,35 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        for (int32_t l_i = 0; l_i < 64; ++l_i) {
-            l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>(
-                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
-                                                     (GLsizei)(0), (BufferId)(0), nullptr, 0));
+        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                                AttributeLocationToVertexAttributeArray__R()));
+        for (BindingIndex l_i = (BindingIndex)(0);
+             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+        }
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            l_array->mVertexAttributeArrays[l_i] =
+                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+        }
+        std::shared_ptr<VertexArray> l_NewVertexArray_3788_result = l_array;
+        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_3788_result;
+        for (AttributeLocation l_i = (AttributeLocation)(0);
+             l_i < (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS); ++l_i) {
+            Slice<Vec4f> l_v = make<Vec4f>(1);
+            write(l_v, 0, {(GLfloat)(0), (GLfloat)(0), (GLfloat)(0), (GLfloat)(1)});
+            l_ctx->mVertexAttributes[l_i] = VertexAttributeValue(l_v.as<uint8_t>());
         }
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_3610_result = l_ctx;
-        this->CGLContexts[l_context] = l_CreateContext_3610_result;
+        std::shared_ptr<Context> l_CreateContext_3787_result = l_ctx;
+        this->CGLContexts[l_context] = l_CreateContext_3787_result;
         write(slice(ctx, 0, 1), 0, l_context);
         break;
     } while (false);
@@ -42908,8 +44129,8 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_3611_context = this->CGLContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_3611_context;
+        std::shared_ptr<Context> l_SetContext_3789_context = this->CGLContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3789_context;
         observe(observations.mReads);
         result = mImports.CGLSetCurrentContext(ctx);
         break;
@@ -43150,11 +44371,11 @@ inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, cha
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_3613_msg = "No context bound";
+            std::string l_error_3791_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_3612_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_3612_result;
+        std::shared_ptr<Context> l_GetContext_3790_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3790_result;
         l_ctx->mInfo.mName = name;
         l_ctx->mInfo.mVendor = vendor;
         l_ctx->mInfo.mExtensions = extensions;

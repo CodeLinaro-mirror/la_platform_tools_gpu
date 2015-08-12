@@ -168,6 +168,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 			out.Write(i, a)
 			return
 
+		// TODO: glVertexAttribIPointer
 		case *GlVertexAttribPointer:
 			if target.vertexArrayObjects == required &&
 				getContext(s).BoundBuffers[GLenum_GL_ARRAY_BUFFER] == 0 {
@@ -285,9 +286,16 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 // clientVAsBound returns true if there are any vertex attribute arrays enabled
 // with pointers to client-side memory.
 func clientVAsBound(c *Context) bool {
-	for _, arr := range c.VertexAttributeArrays {
-		if arr.Enabled && arr.Buffer == 0 {
-			return true
+	// Only the default vertex array can use client-side memory.
+	if c.BoundVertexArray == 0 {
+		va := c.Instances.VertexArrays[c.BoundVertexArray]
+		for _, arr := range va.VertexAttributeArrays {
+			if arr.Enabled {
+				vb := va.VertexBufferBindings[arr.Binding]
+				if vb.Buffer == 0 && arr.Pointer.Address != 0 {
+					return true
+				}
+			}
 		}
 	}
 	return false
@@ -310,9 +318,13 @@ func moveClientVBsToVAs(
 
 	// Gather together all the client-buffers in use by the vertex-attribs.
 	// Merge together all the memory intervals that these use.
-	for _, arr := range c.VertexAttributeArrays {
-		if arr.Enabled && arr.Buffer == 0 {
-			interval.Merge(&rngs, arr.MemoryRange(first, last).Span(), true)
+	va := c.Instances.VertexArrays[c.BoundVertexArray]
+	for _, arr := range va.VertexAttributeArrays {
+		if arr.Enabled {
+			vb := va.VertexBufferBindings[arr.Binding]
+			if vb.Buffer == 0 && arr.Pointer.Address != 0 {
+				interval.Merge(&rngs, arr.MemoryRange(first, last).Span(), true)
+			}
 		}
 	}
 
@@ -353,19 +365,22 @@ func moveClientVBsToVAs(
 	}
 
 	// Redirect all the vertex attrib arrays to point to the array-buffer data.
-	for l, arr := range c.VertexAttributeArrays {
-		if arr.Enabled && arr.Buffer == 0 {
-			i := interval.IndexOf(&rngs, arr.Pointer.Address)
-			offset := arr.Pointer.Address - rngs[i].First
-			out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, ids[i]))
-			out.Write(atom.NoID, &GlVertexAttribPointer{
-				Location:   l,
-				Size:       GLint(arr.Size),
-				Type:       arr.Type,
-				Normalized: arr.Normalized,
-				Stride:     arr.Stride,
-				Data:       NewVertexPointer(offset),
-			})
+	for l, arr := range va.VertexAttributeArrays {
+		if arr.Enabled {
+			vb := va.VertexBufferBindings[arr.Binding]
+			if vb.Buffer == 0 && arr.Pointer.Address != 0 {
+				i := interval.IndexOf(&rngs, arr.Pointer.Address)
+				offset := arr.Pointer.Address - rngs[i].First
+				out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, ids[i]))
+				out.Write(atom.NoID, &GlVertexAttribPointer{
+					Location:   l,
+					Size:       GLint(arr.Size),
+					Type:       arr.Type,
+					Normalized: arr.Normalized,
+					Stride:     arr.Stride,
+					Data:       NewVertexPointer(offset),
+				})
+			}
 		}
 	}
 

@@ -16374,12 +16374,12 @@ bool callGlBindVertexBuffer(Stack* stack, bool pushReturn) {
     int32_t stride = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
     uint32_t buffer = stack->pop<uint32_t>();
-    uint32_t bindingindex = stack->pop<uint32_t>();
+    uint32_t binding_index = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glBindVertexBuffer(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
-                   bindingindex, buffer, offset, stride);
+                   binding_index, buffer, offset, stride);
         if (glBindVertexBuffer != nullptr) {
-            glBindVertexBuffer(bindingindex, buffer, offset, stride);
+            glBindVertexBuffer(binding_index, buffer, offset, stride);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glBindVertexBuffer returned error: 0x%x", err);
@@ -16786,12 +16786,12 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttribBinding(Stack* stack, bool pushReturn) {
-    uint32_t bindingindex = stack->pop<uint32_t>();
-    uint32_t attribindex = stack->pop<uint32_t>();
+    uint32_t binding_index = stack->pop<uint32_t>();
+    uint32_t index = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", attribindex, bindingindex);
+        GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", index, binding_index);
         if (glVertexAttribBinding != nullptr) {
-            glVertexAttribBinding(attribindex, bindingindex);
+            glVertexAttribBinding(index, binding_index);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribBinding returned error: 0x%x", err);
@@ -16832,12 +16832,12 @@ bool callGlVertexAttribFormat(Stack* stack, bool pushReturn) {
     uint8_t normalized = stack->pop<uint8_t>();
     GLenum type = stack->pop<GLenum>();
     int32_t size = stack->pop<int32_t>();
-    uint32_t attribindex = stack->pop<uint32_t>();
+    uint32_t index = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")",
-                   attribindex, size, type, normalized, relativeoffset);
+                   index, size, type, normalized, relativeoffset);
         if (glVertexAttribFormat != nullptr) {
-            glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+            glVertexAttribFormat(index, size, type, normalized, relativeoffset);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribFormat returned error: 0x%x", err);
@@ -16879,12 +16879,12 @@ bool callGlVertexAttribI4i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttribI4iv(Stack* stack, bool pushReturn) {
-    int32_t* v = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     uint32_t index = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, v);
+        GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, values);
         if (glVertexAttribI4iv != nullptr) {
-            glVertexAttribI4iv(index, v);
+            glVertexAttribI4iv(index, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribI4iv returned error: 0x%x", err);
@@ -16926,12 +16926,12 @@ bool callGlVertexAttribI4ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttribI4uiv(Stack* stack, bool pushReturn) {
-    uint32_t* v = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     uint32_t index = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, v);
+        GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, values);
         if (glVertexAttribI4uiv != nullptr) {
-            glVertexAttribI4uiv(index, v);
+            glVertexAttribI4uiv(index, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribI4uiv returned error: 0x%x", err);
@@ -16950,12 +16950,12 @@ bool callGlVertexAttribIFormat(Stack* stack, bool pushReturn) {
     uint32_t relativeoffset = stack->pop<uint32_t>();
     GLenum type = stack->pop<GLenum>();
     int32_t size = stack->pop<int32_t>();
-    uint32_t attribindex = stack->pop<uint32_t>();
+    uint32_t index = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", attribindex,
-                   size, type, relativeoffset);
+        GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", index, size,
+                   type, relativeoffset);
         if (glVertexAttribIFormat != nullptr) {
-            glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+            glVertexAttribIFormat(index, size, type, relativeoffset);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribIFormat returned error: 0x%x", err);
@@ -16971,16 +16971,16 @@ bool callGlVertexAttribIFormat(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttribIPointer(Stack* stack, bool pushReturn) {
-    void* pointer = stack->pop<void*>();
+    void* data = stack->pop<void*>();
     int32_t stride = stack->pop<int32_t>();
     GLenum type = stack->pop<GLenum>();
     int32_t size = stack->pop<int32_t>();
-    uint32_t index = stack->pop<uint32_t>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)", index,
-                   size, type, stride, pointer);
+        GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
+                   location, size, type, stride, data);
         if (glVertexAttribIPointer != nullptr) {
-            glVertexAttribIPointer(index, size, type, stride, pointer);
+            glVertexAttribIPointer(location, size, type, stride, data);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexAttribIPointer returned error: 0x%x", err);
@@ -17024,11 +17024,11 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
 
 bool callGlVertexBindingDivisor(Stack* stack, bool pushReturn) {
     uint32_t divisor = stack->pop<uint32_t>();
-    uint32_t bindingindex = stack->pop<uint32_t>();
+    uint32_t binding_index = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", bindingindex, divisor);
+        GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", binding_index, divisor);
         if (glVertexBindingDivisor != nullptr) {
-            glVertexBindingDivisor(bindingindex, divisor);
+            glVertexBindingDivisor(binding_index, divisor);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glVertexBindingDivisor returned error: 0x%x", err);

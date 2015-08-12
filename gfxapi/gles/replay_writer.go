@@ -781,6 +781,12 @@ var funcInfoStartTimer = builder.FunctionInfo{ID: 746, ReturnType: protocol.Type
 var funcInfoStopTimer = builder.FunctionInfo{ID: 747, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 748, ReturnType: protocol.TypeVoid, Parameters: 0}
 
+func (c BindingIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return GLuint(c).value(ϟb, ϟa, ϟs)
+}
+func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return GLuint(c).value(ϟb, ϟa, ϟs)
+}
 func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
 }
@@ -818,9 +824,6 @@ func (c UniformBlockId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.S
 	return value.U32(uint32(c))
 }
 func (c TransformFeedbackId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
-}
-func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
 }
 func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
@@ -3055,10 +3058,13 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ReadVertexArrays_228_instance_count := uint32(1)            // u32
 	if ((ReadVertexArrays_228_index_count) > (uint32(0))) && ((ReadVertexArrays_228_instance_count) > (uint32(0))) {
 		if (ReadVertexArrays_228_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+			vao3 := ReadVertexArrays_228_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 			for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-				arr := ReadVertexArrays_228_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+				arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 				if arr.Enabled {
-					if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+					binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+					if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+						stride := binding.Stride                  // GLsizei
 						VertexAttribTypeSize_229_type := arr.Type // GLenum
 						VertexAttribTypeSize_229_result := func() (result GLint) {
 							switch VertexAttribTypeSize_229_type {
@@ -3076,23 +3082,11 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 								return result
 							}
 						}() // GLint
-						size := (VertexAttribTypeSize_229_result) * (GLint(arr.Size)) // GLint
-						stride := func() (result GLint) {
-							switch (arr.Stride) == (GLsizei(int32(0))) {
-							case true:
-								return size
-							case false:
-								return GLint(arr.Stride)
-							default:
-								// TODO: better unmatched handling
-								panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-								return result
-							}
-						}() // GLint
-						divisor := arr.Divisor // u32
+						size := (VertexAttribTypeSize_229_result) * (arr.Size) // GLint
+						divisor := uint32(binding.Divisor)                     // u32
 						if (divisor) == (uint32(0)) {
 							for v := uint32(ReadVertexArrays_228_first_index); v < (ReadVertexArrays_228_first_index)+(ReadVertexArrays_228_index_count); v++ {
-								offset := (stride) * (GLint(v)) // GLint
+								offset := (GLint(stride)) * (GLint(v)) // GLint
 								arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 								_ = offset
 							}
@@ -3100,17 +3094,19 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 							last_instance := (ReadVertexArrays_228_instance_count) - (uint32(1)) // u32
 							last_index := (last_instance) / (divisor)                            // u32
 							for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-								offset := (stride) * (GLint(v)) // GLint
+								offset := (GLint(stride)) * (GLint(v)) // GLint
 								arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 								_ = offset
 							}
 							_, _ = last_instance, last_index
 						}
-						_, _, _, _, _ = VertexAttribTypeSize_229_type, VertexAttribTypeSize_229_result, size, stride, divisor
+						_, _, _, _, _ = stride, VertexAttribTypeSize_229_type, VertexAttribTypeSize_229_result, size, divisor
 					}
+					_ = binding
 				}
 				_ = arr
 			}
+			_ = vao3
 		}
 	}
 	ϟb.Push(value.U32(ϟa.DrawMode))
@@ -3210,10 +3206,13 @@ func (ϟa *GlDrawArraysInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ReadVertexArrays_247_instance_count := uint32(ϟa.InstanceCount) // u32
 	if ((ReadVertexArrays_247_index_count) > (uint32(0))) && ((ReadVertexArrays_247_instance_count) > (uint32(0))) {
 		if (ReadVertexArrays_247_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+			vao3 := ReadVertexArrays_247_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 			for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-				arr := ReadVertexArrays_247_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+				arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 				if arr.Enabled {
-					if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+					binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+					if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+						stride := binding.Stride                  // GLsizei
 						VertexAttribTypeSize_248_type := arr.Type // GLenum
 						VertexAttribTypeSize_248_result := func() (result GLint) {
 							switch VertexAttribTypeSize_248_type {
@@ -3231,23 +3230,11 @@ func (ϟa *GlDrawArraysInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 								return result
 							}
 						}() // GLint
-						size := (VertexAttribTypeSize_248_result) * (GLint(arr.Size)) // GLint
-						stride := func() (result GLint) {
-							switch (arr.Stride) == (GLsizei(int32(0))) {
-							case true:
-								return size
-							case false:
-								return GLint(arr.Stride)
-							default:
-								// TODO: better unmatched handling
-								panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-								return result
-							}
-						}() // GLint
-						divisor := arr.Divisor // u32
+						size := (VertexAttribTypeSize_248_result) * (arr.Size) // GLint
+						divisor := uint32(binding.Divisor)                     // u32
 						if (divisor) == (uint32(0)) {
 							for v := uint32(ReadVertexArrays_247_first_index); v < (ReadVertexArrays_247_first_index)+(ReadVertexArrays_247_index_count); v++ {
-								offset := (stride) * (GLint(v)) // GLint
+								offset := (GLint(stride)) * (GLint(v)) // GLint
 								arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 								_ = offset
 							}
@@ -3255,17 +3242,19 @@ func (ϟa *GlDrawArraysInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 							last_instance := (ReadVertexArrays_247_instance_count) - (uint32(1)) // u32
 							last_index := (last_instance) / (divisor)                            // u32
 							for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-								offset := (stride) * (GLint(v)) // GLint
+								offset := (GLint(stride)) * (GLint(v)) // GLint
 								arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 								_ = offset
 							}
 							_, _ = last_instance, last_index
 						}
-						_, _, _, _, _ = VertexAttribTypeSize_248_type, VertexAttribTypeSize_248_result, size, stride, divisor
+						_, _, _, _, _ = stride, VertexAttribTypeSize_248_type, VertexAttribTypeSize_248_result, size, divisor
 					}
+					_ = binding
 				}
 				_ = arr
 			}
+			_ = vao3
 		}
 	}
 	ϟb.Push(value.U32(ϟa.DrawMode))
@@ -3346,10 +3335,13 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 			ReadVertexArrays_261_instance_count := uint32(DrawElements_252_instance_count)                                            // u32
 			if ((ReadVertexArrays_261_index_count) > (uint32(0))) && ((ReadVertexArrays_261_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_261_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_261_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_261_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_262_type := arr.Type // GLenum
 								VertexAttribTypeSize_262_result := func() (result GLint) {
 									switch VertexAttribTypeSize_262_type {
@@ -3367,23 +3359,11 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_262_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_262_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_261_first_index); v < (ReadVertexArrays_261_first_index)+(ReadVertexArrays_261_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3391,17 +3371,19 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 									last_instance := (ReadVertexArrays_261_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_262_type, VertexAttribTypeSize_262_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_262_type, VertexAttribTypeSize_262_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_261_ctx, ReadVertexArrays_261_first_index, ReadVertexArrays_261_index_count, ReadVertexArrays_261_instance_count
@@ -3415,10 +3397,13 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 			ReadVertexArrays_263_instance_count := uint32(DrawElements_252_instance_count)                             // u32
 			if ((ReadVertexArrays_263_index_count) > (uint32(0))) && ((ReadVertexArrays_263_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_263_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_263_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_263_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_264_type := arr.Type // GLenum
 								VertexAttribTypeSize_264_result := func() (result GLint) {
 									switch VertexAttribTypeSize_264_type {
@@ -3436,23 +3421,11 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_264_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_264_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_263_first_index); v < (ReadVertexArrays_263_first_index)+(ReadVertexArrays_263_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3460,17 +3433,19 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 									last_instance := (ReadVertexArrays_263_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_264_type, VertexAttribTypeSize_264_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_264_type, VertexAttribTypeSize_264_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_265_indices_type := DrawElements_252_indices_type // GLenum
@@ -3571,10 +3546,13 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 			ReadVertexArrays_278_instance_count := uint32(DrawElements_269_instance_count)                                            // u32
 			if ((ReadVertexArrays_278_index_count) > (uint32(0))) && ((ReadVertexArrays_278_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_278_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_278_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_278_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_279_type := arr.Type // GLenum
 								VertexAttribTypeSize_279_result := func() (result GLint) {
 									switch VertexAttribTypeSize_279_type {
@@ -3592,23 +3570,11 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_279_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_279_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_278_first_index); v < (ReadVertexArrays_278_first_index)+(ReadVertexArrays_278_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3616,17 +3582,19 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 									last_instance := (ReadVertexArrays_278_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_279_type, VertexAttribTypeSize_279_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_279_type, VertexAttribTypeSize_279_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_278_ctx, ReadVertexArrays_278_first_index, ReadVertexArrays_278_index_count, ReadVertexArrays_278_instance_count
@@ -3640,10 +3608,13 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 			ReadVertexArrays_280_instance_count := uint32(DrawElements_269_instance_count)                             // u32
 			if ((ReadVertexArrays_280_index_count) > (uint32(0))) && ((ReadVertexArrays_280_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_280_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_280_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_280_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_281_type := arr.Type // GLenum
 								VertexAttribTypeSize_281_result := func() (result GLint) {
 									switch VertexAttribTypeSize_281_type {
@@ -3661,23 +3632,11 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_281_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_281_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_280_first_index); v < (ReadVertexArrays_280_first_index)+(ReadVertexArrays_280_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3685,17 +3644,19 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 									last_instance := (ReadVertexArrays_280_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_281_type, VertexAttribTypeSize_281_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_281_type, VertexAttribTypeSize_281_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_282_indices_type := DrawElements_269_indices_type // GLenum
@@ -3853,10 +3814,13 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 			ReadVertexArrays_306_instance_count := uint32(DrawElements_297_instance_count)                                            // u32
 			if ((ReadVertexArrays_306_index_count) > (uint32(0))) && ((ReadVertexArrays_306_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_306_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_306_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_306_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_307_type := arr.Type // GLenum
 								VertexAttribTypeSize_307_result := func() (result GLint) {
 									switch VertexAttribTypeSize_307_type {
@@ -3874,23 +3838,11 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_307_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_307_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_306_first_index); v < (ReadVertexArrays_306_first_index)+(ReadVertexArrays_306_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3898,17 +3850,19 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 									last_instance := (ReadVertexArrays_306_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_307_type, VertexAttribTypeSize_307_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_307_type, VertexAttribTypeSize_307_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_306_ctx, ReadVertexArrays_306_first_index, ReadVertexArrays_306_index_count, ReadVertexArrays_306_instance_count
@@ -3922,10 +3876,13 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 			ReadVertexArrays_308_instance_count := uint32(DrawElements_297_instance_count)                             // u32
 			if ((ReadVertexArrays_308_index_count) > (uint32(0))) && ((ReadVertexArrays_308_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_308_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_308_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_308_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_309_type := arr.Type // GLenum
 								VertexAttribTypeSize_309_result := func() (result GLint) {
 									switch VertexAttribTypeSize_309_type {
@@ -3943,23 +3900,11 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_309_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_309_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_308_first_index); v < (ReadVertexArrays_308_first_index)+(ReadVertexArrays_308_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -3967,17 +3912,19 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 									last_instance := (ReadVertexArrays_308_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_309_type, VertexAttribTypeSize_309_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_309_type, VertexAttribTypeSize_309_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_310_indices_type := DrawElements_297_indices_type // GLenum
@@ -4079,10 +4026,13 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 			ReadVertexArrays_323_instance_count := uint32(DrawElements_314_instance_count)                                            // u32
 			if ((ReadVertexArrays_323_index_count) > (uint32(0))) && ((ReadVertexArrays_323_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_323_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_323_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_323_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_324_type := arr.Type // GLenum
 								VertexAttribTypeSize_324_result := func() (result GLint) {
 									switch VertexAttribTypeSize_324_type {
@@ -4100,23 +4050,11 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_324_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_324_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_323_first_index); v < (ReadVertexArrays_323_first_index)+(ReadVertexArrays_323_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4124,17 +4062,19 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 									last_instance := (ReadVertexArrays_323_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_324_type, VertexAttribTypeSize_324_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_324_type, VertexAttribTypeSize_324_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_323_ctx, ReadVertexArrays_323_first_index, ReadVertexArrays_323_index_count, ReadVertexArrays_323_instance_count
@@ -4148,10 +4088,13 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 			ReadVertexArrays_325_instance_count := uint32(DrawElements_314_instance_count)                             // u32
 			if ((ReadVertexArrays_325_index_count) > (uint32(0))) && ((ReadVertexArrays_325_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_325_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_325_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_325_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_326_type := arr.Type // GLenum
 								VertexAttribTypeSize_326_result := func() (result GLint) {
 									switch VertexAttribTypeSize_326_type {
@@ -4169,23 +4112,11 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_326_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_326_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_325_first_index); v < (ReadVertexArrays_325_first_index)+(ReadVertexArrays_325_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4193,17 +4124,19 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 									last_instance := (ReadVertexArrays_325_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_326_type, VertexAttribTypeSize_326_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_326_type, VertexAttribTypeSize_326_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_327_indices_type := DrawElements_314_indices_type // GLenum
@@ -4310,10 +4243,13 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			ReadVertexArrays_341_instance_count := uint32(DrawElements_332_instance_count)                                            // u32
 			if ((ReadVertexArrays_341_index_count) > (uint32(0))) && ((ReadVertexArrays_341_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_341_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_341_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_341_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_342_type := arr.Type // GLenum
 								VertexAttribTypeSize_342_result := func() (result GLint) {
 									switch VertexAttribTypeSize_342_type {
@@ -4331,23 +4267,11 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_342_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_342_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_341_first_index); v < (ReadVertexArrays_341_first_index)+(ReadVertexArrays_341_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4355,17 +4279,19 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 									last_instance := (ReadVertexArrays_341_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_342_type, VertexAttribTypeSize_342_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_342_type, VertexAttribTypeSize_342_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_341_ctx, ReadVertexArrays_341_first_index, ReadVertexArrays_341_index_count, ReadVertexArrays_341_instance_count
@@ -4379,10 +4305,13 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			ReadVertexArrays_343_instance_count := uint32(DrawElements_332_instance_count)                             // u32
 			if ((ReadVertexArrays_343_index_count) > (uint32(0))) && ((ReadVertexArrays_343_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_343_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_343_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_343_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_344_type := arr.Type // GLenum
 								VertexAttribTypeSize_344_result := func() (result GLint) {
 									switch VertexAttribTypeSize_344_type {
@@ -4400,23 +4329,11 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_344_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_344_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_343_first_index); v < (ReadVertexArrays_343_first_index)+(ReadVertexArrays_343_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4424,17 +4341,19 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 									last_instance := (ReadVertexArrays_343_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_344_type, VertexAttribTypeSize_344_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_344_type, VertexAttribTypeSize_344_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_345_indices_type := DrawElements_332_indices_type // GLenum
@@ -4541,10 +4460,13 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 			ReadVertexArrays_359_instance_count := uint32(DrawElements_350_instance_count)                                            // u32
 			if ((ReadVertexArrays_359_index_count) > (uint32(0))) && ((ReadVertexArrays_359_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_359_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_359_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_359_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_360_type := arr.Type // GLenum
 								VertexAttribTypeSize_360_result := func() (result GLint) {
 									switch VertexAttribTypeSize_360_type {
@@ -4562,23 +4484,11 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_360_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_360_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_359_first_index); v < (ReadVertexArrays_359_first_index)+(ReadVertexArrays_359_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4586,17 +4496,19 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 									last_instance := (ReadVertexArrays_359_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_360_type, VertexAttribTypeSize_360_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_360_type, VertexAttribTypeSize_360_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			_, _, _, _, _, _, _, _ = index_data, offset, first, last, ReadVertexArrays_359_ctx, ReadVertexArrays_359_first_index, ReadVertexArrays_359_index_count, ReadVertexArrays_359_instance_count
@@ -4610,10 +4522,13 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 			ReadVertexArrays_361_instance_count := uint32(DrawElements_350_instance_count)                             // u32
 			if ((ReadVertexArrays_361_index_count) > (uint32(0))) && ((ReadVertexArrays_361_instance_count) > (uint32(0))) {
 				if (ReadVertexArrays_361_ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) {
+					vao3 := ReadVertexArrays_361_ctx.Instances.VertexArrays.Get(VertexArrayId(uint32(0))) // VertexArrayʳ
 					for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-						arr := ReadVertexArrays_361_ctx.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
+						arr := vao3.VertexAttributeArrays.Get(i) // VertexAttributeArrayʳ
 						if arr.Enabled {
-							if ((arr.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+							binding := vao3.VertexBufferBindings.Get(arr.Binding) // VertexBufferBindingʳ
+							if ((binding.Buffer) == (BufferId(uint32(0)))) && ((arr.Pointer) != (VertexPointer(Voidᶜᵖ{}))) {
+								stride := binding.Stride                  // GLsizei
 								VertexAttribTypeSize_362_type := arr.Type // GLenum
 								VertexAttribTypeSize_362_result := func() (result GLint) {
 									switch VertexAttribTypeSize_362_type {
@@ -4631,23 +4546,11 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 										return result
 									}
 								}() // GLint
-								size := (VertexAttribTypeSize_362_result) * (GLint(arr.Size)) // GLint
-								stride := func() (result GLint) {
-									switch (arr.Stride) == (GLsizei(int32(0))) {
-									case true:
-										return size
-									case false:
-										return GLint(arr.Stride)
-									default:
-										// TODO: better unmatched handling
-										panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (arr.Stride) == (GLsizei(int32(0))), ϟa))
-										return result
-									}
-								}() // GLint
-								divisor := arr.Divisor // u32
+								size := (VertexAttribTypeSize_362_result) * (arr.Size) // GLint
+								divisor := uint32(binding.Divisor)                     // u32
 								if (divisor) == (uint32(0)) {
 									for v := uint32(ReadVertexArrays_361_first_index); v < (ReadVertexArrays_361_first_index)+(ReadVertexArrays_361_index_count); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
@@ -4655,17 +4558,19 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 									last_instance := (ReadVertexArrays_361_instance_count) - (uint32(1)) // u32
 									last_index := (last_instance) / (divisor)                            // u32
 									for v := uint32(uint32(0)); v < (last_index)+(uint32(1)); v++ {
-										offset := (stride) * (GLint(v)) // GLint
+										offset := (GLint(stride)) * (GLint(v)) // GLint
 										arr.Pointer.Slice(uint64(offset), uint64((offset)+(size)), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 										_ = offset
 									}
 									_, _ = last_instance, last_index
 								}
-								_, _, _, _, _ = VertexAttribTypeSize_362_type, VertexAttribTypeSize_362_result, size, stride, divisor
+								_, _, _, _, _ = stride, VertexAttribTypeSize_362_type, VertexAttribTypeSize_362_result, size, divisor
 							}
+							_ = binding
 						}
 						_ = arr
 					}
+					_ = vao3
 				}
 			}
 			IndexSize_363_indices_type := DrawElements_350_indices_type // GLenum
@@ -4872,7 +4777,7 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	GetContext_377_result := context // Contextʳ
 	ctx := GetContext_377_result     // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
-		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{}
+		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}}
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
@@ -6515,7 +6420,7 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
-		ctx.Instances.VertexArrays[id] = &VertexArray{}
+		ctx.Instances.VertexArrays[id] = &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -29870,7 +29775,16 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	GetContext_3541_result := context // Contextʳ
 	ctx := GetContext_3541_result     // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
-		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{}
+		array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+		for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+			array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
+		}
+		for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
+			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		}
+		NewVertexArray_3543_result := array // VertexArrayʳ
+		ctx.Instances.VertexArrays[ϟa.Array] = NewVertexArray_3543_result
+		_, _ = array, NewVertexArray_3543_result
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
@@ -29889,9 +29803,50 @@ func (ϟa *GlBindVertexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3543_major := uint32(3) // u32
-	minRequiredVersion_3543_minor := uint32(1) // u32
-	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
+	minRequiredVersion_3544_major := uint32(3)   // u32
+	minRequiredVersion_3544_minor := uint32(1)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3546_msg := "No context bound" // string
+		return
+		_ = error_3546_msg
+	}
+	GetContext_3545_result := context                                                                // Contextʳ
+	ctx := GetContext_3545_result                                                                    // Contextʳ
+	glErrorInvalidOperationIf_3547_condition := (ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) // bool
+	if glErrorInvalidOperationIf_3547_condition {
+		return
+	}
+	BindVertexBuffer_3548_ctx := ctx                                                                                                      // Contextʳ
+	BindVertexBuffer_3548_binding_index := ϟa.BindingIndex                                                                                // BindingIndex
+	BindVertexBuffer_3548_buffer := ϟa.Buffer                                                                                             // BufferId
+	BindVertexBuffer_3548_offset := ϟa.Offset                                                                                             // GLintptr
+	BindVertexBuffer_3548_stride := ϟa.Stride                                                                                             // GLsizei
+	glErrorInvalidValueIf_3549_condition := (BindVertexBuffer_3548_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3549_condition {
+		return
+	}
+	glErrorInvalidValueIf_3550_condition := (BindVertexBuffer_3548_offset) < (GLintptr(int32(0))) // bool
+	if glErrorInvalidValueIf_3550_condition {
+		return
+	}
+	glErrorInvalidValueIf_3551_condition := (BindVertexBuffer_3548_stride) < (GLsizei(int32(0))) // bool
+	if glErrorInvalidValueIf_3551_condition {
+		return
+	}
+	glErrorInvalidValueIf_3552_condition := (BindVertexBuffer_3548_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+	if glErrorInvalidValueIf_3552_condition {
+		return
+	}
+	if !(BindVertexBuffer_3548_ctx.Instances.Buffers.Contains(BindVertexBuffer_3548_buffer)) {
+		BindVertexBuffer_3548_ctx.Instances.Buffers[BindVertexBuffer_3548_buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	}
+	vao4 := BindVertexBuffer_3548_ctx.Instances.VertexArrays.Get(BindVertexBuffer_3548_ctx.BoundVertexArray) // VertexArrayʳ
+	binding := vao4.VertexBufferBindings.Get(BindVertexBuffer_3548_binding_index)                            // VertexBufferBindingʳ
+	binding.Buffer = BindVertexBuffer_3548_buffer
+	binding.Offset = BindVertexBuffer_3548_offset
+	binding.Stride = BindVertexBuffer_3548_stride
+	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
@@ -29901,7 +29856,7 @@ func (ϟa *GlBindVertexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindVertexBuffer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3543_major, minRequiredVersion_3543_minor
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3544_major, minRequiredVersion_3544_minor, context, GetContext_3545_result, ctx, glErrorInvalidOperationIf_3547_condition, BindVertexBuffer_3548_ctx, BindVertexBuffer_3548_binding_index, BindVertexBuffer_3548_buffer, BindVertexBuffer_3548_offset, BindVertexBuffer_3548_stride, glErrorInvalidValueIf_3549_condition, glErrorInvalidValueIf_3550_condition, glErrorInvalidValueIf_3551_condition, glErrorInvalidValueIf_3552_condition, vao4, binding
 	return nil
 }
 
@@ -29910,25 +29865,38 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3544_major := uint32(3)   // u32
-	minRequiredVersion_3544_minor := uint32(0)   // u32
+	minRequiredVersion_3553_major := uint32(3)                               // u32
+	minRequiredVersion_3553_minor := uint32(0)                               // u32
+	glErrorInvalidValueIf_3554_condition := (ϟa.Count) < (GLsizei(int32(0))) // bool
+	if glErrorInvalidValueIf_3554_condition {
+		return
+	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3546_msg := "No context bound" // string
+		error_3556_msg := "No context bound" // string
 		return
-		_ = error_3546_msg
+		_ = error_3556_msg
 	}
-	GetContext_3545_result := context                                     // Contextʳ
-	ctx := GetContext_3545_result                                         // Contextʳ
+	GetContext_3555_result := context                                     // Contextʳ
+	ctx := GetContext_3555_result                                         // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+		id := a.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // VertexArrayId
+		if (id) != (VertexArrayId(uint32(0))) {
+			if ctx.Instances.VertexArrays.Contains(id) {
+				delete(ctx.Instances.VertexArrays, id)
+				if (ctx.BoundVertexArray) == (id) {
+					ctx.BoundVertexArray = VertexArrayId(uint32(0))
+				}
+			}
+		}
+		_ = id
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlDeleteVertexArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_3544_major, minRequiredVersion_3544_minor, context, GetContext_3545_result, ctx, a
+	_, _, _, _, _, _, _ = minRequiredVersion_3553_major, minRequiredVersion_3553_minor, glErrorInvalidValueIf_3554_condition, context, GetContext_3555_result, ctx, a
 	return nil
 }
 
@@ -29937,21 +29905,26 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3547_major := uint32(2)   // u32
-	minRequiredVersion_3547_minor := uint32(0)   // u32
+	minRequiredVersion_3557_major := uint32(2)                                                                 // u32
+	minRequiredVersion_3557_minor := uint32(0)                                                                 // u32
+	glErrorInvalidValueIf_3558_condition := (ϟa.Location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3558_condition {
+		return
+	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3549_msg := "No context bound" // string
+		error_3560_msg := "No context bound" // string
 		return
-		_ = error_3549_msg
+		_ = error_3560_msg
 	}
-	GetContext_3548_result := context // Contextʳ
-	ctx := GetContext_3548_result     // Contextʳ
-	ctx.VertexAttributeArrays.Get(ϟa.Location).Enabled = false
+	GetContext_3559_result := context                           // Contextʳ
+	ctx := GetContext_3559_result                               // Contextʳ
+	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
+	vao.VertexAttributeArrays.Get(ϟa.Location).Enabled = false
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDisableVertexAttribArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_3547_major, minRequiredVersion_3547_minor, context, GetContext_3548_result, ctx
+	_, _, _, _, _, _, _ = minRequiredVersion_3557_major, minRequiredVersion_3557_minor, glErrorInvalidValueIf_3558_condition, context, GetContext_3559_result, ctx, vao
 	return nil
 }
 
@@ -29960,21 +29933,26 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3550_major := uint32(2)   // u32
-	minRequiredVersion_3550_minor := uint32(0)   // u32
+	minRequiredVersion_3561_major := uint32(2)                                                                 // u32
+	minRequiredVersion_3561_minor := uint32(0)                                                                 // u32
+	glErrorInvalidValueIf_3562_condition := (ϟa.Location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3562_condition {
+		return
+	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3552_msg := "No context bound" // string
+		error_3564_msg := "No context bound" // string
 		return
-		_ = error_3552_msg
+		_ = error_3564_msg
 	}
-	GetContext_3551_result := context // Contextʳ
-	ctx := GetContext_3551_result     // Contextʳ
-	ctx.VertexAttributeArrays.Get(ϟa.Location).Enabled = true
+	GetContext_3563_result := context                           // Contextʳ
+	ctx := GetContext_3563_result                               // Contextʳ
+	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
+	vao.VertexAttributeArrays.Get(ϟa.Location).Enabled = true
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEnableVertexAttribArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_3550_major, minRequiredVersion_3550_minor, context, GetContext_3551_result, ctx
+	_, _, _, _, _, _, _ = minRequiredVersion_3561_major, minRequiredVersion_3561_minor, glErrorInvalidValueIf_3562_condition, context, GetContext_3563_result, ctx, vao
 	return nil
 }
 
@@ -29983,28 +29961,31 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3553_major := uint32(3)                            // u32
-	minRequiredVersion_3553_minor := uint32(0)                            // u32
+	minRequiredVersion_3565_major := uint32(3)                               // u32
+	minRequiredVersion_3565_minor := uint32(0)                               // u32
+	glErrorInvalidValueIf_3566_condition := (ϟa.Count) < (GLsizei(int32(0))) // bool
+	if glErrorInvalidValueIf_3566_condition {
+		return
+	}
 	a := ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                          // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3555_msg := "No context bound" // string
+		error_3568_msg := "No context bound" // string
 		return
-		_ = error_3555_msg
+		_ = error_3568_msg
 	}
-	GetContext_3554_result := context // Contextʳ
-	ctx := GetContext_3554_result     // Contextʳ
+	GetContext_3567_result := context // Contextʳ
+	ctx := GetContext_3567_result     // Contextʳ
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlGenVertexArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
-		ctx.Instances.VertexArrays[id] = &VertexArray{}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _, _, _ = minRequiredVersion_3553_major, minRequiredVersion_3553_minor, a, context, GetContext_3554_result, ctx
+	_, _, _, _, _, _, _ = minRequiredVersion_3565_major, minRequiredVersion_3565_minor, glErrorInvalidValueIf_3566_condition, a, context, GetContext_3567_result, ctx
 	return nil
 }
 
@@ -30013,25 +29994,79 @@ func (ϟa *GlGetVertexAttribIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3556_major := uint32(3) // u32
-	minRequiredVersion_3556_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
-	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_3557_major := uint32(3) // u32
-		minRequiredVersion_3557_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_3557_major, minRequiredVersion_3557_minor
-	default:
-		glErrorInvalidEnum_3558_param := ϟa.Pname // GLenum
+	minRequiredVersion_3569_major := uint32(3)                                                              // u32
+	minRequiredVersion_3569_minor := uint32(0)                                                              // u32
+	glErrorInvalidValueIf_3570_condition := (ϟa.Index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3570_condition {
 		return
-		_ = glErrorInvalidEnum_3558_param
 	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3572_msg := "No context bound" // string
+		return
+		_ = error_3572_msg
+	}
+	GetContext_3571_result := context // Contextʳ
+	ctx := GetContext_3571_result     // Contextʳ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3556_major, minRequiredVersion_3556_minor
+	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
+		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
+		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = attr
+	} else {
+		GetVertexAttrib_3573_ctx := ctx                                                                        // Contextʳ
+		GetVertexAttrib_3573_index := ϟa.Index                                                                 // AttributeLocation
+		GetVertexAttrib_3573_pname := ϟa.Pname                                                                 // GLenum
+		vao2 := GetVertexAttrib_3573_ctx.Instances.VertexArrays.Get(GetVertexAttrib_3573_ctx.BoundVertexArray) // VertexArrayʳ
+		array := vao2.VertexAttributeArrays.Get(GetVertexAttrib_3573_index)                                    // VertexAttributeArrayʳ
+		GetVertexAttrib_3573_result := func() (result uint64) {
+			switch GetVertexAttrib_3573_pname {
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED:
+				return func() uint64 {
+					if array.Enabled {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE:
+				return uint64(array.Size)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
+				return uint64(array.Type)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:
+				return uint64(array.Normalized)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE:
+				return uint64(array.Stride)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Buffer)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Divisor)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
+				return func() uint64 {
+					if array.Integer {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_BINDING:
+				return uint64(array.Binding)
+			case GLenum_GL_VERTEX_ATTRIB_RELATIVE_OFFSET:
+				return uint64(array.RelativeOffset)
+			default:
+				// TODO: better unmatched handling
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", GetVertexAttrib_3573_pname, ϟa))
+				return result
+			}
+		}() // u64
+		ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(GetVertexAttrib_3573_result), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _, _, _, _, _ = GetVertexAttrib_3573_ctx, GetVertexAttrib_3573_index, GetVertexAttrib_3573_pname, vao2, array, GetVertexAttrib_3573_result
+	}
+	_, _, _, _, _, _ = minRequiredVersion_3569_major, minRequiredVersion_3569_minor, glErrorInvalidValueIf_3570_condition, context, GetContext_3571_result, ctx
 	return nil
 }
 
@@ -30040,25 +30075,79 @@ func (ϟa *GlGetVertexAttribIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3559_major := uint32(3) // u32
-	minRequiredVersion_3559_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
-	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_3560_major := uint32(3) // u32
-		minRequiredVersion_3560_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_3560_major, minRequiredVersion_3560_minor
-	default:
-		glErrorInvalidEnum_3561_param := ϟa.Pname // GLenum
+	minRequiredVersion_3574_major := uint32(3)                                                              // u32
+	minRequiredVersion_3574_minor := uint32(0)                                                              // u32
+	glErrorInvalidValueIf_3575_condition := (ϟa.Index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3575_condition {
 		return
-		_ = glErrorInvalidEnum_3561_param
 	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3577_msg := "No context bound" // string
+		return
+		_ = error_3577_msg
+	}
+	GetContext_3576_result := context // Contextʳ
+	ctx := GetContext_3576_result     // Contextʳ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3559_major, minRequiredVersion_3559_minor
+	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
+		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
+		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = attr
+	} else {
+		GetVertexAttrib_3578_ctx := ctx                                                                        // Contextʳ
+		GetVertexAttrib_3578_index := ϟa.Index                                                                 // AttributeLocation
+		GetVertexAttrib_3578_pname := ϟa.Pname                                                                 // GLenum
+		vao2 := GetVertexAttrib_3578_ctx.Instances.VertexArrays.Get(GetVertexAttrib_3578_ctx.BoundVertexArray) // VertexArrayʳ
+		array := vao2.VertexAttributeArrays.Get(GetVertexAttrib_3578_index)                                    // VertexAttributeArrayʳ
+		GetVertexAttrib_3578_result := func() (result uint64) {
+			switch GetVertexAttrib_3578_pname {
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED:
+				return func() uint64 {
+					if array.Enabled {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE:
+				return uint64(array.Size)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
+				return uint64(array.Type)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:
+				return uint64(array.Normalized)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE:
+				return uint64(array.Stride)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Buffer)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Divisor)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
+				return func() uint64 {
+					if array.Integer {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_BINDING:
+				return uint64(array.Binding)
+			case GLenum_GL_VERTEX_ATTRIB_RELATIVE_OFFSET:
+				return uint64(array.RelativeOffset)
+			default:
+				// TODO: better unmatched handling
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", GetVertexAttrib_3578_pname, ϟa))
+				return result
+			}
+		}() // u64
+		ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLuint(GetVertexAttrib_3578_result), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _, _, _, _, _ = GetVertexAttrib_3578_ctx, GetVertexAttrib_3578_index, GetVertexAttrib_3578_pname, vao2, array, GetVertexAttrib_3578_result
+	}
+	_, _, _, _, _, _ = minRequiredVersion_3574_major, minRequiredVersion_3574_minor, glErrorInvalidValueIf_3575_condition, context, GetContext_3576_result, ctx
 	return nil
 }
 
@@ -30067,21 +30156,32 @@ func (ϟa *GlGetVertexAttribPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3562_major := uint32(2) // u32
-	minRequiredVersion_3562_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_VERTEX_ATTRIB_ARRAY_POINTER:
-	default:
-		glErrorInvalidEnum_3563_param := ϟa.Pname // GLenum
+	minRequiredVersion_3579_major := uint32(2)                                                              // u32
+	minRequiredVersion_3579_minor := uint32(0)                                                              // u32
+	glErrorInvalidValueIf_3580_condition := (ϟa.Index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3580_condition {
 		return
-		_ = glErrorInvalidEnum_3563_param
 	}
+	glErrorInvalidEnumIf_3581_condition := (ϟa.Pname) != (GLenum_GL_VERTEX_ATTRIB_ARRAY_POINTER) // bool
+	if glErrorInvalidEnumIf_3581_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3583_msg := "No context bound" // string
+		return
+		_ = error_3583_msg
+	}
+	GetContext_3582_result := context                           // Contextʳ
+	ctx := GetContext_3582_result                               // Contextʳ
+	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Pointer.value())
 	ϟb.Call(funcInfoGlGetVertexAttribPointerv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3562_major, minRequiredVersion_3562_minor
+	ϟa.Pointer.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(Voidᵖ(vao.VertexAttributeArrays.Get(ϟa.Index).Pointer), ϟa, ϟs, ϟd, ϟl, ϟb)
+	_, _, _, _, _, _, _, _ = minRequiredVersion_3579_major, minRequiredVersion_3579_minor, glErrorInvalidValueIf_3580_condition, glErrorInvalidEnumIf_3581_condition, context, GetContext_3582_result, ctx, vao
 	return nil
 }
 
@@ -30090,29 +30190,79 @@ func (ϟa *GlGetVertexAttribfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3564_major := uint32(2) // u32
-	minRequiredVersion_3564_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
-	case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
-		minRequiredVersion_3565_major := uint32(3) // u32
-		minRequiredVersion_3565_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_3565_major, minRequiredVersion_3565_minor
-	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_3566_major := uint32(3) // u32
-		minRequiredVersion_3566_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_3566_major, minRequiredVersion_3566_minor
-	default:
-		glErrorInvalidEnum_3567_param := ϟa.Pname // GLenum
+	minRequiredVersion_3584_major := uint32(2)                                                              // u32
+	minRequiredVersion_3584_minor := uint32(0)                                                              // u32
+	glErrorInvalidValueIf_3585_condition := (ϟa.Index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3585_condition {
 		return
-		_ = glErrorInvalidEnum_3567_param
 	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3587_msg := "No context bound" // string
+		return
+		_ = error_3587_msg
+	}
+	GetContext_3586_result := context // Contextʳ
+	ctx := GetContext_3586_result     // Contextʳ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3564_major, minRequiredVersion_3564_minor
+	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
+		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
+		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = attr
+	} else {
+		GetVertexAttrib_3588_ctx := ctx                                                                        // Contextʳ
+		GetVertexAttrib_3588_index := ϟa.Index                                                                 // AttributeLocation
+		GetVertexAttrib_3588_pname := ϟa.Pname                                                                 // GLenum
+		vao2 := GetVertexAttrib_3588_ctx.Instances.VertexArrays.Get(GetVertexAttrib_3588_ctx.BoundVertexArray) // VertexArrayʳ
+		array := vao2.VertexAttributeArrays.Get(GetVertexAttrib_3588_index)                                    // VertexAttributeArrayʳ
+		GetVertexAttrib_3588_result := func() (result uint64) {
+			switch GetVertexAttrib_3588_pname {
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED:
+				return func() uint64 {
+					if array.Enabled {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE:
+				return uint64(array.Size)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
+				return uint64(array.Type)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:
+				return uint64(array.Normalized)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE:
+				return uint64(array.Stride)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Buffer)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Divisor)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
+				return func() uint64 {
+					if array.Integer {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_BINDING:
+				return uint64(array.Binding)
+			case GLenum_GL_VERTEX_ATTRIB_RELATIVE_OFFSET:
+				return uint64(array.RelativeOffset)
+			default:
+				// TODO: better unmatched handling
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", GetVertexAttrib_3588_pname, ϟa))
+				return result
+			}
+		}() // u64
+		ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLfloat(GetVertexAttrib_3588_result), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _, _, _, _, _ = GetVertexAttrib_3588_ctx, GetVertexAttrib_3588_index, GetVertexAttrib_3588_pname, vao2, array, GetVertexAttrib_3588_result
+	}
+	_, _, _, _, _, _ = minRequiredVersion_3584_major, minRequiredVersion_3584_minor, glErrorInvalidValueIf_3585_condition, context, GetContext_3586_result, ctx
 	return nil
 }
 
@@ -30121,29 +30271,79 @@ func (ϟa *GlGetVertexAttribiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3568_major := uint32(2) // u32
-	minRequiredVersion_3568_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
-	case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
-		minRequiredVersion_3569_major := uint32(3) // u32
-		minRequiredVersion_3569_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_3569_major, minRequiredVersion_3569_minor
-	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_3570_major := uint32(3) // u32
-		minRequiredVersion_3570_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_3570_major, minRequiredVersion_3570_minor
-	default:
-		glErrorInvalidEnum_3571_param := ϟa.Pname // GLenum
+	minRequiredVersion_3589_major := uint32(2)                                                              // u32
+	minRequiredVersion_3589_minor := uint32(0)                                                              // u32
+	glErrorInvalidValueIf_3590_condition := (ϟa.Index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3590_condition {
 		return
-		_ = glErrorInvalidEnum_3571_param
 	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3592_msg := "No context bound" // string
+		return
+		_ = error_3592_msg
+	}
+	GetContext_3591_result := context // Contextʳ
+	ctx := GetContext_3591_result     // Contextʳ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3568_major, minRequiredVersion_3568_minor
+	if (ϟa.Pname) == (GLenum_GL_CURRENT_VERTEX_ATTRIB) {
+		attr := ctx.VertexAttributes.Get(ϟa.Index) // VertexAttributeValue
+		ϟa.Params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = attr
+	} else {
+		GetVertexAttrib_3593_ctx := ctx                                                                        // Contextʳ
+		GetVertexAttrib_3593_index := ϟa.Index                                                                 // AttributeLocation
+		GetVertexAttrib_3593_pname := ϟa.Pname                                                                 // GLenum
+		vao2 := GetVertexAttrib_3593_ctx.Instances.VertexArrays.Get(GetVertexAttrib_3593_ctx.BoundVertexArray) // VertexArrayʳ
+		array := vao2.VertexAttributeArrays.Get(GetVertexAttrib_3593_index)                                    // VertexAttributeArrayʳ
+		GetVertexAttrib_3593_result := func() (result uint64) {
+			switch GetVertexAttrib_3593_pname {
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED:
+				return func() uint64 {
+					if array.Enabled {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE:
+				return uint64(array.Size)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
+				return uint64(array.Type)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED:
+				return uint64(array.Normalized)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE:
+				return uint64(array.Stride)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Buffer)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR:
+				return uint64(vao2.VertexBufferBindings.Get(array.Binding).Divisor)
+			case GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
+				return func() uint64 {
+					if array.Integer {
+						return 1
+					} else {
+						return 0
+					}
+				}()
+			case GLenum_GL_VERTEX_ATTRIB_BINDING:
+				return uint64(array.Binding)
+			case GLenum_GL_VERTEX_ATTRIB_RELATIVE_OFFSET:
+				return uint64(array.RelativeOffset)
+			default:
+				// TODO: better unmatched handling
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", GetVertexAttrib_3593_pname, ϟa))
+				return result
+			}
+		}() // u64
+		ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(GetVertexAttrib_3593_result), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _, _, _, _, _ = GetVertexAttrib_3593_ctx, GetVertexAttrib_3593_index, GetVertexAttrib_3593_pname, vao2, array, GetVertexAttrib_3593_result
+	}
+	_, _, _, _, _, _ = minRequiredVersion_3589_major, minRequiredVersion_3589_minor, glErrorInvalidValueIf_3590_condition, context, GetContext_3591_result, ctx
 	return nil
 }
 
@@ -30152,8 +30352,16 @@ func (ϟa *GlIsVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3572_major := uint32(3) // u32
-	minRequiredVersion_3572_minor := uint32(0) // u32
+	minRequiredVersion_3594_major := uint32(3)   // u32
+	minRequiredVersion_3594_minor := uint32(0)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3596_msg := "No context bound" // string
+		return
+		_ = error_3596_msg
+	}
+	GetContext_3595_result := context // Contextʳ
+	ctx := GetContext_3595_result     // Contextʳ
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
@@ -30161,7 +30369,7 @@ func (ϟa *GlIsVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlIsVertexArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3572_major, minRequiredVersion_3572_minor
+	_, _, _, _, _ = minRequiredVersion_3594_major, minRequiredVersion_3594_minor, context, GetContext_3595_result, ctx
 	return nil
 }
 
@@ -30170,13 +30378,30 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3573_major := uint32(2) // u32
-	minRequiredVersion_3573_minor := uint32(0) // u32
+	minRequiredVersion_3597_major := uint32(2)                                                                                        // u32
+	minRequiredVersion_3597_minor := uint32(0)                                                                                        // u32
+	VertexAttribF_3598_location := ϟa.Location                                                                                        // AttributeLocation
+	VertexAttribF_3598_value := Vec4f{Elements: [4]GLfloat{ϟa.Value0, GLfloat(float32(0)), GLfloat(float32(0)), GLfloat(float32(1))}} // Vec4f
+	glErrorInvalidValueIf_3599_condition := (VertexAttribF_3598_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))        // bool
+	if glErrorInvalidValueIf_3599_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3601_msg := "No context bound" // string
+		return
+		_ = error_3601_msg
+	}
+	GetContext_3600_result := context // Contextʳ
+	ctx := GetContext_3600_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib1f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3573_major, minRequiredVersion_3573_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3598_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3598_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3597_major, minRequiredVersion_3597_minor, VertexAttribF_3598_location, VertexAttribF_3598_value, glErrorInvalidValueIf_3599_condition, context, GetContext_3600_result, ctx, vals
 	return nil
 }
 
@@ -30185,14 +30410,31 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3574_major := uint32(2) // u32
-	minRequiredVersion_3574_minor := uint32(0) // u32
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	minRequiredVersion_3602_major := uint32(2)                                                                                                                              // u32
+	minRequiredVersion_3602_minor := uint32(0)                                                                                                                              // u32
+	v := ϟa.Value.Slice(uint64(0), uint64(1), ϟs)                                                                                                                           // GLfloatˢ
+	VertexAttribF_3603_location := ϟa.Location                                                                                                                              // AttributeLocation
+	VertexAttribF_3603_value := Vec4f{Elements: [4]GLfloat{v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), GLfloat(float32(0)), GLfloat(float32(0)), GLfloat(float32(1))}} // Vec4f
+	glErrorInvalidValueIf_3604_condition := (VertexAttribF_3603_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                              // bool
+	if glErrorInvalidValueIf_3604_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3606_msg := "No context bound" // string
+		return
+		_ = error_3606_msg
+	}
+	GetContext_3605_result := context // Contextʳ
+	ctx := GetContext_3605_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib1fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3574_major, minRequiredVersion_3574_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3603_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3603_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3602_major, minRequiredVersion_3602_minor, v, VertexAttribF_3603_location, VertexAttribF_3603_value, glErrorInvalidValueIf_3604_condition, context, GetContext_3605_result, ctx, vals
 	return nil
 }
 
@@ -30201,14 +30443,31 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3575_major := uint32(2) // u32
-	minRequiredVersion_3575_minor := uint32(0) // u32
+	minRequiredVersion_3607_major := uint32(2)                                                                                 // u32
+	minRequiredVersion_3607_minor := uint32(0)                                                                                 // u32
+	VertexAttribF_3608_location := ϟa.Location                                                                                 // AttributeLocation
+	VertexAttribF_3608_value := Vec4f{Elements: [4]GLfloat{ϟa.Value0, ϟa.Value1, GLfloat(float32(0)), GLfloat(float32(1))}}    // Vec4f
+	glErrorInvalidValueIf_3609_condition := (VertexAttribF_3608_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3609_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3611_msg := "No context bound" // string
+		return
+		_ = error_3611_msg
+	}
+	GetContext_3610_result := context // Contextʳ
+	ctx := GetContext_3610_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib2f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3575_major, minRequiredVersion_3575_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3608_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3608_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3607_major, minRequiredVersion_3607_minor, VertexAttribF_3608_location, VertexAttribF_3608_value, glErrorInvalidValueIf_3609_condition, context, GetContext_3610_result, ctx, vals
 	return nil
 }
 
@@ -30217,14 +30476,31 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3576_major := uint32(2) // u32
-	minRequiredVersion_3576_minor := uint32(0) // u32
-	ϟa.Value.Slice(uint64(0), uint64(2), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	minRequiredVersion_3612_major := uint32(2)                                                                                                                                                          // u32
+	minRequiredVersion_3612_minor := uint32(0)                                                                                                                                                          // u32
+	v := ϟa.Value.Slice(uint64(0), uint64(2), ϟs)                                                                                                                                                       // GLfloatˢ
+	VertexAttribF_3613_location := ϟa.Location                                                                                                                                                          // AttributeLocation
+	VertexAttribF_3613_value := Vec4f{Elements: [4]GLfloat{v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), GLfloat(float32(0)), GLfloat(float32(1))}} // Vec4f
+	glErrorInvalidValueIf_3614_condition := (VertexAttribF_3613_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                                                          // bool
+	if glErrorInvalidValueIf_3614_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3616_msg := "No context bound" // string
+		return
+		_ = error_3616_msg
+	}
+	GetContext_3615_result := context // Contextʳ
+	ctx := GetContext_3615_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib2fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3576_major, minRequiredVersion_3576_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3613_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3613_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3612_major, minRequiredVersion_3612_minor, v, VertexAttribF_3613_location, VertexAttribF_3613_value, glErrorInvalidValueIf_3614_condition, context, GetContext_3615_result, ctx, vals
 	return nil
 }
 
@@ -30233,15 +30509,32 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3577_major := uint32(2) // u32
-	minRequiredVersion_3577_minor := uint32(0) // u32
+	minRequiredVersion_3617_major := uint32(2)                                                                                 // u32
+	minRequiredVersion_3617_minor := uint32(0)                                                                                 // u32
+	VertexAttribF_3618_location := ϟa.Location                                                                                 // AttributeLocation
+	VertexAttribF_3618_value := Vec4f{Elements: [4]GLfloat{ϟa.Value0, ϟa.Value1, ϟa.Value2, GLfloat(float32(1))}}              // Vec4f
+	glErrorInvalidValueIf_3619_condition := (VertexAttribF_3618_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3619_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3621_msg := "No context bound" // string
+		return
+		_ = error_3621_msg
+	}
+	GetContext_3620_result := context // Contextʳ
+	ctx := GetContext_3620_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value2.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib3f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3577_major, minRequiredVersion_3577_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3618_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3618_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3617_major, minRequiredVersion_3617_minor, VertexAttribF_3618_location, VertexAttribF_3618_value, glErrorInvalidValueIf_3619_condition, context, GetContext_3620_result, ctx, vals
 	return nil
 }
 
@@ -30250,14 +30543,31 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3578_major := uint32(2) // u32
-	minRequiredVersion_3578_minor := uint32(0) // u32
-	ϟa.Value.Slice(uint64(0), uint64(3), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	minRequiredVersion_3622_major := uint32(2)                                                                                                                                                                                      // u32
+	minRequiredVersion_3622_minor := uint32(0)                                                                                                                                                                                      // u32
+	v := ϟa.Value.Slice(uint64(0), uint64(3), ϟs)                                                                                                                                                                                   // GLfloatˢ
+	VertexAttribF_3623_location := ϟa.Location                                                                                                                                                                                      // AttributeLocation
+	VertexAttribF_3623_value := Vec4f{Elements: [4]GLfloat{v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(2), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), GLfloat(float32(1))}} // Vec4f
+	glErrorInvalidValueIf_3624_condition := (VertexAttribF_3623_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                                                                                      // bool
+	if glErrorInvalidValueIf_3624_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3626_msg := "No context bound" // string
+		return
+		_ = error_3626_msg
+	}
+	GetContext_3625_result := context // Contextʳ
+	ctx := GetContext_3625_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib3fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3578_major, minRequiredVersion_3578_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3623_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3623_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3622_major, minRequiredVersion_3622_minor, v, VertexAttribF_3623_location, VertexAttribF_3623_value, glErrorInvalidValueIf_3624_condition, context, GetContext_3625_result, ctx, vals
 	return nil
 }
 
@@ -30266,8 +30576,23 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3579_major := uint32(2) // u32
-	minRequiredVersion_3579_minor := uint32(0) // u32
+	minRequiredVersion_3627_major := uint32(2)                                                                                 // u32
+	minRequiredVersion_3627_minor := uint32(0)                                                                                 // u32
+	VertexAttribF_3628_location := ϟa.Location                                                                                 // AttributeLocation
+	VertexAttribF_3628_value := Vec4f{Elements: [4]GLfloat{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}                        // Vec4f
+	glErrorInvalidValueIf_3629_condition := (VertexAttribF_3628_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3629_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3631_msg := "No context bound" // string
+		return
+		_ = error_3631_msg
+	}
+	GetContext_3630_result := context // Contextʳ
+	ctx := GetContext_3630_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
@@ -30275,7 +30600,9 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Value3.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib4f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3579_major, minRequiredVersion_3579_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3628_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3628_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3627_major, minRequiredVersion_3627_minor, VertexAttribF_3628_location, VertexAttribF_3628_value, glErrorInvalidValueIf_3629_condition, context, GetContext_3630_result, ctx, vals
 	return nil
 }
 
@@ -30284,14 +30611,31 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3580_major := uint32(2) // u32
-	minRequiredVersion_3580_minor := uint32(0) // u32
-	ϟa.Value.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	minRequiredVersion_3632_major := uint32(2)                                                                                                                                                                                                                  // u32
+	minRequiredVersion_3632_minor := uint32(0)                                                                                                                                                                                                                  // u32
+	v := ϟa.Value.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                               // GLfloatˢ
+	VertexAttribF_3633_location := ϟa.Location                                                                                                                                                                                                                  // AttributeLocation
+	VertexAttribF_3633_value := Vec4f{Elements: [4]GLfloat{v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(2), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(3), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)}} // Vec4f
+	glErrorInvalidValueIf_3634_condition := (VertexAttribF_3633_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                                                                                                                  // bool
+	if glErrorInvalidValueIf_3634_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3636_msg := "No context bound" // string
+		return
+		_ = error_3636_msg
+	}
+	GetContext_3635_result := context // Contextʳ
+	ctx := GetContext_3635_result     // Contextʳ
+	vals := MakeVec4fˢ(uint64(1), ϟs) // Vec4fˢ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib4fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3580_major, minRequiredVersion_3580_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribF_3633_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribF_3633_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3632_major, minRequiredVersion_3632_minor, v, VertexAttribF_3633_location, VertexAttribF_3633_value, glErrorInvalidValueIf_3634_condition, context, GetContext_3635_result, ctx, vals
 	return nil
 }
 
@@ -30300,13 +30644,38 @@ func (ϟa *GlVertexAttribBinding) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3581_major := uint32(3) // u32
-	minRequiredVersion_3581_minor := uint32(1) // u32
-	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
+	minRequiredVersion_3637_major := uint32(3)   // u32
+	minRequiredVersion_3637_minor := uint32(1)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3639_msg := "No context bound" // string
+		return
+		_ = error_3639_msg
+	}
+	GetContext_3638_result := context                                                                // Contextʳ
+	ctx := GetContext_3638_result                                                                    // Contextʳ
+	glErrorInvalidOperationIf_3640_condition := (ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) // bool
+	if glErrorInvalidOperationIf_3640_condition {
+		return
+	}
+	VertexAttribBinding_3641_ctx := ctx                                                                                           // Contextʳ
+	VertexAttribBinding_3641_index := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribBinding_3641_binding_index := ϟa.BindingIndex                                                                     // BindingIndex
+	glErrorInvalidValueIf_3642_condition := (VertexAttribBinding_3641_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3642_condition {
+		return
+	}
+	glErrorInvalidValueIf_3643_condition := (VertexAttribBinding_3641_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3643_condition {
+		return
+	}
+	vao5 := VertexAttribBinding_3641_ctx.Instances.VertexArrays.Get(VertexAttribBinding_3641_ctx.BoundVertexArray) // VertexArrayʳ
+	vao5.VertexAttributeArrays.Get(VertexAttribBinding_3641_index).Binding = VertexAttribBinding_3641_binding_index
+	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribBinding)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3581_major, minRequiredVersion_3581_minor
+	_, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3637_major, minRequiredVersion_3637_minor, context, GetContext_3638_result, ctx, glErrorInvalidOperationIf_3640_condition, VertexAttribBinding_3641_ctx, VertexAttribBinding_3641_index, VertexAttribBinding_3641_binding_index, glErrorInvalidValueIf_3642_condition, glErrorInvalidValueIf_3643_condition, vao5
 	return nil
 }
 
@@ -30315,13 +30684,37 @@ func (ϟa *GlVertexAttribDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3582_major := uint32(3) // u32
-	minRequiredVersion_3582_minor := uint32(0) // u32
+	minRequiredVersion_3644_major := uint32(3)   // u32
+	minRequiredVersion_3644_minor := uint32(0)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3646_msg := "No context bound" // string
+		return
+		_ = error_3646_msg
+	}
+	GetContext_3645_result := context                                                                                             // Contextʳ
+	ctx := GetContext_3645_result                                                                                                 // Contextʳ
+	binding_index := BindingIndex(ϟa.Index)                                                                                       // BindingIndex
+	VertexAttribBinding_3647_ctx := ctx                                                                                           // Contextʳ
+	VertexAttribBinding_3647_index := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribBinding_3647_binding_index := binding_index                                                                       // BindingIndex
+	glErrorInvalidValueIf_3648_condition := (VertexAttribBinding_3647_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3648_condition {
+		return
+	}
+	glErrorInvalidValueIf_3649_condition := (VertexAttribBinding_3647_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3649_condition {
+		return
+	}
+	vao5 := VertexAttribBinding_3647_ctx.Instances.VertexArrays.Get(VertexAttribBinding_3647_ctx.BoundVertexArray) // VertexArrayʳ
+	vao5.VertexAttributeArrays.Get(VertexAttribBinding_3647_index).Binding = VertexAttribBinding_3647_binding_index
+	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
+	vao.VertexBufferBindings.Get(binding_index).Divisor = ϟa.Divisor
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribDivisor)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3582_major, minRequiredVersion_3582_minor
+	_, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3644_major, minRequiredVersion_3644_minor, context, GetContext_3645_result, ctx, binding_index, VertexAttribBinding_3647_ctx, VertexAttribBinding_3647_index, VertexAttribBinding_3647_binding_index, glErrorInvalidValueIf_3648_condition, glErrorInvalidValueIf_3649_condition, vao5, vao
 	return nil
 }
 
@@ -30330,23 +30723,94 @@ func (ϟa *GlVertexAttribFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3583_major := uint32(3) // u32
-	minRequiredVersion_3583_minor := uint32(1) // u32
-	switch ϟa.Type {
-	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
-	default:
-		glErrorInvalidEnum_3584_param := ϟa.Type // GLenum
+	minRequiredVersion_3650_major := uint32(3)   // u32
+	minRequiredVersion_3650_minor := uint32(1)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3652_msg := "No context bound" // string
 		return
-		_ = glErrorInvalidEnum_3584_param
+		_ = error_3652_msg
 	}
-	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
+	GetContext_3651_result := context                                                                // Contextʳ
+	ctx := GetContext_3651_result                                                                    // Contextʳ
+	glErrorInvalidOperationIf_3653_condition := (ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) // bool
+	if glErrorInvalidOperationIf_3653_condition {
+		return
+	}
+	VertexAttribFormat_3654_ctx := ctx                                                                                           // Contextʳ
+	VertexAttribFormat_3654_index := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribFormat_3654_size := ϟa.Size                                                                                      // GLint
+	VertexAttribFormat_3654_type := ϟa.Type                                                                                      // GLenum
+	VertexAttribFormat_3654_normalized := ϟa.Normalized                                                                          // GLboolean
+	VertexAttribFormat_3654_relativeOffset := ϟa.Relativeoffset                                                                  // GLuint
+	VertexAttribFormat_3654_integer := false                                                                                     // bool
+	glErrorInvalidValueIf_3655_condition := (VertexAttribFormat_3654_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3655_condition {
+		return
+	}
+	glErrorInvalidValueIf_3656_condition := !(((GLint(int32(1))) <= (VertexAttribFormat_3654_size)) && ((VertexAttribFormat_3654_size) <= (GLint(int32(4))))) // bool
+	if glErrorInvalidValueIf_3656_condition {
+		return
+	}
+	if VertexAttribFormat_3654_integer {
+		switch VertexAttribFormat_3654_type {
+		case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3657_major := uint32(3) // u32
+			minRequiredVersion_3657_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3657_major, minRequiredVersion_3657_minor
+		default:
+			glErrorInvalidEnum_3658_param := VertexAttribFormat_3654_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3658_param
+		}
+	} else {
+		switch VertexAttribFormat_3654_type {
+		case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3659_major := uint32(2) // u32
+			minRequiredVersion_3659_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3659_major, minRequiredVersion_3659_minor
+		case GLenum_GL_HALF_FLOAT_OES:
+			requiresExtension_3660_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+			_ = requiresExtension_3660_ext
+		case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_INT:
+			minRequiredVersion_3661_major := uint32(3) // u32
+			minRequiredVersion_3661_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3661_major, minRequiredVersion_3661_minor
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			glErrorInvalidOperationIf_3662_condition := (VertexAttribFormat_3654_size) != (GLint(int32(4))) // bool
+			if glErrorInvalidOperationIf_3662_condition {
+				return
+			}
+			minRequiredVersion_3663_major := uint32(3) // u32
+			minRequiredVersion_3663_minor := uint32(0) // u32
+			_, _, _ = glErrorInvalidOperationIf_3662_condition, minRequiredVersion_3663_major, minRequiredVersion_3663_minor
+		default:
+			glErrorInvalidEnum_3664_param := VertexAttribFormat_3654_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3664_param
+		}
+	}
+	glErrorInvalidValueIf_3665_condition := (VertexAttribFormat_3654_relativeOffset) > (GLuint(Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET)) // bool
+	if glErrorInvalidValueIf_3665_condition {
+		return
+	}
+	vao := VertexAttribFormat_3654_ctx.Instances.VertexArrays.Get(VertexAttribFormat_3654_ctx.BoundVertexArray) // VertexArrayʳ
+	format := vao.VertexAttributeArrays.Get(VertexAttribFormat_3654_index)                                      // VertexAttributeArrayʳ
+	format.Size = VertexAttribFormat_3654_size
+	format.Type = VertexAttribFormat_3654_type
+	if !(VertexAttribFormat_3654_integer) {
+		format.Normalized = VertexAttribFormat_3654_normalized
+	}
+	format.RelativeOffset = VertexAttribFormat_3654_relativeOffset
+	format.Integer = VertexAttribFormat_3654_integer
+	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Normalized.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Relativeoffset.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3583_major, minRequiredVersion_3583_minor
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3650_major, minRequiredVersion_3650_minor, context, GetContext_3651_result, ctx, glErrorInvalidOperationIf_3653_condition, VertexAttribFormat_3654_ctx, VertexAttribFormat_3654_index, VertexAttribFormat_3654_size, VertexAttribFormat_3654_type, VertexAttribFormat_3654_normalized, VertexAttribFormat_3654_relativeOffset, VertexAttribFormat_3654_integer, glErrorInvalidValueIf_3655_condition, glErrorInvalidValueIf_3656_condition, glErrorInvalidValueIf_3665_condition, vao, format
 	return nil
 }
 
@@ -30355,8 +30819,23 @@ func (ϟa *GlVertexAttribI4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3585_major := uint32(3) // u32
-	minRequiredVersion_3585_minor := uint32(0) // u32
+	minRequiredVersion_3666_major := uint32(3)                                                                                 // u32
+	minRequiredVersion_3666_minor := uint32(0)                                                                                 // u32
+	VertexAttribI_3667_location := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribI_3667_value := Vec4i{Elements: [4]GLint{ϟa.X, ϟa.Y, ϟa.Z, ϟa.W}}                                              // Vec4i
+	glErrorInvalidValueIf_3668_condition := (VertexAttribI_3667_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3668_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3670_msg := "No context bound" // string
+		return
+		_ = error_3670_msg
+	}
+	GetContext_3669_result := context // Contextʳ
+	ctx := GetContext_3669_result     // Contextʳ
+	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -30364,7 +30843,9 @@ func (ϟa *GlVertexAttribI4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.W.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3585_major, minRequiredVersion_3585_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribI_3667_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribI_3667_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3666_major, minRequiredVersion_3666_minor, VertexAttribI_3667_location, VertexAttribI_3667_value, glErrorInvalidValueIf_3668_condition, context, GetContext_3669_result, ctx, vals
 	return nil
 }
 
@@ -30373,13 +30854,31 @@ func (ϟa *GlVertexAttribI4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3586_major := uint32(3) // u32
-	minRequiredVersion_3586_minor := uint32(0) // u32
+	minRequiredVersion_3671_major := uint32(3)                                                                                                                                                                                                                // u32
+	minRequiredVersion_3671_minor := uint32(0)                                                                                                                                                                                                                // u32
+	v := ϟa.Values.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                            // GLintˢ
+	VertexAttribI_3672_location := ϟa.Index                                                                                                                                                                                                                   // AttributeLocation
+	VertexAttribI_3672_value := Vec4i{Elements: [4]GLint{v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(2), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb), v.Index(uint64(3), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)}} // Vec4i
+	glErrorInvalidValueIf_3673_condition := (VertexAttribI_3672_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                                                                                                                // bool
+	if glErrorInvalidValueIf_3673_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3675_msg := "No context bound" // string
+		return
+		_ = error_3675_msg
+	}
+	GetContext_3674_result := context // Contextʳ
+	ctx := GetContext_3674_result     // Contextʳ
+	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlVertexAttribI4iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3586_major, minRequiredVersion_3586_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribI_3672_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribI_3672_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3671_major, minRequiredVersion_3671_minor, v, VertexAttribI_3672_location, VertexAttribI_3672_value, glErrorInvalidValueIf_3673_condition, context, GetContext_3674_result, ctx, vals
 	return nil
 }
 
@@ -30388,8 +30887,23 @@ func (ϟa *GlVertexAttribI4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3587_major := uint32(3) // u32
-	minRequiredVersion_3587_minor := uint32(0) // u32
+	minRequiredVersion_3676_major := uint32(3)                                                                                 // u32
+	minRequiredVersion_3676_minor := uint32(0)                                                                                 // u32
+	VertexAttribI_3677_location := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribI_3677_value := Vec4i{Elements: [4]GLint{GLint(ϟa.X), GLint(ϟa.Y), GLint(ϟa.Z), GLint(ϟa.W)}}                  // Vec4i
+	glErrorInvalidValueIf_3678_condition := (VertexAttribI_3677_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3678_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3680_msg := "No context bound" // string
+		return
+		_ = error_3680_msg
+	}
+	GetContext_3679_result := context // Contextʳ
+	ctx := GetContext_3679_result     // Contextʳ
+	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -30397,7 +30911,9 @@ func (ϟa *GlVertexAttribI4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.W.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4ui)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3587_major, minRequiredVersion_3587_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribI_3677_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribI_3677_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _ = minRequiredVersion_3676_major, minRequiredVersion_3676_minor, VertexAttribI_3677_location, VertexAttribI_3677_value, glErrorInvalidValueIf_3678_condition, context, GetContext_3679_result, ctx, vals
 	return nil
 }
 
@@ -30406,13 +30922,31 @@ func (ϟa *GlVertexAttribI4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3588_major := uint32(3) // u32
-	minRequiredVersion_3588_minor := uint32(0) // u32
+	minRequiredVersion_3681_major := uint32(3)                                                                                                                                                                                                                                            // u32
+	minRequiredVersion_3681_minor := uint32(0)                                                                                                                                                                                                                                            // u32
+	v := ϟa.Values.Slice(uint64(0), uint64(4), ϟs)                                                                                                                                                                                                                                        // GLuintˢ
+	VertexAttribI_3682_location := ϟa.Index                                                                                                                                                                                                                                               // AttributeLocation
+	VertexAttribI_3682_value := Vec4i{Elements: [4]GLint{GLint(v.Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), GLint(v.Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), GLint(v.Index(uint64(2), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), GLint(v.Index(uint64(3), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))}} // Vec4i
+	glErrorInvalidValueIf_3683_condition := (VertexAttribI_3682_location) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS))                                                                                                                                                            // bool
+	if glErrorInvalidValueIf_3683_condition {
+		return
+	}
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3685_msg := "No context bound" // string
+		return
+		_ = error_3685_msg
+	}
+	GetContext_3684_result := context // Contextʳ
+	ctx := GetContext_3684_result     // Contextʳ
+	vals := MakeVec4iˢ(uint64(1), ϟs) // Vec4iˢ
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlVertexAttribI4uiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3588_major, minRequiredVersion_3588_minor
+	vals.Index(uint64(0), ϟs).Write(VertexAttribI_3682_value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ctx.VertexAttributes[VertexAttribI_3682_location] = VertexAttributeValue{Value: AsU8ˢ(vals, ϟs)}
+	_, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3681_major, minRequiredVersion_3681_minor, v, VertexAttribI_3682_location, VertexAttribI_3682_value, glErrorInvalidValueIf_3683_condition, context, GetContext_3684_result, ctx, vals
 	return nil
 }
 
@@ -30421,22 +30955,93 @@ func (ϟa *GlVertexAttribIFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3589_major := uint32(3) // u32
-	minRequiredVersion_3589_minor := uint32(1) // u32
-	switch ϟa.Type {
-	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
-	default:
-		glErrorInvalidEnum_3590_param := ϟa.Type // GLenum
+	minRequiredVersion_3686_major := uint32(3)   // u32
+	minRequiredVersion_3686_minor := uint32(1)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3688_msg := "No context bound" // string
 		return
-		_ = glErrorInvalidEnum_3590_param
+		_ = error_3688_msg
 	}
-	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
+	GetContext_3687_result := context                                                                // Contextʳ
+	ctx := GetContext_3687_result                                                                    // Contextʳ
+	glErrorInvalidOperationIf_3689_condition := (ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) // bool
+	if glErrorInvalidOperationIf_3689_condition {
+		return
+	}
+	VertexAttribFormat_3690_ctx := ctx                                                                                           // Contextʳ
+	VertexAttribFormat_3690_index := ϟa.Index                                                                                    // AttributeLocation
+	VertexAttribFormat_3690_size := ϟa.Size                                                                                      // GLint
+	VertexAttribFormat_3690_type := ϟa.Type                                                                                      // GLenum
+	VertexAttribFormat_3690_normalized := GLboolean(uint8(0))                                                                    // GLboolean
+	VertexAttribFormat_3690_relativeOffset := ϟa.Relativeoffset                                                                  // GLuint
+	VertexAttribFormat_3690_integer := true                                                                                      // bool
+	glErrorInvalidValueIf_3691_condition := (VertexAttribFormat_3690_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3691_condition {
+		return
+	}
+	glErrorInvalidValueIf_3692_condition := !(((GLint(int32(1))) <= (VertexAttribFormat_3690_size)) && ((VertexAttribFormat_3690_size) <= (GLint(int32(4))))) // bool
+	if glErrorInvalidValueIf_3692_condition {
+		return
+	}
+	if VertexAttribFormat_3690_integer {
+		switch VertexAttribFormat_3690_type {
+		case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3693_major := uint32(3) // u32
+			minRequiredVersion_3693_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3693_major, minRequiredVersion_3693_minor
+		default:
+			glErrorInvalidEnum_3694_param := VertexAttribFormat_3690_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3694_param
+		}
+	} else {
+		switch VertexAttribFormat_3690_type {
+		case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3695_major := uint32(2) // u32
+			minRequiredVersion_3695_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3695_major, minRequiredVersion_3695_minor
+		case GLenum_GL_HALF_FLOAT_OES:
+			requiresExtension_3696_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+			_ = requiresExtension_3696_ext
+		case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_INT:
+			minRequiredVersion_3697_major := uint32(3) // u32
+			minRequiredVersion_3697_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3697_major, minRequiredVersion_3697_minor
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			glErrorInvalidOperationIf_3698_condition := (VertexAttribFormat_3690_size) != (GLint(int32(4))) // bool
+			if glErrorInvalidOperationIf_3698_condition {
+				return
+			}
+			minRequiredVersion_3699_major := uint32(3) // u32
+			minRequiredVersion_3699_minor := uint32(0) // u32
+			_, _, _ = glErrorInvalidOperationIf_3698_condition, minRequiredVersion_3699_major, minRequiredVersion_3699_minor
+		default:
+			glErrorInvalidEnum_3700_param := VertexAttribFormat_3690_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3700_param
+		}
+	}
+	glErrorInvalidValueIf_3701_condition := (VertexAttribFormat_3690_relativeOffset) > (GLuint(Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET)) // bool
+	if glErrorInvalidValueIf_3701_condition {
+		return
+	}
+	vao := VertexAttribFormat_3690_ctx.Instances.VertexArrays.Get(VertexAttribFormat_3690_ctx.BoundVertexArray) // VertexArrayʳ
+	format := vao.VertexAttributeArrays.Get(VertexAttribFormat_3690_index)                                      // VertexAttributeArrayʳ
+	format.Size = VertexAttribFormat_3690_size
+	format.Type = VertexAttribFormat_3690_type
+	if !(VertexAttribFormat_3690_integer) {
+		format.Normalized = VertexAttribFormat_3690_normalized
+	}
+	format.RelativeOffset = VertexAttribFormat_3690_relativeOffset
+	format.Integer = VertexAttribFormat_3690_integer
+	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Relativeoffset.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribIFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3589_major, minRequiredVersion_3589_minor
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3686_major, minRequiredVersion_3686_minor, context, GetContext_3687_result, ctx, glErrorInvalidOperationIf_3689_condition, VertexAttribFormat_3690_ctx, VertexAttribFormat_3690_index, VertexAttribFormat_3690_size, VertexAttribFormat_3690_type, VertexAttribFormat_3690_normalized, VertexAttribFormat_3690_relativeOffset, VertexAttribFormat_3690_integer, glErrorInvalidValueIf_3691_condition, glErrorInvalidValueIf_3692_condition, glErrorInvalidValueIf_3701_condition, vao, format
 	return nil
 }
 
@@ -30445,26 +31050,221 @@ func (ϟa *GlVertexAttribIPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3591_major := uint32(3) // u32
-	minRequiredVersion_3591_minor := uint32(0) // u32
-	switch ϟa.Type {
-	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_3592_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
-		_ = requiresExtension_3592_ext
-	case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
-	default:
-		glErrorInvalidEnum_3593_param := ϟa.Type // GLenum
+	minRequiredVersion_3702_major := uint32(3)   // u32
+	minRequiredVersion_3702_minor := uint32(0)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3704_msg := "No context bound" // string
 		return
-		_ = glErrorInvalidEnum_3593_param
+		_ = error_3704_msg
 	}
-	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
+	GetContext_3703_result := context                                                               // Contextʳ
+	ctx := GetContext_3703_result                                                                   // Contextʳ
+	VertexAttribPointer_3705_ctx := ctx                                                             // Contextʳ
+	VertexAttribPointer_3705_index := ϟa.Location                                                   // AttributeLocation
+	VertexAttribPointer_3705_size := ϟa.Size                                                        // GLint
+	VertexAttribPointer_3705_type := ϟa.Type                                                        // GLenum
+	VertexAttribPointer_3705_normalized := GLboolean(uint8(0))                                      // GLboolean
+	VertexAttribPointer_3705_stride := ϟa.Stride                                                    // GLsizei
+	VertexAttribPointer_3705_pointer := ϟa.Data                                                     // VertexPointer
+	VertexAttribPointer_3705_integer := true                                                        // bool
+	boundArrayBuffer := VertexAttribPointer_3705_ctx.BoundBuffers.Get(GLenum_GL_ARRAY_BUFFER)       // BufferId
+	glErrorInvalidValueIf_3706_condition := (VertexAttribPointer_3705_stride) < (GLsizei(int32(0))) // bool
+	if glErrorInvalidValueIf_3706_condition {
+		return
+	}
+	glErrorInvalidValueIf_3707_condition := (VertexAttribPointer_3705_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+	if glErrorInvalidValueIf_3707_condition {
+		return
+	}
+	glErrorInvalidOperationIf_3708_condition := ((VertexAttribPointer_3705_ctx.BoundVertexArray) != (VertexArrayId(uint32(0)))) && (((boundArrayBuffer) == (BufferId(uint32(0)))) && ((VertexAttribPointer_3705_pointer) != (VertexPointer(Voidᶜᵖ{})))) // bool
+	if glErrorInvalidOperationIf_3708_condition {
+		return
+	}
+	VertexAttribFormat_3709_ctx := VertexAttribPointer_3705_ctx                                                                  // Contextʳ
+	VertexAttribFormat_3709_index := VertexAttribPointer_3705_index                                                              // AttributeLocation
+	VertexAttribFormat_3709_size := VertexAttribPointer_3705_size                                                                // GLint
+	VertexAttribFormat_3709_type := VertexAttribPointer_3705_type                                                                // GLenum
+	VertexAttribFormat_3709_normalized := VertexAttribPointer_3705_normalized                                                    // GLboolean
+	VertexAttribFormat_3709_relativeOffset := GLuint(uint32(0))                                                                  // GLuint
+	VertexAttribFormat_3709_integer := VertexAttribPointer_3705_integer                                                          // bool
+	glErrorInvalidValueIf_3710_condition := (VertexAttribFormat_3709_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3710_condition {
+		return
+	}
+	glErrorInvalidValueIf_3711_condition := !(((GLint(int32(1))) <= (VertexAttribFormat_3709_size)) && ((VertexAttribFormat_3709_size) <= (GLint(int32(4))))) // bool
+	if glErrorInvalidValueIf_3711_condition {
+		return
+	}
+	if VertexAttribFormat_3709_integer {
+		switch VertexAttribFormat_3709_type {
+		case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3712_major := uint32(3) // u32
+			minRequiredVersion_3712_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3712_major, minRequiredVersion_3712_minor
+		default:
+			glErrorInvalidEnum_3713_param := VertexAttribFormat_3709_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3713_param
+		}
+	} else {
+		switch VertexAttribFormat_3709_type {
+		case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3714_major := uint32(2) // u32
+			minRequiredVersion_3714_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3714_major, minRequiredVersion_3714_minor
+		case GLenum_GL_HALF_FLOAT_OES:
+			requiresExtension_3715_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+			_ = requiresExtension_3715_ext
+		case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_INT:
+			minRequiredVersion_3716_major := uint32(3) // u32
+			minRequiredVersion_3716_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3716_major, minRequiredVersion_3716_minor
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			glErrorInvalidOperationIf_3717_condition := (VertexAttribFormat_3709_size) != (GLint(int32(4))) // bool
+			if glErrorInvalidOperationIf_3717_condition {
+				return
+			}
+			minRequiredVersion_3718_major := uint32(3) // u32
+			minRequiredVersion_3718_minor := uint32(0) // u32
+			_, _, _ = glErrorInvalidOperationIf_3717_condition, minRequiredVersion_3718_major, minRequiredVersion_3718_minor
+		default:
+			glErrorInvalidEnum_3719_param := VertexAttribFormat_3709_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3719_param
+		}
+	}
+	glErrorInvalidValueIf_3720_condition := (VertexAttribFormat_3709_relativeOffset) > (GLuint(Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET)) // bool
+	if glErrorInvalidValueIf_3720_condition {
+		return
+	}
+	vao := VertexAttribFormat_3709_ctx.Instances.VertexArrays.Get(VertexAttribFormat_3709_ctx.BoundVertexArray) // VertexArrayʳ
+	format := vao.VertexAttributeArrays.Get(VertexAttribFormat_3709_index)                                      // VertexAttributeArrayʳ
+	format.Size = VertexAttribFormat_3709_size
+	format.Type = VertexAttribFormat_3709_type
+	if !(VertexAttribFormat_3709_integer) {
+		format.Normalized = VertexAttribFormat_3709_normalized
+	}
+	format.RelativeOffset = VertexAttribFormat_3709_relativeOffset
+	format.Integer = VertexAttribFormat_3709_integer
+	binding_index := BindingIndex(VertexAttribPointer_3705_index)                                                                 // BindingIndex
+	VertexAttribBinding_3721_ctx := VertexAttribPointer_3705_ctx                                                                  // Contextʳ
+	VertexAttribBinding_3721_index := VertexAttribPointer_3705_index                                                              // AttributeLocation
+	VertexAttribBinding_3721_binding_index := binding_index                                                                       // BindingIndex
+	glErrorInvalidValueIf_3722_condition := (VertexAttribBinding_3721_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3722_condition {
+		return
+	}
+	glErrorInvalidValueIf_3723_condition := (VertexAttribBinding_3721_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3723_condition {
+		return
+	}
+	vao5 := VertexAttribBinding_3721_ctx.Instances.VertexArrays.Get(VertexAttribBinding_3721_ctx.BoundVertexArray) // VertexArrayʳ
+	vao5.VertexAttributeArrays.Get(VertexAttribBinding_3721_index).Binding = VertexAttribBinding_3721_binding_index
+	VertexAttribTypeSize_3724_type := VertexAttribPointer_3705_type // GLenum
+	VertexAttribTypeSize_3724_result := func() (result GLint) {
+		switch VertexAttribTypeSize_3724_type {
+		case GLenum_GL_BYTE, GLenum_GL_UNSIGNED_BYTE:
+			return GLint(int32(1))
+		case GLenum_GL_SHORT, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_HALF_FLOAT, GLenum_GL_HALF_FLOAT_OES:
+			return GLint(int32(2))
+		case GLenum_GL_INT, GLenum_GL_UNSIGNED_INT, GLenum_GL_FLOAT, GLenum_GL_FIXED:
+			return GLint(int32(4))
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			return GLint(int32(4))
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", VertexAttribTypeSize_3724_type, ϟa))
+			return result
+		}
+	}() // GLint
+	effectiveStride := func() (result GLsizei) {
+		switch (VertexAttribPointer_3705_stride) != (GLsizei(int32(0))) {
+		case true:
+			return VertexAttribPointer_3705_stride
+		case false:
+			return GLsizei((VertexAttribTypeSize_3724_result) * (VertexAttribPointer_3705_size))
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (VertexAttribPointer_3705_stride) != (GLsizei(int32(0))), ϟa))
+			return result
+		}
+	}() // GLsizei
+	vao6 := VertexAttribPointer_3705_ctx.Instances.VertexArrays.Get(VertexAttribPointer_3705_ctx.BoundVertexArray) // VertexArrayʳ
+	vao6.VertexAttributeArrays.Get(VertexAttribPointer_3705_index).Stride = VertexAttribPointer_3705_stride
+	vao6.VertexAttributeArrays.Get(VertexAttribPointer_3705_index).Pointer = VertexAttribPointer_3705_pointer
+	if ((VertexAttribPointer_3705_ctx.BoundVertexArray) == (VertexArrayId(uint32(0)))) && ((boundArrayBuffer) == (BufferId(uint32(0)))) {
+		BindVertexBuffer_3725_ctx := VertexAttribPointer_3705_ctx                                                                             // Contextʳ
+		BindVertexBuffer_3725_binding_index := binding_index                                                                                  // BindingIndex
+		BindVertexBuffer_3725_buffer := BufferId(uint32(0))                                                                                   // BufferId
+		BindVertexBuffer_3725_offset := GLintptr(int32(0))                                                                                    // GLintptr
+		BindVertexBuffer_3725_stride := effectiveStride                                                                                       // GLsizei
+		glErrorInvalidValueIf_3726_condition := (BindVertexBuffer_3725_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		if glErrorInvalidValueIf_3726_condition {
+			return
+		}
+		glErrorInvalidValueIf_3727_condition := (BindVertexBuffer_3725_offset) < (GLintptr(int32(0))) // bool
+		if glErrorInvalidValueIf_3727_condition {
+			return
+		}
+		glErrorInvalidValueIf_3728_condition := (BindVertexBuffer_3725_stride) < (GLsizei(int32(0))) // bool
+		if glErrorInvalidValueIf_3728_condition {
+			return
+		}
+		glErrorInvalidValueIf_3729_condition := (BindVertexBuffer_3725_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+		if glErrorInvalidValueIf_3729_condition {
+			return
+		}
+		if !(BindVertexBuffer_3725_ctx.Instances.Buffers.Contains(BindVertexBuffer_3725_buffer)) {
+			BindVertexBuffer_3725_ctx.Instances.Buffers[BindVertexBuffer_3725_buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+		}
+		vao4 := BindVertexBuffer_3725_ctx.Instances.VertexArrays.Get(BindVertexBuffer_3725_ctx.BoundVertexArray) // VertexArrayʳ
+		binding := vao4.VertexBufferBindings.Get(BindVertexBuffer_3725_binding_index)                            // VertexBufferBindingʳ
+		binding.Buffer = BindVertexBuffer_3725_buffer
+		binding.Offset = BindVertexBuffer_3725_offset
+		binding.Stride = BindVertexBuffer_3725_stride
+		_, _, _, _, _, _, _, _, _, _, _ = BindVertexBuffer_3725_ctx, BindVertexBuffer_3725_binding_index, BindVertexBuffer_3725_buffer, BindVertexBuffer_3725_offset, BindVertexBuffer_3725_stride, glErrorInvalidValueIf_3726_condition, glErrorInvalidValueIf_3727_condition, glErrorInvalidValueIf_3728_condition, glErrorInvalidValueIf_3729_condition, vao4, binding
+	} else {
+		offset := GLintptr(uint64(VertexAttribPointer_3705_pointer.Address))                                                                  // GLintptr
+		BindVertexBuffer_3730_ctx := VertexAttribPointer_3705_ctx                                                                             // Contextʳ
+		BindVertexBuffer_3730_binding_index := binding_index                                                                                  // BindingIndex
+		BindVertexBuffer_3730_buffer := boundArrayBuffer                                                                                      // BufferId
+		BindVertexBuffer_3730_offset := offset                                                                                                // GLintptr
+		BindVertexBuffer_3730_stride := effectiveStride                                                                                       // GLsizei
+		glErrorInvalidValueIf_3731_condition := (BindVertexBuffer_3730_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		if glErrorInvalidValueIf_3731_condition {
+			return
+		}
+		glErrorInvalidValueIf_3732_condition := (BindVertexBuffer_3730_offset) < (GLintptr(int32(0))) // bool
+		if glErrorInvalidValueIf_3732_condition {
+			return
+		}
+		glErrorInvalidValueIf_3733_condition := (BindVertexBuffer_3730_stride) < (GLsizei(int32(0))) // bool
+		if glErrorInvalidValueIf_3733_condition {
+			return
+		}
+		glErrorInvalidValueIf_3734_condition := (BindVertexBuffer_3730_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+		if glErrorInvalidValueIf_3734_condition {
+			return
+		}
+		if !(BindVertexBuffer_3730_ctx.Instances.Buffers.Contains(BindVertexBuffer_3730_buffer)) {
+			BindVertexBuffer_3730_ctx.Instances.Buffers[BindVertexBuffer_3730_buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+		}
+		vao4 := BindVertexBuffer_3730_ctx.Instances.VertexArrays.Get(BindVertexBuffer_3730_ctx.BoundVertexArray) // VertexArrayʳ
+		binding := vao4.VertexBufferBindings.Get(BindVertexBuffer_3730_binding_index)                            // VertexBufferBindingʳ
+		binding.Buffer = BindVertexBuffer_3730_buffer
+		binding.Offset = BindVertexBuffer_3730_offset
+		binding.Stride = BindVertexBuffer_3730_stride
+		_, _, _, _, _, _, _, _, _, _, _, _ = offset, BindVertexBuffer_3730_ctx, BindVertexBuffer_3730_binding_index, BindVertexBuffer_3730_buffer, BindVertexBuffer_3730_offset, BindVertexBuffer_3730_stride, glErrorInvalidValueIf_3731_condition, glErrorInvalidValueIf_3732_condition, glErrorInvalidValueIf_3733_condition, glErrorInvalidValueIf_3734_condition, vao4, binding
+	}
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribIPointer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3591_major, minRequiredVersion_3591_minor
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3702_major, minRequiredVersion_3702_minor, context, GetContext_3703_result, ctx, VertexAttribPointer_3705_ctx, VertexAttribPointer_3705_index, VertexAttribPointer_3705_size, VertexAttribPointer_3705_type, VertexAttribPointer_3705_normalized, VertexAttribPointer_3705_stride, VertexAttribPointer_3705_pointer, VertexAttribPointer_3705_integer, boundArrayBuffer, glErrorInvalidValueIf_3706_condition, glErrorInvalidValueIf_3707_condition, glErrorInvalidOperationIf_3708_condition, VertexAttribFormat_3709_ctx, VertexAttribFormat_3709_index, VertexAttribFormat_3709_size, VertexAttribFormat_3709_type, VertexAttribFormat_3709_normalized, VertexAttribFormat_3709_relativeOffset, VertexAttribFormat_3709_integer, glErrorInvalidValueIf_3710_condition, glErrorInvalidValueIf_3711_condition, glErrorInvalidValueIf_3720_condition, vao, format, binding_index, VertexAttribBinding_3721_ctx, VertexAttribBinding_3721_index, VertexAttribBinding_3721_binding_index, glErrorInvalidValueIf_3722_condition, glErrorInvalidValueIf_3723_condition, vao5, VertexAttribTypeSize_3724_type, VertexAttribTypeSize_3724_result, effectiveStride, vao6
 	return nil
 }
 
@@ -30473,37 +31273,213 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3594_major := uint32(2) // u32
-	minRequiredVersion_3594_minor := uint32(0) // u32
-	switch ϟa.Type {
-	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
-	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_3595_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
-		_ = requiresExtension_3595_ext
-	case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
-		minRequiredVersion_3596_major := uint32(3) // u32
-		minRequiredVersion_3596_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_3596_major, minRequiredVersion_3596_minor
-	default:
-		glErrorInvalidEnum_3597_param := ϟa.Type // GLenum
-		return
-		_ = glErrorInvalidEnum_3597_param
-	}
+	minRequiredVersion_3735_major := uint32(2)   // u32
+	minRequiredVersion_3735_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3599_msg := "No context bound" // string
+		error_3737_msg := "No context bound" // string
 		return
-		_ = error_3599_msg
+		_ = error_3737_msg
 	}
-	GetContext_3598_result := context               // Contextʳ
-	ctx := GetContext_3598_result                   // Contextʳ
-	a := ctx.VertexAttributeArrays.Get(ϟa.Location) // VertexAttributeArrayʳ
-	a.Size = uint32(ϟa.Size)
-	a.Type = ϟa.Type
-	a.Normalized = ϟa.Normalized
-	a.Stride = ϟa.Stride
-	a.Pointer = ϟa.Data
-	a.Buffer = ctx.BoundBuffers.Get(GLenum_GL_ARRAY_BUFFER)
+	GetContext_3736_result := context                                                               // Contextʳ
+	ctx := GetContext_3736_result                                                                   // Contextʳ
+	VertexAttribPointer_3738_ctx := ctx                                                             // Contextʳ
+	VertexAttribPointer_3738_index := ϟa.Location                                                   // AttributeLocation
+	VertexAttribPointer_3738_size := ϟa.Size                                                        // GLint
+	VertexAttribPointer_3738_type := ϟa.Type                                                        // GLenum
+	VertexAttribPointer_3738_normalized := ϟa.Normalized                                            // GLboolean
+	VertexAttribPointer_3738_stride := ϟa.Stride                                                    // GLsizei
+	VertexAttribPointer_3738_pointer := ϟa.Data                                                     // VertexPointer
+	VertexAttribPointer_3738_integer := false                                                       // bool
+	boundArrayBuffer := VertexAttribPointer_3738_ctx.BoundBuffers.Get(GLenum_GL_ARRAY_BUFFER)       // BufferId
+	glErrorInvalidValueIf_3739_condition := (VertexAttribPointer_3738_stride) < (GLsizei(int32(0))) // bool
+	if glErrorInvalidValueIf_3739_condition {
+		return
+	}
+	glErrorInvalidValueIf_3740_condition := (VertexAttribPointer_3738_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+	if glErrorInvalidValueIf_3740_condition {
+		return
+	}
+	glErrorInvalidOperationIf_3741_condition := ((VertexAttribPointer_3738_ctx.BoundVertexArray) != (VertexArrayId(uint32(0)))) && (((boundArrayBuffer) == (BufferId(uint32(0)))) && ((VertexAttribPointer_3738_pointer) != (VertexPointer(Voidᶜᵖ{})))) // bool
+	if glErrorInvalidOperationIf_3741_condition {
+		return
+	}
+	VertexAttribFormat_3742_ctx := VertexAttribPointer_3738_ctx                                                                  // Contextʳ
+	VertexAttribFormat_3742_index := VertexAttribPointer_3738_index                                                              // AttributeLocation
+	VertexAttribFormat_3742_size := VertexAttribPointer_3738_size                                                                // GLint
+	VertexAttribFormat_3742_type := VertexAttribPointer_3738_type                                                                // GLenum
+	VertexAttribFormat_3742_normalized := VertexAttribPointer_3738_normalized                                                    // GLboolean
+	VertexAttribFormat_3742_relativeOffset := GLuint(uint32(0))                                                                  // GLuint
+	VertexAttribFormat_3742_integer := VertexAttribPointer_3738_integer                                                          // bool
+	glErrorInvalidValueIf_3743_condition := (VertexAttribFormat_3742_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3743_condition {
+		return
+	}
+	glErrorInvalidValueIf_3744_condition := !(((GLint(int32(1))) <= (VertexAttribFormat_3742_size)) && ((VertexAttribFormat_3742_size) <= (GLint(int32(4))))) // bool
+	if glErrorInvalidValueIf_3744_condition {
+		return
+	}
+	if VertexAttribFormat_3742_integer {
+		switch VertexAttribFormat_3742_type {
+		case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3745_major := uint32(3) // u32
+			minRequiredVersion_3745_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3745_major, minRequiredVersion_3745_minor
+		default:
+			glErrorInvalidEnum_3746_param := VertexAttribFormat_3742_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3746_param
+		}
+	} else {
+		switch VertexAttribFormat_3742_type {
+		case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
+			minRequiredVersion_3747_major := uint32(2) // u32
+			minRequiredVersion_3747_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3747_major, minRequiredVersion_3747_minor
+		case GLenum_GL_HALF_FLOAT_OES:
+			requiresExtension_3748_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+			_ = requiresExtension_3748_ext
+		case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_INT:
+			minRequiredVersion_3749_major := uint32(3) // u32
+			minRequiredVersion_3749_minor := uint32(0) // u32
+			_, _ = minRequiredVersion_3749_major, minRequiredVersion_3749_minor
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			glErrorInvalidOperationIf_3750_condition := (VertexAttribFormat_3742_size) != (GLint(int32(4))) // bool
+			if glErrorInvalidOperationIf_3750_condition {
+				return
+			}
+			minRequiredVersion_3751_major := uint32(3) // u32
+			minRequiredVersion_3751_minor := uint32(0) // u32
+			_, _, _ = glErrorInvalidOperationIf_3750_condition, minRequiredVersion_3751_major, minRequiredVersion_3751_minor
+		default:
+			glErrorInvalidEnum_3752_param := VertexAttribFormat_3742_type // GLenum
+			return
+			_ = glErrorInvalidEnum_3752_param
+		}
+	}
+	glErrorInvalidValueIf_3753_condition := (VertexAttribFormat_3742_relativeOffset) > (GLuint(Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET)) // bool
+	if glErrorInvalidValueIf_3753_condition {
+		return
+	}
+	vao := VertexAttribFormat_3742_ctx.Instances.VertexArrays.Get(VertexAttribFormat_3742_ctx.BoundVertexArray) // VertexArrayʳ
+	format := vao.VertexAttributeArrays.Get(VertexAttribFormat_3742_index)                                      // VertexAttributeArrayʳ
+	format.Size = VertexAttribFormat_3742_size
+	format.Type = VertexAttribFormat_3742_type
+	if !(VertexAttribFormat_3742_integer) {
+		format.Normalized = VertexAttribFormat_3742_normalized
+	}
+	format.RelativeOffset = VertexAttribFormat_3742_relativeOffset
+	format.Integer = VertexAttribFormat_3742_integer
+	binding_index := BindingIndex(VertexAttribPointer_3738_index)                                                                 // BindingIndex
+	VertexAttribBinding_3754_ctx := VertexAttribPointer_3738_ctx                                                                  // Contextʳ
+	VertexAttribBinding_3754_index := VertexAttribPointer_3738_index                                                              // AttributeLocation
+	VertexAttribBinding_3754_binding_index := binding_index                                                                       // BindingIndex
+	glErrorInvalidValueIf_3755_condition := (VertexAttribBinding_3754_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
+	if glErrorInvalidValueIf_3755_condition {
+		return
+	}
+	glErrorInvalidValueIf_3756_condition := (VertexAttribBinding_3754_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3756_condition {
+		return
+	}
+	vao5 := VertexAttribBinding_3754_ctx.Instances.VertexArrays.Get(VertexAttribBinding_3754_ctx.BoundVertexArray) // VertexArrayʳ
+	vao5.VertexAttributeArrays.Get(VertexAttribBinding_3754_index).Binding = VertexAttribBinding_3754_binding_index
+	VertexAttribTypeSize_3757_type := VertexAttribPointer_3738_type // GLenum
+	VertexAttribTypeSize_3757_result := func() (result GLint) {
+		switch VertexAttribTypeSize_3757_type {
+		case GLenum_GL_BYTE, GLenum_GL_UNSIGNED_BYTE:
+			return GLint(int32(1))
+		case GLenum_GL_SHORT, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_HALF_FLOAT, GLenum_GL_HALF_FLOAT_OES:
+			return GLint(int32(2))
+		case GLenum_GL_INT, GLenum_GL_UNSIGNED_INT, GLenum_GL_FLOAT, GLenum_GL_FIXED:
+			return GLint(int32(4))
+		case GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+			return GLint(int32(4))
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", VertexAttribTypeSize_3757_type, ϟa))
+			return result
+		}
+	}() // GLint
+	effectiveStride := func() (result GLsizei) {
+		switch (VertexAttribPointer_3738_stride) != (GLsizei(int32(0))) {
+		case true:
+			return VertexAttribPointer_3738_stride
+		case false:
+			return GLsizei((VertexAttribTypeSize_3757_result) * (VertexAttribPointer_3738_size))
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (VertexAttribPointer_3738_stride) != (GLsizei(int32(0))), ϟa))
+			return result
+		}
+	}() // GLsizei
+	vao6 := VertexAttribPointer_3738_ctx.Instances.VertexArrays.Get(VertexAttribPointer_3738_ctx.BoundVertexArray) // VertexArrayʳ
+	vao6.VertexAttributeArrays.Get(VertexAttribPointer_3738_index).Stride = VertexAttribPointer_3738_stride
+	vao6.VertexAttributeArrays.Get(VertexAttribPointer_3738_index).Pointer = VertexAttribPointer_3738_pointer
+	if ((VertexAttribPointer_3738_ctx.BoundVertexArray) == (VertexArrayId(uint32(0)))) && ((boundArrayBuffer) == (BufferId(uint32(0)))) {
+		BindVertexBuffer_3758_ctx := VertexAttribPointer_3738_ctx                                                                             // Contextʳ
+		BindVertexBuffer_3758_binding_index := binding_index                                                                                  // BindingIndex
+		BindVertexBuffer_3758_buffer := BufferId(uint32(0))                                                                                   // BufferId
+		BindVertexBuffer_3758_offset := GLintptr(int32(0))                                                                                    // GLintptr
+		BindVertexBuffer_3758_stride := effectiveStride                                                                                       // GLsizei
+		glErrorInvalidValueIf_3759_condition := (BindVertexBuffer_3758_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		if glErrorInvalidValueIf_3759_condition {
+			return
+		}
+		glErrorInvalidValueIf_3760_condition := (BindVertexBuffer_3758_offset) < (GLintptr(int32(0))) // bool
+		if glErrorInvalidValueIf_3760_condition {
+			return
+		}
+		glErrorInvalidValueIf_3761_condition := (BindVertexBuffer_3758_stride) < (GLsizei(int32(0))) // bool
+		if glErrorInvalidValueIf_3761_condition {
+			return
+		}
+		glErrorInvalidValueIf_3762_condition := (BindVertexBuffer_3758_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+		if glErrorInvalidValueIf_3762_condition {
+			return
+		}
+		if !(BindVertexBuffer_3758_ctx.Instances.Buffers.Contains(BindVertexBuffer_3758_buffer)) {
+			BindVertexBuffer_3758_ctx.Instances.Buffers[BindVertexBuffer_3758_buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+		}
+		vao4 := BindVertexBuffer_3758_ctx.Instances.VertexArrays.Get(BindVertexBuffer_3758_ctx.BoundVertexArray) // VertexArrayʳ
+		binding := vao4.VertexBufferBindings.Get(BindVertexBuffer_3758_binding_index)                            // VertexBufferBindingʳ
+		binding.Buffer = BindVertexBuffer_3758_buffer
+		binding.Offset = BindVertexBuffer_3758_offset
+		binding.Stride = BindVertexBuffer_3758_stride
+		_, _, _, _, _, _, _, _, _, _, _ = BindVertexBuffer_3758_ctx, BindVertexBuffer_3758_binding_index, BindVertexBuffer_3758_buffer, BindVertexBuffer_3758_offset, BindVertexBuffer_3758_stride, glErrorInvalidValueIf_3759_condition, glErrorInvalidValueIf_3760_condition, glErrorInvalidValueIf_3761_condition, glErrorInvalidValueIf_3762_condition, vao4, binding
+	} else {
+		offset := GLintptr(uint64(VertexAttribPointer_3738_pointer.Address))                                                                  // GLintptr
+		BindVertexBuffer_3763_ctx := VertexAttribPointer_3738_ctx                                                                             // Contextʳ
+		BindVertexBuffer_3763_binding_index := binding_index                                                                                  // BindingIndex
+		BindVertexBuffer_3763_buffer := boundArrayBuffer                                                                                      // BufferId
+		BindVertexBuffer_3763_offset := offset                                                                                                // GLintptr
+		BindVertexBuffer_3763_stride := effectiveStride                                                                                       // GLsizei
+		glErrorInvalidValueIf_3764_condition := (BindVertexBuffer_3763_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		if glErrorInvalidValueIf_3764_condition {
+			return
+		}
+		glErrorInvalidValueIf_3765_condition := (BindVertexBuffer_3763_offset) < (GLintptr(int32(0))) // bool
+		if glErrorInvalidValueIf_3765_condition {
+			return
+		}
+		glErrorInvalidValueIf_3766_condition := (BindVertexBuffer_3763_stride) < (GLsizei(int32(0))) // bool
+		if glErrorInvalidValueIf_3766_condition {
+			return
+		}
+		glErrorInvalidValueIf_3767_condition := (BindVertexBuffer_3763_stride) > (GLsizei(Constants_MAX_VERTEX_ATTRIB_STRIDE)) // bool
+		if glErrorInvalidValueIf_3767_condition {
+			return
+		}
+		if !(BindVertexBuffer_3763_ctx.Instances.Buffers.Contains(BindVertexBuffer_3763_buffer)) {
+			BindVertexBuffer_3763_ctx.Instances.Buffers[BindVertexBuffer_3763_buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+		}
+		vao4 := BindVertexBuffer_3763_ctx.Instances.VertexArrays.Get(BindVertexBuffer_3763_ctx.BoundVertexArray) // VertexArrayʳ
+		binding := vao4.VertexBufferBindings.Get(BindVertexBuffer_3763_binding_index)                            // VertexBufferBindingʳ
+		binding.Buffer = BindVertexBuffer_3763_buffer
+		binding.Offset = BindVertexBuffer_3763_offset
+		binding.Stride = BindVertexBuffer_3763_stride
+		_, _, _, _, _, _, _, _, _, _, _, _ = offset, BindVertexBuffer_3763_ctx, BindVertexBuffer_3763_binding_index, BindVertexBuffer_3763_buffer, BindVertexBuffer_3763_offset, BindVertexBuffer_3763_stride, glErrorInvalidValueIf_3764_condition, glErrorInvalidValueIf_3765_condition, glErrorInvalidValueIf_3766_condition, glErrorInvalidValueIf_3767_condition, vao4, binding
+	}
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -30512,7 +31488,7 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribPointer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_3594_major, minRequiredVersion_3594_minor, context, GetContext_3598_result, ctx, a
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3735_major, minRequiredVersion_3735_minor, context, GetContext_3736_result, ctx, VertexAttribPointer_3738_ctx, VertexAttribPointer_3738_index, VertexAttribPointer_3738_size, VertexAttribPointer_3738_type, VertexAttribPointer_3738_normalized, VertexAttribPointer_3738_stride, VertexAttribPointer_3738_pointer, VertexAttribPointer_3738_integer, boundArrayBuffer, glErrorInvalidValueIf_3739_condition, glErrorInvalidValueIf_3740_condition, glErrorInvalidOperationIf_3741_condition, VertexAttribFormat_3742_ctx, VertexAttribFormat_3742_index, VertexAttribFormat_3742_size, VertexAttribFormat_3742_type, VertexAttribFormat_3742_normalized, VertexAttribFormat_3742_relativeOffset, VertexAttribFormat_3742_integer, glErrorInvalidValueIf_3743_condition, glErrorInvalidValueIf_3744_condition, glErrorInvalidValueIf_3753_condition, vao, format, binding_index, VertexAttribBinding_3754_ctx, VertexAttribBinding_3754_index, VertexAttribBinding_3754_binding_index, glErrorInvalidValueIf_3755_condition, glErrorInvalidValueIf_3756_condition, vao5, VertexAttribTypeSize_3757_type, VertexAttribTypeSize_3757_result, effectiveStride, vao6
 	return nil
 }
 
@@ -30521,13 +31497,31 @@ func (ϟa *GlVertexBindingDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_3600_major := uint32(3) // u32
-	minRequiredVersion_3600_minor := uint32(1) // u32
-	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
+	minRequiredVersion_3768_major := uint32(3)   // u32
+	minRequiredVersion_3768_minor := uint32(1)   // u32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	if (context) == ((*Context)(nil)) {
+		error_3770_msg := "No context bound" // string
+		return
+		_ = error_3770_msg
+	}
+	GetContext_3769_result := context                                                                                 // Contextʳ
+	ctx := GetContext_3769_result                                                                                     // Contextʳ
+	glErrorInvalidValueIf_3771_condition := (ϟa.BindingIndex) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	if glErrorInvalidValueIf_3771_condition {
+		return
+	}
+	glErrorInvalidOperationIf_3772_condition := (ctx.BoundVertexArray) == (VertexArrayId(uint32(0))) // bool
+	if glErrorInvalidOperationIf_3772_condition {
+		return
+	}
+	vao := ctx.Instances.VertexArrays.Get(ctx.BoundVertexArray) // VertexArrayʳ
+	vao.VertexBufferBindings.Get(ϟa.BindingIndex).Divisor = ϟa.Divisor
+	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexBindingDivisor)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_3600_major, minRequiredVersion_3600_minor
+	_, _, _, _, _, _, _, _ = minRequiredVersion_3768_major, minRequiredVersion_3768_minor, context, GetContext_3769_result, ctx, glErrorInvalidValueIf_3771_condition, glErrorInvalidOperationIf_3772_condition, vao
 	return nil
 }
 
@@ -30596,12 +31590,12 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_3613_msg := "No context bound" // string
+		error_3791_msg := "No context bound" // string
 		return
-		_ = error_3613_msg
+		_ = error_3791_msg
 	}
-	GetContext_3612_result := context // Contextʳ
-	ctx := GetContext_3612_result     // Contextʳ
+	GetContext_3790_result := context // Contextʳ
+	ctx := GetContext_3790_result     // Contextʳ
 	ctx.Info.Name = ϟa.Name
 	ctx.Info.Vendor = ϟa.Vendor
 	ctx.Info.Extensions = ϟa.Extensions
@@ -30642,7 +31636,7 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.Bool(ϟa.PreserveBuffersOnSwap))
 	ϟb.Call(funcInfoContextInfo)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _ = context, GetContext_3612_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
+	_, _, _, _, _, _, _, _, _, _ = context, GetContext_3790_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil
 }
 
