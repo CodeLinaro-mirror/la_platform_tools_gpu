@@ -69,10 +69,10 @@ var (
 func init() {
 	Register(func() {
 		// Install rules for the build tools
-		Tools.Embed = GoInstall(GPURoot + "/tools/embed")
-		Tools.Apic = GoInstall(GPURoot + "/api/apic")
-		Tools.Codergen = GoInstall(GPURoot + "/tools/codergen")
-		Tools.Gapit = GoInstall(GPURoot + "/tools/gapit")
+		Tools.Embed = GoInstall(GPURoot, "tools/embed")
+		Tools.Apic = GoInstall(GPURoot, "api/apic")
+		Tools.Codergen = GoInstall(GPURoot, "tools/codergen")
+		Tools.Gapit = GoInstall(GPURoot, "tools/gapit")
 		List("gapit").DependsOn(Tools.Gapit)
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
@@ -109,9 +109,9 @@ func init() {
 			List("test").DependsOn("go_test")
 		}
 		// The main binary rules
-		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
+		Apps.Gapis = GoInstall(GPURoot, "server/gapis")
 		Creator(Apps.Gapis).DependsOn("code")
-		Apps.Gapid = GoInstall(GPURoot + "/_experimental/client/gapid")
+		Apps.Gapid = GoInstall(GPURoot, "_experimental/client/gapid")
 		Creator(Apps.Gapid).DependsOn("code")
 		List("apps").DependsStruct(Apps)
 		// Application launchers
