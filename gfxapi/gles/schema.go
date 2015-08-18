@@ -568,6 +568,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlDrawElementsBaseVertex := schema.Of((*GlDrawElementsBaseVertex)(nil).Class())
+	sc_GlDrawElementsBaseVertex.Metadata = append(sc_GlDrawElementsBaseVertex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawElementsBaseVertex",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlDrawElementsIndirect := schema.Of((*GlDrawElementsIndirect)(nil).Class())
 	sc_GlDrawElementsIndirect.Metadata = append(sc_GlDrawElementsIndirect.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -586,10 +595,46 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlDrawElementsInstancedBaseVertex := schema.Of((*GlDrawElementsInstancedBaseVertex)(nil).Class())
+	sc_GlDrawElementsInstancedBaseVertex.Metadata = append(sc_GlDrawElementsInstancedBaseVertex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawElementsInstancedBaseVertex",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlDrawRangeElements := schema.Of((*GlDrawRangeElements)(nil).Class())
 	sc_GlDrawRangeElements.Metadata = append(sc_GlDrawRangeElements.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawRangeElements",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawRangeElementsBaseVertex := schema.Of((*GlDrawRangeElementsBaseVertex)(nil).Class())
+	sc_GlDrawRangeElementsBaseVertex.Metadata = append(sc_GlDrawRangeElementsBaseVertex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawRangeElementsBaseVertex",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPatchParameteri := schema.Of((*GlPatchParameteri)(nil).Class())
+	sc_GlPatchParameteri.Metadata = append(sc_GlPatchParameteri.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPatchParameteri",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPrimitiveBoundingBox := schema.Of((*GlPrimitiveBoundingBox)(nil).Class())
+	sc_GlPrimitiveBoundingBox.Metadata = append(sc_GlPrimitiveBoundingBox.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPrimitiveBoundingBox",
 		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -608,6 +653,15 @@ func init() {
 	sc_GlAlphaFuncQCOM.Metadata = append(sc_GlAlphaFuncQCOM.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glAlphaFuncQCOM",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlApplyFramebufferAttachmentCMAAINTEL := schema.Of((*GlApplyFramebufferAttachmentCMAAINTEL)(nil).Class())
+	sc_GlApplyFramebufferAttachmentCMAAINTEL.Metadata = append(sc_GlApplyFramebufferAttachmentCMAAINTEL.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glApplyFramebufferAttachmentCMAAINTEL",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -874,6 +928,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlCoverageModulationNV := schema.Of((*GlCoverageModulationNV)(nil).Class())
+	sc_GlCoverageModulationNV.Metadata = append(sc_GlCoverageModulationNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glCoverageModulationNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlCoverageModulationTableNV := schema.Of((*GlCoverageModulationTableNV)(nil).Class())
+	sc_GlCoverageModulationTableNV.Metadata = append(sc_GlCoverageModulationTableNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glCoverageModulationTableNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlCoverageOperationNV := schema.Of((*GlCoverageOperationNV)(nil).Class())
 	sc_GlCoverageOperationNV.Metadata = append(sc_GlCoverageOperationNV.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -1031,7 +1103,7 @@ func init() {
 	sc_GlDrawArraysInstancedANGLE.Metadata = append(sc_GlDrawArraysInstancedANGLE.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysInstancedANGLE",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1040,7 +1112,7 @@ func init() {
 	sc_GlDrawArraysInstancedBaseInstanceEXT.Metadata = append(sc_GlDrawArraysInstancedBaseInstanceEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysInstancedBaseInstanceEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1049,7 +1121,7 @@ func init() {
 	sc_GlDrawArraysInstancedEXT.Metadata = append(sc_GlDrawArraysInstancedEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysInstancedEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1058,7 +1130,7 @@ func init() {
 	sc_GlDrawArraysInstancedNV.Metadata = append(sc_GlDrawArraysInstancedNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysInstancedNV",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1067,7 +1139,7 @@ func init() {
 	sc_GlDrawBuffersEXT.Metadata = append(sc_GlDrawBuffersEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1076,7 +1148,7 @@ func init() {
 	sc_GlDrawBuffersIndexedEXT.Metadata = append(sc_GlDrawBuffersIndexedEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersIndexedEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1085,7 +1157,7 @@ func init() {
 	sc_GlDrawBuffersNV.Metadata = append(sc_GlDrawBuffersNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersNV",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1094,7 +1166,7 @@ func init() {
 	sc_GlDrawElementsBaseVertexEXT.Metadata = append(sc_GlDrawElementsBaseVertexEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsBaseVertexEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1103,7 +1175,7 @@ func init() {
 	sc_GlDrawElementsBaseVertexOES.Metadata = append(sc_GlDrawElementsBaseVertexOES.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsBaseVertexOES",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1112,7 +1184,7 @@ func init() {
 	sc_GlDrawElementsInstancedANGLE.Metadata = append(sc_GlDrawElementsInstancedANGLE.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstancedANGLE",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1121,25 +1193,7 @@ func init() {
 	sc_GlDrawElementsInstancedBaseInstanceEXT.Metadata = append(sc_GlDrawElementsInstancedBaseInstanceEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstancedBaseInstanceEXT",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlDrawElementsInstancedBaseVertexEXT := schema.Of((*GlDrawElementsInstancedBaseVertexEXT)(nil).Class())
-	sc_GlDrawElementsInstancedBaseVertexEXT.Metadata = append(sc_GlDrawElementsInstancedBaseVertexEXT.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glDrawElementsInstancedBaseVertexEXT",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlDrawElementsInstancedBaseVertexOES := schema.Of((*GlDrawElementsInstancedBaseVertexOES)(nil).Class())
-	sc_GlDrawElementsInstancedBaseVertexOES.Metadata = append(sc_GlDrawElementsInstancedBaseVertexOES.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glDrawElementsInstancedBaseVertexOES",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1148,7 +1202,25 @@ func init() {
 	sc_GlDrawElementsInstancedBaseVertexBaseInstanceEXT.Metadata = append(sc_GlDrawElementsInstancedBaseVertexBaseInstanceEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstancedBaseVertexBaseInstanceEXT",
-		DrawCall:         false,
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawElementsInstancedBaseVertexEXT := schema.Of((*GlDrawElementsInstancedBaseVertexEXT)(nil).Class())
+	sc_GlDrawElementsInstancedBaseVertexEXT.Metadata = append(sc_GlDrawElementsInstancedBaseVertexEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawElementsInstancedBaseVertexEXT",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawElementsInstancedBaseVertexOES := schema.Of((*GlDrawElementsInstancedBaseVertexOES)(nil).Class())
+	sc_GlDrawElementsInstancedBaseVertexOES.Metadata = append(sc_GlDrawElementsInstancedBaseVertexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawElementsInstancedBaseVertexOES",
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1157,7 +1229,7 @@ func init() {
 	sc_GlDrawElementsInstancedEXT.Metadata = append(sc_GlDrawElementsInstancedEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstancedEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1166,7 +1238,7 @@ func init() {
 	sc_GlDrawElementsInstancedNV.Metadata = append(sc_GlDrawElementsInstancedNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstancedNV",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1175,7 +1247,7 @@ func init() {
 	sc_GlDrawRangeElementsBaseVertexEXT.Metadata = append(sc_GlDrawRangeElementsBaseVertexEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawRangeElementsBaseVertexEXT",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1184,7 +1256,7 @@ func init() {
 	sc_GlDrawRangeElementsBaseVertexOES.Metadata = append(sc_GlDrawRangeElementsBaseVertexOES.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawRangeElementsBaseVertexOES",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1414,6 +1486,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlFragmentCoverageColorNV := schema.Of((*GlFragmentCoverageColorNV)(nil).Class())
+	sc_GlFragmentCoverageColorNV.Metadata = append(sc_GlFragmentCoverageColorNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFragmentCoverageColorNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFramebufferSampleLocationsfvNV := schema.Of((*GlFramebufferSampleLocationsfvNV)(nil).Class())
+	sc_GlFramebufferSampleLocationsfvNV.Metadata = append(sc_GlFramebufferSampleLocationsfvNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFramebufferSampleLocationsfvNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlFramebufferTexture2DMultisampleEXT := schema.Of((*GlFramebufferTexture2DMultisampleEXT)(nil).Class())
 	sc_GlFramebufferTexture2DMultisampleEXT.Metadata = append(sc_GlFramebufferTexture2DMultisampleEXT.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -1441,19 +1531,19 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlFramebufferTextureOES := schema.Of((*GlFramebufferTextureOES)(nil).Class())
-	sc_GlFramebufferTextureOES.Metadata = append(sc_GlFramebufferTextureOES.Metadata, &atom.Metadata{
+	sc_GlFramebufferTextureMultiviewOVR := schema.Of((*GlFramebufferTextureMultiviewOVR)(nil).Class())
+	sc_GlFramebufferTextureMultiviewOVR.Metadata = append(sc_GlFramebufferTextureMultiviewOVR.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glFramebufferTextureOES",
+		DisplayName:      "glFramebufferTextureMultiviewOVR",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlFramebufferTextureMultiviewOVR := schema.Of((*GlFramebufferTextureMultiviewOVR)(nil).Class())
-	sc_GlFramebufferTextureMultiviewOVR.Metadata = append(sc_GlFramebufferTextureMultiviewOVR.Metadata, &atom.Metadata{
+	sc_GlFramebufferTextureOES := schema.Of((*GlFramebufferTextureOES)(nil).Class())
+	sc_GlFramebufferTextureOES.Metadata = append(sc_GlFramebufferTextureOES.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glFramebufferTextureMultiviewOVR",
+		DisplayName:      "glFramebufferTextureOES",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -1517,6 +1607,15 @@ func init() {
 	sc_GlGetBufferPointervOES.Metadata = append(sc_GlGetBufferPointervOES.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetBufferPointervOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetCoverageModulationTableNV := schema.Of((*GlGetCoverageModulationTableNV)(nil).Class())
+	sc_GlGetCoverageModulationTableNV.Metadata = append(sc_GlGetCoverageModulationTableNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetCoverageModulationTableNV",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -2026,19 +2125,19 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlIsEnablediOES := schema.Of((*GlIsEnablediOES)(nil).Class())
-	sc_GlIsEnablediOES.Metadata = append(sc_GlIsEnablediOES.Metadata, &atom.Metadata{
+	sc_GlIsEnablediNV := schema.Of((*GlIsEnablediNV)(nil).Class())
+	sc_GlIsEnablediNV.Metadata = append(sc_GlIsEnablediNV.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glIsEnablediOES",
+		DisplayName:      "glIsEnablediNV",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlIsEnablediNV := schema.Of((*GlIsEnablediNV)(nil).Class())
-	sc_GlIsEnablediNV.Metadata = append(sc_GlIsEnablediNV.Metadata, &atom.Metadata{
+	sc_GlIsEnablediOES := schema.Of((*GlIsEnablediOES)(nil).Class())
+	sc_GlIsEnablediOES.Metadata = append(sc_GlIsEnablediOES.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glIsEnablediNV",
+		DisplayName:      "glIsEnablediOES",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -2300,6 +2399,15 @@ func init() {
 	sc_GlMultiDrawElementsIndirectEXT.Metadata = append(sc_GlMultiDrawElementsIndirectEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glMultiDrawElementsIndirectEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNamedFramebufferSampleLocationsfvNV := schema.Of((*GlNamedFramebufferSampleLocationsfvNV)(nil).Class())
+	sc_GlNamedFramebufferSampleLocationsfvNV.Metadata = append(sc_GlNamedFramebufferSampleLocationsfvNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNamedFramebufferSampleLocationsfvNV",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -2872,6 +2980,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlRasterSamplesEXT := schema.Of((*GlRasterSamplesEXT)(nil).Class())
+	sc_GlRasterSamplesEXT.Metadata = append(sc_GlRasterSamplesEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glRasterSamplesEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlReadBufferIndexedEXT := schema.Of((*GlReadBufferIndexedEXT)(nil).Class())
 	sc_GlReadBufferIndexedEXT.Metadata = append(sc_GlReadBufferIndexedEXT.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -2948,6 +3065,15 @@ func init() {
 	sc_GlRenderbufferStorageMultisampleNV.Metadata = append(sc_GlRenderbufferStorageMultisampleNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glRenderbufferStorageMultisampleNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlResolveDepthValuesNV := schema.Of((*GlResolveDepthValuesNV)(nil).Class())
+	sc_GlResolveDepthValuesNV.Metadata = append(sc_GlResolveDepthValuesNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glResolveDepthValuesNV",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3101,6 +3227,15 @@ func init() {
 	sc_GlStencilThenCoverStrokePathNV.Metadata = append(sc_GlStencilThenCoverStrokePathNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glStencilThenCoverStrokePathNV",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlSubpixelPrecisionBiasNV := schema.Of((*GlSubpixelPrecisionBiasNV)(nil).Class())
+	sc_GlSubpixelPrecisionBiasNV.Metadata = append(sc_GlSubpixelPrecisionBiasNV.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glSubpixelPrecisionBiasNV",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3430,82 +3565,10 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlCoverageModulationNV := schema.Of((*GlCoverageModulationNV)(nil).Class())
-	sc_GlCoverageModulationNV.Metadata = append(sc_GlCoverageModulationNV.Metadata, &atom.Metadata{
+	sc_GlBlendBarrier := schema.Of((*GlBlendBarrier)(nil).Class())
+	sc_GlBlendBarrier.Metadata = append(sc_GlBlendBarrier.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glCoverageModulationNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlCoverageModulationTableNV := schema.Of((*GlCoverageModulationTableNV)(nil).Class())
-	sc_GlCoverageModulationTableNV.Metadata = append(sc_GlCoverageModulationTableNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glCoverageModulationTableNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlFragmentCoverageColorNV := schema.Of((*GlFragmentCoverageColorNV)(nil).Class())
-	sc_GlFragmentCoverageColorNV.Metadata = append(sc_GlFragmentCoverageColorNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glFragmentCoverageColorNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlFramebufferSampleLocationsfvNV := schema.Of((*GlFramebufferSampleLocationsfvNV)(nil).Class())
-	sc_GlFramebufferSampleLocationsfvNV.Metadata = append(sc_GlFramebufferSampleLocationsfvNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glFramebufferSampleLocationsfvNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlGetCoverageModulationTableNV := schema.Of((*GlGetCoverageModulationTableNV)(nil).Class())
-	sc_GlGetCoverageModulationTableNV.Metadata = append(sc_GlGetCoverageModulationTableNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glGetCoverageModulationTableNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlNamedFramebufferSampleLocationsfvNV := schema.Of((*GlNamedFramebufferSampleLocationsfvNV)(nil).Class())
-	sc_GlNamedFramebufferSampleLocationsfvNV.Metadata = append(sc_GlNamedFramebufferSampleLocationsfvNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glNamedFramebufferSampleLocationsfvNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlRasterSamplesEXT := schema.Of((*GlRasterSamplesEXT)(nil).Class())
-	sc_GlRasterSamplesEXT.Metadata = append(sc_GlRasterSamplesEXT.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glRasterSamplesEXT",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlResolveDepthValuesNV := schema.Of((*GlResolveDepthValuesNV)(nil).Class())
-	sc_GlResolveDepthValuesNV.Metadata = append(sc_GlResolveDepthValuesNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glResolveDepthValuesNV",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
-	sc_GlSubpixelPrecisionBiasNV := schema.Of((*GlSubpixelPrecisionBiasNV)(nil).Class())
-	sc_GlSubpixelPrecisionBiasNV.Metadata = append(sc_GlSubpixelPrecisionBiasNV.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glSubpixelPrecisionBiasNV",
+		DisplayName:      "glBlendBarrier",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3538,6 +3601,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlBlendEquationSeparatei := schema.Of((*GlBlendEquationSeparatei)(nil).Class())
+	sc_GlBlendEquationSeparatei.Metadata = append(sc_GlBlendEquationSeparatei.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendEquationSeparatei",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendEquationi := schema.Of((*GlBlendEquationi)(nil).Class())
+	sc_GlBlendEquationi.Metadata = append(sc_GlBlendEquationi.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendEquationi",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlBlendFunc := schema.Of((*GlBlendFunc)(nil).Class())
 	sc_GlBlendFunc.Metadata = append(sc_GlBlendFunc.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -3551,6 +3632,24 @@ func init() {
 	sc_GlBlendFuncSeparate.Metadata = append(sc_GlBlendFuncSeparate.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glBlendFuncSeparate",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendFuncSeparatei := schema.Of((*GlBlendFuncSeparatei)(nil).Class())
+	sc_GlBlendFuncSeparatei.Metadata = append(sc_GlBlendFuncSeparatei.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendFuncSeparatei",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendFunci := schema.Of((*GlBlendFunci)(nil).Class())
+	sc_GlBlendFunci.Metadata = append(sc_GlBlendFunci.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendFunci",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3745,6 +3844,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlColorMaski := schema.Of((*GlColorMaski)(nil).Class())
+	sc_GlColorMaski.Metadata = append(sc_GlColorMaski.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColorMaski",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlDeleteFramebuffers := schema.Of((*GlDeleteFramebuffers)(nil).Class())
 	sc_GlDeleteFramebuffers.Metadata = append(sc_GlDeleteFramebuffers.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -3785,6 +3893,15 @@ func init() {
 	sc_GlFramebufferRenderbuffer.Metadata = append(sc_GlFramebufferRenderbuffer.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glFramebufferRenderbuffer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFramebufferTexture := schema.Of((*GlFramebufferTexture)(nil).Class())
+	sc_GlFramebufferTexture.Metadata = append(sc_GlFramebufferTexture.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFramebufferTexture",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3907,6 +4024,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlReadnPixels := schema.Of((*GlReadnPixels)(nil).Class())
+	sc_GlReadnPixels.Metadata = append(sc_GlReadnPixels.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glReadnPixels",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlRenderbufferStorage := schema.Of((*GlRenderbufferStorage)(nil).Class())
 	sc_GlRenderbufferStorage.Metadata = append(sc_GlRenderbufferStorage.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -3952,10 +4078,28 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlDisablei := schema.Of((*GlDisablei)(nil).Class())
+	sc_GlDisablei.Metadata = append(sc_GlDisablei.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDisablei",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlEnable := schema.Of((*GlEnable)(nil).Class())
 	sc_GlEnable.Metadata = append(sc_GlEnable.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glEnable",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlEnablei := schema.Of((*GlEnablei)(nil).Class())
+	sc_GlEnablei.Metadata = append(sc_GlEnablei.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glEnablei",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3992,6 +4136,15 @@ func init() {
 	sc_GlGetError.Metadata = append(sc_GlGetError.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetError",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetGraphicsResetStatus := schema.Of((*GlGetGraphicsResetStatus)(nil).Class())
+	sc_GlGetGraphicsResetStatus.Metadata = append(sc_GlGetGraphicsResetStatus.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetGraphicsResetStatus",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -4388,6 +4541,33 @@ func init() {
 	sc_GlGetUniformuiv.Metadata = append(sc_GlGetUniformuiv.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetUniformuiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetnUniformfv := schema.Of((*GlGetnUniformfv)(nil).Class())
+	sc_GlGetnUniformfv.Metadata = append(sc_GlGetnUniformfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetnUniformfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetnUniformiv := schema.Of((*GlGetnUniformiv)(nil).Class())
+	sc_GlGetnUniformiv.Metadata = append(sc_GlGetnUniformiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetnUniformiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetnUniformuiv := schema.Of((*GlGetnUniformuiv)(nil).Class())
+	sc_GlGetnUniformuiv.Metadata = append(sc_GlGetnUniformuiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetnUniformuiv",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -5176,6 +5356,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlMinSampleShading := schema.Of((*GlMinSampleShading)(nil).Class())
+	sc_GlMinSampleShading.Metadata = append(sc_GlMinSampleShading.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMinSampleShading",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlPolygonOffset := schema.Of((*GlPolygonOffset)(nil).Class())
 	sc_GlPolygonOffset.Metadata = append(sc_GlPolygonOffset.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -5288,6 +5477,15 @@ func init() {
 	sc_GlIsEnabled.Metadata = append(sc_GlIsEnabled.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glIsEnabled",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlIsEnabledi := schema.Of((*GlIsEnabledi)(nil).Class())
+	sc_GlIsEnabledi.Metadata = append(sc_GlIsEnabledi.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glIsEnabledi",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -5419,6 +5617,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlCopyImageSubData := schema.Of((*GlCopyImageSubData)(nil).Class())
+	sc_GlCopyImageSubData.Metadata = append(sc_GlCopyImageSubData.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glCopyImageSubData",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlCopyTexImage2D := schema.Of((*GlCopyTexImage2D)(nil).Class())
 	sc_GlCopyTexImage2D.Metadata = append(sc_GlCopyTexImage2D.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -5491,6 +5698,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlGetSamplerParameterIiv := schema.Of((*GlGetSamplerParameterIiv)(nil).Class())
+	sc_GlGetSamplerParameterIiv.Metadata = append(sc_GlGetSamplerParameterIiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetSamplerParameterIiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetSamplerParameterIuiv := schema.Of((*GlGetSamplerParameterIuiv)(nil).Class())
+	sc_GlGetSamplerParameterIuiv.Metadata = append(sc_GlGetSamplerParameterIuiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetSamplerParameterIuiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlGetSamplerParameterfv := schema.Of((*GlGetSamplerParameterfv)(nil).Class())
 	sc_GlGetSamplerParameterfv.Metadata = append(sc_GlGetSamplerParameterfv.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -5522,6 +5747,24 @@ func init() {
 	sc_GlGetTexLevelParameteriv.Metadata = append(sc_GlGetTexLevelParameteriv.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetTexLevelParameteriv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexParameterIiv := schema.Of((*GlGetTexParameterIiv)(nil).Class())
+	sc_GlGetTexParameterIiv.Metadata = append(sc_GlGetTexParameterIiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexParameterIiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexParameterIuiv := schema.Of((*GlGetTexParameterIuiv)(nil).Class())
+	sc_GlGetTexParameterIuiv.Metadata = append(sc_GlGetTexParameterIuiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexParameterIuiv",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -5572,6 +5815,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlSamplerParameterIiv := schema.Of((*GlSamplerParameterIiv)(nil).Class())
+	sc_GlSamplerParameterIiv.Metadata = append(sc_GlSamplerParameterIiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glSamplerParameterIiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlSamplerParameterIuiv := schema.Of((*GlSamplerParameterIuiv)(nil).Class())
+	sc_GlSamplerParameterIuiv.Metadata = append(sc_GlSamplerParameterIuiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glSamplerParameterIuiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlSamplerParameterf := schema.Of((*GlSamplerParameterf)(nil).Class())
 	sc_GlSamplerParameterf.Metadata = append(sc_GlSamplerParameterf.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -5608,6 +5869,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlTexBuffer := schema.Of((*GlTexBuffer)(nil).Class())
+	sc_GlTexBuffer.Metadata = append(sc_GlTexBuffer.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexBuffer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexBufferRange := schema.Of((*GlTexBufferRange)(nil).Class())
+	sc_GlTexBufferRange.Metadata = append(sc_GlTexBufferRange.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexBufferRange",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlTexImage2D := schema.Of((*GlTexImage2D)(nil).Class())
 	sc_GlTexImage2D.Metadata = append(sc_GlTexImage2D.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -5621,6 +5900,24 @@ func init() {
 	sc_GlTexImage3D.Metadata = append(sc_GlTexImage3D.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glTexImage3D",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterIiv := schema.Of((*GlTexParameterIiv)(nil).Class())
+	sc_GlTexParameterIiv.Metadata = append(sc_GlTexParameterIiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterIiv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterIuiv := schema.Of((*GlTexParameterIuiv)(nil).Class())
+	sc_GlTexParameterIuiv.Metadata = append(sc_GlTexParameterIuiv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterIuiv",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -5684,6 +5981,15 @@ func init() {
 	sc_GlTexStorage3D.Metadata = append(sc_GlTexStorage3D.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glTexStorage3D",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexStorage3DMultisample := schema.Of((*GlTexStorage3DMultisample)(nil).Class())
+	sc_GlTexStorage3DMultisample.Metadata = append(sc_GlTexStorage3DMultisample.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexStorage3DMultisample",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

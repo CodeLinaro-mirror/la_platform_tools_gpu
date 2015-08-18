@@ -1,0 +1,193 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDebugMessageCallback.xhtml","OpenGL ES 3.2")
+cmd void glDebugMessageCallback(GLDEBUGPROC callback, const void* userParam) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDebugMessageControl.xhtml","OpenGL ES 3.2")
+cmd void glDebugMessageControl(GLenum        source,
+                               GLenum        type,
+                               GLenum        severity,
+                               GLsizei       count,
+                               const GLuint* ids,
+                               GLboolean     enabled) {
+  minRequiredVersion(3, 2)
+  switch (source) {
+    case GL_DEBUG_SOURCE_API, GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_OTHER,
+        GL_DEBUG_SOURCE_SHADER_COMPILER, GL_DEBUG_SOURCE_THIRD_PARTY,
+        GL_DEBUG_SOURCE_WINDOW_SYSTEM_, GL_DONT_CARE: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(source)
+    }
+  }
+  switch (type) {
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR, GL_DEBUG_TYPE_ERROR, GL_DEBUG_TYPE_MARKER,
+        GL_DEBUG_TYPE_OTHER, GL_DEBUG_TYPE_PERFORMANCE, GL_DEBUG_TYPE_POP_GROUP,
+        GL_DEBUG_TYPE_PORTABILITY, GL_DEBUG_TYPE_PUSH_GROUP, GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR,
+        GL_DONT_CARE: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  switch (severity) {
+    case GL_DEBUG_SEVERITY_HIGH, GL_DEBUG_SEVERITY_LOW, GL_DEBUG_SEVERITY_MEDIUM,
+        GL_DEBUG_SEVERITY_NOTIFICATION, GL_DONT_CARE: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(severity)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDebugMessageInsert.xhtml","OpenGL ES 3.2")
+cmd void glDebugMessageInsert(GLenum        source,
+                              GLenum        type,
+                              GLuint        id,
+                              GLenum        severity,
+                              GLsizei       length,
+                              const GLchar* buf) {
+  minRequiredVersion(3, 2)
+  switch (source) {
+    case GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_THIRD_PARTY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(source)
+    }
+  }
+  switch (type) {
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR, GL_DEBUG_TYPE_ERROR, GL_DEBUG_TYPE_MARKER,
+        GL_DEBUG_TYPE_OTHER, GL_DEBUG_TYPE_PERFORMANCE, GL_DEBUG_TYPE_POP_GROUP,
+        GL_DEBUG_TYPE_PORTABILITY, GL_DEBUG_TYPE_PUSH_GROUP, GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  switch (severity) {
+    case GL_DEBUG_SEVERITY_HIGH, GL_DEBUG_SEVERITY_LOW, GL_DEBUG_SEVERITY_MEDIUM,
+        GL_DEBUG_SEVERITY_NOTIFICATION: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(severity)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetDebugMessageLog.xhtml","OpenGL ES 3.2")
+cmd GLuint glGetDebugMessageLog(GLuint   count,
+                                GLsizei  bufSize,
+                                GLenum*  sources,
+                                GLenum*  types,
+                                GLuint*  ids,
+                                GLenum*  severities,
+                                GLsizei* lengths,
+                                GLchar*  messageLog) {
+  minRequiredVersion(3, 2)
+  // TODO
+  return ?
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetObjectLabel.xhtml","OpenGL ES 3.2")
+cmd void glGetObjectLabel(GLenum   identifier,
+                          GLuint   name,
+                          GLsizei  bufSize,
+                          GLsizei* length,
+                          GLchar*  label) {
+  minRequiredVersion(3, 2)
+  switch (identifier) {
+    case GL_BUFFER, GL_FRAMEBUFFER, GL_PROGRAM, GL_PROGRAM_PIPELINE, GL_QUERY, GL_RENDERBUFFER,
+        GL_SAMPLER, GL_SHADER, GL_TEXTURE, GL_TRANSFORM_FEEDBACK, GL_VERTEX_ARRAY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(identifier)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetObjectPtrLabel.xhtml","OpenGL ES 3.2")
+cmd void glGetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, GLchar* label) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetPointerv.xhtml","OpenGL ES 3.2")
+cmd void glGetPointerv(GLenum pname, void** params) {
+  minRequiredVersion(3, 2)
+  switch (pname) {
+    case GL_DEBUG_CALLBACK_FUNCTION, GL_DEBUG_CALLBACK_USER_PARAM: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectLabel.xhtml","OpenGL ES 3.2")
+cmd void glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar* label) {
+  minRequiredVersion(3, 2)
+  switch (identifier) {
+    case GL_BUFFER, GL_FRAMEBUFFER, GL_PROGRAM, GL_PROGRAM_PIPELINE, GL_QUERY, GL_RENDERBUFFER,
+        GL_SAMPLER, GL_SHADER, GL_TEXTURE, GL_TRANSFORM_FEEDBACK, GL_VERTEX_ARRAY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(identifier)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectPtrLabel.xhtml","OpenGL ES 3.2")
+cmd void glObjectPtrLabel(const void* ptr, GLsizei length, const GLchar* label) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPopDebugGroup.xhtml","OpenGL ES 3.2")
+cmd void glPopDebugGroup() {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPushDebugGroup.xhtml","OpenGL ES 3.2")
+cmd void glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar* message) {
+  minRequiredVersion(3, 2)
+  switch (source) {
+    case GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_THIRD_PARTY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(source)
+    }
+  }
+  // TODO
+}
+

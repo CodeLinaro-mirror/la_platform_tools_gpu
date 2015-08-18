@@ -19,28 +19,43 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
 
 const indent = "  "
 
+type CommandSlice []*Command
+
+func (cmds CommandSlice) Len() int { return len(cmds) }
+func (cmds CommandSlice) Less(i, j int) bool {
+	return cmds[i].Name() < cmds[j].Name()
+}
+func (cmds CommandSlice) Swap(i, j int) {
+	cmd := cmds[i]
+	cmds[i] = cmds[j]
+	cmds[j] = cmd
+}
+
 // Generate the "gles.api" file from combined online and hand written data.
 func GenerateApi(reg *Registry, api KhronosAPI) {
 	files := map[string]*os.File{}
 	printEnums(createFile(files, "glenum"), reg, api, false)
 	printEnums(createFile(files, "glbitfield"), reg, api, true)
-	for _, cmd := range reg.Command {
+	commands := CommandSlice(reg.Command)
+	sort.Sort(commands)
+	for _, cmd := range commands {
 		versions := reg.GetVersions(api, cmd.Name())
 		extensions := reg.GetExtensions(api, cmd.Name())
 		if versions != nil {
-			printCommand(createFile(files, getCategory(cmd.Name())), reg, &cmd, api)
+			printCommand(createFile(files, getCategory(cmd.Name())), reg, cmd, api)
 		}
 		if extensions != nil {
 			if isInAndroidExtensionPack(extensions) {
-				printCommand(createFile(files, "android_extension_pack"), reg, &cmd, api)
+				printCommand(createFile(files, "android_extension_pack"), reg, cmd, api)
 			} else {
-				printCommand(createFile(files, "extensions"), reg, &cmd, api)
+				printCommand(createFile(files, "extensions"), reg, cmd, api)
 			}
 		}
 	}
@@ -87,15 +102,16 @@ func getCategory(cmdName string) string {
 		{"asynchronous_queries", ".*(Query|Queries).*"},
 		{"synchronization", ".*Sync.*"},
 		{"programs_and_shaders", ".*(Program|Shader|Compute|Uniform|MemoryBarrier|GetFragDataLocation|glValidateProgram|AttribLocation|GetActiveAttrib).*"},
-		{"framebuffer", ".*(Framebuffer|Renderbuffer).*|glReadBuffer|glReadPixels|gl(Color|Depth|Stencil)Mask|glClear.*|glInvalidate.*"},
+		{"framebuffer", ".*(Framebuffer|Renderbuffer).*|glReadBuffer|glRead(|n)Pixels|gl(Color|Depth|Stencil)Mask|glClear.*|glInvalidate.*"},
 		{"textures_and_samplers", ".*(Tex|Image|Sampler|PixelStorei|GenerateMipmap).*"},
 		{"transform_feedback", "gl(.*TransformFeedback.*)"},
 		{"vertex_arrays", ".*Vertex(Attrib|Buffer|Binding|Array).*"},
-		{"draw_commands", "glDraw.*"},
-		{"rasterization", "gl(GetMultisamplefv|LineWidth|FrontFace|CullFace|PolygonOffset|DepthRangef|Viewport)"},
+		{"draw_commands", "glDraw.*|glPatchParameteri|glPrimitiveBoundingBox"},
+		{"rasterization", "gl(GetMultisamplefv|LineWidth|FrontFace|CullFace|PolygonOffset|DepthRangef|Viewport|MinSampleShading)"},
 		{"fragment_operations", "glScissor|glSample.*|glStencil.*|glDepthFunc|glBlend.*"},
 		{"state_queries", "gl(GetBoolean|GetInteger|GetFloat|IsEnabled|GetString|GetInternalformativ).*"},
-		{"other", "glEnable|glDisable|glIsEnabled|glHint|glGetError|glFlush|glFinish"},
+		{"other", "glEnable|glDisable|glIsEnabled|glHint|glGetError|glFlush|glFinish|glGetGraphicsResetStatus"},
+		{"debug", "(glDebug.*)|(glGetDebug.*)|gl(|Get)Object(|Ptr)Label|glGetPointerv|gl(Push|Pop)DebugGroup"},
 		{"buffer_objects", ".*Buffer.*"},
 	}
 	for _, row := range table {
@@ -206,7 +222,6 @@ func renameType(cmdName string, paramIndex int, paramType, paramName string) str
 		paramName string // regexp
 		newType   string
 	}{
-		{"GLboolean", "glIs.*", "result", "bool"},
 		{"GLint", ".*Uniform.*", "location|result", "UniformLocation"},
 		{"GLuint", ".*", "program(|s)", "ProgramId"},
 		{"GLuint", ".*", "texture(|s)", "TextureId"},
@@ -230,7 +245,7 @@ func renameType(cmdName string, paramIndex int, paramType, paramName string) str
 		if row.oldType == glType &&
 			CompileRegexp("^(?:"+row.paramName+")$").MatchString(paramName) &&
 			CompileRegexp("^(?:"+row.cmdName+")$").MatchString(cmdName) {
-			// Replacte the GL type, but keep the original prefix and sufix
+			// Replace the GL type, but keep the original prefix and suffix
 			return paramType[:loc[0]] + row.newType + paramType[loc[1]:]
 		}
 	}
@@ -250,16 +265,21 @@ func printChecks(out io.Writer, cmd *Command, versions []Version) {
 			for _, version := range versions {
 				doc := DownloadDoc(version, cmd.Name())
 				var newCases []string
-				for _, value := range doc.Params[paramIndex].Accepts {
+				accepts := doc.Params[paramIndex].Accepts
+				if accepts == nil {
+					fmt.Printf("%s(%s): Missing accepted GLenum values for %s\n", cmd.Name(), version, paramName)
+					continue
+				}
+				for _, value := range accepts {
 					if _, ok := seen[value]; !ok {
 						newCases = append(newCases, value)
 					}
 					seen[value] = version
 				}
-				// Check that the set of accepted values is increasing from verions to version.
+				// Check that the set of accepted values is increasing from version to version.
 				for k, v := range seen {
 					if v != version {
-						fmt.Fprintf(out, indent+indent+"// TODO: %s seems to be removed in %v\n", k, version)
+						fmt.Printf("%s(%s): %s seems to be removed\n", cmd.Name(), version, k)
 					}
 				}
 				if newCases != nil {
@@ -357,44 +377,55 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 		fmt.Fprintf(out, "%s ", longSig)
 	}
 
-	// Print function body
-	fmt.Fprintf(out, "{\n")
-	for _, extension := range extensions {
-		fmt.Fprintf(out, indent+"requiresExtension(%s)\n", extension)
-	}
-	if len(extensions) > 1 {
-		fmt.Fprintf(out, indent+"// TODO: Multiple extensions\n")
-	}
-	printChecks(out, cmd, versions)
-	foundOldCode := false
+	// Try to find the old code
+	oldCode := ""
 	if oldApi != nil {
-		// Try to add the old code
-		for _, apiCmd := range oldApi.Commands {
+		for _, apiFunction := range oldApi.Functions {
+			apiCmd := apiFunction.AST
 			if apiCmd.Name.Value == cmd.Name() {
-				childs := apiCmd.Block.CST.Children
-				if len(childs) > 0 {
-					start := apiCmd.Block.CST.Children[0].Token()
-					end := apiCmd.Block.CST.Children[len(childs)-1].Token()
-					fmt.Fprintf(out, "%s", string(start.Source.Runes[start.End:end.Start]))
-					foundOldCode = true
-				}
+				token := apiCmd.Block.CST.Token()
+				oldCode = string(token.Source.Runes[token.Start+1 : token.End-1])
 			}
 		}
 	}
-	if !foundOldCode {
+
+	// Generate checks
+	checks := ""
+	{
+		out := &bytes.Buffer{}
+		for _, extension := range extensions {
+			fmt.Fprintf(out, indent+"requiresExtension(%s)\n", extension)
+		}
+		if len(extensions) > 1 {
+			fmt.Fprintf(out, indent+"// TODO: Multiple extensions\n")
+		}
+		printChecks(out, cmd, versions)
+		checks = string(out.Bytes())
+	}
+
+	// Print the method body
+	fmt.Fprintf(out, "{")
+	if strings.HasPrefix(oldCode, "\n"+checks) {
+		// The checks in the existing code match what we expect so keep the old code.
+		fmt.Fprintf(out, "%s", oldCode)
+	} else {
+		// Something is different.  Print both and sort it out manually.
+		fmt.Fprintf(out, "\n%s", checks)
 		fmt.Fprintf(out, indent+"// TODO\n")
 		if cmd.Proto.Type() != "void" {
 			fmt.Fprint(out, indent+"return ?\n")
 		}
+		fmt.Fprintf(out, "%s", oldCode)
 	}
-	fmt.Fprintf(out, "}\n")
-	fmt.Fprintf(out, "\n")
+	fmt.Fprintf(out, "}")
+	fmt.Fprintf(out, "\n\n")
 }
 
 // Rename parameters so that they match our old api file
 func oldParamName(cmdName string, paramIndex int, paramName string) string {
 	if oldApi != nil {
-		for _, cmd := range oldApi.Commands {
+		for _, apiFunction := range oldApi.Functions {
+			cmd := apiFunction.AST
 			if cmd.Name.Value == cmdName {
 				return cmd.Parameters[paramIndex].Name.Value
 			}
@@ -405,7 +436,8 @@ func oldParamName(cmdName string, paramIndex int, paramName string) string {
 
 func oldParamType(cmdName string, paramIndex int) (string, bool) {
 	if oldApi != nil {
-		for _, cmd := range oldApi.Commands {
+		for _, apiFunction := range oldApi.Functions {
+			cmd := apiFunction.AST
 			if cmd.Name.Value == cmdName {
 				token := cmd.Parameters[paramIndex].Type.Node().Token()
 				return string(token.Source.Runes[token.Start:token.End]), true

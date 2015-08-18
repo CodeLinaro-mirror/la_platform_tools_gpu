@@ -250,6 +250,12 @@ cmd void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean a
   ctx.Rasterizing.ColorMaskAlpha = alpha
 }
 
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glColorMask.xhtml","OpenGL ES 3.2")
+cmd void glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteFramebuffers.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteFramebuffers.xhtml","OpenGL ES 3.1")
@@ -305,6 +311,9 @@ cmd void glFramebufferParameteri(GLenum target, GLenum pname, GLint param) {
     case GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS, GL_FRAMEBUFFER_DEFAULT_HEIGHT,
         GL_FRAMEBUFFER_DEFAULT_SAMPLES, GL_FRAMEBUFFER_DEFAULT_WIDTH: {
       // version 3.1
+    }
+    case GL_FRAMEBUFFER_DEFAULT_LAYERS: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(pname)
@@ -375,6 +384,32 @@ cmd void glFramebufferRenderbuffer(GLenum         framebuffer_target,
   attachment.TextureLevel = 0
   attachment.CubeMapFace = GL_TEXTURE_CUBE_MAP_POSITIVE_X
   framebuffer.Attachments[framebuffer_attachment] = attachment
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFramebufferTexture.xhtml","OpenGL ES 3.2")
+cmd void glFramebufferTexture(GLenum target, GLenum attachment, TextureId texture, GLint level) {
+  minRequiredVersion(3, 2)
+  switch (target) {
+    case GL_DRAW_FRAMEBUFFER, GL_FRAMEBUFFER, GL_READ_FRAMEBUFFER: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (attachment) {
+    case GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT10, GL_COLOR_ATTACHMENT11,
+        GL_COLOR_ATTACHMENT12, GL_COLOR_ATTACHMENT13, GL_COLOR_ATTACHMENT14, GL_COLOR_ATTACHMENT15,
+        GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5,
+        GL_COLOR_ATTACHMENT6, GL_COLOR_ATTACHMENT7, GL_COLOR_ATTACHMENT8, GL_COLOR_ATTACHMENT9,
+        GL_DEPTH_ATTACHMENT, GL_DEPTH_STENCIL_ATTACHMENT, GL_STENCIL_ATTACHMENT: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(attachment)
+    }
+  }
+  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml","OpenGL ES 2.0")
@@ -569,6 +604,9 @@ cmd void glGetFramebufferAttachmentParameteriv(GLenum framebuffer_target,
         GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER: {
       minRequiredVersion(3, 0)
     }
+    case GL_FRAMEBUFFER_ATTACHMENT_LAYERED: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(parameter)
     }
@@ -607,6 +645,9 @@ cmd void glGetFramebufferParameteriv(GLenum target, GLenum pname, GLint* params)
     case GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS, GL_FRAMEBUFFER_DEFAULT_HEIGHT,
         GL_FRAMEBUFFER_DEFAULT_SAMPLES, GL_FRAMEBUFFER_DEFAULT_WIDTH: {
       // version 3.1
+    }
+    case GL_FRAMEBUFFER_DEFAULT_LAYERS: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(pname)
@@ -753,33 +794,56 @@ cmd void glReadPixels(GLint   x,
                       void*   data) {
   minRequiredVersion(2, 0)
   switch (format) {
-    case GL_ALPHA, GL_RGB, GL_RGBA: {
+    case GL_RGBA, GL_RGBA_INTEGER: {
       // version 2.0
-    }
-    case GL_LUMINANCE, GL_LUMINANCE_ALPHA, GL_RED, GL_RED_INTEGER, GL_RG, GL_RGBA_INTEGER,
-        GL_RGB_INTEGER, GL_RG_INTEGER: {
-      minRequiredVersion(3, 0)
     }
     default: {
       glErrorInvalidEnum(format)
     }
   }
   switch (type) {
-    case GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_5_5_5_1,
-        GL_UNSIGNED_SHORT_5_6_5: {
+    case GL_FLOAT, GL_INT, GL_UNSIGNED_BYTE, GL_UNSIGNED_INT: {
       // version 2.0
     }
-    case GL_BYTE, GL_FLOAT, GL_HALF_FLOAT, GL_INT, GL_UNSIGNED_INT,
-        GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_2_10_10_10_REV,
-        GL_UNSIGNED_INT_5_9_9_9_REV: {
-      minRequiredVersion(3, 0)
+    case GL_UNSIGNED_INT_2_10_10_10_REV: {
+      minRequiredVersion(3, 1)
     }
     default: {
       glErrorInvalidEnum(type)
     }
   }
+  // TODO
 
   write(data[0:imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)])
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glReadPixels.xhtml","OpenGL ES 3.2")
+cmd void glReadnPixels(GLint   x,
+                       GLint   y,
+                       GLsizei width,
+                       GLsizei height,
+                       GLenum  format,
+                       GLenum  type,
+                       GLsizei bufSize,
+                       void*   data) {
+  minRequiredVersion(3, 2)
+  switch (format) {
+    case GL_RGBA, GL_RGBA_INTEGER: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(format)
+    }
+  }
+  switch (type) {
+    case GL_FLOAT, GL_INT, GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_INT_2_10_10_10_REV: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml","OpenGL ES 2.0")

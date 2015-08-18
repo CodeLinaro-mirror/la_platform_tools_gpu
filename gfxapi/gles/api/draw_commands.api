@@ -24,6 +24,10 @@ cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei index_count) 
         GL_TRIANGLE_STRIP: {
       // version 2.0
     }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(draw_mode)
     }
@@ -44,6 +48,10 @@ cmd void glDrawArraysIndirect(GLenum mode, const void* indirect) {
         GL_TRIANGLE_STRIP: {
       // version 3.1
     }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(mode)
     }
@@ -61,6 +69,10 @@ cmd void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei 
     case GL_LINES, GL_LINE_LOOP, GL_LINE_STRIP, GL_POINTS, GL_TRIANGLES, GL_TRIANGLE_FAN,
         GL_TRIANGLE_STRIP: {
       // version 3.0
+    }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(mode)
@@ -92,6 +104,10 @@ cmd void glDrawElements(GLenum         draw_mode,
     case GL_LINES, GL_LINE_LOOP, GL_LINE_STRIP, GL_POINTS, GL_TRIANGLES, GL_TRIANGLE_FAN,
         GL_TRIANGLE_STRIP: {
       // version 2.0
+    }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(draw_mode)
@@ -138,6 +154,35 @@ cmd void glDrawElements(GLenum         draw_mode,
 }
 
 @DrawCall
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElementsBaseVertex.xhtml","OpenGL ES 3.2")
+cmd void glDrawElementsBaseVertex(GLenum      mode,
+                                  GLsizei     count,
+                                  GLenum      type,
+                                  const void* indices,
+                                  GLint       basevertex) {
+  minRequiredVersion(3, 2)
+  switch (mode) {
+    case GL_LINES, GL_LINES_ADJACENCY, GL_LINE_LOOP, GL_LINE_STRIP, GL_LINE_STRIP_ADJACENCY,
+        GL_PATCHES, GL_POINTS, GL_TRIANGLES, GL_TRIANGLES_ADJACENCY, GL_TRIANGLE_FAN,
+        GL_TRIANGLE_STRIP, GL_TRIANGLE_STRIP_ADJACENCY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(mode)
+    }
+  }
+  switch (type) {
+    case GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElementsIndirect.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElementsIndirect.xhtml","OpenGL ES 3.2")
 cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) {
@@ -146,6 +191,10 @@ cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) 
     case GL_LINES, GL_LINE_LOOP, GL_LINE_STRIP, GL_POINTS, GL_TRIANGLES, GL_TRIANGLE_FAN,
         GL_TRIANGLE_STRIP: {
       // version 3.1
+    }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(mode)
@@ -177,6 +226,10 @@ cmd void glDrawElementsInstanced(GLenum      mode,
         GL_TRIANGLE_STRIP: {
       // version 3.0
     }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(mode)
     }
@@ -184,6 +237,36 @@ cmd void glDrawElementsInstanced(GLenum      mode,
   switch (type) {
     case GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
       // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@DrawCall
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElementsInstancedBaseVertex.xhtml","OpenGL ES 3.2")
+cmd void glDrawElementsInstancedBaseVertex(GLenum      mode,
+                                           GLsizei     count,
+                                           GLenum      type,
+                                           const void* indices,
+                                           GLsizei     instancecount,
+                                           GLint       basevertex) {
+  minRequiredVersion(3, 2)
+  switch (mode) {
+    case GL_LINES, GL_LINES_ADJACENCY, GL_LINE_LOOP, GL_LINE_STRIP, GL_LINE_STRIP_ADJACENCY,
+        GL_PATCHES, GL_POINTS, GL_TRIANGLES, GL_TRIANGLES_ADJACENCY, GL_TRIANGLE_FAN,
+        GL_TRIANGLE_STRIP, GL_TRIANGLE_STRIP_ADJACENCY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(mode)
+    }
+  }
+  switch (type) {
+    case GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
+      // version 3.2
     }
     default: {
       glErrorInvalidEnum(type)
@@ -208,6 +291,10 @@ cmd void glDrawRangeElements(GLenum      mode,
         GL_TRIANGLE_STRIP: {
       // version 3.0
     }
+    case GL_LINES_ADJACENCY, GL_LINE_STRIP_ADJACENCY, GL_PATCHES, GL_TRIANGLES_ADJACENCY,
+        GL_TRIANGLE_STRIP_ADJACENCY: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(mode)
     }
@@ -222,3 +309,64 @@ cmd void glDrawRangeElements(GLenum      mode,
   }
   // TODO
 }
+
+@DrawCall
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawRangeElementsBaseVertex.xhtml","OpenGL ES 3.2")
+cmd void glDrawRangeElementsBaseVertex(GLenum      mode,
+                                       GLuint      start,
+                                       GLuint      end,
+                                       GLsizei     count,
+                                       GLenum      type,
+                                       const void* indices,
+                                       GLint       basevertex) {
+  minRequiredVersion(3, 2)
+  switch (mode) {
+    case GL_LINES, GL_LINES_ADJACENCY, GL_LINE_LOOP, GL_LINE_STRIP, GL_LINE_STRIP_ADJACENCY,
+        GL_PATCHES, GL_POINTS, GL_TRIANGLES, GL_TRIANGLES_ADJACENCY, GL_TRIANGLE_FAN,
+        GL_TRIANGLE_STRIP, GL_TRIANGLE_STRIP_ADJACENCY: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(mode)
+    }
+  }
+  switch (type) {
+    case GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@DrawCall
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPatchParameteri.xhtml","OpenGL ES 3.2")
+cmd void glPatchParameteri(GLenum pname, GLint value) {
+  minRequiredVersion(3, 2)
+  switch (pname) {
+    case GL_PATCH_VERTICES: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@DrawCall
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPrimitiveBoundingBox.xhtml","OpenGL ES 3.2")
+cmd void glPrimitiveBoundingBox(GLfloat minX,
+                                GLfloat minY,
+                                GLfloat minZ,
+                                GLfloat minW,
+                                GLfloat maxX,
+                                GLfloat maxY,
+                                GLfloat maxZ,
+                                GLfloat maxW) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+

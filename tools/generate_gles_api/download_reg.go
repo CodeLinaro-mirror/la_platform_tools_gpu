@@ -41,11 +41,11 @@ const GLES2API = KhronosAPI("gles2") // Includes GLES 3.0 and later
 func (v Version) String() string { return fmt.Sprintf("%s", string(v)) }
 
 type Registry struct {
-	Group     []Group            `xml:"groups>group"`
-	Enums     []Enums            `xml:"enums"`
-	Command   []Command          `xml:"commands>command"`
-	Feature   []Feature          `xml:"feature"`
-	Extension []ExtensionElement `xml:"extensions>extension"`
+	Group     []*Group            `xml:"groups>group"`
+	Enums     []*Enums            `xml:"enums"`
+	Command   []*Command          `xml:"commands>command"`
+	Feature   []*Feature          `xml:"feature"`
+	Extension []*ExtensionElement `xml:"extensions>extension"`
 }
 
 type NamedElementList []NamedElement
@@ -190,11 +190,13 @@ func (r *Registry) GetVersions(api KhronosAPI, name string) []Version {
 		case "1.0":
 			return []Version{"1.0", "1.1"}
 		case "2.0":
-			return []Version{"2.0", "3.0", "3.1"}
+			return []Version{"2.0", "3.0", "3.1", "3.2"}
 		case "3.0":
-			return []Version{"3.0", "3.1"}
+			return []Version{"3.0", "3.1", "3.2"}
 		case "3.1":
-			return []Version{"3.1"}
+			return []Version{"3.1", "3.2"}
+		case "3.2":
+			return []Version{"3.2"}
 		default:
 			panic(fmt.Errorf("Uknown GLES version: %v", version))
 		}

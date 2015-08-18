@@ -133,6 +133,7 @@ func init() {
 	Namespace.Add((*GlActiveShaderProgramEXT)(nil).Class())
 	Namespace.Add((*GlActiveTexture)(nil).Class())
 	Namespace.Add((*GlAlphaFuncQCOM)(nil).Class())
+	Namespace.Add((*GlApplyFramebufferAttachmentCMAAINTEL)(nil).Class())
 	Namespace.Add((*GlAttachShader)(nil).Class())
 	Namespace.Add((*GlBeginConditionalRenderNV)(nil).Class())
 	Namespace.Add((*GlBeginPerfMonitorAMD)(nil).Class())
@@ -155,19 +156,24 @@ func init() {
 	Namespace.Add((*GlBindVertexArray)(nil).Class())
 	Namespace.Add((*GlBindVertexArrayOES)(nil).Class())
 	Namespace.Add((*GlBindVertexBuffer)(nil).Class())
+	Namespace.Add((*GlBlendBarrier)(nil).Class())
 	Namespace.Add((*GlBlendBarrierKHR)(nil).Class())
 	Namespace.Add((*GlBlendBarrierNV)(nil).Class())
 	Namespace.Add((*GlBlendColor)(nil).Class())
 	Namespace.Add((*GlBlendEquation)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparate)(nil).Class())
+	Namespace.Add((*GlBlendEquationSeparatei)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparateiEXT)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparateiOES)(nil).Class())
+	Namespace.Add((*GlBlendEquationi)(nil).Class())
 	Namespace.Add((*GlBlendEquationiEXT)(nil).Class())
 	Namespace.Add((*GlBlendEquationiOES)(nil).Class())
 	Namespace.Add((*GlBlendFunc)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparate)(nil).Class())
+	Namespace.Add((*GlBlendFuncSeparatei)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparateiEXT)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparateiOES)(nil).Class())
+	Namespace.Add((*GlBlendFunci)(nil).Class())
 	Namespace.Add((*GlBlendFunciEXT)(nil).Class())
 	Namespace.Add((*GlBlendFunciOES)(nil).Class())
 	Namespace.Add((*GlBlendParameteriNV)(nil).Class())
@@ -190,6 +196,7 @@ func init() {
 	Namespace.Add((*GlClientWaitSync)(nil).Class())
 	Namespace.Add((*GlClientWaitSyncAPPLE)(nil).Class())
 	Namespace.Add((*GlColorMask)(nil).Class())
+	Namespace.Add((*GlColorMaski)(nil).Class())
 	Namespace.Add((*GlColorMaskiEXT)(nil).Class())
 	Namespace.Add((*GlColorMaskiOES)(nil).Class())
 	Namespace.Add((*GlCompileShader)(nil).Class())
@@ -202,6 +209,7 @@ func init() {
 	Namespace.Add((*GlCompressedTexSubImage3DOES)(nil).Class())
 	Namespace.Add((*GlCopyBufferSubData)(nil).Class())
 	Namespace.Add((*GlCopyBufferSubDataNV)(nil).Class())
+	Namespace.Add((*GlCopyImageSubData)(nil).Class())
 	Namespace.Add((*GlCopyImageSubDataEXT)(nil).Class())
 	Namespace.Add((*GlCopyImageSubDataOES)(nil).Class())
 	Namespace.Add((*GlCopyPathNV)(nil).Class())
@@ -263,6 +271,7 @@ func init() {
 	Namespace.Add((*GlDisable)(nil).Class())
 	Namespace.Add((*GlDisableDriverControlQCOM)(nil).Class())
 	Namespace.Add((*GlDisableVertexAttribArray)(nil).Class())
+	Namespace.Add((*GlDisablei)(nil).Class())
 	Namespace.Add((*GlDisableiEXT)(nil).Class())
 	Namespace.Add((*GlDisableiNV)(nil).Class())
 	Namespace.Add((*GlDisableiOES)(nil).Class())
@@ -282,18 +291,21 @@ func init() {
 	Namespace.Add((*GlDrawBuffersNV)(nil).Class())
 	Namespace.Add((*IndicesPointer)(nil).Class())
 	Namespace.Add((*GlDrawElements)(nil).Class())
+	Namespace.Add((*GlDrawElementsBaseVertex)(nil).Class())
 	Namespace.Add((*GlDrawElementsBaseVertexEXT)(nil).Class())
 	Namespace.Add((*GlDrawElementsBaseVertexOES)(nil).Class())
 	Namespace.Add((*GlDrawElementsIndirect)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstanced)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedANGLE)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedBaseInstanceEXT)(nil).Class())
+	Namespace.Add((*GlDrawElementsInstancedBaseVertex)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedBaseVertexBaseInstanceEXT)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedBaseVertexEXT)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedBaseVertexOES)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedEXT)(nil).Class())
 	Namespace.Add((*GlDrawElementsInstancedNV)(nil).Class())
 	Namespace.Add((*GlDrawRangeElements)(nil).Class())
+	Namespace.Add((*GlDrawRangeElementsBaseVertex)(nil).Class())
 	Namespace.Add((*GlDrawRangeElementsBaseVertexEXT)(nil).Class())
 	Namespace.Add((*GlDrawRangeElementsBaseVertexOES)(nil).Class())
 	Namespace.Add((*GlEGLImageTargetRenderbufferStorageOES)(nil).Class())
@@ -301,6 +313,7 @@ func init() {
 	Namespace.Add((*GlEnable)(nil).Class())
 	Namespace.Add((*GlEnableDriverControlQCOM)(nil).Class())
 	Namespace.Add((*GlEnableVertexAttribArray)(nil).Class())
+	Namespace.Add((*GlEnablei)(nil).Class())
 	Namespace.Add((*GlEnableiEXT)(nil).Class())
 	Namespace.Add((*GlEnableiNV)(nil).Class())
 	Namespace.Add((*GlEnableiOES)(nil).Class())
@@ -339,6 +352,7 @@ func init() {
 	Namespace.Add((*GlFramebufferParameteri)(nil).Class())
 	Namespace.Add((*GlFramebufferRenderbuffer)(nil).Class())
 	Namespace.Add((*GlFramebufferSampleLocationsfvNV)(nil).Class())
+	Namespace.Add((*GlFramebufferTexture)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2D)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2DMultisampleEXT)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2DMultisampleIMG)(nil).Class())
@@ -394,6 +408,7 @@ func init() {
 	Namespace.Add((*GlGetFragDataLocation)(nil).Class())
 	Namespace.Add((*GlGetFramebufferAttachmentParameteriv)(nil).Class())
 	Namespace.Add((*GlGetFramebufferParameteriv)(nil).Class())
+	Namespace.Add((*GlGetGraphicsResetStatus)(nil).Class())
 	Namespace.Add((*GlGetGraphicsResetStatusEXT)(nil).Class())
 	Namespace.Add((*GlGetGraphicsResetStatusKHR)(nil).Class())
 	Namespace.Add((*GlGetImageHandleNV)(nil).Class())
@@ -456,8 +471,10 @@ func init() {
 	Namespace.Add((*GlGetQueryiv)(nil).Class())
 	Namespace.Add((*GlGetQueryivEXT)(nil).Class())
 	Namespace.Add((*GlGetRenderbufferParameteriv)(nil).Class())
+	Namespace.Add((*GlGetSamplerParameterIiv)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIivEXT)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIivOES)(nil).Class())
+	Namespace.Add((*GlGetSamplerParameterIuiv)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIuivEXT)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIuivOES)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterfv)(nil).Class())
@@ -472,8 +489,10 @@ func init() {
 	Namespace.Add((*GlGetSyncivAPPLE)(nil).Class())
 	Namespace.Add((*GlGetTexLevelParameterfv)(nil).Class())
 	Namespace.Add((*GlGetTexLevelParameteriv)(nil).Class())
+	Namespace.Add((*GlGetTexParameterIiv)(nil).Class())
 	Namespace.Add((*GlGetTexParameterIivEXT)(nil).Class())
 	Namespace.Add((*GlGetTexParameterIivOES)(nil).Class())
+	Namespace.Add((*GlGetTexParameterIuiv)(nil).Class())
 	Namespace.Add((*GlGetTexParameterIuivEXT)(nil).Class())
 	Namespace.Add((*GlGetTexParameterIuivOES)(nil).Class())
 	Namespace.Add((*GlGetTexParameterfv)(nil).Class())
@@ -493,10 +512,13 @@ func init() {
 	Namespace.Add((*GlGetVertexAttribPointerv)(nil).Class())
 	Namespace.Add((*GlGetVertexAttribfv)(nil).Class())
 	Namespace.Add((*GlGetVertexAttribiv)(nil).Class())
+	Namespace.Add((*GlGetnUniformfv)(nil).Class())
 	Namespace.Add((*GlGetnUniformfvEXT)(nil).Class())
 	Namespace.Add((*GlGetnUniformfvKHR)(nil).Class())
+	Namespace.Add((*GlGetnUniformiv)(nil).Class())
 	Namespace.Add((*GlGetnUniformivEXT)(nil).Class())
 	Namespace.Add((*GlGetnUniformivKHR)(nil).Class())
+	Namespace.Add((*GlGetnUniformuiv)(nil).Class())
 	Namespace.Add((*GlGetnUniformuivKHR)(nil).Class())
 	Namespace.Add((*GlHint)(nil).Class())
 	Namespace.Add((*GlInsertEventMarkerEXT)(nil).Class())
@@ -505,6 +527,7 @@ func init() {
 	Namespace.Add((*GlInvalidateSubFramebuffer)(nil).Class())
 	Namespace.Add((*GlIsBuffer)(nil).Class())
 	Namespace.Add((*GlIsEnabled)(nil).Class())
+	Namespace.Add((*GlIsEnabledi)(nil).Class())
 	Namespace.Add((*GlIsEnablediEXT)(nil).Class())
 	Namespace.Add((*GlIsEnablediNV)(nil).Class())
 	Namespace.Add((*GlIsEnablediOES)(nil).Class())
@@ -547,6 +570,7 @@ func init() {
 	Namespace.Add((*GlMatrixMultTranspose3x3fNV)(nil).Class())
 	Namespace.Add((*GlMemoryBarrier)(nil).Class())
 	Namespace.Add((*GlMemoryBarrierByRegion)(nil).Class())
+	Namespace.Add((*GlMinSampleShading)(nil).Class())
 	Namespace.Add((*GlMinSampleShadingOES)(nil).Class())
 	Namespace.Add((*GlMultiDrawArraysEXT)(nil).Class())
 	Namespace.Add((*GlMultiDrawArraysIndirectEXT)(nil).Class())
@@ -558,6 +582,7 @@ func init() {
 	Namespace.Add((*GlNamedFramebufferSampleLocationsfvNV)(nil).Class())
 	Namespace.Add((*GlObjectLabelKHR)(nil).Class())
 	Namespace.Add((*GlObjectPtrLabelKHR)(nil).Class())
+	Namespace.Add((*GlPatchParameteri)(nil).Class())
 	Namespace.Add((*GlPatchParameteriEXT)(nil).Class())
 	Namespace.Add((*GlPatchParameteriOES)(nil).Class())
 	Namespace.Add((*GlPathCommandsNV)(nil).Class())
@@ -585,6 +610,7 @@ func init() {
 	Namespace.Add((*GlPolygonOffset)(nil).Class())
 	Namespace.Add((*GlPopDebugGroupKHR)(nil).Class())
 	Namespace.Add((*GlPopGroupMarkerEXT)(nil).Class())
+	Namespace.Add((*GlPrimitiveBoundingBox)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBoxEXT)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBoxOES)(nil).Class())
 	Namespace.Add((*GlProgramBinary)(nil).Class())
@@ -668,6 +694,7 @@ func init() {
 	Namespace.Add((*GlReadBufferIndexedEXT)(nil).Class())
 	Namespace.Add((*GlReadBufferNV)(nil).Class())
 	Namespace.Add((*GlReadPixels)(nil).Class())
+	Namespace.Add((*GlReadnPixels)(nil).Class())
 	Namespace.Add((*GlReadnPixelsEXT)(nil).Class())
 	Namespace.Add((*GlReadnPixelsKHR)(nil).Class())
 	Namespace.Add((*GlReleaseShaderCompiler)(nil).Class())
@@ -683,8 +710,10 @@ func init() {
 	Namespace.Add((*GlResumeTransformFeedback)(nil).Class())
 	Namespace.Add((*GlSampleCoverage)(nil).Class())
 	Namespace.Add((*GlSampleMaski)(nil).Class())
+	Namespace.Add((*GlSamplerParameterIiv)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIivEXT)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIivOES)(nil).Class())
+	Namespace.Add((*GlSamplerParameterIuiv)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIuivEXT)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIuivOES)(nil).Class())
 	Namespace.Add((*GlSamplerParameterf)(nil).Class())
@@ -717,16 +746,20 @@ func init() {
 	Namespace.Add((*GlStencilThenCoverStrokePathNV)(nil).Class())
 	Namespace.Add((*GlSubpixelPrecisionBiasNV)(nil).Class())
 	Namespace.Add((*GlTestFenceNV)(nil).Class())
+	Namespace.Add((*GlTexBuffer)(nil).Class())
 	Namespace.Add((*GlTexBufferEXT)(nil).Class())
 	Namespace.Add((*GlTexBufferOES)(nil).Class())
+	Namespace.Add((*GlTexBufferRange)(nil).Class())
 	Namespace.Add((*GlTexBufferRangeEXT)(nil).Class())
 	Namespace.Add((*GlTexBufferRangeOES)(nil).Class())
 	Namespace.Add((*GlTexImage2D)(nil).Class())
 	Namespace.Add((*GlTexImage3D)(nil).Class())
 	Namespace.Add((*GlTexImage3DOES)(nil).Class())
 	Namespace.Add((*GlTexPageCommitmentARB)(nil).Class())
+	Namespace.Add((*GlTexParameterIiv)(nil).Class())
 	Namespace.Add((*GlTexParameterIivEXT)(nil).Class())
 	Namespace.Add((*GlTexParameterIivOES)(nil).Class())
+	Namespace.Add((*GlTexParameterIuiv)(nil).Class())
 	Namespace.Add((*GlTexParameterIuivEXT)(nil).Class())
 	Namespace.Add((*GlTexParameterIuivOES)(nil).Class())
 	Namespace.Add((*GlTexParameterf)(nil).Class())
@@ -739,6 +772,7 @@ func init() {
 	Namespace.Add((*GlTexStorage2DMultisample)(nil).Class())
 	Namespace.Add((*GlTexStorage3D)(nil).Class())
 	Namespace.Add((*GlTexStorage3DEXT)(nil).Class())
+	Namespace.Add((*GlTexStorage3DMultisample)(nil).Class())
 	Namespace.Add((*GlTexStorage3DMultisampleOES)(nil).Class())
 	Namespace.Add((*GlTexSubImage2D)(nil).Class())
 	Namespace.Add((*GlTexSubImage3D)(nil).Class())
@@ -1017,6 +1051,7 @@ var (
 	binaryIDGlActiveShaderProgramEXT                         = binary.ID{0x29, 0x1c, 0x46, 0x6e, 0xed, 0x88, 0x1d, 0x7b, 0x97, 0x0a, 0x6d, 0xe6, 0xa3, 0xb2, 0x47, 0x87, 0xef, 0xbf, 0xb2, 0x8a}
 	binaryIDGlActiveTexture                                  = binary.ID{0xd4, 0xe8, 0xee, 0x4a, 0x90, 0xf5, 0x2d, 0x73, 0x2d, 0x28, 0x19, 0x31, 0x46, 0x5d, 0x2e, 0xac, 0x53, 0x19, 0x86, 0x54}
 	binaryIDGlAlphaFuncQCOM                                  = binary.ID{0x01, 0x70, 0x2e, 0x94, 0xd9, 0x1a, 0xd4, 0x61, 0x35, 0x08, 0x10, 0xf3, 0x32, 0xa8, 0x58, 0xe7, 0xfb, 0x1f, 0x7e, 0xbe}
+	binaryIDGlApplyFramebufferAttachmentCMAAINTEL            = binary.ID{0xe9, 0xb1, 0x90, 0x3f, 0xd5, 0x8c, 0x26, 0x62, 0x05, 0x23, 0x81, 0x52, 0x88, 0xfe, 0x31, 0x9f, 0xf4, 0x0b, 0x93, 0xb3}
 	binaryIDGlAttachShader                                   = binary.ID{0x25, 0x23, 0xee, 0xce, 0x3c, 0x37, 0xb6, 0x03, 0x61, 0xc4, 0xb6, 0xbf, 0x06, 0x38, 0xb9, 0x7f, 0x78, 0x85, 0xee, 0x77}
 	binaryIDGlBeginConditionalRenderNV                       = binary.ID{0x4d, 0xd5, 0xba, 0x3e, 0xae, 0x81, 0x13, 0x36, 0x9d, 0xa3, 0xcc, 0xb2, 0x1d, 0x78, 0xa9, 0x84, 0xda, 0x08, 0x45, 0xe2}
 	binaryIDGlBeginPerfMonitorAMD                            = binary.ID{0x12, 0x48, 0xf0, 0xb8, 0xe0, 0xd5, 0xfa, 0x7d, 0x53, 0xad, 0x47, 0x97, 0x5f, 0x7f, 0x74, 0x7f, 0xec, 0x13, 0xf5, 0xc2}
@@ -1039,19 +1074,24 @@ var (
 	binaryIDGlBindVertexArray                                = binary.ID{0x23, 0x61, 0xb4, 0x30, 0xbe, 0x1c, 0x45, 0xfe, 0x34, 0x7d, 0xaf, 0x2f, 0xb9, 0xf3, 0x4e, 0xef, 0xa3, 0x25, 0x61, 0x46}
 	binaryIDGlBindVertexArrayOES                             = binary.ID{0x2c, 0x88, 0xbc, 0x5d, 0x79, 0xf5, 0x34, 0x2a, 0x35, 0xca, 0x72, 0x5c, 0xcf, 0x78, 0xee, 0x4b, 0xe5, 0x5f, 0xc8, 0xb4}
 	binaryIDGlBindVertexBuffer                               = binary.ID{0x9d, 0x40, 0xb2, 0xc5, 0x1e, 0xd5, 0x6c, 0x58, 0x27, 0x13, 0x3e, 0x0d, 0xd3, 0x53, 0x7b, 0xba, 0xb7, 0x89, 0xf6, 0x3a}
+	binaryIDGlBlendBarrier                                   = binary.ID{0x10, 0x69, 0xf8, 0x2b, 0xac, 0x7a, 0xc9, 0xdb, 0xd8, 0x60, 0x93, 0x51, 0x94, 0x51, 0x8d, 0xe0, 0x36, 0xff, 0x74, 0x4c}
 	binaryIDGlBlendBarrierKHR                                = binary.ID{0xad, 0x82, 0x54, 0xb5, 0x44, 0x3d, 0x10, 0x4b, 0xb0, 0x92, 0x87, 0x8a, 0x4d, 0x63, 0x42, 0x1e, 0x5d, 0xe3, 0x83, 0xb5}
 	binaryIDGlBlendBarrierNV                                 = binary.ID{0x88, 0x13, 0x6f, 0x0f, 0xfd, 0x69, 0x5c, 0x6c, 0x59, 0xbb, 0xaf, 0xfc, 0x54, 0xb6, 0x1f, 0xea, 0x5c, 0x3b, 0x58, 0x65}
 	binaryIDGlBlendColor                                     = binary.ID{0x67, 0x3c, 0x0a, 0xe9, 0x85, 0x95, 0x30, 0xb5, 0xaf, 0x96, 0xd3, 0x43, 0xed, 0x97, 0xff, 0xd4, 0xf6, 0x14, 0x21, 0xd7}
 	binaryIDGlBlendEquation                                  = binary.ID{0x4a, 0xbd, 0xaa, 0x8a, 0x2f, 0x42, 0xdc, 0xff, 0x13, 0x37, 0xfb, 0xb1, 0x2a, 0x25, 0x1d, 0x32, 0x36, 0x31, 0x12, 0xe0}
 	binaryIDGlBlendEquationSeparate                          = binary.ID{0x3e, 0x0d, 0xbd, 0xc2, 0x0b, 0x0a, 0x81, 0xd4, 0x58, 0xa4, 0x37, 0x7d, 0x58, 0xdc, 0x4f, 0xcc, 0x5b, 0xa6, 0x09, 0xf4}
+	binaryIDGlBlendEquationSeparatei                         = binary.ID{0xa0, 0x50, 0x7e, 0x2f, 0xaa, 0x35, 0xfd, 0x06, 0x2c, 0x5d, 0x74, 0xce, 0x50, 0x1c, 0xcb, 0xd9, 0xbd, 0xa8, 0xb3, 0x4b}
 	binaryIDGlBlendEquationSeparateiEXT                      = binary.ID{0xf3, 0x45, 0x3b, 0x0f, 0x05, 0x52, 0x80, 0x2d, 0x3e, 0xa6, 0xd1, 0x1f, 0xac, 0x46, 0x48, 0x15, 0x1c, 0x06, 0xcc, 0x55}
 	binaryIDGlBlendEquationSeparateiOES                      = binary.ID{0x4a, 0xe5, 0x2d, 0x1d, 0x21, 0xc7, 0xf6, 0x3f, 0xbd, 0x11, 0x55, 0xa4, 0x6c, 0xdb, 0xb0, 0xbd, 0xb6, 0x99, 0x7d, 0x23}
+	binaryIDGlBlendEquationi                                 = binary.ID{0x8f, 0x4b, 0x62, 0xb6, 0x3c, 0x0b, 0xed, 0xef, 0xaf, 0x68, 0x1a, 0x36, 0x2e, 0x0f, 0x28, 0xf0, 0x8c, 0x77, 0xd5, 0xc8}
 	binaryIDGlBlendEquationiEXT                              = binary.ID{0x6e, 0x7e, 0x7e, 0x2d, 0x2a, 0x0f, 0x67, 0x48, 0xeb, 0x35, 0x4a, 0x3e, 0x2d, 0xfe, 0xf5, 0x4e, 0xc1, 0xd6, 0xc6, 0xa5}
 	binaryIDGlBlendEquationiOES                              = binary.ID{0x46, 0x89, 0x07, 0x45, 0xab, 0x6f, 0x7f, 0x81, 0x2a, 0x1d, 0x62, 0xfe, 0x98, 0x1b, 0xef, 0x0f, 0x6a, 0xf3, 0xcd, 0x34}
 	binaryIDGlBlendFunc                                      = binary.ID{0xb8, 0x52, 0x83, 0x14, 0x14, 0xff, 0x0c, 0xad, 0xe0, 0x0f, 0x97, 0xb6, 0x07, 0x6c, 0x80, 0xd4, 0x78, 0xf1, 0xf0, 0x91}
 	binaryIDGlBlendFuncSeparate                              = binary.ID{0x66, 0xd2, 0xff, 0xf8, 0xf7, 0x95, 0xda, 0x57, 0x16, 0xfb, 0x01, 0x2c, 0x5f, 0x29, 0x53, 0xd5, 0xf7, 0xd0, 0xc0, 0xd2}
+	binaryIDGlBlendFuncSeparatei                             = binary.ID{0x36, 0xfd, 0xfb, 0x4e, 0x1b, 0x21, 0x89, 0x7d, 0x89, 0x42, 0x2f, 0xa1, 0xe4, 0x88, 0xac, 0x65, 0xd5, 0x26, 0x89, 0xdd}
 	binaryIDGlBlendFuncSeparateiEXT                          = binary.ID{0x8e, 0x9e, 0x4c, 0xf4, 0x1b, 0x8a, 0x3e, 0xdf, 0x02, 0x8a, 0x9f, 0x13, 0x8e, 0xe6, 0xbf, 0x13, 0xf8, 0x76, 0x02, 0x6b}
 	binaryIDGlBlendFuncSeparateiOES                          = binary.ID{0x2c, 0x76, 0x35, 0x73, 0x1d, 0xd7, 0xb3, 0xc1, 0x3e, 0x36, 0xb8, 0xe5, 0x38, 0x47, 0x5e, 0xdc, 0x05, 0x26, 0x2a, 0x33}
+	binaryIDGlBlendFunci                                     = binary.ID{0x16, 0x4d, 0x1f, 0xcd, 0x52, 0x67, 0x50, 0x5a, 0x97, 0xa5, 0xd0, 0x07, 0xae, 0x7b, 0xbf, 0x4b, 0x34, 0xe0, 0x8a, 0xeb}
 	binaryIDGlBlendFunciEXT                                  = binary.ID{0x27, 0xc9, 0xc1, 0x56, 0x96, 0xae, 0x08, 0xa5, 0x85, 0x80, 0x37, 0x7f, 0x12, 0x66, 0x30, 0x07, 0x9d, 0x63, 0xf6, 0xc7}
 	binaryIDGlBlendFunciOES                                  = binary.ID{0xc9, 0x53, 0x38, 0x83, 0x1e, 0x92, 0x13, 0xb6, 0x19, 0x21, 0xd3, 0xf3, 0x64, 0x74, 0x4c, 0xdd, 0x9f, 0x49, 0x17, 0xb3}
 	binaryIDGlBlendParameteriNV                              = binary.ID{0x48, 0x2f, 0xa6, 0x47, 0x3c, 0x55, 0xe9, 0x34, 0xb2, 0x7d, 0x97, 0x4d, 0x20, 0x49, 0x54, 0xa4, 0x7f, 0x18, 0xdd, 0xf3}
@@ -1074,6 +1114,7 @@ var (
 	binaryIDGlClientWaitSync                                 = binary.ID{0x0b, 0x68, 0xeb, 0x64, 0xf5, 0xef, 0x38, 0xd0, 0x9f, 0xbf, 0x73, 0x4c, 0xf2, 0xdd, 0xc5, 0xe5, 0xd8, 0xd7, 0xe1, 0x84}
 	binaryIDGlClientWaitSyncAPPLE                            = binary.ID{0x66, 0xc0, 0xa1, 0x35, 0xec, 0x45, 0x5d, 0xed, 0x8d, 0x2e, 0x77, 0x60, 0x07, 0xde, 0x10, 0x29, 0x7b, 0x8f, 0x5a, 0xa8}
 	binaryIDGlColorMask                                      = binary.ID{0x08, 0x8e, 0x3b, 0xb6, 0x7d, 0x88, 0x07, 0x6c, 0x0b, 0x69, 0xba, 0xf5, 0x56, 0x97, 0xc3, 0xde, 0x2a, 0xa6, 0xc7, 0x5b}
+	binaryIDGlColorMaski                                     = binary.ID{0x5c, 0xd5, 0x40, 0xfd, 0xb5, 0xf0, 0x99, 0x23, 0xa7, 0x39, 0xb4, 0x70, 0x0c, 0x66, 0x0f, 0xb3, 0xfb, 0xbb, 0x81, 0x5b}
 	binaryIDGlColorMaskiEXT                                  = binary.ID{0xd8, 0xb9, 0x63, 0xa6, 0xb9, 0xe9, 0xbf, 0xba, 0xc9, 0x91, 0x91, 0x63, 0xa1, 0x78, 0x8c, 0xa4, 0x0f, 0x1c, 0x17, 0x95}
 	binaryIDGlColorMaskiOES                                  = binary.ID{0x22, 0xb2, 0xa8, 0x79, 0x8c, 0x2b, 0x70, 0x10, 0x7c, 0xc2, 0x79, 0xf6, 0xce, 0xe5, 0x03, 0x13, 0xd8, 0x40, 0x22, 0xc2}
 	binaryIDGlCompileShader                                  = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
@@ -1086,6 +1127,7 @@ var (
 	binaryIDGlCompressedTexSubImage3DOES                     = binary.ID{0xeb, 0x92, 0x20, 0x2a, 0xf2, 0x7a, 0x0c, 0x41, 0xa1, 0x69, 0x03, 0x9d, 0x60, 0x3a, 0xeb, 0xd1, 0x38, 0x3a, 0x60, 0x01}
 	binaryIDGlCopyBufferSubData                              = binary.ID{0xb9, 0x7d, 0x45, 0x29, 0x67, 0x61, 0x18, 0x61, 0x5a, 0xcd, 0x30, 0x4f, 0x9a, 0xaa, 0x35, 0x6d, 0xfe, 0x59, 0xc7, 0x7b}
 	binaryIDGlCopyBufferSubDataNV                            = binary.ID{0xbd, 0x1a, 0x1d, 0x49, 0x41, 0x26, 0x00, 0x1f, 0xe0, 0x2e, 0x25, 0x72, 0x81, 0xe2, 0x38, 0x7e, 0x1f, 0xcb, 0xfb, 0xb1}
+	binaryIDGlCopyImageSubData                               = binary.ID{0x66, 0xe7, 0x86, 0xbc, 0x27, 0xab, 0x1a, 0xd1, 0xd7, 0xc2, 0x63, 0xce, 0x37, 0xd7, 0x08, 0x0e, 0x0a, 0xe8, 0x72, 0xd5}
 	binaryIDGlCopyImageSubDataEXT                            = binary.ID{0xd7, 0xca, 0xe8, 0x88, 0x23, 0xde, 0x41, 0x13, 0x76, 0x93, 0x10, 0xc4, 0x1f, 0x00, 0xe7, 0x14, 0x90, 0x76, 0xe4, 0x4b}
 	binaryIDGlCopyImageSubDataOES                            = binary.ID{0x73, 0xa7, 0xa4, 0x84, 0x0e, 0x79, 0xfd, 0x17, 0xac, 0x8f, 0x38, 0x25, 0x61, 0x99, 0x0f, 0x12, 0xc5, 0xca, 0x9b, 0xde}
 	binaryIDGlCopyPathNV                                     = binary.ID{0x6f, 0xb0, 0x71, 0xa2, 0x14, 0xbb, 0x6c, 0xd2, 0x68, 0x92, 0x9f, 0x83, 0xc1, 0x6c, 0x0b, 0x16, 0xc9, 0xf7, 0x81, 0x71}
@@ -1147,6 +1189,7 @@ var (
 	binaryIDGlDisable                                        = binary.ID{0x8b, 0xbf, 0x48, 0xf5, 0x2a, 0xf6, 0x13, 0x86, 0x86, 0xfb, 0x54, 0x21, 0x35, 0x6d, 0x05, 0x45, 0x9b, 0xcb, 0x6e, 0x19}
 	binaryIDGlDisableDriverControlQCOM                       = binary.ID{0x60, 0x0a, 0x65, 0x63, 0x9b, 0x16, 0x0c, 0x64, 0x1c, 0x7c, 0xda, 0xfd, 0x4c, 0x72, 0x75, 0x61, 0x75, 0x0a, 0xef, 0x8b}
 	binaryIDGlDisableVertexAttribArray                       = binary.ID{0x0e, 0x71, 0x56, 0x6a, 0x0a, 0x8d, 0xc7, 0x6b, 0x76, 0x8f, 0x05, 0xca, 0xeb, 0x95, 0x01, 0x46, 0x44, 0xf6, 0xf3, 0x52}
+	binaryIDGlDisablei                                       = binary.ID{0x22, 0xf1, 0x92, 0x61, 0xff, 0x53, 0x86, 0xfa, 0x3d, 0x3b, 0xbc, 0x13, 0x24, 0xea, 0x2b, 0x87, 0x31, 0x67, 0x43, 0xd9}
 	binaryIDGlDisableiEXT                                    = binary.ID{0xf9, 0x9b, 0xa8, 0xc9, 0x78, 0xee, 0x90, 0x5f, 0x8a, 0xe8, 0x57, 0x69, 0x42, 0xb3, 0x00, 0xb8, 0xce, 0xc7, 0x6b, 0xfb}
 	binaryIDGlDisableiNV                                     = binary.ID{0xce, 0x59, 0xfe, 0x77, 0x22, 0x27, 0xbc, 0xaa, 0x82, 0x13, 0xb7, 0x31, 0x4a, 0x5c, 0xae, 0x67, 0x18, 0xba, 0x51, 0x08}
 	binaryIDGlDisableiOES                                    = binary.ID{0x8a, 0x69, 0x7e, 0xd5, 0x38, 0xd2, 0x4e, 0x13, 0x55, 0x7f, 0x34, 0x01, 0xa5, 0x44, 0x98, 0x92, 0xe3, 0x1a, 0xb4, 0xfa}
@@ -1166,18 +1209,21 @@ var (
 	binaryIDGlDrawBuffersNV                                  = binary.ID{0xc6, 0x1b, 0x87, 0xe0, 0x77, 0x2c, 0xb7, 0x3d, 0x12, 0x20, 0xc1, 0xe0, 0x5a, 0xca, 0x0a, 0x1d, 0x1c, 0x3d, 0xf6, 0x68}
 	binaryIDIndicesPointer                                   = binary.ID{0x7e, 0xb8, 0x8d, 0x27, 0x89, 0x30, 0x52, 0x1b, 0x7e, 0x06, 0x18, 0xa0, 0x43, 0x8e, 0x88, 0xaa, 0x0c, 0xe6, 0x72, 0x10}
 	binaryIDGlDrawElements                                   = binary.ID{0xc3, 0x58, 0xa6, 0xb5, 0xe7, 0x4e, 0xbd, 0x61, 0xec, 0x16, 0x06, 0xd9, 0x56, 0x28, 0x29, 0x63, 0xd7, 0x60, 0x26, 0xe0}
+	binaryIDGlDrawElementsBaseVertex                         = binary.ID{0x7b, 0xcf, 0x5b, 0x52, 0xeb, 0x7f, 0xfd, 0x8f, 0xf8, 0x1f, 0x8f, 0xdb, 0xf2, 0x13, 0xb0, 0x7f, 0x07, 0x42, 0x8d, 0xcb}
 	binaryIDGlDrawElementsBaseVertexEXT                      = binary.ID{0xc6, 0x01, 0x2e, 0xdc, 0x7b, 0x58, 0xf2, 0xb8, 0x08, 0x31, 0x59, 0x03, 0xe4, 0x97, 0x8b, 0x6b, 0x18, 0xe8, 0x31, 0xc7}
 	binaryIDGlDrawElementsBaseVertexOES                      = binary.ID{0xbe, 0x27, 0x39, 0x73, 0xfa, 0x5b, 0xd9, 0x8b, 0x5e, 0xd7, 0x41, 0x62, 0x63, 0x34, 0xc0, 0x0a, 0x19, 0x33, 0x8a, 0x3d}
 	binaryIDGlDrawElementsIndirect                           = binary.ID{0xd5, 0x00, 0xcf, 0x09, 0x73, 0x64, 0x3c, 0x94, 0x29, 0xe9, 0x2d, 0x19, 0x51, 0x2e, 0x90, 0x74, 0xd8, 0x45, 0xfa, 0x99}
 	binaryIDGlDrawElementsInstanced                          = binary.ID{0x91, 0xe0, 0xbc, 0x3c, 0xfd, 0x58, 0x09, 0x0c, 0xaa, 0x9f, 0xc2, 0xe0, 0xd0, 0x66, 0xfa, 0x0c, 0x14, 0x72, 0x88, 0xa1}
 	binaryIDGlDrawElementsInstancedANGLE                     = binary.ID{0x83, 0x76, 0x1f, 0xd9, 0x3f, 0xed, 0x34, 0x62, 0x16, 0xcf, 0x29, 0x29, 0x19, 0x3c, 0x6c, 0xe3, 0x6c, 0xd3, 0x26, 0xc2}
 	binaryIDGlDrawElementsInstancedBaseInstanceEXT           = binary.ID{0x3d, 0xde, 0x19, 0x3a, 0xb5, 0x36, 0x1b, 0x45, 0x80, 0x89, 0xdc, 0x02, 0x58, 0x66, 0xcf, 0x60, 0x51, 0x5b, 0xb7, 0xb6}
+	binaryIDGlDrawElementsInstancedBaseVertex                = binary.ID{0xf6, 0x6c, 0xb5, 0xcd, 0x59, 0xc2, 0x7f, 0x89, 0x91, 0x80, 0xe2, 0x2c, 0x8a, 0xd3, 0x0c, 0x85, 0x32, 0x54, 0x00, 0xde}
 	binaryIDGlDrawElementsInstancedBaseVertexBaseInstanceEXT = binary.ID{0x5b, 0xfd, 0x0a, 0x10, 0x30, 0x0e, 0xb7, 0x0e, 0xbd, 0xdd, 0x9f, 0x38, 0x86, 0xb0, 0xf4, 0xd2, 0x45, 0x92, 0x56, 0xed}
 	binaryIDGlDrawElementsInstancedBaseVertexEXT             = binary.ID{0xba, 0xd4, 0x6d, 0x5d, 0xf5, 0x36, 0xe1, 0xe1, 0xd8, 0x3c, 0x37, 0x9b, 0x3c, 0xc0, 0x0a, 0xc5, 0x9b, 0x2d, 0x3f, 0x37}
 	binaryIDGlDrawElementsInstancedBaseVertexOES             = binary.ID{0x12, 0xc0, 0xab, 0x32, 0x0e, 0xae, 0x13, 0x66, 0xd8, 0xfc, 0x60, 0x52, 0xbc, 0x4c, 0x9e, 0x27, 0xd3, 0xc9, 0x08, 0xc1}
 	binaryIDGlDrawElementsInstancedEXT                       = binary.ID{0x0d, 0x88, 0x26, 0x49, 0xf0, 0x60, 0x4e, 0xb6, 0x87, 0xe0, 0x20, 0xff, 0x37, 0xf7, 0x5e, 0x1c, 0xcc, 0x64, 0xd8, 0x79}
 	binaryIDGlDrawElementsInstancedNV                        = binary.ID{0x93, 0xc6, 0x5d, 0xbb, 0x00, 0x86, 0xef, 0x5b, 0x74, 0xd3, 0xaf, 0xb0, 0xd0, 0x0b, 0x5d, 0x39, 0x3e, 0x12, 0x83, 0x46}
 	binaryIDGlDrawRangeElements                              = binary.ID{0xd9, 0x92, 0x7c, 0x94, 0x49, 0xdf, 0x20, 0x5c, 0x2f, 0xc4, 0x45, 0x7f, 0x52, 0xaf, 0x90, 0xc6, 0xc6, 0xf3, 0x05, 0xfc}
+	binaryIDGlDrawRangeElementsBaseVertex                    = binary.ID{0x80, 0xfa, 0xf4, 0xfc, 0x70, 0xbb, 0x83, 0xe0, 0x61, 0x66, 0xf4, 0x9b, 0xe9, 0xf5, 0x48, 0x9d, 0xd9, 0x08, 0xdb, 0x18}
 	binaryIDGlDrawRangeElementsBaseVertexEXT                 = binary.ID{0x92, 0x94, 0x02, 0xd3, 0x32, 0xb2, 0x99, 0xa2, 0x4a, 0xff, 0x98, 0x22, 0x13, 0xc7, 0x03, 0x86, 0x09, 0xed, 0x4e, 0xb2}
 	binaryIDGlDrawRangeElementsBaseVertexOES                 = binary.ID{0x7c, 0xf8, 0x8a, 0x03, 0x92, 0x54, 0x07, 0xb7, 0x9f, 0xd7, 0x4a, 0x4e, 0x8a, 0x4a, 0xeb, 0xe6, 0x85, 0x22, 0xe5, 0xdb}
 	binaryIDGlEGLImageTargetRenderbufferStorageOES           = binary.ID{0x9e, 0xae, 0xc5, 0x0e, 0x81, 0x91, 0x4d, 0x5f, 0xf3, 0x64, 0xf6, 0x07, 0xea, 0x99, 0x07, 0x09, 0x76, 0x25, 0xd8, 0x7f}
@@ -1185,6 +1231,7 @@ var (
 	binaryIDGlEnable                                         = binary.ID{0xa2, 0x43, 0xf9, 0xb3, 0x0e, 0xf8, 0x8b, 0x33, 0x2b, 0xc0, 0x38, 0x39, 0x72, 0x7b, 0x53, 0xcb, 0xf0, 0x38, 0x29, 0x01}
 	binaryIDGlEnableDriverControlQCOM                        = binary.ID{0x8a, 0xfa, 0xb1, 0x22, 0x3a, 0x84, 0x67, 0xb9, 0xaf, 0x96, 0xde, 0x31, 0x57, 0x27, 0xdb, 0x08, 0xd1, 0xeb, 0x05, 0xd7}
 	binaryIDGlEnableVertexAttribArray                        = binary.ID{0xe7, 0x92, 0xb4, 0x99, 0xeb, 0x7e, 0xdc, 0x7a, 0xbb, 0x5b, 0x49, 0x71, 0x82, 0xd3, 0x09, 0x49, 0xb4, 0x0f, 0xfc, 0x66}
+	binaryIDGlEnablei                                        = binary.ID{0x45, 0x6d, 0x4d, 0xa7, 0xa9, 0x2c, 0xe4, 0x2b, 0x90, 0xd7, 0xa2, 0x7f, 0xa5, 0xad, 0x7a, 0x99, 0xba, 0xbe, 0x12, 0x1f}
 	binaryIDGlEnableiEXT                                     = binary.ID{0x93, 0xe0, 0xa4, 0xe9, 0xfe, 0xe1, 0x87, 0x69, 0xe9, 0x9a, 0xd9, 0x0b, 0xca, 0x9c, 0x67, 0xcd, 0x68, 0x23, 0x4c, 0x85}
 	binaryIDGlEnableiNV                                      = binary.ID{0xfb, 0xeb, 0x11, 0x7c, 0xb8, 0xc3, 0x5d, 0x38, 0xb0, 0x69, 0xf4, 0xea, 0x7f, 0xb6, 0x40, 0x5f, 0x0f, 0x4b, 0x7b, 0xbb}
 	binaryIDGlEnableiOES                                     = binary.ID{0x57, 0x86, 0x34, 0x07, 0x41, 0x9a, 0xd4, 0x1c, 0x1b, 0x0c, 0xf4, 0x22, 0x02, 0x00, 0xa3, 0xfe, 0x09, 0x6b, 0x0f, 0x5c}
@@ -1223,6 +1270,7 @@ var (
 	binaryIDGlFramebufferParameteri                          = binary.ID{0xb8, 0x00, 0xd9, 0xfc, 0xf7, 0x85, 0x00, 0xe5, 0xc6, 0x1e, 0x6e, 0xa3, 0xfb, 0x79, 0x8e, 0xb5, 0xf6, 0x18, 0x68, 0x0c}
 	binaryIDGlFramebufferRenderbuffer                        = binary.ID{0x84, 0x49, 0x2e, 0xdd, 0x19, 0x60, 0xcf, 0xf5, 0x05, 0xce, 0xd4, 0xf8, 0x5e, 0x70, 0x38, 0x4e, 0xdb, 0x6f, 0xf4, 0x46}
 	binaryIDGlFramebufferSampleLocationsfvNV                 = binary.ID{0x7e, 0xc8, 0xb1, 0x2f, 0xc4, 0x0a, 0x65, 0xd6, 0x97, 0xd5, 0xb5, 0x31, 0x32, 0xf5, 0x15, 0x5b, 0x3a, 0x90, 0x7d, 0xca}
+	binaryIDGlFramebufferTexture                             = binary.ID{0x92, 0x95, 0x42, 0x34, 0x9a, 0xf3, 0x7b, 0xd5, 0xbc, 0xfa, 0xe5, 0x41, 0x06, 0x57, 0x6e, 0xc7, 0x26, 0x6f, 0xcb, 0x20}
 	binaryIDGlFramebufferTexture2D                           = binary.ID{0x66, 0xf3, 0xec, 0x3c, 0xa3, 0xb6, 0x49, 0xba, 0x0f, 0xed, 0xc9, 0x1d, 0x71, 0x63, 0x38, 0x2b, 0xb2, 0x50, 0xf9, 0x8a}
 	binaryIDGlFramebufferTexture2DMultisampleEXT             = binary.ID{0x63, 0x22, 0xc0, 0xa0, 0xfd, 0xf4, 0xd7, 0x15, 0x62, 0x37, 0xcb, 0x14, 0x21, 0x6b, 0x89, 0xc8, 0xc5, 0xad, 0x8f, 0xc0}
 	binaryIDGlFramebufferTexture2DMultisampleIMG             = binary.ID{0x34, 0xf9, 0xf0, 0xc2, 0x46, 0xa4, 0x29, 0xdb, 0xa7, 0xcf, 0x32, 0x55, 0xed, 0x06, 0xed, 0xff, 0xd3, 0x55, 0x7a, 0x88}
@@ -1278,6 +1326,7 @@ var (
 	binaryIDGlGetFragDataLocation                            = binary.ID{0x69, 0x78, 0xe9, 0xa0, 0x6b, 0x1f, 0xcf, 0xdf, 0x50, 0x07, 0x01, 0xbf, 0x0a, 0x94, 0xa7, 0x06, 0x8f, 0x01, 0x3e, 0x60}
 	binaryIDGlGetFramebufferAttachmentParameteriv            = binary.ID{0x36, 0x48, 0xc4, 0xc9, 0x4f, 0x83, 0xb0, 0xad, 0xc9, 0x09, 0x01, 0xbd, 0x2f, 0x6c, 0x4b, 0x1b, 0x31, 0x03, 0xa4, 0xe5}
 	binaryIDGlGetFramebufferParameteriv                      = binary.ID{0xcb, 0xf7, 0x76, 0xe9, 0x4e, 0xd2, 0x1e, 0x5f, 0x91, 0xf0, 0xf1, 0xb1, 0xb5, 0xa7, 0xd2, 0xc6, 0x1d, 0x52, 0x99, 0x19}
+	binaryIDGlGetGraphicsResetStatus                         = binary.ID{0xa6, 0x19, 0xfa, 0xc1, 0xfc, 0xea, 0x81, 0x51, 0xa7, 0x72, 0x76, 0xe7, 0x3d, 0xdc, 0x47, 0x1d, 0x53, 0x28, 0x36, 0xbf}
 	binaryIDGlGetGraphicsResetStatusEXT                      = binary.ID{0x8d, 0x3f, 0x9e, 0x9d, 0x27, 0xd7, 0x66, 0xad, 0x95, 0x1f, 0xf9, 0x73, 0x27, 0xd8, 0x87, 0x5b, 0x64, 0xba, 0xc5, 0xb7}
 	binaryIDGlGetGraphicsResetStatusKHR                      = binary.ID{0xc0, 0x8b, 0x35, 0xb6, 0x03, 0x19, 0xe0, 0x58, 0xa0, 0x18, 0x9c, 0x30, 0x8c, 0x28, 0xb8, 0x43, 0x1a, 0x24, 0xa7, 0x99}
 	binaryIDGlGetImageHandleNV                               = binary.ID{0xf3, 0x04, 0x85, 0x85, 0xa8, 0xcd, 0xfe, 0x4c, 0x30, 0xd8, 0xd4, 0xb5, 0x55, 0xe3, 0x4c, 0x5d, 0x85, 0xb6, 0x34, 0xb6}
@@ -1340,8 +1389,10 @@ var (
 	binaryIDGlGetQueryiv                                     = binary.ID{0x32, 0x28, 0x67, 0x6d, 0x92, 0x88, 0xb3, 0x54, 0x95, 0x42, 0x80, 0x0c, 0x0f, 0x44, 0x58, 0x30, 0xe5, 0x7b, 0x08, 0x1c}
 	binaryIDGlGetQueryivEXT                                  = binary.ID{0xcb, 0x06, 0x2f, 0x04, 0xb7, 0x8f, 0x9d, 0x52, 0xbb, 0x2a, 0xcb, 0x75, 0x49, 0xdc, 0xa9, 0x9e, 0xb2, 0x72, 0x0a, 0x13}
 	binaryIDGlGetRenderbufferParameteriv                     = binary.ID{0x8d, 0x2f, 0x18, 0xcb, 0xf8, 0xdc, 0xb6, 0xfa, 0xd5, 0x73, 0x6a, 0x31, 0xb2, 0x1c, 0x53, 0x38, 0xd0, 0x1b, 0x6e, 0x8b}
+	binaryIDGlGetSamplerParameterIiv                         = binary.ID{0xf6, 0xac, 0x72, 0x5c, 0xc4, 0xb9, 0x63, 0xcc, 0xc1, 0xec, 0x47, 0x47, 0xfa, 0xdf, 0xe3, 0x53, 0x94, 0x50, 0xf5, 0x1d}
 	binaryIDGlGetSamplerParameterIivEXT                      = binary.ID{0x84, 0xa9, 0x6d, 0xa6, 0x65, 0xad, 0x5e, 0x2e, 0xcc, 0x56, 0x5a, 0x87, 0x45, 0x46, 0x20, 0xf0, 0x03, 0x2b, 0x6a, 0x1b}
 	binaryIDGlGetSamplerParameterIivOES                      = binary.ID{0xd6, 0xbf, 0x78, 0xc0, 0xfe, 0x18, 0x4e, 0x64, 0xb7, 0x94, 0x21, 0x20, 0xcb, 0x4d, 0xe4, 0xff, 0xb2, 0xe2, 0x94, 0x14}
+	binaryIDGlGetSamplerParameterIuiv                        = binary.ID{0x58, 0x35, 0x03, 0xa7, 0xdf, 0xec, 0x0a, 0x42, 0xaa, 0x89, 0x8b, 0x70, 0xc9, 0x69, 0xd0, 0x7f, 0xa0, 0x2e, 0xe9, 0x0a}
 	binaryIDGlGetSamplerParameterIuivEXT                     = binary.ID{0x61, 0x03, 0x88, 0x21, 0x32, 0xbd, 0xc4, 0x14, 0x7f, 0x6e, 0x98, 0x31, 0x44, 0x7b, 0x6c, 0xb1, 0x2d, 0x35, 0xd3, 0x75}
 	binaryIDGlGetSamplerParameterIuivOES                     = binary.ID{0xfb, 0x8a, 0xa5, 0xf0, 0xa0, 0x05, 0x68, 0x9e, 0x02, 0x3c, 0x93, 0xab, 0xc8, 0x1e, 0x3c, 0x16, 0x04, 0x6e, 0xe3, 0x62}
 	binaryIDGlGetSamplerParameterfv                          = binary.ID{0x60, 0xda, 0x5d, 0xb0, 0x3f, 0x7c, 0xc6, 0x72, 0x7f, 0xa5, 0x49, 0x71, 0x4c, 0x64, 0x12, 0xa4, 0x6e, 0xa3, 0xe3, 0x01}
@@ -1356,8 +1407,10 @@ var (
 	binaryIDGlGetSyncivAPPLE                                 = binary.ID{0xe6, 0x3d, 0xb5, 0x40, 0x2b, 0xad, 0x0b, 0xbc, 0x95, 0xb1, 0x53, 0x21, 0xe0, 0xf5, 0x2d, 0xe2, 0x20, 0x41, 0x00, 0x91}
 	binaryIDGlGetTexLevelParameterfv                         = binary.ID{0xf6, 0x85, 0x85, 0x7f, 0x34, 0x10, 0xa1, 0x51, 0xc0, 0x33, 0xf8, 0xd8, 0x17, 0x5a, 0xb6, 0xb9, 0x75, 0x31, 0xbe, 0xf9}
 	binaryIDGlGetTexLevelParameteriv                         = binary.ID{0x98, 0x2f, 0x05, 0x4a, 0x23, 0xe8, 0x10, 0xf9, 0x8a, 0x98, 0x59, 0xa1, 0x4d, 0xf3, 0xf5, 0x03, 0x9d, 0xf2, 0x3e, 0xa7}
+	binaryIDGlGetTexParameterIiv                             = binary.ID{0xc4, 0xe4, 0x47, 0x55, 0x7e, 0xb7, 0x33, 0xaf, 0xf7, 0x44, 0x3b, 0x85, 0xb6, 0x76, 0xf7, 0x8a, 0x74, 0xfe, 0xc1, 0x67}
 	binaryIDGlGetTexParameterIivEXT                          = binary.ID{0x0f, 0xed, 0xed, 0x95, 0xd9, 0xac, 0x7d, 0xbb, 0x2d, 0x84, 0x17, 0x66, 0xb3, 0x9f, 0x4e, 0xc9, 0xf3, 0x4e, 0xff, 0x08}
 	binaryIDGlGetTexParameterIivOES                          = binary.ID{0xd6, 0x4d, 0x20, 0x8d, 0x3f, 0x0e, 0x35, 0xf0, 0x28, 0xb6, 0x03, 0x53, 0xb9, 0x83, 0xc1, 0xbf, 0xe4, 0x6a, 0x0f, 0x7e}
+	binaryIDGlGetTexParameterIuiv                            = binary.ID{0xe7, 0xee, 0x5b, 0x97, 0x9b, 0x4c, 0x1d, 0xec, 0xd8, 0x6a, 0xdb, 0x09, 0x00, 0x4d, 0x52, 0x72, 0x03, 0xc8, 0x06, 0xd4}
 	binaryIDGlGetTexParameterIuivEXT                         = binary.ID{0x70, 0x60, 0xc9, 0x59, 0x16, 0xc0, 0xfb, 0x7f, 0xca, 0x73, 0xd2, 0xb0, 0x31, 0x43, 0x0f, 0xb2, 0x7c, 0xef, 0x33, 0xdb}
 	binaryIDGlGetTexParameterIuivOES                         = binary.ID{0x6d, 0x0f, 0x39, 0x93, 0x80, 0x1a, 0x3d, 0x4e, 0xd7, 0x0d, 0xf0, 0x14, 0xcf, 0xb5, 0xab, 0x53, 0x48, 0x28, 0x6a, 0x75}
 	binaryIDGlGetTexParameterfv                              = binary.ID{0x98, 0x02, 0xc0, 0x0b, 0x6b, 0x9b, 0xfc, 0xaf, 0x4f, 0xa2, 0x80, 0xa4, 0x62, 0x67, 0x69, 0xb5, 0xac, 0x7a, 0x96, 0xcb}
@@ -1377,10 +1430,13 @@ var (
 	binaryIDGlGetVertexAttribPointerv                        = binary.ID{0x3e, 0x3b, 0x21, 0x57, 0x6a, 0xb2, 0x67, 0x32, 0xd9, 0x0c, 0xc3, 0xb9, 0xdb, 0x27, 0x0e, 0xd4, 0x00, 0xa7, 0xd5, 0xd8}
 	binaryIDGlGetVertexAttribfv                              = binary.ID{0x43, 0x0f, 0xa7, 0x10, 0x8b, 0x76, 0xec, 0xe5, 0x9d, 0x4f, 0x37, 0xc7, 0x20, 0x96, 0xb0, 0x84, 0xb4, 0x85, 0x68, 0xb4}
 	binaryIDGlGetVertexAttribiv                              = binary.ID{0x85, 0x52, 0xcf, 0x36, 0x59, 0xd7, 0xf7, 0x8f, 0xab, 0x8e, 0xdd, 0x07, 0x4d, 0x93, 0x91, 0x3e, 0xa1, 0x13, 0x39, 0x13}
+	binaryIDGlGetnUniformfv                                  = binary.ID{0x81, 0xa8, 0x5a, 0x4d, 0xc6, 0x09, 0xdf, 0x35, 0x98, 0xbe, 0x06, 0xce, 0xd8, 0x64, 0xc5, 0xa0, 0x13, 0x61, 0xca, 0x93}
 	binaryIDGlGetnUniformfvEXT                               = binary.ID{0x1a, 0x85, 0x54, 0x34, 0x80, 0xdd, 0xa1, 0x19, 0x77, 0xcc, 0x6d, 0x09, 0x5b, 0x6b, 0x87, 0x8b, 0x8a, 0xe6, 0x50, 0x31}
 	binaryIDGlGetnUniformfvKHR                               = binary.ID{0xe9, 0x22, 0x0f, 0x57, 0x9e, 0xe6, 0x80, 0x9c, 0x90, 0x4e, 0x7a, 0xcd, 0x76, 0x47, 0x0d, 0xe6, 0x5d, 0x49, 0x99, 0x51}
+	binaryIDGlGetnUniformiv                                  = binary.ID{0x42, 0xdb, 0xda, 0x9a, 0xf9, 0x6d, 0xa7, 0x8b, 0x1e, 0xb3, 0x39, 0x58, 0xe6, 0xb2, 0xe4, 0x9b, 0x50, 0xab, 0xb5, 0x8c}
 	binaryIDGlGetnUniformivEXT                               = binary.ID{0x8b, 0x9d, 0x78, 0x44, 0x88, 0xf0, 0x34, 0x2f, 0x49, 0x51, 0x8f, 0xb6, 0xf7, 0xc0, 0x2d, 0x6c, 0x5c, 0xad, 0xa8, 0xae}
 	binaryIDGlGetnUniformivKHR                               = binary.ID{0xd0, 0x77, 0xbd, 0x82, 0x7e, 0x23, 0x53, 0x76, 0x88, 0xeb, 0x09, 0x7f, 0xd2, 0xe0, 0x47, 0x77, 0x89, 0x99, 0x3c, 0x28}
+	binaryIDGlGetnUniformuiv                                 = binary.ID{0x31, 0xc5, 0xde, 0xb9, 0x86, 0x17, 0xb4, 0x22, 0xaf, 0xab, 0xdd, 0x81, 0x92, 0xa0, 0xd7, 0xaa, 0x12, 0x1c, 0x85, 0xba}
 	binaryIDGlGetnUniformuivKHR                              = binary.ID{0x3c, 0xb9, 0x2b, 0xd2, 0x34, 0x35, 0x2e, 0x0b, 0xde, 0xc0, 0xcd, 0x60, 0x2d, 0x69, 0x6a, 0x69, 0xf4, 0x6c, 0x43, 0x41}
 	binaryIDGlHint                                           = binary.ID{0x99, 0x8a, 0x57, 0x73, 0xe0, 0x3c, 0x8c, 0x3a, 0x80, 0xb7, 0x02, 0xcc, 0xf5, 0x66, 0x58, 0x95, 0x5a, 0xf5, 0x02, 0x81}
 	binaryIDGlInsertEventMarkerEXT                           = binary.ID{0x25, 0xfc, 0x5a, 0x6d, 0x1f, 0x10, 0x9b, 0xdd, 0x1f, 0x22, 0x18, 0x33, 0xff, 0x80, 0x0d, 0x41, 0x05, 0x25, 0x31, 0x6a}
@@ -1389,6 +1445,7 @@ var (
 	binaryIDGlInvalidateSubFramebuffer                       = binary.ID{0x4e, 0xf4, 0x42, 0xeb, 0x9a, 0x66, 0xc5, 0xe3, 0x09, 0x6c, 0x2f, 0x32, 0x7a, 0x81, 0x05, 0x8c, 0xe3, 0x59, 0x49, 0x59}
 	binaryIDGlIsBuffer                                       = binary.ID{0xd1, 0x42, 0xad, 0xb7, 0x81, 0x67, 0x04, 0x3a, 0x6e, 0x6a, 0x0a, 0x72, 0x75, 0xcb, 0x7c, 0x15, 0xa1, 0x9a, 0xf8, 0x66}
 	binaryIDGlIsEnabled                                      = binary.ID{0xdf, 0xea, 0x56, 0xfa, 0xb1, 0x23, 0x94, 0xf6, 0x32, 0xef, 0x9e, 0x76, 0x22, 0x90, 0x9e, 0x64, 0x72, 0x78, 0x9a, 0x77}
+	binaryIDGlIsEnabledi                                     = binary.ID{0x83, 0xd9, 0xe2, 0x4a, 0xba, 0x5a, 0xbd, 0x69, 0x9e, 0xd0, 0x2d, 0xe9, 0x89, 0x37, 0xa5, 0x5d, 0xbd, 0x05, 0xe0, 0x72}
 	binaryIDGlIsEnablediEXT                                  = binary.ID{0xae, 0x61, 0xac, 0xf0, 0xa8, 0x0a, 0xda, 0xd4, 0x62, 0x6f, 0x79, 0x2a, 0x94, 0xcc, 0x5b, 0x49, 0xde, 0xea, 0x1c, 0xfc}
 	binaryIDGlIsEnablediNV                                   = binary.ID{0x23, 0x7a, 0xc2, 0xbc, 0x0c, 0x99, 0xbd, 0xa3, 0x4a, 0x46, 0xb7, 0x73, 0xe3, 0xaf, 0xfe, 0xe9, 0x57, 0x71, 0xf8, 0xd5}
 	binaryIDGlIsEnablediOES                                  = binary.ID{0xdc, 0x6b, 0x8a, 0x3f, 0x3a, 0xcb, 0xdb, 0x01, 0xc1, 0xc6, 0x0e, 0x8e, 0xab, 0x90, 0xfb, 0x0d, 0x76, 0x5e, 0xb2, 0xad}
@@ -1431,6 +1488,7 @@ var (
 	binaryIDGlMatrixMultTranspose3x3fNV                      = binary.ID{0x03, 0xbe, 0x50, 0x41, 0x3e, 0xd8, 0xd6, 0xe7, 0xaf, 0x10, 0x5a, 0x48, 0xa5, 0x58, 0x5e, 0x0a, 0xff, 0x90, 0xfc, 0xa9}
 	binaryIDGlMemoryBarrier                                  = binary.ID{0x87, 0x0c, 0x05, 0xe4, 0x93, 0x20, 0x1d, 0x0d, 0x00, 0xd3, 0xc8, 0x0c, 0xf1, 0x29, 0xd8, 0x3d, 0xc2, 0xfa, 0x0b, 0xd4}
 	binaryIDGlMemoryBarrierByRegion                          = binary.ID{0xd3, 0x3f, 0x60, 0x4b, 0x14, 0xf1, 0x28, 0x82, 0xaf, 0x9d, 0xad, 0xe4, 0x68, 0x46, 0xc1, 0xdb, 0xad, 0xfd, 0x94, 0x93}
+	binaryIDGlMinSampleShading                               = binary.ID{0x76, 0xff, 0x3e, 0x64, 0xbe, 0xf6, 0x7a, 0xd6, 0x21, 0x08, 0x76, 0x86, 0xbc, 0xbe, 0x56, 0x0e, 0x9f, 0xf9, 0x15, 0x0f}
 	binaryIDGlMinSampleShadingOES                            = binary.ID{0x5e, 0xfa, 0xff, 0x41, 0xd7, 0x9f, 0x63, 0xe7, 0x98, 0xeb, 0x4a, 0xe4, 0x0f, 0x74, 0x04, 0x2a, 0x9a, 0x98, 0xb3, 0x81}
 	binaryIDGlMultiDrawArraysEXT                             = binary.ID{0x86, 0xf4, 0x5b, 0xcf, 0xbe, 0xcf, 0x38, 0x00, 0xd9, 0x95, 0xea, 0x35, 0x02, 0xd8, 0x7e, 0xe3, 0x86, 0x58, 0x29, 0xab}
 	binaryIDGlMultiDrawArraysIndirectEXT                     = binary.ID{0xd9, 0xdc, 0xcb, 0x55, 0xca, 0xd7, 0xd5, 0xbe, 0x85, 0x09, 0xb2, 0x0f, 0xac, 0x2c, 0x17, 0x60, 0x4f, 0xe3, 0x75, 0x97}
@@ -1442,6 +1500,7 @@ var (
 	binaryIDGlNamedFramebufferSampleLocationsfvNV            = binary.ID{0x43, 0xb8, 0x83, 0xea, 0x00, 0xbf, 0x02, 0xb2, 0x61, 0xfb, 0x92, 0xb8, 0x5b, 0x91, 0xc6, 0xba, 0x36, 0xd0, 0x5d, 0xaa}
 	binaryIDGlObjectLabelKHR                                 = binary.ID{0x51, 0xe6, 0x4b, 0x36, 0x04, 0xb3, 0x72, 0xe7, 0x40, 0xf3, 0x74, 0xce, 0x19, 0x9c, 0xac, 0xe5, 0xfb, 0x2d, 0x4d, 0xbb}
 	binaryIDGlObjectPtrLabelKHR                              = binary.ID{0x99, 0x7d, 0xe8, 0x77, 0xdf, 0x67, 0x27, 0x03, 0x5f, 0x10, 0x58, 0x5f, 0xb9, 0x2a, 0xf9, 0x21, 0x23, 0x98, 0xc1, 0xdd}
+	binaryIDGlPatchParameteri                                = binary.ID{0x36, 0x3a, 0x7b, 0xc8, 0x5b, 0x3e, 0x8c, 0x17, 0x34, 0x83, 0x65, 0xb2, 0x7e, 0xd9, 0xf5, 0xe1, 0x53, 0xe5, 0xfd, 0x5c}
 	binaryIDGlPatchParameteriEXT                             = binary.ID{0x95, 0xc2, 0x8c, 0x25, 0x8e, 0xd5, 0x07, 0x40, 0xb9, 0xb2, 0xff, 0xa7, 0x49, 0x76, 0x4f, 0x92, 0xa5, 0x34, 0x17, 0xf2}
 	binaryIDGlPatchParameteriOES                             = binary.ID{0xc4, 0xb0, 0x5b, 0x85, 0x16, 0x65, 0x1e, 0x1a, 0xbe, 0x7e, 0x4e, 0x59, 0x75, 0xeb, 0x6e, 0xfe, 0x90, 0x10, 0xbf, 0xf0}
 	binaryIDGlPathCommandsNV                                 = binary.ID{0x99, 0x1c, 0x51, 0xa0, 0xbb, 0xd0, 0x9a, 0x5f, 0x39, 0xa1, 0x8c, 0xe6, 0xda, 0xd7, 0x08, 0x7f, 0xf7, 0xb7, 0xf9, 0xb4}
@@ -1469,6 +1528,7 @@ var (
 	binaryIDGlPolygonOffset                                  = binary.ID{0x77, 0xd9, 0x9f, 0xb4, 0x8f, 0x74, 0xe9, 0x76, 0x86, 0xe3, 0xec, 0x65, 0xb2, 0xe0, 0xcf, 0xd9, 0xf7, 0xb6, 0x8d, 0xe5}
 	binaryIDGlPopDebugGroupKHR                               = binary.ID{0xe0, 0x5b, 0xe4, 0xda, 0x20, 0xae, 0x4f, 0xfb, 0x0c, 0xfd, 0xc0, 0xa8, 0x5c, 0x0d, 0x66, 0x0e, 0x8f, 0xc2, 0x24, 0xf9}
 	binaryIDGlPopGroupMarkerEXT                              = binary.ID{0x63, 0xb8, 0xb9, 0x5e, 0x5d, 0xf9, 0x13, 0xbb, 0xc7, 0xce, 0x02, 0x0f, 0xc7, 0x14, 0x03, 0x22, 0xe5, 0x70, 0x9f, 0x87}
+	binaryIDGlPrimitiveBoundingBox                           = binary.ID{0x9e, 0x94, 0x74, 0xe8, 0x62, 0x19, 0xaa, 0xa4, 0xe0, 0x0c, 0xc0, 0x9a, 0x57, 0xa7, 0xb1, 0x86, 0x45, 0x9d, 0xcf, 0xba}
 	binaryIDGlPrimitiveBoundingBoxEXT                        = binary.ID{0x95, 0x61, 0x16, 0x23, 0x7a, 0xcb, 0xc5, 0x39, 0x91, 0x21, 0xf6, 0x4a, 0x3e, 0xbf, 0xfd, 0x27, 0x9d, 0x47, 0xca, 0xb1}
 	binaryIDGlPrimitiveBoundingBoxOES                        = binary.ID{0x6f, 0x1d, 0x80, 0xe9, 0xa1, 0xf0, 0x9a, 0xa2, 0xee, 0xe7, 0x29, 0x7d, 0x17, 0x14, 0x2a, 0xb7, 0xd7, 0xb4, 0x14, 0x9d}
 	binaryIDGlProgramBinary                                  = binary.ID{0x93, 0xa3, 0x29, 0x4d, 0x2f, 0x1b, 0xac, 0x3f, 0x99, 0x89, 0xb7, 0x1f, 0xe0, 0x93, 0xb4, 0x2e, 0x51, 0x14, 0x2c, 0x79}
@@ -1552,6 +1612,7 @@ var (
 	binaryIDGlReadBufferIndexedEXT                           = binary.ID{0x42, 0xd5, 0xb6, 0xda, 0xd7, 0x75, 0x93, 0xc7, 0xc4, 0x16, 0x8b, 0xcb, 0x42, 0x5b, 0xed, 0xab, 0x56, 0x48, 0x0a, 0x38}
 	binaryIDGlReadBufferNV                                   = binary.ID{0x4b, 0xa9, 0x27, 0x0c, 0x96, 0xe7, 0xe3, 0x8d, 0x10, 0xb4, 0x15, 0x1e, 0x02, 0x8f, 0x06, 0x0e, 0x13, 0xdc, 0xe9, 0xf6}
 	binaryIDGlReadPixels                                     = binary.ID{0x1b, 0x22, 0x34, 0xf6, 0x26, 0x2f, 0xf1, 0x3e, 0xf1, 0x4b, 0x12, 0xd5, 0xe5, 0x6e, 0x69, 0xc9, 0xb2, 0xaf, 0xa6, 0x3a}
+	binaryIDGlReadnPixels                                    = binary.ID{0x1e, 0x3f, 0x17, 0x91, 0x4a, 0x9e, 0xf1, 0x70, 0x48, 0x29, 0xd3, 0xef, 0xf6, 0x33, 0xc5, 0xea, 0x90, 0x05, 0x87, 0x81}
 	binaryIDGlReadnPixelsEXT                                 = binary.ID{0x30, 0x8f, 0x1c, 0x57, 0x89, 0xeb, 0x28, 0xe0, 0x34, 0x59, 0x00, 0xdd, 0x64, 0x26, 0x3c, 0x77, 0x99, 0xe7, 0xe3, 0xa9}
 	binaryIDGlReadnPixelsKHR                                 = binary.ID{0xef, 0xef, 0xff, 0xf9, 0xa4, 0xa6, 0xdf, 0xd9, 0xbf, 0xef, 0x2a, 0x7a, 0xee, 0x47, 0x18, 0xa6, 0x31, 0x5f, 0x37, 0x58}
 	binaryIDGlReleaseShaderCompiler                          = binary.ID{0x75, 0x57, 0x32, 0x6e, 0x7b, 0x73, 0x9d, 0x61, 0x34, 0xf4, 0xfe, 0x45, 0xb6, 0xb2, 0x1d, 0x6e, 0xd0, 0xab, 0xbb, 0x78}
@@ -1567,8 +1628,10 @@ var (
 	binaryIDGlResumeTransformFeedback                        = binary.ID{0x78, 0x30, 0xbd, 0xa6, 0xf3, 0xcd, 0xd9, 0xb2, 0x78, 0x6d, 0x4e, 0x69, 0x2e, 0x69, 0xcf, 0xe5, 0x4f, 0x78, 0xd8, 0x21}
 	binaryIDGlSampleCoverage                                 = binary.ID{0x8f, 0x2d, 0x0f, 0x2a, 0x05, 0x41, 0x30, 0x62, 0xd9, 0x60, 0x92, 0x3b, 0x02, 0x58, 0xdf, 0x37, 0x82, 0xa1, 0xb7, 0xbd}
 	binaryIDGlSampleMaski                                    = binary.ID{0xf9, 0x62, 0x3a, 0x77, 0xe0, 0xab, 0x12, 0xac, 0xae, 0x9c, 0x9d, 0x2a, 0x7c, 0x46, 0x08, 0xca, 0xe1, 0x25, 0x23, 0x8f}
+	binaryIDGlSamplerParameterIiv                            = binary.ID{0xc2, 0xa4, 0xc2, 0xc6, 0x78, 0x94, 0x3f, 0xe5, 0xab, 0xce, 0x1a, 0x39, 0xc1, 0x0f, 0x1f, 0x21, 0xe7, 0x96, 0x94, 0xc1}
 	binaryIDGlSamplerParameterIivEXT                         = binary.ID{0xb2, 0x2e, 0x2b, 0x5e, 0x97, 0xb8, 0x67, 0xcd, 0x21, 0x4c, 0xf9, 0xc6, 0x05, 0x27, 0x3a, 0xcc, 0x3e, 0x6e, 0x00, 0x0c}
 	binaryIDGlSamplerParameterIivOES                         = binary.ID{0x35, 0xb2, 0x07, 0x23, 0xe3, 0xde, 0x9b, 0xad, 0xaf, 0x52, 0x20, 0x75, 0xe1, 0x09, 0x50, 0xbe, 0x60, 0x31, 0x10, 0xc8}
+	binaryIDGlSamplerParameterIuiv                           = binary.ID{0x30, 0x09, 0x5d, 0x23, 0x0c, 0x65, 0x66, 0xe4, 0x16, 0xcc, 0xf0, 0x08, 0x0d, 0x78, 0x0e, 0x2a, 0x35, 0x3f, 0xba, 0xbe}
 	binaryIDGlSamplerParameterIuivEXT                        = binary.ID{0x6d, 0xe3, 0xca, 0x29, 0x0e, 0x21, 0x75, 0x1e, 0xce, 0x57, 0x2d, 0x75, 0x97, 0xbd, 0x54, 0x3b, 0x78, 0x7f, 0xff, 0xa5}
 	binaryIDGlSamplerParameterIuivOES                        = binary.ID{0x57, 0x02, 0xc2, 0x53, 0x97, 0xca, 0x5c, 0xc8, 0x8b, 0xd3, 0x0c, 0x06, 0xa1, 0xa9, 0x09, 0x94, 0xb5, 0xec, 0xc7, 0x56}
 	binaryIDGlSamplerParameterf                              = binary.ID{0x67, 0x0e, 0xff, 0x85, 0x6c, 0xe4, 0x45, 0xaa, 0x5d, 0x5c, 0x52, 0xdb, 0x5d, 0x61, 0xdb, 0x38, 0x4a, 0xbd, 0x15, 0x48}
@@ -1601,16 +1664,20 @@ var (
 	binaryIDGlStencilThenCoverStrokePathNV                   = binary.ID{0x8f, 0x0b, 0x78, 0x6a, 0x8a, 0x54, 0xf8, 0x5d, 0xa7, 0x73, 0xb4, 0xdd, 0x7f, 0xf2, 0xdb, 0x9e, 0x07, 0xd7, 0x62, 0x12}
 	binaryIDGlSubpixelPrecisionBiasNV                        = binary.ID{0xea, 0x0f, 0x84, 0x6c, 0x1d, 0x16, 0xbf, 0x0a, 0xe7, 0xf2, 0xc7, 0x5e, 0xb9, 0xc6, 0xa9, 0x34, 0x88, 0x94, 0x0e, 0x1e}
 	binaryIDGlTestFenceNV                                    = binary.ID{0xda, 0x0f, 0xc7, 0xdc, 0x07, 0xa5, 0x55, 0xac, 0xfd, 0x2e, 0xdd, 0xa6, 0xc0, 0xad, 0x68, 0xe6, 0x1b, 0x46, 0xf1, 0x50}
+	binaryIDGlTexBuffer                                      = binary.ID{0xb5, 0xfb, 0x39, 0x03, 0x90, 0x64, 0x72, 0x54, 0xdb, 0x48, 0x68, 0xa0, 0x64, 0x96, 0x79, 0x92, 0xfc, 0x68, 0xaa, 0x9b}
 	binaryIDGlTexBufferEXT                                   = binary.ID{0x72, 0x28, 0xab, 0xf2, 0xe5, 0xc4, 0x5f, 0x56, 0xef, 0xd4, 0x9b, 0xcd, 0x2f, 0xa8, 0x59, 0x2b, 0xa8, 0x5a, 0x11, 0xb4}
 	binaryIDGlTexBufferOES                                   = binary.ID{0x05, 0x46, 0xa0, 0x1b, 0x01, 0xd9, 0xd8, 0xe5, 0xae, 0x0b, 0x26, 0x4a, 0x52, 0xd2, 0x16, 0xc0, 0xdc, 0x8d, 0x1b, 0x03}
+	binaryIDGlTexBufferRange                                 = binary.ID{0xf0, 0xe7, 0x47, 0x8d, 0x5f, 0x5e, 0xa2, 0x7d, 0xf5, 0x96, 0x1a, 0x2b, 0xeb, 0x91, 0xb2, 0xb4, 0xa6, 0x75, 0xf5, 0xd6}
 	binaryIDGlTexBufferRangeEXT                              = binary.ID{0x8b, 0x16, 0x65, 0x06, 0xa7, 0xfa, 0x97, 0xfc, 0xfb, 0x97, 0xe1, 0x00, 0xd8, 0x72, 0xa6, 0x49, 0x7f, 0x2f, 0xdb, 0x3b}
 	binaryIDGlTexBufferRangeOES                              = binary.ID{0xd8, 0xff, 0xf0, 0x4a, 0x73, 0x92, 0xd8, 0xf8, 0xc9, 0x3f, 0xd1, 0x95, 0x7c, 0x2f, 0xf6, 0xd5, 0x7b, 0xa0, 0x4c, 0x4a}
 	binaryIDGlTexImage2D                                     = binary.ID{0x89, 0x8f, 0x0f, 0x2d, 0x48, 0x7d, 0xad, 0x43, 0x5a, 0x31, 0x7e, 0xc3, 0xd9, 0x84, 0xe4, 0x4b, 0x9e, 0xa5, 0x79, 0x64}
 	binaryIDGlTexImage3D                                     = binary.ID{0x1d, 0xc6, 0x86, 0xc5, 0x6e, 0xea, 0x02, 0xf0, 0x1b, 0x3f, 0x63, 0xac, 0x2e, 0x88, 0xc4, 0x46, 0x74, 0xf2, 0xf2, 0xda}
 	binaryIDGlTexImage3DOES                                  = binary.ID{0x7d, 0xb5, 0x38, 0xa3, 0x85, 0xaf, 0xdc, 0x8a, 0xd2, 0x72, 0xa0, 0x41, 0x19, 0x9c, 0x4d, 0xfd, 0x41, 0x5d, 0x00, 0x5b}
 	binaryIDGlTexPageCommitmentARB                           = binary.ID{0x2c, 0x23, 0x03, 0x25, 0x39, 0xdd, 0x68, 0xdf, 0xec, 0x7e, 0xb8, 0xe9, 0x9a, 0x15, 0x7f, 0xeb, 0xa3, 0xf5, 0x5f, 0x28}
+	binaryIDGlTexParameterIiv                                = binary.ID{0xfe, 0xed, 0x62, 0x67, 0xf6, 0x78, 0x23, 0xe6, 0xb6, 0x40, 0x9e, 0xad, 0x8a, 0xf5, 0xf7, 0x13, 0x8b, 0x18, 0xeb, 0x96}
 	binaryIDGlTexParameterIivEXT                             = binary.ID{0x42, 0x30, 0x01, 0xcb, 0x92, 0x45, 0xd6, 0xd2, 0x0b, 0x1e, 0x2a, 0xd9, 0x22, 0x67, 0x70, 0x83, 0x46, 0x69, 0x28, 0x49}
 	binaryIDGlTexParameterIivOES                             = binary.ID{0xfd, 0x38, 0x82, 0xf5, 0x20, 0x5b, 0x56, 0x98, 0xe7, 0x51, 0xc9, 0xca, 0x79, 0xb9, 0xa7, 0xf3, 0xfe, 0x4a, 0x77, 0x9c}
+	binaryIDGlTexParameterIuiv                               = binary.ID{0x5a, 0x25, 0xcb, 0x4e, 0x98, 0x4b, 0xa2, 0xe7, 0xef, 0xd8, 0x56, 0x31, 0x9f, 0xe3, 0xa6, 0xfd, 0x76, 0x53, 0x7a, 0xf1}
 	binaryIDGlTexParameterIuivEXT                            = binary.ID{0x55, 0x33, 0xa2, 0xe6, 0xed, 0xdc, 0x82, 0x3d, 0x7f, 0xb4, 0x2e, 0x0e, 0x62, 0x28, 0xbf, 0x83, 0x67, 0x22, 0xcb, 0x5b}
 	binaryIDGlTexParameterIuivOES                            = binary.ID{0x80, 0x97, 0xb0, 0x65, 0x0f, 0xdb, 0xcd, 0x3a, 0xcf, 0x86, 0xac, 0x45, 0x17, 0xa7, 0x50, 0x9e, 0x50, 0x80, 0xf6, 0x30}
 	binaryIDGlTexParameterf                                  = binary.ID{0x96, 0xb9, 0x4b, 0x9e, 0x9a, 0x52, 0xb2, 0x8c, 0xaa, 0x77, 0xa3, 0x3d, 0x0f, 0x3d, 0x13, 0x21, 0x7c, 0xf1, 0x19, 0x94}
@@ -1623,6 +1690,7 @@ var (
 	binaryIDGlTexStorage2DMultisample                        = binary.ID{0xe8, 0xc6, 0x53, 0x74, 0xe6, 0x8d, 0x8a, 0x7d, 0x0c, 0x03, 0xf3, 0xc0, 0xad, 0x68, 0xea, 0x00, 0xf5, 0x52, 0x06, 0xe7}
 	binaryIDGlTexStorage3D                                   = binary.ID{0x04, 0x75, 0xa6, 0xae, 0x40, 0x93, 0x6d, 0x7e, 0x2f, 0x3d, 0xc1, 0xac, 0xa7, 0xde, 0x67, 0x40, 0x6b, 0x94, 0x35, 0x9c}
 	binaryIDGlTexStorage3DEXT                                = binary.ID{0x38, 0x56, 0x7f, 0x63, 0xec, 0x2c, 0x5e, 0x58, 0x93, 0x55, 0x4e, 0xed, 0x2e, 0xb3, 0x31, 0x97, 0x37, 0x7d, 0xb0, 0x48}
+	binaryIDGlTexStorage3DMultisample                        = binary.ID{0x9b, 0x5c, 0x7c, 0x9f, 0x23, 0xed, 0x33, 0xca, 0x3b, 0x4d, 0x2f, 0xed, 0x47, 0x8c, 0xa0, 0x83, 0x4c, 0x32, 0xaa, 0x9c}
 	binaryIDGlTexStorage3DMultisampleOES                     = binary.ID{0x81, 0xea, 0x89, 0x94, 0x80, 0xbc, 0x28, 0x35, 0x70, 0xbb, 0x03, 0xb7, 0xf8, 0x3a, 0x60, 0xc1, 0x21, 0xfa, 0xb1, 0x45}
 	binaryIDGlTexSubImage2D                                  = binary.ID{0xaa, 0xcc, 0xd8, 0xe5, 0x31, 0xe2, 0xeb, 0x33, 0x88, 0x45, 0xb2, 0xe5, 0x2a, 0xfa, 0xa1, 0xf4, 0xe3, 0x82, 0x5b, 0xd5}
 	binaryIDGlTexSubImage3D                                  = binary.ID{0x2e, 0x73, 0xa8, 0xe5, 0xe8, 0xae, 0xbf, 0x0e, 0xb7, 0x53, 0xa8, 0x6e, 0xa0, 0xf7, 0xcd, 0x68, 0xd7, 0xc0, 0x00, 0x06}
@@ -9963,6 +10031,61 @@ var schemaGlAlphaFuncQCOM = &schema.Class{
 	},
 }
 
+type binaryClassGlApplyFramebufferAttachmentCMAAINTEL struct{}
+
+func (*GlApplyFramebufferAttachmentCMAAINTEL) Class() binary.Class {
+	return (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL)(nil)
+}
+func doEncodeGlApplyFramebufferAttachmentCMAAINTEL(e binary.Encoder, o *GlApplyFramebufferAttachmentCMAAINTEL) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder, o *GlApplyFramebufferAttachmentCMAAINTEL) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) ID() binary.ID {
+	return binaryIDGlApplyFramebufferAttachmentCMAAINTEL
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) New() binary.Object {
+	return &GlApplyFramebufferAttachmentCMAAINTEL{}
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlApplyFramebufferAttachmentCMAAINTEL(e, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlApplyFramebufferAttachmentCMAAINTEL{}
+	return obj, doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d, obj)
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Skip(d binary.Decoder) error {
+	return doSkipGlApplyFramebufferAttachmentCMAAINTEL(d)
+}
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *schema.Class {
+	return schemaGlApplyFramebufferAttachmentCMAAINTEL
+}
+
+var schemaGlApplyFramebufferAttachmentCMAAINTEL = &schema.Class{
+	TypeID:  binaryIDGlApplyFramebufferAttachmentCMAAINTEL,
+	Package: "gles",
+	Name:    "GlApplyFramebufferAttachmentCMAAINTEL",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlAttachShader struct{}
 
 func (*GlAttachShader) Class() binary.Class {
@@ -11615,6 +11738,53 @@ var schemaGlBindVertexBuffer = &schema.Class{
 	},
 }
 
+type binaryClassGlBlendBarrier struct{}
+
+func (*GlBlendBarrier) Class() binary.Class {
+	return (*binaryClassGlBlendBarrier)(nil)
+}
+func doEncodeGlBlendBarrier(e binary.Encoder, o *GlBlendBarrier) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBlendBarrier(d binary.Decoder, o *GlBlendBarrier) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlBlendBarrier(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBlendBarrier) ID() binary.ID      { return binaryIDGlBlendBarrier }
+func (*binaryClassGlBlendBarrier) New() binary.Object { return &GlBlendBarrier{} }
+func (*binaryClassGlBlendBarrier) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBlendBarrier(e, obj.(*GlBlendBarrier))
+}
+func (*binaryClassGlBlendBarrier) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBlendBarrier{}
+	return obj, doDecodeGlBlendBarrier(d, obj)
+}
+func (*binaryClassGlBlendBarrier) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBlendBarrier(d, obj.(*GlBlendBarrier))
+}
+func (*binaryClassGlBlendBarrier) Skip(d binary.Decoder) error { return doSkipGlBlendBarrier(d) }
+func (*binaryClassGlBlendBarrier) Schema() *schema.Class       { return schemaGlBlendBarrier }
+
+var schemaGlBlendBarrier = &schema.Class{
+	TypeID:  binaryIDGlBlendBarrier,
+	Package: "gles",
+	Name:    "GlBlendBarrier",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlBlendBarrierKHR struct{}
 
 func (*GlBlendBarrierKHR) Class() binary.Class {
@@ -11938,6 +12108,93 @@ var schemaGlBlendEquationSeparate = &schema.Class{
 	},
 }
 
+type binaryClassGlBlendEquationSeparatei struct{}
+
+func (*GlBlendEquationSeparatei) Class() binary.Class {
+	return (*binaryClassGlBlendEquationSeparatei)(nil)
+}
+func doEncodeGlBlendEquationSeparatei(e binary.Encoder, o *GlBlendEquationSeparatei) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buf)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.ModeRGB)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.ModeAlpha)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBlendEquationSeparatei(d binary.Decoder, o *GlBlendEquationSeparatei) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buf = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.ModeRGB = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.ModeAlpha = GLenum(obj)
+	}
+	return nil
+}
+func doSkipGlBlendEquationSeparatei(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBlendEquationSeparatei) ID() binary.ID      { return binaryIDGlBlendEquationSeparatei }
+func (*binaryClassGlBlendEquationSeparatei) New() binary.Object { return &GlBlendEquationSeparatei{} }
+func (*binaryClassGlBlendEquationSeparatei) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBlendEquationSeparatei(e, obj.(*GlBlendEquationSeparatei))
+}
+func (*binaryClassGlBlendEquationSeparatei) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBlendEquationSeparatei{}
+	return obj, doDecodeGlBlendEquationSeparatei(d, obj)
+}
+func (*binaryClassGlBlendEquationSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBlendEquationSeparatei(d, obj.(*GlBlendEquationSeparatei))
+}
+func (*binaryClassGlBlendEquationSeparatei) Skip(d binary.Decoder) error {
+	return doSkipGlBlendEquationSeparatei(d)
+}
+func (*binaryClassGlBlendEquationSeparatei) Schema() *schema.Class {
+	return schemaGlBlendEquationSeparatei
+}
+
+var schemaGlBlendEquationSeparatei = &schema.Class{
+	TypeID:  binaryIDGlBlendEquationSeparatei,
+	Package: "gles",
+	Name:    "GlBlendEquationSeparatei",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlBlendEquationSeparateiEXT struct{}
 
 func (*GlBlendEquationSeparateiEXT) Class() binary.Class {
@@ -12117,6 +12374,77 @@ var schemaGlBlendEquationSeparateiOES = &schema.Class{
 		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBlendEquationi struct{}
+
+func (*GlBlendEquationi) Class() binary.Class {
+	return (*binaryClassGlBlendEquationi)(nil)
+}
+func doEncodeGlBlendEquationi(e binary.Encoder, o *GlBlendEquationi) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buf)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Mode)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBlendEquationi(d binary.Decoder, o *GlBlendEquationi) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buf = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Mode = GLenum(obj)
+	}
+	return nil
+}
+func doSkipGlBlendEquationi(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBlendEquationi) ID() binary.ID      { return binaryIDGlBlendEquationi }
+func (*binaryClassGlBlendEquationi) New() binary.Object { return &GlBlendEquationi{} }
+func (*binaryClassGlBlendEquationi) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBlendEquationi(e, obj.(*GlBlendEquationi))
+}
+func (*binaryClassGlBlendEquationi) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBlendEquationi{}
+	return obj, doDecodeGlBlendEquationi(d, obj)
+}
+func (*binaryClassGlBlendEquationi) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBlendEquationi(d, obj.(*GlBlendEquationi))
+}
+func (*binaryClassGlBlendEquationi) Skip(d binary.Decoder) error { return doSkipGlBlendEquationi(d) }
+func (*binaryClassGlBlendEquationi) Schema() *schema.Class       { return schemaGlBlendEquationi }
+
+var schemaGlBlendEquationi = &schema.Class{
+	TypeID:  binaryIDGlBlendEquationi,
+	Package: "gles",
+	Name:    "GlBlendEquationi",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12434,6 +12762,115 @@ var schemaGlBlendFuncSeparate = &schema.Class{
 	},
 }
 
+type binaryClassGlBlendFuncSeparatei struct{}
+
+func (*GlBlendFuncSeparatei) Class() binary.Class {
+	return (*binaryClassGlBlendFuncSeparatei)(nil)
+}
+func doEncodeGlBlendFuncSeparatei(e binary.Encoder, o *GlBlendFuncSeparatei) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buf)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SrcRGB)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.DstRGB)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SrcAlpha)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.DstAlpha)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBlendFuncSeparatei(d binary.Decoder, o *GlBlendFuncSeparatei) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buf = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SrcRGB = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.DstRGB = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SrcAlpha = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.DstAlpha = GLenum(obj)
+	}
+	return nil
+}
+func doSkipGlBlendFuncSeparatei(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBlendFuncSeparatei) ID() binary.ID      { return binaryIDGlBlendFuncSeparatei }
+func (*binaryClassGlBlendFuncSeparatei) New() binary.Object { return &GlBlendFuncSeparatei{} }
+func (*binaryClassGlBlendFuncSeparatei) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBlendFuncSeparatei(e, obj.(*GlBlendFuncSeparatei))
+}
+func (*binaryClassGlBlendFuncSeparatei) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBlendFuncSeparatei{}
+	return obj, doDecodeGlBlendFuncSeparatei(d, obj)
+}
+func (*binaryClassGlBlendFuncSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBlendFuncSeparatei(d, obj.(*GlBlendFuncSeparatei))
+}
+func (*binaryClassGlBlendFuncSeparatei) Skip(d binary.Decoder) error {
+	return doSkipGlBlendFuncSeparatei(d)
+}
+func (*binaryClassGlBlendFuncSeparatei) Schema() *schema.Class { return schemaGlBlendFuncSeparatei }
+
+var schemaGlBlendFuncSeparatei = &schema.Class{
+	TypeID:  binaryIDGlBlendFuncSeparatei,
+	Package: "gles",
+	Name:    "GlBlendFuncSeparatei",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlBlendFuncSeparateiEXT struct{}
 
 func (*GlBlendFuncSeparateiEXT) Class() binary.Class {
@@ -12653,6 +13090,89 @@ var schemaGlBlendFuncSeparateiOES = &schema.Class{
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBlendFunci struct{}
+
+func (*GlBlendFunci) Class() binary.Class {
+	return (*binaryClassGlBlendFunci)(nil)
+}
+func doEncodeGlBlendFunci(e binary.Encoder, o *GlBlendFunci) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buf)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Src)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Dst)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBlendFunci(d binary.Decoder, o *GlBlendFunci) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buf = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Src = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Dst = GLenum(obj)
+	}
+	return nil
+}
+func doSkipGlBlendFunci(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBlendFunci) ID() binary.ID      { return binaryIDGlBlendFunci }
+func (*binaryClassGlBlendFunci) New() binary.Object { return &GlBlendFunci{} }
+func (*binaryClassGlBlendFunci) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBlendFunci(e, obj.(*GlBlendFunci))
+}
+func (*binaryClassGlBlendFunci) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBlendFunci{}
+	return obj, doDecodeGlBlendFunci(d, obj)
+}
+func (*binaryClassGlBlendFunci) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBlendFunci(d, obj.(*GlBlendFunci))
+}
+func (*binaryClassGlBlendFunci) Skip(d binary.Decoder) error { return doSkipGlBlendFunci(d) }
+func (*binaryClassGlBlendFunci) Schema() *schema.Class       { return schemaGlBlendFunci }
+
+var schemaGlBlendFunci = &schema.Class{
+	TypeID:  binaryIDGlBlendFunci,
+	Package: "gles",
+	Name:    "GlBlendFunci",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -14698,6 +15218,113 @@ var schemaGlColorMask = &schema.Class{
 	},
 }
 
+type binaryClassGlColorMaski struct{}
+
+func (*GlColorMaski) Class() binary.Class {
+	return (*binaryClassGlColorMaski)(nil)
+}
+func doEncodeGlColorMaski(e binary.Encoder, o *GlColorMaski) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Index)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.R)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.G)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.B)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.A)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlColorMaski(d binary.Decoder, o *GlColorMaski) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Index = GLuint(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.R = GLboolean(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.G = GLboolean(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.B = GLboolean(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.A = GLboolean(obj)
+	}
+	return nil
+}
+func doSkipGlColorMaski(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlColorMaski) ID() binary.ID      { return binaryIDGlColorMaski }
+func (*binaryClassGlColorMaski) New() binary.Object { return &GlColorMaski{} }
+func (*binaryClassGlColorMaski) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlColorMaski(e, obj.(*GlColorMaski))
+}
+func (*binaryClassGlColorMaski) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlColorMaski{}
+	return obj, doDecodeGlColorMaski(d, obj)
+}
+func (*binaryClassGlColorMaski) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlColorMaski(d, obj.(*GlColorMaski))
+}
+func (*binaryClassGlColorMaski) Skip(d binary.Decoder) error { return doSkipGlColorMaski(d) }
+func (*binaryClassGlColorMaski) Schema() *schema.Class       { return schemaGlColorMaski }
+
+var schemaGlColorMaski = &schema.Class{
+	TypeID:  binaryIDGlColorMaski,
+	Package: "gles",
+	Name:    "GlColorMaski",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "A", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
 type binaryClassGlColorMaskiEXT struct{}
 
 func (*GlColorMaskiEXT) Class() binary.Class {
@@ -16211,6 +16838,233 @@ var schemaGlCopyBufferSubDataNV = &schema.Class{
 		{Declared: "ReadOffset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "WriteOffset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlCopyImageSubData struct{}
+
+func (*GlCopyImageSubData) Class() binary.Class {
+	return (*binaryClassGlCopyImageSubData)(nil)
+}
+func doEncodeGlCopyImageSubData(e binary.Encoder, o *GlCopyImageSubData) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SrcName)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SrcTarget)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcLevel)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcX)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcY)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcZ)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.DstName)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.DstTarget)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DstLevel)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DstX)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DstY)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DstZ)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcWidth)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcHeight)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.SrcDepth)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlCopyImageSubData(d binary.Decoder, o *GlCopyImageSubData) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SrcName = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SrcTarget = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcLevel = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcX = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcY = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcZ = GLint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.DstName = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.DstTarget = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DstLevel = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DstX = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DstY = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DstZ = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcWidth = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcHeight = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.SrcDepth = GLsizei(obj)
+	}
+	return nil
+}
+func doSkipGlCopyImageSubData(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlCopyImageSubData) ID() binary.ID      { return binaryIDGlCopyImageSubData }
+func (*binaryClassGlCopyImageSubData) New() binary.Object { return &GlCopyImageSubData{} }
+func (*binaryClassGlCopyImageSubData) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlCopyImageSubData(e, obj.(*GlCopyImageSubData))
+}
+func (*binaryClassGlCopyImageSubData) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlCopyImageSubData{}
+	return obj, doDecodeGlCopyImageSubData(d, obj)
+}
+func (*binaryClassGlCopyImageSubData) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlCopyImageSubData(d, obj.(*GlCopyImageSubData))
+}
+func (*binaryClassGlCopyImageSubData) Skip(d binary.Decoder) error { return doSkipGlCopyImageSubData(d) }
+func (*binaryClassGlCopyImageSubData) Schema() *schema.Class       { return schemaGlCopyImageSubData }
+
+var schemaGlCopyImageSubData = &schema.Class{
+	TypeID:  binaryIDGlCopyImageSubData,
+	Package: "gles",
+	Name:    "GlCopyImageSubData",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SrcLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "SrcX", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "SrcY", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "SrcZ", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DstName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "DstTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DstX", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DstY", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DstZ", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "SrcWidth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "SrcHeight", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "SrcDepth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -21207,6 +22061,77 @@ var schemaGlDisableVertexAttribArray = &schema.Class{
 	},
 }
 
+type binaryClassGlDisablei struct{}
+
+func (*GlDisablei) Class() binary.Class {
+	return (*binaryClassGlDisablei)(nil)
+}
+func doEncodeGlDisablei(e binary.Encoder, o *GlDisablei) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Index)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDisablei(d binary.Decoder, o *GlDisablei) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Index = GLuint(obj)
+	}
+	return nil
+}
+func doSkipGlDisablei(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDisablei) ID() binary.ID      { return binaryIDGlDisablei }
+func (*binaryClassGlDisablei) New() binary.Object { return &GlDisablei{} }
+func (*binaryClassGlDisablei) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDisablei(e, obj.(*GlDisablei))
+}
+func (*binaryClassGlDisablei) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDisablei{}
+	return obj, doDecodeGlDisablei(d, obj)
+}
+func (*binaryClassGlDisablei) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDisablei(d, obj.(*GlDisablei))
+}
+func (*binaryClassGlDisablei) Skip(d binary.Decoder) error { return doSkipGlDisablei(d) }
+func (*binaryClassGlDisablei) Schema() *schema.Class       { return schemaGlDisablei }
+
+var schemaGlDisablei = &schema.Class{
+	TypeID:  binaryIDGlDisablei,
+	Package: "gles",
+	Name:    "GlDisablei",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlDisableiEXT struct{}
 
 func (*GlDisableiEXT) Class() binary.Class {
@@ -22748,6 +23673,115 @@ var schemaGlDrawElements = &schema.Class{
 	},
 }
 
+type binaryClassGlDrawElementsBaseVertex struct{}
+
+func (*GlDrawElementsBaseVertex) Class() binary.Class {
+	return (*binaryClassGlDrawElementsBaseVertex)(nil)
+}
+func doEncodeGlDrawElementsBaseVertex(e binary.Encoder, o *GlDrawElementsBaseVertex) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Mode)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Count)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Indices); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Basevertex)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDrawElementsBaseVertex(d binary.Decoder, o *GlDrawElementsBaseVertex) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Mode = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if err := d.Value(&o.Indices); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Basevertex = GLint(obj)
+	}
+	return nil
+}
+func doSkipGlDrawElementsBaseVertex(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDrawElementsBaseVertex) ID() binary.ID      { return binaryIDGlDrawElementsBaseVertex }
+func (*binaryClassGlDrawElementsBaseVertex) New() binary.Object { return &GlDrawElementsBaseVertex{} }
+func (*binaryClassGlDrawElementsBaseVertex) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDrawElementsBaseVertex(e, obj.(*GlDrawElementsBaseVertex))
+}
+func (*binaryClassGlDrawElementsBaseVertex) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDrawElementsBaseVertex{}
+	return obj, doDecodeGlDrawElementsBaseVertex(d, obj)
+}
+func (*binaryClassGlDrawElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDrawElementsBaseVertex(d, obj.(*GlDrawElementsBaseVertex))
+}
+func (*binaryClassGlDrawElementsBaseVertex) Skip(d binary.Decoder) error {
+	return doSkipGlDrawElementsBaseVertex(d)
+}
+func (*binaryClassGlDrawElementsBaseVertex) Schema() *schema.Class {
+	return schemaGlDrawElementsBaseVertex
+}
+
+var schemaGlDrawElementsBaseVertex = &schema.Class{
+	TypeID:  binaryIDGlDrawElementsBaseVertex,
+	Package: "gles",
+	Name:    "GlDrawElementsBaseVertex",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlDrawElementsBaseVertexEXT struct{}
 
 func (*GlDrawElementsBaseVertexEXT) Class() binary.Class {
@@ -23401,6 +24435,131 @@ var schemaGlDrawElementsInstancedBaseInstanceEXT = &schema.Class{
 		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Baseinstance", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlDrawElementsInstancedBaseVertex struct{}
+
+func (*GlDrawElementsInstancedBaseVertex) Class() binary.Class {
+	return (*binaryClassGlDrawElementsInstancedBaseVertex)(nil)
+}
+func doEncodeGlDrawElementsInstancedBaseVertex(e binary.Encoder, o *GlDrawElementsInstancedBaseVertex) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Mode)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Count)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Indices); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Instancecount)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Basevertex)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDrawElementsInstancedBaseVertex(d binary.Decoder, o *GlDrawElementsInstancedBaseVertex) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Mode = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if err := d.Value(&o.Indices); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Instancecount = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Basevertex = GLint(obj)
+	}
+	return nil
+}
+func doSkipGlDrawElementsInstancedBaseVertex(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) ID() binary.ID {
+	return binaryIDGlDrawElementsInstancedBaseVertex
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) New() binary.Object {
+	return &GlDrawElementsInstancedBaseVertex{}
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDrawElementsInstancedBaseVertex(e, obj.(*GlDrawElementsInstancedBaseVertex))
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDrawElementsInstancedBaseVertex{}
+	return obj, doDecodeGlDrawElementsInstancedBaseVertex(d, obj)
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDrawElementsInstancedBaseVertex(d, obj.(*GlDrawElementsInstancedBaseVertex))
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Skip(d binary.Decoder) error {
+	return doSkipGlDrawElementsInstancedBaseVertex(d)
+}
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *schema.Class {
+	return schemaGlDrawElementsInstancedBaseVertex
+}
+
+var schemaGlDrawElementsInstancedBaseVertex = &schema.Class{
+	TypeID:  binaryIDGlDrawElementsInstancedBaseVertex,
+	Package: "gles",
+	Name:    "GlDrawElementsInstancedBaseVertex",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -24132,6 +25291,143 @@ var schemaGlDrawRangeElements = &schema.Class{
 	},
 }
 
+type binaryClassGlDrawRangeElementsBaseVertex struct{}
+
+func (*GlDrawRangeElementsBaseVertex) Class() binary.Class {
+	return (*binaryClassGlDrawRangeElementsBaseVertex)(nil)
+}
+func doEncodeGlDrawRangeElementsBaseVertex(e binary.Encoder, o *GlDrawRangeElementsBaseVertex) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Mode)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Start)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.End)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Count)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Indices); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Basevertex)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDrawRangeElementsBaseVertex(d binary.Decoder, o *GlDrawRangeElementsBaseVertex) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Mode = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Start = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.End = GLuint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if err := d.Value(&o.Indices); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Basevertex = GLint(obj)
+	}
+	return nil
+}
+func doSkipGlDrawRangeElementsBaseVertex(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) ID() binary.ID {
+	return binaryIDGlDrawRangeElementsBaseVertex
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) New() binary.Object {
+	return &GlDrawRangeElementsBaseVertex{}
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDrawRangeElementsBaseVertex(e, obj.(*GlDrawRangeElementsBaseVertex))
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDrawRangeElementsBaseVertex{}
+	return obj, doDecodeGlDrawRangeElementsBaseVertex(d, obj)
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDrawRangeElementsBaseVertex(d, obj.(*GlDrawRangeElementsBaseVertex))
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) Skip(d binary.Decoder) error {
+	return doSkipGlDrawRangeElementsBaseVertex(d)
+}
+func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *schema.Class {
+	return schemaGlDrawRangeElementsBaseVertex
+}
+
+var schemaGlDrawRangeElementsBaseVertex = &schema.Class{
+	TypeID:  binaryIDGlDrawRangeElementsBaseVertex,
+	Package: "gles",
+	Name:    "GlDrawRangeElementsBaseVertex",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlDrawRangeElementsBaseVertexEXT struct{}
 
 func (*GlDrawRangeElementsBaseVertexEXT) Class() binary.Class {
@@ -24742,6 +26038,77 @@ var schemaGlEnableVertexAttribArray = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlEnablei struct{}
+
+func (*GlEnablei) Class() binary.Class {
+	return (*binaryClassGlEnablei)(nil)
+}
+func doEncodeGlEnablei(e binary.Encoder, o *GlEnablei) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Index)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlEnablei(d binary.Decoder, o *GlEnablei) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Index = GLuint(obj)
+	}
+	return nil
+}
+func doSkipGlEnablei(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlEnablei) ID() binary.ID      { return binaryIDGlEnablei }
+func (*binaryClassGlEnablei) New() binary.Object { return &GlEnablei{} }
+func (*binaryClassGlEnablei) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlEnablei(e, obj.(*GlEnablei))
+}
+func (*binaryClassGlEnablei) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlEnablei{}
+	return obj, doDecodeGlEnablei(d, obj)
+}
+func (*binaryClassGlEnablei) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlEnablei(d, obj.(*GlEnablei))
+}
+func (*binaryClassGlEnablei) Skip(d binary.Decoder) error { return doSkipGlEnablei(d) }
+func (*binaryClassGlEnablei) Schema() *schema.Class       { return schemaGlEnablei }
+
+var schemaGlEnablei = &schema.Class{
+	TypeID:  binaryIDGlEnablei,
+	Package: "gles",
+	Name:    "GlEnablei",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -27562,6 +28929,103 @@ var schemaGlFramebufferSampleLocationsfvNV = &schema.Class{
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "V", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlFramebufferTexture struct{}
+
+func (*GlFramebufferTexture) Class() binary.Class {
+	return (*binaryClassGlFramebufferTexture)(nil)
+}
+func doEncodeGlFramebufferTexture(e binary.Encoder, o *GlFramebufferTexture) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Attachment)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Texture)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Level)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlFramebufferTexture(d binary.Decoder, o *GlFramebufferTexture) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Attachment = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Texture = TextureId(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Level = GLint(obj)
+	}
+	return nil
+}
+func doSkipGlFramebufferTexture(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlFramebufferTexture) ID() binary.ID      { return binaryIDGlFramebufferTexture }
+func (*binaryClassGlFramebufferTexture) New() binary.Object { return &GlFramebufferTexture{} }
+func (*binaryClassGlFramebufferTexture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlFramebufferTexture(e, obj.(*GlFramebufferTexture))
+}
+func (*binaryClassGlFramebufferTexture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlFramebufferTexture{}
+	return obj, doDecodeGlFramebufferTexture(d, obj)
+}
+func (*binaryClassGlFramebufferTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlFramebufferTexture(d, obj.(*GlFramebufferTexture))
+}
+func (*binaryClassGlFramebufferTexture) Skip(d binary.Decoder) error {
+	return doSkipGlFramebufferTexture(d)
+}
+func (*binaryClassGlFramebufferTexture) Schema() *schema.Class { return schemaGlFramebufferTexture }
+
+var schemaGlFramebufferTexture = &schema.Class{
+	TypeID:  binaryIDGlFramebufferTexture,
+	Package: "gles",
+	Name:    "GlFramebufferTexture",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -32145,6 +33609,69 @@ var schemaGlGetFramebufferParameteriv = &schema.Class{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlGetGraphicsResetStatus struct{}
+
+func (*GlGetGraphicsResetStatus) Class() binary.Class {
+	return (*binaryClassGlGetGraphicsResetStatus)(nil)
+}
+func doEncodeGlGetGraphicsResetStatus(e binary.Encoder, o *GlGetGraphicsResetStatus) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetGraphicsResetStatus(d binary.Decoder, o *GlGetGraphicsResetStatus) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Result = GLenum(obj)
+	}
+	return nil
+}
+func doSkipGlGetGraphicsResetStatus(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetGraphicsResetStatus) ID() binary.ID      { return binaryIDGlGetGraphicsResetStatus }
+func (*binaryClassGlGetGraphicsResetStatus) New() binary.Object { return &GlGetGraphicsResetStatus{} }
+func (*binaryClassGlGetGraphicsResetStatus) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetGraphicsResetStatus(e, obj.(*GlGetGraphicsResetStatus))
+}
+func (*binaryClassGlGetGraphicsResetStatus) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetGraphicsResetStatus{}
+	return obj, doDecodeGlGetGraphicsResetStatus(d, obj)
+}
+func (*binaryClassGlGetGraphicsResetStatus) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetGraphicsResetStatus(d, obj.(*GlGetGraphicsResetStatus))
+}
+func (*binaryClassGlGetGraphicsResetStatus) Skip(d binary.Decoder) error {
+	return doSkipGlGetGraphicsResetStatus(d)
+}
+func (*binaryClassGlGetGraphicsResetStatus) Schema() *schema.Class {
+	return schemaGlGetGraphicsResetStatus
+}
+
+var schemaGlGetGraphicsResetStatus = &schema.Class{
+	TypeID:  binaryIDGlGetGraphicsResetStatus,
+	Package: "gles",
+	Name:    "GlGetGraphicsResetStatus",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -37924,6 +39451,91 @@ var schemaGlGetRenderbufferParameteriv = &schema.Class{
 	},
 }
 
+type binaryClassGlGetSamplerParameterIiv struct{}
+
+func (*GlGetSamplerParameterIiv) Class() binary.Class {
+	return (*binaryClassGlGetSamplerParameterIiv)(nil)
+}
+func doEncodeGlGetSamplerParameterIiv(e binary.Encoder, o *GlGetSamplerParameterIiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Sampler)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetSamplerParameterIiv(d binary.Decoder, o *GlGetSamplerParameterIiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Sampler = SamplerId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetSamplerParameterIiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetSamplerParameterIiv) ID() binary.ID      { return binaryIDGlGetSamplerParameterIiv }
+func (*binaryClassGlGetSamplerParameterIiv) New() binary.Object { return &GlGetSamplerParameterIiv{} }
+func (*binaryClassGlGetSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetSamplerParameterIiv(e, obj.(*GlGetSamplerParameterIiv))
+}
+func (*binaryClassGlGetSamplerParameterIiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetSamplerParameterIiv{}
+	return obj, doDecodeGlGetSamplerParameterIiv(d, obj)
+}
+func (*binaryClassGlGetSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetSamplerParameterIiv(d, obj.(*GlGetSamplerParameterIiv))
+}
+func (*binaryClassGlGetSamplerParameterIiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetSamplerParameterIiv(d)
+}
+func (*binaryClassGlGetSamplerParameterIiv) Schema() *schema.Class {
+	return schemaGlGetSamplerParameterIiv
+}
+
+var schemaGlGetSamplerParameterIiv = &schema.Class{
+	TypeID:  binaryIDGlGetSamplerParameterIiv,
+	Package: "gles",
+	Name:    "GlGetSamplerParameterIiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetSamplerParameterIivEXT struct{}
 
 func (*GlGetSamplerParameterIivEXT) Class() binary.Class {
@@ -38099,6 +39711,91 @@ var schemaGlGetSamplerParameterIivOES = &schema.Class{
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlGetSamplerParameterIuiv struct{}
+
+func (*GlGetSamplerParameterIuiv) Class() binary.Class {
+	return (*binaryClassGlGetSamplerParameterIuiv)(nil)
+}
+func doEncodeGlGetSamplerParameterIuiv(e binary.Encoder, o *GlGetSamplerParameterIuiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Sampler)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetSamplerParameterIuiv(d binary.Decoder, o *GlGetSamplerParameterIuiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Sampler = SamplerId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetSamplerParameterIuiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetSamplerParameterIuiv) ID() binary.ID      { return binaryIDGlGetSamplerParameterIuiv }
+func (*binaryClassGlGetSamplerParameterIuiv) New() binary.Object { return &GlGetSamplerParameterIuiv{} }
+func (*binaryClassGlGetSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetSamplerParameterIuiv(e, obj.(*GlGetSamplerParameterIuiv))
+}
+func (*binaryClassGlGetSamplerParameterIuiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetSamplerParameterIuiv{}
+	return obj, doDecodeGlGetSamplerParameterIuiv(d, obj)
+}
+func (*binaryClassGlGetSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetSamplerParameterIuiv(d, obj.(*GlGetSamplerParameterIuiv))
+}
+func (*binaryClassGlGetSamplerParameterIuiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetSamplerParameterIuiv(d)
+}
+func (*binaryClassGlGetSamplerParameterIuiv) Schema() *schema.Class {
+	return schemaGlGetSamplerParameterIuiv
+}
+
+var schemaGlGetSamplerParameterIuiv = &schema.Class{
+	TypeID:  binaryIDGlGetSamplerParameterIuiv,
+	Package: "gles",
+	Name:    "GlGetSamplerParameterIuiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -39362,6 +41059,89 @@ var schemaGlGetTexLevelParameteriv = &schema.Class{
 	},
 }
 
+type binaryClassGlGetTexParameterIiv struct{}
+
+func (*GlGetTexParameterIiv) Class() binary.Class {
+	return (*binaryClassGlGetTexParameterIiv)(nil)
+}
+func doEncodeGlGetTexParameterIiv(e binary.Encoder, o *GlGetTexParameterIiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetTexParameterIiv(d binary.Decoder, o *GlGetTexParameterIiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetTexParameterIiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetTexParameterIiv) ID() binary.ID      { return binaryIDGlGetTexParameterIiv }
+func (*binaryClassGlGetTexParameterIiv) New() binary.Object { return &GlGetTexParameterIiv{} }
+func (*binaryClassGlGetTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetTexParameterIiv(e, obj.(*GlGetTexParameterIiv))
+}
+func (*binaryClassGlGetTexParameterIiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetTexParameterIiv{}
+	return obj, doDecodeGlGetTexParameterIiv(d, obj)
+}
+func (*binaryClassGlGetTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetTexParameterIiv(d, obj.(*GlGetTexParameterIiv))
+}
+func (*binaryClassGlGetTexParameterIiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetTexParameterIiv(d)
+}
+func (*binaryClassGlGetTexParameterIiv) Schema() *schema.Class { return schemaGlGetTexParameterIiv }
+
+var schemaGlGetTexParameterIiv = &schema.Class{
+	TypeID:  binaryIDGlGetTexParameterIiv,
+	Package: "gles",
+	Name:    "GlGetTexParameterIiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetTexParameterIivEXT struct{}
 
 func (*GlGetTexParameterIivEXT) Class() binary.Class {
@@ -39529,6 +41309,89 @@ var schemaGlGetTexParameterIivOES = &schema.Class{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlGetTexParameterIuiv struct{}
+
+func (*GlGetTexParameterIuiv) Class() binary.Class {
+	return (*binaryClassGlGetTexParameterIuiv)(nil)
+}
+func doEncodeGlGetTexParameterIuiv(e binary.Encoder, o *GlGetTexParameterIuiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetTexParameterIuiv(d binary.Decoder, o *GlGetTexParameterIuiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetTexParameterIuiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetTexParameterIuiv) ID() binary.ID      { return binaryIDGlGetTexParameterIuiv }
+func (*binaryClassGlGetTexParameterIuiv) New() binary.Object { return &GlGetTexParameterIuiv{} }
+func (*binaryClassGlGetTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetTexParameterIuiv(e, obj.(*GlGetTexParameterIuiv))
+}
+func (*binaryClassGlGetTexParameterIuiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetTexParameterIuiv{}
+	return obj, doDecodeGlGetTexParameterIuiv(d, obj)
+}
+func (*binaryClassGlGetTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetTexParameterIuiv(d, obj.(*GlGetTexParameterIuiv))
+}
+func (*binaryClassGlGetTexParameterIuiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetTexParameterIuiv(d)
+}
+func (*binaryClassGlGetTexParameterIuiv) Schema() *schema.Class { return schemaGlGetTexParameterIuiv }
+
+var schemaGlGetTexParameterIuiv = &schema.Class{
+	TypeID:  binaryIDGlGetTexParameterIuiv,
+	Package: "gles",
+	Name:    "GlGetTexParameterIuiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -41183,6 +43046,99 @@ var schemaGlGetVertexAttribiv = &schema.Class{
 	},
 }
 
+type binaryClassGlGetnUniformfv struct{}
+
+func (*GlGetnUniformfv) Class() binary.Class {
+	return (*binaryClassGlGetnUniformfv)(nil)
+}
+func doEncodeGlGetnUniformfv(e binary.Encoder, o *GlGetnUniformfv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Location)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetnUniformfv(d binary.Decoder, o *GlGetnUniformfv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Location = UniformLocation(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetnUniformfv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLfloatᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetnUniformfv) ID() binary.ID      { return binaryIDGlGetnUniformfv }
+func (*binaryClassGlGetnUniformfv) New() binary.Object { return &GlGetnUniformfv{} }
+func (*binaryClassGlGetnUniformfv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetnUniformfv(e, obj.(*GlGetnUniformfv))
+}
+func (*binaryClassGlGetnUniformfv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetnUniformfv{}
+	return obj, doDecodeGlGetnUniformfv(d, obj)
+}
+func (*binaryClassGlGetnUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetnUniformfv(d, obj.(*GlGetnUniformfv))
+}
+func (*binaryClassGlGetnUniformfv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformfv(d) }
+func (*binaryClassGlGetnUniformfv) Schema() *schema.Class       { return schemaGlGetnUniformfv }
+
+var schemaGlGetnUniformfv = &schema.Class{
+	TypeID:  binaryIDGlGetnUniformfv,
+	Package: "gles",
+	Name:    "GlGetnUniformfv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLfloatᵖ", ID: (*GLfloatᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetnUniformfvEXT struct{}
 
 func (*GlGetnUniformfvEXT) Class() binary.Class {
@@ -41369,6 +43325,99 @@ var schemaGlGetnUniformfvKHR = &schema.Class{
 	},
 }
 
+type binaryClassGlGetnUniformiv struct{}
+
+func (*GlGetnUniformiv) Class() binary.Class {
+	return (*binaryClassGlGetnUniformiv)(nil)
+}
+func doEncodeGlGetnUniformiv(e binary.Encoder, o *GlGetnUniformiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Location)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetnUniformiv(d binary.Decoder, o *GlGetnUniformiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Location = UniformLocation(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetnUniformiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetnUniformiv) ID() binary.ID      { return binaryIDGlGetnUniformiv }
+func (*binaryClassGlGetnUniformiv) New() binary.Object { return &GlGetnUniformiv{} }
+func (*binaryClassGlGetnUniformiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetnUniformiv(e, obj.(*GlGetnUniformiv))
+}
+func (*binaryClassGlGetnUniformiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetnUniformiv{}
+	return obj, doDecodeGlGetnUniformiv(d, obj)
+}
+func (*binaryClassGlGetnUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetnUniformiv(d, obj.(*GlGetnUniformiv))
+}
+func (*binaryClassGlGetnUniformiv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformiv(d) }
+func (*binaryClassGlGetnUniformiv) Schema() *schema.Class       { return schemaGlGetnUniformiv }
+
+var schemaGlGetnUniformiv = &schema.Class{
+	TypeID:  binaryIDGlGetnUniformiv,
+	Package: "gles",
+	Name:    "GlGetnUniformiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetnUniformivEXT struct{}
 
 func (*GlGetnUniformivEXT) Class() binary.Class {
@@ -41552,6 +43601,99 @@ var schemaGlGetnUniformivKHR = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlGetnUniformuiv struct{}
+
+func (*GlGetnUniformuiv) Class() binary.Class {
+	return (*binaryClassGlGetnUniformuiv)(nil)
+}
+func doEncodeGlGetnUniformuiv(e binary.Encoder, o *GlGetnUniformuiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Location)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetnUniformuiv(d binary.Decoder, o *GlGetnUniformuiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Location = UniformLocation(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetnUniformuiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetnUniformuiv) ID() binary.ID      { return binaryIDGlGetnUniformuiv }
+func (*binaryClassGlGetnUniformuiv) New() binary.Object { return &GlGetnUniformuiv{} }
+func (*binaryClassGlGetnUniformuiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetnUniformuiv(e, obj.(*GlGetnUniformuiv))
+}
+func (*binaryClassGlGetnUniformuiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetnUniformuiv{}
+	return obj, doDecodeGlGetnUniformuiv(d, obj)
+}
+func (*binaryClassGlGetnUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetnUniformuiv(d, obj.(*GlGetnUniformuiv))
+}
+func (*binaryClassGlGetnUniformuiv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformuiv(d) }
+func (*binaryClassGlGetnUniformuiv) Schema() *schema.Class       { return schemaGlGetnUniformuiv }
+
+var schemaGlGetnUniformuiv = &schema.Class{
+	TypeID:  binaryIDGlGetnUniformuiv,
+	Package: "gles",
+	Name:    "GlGetnUniformuiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -42249,6 +44391,89 @@ var schemaGlIsEnabled = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassGlIsEnabledi struct{}
+
+func (*GlIsEnabledi) Class() binary.Class {
+	return (*binaryClassGlIsEnabledi)(nil)
+}
+func doEncodeGlIsEnabledi(e binary.Encoder, o *GlIsEnabledi) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Index)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlIsEnabledi(d binary.Decoder, o *GlIsEnabledi) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Index = GLuint(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.Result = GLboolean(obj)
+	}
+	return nil
+}
+func doSkipGlIsEnabledi(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlIsEnabledi) ID() binary.ID      { return binaryIDGlIsEnabledi }
+func (*binaryClassGlIsEnabledi) New() binary.Object { return &GlIsEnabledi{} }
+func (*binaryClassGlIsEnabledi) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlIsEnabledi(e, obj.(*GlIsEnabledi))
+}
+func (*binaryClassGlIsEnabledi) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlIsEnabledi{}
+	return obj, doDecodeGlIsEnabledi(d, obj)
+}
+func (*binaryClassGlIsEnabledi) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlIsEnabledi(d, obj.(*GlIsEnabledi))
+}
+func (*binaryClassGlIsEnabledi) Skip(d binary.Decoder) error { return doSkipGlIsEnabledi(d) }
+func (*binaryClassGlIsEnabledi) Schema() *schema.Class       { return schemaGlIsEnabledi }
+
+var schemaGlIsEnabledi = &schema.Class{
+	TypeID:  binaryIDGlIsEnabledi,
+	Package: "gles",
+	Name:    "GlIsEnabledi",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -45413,6 +47638,65 @@ var schemaGlMemoryBarrierByRegion = &schema.Class{
 	},
 }
 
+type binaryClassGlMinSampleShading struct{}
+
+func (*GlMinSampleShading) Class() binary.Class {
+	return (*binaryClassGlMinSampleShading)(nil)
+}
+func doEncodeGlMinSampleShading(e binary.Encoder, o *GlMinSampleShading) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.Value)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlMinSampleShading(d binary.Decoder, o *GlMinSampleShading) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Value = GLfloat(obj)
+	}
+	return nil
+}
+func doSkipGlMinSampleShading(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlMinSampleShading) ID() binary.ID      { return binaryIDGlMinSampleShading }
+func (*binaryClassGlMinSampleShading) New() binary.Object { return &GlMinSampleShading{} }
+func (*binaryClassGlMinSampleShading) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlMinSampleShading(e, obj.(*GlMinSampleShading))
+}
+func (*binaryClassGlMinSampleShading) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlMinSampleShading{}
+	return obj, doDecodeGlMinSampleShading(d, obj)
+}
+func (*binaryClassGlMinSampleShading) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlMinSampleShading(d, obj.(*GlMinSampleShading))
+}
+func (*binaryClassGlMinSampleShading) Skip(d binary.Decoder) error { return doSkipGlMinSampleShading(d) }
+func (*binaryClassGlMinSampleShading) Schema() *schema.Class       { return schemaGlMinSampleShading }
+
+var schemaGlMinSampleShading = &schema.Class{
+	TypeID:  binaryIDGlMinSampleShading,
+	Package: "gles",
+	Name:    "GlMinSampleShading",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
 type binaryClassGlMinSampleShadingOES struct{}
 
 func (*GlMinSampleShadingOES) Class() binary.Class {
@@ -46447,6 +48731,77 @@ var schemaGlObjectPtrLabelKHR = &schema.Class{
 		{Declared: "Ptr", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlPatchParameteri struct{}
+
+func (*GlPatchParameteri) Class() binary.Class {
+	return (*binaryClassGlPatchParameteri)(nil)
+}
+func doEncodeGlPatchParameteri(e binary.Encoder, o *GlPatchParameteri) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Value)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlPatchParameteri(d binary.Decoder, o *GlPatchParameteri) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Value = GLint(obj)
+	}
+	return nil
+}
+func doSkipGlPatchParameteri(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlPatchParameteri) ID() binary.ID      { return binaryIDGlPatchParameteri }
+func (*binaryClassGlPatchParameteri) New() binary.Object { return &GlPatchParameteri{} }
+func (*binaryClassGlPatchParameteri) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlPatchParameteri(e, obj.(*GlPatchParameteri))
+}
+func (*binaryClassGlPatchParameteri) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlPatchParameteri{}
+	return obj, doDecodeGlPatchParameteri(d, obj)
+}
+func (*binaryClassGlPatchParameteri) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlPatchParameteri(d, obj.(*GlPatchParameteri))
+}
+func (*binaryClassGlPatchParameteri) Skip(d binary.Decoder) error { return doSkipGlPatchParameteri(d) }
+func (*binaryClassGlPatchParameteri) Schema() *schema.Class       { return schemaGlPatchParameteri }
+
+var schemaGlPatchParameteri = &schema.Class{
+	TypeID:  binaryIDGlPatchParameteri,
+	Package: "gles",
+	Name:    "GlPatchParameteri",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -49064,6 +51419,151 @@ var schemaGlPopGroupMarkerEXT = &schema.Class{
 	Name:    "GlPopGroupMarkerEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlPrimitiveBoundingBox struct{}
+
+func (*GlPrimitiveBoundingBox) Class() binary.Class {
+	return (*binaryClassGlPrimitiveBoundingBox)(nil)
+}
+func doEncodeGlPrimitiveBoundingBox(e binary.Encoder, o *GlPrimitiveBoundingBox) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MinX)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MinY)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MinZ)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MinW)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MaxX)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MaxY)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MaxZ)); err != nil {
+		return err
+	}
+	if err := e.Float32(float32(o.MaxW)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlPrimitiveBoundingBox(d binary.Decoder, o *GlPrimitiveBoundingBox) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MinX = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MinY = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MinZ = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MinW = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MaxX = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MaxY = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MaxZ = GLfloat(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MaxW = GLfloat(obj)
+	}
+	return nil
+}
+func doSkipGlPrimitiveBoundingBox(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlPrimitiveBoundingBox) ID() binary.ID      { return binaryIDGlPrimitiveBoundingBox }
+func (*binaryClassGlPrimitiveBoundingBox) New() binary.Object { return &GlPrimitiveBoundingBox{} }
+func (*binaryClassGlPrimitiveBoundingBox) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlPrimitiveBoundingBox(e, obj.(*GlPrimitiveBoundingBox))
+}
+func (*binaryClassGlPrimitiveBoundingBox) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlPrimitiveBoundingBox{}
+	return obj, doDecodeGlPrimitiveBoundingBox(d, obj)
+}
+func (*binaryClassGlPrimitiveBoundingBox) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlPrimitiveBoundingBox(d, obj.(*GlPrimitiveBoundingBox))
+}
+func (*binaryClassGlPrimitiveBoundingBox) Skip(d binary.Decoder) error {
+	return doSkipGlPrimitiveBoundingBox(d)
+}
+func (*binaryClassGlPrimitiveBoundingBox) Schema() *schema.Class { return schemaGlPrimitiveBoundingBox }
+
+var schemaGlPrimitiveBoundingBox = &schema.Class{
+	TypeID:  binaryIDGlPrimitiveBoundingBox,
+	Package: "gles",
+	Name:    "GlPrimitiveBoundingBox",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MinZ", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MinW", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxZ", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxW", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
 
@@ -57416,6 +59916,147 @@ var schemaGlReadPixels = &schema.Class{
 	},
 }
 
+type binaryClassGlReadnPixels struct{}
+
+func (*GlReadnPixels) Class() binary.Class {
+	return (*binaryClassGlReadnPixels)(nil)
+}
+func doEncodeGlReadnPixels(e binary.Encoder, o *GlReadnPixels) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.X)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Y)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Width)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Height)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Format)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Data); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlReadnPixels(d binary.Decoder, o *GlReadnPixels) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.X = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Y = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Width = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Height = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Format = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Data); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlReadnPixels(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlReadnPixels) ID() binary.ID      { return binaryIDGlReadnPixels }
+func (*binaryClassGlReadnPixels) New() binary.Object { return &GlReadnPixels{} }
+func (*binaryClassGlReadnPixels) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlReadnPixels(e, obj.(*GlReadnPixels))
+}
+func (*binaryClassGlReadnPixels) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlReadnPixels{}
+	return obj, doDecodeGlReadnPixels(d, obj)
+}
+func (*binaryClassGlReadnPixels) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlReadnPixels(d, obj.(*GlReadnPixels))
+}
+func (*binaryClassGlReadnPixels) Skip(d binary.Decoder) error { return doSkipGlReadnPixels(d) }
+func (*binaryClassGlReadnPixels) Schema() *schema.Class       { return schemaGlReadnPixels }
+
+var schemaGlReadnPixels = &schema.Class{
+	TypeID:  binaryIDGlReadnPixels,
+	Package: "gles",
+	Name:    "GlReadnPixels",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlReadnPixelsEXT struct{}
 
 func (*GlReadnPixelsEXT) Class() binary.Class {
@@ -58833,6 +61474,89 @@ var schemaGlSampleMaski = &schema.Class{
 	},
 }
 
+type binaryClassGlSamplerParameterIiv struct{}
+
+func (*GlSamplerParameterIiv) Class() binary.Class {
+	return (*binaryClassGlSamplerParameterIiv)(nil)
+}
+func doEncodeGlSamplerParameterIiv(e binary.Encoder, o *GlSamplerParameterIiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Sampler)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Param); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlSamplerParameterIiv(d binary.Decoder, o *GlSamplerParameterIiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Sampler = SamplerId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Param); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlSamplerParameterIiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLintᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlSamplerParameterIiv) ID() binary.ID      { return binaryIDGlSamplerParameterIiv }
+func (*binaryClassGlSamplerParameterIiv) New() binary.Object { return &GlSamplerParameterIiv{} }
+func (*binaryClassGlSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlSamplerParameterIiv(e, obj.(*GlSamplerParameterIiv))
+}
+func (*binaryClassGlSamplerParameterIiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlSamplerParameterIiv{}
+	return obj, doDecodeGlSamplerParameterIiv(d, obj)
+}
+func (*binaryClassGlSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlSamplerParameterIiv(d, obj.(*GlSamplerParameterIiv))
+}
+func (*binaryClassGlSamplerParameterIiv) Skip(d binary.Decoder) error {
+	return doSkipGlSamplerParameterIiv(d)
+}
+func (*binaryClassGlSamplerParameterIiv) Schema() *schema.Class { return schemaGlSamplerParameterIiv }
+
+var schemaGlSamplerParameterIiv = &schema.Class{
+	TypeID:  binaryIDGlSamplerParameterIiv,
+	Package: "gles",
+	Name:    "GlSamplerParameterIiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlSamplerParameterIivEXT struct{}
 
 func (*GlSamplerParameterIivEXT) Class() binary.Class {
@@ -59000,6 +61724,89 @@ var schemaGlSamplerParameterIivOES = &schema.Class{
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Param", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlSamplerParameterIuiv struct{}
+
+func (*GlSamplerParameterIuiv) Class() binary.Class {
+	return (*binaryClassGlSamplerParameterIuiv)(nil)
+}
+func doEncodeGlSamplerParameterIuiv(e binary.Encoder, o *GlSamplerParameterIuiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Sampler)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Param); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlSamplerParameterIuiv(d binary.Decoder, o *GlSamplerParameterIuiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Sampler = SamplerId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Param); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlSamplerParameterIuiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLuintᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlSamplerParameterIuiv) ID() binary.ID      { return binaryIDGlSamplerParameterIuiv }
+func (*binaryClassGlSamplerParameterIuiv) New() binary.Object { return &GlSamplerParameterIuiv{} }
+func (*binaryClassGlSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlSamplerParameterIuiv(e, obj.(*GlSamplerParameterIuiv))
+}
+func (*binaryClassGlSamplerParameterIuiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlSamplerParameterIuiv{}
+	return obj, doDecodeGlSamplerParameterIuiv(d, obj)
+}
+func (*binaryClassGlSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlSamplerParameterIuiv(d, obj.(*GlSamplerParameterIuiv))
+}
+func (*binaryClassGlSamplerParameterIuiv) Skip(d binary.Decoder) error {
+	return doSkipGlSamplerParameterIuiv(d)
+}
+func (*binaryClassGlSamplerParameterIuiv) Schema() *schema.Class { return schemaGlSamplerParameterIuiv }
+
+var schemaGlSamplerParameterIuiv = &schema.Class{
+	TypeID:  binaryIDGlSamplerParameterIuiv,
+	Package: "gles",
+	Name:    "GlSamplerParameterIuiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -62021,6 +64828,89 @@ var schemaGlTestFenceNV = &schema.Class{
 	},
 }
 
+type binaryClassGlTexBuffer struct{}
+
+func (*GlTexBuffer) Class() binary.Class {
+	return (*binaryClassGlTexBuffer)(nil)
+}
+func doEncodeGlTexBuffer(e binary.Encoder, o *GlTexBuffer) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Internalformat)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buffer)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlTexBuffer(d binary.Decoder, o *GlTexBuffer) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Internalformat = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buffer = BufferId(obj)
+	}
+	return nil
+}
+func doSkipGlTexBuffer(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlTexBuffer) ID() binary.ID      { return binaryIDGlTexBuffer }
+func (*binaryClassGlTexBuffer) New() binary.Object { return &GlTexBuffer{} }
+func (*binaryClassGlTexBuffer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlTexBuffer(e, obj.(*GlTexBuffer))
+}
+func (*binaryClassGlTexBuffer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlTexBuffer{}
+	return obj, doDecodeGlTexBuffer(d, obj)
+}
+func (*binaryClassGlTexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlTexBuffer(d, obj.(*GlTexBuffer))
+}
+func (*binaryClassGlTexBuffer) Skip(d binary.Decoder) error { return doSkipGlTexBuffer(d) }
+func (*binaryClassGlTexBuffer) Schema() *schema.Class       { return schemaGlTexBuffer }
+
+var schemaGlTexBuffer = &schema.Class{
+	TypeID:  binaryIDGlTexBuffer,
+	Package: "gles",
+	Name:    "GlTexBuffer",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlTexBufferEXT struct{}
 
 func (*GlTexBufferEXT) Class() binary.Class {
@@ -62184,6 +65074,113 @@ var schemaGlTexBufferOES = &schema.Class{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlTexBufferRange struct{}
+
+func (*GlTexBufferRange) Class() binary.Class {
+	return (*binaryClassGlTexBufferRange)(nil)
+}
+func doEncodeGlTexBufferRange(e binary.Encoder, o *GlTexBufferRange) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Internalformat)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buffer)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Offset)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Size)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlTexBufferRange(d binary.Decoder, o *GlTexBufferRange) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Internalformat = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buffer = BufferId(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Offset = GLintptr(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Size = GLsizeiptr(obj)
+	}
+	return nil
+}
+func doSkipGlTexBufferRange(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlTexBufferRange) ID() binary.ID      { return binaryIDGlTexBufferRange }
+func (*binaryClassGlTexBufferRange) New() binary.Object { return &GlTexBufferRange{} }
+func (*binaryClassGlTexBufferRange) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlTexBufferRange(e, obj.(*GlTexBufferRange))
+}
+func (*binaryClassGlTexBufferRange) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlTexBufferRange{}
+	return obj, doDecodeGlTexBufferRange(d, obj)
+}
+func (*binaryClassGlTexBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlTexBufferRange(d, obj.(*GlTexBufferRange))
+}
+func (*binaryClassGlTexBufferRange) Skip(d binary.Decoder) error { return doSkipGlTexBufferRange(d) }
+func (*binaryClassGlTexBufferRange) Schema() *schema.Class       { return schemaGlTexBufferRange }
+
+var schemaGlTexBufferRange = &schema.Class{
+	TypeID:  binaryIDGlTexBufferRange,
+	Package: "gles",
+	Name:    "GlTexBufferRange",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 	},
 }
 
@@ -63045,6 +66042,87 @@ var schemaGlTexPageCommitmentARB = &schema.Class{
 	},
 }
 
+type binaryClassGlTexParameterIiv struct{}
+
+func (*GlTexParameterIiv) Class() binary.Class {
+	return (*binaryClassGlTexParameterIiv)(nil)
+}
+func doEncodeGlTexParameterIiv(e binary.Encoder, o *GlTexParameterIiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlTexParameterIiv(d binary.Decoder, o *GlTexParameterIiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlTexParameterIiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLintᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlTexParameterIiv) ID() binary.ID      { return binaryIDGlTexParameterIiv }
+func (*binaryClassGlTexParameterIiv) New() binary.Object { return &GlTexParameterIiv{} }
+func (*binaryClassGlTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlTexParameterIiv(e, obj.(*GlTexParameterIiv))
+}
+func (*binaryClassGlTexParameterIiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlTexParameterIiv{}
+	return obj, doDecodeGlTexParameterIiv(d, obj)
+}
+func (*binaryClassGlTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlTexParameterIiv(d, obj.(*GlTexParameterIiv))
+}
+func (*binaryClassGlTexParameterIiv) Skip(d binary.Decoder) error { return doSkipGlTexParameterIiv(d) }
+func (*binaryClassGlTexParameterIiv) Schema() *schema.Class       { return schemaGlTexParameterIiv }
+
+var schemaGlTexParameterIiv = &schema.Class{
+	TypeID:  binaryIDGlTexParameterIiv,
+	Package: "gles",
+	Name:    "GlTexParameterIiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlTexParameterIivEXT struct{}
 
 func (*GlTexParameterIivEXT) Class() binary.Class {
@@ -63208,6 +66286,87 @@ var schemaGlTexParameterIivOES = &schema.Class{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlTexParameterIuiv struct{}
+
+func (*GlTexParameterIuiv) Class() binary.Class {
+	return (*binaryClassGlTexParameterIuiv)(nil)
+}
+func doEncodeGlTexParameterIuiv(e binary.Encoder, o *GlTexParameterIuiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlTexParameterIuiv(d binary.Decoder, o *GlTexParameterIuiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlTexParameterIuiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLuintᶜᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlTexParameterIuiv) ID() binary.ID      { return binaryIDGlTexParameterIuiv }
+func (*binaryClassGlTexParameterIuiv) New() binary.Object { return &GlTexParameterIuiv{} }
+func (*binaryClassGlTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlTexParameterIuiv(e, obj.(*GlTexParameterIuiv))
+}
+func (*binaryClassGlTexParameterIuiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlTexParameterIuiv{}
+	return obj, doDecodeGlTexParameterIuiv(d, obj)
+}
+func (*binaryClassGlTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlTexParameterIuiv(d, obj.(*GlTexParameterIuiv))
+}
+func (*binaryClassGlTexParameterIuiv) Skip(d binary.Decoder) error { return doSkipGlTexParameterIuiv(d) }
+func (*binaryClassGlTexParameterIuiv) Schema() *schema.Class       { return schemaGlTexParameterIuiv }
+
+var schemaGlTexParameterIuiv = &schema.Class{
+	TypeID:  binaryIDGlTexParameterIuiv,
+	Package: "gles",
+	Name:    "GlTexParameterIuiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -64372,6 +67531,141 @@ var schemaGlTexStorage3DEXT = &schema.Class{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexStorage3DMultisample struct{}
+
+func (*GlTexStorage3DMultisample) Class() binary.Class {
+	return (*binaryClassGlTexStorage3DMultisample)(nil)
+}
+func doEncodeGlTexStorage3DMultisample(e binary.Encoder, o *GlTexStorage3DMultisample) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Samples)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Internalformat)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Width)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Height)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Depth)); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.Fixedsamplelocations)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlTexStorage3DMultisample(d binary.Decoder, o *GlTexStorage3DMultisample) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Samples = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Internalformat = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Width = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Height = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Depth = GLsizei(obj)
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.Fixedsamplelocations = GLboolean(obj)
+	}
+	return nil
+}
+func doSkipGlTexStorage3DMultisample(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlTexStorage3DMultisample) ID() binary.ID      { return binaryIDGlTexStorage3DMultisample }
+func (*binaryClassGlTexStorage3DMultisample) New() binary.Object { return &GlTexStorage3DMultisample{} }
+func (*binaryClassGlTexStorage3DMultisample) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlTexStorage3DMultisample(e, obj.(*GlTexStorage3DMultisample))
+}
+func (*binaryClassGlTexStorage3DMultisample) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlTexStorage3DMultisample{}
+	return obj, doDecodeGlTexStorage3DMultisample(d, obj)
+}
+func (*binaryClassGlTexStorage3DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlTexStorage3DMultisample(d, obj.(*GlTexStorage3DMultisample))
+}
+func (*binaryClassGlTexStorage3DMultisample) Skip(d binary.Decoder) error {
+	return doSkipGlTexStorage3DMultisample(d)
+}
+func (*binaryClassGlTexStorage3DMultisample) Schema() *schema.Class {
+	return schemaGlTexStorage3DMultisample
+}
+
+var schemaGlTexStorage3DMultisample = &schema.Class{
+	TypeID:  binaryIDGlTexStorage3DMultisample,
+	Package: "gles",
+	Name:    "GlTexStorage3DMultisample",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Fixedsamplelocations", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -76861,6 +80155,7 @@ func init() {
 	_ExtensionId_map[87] = "GL_AMD_compressed_ATC_texture"
 	_ExtensionId_map[88] = "GL_OES_texture_half_float"
 	_ExtensionId_map[89] = "GL_OES_vertex_half_float"
+	_ExtensionId_map[90] = "GL_INTEL_framebuffer_CMAA"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ExtensionId", Method: schema.Uint32},
@@ -76954,6 +80249,7 @@ func init() {
 			{Name: "GL_AMD_compressed_ATC_texture", Value: uint32(87)},
 			{Name: "GL_OES_texture_half_float", Value: uint32(88)},
 			{Name: "GL_OES_vertex_half_float", Value: uint32(89)},
+			{Name: "GL_INTEL_framebuffer_CMAA", Value: uint32(90)},
 		},
 	})
 }
@@ -77420,84 +80716,84 @@ func (v *GLbitfield) Parse(s string) error {
 var _GLenum_map = map[GLenum]string{}
 
 func init() {
-	_GLenum_map[0] = "GL_TERMINATE_SEQUENCE_COMMAND_NV"
-	_GLenum_map[0] = "GL_CLOSE_PATH_NV"
-	_GLenum_map[0] = "GL_FALSE"
-	_GLenum_map[0] = "GL_ZERO"
-	_GLenum_map[0] = "GL_NONE"
-	_GLenum_map[0] = "GL_NONE_OES"
 	_GLenum_map[0] = "GL_NO_ERROR"
 	_GLenum_map[0] = "GL_LAYOUT_DEFAULT_INTEL"
+	_GLenum_map[0] = "GL_NONE_OES"
+	_GLenum_map[0] = "GL_NONE"
+	_GLenum_map[0] = "GL_ZERO"
 	_GLenum_map[0] = "GL_POINTS"
-	_GLenum_map[1] = "GL_TRUE"
-	_GLenum_map[1] = "GL_RESTART_SUN"
-	_GLenum_map[1] = "GL_VERSION_ES_CM_1_1"
-	_GLenum_map[1] = "GL_VERSION_ES_CL_1_1"
-	_GLenum_map[1] = "GL_VERSION_ES_CL_1_0"
-	_GLenum_map[1] = "GL_ONE"
+	_GLenum_map[0] = "GL_FALSE"
+	_GLenum_map[0] = "GL_CLOSE_PATH_NV"
+	_GLenum_map[0] = "GL_TERMINATE_SEQUENCE_COMMAND_NV"
 	_GLenum_map[1] = "GL_LAYOUT_LINEAR_INTEL"
 	_GLenum_map[1] = "GL_NOP_COMMAND_NV"
+	_GLenum_map[1] = "GL_VERSION_ES_CL_1_0"
+	_GLenum_map[1] = "GL_VERSION_ES_CM_1_1"
+	_GLenum_map[1] = "GL_TRUE"
+	_GLenum_map[1] = "GL_RESTART_SUN"
+	_GLenum_map[1] = "GL_VERSION_ES_CL_1_1"
+	_GLenum_map[1] = "GL_ONE"
 	_GLenum_map[1] = "GL_LINES"
-	_GLenum_map[2] = "GL_REPLACE_MIDDLE_SUN"
-	_GLenum_map[2] = "GL_DRAW_ELEMENTS_COMMAND_NV"
-	_GLenum_map[2] = "GL_LAYOUT_LINEAR_CPU_CACHED_INTEL"
 	_GLenum_map[2] = "GL_LINE_LOOP"
 	_GLenum_map[2] = "GL_MOVE_TO_NV"
-	_GLenum_map[3] = "GL_RELATIVE_MOVE_TO_NV"
-	_GLenum_map[3] = "GL_LINE_STRIP"
-	_GLenum_map[3] = "GL_DRAW_ARRAYS_COMMAND_NV"
+	_GLenum_map[2] = "GL_LAYOUT_LINEAR_CPU_CACHED_INTEL"
+	_GLenum_map[2] = "GL_DRAW_ELEMENTS_COMMAND_NV"
+	_GLenum_map[2] = "GL_REPLACE_MIDDLE_SUN"
 	_GLenum_map[3] = "GL_REPLACE_OLDEST_SUN"
-	_GLenum_map[4] = "GL_LINE_TO_NV"
-	_GLenum_map[4] = "GL_DRAW_ELEMENTS_STRIP_COMMAND_NV"
+	_GLenum_map[3] = "GL_RELATIVE_MOVE_TO_NV"
+	_GLenum_map[3] = "GL_DRAW_ARRAYS_COMMAND_NV"
+	_GLenum_map[3] = "GL_LINE_STRIP"
 	_GLenum_map[4] = "GL_TRIANGLES"
-	_GLenum_map[5] = "GL_DRAW_ARRAYS_STRIP_COMMAND_NV"
+	_GLenum_map[4] = "GL_DRAW_ELEMENTS_STRIP_COMMAND_NV"
+	_GLenum_map[4] = "GL_LINE_TO_NV"
 	_GLenum_map[5] = "GL_TRIANGLE_STRIP"
+	_GLenum_map[5] = "GL_DRAW_ARRAYS_STRIP_COMMAND_NV"
 	_GLenum_map[5] = "GL_RELATIVE_LINE_TO_NV"
-	_GLenum_map[6] = "GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV"
 	_GLenum_map[6] = "GL_HORIZONTAL_LINE_TO_NV"
 	_GLenum_map[6] = "GL_TRIANGLE_FAN"
+	_GLenum_map[6] = "GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV"
 	_GLenum_map[7] = "GL_QUADS_EXT"
-	_GLenum_map[7] = "GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV"
-	_GLenum_map[7] = "GL_QUADS"
 	_GLenum_map[7] = "GL_RELATIVE_HORIZONTAL_LINE_TO_NV"
+	_GLenum_map[7] = "GL_QUADS"
 	_GLenum_map[7] = "GL_QUADS_OES"
-	_GLenum_map[8] = "GL_VERTICAL_LINE_TO_NV"
+	_GLenum_map[7] = "GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV"
 	_GLenum_map[8] = "GL_QUAD_STRIP"
 	_GLenum_map[8] = "GL_ELEMENT_ADDRESS_COMMAND_NV"
-	_GLenum_map[9] = "GL_POLYGON"
+	_GLenum_map[8] = "GL_VERTICAL_LINE_TO_NV"
 	_GLenum_map[9] = "GL_RELATIVE_VERTICAL_LINE_TO_NV"
+	_GLenum_map[9] = "GL_POLYGON"
 	_GLenum_map[9] = "GL_ATTRIBUTE_ADDRESS_COMMAND_NV"
 	_GLenum_map[10] = "GL_LINES_ADJACENCY_EXT"
 	_GLenum_map[10] = "GL_LINES_ADJACENCY_ARB"
-	_GLenum_map[10] = "GL_LINES_ADJACENCY_OES"
 	_GLenum_map[10] = "GL_QUADRATIC_CURVE_TO_NV"
 	_GLenum_map[10] = "GL_UNIFORM_ADDRESS_COMMAND_NV"
+	_GLenum_map[10] = "GL_LINES_ADJACENCY_OES"
 	_GLenum_map[10] = "GL_LINES_ADJACENCY"
-	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_EXT"
-	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY"
-	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_ARB"
-	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_OES"
 	_GLenum_map[11] = "GL_BLEND_COLOR_COMMAND_NV"
 	_GLenum_map[11] = "GL_RELATIVE_QUADRATIC_CURVE_TO_NV"
-	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY_EXT"
-	_GLenum_map[12] = "GL_STENCIL_REF_COMMAND_NV"
-	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY_ARB"
+	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_OES"
+	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_EXT"
+	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY_ARB"
+	_GLenum_map[11] = "GL_LINE_STRIP_ADJACENCY"
 	_GLenum_map[12] = "GL_CUBIC_CURVE_TO_NV"
 	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY"
+	_GLenum_map[12] = "GL_STENCIL_REF_COMMAND_NV"
+	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY_ARB"
+	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY_EXT"
 	_GLenum_map[12] = "GL_TRIANGLES_ADJACENCY_OES"
-	_GLenum_map[13] = "GL_TRIANGLE_STRIP_ADJACENCY_EXT"
 	_GLenum_map[13] = "GL_TRIANGLE_STRIP_ADJACENCY_OES"
-	_GLenum_map[13] = "GL_LINE_WIDTH_COMMAND_NV"
 	_GLenum_map[13] = "GL_RELATIVE_CUBIC_CURVE_TO_NV"
+	_GLenum_map[13] = "GL_LINE_WIDTH_COMMAND_NV"
 	_GLenum_map[13] = "GL_TRIANGLE_STRIP_ADJACENCY"
 	_GLenum_map[13] = "GL_TRIANGLE_STRIP_ADJACENCY_ARB"
-	_GLenum_map[14] = "GL_POLYGON_OFFSET_COMMAND_NV"
-	_GLenum_map[14] = "GL_PATCHES"
+	_GLenum_map[13] = "GL_TRIANGLE_STRIP_ADJACENCY_EXT"
 	_GLenum_map[14] = "GL_PATCHES_OES"
+	_GLenum_map[14] = "GL_PATCHES"
 	_GLenum_map[14] = "GL_SMOOTH_QUADRATIC_CURVE_TO_NV"
 	_GLenum_map[14] = "GL_PATCHES_EXT"
-	_GLenum_map[15] = "GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV"
+	_GLenum_map[14] = "GL_POLYGON_OFFSET_COMMAND_NV"
 	_GLenum_map[15] = "GL_ALPHA_REF_COMMAND_NV"
+	_GLenum_map[15] = "GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV"
 	_GLenum_map[16] = "GL_VIEWPORT_COMMAND_NV"
 	_GLenum_map[16] = "GL_SMOOTH_CUBIC_CURVE_TO_NV"
 	_GLenum_map[17] = "GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV"
@@ -77575,9 +80871,9 @@ func init() {
 	_GLenum_map[1284] = "GL_STACK_UNDERFLOW"
 	_GLenum_map[1284] = "GL_STACK_UNDERFLOW_KHR"
 	_GLenum_map[1285] = "GL_OUT_OF_MEMORY"
-	_GLenum_map[1286] = "GL_INVALID_FRAMEBUFFER_OPERATION"
-	_GLenum_map[1286] = "GL_INVALID_FRAMEBUFFER_OPERATION_OES"
 	_GLenum_map[1286] = "GL_INVALID_FRAMEBUFFER_OPERATION_EXT"
+	_GLenum_map[1286] = "GL_INVALID_FRAMEBUFFER_OPERATION_OES"
+	_GLenum_map[1286] = "GL_INVALID_FRAMEBUFFER_OPERATION"
 	_GLenum_map[1287] = "GL_CONTEXT_LOST_KHR"
 	_GLenum_map[1287] = "GL_CONTEXT_LOST"
 	_GLenum_map[1536] = "GL_2D"
@@ -77618,8 +80914,8 @@ func init() {
 	_GLenum_map[2835] = "GL_POINT_SIZE_GRANULARITY"
 	_GLenum_map[2848] = "GL_LINE_SMOOTH"
 	_GLenum_map[2849] = "GL_LINE_WIDTH"
-	_GLenum_map[2850] = "GL_SMOOTH_LINE_WIDTH_RANGE"
 	_GLenum_map[2850] = "GL_LINE_WIDTH_RANGE"
+	_GLenum_map[2850] = "GL_SMOOTH_LINE_WIDTH_RANGE"
 	_GLenum_map[2851] = "GL_SMOOTH_LINE_WIDTH_GRANULARITY"
 	_GLenum_map[2851] = "GL_LINE_WIDTH_GRANULARITY"
 	_GLenum_map[2852] = "GL_LINE_STIPPLE"
@@ -77629,8 +80925,8 @@ func init() {
 	_GLenum_map[2865] = "GL_MAX_LIST_NESTING"
 	_GLenum_map[2866] = "GL_LIST_BASE"
 	_GLenum_map[2867] = "GL_LIST_INDEX"
-	_GLenum_map[2880] = "GL_POLYGON_MODE"
 	_GLenum_map[2880] = "GL_POLYGON_MODE_NV"
+	_GLenum_map[2880] = "GL_POLYGON_MODE"
 	_GLenum_map[2881] = "GL_POLYGON_SMOOTH"
 	_GLenum_map[2882] = "GL_POLYGON_STIPPLE"
 	_GLenum_map[2883] = "GL_EDGE_FLAG"
@@ -77670,24 +80966,24 @@ func init() {
 	_GLenum_map[2976] = "GL_MATRIX_MODE"
 	_GLenum_map[2977] = "GL_NORMALIZE"
 	_GLenum_map[2978] = "GL_VIEWPORT"
-	_GLenum_map[2979] = "GL_MODELVIEW0_STACK_DEPTH_EXT"
-	_GLenum_map[2979] = "GL_PATH_MODELVIEW_STACK_DEPTH_NV"
 	_GLenum_map[2979] = "GL_MODELVIEW_STACK_DEPTH"
-	_GLenum_map[2980] = "GL_PROJECTION_STACK_DEPTH"
+	_GLenum_map[2979] = "GL_PATH_MODELVIEW_STACK_DEPTH_NV"
+	_GLenum_map[2979] = "GL_MODELVIEW0_STACK_DEPTH_EXT"
 	_GLenum_map[2980] = "GL_PATH_PROJECTION_STACK_DEPTH_NV"
+	_GLenum_map[2980] = "GL_PROJECTION_STACK_DEPTH"
 	_GLenum_map[2981] = "GL_TEXTURE_STACK_DEPTH"
-	_GLenum_map[2982] = "GL_PATH_MODELVIEW_MATRIX_NV"
 	_GLenum_map[2982] = "GL_MODELVIEW_MATRIX"
+	_GLenum_map[2982] = "GL_PATH_MODELVIEW_MATRIX_NV"
 	_GLenum_map[2982] = "GL_MODELVIEW0_MATRIX_EXT"
-	_GLenum_map[2983] = "GL_PATH_PROJECTION_MATRIX_NV"
 	_GLenum_map[2983] = "GL_PROJECTION_MATRIX"
+	_GLenum_map[2983] = "GL_PATH_PROJECTION_MATRIX_NV"
 	_GLenum_map[2984] = "GL_TEXTURE_MATRIX"
 	_GLenum_map[2992] = "GL_ATTRIB_STACK_DEPTH"
 	_GLenum_map[2993] = "GL_CLIENT_ATTRIB_STACK_DEPTH"
-	_GLenum_map[3008] = "GL_ALPHA_TEST_QCOM"
 	_GLenum_map[3008] = "GL_ALPHA_TEST"
-	_GLenum_map[3009] = "GL_ALPHA_TEST_FUNC_QCOM"
+	_GLenum_map[3008] = "GL_ALPHA_TEST_QCOM"
 	_GLenum_map[3009] = "GL_ALPHA_TEST_FUNC"
+	_GLenum_map[3009] = "GL_ALPHA_TEST_FUNC_QCOM"
 	_GLenum_map[3010] = "GL_ALPHA_TEST_REF_QCOM"
 	_GLenum_map[3010] = "GL_ALPHA_TEST_REF"
 	_GLenum_map[3024] = "GL_DITHER"
@@ -77695,15 +80991,15 @@ func init() {
 	_GLenum_map[3041] = "GL_BLEND_SRC"
 	_GLenum_map[3042] = "GL_BLEND"
 	_GLenum_map[3056] = "GL_LOGIC_OP_MODE"
-	_GLenum_map[3057] = "GL_LOGIC_OP"
 	_GLenum_map[3057] = "GL_INDEX_LOGIC_OP"
+	_GLenum_map[3057] = "GL_LOGIC_OP"
 	_GLenum_map[3058] = "GL_COLOR_LOGIC_OP"
 	_GLenum_map[3072] = "GL_AUX_BUFFERS"
 	_GLenum_map[3073] = "GL_DRAW_BUFFER_EXT"
 	_GLenum_map[3073] = "GL_DRAW_BUFFER"
-	_GLenum_map[3074] = "GL_READ_BUFFER"
 	_GLenum_map[3074] = "GL_READ_BUFFER_NV"
 	_GLenum_map[3074] = "GL_READ_BUFFER_EXT"
+	_GLenum_map[3074] = "GL_READ_BUFFER"
 	_GLenum_map[3088] = "GL_SCISSOR_BOX"
 	_GLenum_map[3089] = "GL_SCISSOR_TEST"
 	_GLenum_map[3104] = "GL_INDEX_CLEAR_VALUE"
@@ -77748,8 +81044,8 @@ func init() {
 	_GLenum_map[3313] = "GL_UNPACK_LSB_FIRST"
 	_GLenum_map[3314] = "GL_UNPACK_ROW_LENGTH"
 	_GLenum_map[3314] = "GL_UNPACK_ROW_LENGTH_EXT"
-	_GLenum_map[3315] = "GL_UNPACK_SKIP_ROWS"
 	_GLenum_map[3315] = "GL_UNPACK_SKIP_ROWS_EXT"
+	_GLenum_map[3315] = "GL_UNPACK_SKIP_ROWS"
 	_GLenum_map[3316] = "GL_UNPACK_SKIP_PIXELS"
 	_GLenum_map[3316] = "GL_UNPACK_SKIP_PIXELS_EXT"
 	_GLenum_map[3317] = "GL_UNPACK_ALIGNMENT"
@@ -77778,8 +81074,8 @@ func init() {
 	_GLenum_map[3376] = "GL_MAX_EVAL_ORDER"
 	_GLenum_map[3377] = "GL_MAX_LIGHTS"
 	_GLenum_map[3378] = "GL_MAX_CLIP_DISTANCES_APPLE"
-	_GLenum_map[3378] = "GL_MAX_CLIP_PLANES"
 	_GLenum_map[3378] = "GL_MAX_CLIP_DISTANCES"
+	_GLenum_map[3378] = "GL_MAX_CLIP_PLANES"
 	_GLenum_map[3378] = "GL_MAX_CLIP_PLANES_IMG"
 	_GLenum_map[3379] = "GL_MAX_TEXTURE_SIZE"
 	_GLenum_map[3380] = "GL_MAX_PIXEL_MAP_TABLE"
@@ -77837,11 +81133,11 @@ func init() {
 	_GLenum_map[3572] = "GL_SELECTION_BUFFER_SIZE"
 	_GLenum_map[4096] = "GL_TEXTURE_WIDTH"
 	_GLenum_map[4097] = "GL_TEXTURE_HEIGHT"
-	_GLenum_map[4099] = "GL_TEXTURE_INTERNAL_FORMAT"
 	_GLenum_map[4099] = "GL_TEXTURE_COMPONENTS"
-	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR_EXT"
-	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR_NV"
+	_GLenum_map[4099] = "GL_TEXTURE_INTERNAL_FORMAT"
 	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR_OES"
+	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR_NV"
+	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR_EXT"
 	_GLenum_map[4100] = "GL_TEXTURE_BORDER_COLOR"
 	_GLenum_map[4101] = "GL_TEXTURE_BORDER"
 	_GLenum_map[4102] = "GL_TEXTURE_TARGET"
@@ -77867,21 +81163,22 @@ func init() {
 	_GLenum_map[5124] = "GL_INT"
 	_GLenum_map[5125] = "GL_UNSIGNED_INT"
 	_GLenum_map[5126] = "GL_FLOAT"
-	_GLenum_map[5127] = "GL_2_BYTES"
 	_GLenum_map[5127] = "GL_2_BYTES_NV"
+	_GLenum_map[5127] = "GL_2_BYTES"
 	_GLenum_map[5128] = "GL_3_BYTES"
 	_GLenum_map[5128] = "GL_3_BYTES_NV"
-	_GLenum_map[5129] = "GL_4_BYTES_NV"
 	_GLenum_map[5129] = "GL_4_BYTES"
-	_GLenum_map[5130] = "GL_DOUBLE_EXT"
+	_GLenum_map[5129] = "GL_4_BYTES_NV"
 	_GLenum_map[5130] = "GL_DOUBLE"
+	_GLenum_map[5130] = "GL_DOUBLE_EXT"
 	_GLenum_map[5131] = "GL_HALF_FLOAT_ARB"
+	_GLenum_map[5131] = "GL_HALF_FLOAT_NV"
 	_GLenum_map[5131] = "GL_HALF_FLOAT"
 	_GLenum_map[5131] = "GL_HALF_APPLE"
-	_GLenum_map[5131] = "GL_HALF_FLOAT_NV"
-	_GLenum_map[5132] = "GL_FIXED_OES"
 	_GLenum_map[5132] = "GL_FIXED"
+	_GLenum_map[5132] = "GL_FIXED_OES"
 	_GLenum_map[5134] = "GL_INT64_NV"
+	_GLenum_map[5134] = "GL_INT64_ARB"
 	_GLenum_map[5135] = "GL_UNSIGNED_INT64_ARB"
 	_GLenum_map[5135] = "GL_UNSIGNED_INT64_NV"
 	_GLenum_map[5376] = "GL_CLEAR"
@@ -77905,30 +81202,30 @@ func init() {
 	_GLenum_map[5633] = "GL_SHININESS"
 	_GLenum_map[5634] = "GL_AMBIENT_AND_DIFFUSE"
 	_GLenum_map[5635] = "GL_COLOR_INDEXES"
-	_GLenum_map[5888] = "GL_MODELVIEW"
-	_GLenum_map[5888] = "GL_MODELVIEW0_EXT"
 	_GLenum_map[5888] = "GL_MODELVIEW0_ARB"
 	_GLenum_map[5888] = "GL_PATH_MODELVIEW_NV"
-	_GLenum_map[5889] = "GL_PATH_PROJECTION_NV"
+	_GLenum_map[5888] = "GL_MODELVIEW0_EXT"
+	_GLenum_map[5888] = "GL_MODELVIEW"
 	_GLenum_map[5889] = "GL_PROJECTION"
+	_GLenum_map[5889] = "GL_PATH_PROJECTION_NV"
 	_GLenum_map[5890] = "GL_TEXTURE"
 	_GLenum_map[6144] = "GL_COLOR"
 	_GLenum_map[6144] = "GL_COLOR_EXT"
 	_GLenum_map[6145] = "GL_DEPTH_EXT"
 	_GLenum_map[6145] = "GL_DEPTH"
-	_GLenum_map[6146] = "GL_STENCIL_EXT"
 	_GLenum_map[6146] = "GL_STENCIL"
+	_GLenum_map[6146] = "GL_STENCIL_EXT"
 	_GLenum_map[6400] = "GL_COLOR_INDEX"
 	_GLenum_map[6401] = "GL_STENCIL_INDEX_OES"
 	_GLenum_map[6401] = "GL_STENCIL_INDEX"
 	_GLenum_map[6402] = "GL_DEPTH_COMPONENT"
 	_GLenum_map[6403] = "GL_RED"
-	_GLenum_map[6403] = "GL_RED_NV"
 	_GLenum_map[6403] = "GL_RED_EXT"
-	_GLenum_map[6404] = "GL_GREEN_NV"
+	_GLenum_map[6403] = "GL_RED_NV"
 	_GLenum_map[6404] = "GL_GREEN"
-	_GLenum_map[6405] = "GL_BLUE"
+	_GLenum_map[6404] = "GL_GREEN_NV"
 	_GLenum_map[6405] = "GL_BLUE_NV"
+	_GLenum_map[6405] = "GL_BLUE"
 	_GLenum_map[6406] = "GL_ALPHA"
 	_GLenum_map[6407] = "GL_RGB"
 	_GLenum_map[6408] = "GL_RGBA"
@@ -77937,10 +81234,10 @@ func init() {
 	_GLenum_map[6656] = "GL_BITMAP"
 	_GLenum_map[6912] = "GL_POINT_NV"
 	_GLenum_map[6912] = "GL_POINT"
-	_GLenum_map[6913] = "GL_LINE_NV"
 	_GLenum_map[6913] = "GL_LINE"
-	_GLenum_map[6914] = "GL_FILL"
+	_GLenum_map[6913] = "GL_LINE_NV"
 	_GLenum_map[6914] = "GL_FILL_NV"
+	_GLenum_map[6914] = "GL_FILL"
 	_GLenum_map[7168] = "GL_RENDER"
 	_GLenum_map[7169] = "GL_FEEDBACK"
 	_GLenum_map[7170] = "GL_SELECT"
@@ -77968,8 +81265,8 @@ func init() {
 	_GLenum_map[9217] = "GL_OBJECT_LINEAR_NV"
 	_GLenum_map[9217] = "GL_OBJECT_LINEAR"
 	_GLenum_map[9218] = "GL_SPHERE_MAP"
-	_GLenum_map[9472] = "GL_TEXTURE_GEN_MODE"
 	_GLenum_map[9472] = "GL_TEXTURE_GEN_MODE_OES"
+	_GLenum_map[9472] = "GL_TEXTURE_GEN_MODE"
 	_GLenum_map[9473] = "GL_OBJECT_PLANE"
 	_GLenum_map[9474] = "GL_EYE_PLANE"
 	_GLenum_map[9728] = "GL_NEAREST"
@@ -77985,10 +81282,10 @@ func init() {
 	_GLenum_map[10496] = "GL_CLAMP"
 	_GLenum_map[10497] = "GL_REPEAT"
 	_GLenum_map[10752] = "GL_POLYGON_OFFSET_UNITS"
-	_GLenum_map[10753] = "GL_POLYGON_OFFSET_POINT"
 	_GLenum_map[10753] = "GL_POLYGON_OFFSET_POINT_NV"
-	_GLenum_map[10754] = "GL_POLYGON_OFFSET_LINE_NV"
+	_GLenum_map[10753] = "GL_POLYGON_OFFSET_POINT"
 	_GLenum_map[10754] = "GL_POLYGON_OFFSET_LINE"
+	_GLenum_map[10754] = "GL_POLYGON_OFFSET_LINE_NV"
 	_GLenum_map[10768] = "GL_R3_G3_B2"
 	_GLenum_map[10784] = "GL_V2F"
 	_GLenum_map[10785] = "GL_V3F"
@@ -78004,32 +81301,32 @@ func init() {
 	_GLenum_map[10795] = "GL_T2F_N3F_V3F"
 	_GLenum_map[10796] = "GL_T2F_C4F_N3F_V3F"
 	_GLenum_map[10797] = "GL_T4F_C4F_N3F_V4F"
-	_GLenum_map[12288] = "GL_CLIP_DISTANCE0"
 	_GLenum_map[12288] = "GL_CLIP_DISTANCE0_APPLE"
 	_GLenum_map[12288] = "GL_CLIP_PLANE0"
 	_GLenum_map[12288] = "GL_CLIP_PLANE0_IMG"
-	_GLenum_map[12289] = "GL_CLIP_DISTANCE1"
-	_GLenum_map[12289] = "GL_CLIP_PLANE1_IMG"
-	_GLenum_map[12289] = "GL_CLIP_DISTANCE1_APPLE"
+	_GLenum_map[12288] = "GL_CLIP_DISTANCE0"
 	_GLenum_map[12289] = "GL_CLIP_PLANE1"
+	_GLenum_map[12289] = "GL_CLIP_DISTANCE1"
+	_GLenum_map[12289] = "GL_CLIP_DISTANCE1_APPLE"
+	_GLenum_map[12289] = "GL_CLIP_PLANE1_IMG"
 	_GLenum_map[12290] = "GL_CLIP_DISTANCE2_APPLE"
-	_GLenum_map[12290] = "GL_CLIP_PLANE2_IMG"
-	_GLenum_map[12290] = "GL_CLIP_DISTANCE2"
 	_GLenum_map[12290] = "GL_CLIP_PLANE2"
+	_GLenum_map[12290] = "GL_CLIP_DISTANCE2"
+	_GLenum_map[12290] = "GL_CLIP_PLANE2_IMG"
 	_GLenum_map[12291] = "GL_CLIP_PLANE3"
-	_GLenum_map[12291] = "GL_CLIP_DISTANCE3"
 	_GLenum_map[12291] = "GL_CLIP_DISTANCE3_APPLE"
+	_GLenum_map[12291] = "GL_CLIP_DISTANCE3"
 	_GLenum_map[12291] = "GL_CLIP_PLANE3_IMG"
 	_GLenum_map[12292] = "GL_CLIP_PLANE4"
-	_GLenum_map[12292] = "GL_CLIP_DISTANCE4_APPLE"
-	_GLenum_map[12292] = "GL_CLIP_DISTANCE4"
 	_GLenum_map[12292] = "GL_CLIP_PLANE4_IMG"
+	_GLenum_map[12292] = "GL_CLIP_DISTANCE4"
+	_GLenum_map[12292] = "GL_CLIP_DISTANCE4_APPLE"
 	_GLenum_map[12293] = "GL_CLIP_PLANE5_IMG"
 	_GLenum_map[12293] = "GL_CLIP_DISTANCE5"
 	_GLenum_map[12293] = "GL_CLIP_PLANE5"
 	_GLenum_map[12293] = "GL_CLIP_DISTANCE5_APPLE"
-	_GLenum_map[12294] = "GL_CLIP_DISTANCE6_APPLE"
 	_GLenum_map[12294] = "GL_CLIP_DISTANCE6"
+	_GLenum_map[12294] = "GL_CLIP_DISTANCE6_APPLE"
 	_GLenum_map[12295] = "GL_CLIP_DISTANCE7"
 	_GLenum_map[12295] = "GL_CLIP_DISTANCE7_APPLE"
 	_GLenum_map[16384] = "GL_LIGHT0"
@@ -78041,32 +81338,32 @@ func init() {
 	_GLenum_map[16390] = "GL_LIGHT6"
 	_GLenum_map[16391] = "GL_LIGHT7"
 	_GLenum_map[32768] = "GL_ABGR_EXT"
-	_GLenum_map[32769] = "GL_CONSTANT_COLOR_EXT"
 	_GLenum_map[32769] = "GL_CONSTANT_COLOR"
-	_GLenum_map[32770] = "GL_ONE_MINUS_CONSTANT_COLOR_EXT"
+	_GLenum_map[32769] = "GL_CONSTANT_COLOR_EXT"
 	_GLenum_map[32770] = "GL_ONE_MINUS_CONSTANT_COLOR"
+	_GLenum_map[32770] = "GL_ONE_MINUS_CONSTANT_COLOR_EXT"
 	_GLenum_map[32771] = "GL_CONSTANT_ALPHA"
 	_GLenum_map[32771] = "GL_CONSTANT_ALPHA_EXT"
-	_GLenum_map[32772] = "GL_ONE_MINUS_CONSTANT_ALPHA"
 	_GLenum_map[32772] = "GL_ONE_MINUS_CONSTANT_ALPHA_EXT"
-	_GLenum_map[32773] = "GL_BLEND_COLOR"
+	_GLenum_map[32772] = "GL_ONE_MINUS_CONSTANT_ALPHA"
 	_GLenum_map[32773] = "GL_BLEND_COLOR_EXT"
-	_GLenum_map[32774] = "GL_FUNC_ADD_OES"
+	_GLenum_map[32773] = "GL_BLEND_COLOR"
 	_GLenum_map[32774] = "GL_FUNC_ADD"
 	_GLenum_map[32774] = "GL_FUNC_ADD_EXT"
+	_GLenum_map[32774] = "GL_FUNC_ADD_OES"
 	_GLenum_map[32775] = "GL_MIN_EXT"
 	_GLenum_map[32775] = "GL_MIN"
-	_GLenum_map[32776] = "GL_MAX_EXT"
 	_GLenum_map[32776] = "GL_MAX"
-	_GLenum_map[32777] = "GL_BLEND_EQUATION_EXT"
-	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB_OES"
+	_GLenum_map[32776] = "GL_MAX_EXT"
+	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB_EXT"
+	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB"
 	_GLenum_map[32777] = "GL_BLEND_EQUATION_OES"
 	_GLenum_map[32777] = "GL_BLEND_EQUATION"
-	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB"
-	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB_EXT"
-	_GLenum_map[32778] = "GL_FUNC_SUBTRACT_OES"
+	_GLenum_map[32777] = "GL_BLEND_EQUATION_EXT"
+	_GLenum_map[32777] = "GL_BLEND_EQUATION_RGB_OES"
 	_GLenum_map[32778] = "GL_FUNC_SUBTRACT"
 	_GLenum_map[32778] = "GL_FUNC_SUBTRACT_EXT"
+	_GLenum_map[32778] = "GL_FUNC_SUBTRACT_OES"
 	_GLenum_map[32779] = "GL_FUNC_REVERSE_SUBTRACT_OES"
 	_GLenum_map[32779] = "GL_FUNC_REVERSE_SUBTRACT"
 	_GLenum_map[32779] = "GL_FUNC_REVERSE_SUBTRACT_EXT"
@@ -78074,28 +81371,28 @@ func init() {
 	_GLenum_map[32781] = "GL_CMYKA_EXT"
 	_GLenum_map[32782] = "GL_PACK_CMYK_HINT_EXT"
 	_GLenum_map[32783] = "GL_UNPACK_CMYK_HINT_EXT"
-	_GLenum_map[32784] = "GL_CONVOLUTION_1D_EXT"
 	_GLenum_map[32784] = "GL_CONVOLUTION_1D"
-	_GLenum_map[32785] = "GL_CONVOLUTION_2D"
+	_GLenum_map[32784] = "GL_CONVOLUTION_1D_EXT"
 	_GLenum_map[32785] = "GL_CONVOLUTION_2D_EXT"
-	_GLenum_map[32786] = "GL_SEPARABLE_2D_EXT"
+	_GLenum_map[32785] = "GL_CONVOLUTION_2D"
 	_GLenum_map[32786] = "GL_SEPARABLE_2D"
+	_GLenum_map[32786] = "GL_SEPARABLE_2D_EXT"
 	_GLenum_map[32787] = "GL_CONVOLUTION_BORDER_MODE_EXT"
 	_GLenum_map[32787] = "GL_CONVOLUTION_BORDER_MODE"
-	_GLenum_map[32788] = "GL_CONVOLUTION_FILTER_SCALE_EXT"
 	_GLenum_map[32788] = "GL_CONVOLUTION_FILTER_SCALE"
-	_GLenum_map[32789] = "GL_CONVOLUTION_FILTER_BIAS_EXT"
+	_GLenum_map[32788] = "GL_CONVOLUTION_FILTER_SCALE_EXT"
 	_GLenum_map[32789] = "GL_CONVOLUTION_FILTER_BIAS"
+	_GLenum_map[32789] = "GL_CONVOLUTION_FILTER_BIAS_EXT"
 	_GLenum_map[32790] = "GL_REDUCE"
 	_GLenum_map[32790] = "GL_REDUCE_EXT"
 	_GLenum_map[32791] = "GL_CONVOLUTION_FORMAT"
 	_GLenum_map[32791] = "GL_CONVOLUTION_FORMAT_EXT"
-	_GLenum_map[32792] = "GL_CONVOLUTION_WIDTH_EXT"
 	_GLenum_map[32792] = "GL_CONVOLUTION_WIDTH"
-	_GLenum_map[32793] = "GL_CONVOLUTION_HEIGHT"
+	_GLenum_map[32792] = "GL_CONVOLUTION_WIDTH_EXT"
 	_GLenum_map[32793] = "GL_CONVOLUTION_HEIGHT_EXT"
-	_GLenum_map[32794] = "GL_MAX_CONVOLUTION_WIDTH"
+	_GLenum_map[32793] = "GL_CONVOLUTION_HEIGHT"
 	_GLenum_map[32794] = "GL_MAX_CONVOLUTION_WIDTH_EXT"
+	_GLenum_map[32794] = "GL_MAX_CONVOLUTION_WIDTH"
 	_GLenum_map[32795] = "GL_MAX_CONVOLUTION_HEIGHT_EXT"
 	_GLenum_map[32795] = "GL_MAX_CONVOLUTION_HEIGHT"
 	_GLenum_map[32796] = "GL_POST_CONVOLUTION_RED_SCALE"
@@ -78106,147 +81403,147 @@ func init() {
 	_GLenum_map[32798] = "GL_POST_CONVOLUTION_BLUE_SCALE_EXT"
 	_GLenum_map[32799] = "GL_POST_CONVOLUTION_ALPHA_SCALE"
 	_GLenum_map[32799] = "GL_POST_CONVOLUTION_ALPHA_SCALE_EXT"
-	_GLenum_map[32800] = "GL_POST_CONVOLUTION_RED_BIAS_EXT"
 	_GLenum_map[32800] = "GL_POST_CONVOLUTION_RED_BIAS"
-	_GLenum_map[32801] = "GL_POST_CONVOLUTION_GREEN_BIAS_EXT"
+	_GLenum_map[32800] = "GL_POST_CONVOLUTION_RED_BIAS_EXT"
 	_GLenum_map[32801] = "GL_POST_CONVOLUTION_GREEN_BIAS"
-	_GLenum_map[32802] = "GL_POST_CONVOLUTION_BLUE_BIAS"
+	_GLenum_map[32801] = "GL_POST_CONVOLUTION_GREEN_BIAS_EXT"
 	_GLenum_map[32802] = "GL_POST_CONVOLUTION_BLUE_BIAS_EXT"
+	_GLenum_map[32802] = "GL_POST_CONVOLUTION_BLUE_BIAS"
 	_GLenum_map[32803] = "GL_POST_CONVOLUTION_ALPHA_BIAS"
 	_GLenum_map[32803] = "GL_POST_CONVOLUTION_ALPHA_BIAS_EXT"
-	_GLenum_map[32804] = "GL_HISTOGRAM"
 	_GLenum_map[32804] = "GL_HISTOGRAM_EXT"
+	_GLenum_map[32804] = "GL_HISTOGRAM"
 	_GLenum_map[32805] = "GL_PROXY_HISTOGRAM_EXT"
 	_GLenum_map[32805] = "GL_PROXY_HISTOGRAM"
-	_GLenum_map[32806] = "GL_HISTOGRAM_WIDTH"
 	_GLenum_map[32806] = "GL_HISTOGRAM_WIDTH_EXT"
+	_GLenum_map[32806] = "GL_HISTOGRAM_WIDTH"
 	_GLenum_map[32807] = "GL_HISTOGRAM_FORMAT_EXT"
 	_GLenum_map[32807] = "GL_HISTOGRAM_FORMAT"
-	_GLenum_map[32808] = "GL_HISTOGRAM_RED_SIZE"
 	_GLenum_map[32808] = "GL_HISTOGRAM_RED_SIZE_EXT"
-	_GLenum_map[32809] = "GL_HISTOGRAM_GREEN_SIZE"
+	_GLenum_map[32808] = "GL_HISTOGRAM_RED_SIZE"
 	_GLenum_map[32809] = "GL_HISTOGRAM_GREEN_SIZE_EXT"
-	_GLenum_map[32810] = "GL_HISTOGRAM_BLUE_SIZE"
+	_GLenum_map[32809] = "GL_HISTOGRAM_GREEN_SIZE"
 	_GLenum_map[32810] = "GL_HISTOGRAM_BLUE_SIZE_EXT"
+	_GLenum_map[32810] = "GL_HISTOGRAM_BLUE_SIZE"
 	_GLenum_map[32811] = "GL_HISTOGRAM_ALPHA_SIZE"
 	_GLenum_map[32811] = "GL_HISTOGRAM_ALPHA_SIZE_EXT"
-	_GLenum_map[32812] = "GL_HISTOGRAM_LUMINANCE_SIZE_EXT"
 	_GLenum_map[32812] = "GL_HISTOGRAM_LUMINANCE_SIZE"
-	_GLenum_map[32813] = "GL_HISTOGRAM_SINK"
+	_GLenum_map[32812] = "GL_HISTOGRAM_LUMINANCE_SIZE_EXT"
 	_GLenum_map[32813] = "GL_HISTOGRAM_SINK_EXT"
-	_GLenum_map[32814] = "GL_MINMAX"
+	_GLenum_map[32813] = "GL_HISTOGRAM_SINK"
 	_GLenum_map[32814] = "GL_MINMAX_EXT"
-	_GLenum_map[32815] = "GL_MINMAX_FORMAT_EXT"
+	_GLenum_map[32814] = "GL_MINMAX"
 	_GLenum_map[32815] = "GL_MINMAX_FORMAT"
-	_GLenum_map[32816] = "GL_MINMAX_SINK"
+	_GLenum_map[32815] = "GL_MINMAX_FORMAT_EXT"
 	_GLenum_map[32816] = "GL_MINMAX_SINK_EXT"
+	_GLenum_map[32816] = "GL_MINMAX_SINK"
 	_GLenum_map[32817] = "GL_TABLE_TOO_LARGE_EXT"
 	_GLenum_map[32817] = "GL_TABLE_TOO_LARGE"
-	_GLenum_map[32818] = "GL_UNSIGNED_BYTE_3_3_2_EXT"
 	_GLenum_map[32818] = "GL_UNSIGNED_BYTE_3_3_2"
+	_GLenum_map[32818] = "GL_UNSIGNED_BYTE_3_3_2_EXT"
 	_GLenum_map[32819] = "GL_UNSIGNED_SHORT_4_4_4_4"
 	_GLenum_map[32819] = "GL_UNSIGNED_SHORT_4_4_4_4_EXT"
-	_GLenum_map[32820] = "GL_UNSIGNED_SHORT_5_5_5_1"
 	_GLenum_map[32820] = "GL_UNSIGNED_SHORT_5_5_5_1_EXT"
+	_GLenum_map[32820] = "GL_UNSIGNED_SHORT_5_5_5_1"
 	_GLenum_map[32821] = "GL_UNSIGNED_INT_8_8_8_8_EXT"
 	_GLenum_map[32821] = "GL_UNSIGNED_INT_8_8_8_8"
-	_GLenum_map[32822] = "GL_UNSIGNED_INT_10_10_10_2_EXT"
 	_GLenum_map[32822] = "GL_UNSIGNED_INT_10_10_10_2"
-	_GLenum_map[32823] = "GL_POLYGON_OFFSET_EXT"
+	_GLenum_map[32822] = "GL_UNSIGNED_INT_10_10_10_2_EXT"
 	_GLenum_map[32823] = "GL_POLYGON_OFFSET_FILL"
-	_GLenum_map[32824] = "GL_POLYGON_OFFSET_FACTOR"
+	_GLenum_map[32823] = "GL_POLYGON_OFFSET_EXT"
 	_GLenum_map[32824] = "GL_POLYGON_OFFSET_FACTOR_EXT"
+	_GLenum_map[32824] = "GL_POLYGON_OFFSET_FACTOR"
 	_GLenum_map[32825] = "GL_POLYGON_OFFSET_BIAS_EXT"
-	_GLenum_map[32826] = "GL_RESCALE_NORMAL_EXT"
 	_GLenum_map[32826] = "GL_RESCALE_NORMAL"
+	_GLenum_map[32826] = "GL_RESCALE_NORMAL_EXT"
 	_GLenum_map[32827] = "GL_ALPHA4_EXT"
 	_GLenum_map[32827] = "GL_ALPHA4"
 	_GLenum_map[32828] = "GL_ALPHA8_EXT"
-	_GLenum_map[32828] = "GL_ALPHA8_OES"
 	_GLenum_map[32828] = "GL_ALPHA8"
-	_GLenum_map[32829] = "GL_ALPHA12"
+	_GLenum_map[32828] = "GL_ALPHA8_OES"
 	_GLenum_map[32829] = "GL_ALPHA12_EXT"
+	_GLenum_map[32829] = "GL_ALPHA12"
 	_GLenum_map[32830] = "GL_ALPHA16"
 	_GLenum_map[32830] = "GL_ALPHA16_EXT"
 	_GLenum_map[32831] = "GL_LUMINANCE4"
 	_GLenum_map[32831] = "GL_LUMINANCE4_EXT"
 	_GLenum_map[32832] = "GL_LUMINANCE8_OES"
-	_GLenum_map[32832] = "GL_LUMINANCE8_EXT"
 	_GLenum_map[32832] = "GL_LUMINANCE8"
-	_GLenum_map[32833] = "GL_LUMINANCE12_EXT"
+	_GLenum_map[32832] = "GL_LUMINANCE8_EXT"
 	_GLenum_map[32833] = "GL_LUMINANCE12"
-	_GLenum_map[32834] = "GL_LUMINANCE16_EXT"
+	_GLenum_map[32833] = "GL_LUMINANCE12_EXT"
 	_GLenum_map[32834] = "GL_LUMINANCE16"
-	_GLenum_map[32835] = "GL_LUMINANCE4_ALPHA4_OES"
-	_GLenum_map[32835] = "GL_LUMINANCE4_ALPHA4"
+	_GLenum_map[32834] = "GL_LUMINANCE16_EXT"
 	_GLenum_map[32835] = "GL_LUMINANCE4_ALPHA4_EXT"
+	_GLenum_map[32835] = "GL_LUMINANCE4_ALPHA4"
+	_GLenum_map[32835] = "GL_LUMINANCE4_ALPHA4_OES"
 	_GLenum_map[32836] = "GL_LUMINANCE6_ALPHA2"
 	_GLenum_map[32836] = "GL_LUMINANCE6_ALPHA2_EXT"
-	_GLenum_map[32837] = "GL_LUMINANCE8_ALPHA8_EXT"
-	_GLenum_map[32837] = "GL_LUMINANCE8_ALPHA8"
 	_GLenum_map[32837] = "GL_LUMINANCE8_ALPHA8_OES"
+	_GLenum_map[32837] = "GL_LUMINANCE8_ALPHA8"
+	_GLenum_map[32837] = "GL_LUMINANCE8_ALPHA8_EXT"
 	_GLenum_map[32838] = "GL_LUMINANCE12_ALPHA4"
 	_GLenum_map[32838] = "GL_LUMINANCE12_ALPHA4_EXT"
 	_GLenum_map[32839] = "GL_LUMINANCE12_ALPHA12_EXT"
 	_GLenum_map[32839] = "GL_LUMINANCE12_ALPHA12"
-	_GLenum_map[32840] = "GL_LUMINANCE16_ALPHA16_EXT"
 	_GLenum_map[32840] = "GL_LUMINANCE16_ALPHA16"
-	_GLenum_map[32841] = "GL_INTENSITY_EXT"
+	_GLenum_map[32840] = "GL_LUMINANCE16_ALPHA16_EXT"
 	_GLenum_map[32841] = "GL_INTENSITY"
+	_GLenum_map[32841] = "GL_INTENSITY_EXT"
 	_GLenum_map[32842] = "GL_INTENSITY4"
 	_GLenum_map[32842] = "GL_INTENSITY4_EXT"
 	_GLenum_map[32843] = "GL_INTENSITY8_EXT"
 	_GLenum_map[32843] = "GL_INTENSITY8"
 	_GLenum_map[32844] = "GL_INTENSITY12"
 	_GLenum_map[32844] = "GL_INTENSITY12_EXT"
-	_GLenum_map[32845] = "GL_INTENSITY16"
 	_GLenum_map[32845] = "GL_INTENSITY16_EXT"
+	_GLenum_map[32845] = "GL_INTENSITY16"
 	_GLenum_map[32846] = "GL_RGB2_EXT"
 	_GLenum_map[32847] = "GL_RGB4"
 	_GLenum_map[32847] = "GL_RGB4_EXT"
-	_GLenum_map[32848] = "GL_RGB5_EXT"
 	_GLenum_map[32848] = "GL_RGB5"
+	_GLenum_map[32848] = "GL_RGB5_EXT"
 	_GLenum_map[32849] = "GL_RGB8"
 	_GLenum_map[32849] = "GL_RGB8_OES"
 	_GLenum_map[32849] = "GL_RGB8_EXT"
-	_GLenum_map[32850] = "GL_RGB10_EXT"
 	_GLenum_map[32850] = "GL_RGB10"
-	_GLenum_map[32851] = "GL_RGB12"
+	_GLenum_map[32850] = "GL_RGB10_EXT"
 	_GLenum_map[32851] = "GL_RGB12_EXT"
-	_GLenum_map[32852] = "GL_RGB16"
+	_GLenum_map[32851] = "GL_RGB12"
 	_GLenum_map[32852] = "GL_RGB16_EXT"
+	_GLenum_map[32852] = "GL_RGB16"
 	_GLenum_map[32853] = "GL_RGBA2"
 	_GLenum_map[32853] = "GL_RGBA2_EXT"
-	_GLenum_map[32854] = "GL_RGBA4_EXT"
 	_GLenum_map[32854] = "GL_RGBA4_OES"
+	_GLenum_map[32854] = "GL_RGBA4_EXT"
 	_GLenum_map[32854] = "GL_RGBA4"
+	_GLenum_map[32855] = "GL_RGB5_A1_EXT"
 	_GLenum_map[32855] = "GL_RGB5_A1_OES"
 	_GLenum_map[32855] = "GL_RGB5_A1"
-	_GLenum_map[32855] = "GL_RGB5_A1_EXT"
-	_GLenum_map[32856] = "GL_RGBA8_EXT"
 	_GLenum_map[32856] = "GL_RGBA8"
+	_GLenum_map[32856] = "GL_RGBA8_EXT"
 	_GLenum_map[32856] = "GL_RGBA8_OES"
 	_GLenum_map[32857] = "GL_RGB10_A2_EXT"
 	_GLenum_map[32857] = "GL_RGB10_A2"
-	_GLenum_map[32858] = "GL_RGBA12_EXT"
 	_GLenum_map[32858] = "GL_RGBA12"
-	_GLenum_map[32859] = "GL_RGBA16"
+	_GLenum_map[32858] = "GL_RGBA12_EXT"
 	_GLenum_map[32859] = "GL_RGBA16_EXT"
+	_GLenum_map[32859] = "GL_RGBA16"
 	_GLenum_map[32860] = "GL_TEXTURE_RED_SIZE_EXT"
 	_GLenum_map[32860] = "GL_TEXTURE_RED_SIZE"
 	_GLenum_map[32861] = "GL_TEXTURE_GREEN_SIZE"
 	_GLenum_map[32861] = "GL_TEXTURE_GREEN_SIZE_EXT"
-	_GLenum_map[32862] = "GL_TEXTURE_BLUE_SIZE_EXT"
 	_GLenum_map[32862] = "GL_TEXTURE_BLUE_SIZE"
-	_GLenum_map[32863] = "GL_TEXTURE_ALPHA_SIZE_EXT"
+	_GLenum_map[32862] = "GL_TEXTURE_BLUE_SIZE_EXT"
 	_GLenum_map[32863] = "GL_TEXTURE_ALPHA_SIZE"
-	_GLenum_map[32864] = "GL_TEXTURE_LUMINANCE_SIZE_EXT"
+	_GLenum_map[32863] = "GL_TEXTURE_ALPHA_SIZE_EXT"
 	_GLenum_map[32864] = "GL_TEXTURE_LUMINANCE_SIZE"
+	_GLenum_map[32864] = "GL_TEXTURE_LUMINANCE_SIZE_EXT"
 	_GLenum_map[32865] = "GL_TEXTURE_INTENSITY_SIZE"
 	_GLenum_map[32865] = "GL_TEXTURE_INTENSITY_SIZE_EXT"
 	_GLenum_map[32866] = "GL_REPLACE_EXT"
-	_GLenum_map[32867] = "GL_PROXY_TEXTURE_1D_EXT"
 	_GLenum_map[32867] = "GL_PROXY_TEXTURE_1D"
+	_GLenum_map[32867] = "GL_PROXY_TEXTURE_1D_EXT"
 	_GLenum_map[32868] = "GL_PROXY_TEXTURE_2D_EXT"
 	_GLenum_map[32868] = "GL_PROXY_TEXTURE_2D"
 	_GLenum_map[32869] = "GL_TEXTURE_TOO_LARGE_EXT"
@@ -78254,24 +81551,24 @@ func init() {
 	_GLenum_map[32870] = "GL_TEXTURE_PRIORITY_EXT"
 	_GLenum_map[32871] = "GL_TEXTURE_RESIDENT"
 	_GLenum_map[32871] = "GL_TEXTURE_RESIDENT_EXT"
-	_GLenum_map[32872] = "GL_TEXTURE_1D_BINDING_EXT"
 	_GLenum_map[32872] = "GL_TEXTURE_BINDING_1D"
+	_GLenum_map[32872] = "GL_TEXTURE_1D_BINDING_EXT"
 	_GLenum_map[32873] = "GL_TEXTURE_2D_BINDING_EXT"
 	_GLenum_map[32873] = "GL_TEXTURE_BINDING_2D"
 	_GLenum_map[32874] = "GL_TEXTURE_BINDING_3D_OES"
+	_GLenum_map[32874] = "GL_TEXTURE_3D_BINDING_EXT"
 	_GLenum_map[32874] = "GL_TEXTURE_3D_BINDING_OES"
 	_GLenum_map[32874] = "GL_TEXTURE_BINDING_3D"
-	_GLenum_map[32874] = "GL_TEXTURE_3D_BINDING_EXT"
 	_GLenum_map[32875] = "GL_PACK_SKIP_IMAGES"
 	_GLenum_map[32875] = "GL_PACK_SKIP_IMAGES_EXT"
-	_GLenum_map[32876] = "GL_PACK_IMAGE_HEIGHT"
 	_GLenum_map[32876] = "GL_PACK_IMAGE_HEIGHT_EXT"
+	_GLenum_map[32876] = "GL_PACK_IMAGE_HEIGHT"
 	_GLenum_map[32877] = "GL_UNPACK_SKIP_IMAGES_EXT"
 	_GLenum_map[32877] = "GL_UNPACK_SKIP_IMAGES"
 	_GLenum_map[32878] = "GL_UNPACK_IMAGE_HEIGHT"
 	_GLenum_map[32878] = "GL_UNPACK_IMAGE_HEIGHT_EXT"
-	_GLenum_map[32879] = "GL_TEXTURE_3D_OES"
 	_GLenum_map[32879] = "GL_TEXTURE_3D"
+	_GLenum_map[32879] = "GL_TEXTURE_3D_OES"
 	_GLenum_map[32879] = "GL_TEXTURE_3D_EXT"
 	_GLenum_map[32880] = "GL_PROXY_TEXTURE_3D"
 	_GLenum_map[32880] = "GL_PROXY_TEXTURE_3D_EXT"
@@ -78281,27 +81578,27 @@ func init() {
 	_GLenum_map[32882] = "GL_TEXTURE_WRAP_R_EXT"
 	_GLenum_map[32882] = "GL_TEXTURE_WRAP_R_OES"
 	_GLenum_map[32883] = "GL_MAX_3D_TEXTURE_SIZE_OES"
-	_GLenum_map[32883] = "GL_MAX_3D_TEXTURE_SIZE"
 	_GLenum_map[32883] = "GL_MAX_3D_TEXTURE_SIZE_EXT"
-	_GLenum_map[32884] = "GL_VERTEX_ARRAY"
-	_GLenum_map[32884] = "GL_VERTEX_ARRAY_KHR"
+	_GLenum_map[32883] = "GL_MAX_3D_TEXTURE_SIZE"
 	_GLenum_map[32884] = "GL_VERTEX_ARRAY_EXT"
+	_GLenum_map[32884] = "GL_VERTEX_ARRAY_KHR"
+	_GLenum_map[32884] = "GL_VERTEX_ARRAY"
 	_GLenum_map[32885] = "GL_NORMAL_ARRAY"
 	_GLenum_map[32885] = "GL_NORMAL_ARRAY_EXT"
-	_GLenum_map[32886] = "GL_COLOR_ARRAY"
 	_GLenum_map[32886] = "GL_COLOR_ARRAY_EXT"
-	_GLenum_map[32887] = "GL_INDEX_ARRAY_EXT"
+	_GLenum_map[32886] = "GL_COLOR_ARRAY"
 	_GLenum_map[32887] = "GL_INDEX_ARRAY"
+	_GLenum_map[32887] = "GL_INDEX_ARRAY_EXT"
 	_GLenum_map[32888] = "GL_TEXTURE_COORD_ARRAY_EXT"
 	_GLenum_map[32888] = "GL_TEXTURE_COORD_ARRAY"
-	_GLenum_map[32889] = "GL_EDGE_FLAG_ARRAY"
 	_GLenum_map[32889] = "GL_EDGE_FLAG_ARRAY_EXT"
+	_GLenum_map[32889] = "GL_EDGE_FLAG_ARRAY"
 	_GLenum_map[32890] = "GL_VERTEX_ARRAY_SIZE"
 	_GLenum_map[32890] = "GL_VERTEX_ARRAY_SIZE_EXT"
-	_GLenum_map[32891] = "GL_VERTEX_ARRAY_TYPE"
 	_GLenum_map[32891] = "GL_VERTEX_ARRAY_TYPE_EXT"
-	_GLenum_map[32892] = "GL_VERTEX_ARRAY_STRIDE_EXT"
+	_GLenum_map[32891] = "GL_VERTEX_ARRAY_TYPE"
 	_GLenum_map[32892] = "GL_VERTEX_ARRAY_STRIDE"
+	_GLenum_map[32892] = "GL_VERTEX_ARRAY_STRIDE_EXT"
 	_GLenum_map[32893] = "GL_VERTEX_ARRAY_COUNT_EXT"
 	_GLenum_map[32894] = "GL_NORMAL_ARRAY_TYPE"
 	_GLenum_map[32894] = "GL_NORMAL_ARRAY_TYPE_EXT"
@@ -78315,20 +81612,20 @@ func init() {
 	_GLenum_map[32899] = "GL_COLOR_ARRAY_STRIDE_EXT"
 	_GLenum_map[32899] = "GL_COLOR_ARRAY_STRIDE"
 	_GLenum_map[32900] = "GL_COLOR_ARRAY_COUNT_EXT"
-	_GLenum_map[32901] = "GL_INDEX_ARRAY_TYPE_EXT"
 	_GLenum_map[32901] = "GL_INDEX_ARRAY_TYPE"
+	_GLenum_map[32901] = "GL_INDEX_ARRAY_TYPE_EXT"
 	_GLenum_map[32902] = "GL_INDEX_ARRAY_STRIDE"
 	_GLenum_map[32902] = "GL_INDEX_ARRAY_STRIDE_EXT"
 	_GLenum_map[32903] = "GL_INDEX_ARRAY_COUNT_EXT"
 	_GLenum_map[32904] = "GL_TEXTURE_COORD_ARRAY_SIZE"
 	_GLenum_map[32904] = "GL_TEXTURE_COORD_ARRAY_SIZE_EXT"
-	_GLenum_map[32905] = "GL_TEXTURE_COORD_ARRAY_TYPE"
 	_GLenum_map[32905] = "GL_TEXTURE_COORD_ARRAY_TYPE_EXT"
+	_GLenum_map[32905] = "GL_TEXTURE_COORD_ARRAY_TYPE"
 	_GLenum_map[32906] = "GL_TEXTURE_COORD_ARRAY_STRIDE"
 	_GLenum_map[32906] = "GL_TEXTURE_COORD_ARRAY_STRIDE_EXT"
 	_GLenum_map[32907] = "GL_TEXTURE_COORD_ARRAY_COUNT_EXT"
-	_GLenum_map[32908] = "GL_EDGE_FLAG_ARRAY_STRIDE_EXT"
 	_GLenum_map[32908] = "GL_EDGE_FLAG_ARRAY_STRIDE"
+	_GLenum_map[32908] = "GL_EDGE_FLAG_ARRAY_STRIDE_EXT"
 	_GLenum_map[32909] = "GL_EDGE_FLAG_ARRAY_COUNT_EXT"
 	_GLenum_map[32910] = "GL_VERTEX_ARRAY_POINTER_EXT"
 	_GLenum_map[32910] = "GL_VERTEX_ARRAY_POINTER"
@@ -78336,10 +81633,10 @@ func init() {
 	_GLenum_map[32911] = "GL_NORMAL_ARRAY_POINTER"
 	_GLenum_map[32912] = "GL_COLOR_ARRAY_POINTER"
 	_GLenum_map[32912] = "GL_COLOR_ARRAY_POINTER_EXT"
-	_GLenum_map[32913] = "GL_INDEX_ARRAY_POINTER"
 	_GLenum_map[32913] = "GL_INDEX_ARRAY_POINTER_EXT"
-	_GLenum_map[32914] = "GL_TEXTURE_COORD_ARRAY_POINTER"
+	_GLenum_map[32913] = "GL_INDEX_ARRAY_POINTER"
 	_GLenum_map[32914] = "GL_TEXTURE_COORD_ARRAY_POINTER_EXT"
+	_GLenum_map[32914] = "GL_TEXTURE_COORD_ARRAY_POINTER"
 	_GLenum_map[32915] = "GL_EDGE_FLAG_ARRAY_POINTER"
 	_GLenum_map[32915] = "GL_EDGE_FLAG_ARRAY_POINTER_EXT"
 	_GLenum_map[32916] = "GL_INTERLACE_SGIX"
@@ -78351,74 +81648,74 @@ func init() {
 	_GLenum_map[32922] = "GL_DETAIL_TEXTURE_LEVEL_SGIS"
 	_GLenum_map[32923] = "GL_DETAIL_TEXTURE_MODE_SGIS"
 	_GLenum_map[32924] = "GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS"
-	_GLenum_map[32925] = "GL_MULTISAMPLE_SGIS"
-	_GLenum_map[32925] = "GL_MULTISAMPLE_EXT"
 	_GLenum_map[32925] = "GL_MULTISAMPLE_ARB"
 	_GLenum_map[32925] = "GL_MULTISAMPLE"
-	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_COVERAGE_ARB"
+	_GLenum_map[32925] = "GL_MULTISAMPLE_SGIS"
+	_GLenum_map[32925] = "GL_MULTISAMPLE_EXT"
 	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_MASK_SGIS"
-	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_COVERAGE"
 	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_MASK_EXT"
-	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE_EXT"
+	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_COVERAGE_ARB"
+	_GLenum_map[32926] = "GL_SAMPLE_ALPHA_TO_COVERAGE"
 	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE"
-	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE_ARB"
 	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE_SGIS"
+	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE_EXT"
+	_GLenum_map[32927] = "GL_SAMPLE_ALPHA_TO_ONE_ARB"
 	_GLenum_map[32928] = "GL_SAMPLE_MASK_EXT"
 	_GLenum_map[32928] = "GL_SAMPLE_COVERAGE_ARB"
 	_GLenum_map[32928] = "GL_SAMPLE_MASK_SGIS"
 	_GLenum_map[32928] = "GL_SAMPLE_COVERAGE"
 	_GLenum_map[32929] = "GL_1PASS_EXT"
 	_GLenum_map[32929] = "GL_1PASS_SGIS"
-	_GLenum_map[32930] = "GL_2PASS_0_SGIS"
 	_GLenum_map[32930] = "GL_2PASS_0_EXT"
+	_GLenum_map[32930] = "GL_2PASS_0_SGIS"
 	_GLenum_map[32931] = "GL_2PASS_1_EXT"
 	_GLenum_map[32931] = "GL_2PASS_1_SGIS"
 	_GLenum_map[32932] = "GL_4PASS_0_EXT"
 	_GLenum_map[32932] = "GL_4PASS_0_SGIS"
-	_GLenum_map[32933] = "GL_4PASS_1_EXT"
 	_GLenum_map[32933] = "GL_4PASS_1_SGIS"
-	_GLenum_map[32934] = "GL_4PASS_2_SGIS"
+	_GLenum_map[32933] = "GL_4PASS_1_EXT"
 	_GLenum_map[32934] = "GL_4PASS_2_EXT"
-	_GLenum_map[32935] = "GL_4PASS_3_EXT"
+	_GLenum_map[32934] = "GL_4PASS_2_SGIS"
 	_GLenum_map[32935] = "GL_4PASS_3_SGIS"
-	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS_SGIS"
+	_GLenum_map[32935] = "GL_4PASS_3_EXT"
+	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS_EXT"
 	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS_ARB"
 	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS"
-	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS_EXT"
-	_GLenum_map[32937] = "GL_SAMPLES_SGIS"
-	_GLenum_map[32937] = "GL_SAMPLES_ARB"
-	_GLenum_map[32937] = "GL_SAMPLES"
+	_GLenum_map[32936] = "GL_SAMPLE_BUFFERS_SGIS"
 	_GLenum_map[32937] = "GL_SAMPLES_EXT"
-	_GLenum_map[32938] = "GL_SAMPLE_COVERAGE_VALUE_ARB"
+	_GLenum_map[32937] = "GL_SAMPLES"
+	_GLenum_map[32937] = "GL_SAMPLES_ARB"
+	_GLenum_map[32937] = "GL_SAMPLES_SGIS"
+	_GLenum_map[32938] = "GL_SAMPLE_COVERAGE_VALUE"
 	_GLenum_map[32938] = "GL_SAMPLE_MASK_VALUE_SGIS"
 	_GLenum_map[32938] = "GL_SAMPLE_MASK_VALUE_EXT"
-	_GLenum_map[32938] = "GL_SAMPLE_COVERAGE_VALUE"
+	_GLenum_map[32938] = "GL_SAMPLE_COVERAGE_VALUE_ARB"
 	_GLenum_map[32939] = "GL_SAMPLE_COVERAGE_INVERT"
-	_GLenum_map[32939] = "GL_SAMPLE_MASK_INVERT_EXT"
 	_GLenum_map[32939] = "GL_SAMPLE_COVERAGE_INVERT_ARB"
 	_GLenum_map[32939] = "GL_SAMPLE_MASK_INVERT_SGIS"
-	_GLenum_map[32940] = "GL_SAMPLE_PATTERN_EXT"
+	_GLenum_map[32939] = "GL_SAMPLE_MASK_INVERT_EXT"
 	_GLenum_map[32940] = "GL_SAMPLE_PATTERN_SGIS"
+	_GLenum_map[32940] = "GL_SAMPLE_PATTERN_EXT"
 	_GLenum_map[32941] = "GL_LINEAR_SHARPEN_SGIS"
 	_GLenum_map[32942] = "GL_LINEAR_SHARPEN_ALPHA_SGIS"
 	_GLenum_map[32943] = "GL_LINEAR_SHARPEN_COLOR_SGIS"
 	_GLenum_map[32944] = "GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS"
-	_GLenum_map[32945] = "GL_COLOR_MATRIX"
 	_GLenum_map[32945] = "GL_COLOR_MATRIX_SGI"
-	_GLenum_map[32946] = "GL_COLOR_MATRIX_STACK_DEPTH"
+	_GLenum_map[32945] = "GL_COLOR_MATRIX"
 	_GLenum_map[32946] = "GL_COLOR_MATRIX_STACK_DEPTH_SGI"
+	_GLenum_map[32946] = "GL_COLOR_MATRIX_STACK_DEPTH"
 	_GLenum_map[32947] = "GL_MAX_COLOR_MATRIX_STACK_DEPTH"
 	_GLenum_map[32947] = "GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI"
 	_GLenum_map[32948] = "GL_POST_COLOR_MATRIX_RED_SCALE_SGI"
 	_GLenum_map[32948] = "GL_POST_COLOR_MATRIX_RED_SCALE"
-	_GLenum_map[32949] = "GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI"
 	_GLenum_map[32949] = "GL_POST_COLOR_MATRIX_GREEN_SCALE"
+	_GLenum_map[32949] = "GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI"
 	_GLenum_map[32950] = "GL_POST_COLOR_MATRIX_BLUE_SCALE"
 	_GLenum_map[32950] = "GL_POST_COLOR_MATRIX_BLUE_SCALE_SGI"
-	_GLenum_map[32951] = "GL_POST_COLOR_MATRIX_ALPHA_SCALE"
 	_GLenum_map[32951] = "GL_POST_COLOR_MATRIX_ALPHA_SCALE_SGI"
-	_GLenum_map[32952] = "GL_POST_COLOR_MATRIX_RED_BIAS_SGI"
+	_GLenum_map[32951] = "GL_POST_COLOR_MATRIX_ALPHA_SCALE"
 	_GLenum_map[32952] = "GL_POST_COLOR_MATRIX_RED_BIAS"
+	_GLenum_map[32952] = "GL_POST_COLOR_MATRIX_RED_BIAS_SGI"
 	_GLenum_map[32953] = "GL_POST_COLOR_MATRIX_GREEN_BIAS_SGI"
 	_GLenum_map[32953] = "GL_POST_COLOR_MATRIX_GREEN_BIAS"
 	_GLenum_map[32954] = "GL_POST_COLOR_MATRIX_BLUE_BIAS_SGI"
@@ -78430,69 +81727,69 @@ func init() {
 	_GLenum_map[32958] = "GL_TEXTURE_ENV_BIAS_SGIX"
 	_GLenum_map[32959] = "GL_SHADOW_AMBIENT_SGIX"
 	_GLenum_map[32959] = "GL_TEXTURE_COMPARE_FAIL_VALUE_ARB"
-	_GLenum_map[32968] = "GL_BLEND_DST_RGB_OES"
 	_GLenum_map[32968] = "GL_BLEND_DST_RGB"
+	_GLenum_map[32968] = "GL_BLEND_DST_RGB_OES"
 	_GLenum_map[32968] = "GL_BLEND_DST_RGB_EXT"
 	_GLenum_map[32969] = "GL_BLEND_SRC_RGB"
-	_GLenum_map[32969] = "GL_BLEND_SRC_RGB_EXT"
 	_GLenum_map[32969] = "GL_BLEND_SRC_RGB_OES"
-	_GLenum_map[32970] = "GL_BLEND_DST_ALPHA"
+	_GLenum_map[32969] = "GL_BLEND_SRC_RGB_EXT"
 	_GLenum_map[32970] = "GL_BLEND_DST_ALPHA_EXT"
+	_GLenum_map[32970] = "GL_BLEND_DST_ALPHA"
 	_GLenum_map[32970] = "GL_BLEND_DST_ALPHA_OES"
-	_GLenum_map[32971] = "GL_BLEND_SRC_ALPHA_OES"
 	_GLenum_map[32971] = "GL_BLEND_SRC_ALPHA"
+	_GLenum_map[32971] = "GL_BLEND_SRC_ALPHA_OES"
 	_GLenum_map[32971] = "GL_BLEND_SRC_ALPHA_EXT"
 	_GLenum_map[32972] = "GL_422_EXT"
 	_GLenum_map[32973] = "GL_422_REV_EXT"
 	_GLenum_map[32974] = "GL_422_AVERAGE_EXT"
 	_GLenum_map[32975] = "GL_422_REV_AVERAGE_EXT"
-	_GLenum_map[32976] = "GL_COLOR_TABLE"
 	_GLenum_map[32976] = "GL_COLOR_TABLE_SGI"
+	_GLenum_map[32976] = "GL_COLOR_TABLE"
 	_GLenum_map[32977] = "GL_POST_CONVOLUTION_COLOR_TABLE"
 	_GLenum_map[32977] = "GL_POST_CONVOLUTION_COLOR_TABLE_SGI"
-	_GLenum_map[32978] = "GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI"
 	_GLenum_map[32978] = "GL_POST_COLOR_MATRIX_COLOR_TABLE"
-	_GLenum_map[32979] = "GL_PROXY_COLOR_TABLE"
+	_GLenum_map[32978] = "GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI"
 	_GLenum_map[32979] = "GL_PROXY_COLOR_TABLE_SGI"
+	_GLenum_map[32979] = "GL_PROXY_COLOR_TABLE"
 	_GLenum_map[32980] = "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI"
 	_GLenum_map[32980] = "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE"
-	_GLenum_map[32981] = "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE"
 	_GLenum_map[32981] = "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE_SGI"
-	_GLenum_map[32982] = "GL_COLOR_TABLE_SCALE_SGI"
+	_GLenum_map[32981] = "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE"
 	_GLenum_map[32982] = "GL_COLOR_TABLE_SCALE"
-	_GLenum_map[32983] = "GL_COLOR_TABLE_BIAS_SGI"
+	_GLenum_map[32982] = "GL_COLOR_TABLE_SCALE_SGI"
 	_GLenum_map[32983] = "GL_COLOR_TABLE_BIAS"
+	_GLenum_map[32983] = "GL_COLOR_TABLE_BIAS_SGI"
 	_GLenum_map[32984] = "GL_COLOR_TABLE_FORMAT"
 	_GLenum_map[32984] = "GL_COLOR_TABLE_FORMAT_SGI"
-	_GLenum_map[32985] = "GL_COLOR_TABLE_WIDTH"
 	_GLenum_map[32985] = "GL_COLOR_TABLE_WIDTH_SGI"
-	_GLenum_map[32986] = "GL_COLOR_TABLE_RED_SIZE_SGI"
+	_GLenum_map[32985] = "GL_COLOR_TABLE_WIDTH"
 	_GLenum_map[32986] = "GL_COLOR_TABLE_RED_SIZE"
-	_GLenum_map[32987] = "GL_COLOR_TABLE_GREEN_SIZE_SGI"
+	_GLenum_map[32986] = "GL_COLOR_TABLE_RED_SIZE_SGI"
 	_GLenum_map[32987] = "GL_COLOR_TABLE_GREEN_SIZE"
+	_GLenum_map[32987] = "GL_COLOR_TABLE_GREEN_SIZE_SGI"
 	_GLenum_map[32988] = "GL_COLOR_TABLE_BLUE_SIZE_SGI"
 	_GLenum_map[32988] = "GL_COLOR_TABLE_BLUE_SIZE"
-	_GLenum_map[32989] = "GL_COLOR_TABLE_ALPHA_SIZE"
 	_GLenum_map[32989] = "GL_COLOR_TABLE_ALPHA_SIZE_SGI"
+	_GLenum_map[32989] = "GL_COLOR_TABLE_ALPHA_SIZE"
 	_GLenum_map[32990] = "GL_COLOR_TABLE_LUMINANCE_SIZE_SGI"
 	_GLenum_map[32990] = "GL_COLOR_TABLE_LUMINANCE_SIZE"
-	_GLenum_map[32991] = "GL_COLOR_TABLE_INTENSITY_SIZE_SGI"
 	_GLenum_map[32991] = "GL_COLOR_TABLE_INTENSITY_SIZE"
+	_GLenum_map[32991] = "GL_COLOR_TABLE_INTENSITY_SIZE_SGI"
 	_GLenum_map[32992] = "GL_BGR"
 	_GLenum_map[32992] = "GL_BGR_EXT"
 	_GLenum_map[32993] = "GL_BGRA_IMG"
-	_GLenum_map[32993] = "GL_BGRA"
 	_GLenum_map[32993] = "GL_BGRA_EXT"
+	_GLenum_map[32993] = "GL_BGRA"
 	_GLenum_map[32994] = "GL_COLOR_INDEX1_EXT"
 	_GLenum_map[32995] = "GL_COLOR_INDEX2_EXT"
 	_GLenum_map[32996] = "GL_COLOR_INDEX4_EXT"
 	_GLenum_map[32997] = "GL_COLOR_INDEX8_EXT"
 	_GLenum_map[32998] = "GL_COLOR_INDEX12_EXT"
 	_GLenum_map[32999] = "GL_COLOR_INDEX16_EXT"
-	_GLenum_map[33000] = "GL_MAX_ELEMENTS_VERTICES"
 	_GLenum_map[33000] = "GL_MAX_ELEMENTS_VERTICES_EXT"
-	_GLenum_map[33001] = "GL_MAX_ELEMENTS_INDICES_EXT"
+	_GLenum_map[33000] = "GL_MAX_ELEMENTS_VERTICES"
 	_GLenum_map[33001] = "GL_MAX_ELEMENTS_INDICES"
+	_GLenum_map[33001] = "GL_MAX_ELEMENTS_INDICES_EXT"
 	_GLenum_map[33002] = "GL_PHONG_WIN"
 	_GLenum_map[33003] = "GL_PHONG_HINT_WIN"
 	_GLenum_map[33004] = "GL_FOG_SPECULAR_TEXTURE_WIN"
@@ -78522,18 +81819,18 @@ func init() {
 	_GLenum_map[33059] = "GL_QUAD_INTENSITY8_SGIS"
 	_GLenum_map[33060] = "GL_DUAL_TEXTURE_SELECT_SGIS"
 	_GLenum_map[33061] = "GL_QUAD_TEXTURE_SELECT_SGIS"
+	_GLenum_map[33062] = "GL_POINT_SIZE_MIN_SGIS"
+	_GLenum_map[33062] = "GL_POINT_SIZE_MIN"
 	_GLenum_map[33062] = "GL_POINT_SIZE_MIN_EXT"
 	_GLenum_map[33062] = "GL_POINT_SIZE_MIN_ARB"
-	_GLenum_map[33062] = "GL_POINT_SIZE_MIN"
-	_GLenum_map[33062] = "GL_POINT_SIZE_MIN_SGIS"
+	_GLenum_map[33063] = "GL_POINT_SIZE_MAX_SGIS"
 	_GLenum_map[33063] = "GL_POINT_SIZE_MAX_ARB"
 	_GLenum_map[33063] = "GL_POINT_SIZE_MAX_EXT"
 	_GLenum_map[33063] = "GL_POINT_SIZE_MAX"
-	_GLenum_map[33063] = "GL_POINT_SIZE_MAX_SGIS"
-	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE"
-	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE_EXT"
-	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE_ARB"
 	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE_SGIS"
+	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE"
+	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE_ARB"
+	_GLenum_map[33064] = "GL_POINT_FADE_THRESHOLD_SIZE_EXT"
 	_GLenum_map[33065] = "GL_POINT_DISTANCE_ATTENUATION_ARB"
 	_GLenum_map[33065] = "GL_POINT_DISTANCE_ATTENUATION"
 	_GLenum_map[33065] = "GL_DISTANCE_ATTENUATION_SGIS"
@@ -78541,12 +81838,12 @@ func init() {
 	_GLenum_map[33066] = "GL_FOG_FUNC_SGIS"
 	_GLenum_map[33067] = "GL_FOG_FUNC_POINTS_SGIS"
 	_GLenum_map[33068] = "GL_MAX_FOG_FUNC_POINTS_SGIS"
-	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_ARB"
+	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_SGIS"
 	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER"
+	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_ARB"
 	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_EXT"
 	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_NV"
 	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_OES"
-	_GLenum_map[33069] = "GL_CLAMP_TO_BORDER_SGIS"
 	_GLenum_map[33070] = "GL_TEXTURE_MULTI_BUFFER_HINT_SGIX"
 	_GLenum_map[33071] = "GL_CLAMP_TO_EDGE"
 	_GLenum_map[33071] = "GL_CLAMP_TO_EDGE_SGIS"
@@ -78560,15 +81857,15 @@ func init() {
 	_GLenum_map[33079] = "GL_TEXTURE_WRAP_Q_SGIS"
 	_GLenum_map[33080] = "GL_MAX_4D_TEXTURE_SIZE_SGIS"
 	_GLenum_map[33081] = "GL_PIXEL_TEX_GEN_SGIX"
-	_GLenum_map[33082] = "GL_TEXTURE_MIN_LOD"
 	_GLenum_map[33082] = "GL_TEXTURE_MIN_LOD_SGIS"
+	_GLenum_map[33082] = "GL_TEXTURE_MIN_LOD"
 	_GLenum_map[33083] = "GL_TEXTURE_MAX_LOD"
 	_GLenum_map[33083] = "GL_TEXTURE_MAX_LOD_SGIS"
-	_GLenum_map[33084] = "GL_TEXTURE_BASE_LEVEL_SGIS"
 	_GLenum_map[33084] = "GL_TEXTURE_BASE_LEVEL"
+	_GLenum_map[33084] = "GL_TEXTURE_BASE_LEVEL_SGIS"
+	_GLenum_map[33085] = "GL_TEXTURE_MAX_LEVEL_APPLE"
 	_GLenum_map[33085] = "GL_TEXTURE_MAX_LEVEL"
 	_GLenum_map[33085] = "GL_TEXTURE_MAX_LEVEL_SGIS"
-	_GLenum_map[33085] = "GL_TEXTURE_MAX_LEVEL_APPLE"
 	_GLenum_map[33086] = "GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX"
 	_GLenum_map[33087] = "GL_PIXEL_TILE_CACHE_INCREMENT_SGIX"
 	_GLenum_map[33088] = "GL_PIXEL_TILE_WIDTH_SGIX"
@@ -78590,8 +81887,8 @@ func init() {
 	_GLenum_map[33104] = "GL_IGNORE_BORDER_HP"
 	_GLenum_map[33105] = "GL_CONSTANT_BORDER"
 	_GLenum_map[33105] = "GL_CONSTANT_BORDER_HP"
-	_GLenum_map[33107] = "GL_REPLICATE_BORDER"
 	_GLenum_map[33107] = "GL_REPLICATE_BORDER_HP"
+	_GLenum_map[33107] = "GL_REPLICATE_BORDER"
 	_GLenum_map[33108] = "GL_CONVOLUTION_BORDER_COLOR"
 	_GLenum_map[33108] = "GL_CONVOLUTION_BORDER_COLOR_HP"
 	_GLenum_map[33109] = "GL_IMAGE_SCALE_X_HP"
@@ -78649,8 +81946,8 @@ func init() {
 	_GLenum_map[33168] = "GL_TEXTURE_LOD_BIAS_R_SGIX"
 	_GLenum_map[33169] = "GL_GENERATE_MIPMAP_SGIS"
 	_GLenum_map[33169] = "GL_GENERATE_MIPMAP"
-	_GLenum_map[33170] = "GL_GENERATE_MIPMAP_HINT"
 	_GLenum_map[33170] = "GL_GENERATE_MIPMAP_HINT_SGIS"
+	_GLenum_map[33170] = "GL_GENERATE_MIPMAP_HINT"
 	_GLenum_map[33172] = "GL_GEOMETRY_DEFORMATION_SGIX"
 	_GLenum_map[33173] = "GL_TEXTURE_DEFORMATION_SGIX"
 	_GLenum_map[33174] = "GL_DEFORMATIONS_MASK_SGIX"
@@ -78661,18 +81958,18 @@ func init() {
 	_GLenum_map[33179] = "GL_TEXTURE_COMPARE_OPERATOR_SGIX"
 	_GLenum_map[33180] = "GL_TEXTURE_LEQUAL_R_SGIX"
 	_GLenum_map[33181] = "GL_TEXTURE_GEQUAL_R_SGIX"
-	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16_SGIX"
-	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16_ARB"
-	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16"
 	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16_OES"
+	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16_SGIX"
+	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16"
+	_GLenum_map[33189] = "GL_DEPTH_COMPONENT16_ARB"
 	_GLenum_map[33190] = "GL_DEPTH_COMPONENT24_OES"
+	_GLenum_map[33190] = "GL_DEPTH_COMPONENT24_ARB"
 	_GLenum_map[33190] = "GL_DEPTH_COMPONENT24_SGIX"
 	_GLenum_map[33190] = "GL_DEPTH_COMPONENT24"
-	_GLenum_map[33190] = "GL_DEPTH_COMPONENT24_ARB"
-	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32_SGIX"
 	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32_OES"
-	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32_ARB"
 	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32"
+	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32_ARB"
+	_GLenum_map[33191] = "GL_DEPTH_COMPONENT32_SGIX"
 	_GLenum_map[33192] = "GL_ARRAY_ELEMENT_LOCK_FIRST_EXT"
 	_GLenum_map[33193] = "GL_ARRAY_ELEMENT_LOCK_COUNT_EXT"
 	_GLenum_map[33194] = "GL_CULL_VERTEX_EXT"
@@ -78712,16 +82009,16 @@ func init() {
 	_GLenum_map[33271] = "GL_OBJECT_LINE_SGIS"
 	_GLenum_map[33272] = "GL_LIGHT_MODEL_COLOR_CONTROL"
 	_GLenum_map[33272] = "GL_LIGHT_MODEL_COLOR_CONTROL_EXT"
-	_GLenum_map[33273] = "GL_SINGLE_COLOR"
 	_GLenum_map[33273] = "GL_SINGLE_COLOR_EXT"
-	_GLenum_map[33274] = "GL_SEPARATE_SPECULAR_COLOR"
+	_GLenum_map[33273] = "GL_SINGLE_COLOR"
 	_GLenum_map[33274] = "GL_SEPARATE_SPECULAR_COLOR_EXT"
+	_GLenum_map[33274] = "GL_SEPARATE_SPECULAR_COLOR"
 	_GLenum_map[33275] = "GL_SHARED_TEXTURE_PALETTE_EXT"
 	_GLenum_map[33280] = "GL_TEXT_FRAGMENT_SHADER_ATI"
-	_GLenum_map[33296] = "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING"
 	_GLenum_map[33296] = "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT"
-	_GLenum_map[33297] = "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE"
+	_GLenum_map[33296] = "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING"
 	_GLenum_map[33297] = "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT"
+	_GLenum_map[33297] = "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE"
 	_GLenum_map[33298] = "GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE"
 	_GLenum_map[33299] = "GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE"
 	_GLenum_map[33300] = "GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE"
@@ -78729,15 +82026,15 @@ func init() {
 	_GLenum_map[33302] = "GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE"
 	_GLenum_map[33303] = "GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE"
 	_GLenum_map[33304] = "GL_FRAMEBUFFER_DEFAULT"
-	_GLenum_map[33305] = "GL_FRAMEBUFFER_UNDEFINED"
 	_GLenum_map[33305] = "GL_FRAMEBUFFER_UNDEFINED_OES"
+	_GLenum_map[33305] = "GL_FRAMEBUFFER_UNDEFINED"
 	_GLenum_map[33306] = "GL_DEPTH_STENCIL_ATTACHMENT"
 	_GLenum_map[33307] = "GL_MAJOR_VERSION"
 	_GLenum_map[33308] = "GL_MINOR_VERSION"
 	_GLenum_map[33309] = "GL_NUM_EXTENSIONS"
 	_GLenum_map[33310] = "GL_CONTEXT_FLAGS"
-	_GLenum_map[33311] = "GL_BUFFER_IMMUTABLE_STORAGE_EXT"
 	_GLenum_map[33311] = "GL_BUFFER_IMMUTABLE_STORAGE"
+	_GLenum_map[33311] = "GL_BUFFER_IMMUTABLE_STORAGE_EXT"
 	_GLenum_map[33312] = "GL_BUFFER_STORAGE_FLAGS_EXT"
 	_GLenum_map[33312] = "GL_BUFFER_STORAGE_FLAGS"
 	_GLenum_map[33313] = "GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED"
@@ -78745,8 +82042,8 @@ func init() {
 	_GLenum_map[33314] = "GL_INDEX"
 	_GLenum_map[33317] = "GL_COMPRESSED_RED"
 	_GLenum_map[33318] = "GL_COMPRESSED_RG"
-	_GLenum_map[33319] = "GL_RG"
 	_GLenum_map[33319] = "GL_RG_EXT"
+	_GLenum_map[33319] = "GL_RG"
 	_GLenum_map[33320] = "GL_RG_INTEGER"
 	_GLenum_map[33321] = "GL_R8"
 	_GLenum_map[33321] = "GL_R8_EXT"
@@ -78754,16 +82051,16 @@ func init() {
 	_GLenum_map[33322] = "GL_R16_EXT"
 	_GLenum_map[33323] = "GL_RG8_EXT"
 	_GLenum_map[33323] = "GL_RG8"
-	_GLenum_map[33324] = "GL_RG16_EXT"
 	_GLenum_map[33324] = "GL_RG16"
-	_GLenum_map[33325] = "GL_R16F_EXT"
+	_GLenum_map[33324] = "GL_RG16_EXT"
 	_GLenum_map[33325] = "GL_R16F"
-	_GLenum_map[33326] = "GL_R32F_EXT"
+	_GLenum_map[33325] = "GL_R16F_EXT"
 	_GLenum_map[33326] = "GL_R32F"
+	_GLenum_map[33326] = "GL_R32F_EXT"
 	_GLenum_map[33327] = "GL_RG16F"
 	_GLenum_map[33327] = "GL_RG16F_EXT"
-	_GLenum_map[33328] = "GL_RG32F_EXT"
 	_GLenum_map[33328] = "GL_RG32F"
+	_GLenum_map[33328] = "GL_RG32F_EXT"
 	_GLenum_map[33329] = "GL_R8I"
 	_GLenum_map[33330] = "GL_R8UI"
 	_GLenum_map[33331] = "GL_R16I"
@@ -78781,117 +82078,117 @@ func init() {
 	_GLenum_map[33346] = "GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR"
 	_GLenum_map[33346] = "GL_DEBUG_OUTPUT_SYNCHRONOUS"
 	_GLenum_map[33346] = "GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB"
-	_GLenum_map[33347] = "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR"
 	_GLenum_map[33347] = "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH"
+	_GLenum_map[33347] = "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR"
 	_GLenum_map[33347] = "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB"
 	_GLenum_map[33348] = "GL_DEBUG_CALLBACK_FUNCTION_KHR"
 	_GLenum_map[33348] = "GL_DEBUG_CALLBACK_FUNCTION"
 	_GLenum_map[33348] = "GL_DEBUG_CALLBACK_FUNCTION_ARB"
+	_GLenum_map[33349] = "GL_DEBUG_CALLBACK_USER_PARAM_KHR"
 	_GLenum_map[33349] = "GL_DEBUG_CALLBACK_USER_PARAM_ARB"
 	_GLenum_map[33349] = "GL_DEBUG_CALLBACK_USER_PARAM"
-	_GLenum_map[33349] = "GL_DEBUG_CALLBACK_USER_PARAM_KHR"
-	_GLenum_map[33350] = "GL_DEBUG_SOURCE_API"
 	_GLenum_map[33350] = "GL_DEBUG_SOURCE_API_KHR"
+	_GLenum_map[33350] = "GL_DEBUG_SOURCE_API"
 	_GLenum_map[33350] = "GL_DEBUG_SOURCE_API_ARB"
 	_GLenum_map[33351] = "GL_DEBUG_SOURCE_WINDOW_SYSTEM_KHR"
-	_GLenum_map[33351] = "GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB"
 	_GLenum_map[33351] = "GL_DEBUG_SOURCE_WINDOW_SYSTEM"
+	_GLenum_map[33351] = "GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB"
 	_GLenum_map[33352] = "GL_DEBUG_SOURCE_SHADER_COMPILER_KHR"
-	_GLenum_map[33352] = "GL_DEBUG_SOURCE_SHADER_COMPILER_ARB"
 	_GLenum_map[33352] = "GL_DEBUG_SOURCE_SHADER_COMPILER"
-	_GLenum_map[33353] = "GL_DEBUG_SOURCE_THIRD_PARTY_ARB"
+	_GLenum_map[33352] = "GL_DEBUG_SOURCE_SHADER_COMPILER_ARB"
 	_GLenum_map[33353] = "GL_DEBUG_SOURCE_THIRD_PARTY"
+	_GLenum_map[33353] = "GL_DEBUG_SOURCE_THIRD_PARTY_ARB"
 	_GLenum_map[33353] = "GL_DEBUG_SOURCE_THIRD_PARTY_KHR"
-	_GLenum_map[33354] = "GL_DEBUG_SOURCE_APPLICATION_KHR"
 	_GLenum_map[33354] = "GL_DEBUG_SOURCE_APPLICATION"
+	_GLenum_map[33354] = "GL_DEBUG_SOURCE_APPLICATION_KHR"
 	_GLenum_map[33354] = "GL_DEBUG_SOURCE_APPLICATION_ARB"
-	_GLenum_map[33355] = "GL_DEBUG_SOURCE_OTHER_ARB"
-	_GLenum_map[33355] = "GL_DEBUG_SOURCE_OTHER"
 	_GLenum_map[33355] = "GL_DEBUG_SOURCE_OTHER_KHR"
-	_GLenum_map[33356] = "GL_DEBUG_TYPE_ERROR_ARB"
+	_GLenum_map[33355] = "GL_DEBUG_SOURCE_OTHER"
+	_GLenum_map[33355] = "GL_DEBUG_SOURCE_OTHER_ARB"
 	_GLenum_map[33356] = "GL_DEBUG_TYPE_ERROR"
+	_GLenum_map[33356] = "GL_DEBUG_TYPE_ERROR_ARB"
 	_GLenum_map[33356] = "GL_DEBUG_TYPE_ERROR_KHR"
-	_GLenum_map[33357] = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB"
-	_GLenum_map[33357] = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR"
 	_GLenum_map[33357] = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR"
-	_GLenum_map[33358] = "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB"
+	_GLenum_map[33357] = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR"
+	_GLenum_map[33357] = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB"
 	_GLenum_map[33358] = "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_KHR"
+	_GLenum_map[33358] = "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB"
 	_GLenum_map[33358] = "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR"
 	_GLenum_map[33359] = "GL_DEBUG_TYPE_PORTABILITY_ARB"
-	_GLenum_map[33359] = "GL_DEBUG_TYPE_PORTABILITY"
 	_GLenum_map[33359] = "GL_DEBUG_TYPE_PORTABILITY_KHR"
-	_GLenum_map[33360] = "GL_DEBUG_TYPE_PERFORMANCE"
+	_GLenum_map[33359] = "GL_DEBUG_TYPE_PORTABILITY"
 	_GLenum_map[33360] = "GL_DEBUG_TYPE_PERFORMANCE_KHR"
+	_GLenum_map[33360] = "GL_DEBUG_TYPE_PERFORMANCE"
 	_GLenum_map[33360] = "GL_DEBUG_TYPE_PERFORMANCE_ARB"
-	_GLenum_map[33361] = "GL_DEBUG_TYPE_OTHER_ARB"
 	_GLenum_map[33361] = "GL_DEBUG_TYPE_OTHER"
 	_GLenum_map[33361] = "GL_DEBUG_TYPE_OTHER_KHR"
+	_GLenum_map[33361] = "GL_DEBUG_TYPE_OTHER_ARB"
+	_GLenum_map[33362] = "GL_LOSE_CONTEXT_ON_RESET_KHR"
 	_GLenum_map[33362] = "GL_LOSE_CONTEXT_ON_RESET_ARB"
 	_GLenum_map[33362] = "GL_LOSE_CONTEXT_ON_RESET"
 	_GLenum_map[33362] = "GL_LOSE_CONTEXT_ON_RESET_EXT"
-	_GLenum_map[33362] = "GL_LOSE_CONTEXT_ON_RESET_KHR"
-	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET_EXT"
-	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET_ARB"
 	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET_KHR"
+	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET_EXT"
 	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET"
+	_GLenum_map[33363] = "GL_GUILTY_CONTEXT_RESET_ARB"
 	_GLenum_map[33364] = "GL_INNOCENT_CONTEXT_RESET_EXT"
 	_GLenum_map[33364] = "GL_INNOCENT_CONTEXT_RESET_KHR"
 	_GLenum_map[33364] = "GL_INNOCENT_CONTEXT_RESET_ARB"
 	_GLenum_map[33364] = "GL_INNOCENT_CONTEXT_RESET"
 	_GLenum_map[33365] = "GL_UNKNOWN_CONTEXT_RESET"
 	_GLenum_map[33365] = "GL_UNKNOWN_CONTEXT_RESET_KHR"
-	_GLenum_map[33365] = "GL_UNKNOWN_CONTEXT_RESET_ARB"
 	_GLenum_map[33365] = "GL_UNKNOWN_CONTEXT_RESET_EXT"
+	_GLenum_map[33365] = "GL_UNKNOWN_CONTEXT_RESET_ARB"
 	_GLenum_map[33366] = "GL_RESET_NOTIFICATION_STRATEGY_KHR"
 	_GLenum_map[33366] = "GL_RESET_NOTIFICATION_STRATEGY"
-	_GLenum_map[33366] = "GL_RESET_NOTIFICATION_STRATEGY_EXT"
 	_GLenum_map[33366] = "GL_RESET_NOTIFICATION_STRATEGY_ARB"
+	_GLenum_map[33366] = "GL_RESET_NOTIFICATION_STRATEGY_EXT"
 	_GLenum_map[33367] = "GL_PROGRAM_BINARY_RETRIEVABLE_HINT"
-	_GLenum_map[33368] = "GL_PROGRAM_SEPARABLE_EXT"
 	_GLenum_map[33368] = "GL_PROGRAM_SEPARABLE"
+	_GLenum_map[33368] = "GL_PROGRAM_SEPARABLE_EXT"
 	_GLenum_map[33369] = "GL_ACTIVE_PROGRAM"
 	_GLenum_map[33369] = "GL_ACTIVE_PROGRAM_EXT"
-	_GLenum_map[33370] = "GL_PROGRAM_PIPELINE_BINDING"
 	_GLenum_map[33370] = "GL_PROGRAM_PIPELINE_BINDING_EXT"
-	_GLenum_map[33371] = "GL_MAX_VIEWPORTS_NV"
+	_GLenum_map[33370] = "GL_PROGRAM_PIPELINE_BINDING"
 	_GLenum_map[33371] = "GL_MAX_VIEWPORTS"
-	_GLenum_map[33372] = "GL_VIEWPORT_SUBPIXEL_BITS_EXT"
-	_GLenum_map[33372] = "GL_VIEWPORT_SUBPIXEL_BITS_NV"
+	_GLenum_map[33371] = "GL_MAX_VIEWPORTS_NV"
 	_GLenum_map[33372] = "GL_VIEWPORT_SUBPIXEL_BITS"
-	_GLenum_map[33373] = "GL_VIEWPORT_BOUNDS_RANGE"
+	_GLenum_map[33372] = "GL_VIEWPORT_SUBPIXEL_BITS_NV"
+	_GLenum_map[33372] = "GL_VIEWPORT_SUBPIXEL_BITS_EXT"
 	_GLenum_map[33373] = "GL_VIEWPORT_BOUNDS_RANGE_NV"
+	_GLenum_map[33373] = "GL_VIEWPORT_BOUNDS_RANGE"
 	_GLenum_map[33373] = "GL_VIEWPORT_BOUNDS_RANGE_EXT"
-	_GLenum_map[33374] = "GL_LAYER_PROVOKING_VERTEX"
 	_GLenum_map[33374] = "GL_LAYER_PROVOKING_VERTEX_EXT"
+	_GLenum_map[33374] = "GL_LAYER_PROVOKING_VERTEX"
 	_GLenum_map[33374] = "GL_LAYER_PROVOKING_VERTEX_OES"
-	_GLenum_map[33375] = "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_NV"
-	_GLenum_map[33375] = "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_EXT"
 	_GLenum_map[33375] = "GL_VIEWPORT_INDEX_PROVOKING_VERTEX"
+	_GLenum_map[33375] = "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_EXT"
+	_GLenum_map[33375] = "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_NV"
 	_GLenum_map[33376] = "GL_UNDEFINED_VERTEX"
 	_GLenum_map[33376] = "GL_UNDEFINED_VERTEX_EXT"
 	_GLenum_map[33376] = "GL_UNDEFINED_VERTEX_OES"
-	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION"
 	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION_ARB"
-	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION_EXT"
+	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION"
 	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION_KHR"
+	_GLenum_map[33377] = "GL_NO_RESET_NOTIFICATION_EXT"
 	_GLenum_map[33378] = "GL_MAX_COMPUTE_SHARED_MEMORY_SIZE"
 	_GLenum_map[33379] = "GL_MAX_COMPUTE_UNIFORM_COMPONENTS"
 	_GLenum_map[33380] = "GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS"
 	_GLenum_map[33381] = "GL_MAX_COMPUTE_ATOMIC_COUNTERS"
 	_GLenum_map[33382] = "GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS"
 	_GLenum_map[33383] = "GL_COMPUTE_WORK_GROUP_SIZE"
-	_GLenum_map[33384] = "GL_DEBUG_TYPE_MARKER_KHR"
 	_GLenum_map[33384] = "GL_DEBUG_TYPE_MARKER"
-	_GLenum_map[33385] = "GL_DEBUG_TYPE_PUSH_GROUP_KHR"
+	_GLenum_map[33384] = "GL_DEBUG_TYPE_MARKER_KHR"
 	_GLenum_map[33385] = "GL_DEBUG_TYPE_PUSH_GROUP"
+	_GLenum_map[33385] = "GL_DEBUG_TYPE_PUSH_GROUP_KHR"
 	_GLenum_map[33386] = "GL_DEBUG_TYPE_POP_GROUP_KHR"
 	_GLenum_map[33386] = "GL_DEBUG_TYPE_POP_GROUP"
 	_GLenum_map[33387] = "GL_DEBUG_SEVERITY_NOTIFICATION_KHR"
 	_GLenum_map[33387] = "GL_DEBUG_SEVERITY_NOTIFICATION"
-	_GLenum_map[33388] = "GL_MAX_DEBUG_GROUP_STACK_DEPTH_KHR"
 	_GLenum_map[33388] = "GL_MAX_DEBUG_GROUP_STACK_DEPTH"
-	_GLenum_map[33389] = "GL_DEBUG_GROUP_STACK_DEPTH_KHR"
+	_GLenum_map[33388] = "GL_MAX_DEBUG_GROUP_STACK_DEPTH_KHR"
 	_GLenum_map[33389] = "GL_DEBUG_GROUP_STACK_DEPTH"
+	_GLenum_map[33389] = "GL_DEBUG_GROUP_STACK_DEPTH_KHR"
 	_GLenum_map[33390] = "GL_MAX_UNIFORM_LOCATIONS"
 	_GLenum_map[33391] = "GL_INTERNALFORMAT_SUPPORTED"
 	_GLenum_map[33392] = "GL_INTERNALFORMAT_PREFERRED"
@@ -79003,31 +82300,31 @@ func init() {
 	_GLenum_map[33499] = "GL_TEXTURE_VIEW_MIN_LEVEL_EXT"
 	_GLenum_map[33499] = "GL_TEXTURE_VIEW_MIN_LEVEL"
 	_GLenum_map[33500] = "GL_TEXTURE_VIEW_NUM_LEVELS_OES"
-	_GLenum_map[33500] = "GL_TEXTURE_VIEW_NUM_LEVELS"
 	_GLenum_map[33500] = "GL_TEXTURE_VIEW_NUM_LEVELS_EXT"
-	_GLenum_map[33501] = "GL_TEXTURE_VIEW_MIN_LAYER_EXT"
+	_GLenum_map[33500] = "GL_TEXTURE_VIEW_NUM_LEVELS"
 	_GLenum_map[33501] = "GL_TEXTURE_VIEW_MIN_LAYER"
 	_GLenum_map[33501] = "GL_TEXTURE_VIEW_MIN_LAYER_OES"
-	_GLenum_map[33502] = "GL_TEXTURE_VIEW_NUM_LAYERS"
+	_GLenum_map[33501] = "GL_TEXTURE_VIEW_MIN_LAYER_EXT"
 	_GLenum_map[33502] = "GL_TEXTURE_VIEW_NUM_LAYERS_EXT"
+	_GLenum_map[33502] = "GL_TEXTURE_VIEW_NUM_LAYERS"
 	_GLenum_map[33502] = "GL_TEXTURE_VIEW_NUM_LAYERS_OES"
 	_GLenum_map[33503] = "GL_TEXTURE_IMMUTABLE_LEVELS"
 	_GLenum_map[33504] = "GL_BUFFER"
 	_GLenum_map[33504] = "GL_BUFFER_KHR"
 	_GLenum_map[33505] = "GL_SHADER_KHR"
 	_GLenum_map[33505] = "GL_SHADER"
-	_GLenum_map[33506] = "GL_PROGRAM"
 	_GLenum_map[33506] = "GL_PROGRAM_KHR"
+	_GLenum_map[33506] = "GL_PROGRAM"
 	_GLenum_map[33507] = "GL_QUERY"
 	_GLenum_map[33507] = "GL_QUERY_KHR"
-	_GLenum_map[33508] = "GL_PROGRAM_PIPELINE_KHR"
 	_GLenum_map[33508] = "GL_PROGRAM_PIPELINE"
+	_GLenum_map[33508] = "GL_PROGRAM_PIPELINE_KHR"
 	_GLenum_map[33509] = "GL_MAX_VERTEX_ATTRIB_STRIDE"
-	_GLenum_map[33510] = "GL_SAMPLER"
 	_GLenum_map[33510] = "GL_SAMPLER_KHR"
+	_GLenum_map[33510] = "GL_SAMPLER"
 	_GLenum_map[33511] = "GL_DISPLAY_LIST"
-	_GLenum_map[33512] = "GL_MAX_LABEL_LENGTH"
 	_GLenum_map[33512] = "GL_MAX_LABEL_LENGTH_KHR"
+	_GLenum_map[33512] = "GL_MAX_LABEL_LENGTH"
 	_GLenum_map[33513] = "GL_NUM_SHADING_LANGUAGE_VERSIONS"
 	_GLenum_map[33514] = "GL_QUERY_TARGET"
 	_GLenum_map[33516] = "GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB"
@@ -79045,8 +82342,8 @@ func init() {
 	_GLenum_map[33528] = "GL_SPARSE_BUFFER_PAGE_SIZE_ARB"
 	_GLenum_map[33529] = "GL_MAX_CULL_DISTANCES"
 	_GLenum_map[33530] = "GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES"
-	_GLenum_map[33531] = "GL_CONTEXT_RELEASE_BEHAVIOR"
 	_GLenum_map[33531] = "GL_CONTEXT_RELEASE_BEHAVIOR_KHR"
+	_GLenum_map[33531] = "GL_CONTEXT_RELEASE_BEHAVIOR"
 	_GLenum_map[33532] = "GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_KHR"
 	_GLenum_map[33532] = "GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH"
 	_GLenum_map[33552] = "GL_DEPTH_PASS_INSTRUMENT_SGIX"
@@ -79106,21 +82403,21 @@ func init() {
 	_GLenum_map[33635] = "GL_UNSIGNED_SHORT_5_6_5_EXT"
 	_GLenum_map[33636] = "GL_UNSIGNED_SHORT_5_6_5_REV_EXT"
 	_GLenum_map[33636] = "GL_UNSIGNED_SHORT_5_6_5_REV"
-	_GLenum_map[33637] = "GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG"
-	_GLenum_map[33637] = "GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT"
 	_GLenum_map[33637] = "GL_UNSIGNED_SHORT_4_4_4_4_REV"
-	_GLenum_map[33638] = "GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT"
+	_GLenum_map[33637] = "GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT"
+	_GLenum_map[33637] = "GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG"
 	_GLenum_map[33638] = "GL_UNSIGNED_SHORT_1_5_5_5_REV"
-	_GLenum_map[33639] = "GL_UNSIGNED_INT_8_8_8_8_REV_EXT"
+	_GLenum_map[33638] = "GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT"
 	_GLenum_map[33639] = "GL_UNSIGNED_INT_8_8_8_8_REV"
+	_GLenum_map[33639] = "GL_UNSIGNED_INT_8_8_8_8_REV_EXT"
 	_GLenum_map[33640] = "GL_UNSIGNED_INT_2_10_10_10_REV_EXT"
 	_GLenum_map[33640] = "GL_UNSIGNED_INT_2_10_10_10_REV"
 	_GLenum_map[33641] = "GL_TEXTURE_MAX_CLAMP_S_SGIX"
 	_GLenum_map[33642] = "GL_TEXTURE_MAX_CLAMP_T_SGIX"
 	_GLenum_map[33643] = "GL_TEXTURE_MAX_CLAMP_R_SGIX"
-	_GLenum_map[33648] = "GL_MIRRORED_REPEAT_ARB"
 	_GLenum_map[33648] = "GL_MIRRORED_REPEAT"
 	_GLenum_map[33648] = "GL_MIRRORED_REPEAT_OES"
+	_GLenum_map[33648] = "GL_MIRRORED_REPEAT_ARB"
 	_GLenum_map[33648] = "GL_MIRRORED_REPEAT_IBM"
 	_GLenum_map[33696] = "GL_RGB_S3TC"
 	_GLenum_map[33697] = "GL_RGB4_S3TC"
@@ -79187,40 +82484,40 @@ func init() {
 	_GLenum_map[33869] = "GL_NEAREST_CLIPMAP_NEAREST_SGIX"
 	_GLenum_map[33870] = "GL_NEAREST_CLIPMAP_LINEAR_SGIX"
 	_GLenum_map[33871] = "GL_LINEAR_CLIPMAP_NEAREST_SGIX"
-	_GLenum_map[33872] = "GL_FOG_COORDINATE_SOURCE"
 	_GLenum_map[33872] = "GL_FOG_COORDINATE_SOURCE_EXT"
 	_GLenum_map[33872] = "GL_FOG_COORD_SRC"
+	_GLenum_map[33872] = "GL_FOG_COORDINATE_SOURCE"
 	_GLenum_map[33873] = "GL_FOG_COORDINATE_EXT"
-	_GLenum_map[33873] = "GL_FOG_COORDINATE"
 	_GLenum_map[33873] = "GL_FOG_COORD"
+	_GLenum_map[33873] = "GL_FOG_COORDINATE"
 	_GLenum_map[33874] = "GL_FRAGMENT_DEPTH"
 	_GLenum_map[33874] = "GL_FRAGMENT_DEPTH_EXT"
 	_GLenum_map[33875] = "GL_CURRENT_FOG_COORD"
-	_GLenum_map[33875] = "GL_CURRENT_FOG_COORDINATE_EXT"
 	_GLenum_map[33875] = "GL_CURRENT_FOG_COORDINATE"
-	_GLenum_map[33876] = "GL_FOG_COORDINATE_ARRAY_TYPE_EXT"
+	_GLenum_map[33875] = "GL_CURRENT_FOG_COORDINATE_EXT"
 	_GLenum_map[33876] = "GL_FOG_COORD_ARRAY_TYPE"
+	_GLenum_map[33876] = "GL_FOG_COORDINATE_ARRAY_TYPE_EXT"
 	_GLenum_map[33876] = "GL_FOG_COORDINATE_ARRAY_TYPE"
 	_GLenum_map[33877] = "GL_FOG_COORD_ARRAY_STRIDE"
-	_GLenum_map[33877] = "GL_FOG_COORDINATE_ARRAY_STRIDE_EXT"
 	_GLenum_map[33877] = "GL_FOG_COORDINATE_ARRAY_STRIDE"
-	_GLenum_map[33878] = "GL_FOG_COORDINATE_ARRAY_POINTER_EXT"
+	_GLenum_map[33877] = "GL_FOG_COORDINATE_ARRAY_STRIDE_EXT"
 	_GLenum_map[33878] = "GL_FOG_COORD_ARRAY_POINTER"
 	_GLenum_map[33878] = "GL_FOG_COORDINATE_ARRAY_POINTER"
-	_GLenum_map[33879] = "GL_FOG_COORD_ARRAY"
+	_GLenum_map[33878] = "GL_FOG_COORDINATE_ARRAY_POINTER_EXT"
 	_GLenum_map[33879] = "GL_FOG_COORDINATE_ARRAY_EXT"
 	_GLenum_map[33879] = "GL_FOG_COORDINATE_ARRAY"
+	_GLenum_map[33879] = "GL_FOG_COORD_ARRAY"
 	_GLenum_map[33880] = "GL_COLOR_SUM"
-	_GLenum_map[33880] = "GL_COLOR_SUM_EXT"
 	_GLenum_map[33880] = "GL_COLOR_SUM_ARB"
-	_GLenum_map[33881] = "GL_CURRENT_SECONDARY_COLOR"
+	_GLenum_map[33880] = "GL_COLOR_SUM_EXT"
 	_GLenum_map[33881] = "GL_CURRENT_SECONDARY_COLOR_EXT"
+	_GLenum_map[33881] = "GL_CURRENT_SECONDARY_COLOR"
 	_GLenum_map[33882] = "GL_SECONDARY_COLOR_ARRAY_SIZE_EXT"
 	_GLenum_map[33882] = "GL_SECONDARY_COLOR_ARRAY_SIZE"
-	_GLenum_map[33883] = "GL_SECONDARY_COLOR_ARRAY_TYPE_EXT"
 	_GLenum_map[33883] = "GL_SECONDARY_COLOR_ARRAY_TYPE"
-	_GLenum_map[33884] = "GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT"
+	_GLenum_map[33883] = "GL_SECONDARY_COLOR_ARRAY_TYPE_EXT"
 	_GLenum_map[33884] = "GL_SECONDARY_COLOR_ARRAY_STRIDE"
+	_GLenum_map[33884] = "GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT"
 	_GLenum_map[33885] = "GL_SECONDARY_COLOR_ARRAY_POINTER_EXT"
 	_GLenum_map[33885] = "GL_SECONDARY_COLOR_ARRAY_POINTER"
 	_GLenum_map[33886] = "GL_SECONDARY_COLOR_ARRAY"
@@ -79232,24 +82529,24 @@ func init() {
 	_GLenum_map[33937] = "GL_INVERTED_SCREEN_W_REND"
 	_GLenum_map[33984] = "GL_TEXTURE0_ARB"
 	_GLenum_map[33984] = "GL_TEXTURE0"
-	_GLenum_map[33985] = "GL_TEXTURE1_ARB"
 	_GLenum_map[33985] = "GL_TEXTURE1"
-	_GLenum_map[33986] = "GL_TEXTURE2"
+	_GLenum_map[33985] = "GL_TEXTURE1_ARB"
 	_GLenum_map[33986] = "GL_TEXTURE2_ARB"
-	_GLenum_map[33987] = "GL_TEXTURE3_ARB"
+	_GLenum_map[33986] = "GL_TEXTURE2"
 	_GLenum_map[33987] = "GL_TEXTURE3"
-	_GLenum_map[33988] = "GL_TEXTURE4_ARB"
+	_GLenum_map[33987] = "GL_TEXTURE3_ARB"
 	_GLenum_map[33988] = "GL_TEXTURE4"
+	_GLenum_map[33988] = "GL_TEXTURE4_ARB"
 	_GLenum_map[33989] = "GL_TEXTURE5"
 	_GLenum_map[33989] = "GL_TEXTURE5_ARB"
-	_GLenum_map[33990] = "GL_TEXTURE6_ARB"
 	_GLenum_map[33990] = "GL_TEXTURE6"
-	_GLenum_map[33991] = "GL_TEXTURE7"
+	_GLenum_map[33990] = "GL_TEXTURE6_ARB"
 	_GLenum_map[33991] = "GL_TEXTURE7_ARB"
+	_GLenum_map[33991] = "GL_TEXTURE7"
 	_GLenum_map[33992] = "GL_TEXTURE8"
 	_GLenum_map[33992] = "GL_TEXTURE8_ARB"
-	_GLenum_map[33993] = "GL_TEXTURE9_ARB"
 	_GLenum_map[33993] = "GL_TEXTURE9"
+	_GLenum_map[33993] = "GL_TEXTURE9_ARB"
 	_GLenum_map[33994] = "GL_TEXTURE10_ARB"
 	_GLenum_map[33994] = "GL_TEXTURE10"
 	_GLenum_map[33995] = "GL_TEXTURE11"
@@ -79274,40 +82571,40 @@ func init() {
 	_GLenum_map[34004] = "GL_TEXTURE20"
 	_GLenum_map[34005] = "GL_TEXTURE21"
 	_GLenum_map[34005] = "GL_TEXTURE21_ARB"
-	_GLenum_map[34006] = "GL_TEXTURE22"
 	_GLenum_map[34006] = "GL_TEXTURE22_ARB"
-	_GLenum_map[34007] = "GL_TEXTURE23_ARB"
+	_GLenum_map[34006] = "GL_TEXTURE22"
 	_GLenum_map[34007] = "GL_TEXTURE23"
-	_GLenum_map[34008] = "GL_TEXTURE24_ARB"
+	_GLenum_map[34007] = "GL_TEXTURE23_ARB"
 	_GLenum_map[34008] = "GL_TEXTURE24"
+	_GLenum_map[34008] = "GL_TEXTURE24_ARB"
 	_GLenum_map[34009] = "GL_TEXTURE25"
 	_GLenum_map[34009] = "GL_TEXTURE25_ARB"
-	_GLenum_map[34010] = "GL_TEXTURE26_ARB"
 	_GLenum_map[34010] = "GL_TEXTURE26"
-	_GLenum_map[34011] = "GL_TEXTURE27_ARB"
+	_GLenum_map[34010] = "GL_TEXTURE26_ARB"
 	_GLenum_map[34011] = "GL_TEXTURE27"
-	_GLenum_map[34012] = "GL_TEXTURE28"
+	_GLenum_map[34011] = "GL_TEXTURE27_ARB"
 	_GLenum_map[34012] = "GL_TEXTURE28_ARB"
+	_GLenum_map[34012] = "GL_TEXTURE28"
 	_GLenum_map[34013] = "GL_TEXTURE29"
 	_GLenum_map[34013] = "GL_TEXTURE29_ARB"
-	_GLenum_map[34014] = "GL_TEXTURE30"
 	_GLenum_map[34014] = "GL_TEXTURE30_ARB"
-	_GLenum_map[34015] = "GL_TEXTURE31_ARB"
+	_GLenum_map[34014] = "GL_TEXTURE30"
 	_GLenum_map[34015] = "GL_TEXTURE31"
-	_GLenum_map[34016] = "GL_ACTIVE_TEXTURE_ARB"
+	_GLenum_map[34015] = "GL_TEXTURE31_ARB"
 	_GLenum_map[34016] = "GL_ACTIVE_TEXTURE"
+	_GLenum_map[34016] = "GL_ACTIVE_TEXTURE_ARB"
 	_GLenum_map[34017] = "GL_CLIENT_ACTIVE_TEXTURE_ARB"
 	_GLenum_map[34017] = "GL_CLIENT_ACTIVE_TEXTURE"
 	_GLenum_map[34018] = "GL_MAX_TEXTURE_UNITS_ARB"
 	_GLenum_map[34018] = "GL_MAX_TEXTURE_UNITS"
-	_GLenum_map[34019] = "GL_TRANSPOSE_MODELVIEW_MATRIX"
 	_GLenum_map[34019] = "GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV"
 	_GLenum_map[34019] = "GL_TRANSPOSE_MODELVIEW_MATRIX_ARB"
-	_GLenum_map[34020] = "GL_TRANSPOSE_PROJECTION_MATRIX_ARB"
+	_GLenum_map[34019] = "GL_TRANSPOSE_MODELVIEW_MATRIX"
 	_GLenum_map[34020] = "GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV"
 	_GLenum_map[34020] = "GL_TRANSPOSE_PROJECTION_MATRIX"
-	_GLenum_map[34021] = "GL_TRANSPOSE_TEXTURE_MATRIX_ARB"
+	_GLenum_map[34020] = "GL_TRANSPOSE_PROJECTION_MATRIX_ARB"
 	_GLenum_map[34021] = "GL_TRANSPOSE_TEXTURE_MATRIX"
+	_GLenum_map[34021] = "GL_TRANSPOSE_TEXTURE_MATRIX_ARB"
 	_GLenum_map[34022] = "GL_TRANSPOSE_COLOR_MATRIX"
 	_GLenum_map[34022] = "GL_TRANSPOSE_COLOR_MATRIX_ARB"
 	_GLenum_map[34023] = "GL_SUBTRACT_ARB"
@@ -79315,131 +82612,131 @@ func init() {
 	_GLenum_map[34024] = "GL_MAX_RENDERBUFFER_SIZE"
 	_GLenum_map[34024] = "GL_MAX_RENDERBUFFER_SIZE_OES"
 	_GLenum_map[34024] = "GL_MAX_RENDERBUFFER_SIZE_EXT"
-	_GLenum_map[34025] = "GL_COMPRESSED_ALPHA_ARB"
 	_GLenum_map[34025] = "GL_COMPRESSED_ALPHA"
-	_GLenum_map[34026] = "GL_COMPRESSED_LUMINANCE"
+	_GLenum_map[34025] = "GL_COMPRESSED_ALPHA_ARB"
 	_GLenum_map[34026] = "GL_COMPRESSED_LUMINANCE_ARB"
+	_GLenum_map[34026] = "GL_COMPRESSED_LUMINANCE"
 	_GLenum_map[34027] = "GL_COMPRESSED_LUMINANCE_ALPHA"
 	_GLenum_map[34027] = "GL_COMPRESSED_LUMINANCE_ALPHA_ARB"
 	_GLenum_map[34028] = "GL_COMPRESSED_INTENSITY"
 	_GLenum_map[34028] = "GL_COMPRESSED_INTENSITY_ARB"
-	_GLenum_map[34029] = "GL_COMPRESSED_RGB"
 	_GLenum_map[34029] = "GL_COMPRESSED_RGB_ARB"
-	_GLenum_map[34030] = "GL_COMPRESSED_RGBA"
+	_GLenum_map[34029] = "GL_COMPRESSED_RGB"
 	_GLenum_map[34030] = "GL_COMPRESSED_RGBA_ARB"
-	_GLenum_map[34031] = "GL_TEXTURE_COMPRESSION_HINT_ARB"
+	_GLenum_map[34030] = "GL_COMPRESSED_RGBA"
 	_GLenum_map[34031] = "GL_TEXTURE_COMPRESSION_HINT"
+	_GLenum_map[34031] = "GL_TEXTURE_COMPRESSION_HINT_ARB"
 	_GLenum_map[34032] = "GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER"
 	_GLenum_map[34033] = "GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER"
 	_GLenum_map[34034] = "GL_ALL_COMPLETED_NV"
 	_GLenum_map[34035] = "GL_FENCE_STATUS_NV"
 	_GLenum_map[34036] = "GL_FENCE_CONDITION_NV"
+	_GLenum_map[34037] = "GL_TEXTURE_RECTANGLE_ARB"
 	_GLenum_map[34037] = "GL_TEXTURE_RECTANGLE_NV"
 	_GLenum_map[34037] = "GL_TEXTURE_RECTANGLE"
-	_GLenum_map[34037] = "GL_TEXTURE_RECTANGLE_ARB"
-	_GLenum_map[34038] = "GL_TEXTURE_BINDING_RECTANGLE_NV"
 	_GLenum_map[34038] = "GL_TEXTURE_BINDING_RECTANGLE_ARB"
+	_GLenum_map[34038] = "GL_TEXTURE_BINDING_RECTANGLE_NV"
 	_GLenum_map[34038] = "GL_TEXTURE_BINDING_RECTANGLE"
 	_GLenum_map[34039] = "GL_PROXY_TEXTURE_RECTANGLE"
-	_GLenum_map[34039] = "GL_PROXY_TEXTURE_RECTANGLE_NV"
 	_GLenum_map[34039] = "GL_PROXY_TEXTURE_RECTANGLE_ARB"
-	_GLenum_map[34040] = "GL_MAX_RECTANGLE_TEXTURE_SIZE_NV"
-	_GLenum_map[34040] = "GL_MAX_RECTANGLE_TEXTURE_SIZE"
+	_GLenum_map[34039] = "GL_PROXY_TEXTURE_RECTANGLE_NV"
 	_GLenum_map[34040] = "GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB"
+	_GLenum_map[34040] = "GL_MAX_RECTANGLE_TEXTURE_SIZE"
+	_GLenum_map[34040] = "GL_MAX_RECTANGLE_TEXTURE_SIZE_NV"
 	_GLenum_map[34041] = "GL_DEPTH_STENCIL_NV"
-	_GLenum_map[34041] = "GL_DEPTH_STENCIL_EXT"
-	_GLenum_map[34041] = "GL_DEPTH_STENCIL_OES"
 	_GLenum_map[34041] = "GL_DEPTH_STENCIL"
+	_GLenum_map[34041] = "GL_DEPTH_STENCIL_OES"
+	_GLenum_map[34041] = "GL_DEPTH_STENCIL_EXT"
 	_GLenum_map[34042] = "GL_UNSIGNED_INT_24_8_EXT"
-	_GLenum_map[34042] = "GL_UNSIGNED_INT_24_8_OES"
 	_GLenum_map[34042] = "GL_UNSIGNED_INT_24_8_NV"
 	_GLenum_map[34042] = "GL_UNSIGNED_INT_24_8"
+	_GLenum_map[34042] = "GL_UNSIGNED_INT_24_8_OES"
 	_GLenum_map[34045] = "GL_MAX_TEXTURE_LOD_BIAS_EXT"
 	_GLenum_map[34045] = "GL_MAX_TEXTURE_LOD_BIAS"
 	_GLenum_map[34046] = "GL_TEXTURE_MAX_ANISOTROPY_EXT"
 	_GLenum_map[34047] = "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
-	_GLenum_map[34048] = "GL_TEXTURE_FILTER_CONTROL"
 	_GLenum_map[34048] = "GL_TEXTURE_FILTER_CONTROL_EXT"
-	_GLenum_map[34049] = "GL_TEXTURE_LOD_BIAS"
+	_GLenum_map[34048] = "GL_TEXTURE_FILTER_CONTROL"
 	_GLenum_map[34049] = "GL_TEXTURE_LOD_BIAS_EXT"
+	_GLenum_map[34049] = "GL_TEXTURE_LOD_BIAS"
 	_GLenum_map[34050] = "GL_MODELVIEW1_STACK_DEPTH_EXT"
 	_GLenum_map[34051] = "GL_COMBINE4_NV"
 	_GLenum_map[34052] = "GL_MAX_SHININESS_NV"
 	_GLenum_map[34053] = "GL_MAX_SPOT_EXPONENT_NV"
 	_GLenum_map[34054] = "GL_MODELVIEW1_MATRIX_EXT"
-	_GLenum_map[34055] = "GL_INCR_WRAP_EXT"
 	_GLenum_map[34055] = "GL_INCR_WRAP"
 	_GLenum_map[34055] = "GL_INCR_WRAP_OES"
-	_GLenum_map[34056] = "GL_DECR_WRAP_EXT"
-	_GLenum_map[34056] = "GL_DECR_WRAP_OES"
+	_GLenum_map[34055] = "GL_INCR_WRAP_EXT"
 	_GLenum_map[34056] = "GL_DECR_WRAP"
+	_GLenum_map[34056] = "GL_DECR_WRAP_OES"
+	_GLenum_map[34056] = "GL_DECR_WRAP_EXT"
 	_GLenum_map[34057] = "GL_VERTEX_WEIGHTING_EXT"
-	_GLenum_map[34058] = "GL_MODELVIEW1_EXT"
 	_GLenum_map[34058] = "GL_MODELVIEW1_ARB"
+	_GLenum_map[34058] = "GL_MODELVIEW1_EXT"
 	_GLenum_map[34059] = "GL_CURRENT_VERTEX_WEIGHT_EXT"
 	_GLenum_map[34060] = "GL_VERTEX_WEIGHT_ARRAY_EXT"
 	_GLenum_map[34061] = "GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT"
 	_GLenum_map[34062] = "GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT"
 	_GLenum_map[34063] = "GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT"
 	_GLenum_map[34064] = "GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT"
-	_GLenum_map[34065] = "GL_NORMAL_MAP_EXT"
-	_GLenum_map[34065] = "GL_NORMAL_MAP"
 	_GLenum_map[34065] = "GL_NORMAL_MAP_OES"
 	_GLenum_map[34065] = "GL_NORMAL_MAP_NV"
+	_GLenum_map[34065] = "GL_NORMAL_MAP_EXT"
 	_GLenum_map[34065] = "GL_NORMAL_MAP_ARB"
+	_GLenum_map[34065] = "GL_NORMAL_MAP"
+	_GLenum_map[34066] = "GL_REFLECTION_MAP_EXT"
+	_GLenum_map[34066] = "GL_REFLECTION_MAP"
 	_GLenum_map[34066] = "GL_REFLECTION_MAP_ARB"
 	_GLenum_map[34066] = "GL_REFLECTION_MAP_OES"
 	_GLenum_map[34066] = "GL_REFLECTION_MAP_NV"
-	_GLenum_map[34066] = "GL_REFLECTION_MAP_EXT"
-	_GLenum_map[34066] = "GL_REFLECTION_MAP"
 	_GLenum_map[34067] = "GL_TEXTURE_CUBE_MAP_OES"
 	_GLenum_map[34067] = "GL_TEXTURE_CUBE_MAP_EXT"
 	_GLenum_map[34067] = "GL_TEXTURE_CUBE_MAP_ARB"
 	_GLenum_map[34067] = "GL_TEXTURE_CUBE_MAP"
-	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP_EXT"
-	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP_ARB"
 	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP_OES"
+	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP_ARB"
+	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP_EXT"
 	_GLenum_map[34068] = "GL_TEXTURE_BINDING_CUBE_MAP"
+	_GLenum_map[34069] = "GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB"
 	_GLenum_map[34069] = "GL_TEXTURE_CUBE_MAP_POSITIVE_X_OES"
 	_GLenum_map[34069] = "GL_TEXTURE_CUBE_MAP_POSITIVE_X_EXT"
-	_GLenum_map[34069] = "GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB"
 	_GLenum_map[34069] = "GL_TEXTURE_CUBE_MAP_POSITIVE_X"
 	_GLenum_map[34070] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_OES"
 	_GLenum_map[34070] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_X"
-	_GLenum_map[34070] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB"
 	_GLenum_map[34070] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_EXT"
-	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB"
-	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_EXT"
+	_GLenum_map[34070] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB"
 	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y"
 	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_OES"
-	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB"
+	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_EXT"
+	_GLenum_map[34071] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB"
 	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_EXT"
-	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_OES"
 	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y"
+	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_OES"
+	_GLenum_map[34072] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB"
 	_GLenum_map[34073] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Z"
+	_GLenum_map[34073] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB"
 	_GLenum_map[34073] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_EXT"
 	_GLenum_map[34073] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_OES"
-	_GLenum_map[34073] = "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB"
-	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB"
-	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_OES"
-	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT"
 	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
-	_GLenum_map[34075] = "GL_PROXY_TEXTURE_CUBE_MAP"
+	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_OES"
+	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB"
+	_GLenum_map[34074] = "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT"
 	_GLenum_map[34075] = "GL_PROXY_TEXTURE_CUBE_MAP_EXT"
+	_GLenum_map[34075] = "GL_PROXY_TEXTURE_CUBE_MAP"
 	_GLenum_map[34075] = "GL_PROXY_TEXTURE_CUBE_MAP_ARB"
+	_GLenum_map[34076] = "GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT"
 	_GLenum_map[34076] = "GL_MAX_CUBE_MAP_TEXTURE_SIZE"
 	_GLenum_map[34076] = "GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB"
-	_GLenum_map[34076] = "GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT"
 	_GLenum_map[34076] = "GL_MAX_CUBE_MAP_TEXTURE_SIZE_OES"
 	_GLenum_map[34077] = "GL_VERTEX_ARRAY_RANGE_APPLE"
 	_GLenum_map[34077] = "GL_VERTEX_ARRAY_RANGE_NV"
 	_GLenum_map[34078] = "GL_VERTEX_ARRAY_RANGE_LENGTH_NV"
 	_GLenum_map[34078] = "GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE"
-	_GLenum_map[34079] = "GL_VERTEX_ARRAY_RANGE_VALID_NV"
 	_GLenum_map[34079] = "GL_VERTEX_ARRAY_STORAGE_HINT_APPLE"
+	_GLenum_map[34079] = "GL_VERTEX_ARRAY_RANGE_VALID_NV"
 	_GLenum_map[34080] = "GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV"
-	_GLenum_map[34081] = "GL_VERTEX_ARRAY_RANGE_POINTER_APPLE"
 	_GLenum_map[34081] = "GL_VERTEX_ARRAY_RANGE_POINTER_NV"
+	_GLenum_map[34081] = "GL_VERTEX_ARRAY_RANGE_POINTER_APPLE"
 	_GLenum_map[34082] = "GL_REGISTER_COMBINERS_NV"
 	_GLenum_map[34083] = "GL_VARIABLE_A_NV"
 	_GLenum_map[34084] = "GL_VARIABLE_B_NV"
@@ -79511,15 +82808,15 @@ func init() {
 	_GLenum_map[34150] = "GL_BLUE_MAX_CLAMP_INGR"
 	_GLenum_map[34151] = "GL_ALPHA_MAX_CLAMP_INGR"
 	_GLenum_map[34152] = "GL_INTERLACE_READ_INGR"
-	_GLenum_map[34160] = "GL_COMBINE_ARB"
 	_GLenum_map[34160] = "GL_COMBINE"
 	_GLenum_map[34160] = "GL_COMBINE_EXT"
+	_GLenum_map[34160] = "GL_COMBINE_ARB"
 	_GLenum_map[34161] = "GL_COMBINE_RGB_ARB"
-	_GLenum_map[34161] = "GL_COMBINE_RGB_EXT"
 	_GLenum_map[34161] = "GL_COMBINE_RGB"
+	_GLenum_map[34161] = "GL_COMBINE_RGB_EXT"
 	_GLenum_map[34162] = "GL_COMBINE_ALPHA_ARB"
-	_GLenum_map[34162] = "GL_COMBINE_ALPHA"
 	_GLenum_map[34162] = "GL_COMBINE_ALPHA_EXT"
+	_GLenum_map[34162] = "GL_COMBINE_ALPHA"
 	_GLenum_map[34163] = "GL_RGB_SCALE"
 	_GLenum_map[34163] = "GL_RGB_SCALE_EXT"
 	_GLenum_map[34163] = "GL_RGB_SCALE_ARB"
@@ -79527,62 +82824,62 @@ func init() {
 	_GLenum_map[34164] = "GL_ADD_SIGNED_ARB"
 	_GLenum_map[34164] = "GL_ADD_SIGNED_EXT"
 	_GLenum_map[34165] = "GL_INTERPOLATE_ARB"
-	_GLenum_map[34165] = "GL_INTERPOLATE_EXT"
 	_GLenum_map[34165] = "GL_INTERPOLATE"
-	_GLenum_map[34166] = "GL_CONSTANT_NV"
-	_GLenum_map[34166] = "GL_CONSTANT_EXT"
+	_GLenum_map[34165] = "GL_INTERPOLATE_EXT"
 	_GLenum_map[34166] = "GL_CONSTANT_ARB"
 	_GLenum_map[34166] = "GL_CONSTANT"
-	_GLenum_map[34167] = "GL_PRIMARY_COLOR"
-	_GLenum_map[34167] = "GL_PRIMARY_COLOR_EXT"
+	_GLenum_map[34166] = "GL_CONSTANT_EXT"
+	_GLenum_map[34166] = "GL_CONSTANT_NV"
 	_GLenum_map[34167] = "GL_PRIMARY_COLOR_ARB"
+	_GLenum_map[34167] = "GL_PRIMARY_COLOR_EXT"
+	_GLenum_map[34167] = "GL_PRIMARY_COLOR"
+	_GLenum_map[34168] = "GL_PREVIOUS"
 	_GLenum_map[34168] = "GL_PREVIOUS_EXT"
 	_GLenum_map[34168] = "GL_PREVIOUS_ARB"
-	_GLenum_map[34168] = "GL_PREVIOUS"
 	_GLenum_map[34176] = "GL_SRC0_RGB"
+	_GLenum_map[34176] = "GL_SOURCE0_RGB_EXT"
 	_GLenum_map[34176] = "GL_SOURCE0_RGB"
 	_GLenum_map[34176] = "GL_SOURCE0_RGB_ARB"
-	_GLenum_map[34176] = "GL_SOURCE0_RGB_EXT"
 	_GLenum_map[34177] = "GL_SOURCE1_RGB_EXT"
-	_GLenum_map[34177] = "GL_SRC1_RGB"
 	_GLenum_map[34177] = "GL_SOURCE1_RGB"
 	_GLenum_map[34177] = "GL_SOURCE1_RGB_ARB"
+	_GLenum_map[34177] = "GL_SRC1_RGB"
 	_GLenum_map[34178] = "GL_SOURCE2_RGB_EXT"
-	_GLenum_map[34178] = "GL_SRC2_RGB"
 	_GLenum_map[34178] = "GL_SOURCE2_RGB_ARB"
 	_GLenum_map[34178] = "GL_SOURCE2_RGB"
+	_GLenum_map[34178] = "GL_SRC2_RGB"
 	_GLenum_map[34179] = "GL_SOURCE3_RGB_NV"
-	_GLenum_map[34184] = "GL_SOURCE0_ALPHA"
-	_GLenum_map[34184] = "GL_SRC0_ALPHA"
-	_GLenum_map[34184] = "GL_SOURCE0_ALPHA_EXT"
 	_GLenum_map[34184] = "GL_SOURCE0_ALPHA_ARB"
-	_GLenum_map[34185] = "GL_SOURCE1_ALPHA_ARB"
+	_GLenum_map[34184] = "GL_SRC0_ALPHA"
+	_GLenum_map[34184] = "GL_SOURCE0_ALPHA"
+	_GLenum_map[34184] = "GL_SOURCE0_ALPHA_EXT"
 	_GLenum_map[34185] = "GL_SOURCE1_ALPHA_EXT"
-	_GLenum_map[34185] = "GL_SOURCE1_ALPHA"
 	_GLenum_map[34185] = "GL_SRC1_ALPHA"
+	_GLenum_map[34185] = "GL_SOURCE1_ALPHA"
+	_GLenum_map[34185] = "GL_SOURCE1_ALPHA_ARB"
 	_GLenum_map[34186] = "GL_SOURCE2_ALPHA_ARB"
-	_GLenum_map[34186] = "GL_SOURCE2_ALPHA"
 	_GLenum_map[34186] = "GL_SRC2_ALPHA"
+	_GLenum_map[34186] = "GL_SOURCE2_ALPHA"
 	_GLenum_map[34186] = "GL_SOURCE2_ALPHA_EXT"
 	_GLenum_map[34187] = "GL_SOURCE3_ALPHA_NV"
 	_GLenum_map[34192] = "GL_OPERAND0_RGB_EXT"
-	_GLenum_map[34192] = "GL_OPERAND0_RGB"
 	_GLenum_map[34192] = "GL_OPERAND0_RGB_ARB"
+	_GLenum_map[34192] = "GL_OPERAND0_RGB"
+	_GLenum_map[34193] = "GL_OPERAND1_RGB"
 	_GLenum_map[34193] = "GL_OPERAND1_RGB_EXT"
 	_GLenum_map[34193] = "GL_OPERAND1_RGB_ARB"
-	_GLenum_map[34193] = "GL_OPERAND1_RGB"
-	_GLenum_map[34194] = "GL_OPERAND2_RGB"
 	_GLenum_map[34194] = "GL_OPERAND2_RGB_EXT"
+	_GLenum_map[34194] = "GL_OPERAND2_RGB"
 	_GLenum_map[34194] = "GL_OPERAND2_RGB_ARB"
 	_GLenum_map[34195] = "GL_OPERAND3_RGB_NV"
-	_GLenum_map[34200] = "GL_OPERAND0_ALPHA"
-	_GLenum_map[34200] = "GL_OPERAND0_ALPHA_ARB"
 	_GLenum_map[34200] = "GL_OPERAND0_ALPHA_EXT"
+	_GLenum_map[34200] = "GL_OPERAND0_ALPHA_ARB"
+	_GLenum_map[34200] = "GL_OPERAND0_ALPHA"
 	_GLenum_map[34201] = "GL_OPERAND1_ALPHA"
 	_GLenum_map[34201] = "GL_OPERAND1_ALPHA_ARB"
 	_GLenum_map[34201] = "GL_OPERAND1_ALPHA_EXT"
-	_GLenum_map[34202] = "GL_OPERAND2_ALPHA"
 	_GLenum_map[34202] = "GL_OPERAND2_ALPHA_ARB"
+	_GLenum_map[34202] = "GL_OPERAND2_ALPHA"
 	_GLenum_map[34202] = "GL_OPERAND2_ALPHA_EXT"
 	_GLenum_map[34203] = "GL_OPERAND3_ALPHA_NV"
 	_GLenum_map[34208] = "GL_PACK_SUBSAMPLE_RATE_SGIX"
@@ -79605,8 +82902,8 @@ func init() {
 	_GLenum_map[34233] = "GL_YCBCR_422_APPLE"
 	_GLenum_map[34234] = "GL_UNSIGNED_SHORT_8_8_MESA"
 	_GLenum_map[34234] = "GL_UNSIGNED_SHORT_8_8_APPLE"
-	_GLenum_map[34235] = "GL_UNSIGNED_SHORT_8_8_REV_APPLE"
 	_GLenum_map[34235] = "GL_UNSIGNED_SHORT_8_8_REV_MESA"
+	_GLenum_map[34235] = "GL_UNSIGNED_SHORT_8_8_REV_APPLE"
 	_GLenum_map[34236] = "GL_TEXTURE_STORAGE_HINT_APPLE"
 	_GLenum_map[34237] = "GL_STORAGE_PRIVATE_APPLE"
 	_GLenum_map[34238] = "GL_STORAGE_CACHED_APPLE"
@@ -79629,20 +82926,20 @@ func init() {
 	_GLenum_map[34336] = "GL_VERTEX_PROGRAM_NV"
 	_GLenum_map[34336] = "GL_VERTEX_PROGRAM_ARB"
 	_GLenum_map[34337] = "GL_VERTEX_STATE_PROGRAM_NV"
-	_GLenum_map[34338] = "GL_VERTEX_ATTRIB_ARRAY_ENABLED"
 	_GLenum_map[34338] = "GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB"
-	_GLenum_map[34339] = "GL_VERTEX_ATTRIB_ARRAY_SIZE"
-	_GLenum_map[34339] = "GL_ATTRIB_ARRAY_SIZE_NV"
+	_GLenum_map[34338] = "GL_VERTEX_ATTRIB_ARRAY_ENABLED"
 	_GLenum_map[34339] = "GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB"
+	_GLenum_map[34339] = "GL_ATTRIB_ARRAY_SIZE_NV"
+	_GLenum_map[34339] = "GL_VERTEX_ATTRIB_ARRAY_SIZE"
+	_GLenum_map[34340] = "GL_VERTEX_ATTRIB_ARRAY_STRIDE"
 	_GLenum_map[34340] = "GL_ATTRIB_ARRAY_STRIDE_NV"
 	_GLenum_map[34340] = "GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB"
-	_GLenum_map[34340] = "GL_VERTEX_ATTRIB_ARRAY_STRIDE"
+	_GLenum_map[34341] = "GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB"
 	_GLenum_map[34341] = "GL_VERTEX_ATTRIB_ARRAY_TYPE"
 	_GLenum_map[34341] = "GL_ATTRIB_ARRAY_TYPE_NV"
-	_GLenum_map[34341] = "GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB"
-	_GLenum_map[34342] = "GL_CURRENT_ATTRIB_NV"
-	_GLenum_map[34342] = "GL_CURRENT_VERTEX_ATTRIB_ARB"
 	_GLenum_map[34342] = "GL_CURRENT_VERTEX_ATTRIB"
+	_GLenum_map[34342] = "GL_CURRENT_VERTEX_ATTRIB_ARB"
+	_GLenum_map[34342] = "GL_CURRENT_ATTRIB_NV"
 	_GLenum_map[34343] = "GL_PROGRAM_LENGTH_NV"
 	_GLenum_map[34343] = "GL_PROGRAM_LENGTH_ARB"
 	_GLenum_map[34344] = "GL_PROGRAM_STRING_ARB"
@@ -79652,10 +82949,10 @@ func init() {
 	_GLenum_map[34347] = "GL_INVERSE_NV"
 	_GLenum_map[34348] = "GL_TRANSPOSE_NV"
 	_GLenum_map[34349] = "GL_INVERSE_TRANSPOSE_NV"
-	_GLenum_map[34350] = "GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB"
 	_GLenum_map[34350] = "GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV"
-	_GLenum_map[34351] = "GL_MAX_PROGRAM_MATRICES_ARB"
+	_GLenum_map[34350] = "GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB"
 	_GLenum_map[34351] = "GL_MAX_TRACK_MATRICES_NV"
+	_GLenum_map[34351] = "GL_MAX_PROGRAM_MATRICES_ARB"
 	_GLenum_map[34352] = "GL_MATRIX0_NV"
 	_GLenum_map[34353] = "GL_MATRIX1_NV"
 	_GLenum_map[34354] = "GL_MATRIX2_NV"
@@ -79666,20 +82963,20 @@ func init() {
 	_GLenum_map[34359] = "GL_MATRIX7_NV"
 	_GLenum_map[34368] = "GL_CURRENT_MATRIX_STACK_DEPTH_NV"
 	_GLenum_map[34368] = "GL_CURRENT_MATRIX_STACK_DEPTH_ARB"
-	_GLenum_map[34369] = "GL_CURRENT_MATRIX_ARB"
 	_GLenum_map[34369] = "GL_CURRENT_MATRIX_NV"
-	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE_ARB"
-	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE"
-	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE_NV"
-	_GLenum_map[34370] = "GL_PROGRAM_POINT_SIZE"
+	_GLenum_map[34369] = "GL_CURRENT_MATRIX_ARB"
 	_GLenum_map[34370] = "GL_PROGRAM_POINT_SIZE_ARB"
+	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE"
+	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE_ARB"
+	_GLenum_map[34370] = "GL_VERTEX_PROGRAM_POINT_SIZE_NV"
 	_GLenum_map[34370] = "GL_PROGRAM_POINT_SIZE_EXT"
-	_GLenum_map[34371] = "GL_VERTEX_PROGRAM_TWO_SIDE"
-	_GLenum_map[34371] = "GL_VERTEX_PROGRAM_TWO_SIDE_ARB"
+	_GLenum_map[34370] = "GL_PROGRAM_POINT_SIZE"
 	_GLenum_map[34371] = "GL_VERTEX_PROGRAM_TWO_SIDE_NV"
+	_GLenum_map[34371] = "GL_VERTEX_PROGRAM_TWO_SIDE_ARB"
+	_GLenum_map[34371] = "GL_VERTEX_PROGRAM_TWO_SIDE"
 	_GLenum_map[34372] = "GL_PROGRAM_PARAMETER_NV"
-	_GLenum_map[34373] = "GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB"
 	_GLenum_map[34373] = "GL_ATTRIB_ARRAY_POINTER_NV"
+	_GLenum_map[34373] = "GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB"
 	_GLenum_map[34373] = "GL_VERTEX_ATTRIB_ARRAY_POINTER"
 	_GLenum_map[34374] = "GL_PROGRAM_TARGET_NV"
 	_GLenum_map[34375] = "GL_PROGRAM_RESIDENT_NV"
@@ -79742,14 +83039,14 @@ func init() {
 	_GLenum_map[34429] = "GL_MAP2_VERTEX_ATTRIB13_4_NV"
 	_GLenum_map[34430] = "GL_MAP2_VERTEX_ATTRIB14_4_NV"
 	_GLenum_map[34431] = "GL_MAP2_VERTEX_ATTRIB15_4_NV"
-	_GLenum_map[34464] = "GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB"
 	_GLenum_map[34464] = "GL_TEXTURE_COMPRESSED_IMAGE_SIZE"
-	_GLenum_map[34465] = "GL_TEXTURE_COMPRESSED_ARB"
+	_GLenum_map[34464] = "GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB"
 	_GLenum_map[34465] = "GL_TEXTURE_COMPRESSED"
+	_GLenum_map[34465] = "GL_TEXTURE_COMPRESSED_ARB"
 	_GLenum_map[34466] = "GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB"
 	_GLenum_map[34466] = "GL_NUM_COMPRESSED_TEXTURE_FORMATS"
-	_GLenum_map[34467] = "GL_COMPRESSED_TEXTURE_FORMATS"
 	_GLenum_map[34467] = "GL_COMPRESSED_TEXTURE_FORMATS_ARB"
+	_GLenum_map[34467] = "GL_COMPRESSED_TEXTURE_FORMATS"
 	_GLenum_map[34468] = "GL_MAX_VERTEX_UNITS_ARB"
 	_GLenum_map[34468] = "GL_MAX_VERTEX_UNITS_OES"
 	_GLenum_map[34469] = "GL_ACTIVE_VERTEX_UNITS_ARB"
@@ -79758,19 +83055,19 @@ func init() {
 	_GLenum_map[34472] = "GL_CURRENT_WEIGHT_ARB"
 	_GLenum_map[34473] = "GL_WEIGHT_ARRAY_TYPE_OES"
 	_GLenum_map[34473] = "GL_WEIGHT_ARRAY_TYPE_ARB"
-	_GLenum_map[34474] = "GL_WEIGHT_ARRAY_STRIDE_ARB"
 	_GLenum_map[34474] = "GL_WEIGHT_ARRAY_STRIDE_OES"
-	_GLenum_map[34475] = "GL_WEIGHT_ARRAY_SIZE_OES"
+	_GLenum_map[34474] = "GL_WEIGHT_ARRAY_STRIDE_ARB"
 	_GLenum_map[34475] = "GL_WEIGHT_ARRAY_SIZE_ARB"
-	_GLenum_map[34476] = "GL_WEIGHT_ARRAY_POINTER_OES"
+	_GLenum_map[34475] = "GL_WEIGHT_ARRAY_SIZE_OES"
 	_GLenum_map[34476] = "GL_WEIGHT_ARRAY_POINTER_ARB"
-	_GLenum_map[34477] = "GL_WEIGHT_ARRAY_OES"
+	_GLenum_map[34476] = "GL_WEIGHT_ARRAY_POINTER_OES"
 	_GLenum_map[34477] = "GL_WEIGHT_ARRAY_ARB"
+	_GLenum_map[34477] = "GL_WEIGHT_ARRAY_OES"
 	_GLenum_map[34478] = "GL_DOT3_RGB"
 	_GLenum_map[34478] = "GL_DOT3_RGB_ARB"
-	_GLenum_map[34479] = "GL_DOT3_RGBA_IMG"
 	_GLenum_map[34479] = "GL_DOT3_RGBA"
 	_GLenum_map[34479] = "GL_DOT3_RGBA_ARB"
+	_GLenum_map[34479] = "GL_DOT3_RGBA_IMG"
 	_GLenum_map[34480] = "GL_COMPRESSED_RGB_FXT1_3DFX"
 	_GLenum_map[34481] = "GL_COMPRESSED_RGBA_FXT1_3DFX"
 	_GLenum_map[34482] = "GL_MULTISAMPLE_3DFX"
@@ -79908,13 +83205,13 @@ func init() {
 	_GLenum_map[34624] = "GL_Z400_BINARY_AMD"
 	_GLenum_map[34624] = "GL_DOT3_RGB_EXT"
 	_GLenum_map[34625] = "GL_DOT3_RGBA_EXT"
-	_GLenum_map[34625] = "GL_PROGRAM_BINARY_LENGTH"
 	_GLenum_map[34625] = "GL_PROGRAM_BINARY_LENGTH_OES"
-	_GLenum_map[34626] = "GL_MIRROR_CLAMP_EXT"
+	_GLenum_map[34625] = "GL_PROGRAM_BINARY_LENGTH"
 	_GLenum_map[34626] = "GL_MIRROR_CLAMP_ATI"
+	_GLenum_map[34626] = "GL_MIRROR_CLAMP_EXT"
 	_GLenum_map[34627] = "GL_MIRROR_CLAMP_TO_EDGE"
-	_GLenum_map[34627] = "GL_MIRROR_CLAMP_TO_EDGE_ATI"
 	_GLenum_map[34627] = "GL_MIRROR_CLAMP_TO_EDGE_EXT"
+	_GLenum_map[34627] = "GL_MIRROR_CLAMP_TO_EDGE_ATI"
 	_GLenum_map[34628] = "GL_MODULATE_ADD_ATI"
 	_GLenum_map[34629] = "GL_MODULATE_SIGNED_ADD_ATI"
 	_GLenum_map[34630] = "GL_MODULATE_SUBTRACT_ATI"
@@ -79933,12 +83230,12 @@ func init() {
 	_GLenum_map[34646] = "GL_TRACE_NAME_MESA"
 	_GLenum_map[34647] = "GL_YCBCR_MESA"
 	_GLenum_map[34648] = "GL_PACK_INVERT_MESA"
-	_GLenum_map[34649] = "GL_DEBUG_OBJECT_MESA"
 	_GLenum_map[34649] = "GL_TEXTURE_1D_STACK_MESAX"
+	_GLenum_map[34649] = "GL_DEBUG_OBJECT_MESA"
 	_GLenum_map[34650] = "GL_DEBUG_PRINT_MESA"
 	_GLenum_map[34650] = "GL_TEXTURE_2D_STACK_MESAX"
-	_GLenum_map[34651] = "GL_DEBUG_ASSERT_MESA"
 	_GLenum_map[34651] = "GL_PROXY_TEXTURE_1D_STACK_MESAX"
+	_GLenum_map[34651] = "GL_DEBUG_ASSERT_MESA"
 	_GLenum_map[34652] = "GL_PROXY_TEXTURE_2D_STACK_MESAX"
 	_GLenum_map[34653] = "GL_TEXTURE_1D_STACK_BINDING_MESAX"
 	_GLenum_map[34654] = "GL_TEXTURE_2D_STACK_BINDING_MESAX"
@@ -79946,9 +83243,9 @@ func init() {
 	_GLenum_map[34657] = "GL_DYNAMIC_ATI"
 	_GLenum_map[34658] = "GL_PRESERVE_ATI"
 	_GLenum_map[34659] = "GL_DISCARD_ATI"
-	_GLenum_map[34660] = "GL_BUFFER_SIZE_ARB"
 	_GLenum_map[34660] = "GL_BUFFER_SIZE"
 	_GLenum_map[34660] = "GL_OBJECT_BUFFER_SIZE_ATI"
+	_GLenum_map[34660] = "GL_BUFFER_SIZE_ARB"
 	_GLenum_map[34661] = "GL_BUFFER_USAGE"
 	_GLenum_map[34661] = "GL_BUFFER_USAGE_ARB"
 	_GLenum_map[34661] = "GL_OBJECT_BUFFER_USAGE_ATI"
@@ -80100,18 +83397,18 @@ func init() {
 	_GLenum_map[34811] = "GL_VBO_FREE_MEMORY_ATI"
 	_GLenum_map[34812] = "GL_TEXTURE_FREE_MEMORY_ATI"
 	_GLenum_map[34813] = "GL_RENDERBUFFER_FREE_MEMORY_ATI"
-	_GLenum_map[34814] = "GL_NUM_PROGRAM_BINARY_FORMATS_OES"
 	_GLenum_map[34814] = "GL_NUM_PROGRAM_BINARY_FORMATS"
-	_GLenum_map[34815] = "GL_PROGRAM_BINARY_FORMATS_OES"
+	_GLenum_map[34814] = "GL_NUM_PROGRAM_BINARY_FORMATS_OES"
 	_GLenum_map[34815] = "GL_PROGRAM_BINARY_FORMATS"
-	_GLenum_map[34816] = "GL_STENCIL_BACK_FUNC"
+	_GLenum_map[34815] = "GL_PROGRAM_BINARY_FORMATS_OES"
 	_GLenum_map[34816] = "GL_STENCIL_BACK_FUNC_ATI"
-	_GLenum_map[34817] = "GL_STENCIL_BACK_FAIL"
+	_GLenum_map[34816] = "GL_STENCIL_BACK_FUNC"
 	_GLenum_map[34817] = "GL_STENCIL_BACK_FAIL_ATI"
+	_GLenum_map[34817] = "GL_STENCIL_BACK_FAIL"
 	_GLenum_map[34818] = "GL_STENCIL_BACK_PASS_DEPTH_FAIL"
 	_GLenum_map[34818] = "GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI"
-	_GLenum_map[34819] = "GL_STENCIL_BACK_PASS_DEPTH_PASS"
 	_GLenum_map[34819] = "GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI"
+	_GLenum_map[34819] = "GL_STENCIL_BACK_PASS_DEPTH_PASS"
 	_GLenum_map[34820] = "GL_FRAGMENT_PROGRAM_ARB"
 	_GLenum_map[34821] = "GL_PROGRAM_ALU_INSTRUCTIONS_ARB"
 	_GLenum_map[34822] = "GL_PROGRAM_TEX_INSTRUCTIONS_ARB"
@@ -80125,183 +83422,183 @@ func init() {
 	_GLenum_map[34830] = "GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB"
 	_GLenum_map[34831] = "GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB"
 	_GLenum_map[34832] = "GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB"
-	_GLenum_map[34836] = "GL_RGBA32F_ARB"
-	_GLenum_map[34836] = "GL_RGBA_FLOAT32_ATI"
 	_GLenum_map[34836] = "GL_RGBA_FLOAT32_APPLE"
 	_GLenum_map[34836] = "GL_RGBA32F_EXT"
+	_GLenum_map[34836] = "GL_RGBA32F_ARB"
 	_GLenum_map[34836] = "GL_RGBA32F"
-	_GLenum_map[34837] = "GL_RGB32F_ARB"
-	_GLenum_map[34837] = "GL_RGB_FLOAT32_ATI"
-	_GLenum_map[34837] = "GL_RGB_FLOAT32_APPLE"
+	_GLenum_map[34836] = "GL_RGBA_FLOAT32_ATI"
 	_GLenum_map[34837] = "GL_RGB32F_EXT"
 	_GLenum_map[34837] = "GL_RGB32F"
+	_GLenum_map[34837] = "GL_RGB32F_ARB"
+	_GLenum_map[34837] = "GL_RGB_FLOAT32_APPLE"
+	_GLenum_map[34837] = "GL_RGB_FLOAT32_ATI"
 	_GLenum_map[34838] = "GL_ALPHA_FLOAT32_ATI"
+	_GLenum_map[34838] = "GL_ALPHA32F_EXT"
 	_GLenum_map[34838] = "GL_ALPHA_FLOAT32_APPLE"
 	_GLenum_map[34838] = "GL_ALPHA32F_ARB"
-	_GLenum_map[34838] = "GL_ALPHA32F_EXT"
-	_GLenum_map[34839] = "GL_INTENSITY32F_ARB"
 	_GLenum_map[34839] = "GL_INTENSITY_FLOAT32_APPLE"
 	_GLenum_map[34839] = "GL_INTENSITY_FLOAT32_ATI"
+	_GLenum_map[34839] = "GL_INTENSITY32F_ARB"
 	_GLenum_map[34840] = "GL_LUMINANCE32F_EXT"
 	_GLenum_map[34840] = "GL_LUMINANCE_FLOAT32_APPLE"
 	_GLenum_map[34840] = "GL_LUMINANCE_FLOAT32_ATI"
 	_GLenum_map[34840] = "GL_LUMINANCE32F_ARB"
-	_GLenum_map[34841] = "GL_LUMINANCE_ALPHA_FLOAT32_ATI"
 	_GLenum_map[34841] = "GL_LUMINANCE_ALPHA32F_ARB"
 	_GLenum_map[34841] = "GL_LUMINANCE_ALPHA32F_EXT"
+	_GLenum_map[34841] = "GL_LUMINANCE_ALPHA_FLOAT32_ATI"
 	_GLenum_map[34841] = "GL_LUMINANCE_ALPHA_FLOAT32_APPLE"
-	_GLenum_map[34842] = "GL_RGBA16F_EXT"
-	_GLenum_map[34842] = "GL_RGBA16F_ARB"
-	_GLenum_map[34842] = "GL_RGBA16F"
-	_GLenum_map[34842] = "GL_RGBA_FLOAT16_ATI"
 	_GLenum_map[34842] = "GL_RGBA_FLOAT16_APPLE"
-	_GLenum_map[34843] = "GL_RGB_FLOAT16_APPLE"
+	_GLenum_map[34842] = "GL_RGBA_FLOAT16_ATI"
+	_GLenum_map[34842] = "GL_RGBA16F"
+	_GLenum_map[34842] = "GL_RGBA16F_ARB"
+	_GLenum_map[34842] = "GL_RGBA16F_EXT"
 	_GLenum_map[34843] = "GL_RGB_FLOAT16_ATI"
-	_GLenum_map[34843] = "GL_RGB16F"
-	_GLenum_map[34843] = "GL_RGB16F_ARB"
 	_GLenum_map[34843] = "GL_RGB16F_EXT"
+	_GLenum_map[34843] = "GL_RGB16F_ARB"
+	_GLenum_map[34843] = "GL_RGB_FLOAT16_APPLE"
+	_GLenum_map[34843] = "GL_RGB16F"
 	_GLenum_map[34844] = "GL_ALPHA16F_EXT"
 	_GLenum_map[34844] = "GL_ALPHA_FLOAT16_APPLE"
 	_GLenum_map[34844] = "GL_ALPHA_FLOAT16_ATI"
 	_GLenum_map[34844] = "GL_ALPHA16F_ARB"
 	_GLenum_map[34845] = "GL_INTENSITY_FLOAT16_ATI"
-	_GLenum_map[34845] = "GL_INTENSITY16F_ARB"
 	_GLenum_map[34845] = "GL_INTENSITY_FLOAT16_APPLE"
-	_GLenum_map[34846] = "GL_LUMINANCE16F_EXT"
-	_GLenum_map[34846] = "GL_LUMINANCE_FLOAT16_ATI"
+	_GLenum_map[34845] = "GL_INTENSITY16F_ARB"
 	_GLenum_map[34846] = "GL_LUMINANCE16F_ARB"
+	_GLenum_map[34846] = "GL_LUMINANCE_FLOAT16_ATI"
 	_GLenum_map[34846] = "GL_LUMINANCE_FLOAT16_APPLE"
-	_GLenum_map[34847] = "GL_LUMINANCE_ALPHA16F_EXT"
+	_GLenum_map[34846] = "GL_LUMINANCE16F_EXT"
 	_GLenum_map[34847] = "GL_LUMINANCE_ALPHA16F_ARB"
 	_GLenum_map[34847] = "GL_LUMINANCE_ALPHA_FLOAT16_APPLE"
 	_GLenum_map[34847] = "GL_LUMINANCE_ALPHA_FLOAT16_ATI"
-	_GLenum_map[34848] = "GL_RGBA_FLOAT_MODE_ARB"
+	_GLenum_map[34847] = "GL_LUMINANCE_ALPHA16F_EXT"
 	_GLenum_map[34848] = "GL_RGBA_FLOAT_MODE_ATI"
+	_GLenum_map[34848] = "GL_RGBA_FLOAT_MODE_ARB"
 	_GLenum_map[34851] = "GL_WRITEONLY_RENDERING_QCOM"
 	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS"
-	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS_ATI"
 	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS_NV"
+	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS_ATI"
 	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS_ARB"
 	_GLenum_map[34852] = "GL_MAX_DRAW_BUFFERS_EXT"
-	_GLenum_map[34853] = "GL_DRAW_BUFFER0_EXT"
-	_GLenum_map[34853] = "GL_DRAW_BUFFER0_ATI"
 	_GLenum_map[34853] = "GL_DRAW_BUFFER0_NV"
-	_GLenum_map[34853] = "GL_DRAW_BUFFER0"
+	_GLenum_map[34853] = "GL_DRAW_BUFFER0_ATI"
 	_GLenum_map[34853] = "GL_DRAW_BUFFER0_ARB"
-	_GLenum_map[34854] = "GL_DRAW_BUFFER1_NV"
-	_GLenum_map[34854] = "GL_DRAW_BUFFER1_EXT"
+	_GLenum_map[34853] = "GL_DRAW_BUFFER0"
+	_GLenum_map[34853] = "GL_DRAW_BUFFER0_EXT"
 	_GLenum_map[34854] = "GL_DRAW_BUFFER1_ATI"
+	_GLenum_map[34854] = "GL_DRAW_BUFFER1_EXT"
 	_GLenum_map[34854] = "GL_DRAW_BUFFER1_ARB"
+	_GLenum_map[34854] = "GL_DRAW_BUFFER1_NV"
 	_GLenum_map[34854] = "GL_DRAW_BUFFER1"
+	_GLenum_map[34855] = "GL_DRAW_BUFFER2_ARB"
 	_GLenum_map[34855] = "GL_DRAW_BUFFER2"
 	_GLenum_map[34855] = "GL_DRAW_BUFFER2_NV"
 	_GLenum_map[34855] = "GL_DRAW_BUFFER2_EXT"
 	_GLenum_map[34855] = "GL_DRAW_BUFFER2_ATI"
-	_GLenum_map[34855] = "GL_DRAW_BUFFER2_ARB"
-	_GLenum_map[34856] = "GL_DRAW_BUFFER3_EXT"
-	_GLenum_map[34856] = "GL_DRAW_BUFFER3_ATI"
-	_GLenum_map[34856] = "GL_DRAW_BUFFER3_NV"
 	_GLenum_map[34856] = "GL_DRAW_BUFFER3_ARB"
+	_GLenum_map[34856] = "GL_DRAW_BUFFER3_EXT"
+	_GLenum_map[34856] = "GL_DRAW_BUFFER3_NV"
 	_GLenum_map[34856] = "GL_DRAW_BUFFER3"
-	_GLenum_map[34857] = "GL_DRAW_BUFFER4_EXT"
+	_GLenum_map[34856] = "GL_DRAW_BUFFER3_ATI"
 	_GLenum_map[34857] = "GL_DRAW_BUFFER4_NV"
-	_GLenum_map[34857] = "GL_DRAW_BUFFER4_ATI"
-	_GLenum_map[34857] = "GL_DRAW_BUFFER4_ARB"
 	_GLenum_map[34857] = "GL_DRAW_BUFFER4"
-	_GLenum_map[34858] = "GL_DRAW_BUFFER5_ATI"
-	_GLenum_map[34858] = "GL_DRAW_BUFFER5"
-	_GLenum_map[34858] = "GL_DRAW_BUFFER5_ARB"
+	_GLenum_map[34857] = "GL_DRAW_BUFFER4_ARB"
+	_GLenum_map[34857] = "GL_DRAW_BUFFER4_ATI"
+	_GLenum_map[34857] = "GL_DRAW_BUFFER4_EXT"
 	_GLenum_map[34858] = "GL_DRAW_BUFFER5_NV"
+	_GLenum_map[34858] = "GL_DRAW_BUFFER5"
 	_GLenum_map[34858] = "GL_DRAW_BUFFER5_EXT"
-	_GLenum_map[34859] = "GL_DRAW_BUFFER6_ATI"
-	_GLenum_map[34859] = "GL_DRAW_BUFFER6"
-	_GLenum_map[34859] = "GL_DRAW_BUFFER6_ARB"
-	_GLenum_map[34859] = "GL_DRAW_BUFFER6_EXT"
+	_GLenum_map[34858] = "GL_DRAW_BUFFER5_ARB"
+	_GLenum_map[34858] = "GL_DRAW_BUFFER5_ATI"
 	_GLenum_map[34859] = "GL_DRAW_BUFFER6_NV"
-	_GLenum_map[34860] = "GL_DRAW_BUFFER7_ATI"
+	_GLenum_map[34859] = "GL_DRAW_BUFFER6"
+	_GLenum_map[34859] = "GL_DRAW_BUFFER6_ATI"
+	_GLenum_map[34859] = "GL_DRAW_BUFFER6_EXT"
+	_GLenum_map[34859] = "GL_DRAW_BUFFER6_ARB"
 	_GLenum_map[34860] = "GL_DRAW_BUFFER7_ARB"
-	_GLenum_map[34860] = "GL_DRAW_BUFFER7"
-	_GLenum_map[34860] = "GL_DRAW_BUFFER7_NV"
+	_GLenum_map[34860] = "GL_DRAW_BUFFER7_ATI"
 	_GLenum_map[34860] = "GL_DRAW_BUFFER7_EXT"
+	_GLenum_map[34860] = "GL_DRAW_BUFFER7_NV"
+	_GLenum_map[34860] = "GL_DRAW_BUFFER7"
+	_GLenum_map[34861] = "GL_DRAW_BUFFER8_NV"
+	_GLenum_map[34861] = "GL_DRAW_BUFFER8_EXT"
 	_GLenum_map[34861] = "GL_DRAW_BUFFER8_ATI"
 	_GLenum_map[34861] = "GL_DRAW_BUFFER8"
 	_GLenum_map[34861] = "GL_DRAW_BUFFER8_ARB"
-	_GLenum_map[34861] = "GL_DRAW_BUFFER8_EXT"
-	_GLenum_map[34861] = "GL_DRAW_BUFFER8_NV"
-	_GLenum_map[34862] = "GL_DRAW_BUFFER9_ATI"
 	_GLenum_map[34862] = "GL_DRAW_BUFFER9"
-	_GLenum_map[34862] = "GL_DRAW_BUFFER9_EXT"
-	_GLenum_map[34862] = "GL_DRAW_BUFFER9_ARB"
 	_GLenum_map[34862] = "GL_DRAW_BUFFER9_NV"
-	_GLenum_map[34863] = "GL_DRAW_BUFFER10_ARB"
-	_GLenum_map[34863] = "GL_DRAW_BUFFER10_EXT"
-	_GLenum_map[34863] = "GL_DRAW_BUFFER10_ATI"
+	_GLenum_map[34862] = "GL_DRAW_BUFFER9_EXT"
+	_GLenum_map[34862] = "GL_DRAW_BUFFER9_ATI"
+	_GLenum_map[34862] = "GL_DRAW_BUFFER9_ARB"
 	_GLenum_map[34863] = "GL_DRAW_BUFFER10"
 	_GLenum_map[34863] = "GL_DRAW_BUFFER10_NV"
-	_GLenum_map[34864] = "GL_DRAW_BUFFER11_ARB"
+	_GLenum_map[34863] = "GL_DRAW_BUFFER10_EXT"
+	_GLenum_map[34863] = "GL_DRAW_BUFFER10_ATI"
+	_GLenum_map[34863] = "GL_DRAW_BUFFER10_ARB"
 	_GLenum_map[34864] = "GL_DRAW_BUFFER11_EXT"
-	_GLenum_map[34864] = "GL_DRAW_BUFFER11_ATI"
-	_GLenum_map[34864] = "GL_DRAW_BUFFER11_NV"
 	_GLenum_map[34864] = "GL_DRAW_BUFFER11"
+	_GLenum_map[34864] = "GL_DRAW_BUFFER11_ATI"
+	_GLenum_map[34864] = "GL_DRAW_BUFFER11_ARB"
+	_GLenum_map[34864] = "GL_DRAW_BUFFER11_NV"
+	_GLenum_map[34865] = "GL_DRAW_BUFFER12_EXT"
+	_GLenum_map[34865] = "GL_DRAW_BUFFER12_NV"
 	_GLenum_map[34865] = "GL_DRAW_BUFFER12_ATI"
 	_GLenum_map[34865] = "GL_DRAW_BUFFER12_ARB"
 	_GLenum_map[34865] = "GL_DRAW_BUFFER12"
-	_GLenum_map[34865] = "GL_DRAW_BUFFER12_EXT"
-	_GLenum_map[34865] = "GL_DRAW_BUFFER12_NV"
-	_GLenum_map[34866] = "GL_DRAW_BUFFER13_ARB"
 	_GLenum_map[34866] = "GL_DRAW_BUFFER13_EXT"
 	_GLenum_map[34866] = "GL_DRAW_BUFFER13"
 	_GLenum_map[34866] = "GL_DRAW_BUFFER13_NV"
+	_GLenum_map[34866] = "GL_DRAW_BUFFER13_ARB"
 	_GLenum_map[34866] = "GL_DRAW_BUFFER13_ATI"
-	_GLenum_map[34867] = "GL_DRAW_BUFFER14_ATI"
 	_GLenum_map[34867] = "GL_DRAW_BUFFER14"
-	_GLenum_map[34867] = "GL_DRAW_BUFFER14_ARB"
-	_GLenum_map[34867] = "GL_DRAW_BUFFER14_EXT"
 	_GLenum_map[34867] = "GL_DRAW_BUFFER14_NV"
+	_GLenum_map[34867] = "GL_DRAW_BUFFER14_EXT"
+	_GLenum_map[34867] = "GL_DRAW_BUFFER14_ATI"
+	_GLenum_map[34867] = "GL_DRAW_BUFFER14_ARB"
 	_GLenum_map[34868] = "GL_DRAW_BUFFER15"
-	_GLenum_map[34868] = "GL_DRAW_BUFFER15_ARB"
-	_GLenum_map[34868] = "GL_DRAW_BUFFER15_EXT"
-	_GLenum_map[34868] = "GL_DRAW_BUFFER15_NV"
 	_GLenum_map[34868] = "GL_DRAW_BUFFER15_ATI"
+	_GLenum_map[34868] = "GL_DRAW_BUFFER15_ARB"
+	_GLenum_map[34868] = "GL_DRAW_BUFFER15_NV"
+	_GLenum_map[34868] = "GL_DRAW_BUFFER15_EXT"
 	_GLenum_map[34869] = "GL_COLOR_CLEAR_UNCLAMPED_VALUE_ATI"
 	_GLenum_map[34871] = "GL_COMPRESSED_LUMINANCE_ALPHA_3DC_ATI"
 	_GLenum_map[34877] = "GL_BLEND_EQUATION_ALPHA"
-	_GLenum_map[34877] = "GL_BLEND_EQUATION_ALPHA_OES"
 	_GLenum_map[34877] = "GL_BLEND_EQUATION_ALPHA_EXT"
+	_GLenum_map[34877] = "GL_BLEND_EQUATION_ALPHA_OES"
 	_GLenum_map[34879] = "GL_SUBSAMPLE_DISTANCE_AMD"
-	_GLenum_map[34880] = "GL_MATRIX_PALETTE_ARB"
 	_GLenum_map[34880] = "GL_MATRIX_PALETTE_OES"
+	_GLenum_map[34880] = "GL_MATRIX_PALETTE_ARB"
 	_GLenum_map[34881] = "GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB"
-	_GLenum_map[34882] = "GL_MAX_PALETTE_MATRICES_ARB"
 	_GLenum_map[34882] = "GL_MAX_PALETTE_MATRICES_OES"
-	_GLenum_map[34883] = "GL_CURRENT_PALETTE_MATRIX_ARB"
+	_GLenum_map[34882] = "GL_MAX_PALETTE_MATRICES_ARB"
 	_GLenum_map[34883] = "GL_CURRENT_PALETTE_MATRIX_OES"
+	_GLenum_map[34883] = "GL_CURRENT_PALETTE_MATRIX_ARB"
 	_GLenum_map[34884] = "GL_MATRIX_INDEX_ARRAY_OES"
 	_GLenum_map[34884] = "GL_MATRIX_INDEX_ARRAY_ARB"
 	_GLenum_map[34885] = "GL_CURRENT_MATRIX_INDEX_ARB"
-	_GLenum_map[34886] = "GL_MATRIX_INDEX_ARRAY_SIZE_ARB"
 	_GLenum_map[34886] = "GL_MATRIX_INDEX_ARRAY_SIZE_OES"
-	_GLenum_map[34887] = "GL_MATRIX_INDEX_ARRAY_TYPE_OES"
+	_GLenum_map[34886] = "GL_MATRIX_INDEX_ARRAY_SIZE_ARB"
 	_GLenum_map[34887] = "GL_MATRIX_INDEX_ARRAY_TYPE_ARB"
-	_GLenum_map[34888] = "GL_MATRIX_INDEX_ARRAY_STRIDE_ARB"
+	_GLenum_map[34887] = "GL_MATRIX_INDEX_ARRAY_TYPE_OES"
 	_GLenum_map[34888] = "GL_MATRIX_INDEX_ARRAY_STRIDE_OES"
+	_GLenum_map[34888] = "GL_MATRIX_INDEX_ARRAY_STRIDE_ARB"
 	_GLenum_map[34889] = "GL_MATRIX_INDEX_ARRAY_POINTER_OES"
 	_GLenum_map[34889] = "GL_MATRIX_INDEX_ARRAY_POINTER_ARB"
 	_GLenum_map[34890] = "GL_TEXTURE_DEPTH_SIZE"
 	_GLenum_map[34890] = "GL_TEXTURE_DEPTH_SIZE_ARB"
 	_GLenum_map[34891] = "GL_DEPTH_TEXTURE_MODE_ARB"
 	_GLenum_map[34891] = "GL_DEPTH_TEXTURE_MODE"
+	_GLenum_map[34892] = "GL_TEXTURE_COMPARE_MODE_EXT"
 	_GLenum_map[34892] = "GL_TEXTURE_COMPARE_MODE"
 	_GLenum_map[34892] = "GL_TEXTURE_COMPARE_MODE_ARB"
-	_GLenum_map[34892] = "GL_TEXTURE_COMPARE_MODE_EXT"
 	_GLenum_map[34893] = "GL_TEXTURE_COMPARE_FUNC"
 	_GLenum_map[34893] = "GL_TEXTURE_COMPARE_FUNC_EXT"
 	_GLenum_map[34893] = "GL_TEXTURE_COMPARE_FUNC_ARB"
-	_GLenum_map[34894] = "GL_COMPARE_REF_TO_TEXTURE"
+	_GLenum_map[34894] = "GL_COMPARE_R_TO_TEXTURE_ARB"
 	_GLenum_map[34894] = "GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT"
+	_GLenum_map[34894] = "GL_COMPARE_REF_TO_TEXTURE"
 	_GLenum_map[34894] = "GL_COMPARE_REF_TO_TEXTURE_EXT"
 	_GLenum_map[34894] = "GL_COMPARE_R_TO_TEXTURE"
-	_GLenum_map[34894] = "GL_COMPARE_R_TO_TEXTURE_ARB"
 	_GLenum_map[34895] = "GL_TEXTURE_CUBE_MAP_SEAMLESS"
 	_GLenum_map[34896] = "GL_OFFSET_PROJECTIVE_TEXTURE_2D_NV"
 	_GLenum_map[34897] = "GL_OFFSET_PROJECTIVE_TEXTURE_2D_SCALE_NV"
@@ -80320,54 +83617,54 @@ func init() {
 	_GLenum_map[34910] = "GL_HILO8_NV"
 	_GLenum_map[34911] = "GL_SIGNED_HILO8_NV"
 	_GLenum_map[34912] = "GL_FORCE_BLUE_TO_ONE_NV"
+	_GLenum_map[34913] = "GL_POINT_SPRITE"
 	_GLenum_map[34913] = "GL_POINT_SPRITE_OES"
 	_GLenum_map[34913] = "GL_POINT_SPRITE_ARB"
-	_GLenum_map[34913] = "GL_POINT_SPRITE"
 	_GLenum_map[34913] = "GL_POINT_SPRITE_NV"
-	_GLenum_map[34914] = "GL_COORD_REPLACE_ARB"
-	_GLenum_map[34914] = "GL_COORD_REPLACE_OES"
 	_GLenum_map[34914] = "GL_COORD_REPLACE"
+	_GLenum_map[34914] = "GL_COORD_REPLACE_ARB"
 	_GLenum_map[34914] = "GL_COORD_REPLACE_NV"
+	_GLenum_map[34914] = "GL_COORD_REPLACE_OES"
 	_GLenum_map[34915] = "GL_POINT_SPRITE_R_MODE_NV"
-	_GLenum_map[34916] = "GL_PIXEL_COUNTER_BITS_NV"
-	_GLenum_map[34916] = "GL_QUERY_COUNTER_BITS_ARB"
-	_GLenum_map[34916] = "GL_QUERY_COUNTER_BITS_EXT"
 	_GLenum_map[34916] = "GL_QUERY_COUNTER_BITS"
-	_GLenum_map[34917] = "GL_CURRENT_OCCLUSION_QUERY_ID_NV"
-	_GLenum_map[34917] = "GL_CURRENT_QUERY"
+	_GLenum_map[34916] = "GL_QUERY_COUNTER_BITS_ARB"
+	_GLenum_map[34916] = "GL_PIXEL_COUNTER_BITS_NV"
+	_GLenum_map[34916] = "GL_QUERY_COUNTER_BITS_EXT"
 	_GLenum_map[34917] = "GL_CURRENT_QUERY_ARB"
+	_GLenum_map[34917] = "GL_CURRENT_OCCLUSION_QUERY_ID_NV"
 	_GLenum_map[34917] = "GL_CURRENT_QUERY_EXT"
-	_GLenum_map[34918] = "GL_QUERY_RESULT_ARB"
+	_GLenum_map[34917] = "GL_CURRENT_QUERY"
+	_GLenum_map[34918] = "GL_QUERY_RESULT_EXT"
 	_GLenum_map[34918] = "GL_QUERY_RESULT"
 	_GLenum_map[34918] = "GL_PIXEL_COUNT_NV"
-	_GLenum_map[34918] = "GL_QUERY_RESULT_EXT"
-	_GLenum_map[34919] = "GL_PIXEL_COUNT_AVAILABLE_NV"
-	_GLenum_map[34919] = "GL_QUERY_RESULT_AVAILABLE_ARB"
+	_GLenum_map[34918] = "GL_QUERY_RESULT_ARB"
 	_GLenum_map[34919] = "GL_QUERY_RESULT_AVAILABLE_EXT"
+	_GLenum_map[34919] = "GL_QUERY_RESULT_AVAILABLE_ARB"
 	_GLenum_map[34919] = "GL_QUERY_RESULT_AVAILABLE"
+	_GLenum_map[34919] = "GL_PIXEL_COUNT_AVAILABLE_NV"
 	_GLenum_map[34920] = "GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV"
-	_GLenum_map[34921] = "GL_MAX_VERTEX_ATTRIBS"
 	_GLenum_map[34921] = "GL_MAX_VERTEX_ATTRIBS_ARB"
+	_GLenum_map[34921] = "GL_MAX_VERTEX_ATTRIBS"
 	_GLenum_map[34922] = "GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB"
 	_GLenum_map[34922] = "GL_VERTEX_ATTRIB_ARRAY_NORMALIZED"
-	_GLenum_map[34924] = "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_EXT"
 	_GLenum_map[34924] = "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_OES"
 	_GLenum_map[34924] = "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS"
-	_GLenum_map[34925] = "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_OES"
+	_GLenum_map[34924] = "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_EXT"
 	_GLenum_map[34925] = "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_EXT"
+	_GLenum_map[34925] = "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_OES"
 	_GLenum_map[34925] = "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS"
 	_GLenum_map[34926] = "GL_DEPTH_STENCIL_TO_RGBA_NV"
 	_GLenum_map[34927] = "GL_DEPTH_STENCIL_TO_BGRA_NV"
 	_GLenum_map[34928] = "GL_FRAGMENT_PROGRAM_NV"
-	_GLenum_map[34929] = "GL_MAX_TEXTURE_COORDS"
-	_GLenum_map[34929] = "GL_MAX_TEXTURE_COORDS_ARB"
 	_GLenum_map[34929] = "GL_MAX_TEXTURE_COORDS_NV"
-	_GLenum_map[34930] = "GL_MAX_TEXTURE_IMAGE_UNITS"
+	_GLenum_map[34929] = "GL_MAX_TEXTURE_COORDS_ARB"
+	_GLenum_map[34929] = "GL_MAX_TEXTURE_COORDS"
 	_GLenum_map[34930] = "GL_MAX_TEXTURE_IMAGE_UNITS_NV"
+	_GLenum_map[34930] = "GL_MAX_TEXTURE_IMAGE_UNITS"
 	_GLenum_map[34930] = "GL_MAX_TEXTURE_IMAGE_UNITS_ARB"
 	_GLenum_map[34931] = "GL_FRAGMENT_PROGRAM_BINDING_NV"
-	_GLenum_map[34932] = "GL_PROGRAM_ERROR_STRING_ARB"
 	_GLenum_map[34932] = "GL_PROGRAM_ERROR_STRING_NV"
+	_GLenum_map[34932] = "GL_PROGRAM_ERROR_STRING_ARB"
 	_GLenum_map[34933] = "GL_PROGRAM_FORMAT_ASCII_ARB"
 	_GLenum_map[34934] = "GL_PROGRAM_FORMAT_ARB"
 	_GLenum_map[34936] = "GL_WRITE_PIXEL_DATA_RANGE_NV"
@@ -80377,8 +83674,8 @@ func init() {
 	_GLenum_map[34940] = "GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV"
 	_GLenum_map[34941] = "GL_READ_PIXEL_DATA_RANGE_POINTER_NV"
 	_GLenum_map[34943] = "GL_GEOMETRY_SHADER_INVOCATIONS_OES"
-	_GLenum_map[34943] = "GL_GEOMETRY_SHADER_INVOCATIONS"
 	_GLenum_map[34943] = "GL_GEOMETRY_SHADER_INVOCATIONS_EXT"
+	_GLenum_map[34943] = "GL_GEOMETRY_SHADER_INVOCATIONS"
 	_GLenum_map[34944] = "GL_FLOAT_R_NV"
 	_GLenum_map[34945] = "GL_FLOAT_RG_NV"
 	_GLenum_map[34946] = "GL_FLOAT_RGB_NV"
@@ -80397,36 +83694,36 @@ func init() {
 	_GLenum_map[34959] = "GL_TEXTURE_UNSIGNED_REMAP_MODE_NV"
 	_GLenum_map[34960] = "GL_DEPTH_BOUNDS_TEST_EXT"
 	_GLenum_map[34961] = "GL_DEPTH_BOUNDS_EXT"
-	_GLenum_map[34962] = "GL_ARRAY_BUFFER_ARB"
 	_GLenum_map[34962] = "GL_ARRAY_BUFFER"
+	_GLenum_map[34962] = "GL_ARRAY_BUFFER_ARB"
 	_GLenum_map[34963] = "GL_ELEMENT_ARRAY_BUFFER_ARB"
 	_GLenum_map[34963] = "GL_ELEMENT_ARRAY_BUFFER"
 	_GLenum_map[34964] = "GL_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34964] = "GL_ARRAY_BUFFER_BINDING_ARB"
-	_GLenum_map[34965] = "GL_ELEMENT_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34965] = "GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB"
+	_GLenum_map[34965] = "GL_ELEMENT_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34966] = "GL_VERTEX_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34966] = "GL_VERTEX_ARRAY_BUFFER_BINDING_ARB"
 	_GLenum_map[34967] = "GL_NORMAL_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34967] = "GL_NORMAL_ARRAY_BUFFER_BINDING_ARB"
 	_GLenum_map[34968] = "GL_COLOR_ARRAY_BUFFER_BINDING_ARB"
 	_GLenum_map[34968] = "GL_COLOR_ARRAY_BUFFER_BINDING"
-	_GLenum_map[34969] = "GL_INDEX_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34969] = "GL_INDEX_ARRAY_BUFFER_BINDING_ARB"
+	_GLenum_map[34969] = "GL_INDEX_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34970] = "GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB"
 	_GLenum_map[34970] = "GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING"
-	_GLenum_map[34971] = "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34971] = "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING_ARB"
-	_GLenum_map[34972] = "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING"
+	_GLenum_map[34971] = "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34972] = "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB"
+	_GLenum_map[34972] = "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34973] = "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB"
-	_GLenum_map[34973] = "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34973] = "GL_FOG_COORD_ARRAY_BUFFER_BINDING"
+	_GLenum_map[34973] = "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34974] = "GL_WEIGHT_ARRAY_BUFFER_BINDING_OES"
 	_GLenum_map[34974] = "GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB"
 	_GLenum_map[34974] = "GL_WEIGHT_ARRAY_BUFFER_BINDING"
-	_GLenum_map[34975] = "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34975] = "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB"
+	_GLenum_map[34975] = "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING"
 	_GLenum_map[34976] = "GL_PROGRAM_INSTRUCTIONS_ARB"
 	_GLenum_map[34977] = "GL_MAX_PROGRAM_INSTRUCTIONS_ARB"
 	_GLenum_map[34978] = "GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB"
@@ -80453,23 +83750,23 @@ func init() {
 	_GLenum_map[34999] = "GL_TRANSPOSE_CURRENT_MATRIX_ARB"
 	_GLenum_map[35000] = "GL_READ_ONLY_ARB"
 	_GLenum_map[35000] = "GL_READ_ONLY"
-	_GLenum_map[35001] = "GL_WRITE_ONLY"
 	_GLenum_map[35001] = "GL_WRITE_ONLY_ARB"
+	_GLenum_map[35001] = "GL_WRITE_ONLY"
 	_GLenum_map[35001] = "GL_WRITE_ONLY_OES"
 	_GLenum_map[35002] = "GL_READ_WRITE_ARB"
 	_GLenum_map[35002] = "GL_READ_WRITE"
-	_GLenum_map[35003] = "GL_BUFFER_ACCESS_ARB"
 	_GLenum_map[35003] = "GL_BUFFER_ACCESS_OES"
+	_GLenum_map[35003] = "GL_BUFFER_ACCESS_ARB"
 	_GLenum_map[35003] = "GL_BUFFER_ACCESS"
-	_GLenum_map[35004] = "GL_BUFFER_MAPPED"
-	_GLenum_map[35004] = "GL_BUFFER_MAPPED_ARB"
 	_GLenum_map[35004] = "GL_BUFFER_MAPPED_OES"
+	_GLenum_map[35004] = "GL_BUFFER_MAPPED_ARB"
+	_GLenum_map[35004] = "GL_BUFFER_MAPPED"
 	_GLenum_map[35005] = "GL_BUFFER_MAP_POINTER_OES"
 	_GLenum_map[35005] = "GL_BUFFER_MAP_POINTER"
 	_GLenum_map[35005] = "GL_BUFFER_MAP_POINTER_ARB"
 	_GLenum_map[35006] = "GL_WRITE_DISCARD_NV"
-	_GLenum_map[35007] = "GL_TIME_ELAPSED"
 	_GLenum_map[35007] = "GL_TIME_ELAPSED_EXT"
+	_GLenum_map[35007] = "GL_TIME_ELAPSED"
 	_GLenum_map[35008] = "GL_MATRIX0_ARB"
 	_GLenum_map[35009] = "GL_MATRIX1_ARB"
 	_GLenum_map[35010] = "GL_MATRIX2_ARB"
@@ -80502,10 +83799,10 @@ func init() {
 	_GLenum_map[35037] = "GL_MATRIX29_ARB"
 	_GLenum_map[35038] = "GL_MATRIX30_ARB"
 	_GLenum_map[35039] = "GL_MATRIX31_ARB"
-	_GLenum_map[35040] = "GL_STREAM_DRAW_ARB"
 	_GLenum_map[35040] = "GL_STREAM_DRAW"
-	_GLenum_map[35041] = "GL_STREAM_READ"
+	_GLenum_map[35040] = "GL_STREAM_DRAW_ARB"
 	_GLenum_map[35041] = "GL_STREAM_READ_ARB"
+	_GLenum_map[35041] = "GL_STREAM_READ"
 	_GLenum_map[35042] = "GL_STREAM_COPY"
 	_GLenum_map[35042] = "GL_STREAM_COPY_ARB"
 	_GLenum_map[35044] = "GL_STATIC_DRAW"
@@ -80514,30 +83811,30 @@ func init() {
 	_GLenum_map[35045] = "GL_STATIC_READ"
 	_GLenum_map[35046] = "GL_STATIC_COPY_ARB"
 	_GLenum_map[35046] = "GL_STATIC_COPY"
-	_GLenum_map[35048] = "GL_DYNAMIC_DRAW_ARB"
 	_GLenum_map[35048] = "GL_DYNAMIC_DRAW"
-	_GLenum_map[35049] = "GL_DYNAMIC_READ_ARB"
+	_GLenum_map[35048] = "GL_DYNAMIC_DRAW_ARB"
 	_GLenum_map[35049] = "GL_DYNAMIC_READ"
-	_GLenum_map[35050] = "GL_DYNAMIC_COPY_ARB"
+	_GLenum_map[35049] = "GL_DYNAMIC_READ_ARB"
 	_GLenum_map[35050] = "GL_DYNAMIC_COPY"
+	_GLenum_map[35050] = "GL_DYNAMIC_COPY_ARB"
 	_GLenum_map[35051] = "GL_PIXEL_PACK_BUFFER_ARB"
-	_GLenum_map[35051] = "GL_PIXEL_PACK_BUFFER"
 	_GLenum_map[35051] = "GL_PIXEL_PACK_BUFFER_EXT"
-	_GLenum_map[35052] = "GL_PIXEL_UNPACK_BUFFER_EXT"
+	_GLenum_map[35051] = "GL_PIXEL_PACK_BUFFER"
 	_GLenum_map[35052] = "GL_PIXEL_UNPACK_BUFFER_ARB"
+	_GLenum_map[35052] = "GL_PIXEL_UNPACK_BUFFER_EXT"
 	_GLenum_map[35052] = "GL_PIXEL_UNPACK_BUFFER"
-	_GLenum_map[35053] = "GL_PIXEL_PACK_BUFFER_BINDING_EXT"
 	_GLenum_map[35053] = "GL_PIXEL_PACK_BUFFER_BINDING"
 	_GLenum_map[35053] = "GL_PIXEL_PACK_BUFFER_BINDING_ARB"
+	_GLenum_map[35053] = "GL_PIXEL_PACK_BUFFER_BINDING_EXT"
 	_GLenum_map[35054] = "GL_ETC1_SRGB8_NV"
 	_GLenum_map[35055] = "GL_PIXEL_UNPACK_BUFFER_BINDING_EXT"
-	_GLenum_map[35055] = "GL_PIXEL_UNPACK_BUFFER_BINDING_ARB"
 	_GLenum_map[35055] = "GL_PIXEL_UNPACK_BUFFER_BINDING"
-	_GLenum_map[35056] = "GL_DEPTH24_STENCIL8_OES"
+	_GLenum_map[35055] = "GL_PIXEL_UNPACK_BUFFER_BINDING_ARB"
 	_GLenum_map[35056] = "GL_DEPTH24_STENCIL8"
+	_GLenum_map[35056] = "GL_DEPTH24_STENCIL8_OES"
 	_GLenum_map[35056] = "GL_DEPTH24_STENCIL8_EXT"
-	_GLenum_map[35057] = "GL_TEXTURE_STENCIL_SIZE_EXT"
 	_GLenum_map[35057] = "GL_TEXTURE_STENCIL_SIZE"
+	_GLenum_map[35057] = "GL_TEXTURE_STENCIL_SIZE_EXT"
 	_GLenum_map[35058] = "GL_STENCIL_TAG_BITS_EXT"
 	_GLenum_map[35059] = "GL_STENCIL_CLEAR_TAG_VALUE_EXT"
 	_GLenum_map[35060] = "GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV"
@@ -80549,21 +83846,21 @@ func init() {
 	_GLenum_map[35066] = "GL_ONE_MINUS_SRC1_COLOR"
 	_GLenum_map[35067] = "GL_ONE_MINUS_SRC1_ALPHA"
 	_GLenum_map[35068] = "GL_MAX_DUAL_SOURCE_DRAW_BUFFERS"
-	_GLenum_map[35069] = "GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV"
-	_GLenum_map[35069] = "GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT"
 	_GLenum_map[35069] = "GL_VERTEX_ATTRIB_ARRAY_INTEGER"
+	_GLenum_map[35069] = "GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT"
+	_GLenum_map[35069] = "GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV"
+	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT"
+	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR"
 	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE"
 	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB"
 	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV"
-	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR"
-	_GLenum_map[35070] = "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT"
-	_GLenum_map[35071] = "GL_MAX_ARRAY_TEXTURE_LAYERS"
 	_GLenum_map[35071] = "GL_MAX_ARRAY_TEXTURE_LAYERS_EXT"
-	_GLenum_map[35076] = "GL_MIN_PROGRAM_TEXEL_OFFSET"
+	_GLenum_map[35071] = "GL_MAX_ARRAY_TEXTURE_LAYERS"
 	_GLenum_map[35076] = "GL_MIN_PROGRAM_TEXEL_OFFSET_EXT"
 	_GLenum_map[35076] = "GL_MIN_PROGRAM_TEXEL_OFFSET_NV"
-	_GLenum_map[35077] = "GL_MAX_PROGRAM_TEXEL_OFFSET_NV"
+	_GLenum_map[35076] = "GL_MIN_PROGRAM_TEXEL_OFFSET"
 	_GLenum_map[35077] = "GL_MAX_PROGRAM_TEXEL_OFFSET"
+	_GLenum_map[35077] = "GL_MAX_PROGRAM_TEXEL_OFFSET_NV"
 	_GLenum_map[35077] = "GL_MAX_PROGRAM_TEXEL_OFFSET_EXT"
 	_GLenum_map[35078] = "GL_PROGRAM_ATTRIB_COMPONENTS_NV"
 	_GLenum_map[35079] = "GL_PROGRAM_RESULT_COMPONENTS_NV"
@@ -80574,24 +83871,24 @@ func init() {
 	_GLenum_map[35090] = "GL_MIRROR_CLAMP_TO_BORDER_EXT"
 	_GLenum_map[35092] = "GL_SAMPLES_PASSED"
 	_GLenum_map[35092] = "GL_SAMPLES_PASSED_ARB"
+	_GLenum_map[35094] = "GL_GEOMETRY_LINKED_VERTICES_OUT_OES"
 	_GLenum_map[35094] = "GL_GEOMETRY_VERTICES_OUT"
 	_GLenum_map[35094] = "GL_GEOMETRY_LINKED_VERTICES_OUT_EXT"
-	_GLenum_map[35094] = "GL_GEOMETRY_LINKED_VERTICES_OUT_OES"
 	_GLenum_map[35095] = "GL_GEOMETRY_INPUT_TYPE"
 	_GLenum_map[35095] = "GL_GEOMETRY_LINKED_INPUT_TYPE_EXT"
 	_GLenum_map[35095] = "GL_GEOMETRY_LINKED_INPUT_TYPE_OES"
-	_GLenum_map[35096] = "GL_GEOMETRY_LINKED_OUTPUT_TYPE_OES"
 	_GLenum_map[35096] = "GL_GEOMETRY_OUTPUT_TYPE"
+	_GLenum_map[35096] = "GL_GEOMETRY_LINKED_OUTPUT_TYPE_OES"
 	_GLenum_map[35096] = "GL_GEOMETRY_LINKED_OUTPUT_TYPE_EXT"
 	_GLenum_map[35097] = "GL_SAMPLER_BINDING"
-	_GLenum_map[35098] = "GL_CLAMP_VERTEX_COLOR_ARB"
 	_GLenum_map[35098] = "GL_CLAMP_VERTEX_COLOR"
+	_GLenum_map[35098] = "GL_CLAMP_VERTEX_COLOR_ARB"
 	_GLenum_map[35099] = "GL_CLAMP_FRAGMENT_COLOR"
 	_GLenum_map[35099] = "GL_CLAMP_FRAGMENT_COLOR_ARB"
-	_GLenum_map[35100] = "GL_CLAMP_READ_COLOR_ARB"
 	_GLenum_map[35100] = "GL_CLAMP_READ_COLOR"
-	_GLenum_map[35101] = "GL_FIXED_ONLY_ARB"
+	_GLenum_map[35100] = "GL_CLAMP_READ_COLOR_ARB"
 	_GLenum_map[35101] = "GL_FIXED_ONLY"
+	_GLenum_map[35101] = "GL_FIXED_ONLY_ARB"
 	_GLenum_map[35102] = "GL_TESS_CONTROL_PROGRAM_NV"
 	_GLenum_map[35103] = "GL_TESS_EVALUATION_PROGRAM_NV"
 	_GLenum_map[35104] = "GL_FRAGMENT_SHADER_ATI"
@@ -80733,17 +84030,17 @@ func init() {
 	_GLenum_map[35369] = "GL_UNIFORM_BUFFER_START"
 	_GLenum_map[35370] = "GL_UNIFORM_BUFFER_SIZE"
 	_GLenum_map[35371] = "GL_MAX_VERTEX_UNIFORM_BLOCKS"
-	_GLenum_map[35372] = "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_EXT"
-	_GLenum_map[35372] = "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_OES"
 	_GLenum_map[35372] = "GL_MAX_GEOMETRY_UNIFORM_BLOCKS"
+	_GLenum_map[35372] = "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_OES"
+	_GLenum_map[35372] = "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_EXT"
 	_GLenum_map[35373] = "GL_MAX_FRAGMENT_UNIFORM_BLOCKS"
 	_GLenum_map[35374] = "GL_MAX_COMBINED_UNIFORM_BLOCKS"
 	_GLenum_map[35375] = "GL_MAX_UNIFORM_BUFFER_BINDINGS"
 	_GLenum_map[35376] = "GL_MAX_UNIFORM_BLOCK_SIZE"
 	_GLenum_map[35377] = "GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS"
 	_GLenum_map[35378] = "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS"
-	_GLenum_map[35378] = "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[35378] = "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_EXT"
+	_GLenum_map[35378] = "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[35379] = "GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS"
 	_GLenum_map[35380] = "GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT"
 	_GLenum_map[35381] = "GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH"
@@ -80777,49 +84074,49 @@ func init() {
 	_GLenum_map[35415] = "GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT"
 	_GLenum_map[35632] = "GL_FRAGMENT_SHADER_ARB"
 	_GLenum_map[35632] = "GL_FRAGMENT_SHADER"
-	_GLenum_map[35633] = "GL_VERTEX_SHADER"
 	_GLenum_map[35633] = "GL_VERTEX_SHADER_ARB"
+	_GLenum_map[35633] = "GL_VERTEX_SHADER"
 	_GLenum_map[35648] = "GL_PROGRAM_OBJECT_EXT"
 	_GLenum_map[35648] = "GL_PROGRAM_OBJECT_ARB"
-	_GLenum_map[35656] = "GL_SHADER_OBJECT_ARB"
 	_GLenum_map[35656] = "GL_SHADER_OBJECT_EXT"
-	_GLenum_map[35657] = "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB"
+	_GLenum_map[35656] = "GL_SHADER_OBJECT_ARB"
 	_GLenum_map[35657] = "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS"
+	_GLenum_map[35657] = "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB"
 	_GLenum_map[35658] = "GL_MAX_VERTEX_UNIFORM_COMPONENTS"
 	_GLenum_map[35658] = "GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB"
-	_GLenum_map[35659] = "GL_MAX_VARYING_FLOATS_ARB"
-	_GLenum_map[35659] = "GL_MAX_VARYING_COMPONENTS_EXT"
-	_GLenum_map[35659] = "GL_MAX_VARYING_FLOATS"
 	_GLenum_map[35659] = "GL_MAX_VARYING_COMPONENTS"
+	_GLenum_map[35659] = "GL_MAX_VARYING_FLOATS"
+	_GLenum_map[35659] = "GL_MAX_VARYING_COMPONENTS_EXT"
+	_GLenum_map[35659] = "GL_MAX_VARYING_FLOATS_ARB"
 	_GLenum_map[35660] = "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB"
 	_GLenum_map[35660] = "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS"
 	_GLenum_map[35661] = "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS"
 	_GLenum_map[35661] = "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB"
 	_GLenum_map[35662] = "GL_OBJECT_TYPE_ARB"
-	_GLenum_map[35663] = "GL_OBJECT_SUBTYPE_ARB"
 	_GLenum_map[35663] = "GL_SHADER_TYPE"
-	_GLenum_map[35664] = "GL_FLOAT_VEC2_ARB"
+	_GLenum_map[35663] = "GL_OBJECT_SUBTYPE_ARB"
 	_GLenum_map[35664] = "GL_FLOAT_VEC2"
-	_GLenum_map[35665] = "GL_FLOAT_VEC3_ARB"
+	_GLenum_map[35664] = "GL_FLOAT_VEC2_ARB"
 	_GLenum_map[35665] = "GL_FLOAT_VEC3"
-	_GLenum_map[35666] = "GL_FLOAT_VEC4_ARB"
+	_GLenum_map[35665] = "GL_FLOAT_VEC3_ARB"
 	_GLenum_map[35666] = "GL_FLOAT_VEC4"
+	_GLenum_map[35666] = "GL_FLOAT_VEC4_ARB"
 	_GLenum_map[35667] = "GL_INT_VEC2"
 	_GLenum_map[35667] = "GL_INT_VEC2_ARB"
-	_GLenum_map[35668] = "GL_INT_VEC3_ARB"
 	_GLenum_map[35668] = "GL_INT_VEC3"
-	_GLenum_map[35669] = "GL_INT_VEC4"
+	_GLenum_map[35668] = "GL_INT_VEC3_ARB"
 	_GLenum_map[35669] = "GL_INT_VEC4_ARB"
+	_GLenum_map[35669] = "GL_INT_VEC4"
 	_GLenum_map[35670] = "GL_BOOL_ARB"
 	_GLenum_map[35670] = "GL_BOOL"
 	_GLenum_map[35671] = "GL_BOOL_VEC2"
 	_GLenum_map[35671] = "GL_BOOL_VEC2_ARB"
 	_GLenum_map[35672] = "GL_BOOL_VEC3_ARB"
 	_GLenum_map[35672] = "GL_BOOL_VEC3"
-	_GLenum_map[35673] = "GL_BOOL_VEC4"
 	_GLenum_map[35673] = "GL_BOOL_VEC4_ARB"
-	_GLenum_map[35674] = "GL_FLOAT_MAT2_ARB"
+	_GLenum_map[35673] = "GL_BOOL_VEC4"
 	_GLenum_map[35674] = "GL_FLOAT_MAT2"
+	_GLenum_map[35674] = "GL_FLOAT_MAT2_ARB"
 	_GLenum_map[35675] = "GL_FLOAT_MAT3_ARB"
 	_GLenum_map[35675] = "GL_FLOAT_MAT3"
 	_GLenum_map[35676] = "GL_FLOAT_MAT4"
@@ -80831,56 +84128,56 @@ func init() {
 	_GLenum_map[35679] = "GL_SAMPLER_3D_ARB"
 	_GLenum_map[35679] = "GL_SAMPLER_3D"
 	_GLenum_map[35679] = "GL_SAMPLER_3D_OES"
-	_GLenum_map[35680] = "GL_SAMPLER_CUBE_ARB"
 	_GLenum_map[35680] = "GL_SAMPLER_CUBE"
+	_GLenum_map[35680] = "GL_SAMPLER_CUBE_ARB"
 	_GLenum_map[35681] = "GL_SAMPLER_1D_SHADOW_ARB"
 	_GLenum_map[35681] = "GL_SAMPLER_1D_SHADOW"
 	_GLenum_map[35682] = "GL_SAMPLER_2D_SHADOW_EXT"
-	_GLenum_map[35682] = "GL_SAMPLER_2D_SHADOW_ARB"
 	_GLenum_map[35682] = "GL_SAMPLER_2D_SHADOW"
+	_GLenum_map[35682] = "GL_SAMPLER_2D_SHADOW_ARB"
 	_GLenum_map[35683] = "GL_SAMPLER_2D_RECT_ARB"
 	_GLenum_map[35683] = "GL_SAMPLER_2D_RECT"
-	_GLenum_map[35684] = "GL_SAMPLER_2D_RECT_SHADOW"
 	_GLenum_map[35684] = "GL_SAMPLER_2D_RECT_SHADOW_ARB"
-	_GLenum_map[35685] = "GL_FLOAT_MAT2x3"
+	_GLenum_map[35684] = "GL_SAMPLER_2D_RECT_SHADOW"
 	_GLenum_map[35685] = "GL_FLOAT_MAT2x3_NV"
-	_GLenum_map[35686] = "GL_FLOAT_MAT2x4_NV"
+	_GLenum_map[35685] = "GL_FLOAT_MAT2x3"
 	_GLenum_map[35686] = "GL_FLOAT_MAT2x4"
+	_GLenum_map[35686] = "GL_FLOAT_MAT2x4_NV"
 	_GLenum_map[35687] = "GL_FLOAT_MAT3x2"
 	_GLenum_map[35687] = "GL_FLOAT_MAT3x2_NV"
-	_GLenum_map[35688] = "GL_FLOAT_MAT3x4"
 	_GLenum_map[35688] = "GL_FLOAT_MAT3x4_NV"
+	_GLenum_map[35688] = "GL_FLOAT_MAT3x4"
 	_GLenum_map[35689] = "GL_FLOAT_MAT4x2"
 	_GLenum_map[35689] = "GL_FLOAT_MAT4x2_NV"
-	_GLenum_map[35690] = "GL_FLOAT_MAT4x3"
 	_GLenum_map[35690] = "GL_FLOAT_MAT4x3_NV"
+	_GLenum_map[35690] = "GL_FLOAT_MAT4x3"
 	_GLenum_map[35712] = "GL_DELETE_STATUS"
 	_GLenum_map[35712] = "GL_OBJECT_DELETE_STATUS_ARB"
-	_GLenum_map[35713] = "GL_OBJECT_COMPILE_STATUS_ARB"
 	_GLenum_map[35713] = "GL_COMPILE_STATUS"
-	_GLenum_map[35714] = "GL_OBJECT_LINK_STATUS_ARB"
+	_GLenum_map[35713] = "GL_OBJECT_COMPILE_STATUS_ARB"
 	_GLenum_map[35714] = "GL_LINK_STATUS"
+	_GLenum_map[35714] = "GL_OBJECT_LINK_STATUS_ARB"
 	_GLenum_map[35715] = "GL_OBJECT_VALIDATE_STATUS_ARB"
 	_GLenum_map[35715] = "GL_VALIDATE_STATUS"
-	_GLenum_map[35716] = "GL_INFO_LOG_LENGTH"
 	_GLenum_map[35716] = "GL_OBJECT_INFO_LOG_LENGTH_ARB"
-	_GLenum_map[35717] = "GL_OBJECT_ATTACHED_OBJECTS_ARB"
+	_GLenum_map[35716] = "GL_INFO_LOG_LENGTH"
 	_GLenum_map[35717] = "GL_ATTACHED_SHADERS"
+	_GLenum_map[35717] = "GL_OBJECT_ATTACHED_OBJECTS_ARB"
 	_GLenum_map[35718] = "GL_ACTIVE_UNIFORMS"
 	_GLenum_map[35718] = "GL_OBJECT_ACTIVE_UNIFORMS_ARB"
 	_GLenum_map[35719] = "GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB"
 	_GLenum_map[35719] = "GL_ACTIVE_UNIFORM_MAX_LENGTH"
 	_GLenum_map[35720] = "GL_SHADER_SOURCE_LENGTH"
 	_GLenum_map[35720] = "GL_OBJECT_SHADER_SOURCE_LENGTH_ARB"
-	_GLenum_map[35721] = "GL_ACTIVE_ATTRIBUTES"
 	_GLenum_map[35721] = "GL_OBJECT_ACTIVE_ATTRIBUTES_ARB"
-	_GLenum_map[35722] = "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
+	_GLenum_map[35721] = "GL_ACTIVE_ATTRIBUTES"
 	_GLenum_map[35722] = "GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB"
-	_GLenum_map[35723] = "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES"
-	_GLenum_map[35723] = "GL_FRAGMENT_SHADER_DERIVATIVE_HINT"
+	_GLenum_map[35722] = "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
 	_GLenum_map[35723] = "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB"
-	_GLenum_map[35724] = "GL_SHADING_LANGUAGE_VERSION"
+	_GLenum_map[35723] = "GL_FRAGMENT_SHADER_DERIVATIVE_HINT"
+	_GLenum_map[35723] = "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES"
 	_GLenum_map[35724] = "GL_SHADING_LANGUAGE_VERSION_ARB"
+	_GLenum_map[35724] = "GL_SHADING_LANGUAGE_VERSION"
 	_GLenum_map[35725] = "GL_CURRENT_PROGRAM"
 	_GLenum_map[35728] = "GL_PALETTE4_RGB8_OES"
 	_GLenum_map[35729] = "GL_PALETTE4_RGBA8_OES"
@@ -80892,8 +84189,8 @@ func init() {
 	_GLenum_map[35735] = "GL_PALETTE8_R5_G6_B5_OES"
 	_GLenum_map[35736] = "GL_PALETTE8_RGBA4_OES"
 	_GLenum_map[35737] = "GL_PALETTE8_RGB5_A1_OES"
-	_GLenum_map[35738] = "GL_IMPLEMENTATION_COLOR_READ_TYPE_OES"
 	_GLenum_map[35738] = "GL_IMPLEMENTATION_COLOR_READ_TYPE"
+	_GLenum_map[35738] = "GL_IMPLEMENTATION_COLOR_READ_TYPE_OES"
 	_GLenum_map[35739] = "GL_IMPLEMENTATION_COLOR_READ_FORMAT"
 	_GLenum_map[35739] = "GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES"
 	_GLenum_map[35740] = "GL_POINT_SIZE_ARRAY_OES"
@@ -80940,20 +84237,20 @@ func init() {
 	_GLenum_map[35850] = "GL_SGX_BINARY_IMG"
 	_GLenum_map[35856] = "GL_TEXTURE_RED_TYPE"
 	_GLenum_map[35856] = "GL_TEXTURE_RED_TYPE_ARB"
-	_GLenum_map[35857] = "GL_TEXTURE_GREEN_TYPE_ARB"
 	_GLenum_map[35857] = "GL_TEXTURE_GREEN_TYPE"
+	_GLenum_map[35857] = "GL_TEXTURE_GREEN_TYPE_ARB"
 	_GLenum_map[35858] = "GL_TEXTURE_BLUE_TYPE_ARB"
 	_GLenum_map[35858] = "GL_TEXTURE_BLUE_TYPE"
-	_GLenum_map[35859] = "GL_TEXTURE_ALPHA_TYPE_ARB"
 	_GLenum_map[35859] = "GL_TEXTURE_ALPHA_TYPE"
-	_GLenum_map[35860] = "GL_TEXTURE_LUMINANCE_TYPE_ARB"
+	_GLenum_map[35859] = "GL_TEXTURE_ALPHA_TYPE_ARB"
 	_GLenum_map[35860] = "GL_TEXTURE_LUMINANCE_TYPE"
+	_GLenum_map[35860] = "GL_TEXTURE_LUMINANCE_TYPE_ARB"
 	_GLenum_map[35861] = "GL_TEXTURE_INTENSITY_TYPE_ARB"
 	_GLenum_map[35861] = "GL_TEXTURE_INTENSITY_TYPE"
-	_GLenum_map[35862] = "GL_TEXTURE_DEPTH_TYPE_ARB"
 	_GLenum_map[35862] = "GL_TEXTURE_DEPTH_TYPE"
-	_GLenum_map[35863] = "GL_UNSIGNED_NORMALIZED_EXT"
+	_GLenum_map[35862] = "GL_TEXTURE_DEPTH_TYPE_ARB"
 	_GLenum_map[35863] = "GL_UNSIGNED_NORMALIZED_ARB"
+	_GLenum_map[35863] = "GL_UNSIGNED_NORMALIZED_EXT"
 	_GLenum_map[35863] = "GL_UNSIGNED_NORMALIZED"
 	_GLenum_map[35864] = "GL_TEXTURE_1D_ARRAY_EXT"
 	_GLenum_map[35864] = "GL_TEXTURE_1D_ARRAY"
@@ -80961,8 +84258,8 @@ func init() {
 	_GLenum_map[35865] = "GL_PROXY_TEXTURE_1D_ARRAY"
 	_GLenum_map[35866] = "GL_TEXTURE_2D_ARRAY"
 	_GLenum_map[35866] = "GL_TEXTURE_2D_ARRAY_EXT"
-	_GLenum_map[35867] = "GL_PROXY_TEXTURE_2D_ARRAY_EXT"
 	_GLenum_map[35867] = "GL_PROXY_TEXTURE_2D_ARRAY"
+	_GLenum_map[35867] = "GL_PROXY_TEXTURE_2D_ARRAY_EXT"
 	_GLenum_map[35868] = "GL_TEXTURE_BINDING_1D_ARRAY"
 	_GLenum_map[35868] = "GL_TEXTURE_BINDING_1D_ARRAY_EXT"
 	_GLenum_map[35869] = "GL_TEXTURE_BINDING_2D_ARRAY"
@@ -80971,48 +84268,48 @@ func init() {
 	_GLenum_map[35879] = "GL_MAX_PROGRAM_OUTPUT_VERTICES_NV"
 	_GLenum_map[35880] = "GL_MAX_PROGRAM_TOTAL_OUTPUT_COMPONENTS_NV"
 	_GLenum_map[35881] = "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS"
+	_GLenum_map[35881] = "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT"
 	_GLenum_map[35881] = "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB"
 	_GLenum_map[35881] = "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_OES"
-	_GLenum_map[35881] = "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT"
-	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_BINDING_OES"
 	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_OES"
-	_GLenum_map[35882] = "GL_TEXTURE_BUFFER"
+	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_EXT"
+	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_BINDING_OES"
+	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_BINDING_EXT"
 	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_BINDING"
 	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_ARB"
-	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_EXT"
-	_GLenum_map[35882] = "GL_TEXTURE_BUFFER_BINDING_EXT"
+	_GLenum_map[35882] = "GL_TEXTURE_BUFFER"
 	_GLenum_map[35883] = "GL_MAX_TEXTURE_BUFFER_SIZE_ARB"
 	_GLenum_map[35883] = "GL_MAX_TEXTURE_BUFFER_SIZE_EXT"
-	_GLenum_map[35883] = "GL_MAX_TEXTURE_BUFFER_SIZE_OES"
 	_GLenum_map[35883] = "GL_MAX_TEXTURE_BUFFER_SIZE"
+	_GLenum_map[35883] = "GL_MAX_TEXTURE_BUFFER_SIZE_OES"
 	_GLenum_map[35884] = "GL_TEXTURE_BINDING_BUFFER_OES"
 	_GLenum_map[35884] = "GL_TEXTURE_BINDING_BUFFER"
 	_GLenum_map[35884] = "GL_TEXTURE_BINDING_BUFFER_ARB"
 	_GLenum_map[35884] = "GL_TEXTURE_BINDING_BUFFER_EXT"
+	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB"
+	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES"
 	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING"
 	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT"
-	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES"
-	_GLenum_map[35885] = "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB"
 	_GLenum_map[35886] = "GL_TEXTURE_BUFFER_FORMAT_EXT"
 	_GLenum_map[35886] = "GL_TEXTURE_BUFFER_FORMAT_ARB"
-	_GLenum_map[35887] = "GL_ANY_SAMPLES_PASSED_EXT"
 	_GLenum_map[35887] = "GL_ANY_SAMPLES_PASSED"
-	_GLenum_map[35894] = "GL_SAMPLE_SHADING_OES"
+	_GLenum_map[35887] = "GL_ANY_SAMPLES_PASSED_EXT"
 	_GLenum_map[35894] = "GL_SAMPLE_SHADING_ARB"
+	_GLenum_map[35894] = "GL_SAMPLE_SHADING_OES"
 	_GLenum_map[35894] = "GL_SAMPLE_SHADING"
-	_GLenum_map[35895] = "GL_MIN_SAMPLE_SHADING_VALUE"
-	_GLenum_map[35895] = "GL_MIN_SAMPLE_SHADING_VALUE_ARB"
 	_GLenum_map[35895] = "GL_MIN_SAMPLE_SHADING_VALUE_OES"
-	_GLenum_map[35898] = "GL_R11F_G11F_B10F_APPLE"
-	_GLenum_map[35898] = "GL_R11F_G11F_B10F"
+	_GLenum_map[35895] = "GL_MIN_SAMPLE_SHADING_VALUE_ARB"
+	_GLenum_map[35895] = "GL_MIN_SAMPLE_SHADING_VALUE"
 	_GLenum_map[35898] = "GL_R11F_G11F_B10F_EXT"
-	_GLenum_map[35899] = "GL_UNSIGNED_INT_10F_11F_11F_REV_EXT"
+	_GLenum_map[35898] = "GL_R11F_G11F_B10F"
+	_GLenum_map[35898] = "GL_R11F_G11F_B10F_APPLE"
 	_GLenum_map[35899] = "GL_UNSIGNED_INT_10F_11F_11F_REV_APPLE"
 	_GLenum_map[35899] = "GL_UNSIGNED_INT_10F_11F_11F_REV"
+	_GLenum_map[35899] = "GL_UNSIGNED_INT_10F_11F_11F_REV_EXT"
 	_GLenum_map[35900] = "GL_RGBA_SIGNED_COMPONENTS_EXT"
 	_GLenum_map[35901] = "GL_RGB9_E5_APPLE"
-	_GLenum_map[35901] = "GL_RGB9_E5"
 	_GLenum_map[35901] = "GL_RGB9_E5_EXT"
+	_GLenum_map[35901] = "GL_RGB9_E5"
 	_GLenum_map[35902] = "GL_UNSIGNED_INT_5_9_9_9_REV_EXT"
 	_GLenum_map[35902] = "GL_UNSIGNED_INT_5_9_9_9_REV"
 	_GLenum_map[35902] = "GL_UNSIGNED_INT_5_9_9_9_REV_APPLE"
@@ -81020,41 +84317,41 @@ func init() {
 	_GLenum_map[35903] = "GL_TEXTURE_SHARED_SIZE_EXT"
 	_GLenum_map[35904] = "GL_SRGB_EXT"
 	_GLenum_map[35904] = "GL_SRGB"
-	_GLenum_map[35905] = "GL_SRGB8_NV"
-	_GLenum_map[35905] = "GL_SRGB8"
 	_GLenum_map[35905] = "GL_SRGB8_EXT"
+	_GLenum_map[35905] = "GL_SRGB8"
+	_GLenum_map[35905] = "GL_SRGB8_NV"
 	_GLenum_map[35906] = "GL_SRGB_ALPHA_EXT"
 	_GLenum_map[35906] = "GL_SRGB_ALPHA"
 	_GLenum_map[35907] = "GL_SRGB8_ALPHA8_EXT"
 	_GLenum_map[35907] = "GL_SRGB8_ALPHA8"
 	_GLenum_map[35908] = "GL_SLUMINANCE_ALPHA"
-	_GLenum_map[35908] = "GL_SLUMINANCE_ALPHA_NV"
 	_GLenum_map[35908] = "GL_SLUMINANCE_ALPHA_EXT"
-	_GLenum_map[35909] = "GL_SLUMINANCE8_ALPHA8"
-	_GLenum_map[35909] = "GL_SLUMINANCE8_ALPHA8_EXT"
+	_GLenum_map[35908] = "GL_SLUMINANCE_ALPHA_NV"
 	_GLenum_map[35909] = "GL_SLUMINANCE8_ALPHA8_NV"
+	_GLenum_map[35909] = "GL_SLUMINANCE8_ALPHA8_EXT"
+	_GLenum_map[35909] = "GL_SLUMINANCE8_ALPHA8"
+	_GLenum_map[35910] = "GL_SLUMINANCE"
 	_GLenum_map[35910] = "GL_SLUMINANCE_NV"
 	_GLenum_map[35910] = "GL_SLUMINANCE_EXT"
-	_GLenum_map[35910] = "GL_SLUMINANCE"
-	_GLenum_map[35911] = "GL_SLUMINANCE8_EXT"
 	_GLenum_map[35911] = "GL_SLUMINANCE8_NV"
 	_GLenum_map[35911] = "GL_SLUMINANCE8"
+	_GLenum_map[35911] = "GL_SLUMINANCE8_EXT"
 	_GLenum_map[35912] = "GL_COMPRESSED_SRGB_EXT"
 	_GLenum_map[35912] = "GL_COMPRESSED_SRGB"
-	_GLenum_map[35913] = "GL_COMPRESSED_SRGB_ALPHA_EXT"
 	_GLenum_map[35913] = "GL_COMPRESSED_SRGB_ALPHA"
+	_GLenum_map[35913] = "GL_COMPRESSED_SRGB_ALPHA_EXT"
 	_GLenum_map[35914] = "GL_COMPRESSED_SLUMINANCE"
 	_GLenum_map[35914] = "GL_COMPRESSED_SLUMINANCE_EXT"
 	_GLenum_map[35915] = "GL_COMPRESSED_SLUMINANCE_ALPHA_EXT"
 	_GLenum_map[35915] = "GL_COMPRESSED_SLUMINANCE_ALPHA"
-	_GLenum_map[35916] = "GL_COMPRESSED_SRGB_S3TC_DXT1_EXT"
 	_GLenum_map[35916] = "GL_COMPRESSED_SRGB_S3TC_DXT1_NV"
+	_GLenum_map[35916] = "GL_COMPRESSED_SRGB_S3TC_DXT1_EXT"
 	_GLenum_map[35917] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV"
 	_GLenum_map[35917] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT"
-	_GLenum_map[35918] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT"
 	_GLenum_map[35918] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV"
-	_GLenum_map[35919] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV"
+	_GLenum_map[35918] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT"
 	_GLenum_map[35919] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT"
+	_GLenum_map[35919] = "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV"
 	_GLenum_map[35952] = "GL_COMPRESSED_LUMINANCE_LATC1_EXT"
 	_GLenum_map[35953] = "GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT"
 	_GLenum_map[35954] = "GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT"
@@ -81071,52 +84368,52 @@ func init() {
 	_GLenum_map[35964] = "GL_PRIMITIVE_ID_NV"
 	_GLenum_map[35965] = "GL_GENERIC_ATTRIB_NV"
 	_GLenum_map[35966] = "GL_TRANSFORM_FEEDBACK_ATTRIBS_NV"
-	_GLenum_map[35967] = "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT"
 	_GLenum_map[35967] = "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_NV"
 	_GLenum_map[35967] = "GL_TRANSFORM_FEEDBACK_BUFFER_MODE"
-	_GLenum_map[35968] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT"
+	_GLenum_map[35967] = "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT"
 	_GLenum_map[35968] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS"
 	_GLenum_map[35968] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_NV"
+	_GLenum_map[35968] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT"
 	_GLenum_map[35969] = "GL_ACTIVE_VARYINGS_NV"
 	_GLenum_map[35970] = "GL_ACTIVE_VARYING_MAX_LENGTH_NV"
+	_GLenum_map[35971] = "GL_TRANSFORM_FEEDBACK_VARYINGS_NV"
 	_GLenum_map[35971] = "GL_TRANSFORM_FEEDBACK_VARYINGS_EXT"
 	_GLenum_map[35971] = "GL_TRANSFORM_FEEDBACK_VARYINGS"
-	_GLenum_map[35971] = "GL_TRANSFORM_FEEDBACK_VARYINGS_NV"
 	_GLenum_map[35972] = "GL_TRANSFORM_FEEDBACK_BUFFER_START_EXT"
 	_GLenum_map[35972] = "GL_TRANSFORM_FEEDBACK_BUFFER_START"
 	_GLenum_map[35972] = "GL_TRANSFORM_FEEDBACK_BUFFER_START_NV"
-	_GLenum_map[35973] = "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE"
-	_GLenum_map[35973] = "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT"
 	_GLenum_map[35973] = "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_NV"
+	_GLenum_map[35973] = "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT"
+	_GLenum_map[35973] = "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE"
 	_GLenum_map[35974] = "GL_TRANSFORM_FEEDBACK_RECORD_NV"
 	_GLenum_map[35975] = "GL_PRIMITIVES_GENERATED"
-	_GLenum_map[35975] = "GL_PRIMITIVES_GENERATED_EXT"
 	_GLenum_map[35975] = "GL_PRIMITIVES_GENERATED_NV"
 	_GLenum_map[35975] = "GL_PRIMITIVES_GENERATED_OES"
-	_GLenum_map[35976] = "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT"
+	_GLenum_map[35975] = "GL_PRIMITIVES_GENERATED_EXT"
 	_GLenum_map[35976] = "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN"
 	_GLenum_map[35976] = "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV"
-	_GLenum_map[35977] = "GL_RASTERIZER_DISCARD_NV"
+	_GLenum_map[35976] = "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT"
 	_GLenum_map[35977] = "GL_RASTERIZER_DISCARD"
+	_GLenum_map[35977] = "GL_RASTERIZER_DISCARD_NV"
 	_GLenum_map[35977] = "GL_RASTERIZER_DISCARD_EXT"
 	_GLenum_map[35978] = "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT"
 	_GLenum_map[35978] = "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS"
 	_GLenum_map[35978] = "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_NV"
-	_GLenum_map[35979] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT"
 	_GLenum_map[35979] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS"
+	_GLenum_map[35979] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT"
 	_GLenum_map[35979] = "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_NV"
+	_GLenum_map[35980] = "GL_INTERLEAVED_ATTRIBS_NV"
 	_GLenum_map[35980] = "GL_INTERLEAVED_ATTRIBS_EXT"
 	_GLenum_map[35980] = "GL_INTERLEAVED_ATTRIBS"
-	_GLenum_map[35980] = "GL_INTERLEAVED_ATTRIBS_NV"
 	_GLenum_map[35981] = "GL_SEPARATE_ATTRIBS_NV"
 	_GLenum_map[35981] = "GL_SEPARATE_ATTRIBS"
 	_GLenum_map[35981] = "GL_SEPARATE_ATTRIBS_EXT"
 	_GLenum_map[35982] = "GL_TRANSFORM_FEEDBACK_BUFFER"
 	_GLenum_map[35982] = "GL_TRANSFORM_FEEDBACK_BUFFER_NV"
 	_GLenum_map[35982] = "GL_TRANSFORM_FEEDBACK_BUFFER_EXT"
+	_GLenum_map[35983] = "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT"
 	_GLenum_map[35983] = "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING"
 	_GLenum_map[35983] = "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_NV"
-	_GLenum_map[35983] = "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT"
 	_GLenum_map[35986] = "GL_ATC_RGB_AMD"
 	_GLenum_map[35987] = "GL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
 	_GLenum_map[36000] = "GL_POINT_SPRITE_COORD_ORIGIN"
@@ -81125,130 +84422,130 @@ func init() {
 	_GLenum_map[36003] = "GL_STENCIL_BACK_REF"
 	_GLenum_map[36004] = "GL_STENCIL_BACK_VALUE_MASK"
 	_GLenum_map[36005] = "GL_STENCIL_BACK_WRITEMASK"
-	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING"
-	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING_EXT"
 	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING_ANGLE"
-	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_APPLE"
+	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING_OES"
+	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING_EXT"
 	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_ANGLE"
 	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING"
-	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_EXT"
 	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_NV"
-	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING_OES"
-	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING"
+	_GLenum_map[36006] = "GL_FRAMEBUFFER_BINDING"
+	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_EXT"
+	_GLenum_map[36006] = "GL_DRAW_FRAMEBUFFER_BINDING_APPLE"
+	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING_OES"
 	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING_ANGLE"
 	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING_EXT"
-	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING_OES"
+	_GLenum_map[36007] = "GL_RENDERBUFFER_BINDING"
+	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_EXT"
 	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER"
 	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_ANGLE"
-	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_NV"
 	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_APPLE"
-	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_EXT"
+	_GLenum_map[36008] = "GL_READ_FRAMEBUFFER_NV"
+	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_EXT"
+	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_NV"
 	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER"
 	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_APPLE"
 	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_ANGLE"
-	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_EXT"
-	_GLenum_map[36009] = "GL_DRAW_FRAMEBUFFER_NV"
 	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING"
-	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_NV"
 	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_EXT"
-	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_ANGLE"
+	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_NV"
 	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_APPLE"
-	_GLenum_map[36011] = "GL_RENDERBUFFER_COVERAGE_SAMPLES_NV"
-	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES_APPLE"
+	_GLenum_map[36010] = "GL_READ_FRAMEBUFFER_BINDING_ANGLE"
 	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES_EXT"
-	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES"
+	_GLenum_map[36011] = "GL_RENDERBUFFER_COVERAGE_SAMPLES_NV"
 	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES_NV"
+	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES_APPLE"
 	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES_ANGLE"
+	_GLenum_map[36011] = "GL_RENDERBUFFER_SAMPLES"
 	_GLenum_map[36012] = "GL_DEPTH_COMPONENT32F"
 	_GLenum_map[36013] = "GL_DEPTH32F_STENCIL8"
+	_GLenum_map[36048] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE"
 	_GLenum_map[36048] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT"
 	_GLenum_map[36048] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_OES"
-	_GLenum_map[36048] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE"
 	_GLenum_map[36049] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME"
-	_GLenum_map[36049] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT"
 	_GLenum_map[36049] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_OES"
-	_GLenum_map[36050] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT"
-	_GLenum_map[36050] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_OES"
+	_GLenum_map[36049] = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT"
 	_GLenum_map[36050] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL"
+	_GLenum_map[36050] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_OES"
+	_GLenum_map[36050] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT"
 	_GLenum_map[36051] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE"
 	_GLenum_map[36051] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT"
 	_GLenum_map[36051] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_OES"
+	_GLenum_map[36052] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES"
 	_GLenum_map[36052] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT"
 	_GLenum_map[36052] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER"
 	_GLenum_map[36052] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT"
-	_GLenum_map[36052] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES"
-	_GLenum_map[36053] = "GL_FRAMEBUFFER_COMPLETE"
-	_GLenum_map[36053] = "GL_FRAMEBUFFER_COMPLETE_OES"
 	_GLenum_map[36053] = "GL_FRAMEBUFFER_COMPLETE_EXT"
-	_GLenum_map[36054] = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_OES"
+	_GLenum_map[36053] = "GL_FRAMEBUFFER_COMPLETE_OES"
+	_GLenum_map[36053] = "GL_FRAMEBUFFER_COMPLETE"
 	_GLenum_map[36054] = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT"
 	_GLenum_map[36054] = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT"
-	_GLenum_map[36055] = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT"
-	_GLenum_map[36055] = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES"
+	_GLenum_map[36054] = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_OES"
 	_GLenum_map[36055] = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT"
-	_GLenum_map[36057] = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT"
+	_GLenum_map[36055] = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES"
+	_GLenum_map[36055] = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT"
 	_GLenum_map[36057] = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_OES"
 	_GLenum_map[36057] = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS"
+	_GLenum_map[36057] = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT"
 	_GLenum_map[36058] = "GL_FRAMEBUFFER_INCOMPLETE_FORMATS_OES"
 	_GLenum_map[36058] = "GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT"
-	_GLenum_map[36059] = "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER"
 	_GLenum_map[36059] = "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT"
 	_GLenum_map[36059] = "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_OES"
-	_GLenum_map[36060] = "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER"
-	_GLenum_map[36060] = "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_OES"
+	_GLenum_map[36059] = "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER"
 	_GLenum_map[36060] = "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT"
+	_GLenum_map[36060] = "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_OES"
+	_GLenum_map[36060] = "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER"
+	_GLenum_map[36061] = "GL_FRAMEBUFFER_UNSUPPORTED_OES"
 	_GLenum_map[36061] = "GL_FRAMEBUFFER_UNSUPPORTED_EXT"
 	_GLenum_map[36061] = "GL_FRAMEBUFFER_UNSUPPORTED"
-	_GLenum_map[36061] = "GL_FRAMEBUFFER_UNSUPPORTED_OES"
-	_GLenum_map[36063] = "GL_MAX_COLOR_ATTACHMENTS"
 	_GLenum_map[36063] = "GL_MAX_COLOR_ATTACHMENTS_NV"
 	_GLenum_map[36063] = "GL_MAX_COLOR_ATTACHMENTS_EXT"
+	_GLenum_map[36063] = "GL_MAX_COLOR_ATTACHMENTS"
 	_GLenum_map[36064] = "GL_COLOR_ATTACHMENT0_EXT"
-	_GLenum_map[36064] = "GL_COLOR_ATTACHMENT0_NV"
 	_GLenum_map[36064] = "GL_COLOR_ATTACHMENT0"
+	_GLenum_map[36064] = "GL_COLOR_ATTACHMENT0_NV"
 	_GLenum_map[36064] = "GL_COLOR_ATTACHMENT0_OES"
 	_GLenum_map[36065] = "GL_COLOR_ATTACHMENT1_EXT"
-	_GLenum_map[36065] = "GL_COLOR_ATTACHMENT1"
 	_GLenum_map[36065] = "GL_COLOR_ATTACHMENT1_NV"
+	_GLenum_map[36065] = "GL_COLOR_ATTACHMENT1"
 	_GLenum_map[36066] = "GL_COLOR_ATTACHMENT2"
 	_GLenum_map[36066] = "GL_COLOR_ATTACHMENT2_NV"
 	_GLenum_map[36066] = "GL_COLOR_ATTACHMENT2_EXT"
-	_GLenum_map[36067] = "GL_COLOR_ATTACHMENT3"
 	_GLenum_map[36067] = "GL_COLOR_ATTACHMENT3_EXT"
 	_GLenum_map[36067] = "GL_COLOR_ATTACHMENT3_NV"
+	_GLenum_map[36067] = "GL_COLOR_ATTACHMENT3"
 	_GLenum_map[36068] = "GL_COLOR_ATTACHMENT4_EXT"
 	_GLenum_map[36068] = "GL_COLOR_ATTACHMENT4"
 	_GLenum_map[36068] = "GL_COLOR_ATTACHMENT4_NV"
 	_GLenum_map[36069] = "GL_COLOR_ATTACHMENT5_NV"
-	_GLenum_map[36069] = "GL_COLOR_ATTACHMENT5_EXT"
 	_GLenum_map[36069] = "GL_COLOR_ATTACHMENT5"
+	_GLenum_map[36069] = "GL_COLOR_ATTACHMENT5_EXT"
 	_GLenum_map[36070] = "GL_COLOR_ATTACHMENT6"
 	_GLenum_map[36070] = "GL_COLOR_ATTACHMENT6_NV"
 	_GLenum_map[36070] = "GL_COLOR_ATTACHMENT6_EXT"
-	_GLenum_map[36071] = "GL_COLOR_ATTACHMENT7"
 	_GLenum_map[36071] = "GL_COLOR_ATTACHMENT7_NV"
 	_GLenum_map[36071] = "GL_COLOR_ATTACHMENT7_EXT"
+	_GLenum_map[36071] = "GL_COLOR_ATTACHMENT7"
 	_GLenum_map[36072] = "GL_COLOR_ATTACHMENT8_NV"
-	_GLenum_map[36072] = "GL_COLOR_ATTACHMENT8_EXT"
 	_GLenum_map[36072] = "GL_COLOR_ATTACHMENT8"
+	_GLenum_map[36072] = "GL_COLOR_ATTACHMENT8_EXT"
+	_GLenum_map[36073] = "GL_COLOR_ATTACHMENT9"
 	_GLenum_map[36073] = "GL_COLOR_ATTACHMENT9_EXT"
 	_GLenum_map[36073] = "GL_COLOR_ATTACHMENT9_NV"
-	_GLenum_map[36073] = "GL_COLOR_ATTACHMENT9"
-	_GLenum_map[36074] = "GL_COLOR_ATTACHMENT10_NV"
 	_GLenum_map[36074] = "GL_COLOR_ATTACHMENT10"
+	_GLenum_map[36074] = "GL_COLOR_ATTACHMENT10_NV"
 	_GLenum_map[36074] = "GL_COLOR_ATTACHMENT10_EXT"
-	_GLenum_map[36075] = "GL_COLOR_ATTACHMENT11"
 	_GLenum_map[36075] = "GL_COLOR_ATTACHMENT11_NV"
 	_GLenum_map[36075] = "GL_COLOR_ATTACHMENT11_EXT"
-	_GLenum_map[36076] = "GL_COLOR_ATTACHMENT12_NV"
+	_GLenum_map[36075] = "GL_COLOR_ATTACHMENT11"
 	_GLenum_map[36076] = "GL_COLOR_ATTACHMENT12"
+	_GLenum_map[36076] = "GL_COLOR_ATTACHMENT12_NV"
 	_GLenum_map[36076] = "GL_COLOR_ATTACHMENT12_EXT"
 	_GLenum_map[36077] = "GL_COLOR_ATTACHMENT13_EXT"
-	_GLenum_map[36077] = "GL_COLOR_ATTACHMENT13_NV"
 	_GLenum_map[36077] = "GL_COLOR_ATTACHMENT13"
-	_GLenum_map[36078] = "GL_COLOR_ATTACHMENT14_NV"
+	_GLenum_map[36077] = "GL_COLOR_ATTACHMENT13_NV"
 	_GLenum_map[36078] = "GL_COLOR_ATTACHMENT14_EXT"
 	_GLenum_map[36078] = "GL_COLOR_ATTACHMENT14"
+	_GLenum_map[36078] = "GL_COLOR_ATTACHMENT14_NV"
 	_GLenum_map[36079] = "GL_COLOR_ATTACHMENT15"
 	_GLenum_map[36079] = "GL_COLOR_ATTACHMENT15_EXT"
 	_GLenum_map[36079] = "GL_COLOR_ATTACHMENT15_NV"
@@ -81268,66 +84565,66 @@ func init() {
 	_GLenum_map[36093] = "GL_COLOR_ATTACHMENT29"
 	_GLenum_map[36094] = "GL_COLOR_ATTACHMENT30"
 	_GLenum_map[36095] = "GL_COLOR_ATTACHMENT31"
-	_GLenum_map[36096] = "GL_DEPTH_ATTACHMENT"
 	_GLenum_map[36096] = "GL_DEPTH_ATTACHMENT_EXT"
+	_GLenum_map[36096] = "GL_DEPTH_ATTACHMENT"
 	_GLenum_map[36096] = "GL_DEPTH_ATTACHMENT_OES"
-	_GLenum_map[36128] = "GL_STENCIL_ATTACHMENT_OES"
 	_GLenum_map[36128] = "GL_STENCIL_ATTACHMENT"
+	_GLenum_map[36128] = "GL_STENCIL_ATTACHMENT_OES"
 	_GLenum_map[36128] = "GL_STENCIL_ATTACHMENT_EXT"
-	_GLenum_map[36160] = "GL_FRAMEBUFFER_EXT"
 	_GLenum_map[36160] = "GL_FRAMEBUFFER_OES"
+	_GLenum_map[36160] = "GL_FRAMEBUFFER_EXT"
 	_GLenum_map[36160] = "GL_FRAMEBUFFER"
 	_GLenum_map[36161] = "GL_RENDERBUFFER_OES"
 	_GLenum_map[36161] = "GL_RENDERBUFFER_EXT"
 	_GLenum_map[36161] = "GL_RENDERBUFFER"
-	_GLenum_map[36162] = "GL_RENDERBUFFER_WIDTH"
 	_GLenum_map[36162] = "GL_RENDERBUFFER_WIDTH_OES"
 	_GLenum_map[36162] = "GL_RENDERBUFFER_WIDTH_EXT"
-	_GLenum_map[36163] = "GL_RENDERBUFFER_HEIGHT_OES"
+	_GLenum_map[36162] = "GL_RENDERBUFFER_WIDTH"
 	_GLenum_map[36163] = "GL_RENDERBUFFER_HEIGHT"
 	_GLenum_map[36163] = "GL_RENDERBUFFER_HEIGHT_EXT"
-	_GLenum_map[36164] = "GL_RENDERBUFFER_INTERNAL_FORMAT"
-	_GLenum_map[36164] = "GL_RENDERBUFFER_INTERNAL_FORMAT_EXT"
+	_GLenum_map[36163] = "GL_RENDERBUFFER_HEIGHT_OES"
 	_GLenum_map[36164] = "GL_RENDERBUFFER_INTERNAL_FORMAT_OES"
+	_GLenum_map[36164] = "GL_RENDERBUFFER_INTERNAL_FORMAT_EXT"
+	_GLenum_map[36164] = "GL_RENDERBUFFER_INTERNAL_FORMAT"
+	_GLenum_map[36166] = "GL_STENCIL_INDEX1"
 	_GLenum_map[36166] = "GL_STENCIL_INDEX1_OES"
 	_GLenum_map[36166] = "GL_STENCIL_INDEX1_EXT"
-	_GLenum_map[36166] = "GL_STENCIL_INDEX1"
+	_GLenum_map[36167] = "GL_STENCIL_INDEX4_OES"
 	_GLenum_map[36167] = "GL_STENCIL_INDEX4_EXT"
 	_GLenum_map[36167] = "GL_STENCIL_INDEX4"
-	_GLenum_map[36167] = "GL_STENCIL_INDEX4_OES"
-	_GLenum_map[36168] = "GL_STENCIL_INDEX8_EXT"
 	_GLenum_map[36168] = "GL_STENCIL_INDEX8"
+	_GLenum_map[36168] = "GL_STENCIL_INDEX8_EXT"
 	_GLenum_map[36168] = "GL_STENCIL_INDEX8_OES"
 	_GLenum_map[36169] = "GL_STENCIL_INDEX16"
 	_GLenum_map[36169] = "GL_STENCIL_INDEX16_EXT"
-	_GLenum_map[36176] = "GL_RENDERBUFFER_RED_SIZE_EXT"
 	_GLenum_map[36176] = "GL_RENDERBUFFER_RED_SIZE"
+	_GLenum_map[36176] = "GL_RENDERBUFFER_RED_SIZE_EXT"
 	_GLenum_map[36176] = "GL_RENDERBUFFER_RED_SIZE_OES"
 	_GLenum_map[36177] = "GL_RENDERBUFFER_GREEN_SIZE_EXT"
 	_GLenum_map[36177] = "GL_RENDERBUFFER_GREEN_SIZE"
 	_GLenum_map[36177] = "GL_RENDERBUFFER_GREEN_SIZE_OES"
-	_GLenum_map[36178] = "GL_RENDERBUFFER_BLUE_SIZE_OES"
 	_GLenum_map[36178] = "GL_RENDERBUFFER_BLUE_SIZE"
+	_GLenum_map[36178] = "GL_RENDERBUFFER_BLUE_SIZE_OES"
 	_GLenum_map[36178] = "GL_RENDERBUFFER_BLUE_SIZE_EXT"
-	_GLenum_map[36179] = "GL_RENDERBUFFER_ALPHA_SIZE"
 	_GLenum_map[36179] = "GL_RENDERBUFFER_ALPHA_SIZE_OES"
+	_GLenum_map[36179] = "GL_RENDERBUFFER_ALPHA_SIZE"
 	_GLenum_map[36179] = "GL_RENDERBUFFER_ALPHA_SIZE_EXT"
+	_GLenum_map[36180] = "GL_RENDERBUFFER_DEPTH_SIZE"
 	_GLenum_map[36180] = "GL_RENDERBUFFER_DEPTH_SIZE_OES"
 	_GLenum_map[36180] = "GL_RENDERBUFFER_DEPTH_SIZE_EXT"
-	_GLenum_map[36180] = "GL_RENDERBUFFER_DEPTH_SIZE"
 	_GLenum_map[36181] = "GL_RENDERBUFFER_STENCIL_SIZE"
-	_GLenum_map[36181] = "GL_RENDERBUFFER_STENCIL_SIZE_OES"
 	_GLenum_map[36181] = "GL_RENDERBUFFER_STENCIL_SIZE_EXT"
+	_GLenum_map[36181] = "GL_RENDERBUFFER_STENCIL_SIZE_OES"
+	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE"
 	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE"
 	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT"
 	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE"
 	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV"
-	_GLenum_map[36182] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE"
-	_GLenum_map[36183] = "GL_MAX_SAMPLES_ANGLE"
-	_GLenum_map[36183] = "GL_MAX_SAMPLES_APPLE"
 	_GLenum_map[36183] = "GL_MAX_SAMPLES_EXT"
 	_GLenum_map[36183] = "GL_MAX_SAMPLES_NV"
+	_GLenum_map[36183] = "GL_MAX_SAMPLES_ANGLE"
 	_GLenum_map[36183] = "GL_MAX_SAMPLES"
+	_GLenum_map[36183] = "GL_MAX_SAMPLES_APPLE"
 	_GLenum_map[36192] = "GL_TEXTURE_GEN_STR_OES"
 	_GLenum_map[36193] = "GL_HALF_FLOAT_OES"
 	_GLenum_map[36194] = "GL_RGB565"
@@ -81338,22 +84635,22 @@ func init() {
 	_GLenum_map[36199] = "GL_TEXTURE_BINDING_EXTERNAL_OES"
 	_GLenum_map[36200] = "GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES"
 	_GLenum_map[36201] = "GL_PRIMITIVE_RESTART_FIXED_INDEX"
-	_GLenum_map[36202] = "GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT"
 	_GLenum_map[36202] = "GL_ANY_SAMPLES_PASSED_CONSERVATIVE"
+	_GLenum_map[36202] = "GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT"
 	_GLenum_map[36203] = "GL_MAX_ELEMENT_INDEX"
 	_GLenum_map[36204] = "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT"
-	_GLenum_map[36208] = "GL_RGBA32UI_EXT"
 	_GLenum_map[36208] = "GL_RGBA32UI"
+	_GLenum_map[36208] = "GL_RGBA32UI_EXT"
 	_GLenum_map[36209] = "GL_RGB32UI_EXT"
 	_GLenum_map[36209] = "GL_RGB32UI"
 	_GLenum_map[36210] = "GL_ALPHA32UI_EXT"
 	_GLenum_map[36211] = "GL_INTENSITY32UI_EXT"
 	_GLenum_map[36212] = "GL_LUMINANCE32UI_EXT"
 	_GLenum_map[36213] = "GL_LUMINANCE_ALPHA32UI_EXT"
-	_GLenum_map[36214] = "GL_RGBA16UI_EXT"
 	_GLenum_map[36214] = "GL_RGBA16UI"
-	_GLenum_map[36215] = "GL_RGB16UI"
+	_GLenum_map[36214] = "GL_RGBA16UI_EXT"
 	_GLenum_map[36215] = "GL_RGB16UI_EXT"
+	_GLenum_map[36215] = "GL_RGB16UI"
 	_GLenum_map[36216] = "GL_ALPHA16UI_EXT"
 	_GLenum_map[36217] = "GL_INTENSITY16UI_EXT"
 	_GLenum_map[36218] = "GL_LUMINANCE16UI_EXT"
@@ -81366,10 +84663,10 @@ func init() {
 	_GLenum_map[36223] = "GL_INTENSITY8UI_EXT"
 	_GLenum_map[36224] = "GL_LUMINANCE8UI_EXT"
 	_GLenum_map[36225] = "GL_LUMINANCE_ALPHA8UI_EXT"
-	_GLenum_map[36226] = "GL_RGBA32I_EXT"
 	_GLenum_map[36226] = "GL_RGBA32I"
-	_GLenum_map[36227] = "GL_RGB32I"
+	_GLenum_map[36226] = "GL_RGBA32I_EXT"
 	_GLenum_map[36227] = "GL_RGB32I_EXT"
+	_GLenum_map[36227] = "GL_RGB32I"
 	_GLenum_map[36228] = "GL_ALPHA32I_EXT"
 	_GLenum_map[36229] = "GL_INTENSITY32I_EXT"
 	_GLenum_map[36230] = "GL_LUMINANCE32I_EXT"
@@ -81382,18 +84679,18 @@ func init() {
 	_GLenum_map[36235] = "GL_INTENSITY16I_EXT"
 	_GLenum_map[36236] = "GL_LUMINANCE16I_EXT"
 	_GLenum_map[36237] = "GL_LUMINANCE_ALPHA16I_EXT"
-	_GLenum_map[36238] = "GL_RGBA8I"
 	_GLenum_map[36238] = "GL_RGBA8I_EXT"
-	_GLenum_map[36239] = "GL_RGB8I_EXT"
+	_GLenum_map[36238] = "GL_RGBA8I"
 	_GLenum_map[36239] = "GL_RGB8I"
+	_GLenum_map[36239] = "GL_RGB8I_EXT"
 	_GLenum_map[36240] = "GL_ALPHA8I_EXT"
 	_GLenum_map[36241] = "GL_INTENSITY8I_EXT"
 	_GLenum_map[36242] = "GL_LUMINANCE8I_EXT"
 	_GLenum_map[36243] = "GL_LUMINANCE_ALPHA8I_EXT"
-	_GLenum_map[36244] = "GL_RED_INTEGER"
 	_GLenum_map[36244] = "GL_RED_INTEGER_EXT"
-	_GLenum_map[36245] = "GL_GREEN_INTEGER_EXT"
+	_GLenum_map[36244] = "GL_RED_INTEGER"
 	_GLenum_map[36245] = "GL_GREEN_INTEGER"
+	_GLenum_map[36245] = "GL_GREEN_INTEGER_EXT"
 	_GLenum_map[36246] = "GL_BLUE_INTEGER_EXT"
 	_GLenum_map[36246] = "GL_BLUE_INTEGER"
 	_GLenum_map[36247] = "GL_ALPHA_INTEGER_EXT"
@@ -81402,10 +84699,10 @@ func init() {
 	_GLenum_map[36248] = "GL_RGB_INTEGER"
 	_GLenum_map[36249] = "GL_RGBA_INTEGER"
 	_GLenum_map[36249] = "GL_RGBA_INTEGER_EXT"
-	_GLenum_map[36250] = "GL_BGR_INTEGER_EXT"
 	_GLenum_map[36250] = "GL_BGR_INTEGER"
-	_GLenum_map[36251] = "GL_BGRA_INTEGER"
+	_GLenum_map[36250] = "GL_BGR_INTEGER_EXT"
 	_GLenum_map[36251] = "GL_BGRA_INTEGER_EXT"
+	_GLenum_map[36251] = "GL_BGRA_INTEGER"
 	_GLenum_map[36252] = "GL_LUMINANCE_INTEGER_EXT"
 	_GLenum_map[36253] = "GL_LUMINANCE_ALPHA_INTEGER_EXT"
 	_GLenum_map[36254] = "GL_RGBA_INTEGER_MODE_EXT"
@@ -81417,115 +84714,115 @@ func init() {
 	_GLenum_map[36260] = "GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV"
 	_GLenum_map[36261] = "GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV"
 	_GLenum_map[36262] = "GL_MAX_PROGRAM_GENERIC_RESULTS_NV"
-	_GLenum_map[36263] = "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB"
 	_GLenum_map[36263] = "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_OES"
 	_GLenum_map[36263] = "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT"
+	_GLenum_map[36263] = "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB"
 	_GLenum_map[36263] = "GL_FRAMEBUFFER_ATTACHMENT_LAYERED"
 	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB"
-	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_OES"
-	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT"
 	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS"
+	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT"
+	_GLenum_map[36264] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_OES"
 	_GLenum_map[36265] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT"
 	_GLenum_map[36265] = "GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB"
 	_GLenum_map[36266] = "GL_LAYER_NV"
 	_GLenum_map[36267] = "GL_DEPTH_COMPONENT32F_NV"
 	_GLenum_map[36268] = "GL_DEPTH32F_STENCIL8_NV"
-	_GLenum_map[36269] = "GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV"
 	_GLenum_map[36269] = "GL_FLOAT_32_UNSIGNED_INT_24_8_REV"
+	_GLenum_map[36269] = "GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV"
 	_GLenum_map[36270] = "GL_SHADER_INCLUDE_ARB"
 	_GLenum_map[36271] = "GL_DEPTH_BUFFER_FLOAT_MODE_NV"
-	_GLenum_map[36281] = "GL_FRAMEBUFFER_SRGB"
 	_GLenum_map[36281] = "GL_FRAMEBUFFER_SRGB_EXT"
+	_GLenum_map[36281] = "GL_FRAMEBUFFER_SRGB"
 	_GLenum_map[36282] = "GL_FRAMEBUFFER_SRGB_CAPABLE_EXT"
-	_GLenum_map[36283] = "GL_COMPRESSED_RED_RGTC1_EXT"
 	_GLenum_map[36283] = "GL_COMPRESSED_RED_RGTC1"
+	_GLenum_map[36283] = "GL_COMPRESSED_RED_RGTC1_EXT"
 	_GLenum_map[36284] = "GL_COMPRESSED_SIGNED_RED_RGTC1_EXT"
 	_GLenum_map[36284] = "GL_COMPRESSED_SIGNED_RED_RGTC1"
-	_GLenum_map[36285] = "GL_COMPRESSED_RG_RGTC2"
 	_GLenum_map[36285] = "GL_COMPRESSED_RED_GREEN_RGTC2_EXT"
-	_GLenum_map[36286] = "GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT"
+	_GLenum_map[36285] = "GL_COMPRESSED_RG_RGTC2"
 	_GLenum_map[36286] = "GL_COMPRESSED_SIGNED_RG_RGTC2"
-	_GLenum_map[36288] = "GL_SAMPLER_1D_ARRAY"
+	_GLenum_map[36286] = "GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT"
 	_GLenum_map[36288] = "GL_SAMPLER_1D_ARRAY_EXT"
+	_GLenum_map[36288] = "GL_SAMPLER_1D_ARRAY"
 	_GLenum_map[36289] = "GL_SAMPLER_2D_ARRAY"
 	_GLenum_map[36289] = "GL_SAMPLER_2D_ARRAY_EXT"
-	_GLenum_map[36290] = "GL_SAMPLER_BUFFER"
-	_GLenum_map[36290] = "GL_SAMPLER_BUFFER_EXT"
 	_GLenum_map[36290] = "GL_SAMPLER_BUFFER_OES"
+	_GLenum_map[36290] = "GL_SAMPLER_BUFFER_EXT"
+	_GLenum_map[36290] = "GL_SAMPLER_BUFFER"
 	_GLenum_map[36291] = "GL_SAMPLER_1D_ARRAY_SHADOW"
 	_GLenum_map[36291] = "GL_SAMPLER_1D_ARRAY_SHADOW_EXT"
 	_GLenum_map[36292] = "GL_SAMPLER_2D_ARRAY_SHADOW"
-	_GLenum_map[36292] = "GL_SAMPLER_2D_ARRAY_SHADOW_NV"
 	_GLenum_map[36292] = "GL_SAMPLER_2D_ARRAY_SHADOW_EXT"
-	_GLenum_map[36293] = "GL_SAMPLER_CUBE_SHADOW"
+	_GLenum_map[36292] = "GL_SAMPLER_2D_ARRAY_SHADOW_NV"
 	_GLenum_map[36293] = "GL_SAMPLER_CUBE_SHADOW_EXT"
 	_GLenum_map[36293] = "GL_SAMPLER_CUBE_SHADOW_NV"
-	_GLenum_map[36294] = "GL_UNSIGNED_INT_VEC2_EXT"
+	_GLenum_map[36293] = "GL_SAMPLER_CUBE_SHADOW"
 	_GLenum_map[36294] = "GL_UNSIGNED_INT_VEC2"
-	_GLenum_map[36295] = "GL_UNSIGNED_INT_VEC3_EXT"
+	_GLenum_map[36294] = "GL_UNSIGNED_INT_VEC2_EXT"
 	_GLenum_map[36295] = "GL_UNSIGNED_INT_VEC3"
-	_GLenum_map[36296] = "GL_UNSIGNED_INT_VEC4"
+	_GLenum_map[36295] = "GL_UNSIGNED_INT_VEC3_EXT"
 	_GLenum_map[36296] = "GL_UNSIGNED_INT_VEC4_EXT"
+	_GLenum_map[36296] = "GL_UNSIGNED_INT_VEC4"
 	_GLenum_map[36297] = "GL_INT_SAMPLER_1D_EXT"
 	_GLenum_map[36297] = "GL_INT_SAMPLER_1D"
 	_GLenum_map[36298] = "GL_INT_SAMPLER_2D"
 	_GLenum_map[36298] = "GL_INT_SAMPLER_2D_EXT"
-	_GLenum_map[36299] = "GL_INT_SAMPLER_3D"
 	_GLenum_map[36299] = "GL_INT_SAMPLER_3D_EXT"
-	_GLenum_map[36300] = "GL_INT_SAMPLER_CUBE"
+	_GLenum_map[36299] = "GL_INT_SAMPLER_3D"
 	_GLenum_map[36300] = "GL_INT_SAMPLER_CUBE_EXT"
-	_GLenum_map[36301] = "GL_INT_SAMPLER_2D_RECT"
+	_GLenum_map[36300] = "GL_INT_SAMPLER_CUBE"
 	_GLenum_map[36301] = "GL_INT_SAMPLER_2D_RECT_EXT"
-	_GLenum_map[36302] = "GL_INT_SAMPLER_1D_ARRAY"
+	_GLenum_map[36301] = "GL_INT_SAMPLER_2D_RECT"
 	_GLenum_map[36302] = "GL_INT_SAMPLER_1D_ARRAY_EXT"
-	_GLenum_map[36303] = "GL_INT_SAMPLER_2D_ARRAY"
+	_GLenum_map[36302] = "GL_INT_SAMPLER_1D_ARRAY"
 	_GLenum_map[36303] = "GL_INT_SAMPLER_2D_ARRAY_EXT"
-	_GLenum_map[36304] = "GL_INT_SAMPLER_BUFFER"
+	_GLenum_map[36303] = "GL_INT_SAMPLER_2D_ARRAY"
 	_GLenum_map[36304] = "GL_INT_SAMPLER_BUFFER_OES"
+	_GLenum_map[36304] = "GL_INT_SAMPLER_BUFFER"
 	_GLenum_map[36304] = "GL_INT_SAMPLER_BUFFER_EXT"
 	_GLenum_map[36305] = "GL_UNSIGNED_INT_SAMPLER_1D_EXT"
 	_GLenum_map[36305] = "GL_UNSIGNED_INT_SAMPLER_1D"
-	_GLenum_map[36306] = "GL_UNSIGNED_INT_SAMPLER_2D"
 	_GLenum_map[36306] = "GL_UNSIGNED_INT_SAMPLER_2D_EXT"
-	_GLenum_map[36307] = "GL_UNSIGNED_INT_SAMPLER_3D"
+	_GLenum_map[36306] = "GL_UNSIGNED_INT_SAMPLER_2D"
 	_GLenum_map[36307] = "GL_UNSIGNED_INT_SAMPLER_3D_EXT"
+	_GLenum_map[36307] = "GL_UNSIGNED_INT_SAMPLER_3D"
 	_GLenum_map[36308] = "GL_UNSIGNED_INT_SAMPLER_CUBE"
 	_GLenum_map[36308] = "GL_UNSIGNED_INT_SAMPLER_CUBE_EXT"
 	_GLenum_map[36309] = "GL_UNSIGNED_INT_SAMPLER_2D_RECT_EXT"
 	_GLenum_map[36309] = "GL_UNSIGNED_INT_SAMPLER_2D_RECT"
-	_GLenum_map[36310] = "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY"
 	_GLenum_map[36310] = "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY_EXT"
+	_GLenum_map[36310] = "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY"
 	_GLenum_map[36311] = "GL_UNSIGNED_INT_SAMPLER_2D_ARRAY"
 	_GLenum_map[36311] = "GL_UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT"
-	_GLenum_map[36312] = "GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT"
 	_GLenum_map[36312] = "GL_UNSIGNED_INT_SAMPLER_BUFFER"
 	_GLenum_map[36312] = "GL_UNSIGNED_INT_SAMPLER_BUFFER_OES"
+	_GLenum_map[36312] = "GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT"
+	_GLenum_map[36313] = "GL_GEOMETRY_SHADER_OES"
 	_GLenum_map[36313] = "GL_GEOMETRY_SHADER_EXT"
 	_GLenum_map[36313] = "GL_GEOMETRY_SHADER_ARB"
 	_GLenum_map[36313] = "GL_GEOMETRY_SHADER"
-	_GLenum_map[36313] = "GL_GEOMETRY_SHADER_OES"
-	_GLenum_map[36314] = "GL_GEOMETRY_VERTICES_OUT_EXT"
 	_GLenum_map[36314] = "GL_GEOMETRY_VERTICES_OUT_ARB"
-	_GLenum_map[36315] = "GL_GEOMETRY_INPUT_TYPE_ARB"
+	_GLenum_map[36314] = "GL_GEOMETRY_VERTICES_OUT_EXT"
 	_GLenum_map[36315] = "GL_GEOMETRY_INPUT_TYPE_EXT"
+	_GLenum_map[36315] = "GL_GEOMETRY_INPUT_TYPE_ARB"
 	_GLenum_map[36316] = "GL_GEOMETRY_OUTPUT_TYPE_ARB"
 	_GLenum_map[36316] = "GL_GEOMETRY_OUTPUT_TYPE_EXT"
-	_GLenum_map[36317] = "GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT"
 	_GLenum_map[36317] = "GL_MAX_GEOMETRY_VARYING_COMPONENTS_ARB"
-	_GLenum_map[36318] = "GL_MAX_VERTEX_VARYING_COMPONENTS_EXT"
+	_GLenum_map[36317] = "GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT"
 	_GLenum_map[36318] = "GL_MAX_VERTEX_VARYING_COMPONENTS_ARB"
+	_GLenum_map[36318] = "GL_MAX_VERTEX_VARYING_COMPONENTS_EXT"
+	_GLenum_map[36319] = "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT"
 	_GLenum_map[36319] = "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[36319] = "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS"
 	_GLenum_map[36319] = "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_ARB"
-	_GLenum_map[36319] = "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT"
+	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB"
+	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT"
 	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES"
 	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES_OES"
-	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT"
-	_GLenum_map[36320] = "GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB"
-	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_OES"
 	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT"
-	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS"
+	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_OES"
 	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB"
+	_GLenum_map[36321] = "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS"
 	_GLenum_map[36322] = "GL_MAX_VERTEX_BINDABLE_UNIFORMS_EXT"
 	_GLenum_map[36323] = "GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT"
 	_GLenum_map[36324] = "GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT"
@@ -81555,41 +84852,41 @@ func init() {
 	_GLenum_map[36368] = "GL_RENDERBUFFER_COLOR_SAMPLES_NV"
 	_GLenum_map[36369] = "GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV"
 	_GLenum_map[36370] = "GL_MULTISAMPLE_COVERAGE_MODES_NV"
-	_GLenum_map[36371] = "GL_QUERY_WAIT_NV"
 	_GLenum_map[36371] = "GL_QUERY_WAIT"
+	_GLenum_map[36371] = "GL_QUERY_WAIT_NV"
 	_GLenum_map[36372] = "GL_QUERY_NO_WAIT_NV"
 	_GLenum_map[36372] = "GL_QUERY_NO_WAIT"
 	_GLenum_map[36373] = "GL_QUERY_BY_REGION_WAIT"
 	_GLenum_map[36373] = "GL_QUERY_BY_REGION_WAIT_NV"
-	_GLenum_map[36374] = "GL_QUERY_BY_REGION_NO_WAIT"
 	_GLenum_map[36374] = "GL_QUERY_BY_REGION_NO_WAIT_NV"
+	_GLenum_map[36374] = "GL_QUERY_BY_REGION_NO_WAIT"
 	_GLenum_map[36375] = "GL_QUERY_WAIT_INVERTED"
 	_GLenum_map[36376] = "GL_QUERY_NO_WAIT_INVERTED"
 	_GLenum_map[36377] = "GL_QUERY_BY_REGION_WAIT_INVERTED"
 	_GLenum_map[36378] = "GL_QUERY_BY_REGION_NO_WAIT_INVERTED"
 	_GLenum_map[36379] = "GL_POLYGON_OFFSET_CLAMP_EXT"
 	_GLenum_map[36382] = "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_OES"
-	_GLenum_map[36382] = "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_EXT"
 	_GLenum_map[36382] = "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS"
+	_GLenum_map[36382] = "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_EXT"
 	_GLenum_map[36383] = "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT"
 	_GLenum_map[36383] = "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[36383] = "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS"
 	_GLenum_map[36384] = "GL_COLOR_SAMPLES_NV"
-	_GLenum_map[36386] = "GL_TRANSFORM_FEEDBACK"
 	_GLenum_map[36386] = "GL_TRANSFORM_FEEDBACK_NV"
+	_GLenum_map[36386] = "GL_TRANSFORM_FEEDBACK"
 	_GLenum_map[36387] = "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV"
-	_GLenum_map[36387] = "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED"
 	_GLenum_map[36387] = "GL_TRANSFORM_FEEDBACK_PAUSED"
-	_GLenum_map[36388] = "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE"
+	_GLenum_map[36387] = "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED"
 	_GLenum_map[36388] = "GL_TRANSFORM_FEEDBACK_ACTIVE"
+	_GLenum_map[36388] = "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE"
 	_GLenum_map[36388] = "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV"
 	_GLenum_map[36389] = "GL_TRANSFORM_FEEDBACK_BINDING_NV"
 	_GLenum_map[36389] = "GL_TRANSFORM_FEEDBACK_BINDING"
 	_GLenum_map[36390] = "GL_FRAME_NV"
 	_GLenum_map[36391] = "GL_FIELDS_NV"
 	_GLenum_map[36392] = "GL_TIMESTAMP_EXT"
-	_GLenum_map[36392] = "GL_CURRENT_TIME_NV"
 	_GLenum_map[36392] = "GL_TIMESTAMP"
+	_GLenum_map[36392] = "GL_CURRENT_TIME_NV"
 	_GLenum_map[36393] = "GL_NUM_FILL_STREAMS_NV"
 	_GLenum_map[36394] = "GL_PRESENT_TIME_NV"
 	_GLenum_map[36395] = "GL_PRESENT_DURATION_NV"
@@ -81599,14 +84896,14 @@ func init() {
 	_GLenum_map[36399] = "GL_PROGRAM_MATRIX_STACK_DEPTH_EXT"
 	_GLenum_map[36418] = "GL_TEXTURE_SWIZZLE_R"
 	_GLenum_map[36418] = "GL_TEXTURE_SWIZZLE_R_EXT"
-	_GLenum_map[36419] = "GL_TEXTURE_SWIZZLE_G"
 	_GLenum_map[36419] = "GL_TEXTURE_SWIZZLE_G_EXT"
+	_GLenum_map[36419] = "GL_TEXTURE_SWIZZLE_G"
 	_GLenum_map[36420] = "GL_TEXTURE_SWIZZLE_B_EXT"
 	_GLenum_map[36420] = "GL_TEXTURE_SWIZZLE_B"
-	_GLenum_map[36421] = "GL_TEXTURE_SWIZZLE_A_EXT"
 	_GLenum_map[36421] = "GL_TEXTURE_SWIZZLE_A"
-	_GLenum_map[36422] = "GL_TEXTURE_SWIZZLE_RGBA_EXT"
+	_GLenum_map[36421] = "GL_TEXTURE_SWIZZLE_A_EXT"
 	_GLenum_map[36422] = "GL_TEXTURE_SWIZZLE_RGBA"
+	_GLenum_map[36422] = "GL_TEXTURE_SWIZZLE_RGBA_EXT"
 	_GLenum_map[36423] = "GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS"
 	_GLenum_map[36424] = "GL_ACTIVE_SUBROUTINE_MAX_LENGTH"
 	_GLenum_map[36425] = "GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH"
@@ -81618,15 +84915,16 @@ func init() {
 	_GLenum_map[36429] = "GL_FIRST_VERTEX_CONVENTION"
 	_GLenum_map[36429] = "GL_FIRST_VERTEX_CONVENTION_EXT"
 	_GLenum_map[36430] = "GL_LAST_VERTEX_CONVENTION_EXT"
-	_GLenum_map[36430] = "GL_LAST_VERTEX_CONVENTION"
 	_GLenum_map[36430] = "GL_LAST_VERTEX_CONVENTION_OES"
+	_GLenum_map[36430] = "GL_LAST_VERTEX_CONVENTION"
 	_GLenum_map[36431] = "GL_PROVOKING_VERTEX"
 	_GLenum_map[36431] = "GL_PROVOKING_VERTEX_EXT"
+	_GLenum_map[36432] = "GL_SAMPLE_LOCATION_NV"
 	_GLenum_map[36432] = "GL_SAMPLE_POSITION_NV"
 	_GLenum_map[36432] = "GL_SAMPLE_POSITION"
-	_GLenum_map[36432] = "GL_SAMPLE_LOCATION_NV"
-	_GLenum_map[36433] = "GL_SAMPLE_MASK_NV"
+	_GLenum_map[36432] = "GL_SAMPLE_LOCATION_ARB"
 	_GLenum_map[36433] = "GL_SAMPLE_MASK"
+	_GLenum_map[36433] = "GL_SAMPLE_MASK_NV"
 	_GLenum_map[36434] = "GL_SAMPLE_MASK_VALUE_NV"
 	_GLenum_map[36434] = "GL_SAMPLE_MASK_VALUE"
 	_GLenum_map[36435] = "GL_TEXTURE_BINDING_RENDERBUFFER_NV"
@@ -81635,110 +84933,110 @@ func init() {
 	_GLenum_map[36438] = "GL_SAMPLER_RENDERBUFFER_NV"
 	_GLenum_map[36439] = "GL_INT_SAMPLER_RENDERBUFFER_NV"
 	_GLenum_map[36440] = "GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV"
-	_GLenum_map[36441] = "GL_MAX_SAMPLE_MASK_WORDS_NV"
 	_GLenum_map[36441] = "GL_MAX_SAMPLE_MASK_WORDS"
-	_GLenum_map[36442] = "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_EXT"
-	_GLenum_map[36442] = "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_OES"
+	_GLenum_map[36441] = "GL_MAX_SAMPLE_MASK_WORDS_NV"
 	_GLenum_map[36442] = "GL_MAX_GEOMETRY_PROGRAM_INVOCATIONS_NV"
 	_GLenum_map[36442] = "GL_MAX_GEOMETRY_SHADER_INVOCATIONS"
+	_GLenum_map[36442] = "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_OES"
+	_GLenum_map[36442] = "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_EXT"
 	_GLenum_map[36443] = "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_NV"
-	_GLenum_map[36443] = "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_OES"
 	_GLenum_map[36443] = "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET"
-	_GLenum_map[36444] = "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_OES"
+	_GLenum_map[36443] = "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_OES"
 	_GLenum_map[36444] = "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET"
+	_GLenum_map[36444] = "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_OES"
 	_GLenum_map[36444] = "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_NV"
-	_GLenum_map[36445] = "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS_OES"
 	_GLenum_map[36445] = "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS"
+	_GLenum_map[36445] = "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS_OES"
 	_GLenum_map[36445] = "GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV"
-	_GLenum_map[36446] = "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET"
 	_GLenum_map[36446] = "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB"
+	_GLenum_map[36446] = "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET"
 	_GLenum_map[36446] = "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_NV"
-	_GLenum_map[36447] = "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB"
 	_GLenum_map[36447] = "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET"
 	_GLenum_map[36447] = "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV"
+	_GLenum_map[36447] = "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB"
 	_GLenum_map[36464] = "GL_MAX_TRANSFORM_FEEDBACK_BUFFERS"
 	_GLenum_map[36465] = "GL_MAX_VERTEX_STREAMS"
 	_GLenum_map[36466] = "GL_PATCH_VERTICES_OES"
 	_GLenum_map[36466] = "GL_PATCH_VERTICES"
 	_GLenum_map[36466] = "GL_PATCH_VERTICES_EXT"
-	_GLenum_map[36467] = "GL_PATCH_DEFAULT_INNER_LEVEL"
 	_GLenum_map[36467] = "GL_PATCH_DEFAULT_INNER_LEVEL_EXT"
+	_GLenum_map[36467] = "GL_PATCH_DEFAULT_INNER_LEVEL"
 	_GLenum_map[36468] = "GL_PATCH_DEFAULT_OUTER_LEVEL"
 	_GLenum_map[36468] = "GL_PATCH_DEFAULT_OUTER_LEVEL_EXT"
-	_GLenum_map[36469] = "GL_TESS_CONTROL_OUTPUT_VERTICES_EXT"
 	_GLenum_map[36469] = "GL_TESS_CONTROL_OUTPUT_VERTICES"
 	_GLenum_map[36469] = "GL_TESS_CONTROL_OUTPUT_VERTICES_OES"
-	_GLenum_map[36470] = "GL_TESS_GEN_MODE_EXT"
-	_GLenum_map[36470] = "GL_TESS_GEN_MODE_OES"
+	_GLenum_map[36469] = "GL_TESS_CONTROL_OUTPUT_VERTICES_EXT"
 	_GLenum_map[36470] = "GL_TESS_GEN_MODE"
-	_GLenum_map[36471] = "GL_TESS_GEN_SPACING_OES"
+	_GLenum_map[36470] = "GL_TESS_GEN_MODE_OES"
+	_GLenum_map[36470] = "GL_TESS_GEN_MODE_EXT"
 	_GLenum_map[36471] = "GL_TESS_GEN_SPACING_EXT"
 	_GLenum_map[36471] = "GL_TESS_GEN_SPACING"
-	_GLenum_map[36472] = "GL_TESS_GEN_VERTEX_ORDER_EXT"
-	_GLenum_map[36472] = "GL_TESS_GEN_VERTEX_ORDER_OES"
+	_GLenum_map[36471] = "GL_TESS_GEN_SPACING_OES"
 	_GLenum_map[36472] = "GL_TESS_GEN_VERTEX_ORDER"
-	_GLenum_map[36473] = "GL_TESS_GEN_POINT_MODE_EXT"
-	_GLenum_map[36473] = "GL_TESS_GEN_POINT_MODE_OES"
+	_GLenum_map[36472] = "GL_TESS_GEN_VERTEX_ORDER_OES"
+	_GLenum_map[36472] = "GL_TESS_GEN_VERTEX_ORDER_EXT"
 	_GLenum_map[36473] = "GL_TESS_GEN_POINT_MODE"
-	_GLenum_map[36474] = "GL_ISOLINES_EXT"
+	_GLenum_map[36473] = "GL_TESS_GEN_POINT_MODE_OES"
+	_GLenum_map[36473] = "GL_TESS_GEN_POINT_MODE_EXT"
 	_GLenum_map[36474] = "GL_ISOLINES_OES"
 	_GLenum_map[36474] = "GL_ISOLINES"
+	_GLenum_map[36474] = "GL_ISOLINES_EXT"
+	_GLenum_map[36475] = "GL_FRACTIONAL_ODD_OES"
 	_GLenum_map[36475] = "GL_FRACTIONAL_ODD"
 	_GLenum_map[36475] = "GL_FRACTIONAL_ODD_EXT"
-	_GLenum_map[36475] = "GL_FRACTIONAL_ODD_OES"
 	_GLenum_map[36476] = "GL_FRACTIONAL_EVEN"
-	_GLenum_map[36476] = "GL_FRACTIONAL_EVEN_OES"
 	_GLenum_map[36476] = "GL_FRACTIONAL_EVEN_EXT"
-	_GLenum_map[36477] = "GL_MAX_PATCH_VERTICES_EXT"
-	_GLenum_map[36477] = "GL_MAX_PATCH_VERTICES_OES"
+	_GLenum_map[36476] = "GL_FRACTIONAL_EVEN_OES"
 	_GLenum_map[36477] = "GL_MAX_PATCH_VERTICES"
+	_GLenum_map[36477] = "GL_MAX_PATCH_VERTICES_OES"
+	_GLenum_map[36477] = "GL_MAX_PATCH_VERTICES_EXT"
+	_GLenum_map[36478] = "GL_MAX_TESS_GEN_LEVEL_EXT"
 	_GLenum_map[36478] = "GL_MAX_TESS_GEN_LEVEL_OES"
 	_GLenum_map[36478] = "GL_MAX_TESS_GEN_LEVEL"
-	_GLenum_map[36478] = "GL_MAX_TESS_GEN_LEVEL_EXT"
-	_GLenum_map[36479] = "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS"
 	_GLenum_map[36479] = "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[36479] = "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_EXT"
-	_GLenum_map[36480] = "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_OES"
+	_GLenum_map[36479] = "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS"
 	_GLenum_map[36480] = "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT"
 	_GLenum_map[36480] = "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS"
+	_GLenum_map[36480] = "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_OES"
 	_GLenum_map[36481] = "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_OES"
 	_GLenum_map[36481] = "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS"
 	_GLenum_map[36481] = "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_EXT"
 	_GLenum_map[36482] = "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS"
-	_GLenum_map[36482] = "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_EXT"
 	_GLenum_map[36482] = "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_OES"
+	_GLenum_map[36482] = "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_EXT"
 	_GLenum_map[36483] = "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_OES"
-	_GLenum_map[36483] = "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS"
 	_GLenum_map[36483] = "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_EXT"
+	_GLenum_map[36483] = "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS"
 	_GLenum_map[36484] = "GL_MAX_TESS_PATCH_COMPONENTS_EXT"
-	_GLenum_map[36484] = "GL_MAX_TESS_PATCH_COMPONENTS"
 	_GLenum_map[36484] = "GL_MAX_TESS_PATCH_COMPONENTS_OES"
-	_GLenum_map[36485] = "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_EXT"
+	_GLenum_map[36484] = "GL_MAX_TESS_PATCH_COMPONENTS"
 	_GLenum_map[36485] = "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_OES"
 	_GLenum_map[36485] = "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS"
+	_GLenum_map[36485] = "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_EXT"
 	_GLenum_map[36486] = "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS"
-	_GLenum_map[36486] = "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_OES"
 	_GLenum_map[36486] = "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_EXT"
+	_GLenum_map[36486] = "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_OES"
+	_GLenum_map[36487] = "GL_TESS_EVALUATION_SHADER_OES"
 	_GLenum_map[36487] = "GL_TESS_EVALUATION_SHADER"
 	_GLenum_map[36487] = "GL_TESS_EVALUATION_SHADER_EXT"
-	_GLenum_map[36487] = "GL_TESS_EVALUATION_SHADER_OES"
 	_GLenum_map[36488] = "GL_TESS_CONTROL_SHADER_EXT"
-	_GLenum_map[36488] = "GL_TESS_CONTROL_SHADER_OES"
 	_GLenum_map[36488] = "GL_TESS_CONTROL_SHADER"
+	_GLenum_map[36488] = "GL_TESS_CONTROL_SHADER_OES"
+	_GLenum_map[36489] = "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_OES"
 	_GLenum_map[36489] = "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_EXT"
 	_GLenum_map[36489] = "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS"
-	_GLenum_map[36489] = "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_OES"
 	_GLenum_map[36490] = "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_OES"
-	_GLenum_map[36490] = "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_EXT"
 	_GLenum_map[36490] = "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS"
-	_GLenum_map[36492] = "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB"
+	_GLenum_map[36490] = "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_EXT"
 	_GLenum_map[36492] = "GL_COMPRESSED_RGBA_BPTC_UNORM"
-	_GLenum_map[36493] = "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM"
+	_GLenum_map[36492] = "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB"
 	_GLenum_map[36493] = "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB"
+	_GLenum_map[36493] = "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM"
 	_GLenum_map[36494] = "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT"
 	_GLenum_map[36494] = "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB"
-	_GLenum_map[36495] = "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT"
 	_GLenum_map[36495] = "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB"
+	_GLenum_map[36495] = "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT"
 	_GLenum_map[36560] = "GL_COVERAGE_COMPONENT_NV"
 	_GLenum_map[36561] = "GL_COVERAGE_COMPONENT4_NV"
 	_GLenum_map[36562] = "GL_COVERAGE_ATTACHMENT_NV"
@@ -81775,11 +85073,11 @@ func init() {
 	_GLenum_map[36662] = "GL_COPY_READ_BUFFER_NV"
 	_GLenum_map[36662] = "GL_COPY_READ_BUFFER_BINDING"
 	_GLenum_map[36662] = "GL_COPY_READ_BUFFER"
+	_GLenum_map[36663] = "GL_COPY_WRITE_BUFFER_BINDING"
 	_GLenum_map[36663] = "GL_COPY_WRITE_BUFFER_NV"
 	_GLenum_map[36663] = "GL_COPY_WRITE_BUFFER"
-	_GLenum_map[36663] = "GL_COPY_WRITE_BUFFER_BINDING"
-	_GLenum_map[36664] = "GL_MAX_IMAGE_UNITS_EXT"
 	_GLenum_map[36664] = "GL_MAX_IMAGE_UNITS"
+	_GLenum_map[36664] = "GL_MAX_IMAGE_UNITS_EXT"
 	_GLenum_map[36665] = "GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS"
 	_GLenum_map[36665] = "GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES"
 	_GLenum_map[36665] = "GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT"
@@ -81791,8 +85089,8 @@ func init() {
 	_GLenum_map[36668] = "GL_IMAGE_BINDING_LAYERED_EXT"
 	_GLenum_map[36669] = "GL_IMAGE_BINDING_LAYER_EXT"
 	_GLenum_map[36669] = "GL_IMAGE_BINDING_LAYER"
-	_GLenum_map[36670] = "GL_IMAGE_BINDING_ACCESS"
 	_GLenum_map[36670] = "GL_IMAGE_BINDING_ACCESS_EXT"
+	_GLenum_map[36670] = "GL_IMAGE_BINDING_ACCESS"
 	_GLenum_map[36671] = "GL_DRAW_INDIRECT_BUFFER"
 	_GLenum_map[36672] = "GL_DRAW_INDIRECT_UNIFIED_NV"
 	_GLenum_map[36673] = "GL_DRAW_INDIRECT_ADDRESS_NV"
@@ -81800,20 +85098,20 @@ func init() {
 	_GLenum_map[36675] = "GL_DRAW_INDIRECT_BUFFER_BINDING"
 	_GLenum_map[36676] = "GL_MAX_PROGRAM_SUBROUTINE_PARAMETERS_NV"
 	_GLenum_map[36677] = "GL_MAX_PROGRAM_SUBROUTINE_NUM_NV"
-	_GLenum_map[36678] = "GL_DOUBLE_MAT2_EXT"
 	_GLenum_map[36678] = "GL_DOUBLE_MAT2"
+	_GLenum_map[36678] = "GL_DOUBLE_MAT2_EXT"
 	_GLenum_map[36679] = "GL_DOUBLE_MAT3_EXT"
 	_GLenum_map[36679] = "GL_DOUBLE_MAT3"
 	_GLenum_map[36680] = "GL_DOUBLE_MAT4_EXT"
 	_GLenum_map[36680] = "GL_DOUBLE_MAT4"
 	_GLenum_map[36681] = "GL_DOUBLE_MAT2x3_EXT"
 	_GLenum_map[36681] = "GL_DOUBLE_MAT2x3"
-	_GLenum_map[36682] = "GL_DOUBLE_MAT2x4_EXT"
 	_GLenum_map[36682] = "GL_DOUBLE_MAT2x4"
+	_GLenum_map[36682] = "GL_DOUBLE_MAT2x4_EXT"
 	_GLenum_map[36683] = "GL_DOUBLE_MAT3x2"
 	_GLenum_map[36683] = "GL_DOUBLE_MAT3x2_EXT"
-	_GLenum_map[36684] = "GL_DOUBLE_MAT3x4_EXT"
 	_GLenum_map[36684] = "GL_DOUBLE_MAT3x4"
+	_GLenum_map[36684] = "GL_DOUBLE_MAT3x4_EXT"
 	_GLenum_map[36685] = "GL_DOUBLE_MAT4x2"
 	_GLenum_map[36685] = "GL_DOUBLE_MAT4x2_EXT"
 	_GLenum_map[36686] = "GL_DOUBLE_MAT4x3_EXT"
@@ -81838,8 +85136,8 @@ func init() {
 	_GLenum_map[36760] = "GL_R16_SNORM"
 	_GLenum_map[36761] = "GL_RG16_SNORM"
 	_GLenum_map[36761] = "GL_RG16_SNORM_EXT"
-	_GLenum_map[36762] = "GL_RGB16_SNORM"
 	_GLenum_map[36762] = "GL_RGB16_SNORM_EXT"
+	_GLenum_map[36762] = "GL_RGB16_SNORM"
 	_GLenum_map[36763] = "GL_RGBA16_SNORM_EXT"
 	_GLenum_map[36763] = "GL_RGBA16_SNORM"
 	_GLenum_map[36764] = "GL_SIGNED_NORMALIZED"
@@ -81863,8 +85161,11 @@ func init() {
 	_GLenum_map[36837] = "GL_INT16_VEC2_NV"
 	_GLenum_map[36838] = "GL_INT16_VEC3_NV"
 	_GLenum_map[36839] = "GL_INT16_VEC4_NV"
+	_GLenum_map[36841] = "GL_INT64_VEC2_ARB"
 	_GLenum_map[36841] = "GL_INT64_VEC2_NV"
 	_GLenum_map[36842] = "GL_INT64_VEC3_NV"
+	_GLenum_map[36842] = "GL_INT64_VEC3_ARB"
+	_GLenum_map[36843] = "GL_INT64_VEC4_ARB"
 	_GLenum_map[36843] = "GL_INT64_VEC4_NV"
 	_GLenum_map[36844] = "GL_UNSIGNED_INT8_NV"
 	_GLenum_map[36845] = "GL_UNSIGNED_INT8_VEC2_NV"
@@ -81874,15 +85175,18 @@ func init() {
 	_GLenum_map[36849] = "GL_UNSIGNED_INT16_VEC2_NV"
 	_GLenum_map[36850] = "GL_UNSIGNED_INT16_VEC3_NV"
 	_GLenum_map[36851] = "GL_UNSIGNED_INT16_VEC4_NV"
+	_GLenum_map[36853] = "GL_UNSIGNED_INT64_VEC2_ARB"
 	_GLenum_map[36853] = "GL_UNSIGNED_INT64_VEC2_NV"
 	_GLenum_map[36854] = "GL_UNSIGNED_INT64_VEC3_NV"
+	_GLenum_map[36854] = "GL_UNSIGNED_INT64_VEC3_ARB"
 	_GLenum_map[36855] = "GL_UNSIGNED_INT64_VEC4_NV"
+	_GLenum_map[36855] = "GL_UNSIGNED_INT64_VEC4_ARB"
 	_GLenum_map[36856] = "GL_FLOAT16_NV"
 	_GLenum_map[36857] = "GL_FLOAT16_VEC2_NV"
 	_GLenum_map[36858] = "GL_FLOAT16_VEC3_NV"
 	_GLenum_map[36859] = "GL_FLOAT16_VEC4_NV"
-	_GLenum_map[36860] = "GL_DOUBLE_VEC2"
 	_GLenum_map[36860] = "GL_DOUBLE_VEC2_EXT"
+	_GLenum_map[36860] = "GL_DOUBLE_VEC2"
 	_GLenum_map[36861] = "GL_DOUBLE_VEC3_EXT"
 	_GLenum_map[36861] = "GL_DOUBLE_VEC3"
 	_GLenum_map[36862] = "GL_DOUBLE_VEC4_EXT"
@@ -81895,30 +85199,30 @@ func init() {
 	_GLenum_map[36870] = "GL_DISCRETE_AMD"
 	_GLenum_map[36871] = "GL_CONTINUOUS_AMD"
 	_GLenum_map[36873] = "GL_TEXTURE_CUBE_MAP_ARRAY_OES"
+	_GLenum_map[36873] = "GL_TEXTURE_CUBE_MAP_ARRAY_ARB"
 	_GLenum_map[36873] = "GL_TEXTURE_CUBE_MAP_ARRAY"
 	_GLenum_map[36873] = "GL_TEXTURE_CUBE_MAP_ARRAY_EXT"
-	_GLenum_map[36873] = "GL_TEXTURE_CUBE_MAP_ARRAY_ARB"
 	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY"
-	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_OES"
-	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB"
-	_GLenum_map[36875] = "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY"
+	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT"
+	_GLenum_map[36874] = "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_OES"
 	_GLenum_map[36875] = "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB"
+	_GLenum_map[36875] = "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY"
 	_GLenum_map[36876] = "GL_SAMPLER_CUBE_MAP_ARRAY_ARB"
 	_GLenum_map[36876] = "GL_SAMPLER_CUBE_MAP_ARRAY_OES"
 	_GLenum_map[36876] = "GL_SAMPLER_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36876] = "GL_SAMPLER_CUBE_MAP_ARRAY"
-	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW"
-	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT"
-	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_OES"
 	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB"
-	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY"
-	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY_EXT"
+	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_OES"
+	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT"
+	_GLenum_map[36877] = "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW"
 	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY_OES"
+	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY_ARB"
+	_GLenum_map[36878] = "GL_INT_SAMPLER_CUBE_MAP_ARRAY"
+	_GLenum_map[36879] = "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY"
 	_GLenum_map[36879] = "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB"
 	_GLenum_map[36879] = "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_OES"
-	_GLenum_map[36879] = "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY"
 	_GLenum_map[36879] = "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36880] = "GL_ALPHA_SNORM"
 	_GLenum_map[36881] = "GL_LUMINANCE_SNORM"
@@ -81972,28 +85276,28 @@ func init() {
 	_GLenum_map[36937] = "GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX"
 	_GLenum_map[36938] = "GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX"
 	_GLenum_map[36939] = "GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX"
-	_GLenum_map[36940] = "GL_IMAGE_1D"
 	_GLenum_map[36940] = "GL_IMAGE_1D_EXT"
-	_GLenum_map[36941] = "GL_IMAGE_2D_EXT"
+	_GLenum_map[36940] = "GL_IMAGE_1D"
 	_GLenum_map[36941] = "GL_IMAGE_2D"
-	_GLenum_map[36942] = "GL_IMAGE_3D_EXT"
+	_GLenum_map[36941] = "GL_IMAGE_2D_EXT"
 	_GLenum_map[36942] = "GL_IMAGE_3D"
+	_GLenum_map[36942] = "GL_IMAGE_3D_EXT"
 	_GLenum_map[36943] = "GL_IMAGE_2D_RECT"
 	_GLenum_map[36943] = "GL_IMAGE_2D_RECT_EXT"
-	_GLenum_map[36944] = "GL_IMAGE_CUBE"
 	_GLenum_map[36944] = "GL_IMAGE_CUBE_EXT"
-	_GLenum_map[36945] = "GL_IMAGE_BUFFER_OES"
+	_GLenum_map[36944] = "GL_IMAGE_CUBE"
 	_GLenum_map[36945] = "GL_IMAGE_BUFFER_EXT"
+	_GLenum_map[36945] = "GL_IMAGE_BUFFER_OES"
 	_GLenum_map[36945] = "GL_IMAGE_BUFFER"
 	_GLenum_map[36946] = "GL_IMAGE_1D_ARRAY_EXT"
 	_GLenum_map[36946] = "GL_IMAGE_1D_ARRAY"
-	_GLenum_map[36947] = "GL_IMAGE_2D_ARRAY"
 	_GLenum_map[36947] = "GL_IMAGE_2D_ARRAY_EXT"
-	_GLenum_map[36948] = "GL_IMAGE_CUBE_MAP_ARRAY"
+	_GLenum_map[36947] = "GL_IMAGE_2D_ARRAY"
 	_GLenum_map[36948] = "GL_IMAGE_CUBE_MAP_ARRAY_OES"
 	_GLenum_map[36948] = "GL_IMAGE_CUBE_MAP_ARRAY_EXT"
-	_GLenum_map[36949] = "GL_IMAGE_2D_MULTISAMPLE"
+	_GLenum_map[36948] = "GL_IMAGE_CUBE_MAP_ARRAY"
 	_GLenum_map[36949] = "GL_IMAGE_2D_MULTISAMPLE_EXT"
+	_GLenum_map[36949] = "GL_IMAGE_2D_MULTISAMPLE"
 	_GLenum_map[36950] = "GL_IMAGE_2D_MULTISAMPLE_ARRAY_EXT"
 	_GLenum_map[36950] = "GL_IMAGE_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[36951] = "GL_INT_IMAGE_1D"
@@ -82004,50 +85308,50 @@ func init() {
 	_GLenum_map[36953] = "GL_INT_IMAGE_3D_EXT"
 	_GLenum_map[36954] = "GL_INT_IMAGE_2D_RECT"
 	_GLenum_map[36954] = "GL_INT_IMAGE_2D_RECT_EXT"
-	_GLenum_map[36955] = "GL_INT_IMAGE_CUBE_EXT"
 	_GLenum_map[36955] = "GL_INT_IMAGE_CUBE"
-	_GLenum_map[36956] = "GL_INT_IMAGE_BUFFER_OES"
-	_GLenum_map[36956] = "GL_INT_IMAGE_BUFFER_EXT"
+	_GLenum_map[36955] = "GL_INT_IMAGE_CUBE_EXT"
 	_GLenum_map[36956] = "GL_INT_IMAGE_BUFFER"
+	_GLenum_map[36956] = "GL_INT_IMAGE_BUFFER_EXT"
+	_GLenum_map[36956] = "GL_INT_IMAGE_BUFFER_OES"
 	_GLenum_map[36957] = "GL_INT_IMAGE_1D_ARRAY"
 	_GLenum_map[36957] = "GL_INT_IMAGE_1D_ARRAY_EXT"
 	_GLenum_map[36958] = "GL_INT_IMAGE_2D_ARRAY"
 	_GLenum_map[36958] = "GL_INT_IMAGE_2D_ARRAY_EXT"
-	_GLenum_map[36959] = "GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36959] = "GL_INT_IMAGE_CUBE_MAP_ARRAY_OES"
+	_GLenum_map[36959] = "GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36959] = "GL_INT_IMAGE_CUBE_MAP_ARRAY"
-	_GLenum_map[36960] = "GL_INT_IMAGE_2D_MULTISAMPLE_EXT"
 	_GLenum_map[36960] = "GL_INT_IMAGE_2D_MULTISAMPLE"
-	_GLenum_map[36961] = "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY"
+	_GLenum_map[36960] = "GL_INT_IMAGE_2D_MULTISAMPLE_EXT"
 	_GLenum_map[36961] = "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT"
-	_GLenum_map[36962] = "GL_UNSIGNED_INT_IMAGE_1D_EXT"
+	_GLenum_map[36961] = "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[36962] = "GL_UNSIGNED_INT_IMAGE_1D"
+	_GLenum_map[36962] = "GL_UNSIGNED_INT_IMAGE_1D_EXT"
 	_GLenum_map[36963] = "GL_UNSIGNED_INT_IMAGE_2D_EXT"
 	_GLenum_map[36963] = "GL_UNSIGNED_INT_IMAGE_2D"
 	_GLenum_map[36964] = "GL_UNSIGNED_INT_IMAGE_3D_EXT"
 	_GLenum_map[36964] = "GL_UNSIGNED_INT_IMAGE_3D"
-	_GLenum_map[36965] = "GL_UNSIGNED_INT_IMAGE_2D_RECT_EXT"
 	_GLenum_map[36965] = "GL_UNSIGNED_INT_IMAGE_2D_RECT"
+	_GLenum_map[36965] = "GL_UNSIGNED_INT_IMAGE_2D_RECT_EXT"
 	_GLenum_map[36966] = "GL_UNSIGNED_INT_IMAGE_CUBE"
 	_GLenum_map[36966] = "GL_UNSIGNED_INT_IMAGE_CUBE_EXT"
 	_GLenum_map[36967] = "GL_UNSIGNED_INT_IMAGE_BUFFER_EXT"
-	_GLenum_map[36967] = "GL_UNSIGNED_INT_IMAGE_BUFFER_OES"
 	_GLenum_map[36967] = "GL_UNSIGNED_INT_IMAGE_BUFFER"
-	_GLenum_map[36968] = "GL_UNSIGNED_INT_IMAGE_1D_ARRAY_EXT"
+	_GLenum_map[36967] = "GL_UNSIGNED_INT_IMAGE_BUFFER_OES"
 	_GLenum_map[36968] = "GL_UNSIGNED_INT_IMAGE_1D_ARRAY"
-	_GLenum_map[36969] = "GL_UNSIGNED_INT_IMAGE_2D_ARRAY_EXT"
+	_GLenum_map[36968] = "GL_UNSIGNED_INT_IMAGE_1D_ARRAY_EXT"
 	_GLenum_map[36969] = "GL_UNSIGNED_INT_IMAGE_2D_ARRAY"
-	_GLenum_map[36970] = "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT"
+	_GLenum_map[36969] = "GL_UNSIGNED_INT_IMAGE_2D_ARRAY_EXT"
 	_GLenum_map[36970] = "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_OES"
 	_GLenum_map[36970] = "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY"
+	_GLenum_map[36970] = "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT"
 	_GLenum_map[36971] = "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE"
 	_GLenum_map[36971] = "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_EXT"
-	_GLenum_map[36972] = "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[36972] = "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT"
-	_GLenum_map[36973] = "GL_MAX_IMAGE_SAMPLES_EXT"
+	_GLenum_map[36972] = "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[36973] = "GL_MAX_IMAGE_SAMPLES"
-	_GLenum_map[36974] = "GL_IMAGE_BINDING_FORMAT_EXT"
+	_GLenum_map[36973] = "GL_MAX_IMAGE_SAMPLES_EXT"
 	_GLenum_map[36974] = "GL_IMAGE_BINDING_FORMAT"
+	_GLenum_map[36974] = "GL_IMAGE_BINDING_FORMAT_EXT"
 	_GLenum_map[36975] = "GL_RGB10_A2UI"
 	_GLenum_map[36976] = "GL_PATH_FORMAT_SVG_NV"
 	_GLenum_map[36977] = "GL_PATH_FORMAT_PS_NV"
@@ -82125,11 +85429,11 @@ func init() {
 	_GLenum_map[37064] = "GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE"
 	_GLenum_map[37065] = "GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS"
 	_GLenum_map[37066] = "GL_MAX_VERTEX_IMAGE_UNIFORMS"
-	_GLenum_map[37067] = "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS"
-	_GLenum_map[37067] = "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_EXT"
 	_GLenum_map[37067] = "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_OES"
-	_GLenum_map[37068] = "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_OES"
+	_GLenum_map[37067] = "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_EXT"
+	_GLenum_map[37067] = "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS"
 	_GLenum_map[37068] = "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS"
+	_GLenum_map[37068] = "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_OES"
 	_GLenum_map[37068] = "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_EXT"
 	_GLenum_map[37069] = "GL_MAX_GEOMETRY_IMAGE_UNIFORMS_EXT"
 	_GLenum_map[37069] = "GL_MAX_GEOMETRY_IMAGE_UNIFORMS_OES"
@@ -82143,15 +85447,15 @@ func init() {
 	_GLenum_map[37076] = "GL_SHADER_STORAGE_BUFFER_START"
 	_GLenum_map[37077] = "GL_SHADER_STORAGE_BUFFER_SIZE"
 	_GLenum_map[37078] = "GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS"
+	_GLenum_map[37079] = "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_OES"
 	_GLenum_map[37079] = "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS"
 	_GLenum_map[37079] = "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_EXT"
-	_GLenum_map[37079] = "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_OES"
-	_GLenum_map[37080] = "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_OES"
-	_GLenum_map[37080] = "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_EXT"
 	_GLenum_map[37080] = "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS"
-	_GLenum_map[37081] = "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS"
+	_GLenum_map[37080] = "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_EXT"
+	_GLenum_map[37080] = "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_OES"
 	_GLenum_map[37081] = "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_OES"
 	_GLenum_map[37081] = "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_EXT"
+	_GLenum_map[37081] = "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS"
 	_GLenum_map[37082] = "GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS"
 	_GLenum_map[37083] = "GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS"
 	_GLenum_map[37084] = "GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS"
@@ -82169,9 +85473,9 @@ func init() {
 	_GLenum_map[37104] = "GL_COLOR_ATTACHMENT_EXT"
 	_GLenum_map[37105] = "GL_MULTIVIEW_EXT"
 	_GLenum_map[37106] = "GL_MAX_MULTIVIEW_BUFFERS_EXT"
-	_GLenum_map[37107] = "GL_CONTEXT_ROBUST_ACCESS_EXT"
 	_GLenum_map[37107] = "GL_CONTEXT_ROBUST_ACCESS_KHR"
 	_GLenum_map[37107] = "GL_CONTEXT_ROBUST_ACCESS"
+	_GLenum_map[37107] = "GL_CONTEXT_ROBUST_ACCESS_EXT"
 	_GLenum_map[37115] = "GL_COMPUTE_PROGRAM_NV"
 	_GLenum_map[37116] = "GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV"
 	_GLenum_map[37120] = "GL_TEXTURE_2D_MULTISAMPLE"
@@ -82187,12 +85491,12 @@ func init() {
 	_GLenum_map[37128] = "GL_SAMPLER_2D_MULTISAMPLE"
 	_GLenum_map[37129] = "GL_INT_SAMPLER_2D_MULTISAMPLE"
 	_GLenum_map[37130] = "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE"
-	_GLenum_map[37131] = "GL_SAMPLER_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[37131] = "GL_SAMPLER_2D_MULTISAMPLE_ARRAY_OES"
+	_GLenum_map[37131] = "GL_SAMPLER_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[37132] = "GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES"
 	_GLenum_map[37132] = "GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"
-	_GLenum_map[37133] = "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[37133] = "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES"
+	_GLenum_map[37133] = "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"
 	_GLenum_map[37134] = "GL_MAX_COLOR_TEXTURE_SAMPLES"
 	_GLenum_map[37135] = "GL_MAX_DEPTH_TEXTURE_SAMPLES"
 	_GLenum_map[37136] = "GL_MAX_INTEGER_SAMPLES"
@@ -82204,8 +85508,8 @@ func init() {
 	_GLenum_map[37139] = "GL_SYNC_CONDITION_APPLE"
 	_GLenum_map[37140] = "GL_SYNC_STATUS"
 	_GLenum_map[37140] = "GL_SYNC_STATUS_APPLE"
-	_GLenum_map[37141] = "GL_SYNC_FLAGS_APPLE"
 	_GLenum_map[37141] = "GL_SYNC_FLAGS"
+	_GLenum_map[37141] = "GL_SYNC_FLAGS_APPLE"
 	_GLenum_map[37142] = "GL_SYNC_FENCE_APPLE"
 	_GLenum_map[37142] = "GL_SYNC_FENCE"
 	_GLenum_map[37143] = "GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE"
@@ -82218,20 +85522,20 @@ func init() {
 	_GLenum_map[37146] = "GL_ALREADY_SIGNALED"
 	_GLenum_map[37147] = "GL_TIMEOUT_EXPIRED"
 	_GLenum_map[37147] = "GL_TIMEOUT_EXPIRED_APPLE"
-	_GLenum_map[37148] = "GL_CONDITION_SATISFIED"
 	_GLenum_map[37148] = "GL_CONDITION_SATISFIED_APPLE"
+	_GLenum_map[37148] = "GL_CONDITION_SATISFIED"
 	_GLenum_map[37149] = "GL_WAIT_FAILED_APPLE"
 	_GLenum_map[37149] = "GL_WAIT_FAILED"
 	_GLenum_map[37151] = "GL_BUFFER_ACCESS_FLAGS"
 	_GLenum_map[37152] = "GL_BUFFER_MAP_LENGTH"
 	_GLenum_map[37153] = "GL_BUFFER_MAP_OFFSET"
 	_GLenum_map[37154] = "GL_MAX_VERTEX_OUTPUT_COMPONENTS"
-	_GLenum_map[37155] = "GL_MAX_GEOMETRY_INPUT_COMPONENTS_EXT"
-	_GLenum_map[37155] = "GL_MAX_GEOMETRY_INPUT_COMPONENTS"
 	_GLenum_map[37155] = "GL_MAX_GEOMETRY_INPUT_COMPONENTS_OES"
-	_GLenum_map[37156] = "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_EXT"
-	_GLenum_map[37156] = "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS"
+	_GLenum_map[37155] = "GL_MAX_GEOMETRY_INPUT_COMPONENTS"
+	_GLenum_map[37155] = "GL_MAX_GEOMETRY_INPUT_COMPONENTS_EXT"
 	_GLenum_map[37156] = "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_OES"
+	_GLenum_map[37156] = "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS"
+	_GLenum_map[37156] = "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_EXT"
 	_GLenum_map[37157] = "GL_MAX_FRAGMENT_INPUT_COMPONENTS"
 	_GLenum_map[37158] = "GL_CONTEXT_PROFILE_MASK"
 	_GLenum_map[37159] = "GL_UNPACK_COMPRESSED_BLOCK_WIDTH"
@@ -82242,8 +85546,8 @@ func init() {
 	_GLenum_map[37164] = "GL_PACK_COMPRESSED_BLOCK_HEIGHT"
 	_GLenum_map[37165] = "GL_PACK_COMPRESSED_BLOCK_DEPTH"
 	_GLenum_map[37166] = "GL_PACK_COMPRESSED_BLOCK_SIZE"
-	_GLenum_map[37167] = "GL_TEXTURE_IMMUTABLE_FORMAT"
 	_GLenum_map[37167] = "GL_TEXTURE_IMMUTABLE_FORMAT_EXT"
+	_GLenum_map[37167] = "GL_TEXTURE_IMMUTABLE_FORMAT"
 	_GLenum_map[37168] = "GL_SGX_PROGRAM_BINARY_IMG"
 	_GLenum_map[37171] = "GL_RENDERBUFFER_SAMPLES_IMG"
 	_GLenum_map[37172] = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG"
@@ -82252,28 +85556,28 @@ func init() {
 	_GLenum_map[37175] = "GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG"
 	_GLenum_map[37176] = "GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG"
 	_GLenum_map[37187] = "GL_MAX_DEBUG_MESSAGE_LENGTH_KHR"
+	_GLenum_map[37187] = "GL_MAX_DEBUG_MESSAGE_LENGTH_ARB"
 	_GLenum_map[37187] = "GL_MAX_DEBUG_MESSAGE_LENGTH"
 	_GLenum_map[37187] = "GL_MAX_DEBUG_MESSAGE_LENGTH_AMD"
-	_GLenum_map[37187] = "GL_MAX_DEBUG_MESSAGE_LENGTH_ARB"
 	_GLenum_map[37188] = "GL_MAX_DEBUG_LOGGED_MESSAGES_KHR"
 	_GLenum_map[37188] = "GL_MAX_DEBUG_LOGGED_MESSAGES_AMD"
 	_GLenum_map[37188] = "GL_MAX_DEBUG_LOGGED_MESSAGES"
 	_GLenum_map[37188] = "GL_MAX_DEBUG_LOGGED_MESSAGES_ARB"
-	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES"
-	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES_AMD"
-	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES_ARB"
 	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES_KHR"
-	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH_AMD"
+	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES_AMD"
+	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES"
+	_GLenum_map[37189] = "GL_DEBUG_LOGGED_MESSAGES_ARB"
 	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH_ARB"
-	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH_KHR"
+	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH_AMD"
 	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH"
-	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM_ARB"
-	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM_AMD"
+	_GLenum_map[37190] = "GL_DEBUG_SEVERITY_HIGH_KHR"
 	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM_KHR"
+	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM_ARB"
 	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM"
-	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW_KHR"
-	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW"
+	_GLenum_map[37191] = "GL_DEBUG_SEVERITY_MEDIUM_AMD"
 	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW_AMD"
+	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW"
+	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW_KHR"
 	_GLenum_map[37192] = "GL_DEBUG_SEVERITY_LOW_ARB"
 	_GLenum_map[37193] = "GL_DEBUG_CATEGORY_API_ERROR_AMD"
 	_GLenum_map[37194] = "GL_DEBUG_CATEGORY_WINDOW_SYSTEM_AMD"
@@ -82283,63 +85587,65 @@ func init() {
 	_GLenum_map[37198] = "GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD"
 	_GLenum_map[37199] = "GL_DEBUG_CATEGORY_APPLICATION_AMD"
 	_GLenum_map[37200] = "GL_DEBUG_CATEGORY_OTHER_AMD"
-	_GLenum_map[37201] = "GL_DATA_BUFFER_AMD"
 	_GLenum_map[37201] = "GL_BUFFER_OBJECT_EXT"
+	_GLenum_map[37201] = "GL_DATA_BUFFER_AMD"
 	_GLenum_map[37202] = "GL_PERFORMANCE_MONITOR_AMD"
-	_GLenum_map[37203] = "GL_QUERY_OBJECT_AMD"
 	_GLenum_map[37203] = "GL_QUERY_OBJECT_EXT"
+	_GLenum_map[37203] = "GL_QUERY_OBJECT_AMD"
 	_GLenum_map[37204] = "GL_VERTEX_ARRAY_OBJECT_AMD"
 	_GLenum_map[37204] = "GL_VERTEX_ARRAY_OBJECT_EXT"
 	_GLenum_map[37205] = "GL_SAMPLER_OBJECT_AMD"
 	_GLenum_map[37216] = "GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD"
-	_GLenum_map[37266] = "GL_QUERY_BUFFER"
 	_GLenum_map[37266] = "GL_QUERY_BUFFER_AMD"
+	_GLenum_map[37266] = "GL_QUERY_BUFFER"
 	_GLenum_map[37267] = "GL_QUERY_BUFFER_BINDING_AMD"
 	_GLenum_map[37267] = "GL_QUERY_BUFFER_BINDING"
 	_GLenum_map[37268] = "GL_QUERY_RESULT_NO_WAIT"
 	_GLenum_map[37268] = "GL_QUERY_RESULT_NO_WAIT_AMD"
 	_GLenum_map[37269] = "GL_VIRTUAL_PAGE_SIZE_X_AMD"
-	_GLenum_map[37269] = "GL_VIRTUAL_PAGE_SIZE_X_ARB"
 	_GLenum_map[37269] = "GL_VIRTUAL_PAGE_SIZE_X_EXT"
-	_GLenum_map[37270] = "GL_VIRTUAL_PAGE_SIZE_Y_AMD"
+	_GLenum_map[37269] = "GL_VIRTUAL_PAGE_SIZE_X_ARB"
 	_GLenum_map[37270] = "GL_VIRTUAL_PAGE_SIZE_Y_EXT"
 	_GLenum_map[37270] = "GL_VIRTUAL_PAGE_SIZE_Y_ARB"
-	_GLenum_map[37271] = "GL_VIRTUAL_PAGE_SIZE_Z_EXT"
+	_GLenum_map[37270] = "GL_VIRTUAL_PAGE_SIZE_Y_AMD"
 	_GLenum_map[37271] = "GL_VIRTUAL_PAGE_SIZE_Z_ARB"
 	_GLenum_map[37271] = "GL_VIRTUAL_PAGE_SIZE_Z_AMD"
-	_GLenum_map[37272] = "GL_MAX_SPARSE_TEXTURE_SIZE_ARB"
+	_GLenum_map[37271] = "GL_VIRTUAL_PAGE_SIZE_Z_EXT"
 	_GLenum_map[37272] = "GL_MAX_SPARSE_TEXTURE_SIZE_EXT"
 	_GLenum_map[37272] = "GL_MAX_SPARSE_TEXTURE_SIZE_AMD"
-	_GLenum_map[37273] = "GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD"
-	_GLenum_map[37273] = "GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB"
+	_GLenum_map[37272] = "GL_MAX_SPARSE_TEXTURE_SIZE_ARB"
 	_GLenum_map[37273] = "GL_MAX_SPARSE_3D_TEXTURE_SIZE_EXT"
+	_GLenum_map[37273] = "GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB"
+	_GLenum_map[37273] = "GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD"
 	_GLenum_map[37274] = "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT"
-	_GLenum_map[37274] = "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS"
 	_GLenum_map[37274] = "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB"
+	_GLenum_map[37274] = "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS"
 	_GLenum_map[37275] = "GL_MIN_SPARSE_LEVEL_AMD"
 	_GLenum_map[37276] = "GL_MIN_LOD_WARNING_AMD"
-	_GLenum_map[37277] = "GL_TEXTURE_BUFFER_OFFSET"
-	_GLenum_map[37277] = "GL_TEXTURE_BUFFER_OFFSET_OES"
 	_GLenum_map[37277] = "GL_TEXTURE_BUFFER_OFFSET_EXT"
+	_GLenum_map[37277] = "GL_TEXTURE_BUFFER_OFFSET_OES"
+	_GLenum_map[37277] = "GL_TEXTURE_BUFFER_OFFSET"
 	_GLenum_map[37278] = "GL_TEXTURE_BUFFER_SIZE"
-	_GLenum_map[37278] = "GL_TEXTURE_BUFFER_SIZE_OES"
 	_GLenum_map[37278] = "GL_TEXTURE_BUFFER_SIZE_EXT"
+	_GLenum_map[37278] = "GL_TEXTURE_BUFFER_SIZE_OES"
+	_GLenum_map[37279] = "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_OES"
 	_GLenum_map[37279] = "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_EXT"
 	_GLenum_map[37279] = "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT"
-	_GLenum_map[37279] = "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_OES"
 	_GLenum_map[37280] = "GL_STREAM_RASTERIZATION_AMD"
 	_GLenum_map[37284] = "GL_VERTEX_ELEMENT_SWIZZLE_AMD"
 	_GLenum_map[37285] = "GL_VERTEX_ID_SWIZZLE_AMD"
-	_GLenum_map[37286] = "GL_TEXTURE_SPARSE_EXT"
 	_GLenum_map[37286] = "GL_TEXTURE_SPARSE_ARB"
+	_GLenum_map[37286] = "GL_TEXTURE_SPARSE_EXT"
 	_GLenum_map[37287] = "GL_VIRTUAL_PAGE_SIZE_INDEX_ARB"
 	_GLenum_map[37287] = "GL_VIRTUAL_PAGE_SIZE_INDEX_EXT"
 	_GLenum_map[37288] = "GL_NUM_VIRTUAL_PAGE_SIZES_EXT"
 	_GLenum_map[37288] = "GL_NUM_VIRTUAL_PAGE_SIZES_ARB"
-	_GLenum_map[37289] = "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT"
 	_GLenum_map[37289] = "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB"
-	_GLenum_map[37290] = "GL_NUM_SPARSE_LEVELS_EXT"
+	_GLenum_map[37289] = "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT"
 	_GLenum_map[37290] = "GL_NUM_SPARSE_LEVELS_ARB"
+	_GLenum_map[37290] = "GL_NUM_SPARSE_LEVELS_EXT"
+	_GLenum_map[37296] = "GL_MAX_SHADER_COMPILER_THREADS_ARB"
+	_GLenum_map[37297] = "GL_COMPLETION_STATUS_ARB"
 	_GLenum_map[37305] = "GL_COMPUTE_SHADER"
 	_GLenum_map[37307] = "GL_MAX_COMPUTE_UNIFORM_BLOCKS"
 	_GLenum_map[37308] = "GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS"
@@ -82361,29 +85667,29 @@ func init() {
 	_GLenum_map[37488] = "GL_COMPRESSED_R11_EAC"
 	_GLenum_map[37489] = "GL_COMPRESSED_SIGNED_R11_EAC"
 	_GLenum_map[37489] = "GL_COMPRESSED_SIGNED_R11_EAC_OES"
-	_GLenum_map[37490] = "GL_COMPRESSED_RG11_EAC"
 	_GLenum_map[37490] = "GL_COMPRESSED_RG11_EAC_OES"
+	_GLenum_map[37490] = "GL_COMPRESSED_RG11_EAC"
 	_GLenum_map[37491] = "GL_COMPRESSED_SIGNED_RG11_EAC"
 	_GLenum_map[37491] = "GL_COMPRESSED_SIGNED_RG11_EAC_OES"
 	_GLenum_map[37492] = "GL_COMPRESSED_RGB8_ETC2_OES"
 	_GLenum_map[37492] = "GL_COMPRESSED_RGB8_ETC2"
 	_GLenum_map[37493] = "GL_COMPRESSED_SRGB8_ETC2"
 	_GLenum_map[37493] = "GL_COMPRESSED_SRGB8_ETC2_OES"
-	_GLenum_map[37494] = "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES"
 	_GLenum_map[37494] = "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2"
-	_GLenum_map[37495] = "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES"
+	_GLenum_map[37494] = "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES"
 	_GLenum_map[37495] = "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2"
+	_GLenum_map[37495] = "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES"
 	_GLenum_map[37496] = "GL_COMPRESSED_RGBA8_ETC2_EAC"
 	_GLenum_map[37496] = "GL_COMPRESSED_RGBA8_ETC2_EAC_OES"
-	_GLenum_map[37497] = "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC"
 	_GLenum_map[37497] = "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC_OES"
+	_GLenum_map[37497] = "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC"
 	_GLenum_map[37504] = "GL_BLEND_PREMULTIPLIED_SRC_NV"
 	_GLenum_map[37505] = "GL_BLEND_OVERLAP_NV"
 	_GLenum_map[37506] = "GL_UNCORRELATED_NV"
 	_GLenum_map[37507] = "GL_DISJOINT_NV"
 	_GLenum_map[37508] = "GL_CONJOINT_NV"
-	_GLenum_map[37509] = "GL_BLEND_ADVANCED_COHERENT_NV"
 	_GLenum_map[37509] = "GL_BLEND_ADVANCED_COHERENT_KHR"
+	_GLenum_map[37509] = "GL_BLEND_ADVANCED_COHERENT_NV"
 	_GLenum_map[37510] = "GL_SRC_NV"
 	_GLenum_map[37511] = "GL_DST_NV"
 	_GLenum_map[37512] = "GL_SRC_OVER_NV"
@@ -82396,29 +85702,40 @@ func init() {
 	_GLenum_map[37519] = "GL_DST_ATOP_NV"
 	_GLenum_map[37521] = "GL_PLUS_NV"
 	_GLenum_map[37522] = "GL_PLUS_DARKER_NV"
-	_GLenum_map[37524] = "GL_MULTIPLY_NV"
 	_GLenum_map[37524] = "GL_MULTIPLY_KHR"
-	_GLenum_map[37525] = "GL_SCREEN_KHR"
+	_GLenum_map[37524] = "GL_MULTIPLY_NV"
+	_GLenum_map[37524] = "GL_MULTIPLY"
 	_GLenum_map[37525] = "GL_SCREEN_NV"
+	_GLenum_map[37525] = "GL_SCREEN_KHR"
+	_GLenum_map[37525] = "GL_SCREEN"
 	_GLenum_map[37526] = "GL_OVERLAY_KHR"
+	_GLenum_map[37526] = "GL_OVERLAY"
 	_GLenum_map[37526] = "GL_OVERLAY_NV"
 	_GLenum_map[37527] = "GL_DARKEN_NV"
 	_GLenum_map[37527] = "GL_DARKEN_KHR"
-	_GLenum_map[37528] = "GL_LIGHTEN_NV"
+	_GLenum_map[37527] = "GL_DARKEN"
 	_GLenum_map[37528] = "GL_LIGHTEN_KHR"
+	_GLenum_map[37528] = "GL_LIGHTEN"
+	_GLenum_map[37528] = "GL_LIGHTEN_NV"
 	_GLenum_map[37529] = "GL_COLORDODGE_NV"
+	_GLenum_map[37529] = "GL_COLORDODGE"
 	_GLenum_map[37529] = "GL_COLORDODGE_KHR"
+	_GLenum_map[37530] = "GL_COLORBURN"
 	_GLenum_map[37530] = "GL_COLORBURN_KHR"
 	_GLenum_map[37530] = "GL_COLORBURN_NV"
 	_GLenum_map[37531] = "GL_HARDLIGHT_KHR"
+	_GLenum_map[37531] = "GL_HARDLIGHT"
 	_GLenum_map[37531] = "GL_HARDLIGHT_NV"
-	_GLenum_map[37532] = "GL_SOFTLIGHT_NV"
 	_GLenum_map[37532] = "GL_SOFTLIGHT_KHR"
+	_GLenum_map[37532] = "GL_SOFTLIGHT"
+	_GLenum_map[37532] = "GL_SOFTLIGHT_NV"
 	_GLenum_map[37534] = "GL_DIFFERENCE_NV"
 	_GLenum_map[37534] = "GL_DIFFERENCE_KHR"
+	_GLenum_map[37534] = "GL_DIFFERENCE"
 	_GLenum_map[37535] = "GL_MINUS_NV"
-	_GLenum_map[37536] = "GL_EXCLUSION_NV"
 	_GLenum_map[37536] = "GL_EXCLUSION_KHR"
+	_GLenum_map[37536] = "GL_EXCLUSION_NV"
+	_GLenum_map[37536] = "GL_EXCLUSION"
 	_GLenum_map[37537] = "GL_CONTRAST_NV"
 	_GLenum_map[37539] = "GL_INVERT_RGB_NV"
 	_GLenum_map[37540] = "GL_LINEARDODGE_NV"
@@ -82427,20 +85744,26 @@ func init() {
 	_GLenum_map[37543] = "GL_LINEARLIGHT_NV"
 	_GLenum_map[37544] = "GL_PINLIGHT_NV"
 	_GLenum_map[37545] = "GL_HARDMIX_NV"
+	_GLenum_map[37549] = "GL_HSL_HUE"
 	_GLenum_map[37549] = "GL_HSL_HUE_KHR"
 	_GLenum_map[37549] = "GL_HSL_HUE_NV"
 	_GLenum_map[37550] = "GL_HSL_SATURATION_NV"
 	_GLenum_map[37550] = "GL_HSL_SATURATION_KHR"
-	_GLenum_map[37551] = "GL_HSL_COLOR_KHR"
+	_GLenum_map[37550] = "GL_HSL_SATURATION"
 	_GLenum_map[37551] = "GL_HSL_COLOR_NV"
-	_GLenum_map[37552] = "GL_HSL_LUMINOSITY_NV"
+	_GLenum_map[37551] = "GL_HSL_COLOR_KHR"
+	_GLenum_map[37551] = "GL_HSL_COLOR"
 	_GLenum_map[37552] = "GL_HSL_LUMINOSITY_KHR"
+	_GLenum_map[37552] = "GL_HSL_LUMINOSITY_NV"
+	_GLenum_map[37552] = "GL_HSL_LUMINOSITY"
 	_GLenum_map[37553] = "GL_PLUS_CLAMPED_NV"
 	_GLenum_map[37554] = "GL_PLUS_CLAMPED_ALPHA_NV"
 	_GLenum_map[37555] = "GL_MINUS_CLAMPED_NV"
 	_GLenum_map[37556] = "GL_INVERT_OVG_NV"
-	_GLenum_map[37566] = "GL_PRIMITIVE_BOUNDING_BOX_EXT"
+	_GLenum_map[37566] = "GL_PRIMITIVE_BOUNDING_BOX"
 	_GLenum_map[37566] = "GL_PRIMITIVE_BOUNDING_BOX_OES"
+	_GLenum_map[37566] = "GL_PRIMITIVE_BOUNDING_BOX_ARB"
+	_GLenum_map[37566] = "GL_PRIMITIVE_BOUNDING_BOX_EXT"
 	_GLenum_map[37568] = "GL_ATOMIC_COUNTER_BUFFER"
 	_GLenum_map[37569] = "GL_ATOMIC_COUNTER_BUFFER_BINDING"
 	_GLenum_map[37570] = "GL_ATOMIC_COUNTER_BUFFER_START"
@@ -82454,9 +85777,9 @@ func init() {
 	_GLenum_map[37578] = "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER"
 	_GLenum_map[37579] = "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER"
 	_GLenum_map[37580] = "GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS"
-	_GLenum_map[37581] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_EXT"
 	_GLenum_map[37581] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_OES"
 	_GLenum_map[37581] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS"
+	_GLenum_map[37581] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_EXT"
 	_GLenum_map[37582] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_OES"
 	_GLenum_map[37582] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS"
 	_GLenum_map[37582] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_EXT"
@@ -82466,15 +85789,15 @@ func init() {
 	_GLenum_map[37584] = "GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS"
 	_GLenum_map[37585] = "GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS"
 	_GLenum_map[37586] = "GL_MAX_VERTEX_ATOMIC_COUNTERS"
-	_GLenum_map[37587] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_EXT"
 	_GLenum_map[37587] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_OES"
 	_GLenum_map[37587] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS"
-	_GLenum_map[37588] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_EXT"
+	_GLenum_map[37587] = "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_EXT"
 	_GLenum_map[37588] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_OES"
 	_GLenum_map[37588] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS"
+	_GLenum_map[37588] = "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_EXT"
 	_GLenum_map[37589] = "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_OES"
-	_GLenum_map[37589] = "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_EXT"
 	_GLenum_map[37589] = "GL_MAX_GEOMETRY_ATOMIC_COUNTERS"
+	_GLenum_map[37589] = "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_EXT"
 	_GLenum_map[37590] = "GL_MAX_FRAGMENT_ATOMIC_COUNTERS"
 	_GLenum_map[37591] = "GL_MAX_COMBINED_ATOMIC_COUNTERS"
 	_GLenum_map[37592] = "GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE"
@@ -82492,9 +85815,9 @@ func init() {
 	_GLenum_map[37604] = "GL_PROGRAM_OUTPUT"
 	_GLenum_map[37605] = "GL_BUFFER_VARIABLE"
 	_GLenum_map[37606] = "GL_SHADER_STORAGE_BLOCK"
-	_GLenum_map[37607] = "GL_IS_PER_PATCH_OES"
 	_GLenum_map[37607] = "GL_IS_PER_PATCH"
 	_GLenum_map[37607] = "GL_IS_PER_PATCH_EXT"
+	_GLenum_map[37607] = "GL_IS_PER_PATCH_OES"
 	_GLenum_map[37608] = "GL_VERTEX_SUBROUTINE"
 	_GLenum_map[37609] = "GL_TESS_CONTROL_SUBROUTINE"
 	_GLenum_map[37610] = "GL_TESS_EVALUATION_SUBROUTINE"
@@ -82526,15 +85849,15 @@ func init() {
 	_GLenum_map[37636] = "GL_NUM_ACTIVE_VARIABLES"
 	_GLenum_map[37637] = "GL_ACTIVE_VARIABLES"
 	_GLenum_map[37638] = "GL_REFERENCED_BY_VERTEX_SHADER"
+	_GLenum_map[37639] = "GL_REFERENCED_BY_TESS_CONTROL_SHADER_OES"
 	_GLenum_map[37639] = "GL_REFERENCED_BY_TESS_CONTROL_SHADER_EXT"
 	_GLenum_map[37639] = "GL_REFERENCED_BY_TESS_CONTROL_SHADER"
-	_GLenum_map[37639] = "GL_REFERENCED_BY_TESS_CONTROL_SHADER_OES"
-	_GLenum_map[37640] = "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_EXT"
 	_GLenum_map[37640] = "GL_REFERENCED_BY_TESS_EVALUATION_SHADER"
 	_GLenum_map[37640] = "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_OES"
+	_GLenum_map[37640] = "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_EXT"
+	_GLenum_map[37641] = "GL_REFERENCED_BY_GEOMETRY_SHADER_OES"
 	_GLenum_map[37641] = "GL_REFERENCED_BY_GEOMETRY_SHADER"
 	_GLenum_map[37641] = "GL_REFERENCED_BY_GEOMETRY_SHADER_EXT"
-	_GLenum_map[37641] = "GL_REFERENCED_BY_GEOMETRY_SHADER_OES"
 	_GLenum_map[37642] = "GL_REFERENCED_BY_FRAGMENT_SHADER"
 	_GLenum_map[37643] = "GL_REFERENCED_BY_COMPUTE_SHADER"
 	_GLenum_map[37644] = "GL_TOP_LEVEL_ARRAY_SIZE"
@@ -82544,8 +85867,8 @@ func init() {
 	_GLenum_map[37648] = "GL_FRAMEBUFFER_DEFAULT_WIDTH"
 	_GLenum_map[37649] = "GL_FRAMEBUFFER_DEFAULT_HEIGHT"
 	_GLenum_map[37650] = "GL_FRAMEBUFFER_DEFAULT_LAYERS_OES"
-	_GLenum_map[37650] = "GL_FRAMEBUFFER_DEFAULT_LAYERS"
 	_GLenum_map[37650] = "GL_FRAMEBUFFER_DEFAULT_LAYERS_EXT"
+	_GLenum_map[37650] = "GL_FRAMEBUFFER_DEFAULT_LAYERS"
 	_GLenum_map[37651] = "GL_FRAMEBUFFER_DEFAULT_SAMPLES"
 	_GLenum_map[37652] = "GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS"
 	_GLenum_map[37653] = "GL_MAX_FRAMEBUFFER_WIDTH"
@@ -82571,12 +85894,19 @@ func init() {
 	_GLenum_map[37690] = "GL_WARPS_PER_SM_NV"
 	_GLenum_map[37691] = "GL_SM_COUNT_NV"
 	_GLenum_map[37692] = "GL_FILL_RECTANGLE_NV"
+	_GLenum_map[37693] = "GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB"
 	_GLenum_map[37693] = "GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV"
 	_GLenum_map[37694] = "GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV"
+	_GLenum_map[37694] = "GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB"
+	_GLenum_map[37695] = "GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB"
 	_GLenum_map[37695] = "GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV"
 	_GLenum_map[37696] = "GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV"
+	_GLenum_map[37696] = "GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB"
 	_GLenum_map[37697] = "GL_PROGRAMMABLE_SAMPLE_LOCATION_NV"
+	_GLenum_map[37697] = "GL_PROGRAMMABLE_SAMPLE_LOCATION_ARB"
 	_GLenum_map[37698] = "GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV"
+	_GLenum_map[37698] = "GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB"
+	_GLenum_map[37699] = "GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB"
 	_GLenum_map[37699] = "GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV"
 	_GLenum_map[37700] = "GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB"
 	_GLenum_map[37701] = "GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB"
@@ -82592,6 +85922,8 @@ func init() {
 	_GLenum_map[37726] = "GL_NEGATIVE_ONE_TO_ONE"
 	_GLenum_map[37727] = "GL_ZERO_TO_ONE"
 	_GLenum_map[37733] = "GL_CLEAR_TEXTURE"
+	_GLenum_map[37734] = "GL_TEXTURE_REDUCTION_MODE_ARB"
+	_GLenum_map[37735] = "GL_WEIGHTED_AVERAGE_ARB"
 	_GLenum_map[37736] = "GL_FONT_GLYPHS_AVAILABLE_NV"
 	_GLenum_map[37737] = "GL_FONT_TARGET_UNAVAILABLE_NV"
 	_GLenum_map[37738] = "GL_FONT_UNAVAILABLE_NV"
@@ -82605,7 +85937,14 @@ func init() {
 	_GLenum_map[37746] = "GL_SUPERSAMPLE_SCALE_X_NV"
 	_GLenum_map[37747] = "GL_SUPERSAMPLE_SCALE_Y_NV"
 	_GLenum_map[37748] = "GL_CONFORMANT_NV"
+	_GLenum_map[37753] = "GL_CONSERVATIVE_RASTER_DILATE_NV"
+	_GLenum_map[37754] = "GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV"
+	_GLenum_map[37755] = "GL_CONSERVATIVE_RASTER_DILATE_GRANULARITY_NV"
 	_GLenum_map[37760] = "GL_NUM_SAMPLE_COUNTS"
+	_GLenum_map[37761] = "GL_MULTISAMPLE_LINE_WIDTH_RANGE"
+	_GLenum_map[37761] = "GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB"
+	_GLenum_map[37762] = "GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY"
+	_GLenum_map[37762] = "GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB"
 	_GLenum_map[37792] = "GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE"
 	_GLenum_map[37793] = "GL_BGRA8_EXT"
 	_GLenum_map[37794] = "GL_TEXTURE_USAGE_ANGLE"
@@ -82613,18 +85952,32 @@ func init() {
 	_GLenum_map[37796] = "GL_PACK_REVERSE_ROW_ORDER_ANGLE"
 	_GLenum_map[37798] = "GL_PROGRAM_BINARY_ANGLE"
 	_GLenum_map[37808] = "GL_COMPRESSED_RGBA_ASTC_4x4_KHR"
+	_GLenum_map[37808] = "GL_COMPRESSED_RGBA_ASTC_4x4"
+	_GLenum_map[37809] = "GL_COMPRESSED_RGBA_ASTC_5x4"
 	_GLenum_map[37809] = "GL_COMPRESSED_RGBA_ASTC_5x4_KHR"
+	_GLenum_map[37810] = "GL_COMPRESSED_RGBA_ASTC_5x5"
 	_GLenum_map[37810] = "GL_COMPRESSED_RGBA_ASTC_5x5_KHR"
+	_GLenum_map[37811] = "GL_COMPRESSED_RGBA_ASTC_6x5"
 	_GLenum_map[37811] = "GL_COMPRESSED_RGBA_ASTC_6x5_KHR"
 	_GLenum_map[37812] = "GL_COMPRESSED_RGBA_ASTC_6x6_KHR"
+	_GLenum_map[37812] = "GL_COMPRESSED_RGBA_ASTC_6x6"
+	_GLenum_map[37813] = "GL_COMPRESSED_RGBA_ASTC_8x5"
 	_GLenum_map[37813] = "GL_COMPRESSED_RGBA_ASTC_8x5_KHR"
 	_GLenum_map[37814] = "GL_COMPRESSED_RGBA_ASTC_8x6_KHR"
+	_GLenum_map[37814] = "GL_COMPRESSED_RGBA_ASTC_8x6"
 	_GLenum_map[37815] = "GL_COMPRESSED_RGBA_ASTC_8x8_KHR"
+	_GLenum_map[37815] = "GL_COMPRESSED_RGBA_ASTC_8x8"
 	_GLenum_map[37816] = "GL_COMPRESSED_RGBA_ASTC_10x5_KHR"
+	_GLenum_map[37816] = "GL_COMPRESSED_RGBA_ASTC_10x5"
 	_GLenum_map[37817] = "GL_COMPRESSED_RGBA_ASTC_10x6_KHR"
+	_GLenum_map[37817] = "GL_COMPRESSED_RGBA_ASTC_10x6"
 	_GLenum_map[37818] = "GL_COMPRESSED_RGBA_ASTC_10x8_KHR"
+	_GLenum_map[37818] = "GL_COMPRESSED_RGBA_ASTC_10x8"
+	_GLenum_map[37819] = "GL_COMPRESSED_RGBA_ASTC_10x10"
 	_GLenum_map[37819] = "GL_COMPRESSED_RGBA_ASTC_10x10_KHR"
 	_GLenum_map[37820] = "GL_COMPRESSED_RGBA_ASTC_12x10_KHR"
+	_GLenum_map[37820] = "GL_COMPRESSED_RGBA_ASTC_12x10"
+	_GLenum_map[37821] = "GL_COMPRESSED_RGBA_ASTC_12x12"
 	_GLenum_map[37821] = "GL_COMPRESSED_RGBA_ASTC_12x12_KHR"
 	_GLenum_map[37824] = "GL_COMPRESSED_RGBA_ASTC_3x3x3_OES"
 	_GLenum_map[37825] = "GL_COMPRESSED_RGBA_ASTC_4x3x3_OES"
@@ -82637,18 +85990,32 @@ func init() {
 	_GLenum_map[37832] = "GL_COMPRESSED_RGBA_ASTC_6x6x5_OES"
 	_GLenum_map[37833] = "GL_COMPRESSED_RGBA_ASTC_6x6x6_OES"
 	_GLenum_map[37840] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR"
+	_GLenum_map[37840] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4"
+	_GLenum_map[37841] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4"
 	_GLenum_map[37841] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR"
 	_GLenum_map[37842] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR"
+	_GLenum_map[37842] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5"
 	_GLenum_map[37843] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR"
+	_GLenum_map[37843] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5"
+	_GLenum_map[37844] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6"
 	_GLenum_map[37844] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR"
+	_GLenum_map[37845] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5"
 	_GLenum_map[37845] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR"
+	_GLenum_map[37846] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6"
 	_GLenum_map[37846] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR"
 	_GLenum_map[37847] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR"
+	_GLenum_map[37847] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8"
 	_GLenum_map[37848] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR"
+	_GLenum_map[37848] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5"
+	_GLenum_map[37849] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6"
 	_GLenum_map[37849] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR"
+	_GLenum_map[37850] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8"
 	_GLenum_map[37850] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR"
+	_GLenum_map[37851] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10"
 	_GLenum_map[37851] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR"
 	_GLenum_map[37852] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR"
+	_GLenum_map[37852] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10"
+	_GLenum_map[37853] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12"
 	_GLenum_map[37853] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 	_GLenum_map[37856] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_3x3x3_OES"
 	_GLenum_map[37857] = "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x3x3_OES"
@@ -82736,84 +86103,84 @@ func init() {
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: "GL_TERMINATE_SEQUENCE_COMMAND_NV", Value: uint32(0)},
-			{Name: "GL_CLOSE_PATH_NV", Value: uint32(0)},
-			{Name: "GL_FALSE", Value: uint32(0)},
-			{Name: "GL_ZERO", Value: uint32(0)},
-			{Name: "GL_NONE", Value: uint32(0)},
-			{Name: "GL_NONE_OES", Value: uint32(0)},
 			{Name: "GL_NO_ERROR", Value: uint32(0)},
 			{Name: "GL_LAYOUT_DEFAULT_INTEL", Value: uint32(0)},
+			{Name: "GL_NONE_OES", Value: uint32(0)},
+			{Name: "GL_NONE", Value: uint32(0)},
+			{Name: "GL_ZERO", Value: uint32(0)},
 			{Name: "GL_POINTS", Value: uint32(0)},
-			{Name: "GL_TRUE", Value: uint32(1)},
-			{Name: "GL_RESTART_SUN", Value: uint32(1)},
-			{Name: "GL_VERSION_ES_CM_1_1", Value: uint32(1)},
-			{Name: "GL_VERSION_ES_CL_1_1", Value: uint32(1)},
-			{Name: "GL_VERSION_ES_CL_1_0", Value: uint32(1)},
-			{Name: "GL_ONE", Value: uint32(1)},
+			{Name: "GL_FALSE", Value: uint32(0)},
+			{Name: "GL_CLOSE_PATH_NV", Value: uint32(0)},
+			{Name: "GL_TERMINATE_SEQUENCE_COMMAND_NV", Value: uint32(0)},
 			{Name: "GL_LAYOUT_LINEAR_INTEL", Value: uint32(1)},
 			{Name: "GL_NOP_COMMAND_NV", Value: uint32(1)},
+			{Name: "GL_VERSION_ES_CL_1_0", Value: uint32(1)},
+			{Name: "GL_VERSION_ES_CM_1_1", Value: uint32(1)},
+			{Name: "GL_TRUE", Value: uint32(1)},
+			{Name: "GL_RESTART_SUN", Value: uint32(1)},
+			{Name: "GL_VERSION_ES_CL_1_1", Value: uint32(1)},
+			{Name: "GL_ONE", Value: uint32(1)},
 			{Name: "GL_LINES", Value: uint32(1)},
-			{Name: "GL_REPLACE_MIDDLE_SUN", Value: uint32(2)},
-			{Name: "GL_DRAW_ELEMENTS_COMMAND_NV", Value: uint32(2)},
-			{Name: "GL_LAYOUT_LINEAR_CPU_CACHED_INTEL", Value: uint32(2)},
 			{Name: "GL_LINE_LOOP", Value: uint32(2)},
 			{Name: "GL_MOVE_TO_NV", Value: uint32(2)},
-			{Name: "GL_RELATIVE_MOVE_TO_NV", Value: uint32(3)},
-			{Name: "GL_LINE_STRIP", Value: uint32(3)},
-			{Name: "GL_DRAW_ARRAYS_COMMAND_NV", Value: uint32(3)},
+			{Name: "GL_LAYOUT_LINEAR_CPU_CACHED_INTEL", Value: uint32(2)},
+			{Name: "GL_DRAW_ELEMENTS_COMMAND_NV", Value: uint32(2)},
+			{Name: "GL_REPLACE_MIDDLE_SUN", Value: uint32(2)},
 			{Name: "GL_REPLACE_OLDEST_SUN", Value: uint32(3)},
-			{Name: "GL_LINE_TO_NV", Value: uint32(4)},
-			{Name: "GL_DRAW_ELEMENTS_STRIP_COMMAND_NV", Value: uint32(4)},
+			{Name: "GL_RELATIVE_MOVE_TO_NV", Value: uint32(3)},
+			{Name: "GL_DRAW_ARRAYS_COMMAND_NV", Value: uint32(3)},
+			{Name: "GL_LINE_STRIP", Value: uint32(3)},
 			{Name: "GL_TRIANGLES", Value: uint32(4)},
-			{Name: "GL_DRAW_ARRAYS_STRIP_COMMAND_NV", Value: uint32(5)},
+			{Name: "GL_DRAW_ELEMENTS_STRIP_COMMAND_NV", Value: uint32(4)},
+			{Name: "GL_LINE_TO_NV", Value: uint32(4)},
 			{Name: "GL_TRIANGLE_STRIP", Value: uint32(5)},
+			{Name: "GL_DRAW_ARRAYS_STRIP_COMMAND_NV", Value: uint32(5)},
 			{Name: "GL_RELATIVE_LINE_TO_NV", Value: uint32(5)},
-			{Name: "GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV", Value: uint32(6)},
 			{Name: "GL_HORIZONTAL_LINE_TO_NV", Value: uint32(6)},
 			{Name: "GL_TRIANGLE_FAN", Value: uint32(6)},
+			{Name: "GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV", Value: uint32(6)},
 			{Name: "GL_QUADS_EXT", Value: uint32(7)},
-			{Name: "GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV", Value: uint32(7)},
-			{Name: "GL_QUADS", Value: uint32(7)},
 			{Name: "GL_RELATIVE_HORIZONTAL_LINE_TO_NV", Value: uint32(7)},
+			{Name: "GL_QUADS", Value: uint32(7)},
 			{Name: "GL_QUADS_OES", Value: uint32(7)},
-			{Name: "GL_VERTICAL_LINE_TO_NV", Value: uint32(8)},
+			{Name: "GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV", Value: uint32(7)},
 			{Name: "GL_QUAD_STRIP", Value: uint32(8)},
 			{Name: "GL_ELEMENT_ADDRESS_COMMAND_NV", Value: uint32(8)},
-			{Name: "GL_POLYGON", Value: uint32(9)},
+			{Name: "GL_VERTICAL_LINE_TO_NV", Value: uint32(8)},
 			{Name: "GL_RELATIVE_VERTICAL_LINE_TO_NV", Value: uint32(9)},
+			{Name: "GL_POLYGON", Value: uint32(9)},
 			{Name: "GL_ATTRIBUTE_ADDRESS_COMMAND_NV", Value: uint32(9)},
 			{Name: "GL_LINES_ADJACENCY_EXT", Value: uint32(10)},
 			{Name: "GL_LINES_ADJACENCY_ARB", Value: uint32(10)},
-			{Name: "GL_LINES_ADJACENCY_OES", Value: uint32(10)},
 			{Name: "GL_QUADRATIC_CURVE_TO_NV", Value: uint32(10)},
 			{Name: "GL_UNIFORM_ADDRESS_COMMAND_NV", Value: uint32(10)},
+			{Name: "GL_LINES_ADJACENCY_OES", Value: uint32(10)},
 			{Name: "GL_LINES_ADJACENCY", Value: uint32(10)},
-			{Name: "GL_LINE_STRIP_ADJACENCY_EXT", Value: uint32(11)},
-			{Name: "GL_LINE_STRIP_ADJACENCY", Value: uint32(11)},
-			{Name: "GL_LINE_STRIP_ADJACENCY_ARB", Value: uint32(11)},
-			{Name: "GL_LINE_STRIP_ADJACENCY_OES", Value: uint32(11)},
 			{Name: "GL_BLEND_COLOR_COMMAND_NV", Value: uint32(11)},
 			{Name: "GL_RELATIVE_QUADRATIC_CURVE_TO_NV", Value: uint32(11)},
-			{Name: "GL_TRIANGLES_ADJACENCY_EXT", Value: uint32(12)},
-			{Name: "GL_STENCIL_REF_COMMAND_NV", Value: uint32(12)},
-			{Name: "GL_TRIANGLES_ADJACENCY_ARB", Value: uint32(12)},
+			{Name: "GL_LINE_STRIP_ADJACENCY_OES", Value: uint32(11)},
+			{Name: "GL_LINE_STRIP_ADJACENCY_EXT", Value: uint32(11)},
+			{Name: "GL_LINE_STRIP_ADJACENCY_ARB", Value: uint32(11)},
+			{Name: "GL_LINE_STRIP_ADJACENCY", Value: uint32(11)},
 			{Name: "GL_CUBIC_CURVE_TO_NV", Value: uint32(12)},
 			{Name: "GL_TRIANGLES_ADJACENCY", Value: uint32(12)},
+			{Name: "GL_STENCIL_REF_COMMAND_NV", Value: uint32(12)},
+			{Name: "GL_TRIANGLES_ADJACENCY_ARB", Value: uint32(12)},
+			{Name: "GL_TRIANGLES_ADJACENCY_EXT", Value: uint32(12)},
 			{Name: "GL_TRIANGLES_ADJACENCY_OES", Value: uint32(12)},
-			{Name: "GL_TRIANGLE_STRIP_ADJACENCY_EXT", Value: uint32(13)},
 			{Name: "GL_TRIANGLE_STRIP_ADJACENCY_OES", Value: uint32(13)},
-			{Name: "GL_LINE_WIDTH_COMMAND_NV", Value: uint32(13)},
 			{Name: "GL_RELATIVE_CUBIC_CURVE_TO_NV", Value: uint32(13)},
+			{Name: "GL_LINE_WIDTH_COMMAND_NV", Value: uint32(13)},
 			{Name: "GL_TRIANGLE_STRIP_ADJACENCY", Value: uint32(13)},
 			{Name: "GL_TRIANGLE_STRIP_ADJACENCY_ARB", Value: uint32(13)},
-			{Name: "GL_POLYGON_OFFSET_COMMAND_NV", Value: uint32(14)},
-			{Name: "GL_PATCHES", Value: uint32(14)},
+			{Name: "GL_TRIANGLE_STRIP_ADJACENCY_EXT", Value: uint32(13)},
 			{Name: "GL_PATCHES_OES", Value: uint32(14)},
+			{Name: "GL_PATCHES", Value: uint32(14)},
 			{Name: "GL_SMOOTH_QUADRATIC_CURVE_TO_NV", Value: uint32(14)},
 			{Name: "GL_PATCHES_EXT", Value: uint32(14)},
-			{Name: "GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV", Value: uint32(15)},
+			{Name: "GL_POLYGON_OFFSET_COMMAND_NV", Value: uint32(14)},
 			{Name: "GL_ALPHA_REF_COMMAND_NV", Value: uint32(15)},
+			{Name: "GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV", Value: uint32(15)},
 			{Name: "GL_VIEWPORT_COMMAND_NV", Value: uint32(16)},
 			{Name: "GL_SMOOTH_CUBIC_CURVE_TO_NV", Value: uint32(16)},
 			{Name: "GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV", Value: uint32(17)},
@@ -82891,9 +86258,9 @@ func init() {
 			{Name: "GL_STACK_UNDERFLOW", Value: uint32(1284)},
 			{Name: "GL_STACK_UNDERFLOW_KHR", Value: uint32(1284)},
 			{Name: "GL_OUT_OF_MEMORY", Value: uint32(1285)},
-			{Name: "GL_INVALID_FRAMEBUFFER_OPERATION", Value: uint32(1286)},
-			{Name: "GL_INVALID_FRAMEBUFFER_OPERATION_OES", Value: uint32(1286)},
 			{Name: "GL_INVALID_FRAMEBUFFER_OPERATION_EXT", Value: uint32(1286)},
+			{Name: "GL_INVALID_FRAMEBUFFER_OPERATION_OES", Value: uint32(1286)},
+			{Name: "GL_INVALID_FRAMEBUFFER_OPERATION", Value: uint32(1286)},
 			{Name: "GL_CONTEXT_LOST_KHR", Value: uint32(1287)},
 			{Name: "GL_CONTEXT_LOST", Value: uint32(1287)},
 			{Name: "GL_2D", Value: uint32(1536)},
@@ -82934,8 +86301,8 @@ func init() {
 			{Name: "GL_POINT_SIZE_GRANULARITY", Value: uint32(2835)},
 			{Name: "GL_LINE_SMOOTH", Value: uint32(2848)},
 			{Name: "GL_LINE_WIDTH", Value: uint32(2849)},
-			{Name: "GL_SMOOTH_LINE_WIDTH_RANGE", Value: uint32(2850)},
 			{Name: "GL_LINE_WIDTH_RANGE", Value: uint32(2850)},
+			{Name: "GL_SMOOTH_LINE_WIDTH_RANGE", Value: uint32(2850)},
 			{Name: "GL_SMOOTH_LINE_WIDTH_GRANULARITY", Value: uint32(2851)},
 			{Name: "GL_LINE_WIDTH_GRANULARITY", Value: uint32(2851)},
 			{Name: "GL_LINE_STIPPLE", Value: uint32(2852)},
@@ -82945,8 +86312,8 @@ func init() {
 			{Name: "GL_MAX_LIST_NESTING", Value: uint32(2865)},
 			{Name: "GL_LIST_BASE", Value: uint32(2866)},
 			{Name: "GL_LIST_INDEX", Value: uint32(2867)},
-			{Name: "GL_POLYGON_MODE", Value: uint32(2880)},
 			{Name: "GL_POLYGON_MODE_NV", Value: uint32(2880)},
+			{Name: "GL_POLYGON_MODE", Value: uint32(2880)},
 			{Name: "GL_POLYGON_SMOOTH", Value: uint32(2881)},
 			{Name: "GL_POLYGON_STIPPLE", Value: uint32(2882)},
 			{Name: "GL_EDGE_FLAG", Value: uint32(2883)},
@@ -82986,24 +86353,24 @@ func init() {
 			{Name: "GL_MATRIX_MODE", Value: uint32(2976)},
 			{Name: "GL_NORMALIZE", Value: uint32(2977)},
 			{Name: "GL_VIEWPORT", Value: uint32(2978)},
-			{Name: "GL_MODELVIEW0_STACK_DEPTH_EXT", Value: uint32(2979)},
-			{Name: "GL_PATH_MODELVIEW_STACK_DEPTH_NV", Value: uint32(2979)},
 			{Name: "GL_MODELVIEW_STACK_DEPTH", Value: uint32(2979)},
-			{Name: "GL_PROJECTION_STACK_DEPTH", Value: uint32(2980)},
+			{Name: "GL_PATH_MODELVIEW_STACK_DEPTH_NV", Value: uint32(2979)},
+			{Name: "GL_MODELVIEW0_STACK_DEPTH_EXT", Value: uint32(2979)},
 			{Name: "GL_PATH_PROJECTION_STACK_DEPTH_NV", Value: uint32(2980)},
+			{Name: "GL_PROJECTION_STACK_DEPTH", Value: uint32(2980)},
 			{Name: "GL_TEXTURE_STACK_DEPTH", Value: uint32(2981)},
-			{Name: "GL_PATH_MODELVIEW_MATRIX_NV", Value: uint32(2982)},
 			{Name: "GL_MODELVIEW_MATRIX", Value: uint32(2982)},
+			{Name: "GL_PATH_MODELVIEW_MATRIX_NV", Value: uint32(2982)},
 			{Name: "GL_MODELVIEW0_MATRIX_EXT", Value: uint32(2982)},
-			{Name: "GL_PATH_PROJECTION_MATRIX_NV", Value: uint32(2983)},
 			{Name: "GL_PROJECTION_MATRIX", Value: uint32(2983)},
+			{Name: "GL_PATH_PROJECTION_MATRIX_NV", Value: uint32(2983)},
 			{Name: "GL_TEXTURE_MATRIX", Value: uint32(2984)},
 			{Name: "GL_ATTRIB_STACK_DEPTH", Value: uint32(2992)},
 			{Name: "GL_CLIENT_ATTRIB_STACK_DEPTH", Value: uint32(2993)},
-			{Name: "GL_ALPHA_TEST_QCOM", Value: uint32(3008)},
 			{Name: "GL_ALPHA_TEST", Value: uint32(3008)},
-			{Name: "GL_ALPHA_TEST_FUNC_QCOM", Value: uint32(3009)},
+			{Name: "GL_ALPHA_TEST_QCOM", Value: uint32(3008)},
 			{Name: "GL_ALPHA_TEST_FUNC", Value: uint32(3009)},
+			{Name: "GL_ALPHA_TEST_FUNC_QCOM", Value: uint32(3009)},
 			{Name: "GL_ALPHA_TEST_REF_QCOM", Value: uint32(3010)},
 			{Name: "GL_ALPHA_TEST_REF", Value: uint32(3010)},
 			{Name: "GL_DITHER", Value: uint32(3024)},
@@ -83011,15 +86378,15 @@ func init() {
 			{Name: "GL_BLEND_SRC", Value: uint32(3041)},
 			{Name: "GL_BLEND", Value: uint32(3042)},
 			{Name: "GL_LOGIC_OP_MODE", Value: uint32(3056)},
-			{Name: "GL_LOGIC_OP", Value: uint32(3057)},
 			{Name: "GL_INDEX_LOGIC_OP", Value: uint32(3057)},
+			{Name: "GL_LOGIC_OP", Value: uint32(3057)},
 			{Name: "GL_COLOR_LOGIC_OP", Value: uint32(3058)},
 			{Name: "GL_AUX_BUFFERS", Value: uint32(3072)},
 			{Name: "GL_DRAW_BUFFER_EXT", Value: uint32(3073)},
 			{Name: "GL_DRAW_BUFFER", Value: uint32(3073)},
-			{Name: "GL_READ_BUFFER", Value: uint32(3074)},
 			{Name: "GL_READ_BUFFER_NV", Value: uint32(3074)},
 			{Name: "GL_READ_BUFFER_EXT", Value: uint32(3074)},
+			{Name: "GL_READ_BUFFER", Value: uint32(3074)},
 			{Name: "GL_SCISSOR_BOX", Value: uint32(3088)},
 			{Name: "GL_SCISSOR_TEST", Value: uint32(3089)},
 			{Name: "GL_INDEX_CLEAR_VALUE", Value: uint32(3104)},
@@ -83064,8 +86431,8 @@ func init() {
 			{Name: "GL_UNPACK_LSB_FIRST", Value: uint32(3313)},
 			{Name: "GL_UNPACK_ROW_LENGTH", Value: uint32(3314)},
 			{Name: "GL_UNPACK_ROW_LENGTH_EXT", Value: uint32(3314)},
-			{Name: "GL_UNPACK_SKIP_ROWS", Value: uint32(3315)},
 			{Name: "GL_UNPACK_SKIP_ROWS_EXT", Value: uint32(3315)},
+			{Name: "GL_UNPACK_SKIP_ROWS", Value: uint32(3315)},
 			{Name: "GL_UNPACK_SKIP_PIXELS", Value: uint32(3316)},
 			{Name: "GL_UNPACK_SKIP_PIXELS_EXT", Value: uint32(3316)},
 			{Name: "GL_UNPACK_ALIGNMENT", Value: uint32(3317)},
@@ -83094,8 +86461,8 @@ func init() {
 			{Name: "GL_MAX_EVAL_ORDER", Value: uint32(3376)},
 			{Name: "GL_MAX_LIGHTS", Value: uint32(3377)},
 			{Name: "GL_MAX_CLIP_DISTANCES_APPLE", Value: uint32(3378)},
-			{Name: "GL_MAX_CLIP_PLANES", Value: uint32(3378)},
 			{Name: "GL_MAX_CLIP_DISTANCES", Value: uint32(3378)},
+			{Name: "GL_MAX_CLIP_PLANES", Value: uint32(3378)},
 			{Name: "GL_MAX_CLIP_PLANES_IMG", Value: uint32(3378)},
 			{Name: "GL_MAX_TEXTURE_SIZE", Value: uint32(3379)},
 			{Name: "GL_MAX_PIXEL_MAP_TABLE", Value: uint32(3380)},
@@ -83153,11 +86520,11 @@ func init() {
 			{Name: "GL_SELECTION_BUFFER_SIZE", Value: uint32(3572)},
 			{Name: "GL_TEXTURE_WIDTH", Value: uint32(4096)},
 			{Name: "GL_TEXTURE_HEIGHT", Value: uint32(4097)},
-			{Name: "GL_TEXTURE_INTERNAL_FORMAT", Value: uint32(4099)},
 			{Name: "GL_TEXTURE_COMPONENTS", Value: uint32(4099)},
-			{Name: "GL_TEXTURE_BORDER_COLOR_EXT", Value: uint32(4100)},
-			{Name: "GL_TEXTURE_BORDER_COLOR_NV", Value: uint32(4100)},
+			{Name: "GL_TEXTURE_INTERNAL_FORMAT", Value: uint32(4099)},
 			{Name: "GL_TEXTURE_BORDER_COLOR_OES", Value: uint32(4100)},
+			{Name: "GL_TEXTURE_BORDER_COLOR_NV", Value: uint32(4100)},
+			{Name: "GL_TEXTURE_BORDER_COLOR_EXT", Value: uint32(4100)},
 			{Name: "GL_TEXTURE_BORDER_COLOR", Value: uint32(4100)},
 			{Name: "GL_TEXTURE_BORDER", Value: uint32(4101)},
 			{Name: "GL_TEXTURE_TARGET", Value: uint32(4102)},
@@ -83183,21 +86550,22 @@ func init() {
 			{Name: "GL_INT", Value: uint32(5124)},
 			{Name: "GL_UNSIGNED_INT", Value: uint32(5125)},
 			{Name: "GL_FLOAT", Value: uint32(5126)},
-			{Name: "GL_2_BYTES", Value: uint32(5127)},
 			{Name: "GL_2_BYTES_NV", Value: uint32(5127)},
+			{Name: "GL_2_BYTES", Value: uint32(5127)},
 			{Name: "GL_3_BYTES", Value: uint32(5128)},
 			{Name: "GL_3_BYTES_NV", Value: uint32(5128)},
-			{Name: "GL_4_BYTES_NV", Value: uint32(5129)},
 			{Name: "GL_4_BYTES", Value: uint32(5129)},
-			{Name: "GL_DOUBLE_EXT", Value: uint32(5130)},
+			{Name: "GL_4_BYTES_NV", Value: uint32(5129)},
 			{Name: "GL_DOUBLE", Value: uint32(5130)},
+			{Name: "GL_DOUBLE_EXT", Value: uint32(5130)},
 			{Name: "GL_HALF_FLOAT_ARB", Value: uint32(5131)},
+			{Name: "GL_HALF_FLOAT_NV", Value: uint32(5131)},
 			{Name: "GL_HALF_FLOAT", Value: uint32(5131)},
 			{Name: "GL_HALF_APPLE", Value: uint32(5131)},
-			{Name: "GL_HALF_FLOAT_NV", Value: uint32(5131)},
-			{Name: "GL_FIXED_OES", Value: uint32(5132)},
 			{Name: "GL_FIXED", Value: uint32(5132)},
+			{Name: "GL_FIXED_OES", Value: uint32(5132)},
 			{Name: "GL_INT64_NV", Value: uint32(5134)},
+			{Name: "GL_INT64_ARB", Value: uint32(5134)},
 			{Name: "GL_UNSIGNED_INT64_ARB", Value: uint32(5135)},
 			{Name: "GL_UNSIGNED_INT64_NV", Value: uint32(5135)},
 			{Name: "GL_CLEAR", Value: uint32(5376)},
@@ -83221,30 +86589,30 @@ func init() {
 			{Name: "GL_SHININESS", Value: uint32(5633)},
 			{Name: "GL_AMBIENT_AND_DIFFUSE", Value: uint32(5634)},
 			{Name: "GL_COLOR_INDEXES", Value: uint32(5635)},
-			{Name: "GL_MODELVIEW", Value: uint32(5888)},
-			{Name: "GL_MODELVIEW0_EXT", Value: uint32(5888)},
 			{Name: "GL_MODELVIEW0_ARB", Value: uint32(5888)},
 			{Name: "GL_PATH_MODELVIEW_NV", Value: uint32(5888)},
-			{Name: "GL_PATH_PROJECTION_NV", Value: uint32(5889)},
+			{Name: "GL_MODELVIEW0_EXT", Value: uint32(5888)},
+			{Name: "GL_MODELVIEW", Value: uint32(5888)},
 			{Name: "GL_PROJECTION", Value: uint32(5889)},
+			{Name: "GL_PATH_PROJECTION_NV", Value: uint32(5889)},
 			{Name: "GL_TEXTURE", Value: uint32(5890)},
 			{Name: "GL_COLOR", Value: uint32(6144)},
 			{Name: "GL_COLOR_EXT", Value: uint32(6144)},
 			{Name: "GL_DEPTH_EXT", Value: uint32(6145)},
 			{Name: "GL_DEPTH", Value: uint32(6145)},
-			{Name: "GL_STENCIL_EXT", Value: uint32(6146)},
 			{Name: "GL_STENCIL", Value: uint32(6146)},
+			{Name: "GL_STENCIL_EXT", Value: uint32(6146)},
 			{Name: "GL_COLOR_INDEX", Value: uint32(6400)},
 			{Name: "GL_STENCIL_INDEX_OES", Value: uint32(6401)},
 			{Name: "GL_STENCIL_INDEX", Value: uint32(6401)},
 			{Name: "GL_DEPTH_COMPONENT", Value: uint32(6402)},
 			{Name: "GL_RED", Value: uint32(6403)},
-			{Name: "GL_RED_NV", Value: uint32(6403)},
 			{Name: "GL_RED_EXT", Value: uint32(6403)},
-			{Name: "GL_GREEN_NV", Value: uint32(6404)},
+			{Name: "GL_RED_NV", Value: uint32(6403)},
 			{Name: "GL_GREEN", Value: uint32(6404)},
-			{Name: "GL_BLUE", Value: uint32(6405)},
+			{Name: "GL_GREEN_NV", Value: uint32(6404)},
 			{Name: "GL_BLUE_NV", Value: uint32(6405)},
+			{Name: "GL_BLUE", Value: uint32(6405)},
 			{Name: "GL_ALPHA", Value: uint32(6406)},
 			{Name: "GL_RGB", Value: uint32(6407)},
 			{Name: "GL_RGBA", Value: uint32(6408)},
@@ -83253,10 +86621,10 @@ func init() {
 			{Name: "GL_BITMAP", Value: uint32(6656)},
 			{Name: "GL_POINT_NV", Value: uint32(6912)},
 			{Name: "GL_POINT", Value: uint32(6912)},
-			{Name: "GL_LINE_NV", Value: uint32(6913)},
 			{Name: "GL_LINE", Value: uint32(6913)},
-			{Name: "GL_FILL", Value: uint32(6914)},
+			{Name: "GL_LINE_NV", Value: uint32(6913)},
 			{Name: "GL_FILL_NV", Value: uint32(6914)},
+			{Name: "GL_FILL", Value: uint32(6914)},
 			{Name: "GL_RENDER", Value: uint32(7168)},
 			{Name: "GL_FEEDBACK", Value: uint32(7169)},
 			{Name: "GL_SELECT", Value: uint32(7170)},
@@ -83284,8 +86652,8 @@ func init() {
 			{Name: "GL_OBJECT_LINEAR_NV", Value: uint32(9217)},
 			{Name: "GL_OBJECT_LINEAR", Value: uint32(9217)},
 			{Name: "GL_SPHERE_MAP", Value: uint32(9218)},
-			{Name: "GL_TEXTURE_GEN_MODE", Value: uint32(9472)},
 			{Name: "GL_TEXTURE_GEN_MODE_OES", Value: uint32(9472)},
+			{Name: "GL_TEXTURE_GEN_MODE", Value: uint32(9472)},
 			{Name: "GL_OBJECT_PLANE", Value: uint32(9473)},
 			{Name: "GL_EYE_PLANE", Value: uint32(9474)},
 			{Name: "GL_NEAREST", Value: uint32(9728)},
@@ -83301,10 +86669,10 @@ func init() {
 			{Name: "GL_CLAMP", Value: uint32(10496)},
 			{Name: "GL_REPEAT", Value: uint32(10497)},
 			{Name: "GL_POLYGON_OFFSET_UNITS", Value: uint32(10752)},
-			{Name: "GL_POLYGON_OFFSET_POINT", Value: uint32(10753)},
 			{Name: "GL_POLYGON_OFFSET_POINT_NV", Value: uint32(10753)},
-			{Name: "GL_POLYGON_OFFSET_LINE_NV", Value: uint32(10754)},
+			{Name: "GL_POLYGON_OFFSET_POINT", Value: uint32(10753)},
 			{Name: "GL_POLYGON_OFFSET_LINE", Value: uint32(10754)},
+			{Name: "GL_POLYGON_OFFSET_LINE_NV", Value: uint32(10754)},
 			{Name: "GL_R3_G3_B2", Value: uint32(10768)},
 			{Name: "GL_V2F", Value: uint32(10784)},
 			{Name: "GL_V3F", Value: uint32(10785)},
@@ -83320,32 +86688,32 @@ func init() {
 			{Name: "GL_T2F_N3F_V3F", Value: uint32(10795)},
 			{Name: "GL_T2F_C4F_N3F_V3F", Value: uint32(10796)},
 			{Name: "GL_T4F_C4F_N3F_V4F", Value: uint32(10797)},
-			{Name: "GL_CLIP_DISTANCE0", Value: uint32(12288)},
 			{Name: "GL_CLIP_DISTANCE0_APPLE", Value: uint32(12288)},
 			{Name: "GL_CLIP_PLANE0", Value: uint32(12288)},
 			{Name: "GL_CLIP_PLANE0_IMG", Value: uint32(12288)},
-			{Name: "GL_CLIP_DISTANCE1", Value: uint32(12289)},
-			{Name: "GL_CLIP_PLANE1_IMG", Value: uint32(12289)},
-			{Name: "GL_CLIP_DISTANCE1_APPLE", Value: uint32(12289)},
+			{Name: "GL_CLIP_DISTANCE0", Value: uint32(12288)},
 			{Name: "GL_CLIP_PLANE1", Value: uint32(12289)},
+			{Name: "GL_CLIP_DISTANCE1", Value: uint32(12289)},
+			{Name: "GL_CLIP_DISTANCE1_APPLE", Value: uint32(12289)},
+			{Name: "GL_CLIP_PLANE1_IMG", Value: uint32(12289)},
 			{Name: "GL_CLIP_DISTANCE2_APPLE", Value: uint32(12290)},
-			{Name: "GL_CLIP_PLANE2_IMG", Value: uint32(12290)},
-			{Name: "GL_CLIP_DISTANCE2", Value: uint32(12290)},
 			{Name: "GL_CLIP_PLANE2", Value: uint32(12290)},
+			{Name: "GL_CLIP_DISTANCE2", Value: uint32(12290)},
+			{Name: "GL_CLIP_PLANE2_IMG", Value: uint32(12290)},
 			{Name: "GL_CLIP_PLANE3", Value: uint32(12291)},
-			{Name: "GL_CLIP_DISTANCE3", Value: uint32(12291)},
 			{Name: "GL_CLIP_DISTANCE3_APPLE", Value: uint32(12291)},
+			{Name: "GL_CLIP_DISTANCE3", Value: uint32(12291)},
 			{Name: "GL_CLIP_PLANE3_IMG", Value: uint32(12291)},
 			{Name: "GL_CLIP_PLANE4", Value: uint32(12292)},
-			{Name: "GL_CLIP_DISTANCE4_APPLE", Value: uint32(12292)},
-			{Name: "GL_CLIP_DISTANCE4", Value: uint32(12292)},
 			{Name: "GL_CLIP_PLANE4_IMG", Value: uint32(12292)},
+			{Name: "GL_CLIP_DISTANCE4", Value: uint32(12292)},
+			{Name: "GL_CLIP_DISTANCE4_APPLE", Value: uint32(12292)},
 			{Name: "GL_CLIP_PLANE5_IMG", Value: uint32(12293)},
 			{Name: "GL_CLIP_DISTANCE5", Value: uint32(12293)},
 			{Name: "GL_CLIP_PLANE5", Value: uint32(12293)},
 			{Name: "GL_CLIP_DISTANCE5_APPLE", Value: uint32(12293)},
-			{Name: "GL_CLIP_DISTANCE6_APPLE", Value: uint32(12294)},
 			{Name: "GL_CLIP_DISTANCE6", Value: uint32(12294)},
+			{Name: "GL_CLIP_DISTANCE6_APPLE", Value: uint32(12294)},
 			{Name: "GL_CLIP_DISTANCE7", Value: uint32(12295)},
 			{Name: "GL_CLIP_DISTANCE7_APPLE", Value: uint32(12295)},
 			{Name: "GL_LIGHT0", Value: uint32(16384)},
@@ -83357,32 +86725,32 @@ func init() {
 			{Name: "GL_LIGHT6", Value: uint32(16390)},
 			{Name: "GL_LIGHT7", Value: uint32(16391)},
 			{Name: "GL_ABGR_EXT", Value: uint32(32768)},
-			{Name: "GL_CONSTANT_COLOR_EXT", Value: uint32(32769)},
 			{Name: "GL_CONSTANT_COLOR", Value: uint32(32769)},
-			{Name: "GL_ONE_MINUS_CONSTANT_COLOR_EXT", Value: uint32(32770)},
+			{Name: "GL_CONSTANT_COLOR_EXT", Value: uint32(32769)},
 			{Name: "GL_ONE_MINUS_CONSTANT_COLOR", Value: uint32(32770)},
+			{Name: "GL_ONE_MINUS_CONSTANT_COLOR_EXT", Value: uint32(32770)},
 			{Name: "GL_CONSTANT_ALPHA", Value: uint32(32771)},
 			{Name: "GL_CONSTANT_ALPHA_EXT", Value: uint32(32771)},
-			{Name: "GL_ONE_MINUS_CONSTANT_ALPHA", Value: uint32(32772)},
 			{Name: "GL_ONE_MINUS_CONSTANT_ALPHA_EXT", Value: uint32(32772)},
-			{Name: "GL_BLEND_COLOR", Value: uint32(32773)},
+			{Name: "GL_ONE_MINUS_CONSTANT_ALPHA", Value: uint32(32772)},
 			{Name: "GL_BLEND_COLOR_EXT", Value: uint32(32773)},
-			{Name: "GL_FUNC_ADD_OES", Value: uint32(32774)},
+			{Name: "GL_BLEND_COLOR", Value: uint32(32773)},
 			{Name: "GL_FUNC_ADD", Value: uint32(32774)},
 			{Name: "GL_FUNC_ADD_EXT", Value: uint32(32774)},
+			{Name: "GL_FUNC_ADD_OES", Value: uint32(32774)},
 			{Name: "GL_MIN_EXT", Value: uint32(32775)},
 			{Name: "GL_MIN", Value: uint32(32775)},
-			{Name: "GL_MAX_EXT", Value: uint32(32776)},
 			{Name: "GL_MAX", Value: uint32(32776)},
-			{Name: "GL_BLEND_EQUATION_EXT", Value: uint32(32777)},
-			{Name: "GL_BLEND_EQUATION_RGB_OES", Value: uint32(32777)},
+			{Name: "GL_MAX_EXT", Value: uint32(32776)},
+			{Name: "GL_BLEND_EQUATION_RGB_EXT", Value: uint32(32777)},
+			{Name: "GL_BLEND_EQUATION_RGB", Value: uint32(32777)},
 			{Name: "GL_BLEND_EQUATION_OES", Value: uint32(32777)},
 			{Name: "GL_BLEND_EQUATION", Value: uint32(32777)},
-			{Name: "GL_BLEND_EQUATION_RGB", Value: uint32(32777)},
-			{Name: "GL_BLEND_EQUATION_RGB_EXT", Value: uint32(32777)},
-			{Name: "GL_FUNC_SUBTRACT_OES", Value: uint32(32778)},
+			{Name: "GL_BLEND_EQUATION_EXT", Value: uint32(32777)},
+			{Name: "GL_BLEND_EQUATION_RGB_OES", Value: uint32(32777)},
 			{Name: "GL_FUNC_SUBTRACT", Value: uint32(32778)},
 			{Name: "GL_FUNC_SUBTRACT_EXT", Value: uint32(32778)},
+			{Name: "GL_FUNC_SUBTRACT_OES", Value: uint32(32778)},
 			{Name: "GL_FUNC_REVERSE_SUBTRACT_OES", Value: uint32(32779)},
 			{Name: "GL_FUNC_REVERSE_SUBTRACT", Value: uint32(32779)},
 			{Name: "GL_FUNC_REVERSE_SUBTRACT_EXT", Value: uint32(32779)},
@@ -83390,28 +86758,28 @@ func init() {
 			{Name: "GL_CMYKA_EXT", Value: uint32(32781)},
 			{Name: "GL_PACK_CMYK_HINT_EXT", Value: uint32(32782)},
 			{Name: "GL_UNPACK_CMYK_HINT_EXT", Value: uint32(32783)},
-			{Name: "GL_CONVOLUTION_1D_EXT", Value: uint32(32784)},
 			{Name: "GL_CONVOLUTION_1D", Value: uint32(32784)},
-			{Name: "GL_CONVOLUTION_2D", Value: uint32(32785)},
+			{Name: "GL_CONVOLUTION_1D_EXT", Value: uint32(32784)},
 			{Name: "GL_CONVOLUTION_2D_EXT", Value: uint32(32785)},
-			{Name: "GL_SEPARABLE_2D_EXT", Value: uint32(32786)},
+			{Name: "GL_CONVOLUTION_2D", Value: uint32(32785)},
 			{Name: "GL_SEPARABLE_2D", Value: uint32(32786)},
+			{Name: "GL_SEPARABLE_2D_EXT", Value: uint32(32786)},
 			{Name: "GL_CONVOLUTION_BORDER_MODE_EXT", Value: uint32(32787)},
 			{Name: "GL_CONVOLUTION_BORDER_MODE", Value: uint32(32787)},
-			{Name: "GL_CONVOLUTION_FILTER_SCALE_EXT", Value: uint32(32788)},
 			{Name: "GL_CONVOLUTION_FILTER_SCALE", Value: uint32(32788)},
-			{Name: "GL_CONVOLUTION_FILTER_BIAS_EXT", Value: uint32(32789)},
+			{Name: "GL_CONVOLUTION_FILTER_SCALE_EXT", Value: uint32(32788)},
 			{Name: "GL_CONVOLUTION_FILTER_BIAS", Value: uint32(32789)},
+			{Name: "GL_CONVOLUTION_FILTER_BIAS_EXT", Value: uint32(32789)},
 			{Name: "GL_REDUCE", Value: uint32(32790)},
 			{Name: "GL_REDUCE_EXT", Value: uint32(32790)},
 			{Name: "GL_CONVOLUTION_FORMAT", Value: uint32(32791)},
 			{Name: "GL_CONVOLUTION_FORMAT_EXT", Value: uint32(32791)},
-			{Name: "GL_CONVOLUTION_WIDTH_EXT", Value: uint32(32792)},
 			{Name: "GL_CONVOLUTION_WIDTH", Value: uint32(32792)},
-			{Name: "GL_CONVOLUTION_HEIGHT", Value: uint32(32793)},
+			{Name: "GL_CONVOLUTION_WIDTH_EXT", Value: uint32(32792)},
 			{Name: "GL_CONVOLUTION_HEIGHT_EXT", Value: uint32(32793)},
-			{Name: "GL_MAX_CONVOLUTION_WIDTH", Value: uint32(32794)},
+			{Name: "GL_CONVOLUTION_HEIGHT", Value: uint32(32793)},
 			{Name: "GL_MAX_CONVOLUTION_WIDTH_EXT", Value: uint32(32794)},
+			{Name: "GL_MAX_CONVOLUTION_WIDTH", Value: uint32(32794)},
 			{Name: "GL_MAX_CONVOLUTION_HEIGHT_EXT", Value: uint32(32795)},
 			{Name: "GL_MAX_CONVOLUTION_HEIGHT", Value: uint32(32795)},
 			{Name: "GL_POST_CONVOLUTION_RED_SCALE", Value: uint32(32796)},
@@ -83422,147 +86790,147 @@ func init() {
 			{Name: "GL_POST_CONVOLUTION_BLUE_SCALE_EXT", Value: uint32(32798)},
 			{Name: "GL_POST_CONVOLUTION_ALPHA_SCALE", Value: uint32(32799)},
 			{Name: "GL_POST_CONVOLUTION_ALPHA_SCALE_EXT", Value: uint32(32799)},
-			{Name: "GL_POST_CONVOLUTION_RED_BIAS_EXT", Value: uint32(32800)},
 			{Name: "GL_POST_CONVOLUTION_RED_BIAS", Value: uint32(32800)},
-			{Name: "GL_POST_CONVOLUTION_GREEN_BIAS_EXT", Value: uint32(32801)},
+			{Name: "GL_POST_CONVOLUTION_RED_BIAS_EXT", Value: uint32(32800)},
 			{Name: "GL_POST_CONVOLUTION_GREEN_BIAS", Value: uint32(32801)},
-			{Name: "GL_POST_CONVOLUTION_BLUE_BIAS", Value: uint32(32802)},
+			{Name: "GL_POST_CONVOLUTION_GREEN_BIAS_EXT", Value: uint32(32801)},
 			{Name: "GL_POST_CONVOLUTION_BLUE_BIAS_EXT", Value: uint32(32802)},
+			{Name: "GL_POST_CONVOLUTION_BLUE_BIAS", Value: uint32(32802)},
 			{Name: "GL_POST_CONVOLUTION_ALPHA_BIAS", Value: uint32(32803)},
 			{Name: "GL_POST_CONVOLUTION_ALPHA_BIAS_EXT", Value: uint32(32803)},
-			{Name: "GL_HISTOGRAM", Value: uint32(32804)},
 			{Name: "GL_HISTOGRAM_EXT", Value: uint32(32804)},
+			{Name: "GL_HISTOGRAM", Value: uint32(32804)},
 			{Name: "GL_PROXY_HISTOGRAM_EXT", Value: uint32(32805)},
 			{Name: "GL_PROXY_HISTOGRAM", Value: uint32(32805)},
-			{Name: "GL_HISTOGRAM_WIDTH", Value: uint32(32806)},
 			{Name: "GL_HISTOGRAM_WIDTH_EXT", Value: uint32(32806)},
+			{Name: "GL_HISTOGRAM_WIDTH", Value: uint32(32806)},
 			{Name: "GL_HISTOGRAM_FORMAT_EXT", Value: uint32(32807)},
 			{Name: "GL_HISTOGRAM_FORMAT", Value: uint32(32807)},
-			{Name: "GL_HISTOGRAM_RED_SIZE", Value: uint32(32808)},
 			{Name: "GL_HISTOGRAM_RED_SIZE_EXT", Value: uint32(32808)},
-			{Name: "GL_HISTOGRAM_GREEN_SIZE", Value: uint32(32809)},
+			{Name: "GL_HISTOGRAM_RED_SIZE", Value: uint32(32808)},
 			{Name: "GL_HISTOGRAM_GREEN_SIZE_EXT", Value: uint32(32809)},
-			{Name: "GL_HISTOGRAM_BLUE_SIZE", Value: uint32(32810)},
+			{Name: "GL_HISTOGRAM_GREEN_SIZE", Value: uint32(32809)},
 			{Name: "GL_HISTOGRAM_BLUE_SIZE_EXT", Value: uint32(32810)},
+			{Name: "GL_HISTOGRAM_BLUE_SIZE", Value: uint32(32810)},
 			{Name: "GL_HISTOGRAM_ALPHA_SIZE", Value: uint32(32811)},
 			{Name: "GL_HISTOGRAM_ALPHA_SIZE_EXT", Value: uint32(32811)},
-			{Name: "GL_HISTOGRAM_LUMINANCE_SIZE_EXT", Value: uint32(32812)},
 			{Name: "GL_HISTOGRAM_LUMINANCE_SIZE", Value: uint32(32812)},
-			{Name: "GL_HISTOGRAM_SINK", Value: uint32(32813)},
+			{Name: "GL_HISTOGRAM_LUMINANCE_SIZE_EXT", Value: uint32(32812)},
 			{Name: "GL_HISTOGRAM_SINK_EXT", Value: uint32(32813)},
-			{Name: "GL_MINMAX", Value: uint32(32814)},
+			{Name: "GL_HISTOGRAM_SINK", Value: uint32(32813)},
 			{Name: "GL_MINMAX_EXT", Value: uint32(32814)},
-			{Name: "GL_MINMAX_FORMAT_EXT", Value: uint32(32815)},
+			{Name: "GL_MINMAX", Value: uint32(32814)},
 			{Name: "GL_MINMAX_FORMAT", Value: uint32(32815)},
-			{Name: "GL_MINMAX_SINK", Value: uint32(32816)},
+			{Name: "GL_MINMAX_FORMAT_EXT", Value: uint32(32815)},
 			{Name: "GL_MINMAX_SINK_EXT", Value: uint32(32816)},
+			{Name: "GL_MINMAX_SINK", Value: uint32(32816)},
 			{Name: "GL_TABLE_TOO_LARGE_EXT", Value: uint32(32817)},
 			{Name: "GL_TABLE_TOO_LARGE", Value: uint32(32817)},
-			{Name: "GL_UNSIGNED_BYTE_3_3_2_EXT", Value: uint32(32818)},
 			{Name: "GL_UNSIGNED_BYTE_3_3_2", Value: uint32(32818)},
+			{Name: "GL_UNSIGNED_BYTE_3_3_2_EXT", Value: uint32(32818)},
 			{Name: "GL_UNSIGNED_SHORT_4_4_4_4", Value: uint32(32819)},
 			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_EXT", Value: uint32(32819)},
-			{Name: "GL_UNSIGNED_SHORT_5_5_5_1", Value: uint32(32820)},
 			{Name: "GL_UNSIGNED_SHORT_5_5_5_1_EXT", Value: uint32(32820)},
+			{Name: "GL_UNSIGNED_SHORT_5_5_5_1", Value: uint32(32820)},
 			{Name: "GL_UNSIGNED_INT_8_8_8_8_EXT", Value: uint32(32821)},
 			{Name: "GL_UNSIGNED_INT_8_8_8_8", Value: uint32(32821)},
-			{Name: "GL_UNSIGNED_INT_10_10_10_2_EXT", Value: uint32(32822)},
 			{Name: "GL_UNSIGNED_INT_10_10_10_2", Value: uint32(32822)},
-			{Name: "GL_POLYGON_OFFSET_EXT", Value: uint32(32823)},
+			{Name: "GL_UNSIGNED_INT_10_10_10_2_EXT", Value: uint32(32822)},
 			{Name: "GL_POLYGON_OFFSET_FILL", Value: uint32(32823)},
-			{Name: "GL_POLYGON_OFFSET_FACTOR", Value: uint32(32824)},
+			{Name: "GL_POLYGON_OFFSET_EXT", Value: uint32(32823)},
 			{Name: "GL_POLYGON_OFFSET_FACTOR_EXT", Value: uint32(32824)},
+			{Name: "GL_POLYGON_OFFSET_FACTOR", Value: uint32(32824)},
 			{Name: "GL_POLYGON_OFFSET_BIAS_EXT", Value: uint32(32825)},
-			{Name: "GL_RESCALE_NORMAL_EXT", Value: uint32(32826)},
 			{Name: "GL_RESCALE_NORMAL", Value: uint32(32826)},
+			{Name: "GL_RESCALE_NORMAL_EXT", Value: uint32(32826)},
 			{Name: "GL_ALPHA4_EXT", Value: uint32(32827)},
 			{Name: "GL_ALPHA4", Value: uint32(32827)},
 			{Name: "GL_ALPHA8_EXT", Value: uint32(32828)},
-			{Name: "GL_ALPHA8_OES", Value: uint32(32828)},
 			{Name: "GL_ALPHA8", Value: uint32(32828)},
-			{Name: "GL_ALPHA12", Value: uint32(32829)},
+			{Name: "GL_ALPHA8_OES", Value: uint32(32828)},
 			{Name: "GL_ALPHA12_EXT", Value: uint32(32829)},
+			{Name: "GL_ALPHA12", Value: uint32(32829)},
 			{Name: "GL_ALPHA16", Value: uint32(32830)},
 			{Name: "GL_ALPHA16_EXT", Value: uint32(32830)},
 			{Name: "GL_LUMINANCE4", Value: uint32(32831)},
 			{Name: "GL_LUMINANCE4_EXT", Value: uint32(32831)},
 			{Name: "GL_LUMINANCE8_OES", Value: uint32(32832)},
-			{Name: "GL_LUMINANCE8_EXT", Value: uint32(32832)},
 			{Name: "GL_LUMINANCE8", Value: uint32(32832)},
-			{Name: "GL_LUMINANCE12_EXT", Value: uint32(32833)},
+			{Name: "GL_LUMINANCE8_EXT", Value: uint32(32832)},
 			{Name: "GL_LUMINANCE12", Value: uint32(32833)},
-			{Name: "GL_LUMINANCE16_EXT", Value: uint32(32834)},
+			{Name: "GL_LUMINANCE12_EXT", Value: uint32(32833)},
 			{Name: "GL_LUMINANCE16", Value: uint32(32834)},
-			{Name: "GL_LUMINANCE4_ALPHA4_OES", Value: uint32(32835)},
-			{Name: "GL_LUMINANCE4_ALPHA4", Value: uint32(32835)},
+			{Name: "GL_LUMINANCE16_EXT", Value: uint32(32834)},
 			{Name: "GL_LUMINANCE4_ALPHA4_EXT", Value: uint32(32835)},
+			{Name: "GL_LUMINANCE4_ALPHA4", Value: uint32(32835)},
+			{Name: "GL_LUMINANCE4_ALPHA4_OES", Value: uint32(32835)},
 			{Name: "GL_LUMINANCE6_ALPHA2", Value: uint32(32836)},
 			{Name: "GL_LUMINANCE6_ALPHA2_EXT", Value: uint32(32836)},
-			{Name: "GL_LUMINANCE8_ALPHA8_EXT", Value: uint32(32837)},
-			{Name: "GL_LUMINANCE8_ALPHA8", Value: uint32(32837)},
 			{Name: "GL_LUMINANCE8_ALPHA8_OES", Value: uint32(32837)},
+			{Name: "GL_LUMINANCE8_ALPHA8", Value: uint32(32837)},
+			{Name: "GL_LUMINANCE8_ALPHA8_EXT", Value: uint32(32837)},
 			{Name: "GL_LUMINANCE12_ALPHA4", Value: uint32(32838)},
 			{Name: "GL_LUMINANCE12_ALPHA4_EXT", Value: uint32(32838)},
 			{Name: "GL_LUMINANCE12_ALPHA12_EXT", Value: uint32(32839)},
 			{Name: "GL_LUMINANCE12_ALPHA12", Value: uint32(32839)},
-			{Name: "GL_LUMINANCE16_ALPHA16_EXT", Value: uint32(32840)},
 			{Name: "GL_LUMINANCE16_ALPHA16", Value: uint32(32840)},
-			{Name: "GL_INTENSITY_EXT", Value: uint32(32841)},
+			{Name: "GL_LUMINANCE16_ALPHA16_EXT", Value: uint32(32840)},
 			{Name: "GL_INTENSITY", Value: uint32(32841)},
+			{Name: "GL_INTENSITY_EXT", Value: uint32(32841)},
 			{Name: "GL_INTENSITY4", Value: uint32(32842)},
 			{Name: "GL_INTENSITY4_EXT", Value: uint32(32842)},
 			{Name: "GL_INTENSITY8_EXT", Value: uint32(32843)},
 			{Name: "GL_INTENSITY8", Value: uint32(32843)},
 			{Name: "GL_INTENSITY12", Value: uint32(32844)},
 			{Name: "GL_INTENSITY12_EXT", Value: uint32(32844)},
-			{Name: "GL_INTENSITY16", Value: uint32(32845)},
 			{Name: "GL_INTENSITY16_EXT", Value: uint32(32845)},
+			{Name: "GL_INTENSITY16", Value: uint32(32845)},
 			{Name: "GL_RGB2_EXT", Value: uint32(32846)},
 			{Name: "GL_RGB4", Value: uint32(32847)},
 			{Name: "GL_RGB4_EXT", Value: uint32(32847)},
-			{Name: "GL_RGB5_EXT", Value: uint32(32848)},
 			{Name: "GL_RGB5", Value: uint32(32848)},
+			{Name: "GL_RGB5_EXT", Value: uint32(32848)},
 			{Name: "GL_RGB8", Value: uint32(32849)},
 			{Name: "GL_RGB8_OES", Value: uint32(32849)},
 			{Name: "GL_RGB8_EXT", Value: uint32(32849)},
-			{Name: "GL_RGB10_EXT", Value: uint32(32850)},
 			{Name: "GL_RGB10", Value: uint32(32850)},
-			{Name: "GL_RGB12", Value: uint32(32851)},
+			{Name: "GL_RGB10_EXT", Value: uint32(32850)},
 			{Name: "GL_RGB12_EXT", Value: uint32(32851)},
-			{Name: "GL_RGB16", Value: uint32(32852)},
+			{Name: "GL_RGB12", Value: uint32(32851)},
 			{Name: "GL_RGB16_EXT", Value: uint32(32852)},
+			{Name: "GL_RGB16", Value: uint32(32852)},
 			{Name: "GL_RGBA2", Value: uint32(32853)},
 			{Name: "GL_RGBA2_EXT", Value: uint32(32853)},
-			{Name: "GL_RGBA4_EXT", Value: uint32(32854)},
 			{Name: "GL_RGBA4_OES", Value: uint32(32854)},
+			{Name: "GL_RGBA4_EXT", Value: uint32(32854)},
 			{Name: "GL_RGBA4", Value: uint32(32854)},
+			{Name: "GL_RGB5_A1_EXT", Value: uint32(32855)},
 			{Name: "GL_RGB5_A1_OES", Value: uint32(32855)},
 			{Name: "GL_RGB5_A1", Value: uint32(32855)},
-			{Name: "GL_RGB5_A1_EXT", Value: uint32(32855)},
-			{Name: "GL_RGBA8_EXT", Value: uint32(32856)},
 			{Name: "GL_RGBA8", Value: uint32(32856)},
+			{Name: "GL_RGBA8_EXT", Value: uint32(32856)},
 			{Name: "GL_RGBA8_OES", Value: uint32(32856)},
 			{Name: "GL_RGB10_A2_EXT", Value: uint32(32857)},
 			{Name: "GL_RGB10_A2", Value: uint32(32857)},
-			{Name: "GL_RGBA12_EXT", Value: uint32(32858)},
 			{Name: "GL_RGBA12", Value: uint32(32858)},
-			{Name: "GL_RGBA16", Value: uint32(32859)},
+			{Name: "GL_RGBA12_EXT", Value: uint32(32858)},
 			{Name: "GL_RGBA16_EXT", Value: uint32(32859)},
+			{Name: "GL_RGBA16", Value: uint32(32859)},
 			{Name: "GL_TEXTURE_RED_SIZE_EXT", Value: uint32(32860)},
 			{Name: "GL_TEXTURE_RED_SIZE", Value: uint32(32860)},
 			{Name: "GL_TEXTURE_GREEN_SIZE", Value: uint32(32861)},
 			{Name: "GL_TEXTURE_GREEN_SIZE_EXT", Value: uint32(32861)},
-			{Name: "GL_TEXTURE_BLUE_SIZE_EXT", Value: uint32(32862)},
 			{Name: "GL_TEXTURE_BLUE_SIZE", Value: uint32(32862)},
-			{Name: "GL_TEXTURE_ALPHA_SIZE_EXT", Value: uint32(32863)},
+			{Name: "GL_TEXTURE_BLUE_SIZE_EXT", Value: uint32(32862)},
 			{Name: "GL_TEXTURE_ALPHA_SIZE", Value: uint32(32863)},
-			{Name: "GL_TEXTURE_LUMINANCE_SIZE_EXT", Value: uint32(32864)},
+			{Name: "GL_TEXTURE_ALPHA_SIZE_EXT", Value: uint32(32863)},
 			{Name: "GL_TEXTURE_LUMINANCE_SIZE", Value: uint32(32864)},
+			{Name: "GL_TEXTURE_LUMINANCE_SIZE_EXT", Value: uint32(32864)},
 			{Name: "GL_TEXTURE_INTENSITY_SIZE", Value: uint32(32865)},
 			{Name: "GL_TEXTURE_INTENSITY_SIZE_EXT", Value: uint32(32865)},
 			{Name: "GL_REPLACE_EXT", Value: uint32(32866)},
-			{Name: "GL_PROXY_TEXTURE_1D_EXT", Value: uint32(32867)},
 			{Name: "GL_PROXY_TEXTURE_1D", Value: uint32(32867)},
+			{Name: "GL_PROXY_TEXTURE_1D_EXT", Value: uint32(32867)},
 			{Name: "GL_PROXY_TEXTURE_2D_EXT", Value: uint32(32868)},
 			{Name: "GL_PROXY_TEXTURE_2D", Value: uint32(32868)},
 			{Name: "GL_TEXTURE_TOO_LARGE_EXT", Value: uint32(32869)},
@@ -83570,24 +86938,24 @@ func init() {
 			{Name: "GL_TEXTURE_PRIORITY_EXT", Value: uint32(32870)},
 			{Name: "GL_TEXTURE_RESIDENT", Value: uint32(32871)},
 			{Name: "GL_TEXTURE_RESIDENT_EXT", Value: uint32(32871)},
-			{Name: "GL_TEXTURE_1D_BINDING_EXT", Value: uint32(32872)},
 			{Name: "GL_TEXTURE_BINDING_1D", Value: uint32(32872)},
+			{Name: "GL_TEXTURE_1D_BINDING_EXT", Value: uint32(32872)},
 			{Name: "GL_TEXTURE_2D_BINDING_EXT", Value: uint32(32873)},
 			{Name: "GL_TEXTURE_BINDING_2D", Value: uint32(32873)},
 			{Name: "GL_TEXTURE_BINDING_3D_OES", Value: uint32(32874)},
+			{Name: "GL_TEXTURE_3D_BINDING_EXT", Value: uint32(32874)},
 			{Name: "GL_TEXTURE_3D_BINDING_OES", Value: uint32(32874)},
 			{Name: "GL_TEXTURE_BINDING_3D", Value: uint32(32874)},
-			{Name: "GL_TEXTURE_3D_BINDING_EXT", Value: uint32(32874)},
 			{Name: "GL_PACK_SKIP_IMAGES", Value: uint32(32875)},
 			{Name: "GL_PACK_SKIP_IMAGES_EXT", Value: uint32(32875)},
-			{Name: "GL_PACK_IMAGE_HEIGHT", Value: uint32(32876)},
 			{Name: "GL_PACK_IMAGE_HEIGHT_EXT", Value: uint32(32876)},
+			{Name: "GL_PACK_IMAGE_HEIGHT", Value: uint32(32876)},
 			{Name: "GL_UNPACK_SKIP_IMAGES_EXT", Value: uint32(32877)},
 			{Name: "GL_UNPACK_SKIP_IMAGES", Value: uint32(32877)},
 			{Name: "GL_UNPACK_IMAGE_HEIGHT", Value: uint32(32878)},
 			{Name: "GL_UNPACK_IMAGE_HEIGHT_EXT", Value: uint32(32878)},
-			{Name: "GL_TEXTURE_3D_OES", Value: uint32(32879)},
 			{Name: "GL_TEXTURE_3D", Value: uint32(32879)},
+			{Name: "GL_TEXTURE_3D_OES", Value: uint32(32879)},
 			{Name: "GL_TEXTURE_3D_EXT", Value: uint32(32879)},
 			{Name: "GL_PROXY_TEXTURE_3D", Value: uint32(32880)},
 			{Name: "GL_PROXY_TEXTURE_3D_EXT", Value: uint32(32880)},
@@ -83597,27 +86965,27 @@ func init() {
 			{Name: "GL_TEXTURE_WRAP_R_EXT", Value: uint32(32882)},
 			{Name: "GL_TEXTURE_WRAP_R_OES", Value: uint32(32882)},
 			{Name: "GL_MAX_3D_TEXTURE_SIZE_OES", Value: uint32(32883)},
-			{Name: "GL_MAX_3D_TEXTURE_SIZE", Value: uint32(32883)},
 			{Name: "GL_MAX_3D_TEXTURE_SIZE_EXT", Value: uint32(32883)},
-			{Name: "GL_VERTEX_ARRAY", Value: uint32(32884)},
-			{Name: "GL_VERTEX_ARRAY_KHR", Value: uint32(32884)},
+			{Name: "GL_MAX_3D_TEXTURE_SIZE", Value: uint32(32883)},
 			{Name: "GL_VERTEX_ARRAY_EXT", Value: uint32(32884)},
+			{Name: "GL_VERTEX_ARRAY_KHR", Value: uint32(32884)},
+			{Name: "GL_VERTEX_ARRAY", Value: uint32(32884)},
 			{Name: "GL_NORMAL_ARRAY", Value: uint32(32885)},
 			{Name: "GL_NORMAL_ARRAY_EXT", Value: uint32(32885)},
-			{Name: "GL_COLOR_ARRAY", Value: uint32(32886)},
 			{Name: "GL_COLOR_ARRAY_EXT", Value: uint32(32886)},
-			{Name: "GL_INDEX_ARRAY_EXT", Value: uint32(32887)},
+			{Name: "GL_COLOR_ARRAY", Value: uint32(32886)},
 			{Name: "GL_INDEX_ARRAY", Value: uint32(32887)},
+			{Name: "GL_INDEX_ARRAY_EXT", Value: uint32(32887)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_EXT", Value: uint32(32888)},
 			{Name: "GL_TEXTURE_COORD_ARRAY", Value: uint32(32888)},
-			{Name: "GL_EDGE_FLAG_ARRAY", Value: uint32(32889)},
 			{Name: "GL_EDGE_FLAG_ARRAY_EXT", Value: uint32(32889)},
+			{Name: "GL_EDGE_FLAG_ARRAY", Value: uint32(32889)},
 			{Name: "GL_VERTEX_ARRAY_SIZE", Value: uint32(32890)},
 			{Name: "GL_VERTEX_ARRAY_SIZE_EXT", Value: uint32(32890)},
-			{Name: "GL_VERTEX_ARRAY_TYPE", Value: uint32(32891)},
 			{Name: "GL_VERTEX_ARRAY_TYPE_EXT", Value: uint32(32891)},
-			{Name: "GL_VERTEX_ARRAY_STRIDE_EXT", Value: uint32(32892)},
+			{Name: "GL_VERTEX_ARRAY_TYPE", Value: uint32(32891)},
 			{Name: "GL_VERTEX_ARRAY_STRIDE", Value: uint32(32892)},
+			{Name: "GL_VERTEX_ARRAY_STRIDE_EXT", Value: uint32(32892)},
 			{Name: "GL_VERTEX_ARRAY_COUNT_EXT", Value: uint32(32893)},
 			{Name: "GL_NORMAL_ARRAY_TYPE", Value: uint32(32894)},
 			{Name: "GL_NORMAL_ARRAY_TYPE_EXT", Value: uint32(32894)},
@@ -83631,20 +86999,20 @@ func init() {
 			{Name: "GL_COLOR_ARRAY_STRIDE_EXT", Value: uint32(32899)},
 			{Name: "GL_COLOR_ARRAY_STRIDE", Value: uint32(32899)},
 			{Name: "GL_COLOR_ARRAY_COUNT_EXT", Value: uint32(32900)},
-			{Name: "GL_INDEX_ARRAY_TYPE_EXT", Value: uint32(32901)},
 			{Name: "GL_INDEX_ARRAY_TYPE", Value: uint32(32901)},
+			{Name: "GL_INDEX_ARRAY_TYPE_EXT", Value: uint32(32901)},
 			{Name: "GL_INDEX_ARRAY_STRIDE", Value: uint32(32902)},
 			{Name: "GL_INDEX_ARRAY_STRIDE_EXT", Value: uint32(32902)},
 			{Name: "GL_INDEX_ARRAY_COUNT_EXT", Value: uint32(32903)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_SIZE", Value: uint32(32904)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_SIZE_EXT", Value: uint32(32904)},
-			{Name: "GL_TEXTURE_COORD_ARRAY_TYPE", Value: uint32(32905)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_TYPE_EXT", Value: uint32(32905)},
+			{Name: "GL_TEXTURE_COORD_ARRAY_TYPE", Value: uint32(32905)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_STRIDE", Value: uint32(32906)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_STRIDE_EXT", Value: uint32(32906)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_COUNT_EXT", Value: uint32(32907)},
-			{Name: "GL_EDGE_FLAG_ARRAY_STRIDE_EXT", Value: uint32(32908)},
 			{Name: "GL_EDGE_FLAG_ARRAY_STRIDE", Value: uint32(32908)},
+			{Name: "GL_EDGE_FLAG_ARRAY_STRIDE_EXT", Value: uint32(32908)},
 			{Name: "GL_EDGE_FLAG_ARRAY_COUNT_EXT", Value: uint32(32909)},
 			{Name: "GL_VERTEX_ARRAY_POINTER_EXT", Value: uint32(32910)},
 			{Name: "GL_VERTEX_ARRAY_POINTER", Value: uint32(32910)},
@@ -83652,10 +87020,10 @@ func init() {
 			{Name: "GL_NORMAL_ARRAY_POINTER", Value: uint32(32911)},
 			{Name: "GL_COLOR_ARRAY_POINTER", Value: uint32(32912)},
 			{Name: "GL_COLOR_ARRAY_POINTER_EXT", Value: uint32(32912)},
-			{Name: "GL_INDEX_ARRAY_POINTER", Value: uint32(32913)},
 			{Name: "GL_INDEX_ARRAY_POINTER_EXT", Value: uint32(32913)},
-			{Name: "GL_TEXTURE_COORD_ARRAY_POINTER", Value: uint32(32914)},
+			{Name: "GL_INDEX_ARRAY_POINTER", Value: uint32(32913)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_POINTER_EXT", Value: uint32(32914)},
+			{Name: "GL_TEXTURE_COORD_ARRAY_POINTER", Value: uint32(32914)},
 			{Name: "GL_EDGE_FLAG_ARRAY_POINTER", Value: uint32(32915)},
 			{Name: "GL_EDGE_FLAG_ARRAY_POINTER_EXT", Value: uint32(32915)},
 			{Name: "GL_INTERLACE_SGIX", Value: uint32(32916)},
@@ -83667,74 +87035,74 @@ func init() {
 			{Name: "GL_DETAIL_TEXTURE_LEVEL_SGIS", Value: uint32(32922)},
 			{Name: "GL_DETAIL_TEXTURE_MODE_SGIS", Value: uint32(32923)},
 			{Name: "GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS", Value: uint32(32924)},
-			{Name: "GL_MULTISAMPLE_SGIS", Value: uint32(32925)},
-			{Name: "GL_MULTISAMPLE_EXT", Value: uint32(32925)},
 			{Name: "GL_MULTISAMPLE_ARB", Value: uint32(32925)},
 			{Name: "GL_MULTISAMPLE", Value: uint32(32925)},
-			{Name: "GL_SAMPLE_ALPHA_TO_COVERAGE_ARB", Value: uint32(32926)},
+			{Name: "GL_MULTISAMPLE_SGIS", Value: uint32(32925)},
+			{Name: "GL_MULTISAMPLE_EXT", Value: uint32(32925)},
 			{Name: "GL_SAMPLE_ALPHA_TO_MASK_SGIS", Value: uint32(32926)},
-			{Name: "GL_SAMPLE_ALPHA_TO_COVERAGE", Value: uint32(32926)},
 			{Name: "GL_SAMPLE_ALPHA_TO_MASK_EXT", Value: uint32(32926)},
-			{Name: "GL_SAMPLE_ALPHA_TO_ONE_EXT", Value: uint32(32927)},
+			{Name: "GL_SAMPLE_ALPHA_TO_COVERAGE_ARB", Value: uint32(32926)},
+			{Name: "GL_SAMPLE_ALPHA_TO_COVERAGE", Value: uint32(32926)},
 			{Name: "GL_SAMPLE_ALPHA_TO_ONE", Value: uint32(32927)},
-			{Name: "GL_SAMPLE_ALPHA_TO_ONE_ARB", Value: uint32(32927)},
 			{Name: "GL_SAMPLE_ALPHA_TO_ONE_SGIS", Value: uint32(32927)},
+			{Name: "GL_SAMPLE_ALPHA_TO_ONE_EXT", Value: uint32(32927)},
+			{Name: "GL_SAMPLE_ALPHA_TO_ONE_ARB", Value: uint32(32927)},
 			{Name: "GL_SAMPLE_MASK_EXT", Value: uint32(32928)},
 			{Name: "GL_SAMPLE_COVERAGE_ARB", Value: uint32(32928)},
 			{Name: "GL_SAMPLE_MASK_SGIS", Value: uint32(32928)},
 			{Name: "GL_SAMPLE_COVERAGE", Value: uint32(32928)},
 			{Name: "GL_1PASS_EXT", Value: uint32(32929)},
 			{Name: "GL_1PASS_SGIS", Value: uint32(32929)},
-			{Name: "GL_2PASS_0_SGIS", Value: uint32(32930)},
 			{Name: "GL_2PASS_0_EXT", Value: uint32(32930)},
+			{Name: "GL_2PASS_0_SGIS", Value: uint32(32930)},
 			{Name: "GL_2PASS_1_EXT", Value: uint32(32931)},
 			{Name: "GL_2PASS_1_SGIS", Value: uint32(32931)},
 			{Name: "GL_4PASS_0_EXT", Value: uint32(32932)},
 			{Name: "GL_4PASS_0_SGIS", Value: uint32(32932)},
-			{Name: "GL_4PASS_1_EXT", Value: uint32(32933)},
 			{Name: "GL_4PASS_1_SGIS", Value: uint32(32933)},
-			{Name: "GL_4PASS_2_SGIS", Value: uint32(32934)},
+			{Name: "GL_4PASS_1_EXT", Value: uint32(32933)},
 			{Name: "GL_4PASS_2_EXT", Value: uint32(32934)},
-			{Name: "GL_4PASS_3_EXT", Value: uint32(32935)},
+			{Name: "GL_4PASS_2_SGIS", Value: uint32(32934)},
 			{Name: "GL_4PASS_3_SGIS", Value: uint32(32935)},
-			{Name: "GL_SAMPLE_BUFFERS_SGIS", Value: uint32(32936)},
+			{Name: "GL_4PASS_3_EXT", Value: uint32(32935)},
+			{Name: "GL_SAMPLE_BUFFERS_EXT", Value: uint32(32936)},
 			{Name: "GL_SAMPLE_BUFFERS_ARB", Value: uint32(32936)},
 			{Name: "GL_SAMPLE_BUFFERS", Value: uint32(32936)},
-			{Name: "GL_SAMPLE_BUFFERS_EXT", Value: uint32(32936)},
-			{Name: "GL_SAMPLES_SGIS", Value: uint32(32937)},
-			{Name: "GL_SAMPLES_ARB", Value: uint32(32937)},
-			{Name: "GL_SAMPLES", Value: uint32(32937)},
+			{Name: "GL_SAMPLE_BUFFERS_SGIS", Value: uint32(32936)},
 			{Name: "GL_SAMPLES_EXT", Value: uint32(32937)},
-			{Name: "GL_SAMPLE_COVERAGE_VALUE_ARB", Value: uint32(32938)},
+			{Name: "GL_SAMPLES", Value: uint32(32937)},
+			{Name: "GL_SAMPLES_ARB", Value: uint32(32937)},
+			{Name: "GL_SAMPLES_SGIS", Value: uint32(32937)},
+			{Name: "GL_SAMPLE_COVERAGE_VALUE", Value: uint32(32938)},
 			{Name: "GL_SAMPLE_MASK_VALUE_SGIS", Value: uint32(32938)},
 			{Name: "GL_SAMPLE_MASK_VALUE_EXT", Value: uint32(32938)},
-			{Name: "GL_SAMPLE_COVERAGE_VALUE", Value: uint32(32938)},
+			{Name: "GL_SAMPLE_COVERAGE_VALUE_ARB", Value: uint32(32938)},
 			{Name: "GL_SAMPLE_COVERAGE_INVERT", Value: uint32(32939)},
-			{Name: "GL_SAMPLE_MASK_INVERT_EXT", Value: uint32(32939)},
 			{Name: "GL_SAMPLE_COVERAGE_INVERT_ARB", Value: uint32(32939)},
 			{Name: "GL_SAMPLE_MASK_INVERT_SGIS", Value: uint32(32939)},
-			{Name: "GL_SAMPLE_PATTERN_EXT", Value: uint32(32940)},
+			{Name: "GL_SAMPLE_MASK_INVERT_EXT", Value: uint32(32939)},
 			{Name: "GL_SAMPLE_PATTERN_SGIS", Value: uint32(32940)},
+			{Name: "GL_SAMPLE_PATTERN_EXT", Value: uint32(32940)},
 			{Name: "GL_LINEAR_SHARPEN_SGIS", Value: uint32(32941)},
 			{Name: "GL_LINEAR_SHARPEN_ALPHA_SGIS", Value: uint32(32942)},
 			{Name: "GL_LINEAR_SHARPEN_COLOR_SGIS", Value: uint32(32943)},
 			{Name: "GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS", Value: uint32(32944)},
-			{Name: "GL_COLOR_MATRIX", Value: uint32(32945)},
 			{Name: "GL_COLOR_MATRIX_SGI", Value: uint32(32945)},
-			{Name: "GL_COLOR_MATRIX_STACK_DEPTH", Value: uint32(32946)},
+			{Name: "GL_COLOR_MATRIX", Value: uint32(32945)},
 			{Name: "GL_COLOR_MATRIX_STACK_DEPTH_SGI", Value: uint32(32946)},
+			{Name: "GL_COLOR_MATRIX_STACK_DEPTH", Value: uint32(32946)},
 			{Name: "GL_MAX_COLOR_MATRIX_STACK_DEPTH", Value: uint32(32947)},
 			{Name: "GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI", Value: uint32(32947)},
 			{Name: "GL_POST_COLOR_MATRIX_RED_SCALE_SGI", Value: uint32(32948)},
 			{Name: "GL_POST_COLOR_MATRIX_RED_SCALE", Value: uint32(32948)},
-			{Name: "GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI", Value: uint32(32949)},
 			{Name: "GL_POST_COLOR_MATRIX_GREEN_SCALE", Value: uint32(32949)},
+			{Name: "GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI", Value: uint32(32949)},
 			{Name: "GL_POST_COLOR_MATRIX_BLUE_SCALE", Value: uint32(32950)},
 			{Name: "GL_POST_COLOR_MATRIX_BLUE_SCALE_SGI", Value: uint32(32950)},
-			{Name: "GL_POST_COLOR_MATRIX_ALPHA_SCALE", Value: uint32(32951)},
 			{Name: "GL_POST_COLOR_MATRIX_ALPHA_SCALE_SGI", Value: uint32(32951)},
-			{Name: "GL_POST_COLOR_MATRIX_RED_BIAS_SGI", Value: uint32(32952)},
+			{Name: "GL_POST_COLOR_MATRIX_ALPHA_SCALE", Value: uint32(32951)},
 			{Name: "GL_POST_COLOR_MATRIX_RED_BIAS", Value: uint32(32952)},
+			{Name: "GL_POST_COLOR_MATRIX_RED_BIAS_SGI", Value: uint32(32952)},
 			{Name: "GL_POST_COLOR_MATRIX_GREEN_BIAS_SGI", Value: uint32(32953)},
 			{Name: "GL_POST_COLOR_MATRIX_GREEN_BIAS", Value: uint32(32953)},
 			{Name: "GL_POST_COLOR_MATRIX_BLUE_BIAS_SGI", Value: uint32(32954)},
@@ -83746,69 +87114,69 @@ func init() {
 			{Name: "GL_TEXTURE_ENV_BIAS_SGIX", Value: uint32(32958)},
 			{Name: "GL_SHADOW_AMBIENT_SGIX", Value: uint32(32959)},
 			{Name: "GL_TEXTURE_COMPARE_FAIL_VALUE_ARB", Value: uint32(32959)},
-			{Name: "GL_BLEND_DST_RGB_OES", Value: uint32(32968)},
 			{Name: "GL_BLEND_DST_RGB", Value: uint32(32968)},
+			{Name: "GL_BLEND_DST_RGB_OES", Value: uint32(32968)},
 			{Name: "GL_BLEND_DST_RGB_EXT", Value: uint32(32968)},
 			{Name: "GL_BLEND_SRC_RGB", Value: uint32(32969)},
-			{Name: "GL_BLEND_SRC_RGB_EXT", Value: uint32(32969)},
 			{Name: "GL_BLEND_SRC_RGB_OES", Value: uint32(32969)},
-			{Name: "GL_BLEND_DST_ALPHA", Value: uint32(32970)},
+			{Name: "GL_BLEND_SRC_RGB_EXT", Value: uint32(32969)},
 			{Name: "GL_BLEND_DST_ALPHA_EXT", Value: uint32(32970)},
+			{Name: "GL_BLEND_DST_ALPHA", Value: uint32(32970)},
 			{Name: "GL_BLEND_DST_ALPHA_OES", Value: uint32(32970)},
-			{Name: "GL_BLEND_SRC_ALPHA_OES", Value: uint32(32971)},
 			{Name: "GL_BLEND_SRC_ALPHA", Value: uint32(32971)},
+			{Name: "GL_BLEND_SRC_ALPHA_OES", Value: uint32(32971)},
 			{Name: "GL_BLEND_SRC_ALPHA_EXT", Value: uint32(32971)},
 			{Name: "GL_422_EXT", Value: uint32(32972)},
 			{Name: "GL_422_REV_EXT", Value: uint32(32973)},
 			{Name: "GL_422_AVERAGE_EXT", Value: uint32(32974)},
 			{Name: "GL_422_REV_AVERAGE_EXT", Value: uint32(32975)},
-			{Name: "GL_COLOR_TABLE", Value: uint32(32976)},
 			{Name: "GL_COLOR_TABLE_SGI", Value: uint32(32976)},
+			{Name: "GL_COLOR_TABLE", Value: uint32(32976)},
 			{Name: "GL_POST_CONVOLUTION_COLOR_TABLE", Value: uint32(32977)},
 			{Name: "GL_POST_CONVOLUTION_COLOR_TABLE_SGI", Value: uint32(32977)},
-			{Name: "GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI", Value: uint32(32978)},
 			{Name: "GL_POST_COLOR_MATRIX_COLOR_TABLE", Value: uint32(32978)},
-			{Name: "GL_PROXY_COLOR_TABLE", Value: uint32(32979)},
+			{Name: "GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI", Value: uint32(32978)},
 			{Name: "GL_PROXY_COLOR_TABLE_SGI", Value: uint32(32979)},
+			{Name: "GL_PROXY_COLOR_TABLE", Value: uint32(32979)},
 			{Name: "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI", Value: uint32(32980)},
 			{Name: "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE", Value: uint32(32980)},
-			{Name: "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE", Value: uint32(32981)},
 			{Name: "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE_SGI", Value: uint32(32981)},
-			{Name: "GL_COLOR_TABLE_SCALE_SGI", Value: uint32(32982)},
+			{Name: "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE", Value: uint32(32981)},
 			{Name: "GL_COLOR_TABLE_SCALE", Value: uint32(32982)},
-			{Name: "GL_COLOR_TABLE_BIAS_SGI", Value: uint32(32983)},
+			{Name: "GL_COLOR_TABLE_SCALE_SGI", Value: uint32(32982)},
 			{Name: "GL_COLOR_TABLE_BIAS", Value: uint32(32983)},
+			{Name: "GL_COLOR_TABLE_BIAS_SGI", Value: uint32(32983)},
 			{Name: "GL_COLOR_TABLE_FORMAT", Value: uint32(32984)},
 			{Name: "GL_COLOR_TABLE_FORMAT_SGI", Value: uint32(32984)},
-			{Name: "GL_COLOR_TABLE_WIDTH", Value: uint32(32985)},
 			{Name: "GL_COLOR_TABLE_WIDTH_SGI", Value: uint32(32985)},
-			{Name: "GL_COLOR_TABLE_RED_SIZE_SGI", Value: uint32(32986)},
+			{Name: "GL_COLOR_TABLE_WIDTH", Value: uint32(32985)},
 			{Name: "GL_COLOR_TABLE_RED_SIZE", Value: uint32(32986)},
-			{Name: "GL_COLOR_TABLE_GREEN_SIZE_SGI", Value: uint32(32987)},
+			{Name: "GL_COLOR_TABLE_RED_SIZE_SGI", Value: uint32(32986)},
 			{Name: "GL_COLOR_TABLE_GREEN_SIZE", Value: uint32(32987)},
+			{Name: "GL_COLOR_TABLE_GREEN_SIZE_SGI", Value: uint32(32987)},
 			{Name: "GL_COLOR_TABLE_BLUE_SIZE_SGI", Value: uint32(32988)},
 			{Name: "GL_COLOR_TABLE_BLUE_SIZE", Value: uint32(32988)},
-			{Name: "GL_COLOR_TABLE_ALPHA_SIZE", Value: uint32(32989)},
 			{Name: "GL_COLOR_TABLE_ALPHA_SIZE_SGI", Value: uint32(32989)},
+			{Name: "GL_COLOR_TABLE_ALPHA_SIZE", Value: uint32(32989)},
 			{Name: "GL_COLOR_TABLE_LUMINANCE_SIZE_SGI", Value: uint32(32990)},
 			{Name: "GL_COLOR_TABLE_LUMINANCE_SIZE", Value: uint32(32990)},
-			{Name: "GL_COLOR_TABLE_INTENSITY_SIZE_SGI", Value: uint32(32991)},
 			{Name: "GL_COLOR_TABLE_INTENSITY_SIZE", Value: uint32(32991)},
+			{Name: "GL_COLOR_TABLE_INTENSITY_SIZE_SGI", Value: uint32(32991)},
 			{Name: "GL_BGR", Value: uint32(32992)},
 			{Name: "GL_BGR_EXT", Value: uint32(32992)},
 			{Name: "GL_BGRA_IMG", Value: uint32(32993)},
-			{Name: "GL_BGRA", Value: uint32(32993)},
 			{Name: "GL_BGRA_EXT", Value: uint32(32993)},
+			{Name: "GL_BGRA", Value: uint32(32993)},
 			{Name: "GL_COLOR_INDEX1_EXT", Value: uint32(32994)},
 			{Name: "GL_COLOR_INDEX2_EXT", Value: uint32(32995)},
 			{Name: "GL_COLOR_INDEX4_EXT", Value: uint32(32996)},
 			{Name: "GL_COLOR_INDEX8_EXT", Value: uint32(32997)},
 			{Name: "GL_COLOR_INDEX12_EXT", Value: uint32(32998)},
 			{Name: "GL_COLOR_INDEX16_EXT", Value: uint32(32999)},
-			{Name: "GL_MAX_ELEMENTS_VERTICES", Value: uint32(33000)},
 			{Name: "GL_MAX_ELEMENTS_VERTICES_EXT", Value: uint32(33000)},
-			{Name: "GL_MAX_ELEMENTS_INDICES_EXT", Value: uint32(33001)},
+			{Name: "GL_MAX_ELEMENTS_VERTICES", Value: uint32(33000)},
 			{Name: "GL_MAX_ELEMENTS_INDICES", Value: uint32(33001)},
+			{Name: "GL_MAX_ELEMENTS_INDICES_EXT", Value: uint32(33001)},
 			{Name: "GL_PHONG_WIN", Value: uint32(33002)},
 			{Name: "GL_PHONG_HINT_WIN", Value: uint32(33003)},
 			{Name: "GL_FOG_SPECULAR_TEXTURE_WIN", Value: uint32(33004)},
@@ -83838,18 +87206,18 @@ func init() {
 			{Name: "GL_QUAD_INTENSITY8_SGIS", Value: uint32(33059)},
 			{Name: "GL_DUAL_TEXTURE_SELECT_SGIS", Value: uint32(33060)},
 			{Name: "GL_QUAD_TEXTURE_SELECT_SGIS", Value: uint32(33061)},
+			{Name: "GL_POINT_SIZE_MIN_SGIS", Value: uint32(33062)},
+			{Name: "GL_POINT_SIZE_MIN", Value: uint32(33062)},
 			{Name: "GL_POINT_SIZE_MIN_EXT", Value: uint32(33062)},
 			{Name: "GL_POINT_SIZE_MIN_ARB", Value: uint32(33062)},
-			{Name: "GL_POINT_SIZE_MIN", Value: uint32(33062)},
-			{Name: "GL_POINT_SIZE_MIN_SGIS", Value: uint32(33062)},
+			{Name: "GL_POINT_SIZE_MAX_SGIS", Value: uint32(33063)},
 			{Name: "GL_POINT_SIZE_MAX_ARB", Value: uint32(33063)},
 			{Name: "GL_POINT_SIZE_MAX_EXT", Value: uint32(33063)},
 			{Name: "GL_POINT_SIZE_MAX", Value: uint32(33063)},
-			{Name: "GL_POINT_SIZE_MAX_SGIS", Value: uint32(33063)},
-			{Name: "GL_POINT_FADE_THRESHOLD_SIZE", Value: uint32(33064)},
-			{Name: "GL_POINT_FADE_THRESHOLD_SIZE_EXT", Value: uint32(33064)},
-			{Name: "GL_POINT_FADE_THRESHOLD_SIZE_ARB", Value: uint32(33064)},
 			{Name: "GL_POINT_FADE_THRESHOLD_SIZE_SGIS", Value: uint32(33064)},
+			{Name: "GL_POINT_FADE_THRESHOLD_SIZE", Value: uint32(33064)},
+			{Name: "GL_POINT_FADE_THRESHOLD_SIZE_ARB", Value: uint32(33064)},
+			{Name: "GL_POINT_FADE_THRESHOLD_SIZE_EXT", Value: uint32(33064)},
 			{Name: "GL_POINT_DISTANCE_ATTENUATION_ARB", Value: uint32(33065)},
 			{Name: "GL_POINT_DISTANCE_ATTENUATION", Value: uint32(33065)},
 			{Name: "GL_DISTANCE_ATTENUATION_SGIS", Value: uint32(33065)},
@@ -83857,12 +87225,12 @@ func init() {
 			{Name: "GL_FOG_FUNC_SGIS", Value: uint32(33066)},
 			{Name: "GL_FOG_FUNC_POINTS_SGIS", Value: uint32(33067)},
 			{Name: "GL_MAX_FOG_FUNC_POINTS_SGIS", Value: uint32(33068)},
-			{Name: "GL_CLAMP_TO_BORDER_ARB", Value: uint32(33069)},
+			{Name: "GL_CLAMP_TO_BORDER_SGIS", Value: uint32(33069)},
 			{Name: "GL_CLAMP_TO_BORDER", Value: uint32(33069)},
+			{Name: "GL_CLAMP_TO_BORDER_ARB", Value: uint32(33069)},
 			{Name: "GL_CLAMP_TO_BORDER_EXT", Value: uint32(33069)},
 			{Name: "GL_CLAMP_TO_BORDER_NV", Value: uint32(33069)},
 			{Name: "GL_CLAMP_TO_BORDER_OES", Value: uint32(33069)},
-			{Name: "GL_CLAMP_TO_BORDER_SGIS", Value: uint32(33069)},
 			{Name: "GL_TEXTURE_MULTI_BUFFER_HINT_SGIX", Value: uint32(33070)},
 			{Name: "GL_CLAMP_TO_EDGE", Value: uint32(33071)},
 			{Name: "GL_CLAMP_TO_EDGE_SGIS", Value: uint32(33071)},
@@ -83876,15 +87244,15 @@ func init() {
 			{Name: "GL_TEXTURE_WRAP_Q_SGIS", Value: uint32(33079)},
 			{Name: "GL_MAX_4D_TEXTURE_SIZE_SGIS", Value: uint32(33080)},
 			{Name: "GL_PIXEL_TEX_GEN_SGIX", Value: uint32(33081)},
-			{Name: "GL_TEXTURE_MIN_LOD", Value: uint32(33082)},
 			{Name: "GL_TEXTURE_MIN_LOD_SGIS", Value: uint32(33082)},
+			{Name: "GL_TEXTURE_MIN_LOD", Value: uint32(33082)},
 			{Name: "GL_TEXTURE_MAX_LOD", Value: uint32(33083)},
 			{Name: "GL_TEXTURE_MAX_LOD_SGIS", Value: uint32(33083)},
-			{Name: "GL_TEXTURE_BASE_LEVEL_SGIS", Value: uint32(33084)},
 			{Name: "GL_TEXTURE_BASE_LEVEL", Value: uint32(33084)},
+			{Name: "GL_TEXTURE_BASE_LEVEL_SGIS", Value: uint32(33084)},
+			{Name: "GL_TEXTURE_MAX_LEVEL_APPLE", Value: uint32(33085)},
 			{Name: "GL_TEXTURE_MAX_LEVEL", Value: uint32(33085)},
 			{Name: "GL_TEXTURE_MAX_LEVEL_SGIS", Value: uint32(33085)},
-			{Name: "GL_TEXTURE_MAX_LEVEL_APPLE", Value: uint32(33085)},
 			{Name: "GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX", Value: uint32(33086)},
 			{Name: "GL_PIXEL_TILE_CACHE_INCREMENT_SGIX", Value: uint32(33087)},
 			{Name: "GL_PIXEL_TILE_WIDTH_SGIX", Value: uint32(33088)},
@@ -83906,8 +87274,8 @@ func init() {
 			{Name: "GL_IGNORE_BORDER_HP", Value: uint32(33104)},
 			{Name: "GL_CONSTANT_BORDER", Value: uint32(33105)},
 			{Name: "GL_CONSTANT_BORDER_HP", Value: uint32(33105)},
-			{Name: "GL_REPLICATE_BORDER", Value: uint32(33107)},
 			{Name: "GL_REPLICATE_BORDER_HP", Value: uint32(33107)},
+			{Name: "GL_REPLICATE_BORDER", Value: uint32(33107)},
 			{Name: "GL_CONVOLUTION_BORDER_COLOR", Value: uint32(33108)},
 			{Name: "GL_CONVOLUTION_BORDER_COLOR_HP", Value: uint32(33108)},
 			{Name: "GL_IMAGE_SCALE_X_HP", Value: uint32(33109)},
@@ -83965,8 +87333,8 @@ func init() {
 			{Name: "GL_TEXTURE_LOD_BIAS_R_SGIX", Value: uint32(33168)},
 			{Name: "GL_GENERATE_MIPMAP_SGIS", Value: uint32(33169)},
 			{Name: "GL_GENERATE_MIPMAP", Value: uint32(33169)},
-			{Name: "GL_GENERATE_MIPMAP_HINT", Value: uint32(33170)},
 			{Name: "GL_GENERATE_MIPMAP_HINT_SGIS", Value: uint32(33170)},
+			{Name: "GL_GENERATE_MIPMAP_HINT", Value: uint32(33170)},
 			{Name: "GL_GEOMETRY_DEFORMATION_SGIX", Value: uint32(33172)},
 			{Name: "GL_TEXTURE_DEFORMATION_SGIX", Value: uint32(33173)},
 			{Name: "GL_DEFORMATIONS_MASK_SGIX", Value: uint32(33174)},
@@ -83977,18 +87345,18 @@ func init() {
 			{Name: "GL_TEXTURE_COMPARE_OPERATOR_SGIX", Value: uint32(33179)},
 			{Name: "GL_TEXTURE_LEQUAL_R_SGIX", Value: uint32(33180)},
 			{Name: "GL_TEXTURE_GEQUAL_R_SGIX", Value: uint32(33181)},
-			{Name: "GL_DEPTH_COMPONENT16_SGIX", Value: uint32(33189)},
-			{Name: "GL_DEPTH_COMPONENT16_ARB", Value: uint32(33189)},
-			{Name: "GL_DEPTH_COMPONENT16", Value: uint32(33189)},
 			{Name: "GL_DEPTH_COMPONENT16_OES", Value: uint32(33189)},
+			{Name: "GL_DEPTH_COMPONENT16_SGIX", Value: uint32(33189)},
+			{Name: "GL_DEPTH_COMPONENT16", Value: uint32(33189)},
+			{Name: "GL_DEPTH_COMPONENT16_ARB", Value: uint32(33189)},
 			{Name: "GL_DEPTH_COMPONENT24_OES", Value: uint32(33190)},
+			{Name: "GL_DEPTH_COMPONENT24_ARB", Value: uint32(33190)},
 			{Name: "GL_DEPTH_COMPONENT24_SGIX", Value: uint32(33190)},
 			{Name: "GL_DEPTH_COMPONENT24", Value: uint32(33190)},
-			{Name: "GL_DEPTH_COMPONENT24_ARB", Value: uint32(33190)},
-			{Name: "GL_DEPTH_COMPONENT32_SGIX", Value: uint32(33191)},
 			{Name: "GL_DEPTH_COMPONENT32_OES", Value: uint32(33191)},
-			{Name: "GL_DEPTH_COMPONENT32_ARB", Value: uint32(33191)},
 			{Name: "GL_DEPTH_COMPONENT32", Value: uint32(33191)},
+			{Name: "GL_DEPTH_COMPONENT32_ARB", Value: uint32(33191)},
+			{Name: "GL_DEPTH_COMPONENT32_SGIX", Value: uint32(33191)},
 			{Name: "GL_ARRAY_ELEMENT_LOCK_FIRST_EXT", Value: uint32(33192)},
 			{Name: "GL_ARRAY_ELEMENT_LOCK_COUNT_EXT", Value: uint32(33193)},
 			{Name: "GL_CULL_VERTEX_EXT", Value: uint32(33194)},
@@ -84028,16 +87396,16 @@ func init() {
 			{Name: "GL_OBJECT_LINE_SGIS", Value: uint32(33271)},
 			{Name: "GL_LIGHT_MODEL_COLOR_CONTROL", Value: uint32(33272)},
 			{Name: "GL_LIGHT_MODEL_COLOR_CONTROL_EXT", Value: uint32(33272)},
-			{Name: "GL_SINGLE_COLOR", Value: uint32(33273)},
 			{Name: "GL_SINGLE_COLOR_EXT", Value: uint32(33273)},
-			{Name: "GL_SEPARATE_SPECULAR_COLOR", Value: uint32(33274)},
+			{Name: "GL_SINGLE_COLOR", Value: uint32(33273)},
 			{Name: "GL_SEPARATE_SPECULAR_COLOR_EXT", Value: uint32(33274)},
+			{Name: "GL_SEPARATE_SPECULAR_COLOR", Value: uint32(33274)},
 			{Name: "GL_SHARED_TEXTURE_PALETTE_EXT", Value: uint32(33275)},
 			{Name: "GL_TEXT_FRAGMENT_SHADER_ATI", Value: uint32(33280)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING", Value: uint32(33296)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT", Value: uint32(33296)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE", Value: uint32(33297)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING", Value: uint32(33296)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", Value: uint32(33297)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE", Value: uint32(33297)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE", Value: uint32(33298)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE", Value: uint32(33299)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE", Value: uint32(33300)},
@@ -84045,15 +87413,15 @@ func init() {
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE", Value: uint32(33302)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE", Value: uint32(33303)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT", Value: uint32(33304)},
-			{Name: "GL_FRAMEBUFFER_UNDEFINED", Value: uint32(33305)},
 			{Name: "GL_FRAMEBUFFER_UNDEFINED_OES", Value: uint32(33305)},
+			{Name: "GL_FRAMEBUFFER_UNDEFINED", Value: uint32(33305)},
 			{Name: "GL_DEPTH_STENCIL_ATTACHMENT", Value: uint32(33306)},
 			{Name: "GL_MAJOR_VERSION", Value: uint32(33307)},
 			{Name: "GL_MINOR_VERSION", Value: uint32(33308)},
 			{Name: "GL_NUM_EXTENSIONS", Value: uint32(33309)},
 			{Name: "GL_CONTEXT_FLAGS", Value: uint32(33310)},
-			{Name: "GL_BUFFER_IMMUTABLE_STORAGE_EXT", Value: uint32(33311)},
 			{Name: "GL_BUFFER_IMMUTABLE_STORAGE", Value: uint32(33311)},
+			{Name: "GL_BUFFER_IMMUTABLE_STORAGE_EXT", Value: uint32(33311)},
 			{Name: "GL_BUFFER_STORAGE_FLAGS_EXT", Value: uint32(33312)},
 			{Name: "GL_BUFFER_STORAGE_FLAGS", Value: uint32(33312)},
 			{Name: "GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED", Value: uint32(33313)},
@@ -84061,8 +87429,8 @@ func init() {
 			{Name: "GL_INDEX", Value: uint32(33314)},
 			{Name: "GL_COMPRESSED_RED", Value: uint32(33317)},
 			{Name: "GL_COMPRESSED_RG", Value: uint32(33318)},
-			{Name: "GL_RG", Value: uint32(33319)},
 			{Name: "GL_RG_EXT", Value: uint32(33319)},
+			{Name: "GL_RG", Value: uint32(33319)},
 			{Name: "GL_RG_INTEGER", Value: uint32(33320)},
 			{Name: "GL_R8", Value: uint32(33321)},
 			{Name: "GL_R8_EXT", Value: uint32(33321)},
@@ -84070,16 +87438,16 @@ func init() {
 			{Name: "GL_R16_EXT", Value: uint32(33322)},
 			{Name: "GL_RG8_EXT", Value: uint32(33323)},
 			{Name: "GL_RG8", Value: uint32(33323)},
-			{Name: "GL_RG16_EXT", Value: uint32(33324)},
 			{Name: "GL_RG16", Value: uint32(33324)},
-			{Name: "GL_R16F_EXT", Value: uint32(33325)},
+			{Name: "GL_RG16_EXT", Value: uint32(33324)},
 			{Name: "GL_R16F", Value: uint32(33325)},
-			{Name: "GL_R32F_EXT", Value: uint32(33326)},
+			{Name: "GL_R16F_EXT", Value: uint32(33325)},
 			{Name: "GL_R32F", Value: uint32(33326)},
+			{Name: "GL_R32F_EXT", Value: uint32(33326)},
 			{Name: "GL_RG16F", Value: uint32(33327)},
 			{Name: "GL_RG16F_EXT", Value: uint32(33327)},
-			{Name: "GL_RG32F_EXT", Value: uint32(33328)},
 			{Name: "GL_RG32F", Value: uint32(33328)},
+			{Name: "GL_RG32F_EXT", Value: uint32(33328)},
 			{Name: "GL_R8I", Value: uint32(33329)},
 			{Name: "GL_R8UI", Value: uint32(33330)},
 			{Name: "GL_R16I", Value: uint32(33331)},
@@ -84097,117 +87465,117 @@ func init() {
 			{Name: "GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR", Value: uint32(33346)},
 			{Name: "GL_DEBUG_OUTPUT_SYNCHRONOUS", Value: uint32(33346)},
 			{Name: "GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB", Value: uint32(33346)},
-			{Name: "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR", Value: uint32(33347)},
 			{Name: "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH", Value: uint32(33347)},
+			{Name: "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR", Value: uint32(33347)},
 			{Name: "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB", Value: uint32(33347)},
 			{Name: "GL_DEBUG_CALLBACK_FUNCTION_KHR", Value: uint32(33348)},
 			{Name: "GL_DEBUG_CALLBACK_FUNCTION", Value: uint32(33348)},
 			{Name: "GL_DEBUG_CALLBACK_FUNCTION_ARB", Value: uint32(33348)},
+			{Name: "GL_DEBUG_CALLBACK_USER_PARAM_KHR", Value: uint32(33349)},
 			{Name: "GL_DEBUG_CALLBACK_USER_PARAM_ARB", Value: uint32(33349)},
 			{Name: "GL_DEBUG_CALLBACK_USER_PARAM", Value: uint32(33349)},
-			{Name: "GL_DEBUG_CALLBACK_USER_PARAM_KHR", Value: uint32(33349)},
-			{Name: "GL_DEBUG_SOURCE_API", Value: uint32(33350)},
 			{Name: "GL_DEBUG_SOURCE_API_KHR", Value: uint32(33350)},
+			{Name: "GL_DEBUG_SOURCE_API", Value: uint32(33350)},
 			{Name: "GL_DEBUG_SOURCE_API_ARB", Value: uint32(33350)},
 			{Name: "GL_DEBUG_SOURCE_WINDOW_SYSTEM_KHR", Value: uint32(33351)},
-			{Name: "GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB", Value: uint32(33351)},
 			{Name: "GL_DEBUG_SOURCE_WINDOW_SYSTEM", Value: uint32(33351)},
+			{Name: "GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB", Value: uint32(33351)},
 			{Name: "GL_DEBUG_SOURCE_SHADER_COMPILER_KHR", Value: uint32(33352)},
-			{Name: "GL_DEBUG_SOURCE_SHADER_COMPILER_ARB", Value: uint32(33352)},
 			{Name: "GL_DEBUG_SOURCE_SHADER_COMPILER", Value: uint32(33352)},
-			{Name: "GL_DEBUG_SOURCE_THIRD_PARTY_ARB", Value: uint32(33353)},
+			{Name: "GL_DEBUG_SOURCE_SHADER_COMPILER_ARB", Value: uint32(33352)},
 			{Name: "GL_DEBUG_SOURCE_THIRD_PARTY", Value: uint32(33353)},
+			{Name: "GL_DEBUG_SOURCE_THIRD_PARTY_ARB", Value: uint32(33353)},
 			{Name: "GL_DEBUG_SOURCE_THIRD_PARTY_KHR", Value: uint32(33353)},
-			{Name: "GL_DEBUG_SOURCE_APPLICATION_KHR", Value: uint32(33354)},
 			{Name: "GL_DEBUG_SOURCE_APPLICATION", Value: uint32(33354)},
+			{Name: "GL_DEBUG_SOURCE_APPLICATION_KHR", Value: uint32(33354)},
 			{Name: "GL_DEBUG_SOURCE_APPLICATION_ARB", Value: uint32(33354)},
-			{Name: "GL_DEBUG_SOURCE_OTHER_ARB", Value: uint32(33355)},
-			{Name: "GL_DEBUG_SOURCE_OTHER", Value: uint32(33355)},
 			{Name: "GL_DEBUG_SOURCE_OTHER_KHR", Value: uint32(33355)},
-			{Name: "GL_DEBUG_TYPE_ERROR_ARB", Value: uint32(33356)},
+			{Name: "GL_DEBUG_SOURCE_OTHER", Value: uint32(33355)},
+			{Name: "GL_DEBUG_SOURCE_OTHER_ARB", Value: uint32(33355)},
 			{Name: "GL_DEBUG_TYPE_ERROR", Value: uint32(33356)},
+			{Name: "GL_DEBUG_TYPE_ERROR_ARB", Value: uint32(33356)},
 			{Name: "GL_DEBUG_TYPE_ERROR_KHR", Value: uint32(33356)},
-			{Name: "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB", Value: uint32(33357)},
-			{Name: "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR", Value: uint32(33357)},
 			{Name: "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR", Value: uint32(33357)},
-			{Name: "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB", Value: uint32(33358)},
+			{Name: "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR", Value: uint32(33357)},
+			{Name: "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB", Value: uint32(33357)},
 			{Name: "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_KHR", Value: uint32(33358)},
+			{Name: "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB", Value: uint32(33358)},
 			{Name: "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR", Value: uint32(33358)},
 			{Name: "GL_DEBUG_TYPE_PORTABILITY_ARB", Value: uint32(33359)},
-			{Name: "GL_DEBUG_TYPE_PORTABILITY", Value: uint32(33359)},
 			{Name: "GL_DEBUG_TYPE_PORTABILITY_KHR", Value: uint32(33359)},
-			{Name: "GL_DEBUG_TYPE_PERFORMANCE", Value: uint32(33360)},
+			{Name: "GL_DEBUG_TYPE_PORTABILITY", Value: uint32(33359)},
 			{Name: "GL_DEBUG_TYPE_PERFORMANCE_KHR", Value: uint32(33360)},
+			{Name: "GL_DEBUG_TYPE_PERFORMANCE", Value: uint32(33360)},
 			{Name: "GL_DEBUG_TYPE_PERFORMANCE_ARB", Value: uint32(33360)},
-			{Name: "GL_DEBUG_TYPE_OTHER_ARB", Value: uint32(33361)},
 			{Name: "GL_DEBUG_TYPE_OTHER", Value: uint32(33361)},
 			{Name: "GL_DEBUG_TYPE_OTHER_KHR", Value: uint32(33361)},
+			{Name: "GL_DEBUG_TYPE_OTHER_ARB", Value: uint32(33361)},
+			{Name: "GL_LOSE_CONTEXT_ON_RESET_KHR", Value: uint32(33362)},
 			{Name: "GL_LOSE_CONTEXT_ON_RESET_ARB", Value: uint32(33362)},
 			{Name: "GL_LOSE_CONTEXT_ON_RESET", Value: uint32(33362)},
 			{Name: "GL_LOSE_CONTEXT_ON_RESET_EXT", Value: uint32(33362)},
-			{Name: "GL_LOSE_CONTEXT_ON_RESET_KHR", Value: uint32(33362)},
-			{Name: "GL_GUILTY_CONTEXT_RESET_EXT", Value: uint32(33363)},
-			{Name: "GL_GUILTY_CONTEXT_RESET_ARB", Value: uint32(33363)},
 			{Name: "GL_GUILTY_CONTEXT_RESET_KHR", Value: uint32(33363)},
+			{Name: "GL_GUILTY_CONTEXT_RESET_EXT", Value: uint32(33363)},
 			{Name: "GL_GUILTY_CONTEXT_RESET", Value: uint32(33363)},
+			{Name: "GL_GUILTY_CONTEXT_RESET_ARB", Value: uint32(33363)},
 			{Name: "GL_INNOCENT_CONTEXT_RESET_EXT", Value: uint32(33364)},
 			{Name: "GL_INNOCENT_CONTEXT_RESET_KHR", Value: uint32(33364)},
 			{Name: "GL_INNOCENT_CONTEXT_RESET_ARB", Value: uint32(33364)},
 			{Name: "GL_INNOCENT_CONTEXT_RESET", Value: uint32(33364)},
 			{Name: "GL_UNKNOWN_CONTEXT_RESET", Value: uint32(33365)},
 			{Name: "GL_UNKNOWN_CONTEXT_RESET_KHR", Value: uint32(33365)},
-			{Name: "GL_UNKNOWN_CONTEXT_RESET_ARB", Value: uint32(33365)},
 			{Name: "GL_UNKNOWN_CONTEXT_RESET_EXT", Value: uint32(33365)},
+			{Name: "GL_UNKNOWN_CONTEXT_RESET_ARB", Value: uint32(33365)},
 			{Name: "GL_RESET_NOTIFICATION_STRATEGY_KHR", Value: uint32(33366)},
 			{Name: "GL_RESET_NOTIFICATION_STRATEGY", Value: uint32(33366)},
-			{Name: "GL_RESET_NOTIFICATION_STRATEGY_EXT", Value: uint32(33366)},
 			{Name: "GL_RESET_NOTIFICATION_STRATEGY_ARB", Value: uint32(33366)},
+			{Name: "GL_RESET_NOTIFICATION_STRATEGY_EXT", Value: uint32(33366)},
 			{Name: "GL_PROGRAM_BINARY_RETRIEVABLE_HINT", Value: uint32(33367)},
-			{Name: "GL_PROGRAM_SEPARABLE_EXT", Value: uint32(33368)},
 			{Name: "GL_PROGRAM_SEPARABLE", Value: uint32(33368)},
+			{Name: "GL_PROGRAM_SEPARABLE_EXT", Value: uint32(33368)},
 			{Name: "GL_ACTIVE_PROGRAM", Value: uint32(33369)},
 			{Name: "GL_ACTIVE_PROGRAM_EXT", Value: uint32(33369)},
-			{Name: "GL_PROGRAM_PIPELINE_BINDING", Value: uint32(33370)},
 			{Name: "GL_PROGRAM_PIPELINE_BINDING_EXT", Value: uint32(33370)},
-			{Name: "GL_MAX_VIEWPORTS_NV", Value: uint32(33371)},
+			{Name: "GL_PROGRAM_PIPELINE_BINDING", Value: uint32(33370)},
 			{Name: "GL_MAX_VIEWPORTS", Value: uint32(33371)},
-			{Name: "GL_VIEWPORT_SUBPIXEL_BITS_EXT", Value: uint32(33372)},
-			{Name: "GL_VIEWPORT_SUBPIXEL_BITS_NV", Value: uint32(33372)},
+			{Name: "GL_MAX_VIEWPORTS_NV", Value: uint32(33371)},
 			{Name: "GL_VIEWPORT_SUBPIXEL_BITS", Value: uint32(33372)},
-			{Name: "GL_VIEWPORT_BOUNDS_RANGE", Value: uint32(33373)},
+			{Name: "GL_VIEWPORT_SUBPIXEL_BITS_NV", Value: uint32(33372)},
+			{Name: "GL_VIEWPORT_SUBPIXEL_BITS_EXT", Value: uint32(33372)},
 			{Name: "GL_VIEWPORT_BOUNDS_RANGE_NV", Value: uint32(33373)},
+			{Name: "GL_VIEWPORT_BOUNDS_RANGE", Value: uint32(33373)},
 			{Name: "GL_VIEWPORT_BOUNDS_RANGE_EXT", Value: uint32(33373)},
-			{Name: "GL_LAYER_PROVOKING_VERTEX", Value: uint32(33374)},
 			{Name: "GL_LAYER_PROVOKING_VERTEX_EXT", Value: uint32(33374)},
+			{Name: "GL_LAYER_PROVOKING_VERTEX", Value: uint32(33374)},
 			{Name: "GL_LAYER_PROVOKING_VERTEX_OES", Value: uint32(33374)},
-			{Name: "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_NV", Value: uint32(33375)},
-			{Name: "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_EXT", Value: uint32(33375)},
 			{Name: "GL_VIEWPORT_INDEX_PROVOKING_VERTEX", Value: uint32(33375)},
+			{Name: "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_EXT", Value: uint32(33375)},
+			{Name: "GL_VIEWPORT_INDEX_PROVOKING_VERTEX_NV", Value: uint32(33375)},
 			{Name: "GL_UNDEFINED_VERTEX", Value: uint32(33376)},
 			{Name: "GL_UNDEFINED_VERTEX_EXT", Value: uint32(33376)},
 			{Name: "GL_UNDEFINED_VERTEX_OES", Value: uint32(33376)},
-			{Name: "GL_NO_RESET_NOTIFICATION", Value: uint32(33377)},
 			{Name: "GL_NO_RESET_NOTIFICATION_ARB", Value: uint32(33377)},
-			{Name: "GL_NO_RESET_NOTIFICATION_EXT", Value: uint32(33377)},
+			{Name: "GL_NO_RESET_NOTIFICATION", Value: uint32(33377)},
 			{Name: "GL_NO_RESET_NOTIFICATION_KHR", Value: uint32(33377)},
+			{Name: "GL_NO_RESET_NOTIFICATION_EXT", Value: uint32(33377)},
 			{Name: "GL_MAX_COMPUTE_SHARED_MEMORY_SIZE", Value: uint32(33378)},
 			{Name: "GL_MAX_COMPUTE_UNIFORM_COMPONENTS", Value: uint32(33379)},
 			{Name: "GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS", Value: uint32(33380)},
 			{Name: "GL_MAX_COMPUTE_ATOMIC_COUNTERS", Value: uint32(33381)},
 			{Name: "GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS", Value: uint32(33382)},
 			{Name: "GL_COMPUTE_WORK_GROUP_SIZE", Value: uint32(33383)},
-			{Name: "GL_DEBUG_TYPE_MARKER_KHR", Value: uint32(33384)},
 			{Name: "GL_DEBUG_TYPE_MARKER", Value: uint32(33384)},
-			{Name: "GL_DEBUG_TYPE_PUSH_GROUP_KHR", Value: uint32(33385)},
+			{Name: "GL_DEBUG_TYPE_MARKER_KHR", Value: uint32(33384)},
 			{Name: "GL_DEBUG_TYPE_PUSH_GROUP", Value: uint32(33385)},
+			{Name: "GL_DEBUG_TYPE_PUSH_GROUP_KHR", Value: uint32(33385)},
 			{Name: "GL_DEBUG_TYPE_POP_GROUP_KHR", Value: uint32(33386)},
 			{Name: "GL_DEBUG_TYPE_POP_GROUP", Value: uint32(33386)},
 			{Name: "GL_DEBUG_SEVERITY_NOTIFICATION_KHR", Value: uint32(33387)},
 			{Name: "GL_DEBUG_SEVERITY_NOTIFICATION", Value: uint32(33387)},
-			{Name: "GL_MAX_DEBUG_GROUP_STACK_DEPTH_KHR", Value: uint32(33388)},
 			{Name: "GL_MAX_DEBUG_GROUP_STACK_DEPTH", Value: uint32(33388)},
-			{Name: "GL_DEBUG_GROUP_STACK_DEPTH_KHR", Value: uint32(33389)},
+			{Name: "GL_MAX_DEBUG_GROUP_STACK_DEPTH_KHR", Value: uint32(33388)},
 			{Name: "GL_DEBUG_GROUP_STACK_DEPTH", Value: uint32(33389)},
+			{Name: "GL_DEBUG_GROUP_STACK_DEPTH_KHR", Value: uint32(33389)},
 			{Name: "GL_MAX_UNIFORM_LOCATIONS", Value: uint32(33390)},
 			{Name: "GL_INTERNALFORMAT_SUPPORTED", Value: uint32(33391)},
 			{Name: "GL_INTERNALFORMAT_PREFERRED", Value: uint32(33392)},
@@ -84319,31 +87687,31 @@ func init() {
 			{Name: "GL_TEXTURE_VIEW_MIN_LEVEL_EXT", Value: uint32(33499)},
 			{Name: "GL_TEXTURE_VIEW_MIN_LEVEL", Value: uint32(33499)},
 			{Name: "GL_TEXTURE_VIEW_NUM_LEVELS_OES", Value: uint32(33500)},
-			{Name: "GL_TEXTURE_VIEW_NUM_LEVELS", Value: uint32(33500)},
 			{Name: "GL_TEXTURE_VIEW_NUM_LEVELS_EXT", Value: uint32(33500)},
-			{Name: "GL_TEXTURE_VIEW_MIN_LAYER_EXT", Value: uint32(33501)},
+			{Name: "GL_TEXTURE_VIEW_NUM_LEVELS", Value: uint32(33500)},
 			{Name: "GL_TEXTURE_VIEW_MIN_LAYER", Value: uint32(33501)},
 			{Name: "GL_TEXTURE_VIEW_MIN_LAYER_OES", Value: uint32(33501)},
-			{Name: "GL_TEXTURE_VIEW_NUM_LAYERS", Value: uint32(33502)},
+			{Name: "GL_TEXTURE_VIEW_MIN_LAYER_EXT", Value: uint32(33501)},
 			{Name: "GL_TEXTURE_VIEW_NUM_LAYERS_EXT", Value: uint32(33502)},
+			{Name: "GL_TEXTURE_VIEW_NUM_LAYERS", Value: uint32(33502)},
 			{Name: "GL_TEXTURE_VIEW_NUM_LAYERS_OES", Value: uint32(33502)},
 			{Name: "GL_TEXTURE_IMMUTABLE_LEVELS", Value: uint32(33503)},
 			{Name: "GL_BUFFER", Value: uint32(33504)},
 			{Name: "GL_BUFFER_KHR", Value: uint32(33504)},
 			{Name: "GL_SHADER_KHR", Value: uint32(33505)},
 			{Name: "GL_SHADER", Value: uint32(33505)},
-			{Name: "GL_PROGRAM", Value: uint32(33506)},
 			{Name: "GL_PROGRAM_KHR", Value: uint32(33506)},
+			{Name: "GL_PROGRAM", Value: uint32(33506)},
 			{Name: "GL_QUERY", Value: uint32(33507)},
 			{Name: "GL_QUERY_KHR", Value: uint32(33507)},
-			{Name: "GL_PROGRAM_PIPELINE_KHR", Value: uint32(33508)},
 			{Name: "GL_PROGRAM_PIPELINE", Value: uint32(33508)},
+			{Name: "GL_PROGRAM_PIPELINE_KHR", Value: uint32(33508)},
 			{Name: "GL_MAX_VERTEX_ATTRIB_STRIDE", Value: uint32(33509)},
-			{Name: "GL_SAMPLER", Value: uint32(33510)},
 			{Name: "GL_SAMPLER_KHR", Value: uint32(33510)},
+			{Name: "GL_SAMPLER", Value: uint32(33510)},
 			{Name: "GL_DISPLAY_LIST", Value: uint32(33511)},
-			{Name: "GL_MAX_LABEL_LENGTH", Value: uint32(33512)},
 			{Name: "GL_MAX_LABEL_LENGTH_KHR", Value: uint32(33512)},
+			{Name: "GL_MAX_LABEL_LENGTH", Value: uint32(33512)},
 			{Name: "GL_NUM_SHADING_LANGUAGE_VERSIONS", Value: uint32(33513)},
 			{Name: "GL_QUERY_TARGET", Value: uint32(33514)},
 			{Name: "GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB", Value: uint32(33516)},
@@ -84361,8 +87729,8 @@ func init() {
 			{Name: "GL_SPARSE_BUFFER_PAGE_SIZE_ARB", Value: uint32(33528)},
 			{Name: "GL_MAX_CULL_DISTANCES", Value: uint32(33529)},
 			{Name: "GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES", Value: uint32(33530)},
-			{Name: "GL_CONTEXT_RELEASE_BEHAVIOR", Value: uint32(33531)},
 			{Name: "GL_CONTEXT_RELEASE_BEHAVIOR_KHR", Value: uint32(33531)},
+			{Name: "GL_CONTEXT_RELEASE_BEHAVIOR", Value: uint32(33531)},
 			{Name: "GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_KHR", Value: uint32(33532)},
 			{Name: "GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH", Value: uint32(33532)},
 			{Name: "GL_DEPTH_PASS_INSTRUMENT_SGIX", Value: uint32(33552)},
@@ -84422,21 +87790,21 @@ func init() {
 			{Name: "GL_UNSIGNED_SHORT_5_6_5_EXT", Value: uint32(33635)},
 			{Name: "GL_UNSIGNED_SHORT_5_6_5_REV_EXT", Value: uint32(33636)},
 			{Name: "GL_UNSIGNED_SHORT_5_6_5_REV", Value: uint32(33636)},
-			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG", Value: uint32(33637)},
-			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT", Value: uint32(33637)},
 			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_REV", Value: uint32(33637)},
-			{Name: "GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT", Value: uint32(33638)},
+			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT", Value: uint32(33637)},
+			{Name: "GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG", Value: uint32(33637)},
 			{Name: "GL_UNSIGNED_SHORT_1_5_5_5_REV", Value: uint32(33638)},
-			{Name: "GL_UNSIGNED_INT_8_8_8_8_REV_EXT", Value: uint32(33639)},
+			{Name: "GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT", Value: uint32(33638)},
 			{Name: "GL_UNSIGNED_INT_8_8_8_8_REV", Value: uint32(33639)},
+			{Name: "GL_UNSIGNED_INT_8_8_8_8_REV_EXT", Value: uint32(33639)},
 			{Name: "GL_UNSIGNED_INT_2_10_10_10_REV_EXT", Value: uint32(33640)},
 			{Name: "GL_UNSIGNED_INT_2_10_10_10_REV", Value: uint32(33640)},
 			{Name: "GL_TEXTURE_MAX_CLAMP_S_SGIX", Value: uint32(33641)},
 			{Name: "GL_TEXTURE_MAX_CLAMP_T_SGIX", Value: uint32(33642)},
 			{Name: "GL_TEXTURE_MAX_CLAMP_R_SGIX", Value: uint32(33643)},
-			{Name: "GL_MIRRORED_REPEAT_ARB", Value: uint32(33648)},
 			{Name: "GL_MIRRORED_REPEAT", Value: uint32(33648)},
 			{Name: "GL_MIRRORED_REPEAT_OES", Value: uint32(33648)},
+			{Name: "GL_MIRRORED_REPEAT_ARB", Value: uint32(33648)},
 			{Name: "GL_MIRRORED_REPEAT_IBM", Value: uint32(33648)},
 			{Name: "GL_RGB_S3TC", Value: uint32(33696)},
 			{Name: "GL_RGB4_S3TC", Value: uint32(33697)},
@@ -84503,40 +87871,40 @@ func init() {
 			{Name: "GL_NEAREST_CLIPMAP_NEAREST_SGIX", Value: uint32(33869)},
 			{Name: "GL_NEAREST_CLIPMAP_LINEAR_SGIX", Value: uint32(33870)},
 			{Name: "GL_LINEAR_CLIPMAP_NEAREST_SGIX", Value: uint32(33871)},
-			{Name: "GL_FOG_COORDINATE_SOURCE", Value: uint32(33872)},
 			{Name: "GL_FOG_COORDINATE_SOURCE_EXT", Value: uint32(33872)},
 			{Name: "GL_FOG_COORD_SRC", Value: uint32(33872)},
+			{Name: "GL_FOG_COORDINATE_SOURCE", Value: uint32(33872)},
 			{Name: "GL_FOG_COORDINATE_EXT", Value: uint32(33873)},
-			{Name: "GL_FOG_COORDINATE", Value: uint32(33873)},
 			{Name: "GL_FOG_COORD", Value: uint32(33873)},
+			{Name: "GL_FOG_COORDINATE", Value: uint32(33873)},
 			{Name: "GL_FRAGMENT_DEPTH", Value: uint32(33874)},
 			{Name: "GL_FRAGMENT_DEPTH_EXT", Value: uint32(33874)},
 			{Name: "GL_CURRENT_FOG_COORD", Value: uint32(33875)},
-			{Name: "GL_CURRENT_FOG_COORDINATE_EXT", Value: uint32(33875)},
 			{Name: "GL_CURRENT_FOG_COORDINATE", Value: uint32(33875)},
-			{Name: "GL_FOG_COORDINATE_ARRAY_TYPE_EXT", Value: uint32(33876)},
+			{Name: "GL_CURRENT_FOG_COORDINATE_EXT", Value: uint32(33875)},
 			{Name: "GL_FOG_COORD_ARRAY_TYPE", Value: uint32(33876)},
+			{Name: "GL_FOG_COORDINATE_ARRAY_TYPE_EXT", Value: uint32(33876)},
 			{Name: "GL_FOG_COORDINATE_ARRAY_TYPE", Value: uint32(33876)},
 			{Name: "GL_FOG_COORD_ARRAY_STRIDE", Value: uint32(33877)},
-			{Name: "GL_FOG_COORDINATE_ARRAY_STRIDE_EXT", Value: uint32(33877)},
 			{Name: "GL_FOG_COORDINATE_ARRAY_STRIDE", Value: uint32(33877)},
-			{Name: "GL_FOG_COORDINATE_ARRAY_POINTER_EXT", Value: uint32(33878)},
+			{Name: "GL_FOG_COORDINATE_ARRAY_STRIDE_EXT", Value: uint32(33877)},
 			{Name: "GL_FOG_COORD_ARRAY_POINTER", Value: uint32(33878)},
 			{Name: "GL_FOG_COORDINATE_ARRAY_POINTER", Value: uint32(33878)},
-			{Name: "GL_FOG_COORD_ARRAY", Value: uint32(33879)},
+			{Name: "GL_FOG_COORDINATE_ARRAY_POINTER_EXT", Value: uint32(33878)},
 			{Name: "GL_FOG_COORDINATE_ARRAY_EXT", Value: uint32(33879)},
 			{Name: "GL_FOG_COORDINATE_ARRAY", Value: uint32(33879)},
+			{Name: "GL_FOG_COORD_ARRAY", Value: uint32(33879)},
 			{Name: "GL_COLOR_SUM", Value: uint32(33880)},
-			{Name: "GL_COLOR_SUM_EXT", Value: uint32(33880)},
 			{Name: "GL_COLOR_SUM_ARB", Value: uint32(33880)},
-			{Name: "GL_CURRENT_SECONDARY_COLOR", Value: uint32(33881)},
+			{Name: "GL_COLOR_SUM_EXT", Value: uint32(33880)},
 			{Name: "GL_CURRENT_SECONDARY_COLOR_EXT", Value: uint32(33881)},
+			{Name: "GL_CURRENT_SECONDARY_COLOR", Value: uint32(33881)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_SIZE_EXT", Value: uint32(33882)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_SIZE", Value: uint32(33882)},
-			{Name: "GL_SECONDARY_COLOR_ARRAY_TYPE_EXT", Value: uint32(33883)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_TYPE", Value: uint32(33883)},
-			{Name: "GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT", Value: uint32(33884)},
+			{Name: "GL_SECONDARY_COLOR_ARRAY_TYPE_EXT", Value: uint32(33883)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_STRIDE", Value: uint32(33884)},
+			{Name: "GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT", Value: uint32(33884)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_POINTER_EXT", Value: uint32(33885)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_POINTER", Value: uint32(33885)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY", Value: uint32(33886)},
@@ -84548,24 +87916,24 @@ func init() {
 			{Name: "GL_INVERTED_SCREEN_W_REND", Value: uint32(33937)},
 			{Name: "GL_TEXTURE0_ARB", Value: uint32(33984)},
 			{Name: "GL_TEXTURE0", Value: uint32(33984)},
-			{Name: "GL_TEXTURE1_ARB", Value: uint32(33985)},
 			{Name: "GL_TEXTURE1", Value: uint32(33985)},
-			{Name: "GL_TEXTURE2", Value: uint32(33986)},
+			{Name: "GL_TEXTURE1_ARB", Value: uint32(33985)},
 			{Name: "GL_TEXTURE2_ARB", Value: uint32(33986)},
-			{Name: "GL_TEXTURE3_ARB", Value: uint32(33987)},
+			{Name: "GL_TEXTURE2", Value: uint32(33986)},
 			{Name: "GL_TEXTURE3", Value: uint32(33987)},
-			{Name: "GL_TEXTURE4_ARB", Value: uint32(33988)},
+			{Name: "GL_TEXTURE3_ARB", Value: uint32(33987)},
 			{Name: "GL_TEXTURE4", Value: uint32(33988)},
+			{Name: "GL_TEXTURE4_ARB", Value: uint32(33988)},
 			{Name: "GL_TEXTURE5", Value: uint32(33989)},
 			{Name: "GL_TEXTURE5_ARB", Value: uint32(33989)},
-			{Name: "GL_TEXTURE6_ARB", Value: uint32(33990)},
 			{Name: "GL_TEXTURE6", Value: uint32(33990)},
-			{Name: "GL_TEXTURE7", Value: uint32(33991)},
+			{Name: "GL_TEXTURE6_ARB", Value: uint32(33990)},
 			{Name: "GL_TEXTURE7_ARB", Value: uint32(33991)},
+			{Name: "GL_TEXTURE7", Value: uint32(33991)},
 			{Name: "GL_TEXTURE8", Value: uint32(33992)},
 			{Name: "GL_TEXTURE8_ARB", Value: uint32(33992)},
-			{Name: "GL_TEXTURE9_ARB", Value: uint32(33993)},
 			{Name: "GL_TEXTURE9", Value: uint32(33993)},
+			{Name: "GL_TEXTURE9_ARB", Value: uint32(33993)},
 			{Name: "GL_TEXTURE10_ARB", Value: uint32(33994)},
 			{Name: "GL_TEXTURE10", Value: uint32(33994)},
 			{Name: "GL_TEXTURE11", Value: uint32(33995)},
@@ -84590,40 +87958,40 @@ func init() {
 			{Name: "GL_TEXTURE20", Value: uint32(34004)},
 			{Name: "GL_TEXTURE21", Value: uint32(34005)},
 			{Name: "GL_TEXTURE21_ARB", Value: uint32(34005)},
-			{Name: "GL_TEXTURE22", Value: uint32(34006)},
 			{Name: "GL_TEXTURE22_ARB", Value: uint32(34006)},
-			{Name: "GL_TEXTURE23_ARB", Value: uint32(34007)},
+			{Name: "GL_TEXTURE22", Value: uint32(34006)},
 			{Name: "GL_TEXTURE23", Value: uint32(34007)},
-			{Name: "GL_TEXTURE24_ARB", Value: uint32(34008)},
+			{Name: "GL_TEXTURE23_ARB", Value: uint32(34007)},
 			{Name: "GL_TEXTURE24", Value: uint32(34008)},
+			{Name: "GL_TEXTURE24_ARB", Value: uint32(34008)},
 			{Name: "GL_TEXTURE25", Value: uint32(34009)},
 			{Name: "GL_TEXTURE25_ARB", Value: uint32(34009)},
-			{Name: "GL_TEXTURE26_ARB", Value: uint32(34010)},
 			{Name: "GL_TEXTURE26", Value: uint32(34010)},
-			{Name: "GL_TEXTURE27_ARB", Value: uint32(34011)},
+			{Name: "GL_TEXTURE26_ARB", Value: uint32(34010)},
 			{Name: "GL_TEXTURE27", Value: uint32(34011)},
-			{Name: "GL_TEXTURE28", Value: uint32(34012)},
+			{Name: "GL_TEXTURE27_ARB", Value: uint32(34011)},
 			{Name: "GL_TEXTURE28_ARB", Value: uint32(34012)},
+			{Name: "GL_TEXTURE28", Value: uint32(34012)},
 			{Name: "GL_TEXTURE29", Value: uint32(34013)},
 			{Name: "GL_TEXTURE29_ARB", Value: uint32(34013)},
-			{Name: "GL_TEXTURE30", Value: uint32(34014)},
 			{Name: "GL_TEXTURE30_ARB", Value: uint32(34014)},
-			{Name: "GL_TEXTURE31_ARB", Value: uint32(34015)},
+			{Name: "GL_TEXTURE30", Value: uint32(34014)},
 			{Name: "GL_TEXTURE31", Value: uint32(34015)},
-			{Name: "GL_ACTIVE_TEXTURE_ARB", Value: uint32(34016)},
+			{Name: "GL_TEXTURE31_ARB", Value: uint32(34015)},
 			{Name: "GL_ACTIVE_TEXTURE", Value: uint32(34016)},
+			{Name: "GL_ACTIVE_TEXTURE_ARB", Value: uint32(34016)},
 			{Name: "GL_CLIENT_ACTIVE_TEXTURE_ARB", Value: uint32(34017)},
 			{Name: "GL_CLIENT_ACTIVE_TEXTURE", Value: uint32(34017)},
 			{Name: "GL_MAX_TEXTURE_UNITS_ARB", Value: uint32(34018)},
 			{Name: "GL_MAX_TEXTURE_UNITS", Value: uint32(34018)},
-			{Name: "GL_TRANSPOSE_MODELVIEW_MATRIX", Value: uint32(34019)},
 			{Name: "GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV", Value: uint32(34019)},
 			{Name: "GL_TRANSPOSE_MODELVIEW_MATRIX_ARB", Value: uint32(34019)},
-			{Name: "GL_TRANSPOSE_PROJECTION_MATRIX_ARB", Value: uint32(34020)},
+			{Name: "GL_TRANSPOSE_MODELVIEW_MATRIX", Value: uint32(34019)},
 			{Name: "GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV", Value: uint32(34020)},
 			{Name: "GL_TRANSPOSE_PROJECTION_MATRIX", Value: uint32(34020)},
-			{Name: "GL_TRANSPOSE_TEXTURE_MATRIX_ARB", Value: uint32(34021)},
+			{Name: "GL_TRANSPOSE_PROJECTION_MATRIX_ARB", Value: uint32(34020)},
 			{Name: "GL_TRANSPOSE_TEXTURE_MATRIX", Value: uint32(34021)},
+			{Name: "GL_TRANSPOSE_TEXTURE_MATRIX_ARB", Value: uint32(34021)},
 			{Name: "GL_TRANSPOSE_COLOR_MATRIX", Value: uint32(34022)},
 			{Name: "GL_TRANSPOSE_COLOR_MATRIX_ARB", Value: uint32(34022)},
 			{Name: "GL_SUBTRACT_ARB", Value: uint32(34023)},
@@ -84631,131 +87999,131 @@ func init() {
 			{Name: "GL_MAX_RENDERBUFFER_SIZE", Value: uint32(34024)},
 			{Name: "GL_MAX_RENDERBUFFER_SIZE_OES", Value: uint32(34024)},
 			{Name: "GL_MAX_RENDERBUFFER_SIZE_EXT", Value: uint32(34024)},
-			{Name: "GL_COMPRESSED_ALPHA_ARB", Value: uint32(34025)},
 			{Name: "GL_COMPRESSED_ALPHA", Value: uint32(34025)},
-			{Name: "GL_COMPRESSED_LUMINANCE", Value: uint32(34026)},
+			{Name: "GL_COMPRESSED_ALPHA_ARB", Value: uint32(34025)},
 			{Name: "GL_COMPRESSED_LUMINANCE_ARB", Value: uint32(34026)},
+			{Name: "GL_COMPRESSED_LUMINANCE", Value: uint32(34026)},
 			{Name: "GL_COMPRESSED_LUMINANCE_ALPHA", Value: uint32(34027)},
 			{Name: "GL_COMPRESSED_LUMINANCE_ALPHA_ARB", Value: uint32(34027)},
 			{Name: "GL_COMPRESSED_INTENSITY", Value: uint32(34028)},
 			{Name: "GL_COMPRESSED_INTENSITY_ARB", Value: uint32(34028)},
-			{Name: "GL_COMPRESSED_RGB", Value: uint32(34029)},
 			{Name: "GL_COMPRESSED_RGB_ARB", Value: uint32(34029)},
-			{Name: "GL_COMPRESSED_RGBA", Value: uint32(34030)},
+			{Name: "GL_COMPRESSED_RGB", Value: uint32(34029)},
 			{Name: "GL_COMPRESSED_RGBA_ARB", Value: uint32(34030)},
-			{Name: "GL_TEXTURE_COMPRESSION_HINT_ARB", Value: uint32(34031)},
+			{Name: "GL_COMPRESSED_RGBA", Value: uint32(34030)},
 			{Name: "GL_TEXTURE_COMPRESSION_HINT", Value: uint32(34031)},
+			{Name: "GL_TEXTURE_COMPRESSION_HINT_ARB", Value: uint32(34031)},
 			{Name: "GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER", Value: uint32(34032)},
 			{Name: "GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER", Value: uint32(34033)},
 			{Name: "GL_ALL_COMPLETED_NV", Value: uint32(34034)},
 			{Name: "GL_FENCE_STATUS_NV", Value: uint32(34035)},
 			{Name: "GL_FENCE_CONDITION_NV", Value: uint32(34036)},
+			{Name: "GL_TEXTURE_RECTANGLE_ARB", Value: uint32(34037)},
 			{Name: "GL_TEXTURE_RECTANGLE_NV", Value: uint32(34037)},
 			{Name: "GL_TEXTURE_RECTANGLE", Value: uint32(34037)},
-			{Name: "GL_TEXTURE_RECTANGLE_ARB", Value: uint32(34037)},
-			{Name: "GL_TEXTURE_BINDING_RECTANGLE_NV", Value: uint32(34038)},
 			{Name: "GL_TEXTURE_BINDING_RECTANGLE_ARB", Value: uint32(34038)},
+			{Name: "GL_TEXTURE_BINDING_RECTANGLE_NV", Value: uint32(34038)},
 			{Name: "GL_TEXTURE_BINDING_RECTANGLE", Value: uint32(34038)},
 			{Name: "GL_PROXY_TEXTURE_RECTANGLE", Value: uint32(34039)},
-			{Name: "GL_PROXY_TEXTURE_RECTANGLE_NV", Value: uint32(34039)},
 			{Name: "GL_PROXY_TEXTURE_RECTANGLE_ARB", Value: uint32(34039)},
-			{Name: "GL_MAX_RECTANGLE_TEXTURE_SIZE_NV", Value: uint32(34040)},
-			{Name: "GL_MAX_RECTANGLE_TEXTURE_SIZE", Value: uint32(34040)},
+			{Name: "GL_PROXY_TEXTURE_RECTANGLE_NV", Value: uint32(34039)},
 			{Name: "GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB", Value: uint32(34040)},
+			{Name: "GL_MAX_RECTANGLE_TEXTURE_SIZE", Value: uint32(34040)},
+			{Name: "GL_MAX_RECTANGLE_TEXTURE_SIZE_NV", Value: uint32(34040)},
 			{Name: "GL_DEPTH_STENCIL_NV", Value: uint32(34041)},
-			{Name: "GL_DEPTH_STENCIL_EXT", Value: uint32(34041)},
-			{Name: "GL_DEPTH_STENCIL_OES", Value: uint32(34041)},
 			{Name: "GL_DEPTH_STENCIL", Value: uint32(34041)},
+			{Name: "GL_DEPTH_STENCIL_OES", Value: uint32(34041)},
+			{Name: "GL_DEPTH_STENCIL_EXT", Value: uint32(34041)},
 			{Name: "GL_UNSIGNED_INT_24_8_EXT", Value: uint32(34042)},
-			{Name: "GL_UNSIGNED_INT_24_8_OES", Value: uint32(34042)},
 			{Name: "GL_UNSIGNED_INT_24_8_NV", Value: uint32(34042)},
 			{Name: "GL_UNSIGNED_INT_24_8", Value: uint32(34042)},
+			{Name: "GL_UNSIGNED_INT_24_8_OES", Value: uint32(34042)},
 			{Name: "GL_MAX_TEXTURE_LOD_BIAS_EXT", Value: uint32(34045)},
 			{Name: "GL_MAX_TEXTURE_LOD_BIAS", Value: uint32(34045)},
 			{Name: "GL_TEXTURE_MAX_ANISOTROPY_EXT", Value: uint32(34046)},
 			{Name: "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT", Value: uint32(34047)},
-			{Name: "GL_TEXTURE_FILTER_CONTROL", Value: uint32(34048)},
 			{Name: "GL_TEXTURE_FILTER_CONTROL_EXT", Value: uint32(34048)},
-			{Name: "GL_TEXTURE_LOD_BIAS", Value: uint32(34049)},
+			{Name: "GL_TEXTURE_FILTER_CONTROL", Value: uint32(34048)},
 			{Name: "GL_TEXTURE_LOD_BIAS_EXT", Value: uint32(34049)},
+			{Name: "GL_TEXTURE_LOD_BIAS", Value: uint32(34049)},
 			{Name: "GL_MODELVIEW1_STACK_DEPTH_EXT", Value: uint32(34050)},
 			{Name: "GL_COMBINE4_NV", Value: uint32(34051)},
 			{Name: "GL_MAX_SHININESS_NV", Value: uint32(34052)},
 			{Name: "GL_MAX_SPOT_EXPONENT_NV", Value: uint32(34053)},
 			{Name: "GL_MODELVIEW1_MATRIX_EXT", Value: uint32(34054)},
-			{Name: "GL_INCR_WRAP_EXT", Value: uint32(34055)},
 			{Name: "GL_INCR_WRAP", Value: uint32(34055)},
 			{Name: "GL_INCR_WRAP_OES", Value: uint32(34055)},
-			{Name: "GL_DECR_WRAP_EXT", Value: uint32(34056)},
-			{Name: "GL_DECR_WRAP_OES", Value: uint32(34056)},
+			{Name: "GL_INCR_WRAP_EXT", Value: uint32(34055)},
 			{Name: "GL_DECR_WRAP", Value: uint32(34056)},
+			{Name: "GL_DECR_WRAP_OES", Value: uint32(34056)},
+			{Name: "GL_DECR_WRAP_EXT", Value: uint32(34056)},
 			{Name: "GL_VERTEX_WEIGHTING_EXT", Value: uint32(34057)},
-			{Name: "GL_MODELVIEW1_EXT", Value: uint32(34058)},
 			{Name: "GL_MODELVIEW1_ARB", Value: uint32(34058)},
+			{Name: "GL_MODELVIEW1_EXT", Value: uint32(34058)},
 			{Name: "GL_CURRENT_VERTEX_WEIGHT_EXT", Value: uint32(34059)},
 			{Name: "GL_VERTEX_WEIGHT_ARRAY_EXT", Value: uint32(34060)},
 			{Name: "GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT", Value: uint32(34061)},
 			{Name: "GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT", Value: uint32(34062)},
 			{Name: "GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT", Value: uint32(34063)},
 			{Name: "GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT", Value: uint32(34064)},
-			{Name: "GL_NORMAL_MAP_EXT", Value: uint32(34065)},
-			{Name: "GL_NORMAL_MAP", Value: uint32(34065)},
 			{Name: "GL_NORMAL_MAP_OES", Value: uint32(34065)},
 			{Name: "GL_NORMAL_MAP_NV", Value: uint32(34065)},
+			{Name: "GL_NORMAL_MAP_EXT", Value: uint32(34065)},
 			{Name: "GL_NORMAL_MAP_ARB", Value: uint32(34065)},
+			{Name: "GL_NORMAL_MAP", Value: uint32(34065)},
+			{Name: "GL_REFLECTION_MAP_EXT", Value: uint32(34066)},
+			{Name: "GL_REFLECTION_MAP", Value: uint32(34066)},
 			{Name: "GL_REFLECTION_MAP_ARB", Value: uint32(34066)},
 			{Name: "GL_REFLECTION_MAP_OES", Value: uint32(34066)},
 			{Name: "GL_REFLECTION_MAP_NV", Value: uint32(34066)},
-			{Name: "GL_REFLECTION_MAP_EXT", Value: uint32(34066)},
-			{Name: "GL_REFLECTION_MAP", Value: uint32(34066)},
 			{Name: "GL_TEXTURE_CUBE_MAP_OES", Value: uint32(34067)},
 			{Name: "GL_TEXTURE_CUBE_MAP_EXT", Value: uint32(34067)},
 			{Name: "GL_TEXTURE_CUBE_MAP_ARB", Value: uint32(34067)},
 			{Name: "GL_TEXTURE_CUBE_MAP", Value: uint32(34067)},
-			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_EXT", Value: uint32(34068)},
-			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARB", Value: uint32(34068)},
 			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_OES", Value: uint32(34068)},
+			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARB", Value: uint32(34068)},
+			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_EXT", Value: uint32(34068)},
 			{Name: "GL_TEXTURE_BINDING_CUBE_MAP", Value: uint32(34068)},
+			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB", Value: uint32(34069)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_X_OES", Value: uint32(34069)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_X_EXT", Value: uint32(34069)},
-			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB", Value: uint32(34069)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_X", Value: uint32(34069)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_OES", Value: uint32(34070)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_X", Value: uint32(34070)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB", Value: uint32(34070)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_EXT", Value: uint32(34070)},
-			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB", Value: uint32(34071)},
-			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_EXT", Value: uint32(34071)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB", Value: uint32(34070)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y", Value: uint32(34071)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_OES", Value: uint32(34071)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB", Value: uint32(34072)},
+			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_EXT", Value: uint32(34071)},
+			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB", Value: uint32(34071)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_EXT", Value: uint32(34072)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_OES", Value: uint32(34072)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y", Value: uint32(34072)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_OES", Value: uint32(34072)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB", Value: uint32(34072)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Z", Value: uint32(34073)},
+			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB", Value: uint32(34073)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_EXT", Value: uint32(34073)},
 			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_OES", Value: uint32(34073)},
-			{Name: "GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB", Value: uint32(34073)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB", Value: uint32(34074)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_OES", Value: uint32(34074)},
-			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT", Value: uint32(34074)},
 			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z", Value: uint32(34074)},
-			{Name: "GL_PROXY_TEXTURE_CUBE_MAP", Value: uint32(34075)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_OES", Value: uint32(34074)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB", Value: uint32(34074)},
+			{Name: "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT", Value: uint32(34074)},
 			{Name: "GL_PROXY_TEXTURE_CUBE_MAP_EXT", Value: uint32(34075)},
+			{Name: "GL_PROXY_TEXTURE_CUBE_MAP", Value: uint32(34075)},
 			{Name: "GL_PROXY_TEXTURE_CUBE_MAP_ARB", Value: uint32(34075)},
+			{Name: "GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT", Value: uint32(34076)},
 			{Name: "GL_MAX_CUBE_MAP_TEXTURE_SIZE", Value: uint32(34076)},
 			{Name: "GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB", Value: uint32(34076)},
-			{Name: "GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT", Value: uint32(34076)},
 			{Name: "GL_MAX_CUBE_MAP_TEXTURE_SIZE_OES", Value: uint32(34076)},
 			{Name: "GL_VERTEX_ARRAY_RANGE_APPLE", Value: uint32(34077)},
 			{Name: "GL_VERTEX_ARRAY_RANGE_NV", Value: uint32(34077)},
 			{Name: "GL_VERTEX_ARRAY_RANGE_LENGTH_NV", Value: uint32(34078)},
 			{Name: "GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE", Value: uint32(34078)},
-			{Name: "GL_VERTEX_ARRAY_RANGE_VALID_NV", Value: uint32(34079)},
 			{Name: "GL_VERTEX_ARRAY_STORAGE_HINT_APPLE", Value: uint32(34079)},
+			{Name: "GL_VERTEX_ARRAY_RANGE_VALID_NV", Value: uint32(34079)},
 			{Name: "GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV", Value: uint32(34080)},
-			{Name: "GL_VERTEX_ARRAY_RANGE_POINTER_APPLE", Value: uint32(34081)},
 			{Name: "GL_VERTEX_ARRAY_RANGE_POINTER_NV", Value: uint32(34081)},
+			{Name: "GL_VERTEX_ARRAY_RANGE_POINTER_APPLE", Value: uint32(34081)},
 			{Name: "GL_REGISTER_COMBINERS_NV", Value: uint32(34082)},
 			{Name: "GL_VARIABLE_A_NV", Value: uint32(34083)},
 			{Name: "GL_VARIABLE_B_NV", Value: uint32(34084)},
@@ -84827,15 +88195,15 @@ func init() {
 			{Name: "GL_BLUE_MAX_CLAMP_INGR", Value: uint32(34150)},
 			{Name: "GL_ALPHA_MAX_CLAMP_INGR", Value: uint32(34151)},
 			{Name: "GL_INTERLACE_READ_INGR", Value: uint32(34152)},
-			{Name: "GL_COMBINE_ARB", Value: uint32(34160)},
 			{Name: "GL_COMBINE", Value: uint32(34160)},
 			{Name: "GL_COMBINE_EXT", Value: uint32(34160)},
+			{Name: "GL_COMBINE_ARB", Value: uint32(34160)},
 			{Name: "GL_COMBINE_RGB_ARB", Value: uint32(34161)},
-			{Name: "GL_COMBINE_RGB_EXT", Value: uint32(34161)},
 			{Name: "GL_COMBINE_RGB", Value: uint32(34161)},
+			{Name: "GL_COMBINE_RGB_EXT", Value: uint32(34161)},
 			{Name: "GL_COMBINE_ALPHA_ARB", Value: uint32(34162)},
-			{Name: "GL_COMBINE_ALPHA", Value: uint32(34162)},
 			{Name: "GL_COMBINE_ALPHA_EXT", Value: uint32(34162)},
+			{Name: "GL_COMBINE_ALPHA", Value: uint32(34162)},
 			{Name: "GL_RGB_SCALE", Value: uint32(34163)},
 			{Name: "GL_RGB_SCALE_EXT", Value: uint32(34163)},
 			{Name: "GL_RGB_SCALE_ARB", Value: uint32(34163)},
@@ -84843,62 +88211,62 @@ func init() {
 			{Name: "GL_ADD_SIGNED_ARB", Value: uint32(34164)},
 			{Name: "GL_ADD_SIGNED_EXT", Value: uint32(34164)},
 			{Name: "GL_INTERPOLATE_ARB", Value: uint32(34165)},
-			{Name: "GL_INTERPOLATE_EXT", Value: uint32(34165)},
 			{Name: "GL_INTERPOLATE", Value: uint32(34165)},
-			{Name: "GL_CONSTANT_NV", Value: uint32(34166)},
-			{Name: "GL_CONSTANT_EXT", Value: uint32(34166)},
+			{Name: "GL_INTERPOLATE_EXT", Value: uint32(34165)},
 			{Name: "GL_CONSTANT_ARB", Value: uint32(34166)},
 			{Name: "GL_CONSTANT", Value: uint32(34166)},
-			{Name: "GL_PRIMARY_COLOR", Value: uint32(34167)},
-			{Name: "GL_PRIMARY_COLOR_EXT", Value: uint32(34167)},
+			{Name: "GL_CONSTANT_EXT", Value: uint32(34166)},
+			{Name: "GL_CONSTANT_NV", Value: uint32(34166)},
 			{Name: "GL_PRIMARY_COLOR_ARB", Value: uint32(34167)},
+			{Name: "GL_PRIMARY_COLOR_EXT", Value: uint32(34167)},
+			{Name: "GL_PRIMARY_COLOR", Value: uint32(34167)},
+			{Name: "GL_PREVIOUS", Value: uint32(34168)},
 			{Name: "GL_PREVIOUS_EXT", Value: uint32(34168)},
 			{Name: "GL_PREVIOUS_ARB", Value: uint32(34168)},
-			{Name: "GL_PREVIOUS", Value: uint32(34168)},
 			{Name: "GL_SRC0_RGB", Value: uint32(34176)},
+			{Name: "GL_SOURCE0_RGB_EXT", Value: uint32(34176)},
 			{Name: "GL_SOURCE0_RGB", Value: uint32(34176)},
 			{Name: "GL_SOURCE0_RGB_ARB", Value: uint32(34176)},
-			{Name: "GL_SOURCE0_RGB_EXT", Value: uint32(34176)},
 			{Name: "GL_SOURCE1_RGB_EXT", Value: uint32(34177)},
-			{Name: "GL_SRC1_RGB", Value: uint32(34177)},
 			{Name: "GL_SOURCE1_RGB", Value: uint32(34177)},
 			{Name: "GL_SOURCE1_RGB_ARB", Value: uint32(34177)},
+			{Name: "GL_SRC1_RGB", Value: uint32(34177)},
 			{Name: "GL_SOURCE2_RGB_EXT", Value: uint32(34178)},
-			{Name: "GL_SRC2_RGB", Value: uint32(34178)},
 			{Name: "GL_SOURCE2_RGB_ARB", Value: uint32(34178)},
 			{Name: "GL_SOURCE2_RGB", Value: uint32(34178)},
+			{Name: "GL_SRC2_RGB", Value: uint32(34178)},
 			{Name: "GL_SOURCE3_RGB_NV", Value: uint32(34179)},
-			{Name: "GL_SOURCE0_ALPHA", Value: uint32(34184)},
-			{Name: "GL_SRC0_ALPHA", Value: uint32(34184)},
-			{Name: "GL_SOURCE0_ALPHA_EXT", Value: uint32(34184)},
 			{Name: "GL_SOURCE0_ALPHA_ARB", Value: uint32(34184)},
-			{Name: "GL_SOURCE1_ALPHA_ARB", Value: uint32(34185)},
+			{Name: "GL_SRC0_ALPHA", Value: uint32(34184)},
+			{Name: "GL_SOURCE0_ALPHA", Value: uint32(34184)},
+			{Name: "GL_SOURCE0_ALPHA_EXT", Value: uint32(34184)},
 			{Name: "GL_SOURCE1_ALPHA_EXT", Value: uint32(34185)},
-			{Name: "GL_SOURCE1_ALPHA", Value: uint32(34185)},
 			{Name: "GL_SRC1_ALPHA", Value: uint32(34185)},
+			{Name: "GL_SOURCE1_ALPHA", Value: uint32(34185)},
+			{Name: "GL_SOURCE1_ALPHA_ARB", Value: uint32(34185)},
 			{Name: "GL_SOURCE2_ALPHA_ARB", Value: uint32(34186)},
-			{Name: "GL_SOURCE2_ALPHA", Value: uint32(34186)},
 			{Name: "GL_SRC2_ALPHA", Value: uint32(34186)},
+			{Name: "GL_SOURCE2_ALPHA", Value: uint32(34186)},
 			{Name: "GL_SOURCE2_ALPHA_EXT", Value: uint32(34186)},
 			{Name: "GL_SOURCE3_ALPHA_NV", Value: uint32(34187)},
 			{Name: "GL_OPERAND0_RGB_EXT", Value: uint32(34192)},
-			{Name: "GL_OPERAND0_RGB", Value: uint32(34192)},
 			{Name: "GL_OPERAND0_RGB_ARB", Value: uint32(34192)},
+			{Name: "GL_OPERAND0_RGB", Value: uint32(34192)},
+			{Name: "GL_OPERAND1_RGB", Value: uint32(34193)},
 			{Name: "GL_OPERAND1_RGB_EXT", Value: uint32(34193)},
 			{Name: "GL_OPERAND1_RGB_ARB", Value: uint32(34193)},
-			{Name: "GL_OPERAND1_RGB", Value: uint32(34193)},
-			{Name: "GL_OPERAND2_RGB", Value: uint32(34194)},
 			{Name: "GL_OPERAND2_RGB_EXT", Value: uint32(34194)},
+			{Name: "GL_OPERAND2_RGB", Value: uint32(34194)},
 			{Name: "GL_OPERAND2_RGB_ARB", Value: uint32(34194)},
 			{Name: "GL_OPERAND3_RGB_NV", Value: uint32(34195)},
-			{Name: "GL_OPERAND0_ALPHA", Value: uint32(34200)},
-			{Name: "GL_OPERAND0_ALPHA_ARB", Value: uint32(34200)},
 			{Name: "GL_OPERAND0_ALPHA_EXT", Value: uint32(34200)},
+			{Name: "GL_OPERAND0_ALPHA_ARB", Value: uint32(34200)},
+			{Name: "GL_OPERAND0_ALPHA", Value: uint32(34200)},
 			{Name: "GL_OPERAND1_ALPHA", Value: uint32(34201)},
 			{Name: "GL_OPERAND1_ALPHA_ARB", Value: uint32(34201)},
 			{Name: "GL_OPERAND1_ALPHA_EXT", Value: uint32(34201)},
-			{Name: "GL_OPERAND2_ALPHA", Value: uint32(34202)},
 			{Name: "GL_OPERAND2_ALPHA_ARB", Value: uint32(34202)},
+			{Name: "GL_OPERAND2_ALPHA", Value: uint32(34202)},
 			{Name: "GL_OPERAND2_ALPHA_EXT", Value: uint32(34202)},
 			{Name: "GL_OPERAND3_ALPHA_NV", Value: uint32(34203)},
 			{Name: "GL_PACK_SUBSAMPLE_RATE_SGIX", Value: uint32(34208)},
@@ -84921,8 +88289,8 @@ func init() {
 			{Name: "GL_YCBCR_422_APPLE", Value: uint32(34233)},
 			{Name: "GL_UNSIGNED_SHORT_8_8_MESA", Value: uint32(34234)},
 			{Name: "GL_UNSIGNED_SHORT_8_8_APPLE", Value: uint32(34234)},
-			{Name: "GL_UNSIGNED_SHORT_8_8_REV_APPLE", Value: uint32(34235)},
 			{Name: "GL_UNSIGNED_SHORT_8_8_REV_MESA", Value: uint32(34235)},
+			{Name: "GL_UNSIGNED_SHORT_8_8_REV_APPLE", Value: uint32(34235)},
 			{Name: "GL_TEXTURE_STORAGE_HINT_APPLE", Value: uint32(34236)},
 			{Name: "GL_STORAGE_PRIVATE_APPLE", Value: uint32(34237)},
 			{Name: "GL_STORAGE_CACHED_APPLE", Value: uint32(34238)},
@@ -84945,20 +88313,20 @@ func init() {
 			{Name: "GL_VERTEX_PROGRAM_NV", Value: uint32(34336)},
 			{Name: "GL_VERTEX_PROGRAM_ARB", Value: uint32(34336)},
 			{Name: "GL_VERTEX_STATE_PROGRAM_NV", Value: uint32(34337)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_ENABLED", Value: uint32(34338)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB", Value: uint32(34338)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_SIZE", Value: uint32(34339)},
-			{Name: "GL_ATTRIB_ARRAY_SIZE_NV", Value: uint32(34339)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_ENABLED", Value: uint32(34338)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB", Value: uint32(34339)},
+			{Name: "GL_ATTRIB_ARRAY_SIZE_NV", Value: uint32(34339)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_SIZE", Value: uint32(34339)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_STRIDE", Value: uint32(34340)},
 			{Name: "GL_ATTRIB_ARRAY_STRIDE_NV", Value: uint32(34340)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB", Value: uint32(34340)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_STRIDE", Value: uint32(34340)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB", Value: uint32(34341)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_TYPE", Value: uint32(34341)},
 			{Name: "GL_ATTRIB_ARRAY_TYPE_NV", Value: uint32(34341)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB", Value: uint32(34341)},
-			{Name: "GL_CURRENT_ATTRIB_NV", Value: uint32(34342)},
-			{Name: "GL_CURRENT_VERTEX_ATTRIB_ARB", Value: uint32(34342)},
 			{Name: "GL_CURRENT_VERTEX_ATTRIB", Value: uint32(34342)},
+			{Name: "GL_CURRENT_VERTEX_ATTRIB_ARB", Value: uint32(34342)},
+			{Name: "GL_CURRENT_ATTRIB_NV", Value: uint32(34342)},
 			{Name: "GL_PROGRAM_LENGTH_NV", Value: uint32(34343)},
 			{Name: "GL_PROGRAM_LENGTH_ARB", Value: uint32(34343)},
 			{Name: "GL_PROGRAM_STRING_ARB", Value: uint32(34344)},
@@ -84968,10 +88336,10 @@ func init() {
 			{Name: "GL_INVERSE_NV", Value: uint32(34347)},
 			{Name: "GL_TRANSPOSE_NV", Value: uint32(34348)},
 			{Name: "GL_INVERSE_TRANSPOSE_NV", Value: uint32(34349)},
-			{Name: "GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB", Value: uint32(34350)},
 			{Name: "GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV", Value: uint32(34350)},
-			{Name: "GL_MAX_PROGRAM_MATRICES_ARB", Value: uint32(34351)},
+			{Name: "GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB", Value: uint32(34350)},
 			{Name: "GL_MAX_TRACK_MATRICES_NV", Value: uint32(34351)},
+			{Name: "GL_MAX_PROGRAM_MATRICES_ARB", Value: uint32(34351)},
 			{Name: "GL_MATRIX0_NV", Value: uint32(34352)},
 			{Name: "GL_MATRIX1_NV", Value: uint32(34353)},
 			{Name: "GL_MATRIX2_NV", Value: uint32(34354)},
@@ -84982,20 +88350,20 @@ func init() {
 			{Name: "GL_MATRIX7_NV", Value: uint32(34359)},
 			{Name: "GL_CURRENT_MATRIX_STACK_DEPTH_NV", Value: uint32(34368)},
 			{Name: "GL_CURRENT_MATRIX_STACK_DEPTH_ARB", Value: uint32(34368)},
-			{Name: "GL_CURRENT_MATRIX_ARB", Value: uint32(34369)},
 			{Name: "GL_CURRENT_MATRIX_NV", Value: uint32(34369)},
-			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE_ARB", Value: uint32(34370)},
-			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE", Value: uint32(34370)},
-			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE_NV", Value: uint32(34370)},
-			{Name: "GL_PROGRAM_POINT_SIZE", Value: uint32(34370)},
+			{Name: "GL_CURRENT_MATRIX_ARB", Value: uint32(34369)},
 			{Name: "GL_PROGRAM_POINT_SIZE_ARB", Value: uint32(34370)},
+			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE", Value: uint32(34370)},
+			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE_ARB", Value: uint32(34370)},
+			{Name: "GL_VERTEX_PROGRAM_POINT_SIZE_NV", Value: uint32(34370)},
 			{Name: "GL_PROGRAM_POINT_SIZE_EXT", Value: uint32(34370)},
-			{Name: "GL_VERTEX_PROGRAM_TWO_SIDE", Value: uint32(34371)},
-			{Name: "GL_VERTEX_PROGRAM_TWO_SIDE_ARB", Value: uint32(34371)},
+			{Name: "GL_PROGRAM_POINT_SIZE", Value: uint32(34370)},
 			{Name: "GL_VERTEX_PROGRAM_TWO_SIDE_NV", Value: uint32(34371)},
+			{Name: "GL_VERTEX_PROGRAM_TWO_SIDE_ARB", Value: uint32(34371)},
+			{Name: "GL_VERTEX_PROGRAM_TWO_SIDE", Value: uint32(34371)},
 			{Name: "GL_PROGRAM_PARAMETER_NV", Value: uint32(34372)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB", Value: uint32(34373)},
 			{Name: "GL_ATTRIB_ARRAY_POINTER_NV", Value: uint32(34373)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB", Value: uint32(34373)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_POINTER", Value: uint32(34373)},
 			{Name: "GL_PROGRAM_TARGET_NV", Value: uint32(34374)},
 			{Name: "GL_PROGRAM_RESIDENT_NV", Value: uint32(34375)},
@@ -85058,14 +88426,14 @@ func init() {
 			{Name: "GL_MAP2_VERTEX_ATTRIB13_4_NV", Value: uint32(34429)},
 			{Name: "GL_MAP2_VERTEX_ATTRIB14_4_NV", Value: uint32(34430)},
 			{Name: "GL_MAP2_VERTEX_ATTRIB15_4_NV", Value: uint32(34431)},
-			{Name: "GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB", Value: uint32(34464)},
 			{Name: "GL_TEXTURE_COMPRESSED_IMAGE_SIZE", Value: uint32(34464)},
-			{Name: "GL_TEXTURE_COMPRESSED_ARB", Value: uint32(34465)},
+			{Name: "GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB", Value: uint32(34464)},
 			{Name: "GL_TEXTURE_COMPRESSED", Value: uint32(34465)},
+			{Name: "GL_TEXTURE_COMPRESSED_ARB", Value: uint32(34465)},
 			{Name: "GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB", Value: uint32(34466)},
 			{Name: "GL_NUM_COMPRESSED_TEXTURE_FORMATS", Value: uint32(34466)},
-			{Name: "GL_COMPRESSED_TEXTURE_FORMATS", Value: uint32(34467)},
 			{Name: "GL_COMPRESSED_TEXTURE_FORMATS_ARB", Value: uint32(34467)},
+			{Name: "GL_COMPRESSED_TEXTURE_FORMATS", Value: uint32(34467)},
 			{Name: "GL_MAX_VERTEX_UNITS_ARB", Value: uint32(34468)},
 			{Name: "GL_MAX_VERTEX_UNITS_OES", Value: uint32(34468)},
 			{Name: "GL_ACTIVE_VERTEX_UNITS_ARB", Value: uint32(34469)},
@@ -85074,19 +88442,19 @@ func init() {
 			{Name: "GL_CURRENT_WEIGHT_ARB", Value: uint32(34472)},
 			{Name: "GL_WEIGHT_ARRAY_TYPE_OES", Value: uint32(34473)},
 			{Name: "GL_WEIGHT_ARRAY_TYPE_ARB", Value: uint32(34473)},
-			{Name: "GL_WEIGHT_ARRAY_STRIDE_ARB", Value: uint32(34474)},
 			{Name: "GL_WEIGHT_ARRAY_STRIDE_OES", Value: uint32(34474)},
-			{Name: "GL_WEIGHT_ARRAY_SIZE_OES", Value: uint32(34475)},
+			{Name: "GL_WEIGHT_ARRAY_STRIDE_ARB", Value: uint32(34474)},
 			{Name: "GL_WEIGHT_ARRAY_SIZE_ARB", Value: uint32(34475)},
-			{Name: "GL_WEIGHT_ARRAY_POINTER_OES", Value: uint32(34476)},
+			{Name: "GL_WEIGHT_ARRAY_SIZE_OES", Value: uint32(34475)},
 			{Name: "GL_WEIGHT_ARRAY_POINTER_ARB", Value: uint32(34476)},
-			{Name: "GL_WEIGHT_ARRAY_OES", Value: uint32(34477)},
+			{Name: "GL_WEIGHT_ARRAY_POINTER_OES", Value: uint32(34476)},
 			{Name: "GL_WEIGHT_ARRAY_ARB", Value: uint32(34477)},
+			{Name: "GL_WEIGHT_ARRAY_OES", Value: uint32(34477)},
 			{Name: "GL_DOT3_RGB", Value: uint32(34478)},
 			{Name: "GL_DOT3_RGB_ARB", Value: uint32(34478)},
-			{Name: "GL_DOT3_RGBA_IMG", Value: uint32(34479)},
 			{Name: "GL_DOT3_RGBA", Value: uint32(34479)},
 			{Name: "GL_DOT3_RGBA_ARB", Value: uint32(34479)},
+			{Name: "GL_DOT3_RGBA_IMG", Value: uint32(34479)},
 			{Name: "GL_COMPRESSED_RGB_FXT1_3DFX", Value: uint32(34480)},
 			{Name: "GL_COMPRESSED_RGBA_FXT1_3DFX", Value: uint32(34481)},
 			{Name: "GL_MULTISAMPLE_3DFX", Value: uint32(34482)},
@@ -85224,13 +88592,13 @@ func init() {
 			{Name: "GL_Z400_BINARY_AMD", Value: uint32(34624)},
 			{Name: "GL_DOT3_RGB_EXT", Value: uint32(34624)},
 			{Name: "GL_DOT3_RGBA_EXT", Value: uint32(34625)},
-			{Name: "GL_PROGRAM_BINARY_LENGTH", Value: uint32(34625)},
 			{Name: "GL_PROGRAM_BINARY_LENGTH_OES", Value: uint32(34625)},
-			{Name: "GL_MIRROR_CLAMP_EXT", Value: uint32(34626)},
+			{Name: "GL_PROGRAM_BINARY_LENGTH", Value: uint32(34625)},
 			{Name: "GL_MIRROR_CLAMP_ATI", Value: uint32(34626)},
+			{Name: "GL_MIRROR_CLAMP_EXT", Value: uint32(34626)},
 			{Name: "GL_MIRROR_CLAMP_TO_EDGE", Value: uint32(34627)},
-			{Name: "GL_MIRROR_CLAMP_TO_EDGE_ATI", Value: uint32(34627)},
 			{Name: "GL_MIRROR_CLAMP_TO_EDGE_EXT", Value: uint32(34627)},
+			{Name: "GL_MIRROR_CLAMP_TO_EDGE_ATI", Value: uint32(34627)},
 			{Name: "GL_MODULATE_ADD_ATI", Value: uint32(34628)},
 			{Name: "GL_MODULATE_SIGNED_ADD_ATI", Value: uint32(34629)},
 			{Name: "GL_MODULATE_SUBTRACT_ATI", Value: uint32(34630)},
@@ -85249,12 +88617,12 @@ func init() {
 			{Name: "GL_TRACE_NAME_MESA", Value: uint32(34646)},
 			{Name: "GL_YCBCR_MESA", Value: uint32(34647)},
 			{Name: "GL_PACK_INVERT_MESA", Value: uint32(34648)},
-			{Name: "GL_DEBUG_OBJECT_MESA", Value: uint32(34649)},
 			{Name: "GL_TEXTURE_1D_STACK_MESAX", Value: uint32(34649)},
+			{Name: "GL_DEBUG_OBJECT_MESA", Value: uint32(34649)},
 			{Name: "GL_DEBUG_PRINT_MESA", Value: uint32(34650)},
 			{Name: "GL_TEXTURE_2D_STACK_MESAX", Value: uint32(34650)},
-			{Name: "GL_DEBUG_ASSERT_MESA", Value: uint32(34651)},
 			{Name: "GL_PROXY_TEXTURE_1D_STACK_MESAX", Value: uint32(34651)},
+			{Name: "GL_DEBUG_ASSERT_MESA", Value: uint32(34651)},
 			{Name: "GL_PROXY_TEXTURE_2D_STACK_MESAX", Value: uint32(34652)},
 			{Name: "GL_TEXTURE_1D_STACK_BINDING_MESAX", Value: uint32(34653)},
 			{Name: "GL_TEXTURE_2D_STACK_BINDING_MESAX", Value: uint32(34654)},
@@ -85262,9 +88630,9 @@ func init() {
 			{Name: "GL_DYNAMIC_ATI", Value: uint32(34657)},
 			{Name: "GL_PRESERVE_ATI", Value: uint32(34658)},
 			{Name: "GL_DISCARD_ATI", Value: uint32(34659)},
-			{Name: "GL_BUFFER_SIZE_ARB", Value: uint32(34660)},
 			{Name: "GL_BUFFER_SIZE", Value: uint32(34660)},
 			{Name: "GL_OBJECT_BUFFER_SIZE_ATI", Value: uint32(34660)},
+			{Name: "GL_BUFFER_SIZE_ARB", Value: uint32(34660)},
 			{Name: "GL_BUFFER_USAGE", Value: uint32(34661)},
 			{Name: "GL_BUFFER_USAGE_ARB", Value: uint32(34661)},
 			{Name: "GL_OBJECT_BUFFER_USAGE_ATI", Value: uint32(34661)},
@@ -85416,18 +88784,18 @@ func init() {
 			{Name: "GL_VBO_FREE_MEMORY_ATI", Value: uint32(34811)},
 			{Name: "GL_TEXTURE_FREE_MEMORY_ATI", Value: uint32(34812)},
 			{Name: "GL_RENDERBUFFER_FREE_MEMORY_ATI", Value: uint32(34813)},
-			{Name: "GL_NUM_PROGRAM_BINARY_FORMATS_OES", Value: uint32(34814)},
 			{Name: "GL_NUM_PROGRAM_BINARY_FORMATS", Value: uint32(34814)},
-			{Name: "GL_PROGRAM_BINARY_FORMATS_OES", Value: uint32(34815)},
+			{Name: "GL_NUM_PROGRAM_BINARY_FORMATS_OES", Value: uint32(34814)},
 			{Name: "GL_PROGRAM_BINARY_FORMATS", Value: uint32(34815)},
-			{Name: "GL_STENCIL_BACK_FUNC", Value: uint32(34816)},
+			{Name: "GL_PROGRAM_BINARY_FORMATS_OES", Value: uint32(34815)},
 			{Name: "GL_STENCIL_BACK_FUNC_ATI", Value: uint32(34816)},
-			{Name: "GL_STENCIL_BACK_FAIL", Value: uint32(34817)},
+			{Name: "GL_STENCIL_BACK_FUNC", Value: uint32(34816)},
 			{Name: "GL_STENCIL_BACK_FAIL_ATI", Value: uint32(34817)},
+			{Name: "GL_STENCIL_BACK_FAIL", Value: uint32(34817)},
 			{Name: "GL_STENCIL_BACK_PASS_DEPTH_FAIL", Value: uint32(34818)},
 			{Name: "GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI", Value: uint32(34818)},
-			{Name: "GL_STENCIL_BACK_PASS_DEPTH_PASS", Value: uint32(34819)},
 			{Name: "GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI", Value: uint32(34819)},
+			{Name: "GL_STENCIL_BACK_PASS_DEPTH_PASS", Value: uint32(34819)},
 			{Name: "GL_FRAGMENT_PROGRAM_ARB", Value: uint32(34820)},
 			{Name: "GL_PROGRAM_ALU_INSTRUCTIONS_ARB", Value: uint32(34821)},
 			{Name: "GL_PROGRAM_TEX_INSTRUCTIONS_ARB", Value: uint32(34822)},
@@ -85441,183 +88809,183 @@ func init() {
 			{Name: "GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB", Value: uint32(34830)},
 			{Name: "GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB", Value: uint32(34831)},
 			{Name: "GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB", Value: uint32(34832)},
-			{Name: "GL_RGBA32F_ARB", Value: uint32(34836)},
-			{Name: "GL_RGBA_FLOAT32_ATI", Value: uint32(34836)},
 			{Name: "GL_RGBA_FLOAT32_APPLE", Value: uint32(34836)},
 			{Name: "GL_RGBA32F_EXT", Value: uint32(34836)},
+			{Name: "GL_RGBA32F_ARB", Value: uint32(34836)},
 			{Name: "GL_RGBA32F", Value: uint32(34836)},
-			{Name: "GL_RGB32F_ARB", Value: uint32(34837)},
-			{Name: "GL_RGB_FLOAT32_ATI", Value: uint32(34837)},
-			{Name: "GL_RGB_FLOAT32_APPLE", Value: uint32(34837)},
+			{Name: "GL_RGBA_FLOAT32_ATI", Value: uint32(34836)},
 			{Name: "GL_RGB32F_EXT", Value: uint32(34837)},
 			{Name: "GL_RGB32F", Value: uint32(34837)},
+			{Name: "GL_RGB32F_ARB", Value: uint32(34837)},
+			{Name: "GL_RGB_FLOAT32_APPLE", Value: uint32(34837)},
+			{Name: "GL_RGB_FLOAT32_ATI", Value: uint32(34837)},
 			{Name: "GL_ALPHA_FLOAT32_ATI", Value: uint32(34838)},
+			{Name: "GL_ALPHA32F_EXT", Value: uint32(34838)},
 			{Name: "GL_ALPHA_FLOAT32_APPLE", Value: uint32(34838)},
 			{Name: "GL_ALPHA32F_ARB", Value: uint32(34838)},
-			{Name: "GL_ALPHA32F_EXT", Value: uint32(34838)},
-			{Name: "GL_INTENSITY32F_ARB", Value: uint32(34839)},
 			{Name: "GL_INTENSITY_FLOAT32_APPLE", Value: uint32(34839)},
 			{Name: "GL_INTENSITY_FLOAT32_ATI", Value: uint32(34839)},
+			{Name: "GL_INTENSITY32F_ARB", Value: uint32(34839)},
 			{Name: "GL_LUMINANCE32F_EXT", Value: uint32(34840)},
 			{Name: "GL_LUMINANCE_FLOAT32_APPLE", Value: uint32(34840)},
 			{Name: "GL_LUMINANCE_FLOAT32_ATI", Value: uint32(34840)},
 			{Name: "GL_LUMINANCE32F_ARB", Value: uint32(34840)},
-			{Name: "GL_LUMINANCE_ALPHA_FLOAT32_ATI", Value: uint32(34841)},
 			{Name: "GL_LUMINANCE_ALPHA32F_ARB", Value: uint32(34841)},
 			{Name: "GL_LUMINANCE_ALPHA32F_EXT", Value: uint32(34841)},
+			{Name: "GL_LUMINANCE_ALPHA_FLOAT32_ATI", Value: uint32(34841)},
 			{Name: "GL_LUMINANCE_ALPHA_FLOAT32_APPLE", Value: uint32(34841)},
-			{Name: "GL_RGBA16F_EXT", Value: uint32(34842)},
-			{Name: "GL_RGBA16F_ARB", Value: uint32(34842)},
-			{Name: "GL_RGBA16F", Value: uint32(34842)},
-			{Name: "GL_RGBA_FLOAT16_ATI", Value: uint32(34842)},
 			{Name: "GL_RGBA_FLOAT16_APPLE", Value: uint32(34842)},
-			{Name: "GL_RGB_FLOAT16_APPLE", Value: uint32(34843)},
+			{Name: "GL_RGBA_FLOAT16_ATI", Value: uint32(34842)},
+			{Name: "GL_RGBA16F", Value: uint32(34842)},
+			{Name: "GL_RGBA16F_ARB", Value: uint32(34842)},
+			{Name: "GL_RGBA16F_EXT", Value: uint32(34842)},
 			{Name: "GL_RGB_FLOAT16_ATI", Value: uint32(34843)},
-			{Name: "GL_RGB16F", Value: uint32(34843)},
-			{Name: "GL_RGB16F_ARB", Value: uint32(34843)},
 			{Name: "GL_RGB16F_EXT", Value: uint32(34843)},
+			{Name: "GL_RGB16F_ARB", Value: uint32(34843)},
+			{Name: "GL_RGB_FLOAT16_APPLE", Value: uint32(34843)},
+			{Name: "GL_RGB16F", Value: uint32(34843)},
 			{Name: "GL_ALPHA16F_EXT", Value: uint32(34844)},
 			{Name: "GL_ALPHA_FLOAT16_APPLE", Value: uint32(34844)},
 			{Name: "GL_ALPHA_FLOAT16_ATI", Value: uint32(34844)},
 			{Name: "GL_ALPHA16F_ARB", Value: uint32(34844)},
 			{Name: "GL_INTENSITY_FLOAT16_ATI", Value: uint32(34845)},
-			{Name: "GL_INTENSITY16F_ARB", Value: uint32(34845)},
 			{Name: "GL_INTENSITY_FLOAT16_APPLE", Value: uint32(34845)},
-			{Name: "GL_LUMINANCE16F_EXT", Value: uint32(34846)},
-			{Name: "GL_LUMINANCE_FLOAT16_ATI", Value: uint32(34846)},
+			{Name: "GL_INTENSITY16F_ARB", Value: uint32(34845)},
 			{Name: "GL_LUMINANCE16F_ARB", Value: uint32(34846)},
+			{Name: "GL_LUMINANCE_FLOAT16_ATI", Value: uint32(34846)},
 			{Name: "GL_LUMINANCE_FLOAT16_APPLE", Value: uint32(34846)},
-			{Name: "GL_LUMINANCE_ALPHA16F_EXT", Value: uint32(34847)},
+			{Name: "GL_LUMINANCE16F_EXT", Value: uint32(34846)},
 			{Name: "GL_LUMINANCE_ALPHA16F_ARB", Value: uint32(34847)},
 			{Name: "GL_LUMINANCE_ALPHA_FLOAT16_APPLE", Value: uint32(34847)},
 			{Name: "GL_LUMINANCE_ALPHA_FLOAT16_ATI", Value: uint32(34847)},
-			{Name: "GL_RGBA_FLOAT_MODE_ARB", Value: uint32(34848)},
+			{Name: "GL_LUMINANCE_ALPHA16F_EXT", Value: uint32(34847)},
 			{Name: "GL_RGBA_FLOAT_MODE_ATI", Value: uint32(34848)},
+			{Name: "GL_RGBA_FLOAT_MODE_ARB", Value: uint32(34848)},
 			{Name: "GL_WRITEONLY_RENDERING_QCOM", Value: uint32(34851)},
 			{Name: "GL_MAX_DRAW_BUFFERS", Value: uint32(34852)},
-			{Name: "GL_MAX_DRAW_BUFFERS_ATI", Value: uint32(34852)},
 			{Name: "GL_MAX_DRAW_BUFFERS_NV", Value: uint32(34852)},
+			{Name: "GL_MAX_DRAW_BUFFERS_ATI", Value: uint32(34852)},
 			{Name: "GL_MAX_DRAW_BUFFERS_ARB", Value: uint32(34852)},
 			{Name: "GL_MAX_DRAW_BUFFERS_EXT", Value: uint32(34852)},
-			{Name: "GL_DRAW_BUFFER0_EXT", Value: uint32(34853)},
-			{Name: "GL_DRAW_BUFFER0_ATI", Value: uint32(34853)},
 			{Name: "GL_DRAW_BUFFER0_NV", Value: uint32(34853)},
-			{Name: "GL_DRAW_BUFFER0", Value: uint32(34853)},
+			{Name: "GL_DRAW_BUFFER0_ATI", Value: uint32(34853)},
 			{Name: "GL_DRAW_BUFFER0_ARB", Value: uint32(34853)},
-			{Name: "GL_DRAW_BUFFER1_NV", Value: uint32(34854)},
-			{Name: "GL_DRAW_BUFFER1_EXT", Value: uint32(34854)},
+			{Name: "GL_DRAW_BUFFER0", Value: uint32(34853)},
+			{Name: "GL_DRAW_BUFFER0_EXT", Value: uint32(34853)},
 			{Name: "GL_DRAW_BUFFER1_ATI", Value: uint32(34854)},
+			{Name: "GL_DRAW_BUFFER1_EXT", Value: uint32(34854)},
 			{Name: "GL_DRAW_BUFFER1_ARB", Value: uint32(34854)},
+			{Name: "GL_DRAW_BUFFER1_NV", Value: uint32(34854)},
 			{Name: "GL_DRAW_BUFFER1", Value: uint32(34854)},
+			{Name: "GL_DRAW_BUFFER2_ARB", Value: uint32(34855)},
 			{Name: "GL_DRAW_BUFFER2", Value: uint32(34855)},
 			{Name: "GL_DRAW_BUFFER2_NV", Value: uint32(34855)},
 			{Name: "GL_DRAW_BUFFER2_EXT", Value: uint32(34855)},
 			{Name: "GL_DRAW_BUFFER2_ATI", Value: uint32(34855)},
-			{Name: "GL_DRAW_BUFFER2_ARB", Value: uint32(34855)},
-			{Name: "GL_DRAW_BUFFER3_EXT", Value: uint32(34856)},
-			{Name: "GL_DRAW_BUFFER3_ATI", Value: uint32(34856)},
-			{Name: "GL_DRAW_BUFFER3_NV", Value: uint32(34856)},
 			{Name: "GL_DRAW_BUFFER3_ARB", Value: uint32(34856)},
+			{Name: "GL_DRAW_BUFFER3_EXT", Value: uint32(34856)},
+			{Name: "GL_DRAW_BUFFER3_NV", Value: uint32(34856)},
 			{Name: "GL_DRAW_BUFFER3", Value: uint32(34856)},
-			{Name: "GL_DRAW_BUFFER4_EXT", Value: uint32(34857)},
+			{Name: "GL_DRAW_BUFFER3_ATI", Value: uint32(34856)},
 			{Name: "GL_DRAW_BUFFER4_NV", Value: uint32(34857)},
-			{Name: "GL_DRAW_BUFFER4_ATI", Value: uint32(34857)},
-			{Name: "GL_DRAW_BUFFER4_ARB", Value: uint32(34857)},
 			{Name: "GL_DRAW_BUFFER4", Value: uint32(34857)},
-			{Name: "GL_DRAW_BUFFER5_ATI", Value: uint32(34858)},
-			{Name: "GL_DRAW_BUFFER5", Value: uint32(34858)},
-			{Name: "GL_DRAW_BUFFER5_ARB", Value: uint32(34858)},
+			{Name: "GL_DRAW_BUFFER4_ARB", Value: uint32(34857)},
+			{Name: "GL_DRAW_BUFFER4_ATI", Value: uint32(34857)},
+			{Name: "GL_DRAW_BUFFER4_EXT", Value: uint32(34857)},
 			{Name: "GL_DRAW_BUFFER5_NV", Value: uint32(34858)},
+			{Name: "GL_DRAW_BUFFER5", Value: uint32(34858)},
 			{Name: "GL_DRAW_BUFFER5_EXT", Value: uint32(34858)},
-			{Name: "GL_DRAW_BUFFER6_ATI", Value: uint32(34859)},
-			{Name: "GL_DRAW_BUFFER6", Value: uint32(34859)},
-			{Name: "GL_DRAW_BUFFER6_ARB", Value: uint32(34859)},
-			{Name: "GL_DRAW_BUFFER6_EXT", Value: uint32(34859)},
+			{Name: "GL_DRAW_BUFFER5_ARB", Value: uint32(34858)},
+			{Name: "GL_DRAW_BUFFER5_ATI", Value: uint32(34858)},
 			{Name: "GL_DRAW_BUFFER6_NV", Value: uint32(34859)},
-			{Name: "GL_DRAW_BUFFER7_ATI", Value: uint32(34860)},
+			{Name: "GL_DRAW_BUFFER6", Value: uint32(34859)},
+			{Name: "GL_DRAW_BUFFER6_ATI", Value: uint32(34859)},
+			{Name: "GL_DRAW_BUFFER6_EXT", Value: uint32(34859)},
+			{Name: "GL_DRAW_BUFFER6_ARB", Value: uint32(34859)},
 			{Name: "GL_DRAW_BUFFER7_ARB", Value: uint32(34860)},
-			{Name: "GL_DRAW_BUFFER7", Value: uint32(34860)},
-			{Name: "GL_DRAW_BUFFER7_NV", Value: uint32(34860)},
+			{Name: "GL_DRAW_BUFFER7_ATI", Value: uint32(34860)},
 			{Name: "GL_DRAW_BUFFER7_EXT", Value: uint32(34860)},
+			{Name: "GL_DRAW_BUFFER7_NV", Value: uint32(34860)},
+			{Name: "GL_DRAW_BUFFER7", Value: uint32(34860)},
+			{Name: "GL_DRAW_BUFFER8_NV", Value: uint32(34861)},
+			{Name: "GL_DRAW_BUFFER8_EXT", Value: uint32(34861)},
 			{Name: "GL_DRAW_BUFFER8_ATI", Value: uint32(34861)},
 			{Name: "GL_DRAW_BUFFER8", Value: uint32(34861)},
 			{Name: "GL_DRAW_BUFFER8_ARB", Value: uint32(34861)},
-			{Name: "GL_DRAW_BUFFER8_EXT", Value: uint32(34861)},
-			{Name: "GL_DRAW_BUFFER8_NV", Value: uint32(34861)},
-			{Name: "GL_DRAW_BUFFER9_ATI", Value: uint32(34862)},
 			{Name: "GL_DRAW_BUFFER9", Value: uint32(34862)},
-			{Name: "GL_DRAW_BUFFER9_EXT", Value: uint32(34862)},
-			{Name: "GL_DRAW_BUFFER9_ARB", Value: uint32(34862)},
 			{Name: "GL_DRAW_BUFFER9_NV", Value: uint32(34862)},
-			{Name: "GL_DRAW_BUFFER10_ARB", Value: uint32(34863)},
-			{Name: "GL_DRAW_BUFFER10_EXT", Value: uint32(34863)},
-			{Name: "GL_DRAW_BUFFER10_ATI", Value: uint32(34863)},
+			{Name: "GL_DRAW_BUFFER9_EXT", Value: uint32(34862)},
+			{Name: "GL_DRAW_BUFFER9_ATI", Value: uint32(34862)},
+			{Name: "GL_DRAW_BUFFER9_ARB", Value: uint32(34862)},
 			{Name: "GL_DRAW_BUFFER10", Value: uint32(34863)},
 			{Name: "GL_DRAW_BUFFER10_NV", Value: uint32(34863)},
-			{Name: "GL_DRAW_BUFFER11_ARB", Value: uint32(34864)},
+			{Name: "GL_DRAW_BUFFER10_EXT", Value: uint32(34863)},
+			{Name: "GL_DRAW_BUFFER10_ATI", Value: uint32(34863)},
+			{Name: "GL_DRAW_BUFFER10_ARB", Value: uint32(34863)},
 			{Name: "GL_DRAW_BUFFER11_EXT", Value: uint32(34864)},
-			{Name: "GL_DRAW_BUFFER11_ATI", Value: uint32(34864)},
-			{Name: "GL_DRAW_BUFFER11_NV", Value: uint32(34864)},
 			{Name: "GL_DRAW_BUFFER11", Value: uint32(34864)},
+			{Name: "GL_DRAW_BUFFER11_ATI", Value: uint32(34864)},
+			{Name: "GL_DRAW_BUFFER11_ARB", Value: uint32(34864)},
+			{Name: "GL_DRAW_BUFFER11_NV", Value: uint32(34864)},
+			{Name: "GL_DRAW_BUFFER12_EXT", Value: uint32(34865)},
+			{Name: "GL_DRAW_BUFFER12_NV", Value: uint32(34865)},
 			{Name: "GL_DRAW_BUFFER12_ATI", Value: uint32(34865)},
 			{Name: "GL_DRAW_BUFFER12_ARB", Value: uint32(34865)},
 			{Name: "GL_DRAW_BUFFER12", Value: uint32(34865)},
-			{Name: "GL_DRAW_BUFFER12_EXT", Value: uint32(34865)},
-			{Name: "GL_DRAW_BUFFER12_NV", Value: uint32(34865)},
-			{Name: "GL_DRAW_BUFFER13_ARB", Value: uint32(34866)},
 			{Name: "GL_DRAW_BUFFER13_EXT", Value: uint32(34866)},
 			{Name: "GL_DRAW_BUFFER13", Value: uint32(34866)},
 			{Name: "GL_DRAW_BUFFER13_NV", Value: uint32(34866)},
+			{Name: "GL_DRAW_BUFFER13_ARB", Value: uint32(34866)},
 			{Name: "GL_DRAW_BUFFER13_ATI", Value: uint32(34866)},
-			{Name: "GL_DRAW_BUFFER14_ATI", Value: uint32(34867)},
 			{Name: "GL_DRAW_BUFFER14", Value: uint32(34867)},
-			{Name: "GL_DRAW_BUFFER14_ARB", Value: uint32(34867)},
-			{Name: "GL_DRAW_BUFFER14_EXT", Value: uint32(34867)},
 			{Name: "GL_DRAW_BUFFER14_NV", Value: uint32(34867)},
+			{Name: "GL_DRAW_BUFFER14_EXT", Value: uint32(34867)},
+			{Name: "GL_DRAW_BUFFER14_ATI", Value: uint32(34867)},
+			{Name: "GL_DRAW_BUFFER14_ARB", Value: uint32(34867)},
 			{Name: "GL_DRAW_BUFFER15", Value: uint32(34868)},
-			{Name: "GL_DRAW_BUFFER15_ARB", Value: uint32(34868)},
-			{Name: "GL_DRAW_BUFFER15_EXT", Value: uint32(34868)},
-			{Name: "GL_DRAW_BUFFER15_NV", Value: uint32(34868)},
 			{Name: "GL_DRAW_BUFFER15_ATI", Value: uint32(34868)},
+			{Name: "GL_DRAW_BUFFER15_ARB", Value: uint32(34868)},
+			{Name: "GL_DRAW_BUFFER15_NV", Value: uint32(34868)},
+			{Name: "GL_DRAW_BUFFER15_EXT", Value: uint32(34868)},
 			{Name: "GL_COLOR_CLEAR_UNCLAMPED_VALUE_ATI", Value: uint32(34869)},
 			{Name: "GL_COMPRESSED_LUMINANCE_ALPHA_3DC_ATI", Value: uint32(34871)},
 			{Name: "GL_BLEND_EQUATION_ALPHA", Value: uint32(34877)},
-			{Name: "GL_BLEND_EQUATION_ALPHA_OES", Value: uint32(34877)},
 			{Name: "GL_BLEND_EQUATION_ALPHA_EXT", Value: uint32(34877)},
+			{Name: "GL_BLEND_EQUATION_ALPHA_OES", Value: uint32(34877)},
 			{Name: "GL_SUBSAMPLE_DISTANCE_AMD", Value: uint32(34879)},
-			{Name: "GL_MATRIX_PALETTE_ARB", Value: uint32(34880)},
 			{Name: "GL_MATRIX_PALETTE_OES", Value: uint32(34880)},
+			{Name: "GL_MATRIX_PALETTE_ARB", Value: uint32(34880)},
 			{Name: "GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB", Value: uint32(34881)},
-			{Name: "GL_MAX_PALETTE_MATRICES_ARB", Value: uint32(34882)},
 			{Name: "GL_MAX_PALETTE_MATRICES_OES", Value: uint32(34882)},
-			{Name: "GL_CURRENT_PALETTE_MATRIX_ARB", Value: uint32(34883)},
+			{Name: "GL_MAX_PALETTE_MATRICES_ARB", Value: uint32(34882)},
 			{Name: "GL_CURRENT_PALETTE_MATRIX_OES", Value: uint32(34883)},
+			{Name: "GL_CURRENT_PALETTE_MATRIX_ARB", Value: uint32(34883)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_OES", Value: uint32(34884)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_ARB", Value: uint32(34884)},
 			{Name: "GL_CURRENT_MATRIX_INDEX_ARB", Value: uint32(34885)},
-			{Name: "GL_MATRIX_INDEX_ARRAY_SIZE_ARB", Value: uint32(34886)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_SIZE_OES", Value: uint32(34886)},
-			{Name: "GL_MATRIX_INDEX_ARRAY_TYPE_OES", Value: uint32(34887)},
+			{Name: "GL_MATRIX_INDEX_ARRAY_SIZE_ARB", Value: uint32(34886)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_TYPE_ARB", Value: uint32(34887)},
-			{Name: "GL_MATRIX_INDEX_ARRAY_STRIDE_ARB", Value: uint32(34888)},
+			{Name: "GL_MATRIX_INDEX_ARRAY_TYPE_OES", Value: uint32(34887)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_STRIDE_OES", Value: uint32(34888)},
+			{Name: "GL_MATRIX_INDEX_ARRAY_STRIDE_ARB", Value: uint32(34888)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_POINTER_OES", Value: uint32(34889)},
 			{Name: "GL_MATRIX_INDEX_ARRAY_POINTER_ARB", Value: uint32(34889)},
 			{Name: "GL_TEXTURE_DEPTH_SIZE", Value: uint32(34890)},
 			{Name: "GL_TEXTURE_DEPTH_SIZE_ARB", Value: uint32(34890)},
 			{Name: "GL_DEPTH_TEXTURE_MODE_ARB", Value: uint32(34891)},
 			{Name: "GL_DEPTH_TEXTURE_MODE", Value: uint32(34891)},
+			{Name: "GL_TEXTURE_COMPARE_MODE_EXT", Value: uint32(34892)},
 			{Name: "GL_TEXTURE_COMPARE_MODE", Value: uint32(34892)},
 			{Name: "GL_TEXTURE_COMPARE_MODE_ARB", Value: uint32(34892)},
-			{Name: "GL_TEXTURE_COMPARE_MODE_EXT", Value: uint32(34892)},
 			{Name: "GL_TEXTURE_COMPARE_FUNC", Value: uint32(34893)},
 			{Name: "GL_TEXTURE_COMPARE_FUNC_EXT", Value: uint32(34893)},
 			{Name: "GL_TEXTURE_COMPARE_FUNC_ARB", Value: uint32(34893)},
-			{Name: "GL_COMPARE_REF_TO_TEXTURE", Value: uint32(34894)},
+			{Name: "GL_COMPARE_R_TO_TEXTURE_ARB", Value: uint32(34894)},
 			{Name: "GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT", Value: uint32(34894)},
+			{Name: "GL_COMPARE_REF_TO_TEXTURE", Value: uint32(34894)},
 			{Name: "GL_COMPARE_REF_TO_TEXTURE_EXT", Value: uint32(34894)},
 			{Name: "GL_COMPARE_R_TO_TEXTURE", Value: uint32(34894)},
-			{Name: "GL_COMPARE_R_TO_TEXTURE_ARB", Value: uint32(34894)},
 			{Name: "GL_TEXTURE_CUBE_MAP_SEAMLESS", Value: uint32(34895)},
 			{Name: "GL_OFFSET_PROJECTIVE_TEXTURE_2D_NV", Value: uint32(34896)},
 			{Name: "GL_OFFSET_PROJECTIVE_TEXTURE_2D_SCALE_NV", Value: uint32(34897)},
@@ -85636,54 +89004,54 @@ func init() {
 			{Name: "GL_HILO8_NV", Value: uint32(34910)},
 			{Name: "GL_SIGNED_HILO8_NV", Value: uint32(34911)},
 			{Name: "GL_FORCE_BLUE_TO_ONE_NV", Value: uint32(34912)},
+			{Name: "GL_POINT_SPRITE", Value: uint32(34913)},
 			{Name: "GL_POINT_SPRITE_OES", Value: uint32(34913)},
 			{Name: "GL_POINT_SPRITE_ARB", Value: uint32(34913)},
-			{Name: "GL_POINT_SPRITE", Value: uint32(34913)},
 			{Name: "GL_POINT_SPRITE_NV", Value: uint32(34913)},
-			{Name: "GL_COORD_REPLACE_ARB", Value: uint32(34914)},
-			{Name: "GL_COORD_REPLACE_OES", Value: uint32(34914)},
 			{Name: "GL_COORD_REPLACE", Value: uint32(34914)},
+			{Name: "GL_COORD_REPLACE_ARB", Value: uint32(34914)},
 			{Name: "GL_COORD_REPLACE_NV", Value: uint32(34914)},
+			{Name: "GL_COORD_REPLACE_OES", Value: uint32(34914)},
 			{Name: "GL_POINT_SPRITE_R_MODE_NV", Value: uint32(34915)},
-			{Name: "GL_PIXEL_COUNTER_BITS_NV", Value: uint32(34916)},
-			{Name: "GL_QUERY_COUNTER_BITS_ARB", Value: uint32(34916)},
-			{Name: "GL_QUERY_COUNTER_BITS_EXT", Value: uint32(34916)},
 			{Name: "GL_QUERY_COUNTER_BITS", Value: uint32(34916)},
-			{Name: "GL_CURRENT_OCCLUSION_QUERY_ID_NV", Value: uint32(34917)},
-			{Name: "GL_CURRENT_QUERY", Value: uint32(34917)},
+			{Name: "GL_QUERY_COUNTER_BITS_ARB", Value: uint32(34916)},
+			{Name: "GL_PIXEL_COUNTER_BITS_NV", Value: uint32(34916)},
+			{Name: "GL_QUERY_COUNTER_BITS_EXT", Value: uint32(34916)},
 			{Name: "GL_CURRENT_QUERY_ARB", Value: uint32(34917)},
+			{Name: "GL_CURRENT_OCCLUSION_QUERY_ID_NV", Value: uint32(34917)},
 			{Name: "GL_CURRENT_QUERY_EXT", Value: uint32(34917)},
-			{Name: "GL_QUERY_RESULT_ARB", Value: uint32(34918)},
+			{Name: "GL_CURRENT_QUERY", Value: uint32(34917)},
+			{Name: "GL_QUERY_RESULT_EXT", Value: uint32(34918)},
 			{Name: "GL_QUERY_RESULT", Value: uint32(34918)},
 			{Name: "GL_PIXEL_COUNT_NV", Value: uint32(34918)},
-			{Name: "GL_QUERY_RESULT_EXT", Value: uint32(34918)},
-			{Name: "GL_PIXEL_COUNT_AVAILABLE_NV", Value: uint32(34919)},
-			{Name: "GL_QUERY_RESULT_AVAILABLE_ARB", Value: uint32(34919)},
+			{Name: "GL_QUERY_RESULT_ARB", Value: uint32(34918)},
 			{Name: "GL_QUERY_RESULT_AVAILABLE_EXT", Value: uint32(34919)},
+			{Name: "GL_QUERY_RESULT_AVAILABLE_ARB", Value: uint32(34919)},
 			{Name: "GL_QUERY_RESULT_AVAILABLE", Value: uint32(34919)},
+			{Name: "GL_PIXEL_COUNT_AVAILABLE_NV", Value: uint32(34919)},
 			{Name: "GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV", Value: uint32(34920)},
-			{Name: "GL_MAX_VERTEX_ATTRIBS", Value: uint32(34921)},
 			{Name: "GL_MAX_VERTEX_ATTRIBS_ARB", Value: uint32(34921)},
+			{Name: "GL_MAX_VERTEX_ATTRIBS", Value: uint32(34921)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB", Value: uint32(34922)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_NORMALIZED", Value: uint32(34922)},
-			{Name: "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_EXT", Value: uint32(34924)},
 			{Name: "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_OES", Value: uint32(34924)},
 			{Name: "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS", Value: uint32(34924)},
-			{Name: "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_OES", Value: uint32(34925)},
+			{Name: "GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_EXT", Value: uint32(34924)},
 			{Name: "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_EXT", Value: uint32(34925)},
+			{Name: "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_OES", Value: uint32(34925)},
 			{Name: "GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS", Value: uint32(34925)},
 			{Name: "GL_DEPTH_STENCIL_TO_RGBA_NV", Value: uint32(34926)},
 			{Name: "GL_DEPTH_STENCIL_TO_BGRA_NV", Value: uint32(34927)},
 			{Name: "GL_FRAGMENT_PROGRAM_NV", Value: uint32(34928)},
-			{Name: "GL_MAX_TEXTURE_COORDS", Value: uint32(34929)},
-			{Name: "GL_MAX_TEXTURE_COORDS_ARB", Value: uint32(34929)},
 			{Name: "GL_MAX_TEXTURE_COORDS_NV", Value: uint32(34929)},
-			{Name: "GL_MAX_TEXTURE_IMAGE_UNITS", Value: uint32(34930)},
+			{Name: "GL_MAX_TEXTURE_COORDS_ARB", Value: uint32(34929)},
+			{Name: "GL_MAX_TEXTURE_COORDS", Value: uint32(34929)},
 			{Name: "GL_MAX_TEXTURE_IMAGE_UNITS_NV", Value: uint32(34930)},
+			{Name: "GL_MAX_TEXTURE_IMAGE_UNITS", Value: uint32(34930)},
 			{Name: "GL_MAX_TEXTURE_IMAGE_UNITS_ARB", Value: uint32(34930)},
 			{Name: "GL_FRAGMENT_PROGRAM_BINDING_NV", Value: uint32(34931)},
-			{Name: "GL_PROGRAM_ERROR_STRING_ARB", Value: uint32(34932)},
 			{Name: "GL_PROGRAM_ERROR_STRING_NV", Value: uint32(34932)},
+			{Name: "GL_PROGRAM_ERROR_STRING_ARB", Value: uint32(34932)},
 			{Name: "GL_PROGRAM_FORMAT_ASCII_ARB", Value: uint32(34933)},
 			{Name: "GL_PROGRAM_FORMAT_ARB", Value: uint32(34934)},
 			{Name: "GL_WRITE_PIXEL_DATA_RANGE_NV", Value: uint32(34936)},
@@ -85693,8 +89061,8 @@ func init() {
 			{Name: "GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV", Value: uint32(34940)},
 			{Name: "GL_READ_PIXEL_DATA_RANGE_POINTER_NV", Value: uint32(34941)},
 			{Name: "GL_GEOMETRY_SHADER_INVOCATIONS_OES", Value: uint32(34943)},
-			{Name: "GL_GEOMETRY_SHADER_INVOCATIONS", Value: uint32(34943)},
 			{Name: "GL_GEOMETRY_SHADER_INVOCATIONS_EXT", Value: uint32(34943)},
+			{Name: "GL_GEOMETRY_SHADER_INVOCATIONS", Value: uint32(34943)},
 			{Name: "GL_FLOAT_R_NV", Value: uint32(34944)},
 			{Name: "GL_FLOAT_RG_NV", Value: uint32(34945)},
 			{Name: "GL_FLOAT_RGB_NV", Value: uint32(34946)},
@@ -85713,36 +89081,36 @@ func init() {
 			{Name: "GL_TEXTURE_UNSIGNED_REMAP_MODE_NV", Value: uint32(34959)},
 			{Name: "GL_DEPTH_BOUNDS_TEST_EXT", Value: uint32(34960)},
 			{Name: "GL_DEPTH_BOUNDS_EXT", Value: uint32(34961)},
-			{Name: "GL_ARRAY_BUFFER_ARB", Value: uint32(34962)},
 			{Name: "GL_ARRAY_BUFFER", Value: uint32(34962)},
+			{Name: "GL_ARRAY_BUFFER_ARB", Value: uint32(34962)},
 			{Name: "GL_ELEMENT_ARRAY_BUFFER_ARB", Value: uint32(34963)},
 			{Name: "GL_ELEMENT_ARRAY_BUFFER", Value: uint32(34963)},
 			{Name: "GL_ARRAY_BUFFER_BINDING", Value: uint32(34964)},
 			{Name: "GL_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34964)},
-			{Name: "GL_ELEMENT_ARRAY_BUFFER_BINDING", Value: uint32(34965)},
 			{Name: "GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34965)},
+			{Name: "GL_ELEMENT_ARRAY_BUFFER_BINDING", Value: uint32(34965)},
 			{Name: "GL_VERTEX_ARRAY_BUFFER_BINDING", Value: uint32(34966)},
 			{Name: "GL_VERTEX_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34966)},
 			{Name: "GL_NORMAL_ARRAY_BUFFER_BINDING", Value: uint32(34967)},
 			{Name: "GL_NORMAL_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34967)},
 			{Name: "GL_COLOR_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34968)},
 			{Name: "GL_COLOR_ARRAY_BUFFER_BINDING", Value: uint32(34968)},
-			{Name: "GL_INDEX_ARRAY_BUFFER_BINDING", Value: uint32(34969)},
 			{Name: "GL_INDEX_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34969)},
+			{Name: "GL_INDEX_ARRAY_BUFFER_BINDING", Value: uint32(34969)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34970)},
 			{Name: "GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING", Value: uint32(34970)},
-			{Name: "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING", Value: uint32(34971)},
 			{Name: "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34971)},
-			{Name: "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING", Value: uint32(34972)},
+			{Name: "GL_EDGE_FLAG_ARRAY_BUFFER_BINDING", Value: uint32(34971)},
 			{Name: "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34972)},
+			{Name: "GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING", Value: uint32(34972)},
 			{Name: "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34973)},
-			{Name: "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING", Value: uint32(34973)},
 			{Name: "GL_FOG_COORD_ARRAY_BUFFER_BINDING", Value: uint32(34973)},
+			{Name: "GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING", Value: uint32(34973)},
 			{Name: "GL_WEIGHT_ARRAY_BUFFER_BINDING_OES", Value: uint32(34974)},
 			{Name: "GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34974)},
 			{Name: "GL_WEIGHT_ARRAY_BUFFER_BINDING", Value: uint32(34974)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING", Value: uint32(34975)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB", Value: uint32(34975)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING", Value: uint32(34975)},
 			{Name: "GL_PROGRAM_INSTRUCTIONS_ARB", Value: uint32(34976)},
 			{Name: "GL_MAX_PROGRAM_INSTRUCTIONS_ARB", Value: uint32(34977)},
 			{Name: "GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB", Value: uint32(34978)},
@@ -85769,23 +89137,23 @@ func init() {
 			{Name: "GL_TRANSPOSE_CURRENT_MATRIX_ARB", Value: uint32(34999)},
 			{Name: "GL_READ_ONLY_ARB", Value: uint32(35000)},
 			{Name: "GL_READ_ONLY", Value: uint32(35000)},
-			{Name: "GL_WRITE_ONLY", Value: uint32(35001)},
 			{Name: "GL_WRITE_ONLY_ARB", Value: uint32(35001)},
+			{Name: "GL_WRITE_ONLY", Value: uint32(35001)},
 			{Name: "GL_WRITE_ONLY_OES", Value: uint32(35001)},
 			{Name: "GL_READ_WRITE_ARB", Value: uint32(35002)},
 			{Name: "GL_READ_WRITE", Value: uint32(35002)},
-			{Name: "GL_BUFFER_ACCESS_ARB", Value: uint32(35003)},
 			{Name: "GL_BUFFER_ACCESS_OES", Value: uint32(35003)},
+			{Name: "GL_BUFFER_ACCESS_ARB", Value: uint32(35003)},
 			{Name: "GL_BUFFER_ACCESS", Value: uint32(35003)},
-			{Name: "GL_BUFFER_MAPPED", Value: uint32(35004)},
-			{Name: "GL_BUFFER_MAPPED_ARB", Value: uint32(35004)},
 			{Name: "GL_BUFFER_MAPPED_OES", Value: uint32(35004)},
+			{Name: "GL_BUFFER_MAPPED_ARB", Value: uint32(35004)},
+			{Name: "GL_BUFFER_MAPPED", Value: uint32(35004)},
 			{Name: "GL_BUFFER_MAP_POINTER_OES", Value: uint32(35005)},
 			{Name: "GL_BUFFER_MAP_POINTER", Value: uint32(35005)},
 			{Name: "GL_BUFFER_MAP_POINTER_ARB", Value: uint32(35005)},
 			{Name: "GL_WRITE_DISCARD_NV", Value: uint32(35006)},
-			{Name: "GL_TIME_ELAPSED", Value: uint32(35007)},
 			{Name: "GL_TIME_ELAPSED_EXT", Value: uint32(35007)},
+			{Name: "GL_TIME_ELAPSED", Value: uint32(35007)},
 			{Name: "GL_MATRIX0_ARB", Value: uint32(35008)},
 			{Name: "GL_MATRIX1_ARB", Value: uint32(35009)},
 			{Name: "GL_MATRIX2_ARB", Value: uint32(35010)},
@@ -85818,10 +89186,10 @@ func init() {
 			{Name: "GL_MATRIX29_ARB", Value: uint32(35037)},
 			{Name: "GL_MATRIX30_ARB", Value: uint32(35038)},
 			{Name: "GL_MATRIX31_ARB", Value: uint32(35039)},
-			{Name: "GL_STREAM_DRAW_ARB", Value: uint32(35040)},
 			{Name: "GL_STREAM_DRAW", Value: uint32(35040)},
-			{Name: "GL_STREAM_READ", Value: uint32(35041)},
+			{Name: "GL_STREAM_DRAW_ARB", Value: uint32(35040)},
 			{Name: "GL_STREAM_READ_ARB", Value: uint32(35041)},
+			{Name: "GL_STREAM_READ", Value: uint32(35041)},
 			{Name: "GL_STREAM_COPY", Value: uint32(35042)},
 			{Name: "GL_STREAM_COPY_ARB", Value: uint32(35042)},
 			{Name: "GL_STATIC_DRAW", Value: uint32(35044)},
@@ -85830,30 +89198,30 @@ func init() {
 			{Name: "GL_STATIC_READ", Value: uint32(35045)},
 			{Name: "GL_STATIC_COPY_ARB", Value: uint32(35046)},
 			{Name: "GL_STATIC_COPY", Value: uint32(35046)},
-			{Name: "GL_DYNAMIC_DRAW_ARB", Value: uint32(35048)},
 			{Name: "GL_DYNAMIC_DRAW", Value: uint32(35048)},
-			{Name: "GL_DYNAMIC_READ_ARB", Value: uint32(35049)},
+			{Name: "GL_DYNAMIC_DRAW_ARB", Value: uint32(35048)},
 			{Name: "GL_DYNAMIC_READ", Value: uint32(35049)},
-			{Name: "GL_DYNAMIC_COPY_ARB", Value: uint32(35050)},
+			{Name: "GL_DYNAMIC_READ_ARB", Value: uint32(35049)},
 			{Name: "GL_DYNAMIC_COPY", Value: uint32(35050)},
+			{Name: "GL_DYNAMIC_COPY_ARB", Value: uint32(35050)},
 			{Name: "GL_PIXEL_PACK_BUFFER_ARB", Value: uint32(35051)},
-			{Name: "GL_PIXEL_PACK_BUFFER", Value: uint32(35051)},
 			{Name: "GL_PIXEL_PACK_BUFFER_EXT", Value: uint32(35051)},
-			{Name: "GL_PIXEL_UNPACK_BUFFER_EXT", Value: uint32(35052)},
+			{Name: "GL_PIXEL_PACK_BUFFER", Value: uint32(35051)},
 			{Name: "GL_PIXEL_UNPACK_BUFFER_ARB", Value: uint32(35052)},
+			{Name: "GL_PIXEL_UNPACK_BUFFER_EXT", Value: uint32(35052)},
 			{Name: "GL_PIXEL_UNPACK_BUFFER", Value: uint32(35052)},
-			{Name: "GL_PIXEL_PACK_BUFFER_BINDING_EXT", Value: uint32(35053)},
 			{Name: "GL_PIXEL_PACK_BUFFER_BINDING", Value: uint32(35053)},
 			{Name: "GL_PIXEL_PACK_BUFFER_BINDING_ARB", Value: uint32(35053)},
+			{Name: "GL_PIXEL_PACK_BUFFER_BINDING_EXT", Value: uint32(35053)},
 			{Name: "GL_ETC1_SRGB8_NV", Value: uint32(35054)},
 			{Name: "GL_PIXEL_UNPACK_BUFFER_BINDING_EXT", Value: uint32(35055)},
-			{Name: "GL_PIXEL_UNPACK_BUFFER_BINDING_ARB", Value: uint32(35055)},
 			{Name: "GL_PIXEL_UNPACK_BUFFER_BINDING", Value: uint32(35055)},
-			{Name: "GL_DEPTH24_STENCIL8_OES", Value: uint32(35056)},
+			{Name: "GL_PIXEL_UNPACK_BUFFER_BINDING_ARB", Value: uint32(35055)},
 			{Name: "GL_DEPTH24_STENCIL8", Value: uint32(35056)},
+			{Name: "GL_DEPTH24_STENCIL8_OES", Value: uint32(35056)},
 			{Name: "GL_DEPTH24_STENCIL8_EXT", Value: uint32(35056)},
-			{Name: "GL_TEXTURE_STENCIL_SIZE_EXT", Value: uint32(35057)},
 			{Name: "GL_TEXTURE_STENCIL_SIZE", Value: uint32(35057)},
+			{Name: "GL_TEXTURE_STENCIL_SIZE_EXT", Value: uint32(35057)},
 			{Name: "GL_STENCIL_TAG_BITS_EXT", Value: uint32(35058)},
 			{Name: "GL_STENCIL_CLEAR_TAG_VALUE_EXT", Value: uint32(35059)},
 			{Name: "GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV", Value: uint32(35060)},
@@ -85865,21 +89233,21 @@ func init() {
 			{Name: "GL_ONE_MINUS_SRC1_COLOR", Value: uint32(35066)},
 			{Name: "GL_ONE_MINUS_SRC1_ALPHA", Value: uint32(35067)},
 			{Name: "GL_MAX_DUAL_SOURCE_DRAW_BUFFERS", Value: uint32(35068)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV", Value: uint32(35069)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT", Value: uint32(35069)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_INTEGER", Value: uint32(35069)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT", Value: uint32(35069)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV", Value: uint32(35069)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT", Value: uint32(35070)},
+			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR", Value: uint32(35070)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE", Value: uint32(35070)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB", Value: uint32(35070)},
 			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV", Value: uint32(35070)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR", Value: uint32(35070)},
-			{Name: "GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT", Value: uint32(35070)},
-			{Name: "GL_MAX_ARRAY_TEXTURE_LAYERS", Value: uint32(35071)},
 			{Name: "GL_MAX_ARRAY_TEXTURE_LAYERS_EXT", Value: uint32(35071)},
-			{Name: "GL_MIN_PROGRAM_TEXEL_OFFSET", Value: uint32(35076)},
+			{Name: "GL_MAX_ARRAY_TEXTURE_LAYERS", Value: uint32(35071)},
 			{Name: "GL_MIN_PROGRAM_TEXEL_OFFSET_EXT", Value: uint32(35076)},
 			{Name: "GL_MIN_PROGRAM_TEXEL_OFFSET_NV", Value: uint32(35076)},
-			{Name: "GL_MAX_PROGRAM_TEXEL_OFFSET_NV", Value: uint32(35077)},
+			{Name: "GL_MIN_PROGRAM_TEXEL_OFFSET", Value: uint32(35076)},
 			{Name: "GL_MAX_PROGRAM_TEXEL_OFFSET", Value: uint32(35077)},
+			{Name: "GL_MAX_PROGRAM_TEXEL_OFFSET_NV", Value: uint32(35077)},
 			{Name: "GL_MAX_PROGRAM_TEXEL_OFFSET_EXT", Value: uint32(35077)},
 			{Name: "GL_PROGRAM_ATTRIB_COMPONENTS_NV", Value: uint32(35078)},
 			{Name: "GL_PROGRAM_RESULT_COMPONENTS_NV", Value: uint32(35079)},
@@ -85890,24 +89258,24 @@ func init() {
 			{Name: "GL_MIRROR_CLAMP_TO_BORDER_EXT", Value: uint32(35090)},
 			{Name: "GL_SAMPLES_PASSED", Value: uint32(35092)},
 			{Name: "GL_SAMPLES_PASSED_ARB", Value: uint32(35092)},
+			{Name: "GL_GEOMETRY_LINKED_VERTICES_OUT_OES", Value: uint32(35094)},
 			{Name: "GL_GEOMETRY_VERTICES_OUT", Value: uint32(35094)},
 			{Name: "GL_GEOMETRY_LINKED_VERTICES_OUT_EXT", Value: uint32(35094)},
-			{Name: "GL_GEOMETRY_LINKED_VERTICES_OUT_OES", Value: uint32(35094)},
 			{Name: "GL_GEOMETRY_INPUT_TYPE", Value: uint32(35095)},
 			{Name: "GL_GEOMETRY_LINKED_INPUT_TYPE_EXT", Value: uint32(35095)},
 			{Name: "GL_GEOMETRY_LINKED_INPUT_TYPE_OES", Value: uint32(35095)},
-			{Name: "GL_GEOMETRY_LINKED_OUTPUT_TYPE_OES", Value: uint32(35096)},
 			{Name: "GL_GEOMETRY_OUTPUT_TYPE", Value: uint32(35096)},
+			{Name: "GL_GEOMETRY_LINKED_OUTPUT_TYPE_OES", Value: uint32(35096)},
 			{Name: "GL_GEOMETRY_LINKED_OUTPUT_TYPE_EXT", Value: uint32(35096)},
 			{Name: "GL_SAMPLER_BINDING", Value: uint32(35097)},
-			{Name: "GL_CLAMP_VERTEX_COLOR_ARB", Value: uint32(35098)},
 			{Name: "GL_CLAMP_VERTEX_COLOR", Value: uint32(35098)},
+			{Name: "GL_CLAMP_VERTEX_COLOR_ARB", Value: uint32(35098)},
 			{Name: "GL_CLAMP_FRAGMENT_COLOR", Value: uint32(35099)},
 			{Name: "GL_CLAMP_FRAGMENT_COLOR_ARB", Value: uint32(35099)},
-			{Name: "GL_CLAMP_READ_COLOR_ARB", Value: uint32(35100)},
 			{Name: "GL_CLAMP_READ_COLOR", Value: uint32(35100)},
-			{Name: "GL_FIXED_ONLY_ARB", Value: uint32(35101)},
+			{Name: "GL_CLAMP_READ_COLOR_ARB", Value: uint32(35100)},
 			{Name: "GL_FIXED_ONLY", Value: uint32(35101)},
+			{Name: "GL_FIXED_ONLY_ARB", Value: uint32(35101)},
 			{Name: "GL_TESS_CONTROL_PROGRAM_NV", Value: uint32(35102)},
 			{Name: "GL_TESS_EVALUATION_PROGRAM_NV", Value: uint32(35103)},
 			{Name: "GL_FRAGMENT_SHADER_ATI", Value: uint32(35104)},
@@ -86049,17 +89417,17 @@ func init() {
 			{Name: "GL_UNIFORM_BUFFER_START", Value: uint32(35369)},
 			{Name: "GL_UNIFORM_BUFFER_SIZE", Value: uint32(35370)},
 			{Name: "GL_MAX_VERTEX_UNIFORM_BLOCKS", Value: uint32(35371)},
-			{Name: "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_EXT", Value: uint32(35372)},
-			{Name: "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_OES", Value: uint32(35372)},
 			{Name: "GL_MAX_GEOMETRY_UNIFORM_BLOCKS", Value: uint32(35372)},
+			{Name: "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_OES", Value: uint32(35372)},
+			{Name: "GL_MAX_GEOMETRY_UNIFORM_BLOCKS_EXT", Value: uint32(35372)},
 			{Name: "GL_MAX_FRAGMENT_UNIFORM_BLOCKS", Value: uint32(35373)},
 			{Name: "GL_MAX_COMBINED_UNIFORM_BLOCKS", Value: uint32(35374)},
 			{Name: "GL_MAX_UNIFORM_BUFFER_BINDINGS", Value: uint32(35375)},
 			{Name: "GL_MAX_UNIFORM_BLOCK_SIZE", Value: uint32(35376)},
 			{Name: "GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS", Value: uint32(35377)},
 			{Name: "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS", Value: uint32(35378)},
-			{Name: "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_OES", Value: uint32(35378)},
 			{Name: "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_EXT", Value: uint32(35378)},
+			{Name: "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_OES", Value: uint32(35378)},
 			{Name: "GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS", Value: uint32(35379)},
 			{Name: "GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT", Value: uint32(35380)},
 			{Name: "GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH", Value: uint32(35381)},
@@ -86093,49 +89461,49 @@ func init() {
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT", Value: uint32(35415)},
 			{Name: "GL_FRAGMENT_SHADER_ARB", Value: uint32(35632)},
 			{Name: "GL_FRAGMENT_SHADER", Value: uint32(35632)},
-			{Name: "GL_VERTEX_SHADER", Value: uint32(35633)},
 			{Name: "GL_VERTEX_SHADER_ARB", Value: uint32(35633)},
+			{Name: "GL_VERTEX_SHADER", Value: uint32(35633)},
 			{Name: "GL_PROGRAM_OBJECT_EXT", Value: uint32(35648)},
 			{Name: "GL_PROGRAM_OBJECT_ARB", Value: uint32(35648)},
-			{Name: "GL_SHADER_OBJECT_ARB", Value: uint32(35656)},
 			{Name: "GL_SHADER_OBJECT_EXT", Value: uint32(35656)},
-			{Name: "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB", Value: uint32(35657)},
+			{Name: "GL_SHADER_OBJECT_ARB", Value: uint32(35656)},
 			{Name: "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS", Value: uint32(35657)},
+			{Name: "GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB", Value: uint32(35657)},
 			{Name: "GL_MAX_VERTEX_UNIFORM_COMPONENTS", Value: uint32(35658)},
 			{Name: "GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB", Value: uint32(35658)},
-			{Name: "GL_MAX_VARYING_FLOATS_ARB", Value: uint32(35659)},
-			{Name: "GL_MAX_VARYING_COMPONENTS_EXT", Value: uint32(35659)},
-			{Name: "GL_MAX_VARYING_FLOATS", Value: uint32(35659)},
 			{Name: "GL_MAX_VARYING_COMPONENTS", Value: uint32(35659)},
+			{Name: "GL_MAX_VARYING_FLOATS", Value: uint32(35659)},
+			{Name: "GL_MAX_VARYING_COMPONENTS_EXT", Value: uint32(35659)},
+			{Name: "GL_MAX_VARYING_FLOATS_ARB", Value: uint32(35659)},
 			{Name: "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB", Value: uint32(35660)},
 			{Name: "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS", Value: uint32(35660)},
 			{Name: "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS", Value: uint32(35661)},
 			{Name: "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB", Value: uint32(35661)},
 			{Name: "GL_OBJECT_TYPE_ARB", Value: uint32(35662)},
-			{Name: "GL_OBJECT_SUBTYPE_ARB", Value: uint32(35663)},
 			{Name: "GL_SHADER_TYPE", Value: uint32(35663)},
-			{Name: "GL_FLOAT_VEC2_ARB", Value: uint32(35664)},
+			{Name: "GL_OBJECT_SUBTYPE_ARB", Value: uint32(35663)},
 			{Name: "GL_FLOAT_VEC2", Value: uint32(35664)},
-			{Name: "GL_FLOAT_VEC3_ARB", Value: uint32(35665)},
+			{Name: "GL_FLOAT_VEC2_ARB", Value: uint32(35664)},
 			{Name: "GL_FLOAT_VEC3", Value: uint32(35665)},
-			{Name: "GL_FLOAT_VEC4_ARB", Value: uint32(35666)},
+			{Name: "GL_FLOAT_VEC3_ARB", Value: uint32(35665)},
 			{Name: "GL_FLOAT_VEC4", Value: uint32(35666)},
+			{Name: "GL_FLOAT_VEC4_ARB", Value: uint32(35666)},
 			{Name: "GL_INT_VEC2", Value: uint32(35667)},
 			{Name: "GL_INT_VEC2_ARB", Value: uint32(35667)},
-			{Name: "GL_INT_VEC3_ARB", Value: uint32(35668)},
 			{Name: "GL_INT_VEC3", Value: uint32(35668)},
-			{Name: "GL_INT_VEC4", Value: uint32(35669)},
+			{Name: "GL_INT_VEC3_ARB", Value: uint32(35668)},
 			{Name: "GL_INT_VEC4_ARB", Value: uint32(35669)},
+			{Name: "GL_INT_VEC4", Value: uint32(35669)},
 			{Name: "GL_BOOL_ARB", Value: uint32(35670)},
 			{Name: "GL_BOOL", Value: uint32(35670)},
 			{Name: "GL_BOOL_VEC2", Value: uint32(35671)},
 			{Name: "GL_BOOL_VEC2_ARB", Value: uint32(35671)},
 			{Name: "GL_BOOL_VEC3_ARB", Value: uint32(35672)},
 			{Name: "GL_BOOL_VEC3", Value: uint32(35672)},
-			{Name: "GL_BOOL_VEC4", Value: uint32(35673)},
 			{Name: "GL_BOOL_VEC4_ARB", Value: uint32(35673)},
-			{Name: "GL_FLOAT_MAT2_ARB", Value: uint32(35674)},
+			{Name: "GL_BOOL_VEC4", Value: uint32(35673)},
 			{Name: "GL_FLOAT_MAT2", Value: uint32(35674)},
+			{Name: "GL_FLOAT_MAT2_ARB", Value: uint32(35674)},
 			{Name: "GL_FLOAT_MAT3_ARB", Value: uint32(35675)},
 			{Name: "GL_FLOAT_MAT3", Value: uint32(35675)},
 			{Name: "GL_FLOAT_MAT4", Value: uint32(35676)},
@@ -86147,56 +89515,56 @@ func init() {
 			{Name: "GL_SAMPLER_3D_ARB", Value: uint32(35679)},
 			{Name: "GL_SAMPLER_3D", Value: uint32(35679)},
 			{Name: "GL_SAMPLER_3D_OES", Value: uint32(35679)},
-			{Name: "GL_SAMPLER_CUBE_ARB", Value: uint32(35680)},
 			{Name: "GL_SAMPLER_CUBE", Value: uint32(35680)},
+			{Name: "GL_SAMPLER_CUBE_ARB", Value: uint32(35680)},
 			{Name: "GL_SAMPLER_1D_SHADOW_ARB", Value: uint32(35681)},
 			{Name: "GL_SAMPLER_1D_SHADOW", Value: uint32(35681)},
 			{Name: "GL_SAMPLER_2D_SHADOW_EXT", Value: uint32(35682)},
-			{Name: "GL_SAMPLER_2D_SHADOW_ARB", Value: uint32(35682)},
 			{Name: "GL_SAMPLER_2D_SHADOW", Value: uint32(35682)},
+			{Name: "GL_SAMPLER_2D_SHADOW_ARB", Value: uint32(35682)},
 			{Name: "GL_SAMPLER_2D_RECT_ARB", Value: uint32(35683)},
 			{Name: "GL_SAMPLER_2D_RECT", Value: uint32(35683)},
-			{Name: "GL_SAMPLER_2D_RECT_SHADOW", Value: uint32(35684)},
 			{Name: "GL_SAMPLER_2D_RECT_SHADOW_ARB", Value: uint32(35684)},
-			{Name: "GL_FLOAT_MAT2x3", Value: uint32(35685)},
+			{Name: "GL_SAMPLER_2D_RECT_SHADOW", Value: uint32(35684)},
 			{Name: "GL_FLOAT_MAT2x3_NV", Value: uint32(35685)},
-			{Name: "GL_FLOAT_MAT2x4_NV", Value: uint32(35686)},
+			{Name: "GL_FLOAT_MAT2x3", Value: uint32(35685)},
 			{Name: "GL_FLOAT_MAT2x4", Value: uint32(35686)},
+			{Name: "GL_FLOAT_MAT2x4_NV", Value: uint32(35686)},
 			{Name: "GL_FLOAT_MAT3x2", Value: uint32(35687)},
 			{Name: "GL_FLOAT_MAT3x2_NV", Value: uint32(35687)},
-			{Name: "GL_FLOAT_MAT3x4", Value: uint32(35688)},
 			{Name: "GL_FLOAT_MAT3x4_NV", Value: uint32(35688)},
+			{Name: "GL_FLOAT_MAT3x4", Value: uint32(35688)},
 			{Name: "GL_FLOAT_MAT4x2", Value: uint32(35689)},
 			{Name: "GL_FLOAT_MAT4x2_NV", Value: uint32(35689)},
-			{Name: "GL_FLOAT_MAT4x3", Value: uint32(35690)},
 			{Name: "GL_FLOAT_MAT4x3_NV", Value: uint32(35690)},
+			{Name: "GL_FLOAT_MAT4x3", Value: uint32(35690)},
 			{Name: "GL_DELETE_STATUS", Value: uint32(35712)},
 			{Name: "GL_OBJECT_DELETE_STATUS_ARB", Value: uint32(35712)},
-			{Name: "GL_OBJECT_COMPILE_STATUS_ARB", Value: uint32(35713)},
 			{Name: "GL_COMPILE_STATUS", Value: uint32(35713)},
-			{Name: "GL_OBJECT_LINK_STATUS_ARB", Value: uint32(35714)},
+			{Name: "GL_OBJECT_COMPILE_STATUS_ARB", Value: uint32(35713)},
 			{Name: "GL_LINK_STATUS", Value: uint32(35714)},
+			{Name: "GL_OBJECT_LINK_STATUS_ARB", Value: uint32(35714)},
 			{Name: "GL_OBJECT_VALIDATE_STATUS_ARB", Value: uint32(35715)},
 			{Name: "GL_VALIDATE_STATUS", Value: uint32(35715)},
-			{Name: "GL_INFO_LOG_LENGTH", Value: uint32(35716)},
 			{Name: "GL_OBJECT_INFO_LOG_LENGTH_ARB", Value: uint32(35716)},
-			{Name: "GL_OBJECT_ATTACHED_OBJECTS_ARB", Value: uint32(35717)},
+			{Name: "GL_INFO_LOG_LENGTH", Value: uint32(35716)},
 			{Name: "GL_ATTACHED_SHADERS", Value: uint32(35717)},
+			{Name: "GL_OBJECT_ATTACHED_OBJECTS_ARB", Value: uint32(35717)},
 			{Name: "GL_ACTIVE_UNIFORMS", Value: uint32(35718)},
 			{Name: "GL_OBJECT_ACTIVE_UNIFORMS_ARB", Value: uint32(35718)},
 			{Name: "GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB", Value: uint32(35719)},
 			{Name: "GL_ACTIVE_UNIFORM_MAX_LENGTH", Value: uint32(35719)},
 			{Name: "GL_SHADER_SOURCE_LENGTH", Value: uint32(35720)},
 			{Name: "GL_OBJECT_SHADER_SOURCE_LENGTH_ARB", Value: uint32(35720)},
-			{Name: "GL_ACTIVE_ATTRIBUTES", Value: uint32(35721)},
 			{Name: "GL_OBJECT_ACTIVE_ATTRIBUTES_ARB", Value: uint32(35721)},
-			{Name: "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH", Value: uint32(35722)},
+			{Name: "GL_ACTIVE_ATTRIBUTES", Value: uint32(35721)},
 			{Name: "GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB", Value: uint32(35722)},
-			{Name: "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES", Value: uint32(35723)},
-			{Name: "GL_FRAGMENT_SHADER_DERIVATIVE_HINT", Value: uint32(35723)},
+			{Name: "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH", Value: uint32(35722)},
 			{Name: "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB", Value: uint32(35723)},
-			{Name: "GL_SHADING_LANGUAGE_VERSION", Value: uint32(35724)},
+			{Name: "GL_FRAGMENT_SHADER_DERIVATIVE_HINT", Value: uint32(35723)},
+			{Name: "GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES", Value: uint32(35723)},
 			{Name: "GL_SHADING_LANGUAGE_VERSION_ARB", Value: uint32(35724)},
+			{Name: "GL_SHADING_LANGUAGE_VERSION", Value: uint32(35724)},
 			{Name: "GL_CURRENT_PROGRAM", Value: uint32(35725)},
 			{Name: "GL_PALETTE4_RGB8_OES", Value: uint32(35728)},
 			{Name: "GL_PALETTE4_RGBA8_OES", Value: uint32(35729)},
@@ -86208,8 +89576,8 @@ func init() {
 			{Name: "GL_PALETTE8_R5_G6_B5_OES", Value: uint32(35735)},
 			{Name: "GL_PALETTE8_RGBA4_OES", Value: uint32(35736)},
 			{Name: "GL_PALETTE8_RGB5_A1_OES", Value: uint32(35737)},
-			{Name: "GL_IMPLEMENTATION_COLOR_READ_TYPE_OES", Value: uint32(35738)},
 			{Name: "GL_IMPLEMENTATION_COLOR_READ_TYPE", Value: uint32(35738)},
+			{Name: "GL_IMPLEMENTATION_COLOR_READ_TYPE_OES", Value: uint32(35738)},
 			{Name: "GL_IMPLEMENTATION_COLOR_READ_FORMAT", Value: uint32(35739)},
 			{Name: "GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES", Value: uint32(35739)},
 			{Name: "GL_POINT_SIZE_ARRAY_OES", Value: uint32(35740)},
@@ -86256,20 +89624,20 @@ func init() {
 			{Name: "GL_SGX_BINARY_IMG", Value: uint32(35850)},
 			{Name: "GL_TEXTURE_RED_TYPE", Value: uint32(35856)},
 			{Name: "GL_TEXTURE_RED_TYPE_ARB", Value: uint32(35856)},
-			{Name: "GL_TEXTURE_GREEN_TYPE_ARB", Value: uint32(35857)},
 			{Name: "GL_TEXTURE_GREEN_TYPE", Value: uint32(35857)},
+			{Name: "GL_TEXTURE_GREEN_TYPE_ARB", Value: uint32(35857)},
 			{Name: "GL_TEXTURE_BLUE_TYPE_ARB", Value: uint32(35858)},
 			{Name: "GL_TEXTURE_BLUE_TYPE", Value: uint32(35858)},
-			{Name: "GL_TEXTURE_ALPHA_TYPE_ARB", Value: uint32(35859)},
 			{Name: "GL_TEXTURE_ALPHA_TYPE", Value: uint32(35859)},
-			{Name: "GL_TEXTURE_LUMINANCE_TYPE_ARB", Value: uint32(35860)},
+			{Name: "GL_TEXTURE_ALPHA_TYPE_ARB", Value: uint32(35859)},
 			{Name: "GL_TEXTURE_LUMINANCE_TYPE", Value: uint32(35860)},
+			{Name: "GL_TEXTURE_LUMINANCE_TYPE_ARB", Value: uint32(35860)},
 			{Name: "GL_TEXTURE_INTENSITY_TYPE_ARB", Value: uint32(35861)},
 			{Name: "GL_TEXTURE_INTENSITY_TYPE", Value: uint32(35861)},
-			{Name: "GL_TEXTURE_DEPTH_TYPE_ARB", Value: uint32(35862)},
 			{Name: "GL_TEXTURE_DEPTH_TYPE", Value: uint32(35862)},
-			{Name: "GL_UNSIGNED_NORMALIZED_EXT", Value: uint32(35863)},
+			{Name: "GL_TEXTURE_DEPTH_TYPE_ARB", Value: uint32(35862)},
 			{Name: "GL_UNSIGNED_NORMALIZED_ARB", Value: uint32(35863)},
+			{Name: "GL_UNSIGNED_NORMALIZED_EXT", Value: uint32(35863)},
 			{Name: "GL_UNSIGNED_NORMALIZED", Value: uint32(35863)},
 			{Name: "GL_TEXTURE_1D_ARRAY_EXT", Value: uint32(35864)},
 			{Name: "GL_TEXTURE_1D_ARRAY", Value: uint32(35864)},
@@ -86277,8 +89645,8 @@ func init() {
 			{Name: "GL_PROXY_TEXTURE_1D_ARRAY", Value: uint32(35865)},
 			{Name: "GL_TEXTURE_2D_ARRAY", Value: uint32(35866)},
 			{Name: "GL_TEXTURE_2D_ARRAY_EXT", Value: uint32(35866)},
-			{Name: "GL_PROXY_TEXTURE_2D_ARRAY_EXT", Value: uint32(35867)},
 			{Name: "GL_PROXY_TEXTURE_2D_ARRAY", Value: uint32(35867)},
+			{Name: "GL_PROXY_TEXTURE_2D_ARRAY_EXT", Value: uint32(35867)},
 			{Name: "GL_TEXTURE_BINDING_1D_ARRAY", Value: uint32(35868)},
 			{Name: "GL_TEXTURE_BINDING_1D_ARRAY_EXT", Value: uint32(35868)},
 			{Name: "GL_TEXTURE_BINDING_2D_ARRAY", Value: uint32(35869)},
@@ -86287,48 +89655,48 @@ func init() {
 			{Name: "GL_MAX_PROGRAM_OUTPUT_VERTICES_NV", Value: uint32(35879)},
 			{Name: "GL_MAX_PROGRAM_TOTAL_OUTPUT_COMPONENTS_NV", Value: uint32(35880)},
 			{Name: "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS", Value: uint32(35881)},
+			{Name: "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT", Value: uint32(35881)},
 			{Name: "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB", Value: uint32(35881)},
 			{Name: "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_OES", Value: uint32(35881)},
-			{Name: "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT", Value: uint32(35881)},
-			{Name: "GL_TEXTURE_BUFFER_BINDING_OES", Value: uint32(35882)},
 			{Name: "GL_TEXTURE_BUFFER_OES", Value: uint32(35882)},
-			{Name: "GL_TEXTURE_BUFFER", Value: uint32(35882)},
+			{Name: "GL_TEXTURE_BUFFER_EXT", Value: uint32(35882)},
+			{Name: "GL_TEXTURE_BUFFER_BINDING_OES", Value: uint32(35882)},
+			{Name: "GL_TEXTURE_BUFFER_BINDING_EXT", Value: uint32(35882)},
 			{Name: "GL_TEXTURE_BUFFER_BINDING", Value: uint32(35882)},
 			{Name: "GL_TEXTURE_BUFFER_ARB", Value: uint32(35882)},
-			{Name: "GL_TEXTURE_BUFFER_EXT", Value: uint32(35882)},
-			{Name: "GL_TEXTURE_BUFFER_BINDING_EXT", Value: uint32(35882)},
+			{Name: "GL_TEXTURE_BUFFER", Value: uint32(35882)},
 			{Name: "GL_MAX_TEXTURE_BUFFER_SIZE_ARB", Value: uint32(35883)},
 			{Name: "GL_MAX_TEXTURE_BUFFER_SIZE_EXT", Value: uint32(35883)},
-			{Name: "GL_MAX_TEXTURE_BUFFER_SIZE_OES", Value: uint32(35883)},
 			{Name: "GL_MAX_TEXTURE_BUFFER_SIZE", Value: uint32(35883)},
+			{Name: "GL_MAX_TEXTURE_BUFFER_SIZE_OES", Value: uint32(35883)},
 			{Name: "GL_TEXTURE_BINDING_BUFFER_OES", Value: uint32(35884)},
 			{Name: "GL_TEXTURE_BINDING_BUFFER", Value: uint32(35884)},
 			{Name: "GL_TEXTURE_BINDING_BUFFER_ARB", Value: uint32(35884)},
 			{Name: "GL_TEXTURE_BINDING_BUFFER_EXT", Value: uint32(35884)},
+			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB", Value: uint32(35885)},
+			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES", Value: uint32(35885)},
 			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING", Value: uint32(35885)},
 			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT", Value: uint32(35885)},
-			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES", Value: uint32(35885)},
-			{Name: "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB", Value: uint32(35885)},
 			{Name: "GL_TEXTURE_BUFFER_FORMAT_EXT", Value: uint32(35886)},
 			{Name: "GL_TEXTURE_BUFFER_FORMAT_ARB", Value: uint32(35886)},
-			{Name: "GL_ANY_SAMPLES_PASSED_EXT", Value: uint32(35887)},
 			{Name: "GL_ANY_SAMPLES_PASSED", Value: uint32(35887)},
-			{Name: "GL_SAMPLE_SHADING_OES", Value: uint32(35894)},
+			{Name: "GL_ANY_SAMPLES_PASSED_EXT", Value: uint32(35887)},
 			{Name: "GL_SAMPLE_SHADING_ARB", Value: uint32(35894)},
+			{Name: "GL_SAMPLE_SHADING_OES", Value: uint32(35894)},
 			{Name: "GL_SAMPLE_SHADING", Value: uint32(35894)},
-			{Name: "GL_MIN_SAMPLE_SHADING_VALUE", Value: uint32(35895)},
-			{Name: "GL_MIN_SAMPLE_SHADING_VALUE_ARB", Value: uint32(35895)},
 			{Name: "GL_MIN_SAMPLE_SHADING_VALUE_OES", Value: uint32(35895)},
-			{Name: "GL_R11F_G11F_B10F_APPLE", Value: uint32(35898)},
-			{Name: "GL_R11F_G11F_B10F", Value: uint32(35898)},
+			{Name: "GL_MIN_SAMPLE_SHADING_VALUE_ARB", Value: uint32(35895)},
+			{Name: "GL_MIN_SAMPLE_SHADING_VALUE", Value: uint32(35895)},
 			{Name: "GL_R11F_G11F_B10F_EXT", Value: uint32(35898)},
-			{Name: "GL_UNSIGNED_INT_10F_11F_11F_REV_EXT", Value: uint32(35899)},
+			{Name: "GL_R11F_G11F_B10F", Value: uint32(35898)},
+			{Name: "GL_R11F_G11F_B10F_APPLE", Value: uint32(35898)},
 			{Name: "GL_UNSIGNED_INT_10F_11F_11F_REV_APPLE", Value: uint32(35899)},
 			{Name: "GL_UNSIGNED_INT_10F_11F_11F_REV", Value: uint32(35899)},
+			{Name: "GL_UNSIGNED_INT_10F_11F_11F_REV_EXT", Value: uint32(35899)},
 			{Name: "GL_RGBA_SIGNED_COMPONENTS_EXT", Value: uint32(35900)},
 			{Name: "GL_RGB9_E5_APPLE", Value: uint32(35901)},
-			{Name: "GL_RGB9_E5", Value: uint32(35901)},
 			{Name: "GL_RGB9_E5_EXT", Value: uint32(35901)},
+			{Name: "GL_RGB9_E5", Value: uint32(35901)},
 			{Name: "GL_UNSIGNED_INT_5_9_9_9_REV_EXT", Value: uint32(35902)},
 			{Name: "GL_UNSIGNED_INT_5_9_9_9_REV", Value: uint32(35902)},
 			{Name: "GL_UNSIGNED_INT_5_9_9_9_REV_APPLE", Value: uint32(35902)},
@@ -86336,41 +89704,41 @@ func init() {
 			{Name: "GL_TEXTURE_SHARED_SIZE_EXT", Value: uint32(35903)},
 			{Name: "GL_SRGB_EXT", Value: uint32(35904)},
 			{Name: "GL_SRGB", Value: uint32(35904)},
-			{Name: "GL_SRGB8_NV", Value: uint32(35905)},
-			{Name: "GL_SRGB8", Value: uint32(35905)},
 			{Name: "GL_SRGB8_EXT", Value: uint32(35905)},
+			{Name: "GL_SRGB8", Value: uint32(35905)},
+			{Name: "GL_SRGB8_NV", Value: uint32(35905)},
 			{Name: "GL_SRGB_ALPHA_EXT", Value: uint32(35906)},
 			{Name: "GL_SRGB_ALPHA", Value: uint32(35906)},
 			{Name: "GL_SRGB8_ALPHA8_EXT", Value: uint32(35907)},
 			{Name: "GL_SRGB8_ALPHA8", Value: uint32(35907)},
 			{Name: "GL_SLUMINANCE_ALPHA", Value: uint32(35908)},
-			{Name: "GL_SLUMINANCE_ALPHA_NV", Value: uint32(35908)},
 			{Name: "GL_SLUMINANCE_ALPHA_EXT", Value: uint32(35908)},
-			{Name: "GL_SLUMINANCE8_ALPHA8", Value: uint32(35909)},
-			{Name: "GL_SLUMINANCE8_ALPHA8_EXT", Value: uint32(35909)},
+			{Name: "GL_SLUMINANCE_ALPHA_NV", Value: uint32(35908)},
 			{Name: "GL_SLUMINANCE8_ALPHA8_NV", Value: uint32(35909)},
+			{Name: "GL_SLUMINANCE8_ALPHA8_EXT", Value: uint32(35909)},
+			{Name: "GL_SLUMINANCE8_ALPHA8", Value: uint32(35909)},
+			{Name: "GL_SLUMINANCE", Value: uint32(35910)},
 			{Name: "GL_SLUMINANCE_NV", Value: uint32(35910)},
 			{Name: "GL_SLUMINANCE_EXT", Value: uint32(35910)},
-			{Name: "GL_SLUMINANCE", Value: uint32(35910)},
-			{Name: "GL_SLUMINANCE8_EXT", Value: uint32(35911)},
 			{Name: "GL_SLUMINANCE8_NV", Value: uint32(35911)},
 			{Name: "GL_SLUMINANCE8", Value: uint32(35911)},
+			{Name: "GL_SLUMINANCE8_EXT", Value: uint32(35911)},
 			{Name: "GL_COMPRESSED_SRGB_EXT", Value: uint32(35912)},
 			{Name: "GL_COMPRESSED_SRGB", Value: uint32(35912)},
-			{Name: "GL_COMPRESSED_SRGB_ALPHA_EXT", Value: uint32(35913)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA", Value: uint32(35913)},
+			{Name: "GL_COMPRESSED_SRGB_ALPHA_EXT", Value: uint32(35913)},
 			{Name: "GL_COMPRESSED_SLUMINANCE", Value: uint32(35914)},
 			{Name: "GL_COMPRESSED_SLUMINANCE_EXT", Value: uint32(35914)},
 			{Name: "GL_COMPRESSED_SLUMINANCE_ALPHA_EXT", Value: uint32(35915)},
 			{Name: "GL_COMPRESSED_SLUMINANCE_ALPHA", Value: uint32(35915)},
-			{Name: "GL_COMPRESSED_SRGB_S3TC_DXT1_EXT", Value: uint32(35916)},
 			{Name: "GL_COMPRESSED_SRGB_S3TC_DXT1_NV", Value: uint32(35916)},
+			{Name: "GL_COMPRESSED_SRGB_S3TC_DXT1_EXT", Value: uint32(35916)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV", Value: uint32(35917)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT", Value: uint32(35917)},
-			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", Value: uint32(35918)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV", Value: uint32(35918)},
-			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV", Value: uint32(35919)},
+			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", Value: uint32(35918)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT", Value: uint32(35919)},
+			{Name: "GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV", Value: uint32(35919)},
 			{Name: "GL_COMPRESSED_LUMINANCE_LATC1_EXT", Value: uint32(35952)},
 			{Name: "GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT", Value: uint32(35953)},
 			{Name: "GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT", Value: uint32(35954)},
@@ -86387,52 +89755,52 @@ func init() {
 			{Name: "GL_PRIMITIVE_ID_NV", Value: uint32(35964)},
 			{Name: "GL_GENERIC_ATTRIB_NV", Value: uint32(35965)},
 			{Name: "GL_TRANSFORM_FEEDBACK_ATTRIBS_NV", Value: uint32(35966)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT", Value: uint32(35967)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_NV", Value: uint32(35967)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_MODE", Value: uint32(35967)},
-			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT", Value: uint32(35968)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT", Value: uint32(35967)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS", Value: uint32(35968)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_NV", Value: uint32(35968)},
+			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT", Value: uint32(35968)},
 			{Name: "GL_ACTIVE_VARYINGS_NV", Value: uint32(35969)},
 			{Name: "GL_ACTIVE_VARYING_MAX_LENGTH_NV", Value: uint32(35970)},
+			{Name: "GL_TRANSFORM_FEEDBACK_VARYINGS_NV", Value: uint32(35971)},
 			{Name: "GL_TRANSFORM_FEEDBACK_VARYINGS_EXT", Value: uint32(35971)},
 			{Name: "GL_TRANSFORM_FEEDBACK_VARYINGS", Value: uint32(35971)},
-			{Name: "GL_TRANSFORM_FEEDBACK_VARYINGS_NV", Value: uint32(35971)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_START_EXT", Value: uint32(35972)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_START", Value: uint32(35972)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_START_NV", Value: uint32(35972)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE", Value: uint32(35973)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT", Value: uint32(35973)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_NV", Value: uint32(35973)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT", Value: uint32(35973)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_SIZE", Value: uint32(35973)},
 			{Name: "GL_TRANSFORM_FEEDBACK_RECORD_NV", Value: uint32(35974)},
 			{Name: "GL_PRIMITIVES_GENERATED", Value: uint32(35975)},
-			{Name: "GL_PRIMITIVES_GENERATED_EXT", Value: uint32(35975)},
 			{Name: "GL_PRIMITIVES_GENERATED_NV", Value: uint32(35975)},
 			{Name: "GL_PRIMITIVES_GENERATED_OES", Value: uint32(35975)},
-			{Name: "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT", Value: uint32(35976)},
+			{Name: "GL_PRIMITIVES_GENERATED_EXT", Value: uint32(35975)},
 			{Name: "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN", Value: uint32(35976)},
 			{Name: "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV", Value: uint32(35976)},
-			{Name: "GL_RASTERIZER_DISCARD_NV", Value: uint32(35977)},
+			{Name: "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT", Value: uint32(35976)},
 			{Name: "GL_RASTERIZER_DISCARD", Value: uint32(35977)},
+			{Name: "GL_RASTERIZER_DISCARD_NV", Value: uint32(35977)},
 			{Name: "GL_RASTERIZER_DISCARD_EXT", Value: uint32(35977)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT", Value: uint32(35978)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS", Value: uint32(35978)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_NV", Value: uint32(35978)},
-			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT", Value: uint32(35979)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS", Value: uint32(35979)},
+			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT", Value: uint32(35979)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_NV", Value: uint32(35979)},
+			{Name: "GL_INTERLEAVED_ATTRIBS_NV", Value: uint32(35980)},
 			{Name: "GL_INTERLEAVED_ATTRIBS_EXT", Value: uint32(35980)},
 			{Name: "GL_INTERLEAVED_ATTRIBS", Value: uint32(35980)},
-			{Name: "GL_INTERLEAVED_ATTRIBS_NV", Value: uint32(35980)},
 			{Name: "GL_SEPARATE_ATTRIBS_NV", Value: uint32(35981)},
 			{Name: "GL_SEPARATE_ATTRIBS", Value: uint32(35981)},
 			{Name: "GL_SEPARATE_ATTRIBS_EXT", Value: uint32(35981)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER", Value: uint32(35982)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_NV", Value: uint32(35982)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_EXT", Value: uint32(35982)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT", Value: uint32(35983)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING", Value: uint32(35983)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_NV", Value: uint32(35983)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT", Value: uint32(35983)},
 			{Name: "GL_ATC_RGB_AMD", Value: uint32(35986)},
 			{Name: "GL_ATC_RGBA_EXPLICIT_ALPHA_AMD", Value: uint32(35987)},
 			{Name: "GL_POINT_SPRITE_COORD_ORIGIN", Value: uint32(36000)},
@@ -86441,130 +89809,130 @@ func init() {
 			{Name: "GL_STENCIL_BACK_REF", Value: uint32(36003)},
 			{Name: "GL_STENCIL_BACK_VALUE_MASK", Value: uint32(36004)},
 			{Name: "GL_STENCIL_BACK_WRITEMASK", Value: uint32(36005)},
-			{Name: "GL_FRAMEBUFFER_BINDING", Value: uint32(36006)},
-			{Name: "GL_FRAMEBUFFER_BINDING_EXT", Value: uint32(36006)},
 			{Name: "GL_FRAMEBUFFER_BINDING_ANGLE", Value: uint32(36006)},
-			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_APPLE", Value: uint32(36006)},
+			{Name: "GL_FRAMEBUFFER_BINDING_OES", Value: uint32(36006)},
+			{Name: "GL_FRAMEBUFFER_BINDING_EXT", Value: uint32(36006)},
 			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_ANGLE", Value: uint32(36006)},
 			{Name: "GL_DRAW_FRAMEBUFFER_BINDING", Value: uint32(36006)},
-			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_EXT", Value: uint32(36006)},
 			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_NV", Value: uint32(36006)},
-			{Name: "GL_FRAMEBUFFER_BINDING_OES", Value: uint32(36006)},
-			{Name: "GL_RENDERBUFFER_BINDING", Value: uint32(36007)},
+			{Name: "GL_FRAMEBUFFER_BINDING", Value: uint32(36006)},
+			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_EXT", Value: uint32(36006)},
+			{Name: "GL_DRAW_FRAMEBUFFER_BINDING_APPLE", Value: uint32(36006)},
+			{Name: "GL_RENDERBUFFER_BINDING_OES", Value: uint32(36007)},
 			{Name: "GL_RENDERBUFFER_BINDING_ANGLE", Value: uint32(36007)},
 			{Name: "GL_RENDERBUFFER_BINDING_EXT", Value: uint32(36007)},
-			{Name: "GL_RENDERBUFFER_BINDING_OES", Value: uint32(36007)},
+			{Name: "GL_RENDERBUFFER_BINDING", Value: uint32(36007)},
+			{Name: "GL_READ_FRAMEBUFFER_EXT", Value: uint32(36008)},
 			{Name: "GL_READ_FRAMEBUFFER", Value: uint32(36008)},
 			{Name: "GL_READ_FRAMEBUFFER_ANGLE", Value: uint32(36008)},
-			{Name: "GL_READ_FRAMEBUFFER_NV", Value: uint32(36008)},
 			{Name: "GL_READ_FRAMEBUFFER_APPLE", Value: uint32(36008)},
-			{Name: "GL_READ_FRAMEBUFFER_EXT", Value: uint32(36008)},
+			{Name: "GL_READ_FRAMEBUFFER_NV", Value: uint32(36008)},
+			{Name: "GL_DRAW_FRAMEBUFFER_EXT", Value: uint32(36009)},
+			{Name: "GL_DRAW_FRAMEBUFFER_NV", Value: uint32(36009)},
 			{Name: "GL_DRAW_FRAMEBUFFER", Value: uint32(36009)},
 			{Name: "GL_DRAW_FRAMEBUFFER_APPLE", Value: uint32(36009)},
 			{Name: "GL_DRAW_FRAMEBUFFER_ANGLE", Value: uint32(36009)},
-			{Name: "GL_DRAW_FRAMEBUFFER_EXT", Value: uint32(36009)},
-			{Name: "GL_DRAW_FRAMEBUFFER_NV", Value: uint32(36009)},
 			{Name: "GL_READ_FRAMEBUFFER_BINDING", Value: uint32(36010)},
-			{Name: "GL_READ_FRAMEBUFFER_BINDING_NV", Value: uint32(36010)},
 			{Name: "GL_READ_FRAMEBUFFER_BINDING_EXT", Value: uint32(36010)},
-			{Name: "GL_READ_FRAMEBUFFER_BINDING_ANGLE", Value: uint32(36010)},
+			{Name: "GL_READ_FRAMEBUFFER_BINDING_NV", Value: uint32(36010)},
 			{Name: "GL_READ_FRAMEBUFFER_BINDING_APPLE", Value: uint32(36010)},
-			{Name: "GL_RENDERBUFFER_COVERAGE_SAMPLES_NV", Value: uint32(36011)},
-			{Name: "GL_RENDERBUFFER_SAMPLES_APPLE", Value: uint32(36011)},
+			{Name: "GL_READ_FRAMEBUFFER_BINDING_ANGLE", Value: uint32(36010)},
 			{Name: "GL_RENDERBUFFER_SAMPLES_EXT", Value: uint32(36011)},
-			{Name: "GL_RENDERBUFFER_SAMPLES", Value: uint32(36011)},
+			{Name: "GL_RENDERBUFFER_COVERAGE_SAMPLES_NV", Value: uint32(36011)},
 			{Name: "GL_RENDERBUFFER_SAMPLES_NV", Value: uint32(36011)},
+			{Name: "GL_RENDERBUFFER_SAMPLES_APPLE", Value: uint32(36011)},
 			{Name: "GL_RENDERBUFFER_SAMPLES_ANGLE", Value: uint32(36011)},
+			{Name: "GL_RENDERBUFFER_SAMPLES", Value: uint32(36011)},
 			{Name: "GL_DEPTH_COMPONENT32F", Value: uint32(36012)},
 			{Name: "GL_DEPTH32F_STENCIL8", Value: uint32(36013)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE", Value: uint32(36048)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT", Value: uint32(36048)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_OES", Value: uint32(36048)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE", Value: uint32(36048)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME", Value: uint32(36049)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT", Value: uint32(36049)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_OES", Value: uint32(36049)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT", Value: uint32(36050)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_OES", Value: uint32(36050)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT", Value: uint32(36049)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL", Value: uint32(36050)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_OES", Value: uint32(36050)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT", Value: uint32(36050)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE", Value: uint32(36051)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT", Value: uint32(36051)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_OES", Value: uint32(36051)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES", Value: uint32(36052)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT", Value: uint32(36052)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER", Value: uint32(36052)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT", Value: uint32(36052)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES", Value: uint32(36052)},
-			{Name: "GL_FRAMEBUFFER_COMPLETE", Value: uint32(36053)},
-			{Name: "GL_FRAMEBUFFER_COMPLETE_OES", Value: uint32(36053)},
 			{Name: "GL_FRAMEBUFFER_COMPLETE_EXT", Value: uint32(36053)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_OES", Value: uint32(36054)},
+			{Name: "GL_FRAMEBUFFER_COMPLETE_OES", Value: uint32(36053)},
+			{Name: "GL_FRAMEBUFFER_COMPLETE", Value: uint32(36053)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT", Value: uint32(36054)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT", Value: uint32(36054)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT", Value: uint32(36055)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES", Value: uint32(36055)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_OES", Value: uint32(36054)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT", Value: uint32(36055)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT", Value: uint32(36057)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_OES", Value: uint32(36055)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT", Value: uint32(36055)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_OES", Value: uint32(36057)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS", Value: uint32(36057)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT", Value: uint32(36057)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_FORMATS_OES", Value: uint32(36058)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT", Value: uint32(36058)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER", Value: uint32(36059)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT", Value: uint32(36059)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_OES", Value: uint32(36059)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER", Value: uint32(36060)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_OES", Value: uint32(36060)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER", Value: uint32(36059)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT", Value: uint32(36060)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_OES", Value: uint32(36060)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER", Value: uint32(36060)},
+			{Name: "GL_FRAMEBUFFER_UNSUPPORTED_OES", Value: uint32(36061)},
 			{Name: "GL_FRAMEBUFFER_UNSUPPORTED_EXT", Value: uint32(36061)},
 			{Name: "GL_FRAMEBUFFER_UNSUPPORTED", Value: uint32(36061)},
-			{Name: "GL_FRAMEBUFFER_UNSUPPORTED_OES", Value: uint32(36061)},
-			{Name: "GL_MAX_COLOR_ATTACHMENTS", Value: uint32(36063)},
 			{Name: "GL_MAX_COLOR_ATTACHMENTS_NV", Value: uint32(36063)},
 			{Name: "GL_MAX_COLOR_ATTACHMENTS_EXT", Value: uint32(36063)},
+			{Name: "GL_MAX_COLOR_ATTACHMENTS", Value: uint32(36063)},
 			{Name: "GL_COLOR_ATTACHMENT0_EXT", Value: uint32(36064)},
-			{Name: "GL_COLOR_ATTACHMENT0_NV", Value: uint32(36064)},
 			{Name: "GL_COLOR_ATTACHMENT0", Value: uint32(36064)},
+			{Name: "GL_COLOR_ATTACHMENT0_NV", Value: uint32(36064)},
 			{Name: "GL_COLOR_ATTACHMENT0_OES", Value: uint32(36064)},
 			{Name: "GL_COLOR_ATTACHMENT1_EXT", Value: uint32(36065)},
-			{Name: "GL_COLOR_ATTACHMENT1", Value: uint32(36065)},
 			{Name: "GL_COLOR_ATTACHMENT1_NV", Value: uint32(36065)},
+			{Name: "GL_COLOR_ATTACHMENT1", Value: uint32(36065)},
 			{Name: "GL_COLOR_ATTACHMENT2", Value: uint32(36066)},
 			{Name: "GL_COLOR_ATTACHMENT2_NV", Value: uint32(36066)},
 			{Name: "GL_COLOR_ATTACHMENT2_EXT", Value: uint32(36066)},
-			{Name: "GL_COLOR_ATTACHMENT3", Value: uint32(36067)},
 			{Name: "GL_COLOR_ATTACHMENT3_EXT", Value: uint32(36067)},
 			{Name: "GL_COLOR_ATTACHMENT3_NV", Value: uint32(36067)},
+			{Name: "GL_COLOR_ATTACHMENT3", Value: uint32(36067)},
 			{Name: "GL_COLOR_ATTACHMENT4_EXT", Value: uint32(36068)},
 			{Name: "GL_COLOR_ATTACHMENT4", Value: uint32(36068)},
 			{Name: "GL_COLOR_ATTACHMENT4_NV", Value: uint32(36068)},
 			{Name: "GL_COLOR_ATTACHMENT5_NV", Value: uint32(36069)},
-			{Name: "GL_COLOR_ATTACHMENT5_EXT", Value: uint32(36069)},
 			{Name: "GL_COLOR_ATTACHMENT5", Value: uint32(36069)},
+			{Name: "GL_COLOR_ATTACHMENT5_EXT", Value: uint32(36069)},
 			{Name: "GL_COLOR_ATTACHMENT6", Value: uint32(36070)},
 			{Name: "GL_COLOR_ATTACHMENT6_NV", Value: uint32(36070)},
 			{Name: "GL_COLOR_ATTACHMENT6_EXT", Value: uint32(36070)},
-			{Name: "GL_COLOR_ATTACHMENT7", Value: uint32(36071)},
 			{Name: "GL_COLOR_ATTACHMENT7_NV", Value: uint32(36071)},
 			{Name: "GL_COLOR_ATTACHMENT7_EXT", Value: uint32(36071)},
+			{Name: "GL_COLOR_ATTACHMENT7", Value: uint32(36071)},
 			{Name: "GL_COLOR_ATTACHMENT8_NV", Value: uint32(36072)},
-			{Name: "GL_COLOR_ATTACHMENT8_EXT", Value: uint32(36072)},
 			{Name: "GL_COLOR_ATTACHMENT8", Value: uint32(36072)},
+			{Name: "GL_COLOR_ATTACHMENT8_EXT", Value: uint32(36072)},
+			{Name: "GL_COLOR_ATTACHMENT9", Value: uint32(36073)},
 			{Name: "GL_COLOR_ATTACHMENT9_EXT", Value: uint32(36073)},
 			{Name: "GL_COLOR_ATTACHMENT9_NV", Value: uint32(36073)},
-			{Name: "GL_COLOR_ATTACHMENT9", Value: uint32(36073)},
-			{Name: "GL_COLOR_ATTACHMENT10_NV", Value: uint32(36074)},
 			{Name: "GL_COLOR_ATTACHMENT10", Value: uint32(36074)},
+			{Name: "GL_COLOR_ATTACHMENT10_NV", Value: uint32(36074)},
 			{Name: "GL_COLOR_ATTACHMENT10_EXT", Value: uint32(36074)},
-			{Name: "GL_COLOR_ATTACHMENT11", Value: uint32(36075)},
 			{Name: "GL_COLOR_ATTACHMENT11_NV", Value: uint32(36075)},
 			{Name: "GL_COLOR_ATTACHMENT11_EXT", Value: uint32(36075)},
-			{Name: "GL_COLOR_ATTACHMENT12_NV", Value: uint32(36076)},
+			{Name: "GL_COLOR_ATTACHMENT11", Value: uint32(36075)},
 			{Name: "GL_COLOR_ATTACHMENT12", Value: uint32(36076)},
+			{Name: "GL_COLOR_ATTACHMENT12_NV", Value: uint32(36076)},
 			{Name: "GL_COLOR_ATTACHMENT12_EXT", Value: uint32(36076)},
 			{Name: "GL_COLOR_ATTACHMENT13_EXT", Value: uint32(36077)},
-			{Name: "GL_COLOR_ATTACHMENT13_NV", Value: uint32(36077)},
 			{Name: "GL_COLOR_ATTACHMENT13", Value: uint32(36077)},
-			{Name: "GL_COLOR_ATTACHMENT14_NV", Value: uint32(36078)},
+			{Name: "GL_COLOR_ATTACHMENT13_NV", Value: uint32(36077)},
 			{Name: "GL_COLOR_ATTACHMENT14_EXT", Value: uint32(36078)},
 			{Name: "GL_COLOR_ATTACHMENT14", Value: uint32(36078)},
+			{Name: "GL_COLOR_ATTACHMENT14_NV", Value: uint32(36078)},
 			{Name: "GL_COLOR_ATTACHMENT15", Value: uint32(36079)},
 			{Name: "GL_COLOR_ATTACHMENT15_EXT", Value: uint32(36079)},
 			{Name: "GL_COLOR_ATTACHMENT15_NV", Value: uint32(36079)},
@@ -86584,66 +89952,66 @@ func init() {
 			{Name: "GL_COLOR_ATTACHMENT29", Value: uint32(36093)},
 			{Name: "GL_COLOR_ATTACHMENT30", Value: uint32(36094)},
 			{Name: "GL_COLOR_ATTACHMENT31", Value: uint32(36095)},
-			{Name: "GL_DEPTH_ATTACHMENT", Value: uint32(36096)},
 			{Name: "GL_DEPTH_ATTACHMENT_EXT", Value: uint32(36096)},
+			{Name: "GL_DEPTH_ATTACHMENT", Value: uint32(36096)},
 			{Name: "GL_DEPTH_ATTACHMENT_OES", Value: uint32(36096)},
-			{Name: "GL_STENCIL_ATTACHMENT_OES", Value: uint32(36128)},
 			{Name: "GL_STENCIL_ATTACHMENT", Value: uint32(36128)},
+			{Name: "GL_STENCIL_ATTACHMENT_OES", Value: uint32(36128)},
 			{Name: "GL_STENCIL_ATTACHMENT_EXT", Value: uint32(36128)},
-			{Name: "GL_FRAMEBUFFER_EXT", Value: uint32(36160)},
 			{Name: "GL_FRAMEBUFFER_OES", Value: uint32(36160)},
+			{Name: "GL_FRAMEBUFFER_EXT", Value: uint32(36160)},
 			{Name: "GL_FRAMEBUFFER", Value: uint32(36160)},
 			{Name: "GL_RENDERBUFFER_OES", Value: uint32(36161)},
 			{Name: "GL_RENDERBUFFER_EXT", Value: uint32(36161)},
 			{Name: "GL_RENDERBUFFER", Value: uint32(36161)},
-			{Name: "GL_RENDERBUFFER_WIDTH", Value: uint32(36162)},
 			{Name: "GL_RENDERBUFFER_WIDTH_OES", Value: uint32(36162)},
 			{Name: "GL_RENDERBUFFER_WIDTH_EXT", Value: uint32(36162)},
-			{Name: "GL_RENDERBUFFER_HEIGHT_OES", Value: uint32(36163)},
+			{Name: "GL_RENDERBUFFER_WIDTH", Value: uint32(36162)},
 			{Name: "GL_RENDERBUFFER_HEIGHT", Value: uint32(36163)},
 			{Name: "GL_RENDERBUFFER_HEIGHT_EXT", Value: uint32(36163)},
-			{Name: "GL_RENDERBUFFER_INTERNAL_FORMAT", Value: uint32(36164)},
-			{Name: "GL_RENDERBUFFER_INTERNAL_FORMAT_EXT", Value: uint32(36164)},
+			{Name: "GL_RENDERBUFFER_HEIGHT_OES", Value: uint32(36163)},
 			{Name: "GL_RENDERBUFFER_INTERNAL_FORMAT_OES", Value: uint32(36164)},
+			{Name: "GL_RENDERBUFFER_INTERNAL_FORMAT_EXT", Value: uint32(36164)},
+			{Name: "GL_RENDERBUFFER_INTERNAL_FORMAT", Value: uint32(36164)},
+			{Name: "GL_STENCIL_INDEX1", Value: uint32(36166)},
 			{Name: "GL_STENCIL_INDEX1_OES", Value: uint32(36166)},
 			{Name: "GL_STENCIL_INDEX1_EXT", Value: uint32(36166)},
-			{Name: "GL_STENCIL_INDEX1", Value: uint32(36166)},
+			{Name: "GL_STENCIL_INDEX4_OES", Value: uint32(36167)},
 			{Name: "GL_STENCIL_INDEX4_EXT", Value: uint32(36167)},
 			{Name: "GL_STENCIL_INDEX4", Value: uint32(36167)},
-			{Name: "GL_STENCIL_INDEX4_OES", Value: uint32(36167)},
-			{Name: "GL_STENCIL_INDEX8_EXT", Value: uint32(36168)},
 			{Name: "GL_STENCIL_INDEX8", Value: uint32(36168)},
+			{Name: "GL_STENCIL_INDEX8_EXT", Value: uint32(36168)},
 			{Name: "GL_STENCIL_INDEX8_OES", Value: uint32(36168)},
 			{Name: "GL_STENCIL_INDEX16", Value: uint32(36169)},
 			{Name: "GL_STENCIL_INDEX16_EXT", Value: uint32(36169)},
-			{Name: "GL_RENDERBUFFER_RED_SIZE_EXT", Value: uint32(36176)},
 			{Name: "GL_RENDERBUFFER_RED_SIZE", Value: uint32(36176)},
+			{Name: "GL_RENDERBUFFER_RED_SIZE_EXT", Value: uint32(36176)},
 			{Name: "GL_RENDERBUFFER_RED_SIZE_OES", Value: uint32(36176)},
 			{Name: "GL_RENDERBUFFER_GREEN_SIZE_EXT", Value: uint32(36177)},
 			{Name: "GL_RENDERBUFFER_GREEN_SIZE", Value: uint32(36177)},
 			{Name: "GL_RENDERBUFFER_GREEN_SIZE_OES", Value: uint32(36177)},
-			{Name: "GL_RENDERBUFFER_BLUE_SIZE_OES", Value: uint32(36178)},
 			{Name: "GL_RENDERBUFFER_BLUE_SIZE", Value: uint32(36178)},
+			{Name: "GL_RENDERBUFFER_BLUE_SIZE_OES", Value: uint32(36178)},
 			{Name: "GL_RENDERBUFFER_BLUE_SIZE_EXT", Value: uint32(36178)},
-			{Name: "GL_RENDERBUFFER_ALPHA_SIZE", Value: uint32(36179)},
 			{Name: "GL_RENDERBUFFER_ALPHA_SIZE_OES", Value: uint32(36179)},
+			{Name: "GL_RENDERBUFFER_ALPHA_SIZE", Value: uint32(36179)},
 			{Name: "GL_RENDERBUFFER_ALPHA_SIZE_EXT", Value: uint32(36179)},
+			{Name: "GL_RENDERBUFFER_DEPTH_SIZE", Value: uint32(36180)},
 			{Name: "GL_RENDERBUFFER_DEPTH_SIZE_OES", Value: uint32(36180)},
 			{Name: "GL_RENDERBUFFER_DEPTH_SIZE_EXT", Value: uint32(36180)},
-			{Name: "GL_RENDERBUFFER_DEPTH_SIZE", Value: uint32(36180)},
 			{Name: "GL_RENDERBUFFER_STENCIL_SIZE", Value: uint32(36181)},
-			{Name: "GL_RENDERBUFFER_STENCIL_SIZE_OES", Value: uint32(36181)},
 			{Name: "GL_RENDERBUFFER_STENCIL_SIZE_EXT", Value: uint32(36181)},
+			{Name: "GL_RENDERBUFFER_STENCIL_SIZE_OES", Value: uint32(36181)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE", Value: uint32(36182)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE", Value: uint32(36182)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT", Value: uint32(36182)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE", Value: uint32(36182)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV", Value: uint32(36182)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE", Value: uint32(36182)},
-			{Name: "GL_MAX_SAMPLES_ANGLE", Value: uint32(36183)},
-			{Name: "GL_MAX_SAMPLES_APPLE", Value: uint32(36183)},
 			{Name: "GL_MAX_SAMPLES_EXT", Value: uint32(36183)},
 			{Name: "GL_MAX_SAMPLES_NV", Value: uint32(36183)},
+			{Name: "GL_MAX_SAMPLES_ANGLE", Value: uint32(36183)},
 			{Name: "GL_MAX_SAMPLES", Value: uint32(36183)},
+			{Name: "GL_MAX_SAMPLES_APPLE", Value: uint32(36183)},
 			{Name: "GL_TEXTURE_GEN_STR_OES", Value: uint32(36192)},
 			{Name: "GL_HALF_FLOAT_OES", Value: uint32(36193)},
 			{Name: "GL_RGB565", Value: uint32(36194)},
@@ -86654,22 +90022,22 @@ func init() {
 			{Name: "GL_TEXTURE_BINDING_EXTERNAL_OES", Value: uint32(36199)},
 			{Name: "GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES", Value: uint32(36200)},
 			{Name: "GL_PRIMITIVE_RESTART_FIXED_INDEX", Value: uint32(36201)},
-			{Name: "GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT", Value: uint32(36202)},
 			{Name: "GL_ANY_SAMPLES_PASSED_CONSERVATIVE", Value: uint32(36202)},
+			{Name: "GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT", Value: uint32(36202)},
 			{Name: "GL_MAX_ELEMENT_INDEX", Value: uint32(36203)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT", Value: uint32(36204)},
-			{Name: "GL_RGBA32UI_EXT", Value: uint32(36208)},
 			{Name: "GL_RGBA32UI", Value: uint32(36208)},
+			{Name: "GL_RGBA32UI_EXT", Value: uint32(36208)},
 			{Name: "GL_RGB32UI_EXT", Value: uint32(36209)},
 			{Name: "GL_RGB32UI", Value: uint32(36209)},
 			{Name: "GL_ALPHA32UI_EXT", Value: uint32(36210)},
 			{Name: "GL_INTENSITY32UI_EXT", Value: uint32(36211)},
 			{Name: "GL_LUMINANCE32UI_EXT", Value: uint32(36212)},
 			{Name: "GL_LUMINANCE_ALPHA32UI_EXT", Value: uint32(36213)},
-			{Name: "GL_RGBA16UI_EXT", Value: uint32(36214)},
 			{Name: "GL_RGBA16UI", Value: uint32(36214)},
-			{Name: "GL_RGB16UI", Value: uint32(36215)},
+			{Name: "GL_RGBA16UI_EXT", Value: uint32(36214)},
 			{Name: "GL_RGB16UI_EXT", Value: uint32(36215)},
+			{Name: "GL_RGB16UI", Value: uint32(36215)},
 			{Name: "GL_ALPHA16UI_EXT", Value: uint32(36216)},
 			{Name: "GL_INTENSITY16UI_EXT", Value: uint32(36217)},
 			{Name: "GL_LUMINANCE16UI_EXT", Value: uint32(36218)},
@@ -86682,10 +90050,10 @@ func init() {
 			{Name: "GL_INTENSITY8UI_EXT", Value: uint32(36223)},
 			{Name: "GL_LUMINANCE8UI_EXT", Value: uint32(36224)},
 			{Name: "GL_LUMINANCE_ALPHA8UI_EXT", Value: uint32(36225)},
-			{Name: "GL_RGBA32I_EXT", Value: uint32(36226)},
 			{Name: "GL_RGBA32I", Value: uint32(36226)},
-			{Name: "GL_RGB32I", Value: uint32(36227)},
+			{Name: "GL_RGBA32I_EXT", Value: uint32(36226)},
 			{Name: "GL_RGB32I_EXT", Value: uint32(36227)},
+			{Name: "GL_RGB32I", Value: uint32(36227)},
 			{Name: "GL_ALPHA32I_EXT", Value: uint32(36228)},
 			{Name: "GL_INTENSITY32I_EXT", Value: uint32(36229)},
 			{Name: "GL_LUMINANCE32I_EXT", Value: uint32(36230)},
@@ -86698,18 +90066,18 @@ func init() {
 			{Name: "GL_INTENSITY16I_EXT", Value: uint32(36235)},
 			{Name: "GL_LUMINANCE16I_EXT", Value: uint32(36236)},
 			{Name: "GL_LUMINANCE_ALPHA16I_EXT", Value: uint32(36237)},
-			{Name: "GL_RGBA8I", Value: uint32(36238)},
 			{Name: "GL_RGBA8I_EXT", Value: uint32(36238)},
-			{Name: "GL_RGB8I_EXT", Value: uint32(36239)},
+			{Name: "GL_RGBA8I", Value: uint32(36238)},
 			{Name: "GL_RGB8I", Value: uint32(36239)},
+			{Name: "GL_RGB8I_EXT", Value: uint32(36239)},
 			{Name: "GL_ALPHA8I_EXT", Value: uint32(36240)},
 			{Name: "GL_INTENSITY8I_EXT", Value: uint32(36241)},
 			{Name: "GL_LUMINANCE8I_EXT", Value: uint32(36242)},
 			{Name: "GL_LUMINANCE_ALPHA8I_EXT", Value: uint32(36243)},
-			{Name: "GL_RED_INTEGER", Value: uint32(36244)},
 			{Name: "GL_RED_INTEGER_EXT", Value: uint32(36244)},
-			{Name: "GL_GREEN_INTEGER_EXT", Value: uint32(36245)},
+			{Name: "GL_RED_INTEGER", Value: uint32(36244)},
 			{Name: "GL_GREEN_INTEGER", Value: uint32(36245)},
+			{Name: "GL_GREEN_INTEGER_EXT", Value: uint32(36245)},
 			{Name: "GL_BLUE_INTEGER_EXT", Value: uint32(36246)},
 			{Name: "GL_BLUE_INTEGER", Value: uint32(36246)},
 			{Name: "GL_ALPHA_INTEGER_EXT", Value: uint32(36247)},
@@ -86718,10 +90086,10 @@ func init() {
 			{Name: "GL_RGB_INTEGER", Value: uint32(36248)},
 			{Name: "GL_RGBA_INTEGER", Value: uint32(36249)},
 			{Name: "GL_RGBA_INTEGER_EXT", Value: uint32(36249)},
-			{Name: "GL_BGR_INTEGER_EXT", Value: uint32(36250)},
 			{Name: "GL_BGR_INTEGER", Value: uint32(36250)},
-			{Name: "GL_BGRA_INTEGER", Value: uint32(36251)},
+			{Name: "GL_BGR_INTEGER_EXT", Value: uint32(36250)},
 			{Name: "GL_BGRA_INTEGER_EXT", Value: uint32(36251)},
+			{Name: "GL_BGRA_INTEGER", Value: uint32(36251)},
 			{Name: "GL_LUMINANCE_INTEGER_EXT", Value: uint32(36252)},
 			{Name: "GL_LUMINANCE_ALPHA_INTEGER_EXT", Value: uint32(36253)},
 			{Name: "GL_RGBA_INTEGER_MODE_EXT", Value: uint32(36254)},
@@ -86733,115 +90101,115 @@ func init() {
 			{Name: "GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV", Value: uint32(36260)},
 			{Name: "GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV", Value: uint32(36261)},
 			{Name: "GL_MAX_PROGRAM_GENERIC_RESULTS_NV", Value: uint32(36262)},
-			{Name: "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB", Value: uint32(36263)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_OES", Value: uint32(36263)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT", Value: uint32(36263)},
+			{Name: "GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB", Value: uint32(36263)},
 			{Name: "GL_FRAMEBUFFER_ATTACHMENT_LAYERED", Value: uint32(36263)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB", Value: uint32(36264)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_OES", Value: uint32(36264)},
-			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT", Value: uint32(36264)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS", Value: uint32(36264)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT", Value: uint32(36264)},
+			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_OES", Value: uint32(36264)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT", Value: uint32(36265)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB", Value: uint32(36265)},
 			{Name: "GL_LAYER_NV", Value: uint32(36266)},
 			{Name: "GL_DEPTH_COMPONENT32F_NV", Value: uint32(36267)},
 			{Name: "GL_DEPTH32F_STENCIL8_NV", Value: uint32(36268)},
-			{Name: "GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV", Value: uint32(36269)},
 			{Name: "GL_FLOAT_32_UNSIGNED_INT_24_8_REV", Value: uint32(36269)},
+			{Name: "GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV", Value: uint32(36269)},
 			{Name: "GL_SHADER_INCLUDE_ARB", Value: uint32(36270)},
 			{Name: "GL_DEPTH_BUFFER_FLOAT_MODE_NV", Value: uint32(36271)},
-			{Name: "GL_FRAMEBUFFER_SRGB", Value: uint32(36281)},
 			{Name: "GL_FRAMEBUFFER_SRGB_EXT", Value: uint32(36281)},
+			{Name: "GL_FRAMEBUFFER_SRGB", Value: uint32(36281)},
 			{Name: "GL_FRAMEBUFFER_SRGB_CAPABLE_EXT", Value: uint32(36282)},
-			{Name: "GL_COMPRESSED_RED_RGTC1_EXT", Value: uint32(36283)},
 			{Name: "GL_COMPRESSED_RED_RGTC1", Value: uint32(36283)},
+			{Name: "GL_COMPRESSED_RED_RGTC1_EXT", Value: uint32(36283)},
 			{Name: "GL_COMPRESSED_SIGNED_RED_RGTC1_EXT", Value: uint32(36284)},
 			{Name: "GL_COMPRESSED_SIGNED_RED_RGTC1", Value: uint32(36284)},
-			{Name: "GL_COMPRESSED_RG_RGTC2", Value: uint32(36285)},
 			{Name: "GL_COMPRESSED_RED_GREEN_RGTC2_EXT", Value: uint32(36285)},
-			{Name: "GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", Value: uint32(36286)},
+			{Name: "GL_COMPRESSED_RG_RGTC2", Value: uint32(36285)},
 			{Name: "GL_COMPRESSED_SIGNED_RG_RGTC2", Value: uint32(36286)},
-			{Name: "GL_SAMPLER_1D_ARRAY", Value: uint32(36288)},
+			{Name: "GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", Value: uint32(36286)},
 			{Name: "GL_SAMPLER_1D_ARRAY_EXT", Value: uint32(36288)},
+			{Name: "GL_SAMPLER_1D_ARRAY", Value: uint32(36288)},
 			{Name: "GL_SAMPLER_2D_ARRAY", Value: uint32(36289)},
 			{Name: "GL_SAMPLER_2D_ARRAY_EXT", Value: uint32(36289)},
-			{Name: "GL_SAMPLER_BUFFER", Value: uint32(36290)},
-			{Name: "GL_SAMPLER_BUFFER_EXT", Value: uint32(36290)},
 			{Name: "GL_SAMPLER_BUFFER_OES", Value: uint32(36290)},
+			{Name: "GL_SAMPLER_BUFFER_EXT", Value: uint32(36290)},
+			{Name: "GL_SAMPLER_BUFFER", Value: uint32(36290)},
 			{Name: "GL_SAMPLER_1D_ARRAY_SHADOW", Value: uint32(36291)},
 			{Name: "GL_SAMPLER_1D_ARRAY_SHADOW_EXT", Value: uint32(36291)},
 			{Name: "GL_SAMPLER_2D_ARRAY_SHADOW", Value: uint32(36292)},
-			{Name: "GL_SAMPLER_2D_ARRAY_SHADOW_NV", Value: uint32(36292)},
 			{Name: "GL_SAMPLER_2D_ARRAY_SHADOW_EXT", Value: uint32(36292)},
-			{Name: "GL_SAMPLER_CUBE_SHADOW", Value: uint32(36293)},
+			{Name: "GL_SAMPLER_2D_ARRAY_SHADOW_NV", Value: uint32(36292)},
 			{Name: "GL_SAMPLER_CUBE_SHADOW_EXT", Value: uint32(36293)},
 			{Name: "GL_SAMPLER_CUBE_SHADOW_NV", Value: uint32(36293)},
-			{Name: "GL_UNSIGNED_INT_VEC2_EXT", Value: uint32(36294)},
+			{Name: "GL_SAMPLER_CUBE_SHADOW", Value: uint32(36293)},
 			{Name: "GL_UNSIGNED_INT_VEC2", Value: uint32(36294)},
-			{Name: "GL_UNSIGNED_INT_VEC3_EXT", Value: uint32(36295)},
+			{Name: "GL_UNSIGNED_INT_VEC2_EXT", Value: uint32(36294)},
 			{Name: "GL_UNSIGNED_INT_VEC3", Value: uint32(36295)},
-			{Name: "GL_UNSIGNED_INT_VEC4", Value: uint32(36296)},
+			{Name: "GL_UNSIGNED_INT_VEC3_EXT", Value: uint32(36295)},
 			{Name: "GL_UNSIGNED_INT_VEC4_EXT", Value: uint32(36296)},
+			{Name: "GL_UNSIGNED_INT_VEC4", Value: uint32(36296)},
 			{Name: "GL_INT_SAMPLER_1D_EXT", Value: uint32(36297)},
 			{Name: "GL_INT_SAMPLER_1D", Value: uint32(36297)},
 			{Name: "GL_INT_SAMPLER_2D", Value: uint32(36298)},
 			{Name: "GL_INT_SAMPLER_2D_EXT", Value: uint32(36298)},
-			{Name: "GL_INT_SAMPLER_3D", Value: uint32(36299)},
 			{Name: "GL_INT_SAMPLER_3D_EXT", Value: uint32(36299)},
-			{Name: "GL_INT_SAMPLER_CUBE", Value: uint32(36300)},
+			{Name: "GL_INT_SAMPLER_3D", Value: uint32(36299)},
 			{Name: "GL_INT_SAMPLER_CUBE_EXT", Value: uint32(36300)},
-			{Name: "GL_INT_SAMPLER_2D_RECT", Value: uint32(36301)},
+			{Name: "GL_INT_SAMPLER_CUBE", Value: uint32(36300)},
 			{Name: "GL_INT_SAMPLER_2D_RECT_EXT", Value: uint32(36301)},
-			{Name: "GL_INT_SAMPLER_1D_ARRAY", Value: uint32(36302)},
+			{Name: "GL_INT_SAMPLER_2D_RECT", Value: uint32(36301)},
 			{Name: "GL_INT_SAMPLER_1D_ARRAY_EXT", Value: uint32(36302)},
-			{Name: "GL_INT_SAMPLER_2D_ARRAY", Value: uint32(36303)},
+			{Name: "GL_INT_SAMPLER_1D_ARRAY", Value: uint32(36302)},
 			{Name: "GL_INT_SAMPLER_2D_ARRAY_EXT", Value: uint32(36303)},
-			{Name: "GL_INT_SAMPLER_BUFFER", Value: uint32(36304)},
+			{Name: "GL_INT_SAMPLER_2D_ARRAY", Value: uint32(36303)},
 			{Name: "GL_INT_SAMPLER_BUFFER_OES", Value: uint32(36304)},
+			{Name: "GL_INT_SAMPLER_BUFFER", Value: uint32(36304)},
 			{Name: "GL_INT_SAMPLER_BUFFER_EXT", Value: uint32(36304)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_1D_EXT", Value: uint32(36305)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_1D", Value: uint32(36305)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_2D", Value: uint32(36306)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_EXT", Value: uint32(36306)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_3D", Value: uint32(36307)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_2D", Value: uint32(36306)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_3D_EXT", Value: uint32(36307)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_3D", Value: uint32(36307)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE", Value: uint32(36308)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_EXT", Value: uint32(36308)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_RECT_EXT", Value: uint32(36309)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_RECT", Value: uint32(36309)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY", Value: uint32(36310)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY_EXT", Value: uint32(36310)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_1D_ARRAY", Value: uint32(36310)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_ARRAY", Value: uint32(36311)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT", Value: uint32(36311)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT", Value: uint32(36312)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_BUFFER", Value: uint32(36312)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_BUFFER_OES", Value: uint32(36312)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT", Value: uint32(36312)},
+			{Name: "GL_GEOMETRY_SHADER_OES", Value: uint32(36313)},
 			{Name: "GL_GEOMETRY_SHADER_EXT", Value: uint32(36313)},
 			{Name: "GL_GEOMETRY_SHADER_ARB", Value: uint32(36313)},
 			{Name: "GL_GEOMETRY_SHADER", Value: uint32(36313)},
-			{Name: "GL_GEOMETRY_SHADER_OES", Value: uint32(36313)},
-			{Name: "GL_GEOMETRY_VERTICES_OUT_EXT", Value: uint32(36314)},
 			{Name: "GL_GEOMETRY_VERTICES_OUT_ARB", Value: uint32(36314)},
-			{Name: "GL_GEOMETRY_INPUT_TYPE_ARB", Value: uint32(36315)},
+			{Name: "GL_GEOMETRY_VERTICES_OUT_EXT", Value: uint32(36314)},
 			{Name: "GL_GEOMETRY_INPUT_TYPE_EXT", Value: uint32(36315)},
+			{Name: "GL_GEOMETRY_INPUT_TYPE_ARB", Value: uint32(36315)},
 			{Name: "GL_GEOMETRY_OUTPUT_TYPE_ARB", Value: uint32(36316)},
 			{Name: "GL_GEOMETRY_OUTPUT_TYPE_EXT", Value: uint32(36316)},
-			{Name: "GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT", Value: uint32(36317)},
 			{Name: "GL_MAX_GEOMETRY_VARYING_COMPONENTS_ARB", Value: uint32(36317)},
-			{Name: "GL_MAX_VERTEX_VARYING_COMPONENTS_EXT", Value: uint32(36318)},
+			{Name: "GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT", Value: uint32(36317)},
 			{Name: "GL_MAX_VERTEX_VARYING_COMPONENTS_ARB", Value: uint32(36318)},
+			{Name: "GL_MAX_VERTEX_VARYING_COMPONENTS_EXT", Value: uint32(36318)},
+			{Name: "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT", Value: uint32(36319)},
 			{Name: "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_OES", Value: uint32(36319)},
 			{Name: "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS", Value: uint32(36319)},
 			{Name: "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_ARB", Value: uint32(36319)},
-			{Name: "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT", Value: uint32(36319)},
+			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB", Value: uint32(36320)},
+			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT", Value: uint32(36320)},
 			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES", Value: uint32(36320)},
 			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES_OES", Value: uint32(36320)},
-			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT", Value: uint32(36320)},
-			{Name: "GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB", Value: uint32(36320)},
-			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_OES", Value: uint32(36321)},
 			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT", Value: uint32(36321)},
-			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS", Value: uint32(36321)},
+			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_OES", Value: uint32(36321)},
 			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB", Value: uint32(36321)},
+			{Name: "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS", Value: uint32(36321)},
 			{Name: "GL_MAX_VERTEX_BINDABLE_UNIFORMS_EXT", Value: uint32(36322)},
 			{Name: "GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT", Value: uint32(36323)},
 			{Name: "GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT", Value: uint32(36324)},
@@ -86871,41 +90239,41 @@ func init() {
 			{Name: "GL_RENDERBUFFER_COLOR_SAMPLES_NV", Value: uint32(36368)},
 			{Name: "GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV", Value: uint32(36369)},
 			{Name: "GL_MULTISAMPLE_COVERAGE_MODES_NV", Value: uint32(36370)},
-			{Name: "GL_QUERY_WAIT_NV", Value: uint32(36371)},
 			{Name: "GL_QUERY_WAIT", Value: uint32(36371)},
+			{Name: "GL_QUERY_WAIT_NV", Value: uint32(36371)},
 			{Name: "GL_QUERY_NO_WAIT_NV", Value: uint32(36372)},
 			{Name: "GL_QUERY_NO_WAIT", Value: uint32(36372)},
 			{Name: "GL_QUERY_BY_REGION_WAIT", Value: uint32(36373)},
 			{Name: "GL_QUERY_BY_REGION_WAIT_NV", Value: uint32(36373)},
-			{Name: "GL_QUERY_BY_REGION_NO_WAIT", Value: uint32(36374)},
 			{Name: "GL_QUERY_BY_REGION_NO_WAIT_NV", Value: uint32(36374)},
+			{Name: "GL_QUERY_BY_REGION_NO_WAIT", Value: uint32(36374)},
 			{Name: "GL_QUERY_WAIT_INVERTED", Value: uint32(36375)},
 			{Name: "GL_QUERY_NO_WAIT_INVERTED", Value: uint32(36376)},
 			{Name: "GL_QUERY_BY_REGION_WAIT_INVERTED", Value: uint32(36377)},
 			{Name: "GL_QUERY_BY_REGION_NO_WAIT_INVERTED", Value: uint32(36378)},
 			{Name: "GL_POLYGON_OFFSET_CLAMP_EXT", Value: uint32(36379)},
 			{Name: "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_OES", Value: uint32(36382)},
-			{Name: "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_EXT", Value: uint32(36382)},
 			{Name: "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS", Value: uint32(36382)},
+			{Name: "GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_EXT", Value: uint32(36382)},
 			{Name: "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT", Value: uint32(36383)},
 			{Name: "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_OES", Value: uint32(36383)},
 			{Name: "GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS", Value: uint32(36383)},
 			{Name: "GL_COLOR_SAMPLES_NV", Value: uint32(36384)},
-			{Name: "GL_TRANSFORM_FEEDBACK", Value: uint32(36386)},
 			{Name: "GL_TRANSFORM_FEEDBACK_NV", Value: uint32(36386)},
+			{Name: "GL_TRANSFORM_FEEDBACK", Value: uint32(36386)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV", Value: uint32(36387)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED", Value: uint32(36387)},
 			{Name: "GL_TRANSFORM_FEEDBACK_PAUSED", Value: uint32(36387)},
-			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE", Value: uint32(36388)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED", Value: uint32(36387)},
 			{Name: "GL_TRANSFORM_FEEDBACK_ACTIVE", Value: uint32(36388)},
+			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE", Value: uint32(36388)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV", Value: uint32(36388)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BINDING_NV", Value: uint32(36389)},
 			{Name: "GL_TRANSFORM_FEEDBACK_BINDING", Value: uint32(36389)},
 			{Name: "GL_FRAME_NV", Value: uint32(36390)},
 			{Name: "GL_FIELDS_NV", Value: uint32(36391)},
 			{Name: "GL_TIMESTAMP_EXT", Value: uint32(36392)},
-			{Name: "GL_CURRENT_TIME_NV", Value: uint32(36392)},
 			{Name: "GL_TIMESTAMP", Value: uint32(36392)},
+			{Name: "GL_CURRENT_TIME_NV", Value: uint32(36392)},
 			{Name: "GL_NUM_FILL_STREAMS_NV", Value: uint32(36393)},
 			{Name: "GL_PRESENT_TIME_NV", Value: uint32(36394)},
 			{Name: "GL_PRESENT_DURATION_NV", Value: uint32(36395)},
@@ -86915,14 +90283,14 @@ func init() {
 			{Name: "GL_PROGRAM_MATRIX_STACK_DEPTH_EXT", Value: uint32(36399)},
 			{Name: "GL_TEXTURE_SWIZZLE_R", Value: uint32(36418)},
 			{Name: "GL_TEXTURE_SWIZZLE_R_EXT", Value: uint32(36418)},
-			{Name: "GL_TEXTURE_SWIZZLE_G", Value: uint32(36419)},
 			{Name: "GL_TEXTURE_SWIZZLE_G_EXT", Value: uint32(36419)},
+			{Name: "GL_TEXTURE_SWIZZLE_G", Value: uint32(36419)},
 			{Name: "GL_TEXTURE_SWIZZLE_B_EXT", Value: uint32(36420)},
 			{Name: "GL_TEXTURE_SWIZZLE_B", Value: uint32(36420)},
-			{Name: "GL_TEXTURE_SWIZZLE_A_EXT", Value: uint32(36421)},
 			{Name: "GL_TEXTURE_SWIZZLE_A", Value: uint32(36421)},
-			{Name: "GL_TEXTURE_SWIZZLE_RGBA_EXT", Value: uint32(36422)},
+			{Name: "GL_TEXTURE_SWIZZLE_A_EXT", Value: uint32(36421)},
 			{Name: "GL_TEXTURE_SWIZZLE_RGBA", Value: uint32(36422)},
+			{Name: "GL_TEXTURE_SWIZZLE_RGBA_EXT", Value: uint32(36422)},
 			{Name: "GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS", Value: uint32(36423)},
 			{Name: "GL_ACTIVE_SUBROUTINE_MAX_LENGTH", Value: uint32(36424)},
 			{Name: "GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH", Value: uint32(36425)},
@@ -86934,15 +90302,16 @@ func init() {
 			{Name: "GL_FIRST_VERTEX_CONVENTION", Value: uint32(36429)},
 			{Name: "GL_FIRST_VERTEX_CONVENTION_EXT", Value: uint32(36429)},
 			{Name: "GL_LAST_VERTEX_CONVENTION_EXT", Value: uint32(36430)},
-			{Name: "GL_LAST_VERTEX_CONVENTION", Value: uint32(36430)},
 			{Name: "GL_LAST_VERTEX_CONVENTION_OES", Value: uint32(36430)},
+			{Name: "GL_LAST_VERTEX_CONVENTION", Value: uint32(36430)},
 			{Name: "GL_PROVOKING_VERTEX", Value: uint32(36431)},
 			{Name: "GL_PROVOKING_VERTEX_EXT", Value: uint32(36431)},
+			{Name: "GL_SAMPLE_LOCATION_NV", Value: uint32(36432)},
 			{Name: "GL_SAMPLE_POSITION_NV", Value: uint32(36432)},
 			{Name: "GL_SAMPLE_POSITION", Value: uint32(36432)},
-			{Name: "GL_SAMPLE_LOCATION_NV", Value: uint32(36432)},
-			{Name: "GL_SAMPLE_MASK_NV", Value: uint32(36433)},
+			{Name: "GL_SAMPLE_LOCATION_ARB", Value: uint32(36432)},
 			{Name: "GL_SAMPLE_MASK", Value: uint32(36433)},
+			{Name: "GL_SAMPLE_MASK_NV", Value: uint32(36433)},
 			{Name: "GL_SAMPLE_MASK_VALUE_NV", Value: uint32(36434)},
 			{Name: "GL_SAMPLE_MASK_VALUE", Value: uint32(36434)},
 			{Name: "GL_TEXTURE_BINDING_RENDERBUFFER_NV", Value: uint32(36435)},
@@ -86951,110 +90320,110 @@ func init() {
 			{Name: "GL_SAMPLER_RENDERBUFFER_NV", Value: uint32(36438)},
 			{Name: "GL_INT_SAMPLER_RENDERBUFFER_NV", Value: uint32(36439)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV", Value: uint32(36440)},
-			{Name: "GL_MAX_SAMPLE_MASK_WORDS_NV", Value: uint32(36441)},
 			{Name: "GL_MAX_SAMPLE_MASK_WORDS", Value: uint32(36441)},
-			{Name: "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_EXT", Value: uint32(36442)},
-			{Name: "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_OES", Value: uint32(36442)},
+			{Name: "GL_MAX_SAMPLE_MASK_WORDS_NV", Value: uint32(36441)},
 			{Name: "GL_MAX_GEOMETRY_PROGRAM_INVOCATIONS_NV", Value: uint32(36442)},
 			{Name: "GL_MAX_GEOMETRY_SHADER_INVOCATIONS", Value: uint32(36442)},
+			{Name: "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_OES", Value: uint32(36442)},
+			{Name: "GL_MAX_GEOMETRY_SHADER_INVOCATIONS_EXT", Value: uint32(36442)},
 			{Name: "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_NV", Value: uint32(36443)},
-			{Name: "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_OES", Value: uint32(36443)},
 			{Name: "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET", Value: uint32(36443)},
-			{Name: "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_OES", Value: uint32(36444)},
+			{Name: "GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_OES", Value: uint32(36443)},
 			{Name: "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET", Value: uint32(36444)},
+			{Name: "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_OES", Value: uint32(36444)},
 			{Name: "GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_NV", Value: uint32(36444)},
-			{Name: "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS_OES", Value: uint32(36445)},
 			{Name: "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS", Value: uint32(36445)},
+			{Name: "GL_FRAGMENT_INTERPOLATION_OFFSET_BITS_OES", Value: uint32(36445)},
 			{Name: "GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV", Value: uint32(36445)},
-			{Name: "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET", Value: uint32(36446)},
 			{Name: "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB", Value: uint32(36446)},
+			{Name: "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET", Value: uint32(36446)},
 			{Name: "GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_NV", Value: uint32(36446)},
-			{Name: "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB", Value: uint32(36447)},
 			{Name: "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET", Value: uint32(36447)},
 			{Name: "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV", Value: uint32(36447)},
+			{Name: "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB", Value: uint32(36447)},
 			{Name: "GL_MAX_TRANSFORM_FEEDBACK_BUFFERS", Value: uint32(36464)},
 			{Name: "GL_MAX_VERTEX_STREAMS", Value: uint32(36465)},
 			{Name: "GL_PATCH_VERTICES_OES", Value: uint32(36466)},
 			{Name: "GL_PATCH_VERTICES", Value: uint32(36466)},
 			{Name: "GL_PATCH_VERTICES_EXT", Value: uint32(36466)},
-			{Name: "GL_PATCH_DEFAULT_INNER_LEVEL", Value: uint32(36467)},
 			{Name: "GL_PATCH_DEFAULT_INNER_LEVEL_EXT", Value: uint32(36467)},
+			{Name: "GL_PATCH_DEFAULT_INNER_LEVEL", Value: uint32(36467)},
 			{Name: "GL_PATCH_DEFAULT_OUTER_LEVEL", Value: uint32(36468)},
 			{Name: "GL_PATCH_DEFAULT_OUTER_LEVEL_EXT", Value: uint32(36468)},
-			{Name: "GL_TESS_CONTROL_OUTPUT_VERTICES_EXT", Value: uint32(36469)},
 			{Name: "GL_TESS_CONTROL_OUTPUT_VERTICES", Value: uint32(36469)},
 			{Name: "GL_TESS_CONTROL_OUTPUT_VERTICES_OES", Value: uint32(36469)},
-			{Name: "GL_TESS_GEN_MODE_EXT", Value: uint32(36470)},
-			{Name: "GL_TESS_GEN_MODE_OES", Value: uint32(36470)},
+			{Name: "GL_TESS_CONTROL_OUTPUT_VERTICES_EXT", Value: uint32(36469)},
 			{Name: "GL_TESS_GEN_MODE", Value: uint32(36470)},
-			{Name: "GL_TESS_GEN_SPACING_OES", Value: uint32(36471)},
+			{Name: "GL_TESS_GEN_MODE_OES", Value: uint32(36470)},
+			{Name: "GL_TESS_GEN_MODE_EXT", Value: uint32(36470)},
 			{Name: "GL_TESS_GEN_SPACING_EXT", Value: uint32(36471)},
 			{Name: "GL_TESS_GEN_SPACING", Value: uint32(36471)},
-			{Name: "GL_TESS_GEN_VERTEX_ORDER_EXT", Value: uint32(36472)},
-			{Name: "GL_TESS_GEN_VERTEX_ORDER_OES", Value: uint32(36472)},
+			{Name: "GL_TESS_GEN_SPACING_OES", Value: uint32(36471)},
 			{Name: "GL_TESS_GEN_VERTEX_ORDER", Value: uint32(36472)},
-			{Name: "GL_TESS_GEN_POINT_MODE_EXT", Value: uint32(36473)},
-			{Name: "GL_TESS_GEN_POINT_MODE_OES", Value: uint32(36473)},
+			{Name: "GL_TESS_GEN_VERTEX_ORDER_OES", Value: uint32(36472)},
+			{Name: "GL_TESS_GEN_VERTEX_ORDER_EXT", Value: uint32(36472)},
 			{Name: "GL_TESS_GEN_POINT_MODE", Value: uint32(36473)},
-			{Name: "GL_ISOLINES_EXT", Value: uint32(36474)},
+			{Name: "GL_TESS_GEN_POINT_MODE_OES", Value: uint32(36473)},
+			{Name: "GL_TESS_GEN_POINT_MODE_EXT", Value: uint32(36473)},
 			{Name: "GL_ISOLINES_OES", Value: uint32(36474)},
 			{Name: "GL_ISOLINES", Value: uint32(36474)},
+			{Name: "GL_ISOLINES_EXT", Value: uint32(36474)},
+			{Name: "GL_FRACTIONAL_ODD_OES", Value: uint32(36475)},
 			{Name: "GL_FRACTIONAL_ODD", Value: uint32(36475)},
 			{Name: "GL_FRACTIONAL_ODD_EXT", Value: uint32(36475)},
-			{Name: "GL_FRACTIONAL_ODD_OES", Value: uint32(36475)},
 			{Name: "GL_FRACTIONAL_EVEN", Value: uint32(36476)},
-			{Name: "GL_FRACTIONAL_EVEN_OES", Value: uint32(36476)},
 			{Name: "GL_FRACTIONAL_EVEN_EXT", Value: uint32(36476)},
-			{Name: "GL_MAX_PATCH_VERTICES_EXT", Value: uint32(36477)},
-			{Name: "GL_MAX_PATCH_VERTICES_OES", Value: uint32(36477)},
+			{Name: "GL_FRACTIONAL_EVEN_OES", Value: uint32(36476)},
 			{Name: "GL_MAX_PATCH_VERTICES", Value: uint32(36477)},
+			{Name: "GL_MAX_PATCH_VERTICES_OES", Value: uint32(36477)},
+			{Name: "GL_MAX_PATCH_VERTICES_EXT", Value: uint32(36477)},
+			{Name: "GL_MAX_TESS_GEN_LEVEL_EXT", Value: uint32(36478)},
 			{Name: "GL_MAX_TESS_GEN_LEVEL_OES", Value: uint32(36478)},
 			{Name: "GL_MAX_TESS_GEN_LEVEL", Value: uint32(36478)},
-			{Name: "GL_MAX_TESS_GEN_LEVEL_EXT", Value: uint32(36478)},
-			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS", Value: uint32(36479)},
 			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_OES", Value: uint32(36479)},
 			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_EXT", Value: uint32(36479)},
-			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_OES", Value: uint32(36480)},
+			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS", Value: uint32(36479)},
 			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT", Value: uint32(36480)},
 			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS", Value: uint32(36480)},
+			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_OES", Value: uint32(36480)},
 			{Name: "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_OES", Value: uint32(36481)},
 			{Name: "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS", Value: uint32(36481)},
 			{Name: "GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_EXT", Value: uint32(36481)},
 			{Name: "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS", Value: uint32(36482)},
-			{Name: "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_EXT", Value: uint32(36482)},
 			{Name: "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_OES", Value: uint32(36482)},
+			{Name: "GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_EXT", Value: uint32(36482)},
 			{Name: "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_OES", Value: uint32(36483)},
-			{Name: "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS", Value: uint32(36483)},
 			{Name: "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_EXT", Value: uint32(36483)},
+			{Name: "GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS", Value: uint32(36483)},
 			{Name: "GL_MAX_TESS_PATCH_COMPONENTS_EXT", Value: uint32(36484)},
-			{Name: "GL_MAX_TESS_PATCH_COMPONENTS", Value: uint32(36484)},
 			{Name: "GL_MAX_TESS_PATCH_COMPONENTS_OES", Value: uint32(36484)},
-			{Name: "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_EXT", Value: uint32(36485)},
+			{Name: "GL_MAX_TESS_PATCH_COMPONENTS", Value: uint32(36484)},
 			{Name: "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_OES", Value: uint32(36485)},
 			{Name: "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS", Value: uint32(36485)},
+			{Name: "GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_EXT", Value: uint32(36485)},
 			{Name: "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS", Value: uint32(36486)},
-			{Name: "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_OES", Value: uint32(36486)},
 			{Name: "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_EXT", Value: uint32(36486)},
+			{Name: "GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_OES", Value: uint32(36486)},
+			{Name: "GL_TESS_EVALUATION_SHADER_OES", Value: uint32(36487)},
 			{Name: "GL_TESS_EVALUATION_SHADER", Value: uint32(36487)},
 			{Name: "GL_TESS_EVALUATION_SHADER_EXT", Value: uint32(36487)},
-			{Name: "GL_TESS_EVALUATION_SHADER_OES", Value: uint32(36487)},
 			{Name: "GL_TESS_CONTROL_SHADER_EXT", Value: uint32(36488)},
-			{Name: "GL_TESS_CONTROL_SHADER_OES", Value: uint32(36488)},
 			{Name: "GL_TESS_CONTROL_SHADER", Value: uint32(36488)},
+			{Name: "GL_TESS_CONTROL_SHADER_OES", Value: uint32(36488)},
+			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_OES", Value: uint32(36489)},
 			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_EXT", Value: uint32(36489)},
 			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS", Value: uint32(36489)},
-			{Name: "GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_OES", Value: uint32(36489)},
 			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_OES", Value: uint32(36490)},
-			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_EXT", Value: uint32(36490)},
 			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS", Value: uint32(36490)},
-			{Name: "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB", Value: uint32(36492)},
+			{Name: "GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_EXT", Value: uint32(36490)},
 			{Name: "GL_COMPRESSED_RGBA_BPTC_UNORM", Value: uint32(36492)},
-			{Name: "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM", Value: uint32(36493)},
+			{Name: "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB", Value: uint32(36492)},
 			{Name: "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB", Value: uint32(36493)},
+			{Name: "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM", Value: uint32(36493)},
 			{Name: "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT", Value: uint32(36494)},
 			{Name: "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB", Value: uint32(36494)},
-			{Name: "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT", Value: uint32(36495)},
 			{Name: "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB", Value: uint32(36495)},
+			{Name: "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT", Value: uint32(36495)},
 			{Name: "GL_COVERAGE_COMPONENT_NV", Value: uint32(36560)},
 			{Name: "GL_COVERAGE_COMPONENT4_NV", Value: uint32(36561)},
 			{Name: "GL_COVERAGE_ATTACHMENT_NV", Value: uint32(36562)},
@@ -87091,11 +90460,11 @@ func init() {
 			{Name: "GL_COPY_READ_BUFFER_NV", Value: uint32(36662)},
 			{Name: "GL_COPY_READ_BUFFER_BINDING", Value: uint32(36662)},
 			{Name: "GL_COPY_READ_BUFFER", Value: uint32(36662)},
+			{Name: "GL_COPY_WRITE_BUFFER_BINDING", Value: uint32(36663)},
 			{Name: "GL_COPY_WRITE_BUFFER_NV", Value: uint32(36663)},
 			{Name: "GL_COPY_WRITE_BUFFER", Value: uint32(36663)},
-			{Name: "GL_COPY_WRITE_BUFFER_BINDING", Value: uint32(36663)},
-			{Name: "GL_MAX_IMAGE_UNITS_EXT", Value: uint32(36664)},
 			{Name: "GL_MAX_IMAGE_UNITS", Value: uint32(36664)},
+			{Name: "GL_MAX_IMAGE_UNITS_EXT", Value: uint32(36664)},
 			{Name: "GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS", Value: uint32(36665)},
 			{Name: "GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES", Value: uint32(36665)},
 			{Name: "GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT", Value: uint32(36665)},
@@ -87107,8 +90476,8 @@ func init() {
 			{Name: "GL_IMAGE_BINDING_LAYERED_EXT", Value: uint32(36668)},
 			{Name: "GL_IMAGE_BINDING_LAYER_EXT", Value: uint32(36669)},
 			{Name: "GL_IMAGE_BINDING_LAYER", Value: uint32(36669)},
-			{Name: "GL_IMAGE_BINDING_ACCESS", Value: uint32(36670)},
 			{Name: "GL_IMAGE_BINDING_ACCESS_EXT", Value: uint32(36670)},
+			{Name: "GL_IMAGE_BINDING_ACCESS", Value: uint32(36670)},
 			{Name: "GL_DRAW_INDIRECT_BUFFER", Value: uint32(36671)},
 			{Name: "GL_DRAW_INDIRECT_UNIFIED_NV", Value: uint32(36672)},
 			{Name: "GL_DRAW_INDIRECT_ADDRESS_NV", Value: uint32(36673)},
@@ -87116,20 +90485,20 @@ func init() {
 			{Name: "GL_DRAW_INDIRECT_BUFFER_BINDING", Value: uint32(36675)},
 			{Name: "GL_MAX_PROGRAM_SUBROUTINE_PARAMETERS_NV", Value: uint32(36676)},
 			{Name: "GL_MAX_PROGRAM_SUBROUTINE_NUM_NV", Value: uint32(36677)},
-			{Name: "GL_DOUBLE_MAT2_EXT", Value: uint32(36678)},
 			{Name: "GL_DOUBLE_MAT2", Value: uint32(36678)},
+			{Name: "GL_DOUBLE_MAT2_EXT", Value: uint32(36678)},
 			{Name: "GL_DOUBLE_MAT3_EXT", Value: uint32(36679)},
 			{Name: "GL_DOUBLE_MAT3", Value: uint32(36679)},
 			{Name: "GL_DOUBLE_MAT4_EXT", Value: uint32(36680)},
 			{Name: "GL_DOUBLE_MAT4", Value: uint32(36680)},
 			{Name: "GL_DOUBLE_MAT2x3_EXT", Value: uint32(36681)},
 			{Name: "GL_DOUBLE_MAT2x3", Value: uint32(36681)},
-			{Name: "GL_DOUBLE_MAT2x4_EXT", Value: uint32(36682)},
 			{Name: "GL_DOUBLE_MAT2x4", Value: uint32(36682)},
+			{Name: "GL_DOUBLE_MAT2x4_EXT", Value: uint32(36682)},
 			{Name: "GL_DOUBLE_MAT3x2", Value: uint32(36683)},
 			{Name: "GL_DOUBLE_MAT3x2_EXT", Value: uint32(36683)},
-			{Name: "GL_DOUBLE_MAT3x4_EXT", Value: uint32(36684)},
 			{Name: "GL_DOUBLE_MAT3x4", Value: uint32(36684)},
+			{Name: "GL_DOUBLE_MAT3x4_EXT", Value: uint32(36684)},
 			{Name: "GL_DOUBLE_MAT4x2", Value: uint32(36685)},
 			{Name: "GL_DOUBLE_MAT4x2_EXT", Value: uint32(36685)},
 			{Name: "GL_DOUBLE_MAT4x3_EXT", Value: uint32(36686)},
@@ -87154,8 +90523,8 @@ func init() {
 			{Name: "GL_R16_SNORM", Value: uint32(36760)},
 			{Name: "GL_RG16_SNORM", Value: uint32(36761)},
 			{Name: "GL_RG16_SNORM_EXT", Value: uint32(36761)},
-			{Name: "GL_RGB16_SNORM", Value: uint32(36762)},
 			{Name: "GL_RGB16_SNORM_EXT", Value: uint32(36762)},
+			{Name: "GL_RGB16_SNORM", Value: uint32(36762)},
 			{Name: "GL_RGBA16_SNORM_EXT", Value: uint32(36763)},
 			{Name: "GL_RGBA16_SNORM", Value: uint32(36763)},
 			{Name: "GL_SIGNED_NORMALIZED", Value: uint32(36764)},
@@ -87179,8 +90548,11 @@ func init() {
 			{Name: "GL_INT16_VEC2_NV", Value: uint32(36837)},
 			{Name: "GL_INT16_VEC3_NV", Value: uint32(36838)},
 			{Name: "GL_INT16_VEC4_NV", Value: uint32(36839)},
+			{Name: "GL_INT64_VEC2_ARB", Value: uint32(36841)},
 			{Name: "GL_INT64_VEC2_NV", Value: uint32(36841)},
 			{Name: "GL_INT64_VEC3_NV", Value: uint32(36842)},
+			{Name: "GL_INT64_VEC3_ARB", Value: uint32(36842)},
+			{Name: "GL_INT64_VEC4_ARB", Value: uint32(36843)},
 			{Name: "GL_INT64_VEC4_NV", Value: uint32(36843)},
 			{Name: "GL_UNSIGNED_INT8_NV", Value: uint32(36844)},
 			{Name: "GL_UNSIGNED_INT8_VEC2_NV", Value: uint32(36845)},
@@ -87190,15 +90562,18 @@ func init() {
 			{Name: "GL_UNSIGNED_INT16_VEC2_NV", Value: uint32(36849)},
 			{Name: "GL_UNSIGNED_INT16_VEC3_NV", Value: uint32(36850)},
 			{Name: "GL_UNSIGNED_INT16_VEC4_NV", Value: uint32(36851)},
+			{Name: "GL_UNSIGNED_INT64_VEC2_ARB", Value: uint32(36853)},
 			{Name: "GL_UNSIGNED_INT64_VEC2_NV", Value: uint32(36853)},
 			{Name: "GL_UNSIGNED_INT64_VEC3_NV", Value: uint32(36854)},
+			{Name: "GL_UNSIGNED_INT64_VEC3_ARB", Value: uint32(36854)},
 			{Name: "GL_UNSIGNED_INT64_VEC4_NV", Value: uint32(36855)},
+			{Name: "GL_UNSIGNED_INT64_VEC4_ARB", Value: uint32(36855)},
 			{Name: "GL_FLOAT16_NV", Value: uint32(36856)},
 			{Name: "GL_FLOAT16_VEC2_NV", Value: uint32(36857)},
 			{Name: "GL_FLOAT16_VEC3_NV", Value: uint32(36858)},
 			{Name: "GL_FLOAT16_VEC4_NV", Value: uint32(36859)},
-			{Name: "GL_DOUBLE_VEC2", Value: uint32(36860)},
 			{Name: "GL_DOUBLE_VEC2_EXT", Value: uint32(36860)},
+			{Name: "GL_DOUBLE_VEC2", Value: uint32(36860)},
 			{Name: "GL_DOUBLE_VEC3_EXT", Value: uint32(36861)},
 			{Name: "GL_DOUBLE_VEC3", Value: uint32(36861)},
 			{Name: "GL_DOUBLE_VEC4_EXT", Value: uint32(36862)},
@@ -87211,30 +90586,30 @@ func init() {
 			{Name: "GL_DISCRETE_AMD", Value: uint32(36870)},
 			{Name: "GL_CONTINUOUS_AMD", Value: uint32(36871)},
 			{Name: "GL_TEXTURE_CUBE_MAP_ARRAY_OES", Value: uint32(36873)},
+			{Name: "GL_TEXTURE_CUBE_MAP_ARRAY_ARB", Value: uint32(36873)},
 			{Name: "GL_TEXTURE_CUBE_MAP_ARRAY", Value: uint32(36873)},
 			{Name: "GL_TEXTURE_CUBE_MAP_ARRAY_EXT", Value: uint32(36873)},
-			{Name: "GL_TEXTURE_CUBE_MAP_ARRAY_ARB", Value: uint32(36873)},
 			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY", Value: uint32(36874)},
-			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_OES", Value: uint32(36874)},
-			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT", Value: uint32(36874)},
 			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB", Value: uint32(36874)},
-			{Name: "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY", Value: uint32(36875)},
+			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT", Value: uint32(36874)},
+			{Name: "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_OES", Value: uint32(36874)},
 			{Name: "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB", Value: uint32(36875)},
+			{Name: "GL_PROXY_TEXTURE_CUBE_MAP_ARRAY", Value: uint32(36875)},
 			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_ARB", Value: uint32(36876)},
 			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_OES", Value: uint32(36876)},
 			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_EXT", Value: uint32(36876)},
 			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY", Value: uint32(36876)},
-			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW", Value: uint32(36877)},
-			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT", Value: uint32(36877)},
-			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_OES", Value: uint32(36877)},
 			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB", Value: uint32(36877)},
-			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY", Value: uint32(36878)},
-			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY_EXT", Value: uint32(36878)},
+			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_OES", Value: uint32(36877)},
+			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT", Value: uint32(36877)},
+			{Name: "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW", Value: uint32(36877)},
 			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY_OES", Value: uint32(36878)},
+			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY_EXT", Value: uint32(36878)},
 			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY_ARB", Value: uint32(36878)},
+			{Name: "GL_INT_SAMPLER_CUBE_MAP_ARRAY", Value: uint32(36878)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY", Value: uint32(36879)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB", Value: uint32(36879)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_OES", Value: uint32(36879)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY", Value: uint32(36879)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_EXT", Value: uint32(36879)},
 			{Name: "GL_ALPHA_SNORM", Value: uint32(36880)},
 			{Name: "GL_LUMINANCE_SNORM", Value: uint32(36881)},
@@ -87288,28 +90663,28 @@ func init() {
 			{Name: "GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX", Value: uint32(36937)},
 			{Name: "GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX", Value: uint32(36938)},
 			{Name: "GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX", Value: uint32(36939)},
-			{Name: "GL_IMAGE_1D", Value: uint32(36940)},
 			{Name: "GL_IMAGE_1D_EXT", Value: uint32(36940)},
-			{Name: "GL_IMAGE_2D_EXT", Value: uint32(36941)},
+			{Name: "GL_IMAGE_1D", Value: uint32(36940)},
 			{Name: "GL_IMAGE_2D", Value: uint32(36941)},
-			{Name: "GL_IMAGE_3D_EXT", Value: uint32(36942)},
+			{Name: "GL_IMAGE_2D_EXT", Value: uint32(36941)},
 			{Name: "GL_IMAGE_3D", Value: uint32(36942)},
+			{Name: "GL_IMAGE_3D_EXT", Value: uint32(36942)},
 			{Name: "GL_IMAGE_2D_RECT", Value: uint32(36943)},
 			{Name: "GL_IMAGE_2D_RECT_EXT", Value: uint32(36943)},
-			{Name: "GL_IMAGE_CUBE", Value: uint32(36944)},
 			{Name: "GL_IMAGE_CUBE_EXT", Value: uint32(36944)},
-			{Name: "GL_IMAGE_BUFFER_OES", Value: uint32(36945)},
+			{Name: "GL_IMAGE_CUBE", Value: uint32(36944)},
 			{Name: "GL_IMAGE_BUFFER_EXT", Value: uint32(36945)},
+			{Name: "GL_IMAGE_BUFFER_OES", Value: uint32(36945)},
 			{Name: "GL_IMAGE_BUFFER", Value: uint32(36945)},
 			{Name: "GL_IMAGE_1D_ARRAY_EXT", Value: uint32(36946)},
 			{Name: "GL_IMAGE_1D_ARRAY", Value: uint32(36946)},
-			{Name: "GL_IMAGE_2D_ARRAY", Value: uint32(36947)},
 			{Name: "GL_IMAGE_2D_ARRAY_EXT", Value: uint32(36947)},
-			{Name: "GL_IMAGE_CUBE_MAP_ARRAY", Value: uint32(36948)},
+			{Name: "GL_IMAGE_2D_ARRAY", Value: uint32(36947)},
 			{Name: "GL_IMAGE_CUBE_MAP_ARRAY_OES", Value: uint32(36948)},
 			{Name: "GL_IMAGE_CUBE_MAP_ARRAY_EXT", Value: uint32(36948)},
-			{Name: "GL_IMAGE_2D_MULTISAMPLE", Value: uint32(36949)},
+			{Name: "GL_IMAGE_CUBE_MAP_ARRAY", Value: uint32(36948)},
 			{Name: "GL_IMAGE_2D_MULTISAMPLE_EXT", Value: uint32(36949)},
+			{Name: "GL_IMAGE_2D_MULTISAMPLE", Value: uint32(36949)},
 			{Name: "GL_IMAGE_2D_MULTISAMPLE_ARRAY_EXT", Value: uint32(36950)},
 			{Name: "GL_IMAGE_2D_MULTISAMPLE_ARRAY", Value: uint32(36950)},
 			{Name: "GL_INT_IMAGE_1D", Value: uint32(36951)},
@@ -87320,50 +90695,50 @@ func init() {
 			{Name: "GL_INT_IMAGE_3D_EXT", Value: uint32(36953)},
 			{Name: "GL_INT_IMAGE_2D_RECT", Value: uint32(36954)},
 			{Name: "GL_INT_IMAGE_2D_RECT_EXT", Value: uint32(36954)},
-			{Name: "GL_INT_IMAGE_CUBE_EXT", Value: uint32(36955)},
 			{Name: "GL_INT_IMAGE_CUBE", Value: uint32(36955)},
-			{Name: "GL_INT_IMAGE_BUFFER_OES", Value: uint32(36956)},
-			{Name: "GL_INT_IMAGE_BUFFER_EXT", Value: uint32(36956)},
+			{Name: "GL_INT_IMAGE_CUBE_EXT", Value: uint32(36955)},
 			{Name: "GL_INT_IMAGE_BUFFER", Value: uint32(36956)},
+			{Name: "GL_INT_IMAGE_BUFFER_EXT", Value: uint32(36956)},
+			{Name: "GL_INT_IMAGE_BUFFER_OES", Value: uint32(36956)},
 			{Name: "GL_INT_IMAGE_1D_ARRAY", Value: uint32(36957)},
 			{Name: "GL_INT_IMAGE_1D_ARRAY_EXT", Value: uint32(36957)},
 			{Name: "GL_INT_IMAGE_2D_ARRAY", Value: uint32(36958)},
 			{Name: "GL_INT_IMAGE_2D_ARRAY_EXT", Value: uint32(36958)},
-			{Name: "GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT", Value: uint32(36959)},
 			{Name: "GL_INT_IMAGE_CUBE_MAP_ARRAY_OES", Value: uint32(36959)},
+			{Name: "GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT", Value: uint32(36959)},
 			{Name: "GL_INT_IMAGE_CUBE_MAP_ARRAY", Value: uint32(36959)},
-			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE_EXT", Value: uint32(36960)},
 			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE", Value: uint32(36960)},
-			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY", Value: uint32(36961)},
+			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE_EXT", Value: uint32(36960)},
 			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT", Value: uint32(36961)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_1D_EXT", Value: uint32(36962)},
+			{Name: "GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY", Value: uint32(36961)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_1D", Value: uint32(36962)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_1D_EXT", Value: uint32(36962)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_EXT", Value: uint32(36963)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D", Value: uint32(36963)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_3D_EXT", Value: uint32(36964)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_3D", Value: uint32(36964)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_2D_RECT_EXT", Value: uint32(36965)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_RECT", Value: uint32(36965)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_2D_RECT_EXT", Value: uint32(36965)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE", Value: uint32(36966)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE_EXT", Value: uint32(36966)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_BUFFER_EXT", Value: uint32(36967)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_BUFFER_OES", Value: uint32(36967)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_BUFFER", Value: uint32(36967)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_1D_ARRAY_EXT", Value: uint32(36968)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_BUFFER_OES", Value: uint32(36967)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_1D_ARRAY", Value: uint32(36968)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_2D_ARRAY_EXT", Value: uint32(36969)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_1D_ARRAY_EXT", Value: uint32(36968)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_ARRAY", Value: uint32(36969)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT", Value: uint32(36970)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_2D_ARRAY_EXT", Value: uint32(36969)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_OES", Value: uint32(36970)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY", Value: uint32(36970)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT", Value: uint32(36970)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE", Value: uint32(36971)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_EXT", Value: uint32(36971)},
-			{Name: "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY", Value: uint32(36972)},
 			{Name: "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT", Value: uint32(36972)},
-			{Name: "GL_MAX_IMAGE_SAMPLES_EXT", Value: uint32(36973)},
+			{Name: "GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY", Value: uint32(36972)},
 			{Name: "GL_MAX_IMAGE_SAMPLES", Value: uint32(36973)},
-			{Name: "GL_IMAGE_BINDING_FORMAT_EXT", Value: uint32(36974)},
+			{Name: "GL_MAX_IMAGE_SAMPLES_EXT", Value: uint32(36973)},
 			{Name: "GL_IMAGE_BINDING_FORMAT", Value: uint32(36974)},
+			{Name: "GL_IMAGE_BINDING_FORMAT_EXT", Value: uint32(36974)},
 			{Name: "GL_RGB10_A2UI", Value: uint32(36975)},
 			{Name: "GL_PATH_FORMAT_SVG_NV", Value: uint32(36976)},
 			{Name: "GL_PATH_FORMAT_PS_NV", Value: uint32(36977)},
@@ -87441,11 +90816,11 @@ func init() {
 			{Name: "GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE", Value: uint32(37064)},
 			{Name: "GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS", Value: uint32(37065)},
 			{Name: "GL_MAX_VERTEX_IMAGE_UNIFORMS", Value: uint32(37066)},
-			{Name: "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS", Value: uint32(37067)},
-			{Name: "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_EXT", Value: uint32(37067)},
 			{Name: "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_OES", Value: uint32(37067)},
-			{Name: "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_OES", Value: uint32(37068)},
+			{Name: "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_EXT", Value: uint32(37067)},
+			{Name: "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS", Value: uint32(37067)},
 			{Name: "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS", Value: uint32(37068)},
+			{Name: "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_OES", Value: uint32(37068)},
 			{Name: "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_EXT", Value: uint32(37068)},
 			{Name: "GL_MAX_GEOMETRY_IMAGE_UNIFORMS_EXT", Value: uint32(37069)},
 			{Name: "GL_MAX_GEOMETRY_IMAGE_UNIFORMS_OES", Value: uint32(37069)},
@@ -87459,15 +90834,15 @@ func init() {
 			{Name: "GL_SHADER_STORAGE_BUFFER_START", Value: uint32(37076)},
 			{Name: "GL_SHADER_STORAGE_BUFFER_SIZE", Value: uint32(37077)},
 			{Name: "GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS", Value: uint32(37078)},
+			{Name: "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_OES", Value: uint32(37079)},
 			{Name: "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS", Value: uint32(37079)},
 			{Name: "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_EXT", Value: uint32(37079)},
-			{Name: "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_OES", Value: uint32(37079)},
-			{Name: "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_OES", Value: uint32(37080)},
-			{Name: "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_EXT", Value: uint32(37080)},
 			{Name: "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS", Value: uint32(37080)},
-			{Name: "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS", Value: uint32(37081)},
+			{Name: "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_EXT", Value: uint32(37080)},
+			{Name: "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_OES", Value: uint32(37080)},
 			{Name: "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_OES", Value: uint32(37081)},
 			{Name: "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_EXT", Value: uint32(37081)},
+			{Name: "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS", Value: uint32(37081)},
 			{Name: "GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS", Value: uint32(37082)},
 			{Name: "GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS", Value: uint32(37083)},
 			{Name: "GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS", Value: uint32(37084)},
@@ -87485,9 +90860,9 @@ func init() {
 			{Name: "GL_COLOR_ATTACHMENT_EXT", Value: uint32(37104)},
 			{Name: "GL_MULTIVIEW_EXT", Value: uint32(37105)},
 			{Name: "GL_MAX_MULTIVIEW_BUFFERS_EXT", Value: uint32(37106)},
-			{Name: "GL_CONTEXT_ROBUST_ACCESS_EXT", Value: uint32(37107)},
 			{Name: "GL_CONTEXT_ROBUST_ACCESS_KHR", Value: uint32(37107)},
 			{Name: "GL_CONTEXT_ROBUST_ACCESS", Value: uint32(37107)},
+			{Name: "GL_CONTEXT_ROBUST_ACCESS_EXT", Value: uint32(37107)},
 			{Name: "GL_COMPUTE_PROGRAM_NV", Value: uint32(37115)},
 			{Name: "GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV", Value: uint32(37116)},
 			{Name: "GL_TEXTURE_2D_MULTISAMPLE", Value: uint32(37120)},
@@ -87503,12 +90878,12 @@ func init() {
 			{Name: "GL_SAMPLER_2D_MULTISAMPLE", Value: uint32(37128)},
 			{Name: "GL_INT_SAMPLER_2D_MULTISAMPLE", Value: uint32(37129)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE", Value: uint32(37130)},
-			{Name: "GL_SAMPLER_2D_MULTISAMPLE_ARRAY", Value: uint32(37131)},
 			{Name: "GL_SAMPLER_2D_MULTISAMPLE_ARRAY_OES", Value: uint32(37131)},
+			{Name: "GL_SAMPLER_2D_MULTISAMPLE_ARRAY", Value: uint32(37131)},
 			{Name: "GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES", Value: uint32(37132)},
 			{Name: "GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY", Value: uint32(37132)},
-			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY", Value: uint32(37133)},
 			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES", Value: uint32(37133)},
+			{Name: "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY", Value: uint32(37133)},
 			{Name: "GL_MAX_COLOR_TEXTURE_SAMPLES", Value: uint32(37134)},
 			{Name: "GL_MAX_DEPTH_TEXTURE_SAMPLES", Value: uint32(37135)},
 			{Name: "GL_MAX_INTEGER_SAMPLES", Value: uint32(37136)},
@@ -87520,8 +90895,8 @@ func init() {
 			{Name: "GL_SYNC_CONDITION_APPLE", Value: uint32(37139)},
 			{Name: "GL_SYNC_STATUS", Value: uint32(37140)},
 			{Name: "GL_SYNC_STATUS_APPLE", Value: uint32(37140)},
-			{Name: "GL_SYNC_FLAGS_APPLE", Value: uint32(37141)},
 			{Name: "GL_SYNC_FLAGS", Value: uint32(37141)},
+			{Name: "GL_SYNC_FLAGS_APPLE", Value: uint32(37141)},
 			{Name: "GL_SYNC_FENCE_APPLE", Value: uint32(37142)},
 			{Name: "GL_SYNC_FENCE", Value: uint32(37142)},
 			{Name: "GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE", Value: uint32(37143)},
@@ -87534,20 +90909,20 @@ func init() {
 			{Name: "GL_ALREADY_SIGNALED", Value: uint32(37146)},
 			{Name: "GL_TIMEOUT_EXPIRED", Value: uint32(37147)},
 			{Name: "GL_TIMEOUT_EXPIRED_APPLE", Value: uint32(37147)},
-			{Name: "GL_CONDITION_SATISFIED", Value: uint32(37148)},
 			{Name: "GL_CONDITION_SATISFIED_APPLE", Value: uint32(37148)},
+			{Name: "GL_CONDITION_SATISFIED", Value: uint32(37148)},
 			{Name: "GL_WAIT_FAILED_APPLE", Value: uint32(37149)},
 			{Name: "GL_WAIT_FAILED", Value: uint32(37149)},
 			{Name: "GL_BUFFER_ACCESS_FLAGS", Value: uint32(37151)},
 			{Name: "GL_BUFFER_MAP_LENGTH", Value: uint32(37152)},
 			{Name: "GL_BUFFER_MAP_OFFSET", Value: uint32(37153)},
 			{Name: "GL_MAX_VERTEX_OUTPUT_COMPONENTS", Value: uint32(37154)},
-			{Name: "GL_MAX_GEOMETRY_INPUT_COMPONENTS_EXT", Value: uint32(37155)},
-			{Name: "GL_MAX_GEOMETRY_INPUT_COMPONENTS", Value: uint32(37155)},
 			{Name: "GL_MAX_GEOMETRY_INPUT_COMPONENTS_OES", Value: uint32(37155)},
-			{Name: "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_EXT", Value: uint32(37156)},
-			{Name: "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS", Value: uint32(37156)},
+			{Name: "GL_MAX_GEOMETRY_INPUT_COMPONENTS", Value: uint32(37155)},
+			{Name: "GL_MAX_GEOMETRY_INPUT_COMPONENTS_EXT", Value: uint32(37155)},
 			{Name: "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_OES", Value: uint32(37156)},
+			{Name: "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS", Value: uint32(37156)},
+			{Name: "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_EXT", Value: uint32(37156)},
 			{Name: "GL_MAX_FRAGMENT_INPUT_COMPONENTS", Value: uint32(37157)},
 			{Name: "GL_CONTEXT_PROFILE_MASK", Value: uint32(37158)},
 			{Name: "GL_UNPACK_COMPRESSED_BLOCK_WIDTH", Value: uint32(37159)},
@@ -87558,8 +90933,8 @@ func init() {
 			{Name: "GL_PACK_COMPRESSED_BLOCK_HEIGHT", Value: uint32(37164)},
 			{Name: "GL_PACK_COMPRESSED_BLOCK_DEPTH", Value: uint32(37165)},
 			{Name: "GL_PACK_COMPRESSED_BLOCK_SIZE", Value: uint32(37166)},
-			{Name: "GL_TEXTURE_IMMUTABLE_FORMAT", Value: uint32(37167)},
 			{Name: "GL_TEXTURE_IMMUTABLE_FORMAT_EXT", Value: uint32(37167)},
+			{Name: "GL_TEXTURE_IMMUTABLE_FORMAT", Value: uint32(37167)},
 			{Name: "GL_SGX_PROGRAM_BINARY_IMG", Value: uint32(37168)},
 			{Name: "GL_RENDERBUFFER_SAMPLES_IMG", Value: uint32(37171)},
 			{Name: "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG", Value: uint32(37172)},
@@ -87568,28 +90943,28 @@ func init() {
 			{Name: "GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG", Value: uint32(37175)},
 			{Name: "GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG", Value: uint32(37176)},
 			{Name: "GL_MAX_DEBUG_MESSAGE_LENGTH_KHR", Value: uint32(37187)},
+			{Name: "GL_MAX_DEBUG_MESSAGE_LENGTH_ARB", Value: uint32(37187)},
 			{Name: "GL_MAX_DEBUG_MESSAGE_LENGTH", Value: uint32(37187)},
 			{Name: "GL_MAX_DEBUG_MESSAGE_LENGTH_AMD", Value: uint32(37187)},
-			{Name: "GL_MAX_DEBUG_MESSAGE_LENGTH_ARB", Value: uint32(37187)},
 			{Name: "GL_MAX_DEBUG_LOGGED_MESSAGES_KHR", Value: uint32(37188)},
 			{Name: "GL_MAX_DEBUG_LOGGED_MESSAGES_AMD", Value: uint32(37188)},
 			{Name: "GL_MAX_DEBUG_LOGGED_MESSAGES", Value: uint32(37188)},
 			{Name: "GL_MAX_DEBUG_LOGGED_MESSAGES_ARB", Value: uint32(37188)},
-			{Name: "GL_DEBUG_LOGGED_MESSAGES", Value: uint32(37189)},
-			{Name: "GL_DEBUG_LOGGED_MESSAGES_AMD", Value: uint32(37189)},
-			{Name: "GL_DEBUG_LOGGED_MESSAGES_ARB", Value: uint32(37189)},
 			{Name: "GL_DEBUG_LOGGED_MESSAGES_KHR", Value: uint32(37189)},
-			{Name: "GL_DEBUG_SEVERITY_HIGH_AMD", Value: uint32(37190)},
+			{Name: "GL_DEBUG_LOGGED_MESSAGES_AMD", Value: uint32(37189)},
+			{Name: "GL_DEBUG_LOGGED_MESSAGES", Value: uint32(37189)},
+			{Name: "GL_DEBUG_LOGGED_MESSAGES_ARB", Value: uint32(37189)},
 			{Name: "GL_DEBUG_SEVERITY_HIGH_ARB", Value: uint32(37190)},
-			{Name: "GL_DEBUG_SEVERITY_HIGH_KHR", Value: uint32(37190)},
+			{Name: "GL_DEBUG_SEVERITY_HIGH_AMD", Value: uint32(37190)},
 			{Name: "GL_DEBUG_SEVERITY_HIGH", Value: uint32(37190)},
-			{Name: "GL_DEBUG_SEVERITY_MEDIUM_ARB", Value: uint32(37191)},
-			{Name: "GL_DEBUG_SEVERITY_MEDIUM_AMD", Value: uint32(37191)},
+			{Name: "GL_DEBUG_SEVERITY_HIGH_KHR", Value: uint32(37190)},
 			{Name: "GL_DEBUG_SEVERITY_MEDIUM_KHR", Value: uint32(37191)},
+			{Name: "GL_DEBUG_SEVERITY_MEDIUM_ARB", Value: uint32(37191)},
 			{Name: "GL_DEBUG_SEVERITY_MEDIUM", Value: uint32(37191)},
-			{Name: "GL_DEBUG_SEVERITY_LOW_KHR", Value: uint32(37192)},
-			{Name: "GL_DEBUG_SEVERITY_LOW", Value: uint32(37192)},
+			{Name: "GL_DEBUG_SEVERITY_MEDIUM_AMD", Value: uint32(37191)},
 			{Name: "GL_DEBUG_SEVERITY_LOW_AMD", Value: uint32(37192)},
+			{Name: "GL_DEBUG_SEVERITY_LOW", Value: uint32(37192)},
+			{Name: "GL_DEBUG_SEVERITY_LOW_KHR", Value: uint32(37192)},
 			{Name: "GL_DEBUG_SEVERITY_LOW_ARB", Value: uint32(37192)},
 			{Name: "GL_DEBUG_CATEGORY_API_ERROR_AMD", Value: uint32(37193)},
 			{Name: "GL_DEBUG_CATEGORY_WINDOW_SYSTEM_AMD", Value: uint32(37194)},
@@ -87599,63 +90974,65 @@ func init() {
 			{Name: "GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD", Value: uint32(37198)},
 			{Name: "GL_DEBUG_CATEGORY_APPLICATION_AMD", Value: uint32(37199)},
 			{Name: "GL_DEBUG_CATEGORY_OTHER_AMD", Value: uint32(37200)},
-			{Name: "GL_DATA_BUFFER_AMD", Value: uint32(37201)},
 			{Name: "GL_BUFFER_OBJECT_EXT", Value: uint32(37201)},
+			{Name: "GL_DATA_BUFFER_AMD", Value: uint32(37201)},
 			{Name: "GL_PERFORMANCE_MONITOR_AMD", Value: uint32(37202)},
-			{Name: "GL_QUERY_OBJECT_AMD", Value: uint32(37203)},
 			{Name: "GL_QUERY_OBJECT_EXT", Value: uint32(37203)},
+			{Name: "GL_QUERY_OBJECT_AMD", Value: uint32(37203)},
 			{Name: "GL_VERTEX_ARRAY_OBJECT_AMD", Value: uint32(37204)},
 			{Name: "GL_VERTEX_ARRAY_OBJECT_EXT", Value: uint32(37204)},
 			{Name: "GL_SAMPLER_OBJECT_AMD", Value: uint32(37205)},
 			{Name: "GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD", Value: uint32(37216)},
-			{Name: "GL_QUERY_BUFFER", Value: uint32(37266)},
 			{Name: "GL_QUERY_BUFFER_AMD", Value: uint32(37266)},
+			{Name: "GL_QUERY_BUFFER", Value: uint32(37266)},
 			{Name: "GL_QUERY_BUFFER_BINDING_AMD", Value: uint32(37267)},
 			{Name: "GL_QUERY_BUFFER_BINDING", Value: uint32(37267)},
 			{Name: "GL_QUERY_RESULT_NO_WAIT", Value: uint32(37268)},
 			{Name: "GL_QUERY_RESULT_NO_WAIT_AMD", Value: uint32(37268)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_X_AMD", Value: uint32(37269)},
-			{Name: "GL_VIRTUAL_PAGE_SIZE_X_ARB", Value: uint32(37269)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_X_EXT", Value: uint32(37269)},
-			{Name: "GL_VIRTUAL_PAGE_SIZE_Y_AMD", Value: uint32(37270)},
+			{Name: "GL_VIRTUAL_PAGE_SIZE_X_ARB", Value: uint32(37269)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_Y_EXT", Value: uint32(37270)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_Y_ARB", Value: uint32(37270)},
-			{Name: "GL_VIRTUAL_PAGE_SIZE_Z_EXT", Value: uint32(37271)},
+			{Name: "GL_VIRTUAL_PAGE_SIZE_Y_AMD", Value: uint32(37270)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_Z_ARB", Value: uint32(37271)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_Z_AMD", Value: uint32(37271)},
-			{Name: "GL_MAX_SPARSE_TEXTURE_SIZE_ARB", Value: uint32(37272)},
+			{Name: "GL_VIRTUAL_PAGE_SIZE_Z_EXT", Value: uint32(37271)},
 			{Name: "GL_MAX_SPARSE_TEXTURE_SIZE_EXT", Value: uint32(37272)},
 			{Name: "GL_MAX_SPARSE_TEXTURE_SIZE_AMD", Value: uint32(37272)},
-			{Name: "GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD", Value: uint32(37273)},
-			{Name: "GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB", Value: uint32(37273)},
+			{Name: "GL_MAX_SPARSE_TEXTURE_SIZE_ARB", Value: uint32(37272)},
 			{Name: "GL_MAX_SPARSE_3D_TEXTURE_SIZE_EXT", Value: uint32(37273)},
+			{Name: "GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB", Value: uint32(37273)},
+			{Name: "GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD", Value: uint32(37273)},
 			{Name: "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT", Value: uint32(37274)},
-			{Name: "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS", Value: uint32(37274)},
 			{Name: "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB", Value: uint32(37274)},
+			{Name: "GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS", Value: uint32(37274)},
 			{Name: "GL_MIN_SPARSE_LEVEL_AMD", Value: uint32(37275)},
 			{Name: "GL_MIN_LOD_WARNING_AMD", Value: uint32(37276)},
-			{Name: "GL_TEXTURE_BUFFER_OFFSET", Value: uint32(37277)},
-			{Name: "GL_TEXTURE_BUFFER_OFFSET_OES", Value: uint32(37277)},
 			{Name: "GL_TEXTURE_BUFFER_OFFSET_EXT", Value: uint32(37277)},
+			{Name: "GL_TEXTURE_BUFFER_OFFSET_OES", Value: uint32(37277)},
+			{Name: "GL_TEXTURE_BUFFER_OFFSET", Value: uint32(37277)},
 			{Name: "GL_TEXTURE_BUFFER_SIZE", Value: uint32(37278)},
-			{Name: "GL_TEXTURE_BUFFER_SIZE_OES", Value: uint32(37278)},
 			{Name: "GL_TEXTURE_BUFFER_SIZE_EXT", Value: uint32(37278)},
+			{Name: "GL_TEXTURE_BUFFER_SIZE_OES", Value: uint32(37278)},
+			{Name: "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_OES", Value: uint32(37279)},
 			{Name: "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_EXT", Value: uint32(37279)},
 			{Name: "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT", Value: uint32(37279)},
-			{Name: "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_OES", Value: uint32(37279)},
 			{Name: "GL_STREAM_RASTERIZATION_AMD", Value: uint32(37280)},
 			{Name: "GL_VERTEX_ELEMENT_SWIZZLE_AMD", Value: uint32(37284)},
 			{Name: "GL_VERTEX_ID_SWIZZLE_AMD", Value: uint32(37285)},
-			{Name: "GL_TEXTURE_SPARSE_EXT", Value: uint32(37286)},
 			{Name: "GL_TEXTURE_SPARSE_ARB", Value: uint32(37286)},
+			{Name: "GL_TEXTURE_SPARSE_EXT", Value: uint32(37286)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_INDEX_ARB", Value: uint32(37287)},
 			{Name: "GL_VIRTUAL_PAGE_SIZE_INDEX_EXT", Value: uint32(37287)},
 			{Name: "GL_NUM_VIRTUAL_PAGE_SIZES_EXT", Value: uint32(37288)},
 			{Name: "GL_NUM_VIRTUAL_PAGE_SIZES_ARB", Value: uint32(37288)},
-			{Name: "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT", Value: uint32(37289)},
 			{Name: "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB", Value: uint32(37289)},
-			{Name: "GL_NUM_SPARSE_LEVELS_EXT", Value: uint32(37290)},
+			{Name: "GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT", Value: uint32(37289)},
 			{Name: "GL_NUM_SPARSE_LEVELS_ARB", Value: uint32(37290)},
+			{Name: "GL_NUM_SPARSE_LEVELS_EXT", Value: uint32(37290)},
+			{Name: "GL_MAX_SHADER_COMPILER_THREADS_ARB", Value: uint32(37296)},
+			{Name: "GL_COMPLETION_STATUS_ARB", Value: uint32(37297)},
 			{Name: "GL_COMPUTE_SHADER", Value: uint32(37305)},
 			{Name: "GL_MAX_COMPUTE_UNIFORM_BLOCKS", Value: uint32(37307)},
 			{Name: "GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS", Value: uint32(37308)},
@@ -87677,29 +91054,29 @@ func init() {
 			{Name: "GL_COMPRESSED_R11_EAC", Value: uint32(37488)},
 			{Name: "GL_COMPRESSED_SIGNED_R11_EAC", Value: uint32(37489)},
 			{Name: "GL_COMPRESSED_SIGNED_R11_EAC_OES", Value: uint32(37489)},
-			{Name: "GL_COMPRESSED_RG11_EAC", Value: uint32(37490)},
 			{Name: "GL_COMPRESSED_RG11_EAC_OES", Value: uint32(37490)},
+			{Name: "GL_COMPRESSED_RG11_EAC", Value: uint32(37490)},
 			{Name: "GL_COMPRESSED_SIGNED_RG11_EAC", Value: uint32(37491)},
 			{Name: "GL_COMPRESSED_SIGNED_RG11_EAC_OES", Value: uint32(37491)},
 			{Name: "GL_COMPRESSED_RGB8_ETC2_OES", Value: uint32(37492)},
 			{Name: "GL_COMPRESSED_RGB8_ETC2", Value: uint32(37492)},
 			{Name: "GL_COMPRESSED_SRGB8_ETC2", Value: uint32(37493)},
 			{Name: "GL_COMPRESSED_SRGB8_ETC2_OES", Value: uint32(37493)},
-			{Name: "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES", Value: uint32(37494)},
 			{Name: "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2", Value: uint32(37494)},
-			{Name: "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES", Value: uint32(37495)},
+			{Name: "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES", Value: uint32(37494)},
 			{Name: "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2", Value: uint32(37495)},
+			{Name: "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2_OES", Value: uint32(37495)},
 			{Name: "GL_COMPRESSED_RGBA8_ETC2_EAC", Value: uint32(37496)},
 			{Name: "GL_COMPRESSED_RGBA8_ETC2_EAC_OES", Value: uint32(37496)},
-			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC", Value: uint32(37497)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC_OES", Value: uint32(37497)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC", Value: uint32(37497)},
 			{Name: "GL_BLEND_PREMULTIPLIED_SRC_NV", Value: uint32(37504)},
 			{Name: "GL_BLEND_OVERLAP_NV", Value: uint32(37505)},
 			{Name: "GL_UNCORRELATED_NV", Value: uint32(37506)},
 			{Name: "GL_DISJOINT_NV", Value: uint32(37507)},
 			{Name: "GL_CONJOINT_NV", Value: uint32(37508)},
-			{Name: "GL_BLEND_ADVANCED_COHERENT_NV", Value: uint32(37509)},
 			{Name: "GL_BLEND_ADVANCED_COHERENT_KHR", Value: uint32(37509)},
+			{Name: "GL_BLEND_ADVANCED_COHERENT_NV", Value: uint32(37509)},
 			{Name: "GL_SRC_NV", Value: uint32(37510)},
 			{Name: "GL_DST_NV", Value: uint32(37511)},
 			{Name: "GL_SRC_OVER_NV", Value: uint32(37512)},
@@ -87712,29 +91089,40 @@ func init() {
 			{Name: "GL_DST_ATOP_NV", Value: uint32(37519)},
 			{Name: "GL_PLUS_NV", Value: uint32(37521)},
 			{Name: "GL_PLUS_DARKER_NV", Value: uint32(37522)},
-			{Name: "GL_MULTIPLY_NV", Value: uint32(37524)},
 			{Name: "GL_MULTIPLY_KHR", Value: uint32(37524)},
-			{Name: "GL_SCREEN_KHR", Value: uint32(37525)},
+			{Name: "GL_MULTIPLY_NV", Value: uint32(37524)},
+			{Name: "GL_MULTIPLY", Value: uint32(37524)},
 			{Name: "GL_SCREEN_NV", Value: uint32(37525)},
+			{Name: "GL_SCREEN_KHR", Value: uint32(37525)},
+			{Name: "GL_SCREEN", Value: uint32(37525)},
 			{Name: "GL_OVERLAY_KHR", Value: uint32(37526)},
+			{Name: "GL_OVERLAY", Value: uint32(37526)},
 			{Name: "GL_OVERLAY_NV", Value: uint32(37526)},
 			{Name: "GL_DARKEN_NV", Value: uint32(37527)},
 			{Name: "GL_DARKEN_KHR", Value: uint32(37527)},
-			{Name: "GL_LIGHTEN_NV", Value: uint32(37528)},
+			{Name: "GL_DARKEN", Value: uint32(37527)},
 			{Name: "GL_LIGHTEN_KHR", Value: uint32(37528)},
+			{Name: "GL_LIGHTEN", Value: uint32(37528)},
+			{Name: "GL_LIGHTEN_NV", Value: uint32(37528)},
 			{Name: "GL_COLORDODGE_NV", Value: uint32(37529)},
+			{Name: "GL_COLORDODGE", Value: uint32(37529)},
 			{Name: "GL_COLORDODGE_KHR", Value: uint32(37529)},
+			{Name: "GL_COLORBURN", Value: uint32(37530)},
 			{Name: "GL_COLORBURN_KHR", Value: uint32(37530)},
 			{Name: "GL_COLORBURN_NV", Value: uint32(37530)},
 			{Name: "GL_HARDLIGHT_KHR", Value: uint32(37531)},
+			{Name: "GL_HARDLIGHT", Value: uint32(37531)},
 			{Name: "GL_HARDLIGHT_NV", Value: uint32(37531)},
-			{Name: "GL_SOFTLIGHT_NV", Value: uint32(37532)},
 			{Name: "GL_SOFTLIGHT_KHR", Value: uint32(37532)},
+			{Name: "GL_SOFTLIGHT", Value: uint32(37532)},
+			{Name: "GL_SOFTLIGHT_NV", Value: uint32(37532)},
 			{Name: "GL_DIFFERENCE_NV", Value: uint32(37534)},
 			{Name: "GL_DIFFERENCE_KHR", Value: uint32(37534)},
+			{Name: "GL_DIFFERENCE", Value: uint32(37534)},
 			{Name: "GL_MINUS_NV", Value: uint32(37535)},
-			{Name: "GL_EXCLUSION_NV", Value: uint32(37536)},
 			{Name: "GL_EXCLUSION_KHR", Value: uint32(37536)},
+			{Name: "GL_EXCLUSION_NV", Value: uint32(37536)},
+			{Name: "GL_EXCLUSION", Value: uint32(37536)},
 			{Name: "GL_CONTRAST_NV", Value: uint32(37537)},
 			{Name: "GL_INVERT_RGB_NV", Value: uint32(37539)},
 			{Name: "GL_LINEARDODGE_NV", Value: uint32(37540)},
@@ -87743,20 +91131,26 @@ func init() {
 			{Name: "GL_LINEARLIGHT_NV", Value: uint32(37543)},
 			{Name: "GL_PINLIGHT_NV", Value: uint32(37544)},
 			{Name: "GL_HARDMIX_NV", Value: uint32(37545)},
+			{Name: "GL_HSL_HUE", Value: uint32(37549)},
 			{Name: "GL_HSL_HUE_KHR", Value: uint32(37549)},
 			{Name: "GL_HSL_HUE_NV", Value: uint32(37549)},
 			{Name: "GL_HSL_SATURATION_NV", Value: uint32(37550)},
 			{Name: "GL_HSL_SATURATION_KHR", Value: uint32(37550)},
-			{Name: "GL_HSL_COLOR_KHR", Value: uint32(37551)},
+			{Name: "GL_HSL_SATURATION", Value: uint32(37550)},
 			{Name: "GL_HSL_COLOR_NV", Value: uint32(37551)},
-			{Name: "GL_HSL_LUMINOSITY_NV", Value: uint32(37552)},
+			{Name: "GL_HSL_COLOR_KHR", Value: uint32(37551)},
+			{Name: "GL_HSL_COLOR", Value: uint32(37551)},
 			{Name: "GL_HSL_LUMINOSITY_KHR", Value: uint32(37552)},
+			{Name: "GL_HSL_LUMINOSITY_NV", Value: uint32(37552)},
+			{Name: "GL_HSL_LUMINOSITY", Value: uint32(37552)},
 			{Name: "GL_PLUS_CLAMPED_NV", Value: uint32(37553)},
 			{Name: "GL_PLUS_CLAMPED_ALPHA_NV", Value: uint32(37554)},
 			{Name: "GL_MINUS_CLAMPED_NV", Value: uint32(37555)},
 			{Name: "GL_INVERT_OVG_NV", Value: uint32(37556)},
-			{Name: "GL_PRIMITIVE_BOUNDING_BOX_EXT", Value: uint32(37566)},
+			{Name: "GL_PRIMITIVE_BOUNDING_BOX", Value: uint32(37566)},
 			{Name: "GL_PRIMITIVE_BOUNDING_BOX_OES", Value: uint32(37566)},
+			{Name: "GL_PRIMITIVE_BOUNDING_BOX_ARB", Value: uint32(37566)},
+			{Name: "GL_PRIMITIVE_BOUNDING_BOX_EXT", Value: uint32(37566)},
 			{Name: "GL_ATOMIC_COUNTER_BUFFER", Value: uint32(37568)},
 			{Name: "GL_ATOMIC_COUNTER_BUFFER_BINDING", Value: uint32(37569)},
 			{Name: "GL_ATOMIC_COUNTER_BUFFER_START", Value: uint32(37570)},
@@ -87770,9 +91164,9 @@ func init() {
 			{Name: "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER", Value: uint32(37578)},
 			{Name: "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER", Value: uint32(37579)},
 			{Name: "GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS", Value: uint32(37580)},
-			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_EXT", Value: uint32(37581)},
 			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_OES", Value: uint32(37581)},
 			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS", Value: uint32(37581)},
+			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_EXT", Value: uint32(37581)},
 			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_OES", Value: uint32(37582)},
 			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS", Value: uint32(37582)},
 			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_EXT", Value: uint32(37582)},
@@ -87782,15 +91176,15 @@ func init() {
 			{Name: "GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS", Value: uint32(37584)},
 			{Name: "GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS", Value: uint32(37585)},
 			{Name: "GL_MAX_VERTEX_ATOMIC_COUNTERS", Value: uint32(37586)},
-			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_EXT", Value: uint32(37587)},
 			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_OES", Value: uint32(37587)},
 			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS", Value: uint32(37587)},
-			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_EXT", Value: uint32(37588)},
+			{Name: "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_EXT", Value: uint32(37587)},
 			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_OES", Value: uint32(37588)},
 			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS", Value: uint32(37588)},
+			{Name: "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_EXT", Value: uint32(37588)},
 			{Name: "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_OES", Value: uint32(37589)},
-			{Name: "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_EXT", Value: uint32(37589)},
 			{Name: "GL_MAX_GEOMETRY_ATOMIC_COUNTERS", Value: uint32(37589)},
+			{Name: "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_EXT", Value: uint32(37589)},
 			{Name: "GL_MAX_FRAGMENT_ATOMIC_COUNTERS", Value: uint32(37590)},
 			{Name: "GL_MAX_COMBINED_ATOMIC_COUNTERS", Value: uint32(37591)},
 			{Name: "GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE", Value: uint32(37592)},
@@ -87808,9 +91202,9 @@ func init() {
 			{Name: "GL_PROGRAM_OUTPUT", Value: uint32(37604)},
 			{Name: "GL_BUFFER_VARIABLE", Value: uint32(37605)},
 			{Name: "GL_SHADER_STORAGE_BLOCK", Value: uint32(37606)},
-			{Name: "GL_IS_PER_PATCH_OES", Value: uint32(37607)},
 			{Name: "GL_IS_PER_PATCH", Value: uint32(37607)},
 			{Name: "GL_IS_PER_PATCH_EXT", Value: uint32(37607)},
+			{Name: "GL_IS_PER_PATCH_OES", Value: uint32(37607)},
 			{Name: "GL_VERTEX_SUBROUTINE", Value: uint32(37608)},
 			{Name: "GL_TESS_CONTROL_SUBROUTINE", Value: uint32(37609)},
 			{Name: "GL_TESS_EVALUATION_SUBROUTINE", Value: uint32(37610)},
@@ -87842,15 +91236,15 @@ func init() {
 			{Name: "GL_NUM_ACTIVE_VARIABLES", Value: uint32(37636)},
 			{Name: "GL_ACTIVE_VARIABLES", Value: uint32(37637)},
 			{Name: "GL_REFERENCED_BY_VERTEX_SHADER", Value: uint32(37638)},
+			{Name: "GL_REFERENCED_BY_TESS_CONTROL_SHADER_OES", Value: uint32(37639)},
 			{Name: "GL_REFERENCED_BY_TESS_CONTROL_SHADER_EXT", Value: uint32(37639)},
 			{Name: "GL_REFERENCED_BY_TESS_CONTROL_SHADER", Value: uint32(37639)},
-			{Name: "GL_REFERENCED_BY_TESS_CONTROL_SHADER_OES", Value: uint32(37639)},
-			{Name: "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_EXT", Value: uint32(37640)},
 			{Name: "GL_REFERENCED_BY_TESS_EVALUATION_SHADER", Value: uint32(37640)},
 			{Name: "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_OES", Value: uint32(37640)},
+			{Name: "GL_REFERENCED_BY_TESS_EVALUATION_SHADER_EXT", Value: uint32(37640)},
+			{Name: "GL_REFERENCED_BY_GEOMETRY_SHADER_OES", Value: uint32(37641)},
 			{Name: "GL_REFERENCED_BY_GEOMETRY_SHADER", Value: uint32(37641)},
 			{Name: "GL_REFERENCED_BY_GEOMETRY_SHADER_EXT", Value: uint32(37641)},
-			{Name: "GL_REFERENCED_BY_GEOMETRY_SHADER_OES", Value: uint32(37641)},
 			{Name: "GL_REFERENCED_BY_FRAGMENT_SHADER", Value: uint32(37642)},
 			{Name: "GL_REFERENCED_BY_COMPUTE_SHADER", Value: uint32(37643)},
 			{Name: "GL_TOP_LEVEL_ARRAY_SIZE", Value: uint32(37644)},
@@ -87860,8 +91254,8 @@ func init() {
 			{Name: "GL_FRAMEBUFFER_DEFAULT_WIDTH", Value: uint32(37648)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT_HEIGHT", Value: uint32(37649)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT_LAYERS_OES", Value: uint32(37650)},
-			{Name: "GL_FRAMEBUFFER_DEFAULT_LAYERS", Value: uint32(37650)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT_LAYERS_EXT", Value: uint32(37650)},
+			{Name: "GL_FRAMEBUFFER_DEFAULT_LAYERS", Value: uint32(37650)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT_SAMPLES", Value: uint32(37651)},
 			{Name: "GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS", Value: uint32(37652)},
 			{Name: "GL_MAX_FRAMEBUFFER_WIDTH", Value: uint32(37653)},
@@ -87887,12 +91281,19 @@ func init() {
 			{Name: "GL_WARPS_PER_SM_NV", Value: uint32(37690)},
 			{Name: "GL_SM_COUNT_NV", Value: uint32(37691)},
 			{Name: "GL_FILL_RECTANGLE_NV", Value: uint32(37692)},
+			{Name: "GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB", Value: uint32(37693)},
 			{Name: "GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV", Value: uint32(37693)},
 			{Name: "GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV", Value: uint32(37694)},
+			{Name: "GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB", Value: uint32(37694)},
+			{Name: "GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB", Value: uint32(37695)},
 			{Name: "GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV", Value: uint32(37695)},
 			{Name: "GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV", Value: uint32(37696)},
+			{Name: "GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB", Value: uint32(37696)},
 			{Name: "GL_PROGRAMMABLE_SAMPLE_LOCATION_NV", Value: uint32(37697)},
+			{Name: "GL_PROGRAMMABLE_SAMPLE_LOCATION_ARB", Value: uint32(37697)},
 			{Name: "GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV", Value: uint32(37698)},
+			{Name: "GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB", Value: uint32(37698)},
+			{Name: "GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB", Value: uint32(37699)},
 			{Name: "GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV", Value: uint32(37699)},
 			{Name: "GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB", Value: uint32(37700)},
 			{Name: "GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB", Value: uint32(37701)},
@@ -87908,6 +91309,8 @@ func init() {
 			{Name: "GL_NEGATIVE_ONE_TO_ONE", Value: uint32(37726)},
 			{Name: "GL_ZERO_TO_ONE", Value: uint32(37727)},
 			{Name: "GL_CLEAR_TEXTURE", Value: uint32(37733)},
+			{Name: "GL_TEXTURE_REDUCTION_MODE_ARB", Value: uint32(37734)},
+			{Name: "GL_WEIGHTED_AVERAGE_ARB", Value: uint32(37735)},
 			{Name: "GL_FONT_GLYPHS_AVAILABLE_NV", Value: uint32(37736)},
 			{Name: "GL_FONT_TARGET_UNAVAILABLE_NV", Value: uint32(37737)},
 			{Name: "GL_FONT_UNAVAILABLE_NV", Value: uint32(37738)},
@@ -87921,7 +91324,14 @@ func init() {
 			{Name: "GL_SUPERSAMPLE_SCALE_X_NV", Value: uint32(37746)},
 			{Name: "GL_SUPERSAMPLE_SCALE_Y_NV", Value: uint32(37747)},
 			{Name: "GL_CONFORMANT_NV", Value: uint32(37748)},
+			{Name: "GL_CONSERVATIVE_RASTER_DILATE_NV", Value: uint32(37753)},
+			{Name: "GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV", Value: uint32(37754)},
+			{Name: "GL_CONSERVATIVE_RASTER_DILATE_GRANULARITY_NV", Value: uint32(37755)},
 			{Name: "GL_NUM_SAMPLE_COUNTS", Value: uint32(37760)},
+			{Name: "GL_MULTISAMPLE_LINE_WIDTH_RANGE", Value: uint32(37761)},
+			{Name: "GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB", Value: uint32(37761)},
+			{Name: "GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY", Value: uint32(37762)},
+			{Name: "GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB", Value: uint32(37762)},
 			{Name: "GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE", Value: uint32(37792)},
 			{Name: "GL_BGRA8_EXT", Value: uint32(37793)},
 			{Name: "GL_TEXTURE_USAGE_ANGLE", Value: uint32(37794)},
@@ -87929,18 +91339,32 @@ func init() {
 			{Name: "GL_PACK_REVERSE_ROW_ORDER_ANGLE", Value: uint32(37796)},
 			{Name: "GL_PROGRAM_BINARY_ANGLE", Value: uint32(37798)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_4x4_KHR", Value: uint32(37808)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_4x4", Value: uint32(37808)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_5x4", Value: uint32(37809)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_5x4_KHR", Value: uint32(37809)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_5x5", Value: uint32(37810)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_5x5_KHR", Value: uint32(37810)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_6x5", Value: uint32(37811)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_6x5_KHR", Value: uint32(37811)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_6x6_KHR", Value: uint32(37812)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_6x6", Value: uint32(37812)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_8x5", Value: uint32(37813)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_8x5_KHR", Value: uint32(37813)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_8x6_KHR", Value: uint32(37814)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_8x6", Value: uint32(37814)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_8x8_KHR", Value: uint32(37815)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_8x8", Value: uint32(37815)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_10x5_KHR", Value: uint32(37816)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_10x5", Value: uint32(37816)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_10x6_KHR", Value: uint32(37817)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_10x6", Value: uint32(37817)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_10x8_KHR", Value: uint32(37818)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_10x8", Value: uint32(37818)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_10x10", Value: uint32(37819)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_10x10_KHR", Value: uint32(37819)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_12x10_KHR", Value: uint32(37820)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_12x10", Value: uint32(37820)},
+			{Name: "GL_COMPRESSED_RGBA_ASTC_12x12", Value: uint32(37821)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_12x12_KHR", Value: uint32(37821)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_3x3x3_OES", Value: uint32(37824)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_4x3x3_OES", Value: uint32(37825)},
@@ -87953,18 +91377,32 @@ func init() {
 			{Name: "GL_COMPRESSED_RGBA_ASTC_6x6x5_OES", Value: uint32(37832)},
 			{Name: "GL_COMPRESSED_RGBA_ASTC_6x6x6_OES", Value: uint32(37833)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR", Value: uint32(37840)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4", Value: uint32(37840)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4", Value: uint32(37841)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR", Value: uint32(37841)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR", Value: uint32(37842)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5", Value: uint32(37842)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR", Value: uint32(37843)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5", Value: uint32(37843)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6", Value: uint32(37844)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR", Value: uint32(37844)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5", Value: uint32(37845)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR", Value: uint32(37845)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6", Value: uint32(37846)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR", Value: uint32(37846)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR", Value: uint32(37847)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8", Value: uint32(37847)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR", Value: uint32(37848)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5", Value: uint32(37848)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6", Value: uint32(37849)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR", Value: uint32(37849)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8", Value: uint32(37850)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR", Value: uint32(37850)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10", Value: uint32(37851)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR", Value: uint32(37851)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR", Value: uint32(37852)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10", Value: uint32(37852)},
+			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12", Value: uint32(37853)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR", Value: uint32(37853)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_3x3x3_OES", Value: uint32(37856)},
 			{Name: "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x3x3_OES", Value: uint32(37857)},

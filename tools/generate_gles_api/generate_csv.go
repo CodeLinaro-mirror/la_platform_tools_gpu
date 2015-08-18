@@ -34,12 +34,12 @@ func GenerateCsv(reg *Registry, api KhronosAPI) {
 		for _, version := range reg.GetVersions(api, cmdName) {
 			doc := DownloadDoc(version, cmdName)
 			if len(doc.Params)-1 /* result */ != len(cmd.Param) {
-				panic(fmt.Errorf("%s: param count mismatch: %v vs %v", cmdName, len(doc.Params), len(cmd.Param)))
+				fmt.Printf("%s: param count mismatch: %v vs %v", cmdName, len(doc.Params), len(cmd.Param))
 			}
-			printCsvCommand(writer, &cmd, string(version), doc)
+			printCsvCommand(writer, cmd, string(version), doc)
 		}
 		for _, extension := range reg.GetExtensions(api, cmdName) {
-			printCsvCommand(writer, &cmd, extension, &CommandDoc{})
+			printCsvCommand(writer, cmd, extension, &CommandDoc{})
 		}
 	}
 	writer.Flush()
@@ -55,7 +55,7 @@ func printCsvCommand(writer *csv.Writer, cmd *Command, definedBy string, doc *Co
 		if doc.Params != nil {
 			paramDoc := doc.Params[i]
 			if paramDoc.Name != param.Name {
-				panic(fmt.Errorf("%s: param name mismatch: %s vs %s\n", cmd.Proto.Name, param.Name, paramDoc.Name))
+				fmt.Printf("%s: param name mismatch: %s vs %s\n", cmd.Proto.Name, param.Name, paramDoc.Name)
 			}
 			accepts = strings.Join(paramDoc.Accepts, "|")
 		}
