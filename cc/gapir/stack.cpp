@@ -27,13 +27,13 @@ namespace gapir {
 
 bool Stack::pushCheck(const char * what) {
     if (!mValid) {
-        GAPID_WARNING("%s on invalid stack\n", what);
+        GAPID_WARNING("%s on invalid stack", what);
         return false;
     }
 
     if (mTop > mStack.size() - 1) {
         mValid = false;
-        GAPID_WARNING("%s with invalid stack head, offset: %d\n", what, mTop);
+        GAPID_WARNING("%s with invalid stack head, offset: %d", what, mTop);
         return false;
     }
     return true;
@@ -41,13 +41,13 @@ bool Stack::pushCheck(const char * what) {
 
 bool Stack::popCheck(const char * what) {
     if (!mValid) {
-        GAPID_WARNING("%s on invalid stack\n", what);
+        GAPID_WARNING("%s on invalid stack", what);
         return false;
     }
 
     if (mTop == 0 || mTop > mStack.size()) {
         mValid = false;
-        GAPID_WARNING("%s with invalid stack head, offset: %d\n", what, mTop);
+        GAPID_WARNING("%s with invalid stack head, offset: %d", what, mTop);
         return false;
     }
     return true;
@@ -131,21 +131,21 @@ Stack::Stack(uint32_t size, const MemoryManager* memoryManager) :
 }
 
 void Stack::printStack() const {
-    GAPID_DEBUG("Stack size: %u\n", mTop);
+    GAPID_DEBUG("Stack size: %u", mTop);
     for (uint32_t i = 0; i < mTop; ++i) {
-        GAPID_DEBUG("(%d) %s\n", i, mStack[i].debugInfo(mMemoryManager));
+        GAPID_DEBUG("(%d) %s", i, mStack[i].debugInfo(mMemoryManager));
     }
 }
 
 BaseType Stack::getTopType() {
     if (!mValid) {
-        GAPID_WARNING("GetTopType on invalid stack\n");
+        GAPID_WARNING("GetTopType on invalid stack");
         return BaseType::Bool;
     }
 
     if (mTop == 0 || mTop > mStack.size()) {
         mValid = false;
-        GAPID_WARNING("GetTopType with invalid stack head: %u (size: %zu)\n", mTop, mStack.size());
+        GAPID_WARNING("GetTopType with invalid stack head: %u (size: %zu)", mTop, mStack.size());
         return BaseType::Bool;
     }
 
@@ -191,13 +191,13 @@ void Stack::popTo(void* address) {
 
 void Stack::discard(uint32_t count) {
     if (!mValid) {
-        GAPID_WARNING("Discard on invalid stack\n");
+        GAPID_WARNING("Discard on invalid stack");
         return;
     }
 
     if (count > mTop) {
         mValid = false;
-        GAPID_WARNING("Discarding more element (%u) then in the stack (%u)\n", count, mTop);
+        GAPID_WARNING("Discarding more element (%u) then in the stack (%u)", count, mTop);
         return;
     }
 
@@ -210,19 +210,19 @@ void Stack::discard(uint32_t count) {
 
 void Stack::clone(uint32_t n) {
     if (!mValid) {
-        GAPID_WARNING("Clone on invalid stack\n");
+        GAPID_WARNING("Clone on invalid stack");
         return;
     }
 
     if (mTop >= mStack.size()) {
         mValid = false;
-        GAPID_WARNING("Cloning to full stack\n");
+        GAPID_WARNING("Cloning to full stack");
         return;
     }
 
     if (mTop < n + 1) {
         mValid = false;
-        GAPID_WARNING("Cloning from invalid index: %u (head: %u)\n", n, mTop);
+        GAPID_WARNING("Cloning from invalid index: %u (head: %u)", n, mTop);
         return;
     }
 
@@ -241,7 +241,7 @@ const void* Stack::checkAndGetTopPointer(const char* what) {
             uint32_t offset = mStack[mTop].value<uint32_t>();
             const void* pointer = mMemoryManager->constantToAbsolute(offset);
             if (!mMemoryManager->isConstantAddress(pointer)) {
-                GAPID_WARNING("%s: Invalid constant address %p offset %u\n", what, pointer, offset);
+                GAPID_WARNING("%s: Invalid constant address %p offset %u", what, pointer, offset);
                 mValid = false;
                 return nullptr;
             }
@@ -251,14 +251,14 @@ const void* Stack::checkAndGetTopPointer(const char* what) {
             uint32_t offset = mStack[mTop].value<uint32_t>();
             void* pointer = mMemoryManager->volatileToAbsolute(offset);
             if (!mMemoryManager->isVolatileAddress(pointer)) {
-                GAPID_WARNING("%s Invalid volatile address %p offset %u\n", what, pointer, offset);
+                GAPID_WARNING("%s Invalid volatile address %p offset %u", what, pointer, offset);
                 mValid = false;
                 return nullptr;
             }
             return pointer;
         }
         default:
-            GAPID_WARNING("%s top was not a pointer type: %s\n", what, baseTypeName(type));
+            GAPID_WARNING("%s top was not a pointer type: %s", what, baseTypeName(type));
             mValid = false;
             return nullptr;
     }

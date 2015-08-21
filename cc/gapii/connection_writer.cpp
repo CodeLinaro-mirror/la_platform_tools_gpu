@@ -24,14 +24,14 @@ namespace gapii {
 std::shared_ptr<ConnectionWriter> ConnectionWriter::listenSocket(
         const char* hostname, const char* port) {
     auto c = gapic::SocketConnection::createSocket(hostname, port);
-    GAPID_INFO("GAPII awaiting connection on socket %s:%s\n", hostname, port);
+    GAPID_INFO("GAPII awaiting connection on socket %s:%s", hostname, port);
     return std::shared_ptr<ConnectionWriter>(new ConnectionWriter(c->accept()));
 }
 
 std::shared_ptr<ConnectionWriter> ConnectionWriter::listenPipe(
         const char* pipename, bool abstract) {
     auto c = gapic::SocketConnection::createPipe(pipename, abstract);
-    GAPID_INFO("GAPII awaiting connection on pipe %s%s\n",
+    GAPID_INFO("GAPII awaiting connection on pipe %s%s",
         pipename, (abstract ? " (abstract)" : ""));
     return std::shared_ptr<ConnectionWriter>(new ConnectionWriter(c->accept()));
 }

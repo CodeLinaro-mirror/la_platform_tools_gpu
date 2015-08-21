@@ -35,10 +35,10 @@ Logger Logger::instance;
 
 void Logger::init(const char* path) {
     if (FILE* f = fopen(path, "w")) {
-        GAPID_INFO("Logging to %s\n", path);
+        GAPID_INFO("Logging to %s", path);
         instance.mFile = f;
     } else {
-        GAPID_WARNING("Can't open file for logging (%s): %s\n", path, strerror(errno));
+        GAPID_WARNING("Can't open file for logging (%s): %s", path, strerror(errno));
     }
 }
 
@@ -67,11 +67,14 @@ void Logger::logImpl(unsigned level, const char* location, const char* format, v
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t.time_since_epoch());
 
     // Print out the common part of the log messages
-    fprintf(mFile, "%02d:%02d:%02d.%03d #Caze %c: %s -> ", loc->tm_hour, loc->tm_min, loc->tm_sec,
+    fprintf(mFile, "%02d:%02d:%02d.%03d %c: %s -> ", loc->tm_hour, loc->tm_min, loc->tm_sec,
             static_cast<int>(ms.count() % 1000), "FWID"[level], location);
 
     // Print out the actual log message
     vfprintf(mFile, format, args);
+
+    // Always finish with a newline
+    fprintf(mFile, "\n");
 
     // Flush the log to ensure that every message is written out even if the application crashes
     fflush(mFile);

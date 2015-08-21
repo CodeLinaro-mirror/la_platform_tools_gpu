@@ -105,13 +105,13 @@ RendererImpl::RendererImpl()
 
     mDisplay = XOpenDisplay(nullptr);
     if (mDisplay == nullptr) {
-        GAPID_FATAL("Unable to to open X display\n");
+        GAPID_FATAL("Unable to to open X display");
     }
 
     int major;
     int minor;
     if (!glXQueryVersion(mDisplay, &major, &minor) || (major == 1 && minor < 3)) {
-        GAPID_FATAL("GLX 1.3+ unsupported by X server (was %d.%d)\n", major, minor);
+        GAPID_FATAL("GLX 1.3+ unsupported by X server (was %d.%d)", major, minor);
     }
 
     // Initialize with a default target.
@@ -172,7 +172,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         mDepthSize == depthSize &&
         mStencilSize == stencilSize) {
         // Resize only
-        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d\n", mWidth, mHeight, width, height);
+        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d", mWidth, mHeight, width, height);
         createPbuffer(width, height);
         glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext);
         mWidth = width;
@@ -199,14 +199,14 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     GLXFBConfig *fbConfigs = glXChooseFBConfig(
             mDisplay, DefaultScreen(mDisplay), visualAttribs, &fbConfigsCount);
     if (fbConfigs == nullptr) {
-        GAPID_FATAL("Unable to find a suitable X framebuffer config\n");
+        GAPID_FATAL("Unable to find a suitable X framebuffer config");
     }
     mFBConfig = fbConfigs[0];
     XFree(fbConfigs);
 
     mContext = glXCreateNewContext(mDisplay, mFBConfig, GLX_RGBA_TYPE, nullptr, True);
     if (mContext == nullptr) {
-        GAPID_FATAL("Failed to create glX context\n");
+        GAPID_FATAL("Failed to create glX context");
     }
     XSync(mDisplay, False);
 
@@ -225,7 +225,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
 void RendererImpl::bind() {
     if (!mBound) {
         if (!glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext)) {
-            GAPID_FATAL("Unable to make GLX context current\n");
+            GAPID_FATAL("Unable to make GLX context current");
         }
 
         mBound = true;

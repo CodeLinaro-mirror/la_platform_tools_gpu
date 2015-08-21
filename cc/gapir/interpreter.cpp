@@ -65,7 +65,7 @@ uint32_t Interpreter::extract26bitData(uint32_t opcode) const {
 bool Interpreter::call(uint32_t opcode) {
     auto func = mFunctions.find(opcode & FUNCTION_ID_MASK);
     if (func == mFunctions.end()) {
-        GAPID_WARNING("Invalid function id: %u\n", opcode & FUNCTION_ID_MASK);
+        GAPID_WARNING("Invalid function id: %u", opcode & FUNCTION_ID_MASK);
         return false;
     } else {
         return func->second(&mStack, (opcode & PUSH_RETURN_MASK) != 0);
@@ -75,7 +75,7 @@ bool Interpreter::call(uint32_t opcode) {
 bool Interpreter::pushI(uint32_t opcode) {
     BaseType type = extractType(opcode);
     if (!isValid(type)) {
-        GAPID_WARNING("Error: pushI basic type invalid %u\n", type);
+        GAPID_WARNING("Error: pushI basic type invalid %u", type);
         return false;
     }
     Stack::BaseValue data = extract20bitData(opcode);
@@ -104,12 +104,12 @@ bool Interpreter::pushI(uint32_t opcode) {
 bool Interpreter::loadC(uint32_t opcode) {
     BaseType type = extractType(opcode);
     if (!isValid(type)) {
-      GAPID_WARNING("Error: loadC basic type invalid %u\n", type);
+      GAPID_WARNING("Error: loadC basic type invalid %u", type);
       return false;
     }
     const void* address = mMemoryManager->constantToAbsolute(extract20bitData(opcode));
     if (!isConstantAddressForType(address, type)) {
-      GAPID_WARNING("Error: loadC not constant address %p\n", address);
+      GAPID_WARNING("Error: loadC not constant address %p", address);
       return false;
     }
     mStack.pushFrom(type, address);
@@ -119,12 +119,12 @@ bool Interpreter::loadC(uint32_t opcode) {
 bool Interpreter::loadV(uint32_t opcode) {
     BaseType type = extractType(opcode);
     if (!isValid(type)) {
-      GAPID_WARNING("Error: loadV basic type invalid %u\n", type);
+      GAPID_WARNING("Error: loadV basic type invalid %u", type);
       return false;
     }
     const void* address = mMemoryManager->volatileToAbsolute(extract20bitData(opcode));
     if (!isVolatileAddressForType(address, type)) {
-      GAPID_WARNING("Error: loadV not volatile address %p\n", address);
+      GAPID_WARNING("Error: loadV not volatile address %p", address);
       return false;
     }
     mStack.pushFrom(type, address);
@@ -134,12 +134,12 @@ bool Interpreter::loadV(uint32_t opcode) {
 bool Interpreter::load(uint32_t opcode) {
     BaseType type = extractType(opcode);
     if (!isValid(type)) {
-      GAPID_WARNING("Error: load basic type invalid %u\n", type);
+      GAPID_WARNING("Error: load basic type invalid %u", type);
       return false;
     }
     const void* address = mStack.pop<const void*>();
     if (!isReadAddress(address)) {
-      GAPID_WARNING("Error: load not readable address %p\n", address);
+      GAPID_WARNING("Error: load not readable address %p", address);
       return false;
     }
     mStack.pushFrom(type, address);
@@ -154,7 +154,7 @@ bool Interpreter::pop(uint32_t opcode) {
 bool Interpreter::storeV(uint32_t opcode) {
     void* address = mMemoryManager->volatileToAbsolute(extract26bitData(opcode));
     if (!isVolatileAddressForType(address, mStack.getTopType())) {
-      GAPID_WARNING("Error: storeV not volatile address %p\n", address);
+      GAPID_WARNING("Error: storeV not volatile address %p", address);
       return false;
     }
 
@@ -165,7 +165,7 @@ bool Interpreter::storeV(uint32_t opcode) {
 bool Interpreter::store() {
     void* address = mStack.pop<void*>();
     if (!isWriteAddress(address)) {
-      GAPID_WARNING("Error: store not write address %p\n", address);
+      GAPID_WARNING("Error: store not write address %p", address);
       return false;
     }
     mStack.popTo(address);
@@ -186,19 +186,19 @@ bool Interpreter::copy(uint32_t opcode) {
     void* target = mStack.pop<void*>();
     const void* source = mStack.pop<const void*>();
     if (!isWriteAddress(target)) {
-        GAPID_WARNING("Error: copy target is invalid %p %d\n", target, count);
+        GAPID_WARNING("Error: copy target is invalid %p %d", target, count);
         return false;
     }
     if (!isReadAddress(source)) {
-        GAPID_WARNING("Error: copy source is invalid %p %d\n", target, count);
+        GAPID_WARNING("Error: copy source is invalid %p %d", target, count);
         return false;
     }
     if (source == nullptr) {
-        GAPID_WARNING("Error: copy source address is null\n");
+        GAPID_WARNING("Error: copy source address is null");
         return false;
     }
     if (target == nullptr) {
-        GAPID_WARNING("Error: copy destination address is null\n");
+        GAPID_WARNING("Error: copy destination address is null");
         return false;
     }
     memcpy(target, source, count);
@@ -216,19 +216,19 @@ bool Interpreter::strcpy(uint32_t opcode) {
     const char* source = mStack.pop<const char*>();
     // Requires that the whole count is available, even if source is shorter.
     if (!isWriteAddress(target)) {
-        GAPID_WARNING("Error: copy target is invalid %p %d\n", target, count);
+        GAPID_WARNING("Error: copy target is invalid %p %d", target, count);
         return false;
     }
     if (!isReadAddress(source)) {
-        GAPID_WARNING("Error: copy source is invalid %p %d\n", target, count);
+        GAPID_WARNING("Error: copy source is invalid %p %d", target, count);
         return false;
     }
     if (source == nullptr) {
-        GAPID_WARNING("Error: strcpy source address is null\n");
+        GAPID_WARNING("Error: strcpy source address is null");
         return false;
     }
     if (target == nullptr) {
-        GAPID_WARNING("Error: strcpy destination address is null\n");
+        GAPID_WARNING("Error: strcpy destination address is null");
         return false;
     }
     uint32_t i;
@@ -278,9 +278,9 @@ bool Interpreter::label(uint32_t opcode) {
     return mStack.isValid();
 }
 
-#define DEBUG_OPCODE(name, value) GAPID_DEBUG(name "\n")
-#define DEBUG_OPCODE_26(name, value) GAPID_DEBUG(name "(%#010x)\n", value & DATA_MASK26)
-#define DEBUG_OPCODE_TY_20(name, value) GAPID_DEBUG(name "(%#010x, %s)\n", value & DATA_MASK20, baseTypeName(extractType(value)))
+#define DEBUG_OPCODE(name, value) GAPID_DEBUG(name)
+#define DEBUG_OPCODE_26(name, value) GAPID_DEBUG(name "(%#010x)", value & DATA_MASK26)
+#define DEBUG_OPCODE_TY_20(name, value) GAPID_DEBUG(name "(%#010x, %s)", value & DATA_MASK20, baseTypeName(extractType(value)))
 
 bool Interpreter::interpret(uint32_t opcode) {
     InstructionCode code = static_cast<InstructionCode>(opcode >> OPCODE_BIT_SHIFT);
@@ -331,7 +331,7 @@ bool Interpreter::interpret(uint32_t opcode) {
             DEBUG_OPCODE_26("LABEL", opcode);
             return this->label(opcode);
         default:
-            GAPID_WARNING("Unknown opcode! %#010x\n", opcode);
+            GAPID_WARNING("Unknown opcode! %#010x", opcode);
             return false;
     }
 }

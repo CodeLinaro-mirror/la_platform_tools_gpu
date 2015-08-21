@@ -68,7 +68,7 @@ void Spy::lock() {
     SpyBase::lock();
     auto threadID = gapic::Thread::current().id();
     if (threadID != CurrentThread) {
-        GAPID_INFO("Changing threads: %" PRIu64 "-> %" PRIu64 "\n", CurrentThread, threadID);
+        GAPID_INFO("Changing threads: %" PRIu64 "-> %" PRIu64, CurrentThread, threadID);
         GlesSpy::switchThread(threadID);
     }
 }

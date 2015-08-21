@@ -63,19 +63,19 @@ RendererImpl::RendererImpl()
     mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     EGLint error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to get EGL display: %d\n", error);
+        GAPID_FATAL("Failed to get EGL display: %d", error);
     }
 
     eglInitialize(mDisplay, nullptr, nullptr);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to initialize EGL: %d\n", error);
+        GAPID_FATAL("Failed to initialize EGL: %d", error);
     }
 
     eglBindAPI(EGL_OPENGL_ES_API);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to bind EGL API: %d\n", error);
+        GAPID_FATAL("Failed to bind EGL API: %d", error);
     }
 
     // Initialize with a default target.
@@ -88,13 +88,13 @@ RendererImpl::~RendererImpl() {
     eglTerminate(mDisplay);
     EGLint error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to terminate EGL: %d\n", error);
+        GAPID_WARNING("Failed to terminate EGL: %d", error);
     }
 
     eglReleaseThread();
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to release EGL thread: %d\n", error);
+        GAPID_WARNING("Failed to release EGL thread: %d", error);
     }
 }
 
@@ -105,7 +105,7 @@ void RendererImpl::reset() {
         eglDestroySurface(mDisplay, mSurface);
         EGLint error = eglGetError();
         if (error != EGL_SUCCESS) {
-            GAPID_WARNING("Failed to destroy EGL surface: %d\n", error);
+            GAPID_WARNING("Failed to destroy EGL surface: %d", error);
         }
         mSurface = EGL_NO_SURFACE;
     }
@@ -114,7 +114,7 @@ void RendererImpl::reset() {
         eglDestroyContext(mDisplay, mContext);
         EGLint error = eglGetError();
         if (error != EGL_SUCCESS) {
-            GAPID_WARNING("Failed to destroy EGL context: %d\n", error);
+            GAPID_WARNING("Failed to destroy EGL context: %d", error);
         }
         mContext = EGL_NO_CONTEXT;
     }
@@ -159,7 +159,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     eglChooseConfig(mDisplay, configAttribList, &eglConfig, 1, &one);
     EGLint error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to choose EGL config: %d\n", error);
+        GAPID_FATAL("Failed to choose EGL config: %d", error);
     }
 
     // Create an EGL context.
@@ -170,7 +170,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     mContext = eglCreateContext(mDisplay, eglConfig, EGL_NO_CONTEXT, contextAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to create EGL context: %d\n", error);
+        GAPID_FATAL("Failed to create EGL context: %d", error);
     }
 
     // Create an EGL surface for the read/draw framebuffer.
@@ -182,7 +182,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     mSurface = eglCreatePbufferSurface(mDisplay, eglConfig, surfaceAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to create EGL pbuffer surface: %d\n", error);
+        GAPID_FATAL("Failed to create EGL pbuffer surface: %d", error);
     }
 
     mWidth = width;
@@ -201,7 +201,7 @@ void RendererImpl::bind() {
         eglMakeCurrent(mDisplay, mSurface, mSurface, mContext);
         EGLint error = eglGetError();
         if (error != EGL_SUCCESS) {
-            GAPID_FATAL("Failed to make EGL current: %d\n", error);
+            GAPID_FATAL("Failed to make EGL current: %d", error);
         }
 
         mBound = true;
@@ -217,7 +217,7 @@ void RendererImpl::unbind() {
         eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         EGLint error = eglGetError();
         if (error != EGL_SUCCESS) {
-            GAPID_WARNING("Failed to release EGL context: %d\n", error);
+            GAPID_WARNING("Failed to release EGL context: %d", error);
         }
         mBound = false;
     }

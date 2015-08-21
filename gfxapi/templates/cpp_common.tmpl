@@ -740,7 +740,7 @@
   {{$name := Macro "CmdName" $}}
   {{$args := Macro "C++.CallArguments" $}}
 
-  "{{$name}}({{ForEach $.CallParameters "C++.PrintfFormatCode" | JoinWith ", "}})\n"
+  "{{$name}}({{ForEach $.CallParameters "C++.PrintfFormatCode" | JoinWith ", "}})"
   {{if $args}}, {{$args}}{{end}}
 {{end}}
 

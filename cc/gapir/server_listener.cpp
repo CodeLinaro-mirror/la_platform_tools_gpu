@@ -42,7 +42,7 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
     while (true) {
         std::unique_ptr<gapic::Connection> client = mConn->accept();
         if (client == nullptr) {
-            GAPID_WARNING("Failed to accept incoming connection\n");
+            GAPID_WARNING("Failed to accept incoming connection");
             consecutiveAcceptFailures++;
             if (consecutiveAcceptFailures >= MAX_CONSECUTIVE_ACCEPT_FAILURES) {
                 GAPID_WARNING("Multiple consecutive failures (%d) accepting connection", consecutiveAcceptFailures);
@@ -54,13 +54,13 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
 
         uint8_t connectionType;
         if (client->recv(&connectionType, sizeof(connectionType)) != sizeof(connectionType)) {
-            GAPID_WARNING("Failed to read connection type\n");
+            GAPID_WARNING("Failed to read connection type");
             continue;
         }
 
         switch (connectionType) {
             case DEVICE_INFO: {
-                GAPID_INFO("Sending device info\n");
+                GAPID_INFO("Sending device info");
                 uint8_t ptrSize = sizeof(void*);
                 uint8_t ptrAlign = std::alignment_of<void*>::value;
                 uint8_t targetOs = TARGET_OS;
@@ -76,7 +76,7 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
                     !client->sendString(r->name()) ||
                     !client->sendString(r->vendor()) ||
                     !client->sendString(r->version())) {
-                    GAPID_WARNING("Failed to send connection header\n");
+                    GAPID_WARNING("Failed to send connection header");
                 }
                 break;
             }
@@ -85,16 +85,16 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
                 if (conn != nullptr) {
                     return conn;
                 } else {
-                    GAPID_WARNING("Loading ServerConnection failed!\n");
+                    GAPID_WARNING("Loading ServerConnection failed!");
                 }
                 break;
             }
             case SHUTDOWN_REQUEST: {
-                GAPID_INFO("Shutdown request received!\n");
+                GAPID_INFO("Shutdown request received!");
                 return nullptr;
             }
             default: {
-                GAPID_WARNING("Unknown connection type %d ignored\n", connectionType);
+                GAPID_WARNING("Unknown connection type %d ignored", connectionType);
             }
         }
     }

@@ -69,19 +69,19 @@ bool Context::initialize() {
     }
 
     if (!mMemoryManager->setVolatileMemory(mReplayRequest->getVolatileMemorySize())) {
-        GAPID_WARNING("Setting the volatile memory size failed (size: %u)\n",
+        GAPID_WARNING("Setting the volatile memory size failed (size: %u)",
                      mReplayRequest->getVolatileMemorySize());
         return false;
     }
 
     mMemoryManager->setConstantMemory(mReplayRequest->getConstantMemory());
 
-    GAPID_INFO("Prefetching resources...\n");
+    GAPID_INFO("Prefetching resources...");
     mResourceProvider->prefetch(mReplayRequest->getResources(), mServer,
                                 mMemoryManager->getVolatileAddress(),
                                 mReplayRequest->getVolatileMemorySize());
 
-    GAPID_INFO("Prefetching ready\n");
+    GAPID_INFO("Prefetching ready");
     mInMemoryCacheSize = static_cast<uint32_t>(
             static_cast<uint8_t*>(mMemoryManager->getVolatileAddress()) -
             static_cast<uint8_t*>(mMemoryManager->getBaseAddress()));
@@ -119,9 +119,9 @@ void Context::registerCallbacks(Interpreter* interpreter) {
     });
 
     interpreter->registerFunction(gfxapi::Ids::ReplayCreateRenderer, [this](Stack* stack, bool) {
-        int32_t id = stack->pop<uint32_t>();
+        uint32_t id = stack->pop<uint32_t>();
         if (stack->isValid()) {
-            GAPID_INFO("replayCreateRenderer(%d)\n", id);
+            GAPID_INFO("replayCreateRenderer(%u)", id);
             if (Renderer* prev = mRenderers[id]) {
                 if (mBoundRenderer == prev) {
                     mBoundRenderer = nullptr;
@@ -131,24 +131,24 @@ void Context::registerCallbacks(Interpreter* interpreter) {
             mRenderers[id] = Renderer::create();
             return true;
         } else {
-            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+            GAPID_WARNING("Error during calling function replayCreateRenderer");
             return false;
         }
     });
 
     interpreter->registerFunction(gfxapi::Ids::ReplayBindRenderer, [this](Stack* stack, bool) {
-        int32_t id = stack->pop<uint32_t>();
+        uint32_t id = stack->pop<uint32_t>();
         if (stack->isValid()) {
-            GAPID_INFO("replayBindRenderer(%d)\n", id);
             if (mBoundRenderer != nullptr) {
                 mBoundRenderer->unbind();
                 mBoundRenderer = nullptr;
             }
             mBoundRenderer = mRenderers[id];
             mBoundRenderer->bind();
+            GAPID_INFO("Bound renderer %u: %s - %s", id, mBoundRenderer->name(), mBoundRenderer->version());
             return true;
         } else {
-            GAPID_WARNING("Error during calling function replayBindRenderer\n");
+            GAPID_WARNING("Error during calling function replayBindRenderer");
             return false;
         }
     });
@@ -162,7 +162,7 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
         if (!stack->isValid()) {
-            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+            GAPID_WARNING("Error during calling function replayCreateRenderer");
             return false;
         }
 
@@ -182,11 +182,11 @@ void Context::registerCallbacks(Interpreter* interpreter) {
                 stencilSize = 8;
         }
         if (stack->isValid()) {
-            GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
+            GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)",
                     width, height, color_fmt, depth_fmt, stencil_fmt,
                     resetViewportScissor ? "true" : "false");
             if (mBoundRenderer == nullptr) {
-                GAPID_INFO("backbufferInfo called without a bound renderer\n");
+                GAPID_INFO("backbufferInfo called without a bound renderer");
                 return false;
             }
             mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
@@ -196,7 +196,7 @@ void Context::registerCallbacks(Interpreter* interpreter) {
             }
             return true;
         } else {
-            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+            GAPID_WARNING("Error during calling function replayCreateRenderer");
             return false;
         }
         mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
@@ -213,18 +213,18 @@ bool Context::loadResource(Stack* stack) {
     void* address = stack->pop<void*>();
 
     if (!stack->isValid()) {
-        GAPID_WARNING("Error during loadResource\n");
+        GAPID_WARNING("Error during loadResource");
         return false;
     }
 
     const auto& resourceData = mReplayRequest->getResourceData(resourceId);
     if (!mMemoryManager->isVolatileAddressWithSize(address, resourceData.second)) {
-        GAPID_WARNING("Invalid volatile address in loadResource %p\n", address);
+        GAPID_WARNING("Invalid volatile address in loadResource %p", address);
         return false;
     }
 
     if (!mResourceProvider->get(resourceData.first, mServer, address, resourceData.second)) {
-        GAPID_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
+        GAPID_WARNING("Can't fetch resource: %s", resourceData.first.c_str());
         return false;
     }
 
@@ -236,7 +236,7 @@ bool Context::postData(Stack* stack) {
     const void* address = stack->pop<const void*>();
 
     if (!stack->isValid()) {
-        GAPID_WARNING("Error during postData\n");
+        GAPID_WARNING("Error during postData");
         return false;
     }
 
@@ -245,7 +245,7 @@ bool Context::postData(Stack* stack) {
 
 bool Context::flushPostBuffer(Stack* stack) {
     if (!stack->isValid()) {
-        GAPID_WARNING("Error during flushPostBuffer\n");
+        GAPID_WARNING("Error during flushPostBuffer");
         return false;
     }
 
@@ -256,14 +256,14 @@ bool Context::startTimer(Stack* stack) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            GAPID_INFO("startTimer(%d)\n", index);
+            GAPID_INFO("startTimer(%d)", index);
             mTimers[index].Start();
             return true;
         } else {
-            GAPID_WARNING("StartTimer called with invalid index %d\n", index);
+            GAPID_WARNING("StartTimer called with invalid index %d", index);
         }
     } else {
-        GAPID_WARNING("Error while calling function StartTimer\n");
+        GAPID_WARNING("Error while calling function StartTimer");
     }
     return false;
 }
@@ -272,17 +272,17 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            GAPID_INFO("stopTimer(%d)\n", index);
+            GAPID_INFO("stopTimer(%d)", index);
             uint64_t ns = mTimers[index].Stop();
             if (pushReturn) {
                 stack->push(ns);
             }
             return true;
         } else {
-            GAPID_WARNING("StopTimer called with invalid index %d\n", index);
+            GAPID_WARNING("StopTimer called with invalid index %d", index);
         }
     } else {
-        GAPID_WARNING("Error while calling function StopTimer\n");
+        GAPID_WARNING("Error while calling function StopTimer");
     }
     return false;
 }

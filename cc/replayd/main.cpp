@@ -69,7 +69,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
                        MemoryManager* memoryManager) {
     std::unique_ptr<Connection> conn = SocketConnection::createSocket("127.0.0.1", listenerPort);
     if (conn == nullptr) {
-        GAPID_FATAL("Failed to create listening socket\n");
+        GAPID_FATAL("Failed to create listening socket");
     }
     ServerListener listener(std::move(conn), memoryManager->getSize());
 
@@ -86,13 +86,13 @@ void listenConnections(const char* listenerPort, const char* cachePath,
         std::unique_ptr<Context> context =
                 Context::create(*acceptedConn, resourceProvider.get(), memoryManager);
         if (context == nullptr) {
-            GAPID_WARNING("Loading Context failed!\n");
+            GAPID_WARNING("Loading Context failed!");
             continue;
         }
 
         resourceProvider->updateSize(context->getInMemoryCacheSize());
         if (!context->interpret()) {
-          GAPID_DEBUG("Interpret returned false\n");
+          GAPID_DEBUG("Interpret returned false");
         }
     }
 }
@@ -129,6 +129,7 @@ int main(int argc, char* argv[]) {
     }
     const char* cachePath = useCache ? ("data" PATH_DELIMITER_STR "ccache") : nullptr;
     MemoryManager memoryManager(memorySizes);
+    GAPID_INFO("replayd listening on port %s", portStr);
     listenConnections(portStr, cachePath, &memoryManager);
     return EXIT_SUCCESS;
 }

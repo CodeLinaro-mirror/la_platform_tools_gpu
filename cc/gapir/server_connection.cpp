@@ -29,13 +29,13 @@ std::unique_ptr<ServerConnection> ServerConnection::create(
         std::unique_ptr<gapic::Connection> conn) {
     std::string replayId;
     if (!conn->readString(&replayId)) {
-        GAPID_WARNING("Failed to read replay id. Error: %s\n", conn->error());
+        GAPID_WARNING("Failed to read replay id. Error: %s", conn->error());
         return nullptr;
     }
 
     uint32_t replayLen;
     if (conn->recv(&replayLen, sizeof(replayLen)) != sizeof(replayLen)) {
-        GAPID_WARNING("Failed to read replay length. Error: %s\n", conn->error());
+        GAPID_WARNING("Failed to read replay length. Error: %s", conn->error());
         return nullptr;
     }
 
@@ -63,24 +63,24 @@ uint32_t ServerConnection::replayLength() const {
 
 bool ServerConnection::getResources(const std::vector<std::string>& resourceIds, void* target,
                           uint32_t size) const {
-    GAPID_INFO("GET resources (count: %lu, size: %d, target: %p)\n",
+    GAPID_INFO("GET resources (count: %lu, size: %d, target: %p)",
               static_cast<unsigned long>(resourceIds.size()), size, target);
 
     MessageType type = MESSAGE_TYPE_GET;
     if (mConn->send(&type, sizeof(type)) != sizeof(type)) {
-        GAPID_WARNING("Failed to send GET messageType to the server. Error: %s\n", mConn->error());
+        GAPID_WARNING("Failed to send GET messageType to the server. Error: %s", mConn->error());
         return false;
     }
 
     uint32_t count = static_cast<uint32_t>(resourceIds.size());
     if (mConn->send(&count, sizeof(count)) != sizeof(count)) {
-        GAPID_WARNING("Failed to send GET count to the server. Error: %s\n", mConn->error());
+        GAPID_WARNING("Failed to send GET count to the server. Error: %s", mConn->error());
         return false;
     }
 
     for (const auto& res : resourceIds) {
         if (!mConn->sendString(res)) {
-            GAPID_WARNING("Failed to send GET resource id to the server. Error: %s\n",
+            GAPID_WARNING("Failed to send GET resource id to the server. Error: %s",
                 mConn->error());
             return false;
         }
@@ -97,21 +97,21 @@ bool ServerConnection::getResources(const std::vector<std::string>& resourceIds,
 }
 
 bool ServerConnection::post(const void* postData, uint32_t postSize) const {
-    GAPID_INFO("POST: %p (%d)\n", postData, postSize);
+    GAPID_INFO("POST: %p (%d)", postData, postSize);
 
     MessageType type = MESSAGE_TYPE_POST;
     if (mConn->send(&type, sizeof(type)) != sizeof(type)) {
-        GAPID_WARNING("Failed to send POST messageType to the server. Error: %s\n", mConn->error());
+        GAPID_WARNING("Failed to send POST messageType to the server. Error: %s", mConn->error());
         return false;
     }
 
     if (mConn->send(&postSize, sizeof(postSize)) != sizeof(postSize)) {
-        GAPID_WARNING("Failed to send POST length to the server. Error: %s\n", mConn->error());
+        GAPID_WARNING("Failed to send POST length to the server. Error: %s", mConn->error());
         return false;
     }
 
     if (mConn->send(postData, postSize) != postSize) {
-        GAPID_WARNING("Failed to send POST content to the server. Error: %s\n", mConn->error());
+        GAPID_WARNING("Failed to send POST content to the server. Error: %s", mConn->error());
         return false;
     }
 

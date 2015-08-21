@@ -50,7 +50,7 @@ public:
         if (!popCheck("pop")) {
             return T();
         }
-        GAPID_DEBUG("-%s pop()\n", mStack[mTop-1].debugInfo(mMemoryManager));
+        GAPID_DEBUG("-%s pop()", mStack[mTop-1].debugInfo(mMemoryManager));
         return PopImpl<T>::pop(this);
     }
 
@@ -124,7 +124,7 @@ public:
         if (!checkTopForInvalidPointer("push")) {
             return;
         }
-        GAPID_DEBUG("+%s push()\n", mStack[mTop].debugInfo(mMemoryManager));
+        GAPID_DEBUG("+%s push()", mStack[mTop].debugInfo(mMemoryManager));
         mTop++;
     }
 

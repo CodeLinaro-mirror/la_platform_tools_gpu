@@ -1140,9 +1140,9 @@ std::unique_ptr<Spy> gSpy;  // Must be accessed via spy() below, gets destroyed 
 Spy* spy() {
     gapic::Lock<gapic::Mutex> lock(&gMutex);
     if (!gSpy) {
-        GAPID_INFO("Constructing spy...\n");
+        GAPID_INFO("Constructing spy...");
         gSpy.reset(new Spy());
-        GAPID_INFO("Registering spy symbols...\n");
+        GAPID_INFO("Registering spy symbols...");
         gSpy->RegisterSymbol("glBlendBarrierKHR", reinterpret_cast<void*>(glBlendBarrierKHR));
         gSpy->RegisterSymbol("glBlendEquationSeparateiEXT",
                              reinterpret_cast<void*>(glBlendEquationSeparateiEXT));
@@ -2160,7 +2160,7 @@ void* STDCALL GetSpyProcAddress(const char* name) {
     if (void* proc = spy()->LookupSymbol(name)) {
         return proc;
     } else {
-        GAPID_WARNING("%s will NOT be captured.\n", name);
+        GAPID_WARNING("%s will NOT be captured.", name);
         return gapic::GetGfxProcAddress(name, true);
     }
 }

@@ -152,7 +152,7 @@ const char* SocketConnection::error() {
 std::unique_ptr<Connection> SocketConnection::accept() {
     int clientSocket = gapic::accept(mSocket, nullptr, nullptr);
     if (-1 == clientSocket) {
-        GAPID_WARNING("Failed to accept incoming connection: %s\n", strerror(gapic::error()));
+        GAPID_WARNING("Failed to accept incoming connection: %s", strerror(gapic::error()));
         return nullptr;
     }
     return std::unique_ptr<Connection>(new SocketConnection(clientSocket));
@@ -172,7 +172,7 @@ std::unique_ptr<Connection> SocketConnection::createSocket(
 
     const int getaddrinfoRes = gapic::getaddrinfo(hostname, port, &hints, &addr);
     if (0 != getaddrinfoRes) {
-        GAPID_WARNING("getaddrinfo() failed: %d - %s.\n", getaddrinfoRes, strerror(gapic::error()));
+        GAPID_WARNING("getaddrinfo() failed: %d - %s.", getaddrinfoRes, strerror(gapic::error()));
         return nullptr;
     }
     auto addrDeleter = [](struct addrinfo* ptr) { gapic::freeaddrinfo(ptr); };  // deferred.
@@ -180,7 +180,7 @@ std::unique_ptr<Connection> SocketConnection::createSocket(
 
     const int sock = gapic::socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
     if (-1 == sock) {
-        GAPID_WARNING("socket() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("socket() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
     auto socketCloser = [](const int* ptr) { gapic::close(*ptr); };  // deferred.
@@ -188,17 +188,17 @@ std::unique_ptr<Connection> SocketConnection::createSocket(
 
     const int one = 1;
     if (-1 == gapic::setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&one, sizeof(int))) {
-        GAPID_WARNING("setsockopt() failed: %s\n", strerror(gapic::error()));
+        GAPID_WARNING("setsockopt() failed: %s", strerror(gapic::error()));
         return nullptr;
     }
 
     if (-1 == gapic::bind(sock, addr->ai_addr, addr->ai_addrlen)) {
-        GAPID_WARNING("bind() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("bind() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
 
     if (-1 == gapic::listen(sock, 10)) {
-        GAPID_WARNING("listen() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("listen() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
 
@@ -213,7 +213,7 @@ std::unique_ptr<Connection> SocketConnection::createPipe(const char* pipename, b
 #else  // TARGET_OS == GAPID_OS_WINDOWS
     const int sock = gapic::socket(AF_UNIX, SOCK_STREAM, 0);
     if (-1 == sock) {
-        GAPID_WARNING("socket() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("socket() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
     auto socketCloser = [](const int* ptr) { gapic::close(*ptr); };  // deferred.
@@ -237,12 +237,12 @@ std::unique_ptr<Connection> SocketConnection::createPipe(const char* pipename, b
     const size_t pipelen = sizeof(pipe.sun_family) + strlen(pipename) + (abstract ? 1 : 0);
 
     if (-1 == gapic::bind(sock, (struct sockaddr*)&pipe, pipelen)) {
-        GAPID_WARNING("bind() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("bind() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
 
     if (-1 == gapic::listen(sock, 10)) {
-        GAPID_WARNING("listen() failed: %s.\n", strerror(gapic::error()));
+        GAPID_WARNING("listen() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
 
@@ -257,7 +257,7 @@ SocketConnection::NetworkInitializer::NetworkInitializer() {
         WSADATA wsaData;
         int wsaInitRes = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
         if (wsaInitRes != 0) {
-            GAPID_FATAL("WSAStartup failed with error code: %d\n", wsaInitRes);
+            GAPID_FATAL("WSAStartup failed with error code: %d", wsaInitRes);
         }
     }
 #endif  // TARGET_OS == GAPID_OS_WINDOWS

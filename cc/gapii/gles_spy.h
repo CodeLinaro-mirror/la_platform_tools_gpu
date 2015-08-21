@@ -1143,7 +1143,7 @@ inline void GlesSpy::init(std::shared_ptr<gapic::Encoder> encoder) {
 }
 
 inline void GlesSpy::glBlendBarrierKHR() {
-    GAPID_INFO("glBlendBarrierKHR()\n");
+    GAPID_INFO("glBlendBarrierKHR()");
 
     Observations observations;
     do {
@@ -1159,7 +1159,7 @@ inline void GlesSpy::glBlendBarrierKHR() {
 
 inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
                                                  uint32_t modeAlpha) {
-    GAPID_INFO("glBlendEquationSeparateiEXT(%" PRIu32 ", %u, %u)\n", buf, modeRGB, modeAlpha);
+    GAPID_INFO("glBlendEquationSeparateiEXT(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
 
     Observations observations;
     do {
@@ -1174,7 +1174,7 @@ inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
 }
 
 inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
-    GAPID_INFO("glBlendEquationiEXT(%" PRIu32 ", %u)\n", buf, mode);
+    GAPID_INFO("glBlendEquationiEXT(%" PRIu32 ", %u)", buf, mode);
 
     Observations observations;
     do {
@@ -1190,7 +1190,7 @@ inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
 
 inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                              uint32_t srcAlpha, uint32_t dstAlpha) {
-    GAPID_INFO("glBlendFuncSeparateiEXT(%" PRIu32 ", %u, %u, %u, %u)\n", buf, srcRGB, dstRGB,
+    GAPID_INFO("glBlendFuncSeparateiEXT(%" PRIu32 ", %u, %u, %u, %u)", buf, srcRGB, dstRGB,
                srcAlpha, dstAlpha);
 
     Observations observations;
@@ -1207,7 +1207,7 @@ inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint
 }
 
 inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
-    GAPID_INFO("glBlendFunciEXT(%" PRIu32 ", %u, %u)\n", buf, src, dst);
+    GAPID_INFO("glBlendFunciEXT(%" PRIu32 ", %u, %u)", buf, src, dst);
 
     Observations observations;
     do {
@@ -1222,7 +1222,7 @@ inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
 }
 
 inline void GlesSpy::glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    GAPID_INFO("glColorMaskiEXT(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")\n",
+    GAPID_INFO("glColorMaskiEXT(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")",
                index, r, g, b, a);
 
     Observations observations;
@@ -1244,7 +1244,7 @@ inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget,
                                            int32_t srcWidth, int32_t srcHeight, int32_t srcDepth) {
     GAPID_INFO("glCopyImageSubDataEXT(%" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX,
                dstY, dstZ, srcWidth, srcHeight, srcDepth);
 
@@ -1265,7 +1265,7 @@ inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget,
 }
 
 inline void GlesSpy::glDebugMessageCallbackKHR(void* callback, void* userParam) {
-    GAPID_INFO("glDebugMessageCallbackKHR(%p, %p)\n", callback, userParam);
+    GAPID_INFO("glDebugMessageCallbackKHR(%p, %p)", callback, userParam);
 
     Observations observations;
     do {
@@ -1285,7 +1285,7 @@ inline void GlesSpy::glDebugMessageCallbackKHR(void* callback, void* userParam) 
 
 inline void GlesSpy::glDebugMessageControlKHR(uint32_t source, uint32_t type, uint32_t severity,
                                               int32_t count, uint32_t* ids, uint8_t enabled) {
-    GAPID_INFO("glDebugMessageControlKHR(%u, %u, %u, %" PRId32 ", %p, %" PRIu8 ")\n", source, type,
+    GAPID_INFO("glDebugMessageControlKHR(%u, %u, %u, %" PRId32 ", %p, %" PRIu8 ")", source, type,
                severity, count, ids, enabled);
 
     Observations observations;
@@ -1306,7 +1306,7 @@ inline void GlesSpy::glDebugMessageControlKHR(uint32_t source, uint32_t type, ui
 
 inline void GlesSpy::glDebugMessageInsertKHR(uint32_t source, uint32_t type, uint32_t id,
                                              uint32_t severity, int32_t length, char* buf) {
-    GAPID_INFO("glDebugMessageInsertKHR(%u, %u, %" PRIu32 ", %u, %" PRId32 ", %p)\n", source, type,
+    GAPID_INFO("glDebugMessageInsertKHR(%u, %u, %" PRIu32 ", %u, %" PRId32 ", %p)", source, type,
                id, severity, length, buf);
 
     Observations observations;
@@ -1325,7 +1325,7 @@ inline void GlesSpy::glDebugMessageInsertKHR(uint32_t source, uint32_t type, uin
 }
 
 inline void GlesSpy::glDisableiEXT(uint32_t target, uint32_t index) {
-    GAPID_INFO("glDisableiEXT(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glDisableiEXT(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -1340,7 +1340,7 @@ inline void GlesSpy::glDisableiEXT(uint32_t target, uint32_t index) {
 }
 
 inline void GlesSpy::glEnableiEXT(uint32_t target, uint32_t index) {
-    GAPID_INFO("glEnableiEXT(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glEnableiEXT(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -1356,7 +1356,7 @@ inline void GlesSpy::glEnableiEXT(uint32_t target, uint32_t index) {
 
 inline void GlesSpy::glFramebufferTextureEXT(uint32_t target, uint32_t attachment, uint32_t texture,
                                              int32_t level) {
-    GAPID_INFO("glFramebufferTextureEXT(%u, %u, %" PRIu32 ", %" PRId32 ")\n", target, attachment,
+    GAPID_INFO("glFramebufferTextureEXT(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
                texture, level);
 
     Observations observations;
@@ -1376,7 +1376,7 @@ inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize
                                                  uint32_t* types, uint32_t* ids,
                                                  uint32_t* severities, int32_t* lengths,
                                                  char* messageLog) {
-    GAPID_INFO("glGetDebugMessageLogKHR(%" PRIu32 ", %" PRId32 ", %p, %p, %p, %p, %p, %p)\n", count,
+    GAPID_INFO("glGetDebugMessageLogKHR(%" PRIu32 ", %" PRId32 ", %p, %p, %p, %p, %p, %p)", count,
                bufSize, sources, types, ids, severities, lengths, messageLog);
 
     uint32_t result = 0;
@@ -1413,7 +1413,7 @@ inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize
 
 inline void GlesSpy::glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t bufSize,
                                          int32_t* length, char* label) {
-    GAPID_INFO("glGetObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p, %p)\n", identifier, name,
+    GAPID_INFO("glGetObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p, %p)", identifier, name,
                bufSize, length, label);
 
     Observations observations;
@@ -1435,7 +1435,7 @@ inline void GlesSpy::glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int
 
 inline void GlesSpy::glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t* length,
                                             char* label) {
-    GAPID_INFO("glGetObjectPtrLabelKHR(%p, %" PRId32 ", %p, %p)\n", ptr, bufSize, length, label);
+    GAPID_INFO("glGetObjectPtrLabelKHR(%p, %" PRId32 ", %p, %p)", ptr, bufSize, length, label);
 
     Observations observations;
     do {
@@ -1456,7 +1456,7 @@ inline void GlesSpy::glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t*
 }
 
 inline void GlesSpy::glGetPointervKHR(uint32_t pname, void** params) {
-    GAPID_INFO("glGetPointervKHR(%u, %p)\n", pname, params);
+    GAPID_INFO("glGetPointervKHR(%u, %p)", pname, params);
 
     Observations observations;
     do {
@@ -1474,7 +1474,7 @@ inline void GlesSpy::glGetPointervKHR(uint32_t pname, void** params) {
 
 inline void GlesSpy::glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pname,
                                                  int32_t* params) {
-    GAPID_INFO("glGetSamplerParameterIivEXT(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -1493,7 +1493,7 @@ inline void GlesSpy::glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pnam
 
 inline void GlesSpy::glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname,
                                                   uint32_t* params) {
-    GAPID_INFO("glGetSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -1511,7 +1511,7 @@ inline void GlesSpy::glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pna
 }
 
 inline void GlesSpy::glGetTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetTexParameterIivEXT(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetTexParameterIivEXT(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -1528,7 +1528,7 @@ inline void GlesSpy::glGetTexParameterIivEXT(uint32_t target, uint32_t pname, in
 }
 
 inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params) {
-    GAPID_INFO("glGetTexParameterIuivEXT(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -1546,7 +1546,7 @@ inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, u
 }
 
 inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
-    GAPID_INFO("glIsEnablediEXT(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glIsEnablediEXT(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
 
@@ -1566,7 +1566,7 @@ inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
 }
 
 inline void GlesSpy::glMinSampleShadingOES(float value) {
-    GAPID_INFO("glMinSampleShadingOES(%f)\n", value);
+    GAPID_INFO("glMinSampleShadingOES(%f)", value);
 
     Observations observations;
     do {
@@ -1582,7 +1582,7 @@ inline void GlesSpy::glMinSampleShadingOES(float value) {
 
 inline void GlesSpy::glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t length,
                                       char* label) {
-    GAPID_INFO("glObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p)\n", identifier, name, length,
+    GAPID_INFO("glObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p)", identifier, name, length,
                label);
 
     Observations observations;
@@ -1601,7 +1601,7 @@ inline void GlesSpy::glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_
 }
 
 inline void GlesSpy::glObjectPtrLabelKHR(void* ptr, int32_t length, char* label) {
-    GAPID_INFO("glObjectPtrLabelKHR(%p, %" PRId32 ", %p)\n", ptr, length, label);
+    GAPID_INFO("glObjectPtrLabelKHR(%p, %" PRId32 ", %p)", ptr, length, label);
 
     Observations observations;
     do {
@@ -1620,7 +1620,7 @@ inline void GlesSpy::glObjectPtrLabelKHR(void* ptr, int32_t length, char* label)
 }
 
 inline void GlesSpy::glPatchParameteriEXT(uint32_t pname, int32_t value) {
-    GAPID_INFO("glPatchParameteriEXT(%u, %" PRId32 ")\n", pname, value);
+    GAPID_INFO("glPatchParameteriEXT(%u, %" PRId32 ")", pname, value);
 
     Observations observations;
     do {
@@ -1635,7 +1635,7 @@ inline void GlesSpy::glPatchParameteriEXT(uint32_t pname, int32_t value) {
 }
 
 inline void GlesSpy::glPopDebugGroupKHR() {
-    GAPID_INFO("glPopDebugGroupKHR()\n");
+    GAPID_INFO("glPopDebugGroupKHR()");
 
     Observations observations;
     do {
@@ -1651,8 +1651,8 @@ inline void GlesSpy::glPopDebugGroupKHR() {
 
 inline void GlesSpy::glPrimitiveBoundingBoxEXT(float minX, float minY, float minZ, float minW,
                                                float maxX, float maxY, float maxZ, float maxW) {
-    GAPID_INFO("glPrimitiveBoundingBoxEXT(%f, %f, %f, %f, %f, %f, %f, %f)\n", minX, minY, minZ,
-               minW, maxX, maxY, maxZ, maxW);
+    GAPID_INFO("glPrimitiveBoundingBoxEXT(%f, %f, %f, %f, %f, %f, %f, %f)", minX, minY, minZ, minW,
+               maxX, maxY, maxZ, maxW);
 
     Observations observations;
     do {
@@ -1669,7 +1669,7 @@ inline void GlesSpy::glPrimitiveBoundingBoxEXT(float minX, float minY, float min
 
 inline void GlesSpy::glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t length,
                                          char* message) {
-    GAPID_INFO("glPushDebugGroupKHR(%u, %" PRIu32 ", %" PRId32 ", %p)\n", source, id, length,
+    GAPID_INFO("glPushDebugGroupKHR(%u, %" PRIu32 ", %" PRId32 ", %p)", source, id, length,
                message);
 
     Observations observations;
@@ -1688,7 +1688,7 @@ inline void GlesSpy::glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t l
 }
 
 inline void GlesSpy::glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, int32_t* param) {
-    GAPID_INFO("glSamplerParameterIivEXT(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -1706,7 +1706,7 @@ inline void GlesSpy::glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, 
 }
 
 inline void GlesSpy::glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* param) {
-    GAPID_INFO("glSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -1724,7 +1724,7 @@ inline void GlesSpy::glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname,
 }
 
 inline void GlesSpy::glTexBufferEXT(uint32_t target, uint32_t internalformat, uint32_t buffer) {
-    GAPID_INFO("glTexBufferEXT(%u, %u, %" PRIu32 ")\n", target, internalformat, buffer);
+    GAPID_INFO("glTexBufferEXT(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
 
     Observations observations;
     do {
@@ -1740,7 +1740,7 @@ inline void GlesSpy::glTexBufferEXT(uint32_t target, uint32_t internalformat, ui
 
 inline void GlesSpy::glTexBufferRangeEXT(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                          int32_t offset, int32_t size) {
-    GAPID_INFO("glTexBufferRangeEXT(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", target,
+    GAPID_INFO("glTexBufferRangeEXT(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                internalformat, buffer, offset, size);
 
     Observations observations;
@@ -1757,7 +1757,7 @@ inline void GlesSpy::glTexBufferRangeEXT(uint32_t target, uint32_t internalforma
 }
 
 inline void GlesSpy::glTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glTexParameterIivEXT(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameterIivEXT(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -1775,7 +1775,7 @@ inline void GlesSpy::glTexParameterIivEXT(uint32_t target, uint32_t pname, int32
 }
 
 inline void GlesSpy::glTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params) {
-    GAPID_INFO("glTexParameterIuivEXT(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -1797,7 +1797,7 @@ inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t sampl
                                                   int32_t height, int32_t depth,
                                                   uint8_t fixedsamplelocations) {
     GAPID_INFO("glTexStorage3DMultisampleOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRIu8 ")\n",
+               ", %" PRId32 ", %" PRIu8 ")",
                target, samples, internalformat, width, height, depth, fixedsamplelocations);
 
     Observations observations;
@@ -1817,7 +1817,7 @@ inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t sampl
 }
 
 inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
-    GAPID_INFO("glBeginQuery(%u, %" PRIu32 ")\n", target, query);
+    GAPID_INFO("glBeginQuery(%u, %" PRIu32 ")", target, query);
 
     Observations observations;
     do {
@@ -1840,7 +1840,7 @@ inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
 }
 
 inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
-    GAPID_INFO("glDeleteQueries(%" PRId32 ", %p)\n", count, queries);
+    GAPID_INFO("glDeleteQueries(%" PRId32 ", %p)", count, queries);
 
     Observations observations;
     do {
@@ -1865,7 +1865,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
 }
 
 inline void GlesSpy::glEndQuery(uint32_t target) {
-    GAPID_INFO("glEndQuery(%u)\n", target);
+    GAPID_INFO("glEndQuery(%u)", target);
 
     Observations observations;
     do {
@@ -1888,7 +1888,7 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
 }
 
 inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
-    GAPID_INFO("glGenQueries(%" PRId32 ", %p)\n", count, queries);
+    GAPID_INFO("glGenQueries(%" PRId32 ", %p)", count, queries);
 
     Observations observations;
     do {
@@ -1916,7 +1916,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
 }
 
 inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value) {
-    GAPID_INFO("glGetQueryObjectuiv(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjectuiv(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -1942,7 +1942,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
 }
 
 inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
+    GAPID_INFO("glGetQueryiv(%u, %u, %p)", target, parameter, value);
 
     Observations observations;
     do {
@@ -1974,7 +1974,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
 }
 
 inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
-    GAPID_INFO("glIsQuery(%" PRIu32 ")\n", query);
+    GAPID_INFO("glIsQuery(%" PRIu32 ")", query);
 
     uint8_t result = 0;
 
@@ -1998,7 +1998,7 @@ inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
 }
 
 inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
-    GAPID_INFO("glBindBuffer(%u, %" PRIu32 ")\n", target, buffer);
+    GAPID_INFO("glBindBuffer(%u, %" PRIu32 ")", target, buffer);
 
     Observations observations;
     do {
@@ -2045,7 +2045,7 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
 }
 
 inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t buffer) {
-    GAPID_INFO("glBindBufferBase(%u, %" PRIu32 ", %" PRIu32 ")\n", target, index, buffer);
+    GAPID_INFO("glBindBufferBase(%u, %" PRIu32 ", %" PRIu32 ")", target, index, buffer);
 
     Observations observations;
     do {
@@ -2074,8 +2074,8 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
 
 inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t buffer,
                                        int32_t offset, int32_t size) {
-    GAPID_INFO("glBindBufferRange(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n",
-               target, index, buffer, offset, size);
+    GAPID_INFO("glBindBufferRange(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
+               index, buffer, offset, size);
 
     Observations observations;
     do {
@@ -2103,7 +2103,7 @@ inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t
 }
 
 inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uint32_t usage) {
-    GAPID_INFO("glBufferData(%u, %" PRId32 ", %p, %u)\n", target, size, data, usage);
+    GAPID_INFO("glBufferData(%u, %" PRId32 ", %p, %u)", target, size, data, usage);
 
     Observations observations;
     do {
@@ -2176,7 +2176,7 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
 }
 
 inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t size, void* data) {
-    GAPID_INFO("glBufferSubData(%u, %" PRId32 ", %" PRId32 ", %p)\n", target, offset, size, data);
+    GAPID_INFO("glBufferSubData(%u, %" PRId32 ", %" PRId32 ", %p)", target, offset, size, data);
 
     Observations observations;
     do {
@@ -2221,7 +2221,7 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
 
 inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarget,
                                          int32_t readOffset, int32_t writeOffset, int32_t size) {
-    GAPID_INFO("glCopyBufferSubData(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", readTarget,
+    GAPID_INFO("glCopyBufferSubData(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", readTarget,
                writeTarget, readOffset, writeOffset, size);
 
     Observations observations;
@@ -2263,7 +2263,7 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
 }
 
 inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
-    GAPID_INFO("glDeleteBuffers(%" PRId32 ", %p)\n", count, buffers);
+    GAPID_INFO("glDeleteBuffers(%" PRId32 ", %p)", count, buffers);
 
     Observations observations;
     do {
@@ -2288,7 +2288,7 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
 }
 
 inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
-    GAPID_INFO("glGenBuffers(%" PRId32 ", %p)\n", count, buffers);
+    GAPID_INFO("glGenBuffers(%" PRId32 ", %p)", count, buffers);
 
     Observations observations;
     do {
@@ -2316,7 +2316,7 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
 }
 
 inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, int64_t* params) {
-    GAPID_INFO("glGetBufferParameteri64v(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetBufferParameteri64v(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -2357,7 +2357,7 @@ inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, i
 }
 
 inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)\n", target, parameter, value);
+    GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)", target, parameter, value);
 
     Observations observations;
     do {
@@ -2416,7 +2416,7 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
 }
 
 inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void** params) {
-    GAPID_INFO("glGetBufferPointerv(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetBufferPointerv(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -2452,7 +2452,7 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
 }
 
 inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
-    GAPID_INFO("glIsBuffer(%" PRIu32 ")\n", buffer);
+    GAPID_INFO("glIsBuffer(%" PRIu32 ")", buffer);
 
     uint8_t result = 0;
 
@@ -2477,7 +2477,7 @@ inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
 
 inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t length,
                                        uint32_t access) {
-    GAPID_INFO("glMapBufferRange(%u, %" PRId32 ", %" PRId32 ", %u)\n", target, offset, length,
+    GAPID_INFO("glMapBufferRange(%u, %" PRId32 ", %" PRId32 ", %u)", target, offset, length,
                access);
 
     void* result = nullptr;
@@ -2552,7 +2552,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
 }
 
 inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
-    GAPID_INFO("glUnmapBuffer(%u)\n", target);
+    GAPID_INFO("glUnmapBuffer(%u)", target);
 
     uint8_t result = 0;
 
@@ -2602,7 +2602,7 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
 }
 
 inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
-    GAPID_INFO("glDrawArrays(%u, %" PRId32 ", %" PRId32 ")\n", draw_mode, first_index, index_count);
+    GAPID_INFO("glDrawArrays(%u, %" PRId32 ", %" PRId32 ")", draw_mode, first_index, index_count);
 
     Observations observations;
     do {
@@ -2667,7 +2667,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
 }
 
 inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
-    GAPID_INFO("glDrawArraysIndirect(%u, %p)\n", mode, indirect);
+    GAPID_INFO("glDrawArraysIndirect(%u, %p)", mode, indirect);
 
     Observations observations;
     do {
@@ -2697,7 +2697,7 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
 
 inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count,
                                            int32_t instancecount) {
-    GAPID_INFO("glDrawArraysInstanced(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", mode, first,
+    GAPID_INFO("glDrawArraysInstanced(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
                count, instancecount);
 
     Observations observations;
@@ -2726,7 +2726,7 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t
 }
 
 inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
-    GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)\n", n, bufs);
+    GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)", n, bufs);
 
     Observations observations;
     do {
@@ -2745,7 +2745,7 @@ inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
 
 inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                                     uint32_t indices_type, void* indices) {
-    GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)\n", draw_mode, element_count, indices_type,
+    GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)", draw_mode, element_count, indices_type,
                indices);
 
     Observations observations;
@@ -2883,7 +2883,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
 }
 
 inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect) {
-    GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)\n", mode, type, indirect);
+    GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)", mode, type, indirect);
 
     Observations observations;
     do {
@@ -2920,7 +2920,7 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* 
 
 inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type,
                                              void* indices, int32_t instancecount) {
-    GAPID_INFO("glDrawElementsInstanced(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count, type,
+    GAPID_INFO("glDrawElementsInstanced(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count, type,
                indices, instancecount);
 
     Observations observations;
@@ -2960,7 +2960,7 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint3
 
 inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
                                          uint32_t type, void* indices) {
-    GAPID_INFO("glDrawRangeElements(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %u, %p)\n", mode,
+    GAPID_INFO("glDrawRangeElements(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %u, %p)", mode,
                start, end, count, type, indices);
 
     Observations observations;
@@ -2998,7 +2998,7 @@ inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t
 }
 
 inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t program) {
-    GAPID_INFO("glActiveShaderProgramEXT(%" PRIu32 ", %" PRIu32 ")\n", pipeline, program);
+    GAPID_INFO("glActiveShaderProgramEXT(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
 
     Observations observations;
     do {
@@ -3013,7 +3013,7 @@ inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t progra
 }
 
 inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
-    GAPID_INFO("glAlphaFuncQCOM(%u, %f)\n", func, ref);
+    GAPID_INFO("glAlphaFuncQCOM(%u, %f)", func, ref);
 
     Observations observations;
     do {
@@ -3028,7 +3028,7 @@ inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
 }
 
 inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
-    GAPID_INFO("glBeginConditionalRenderNV(%" PRIu32 ", %u)\n", id, mode);
+    GAPID_INFO("glBeginConditionalRenderNV(%" PRIu32 ", %u)", id, mode);
 
     Observations observations;
     do {
@@ -3043,7 +3043,7 @@ inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
 }
 
 inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
-    GAPID_INFO("glBeginPerfMonitorAMD(%" PRIu32 ")\n", monitor);
+    GAPID_INFO("glBeginPerfMonitorAMD(%" PRIu32 ")", monitor);
 
     Observations observations;
     do {
@@ -3058,7 +3058,7 @@ inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
 }
 
 inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
-    GAPID_INFO("glBeginPerfQueryINTEL(%" PRIu32 ")\n", queryHandle);
+    GAPID_INFO("glBeginPerfQueryINTEL(%" PRIu32 ")", queryHandle);
 
     Observations observations;
     do {
@@ -3073,7 +3073,7 @@ inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
 }
 
 inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
-    GAPID_INFO("glBeginQueryEXT(%u, %" PRIu32 ")\n", target, query);
+    GAPID_INFO("glBeginQueryEXT(%u, %" PRIu32 ")", target, query);
 
     Observations observations;
     do {
@@ -3089,7 +3089,7 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
 }
 
 inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
-    GAPID_INFO("glBindProgramPipelineEXT(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glBindProgramPipelineEXT(%" PRIu32 ")", pipeline);
 
     Observations observations;
     do {
@@ -3104,7 +3104,7 @@ inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
 }
 
 inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
-    GAPID_INFO("glBindVertexArrayOES(%" PRIu32 ")\n", array);
+    GAPID_INFO("glBindVertexArrayOES(%" PRIu32 ")", array);
 
     Observations observations;
     do {
@@ -3127,7 +3127,7 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
 }
 
 inline void GlesSpy::glBlendBarrierNV() {
-    GAPID_INFO("glBlendBarrierNV()\n");
+    GAPID_INFO("glBlendBarrierNV()");
 
     Observations observations;
     do {
@@ -3143,7 +3143,7 @@ inline void GlesSpy::glBlendBarrierNV() {
 
 inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
                                                  uint32_t modeAlpha) {
-    GAPID_INFO("glBlendEquationSeparateiOES(%" PRIu32 ", %u, %u)\n", buf, modeRGB, modeAlpha);
+    GAPID_INFO("glBlendEquationSeparateiOES(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
 
     Observations observations;
     do {
@@ -3158,7 +3158,7 @@ inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
 }
 
 inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
-    GAPID_INFO("glBlendEquationiOES(%" PRIu32 ", %u)\n", buf, mode);
+    GAPID_INFO("glBlendEquationiOES(%" PRIu32 ", %u)", buf, mode);
 
     Observations observations;
     do {
@@ -3174,7 +3174,7 @@ inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
 
 inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                              uint32_t srcAlpha, uint32_t dstAlpha) {
-    GAPID_INFO("glBlendFuncSeparateiOES(%" PRIu32 ", %u, %u, %u, %u)\n", buf, srcRGB, dstRGB,
+    GAPID_INFO("glBlendFuncSeparateiOES(%" PRIu32 ", %u, %u, %u, %u)", buf, srcRGB, dstRGB,
                srcAlpha, dstAlpha);
 
     Observations observations;
@@ -3191,7 +3191,7 @@ inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint
 }
 
 inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
-    GAPID_INFO("glBlendFunciOES(%" PRIu32 ", %u, %u)\n", buf, src, dst);
+    GAPID_INFO("glBlendFunciOES(%" PRIu32 ", %u, %u)", buf, src, dst);
 
     Observations observations;
     do {
@@ -3206,7 +3206,7 @@ inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
 }
 
 inline void GlesSpy::glBlendParameteriNV(uint32_t pname, int32_t value) {
-    GAPID_INFO("glBlendParameteriNV(%u, %" PRId32 ")\n", pname, value);
+    GAPID_INFO("glBlendParameteriNV(%u, %" PRId32 ")", pname, value);
 
     Observations observations;
     do {
@@ -3225,7 +3225,7 @@ inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_
                                             int32_t dstX1, int32_t dstY1, uint32_t mask,
                                             uint32_t filter) {
     GAPID_INFO("glBlitFramebufferANGLE(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 
     Observations observations;
@@ -3246,7 +3246,7 @@ inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t s
                                          int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                          uint32_t mask, uint32_t filter) {
     GAPID_INFO("glBlitFramebufferNV(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 
     Observations observations;
@@ -3264,7 +3264,7 @@ inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t s
 }
 
 inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* data, uint32_t flag) {
-    GAPID_INFO("glBufferStorageEXT(%u, %" PRId32 ", %p, %u)\n", target, size, data, flag);
+    GAPID_INFO("glBufferStorageEXT(%u, %" PRId32 ", %p, %u)", target, size, data, flag);
 
     Observations observations;
     do {
@@ -3282,7 +3282,7 @@ inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* dat
 }
 
 inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout) {
-    GAPID_INFO("glClientWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, flag, timeout);
+    GAPID_INFO("glClientWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")", sync, flag, timeout);
 
     uint32_t result = 0;
 
@@ -3302,7 +3302,7 @@ inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uin
 }
 
 inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    GAPID_INFO("glColorMaskiOES(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")\n",
+    GAPID_INFO("glColorMaskiOES(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")",
                index, r, g, b, a);
 
     Observations observations;
@@ -3322,7 +3322,7 @@ inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
                                                int32_t height, int32_t depth, int32_t border,
                                                int32_t imageSize, void* data) {
     GAPID_INFO("glCompressedTexImage3DOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %p)",
                target, level, internalformat, width, height, depth, border, imageSize, data);
 
     Observations observations;
@@ -3346,7 +3346,7 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
                                                   int32_t height, int32_t depth, uint32_t format,
                                                   int32_t imageSize, void* data) {
     GAPID_INFO("glCompressedTexSubImage3DOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize,
                data);
 
@@ -3368,7 +3368,7 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
 
 inline void GlesSpy::glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTarget,
                                            int32_t readOffset, int32_t writeOffset, int32_t size) {
-    GAPID_INFO("glCopyBufferSubDataNV(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", readTarget,
+    GAPID_INFO("glCopyBufferSubDataNV(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", readTarget,
                writeTarget, readOffset, writeOffset, size);
 
     Observations observations;
@@ -3391,7 +3391,7 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
                                            int32_t srcWidth, int32_t srcHeight, int32_t srcDepth) {
     GAPID_INFO("glCopyImageSubDataOES(%" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX,
                dstY, dstZ, srcWidth, srcHeight, srcDepth);
 
@@ -3412,7 +3412,7 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
 }
 
 inline void GlesSpy::glCopyPathNV(uint32_t resultPath, uint32_t srcPath) {
-    GAPID_INFO("glCopyPathNV(%" PRIu32 ", %" PRIu32 ")\n", resultPath, srcPath);
+    GAPID_INFO("glCopyPathNV(%" PRIu32 ", %" PRIu32 ")", resultPath, srcPath);
 
     Observations observations;
     do {
@@ -3430,7 +3430,7 @@ inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int3
                                             int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                             int32_t width, int32_t height) {
     GAPID_INFO("glCopyTexSubImage3DOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, zoffset, x, y, width, height);
 
     Observations observations;
@@ -3449,7 +3449,7 @@ inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int3
 
 inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint32_t sourceTexture,
                                               int32_t sourceBaseLevel, int32_t sourceLevelCount) {
-    GAPID_INFO("glCopyTextureLevelsAPPLE(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glCopyTextureLevelsAPPLE(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount);
 
     Observations observations;
@@ -3469,8 +3469,8 @@ inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint3
 inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                 void* paths, uint32_t pathBase, uint32_t coverMode,
                                                 uint32_t transformType, float* transformValues) {
-    GAPID_INFO("glCoverFillPathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)\n",
-               numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues);
+    GAPID_INFO("glCoverFillPathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)", numPaths,
+               pathNameType, paths, pathBase, coverMode, transformType, transformValues);
 
     Observations observations;
     do {
@@ -3492,7 +3492,7 @@ inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathN
 }
 
 inline void GlesSpy::glCoverFillPathNV(uint32_t path, uint32_t coverMode) {
-    GAPID_INFO("glCoverFillPathNV(%" PRIu32 ", %u)\n", path, coverMode);
+    GAPID_INFO("glCoverFillPathNV(%" PRIu32 ", %u)", path, coverMode);
 
     Observations observations;
     do {
@@ -3510,7 +3510,7 @@ inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pat
                                                   void* paths, uint32_t pathBase,
                                                   uint32_t coverMode, uint32_t transformType,
                                                   float* transformValues) {
-    GAPID_INFO("glCoverStrokePathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)\n",
+    GAPID_INFO("glCoverStrokePathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues);
 
     Observations observations;
@@ -3533,7 +3533,7 @@ inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pat
 }
 
 inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
-    GAPID_INFO("glCoverStrokePathNV(%" PRIu32 ", %u)\n", path, coverMode);
+    GAPID_INFO("glCoverStrokePathNV(%" PRIu32 ", %u)", path, coverMode);
 
     Observations observations;
     do {
@@ -3548,7 +3548,7 @@ inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
 }
 
 inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
-    GAPID_INFO("glCoverageMaskNV(%" PRIu8 ")\n", mask);
+    GAPID_INFO("glCoverageMaskNV(%" PRIu8 ")", mask);
 
     Observations observations;
     do {
@@ -3563,7 +3563,7 @@ inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
 }
 
 inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
-    GAPID_INFO("glCoverageOperationNV(%u)\n", operation);
+    GAPID_INFO("glCoverageOperationNV(%u)", operation);
 
     Observations observations;
     do {
@@ -3578,7 +3578,7 @@ inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
 }
 
 inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHandle) {
-    GAPID_INFO("glCreatePerfQueryINTEL(%" PRIu32 ", %p)\n", queryId, queryHandle);
+    GAPID_INFO("glCreatePerfQueryINTEL(%" PRIu32 ", %p)", queryId, queryHandle);
 
     Observations observations;
     do {
@@ -3595,7 +3595,7 @@ inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHan
 }
 
 inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count, char** strings) {
-    GAPID_INFO("glCreateShaderProgramvEXT(%u, %" PRId32 ", %p)\n", type, count, strings);
+    GAPID_INFO("glCreateShaderProgramvEXT(%u, %" PRId32 ", %p)", type, count, strings);
 
     uint32_t result = 0;
 
@@ -3619,7 +3619,7 @@ inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count,
 }
 
 inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
-    GAPID_INFO("glDeleteFencesNV(%" PRId32 ", %p)\n", n, fences);
+    GAPID_INFO("glDeleteFencesNV(%" PRId32 ", %p)", n, fences);
 
     Observations observations;
     do {
@@ -3636,7 +3636,7 @@ inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
 }
 
 inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
-    GAPID_INFO("glDeletePathsNV(%" PRIu32 ", %" PRId32 ")\n", path, range);
+    GAPID_INFO("glDeletePathsNV(%" PRIu32 ", %" PRId32 ")", path, range);
 
     Observations observations;
     do {
@@ -3651,7 +3651,7 @@ inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
 }
 
 inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
-    GAPID_INFO("glDeletePerfMonitorsAMD(%" PRId32 ", %p)\n", n, monitors);
+    GAPID_INFO("glDeletePerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
 
     Observations observations;
     do {
@@ -3668,7 +3668,7 @@ inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
 }
 
 inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
-    GAPID_INFO("glDeletePerfQueryINTEL(%" PRIu32 ")\n", queryHandle);
+    GAPID_INFO("glDeletePerfQueryINTEL(%" PRIu32 ")", queryHandle);
 
     Observations observations;
     do {
@@ -3683,7 +3683,7 @@ inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
 }
 
 inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
-    GAPID_INFO("glDeleteProgramPipelinesEXT(%" PRId32 ", %p)\n", n, pipelines);
+    GAPID_INFO("glDeleteProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
 
     Observations observations;
     do {
@@ -3700,7 +3700,7 @@ inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines)
 }
 
 inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
-    GAPID_INFO("glDeleteQueriesEXT(%" PRId32 ", %p)\n", count, queries);
+    GAPID_INFO("glDeleteQueriesEXT(%" PRId32 ", %p)", count, queries);
 
     Observations observations;
     do {
@@ -3725,7 +3725,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
 }
 
 inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
-    GAPID_INFO("glDeleteSyncAPPLE(%" PRIu64 ")\n", sync);
+    GAPID_INFO("glDeleteSyncAPPLE(%" PRIu64 ")", sync);
 
     Observations observations;
     do {
@@ -3740,7 +3740,7 @@ inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
 }
 
 inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
-    GAPID_INFO("glDeleteVertexArraysOES(%" PRId32 ", %p)\n", count, arrays);
+    GAPID_INFO("glDeleteVertexArraysOES(%" PRId32 ", %p)", count, arrays);
 
     Observations observations;
     do {
@@ -3766,7 +3766,7 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
 }
 
 inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float* v) {
-    GAPID_INFO("glDepthRangeArrayfvNV(%" PRIu32 ", %" PRId32 ", %p)\n", first, count, v);
+    GAPID_INFO("glDepthRangeArrayfvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
 
     Observations observations;
     do {
@@ -3784,7 +3784,7 @@ inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float*
 }
 
 inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
-    GAPID_INFO("glDepthRangeIndexedfNV(%" PRIu32 ", %f, %f)\n", index, n, f);
+    GAPID_INFO("glDepthRangeIndexedfNV(%" PRIu32 ", %f, %f)", index, n, f);
 
     Observations observations;
     do {
@@ -3799,7 +3799,7 @@ inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
 }
 
 inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
-    GAPID_INFO("glDisableDriverControlQCOM(%" PRIu32 ")\n", driverControl);
+    GAPID_INFO("glDisableDriverControlQCOM(%" PRIu32 ")", driverControl);
 
     Observations observations;
     do {
@@ -3814,7 +3814,7 @@ inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
 }
 
 inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
-    GAPID_INFO("glDisableiNV(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glDisableiNV(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -3829,7 +3829,7 @@ inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
 }
 
 inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
-    GAPID_INFO("glDisableiOES(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glDisableiOES(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -3845,8 +3845,7 @@ inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
 
 inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments,
                                              uint32_t* attachments) {
-    GAPID_INFO("glDiscardFramebufferEXT(%u, %" PRId32 ", %p)\n", target, numAttachments,
-               attachments);
+    GAPID_INFO("glDiscardFramebufferEXT(%u, %" PRId32 ", %p)", target, numAttachments, attachments);
 
     Observations observations;
     do {
@@ -3865,8 +3864,8 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
 
 inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, int32_t count,
                                                 int32_t primcount) {
-    GAPID_INFO("glDrawArraysInstancedANGLE(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", mode,
-               first, count, primcount);
+    GAPID_INFO("glDrawArraysInstancedANGLE(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
+               count, primcount);
 
     Observations observations;
     do {
@@ -3885,7 +3884,7 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
                                                           int32_t count, int32_t instancecount,
                                                           uint32_t baseinstance) {
     GAPID_INFO("glDrawArraysInstancedBaseInstanceEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRIu32 ")\n",
+               ", %" PRIu32 ")",
                mode, first, count, instancecount, baseinstance);
 
     Observations observations;
@@ -3904,7 +3903,7 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
 
 inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int32_t count,
                                               int32_t primcount) {
-    GAPID_INFO("glDrawArraysInstancedEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", mode, start,
+    GAPID_INFO("glDrawArraysInstancedEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, start,
                count, primcount);
 
     Observations observations;
@@ -3922,7 +3921,7 @@ inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int3
 
 inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32_t count,
                                              int32_t primcount) {
-    GAPID_INFO("glDrawArraysInstancedNV(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", mode, first,
+    GAPID_INFO("glDrawArraysInstancedNV(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
                count, primcount);
 
     Observations observations;
@@ -3938,7 +3937,7 @@ inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32
 }
 
 inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
-    GAPID_INFO("glDrawBuffersEXT(%" PRId32 ", %p)\n", n, bufs);
+    GAPID_INFO("glDrawBuffersEXT(%" PRId32 ", %p)", n, bufs);
 
     Observations observations;
     do {
@@ -3955,7 +3954,7 @@ inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
 }
 
 inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int32_t* indices) {
-    GAPID_INFO("glDrawBuffersIndexedEXT(%" PRId32 ", %p, %p)\n", n, location, indices);
+    GAPID_INFO("glDrawBuffersIndexedEXT(%" PRId32 ", %p, %p)", n, location, indices);
 
     Observations observations;
     do {
@@ -3974,7 +3973,7 @@ inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int3
 }
 
 inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
-    GAPID_INFO("glDrawBuffersNV(%" PRId32 ", %p)\n", n, bufs);
+    GAPID_INFO("glDrawBuffersNV(%" PRId32 ", %p)", n, bufs);
 
     Observations observations;
     do {
@@ -3992,7 +3991,7 @@ inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
 
 inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, uint32_t type,
                                                  void* indices, int32_t basevertex) {
-    GAPID_INFO("glDrawElementsBaseVertexEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count,
+    GAPID_INFO("glDrawElementsBaseVertexEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, basevertex);
 
     Observations observations;
@@ -4013,7 +4012,7 @@ inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, u
 
 inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, uint32_t type,
                                                  void* indices, int32_t basevertex) {
-    GAPID_INFO("glDrawElementsBaseVertexOES(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count,
+    GAPID_INFO("glDrawElementsBaseVertexOES(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, basevertex);
 
     Observations observations;
@@ -4034,7 +4033,7 @@ inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, u
 
 inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, uint32_t type,
                                                   void* indices, int32_t primcount) {
-    GAPID_INFO("glDrawElementsInstancedANGLE(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count,
+    GAPID_INFO("glDrawElementsInstancedANGLE(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, primcount);
 
     Observations observations;
@@ -4058,7 +4057,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
                                                             int32_t instancecount,
                                                             uint32_t baseinstance) {
     GAPID_INFO("glDrawElementsInstancedBaseInstanceEXT(%u, %" PRId32 ", %u, %p, %" PRId32
-               ", %" PRIu32 ")\n",
+               ", %" PRIu32 ")",
                mode, count, type, indices, instancecount, baseinstance);
 
     Observations observations;
@@ -4083,7 +4082,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
                                                           int32_t instancecount,
                                                           int32_t basevertex) {
     GAPID_INFO("glDrawElementsInstancedBaseVertexEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                mode, count, type, indices, instancecount, basevertex);
 
     Observations observations;
@@ -4108,7 +4107,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
                                                           int32_t instancecount,
                                                           int32_t basevertex) {
     GAPID_INFO("glDrawElementsInstancedBaseVertexOES(%u, %" PRId32 ", %u, %p, %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                mode, count, type, indices, instancecount, basevertex);
 
     Observations observations;
@@ -4134,7 +4133,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
                                                                       int32_t basevertex,
                                                                       uint32_t baseinstance) {
     GAPID_INFO("glDrawElementsInstancedBaseVertexBaseInstanceEXT(%u, %" PRId32 ", %u, %p, %" PRId32
-               ", %" PRId32 ", %" PRIu32 ")\n",
+               ", %" PRId32 ", %" PRIu32 ")",
                mode, count, type, indices, instancecount, basevertex, baseinstance);
 
     Observations observations;
@@ -4156,7 +4155,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
 
 inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, uint32_t type,
                                                 void* indices, int32_t primcount) {
-    GAPID_INFO("glDrawElementsInstancedEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count,
+    GAPID_INFO("glDrawElementsInstancedEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, primcount);
 
     Observations observations;
@@ -4178,8 +4177,8 @@ inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, ui
 
 inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uint32_t type,
                                                void* indices, int32_t primcount) {
-    GAPID_INFO("glDrawElementsInstancedNV(%u, %" PRId32 ", %u, %p, %" PRId32 ")\n", mode, count,
-               type, indices, primcount);
+    GAPID_INFO("glDrawElementsInstancedNV(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count, type,
+               indices, primcount);
 
     Observations observations;
     do {
@@ -4201,7 +4200,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t st
                                                       int32_t count, uint32_t type, void* indices,
                                                       int32_t basevertex) {
     GAPID_INFO("glDrawRangeElementsBaseVertexEXT(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
-               ", %u, %p, %" PRId32 ")\n",
+               ", %u, %p, %" PRId32 ")",
                mode, start, end, count, type, indices, basevertex);
 
     Observations observations;
@@ -4225,7 +4224,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
                                                       int32_t count, uint32_t type, void* indices,
                                                       int32_t basevertex) {
     GAPID_INFO("glDrawRangeElementsBaseVertexOES(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
-               ", %u, %p, %" PRId32 ")\n",
+               ", %u, %p, %" PRId32 ")",
                mode, start, end, count, type, indices, basevertex);
 
     Observations observations;
@@ -4246,7 +4245,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
 }
 
 inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image) {
-    GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
+    GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)", target, image);
 
     Observations observations;
     do {
@@ -4263,7 +4262,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
 }
 
 inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) {
-    GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
+    GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)", target, image);
 
     Observations observations;
     do {
@@ -4280,7 +4279,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
 }
 
 inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
-    GAPID_INFO("glEnableDriverControlQCOM(%" PRIu32 ")\n", driverControl);
+    GAPID_INFO("glEnableDriverControlQCOM(%" PRIu32 ")", driverControl);
 
     Observations observations;
     do {
@@ -4295,7 +4294,7 @@ inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
 }
 
 inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
-    GAPID_INFO("glEnableiNV(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glEnableiNV(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -4310,7 +4309,7 @@ inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
 }
 
 inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
-    GAPID_INFO("glEnableiOES(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glEnableiOES(%u, %" PRIu32 ")", target, index);
 
     Observations observations;
     do {
@@ -4325,7 +4324,7 @@ inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
 }
 
 inline void GlesSpy::glEndConditionalRenderNV() {
-    GAPID_INFO("glEndConditionalRenderNV()\n");
+    GAPID_INFO("glEndConditionalRenderNV()");
 
     Observations observations;
     do {
@@ -4340,7 +4339,7 @@ inline void GlesSpy::glEndConditionalRenderNV() {
 }
 
 inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
-    GAPID_INFO("glEndPerfMonitorAMD(%" PRIu32 ")\n", monitor);
+    GAPID_INFO("glEndPerfMonitorAMD(%" PRIu32 ")", monitor);
 
     Observations observations;
     do {
@@ -4355,7 +4354,7 @@ inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
 }
 
 inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
-    GAPID_INFO("glEndPerfQueryINTEL(%" PRIu32 ")\n", queryHandle);
+    GAPID_INFO("glEndPerfQueryINTEL(%" PRIu32 ")", queryHandle);
 
     Observations observations;
     do {
@@ -4370,7 +4369,7 @@ inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
 }
 
 inline void GlesSpy::glEndQueryEXT(uint32_t target) {
-    GAPID_INFO("glEndQueryEXT(%u)\n", target);
+    GAPID_INFO("glEndQueryEXT(%u)", target);
 
     Observations observations;
     do {
@@ -4386,7 +4385,7 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
 }
 
 inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
-    GAPID_INFO("glEndTilingQCOM(%u)\n", preserve_mask);
+    GAPID_INFO("glEndTilingQCOM(%u)", preserve_mask);
 
     Observations observations;
     do {
@@ -4401,7 +4400,7 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
 }
 
 inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) {
-    GAPID_INFO("glExtGetBufferPointervQCOM(%u, %p)\n", target, params);
+    GAPID_INFO("glExtGetBufferPointervQCOM(%u, %p)", target, params);
 
     Observations observations;
     do {
@@ -4419,7 +4418,7 @@ inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) 
 
 inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
                                          int32_t* numBuffers) {
-    GAPID_INFO("glExtGetBuffersQCOM(%p, %" PRId32 ", %p)\n", buffers, maxBuffers, numBuffers);
+    GAPID_INFO("glExtGetBuffersQCOM(%p, %" PRId32 ", %p)", buffers, maxBuffers, numBuffers);
 
     Observations observations;
     do {
@@ -4439,7 +4438,7 @@ inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
 
 inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t maxFramebuffers,
                                               int32_t* numFramebuffers) {
-    GAPID_INFO("glExtGetFramebuffersQCOM(%p, %" PRId32 ", %p)\n", framebuffers, maxFramebuffers,
+    GAPID_INFO("glExtGetFramebuffersQCOM(%p, %" PRId32 ", %p)", framebuffers, maxFramebuffers,
                numFramebuffers);
 
     Observations observations;
@@ -4460,7 +4459,7 @@ inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t ma
 
 inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t shadertype,
                                                      char* source, int32_t* length) {
-    GAPID_INFO("glExtGetProgramBinarySourceQCOM(%" PRIu32 ", %u, %p, %p)\n", program, shadertype,
+    GAPID_INFO("glExtGetProgramBinarySourceQCOM(%" PRIu32 ", %u, %p, %p)", program, shadertype,
                source, length);
 
     Observations observations;
@@ -4482,7 +4481,7 @@ inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t 
 
 inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxPrograms,
                                           int32_t* numPrograms) {
-    GAPID_INFO("glExtGetProgramsQCOM(%p, %" PRId32 ", %p)\n", programs, maxPrograms, numPrograms);
+    GAPID_INFO("glExtGetProgramsQCOM(%p, %" PRId32 ", %p)", programs, maxPrograms, numPrograms);
 
     Observations observations;
     do {
@@ -4502,7 +4501,7 @@ inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxProgram
 
 inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t maxRenderbuffers,
                                                int32_t* numRenderbuffers) {
-    GAPID_INFO("glExtGetRenderbuffersQCOM(%p, %" PRId32 ", %p)\n", renderbuffers, maxRenderbuffers,
+    GAPID_INFO("glExtGetRenderbuffersQCOM(%p, %" PRId32 ", %p)", renderbuffers, maxRenderbuffers,
                numRenderbuffers);
 
     Observations observations;
@@ -4523,7 +4522,7 @@ inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t 
 
 inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
                                          int32_t* numShaders) {
-    GAPID_INFO("glExtGetShadersQCOM(%p, %" PRId32 ", %p)\n", shaders, maxShaders, numShaders);
+    GAPID_INFO("glExtGetShadersQCOM(%p, %" PRId32 ", %p)", shaders, maxShaders, numShaders);
 
     Observations observations;
     do {
@@ -4543,7 +4542,7 @@ inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
 
 inline void GlesSpy::glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t face, int32_t level,
                                                      uint32_t pname, int32_t* params) {
-    GAPID_INFO("glExtGetTexLevelParameterivQCOM(%" PRIu32 ", %u, %" PRId32 ", %u, %p)\n", texture,
+    GAPID_INFO("glExtGetTexLevelParameterivQCOM(%" PRIu32 ", %u, %" PRId32 ", %u, %p)", texture,
                face, level, pname, params);
 
     Observations observations;
@@ -4566,7 +4565,7 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
                                              int32_t height, int32_t depth, uint32_t format,
                                              uint32_t type, void* texels) {
     GAPID_INFO("glExtGetTexSubImageQCOM(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                texels);
 
@@ -4588,7 +4587,7 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
 
 inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTextures,
                                           int32_t* numTextures) {
-    GAPID_INFO("glExtGetTexturesQCOM(%p, %" PRId32 ", %p)\n", textures, maxTextures, numTextures);
+    GAPID_INFO("glExtGetTexturesQCOM(%p, %" PRId32 ", %p)", textures, maxTextures, numTextures);
 
     Observations observations;
     do {
@@ -4607,7 +4606,7 @@ inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTexture
 }
 
 inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
-    GAPID_INFO("glExtIsProgramBinaryQCOM(%" PRIu32 ")\n", program);
+    GAPID_INFO("glExtIsProgramBinaryQCOM(%" PRIu32 ")", program);
 
     uint8_t result = 0;
 
@@ -4628,7 +4627,7 @@ inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
 
 inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t pname,
                                                       int32_t param) {
-    GAPID_INFO("glExtTexObjectStateOverrideiQCOM(%u, %u, %" PRId32 ")\n", target, pname, param);
+    GAPID_INFO("glExtTexObjectStateOverrideiQCOM(%u, %u, %" PRId32 ")", target, pname, param);
 
     Observations observations;
     do {
@@ -4643,7 +4642,7 @@ inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t 
 }
 
 inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
-    GAPID_INFO("glFenceSyncAPPLE(%u, %u)\n", condition, flag);
+    GAPID_INFO("glFenceSyncAPPLE(%u, %u)", condition, flag);
 
     uint64_t result = 0;
 
@@ -4663,7 +4662,7 @@ inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
 }
 
 inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
-    GAPID_INFO("glFinishFenceNV(%" PRIu32 ")\n", fence);
+    GAPID_INFO("glFinishFenceNV(%" PRIu32 ")", fence);
 
     Observations observations;
     do {
@@ -4678,8 +4677,7 @@ inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
 }
 
 inline void GlesSpy::glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset, int32_t length) {
-    GAPID_INFO("glFlushMappedBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ")\n", target, offset,
-               length);
+    GAPID_INFO("glFlushMappedBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ")", target, offset, length);
 
     Observations observations;
     do {
@@ -4697,7 +4695,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleEXT(uint32_t target, uint3
                                                           uint32_t textarget, uint32_t texture,
                                                           int32_t level, int32_t samples) {
     GAPID_INFO("glFramebufferTexture2DMultisampleEXT(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                target, attachment, textarget, texture, level, samples);
 
     Observations observations;
@@ -4718,7 +4716,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint3
                                                           uint32_t textarget, uint32_t texture,
                                                           int32_t level, int32_t samples) {
     GAPID_INFO("glFramebufferTexture2DMultisampleIMG(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                target, attachment, textarget, texture, level, samples);
 
     Observations observations;
@@ -4738,7 +4736,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint3
 inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachment,
                                                uint32_t textarget, uint32_t texture, int32_t level,
                                                int32_t zoffset) {
-    GAPID_INFO("glFramebufferTexture3DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glFramebufferTexture3DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                target, attachment, textarget, texture, level, zoffset);
 
     Observations observations;
@@ -4756,7 +4754,7 @@ inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachm
 
 inline void GlesSpy::glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture,
                                              int32_t level) {
-    GAPID_INFO("glFramebufferTextureOES(%u, %u, %" PRIu32 ", %" PRId32 ")\n", target, attachment,
+    GAPID_INFO("glFramebufferTextureOES(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
                texture, level);
 
     Observations observations;
@@ -4776,7 +4774,7 @@ inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t 
                                                       uint32_t texture, int32_t level,
                                                       int32_t baseViewIndex, int32_t numViews) {
     GAPID_INFO("glFramebufferTextureMultiviewOVR(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ")\n",
+               ", %" PRId32 ")",
                target, attachment, texture, level, baseViewIndex, numViews);
 
     Observations observations;
@@ -4794,7 +4792,7 @@ inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t 
 }
 
 inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
-    GAPID_INFO("glGenFencesNV(%" PRId32 ", %p)\n", n, fences);
+    GAPID_INFO("glGenFencesNV(%" PRId32 ", %p)", n, fences);
 
     Observations observations;
     do {
@@ -4811,7 +4809,7 @@ inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
 }
 
 inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
-    GAPID_INFO("glGenPathsNV(%" PRId32 ")\n", range);
+    GAPID_INFO("glGenPathsNV(%" PRId32 ")", range);
 
     uint32_t result = 0;
 
@@ -4831,7 +4829,7 @@ inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
 }
 
 inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
-    GAPID_INFO("glGenPerfMonitorsAMD(%" PRId32 ", %p)\n", n, monitors);
+    GAPID_INFO("glGenPerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
 
     Observations observations;
     do {
@@ -4848,7 +4846,7 @@ inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
 }
 
 inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
-    GAPID_INFO("glGenProgramPipelinesEXT(%" PRId32 ", %p)\n", n, pipelines);
+    GAPID_INFO("glGenProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
 
     Observations observations;
     do {
@@ -4865,7 +4863,7 @@ inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
 }
 
 inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
-    GAPID_INFO("glGenQueriesEXT(%" PRId32 ", %p)\n", count, queries);
+    GAPID_INFO("glGenQueriesEXT(%" PRId32 ", %p)", count, queries);
 
     Observations observations;
     do {
@@ -4893,7 +4891,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
 }
 
 inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
-    GAPID_INFO("glGenVertexArraysOES(%" PRId32 ", %p)\n", count, arrays);
+    GAPID_INFO("glGenVertexArraysOES(%" PRId32 ", %p)", count, arrays);
 
     Observations observations;
     do {
@@ -4921,7 +4919,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
 }
 
 inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, void** params) {
-    GAPID_INFO("glGetBufferPointervOES(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetBufferPointervOES(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -4940,7 +4938,7 @@ inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, voi
 
 inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_t bufSize,
                                                   int32_t* length, char* driverControlString) {
-    GAPID_INFO("glGetDriverControlStringQCOM(%" PRIu32 ", %" PRId32 ", %p, %p)\n", driverControl,
+    GAPID_INFO("glGetDriverControlStringQCOM(%" PRIu32 ", %" PRId32 ", %p, %p)", driverControl,
                bufSize, length, driverControlString);
 
     Observations observations;
@@ -4961,7 +4959,7 @@ inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_
 }
 
 inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_t* driverControls) {
-    GAPID_INFO("glGetDriverControlsQCOM(%p, %" PRId32 ", %p)\n", num, size, driverControls);
+    GAPID_INFO("glGetDriverControlsQCOM(%p, %" PRId32 ", %p)", num, size, driverControls);
 
     Observations observations;
     do {
@@ -4980,7 +4978,7 @@ inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_
 }
 
 inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetFenceivNV(%" PRIu32 ", %u, %p)\n", fence, pname, params);
+    GAPID_INFO("glGetFenceivNV(%" PRIu32 ", %u, %p)", fence, pname, params);
 
     Observations observations;
     do {
@@ -4997,7 +4995,7 @@ inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* par
 }
 
 inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
-    GAPID_INFO("glGetFirstPerfQueryIdINTEL(%p)\n", queryId);
+    GAPID_INFO("glGetFirstPerfQueryIdINTEL(%p)", queryId);
 
     Observations observations;
     do {
@@ -5014,7 +5012,7 @@ inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
 }
 
 inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* data) {
-    GAPID_INFO("glGetFloati_vNV(%u, %" PRIu32 ", %p)\n", target, index, data);
+    GAPID_INFO("glGetFloati_vNV(%u, %" PRIu32 ", %p)", target, index, data);
 
     Observations observations;
     do {
@@ -5032,7 +5030,7 @@ inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* dat
 }
 
 inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
-    GAPID_INFO("glGetGraphicsResetStatusEXT()\n");
+    GAPID_INFO("glGetGraphicsResetStatusEXT()");
 
     uint32_t result = 0;
 
@@ -5052,7 +5050,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
 }
 
 inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
-    GAPID_INFO("glGetGraphicsResetStatusKHR()\n");
+    GAPID_INFO("glGetGraphicsResetStatusKHR()");
 
     uint32_t result = 0;
 
@@ -5073,8 +5071,8 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
 
 inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uint8_t layered,
                                             int32_t layer, uint32_t format) {
-    GAPID_INFO("glGetImageHandleNV(%" PRIu32 ", %" PRId32 ", %" PRIu8 ", %" PRId32 ", %u)\n",
-               texture, level, layered, layer, format);
+    GAPID_INFO("glGetImageHandleNV(%" PRIu32 ", %" PRId32 ", %" PRIu8 ", %" PRId32 ", %u)", texture,
+               level, layered, layer, format);
 
     uint64_t result = 0;
 
@@ -5095,7 +5093,7 @@ inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uin
 }
 
 inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
-    GAPID_INFO("glGetInteger64vAPPLE(%u, %p)\n", pname, params);
+    GAPID_INFO("glGetInteger64vAPPLE(%u, %p)", pname, params);
 
     Observations observations;
     do {
@@ -5112,7 +5110,7 @@ inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
 }
 
 inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t* data) {
-    GAPID_INFO("glGetIntegeri_vEXT(%u, %" PRIu32 ", %p)\n", target, index, data);
+    GAPID_INFO("glGetIntegeri_vEXT(%u, %" PRIu32 ", %p)", target, index, data);
 
     Observations observations;
     do {
@@ -5131,7 +5129,7 @@ inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t
 inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t internalformat,
                                                    int32_t samples, uint32_t pname, int32_t bufSize,
                                                    int32_t* params) {
-    GAPID_INFO("glGetInternalformatSampleivNV(%u, %u, %" PRId32 ", %u, %" PRId32 ", %p)\n", target,
+    GAPID_INFO("glGetInternalformatSampleivNV(%u, %u, %" PRId32 ", %u, %" PRId32 ", %p)", target,
                internalformat, samples, pname, bufSize, params);
 
     Observations observations;
@@ -5151,7 +5149,7 @@ inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t int
 }
 
 inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQueryId) {
-    GAPID_INFO("glGetNextPerfQueryIdINTEL(%" PRIu32 ", %p)\n", queryId, nextQueryId);
+    GAPID_INFO("glGetNextPerfQueryIdINTEL(%" PRIu32 ", %p)", queryId, nextQueryId);
 
     Observations observations;
     do {
@@ -5169,7 +5167,7 @@ inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQ
 
 inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t bufSize,
                                          int32_t* length, char* label) {
-    GAPID_INFO("glGetObjectLabelEXT(%u, %" PRIu32 ", %" PRId32 ", %p, %p)\n", type, object, bufSize,
+    GAPID_INFO("glGetObjectLabelEXT(%u, %" PRIu32 ", %" PRId32 ", %p, %p)", type, object, bufSize,
                length, label);
 
     Observations observations;
@@ -5190,7 +5188,7 @@ inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t
 }
 
 inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
-    GAPID_INFO("glGetPathCommandsNV(%" PRIu32 ", %p)\n", path, commands);
+    GAPID_INFO("glGetPathCommandsNV(%" PRIu32 ", %p)", path, commands);
 
     Observations observations;
     do {
@@ -5207,7 +5205,7 @@ inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
 }
 
 inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
-    GAPID_INFO("glGetPathCoordsNV(%" PRIu32 ", %p)\n", path, coords);
+    GAPID_INFO("glGetPathCoordsNV(%" PRIu32 ", %p)", path, coords);
 
     Observations observations;
     do {
@@ -5224,7 +5222,7 @@ inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
 }
 
 inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
-    GAPID_INFO("glGetPathDashArrayNV(%" PRIu32 ", %p)\n", path, dashArray);
+    GAPID_INFO("glGetPathDashArrayNV(%" PRIu32 ", %p)", path, dashArray);
 
     Observations observations;
     do {
@@ -5241,7 +5239,7 @@ inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
 }
 
 inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int32_t numSegments) {
-    GAPID_INFO("glGetPathLengthNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", path, startSegment,
+    GAPID_INFO("glGetPathLengthNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", path, startSegment,
                numSegments);
 
     float result = 0;
@@ -5264,7 +5262,7 @@ inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int
 
 inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t firstPathName,
                                             int32_t numPaths, int32_t stride, float* metrics) {
-    GAPID_INFO("glGetPathMetricRangeNV(%u, %" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n",
+    GAPID_INFO("glGetPathMetricRangeNV(%u, %" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)",
                metricQueryMask, firstPathName, numPaths, stride, metrics);
 
     Observations observations;
@@ -5285,7 +5283,7 @@ inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t f
 inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPaths,
                                         uint32_t pathNameType, void* paths, uint32_t pathBase,
                                         int32_t stride, float* metrics) {
-    GAPID_INFO("glGetPathMetricsNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %" PRId32 ", %p)\n",
+    GAPID_INFO("glGetPathMetricsNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %" PRId32 ", %p)",
                metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics);
 
     Observations observations;
@@ -5307,7 +5305,7 @@ inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPat
 }
 
 inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float* value) {
-    GAPID_INFO("glGetPathParameterfvNV(%" PRIu32 ", %u, %p)\n", path, pname, value);
+    GAPID_INFO("glGetPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
 
     Observations observations;
     do {
@@ -5324,7 +5322,7 @@ inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float
 }
 
 inline void GlesSpy::glGetPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value) {
-    GAPID_INFO("glGetPathParameterivNV(%" PRIu32 ", %u, %p)\n", path, pname, value);
+    GAPID_INFO("glGetPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
 
     Observations observations;
     do {
@@ -5344,7 +5342,7 @@ inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
                                         uint32_t pathNameType, void* paths, uint32_t pathBase,
                                         float advanceScale, float kerningScale,
                                         uint32_t transformType, float* returnedSpacing) {
-    GAPID_INFO("glGetPathSpacingNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %f, %f, %u, %p)\n",
+    GAPID_INFO("glGetPathSpacingNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %f, %f, %u, %p)",
                pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale,
                transformType, returnedSpacing);
 
@@ -5375,7 +5373,7 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
                                                uint32_t* counterDataTypeEnum,
                                                uint64_t* rawCounterMaxValue) {
     GAPID_INFO("glGetPerfCounterInfoINTEL(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %p, %" PRIu32
-               ", %p, %p, %p, %p, %p, %p)\n",
+               ", %p, %p, %p, %p, %p, %p)",
                queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc,
                counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum,
                rawCounterMaxValue);
@@ -5413,7 +5411,7 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
 inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t pname,
                                                     int32_t dataSize, uint32_t* data,
                                                     int32_t* bytesWritten) {
-    GAPID_INFO("glGetPerfMonitorCounterDataAMD(%" PRIu32 ", %u, %" PRId32 ", %p, %p)\n", monitor,
+    GAPID_INFO("glGetPerfMonitorCounterDataAMD(%" PRIu32 ", %u, %" PRId32 ", %p, %p)", monitor,
                pname, dataSize, data, bytesWritten);
 
     Observations observations;
@@ -5435,7 +5433,7 @@ inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t p
 
 inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t counter,
                                                     uint32_t pname, void* data) {
-    GAPID_INFO("glGetPerfMonitorCounterInfoAMD(%" PRIu32 ", %" PRIu32 ", %u, %p)\n", group, counter,
+    GAPID_INFO("glGetPerfMonitorCounterInfoAMD(%" PRIu32 ", %" PRIu32 ", %u, %p)", group, counter,
                pname, data);
 
     Observations observations;
@@ -5456,7 +5454,7 @@ inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t cou
 inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t counter,
                                                       int32_t bufSize, int32_t* length,
                                                       char* counterString) {
-    GAPID_INFO("glGetPerfMonitorCounterStringAMD(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)\n",
+    GAPID_INFO("glGetPerfMonitorCounterStringAMD(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                group, counter, bufSize, length, counterString);
 
     Observations observations;
@@ -5479,7 +5477,7 @@ inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t c
 inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCounters,
                                                  int32_t* maxActiveCounters, int32_t counterSize,
                                                  uint32_t* counters) {
-    GAPID_INFO("glGetPerfMonitorCountersAMD(%" PRIu32 ", %p, %p, %" PRId32 ", %p)\n", group,
+    GAPID_INFO("glGetPerfMonitorCountersAMD(%" PRIu32 ", %p, %p, %" PRId32 ", %p)", group,
                numCounters, maxActiveCounters, counterSize, counters);
 
     Observations observations;
@@ -5503,7 +5501,7 @@ inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCou
 
 inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufSize,
                                                     int32_t* length, char* groupString) {
-    GAPID_INFO("glGetPerfMonitorGroupStringAMD(%" PRIu32 ", %" PRId32 ", %p, %p)\n", group, bufSize,
+    GAPID_INFO("glGetPerfMonitorGroupStringAMD(%" PRIu32 ", %" PRId32 ", %p, %p)", group, bufSize,
                length, groupString);
 
     Observations observations;
@@ -5525,7 +5523,7 @@ inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufS
 
 inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t groupsSize,
                                                uint32_t* groups) {
-    GAPID_INFO("glGetPerfMonitorGroupsAMD(%p, %" PRId32 ", %p)\n", numGroups, groupsSize, groups);
+    GAPID_INFO("glGetPerfMonitorGroupsAMD(%p, %" PRId32 ", %p)", numGroups, groupsSize, groups);
 
     Observations observations;
     do {
@@ -5545,7 +5543,7 @@ inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t group
 
 inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag, int32_t dataSize,
                                              void* data, uint32_t* bytesWritten) {
-    GAPID_INFO("glGetPerfQueryDataINTEL(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)\n",
+    GAPID_INFO("glGetPerfQueryDataINTEL(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                queryHandle, flag, dataSize, data, bytesWritten);
 
     Observations observations;
@@ -5566,7 +5564,7 @@ inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag
 }
 
 inline void GlesSpy::glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* queryId) {
-    GAPID_INFO("glGetPerfQueryIdByNameINTEL(%p, %p)\n", queryName, queryId);
+    GAPID_INFO("glGetPerfQueryIdByNameINTEL(%p, %p)", queryName, queryId);
 
     Observations observations;
     do {
@@ -5588,7 +5586,7 @@ inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNam
                                              char* queryName, uint32_t* dataSize,
                                              uint32_t* noCounters, uint32_t* noInstances,
                                              uint32_t* capsMask) {
-    GAPID_INFO("glGetPerfQueryInfoINTEL(%" PRIu32 ", %" PRIu32 ", %p, %p, %p, %p, %p)\n", queryId,
+    GAPID_INFO("glGetPerfQueryInfoINTEL(%" PRIu32 ", %" PRIu32 ", %p, %p, %p, %p, %p)", queryId,
                queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask);
 
     Observations observations;
@@ -5618,8 +5616,8 @@ inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNam
 inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size,
                                            int32_t* bytes_written, uint32_t* binary_format,
                                            void* binary) {
-    GAPID_INFO("glGetProgramBinaryOES(%" PRIu32 ", %" PRId32 ", %p, %p, %p)\n", program,
-               buffer_size, bytes_written, binary_format, binary);
+    GAPID_INFO("glGetProgramBinaryOES(%" PRIu32 ", %" PRId32 ", %p, %p, %p)", program, buffer_size,
+               bytes_written, binary_format, binary);
 
     Observations observations;
     do {
@@ -5646,7 +5644,7 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
 
 inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t bufSize,
                                                     int32_t* length, char* infoLog) {
-    GAPID_INFO("glGetProgramPipelineInfoLogEXT(%" PRIu32 ", %" PRId32 ", %p, %p)\n", pipeline,
+    GAPID_INFO("glGetProgramPipelineInfoLogEXT(%" PRIu32 ", %" PRId32 ", %p, %p)", pipeline,
                bufSize, length, infoLog);
 
     Observations observations;
@@ -5667,7 +5665,7 @@ inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t b
 }
 
 inline void GlesSpy::glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetProgramPipelineivEXT(%" PRIu32 ", %u, %p)\n", pipeline, pname, params);
+    GAPID_INFO("glGetProgramPipelineivEXT(%" PRIu32 ", %u, %p)", pipeline, pname, params);
 
     Observations observations;
     do {
@@ -5688,7 +5686,7 @@ inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t program
                                               uint32_t index, int32_t propCount, uint32_t* props,
                                               int32_t bufSize, int32_t* length, float* params) {
     GAPID_INFO("glGetProgramResourcefvNV(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %" PRId32
-               ", %p, %p)\n",
+               ", %p, %p)",
                program, programInterface, index, propCount, props, bufSize, length, params);
 
     Observations observations;
@@ -5712,7 +5710,7 @@ inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t program
 }
 
 inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter, int64_t* value) {
-    GAPID_INFO("glGetQueryObjecti64vEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjecti64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -5731,7 +5729,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
 }
 
 inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryObjectivEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjectivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -5750,7 +5748,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
 }
 
 inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter, uint64_t* value) {
-    GAPID_INFO("glGetQueryObjectui64vEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjectui64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -5769,7 +5767,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
 }
 
 inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, uint32_t* value) {
-    GAPID_INFO("glGetQueryObjectuivEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjectuivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -5789,7 +5787,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
 }
 
 inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
+    GAPID_INFO("glGetQueryivEXT(%u, %u, %p)", target, parameter, value);
 
     Observations observations;
     do {
@@ -5810,7 +5808,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
 
 inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pname,
                                                  int32_t* params) {
-    GAPID_INFO("glGetSamplerParameterIivOES(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -5829,7 +5827,7 @@ inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pnam
 
 inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
                                                   uint32_t* params) {
-    GAPID_INFO("glGetSamplerParameterIuivOES(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -5848,7 +5846,7 @@ inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pna
 
 inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t bufSize,
                                       int32_t* length, int32_t* values) {
-    GAPID_INFO("glGetSyncivAPPLE(%" PRIu64 ", %u, %" PRId32 ", %p, %p)\n", sync, pname, bufSize,
+    GAPID_INFO("glGetSyncivAPPLE(%" PRIu64 ", %u, %" PRId32 ", %p, %p)", sync, pname, bufSize,
                length, values);
 
     Observations observations;
@@ -5869,7 +5867,7 @@ inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t buf
 }
 
 inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetTexParameterIivOES(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetTexParameterIivOES(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -5886,7 +5884,7 @@ inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, in
 }
 
 inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params) {
-    GAPID_INFO("glGetTexParameterIuivOES(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetTexParameterIuivOES(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -5904,7 +5902,7 @@ inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, u
 }
 
 inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
-    GAPID_INFO("glGetTextureHandleNV(%" PRIu32 ")\n", texture);
+    GAPID_INFO("glGetTextureHandleNV(%" PRIu32 ")", texture);
 
     uint64_t result = 0;
 
@@ -5924,7 +5922,7 @@ inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
 }
 
 inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t sampler) {
-    GAPID_INFO("glGetTextureSamplerHandleNV(%" PRIu32 ", %" PRIu32 ")\n", texture, sampler);
+    GAPID_INFO("glGetTextureSamplerHandleNV(%" PRIu32 ", %" PRIu32 ")", texture, sampler);
 
     uint64_t result = 0;
 
@@ -5945,7 +5943,7 @@ inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t 
 
 inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t bufsize,
                                                       int32_t* length, char* source) {
-    GAPID_INFO("glGetTranslatedShaderSourceANGLE(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader,
+    GAPID_INFO("glGetTranslatedShaderSourceANGLE(%" PRIu32 ", %" PRId32 ", %p, %p)", shader,
                bufsize, length, source);
 
     Observations observations;
@@ -5967,7 +5965,7 @@ inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t b
 
 inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int32_t bufSize,
                                         float* params) {
-    GAPID_INFO("glGetnUniformfvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program, location,
+    GAPID_INFO("glGetnUniformfvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
 
     Observations observations;
@@ -5987,7 +5985,7 @@ inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int32_t bufSize,
                                         float* params) {
-    GAPID_INFO("glGetnUniformfvKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program, location,
+    GAPID_INFO("glGetnUniformfvKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
 
     Observations observations;
@@ -6007,7 +6005,7 @@ inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int32_t bufSize,
                                         int32_t* params) {
-    GAPID_INFO("glGetnUniformivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program, location,
+    GAPID_INFO("glGetnUniformivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
 
     Observations observations;
@@ -6027,7 +6025,7 @@ inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                         int32_t* params) {
-    GAPID_INFO("glGetnUniformivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program, location,
+    GAPID_INFO("glGetnUniformivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
 
     Observations observations;
@@ -6047,8 +6045,8 @@ inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                          uint32_t* params) {
-    GAPID_INFO("glGetnUniformuivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, bufSize, params);
+    GAPID_INFO("glGetnUniformuivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               bufSize, params);
 
     Observations observations;
     do {
@@ -6066,7 +6064,7 @@ inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int
 }
 
 inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
-    GAPID_INFO("glInsertEventMarkerEXT(%" PRId32 ", %p)\n", length, marker);
+    GAPID_INFO("glInsertEventMarkerEXT(%" PRId32 ", %p)", length, marker);
 
     Observations observations;
     do {
@@ -6089,8 +6087,8 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
 
 inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB,
                                           float weight) {
-    GAPID_INFO("glInterpolatePathsNV(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %f)\n", resultPath,
-               pathA, pathB, weight);
+    GAPID_INFO("glInterpolatePathsNV(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %f)", resultPath, pathA,
+               pathB, weight);
 
     Observations observations;
     do {
@@ -6105,7 +6103,7 @@ inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, u
 }
 
 inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
-    GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
 
@@ -6125,7 +6123,7 @@ inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
 }
 
 inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
-    GAPID_INFO("glIsEnablediNV(%u, %" PRIu32 ")\n", target, index);
+    GAPID_INFO("glIsEnablediNV(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
 
@@ -6145,7 +6143,7 @@ inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
 }
 
 inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
-    GAPID_INFO("glIsFenceNV(%" PRIu32 ")\n", fence);
+    GAPID_INFO("glIsFenceNV(%" PRIu32 ")", fence);
 
     uint8_t result = 0;
 
@@ -6165,7 +6163,7 @@ inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
 }
 
 inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
-    GAPID_INFO("glIsImageHandleResidentNV(%" PRIu64 ")\n", handle);
+    GAPID_INFO("glIsImageHandleResidentNV(%" PRIu64 ")", handle);
 
     uint8_t result = 0;
 
@@ -6185,7 +6183,7 @@ inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
 }
 
 inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
-    GAPID_INFO("glIsPathNV(%" PRIu32 ")\n", path);
+    GAPID_INFO("glIsPathNV(%" PRIu32 ")", path);
 
     uint8_t result = 0;
 
@@ -6205,7 +6203,7 @@ inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
 }
 
 inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
-    GAPID_INFO("glIsPointInFillPathNV(%" PRIu32 ", %" PRIu32 ", %f, %f)\n", path, mask, x, y);
+    GAPID_INFO("glIsPointInFillPathNV(%" PRIu32 ", %" PRIu32 ", %f, %f)", path, mask, x, y);
 
     uint8_t result = 0;
 
@@ -6225,7 +6223,7 @@ inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, floa
 }
 
 inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y) {
-    GAPID_INFO("glIsPointInStrokePathNV(%" PRIu32 ", %f, %f)\n", path, x, y);
+    GAPID_INFO("glIsPointInStrokePathNV(%" PRIu32 ", %f, %f)", path, x, y);
 
     uint8_t result = 0;
 
@@ -6245,7 +6243,7 @@ inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y)
 }
 
 inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
-    GAPID_INFO("glIsProgramPipelineEXT(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glIsProgramPipelineEXT(%" PRIu32 ")", pipeline);
 
     uint8_t result = 0;
 
@@ -6265,7 +6263,7 @@ inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
 }
 
 inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
-    GAPID_INFO("glIsQueryEXT(%" PRIu32 ")\n", query);
+    GAPID_INFO("glIsQueryEXT(%" PRIu32 ")", query);
 
     uint8_t result = 0;
 
@@ -6289,7 +6287,7 @@ inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
 }
 
 inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
-    GAPID_INFO("glIsSyncAPPLE(%" PRIu64 ")\n", sync);
+    GAPID_INFO("glIsSyncAPPLE(%" PRIu64 ")", sync);
 
     uint8_t result = 0;
 
@@ -6309,7 +6307,7 @@ inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
 }
 
 inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
-    GAPID_INFO("glIsTextureHandleResidentNV(%" PRIu64 ")\n", handle);
+    GAPID_INFO("glIsTextureHandleResidentNV(%" PRIu64 ")", handle);
 
     uint8_t result = 0;
 
@@ -6329,7 +6327,7 @@ inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
 }
 
 inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
-    GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")\n", array);
+    GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")", array);
 
     uint8_t result = 0;
 
@@ -6352,7 +6350,7 @@ inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
 }
 
 inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t length, char* label) {
-    GAPID_INFO("glLabelObjectEXT(%u, %" PRIu32 ", %" PRId32 ", %p)\n", type, object, length, label);
+    GAPID_INFO("glLabelObjectEXT(%u, %" PRIu32 ", %" PRId32 ", %p)", type, object, length, label);
 
     Observations observations;
     do {
@@ -6370,7 +6368,7 @@ inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t le
 }
 
 inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
-    GAPID_INFO("glMakeImageHandleNonResidentNV(%" PRIu64 ")\n", handle);
+    GAPID_INFO("glMakeImageHandleNonResidentNV(%" PRIu64 ")", handle);
 
     Observations observations;
     do {
@@ -6385,7 +6383,7 @@ inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
 }
 
 inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t access) {
-    GAPID_INFO("glMakeImageHandleResidentNV(%" PRIu64 ", %u)\n", handle, access);
+    GAPID_INFO("glMakeImageHandleResidentNV(%" PRIu64 ", %u)", handle, access);
 
     Observations observations;
     do {
@@ -6400,7 +6398,7 @@ inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t acces
 }
 
 inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
-    GAPID_INFO("glMakeTextureHandleNonResidentNV(%" PRIu64 ")\n", handle);
+    GAPID_INFO("glMakeTextureHandleNonResidentNV(%" PRIu64 ")", handle);
 
     Observations observations;
     do {
@@ -6415,7 +6413,7 @@ inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
 }
 
 inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
-    GAPID_INFO("glMakeTextureHandleResidentNV(%" PRIu64 ")\n", handle);
+    GAPID_INFO("glMakeTextureHandleResidentNV(%" PRIu64 ")", handle);
 
     Observations observations;
     do {
@@ -6430,7 +6428,7 @@ inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
 }
 
 inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
-    GAPID_INFO("glMapBufferOES(%u, %u)\n", target, access);
+    GAPID_INFO("glMapBufferOES(%u, %u)", target, access);
 
     void* result = nullptr;
 
@@ -6453,7 +6451,7 @@ inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
 
 inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32_t length,
                                           uint32_t access) {
-    GAPID_INFO("glMapBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ", %u)\n", target, offset, length,
+    GAPID_INFO("glMapBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ", %u)", target, offset, length,
                access);
 
     void* result = nullptr;
@@ -6477,7 +6475,7 @@ inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32
 }
 
 inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixLoad3x2fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixLoad3x2fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6494,7 +6492,7 @@ inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
 }
 
 inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixLoad3x3fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixLoad3x3fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6511,7 +6509,7 @@ inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
 }
 
 inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixLoadTranspose3x3fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixLoadTranspose3x3fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6528,7 +6526,7 @@ inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) 
 }
 
 inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixMult3x2fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixMult3x2fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6545,7 +6543,7 @@ inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
 }
 
 inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixMult3x3fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixMult3x3fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6562,7 +6560,7 @@ inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
 }
 
 inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) {
-    GAPID_INFO("glMatrixMultTranspose3x3fNV(%u, %p)\n", matrixMode, m);
+    GAPID_INFO("glMatrixMultTranspose3x3fNV(%u, %p)", matrixMode, m);
 
     Observations observations;
     do {
@@ -6580,7 +6578,7 @@ inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) 
 
 inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t* count,
                                           int32_t primcount) {
-    GAPID_INFO("glMultiDrawArraysEXT(%u, %p, %p, %" PRId32 ")\n", mode, first, count, primcount);
+    GAPID_INFO("glMultiDrawArraysEXT(%u, %p, %p, %" PRId32 ")", mode, first, count, primcount);
 
     Observations observations;
     do {
@@ -6601,7 +6599,7 @@ inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t
 
 inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect, int32_t drawcount,
                                                   int32_t stride) {
-    GAPID_INFO("glMultiDrawArraysIndirectEXT(%u, %p, %" PRId32 ", %" PRId32 ")\n", mode, indirect,
+    GAPID_INFO("glMultiDrawArraysIndirectEXT(%u, %p, %" PRId32 ", %" PRId32 ")", mode, indirect,
                drawcount, stride);
 
     Observations observations;
@@ -6622,7 +6620,7 @@ inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect,
 inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* count, uint32_t type,
                                                       void** indices, int32_t primcount,
                                                       int32_t* basevertex) {
-    GAPID_INFO("glMultiDrawElementsBaseVertexEXT(%u, %p, %u, %p, %" PRId32 ", %p)\n", mode, count,
+    GAPID_INFO("glMultiDrawElementsBaseVertexEXT(%u, %p, %u, %p, %" PRId32 ", %p)", mode, count,
                type, indices, primcount, basevertex);
 
     Observations observations;
@@ -6647,7 +6645,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* co
 inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* count, uint32_t type,
                                                       void** indices, int32_t primcount,
                                                       int32_t* basevertex) {
-    GAPID_INFO("glMultiDrawElementsBaseVertexOES(%u, %p, %u, %p, %" PRId32 ", %p)\n", mode, count,
+    GAPID_INFO("glMultiDrawElementsBaseVertexOES(%u, %p, %u, %p, %" PRId32 ", %p)", mode, count,
                type, indices, primcount, basevertex);
 
     Observations observations;
@@ -6671,7 +6669,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* co
 
 inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint32_t type,
                                             void** indices, int32_t primcount) {
-    GAPID_INFO("glMultiDrawElementsEXT(%u, %p, %u, %p, %" PRId32 ")\n", mode, count, type, indices,
+    GAPID_INFO("glMultiDrawElementsEXT(%u, %p, %u, %p, %" PRId32 ")", mode, count, type, indices,
                primcount);
 
     Observations observations;
@@ -6693,7 +6691,7 @@ inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint3
 
 inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type, void* indirect,
                                                     int32_t drawcount, int32_t stride) {
-    GAPID_INFO("glMultiDrawElementsIndirectEXT(%u, %u, %p, %" PRId32 ", %" PRId32 ")\n", mode, type,
+    GAPID_INFO("glMultiDrawElementsIndirectEXT(%u, %u, %p, %" PRId32 ", %" PRId32 ")", mode, type,
                indirect, drawcount, stride);
 
     Observations observations;
@@ -6712,7 +6710,7 @@ inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type
 }
 
 inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
-    GAPID_INFO("glPatchParameteriOES(%u, %" PRId32 ")\n", pname, value);
+    GAPID_INFO("glPatchParameteriOES(%u, %" PRId32 ")", pname, value);
 
     Observations observations;
     do {
@@ -6728,7 +6726,7 @@ inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
 
 inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_t* commands,
                                       int32_t numCoords, uint32_t coordType, void* coords) {
-    GAPID_INFO("glPathCommandsNV(%" PRIu32 ", %" PRId32 ", %p, %" PRId32 ", %u, %p)\n", path,
+    GAPID_INFO("glPathCommandsNV(%" PRIu32 ", %" PRId32 ", %p, %" PRId32 ", %u, %p)", path,
                numCommands, commands, numCoords, coordType, coords);
 
     Observations observations;
@@ -6750,7 +6748,7 @@ inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_
 
 inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t coordType,
                                     void* coords) {
-    GAPID_INFO("glPathCoordsNV(%" PRIu32 ", %" PRId32 ", %u, %p)\n", path, numCoords, coordType,
+    GAPID_INFO("glPathCoordsNV(%" PRIu32 ", %" PRId32 ", %u, %p)", path, numCoords, coordType,
                coords);
 
     Observations observations;
@@ -6769,7 +6767,7 @@ inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t c
 }
 
 inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
-    GAPID_INFO("glPathCoverDepthFuncNV(%u)\n", func);
+    GAPID_INFO("glPathCoverDepthFuncNV(%u)", func);
 
     Observations observations;
     do {
@@ -6784,7 +6782,7 @@ inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
 }
 
 inline void GlesSpy::glPathDashArrayNV(uint32_t path, int32_t dashCount, float* dashArray) {
-    GAPID_INFO("glPathDashArrayNV(%" PRIu32 ", %" PRId32 ", %p)\n", path, dashCount, dashArray);
+    GAPID_INFO("glPathDashArrayNV(%" PRIu32 ", %" PRId32 ", %p)", path, dashCount, dashArray);
 
     Observations observations;
     do {
@@ -6806,7 +6804,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
                                                  uint32_t firstGlyphIndex, int32_t numGlyphs,
                                                  uint32_t pathParameterTemplate, float emScale) {
     GAPID_INFO("glPathGlyphIndexArrayNV(%" PRIu32 ", %u, %p, %u, %" PRIu32 ", %" PRId32 ", %" PRIu32
-               ", %f)\n",
+               ", %f)",
                firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs,
                pathParameterTemplate, emScale);
 
@@ -6836,7 +6834,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
 inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* fontName,
                                                  uint32_t fontStyle, uint32_t pathParameterTemplate,
                                                  float emScale, uint32_t baseAndCount) {
-    GAPID_INFO("glPathGlyphIndexRangeNV(%u, %p, %u, %" PRIu32 ", %f, %" PRIu32 ")\n", fontTarget,
+    GAPID_INFO("glPathGlyphIndexRangeNV(%u, %p, %u, %" PRIu32 ", %f, %" PRIu32 ")", fontTarget,
                fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount);
 
     uint32_t result = 0;
@@ -6865,7 +6863,7 @@ inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTar
                                         uint32_t handleMissingGlyphs,
                                         uint32_t pathParameterTemplate, float emScale) {
     GAPID_INFO("glPathGlyphRangeNV(%" PRIu32 ", %u, %p, %u, %" PRIu32 ", %" PRId32 ", %u, %" PRIu32
-               ", %f)\n",
+               ", %f)",
                firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs,
                handleMissingGlyphs, pathParameterTemplate, emScale);
 
@@ -6890,8 +6888,7 @@ inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget,
                                     uint32_t fontStyle, int32_t numGlyphs, uint32_t type,
                                     void* charcodes, uint32_t handleMissingGlyphs,
                                     uint32_t pathParameterTemplate, float emScale) {
-    GAPID_INFO("glPathGlyphsNV(%" PRIu32 ", %u, %p, %u, %" PRId32 ", %u, %p, %u, %" PRIu32
-               ", %f)\n",
+    GAPID_INFO("glPathGlyphsNV(%" PRIu32 ", %u, %p, %u, %" PRId32 ", %u, %p, %u, %" PRIu32 ", %f)",
                firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type, charcodes,
                handleMissingGlyphs, pathParameterTemplate, emScale);
 
@@ -6921,7 +6918,7 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
                                                        uint32_t pathParameterTemplate,
                                                        float emScale) {
     GAPID_INFO("glPathMemoryGlyphIndexArrayNV(%" PRIu32 ", %u, %" PRId32 ", %p, %" PRId32
-               ", %" PRIu32 ", %" PRId32 ", %" PRIu32 ", %f)\n",
+               ", %" PRIu32 ", %" PRId32 ", %" PRIu32 ", %f)",
                firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs,
                pathParameterTemplate, emScale);
 
@@ -6949,7 +6946,7 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
 }
 
 inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float value) {
-    GAPID_INFO("glPathParameterfNV(%" PRIu32 ", %u, %f)\n", path, pname, value);
+    GAPID_INFO("glPathParameterfNV(%" PRIu32 ", %u, %f)", path, pname, value);
 
     Observations observations;
     do {
@@ -6964,7 +6961,7 @@ inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float val
 }
 
 inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* value) {
-    GAPID_INFO("glPathParameterfvNV(%" PRIu32 ", %u, %p)\n", path, pname, value);
+    GAPID_INFO("glPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
 
     Observations observations;
     do {
@@ -6982,7 +6979,7 @@ inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* v
 }
 
 inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t value) {
-    GAPID_INFO("glPathParameteriNV(%" PRIu32 ", %u, %" PRId32 ")\n", path, pname, value);
+    GAPID_INFO("glPathParameteriNV(%" PRIu32 ", %u, %" PRId32 ")", path, pname, value);
 
     Observations observations;
     do {
@@ -6997,7 +6994,7 @@ inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t v
 }
 
 inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value) {
-    GAPID_INFO("glPathParameterivNV(%" PRIu32 ", %u, %p)\n", path, pname, value);
+    GAPID_INFO("glPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
 
     Observations observations;
     do {
@@ -7014,7 +7011,7 @@ inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t*
 }
 
 inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
-    GAPID_INFO("glPathStencilDepthOffsetNV(%f, %f)\n", factor, units);
+    GAPID_INFO("glPathStencilDepthOffsetNV(%f, %f)", factor, units);
 
     Observations observations;
     do {
@@ -7029,7 +7026,7 @@ inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
 }
 
 inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t mask) {
-    GAPID_INFO("glPathStencilFuncNV(%u, %" PRId32 ", %" PRIu32 ")\n", func, ref, mask);
+    GAPID_INFO("glPathStencilFuncNV(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
 
     Observations observations;
     do {
@@ -7045,7 +7042,7 @@ inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t ma
 
 inline void GlesSpy::glPathStringNV(uint32_t path, uint32_t format, int32_t length,
                                     void* pathString) {
-    GAPID_INFO("glPathStringNV(%" PRIu32 ", %u, %" PRId32 ", %p)\n", path, format, length,
+    GAPID_INFO("glPathStringNV(%" PRIu32 ", %u, %" PRId32 ", %p)", path, format, length,
                pathString);
 
     Observations observations;
@@ -7068,7 +7065,7 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
                                          uint8_t* commands, int32_t numCoords, uint32_t coordType,
                                          void* coords) {
     GAPID_INFO("glPathSubCommandsNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %p, %" PRId32 ", %u, %p)\n",
+               ", %p, %" PRId32 ", %u, %p)",
                path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType,
                coords);
 
@@ -7092,8 +7089,8 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
 
 inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_t numCoords,
                                        uint32_t coordType, void* coords) {
-    GAPID_INFO("glPathSubCoordsNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %u, %p)\n", path,
-               coordStart, numCoords, coordType, coords);
+    GAPID_INFO("glPathSubCoordsNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %u, %p)", path, coordStart,
+               numCoords, coordType, coords);
 
     Observations observations;
     do {
@@ -7113,7 +7110,7 @@ inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_
 inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, int32_t numSegments,
                                            float distance, float* x, float* y, float* tangentX,
                                            float* tangentY) {
-    GAPID_INFO("glPointAlongPathNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %f, %p, %p, %p, %p)\n",
+    GAPID_INFO("glPointAlongPathNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %f, %p, %p, %p, %p)",
                path, startSegment, numSegments, distance, x, y, tangentX, tangentY);
 
     uint8_t result = 0;
@@ -7145,7 +7142,7 @@ inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, 
 }
 
 inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
-    GAPID_INFO("glPolygonModeNV(%u, %u)\n", face, mode);
+    GAPID_INFO("glPolygonModeNV(%u, %u)", face, mode);
 
     Observations observations;
     do {
@@ -7160,7 +7157,7 @@ inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
 }
 
 inline void GlesSpy::glPopGroupMarkerEXT() {
-    GAPID_INFO("glPopGroupMarkerEXT()\n");
+    GAPID_INFO("glPopGroupMarkerEXT()");
 
     Observations observations;
     do {
@@ -7176,8 +7173,8 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
 
 inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float minZ, float minW,
                                                float maxX, float maxY, float maxZ, float maxW) {
-    GAPID_INFO("glPrimitiveBoundingBoxOES(%f, %f, %f, %f, %f, %f, %f, %f)\n", minX, minY, minZ,
-               minW, maxX, maxY, maxZ, maxW);
+    GAPID_INFO("glPrimitiveBoundingBoxOES(%f, %f, %f, %f, %f, %f, %f, %f)", minX, minY, minZ, minW,
+               maxX, maxY, maxZ, maxW);
 
     Observations observations;
     do {
@@ -7194,7 +7191,7 @@ inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float min
 
 inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format, void* binary,
                                         int32_t binary_size) {
-    GAPID_INFO("glProgramBinaryOES(%" PRIu32 ", %u, %p, %" PRId32 ")\n", program, binary_format,
+    GAPID_INFO("glProgramBinaryOES(%" PRIu32 ", %u, %p, %" PRId32 ")", program, binary_format,
                binary, binary_size);
 
     Observations observations;
@@ -7214,7 +7211,7 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
 }
 
 inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, int32_t value) {
-    GAPID_INFO("glProgramParameteriEXT(%" PRIu32 ", %u, %" PRId32 ")\n", program, pname, value);
+    GAPID_INFO("glProgramParameteriEXT(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
 
     Observations observations;
     do {
@@ -7231,7 +7228,7 @@ inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, in
 inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t location,
                                                      uint32_t genMode, int32_t components,
                                                      float* coeffs) {
-    GAPID_INFO("glProgramPathFragmentInputGenNV(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)\n",
+    GAPID_INFO("glProgramPathFragmentInputGenNV(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                program, location, genMode, components, coeffs);
 
     Observations observations;
@@ -7250,7 +7247,7 @@ inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t l
 }
 
 inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, float v0) {
-    GAPID_INFO("glProgramUniform1fEXT(%" PRIu32 ", %" PRId32 ", %f)\n", program, location, v0);
+    GAPID_INFO("glProgramUniform1fEXT(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
 
     Observations observations;
     do {
@@ -7266,7 +7263,7 @@ inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, f
 
 inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
-    GAPID_INFO("glProgramUniform1fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform1fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7285,7 +7282,7 @@ inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, 
 }
 
 inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, int32_t v0) {
-    GAPID_INFO("glProgramUniform1iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", program, location,
+    GAPID_INFO("glProgramUniform1iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", program, location,
                v0);
 
     Observations observations;
@@ -7302,7 +7299,7 @@ inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, i
 
 inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
-    GAPID_INFO("glProgramUniform1ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform1ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7321,7 +7318,7 @@ inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, 
 }
 
 inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, uint32_t v0) {
-    GAPID_INFO("glProgramUniform1uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")\n", program, location,
+    GAPID_INFO("glProgramUniform1uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", program, location,
                v0);
 
     Observations observations;
@@ -7338,7 +7335,7 @@ inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
-    GAPID_INFO("glProgramUniform1uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform1uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7357,7 +7354,7 @@ inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location,
 }
 
 inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, float v0, float v1) {
-    GAPID_INFO("glProgramUniform2fEXT(%" PRIu32 ", %" PRId32 ", %f, %f)\n", program, location, v0,
+    GAPID_INFO("glProgramUniform2fEXT(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location, v0,
                v1);
 
     Observations observations;
@@ -7374,7 +7371,7 @@ inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, f
 
 inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
-    GAPID_INFO("glProgramUniform2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7394,8 +7391,8 @@ inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1) {
-    GAPID_INFO("glProgramUniform2iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
-               program, location, v0, v1);
+    GAPID_INFO("glProgramUniform2iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", program,
+               location, v0, v1);
 
     Observations observations;
     do {
@@ -7411,7 +7408,7 @@ inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, i
 
 inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
-    GAPID_INFO("glProgramUniform2ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform2ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7431,7 +7428,7 @@ inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1) {
-    GAPID_INFO("glProgramUniform2uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")\n",
+    GAPID_INFO("glProgramUniform2uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")",
                program, location, v0, v1);
 
     Observations observations;
@@ -7448,7 +7445,7 @@ inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
-    GAPID_INFO("glProgramUniform2uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform2uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7468,8 +7465,8 @@ inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location,
 
 inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, float v0, float v1,
                                            float v2) {
-    GAPID_INFO("glProgramUniform3fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f)\n", program, location,
-               v0, v1, v2);
+    GAPID_INFO("glProgramUniform3fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f)", program, location, v0,
+               v1, v2);
 
     Observations observations;
     do {
@@ -7485,7 +7482,7 @@ inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, f
 
 inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
-    GAPID_INFO("glProgramUniform3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7506,7 +7503,7 @@ inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, 
 inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1, int32_t v2) {
     GAPID_INFO("glProgramUniform3iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                program, location, v0, v1, v2);
 
     Observations observations;
@@ -7523,7 +7520,7 @@ inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, i
 
 inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
-    GAPID_INFO("glProgramUniform3ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform3ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7544,7 +7541,7 @@ inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, 
 inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1, uint32_t v2) {
     GAPID_INFO("glProgramUniform3uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
-               ")\n",
+               ")",
                program, location, v0, v1, v2);
 
     Observations observations;
@@ -7561,7 +7558,7 @@ inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
-    GAPID_INFO("glProgramUniform3uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform3uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7581,8 +7578,8 @@ inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location,
 
 inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, float v0, float v1,
                                            float v2, float v3) {
-    GAPID_INFO("glProgramUniform4fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)\n", program,
-               location, v0, v1, v2, v3);
+    GAPID_INFO("glProgramUniform4fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)", program, location,
+               v0, v1, v2, v3);
 
     Observations observations;
     do {
@@ -7599,7 +7596,7 @@ inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, f
 
 inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
-    GAPID_INFO("glProgramUniform4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7620,7 +7617,7 @@ inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, 
 inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1, int32_t v2, int32_t v3) {
     GAPID_INFO("glProgramUniform4iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ")\n",
+               ", %" PRId32 ")",
                program, location, v0, v1, v2, v3);
 
     Observations observations;
@@ -7638,7 +7635,7 @@ inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, i
 
 inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
-    GAPID_INFO("glProgramUniform4ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform4ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7659,7 +7656,7 @@ inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, 
 inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1, uint32_t v2, uint32_t v3) {
     GAPID_INFO("glProgramUniform4uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
-               ", %" PRIu32 ")\n",
+               ", %" PRIu32 ")",
                program, location, v0, v1, v2, v3);
 
     Observations observations;
@@ -7677,7 +7674,7 @@ inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, 
 
 inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
-    GAPID_INFO("glProgramUniform4uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
+    GAPID_INFO("glProgramUniform4uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
 
     Observations observations;
@@ -7697,7 +7694,7 @@ inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location,
 
 inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t location,
                                                   uint64_t value) {
-    GAPID_INFO("glProgramUniformHandleui64NV(%" PRIu32 ", %" PRId32 ", %" PRIu64 ")\n", program,
+    GAPID_INFO("glProgramUniformHandleui64NV(%" PRIu32 ", %" PRId32 ", %" PRIu64 ")", program,
                location, value);
 
     Observations observations;
@@ -7714,8 +7711,8 @@ inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t loca
 
 inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t location,
                                                    int32_t count, uint64_t* values) {
-    GAPID_INFO("glProgramUniformHandleui64vNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n",
-               program, location, count, values);
+    GAPID_INFO("glProgramUniformHandleui64vNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
+               location, count, values);
 
     Observations observations;
     do {
@@ -7735,7 +7732,7 @@ inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t loc
 inline void GlesSpy::glProgramUniformMatrix2fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7757,7 +7754,7 @@ inline void GlesSpy::glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix2x3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7779,7 +7776,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix2x4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7800,7 +7797,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t lo
 inline void GlesSpy::glProgramUniformMatrix3fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7822,7 +7819,7 @@ inline void GlesSpy::glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix3x2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7844,7 +7841,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix3x4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7865,7 +7862,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t lo
 inline void GlesSpy::glProgramUniformMatrix4fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7887,7 +7884,7 @@ inline void GlesSpy::glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix4x2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7909,7 +7906,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t lo
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix4x3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+               ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -7928,7 +7925,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t lo
 }
 
 inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
-    GAPID_INFO("glPushGroupMarkerEXT(%" PRId32 ", %p)\n", length, marker);
+    GAPID_INFO("glPushGroupMarkerEXT(%" PRId32 ", %p)", length, marker);
 
     Observations observations;
     do {
@@ -7950,7 +7947,7 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
 }
 
 inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
-    GAPID_INFO("glQueryCounterEXT(%" PRIu32 ", %u)\n", query, target);
+    GAPID_INFO("glQueryCounterEXT(%" PRIu32 ", %u)", query, target);
 
     Observations observations;
     do {
@@ -7965,7 +7962,7 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
 }
 
 inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
-    GAPID_INFO("glReadBufferIndexedEXT(%u, %" PRId32 ")\n", src, index);
+    GAPID_INFO("glReadBufferIndexedEXT(%u, %" PRId32 ")", src, index);
 
     Observations observations;
     do {
@@ -7980,7 +7977,7 @@ inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
 }
 
 inline void GlesSpy::glReadBufferNV(uint32_t mode) {
-    GAPID_INFO("glReadBufferNV(%u)\n", mode);
+    GAPID_INFO("glReadBufferNV(%u)", mode);
 
     Observations observations;
     do {
@@ -7997,7 +7994,7 @@ inline void GlesSpy::glReadBufferNV(uint32_t mode) {
 inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32_t height,
                                       uint32_t format, uint32_t type, int32_t bufSize, void* data) {
     GAPID_INFO("glReadnPixelsEXT(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %u, %u, %" PRId32 ", %p)\n",
+               ", %u, %u, %" PRId32 ", %p)",
                x, y, width, height, format, type, bufSize, data);
 
     Observations observations;
@@ -8018,7 +8015,7 @@ inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32
 inline void GlesSpy::glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32_t height,
                                       uint32_t format, uint32_t type, int32_t bufSize, void* data) {
     GAPID_INFO("glReadnPixelsKHR(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %u, %u, %" PRId32 ", %p)\n",
+               ", %u, %u, %" PRId32 ", %p)",
                x, y, width, height, format, type, bufSize, data);
 
     Observations observations;
@@ -8040,7 +8037,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleANGLE(uint32_t target, int3
                                                            uint32_t internalformat, int32_t width,
                                                            int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleANGLE(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                target, samples, internalformat, width, height);
 
     Observations observations;
@@ -8061,7 +8058,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int3
                                                            uint32_t internalformat, int32_t width,
                                                            int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleAPPLE(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                target, samples, internalformat, width, height);
 
     Observations observations;
@@ -8081,8 +8078,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int3
 inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_t samples,
                                                          uint32_t internalformat, int32_t width,
                                                          int32_t height) {
-    GAPID_INFO("glRenderbufferStorageMultisampleEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+    GAPID_INFO("glRenderbufferStorageMultisampleEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
 
     Observations observations;
@@ -8102,8 +8098,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_
 inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_t samples,
                                                          uint32_t internalformat, int32_t width,
                                                          int32_t height) {
-    GAPID_INFO("glRenderbufferStorageMultisampleIMG(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+    GAPID_INFO("glRenderbufferStorageMultisampleIMG(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
 
     Observations observations;
@@ -8123,8 +8118,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_
 inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t samples,
                                                         uint32_t internalformat, int32_t width,
                                                         int32_t height) {
-    GAPID_INFO("glRenderbufferStorageMultisampleNV(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+    GAPID_INFO("glRenderbufferStorageMultisampleNV(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
 
     Observations observations;
@@ -8141,7 +8135,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t
 }
 
 inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
-    GAPID_INFO("glResolveMultisampleFramebufferAPPLE()\n");
+    GAPID_INFO("glResolveMultisampleFramebufferAPPLE()");
 
     Observations observations;
     do {
@@ -8156,7 +8150,7 @@ inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
 }
 
 inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, int32_t* param) {
-    GAPID_INFO("glSamplerParameterIivOES(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -8174,7 +8168,7 @@ inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, 
 }
 
 inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname, uint32_t* param) {
-    GAPID_INFO("glSamplerParameterIuivOES(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -8192,7 +8186,7 @@ inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
 }
 
 inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v) {
-    GAPID_INFO("glScissorArrayvNV(%" PRIu32 ", %" PRId32 ", %p)\n", first, count, v);
+    GAPID_INFO("glScissorArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
 
     Observations observations;
     do {
@@ -8211,7 +8205,7 @@ inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v
 inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bottom, int32_t width,
                                         int32_t height) {
     GAPID_INFO("glScissorIndexedNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                index, left, bottom, width, height);
 
     Observations observations;
@@ -8227,7 +8221,7 @@ inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bo
 }
 
 inline void GlesSpy::glScissorIndexedvNV(uint32_t index, int32_t* v) {
-    GAPID_INFO("glScissorIndexedvNV(%" PRIu32 ", %p)\n", index, v);
+    GAPID_INFO("glScissorIndexedvNV(%" PRIu32 ", %p)", index, v);
 
     Observations observations;
     do {
@@ -8247,7 +8241,7 @@ inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t en
                                                     uint32_t group, int32_t numCounters,
                                                     uint32_t* counterList) {
     GAPID_INFO("glSelectPerfMonitorCountersAMD(%" PRIu32 ", %" PRIu8 ", %" PRIu32 ", %" PRId32
-               ", %p)\n",
+               ", %p)",
                monitor, enable, group, numCounters, counterList);
 
     Observations observations;
@@ -8266,7 +8260,7 @@ inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t en
 }
 
 inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
-    GAPID_INFO("glSetFenceNV(%" PRIu32 ", %u)\n", fence, condition);
+    GAPID_INFO("glSetFenceNV(%" PRIu32 ", %u)", fence, condition);
 
     Observations observations;
     do {
@@ -8282,7 +8276,7 @@ inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
 
 inline void GlesSpy::glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, uint32_t height,
                                        uint32_t preserveMask) {
-    GAPID_INFO("glStartTilingQCOM(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %u)\n", x, y,
+    GAPID_INFO("glStartTilingQCOM(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %u)", x, y,
                width, height, preserveMask);
 
     Observations observations;
@@ -8302,7 +8296,7 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
                                                   uint32_t mask, uint32_t transformType,
                                                   float* transformValues) {
     GAPID_INFO("glStencilFillPathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %" PRIu32
-               ", %u, %p)\n",
+               ", %u, %p)",
                numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType,
                transformValues);
 
@@ -8326,7 +8320,7 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
 }
 
 inline void GlesSpy::glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask) {
-    GAPID_INFO("glStencilFillPathNV(%" PRIu32 ", %u, %" PRIu32 ")\n", path, fillMode, mask);
+    GAPID_INFO("glStencilFillPathNV(%" PRIu32 ", %u, %" PRIu32 ")", path, fillMode, mask);
 
     Observations observations;
     do {
@@ -8346,7 +8340,7 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
                                                     uint32_t transformType,
                                                     float* transformValues) {
     GAPID_INFO("glStencilStrokePathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %" PRId32
-               ", %" PRIu32 ", %u, %p)\n",
+               ", %" PRIu32 ", %u, %p)",
                numPaths, pathNameType, paths, pathBase, reference, mask, transformType,
                transformValues);
 
@@ -8370,7 +8364,7 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
 }
 
 inline void GlesSpy::glStencilStrokePathNV(uint32_t path, int32_t reference, uint32_t mask) {
-    GAPID_INFO("glStencilStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")\n", path, reference,
+    GAPID_INFO("glStencilStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", path, reference,
                mask);
 
     Observations observations;
@@ -8389,7 +8383,7 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
         int32_t numPaths, uint32_t pathNameType, void* paths, uint32_t pathBase, uint32_t fillMode,
         uint32_t mask, uint32_t coverMode, uint32_t transformType, float* transformValues) {
     GAPID_INFO("glStencilThenCoverFillPathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32
-               ", %u, %" PRIu32 ", %u, %u, %p)\n",
+               ", %u, %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType,
                transformValues);
 
@@ -8415,7 +8409,7 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
 
 inline void GlesSpy::glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask,
                                                   uint32_t coverMode) {
-    GAPID_INFO("glStencilThenCoverFillPathNV(%" PRIu32 ", %u, %" PRIu32 ", %u)\n", path, fillMode,
+    GAPID_INFO("glStencilThenCoverFillPathNV(%" PRIu32 ", %u, %" PRIu32 ", %u)", path, fillMode,
                mask, coverMode);
 
     Observations observations;
@@ -8435,7 +8429,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
         int32_t numPaths, uint32_t pathNameType, void* paths, uint32_t pathBase, int32_t reference,
         uint32_t mask, uint32_t coverMode, uint32_t transformType, float* transformValues) {
     GAPID_INFO("glStencilThenCoverStrokePathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %" PRId32
-               ", %" PRIu32 ", %u, %u, %p)\n",
+               ", %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType,
                transformValues);
 
@@ -8461,7 +8455,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
 
 inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t reference, uint32_t mask,
                                                     uint32_t coverMode) {
-    GAPID_INFO("glStencilThenCoverStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %u)\n", path,
+    GAPID_INFO("glStencilThenCoverStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %u)", path,
                reference, mask, coverMode);
 
     Observations observations;
@@ -8478,7 +8472,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t refer
 }
 
 inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
-    GAPID_INFO("glTestFenceNV(%" PRIu32 ")\n", fence);
+    GAPID_INFO("glTestFenceNV(%" PRIu32 ")", fence);
 
     uint8_t result = 0;
 
@@ -8498,7 +8492,7 @@ inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
 }
 
 inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, uint32_t buffer) {
-    GAPID_INFO("glTexBufferOES(%u, %u, %" PRIu32 ")\n", target, internalformat, buffer);
+    GAPID_INFO("glTexBufferOES(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
 
     Observations observations;
     do {
@@ -8514,7 +8508,7 @@ inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, ui
 
 inline void GlesSpy::glTexBufferRangeOES(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                          int32_t offset, int32_t size) {
-    GAPID_INFO("glTexBufferRangeOES(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", target,
+    GAPID_INFO("glTexBufferRangeOES(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                internalformat, buffer, offset, size);
 
     Observations observations;
@@ -8534,7 +8528,7 @@ inline void GlesSpy::glTexImage3DOES(uint32_t target, int32_t level, uint32_t in
                                      int32_t width, int32_t height, int32_t depth, int32_t border,
                                      uint32_t format, uint32_t type, void* pixels) {
     GAPID_INFO("glTexImage3DOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %u, %u, %p)\n",
+               ", %" PRId32 ", %u, %u, %p)",
                target, level, internalformat, width, height, depth, border, format, type, pixels);
 
     Observations observations;
@@ -8557,7 +8551,7 @@ inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int3
                                             int32_t yoffset, int32_t zoffset, int32_t width,
                                             int32_t height, int32_t depth, uint8_t commit) {
     GAPID_INFO("glTexPageCommitmentARB(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ")",
                target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
 
     Observations observations;
@@ -8575,7 +8569,7 @@ inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int3
 }
 
 inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glTexParameterIivOES(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameterIivOES(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -8593,7 +8587,7 @@ inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32
 }
 
 inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params) {
-    GAPID_INFO("glTexParameterIuivOES(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameterIuivOES(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -8612,7 +8606,7 @@ inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint
 
 inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width) {
-    GAPID_INFO("glTexStorage1DEXT(%u, %" PRId32 ", %u, %" PRId32 ")\n", target, levels, format,
+    GAPID_INFO("glTexStorage1DEXT(%u, %" PRId32 ", %u, %" PRId32 ")", target, levels, format,
                width);
 
     Observations observations;
@@ -8629,7 +8623,7 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
 
 inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height) {
-    GAPID_INFO("glTexStorage2DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")\n", target, levels,
+    GAPID_INFO("glTexStorage2DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")", target, levels,
                format, width, height);
 
     Observations observations;
@@ -8647,7 +8641,7 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
 
 inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height, int32_t depth) {
-    GAPID_INFO("glTexStorage3DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glTexStorage3DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, levels, format, width, height, depth);
 
     Observations observations;
@@ -8668,7 +8662,7 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
                                         int32_t height, int32_t depth, uint32_t format,
                                         uint32_t type, void* pixels) {
     GAPID_INFO("glTexSubImage3DOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %u, %u, %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                pixels);
 
@@ -8690,7 +8684,7 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
 
 inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width) {
-    GAPID_INFO("glTextureStorage1DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ")\n", texture,
+    GAPID_INFO("glTextureStorage1DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ")", texture,
                target, levels, format, width);
 
     Observations observations;
@@ -8708,8 +8702,7 @@ inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, in
 
 inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width, int32_t height) {
-    GAPID_INFO("glTextureStorage2DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ")\n",
+    GAPID_INFO("glTextureStorage2DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                texture, target, levels, format, width, height);
 
     Observations observations;
@@ -8729,7 +8722,7 @@ inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, in
                                            uint32_t format, int32_t width, int32_t height,
                                            int32_t depth) {
     GAPID_INFO("glTextureStorage3DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
-               ", %" PRId32 ")\n",
+               ", %" PRId32 ")",
                texture, target, levels, format, width, height, depth);
 
     Observations observations;
@@ -8749,7 +8742,7 @@ inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_
                                       uint32_t internalformat, uint32_t minlevel,
                                       uint32_t numlevels, uint32_t minlayer, uint32_t numlayers) {
     GAPID_INFO("glTextureViewEXT(%" PRIu32 ", %u, %" PRIu32 ", %u, %" PRIu32 ", %" PRIu32
-               ", %" PRIu32 ", %" PRIu32 ")\n",
+               ", %" PRIu32 ", %" PRIu32 ")",
                texture, target, origtexture, internalformat, minlevel, numlevels, minlayer,
                numlayers);
 
@@ -8772,7 +8765,7 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
                                       uint32_t internalformat, uint32_t minlevel,
                                       uint32_t numlevels, uint32_t minlayer, uint32_t numlayers) {
     GAPID_INFO("glTextureViewOES(%" PRIu32 ", %u, %" PRIu32 ", %u, %" PRIu32 ", %" PRIu32
-               ", %" PRIu32 ", %" PRIu32 ")\n",
+               ", %" PRIu32 ", %" PRIu32 ")",
                texture, target, origtexture, internalformat, minlevel, numlevels, minlayer,
                numlayers);
 
@@ -8793,7 +8786,7 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
 
 inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
                                        uint32_t transformType, float* transformValues) {
-    GAPID_INFO("glTransformPathNV(%" PRIu32 ", %" PRIu32 ", %u, %p)\n", resultPath, srcPath,
+    GAPID_INFO("glTransformPathNV(%" PRIu32 ", %" PRIu32 ", %u, %p)", resultPath, srcPath,
                transformType, transformValues);
 
     Observations observations;
@@ -8812,7 +8805,7 @@ inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
 }
 
 inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
-    GAPID_INFO("glUniformHandleui64NV(%" PRId32 ", %" PRIu64 ")\n", location, value);
+    GAPID_INFO("glUniformHandleui64NV(%" PRId32 ", %" PRIu64 ")", location, value);
 
     Observations observations;
     do {
@@ -8827,7 +8820,7 @@ inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
 }
 
 inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uint64_t* value) {
-    GAPID_INFO("glUniformHandleui64vNV(%" PRId32 ", %" PRId32 ", %p)\n", location, count, value);
+    GAPID_INFO("glUniformHandleui64vNV(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
 
     Observations observations;
     do {
@@ -8846,8 +8839,8 @@ inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix2x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix2x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8866,8 +8859,8 @@ inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix2x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix2x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8886,8 +8879,8 @@ inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix3x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix3x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8906,8 +8899,8 @@ inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix3x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix3x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8926,8 +8919,8 @@ inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix4x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix4x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8946,8 +8939,8 @@ inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uin
 
 inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
-    GAPID_INFO("glUniformMatrix4x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location,
-               count, transpose, value);
+    GAPID_INFO("glUniformMatrix4x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
+               transpose, value);
 
     Observations observations;
     do {
@@ -8965,7 +8958,7 @@ inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uin
 }
 
 inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
-    GAPID_INFO("glUnmapBufferOES(%u)\n", target);
+    GAPID_INFO("glUnmapBufferOES(%u)", target);
 
     uint8_t result = 0;
 
@@ -8985,7 +8978,7 @@ inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
 }
 
 inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, uint32_t program) {
-    GAPID_INFO("glUseProgramStagesEXT(%" PRIu32 ", %u, %" PRIu32 ")\n", pipeline, stages, program);
+    GAPID_INFO("glUseProgramStagesEXT(%" PRIu32 ", %u, %" PRIu32 ")", pipeline, stages, program);
 
     Observations observations;
     do {
@@ -9000,7 +8993,7 @@ inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, u
 }
 
 inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
-    GAPID_INFO("glValidateProgramPipelineEXT(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glValidateProgramPipelineEXT(%" PRIu32 ")", pipeline);
 
     Observations observations;
     do {
@@ -9015,7 +9008,7 @@ inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
 }
 
 inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor) {
-    GAPID_INFO("glVertexAttribDivisorANGLE(%" PRIu32 ", %" PRIu32 ")\n", index, divisor);
+    GAPID_INFO("glVertexAttribDivisorANGLE(%" PRIu32 ", %" PRIu32 ")", index, divisor);
 
     Observations observations;
     do {
@@ -9030,7 +9023,7 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
 }
 
 inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) {
-    GAPID_INFO("glVertexAttribDivisorEXT(%" PRIu32 ", %" PRIu32 ")\n", index, divisor);
+    GAPID_INFO("glVertexAttribDivisorEXT(%" PRIu32 ", %" PRIu32 ")", index, divisor);
 
     Observations observations;
     do {
@@ -9045,7 +9038,7 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
 }
 
 inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
-    GAPID_INFO("glVertexAttribDivisorNV(%" PRIu32 ", %" PRIu32 ")\n", index, divisor);
+    GAPID_INFO("glVertexAttribDivisorNV(%" PRIu32 ", %" PRIu32 ")", index, divisor);
 
     Observations observations;
     do {
@@ -9060,7 +9053,7 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
 }
 
 inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v) {
-    GAPID_INFO("glViewportArrayvNV(%" PRIu32 ", %" PRId32 ", %p)\n", first, count, v);
+    GAPID_INFO("glViewportArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
 
     Observations observations;
     do {
@@ -9078,7 +9071,7 @@ inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v)
 }
 
 inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, float w, float h) {
-    GAPID_INFO("glViewportIndexedfNV(%" PRIu32 ", %f, %f, %f, %f)\n", index, x, y, w, h);
+    GAPID_INFO("glViewportIndexedfNV(%" PRIu32 ", %f, %f, %f, %f)", index, x, y, w, h);
 
     Observations observations;
     do {
@@ -9093,7 +9086,7 @@ inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, floa
 }
 
 inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
-    GAPID_INFO("glViewportIndexedfvNV(%" PRIu32 ", %p)\n", index, v);
+    GAPID_INFO("glViewportIndexedfvNV(%" PRIu32 ", %p)", index, v);
 
     Observations observations;
     do {
@@ -9110,7 +9103,7 @@ inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
 }
 
 inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout) {
-    GAPID_INFO("glWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, flag, timeout);
+    GAPID_INFO("glWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")", sync, flag, timeout);
 
     Observations observations;
     do {
@@ -9126,7 +9119,7 @@ inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t time
 
 inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint32_t* paths,
                                      float* weights) {
-    GAPID_INFO("glWeightPathsNV(%" PRIu32 ", %" PRId32 ", %p, %p)\n", resultPath, numPaths, paths,
+    GAPID_INFO("glWeightPathsNV(%" PRIu32 ", %" PRId32 ", %p, %p)", resultPath, numPaths, paths,
                weights);
 
     Observations observations;
@@ -9147,7 +9140,7 @@ inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint
 }
 
 inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
-    GAPID_INFO("glCoverageModulationNV(%u)\n", components);
+    GAPID_INFO("glCoverageModulationNV(%u)", components);
 
     Observations observations;
     do {
@@ -9162,7 +9155,7 @@ inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
 }
 
 inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
-    GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)\n", n, v);
+    GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)", n, v);
 
     Observations observations;
     do {
@@ -9179,7 +9172,7 @@ inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
 }
 
 inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
-    GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")\n", color);
+    GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")", color);
 
     Observations observations;
     do {
@@ -9195,8 +9188,8 @@ inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
 
 inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start,
                                                       int32_t count, float* v) {
-    GAPID_INFO("glFramebufferSampleLocationsfvNV(%u, %" PRIu32 ", %" PRId32 ", %p)\n", target,
-               start, count, v);
+    GAPID_INFO("glFramebufferSampleLocationsfvNV(%u, %" PRIu32 ", %" PRId32 ", %p)", target, start,
+               count, v);
 
     Observations observations;
     do {
@@ -9214,7 +9207,7 @@ inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t 
 }
 
 inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
-    GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)\n", bufsize, v);
+    GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)", bufsize, v);
 
     Observations observations;
     do {
@@ -9232,7 +9225,7 @@ inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
 
 inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
                                                            int32_t count, float* v) {
-    GAPID_INFO("glNamedFramebufferSampleLocationsfvNV(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p)\n",
+    GAPID_INFO("glNamedFramebufferSampleLocationsfvNV(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p)",
                framebuffer, start, count, v);
 
     Observations observations;
@@ -9251,7 +9244,7 @@ inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer,
 }
 
 inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations) {
-    GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")\n", samples, fixedsamplelocations);
+    GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")", samples, fixedsamplelocations);
 
     Observations observations;
     do {
@@ -9268,7 +9261,7 @@ inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsampleloc
 }
 
 inline void GlesSpy::glResolveDepthValuesNV() {
-    GAPID_INFO("glResolveDepthValuesNV()\n");
+    GAPID_INFO("glResolveDepthValuesNV()");
 
     Observations observations;
     do {
@@ -9283,7 +9276,7 @@ inline void GlesSpy::glResolveDepthValuesNV() {
 }
 
 inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
-    GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")\n", xbits, ybits);
+    GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")", xbits, ybits);
 
     Observations observations;
     do {
@@ -9298,7 +9291,7 @@ inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
 }
 
 inline void GlesSpy::glBlendColor(float red, float green, float blue, float alpha) {
-    GAPID_INFO("glBlendColor(%f, %f, %f, %f)\n", red, green, blue, alpha);
+    GAPID_INFO("glBlendColor(%f, %f, %f, %f)", red, green, blue, alpha);
 
     Observations observations;
     do {
@@ -9319,7 +9312,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
 }
 
 inline void GlesSpy::glBlendEquation(uint32_t equation) {
-    GAPID_INFO("glBlendEquation(%u)\n", equation);
+    GAPID_INFO("glBlendEquation(%u)", equation);
 
     Observations observations;
     do {
@@ -9353,7 +9346,7 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
 }
 
 inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
-    GAPID_INFO("glBlendEquationSeparate(%u, %u)\n", rgb, alpha);
+    GAPID_INFO("glBlendEquationSeparate(%u, %u)", rgb, alpha);
 
     Observations observations;
     do {
@@ -9400,7 +9393,7 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
 }
 
 inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
-    GAPID_INFO("glBlendFunc(%u, %u)\n", src_factor, dst_factor);
+    GAPID_INFO("glBlendFunc(%u, %u)", src_factor, dst_factor);
 
     Observations observations;
     do {
@@ -9461,7 +9454,7 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
 
 inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                          uint32_t src_factor_alpha, uint32_t dst_factor_alpha) {
-    GAPID_INFO("glBlendFuncSeparate(%u, %u, %u, %u)\n", src_factor_rgb, dst_factor_rgb,
+    GAPID_INFO("glBlendFuncSeparate(%u, %u, %u, %u)", src_factor_rgb, dst_factor_rgb,
                src_factor_alpha, dst_factor_alpha);
 
     Observations observations;
@@ -9561,7 +9554,7 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
 }
 
 inline void GlesSpy::glDepthFunc(uint32_t function) {
-    GAPID_INFO("glDepthFunc(%u)\n", function);
+    GAPID_INFO("glDepthFunc(%u)", function);
 
     Observations observations;
     do {
@@ -9593,7 +9586,7 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
 }
 
 inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
-    GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")\n", value, invert);
+    GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")", value, invert);
 
     Observations observations;
     do {
@@ -9614,7 +9607,7 @@ inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
 }
 
 inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
-    GAPID_INFO("glSampleMaski(%" PRIu32 ", %u)\n", maskNumber, mask);
+    GAPID_INFO("glSampleMaski(%" PRIu32 ", %u)", maskNumber, mask);
 
     Observations observations;
     do {
@@ -9630,7 +9623,7 @@ inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
 }
 
 inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t height) {
-    GAPID_INFO("glScissor(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", x, y, width,
+    GAPID_INFO("glScissor(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, width,
                height);
 
     Observations observations;
@@ -9651,7 +9644,7 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
 }
 
 inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
-    GAPID_INFO("glStencilFunc(%u, %" PRId32 ", %" PRIu32 ")\n", func, ref, mask);
+    GAPID_INFO("glStencilFunc(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
 
     Observations observations;
     do {
@@ -9680,7 +9673,7 @@ inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
 
 inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
                                            int32_t reference_value, uint32_t mask) {
-    GAPID_INFO("glStencilFuncSeparate(%u, %u, %" PRId32 ", %" PRIu32 ")\n", face, function,
+    GAPID_INFO("glStencilFuncSeparate(%u, %u, %" PRId32 ", %" PRIu32 ")", face, function,
                reference_value, mask);
 
     Observations observations;
@@ -9717,7 +9710,7 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
 }
 
 inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) {
-    GAPID_INFO("glStencilOp(%u, %u, %u)\n", fail, zfail, zpass);
+    GAPID_INFO("glStencilOp(%u, %u, %u)", fail, zfail, zpass);
 
     Observations observations;
     do {
@@ -9771,7 +9764,7 @@ inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) 
 inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
                                          uint32_t stencil_pass_depth_fail,
                                          uint32_t stencil_pass_depth_pass) {
-    GAPID_INFO("glStencilOpSeparate(%u, %u, %u, %u)\n", face, stencil_fail, stencil_pass_depth_fail,
+    GAPID_INFO("glStencilOpSeparate(%u, %u, %u, %u)", face, stencil_fail, stencil_pass_depth_fail,
                stencil_pass_depth_pass);
 
     Observations observations;
@@ -9833,7 +9826,7 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
 }
 
 inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
-    GAPID_INFO("glBindFramebuffer(%u, %" PRIu32 ")\n", target, framebuffer);
+    GAPID_INFO("glBindFramebuffer(%u, %" PRIu32 ")", target, framebuffer);
 
     Observations observations;
     do {
@@ -9873,7 +9866,7 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
 }
 
 inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) {
-    GAPID_INFO("glBindRenderbuffer(%u, %" PRIu32 ")\n", target, renderbuffer);
+    GAPID_INFO("glBindRenderbuffer(%u, %" PRIu32 ")", target, renderbuffer);
 
     Observations observations;
     do {
@@ -9905,7 +9898,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
                                        int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                        uint32_t mask, uint32_t filter) {
     GAPID_INFO("glBlitFramebuffer(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 
     Observations observations;
@@ -9940,7 +9933,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
 }
 
 inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
-    GAPID_INFO("glCheckFramebufferStatus(%u)\n", target);
+    GAPID_INFO("glCheckFramebufferStatus(%u)", target);
 
     uint32_t result = 0;
 
@@ -9972,7 +9965,7 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
 }
 
 inline void GlesSpy::glClear(uint32_t mask) {
-    GAPID_INFO("glClear(%u)\n", mask);
+    GAPID_INFO("glClear(%u)", mask);
 
     Observations observations;
     do {
@@ -10001,7 +9994,7 @@ inline void GlesSpy::glClear(uint32_t mask) {
 
 inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float depth,
                                      int32_t stencil) {
-    GAPID_INFO("glClearBufferfi(%u, %" PRId32 ", %f, %" PRId32 ")\n", buffer, drawbuffer, depth,
+    GAPID_INFO("glClearBufferfi(%u, %" PRId32 ", %f, %" PRId32 ")", buffer, drawbuffer, depth,
                stencil);
 
     Observations observations;
@@ -10023,7 +10016,7 @@ inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float 
 }
 
 inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float* value) {
-    GAPID_INFO("glClearBufferfv(%u, %" PRId32 ", %p)\n", buffer, drawbuffer, value);
+    GAPID_INFO("glClearBufferfv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
 
     Observations observations;
     do {
@@ -10048,7 +10041,7 @@ inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float*
 }
 
 inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_t* value) {
-    GAPID_INFO("glClearBufferiv(%u, %" PRId32 ", %p)\n", buffer, drawbuffer, value);
+    GAPID_INFO("glClearBufferiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
 
     Observations observations;
     do {
@@ -10073,7 +10066,7 @@ inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_
 }
 
 inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint32_t* value) {
-    GAPID_INFO("glClearBufferuiv(%u, %" PRId32 ", %p)\n", buffer, drawbuffer, value);
+    GAPID_INFO("glClearBufferuiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
 
     Observations observations;
     do {
@@ -10097,7 +10090,7 @@ inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint3
 }
 
 inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
-    GAPID_INFO("glClearColor(%f, %f, %f, %f)\n", r, g, b, a);
+    GAPID_INFO("glClearColor(%f, %f, %f, %f)", r, g, b, a);
 
     Observations observations;
     do {
@@ -10117,7 +10110,7 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
 }
 
 inline void GlesSpy::glClearDepthf(float depth) {
-    GAPID_INFO("glClearDepthf(%f)\n", depth);
+    GAPID_INFO("glClearDepthf(%f)", depth);
 
     Observations observations;
     do {
@@ -10137,7 +10130,7 @@ inline void GlesSpy::glClearDepthf(float depth) {
 }
 
 inline void GlesSpy::glClearStencil(int32_t stencil) {
-    GAPID_INFO("glClearStencil(%" PRId32 ")\n", stencil);
+    GAPID_INFO("glClearStencil(%" PRId32 ")", stencil);
 
     Observations observations;
     do {
@@ -10157,7 +10150,7 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
 }
 
 inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
-    GAPID_INFO("glColorMask(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")\n", red, green, blue,
+    GAPID_INFO("glColorMask(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")", red, green, blue,
                alpha);
 
     Observations observations;
@@ -10181,7 +10174,7 @@ inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8
 }
 
 inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers) {
-    GAPID_INFO("glDeleteFramebuffers(%" PRId32 ", %p)\n", count, framebuffers);
+    GAPID_INFO("glDeleteFramebuffers(%" PRId32 ", %p)", count, framebuffers);
 
     Observations observations;
     do {
@@ -10208,7 +10201,7 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
 }
 
 inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers) {
-    GAPID_INFO("glDeleteRenderbuffers(%" PRId32 ", %p)\n", count, renderbuffers);
+    GAPID_INFO("glDeleteRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
 
     Observations observations;
     do {
@@ -10236,7 +10229,7 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
 }
 
 inline void GlesSpy::glDepthMask(uint8_t enabled) {
-    GAPID_INFO("glDepthMask(%" PRIu8 ")\n", enabled);
+    GAPID_INFO("glDepthMask(%" PRIu8 ")", enabled);
 
     Observations observations;
     do {
@@ -10256,7 +10249,7 @@ inline void GlesSpy::glDepthMask(uint8_t enabled) {
 }
 
 inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param) {
-    GAPID_INFO("glFramebufferParameteri(%u, %u, %" PRId32 ")\n", target, pname, param);
+    GAPID_INFO("glFramebufferParameteri(%u, %u, %" PRId32 ")", target, pname, param);
 
     Observations observations;
     do {
@@ -10290,7 +10283,7 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                                uint32_t framebuffer_attachment,
                                                uint32_t renderbuffer_target,
                                                uint32_t renderbuffer) {
-    GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %" PRIu32 ")\n", framebuffer_target,
+    GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %" PRIu32 ")", framebuffer_target,
                framebuffer_attachment, renderbuffer_target, renderbuffer);
 
     Observations observations;
@@ -10379,7 +10372,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
                                             uint32_t framebuffer_attachment,
                                             uint32_t texture_target, uint32_t texture,
                                             int32_t level) {
-    GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %" PRIu32 ", %" PRId32 ")\n", framebuffer_target,
+    GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %" PRIu32 ", %" PRId32 ")", framebuffer_target,
                framebuffer_attachment, texture_target, texture, level);
 
     Observations observations;
@@ -10489,7 +10482,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
 
 inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachment,
                                                uint32_t texture, int32_t level, int32_t layer) {
-    GAPID_INFO("glFramebufferTextureLayer(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", target,
+    GAPID_INFO("glFramebufferTextureLayer(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                attachment, texture, level, layer);
 
     Observations observations;
@@ -10537,7 +10530,7 @@ inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachm
 }
 
 inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
-    GAPID_INFO("glGenFramebuffers(%" PRId32 ", %p)\n", count, framebuffers);
+    GAPID_INFO("glGenFramebuffers(%" PRId32 ", %p)", count, framebuffers);
 
     Observations observations;
     do {
@@ -10566,7 +10559,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
 }
 
 inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) {
-    GAPID_INFO("glGenRenderbuffers(%" PRId32 ", %p)\n", count, renderbuffers);
+    GAPID_INFO("glGenRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
 
     Observations observations;
     do {
@@ -10599,7 +10592,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
 inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target,
                                                            uint32_t attachment, uint32_t parameter,
                                                            int32_t* value) {
-    GAPID_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", framebuffer_target,
+    GAPID_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)", framebuffer_target,
                attachment, parameter, value);
 
     Observations observations;
@@ -10702,7 +10695,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
 }
 
 inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetFramebufferParameteriv(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glGetFramebufferParameteriv(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -10736,7 +10729,7 @@ inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname
 
 inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter,
                                                   int32_t* values) {
-    GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)\n", target, parameter, values);
+    GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)", target, parameter, values);
 
     Observations observations;
     do {
@@ -10790,7 +10783,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
 
 inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
                                              uint32_t* attachments) {
-    GAPID_INFO("glInvalidateFramebuffer(%u, %" PRId32 ", %p)\n", target, count, attachments);
+    GAPID_INFO("glInvalidateFramebuffer(%u, %" PRId32 ", %p)", target, count, attachments);
 
     Observations observations;
     do {
@@ -10817,7 +10810,7 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
                                                 uint32_t* attachments, int32_t x, int32_t y,
                                                 int32_t width, int32_t height) {
     GAPID_INFO("glInvalidateSubFramebuffer(%u, %" PRId32 ", %p, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ")\n",
+               ", %" PRId32 ")",
                target, numAttachments, attachments, x, y, width, height);
 
     Observations observations;
@@ -10844,7 +10837,7 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
 }
 
 inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
-    GAPID_INFO("glIsFramebuffer(%" PRIu32 ")\n", framebuffer);
+    GAPID_INFO("glIsFramebuffer(%" PRIu32 ")", framebuffer);
 
     uint8_t result = 0;
 
@@ -10868,7 +10861,7 @@ inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
 }
 
 inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
-    GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")\n", renderbuffer);
+    GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")", renderbuffer);
 
     uint8_t result = 0;
 
@@ -10892,7 +10885,7 @@ inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
 }
 
 inline void GlesSpy::glReadBuffer(uint32_t src) {
-    GAPID_INFO("glReadBuffer(%u)\n", src);
+    GAPID_INFO("glReadBuffer(%u)", src);
 
     Observations observations;
     do {
@@ -10931,8 +10924,8 @@ inline void GlesSpy::glReadBuffer(uint32_t src) {
 
 inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
                                   uint32_t format, uint32_t type, void* data) {
-    GAPID_INFO("glReadPixels(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)\n", x,
-               y, width, height, format, type, data);
+    GAPID_INFO("glReadPixels(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)", x, y,
+               width, height, format, type, data);
 
     Observations observations;
     do {
@@ -10993,7 +10986,7 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
 
 inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width,
                                            int32_t height) {
-    GAPID_INFO("glRenderbufferStorage(%u, %u, %" PRId32 ", %" PRId32 ")\n", target, format, width,
+    GAPID_INFO("glRenderbufferStorage(%u, %u, %" PRId32 ", %" PRId32 ")", target, format, width,
                height);
 
     Observations observations;
@@ -11067,7 +11060,7 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
 inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
                                                       uint32_t format, int32_t width,
                                                       int32_t height) {
-    GAPID_INFO("glRenderbufferStorageMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glRenderbufferStorageMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, format, width, height);
 
     Observations observations;
@@ -11128,7 +11121,7 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
 }
 
 inline void GlesSpy::glStencilMask(uint32_t mask) {
-    GAPID_INFO("glStencilMask(%" PRIu32 ")\n", mask);
+    GAPID_INFO("glStencilMask(%" PRIu32 ")", mask);
 
     Observations observations;
     do {
@@ -11149,7 +11142,7 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
 }
 
 inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
-    GAPID_INFO("glStencilMaskSeparate(%u, %" PRIu32 ")\n", face, mask);
+    GAPID_INFO("glStencilMaskSeparate(%u, %" PRIu32 ")", face, mask);
 
     Observations observations;
     do {
@@ -11190,7 +11183,7 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
 }
 
 inline void GlesSpy::glDisable(uint32_t capability) {
-    GAPID_INFO("glDisable(%u)\n", capability);
+    GAPID_INFO("glDisable(%u)", capability);
 
     Observations observations;
     do {
@@ -11234,7 +11227,7 @@ inline void GlesSpy::glDisable(uint32_t capability) {
 }
 
 inline void GlesSpy::glEnable(uint32_t capability) {
-    GAPID_INFO("glEnable(%u)\n", capability);
+    GAPID_INFO("glEnable(%u)", capability);
 
     Observations observations;
     do {
@@ -11278,7 +11271,7 @@ inline void GlesSpy::glEnable(uint32_t capability) {
 }
 
 inline void GlesSpy::glFinish() {
-    GAPID_INFO("glFinish()\n");
+    GAPID_INFO("glFinish()");
 
     Observations observations;
     do {
@@ -11294,7 +11287,7 @@ inline void GlesSpy::glFinish() {
 }
 
 inline void GlesSpy::glFlush() {
-    GAPID_INFO("glFlush()\n");
+    GAPID_INFO("glFlush()");
 
     Observations observations;
     do {
@@ -11310,7 +11303,7 @@ inline void GlesSpy::glFlush() {
 }
 
 inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, int32_t length) {
-    GAPID_INFO("glFlushMappedBufferRange(%u, %" PRId32 ", %" PRId32 ")\n", target, offset, length);
+    GAPID_INFO("glFlushMappedBufferRange(%u, %" PRId32 ", %" PRId32 ")", target, offset, length);
 
     Observations observations;
     do {
@@ -11338,7 +11331,7 @@ inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, i
 }
 
 inline uint32_t GlesSpy::glGetError() {
-    GAPID_INFO("glGetError()\n");
+    GAPID_INFO("glGetError()");
 
     uint32_t result = 0;
 
@@ -11359,7 +11352,7 @@ inline uint32_t GlesSpy::glGetError() {
 }
 
 inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
-    GAPID_INFO("glHint(%u, %u)\n", target, mode);
+    GAPID_INFO("glHint(%u, %u)", target, mode);
 
     Observations observations;
     do {
@@ -11396,7 +11389,7 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
 }
 
 inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) {
-    GAPID_INFO("glActiveShaderProgram(%" PRIu32 ", %" PRIu32 ")\n", pipeline, program);
+    GAPID_INFO("glActiveShaderProgram(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
 
     Observations observations;
     do {
@@ -11412,7 +11405,7 @@ inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) 
 }
 
 inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
-    GAPID_INFO("glAttachShader(%" PRIu32 ", %" PRIu32 ")\n", program, shader);
+    GAPID_INFO("glAttachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
 
     Observations observations;
     do {
@@ -11434,7 +11427,7 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
 }
 
 inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, char* name) {
-    GAPID_INFO("glBindAttribLocation(%" PRIu32 ", %" PRIu32 ", %s)\n", program, location, name);
+    GAPID_INFO("glBindAttribLocation(%" PRIu32 ", %" PRIu32 ", %s)", program, location, name);
 
     Observations observations;
     do {
@@ -11455,7 +11448,7 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, c
 }
 
 inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
-    GAPID_INFO("glBindProgramPipeline(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glBindProgramPipeline(%" PRIu32 ")", pipeline);
 
     Observations observations;
     do {
@@ -11471,7 +11464,7 @@ inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
 }
 
 inline void GlesSpy::glCompileShader(uint32_t shader) {
-    GAPID_INFO("glCompileShader(%" PRIu32 ")\n", shader);
+    GAPID_INFO("glCompileShader(%" PRIu32 ")", shader);
 
     Observations observations;
     do {
@@ -11487,7 +11480,7 @@ inline void GlesSpy::glCompileShader(uint32_t shader) {
 }
 
 inline uint32_t GlesSpy::glCreateProgram() {
-    GAPID_INFO("glCreateProgram()\n");
+    GAPID_INFO("glCreateProgram()");
 
     uint32_t result = 0;
 
@@ -11513,7 +11506,7 @@ inline uint32_t GlesSpy::glCreateProgram() {
 }
 
 inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
-    GAPID_INFO("glCreateShader(%u)\n", type);
+    GAPID_INFO("glCreateShader(%u)", type);
 
     uint32_t result = 0;
 
@@ -11552,7 +11545,7 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
 }
 
 inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, char** strings) {
-    GAPID_INFO("glCreateShaderProgramv(%u, %" PRId32 ", %p)\n", type, count, strings);
+    GAPID_INFO("glCreateShaderProgramv(%u, %" PRId32 ", %p)", type, count, strings);
 
     uint32_t result = 0;
 
@@ -11584,7 +11577,7 @@ inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, ch
 }
 
 inline void GlesSpy::glDeleteProgram(uint32_t program) {
-    GAPID_INFO("glDeleteProgram(%" PRIu32 ")\n", program);
+    GAPID_INFO("glDeleteProgram(%" PRIu32 ")", program);
 
     Observations observations;
     do {
@@ -11604,7 +11597,7 @@ inline void GlesSpy::glDeleteProgram(uint32_t program) {
 }
 
 inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
-    GAPID_INFO("glDeleteProgramPipelines(%" PRId32 ", %p)\n", n, pipelines);
+    GAPID_INFO("glDeleteProgramPipelines(%" PRId32 ", %p)", n, pipelines);
 
     Observations observations;
     do {
@@ -11622,7 +11615,7 @@ inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
 }
 
 inline void GlesSpy::glDeleteShader(uint32_t shader) {
-    GAPID_INFO("glDeleteShader(%" PRIu32 ")\n", shader);
+    GAPID_INFO("glDeleteShader(%" PRIu32 ")", shader);
 
     Observations observations;
     do {
@@ -11644,7 +11637,7 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
 }
 
 inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
-    GAPID_INFO("glDetachShader(%" PRIu32 ", %" PRIu32 ")\n", program, shader);
+    GAPID_INFO("glDetachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
 
     Observations observations;
     do {
@@ -11667,7 +11660,7 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
 
 inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_groups_y,
                                        uint32_t num_groups_z) {
-    GAPID_INFO("glDispatchCompute(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")\n", num_groups_x,
+    GAPID_INFO("glDispatchCompute(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", num_groups_x,
                num_groups_y, num_groups_z);
 
     Observations observations;
@@ -11685,7 +11678,7 @@ inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_group
 }
 
 inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
-    GAPID_INFO("glDispatchComputeIndirect(%" PRId32 ")\n", indirect);
+    GAPID_INFO("glDispatchComputeIndirect(%" PRId32 ")", indirect);
 
     Observations observations;
     do {
@@ -11701,7 +11694,7 @@ inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
 }
 
 inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
-    GAPID_INFO("glGenProgramPipelines(%" PRId32 ", %p)\n", n, pipelines);
+    GAPID_INFO("glGenProgramPipelines(%" PRId32 ", %p)", n, pipelines);
 
     Observations observations;
     do {
@@ -11721,8 +11714,8 @@ inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
 inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                        uint32_t* type, char* name) {
-    GAPID_INFO("glGetActiveAttrib(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)\n",
-               program, location, buffer_size, buffer_bytes_written, vector_count, type, name);
+    GAPID_INFO("glGetActiveAttrib(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)", program,
+               location, buffer_size, buffer_bytes_written, vector_count, type, name);
 
     Observations observations;
     do {
@@ -11759,8 +11752,8 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
 inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
                                         int32_t* buffer_bytes_written, int32_t* vector_count,
                                         uint32_t* type, char* name) {
-    GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)\n",
-               program, location, buffer_size, buffer_bytes_written, vector_count, type, name);
+    GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)", program,
+               location, buffer_size, buffer_bytes_written, vector_count, type, name);
 
     Observations observations;
     do {
@@ -11797,7 +11790,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
 inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t uniform_block_index,
                                                  int32_t buffer_size, int32_t* buffer_bytes_written,
                                                  char* name) {
-    GAPID_INFO("glGetActiveUniformBlockName(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)\n",
+    GAPID_INFO("glGetActiveUniformBlockName(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                program, uniform_block_index, buffer_size, buffer_bytes_written, name);
 
     Observations observations;
@@ -11824,7 +11817,7 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
 
 inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t uniform_block_index,
                                                uint32_t parameter_name, int32_t* parameters) {
-    GAPID_INFO("glGetActiveUniformBlockiv(%" PRIu32 ", %" PRIu32 ", %u, %p)\n", program,
+    GAPID_INFO("glGetActiveUniformBlockiv(%" PRIu32 ", %" PRIu32 ", %u, %p)", program,
                uniform_block_index, parameter_name, parameters);
 
     Observations observations;
@@ -11859,7 +11852,7 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
 inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_count,
                                            uint32_t* uniform_indices, uint32_t parameter_name,
                                            int32_t* parameters) {
-    GAPID_INFO("glGetActiveUniformsiv(%" PRIu32 ", %" PRId32 ", %p, %u, %p)\n", program,
+    GAPID_INFO("glGetActiveUniformsiv(%" PRIu32 ", %" PRId32 ", %p, %u, %p)", program,
                uniform_count, uniform_indices, parameter_name, parameters);
 
     Observations observations;
@@ -11897,7 +11890,7 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_cou
 
 inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_length,
                                           int32_t* shaders_length_written, uint32_t* shaders) {
-    GAPID_INFO("glGetAttachedShaders(%" PRIu32 ", %" PRId32 ", %p, %p)\n", program, buffer_length,
+    GAPID_INFO("glGetAttachedShaders(%" PRIu32 ", %" PRId32 ", %p, %p)", program, buffer_length,
                shaders_length_written, shaders);
 
     Observations observations;
@@ -11932,7 +11925,7 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
 }
 
 inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
-    GAPID_INFO("glGetAttribLocation(%" PRIu32 ", %s)\n", program, name);
+    GAPID_INFO("glGetAttribLocation(%" PRIu32 ", %s)", program, name);
 
     int32_t result = 0;
 
@@ -11953,7 +11946,7 @@ inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
 }
 
 inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
-    GAPID_INFO("glGetFragDataLocation(%" PRIu32 ", %p)\n", program, name);
+    GAPID_INFO("glGetFragDataLocation(%" PRIu32 ", %p)", program, name);
 
     int32_t result = 0;
 
@@ -11978,8 +11971,8 @@ inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
 
 inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32_t* length,
                                         uint32_t* binaryFormat, void* binary) {
-    GAPID_INFO("glGetProgramBinary(%" PRIu32 ", %" PRId32 ", %p, %p, %p)\n", program, bufSize,
-               length, binaryFormat, binary);
+    GAPID_INFO("glGetProgramBinary(%" PRIu32 ", %" PRId32 ", %p, %p, %p)", program, bufSize, length,
+               binaryFormat, binary);
 
     Observations observations;
     do {
@@ -12003,7 +11996,7 @@ inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32
 
 inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length,
                                          int32_t* string_length_written, char* info) {
-    GAPID_INFO("glGetProgramInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)\n", program, buffer_length,
+    GAPID_INFO("glGetProgramInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", program, buffer_length,
                string_length_written, info);
 
     Observations observations;
@@ -12042,8 +12035,8 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
 
 inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programInterface,
                                              uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetProgramInterfaceiv(%" PRIu32 ", %u, %u, %p)\n", program, programInterface,
-               pname, params);
+    GAPID_INFO("glGetProgramInterfaceiv(%" PRIu32 ", %u, %u, %p)", program, programInterface, pname,
+               params);
 
     Observations observations;
     do {
@@ -12083,7 +12076,7 @@ inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programI
 
 inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufSize,
                                                  int32_t* length, char* infoLog) {
-    GAPID_INFO("glGetProgramPipelineInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)\n", pipeline, bufSize,
+    GAPID_INFO("glGetProgramPipelineInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", pipeline, bufSize,
                length, infoLog);
 
     Observations observations;
@@ -12105,7 +12098,7 @@ inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufS
 }
 
 inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetProgramPipelineiv(%" PRIu32 ", %u, %p)\n", pipeline, pname, params);
+    GAPID_INFO("glGetProgramPipelineiv(%" PRIu32 ", %u, %p)", pipeline, pname, params);
 
     Observations observations;
     do {
@@ -12135,7 +12128,7 @@ inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, i
 
 inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t programInterface,
                                                    char* name) {
-    GAPID_INFO("glGetProgramResourceIndex(%" PRIu32 ", %u, %p)\n", program, programInterface, name);
+    GAPID_INFO("glGetProgramResourceIndex(%" PRIu32 ", %u, %p)", program, programInterface, name);
 
     uint32_t result = 0;
 
@@ -12172,7 +12165,7 @@ inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t pr
 
 inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t programInterface,
                                                      char* name) {
-    GAPID_INFO("glGetProgramResourceLocation(%" PRIu32 ", %u, %p)\n", program, programInterface,
+    GAPID_INFO("glGetProgramResourceLocation(%" PRIu32 ", %u, %p)", program, programInterface,
                name);
 
     int32_t result = 0;
@@ -12208,7 +12201,7 @@ inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t 
 inline void GlesSpy::glGetProgramResourceName(uint32_t program, uint32_t programInterface,
                                               uint32_t index, int32_t bufSize, int32_t* length,
                                               char* name) {
-    GAPID_INFO("glGetProgramResourceName(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %p)\n",
+    GAPID_INFO("glGetProgramResourceName(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %p)",
                program, programInterface, index, bufSize, length, name);
 
     Observations observations;
@@ -12244,7 +12237,7 @@ inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programIn
                                             uint32_t index, int32_t propCount, uint32_t* props,
                                             int32_t bufSize, int32_t* length, int32_t* params) {
     GAPID_INFO("glGetProgramResourceiv(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %" PRId32
-               ", %p, %p)\n",
+               ", %p, %p)",
                program, programInterface, index, propCount, props, bufSize, length, params);
 
     Observations observations;
@@ -12282,7 +12275,7 @@ inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programIn
 }
 
 inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetProgramiv(%" PRIu32 ", %u, %p)\n", program, parameter, value);
+    GAPID_INFO("glGetProgramiv(%" PRIu32 ", %u, %p)", program, parameter, value);
 
     Observations observations;
     do {
@@ -12333,7 +12326,7 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
 
 inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
                                         int32_t* string_length_written, char* info) {
-    GAPID_INFO("glGetShaderInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, buffer_length,
+    GAPID_INFO("glGetShaderInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, buffer_length,
                string_length_written, info);
 
     Observations observations;
@@ -12372,7 +12365,7 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
 
 inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                                 int32_t* range, int32_t* precision) {
-    GAPID_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)\n", shader_type, precision_type, range,
+    GAPID_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)", shader_type, precision_type, range,
                precision);
 
     Observations observations;
@@ -12413,7 +12406,7 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
 
 inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
                                        int32_t* string_length_written, char* source) {
-    GAPID_INFO("glGetShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, buffer_length,
+    GAPID_INFO("glGetShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, buffer_length,
                string_length_written, source);
 
     Observations observations;
@@ -12451,7 +12444,7 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
 }
 
 inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetShaderiv(%" PRIu32 ", %u, %p)\n", shader, parameter, value);
+    GAPID_INFO("glGetShaderiv(%" PRIu32 ", %u, %p)", shader, parameter, value);
 
     Observations observations;
     do {
@@ -12510,7 +12503,7 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
 }
 
 inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformBlockName) {
-    GAPID_INFO("glGetUniformBlockIndex(%" PRIu32 ", %p)\n", program, uniformBlockName);
+    GAPID_INFO("glGetUniformBlockIndex(%" PRIu32 ", %p)", program, uniformBlockName);
 
     uint32_t result = 0;
 
@@ -12535,7 +12528,7 @@ inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformB
 
 inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
                                          char** uniformNames, uint32_t* uniformIndices) {
-    GAPID_INFO("glGetUniformIndices(%" PRIu32 ", %" PRId32 ", %p, %p)\n", program, uniformCount,
+    GAPID_INFO("glGetUniformIndices(%" PRIu32 ", %" PRId32 ", %p, %p)", program, uniformCount,
                uniformNames, uniformIndices);
 
     Observations observations;
@@ -12557,7 +12550,7 @@ inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
 }
 
 inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
-    GAPID_INFO("glGetUniformLocation(%" PRIu32 ", %s)\n", program, name);
+    GAPID_INFO("glGetUniformLocation(%" PRIu32 ", %s)", program, name);
 
     int32_t result = 0;
 
@@ -12578,7 +12571,7 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
 }
 
 inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* values) {
-    GAPID_INFO("glGetUniformfv(%" PRIu32 ", %" PRId32 ", %p)\n", program, location, values);
+    GAPID_INFO("glGetUniformfv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
 
     Observations observations;
     do {
@@ -12597,7 +12590,7 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
 }
 
 inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t* values) {
-    GAPID_INFO("glGetUniformiv(%" PRIu32 ", %" PRId32 ", %p)\n", program, location, values);
+    GAPID_INFO("glGetUniformiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
 
     Observations observations;
     do {
@@ -12616,7 +12609,7 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
 }
 
 inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params) {
-    GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)\n", program, location, params);
+    GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, params);
 
     Observations observations;
     do {
@@ -12635,7 +12628,7 @@ inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_
 }
 
 inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
-    GAPID_INFO("glIsProgram(%" PRIu32 ")\n", program);
+    GAPID_INFO("glIsProgram(%" PRIu32 ")", program);
 
     uint8_t result = 0;
 
@@ -12659,7 +12652,7 @@ inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
 }
 
 inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
-    GAPID_INFO("glIsProgramPipeline(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glIsProgramPipeline(%" PRIu32 ")", pipeline);
 
     uint8_t result = 0;
 
@@ -12680,7 +12673,7 @@ inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
 }
 
 inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
-    GAPID_INFO("glIsShader(%" PRIu32 ")\n", shader);
+    GAPID_INFO("glIsShader(%" PRIu32 ")", shader);
 
     uint8_t result = 0;
 
@@ -12704,7 +12697,7 @@ inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
 }
 
 inline void GlesSpy::glLinkProgram(uint32_t program) {
-    GAPID_INFO("glLinkProgram(%" PRIu32 ")\n", program);
+    GAPID_INFO("glLinkProgram(%" PRIu32 ")", program);
 
     Observations observations;
     do {
@@ -12720,7 +12713,7 @@ inline void GlesSpy::glLinkProgram(uint32_t program) {
 }
 
 inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
-    GAPID_INFO("glMemoryBarrier(%u)\n", barriers);
+    GAPID_INFO("glMemoryBarrier(%u)", barriers);
 
     Observations observations;
     do {
@@ -12776,7 +12769,7 @@ inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
 }
 
 inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
-    GAPID_INFO("glMemoryBarrierByRegion(%u)\n", barriers);
+    GAPID_INFO("glMemoryBarrierByRegion(%u)", barriers);
 
     Observations observations;
     do {
@@ -12833,7 +12826,7 @@ inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
 
 inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, void* binary,
                                      int32_t length) {
-    GAPID_INFO("glProgramBinary(%" PRIu32 ", %u, %p, %" PRId32 ")\n", program, binaryFormat, binary,
+    GAPID_INFO("glProgramBinary(%" PRIu32 ", %u, %p, %" PRId32 ")", program, binaryFormat, binary,
                length);
 
     Observations observations;
@@ -12855,7 +12848,7 @@ inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, vo
 }
 
 inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32_t value) {
-    GAPID_INFO("glProgramParameteri(%" PRIu32 ", %u, %" PRId32 ")\n", program, pname, value);
+    GAPID_INFO("glProgramParameteri(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
 
     Observations observations;
     do {
@@ -12881,7 +12874,7 @@ inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32
 }
 
 inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, float v0) {
-    GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)\n", program, location, v0);
+    GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
 
     Observations observations;
     do {
@@ -12898,8 +12891,8 @@ inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, floa
 
 inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
-    GAPID_INFO("glProgramUniform1fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform1fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -12918,8 +12911,7 @@ inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int
 }
 
 inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int32_t v0) {
-    GAPID_INFO("glProgramUniform1i(%" PRIu32 ", %" PRId32 ", %" PRId32 ")\n", program, location,
-               v0);
+    GAPID_INFO("glProgramUniform1i(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", program, location, v0);
 
     Observations observations;
     do {
@@ -12936,8 +12928,8 @@ inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
-    GAPID_INFO("glProgramUniform1iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform1iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -12956,8 +12948,7 @@ inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int
 }
 
 inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uint32_t v0) {
-    GAPID_INFO("glProgramUniform1ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")\n", program, location,
-               v0);
+    GAPID_INFO("glProgramUniform1ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", program, location, v0);
 
     Observations observations;
     do {
@@ -12974,8 +12965,8 @@ inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uin
 
 inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
-    GAPID_INFO("glProgramUniform1uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform1uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -12994,7 +12985,7 @@ inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, in
 }
 
 inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, float v0, float v1) {
-    GAPID_INFO("glProgramUniform2f(%" PRIu32 ", %" PRId32 ", %f, %f)\n", program, location, v0, v1);
+    GAPID_INFO("glProgramUniform2f(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location, v0, v1);
 
     Observations observations;
     do {
@@ -13011,8 +13002,8 @@ inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, floa
 
 inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
-    GAPID_INFO("glProgramUniform2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13032,7 +13023,7 @@ inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int
 
 inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int32_t v0,
                                         int32_t v1) {
-    GAPID_INFO("glProgramUniform2i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", program,
+    GAPID_INFO("glProgramUniform2i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", program,
                location, v0, v1);
 
     Observations observations;
@@ -13050,8 +13041,8 @@ inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
-    GAPID_INFO("glProgramUniform2iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform2iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13071,7 +13062,7 @@ inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int
 
 inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1) {
-    GAPID_INFO("glProgramUniform2ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")\n", program,
+    GAPID_INFO("glProgramUniform2ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")", program,
                location, v0, v1);
 
     Observations observations;
@@ -13089,8 +13080,8 @@ inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uin
 
 inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
-    GAPID_INFO("glProgramUniform2uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform2uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13110,7 +13101,7 @@ inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, in
 
 inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, float v0, float v1,
                                         float v2) {
-    GAPID_INFO("glProgramUniform3f(%" PRIu32 ", %" PRId32 ", %f, %f, %f)\n", program, location, v0,
+    GAPID_INFO("glProgramUniform3f(%" PRIu32 ", %" PRId32 ", %f, %f, %f)", program, location, v0,
                v1, v2);
 
     Observations observations;
@@ -13128,8 +13119,8 @@ inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, floa
 
 inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
-    GAPID_INFO("glProgramUniform3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13150,7 +13141,7 @@ inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int
 inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                         int32_t v2) {
     GAPID_INFO("glProgramUniform3i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ")\n",
+               ")",
                program, location, v0, v1, v2);
 
     Observations observations;
@@ -13168,8 +13159,8 @@ inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
-    GAPID_INFO("glProgramUniform3iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform3iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13190,7 +13181,7 @@ inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int
 inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1, uint32_t v2) {
     GAPID_INFO("glProgramUniform3ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
-               ")\n",
+               ")",
                program, location, v0, v1, v2);
 
     Observations observations;
@@ -13208,8 +13199,8 @@ inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uin
 
 inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
-    GAPID_INFO("glProgramUniform3uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform3uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13229,7 +13220,7 @@ inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, in
 
 inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, float v0, float v1,
                                         float v2, float v3) {
-    GAPID_INFO("glProgramUniform4f(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)\n", program, location,
+    GAPID_INFO("glProgramUniform4f(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)", program, location,
                v0, v1, v2, v3);
 
     Observations observations;
@@ -13247,8 +13238,8 @@ inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, floa
 
 inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
-    GAPID_INFO("glProgramUniform4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13269,7 +13260,7 @@ inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int
 inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                         int32_t v2, int32_t v3) {
     GAPID_INFO("glProgramUniform4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ")\n",
+               ", %" PRId32 ")",
                program, location, v0, v1, v2, v3);
 
     Observations observations;
@@ -13287,8 +13278,8 @@ inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int3
 
 inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
-    GAPID_INFO("glProgramUniform4iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform4iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13309,7 +13300,7 @@ inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int
 inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1, uint32_t v2, uint32_t v3) {
     GAPID_INFO("glProgramUniform4ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
-               ", %" PRIu32 ")\n",
+               ", %" PRIu32 ")",
                program, location, v0, v1, v2, v3);
 
     Observations observations;
@@ -13327,8 +13318,8 @@ inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uin
 
 inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
-    GAPID_INFO("glProgramUniform4uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)\n", program,
-               location, count, value);
+    GAPID_INFO("glProgramUniform4uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+               count, value);
 
     Observations observations;
     do {
@@ -13348,7 +13339,7 @@ inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, in
 
 inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13369,8 +13360,7 @@ inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t locatio
 
 inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix2x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix2x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13391,8 +13381,7 @@ inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t locat
 
 inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix2x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix2x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13413,7 +13402,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t locat
 
 inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13434,8 +13423,7 @@ inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t locatio
 
 inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix3x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix3x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13456,8 +13444,7 @@ inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t locat
 
 inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix3x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix3x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13478,7 +13465,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t locat
 
 inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13499,8 +13486,7 @@ inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t locatio
 
 inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix4x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix4x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13521,8 +13507,7 @@ inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t locat
 
 inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
-    GAPID_INFO("glProgramUniformMatrix4x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
-               ", %p)\n",
+    GAPID_INFO("glProgramUniformMatrix4x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
 
     Observations observations;
@@ -13542,7 +13527,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t locat
 }
 
 inline void GlesSpy::glReleaseShaderCompiler() {
-    GAPID_INFO("glReleaseShaderCompiler()\n");
+    GAPID_INFO("glReleaseShaderCompiler()");
 
     Observations observations;
     do {
@@ -13559,7 +13544,7 @@ inline void GlesSpy::glReleaseShaderCompiler() {
 
 inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t binary_format,
                                     void* binary, int32_t binary_size) {
-    GAPID_INFO("glShaderBinary(%" PRId32 ", %p, %u, %p, %" PRId32 ")\n", count, shaders,
+    GAPID_INFO("glShaderBinary(%" PRId32 ", %p, %u, %p, %" PRId32 ")", count, shaders,
                binary_format, binary, binary_size);
 
     Observations observations;
@@ -13585,7 +13570,7 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
 
 inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** source,
                                     int32_t* length) {
-    GAPID_INFO("glShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, count, source, length);
+    GAPID_INFO("glShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, count, source, length);
 
     Observations observations;
     do {
@@ -13620,7 +13605,7 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
 }
 
 inline void GlesSpy::glUniform1f(int32_t location, float value) {
-    GAPID_INFO("glUniform1f(%" PRId32 ", %f)\n", location, value);
+    GAPID_INFO("glUniform1f(%" PRId32 ", %f)", location, value);
 
     Observations observations;
     do {
@@ -13646,7 +13631,7 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
 }
 
 inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values) {
-    GAPID_INFO("glUniform1fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform1fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -13674,7 +13659,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
 }
 
 inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
-    GAPID_INFO("glUniform1i(%" PRId32 ", %" PRId32 ")\n", location, value);
+    GAPID_INFO("glUniform1i(%" PRId32 ", %" PRId32 ")", location, value);
 
     Observations observations;
     do {
@@ -13700,7 +13685,7 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
 }
 
 inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* values) {
-    GAPID_INFO("glUniform1iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform1iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -13728,7 +13713,7 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
 }
 
 inline void GlesSpy::glUniform1ui(int32_t location, uint32_t v0) {
-    GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")\n", location, v0);
+    GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")", location, v0);
 
     Observations observations;
     do {
@@ -13744,7 +13729,7 @@ inline void GlesSpy::glUniform1ui(int32_t location, uint32_t v0) {
 }
 
 inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* value) {
-    GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, value);
+    GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
 
     Observations observations;
     do {
@@ -13763,7 +13748,7 @@ inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* va
 }
 
 inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
-    GAPID_INFO("glUniform2f(%" PRId32 ", %f, %f)\n", location, value0, value1);
+    GAPID_INFO("glUniform2f(%" PRId32 ", %f, %f)", location, value0, value1);
 
     Observations observations;
     do {
@@ -13789,7 +13774,7 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
 }
 
 inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values) {
-    GAPID_INFO("glUniform2fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform2fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -13817,7 +13802,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
 }
 
 inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value1) {
-    GAPID_INFO("glUniform2i(%" PRId32 ", %" PRId32 ", %" PRId32 ")\n", location, value0, value1);
+    GAPID_INFO("glUniform2i(%" PRId32 ", %" PRId32 ", %" PRId32 ")", location, value0, value1);
 
     Observations observations;
     do {
@@ -13843,7 +13828,7 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
 }
 
 inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* values) {
-    GAPID_INFO("glUniform2iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform2iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -13871,7 +13856,7 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
 }
 
 inline void GlesSpy::glUniform2ui(int32_t location, uint32_t v0, uint32_t v1) {
-    GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")\n", location, v0, v1);
+    GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")", location, v0, v1);
 
     Observations observations;
     do {
@@ -13887,7 +13872,7 @@ inline void GlesSpy::glUniform2ui(int32_t location, uint32_t v0, uint32_t v1) {
 }
 
 inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* value) {
-    GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, value);
+    GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
 
     Observations observations;
     do {
@@ -13906,7 +13891,7 @@ inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* va
 }
 
 inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, float value2) {
-    GAPID_INFO("glUniform3f(%" PRId32 ", %f, %f, %f)\n", location, value0, value1, value2);
+    GAPID_INFO("glUniform3f(%" PRId32 ", %f, %f, %f)", location, value0, value1, value2);
 
     Observations observations;
     do {
@@ -13932,7 +13917,7 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
 }
 
 inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values) {
-    GAPID_INFO("glUniform3fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform3fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -13960,8 +13945,8 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
 }
 
 inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value1, int32_t value2) {
-    GAPID_INFO("glUniform3i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", location,
-               value0, value1, value2);
+    GAPID_INFO("glUniform3i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", location, value0,
+               value1, value2);
 
     Observations observations;
     do {
@@ -13987,7 +13972,7 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
 }
 
 inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* values) {
-    GAPID_INFO("glUniform3iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform3iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -14015,8 +14000,8 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
 }
 
 inline void GlesSpy::glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2) {
-    GAPID_INFO("glUniform3ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")\n", location, v0,
-               v1, v2);
+    GAPID_INFO("glUniform3ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", location, v0, v1,
+               v2);
 
     Observations observations;
     do {
@@ -14032,7 +14017,7 @@ inline void GlesSpy::glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, ui
 }
 
 inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* value) {
-    GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, value);
+    GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
 
     Observations observations;
     do {
@@ -14052,7 +14037,7 @@ inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* va
 
 inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, float value2,
                                  float value3) {
-    GAPID_INFO("glUniform4f(%" PRId32 ", %f, %f, %f, %f)\n", location, value0, value1, value2,
+    GAPID_INFO("glUniform4f(%" PRId32 ", %f, %f, %f, %f)", location, value0, value1, value2,
                value3);
 
     Observations observations;
@@ -14079,7 +14064,7 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
 }
 
 inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values) {
-    GAPID_INFO("glUniform4fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform4fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -14108,7 +14093,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
 
 inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2,
                                  int32_t value3) {
-    GAPID_INFO("glUniform4i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glUniform4i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                location, value0, value1, value2, value3);
 
     Observations observations;
@@ -14135,7 +14120,7 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
 }
 
 inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* values) {
-    GAPID_INFO("glUniform4iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
+    GAPID_INFO("glUniform4iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
 
     Observations observations;
     do {
@@ -14164,7 +14149,7 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
 
 inline void GlesSpy::glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2,
                                   uint32_t v3) {
-    GAPID_INFO("glUniform4ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")\n",
+    GAPID_INFO("glUniform4ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")",
                location, v0, v1, v2, v3);
 
     Observations observations;
@@ -14181,7 +14166,7 @@ inline void GlesSpy::glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, ui
 }
 
 inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* value) {
-    GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, value);
+    GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
 
     Observations observations;
     do {
@@ -14201,7 +14186,7 @@ inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* va
 
 inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_block_index,
                                            uint32_t uniform_block_binding) {
-    GAPID_INFO("glUniformBlockBinding(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")\n", program,
+    GAPID_INFO("glUniformBlockBinding(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", program,
                uniform_block_index, uniform_block_binding);
 
     Observations observations;
@@ -14220,7 +14205,7 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
 
 inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
-    GAPID_INFO("glUniformMatrix2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
 
     Observations observations;
@@ -14250,7 +14235,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t
 
 inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix2x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix2x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14271,7 +14256,7 @@ inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8
 
 inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix2x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix2x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14292,7 +14277,7 @@ inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8
 
 inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
-    GAPID_INFO("glUniformMatrix3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
 
     Observations observations;
@@ -14322,7 +14307,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t
 
 inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix3x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix3x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14343,7 +14328,7 @@ inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8
 
 inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix3x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix3x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14364,7 +14349,7 @@ inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8
 
 inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
-    GAPID_INFO("glUniformMatrix4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
 
     Observations observations;
@@ -14393,7 +14378,7 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t
 
 inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix4x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix4x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14414,7 +14399,7 @@ inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8
 
 inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
-    GAPID_INFO("glUniformMatrix4x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)\n", location, count,
+    GAPID_INFO("glUniformMatrix4x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
 
     Observations observations;
@@ -14434,7 +14419,7 @@ inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8
 }
 
 inline void GlesSpy::glUseProgram(uint32_t program) {
-    GAPID_INFO("glUseProgram(%" PRIu32 ")\n", program);
+    GAPID_INFO("glUseProgram(%" PRIu32 ")", program);
 
     Observations observations;
     do {
@@ -14454,7 +14439,7 @@ inline void GlesSpy::glUseProgram(uint32_t program) {
 }
 
 inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint32_t program) {
-    GAPID_INFO("glUseProgramStages(%" PRIu32 ", %u, %" PRIu32 ")\n", pipeline, stages, program);
+    GAPID_INFO("glUseProgramStages(%" PRIu32 ", %u, %" PRIu32 ")", pipeline, stages, program);
 
     Observations observations;
     do {
@@ -14482,7 +14467,7 @@ inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint
 }
 
 inline void GlesSpy::glValidateProgram(uint32_t program) {
-    GAPID_INFO("glValidateProgram(%" PRIu32 ")\n", program);
+    GAPID_INFO("glValidateProgram(%" PRIu32 ")", program);
 
     Observations observations;
     do {
@@ -14498,7 +14483,7 @@ inline void GlesSpy::glValidateProgram(uint32_t program) {
 }
 
 inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
-    GAPID_INFO("glValidateProgramPipeline(%" PRIu32 ")\n", pipeline);
+    GAPID_INFO("glValidateProgramPipeline(%" PRIu32 ")", pipeline);
 
     Observations observations;
     do {
@@ -14514,7 +14499,7 @@ inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
 }
 
 inline void GlesSpy::glCullFace(uint32_t mode) {
-    GAPID_INFO("glCullFace(%u)\n", mode);
+    GAPID_INFO("glCullFace(%u)", mode);
 
     Observations observations;
     do {
@@ -14541,7 +14526,7 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
 }
 
 inline void GlesSpy::glDepthRangef(float near, float far) {
-    GAPID_INFO("glDepthRangef(%f, %f)\n", near, far);
+    GAPID_INFO("glDepthRangef(%f, %f)", near, far);
 
     Observations observations;
     do {
@@ -14562,7 +14547,7 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
 }
 
 inline void GlesSpy::glFrontFace(uint32_t orientation) {
-    GAPID_INFO("glFrontFace(%u)\n", orientation);
+    GAPID_INFO("glFrontFace(%u)", orientation);
 
     Observations observations;
     do {
@@ -14588,7 +14573,7 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
 }
 
 inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* val) {
-    GAPID_INFO("glGetMultisamplefv(%u, %" PRIu32 ", %p)\n", pname, index, val);
+    GAPID_INFO("glGetMultisamplefv(%u, %" PRIu32 ", %p)", pname, index, val);
 
     Observations observations;
     do {
@@ -14612,7 +14597,7 @@ inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* v
 }
 
 inline void GlesSpy::glLineWidth(float width) {
-    GAPID_INFO("glLineWidth(%f)\n", width);
+    GAPID_INFO("glLineWidth(%f)", width);
 
     Observations observations;
     do {
@@ -14632,7 +14617,7 @@ inline void GlesSpy::glLineWidth(float width) {
 }
 
 inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
-    GAPID_INFO("glPolygonOffset(%f, %f)\n", scale_factor, units);
+    GAPID_INFO("glPolygonOffset(%f, %f)", scale_factor, units);
 
     Observations observations;
     do {
@@ -14653,7 +14638,7 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
 }
 
 inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t height) {
-    GAPID_INFO("glViewport(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", x, y, width,
+    GAPID_INFO("glViewport(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, width,
                height);
 
     Observations observations;
@@ -14674,7 +14659,7 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
 }
 
 inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data) {
-    GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)\n", target, index, data);
+    GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", target, index, data);
 
     Observations observations;
     do {
@@ -14886,7 +14871,7 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
 }
 
 inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
-    GAPID_INFO("glGetBooleanv(%u, %p)\n", param, values);
+    GAPID_INFO("glGetBooleanv(%u, %p)", param, values);
 
     Observations observations;
     do {
@@ -15173,7 +15158,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
 }
 
 inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
-    GAPID_INFO("glGetFloatv(%u, %p)\n", param, values);
+    GAPID_INFO("glGetFloatv(%u, %p)", param, values);
 
     Observations observations;
     do {
@@ -15449,7 +15434,7 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
 }
 
 inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data) {
-    GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)\n", target, index, data);
+    GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", target, index, data);
 
     Observations observations;
     do {
@@ -15665,7 +15650,7 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
 }
 
 inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
-    GAPID_INFO("glGetInteger64v(%u, %p)\n", pname, data);
+    GAPID_INFO("glGetInteger64v(%u, %p)", pname, data);
 
     Observations observations;
     do {
@@ -15880,7 +15865,7 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
 }
 
 inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data) {
-    GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)\n", target, index, data);
+    GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", target, index, data);
 
     Observations observations;
     do {
@@ -16095,7 +16080,7 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
 }
 
 inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
-    GAPID_INFO("glGetIntegerv(%u, %p)\n", param, values);
+    GAPID_INFO("glGetIntegerv(%u, %p)", param, values);
 
     Observations observations;
     do {
@@ -16590,8 +16575,8 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
 
 inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalformat, uint32_t pname,
                                            int32_t bufSize, int32_t* params) {
-    GAPID_INFO("glGetInternalformativ(%u, %u, %u, %" PRId32 ", %p)\n", target, internalformat,
-               pname, bufSize, params);
+    GAPID_INFO("glGetInternalformativ(%u, %u, %u, %" PRId32 ", %p)", target, internalformat, pname,
+               bufSize, params);
 
     Observations observations;
     do {
@@ -16684,7 +16669,7 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
 }
 
 inline uint8_t* GlesSpy::glGetString(uint32_t param) {
-    GAPID_INFO("glGetString(%u)\n", param);
+    GAPID_INFO("glGetString(%u)", param);
 
     uint8_t* result = nullptr;
 
@@ -16716,7 +16701,7 @@ inline uint8_t* GlesSpy::glGetString(uint32_t param) {
 }
 
 inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
-    GAPID_INFO("glGetStringi(%u, %" PRIu32 ")\n", name, index);
+    GAPID_INFO("glGetStringi(%u, %" PRIu32 ")", name, index);
 
     uint8_t* result = nullptr;
 
@@ -16745,7 +16730,7 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
 }
 
 inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
-    GAPID_INFO("glIsEnabled(%u)\n", capability);
+    GAPID_INFO("glIsEnabled(%u)", capability);
 
     uint8_t result = 0;
 
@@ -16788,7 +16773,7 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
 }
 
 inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
-    GAPID_INFO("glClientWaitSync(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, syncFlags, timeout);
+    GAPID_INFO("glClientWaitSync(%" PRIu64 ", %u, %" PRIu64 ")", sync, syncFlags, timeout);
 
     uint32_t result = 0;
 
@@ -16813,7 +16798,7 @@ inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uin
 }
 
 inline void GlesSpy::glDeleteSync(uint64_t sync) {
-    GAPID_INFO("glDeleteSync(%" PRIu64 ")\n", sync);
+    GAPID_INFO("glDeleteSync(%" PRIu64 ")", sync);
 
     Observations observations;
     do {
@@ -16829,7 +16814,7 @@ inline void GlesSpy::glDeleteSync(uint64_t sync) {
 }
 
 inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
-    GAPID_INFO("glFenceSync(%u, %u)\n", condition, syncFlags);
+    GAPID_INFO("glFenceSync(%u, %u)", condition, syncFlags);
 
     uint64_t result = 0;
 
@@ -16856,7 +16841,7 @@ inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
 
 inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length,
                                  int32_t* values) {
-    GAPID_INFO("glGetSynciv(%" PRIu64 ", %u, %" PRId32 ", %p, %p)\n", sync, pname, bufSize, length,
+    GAPID_INFO("glGetSynciv(%" PRIu64 ", %u, %" PRId32 ", %p, %p)", sync, pname, bufSize, length,
                values);
 
     Observations observations;
@@ -16886,7 +16871,7 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
 }
 
 inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
-    GAPID_INFO("glIsSync(%" PRIu64 ")\n", sync);
+    GAPID_INFO("glIsSync(%" PRIu64 ")", sync);
 
     uint8_t result = 0;
 
@@ -16907,7 +16892,7 @@ inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
 }
 
 inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
-    GAPID_INFO("glWaitSync(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, syncFlags, timeout);
+    GAPID_INFO("glWaitSync(%" PRIu64 ", %u, %" PRIu64 ")", sync, syncFlags, timeout);
 
     Observations observations;
     do {
@@ -16923,7 +16908,7 @@ inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t time
 }
 
 inline void GlesSpy::glActiveTexture(uint32_t unit) {
-    GAPID_INFO("glActiveTexture(%u)\n", unit);
+    GAPID_INFO("glActiveTexture(%u)", unit);
 
     Observations observations;
     do {
@@ -16985,7 +16970,7 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
                                         uint8_t layered, int32_t layer, uint32_t access,
                                         uint32_t format) {
     GAPID_INFO("glBindImageTexture(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRIu8 ", %" PRId32
-               ", %u, %u)\n",
+               ", %u, %u)",
                unit, texture, level, layered, layer, access, format);
 
     Observations observations;
@@ -17027,7 +17012,7 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
 }
 
 inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
-    GAPID_INFO("glBindSampler(%" PRIu32 ", %" PRIu32 ")\n", unit, sampler);
+    GAPID_INFO("glBindSampler(%" PRIu32 ", %" PRIu32 ")", unit, sampler);
 
     Observations observations;
     do {
@@ -17043,7 +17028,7 @@ inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
 }
 
 inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
-    GAPID_INFO("glBindTexture(%u, %" PRIu32 ")\n", target, texture);
+    GAPID_INFO("glBindTexture(%u, %" PRIu32 ")", target, texture);
 
     Observations observations;
     do {
@@ -17086,7 +17071,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                                             int32_t width, int32_t height, int32_t border,
                                             int32_t image_size, void* data) {
     GAPID_INFO("glCompressedTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %p)",
                target, level, format, width, height, border, image_size, data);
 
     Observations observations;
@@ -17193,7 +17178,7 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
                                             int32_t width, int32_t height, int32_t depth,
                                             int32_t border, int32_t imageSize, void* data) {
     GAPID_INFO("glCompressedTexImage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %p)",
                target, level, internalformat, width, height, depth, border, imageSize, data);
 
     Observations observations;
@@ -17237,7 +17222,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
                                                int32_t yoffset, int32_t width, int32_t height,
                                                uint32_t format, int32_t image_size, void* data) {
     GAPID_INFO("glCompressedTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %u, %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, width, height, format, image_size, data);
 
     Observations observations;
@@ -17289,7 +17274,7 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
                                                int32_t height, int32_t depth, uint32_t format,
                                                int32_t imageSize, void* data) {
     GAPID_INFO("glCompressedTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize,
                data);
 
@@ -17333,7 +17318,7 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
 inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                       int32_t y, int32_t width, int32_t height, int32_t border) {
     GAPID_INFO("glCopyTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ")",
                target, level, format, x, y, width, height, border);
 
     Observations observations;
@@ -17407,7 +17392,7 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
                                          int32_t yoffset, int32_t x, int32_t y, int32_t width,
                                          int32_t height) {
     GAPID_INFO("glCopyTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, x, y, width, height);
 
     Observations observations;
@@ -17439,7 +17424,7 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
                                          int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                          int32_t width, int32_t height) {
     GAPID_INFO("glCopyTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+               ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, zoffset, x, y, width, height);
 
     Observations observations;
@@ -17463,7 +17448,7 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
 }
 
 inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
-    GAPID_INFO("glDeleteSamplers(%" PRId32 ", %p)\n", count, samplers);
+    GAPID_INFO("glDeleteSamplers(%" PRId32 ", %p)", count, samplers);
 
     Observations observations;
     do {
@@ -17481,7 +17466,7 @@ inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
 }
 
 inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
-    GAPID_INFO("glDeleteTextures(%" PRId32 ", %p)\n", count, textures);
+    GAPID_INFO("glDeleteTextures(%" PRId32 ", %p)", count, textures);
 
     Observations observations;
     do {
@@ -17506,7 +17491,7 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
 }
 
 inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
-    GAPID_INFO("glGenSamplers(%" PRId32 ", %p)\n", count, samplers);
+    GAPID_INFO("glGenSamplers(%" PRId32 ", %p)", count, samplers);
 
     Observations observations;
     do {
@@ -17524,7 +17509,7 @@ inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
 }
 
 inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
-    GAPID_INFO("glGenTextures(%" PRId32 ", %p)\n", count, textures);
+    GAPID_INFO("glGenTextures(%" PRId32 ", %p)", count, textures);
 
     Observations observations;
     do {
@@ -17552,7 +17537,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
 }
 
 inline void GlesSpy::glGenerateMipmap(uint32_t target) {
-    GAPID_INFO("glGenerateMipmap(%u)\n", target);
+    GAPID_INFO("glGenerateMipmap(%u)", target);
 
     Observations observations;
     do {
@@ -17580,7 +17565,7 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
 }
 
 inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, float* params) {
-    GAPID_INFO("glGetSamplerParameterfv(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -17612,7 +17597,7 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
 }
 
 inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetSamplerParameteriv(%" PRIu32 ", %u, %p)\n", sampler, pname, params);
+    GAPID_INFO("glGetSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, params);
 
     Observations observations;
     do {
@@ -17645,7 +17630,7 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
 
 inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, uint32_t pname,
                                               float* params) {
-    GAPID_INFO("glGetTexLevelParameterfv(%u, %" PRId32 ", %u, %p)\n", target, level, pname, params);
+    GAPID_INFO("glGetTexLevelParameterfv(%u, %" PRId32 ", %u, %p)", target, level, pname, params);
 
     Observations observations;
     do {
@@ -17702,7 +17687,7 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
 
 inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname,
                                               int32_t* params) {
-    GAPID_INFO("glGetTexLevelParameteriv(%u, %" PRId32 ", %u, %p)\n", target, level, pname, params);
+    GAPID_INFO("glGetTexLevelParameteriv(%u, %" PRId32 ", %u, %p)", target, level, pname, params);
 
     Observations observations;
     do {
@@ -17758,7 +17743,7 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
 }
 
 inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
-    GAPID_INFO("glGetTexParameterfv(%u, %u, %p)\n", target, parameter, values);
+    GAPID_INFO("glGetTexParameterfv(%u, %u, %p)", target, parameter, values);
 
     Observations observations;
     do {
@@ -17842,7 +17827,7 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
 }
 
 inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
-    GAPID_INFO("glGetTexParameteriv(%u, %u, %p)\n", target, parameter, values);
+    GAPID_INFO("glGetTexParameteriv(%u, %u, %p)", target, parameter, values);
 
     Observations observations;
     do {
@@ -17926,7 +17911,7 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
 }
 
 inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
-    GAPID_INFO("glIsSampler(%" PRIu32 ")\n", sampler);
+    GAPID_INFO("glIsSampler(%" PRIu32 ")", sampler);
 
     uint8_t result = 0;
 
@@ -17947,7 +17932,7 @@ inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
 }
 
 inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
-    GAPID_INFO("glIsTexture(%" PRIu32 ")\n", texture);
+    GAPID_INFO("glIsTexture(%" PRIu32 ")", texture);
 
     uint8_t result = 0;
 
@@ -17971,7 +17956,7 @@ inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
 }
 
 inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
-    GAPID_INFO("glPixelStorei(%u, %" PRId32 ")\n", parameter, value);
+    GAPID_INFO("glPixelStorei(%u, %" PRId32 ")", parameter, value);
 
     Observations observations;
     do {
@@ -18011,7 +17996,7 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
 }
 
 inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float param) {
-    GAPID_INFO("glSamplerParameterf(%" PRIu32 ", %u, %f)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterf(%" PRIu32 ", %u, %f)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -18040,7 +18025,7 @@ inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float
 }
 
 inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param) {
-    GAPID_INFO("glSamplerParameterfv(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -18072,7 +18057,7 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
 }
 
 inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32_t param) {
-    GAPID_INFO("glSamplerParameteri(%" PRIu32 ", %u, %" PRId32 ")\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameteri(%" PRIu32 ", %u, %" PRId32 ")", sampler, pname, param);
 
     Observations observations;
     do {
@@ -18101,7 +18086,7 @@ inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32
 }
 
 inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* param) {
-    GAPID_INFO("glSamplerParameteriv(%" PRIu32 ", %u, %p)\n", sampler, pname, param);
+    GAPID_INFO("glSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, param);
 
     Observations observations;
     do {
@@ -18136,7 +18121,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                                   int32_t width, int32_t height, int32_t border, uint32_t format,
                                   uint32_t type, void* data) {
     GAPID_INFO("glTexImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %u, %u, %p)\n",
+               ", %u, %u, %p)",
                target, level, internal_format, width, height, border, format, type, data);
 
     Observations observations;
@@ -18278,7 +18263,7 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
                                   int32_t width, int32_t height, int32_t depth, int32_t border,
                                   uint32_t format, uint32_t type, void* pixels) {
     GAPID_INFO("glTexImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %u, %u, %p)\n",
+               ", %" PRId32 ", %u, %u, %p)",
                target, level, internalformat, width, height, depth, border, format, type, pixels);
 
     Observations observations;
@@ -18346,7 +18331,7 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
 }
 
 inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float value) {
-    GAPID_INFO("glTexParameterf(%u, %u, %f)\n", target, parameter, value);
+    GAPID_INFO("glTexParameterf(%u, %u, %f)", target, parameter, value);
 
     Observations observations;
     do {
@@ -18450,7 +18435,7 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
 }
 
 inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* params) {
-    GAPID_INFO("glTexParameterfv(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameterfv(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -18514,7 +18499,7 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
 }
 
 inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_t value) {
-    GAPID_INFO("glTexParameteri(%u, %u, %" PRId32 ")\n", target, parameter, value);
+    GAPID_INFO("glTexParameteri(%u, %u, %" PRId32 ")", target, parameter, value);
 
     Observations observations;
     do {
@@ -18618,7 +18603,7 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
 }
 
 inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glTexParameteriv(%u, %u, %p)\n", target, pname, params);
+    GAPID_INFO("glTexParameteriv(%u, %u, %p)", target, pname, params);
 
     Observations observations;
     do {
@@ -18683,7 +18668,7 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
 
 inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t internalformat,
                                     int32_t width, int32_t height) {
-    GAPID_INFO("glTexStorage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")\n", target, levels,
+    GAPID_INFO("glTexStorage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")", target, levels,
                internalformat, width, height);
 
     Observations observations;
@@ -18778,7 +18763,7 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
                                                uint32_t internalformat, int32_t width,
                                                int32_t height, uint8_t fixedsamplelocations) {
     GAPID_INFO("glTexStorage2DMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRIu8
-               ")\n",
+               ")",
                target, samples, internalformat, width, height, fixedsamplelocations);
 
     Observations observations;
@@ -18861,8 +18846,8 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
 
 inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t internalformat,
                                     int32_t width, int32_t height, int32_t depth) {
-    GAPID_INFO("glTexStorage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
-               target, levels, internalformat, width, height, depth);
+    GAPID_INFO("glTexStorage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", target,
+               levels, internalformat, width, height, depth);
 
     Observations observations;
     do {
@@ -18956,7 +18941,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                                      int32_t yoffset, int32_t width, int32_t height,
                                      uint32_t format, uint32_t type, void* data) {
     GAPID_INFO("glTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %u, %u, %p)\n",
+               ", %u, %u, %p)",
                target, level, xoffset, yoffset, width, height, format, type, data);
 
     Observations observations;
@@ -19093,7 +19078,7 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
                                      int32_t height, int32_t depth, uint32_t format, uint32_t type,
                                      void* pixels) {
     GAPID_INFO("glTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ", %" PRId32 ", %" PRId32 ", %u, %u, %p)\n",
+               ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                pixels);
 
@@ -19162,7 +19147,7 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
 }
 
 inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
-    GAPID_INFO("glBeginTransformFeedback(%u)\n", primitiveMode);
+    GAPID_INFO("glBeginTransformFeedback(%u)", primitiveMode);
 
     Observations observations;
     do {
@@ -19185,7 +19170,7 @@ inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
 }
 
 inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
-    GAPID_INFO("glBindTransformFeedback(%u, %" PRIu32 ")\n", target, id);
+    GAPID_INFO("glBindTransformFeedback(%u, %" PRIu32 ")", target, id);
 
     Observations observations;
     do {
@@ -19206,7 +19191,7 @@ inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
 }
 
 inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
-    GAPID_INFO("glDeleteTransformFeedbacks(%" PRId32 ", %p)\n", n, ids);
+    GAPID_INFO("glDeleteTransformFeedbacks(%" PRId32 ", %p)", n, ids);
 
     Observations observations;
     do {
@@ -19225,7 +19210,7 @@ inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
 }
 
 inline void GlesSpy::glEndTransformFeedback() {
-    GAPID_INFO("glEndTransformFeedback()\n");
+    GAPID_INFO("glEndTransformFeedback()");
 
     Observations observations;
     do {
@@ -19241,7 +19226,7 @@ inline void GlesSpy::glEndTransformFeedback() {
 }
 
 inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
-    GAPID_INFO("glGenTransformFeedbacks(%" PRId32 ", %p)\n", n, ids);
+    GAPID_INFO("glGenTransformFeedbacks(%" PRId32 ", %p)", n, ids);
 
     Observations observations;
     do {
@@ -19263,7 +19248,7 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
                                                    int32_t bufSize, int32_t* length, int32_t* size,
                                                    uint32_t* type, char* name) {
     GAPID_INFO("glGetTransformFeedbackVarying(%" PRIu32 ", %" PRIu32 ", %" PRId32
-               ", %p, %p, %p, %p)\n",
+               ", %p, %p, %p, %p)",
                program, index, bufSize, length, size, type, name);
 
     Observations observations;
@@ -19289,7 +19274,7 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
 }
 
 inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
-    GAPID_INFO("glIsTransformFeedback(%" PRIu32 ")\n", id);
+    GAPID_INFO("glIsTransformFeedback(%" PRIu32 ")", id);
 
     uint8_t result = 0;
 
@@ -19310,7 +19295,7 @@ inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
 }
 
 inline void GlesSpy::glPauseTransformFeedback() {
-    GAPID_INFO("glPauseTransformFeedback()\n");
+    GAPID_INFO("glPauseTransformFeedback()");
 
     Observations observations;
     do {
@@ -19326,7 +19311,7 @@ inline void GlesSpy::glPauseTransformFeedback() {
 }
 
 inline void GlesSpy::glResumeTransformFeedback() {
-    GAPID_INFO("glResumeTransformFeedback()\n");
+    GAPID_INFO("glResumeTransformFeedback()");
 
     Observations observations;
     do {
@@ -19343,7 +19328,7 @@ inline void GlesSpy::glResumeTransformFeedback() {
 
 inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count, char** varyings,
                                                  uint32_t bufferMode) {
-    GAPID_INFO("glTransformFeedbackVaryings(%" PRIu32 ", %" PRId32 ", %p, %u)\n", program, count,
+    GAPID_INFO("glTransformFeedbackVaryings(%" PRIu32 ", %" PRId32 ", %p, %u)", program, count,
                varyings, bufferMode);
 
     Observations observations;
@@ -19370,7 +19355,7 @@ inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count
 }
 
 inline void GlesSpy::glBindVertexArray(uint32_t array) {
-    GAPID_INFO("glBindVertexArray(%" PRIu32 ")\n", array);
+    GAPID_INFO("glBindVertexArray(%" PRIu32 ")", array);
 
     Observations observations;
     do {
@@ -19395,7 +19380,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
 
 inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset,
                                         int32_t stride) {
-    GAPID_INFO("glBindVertexBuffer(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")\n",
+    GAPID_INFO("glBindVertexBuffer(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                bindingindex, buffer, offset, stride);
 
     Observations observations;
@@ -19413,7 +19398,7 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
 }
 
 inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
-    GAPID_INFO("glDeleteVertexArrays(%" PRId32 ", %p)\n", count, arrays);
+    GAPID_INFO("glDeleteVertexArrays(%" PRId32 ", %p)", count, arrays);
 
     Observations observations;
     do {
@@ -19440,7 +19425,7 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
 }
 
 inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
-    GAPID_INFO("glDisableVertexAttribArray(%" PRIu32 ")\n", location);
+    GAPID_INFO("glDisableVertexAttribArray(%" PRIu32 ")", location);
 
     Observations observations;
     do {
@@ -19460,7 +19445,7 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
 }
 
 inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
-    GAPID_INFO("glEnableVertexAttribArray(%" PRIu32 ")\n", location);
+    GAPID_INFO("glEnableVertexAttribArray(%" PRIu32 ")", location);
 
     Observations observations;
     do {
@@ -19480,7 +19465,7 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
 }
 
 inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
-    GAPID_INFO("glGenVertexArrays(%" PRId32 ", %p)\n", count, arrays);
+    GAPID_INFO("glGenVertexArrays(%" PRId32 ", %p)", count, arrays);
 
     Observations observations;
     do {
@@ -19509,7 +19494,7 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
 }
 
 inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetVertexAttribIiv(%" PRIu32 ", %u, %p)\n", index, pname, params);
+    GAPID_INFO("glGetVertexAttribIiv(%" PRIu32 ", %u, %p)", index, pname, params);
 
     Observations observations;
     do {
@@ -19545,7 +19530,7 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
 }
 
 inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint32_t* params) {
-    GAPID_INFO("glGetVertexAttribIuiv(%" PRIu32 ", %u, %p)\n", index, pname, params);
+    GAPID_INFO("glGetVertexAttribIuiv(%" PRIu32 ", %u, %p)", index, pname, params);
 
     Observations observations;
     do {
@@ -19581,7 +19566,7 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
 }
 
 inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, void** pointer) {
-    GAPID_INFO("glGetVertexAttribPointerv(%" PRIu32 ", %u, %p)\n", index, pname, pointer);
+    GAPID_INFO("glGetVertexAttribPointerv(%" PRIu32 ", %u, %p)", index, pname, pointer);
 
     Observations observations;
     do {
@@ -19605,7 +19590,7 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
 }
 
 inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* params) {
-    GAPID_INFO("glGetVertexAttribfv(%" PRIu32 ", %u, %p)\n", index, pname, params);
+    GAPID_INFO("glGetVertexAttribfv(%" PRIu32 ", %u, %p)", index, pname, params);
 
     Observations observations;
     do {
@@ -19646,7 +19631,7 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
 }
 
 inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t* params) {
-    GAPID_INFO("glGetVertexAttribiv(%" PRIu32 ", %u, %p)\n", index, pname, params);
+    GAPID_INFO("glGetVertexAttribiv(%" PRIu32 ", %u, %p)", index, pname, params);
 
     Observations observations;
     do {
@@ -19686,7 +19671,7 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
 }
 
 inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
-    GAPID_INFO("glIsVertexArray(%" PRIu32 ")\n", array);
+    GAPID_INFO("glIsVertexArray(%" PRIu32 ")", array);
 
     uint8_t result = 0;
 
@@ -19707,7 +19692,7 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
 }
 
 inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
-    GAPID_INFO("glVertexAttrib1f(%" PRIu32 ", %f)\n", location, value0);
+    GAPID_INFO("glVertexAttrib1f(%" PRIu32 ", %f)", location, value0);
 
     Observations observations;
     do {
@@ -19723,7 +19708,7 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
 }
 
 inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
-    GAPID_INFO("glVertexAttrib1fv(%" PRIu32 ", %p)\n", location, value);
+    GAPID_INFO("glVertexAttrib1fv(%" PRIu32 ", %p)", location, value);
 
     Observations observations;
     do {
@@ -19742,7 +19727,7 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
 }
 
 inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float value1) {
-    GAPID_INFO("glVertexAttrib2f(%" PRIu32 ", %f, %f)\n", location, value0, value1);
+    GAPID_INFO("glVertexAttrib2f(%" PRIu32 ", %f, %f)", location, value0, value1);
 
     Observations observations;
     do {
@@ -19758,7 +19743,7 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
 }
 
 inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
-    GAPID_INFO("glVertexAttrib2fv(%" PRIu32 ", %p)\n", location, value);
+    GAPID_INFO("glVertexAttrib2fv(%" PRIu32 ", %p)", location, value);
 
     Observations observations;
     do {
@@ -19777,7 +19762,7 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
 }
 
 inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float value1, float value2) {
-    GAPID_INFO("glVertexAttrib3f(%" PRIu32 ", %f, %f, %f)\n", location, value0, value1, value2);
+    GAPID_INFO("glVertexAttrib3f(%" PRIu32 ", %f, %f, %f)", location, value0, value1, value2);
 
     Observations observations;
     do {
@@ -19793,7 +19778,7 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
 }
 
 inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
-    GAPID_INFO("glVertexAttrib3fv(%" PRIu32 ", %p)\n", location, value);
+    GAPID_INFO("glVertexAttrib3fv(%" PRIu32 ", %p)", location, value);
 
     Observations observations;
     do {
@@ -19813,7 +19798,7 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
 
 inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float value1, float value2,
                                       float value3) {
-    GAPID_INFO("glVertexAttrib4f(%" PRIu32 ", %f, %f, %f, %f)\n", location, value0, value1, value2,
+    GAPID_INFO("glVertexAttrib4f(%" PRIu32 ", %f, %f, %f, %f)", location, value0, value1, value2,
                value3);
 
     Observations observations;
@@ -19831,7 +19816,7 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 }
 
 inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
-    GAPID_INFO("glVertexAttrib4fv(%" PRIu32 ", %p)\n", location, value);
+    GAPID_INFO("glVertexAttrib4fv(%" PRIu32 ", %p)", location, value);
 
     Observations observations;
     do {
@@ -19850,7 +19835,7 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
 }
 
 inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex) {
-    GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")\n", attribindex, bindingindex);
+    GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", attribindex, bindingindex);
 
     Observations observations;
     do {
@@ -19866,7 +19851,7 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
 }
 
 inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
-    GAPID_INFO("glVertexAttribDivisor(%" PRIu32 ", %" PRIu32 ")\n", index, divisor);
+    GAPID_INFO("glVertexAttribDivisor(%" PRIu32 ", %" PRIu32 ")", index, divisor);
 
     Observations observations;
     do {
@@ -19883,7 +19868,7 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
 
 inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                           uint8_t normalized, uint32_t relativeoffset) {
-    GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")\n",
+    GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")",
                attribindex, size, type, normalized, relativeoffset);
 
     Observations observations;
@@ -19916,8 +19901,7 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
 }
 
 inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w) {
-    GAPID_INFO("glVertexAttribI4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
-               ")\n",
+    GAPID_INFO("glVertexAttribI4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                index, x, y, z, w);
 
     Observations observations;
@@ -19934,7 +19918,7 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
 }
 
 inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
-    GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)\n", index, v);
+    GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, v);
 
     Observations observations;
     do {
@@ -19954,7 +19938,7 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
 inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z,
                                         uint32_t w) {
     GAPID_INFO("glVertexAttribI4ui(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
-               ")\n",
+               ")",
                index, x, y, z, w);
 
     Observations observations;
@@ -19971,7 +19955,7 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
 }
 
 inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
-    GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)\n", index, v);
+    GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, v);
 
     Observations observations;
     do {
@@ -19990,7 +19974,7 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
 
 inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                            uint32_t relativeoffset) {
-    GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")\n", attribindex,
+    GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", attribindex,
                size, type, relativeoffset);
 
     Observations observations;
@@ -20024,8 +20008,8 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
 
 inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type,
                                             int32_t stride, void* pointer) {
-    GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)\n", index,
-               size, type, stride, pointer);
+    GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)", index, size,
+               type, stride, pointer);
 
     Observations observations;
     do {
@@ -20059,7 +20043,7 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
 
 inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                            uint8_t normalized, int32_t stride, void* data) {
-    GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRId32 ", %p)\n",
+    GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRId32 ", %p)",
                location, size, type, normalized, stride, data);
 
     Observations observations;
@@ -20112,7 +20096,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
 }
 
 inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor) {
-    GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")\n", bindingindex, divisor);
+    GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", bindingindex, divisor);
 
     Observations observations;
     do {
@@ -20128,7 +20112,7 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
 }
 
 inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
-    GAPID_INFO("eglInitialize(%p, %p, %p)\n", dpy, major, minor);
+    GAPID_INFO("eglInitialize(%p, %p, %p)", dpy, major, minor);
 
     int result = 0;
 
@@ -20161,7 +20145,7 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
 
 inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_context,
                                        int* attrib_list) {
-    GAPID_INFO("eglCreateContext(%p, %p, %p, %p)\n", display, config, share_context, attrib_list);
+    GAPID_INFO("eglCreateContext(%p, %p, %p, %p)", display, config, share_context, attrib_list);
 
     void* result = nullptr;
 
@@ -20238,7 +20222,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
 }
 
 inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* context) {
-    GAPID_INFO("eglMakeCurrent(%p, %p, %p, %p)\n", display, draw, read, context);
+    GAPID_INFO("eglMakeCurrent(%p, %p, %p, %p)", display, draw, read, context);
 
     int result = 0;
 
@@ -20268,7 +20252,7 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 }
 
 inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
-    GAPID_INFO("eglSwapBuffers(%p, %p)\n", display, surface);
+    GAPID_INFO("eglSwapBuffers(%p, %p)", display, surface);
 
     int result = 0;
 
@@ -20292,7 +20276,7 @@ inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
 }
 
 inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute, int* value) {
-    GAPID_INFO("eglQuerySurface(%p, %p, %d, %p)\n", display, surface, attribute, value);
+    GAPID_INFO("eglQuerySurface(%p, %p, %d, %p)", display, surface, attribute, value);
 
     int result = 0;
 
@@ -20319,7 +20303,7 @@ inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute,
 }
 
 inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bool direct) {
-    GAPID_INFO("glXCreateContext(%p, %p, %p, %d)\n", dpy, vis, shareList, direct);
+    GAPID_INFO("glXCreateContext(%p, %p, %p, %d)", dpy, vis, shareList, direct);
 
     void* result = nullptr;
 
@@ -20395,8 +20379,8 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
 
 inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_t type,
                                           void* shared, bool direct) {
-    GAPID_INFO("glXCreateNewContext(%p, %p, %" PRIu32 ", %p, %d)\n", display, fbconfig, type,
-               shared, direct);
+    GAPID_INFO("glXCreateNewContext(%p, %p, %" PRIu32 ", %p, %d)", display, fbconfig, type, shared,
+               direct);
 
     void* result = nullptr;
 
@@ -20471,7 +20455,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
 }
 
 inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx) {
-    GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)\n", display, draw, read, ctx);
+    GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)", display, draw, read, ctx);
 
     int result = 0;
 
@@ -20501,7 +20485,7 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
 }
 
 inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
-    GAPID_INFO("glXMakeCurrent(%p, %p, %p)\n", display, drawable, ctx);
+    GAPID_INFO("glXMakeCurrent(%p, %p, %p)", display, drawable, ctx);
 
     int result = 0;
 
@@ -20529,7 +20513,7 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
 }
 
 inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
-    GAPID_INFO("glXSwapBuffers(%p, %p)\n", display, drawable);
+    GAPID_INFO("glXSwapBuffers(%p, %p)", display, drawable);
 
     Observations observations;
     do {
@@ -20547,7 +20531,7 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
 }
 
 inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, int* value) {
-    GAPID_INFO("glXQueryDrawable(%p, %p, %d, %p)\n", display, draw, attribute, value);
+    GAPID_INFO("glXQueryDrawable(%p, %p, %d, %p)", display, draw, attribute, value);
 
     int result = 0;
 
@@ -20574,7 +20558,7 @@ inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, i
 }
 
 inline void* GlesSpy::wglCreateContext(void* hdc) {
-    GAPID_INFO("wglCreateContext(%p)\n", hdc);
+    GAPID_INFO("wglCreateContext(%p)", hdc);
 
     void* result = nullptr;
 
@@ -20645,7 +20629,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
 }
 
 inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext, int* attribList) {
-    GAPID_INFO("wglCreateContextAttribsARB(%p, %p, %p)\n", hdc, hShareContext, attribList);
+    GAPID_INFO("wglCreateContextAttribsARB(%p, %p, %p)", hdc, hShareContext, attribList);
 
     void* result = nullptr;
 
@@ -20720,7 +20704,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
 }
 
 inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
-    GAPID_INFO("wglMakeCurrent(%p, %p)\n", hdc, hglrc);
+    GAPID_INFO("wglMakeCurrent(%p, %p)", hdc, hglrc);
 
     int result = 0;
 
@@ -20746,7 +20730,7 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 }
 
 inline void GlesSpy::wglSwapBuffers(void* hdc) {
-    GAPID_INFO("wglSwapBuffers(%p)\n", hdc);
+    GAPID_INFO("wglSwapBuffers(%p)", hdc);
 
     Observations observations;
     do {
@@ -20762,7 +20746,7 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
 }
 
 inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
-    GAPID_INFO("CGLCreateContext(%p, %p, %p)\n", pix, share, ctx);
+    GAPID_INFO("CGLCreateContext(%p, %p, %p)", pix, share, ctx);
 
     int result = 0;
 
@@ -20837,7 +20821,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
 }
 
 inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
-    GAPID_INFO("CGLSetCurrentContext(%p)\n", ctx);
+    GAPID_INFO("CGLSetCurrentContext(%p)", ctx);
 
     int result = 0;
 
@@ -20861,7 +20845,7 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 }
 
 inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* sid) {
-    GAPID_INFO("CGLGetSurface(%p, %p, %p, %p)\n", ctx, cid, wid, sid);
+    GAPID_INFO("CGLGetSurface(%p, %p, %p, %p)", ctx, cid, wid, sid);
 
     int result = 0;
 
@@ -20892,7 +20876,7 @@ inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* 
 }
 
 inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, double* bounds) {
-    GAPID_INFO("CGSGetSurfaceBounds(%p, %" PRId32 ", %" PRId32 ", %p)\n", cid, wid, sid, bounds);
+    GAPID_INFO("CGSGetSurfaceBounds(%p, %" PRId32 ", %" PRId32 ", %p)", cid, wid, sid, bounds);
 
     int result = 0;
 
@@ -20917,7 +20901,7 @@ inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, dou
 }
 
 inline int GlesSpy::CGLFlushDrawable(void* ctx) {
-    GAPID_INFO("CGLFlushDrawable(%p)\n", ctx);
+    GAPID_INFO("CGLFlushDrawable(%p)", ctx);
 
     int result = 0;
 
@@ -20939,7 +20923,7 @@ inline int GlesSpy::CGLFlushDrawable(void* ctx) {
 }
 
 inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value) {
-    GAPID_INFO("glGetQueryObjecti64v(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjecti64v(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -20957,7 +20941,7 @@ inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, in
 }
 
 inline void GlesSpy::glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value) {
-    GAPID_INFO("glGetQueryObjectui64v(%" PRIu32 ", %u, %p)\n", query, parameter, value);
+    GAPID_INFO("glGetQueryObjectui64v(%" PRIu32 ", %u, %p)", query, parameter, value);
 
     Observations observations;
     do {
@@ -20976,7 +20960,7 @@ inline void GlesSpy::glGetQueryObjectui64v(uint32_t query, uint32_t parameter, u
 
 inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_size,
                                   uint32_t integer_size, bool little_endian) {
-    GAPID_INFO("architecture(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %d)\n", pointer_alignment,
+    GAPID_INFO("architecture(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %d)", pointer_alignment,
                pointer_size, integer_size, little_endian);
 
     Observations observations;
@@ -20991,7 +20975,7 @@ inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_s
 }
 
 inline void GlesSpy::replayCreateRenderer(uint32_t id) {
-    GAPID_INFO("replayCreateRenderer(%" PRIu32 ")\n", id);
+    GAPID_INFO("replayCreateRenderer(%" PRIu32 ")", id);
 
     Observations observations;
     do {
@@ -21004,7 +20988,7 @@ inline void GlesSpy::replayCreateRenderer(uint32_t id) {
 }
 
 inline void GlesSpy::replayBindRenderer(uint32_t id) {
-    GAPID_INFO("replayBindRenderer(%" PRIu32 ")\n", id);
+    GAPID_INFO("replayBindRenderer(%" PRIu32 ")", id);
 
     Observations observations;
     do {
@@ -21017,7 +21001,7 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
 }
 
 inline void GlesSpy::switchThread(uint64_t threadID) {
-    GAPID_INFO("switchThread(%" PRIu64 ")\n", threadID);
+    GAPID_INFO("switchThread(%" PRIu64 ")", threadID);
 
     Observations observations;
     do {
@@ -21033,7 +21017,7 @@ inline void GlesSpy::switchThread(uint64_t threadID) {
 inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                     uint32_t depth_fmt, uint32_t stencil_fmt,
                                     bool resetViewportScissor, bool preserveBuffersOnSwap) {
-    GAPID_INFO("backbufferInfo(%" PRId32 ", %" PRId32 ", %u, %u, %u, %d, %d)\n", width, height,
+    GAPID_INFO("backbufferInfo(%" PRId32 ", %" PRId32 ", %u, %u, %u, %d, %d)", width, height,
                color_fmt, depth_fmt, stencil_fmt, resetViewportScissor, preserveBuffersOnSwap);
 
     Observations observations;
@@ -21080,7 +21064,7 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
 }
 
 inline void GlesSpy::startTimer(uint8_t index) {
-    GAPID_INFO("startTimer(%" PRIu8 ")\n", index);
+    GAPID_INFO("startTimer(%" PRIu8 ")", index);
 
     Observations observations;
     do {
@@ -21093,7 +21077,7 @@ inline void GlesSpy::startTimer(uint8_t index) {
 }
 
 inline uint64_t GlesSpy::stopTimer(uint8_t index) {
-    GAPID_INFO("stopTimer(%" PRIu8 ")\n", index);
+    GAPID_INFO("stopTimer(%" PRIu8 ")", index);
 
     uint64_t result = 0;
 
@@ -21111,7 +21095,7 @@ inline uint64_t GlesSpy::stopTimer(uint8_t index) {
 }
 
 inline void GlesSpy::flushPostBuffer() {
-    GAPID_INFO("flushPostBuffer()\n");
+    GAPID_INFO("flushPostBuffer()");
 
     Observations observations;
     do {

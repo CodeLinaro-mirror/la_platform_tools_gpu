@@ -101,7 +101,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         mDepthSize == depthSize &&
         mStencilSize == stencilSize) {
         // Resize only
-        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d\n", mWidth, mHeight, width, height);
+        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d", mWidth, mHeight, width, height);
         [mWindow setContentSize: NSMakeSize(width, height)];
         [mContext update];
         mWidth = width;
@@ -123,7 +123,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         defer:NO
     ];
     if (mWindow == nullptr) {
-        GAPID_FATAL("Unable to create NSWindow\n");
+        GAPID_FATAL("Unable to create NSWindow");
     }
 
     NSOpenGLPixelFormatAttribute attributes[] = {
@@ -138,12 +138,12 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
 
     NSOpenGLPixelFormat* format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
     if (format == nullptr) {
-        GAPID_FATAL("Unable to create NSOpenGLPixelFormat\n");
+        GAPID_FATAL("Unable to create NSOpenGLPixelFormat");
     }
 
     mContext = [[NSOpenGLContext alloc] initWithFormat:format shareContext:nil];
     if (mContext == nullptr) {
-        GAPID_FATAL("Unable to create NSOpenGLContext\n");
+        GAPID_FATAL("Unable to create NSOpenGLContext");
     }
 
     [mContext setView:[mWindow contentView]];

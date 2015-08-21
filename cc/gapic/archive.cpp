@@ -30,13 +30,13 @@ Archive::Archive(const std::string& archiveName) {
     // Open or create the archive data file in binary read/write mode.
     const std::string dataFilename(archiveName + ".data");
     if (!(mDataFile = fopen(dataFilename.c_str(), "ab+"))) {
-        GAPID_FATAL("Unable to open archive data file %s\n", dataFilename.c_str());
+        GAPID_FATAL("Unable to open archive data file %s", dataFilename.c_str());
     }
 
     // Open or create the archive index file in binary read/write mode.
     const std::string indexFilename(archiveName + ".index");
     if (!(mIndexFile = fopen(indexFilename.c_str(), "ab+"))) {
-        GAPID_FATAL("Unable to open archive index file %s\n", indexFilename.c_str());
+        GAPID_FATAL("Unable to open archive index file %s", indexFilename.c_str());
     }
 
     // Load the archive index in memory.
@@ -87,7 +87,7 @@ bool Archive::write(const std::string& id, const void* buffer, uint32_t size) {
     fseek(mDataFile, 0, SEEK_END);
     const uint64_t dataOffset = ftell(mDataFile);
     if (!fwrite(buffer, size, 1, mDataFile)) {
-        GAPID_WARNING("Couldn't write '%s' to the archive data file, dropping it.\n", id.c_str());
+        GAPID_WARNING("Couldn't write '%s' to the archive data file, dropping it.", id.c_str());
         ftruncate(fileno(mDataFile), dataOffset);
         return false;
     }
@@ -99,7 +99,7 @@ bool Archive::write(const std::string& id, const void* buffer, uint32_t size) {
         !fwrite(&id.front(), id.size(), 1, mIndexFile) ||
         !fwrite(&dataOffset, sizeof(dataOffset), 1, mIndexFile) ||
         !fwrite(&size, sizeof(size), 1, mIndexFile)) {
-        GAPID_WARNING("Couldn't write '%s' to the archive index file, dropping it.\n", id.c_str());
+        GAPID_WARNING("Couldn't write '%s' to the archive index file, dropping it.", id.c_str());
         ftruncate(fileno(mDataFile), dataOffset);
         ftruncate(fileno(mIndexFile), indexOffset);
         fseek(mIndexFile, 0, SEEK_END);

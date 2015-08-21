@@ -122,7 +122,7 @@
       if ({{$name}} != nullptr) {
         {{if not (IsVoid $.Return.Type)}}
           {{Template "C++.ReturnType" $}} return_value = {{Template "Call" $}};
-          GAPID_INFO("Returned: {{Template "C++.PrintfFormatCode" $.Return.Type}}\n", return_value);
+          GAPID_INFO("Returned: {{Template "C++.PrintfFormatCode" $.Return.Type}}", return_value);
           if (pushReturn) {
             stack->push<{{Template "C++.ReturnType" $}}>(return_value);
           }
@@ -133,16 +133,16 @@
         {{if 1}} {{/* Enable for debugging */}}
           const GLenum err = glGetError();
           if (err != GLenum::GL_NO_ERROR) {
-            GAPID_WARNING("{{$name}} returned error: 0x%x\n", err);
+            GAPID_WARNING("{{$name}} returned error: 0x%x", err);
           }
         {{end}}
       } else {
-        GAPID_WARNING("Attempted to call unsupported function {{$name}}\n");
+        GAPID_WARNING("Attempted to call unsupported function {{$name}}");
       }
 
       return true;
     } else {
-      GAPID_WARNING("Error during calling function {{$name}}\n");
+      GAPID_WARNING("Error during calling function {{$name}}");
       return false;
     }
   }
