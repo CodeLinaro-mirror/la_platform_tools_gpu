@@ -51,9 +51,11 @@ type Annotations []*Annotation
 
 // Invalid is used when an error was encountered in the parsing, but we want to
 // keep going. If there are no errors, this will never be in the tree.
-type Invalid struct{}
+type Invalid struct {
+	CST parse.Node // the CST node that caused the error.
+}
 
-func (t Invalid) Node() parse.Node { return nil }
+func (t Invalid) Node() parse.Node { return t.CST }
 
 // Import is the AST node that represents «import name "path"» constructs
 type Import struct {

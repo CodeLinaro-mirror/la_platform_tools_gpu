@@ -50,7 +50,7 @@ func requireLHSExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 		return g
 	}
 	p.Expected("expression")
-	return &ast.Invalid{}
+	return &ast.Invalid{CST: cst}
 }
 
 // lhs (index | call | binary_op | member)
