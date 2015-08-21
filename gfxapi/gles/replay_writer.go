@@ -14134,7 +14134,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	GetContext_908_result := context             // Contextʳ
 	ctx := GetContext_908_result                 // Contextʳ
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
-		ctx.Instances.Textures[ϟa.Texture] = &Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+		ctx.Instances.Textures[ϟa.Texture] = (&Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	}
 	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
 	ϟb.Push(value.U32(ϟa.Target))
@@ -14185,9 +14185,9 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)             // TextureId
@@ -14196,11 +14196,11 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -14488,7 +14488,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
-		ctx.Instances.Textures[id] = &Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+		ctx.Instances.Textures[id] = (&Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -14670,23 +14670,23 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLfloat) {
 		switch ϟa.Parameter {
 		case GLenum_GL_TEXTURE_MAG_FILTER:
-			return GLfloat(t.MagFilter)
+			return GLfloat(t.OnAccess(ϟs).MagFilter)
 		case GLenum_GL_TEXTURE_MIN_FILTER:
-			return GLfloat(t.MinFilter)
+			return GLfloat(t.OnAccess(ϟs).MinFilter)
 		case GLenum_GL_TEXTURE_WRAP_S:
-			return GLfloat(t.WrapS)
+			return GLfloat(t.OnAccess(ϟs).WrapS)
 		case GLenum_GL_TEXTURE_WRAP_T:
-			return GLfloat(t.WrapT)
+			return GLfloat(t.OnAccess(ϟs).WrapT)
 		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-			return GLfloat(t.MaxAnisotropy)
+			return GLfloat(t.OnAccess(ϟs).MaxAnisotropy)
 		case GLenum_GL_TEXTURE_SWIZZLE_R:
-			return GLfloat(t.SwizzleR)
+			return GLfloat(t.OnAccess(ϟs).SwizzleR)
 		case GLenum_GL_TEXTURE_SWIZZLE_G:
-			return GLfloat(t.SwizzleG)
+			return GLfloat(t.OnAccess(ϟs).SwizzleG)
 		case GLenum_GL_TEXTURE_SWIZZLE_B:
-			return GLfloat(t.SwizzleB)
+			return GLfloat(t.OnAccess(ϟs).SwizzleB)
 		case GLenum_GL_TEXTURE_SWIZZLE_A:
-			return GLfloat(t.SwizzleA)
+			return GLfloat(t.OnAccess(ϟs).SwizzleA)
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -14745,23 +14745,23 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_TEXTURE_MAG_FILTER:
-			return GLint(t.MagFilter)
+			return GLint(t.OnAccess(ϟs).MagFilter)
 		case GLenum_GL_TEXTURE_MIN_FILTER:
-			return GLint(t.MinFilter)
+			return GLint(t.OnAccess(ϟs).MinFilter)
 		case GLenum_GL_TEXTURE_WRAP_S:
-			return GLint(t.WrapS)
+			return GLint(t.OnAccess(ϟs).WrapS)
 		case GLenum_GL_TEXTURE_WRAP_T:
-			return GLint(t.WrapT)
+			return GLint(t.OnAccess(ϟs).WrapT)
 		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-			return GLint(t.MaxAnisotropy)
+			return GLint(t.OnAccess(ϟs).MaxAnisotropy)
 		case GLenum_GL_TEXTURE_SWIZZLE_R:
-			return GLint(t.SwizzleR)
+			return GLint(t.OnAccess(ϟs).SwizzleR)
 		case GLenum_GL_TEXTURE_SWIZZLE_G:
-			return GLint(t.SwizzleG)
+			return GLint(t.OnAccess(ϟs).SwizzleG)
 		case GLenum_GL_TEXTURE_SWIZZLE_B:
-			return GLint(t.SwizzleB)
+			return GLint(t.OnAccess(ϟs).SwizzleB)
 		case GLenum_GL_TEXTURE_SWIZZLE_A:
-			return GLint(t.SwizzleA)
+			return GLint(t.OnAccess(ϟs).SwizzleA)
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -14975,9 +14975,9 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		} else {
 			l.Data = MakeU8ˢ(uint64(l.Size), ϟs)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
@@ -14990,11 +14990,11 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		} else {
 			l.Data = MakeU8ˢ(uint64(l.Size), ϟs)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -15101,23 +15101,23 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MinFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_S:
-		t.WrapS = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapS = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_T:
-		t.WrapT = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapT = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-		t.MaxAnisotropy = float32(ϟa.Value)
+		t.OnAccess(ϟs).MaxAnisotropy = float32(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleR = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleG = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleB = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -15217,23 +15217,23 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MinFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_S:
-		t.WrapS = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapS = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_T:
-		t.WrapT = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapT = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-		t.MaxAnisotropy = float32(ϟa.Value)
+		t.OnAccess(ϟs).MaxAnisotropy = float32(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleR = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleG = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleB = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -15430,9 +15430,9 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
@@ -15441,11 +15441,11 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target

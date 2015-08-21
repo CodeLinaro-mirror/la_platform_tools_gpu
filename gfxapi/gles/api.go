@@ -37237,6 +37237,22 @@ type Texture struct {
 	MaxAnisotropy float32
 }
 
+// OnCreate should be called immediately after the Texture resource is created.
+func (c *Texture) OnCreate(ϟs *gfxapi.State) *Texture {
+	if f := ϟs.OnResourceCreated; f != nil {
+		f(c)
+	}
+	return c
+}
+
+// OnAccess should be called each time the Texture resource is used.
+func (c *Texture) OnAccess(ϟs *gfxapi.State) *Texture {
+	if f := ϟs.OnResourceAccessed; f != nil {
+		f(c)
+	}
+	return c
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // class CubemapLevel
 ////////////////////////////////////////////////////////////////////////////////

@@ -315,6 +315,7 @@ class Renderbuffer {
 }
 
 @internal
+@resource
 class Texture {
   TextureId                 ID
   TextureKind               Kind

@@ -8262,7 +8262,7 @@ func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_908_result := context             // Contextʳ
 	ctx := GetContext_908_result                 // Contextʳ
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
-		ctx.Instances.Textures[ϟa.Texture] = &Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+		ctx.Instances.Textures[ϟa.Texture] = (&Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	}
 	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -8304,9 +8304,9 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)             // TextureId
@@ -8315,11 +8315,11 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -8506,7 +8506,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
-		ctx.Instances.Textures[id] = &Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+		ctx.Instances.Textures[id] = (&Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -8652,23 +8652,23 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLfloat) {
 		switch ϟa.Parameter {
 		case GLenum_GL_TEXTURE_MAG_FILTER:
-			return GLfloat(t.MagFilter)
+			return GLfloat(t.OnAccess(ϟs).MagFilter)
 		case GLenum_GL_TEXTURE_MIN_FILTER:
-			return GLfloat(t.MinFilter)
+			return GLfloat(t.OnAccess(ϟs).MinFilter)
 		case GLenum_GL_TEXTURE_WRAP_S:
-			return GLfloat(t.WrapS)
+			return GLfloat(t.OnAccess(ϟs).WrapS)
 		case GLenum_GL_TEXTURE_WRAP_T:
-			return GLfloat(t.WrapT)
+			return GLfloat(t.OnAccess(ϟs).WrapT)
 		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-			return GLfloat(t.MaxAnisotropy)
+			return GLfloat(t.OnAccess(ϟs).MaxAnisotropy)
 		case GLenum_GL_TEXTURE_SWIZZLE_R:
-			return GLfloat(t.SwizzleR)
+			return GLfloat(t.OnAccess(ϟs).SwizzleR)
 		case GLenum_GL_TEXTURE_SWIZZLE_G:
-			return GLfloat(t.SwizzleG)
+			return GLfloat(t.OnAccess(ϟs).SwizzleG)
 		case GLenum_GL_TEXTURE_SWIZZLE_B:
-			return GLfloat(t.SwizzleB)
+			return GLfloat(t.OnAccess(ϟs).SwizzleB)
 		case GLenum_GL_TEXTURE_SWIZZLE_A:
-			return GLfloat(t.SwizzleA)
+			return GLfloat(t.OnAccess(ϟs).SwizzleA)
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -8721,23 +8721,23 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
 		case GLenum_GL_TEXTURE_MAG_FILTER:
-			return GLint(t.MagFilter)
+			return GLint(t.OnAccess(ϟs).MagFilter)
 		case GLenum_GL_TEXTURE_MIN_FILTER:
-			return GLint(t.MinFilter)
+			return GLint(t.OnAccess(ϟs).MinFilter)
 		case GLenum_GL_TEXTURE_WRAP_S:
-			return GLint(t.WrapS)
+			return GLint(t.OnAccess(ϟs).WrapS)
 		case GLenum_GL_TEXTURE_WRAP_T:
-			return GLint(t.WrapT)
+			return GLint(t.OnAccess(ϟs).WrapT)
 		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-			return GLint(t.MaxAnisotropy)
+			return GLint(t.OnAccess(ϟs).MaxAnisotropy)
 		case GLenum_GL_TEXTURE_SWIZZLE_R:
-			return GLint(t.SwizzleR)
+			return GLint(t.OnAccess(ϟs).SwizzleR)
 		case GLenum_GL_TEXTURE_SWIZZLE_G:
-			return GLint(t.SwizzleG)
+			return GLint(t.OnAccess(ϟs).SwizzleG)
 		case GLenum_GL_TEXTURE_SWIZZLE_B:
-			return GLint(t.SwizzleB)
+			return GLint(t.OnAccess(ϟs).SwizzleB)
 		case GLenum_GL_TEXTURE_SWIZZLE_A:
-			return GLint(t.SwizzleA)
+			return GLint(t.OnAccess(ϟs).SwizzleA)
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -8916,9 +8916,9 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		} else {
 			l.Data = MakeU8ˢ(uint64(l.Size), ϟs)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
@@ -8931,11 +8931,11 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		} else {
 			l.Data = MakeU8ˢ(uint64(l.Size), ϟs)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -9017,23 +9017,23 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MinFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_S:
-		t.WrapS = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapS = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_T:
-		t.WrapT = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapT = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-		t.MaxAnisotropy = float32(ϟa.Value)
+		t.OnAccess(ϟs).MaxAnisotropy = float32(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleR = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleG = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleB = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -9121,23 +9121,23 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).MinFilter = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_S:
-		t.WrapS = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapS = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_WRAP_T:
-		t.WrapT = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).WrapT = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
-		t.MaxAnisotropy = float32(ϟa.Value)
+		t.OnAccess(ϟs).MaxAnisotropy = float32(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleR = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleG = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleB = GLenum(ϟa.Value)
 	case GLenum_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = GLenum(ϟa.Value)
+		t.OnAccess(ϟs).SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -9296,9 +9296,9 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		t.Texture2D[ϟa.Level] = l
-		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
+		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
@@ -9307,11 +9307,11 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
-		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
+		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[ϟa.Target] = l
-		t.Cubemap[ϟa.Level] = cube
-		t.Kind = TextureKind_CUBEMAP
-		t.Format = ϟa.Format
+		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
+		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
+		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -9941,7 +9941,7 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
@@ -10008,7 +10008,7 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
@@ -10047,7 +10047,7 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
@@ -10124,7 +10124,7 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
@@ -10163,7 +10163,7 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
@@ -10220,7 +10220,7 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
-	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
