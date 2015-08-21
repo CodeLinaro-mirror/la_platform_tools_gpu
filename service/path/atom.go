@@ -72,6 +72,12 @@ func (n *Atom) MemoryAfter(pool uint64, address, size uint64) *MemoryRange {
 	return &MemoryRange{After: n, Pool: pool, Address: address, Size: size}
 }
 
+// ResourceAfter returns the path to the resource snapshot immediately following
+// this atom.
+func (n *Atom) ResourceAfter(id ResourceID) *Resource {
+	return &Resource{After: n, ID: id}
+}
+
 // FindAtom returns the first Atom found traversing the path p.
 // If no Atom was found, then nil is returned.
 func FindAtom(p Path) *Atom {

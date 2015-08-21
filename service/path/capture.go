@@ -70,6 +70,11 @@ func (c *Capture) Hierarchy() *Hierarchy {
 	return &Hierarchy{Capture: c}
 }
 
+// Resources returns the path to the list of resources used by the capture.
+func (c *Capture) Resources() *Resources {
+	return &Resources{Capture: c}
+}
+
 // FindCapture returns the first Capture found traversing the path p.
 // If no Capture was found, then nil is returned.
 func FindCapture(p Path) *Capture {
