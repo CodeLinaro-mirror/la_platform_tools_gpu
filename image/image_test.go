@@ -12,29 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builder
+package image
 
-import (
-	"testing"
+import "android.googlesource.com/platform/tools/gpu/service/path"
 
-	"android.googlesource.com/platform/tools/gpu/database"
-)
-
-func TestLazyInterfaceCompliance(t *testing.T) {
-	// Interface compliance tests
-	_ = []database.Lazy{
-		(*BuildReport)(nil),
-		(*Get)(nil),
-		(*GetFramebufferColor)(nil),
-		(*GetFramebufferDepth)(nil),
-		(*GetHierarchy)(nil),
-		(*GetState)(nil),
-		(*GetTimingInfo)(nil),
-		(*PrerenderFramebuffers)(nil),
-		(*RenderFramebufferColor)(nil),
-		(*RenderFramebufferDepth)(nil),
-		(*Set)(nil),
-
-		(*getCaptureFramebufferDimensions)(nil),
-	}
-}
+var _ = path.Converter((*Info)(nil))

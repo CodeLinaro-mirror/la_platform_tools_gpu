@@ -14,7 +14,13 @@
 
 package image
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/log"
+)
 
 // Converter is used to convert the the image formed from the parameters data,
 // width and height into another format. If the conversion succeeds then the
@@ -66,4 +72,30 @@ func Convert(data []byte, width int, height int, srcFmt Format, dstFmt Format) (
 
 	return nil, fmt.Errorf("No converter registered that can convert from format '%s' to '%s'\n",
 		srcFmt, dstFmt)
+}
+
+// LazyConverter is a lazy request to decode a compressed texture.
+type LazyConverter struct {
+	binary.Generate
+	Data       binary.ID
+	Width      int
+	Height     int
+	FormatFrom Format
+	FormatTo   Format
+}
+
+// BuildLazy returns the byte array holding the converted image for the
+// ConvertLazy request.
+func (r *LazyConverter) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
+	data, err := database.Resolve(r.Data, d, l)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err = Convert(data.([]byte), r.Width, r.Height, r.FormatFrom, r.FormatTo)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

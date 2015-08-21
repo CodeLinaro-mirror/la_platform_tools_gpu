@@ -17,7 +17,6 @@ package builder
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -85,16 +84,6 @@ type RenderFramebufferColor struct {
 	Width         uint32
 	Height        uint32
 	WireframeMode service.WireframeMode
-}
-
-// ConvertImage is a request to decode a compressed texture.
-type ConvertImage struct {
-	binary.Generate
-	Data       binary.ID
-	Width      int
-	Height     int
-	FormatFrom image.Format
-	FormatTo   image.Format
 }
 
 // BuildReport generates a service.Report for the given capture.

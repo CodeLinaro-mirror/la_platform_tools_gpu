@@ -15,11 +15,9 @@
 package gles
 
 import (
-	"fmt"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/image"
@@ -51,11 +49,11 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 				return
 			}
 
-			id, err := database.Store(&builder.ConvertImage{
+			id, err := database.Store(&image.LazyConverter{
 				Data:       a.Data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
 				Width:      int(a.Width),
 				Height:     int(a.Height),
-				FormatFrom: getImageFormat(a.Format),
+				FormatFrom: imageFormat(a.Format),
 				FormatTo:   image.RGBA(),
 			}, d, l)
 			if err != nil {
@@ -79,18 +77,6 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 			out.Write(i, a)
 		}
 	})
-}
-
-func getImageFormat(f GLenum) image.Format {
-	switch f {
-	case GLenum_GL_ATC_RGB_AMD:
-		return image.ATC_RGB_AMD()
-	case GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
-		return image.ATC_RGBA_EXPLICIT_ALPHA_AMD()
-	case GLenum_GL_ETC1_RGB8_OES:
-		return image.ETC1_RGB8_OES()
-	}
-	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
 }
 
 // getCompressedFormats returns the set of supported compressed texture formats for a given device

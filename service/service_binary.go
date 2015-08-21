@@ -12,7 +12,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -26,7 +25,6 @@ func init() {
 	Namespace.Add((*AtomTimer)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
-	Namespace.Add((*ImageInfo)(nil).Class())
 	Namespace.Add((*MemoryInfo)(nil).Class())
 	Namespace.Add((*RenderSettings)(nil).Class())
 	Namespace.Add((*ReportItem)(nil).Class())
@@ -62,7 +60,6 @@ var (
 	binaryIDAtomTimer                   = binary.ID{0xdb, 0x43, 0x2a, 0x58, 0x94, 0xb7, 0x31, 0x63, 0xb2, 0xfe, 0x02, 0xf7, 0x23, 0xcd, 0xee, 0xa9, 0x24, 0x6a, 0xcf, 0xb6}
 	binaryIDCapture                     = binary.ID{0x53, 0x83, 0xdc, 0x37, 0x1e, 0x26, 0x9f, 0xb9, 0xc9, 0xf8, 0x6f, 0x4b, 0x42, 0x3b, 0xcd, 0xbc, 0x01, 0x83, 0x76, 0xe2}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
-	binaryIDImageInfo                   = binary.ID{0x2d, 0xaa, 0x5c, 0x7f, 0x36, 0x92, 0xad, 0xf2, 0x8d, 0xfc, 0xc0, 0x47, 0x69, 0x59, 0x60, 0xcc, 0xdd, 0x06, 0xf1, 0xa6}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
 	binaryIDRenderSettings              = binary.ID{0xf8, 0x94, 0x85, 0x1d, 0x97, 0x54, 0x1c, 0xb7, 0x82, 0x93, 0x7a, 0x28, 0x65, 0xe7, 0x55, 0x95, 0x4d, 0x89, 0x7a, 0x02}
 	binaryIDReportItem                  = binary.ID{0x8a, 0xb2, 0x14, 0x6f, 0x40, 0xb0, 0x0b, 0x10, 0xa9, 0x02, 0xfb, 0xa1, 0x76, 0x1a, 0xe9, 0xd7, 0x9c, 0x62, 0x40, 0x93}
@@ -472,103 +469,6 @@ var schemaDevice = &schema.Class{
 		{Declared: "Renderer", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassImageInfo struct{}
-
-func (*ImageInfo) Class() binary.Class {
-	return (*binaryClassImageInfo)(nil)
-}
-func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
-	if o.Format != nil {
-		if err := e.Object(o.Format); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Height); err != nil {
-		return err
-	}
-	if o.Data != nil {
-		if err := e.Object(o.Data); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Format = obj.(image.Format)
-	} else {
-		o.Format = nil
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Width = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Height = uint32(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Data = obj.(*path.Blob)
-	} else {
-		o.Data = nil
-	}
-	return nil
-}
-func doSkipImageInfo(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassImageInfo) ID() binary.ID      { return binaryIDImageInfo }
-func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
-func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeImageInfo(e, obj.(*ImageInfo))
-}
-func (*binaryClassImageInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ImageInfo{}
-	return obj, doDecodeImageInfo(d, obj)
-}
-func (*binaryClassImageInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeImageInfo(d, obj.(*ImageInfo))
-}
-func (*binaryClassImageInfo) Skip(d binary.Decoder) error { return doSkipImageInfo(d) }
-func (*binaryClassImageInfo) Schema() *schema.Class       { return schemaImageInfo }
-
-var schemaImageInfo = &schema.Class{
-	TypeID:  binaryIDImageInfo,
-	Package: "service",
-	Name:    "ImageInfo",
-	Fields: []schema.Field{
-		{Declared: "Format", Type: &schema.Interface{Name: "image.Format"}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Blob", ID: (*path.Blob)(nil).Class().ID()}}},
 	},
 }
 

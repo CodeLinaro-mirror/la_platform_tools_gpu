@@ -20,7 +20,6 @@ package service
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -129,16 +128,6 @@ type MemoryInfo struct {
 	Reads    memory.RangeList // The Data-relative ranges that were read-from at the specified atom.
 	Writes   memory.RangeList // The Data-relative ranges that were written-to at the specified atom.
 	Observed memory.RangeList // The Data-relative ranges that have been observed.
-}
-
-// ImageInfo describes an image, such as a texture or framebuffer at a specific
-// point in the atom stream.
-type ImageInfo struct {
-	binary.Generate
-	Format image.Format // The format of the image.
-	Width  uint32       // The width of the image in pixels.
-	Height uint32       // The height of the image in pixels.
-	Data   *path.Blob   // The pixel data of the image.
 }
 
 // TimingInfo holds the results of a resolved GetTimingInfo request.

@@ -14,7 +14,11 @@
 
 package gles
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/image"
+)
 
 // imageSize returns the image pixel data size in bytes for the given
 // width, height, format and type.
@@ -50,4 +54,27 @@ func imageSize(width, height uint32, f GLenum, ty GLenum) uint32 {
 	default:
 		panic(fmt.Errorf("Unsupported image format: %v", f))
 	}
+}
+
+// imageFormat returns the package image format for the given GL format.
+func imageFormat(f GLenum) image.Format {
+	switch f {
+	case GLenum_GL_ALPHA:
+		return image.Alpha()
+	case GLenum_GL_LUMINANCE:
+		return image.Luminance()
+	case GLenum_GL_LUMINANCE_ALPHA:
+		return image.LuminanceAlpha()
+	case GLenum_GL_RGB:
+		return image.RGB()
+	case GLenum_GL_RGBA:
+		return image.RGBA()
+	case GLenum_GL_ATC_RGB_AMD:
+		return image.ATC_RGB_AMD()
+	case GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
+		return image.ATC_RGBA_EXPLICIT_ALPHA_AMD()
+	case GLenum_GL_ETC1_RGB8_OES:
+		return image.ETC1_RGB8_OES()
+	}
+	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
 }
