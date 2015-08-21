@@ -132,7 +132,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 					paths[i-1].Path())
 			}
 			s := gfxapi.NewState()
-			for _, a := range atoms[:p.After.Index] {
+			for _, a := range atoms[:p.After.Index+1] {
 				a.Mutate(s, d, l)
 			}
 			res, found := s.APIs[api]

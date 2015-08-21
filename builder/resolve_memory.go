@@ -38,7 +38,7 @@ func ResolveMemoryRange(
 
 	s := gfxapi.NewState()
 
-	for _, a := range a[:i] {
+	for _, a := range a[:i+1] {
 		a.Mutate(s, d, l)
 	}
 
