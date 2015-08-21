@@ -22,9 +22,9 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-// NewProgram returns the atoms to create a shader program with compiled vertex
+// BuildProgram returns the atoms to create a shader program with compiled vertex
 // and fragment shaders. The returned program is not linked.
-func NewProgram(a device.Architecture, d database.Database, l log.Logger,
+func BuildProgram(a device.Architecture, d database.Database, l log.Logger,
 	vertexShaderID, fragmentShaderID ShaderId, programID ProgramId,
 	vertexShaderSource, fragmentShaderSource string) []atom.Atom {
 	return []atom.Atom{

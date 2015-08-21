@@ -101,7 +101,7 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 	}
 
 	// Create the shader program
-	for _, a := range NewProgram(s.Architecture, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource) {
+	for _, a := range BuildProgram(s.Architecture, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource) {
 		out.Write(atom.NoID, a)
 	}
 

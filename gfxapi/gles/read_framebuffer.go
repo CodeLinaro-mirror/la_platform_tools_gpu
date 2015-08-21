@@ -157,7 +157,7 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 
 		// Create the shader program
 		replayEach(i, s, d, l, b,
-			NewProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
+			BuildProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
 
 		replayEach(i, s, d, l, b,
 			NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),

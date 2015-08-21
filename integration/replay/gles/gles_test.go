@@ -163,7 +163,7 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
-	atoms.Add(gles.NewProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
+	atoms.Add(gles.BuildProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
 	triangle := atoms.Add(
 		gles.NewGlLinkProgram(prog),
 		gles.NewGlUseProgram(prog),
@@ -192,7 +192,7 @@ func TestResizeRenderer(t *testing.T) {
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 8, 8, false) // start with a small backbuffer
-	atoms.Add(gles.NewProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
+	atoms.Add(gles.BuildProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
 	atoms.Add(
 		gles.NewGlLinkProgram(prog),
 		gles.NewGlUseProgram(prog),
