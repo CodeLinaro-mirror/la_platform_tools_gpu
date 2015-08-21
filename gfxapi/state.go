@@ -43,20 +43,14 @@ type State struct {
 
 	// APIs holds the per-API context states.
 	APIs map[API]binary.Object
+
+	// OnResourceCreated is called when a new resource is created.
+	OnResourceCreated func(Resource)
+
+	// OnResourceAccessed is called when a resource is used.
+	OnResourceAccessed func(Resource)
 }
 
-func (s State) String() string {
-	mem := make([]string, 0, len(s.Memory))
-	for i, p := range s.Memory {
-		mem = append(mem, fmt.Sprintf("    %d: %v", i, strings.Replace(p.String(), "\n", "\n      ", -1)))
-	}
-	apis := make([]string, 0, len(s.APIs))
-	for a, s := range s.APIs {
-		apis = append(apis, fmt.Sprintf("    %v: %v", a, s))
-	}
-	return fmt.Sprintf("State{\n  %v\n  Memory:\n%v\n  APIs:\n%v\n}",
-		s.Architecture, strings.Join(mem, "\n"), strings.Join(apis, "\n"))
-}
 // NewState returns a new, default-initialized State object.
 func NewState() *State {
 	return &State{
@@ -72,6 +66,19 @@ func NewState() *State {
 		NextPoolID: memory.ApplicationPool + 1,
 		APIs:       map[API]binary.Object{},
 	}
+}
+
+func (st State) String() string {
+	mem := make([]string, 0, len(st.Memory))
+	for i, p := range st.Memory {
+		mem = append(mem, fmt.Sprintf("    %d: %v", i, strings.Replace(p.String(), "\n", "\n      ", -1)))
+	}
+	apis := make([]string, 0, len(st.APIs))
+	for a, s := range st.APIs {
+		apis = append(apis, fmt.Sprintf("    %v: %v", a, s))
+	}
+	return fmt.Sprintf("State{\n  %v\n  Memory:\n%v\n  APIs:\n%v\n}",
+		st.Architecture, strings.Join(mem, "\n"), strings.Join(apis, "\n"))
 }
 
 // MemoryDecoder returns a flat decoder backed by an endian reader that uses

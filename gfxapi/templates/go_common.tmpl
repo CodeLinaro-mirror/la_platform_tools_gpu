@@ -603,6 +603,7 @@
 
   {{$ty := $.Object | TypeOf | Unpack}}
   {{Template "Go.Read" $.Object}}§
+  {{if IsReference $ty}}{{if GetAnnotation $ty.To "resource"}}.OnAccess(ϟs)§{{end}}{{end}}
   .{{Template "Go.Public" $.Field.Name}}
 {{end}}
 
@@ -727,7 +728,11 @@
 {{define "Go.Create"}}
   {{AssertType $ "Create"}}
 
-  &{{Template "Go.ClassInitializer" $.Initializer}}
+  {{if GetAnnotation $.Initializer.Class "resource"}}
+    (&{{Template "Go.ClassInitializer" $.Initializer}}).OnCreate(ϟs)
+  {{else}}
+    &{{Template "Go.ClassInitializer" $.Initializer}}
+  {{end}}
 {{end}}
 
 

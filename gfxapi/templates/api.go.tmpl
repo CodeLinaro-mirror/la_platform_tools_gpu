@@ -634,6 +634,19 @@
       {{Template "ClassFields" $}}
     }
 
+    {{if GetAnnotation $ "resource"}}
+      // OnCreate should be called immediately after the {{$.Name}} resource is created.
+      func (c *{{$.Name}}) OnCreate(ϟs *gfxapi.State) *{{$.Name}} {
+        if f := ϟs.OnResourceCreated; f != nil { f(c) }
+        return c
+      }
+
+      // OnAccess should be called each time the {{$.Name}} resource is used.
+      func (c *{{$.Name}}) OnAccess(ϟs *gfxapi.State) *{{$.Name}} {
+        if f := ϟs.OnResourceAccessed; f != nil { f(c) }
+        return c
+      }
+    {{end}}
   {{end}}
 {{end}}
 
