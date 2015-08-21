@@ -15,6 +15,7 @@
 package gles
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"image"
@@ -23,6 +24,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
@@ -37,9 +39,9 @@ const (
 
 	simpleVSSource = `
 		precision mediump float;
-		attribute vec2 position;
+		attribute vec3 position;
 		void main() {
-			gl_Position = vec4(position, 0.5, 1.0);
+			gl_Position = vec4(position, 1.0);
 		}`
 
 	simpleFSSource = `
@@ -51,9 +53,9 @@ const (
 
 var (
 	triangleVertices = []float32{
-		+0.0, -0.5,
-		-0.5, +0.5,
-		+0.5, +0.5,
+		+0.0, -0.5, 0.1,
+		-0.5, +0.5, 0.5,
+		+0.5, +0.5, 0.9,
 	}
 )
 
@@ -98,6 +100,43 @@ func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, 
 	case <-time.Tick(replayTimeout):
 		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
 		panic(fmt.Errorf("Timeout reading ColorBuffer at %d for %s", after, name))
+	}
+}
+
+func depthToU16(in []byte) []byte {
+	buf := &bytes.Buffer{}
+	w := endian.Writer(buf, endian.Big)
+	for len(in) > 0 {
+		a, b := uint16(in[0]), uint16(in[1])
+		w.Uint16((a << 8) | b)
+		in = in[4:]
+	}
+	return buf.Bytes()
+}
+
+func checkDepthBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID, done *sync.WaitGroup) {
+	select {
+	case img := <-gles.API().(replay.QueryDepthBuffer).QueryDepthBuffer(ctx, mgr, after):
+		if img.Error != nil {
+			t.Errorf("Failed to read DepthBuffer at %d for %s. Reason: %v", after, name, img.Error)
+			return
+		}
+		if w*h*4 != uint32(len(img.Data)) {
+			t.Errorf("DepthBuffer does not contain the expected number of bytes. Expected: %v, got: %v", w*h*4, len(img.Data))
+			return
+		}
+		got := &image.Gray16{
+			Pix:    depthToU16(img.Data),
+			Stride: int(w * 2),
+			Rect:   image.Rect(0, 0, int(w), int(h)),
+		}
+		checkImage(t, name, got, threshold)
+	case <-time.Tick(replayTimeout):
+		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
+		panic(fmt.Errorf("Timeout reading DepthBuffer at %d for %s", after, name))
+	}
+	if done != nil {
+		done.Done()
 	}
 }
 
@@ -200,9 +239,10 @@ func TestDrawTriangle(t *testing.T) {
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 64, 64, false)
+	atoms.Add(gles.NewGlEnable(gles.GLenum_GL_DEPTH_TEST)) // Required for depth-writing
 	clear := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
-		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT|gles.GLbitfield_GL_DEPTH_BUFFER_BIT),
 	)
 	atoms.Add(gles.BuildProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
 	triangle := atoms.Add(
@@ -210,7 +250,7 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
@@ -223,9 +263,11 @@ func TestDrawTriangle(t *testing.T) {
 	defer checkReplay(t, ctx, 1)() // expect a single replay batch.
 
 	done := &sync.WaitGroup{}
-	done.Add(2)
+	done.Add(4)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-green", clear, done)
+	go checkDepthBuffer(t, ctx, mgr, 64, 64, 0.0, "one-depth", clear, done)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle", triangle, done)
+	go checkDepthBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle-depth", triangle, done)
 	done.Wait()
 }
 
@@ -244,7 +286,7 @@ func TestResizeRenderer(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 	)
 	triangle := atoms.Add(

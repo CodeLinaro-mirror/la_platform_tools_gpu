@@ -27,9 +27,15 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func readFramebufferDepth(out chan replay.Image) atom.Atom {
+func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.Atom {
+	shaderPrefix := ""
+	if v, err := ParseVersion(device.Version); err == nil && v.IsES {
+		shaderPrefix = "precision highp float;\n"
+	}
+
 	return replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 		arch := s.Architecture
 		c := getContext(s)
@@ -46,33 +52,29 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 		const (
 			uTextureLocation      UniformLocation   = 0
 			aScreenCoordsLocation AttributeLocation = 0
-
-			vertexShaderSource string = `
-				precision highp float;
+		)
+		var (
+			vertexShaderSource = shaderPrefix + `
 				attribute vec2 aScreenCoords;
 				varying vec2 vTexCoords;
 
 				void main() {
-					vTexCoords = aScreenCoords / 2. + vec2(0.5, 0.5);
-					gl_Position = vec4(aScreenCoords.xy, 0., 1.);
+					vTexCoords = aScreenCoords / 2.0 + vec2(0.5, 0.5);
+					gl_Position = vec4(aScreenCoords.xy, 0.0, 1.0);
 				}`
-			fragmentShaderSource string = `
-				precision highp float;
+			fragmentShaderSource = shaderPrefix + `
 				uniform sampler2D uTexture;
 				varying vec2 vTexCoords;
 
 				vec4 float2rgba(float f) {
-					vec4 v = fract(f * vec4(1., 255., 65025., 16581375.));
-					return v - vec4(v.yzw, 0.) / 255.;
+					vec4 v = vec4(f, 0.0, 0.0, 0.0) + fract(f * vec4(0.0, 255.0, 65025.0, 16581375.0));
+					return v - vec4(v.yzw, 0.0) / 255.0;
 				}
 
 				void main() {
 					float sample = texture2D(uTexture, vTexCoords).r;
 					gl_FragColor = float2rgba(sample);
 				}`
-		)
-
-		var (
 			origProgramID            = c.BoundProgram
 			origRenderbufferID       = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
 			origReadFramebufferID    = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
@@ -110,6 +112,7 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			GLenum_GL_DEPTH_TEST,
 			GLenum_GL_SCISSOR_TEST,
 			GLenum_GL_STENCIL_TEST,
+			GLenum_GL_ALPHA_TEST,
 		} {
 			capability := cap
 			if c.Capabilities[capability] {
@@ -126,11 +129,11 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			// Setup new framebuffer/renderbuffer.
 			NewGlGenFramebuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
-			NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
 			NewGlGenRenderbuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 			NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, renderbufferID),
 			NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, GLsizei(outW), GLsizei(outH)),
+			NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
 			NewGlFramebufferRenderbuffer(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_RENDERBUFFER, renderbufferID),
 
 			// Setup depth texture.
@@ -147,12 +150,6 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, textureID, 0),
 			NewGlBlitFramebuffer(0, 0, GLint(inW), GLint(inH), 0, 0, GLint(outW), GLint(outH), GLbitfield_GL_DEPTH_BUFFER_BIT, GLenum_GL_NEAREST),
 			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, TextureId(0), 0),
-
-			// Bind new framebuffer.
-			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
-
-			// Render depth texture to framebuffer color attachment.
-			NewGlClear(GLbitfield_GL_COLOR_BUFFER_BIT),
 		)
 
 		// Create the shader program
@@ -171,6 +168,9 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Tmp),
 			NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, positions)),
+
+			// Bind new framebuffer for reading.
+			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 		)
 
 		postColorData(i, s, d, l, b, outW, outH, out)

@@ -109,7 +109,7 @@ func (a api) Replay(
 		case depthBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
-			injector.Inject(req.after, readFramebufferDepth(req.out))
+			injector.Inject(req.after, readFramebufferDepth(device, req.out))
 
 		case timeCallsRequest:
 			profiling = true

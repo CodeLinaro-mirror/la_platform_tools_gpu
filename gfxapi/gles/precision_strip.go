@@ -30,12 +30,10 @@ import (
 // precisionStrip returns a transform that removes all precision specifiers from
 // shader programs if the device target doesn't support them.
 func precisionStrip(device *service.Device, d database.Database, l log.Logger) atom.Transformer {
-	s := gfxapi.NewState()
-	if v, err := ParseVersion(device.Version); err == nil {
-		if v.IsES {
-			return nil
-		}
+	if v, err := ParseVersion(device.Version); err == nil && v.IsES {
+		return nil
 	}
+	s := gfxapi.NewState()
 	return atom.Transform("PrecisionStrip", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		a.Mutate(s, d, l)
 		if cmd, ok := a.(*GlShaderSource); ok {
