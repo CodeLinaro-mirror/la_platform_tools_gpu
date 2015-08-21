@@ -72,9 +72,9 @@ func New(d database.Database, l log.Logger) *Manager {
 // may take some considerable time before it is executed. Replay requests made
 // with configs that have equality (==) will likely be batched into the same
 // replay pass.
-func (m *Manager) Replay(ctx *Context, cfg Config, req Request, generator Generator) error {
+func (m *Manager) Replay(ctx Context, cfg Config, req Request, generator Generator) error {
 	batch, err := m.getBatchStream(batcherContext{
-		Context:   *ctx,
+		Context:   ctx,
 		Generator: generator,
 		Config:    cfg,
 	})

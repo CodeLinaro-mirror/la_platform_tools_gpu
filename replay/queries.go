@@ -37,19 +37,19 @@ const (
 // QueryColorBuffer is the interface implemented by types that can return the
 // content of the color buffer at a particular point in a capture.
 type QueryColorBuffer interface {
-	QueryColorBuffer(ctx *Context, mgr *Manager, after atom.ID, width, height uint32, wireframeMode WireframeMode) <-chan Image
+	QueryColorBuffer(ctx Context, mgr *Manager, after atom.ID, width, height uint32, wireframeMode WireframeMode) <-chan Image
 }
 
 // QueryDepthBufferer is the interface implemented by types that can return the
 // content of the depth buffer at a particular point in a capture.
 type QueryDepthBuffer interface {
-	QueryDepthBuffer(ctx *Context, mgr *Manager, after atom.ID) <-chan Image
+	QueryDepthBuffer(ctx Context, mgr *Manager, after atom.ID) <-chan Image
 }
 
 // QueryCallDurations is the interface implemented by types that can time the
 // duration of each call in a capture.
 type QueryCallDurations interface {
-	QueryCallDurations(ctx *Context, mgr *Manager, flags service.TimingFlags) <-chan CallTiming
+	QueryCallDurations(ctx Context, mgr *Manager, flags service.TimingFlags) <-chan CallTiming
 }
 
 // CallTiming represents the call timing information for a replay.

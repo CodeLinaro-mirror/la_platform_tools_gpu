@@ -62,7 +62,7 @@ func p(addr uint64) memory.Pointer {
 	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID) {
+func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID) {
 	select {
 	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, replay.NoWireframe):
 		if img.Error != nil {
@@ -141,7 +141,7 @@ func TestClear(t *testing.T) {
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Capture: utils.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
@@ -174,7 +174,7 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Capture: utils.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
@@ -208,7 +208,7 @@ func TestResizeRenderer(t *testing.T) {
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Capture: utils.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
@@ -232,7 +232,7 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 	swapB := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
 	swapC := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Capture: utils.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}

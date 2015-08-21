@@ -168,7 +168,7 @@ func (a api) Replay(
 }
 
 func (a api) QueryColorBuffer(
-	ctx *replay.Context,
+	ctx replay.Context,
 	mgr *replay.Manager,
 	after atom.ID,
 	width, height uint32,
@@ -186,7 +186,7 @@ func (a api) QueryColorBuffer(
 	return out
 }
 
-func (a api) QueryDepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan replay.Image {
+func (a api) QueryDepthBuffer(ctx replay.Context, mgr *replay.Manager, after atom.ID) <-chan replay.Image {
 	out := make(chan replay.Image, 1)
 	c := drawConfig{}
 	r := depthBufferRequest{after: after, out: out}
@@ -196,7 +196,7 @@ func (a api) QueryDepthBuffer(ctx *replay.Context, mgr *replay.Manager, after at
 	return out
 }
 
-func (a api) QueryCallDurations(ctx *replay.Context, mgr *replay.Manager, flags service.TimingFlags) <-chan replay.CallTiming {
+func (a api) QueryCallDurations(ctx replay.Context, mgr *replay.Manager, flags service.TimingFlags) <-chan replay.CallTiming {
 	out := make(chan replay.CallTiming, 1)
 	c := uniqueConfig()
 	r := timeCallsRequest{flags: flags, out: out}

@@ -61,7 +61,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Device:  r.Device.ID,
 		Capture: r.After.Atoms.Capture.ID,
 	}

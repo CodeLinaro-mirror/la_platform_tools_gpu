@@ -30,7 +30,7 @@ import (
 func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
 
-	ctx := &replay.Context{
+	ctx := replay.Context{
 		Device:  r.Device.ID,
 		Capture: r.Capture.ID,
 	}
