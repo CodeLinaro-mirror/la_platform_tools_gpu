@@ -114,7 +114,7 @@ func ResolveImageInfo(id binary.ID, d database.Database, l log.Logger) (*image.I
 }
 
 // GetImageInfo calls s.Get with p and then safely casts the result to a *image.Info.
-func GetImageInfo(p *path.ImageInfo, s Service, l log.Logger) (*image.Info, error) {
+func GetImageInfo(p path.Path, s Service, l log.Logger) (*image.Info, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*image.Info); !ok {

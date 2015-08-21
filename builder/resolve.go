@@ -8,6 +8,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -99,7 +100,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			if blob, err := database.Resolve(p.ID, d, l); err != nil {
 				return nil, err
 			} else if data, ok := blob.([]byte); !ok {
-				return nil, fmt.Errorf("ID %s gave %T, expected []byte", p.ID, blob)
+				return nil, fmt.Errorf("Path %s gave %T, expected []byte", p, blob)
 			} else {
 				v[i] = data
 			}
@@ -141,8 +142,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			api := gfxapi.Find(atoms[p.After.Index].API())
 			if api == nil {
-				return nil, fmt.Errorf("Atom at %s has no API",
-					paths[i-1].Path())
+				return nil, fmt.Errorf("Atom at %s has no API", paths[i-1].Path())
 			}
 			s := gfxapi.NewState()
 			for _, a := range atoms[:p.After.Index+1] {
@@ -150,7 +150,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			res, found := s.APIs[api]
 			if !found {
-				return nil, fmt.Errorf("No state for API '%v' after %v",
+				return nil, fmt.Errorf("No state for API '%v' after %s",
 					api.Name(), paths[i-1].Path())
 			}
 			v[i] = res
@@ -168,6 +168,17 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 				return nil, err
 			}
 			v[i] = resource
+
+		case *path.Thumbnail:
+			t, ok := v[i-1].(image.Thumbnailer)
+			if !ok {
+				return nil, fmt.Errorf("Type %T does not support thumbnailing", v[i-1])
+			}
+			img, err := t.Thumbnail(p.DesiredWidth, p.DesiredHeight, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = img
 
 		case *path.MemoryRange:
 			atoms := v[i-2].(*atom.List).Atoms

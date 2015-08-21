@@ -33,6 +33,7 @@ func init() {
 	Namespace.Add((*Resources)(nil).Class())
 	Namespace.Add((*Slice)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
+	Namespace.Add((*Thumbnail)(nil).Class())
 	Namespace.Add((*TimingInfo)(nil).Class())
 }
 
@@ -54,6 +55,7 @@ var (
 	binaryIDResources   = binary.ID{0x82, 0x0b, 0xab, 0xba, 0x6a, 0x6f, 0x0d, 0xfa, 0x3e, 0xb4, 0x2a, 0xb8, 0xf0, 0xb1, 0x28, 0x47, 0xec, 0x67, 0x48, 0xf2}
 	binaryIDSlice       = binary.ID{0xd2, 0x2a, 0x0c, 0x1e, 0x91, 0x2e, 0x6b, 0x8d, 0xc1, 0xde, 0x05, 0xf2, 0x17, 0x1e, 0xf4, 0x42, 0x3b, 0x12, 0xd9, 0x76}
 	binaryIDState       = binary.ID{0xf1, 0xa4, 0x19, 0x51, 0x01, 0xc4, 0xe2, 0x90, 0xc2, 0xca, 0x28, 0x00, 0x17, 0x08, 0x72, 0xb9, 0x46, 0x3a, 0xd1, 0x7b}
+	binaryIDThumbnail   = binary.ID{0x0d, 0x7a, 0x1a, 0xba, 0xcd, 0x7e, 0x51, 0x2a, 0xb5, 0x6f, 0x82, 0x12, 0x02, 0x58, 0xe7, 0xa6, 0x0f, 0xad, 0x05, 0xbf}
 	binaryIDTimingInfo  = binary.ID{0xad, 0xc7, 0xb9, 0x1b, 0xaa, 0x9c, 0x98, 0xc2, 0x28, 0xb0, 0xdc, 0x3a, 0x6f, 0xdb, 0xa8, 0xff, 0x9c, 0xb6, 0x9a, 0x89}
 )
 
@@ -1123,6 +1125,85 @@ var schemaState = &schema.Class{
 	Name:    "State",
 	Fields: []schema.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassThumbnail struct{}
+
+func (*Thumbnail) Class() binary.Class {
+	return (*binaryClassThumbnail)(nil)
+}
+func doEncodeThumbnail(e binary.Encoder, o *Thumbnail) error {
+	if o.Object != nil {
+		if err := e.Object(o.Object); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DesiredWidth)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.DesiredHeight)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Object = obj.(Path)
+	} else {
+		o.Object = nil
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DesiredWidth = int(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.DesiredHeight = int(obj)
+	}
+	return nil
+}
+func doSkipThumbnail(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassThumbnail) ID() binary.ID      { return binaryIDThumbnail }
+func (*binaryClassThumbnail) New() binary.Object { return &Thumbnail{} }
+func (*binaryClassThumbnail) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeThumbnail(e, obj.(*Thumbnail))
+}
+func (*binaryClassThumbnail) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Thumbnail{}
+	return obj, doDecodeThumbnail(d, obj)
+}
+func (*binaryClassThumbnail) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeThumbnail(d, obj.(*Thumbnail))
+}
+func (*binaryClassThumbnail) Skip(d binary.Decoder) error { return doSkipThumbnail(d) }
+func (*binaryClassThumbnail) Schema() *schema.Class       { return schemaThumbnail }
+
+var schemaThumbnail = &schema.Class{
+	TypeID:  binaryIDThumbnail,
+	Package: "path",
+	Name:    "Thumbnail",
+	Fields: []schema.Field{
+		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
+		{Declared: "DesiredWidth", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "DesiredHeight", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 	},
 }
 
