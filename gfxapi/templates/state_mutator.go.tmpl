@@ -38,9 +38,6 @@
     if state, ok := s.APIs[api].(*State); ok {
       return state
     } else {
-      if s.APIs == nil {
-        s.APIs = make(map[gfxapi.API]binary.Object)
-      }
       state = &State{}
       state.Init()
       s.APIs[api] = state

@@ -57,6 +57,7 @@ func (s State) String() string {
 	return fmt.Sprintf("State{\n  %v\n  Memory:\n%v\n  APIs:\n%v\n}",
 		s.Architecture, strings.Join(mem, "\n"), strings.Join(apis, "\n"))
 }
+// NewState returns a new, default-initialized State object.
 func NewState() *State {
 	return &State{
 		Architecture: device.Architecture{
@@ -69,6 +70,7 @@ func NewState() *State {
 			memory.ApplicationPool: &memory.Pool{},
 		},
 		NextPoolID: memory.ApplicationPool + 1,
+		APIs:       map[API]binary.Object{},
 	}
 }
 

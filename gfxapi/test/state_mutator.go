@@ -7,7 +7,6 @@ package test
 import (
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -20,9 +19,6 @@ func getState(s *gfxapi.State) *State {
 	if state, ok := s.APIs[api].(*State); ok {
 		return state
 	} else {
-		if s.APIs == nil {
-			s.APIs = make(map[gfxapi.API]binary.Object)
-		}
 		state = &State{}
 		state.Init()
 		s.APIs[api] = state
