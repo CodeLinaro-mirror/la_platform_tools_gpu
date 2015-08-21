@@ -90,6 +90,13 @@ func (n *Field) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
 
+// As returns the path to the field value converted to the requested type.
+// If the represented value does not support converting to the requested type
+// then the returned path is invalid.
+func (n *Field) As(ty interface{}) Value {
+	return &As{Object: n, Type: ty}
+}
+
 // FindField returns the first Field found traversing the path p.
 // If no Atom was found, then nil is returned.
 func FindField(p Path) *Field {

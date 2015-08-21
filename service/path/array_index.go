@@ -88,6 +88,13 @@ func (n *ArrayIndex) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
 
+// As returns the path to the array element converted to the requested type.
+// If the represented value does not support converting to the requested type
+// then the returned path is invalid.
+func (n *ArrayIndex) As(ty interface{}) Value {
+	return &As{Object: n, Type: ty}
+}
+
 // FindArrayIndex returns the first ArrayIndex found traversing the path p.
 // If no Atom was found, then nil is returned.
 func FindArrayIndex(p Path) *ArrayIndex {

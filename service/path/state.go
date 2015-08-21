@@ -80,6 +80,13 @@ func (n *State) ArrayIndex(index uint64) *ArrayIndex {
 	return &ArrayIndex{Array: n, Index: index}
 }
 
+// As returns the path to the state object converted to the requested type.
+// If the represented value does not support converting to the requested type
+// then the returned path is invalid.
+func (n *State) As(ty interface{}) Value {
+	return &As{Object: n, Type: ty}
+}
+
 // MapIndex returns the path to the map element with key k on the map object
 // represented by this path.
 // The represented value type must be of type map, otherwise the returned path

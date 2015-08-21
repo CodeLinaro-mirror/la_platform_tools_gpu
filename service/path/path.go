@@ -77,4 +77,10 @@ type Value interface {
 	// The represented value type must be of type map, otherwise the returned path
 	// is invalid.
 	MapIndex(k interface{}) *MapIndex
+
+	// As returns the path to the struct, array, slice, map or POD type, converted
+	// to the requested type.
+	// If the represented value does not support converting to the requested type
+	// then the returned path is invalid.
+	As(ty interface{}) Value
 }

@@ -89,3 +89,10 @@ func (n *MapIndex) ArrayIndex(index uint64) *ArrayIndex {
 func (n *MapIndex) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
+
+// As returns the path to the map element converted to the requested type.
+// If the represented value does not support converting to the requested type
+// then the returned path is invalid.
+func (n *MapIndex) As(ty interface{}) Value {
+	return &As{Object: n, Type: ty}
+}
