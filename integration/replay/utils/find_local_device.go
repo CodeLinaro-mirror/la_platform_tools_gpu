@@ -23,16 +23,21 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 )
 
-const findLocalDeviceAttempts = 5
-const msBetweenFindLocalDeviceAttempts = 500
-const localDeviceName = "Local machine" // TODO: Remove hard-coded string.
+const (
+	findLocalDeviceAttempts          = 5
+	msBetweenFindLocalDeviceAttempts = 500
+	localDeviceName                  = "Local machine" // TODO: Remove hard-coded string.
+	replaydPort                      = 9283            // Note: Not the usual replayd port.
+)
 
 // FindLocalDevice returns the replay Device for the local host. If the local
 // host cannot be found then the test fails and nil is returned.
 func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
-	replay.ConfigureLocalReplayDevice(true, // disable disk-cache
+	replay.ConfigureLocalReplayDevice(
+		true, // disable disk-cache
 		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.Replayd)),
-		9283)
+		replaydPort,
+	)
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {
 			info := d.Info()
