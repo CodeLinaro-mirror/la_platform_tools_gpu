@@ -527,11 +527,10 @@
   type {{$name}} map[{{$key}}]{{$value}}
 
   func (m {{$name}}) Get(key {{$key}}) {{$value}} {
-    {{$init := Macro "Init" "Name" "v" "Type" $.ValueType}}
-    {{if $init}}
+    {{if $init := Macro "Go.DefaultInitialValue" $.ValueType}}
       v, ok := m[key]
       if !ok {
-        {{$init}}
+        v = {{$init}}
       }
       return v
     {{else}}
@@ -555,21 +554,6 @@
     }
     return values
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits initialization code for the specified type.
--------------------------------------------------------------------------------
-*/}}
-{{define "Init"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
-
-  {{     if IsMap   $.Type}}{{$.Name}} = make({{Template "Go.Type" $.Type}})
-  {{else if IsClass $.Type}}{{$.Name}}.Init()
-  {{end}}
 {{end}}
 
 
@@ -650,9 +634,6 @@
       {{Template "ClassFields" $}}
     }
 
-    func (c *{{$.Name}}) Init() {
-      {{Template "FieldsInit" "Type" $ "Name" "c"}}
-    }
   {{end}}
 {{end}}
 
@@ -681,35 +662,6 @@
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
     {{Title $v.Name}} {{Template "Go.Type" $v}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits initialization code for all fields of the specified class.
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldsInit"}}
-  {{AssertType $.Type "Class"  "API"}}
-  {{AssertType $.Name "string"}}
-  {{range $v := $.Type.Fields}}
-    {{Template "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits initialization code for the specified class field.
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldInit"}}
-  {{AssertType $.Field "Field"  "Global"}}
-  {{AssertType $.Name "string"}}
-
-  {{if $.Field.Default}}{{$.Name}} = {{Template "Default" $.Field.Default}}
-  {{else              }}{{Template "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
   {{end}}
 {{end}}
 
@@ -814,7 +766,9 @@
 
   func (g *State) Init() {
     {{range $g := $.Globals}}
-      {{Template "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
+      {{if $init := Macro "Go.DefaultInitialValue" $g.Type}}
+        g.{{$g.Name}} = {{$init}}
+      {{end}}
     {{end}}
   }
 {{end}}

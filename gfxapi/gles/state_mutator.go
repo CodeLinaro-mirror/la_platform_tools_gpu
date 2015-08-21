@@ -419,11 +419,7 @@ func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
-		ctx.Instances.Queries[id] = func() *Query {
-			s := &Query{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Queries[id] = &Query{}
 		q.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -514,11 +510,7 @@ func (ϟa *GlBindBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_55_result := context              // Contextʳ
 	ctx := GetContext_55_result                  // Contextʳ
 	if !(ctx.Instances.Buffers.Contains(ϟa.Buffer)) {
-		ctx.Instances.Buffers[ϟa.Buffer] = func() *Buffer {
-			s := &Buffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Buffers[ϟa.Buffer] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	}
 	ctx.BoundBuffers[ϟa.Target] = ϟa.Buffer
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -695,11 +687,7 @@ func (ϟa *GlGenBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := BufferId(ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // BufferId
-		ctx.Instances.Buffers[id] = func() *Buffer {
-			s := &Buffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Buffers[id] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 		b.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -1310,11 +1298,7 @@ func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	GetContext_141_result := context                                    // Contextʳ
 	ctx := GetContext_141_result                                        // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
-		ctx.Instances.VertexArrays[ϟa.Array] = func() *VertexArray {
-			s := &VertexArray{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{}
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -2185,11 +2169,7 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
-		ctx.Instances.Queries[id] = func() *Query {
-			s := &Query{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Queries[id] = &Query{}
 		q.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -2208,11 +2188,7 @@ func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
-		ctx.Instances.VertexArrays[id] = func() *VertexArray {
-			s := &VertexArray{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.VertexArrays[id] = &VertexArray{}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -4294,15 +4270,7 @@ func (ϟa *GlBlendColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_475_result := context             // Contextʳ
 	ctx := GetContext_475_result                 // Contextʳ
-	ctx.Blending.BlendColor = func() Color {
-		s := Color{}
-		s.Init()
-		s.Red = ϟa.Red
-		s.Green = ϟa.Green
-		s.Blue = ϟa.Blue
-		s.Alpha = ϟa.Alpha
-		return s
-	}()
+	ctx.Blending.BlendColor = Color{Red: ϟa.Red, Green: ϟa.Green, Blue: ϟa.Blue, Alpha: ϟa.Alpha}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_474_major, minRequiredVersion_474_minor, context, GetContext_475_result, ctx
 	return nil
@@ -4491,15 +4459,7 @@ func (ϟa *GlScissor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_503_result := context             // Contextʳ
 	ctx := GetContext_503_result                 // Contextʳ
-	ctx.Rasterizing.Scissor = func() Rect {
-		s := Rect{}
-		s.Init()
-		s.X = ϟa.X
-		s.Y = ϟa.Y
-		s.Width = ϟa.Width
-		s.Height = ϟa.Height
-		return s
-	}()
+	ctx.Rasterizing.Scissor = Rect{X: ϟa.X, Y: ϟa.Y, Width: ϟa.Width, Height: ϟa.Height}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_502_major, minRequiredVersion_502_minor, context, GetContext_503_result, ctx
 	return nil
@@ -4624,11 +4584,7 @@ func (ϟa *GlBindFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	GetContext_521_result := context             // Contextʳ
 	ctx := GetContext_521_result                 // Contextʳ
 	if !(ctx.Instances.Framebuffers.Contains(ϟa.Framebuffer)) {
-		ctx.Instances.Framebuffers[ϟa.Framebuffer] = func() *Framebuffer {
-			s := &Framebuffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Framebuffers[ϟa.Framebuffer] = &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}}
 	}
 	if (ϟa.Target) == (GLenum_GL_FRAMEBUFFER) {
 		ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = ϟa.Framebuffer
@@ -4656,11 +4612,7 @@ func (ϟa *GlBindRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	GetContext_524_result := context             // Contextʳ
 	ctx := GetContext_524_result                 // Contextʳ
 	if !(ctx.Instances.Renderbuffers.Contains(ϟa.Renderbuffer)) {
-		ctx.Instances.Renderbuffers[ϟa.Renderbuffer] = func() *Renderbuffer {
-			s := &Renderbuffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Renderbuffers[ϟa.Renderbuffer] = &Renderbuffer{}
 	}
 	ctx.BoundRenderbuffers[ϟa.Target] = ϟa.Renderbuffer
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -4805,15 +4757,7 @@ func (ϟa *GlClearColor) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_542_result := context             // Contextʳ
 	ctx := GetContext_542_result                 // Contextʳ
-	ctx.Clearing.ClearColor = func() Color {
-		s := Color{}
-		s.Init()
-		s.Red = ϟa.R
-		s.Green = ϟa.G
-		s.Blue = ϟa.B
-		s.Alpha = ϟa.A
-		return s
-	}()
+	ctx.Clearing.ClearColor = Color{Red: ϟa.R, Green: ϟa.G, Blue: ϟa.B, Alpha: ϟa.A}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_541_major, minRequiredVersion_541_minor, context, GetContext_542_result, ctx
 	return nil
@@ -5126,11 +5070,7 @@ func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := FramebufferId(ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // FramebufferId
-		ctx.Instances.Framebuffers[id] = func() *Framebuffer {
-			s := &Framebuffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Framebuffers[id] = &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}}
 		f.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -5150,11 +5090,7 @@ func (ϟa *GlGenRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := RenderbufferId(ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // RenderbufferId
-		ctx.Instances.Renderbuffers[id] = func() *Renderbuffer {
-			s := &Renderbuffer{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.Renderbuffers[id] = &Renderbuffer{}
 		r.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -5730,11 +5666,7 @@ func (ϟa *GlCreateProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ctx := GetContext_652_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ProgramId(ϟa.Result) // ProgramId
-	ctx.Instances.Programs[id] = func() *Program {
-		s := &Program{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Programs[id] = &Program{Shaders: GLenumːShaderIdᵐ{}, AttributeBindings: StringːAttributeLocationᵐ{}, Attributes: S32ːVertexAttributeᵐ{}, Uniforms: UniformLocationːUniformᵐ{}}
 	ϟa.Result = id
 	_, _, _, _, _, _ = minRequiredVersion_651_major, minRequiredVersion_651_minor, context, GetContext_652_result, ctx, id
 	return nil
@@ -5760,11 +5692,7 @@ func (ϟa *GlCreateShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ctx := GetContext_656_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ShaderId(ϟa.Result) // ShaderId
-	ctx.Instances.Shaders[id] = func() *Shader {
-		s := &Shader{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Shaders[id] = &Shader{Compiled: false, Deletable: false}
 	s := ctx.Instances.Shaders.Get(id) // Shaderʳ
 	s.Type = ϟa.Type
 	ϟa.Result = id
@@ -7648,15 +7576,7 @@ func (ϟa *GlViewport) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_848_result := context             // Contextʳ
 	ctx := GetContext_848_result                 // Contextʳ
-	ctx.Rasterizing.Viewport = func() Rect {
-		s := Rect{}
-		s.Init()
-		s.X = ϟa.X
-		s.Y = ϟa.Y
-		s.Width = ϟa.Width
-		s.Height = ϟa.Height
-		return s
-	}()
+	ctx.Rasterizing.Viewport = Rect{X: ϟa.X, Y: ϟa.Y, Width: ϟa.Width, Height: ϟa.Height}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_847_major, minRequiredVersion_847_minor, context, GetContext_848_result, ctx
 	return nil
@@ -8346,12 +8266,7 @@ func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	GetContext_908_result := context             // Contextʳ
 	ctx := GetContext_908_result                 // Contextʳ
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
-		ctx.Instances.Textures[ϟa.Texture] = func() *Texture {
-			s := &Texture{}
-			s.Init()
-			s.ID = ϟa.Texture
-			return s
-		}()
+		ctx.Instances.Textures[ϟa.Texture] = &Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
 	}
 	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -8387,17 +8302,9 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	ctx := GetContext_914_result                 // Contextʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = uint32(ϟa.ImageSize)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                   // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
@@ -8406,17 +8313,9 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		t.Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = uint32(ϟa.ImageSize)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)             // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
@@ -8611,12 +8510,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
-		ctx.Instances.Textures[id] = func() *Texture {
-			s := &Texture{}
-			s.Init()
-			s.ID = id
-			return s
-		}()
+		ctx.Instances.Textures[id] = &Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -9016,17 +8910,9 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ctx := GetContext_990_result                 // Contextʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9039,17 +8925,9 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		t.Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9416,17 +9294,9 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ctx := GetContext_1042_result                // Contextʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
@@ -9435,17 +9305,9 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		t.Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
-		l := func() Image {
-			s := Image{}
-			s.Init()
-			s.Width = ϟa.Width
-			s.Height = ϟa.Height
-			s.Size = externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ϟa.Format
-			return s
-		}() // Image
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
@@ -9623,11 +9485,7 @@ func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	GetContext_1062_result := context            // Contextʳ
 	ctx := GetContext_1062_result                // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
-		ctx.Instances.VertexArrays[ϟa.Array] = func() *VertexArray {
-			s := &VertexArray{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{}
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -9702,11 +9560,7 @@ func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
-		ctx.Instances.VertexArrays[id] = func() *VertexArray {
-			s := &VertexArray{}
-			s.Init()
-			return s
-		}()
+		ctx.Instances.VertexArrays[id] = &VertexArray{}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
@@ -10088,74 +9942,21 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := EGLContext(ϟa.Result) // EGLContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10164,11 +9965,7 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1116_result := ctx // Contextʳ
 	ϟc.EGLContexts[context] = CreateContext_1116_result
@@ -10212,74 +10009,21 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10288,11 +10032,7 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1118_result := ctx // Contextʳ
 	ϟc.GLXContexts[context] = CreateContext_1118_result
@@ -10308,74 +10048,21 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10384,11 +10071,7 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1119_result := ctx // Contextʳ
 	ϟc.GLXContexts[context] = CreateContext_1119_result
@@ -10442,74 +10125,21 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10518,11 +10148,7 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1122_result := ctx // Contextʳ
 	ϟc.WGLContexts[context] = CreateContext_1122_result
@@ -10538,74 +10164,21 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10614,11 +10187,7 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1123_result := ctx // Contextʳ
 	ϟc.WGLContexts[context] = CreateContext_1123_result
@@ -10652,74 +10221,21 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := CGLContextObj(ϟa.Ctx.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // CGLContextObj
 	identifier := ϟc.NextContextID                                                                                                                // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := func() *Context {
-		s := &Context{}
-		s.Init()
-		return s
-	}() // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
-	ctx.Instances.Buffers[BufferId(uint32(0))] = func() *Buffer {
-		s := &Buffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Textures[TextureId(uint32(0))] = func() *Texture {
-		s := &Texture{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
+	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
+	ctx.Instances.Textures[TextureId(uint32(0))] = &Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}
+	ctx.Instances.Renderbuffers[RenderbufferId(uint32(0))] = &Renderbuffer{}
 	color_id := RenderbufferId(uint32(4294967295))   // RenderbufferId
 	depth_id := RenderbufferId(uint32(4294967294))   // RenderbufferId
 	stencil_id := RenderbufferId(uint32(4294967293)) // RenderbufferId
-	ctx.Instances.Renderbuffers[color_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[depth_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	ctx.Instances.Renderbuffers[stencil_id] = func() *Renderbuffer {
-		s := &Renderbuffer{}
-		s.Init()
-		return s
-	}()
-	backbuffer := func() *Framebuffer {
-		s := &Framebuffer{}
-		s.Init()
-		return s
-	}() // Framebufferʳ
-	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(color_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(depth_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
-	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
-		s := FramebufferAttachmentInfo{}
-		s.Init()
-		s.Object = uint32(stencil_id)
-		s.Type = GLenum_GL_RENDERBUFFER
-		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-		return s
-	}()
+	ctx.Instances.Renderbuffers[color_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[depth_id] = &Renderbuffer{}
+	ctx.Instances.Renderbuffers[stencil_id] = &Renderbuffer{}
+	backbuffer := &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}} // Framebufferʳ
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{Object: uint32(color_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(depth_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{Object: uint32(stencil_id), Type: GLenum_GL_RENDERBUFFER, CubeMapFace: GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X}
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
 	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
 	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
@@ -10728,11 +10244,7 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
-		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
-			s := &VertexAttributeArray{}
-			s.Init()
-			return s
-		}()
+		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
 	CreateContext_1125_result := ctx // Contextʳ
 	ϟc.CGLContexts[context] = CreateContext_1125_result

@@ -531,7 +531,7 @@
   {{else if IsCall             $}}{{Template "Go.Call" $}}
   {{else if IsUnknown          $}}{{Global "Go.InferredExpression" "1"}}{{Template "Go.Read" $.Inferred}}{{Global "Go.InferredExpression" ""}}
   {{else if IsObserved         $}}{{Template "Go.ReadParameter" $.Parameter}}
-  {{else if IsMember           $}}{{Template "Go.Read" $.Object}}.{{Template "Go.Public" $.Field.Name}}
+  {{else if IsMember           $}}{{Template "Go.Member" $}}
   {{else if IsGlobal           $}}ϟc.{{Title $.Name}}
   {{else if IsParameter        $}}{{Template "Go.ReadParameter" $}}
   {{else if IsMapIndex         $}}{{Template "Go.Read" $.Map}}.Get({{Template "Go.Read" $.Index}})
@@ -595,6 +595,20 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the logic to access a member on a class instance.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Member"}}
+  {{AssertType $ "Member"}}
+
+  {{$ty := $.Object | TypeOf | Unpack}}
+  {{Template "Go.Read" $.Object}}§
+  .{{Template "Go.Public" $.Field.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the logic to read the value of the specified expression.
 -------------------------------------------------------------------------------
 */}}
@@ -651,14 +665,57 @@
 {{define "Go.ClassInitializer"}}
   {{AssertType $ "ClassInitializer"}}
 
-  func(){{Template "Go.Type" $}}{
-    s := {{Template "Go.Type" $}}{}
-    s.Init()
-    {{range $f := $.Fields}}
-      s.{{$f.Field.Name}} = {{Template "Go.Read" $f.Value}}
+  {{Template "Go.Type" $}}{ §
+    {{range $i, $v := $.InitialValues}}
+      {{$f := index $.Class.Fields $i}}
+      {{if IsNil $v}}
+        {{if $init := Macro "Go.DefaultInitialValue" $f.Type}}
+          {{$f.Name}}: {{$init}}, §
+        {{end}}
+      {{else}}
+        {{$f.Name}}: {{Template "Go.Read" $v}}, §
+      {{end}}
     {{end}}
-    return s
-  }()
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the default initialization code for the specified type, or nothing if
+  the type has go-default initialization.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.DefaultInitialValue"}}
+  {{AssertType $ "Type"}}
+
+  {{if IsMap $}}
+    {{Template "Go.Type" $}}{}
+  {{else if IsClass $}}
+    {{if $fields := Macro "Go.DefaultClassFields" $}}
+      {{Template "Go.Type" $}}{ {{$fields}} }
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the default initialization code for the fields of the specified class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.DefaultClassFields"}}
+  {{AssertType $ "Class"}}
+
+  {{range $f := $.Fields}}
+    {{if IsNil $f.Default}}
+      {{if $init := Macro "Go.DefaultInitialValue" $f.Type}}
+        {{$f.Name}}: {{$init}}, §
+      {{end}}
+    {{else}}
+      {{$f.Name}}: {{Macro "Go.Read" $f.Default}}, §
+    {{end}}
+  {{end}}
 {{end}}
 
 
@@ -670,14 +727,7 @@
 {{define "Go.Create"}}
   {{AssertType $ "Create"}}
 
-  func(){{Template "Go.Type" $}}{
-    s := &{{Template "Go.Type" (Unpack $.Type).To}}{}
-    s.Init()
-    {{range $f := $.Initializer.Fields}}
-      s.{{$f.Field.Name}} = {{Template "Go.Read" $f.Value}}
-    {{end}}
-    return s
-  }()
+  &{{Template "Go.ClassInitializer" $.Initializer}}
 {{end}}
 
 

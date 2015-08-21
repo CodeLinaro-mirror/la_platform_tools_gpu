@@ -12308,11 +12308,7 @@ func (m GLenumːBufferIdᵐ) Range() []BufferId {
 type GLenumːFramebufferAttachmentInfoᵐ map[GLenum]FramebufferAttachmentInfo
 
 func (m GLenumːFramebufferAttachmentInfoᵐ) Get(key GLenum) FramebufferAttachmentInfo {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
+	return m[key]
 }
 func (m GLenumːFramebufferAttachmentInfoᵐ) Contains(key GLenum) bool {
 	_, ok := m[key]
@@ -12354,7 +12350,7 @@ type GLenumːGLenumːTextureIdᵐᵐ map[GLenum]GLenumːTextureIdᵐ
 func (m GLenumːGLenumːTextureIdᵐᵐ) Get(key GLenum) GLenumːTextureIdᵐ {
 	v, ok := m[key]
 	if !ok {
-		v = make(GLenumːTextureIdᵐ)
+		v = GLenumːTextureIdᵐ{}
 	}
 	return v
 }
@@ -12416,11 +12412,7 @@ func (m GLenumːGLuintᵐ) Range() []GLuint {
 type GLenumːImageᵐ map[GLenum]Image
 
 func (m GLenumːImageᵐ) Get(key GLenum) Image {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
+	return m[key]
 }
 func (m GLenumːImageᵐ) Contains(key GLenum) bool {
 	_, ok := m[key]
@@ -12522,7 +12514,7 @@ type GLintːCubemapLevelᵐ map[GLint]CubemapLevel
 func (m GLintːCubemapLevelᵐ) Get(key GLint) CubemapLevel {
 	v, ok := m[key]
 	if !ok {
-		v.Init()
+		v = CubemapLevel{Faces: GLenumːImageᵐ{}}
 	}
 	return v
 }
@@ -12544,11 +12536,7 @@ func (m GLintːCubemapLevelᵐ) Range() []CubemapLevel {
 type GLintːImageᵐ map[GLint]Image
 
 func (m GLintːImageᵐ) Get(key GLint) Image {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
+	return m[key]
 }
 func (m GLintːImageᵐ) Contains(key GLint) bool {
 	_, ok := m[key]
@@ -12648,11 +12636,7 @@ func (m RenderbufferIdːRenderbufferʳᵐ) Range() [](*Renderbuffer) {
 type S32ːVertexAttributeᵐ map[int32]VertexAttribute
 
 func (m S32ːVertexAttributeᵐ) Get(key int32) VertexAttribute {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
+	return m[key]
 }
 func (m S32ːVertexAttributeᵐ) Contains(key int32) bool {
 	_, ok := m[key]
@@ -12752,11 +12736,7 @@ func (m ThreadIDːContextʳᵐ) Range() [](*Context) {
 type UniformLocationːUniformᵐ map[UniformLocation]Uniform
 
 func (m UniformLocationːUniformᵐ) Get(key UniformLocation) Uniform {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
+	return m[key]
 }
 func (m UniformLocationːUniformᵐ) Contains(key UniformLocation) bool {
 	_, ok := m[key]
@@ -37191,9 +37171,6 @@ type generate_types struct {
 	U32_slice U32ˢ
 }
 
-func (c *generate_types) Init() {
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Color
 ////////////////////////////////////////////////////////////////////////////////
@@ -37205,9 +37182,6 @@ type Color struct {
 	Alpha GLfloat
 }
 
-func (c *Color) Init() {
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Rect
 ////////////////////////////////////////////////////////////////////////////////
@@ -37217,9 +37191,6 @@ type Rect struct {
 	Y      GLint
 	Width  GLsizei
 	Height GLsizei
-}
-
-func (c *Rect) Init() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37234,9 +37205,6 @@ type Image struct {
 	Format GLenum
 }
 
-func (c *Image) Init() {
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Renderbuffer
 ////////////////////////////////////////////////////////////////////////////////
@@ -37246,9 +37214,6 @@ type Renderbuffer struct {
 	Height GLsizei
 	Data   U8ˢ
 	Format GLenum
-}
-
-func (c *Renderbuffer) Init() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37272,30 +37237,12 @@ type Texture struct {
 	MaxAnisotropy float32
 }
 
-func (c *Texture) Init() {
-	c.Texture2D = make(GLintːImageᵐ)
-	c.Cubemap = make(GLintːCubemapLevelᵐ)
-	c.MagFilter = GLenum_GL_LINEAR
-	c.MinFilter = GLenum_GL_NEAREST_MIPMAP_LINEAR
-	c.WrapS = GLenum_GL_REPEAT
-	c.WrapT = GLenum_GL_REPEAT
-	c.SwizzleR = GLenum_GL_RED
-	c.SwizzleG = GLenum_GL_GREEN
-	c.SwizzleB = GLenum_GL_BLUE
-	c.SwizzleA = GLenum_GL_ALPHA
-	c.MaxAnisotropy = 1
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class CubemapLevel
 ////////////////////////////////////////////////////////////////////////////////
 type CubemapLevel struct {
 	binary.Generate
 	Faces GLenumːImageᵐ
-}
-
-func (c *CubemapLevel) Init() {
-	c.Faces = make(GLenumːImageᵐ)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37309,19 +37256,12 @@ type FramebufferAttachmentInfo struct {
 	CubeMapFace  GLenum
 }
 
-func (c *FramebufferAttachmentInfo) Init() {
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Framebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type Framebuffer struct {
 	binary.Generate
 	Attachments GLenumːFramebufferAttachmentInfoᵐ
-}
-
-func (c *Framebuffer) Init() {
-	c.Attachments = make(GLenumːFramebufferAttachmentInfoᵐ)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37337,11 +37277,6 @@ type Buffer struct {
 	MappingData   U8ˢ
 }
 
-func (c *Buffer) Init() {
-	c.Size = 0
-	c.Usage = GLenum_GL_STATIC_DRAW
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Shader
 ////////////////////////////////////////////////////////////////////////////////
@@ -37355,11 +37290,6 @@ type Shader struct {
 	Type      GLenum
 }
 
-func (c *Shader) Init() {
-	c.Compiled = false
-	c.Deletable = false
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexAttribute
 ////////////////////////////////////////////////////////////////////////////////
@@ -37370,9 +37300,6 @@ type VertexAttribute struct {
 	Type        GLenum
 }
 
-func (c *VertexAttribute) Init() {
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Uniform
 ////////////////////////////////////////////////////////////////////////////////
@@ -37381,9 +37308,6 @@ type Uniform struct {
 	Name  string
 	Type  GLenum
 	Value U8ˢ
-}
-
-func (c *Uniform) Init() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37400,21 +37324,11 @@ type Program struct {
 	InfoLog           GLcharˢ
 }
 
-func (c *Program) Init() {
-	c.Shaders = make(GLenumːShaderIdᵐ)
-	c.AttributeBindings = make(StringːAttributeLocationᵐ)
-	c.Attributes = make(S32ːVertexAttributeᵐ)
-	c.Uniforms = make(UniformLocationːUniformᵐ)
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexArray
 ////////////////////////////////////////////////////////////////////////////////
 type VertexArray struct {
 	binary.Generate
-}
-
-func (c *VertexArray) Init() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37431,23 +37345,11 @@ type VertexAttributeArray struct {
 	Pointer    VertexPointer
 }
 
-func (c *VertexAttributeArray) Init() {
-	c.Enabled = false
-	c.Size = 4
-	c.Type = GLenum_GL_FLOAT
-	c.Normalized = 0
-	c.Stride = 0
-	c.Buffer = 0
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class Query
 ////////////////////////////////////////////////////////////////////////////////
 type Query struct {
 	binary.Generate
-}
-
-func (c *Query) Init() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37462,16 +37364,6 @@ type BlendState struct {
 	BlendEquationRgb    GLenum
 	BlendEquationAlpha  GLenum
 	BlendColor          Color
-}
-
-func (c *BlendState) Init() {
-	c.SrcRgbBlendFactor = GLenum_GL_ONE
-	c.SrcAlphaBlendFactor = GLenum_GL_ZERO
-	c.DstRgbBlendFactor = GLenum_GL_ONE
-	c.DstAlphaBlendFactor = GLenum_GL_ZERO
-	c.BlendEquationRgb = GLenum_GL_FUNC_ADD
-	c.BlendEquationAlpha = GLenum_GL_FUNC_ADD
-	c.BlendColor.Init()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37499,24 +37391,6 @@ type RasterizerState struct {
 	SampleCoverageInvert GLboolean
 }
 
-func (c *RasterizerState) Init() {
-	c.DepthMask = 1
-	c.DepthTestFunction = GLenum_GL_LESS
-	c.DepthNear = 0
-	c.DepthFar = 1
-	c.ColorMaskRed = 1
-	c.ColorMaskGreen = 1
-	c.ColorMaskBlue = 1
-	c.ColorMaskAlpha = 1
-	c.StencilMask = make(GLenumːGLuintᵐ)
-	c.Viewport.Init()
-	c.Scissor.Init()
-	c.FrontFace = GLenum_GL_CCW
-	c.CullFace = GLenum_GL_BACK
-	c.LineWidth = 1
-	c.SampleCoverageValue = 1
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // class ClearState
 ////////////////////////////////////////////////////////////////////////////////
@@ -37525,11 +37399,6 @@ type ClearState struct {
 	ClearColor   Color
 	ClearDepth   GLfloat
 	ClearStencil GLint
-}
-
-func (c *ClearState) Init() {
-	c.ClearColor.Init()
-	c.ClearDepth = 1
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37545,17 +37414,6 @@ type Objects struct {
 	Programs      ProgramIdːProgramʳᵐ
 	VertexArrays  VertexArrayIdːVertexArrayʳᵐ
 	Queries       QueryIdːQueryʳᵐ
-}
-
-func (c *Objects) Init() {
-	c.Renderbuffers = make(RenderbufferIdːRenderbufferʳᵐ)
-	c.Textures = make(TextureIdːTextureʳᵐ)
-	c.Framebuffers = make(FramebufferIdːFramebufferʳᵐ)
-	c.Buffers = make(BufferIdːBufferʳᵐ)
-	c.Shaders = make(ShaderIdːShaderʳᵐ)
-	c.Programs = make(ProgramIdːProgramʳᵐ)
-	c.VertexArrays = make(VertexArrayIdːVertexArrayʳᵐ)
-	c.Queries = make(QueryIdːQueryʳᵐ)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37580,22 +37438,6 @@ type Context struct {
 	PixelStorage          GLenumːGLintᵐ
 	Instances             Objects
 	PreserveBuffersOnSwap bool
-}
-
-func (c *Context) Init() {
-	c.Blending.Init()
-	c.Rasterizing.Init()
-	c.Clearing.Init()
-	c.BoundFramebuffers = make(GLenumːFramebufferIdᵐ)
-	c.BoundRenderbuffers = make(GLenumːRenderbufferIdᵐ)
-	c.BoundBuffers = make(GLenumːBufferIdᵐ)
-	c.VertexAttributeArrays = make(AttributeLocationːVertexAttributeArrayʳᵐ)
-	c.TextureUnits = make(GLenumːGLenumːTextureIdᵐᵐ)
-	c.ActiveTextureUnit = GLenum_GL_TEXTURE0
-	c.Capabilities = make(GLenumːboolᵐ)
-	c.GenerateMipmapHint = GLenum_GL_DONT_CARE
-	c.PixelStorage = make(GLenumːGLintᵐ)
-	c.Instances.Init()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43256,11 +43098,11 @@ type State struct {
 }
 
 func (g *State) Init() {
-	g.Contexts = make(ThreadIDːContextʳᵐ)
-	g.EGLContexts = make(EGLContextːContextʳᵐ)
-	g.GLXContexts = make(GLXContextːContextʳᵐ)
-	g.WGLContexts = make(HGLRCːContextʳᵐ)
-	g.CGLContexts = make(CGLContextObjːContextʳᵐ)
+	g.Contexts = ThreadIDːContextʳᵐ{}
+	g.EGLContexts = EGLContextːContextʳᵐ{}
+	g.GLXContexts = GLXContextːContextʳᵐ{}
+	g.WGLContexts = HGLRCːContextʳᵐ{}
+	g.CGLContexts = CGLContextObjːContextʳᵐ{}
 }
 func NewGlBlendBarrierKHR() *GlBlendBarrierKHR {
 	return &GlBlendBarrierKHR{}
