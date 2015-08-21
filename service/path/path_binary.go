@@ -17,6 +17,7 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*ArrayIndex)(nil).Class())
+	Namespace.Add((*As)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Atoms)(nil).Class())
 	Namespace.Add((*Atom)(nil).Class())
@@ -35,6 +36,7 @@ func init() {
 
 var (
 	binaryIDArrayIndex  = binary.ID{0x70, 0x45, 0xaf, 0xd6, 0x00, 0x20, 0x4c, 0x2c, 0x72, 0x36, 0x74, 0xc3, 0x2e, 0x1e, 0xb9, 0xf5, 0x4b, 0xe6, 0x68, 0xfb}
+	binaryIDAs          = binary.ID{0xbf, 0x36, 0xfa, 0x97, 0x9a, 0x18, 0x95, 0x91, 0x1f, 0xfb, 0x8f, 0x30, 0xad, 0xfb, 0xbc, 0x66, 0x83, 0xba, 0x4d, 0x7c}
 	binaryIDCapture     = binary.ID{0x0e, 0x9b, 0xe3, 0x62, 0x7b, 0x67, 0x5b, 0xe0, 0x44, 0x7b, 0x7b, 0x21, 0xa1, 0x50, 0x6d, 0x1b, 0xfb, 0xc7, 0x47, 0xe6}
 	binaryIDAtoms       = binary.ID{0x17, 0x6b, 0x7c, 0x08, 0xc2, 0x36, 0x2c, 0xe3, 0x1b, 0x17, 0xd5, 0x3a, 0x0a, 0x98, 0x5b, 0x76, 0xc5, 0x1d, 0x01, 0xa7}
 	binaryIDAtom        = binary.ID{0x58, 0x11, 0xbe, 0x6d, 0xfc, 0xe2, 0xe0, 0x12, 0x6c, 0x42, 0x55, 0x2d, 0xf3, 0x5e, 0x11, 0x1a, 0xc1, 0x6b, 0xfe, 0x3b}
@@ -115,6 +117,86 @@ var schemaArrayIndex = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Array", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
+
+type binaryClassAs struct{}
+
+func (*As) Class() binary.Class {
+	return (*binaryClassAs)(nil)
+}
+func doEncodeAs(e binary.Encoder, o *As) error {
+	if o.Object != nil {
+		if err := e.Object(o.Object); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if o.Type != nil {
+		var boxed binary.Object
+		boxed, err := any.Box(o.Type)
+		if err != nil {
+			return err
+		}
+		if err := e.Variant(boxed); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeAs(d binary.Decoder, o *As) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Object = obj.(Path)
+	} else {
+		o.Object = nil
+	}
+	if boxed, err := d.Variant(); err != nil {
+		return err
+	} else if boxed != nil {
+		if o.Type, err = any.Unbox(boxed); err != nil {
+			return err
+		}
+	} else {
+		o.Type = nil
+	}
+	return nil
+}
+func doSkipAs(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.SkipVariant(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassAs) ID() binary.ID      { return binaryIDAs }
+func (*binaryClassAs) New() binary.Object { return &As{} }
+func (*binaryClassAs) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeAs(e, obj.(*As))
+}
+func (*binaryClassAs) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &As{}
+	return obj, doDecodeAs(d, obj)
+}
+func (*binaryClassAs) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeAs(d, obj.(*As))
+}
+func (*binaryClassAs) Skip(d binary.Decoder) error { return doSkipAs(d) }
+func (*binaryClassAs) Schema() *schema.Class       { return schemaAs }
+
+var schemaAs = &schema.Class{
+	TypeID:  binaryIDAs,
+	Package: "path",
+	Name:    "As",
+	Fields: []schema.Field{
+		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
+		{Declared: "Type", Type: &any.Any{}},
 	},
 }
 

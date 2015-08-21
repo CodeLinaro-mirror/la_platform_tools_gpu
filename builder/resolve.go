@@ -68,6 +68,19 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			v[i] = device
 
+		case *path.As:
+			o := v[i-1]
+			if c, ok := o.(path.Converter); ok {
+				o, err := c.Convert(p, d, l)
+				if err != nil {
+					return nil, err
+				}
+				v[i] = o
+			} else {
+				return nil, fmt.Errorf("Object of type %T at %s does not support converting",
+					o, paths[i-1])
+			}
+
 		case *path.ImageInfo:
 			r, err := service.ResolveImageInfo(p.ID, d, l)
 			if err != nil {
