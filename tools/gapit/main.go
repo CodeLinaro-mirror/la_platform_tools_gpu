@@ -35,6 +35,7 @@ var (
 	duration = flag.Duration("d", 10*time.Second, "duration to trace for")
 	output   = flag.String("out", "", "the file to generate")
 	debug    = flag.Bool("debug", false, "use the debug spy .so")
+	local    = flag.Bool("local", false, "capture a local program instead of using ADB")
 )
 
 const usage = `gapit: A tool to trace graphics calls on android.
@@ -49,12 +50,10 @@ func run() error {
 	}
 	flag.Parse()
 
-	if flag.NArg() != 1 {
+	if flag.NArg() != 1 && !*local {
 		flag.Usage()
 		return fmt.Errorf("Invalid number of arguments. Expected 1, got %d", flag.NArg())
 	}
-
-	activity := flag.Arg(0)
 
 	info := os.Stdout
 	if *verbose == false {
@@ -63,6 +62,23 @@ func run() error {
 	logger := log.Writer(info, os.Stdout, os.Stderr, nil)
 	defer log.Close(logger)
 
+	if *local {
+		return captureLocal(logger)
+	} else {
+		return captureADB(logger)
+	}
+}
+
+func captureLocal(logger log.Logger) error {
+	out := *output
+	if out == "" {
+		out = "capture.gfxtrace"
+	}
+	return capture(logger, out)
+}
+
+func captureADB(logger log.Logger) error {
+	activity := flag.Arg(0)
 	d, err := getDevice(logger, *device)
 	if err != nil {
 		return err
@@ -90,6 +106,15 @@ func run() error {
 		out = name + ".gfxtrace"
 	}
 
+	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport), *debug)
+	if err != nil {
+		return err
+	}
+
+	return capture(logger, out)
+}
+
+func capture(logger log.Logger, out string) error {
 	log.Infof(logger, "Creating file %s", out)
 	os.MkdirAll(filepath.Dir(out), 0755)
 	file, err := os.Create(out)
@@ -97,11 +122,6 @@ func run() error {
 		return err
 	}
 	defer file.Close()
-
-	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport), *debug)
-	if err != nil {
-		return err
-	}
 
 	stop := make(chan struct{})
 	go func() {
