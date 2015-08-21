@@ -793,6 +793,22 @@ namespace gles {
         VertexPointer mPointer;
     };
 
+    class TextureUnit: public Encodable {
+    public:
+        TextureUnit() = default;
+        TextureUnit(std::unordered_map<uint32_t,uint32_t>* Bindings) :
+            mBindings(Bindings) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbd, 0xaf, 0x42, 0x01, 0x29, 0xb0, 0x1b, 0x44, 0xb0, 0xcb, 0x60, 0x4f, 0x3f, 0x18, 0x2e, 0xa4, 0x44, 0x07, 0x1e, 0x30,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            GAPID_FATAL("C++ map encoding not supported");
+        }
+
+        std::unordered_map<uint32_t,uint32_t>* mBindings;
+    };
+
     class Renderbuffer: public Encodable {
     public:
         Renderbuffer() = default;
@@ -1147,7 +1163,7 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
+        Context(uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,TextureUnit*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
             mIdentifier(Identifier),
             mBlending(Blending),
             mRasterizing(Rasterizing),
@@ -1166,7 +1182,7 @@ namespace gles {
             mInstances(Instances),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd0, 0x13, 0xab, 0x51, 0x44, 0x9f, 0x32, 0x91, 0x7c, 0x79, 0x9d, 0x0d, 0xa7, 0x7d, 0x38, 0x90, 0x9e, 0x95, 0x9f, 0x7e,  } };
+            static gapic::Id ID{ { 0x57, 0xab, 0x80, 0xd6, 0xb0, 0x07, 0x70, 0xaa, 0xcd, 0xee, 0xe2, 0xd4, 0xde, 0x3c, 0x80, 0xf6, 0x36, 0x38, 0x87, 0x0d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1199,7 +1215,7 @@ namespace gles {
         uint32_t mBoundProgram;
         uint32_t mBoundVertexArray;
         std::unordered_map<uint32_t,VertexAttributeArray*>* mVertexAttributeArrays;
-        std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* mTextureUnits;
+        std::unordered_map<uint32_t,TextureUnit*>* mTextureUnits;
         uint32_t mActiveTextureUnit;
         std::unordered_map<uint32_t,bool>* mCapabilities;
         uint32_t mGenerateMipmapHint;

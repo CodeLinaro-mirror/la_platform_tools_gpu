@@ -729,9 +729,9 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
     case GL_CURRENT_PROGRAM:
       v[0] = as!GLint(ctx.BoundProgram)
     case GL_TEXTURE_BINDING_2D:
-      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D])
+      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit].Bindings[GL_TEXTURE_2D])
     case GL_TEXTURE_BINDING_CUBE_MAP:
-      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP])
+      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit].Bindings[GL_TEXTURE_CUBE_MAP])
     case GL_GENERATE_MIPMAP_HINT:
       v[0] = as!GLint(ctx.GenerateMipmapHint)
     case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {

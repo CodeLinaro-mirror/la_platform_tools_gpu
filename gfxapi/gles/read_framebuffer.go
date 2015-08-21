@@ -79,7 +79,7 @@ func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.At
 			origRenderbufferID       = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
 			origReadFramebufferID    = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
 			origDrawFramebufferID    = c.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER]
-			origTextureID            = c.TextureUnits[c.ActiveTextureUnit][GLenum_GL_TEXTURE_2D]
+			origTextureID            = c.TextureUnits[c.ActiveTextureUnit].Bindings[GLenum_GL_TEXTURE_2D]
 			origArrayBufferID        = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
 			origElementArrayBufferID = c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
 			origActiveTextureUnit    = int32(c.ActiveTextureUnit - GLenum_GL_TEXTURE0)

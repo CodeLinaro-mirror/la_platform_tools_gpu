@@ -39,8 +39,6 @@ class generate_types {
   u32[] u32_slice
 }
 
-alias map!(GLenum, map!(GLenum, TextureId)) TextureUnitMap
-
 extern u32 imageSize(u32 width, u32 height, GLenum format, GLenum type)
 extern s32 stateVariableSize(GLenum v)
 macro void minRequiredVersion(u32 major, u32 minor) {}
@@ -422,6 +420,11 @@ class VertexAttributeArray {
 }
 
 @internal
+class TextureUnit {
+  map!(GLenum, TextureId) Bindings
+}
+
+@internal
 class Query {}
 
 /////////////////////////////////////////////////////////////////
@@ -515,7 +518,7 @@ class Context {
   ProgramId                                         BoundProgram
   VertexArrayId                                     BoundVertexArray
   map!(AttributeLocation, ref!VertexAttributeArray) VertexAttributeArrays
-  TextureUnitMap                                    TextureUnits
+  map!(GLenum, ref!TextureUnit)                     TextureUnits
   GLenum                                            ActiveTextureUnit     = GL_TEXTURE0
   map!(GLenum, bool)                                Capabilities
   GLenum                                            GenerateMipmapHint    = GL_DONT_CARE
@@ -592,6 +595,10 @@ macro ref!Context CreateContext() {
 
   for i in (0 .. 64) {  // TODO: Count
     ctx.VertexAttributeArrays[as!AttributeLocation(i)] = new!VertexAttributeArray()
+  }
+
+  for i in (0 .. 64) {  // TODO: Count
+    ctx.TextureUnits[GL_TEXTURE0 + as!GLenum(i)] = new!TextureUnit()
   }
 
   return ctx

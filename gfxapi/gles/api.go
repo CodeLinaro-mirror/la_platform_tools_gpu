@@ -12345,30 +12345,6 @@ func (m GLenumːFramebufferIdᵐ) Range() []FramebufferId {
 	return values
 }
 
-type GLenumːGLenumːTextureIdᵐᵐ map[GLenum]GLenumːTextureIdᵐ
-
-func (m GLenumːGLenumːTextureIdᵐᵐ) Get(key GLenum) GLenumːTextureIdᵐ {
-	v, ok := m[key]
-	if !ok {
-		v = GLenumːTextureIdᵐ{}
-	}
-	return v
-}
-func (m GLenumːGLenumːTextureIdᵐᵐ) Contains(key GLenum) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m GLenumːGLenumːTextureIdᵐᵐ) Delete(key GLenum) {
-	delete(m, key)
-}
-func (m GLenumːGLenumːTextureIdᵐᵐ) Range() []GLenumːTextureIdᵐ {
-	values := make([]GLenumːTextureIdᵐ, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
 type GLenumːGLintᵐ map[GLenum]GLint
 
 func (m GLenumːGLintᵐ) Get(key GLenum) GLint {
@@ -12483,6 +12459,26 @@ func (m GLenumːTextureIdᵐ) Delete(key GLenum) {
 }
 func (m GLenumːTextureIdᵐ) Range() []TextureId {
 	values := make([]TextureId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːTextureUnitʳᵐ map[GLenum](*TextureUnit)
+
+func (m GLenumːTextureUnitʳᵐ) Get(key GLenum) *TextureUnit {
+	return m[key]
+}
+func (m GLenumːTextureUnitʳᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːTextureUnitʳᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːTextureUnitʳᵐ) Range() [](*TextureUnit) {
+	values := make([](*TextureUnit), 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -37362,6 +37358,14 @@ type VertexAttributeArray struct {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// class TextureUnit
+////////////////////////////////////////////////////////////////////////////////
+type TextureUnit struct {
+	binary.Generate
+	Bindings GLenumːTextureIdᵐ
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // class Query
 ////////////////////////////////////////////////////////////////////////////////
 type Query struct {
@@ -37447,7 +37451,7 @@ type Context struct {
 	BoundProgram          ProgramId
 	BoundVertexArray      VertexArrayId
 	VertexAttributeArrays AttributeLocationːVertexAttributeArrayʳᵐ
-	TextureUnits          GLenumːGLenumːTextureIdᵐᵐ
+	TextureUnits          GLenumːTextureUnitʳᵐ
 	ActiveTextureUnit     GLenum
 	Capabilities          GLenumːboolᵐ
 	GenerateMipmapHint    GLenum

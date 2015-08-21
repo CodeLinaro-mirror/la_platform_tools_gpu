@@ -5985,7 +5985,14 @@ typedef std::unordered_map<uint32_t, BufferId> GLenumToBufferId;
 
 typedef std::unordered_map<uint32_t, TextureId> GLenumToTextureId;
 
-typedef std::unordered_map<uint32_t, GLenumToTextureId> GLenumToGLenumToTextureId;
+struct TextureUnit {
+    inline TextureUnit() : mBindings(GLenumToTextureId()) {}
+    inline TextureUnit(GLenumToTextureId Bindings) : mBindings(Bindings) {}
+
+    GLenumToTextureId mBindings;
+};
+
+typedef std::unordered_map<uint32_t, std::shared_ptr<TextureUnit>> GLenumToTextureUnit__R;
 
 typedef std::unordered_map<uint32_t, bool> GLenumToBool;
 
@@ -6247,7 +6254,7 @@ struct Context {
           mBoundProgram(0),
           mBoundVertexArray(0),
           mVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R()),
-          mTextureUnits(GLenumToGLenumToTextureId()),
+          mTextureUnits(GLenumToTextureUnit__R()),
           mActiveTextureUnit(GLenum::GL_TEXTURE0),
           mCapabilities(GLenumToBool()),
           mGenerateMipmapHint(GLenum::GL_DONT_CARE),
@@ -6259,7 +6266,7 @@ struct Context {
                    GLenumToRenderbufferId BoundRenderbuffers, GLenumToBufferId BoundBuffers,
                    ProgramId BoundProgram, VertexArrayId BoundVertexArray,
                    AttributeLocationToVertexAttributeArray__R VertexAttributeArrays,
-                   GLenumToGLenumToTextureId TextureUnits, uint32_t ActiveTextureUnit,
+                   GLenumToTextureUnit__R TextureUnits, uint32_t ActiveTextureUnit,
                    GLenumToBool Capabilities, uint32_t GenerateMipmapHint,
                    GLenumToGLint PixelStorage, Objects Instances, bool PreserveBuffersOnSwap)
         : mIdentifier(Identifier),
@@ -6290,7 +6297,7 @@ struct Context {
     ProgramId mBoundProgram;
     VertexArrayId mBoundVertexArray;
     AttributeLocationToVertexAttributeArray__R mVertexAttributeArrays;
-    GLenumToGLenumToTextureId mTextureUnits;
+    GLenumToTextureUnit__R mTextureUnits;
     uint32_t mActiveTextureUnit;
     GLenumToBool mCapabilities;
     uint32_t mGenerateMipmapHint;

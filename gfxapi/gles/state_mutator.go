@@ -7912,9 +7912,9 @@ func (ϟa *GlGetIntegerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	case GLenum_GL_CURRENT_PROGRAM:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.BoundProgram), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BINDING_2D:
-		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Bindings.Get(GLenum_GL_TEXTURE_2D)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
-		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_GENERATE_MIPMAP_HINT:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.GenerateMipmapHint), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
@@ -8199,9 +8199,6 @@ func (ϟa *GlActiveTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_899_result := context             // Contextʳ
 	ctx := GetContext_899_result                 // Contextʳ
 	ctx.ActiveTextureUnit = ϟa.Unit
-	if !(ctx.TextureUnits.Contains(ϟa.Unit)) {
-		ctx.TextureUnits[ϟa.Unit] = ctx.TextureUnits.Get(ϟa.Unit)
-	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_897_major, minRequiredVersion_897_minor, context, GetContext_899_result, ctx
 	return nil
@@ -8264,9 +8261,10 @@ func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
 		ctx.Instances.Textures[ϟa.Texture] = (&Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	}
-	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	tu.Bindings[ϟa.Target] = ϟa.Texture
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_904_major, minRequiredVersion_904_minor, context, GetContext_908_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_904_major, minRequiredVersion_904_minor, context, GetContext_908_result, ctx, tu
 	return nil
 }
 func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -8293,12 +8291,13 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		v := ϟa.Format
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_914_result := context             // Contextʳ
-	ctx := GetContext_914_result                 // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_914_result := context                  // Contextʳ
+	ctx := GetContext_914_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                   // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                   // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -8309,7 +8308,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)             // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -8326,7 +8325,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_909_major, minRequiredVersion_909_minor, context, GetContext_914_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_909_major, minRequiredVersion_909_minor, context, GetContext_914_result, ctx, tu
 	return nil
 }
 func (ϟa *GlCompressedTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -8643,11 +8642,12 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_959_result := context                                 // Contextʳ
-	ctx := GetContext_959_result                                     // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_959_result := context                  // Contextʳ
+	ctx := GetContext_959_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLfloat) {
 		switch ϟa.Parameter {
@@ -8675,7 +8675,7 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _ = minRequiredVersion_952_major, minRequiredVersion_952_minor, context, GetContext_959_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_952_major, minRequiredVersion_952_minor, context, GetContext_959_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -8712,11 +8712,12 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_967_result := context                                 // Contextʳ
-	ctx := GetContext_967_result                                     // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_967_result := context                  // Contextʳ
+	ctx := GetContext_967_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result GLint) {
 		switch ϟa.Parameter {
@@ -8744,7 +8745,7 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _ = minRequiredVersion_960_major, minRequiredVersion_960_minor, context, GetContext_967_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_960_major, minRequiredVersion_960_minor, context, GetContext_967_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlIsSampler) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -8901,12 +8902,13 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		v := ϟa.Type
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_990_result := context             // Contextʳ
-	ctx := GetContext_990_result                 // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_990_result := context                  // Contextʳ
+	ctx := GetContext_990_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                                                                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
@@ -8921,7 +8923,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                                                       // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
@@ -8942,7 +8944,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_983_major, minRequiredVersion_983_minor, context, GetContext_990_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_983_major, minRequiredVersion_983_minor, context, GetContext_990_result, ctx, tu
 	return nil
 }
 func (ϟa *GlTexImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -9010,11 +9012,12 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_1003_result := context                                // Contextʳ
-	ctx := GetContext_1003_result                                    // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1003_result := context                 // Contextʳ
+	ctx := GetContext_1003_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
 		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
@@ -9039,7 +9042,7 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_996_major, minRequiredVersion_996_minor, context, GetContext_1003_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_996_major, minRequiredVersion_996_minor, context, GetContext_1003_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -9114,11 +9117,12 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_1018_result := context                                // Contextʳ
-	ctx := GetContext_1018_result                                    // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1018_result := context                 // Contextʳ
+	ctx := GetContext_1018_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
 		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
@@ -9143,7 +9147,7 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1011_major, minRequiredVersion_1011_minor, context, GetContext_1018_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_1011_major, minRequiredVersion_1011_minor, context, GetContext_1018_result, ctx, tu, id, t
 	return nil
 }
 func (ϟa *GlTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -9285,12 +9289,13 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		v := ϟa.Type
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_1042_result := context            // Contextʳ
-	ctx := GetContext_1042_result                // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1042_result := context                 // Contextʳ
+	ctx := GetContext_1042_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -9299,9 +9304,8 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
 		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
 		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _, _ = id, t, l
+		_, _ = t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -9312,13 +9316,13 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
 		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
 		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _, _, _ = id, t, l, cube
+		_, _, _ = t, l, cube
 	default:
 		v := ϟa.Target
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx
+	_, _, _, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx, tu, id
 	return nil
 }
 func (ϟa *GlTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -9938,7 +9942,7 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := EGLContext(ϟa.Result) // EGLContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -9962,6 +9966,9 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
+	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
 	}
 	CreateContext_1116_result := ctx // Contextʳ
 	ϟc.EGLContexts[context] = CreateContext_1116_result
@@ -10005,7 +10012,7 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -10030,6 +10037,9 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
+	}
 	CreateContext_1118_result := ctx // Contextʳ
 	ϟc.GLXContexts[context] = CreateContext_1118_result
 	ϟa.Result = context
@@ -10044,7 +10054,7 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	context := GLXContext(ϟa.Result) // GLXContext
 	identifier := ϟc.NextContextID   // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -10068,6 +10078,9 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
+	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
 	}
 	CreateContext_1119_result := ctx // Contextʳ
 	ϟc.GLXContexts[context] = CreateContext_1119_result
@@ -10121,7 +10134,7 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -10146,6 +10159,9 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
 	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
+	}
 	CreateContext_1122_result := ctx // Contextʳ
 	ϟc.WGLContexts[context] = CreateContext_1122_result
 	ϟa.Result = context
@@ -10160,7 +10176,7 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	context := HGLRC(ϟa.Result)    // HGLRC
 	identifier := ϟc.NextContextID // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -10184,6 +10200,9 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
+	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
 	}
 	CreateContext_1123_result := ctx // Contextʳ
 	ϟc.WGLContexts[context] = CreateContext_1123_result
@@ -10217,7 +10236,7 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	context := CGLContextObj(ϟa.Ctx.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // CGLContextObj
 	identifier := ϟc.NextContextID                                                                                                                // ContextID
 	ϟc.NextContextID = (ϟc.NextContextID) + (ContextID(uint32(1)))
-	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːGLenumːTextureIdᵐᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
+	ctx := &Context{Blending: BlendState{SrcRgbBlendFactor: GLenum_GL_ONE, SrcAlphaBlendFactor: GLenum_GL_ZERO, DstRgbBlendFactor: GLenum_GL_ONE, DstAlphaBlendFactor: GLenum_GL_ZERO, BlendEquationRgb: GLenum_GL_FUNC_ADD, BlendEquationAlpha: GLenum_GL_FUNC_ADD}, Rasterizing: RasterizerState{DepthMask: GLboolean(uint8(1)), DepthTestFunction: GLenum_GL_LESS, DepthNear: GLfloat(float32(0)), DepthFar: GLfloat(float32(1)), ColorMaskRed: GLboolean(uint8(1)), ColorMaskGreen: GLboolean(uint8(1)), ColorMaskBlue: GLboolean(uint8(1)), ColorMaskAlpha: GLboolean(uint8(1)), StencilMask: GLenumːGLuintᵐ{}, FrontFace: GLenum_GL_CCW, CullFace: GLenum_GL_BACK, LineWidth: GLfloat(float32(1)), SampleCoverageValue: GLfloat(float32(1))}, Clearing: ClearState{ClearDepth: GLfloat(float32(1))}, BoundFramebuffers: GLenumːFramebufferIdᵐ{}, BoundRenderbuffers: GLenumːRenderbufferIdᵐ{}, BoundBuffers: GLenumːBufferIdᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}, TextureUnits: GLenumːTextureUnitʳᵐ{}, ActiveTextureUnit: GLenum_GL_TEXTURE0, Capabilities: GLenumːboolᵐ{}, GenerateMipmapHint: GLenum_GL_DONT_CARE, PixelStorage: GLenumːGLintᵐ{}, Instances: Objects{Renderbuffers: RenderbufferIdːRenderbufferʳᵐ{}, Textures: TextureIdːTextureʳᵐ{}, Framebuffers: FramebufferIdːFramebufferʳᵐ{}, Buffers: BufferIdːBufferʳᵐ{}, Shaders: ShaderIdːShaderʳᵐ{}, Programs: ProgramIdːProgramʳᵐ{}, VertexArrays: VertexArrayIdːVertexArrayʳᵐ{}, Queries: QueryIdːQueryʳᵐ{}}} // Contextʳ
 	ctx.Identifier = identifier
 	ctx.Instances.Buffers[BufferId(uint32(0))] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 	ctx.Instances.Textures[TextureId(uint32(0))] = (&Texture{Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
@@ -10241,6 +10260,9 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = &VertexAttributeArray{Enabled: false, Size: uint32(4), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), Buffer: BufferId(uint32(0))}
+	}
+	for i := int32(int32(0)); i < int32(64); i++ {
+		ctx.TextureUnits[(GLenum_GL_TEXTURE0)+(GLenum(i))] = &TextureUnit{Bindings: GLenumːTextureIdᵐ{}}
 	}
 	CreateContext_1125_result := ctx // Contextʳ
 	ϟc.CGLContexts[context] = CreateContext_1125_result

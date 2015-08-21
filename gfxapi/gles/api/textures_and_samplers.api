@@ -33,9 +33,6 @@ cmd void glActiveTexture(GLenum unit) {
 
   ctx := GetContext()
   ctx.ActiveTextureUnit = unit
-  if !(unit in ctx.TextureUnits) {
-    ctx.TextureUnits[unit] = ctx.TextureUnits[unit]
-  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindImageTexture.xhtml","OpenGL ES 3.1")
@@ -98,7 +95,8 @@ cmd void glBindTexture(GLenum target, TextureId texture) {
   if !(texture in ctx.Instances.Textures) {
     ctx.Instances.Textures[texture] = new!Texture(ID: texture)
   }
-  ctx.TextureUnits[ctx.ActiveTextureUnit][target] = texture
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  tu.Bindings[target] = texture
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml","OpenGL ES 2.0")
@@ -142,9 +140,10 @@ cmd void glCompressedTexImage2D(GLenum         target,
 
   assert(border == 0)
   ctx := GetContext()
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
   switch (target) {
     case GL_TEXTURE_2D: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
+      id := tu.Bindings[GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -162,7 +161,7 @@ cmd void glCompressedTexImage2D(GLenum         target,
     }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
+      id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -572,7 +571,8 @@ cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
   }
 
   ctx := GetContext()
-  id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  id := tu.Bindings[target]
   t := ctx.Instances.Textures[id]
   values[0] = switch (parameter) {
     case GL_TEXTURE_MAG_FILTER:         as!GLfloat(t.MagFilter)
@@ -626,7 +626,8 @@ cmd void glGetTexParameteriv(GLenum target, GLenum parameter, GLint* values) {
   }
 
   ctx := GetContext()
-  id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  id := tu.Bindings[target]
   t := ctx.Instances.Textures[id]
   values[0] = switch (parameter) {
     case GL_TEXTURE_MAG_FILTER:         as!GLint(t.MagFilter)
@@ -807,9 +808,10 @@ cmd void glTexImage2D(GLenum         target,
   assert(internal_format == as!GLint(format))
   assert(border == 0)
   ctx := GetContext()
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
   switch (target) {
     case GL_TEXTURE_2D: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
+      id := tu.Bindings[GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -832,7 +834,7 @@ cmd void glTexImage2D(GLenum         target,
     }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
+      id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -941,7 +943,8 @@ cmd void glTexParameterf(GLenum target, GLenum parameter, GLfloat value) {
   }
 
   ctx := GetContext()
-  id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  id := tu.Bindings[target]
   t := ctx.Instances.Textures[id]
   switch (parameter) {
     case GL_TEXTURE_MAG_FILTER:         t.MagFilter = as!GLenum(value)
@@ -1031,7 +1034,8 @@ cmd void glTexParameteri(GLenum target, GLenum parameter, GLint value) {
   }
 
   ctx := GetContext()
-  id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  id := tu.Bindings[target]
   t := ctx.Instances.Textures[id]
   switch (parameter) {
     case GL_TEXTURE_MAG_FILTER:         t.MagFilter = as!GLenum(value)
@@ -1251,11 +1255,13 @@ cmd void glTexSubImage2D(GLenum         target,
   }
 
   ctx := GetContext()
+  tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
+  id := tu.Bindings[target]
+
   // TODO: This does not consider xoffset or yoffset and completely replaces the level.
   // FIX.
   switch (target) {
     case GL_TEXTURE_2D: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -1273,7 +1279,6 @@ cmd void glTexSubImage2D(GLenum         target,
     }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-      id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
         Width:   width,
@@ -1341,4 +1346,3 @@ cmd void glTexSubImage3D(GLenum      target,
   }
   // TODO
 }
-

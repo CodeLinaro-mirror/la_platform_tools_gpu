@@ -13688,9 +13688,9 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case GLenum_GL_CURRENT_PROGRAM:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.BoundProgram), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BINDING_2D:
-		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Bindings.Get(GLenum_GL_TEXTURE_2D)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
-		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(GLint(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_GENERATE_MIPMAP_HINT:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.GenerateMipmapHint), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
@@ -14048,9 +14048,6 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	GetContext_899_result := context             // Contextʳ
 	ctx := GetContext_899_result                 // Contextʳ
 	ctx.ActiveTextureUnit = ϟa.Unit
-	if !(ctx.TextureUnits.Contains(ϟa.Unit)) {
-		ctx.TextureUnits[ϟa.Unit] = ctx.TextureUnits.Get(ϟa.Unit)
-	}
 	ϟb.Push(value.U32(ϟa.Unit))
 	ϟb.Call(funcInfoGlActiveTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -14136,7 +14133,8 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
 		ctx.Instances.Textures[ϟa.Texture] = (&Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	}
-	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	tu.Bindings[ϟa.Target] = ϟa.Texture
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -14145,7 +14143,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Call(funcInfoGlBindTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_904_major, minRequiredVersion_904_minor, context, GetContext_908_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_904_major, minRequiredVersion_904_minor, context, GetContext_908_result, ctx, tu
 	return nil
 }
 
@@ -14174,12 +14172,13 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		v := ϟa.Format
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_914_result := context             // Contextʳ
-	ctx := GetContext_914_result                 // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_914_result := context                  // Contextʳ
+	ctx := GetContext_914_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                   // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                   // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -14190,7 +14189,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)             // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -14216,7 +14215,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_909_major, minRequiredVersion_909_minor, context, GetContext_914_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_909_major, minRequiredVersion_909_minor, context, GetContext_914_result, ctx, tu
 	return nil
 }
 
@@ -14657,11 +14656,12 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_959_result := context                                 // Contextʳ
-	ctx := GetContext_959_result                                     // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_959_result := context                  // Contextʳ
+	ctx := GetContext_959_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Values.value())
@@ -14693,7 +14693,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _ = minRequiredVersion_952_major, minRequiredVersion_952_minor, context, GetContext_959_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_952_major, minRequiredVersion_952_minor, context, GetContext_959_result, ctx, tu, id, t
 	return nil
 }
 
@@ -14732,11 +14732,12 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_967_result := context                                 // Contextʳ
-	ctx := GetContext_967_result                                     // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_967_result := context                  // Contextʳ
+	ctx := GetContext_967_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Values.value())
@@ -14768,7 +14769,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _ = minRequiredVersion_960_major, minRequiredVersion_960_minor, context, GetContext_967_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_960_major, minRequiredVersion_960_minor, context, GetContext_967_result, ctx, tu, id, t
 	return nil
 }
 
@@ -14960,12 +14961,13 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		v := ϟa.Type
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_990_result := context             // Contextʳ
-	ctx := GetContext_990_result                 // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_990_result := context                  // Contextʳ
+	ctx := GetContext_990_result                      // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                                                                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
@@ -14980,7 +14982,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		t.OnAccess(ϟs).Format = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                                                       // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
@@ -15011,7 +15013,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_983_major, minRequiredVersion_983_minor, context, GetContext_990_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_983_major, minRequiredVersion_983_minor, context, GetContext_990_result, ctx, tu
 	return nil
 }
 
@@ -15094,11 +15096,12 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_1003_result := context                                // Contextʳ
-	ctx := GetContext_1003_result                                    // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1003_result := context                 // Contextʳ
+	ctx := GetContext_1003_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
 		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
@@ -15127,7 +15130,7 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterf)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_996_major, minRequiredVersion_996_minor, context, GetContext_1003_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_996_major, minRequiredVersion_996_minor, context, GetContext_1003_result, ctx, tu, id, t
 	return nil
 }
 
@@ -15210,11 +15213,12 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_1018_result := context                                // Contextʳ
-	ctx := GetContext_1018_result                                    // Contextʳ
-	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
-	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1018_result := context                 // Contextʳ
+	ctx := GetContext_1018_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
+	t := ctx.Instances.Textures.Get(id)               // Textureʳ
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER:
 		t.OnAccess(ϟs).MagFilter = GLenum(ϟa.Value)
@@ -15243,7 +15247,7 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameteri)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1011_major, minRequiredVersion_1011_minor, context, GetContext_1018_result, ctx, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_1011_major, minRequiredVersion_1011_minor, context, GetContext_1018_result, ctx, tu, id, t
 	return nil
 }
 
@@ -15419,12 +15423,13 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		v := ϟa.Type
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_1042_result := context            // Contextʳ
-	ctx := GetContext_1042_result                // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
+	GetContext_1042_result := context                 // Contextʳ
+	ctx := GetContext_1042_result                     // Contextʳ
+	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
+	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)                                                                                             // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -15433,9 +15438,8 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
 		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
 		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _, _ = id, t, l
+		_, _ = t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                       // TextureId
 		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
 		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
@@ -15446,7 +15450,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
 		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
 		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _, _, _ = id, t, l, cube
+		_, _, _ = t, l, cube
 	default:
 		v := ϟa.Target
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -15462,7 +15466,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexSubImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx
+	_, _, _, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx, tu, id
 	return nil
 }
 

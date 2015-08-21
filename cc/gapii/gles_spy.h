@@ -16402,12 +16402,12 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             }
             case GLenum::GL_TEXTURE_BINDING_2D: {
                 write(l_v, 0, (GLint)(l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                          [GLenum::GL_TEXTURE_2D]));
+                                              ->mBindings[GLenum::GL_TEXTURE_2D]));
                 break;
             }
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
                 write(l_v, 0, (GLint)(l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                          [GLenum::GL_TEXTURE_CUBE_MAP]));
+                                              ->mBindings[GLenum::GL_TEXTURE_CUBE_MAP]));
                 break;
             }
             case GLenum::GL_GENERATE_MIPMAP_HINT: {
@@ -16959,9 +16959,6 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
         std::shared_ptr<Context> l_GetContext_899_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_899_result;
         l_ctx->mActiveTextureUnit = unit;
-        if (!(l_ctx->mTextureUnits.count(unit) > 0)) {
-            l_ctx->mTextureUnits[unit] = l_ctx->mTextureUnits[unit];
-        }
         observe(observations.mReads);
         mImports.glActiveTexture(unit);
     } while (false);
@@ -17065,7 +17062,8 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
                     GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                     GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         }
-        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target] = texture;
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        l_tu->mBindings[target] = texture;
         observe(observations.mReads);
         mImports.glBindTexture(target, texture);
     } while (false);
@@ -17122,10 +17120,10 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_914_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_914_result;
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
-                TextureId l_id =
-                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
+                TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
@@ -17144,8 +17142,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
+                TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
@@ -17803,7 +17800,8 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_959_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_959_result;
-        TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         observe(observations.mReads);
         mImports.glGetTexParameterfv(target, parameter, values);
@@ -17887,7 +17885,8 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_967_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_967_result;
-        TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         observe(observations.mReads);
         mImports.glGetTexParameteriv(target, parameter, values);
@@ -18194,10 +18193,10 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_990_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_990_result;
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
-                TextureId l_id =
-                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
+                TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(),
                                   imageSize((uint32_t)(width), (uint32_t)(height), format, type),
@@ -18221,8 +18220,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
+                TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(),
                                   imageSize((uint32_t)(width), (uint32_t)(height), format, type),
@@ -18382,7 +18380,8 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_1003_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1003_result;
-        TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER: {
@@ -18550,7 +18549,8 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_1018_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1018_result;
-        TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER: {
@@ -19008,10 +19008,10 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_1042_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1042_result;
+        std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
+        TextureId l_id = l_tu->mBindings[target];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
-                TextureId l_id =
-                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(),
                                   imageSize((uint32_t)(width), (uint32_t)(height), format, type),
@@ -19032,8 +19032,6 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image(width, height, Slice<uint8_t>(),
                                   imageSize((uint32_t)(width), (uint32_t)(height), format, type),
@@ -20150,7 +20148,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20193,6 +20191,10 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
                     std::shared_ptr<VertexAttributeArray>(
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
+        }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
         std::shared_ptr<Context> l_CreateContext_1116_result = l_ctx;
         this->EGLContexts[l_context] = l_CreateContext_1116_result;
@@ -20313,7 +20315,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20357,6 +20359,10 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
         }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
+        }
         std::shared_ptr<Context> l_CreateContext_1118_result = l_ctx;
         this->GLXContexts[l_context] = l_CreateContext_1118_result;
         break;
@@ -20395,7 +20401,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20438,6 +20444,10 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
                     std::shared_ptr<VertexAttributeArray>(
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
+        }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
         std::shared_ptr<Context> l_CreateContext_1119_result = l_ctx;
         this->GLXContexts[l_context] = l_CreateContext_1119_result;
@@ -20578,7 +20588,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20622,6 +20632,10 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
         }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
+        }
         std::shared_ptr<Context> l_CreateContext_1122_result = l_ctx;
         this->WGLContexts[l_context] = l_CreateContext_1122_result;
         break;
@@ -20654,7 +20668,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20697,6 +20711,10 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
                     std::shared_ptr<VertexAttributeArray>(
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
+        }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
         std::shared_ptr<Context> l_CreateContext_1123_result = l_ctx;
         this->WGLContexts[l_context] = l_CreateContext_1123_result;
@@ -20776,7 +20794,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
                 new Context(0, BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
-                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
                             GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
@@ -20819,6 +20837,10 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
                     std::shared_ptr<VertexAttributeArray>(
                             new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
                                                      (GLsizei)(0), (BufferId)(0), nullptr));
+        }
+        for (int32_t l_i = 0; l_i < 64; ++l_i) {
+            l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
+                    std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
         std::shared_ptr<Context> l_CreateContext_1125_result = l_ctx;
         this->CGLContexts[l_context] = l_CreateContext_1125_result;

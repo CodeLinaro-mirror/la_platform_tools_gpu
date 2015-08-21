@@ -54,6 +54,7 @@ func init() {
 	Namespace.Add((*RasterizerState)(nil).Class())
 	Namespace.Add((*VertexPointer)(nil).Class())
 	Namespace.Add((*VertexAttributeArray)(nil).Class())
+	Namespace.Add((*TextureUnit)(nil).Class())
 	Namespace.Add((*Renderbuffer)(nil).Class())
 	Namespace.Add((*Image)(nil).Class())
 	Namespace.Add((*CubemapLevel)(nil).Class())
@@ -937,6 +938,7 @@ var (
 	binaryIDRasterizerState                                  = binary.ID{0xba, 0xcc, 0xd9, 0x38, 0xef, 0x30, 0x2c, 0x2e, 0x7b, 0xd7, 0x18, 0x82, 0x47, 0x5c, 0x0f, 0xca, 0xd0, 0x70, 0x0c, 0x27}
 	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
 	binaryIDVertexAttributeArray                             = binary.ID{0xd6, 0xdb, 0x80, 0x6a, 0xa4, 0x37, 0x8a, 0xfb, 0x6f, 0x2b, 0xda, 0x40, 0x36, 0x4d, 0x5a, 0x43, 0xf8, 0x16, 0x3e, 0x41}
+	binaryIDTextureUnit                                      = binary.ID{0xbd, 0xaf, 0x42, 0x01, 0x29, 0xb0, 0x1b, 0x44, 0xb0, 0xcb, 0x60, 0x4f, 0x3f, 0x18, 0x2e, 0xa4, 0x44, 0x07, 0x1e, 0x30}
 	binaryIDRenderbuffer                                     = binary.ID{0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd}
 	binaryIDImage                                            = binary.ID{0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb}
 	binaryIDCubemapLevel                                     = binary.ID{0x1c, 0xc1, 0xfa, 0xd8, 0xb4, 0xda, 0xc5, 0x86, 0x02, 0xcd, 0x3a, 0x43, 0xbc, 0x10, 0x9f, 0xe4, 0x55, 0x68, 0xe2, 0x4f}
@@ -951,7 +953,7 @@ var (
 	binaryIDVertexArray                                      = binary.ID{0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33}
 	binaryIDQuery                                            = binary.ID{0x62, 0x44, 0x8a, 0xcf, 0x74, 0x8f, 0xd4, 0xae, 0x50, 0xd3, 0xfd, 0x27, 0xe3, 0x02, 0x90, 0xfe, 0x17, 0x13, 0x0c, 0xa3}
 	binaryIDObjects                                          = binary.ID{0x12, 0x48, 0x34, 0xe0, 0x63, 0x96, 0xd4, 0xef, 0x29, 0xea, 0xb8, 0xa4, 0xe1, 0x96, 0x9f, 0x3f, 0xb0, 0xc8, 0x1b, 0xf7}
-	binaryIDContext                                          = binary.ID{0xd0, 0x13, 0xab, 0x51, 0x44, 0x9f, 0x32, 0x91, 0x7c, 0x79, 0x9d, 0x0d, 0xa7, 0x7d, 0x38, 0x90, 0x9e, 0x95, 0x9f, 0x7e}
+	binaryIDContext                                          = binary.ID{0x57, 0xab, 0x80, 0xd6, 0xb0, 0x07, 0x70, 0xaa, 0xcd, 0xee, 0xe2, 0xd4, 0xde, 0x3c, 0x80, 0xf6, 0x36, 0x38, 0x87, 0x0d}
 	binaryIDEGLConfig                                        = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
 	binaryIDEGLContext                                       = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
 	binaryIDEGLDisplay                                       = binary.ID{0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10}
@@ -4322,6 +4324,88 @@ var schemaVertexAttributeArray = &schema.Class{
 	},
 }
 
+type binaryClassTextureUnit struct{}
+
+func (*TextureUnit) Class() binary.Class {
+	return (*binaryClassTextureUnit)(nil)
+}
+func doEncodeTextureUnit(e binary.Encoder, o *TextureUnit) error {
+	if err := e.Uint32(uint32(len(o.Bindings))); err != nil {
+		return err
+	}
+	for k, v := range o.Bindings {
+		if err := e.Uint32(uint32(k)); err != nil {
+			return err
+		}
+		if err := e.Uint32(uint32(v)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeTextureUnit(d binary.Decoder, o *TextureUnit) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Bindings = make(GLenumːTextureIdᵐ, count)
+		m := o.Bindings
+		for i := uint32(0); i < count; i++ {
+			var k GLenum
+			var v TextureId
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				k = GLenum(obj)
+			}
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				v = TextureId(obj)
+			}
+			m[k] = v
+		}
+	}
+	return nil
+}
+func doSkipTextureUnit(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassTextureUnit) ID() binary.ID      { return binaryIDTextureUnit }
+func (*binaryClassTextureUnit) New() binary.Object { return &TextureUnit{} }
+func (*binaryClassTextureUnit) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTextureUnit(e, obj.(*TextureUnit))
+}
+func (*binaryClassTextureUnit) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &TextureUnit{}
+	return obj, doDecodeTextureUnit(d, obj)
+}
+func (*binaryClassTextureUnit) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTextureUnit(d, obj.(*TextureUnit))
+}
+func (*binaryClassTextureUnit) Skip(d binary.Decoder) error { return doSkipTextureUnit(d) }
+func (*binaryClassTextureUnit) Schema() *schema.Class       { return schemaTextureUnit }
+
+var schemaTextureUnit = &schema.Class{
+	TypeID:  binaryIDTextureUnit,
+	Package: "gles",
+	Name:    "TextureUnit",
+	Fields: []schema.Field{
+		{Declared: "Bindings", Type: &schema.Map{Alias: "GLenumːTextureIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}},
+	},
+}
+
 type binaryClassRenderbuffer struct{}
 
 func (*Renderbuffer) Class() binary.Class {
@@ -6151,16 +6235,12 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 		if err := e.Uint32(uint32(k)); err != nil {
 			return err
 		}
-		if err := e.Uint32(uint32(len(v))); err != nil {
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
 			return err
-		}
-		for k, v := range v {
-			if err := e.Uint32(uint32(k)); err != nil {
-				return err
-			}
-			if err := e.Uint32(uint32(v)); err != nil {
-				return err
-			}
 		}
 	}
 	if err := e.Uint32(uint32(o.ActiveTextureUnit)); err != nil {
@@ -6313,36 +6393,22 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.TextureUnits = make(GLenumːGLenumːTextureIdᵐᵐ, count)
+		o.TextureUnits = make(GLenumːTextureUnitʳᵐ, count)
 		m := o.TextureUnits
 		for i := uint32(0); i < count; i++ {
 			var k GLenum
-			var v GLenumːTextureIdᵐ
+			var v *TextureUnit
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
 				k = GLenum(obj)
 			}
-			if count, err := d.Uint32(); err != nil {
+			if obj, err := d.Object(); err != nil {
 				return err
+			} else if obj != nil {
+				v = obj.(*TextureUnit)
 			} else {
-				v = make(GLenumːTextureIdᵐ, count)
-				m := v
-				for i := uint32(0); i < count; i++ {
-					var k GLenum
-					var v TextureId
-					if obj, err := d.Uint32(); err != nil {
-						return err
-					} else {
-						k = GLenum(obj)
-					}
-					if obj, err := d.Uint32(); err != nil {
-						return err
-					} else {
-						v = TextureId(obj)
-					}
-					m[k] = v
-				}
+				v = nil
 			}
 			m[k] = v
 		}
@@ -6483,17 +6549,8 @@ func doSkipContext(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if count, err := d.Uint32(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
-			} else {
-				for i := uint32(0); i < count; i++ {
-					if _, err := d.Uint32(); err != nil {
-						return err
-					}
-					if _, err := d.Uint32(); err != nil {
-						return err
-					}
-				}
 			}
 		}
 	}
@@ -6565,7 +6622,7 @@ var schemaContext = &schema.Class{
 		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray", ID: (*VertexAttributeArray)(nil).Class().ID()}}}},
-		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːGLenumːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "GLenumːTextureIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
+		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːTextureUnitʳᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "TextureUnit", ID: (*TextureUnit)(nil).Class().ID()}}}},
 		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Capabilities", Type: &schema.Map{Alias: "GLenumːboolᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
 		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
