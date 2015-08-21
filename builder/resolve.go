@@ -155,6 +155,20 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			v[i] = res
 
+		case *path.Resources:
+			resources, err := database.Build(&GetResources{Capture: p.Capture}, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = resources.(*service.Resources)
+
+		case *path.Resource:
+			resource, err := database.Build(&GetResourceData{Path: p}, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = resource
+
 		case *path.MemoryRange:
 			atoms := v[i-2].(*atom.List).Atoms
 			if p.After.Index >= uint64(len(atoms)) {

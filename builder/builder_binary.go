@@ -25,6 +25,8 @@ func init() {
 	Namespace.Add((*GetFramebufferColor)(nil).Class())
 	Namespace.Add((*GetFramebufferDepth)(nil).Class())
 	Namespace.Add((*GetHierarchy)(nil).Class())
+	Namespace.Add((*GetResourceData)(nil).Class())
+	Namespace.Add((*GetResources)(nil).Class())
 	Namespace.Add((*GetState)(nil).Class())
 	Namespace.Add((*GetTimingInfo)(nil).Class())
 	Namespace.Add((*IndexLimits)(nil).Class())
@@ -45,6 +47,8 @@ var (
 	binaryIDGetFramebufferColor             = binary.ID{0x1a, 0xcc, 0x5f, 0x4b, 0xe4, 0x22, 0xd7, 0x61, 0x00, 0xc8, 0xd8, 0x41, 0x30, 0xeb, 0xfe, 0x59, 0x7d, 0x4c, 0xbe, 0x9f}
 	binaryIDGetFramebufferDepth             = binary.ID{0xa7, 0x03, 0x08, 0x3d, 0x42, 0xbc, 0x22, 0x83, 0x51, 0x9f, 0xc0, 0x5f, 0xa6, 0xa2, 0x1e, 0xa7, 0x5e, 0xd6, 0xc8, 0x03}
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
+	binaryIDGetResourceData                 = binary.ID{0x2a, 0x41, 0x7e, 0x56, 0x79, 0x33, 0xf7, 0x75, 0xfc, 0xba, 0xb7, 0x04, 0xcd, 0x71, 0x93, 0x44, 0x17, 0xd4, 0x56, 0x40}
+	binaryIDGetResources                    = binary.ID{0xa9, 0xe2, 0x86, 0x0c, 0x50, 0xbb, 0xbb, 0xe6, 0xc3, 0x78, 0x9c, 0xeb, 0xcd, 0x5a, 0x4b, 0xfc, 0xb3, 0x84, 0x98, 0x00}
 	binaryIDGetState                        = binary.ID{0x40, 0xfb, 0x42, 0x18, 0xf5, 0x5c, 0xff, 0x11, 0x85, 0x82, 0xaf, 0xf4, 0x6d, 0xc5, 0xde, 0x19, 0x0b, 0x41, 0xba, 0x38}
 	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
 	binaryIDIndexLimits                     = binary.ID{0x28, 0x48, 0x73, 0xe2, 0x23, 0x35, 0xf2, 0x21, 0xaa, 0x3b, 0x89, 0x14, 0x5f, 0x70, 0xf7, 0x21, 0x59, 0x64, 0xe7, 0xb4}
@@ -433,6 +437,116 @@ var schemaGetHierarchy = &schema.Class{
 	TypeID:  binaryIDGetHierarchy,
 	Package: "builder",
 	Name:    "GetHierarchy",
+	Fields: []schema.Field{
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassGetResourceData struct{}
+
+func (*GetResourceData) Class() binary.Class {
+	return (*binaryClassGetResourceData)(nil)
+}
+func doEncodeGetResourceData(e binary.Encoder, o *GetResourceData) error {
+	if o.Path != nil {
+		if err := e.Object(o.Path); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGetResourceData(d binary.Decoder, o *GetResourceData) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Path = obj.(*path.Resource)
+	} else {
+		o.Path = nil
+	}
+	return nil
+}
+func doSkipGetResourceData(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGetResourceData) ID() binary.ID      { return binaryIDGetResourceData }
+func (*binaryClassGetResourceData) New() binary.Object { return &GetResourceData{} }
+func (*binaryClassGetResourceData) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetResourceData(e, obj.(*GetResourceData))
+}
+func (*binaryClassGetResourceData) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetResourceData{}
+	return obj, doDecodeGetResourceData(d, obj)
+}
+func (*binaryClassGetResourceData) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetResourceData(d, obj.(*GetResourceData))
+}
+func (*binaryClassGetResourceData) Skip(d binary.Decoder) error { return doSkipGetResourceData(d) }
+func (*binaryClassGetResourceData) Schema() *schema.Class       { return schemaGetResourceData }
+
+var schemaGetResourceData = &schema.Class{
+	TypeID:  binaryIDGetResourceData,
+	Package: "builder",
+	Name:    "GetResourceData",
+	Fields: []schema.Field{
+		{Declared: "Path", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Resource", ID: (*path.Resource)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassGetResources struct{}
+
+func (*GetResources) Class() binary.Class {
+	return (*binaryClassGetResources)(nil)
+}
+func doEncodeGetResources(e binary.Encoder, o *GetResources) error {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGetResources(d binary.Decoder, o *GetResources) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Capture = obj.(*path.Capture)
+	} else {
+		o.Capture = nil
+	}
+	return nil
+}
+func doSkipGetResources(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGetResources) ID() binary.ID      { return binaryIDGetResources }
+func (*binaryClassGetResources) New() binary.Object { return &GetResources{} }
+func (*binaryClassGetResources) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetResources(e, obj.(*GetResources))
+}
+func (*binaryClassGetResources) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetResources{}
+	return obj, doDecodeGetResources(d, obj)
+}
+func (*binaryClassGetResources) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetResources(d, obj.(*GetResources))
+}
+func (*binaryClassGetResources) Skip(d binary.Decoder) error { return doSkipGetResources(d) }
+func (*binaryClassGetResources) Schema() *schema.Class       { return schemaGetResources }
+
+var schemaGetResources = &schema.Class{
+	TypeID:  binaryIDGetResources,
+	Package: "builder",
+	Name:    "GetResources",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 	},

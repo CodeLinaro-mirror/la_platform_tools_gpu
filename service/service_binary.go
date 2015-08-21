@@ -29,6 +29,8 @@ func init() {
 	Namespace.Add((*RenderSettings)(nil).Class())
 	Namespace.Add((*ReportItem)(nil).Class())
 	Namespace.Add((*Report)(nil).Class())
+	Namespace.Add((*ResourceInfo)(nil).Class())
+	Namespace.Add((*Resources)(nil).Class())
 	Namespace.Add((*Schema)(nil).Class())
 	Namespace.Add((*TimingInfo)(nil).Class())
 	Namespace.Add((*callFollow)(nil).Class())
@@ -64,6 +66,8 @@ var (
 	binaryIDRenderSettings              = binary.ID{0xf8, 0x94, 0x85, 0x1d, 0x97, 0x54, 0x1c, 0xb7, 0x82, 0x93, 0x7a, 0x28, 0x65, 0xe7, 0x55, 0x95, 0x4d, 0x89, 0x7a, 0x02}
 	binaryIDReportItem                  = binary.ID{0x8a, 0xb2, 0x14, 0x6f, 0x40, 0xb0, 0x0b, 0x10, 0xa9, 0x02, 0xfb, 0xa1, 0x76, 0x1a, 0xe9, 0xd7, 0x9c, 0x62, 0x40, 0x93}
 	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
+	binaryIDResourceInfo                = binary.ID{0xf1, 0x3a, 0x47, 0x32, 0x56, 0x75, 0x79, 0xa2, 0x7a, 0xba, 0x82, 0x05, 0xb4, 0x23, 0x31, 0x6d, 0xe6, 0x0e, 0x50, 0xce}
+	binaryIDResources                   = binary.ID{0x1b, 0x22, 0x54, 0xc7, 0xa2, 0x02, 0xfd, 0xda, 0xc8, 0x0e, 0x46, 0xf4, 0x2f, 0xdb, 0x32, 0x93, 0xa3, 0x3c, 0xd7, 0xec}
 	binaryIDSchema                      = binary.ID{0x74, 0xe2, 0x21, 0xf1, 0x49, 0x8f, 0x1b, 0x90, 0xf3, 0x8b, 0xe8, 0x56, 0xef, 0xbf, 0x17, 0x79, 0xdf, 0xfc, 0x38, 0x25}
 	binaryIDTimingInfo                  = binary.ID{0xf8, 0xfe, 0x88, 0x50, 0x3d, 0x72, 0xb3, 0x55, 0xb0, 0x01, 0x73, 0xfe, 0x8a, 0x82, 0xbd, 0x1e, 0xb7, 0xc9, 0x5b, 0xb1}
 	binaryIDcallFollow                  = binary.ID{0xe1, 0x2c, 0x0d, 0x00, 0xd2, 0x83, 0xe0, 0xd5, 0x61, 0xf9, 0x0f, 0xce, 0xfe, 0xb7, 0x3a, 0x65, 0x6d, 0x3e, 0xb9, 0x8e}
@@ -823,6 +827,162 @@ var schemaReport = &schema.Class{
 	Name:    "Report",
 	Fields: []schema.Field{
 		{Declared: "Items", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ReportItem", ID: (*ReportItem)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassResourceInfo struct{}
+
+func (*ResourceInfo) Class() binary.Class {
+	return (*binaryClassResourceInfo)(nil)
+}
+func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) error {
+	if err := e.ID(binary.ID(o.ID)); err != nil {
+		return err
+	}
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.Accesses))); err != nil {
+		return err
+	}
+	for i := range o.Accesses {
+		if err := e.Uint64(o.Accesses[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = path.ResourceID(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Accesses = make([]uint64, count)
+		for i := range o.Accesses {
+			if obj, err := d.Uint64(); err != nil {
+				return err
+			} else {
+				o.Accesses[i] = uint64(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipResourceInfo(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint64(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
+func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
+func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeResourceInfo(e, obj.(*ResourceInfo))
+}
+func (*binaryClassResourceInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ResourceInfo{}
+	return obj, doDecodeResourceInfo(d, obj)
+}
+func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
+}
+func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipResourceInfo(d) }
+func (*binaryClassResourceInfo) Schema() *schema.Class       { return schemaResourceInfo }
+
+var schemaResourceInfo = &schema.Class{
+	TypeID:  binaryIDResourceInfo,
+	Package: "service",
+	Name:    "ResourceInfo",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "path.ResourceID", Method: schema.ID}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Accesses", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+	},
+}
+
+type binaryClassResources struct{}
+
+func (*Resources) Class() binary.Class {
+	return (*binaryClassResources)(nil)
+}
+func doEncodeResources(e binary.Encoder, o *Resources) error {
+	if err := e.Uint32(uint32(len(o.Textures))); err != nil {
+		return err
+	}
+	for i := range o.Textures {
+		if err := e.Value(&o.Textures[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeResources(d binary.Decoder, o *Resources) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Textures = make([]ResourceInfo, count)
+		for i := range o.Textures {
+			if err := d.Value(&o.Textures[i]); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func doSkipResources(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*ResourceInfo)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassResources) ID() binary.ID      { return binaryIDResources }
+func (*binaryClassResources) New() binary.Object { return &Resources{} }
+func (*binaryClassResources) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeResources(e, obj.(*Resources))
+}
+func (*binaryClassResources) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Resources{}
+	return obj, doDecodeResources(d, obj)
+}
+func (*binaryClassResources) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeResources(d, obj.(*Resources))
+}
+func (*binaryClassResources) Skip(d binary.Decoder) error { return doSkipResources(d) }
+func (*binaryClassResources) Schema() *schema.Class       { return schemaResources }
+
+var schemaResources = &schema.Class{
+	TypeID:  binaryIDResources,
+	Package: "service",
+	Name:    "Resources",
+	Fields: []schema.Field{
+		{Declared: "Textures", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo", ID: (*ResourceInfo)(nil).Class().ID()}}},
 	},
 }
 

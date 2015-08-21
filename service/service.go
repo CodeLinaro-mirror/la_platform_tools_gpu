@@ -31,6 +31,7 @@ import (
 // binary: java.member_prefix = my
 // binary: service = Service
 
+// Service is the interface provided by the GAPIS server.
 type Service interface {
 	path.Service
 	// The GetSchema returns the type and constant schema descriptions for all
@@ -76,7 +77,10 @@ type Service interface {
 	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIndicies []uint64, l log.Logger) error
 }
 
+// ApiID is an identifier for an API.
 type ApiID binary.ID
+
+// AtomsID is an identifier of an atom stream.
 type AtomsID binary.ID
 
 // TimingFlags is a bitfield describing what should be timed.
@@ -179,4 +183,18 @@ type RenderSettings struct {
 	MaxWidth      uint32        // The desired maximum width of the image. The returned image may be larger than this.
 	MaxHeight     uint32        // The desired minimum height of the image. The returned image may be larger than this.
 	WireframeMode WireframeMode // The wireframe mode to use when rendering.
+}
+
+// Resources contains the full list of resources used by a capture.
+type Resources struct {
+	binary.Generate
+	Textures []ResourceInfo
+}
+
+// ResourceInfo describes a single resource.
+type ResourceInfo struct {
+	binary.Generate
+	ID       path.ResourceID // The resource instance unique identifier.
+	Name     string          // The resource name.
+	Accesses []uint64        // The list of atom indices where the resource was used.
 }
