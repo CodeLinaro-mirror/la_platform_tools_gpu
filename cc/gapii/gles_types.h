@@ -5791,34 +5791,23 @@ typedef uint64_t GLsync;
 typedef void* GLeglImageOES;
 
 struct VertexAttributeArray {
-    inline VertexAttributeArray& SetEnabled(bool v) {
-        mEnabled = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetSize(uint32_t v) {
-        mSize = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetType(uint32_t v) {
-        mType = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetNormalized(GLboolean v) {
-        mNormalized = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetStride(GLsizei v) {
-        mStride = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetBuffer(BufferId v) {
-        mBuffer = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetPointer(VertexPointer v) {
-        mPointer = v;
-        return *this;
-    }
+    inline VertexAttributeArray()
+        : mEnabled(false),
+          mSize(4),
+          mType(GLenum::GL_FLOAT),
+          mNormalized((GLboolean)(0)),
+          mStride((GLsizei)(0)),
+          mBuffer((BufferId)(0)),
+          mPointer(nullptr) {}
+    inline VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, GLboolean Normalized,
+                                GLsizei Stride, BufferId Buffer, VertexPointer Pointer)
+        : mEnabled(Enabled),
+          mSize(Size),
+          mType(Type),
+          mNormalized(Normalized),
+          mStride(Stride),
+          mBuffer(Buffer),
+          mPointer(Pointer) {}
 
     bool mEnabled;
     uint32_t mSize;
@@ -5833,30 +5822,21 @@ typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArr
         AttributeLocationToVertexAttributeArray__R;
 
 struct Buffer {
-    inline Buffer& SetData(Slice<uint8_t> v) {
-        mData = v;
-        return *this;
-    }
-    inline Buffer& SetSize(GLsizeiptr v) {
-        mSize = v;
-        return *this;
-    }
-    inline Buffer& SetUsage(uint32_t v) {
-        mUsage = v;
-        return *this;
-    }
-    inline Buffer& SetMappingAccess(uint32_t v) {
-        mMappingAccess = v;
-        return *this;
-    }
-    inline Buffer& SetMappingOffset(int32_t v) {
-        mMappingOffset = v;
-        return *this;
-    }
-    inline Buffer& SetMappingData(Slice<uint8_t> v) {
-        mMappingData = v;
-        return *this;
-    }
+    inline Buffer()
+        : mData(Slice<uint8_t>()),
+          mSize((GLsizeiptr)(0)),
+          mUsage(GLenum::GL_STATIC_DRAW),
+          mMappingAccess(0),
+          mMappingOffset(0),
+          mMappingData(Slice<uint8_t>()) {}
+    inline Buffer(Slice<uint8_t> Data, GLsizeiptr Size, uint32_t Usage, uint32_t MappingAccess,
+                  int32_t MappingOffset, Slice<uint8_t> MappingData)
+        : mData(Data),
+          mSize(Size),
+          mUsage(Usage),
+          mMappingAccess(MappingAccess),
+          mMappingOffset(MappingOffset),
+          mMappingData(MappingData) {}
 
     Slice<uint8_t> mData;
     GLsizeiptr mSize;
@@ -5869,22 +5849,9 @@ struct Buffer {
 typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferIdToBuffer__R;
 
 struct Color {
-    inline Color& SetRed(GLfloat v) {
-        mRed = v;
-        return *this;
-    }
-    inline Color& SetGreen(GLfloat v) {
-        mGreen = v;
-        return *this;
-    }
-    inline Color& SetBlue(GLfloat v) {
-        mBlue = v;
-        return *this;
-    }
-    inline Color& SetAlpha(GLfloat v) {
-        mAlpha = v;
-        return *this;
-    }
+    inline Color() : mRed(0), mGreen(0), mBlue(0), mAlpha(0) {}
+    inline Color(GLfloat Red, GLfloat Green, GLfloat Blue, GLfloat Alpha)
+        : mRed(Red), mGreen(Green), mBlue(Blue), mAlpha(Alpha) {}
 
     GLfloat mRed;
     GLfloat mGreen;
@@ -5893,34 +5860,24 @@ struct Color {
 };
 
 struct BlendState {
-    inline BlendState& SetSrcRgbBlendFactor(uint32_t v) {
-        mSrcRgbBlendFactor = v;
-        return *this;
-    }
-    inline BlendState& SetSrcAlphaBlendFactor(uint32_t v) {
-        mSrcAlphaBlendFactor = v;
-        return *this;
-    }
-    inline BlendState& SetDstRgbBlendFactor(uint32_t v) {
-        mDstRgbBlendFactor = v;
-        return *this;
-    }
-    inline BlendState& SetDstAlphaBlendFactor(uint32_t v) {
-        mDstAlphaBlendFactor = v;
-        return *this;
-    }
-    inline BlendState& SetBlendEquationRgb(uint32_t v) {
-        mBlendEquationRgb = v;
-        return *this;
-    }
-    inline BlendState& SetBlendEquationAlpha(uint32_t v) {
-        mBlendEquationAlpha = v;
-        return *this;
-    }
-    inline BlendState& SetBlendColor(Color v) {
-        mBlendColor = v;
-        return *this;
-    }
+    inline BlendState()
+        : mSrcRgbBlendFactor(GLenum::GL_ONE),
+          mSrcAlphaBlendFactor(GLenum::GL_ZERO),
+          mDstRgbBlendFactor(GLenum::GL_ONE),
+          mDstAlphaBlendFactor(GLenum::GL_ZERO),
+          mBlendEquationRgb(GLenum::GL_FUNC_ADD),
+          mBlendEquationAlpha(GLenum::GL_FUNC_ADD),
+          mBlendColor(Color()) {}
+    inline BlendState(uint32_t SrcRgbBlendFactor, uint32_t SrcAlphaBlendFactor,
+                      uint32_t DstRgbBlendFactor, uint32_t DstAlphaBlendFactor,
+                      uint32_t BlendEquationRgb, uint32_t BlendEquationAlpha, Color BlendColor)
+        : mSrcRgbBlendFactor(SrcRgbBlendFactor),
+          mSrcAlphaBlendFactor(SrcAlphaBlendFactor),
+          mDstRgbBlendFactor(DstRgbBlendFactor),
+          mDstAlphaBlendFactor(DstAlphaBlendFactor),
+          mBlendEquationRgb(BlendEquationRgb),
+          mBlendEquationAlpha(BlendEquationAlpha),
+          mBlendColor(BlendColor) {}
 
     uint32_t mSrcRgbBlendFactor;
     uint32_t mSrcAlphaBlendFactor;
@@ -5934,22 +5891,9 @@ struct BlendState {
 typedef std::unordered_map<uint32_t, GLuint> GLenumToGLuint;
 
 struct Rect {
-    inline Rect& SetX(GLint v) {
-        mX = v;
-        return *this;
-    }
-    inline Rect& SetY(GLint v) {
-        mY = v;
-        return *this;
-    }
-    inline Rect& SetWidth(GLsizei v) {
-        mWidth = v;
-        return *this;
-    }
-    inline Rect& SetHeight(GLsizei v) {
-        mHeight = v;
-        return *this;
-    }
+    inline Rect() : mX(0), mY(0), mWidth(0), mHeight(0) {}
+    inline Rect(GLint X, GLint Y, GLsizei Width, GLsizei Height)
+        : mX(X), mY(Y), mWidth(Width), mHeight(Height) {}
 
     GLint mX;
     GLint mY;
@@ -5958,78 +5902,50 @@ struct Rect {
 };
 
 struct RasterizerState {
-    inline RasterizerState& SetDepthMask(GLboolean v) {
-        mDepthMask = v;
-        return *this;
-    }
-    inline RasterizerState& SetDepthTestFunction(uint32_t v) {
-        mDepthTestFunction = v;
-        return *this;
-    }
-    inline RasterizerState& SetDepthNear(GLfloat v) {
-        mDepthNear = v;
-        return *this;
-    }
-    inline RasterizerState& SetDepthFar(GLfloat v) {
-        mDepthFar = v;
-        return *this;
-    }
-    inline RasterizerState& SetColorMaskRed(GLboolean v) {
-        mColorMaskRed = v;
-        return *this;
-    }
-    inline RasterizerState& SetColorMaskGreen(GLboolean v) {
-        mColorMaskGreen = v;
-        return *this;
-    }
-    inline RasterizerState& SetColorMaskBlue(GLboolean v) {
-        mColorMaskBlue = v;
-        return *this;
-    }
-    inline RasterizerState& SetColorMaskAlpha(GLboolean v) {
-        mColorMaskAlpha = v;
-        return *this;
-    }
-    inline RasterizerState& SetStencilMask(GLenumToGLuint v) {
-        mStencilMask = v;
-        return *this;
-    }
-    inline RasterizerState& SetViewport(Rect v) {
-        mViewport = v;
-        return *this;
-    }
-    inline RasterizerState& SetScissor(Rect v) {
-        mScissor = v;
-        return *this;
-    }
-    inline RasterizerState& SetFrontFace(uint32_t v) {
-        mFrontFace = v;
-        return *this;
-    }
-    inline RasterizerState& SetCullFace(uint32_t v) {
-        mCullFace = v;
-        return *this;
-    }
-    inline RasterizerState& SetLineWidth(GLfloat v) {
-        mLineWidth = v;
-        return *this;
-    }
-    inline RasterizerState& SetPolygonOffsetFactor(GLfloat v) {
-        mPolygonOffsetFactor = v;
-        return *this;
-    }
-    inline RasterizerState& SetPolygonOffsetUnits(GLfloat v) {
-        mPolygonOffsetUnits = v;
-        return *this;
-    }
-    inline RasterizerState& SetSampleCoverageValue(GLfloat v) {
-        mSampleCoverageValue = v;
-        return *this;
-    }
-    inline RasterizerState& SetSampleCoverageInvert(GLboolean v) {
-        mSampleCoverageInvert = v;
-        return *this;
-    }
+    inline RasterizerState()
+        : mDepthMask((GLboolean)(1)),
+          mDepthTestFunction(GLenum::GL_LESS),
+          mDepthNear((GLfloat)(0)),
+          mDepthFar((GLfloat)(1)),
+          mColorMaskRed((GLboolean)(1)),
+          mColorMaskGreen((GLboolean)(1)),
+          mColorMaskBlue((GLboolean)(1)),
+          mColorMaskAlpha((GLboolean)(1)),
+          mStencilMask(GLenumToGLuint()),
+          mViewport(Rect()),
+          mScissor(Rect()),
+          mFrontFace(GLenum::GL_CCW),
+          mCullFace(GLenum::GL_BACK),
+          mLineWidth((GLfloat)(1)),
+          mPolygonOffsetFactor(0),
+          mPolygonOffsetUnits(0),
+          mSampleCoverageValue((GLfloat)(1)),
+          mSampleCoverageInvert(0) {}
+    inline RasterizerState(GLboolean DepthMask, uint32_t DepthTestFunction, GLfloat DepthNear,
+                           GLfloat DepthFar, GLboolean ColorMaskRed, GLboolean ColorMaskGreen,
+                           GLboolean ColorMaskBlue, GLboolean ColorMaskAlpha,
+                           GLenumToGLuint StencilMask, Rect Viewport, Rect Scissor,
+                           uint32_t FrontFace, uint32_t CullFace, GLfloat LineWidth,
+                           GLfloat PolygonOffsetFactor, GLfloat PolygonOffsetUnits,
+                           GLfloat SampleCoverageValue, GLboolean SampleCoverageInvert)
+        : mDepthMask(DepthMask),
+          mDepthTestFunction(DepthTestFunction),
+          mDepthNear(DepthNear),
+          mDepthFar(DepthFar),
+          mColorMaskRed(ColorMaskRed),
+          mColorMaskGreen(ColorMaskGreen),
+          mColorMaskBlue(ColorMaskBlue),
+          mColorMaskAlpha(ColorMaskAlpha),
+          mStencilMask(StencilMask),
+          mViewport(Viewport),
+          mScissor(Scissor),
+          mFrontFace(FrontFace),
+          mCullFace(CullFace),
+          mLineWidth(LineWidth),
+          mPolygonOffsetFactor(PolygonOffsetFactor),
+          mPolygonOffsetUnits(PolygonOffsetUnits),
+          mSampleCoverageValue(SampleCoverageValue),
+          mSampleCoverageInvert(SampleCoverageInvert) {}
 
     GLboolean mDepthMask;
     uint32_t mDepthTestFunction;
@@ -6052,18 +5968,9 @@ struct RasterizerState {
 };
 
 struct ClearState {
-    inline ClearState& SetClearColor(Color v) {
-        mClearColor = v;
-        return *this;
-    }
-    inline ClearState& SetClearDepth(GLfloat v) {
-        mClearDepth = v;
-        return *this;
-    }
-    inline ClearState& SetClearStencil(GLint v) {
-        mClearStencil = v;
-        return *this;
-    }
+    inline ClearState() : mClearColor(Color()), mClearDepth((GLfloat)(1)), mClearStencil(0) {}
+    inline ClearState(Color ClearColor, GLfloat ClearDepth, GLint ClearStencil)
+        : mClearColor(ClearColor), mClearDepth(ClearDepth), mClearStencil(ClearStencil) {}
 
     Color mClearColor;
     GLfloat mClearDepth;
@@ -6085,22 +5992,9 @@ typedef std::unordered_map<uint32_t, bool> GLenumToBool;
 typedef std::unordered_map<uint32_t, GLint> GLenumToGLint;
 
 struct Renderbuffer {
-    inline Renderbuffer& SetWidth(GLsizei v) {
-        mWidth = v;
-        return *this;
-    }
-    inline Renderbuffer& SetHeight(GLsizei v) {
-        mHeight = v;
-        return *this;
-    }
-    inline Renderbuffer& SetData(Slice<uint8_t> v) {
-        mData = v;
-        return *this;
-    }
-    inline Renderbuffer& SetFormat(uint32_t v) {
-        mFormat = v;
-        return *this;
-    }
+    inline Renderbuffer() : mWidth(0), mHeight(0), mData(Slice<uint8_t>()), mFormat(0) {}
+    inline Renderbuffer(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t Format)
+        : mWidth(Width), mHeight(Height), mData(Data), mFormat(Format) {}
 
     GLsizei mWidth;
     GLsizei mHeight;
@@ -6112,26 +6006,9 @@ typedef std::unordered_map<RenderbufferId, std::shared_ptr<Renderbuffer>>
         RenderbufferIdToRenderbuffer__R;
 
 struct Image {
-    inline Image& SetWidth(GLsizei v) {
-        mWidth = v;
-        return *this;
-    }
-    inline Image& SetHeight(GLsizei v) {
-        mHeight = v;
-        return *this;
-    }
-    inline Image& SetData(Slice<uint8_t> v) {
-        mData = v;
-        return *this;
-    }
-    inline Image& SetSize(uint32_t v) {
-        mSize = v;
-        return *this;
-    }
-    inline Image& SetFormat(uint32_t v) {
-        mFormat = v;
-        return *this;
-    }
+    inline Image() : mWidth(0), mHeight(0), mData(Slice<uint8_t>()), mSize(0), mFormat(0) {}
+    inline Image(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t Size, uint32_t Format)
+        : mWidth(Width), mHeight(Height), mData(Data), mSize(Size), mFormat(Format) {}
 
     GLsizei mWidth;
     GLsizei mHeight;
@@ -6145,10 +6022,8 @@ typedef std::unordered_map<GLint, Image> GLintToImage;
 typedef std::unordered_map<uint32_t, Image> GLenumToImage;
 
 struct CubemapLevel {
-    inline CubemapLevel& SetFaces(GLenumToImage v) {
-        mFaces = v;
-        return *this;
-    }
+    inline CubemapLevel() : mFaces(GLenumToImage()) {}
+    inline CubemapLevel(GLenumToImage Faces) : mFaces(Faces) {}
 
     GLenumToImage mFaces;
 };
@@ -6156,58 +6031,37 @@ struct CubemapLevel {
 typedef std::unordered_map<GLint, CubemapLevel> GLintToCubemapLevel;
 
 struct Texture {
-    inline Texture& SetKind(uint32_t v) {
-        mKind = v;
-        return *this;
-    }
-    inline Texture& SetFormat(uint32_t v) {
-        mFormat = v;
-        return *this;
-    }
-    inline Texture& SetTexture2D(GLintToImage v) {
-        mTexture2D = v;
-        return *this;
-    }
-    inline Texture& SetCubemap(GLintToCubemapLevel v) {
-        mCubemap = v;
-        return *this;
-    }
-    inline Texture& SetMagFilter(uint32_t v) {
-        mMagFilter = v;
-        return *this;
-    }
-    inline Texture& SetMinFilter(uint32_t v) {
-        mMinFilter = v;
-        return *this;
-    }
-    inline Texture& SetWrapS(uint32_t v) {
-        mWrapS = v;
-        return *this;
-    }
-    inline Texture& SetWrapT(uint32_t v) {
-        mWrapT = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleR(uint32_t v) {
-        mSwizzleR = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleG(uint32_t v) {
-        mSwizzleG = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleB(uint32_t v) {
-        mSwizzleB = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleA(uint32_t v) {
-        mSwizzleA = v;
-        return *this;
-    }
-    inline Texture& SetMaxAnisotropy(float v) {
-        mMaxAnisotropy = v;
-        return *this;
-    }
+    inline Texture()
+        : mKind(0),
+          mFormat(0),
+          mTexture2D(GLintToImage()),
+          mCubemap(GLintToCubemapLevel()),
+          mMagFilter(GLenum::GL_LINEAR),
+          mMinFilter(GLenum::GL_NEAREST_MIPMAP_LINEAR),
+          mWrapS(GLenum::GL_REPEAT),
+          mWrapT(GLenum::GL_REPEAT),
+          mSwizzleR(GLenum::GL_RED),
+          mSwizzleG(GLenum::GL_GREEN),
+          mSwizzleB(GLenum::GL_BLUE),
+          mSwizzleA(GLenum::GL_ALPHA),
+          mMaxAnisotropy(1) {}
+    inline Texture(uint32_t Kind, uint32_t Format, GLintToImage Texture2D,
+                   GLintToCubemapLevel Cubemap, uint32_t MagFilter, uint32_t MinFilter,
+                   uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG,
+                   uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy)
+        : mKind(Kind),
+          mFormat(Format),
+          mTexture2D(Texture2D),
+          mCubemap(Cubemap),
+          mMagFilter(MagFilter),
+          mMinFilter(MinFilter),
+          mWrapS(WrapS),
+          mWrapT(WrapT),
+          mSwizzleR(SwizzleR),
+          mSwizzleG(SwizzleG),
+          mSwizzleB(SwizzleB),
+          mSwizzleA(SwizzleA),
+          mMaxAnisotropy(MaxAnisotropy) {}
 
     uint32_t mKind;
     uint32_t mFormat;
@@ -6227,22 +6081,10 @@ struct Texture {
 typedef std::unordered_map<TextureId, std::shared_ptr<Texture>> TextureIdToTexture__R;
 
 struct FramebufferAttachmentInfo {
-    inline FramebufferAttachmentInfo& SetObject(uint32_t v) {
-        mObject = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetType(uint32_t v) {
-        mType = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetTextureLevel(GLint v) {
-        mTextureLevel = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetCubeMapFace(uint32_t v) {
-        mCubeMapFace = v;
-        return *this;
-    }
+    inline FramebufferAttachmentInfo() : mObject(0), mType(0), mTextureLevel(0), mCubeMapFace(0) {}
+    inline FramebufferAttachmentInfo(uint32_t Object, uint32_t Type, GLint TextureLevel,
+                                     uint32_t CubeMapFace)
+        : mObject(Object), mType(Type), mTextureLevel(TextureLevel), mCubeMapFace(CubeMapFace) {}
 
     uint32_t mObject;
     uint32_t mType;
@@ -6253,10 +6095,8 @@ struct FramebufferAttachmentInfo {
 typedef std::unordered_map<uint32_t, FramebufferAttachmentInfo> GLenumToFramebufferAttachmentInfo;
 
 struct Framebuffer {
-    inline Framebuffer& SetAttachments(GLenumToFramebufferAttachmentInfo v) {
-        mAttachments = v;
-        return *this;
-    }
+    inline Framebuffer() : mAttachments(GLenumToFramebufferAttachmentInfo()) {}
+    inline Framebuffer(GLenumToFramebufferAttachmentInfo Attachments) : mAttachments(Attachments) {}
 
     GLenumToFramebufferAttachmentInfo mAttachments;
 };
@@ -6265,30 +6105,21 @@ typedef std::unordered_map<FramebufferId, std::shared_ptr<Framebuffer>>
         FramebufferIdToFramebuffer__R;
 
 struct Shader {
-    inline Shader& SetBinary(Slice<uint8_t> v) {
-        mBinary = v;
-        return *this;
-    }
-    inline Shader& SetCompiled(bool v) {
-        mCompiled = v;
-        return *this;
-    }
-    inline Shader& SetDeletable(bool v) {
-        mDeletable = v;
-        return *this;
-    }
-    inline Shader& SetInfoLog(Slice<GLchar> v) {
-        mInfoLog = v;
-        return *this;
-    }
-    inline Shader& SetSource(std::string v) {
-        mSource = v;
-        return *this;
-    }
-    inline Shader& SetType(uint32_t v) {
-        mType = v;
-        return *this;
-    }
+    inline Shader()
+        : mBinary(Slice<uint8_t>()),
+          mCompiled(false),
+          mDeletable(false),
+          mInfoLog(Slice<GLchar>()),
+          mSource(""),
+          mType(0) {}
+    inline Shader(Slice<uint8_t> Binary, bool Compiled, bool Deletable, Slice<GLchar> InfoLog,
+                  std::string Source, uint32_t Type)
+        : mBinary(Binary),
+          mCompiled(Compiled),
+          mDeletable(Deletable),
+          mInfoLog(InfoLog),
+          mSource(Source),
+          mType(Type) {}
 
     Slice<uint8_t> mBinary;
     bool mCompiled;
@@ -6305,18 +6136,9 @@ typedef std::unordered_map<uint32_t, ShaderId> GLenumToShaderId;
 typedef std::unordered_map<std::string, AttributeLocation> StringToAttributeLocation;
 
 struct VertexAttribute {
-    inline VertexAttribute& SetName(Slice<char> v) {
-        mName = v;
-        return *this;
-    }
-    inline VertexAttribute& SetVectorCount(int32_t v) {
-        mVectorCount = v;
-        return *this;
-    }
-    inline VertexAttribute& SetType(uint32_t v) {
-        mType = v;
-        return *this;
-    }
+    inline VertexAttribute() : mName(Slice<char>()), mVectorCount(0), mType(0) {}
+    inline VertexAttribute(Slice<char> Name, int32_t VectorCount, uint32_t Type)
+        : mName(Name), mVectorCount(VectorCount), mType(Type) {}
 
     Slice<char> mName;
     int32_t mVectorCount;
@@ -6326,18 +6148,9 @@ struct VertexAttribute {
 typedef std::unordered_map<int32_t, VertexAttribute> S32ToVertexAttribute;
 
 struct Uniform {
-    inline Uniform& SetName(std::string v) {
-        mName = v;
-        return *this;
-    }
-    inline Uniform& SetType(uint32_t v) {
-        mType = v;
-        return *this;
-    }
-    inline Uniform& SetValue(Slice<uint8_t> v) {
-        mValue = v;
-        return *this;
-    }
+    inline Uniform() : mName(""), mType(0), mValue(Slice<uint8_t>()) {}
+    inline Uniform(std::string Name, uint32_t Type, Slice<uint8_t> Value)
+        : mName(Name), mType(Type), mValue(Value) {}
 
     std::string mName;
     uint32_t mType;
@@ -6347,34 +6160,24 @@ struct Uniform {
 typedef std::unordered_map<UniformLocation, Uniform> UniformLocationToUniform;
 
 struct Program {
-    inline Program& SetShaders(GLenumToShaderId v) {
-        mShaders = v;
-        return *this;
-    }
-    inline Program& SetLinked(bool v) {
-        mLinked = v;
-        return *this;
-    }
-    inline Program& SetBinary(Slice<uint8_t> v) {
-        mBinary = v;
-        return *this;
-    }
-    inline Program& SetAttributeBindings(StringToAttributeLocation v) {
-        mAttributeBindings = v;
-        return *this;
-    }
-    inline Program& SetAttributes(S32ToVertexAttribute v) {
-        mAttributes = v;
-        return *this;
-    }
-    inline Program& SetUniforms(UniformLocationToUniform v) {
-        mUniforms = v;
-        return *this;
-    }
-    inline Program& SetInfoLog(Slice<GLchar> v) {
-        mInfoLog = v;
-        return *this;
-    }
+    inline Program()
+        : mShaders(GLenumToShaderId()),
+          mLinked(false),
+          mBinary(Slice<uint8_t>()),
+          mAttributeBindings(StringToAttributeLocation()),
+          mAttributes(S32ToVertexAttribute()),
+          mUniforms(UniformLocationToUniform()),
+          mInfoLog(Slice<GLchar>()) {}
+    inline Program(GLenumToShaderId Shaders, bool Linked, Slice<uint8_t> Binary,
+                   StringToAttributeLocation AttributeBindings, S32ToVertexAttribute Attributes,
+                   UniformLocationToUniform Uniforms, Slice<GLchar> InfoLog)
+        : mShaders(Shaders),
+          mLinked(Linked),
+          mBinary(Binary),
+          mAttributeBindings(AttributeBindings),
+          mAttributes(Attributes),
+          mUniforms(Uniforms),
+          mInfoLog(InfoLog) {}
 
     GLenumToShaderId mShaders;
     bool mLinked;
@@ -6397,38 +6200,27 @@ struct Query {};
 typedef std::unordered_map<QueryId, std::shared_ptr<Query>> QueryIdToQuery__R;
 
 struct Objects {
-    inline Objects& SetRenderbuffers(RenderbufferIdToRenderbuffer__R v) {
-        mRenderbuffers = v;
-        return *this;
-    }
-    inline Objects& SetTextures(TextureIdToTexture__R v) {
-        mTextures = v;
-        return *this;
-    }
-    inline Objects& SetFramebuffers(FramebufferIdToFramebuffer__R v) {
-        mFramebuffers = v;
-        return *this;
-    }
-    inline Objects& SetBuffers(BufferIdToBuffer__R v) {
-        mBuffers = v;
-        return *this;
-    }
-    inline Objects& SetShaders(ShaderIdToShader__R v) {
-        mShaders = v;
-        return *this;
-    }
-    inline Objects& SetPrograms(ProgramIdToProgram__R v) {
-        mPrograms = v;
-        return *this;
-    }
-    inline Objects& SetVertexArrays(VertexArrayIdToVertexArray__R v) {
-        mVertexArrays = v;
-        return *this;
-    }
-    inline Objects& SetQueries(QueryIdToQuery__R v) {
-        mQueries = v;
-        return *this;
-    }
+    inline Objects()
+        : mRenderbuffers(RenderbufferIdToRenderbuffer__R()),
+          mTextures(TextureIdToTexture__R()),
+          mFramebuffers(FramebufferIdToFramebuffer__R()),
+          mBuffers(BufferIdToBuffer__R()),
+          mShaders(ShaderIdToShader__R()),
+          mPrograms(ProgramIdToProgram__R()),
+          mVertexArrays(VertexArrayIdToVertexArray__R()),
+          mQueries(QueryIdToQuery__R()) {}
+    inline Objects(RenderbufferIdToRenderbuffer__R Renderbuffers, TextureIdToTexture__R Textures,
+                   FramebufferIdToFramebuffer__R Framebuffers, BufferIdToBuffer__R Buffers,
+                   ShaderIdToShader__R Shaders, ProgramIdToProgram__R Programs,
+                   VertexArrayIdToVertexArray__R VertexArrays, QueryIdToQuery__R Queries)
+        : mRenderbuffers(Renderbuffers),
+          mTextures(Textures),
+          mFramebuffers(Framebuffers),
+          mBuffers(Buffers),
+          mShaders(Shaders),
+          mPrograms(Programs),
+          mVertexArrays(VertexArrays),
+          mQueries(Queries) {}
 
     RenderbufferIdToRenderbuffer__R mRenderbuffers;
     TextureIdToTexture__R mTextures;
@@ -6441,74 +6233,49 @@ struct Objects {
 };
 
 struct Context {
-    inline Context& SetIdentifier(ContextID v) {
-        mIdentifier = v;
-        return *this;
-    }
-    inline Context& SetBlending(BlendState v) {
-        mBlending = v;
-        return *this;
-    }
-    inline Context& SetRasterizing(RasterizerState v) {
-        mRasterizing = v;
-        return *this;
-    }
-    inline Context& SetClearing(ClearState v) {
-        mClearing = v;
-        return *this;
-    }
-    inline Context& SetBoundFramebuffers(GLenumToFramebufferId v) {
-        mBoundFramebuffers = v;
-        return *this;
-    }
-    inline Context& SetBoundRenderbuffers(GLenumToRenderbufferId v) {
-        mBoundRenderbuffers = v;
-        return *this;
-    }
-    inline Context& SetBoundBuffers(GLenumToBufferId v) {
-        mBoundBuffers = v;
-        return *this;
-    }
-    inline Context& SetBoundProgram(ProgramId v) {
-        mBoundProgram = v;
-        return *this;
-    }
-    inline Context& SetBoundVertexArray(VertexArrayId v) {
-        mBoundVertexArray = v;
-        return *this;
-    }
-    inline Context& SetVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R v) {
-        mVertexAttributeArrays = v;
-        return *this;
-    }
-    inline Context& SetTextureUnits(GLenumToGLenumToTextureId v) {
-        mTextureUnits = v;
-        return *this;
-    }
-    inline Context& SetActiveTextureUnit(uint32_t v) {
-        mActiveTextureUnit = v;
-        return *this;
-    }
-    inline Context& SetCapabilities(GLenumToBool v) {
-        mCapabilities = v;
-        return *this;
-    }
-    inline Context& SetGenerateMipmapHint(uint32_t v) {
-        mGenerateMipmapHint = v;
-        return *this;
-    }
-    inline Context& SetPixelStorage(GLenumToGLint v) {
-        mPixelStorage = v;
-        return *this;
-    }
-    inline Context& SetInstances(Objects v) {
-        mInstances = v;
-        return *this;
-    }
-    inline Context& SetPreserveBuffersOnSwap(bool v) {
-        mPreserveBuffersOnSwap = v;
-        return *this;
-    }
+    inline Context()
+        : mIdentifier(0),
+          mBlending(BlendState()),
+          mRasterizing(RasterizerState()),
+          mClearing(ClearState()),
+          mBoundFramebuffers(GLenumToFramebufferId()),
+          mBoundRenderbuffers(GLenumToRenderbufferId()),
+          mBoundBuffers(GLenumToBufferId()),
+          mBoundProgram(0),
+          mBoundVertexArray(0),
+          mVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R()),
+          mTextureUnits(GLenumToGLenumToTextureId()),
+          mActiveTextureUnit(GLenum::GL_TEXTURE0),
+          mCapabilities(GLenumToBool()),
+          mGenerateMipmapHint(GLenum::GL_DONT_CARE),
+          mPixelStorage(GLenumToGLint()),
+          mInstances(Objects()),
+          mPreserveBuffersOnSwap(false) {}
+    inline Context(ContextID Identifier, BlendState Blending, RasterizerState Rasterizing,
+                   ClearState Clearing, GLenumToFramebufferId BoundFramebuffers,
+                   GLenumToRenderbufferId BoundRenderbuffers, GLenumToBufferId BoundBuffers,
+                   ProgramId BoundProgram, VertexArrayId BoundVertexArray,
+                   AttributeLocationToVertexAttributeArray__R VertexAttributeArrays,
+                   GLenumToGLenumToTextureId TextureUnits, uint32_t ActiveTextureUnit,
+                   GLenumToBool Capabilities, uint32_t GenerateMipmapHint,
+                   GLenumToGLint PixelStorage, Objects Instances, bool PreserveBuffersOnSwap)
+        : mIdentifier(Identifier),
+          mBlending(Blending),
+          mRasterizing(Rasterizing),
+          mClearing(Clearing),
+          mBoundFramebuffers(BoundFramebuffers),
+          mBoundRenderbuffers(BoundRenderbuffers),
+          mBoundBuffers(BoundBuffers),
+          mBoundProgram(BoundProgram),
+          mBoundVertexArray(BoundVertexArray),
+          mVertexAttributeArrays(VertexAttributeArrays),
+          mTextureUnits(TextureUnits),
+          mActiveTextureUnit(ActiveTextureUnit),
+          mCapabilities(Capabilities),
+          mGenerateMipmapHint(GenerateMipmapHint),
+          mPixelStorage(PixelStorage),
+          mInstances(Instances),
+          mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
 
     ContextID mIdentifier;
     BlendState mBlending;
@@ -6540,14 +6307,9 @@ typedef std::unordered_map<HGLRC, std::shared_ptr<Context>> HGLRCToContext__R;
 typedef std::unordered_map<ThreadID, std::shared_ptr<Context>> ThreadIDToContext__R;
 
 struct generate_types {
-    inline generate_types& Setu16_slice(Slice<uint16_t> v) {
-        mu16_slice = v;
-        return *this;
-    }
-    inline generate_types& Setu32_slice(Slice<uint32_t> v) {
-        mu32_slice = v;
-        return *this;
-    }
+    inline generate_types() : mu16_slice(Slice<uint16_t>()), mu32_slice(Slice<uint32_t>()) {}
+    inline generate_types(Slice<uint16_t> u16_slice, Slice<uint32_t> u32_slice)
+        : mu16_slice(u16_slice), mu32_slice(u32_slice) {}
 
     Slice<uint16_t> mu16_slice;
     Slice<uint32_t> mu32_slice;

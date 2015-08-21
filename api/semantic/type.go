@@ -67,6 +67,25 @@ type ClassInitializer struct {
 	Fields []*FieldInitializer // the set of field assignments
 }
 
+// InitialValues returns the full set of initial values for each field in
+// the class. If there is not an initialized or default value for a field, then
+// nil is returned for that field.
+func (c *ClassInitializer) InitialValues() []Expression {
+	m := make(map[*Field]*FieldInitializer, len(c.Class.Fields))
+	for _, f := range c.Fields {
+		m[f.Field] = f
+	}
+	out := make([]Expression, len(c.Class.Fields))
+	for i, f := range c.Class.Fields {
+		if v, ok := m[f]; ok {
+			out[i] = v.Value
+		} else {
+			out[i] = f.Default
+		}
+	}
+	return out
+}
+
 // ExpressionType implements Expression returning the class type being initialized.
 func (c *ClassInitializer) ExpressionType() Type {
 	if c.Class != nil {

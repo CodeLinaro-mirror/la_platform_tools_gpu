@@ -1903,7 +1903,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             QueryId l_id = (QueryId)(
                     slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
+            l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>(new Query());
             write(l_q, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -2032,7 +2032,9 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
         std::shared_ptr<Context> l_GetContext_55_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_55_result;
         if (!(l_ctx->mInstances.mBuffers.count(buffer) > 0)) {
-            l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>((new Buffer()));
+            l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>(
+                    new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0,
+                               Slice<uint8_t>()));
         }
         l_ctx->mBoundBuffers[target] = buffer;
         observe(observations.mReads);
@@ -2303,7 +2305,9 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             BufferId l_id = (BufferId)(
                     slice(buffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mBuffers[l_id] = std::shared_ptr<Buffer>((new Buffer()));
+            l_ctx->mInstances.mBuffers[l_id] = std::shared_ptr<Buffer>(
+                    new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0,
+                               Slice<uint8_t>()));
             write(l_b, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -3114,7 +3118,7 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
         std::shared_ptr<Context> l_ctx = l_GetContext_141_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
-                    std::shared_ptr<VertexArray>((new VertexArray()));
+                    std::shared_ptr<VertexArray>(new VertexArray());
         }
         l_ctx->mBoundVertexArray = array;
         observe(observations.mReads);
@@ -4878,7 +4882,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             QueryId l_id = (QueryId)(
                     slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
+            l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>(new Query());
             write(l_q, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -4905,8 +4909,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             VertexArrayId l_id = (VertexArrayId)(
                     slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mVertexArrays[l_id] =
-                    std::shared_ptr<VertexArray>((new VertexArray()));
+            l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(new VertexArray());
             write(l_a, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -9300,8 +9303,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_475_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_475_result;
-        l_ctx->mBlending.mBlendColor =
-                Color().SetRed(red).SetGreen(green).SetBlue(blue).SetAlpha(alpha);
+        l_ctx->mBlending.mBlendColor = Color(red, green, blue, alpha);
         observe(observations.mReads);
         mImports.glBlendColor(red, green, blue, alpha);
     } while (false);
@@ -9633,7 +9635,7 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_503_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_503_result;
-        l_ctx->mRasterizing.mScissor = Rect().SetX(x).SetY(y).SetWidth(width).SetHeight(height);
+        l_ctx->mRasterizing.mScissor = Rect(x, y, width, height);
         observe(observations.mReads);
         mImports.glScissor(x, y, width, height);
     } while (false);
@@ -9847,8 +9849,8 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
         std::shared_ptr<Context> l_GetContext_521_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_521_result;
         if (!(l_ctx->mInstances.mFramebuffers.count(framebuffer) > 0)) {
-            l_ctx->mInstances.mFramebuffers[framebuffer] =
-                    std::shared_ptr<Framebuffer>((new Framebuffer()));
+            l_ctx->mInstances.mFramebuffers[framebuffer] = std::shared_ptr<Framebuffer>(
+                    new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         }
         if (target == GLenum::GL_FRAMEBUFFER) {
             l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = framebuffer;
@@ -9882,7 +9884,7 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
         std::shared_ptr<Context> l_ctx = l_GetContext_524_result;
         if (!(l_ctx->mInstances.mRenderbuffers.count(renderbuffer) > 0)) {
             l_ctx->mInstances.mRenderbuffers[renderbuffer] =
-                    std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                    std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         }
         l_ctx->mBoundRenderbuffers[target] = renderbuffer;
         observe(observations.mReads);
@@ -10099,7 +10101,7 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_542_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_542_result;
-        l_ctx->mClearing.mClearColor = Color().SetRed(r).SetGreen(g).SetBlue(b).SetAlpha(a);
+        l_ctx->mClearing.mClearColor = Color(r, g, b, a);
         observe(observations.mReads);
         mImports.glClearColor(r, g, b, a);
     } while (false);
@@ -10545,8 +10547,8 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             FramebufferId l_id = (FramebufferId)(slice(framebuffers, (uint64_t)((GLsizei)(0)),
                                                        (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mFramebuffers[l_id] =
-                    std::shared_ptr<Framebuffer>((new Framebuffer()));
+            l_ctx->mInstances.mFramebuffers[l_id] = std::shared_ptr<Framebuffer>(
+                    new Framebuffer(GLenumToFramebufferAttachmentInfo()));
             write(l_f, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -10576,7 +10578,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
             RenderbufferId l_id = (RenderbufferId)(slice(renderbuffers, (uint64_t)((GLsizei)(0)),
                                                          (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mRenderbuffers[l_id] =
-                    std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                    std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
             write(l_r, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -11494,7 +11496,9 @@ inline uint32_t GlesSpy::glCreateProgram() {
         observe(observations.mReads);
         result = mImports.glCreateProgram();
         ProgramId l_id = (ProgramId)(result);
-        l_ctx->mInstances.mPrograms[l_id] = std::shared_ptr<Program>((new Program()));
+        l_ctx->mInstances.mPrograms[l_id] = std::shared_ptr<Program>(new Program(
+                GLenumToShaderId(), false, Slice<uint8_t>(), StringToAttributeLocation(),
+                S32ToVertexAttribute(), UniformLocationToUniform(), Slice<GLchar>()));
         break;
     } while (false);
     observe(observations.mWrites);
@@ -11531,7 +11535,8 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
         observe(observations.mReads);
         result = mImports.glCreateShader(type);
         ShaderId l_id = (ShaderId)(result);
-        l_ctx->mInstances.mShaders[l_id] = std::shared_ptr<Shader>((new Shader()));
+        l_ctx->mInstances.mShaders[l_id] = std::shared_ptr<Shader>(
+                new Shader(Slice<uint8_t>(), false, false, Slice<GLchar>(), "", 0));
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[l_id];
         l_s->mType = type;
         break;
@@ -14648,7 +14653,7 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_848_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_848_result;
-        l_ctx->mRasterizing.mViewport = Rect().SetX(x).SetY(y).SetWidth(width).SetHeight(height);
+        l_ctx->mRasterizing.mViewport = Rect(x, y, width, height);
         observe(observations.mReads);
         mImports.glViewport(x, y, width, height);
     } while (false);
@@ -17055,7 +17060,10 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
         std::shared_ptr<Context> l_GetContext_908_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_908_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
-            l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>((new Texture()));
+            l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture(
+                    0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                    GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         }
         l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target] = texture;
         observe(observations.mReads);
@@ -17119,11 +17127,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                 TextureId l_id =
                         l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize((uint32_t)(image_size))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -17143,11 +17147,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize((uint32_t)(image_size))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -17524,7 +17524,10 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             TextureId l_id = (TextureId)(
                     slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>((new Texture()));
+            l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>(new Texture(
+                    0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                    GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
             write(l_t, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -18196,12 +18199,9 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 TextureId l_id =
                         l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
-                                                       format, type))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(),
+                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
+                                  format);
                 if (data != nullptr) {
                     if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
@@ -18224,12 +18224,9 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
-                                                       format, type))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(),
+                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
+                                  format);
                 if (data != nullptr) {
                     if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
@@ -19016,12 +19013,9 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                 TextureId l_id =
                         l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
-                                                       format, type))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(),
+                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
+                                  format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -19041,12 +19035,9 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
-                                    .SetHeight(height)
-                                    .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
-                                                       format, type))
-                                    .SetFormat(format);
+                Image l_l = Image(width, height, Slice<uint8_t>(),
+                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
+                                  format);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -19366,7 +19357,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
         std::shared_ptr<Context> l_ctx = l_GetContext_1062_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
-                    std::shared_ptr<VertexArray>((new VertexArray()));
+                    std::shared_ptr<VertexArray>(new VertexArray());
         }
         l_ctx->mBoundVertexArray = array;
         observe(observations.mReads);
@@ -19480,8 +19471,7 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             VertexArrayId l_id = (VertexArrayId)(
                     slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
-            l_ctx->mInstances.mVertexArrays[l_id] =
-                    std::shared_ptr<VertexArray>((new VertexArray()));
+            l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(new VertexArray());
             write(l_a, (uint64_t)(l_i), l_id);
         }
     } while (false);
@@ -20156,38 +20146,41 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         EGLContext l_context = (EGLContext)(result);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20197,7 +20190,9 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1116_result = l_ctx;
         this->EGLContexts[l_context] = l_CreateContext_1116_result;
@@ -20314,38 +20309,41 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         GLXContext l_context = (GLXContext)(result);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20355,7 +20353,9 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1118_result = l_ctx;
         this->GLXContexts[l_context] = l_CreateContext_1118_result;
@@ -20391,38 +20391,41 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         GLXContext l_context = (GLXContext)(result);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20432,7 +20435,9 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1119_result = l_ctx;
         this->GLXContexts[l_context] = l_CreateContext_1119_result;
@@ -20569,38 +20574,41 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         HGLRC l_context = (HGLRC)(result);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20610,7 +20618,9 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1122_result = l_ctx;
         this->WGLContexts[l_context] = l_CreateContext_1122_result;
@@ -20640,38 +20650,41 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         HGLRC l_context = (HGLRC)(result);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20681,7 +20694,9 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1123_result = l_ctx;
         this->WGLContexts[l_context] = l_CreateContext_1123_result;
@@ -20757,38 +20772,41 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         CGLContextObj l_context = (CGLContextObj)(slice(ctx, 0, 1)[0]);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
-        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
+        std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
+                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                            GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
+                            0, 0, AttributeLocationToVertexAttributeArray__R(),
+                            GLenumToGLenumToTextureId(), GLenum::GL_TEXTURE0, GLenumToBool(),
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
         l_ctx->mIdentifier = l_identifier;
-        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
-        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
+        l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
+                Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
+        l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
+                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
+                GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         RenderbufferId l_color_id = (RenderbufferId)(4294967295);
         RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
         RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
         l_ctx->mInstances.mRenderbuffers[l_color_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+                std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
         std::shared_ptr<Framebuffer> l_backbuffer =
-                std::shared_ptr<Framebuffer>((new Framebuffer()));
+                std::shared_ptr<Framebuffer>(new Framebuffer(GLenumToFramebufferAttachmentInfo()));
         l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_color_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_color_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_depth_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_depth_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
-                FramebufferAttachmentInfo()
-                        .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(GLenum::GL_RENDERBUFFER)
-                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                FramebufferAttachmentInfo((uint32_t)(l_stencil_id), GLenum::GL_RENDERBUFFER, 0,
+                                          GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
         l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
         l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
@@ -20798,7 +20816,9 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                    std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
+                    std::shared_ptr<VertexAttributeArray>(
+                            new VertexAttributeArray(false, 4, GLenum::GL_FLOAT, (GLboolean)(0),
+                                                     (GLsizei)(0), (BufferId)(0), nullptr));
         }
         std::shared_ptr<Context> l_CreateContext_1125_result = l_ctx;
         this->CGLContexts[l_context] = l_CreateContext_1125_result;

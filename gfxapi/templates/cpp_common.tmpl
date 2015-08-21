@@ -447,9 +447,9 @@
   {{else if IsLength           $}}{{Template "C++.Type" $.Type}}(({{Template "C++.ReadLength" "Type" (TypeOf $.Object) "Value" $.Object}}))
   {{else if IsNull             $}}{{Template "C++.Null" $.Type}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Template "C++.Type" $ty.To}}>(new {{Template "C++.Type" $ty.To}}())
-  {{else if IsCreate           $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Template "C++.Type" $ty.To}}>((new {{Template "C++.Type" $ty.To}}()){{Template "C++.InitializeFields" $.Initializer}})
+  {{else if IsCreate           $}}{{Template "C++.Create" $}}
   {{else if IsArrayInitializer $}}{{Template "C++.Type" $}}{ {{ForEach $.Values "C++.Read" | JoinWith ", "}} }
-  {{else if IsClassInitializer $}}{{Template "C++.Type" $}}(){{Template "C++.InitializeFields" $}}
+  {{else if IsClassInitializer $}}{{Template "C++.ClassInitializer" $}}
   {{else if IsSliceIndex       $}}{{Template "C++.SliceIndex" $}}
   {{else if IsSliceRange       $}}slice({{Template "C++.Read" $.Slice}}, {{Template "C++.Read" $.Range.LHS}}, {{Template "C++.Read" $.Range.RHS}})
   {{else if IsPointerRange     $}}slice({{Template "C++.Read" $.Pointer}}, {{Template "C++.Read" $.Range.LHS}}, {{Template "C++.Read" $.Range.RHS}})
@@ -463,12 +463,35 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a chain of 'fluent' set calls, initializing the target class.
+  Emits the logic to initialize a new instance of a class.
 -------------------------------------------------------------------------------
 */}}
-{{define "C++.InitializeFields"}}
+{{define "C++.ClassInitializer"}}
   {{AssertType $ "ClassInitializer"}}
-  {{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Template "C++.Read" $f.Value}}){{end}}
+
+  {{Template "C++.Type" $}}(§
+    {{range $i, $v := $.InitialValues}}
+      {{if $i}}, {{end}}
+      {{if IsNil $v}}
+        {{Template "C++.Null" (TypeOf (index $.Class.Fields $i))}}
+      {{else}}
+        {{Template "C++.Read" $v}}
+      {{end}}§
+    {{end}}
+  )
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to return a pointer to a new instance of a class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Create"}}
+  {{AssertType $ "Create"}}
+
+  {{$ty := Unpack $.Type}}
+  std::shared_ptr<{{Template "C++.Type" $ty.To}}>(new {{Template "C++.ClassInitializer" $.Initializer}})
 {{end}}
 
 

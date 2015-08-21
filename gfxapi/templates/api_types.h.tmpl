@@ -104,16 +104,28 @@
   {{end}}
 
   struct {{Template "C++.Type" $}} {
-    {{range $f := $.Fields}}
-      inline {{Template "C++.Type" $}}& Set{{$f.Name}}({{Template "C++.Type" $f}} v{{Template "C++.StaticArraySuffix" $f}}) {
-      {{if IsStaticArray $f.Type}}
-        {{$sa := Unpack $f.Type}}
-        memcpy(m{{$f.Name}}, v, sizeof({{Template "C++.Type" $f}}) * {{$sa.Size}});
-      {{else}}
-        m{{$f.Name}} = v;
-      {{end}}
-        return *this;
-      }
+    {{if len $.Fields}}
+      inline {{Template "C++.Type" $}}() :
+        {{range $i, $f := $.Fields}}
+          {{if $i}}, {{end}}
+          m{{$f.Name}}(§
+            {{if IsNil $f.Default}}
+              {{Macro "C++.Null" (TypeOf $f)}}
+            {{else}}
+              {{Macro "C++.Read" $f.Default}}
+            {{end}}§
+          )
+        {{end}} {}
+
+      inline {{Template "C++.Type" $}}(§
+        {{range $i, $f := $.Fields}}
+          {{if $i}}, {{end}}
+          {{Template "C++.Type" $f}} {{$f.Name}}{{Template "C++.StaticArraySuffix" $f}}§
+        {{end}}
+        ) :
+        {{range $i, $f := $.Fields}}
+          {{if $i}}, {{end}}m{{$f.Name}}({{$f.Name}})
+        {{end}} {}
     {{end}}
 ¶
     {{range $f := $.Fields}}
