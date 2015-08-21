@@ -37256,6 +37256,7 @@ func (c *Renderbuffer) Init() {
 ////////////////////////////////////////////////////////////////////////////////
 type Texture struct {
 	binary.Generate
+	ID            TextureId
 	Kind          TextureKind
 	Format        GLenum
 	Texture2D     GLintːImageᵐ

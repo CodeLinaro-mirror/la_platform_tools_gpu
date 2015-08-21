@@ -17061,7 +17061,7 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
         std::shared_ptr<Context> l_ctx = l_GetContext_908_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
             l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture(
-                    0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    texture, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                     GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                     GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         }
@@ -17525,7 +17525,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
             TextureId l_id = (TextureId)(
                     slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>(new Texture(
-                    0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    l_id, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                     GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                     GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
             write(l_t, (uint64_t)(l_i), l_id);
@@ -20156,7 +20156,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -20319,7 +20319,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -20401,7 +20401,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -20584,7 +20584,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -20660,7 +20660,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -20782,7 +20782,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =

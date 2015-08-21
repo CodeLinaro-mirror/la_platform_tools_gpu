@@ -8,8 +8,87 @@ package gfxapi
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/image"
 )
+
+var Namespace = registry.NewNamespace()
+
+func init() {
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*Texture)(nil).Class())
+}
+
+var (
+	binaryIDTexture = binary.ID{0x5f, 0xc3, 0xdf, 0x3e, 0xbe, 0xb6, 0x03, 0x02, 0xe3, 0xc7, 0xc0, 0x0c, 0x89, 0xa4, 0x25, 0xa1, 0x07, 0x0d, 0xcd, 0x59}
+)
+
+type binaryClassTexture struct{}
+
+func (*Texture) Class() binary.Class {
+	return (*binaryClassTexture)(nil)
+}
+func doEncodeTexture(e binary.Encoder, o *Texture) error {
+	if err := e.Uint32(uint32(len(o.Levels))); err != nil {
+		return err
+	}
+	for i := range o.Levels {
+		if err := e.Value(&o.Levels[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeTexture(d binary.Decoder, o *Texture) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Levels = make([]image.Info, count)
+		for i := range o.Levels {
+			if err := d.Value(&o.Levels[i]); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func doSkipTexture(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*image.Info)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
+func (*binaryClassTexture) New() binary.Object { return &Texture{} }
+func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTexture(e, obj.(*Texture))
+}
+func (*binaryClassTexture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Texture{}
+	return obj, doDecodeTexture(d, obj)
+}
+func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTexture(d, obj.(*Texture))
+}
+func (*binaryClassTexture) Skip(d binary.Decoder) error { return doSkipTexture(d) }
+func (*binaryClassTexture) Schema() *schema.Class       { return schemaTexture }
+
+var schemaTexture = &schema.Class{
+	TypeID:  binaryIDTexture,
+	Package: "gfxapi",
+	Name:    "Texture",
+	Fields: []schema.Field{
+		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "image.Info", ID: (*image.Info)(nil).Class().ID()}}},
+	},
+}
 
 var ConstantValues schema.Constants
 
@@ -45,4 +124,34 @@ func (v *FramebufferAttachment) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in FramebufferAttachment", s)
+}
+
+var _ResourceType_map = map[ResourceType]string{}
+
+func init() {
+	_ResourceType_map[0] = "TypeTexture"
+
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ResourceType", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: "TypeTexture", Value: int32(0)},
+		},
+	})
+}
+
+func (v ResourceType) String() string {
+	if s, ok := _ResourceType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ResourceType(%d)", v)
+}
+
+func (v *ResourceType) Parse(s string) error {
+	for k, t := range _ResourceType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ResourceType", s)
 }

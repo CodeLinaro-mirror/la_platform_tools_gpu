@@ -96,7 +96,7 @@ cmd void glBindTexture(GLenum target, TextureId texture) {
 
   ctx := GetContext()
   if !(texture in ctx.Instances.Textures) {
-    ctx.Instances.Textures[texture] = new!Texture()
+    ctx.Instances.Textures[texture] = new!Texture(ID: texture)
   }
   ctx.TextureUnits[ctx.ActiveTextureUnit][target] = texture
 }
@@ -417,7 +417,7 @@ cmd void glGenTextures(GLsizei count, TextureId* textures) {
   ctx := GetContext()
   for i in (0 .. count) {
     id := as!TextureId(?)
-    ctx.Instances.Textures[id] = new!Texture()
+    ctx.Instances.Textures[id] = new!Texture(ID: id)
     t[i] = id
   }
 }

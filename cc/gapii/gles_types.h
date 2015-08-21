@@ -6032,7 +6032,8 @@ typedef std::unordered_map<GLint, CubemapLevel> GLintToCubemapLevel;
 
 struct Texture {
     inline Texture()
-        : mKind(0),
+        : mID(0),
+          mKind(0),
           mFormat(0),
           mTexture2D(GLintToImage()),
           mCubemap(GLintToCubemapLevel()),
@@ -6045,11 +6046,12 @@ struct Texture {
           mSwizzleB(GLenum::GL_BLUE),
           mSwizzleA(GLenum::GL_ALPHA),
           mMaxAnisotropy(1) {}
-    inline Texture(uint32_t Kind, uint32_t Format, GLintToImage Texture2D,
+    inline Texture(TextureId ID, uint32_t Kind, uint32_t Format, GLintToImage Texture2D,
                    GLintToCubemapLevel Cubemap, uint32_t MagFilter, uint32_t MinFilter,
                    uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG,
                    uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy)
-        : mKind(Kind),
+        : mID(ID),
+          mKind(Kind),
           mFormat(Format),
           mTexture2D(Texture2D),
           mCubemap(Cubemap),
@@ -6063,6 +6065,7 @@ struct Texture {
           mSwizzleA(SwizzleA),
           mMaxAnisotropy(MaxAnisotropy) {}
 
+    TextureId mID;
     uint32_t mKind;
     uint32_t mFormat;
     GLintToImage mTexture2D;

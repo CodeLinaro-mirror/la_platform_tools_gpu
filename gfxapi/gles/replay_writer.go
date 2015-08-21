@@ -14217,6 +14217,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		ctx.Instances.Textures[ϟa.Texture] = func() *Texture {
 			s := &Texture{}
 			s.Init()
+			s.ID = ϟa.Texture
 			return s
 		}()
 	}
@@ -14591,6 +14592,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		ctx.Instances.Textures[id] = func() *Texture {
 			s := &Texture{}
 			s.Init()
+			s.ID = id
 			return s
 		}()
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)

@@ -8349,6 +8349,7 @@ func (ϟa *GlBindTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		ctx.Instances.Textures[ϟa.Texture] = func() *Texture {
 			s := &Texture{}
 			s.Init()
+			s.ID = ϟa.Texture
 			return s
 		}()
 	}
@@ -8613,6 +8614,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		ctx.Instances.Textures[id] = func() *Texture {
 			s := &Texture{}
 			s.Init()
+			s.ID = id
 			return s
 		}()
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)

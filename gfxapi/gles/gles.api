@@ -316,6 +316,7 @@ class Renderbuffer {
 
 @internal
 class Texture {
+  TextureId                 ID
   TextureKind               Kind
   GLenum                    Format
   map!(GLint, Image)        Texture2D

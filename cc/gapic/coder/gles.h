@@ -865,7 +865,8 @@ namespace gles {
     class Texture: public Encodable {
     public:
         Texture() = default;
-        Texture(uint32_t Kind, uint32_t Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, uint32_t MagFilter, uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy) :
+        Texture(uint32_t ID, uint32_t Kind, uint32_t Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, uint32_t MagFilter, uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy) :
+            mID(ID),
             mKind(Kind),
             mFormat(Format),
             mTexture2D(Texture2D),
@@ -880,10 +881,11 @@ namespace gles {
             mSwizzleA(SwizzleA),
             mMaxAnisotropy(MaxAnisotropy) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x69, 0x8a, 0xa1, 0xe4, 0xf5, 0xeb, 0x7b, 0xe1, 0x0f, 0x82, 0x1c, 0x57, 0xbe, 0xe5, 0x1d, 0xb1, 0x5c, 0xbb, 0xca, 0xee,  } };
+            static gapic::Id ID{ { 0x3f, 0xcf, 0x21, 0xf7, 0xf7, 0x7b, 0x32, 0x95, 0x38, 0x9b, 0x11, 0x3d, 0x8a, 0x15, 0x3a, 0x88, 0xe7, 0xb5, 0x69, 0x10,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
+            e->Uint32(this->mID);
             e->Uint32(this->mKind);
             e->Uint32(this->mFormat);
             GAPID_FATAL("C++ map encoding not supported");
@@ -899,6 +901,7 @@ namespace gles {
             e->Float32(this->mMaxAnisotropy);
         }
 
+        uint32_t mID;
         uint32_t mKind;
         uint32_t mFormat;
         std::unordered_map<int32_t,Image>* mTexture2D;
