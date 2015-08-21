@@ -21,6 +21,6 @@ import (
 
 // Linker is the interface implemented by types that can point to other objects.
 type Linker interface {
-	// Returns the link to the pointee of this object at p.
+	// Link returns the link to the pointee of this object at p.
 	Link(p Path, d database.Database, l log.Logger) (Path, error)
 }

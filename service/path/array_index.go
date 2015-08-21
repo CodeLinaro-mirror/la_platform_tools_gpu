@@ -80,7 +80,7 @@ func (n *ArrayIndex) ArrayIndex(index uint64) *ArrayIndex {
 	return &ArrayIndex{Array: n, Index: index}
 }
 
-// MapIndex returns the path to the map element with key k on the map object
+// MapIndex returns the path to the array element with key k on the map object
 // represented by this path.
 // The represented value type must be of type map, otherwise the returned path
 // is invalid.

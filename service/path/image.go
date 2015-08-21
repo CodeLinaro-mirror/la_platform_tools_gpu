@@ -20,7 +20,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-// ImageInfo is a path that refers to a image information.
+// ImageInfo is a path that refers to an image's information.
 type ImageInfo struct {
 	binary.Generate
 	ID binary.ID // The ImageInfo's unique identifier.
