@@ -18,6 +18,7 @@ import (
 	"flag"
 	"fmt"
 	"image"
+	"sync"
 	"testing"
 	"time"
 
@@ -62,7 +63,22 @@ func p(addr uint64) memory.Pointer {
 	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID) {
+func checkImage(t *testing.T, name string, got image.Image, threshold float64) {
+	if *generateReferenceImages {
+		storeReferenceImage(t, name, got)
+	} else {
+		expected := loadReferenceImage(t, name)
+		err := compareImages(t, expected, got)
+		if err > threshold {
+			t.Errorf("%v had error of %v%% which is above the threshold of %v%%", name, err*100, threshold*100)
+		}
+	}
+}
+
+func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID, done *sync.WaitGroup) {
+	if done != nil {
+		defer done.Done()
+	}
 	select {
 	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, replay.NoWireframe):
 		if img.Error != nil {
@@ -78,18 +94,38 @@ func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, 
 			Stride: int(w * 4),
 			Rect:   image.Rect(0, 0, int(w), int(h)),
 		}
-		if *generateReferenceImages {
-			storeReferenceImage(t, name, got)
-		} else {
-			expected := loadReferenceImage(t, name)
-			err := compareImages(t, expected, got)
-			if err > threshold {
-				t.Errorf("%v had error of %v%% which is above the threshold of %v%%", name, err*100, threshold*100)
-			}
-		}
+		checkImage(t, name, got, threshold)
 	case <-time.Tick(replayTimeout):
 		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
 		panic(fmt.Errorf("Timeout reading ColorBuffer at %d for %s", after, name))
+	}
+}
+
+type ctxCfg struct {
+	context replay.Context
+	config  replay.Config
+}
+
+func (c ctxCfg) String() string { return fmt.Sprintf("Context: %+v, Config: %+v", c.context, c.config) }
+
+func checkReplay(t *testing.T, expectedContext replay.Context, expectedBatchCount int) func() {
+	batchCount := 0
+	uniqueCtxCfgs := map[ctxCfg]struct{}{}
+	replay.Events.OnReplay = func(device replay.Device, context replay.Context, config replay.Config, requests []replay.Request) {
+		if expectedContext != context {
+			t.Errorf("Expected replay context: %v, got: %v", expectedContext, context)
+		}
+		batchCount++
+		uniqueCtxCfgs[ctxCfg{context, config}] = struct{}{}
+	}
+	return func() {
+		if batchCount != expectedBatchCount {
+			t.Errorf("Expected %v replay batches, got %v", expectedBatchCount, batchCount)
+			t.Errorf("%d unique context-config pairs:", len(uniqueCtxCfgs))
+			for cc := range uniqueCtxCfgs {
+				t.Errorf(" • %v", cc)
+			}
+		}
 	}
 }
 
@@ -146,10 +182,15 @@ func TestClear(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-red", red)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-green", green)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-blue", blue)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-black", black)
+	defer checkReplay(t, ctx, 1)() // expect a single replay batch.
+
+	done := &sync.WaitGroup{}
+	done.Add(4)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-red", red, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-green", green, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-blue", blue, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-black", black, done)
+	done.Wait()
 }
 
 func TestDrawTriangle(t *testing.T) {
@@ -179,8 +220,13 @@ func TestDrawTriangle(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-green", clear)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle", triangle)
+	defer checkReplay(t, ctx, 1)() // expect a single replay batch.
+
+	done := &sync.WaitGroup{}
+	done.Add(2)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-green", clear, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle", triangle, done)
+	done.Wait()
 }
 
 // TestResizeRenderer checks that backbuffers can be resized without destroying
@@ -213,7 +259,7 @@ func TestResizeRenderer(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle_2", triangle)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle_2", triangle, nil)
 }
 
 // TestPreserveBuffersOnSwap checks that when the preserveBuffersOnSwap flag is
@@ -237,8 +283,11 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", clear)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapA)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapB)
-	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapC)
+	done := &sync.WaitGroup{}
+	done.Add(4)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", clear, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapA, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapB, done)
+	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapC, done)
+	done.Wait()
 }

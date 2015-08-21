@@ -151,6 +151,10 @@ func (b *batcher) send(requests []Request) (err error) {
 		log.Infof(b.logger, "Sending payload to %v.", device.Name)
 	}
 
+	if Events.OnReplay != nil {
+		Events.OnReplay(b.device, b.context.Context, b.context.Config, requests)
+	}
+
 	return executor.Execute(
 		payload,
 		decoder,
