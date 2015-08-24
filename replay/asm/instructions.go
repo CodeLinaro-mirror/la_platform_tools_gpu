@@ -306,6 +306,16 @@ func (a Post) Encode(r value.PointerResolver, e binary.Encoder) error {
 	return opcode.Post{}.Encode(e)
 }
 
+// Add is an Instruction that pops and sums the top N stack values, pushing the
+// result to the top of the stack. Each summed value must have the same type.
+type Add struct {
+	Count uint32
+}
+
+func (a Add) Encode(r value.PointerResolver, e binary.Encoder) error {
+	return opcode.Add{Count: a.Count}.Encode(e)
+}
+
 // Label is an Instruction that holds a marker value, used for debugging.
 type Label struct {
 	Value uint32
