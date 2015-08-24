@@ -259,6 +259,31 @@ TEST_F(InterpreterTest, ExtendDouble) {
     EXPECT_TRUE(res);
 }
 
+TEST_F(InterpreterTest, Add2xUint32) {
+    mInterpreter->registerFunction(0, CheckTopOfStack<uint32_t>{15});
+
+    std::vector<uint32_t> instructions{
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 5),
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 10),
+            instruction(Interpreter::InstructionCode::ADD, 2),
+            instruction(Interpreter::InstructionCode::CALL, 0)};
+    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
+    EXPECT_TRUE(res);
+}
+
+TEST_F(InterpreterTest, Add3xFloat) {
+    mInterpreter->registerFunction(0, CheckTopOfStack<float>{3.5});
+
+    std::vector<uint32_t> instructions{
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Float, 0x7f),  // 1.0 exp
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Float, 0x7e),  // 0.5 exp
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Float, 0x80),  // 2.0 exp
+            instruction(Interpreter::InstructionCode::ADD, 3),
+            instruction(Interpreter::InstructionCode::CALL, 0)};
+    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
+    EXPECT_TRUE(res);
+}
+
 TEST_F(InterpreterTest, Strcpy) {
     mMemoryManager->setReplayDataSize(20);
     const char* constantMemory = "abc";

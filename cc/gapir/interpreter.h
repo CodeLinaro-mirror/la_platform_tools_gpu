@@ -63,7 +63,8 @@ public:
         CLONE       = 11,
         STRCPY      = 12,
         EXTEND      = 13,
-        LABEL       = 14,
+        ADD         = 14,
+        LABEL       = 15,
     };
 
     // General signature for functions callable by the interpreter with a function call instruction.
@@ -119,6 +120,7 @@ private:
     bool clone(uint32_t opcode);
     bool strcpy(uint32_t opcode);
     bool extend(uint32_t opcode);
+    bool add(uint32_t opcode);
     bool label(uint32_t opcode);
 
     // Returns true, if address..address+size(type) is "constant" memory.

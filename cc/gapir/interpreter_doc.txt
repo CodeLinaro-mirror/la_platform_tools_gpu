@@ -130,6 +130,11 @@ Opcodes
                   point value on the stack is left-shifted by 26 bits and is bitwise-OR’ed with the
                   specified value. Bits shifted beyond the fractional part of the floating point
                   number are discarded.
+        <code:6> <count:26>
+            * ADD(value) [no change]
+            * Pop and sum count values from the top of the stack, and push the result to the top of
+              the stack.
+                * All summed value types must be equal.
 
     Debug
         <code:6> <value:26>

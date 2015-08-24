@@ -24,6 +24,25 @@
 
 namespace gapir {
 
+namespace {
+
+template<typename T> inline T sum2(T a, T b) { return a + b; }
+template<typename T> inline T* sum2(T* a, T* b) {
+  return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(a) + reinterpret_cast<uintptr_t>(b));
+}
+
+template<typename T>
+inline bool sum(Stack& stack, uint32_t count) {
+  T v = 0;
+  for (uint32_t i = 0; i < count; i++) {
+    v = sum2(v, stack.pop<T>());
+  }
+  stack.push(v);
+  return stack.isValid();
+}
+
+} // anonymous namespace
+
 Interpreter::Interpreter(const MemoryManager* memoryManager, uint32_t stackDepth) :
         mMemoryManager(memoryManager), mStack(stackDepth, mMemoryManager),
         mLabel(0) {
@@ -273,6 +292,31 @@ bool Interpreter::extend(uint32_t opcode) {
     return mStack.isValid();
 }
 
+bool Interpreter::add(uint32_t opcode) {
+  uint32_t count = extract26bitData(opcode);
+  if (count < 2) {
+    return mStack.isValid();
+  }
+  auto type = mStack.getTopType();
+  switch (type) {
+      case BaseType::Int8:             return sum<int8_t>(mStack, count);
+      case BaseType::Int16:            return sum<int16_t>(mStack, count);
+      case BaseType::Int32:            return sum<int32_t>(mStack, count);
+      case BaseType::Int64:            return sum<int64_t>(mStack, count);
+      case BaseType::Uint8:            return sum<uint8_t>(mStack, count);
+      case BaseType::Uint16:           return sum<uint16_t>(mStack, count);
+      case BaseType::Uint32:           return sum<uint32_t>(mStack, count);
+      case BaseType::Uint64:           return sum<uint64_t>(mStack, count);
+      case BaseType::Float:            return sum<float>(mStack, count);
+      case BaseType::Double:           return sum<double>(mStack, count);
+      case BaseType::AbsolutePointer:  return sum<void*>(mStack, count);
+      case BaseType::ConstantPointer:  return sum<void*>(mStack, count);
+      default:
+        GAPID_WARNING("Cannot add values of type %s", baseTypeName(type));
+        return false;
+  }
+}
+
 bool Interpreter::label(uint32_t opcode) {
     mLabel = extract26bitData(opcode);
     return mStack.isValid();
@@ -327,6 +371,9 @@ bool Interpreter::interpret(uint32_t opcode) {
         case InstructionCode::EXTEND:
             DEBUG_OPCODE_26("EXTEND", opcode);
             return this->extend(opcode);
+        case InstructionCode::ADD:
+            DEBUG_OPCODE_26("ADD", opcode);
+            return this->add(opcode);
         case InstructionCode::LABEL:
             DEBUG_OPCODE_26("LABEL", opcode);
             return this->label(opcode);
