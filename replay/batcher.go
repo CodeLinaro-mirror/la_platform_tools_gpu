@@ -85,31 +85,26 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	builder := builder.New(architecture)
 
-	if err := func() (err interface{}) {
-		// Prevent panics from causing GAPIS to fall over.
-		// This is temporary, as state mutators should return errors instead of
-		// causing runtime panics.
-		defer func() { err = recover() }()
+	out := &adapter{
+		state:   gfxapi.NewState(),
+		db:      b.database,
+		logger:  b.logger,
+		builder: builder,
+	}
 
-		out := &adapter{
-			state:   gfxapi.NewState(),
-			db:      b.database,
-			logger:  b.logger,
-			builder: builder,
-		}
+	if err := b.context.Generator.Replay(
+		b.context.Context,
+		b.context.Config,
+		requests,
+		device,
+		*list,
+		out,
+		b.database,
+		b.logger); err != nil {
 
-		return b.context.Generator.Replay(
-			b.context.Context,
-			b.context.Config,
-			requests,
-			device,
-			*list,
-			out,
-			b.database,
-			b.logger)
-	}(); err != nil {
-		log.Errorf(b.logger, "Panic raised while writing atoms for replay: %v", err)
-		return fmt.Errorf("%v", err)
+		// TODO: Inform the request that the replay failed.
+		log.Errorf(b.logger, "Replay returned error: %v", err)
+		return err
 	}
 
 	if config.DebugReplay {
