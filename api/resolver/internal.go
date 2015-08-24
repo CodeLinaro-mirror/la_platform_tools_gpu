@@ -47,13 +47,20 @@ func internalCall(ctx *context, in *ast.Call) semantic.Expression {
 	return p(ctx, in, g)
 }
 
-func assert(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
+func checkInternalFunc(ctx *context, in *ast.Call, g *ast.Generic, typeCount, paramCount int) bool {
+	if typeCount >= 0 && len(g.Arguments) != typeCount {
+		ctx.errorf(in, "wrong number of types to %s, expected %d got %v", g.Name.Value, typeCount, len(g.Arguments))
+		return false
 	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if paramCount >= 0 && len(in.Arguments) != paramCount {
+		ctx.errorf(in, "wrong number of arguments to %s, expected %d got %v", g.Name.Value, paramCount, len(in.Arguments))
+		return false
+	}
+	return true
+}
+
+func assert(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
+	if !checkInternalFunc(ctx, in, g, 0, 1) {
 		return invalid{}
 	}
 	condition := expression(ctx, in.Arguments[0])
@@ -67,15 +74,9 @@ func assert(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func cast(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of types to %s, expected 1 got %v", g.Name.Value, len(g.Arguments))
+	if !checkInternalFunc(ctx, in, g, 1, 1) {
 		return invalid{}
 	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
-		return invalid{}
-	}
-
 	t := type_(ctx, g.Arguments[0])
 	var obj semantic.Expression
 	ctx.with(t, func() {
@@ -94,8 +95,7 @@ func cast(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func new_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of types to %s, expected 1 got %v", g.Name.Value, len(g.Arguments))
+	if !checkInternalFunc(ctx, in, g, 1, -1) {
 		return invalid{}
 	}
 	t := type_(ctx, g.Arguments[0])
@@ -112,12 +112,7 @@ func new_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func make_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of types to %s, expected 1 got %v", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 1, 1) {
 		return invalid{}
 	}
 	t := type_(ctx, g.Arguments[0])
@@ -133,12 +128,7 @@ func make_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func clone(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 0, 1) {
 		return invalid{}
 	}
 	slice := expression(ctx, in.Arguments[0])
@@ -153,12 +143,7 @@ func clone(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func read(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 0, 1) {
 		return invalid{}
 	}
 	slice := expression(ctx, in.Arguments[0])
@@ -172,12 +157,7 @@ func read(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func write(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 0, 1) {
 		return invalid{}
 	}
 	slice := expression(ctx, in.Arguments[0])
@@ -191,12 +171,7 @@ func write(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func copy_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 2 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 2 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 0, 2) {
 		return invalid{}
 	}
 	src := expression(ctx, in.Arguments[1])
@@ -216,12 +191,7 @@ func copy_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 }
 
 func length(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
-	if len(g.Arguments) > 0 {
-		ctx.errorf(in, "%s is not a generic function, but got %v type arguments", g.Name.Value, len(g.Arguments))
-		return invalid{}
-	}
-	if len(in.Arguments) != 1 {
-		ctx.errorf(in, "wrong number of arguments to %s, expected 1 got %v", g.Name.Value, len(in.Arguments))
+	if !checkInternalFunc(ctx, in, g, 0, 1) {
 		return invalid{}
 	}
 	obj := expression(ctx, in.Arguments[0])
