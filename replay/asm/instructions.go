@@ -92,7 +92,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			if err := push.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{uint32(v & mask26)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		case v&^mask45 == ^mask45:
 			// ●●●●●●●●●●●●●●●●●●●◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒
 			//                  ▕      PUSHI 20     ▕         EXTEND 26       ▕
@@ -100,7 +100,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			if err := push.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{uint32(v & mask26)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		default:
 			// ◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒
 			//▕  PUSHI 12 ▕         EXTEND 26       ▕         EXTEND 26       ▕
@@ -108,11 +108,11 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			if err := push.Encode(e); err != nil {
 				return err
 			}
-			ext := opcode.Extend{uint32((v >> 26) & mask26)}
+			ext := opcode.Extend{Value: uint32((v >> 26) & mask26)}
 			if err := ext.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{uint32(v & mask26)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		}
 	case protocol.TypeBool,
 		protocol.TypeUint8, protocol.TypeUint16, protocol.TypeUint32, protocol.TypeUint64,
@@ -129,7 +129,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			if err := push.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{uint32(v & mask26)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		default:
 			// ◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒
 			//▕  PUSHI 12 ▕         EXTEND 26       ▕         EXTEND 26       ▕
@@ -137,11 +137,11 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			if err := push.Encode(e); err != nil {
 				return err
 			}
-			ext := opcode.Extend{uint32((v >> 26) & mask26)}
+			ext := opcode.Extend{Value: uint32((v >> 26) & mask26)}
 			if err := ext.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{uint32(v & mask26)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		}
 	}
 	return fmt.Errorf("Cannot push value type %s", t)

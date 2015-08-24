@@ -333,15 +333,15 @@ func TestStrcpy(t *testing.T) {
 func TestResource(t *testing.T) {
 	test(t,
 		[]Instruction{
-			Resource{10, 0x10},
-			Resource{20, 0x4050607},
+			Resource{10, value.RemappedPointer(0x10)},
+			Resource{20, value.RemappedPointer(0x4050607)},
 		},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
-		opcode.Resource{10},
+		opcode.Resource{ID: 10},
 
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 1},
 		opcode.Extend{Value: 0x50607},
-		opcode.Resource{20},
+		opcode.Resource{ID: 20},
 	)
 }
 
