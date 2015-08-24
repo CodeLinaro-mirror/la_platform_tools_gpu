@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -195,6 +196,51 @@ func (r *rpc) LoadState(state *path.State) (*schema.Object, error) {
 	}
 
 	return object.(*schema.Object), nil
+}
+
+func (r *rpc) LoadResource(resource *path.Resource) (interface{}, error) {
+	l := r.beginRPC("LoadResource")
+
+	object, err := r.client.Get(resource, l)
+	if err != nil {
+		return service.Resources{}, err
+	}
+
+	return object, nil
+}
+
+func (r *rpc) LoadResources(resources *path.Resources) (service.Resources, error) {
+	l := r.beginRPC("LoadResources")
+
+	object, err := r.client.Get(resources, l)
+	if err != nil {
+		return service.Resources{}, err
+	}
+
+	return *object.(*service.Resources), nil
+}
+
+func (r *rpc) LoadImageInfo(path path.Path) (image.Info, error) {
+	l := r.beginRPC("LoadImageInfo")
+
+	object, err := r.client.Get(path, l)
+	if err != nil {
+		log.E(l, "Failed to load image (%v): %v", path, err)
+		return image.Info{}, err
+	}
+
+	return *object.(*image.Info), nil
+}
+
+func (r *rpc) LoadBlob(path path.Path) ([]byte, error) {
+	l := r.beginRPC("LoadBlob")
+
+	object, err := r.client.Get(path, l)
+	if err != nil {
+		return nil, err
+	}
+
+	return object.([]byte), nil
 }
 
 func (r *rpc) LoadMemory(rng *path.MemoryRange) (service.MemoryInfo, error) {

@@ -38,6 +38,17 @@ func (i Range) Contains(atomIndex uint64) bool {
 	return atomIndex >= i.Start && atomIndex < i.End
 }
 
+// Clamp returns the nearest index in the range to atomIndex.
+func (i Range) Clamp(atomIndex uint64) uint64 {
+	if atomIndex < i.Start {
+		return i.Start
+	}
+	if atomIndex >= i.End {
+		return i.End - 1
+	}
+	return atomIndex
+}
+
 // Length returns the number of atoms in the range.
 func (i Range) Length() uint64 {
 	return uint64(i.End - i.Start)

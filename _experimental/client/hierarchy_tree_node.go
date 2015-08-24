@@ -104,7 +104,7 @@ func (n hierarchyTreeNode) Create(theme gxui.Theme) gxui.Control {
 		if n.ctx.device != nil {
 			if flags := n.ctx.atoms[atomIndex].Flags(); flags.IsDrawCall() || flags.IsEndOfFrame() {
 				after := n.ctx.capture.Atoms().Index(atomIndex)
-				t.Run(updateThumbnail{appCtx, n.ctx.device, after, img})
+				t.Run(updateFramebufferThumbnail{appCtx, n.ctx.device, after, img})
 			}
 		}
 	}

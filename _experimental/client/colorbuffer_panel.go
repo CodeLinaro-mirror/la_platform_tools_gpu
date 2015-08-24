@@ -121,15 +121,9 @@ func CreateColorBufferPanel(appCtx *ApplicationContext) gxui.Control {
 			device = d
 			update()
 		}
-		if a := path.FindAtom(p); a != nil && !path.Equal(a, after) {
+		if a := lastAtom(p); a != nil && !path.Equal(a, after) {
 			after = a
 			update()
-		}
-		if s, a := path.FindAtomSlice(p); s != nil {
-			if i := a.Index(s.End - 1); !path.Equal(i, after) {
-				after = i
-				update()
-			}
 		}
 	})
 

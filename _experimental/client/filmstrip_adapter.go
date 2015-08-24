@@ -88,20 +88,20 @@ func (a *FilmStripAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	b.AddChild(i)
 
 	t := task.New()
-	b.OnAttach(func() { t.Run(updateThumbnail{a.appCtx, a.device, p, i}) })
+	b.OnAttach(func() { t.Run(updateFramebufferThumbnail{a.appCtx, a.device, p, i}) })
 	b.OnDetach(t.Cancel)
 
 	return b
 }
 
-type updateThumbnail struct {
+type updateFramebufferThumbnail struct {
 	context *ApplicationContext
 	device  *path.Device
 	after   *path.Atom
 	image   gxui.Image
 }
 
-func (t updateThumbnail) Run(c task.CancelSignal) {
+func (t updateFramebufferThumbnail) Run(c task.CancelSignal) {
 	settings := service.RenderSettings{
 		MaxWidth:  kFilmStripAdapterItemWidth,
 		MaxHeight: kFilmStripAdapterItemHeight,

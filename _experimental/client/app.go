@@ -91,7 +91,7 @@ func createPanels(appCtx *ApplicationContext, window gxui.Window) gxui.Control {
 			holder.AddPanel(CreateReportPanel(appCtx), "Report")
 			holder.AddPanel(CreateMemoryPanel(appCtx), "Memory")
 			holder.AddPanel(CreateImageViewerPanel(appCtx), "Image")
-			holder.AddPanel(CreateDocsPanel(appCtx), "Docs")
+			holder.AddPanel(CreateResourcesPanel(appCtx), "Resources")
 			holder.AddPanel(CreateLogPanel(appCtx), "Log")
 			hSplitter.AddChild(holder)
 		}

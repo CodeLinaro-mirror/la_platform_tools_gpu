@@ -24,7 +24,7 @@ import (
 
 // NewColorTexture returns a gxui.Texture from the rgba-8888 data.
 func NewColorTexture(driver gxui.Driver, width, height int, rgba []byte) gxui.Texture {
-	img := image.NewRGBA(image.Rect(0, 0, width, height))
+	img := image.NewNRGBA(image.Rect(0, 0, width, height))
 	img.Pix = rgba
 	tex := driver.CreateTexture(img, 1)
 	tex.SetFlipY(true)

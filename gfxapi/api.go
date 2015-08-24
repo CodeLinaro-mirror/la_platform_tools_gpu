@@ -47,7 +47,7 @@ type ID binary.ID
 // Valid returns true if the id is not the default zero value.
 func (i ID) Valid() bool { return binary.ID(i).Valid() }
 
-var apis map[ID]API = make(map[ID]API)
+var apis = map[ID]API{}
 
 // Register adds an api to the understood set.
 // It is illegal to register the same name twice.
