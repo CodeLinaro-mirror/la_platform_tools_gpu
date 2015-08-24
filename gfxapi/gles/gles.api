@@ -15,6 +15,7 @@
 import "api/android_extension_pack.api"
 import "api/asynchronous_queries.api"
 import "api/buffer_objects.api"
+import "api/debug.api"
 import "api/draw_commands.api"
 import "api/extensions.api"
 import "api/fragment_operations.api"
@@ -49,6 +50,9 @@ macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {  }
 macro void requiresExtension(ExtensionId ext) {  }
 macro void error(string msg) { abort }
 macro void glErrorInvalidEnum(GLenum param) { abort }
+macro void glErrorInvalidEnumIf(bool condition) { if (condition) { abort }  }
+macro void glErrorInvalidOperationIf(bool condition) { if (condition) { abort }  }
+macro void glErrorInvalidValueIf(bool condition) { if (condition) { abort }  }
 
 enum ExtensionId {
   GL_AMD_performance_monitor                  = 1 ,
@@ -517,8 +521,8 @@ class ContextCreationInfo {
   string Vendor
   string Extensions
   string Version
-  GLint  VersionMajor // TODO: Needs setting.
-  GLint  VersionMinor // TODO: Needs setting.
+  GLint  VersionMajor          // TODO: Needs setting.
+  GLint  VersionMinor          // TODO: Needs setting.
   bool   PreserveBuffersOnSwap
 }
 

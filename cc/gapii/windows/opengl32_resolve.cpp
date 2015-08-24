@@ -113,7 +113,6 @@ void* real__glGetMaterialiv = nullptr;
 void* real__glGetPixelMapfv = nullptr;
 void* real__glGetPixelMapuiv = nullptr;
 void* real__glGetPixelMapusv = nullptr;
-void* real__glGetPointerv = nullptr;
 void* real__glGetPolygonStipple = nullptr;
 void* real__glGetTexEnvfv = nullptr;
 void* real__glGetTexEnviv = nullptr;
@@ -432,7 +431,6 @@ void __stdcall resolve() {
     real__glGetPixelMapfv = gapic::GetGfxProcAddress("glGetPixelMapfv", true);
     real__glGetPixelMapuiv = gapic::GetGfxProcAddress("glGetPixelMapuiv", true);
     real__glGetPixelMapusv = gapic::GetGfxProcAddress("glGetPixelMapusv", true);
-    real__glGetPointerv = gapic::GetGfxProcAddress("glGetPointerv", true);
     real__glGetPolygonStipple = gapic::GetGfxProcAddress("glGetPolygonStipple", true);
     real__glGetTexEnvfv = gapic::GetGfxProcAddress("glGetTexEnvfv", true);
     real__glGetTexEnviv = gapic::GetGfxProcAddress("glGetTexEnviv", true);

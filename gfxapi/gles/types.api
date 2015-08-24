@@ -29,7 +29,7 @@ type s32   GLfixed // 16.16 bits, signed, two's complement fixed-point integer.
 type s32   GLsizei // 32 bit, signed binary integer used to represent sizes.
 type s32   GLintptr // TODO: No API datatype to represent this type.
 type s32   GLsizeiptr // TODO: No API datatype to represent this type.
-type void* GLDEBUGPROCKHR // void (*)(GLenum,GLenum,GLuint,GLenum,GLsizei,const GLchar*,const void*)
+type void* GLDEBUGPROC // void (*)(GLenum,GLenum,GLuint,GLenum,GLsizei,const GLchar*,const void*)
 type u16   GLhalf // 16 bit floating-point number encoded as a unsigned 16 bit integer.
 type f32   GLfloat // 32 bit floating-point number.
 type f32   GLclampf // 32 bit floating-point value clamped to [0, 1]

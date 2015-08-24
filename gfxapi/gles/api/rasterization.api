@@ -75,6 +75,7 @@ cmd void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) {
     }
   }
   // TODO
+  read(val[0:2])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml","OpenGL ES 2.0")

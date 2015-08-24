@@ -146,7 +146,6 @@ TRAMPOLINE glGetMaterialiv, real__glGetMaterialiv
 TRAMPOLINE glGetPixelMapfv, real__glGetPixelMapfv
 TRAMPOLINE glGetPixelMapuiv, real__glGetPixelMapuiv
 TRAMPOLINE glGetPixelMapusv, real__glGetPixelMapusv
-TRAMPOLINE glGetPointerv, real__glGetPointerv
 TRAMPOLINE glGetPolygonStipple, real__glGetPolygonStipple
 TRAMPOLINE glGetTexEnvfv, real__glGetTexEnvfv
 TRAMPOLINE glGetTexEnviv, real__glGetTexEnviv

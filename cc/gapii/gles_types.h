@@ -31,6 +31,10 @@
 
 namespace gapii {
 
+namespace FramebufferConstants {
+static const uint32_t MAX_DRAW_BUFFERS = 8;
+}
+
 namespace GLbitfield {
 static const uint32_t GL_CURRENT_BIT = 1;
 static const uint32_t GL_POINT_BIT = 2;
@@ -5850,7 +5854,7 @@ typedef int32_t GLintptr;
 
 typedef int32_t GLsizeiptr;
 
-typedef void* GLDEBUGPROCKHR;
+typedef void* GLDEBUGPROC;
 
 typedef uint16_t GLhalf;
 

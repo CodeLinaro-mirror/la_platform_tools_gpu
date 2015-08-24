@@ -12,6 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+macro void readString(GLsizei length, const GLchar* buffer) {
+  if buffer != null {
+    if length < 0 {
+      // Negative length implies null-terminated string
+      msg := as!string(as!char*(buffer))
+    } else {
+      read(buffer[0:length])
+    }
+  }
+}
+
+macro void writeString(GLsizei  buffer_size,
+                       GLsizei* buffer_bytes_written,
+                       GLchar*  buffer) {
+  if (buffer != null) && (buffer_size > 0) {
+    buffer_size2 := buffer_size // Read before fence
+    if buffer_bytes_written != null {
+      length := as!GLsizei(?)
+      buffer_bytes_written[0] = length // Excluding null-terminator
+      write(buffer[0:length + 1]) // Including null-terminator
+    } else {
+      write(buffer[0:buffer_size2])
+    }
+  }
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glActiveShaderProgram.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glActiveShaderProgram.xhtml","OpenGL ES 3.2")
 cmd void glActiveShaderProgram(PipelineId pipeline, ProgramId program) {
@@ -118,6 +144,12 @@ cmd ProgramId glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar* c
       glErrorInvalidEnum(type)
     }
   }
+
+  ctx := GetContext()
+  sources := strings[0:count]
+  for i in (0 .. count) {
+    source := as!string(as!char*(sources[i]))
+  }
   // TODO
   return ?
 }
@@ -138,6 +170,7 @@ cmd void glDeleteProgram(ProgramId program) {
 cmd void glDeleteProgramPipelines(GLsizei n, const PipelineId* pipelines) {
   minRequiredVersion(3, 1)
   // TODO
+  p := pipelines[0:n]
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml","OpenGL ES 2.0")
@@ -186,6 +219,7 @@ cmd void glDispatchComputeIndirect(GLintptr indirect) {
 cmd void glGenProgramPipelines(GLsizei n, PipelineId* pipelines) {
   minRequiredVersion(3, 1)
   // TODO
+  write(pipelines[0:n])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml","OpenGL ES 2.0")
@@ -201,13 +235,7 @@ cmd void glGetActiveAttrib(ProgramId         program,
                            GLchar*           name) {
   minRequiredVersion(2, 0)
 
-  if buffer_bytes_written != null {
-    l := as!GLsizei(?)
-    buffer_bytes_written[0] = l
-    write(name[0:l])
-  } else {
-    write(name[0:256]) // HACK: Non-deterministic string length!
-  }
+  writeString(buffer_size, buffer_bytes_written, name)
 
   vector_count[0] = as!GLint(?)
   type[0] = as!GLenum(?)
@@ -226,13 +254,7 @@ cmd void glGetActiveUniform(ProgramId program,
                             GLchar*   name) {
   minRequiredVersion(2, 0)
 
-  if buffer_bytes_written != null {
-    l := as!GLsizei(?)
-    buffer_bytes_written[0] = l
-    write(name[0:l])
-  } else {
-    write(name[0:256]) // HACK: Non-deterministic string length!
-  }
+  writeString(buffer_size, buffer_bytes_written, name)
 
   vector_count[0] = as!GLint(?)
   type[0] = as!GLenum(?)
@@ -248,9 +270,7 @@ cmd void glGetActiveUniformBlockName(ProgramId      program,
                                      GLchar*        name) {
   minRequiredVersion(3, 0)
 
-  l := as!GLsizei(?)
-  buffer_bytes_written[0] = l
-  write(name[0:l])
+  writeString(buffer_size, buffer_bytes_written, name)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockiv.xhtml","OpenGL ES 3.0")
@@ -313,7 +333,10 @@ cmd void glGetAttachedShaders(ProgramId program,
   ctx := GetContext()
   p := ctx.Instances.Programs[program]
   l := min(as!s32(buffer_length), len(p.Shaders))
-  shaders_length_written[0] = as!GLsizei(l)
+  write(shaders[0:l])
+  if shaders_length_written != null {
+    shaders_length_written[0] = as!GLsizei(l)
+  }
   // TODO: Requires language support.
   // for i, k, v in p.Shaders {
   //     if i < l {
@@ -335,7 +358,7 @@ cmd GLint glGetAttribLocation(ProgramId program, string name) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetFragDataLocation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetFragDataLocation.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetFragDataLocation.xhtml","OpenGL ES 3.2")
-cmd GLint glGetFragDataLocation(ProgramId program, const GLchar* name) {
+cmd GLint glGetFragDataLocation(ProgramId program, string name) {
   minRequiredVersion(3, 0)
   // TODO
   return ?
@@ -350,7 +373,15 @@ cmd void glGetProgramBinary(ProgramId program,
                             GLenum*   binaryFormat,
                             void*     binary) {
   minRequiredVersion(3, 0)
-  // TODO
+
+  if length != null {
+    l := as!GLsizei(?)
+    length[0] = l
+    write(binary[0:l])
+  } else {
+    write(binary[0:bufSize])
+  }
+  binaryFormat[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml","OpenGL ES 2.0")
@@ -365,9 +396,7 @@ cmd void glGetProgramInfoLog(ProgramId program,
 
   ctx := GetContext()
   p := ctx.Instances.Programs[program]
-  l := min(as!s32(buffer_length), as!s32(len(p.InfoLog)))
-  copy(info[0:l], p.InfoLog[0:l])
-  string_length_written[0] = as!GLsizei(l)
+  writeString(buffer_length, string_length_written, info)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramInterface.xhtml","OpenGL ES 3.1")
@@ -396,6 +425,7 @@ cmd void glGetProgramInterfaceiv(ProgramId program,
     }
   }
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramPipelineInfoLog.xhtml","OpenGL ES 3.1")
@@ -405,7 +435,7 @@ cmd void glGetProgramPipelineInfoLog(PipelineId pipeline,
                                      GLsizei*   length,
                                      GLchar*    infoLog) {
   minRequiredVersion(3, 1)
-  // TODO
+  writeString(bufSize, length, infoLog)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramPipeline.xhtml","OpenGL ES 3.1")
@@ -425,13 +455,14 @@ cmd void glGetProgramPipelineiv(PipelineId pipeline, GLenum pname, GLint* params
     }
   }
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResourceIndex.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResourceIndex.xhtml","OpenGL ES 3.2")
-cmd GLuint glGetProgramResourceIndex(ProgramId     program,
-                                     GLenum        programInterface,
-                                     const GLchar* name) {
+cmd GLuint glGetProgramResourceIndex(ProgramId program,
+                                     GLenum    programInterface,
+                                     string    name) {
   minRequiredVersion(3, 1)
   switch (programInterface) {
     case GL_BUFFER_VARIABLE, GL_PROGRAM_INPUT, GL_PROGRAM_OUTPUT, GL_SHADER_STORAGE_BLOCK,
@@ -448,9 +479,9 @@ cmd GLuint glGetProgramResourceIndex(ProgramId     program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResourceLocation.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResourceLocation.xhtml","OpenGL ES 3.2")
-cmd GLint glGetProgramResourceLocation(ProgramId     program,
-                                       GLenum        programInterface,
-                                       const GLchar* name) {
+cmd GLint glGetProgramResourceLocation(ProgramId program,
+                                       GLenum    programInterface,
+                                       string    name) {
   minRequiredVersion(3, 1)
   switch (programInterface) {
     case GL_PROGRAM_INPUT, GL_PROGRAM_OUTPUT, GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM: {
@@ -482,7 +513,7 @@ cmd void glGetProgramResourceName(ProgramId program,
       glErrorInvalidEnum(programInterface)
     }
   }
-  // TODO
+  writeString(bufSize, length, name)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResource.xhtml","OpenGL ES 3.1")
@@ -507,6 +538,14 @@ cmd void glGetProgramResourceiv(ProgramId     program,
     }
   }
   // TODO
+  p := props[0:propCount]
+  if length != null {
+    l := as!GLsizei(?)
+    length[0] = l
+    write(params[0:l])
+  } else {
+    write(params[0:bufSize])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramiv.xml","OpenGL ES 2.0")
@@ -555,9 +594,7 @@ cmd void glGetShaderInfoLog(ShaderId shader,
 
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
-  l := min(as!s32(buffer_length), as!s32(len(s.InfoLog)))
-  copy(info[0:l], s.InfoLog[0:l])
-  string_length_written[0] = as!GLsizei(l)
+  writeString(buffer_length, string_length_written, info)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml","OpenGL ES 2.0")
@@ -602,9 +639,8 @@ cmd void glGetShaderSource(ShaderId shader,
 
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
-  l := min(as!s32(buffer_length), as!s32(len(s.Source)))
-  copy(as!char*(source)[0:l], as!char[](s.Source)[0:l])
-  string_length_written[0] = as!GLsizei(l)
+  // TODO: Handle properly.  Mind the null-terminator.
+  writeString(buffer_length, string_length_written, source)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml","OpenGL ES 2.0")
@@ -637,7 +673,7 @@ cmd void glGetShaderiv(ShaderId shader, GLenum parameter, GLint* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.2")
-cmd UniformBlockId glGetUniformBlockIndex(ProgramId program, const GLchar* uniformBlockName) {
+cmd UniformBlockId glGetUniformBlockIndex(ProgramId program, string uniformBlockName) {
   minRequiredVersion(3, 0)
   // TODO
   return ?
@@ -651,6 +687,11 @@ cmd void glGetUniformIndices(ProgramId            program,
                              const GLchar* const* uniformNames,
                              GLuint*              uniformIndices) {
   minRequiredVersion(3, 0)
+  names := uniformNames[0:uniformCount]
+  for i in (0 .. uniformCount) {
+    name := as!string(as!char*(names[i]))
+  }
+  write(uniformIndices[0:uniformCount])
   // TODO
 }
 
@@ -850,6 +891,7 @@ cmd void glProgramBinary(ProgramId   program,
     }
   }
   // TODO
+  read(binary[0:length])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glProgramParameteri.xhtml","OpenGL ES 3.0")
@@ -1226,6 +1268,8 @@ cmd void glShaderBinary(GLsizei         count,
     }
   }
 
+  read(shaders[0:count])
+  read(binary[0:binary_size])
   for i in (0 .. count) {
     // TODO: shaders[i].Binary = ?
   }
@@ -1245,13 +1289,12 @@ cmd void glShaderSource(ShaderId             shader,
   lengths := length[0:count]
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
+  s.Source = as!string(null)
   for i in (0 .. count) {
     str := switch ((length == null) || (lengths[i] < 0)) {
       case true:  as!string(as!char*(sources[i]))
       case false: as!string(as!char*(sources[i])[0:lengths[i]])
     }
-    // TODO: We should have a newline between sources to avoid unintentional
-    // concatenation. The language currently does not support string literals.
     s.Source += str
   }
 }

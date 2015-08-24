@@ -47,7 +47,8 @@ struct GlesImports {
                                                        uint32_t severity, int32_t count,
                                                        uint32_t *ids, uint8_t enabled);
     typedef void(STDCALL *PFNGLDEBUGMESSAGEINSERTKHR)(uint32_t source, uint32_t type, uint32_t id,
-                                                      uint32_t severity, int32_t length, char *buf);
+                                                      uint32_t severity, int32_t length,
+                                                      char *message);
     typedef void(STDCALL *PFNGLDISABLEIEXT)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLENABLEIEXT)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREEXT)(uint32_t target, uint32_t attachment,
@@ -127,6 +128,28 @@ struct GlesImports {
     typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(uint32_t target, int32_t offset, int32_t length,
                                                  uint32_t access);
     typedef uint8_t(STDCALL *PFNGLUNMAPBUFFER)(uint32_t target);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGECALLBACK)(void *callback, void *userParam);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGECONTROL)(uint32_t source, uint32_t type,
+                                                    uint32_t severity, int32_t count, uint32_t *ids,
+                                                    uint8_t enabled);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGEINSERT)(uint32_t source, uint32_t type, uint32_t id,
+                                                   uint32_t severity, int32_t length,
+                                                   char *message);
+    typedef uint32_t(STDCALL *PFNGLGETDEBUGMESSAGELOG)(uint32_t count, int32_t bufSize,
+                                                       uint32_t *sources, uint32_t *types,
+                                                       uint32_t *ids, uint32_t *severities,
+                                                       int32_t *lengths, char *messageLog);
+    typedef void(STDCALL *PFNGLGETOBJECTLABEL)(uint32_t identifier, uint32_t name, int32_t bufSize,
+                                               int32_t *length, char *label);
+    typedef void(STDCALL *PFNGLGETOBJECTPTRLABEL)(void *ptr, int32_t bufSize, int32_t *length,
+                                                  char *label);
+    typedef void(STDCALL *PFNGLGETPOINTERV)(uint32_t pname, void **params);
+    typedef void(STDCALL *PFNGLOBJECTLABEL)(uint32_t identifier, uint32_t name, int32_t length,
+                                            char *label);
+    typedef void(STDCALL *PFNGLOBJECTPTRLABEL)(void *ptr, int32_t length, char *label);
+    typedef void(STDCALL *PFNGLPOPDEBUGGROUP)();
+    typedef void(STDCALL *PFNGLPUSHDEBUGGROUP)(uint32_t source, uint32_t id, int32_t length,
+                                               char *message);
     typedef void(STDCALL *PFNGLDRAWARRAYS)(uint32_t draw_mode, int32_t first_index,
                                            int32_t index_count);
     typedef void(STDCALL *PFNGLDRAWARRAYSINDIRECT)(uint32_t mode, void *indirect);
@@ -1187,7 +1210,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE3D)(uint32_t target, int32_t level,
                                                      uint32_t internalformat, int32_t width,
                                                      int32_t height, int32_t depth, int32_t border,
-                                                     int32_t imageSize, void *data);
+                                                     int32_t image_size, void *data);
     typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE2D)(uint32_t target, int32_t level,
                                                         int32_t xoffset, int32_t yoffset,
                                                         int32_t width, int32_t height,
@@ -1197,7 +1220,7 @@ struct GlesImports {
                                                         int32_t xoffset, int32_t yoffset,
                                                         int32_t zoffset, int32_t width,
                                                         int32_t height, int32_t depth,
-                                                        uint32_t format, int32_t imageSize,
+                                                        uint32_t format, int32_t image_size,
                                                         void *data);
     typedef void(STDCALL *PFNGLCOPYIMAGESUBDATA)(uint32_t srcName, uint32_t srcTarget,
                                                  int32_t srcLevel, int32_t srcX, int32_t srcY,
@@ -1261,7 +1284,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLTEXIMAGE3D)(uint32_t target, int32_t level, int32_t internalformat,
                                            int32_t width, int32_t height, int32_t depth,
                                            int32_t border, uint32_t format, uint32_t type,
-                                           void *pixels);
+                                           void *data);
     typedef void(STDCALL *PFNGLTEXPARAMETERIIV)(uint32_t target, uint32_t pname, int32_t *params);
     typedef void(STDCALL *PFNGLTEXPARAMETERIUIV)(uint32_t target, uint32_t pname, uint32_t *params);
     typedef void(STDCALL *PFNGLTEXPARAMETERF)(uint32_t target, uint32_t parameter, float value);
@@ -1288,7 +1311,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLTEXSUBIMAGE3D)(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t zoffset, int32_t width,
                                               int32_t height, int32_t depth, uint32_t format,
-                                              uint32_t type, void *pixels);
+                                              uint32_t type, void *data);
     typedef void(STDCALL *PFNGLBEGINTRANSFORMFEEDBACK)(uint32_t primitiveMode);
     typedef void(STDCALL *PFNGLBINDTRANSFORMFEEDBACK)(uint32_t target, uint32_t id);
     typedef void(STDCALL *PFNGLDELETETRANSFORMFEEDBACKS)(int32_t n, uint32_t *ids);
@@ -1435,6 +1458,17 @@ struct GlesImports {
     PFNGLISBUFFER glIsBuffer;
     PFNGLMAPBUFFERRANGE glMapBufferRange;
     PFNGLUNMAPBUFFER glUnmapBuffer;
+    PFNGLDEBUGMESSAGECALLBACK glDebugMessageCallback;
+    PFNGLDEBUGMESSAGECONTROL glDebugMessageControl;
+    PFNGLDEBUGMESSAGEINSERT glDebugMessageInsert;
+    PFNGLGETDEBUGMESSAGELOG glGetDebugMessageLog;
+    PFNGLGETOBJECTLABEL glGetObjectLabel;
+    PFNGLGETOBJECTPTRLABEL glGetObjectPtrLabel;
+    PFNGLGETPOINTERV glGetPointerv;
+    PFNGLOBJECTLABEL glObjectLabel;
+    PFNGLOBJECTPTRLABEL glObjectPtrLabel;
+    PFNGLPOPDEBUGGROUP glPopDebugGroup;
+    PFNGLPUSHDEBUGGROUP glPushDebugGroup;
     PFNGLDRAWARRAYS glDrawArrays;
     PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect;
     PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced;

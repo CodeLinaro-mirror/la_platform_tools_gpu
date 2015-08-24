@@ -669,40 +669,40 @@ type GLsizei int32
 type GLintptr int32
 type GLsizeiptr int32
 
-// GLDEBUGPROCKHR is a pointer to a void element.
-type GLDEBUGPROCKHR struct {
+// GLDEBUGPROC is a pointer to a void element.
+type GLDEBUGPROC struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewGLDEBUGPROCKHR returns a GLDEBUGPROCKHR that points to addr in the application pool.
-func NewGLDEBUGPROCKHR(addr uint64) GLDEBUGPROCKHR {
-	return GLDEBUGPROCKHR{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewGLDEBUGPROC returns a GLDEBUGPROC that points to addr in the application pool.
+func NewGLDEBUGPROC(addr uint64) GLDEBUGPROC {
+	return GLDEBUGPROC{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that GLDEBUGPROCKHR points to.
-func (p GLDEBUGPROCKHR) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that GLDEBUGPROC points to.
+func (p GLDEBUGPROC) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLDEBUGPROCKHR) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROCKHR {
+func (p GLDEBUGPROC) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROC {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLDEBUGPROCKHR) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROCKHR {
+func (p GLDEBUGPROC) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROC {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p GLDEBUGPROCKHR) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROCKHR {
+func (p GLDEBUGPROC) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLDEBUGPROC {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // Slice returns a new Voidˢ from the pointer using start and end indices.
-func (p GLDEBUGPROCKHR) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
+func (p GLDEBUGPROC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
@@ -832,6 +832,278 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLenumᵖ is a pointer to a GLenum element.
+type GLenumᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
+func NewGLenumᵖ(addr uint64) GLenumᵖ {
+	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLenumᵖ points to.
+func (p GLenumᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLenumᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLenumᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLenumᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLuintᵖ is a pointer to a GLuint element.
+type GLuintᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLuintᵖ returns a GLuintᵖ that points to addr in the application pool.
+func NewGLuintᵖ(addr uint64) GLuintᵖ {
+	return GLuintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLuintᵖ points to.
+func (p GLuintᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLuint element at the pointer.
+func (p GLuintᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLuint element at the pointer.
+func (p GLuintᵖ) Write(value GLuint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLuint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLuintᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLuintᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLuintᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLuintˢ from the pointer using start and end indices.
+func (p GLuintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLsizeiᵖ is a pointer to a GLsizei element.
+type GLsizeiᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLsizeiᵖ returns a GLsizeiᵖ that points to addr in the application pool.
+func NewGLsizeiᵖ(addr uint64) GLsizeiᵖ {
+	return GLsizeiᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLsizeiᵖ points to.
+func (p GLsizeiᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLsizei element at the pointer.
+func (p GLsizeiᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizei {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLsizei element at the pointer.
+func (p GLsizeiᵖ) Write(value GLsizei, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLsizei{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLsizeiᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLsizeiᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLsizeiᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLsizeiˢ from the pointer using start and end indices.
+func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLcharᵖ is a pointer to a GLchar element.
+type GLcharᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLcharᵖ returns a GLcharᵖ that points to addr in the application pool.
+func NewGLcharᵖ(addr uint64) GLcharᵖ {
+	return GLcharᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLcharᵖ points to.
+func (p GLcharᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// Read reads and returns the GLchar element at the pointer.
+func (p GLcharᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLchar element at the pointer.
+func (p GLcharᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLcharᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLcharᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLcharᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+func (p GLcharᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		i++
+		if b, _ := d.Uint8(); b == 0 {
+			return Charˢ(p.Slice(0, i, ϟs))
+		}
+	}
+}
+
+// Slice returns a new GLcharˢ from the pointer using start and end indices.
+func (p GLcharᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLcharᶜᵖ is a pointer to a GLchar element.
+type GLcharᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLcharᶜᵖ returns a GLcharᶜᵖ that points to addr in the application pool.
+func NewGLcharᶜᵖ(addr uint64) GLcharᶜᵖ {
+	return GLcharᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLcharᶜᵖ points to.
+func (p GLcharᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// Read reads and returns the GLchar element at the pointer.
+func (p GLcharᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLchar element at the pointer.
+func (p GLcharᶜᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLcharᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLcharᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLcharᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		i++
+		if b, _ := d.Uint8(); b == 0 {
+			return Charˢ(p.Slice(0, i, ϟs))
+		}
+	}
+}
+
+// Slice returns a new GLcharˢ from the pointer using start and end indices.
+func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U8ᵖ is a pointer to a uint8 element.
@@ -984,67 +1256,6 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLcharᵖ is a pointer to a GLchar element.
-type GLcharᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLcharᵖ returns a GLcharᵖ that points to addr in the application pool.
-func NewGLcharᵖ(addr uint64) GLcharᵖ {
-	return GLcharᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLcharᵖ points to.
-func (p GLcharᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
-}
-
-// Read reads and returns the GLchar element at the pointer.
-func (p GLcharᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLchar element at the pointer.
-func (p GLcharᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLcharᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLcharᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLcharᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
-func (p GLcharᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
-	for {
-		i++
-		if b, _ := d.Uint8(); b == 0 {
-			return Charˢ(p.Slice(0, i, ϟs))
-		}
-	}
-}
-
-// Slice returns a new GLcharˢ from the pointer using start and end indices.
-func (p GLcharᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // Charᵖ is a pointer to a byte element.
 type Charᵖ struct {
 	binary.Generate
@@ -1154,217 +1365,6 @@ func (p GLuintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLuintᵖ is a pointer to a GLuint element.
-type GLuintᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLuintᵖ returns a GLuintᵖ that points to addr in the application pool.
-func NewGLuintᵖ(addr uint64) GLuintᵖ {
-	return GLuintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLuintᵖ points to.
-func (p GLuintᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLuint element at the pointer.
-func (p GLuintᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLuint element at the pointer.
-func (p GLuintᵖ) Write(value GLuint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLuint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLuintᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLuintᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLuintᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLuintˢ from the pointer using start and end indices.
-func (p GLuintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLcharᶜᵖ is a pointer to a GLchar element.
-type GLcharᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLcharᶜᵖ returns a GLcharᶜᵖ that points to addr in the application pool.
-func NewGLcharᶜᵖ(addr uint64) GLcharᶜᵖ {
-	return GLcharᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLcharᶜᵖ points to.
-func (p GLcharᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
-}
-
-// Read reads and returns the GLchar element at the pointer.
-func (p GLcharᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLchar element at the pointer.
-func (p GLcharᶜᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLcharᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
-func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
-	for {
-		i++
-		if b, _ := d.Uint8(); b == 0 {
-			return Charˢ(p.Slice(0, i, ϟs))
-		}
-	}
-}
-
-// Slice returns a new GLcharˢ from the pointer using start and end indices.
-func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLenumᵖ is a pointer to a GLenum element.
-type GLenumᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
-func NewGLenumᵖ(addr uint64) GLenumᵖ {
-	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLenumᵖ points to.
-func (p GLenumᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLenum element at the pointer.
-func (p GLenumᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLenum element at the pointer.
-func (p GLenumᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLenumᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLenumᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLenumᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLenumˢ from the pointer using start and end indices.
-func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLsizeiᵖ is a pointer to a GLsizei element.
-type GLsizeiᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLsizeiᵖ returns a GLsizeiᵖ that points to addr in the application pool.
-func NewGLsizeiᵖ(addr uint64) GLsizeiᵖ {
-	return GLsizeiᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLsizeiᵖ points to.
-func (p GLsizeiᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLsizei element at the pointer.
-func (p GLsizeiᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizei {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLsizei element at the pointer.
-func (p GLsizeiᵖ) Write(value GLsizei, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLsizei{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLsizeiᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLsizeiᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLsizeiᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLsizeiˢ from the pointer using start and end indices.
-func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Voidᵖᵖ is a pointer to a Voidᵖ element.
@@ -13025,7 +13025,7 @@ func (a *GlCopyImageSubDataEXT) Observations() *atom.Observations { return &a.ob
 type GlDebugMessageCallbackKHR struct {
 	binary.Generate
 	observations atom.Observations
-	Callback     GLDEBUGPROCKHR
+	Callback     GLDEBUGPROC
 	UserParam    Voidᶜᵖ
 }
 
@@ -13100,11 +13100,11 @@ type GlDebugMessageInsertKHR struct {
 	Id           GLuint
 	Severity     GLenum
 	Length       GLsizei
-	Buf          GLcharᶜᵖ
+	Message      GLcharᶜᵖ
 }
 
 func (a *GlDebugMessageInsertKHR) String() string {
-	return fmt.Sprintf("glDebugMessageInsertKHR(source: %v, type: %v, id: %v, severity: %v, length: %v, buf: %v)", a.Source, a.Type, a.Id, a.Severity, a.Length, a.Buf)
+	return fmt.Sprintf("glDebugMessageInsertKHR(source: %v, type: %v, id: %v, severity: %v, length: %v, message: %v)", a.Source, a.Type, a.Id, a.Severity, a.Length, a.Message)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -14734,6 +14734,392 @@ func (a *GlUnmapBuffer) AddWrite(rng memory.Range, id binary.ID) *GlUnmapBuffer 
 func (c *GlUnmapBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUnmapBuffer) Flags() atom.Flags                { return 0 }
 func (a *GlUnmapBuffer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDebugMessageCallback
+////////////////////////////////////////////////////////////////////////////////
+type GlDebugMessageCallback struct {
+	binary.Generate
+	observations atom.Observations
+	Callback     GLDEBUGPROC
+	UserParam    Voidᶜᵖ
+}
+
+func (a *GlDebugMessageCallback) String() string {
+	return fmt.Sprintf("glDebugMessageCallback(callback: %v, userParam: %v)", a.Callback, a.UserParam)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageCallback pointer is returned so that calls can be chained.
+func (a *GlDebugMessageCallback) AddRead(rng memory.Range, id binary.ID) *GlDebugMessageCallback {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageCallback pointer is returned so that calls can be chained.
+func (a *GlDebugMessageCallback) AddWrite(rng memory.Range, id binary.ID) *GlDebugMessageCallback {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDebugMessageCallback) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDebugMessageCallback) Flags() atom.Flags                { return 0 }
+func (a *GlDebugMessageCallback) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDebugMessageControl
+////////////////////////////////////////////////////////////////////////////////
+type GlDebugMessageControl struct {
+	binary.Generate
+	observations atom.Observations
+	Source       GLenum
+	Type         GLenum
+	Severity     GLenum
+	Count        GLsizei
+	Ids          GLuintᶜᵖ
+	Enabled      GLboolean
+}
+
+func (a *GlDebugMessageControl) String() string {
+	return fmt.Sprintf("glDebugMessageControl(source: %v, type: %v, severity: %v, count: %v, ids: %v, enabled: %v)", a.Source, a.Type, a.Severity, a.Count, a.Ids, a.Enabled)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageControl pointer is returned so that calls can be chained.
+func (a *GlDebugMessageControl) AddRead(rng memory.Range, id binary.ID) *GlDebugMessageControl {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageControl pointer is returned so that calls can be chained.
+func (a *GlDebugMessageControl) AddWrite(rng memory.Range, id binary.ID) *GlDebugMessageControl {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDebugMessageControl) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDebugMessageControl) Flags() atom.Flags                { return 0 }
+func (a *GlDebugMessageControl) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDebugMessageInsert
+////////////////////////////////////////////////////////////////////////////////
+type GlDebugMessageInsert struct {
+	binary.Generate
+	observations atom.Observations
+	Source       GLenum
+	Type         GLenum
+	Id           GLuint
+	Severity     GLenum
+	Length       GLsizei
+	Message      GLcharᶜᵖ
+}
+
+func (a *GlDebugMessageInsert) String() string {
+	return fmt.Sprintf("glDebugMessageInsert(source: %v, type: %v, id: %v, severity: %v, length: %v, message: %v)", a.Source, a.Type, a.Id, a.Severity, a.Length, a.Message)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageInsert pointer is returned so that calls can be chained.
+func (a *GlDebugMessageInsert) AddRead(rng memory.Range, id binary.ID) *GlDebugMessageInsert {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDebugMessageInsert pointer is returned so that calls can be chained.
+func (a *GlDebugMessageInsert) AddWrite(rng memory.Range, id binary.ID) *GlDebugMessageInsert {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDebugMessageInsert) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDebugMessageInsert) Flags() atom.Flags                { return 0 }
+func (a *GlDebugMessageInsert) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetDebugMessageLog
+////////////////////////////////////////////////////////////////////////////////
+type GlGetDebugMessageLog struct {
+	binary.Generate
+	observations atom.Observations
+	Count        GLuint
+	BufSize      GLsizei
+	Sources      GLenumᵖ
+	Types        GLenumᵖ
+	Ids          GLuintᵖ
+	Severities   GLenumᵖ
+	Lengths      GLsizeiᵖ
+	MessageLog   GLcharᵖ
+	Result       GLuint
+}
+
+func (a *GlGetDebugMessageLog) String() string {
+	return fmt.Sprintf("glGetDebugMessageLog(count: %v, bufSize: %v, sources: %v, types: %v, ids: %v, severities: %v, lengths: %v, messageLog: %v) → %v", a.Count, a.BufSize, a.Sources, a.Types, a.Ids, a.Severities, a.Lengths, a.MessageLog, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetDebugMessageLog pointer is returned so that calls can be chained.
+func (a *GlGetDebugMessageLog) AddRead(rng memory.Range, id binary.ID) *GlGetDebugMessageLog {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetDebugMessageLog pointer is returned so that calls can be chained.
+func (a *GlGetDebugMessageLog) AddWrite(rng memory.Range, id binary.ID) *GlGetDebugMessageLog {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetDebugMessageLog) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetDebugMessageLog) Flags() atom.Flags                { return 0 }
+func (a *GlGetDebugMessageLog) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetObjectLabel
+////////////////////////////////////////////////////////////////////////////////
+type GlGetObjectLabel struct {
+	binary.Generate
+	observations atom.Observations
+	Identifier   GLenum
+	Name         GLuint
+	BufSize      GLsizei
+	Length       GLsizeiᵖ
+	Label        GLcharᵖ
+}
+
+func (a *GlGetObjectLabel) String() string {
+	return fmt.Sprintf("glGetObjectLabel(identifier: %v, name: %v, bufSize: %v, length: %v, label: %v)", a.Identifier, a.Name, a.BufSize, a.Length, a.Label)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetObjectLabel pointer is returned so that calls can be chained.
+func (a *GlGetObjectLabel) AddRead(rng memory.Range, id binary.ID) *GlGetObjectLabel {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetObjectLabel pointer is returned so that calls can be chained.
+func (a *GlGetObjectLabel) AddWrite(rng memory.Range, id binary.ID) *GlGetObjectLabel {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetObjectLabel) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetObjectLabel) Flags() atom.Flags                { return 0 }
+func (a *GlGetObjectLabel) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetObjectPtrLabel
+////////////////////////////////////////////////////////////////////////////////
+type GlGetObjectPtrLabel struct {
+	binary.Generate
+	observations atom.Observations
+	Ptr          Voidᶜᵖ
+	BufSize      GLsizei
+	Length       GLsizeiᵖ
+	Label        GLcharᵖ
+}
+
+func (a *GlGetObjectPtrLabel) String() string {
+	return fmt.Sprintf("glGetObjectPtrLabel(ptr: %v, bufSize: %v, length: %v, label: %v)", a.Ptr, a.BufSize, a.Length, a.Label)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetObjectPtrLabel pointer is returned so that calls can be chained.
+func (a *GlGetObjectPtrLabel) AddRead(rng memory.Range, id binary.ID) *GlGetObjectPtrLabel {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetObjectPtrLabel pointer is returned so that calls can be chained.
+func (a *GlGetObjectPtrLabel) AddWrite(rng memory.Range, id binary.ID) *GlGetObjectPtrLabel {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetObjectPtrLabel) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetObjectPtrLabel) Flags() atom.Flags                { return 0 }
+func (a *GlGetObjectPtrLabel) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetPointerv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetPointerv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       Voidᵖᵖ
+}
+
+func (a *GlGetPointerv) String() string {
+	return fmt.Sprintf("glGetPointerv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetPointerv pointer is returned so that calls can be chained.
+func (a *GlGetPointerv) AddRead(rng memory.Range, id binary.ID) *GlGetPointerv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetPointerv pointer is returned so that calls can be chained.
+func (a *GlGetPointerv) AddWrite(rng memory.Range, id binary.ID) *GlGetPointerv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetPointerv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetPointerv) Flags() atom.Flags                { return 0 }
+func (a *GlGetPointerv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlObjectLabel
+////////////////////////////////////////////////////////////////////////////////
+type GlObjectLabel struct {
+	binary.Generate
+	observations atom.Observations
+	Identifier   GLenum
+	Name         GLuint
+	Length       GLsizei
+	Label        GLcharᶜᵖ
+}
+
+func (a *GlObjectLabel) String() string {
+	return fmt.Sprintf("glObjectLabel(identifier: %v, name: %v, length: %v, label: %v)", a.Identifier, a.Name, a.Length, a.Label)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlObjectLabel pointer is returned so that calls can be chained.
+func (a *GlObjectLabel) AddRead(rng memory.Range, id binary.ID) *GlObjectLabel {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlObjectLabel pointer is returned so that calls can be chained.
+func (a *GlObjectLabel) AddWrite(rng memory.Range, id binary.ID) *GlObjectLabel {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlObjectLabel) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlObjectLabel) Flags() atom.Flags                { return 0 }
+func (a *GlObjectLabel) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlObjectPtrLabel
+////////////////////////////////////////////////////////////////////////////////
+type GlObjectPtrLabel struct {
+	binary.Generate
+	observations atom.Observations
+	Ptr          Voidᶜᵖ
+	Length       GLsizei
+	Label        GLcharᶜᵖ
+}
+
+func (a *GlObjectPtrLabel) String() string {
+	return fmt.Sprintf("glObjectPtrLabel(ptr: %v, length: %v, label: %v)", a.Ptr, a.Length, a.Label)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlObjectPtrLabel pointer is returned so that calls can be chained.
+func (a *GlObjectPtrLabel) AddRead(rng memory.Range, id binary.ID) *GlObjectPtrLabel {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlObjectPtrLabel pointer is returned so that calls can be chained.
+func (a *GlObjectPtrLabel) AddWrite(rng memory.Range, id binary.ID) *GlObjectPtrLabel {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlObjectPtrLabel) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlObjectPtrLabel) Flags() atom.Flags                { return 0 }
+func (a *GlObjectPtrLabel) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPopDebugGroup
+////////////////////////////////////////////////////////////////////////////////
+type GlPopDebugGroup struct {
+	binary.Generate
+	observations atom.Observations
+}
+
+func (a *GlPopDebugGroup) String() string {
+	return fmt.Sprintf("glPopDebugGroup()")
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPopDebugGroup pointer is returned so that calls can be chained.
+func (a *GlPopDebugGroup) AddRead(rng memory.Range, id binary.ID) *GlPopDebugGroup {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPopDebugGroup pointer is returned so that calls can be chained.
+func (a *GlPopDebugGroup) AddWrite(rng memory.Range, id binary.ID) *GlPopDebugGroup {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPopDebugGroup) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPopDebugGroup) Flags() atom.Flags                { return 0 }
+func (a *GlPopDebugGroup) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPushDebugGroup
+////////////////////////////////////////////////////////////////////////////////
+type GlPushDebugGroup struct {
+	binary.Generate
+	observations atom.Observations
+	Source       GLenum
+	Id           GLuint
+	Length       GLsizei
+	Message      GLcharᶜᵖ
+}
+
+func (a *GlPushDebugGroup) String() string {
+	return fmt.Sprintf("glPushDebugGroup(source: %v, id: %v, length: %v, message: %v)", a.Source, a.Id, a.Length, a.Message)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPushDebugGroup pointer is returned so that calls can be chained.
+func (a *GlPushDebugGroup) AddRead(rng memory.Range, id binary.ID) *GlPushDebugGroup {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPushDebugGroup pointer is returned so that calls can be chained.
+func (a *GlPushDebugGroup) AddWrite(rng memory.Range, id binary.ID) *GlPushDebugGroup {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPushDebugGroup) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPushDebugGroup) Flags() atom.Flags                { return 0 }
+func (a *GlPushDebugGroup) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawArrays
@@ -29544,7 +29930,7 @@ type GlGetFragDataLocation struct {
 	binary.Generate
 	observations atom.Observations
 	Program      ProgramId
-	Name         GLcharᶜᵖ
+	Name         string
 	Result       GLint
 }
 
@@ -29754,7 +30140,7 @@ type GlGetProgramResourceIndex struct {
 	observations     atom.Observations
 	Program          ProgramId
 	ProgramInterface GLenum
-	Name             GLcharᶜᵖ
+	Name             string
 	Result           GLuint
 }
 
@@ -29789,7 +30175,7 @@ type GlGetProgramResourceLocation struct {
 	observations     atom.Observations
 	Program          ProgramId
 	ProgramInterface GLenum
-	Name             GLcharᶜᵖ
+	Name             string
 	Result           GLint
 }
 
@@ -30072,7 +30458,7 @@ type GlGetUniformBlockIndex struct {
 	binary.Generate
 	observations     atom.Observations
 	Program          ProgramId
-	UniformBlockName GLcharᶜᵖ
+	UniformBlockName string
 	Result           UniformBlockId
 }
 
@@ -34272,11 +34658,11 @@ type GlCompressedTexImage3D struct {
 	Depth          GLsizei
 	Border         GLint
 	ImageSize      GLsizei
-	Data           Voidᶜᵖ
+	Data           TexturePointer
 }
 
 func (a *GlCompressedTexImage3D) String() string {
-	return fmt.Sprintf("glCompressedTexImage3D(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, imageSize: %v, data: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.ImageSize, a.Data)
+	return fmt.Sprintf("glCompressedTexImage3D(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, image_size: %v, data: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.ImageSize, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -34354,11 +34740,11 @@ type GlCompressedTexSubImage3D struct {
 	Depth        GLsizei
 	Format       GLenum
 	ImageSize    GLsizei
-	Data         Voidᶜᵖ
+	Data         TexturePointer
 }
 
 func (a *GlCompressedTexSubImage3D) String() string {
-	return fmt.Sprintf("glCompressedTexSubImage3D(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, imageSize: %v, data: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.ImageSize, a.Data)
+	return fmt.Sprintf("glCompressedTexSubImage3D(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, image_size: %v, data: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.ImageSize, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -35478,11 +35864,11 @@ type GlTexImage3D struct {
 	Border         GLint
 	Format         GLenum
 	Type           GLenum
-	Pixels         Voidᶜᵖ
+	Data           TexturePointer
 }
 
 func (a *GlTexImage3D) String() string {
-	return fmt.Sprintf("glTexImage3D(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, format: %v, type: %v, pixels: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.Format, a.Type, a.Pixels)
+	return fmt.Sprintf("glTexImage3D(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, format: %v, type: %v, data: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.Format, a.Type, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -35912,11 +36298,11 @@ type GlTexSubImage3D struct {
 	Depth        GLsizei
 	Format       GLenum
 	Type         GLenum
-	Pixels       Voidᶜᵖ
+	Data         TexturePointer
 }
 
 func (a *GlTexSubImage3D) String() string {
-	return fmt.Sprintf("glTexSubImage3D(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, type: %v, pixels: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.Type, a.Pixels)
+	return fmt.Sprintf("glTexSubImage3D(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, type: %v, data: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.Type, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -38668,6 +39054,15 @@ type Context struct {
 	PixelStorage          GLenumːGLintᵐ
 	Instances             Objects
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// enum FramebufferConstants
+////////////////////////////////////////////////////////////////////////////////
+type FramebufferConstants uint32
+
+const (
+	FramebufferConstants_MAX_DRAW_BUFFERS = FramebufferConstants(8)
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum GLbitfield
@@ -44427,13 +44822,13 @@ func NewGlCopyImageSubDataEXT(SrcName GLuint, SrcTarget GLenum, SrcLevel GLint, 
 	return &GlCopyImageSubDataEXT{SrcName: SrcName, SrcTarget: SrcTarget, SrcLevel: SrcLevel, SrcX: SrcX, SrcY: SrcY, SrcZ: SrcZ, DstName: DstName, DstTarget: DstTarget, DstLevel: DstLevel, DstX: DstX, DstY: DstY, DstZ: DstZ, SrcWidth: SrcWidth, SrcHeight: SrcHeight, SrcDepth: SrcDepth}
 }
 func NewGlDebugMessageCallbackKHR(Callback memory.Pointer, UserParam memory.Pointer) *GlDebugMessageCallbackKHR {
-	return &GlDebugMessageCallbackKHR{Callback: GLDEBUGPROCKHR{Pointer: Callback}, UserParam: Voidᶜᵖ{Pointer: UserParam}}
+	return &GlDebugMessageCallbackKHR{Callback: GLDEBUGPROC{Pointer: Callback}, UserParam: Voidᶜᵖ{Pointer: UserParam}}
 }
 func NewGlDebugMessageControlKHR(Source GLenum, Type GLenum, Severity GLenum, Count GLsizei, Ids memory.Pointer, Enabled GLboolean) *GlDebugMessageControlKHR {
 	return &GlDebugMessageControlKHR{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ{Pointer: Ids}, Enabled: Enabled}
 }
-func NewGlDebugMessageInsertKHR(Source GLenum, Type GLenum, Id GLuint, Severity GLenum, Length GLsizei, Buf memory.Pointer) *GlDebugMessageInsertKHR {
-	return &GlDebugMessageInsertKHR{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Buf: GLcharᶜᵖ{Pointer: Buf}}
+func NewGlDebugMessageInsertKHR(Source GLenum, Type GLenum, Id GLuint, Severity GLenum, Length GLsizei, Message memory.Pointer) *GlDebugMessageInsertKHR {
+	return &GlDebugMessageInsertKHR{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
 }
 func NewGlDisableiEXT(Target GLenum, Index GLuint) *GlDisableiEXT {
 	return &GlDisableiEXT{Target: Target, Index: Index}
@@ -44575,6 +44970,39 @@ func NewGlMapBufferRange(Target GLenum, Offset GLintptr, Length GLsizeiptr, Acce
 }
 func NewGlUnmapBuffer(Target GLenum, Result GLboolean) *GlUnmapBuffer {
 	return &GlUnmapBuffer{Target: Target, Result: Result}
+}
+func NewGlDebugMessageCallback(Callback memory.Pointer, UserParam memory.Pointer) *GlDebugMessageCallback {
+	return &GlDebugMessageCallback{Callback: GLDEBUGPROC{Pointer: Callback}, UserParam: Voidᶜᵖ{Pointer: UserParam}}
+}
+func NewGlDebugMessageControl(Source GLenum, Type GLenum, Severity GLenum, Count GLsizei, Ids memory.Pointer, Enabled GLboolean) *GlDebugMessageControl {
+	return &GlDebugMessageControl{Source: Source, Type: Type, Severity: Severity, Count: Count, Ids: GLuintᶜᵖ{Pointer: Ids}, Enabled: Enabled}
+}
+func NewGlDebugMessageInsert(Source GLenum, Type GLenum, Id GLuint, Severity GLenum, Length GLsizei, Message memory.Pointer) *GlDebugMessageInsert {
+	return &GlDebugMessageInsert{Source: Source, Type: Type, Id: Id, Severity: Severity, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
+}
+func NewGlGetDebugMessageLog(Count GLuint, BufSize GLsizei, Sources memory.Pointer, Types memory.Pointer, Ids memory.Pointer, Severities memory.Pointer, Lengths memory.Pointer, MessageLog memory.Pointer, Result GLuint) *GlGetDebugMessageLog {
+	return &GlGetDebugMessageLog{Count: Count, BufSize: BufSize, Sources: GLenumᵖ{Pointer: Sources}, Types: GLenumᵖ{Pointer: Types}, Ids: GLuintᵖ{Pointer: Ids}, Severities: GLenumᵖ{Pointer: Severities}, Lengths: GLsizeiᵖ{Pointer: Lengths}, MessageLog: GLcharᵖ{Pointer: MessageLog}, Result: Result}
+}
+func NewGlGetObjectLabel(Identifier GLenum, Name GLuint, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectLabel {
+	return &GlGetObjectLabel{Identifier: Identifier, Name: Name, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+}
+func NewGlGetObjectPtrLabel(Ptr memory.Pointer, BufSize GLsizei, Length memory.Pointer, Label memory.Pointer) *GlGetObjectPtrLabel {
+	return &GlGetObjectPtrLabel{Ptr: Voidᶜᵖ{Pointer: Ptr}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Label: GLcharᵖ{Pointer: Label}}
+}
+func NewGlGetPointerv(Pname GLenum, Params memory.Pointer) *GlGetPointerv {
+	return &GlGetPointerv{Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
+}
+func NewGlObjectLabel(Identifier GLenum, Name GLuint, Length GLsizei, Label memory.Pointer) *GlObjectLabel {
+	return &GlObjectLabel{Identifier: Identifier, Name: Name, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+}
+func NewGlObjectPtrLabel(Ptr memory.Pointer, Length GLsizei, Label memory.Pointer) *GlObjectPtrLabel {
+	return &GlObjectPtrLabel{Ptr: Voidᶜᵖ{Pointer: Ptr}, Length: Length, Label: GLcharᶜᵖ{Pointer: Label}}
+}
+func NewGlPopDebugGroup() *GlPopDebugGroup {
+	return &GlPopDebugGroup{}
+}
+func NewGlPushDebugGroup(Source GLenum, Id GLuint, Length GLsizei, Message memory.Pointer) *GlPushDebugGroup {
+	return &GlPushDebugGroup{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
 }
 func NewGlDrawArrays(Draw_mode GLenum, First_index GLint, Index_count GLsizei) *GlDrawArrays {
 	return &GlDrawArrays{DrawMode: Draw_mode, FirstIndex: First_index, IndexCount: Index_count}
@@ -45854,8 +46282,8 @@ func NewGlGetAttachedShaders(Program ProgramId, Buffer_length GLsizei, Shaders_l
 func NewGlGetAttribLocation(Program ProgramId, Name string, Result GLint) *GlGetAttribLocation {
 	return &GlGetAttribLocation{Program: Program, Name: Name, Result: Result}
 }
-func NewGlGetFragDataLocation(Program ProgramId, Name memory.Pointer, Result GLint) *GlGetFragDataLocation {
-	return &GlGetFragDataLocation{Program: Program, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+func NewGlGetFragDataLocation(Program ProgramId, Name string, Result GLint) *GlGetFragDataLocation {
+	return &GlGetFragDataLocation{Program: Program, Name: Name, Result: Result}
 }
 func NewGlGetProgramBinary(Program ProgramId, BufSize GLsizei, Length memory.Pointer, BinaryFormat memory.Pointer, Binary memory.Pointer) *GlGetProgramBinary {
 	return &GlGetProgramBinary{Program: Program, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, BinaryFormat: GLenumᵖ{Pointer: BinaryFormat}, Binary: Voidᵖ{Pointer: Binary}}
@@ -45872,11 +46300,11 @@ func NewGlGetProgramPipelineInfoLog(Pipeline PipelineId, BufSize GLsizei, Length
 func NewGlGetProgramPipelineiv(Pipeline PipelineId, Pname GLenum, Params memory.Pointer) *GlGetProgramPipelineiv {
 	return &GlGetProgramPipelineiv{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
 }
-func NewGlGetProgramResourceIndex(Program ProgramId, ProgramInterface GLenum, Name memory.Pointer, Result GLuint) *GlGetProgramResourceIndex {
-	return &GlGetProgramResourceIndex{Program: Program, ProgramInterface: ProgramInterface, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+func NewGlGetProgramResourceIndex(Program ProgramId, ProgramInterface GLenum, Name string, Result GLuint) *GlGetProgramResourceIndex {
+	return &GlGetProgramResourceIndex{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
 }
-func NewGlGetProgramResourceLocation(Program ProgramId, ProgramInterface GLenum, Name memory.Pointer, Result GLint) *GlGetProgramResourceLocation {
-	return &GlGetProgramResourceLocation{Program: Program, ProgramInterface: ProgramInterface, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+func NewGlGetProgramResourceLocation(Program ProgramId, ProgramInterface GLenum, Name string, Result GLint) *GlGetProgramResourceLocation {
+	return &GlGetProgramResourceLocation{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
 }
 func NewGlGetProgramResourceName(Program ProgramId, ProgramInterface GLenum, Index GLuint, BufSize GLsizei, Length memory.Pointer, Name memory.Pointer) *GlGetProgramResourceName {
 	return &GlGetProgramResourceName{Program: Program, ProgramInterface: ProgramInterface, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Name: GLcharᵖ{Pointer: Name}}
@@ -45899,8 +46327,8 @@ func NewGlGetShaderSource(Shader ShaderId, Buffer_length GLsizei, String_length_
 func NewGlGetShaderiv(Shader ShaderId, Parameter GLenum, Value memory.Pointer) *GlGetShaderiv {
 	return &GlGetShaderiv{Shader: Shader, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
 }
-func NewGlGetUniformBlockIndex(Program ProgramId, UniformBlockName memory.Pointer, Result UniformBlockId) *GlGetUniformBlockIndex {
-	return &GlGetUniformBlockIndex{Program: Program, UniformBlockName: GLcharᶜᵖ{Pointer: UniformBlockName}, Result: Result}
+func NewGlGetUniformBlockIndex(Program ProgramId, UniformBlockName string, Result UniformBlockId) *GlGetUniformBlockIndex {
+	return &GlGetUniformBlockIndex{Program: Program, UniformBlockName: UniformBlockName, Result: Result}
 }
 func NewGlGetUniformIndices(Program ProgramId, UniformCount GLsizei, UniformNames memory.Pointer, UniformIndices memory.Pointer) *GlGetUniformIndices {
 	return &GlGetUniformIndices{Program: Program, UniformCount: UniformCount, UniformNames: GLcharᶜᵖᶜᵖ{Pointer: UniformNames}, UniformIndices: GLuintᵖ{Pointer: UniformIndices}}
@@ -46265,14 +46693,14 @@ func NewGlBindTexture(Target GLenum, Texture TextureId) *GlBindTexture {
 func NewGlCompressedTexImage2D(Target GLenum, Level GLint, Format GLenum, Width GLsizei, Height GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage2D {
 	return &GlCompressedTexImage2D{Target: Target, Level: Level, Format: Format, Width: Width, Height: Height, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlCompressedTexImage3D(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, ImageSize GLsizei, Data memory.Pointer) *GlCompressedTexImage3D {
-	return &GlCompressedTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: ImageSize, Data: Voidᶜᵖ{Pointer: Data}}
+func NewGlCompressedTexImage3D(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage3D {
+	return &GlCompressedTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
 func NewGlCompressedTexSubImage2D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Width GLsizei, Height GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage2D {
 	return &GlCompressedTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlCompressedTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, ImageSize GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3D {
-	return &GlCompressedTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: ImageSize, Data: Voidᶜᵖ{Pointer: Data}}
+func NewGlCompressedTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3D {
+	return &GlCompressedTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
 func NewGlCopyImageSubData(SrcName GLuint, SrcTarget GLenum, SrcLevel GLint, SrcX GLint, SrcY GLint, SrcZ GLint, DstName GLuint, DstTarget GLenum, DstLevel GLint, DstX GLint, DstY GLint, DstZ GLint, SrcWidth GLsizei, SrcHeight GLsizei, SrcDepth GLsizei) *GlCopyImageSubData {
 	return &GlCopyImageSubData{SrcName: SrcName, SrcTarget: SrcTarget, SrcLevel: SrcLevel, SrcX: SrcX, SrcY: SrcY, SrcZ: SrcZ, DstName: DstName, DstTarget: DstTarget, DstLevel: DstLevel, DstX: DstX, DstY: DstY, DstZ: DstZ, SrcWidth: SrcWidth, SrcHeight: SrcHeight, SrcDepth: SrcDepth}
@@ -46367,8 +46795,8 @@ func NewGlTexBufferRange(Target GLenum, Internalformat GLenum, Buffer BufferId, 
 func NewGlTexImage2D(Target GLenum, Level GLint, Internal_format GLint, Width GLsizei, Height GLsizei, Border GLint, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexImage2D {
 	return &GlTexImage2D{Target: Target, Level: Level, InternalFormat: Internal_format, Width: Width, Height: Height, Border: Border, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlTexImage3D(Target GLenum, Level GLint, Internalformat GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexImage3D {
-	return &GlTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: Voidᶜᵖ{Pointer: Pixels}}
+func NewGlTexImage3D(Target GLenum, Level GLint, Internalformat GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexImage3D {
+	return &GlTexImage3D{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
 func NewGlTexParameterIiv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIiv {
 	return &GlTexParameterIiv{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
@@ -46403,8 +46831,8 @@ func NewGlTexStorage3DMultisample(Target GLenum, Samples GLsizei, Internalformat
 func NewGlTexSubImage2D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Width GLsizei, Height GLsizei, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexSubImage2D {
 	return &GlTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexSubImage3D {
-	return &GlTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Pixels: Voidᶜᵖ{Pointer: Pixels}}
+func NewGlTexSubImage3D(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexSubImage3D {
+	return &GlTexSubImage3D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
 func NewGlBeginTransformFeedback(PrimitiveMode GLenum) *GlBeginTransformFeedback {
 	return &GlBeginTransformFeedback{PrimitiveMode: PrimitiveMode}

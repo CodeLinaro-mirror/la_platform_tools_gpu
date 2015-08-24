@@ -92,7 +92,6 @@ EXPORTS
   glGetPixelMapfv
   glGetPixelMapuiv
   glGetPixelMapusv
-  glGetPointerv
   glGetPolygonStipple
   glGetTexEnvfv
   glGetTexEnviv

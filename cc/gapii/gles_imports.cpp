@@ -125,6 +125,26 @@ void GlesImports::Resolve() {
     glMapBufferRange =
             reinterpret_cast<PFNGLMAPBUFFERRANGE>(GetGfxProcAddress("glMapBufferRange", true));
     glUnmapBuffer = reinterpret_cast<PFNGLUNMAPBUFFER>(GetGfxProcAddress("glUnmapBuffer", true));
+    glDebugMessageCallback = reinterpret_cast<PFNGLDEBUGMESSAGECALLBACK>(
+            GetGfxProcAddress("glDebugMessageCallback", true));
+    glDebugMessageControl = reinterpret_cast<PFNGLDEBUGMESSAGECONTROL>(
+            GetGfxProcAddress("glDebugMessageControl", true));
+    glDebugMessageInsert = reinterpret_cast<PFNGLDEBUGMESSAGEINSERT>(
+            GetGfxProcAddress("glDebugMessageInsert", true));
+    glGetDebugMessageLog = reinterpret_cast<PFNGLGETDEBUGMESSAGELOG>(
+            GetGfxProcAddress("glGetDebugMessageLog", true));
+    glGetObjectLabel =
+            reinterpret_cast<PFNGLGETOBJECTLABEL>(GetGfxProcAddress("glGetObjectLabel", true));
+    glGetObjectPtrLabel = reinterpret_cast<PFNGLGETOBJECTPTRLABEL>(
+            GetGfxProcAddress("glGetObjectPtrLabel", true));
+    glGetPointerv = reinterpret_cast<PFNGLGETPOINTERV>(GetGfxProcAddress("glGetPointerv", true));
+    glObjectLabel = reinterpret_cast<PFNGLOBJECTLABEL>(GetGfxProcAddress("glObjectLabel", true));
+    glObjectPtrLabel =
+            reinterpret_cast<PFNGLOBJECTPTRLABEL>(GetGfxProcAddress("glObjectPtrLabel", true));
+    glPopDebugGroup =
+            reinterpret_cast<PFNGLPOPDEBUGGROUP>(GetGfxProcAddress("glPopDebugGroup", true));
+    glPushDebugGroup =
+            reinterpret_cast<PFNGLPUSHDEBUGGROUP>(GetGfxProcAddress("glPushDebugGroup", true));
     glDrawArrays = reinterpret_cast<PFNGLDRAWARRAYS>(GetGfxProcAddress("glDrawArrays", true));
     glDrawArraysIndirect = reinterpret_cast<PFNGLDRAWARRAYSINDIRECT>(
             GetGfxProcAddress("glDrawArraysIndirect", true));

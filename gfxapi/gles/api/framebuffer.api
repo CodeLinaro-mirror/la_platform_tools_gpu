@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+enum FramebufferConstants {
+  MAX_DRAW_BUFFERS = 8 // TODO
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindFramebuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindFramebuffer.xhtml","OpenGL ES 3.1")
@@ -146,13 +150,12 @@ cmd void glClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint s
   minRequiredVersion(3, 0)
   switch (buffer) {
     case GL_DEPTH_STENCIL: {
-      // version 3.0
+      glErrorInvalidValueIf(drawbuffer != 0)
     }
     default: {
       glErrorInvalidEnum(buffer)
     }
   }
-  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glClearBuffer.xhtml","OpenGL ES 3.0")
@@ -161,14 +164,18 @@ cmd void glClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint s
 cmd void glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) {
   minRequiredVersion(3, 0)
   switch (buffer) {
-    case GL_COLOR, GL_DEPTH: {
-      // version 3.0
+    case GL_COLOR: {
+      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      read(value[0:4])
+    }
+    case GL_DEPTH: {
+      glErrorInvalidValueIf(drawbuffer != 0)
+      read(value[0:1])
     }
     default: {
       glErrorInvalidEnum(buffer)
     }
   }
-  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glClearBuffer.xhtml","OpenGL ES 3.0")
@@ -177,14 +184,18 @@ cmd void glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) 
 cmd void glClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint* value) {
   minRequiredVersion(3, 0)
   switch (buffer) {
-    case GL_COLOR, GL_STENCIL: {
-      // version 3.0
+    case GL_COLOR: {
+      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      read(value[0:4])
+    }
+    case GL_STENCIL: {
+      glErrorInvalidValueIf(drawbuffer != 0)
+      read(value[0:1])
     }
     default: {
       glErrorInvalidEnum(buffer)
     }
   }
-  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glClearBuffer.xhtml","OpenGL ES 3.0")
@@ -194,13 +205,13 @@ cmd void glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) 
   minRequiredVersion(3, 0)
   switch (buffer) {
     case GL_COLOR: {
-      // version 3.0
+      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      read(value[0:4])
     }
     default: {
       glErrorInvalidEnum(buffer)
     }
   }
-  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml","OpenGL ES 2.0")
@@ -653,7 +664,9 @@ cmd void glGetFramebufferParameteriv(GLenum target, GLenum pname, GLint* params)
       glErrorInvalidEnum(pname)
     }
   }
+
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml","OpenGL ES 2.0")
@@ -715,6 +728,7 @@ cmd void glInvalidateFramebuffer(GLenum target, GLsizei count, const GLenum* att
     }
   }
 
+  a := attachments[0:count]
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateSubFramebuffer.xhtml","OpenGL ES 3.0")
@@ -736,7 +750,9 @@ cmd void glInvalidateSubFramebuffer(GLenum        target,
       glErrorInvalidEnum(target)
     }
   }
+
   // TODO
+  a := attachments[0:numAttachments]
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml","OpenGL ES 2.0")
@@ -812,9 +828,11 @@ cmd void glReadPixels(GLint   x,
       glErrorInvalidEnum(type)
     }
   }
-  // TODO
-
-  write(data[0:imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)])
+  ctx := GetContext()
+  if (ctx.BoundBuffers[GL_PIXEL_PACK_BUFFER] == 0) && (data != null) {
+    requiredSize := imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)
+    write(data[0:requiredSize])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glReadPixels.xhtml","OpenGL ES 3.2")
@@ -843,7 +861,12 @@ cmd void glReadnPixels(GLint   x,
       glErrorInvalidEnum(type)
     }
   }
-  // TODO
+  ctx := GetContext()
+  if (ctx.BoundBuffers[GL_PIXEL_PACK_BUFFER] == 0) && (data != null) {
+    requiredSize := imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)
+    glErrorInvalidOperationIf(as!GLsizei(requiredSize) > bufSize)
+    write(data[0:requiredSize])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml","OpenGL ES 2.0")

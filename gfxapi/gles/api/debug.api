@@ -29,7 +29,7 @@ cmd void glDebugMessageControl(GLenum        source,
   switch (source) {
     case GL_DEBUG_SOURCE_API, GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_OTHER,
         GL_DEBUG_SOURCE_SHADER_COMPILER, GL_DEBUG_SOURCE_THIRD_PARTY,
-        GL_DEBUG_SOURCE_WINDOW_SYSTEM_, GL_DONT_CARE: {
+        GL_DEBUG_SOURCE_WINDOW_SYSTEM, GL_DONT_CARE: {
       // version 3.2
     }
     default: {
@@ -57,6 +57,7 @@ cmd void glDebugMessageControl(GLenum        source,
     }
   }
   // TODO
+  read(ids[0:count])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDebugMessageInsert.xhtml","OpenGL ES 3.2")
@@ -65,7 +66,7 @@ cmd void glDebugMessageInsert(GLenum        source,
                               GLuint        id,
                               GLenum        severity,
                               GLsizei       length,
-                              const GLchar* buf) {
+                              const GLchar* message) {
   minRequiredVersion(3, 2)
   switch (source) {
     case GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_THIRD_PARTY: {
@@ -95,6 +96,37 @@ cmd void glDebugMessageInsert(GLenum        source,
     }
   }
   // TODO
+  readString(length, message)
+}
+
+macro GLuint GetDebugMessageLog(GLuint   count,
+                                GLsizei  bufSize,
+                                GLenum*  sources,
+                                GLenum*  types,
+                                GLuint*  ids,
+                                GLenum*  severities,
+                                GLsizei* lengths,
+                                GLchar*  messageLog) {
+  l := as!GLuint(?)
+  if sources != null {
+    write(sources[0:l])
+  }
+  if types != null {
+    write(types[0:l])
+  }
+  if ids != null {
+    write(ids[0:l])
+  }
+  if severities != null {
+    write(severities[0:l])
+  }
+  if lengths != null {
+    write(lengths[0:l])
+  }
+  if l > 0 {
+    write(messageLog[0:bufSize]) // TODO: "sum of lengths" bytes.
+  }
+  return l
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetDebugMessageLog.xhtml","OpenGL ES 3.2")
@@ -107,8 +139,7 @@ cmd GLuint glGetDebugMessageLog(GLuint   count,
                                 GLsizei* lengths,
                                 GLchar*  messageLog) {
   minRequiredVersion(3, 2)
-  // TODO
-  return ?
+  return GetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetObjectLabel.xhtml","OpenGL ES 3.2")
@@ -128,12 +159,14 @@ cmd void glGetObjectLabel(GLenum   identifier,
     }
   }
   // TODO
+  writeString(bufSize, length, label)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetObjectPtrLabel.xhtml","OpenGL ES 3.2")
 cmd void glGetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, GLchar* label) {
   minRequiredVersion(3, 2)
   // TODO
+  writeString(bufSize, length, label)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetPointerv.xhtml","OpenGL ES 3.2")
@@ -148,6 +181,7 @@ cmd void glGetPointerv(GLenum pname, void** params) {
     }
   }
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectLabel.xhtml","OpenGL ES 3.2")
@@ -163,12 +197,14 @@ cmd void glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLc
     }
   }
   // TODO
+  readString(length, label)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectPtrLabel.xhtml","OpenGL ES 3.2")
 cmd void glObjectPtrLabel(const void* ptr, GLsizei length, const GLchar* label) {
   minRequiredVersion(3, 2)
   // TODO
+  readString(length, label)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPopDebugGroup.xhtml","OpenGL ES 3.2")
@@ -189,5 +225,6 @@ cmd void glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar
     }
   }
   // TODO
+  readString(length, message)
 }
 

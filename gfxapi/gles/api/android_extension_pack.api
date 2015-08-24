@@ -73,7 +73,7 @@ cmd void glCopyImageSubDataEXT(GLuint  srcName,
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
-cmd void glDebugMessageCallbackKHR(GLDEBUGPROCKHR callback, const void* userParam) {
+cmd void glDebugMessageCallbackKHR(GLDEBUGPROC callback, const void* userParam) {
   requiresExtension(GL_KHR_debug)
   // TODO
 }
@@ -87,6 +87,7 @@ cmd void glDebugMessageControlKHR(GLenum        source,
                                   GLboolean     enabled) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  read(ids[0:count])
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
@@ -95,9 +96,10 @@ cmd void glDebugMessageInsertKHR(GLenum        source,
                                  GLuint        id,
                                  GLenum        severity,
                                  GLsizei       length,
-                                 const GLchar* buf) {
+                                 const GLchar* message) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  readString(length, message)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
@@ -128,8 +130,7 @@ cmd GLuint glGetDebugMessageLogKHR(GLuint   count,
                                    GLsizei* lengths,
                                    GLchar*  messageLog) {
   requiresExtension(GL_KHR_debug)
-  // TODO
-  return ?
+  return GetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
@@ -140,6 +141,7 @@ cmd void glGetObjectLabelKHR(GLenum   identifier,
                              GLchar*  label) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  writeString(bufSize, length, label)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
@@ -149,36 +151,42 @@ cmd void glGetObjectPtrLabelKHR(const void* ptr,
                                 GLchar*     label) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  writeString(bufSize, length, label)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
 cmd void glGetPointervKHR(GLenum pname, void** params) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glGetSamplerParameterIivEXT(SamplerId sampler, GLenum pname, GLint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glGetSamplerParameterIuivEXT(SamplerId sampler, GLenum pname, GLuint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  GetTexParameter(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  GetTexParameter(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
@@ -198,12 +206,14 @@ cmd void glMinSampleShadingOES(GLfloat value) {
 cmd void glObjectLabelKHR(GLenum identifier, GLuint name, GLsizei length, const GLchar* label) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  readString(length, label)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/KHR/debug.txt","GL_KHR_debug")
 cmd void glObjectPtrLabelKHR(const void* ptr, GLsizei length, const GLchar* label) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  readString(length, label)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_tessellation_shader.txt","GL_EXT_tessellation_shader")
@@ -235,18 +245,21 @@ cmd void glPrimitiveBoundingBoxEXT(GLfloat minX,
 cmd void glPushDebugGroupKHR(GLenum source, GLuint id, GLsizei length, const GLchar* message) {
   requiresExtension(GL_KHR_debug)
   // TODO
+  readString(length, message)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glSamplerParameterIivEXT(SamplerId sampler, GLenum pname, const GLint* param) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glSamplerParameterIuivEXT(SamplerId sampler, GLenum pname, const GLuint* param) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_buffer.txt","GL_EXT_texture_buffer")
@@ -268,13 +281,15 @@ cmd void glTexBufferRangeEXT(GLenum     target,
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glTexParameterIivEXT(GLenum target, GLenum pname, const GLint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_border_clamp.txt","GL_EXT_texture_border_clamp")
 cmd void glTexParameterIuivEXT(GLenum target, GLenum pname, const GLuint* params) {
   requiresExtension(GL_EXT_texture_border_clamp)
-  // TODO
+  minRequiredVersion(3, 0)
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_texture_storage_multisample_2d_array.txt","GL_OES_texture_storage_multisample_2d_array")

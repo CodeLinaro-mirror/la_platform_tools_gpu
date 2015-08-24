@@ -238,7 +238,7 @@ bool callGlDebugMessageControlKHR(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDebugMessageInsertKHR(Stack* stack, bool pushReturn) {
-    char* buf = stack->pop<char*>();
+    char* message = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     GLenum severity = stack->pop<GLenum>();
     uint32_t id = stack->pop<uint32_t>();
@@ -246,9 +246,9 @@ bool callGlDebugMessageInsertKHR(Stack* stack, bool pushReturn) {
     GLenum source = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDebugMessageInsertKHR(%u, %u, %" PRIu32 ", %u, %" PRId32 ", %p)", source,
-                   type, id, severity, length, buf);
+                   type, id, severity, length, message);
         if (glDebugMessageInsertKHR != nullptr) {
-            glDebugMessageInsertKHR(source, type, id, severity, length, buf);
+            glDebugMessageInsertKHR(source, type, id, severity, length, message);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDebugMessageInsertKHR returned error: 0x%x", err);
@@ -1336,6 +1336,270 @@ bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glUnmapBuffer");
+        return false;
+    }
+}
+
+bool callGlDebugMessageCallback(Stack* stack, bool pushReturn) {
+    void* userParam = stack->pop<void*>();
+    void* callback = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDebugMessageCallback(%p, %p)", callback, userParam);
+        if (glDebugMessageCallback != nullptr) {
+            glDebugMessageCallback(callback, userParam);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDebugMessageCallback returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDebugMessageCallback");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDebugMessageCallback");
+        return false;
+    }
+}
+
+bool callGlDebugMessageControl(Stack* stack, bool pushReturn) {
+    uint8_t enabled = stack->pop<uint8_t>();
+    uint32_t* ids = stack->pop<uint32_t*>();
+    int32_t count = stack->pop<int32_t>();
+    GLenum severity = stack->pop<GLenum>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum source = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDebugMessageControl(%u, %u, %u, %" PRId32 ", %p, %" PRIu8 ")", source, type,
+                   severity, count, ids, enabled);
+        if (glDebugMessageControl != nullptr) {
+            glDebugMessageControl(source, type, severity, count, ids, enabled);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDebugMessageControl returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDebugMessageControl");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDebugMessageControl");
+        return false;
+    }
+}
+
+bool callGlDebugMessageInsert(Stack* stack, bool pushReturn) {
+    char* message = stack->pop<char*>();
+    int32_t length = stack->pop<int32_t>();
+    GLenum severity = stack->pop<GLenum>();
+    uint32_t id = stack->pop<uint32_t>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum source = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDebugMessageInsert(%u, %u, %" PRIu32 ", %u, %" PRId32 ", %p)", source, type,
+                   id, severity, length, message);
+        if (glDebugMessageInsert != nullptr) {
+            glDebugMessageInsert(source, type, id, severity, length, message);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDebugMessageInsert returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDebugMessageInsert");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDebugMessageInsert");
+        return false;
+    }
+}
+
+bool callGlGetDebugMessageLog(Stack* stack, bool pushReturn) {
+    char* messageLog = stack->pop<char*>();
+    int32_t* lengths = stack->pop<int32_t*>();
+    GLenum* severities = stack->pop<GLenum*>();
+    uint32_t* ids = stack->pop<uint32_t*>();
+    GLenum* types = stack->pop<GLenum*>();
+    GLenum* sources = stack->pop<GLenum*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    uint32_t count = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetDebugMessageLog(%" PRIu32 ", %" PRId32 ", %p, %p, %p, %p, %p, %p)", count,
+                   bufSize, sources, types, ids, severities, lengths, messageLog);
+        if (glGetDebugMessageLog != nullptr) {
+            uint32_t return_value = glGetDebugMessageLog(count, bufSize, sources, types, ids,
+                                                         severities, lengths, messageLog);
+            GAPID_INFO("Returned: %" PRIu32 "", return_value);
+            if (pushReturn) {
+                stack->push<uint32_t>(return_value);
+            }
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetDebugMessageLog returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetDebugMessageLog");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetDebugMessageLog");
+        return false;
+    }
+}
+
+bool callGlGetObjectLabel(Stack* stack, bool pushReturn) {
+    char* label = stack->pop<char*>();
+    int32_t* length = stack->pop<int32_t*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    uint32_t name = stack->pop<uint32_t>();
+    GLenum identifier = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetObjectLabel(%u, %" PRIu32 ", %" PRId32 ", %p, %p)", identifier, name,
+                   bufSize, length, label);
+        if (glGetObjectLabel != nullptr) {
+            glGetObjectLabel(identifier, name, bufSize, length, label);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetObjectLabel returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetObjectLabel");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetObjectLabel");
+        return false;
+    }
+}
+
+bool callGlGetObjectPtrLabel(Stack* stack, bool pushReturn) {
+    char* label = stack->pop<char*>();
+    int32_t* length = stack->pop<int32_t*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    void* ptr = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetObjectPtrLabel(%p, %" PRId32 ", %p, %p)", ptr, bufSize, length, label);
+        if (glGetObjectPtrLabel != nullptr) {
+            glGetObjectPtrLabel(ptr, bufSize, length, label);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetObjectPtrLabel returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetObjectPtrLabel");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetObjectPtrLabel");
+        return false;
+    }
+}
+
+bool callGlGetPointerv(Stack* stack, bool pushReturn) {
+    void** params = stack->pop<void**>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetPointerv(%u, %p)", pname, params);
+        if (glGetPointerv != nullptr) {
+            glGetPointerv(pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetPointerv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetPointerv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetPointerv");
+        return false;
+    }
+}
+
+bool callGlObjectLabel(Stack* stack, bool pushReturn) {
+    char* label = stack->pop<char*>();
+    int32_t length = stack->pop<int32_t>();
+    uint32_t name = stack->pop<uint32_t>();
+    GLenum identifier = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glObjectLabel(%u, %" PRIu32 ", %" PRId32 ", %p)", identifier, name, length,
+                   label);
+        if (glObjectLabel != nullptr) {
+            glObjectLabel(identifier, name, length, label);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glObjectLabel returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glObjectLabel");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glObjectLabel");
+        return false;
+    }
+}
+
+bool callGlObjectPtrLabel(Stack* stack, bool pushReturn) {
+    char* label = stack->pop<char*>();
+    int32_t length = stack->pop<int32_t>();
+    void* ptr = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glObjectPtrLabel(%p, %" PRId32 ", %p)", ptr, length, label);
+        if (glObjectPtrLabel != nullptr) {
+            glObjectPtrLabel(ptr, length, label);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glObjectPtrLabel returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glObjectPtrLabel");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glObjectPtrLabel");
+        return false;
+    }
+}
+
+bool callGlPopDebugGroup(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glPopDebugGroup()");
+        if (glPopDebugGroup != nullptr) {
+            glPopDebugGroup();
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glPopDebugGroup returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPopDebugGroup");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPopDebugGroup");
+        return false;
+    }
+}
+
+bool callGlPushDebugGroup(Stack* stack, bool pushReturn) {
+    char* message = stack->pop<char*>();
+    int32_t length = stack->pop<int32_t>();
+    uint32_t id = stack->pop<uint32_t>();
+    GLenum source = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPushDebugGroup(%u, %" PRIu32 ", %" PRId32 ", %p)", source, id, length,
+                   message);
+        if (glPushDebugGroup != nullptr) {
+            glPushDebugGroup(source, id, length, message);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glPushDebugGroup returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPushDebugGroup");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPushDebugGroup");
         return false;
     }
 }
@@ -11497,7 +11761,7 @@ bool callGlGetFragDataLocation(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetFragDataLocation(%" PRIu32 ", %p)", program, name);
+        GAPID_INFO("glGetFragDataLocation(%" PRIu32 ", %s)", program, name);
         if (glGetFragDataLocation != nullptr) {
             int32_t return_value = glGetFragDataLocation(program, name);
             GAPID_INFO("Returned: %" PRId32 "", return_value);
@@ -11642,7 +11906,7 @@ bool callGlGetProgramResourceIndex(Stack* stack, bool pushReturn) {
     GLenum programInterface = stack->pop<GLenum>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramResourceIndex(%" PRIu32 ", %u, %p)", program, programInterface,
+        GAPID_INFO("glGetProgramResourceIndex(%" PRIu32 ", %u, %s)", program, programInterface,
                    name);
         if (glGetProgramResourceIndex != nullptr) {
             uint32_t return_value = glGetProgramResourceIndex(program, programInterface, name);
@@ -11669,7 +11933,7 @@ bool callGlGetProgramResourceLocation(Stack* stack, bool pushReturn) {
     GLenum programInterface = stack->pop<GLenum>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramResourceLocation(%" PRIu32 ", %u, %p)", program, programInterface,
+        GAPID_INFO("glGetProgramResourceLocation(%" PRIu32 ", %u, %s)", program, programInterface,
                    name);
         if (glGetProgramResourceLocation != nullptr) {
             int32_t return_value = glGetProgramResourceLocation(program, programInterface, name);
@@ -11867,7 +12131,7 @@ bool callGlGetUniformBlockIndex(Stack* stack, bool pushReturn) {
     char* uniformBlockName = stack->pop<char*>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetUniformBlockIndex(%" PRIu32 ", %p)", program, uniformBlockName);
+        GAPID_INFO("glGetUniformBlockIndex(%" PRIu32 ", %s)", program, uniformBlockName);
         if (glGetUniformBlockIndex != nullptr) {
             uint32_t return_value = glGetUniformBlockIndex(program, uniformBlockName);
             GAPID_INFO("Returned: %" PRIu32 "", return_value);
@@ -14705,7 +14969,7 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
 
 bool callGlCompressedTexImage3D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    int32_t imageSize = stack->pop<int32_t>();
+    int32_t image_size = stack->pop<int32_t>();
     int32_t border = stack->pop<int32_t>();
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -14716,10 +14980,10 @@ bool callGlCompressedTexImage3D(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glCompressedTexImage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %p)",
-                   target, level, internalformat, width, height, depth, border, imageSize, data);
+                   target, level, internalformat, width, height, depth, border, image_size, data);
         if (glCompressedTexImage3D != nullptr) {
             glCompressedTexImage3D(target, level, internalformat, width, height, depth, border,
-                                   imageSize, data);
+                                   image_size, data);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glCompressedTexImage3D returned error: 0x%x", err);
@@ -14767,7 +15031,7 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
 
 bool callGlCompressedTexSubImage3D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    int32_t imageSize = stack->pop<int32_t>();
+    int32_t image_size = stack->pop<int32_t>();
     GLenum format = stack->pop<GLenum>();
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -14781,10 +15045,10 @@ bool callGlCompressedTexSubImage3D(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCompressedTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                    target, level, xoffset, yoffset, zoffset, width, height, depth, format,
-                   imageSize, data);
+                   image_size, data);
         if (glCompressedTexSubImage3D != nullptr) {
             glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height,
-                                      depth, format, imageSize, data);
+                                      depth, format, image_size, data);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glCompressedTexSubImage3D returned error: 0x%x", err);
@@ -15533,7 +15797,7 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlTexImage3D(Stack* stack, bool pushReturn) {
-    void* pixels = stack->pop<void*>();
+    void* data = stack->pop<void*>();
     GLenum type = stack->pop<GLenum>();
     GLenum format = stack->pop<GLenum>();
     int32_t border = stack->pop<int32_t>();
@@ -15546,11 +15810,10 @@ bool callGlTexImage3D(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glTexImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %u, %u, %p)",
-                   target, level, internalformat, width, height, depth, border, format, type,
-                   pixels);
+                   target, level, internalformat, width, height, depth, border, format, type, data);
         if (glTexImage3D != nullptr) {
             glTexImage3D(target, level, internalformat, width, height, depth, border, format, type,
-                         pixels);
+                         data);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glTexImage3D returned error: 0x%x", err);
@@ -15836,7 +16099,7 @@ bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlTexSubImage3D(Stack* stack, bool pushReturn) {
-    void* pixels = stack->pop<void*>();
+    void* data = stack->pop<void*>();
     GLenum type = stack->pop<GLenum>();
     GLenum format = stack->pop<GLenum>();
     int32_t depth = stack->pop<int32_t>();
@@ -15851,10 +16114,10 @@ bool callGlTexSubImage3D(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                    target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
-                   pixels);
+                   data);
         if (glTexSubImage3D != nullptr) {
             glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format,
-                            type, pixels);
+                            type, data);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glTexSubImage3D returned error: 0x%x", err);
@@ -17393,6 +17656,17 @@ PFNGLGETBUFFERPOINTERV glGetBufferPointerv = nullptr;
 PFNGLISBUFFER glIsBuffer = nullptr;
 PFNGLMAPBUFFERRANGE glMapBufferRange = nullptr;
 PFNGLUNMAPBUFFER glUnmapBuffer = nullptr;
+PFNGLDEBUGMESSAGECALLBACK glDebugMessageCallback = nullptr;
+PFNGLDEBUGMESSAGECONTROL glDebugMessageControl = nullptr;
+PFNGLDEBUGMESSAGEINSERT glDebugMessageInsert = nullptr;
+PFNGLGETDEBUGMESSAGELOG glGetDebugMessageLog = nullptr;
+PFNGLGETOBJECTLABEL glGetObjectLabel = nullptr;
+PFNGLGETOBJECTPTRLABEL glGetObjectPtrLabel = nullptr;
+PFNGLGETPOINTERV glGetPointerv = nullptr;
+PFNGLOBJECTLABEL glObjectLabel = nullptr;
+PFNGLOBJECTPTRLABEL glObjectPtrLabel = nullptr;
+PFNGLPOPDEBUGGROUP glPopDebugGroup = nullptr;
+PFNGLPUSHDEBUGGROUP glPushDebugGroup = nullptr;
 PFNGLDRAWARRAYS glDrawArrays = nullptr;
 PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect = nullptr;
 PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced = nullptr;
@@ -18130,6 +18404,17 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlIsBuffer, callGlIsBuffer);
     interpreter->registerFunction(Ids::GlMapBufferRange, callGlMapBufferRange);
     interpreter->registerFunction(Ids::GlUnmapBuffer, callGlUnmapBuffer);
+    interpreter->registerFunction(Ids::GlDebugMessageCallback, callGlDebugMessageCallback);
+    interpreter->registerFunction(Ids::GlDebugMessageControl, callGlDebugMessageControl);
+    interpreter->registerFunction(Ids::GlDebugMessageInsert, callGlDebugMessageInsert);
+    interpreter->registerFunction(Ids::GlGetDebugMessageLog, callGlGetDebugMessageLog);
+    interpreter->registerFunction(Ids::GlGetObjectLabel, callGlGetObjectLabel);
+    interpreter->registerFunction(Ids::GlGetObjectPtrLabel, callGlGetObjectPtrLabel);
+    interpreter->registerFunction(Ids::GlGetPointerv, callGlGetPointerv);
+    interpreter->registerFunction(Ids::GlObjectLabel, callGlObjectLabel);
+    interpreter->registerFunction(Ids::GlObjectPtrLabel, callGlObjectPtrLabel);
+    interpreter->registerFunction(Ids::GlPopDebugGroup, callGlPopDebugGroup);
+    interpreter->registerFunction(Ids::GlPushDebugGroup, callGlPushDebugGroup);
     interpreter->registerFunction(Ids::GlDrawArrays, callGlDrawArrays);
     interpreter->registerFunction(Ids::GlDrawArraysIndirect, callGlDrawArraysIndirect);
     interpreter->registerFunction(Ids::GlDrawArraysInstanced, callGlDrawArraysInstanced);
@@ -19014,6 +19299,28 @@ void Initialize() {
             gapic::GetGfxProcAddress("glMapBufferRange", false));
     glUnmapBuffer =
             reinterpret_cast<PFNGLUNMAPBUFFER>(gapic::GetGfxProcAddress("glUnmapBuffer", false));
+    glDebugMessageCallback = reinterpret_cast<PFNGLDEBUGMESSAGECALLBACK>(
+            gapic::GetGfxProcAddress("glDebugMessageCallback", false));
+    glDebugMessageControl = reinterpret_cast<PFNGLDEBUGMESSAGECONTROL>(
+            gapic::GetGfxProcAddress("glDebugMessageControl", false));
+    glDebugMessageInsert = reinterpret_cast<PFNGLDEBUGMESSAGEINSERT>(
+            gapic::GetGfxProcAddress("glDebugMessageInsert", false));
+    glGetDebugMessageLog = reinterpret_cast<PFNGLGETDEBUGMESSAGELOG>(
+            gapic::GetGfxProcAddress("glGetDebugMessageLog", false));
+    glGetObjectLabel = reinterpret_cast<PFNGLGETOBJECTLABEL>(
+            gapic::GetGfxProcAddress("glGetObjectLabel", false));
+    glGetObjectPtrLabel = reinterpret_cast<PFNGLGETOBJECTPTRLABEL>(
+            gapic::GetGfxProcAddress("glGetObjectPtrLabel", false));
+    glGetPointerv =
+            reinterpret_cast<PFNGLGETPOINTERV>(gapic::GetGfxProcAddress("glGetPointerv", false));
+    glObjectLabel =
+            reinterpret_cast<PFNGLOBJECTLABEL>(gapic::GetGfxProcAddress("glObjectLabel", false));
+    glObjectPtrLabel = reinterpret_cast<PFNGLOBJECTPTRLABEL>(
+            gapic::GetGfxProcAddress("glObjectPtrLabel", false));
+    glPopDebugGroup = reinterpret_cast<PFNGLPOPDEBUGGROUP>(
+            gapic::GetGfxProcAddress("glPopDebugGroup", false));
+    glPushDebugGroup = reinterpret_cast<PFNGLPUSHDEBUGGROUP>(
+            gapic::GetGfxProcAddress("glPushDebugGroup", false));
     glDrawArrays =
             reinterpret_cast<PFNGLDRAWARRAYS>(gapic::GetGfxProcAddress("glDrawArrays", false));
     glDrawArraysIndirect = reinterpret_cast<PFNGLDRAWARRAYSINDIRECT>(

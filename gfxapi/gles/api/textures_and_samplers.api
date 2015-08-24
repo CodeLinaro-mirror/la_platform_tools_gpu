@@ -207,15 +207,15 @@ cmd void glCompressedTexImage2D(GLenum         target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCompressedTexImage3D.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCompressedTexImage3D.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCompressedTexImage3D.xhtml","OpenGL ES 3.2")
-cmd void glCompressedTexImage3D(GLenum      target,
-                                GLint       level,
-                                GLenum      internalformat,
-                                GLsizei     width,
-                                GLsizei     height,
-                                GLsizei     depth,
-                                GLint       border,
-                                GLsizei     imageSize,
-                                const void* data) {
+cmd void glCompressedTexImage3D(GLenum         target,
+                                GLint          level,
+                                GLenum         internalformat,
+                                GLsizei        width,
+                                GLsizei        height,
+                                GLsizei        depth,
+                                GLint          border,
+                                GLsizei        image_size,
+                                TexturePointer data) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
@@ -255,6 +255,10 @@ cmd void glCompressedTexImage3D(GLenum      target,
     }
   }
   // TODO
+  ctx := GetContext()
+  if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+    read(as!u8*(data)[0:image_size])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml","OpenGL ES 2.0")
@@ -308,22 +312,26 @@ cmd void glCompressedTexSubImage2D(GLenum         target,
     }
   }
 
+  ctx := GetContext()
+  if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+    read(as!u8*(data)[0:image_size])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCompressedTexSubImage3D.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCompressedTexSubImage3D.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCompressedTexSubImage3D.xhtml","OpenGL ES 3.2")
-cmd void glCompressedTexSubImage3D(GLenum      target,
-                                   GLint       level,
-                                   GLint       xoffset,
-                                   GLint       yoffset,
-                                   GLint       zoffset,
-                                   GLsizei     width,
-                                   GLsizei     height,
-                                   GLsizei     depth,
-                                   GLenum      format,
-                                   GLsizei     imageSize,
-                                   const void* data) {
+cmd void glCompressedTexSubImage3D(GLenum         target,
+                                   GLint          level,
+                                   GLint          xoffset,
+                                   GLint          yoffset,
+                                   GLint          zoffset,
+                                   GLsizei        width,
+                                   GLsizei        height,
+                                   GLsizei        depth,
+                                   GLenum         format,
+                                   GLsizei        image_size,
+                                   TexturePointer data) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
@@ -363,7 +371,10 @@ cmd void glCompressedTexSubImage3D(GLenum      target,
     }
   }
   // TODO
-
+  ctx := GetContext()
+  if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+    read(as!u8*(data)[0:image_size])
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCopyImageSubData.xhtml","OpenGL ES 3.2")
@@ -505,6 +516,7 @@ cmd void glCopyTexSubImage3D(GLenum  target,
 cmd void glDeleteSamplers(GLsizei count, const SamplerId* samplers) {
   minRequiredVersion(3, 0)
   // TODO
+  read(samplers[0:count])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml","OpenGL ES 2.0")
@@ -527,6 +539,7 @@ cmd void glDeleteTextures(GLsizei count, const TextureId* textures) {
 cmd void glGenSamplers(GLsizei count, SamplerId* samplers) {
   minRequiredVersion(3, 0)
   // TODO
+  write(samplers[0:count])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml","OpenGL ES 2.0")
@@ -568,36 +581,34 @@ cmd void glGenerateMipmap(GLenum target) {
 
 }
 
-@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
-cmd void glGetSamplerParameterIiv(SamplerId sampler, GLenum pname, GLint* params) {
-  minRequiredVersion(3, 2)
+macro void GetSamplerParameter(SamplerId sampler, GLenum pname, any params) {
   switch (pname) {
-    case GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
+    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
+        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
+        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
+      // version 3.0
+      params[0] = ?
+    }
+    case GL_TEXTURE_BORDER_COLOR: {
       // version 3.2
+      write(params[0:4])
     }
     default: {
       glErrorInvalidEnum(pname)
     }
   }
-  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
+cmd void glGetSamplerParameterIiv(SamplerId sampler, GLenum pname, GLint* params) {
+  minRequiredVersion(3, 2)
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetSamplerParameterIuiv(SamplerId sampler, GLenum pname, GLuint* params) {
   minRequiredVersion(3, 2)
-  switch (pname) {
-    case GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetSamplerParameter.xhtml","OpenGL ES 3.0")
@@ -605,20 +616,7 @@ cmd void glGetSamplerParameterIuiv(SamplerId sampler, GLenum pname, GLuint* para
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetSamplerParameterfv(SamplerId sampler, GLenum pname, GLfloat* params) {
   minRequiredVersion(3, 0)
-  switch (pname) {
-    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
-        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.0
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetSamplerParameter.xhtml","OpenGL ES 3.0")
@@ -626,20 +624,7 @@ cmd void glGetSamplerParameterfv(SamplerId sampler, GLenum pname, GLfloat* param
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetSamplerParameteriv(SamplerId sampler, GLenum pname, GLint* params) {
   minRequiredVersion(3, 0)
-  switch (pname) {
-    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
-        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.0
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexLevelParameter.xhtml","OpenGL ES 3.1")
@@ -676,6 +661,7 @@ cmd void glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfl
     }
   }
   // TODO
+  params[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexLevelParameter.xhtml","OpenGL ES 3.1")
@@ -712,72 +698,10 @@ cmd void glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLin
     }
   }
   // TODO
-
+  params[0] = ?
 }
 
-@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
-cmd void glGetTexParameterIiv(GLenum target, GLenum pname, GLint* params) {
-  minRequiredVersion(3, 2)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_2D_ARRAY, GL_TEXTURE_2D_MULTISAMPLE,
-        GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_3D, GL_TEXTURE_CUBE_MAP,
-        GL_TEXTURE_CUBE_MAP_ARRAY: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GL_TEXTURE_BASE_LEVEL,
-        GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_IMMUTABLE_FORMAT, GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
-}
-
-@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
-cmd void glGetTexParameterIuiv(GLenum target, GLenum pname, GLuint* params) {
-  minRequiredVersion(3, 2)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_2D_ARRAY, GL_TEXTURE_2D_MULTISAMPLE,
-        GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_3D, GL_TEXTURE_CUBE_MAP,
-        GL_TEXTURE_CUBE_MAP_ARRAY: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GL_TEXTURE_BASE_LEVEL,
-        GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_IMMUTABLE_FORMAT, GL_TEXTURE_IMMUTABLE_LEVELS, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
-}
-
-@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml","OpenGL ES 2.0")
-@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetTexParameter.xhtml","OpenGL ES 3.0")
-@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexParameter.xhtml","OpenGL ES 3.1")
-@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
-cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
+macro void GetTexParameter(GLenum target, GLenum parameter, any params) {
   minRequiredVersion(2, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
@@ -799,24 +723,49 @@ cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
   switch (parameter) {
     case GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
       // version 2.0
+      params[0] = ?
     }
     case GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
         GL_TEXTURE_IMMUTABLE_FORMAT, GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_LOD,
         GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
         GL_TEXTURE_WRAP_R: {
       minRequiredVersion(3, 0)
+      params[0] = ?
     }
     case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_IMAGE_FORMAT_COMPATIBILITY_TYPE,
         GL_TEXTURE_IMMUTABLE_LEVELS: {
       minRequiredVersion(3, 1)
+      params[0] = ?
     }
     case GL_TEXTURE_BORDER_COLOR: {
       minRequiredVersion(3, 2)
+      write(params[0:4])
     }
     default: {
       glErrorInvalidEnum(parameter)
     }
   }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
+cmd void glGetTexParameterIiv(GLenum target, GLenum pname, GLint* params) {
+  minRequiredVersion(3, 2)
+  GetTexParameter(target, pname, params)
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
+cmd void glGetTexParameterIuiv(GLenum target, GLenum pname, GLuint* params) {
+  minRequiredVersion(3, 2)
+  GetTexParameter(target, pname, params)
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetTexParameter.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexParameter.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
+cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
+  minRequiredVersion(2, 0)
+  GetTexParameter(target, parameter, values)
 
   ctx := GetContext()
   tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
@@ -841,44 +790,7 @@ cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetTexParameteriv(GLenum target, GLenum parameter, GLint* values) {
   minRequiredVersion(2, 0)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
-      // version 2.0
-    }
-    case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_CUBE_MAP_ARRAY: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (parameter) {
-    case GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 2.0
-    }
-    case GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_IMMUTABLE_FORMAT, GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
-        GL_TEXTURE_WRAP_R: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_IMAGE_FORMAT_COMPATIBILITY_TYPE,
-        GL_TEXTURE_IMMUTABLE_LEVELS: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(parameter)
-    }
-  }
+  GetTexParameter(target, parameter, values)
 
   ctx := GetContext()
   tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
@@ -942,36 +854,35 @@ cmd void glPixelStorei(GLenum parameter, GLint value) {
   ctx.PixelStorage[parameter] = value
 }
 
-@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
-cmd void glSamplerParameterIiv(SamplerId sampler, GLenum pname, const GLint* param) {
-  minRequiredVersion(3, 2)
+macro void SamplerParameterv(SamplerId sampler, GLenum pname, any params) {
+  minRequiredVersion(3, 0)
   switch (pname) {
-    case GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
+    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
+        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
+        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
+      // version 3.0
+      read(params[0:1])
+    }
+    case GL_TEXTURE_BORDER_COLOR: {
+      minRequiredVersion(3, 2)
+      read(params[0:4])
     }
     default: {
       glErrorInvalidEnum(pname)
     }
   }
-  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
+cmd void glSamplerParameterIiv(SamplerId sampler, GLenum pname, const GLint* param) {
+  minRequiredVersion(3, 2)
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glSamplerParameterIuiv(SamplerId sampler, GLenum pname, const GLuint* param) {
   minRequiredVersion(3, 2)
-  switch (pname) {
-    case GL_TEXTURE_BORDER_COLOR, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glSamplerParameter.xhtml","OpenGL ES 3.0")
@@ -997,20 +908,7 @@ cmd void glSamplerParameterf(SamplerId sampler, GLenum pname, GLfloat param) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glSamplerParameterfv(SamplerId sampler, GLenum pname, const GLfloat* param) {
   minRequiredVersion(3, 0)
-  switch (pname) {
-    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
-        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.0
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glSamplerParameter.xhtml","OpenGL ES 3.0")
@@ -1036,21 +934,7 @@ cmd void glSamplerParameteri(SamplerId sampler, GLenum pname, GLint param) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glSamplerParameteriv(SamplerId sampler, GLenum pname, const GLint* param) {
   minRequiredVersion(3, 0)
-  switch (pname) {
-    case GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD, GL_TEXTURE_WRAP_R,
-        GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.0
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
-
+  SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexBuffer.xhtml","OpenGL ES 3.2")
@@ -1221,16 +1105,16 @@ cmd void glTexImage2D(GLenum         target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glTexImage3D.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexImage3D.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexImage3D.xhtml","OpenGL ES 3.2")
-cmd void glTexImage3D(GLenum      target,
-                      GLint       level,
-                      GLint       internalformat,
-                      GLsizei     width,
-                      GLsizei     height,
-                      GLsizei     depth,
-                      GLint       border,
-                      GLenum      format,
-                      GLenum      type,
-                      const void* pixels) {
+cmd void glTexImage3D(GLenum         target,
+                      GLint          level,
+                      GLint          internalformat,
+                      GLsizei        width,
+                      GLsizei        height,
+                      GLsizei        depth,
+                      GLint          border,
+                      GLenum         format,
+                      GLenum         type,
+                      TexturePointer data) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
@@ -1270,63 +1154,66 @@ cmd void glTexImage3D(GLenum      target,
     }
   }
   // TODO
+  ctx := GetContext()
+  if (data != null) && (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
+    size := imageSize(as!u32(width), as!u32(height), format, type) * as!u32(depth)
+    read(as!u8*(data)[0:size])
+  }
+}
 
+macro void TexParameterv(GLenum target, GLenum pname, any params) {
+  switch (target) {
+    case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
+      // version 2.0
+    }
+    case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_TEXTURE_2D_MULTISAMPLE: {
+      minRequiredVersion(3, 1)
+    }
+    case GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_CUBE_MAP_ARRAY: {
+      minRequiredVersion(3, 2)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (pname) {
+    case GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
+      // version 2.0
+      read(params[0:1])
+    }
+    case GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
+        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_A,
+        GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R, GL_TEXTURE_WRAP_R: {
+      minRequiredVersion(3, 0)
+      read(params[0:1])
+    }
+    case GL_DEPTH_STENCIL_TEXTURE_MODE: {
+      minRequiredVersion(3, 1)
+      read(params[0:1])
+    }
+    case GL_TEXTURE_BORDER_COLOR: {
+      minRequiredVersion(3, 2)
+      read(params[0:4])
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterIiv(GLenum target, GLenum pname, const GLint* params) {
   minRequiredVersion(3, 2)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_2D_ARRAY, GL_TEXTURE_2D_MULTISAMPLE,
-        GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_3D, GL_TEXTURE_CUBE_MAP,
-        GL_TEXTURE_CUBE_MAP_ARRAY: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_BORDER_COLOR,
-        GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterIuiv(GLenum target, GLenum pname, const GLuint* params) {
   minRequiredVersion(3, 2)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_2D_ARRAY, GL_TEXTURE_2D_MULTISAMPLE,
-        GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_3D, GL_TEXTURE_CUBE_MAP,
-        GL_TEXTURE_CUBE_MAP_ARRAY: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_DEPTH_STENCIL_TEXTURE_MODE, GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_BORDER_COLOR,
-        GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE, GL_TEXTURE_MAG_FILTER,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_LOD,
-        GL_TEXTURE_SWIZZLE_A, GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R,
-        GL_TEXTURE_WRAP_R, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 3.2
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml","OpenGL ES 2.0")
@@ -1392,43 +1279,7 @@ cmd void glTexParameterf(GLenum target, GLenum parameter, GLfloat value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) {
   minRequiredVersion(2, 0)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
-      // version 2.0
-    }
-    case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_CUBE_MAP_ARRAY: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 2.0
-    }
-    case GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_A,
-        GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R, GL_TEXTURE_WRAP_R: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_DEPTH_STENCIL_TEXTURE_MODE: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml","OpenGL ES 2.0")
@@ -1494,43 +1345,7 @@ cmd void glTexParameteri(GLenum target, GLenum parameter, GLint value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameteriv(GLenum target, GLenum pname, const GLint* params) {
   minRequiredVersion(2, 0)
-  switch (target) {
-    case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
-      // version 2.0
-    }
-    case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_CUBE_MAP_ARRAY: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(target)
-    }
-  }
-  switch (pname) {
-    case GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T: {
-      // version 2.0
-    }
-    case GL_TEXTURE_BASE_LEVEL, GL_TEXTURE_COMPARE_FUNC, GL_TEXTURE_COMPARE_MODE,
-        GL_TEXTURE_MAX_LEVEL, GL_TEXTURE_MAX_LOD, GL_TEXTURE_MIN_LOD, GL_TEXTURE_SWIZZLE_A,
-        GL_TEXTURE_SWIZZLE_B, GL_TEXTURE_SWIZZLE_G, GL_TEXTURE_SWIZZLE_R, GL_TEXTURE_WRAP_R: {
-      minRequiredVersion(3, 0)
-    }
-    case GL_DEPTH_STENCIL_TEXTURE_MODE: {
-      minRequiredVersion(3, 1)
-    }
-    case GL_TEXTURE_BORDER_COLOR: {
-      minRequiredVersion(3, 2)
-    }
-    default: {
-      glErrorInvalidEnum(pname)
-    }
-  }
-  // TODO
+  TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glTexStorage2D.xhtml","OpenGL ES 3.0")
@@ -1794,19 +1609,19 @@ cmd void glTexSubImage2D(GLenum         target,
     case false: as!u32(url)
   }
   src_stride := imageSize(src_width, 1, format, type)
-  src_size   := src_stride * as!u32(height)
+  src_size := src_stride * as!u32(height)
   dst_stride := imageSize(as!u32(image.Width), 1, format, type)
   dst_offset := imageSize(as!u32(xoffset), 1, format, type) + dst_stride * as!u32(yoffset)
   src_data := switch (pbo == 0) {
     case true:  as!u8*(data)[0:src_size]
-    case false: as!u8*(ctx.Instances.Buffers[pbo].Data)[as!u64(data):as!u64(data)+as!u64(src_size)]
+    case false: as!u8*(ctx.Instances.Buffers[pbo].Data)[as!u64(data):as!u64(data) + as!u64(src_size)]
   }
   line_bytes := imageSize(as!u32(width), 1, format, type)
 
   for y in (0 .. as!u32(height)) {
-    src := (src_stride*y)
-    dst := (dst_stride*y) + dst_offset
-    copy(image.Data[dst:dst+line_bytes], src_data[src:src+line_bytes])
+    src := (src_stride * y)
+    dst := (dst_stride * y) + dst_offset
+    copy(image.Data[dst:dst + line_bytes], src_data[src:src + line_bytes])
   }
 
   fence
@@ -1815,17 +1630,17 @@ cmd void glTexSubImage2D(GLenum         target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glTexSubImage3D.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexSubImage3D.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexSubImage3D.xhtml","OpenGL ES 3.2")
-cmd void glTexSubImage3D(GLenum      target,
-                         GLint       level,
-                         GLint       xoffset,
-                         GLint       yoffset,
-                         GLint       zoffset,
-                         GLsizei     width,
-                         GLsizei     height,
-                         GLsizei     depth,
-                         GLenum      format,
-                         GLenum      type,
-                         const void* pixels) {
+cmd void glTexSubImage3D(GLenum         target,
+                         GLint          level,
+                         GLint          xoffset,
+                         GLint          yoffset,
+                         GLint          zoffset,
+                         GLsizei        width,
+                         GLsizei        height,
+                         GLsizei        depth,
+                         GLenum         format,
+                         GLenum         type,
+                         TexturePointer data) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
@@ -1862,4 +1677,9 @@ cmd void glTexSubImage3D(GLenum      target,
     }
   }
   // TODO
+  ctx := GetContext()
+  if (data != null) && (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
+    size := imageSize(as!u32(width), as!u32(height), format, type) * as!u32(depth)
+    read(as!u8*(data)[0:size])
+  }
 }

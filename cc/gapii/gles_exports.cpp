@@ -48,7 +48,7 @@ EXPORT void STDCALL glDebugMessageCallbackKHR(void* callback, void* userParam);
 EXPORT void STDCALL glDebugMessageControlKHR(uint32_t source, uint32_t type, uint32_t severity,
                                              int32_t count, uint32_t* ids, uint8_t enabled);
 EXPORT void STDCALL glDebugMessageInsertKHR(uint32_t source, uint32_t type, uint32_t id,
-                                            uint32_t severity, int32_t length, char* buf);
+                                            uint32_t severity, int32_t length, char* message);
 EXPORT void STDCALL glDisableiEXT(uint32_t target, uint32_t index);
 EXPORT void STDCALL glEnableiEXT(uint32_t target, uint32_t index);
 EXPORT void STDCALL
@@ -112,6 +112,22 @@ EXPORT uint8_t STDCALL glIsBuffer(uint32_t buffer);
 EXPORT void* STDCALL
 glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
 EXPORT uint8_t STDCALL glUnmapBuffer(uint32_t target);
+EXPORT void STDCALL glDebugMessageCallback(void* callback, void* userParam);
+EXPORT void STDCALL glDebugMessageControl(uint32_t source, uint32_t type, uint32_t severity,
+                                          int32_t count, uint32_t* ids, uint8_t enabled);
+EXPORT void STDCALL glDebugMessageInsert(uint32_t source, uint32_t type, uint32_t id,
+                                         uint32_t severity, int32_t length, char* message);
+EXPORT uint32_t STDCALL glGetDebugMessageLog(uint32_t count, int32_t bufSize, uint32_t* sources,
+                                             uint32_t* types, uint32_t* ids, uint32_t* severities,
+                                             int32_t* lengths, char* messageLog);
+EXPORT void STDCALL
+glGetObjectLabel(uint32_t identifier, uint32_t name, int32_t bufSize, int32_t* length, char* label);
+EXPORT void STDCALL glGetObjectPtrLabel(void* ptr, int32_t bufSize, int32_t* length, char* label);
+EXPORT void STDCALL glGetPointerv(uint32_t pname, void** params);
+EXPORT void STDCALL glObjectLabel(uint32_t identifier, uint32_t name, int32_t length, char* label);
+EXPORT void STDCALL glObjectPtrLabel(void* ptr, int32_t length, char* label);
+EXPORT void STDCALL glPopDebugGroup();
+EXPORT void STDCALL glPushDebugGroup(uint32_t source, uint32_t id, int32_t length, char* message);
 EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count);
 EXPORT void STDCALL glDrawArraysIndirect(uint32_t mode, void* indirect);
 EXPORT void STDCALL
@@ -1024,14 +1040,14 @@ EXPORT void STDCALL glCompressedTexImage2D(uint32_t target, int32_t level, uint3
                                            int32_t image_size, void* data);
 EXPORT void STDCALL glCompressedTexImage3D(uint32_t target, int32_t level, uint32_t internalformat,
                                            int32_t width, int32_t height, int32_t depth,
-                                           int32_t border, int32_t imageSize, void* data);
+                                           int32_t border, int32_t image_size, void* data);
 EXPORT void STDCALL glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t width, int32_t height,
                                               uint32_t format, int32_t image_size, void* data);
 EXPORT void STDCALL glCompressedTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t zoffset, int32_t width,
                                               int32_t height, int32_t depth, uint32_t format,
-                                              int32_t imageSize, void* data);
+                                              int32_t image_size, void* data);
 EXPORT void STDCALL glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                        int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
                                        uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
@@ -1079,7 +1095,7 @@ EXPORT void STDCALL glTexImage2D(uint32_t target, int32_t level, int32_t interna
                                  uint32_t type, void* data);
 EXPORT void STDCALL glTexImage3D(uint32_t target, int32_t level, int32_t internalformat,
                                  int32_t width, int32_t height, int32_t depth, int32_t border,
-                                 uint32_t format, uint32_t type, void* pixels);
+                                 uint32_t format, uint32_t type, void* data);
 EXPORT void STDCALL glTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params);
 EXPORT void STDCALL glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_t* params);
 EXPORT void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value);
@@ -1101,7 +1117,7 @@ EXPORT void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoff
                                     uint32_t type, void* data);
 EXPORT void STDCALL glTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t zoffset, int32_t width, int32_t height,
-                                    int32_t depth, uint32_t format, uint32_t type, void* pixels);
+                                    int32_t depth, uint32_t format, uint32_t type, void* data);
 EXPORT void STDCALL glBeginTransformFeedback(uint32_t primitiveMode);
 EXPORT void STDCALL glBindTransformFeedback(uint32_t target, uint32_t id);
 EXPORT void STDCALL glDeleteTransformFeedbacks(int32_t n, uint32_t* ids);
@@ -1274,6 +1290,19 @@ Spy* spy() {
         gSpy->RegisterSymbol("glIsBuffer", reinterpret_cast<void*>(glIsBuffer));
         gSpy->RegisterSymbol("glMapBufferRange", reinterpret_cast<void*>(glMapBufferRange));
         gSpy->RegisterSymbol("glUnmapBuffer", reinterpret_cast<void*>(glUnmapBuffer));
+        gSpy->RegisterSymbol("glDebugMessageCallback",
+                             reinterpret_cast<void*>(glDebugMessageCallback));
+        gSpy->RegisterSymbol("glDebugMessageControl",
+                             reinterpret_cast<void*>(glDebugMessageControl));
+        gSpy->RegisterSymbol("glDebugMessageInsert", reinterpret_cast<void*>(glDebugMessageInsert));
+        gSpy->RegisterSymbol("glGetDebugMessageLog", reinterpret_cast<void*>(glGetDebugMessageLog));
+        gSpy->RegisterSymbol("glGetObjectLabel", reinterpret_cast<void*>(glGetObjectLabel));
+        gSpy->RegisterSymbol("glGetObjectPtrLabel", reinterpret_cast<void*>(glGetObjectPtrLabel));
+        gSpy->RegisterSymbol("glGetPointerv", reinterpret_cast<void*>(glGetPointerv));
+        gSpy->RegisterSymbol("glObjectLabel", reinterpret_cast<void*>(glObjectLabel));
+        gSpy->RegisterSymbol("glObjectPtrLabel", reinterpret_cast<void*>(glObjectPtrLabel));
+        gSpy->RegisterSymbol("glPopDebugGroup", reinterpret_cast<void*>(glPopDebugGroup));
+        gSpy->RegisterSymbol("glPushDebugGroup", reinterpret_cast<void*>(glPushDebugGroup));
         gSpy->RegisterSymbol("glDrawArrays", reinterpret_cast<void*>(glDrawArrays));
         gSpy->RegisterSymbol("glDrawArraysIndirect", reinterpret_cast<void*>(glDrawArraysIndirect));
         gSpy->RegisterSymbol("glDrawArraysInstanced",
@@ -2323,10 +2352,10 @@ EXPORT void STDCALL glDebugMessageControlKHR(uint32_t source, uint32_t type, uin
     s->glDebugMessageControlKHR(source, type, severity, count, ids, enabled);
 }
 EXPORT void STDCALL glDebugMessageInsertKHR(uint32_t source, uint32_t type, uint32_t id,
-                                            uint32_t severity, int32_t length, char* buf) {
+                                            uint32_t severity, int32_t length, char* message) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDebugMessageInsertKHR(source, type, id, severity, length, buf);
+    s->glDebugMessageInsertKHR(source, type, id, severity, length, message);
 }
 EXPORT void STDCALL glDisableiEXT(uint32_t target, uint32_t index) {
     Spy* s = spy();
@@ -2580,6 +2609,67 @@ EXPORT uint8_t STDCALL glUnmapBuffer(uint32_t target) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glUnmapBuffer(target);
+}
+EXPORT void STDCALL glDebugMessageCallback(void* callback, void* userParam) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDebugMessageCallback(callback, userParam);
+}
+EXPORT void STDCALL glDebugMessageControl(uint32_t source, uint32_t type, uint32_t severity,
+                                          int32_t count, uint32_t* ids, uint8_t enabled) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDebugMessageControl(source, type, severity, count, ids, enabled);
+}
+EXPORT void STDCALL glDebugMessageInsert(uint32_t source, uint32_t type, uint32_t id,
+                                         uint32_t severity, int32_t length, char* message) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDebugMessageInsert(source, type, id, severity, length, message);
+}
+EXPORT uint32_t STDCALL glGetDebugMessageLog(uint32_t count, int32_t bufSize, uint32_t* sources,
+                                             uint32_t* types, uint32_t* ids, uint32_t* severities,
+                                             int32_t* lengths, char* messageLog) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths,
+                                   messageLog);
+}
+EXPORT void STDCALL glGetObjectLabel(uint32_t identifier, uint32_t name, int32_t bufSize,
+                                     int32_t* length, char* label) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetObjectLabel(identifier, name, bufSize, length, label);
+}
+EXPORT void STDCALL glGetObjectPtrLabel(void* ptr, int32_t bufSize, int32_t* length, char* label) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetObjectPtrLabel(ptr, bufSize, length, label);
+}
+EXPORT void STDCALL glGetPointerv(uint32_t pname, void** params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetPointerv(pname, params);
+}
+EXPORT void STDCALL glObjectLabel(uint32_t identifier, uint32_t name, int32_t length, char* label) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glObjectLabel(identifier, name, length, label);
+}
+EXPORT void STDCALL glObjectPtrLabel(void* ptr, int32_t length, char* label) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glObjectPtrLabel(ptr, length, label);
+}
+EXPORT void STDCALL glPopDebugGroup() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPopDebugGroup();
+}
+EXPORT void STDCALL glPushDebugGroup(uint32_t source, uint32_t id, int32_t length, char* message) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPushDebugGroup(source, id, length, message);
 }
 EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
     Spy* s = spy();
@@ -5788,11 +5878,11 @@ EXPORT void STDCALL glCompressedTexImage2D(uint32_t target, int32_t level, uint3
 }
 EXPORT void STDCALL glCompressedTexImage3D(uint32_t target, int32_t level, uint32_t internalformat,
                                            int32_t width, int32_t height, int32_t depth,
-                                           int32_t border, int32_t imageSize, void* data) {
+                                           int32_t border, int32_t image_size, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glCompressedTexImage3D(target, level, internalformat, width, height, depth, border,
-                              imageSize, data);
+                              image_size, data);
 }
 EXPORT void STDCALL glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t width, int32_t height,
@@ -5805,11 +5895,11 @@ EXPORT void STDCALL glCompressedTexSubImage2D(uint32_t target, int32_t level, in
 EXPORT void STDCALL glCompressedTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t zoffset, int32_t width,
                                               int32_t height, int32_t depth, uint32_t format,
-                                              int32_t imageSize, void* data) {
+                                              int32_t image_size, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth,
-                                 format, imageSize, data);
+                                 format, image_size, data);
 }
 EXPORT void STDCALL glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                        int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
@@ -5983,11 +6073,11 @@ EXPORT void STDCALL glTexImage2D(uint32_t target, int32_t level, int32_t interna
 }
 EXPORT void STDCALL glTexImage3D(uint32_t target, int32_t level, int32_t internalformat,
                                  int32_t width, int32_t height, int32_t depth, int32_t border,
-                                 uint32_t format, uint32_t type, void* pixels) {
+                                 uint32_t format, uint32_t type, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glTexImage3D(target, level, internalformat, width, height, depth, border, format, type,
-                    pixels);
+                    data);
 }
 EXPORT void STDCALL glTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params) {
     Spy* s = spy();
@@ -6056,11 +6146,11 @@ EXPORT void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoff
 }
 EXPORT void STDCALL glTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t zoffset, int32_t width, int32_t height,
-                                    int32_t depth, uint32_t format, uint32_t type, void* pixels) {
+                                    int32_t depth, uint32_t format, uint32_t type, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
-                       pixels);
+                       data);
 }
 EXPORT void STDCALL glBeginTransformFeedback(uint32_t primitiveMode) {
     Spy* s = spy();

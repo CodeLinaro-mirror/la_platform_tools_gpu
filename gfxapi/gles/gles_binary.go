@@ -88,7 +88,7 @@ func init() {
 	Namespace.Add((*FramebufferIdˢ)(nil).Class())
 	Namespace.Add((*FramebufferIdᵖ)(nil).Class())
 	Namespace.Add((*FramebufferIdᶜᵖ)(nil).Class())
-	Namespace.Add((*GLDEBUGPROCKHR)(nil).Class())
+	Namespace.Add((*GLDEBUGPROC)(nil).Class())
 	Namespace.Add((*GLXContext)(nil).Class())
 	Namespace.Add((*GLXDrawable)(nil).Class())
 	Namespace.Add((*GLbooleanˢ)(nil).Class())
@@ -233,8 +233,11 @@ func init() {
 	Namespace.Add((*GlCreateShaderProgramv)(nil).Class())
 	Namespace.Add((*GlCreateShaderProgramvEXT)(nil).Class())
 	Namespace.Add((*GlCullFace)(nil).Class())
+	Namespace.Add((*GlDebugMessageCallback)(nil).Class())
 	Namespace.Add((*GlDebugMessageCallbackKHR)(nil).Class())
+	Namespace.Add((*GlDebugMessageControl)(nil).Class())
 	Namespace.Add((*GlDebugMessageControlKHR)(nil).Class())
+	Namespace.Add((*GlDebugMessageInsert)(nil).Class())
 	Namespace.Add((*GlDebugMessageInsertKHR)(nil).Class())
 	Namespace.Add((*GlDeleteBuffers)(nil).Class())
 	Namespace.Add((*GlDeleteFencesNV)(nil).Class())
@@ -398,6 +401,7 @@ func init() {
 	Namespace.Add((*GlGetBufferPointerv)(nil).Class())
 	Namespace.Add((*GlGetBufferPointervOES)(nil).Class())
 	Namespace.Add((*GlGetCoverageModulationTableNV)(nil).Class())
+	Namespace.Add((*GlGetDebugMessageLog)(nil).Class())
 	Namespace.Add((*GlGetDebugMessageLogKHR)(nil).Class())
 	Namespace.Add((*GlGetDriverControlStringQCOM)(nil).Class())
 	Namespace.Add((*GlGetDriverControlsQCOM)(nil).Class())
@@ -423,8 +427,10 @@ func init() {
 	Namespace.Add((*GlGetInternalformativ)(nil).Class())
 	Namespace.Add((*GlGetMultisamplefv)(nil).Class())
 	Namespace.Add((*GlGetNextPerfQueryIdINTEL)(nil).Class())
+	Namespace.Add((*GlGetObjectLabel)(nil).Class())
 	Namespace.Add((*GlGetObjectLabelEXT)(nil).Class())
 	Namespace.Add((*GlGetObjectLabelKHR)(nil).Class())
+	Namespace.Add((*GlGetObjectPtrLabel)(nil).Class())
 	Namespace.Add((*GlGetObjectPtrLabelKHR)(nil).Class())
 	Namespace.Add((*GlGetPathCommandsNV)(nil).Class())
 	Namespace.Add((*GlGetPathCoordsNV)(nil).Class())
@@ -445,6 +451,7 @@ func init() {
 	Namespace.Add((*GlGetPerfQueryDataINTEL)(nil).Class())
 	Namespace.Add((*GlGetPerfQueryIdByNameINTEL)(nil).Class())
 	Namespace.Add((*GlGetPerfQueryInfoINTEL)(nil).Class())
+	Namespace.Add((*GlGetPointerv)(nil).Class())
 	Namespace.Add((*GlGetPointervKHR)(nil).Class())
 	Namespace.Add((*GlGetProgramBinary)(nil).Class())
 	Namespace.Add((*GlGetProgramBinaryOES)(nil).Class())
@@ -581,7 +588,9 @@ func init() {
 	Namespace.Add((*GlMultiDrawElementsEXT)(nil).Class())
 	Namespace.Add((*GlMultiDrawElementsIndirectEXT)(nil).Class())
 	Namespace.Add((*GlNamedFramebufferSampleLocationsfvNV)(nil).Class())
+	Namespace.Add((*GlObjectLabel)(nil).Class())
 	Namespace.Add((*GlObjectLabelKHR)(nil).Class())
+	Namespace.Add((*GlObjectPtrLabel)(nil).Class())
 	Namespace.Add((*GlObjectPtrLabelKHR)(nil).Class())
 	Namespace.Add((*GlPatchParameteri)(nil).Class())
 	Namespace.Add((*GlPatchParameteriEXT)(nil).Class())
@@ -609,6 +618,7 @@ func init() {
 	Namespace.Add((*GlPointAlongPathNV)(nil).Class())
 	Namespace.Add((*GlPolygonModeNV)(nil).Class())
 	Namespace.Add((*GlPolygonOffset)(nil).Class())
+	Namespace.Add((*GlPopDebugGroup)(nil).Class())
 	Namespace.Add((*GlPopDebugGroupKHR)(nil).Class())
 	Namespace.Add((*GlPopGroupMarkerEXT)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBox)(nil).Class())
@@ -687,6 +697,7 @@ func init() {
 	Namespace.Add((*GlProgramUniformMatrix4x2fvEXT)(nil).Class())
 	Namespace.Add((*GlProgramUniformMatrix4x3fv)(nil).Class())
 	Namespace.Add((*GlProgramUniformMatrix4x3fvEXT)(nil).Class())
+	Namespace.Add((*GlPushDebugGroup)(nil).Class())
 	Namespace.Add((*GlPushDebugGroupKHR)(nil).Class())
 	Namespace.Add((*GlPushGroupMarkerEXT)(nil).Class())
 	Namespace.Add((*GlQueryCounterEXT)(nil).Class())
@@ -1007,7 +1018,7 @@ var (
 	binaryIDFramebufferIdˢ                                   = binary.ID{0xf9, 0xf6, 0x67, 0x3a, 0x17, 0x5d, 0xd4, 0x54, 0x8c, 0xa7, 0x85, 0xc0, 0x9c, 0xa3, 0x75, 0x13, 0x6f, 0x10, 0xdd, 0x79}
 	binaryIDFramebufferIdᵖ                                   = binary.ID{0xa8, 0x8f, 0xf4, 0xfd, 0x2d, 0xaa, 0xd4, 0x59, 0x93, 0x48, 0xe6, 0xd8, 0x5d, 0x6b, 0xe8, 0x99, 0x72, 0xfa, 0xac, 0xec}
 	binaryIDFramebufferIdᶜᵖ                                  = binary.ID{0x8c, 0xa3, 0xf6, 0xdf, 0xc9, 0x8e, 0x08, 0xea, 0x92, 0x56, 0x02, 0x6e, 0x96, 0x2c, 0x3c, 0xdc, 0x63, 0x7b, 0x3b, 0x50}
-	binaryIDGLDEBUGPROCKHR                                   = binary.ID{0x21, 0x50, 0x75, 0xdf, 0x3c, 0xfd, 0xf9, 0x5f, 0x40, 0x53, 0x4c, 0x56, 0x10, 0xe8, 0x2f, 0x9a, 0x78, 0x59, 0x7b, 0x48}
+	binaryIDGLDEBUGPROC                                      = binary.ID{0x36, 0x87, 0xee, 0x75, 0xee, 0x46, 0xad, 0x63, 0x07, 0x68, 0x3d, 0xd1, 0xad, 0xfb, 0x63, 0x21, 0xdf, 0x45, 0x96, 0xd3}
 	binaryIDGLXContext                                       = binary.ID{0xf7, 0x65, 0x8c, 0x4a, 0x4f, 0xdf, 0x00, 0xcc, 0xb8, 0x97, 0x64, 0x1a, 0xfd, 0x6c, 0x55, 0x30, 0x4a, 0x0f, 0x1e, 0x25}
 	binaryIDGLXDrawable                                      = binary.ID{0xe8, 0x9a, 0x82, 0x65, 0x61, 0x45, 0x3f, 0x8b, 0x8b, 0x50, 0xeb, 0x6a, 0x04, 0x78, 0x5c, 0xdc, 0x6b, 0xb5, 0xdc, 0x63}
 	binaryIDGLbooleanˢ                                       = binary.ID{0x1e, 0xa5, 0x87, 0x0b, 0xc8, 0x63, 0x6e, 0x02, 0xd7, 0xec, 0x8f, 0x9f, 0x2d, 0x8a, 0xc6, 0x75, 0x5e, 0x99, 0x09, 0x11}
@@ -1122,10 +1133,10 @@ var (
 	binaryIDGlCompileShader                                  = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
 	binaryIDTexturePointer                                   = binary.ID{0x34, 0x65, 0x45, 0xf1, 0x2d, 0xda, 0x70, 0xcb, 0x48, 0xb2, 0x29, 0x9b, 0xb3, 0x7f, 0xe4, 0xa6, 0x96, 0xb2, 0x64, 0xe7}
 	binaryIDGlCompressedTexImage2D                           = binary.ID{0x49, 0x15, 0xd8, 0xed, 0xda, 0xa2, 0x48, 0x84, 0xe3, 0x07, 0xe1, 0x7d, 0x93, 0x8f, 0xb0, 0x65, 0xfa, 0x8d, 0x6b, 0x77}
-	binaryIDGlCompressedTexImage3D                           = binary.ID{0x79, 0xb7, 0x8d, 0xb7, 0xeb, 0xe6, 0x65, 0x24, 0x3f, 0x08, 0xdf, 0x1d, 0x17, 0x8b, 0xe6, 0x2b, 0xe7, 0xde, 0xa4, 0x3f}
+	binaryIDGlCompressedTexImage3D                           = binary.ID{0xa4, 0x6c, 0x48, 0xf2, 0xc0, 0xc4, 0x38, 0x2d, 0x5f, 0x39, 0xb8, 0xe2, 0x24, 0x32, 0x8d, 0xd0, 0x27, 0xf5, 0xd4, 0xa5}
 	binaryIDGlCompressedTexImage3DOES                        = binary.ID{0xa3, 0xa7, 0xe6, 0x12, 0xa7, 0xd5, 0x88, 0x65, 0xd8, 0x46, 0x48, 0xe2, 0x44, 0x1c, 0x4c, 0x79, 0x95, 0x29, 0x66, 0x4b}
 	binaryIDGlCompressedTexSubImage2D                        = binary.ID{0xa1, 0xe7, 0x4b, 0x8e, 0x54, 0x07, 0x10, 0x8a, 0xae, 0x42, 0x96, 0x75, 0x3e, 0x55, 0x1d, 0x3d, 0x58, 0xaf, 0x31, 0x58}
-	binaryIDGlCompressedTexSubImage3D                        = binary.ID{0x2a, 0xc8, 0xe7, 0xe3, 0x0c, 0x09, 0x0c, 0x49, 0xb6, 0x2c, 0x4f, 0xd2, 0xbd, 0xc8, 0xcd, 0xad, 0x57, 0x98, 0x12, 0xfa}
+	binaryIDGlCompressedTexSubImage3D                        = binary.ID{0x64, 0x5f, 0x49, 0x8a, 0x00, 0x48, 0x84, 0xe3, 0xa0, 0xd1, 0x3a, 0x24, 0xbd, 0x40, 0x06, 0x68, 0x5b, 0x75, 0xbf, 0xfd}
 	binaryIDGlCompressedTexSubImage3DOES                     = binary.ID{0xeb, 0x92, 0x20, 0x2a, 0xf2, 0x7a, 0x0c, 0x41, 0xa1, 0x69, 0x03, 0x9d, 0x60, 0x3a, 0xeb, 0xd1, 0x38, 0x3a, 0x60, 0x01}
 	binaryIDGlCopyBufferSubData                              = binary.ID{0xb9, 0x7d, 0x45, 0x29, 0x67, 0x61, 0x18, 0x61, 0x5a, 0xcd, 0x30, 0x4f, 0x9a, 0xaa, 0x35, 0x6d, 0xfe, 0x59, 0xc7, 0x7b}
 	binaryIDGlCopyBufferSubDataNV                            = binary.ID{0xbd, 0x1a, 0x1d, 0x49, 0x41, 0x26, 0x00, 0x1f, 0xe0, 0x2e, 0x25, 0x72, 0x81, 0xe2, 0x38, 0x7e, 0x1f, 0xcb, 0xfb, 0xb1}
@@ -1152,9 +1163,12 @@ var (
 	binaryIDGlCreateShaderProgramv                           = binary.ID{0xc3, 0x69, 0x0b, 0x08, 0xa0, 0x15, 0x9f, 0xcd, 0x53, 0xc1, 0x81, 0x31, 0x23, 0x53, 0x6e, 0xcd, 0x42, 0x47, 0x60, 0xf9}
 	binaryIDGlCreateShaderProgramvEXT                        = binary.ID{0xb3, 0x09, 0x45, 0xba, 0xcc, 0xb7, 0x80, 0x65, 0x3e, 0x1a, 0xf8, 0x37, 0xc8, 0x22, 0xe1, 0x22, 0xda, 0xbe, 0xf8, 0x98}
 	binaryIDGlCullFace                                       = binary.ID{0xbb, 0xec, 0x72, 0x6d, 0xbc, 0x88, 0x95, 0xe8, 0xe0, 0x4d, 0x83, 0xd4, 0x75, 0xc2, 0xa1, 0x5d, 0x25, 0xdf, 0x38, 0x1f}
-	binaryIDGlDebugMessageCallbackKHR                        = binary.ID{0x36, 0x25, 0xc3, 0x9f, 0xa8, 0x55, 0xaa, 0x1f, 0x73, 0x17, 0xd4, 0xbd, 0x8d, 0x87, 0x36, 0x27, 0x16, 0xba, 0x4b, 0x9b}
+	binaryIDGlDebugMessageCallback                           = binary.ID{0xf2, 0x82, 0x36, 0x97, 0x6c, 0xde, 0x93, 0xb3, 0x9e, 0x61, 0x56, 0x04, 0x84, 0x7b, 0x61, 0x3f, 0xd5, 0x71, 0x49, 0xfb}
+	binaryIDGlDebugMessageCallbackKHR                        = binary.ID{0x1b, 0x57, 0x2f, 0x06, 0x13, 0xa2, 0x44, 0x36, 0x99, 0xa9, 0x62, 0x54, 0xc8, 0xaf, 0x0c, 0xf8, 0xdc, 0xd1, 0x12, 0xcd}
+	binaryIDGlDebugMessageControl                            = binary.ID{0xaf, 0x0d, 0x82, 0xa6, 0xb6, 0x67, 0xe3, 0x7e, 0xc7, 0x08, 0xa3, 0x4a, 0x19, 0xd6, 0x97, 0x49, 0x08, 0x32, 0xaa, 0x3a}
 	binaryIDGlDebugMessageControlKHR                         = binary.ID{0xb1, 0x31, 0xb6, 0xa5, 0x8f, 0x6a, 0xf2, 0x90, 0x81, 0xae, 0x0d, 0xd6, 0x88, 0x1e, 0x32, 0x25, 0xf7, 0xe2, 0x7b, 0x4a}
-	binaryIDGlDebugMessageInsertKHR                          = binary.ID{0x08, 0x2d, 0x41, 0x74, 0xbd, 0x81, 0x17, 0x57, 0xa0, 0x23, 0x02, 0x6d, 0x3b, 0x7e, 0xd9, 0x13, 0x65, 0x36, 0xa6, 0x14}
+	binaryIDGlDebugMessageInsert                             = binary.ID{0x71, 0xc4, 0xb2, 0xf8, 0x33, 0xf4, 0xda, 0x45, 0x07, 0x79, 0x78, 0x09, 0x79, 0xd5, 0x98, 0xec, 0xc7, 0x2f, 0x8e, 0x64}
+	binaryIDGlDebugMessageInsertKHR                          = binary.ID{0x3b, 0x84, 0x94, 0xc6, 0x54, 0x55, 0x96, 0x23, 0x13, 0xdb, 0xdc, 0x92, 0xb8, 0xa7, 0x13, 0xf9, 0xd0, 0x97, 0xcc, 0xc6}
 	binaryIDGlDeleteBuffers                                  = binary.ID{0x8e, 0xbe, 0xc5, 0xd4, 0x07, 0xe6, 0x79, 0xe1, 0x39, 0x7c, 0x8a, 0xfe, 0xd4, 0x18, 0xe1, 0xbd, 0xbf, 0x43, 0xb9, 0xc1}
 	binaryIDGlDeleteFencesNV                                 = binary.ID{0x4e, 0x46, 0xf9, 0x3e, 0x9c, 0x75, 0x22, 0x8a, 0xc4, 0x4a, 0x85, 0xcc, 0xf6, 0xb1, 0xc0, 0x92, 0x60, 0x36, 0x47, 0x0f}
 	binaryIDGlDeleteFramebuffers                             = binary.ID{0x9c, 0x20, 0xe5, 0xad, 0x48, 0xfd, 0xe0, 0x88, 0x0f, 0xc4, 0x0d, 0xa2, 0xc5, 0x33, 0x39, 0xbf, 0x8e, 0x4a, 0x2f, 0x12}
@@ -1317,6 +1331,7 @@ var (
 	binaryIDGlGetBufferPointerv                              = binary.ID{0xa3, 0x3f, 0x91, 0xab, 0xed, 0x6d, 0x34, 0xb9, 0x97, 0xb3, 0xcd, 0x76, 0xbd, 0x24, 0x18, 0x2f, 0xeb, 0x6b, 0xcc, 0x42}
 	binaryIDGlGetBufferPointervOES                           = binary.ID{0x84, 0x51, 0x92, 0x9d, 0x1d, 0xa4, 0xbe, 0x64, 0x41, 0x2f, 0xc1, 0x60, 0x5d, 0x8e, 0xe1, 0xa0, 0xe7, 0xf3, 0x1a, 0x36}
 	binaryIDGlGetCoverageModulationTableNV                   = binary.ID{0xb6, 0xb3, 0x8f, 0x1c, 0x55, 0x33, 0x73, 0x67, 0x92, 0x79, 0xc6, 0x6f, 0x5d, 0x07, 0xc3, 0x74, 0x7f, 0x3b, 0xec, 0xab}
+	binaryIDGlGetDebugMessageLog                             = binary.ID{0xe0, 0xce, 0xbf, 0x81, 0x6a, 0x1e, 0x78, 0x85, 0xd1, 0xa7, 0x9f, 0x16, 0x53, 0x5c, 0xf9, 0x10, 0xfd, 0xeb, 0xcc, 0x10}
 	binaryIDGlGetDebugMessageLogKHR                          = binary.ID{0xc5, 0x43, 0xda, 0xf0, 0x66, 0xec, 0xe4, 0x25, 0xde, 0x85, 0x16, 0x13, 0xb8, 0xc1, 0x69, 0x7c, 0x35, 0xc9, 0x2e, 0x13}
 	binaryIDGlGetDriverControlStringQCOM                     = binary.ID{0xce, 0xe6, 0x63, 0xc6, 0x0a, 0xbc, 0x22, 0x2d, 0xaa, 0xd6, 0xdb, 0xba, 0x4a, 0x24, 0xe1, 0x48, 0xb7, 0x36, 0x94, 0x5b}
 	binaryIDGlGetDriverControlsQCOM                          = binary.ID{0x0e, 0xcc, 0x1b, 0x68, 0xf8, 0xdd, 0xa4, 0x1a, 0xac, 0xad, 0xe0, 0x80, 0x18, 0xe9, 0x5f, 0xe9, 0xd2, 0x88, 0x59, 0xa5}
@@ -1325,7 +1340,7 @@ var (
 	binaryIDGlGetFirstPerfQueryIdINTEL                       = binary.ID{0x8c, 0x0a, 0xf0, 0x07, 0x36, 0x36, 0xa9, 0xa0, 0x66, 0xa4, 0x03, 0x13, 0xc1, 0x98, 0x59, 0xa9, 0x88, 0x62, 0x7d, 0xac}
 	binaryIDGlGetFloati_vNV                                  = binary.ID{0x74, 0x0d, 0xb3, 0x0a, 0x9b, 0x26, 0x5b, 0xea, 0x0a, 0xb1, 0x3e, 0xd5, 0xd7, 0xdb, 0x8d, 0xea, 0xea, 0xf6, 0x98, 0x30}
 	binaryIDGlGetFloatv                                      = binary.ID{0x94, 0x62, 0x23, 0x02, 0x41, 0xc5, 0x0a, 0xdd, 0x50, 0x4b, 0x7a, 0x25, 0x66, 0x61, 0x71, 0xfe, 0x57, 0xe9, 0x49, 0x51}
-	binaryIDGlGetFragDataLocation                            = binary.ID{0x69, 0x78, 0xe9, 0xa0, 0x6b, 0x1f, 0xcf, 0xdf, 0x50, 0x07, 0x01, 0xbf, 0x0a, 0x94, 0xa7, 0x06, 0x8f, 0x01, 0x3e, 0x60}
+	binaryIDGlGetFragDataLocation                            = binary.ID{0x29, 0x8e, 0x32, 0x7e, 0x15, 0x0a, 0x34, 0x23, 0x9d, 0x88, 0x2d, 0x6f, 0xc6, 0x59, 0x0c, 0xa9, 0x8a, 0x7b, 0xac, 0xe5}
 	binaryIDGlGetFramebufferAttachmentParameteriv            = binary.ID{0x36, 0x48, 0xc4, 0xc9, 0x4f, 0x83, 0xb0, 0xad, 0xc9, 0x09, 0x01, 0xbd, 0x2f, 0x6c, 0x4b, 0x1b, 0x31, 0x03, 0xa4, 0xe5}
 	binaryIDGlGetFramebufferParameteriv                      = binary.ID{0xcb, 0xf7, 0x76, 0xe9, 0x4e, 0xd2, 0x1e, 0x5f, 0x91, 0xf0, 0xf1, 0xb1, 0xb5, 0xa7, 0xd2, 0xc6, 0x1d, 0x52, 0x99, 0x19}
 	binaryIDGlGetGraphicsResetStatus                         = binary.ID{0xa6, 0x19, 0xfa, 0xc1, 0xfc, 0xea, 0x81, 0x51, 0xa7, 0x72, 0x76, 0xe7, 0x3d, 0xdc, 0x47, 0x1d, 0x53, 0x28, 0x36, 0xbf}
@@ -1342,8 +1357,10 @@ var (
 	binaryIDGlGetInternalformativ                            = binary.ID{0xd6, 0x9f, 0xa9, 0xb2, 0xb0, 0xbd, 0x70, 0xa0, 0xba, 0x87, 0xec, 0x5f, 0x03, 0x10, 0xb1, 0xd7, 0xee, 0xc5, 0x0a, 0x34}
 	binaryIDGlGetMultisamplefv                               = binary.ID{0x4f, 0x4f, 0x2c, 0x18, 0xc1, 0xf9, 0x7d, 0xe1, 0x25, 0x96, 0xfc, 0x2e, 0x78, 0xc0, 0x28, 0x73, 0x45, 0xc8, 0x26, 0xfb}
 	binaryIDGlGetNextPerfQueryIdINTEL                        = binary.ID{0x40, 0x59, 0xa0, 0xca, 0x12, 0x68, 0xce, 0x83, 0x82, 0x8d, 0xe1, 0x13, 0x84, 0xd3, 0x5c, 0x51, 0xb4, 0xd3, 0x98, 0xac}
+	binaryIDGlGetObjectLabel                                 = binary.ID{0x44, 0x4d, 0xe7, 0x33, 0x03, 0xd0, 0xa6, 0xa4, 0x07, 0x28, 0x41, 0x06, 0xd4, 0x0d, 0x3c, 0xbf, 0x1c, 0xdb, 0x95, 0xb5}
 	binaryIDGlGetObjectLabelEXT                              = binary.ID{0xc3, 0xa6, 0x4f, 0x4f, 0xcb, 0x22, 0x90, 0x13, 0x19, 0xcc, 0x24, 0x5a, 0xc8, 0x8d, 0xb5, 0x16, 0x98, 0xc6, 0x0b, 0x1d}
 	binaryIDGlGetObjectLabelKHR                              = binary.ID{0xef, 0x64, 0x7b, 0xb2, 0x9f, 0x0b, 0x84, 0xb3, 0xea, 0x92, 0xe3, 0x2c, 0xcb, 0xfd, 0x6c, 0x74, 0x86, 0xe1, 0x7c, 0xc4}
+	binaryIDGlGetObjectPtrLabel                              = binary.ID{0x7a, 0x87, 0x80, 0xa1, 0xee, 0x38, 0x9a, 0x5a, 0x41, 0xa9, 0x71, 0x42, 0x35, 0x9a, 0x9d, 0x6c, 0x21, 0x48, 0xff, 0xf0}
 	binaryIDGlGetObjectPtrLabelKHR                           = binary.ID{0xae, 0x26, 0x9b, 0xde, 0xf6, 0xae, 0x97, 0xb5, 0x02, 0x42, 0x41, 0x71, 0x90, 0x01, 0xf7, 0x62, 0xbe, 0x5d, 0x02, 0xbf}
 	binaryIDGlGetPathCommandsNV                              = binary.ID{0xdd, 0x73, 0xac, 0xc4, 0x03, 0x8f, 0xf8, 0x20, 0xb9, 0x1a, 0xe9, 0xbd, 0xba, 0xd7, 0x43, 0x61, 0xf6, 0x91, 0x8b, 0x00}
 	binaryIDGlGetPathCoordsNV                                = binary.ID{0x7e, 0xc7, 0xcc, 0x83, 0x00, 0xf6, 0x20, 0xa6, 0x36, 0xa3, 0x68, 0xf5, 0xdc, 0x55, 0x28, 0xa4, 0x5b, 0x1a, 0xad, 0x9b}
@@ -1364,6 +1381,7 @@ var (
 	binaryIDGlGetPerfQueryDataINTEL                          = binary.ID{0xd0, 0x68, 0xcf, 0x6f, 0x67, 0x1b, 0x32, 0x50, 0x11, 0x01, 0x11, 0x3a, 0xd3, 0xcb, 0x91, 0x5e, 0xbe, 0x5a, 0xc4, 0x33}
 	binaryIDGlGetPerfQueryIdByNameINTEL                      = binary.ID{0xfe, 0xab, 0x96, 0x8e, 0x39, 0xe7, 0x6c, 0xa5, 0x90, 0x92, 0x96, 0x4f, 0x5d, 0xf5, 0xfb, 0xcf, 0x93, 0xa8, 0xe4, 0xc6}
 	binaryIDGlGetPerfQueryInfoINTEL                          = binary.ID{0x2c, 0x21, 0x2e, 0xb3, 0x3d, 0x95, 0x9e, 0x73, 0x71, 0x4e, 0x5a, 0xda, 0x66, 0xe0, 0x8e, 0xad, 0x81, 0xe9, 0x90, 0xfd}
+	binaryIDGlGetPointerv                                    = binary.ID{0xed, 0x0b, 0xf7, 0xf8, 0xa3, 0x17, 0x9d, 0xc3, 0xce, 0xec, 0x4d, 0xdf, 0xfe, 0x74, 0xfd, 0xa3, 0xee, 0x5d, 0xf8, 0x6f}
 	binaryIDGlGetPointervKHR                                 = binary.ID{0xcc, 0x77, 0xd0, 0xa7, 0xbf, 0x3a, 0x4b, 0x5e, 0xb7, 0x4d, 0x1f, 0xfb, 0x6f, 0xbd, 0x53, 0xfd, 0x63, 0xcd, 0xc5, 0x59}
 	binaryIDGlGetProgramBinary                               = binary.ID{0x3d, 0x3d, 0xc6, 0x41, 0xb6, 0x85, 0x89, 0xcd, 0xb5, 0xb6, 0xfe, 0xbf, 0x7a, 0x70, 0xa2, 0x5c, 0xa5, 0x9f, 0x9a, 0x6a}
 	binaryIDGlGetProgramBinaryOES                            = binary.ID{0x4b, 0x9a, 0x69, 0xaf, 0x98, 0x33, 0x3d, 0xf2, 0xbf, 0xc9, 0x81, 0xec, 0x0d, 0x6a, 0xc4, 0xc4, 0x0a, 0x29, 0xd8, 0xd2}
@@ -1373,8 +1391,8 @@ var (
 	binaryIDGlGetProgramPipelineInfoLogEXT                   = binary.ID{0x26, 0x52, 0x35, 0x30, 0x06, 0xad, 0xc9, 0x8a, 0xc1, 0xfb, 0xa2, 0x95, 0xa8, 0x53, 0x67, 0x95, 0x1b, 0x2c, 0xba, 0xd6}
 	binaryIDGlGetProgramPipelineiv                           = binary.ID{0x05, 0xde, 0x13, 0xd5, 0xac, 0x79, 0xe4, 0x04, 0x27, 0x00, 0xf3, 0x39, 0xff, 0x2d, 0xf8, 0x1e, 0x8e, 0xba, 0xc3, 0x6a}
 	binaryIDGlGetProgramPipelineivEXT                        = binary.ID{0x89, 0xb7, 0x2a, 0xe1, 0xdd, 0xef, 0xde, 0xee, 0xc6, 0xb8, 0x5c, 0x41, 0xf2, 0x15, 0xc6, 0xf6, 0x6b, 0x9e, 0x4f, 0x5e}
-	binaryIDGlGetProgramResourceIndex                        = binary.ID{0xd9, 0xd7, 0xf7, 0xd9, 0x35, 0xda, 0x79, 0xce, 0x33, 0xa1, 0x8a, 0x06, 0xd7, 0x2b, 0x42, 0x54, 0x14, 0x97, 0x09, 0x19}
-	binaryIDGlGetProgramResourceLocation                     = binary.ID{0x67, 0x4e, 0x00, 0xde, 0x99, 0xe5, 0x4f, 0xdc, 0x07, 0xce, 0x31, 0x79, 0x36, 0xe3, 0xf8, 0xbd, 0xb7, 0xc2, 0x2c, 0x79}
+	binaryIDGlGetProgramResourceIndex                        = binary.ID{0xdd, 0x38, 0xd6, 0x81, 0x8e, 0x8e, 0x7c, 0xaf, 0x57, 0xbf, 0x3f, 0xe1, 0x64, 0x0c, 0xda, 0xe1, 0x3c, 0xe5, 0x38, 0x29}
+	binaryIDGlGetProgramResourceLocation                     = binary.ID{0xd5, 0x02, 0x59, 0x7d, 0x2e, 0xa9, 0x9c, 0xf0, 0xe4, 0xd3, 0xc9, 0xfa, 0xe2, 0x03, 0x91, 0x57, 0x82, 0x5f, 0x99, 0x09}
 	binaryIDGlGetProgramResourceName                         = binary.ID{0xfc, 0x79, 0x9f, 0x5a, 0x73, 0xef, 0x0a, 0xbb, 0xc2, 0x87, 0xef, 0xe1, 0xad, 0xf3, 0xe2, 0xb5, 0x55, 0x5c, 0xe3, 0x9c}
 	binaryIDGlGetProgramResourcefvNV                         = binary.ID{0x52, 0xad, 0x56, 0xef, 0x0e, 0x42, 0x90, 0xc5, 0x36, 0x87, 0x35, 0x47, 0x38, 0x16, 0x47, 0x8b, 0x9f, 0x6b, 0x0a, 0xb1}
 	binaryIDGlGetProgramResourceiv                           = binary.ID{0xb3, 0x2d, 0x8c, 0xc9, 0xe9, 0x5d, 0xb3, 0x29, 0xd1, 0xda, 0xbe, 0x04, 0xf4, 0xba, 0xe3, 0x89, 0x75, 0x01, 0xae, 0xcc}
@@ -1421,7 +1439,7 @@ var (
 	binaryIDGlGetTextureSamplerHandleNV                      = binary.ID{0xb4, 0x57, 0x1a, 0x07, 0x81, 0x60, 0x6d, 0x9e, 0x2e, 0x6d, 0x54, 0x6d, 0x2f, 0xaa, 0xad, 0xcd, 0x03, 0xe6, 0xc8, 0x84}
 	binaryIDGlGetTransformFeedbackVarying                    = binary.ID{0x51, 0x5a, 0x47, 0x61, 0x69, 0x61, 0xcc, 0x0f, 0x14, 0x92, 0x09, 0x2a, 0xe1, 0xa1, 0xac, 0x62, 0x28, 0xc6, 0x50, 0x68}
 	binaryIDGlGetTranslatedShaderSourceANGLE                 = binary.ID{0x40, 0xb4, 0x0d, 0x90, 0x35, 0xa5, 0x0a, 0x70, 0x71, 0x0a, 0x7d, 0x7a, 0xfc, 0x86, 0x91, 0x2a, 0xd0, 0x5d, 0x2a, 0x9f}
-	binaryIDGlGetUniformBlockIndex                           = binary.ID{0x8e, 0xbc, 0x52, 0xd3, 0xc7, 0x7a, 0xcf, 0x55, 0x44, 0xef, 0x3e, 0x49, 0x14, 0x7b, 0x36, 0x54, 0x2e, 0xca, 0xbe, 0xa8}
+	binaryIDGlGetUniformBlockIndex                           = binary.ID{0x3f, 0x85, 0x43, 0xf6, 0x3c, 0x53, 0xe7, 0x46, 0x89, 0x5b, 0xc2, 0xad, 0xbc, 0xcb, 0x0c, 0xba, 0xf4, 0x36, 0x3a, 0xc6}
 	binaryIDGlGetUniformIndices                              = binary.ID{0xeb, 0x5f, 0x9f, 0x55, 0xe6, 0x2e, 0xe9, 0x9a, 0x0d, 0xa4, 0xe4, 0xcd, 0x46, 0x98, 0x1a, 0x82, 0x60, 0xfe, 0x55, 0xa1}
 	binaryIDGlGetUniformLocation                             = binary.ID{0xd9, 0x4d, 0x1e, 0x3c, 0xe5, 0x99, 0xab, 0xf3, 0x3c, 0x4e, 0x27, 0xad, 0xd6, 0xd0, 0x7c, 0x6d, 0xb9, 0x4b, 0x2d, 0xc4}
 	binaryIDGlGetUniformfv                                   = binary.ID{0x7e, 0x7b, 0x0d, 0xdb, 0xd6, 0x1a, 0x07, 0x5f, 0x78, 0x88, 0xff, 0xad, 0x74, 0x97, 0xf4, 0x30, 0x54, 0xd6, 0x6f, 0x89}
@@ -1500,7 +1518,9 @@ var (
 	binaryIDGlMultiDrawElementsEXT                           = binary.ID{0x86, 0x3f, 0x30, 0xa5, 0x7e, 0x36, 0xaa, 0xfc, 0x82, 0x32, 0x0b, 0xb4, 0x68, 0x6c, 0x6e, 0xf0, 0x61, 0xc9, 0x02, 0x15}
 	binaryIDGlMultiDrawElementsIndirectEXT                   = binary.ID{0x0a, 0x14, 0x5b, 0xe3, 0xfa, 0xbd, 0x14, 0x49, 0xac, 0x50, 0x77, 0xd8, 0x78, 0x9d, 0x19, 0x39, 0xf3, 0x9f, 0x89, 0xac}
 	binaryIDGlNamedFramebufferSampleLocationsfvNV            = binary.ID{0x43, 0xb8, 0x83, 0xea, 0x00, 0xbf, 0x02, 0xb2, 0x61, 0xfb, 0x92, 0xb8, 0x5b, 0x91, 0xc6, 0xba, 0x36, 0xd0, 0x5d, 0xaa}
+	binaryIDGlObjectLabel                                    = binary.ID{0x99, 0x0c, 0x69, 0x4e, 0x5b, 0x49, 0x26, 0x6e, 0x33, 0xd2, 0x54, 0x15, 0x00, 0x53, 0x68, 0x4d, 0xc2, 0x15, 0x83, 0x9a}
 	binaryIDGlObjectLabelKHR                                 = binary.ID{0x51, 0xe6, 0x4b, 0x36, 0x04, 0xb3, 0x72, 0xe7, 0x40, 0xf3, 0x74, 0xce, 0x19, 0x9c, 0xac, 0xe5, 0xfb, 0x2d, 0x4d, 0xbb}
+	binaryIDGlObjectPtrLabel                                 = binary.ID{0x16, 0xd1, 0x7a, 0x28, 0x08, 0x3d, 0x2d, 0x70, 0x82, 0x8b, 0xd5, 0x8c, 0x23, 0x6b, 0x7e, 0xc2, 0x27, 0xef, 0x79, 0xba}
 	binaryIDGlObjectPtrLabelKHR                              = binary.ID{0x99, 0x7d, 0xe8, 0x77, 0xdf, 0x67, 0x27, 0x03, 0x5f, 0x10, 0x58, 0x5f, 0xb9, 0x2a, 0xf9, 0x21, 0x23, 0x98, 0xc1, 0xdd}
 	binaryIDGlPatchParameteri                                = binary.ID{0x36, 0x3a, 0x7b, 0xc8, 0x5b, 0x3e, 0x8c, 0x17, 0x34, 0x83, 0x65, 0xb2, 0x7e, 0xd9, 0xf5, 0xe1, 0x53, 0xe5, 0xfd, 0x5c}
 	binaryIDGlPatchParameteriEXT                             = binary.ID{0x95, 0xc2, 0x8c, 0x25, 0x8e, 0xd5, 0x07, 0x40, 0xb9, 0xb2, 0xff, 0xa7, 0x49, 0x76, 0x4f, 0x92, 0xa5, 0x34, 0x17, 0xf2}
@@ -1528,6 +1548,7 @@ var (
 	binaryIDGlPointAlongPathNV                               = binary.ID{0x6c, 0x0f, 0x3c, 0x94, 0x90, 0xc6, 0xd1, 0x2f, 0x0a, 0x35, 0xb7, 0x07, 0x82, 0xd4, 0x41, 0x9f, 0xd2, 0xf3, 0xe6, 0x30}
 	binaryIDGlPolygonModeNV                                  = binary.ID{0x4c, 0x0b, 0xb5, 0x62, 0xe6, 0x05, 0x08, 0x70, 0x6a, 0x3e, 0xc9, 0x55, 0x0c, 0x67, 0x84, 0xd1, 0x0b, 0x6d, 0x7c, 0x26}
 	binaryIDGlPolygonOffset                                  = binary.ID{0x77, 0xd9, 0x9f, 0xb4, 0x8f, 0x74, 0xe9, 0x76, 0x86, 0xe3, 0xec, 0x65, 0xb2, 0xe0, 0xcf, 0xd9, 0xf7, 0xb6, 0x8d, 0xe5}
+	binaryIDGlPopDebugGroup                                  = binary.ID{0x07, 0x9b, 0x33, 0x35, 0xcc, 0x05, 0x85, 0x76, 0xb2, 0x97, 0x24, 0xdc, 0x4a, 0xab, 0x9d, 0xdd, 0xa6, 0xab, 0xdb, 0x79}
 	binaryIDGlPopDebugGroupKHR                               = binary.ID{0xe0, 0x5b, 0xe4, 0xda, 0x20, 0xae, 0x4f, 0xfb, 0x0c, 0xfd, 0xc0, 0xa8, 0x5c, 0x0d, 0x66, 0x0e, 0x8f, 0xc2, 0x24, 0xf9}
 	binaryIDGlPopGroupMarkerEXT                              = binary.ID{0x63, 0xb8, 0xb9, 0x5e, 0x5d, 0xf9, 0x13, 0xbb, 0xc7, 0xce, 0x02, 0x0f, 0xc7, 0x14, 0x03, 0x22, 0xe5, 0x70, 0x9f, 0x87}
 	binaryIDGlPrimitiveBoundingBox                           = binary.ID{0x9e, 0x94, 0x74, 0xe8, 0x62, 0x19, 0xaa, 0xa4, 0xe0, 0x0c, 0xc0, 0x9a, 0x57, 0xa7, 0xb1, 0x86, 0x45, 0x9d, 0xcf, 0xba}
@@ -1606,6 +1627,7 @@ var (
 	binaryIDGlProgramUniformMatrix4x2fvEXT                   = binary.ID{0xb9, 0x8c, 0x3d, 0xf7, 0x76, 0xf7, 0xbe, 0xf9, 0x9d, 0x36, 0x26, 0xf8, 0x9e, 0xc6, 0x69, 0xfb, 0xfc, 0xb7, 0x74, 0x9d}
 	binaryIDGlProgramUniformMatrix4x3fv                      = binary.ID{0x72, 0xcb, 0x1f, 0x0a, 0xbe, 0x73, 0x29, 0x95, 0x41, 0xe9, 0xfc, 0xd1, 0x84, 0x38, 0xee, 0x1c, 0x74, 0xc4, 0x65, 0x07}
 	binaryIDGlProgramUniformMatrix4x3fvEXT                   = binary.ID{0xe6, 0x8f, 0x11, 0xef, 0x7f, 0x63, 0x02, 0x7e, 0x16, 0x30, 0x89, 0xb2, 0xd8, 0xf5, 0x3d, 0x5f, 0x2f, 0xfa, 0x8b, 0x13}
+	binaryIDGlPushDebugGroup                                 = binary.ID{0x50, 0xe6, 0x87, 0x49, 0x93, 0x8b, 0x07, 0xae, 0xbe, 0xf7, 0x89, 0xc3, 0xe2, 0x18, 0x40, 0x05, 0x77, 0xc1, 0x3b, 0xaf}
 	binaryIDGlPushDebugGroupKHR                              = binary.ID{0xaa, 0xad, 0xf6, 0x49, 0x5c, 0xde, 0xa9, 0xac, 0x02, 0x01, 0x29, 0xd1, 0x00, 0x12, 0x83, 0xfd, 0x7d, 0xbf, 0x7a, 0x2d}
 	binaryIDGlPushGroupMarkerEXT                             = binary.ID{0x96, 0xc0, 0xda, 0xa0, 0x66, 0x00, 0x07, 0x43, 0xbb, 0x10, 0x3c, 0x72, 0xc3, 0x51, 0x78, 0x69, 0x1e, 0xa0, 0x43, 0x84}
 	binaryIDGlQueryCounterEXT                                = binary.ID{0x88, 0xcc, 0x38, 0xb0, 0xd2, 0x9a, 0xbd, 0x37, 0xd7, 0x6f, 0x4f, 0xb3, 0xba, 0x95, 0xd8, 0x6a, 0xda, 0x18, 0x5e, 0x18}
@@ -1673,7 +1695,7 @@ var (
 	binaryIDGlTexBufferRangeEXT                              = binary.ID{0x8b, 0x16, 0x65, 0x06, 0xa7, 0xfa, 0x97, 0xfc, 0xfb, 0x97, 0xe1, 0x00, 0xd8, 0x72, 0xa6, 0x49, 0x7f, 0x2f, 0xdb, 0x3b}
 	binaryIDGlTexBufferRangeOES                              = binary.ID{0xd8, 0xff, 0xf0, 0x4a, 0x73, 0x92, 0xd8, 0xf8, 0xc9, 0x3f, 0xd1, 0x95, 0x7c, 0x2f, 0xf6, 0xd5, 0x7b, 0xa0, 0x4c, 0x4a}
 	binaryIDGlTexImage2D                                     = binary.ID{0x89, 0x8f, 0x0f, 0x2d, 0x48, 0x7d, 0xad, 0x43, 0x5a, 0x31, 0x7e, 0xc3, 0xd9, 0x84, 0xe4, 0x4b, 0x9e, 0xa5, 0x79, 0x64}
-	binaryIDGlTexImage3D                                     = binary.ID{0x1d, 0xc6, 0x86, 0xc5, 0x6e, 0xea, 0x02, 0xf0, 0x1b, 0x3f, 0x63, 0xac, 0x2e, 0x88, 0xc4, 0x46, 0x74, 0xf2, 0xf2, 0xda}
+	binaryIDGlTexImage3D                                     = binary.ID{0xa2, 0xbc, 0xf1, 0x21, 0xef, 0xd4, 0x4d, 0xaf, 0xe8, 0x0e, 0x69, 0x85, 0x2d, 0xd8, 0x5e, 0x57, 0x1a, 0x38, 0xaf, 0xc1}
 	binaryIDGlTexImage3DOES                                  = binary.ID{0x7d, 0xb5, 0x38, 0xa3, 0x85, 0xaf, 0xdc, 0x8a, 0xd2, 0x72, 0xa0, 0x41, 0x19, 0x9c, 0x4d, 0xfd, 0x41, 0x5d, 0x00, 0x5b}
 	binaryIDGlTexPageCommitmentARB                           = binary.ID{0x2c, 0x23, 0x03, 0x25, 0x39, 0xdd, 0x68, 0xdf, 0xec, 0x7e, 0xb8, 0xe9, 0x9a, 0x15, 0x7f, 0xeb, 0xa3, 0xf5, 0x5f, 0x28}
 	binaryIDGlTexParameterIiv                                = binary.ID{0xfe, 0xed, 0x62, 0x67, 0xf6, 0x78, 0x23, 0xe6, 0xb6, 0x40, 0x9e, 0xad, 0x8a, 0xf5, 0xf7, 0x13, 0x8b, 0x18, 0xeb, 0x96}
@@ -1695,7 +1717,7 @@ var (
 	binaryIDGlTexStorage3DMultisample                        = binary.ID{0x9b, 0x5c, 0x7c, 0x9f, 0x23, 0xed, 0x33, 0xca, 0x3b, 0x4d, 0x2f, 0xed, 0x47, 0x8c, 0xa0, 0x83, 0x4c, 0x32, 0xaa, 0x9c}
 	binaryIDGlTexStorage3DMultisampleOES                     = binary.ID{0x81, 0xea, 0x89, 0x94, 0x80, 0xbc, 0x28, 0x35, 0x70, 0xbb, 0x03, 0xb7, 0xf8, 0x3a, 0x60, 0xc1, 0x21, 0xfa, 0xb1, 0x45}
 	binaryIDGlTexSubImage2D                                  = binary.ID{0xaa, 0xcc, 0xd8, 0xe5, 0x31, 0xe2, 0xeb, 0x33, 0x88, 0x45, 0xb2, 0xe5, 0x2a, 0xfa, 0xa1, 0xf4, 0xe3, 0x82, 0x5b, 0xd5}
-	binaryIDGlTexSubImage3D                                  = binary.ID{0x2e, 0x73, 0xa8, 0xe5, 0xe8, 0xae, 0xbf, 0x0e, 0xb7, 0x53, 0xa8, 0x6e, 0xa0, 0xf7, 0xcd, 0x68, 0xd7, 0xc0, 0x00, 0x06}
+	binaryIDGlTexSubImage3D                                  = binary.ID{0x50, 0x8f, 0x6d, 0x05, 0x40, 0x23, 0x14, 0x32, 0xa7, 0x86, 0xd0, 0x5f, 0xa0, 0xe1, 0x54, 0x11, 0x8c, 0xd3, 0x38, 0x71}
 	binaryIDGlTexSubImage3DOES                               = binary.ID{0x49, 0x4e, 0x1c, 0xec, 0x40, 0xa4, 0x72, 0xdc, 0x61, 0x9f, 0x30, 0x18, 0x01, 0x44, 0x63, 0x26, 0xe6, 0xf7, 0x26, 0xf0}
 	binaryIDGlTextureStorage1DEXT                            = binary.ID{0x3d, 0x8f, 0xdc, 0x91, 0x23, 0xda, 0xa1, 0x5f, 0x87, 0xc3, 0x90, 0x4f, 0x1d, 0x3b, 0xf6, 0x62, 0x98, 0x47, 0x82, 0x3f}
 	binaryIDGlTextureStorage2DEXT                            = binary.ID{0xe2, 0x7d, 0x7b, 0xaf, 0x81, 0x44, 0x32, 0x28, 0x63, 0xbe, 0xd8, 0xe5, 0x10, 0x4a, 0x3f, 0x75, 0x99, 0x55, 0x7d, 0x9b}
@@ -6690,41 +6712,41 @@ var schemaFramebufferIdᶜᵖ = &schema.Class{
 	},
 }
 
-type binaryClassGLDEBUGPROCKHR struct{}
+type binaryClassGLDEBUGPROC struct{}
 
-func (*GLDEBUGPROCKHR) Class() binary.Class {
-	return (*binaryClassGLDEBUGPROCKHR)(nil)
+func (*GLDEBUGPROC) Class() binary.Class {
+	return (*binaryClassGLDEBUGPROC)(nil)
 }
-func doEncodeGLDEBUGPROCKHR(e binary.Encoder, o *GLDEBUGPROCKHR) error {
+func doEncodeGLDEBUGPROC(e binary.Encoder, o *GLDEBUGPROC) error {
 	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeGLDEBUGPROCKHR(d binary.Decoder, o *GLDEBUGPROCKHR) error {
+func doDecodeGLDEBUGPROC(d binary.Decoder, o *GLDEBUGPROC) error {
 	if err := d.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassGLDEBUGPROCKHR) ID() binary.ID      { return binaryIDGLDEBUGPROCKHR }
-func (*binaryClassGLDEBUGPROCKHR) New() binary.Object { return &GLDEBUGPROCKHR{} }
-func (*binaryClassGLDEBUGPROCKHR) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeGLDEBUGPROCKHR(e, obj.(*GLDEBUGPROCKHR))
+func (*binaryClassGLDEBUGPROC) ID() binary.ID      { return binaryIDGLDEBUGPROC }
+func (*binaryClassGLDEBUGPROC) New() binary.Object { return &GLDEBUGPROC{} }
+func (*binaryClassGLDEBUGPROC) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLDEBUGPROC(e, obj.(*GLDEBUGPROC))
 }
-func (*binaryClassGLDEBUGPROCKHR) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &GLDEBUGPROCKHR{}
-	return obj, doDecodeGLDEBUGPROCKHR(d, obj)
+func (*binaryClassGLDEBUGPROC) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLDEBUGPROC{}
+	return obj, doDecodeGLDEBUGPROC(d, obj)
 }
-func (*binaryClassGLDEBUGPROCKHR) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeGLDEBUGPROCKHR(d, obj.(*GLDEBUGPROCKHR))
+func (*binaryClassGLDEBUGPROC) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLDEBUGPROC(d, obj.(*GLDEBUGPROC))
 }
-func (*binaryClassGLDEBUGPROCKHR) Schema() *schema.Class { return schemaGLDEBUGPROCKHR }
+func (*binaryClassGLDEBUGPROC) Schema() *schema.Class { return schemaGLDEBUGPROC }
 
-var schemaGLDEBUGPROCKHR = &schema.Class{
-	TypeID:  binaryIDGLDEBUGPROCKHR,
+var schemaGLDEBUGPROC = &schema.Class{
+	TypeID:  binaryIDGLDEBUGPROC,
 	Package: "gles",
-	Name:    "GLDEBUGPROCKHR",
+	Name:    "GLDEBUGPROC",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -13359,7 +13381,7 @@ var schemaGlCompressedTexImage3D = &schema.Class{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
 
@@ -13740,7 +13762,7 @@ var schemaGlCompressedTexSubImage3D = &schema.Class{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
 
@@ -16081,6 +16103,60 @@ var schemaGlCullFace = &schema.Class{
 	},
 }
 
+type binaryClassGlDebugMessageCallback struct{}
+
+func (*GlDebugMessageCallback) Class() binary.Class {
+	return (*binaryClassGlDebugMessageCallback)(nil)
+}
+func doEncodeGlDebugMessageCallback(e binary.Encoder, o *GlDebugMessageCallback) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Callback); err != nil {
+		return err
+	}
+	if err := e.Value(&o.UserParam); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDebugMessageCallback(d binary.Decoder, o *GlDebugMessageCallback) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Callback); err != nil {
+		return err
+	}
+	if err := d.Value(&o.UserParam); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDebugMessageCallback) ID() binary.ID      { return binaryIDGlDebugMessageCallback }
+func (*binaryClassGlDebugMessageCallback) New() binary.Object { return &GlDebugMessageCallback{} }
+func (*binaryClassGlDebugMessageCallback) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDebugMessageCallback(e, obj.(*GlDebugMessageCallback))
+}
+func (*binaryClassGlDebugMessageCallback) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDebugMessageCallback{}
+	return obj, doDecodeGlDebugMessageCallback(d, obj)
+}
+func (*binaryClassGlDebugMessageCallback) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDebugMessageCallback(d, obj.(*GlDebugMessageCallback))
+}
+func (*binaryClassGlDebugMessageCallback) Schema() *schema.Class { return schemaGlDebugMessageCallback }
+
+var schemaGlDebugMessageCallback = &schema.Class{
+	TypeID:  binaryIDGlDebugMessageCallback,
+	Package: "gles",
+	Name:    "GlDebugMessageCallback",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Callback", Type: &schema.Struct{Name: "GLDEBUGPROC", ID: (*GLDEBUGPROC)(nil).Class().ID()}},
+		{Declared: "UserParam", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlDebugMessageCallbackKHR struct{}
 
 func (*GlDebugMessageCallbackKHR) Class() binary.Class {
@@ -16132,8 +16208,100 @@ var schemaGlDebugMessageCallbackKHR = &schema.Class{
 	Name:    "GlDebugMessageCallbackKHR",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Callback", Type: &schema.Struct{Name: "GLDEBUGPROCKHR", ID: (*GLDEBUGPROCKHR)(nil).Class().ID()}},
+		{Declared: "Callback", Type: &schema.Struct{Name: "GLDEBUGPROC", ID: (*GLDEBUGPROC)(nil).Class().ID()}},
 		{Declared: "UserParam", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlDebugMessageControl struct{}
+
+func (*GlDebugMessageControl) Class() binary.Class {
+	return (*binaryClassGlDebugMessageControl)(nil)
+}
+func doEncodeGlDebugMessageControl(e binary.Encoder, o *GlDebugMessageControl) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Source)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Severity)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Count)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ids); err != nil {
+		return err
+	}
+	if err := e.Uint8(uint8(o.Enabled)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDebugMessageControl(d binary.Decoder, o *GlDebugMessageControl) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Source = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Severity = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = GLsizei(obj)
+	}
+	if err := d.Value(&o.Ids); err != nil {
+		return err
+	}
+	if obj, err := d.Uint8(); err != nil {
+		return err
+	} else {
+		o.Enabled = GLboolean(obj)
+	}
+	return nil
+}
+func (*binaryClassGlDebugMessageControl) ID() binary.ID      { return binaryIDGlDebugMessageControl }
+func (*binaryClassGlDebugMessageControl) New() binary.Object { return &GlDebugMessageControl{} }
+func (*binaryClassGlDebugMessageControl) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDebugMessageControl(e, obj.(*GlDebugMessageControl))
+}
+func (*binaryClassGlDebugMessageControl) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDebugMessageControl{}
+	return obj, doDecodeGlDebugMessageControl(d, obj)
+}
+func (*binaryClassGlDebugMessageControl) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDebugMessageControl(d, obj.(*GlDebugMessageControl))
+}
+func (*binaryClassGlDebugMessageControl) Schema() *schema.Class { return schemaGlDebugMessageControl }
+
+var schemaGlDebugMessageControl = &schema.Class{
+	TypeID:  binaryIDGlDebugMessageControl,
+	Package: "gles",
+	Name:    "GlDebugMessageControl",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Ids", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -16231,6 +16399,98 @@ var schemaGlDebugMessageControlKHR = &schema.Class{
 	},
 }
 
+type binaryClassGlDebugMessageInsert struct{}
+
+func (*GlDebugMessageInsert) Class() binary.Class {
+	return (*binaryClassGlDebugMessageInsert)(nil)
+}
+func doEncodeGlDebugMessageInsert(e binary.Encoder, o *GlDebugMessageInsert) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Source)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Id)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Severity)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Length)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Message); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDebugMessageInsert(d binary.Decoder, o *GlDebugMessageInsert) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Source = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Id = GLuint(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Severity = GLenum(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Length = GLsizei(obj)
+	}
+	if err := d.Value(&o.Message); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDebugMessageInsert) ID() binary.ID      { return binaryIDGlDebugMessageInsert }
+func (*binaryClassGlDebugMessageInsert) New() binary.Object { return &GlDebugMessageInsert{} }
+func (*binaryClassGlDebugMessageInsert) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDebugMessageInsert(e, obj.(*GlDebugMessageInsert))
+}
+func (*binaryClassGlDebugMessageInsert) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDebugMessageInsert{}
+	return obj, doDecodeGlDebugMessageInsert(d, obj)
+}
+func (*binaryClassGlDebugMessageInsert) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDebugMessageInsert(d, obj.(*GlDebugMessageInsert))
+}
+func (*binaryClassGlDebugMessageInsert) Schema() *schema.Class { return schemaGlDebugMessageInsert }
+
+var schemaGlDebugMessageInsert = &schema.Class{
+	TypeID:  binaryIDGlDebugMessageInsert,
+	Package: "gles",
+	Name:    "GlDebugMessageInsert",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Message", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlDebugMessageInsertKHR struct{}
 
 func (*GlDebugMessageInsertKHR) Class() binary.Class {
@@ -16255,7 +16515,7 @@ func doEncodeGlDebugMessageInsertKHR(e binary.Encoder, o *GlDebugMessageInsertKH
 	if err := e.Int32(int32(o.Length)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Buf); err != nil {
+	if err := e.Value(&o.Message); err != nil {
 		return err
 	}
 	return nil
@@ -16289,7 +16549,7 @@ func doDecodeGlDebugMessageInsertKHR(d binary.Decoder, o *GlDebugMessageInsertKH
 	} else {
 		o.Length = GLsizei(obj)
 	}
-	if err := d.Value(&o.Buf); err != nil {
+	if err := d.Value(&o.Message); err != nil {
 		return err
 	}
 	return nil
@@ -16321,7 +16581,7 @@ var schemaGlDebugMessageInsertKHR = &schema.Class{
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Buf", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Message", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -26659,6 +26919,115 @@ var schemaGlGetCoverageModulationTableNV = &schema.Class{
 	},
 }
 
+type binaryClassGlGetDebugMessageLog struct{}
+
+func (*GlGetDebugMessageLog) Class() binary.Class {
+	return (*binaryClassGlGetDebugMessageLog)(nil)
+}
+func doEncodeGlGetDebugMessageLog(e binary.Encoder, o *GlGetDebugMessageLog) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Count)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Sources); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Types); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ids); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Severities); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Lengths); err != nil {
+		return err
+	}
+	if err := e.Value(&o.MessageLog); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetDebugMessageLog(d binary.Decoder, o *GlGetDebugMessageLog) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Count = GLuint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Sources); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Types); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ids); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Severities); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Lengths); err != nil {
+		return err
+	}
+	if err := d.Value(&o.MessageLog); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Result = GLuint(obj)
+	}
+	return nil
+}
+func (*binaryClassGlGetDebugMessageLog) ID() binary.ID      { return binaryIDGlGetDebugMessageLog }
+func (*binaryClassGlGetDebugMessageLog) New() binary.Object { return &GlGetDebugMessageLog{} }
+func (*binaryClassGlGetDebugMessageLog) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetDebugMessageLog(e, obj.(*GlGetDebugMessageLog))
+}
+func (*binaryClassGlGetDebugMessageLog) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetDebugMessageLog{}
+	return obj, doDecodeGlGetDebugMessageLog(d, obj)
+}
+func (*binaryClassGlGetDebugMessageLog) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetDebugMessageLog(d, obj.(*GlGetDebugMessageLog))
+}
+func (*binaryClassGlGetDebugMessageLog) Schema() *schema.Class { return schemaGlGetDebugMessageLog }
+
+var schemaGlGetDebugMessageLog = &schema.Class{
+	TypeID:  binaryIDGlGetDebugMessageLog,
+	Package: "gles",
+	Name:    "GlGetDebugMessageLog",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Sources", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
+		{Declared: "Types", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
+		{Declared: "Ids", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
+		{Declared: "Severities", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
+		{Declared: "Lengths", Type: &schema.Struct{Name: "GLsizeiᵖ", ID: (*GLsizeiᵖ)(nil).Class().ID()}},
+		{Declared: "MessageLog", Type: &schema.Struct{Name: "GLcharᵖ", ID: (*GLcharᵖ)(nil).Class().ID()}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlGetDebugMessageLogKHR struct{}
 
 func (*GlGetDebugMessageLogKHR) Class() binary.Class {
@@ -27213,7 +27582,7 @@ func doEncodeGlGetFragDataLocation(e binary.Encoder, o *GlGetFragDataLocation) e
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Name); err != nil {
+	if err := e.String(o.Name); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.Result)); err != nil {
@@ -27230,8 +27599,10 @@ func doDecodeGlGetFragDataLocation(d binary.Decoder, o *GlGetFragDataLocation) e
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if err := d.Value(&o.Name); err != nil {
+	if obj, err := d.String(); err != nil {
 		return err
+	} else {
+		o.Name = string(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -27261,7 +27632,7 @@ var schemaGlGetFragDataLocation = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Name", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -28339,6 +28710,87 @@ var schemaGlGetNextPerfQueryIdINTEL = &schema.Class{
 	},
 }
 
+type binaryClassGlGetObjectLabel struct{}
+
+func (*GlGetObjectLabel) Class() binary.Class {
+	return (*binaryClassGlGetObjectLabel)(nil)
+}
+func doEncodeGlGetObjectLabel(e binary.Encoder, o *GlGetObjectLabel) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Identifier)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Name)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Length); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetObjectLabel(d binary.Decoder, o *GlGetObjectLabel) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Identifier = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Name = GLuint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Length); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetObjectLabel) ID() binary.ID      { return binaryIDGlGetObjectLabel }
+func (*binaryClassGlGetObjectLabel) New() binary.Object { return &GlGetObjectLabel{} }
+func (*binaryClassGlGetObjectLabel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetObjectLabel(e, obj.(*GlGetObjectLabel))
+}
+func (*binaryClassGlGetObjectLabel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetObjectLabel{}
+	return obj, doDecodeGlGetObjectLabel(d, obj)
+}
+func (*binaryClassGlGetObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetObjectLabel(d, obj.(*GlGetObjectLabel))
+}
+func (*binaryClassGlGetObjectLabel) Schema() *schema.Class { return schemaGlGetObjectLabel }
+
+var schemaGlGetObjectLabel = &schema.Class{
+	TypeID:  binaryIDGlGetObjectLabel,
+	Package: "gles",
+	Name:    "GlGetObjectLabel",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Length", Type: &schema.Struct{Name: "GLsizeiᵖ", ID: (*GLsizeiᵖ)(nil).Class().ID()}},
+		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᵖ", ID: (*GLcharᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetObjectLabelEXT struct{}
 
 func (*GlGetObjectLabelEXT) Class() binary.Class {
@@ -28495,6 +28947,76 @@ var schemaGlGetObjectLabelKHR = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Length", Type: &schema.Struct{Name: "GLsizeiᵖ", ID: (*GLsizeiᵖ)(nil).Class().ID()}},
+		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᵖ", ID: (*GLcharᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlGetObjectPtrLabel struct{}
+
+func (*GlGetObjectPtrLabel) Class() binary.Class {
+	return (*binaryClassGlGetObjectPtrLabel)(nil)
+}
+func doEncodeGlGetObjectPtrLabel(e binary.Encoder, o *GlGetObjectPtrLabel) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ptr); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BufSize)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Length); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetObjectPtrLabel(d binary.Decoder, o *GlGetObjectPtrLabel) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ptr); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufSize = GLsizei(obj)
+	}
+	if err := d.Value(&o.Length); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetObjectPtrLabel) ID() binary.ID      { return binaryIDGlGetObjectPtrLabel }
+func (*binaryClassGlGetObjectPtrLabel) New() binary.Object { return &GlGetObjectPtrLabel{} }
+func (*binaryClassGlGetObjectPtrLabel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetObjectPtrLabel(e, obj.(*GlGetObjectPtrLabel))
+}
+func (*binaryClassGlGetObjectPtrLabel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetObjectPtrLabel{}
+	return obj, doDecodeGlGetObjectPtrLabel(d, obj)
+}
+func (*binaryClassGlGetObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetObjectPtrLabel(d, obj.(*GlGetObjectPtrLabel))
+}
+func (*binaryClassGlGetObjectPtrLabel) Schema() *schema.Class { return schemaGlGetObjectPtrLabel }
+
+var schemaGlGetObjectPtrLabel = &schema.Class{
+	TypeID:  binaryIDGlGetObjectPtrLabel,
+	Package: "gles",
+	Name:    "GlGetObjectPtrLabel",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Ptr", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Struct{Name: "GLsizeiᵖ", ID: (*GLsizeiᵖ)(nil).Class().ID()}},
 		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᵖ", ID: (*GLcharᵖ)(nil).Class().ID()}},
@@ -30091,6 +30613,62 @@ var schemaGlGetPerfQueryInfoINTEL = &schema.Class{
 	},
 }
 
+type binaryClassGlGetPointerv struct{}
+
+func (*GlGetPointerv) Class() binary.Class {
+	return (*binaryClassGlGetPointerv)(nil)
+}
+func doEncodeGlGetPointerv(e binary.Encoder, o *GlGetPointerv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pname)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetPointerv(d binary.Decoder, o *GlGetPointerv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pname = GLenum(obj)
+	}
+	if err := d.Value(&o.Params); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetPointerv) ID() binary.ID      { return binaryIDGlGetPointerv }
+func (*binaryClassGlGetPointerv) New() binary.Object { return &GlGetPointerv{} }
+func (*binaryClassGlGetPointerv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetPointerv(e, obj.(*GlGetPointerv))
+}
+func (*binaryClassGlGetPointerv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetPointerv{}
+	return obj, doDecodeGlGetPointerv(d, obj)
+}
+func (*binaryClassGlGetPointerv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetPointerv(d, obj.(*GlGetPointerv))
+}
+func (*binaryClassGlGetPointerv) Schema() *schema.Class { return schemaGlGetPointerv }
+
+var schemaGlGetPointerv = &schema.Class{
+	TypeID:  binaryIDGlGetPointerv,
+	Package: "gles",
+	Name:    "GlGetPointerv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Name: "Voidᵖᵖ", ID: (*Voidᵖᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetPointervKHR struct{}
 
 func (*GlGetPointervKHR) Class() binary.Class {
@@ -30756,7 +31334,7 @@ func doEncodeGlGetProgramResourceIndex(e binary.Encoder, o *GlGetProgramResource
 	if err := e.Uint32(uint32(o.ProgramInterface)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Name); err != nil {
+	if err := e.String(o.Name); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Result)); err != nil {
@@ -30778,8 +31356,10 @@ func doDecodeGlGetProgramResourceIndex(d binary.Decoder, o *GlGetProgramResource
 	} else {
 		o.ProgramInterface = GLenum(obj)
 	}
-	if err := d.Value(&o.Name); err != nil {
+	if obj, err := d.String(); err != nil {
 		return err
+	} else {
+		o.Name = string(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -30812,7 +31392,7 @@ var schemaGlGetProgramResourceIndex = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Name", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -30832,7 +31412,7 @@ func doEncodeGlGetProgramResourceLocation(e binary.Encoder, o *GlGetProgramResou
 	if err := e.Uint32(uint32(o.ProgramInterface)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Name); err != nil {
+	if err := e.String(o.Name); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.Result)); err != nil {
@@ -30854,8 +31434,10 @@ func doDecodeGlGetProgramResourceLocation(d binary.Decoder, o *GlGetProgramResou
 	} else {
 		o.ProgramInterface = GLenum(obj)
 	}
-	if err := d.Value(&o.Name); err != nil {
+	if obj, err := d.String(); err != nil {
 		return err
+	} else {
+		o.Name = string(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -30892,7 +31474,7 @@ var schemaGlGetProgramResourceLocation = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Name", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -34132,7 +34714,7 @@ func doEncodeGlGetUniformBlockIndex(e binary.Encoder, o *GlGetUniformBlockIndex)
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.UniformBlockName); err != nil {
+	if err := e.String(o.UniformBlockName); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Result)); err != nil {
@@ -34149,8 +34731,10 @@ func doDecodeGlGetUniformBlockIndex(d binary.Decoder, o *GlGetUniformBlockIndex)
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if err := d.Value(&o.UniformBlockName); err != nil {
+	if obj, err := d.String(); err != nil {
 		return err
+	} else {
+		o.UniformBlockName = string(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -34180,7 +34764,7 @@ var schemaGlGetUniformBlockIndex = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "UniformBlockName", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+		{Declared: "UniformBlockName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
 	},
 }
@@ -39267,6 +39851,80 @@ var schemaGlNamedFramebufferSampleLocationsfvNV = &schema.Class{
 	},
 }
 
+type binaryClassGlObjectLabel struct{}
+
+func (*GlObjectLabel) Class() binary.Class {
+	return (*binaryClassGlObjectLabel)(nil)
+}
+func doEncodeGlObjectLabel(e binary.Encoder, o *GlObjectLabel) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Identifier)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Name)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Length)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlObjectLabel(d binary.Decoder, o *GlObjectLabel) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Identifier = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Name = GLuint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Length = GLsizei(obj)
+	}
+	if err := d.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlObjectLabel) ID() binary.ID      { return binaryIDGlObjectLabel }
+func (*binaryClassGlObjectLabel) New() binary.Object { return &GlObjectLabel{} }
+func (*binaryClassGlObjectLabel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlObjectLabel(e, obj.(*GlObjectLabel))
+}
+func (*binaryClassGlObjectLabel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlObjectLabel{}
+	return obj, doDecodeGlObjectLabel(d, obj)
+}
+func (*binaryClassGlObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlObjectLabel(d, obj.(*GlObjectLabel))
+}
+func (*binaryClassGlObjectLabel) Schema() *schema.Class { return schemaGlObjectLabel }
+
+var schemaGlObjectLabel = &schema.Class{
+	TypeID:  binaryIDGlObjectLabel,
+	Package: "gles",
+	Name:    "GlObjectLabel",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlObjectLabelKHR struct{}
 
 func (*GlObjectLabelKHR) Class() binary.Class {
@@ -39336,6 +39994,69 @@ var schemaGlObjectLabelKHR = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGlObjectPtrLabel struct{}
+
+func (*GlObjectPtrLabel) Class() binary.Class {
+	return (*binaryClassGlObjectPtrLabel)(nil)
+}
+func doEncodeGlObjectPtrLabel(e binary.Encoder, o *GlObjectPtrLabel) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ptr); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Length)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlObjectPtrLabel(d binary.Decoder, o *GlObjectPtrLabel) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ptr); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Length = GLsizei(obj)
+	}
+	if err := d.Value(&o.Label); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlObjectPtrLabel) ID() binary.ID      { return binaryIDGlObjectPtrLabel }
+func (*binaryClassGlObjectPtrLabel) New() binary.Object { return &GlObjectPtrLabel{} }
+func (*binaryClassGlObjectPtrLabel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlObjectPtrLabel(e, obj.(*GlObjectPtrLabel))
+}
+func (*binaryClassGlObjectPtrLabel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlObjectPtrLabel{}
+	return obj, doDecodeGlObjectPtrLabel(d, obj)
+}
+func (*binaryClassGlObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlObjectPtrLabel(d, obj.(*GlObjectPtrLabel))
+}
+func (*binaryClassGlObjectPtrLabel) Schema() *schema.Class { return schemaGlObjectPtrLabel }
+
+var schemaGlObjectPtrLabel = &schema.Class{
+	TypeID:  binaryIDGlObjectPtrLabel,
+	Package: "gles",
+	Name:    "GlObjectPtrLabel",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Ptr", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Label", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
 	},
@@ -41445,6 +42166,46 @@ var schemaGlPolygonOffset = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlPopDebugGroup struct{}
+
+func (*GlPopDebugGroup) Class() binary.Class {
+	return (*binaryClassGlPopDebugGroup)(nil)
+}
+func doEncodeGlPopDebugGroup(e binary.Encoder, o *GlPopDebugGroup) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlPopDebugGroup(d binary.Decoder, o *GlPopDebugGroup) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlPopDebugGroup) ID() binary.ID      { return binaryIDGlPopDebugGroup }
+func (*binaryClassGlPopDebugGroup) New() binary.Object { return &GlPopDebugGroup{} }
+func (*binaryClassGlPopDebugGroup) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlPopDebugGroup(e, obj.(*GlPopDebugGroup))
+}
+func (*binaryClassGlPopDebugGroup) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlPopDebugGroup{}
+	return obj, doDecodeGlPopDebugGroup(d, obj)
+}
+func (*binaryClassGlPopDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlPopDebugGroup(d, obj.(*GlPopDebugGroup))
+}
+func (*binaryClassGlPopDebugGroup) Schema() *schema.Class { return schemaGlPopDebugGroup }
+
+var schemaGlPopDebugGroup = &schema.Class{
+	TypeID:  binaryIDGlPopDebugGroup,
+	Package: "gles",
+	Name:    "GlPopDebugGroup",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
 }
 
@@ -47698,6 +48459,80 @@ var schemaGlProgramUniformMatrix4x3fvEXT = &schema.Class{
 	},
 }
 
+type binaryClassGlPushDebugGroup struct{}
+
+func (*GlPushDebugGroup) Class() binary.Class {
+	return (*binaryClassGlPushDebugGroup)(nil)
+}
+func doEncodeGlPushDebugGroup(e binary.Encoder, o *GlPushDebugGroup) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Source)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Id)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Length)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Message); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlPushDebugGroup(d binary.Decoder, o *GlPushDebugGroup) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Source = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Id = GLuint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Length = GLsizei(obj)
+	}
+	if err := d.Value(&o.Message); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlPushDebugGroup) ID() binary.ID      { return binaryIDGlPushDebugGroup }
+func (*binaryClassGlPushDebugGroup) New() binary.Object { return &GlPushDebugGroup{} }
+func (*binaryClassGlPushDebugGroup) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlPushDebugGroup(e, obj.(*GlPushDebugGroup))
+}
+func (*binaryClassGlPushDebugGroup) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlPushDebugGroup{}
+	return obj, doDecodeGlPushDebugGroup(d, obj)
+}
+func (*binaryClassGlPushDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlPushDebugGroup(d, obj.(*GlPushDebugGroup))
+}
+func (*binaryClassGlPushDebugGroup) Schema() *schema.Class { return schemaGlPushDebugGroup }
+
+var schemaGlPushDebugGroup = &schema.Class{
+	TypeID:  binaryIDGlPushDebugGroup,
+	Package: "gles",
+	Name:    "GlPushDebugGroup",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Message", Type: &schema.Struct{Name: "GLcharᶜᵖ", ID: (*GLcharᶜᵖ)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlPushDebugGroupKHR struct{}
 
 func (*GlPushDebugGroupKHR) Class() binary.Class {
@@ -52702,7 +53537,7 @@ func doEncodeGlTexImage3D(e binary.Encoder, o *GlTexImage3D) error {
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Pixels); err != nil {
+	if err := e.Value(&o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -52756,7 +53591,7 @@ func doDecodeGlTexImage3D(d binary.Decoder, o *GlTexImage3D) error {
 	} else {
 		o.Type = GLenum(obj)
 	}
-	if err := d.Value(&o.Pixels); err != nil {
+	if err := d.Value(&o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -52790,7 +53625,7 @@ var schemaGlTexImage3D = &schema.Class{
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Pixels", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
 
@@ -54599,7 +55434,7 @@ func doEncodeGlTexSubImage3D(e binary.Encoder, o *GlTexSubImage3D) error {
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Pixels); err != nil {
+	if err := e.Value(&o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -54658,7 +55493,7 @@ func doDecodeGlTexSubImage3D(d binary.Decoder, o *GlTexSubImage3D) error {
 	} else {
 		o.Type = GLenum(obj)
 	}
-	if err := d.Value(&o.Pixels); err != nil {
+	if err := d.Value(&o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -54693,7 +55528,7 @@ var schemaGlTexSubImage3D = &schema.Class{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Pixels", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
 
@@ -64508,6 +65343,36 @@ func (v *ExtensionId) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in ExtensionId", s)
+}
+
+var _FramebufferConstants_map = map[FramebufferConstants]string{}
+
+func init() {
+	_FramebufferConstants_map[8] = "MAX_DRAW_BUFFERS"
+
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferConstants", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: "MAX_DRAW_BUFFERS", Value: uint32(8)},
+		},
+	})
+}
+
+func (v FramebufferConstants) String() string {
+	if s, ok := _FramebufferConstants_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferConstants(%d)", v)
+}
+
+func (v *FramebufferConstants) Parse(s string) error {
+	for k, t := range _FramebufferConstants_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferConstants", s)
 }
 
 var _GLbitfield_map = map[GLbitfield]string{}

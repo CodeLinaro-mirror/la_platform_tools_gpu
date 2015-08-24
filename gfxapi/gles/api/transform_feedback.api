@@ -50,6 +50,7 @@ cmd void glBindTransformFeedback(GLenum target, TransformFeedbackId id) {
 cmd void glDeleteTransformFeedbacks(GLsizei n, const TransformFeedbackId* ids) {
   minRequiredVersion(3, 0)
   // TODO
+  read(ids[0:n])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.0")
@@ -66,6 +67,7 @@ cmd void glEndTransformFeedback() {
 cmd void glGenTransformFeedbacks(GLsizei n, TransformFeedbackId* ids) {
   minRequiredVersion(3, 0)
   // TODO
+  write(ids[0:n])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetTransformFeedbackVarying.xhtml","OpenGL ES 3.0")
@@ -80,6 +82,9 @@ cmd void glGetTransformFeedbackVarying(ProgramId program,
                                        GLchar*   name) {
   minRequiredVersion(3, 0)
   // TODO
+  writeString(bufSize, length, name)
+  size[0] = ?
+  type[0] = ?
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsTransformFeedback.xhtml","OpenGL ES 3.0")
@@ -124,5 +129,9 @@ cmd void glTransformFeedbackVaryings(ProgramId            program,
     }
   }
   // TODO
+  names := varyings[0:count]
+  for i in (0 .. count) {
+    name := as!string(as!char*(names[i]))
+  }
 }
 

@@ -523,6 +523,105 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlDebugMessageCallback := schema.Of((*GlDebugMessageCallback)(nil).Class())
+	sc_GlDebugMessageCallback.Metadata = append(sc_GlDebugMessageCallback.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDebugMessageCallback",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDebugMessageControl := schema.Of((*GlDebugMessageControl)(nil).Class())
+	sc_GlDebugMessageControl.Metadata = append(sc_GlDebugMessageControl.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDebugMessageControl",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDebugMessageInsert := schema.Of((*GlDebugMessageInsert)(nil).Class())
+	sc_GlDebugMessageInsert.Metadata = append(sc_GlDebugMessageInsert.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDebugMessageInsert",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetDebugMessageLog := schema.Of((*GlGetDebugMessageLog)(nil).Class())
+	sc_GlGetDebugMessageLog.Metadata = append(sc_GlGetDebugMessageLog.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetDebugMessageLog",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetObjectLabel := schema.Of((*GlGetObjectLabel)(nil).Class())
+	sc_GlGetObjectLabel.Metadata = append(sc_GlGetObjectLabel.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetObjectLabel",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetObjectPtrLabel := schema.Of((*GlGetObjectPtrLabel)(nil).Class())
+	sc_GlGetObjectPtrLabel.Metadata = append(sc_GlGetObjectPtrLabel.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetObjectPtrLabel",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetPointerv := schema.Of((*GlGetPointerv)(nil).Class())
+	sc_GlGetPointerv.Metadata = append(sc_GlGetPointerv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetPointerv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlObjectLabel := schema.Of((*GlObjectLabel)(nil).Class())
+	sc_GlObjectLabel.Metadata = append(sc_GlObjectLabel.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glObjectLabel",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlObjectPtrLabel := schema.Of((*GlObjectPtrLabel)(nil).Class())
+	sc_GlObjectPtrLabel.Metadata = append(sc_GlObjectPtrLabel.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glObjectPtrLabel",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPopDebugGroup := schema.Of((*GlPopDebugGroup)(nil).Class())
+	sc_GlPopDebugGroup.Metadata = append(sc_GlPopDebugGroup.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPopDebugGroup",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPushDebugGroup := schema.Of((*GlPushDebugGroup)(nil).Class())
+	sc_GlPushDebugGroup.Metadata = append(sc_GlPushDebugGroup.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPushDebugGroup",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlDrawArrays := schema.Of((*GlDrawArrays)(nil).Class())
 	sc_GlDrawArrays.Metadata = append(sc_GlDrawArrays.Metadata, &atom.Metadata{
 		API:              apiID,

@@ -57,12 +57,17 @@ cmd void glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei* length
   switch (pname) {
     case GL_OBJECT_TYPE, GL_SYNC_CONDITION, GL_SYNC_FLAGS, GL_SYNC_STATUS: {
       // version 3.0
+      if (values != null) && (bufSize > 0) {
+        values[0] = ?
+        if length != null {
+          length[0] = 1
+        }
+      }
     }
     default: {
       glErrorInvalidEnum(pname)
     }
   }
-  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsSync.xhtml","OpenGL ES 3.0")

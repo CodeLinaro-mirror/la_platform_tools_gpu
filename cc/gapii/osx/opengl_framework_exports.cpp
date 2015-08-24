@@ -1446,10 +1446,6 @@ static void* real__glGetPixelMapusv = nullptr;
 EXPORT void __attribute__((naked)) glGetPixelMapusv() {
     asm("jmp *%%rax" : : "a"(real__glGetPixelMapusv) : );
 }
-static void* real__glGetPointerv = nullptr;
-EXPORT void __attribute__((naked)) glGetPointerv() {
-    asm("jmp *%%rax" : : "a"(real__glGetPointerv) : );
-}
 static void* real__glGetPolygonStipple = nullptr;
 EXPORT void __attribute__((naked)) glGetPolygonStipple() {
     asm("jmp *%%rax" : : "a"(real__glGetPolygonStipple) : );
@@ -4737,7 +4733,6 @@ static void initExports() {
     real__glGetPixelMapfv = gapic::GetGfxProcAddress("glGetPixelMapfv", true);
     real__glGetPixelMapuiv = gapic::GetGfxProcAddress("glGetPixelMapuiv", true);
     real__glGetPixelMapusv = gapic::GetGfxProcAddress("glGetPixelMapusv", true);
-    real__glGetPointerv = gapic::GetGfxProcAddress("glGetPointerv", true);
     real__glGetPolygonStipple = gapic::GetGfxProcAddress("glGetPolygonStipple", true);
     real__glGetProgramEnvParameterdvARB = gapic::GetGfxProcAddress("glGetProgramEnvParameterdvARB", true);
     real__glGetProgramEnvParameterfvARB = gapic::GetGfxProcAddress("glGetProgramEnvParameterfvARB", true);
