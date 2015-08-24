@@ -50,8 +50,8 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 
 	return &image.Info{
 		Format: image.RGBA(), // TODO: Add support for other formats.
-		Width:  int(imgWidth),
-		Height: int(imgHeight),
+		Width:  imgWidth,
+		Height: imgHeight,
 		Data:   &path.Blob{ID: data},
 	}, nil
 }

@@ -78,8 +78,8 @@ func Convert(data []byte, width int, height int, srcFmt Format, dstFmt Format) (
 type LazyConverter struct {
 	binary.Generate
 	Data       binary.ID
-	Width      int
-	Height     int
+	Width      uint32
+	Height     uint32
 	FormatFrom Format
 	FormatTo   Format
 }
@@ -92,7 +92,7 @@ func (r *LazyConverter) BuildLazy(c interface{}, d database.Database, l log.Logg
 		return nil, err
 	}
 
-	data, err = Convert(data.([]byte), r.Width, r.Height, r.FormatFrom, r.FormatTo)
+	data, err = Convert(data.([]byte), int(r.Width), int(r.Height), r.FormatFrom, r.FormatTo)
 	if err != nil {
 		return nil, err
 	}

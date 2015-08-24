@@ -62,6 +62,6 @@ func (n *Resource) Validate() error {
 }
 
 // Thumbnail returns the path to the thumbnail of this resource.
-func (n *Resource) Thumbnail(desiredWidth, desiredHeight int) *Thumbnail {
+func (n *Resource) Thumbnail(desiredWidth, desiredHeight uint32) *Thumbnail {
 	return &Thumbnail{Object: n, DesiredWidth: desiredWidth, DesiredHeight: desiredHeight}
 }

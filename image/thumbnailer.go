@@ -24,5 +24,5 @@ import (
 type Thumbnailer interface {
 	// Thumbnail returns a thumbnail image info that most closely matches the
 	// desired image width w and height h.
-	Thumbnail(w, h int, d database.Database, l log.Logger) (*Info, error)
+	Thumbnail(w, h uint32, d database.Database, l log.Logger) (*Info, error)
 }
