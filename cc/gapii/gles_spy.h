@@ -24979,49 +24979,38 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
         std::shared_ptr<Context> l_GetContext_1042_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1042_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
-        TextureId l_id = l_tu->mBindings[target];
-        switch (target) {
-            case GLenum::GL_TEXTURE_2D: {
-                std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image(width, height, Slice<uint8_t>(),
-                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
-                                  format);
-                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
-                    data != nullptr) {
-                    l_l.mData =
-                            clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
-                }
-                l_t->mTexture2D[level] = l_l;
-                l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = format;
-                break;
-            }
-            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
-            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
-            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
-            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
-            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
-            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-                std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image(width, height, Slice<uint8_t>(),
-                                  imageSize((uint32_t)(width), (uint32_t)(height), format, type),
-                                  format);
-                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
-                    data != nullptr) {
-                    l_l.mData =
-                            clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
-                }
-                CubemapLevel l_cube = l_t->mCubemap[level];
-                l_cube.mFaces[target] = l_l;
-                l_t->mCubemap[level] = l_cube;
-                l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = format;
-                break;
-            }
-        }
+        Image l_image = /* clang-format off */
+        /* switch(target) */
+            /* case GLenum::GL_TEXTURE_2D: */(((target) == (GLenum::GL_TEXTURE_2D))) ? (l_ctx->mInstances.mTextures[l_tu->mBindings[GLenum::GL_TEXTURE_2D]]->mTexture2D[level]) :
+            /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X))|| ((target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))|| ((target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))|| ((target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))|| ((target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))|| ((target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (l_ctx->mInstances.mTextures[l_tu->mBindings[GLenum::GL_TEXTURE_CUBE_MAP]]->mCubemap[level].mFaces[target]) :
+            /* default: */ Image() /* clang-format on */;
+        BufferId l_pbo = l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER];
+        GLint l_url = l_ctx->mPixelStorage[GLenum::GL_UNPACK_ROW_LENGTH];
+        uint32_t l_src_width = /* clang-format off */
+        /* switch(l_url == (GLint)(0)) */
+            /* case true: */(((l_url == (GLint)(0)) == (true))) ? ((uint32_t)(width)) :
+            /* case false: */(((l_url == (GLint)(0)) == (false))) ? ((uint32_t)(l_url)) :
+            /* default: */ 0 /* clang-format on */;
+        uint32_t l_src_stride = imageSize(l_src_width, 1, format, type);
+        uint32_t l_src_size = l_src_stride * (uint32_t)(height);
+        uint32_t l_dst_stride = imageSize((uint32_t)(l_image.mWidth), 1, format, type);
+        uint32_t l_dst_offset = imageSize((uint32_t)(xoffset), 1, format, type) +
+                                l_dst_stride * (uint32_t)(yoffset);
+        Slice<uint8_t> l_src_data = /* clang-format off */
+        /* switch(l_pbo == (BufferId)(0)) */
+            /* case true: */(((l_pbo == (BufferId)(0)) == (true))) ? (slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_src_size))) :
+            /* case false: */(((l_pbo == (BufferId)(0)) == (false))) ? (slice(l_ctx->mInstances.mBuffers[l_pbo]->mData.begin(), (uint64_t)(data), (uint64_t)(data) + (uint64_t)(l_src_size))) :
+            /* default: */ Slice<uint8_t>() /* clang-format on */;
+        uint32_t l_line_bytes = imageSize((uint32_t)(width), 1, format, type);
         observe(observations.mReads);
         mImports.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type,
                                  data);
+        for (uint32_t l_y = 0; l_y < (uint32_t)(height); ++l_y) {
+            uint32_t l_src = l_src_stride * l_y;
+            uint32_t l_dst = l_dst_stride * l_y + l_dst_offset;
+            copy(slice(l_image.mData, (uint64_t)(l_dst), (uint64_t)(l_dst + l_line_bytes)),
+                 slice(l_src_data, (uint64_t)(l_src), (uint64_t)(l_src + l_line_bytes)));
+        }
     } while (false);
     observe(observations.mWrites);
 

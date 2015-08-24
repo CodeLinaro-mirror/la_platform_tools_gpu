@@ -1256,46 +1256,38 @@ cmd void glTexSubImage2D(GLenum         target,
 
   ctx := GetContext()
   tu := ctx.TextureUnits[ctx.ActiveTextureUnit]
-  id := tu.Bindings[target]
+  image := switch (target) {
+    case GL_TEXTURE_2D:
+      ctx.Instances.Textures[tu.Bindings[GL_TEXTURE_2D]].Texture2D[level]
 
-  // TODO: This does not consider xoffset or yoffset and completely replaces the level.
-  // FIX.
-  switch (target) {
-    case GL_TEXTURE_2D: {
-      t := ctx.Instances.Textures[id]
-      l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    imageSize(as!u32(width), as!u32(height), format, type),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
-      )
-      if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
-        l.Data = clone(as!u8*(data)[0:l.Size])
-      }
-      t.Texture2D[level] = l
-      t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
-      // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
-    }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-        GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-      t := ctx.Instances.Textures[id]
-      l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    imageSize(as!u32(width), as!u32(height), format, type),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
-      )
-      if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
-        l.Data = clone(as!u8*(data)[0:l.Size])
-      }
-      cube := t.Cubemap[level]
-      cube.Faces[as!GLenum(target)] = l
-      t.Cubemap[level] = cube
-      t.Kind = CUBEMAP // TODO: Warning/Error if kind has changed?
-      // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
-    }
+         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+      ctx.Instances.Textures[tu.Bindings[GL_TEXTURE_CUBE_MAP]].Cubemap[level].Faces[as!GLenum(target)]
+  }
+
+  // TODO: consider GL_UNPACK_ALIGNMENT, GL_UNPACK_SKIP_PIXELS, GL_UNPACK_SKIP_ROWS and GL_UNPACK_SKIP_IMAGES
+  pbo := ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER]
+  url := ctx.PixelStorage[GL_UNPACK_ROW_LENGTH]
+  src_width := switch (url == 0) {
+    case true:  as!u32(width)
+    case false: as!u32(url)
+  }
+  src_stride := imageSize(src_width, 1, format, type)
+  src_size   := src_stride * as!u32(height)
+  dst_stride := imageSize(as!u32(image.Width), 1, format, type)
+  dst_offset := imageSize(as!u32(xoffset), 1, format, type) + dst_stride * as!u32(yoffset)
+  src_data := switch (pbo == 0) {
+    case true:  as!u8*(data)[0:src_size]
+    case false: as!u8*(ctx.Instances.Buffers[pbo].Data)[as!u64(data):as!u64(data)+as!u64(src_size)]
+  }
+  line_bytes := imageSize(as!u32(width), 1, format, type)
+
+  fence
+
+  for y in (0 .. as!u32(height)) {
+    src := (src_stride*y)
+    dst := (dst_stride*y) + dst_offset
+    copy(image.Data[dst:dst+line_bytes], src_data[src:src+line_bytes])
   }
 }
 

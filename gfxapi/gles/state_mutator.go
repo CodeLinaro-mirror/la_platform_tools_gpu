@@ -9293,36 +9293,57 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_1042_result := context                 // Contextʳ
 	ctx := GetContext_1042_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
-	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
-	switch ϟa.Target {
-	case GLenum_GL_TEXTURE_2D:
-		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
-		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
-			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
+	image := func() (result Image) {
+		switch ϟa.Target {
+		case GLenum_GL_TEXTURE_2D:
+			return ctx.Instances.Textures.Get(tu.Bindings.Get(GLenum_GL_TEXTURE_2D)).OnAccess(ϟs).Texture2D.Get(ϟa.Level)
+		case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+			return ctx.Instances.Textures.Get(tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)).OnAccess(ϟs).Cubemap.Get(ϟa.Level).Faces.Get(ϟa.Target)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Target, ϟa))
+			return result
 		}
-		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
-		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
-		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _ = t, l
-	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		t := ctx.Instances.Textures.Get(id)                                                                                                                                     // Textureʳ
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type), Format: ϟa.Format} // Image
-		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
-			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
+	}() // Image
+	pbo := ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER) // BufferId
+	url := ctx.PixelStorage.Get(GLenum_GL_UNPACK_ROW_LENGTH)   // GLint
+	src_width := func() (result uint32) {
+		switch (url) == (GLint(int32(0))) {
+		case true:
+			return uint32(ϟa.Width)
+		case false:
+			return uint32(url)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (url) == (GLint(int32(0))), ϟa))
+			return result
 		}
-		cube := t.OnAccess(ϟs).Cubemap.Get(ϟa.Level) // CubemapLevel
-		cube.Faces[ϟa.Target] = l
-		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
-		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
-		t.OnAccess(ϟs).Format = ϟa.Format
-		_, _, _ = t, l, cube
-	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
-	}
+	}() // u32
+	src_stride := externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(src_width, uint32(1), ϟa.Format, ϟa.Type)                                                    // u32
+	src_size := (src_stride) * (uint32(ϟa.Height))                                                                                                   // u32
+	dst_stride := externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(image.Width), uint32(1), ϟa.Format, ϟa.Type)                                          // u32
+	dst_offset := (externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Xoffset), uint32(1), ϟa.Format, ϟa.Type)) + ((dst_stride) * (uint32(ϟa.Yoffset))) // u32
+	src_data := func() (result U8ˢ) {
+		switch (pbo) == (BufferId(uint32(0))) {
+		case true:
+			return U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(src_size), ϟs)
+		case false:
+			return U8ᵖ(ctx.Instances.Buffers.Get(pbo).Data.Index(0, ϟs)).Slice(uint64(ϟa.Data.Address), (uint64(ϟa.Data.Address))+(uint64(src_size)), ϟs)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (pbo) == (BufferId(uint32(0))), ϟa))
+			return result
+		}
+	}() // U8ˢ
+	line_bytes := externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(1), ϟa.Format, ϟa.Type) // u32
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx, tu, id
+	for y := uint32(uint32(0)); y < uint32(ϟa.Height); y++ {
+		src := (src_stride) * (y)                  // u32
+		dst := ((dst_stride) * (y)) + (dst_offset) // u32
+		image.Data.Slice(uint64(dst), uint64((dst)+(line_bytes)), ϟs).Copy(src_data.Slice(uint64(src), uint64((src)+(line_bytes)), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = src, dst
+	}
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1035_major, minRequiredVersion_1035_minor, context, GetContext_1042_result, ctx, tu, image, pbo, url, src_width, src_stride, src_size, dst_stride, dst_offset, src_data, line_bytes
 	return nil
 }
 func (ϟa *GlTexSubImage3D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
