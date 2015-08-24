@@ -1584,7 +1584,7 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Call(funcInfoGlGenQueries)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
+		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
 		ctx.Instances.Queries[id] = &Query{}
 		q.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -1615,7 +1615,7 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_46_major, minRequiredVersion_46_minor
 	return nil
 }
@@ -1648,7 +1648,7 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_48_major, minRequiredVersion_48_minor
 	return nil
 }
@@ -1956,7 +1956,7 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Call(funcInfoGlGenBuffers)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := BufferId(ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // BufferId
+		id := BufferId(ϟa.Buffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // BufferId
 		ctx.Instances.Buffers[id] = &Buffer{Size: GLsizeiptr(int32(0)), Usage: GLenum_GL_STATIC_DRAW}
 		b.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -4488,7 +4488,7 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Call(funcInfoGlGenQueriesEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
+		id := QueryId(ϟa.Queries.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // QueryId
 		ctx.Instances.Queries[id] = &Query{}
 		q.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -4512,7 +4512,7 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Call(funcInfoGlGenVertexArraysOES)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
+		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
 		ctx.Instances.VertexArrays[id] = &VertexArray{}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -5079,9 +5079,9 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Binary.value())
 	ϟb.Call(funcInfoGlGetProgramBinaryOES)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	l := GLsizei(ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
+	l := GLsizei(ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 	ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Binary.Slice(uint64(GLsizei(int32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = requiresExtension_316_ext, l
 	return nil
@@ -5157,7 +5157,7 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjecti64vEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_320_ext
 	return nil
 }
@@ -5177,7 +5177,7 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectivEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_321_ext
 	return nil
 }
@@ -5197,7 +5197,7 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectui64vEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = requiresExtension_322_ext
 	return nil
 }
@@ -5218,7 +5218,7 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectuivEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = requiresExtension_323_ext, requiresExtension_324_ext
 	return nil
 }
@@ -5235,7 +5235,7 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryivEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = requiresExtension_325_ext, requiresExtension_326_ext
 	return nil
 }
@@ -9698,7 +9698,7 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Call(funcInfoGlGenFramebuffers)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := FramebufferId(ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // FramebufferId
+		id := FramebufferId(ϟa.Framebuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // FramebufferId
 		ctx.Instances.Framebuffers[id] = &Framebuffer{Attachments: GLenumːFramebufferAttachmentInfoᵐ{}}
 		f.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -9723,7 +9723,7 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Call(funcInfoGlGenRenderbuffers)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := RenderbufferId(ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // RenderbufferId
+		id := RenderbufferId(ϟa.Renderbuffers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // RenderbufferId
 		ctx.Instances.Renderbuffers[id] = &Renderbuffer{}
 		r.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -10802,15 +10802,15 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Call(funcInfoGlGetActiveAttrib)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.BufferBytesWritten) != (GLsizeiᵖ{}) {
-		l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
+		l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 		ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟa.Name.Slice(uint64(GLsizei(int32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = l
 	} else {
 		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_735_major, minRequiredVersion_735_minor
 	return nil
 }
@@ -10836,15 +10836,15 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Call(funcInfoGlGetActiveUniform)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.BufferBytesWritten) != (GLsizeiᵖ{}) {
-		l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
+		l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 		ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟa.Name.Slice(uint64(GLsizei(int32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = l
 	} else {
 		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
-	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLint(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_736_major, minRequiredVersion_736_minor
 	return nil
 }
@@ -10867,7 +10867,7 @@ func (ϟa *GlGetActiveUniformBlockName) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveUniformBlockName)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
+	l := GLsizei(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Name.Slice(uint64(GLsizei(int32(0))), uint64(l), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _ = minRequiredVersion_737_major, minRequiredVersion_737_minor, l
@@ -10897,7 +10897,7 @@ func (ϟa *GlGetActiveUniformBlockiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Parameters.value())
 	ϟb.Call(funcInfoGlGetActiveUniformBlockiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Parameters.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_738_major, minRequiredVersion_738_minor
 	return nil
 }
@@ -11301,7 +11301,7 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetProgramiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_766_major, minRequiredVersion_766_minor
 	return nil
 }
@@ -11378,7 +11378,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟb.Call(funcInfoGlGetShaderPrecisionFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Range.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _ = minRequiredVersion_774_major, minRequiredVersion_774_minor
 	return nil
 }
@@ -14115,9 +14115,9 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.SampleCoverageInvert, ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SHADER_COMPILER:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -14179,13 +14179,13 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	case GLenum_GL_DEPTH_CLEAR_VALUE:
 		v.Index(uint64(0), ϟs).Write(ctx.Clearing.ClearDepth, ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -14379,55 +14379,55 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case GLenum_GL_GENERATE_MIPMAP_HINT:
 		v.Index(uint64(0), ϟs).Write(GLint(ctx.GenerateMipmapHint), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_TEXTURE_SIZE:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_VARYING_VECTORS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_VERTEX_ATTRIBS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_MAX_VIEWPORT_DIMS:
-		max_width := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)  // any
-		max_height := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		max_width := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)  // any
+		max_height := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(max_width, ϟa, ϟs, ϟd, ϟl, ϟb)
 		v.Index(uint64(1), ϟs).Write(max_height, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _ = max_width, max_height
 	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_PACK_ALIGNMENT:
@@ -14435,33 +14435,33 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case GLenum_GL_UNPACK_ALIGNMENT:
 		v.Index(uint64(0), ϟs).Write(ctx.PixelStorage.Get(GLenum_GL_UNPACK_ALIGNMENT), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_ALPHA_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_BLUE_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_GREEN_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_RED_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DEPTH_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLE_BUFFERS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLES:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_STENCIL_BITS:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SUBPIXEL_BITS:
-		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = result
 	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_GPU_DISJOINT_EXT:
-		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -15276,7 +15276,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Call(funcInfoGlGenTextures)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
+		id := TextureId(ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // TextureId
 		ctx.Instances.Textures[id] = (&Texture{ID: id, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -17027,7 +17027,7 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Call(funcInfoGlGenVertexArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
-		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
+		id := VertexArrayId(ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // VertexArrayId
 		ctx.Instances.VertexArrays[id] = &VertexArray{}
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
@@ -17559,7 +17559,7 @@ func (ϟa *GlGetQueryObjecti64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjecti64v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -17577,7 +17577,7 @@ func (ϟa *GlGetQueryObjectui64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectui64v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 

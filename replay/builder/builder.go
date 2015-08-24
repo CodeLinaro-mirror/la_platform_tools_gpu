@@ -64,7 +64,7 @@ type Builder struct {
 	heap, temp      allocator
 	resourceIDToIdx map[binary.ID]uint32
 	resources       []protocol.ResourceInfo
-	mappedMemory    memory.RangeList
+	reservedMemory  memory.RangeList
 	instructions    []asm.Instruction
 	decoders        []Postback
 	stack           []stackItem
@@ -89,7 +89,7 @@ func New(architecture device.Architecture) *Builder {
 		temp:            allocator{alignment: uint64(architecture.PointerAlignment)},
 		resourceIDToIdx: map[binary.ID]uint32{},
 		resources:       []protocol.ResourceInfo{},
-		mappedMemory:    memory.RangeList{},
+		reservedMemory:  memory.RangeList{},
 		instructions:    []asm.Instruction{},
 		architecture:    architecture,
 		Remappings:      make(map[interface{}]value.Pointer),
@@ -215,7 +215,7 @@ func (b *Builder) RevertAtom(err error) {
 		panic("RevertAtom called without a call to BeginAtom")
 	}
 	b.inAtom = false
-	// TODO: Revert calls to: AllocateMemory, Buffer, String, MapMemory, Write.
+	// TODO: Revert calls to: AllocateMemory, Buffer, String, ReserveMemory, MapMemory, UnmapMemory, Write.
 	b.temp.reset()
 	b.stack = b.stack[:0]
 	if len(b.instructions) > 0 {
@@ -408,9 +408,9 @@ func (b *Builder) Pop(count uint32) {
 	})
 }
 
-// MapMemory adds rng as a memory range that needs allocating for replay.
-func (b *Builder) MapMemory(rng memory.Range) {
-	interval.Merge(&b.mappedMemory, rng.Span(), true)
+// ReserveMemory adds rng as a memory range that needs allocating for replay.
+func (b *Builder) ReserveMemory(rng memory.Range) {
+	interval.Merge(&b.reservedMemory, rng.Span(), true)
 }
 
 // Write fills the memory range in capture address-space rng with the data
@@ -431,7 +431,7 @@ func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 			Destination: rng.Base,
 		})
 	}
-	b.MapMemory(rng)
+	b.ReserveMemory(rng)
 }
 
 // Build compiles the replay instructions, returning a Payload that can be
@@ -502,35 +502,35 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 	//      ├──────────────────┤
 	//      │       temp       │
 	//      ├──────────────────┤
-	//      │ remapped range 0 │
+	//      │ reserved range 0 │
 	//      ├──────────────────┤
 	//      ├──────────────────┤
-	//      │ remapped range N │
+	//      │ reserved range N │
 	// high └──────────────────┘
 
 	tempBase := b.heap.size
-	remapBase := tempBase + b.temp.size
+	reservedBase := tempBase + b.temp.size
 
-	remapped := allocator{alignment: b.heap.alignment}
-	remappedBases := make([]uint64, len(b.mappedMemory))
-	for i, m := range b.mappedMemory {
-		remappedBases[i] = remapBase + remapped.alloc(m.Size)
+	reserved := allocator{alignment: b.heap.alignment}
+	reservedBases := make([]uint64, len(b.reservedMemory))
+	for i, m := range b.reservedMemory {
+		reservedBases[i] = reservedBase + reserved.alloc(m.Size)
 	}
 
-	size := remapBase + remapped.size
+	size := reservedBase + reserved.size
 	vml := &volatileMemoryLayout{
-		mappedMemory:  b.mappedMemory,
-		tempBase:      tempBase,
-		remappedBases: remappedBases,
-		size:          size,
+		tempBase:       tempBase,
+		reservedBases:  reservedBases,
+		size:           size,
+		reservedMemory: b.reservedMemory,
 	}
 
 	if config.DebugReplayBuilder {
 		log.Infof(logger, "Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
 		log.Infof(logger, "  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
-		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
-		for _, m := range b.mappedMemory {
+		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, reservedBase-1)
+		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", reservedBase, size-1)
+		for _, m := range b.reservedMemory {
 			log.Infof(logger, "    Block:   %v", m)
 		}
 	}
@@ -539,10 +539,10 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 }
 
 type volatileMemoryLayout struct {
-	mappedMemory  memory.RangeList // Mapped memory ranges.
-	tempBase      uint64           // Base address of the temp space.
-	remappedBases []uint64         // Base address for each remapped entry in mappedMemory.
-	size          uint64           // Total size of volatile memory.
+	tempBase       uint64           // Base address of the temp space.
+	reservedBases  []uint64         // Base address for each reserved entry in reservedMemory.
+	size           uint64           // Total size of volatile memory.
+	reservedMemory memory.RangeList // Reserved memory ranges.
 }
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
@@ -554,7 +554,7 @@ func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
 // TranslateRemappedPointer implements the PointerResolver interface method in
 // the replay/value package.
 func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.Type, uint64) {
-	bufferIdx := interval.IndexOf(&l.mappedMemory, offset)
+	bufferIdx := interval.IndexOf(&l.reservedMemory, offset)
 	if bufferIdx < 0 {
 		// Pointer is not observed. This can be legal - for example
 		// glVertexAttribPointer may have been passed a pointer that was never
@@ -564,7 +564,7 @@ func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.
 		// Must match value used in cc/gapir/memory_manager.h
 		return protocol.TypeAbsolutePointer, 0xBADF00D
 	}
-	bufferStart := l.mappedMemory[bufferIdx].First()
-	pointer := l.remappedBases[bufferIdx] + offset - uint64(bufferStart)
+	bufferStart := l.reservedMemory[bufferIdx].First()
+	pointer := l.reservedBases[bufferIdx] + offset - uint64(bufferStart)
 	return protocol.TypeVolatilePointer, pointer
 }

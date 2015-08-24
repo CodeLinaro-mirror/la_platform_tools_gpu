@@ -214,7 +214,7 @@ func (ϟa *CmdUnknownWritePtr) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.P.value())
 	ϟb.Call(funcInfoCmdUnknownWritePtr)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -229,7 +229,7 @@ func (ϟa *CmdUnknownWriteSlice) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Call(funcInfoCmdUnknownWriteSlice)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
-		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // int
+		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // int
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = unknown
 	}
@@ -919,7 +919,7 @@ func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 	ϟb.Call(funcInfoCmdVoidOutArrayOfUnknownRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
-		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // remapped
+		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // remapped
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = unknown
 	}

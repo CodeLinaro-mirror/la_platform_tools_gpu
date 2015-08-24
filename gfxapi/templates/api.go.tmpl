@@ -208,8 +208,8 @@
     return p
   }
 
-  func (p {{$ptr_ty}}) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$ptr_ty}} {
-    p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+  func (p {{$ptr_ty}}) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$ptr_ty}} {
+    p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
     return p
   }
 
@@ -407,7 +407,7 @@
       f(s.Range(ϟs))
     }
     if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-      s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+      s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
       {{if (GetAnnotation $s.To "replay_remap")}}
         {{/* Element type has explicitly stated it needs custom remapping */}}
         ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
@@ -445,7 +445,7 @@
       f(s.Range(ϟs))
     }
     if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-      ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+      ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
       {{if (GetAnnotation $s.To "replay_remap")}}
         {{/* Element type has explicitly stated it needs custom remapping */}}
         size := s.ElementSize(ϟs)
@@ -469,10 +469,10 @@
     return s
   }
 
-  func (s {{$slice_ty}}) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
+  func (s {{$slice_ty}}) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
     if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
       rng := s.Range(ϟs)
-      ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+      ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
     }
     return s
   }
