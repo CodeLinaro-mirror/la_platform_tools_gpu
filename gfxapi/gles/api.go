@@ -46649,4 +46649,6 @@ type Slice interface {
 	Info() SliceInfo
 	// ElementSize returns the size in bytes of a single element in the slice.
 	ElementSize(ϟs *gfxapi.State) uint64
+	// Range returns the memory range this slice represents in the underlying pool.
+	Range(ϟs *gfxapi.State) memory.Range
 }
