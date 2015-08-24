@@ -34,6 +34,25 @@ type externs struct {
 	b *rb.Builder
 }
 
+func (e externs) mapMemory(slice Slice) {
+	if b := e.b; b != nil {
+		switch e.a.(type) {
+		case *GlMapBufferRange:
+			// Base address is on the stack.
+			b.MapMemory(slice.Range(e.s))
+
+		default:
+			log.E(e.l, "mapBuffer extern called for unsupported atom %T", e.a)
+		}
+	}
+}
+
+func (e externs) unmapMemory(slice Slice) {
+	if b := e.b; b != nil {
+		b.UnmapMemory(slice.Range(e.s))
+	}
+}
+
 func (e externs) elSize(ty GLenum) uint64 {
 	switch ty {
 	case GLenum_GL_UNSIGNED_BYTE:

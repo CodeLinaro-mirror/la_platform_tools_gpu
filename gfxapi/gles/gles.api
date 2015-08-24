@@ -39,6 +39,9 @@ class generate_types {
   u32[] u32_slice
 }
 
+extern void mapMemory(any slice)
+extern void unmapMemory(any slice)
+
 extern u32 imageSize(u32 width, u32 height, GLenum format, GLenum type)
 extern s32 stateVariableSize(GLenum v)
 macro void minRequiredVersion(u32 major, u32 minor) {  }
