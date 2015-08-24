@@ -71,6 +71,7 @@
 {{define "Go.Null"}}
   {{AssertType $ "Type"}}
   {{     if IsPointer       $}}{{Template "Go.Type" $}}{}
+  {{else if IsSlice         $}}{{Template "Go.Type" $}}{}
   {{else if IsReference     $}}{{Template "Go.Type" $}}(nil)
   {{else if IsBool          $}}false
   {{else if IsInt           $}}int(0)
