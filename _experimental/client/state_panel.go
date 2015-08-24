@@ -33,20 +33,15 @@ func CreateStatePanel(appCtx *ApplicationContext) gxui.Control {
 	}
 
 	appCtx.events.OnSelect(func(p path.Path) {
-		if a := path.FindAtom(p); a != nil {
+		if a := lastAtom(p); a != nil {
 			if s := a.StateAfter(); !path.Equal(s, state) {
 				state = s
 				update()
 			}
 		}
-		if s, a := path.FindAtomSlice(p); s != nil && a != nil {
-			if s := a.Index(s.End - 1).StateAfter(); !path.Equal(s, state) {
-				state = s
-				update()
-			}
-		}
-		if tree.Select(p.Path()) {
-			tree.Show(p.Path())
+		item := stableStatePath(p)
+		if tree.Select(item) {
+			tree.Show(item)
 		}
 	})
 

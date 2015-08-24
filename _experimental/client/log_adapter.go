@@ -60,7 +60,7 @@ func (a *LogAdapter) add(entry log.Entry) {
 	}
 	a.head = (a.head + 1) % a.maxLength
 
-	a.DataChanged()
+	a.DataChanged(false)
 }
 
 func (a *LogAdapter) Logger() log.Logger {
@@ -75,7 +75,7 @@ func (a *LogAdapter) Clear() {
 	a.entries = a.entries[:0]
 	a.head = 0
 	a.tail = 0
-	a.DataChanged()
+	a.DataReplaced()
 }
 
 func (a *LogAdapter) Count() int {

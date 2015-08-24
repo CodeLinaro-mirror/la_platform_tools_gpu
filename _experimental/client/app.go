@@ -154,7 +154,7 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 				if captures, err := appCtx.rpc.GetCaptures(); err == nil {
 					appCtx.Run(func() {
 						adapter.items = captures
-						adapter.DataChanged()
+						adapter.DataChanged(false)
 					})
 				}
 				time.Sleep(10 * time.Second)
@@ -220,7 +220,7 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 				if devices, err := appCtx.rpc.GetDevices(); err == nil {
 					appCtx.Run(func() {
 						adapter.items = devices
-						adapter.DataChanged()
+						adapter.DataChanged(false)
 						if list.Selected() == nil && len(devices) > 0 {
 							list.Select(devices[0].path)
 						}

@@ -41,17 +41,17 @@ func (a *CommandAdapter) UpdateAtoms(capture *path.Capture, atoms []atom.Atom, r
 	a.ctx.capture = capture
 	a.ctx.atoms = atoms
 	a.group = root
-	a.DataChanged()
+	a.DataChanged(false)
 }
 
 func (a *CommandAdapter) UpdateTimings(timings service.TimingInfo) {
 	a.ctx.timings = timings
-	a.DataChanged()
+	a.DataChanged(true)
 }
 
 func (a *CommandAdapter) UpdateDevice(device *path.Device) {
 	a.ctx.device = device
-	a.DataChanged()
+	a.DataChanged(true)
 }
 
 func (a CommandAdapter) Path(item gxui.AdapterItem) path.Path {

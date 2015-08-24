@@ -18,6 +18,8 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
+	"strconv"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -27,7 +29,7 @@ import (
 
 const kStateAdapterNodeHeight = 18
 
-func createControls(appCtx *ApplicationContext, name string, p path.Path, v interface{}) gxui.Control {
+func createControls(appCtx *ApplicationContext, name string, p path.Path, t schema.Type, v interface{}) gxui.Control {
 	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
@@ -42,12 +44,11 @@ func createControls(appCtx *ApplicationContext, name string, p path.Path, v inte
 
 	label := addLabel("%s: ", name)
 	appCtx.toolTipController.AddToolTip(label, 0.7, func(math.Point) gxui.Control {
-		return createLabel(appCtx, p.Path(), gxui.White)
+		return createLabel(appCtx, stableStatePath(p), gxui.White)
 	})
 
 	if v != nil {
-		c := createField(appCtx, p, nil, v)
-		if c != nil {
+		if c := createField(appCtx, p, t, v); c != nil {
 			layout.AddChild(c)
 		}
 	}
@@ -58,6 +59,7 @@ func createControls(appCtx *ApplicationContext, name string, p path.Path, v inte
 type StateAdapterNode struct {
 	appCtx   *ApplicationContext
 	name     string
+	ty       schema.Type
 	value    interface{}
 	path     path.Value
 	item     string
@@ -71,39 +73,54 @@ func (l StateAdapterNodeList) Len() int           { return len(l) }
 func (l StateAdapterNodeList) Less(a, b int) bool { return l[a].name < l[b].name }
 func (l StateAdapterNodeList) Swap(a, b int)      { l[a], l[b] = l[b], l[a] }
 
-func (n *StateAdapterNode) add(name string, value interface{}, path path.Value) {
+func (n *StateAdapterNode) add(name string, ty schema.Type, value interface{}, path path.Value) {
 	n.children = append(n.children, &StateAdapterNode{
 		appCtx: n.appCtx,
 		name:   name,
+		ty:     ty,
 		value:  value,
 		path:   path,
-		item:   path.Path(),
+		item:   stableStatePath(path),
 		parent: n,
 	})
 }
 
+func stableStatePath(p path.Path) string {
+	if s := path.FindState(p); s != nil {
+		return strings.TrimPrefix(p.Path(), s.Path())
+	}
+	return p.Path()
+}
+
 func (n *StateAdapterNode) init() {
 	n.children = nil
-	if v, ok := n.value.(*schema.Object); ok {
-		for i := range v.Fields {
-			name := v.Type.Fields[i].Name()
-			n.add(name, v.Fields[i], n.path.Field(name))
+	if o, ok := n.value.(*schema.Object); ok {
+		for i := range o.Fields {
+			name := o.Type.Fields[i].Name()
+			n.add(name, o.Type.Fields[i].Type, o.Fields[i], n.path.Field(name))
 		}
 	} else {
-		v := reflect.ValueOf(n.value)
-		switch v.Kind() {
-		case reflect.Array, reflect.Slice:
-			for i, c := 0, v.Len(); i < c; i++ {
-				name := fmt.Sprintf("%d", i)
-				v := v.Index(i)
-				n.add(name, v.Interface(), n.path.ArrayIndex(uint64(i)))
+		name := func(ty schema.Type, v interface{}) string {
+			if c := findConstant(findConstants(ty, n.appCtx), v); c.Value != nil {
+				return c.Name
 			}
-		case reflect.Map:
+			return fmt.Sprintf("%v", v)
+		}
+
+		switch ty := n.ty.(type) {
+		case *schema.Array:
+			v := reflect.ValueOf(n.value)
+			for i, c := 0, v.Len(); i < c; i++ {
+				v := v.Index(i)
+				n.add(strconv.Itoa(i), ty.ValueType, v.Interface(), n.path.ArrayIndex(uint64(i)))
+			}
+
+		case *schema.Map:
+			v := reflect.ValueOf(n.value)
 			for _, k := range v.MapKeys() {
 				v := v.MapIndex(k)
 				k := k.Interface()
-				name := fmt.Sprintf("%v", k)
-				n.add(name, v.Interface(), n.path.MapIndex(k))
+				n.add(name(ty.KeyType, k), ty.ValueType, v.Interface(), n.path.MapIndex(k))
 			}
 			sort.Sort(n.children)
 		}
@@ -141,9 +158,9 @@ func (n *StateAdapterNode) Item() gxui.AdapterItem {
 
 func (n *StateAdapterNode) Create(t gxui.Theme) gxui.Control {
 	if len(n.children) > 0 {
-		return createControls(n.appCtx, n.name, n.path, nil)
+		return createControls(n.appCtx, n.name, n.path, n.ty, nil)
 	} else {
-		return createControls(n.appCtx, n.name, n.path, n.value)
+		return createControls(n.appCtx, n.name, n.path, n.ty, n.value)
 	}
 }
 
@@ -163,8 +180,8 @@ func NewStateAdapter(appCtx *ApplicationContext) *StateAdapter {
 }
 
 func (a *StateAdapter) Update(value interface{}, path *path.State) {
-	a.value = value
-	a.path = path
+	v := value.(*schema.Object)
+	a.value, a.path = v, path
 	a.init()
-	a.DataReplaced()
+	a.DataChanged(true)
 }

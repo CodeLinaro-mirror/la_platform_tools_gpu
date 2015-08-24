@@ -94,3 +94,15 @@ func (n *State) As(ty interface{}) Value {
 func (n *State) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
+
+// FindState returns the first State found traversing the path p.
+// If no State was found, then nil is returned.
+func FindState(p Path) *State {
+	for p != nil {
+		if p, ok := p.(*State); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}

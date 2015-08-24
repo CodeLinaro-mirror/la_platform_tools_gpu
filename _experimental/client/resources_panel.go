@@ -61,7 +61,7 @@ func CreateResourcesPanel(appCtx *ApplicationContext) gxui.Control {
 		}
 		if a := lastAtom(p); a != nil {
 			atomIndex = a.Index
-			adapter.DataChanged()
+			adapter.DataChanged(true)
 		}
 	})
 
@@ -93,7 +93,7 @@ func (t updateResourcesAdapter) Run(c task.CancelSignal) {
 	c.Check()
 	appCtx.Run(func() {
 		t.adapter.groups = []resourceGroupNode{textures}
-		t.adapter.DataChanged()
+		t.adapter.DataChanged(true)
 	})
 }
 
