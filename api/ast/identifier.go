@@ -50,6 +50,7 @@ const (
 	KeywordEnum      = "enum"
 	KeywordExtern    = "extern"
 	KeywordFalse     = "false"
+	KeywordFence     = "fence"
 	KeywordFor       = "for"
 	KeywordIf        = "if"
 	KeywordImport    = "import"

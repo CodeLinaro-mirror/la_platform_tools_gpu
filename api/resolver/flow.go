@@ -39,6 +39,13 @@ func addFence(ctx *context, block *semantic.Block) {
 
 func detectFence(ctx *context, n semantic.Node, fence *semantic.Fence, istop bool) fenceInfo {
 	switch n := n.(type) {
+	case *semantic.Fence:
+		if fence == nil {
+			return fenceInfo{fence: n, pre: istop}
+		} else {
+			ctx.errorf(n, "duplicate fence found")
+			return fenceInfo{fence: fence}
+		}
 	case *semantic.Block:
 		info := fenceInfo{fence: fence, pre: istop}
 		for index, s := range n.Statements {
@@ -59,6 +66,9 @@ func detectFence(ctx *context, n semantic.Node, fence *semantic.Fence, istop boo
 		return info
 	case *semantic.Copy:
 		if fence != nil {
+			if fence.Explicit { // Explict fence overrides implicit copy fence.
+				return fenceInfo{fence: fence}
+			}
 			ctx.errorf(n, "copy after fence")
 		}
 		info := detectFenceChildren(ctx, n, fence)

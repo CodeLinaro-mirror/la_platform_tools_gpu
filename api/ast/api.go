@@ -66,3 +66,10 @@ type Import struct {
 }
 
 func (t Import) Node() parse.Node { return t.CST }
+
+// Fence is the AST node that represents «fence» statement
+type Fence struct {
+	CST *parse.Branch // underlying parse branch for this node
+}
+
+func (t Fence) Node() parse.Node { return t.CST }

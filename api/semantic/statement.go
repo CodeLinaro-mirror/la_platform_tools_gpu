@@ -115,5 +115,7 @@ type Return struct {
 // Note that some statements are classified as both pre-fence and post-fence,
 // and require logic to be executed either side of the API function call.
 type Fence struct {
+	AST       *ast.Fence // the underlying syntax node this was built from
 	Statement Node
+	Explicit  bool // If true, then the fence was explicitly declared in the API file.
 }

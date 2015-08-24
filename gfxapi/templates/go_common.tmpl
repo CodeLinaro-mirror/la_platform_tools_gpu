@@ -308,7 +308,7 @@
   {{else if IsArrayAssign  $}}{{Template "Go.ArrayAssign" $}}
   {{else if IsMapAssign    $}}{{Template "Go.MapAssign" $}}
   {{else if IsSliceAssign  $}}{{Template "Go.SliceAssign" $}}
-  {{else if IsCopy         $}}{{Error "Copy statement found outside of a Fence"}}
+  {{else if IsCopy         $}}{{Template "Go.Copy" $}}
   {{else if IsReturn       $}}{{Template "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsIteration    $}}{{Template "Go.Iteration" $}}
   {{else if IsCall         $}}{{Template "Go.Call" $}}
@@ -360,6 +360,17 @@
   {{else}}
     externs{ϟa, ϟs, ϟd, ϟl, ϟb}.{{$.Target.Function.Name}}({{$args}})
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute a copy statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Copy"}}
+  {{AssertType $ "Copy"}}
+  {{Template "Go.Read" $.Dst}}.Copy({{Template "Go.Read" $.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 {{end}}
 
 

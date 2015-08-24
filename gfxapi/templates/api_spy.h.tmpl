@@ -247,7 +247,6 @@
 {{define "Statement"}}
   {{     if IsReturn $}}break;
   {{else if IsFence  $}}{{Template "Fence" $}}
-  {{else if IsCopy   $}}{{Error "Copy statement found outside of a Fence"}}
   {{else              }}{{Template "C++.Statement.Default" $}}
   {{end}}
 {{end}}

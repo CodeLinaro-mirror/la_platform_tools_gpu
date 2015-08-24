@@ -46,6 +46,9 @@ func requireStatement(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if g := return_(p, cst); g != nil {
 		return g
 	}
+	if g := fence(p, cst); g != nil {
+		return g
+	}
 	e := requireExpression(p, cst)
 	if g := declareLocal(p, cst, e); g != nil {
 		return g
@@ -145,4 +148,17 @@ func return_(p *parse.Parser, cst *parse.Branch) *ast.Return {
 		s.Value = requireExpression(p, cst)
 	})
 	return s
+}
+
+// 'fence' statement
+func fence(p *parse.Parser, cst *parse.Branch) *ast.Fence {
+	if !peekKeyword(ast.KeywordFence, p) {
+		return nil
+	}
+	f := &ast.Fence{}
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		requireKeyword(ast.KeywordFence, p, cst)
+		f.CST = cst
+	})
+	return f
 }
