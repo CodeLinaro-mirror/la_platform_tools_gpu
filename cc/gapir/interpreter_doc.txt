@@ -95,8 +95,8 @@ Opcodes
     Load resource
         <code:6> <resource-id:26>
             * RESOURCE(resource-id) [-1 (pointer)]
-            * Pop the volatile-address from the top of the stack and loads the resource with the
-              given id to that address
+            * Pop the address from the top of the stack and loads the resource with the given id
+              to that address
 
     Post data
         <code:6> <padding:26>

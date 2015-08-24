@@ -218,10 +218,6 @@ bool Context::loadResource(Stack* stack) {
     }
 
     const auto& resourceData = mReplayRequest->getResourceData(resourceId);
-    if (!mMemoryManager->isVolatileAddressWithSize(address, resourceData.second)) {
-        GAPID_WARNING("Invalid volatile address in loadResource %p", address);
-        return false;
-    }
 
     if (!mResourceProvider->get(resourceData.first, mServer, address, resourceData.second)) {
         GAPID_WARNING("Can't fetch resource: %s", resourceData.first.c_str());
