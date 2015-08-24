@@ -115,7 +115,13 @@
 {{define "MethodDefinitions"}}
   {{AssertType $ "Function"}}
 
-  inline {{Template "C++.ReturnType" $}} {{Template "CmdName" $}}({{Template "C++.CallParameters" $}});
+  {{$name := Macro "CmdName" $}}
+
+  {{if not (GetAnnotation $ "synthetic")}}
+  inline bool has{{Title $name}}() const;
+  {{end}}
+
+  inline {{Template "C++.ReturnType" $}} {{$name}}({{Template "C++.CallParameters" $}});
 {{end}}
 
 
@@ -153,8 +159,14 @@
 {{define "MethodImplementation"}}
   {{AssertType $ "Function"}}
 
-  {{$name    := Macro "CmdName" $}}
-  {{$spyname := Global "SpyName"}}
+  {{$name      := Macro "CmdName" $}}
+  {{$spyname   := Global "SpyName"}}
+  {{$synthetic := GetAnnotation $ "synthetic"}}
+
+  {{if not $synthetic}}
+    inline bool {{$spyname}}::has{{Title $name}}() const { return mImports.{{$name}} != nullptr; }
+    ¶
+  {{end}}
 
   inline {{Template "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Template "C++.CallParameters" $}}) {
     GAPID_INFO({{Template "C++.PrintfCommandCall" $}});
@@ -162,6 +174,13 @@
       {{Template "C++.ReturnType" $}} result = {{Template "C++.Null" (TypeOf $.Return)}};
     {{end}}
 ¶
+    {{if not $synthetic}}
+      if (!has{{Title $name}}()) {
+        GAPID_WARNING("Application called unsupported function {{$name}}");
+        return{{if not (IsVoid $.Return.Type)}} result{{end}};
+      }
+¶
+    {{end}}
     Observations observations;
     do {
       {{Global "CurrentCommand" $}}

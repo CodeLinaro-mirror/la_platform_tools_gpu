@@ -43,1064 +43,1760 @@ class GlesSpy : public SpyBase {
 public:
     inline void init(std::shared_ptr<gapic::Encoder> encoder);
 
+    inline bool hasGlBlendBarrierKHR() const;
     inline void glBlendBarrierKHR();
+    inline bool hasGlBlendEquationSeparateiEXT() const;
     inline void glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB, uint32_t modeAlpha);
+    inline bool hasGlBlendEquationiEXT() const;
     inline void glBlendEquationiEXT(uint32_t buf, uint32_t mode);
+    inline bool hasGlBlendFuncSeparateiEXT() const;
     inline void glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                         uint32_t srcAlpha, uint32_t dstAlpha);
+    inline bool hasGlBlendFunciEXT() const;
     inline void glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst);
+    inline bool hasGlColorMaskiEXT() const;
     inline void glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    inline bool hasGlCopyImageSubDataEXT() const;
     inline void glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                       int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
                                       uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
                                       int32_t dstY, int32_t dstZ, int32_t srcWidth,
                                       int32_t srcHeight, int32_t srcDepth);
+    inline bool hasGlDebugMessageCallbackKHR() const;
     inline void glDebugMessageCallbackKHR(void* callback, void* userParam);
+    inline bool hasGlDebugMessageControlKHR() const;
     inline void glDebugMessageControlKHR(uint32_t source, uint32_t type, uint32_t severity,
                                          int32_t count, uint32_t* ids, uint8_t enabled);
+    inline bool hasGlDebugMessageInsertKHR() const;
     inline void glDebugMessageInsertKHR(uint32_t source, uint32_t type, uint32_t id,
                                         uint32_t severity, int32_t length, char* buf);
+    inline bool hasGlDisableiEXT() const;
     inline void glDisableiEXT(uint32_t target, uint32_t index);
+    inline bool hasGlEnableiEXT() const;
     inline void glEnableiEXT(uint32_t target, uint32_t index);
+    inline bool hasGlFramebufferTextureEXT() const;
     inline void glFramebufferTextureEXT(uint32_t target, uint32_t attachment, uint32_t texture,
                                         int32_t level);
+    inline bool hasGlGetDebugMessageLogKHR() const;
     inline uint32_t glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize, uint32_t* sources,
                                             uint32_t* types, uint32_t* ids, uint32_t* severities,
                                             int32_t* lengths, char* messageLog);
+    inline bool hasGlGetObjectLabelKHR() const;
     inline void glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t bufSize,
                                     int32_t* length, char* label);
+    inline bool hasGlGetObjectPtrLabelKHR() const;
     inline void glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t* length, char* label);
+    inline bool hasGlGetPointervKHR() const;
     inline void glGetPointervKHR(uint32_t pname, void** params);
+    inline bool hasGlGetSamplerParameterIivEXT() const;
     inline void glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, int32_t* params);
+    inline bool hasGlGetSamplerParameterIuivEXT() const;
     inline void glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* params);
+    inline bool hasGlGetTexParameterIivEXT() const;
     inline void glGetTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlGetTexParameterIuivEXT() const;
     inline void glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params);
+    inline bool hasGlIsEnablediEXT() const;
     inline uint8_t glIsEnablediEXT(uint32_t target, uint32_t index);
+    inline bool hasGlMinSampleShadingOES() const;
     inline void glMinSampleShadingOES(float value);
+    inline bool hasGlObjectLabelKHR() const;
     inline void glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t length, char* label);
+    inline bool hasGlObjectPtrLabelKHR() const;
     inline void glObjectPtrLabelKHR(void* ptr, int32_t length, char* label);
+    inline bool hasGlPatchParameteriEXT() const;
     inline void glPatchParameteriEXT(uint32_t pname, int32_t value);
+    inline bool hasGlPopDebugGroupKHR() const;
     inline void glPopDebugGroupKHR();
+    inline bool hasGlPrimitiveBoundingBoxEXT() const;
     inline void glPrimitiveBoundingBoxEXT(float minX, float minY, float minZ, float minW,
                                           float maxX, float maxY, float maxZ, float maxW);
+    inline bool hasGlPushDebugGroupKHR() const;
     inline void glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t length, char* message);
+    inline bool hasGlSamplerParameterIivEXT() const;
     inline void glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, int32_t* param);
+    inline bool hasGlSamplerParameterIuivEXT() const;
     inline void glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* param);
+    inline bool hasGlTexBufferEXT() const;
     inline void glTexBufferEXT(uint32_t target, uint32_t internalformat, uint32_t buffer);
+    inline bool hasGlTexBufferRangeEXT() const;
     inline void glTexBufferRangeEXT(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                     int32_t offset, int32_t size);
+    inline bool hasGlTexParameterIivEXT() const;
     inline void glTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlTexParameterIuivEXT() const;
     inline void glTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params);
+    inline bool hasGlTexStorage3DMultisampleOES() const;
     inline void glTexStorage3DMultisampleOES(uint32_t target, int32_t samples,
                                              uint32_t internalformat, int32_t width, int32_t height,
                                              int32_t depth, uint8_t fixedsamplelocations);
+    inline bool hasGlBeginQuery() const;
     inline void glBeginQuery(uint32_t target, uint32_t query);
+    inline bool hasGlDeleteQueries() const;
     inline void glDeleteQueries(int32_t count, uint32_t* queries);
+    inline bool hasGlEndQuery() const;
     inline void glEndQuery(uint32_t target);
+    inline bool hasGlGenQueries() const;
     inline void glGenQueries(int32_t count, uint32_t* queries);
+    inline bool hasGlGetQueryObjectuiv() const;
     inline void glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value);
+    inline bool hasGlGetQueryiv() const;
     inline void glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value);
+    inline bool hasGlIsQuery() const;
     inline uint8_t glIsQuery(uint32_t query);
+    inline bool hasGlBindBuffer() const;
     inline void glBindBuffer(uint32_t target, uint32_t buffer);
+    inline bool hasGlBindBufferBase() const;
     inline void glBindBufferBase(uint32_t target, uint32_t index, uint32_t buffer);
+    inline bool hasGlBindBufferRange() const;
     inline void glBindBufferRange(uint32_t target, uint32_t index, uint32_t buffer, int32_t offset,
                                   int32_t size);
+    inline bool hasGlBufferData() const;
     inline void glBufferData(uint32_t target, int32_t size, void* data, uint32_t usage);
+    inline bool hasGlBufferSubData() const;
     inline void glBufferSubData(uint32_t target, int32_t offset, int32_t size, void* data);
+    inline bool hasGlCopyBufferSubData() const;
     inline void glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarget, int32_t readOffset,
                                     int32_t writeOffset, int32_t size);
+    inline bool hasGlDeleteBuffers() const;
     inline void glDeleteBuffers(int32_t count, uint32_t* buffers);
+    inline bool hasGlGenBuffers() const;
     inline void glGenBuffers(int32_t count, uint32_t* buffers);
+    inline bool hasGlGetBufferParameteri64v() const;
     inline void glGetBufferParameteri64v(uint32_t target, uint32_t pname, int64_t* params);
+    inline bool hasGlGetBufferParameteriv() const;
     inline void glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value);
+    inline bool hasGlGetBufferPointerv() const;
     inline void glGetBufferPointerv(uint32_t target, uint32_t pname, void** params);
+    inline bool hasGlIsBuffer() const;
     inline uint8_t glIsBuffer(uint32_t buffer);
+    inline bool hasGlMapBufferRange() const;
     inline void* glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
+    inline bool hasGlUnmapBuffer() const;
     inline uint8_t glUnmapBuffer(uint32_t target);
+    inline bool hasGlDrawArrays() const;
     inline void glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count);
+    inline bool hasGlDrawArraysIndirect() const;
     inline void glDrawArraysIndirect(uint32_t mode, void* indirect);
+    inline bool hasGlDrawArraysInstanced() const;
     inline void glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count,
                                       int32_t instancecount);
+    inline bool hasGlDrawBuffers() const;
     inline void glDrawBuffers(int32_t n, uint32_t* bufs);
+    inline bool hasGlDrawElements() const;
     inline void glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type,
                                void* indices);
+    inline bool hasGlDrawElementsIndirect() const;
     inline void glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect);
+    inline bool hasGlDrawElementsInstanced() const;
     inline void glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type, void* indices,
                                         int32_t instancecount);
+    inline bool hasGlDrawRangeElements() const;
     inline void glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
                                     uint32_t type, void* indices);
+    inline bool hasGlActiveShaderProgramEXT() const;
     inline void glActiveShaderProgramEXT(uint32_t pipeline, uint32_t program);
+    inline bool hasGlAlphaFuncQCOM() const;
     inline void glAlphaFuncQCOM(uint32_t func, float ref);
+    inline bool hasGlBeginConditionalRenderNV() const;
     inline void glBeginConditionalRenderNV(uint32_t id, uint32_t mode);
+    inline bool hasGlBeginPerfMonitorAMD() const;
     inline void glBeginPerfMonitorAMD(uint32_t monitor);
+    inline bool hasGlBeginPerfQueryINTEL() const;
     inline void glBeginPerfQueryINTEL(uint32_t queryHandle);
+    inline bool hasGlBeginQueryEXT() const;
     inline void glBeginQueryEXT(uint32_t target, uint32_t query);
+    inline bool hasGlBindProgramPipelineEXT() const;
     inline void glBindProgramPipelineEXT(uint32_t pipeline);
+    inline bool hasGlBindVertexArrayOES() const;
     inline void glBindVertexArrayOES(uint32_t array);
+    inline bool hasGlBlendBarrierNV() const;
     inline void glBlendBarrierNV();
+    inline bool hasGlBlendEquationSeparateiOES() const;
     inline void glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB, uint32_t modeAlpha);
+    inline bool hasGlBlendEquationiOES() const;
     inline void glBlendEquationiOES(uint32_t buf, uint32_t mode);
+    inline bool hasGlBlendFuncSeparateiOES() const;
     inline void glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                         uint32_t srcAlpha, uint32_t dstAlpha);
+    inline bool hasGlBlendFunciOES() const;
     inline void glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst);
+    inline bool hasGlBlendParameteriNV() const;
     inline void glBlendParameteriNV(uint32_t pname, int32_t value);
+    inline bool hasGlBlitFramebufferANGLE() const;
     inline void glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                        int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                        uint32_t mask, uint32_t filter);
+    inline bool hasGlBlitFramebufferNV() const;
     inline void glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                     int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                     uint32_t mask, uint32_t filter);
+    inline bool hasGlBufferStorageEXT() const;
     inline void glBufferStorageEXT(uint32_t target, int32_t size, void* data, uint32_t flag);
+    inline bool hasGlClientWaitSyncAPPLE() const;
     inline uint32_t glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout);
+    inline bool hasGlColorMaskiOES() const;
     inline void glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    inline bool hasGlCompressedTexImage3DOES() const;
     inline void glCompressedTexImage3DOES(uint32_t target, int32_t level, uint32_t internalformat,
                                           int32_t width, int32_t height, int32_t depth,
                                           int32_t border, int32_t imageSize, void* data);
+    inline bool hasGlCompressedTexSubImage3DOES() const;
     inline void glCompressedTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset,
                                              int32_t yoffset, int32_t zoffset, int32_t width,
                                              int32_t height, int32_t depth, uint32_t format,
                                              int32_t imageSize, void* data);
+    inline bool hasGlCopyBufferSubDataNV() const;
     inline void glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTarget, int32_t readOffset,
                                       int32_t writeOffset, int32_t size);
+    inline bool hasGlCopyImageSubDataOES() const;
     inline void glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                       int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
                                       uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
                                       int32_t dstY, int32_t dstZ, int32_t srcWidth,
                                       int32_t srcHeight, int32_t srcDepth);
+    inline bool hasGlCopyPathNV() const;
     inline void glCopyPathNV(uint32_t resultPath, uint32_t srcPath);
+    inline bool hasGlCopyTexSubImage3DOES() const;
     inline void glCopyTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset,
                                        int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                        int32_t width, int32_t height);
+    inline bool hasGlCopyTextureLevelsAPPLE() const;
     inline void glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint32_t sourceTexture,
                                          int32_t sourceBaseLevel, int32_t sourceLevelCount);
+    inline bool hasGlCoverFillPathInstancedNV() const;
     inline void glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType, void* paths,
                                            uint32_t pathBase, uint32_t coverMode,
                                            uint32_t transformType, float* transformValues);
+    inline bool hasGlCoverFillPathNV() const;
     inline void glCoverFillPathNV(uint32_t path, uint32_t coverMode);
+    inline bool hasGlCoverStrokePathInstancedNV() const;
     inline void glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType, void* paths,
                                              uint32_t pathBase, uint32_t coverMode,
                                              uint32_t transformType, float* transformValues);
+    inline bool hasGlCoverStrokePathNV() const;
     inline void glCoverStrokePathNV(uint32_t path, uint32_t coverMode);
+    inline bool hasGlCoverageMaskNV() const;
     inline void glCoverageMaskNV(uint8_t mask);
+    inline bool hasGlCoverageOperationNV() const;
     inline void glCoverageOperationNV(uint32_t operation);
+    inline bool hasGlCreatePerfQueryINTEL() const;
     inline void glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHandle);
+    inline bool hasGlCreateShaderProgramvEXT() const;
     inline uint32_t glCreateShaderProgramvEXT(uint32_t type, int32_t count, char** strings);
+    inline bool hasGlDeleteFencesNV() const;
     inline void glDeleteFencesNV(int32_t n, uint32_t* fences);
+    inline bool hasGlDeletePathsNV() const;
     inline void glDeletePathsNV(uint32_t path, int32_t range);
+    inline bool hasGlDeletePerfMonitorsAMD() const;
     inline void glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors);
+    inline bool hasGlDeletePerfQueryINTEL() const;
     inline void glDeletePerfQueryINTEL(uint32_t queryHandle);
+    inline bool hasGlDeleteProgramPipelinesEXT() const;
     inline void glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines);
+    inline bool hasGlDeleteQueriesEXT() const;
     inline void glDeleteQueriesEXT(int32_t count, uint32_t* queries);
+    inline bool hasGlDeleteSyncAPPLE() const;
     inline void glDeleteSyncAPPLE(uint64_t sync);
+    inline bool hasGlDeleteVertexArraysOES() const;
     inline void glDeleteVertexArraysOES(int32_t count, uint32_t* arrays);
+    inline bool hasGlDepthRangeArrayfvNV() const;
     inline void glDepthRangeArrayfvNV(uint32_t first, int32_t count, float* v);
+    inline bool hasGlDepthRangeIndexedfNV() const;
     inline void glDepthRangeIndexedfNV(uint32_t index, float n, float f);
+    inline bool hasGlDisableDriverControlQCOM() const;
     inline void glDisableDriverControlQCOM(uint32_t driverControl);
+    inline bool hasGlDisableiNV() const;
     inline void glDisableiNV(uint32_t target, uint32_t index);
+    inline bool hasGlDisableiOES() const;
     inline void glDisableiOES(uint32_t target, uint32_t index);
+    inline bool hasGlDiscardFramebufferEXT() const;
     inline void glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments,
                                         uint32_t* attachments);
+    inline bool hasGlDrawArraysInstancedANGLE() const;
     inline void glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, int32_t count,
                                            int32_t primcount);
+    inline bool hasGlDrawArraysInstancedBaseInstanceEXT() const;
     inline void glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t first, int32_t count,
                                                      int32_t instancecount, uint32_t baseinstance);
+    inline bool hasGlDrawArraysInstancedEXT() const;
     inline void glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int32_t count,
                                          int32_t primcount);
+    inline bool hasGlDrawArraysInstancedNV() const;
     inline void glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32_t count,
                                         int32_t primcount);
+    inline bool hasGlDrawBuffersEXT() const;
     inline void glDrawBuffersEXT(int32_t n, uint32_t* bufs);
+    inline bool hasGlDrawBuffersIndexedEXT() const;
     inline void glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int32_t* indices);
+    inline bool hasGlDrawBuffersNV() const;
     inline void glDrawBuffersNV(int32_t n, uint32_t* bufs);
+    inline bool hasGlDrawElementsBaseVertexEXT() const;
     inline void glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, uint32_t type,
                                             void* indices, int32_t basevertex);
+    inline bool hasGlDrawElementsBaseVertexOES() const;
     inline void glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, uint32_t type,
                                             void* indices, int32_t basevertex);
+    inline bool hasGlDrawElementsInstancedANGLE() const;
     inline void glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, uint32_t type,
                                              void* indices, int32_t primcount);
+    inline bool hasGlDrawElementsInstancedBaseInstanceEXT() const;
     inline void glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type,
                                                        void* indices, int32_t instancecount,
                                                        uint32_t baseinstance);
+    inline bool hasGlDrawElementsInstancedBaseVertexEXT() const;
     inline void glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t count, uint32_t type,
                                                      void* indices, int32_t instancecount,
                                                      int32_t basevertex);
+    inline bool hasGlDrawElementsInstancedBaseVertexOES() const;
     inline void glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t count, uint32_t type,
                                                      void* indices, int32_t instancecount,
                                                      int32_t basevertex);
+    inline bool hasGlDrawElementsInstancedBaseVertexBaseInstanceEXT() const;
     inline void glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count,
                                                                  uint32_t type, void* indices,
                                                                  int32_t instancecount,
                                                                  int32_t basevertex,
                                                                  uint32_t baseinstance);
+    inline bool hasGlDrawElementsInstancedEXT() const;
     inline void glDrawElementsInstancedEXT(uint32_t mode, int32_t count, uint32_t type,
                                            void* indices, int32_t primcount);
+    inline bool hasGlDrawElementsInstancedNV() const;
     inline void glDrawElementsInstancedNV(uint32_t mode, int32_t count, uint32_t type,
                                           void* indices, int32_t primcount);
+    inline bool hasGlDrawRangeElementsBaseVertexEXT() const;
     inline void glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t start, uint32_t end,
                                                  int32_t count, uint32_t type, void* indices,
                                                  int32_t basevertex);
+    inline bool hasGlDrawRangeElementsBaseVertexOES() const;
     inline void glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t start, uint32_t end,
                                                  int32_t count, uint32_t type, void* indices,
                                                  int32_t basevertex);
+    inline bool hasGlEGLImageTargetRenderbufferStorageOES() const;
     inline void glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image);
+    inline bool hasGlEGLImageTargetTexture2DOES() const;
     inline void glEGLImageTargetTexture2DOES(uint32_t target, void* image);
+    inline bool hasGlEnableDriverControlQCOM() const;
     inline void glEnableDriverControlQCOM(uint32_t driverControl);
+    inline bool hasGlEnableiNV() const;
     inline void glEnableiNV(uint32_t target, uint32_t index);
+    inline bool hasGlEnableiOES() const;
     inline void glEnableiOES(uint32_t target, uint32_t index);
+    inline bool hasGlEndConditionalRenderNV() const;
     inline void glEndConditionalRenderNV();
+    inline bool hasGlEndPerfMonitorAMD() const;
     inline void glEndPerfMonitorAMD(uint32_t monitor);
+    inline bool hasGlEndPerfQueryINTEL() const;
     inline void glEndPerfQueryINTEL(uint32_t queryHandle);
+    inline bool hasGlEndQueryEXT() const;
     inline void glEndQueryEXT(uint32_t target);
+    inline bool hasGlEndTilingQCOM() const;
     inline void glEndTilingQCOM(uint32_t preserve_mask);
+    inline bool hasGlExtGetBufferPointervQCOM() const;
     inline void glExtGetBufferPointervQCOM(uint32_t target, void** params);
+    inline bool hasGlExtGetBuffersQCOM() const;
     inline void glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers, int32_t* numBuffers);
+    inline bool hasGlExtGetFramebuffersQCOM() const;
     inline void glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t maxFramebuffers,
                                          int32_t* numFramebuffers);
+    inline bool hasGlExtGetProgramBinarySourceQCOM() const;
     inline void glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t shadertype, char* source,
                                                 int32_t* length);
+    inline bool hasGlExtGetProgramsQCOM() const;
     inline void glExtGetProgramsQCOM(uint32_t* programs, int32_t maxPrograms, int32_t* numPrograms);
+    inline bool hasGlExtGetRenderbuffersQCOM() const;
     inline void glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t maxRenderbuffers,
                                           int32_t* numRenderbuffers);
+    inline bool hasGlExtGetShadersQCOM() const;
     inline void glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders, int32_t* numShaders);
+    inline bool hasGlExtGetTexLevelParameterivQCOM() const;
     inline void glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t face, int32_t level,
                                                 uint32_t pname, int32_t* params);
+    inline bool hasGlExtGetTexSubImageQCOM() const;
     inline void glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int32_t xoffset,
                                         int32_t yoffset, int32_t zoffset, int32_t width,
                                         int32_t height, int32_t depth, uint32_t format,
                                         uint32_t type, void* texels);
+    inline bool hasGlExtGetTexturesQCOM() const;
     inline void glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTextures, int32_t* numTextures);
+    inline bool hasGlExtIsProgramBinaryQCOM() const;
     inline uint8_t glExtIsProgramBinaryQCOM(uint32_t program);
+    inline bool hasGlExtTexObjectStateOverrideiQCOM() const;
     inline void glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t pname, int32_t param);
+    inline bool hasGlFenceSyncAPPLE() const;
     inline uint64_t glFenceSyncAPPLE(uint32_t condition, uint32_t flag);
+    inline bool hasGlFinishFenceNV() const;
     inline void glFinishFenceNV(uint32_t fence);
+    inline bool hasGlFlushMappedBufferRangeEXT() const;
     inline void glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset, int32_t length);
+    inline bool hasGlFramebufferTexture2DMultisampleEXT() const;
     inline void glFramebufferTexture2DMultisampleEXT(uint32_t target, uint32_t attachment,
                                                      uint32_t textarget, uint32_t texture,
                                                      int32_t level, int32_t samples);
+    inline bool hasGlFramebufferTexture2DMultisampleIMG() const;
     inline void glFramebufferTexture2DMultisampleIMG(uint32_t target, uint32_t attachment,
                                                      uint32_t textarget, uint32_t texture,
                                                      int32_t level, int32_t samples);
+    inline bool hasGlFramebufferTexture3DOES() const;
     inline void glFramebufferTexture3DOES(uint32_t target, uint32_t attachment, uint32_t textarget,
                                           uint32_t texture, int32_t level, int32_t zoffset);
+    inline bool hasGlFramebufferTextureOES() const;
     inline void glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture,
                                         int32_t level);
+    inline bool hasGlFramebufferTextureMultiviewOVR() const;
     inline void glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t attachment,
                                                  uint32_t texture, int32_t level,
                                                  int32_t baseViewIndex, int32_t numViews);
+    inline bool hasGlGenFencesNV() const;
     inline void glGenFencesNV(int32_t n, uint32_t* fences);
+    inline bool hasGlGenPathsNV() const;
     inline uint32_t glGenPathsNV(int32_t range);
+    inline bool hasGlGenPerfMonitorsAMD() const;
     inline void glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors);
+    inline bool hasGlGenProgramPipelinesEXT() const;
     inline void glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines);
+    inline bool hasGlGenQueriesEXT() const;
     inline void glGenQueriesEXT(int32_t count, uint32_t* queries);
+    inline bool hasGlGenVertexArraysOES() const;
     inline void glGenVertexArraysOES(int32_t count, uint32_t* arrays);
+    inline bool hasGlGetBufferPointervOES() const;
     inline void glGetBufferPointervOES(uint32_t target, uint32_t pname, void** params);
+    inline bool hasGlGetDriverControlStringQCOM() const;
     inline void glGetDriverControlStringQCOM(uint32_t driverControl, int32_t bufSize,
                                              int32_t* length, char* driverControlString);
+    inline bool hasGlGetDriverControlsQCOM() const;
     inline void glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_t* driverControls);
+    inline bool hasGlGetFenceivNV() const;
     inline void glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* params);
+    inline bool hasGlGetFirstPerfQueryIdINTEL() const;
     inline void glGetFirstPerfQueryIdINTEL(uint32_t* queryId);
+    inline bool hasGlGetFloati_vNV() const;
     inline void glGetFloati_vNV(uint32_t target, uint32_t index, float* data);
+    inline bool hasGlGetGraphicsResetStatusEXT() const;
     inline uint32_t glGetGraphicsResetStatusEXT();
+    inline bool hasGlGetGraphicsResetStatusKHR() const;
     inline uint32_t glGetGraphicsResetStatusKHR();
+    inline bool hasGlGetImageHandleNV() const;
     inline uint64_t glGetImageHandleNV(uint32_t texture, int32_t level, uint8_t layered,
                                        int32_t layer, uint32_t format);
+    inline bool hasGlGetInteger64vAPPLE() const;
     inline void glGetInteger64vAPPLE(uint32_t pname, int64_t* params);
+    inline bool hasGlGetIntegeri_vEXT() const;
     inline void glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t* data);
+    inline bool hasGlGetInternalformatSampleivNV() const;
     inline void glGetInternalformatSampleivNV(uint32_t target, uint32_t internalformat,
                                               int32_t samples, uint32_t pname, int32_t bufSize,
                                               int32_t* params);
+    inline bool hasGlGetNextPerfQueryIdINTEL() const;
     inline void glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQueryId);
+    inline bool hasGlGetObjectLabelEXT() const;
     inline void glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t bufSize,
                                     int32_t* length, char* label);
+    inline bool hasGlGetPathCommandsNV() const;
     inline void glGetPathCommandsNV(uint32_t path, uint8_t* commands);
+    inline bool hasGlGetPathCoordsNV() const;
     inline void glGetPathCoordsNV(uint32_t path, float* coords);
+    inline bool hasGlGetPathDashArrayNV() const;
     inline void glGetPathDashArrayNV(uint32_t path, float* dashArray);
+    inline bool hasGlGetPathLengthNV() const;
     inline float glGetPathLengthNV(uint32_t path, int32_t startSegment, int32_t numSegments);
+    inline bool hasGlGetPathMetricRangeNV() const;
     inline void glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t firstPathName,
                                        int32_t numPaths, int32_t stride, float* metrics);
+    inline bool hasGlGetPathMetricsNV() const;
     inline void glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPaths,
                                    uint32_t pathNameType, void* paths, uint32_t pathBase,
                                    int32_t stride, float* metrics);
+    inline bool hasGlGetPathParameterfvNV() const;
     inline void glGetPathParameterfvNV(uint32_t path, uint32_t pname, float* value);
+    inline bool hasGlGetPathParameterivNV() const;
     inline void glGetPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value);
+    inline bool hasGlGetPathSpacingNV() const;
     inline void glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths, uint32_t pathNameType,
                                    void* paths, uint32_t pathBase, float advanceScale,
                                    float kerningScale, uint32_t transformType,
                                    float* returnedSpacing);
+    inline bool hasGlGetPerfCounterInfoINTEL() const;
     inline void glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counterId,
                                           uint32_t counterNameLength, char* counterName,
                                           uint32_t counterDescLength, char* counterDesc,
                                           uint32_t* counterOffset, uint32_t* counterDataSize,
                                           uint32_t* counterTypeEnum, uint32_t* counterDataTypeEnum,
                                           uint64_t* rawCounterMaxValue);
+    inline bool hasGlGetPerfMonitorCounterDataAMD() const;
     inline void glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t pname, int32_t dataSize,
                                                uint32_t* data, int32_t* bytesWritten);
+    inline bool hasGlGetPerfMonitorCounterInfoAMD() const;
     inline void glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t counter, uint32_t pname,
                                                void* data);
+    inline bool hasGlGetPerfMonitorCounterStringAMD() const;
     inline void glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t counter, int32_t bufSize,
                                                  int32_t* length, char* counterString);
+    inline bool hasGlGetPerfMonitorCountersAMD() const;
     inline void glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCounters,
                                             int32_t* maxActiveCounters, int32_t counterSize,
                                             uint32_t* counters);
+    inline bool hasGlGetPerfMonitorGroupStringAMD() const;
     inline void glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufSize, int32_t* length,
                                                char* groupString);
+    inline bool hasGlGetPerfMonitorGroupsAMD() const;
     inline void glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t groupsSize, uint32_t* groups);
+    inline bool hasGlGetPerfQueryDataINTEL() const;
     inline void glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag, int32_t dataSize,
                                         void* data, uint32_t* bytesWritten);
+    inline bool hasGlGetPerfQueryIdByNameINTEL() const;
     inline void glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* queryId);
+    inline bool hasGlGetPerfQueryInfoINTEL() const;
     inline void glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNameLength, char* queryName,
                                         uint32_t* dataSize, uint32_t* noCounters,
                                         uint32_t* noInstances, uint32_t* capsMask);
+    inline bool hasGlGetProgramBinaryOES() const;
     inline void glGetProgramBinaryOES(uint32_t program, int32_t buffer_size, int32_t* bytes_written,
                                       uint32_t* binary_format, void* binary);
+    inline bool hasGlGetProgramPipelineInfoLogEXT() const;
     inline void glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t bufSize, int32_t* length,
                                                char* infoLog);
+    inline bool hasGlGetProgramPipelineivEXT() const;
     inline void glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname, int32_t* params);
+    inline bool hasGlGetProgramResourcefvNV() const;
     inline void glGetProgramResourcefvNV(uint32_t program, uint32_t programInterface,
                                          uint32_t index, int32_t propCount, uint32_t* props,
                                          int32_t bufSize, int32_t* length, float* params);
+    inline bool hasGlGetQueryObjecti64vEXT() const;
     inline void glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter, int64_t* value);
+    inline bool hasGlGetQueryObjectivEXT() const;
     inline void glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, int32_t* value);
+    inline bool hasGlGetQueryObjectui64vEXT() const;
     inline void glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter, uint64_t* value);
+    inline bool hasGlGetQueryObjectuivEXT() const;
     inline void glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, uint32_t* value);
+    inline bool hasGlGetQueryivEXT() const;
     inline void glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value);
+    inline bool hasGlGetSamplerParameterIivOES() const;
     inline void glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pname, int32_t* params);
+    inline bool hasGlGetSamplerParameterIuivOES() const;
     inline void glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pname, uint32_t* params);
+    inline bool hasGlGetSyncivAPPLE() const;
     inline void glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length,
                                  int32_t* values);
+    inline bool hasGlGetTexParameterIivOES() const;
     inline void glGetTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlGetTexParameterIuivOES() const;
     inline void glGetTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params);
+    inline bool hasGlGetTextureHandleNV() const;
     inline uint64_t glGetTextureHandleNV(uint32_t texture);
+    inline bool hasGlGetTextureSamplerHandleNV() const;
     inline uint64_t glGetTextureSamplerHandleNV(uint32_t texture, uint32_t sampler);
+    inline bool hasGlGetTranslatedShaderSourceANGLE() const;
     inline void glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t bufsize, int32_t* length,
                                                  char* source);
+    inline bool hasGlGetnUniformfvEXT() const;
     inline void glGetnUniformfvEXT(uint32_t program, int32_t location, int32_t bufSize,
                                    float* params);
+    inline bool hasGlGetnUniformfvKHR() const;
     inline void glGetnUniformfvKHR(uint32_t program, int32_t location, int32_t bufSize,
                                    float* params);
+    inline bool hasGlGetnUniformivEXT() const;
     inline void glGetnUniformivEXT(uint32_t program, int32_t location, int32_t bufSize,
                                    int32_t* params);
+    inline bool hasGlGetnUniformivKHR() const;
     inline void glGetnUniformivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                    int32_t* params);
+    inline bool hasGlGetnUniformuivKHR() const;
     inline void glGetnUniformuivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                     uint32_t* params);
+    inline bool hasGlInsertEventMarkerEXT() const;
     inline void glInsertEventMarkerEXT(int32_t length, char* marker);
+    inline bool hasGlInterpolatePathsNV() const;
     inline void glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB,
                                      float weight);
+    inline bool hasGlIsEnablediOES() const;
     inline uint8_t glIsEnablediOES(uint32_t target, uint32_t index);
+    inline bool hasGlIsEnablediNV() const;
     inline uint8_t glIsEnablediNV(uint32_t target, uint32_t index);
+    inline bool hasGlIsFenceNV() const;
     inline uint8_t glIsFenceNV(uint32_t fence);
+    inline bool hasGlIsImageHandleResidentNV() const;
     inline uint8_t glIsImageHandleResidentNV(uint64_t handle);
+    inline bool hasGlIsPathNV() const;
     inline uint8_t glIsPathNV(uint32_t path);
+    inline bool hasGlIsPointInFillPathNV() const;
     inline uint8_t glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y);
+    inline bool hasGlIsPointInStrokePathNV() const;
     inline uint8_t glIsPointInStrokePathNV(uint32_t path, float x, float y);
+    inline bool hasGlIsProgramPipelineEXT() const;
     inline uint8_t glIsProgramPipelineEXT(uint32_t pipeline);
+    inline bool hasGlIsQueryEXT() const;
     inline uint8_t glIsQueryEXT(uint32_t query);
+    inline bool hasGlIsSyncAPPLE() const;
     inline uint8_t glIsSyncAPPLE(uint64_t sync);
+    inline bool hasGlIsTextureHandleResidentNV() const;
     inline uint8_t glIsTextureHandleResidentNV(uint64_t handle);
+    inline bool hasGlIsVertexArrayOES() const;
     inline uint8_t glIsVertexArrayOES(uint32_t array);
+    inline bool hasGlLabelObjectEXT() const;
     inline void glLabelObjectEXT(uint32_t type, uint32_t object, int32_t length, char* label);
+    inline bool hasGlMakeImageHandleNonResidentNV() const;
     inline void glMakeImageHandleNonResidentNV(uint64_t handle);
+    inline bool hasGlMakeImageHandleResidentNV() const;
     inline void glMakeImageHandleResidentNV(uint64_t handle, uint32_t access);
+    inline bool hasGlMakeTextureHandleNonResidentNV() const;
     inline void glMakeTextureHandleNonResidentNV(uint64_t handle);
+    inline bool hasGlMakeTextureHandleResidentNV() const;
     inline void glMakeTextureHandleResidentNV(uint64_t handle);
+    inline bool hasGlMapBufferOES() const;
     inline void* glMapBufferOES(uint32_t target, uint32_t access);
+    inline bool hasGlMapBufferRangeEXT() const;
     inline void* glMapBufferRangeEXT(uint32_t target, int32_t offset, int32_t length,
                                      uint32_t access);
+    inline bool hasGlMatrixLoad3x2fNV() const;
     inline void glMatrixLoad3x2fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMatrixLoad3x3fNV() const;
     inline void glMatrixLoad3x3fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMatrixLoadTranspose3x3fNV() const;
     inline void glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMatrixMult3x2fNV() const;
     inline void glMatrixMult3x2fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMatrixMult3x3fNV() const;
     inline void glMatrixMult3x3fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMatrixMultTranspose3x3fNV() const;
     inline void glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m);
+    inline bool hasGlMultiDrawArraysEXT() const;
     inline void glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t* count,
                                      int32_t primcount);
+    inline bool hasGlMultiDrawArraysIndirectEXT() const;
     inline void glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect, int32_t drawcount,
                                              int32_t stride);
+    inline bool hasGlMultiDrawElementsBaseVertexEXT() const;
     inline void glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* count, uint32_t type,
                                                  void** indices, int32_t primcount,
                                                  int32_t* basevertex);
+    inline bool hasGlMultiDrawElementsBaseVertexOES() const;
     inline void glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* count, uint32_t type,
                                                  void** indices, int32_t primcount,
                                                  int32_t* basevertex);
+    inline bool hasGlMultiDrawElementsEXT() const;
     inline void glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint32_t type, void** indices,
                                        int32_t primcount);
+    inline bool hasGlMultiDrawElementsIndirectEXT() const;
     inline void glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type, void* indirect,
                                                int32_t drawcount, int32_t stride);
+    inline bool hasGlPatchParameteriOES() const;
     inline void glPatchParameteriOES(uint32_t pname, int32_t value);
+    inline bool hasGlPathCommandsNV() const;
     inline void glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_t* commands,
                                  int32_t numCoords, uint32_t coordType, void* coords);
+    inline bool hasGlPathCoordsNV() const;
     inline void glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t coordType, void* coords);
+    inline bool hasGlPathCoverDepthFuncNV() const;
     inline void glPathCoverDepthFuncNV(uint32_t func);
+    inline bool hasGlPathDashArrayNV() const;
     inline void glPathDashArrayNV(uint32_t path, int32_t dashCount, float* dashArray);
+    inline bool hasGlPathGlyphIndexArrayNV() const;
     inline uint32_t glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_t fontTarget,
                                             void* fontName, uint32_t fontStyle,
                                             uint32_t firstGlyphIndex, int32_t numGlyphs,
                                             uint32_t pathParameterTemplate, float emScale);
+    inline bool hasGlPathGlyphIndexRangeNV() const;
     inline uint32_t glPathGlyphIndexRangeNV(uint32_t fontTarget, void* fontName, uint32_t fontStyle,
                                             uint32_t pathParameterTemplate, float emScale,
                                             uint32_t baseAndCount);
+    inline bool hasGlPathGlyphRangeNV() const;
     inline void glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTarget, void* fontName,
                                    uint32_t fontStyle, uint32_t firstGlyph, int32_t numGlyphs,
                                    uint32_t handleMissingGlyphs, uint32_t pathParameterTemplate,
                                    float emScale);
+    inline bool hasGlPathGlyphsNV() const;
     inline void glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget, void* fontName,
                                uint32_t fontStyle, int32_t numGlyphs, uint32_t type,
                                void* charcodes, uint32_t handleMissingGlyphs,
                                uint32_t pathParameterTemplate, float emScale);
+    inline bool hasGlPathMemoryGlyphIndexArrayNV() const;
     inline uint32_t glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, uint32_t fontTarget,
                                                   int32_t fontSize, void* fontData,
                                                   int32_t faceIndex, uint32_t firstGlyphIndex,
                                                   int32_t numGlyphs, uint32_t pathParameterTemplate,
                                                   float emScale);
+    inline bool hasGlPathParameterfNV() const;
     inline void glPathParameterfNV(uint32_t path, uint32_t pname, float value);
+    inline bool hasGlPathParameterfvNV() const;
     inline void glPathParameterfvNV(uint32_t path, uint32_t pname, float* value);
+    inline bool hasGlPathParameteriNV() const;
     inline void glPathParameteriNV(uint32_t path, uint32_t pname, int32_t value);
+    inline bool hasGlPathParameterivNV() const;
     inline void glPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value);
+    inline bool hasGlPathStencilDepthOffsetNV() const;
     inline void glPathStencilDepthOffsetNV(float factor, float units);
+    inline bool hasGlPathStencilFuncNV() const;
     inline void glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t mask);
+    inline bool hasGlPathStringNV() const;
     inline void glPathStringNV(uint32_t path, uint32_t format, int32_t length, void* pathString);
+    inline bool hasGlPathSubCommandsNV() const;
     inline void glPathSubCommandsNV(uint32_t path, int32_t commandStart, int32_t commandsToDelete,
                                     int32_t numCommands, uint8_t* commands, int32_t numCoords,
                                     uint32_t coordType, void* coords);
+    inline bool hasGlPathSubCoordsNV() const;
     inline void glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_t numCoords,
                                   uint32_t coordType, void* coords);
+    inline bool hasGlPointAlongPathNV() const;
     inline uint8_t glPointAlongPathNV(uint32_t path, int32_t startSegment, int32_t numSegments,
                                       float distance, float* x, float* y, float* tangentX,
                                       float* tangentY);
+    inline bool hasGlPolygonModeNV() const;
     inline void glPolygonModeNV(uint32_t face, uint32_t mode);
+    inline bool hasGlPopGroupMarkerEXT() const;
     inline void glPopGroupMarkerEXT();
+    inline bool hasGlPrimitiveBoundingBoxOES() const;
     inline void glPrimitiveBoundingBoxOES(float minX, float minY, float minZ, float minW,
                                           float maxX, float maxY, float maxZ, float maxW);
+    inline bool hasGlProgramBinaryOES() const;
     inline void glProgramBinaryOES(uint32_t program, uint32_t binary_format, void* binary,
                                    int32_t binary_size);
+    inline bool hasGlProgramParameteriEXT() const;
     inline void glProgramParameteriEXT(uint32_t program, uint32_t pname, int32_t value);
+    inline bool hasGlProgramPathFragmentInputGenNV() const;
     inline void glProgramPathFragmentInputGenNV(uint32_t program, int32_t location,
                                                 uint32_t genMode, int32_t components,
                                                 float* coeffs);
+    inline bool hasGlProgramUniform1fEXT() const;
     inline void glProgramUniform1fEXT(uint32_t program, int32_t location, float v0);
+    inline bool hasGlProgramUniform1fvEXT() const;
     inline void glProgramUniform1fvEXT(uint32_t program, int32_t location, int32_t count,
                                        float* value);
+    inline bool hasGlProgramUniform1iEXT() const;
     inline void glProgramUniform1iEXT(uint32_t program, int32_t location, int32_t v0);
+    inline bool hasGlProgramUniform1ivEXT() const;
     inline void glProgramUniform1ivEXT(uint32_t program, int32_t location, int32_t count,
                                        int32_t* value);
+    inline bool hasGlProgramUniform1uiEXT() const;
     inline void glProgramUniform1uiEXT(uint32_t program, int32_t location, uint32_t v0);
+    inline bool hasGlProgramUniform1uivEXT() const;
     inline void glProgramUniform1uivEXT(uint32_t program, int32_t location, int32_t count,
                                         uint32_t* value);
+    inline bool hasGlProgramUniform2fEXT() const;
     inline void glProgramUniform2fEXT(uint32_t program, int32_t location, float v0, float v1);
+    inline bool hasGlProgramUniform2fvEXT() const;
     inline void glProgramUniform2fvEXT(uint32_t program, int32_t location, int32_t count,
                                        float* value);
+    inline bool hasGlProgramUniform2iEXT() const;
     inline void glProgramUniform2iEXT(uint32_t program, int32_t location, int32_t v0, int32_t v1);
+    inline bool hasGlProgramUniform2ivEXT() const;
     inline void glProgramUniform2ivEXT(uint32_t program, int32_t location, int32_t count,
                                        int32_t* value);
+    inline bool hasGlProgramUniform2uiEXT() const;
     inline void glProgramUniform2uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                        uint32_t v1);
+    inline bool hasGlProgramUniform2uivEXT() const;
     inline void glProgramUniform2uivEXT(uint32_t program, int32_t location, int32_t count,
                                         uint32_t* value);
+    inline bool hasGlProgramUniform3fEXT() const;
     inline void glProgramUniform3fEXT(uint32_t program, int32_t location, float v0, float v1,
                                       float v2);
+    inline bool hasGlProgramUniform3fvEXT() const;
     inline void glProgramUniform3fvEXT(uint32_t program, int32_t location, int32_t count,
                                        float* value);
+    inline bool hasGlProgramUniform3iEXT() const;
     inline void glProgramUniform3iEXT(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                       int32_t v2);
+    inline bool hasGlProgramUniform3ivEXT() const;
     inline void glProgramUniform3ivEXT(uint32_t program, int32_t location, int32_t count,
                                        int32_t* value);
+    inline bool hasGlProgramUniform3uiEXT() const;
     inline void glProgramUniform3uiEXT(uint32_t program, int32_t location, uint32_t v0, uint32_t v1,
                                        uint32_t v2);
+    inline bool hasGlProgramUniform3uivEXT() const;
     inline void glProgramUniform3uivEXT(uint32_t program, int32_t location, int32_t count,
                                         uint32_t* value);
+    inline bool hasGlProgramUniform4fEXT() const;
     inline void glProgramUniform4fEXT(uint32_t program, int32_t location, float v0, float v1,
                                       float v2, float v3);
+    inline bool hasGlProgramUniform4fvEXT() const;
     inline void glProgramUniform4fvEXT(uint32_t program, int32_t location, int32_t count,
                                        float* value);
+    inline bool hasGlProgramUniform4iEXT() const;
     inline void glProgramUniform4iEXT(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                       int32_t v2, int32_t v3);
+    inline bool hasGlProgramUniform4ivEXT() const;
     inline void glProgramUniform4ivEXT(uint32_t program, int32_t location, int32_t count,
                                        int32_t* value);
+    inline bool hasGlProgramUniform4uiEXT() const;
     inline void glProgramUniform4uiEXT(uint32_t program, int32_t location, uint32_t v0, uint32_t v1,
                                        uint32_t v2, uint32_t v3);
+    inline bool hasGlProgramUniform4uivEXT() const;
     inline void glProgramUniform4uivEXT(uint32_t program, int32_t location, int32_t count,
                                         uint32_t* value);
+    inline bool hasGlProgramUniformHandleui64NV() const;
     inline void glProgramUniformHandleui64NV(uint32_t program, int32_t location, uint64_t value);
+    inline bool hasGlProgramUniformHandleui64vNV() const;
     inline void glProgramUniformHandleui64vNV(uint32_t program, int32_t location, int32_t count,
                                               uint64_t* values);
+    inline bool hasGlProgramUniformMatrix2fvEXT() const;
     inline void glProgramUniformMatrix2fvEXT(uint32_t program, int32_t location, int32_t count,
                                              uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix2x3fvEXT() const;
     inline void glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix2x4fvEXT() const;
     inline void glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3fvEXT() const;
     inline void glProgramUniformMatrix3fvEXT(uint32_t program, int32_t location, int32_t count,
                                              uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3x2fvEXT() const;
     inline void glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3x4fvEXT() const;
     inline void glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4fvEXT() const;
     inline void glProgramUniformMatrix4fvEXT(uint32_t program, int32_t location, int32_t count,
                                              uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4x2fvEXT() const;
     inline void glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4x3fvEXT() const;
     inline void glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value);
+    inline bool hasGlPushGroupMarkerEXT() const;
     inline void glPushGroupMarkerEXT(int32_t length, char* marker);
+    inline bool hasGlQueryCounterEXT() const;
     inline void glQueryCounterEXT(uint32_t query, uint32_t target);
+    inline bool hasGlReadBufferIndexedEXT() const;
     inline void glReadBufferIndexedEXT(uint32_t src, int32_t index);
+    inline bool hasGlReadBufferNV() const;
     inline void glReadBufferNV(uint32_t mode);
+    inline bool hasGlReadnPixelsEXT() const;
     inline void glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32_t height,
                                  uint32_t format, uint32_t type, int32_t bufSize, void* data);
+    inline bool hasGlReadnPixelsKHR() const;
     inline void glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32_t height,
                                  uint32_t format, uint32_t type, int32_t bufSize, void* data);
+    inline bool hasGlRenderbufferStorageMultisampleANGLE() const;
     inline void glRenderbufferStorageMultisampleANGLE(uint32_t target, int32_t samples,
                                                       uint32_t internalformat, int32_t width,
                                                       int32_t height);
+    inline bool hasGlRenderbufferStorageMultisampleAPPLE() const;
     inline void glRenderbufferStorageMultisampleAPPLE(uint32_t target, int32_t samples,
                                                       uint32_t internalformat, int32_t width,
                                                       int32_t height);
+    inline bool hasGlRenderbufferStorageMultisampleEXT() const;
     inline void glRenderbufferStorageMultisampleEXT(uint32_t target, int32_t samples,
                                                     uint32_t internalformat, int32_t width,
                                                     int32_t height);
+    inline bool hasGlRenderbufferStorageMultisampleIMG() const;
     inline void glRenderbufferStorageMultisampleIMG(uint32_t target, int32_t samples,
                                                     uint32_t internalformat, int32_t width,
                                                     int32_t height);
+    inline bool hasGlRenderbufferStorageMultisampleNV() const;
     inline void glRenderbufferStorageMultisampleNV(uint32_t target, int32_t samples,
                                                    uint32_t internalformat, int32_t width,
                                                    int32_t height);
+    inline bool hasGlResolveMultisampleFramebufferAPPLE() const;
     inline void glResolveMultisampleFramebufferAPPLE();
+    inline bool hasGlSamplerParameterIivOES() const;
     inline void glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, int32_t* param);
+    inline bool hasGlSamplerParameterIuivOES() const;
     inline void glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname, uint32_t* param);
+    inline bool hasGlScissorArrayvNV() const;
     inline void glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v);
+    inline bool hasGlScissorIndexedNV() const;
     inline void glScissorIndexedNV(uint32_t index, int32_t left, int32_t bottom, int32_t width,
                                    int32_t height);
+    inline bool hasGlScissorIndexedvNV() const;
     inline void glScissorIndexedvNV(uint32_t index, int32_t* v);
+    inline bool hasGlSelectPerfMonitorCountersAMD() const;
     inline void glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t enable, uint32_t group,
                                                int32_t numCounters, uint32_t* counterList);
+    inline bool hasGlSetFenceNV() const;
     inline void glSetFenceNV(uint32_t fence, uint32_t condition);
+    inline bool hasGlStartTilingQCOM() const;
     inline void glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, uint32_t height,
                                   uint32_t preserveMask);
+    inline bool hasGlStencilFillPathInstancedNV() const;
     inline void glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType, void* paths,
                                              uint32_t pathBase, uint32_t fillMode, uint32_t mask,
                                              uint32_t transformType, float* transformValues);
+    inline bool hasGlStencilFillPathNV() const;
     inline void glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask);
+    inline bool hasGlStencilStrokePathInstancedNV() const;
     inline void glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType, void* paths,
                                                uint32_t pathBase, int32_t reference, uint32_t mask,
                                                uint32_t transformType, float* transformValues);
+    inline bool hasGlStencilStrokePathNV() const;
     inline void glStencilStrokePathNV(uint32_t path, int32_t reference, uint32_t mask);
+    inline bool hasGlStencilThenCoverFillPathInstancedNV() const;
     inline void glStencilThenCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                       void* paths, uint32_t pathBase,
                                                       uint32_t fillMode, uint32_t mask,
                                                       uint32_t coverMode, uint32_t transformType,
                                                       float* transformValues);
+    inline bool hasGlStencilThenCoverFillPathNV() const;
     inline void glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask,
                                              uint32_t coverMode);
+    inline bool hasGlStencilThenCoverStrokePathInstancedNV() const;
     inline void glStencilThenCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                         void* paths, uint32_t pathBase,
                                                         int32_t reference, uint32_t mask,
                                                         uint32_t coverMode, uint32_t transformType,
                                                         float* transformValues);
+    inline bool hasGlStencilThenCoverStrokePathNV() const;
     inline void glStencilThenCoverStrokePathNV(uint32_t path, int32_t reference, uint32_t mask,
                                                uint32_t coverMode);
+    inline bool hasGlTestFenceNV() const;
     inline uint8_t glTestFenceNV(uint32_t fence);
+    inline bool hasGlTexBufferOES() const;
     inline void glTexBufferOES(uint32_t target, uint32_t internalformat, uint32_t buffer);
+    inline bool hasGlTexBufferRangeOES() const;
     inline void glTexBufferRangeOES(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                     int32_t offset, int32_t size);
+    inline bool hasGlTexImage3DOES() const;
     inline void glTexImage3DOES(uint32_t target, int32_t level, uint32_t internalformat,
                                 int32_t width, int32_t height, int32_t depth, int32_t border,
                                 uint32_t format, uint32_t type, void* pixels);
+    inline bool hasGlTexPageCommitmentARB() const;
     inline void glTexPageCommitmentARB(uint32_t target, int32_t level, int32_t xoffset,
                                        int32_t yoffset, int32_t zoffset, int32_t width,
                                        int32_t height, int32_t depth, uint8_t commit);
+    inline bool hasGlTexParameterIivOES() const;
     inline void glTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlTexParameterIuivOES() const;
     inline void glTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params);
+    inline bool hasGlTexStorage1DEXT() const;
     inline void glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width);
+    inline bool hasGlTexStorage2DEXT() const;
     inline void glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width,
                                   int32_t height);
+    inline bool hasGlTexStorage3DEXT() const;
     inline void glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width,
                                   int32_t height, int32_t depth);
+    inline bool hasGlTexSubImage3DOES() const;
     inline void glTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset, int32_t yoffset,
                                    int32_t zoffset, int32_t width, int32_t height, int32_t depth,
                                    uint32_t format, uint32_t type, void* pixels);
+    inline bool hasGlTextureStorage1DEXT() const;
     inline void glTextureStorage1DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                       uint32_t format, int32_t width);
+    inline bool hasGlTextureStorage2DEXT() const;
     inline void glTextureStorage2DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                       uint32_t format, int32_t width, int32_t height);
+    inline bool hasGlTextureStorage3DEXT() const;
     inline void glTextureStorage3DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                       uint32_t format, int32_t width, int32_t height,
                                       int32_t depth);
+    inline bool hasGlTextureViewEXT() const;
     inline void glTextureViewEXT(uint32_t texture, uint32_t target, uint32_t origtexture,
                                  uint32_t internalformat, uint32_t minlevel, uint32_t numlevels,
                                  uint32_t minlayer, uint32_t numlayers);
+    inline bool hasGlTextureViewOES() const;
     inline void glTextureViewOES(uint32_t texture, uint32_t target, uint32_t origtexture,
                                  uint32_t internalformat, uint32_t minlevel, uint32_t numlevels,
                                  uint32_t minlayer, uint32_t numlayers);
+    inline bool hasGlTransformPathNV() const;
     inline void glTransformPathNV(uint32_t resultPath, uint32_t srcPath, uint32_t transformType,
                                   float* transformValues);
+    inline bool hasGlUniformHandleui64NV() const;
     inline void glUniformHandleui64NV(int32_t location, uint64_t value);
+    inline bool hasGlUniformHandleui64vNV() const;
     inline void glUniformHandleui64vNV(int32_t location, int32_t count, uint64_t* value);
+    inline bool hasGlUniformMatrix2x3fvNV() const;
     inline void glUniformMatrix2x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUniformMatrix2x4fvNV() const;
     inline void glUniformMatrix2x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUniformMatrix3x2fvNV() const;
     inline void glUniformMatrix3x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUniformMatrix3x4fvNV() const;
     inline void glUniformMatrix3x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUniformMatrix4x2fvNV() const;
     inline void glUniformMatrix4x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUniformMatrix4x3fvNV() const;
     inline void glUniformMatrix4x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                        float* value);
+    inline bool hasGlUnmapBufferOES() const;
     inline uint8_t glUnmapBufferOES(uint32_t target);
+    inline bool hasGlUseProgramStagesEXT() const;
     inline void glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, uint32_t program);
+    inline bool hasGlValidateProgramPipelineEXT() const;
     inline void glValidateProgramPipelineEXT(uint32_t pipeline);
+    inline bool hasGlVertexAttribDivisorANGLE() const;
     inline void glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor);
+    inline bool hasGlVertexAttribDivisorEXT() const;
     inline void glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor);
+    inline bool hasGlVertexAttribDivisorNV() const;
     inline void glVertexAttribDivisorNV(uint32_t index, uint32_t divisor);
+    inline bool hasGlViewportArrayvNV() const;
     inline void glViewportArrayvNV(uint32_t first, int32_t count, float* v);
+    inline bool hasGlViewportIndexedfNV() const;
     inline void glViewportIndexedfNV(uint32_t index, float x, float y, float w, float h);
+    inline bool hasGlViewportIndexedfvNV() const;
     inline void glViewportIndexedfvNV(uint32_t index, float* v);
+    inline bool hasGlWaitSyncAPPLE() const;
     inline void glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout);
+    inline bool hasGlWeightPathsNV() const;
     inline void glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint32_t* paths,
                                 float* weights);
+    inline bool hasGlCoverageModulationNV() const;
     inline void glCoverageModulationNV(uint32_t components);
+    inline bool hasGlCoverageModulationTableNV() const;
     inline void glCoverageModulationTableNV(int32_t n, float* v);
+    inline bool hasGlFragmentCoverageColorNV() const;
     inline void glFragmentCoverageColorNV(uint32_t color);
+    inline bool hasGlFramebufferSampleLocationsfvNV() const;
     inline void glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start, int32_t count,
                                                  float* v);
+    inline bool hasGlGetCoverageModulationTableNV() const;
     inline void glGetCoverageModulationTableNV(int32_t bufsize, float* v);
+    inline bool hasGlNamedFramebufferSampleLocationsfvNV() const;
     inline void glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
                                                       int32_t count, float* v);
+    inline bool hasGlRasterSamplesEXT() const;
     inline void glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations);
+    inline bool hasGlResolveDepthValuesNV() const;
     inline void glResolveDepthValuesNV();
+    inline bool hasGlSubpixelPrecisionBiasNV() const;
     inline void glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits);
+    inline bool hasGlBlendColor() const;
     inline void glBlendColor(float red, float green, float blue, float alpha);
+    inline bool hasGlBlendEquation() const;
     inline void glBlendEquation(uint32_t equation);
+    inline bool hasGlBlendEquationSeparate() const;
     inline void glBlendEquationSeparate(uint32_t rgb, uint32_t alpha);
+    inline bool hasGlBlendFunc() const;
     inline void glBlendFunc(uint32_t src_factor, uint32_t dst_factor);
+    inline bool hasGlBlendFuncSeparate() const;
     inline void glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                     uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
+    inline bool hasGlDepthFunc() const;
     inline void glDepthFunc(uint32_t function);
+    inline bool hasGlSampleCoverage() const;
     inline void glSampleCoverage(float value, uint8_t invert);
+    inline bool hasGlSampleMaski() const;
     inline void glSampleMaski(uint32_t maskNumber, uint32_t mask);
+    inline bool hasGlScissor() const;
     inline void glScissor(int32_t x, int32_t y, int32_t width, int32_t height);
+    inline bool hasGlStencilFunc() const;
     inline void glStencilFunc(uint32_t func, int32_t ref, uint32_t mask);
+    inline bool hasGlStencilFuncSeparate() const;
     inline void glStencilFuncSeparate(uint32_t face, uint32_t function, int32_t reference_value,
                                       uint32_t mask);
+    inline bool hasGlStencilOp() const;
     inline void glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass);
+    inline bool hasGlStencilOpSeparate() const;
     inline void glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
                                     uint32_t stencil_pass_depth_fail,
                                     uint32_t stencil_pass_depth_pass);
+    inline bool hasGlBindFramebuffer() const;
     inline void glBindFramebuffer(uint32_t target, uint32_t framebuffer);
+    inline bool hasGlBindRenderbuffer() const;
     inline void glBindRenderbuffer(uint32_t target, uint32_t renderbuffer);
+    inline bool hasGlBlitFramebuffer() const;
     inline void glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                   int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                   uint32_t mask, uint32_t filter);
+    inline bool hasGlCheckFramebufferStatus() const;
     inline uint32_t glCheckFramebufferStatus(uint32_t target);
+    inline bool hasGlClear() const;
     inline void glClear(uint32_t mask);
+    inline bool hasGlClearBufferfi() const;
     inline void glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float depth, int32_t stencil);
+    inline bool hasGlClearBufferfv() const;
     inline void glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float* value);
+    inline bool hasGlClearBufferiv() const;
     inline void glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_t* value);
+    inline bool hasGlClearBufferuiv() const;
     inline void glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint32_t* value);
+    inline bool hasGlClearColor() const;
     inline void glClearColor(float r, float g, float b, float a);
+    inline bool hasGlClearDepthf() const;
     inline void glClearDepthf(float depth);
+    inline bool hasGlClearStencil() const;
     inline void glClearStencil(int32_t stencil);
+    inline bool hasGlColorMask() const;
     inline void glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+    inline bool hasGlDeleteFramebuffers() const;
     inline void glDeleteFramebuffers(int32_t count, uint32_t* framebuffers);
+    inline bool hasGlDeleteRenderbuffers() const;
     inline void glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers);
+    inline bool hasGlDepthMask() const;
     inline void glDepthMask(uint8_t enabled);
+    inline bool hasGlFramebufferParameteri() const;
     inline void glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param);
+    inline bool hasGlFramebufferRenderbuffer() const;
     inline void glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                           uint32_t framebuffer_attachment,
                                           uint32_t renderbuffer_target, uint32_t renderbuffer);
+    inline bool hasGlFramebufferTexture2D() const;
     inline void glFramebufferTexture2D(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
                                        uint32_t texture_target, uint32_t texture, int32_t level);
+    inline bool hasGlFramebufferTextureLayer() const;
     inline void glFramebufferTextureLayer(uint32_t target, uint32_t attachment, uint32_t texture,
                                           int32_t level, int32_t layer);
+    inline bool hasGlGenFramebuffers() const;
     inline void glGenFramebuffers(int32_t count, uint32_t* framebuffers);
+    inline bool hasGlGenRenderbuffers() const;
     inline void glGenRenderbuffers(int32_t count, uint32_t* renderbuffers);
+    inline bool hasGlGetFramebufferAttachmentParameteriv() const;
     inline void glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target,
                                                       uint32_t attachment, uint32_t parameter,
                                                       int32_t* value);
+    inline bool hasGlGetFramebufferParameteriv() const;
     inline void glGetFramebufferParameteriv(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlGetRenderbufferParameteriv() const;
     inline void glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter, int32_t* values);
+    inline bool hasGlInvalidateFramebuffer() const;
     inline void glInvalidateFramebuffer(uint32_t target, int32_t count, uint32_t* attachments);
+    inline bool hasGlInvalidateSubFramebuffer() const;
     inline void glInvalidateSubFramebuffer(uint32_t target, int32_t numAttachments,
                                            uint32_t* attachments, int32_t x, int32_t y,
                                            int32_t width, int32_t height);
+    inline bool hasGlIsFramebuffer() const;
     inline uint8_t glIsFramebuffer(uint32_t framebuffer);
+    inline bool hasGlIsRenderbuffer() const;
     inline uint8_t glIsRenderbuffer(uint32_t renderbuffer);
+    inline bool hasGlReadBuffer() const;
     inline void glReadBuffer(uint32_t src);
+    inline bool hasGlReadPixels() const;
     inline void glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format,
                              uint32_t type, void* data);
+    inline bool hasGlRenderbufferStorage() const;
     inline void glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width,
                                       int32_t height);
+    inline bool hasGlRenderbufferStorageMultisample() const;
     inline void glRenderbufferStorageMultisample(uint32_t target, int32_t samples, uint32_t format,
                                                  int32_t width, int32_t height);
+    inline bool hasGlStencilMask() const;
     inline void glStencilMask(uint32_t mask);
+    inline bool hasGlStencilMaskSeparate() const;
     inline void glStencilMaskSeparate(uint32_t face, uint32_t mask);
+    inline bool hasGlDisable() const;
     inline void glDisable(uint32_t capability);
+    inline bool hasGlEnable() const;
     inline void glEnable(uint32_t capability);
+    inline bool hasGlFinish() const;
     inline void glFinish();
+    inline bool hasGlFlush() const;
     inline void glFlush();
+    inline bool hasGlFlushMappedBufferRange() const;
     inline void glFlushMappedBufferRange(uint32_t target, int32_t offset, int32_t length);
+    inline bool hasGlGetError() const;
     inline uint32_t glGetError();
+    inline bool hasGlHint() const;
     inline void glHint(uint32_t target, uint32_t mode);
+    inline bool hasGlActiveShaderProgram() const;
     inline void glActiveShaderProgram(uint32_t pipeline, uint32_t program);
+    inline bool hasGlAttachShader() const;
     inline void glAttachShader(uint32_t program, uint32_t shader);
+    inline bool hasGlBindAttribLocation() const;
     inline void glBindAttribLocation(uint32_t program, uint32_t location, char* name);
+    inline bool hasGlBindProgramPipeline() const;
     inline void glBindProgramPipeline(uint32_t pipeline);
+    inline bool hasGlCompileShader() const;
     inline void glCompileShader(uint32_t shader);
+    inline bool hasGlCreateProgram() const;
     inline uint32_t glCreateProgram();
+    inline bool hasGlCreateShader() const;
     inline uint32_t glCreateShader(uint32_t type);
+    inline bool hasGlCreateShaderProgramv() const;
     inline uint32_t glCreateShaderProgramv(uint32_t type, int32_t count, char** strings);
+    inline bool hasGlDeleteProgram() const;
     inline void glDeleteProgram(uint32_t program);
+    inline bool hasGlDeleteProgramPipelines() const;
     inline void glDeleteProgramPipelines(int32_t n, uint32_t* pipelines);
+    inline bool hasGlDeleteShader() const;
     inline void glDeleteShader(uint32_t shader);
+    inline bool hasGlDetachShader() const;
     inline void glDetachShader(uint32_t program, uint32_t shader);
+    inline bool hasGlDispatchCompute() const;
     inline void glDispatchCompute(uint32_t num_groups_x, uint32_t num_groups_y,
                                   uint32_t num_groups_z);
+    inline bool hasGlDispatchComputeIndirect() const;
     inline void glDispatchComputeIndirect(int32_t indirect);
+    inline bool hasGlGenProgramPipelines() const;
     inline void glGenProgramPipelines(int32_t n, uint32_t* pipelines);
+    inline bool hasGlGetActiveAttrib() const;
     inline void glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
                                   int32_t* buffer_bytes_written, int32_t* vector_count,
                                   uint32_t* type, char* name);
+    inline bool hasGlGetActiveUniform() const;
     inline void glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
                                    int32_t* buffer_bytes_written, int32_t* vector_count,
                                    uint32_t* type, char* name);
+    inline bool hasGlGetActiveUniformBlockName() const;
     inline void glGetActiveUniformBlockName(uint32_t program, uint32_t uniform_block_index,
                                             int32_t buffer_size, int32_t* buffer_bytes_written,
                                             char* name);
+    inline bool hasGlGetActiveUniformBlockiv() const;
     inline void glGetActiveUniformBlockiv(uint32_t program, uint32_t uniform_block_index,
                                           uint32_t parameter_name, int32_t* parameters);
+    inline bool hasGlGetActiveUniformsiv() const;
     inline void glGetActiveUniformsiv(uint32_t program, int32_t uniform_count,
                                       uint32_t* uniform_indices, uint32_t parameter_name,
                                       int32_t* parameters);
+    inline bool hasGlGetAttachedShaders() const;
     inline void glGetAttachedShaders(uint32_t program, int32_t buffer_length,
                                      int32_t* shaders_length_written, uint32_t* shaders);
+    inline bool hasGlGetAttribLocation() const;
     inline int32_t glGetAttribLocation(uint32_t program, char* name);
+    inline bool hasGlGetFragDataLocation() const;
     inline int32_t glGetFragDataLocation(uint32_t program, char* name);
+    inline bool hasGlGetProgramBinary() const;
     inline void glGetProgramBinary(uint32_t program, int32_t bufSize, int32_t* length,
                                    uint32_t* binaryFormat, void* binary);
+    inline bool hasGlGetProgramInfoLog() const;
     inline void glGetProgramInfoLog(uint32_t program, int32_t buffer_length,
                                     int32_t* string_length_written, char* info);
+    inline bool hasGlGetProgramInterfaceiv() const;
     inline void glGetProgramInterfaceiv(uint32_t program, uint32_t programInterface, uint32_t pname,
                                         int32_t* params);
+    inline bool hasGlGetProgramPipelineInfoLog() const;
     inline void glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufSize, int32_t* length,
                                             char* infoLog);
+    inline bool hasGlGetProgramPipelineiv() const;
     inline void glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, int32_t* params);
+    inline bool hasGlGetProgramResourceIndex() const;
     inline uint32_t glGetProgramResourceIndex(uint32_t program, uint32_t programInterface,
                                               char* name);
+    inline bool hasGlGetProgramResourceLocation() const;
     inline int32_t glGetProgramResourceLocation(uint32_t program, uint32_t programInterface,
                                                 char* name);
+    inline bool hasGlGetProgramResourceName() const;
     inline void glGetProgramResourceName(uint32_t program, uint32_t programInterface,
                                          uint32_t index, int32_t bufSize, int32_t* length,
                                          char* name);
+    inline bool hasGlGetProgramResourceiv() const;
     inline void glGetProgramResourceiv(uint32_t program, uint32_t programInterface, uint32_t index,
                                        int32_t propCount, uint32_t* props, int32_t bufSize,
                                        int32_t* length, int32_t* params);
+    inline bool hasGlGetProgramiv() const;
     inline void glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value);
+    inline bool hasGlGetShaderInfoLog() const;
     inline void glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
                                    int32_t* string_length_written, char* info);
+    inline bool hasGlGetShaderPrecisionFormat() const;
     inline void glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                            int32_t* range, int32_t* precision);
+    inline bool hasGlGetShaderSource() const;
     inline void glGetShaderSource(uint32_t shader, int32_t buffer_length,
                                   int32_t* string_length_written, char* source);
+    inline bool hasGlGetShaderiv() const;
     inline void glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value);
+    inline bool hasGlGetUniformBlockIndex() const;
     inline uint32_t glGetUniformBlockIndex(uint32_t program, char* uniformBlockName);
+    inline bool hasGlGetUniformIndices() const;
     inline void glGetUniformIndices(uint32_t program, int32_t uniformCount, char** uniformNames,
                                     uint32_t* uniformIndices);
+    inline bool hasGlGetUniformLocation() const;
     inline int32_t glGetUniformLocation(uint32_t program, char* name);
+    inline bool hasGlGetUniformfv() const;
     inline void glGetUniformfv(uint32_t program, int32_t location, float* values);
+    inline bool hasGlGetUniformiv() const;
     inline void glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
+    inline bool hasGlGetUniformuiv() const;
     inline void glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params);
+    inline bool hasGlIsProgram() const;
     inline uint8_t glIsProgram(uint32_t program);
+    inline bool hasGlIsProgramPipeline() const;
     inline uint8_t glIsProgramPipeline(uint32_t pipeline);
+    inline bool hasGlIsShader() const;
     inline uint8_t glIsShader(uint32_t shader);
+    inline bool hasGlLinkProgram() const;
     inline void glLinkProgram(uint32_t program);
+    inline bool hasGlMemoryBarrier() const;
     inline void glMemoryBarrier(uint32_t barriers);
+    inline bool hasGlMemoryBarrierByRegion() const;
     inline void glMemoryBarrierByRegion(uint32_t barriers);
+    inline bool hasGlProgramBinary() const;
     inline void glProgramBinary(uint32_t program, uint32_t binaryFormat, void* binary,
                                 int32_t length);
+    inline bool hasGlProgramParameteri() const;
     inline void glProgramParameteri(uint32_t program, uint32_t pname, int32_t value);
+    inline bool hasGlProgramUniform1f() const;
     inline void glProgramUniform1f(uint32_t program, int32_t location, float v0);
+    inline bool hasGlProgramUniform1fv() const;
     inline void glProgramUniform1fv(uint32_t program, int32_t location, int32_t count,
                                     float* value);
+    inline bool hasGlProgramUniform1i() const;
     inline void glProgramUniform1i(uint32_t program, int32_t location, int32_t v0);
+    inline bool hasGlProgramUniform1iv() const;
     inline void glProgramUniform1iv(uint32_t program, int32_t location, int32_t count,
                                     int32_t* value);
+    inline bool hasGlProgramUniform1ui() const;
     inline void glProgramUniform1ui(uint32_t program, int32_t location, uint32_t v0);
+    inline bool hasGlProgramUniform1uiv() const;
     inline void glProgramUniform1uiv(uint32_t program, int32_t location, int32_t count,
                                      uint32_t* value);
+    inline bool hasGlProgramUniform2f() const;
     inline void glProgramUniform2f(uint32_t program, int32_t location, float v0, float v1);
+    inline bool hasGlProgramUniform2fv() const;
     inline void glProgramUniform2fv(uint32_t program, int32_t location, int32_t count,
                                     float* value);
+    inline bool hasGlProgramUniform2i() const;
     inline void glProgramUniform2i(uint32_t program, int32_t location, int32_t v0, int32_t v1);
+    inline bool hasGlProgramUniform2iv() const;
     inline void glProgramUniform2iv(uint32_t program, int32_t location, int32_t count,
                                     int32_t* value);
+    inline bool hasGlProgramUniform2ui() const;
     inline void glProgramUniform2ui(uint32_t program, int32_t location, uint32_t v0, uint32_t v1);
+    inline bool hasGlProgramUniform2uiv() const;
     inline void glProgramUniform2uiv(uint32_t program, int32_t location, int32_t count,
                                      uint32_t* value);
+    inline bool hasGlProgramUniform3f() const;
     inline void glProgramUniform3f(uint32_t program, int32_t location, float v0, float v1,
                                    float v2);
+    inline bool hasGlProgramUniform3fv() const;
     inline void glProgramUniform3fv(uint32_t program, int32_t location, int32_t count,
                                     float* value);
+    inline bool hasGlProgramUniform3i() const;
     inline void glProgramUniform3i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                    int32_t v2);
+    inline bool hasGlProgramUniform3iv() const;
     inline void glProgramUniform3iv(uint32_t program, int32_t location, int32_t count,
                                     int32_t* value);
+    inline bool hasGlProgramUniform3ui() const;
     inline void glProgramUniform3ui(uint32_t program, int32_t location, uint32_t v0, uint32_t v1,
                                     uint32_t v2);
+    inline bool hasGlProgramUniform3uiv() const;
     inline void glProgramUniform3uiv(uint32_t program, int32_t location, int32_t count,
                                      uint32_t* value);
+    inline bool hasGlProgramUniform4f() const;
     inline void glProgramUniform4f(uint32_t program, int32_t location, float v0, float v1, float v2,
                                    float v3);
+    inline bool hasGlProgramUniform4fv() const;
     inline void glProgramUniform4fv(uint32_t program, int32_t location, int32_t count,
                                     float* value);
+    inline bool hasGlProgramUniform4i() const;
     inline void glProgramUniform4i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                    int32_t v2, int32_t v3);
+    inline bool hasGlProgramUniform4iv() const;
     inline void glProgramUniform4iv(uint32_t program, int32_t location, int32_t count,
                                     int32_t* value);
+    inline bool hasGlProgramUniform4ui() const;
     inline void glProgramUniform4ui(uint32_t program, int32_t location, uint32_t v0, uint32_t v1,
                                     uint32_t v2, uint32_t v3);
+    inline bool hasGlProgramUniform4uiv() const;
     inline void glProgramUniform4uiv(uint32_t program, int32_t location, int32_t count,
                                      uint32_t* value);
+    inline bool hasGlProgramUniformMatrix2fv() const;
     inline void glProgramUniformMatrix2fv(uint32_t program, int32_t location, int32_t count,
                                           uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix2x3fv() const;
     inline void glProgramUniformMatrix2x3fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix2x4fv() const;
     inline void glProgramUniformMatrix2x4fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3fv() const;
     inline void glProgramUniformMatrix3fv(uint32_t program, int32_t location, int32_t count,
                                           uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3x2fv() const;
     inline void glProgramUniformMatrix3x2fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix3x4fv() const;
     inline void glProgramUniformMatrix3x4fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4fv() const;
     inline void glProgramUniformMatrix4fv(uint32_t program, int32_t location, int32_t count,
                                           uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4x2fv() const;
     inline void glProgramUniformMatrix4x2fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlProgramUniformMatrix4x3fv() const;
     inline void glProgramUniformMatrix4x3fv(uint32_t program, int32_t location, int32_t count,
                                             uint8_t transpose, float* value);
+    inline bool hasGlReleaseShaderCompiler() const;
     inline void glReleaseShaderCompiler();
+    inline bool hasGlShaderBinary() const;
     inline void glShaderBinary(int32_t count, uint32_t* shaders, uint32_t binary_format,
                                void* binary, int32_t binary_size);
+    inline bool hasGlShaderSource() const;
     inline void glShaderSource(uint32_t shader, int32_t count, char** source, int32_t* length);
+    inline bool hasGlUniform1f() const;
     inline void glUniform1f(int32_t location, float value);
+    inline bool hasGlUniform1fv() const;
     inline void glUniform1fv(int32_t location, int32_t count, float* values);
+    inline bool hasGlUniform1i() const;
     inline void glUniform1i(int32_t location, int32_t value);
+    inline bool hasGlUniform1iv() const;
     inline void glUniform1iv(int32_t location, int32_t count, int32_t* values);
+    inline bool hasGlUniform1ui() const;
     inline void glUniform1ui(int32_t location, uint32_t v0);
+    inline bool hasGlUniform1uiv() const;
     inline void glUniform1uiv(int32_t location, int32_t count, uint32_t* value);
+    inline bool hasGlUniform2f() const;
     inline void glUniform2f(int32_t location, float value0, float value1);
+    inline bool hasGlUniform2fv() const;
     inline void glUniform2fv(int32_t location, int32_t count, float* values);
+    inline bool hasGlUniform2i() const;
     inline void glUniform2i(int32_t location, int32_t value0, int32_t value1);
+    inline bool hasGlUniform2iv() const;
     inline void glUniform2iv(int32_t location, int32_t count, int32_t* values);
+    inline bool hasGlUniform2ui() const;
     inline void glUniform2ui(int32_t location, uint32_t v0, uint32_t v1);
+    inline bool hasGlUniform2uiv() const;
     inline void glUniform2uiv(int32_t location, int32_t count, uint32_t* value);
+    inline bool hasGlUniform3f() const;
     inline void glUniform3f(int32_t location, float value0, float value1, float value2);
+    inline bool hasGlUniform3fv() const;
     inline void glUniform3fv(int32_t location, int32_t count, float* values);
+    inline bool hasGlUniform3i() const;
     inline void glUniform3i(int32_t location, int32_t value0, int32_t value1, int32_t value2);
+    inline bool hasGlUniform3iv() const;
     inline void glUniform3iv(int32_t location, int32_t count, int32_t* values);
+    inline bool hasGlUniform3ui() const;
     inline void glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2);
+    inline bool hasGlUniform3uiv() const;
     inline void glUniform3uiv(int32_t location, int32_t count, uint32_t* value);
+    inline bool hasGlUniform4f() const;
     inline void glUniform4f(int32_t location, float value0, float value1, float value2,
                             float value3);
+    inline bool hasGlUniform4fv() const;
     inline void glUniform4fv(int32_t location, int32_t count, float* values);
+    inline bool hasGlUniform4i() const;
     inline void glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2,
                             int32_t value3);
+    inline bool hasGlUniform4iv() const;
     inline void glUniform4iv(int32_t location, int32_t count, int32_t* values);
+    inline bool hasGlUniform4ui() const;
     inline void glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3);
+    inline bool hasGlUniform4uiv() const;
     inline void glUniform4uiv(int32_t location, int32_t count, uint32_t* value);
+    inline bool hasGlUniformBlockBinding() const;
     inline void glUniformBlockBinding(uint32_t program, uint32_t uniform_block_index,
                                       uint32_t uniform_block_binding);
+    inline bool hasGlUniformMatrix2fv() const;
     inline void glUniformMatrix2fv(int32_t location, int32_t count, uint8_t transpose,
                                    float* values);
+    inline bool hasGlUniformMatrix2x3fv() const;
     inline void glUniformMatrix2x3fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUniformMatrix2x4fv() const;
     inline void glUniformMatrix2x4fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUniformMatrix3fv() const;
     inline void glUniformMatrix3fv(int32_t location, int32_t count, uint8_t transpose,
                                    float* values);
+    inline bool hasGlUniformMatrix3x2fv() const;
     inline void glUniformMatrix3x2fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUniformMatrix3x4fv() const;
     inline void glUniformMatrix3x4fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUniformMatrix4fv() const;
     inline void glUniformMatrix4fv(int32_t location, int32_t count, uint8_t transpose,
                                    float* values);
+    inline bool hasGlUniformMatrix4x2fv() const;
     inline void glUniformMatrix4x2fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUniformMatrix4x3fv() const;
     inline void glUniformMatrix4x3fv(int32_t location, int32_t count, uint8_t transpose,
                                      float* value);
+    inline bool hasGlUseProgram() const;
     inline void glUseProgram(uint32_t program);
+    inline bool hasGlUseProgramStages() const;
     inline void glUseProgramStages(uint32_t pipeline, uint32_t stages, uint32_t program);
+    inline bool hasGlValidateProgram() const;
     inline void glValidateProgram(uint32_t program);
+    inline bool hasGlValidateProgramPipeline() const;
     inline void glValidateProgramPipeline(uint32_t pipeline);
+    inline bool hasGlCullFace() const;
     inline void glCullFace(uint32_t mode);
+    inline bool hasGlDepthRangef() const;
     inline void glDepthRangef(float near, float far);
+    inline bool hasGlFrontFace() const;
     inline void glFrontFace(uint32_t orientation);
+    inline bool hasGlGetMultisamplefv() const;
     inline void glGetMultisamplefv(uint32_t pname, uint32_t index, float* val);
+    inline bool hasGlLineWidth() const;
     inline void glLineWidth(float width);
+    inline bool hasGlPolygonOffset() const;
     inline void glPolygonOffset(float scale_factor, float units);
+    inline bool hasGlViewport() const;
     inline void glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
+    inline bool hasGlGetBooleani_v() const;
     inline void glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
+    inline bool hasGlGetBooleanv() const;
     inline void glGetBooleanv(uint32_t param, uint8_t* values);
+    inline bool hasGlGetFloatv() const;
     inline void glGetFloatv(uint32_t param, float* values);
+    inline bool hasGlGetInteger64i_v() const;
     inline void glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data);
+    inline bool hasGlGetInteger64v() const;
     inline void glGetInteger64v(uint32_t pname, int64_t* data);
+    inline bool hasGlGetIntegeri_v() const;
     inline void glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data);
+    inline bool hasGlGetIntegerv() const;
     inline void glGetIntegerv(uint32_t param, int32_t* values);
+    inline bool hasGlGetInternalformativ() const;
     inline void glGetInternalformativ(uint32_t target, uint32_t internalformat, uint32_t pname,
                                       int32_t bufSize, int32_t* params);
+    inline bool hasGlGetString() const;
     inline uint8_t* glGetString(uint32_t param);
+    inline bool hasGlGetStringi() const;
     inline uint8_t* glGetStringi(uint32_t name, uint32_t index);
+    inline bool hasGlIsEnabled() const;
     inline uint8_t glIsEnabled(uint32_t capability);
+    inline bool hasGlClientWaitSync() const;
     inline uint32_t glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+    inline bool hasGlDeleteSync() const;
     inline void glDeleteSync(uint64_t sync);
+    inline bool hasGlFenceSync() const;
     inline uint64_t glFenceSync(uint32_t condition, uint32_t syncFlags);
+    inline bool hasGlGetSynciv() const;
     inline void glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length,
                             int32_t* values);
+    inline bool hasGlIsSync() const;
     inline uint8_t glIsSync(uint64_t sync);
+    inline bool hasGlWaitSync() const;
     inline void glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+    inline bool hasGlActiveTexture() const;
     inline void glActiveTexture(uint32_t unit);
+    inline bool hasGlBindImageTexture() const;
     inline void glBindImageTexture(uint32_t unit, uint32_t texture, int32_t level, uint8_t layered,
                                    int32_t layer, uint32_t access, uint32_t format);
+    inline bool hasGlBindSampler() const;
     inline void glBindSampler(uint32_t unit, uint32_t sampler);
+    inline bool hasGlBindTexture() const;
     inline void glBindTexture(uint32_t target, uint32_t texture);
+    inline bool hasGlCompressedTexImage2D() const;
     inline void glCompressedTexImage2D(uint32_t target, int32_t level, uint32_t format,
                                        int32_t width, int32_t height, int32_t border,
                                        int32_t image_size, void* data);
+    inline bool hasGlCompressedTexImage3D() const;
     inline void glCompressedTexImage3D(uint32_t target, int32_t level, uint32_t internalformat,
                                        int32_t width, int32_t height, int32_t depth, int32_t border,
                                        int32_t imageSize, void* data);
+    inline bool hasGlCompressedTexSubImage2D() const;
     inline void glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                           int32_t yoffset, int32_t width, int32_t height,
                                           uint32_t format, int32_t image_size, void* data);
+    inline bool hasGlCompressedTexSubImage3D() const;
     inline void glCompressedTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                           int32_t yoffset, int32_t zoffset, int32_t width,
                                           int32_t height, int32_t depth, uint32_t format,
                                           int32_t imageSize, void* data);
+    inline bool hasGlCopyTexImage2D() const;
     inline void glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                  int32_t y, int32_t width, int32_t height, int32_t border);
+    inline bool hasGlCopyTexSubImage2D() const;
     inline void glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t x, int32_t y, int32_t width,
                                     int32_t height);
+    inline bool hasGlCopyTexSubImage3D() const;
     inline void glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                     int32_t width, int32_t height);
+    inline bool hasGlDeleteSamplers() const;
     inline void glDeleteSamplers(int32_t count, uint32_t* samplers);
+    inline bool hasGlDeleteTextures() const;
     inline void glDeleteTextures(int32_t count, uint32_t* textures);
+    inline bool hasGlGenSamplers() const;
     inline void glGenSamplers(int32_t count, uint32_t* samplers);
+    inline bool hasGlGenTextures() const;
     inline void glGenTextures(int32_t count, uint32_t* textures);
+    inline bool hasGlGenerateMipmap() const;
     inline void glGenerateMipmap(uint32_t target);
+    inline bool hasGlGetSamplerParameterfv() const;
     inline void glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, float* params);
+    inline bool hasGlGetSamplerParameteriv() const;
     inline void glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* params);
+    inline bool hasGlGetTexLevelParameterfv() const;
     inline void glGetTexLevelParameterfv(uint32_t target, int32_t level, uint32_t pname,
                                          float* params);
+    inline bool hasGlGetTexLevelParameteriv() const;
     inline void glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname,
                                          int32_t* params);
+    inline bool hasGlGetTexParameterfv() const;
     inline void glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values);
+    inline bool hasGlGetTexParameteriv() const;
     inline void glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values);
+    inline bool hasGlIsSampler() const;
     inline uint8_t glIsSampler(uint32_t sampler);
+    inline bool hasGlIsTexture() const;
     inline uint8_t glIsTexture(uint32_t texture);
+    inline bool hasGlPixelStorei() const;
     inline void glPixelStorei(uint32_t parameter, int32_t value);
+    inline bool hasGlSamplerParameterf() const;
     inline void glSamplerParameterf(uint32_t sampler, uint32_t pname, float param);
+    inline bool hasGlSamplerParameterfv() const;
     inline void glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param);
+    inline bool hasGlSamplerParameteri() const;
     inline void glSamplerParameteri(uint32_t sampler, uint32_t pname, int32_t param);
+    inline bool hasGlSamplerParameteriv() const;
     inline void glSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* param);
+    inline bool hasGlTexImage2D() const;
     inline void glTexImage2D(uint32_t target, int32_t level, int32_t internal_format, int32_t width,
                              int32_t height, int32_t border, uint32_t format, uint32_t type,
                              void* data);
+    inline bool hasGlTexImage3D() const;
     inline void glTexImage3D(uint32_t target, int32_t level, int32_t internalformat, int32_t width,
                              int32_t height, int32_t depth, int32_t border, uint32_t format,
                              uint32_t type, void* pixels);
+    inline bool hasGlTexParameterf() const;
     inline void glTexParameterf(uint32_t target, uint32_t parameter, float value);
+    inline bool hasGlTexParameterfv() const;
     inline void glTexParameterfv(uint32_t target, uint32_t pname, float* params);
+    inline bool hasGlTexParameteri() const;
     inline void glTexParameteri(uint32_t target, uint32_t parameter, int32_t value);
+    inline bool hasGlTexParameteriv() const;
     inline void glTexParameteriv(uint32_t target, uint32_t pname, int32_t* params);
+    inline bool hasGlTexStorage2D() const;
     inline void glTexStorage2D(uint32_t target, int32_t levels, uint32_t internalformat,
                                int32_t width, int32_t height);
+    inline bool hasGlTexStorage2DMultisample() const;
     inline void glTexStorage2DMultisample(uint32_t target, int32_t samples, uint32_t internalformat,
                                           int32_t width, int32_t height,
                                           uint8_t fixedsamplelocations);
+    inline bool hasGlTexStorage3D() const;
     inline void glTexStorage3D(uint32_t target, int32_t levels, uint32_t internalformat,
                                int32_t width, int32_t height, int32_t depth);
+    inline bool hasGlTexSubImage2D() const;
     inline void glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset, int32_t yoffset,
                                 int32_t width, int32_t height, uint32_t format, uint32_t type,
                                 void* data);
+    inline bool hasGlTexSubImage3D() const;
     inline void glTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset, int32_t yoffset,
                                 int32_t zoffset, int32_t width, int32_t height, int32_t depth,
                                 uint32_t format, uint32_t type, void* pixels);
+    inline bool hasGlBeginTransformFeedback() const;
     inline void glBeginTransformFeedback(uint32_t primitiveMode);
+    inline bool hasGlBindTransformFeedback() const;
     inline void glBindTransformFeedback(uint32_t target, uint32_t id);
+    inline bool hasGlDeleteTransformFeedbacks() const;
     inline void glDeleteTransformFeedbacks(int32_t n, uint32_t* ids);
+    inline bool hasGlEndTransformFeedback() const;
     inline void glEndTransformFeedback();
+    inline bool hasGlGenTransformFeedbacks() const;
     inline void glGenTransformFeedbacks(int32_t n, uint32_t* ids);
+    inline bool hasGlGetTransformFeedbackVarying() const;
     inline void glGetTransformFeedbackVarying(uint32_t program, uint32_t index, int32_t bufSize,
                                               int32_t* length, int32_t* size, uint32_t* type,
                                               char* name);
+    inline bool hasGlIsTransformFeedback() const;
     inline uint8_t glIsTransformFeedback(uint32_t id);
+    inline bool hasGlPauseTransformFeedback() const;
     inline void glPauseTransformFeedback();
+    inline bool hasGlResumeTransformFeedback() const;
     inline void glResumeTransformFeedback();
+    inline bool hasGlTransformFeedbackVaryings() const;
     inline void glTransformFeedbackVaryings(uint32_t program, int32_t count, char** varyings,
                                             uint32_t bufferMode);
+    inline bool hasGlBindVertexArray() const;
     inline void glBindVertexArray(uint32_t array);
+    inline bool hasGlBindVertexBuffer() const;
     inline void glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset,
                                    int32_t stride);
+    inline bool hasGlDeleteVertexArrays() const;
     inline void glDeleteVertexArrays(int32_t count, uint32_t* arrays);
+    inline bool hasGlDisableVertexAttribArray() const;
     inline void glDisableVertexAttribArray(uint32_t location);
+    inline bool hasGlEnableVertexAttribArray() const;
     inline void glEnableVertexAttribArray(uint32_t location);
+    inline bool hasGlGenVertexArrays() const;
     inline void glGenVertexArrays(int32_t count, uint32_t* arrays);
+    inline bool hasGlGetVertexAttribIiv() const;
     inline void glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_t* params);
+    inline bool hasGlGetVertexAttribIuiv() const;
     inline void glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint32_t* params);
+    inline bool hasGlGetVertexAttribPointerv() const;
     inline void glGetVertexAttribPointerv(uint32_t index, uint32_t pname, void** pointer);
+    inline bool hasGlGetVertexAttribfv() const;
     inline void glGetVertexAttribfv(uint32_t index, uint32_t pname, float* params);
+    inline bool hasGlGetVertexAttribiv() const;
     inline void glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t* params);
+    inline bool hasGlIsVertexArray() const;
     inline uint8_t glIsVertexArray(uint32_t array);
+    inline bool hasGlVertexAttrib1f() const;
     inline void glVertexAttrib1f(uint32_t location, float value0);
+    inline bool hasGlVertexAttrib1fv() const;
     inline void glVertexAttrib1fv(uint32_t location, float* value);
+    inline bool hasGlVertexAttrib2f() const;
     inline void glVertexAttrib2f(uint32_t location, float value0, float value1);
+    inline bool hasGlVertexAttrib2fv() const;
     inline void glVertexAttrib2fv(uint32_t location, float* value);
+    inline bool hasGlVertexAttrib3f() const;
     inline void glVertexAttrib3f(uint32_t location, float value0, float value1, float value2);
+    inline bool hasGlVertexAttrib3fv() const;
     inline void glVertexAttrib3fv(uint32_t location, float* value);
+    inline bool hasGlVertexAttrib4f() const;
     inline void glVertexAttrib4f(uint32_t location, float value0, float value1, float value2,
                                  float value3);
+    inline bool hasGlVertexAttrib4fv() const;
     inline void glVertexAttrib4fv(uint32_t location, float* value);
+    inline bool hasGlVertexAttribBinding() const;
     inline void glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex);
+    inline bool hasGlVertexAttribDivisor() const;
     inline void glVertexAttribDivisor(uint32_t index, uint32_t divisor);
+    inline bool hasGlVertexAttribFormat() const;
     inline void glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                      uint8_t normalized, uint32_t relativeoffset);
+    inline bool hasGlVertexAttribI4i() const;
     inline void glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w);
+    inline bool hasGlVertexAttribI4iv() const;
     inline void glVertexAttribI4iv(uint32_t index, int32_t* v);
+    inline bool hasGlVertexAttribI4ui() const;
     inline void glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z, uint32_t w);
+    inline bool hasGlVertexAttribI4uiv() const;
     inline void glVertexAttribI4uiv(uint32_t index, uint32_t* v);
+    inline bool hasGlVertexAttribIFormat() const;
     inline void glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                       uint32_t relativeoffset);
+    inline bool hasGlVertexAttribIPointer() const;
     inline void glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride,
                                        void* pointer);
+    inline bool hasGlVertexAttribPointer() const;
     inline void glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                       uint8_t normalized, int32_t stride, void* data);
+    inline bool hasGlVertexBindingDivisor() const;
     inline void glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor);
+    inline bool hasEglInitialize() const;
     inline int eglInitialize(void* dpy, int* major, int* minor);
+    inline bool hasEglCreateContext() const;
     inline void* eglCreateContext(void* display, void* config, void* share_context,
                                   int* attrib_list);
+    inline bool hasEglMakeCurrent() const;
     inline int eglMakeCurrent(void* display, void* draw, void* read, void* context);
+    inline bool hasEglSwapBuffers() const;
     inline int eglSwapBuffers(void* display, void* surface);
+    inline bool hasEglQuerySurface() const;
     inline int eglQuerySurface(void* display, void* surface, int attribute, int* value);
+    inline bool hasGlXCreateContext() const;
     inline void* glXCreateContext(void* dpy, void* vis, void* shareList, bool direct);
+    inline bool hasGlXCreateNewContext() const;
     inline void* glXCreateNewContext(void* display, void* fbconfig, uint32_t type, void* shared,
                                      bool direct);
+    inline bool hasGlXMakeContextCurrent() const;
     inline int glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx);
+    inline bool hasGlXMakeCurrent() const;
     inline int glXMakeCurrent(void* display, void* drawable, void* ctx);
+    inline bool hasGlXSwapBuffers() const;
     inline void glXSwapBuffers(void* display, void* drawable);
+    inline bool hasGlXQueryDrawable() const;
     inline int glXQueryDrawable(void* display, void* draw, int attribute, int* value);
+    inline bool hasWglCreateContext() const;
     inline void* wglCreateContext(void* hdc);
+    inline bool hasWglCreateContextAttribsARB() const;
     inline void* wglCreateContextAttribsARB(void* hdc, void* hShareContext, int* attribList);
+    inline bool hasWglMakeCurrent() const;
     inline int wglMakeCurrent(void* hdc, void* hglrc);
+    inline bool hasWglSwapBuffers() const;
     inline void wglSwapBuffers(void* hdc);
+    inline bool hasCGLCreateContext() const;
     inline int CGLCreateContext(void* pix, void* share, void** ctx);
+    inline bool hasCGLSetCurrentContext() const;
     inline int CGLSetCurrentContext(void* ctx);
+    inline bool hasCGLGetSurface() const;
     inline int CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* sid);
+    inline bool hasCGSGetSurfaceBounds() const;
     inline int CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, double* bounds);
+    inline bool hasCGLFlushDrawable() const;
     inline int CGLFlushDrawable(void* ctx);
+    inline bool hasGlGetQueryObjecti64v() const;
     inline void glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value);
+    inline bool hasGlGetQueryObjectui64v() const;
     inline void glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value);
     inline void architecture(uint32_t pointer_alignment, uint32_t pointer_size,
                              uint32_t integer_size, bool little_endian);
@@ -1142,8 +1838,15 @@ inline void GlesSpy::init(std::shared_ptr<gapic::Encoder> encoder) {
     CGLContexts = CGLContextObjToContext__R();
 }
 
+inline bool GlesSpy::hasGlBlendBarrierKHR() const { return mImports.glBlendBarrierKHR != nullptr; }
+
 inline void GlesSpy::glBlendBarrierKHR() {
     GAPID_INFO("glBlendBarrierKHR()");
+
+    if (!hasGlBlendBarrierKHR()) {
+        GAPID_WARNING("Application called unsupported function glBlendBarrierKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1157,9 +1860,18 @@ inline void GlesSpy::glBlendBarrierKHR() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquationSeparateiEXT() const {
+    return mImports.glBlendEquationSeparateiEXT != nullptr;
+}
+
 inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
                                                  uint32_t modeAlpha) {
     GAPID_INFO("glBlendEquationSeparateiEXT(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
+
+    if (!hasGlBlendEquationSeparateiEXT()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquationSeparateiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1173,8 +1885,17 @@ inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquationiEXT() const {
+    return mImports.glBlendEquationiEXT != nullptr;
+}
+
 inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
     GAPID_INFO("glBlendEquationiEXT(%" PRIu32 ", %u)", buf, mode);
+
+    if (!hasGlBlendEquationiEXT()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquationiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1188,10 +1909,19 @@ inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFuncSeparateiEXT() const {
+    return mImports.glBlendFuncSeparateiEXT != nullptr;
+}
+
 inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                              uint32_t srcAlpha, uint32_t dstAlpha) {
     GAPID_INFO("glBlendFuncSeparateiEXT(%" PRIu32 ", %u, %u, %u, %u)", buf, srcRGB, dstRGB,
                srcAlpha, dstAlpha);
+
+    if (!hasGlBlendFuncSeparateiEXT()) {
+        GAPID_WARNING("Application called unsupported function glBlendFuncSeparateiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1206,8 +1936,15 @@ inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFunciEXT() const { return mImports.glBlendFunciEXT != nullptr; }
+
 inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
     GAPID_INFO("glBlendFunciEXT(%" PRIu32 ", %u, %u)", buf, src, dst);
+
+    if (!hasGlBlendFunciEXT()) {
+        GAPID_WARNING("Application called unsupported function glBlendFunciEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1221,9 +1958,16 @@ inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlColorMaskiEXT() const { return mImports.glColorMaskiEXT != nullptr; }
+
 inline void GlesSpy::glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
     GAPID_INFO("glColorMaskiEXT(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")",
                index, r, g, b, a);
+
+    if (!hasGlColorMaskiEXT()) {
+        GAPID_WARNING("Application called unsupported function glColorMaskiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1237,6 +1981,10 @@ inline void GlesSpy::glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyImageSubDataEXT() const {
+    return mImports.glCopyImageSubDataEXT != nullptr;
+}
+
 inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                            int32_t srcX, int32_t srcY, int32_t srcZ,
                                            uint32_t dstName, uint32_t dstTarget, int32_t dstLevel,
@@ -1247,6 +1995,11 @@ inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget,
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX,
                dstY, dstZ, srcWidth, srcHeight, srcDepth);
+
+    if (!hasGlCopyImageSubDataEXT()) {
+        GAPID_WARNING("Application called unsupported function glCopyImageSubDataEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1264,8 +2017,17 @@ inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDebugMessageCallbackKHR() const {
+    return mImports.glDebugMessageCallbackKHR != nullptr;
+}
+
 inline void GlesSpy::glDebugMessageCallbackKHR(void* callback, void* userParam) {
     GAPID_INFO("glDebugMessageCallbackKHR(%p, %p)", callback, userParam);
+
+    if (!hasGlDebugMessageCallbackKHR()) {
+        GAPID_WARNING("Application called unsupported function glDebugMessageCallbackKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1283,10 +2045,19 @@ inline void GlesSpy::glDebugMessageCallbackKHR(void* callback, void* userParam) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDebugMessageControlKHR() const {
+    return mImports.glDebugMessageControlKHR != nullptr;
+}
+
 inline void GlesSpy::glDebugMessageControlKHR(uint32_t source, uint32_t type, uint32_t severity,
                                               int32_t count, uint32_t* ids, uint8_t enabled) {
     GAPID_INFO("glDebugMessageControlKHR(%u, %u, %u, %" PRId32 ", %p, %" PRIu8 ")", source, type,
                severity, count, ids, enabled);
+
+    if (!hasGlDebugMessageControlKHR()) {
+        GAPID_WARNING("Application called unsupported function glDebugMessageControlKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1304,10 +2075,19 @@ inline void GlesSpy::glDebugMessageControlKHR(uint32_t source, uint32_t type, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDebugMessageInsertKHR() const {
+    return mImports.glDebugMessageInsertKHR != nullptr;
+}
+
 inline void GlesSpy::glDebugMessageInsertKHR(uint32_t source, uint32_t type, uint32_t id,
                                              uint32_t severity, int32_t length, char* buf) {
     GAPID_INFO("glDebugMessageInsertKHR(%u, %u, %" PRIu32 ", %u, %" PRId32 ", %p)", source, type,
                id, severity, length, buf);
+
+    if (!hasGlDebugMessageInsertKHR()) {
+        GAPID_WARNING("Application called unsupported function glDebugMessageInsertKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1324,8 +2104,15 @@ inline void GlesSpy::glDebugMessageInsertKHR(uint32_t source, uint32_t type, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisableiEXT() const { return mImports.glDisableiEXT != nullptr; }
+
 inline void GlesSpy::glDisableiEXT(uint32_t target, uint32_t index) {
     GAPID_INFO("glDisableiEXT(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlDisableiEXT()) {
+        GAPID_WARNING("Application called unsupported function glDisableiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1339,8 +2126,15 @@ inline void GlesSpy::glDisableiEXT(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnableiEXT() const { return mImports.glEnableiEXT != nullptr; }
+
 inline void GlesSpy::glEnableiEXT(uint32_t target, uint32_t index) {
     GAPID_INFO("glEnableiEXT(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlEnableiEXT()) {
+        GAPID_WARNING("Application called unsupported function glEnableiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1354,10 +2148,19 @@ inline void GlesSpy::glEnableiEXT(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTextureEXT() const {
+    return mImports.glFramebufferTextureEXT != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTextureEXT(uint32_t target, uint32_t attachment, uint32_t texture,
                                              int32_t level) {
     GAPID_INFO("glFramebufferTextureEXT(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
                texture, level);
+
+    if (!hasGlFramebufferTextureEXT()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTextureEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1372,6 +2175,10 @@ inline void GlesSpy::glFramebufferTextureEXT(uint32_t target, uint32_t attachmen
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetDebugMessageLogKHR() const {
+    return mImports.glGetDebugMessageLogKHR != nullptr;
+}
+
 inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize, uint32_t* sources,
                                                  uint32_t* types, uint32_t* ids,
                                                  uint32_t* severities, int32_t* lengths,
@@ -1380,6 +2187,11 @@ inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize
                bufSize, sources, types, ids, severities, lengths, messageLog);
 
     uint32_t result = 0;
+
+    if (!hasGlGetDebugMessageLogKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetDebugMessageLogKHR");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -1411,10 +2223,19 @@ inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize
     return result;
 }
 
+inline bool GlesSpy::hasGlGetObjectLabelKHR() const {
+    return mImports.glGetObjectLabelKHR != nullptr;
+}
+
 inline void GlesSpy::glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t bufSize,
                                          int32_t* length, char* label) {
     GAPID_INFO("glGetObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p, %p)", identifier, name,
                bufSize, length, label);
+
+    if (!hasGlGetObjectLabelKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetObjectLabelKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1433,9 +2254,18 @@ inline void GlesSpy::glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetObjectPtrLabelKHR() const {
+    return mImports.glGetObjectPtrLabelKHR != nullptr;
+}
+
 inline void GlesSpy::glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t* length,
                                             char* label) {
     GAPID_INFO("glGetObjectPtrLabelKHR(%p, %" PRId32 ", %p, %p)", ptr, bufSize, length, label);
+
+    if (!hasGlGetObjectPtrLabelKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetObjectPtrLabelKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1455,8 +2285,15 @@ inline void GlesSpy::glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPointervKHR() const { return mImports.glGetPointervKHR != nullptr; }
+
 inline void GlesSpy::glGetPointervKHR(uint32_t pname, void** params) {
     GAPID_INFO("glGetPointervKHR(%u, %p)", pname, params);
+
+    if (!hasGlGetPointervKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetPointervKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1472,9 +2309,18 @@ inline void GlesSpy::glGetPointervKHR(uint32_t pname, void** params) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameterIivEXT() const {
+    return mImports.glGetSamplerParameterIivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pname,
                                                  int32_t* params) {
     GAPID_INFO("glGetSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameterIivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameterIivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1491,9 +2337,18 @@ inline void GlesSpy::glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pnam
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameterIuivEXT() const {
+    return mImports.glGetSamplerParameterIuivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname,
                                                   uint32_t* params) {
     GAPID_INFO("glGetSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameterIuivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameterIuivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1510,8 +2365,17 @@ inline void GlesSpy::glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pna
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameterIivEXT() const {
+    return mImports.glGetTexParameterIivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetTexParameterIivEXT(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetTexParameterIivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameterIivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1527,8 +2391,17 @@ inline void GlesSpy::glGetTexParameterIivEXT(uint32_t target, uint32_t pname, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameterIuivEXT() const {
+    return mImports.glGetTexParameterIuivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params) {
     GAPID_INFO("glGetTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetTexParameterIuivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameterIuivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1545,10 +2418,17 @@ inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsEnablediEXT() const { return mImports.glIsEnablediEXT != nullptr; }
+
 inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediEXT(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
+
+    if (!hasGlIsEnablediEXT()) {
+        GAPID_WARNING("Application called unsupported function glIsEnablediEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -1565,8 +2445,17 @@ inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
     return result;
 }
 
+inline bool GlesSpy::hasGlMinSampleShadingOES() const {
+    return mImports.glMinSampleShadingOES != nullptr;
+}
+
 inline void GlesSpy::glMinSampleShadingOES(float value) {
     GAPID_INFO("glMinSampleShadingOES(%f)", value);
+
+    if (!hasGlMinSampleShadingOES()) {
+        GAPID_WARNING("Application called unsupported function glMinSampleShadingOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1580,10 +2469,17 @@ inline void GlesSpy::glMinSampleShadingOES(float value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlObjectLabelKHR() const { return mImports.glObjectLabelKHR != nullptr; }
+
 inline void GlesSpy::glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t length,
                                       char* label) {
     GAPID_INFO("glObjectLabelKHR(%u, %" PRIu32 ", %" PRId32 ", %p)", identifier, name, length,
                label);
+
+    if (!hasGlObjectLabelKHR()) {
+        GAPID_WARNING("Application called unsupported function glObjectLabelKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1600,8 +2496,17 @@ inline void GlesSpy::glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlObjectPtrLabelKHR() const {
+    return mImports.glObjectPtrLabelKHR != nullptr;
+}
+
 inline void GlesSpy::glObjectPtrLabelKHR(void* ptr, int32_t length, char* label) {
     GAPID_INFO("glObjectPtrLabelKHR(%p, %" PRId32 ", %p)", ptr, length, label);
+
+    if (!hasGlObjectPtrLabelKHR()) {
+        GAPID_WARNING("Application called unsupported function glObjectPtrLabelKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1619,8 +2524,17 @@ inline void GlesSpy::glObjectPtrLabelKHR(void* ptr, int32_t length, char* label)
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPatchParameteriEXT() const {
+    return mImports.glPatchParameteriEXT != nullptr;
+}
+
 inline void GlesSpy::glPatchParameteriEXT(uint32_t pname, int32_t value) {
     GAPID_INFO("glPatchParameteriEXT(%u, %" PRId32 ")", pname, value);
+
+    if (!hasGlPatchParameteriEXT()) {
+        GAPID_WARNING("Application called unsupported function glPatchParameteriEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1634,8 +2548,17 @@ inline void GlesSpy::glPatchParameteriEXT(uint32_t pname, int32_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPopDebugGroupKHR() const {
+    return mImports.glPopDebugGroupKHR != nullptr;
+}
+
 inline void GlesSpy::glPopDebugGroupKHR() {
     GAPID_INFO("glPopDebugGroupKHR()");
+
+    if (!hasGlPopDebugGroupKHR()) {
+        GAPID_WARNING("Application called unsupported function glPopDebugGroupKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1649,10 +2572,19 @@ inline void GlesSpy::glPopDebugGroupKHR() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPrimitiveBoundingBoxEXT() const {
+    return mImports.glPrimitiveBoundingBoxEXT != nullptr;
+}
+
 inline void GlesSpy::glPrimitiveBoundingBoxEXT(float minX, float minY, float minZ, float minW,
                                                float maxX, float maxY, float maxZ, float maxW) {
     GAPID_INFO("glPrimitiveBoundingBoxEXT(%f, %f, %f, %f, %f, %f, %f, %f)", minX, minY, minZ, minW,
                maxX, maxY, maxZ, maxW);
+
+    if (!hasGlPrimitiveBoundingBoxEXT()) {
+        GAPID_WARNING("Application called unsupported function glPrimitiveBoundingBoxEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1667,10 +2599,19 @@ inline void GlesSpy::glPrimitiveBoundingBoxEXT(float minX, float minY, float min
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPushDebugGroupKHR() const {
+    return mImports.glPushDebugGroupKHR != nullptr;
+}
+
 inline void GlesSpy::glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t length,
                                          char* message) {
     GAPID_INFO("glPushDebugGroupKHR(%u, %" PRIu32 ", %" PRId32 ", %p)", source, id, length,
                message);
+
+    if (!hasGlPushDebugGroupKHR()) {
+        GAPID_WARNING("Application called unsupported function glPushDebugGroupKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1687,8 +2628,17 @@ inline void GlesSpy::glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t l
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterIivEXT() const {
+    return mImports.glSamplerParameterIivEXT != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, int32_t* param) {
     GAPID_INFO("glSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterIivEXT()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterIivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1705,8 +2655,17 @@ inline void GlesSpy::glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterIuivEXT() const {
+    return mImports.glSamplerParameterIuivEXT != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* param) {
     GAPID_INFO("glSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterIuivEXT()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterIuivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1723,8 +2682,15 @@ inline void GlesSpy::glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexBufferEXT() const { return mImports.glTexBufferEXT != nullptr; }
+
 inline void GlesSpy::glTexBufferEXT(uint32_t target, uint32_t internalformat, uint32_t buffer) {
     GAPID_INFO("glTexBufferEXT(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
+
+    if (!hasGlTexBufferEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexBufferEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1738,10 +2704,19 @@ inline void GlesSpy::glTexBufferEXT(uint32_t target, uint32_t internalformat, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexBufferRangeEXT() const {
+    return mImports.glTexBufferRangeEXT != nullptr;
+}
+
 inline void GlesSpy::glTexBufferRangeEXT(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                          int32_t offset, int32_t size) {
     GAPID_INFO("glTexBufferRangeEXT(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                internalformat, buffer, offset, size);
+
+    if (!hasGlTexBufferRangeEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexBufferRangeEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1756,8 +2731,17 @@ inline void GlesSpy::glTexBufferRangeEXT(uint32_t target, uint32_t internalforma
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterIivEXT() const {
+    return mImports.glTexParameterIivEXT != nullptr;
+}
+
 inline void GlesSpy::glTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glTexParameterIivEXT(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameterIivEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterIivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1774,8 +2758,17 @@ inline void GlesSpy::glTexParameterIivEXT(uint32_t target, uint32_t pname, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterIuivEXT() const {
+    return mImports.glTexParameterIuivEXT != nullptr;
+}
+
 inline void GlesSpy::glTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params) {
     GAPID_INFO("glTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameterIuivEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterIuivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1792,6 +2785,10 @@ inline void GlesSpy::glTexParameterIuivEXT(uint32_t target, uint32_t pname, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage3DMultisampleOES() const {
+    return mImports.glTexStorage3DMultisampleOES != nullptr;
+}
+
 inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t samples,
                                                   uint32_t internalformat, int32_t width,
                                                   int32_t height, int32_t depth,
@@ -1799,6 +2796,11 @@ inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t sampl
     GAPID_INFO("glTexStorage3DMultisampleOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRIu8 ")",
                target, samples, internalformat, width, height, depth, fixedsamplelocations);
+
+    if (!hasGlTexStorage3DMultisampleOES()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage3DMultisampleOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1816,8 +2818,15 @@ inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t sampl
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginQuery() const { return mImports.glBeginQuery != nullptr; }
+
 inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
     GAPID_INFO("glBeginQuery(%u, %" PRIu32 ")", target, query);
+
+    if (!hasGlBeginQuery()) {
+        GAPID_WARNING("Application called unsupported function glBeginQuery");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1839,8 +2848,15 @@ inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteQueries() const { return mImports.glDeleteQueries != nullptr; }
+
 inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     GAPID_INFO("glDeleteQueries(%" PRId32 ", %p)", count, queries);
+
+    if (!hasGlDeleteQueries()) {
+        GAPID_WARNING("Application called unsupported function glDeleteQueries");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1864,8 +2880,15 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndQuery() const { return mImports.glEndQuery != nullptr; }
+
 inline void GlesSpy::glEndQuery(uint32_t target) {
     GAPID_INFO("glEndQuery(%u)", target);
+
+    if (!hasGlEndQuery()) {
+        GAPID_WARNING("Application called unsupported function glEndQuery");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1887,8 +2910,15 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenQueries() const { return mImports.glGenQueries != nullptr; }
+
 inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     GAPID_INFO("glGenQueries(%" PRId32 ", %p)", count, queries);
+
+    if (!hasGlGenQueries()) {
+        GAPID_WARNING("Application called unsupported function glGenQueries");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1915,8 +2945,17 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjectuiv() const {
+    return mImports.glGetQueryObjectuiv != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value) {
     GAPID_INFO("glGetQueryObjectuiv(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjectuiv()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjectuiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1941,8 +2980,15 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryiv() const { return mImports.glGetQueryiv != nullptr; }
+
 inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetQueryiv(%u, %u, %p)", target, parameter, value);
+
+    if (!hasGlGetQueryiv()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -1973,10 +3019,17 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsQuery() const { return mImports.glIsQuery != nullptr; }
+
 inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
     GAPID_INFO("glIsQuery(%" PRIu32 ")", query);
 
     uint8_t result = 0;
+
+    if (!hasGlIsQuery()) {
+        GAPID_WARNING("Application called unsupported function glIsQuery");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -1997,8 +3050,15 @@ inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
     return result;
 }
 
+inline bool GlesSpy::hasGlBindBuffer() const { return mImports.glBindBuffer != nullptr; }
+
 inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
     GAPID_INFO("glBindBuffer(%u, %" PRIu32 ")", target, buffer);
+
+    if (!hasGlBindBuffer()) {
+        GAPID_WARNING("Application called unsupported function glBindBuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2046,8 +3106,15 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindBufferBase() const { return mImports.glBindBufferBase != nullptr; }
+
 inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t buffer) {
     GAPID_INFO("glBindBufferBase(%u, %" PRIu32 ", %" PRIu32 ")", target, index, buffer);
+
+    if (!hasGlBindBufferBase()) {
+        GAPID_WARNING("Application called unsupported function glBindBufferBase");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2074,10 +3141,17 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindBufferRange() const { return mImports.glBindBufferRange != nullptr; }
+
 inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t buffer,
                                        int32_t offset, int32_t size) {
     GAPID_INFO("glBindBufferRange(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                index, buffer, offset, size);
+
+    if (!hasGlBindBufferRange()) {
+        GAPID_WARNING("Application called unsupported function glBindBufferRange");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2104,8 +3178,15 @@ inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBufferData() const { return mImports.glBufferData != nullptr; }
+
 inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uint32_t usage) {
     GAPID_INFO("glBufferData(%u, %" PRId32 ", %p, %u)", target, size, data, usage);
+
+    if (!hasGlBufferData()) {
+        GAPID_WARNING("Application called unsupported function glBufferData");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2177,8 +3258,15 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBufferSubData() const { return mImports.glBufferSubData != nullptr; }
+
 inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t size, void* data) {
     GAPID_INFO("glBufferSubData(%u, %" PRId32 ", %" PRId32 ", %p)", target, offset, size, data);
+
+    if (!hasGlBufferSubData()) {
+        GAPID_WARNING("Application called unsupported function glBufferSubData");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2221,10 +3309,19 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyBufferSubData() const {
+    return mImports.glCopyBufferSubData != nullptr;
+}
+
 inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarget,
                                          int32_t readOffset, int32_t writeOffset, int32_t size) {
     GAPID_INFO("glCopyBufferSubData(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", readTarget,
                writeTarget, readOffset, writeOffset, size);
+
+    if (!hasGlCopyBufferSubData()) {
+        GAPID_WARNING("Application called unsupported function glCopyBufferSubData");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2264,8 +3361,15 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteBuffers() const { return mImports.glDeleteBuffers != nullptr; }
+
 inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     GAPID_INFO("glDeleteBuffers(%" PRId32 ", %p)", count, buffers);
+
+    if (!hasGlDeleteBuffers()) {
+        GAPID_WARNING("Application called unsupported function glDeleteBuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2289,8 +3393,15 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenBuffers() const { return mImports.glGenBuffers != nullptr; }
+
 inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     GAPID_INFO("glGenBuffers(%" PRId32 ", %p)", count, buffers);
+
+    if (!hasGlGenBuffers()) {
+        GAPID_WARNING("Application called unsupported function glGenBuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2319,8 +3430,17 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBufferParameteri64v() const {
+    return mImports.glGetBufferParameteri64v != nullptr;
+}
+
 inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, int64_t* params) {
     GAPID_INFO("glGetBufferParameteri64v(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetBufferParameteri64v()) {
+        GAPID_WARNING("Application called unsupported function glGetBufferParameteri64v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2360,8 +3480,17 @@ inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBufferParameteriv() const {
+    return mImports.glGetBufferParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)", target, parameter, value);
+
+    if (!hasGlGetBufferParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetBufferParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2419,8 +3548,17 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBufferPointerv() const {
+    return mImports.glGetBufferPointerv != nullptr;
+}
+
 inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void** params) {
     GAPID_INFO("glGetBufferPointerv(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetBufferPointerv()) {
+        GAPID_WARNING("Application called unsupported function glGetBufferPointerv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2455,10 +3593,17 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsBuffer() const { return mImports.glIsBuffer != nullptr; }
+
 inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
     GAPID_INFO("glIsBuffer(%" PRIu32 ")", buffer);
 
     uint8_t result = 0;
+
+    if (!hasGlIsBuffer()) {
+        GAPID_WARNING("Application called unsupported function glIsBuffer");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -2479,12 +3624,19 @@ inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
     return result;
 }
 
+inline bool GlesSpy::hasGlMapBufferRange() const { return mImports.glMapBufferRange != nullptr; }
+
 inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t length,
                                        uint32_t access) {
     GAPID_INFO("glMapBufferRange(%u, %" PRId32 ", %" PRId32 ", %u)", target, offset, length,
                access);
 
     void* result = nullptr;
+
+    if (!hasGlMapBufferRange()) {
+        GAPID_WARNING("Application called unsupported function glMapBufferRange");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -2555,10 +3707,17 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
     return result;
 }
 
+inline bool GlesSpy::hasGlUnmapBuffer() const { return mImports.glUnmapBuffer != nullptr; }
+
 inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
     GAPID_INFO("glUnmapBuffer(%u)", target);
 
     uint8_t result = 0;
+
+    if (!hasGlUnmapBuffer()) {
+        GAPID_WARNING("Application called unsupported function glUnmapBuffer");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -2605,8 +3764,15 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
     return result;
 }
 
+inline bool GlesSpy::hasGlDrawArrays() const { return mImports.glDrawArrays != nullptr; }
+
 inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
     GAPID_INFO("glDrawArrays(%u, %" PRId32 ", %" PRId32 ")", draw_mode, first_index, index_count);
+
+    if (!hasGlDrawArrays()) {
+        GAPID_WARNING("Application called unsupported function glDrawArrays");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2670,8 +3836,17 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysIndirect() const {
+    return mImports.glDrawArraysIndirect != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
     GAPID_INFO("glDrawArraysIndirect(%u, %p)", mode, indirect);
+
+    if (!hasGlDrawArraysIndirect()) {
+        GAPID_WARNING("Application called unsupported function glDrawArraysIndirect");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2699,10 +3874,19 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysInstanced() const {
+    return mImports.glDrawArraysInstanced != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count,
                                            int32_t instancecount) {
     GAPID_INFO("glDrawArraysInstanced(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
                count, instancecount);
+
+    if (!hasGlDrawArraysInstanced()) {
+        GAPID_WARNING("Application called unsupported function glDrawArraysInstanced");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2729,8 +3913,15 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawBuffers() const { return mImports.glDrawBuffers != nullptr; }
+
 inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
     GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)", n, bufs);
+
+    if (!hasGlDrawBuffers()) {
+        GAPID_WARNING("Application called unsupported function glDrawBuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2747,10 +3938,17 @@ inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElements() const { return mImports.glDrawElements != nullptr; }
+
 inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                                     uint32_t indices_type, void* indices) {
     GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)", draw_mode, element_count, indices_type,
                indices);
+
+    if (!hasGlDrawElements()) {
+        GAPID_WARNING("Application called unsupported function glDrawElements");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2886,8 +4084,17 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsIndirect() const {
+    return mImports.glDrawElementsIndirect != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect) {
     GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)", mode, type, indirect);
+
+    if (!hasGlDrawElementsIndirect()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsIndirect");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2922,10 +4129,19 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstanced() const {
+    return mImports.glDrawElementsInstanced != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type,
                                              void* indices, int32_t instancecount) {
     GAPID_INFO("glDrawElementsInstanced(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count, type,
                indices, instancecount);
+
+    if (!hasGlDrawElementsInstanced()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsInstanced");
+        return;
+    }
 
     Observations observations;
     do {
@@ -2962,10 +4178,19 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawRangeElements() const {
+    return mImports.glDrawRangeElements != nullptr;
+}
+
 inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
                                          uint32_t type, void* indices) {
     GAPID_INFO("glDrawRangeElements(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %u, %p)", mode,
                start, end, count, type, indices);
+
+    if (!hasGlDrawRangeElements()) {
+        GAPID_WARNING("Application called unsupported function glDrawRangeElements");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3001,8 +4226,17 @@ inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlActiveShaderProgramEXT() const {
+    return mImports.glActiveShaderProgramEXT != nullptr;
+}
+
 inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t program) {
     GAPID_INFO("glActiveShaderProgramEXT(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
+
+    if (!hasGlActiveShaderProgramEXT()) {
+        GAPID_WARNING("Application called unsupported function glActiveShaderProgramEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3016,8 +4250,15 @@ inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t progra
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlAlphaFuncQCOM() const { return mImports.glAlphaFuncQCOM != nullptr; }
+
 inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
     GAPID_INFO("glAlphaFuncQCOM(%u, %f)", func, ref);
+
+    if (!hasGlAlphaFuncQCOM()) {
+        GAPID_WARNING("Application called unsupported function glAlphaFuncQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3031,8 +4272,17 @@ inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginConditionalRenderNV() const {
+    return mImports.glBeginConditionalRenderNV != nullptr;
+}
+
 inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
     GAPID_INFO("glBeginConditionalRenderNV(%" PRIu32 ", %u)", id, mode);
+
+    if (!hasGlBeginConditionalRenderNV()) {
+        GAPID_WARNING("Application called unsupported function glBeginConditionalRenderNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3046,8 +4296,17 @@ inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginPerfMonitorAMD() const {
+    return mImports.glBeginPerfMonitorAMD != nullptr;
+}
+
 inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
     GAPID_INFO("glBeginPerfMonitorAMD(%" PRIu32 ")", monitor);
+
+    if (!hasGlBeginPerfMonitorAMD()) {
+        GAPID_WARNING("Application called unsupported function glBeginPerfMonitorAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3061,8 +4320,17 @@ inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginPerfQueryINTEL() const {
+    return mImports.glBeginPerfQueryINTEL != nullptr;
+}
+
 inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
     GAPID_INFO("glBeginPerfQueryINTEL(%" PRIu32 ")", queryHandle);
+
+    if (!hasGlBeginPerfQueryINTEL()) {
+        GAPID_WARNING("Application called unsupported function glBeginPerfQueryINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3076,8 +4344,15 @@ inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginQueryEXT() const { return mImports.glBeginQueryEXT != nullptr; }
+
 inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
     GAPID_INFO("glBeginQueryEXT(%u, %" PRIu32 ")", target, query);
+
+    if (!hasGlBeginQueryEXT()) {
+        GAPID_WARNING("Application called unsupported function glBeginQueryEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3092,8 +4367,17 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindProgramPipelineEXT() const {
+    return mImports.glBindProgramPipelineEXT != nullptr;
+}
+
 inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
     GAPID_INFO("glBindProgramPipelineEXT(%" PRIu32 ")", pipeline);
+
+    if (!hasGlBindProgramPipelineEXT()) {
+        GAPID_WARNING("Application called unsupported function glBindProgramPipelineEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3107,8 +4391,17 @@ inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindVertexArrayOES() const {
+    return mImports.glBindVertexArrayOES != nullptr;
+}
+
 inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
     GAPID_INFO("glBindVertexArrayOES(%" PRIu32 ")", array);
+
+    if (!hasGlBindVertexArrayOES()) {
+        GAPID_WARNING("Application called unsupported function glBindVertexArrayOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3130,8 +4423,15 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendBarrierNV() const { return mImports.glBlendBarrierNV != nullptr; }
+
 inline void GlesSpy::glBlendBarrierNV() {
     GAPID_INFO("glBlendBarrierNV()");
+
+    if (!hasGlBlendBarrierNV()) {
+        GAPID_WARNING("Application called unsupported function glBlendBarrierNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3145,9 +4445,18 @@ inline void GlesSpy::glBlendBarrierNV() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquationSeparateiOES() const {
+    return mImports.glBlendEquationSeparateiOES != nullptr;
+}
+
 inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
                                                  uint32_t modeAlpha) {
     GAPID_INFO("glBlendEquationSeparateiOES(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
+
+    if (!hasGlBlendEquationSeparateiOES()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquationSeparateiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3161,8 +4470,17 @@ inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquationiOES() const {
+    return mImports.glBlendEquationiOES != nullptr;
+}
+
 inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
     GAPID_INFO("glBlendEquationiOES(%" PRIu32 ", %u)", buf, mode);
+
+    if (!hasGlBlendEquationiOES()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquationiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3176,10 +4494,19 @@ inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFuncSeparateiOES() const {
+    return mImports.glBlendFuncSeparateiOES != nullptr;
+}
+
 inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
                                              uint32_t srcAlpha, uint32_t dstAlpha) {
     GAPID_INFO("glBlendFuncSeparateiOES(%" PRIu32 ", %u, %u, %u, %u)", buf, srcRGB, dstRGB,
                srcAlpha, dstAlpha);
+
+    if (!hasGlBlendFuncSeparateiOES()) {
+        GAPID_WARNING("Application called unsupported function glBlendFuncSeparateiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3194,8 +4521,15 @@ inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFunciOES() const { return mImports.glBlendFunciOES != nullptr; }
+
 inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
     GAPID_INFO("glBlendFunciOES(%" PRIu32 ", %u, %u)", buf, src, dst);
+
+    if (!hasGlBlendFunciOES()) {
+        GAPID_WARNING("Application called unsupported function glBlendFunciOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3209,8 +4543,17 @@ inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendParameteriNV() const {
+    return mImports.glBlendParameteriNV != nullptr;
+}
+
 inline void GlesSpy::glBlendParameteriNV(uint32_t pname, int32_t value) {
     GAPID_INFO("glBlendParameteriNV(%u, %" PRId32 ")", pname, value);
+
+    if (!hasGlBlendParameteriNV()) {
+        GAPID_WARNING("Application called unsupported function glBlendParameteriNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3224,6 +4567,10 @@ inline void GlesSpy::glBlendParameteriNV(uint32_t pname, int32_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlitFramebufferANGLE() const {
+    return mImports.glBlitFramebufferANGLE != nullptr;
+}
+
 inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_t srcX1,
                                             int32_t srcY1, int32_t dstX0, int32_t dstY0,
                                             int32_t dstX1, int32_t dstY1, uint32_t mask,
@@ -3231,6 +4578,11 @@ inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_
     GAPID_INFO("glBlitFramebufferANGLE(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+
+    if (!hasGlBlitFramebufferANGLE()) {
+        GAPID_WARNING("Application called unsupported function glBlitFramebufferANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3246,12 +4598,21 @@ inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlitFramebufferNV() const {
+    return mImports.glBlitFramebufferNV != nullptr;
+}
+
 inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                          int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                          uint32_t mask, uint32_t filter) {
     GAPID_INFO("glBlitFramebufferNV(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+
+    if (!hasGlBlitFramebufferNV()) {
+        GAPID_WARNING("Application called unsupported function glBlitFramebufferNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3267,8 +4628,17 @@ inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t s
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBufferStorageEXT() const {
+    return mImports.glBufferStorageEXT != nullptr;
+}
+
 inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* data, uint32_t flag) {
     GAPID_INFO("glBufferStorageEXT(%u, %" PRId32 ", %p, %u)", target, size, data, flag);
+
+    if (!hasGlBufferStorageEXT()) {
+        GAPID_WARNING("Application called unsupported function glBufferStorageEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3285,10 +4655,19 @@ inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* dat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClientWaitSyncAPPLE() const {
+    return mImports.glClientWaitSyncAPPLE != nullptr;
+}
+
 inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout) {
     GAPID_INFO("glClientWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")", sync, flag, timeout);
 
     uint32_t result = 0;
+
+    if (!hasGlClientWaitSyncAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glClientWaitSyncAPPLE");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -3305,9 +4684,16 @@ inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uin
     return result;
 }
 
+inline bool GlesSpy::hasGlColorMaskiOES() const { return mImports.glColorMaskiOES != nullptr; }
+
 inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
     GAPID_INFO("glColorMaskiOES(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")",
                index, r, g, b, a);
+
+    if (!hasGlColorMaskiOES()) {
+        GAPID_WARNING("Application called unsupported function glColorMaskiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3321,6 +4707,10 @@ inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexImage3DOES() const {
+    return mImports.glCompressedTexImage3DOES != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
                                                uint32_t internalformat, int32_t width,
                                                int32_t height, int32_t depth, int32_t border,
@@ -3328,6 +4718,11 @@ inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
     GAPID_INFO("glCompressedTexImage3DOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %p)",
                target, level, internalformat, width, height, depth, border, imageSize, data);
+
+    if (!hasGlCompressedTexImage3DOES()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexImage3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3345,6 +4740,10 @@ inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexSubImage3DOES() const {
+    return mImports.glCompressedTexSubImage3DOES != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset,
                                                   int32_t yoffset, int32_t zoffset, int32_t width,
                                                   int32_t height, int32_t depth, uint32_t format,
@@ -3353,6 +4752,11 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize,
                data);
+
+    if (!hasGlCompressedTexSubImage3DOES()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexSubImage3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3370,10 +4774,19 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyBufferSubDataNV() const {
+    return mImports.glCopyBufferSubDataNV != nullptr;
+}
+
 inline void GlesSpy::glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTarget,
                                            int32_t readOffset, int32_t writeOffset, int32_t size) {
     GAPID_INFO("glCopyBufferSubDataNV(%u, %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", readTarget,
                writeTarget, readOffset, writeOffset, size);
+
+    if (!hasGlCopyBufferSubDataNV()) {
+        GAPID_WARNING("Application called unsupported function glCopyBufferSubDataNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3388,6 +4801,10 @@ inline void GlesSpy::glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyImageSubDataOES() const {
+    return mImports.glCopyImageSubDataOES != nullptr;
+}
+
 inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
                                            int32_t srcX, int32_t srcY, int32_t srcZ,
                                            uint32_t dstName, uint32_t dstTarget, int32_t dstLevel,
@@ -3398,6 +4815,11 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX,
                dstY, dstZ, srcWidth, srcHeight, srcDepth);
+
+    if (!hasGlCopyImageSubDataOES()) {
+        GAPID_WARNING("Application called unsupported function glCopyImageSubDataOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3415,8 +4837,15 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyPathNV() const { return mImports.glCopyPathNV != nullptr; }
+
 inline void GlesSpy::glCopyPathNV(uint32_t resultPath, uint32_t srcPath) {
     GAPID_INFO("glCopyPathNV(%" PRIu32 ", %" PRIu32 ")", resultPath, srcPath);
+
+    if (!hasGlCopyPathNV()) {
+        GAPID_WARNING("Application called unsupported function glCopyPathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3430,12 +4859,21 @@ inline void GlesSpy::glCopyPathNV(uint32_t resultPath, uint32_t srcPath) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyTexSubImage3DOES() const {
+    return mImports.glCopyTexSubImage3DOES != nullptr;
+}
+
 inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset,
                                             int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                             int32_t width, int32_t height) {
     GAPID_INFO("glCopyTexSubImage3DOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, zoffset, x, y, width, height);
+
+    if (!hasGlCopyTexSubImage3DOES()) {
+        GAPID_WARNING("Application called unsupported function glCopyTexSubImage3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3451,10 +4889,19 @@ inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyTextureLevelsAPPLE() const {
+    return mImports.glCopyTextureLevelsAPPLE != nullptr;
+}
+
 inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint32_t sourceTexture,
                                               int32_t sourceBaseLevel, int32_t sourceLevelCount) {
     GAPID_INFO("glCopyTextureLevelsAPPLE(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount);
+
+    if (!hasGlCopyTextureLevelsAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glCopyTextureLevelsAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3470,11 +4917,20 @@ inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverFillPathInstancedNV() const {
+    return mImports.glCoverFillPathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                 void* paths, uint32_t pathBase, uint32_t coverMode,
                                                 uint32_t transformType, float* transformValues) {
     GAPID_INFO("glCoverFillPathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)", numPaths,
                pathNameType, paths, pathBase, coverMode, transformType, transformValues);
+
+    if (!hasGlCoverFillPathInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverFillPathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3495,8 +4951,15 @@ inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathN
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverFillPathNV() const { return mImports.glCoverFillPathNV != nullptr; }
+
 inline void GlesSpy::glCoverFillPathNV(uint32_t path, uint32_t coverMode) {
     GAPID_INFO("glCoverFillPathNV(%" PRIu32 ", %u)", path, coverMode);
+
+    if (!hasGlCoverFillPathNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverFillPathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3510,12 +4973,21 @@ inline void GlesSpy::glCoverFillPathNV(uint32_t path, uint32_t coverMode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverStrokePathInstancedNV() const {
+    return mImports.glCoverStrokePathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                   void* paths, uint32_t pathBase,
                                                   uint32_t coverMode, uint32_t transformType,
                                                   float* transformValues) {
     GAPID_INFO("glCoverStrokePathInstancedNV(%" PRId32 ", %u, %p, %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues);
+
+    if (!hasGlCoverStrokePathInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverStrokePathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3536,8 +5008,17 @@ inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverStrokePathNV() const {
+    return mImports.glCoverStrokePathNV != nullptr;
+}
+
 inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
     GAPID_INFO("glCoverStrokePathNV(%" PRIu32 ", %u)", path, coverMode);
+
+    if (!hasGlCoverStrokePathNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverStrokePathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3551,8 +5032,15 @@ inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverageMaskNV() const { return mImports.glCoverageMaskNV != nullptr; }
+
 inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
     GAPID_INFO("glCoverageMaskNV(%" PRIu8 ")", mask);
+
+    if (!hasGlCoverageMaskNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverageMaskNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3566,8 +5054,17 @@ inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverageOperationNV() const {
+    return mImports.glCoverageOperationNV != nullptr;
+}
+
 inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
     GAPID_INFO("glCoverageOperationNV(%u)", operation);
+
+    if (!hasGlCoverageOperationNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverageOperationNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3581,8 +5078,17 @@ inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCreatePerfQueryINTEL() const {
+    return mImports.glCreatePerfQueryINTEL != nullptr;
+}
+
 inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHandle) {
     GAPID_INFO("glCreatePerfQueryINTEL(%" PRIu32 ", %p)", queryId, queryHandle);
+
+    if (!hasGlCreatePerfQueryINTEL()) {
+        GAPID_WARNING("Application called unsupported function glCreatePerfQueryINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3598,10 +5104,19 @@ inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHan
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCreateShaderProgramvEXT() const {
+    return mImports.glCreateShaderProgramvEXT != nullptr;
+}
+
 inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count, char** strings) {
     GAPID_INFO("glCreateShaderProgramvEXT(%u, %" PRId32 ", %p)", type, count, strings);
 
     uint32_t result = 0;
+
+    if (!hasGlCreateShaderProgramvEXT()) {
+        GAPID_WARNING("Application called unsupported function glCreateShaderProgramvEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -3622,8 +5137,15 @@ inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count,
     return result;
 }
 
+inline bool GlesSpy::hasGlDeleteFencesNV() const { return mImports.glDeleteFencesNV != nullptr; }
+
 inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
     GAPID_INFO("glDeleteFencesNV(%" PRId32 ", %p)", n, fences);
+
+    if (!hasGlDeleteFencesNV()) {
+        GAPID_WARNING("Application called unsupported function glDeleteFencesNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3639,8 +5161,15 @@ inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeletePathsNV() const { return mImports.glDeletePathsNV != nullptr; }
+
 inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
     GAPID_INFO("glDeletePathsNV(%" PRIu32 ", %" PRId32 ")", path, range);
+
+    if (!hasGlDeletePathsNV()) {
+        GAPID_WARNING("Application called unsupported function glDeletePathsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3654,8 +5183,17 @@ inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeletePerfMonitorsAMD() const {
+    return mImports.glDeletePerfMonitorsAMD != nullptr;
+}
+
 inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     GAPID_INFO("glDeletePerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
+
+    if (!hasGlDeletePerfMonitorsAMD()) {
+        GAPID_WARNING("Application called unsupported function glDeletePerfMonitorsAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3671,8 +5209,17 @@ inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeletePerfQueryINTEL() const {
+    return mImports.glDeletePerfQueryINTEL != nullptr;
+}
+
 inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
     GAPID_INFO("glDeletePerfQueryINTEL(%" PRIu32 ")", queryHandle);
+
+    if (!hasGlDeletePerfQueryINTEL()) {
+        GAPID_WARNING("Application called unsupported function glDeletePerfQueryINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3686,8 +5233,17 @@ inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteProgramPipelinesEXT() const {
+    return mImports.glDeleteProgramPipelinesEXT != nullptr;
+}
+
 inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
     GAPID_INFO("glDeleteProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
+
+    if (!hasGlDeleteProgramPipelinesEXT()) {
+        GAPID_WARNING("Application called unsupported function glDeleteProgramPipelinesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3703,8 +5259,17 @@ inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines)
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteQueriesEXT() const {
+    return mImports.glDeleteQueriesEXT != nullptr;
+}
+
 inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     GAPID_INFO("glDeleteQueriesEXT(%" PRId32 ", %p)", count, queries);
+
+    if (!hasGlDeleteQueriesEXT()) {
+        GAPID_WARNING("Application called unsupported function glDeleteQueriesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3728,8 +5293,15 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteSyncAPPLE() const { return mImports.glDeleteSyncAPPLE != nullptr; }
+
 inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
     GAPID_INFO("glDeleteSyncAPPLE(%" PRIu64 ")", sync);
+
+    if (!hasGlDeleteSyncAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glDeleteSyncAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3743,8 +5315,17 @@ inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteVertexArraysOES() const {
+    return mImports.glDeleteVertexArraysOES != nullptr;
+}
+
 inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
     GAPID_INFO("glDeleteVertexArraysOES(%" PRId32 ", %p)", count, arrays);
+
+    if (!hasGlDeleteVertexArraysOES()) {
+        GAPID_WARNING("Application called unsupported function glDeleteVertexArraysOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3769,8 +5350,17 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDepthRangeArrayfvNV() const {
+    return mImports.glDepthRangeArrayfvNV != nullptr;
+}
+
 inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float* v) {
     GAPID_INFO("glDepthRangeArrayfvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
+
+    if (!hasGlDepthRangeArrayfvNV()) {
+        GAPID_WARNING("Application called unsupported function glDepthRangeArrayfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3787,8 +5377,17 @@ inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDepthRangeIndexedfNV() const {
+    return mImports.glDepthRangeIndexedfNV != nullptr;
+}
+
 inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
     GAPID_INFO("glDepthRangeIndexedfNV(%" PRIu32 ", %f, %f)", index, n, f);
+
+    if (!hasGlDepthRangeIndexedfNV()) {
+        GAPID_WARNING("Application called unsupported function glDepthRangeIndexedfNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3802,8 +5401,17 @@ inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisableDriverControlQCOM() const {
+    return mImports.glDisableDriverControlQCOM != nullptr;
+}
+
 inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
     GAPID_INFO("glDisableDriverControlQCOM(%" PRIu32 ")", driverControl);
+
+    if (!hasGlDisableDriverControlQCOM()) {
+        GAPID_WARNING("Application called unsupported function glDisableDriverControlQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3817,8 +5425,15 @@ inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisableiNV() const { return mImports.glDisableiNV != nullptr; }
+
 inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
     GAPID_INFO("glDisableiNV(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlDisableiNV()) {
+        GAPID_WARNING("Application called unsupported function glDisableiNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3832,8 +5447,15 @@ inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisableiOES() const { return mImports.glDisableiOES != nullptr; }
+
 inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
     GAPID_INFO("glDisableiOES(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlDisableiOES()) {
+        GAPID_WARNING("Application called unsupported function glDisableiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3847,9 +5469,18 @@ inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDiscardFramebufferEXT() const {
+    return mImports.glDiscardFramebufferEXT != nullptr;
+}
+
 inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments,
                                              uint32_t* attachments) {
     GAPID_INFO("glDiscardFramebufferEXT(%u, %" PRId32 ", %p)", target, numAttachments, attachments);
+
+    if (!hasGlDiscardFramebufferEXT()) {
+        GAPID_WARNING("Application called unsupported function glDiscardFramebufferEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3866,10 +5497,19 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysInstancedANGLE() const {
+    return mImports.glDrawArraysInstancedANGLE != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, int32_t count,
                                                 int32_t primcount) {
     GAPID_INFO("glDrawArraysInstancedANGLE(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
                count, primcount);
+
+    if (!hasGlDrawArraysInstancedANGLE()) {
+        GAPID_WARNING("Application called unsupported function glDrawArraysInstancedANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3884,12 +5524,22 @@ inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysInstancedBaseInstanceEXT() const {
+    return mImports.glDrawArraysInstancedBaseInstanceEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t first,
                                                           int32_t count, int32_t instancecount,
                                                           uint32_t baseinstance) {
     GAPID_INFO("glDrawArraysInstancedBaseInstanceEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRIu32 ")",
                mode, first, count, instancecount, baseinstance);
+
+    if (!hasGlDrawArraysInstancedBaseInstanceEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function glDrawArraysInstancedBaseInstanceEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3905,10 +5555,19 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysInstancedEXT() const {
+    return mImports.glDrawArraysInstancedEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int32_t count,
                                               int32_t primcount) {
     GAPID_INFO("glDrawArraysInstancedEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, start,
                count, primcount);
+
+    if (!hasGlDrawArraysInstancedEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawArraysInstancedEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3923,10 +5582,19 @@ inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawArraysInstancedNV() const {
+    return mImports.glDrawArraysInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32_t count,
                                              int32_t primcount) {
     GAPID_INFO("glDrawArraysInstancedNV(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
                count, primcount);
+
+    if (!hasGlDrawArraysInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glDrawArraysInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3940,8 +5608,15 @@ inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawBuffersEXT() const { return mImports.glDrawBuffersEXT != nullptr; }
+
 inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
     GAPID_INFO("glDrawBuffersEXT(%" PRId32 ", %p)", n, bufs);
+
+    if (!hasGlDrawBuffersEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawBuffersEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3957,8 +5632,17 @@ inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawBuffersIndexedEXT() const {
+    return mImports.glDrawBuffersIndexedEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int32_t* indices) {
     GAPID_INFO("glDrawBuffersIndexedEXT(%" PRId32 ", %p, %p)", n, location, indices);
+
+    if (!hasGlDrawBuffersIndexedEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawBuffersIndexedEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3976,8 +5660,15 @@ inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawBuffersNV() const { return mImports.glDrawBuffersNV != nullptr; }
+
 inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
     GAPID_INFO("glDrawBuffersNV(%" PRId32 ", %p)", n, bufs);
+
+    if (!hasGlDrawBuffersNV()) {
+        GAPID_WARNING("Application called unsupported function glDrawBuffersNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -3993,10 +5684,19 @@ inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsBaseVertexEXT() const {
+    return mImports.glDrawElementsBaseVertexEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, uint32_t type,
                                                  void* indices, int32_t basevertex) {
     GAPID_INFO("glDrawElementsBaseVertexEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, basevertex);
+
+    if (!hasGlDrawElementsBaseVertexEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsBaseVertexEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4014,10 +5714,19 @@ inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsBaseVertexOES() const {
+    return mImports.glDrawElementsBaseVertexOES != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, uint32_t type,
                                                  void* indices, int32_t basevertex) {
     GAPID_INFO("glDrawElementsBaseVertexOES(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, basevertex);
+
+    if (!hasGlDrawElementsBaseVertexOES()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsBaseVertexOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4035,10 +5744,19 @@ inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedANGLE() const {
+    return mImports.glDrawElementsInstancedANGLE != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, uint32_t type,
                                                   void* indices, int32_t primcount) {
     GAPID_INFO("glDrawElementsInstancedANGLE(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, primcount);
+
+    if (!hasGlDrawElementsInstancedANGLE()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsInstancedANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4056,6 +5774,10 @@ inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedBaseInstanceEXT() const {
+    return mImports.glDrawElementsInstancedBaseInstanceEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32_t count,
                                                             uint32_t type, void* indices,
                                                             int32_t instancecount,
@@ -4063,6 +5785,12 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
     GAPID_INFO("glDrawElementsInstancedBaseInstanceEXT(%u, %" PRId32 ", %u, %p, %" PRId32
                ", %" PRIu32 ")",
                mode, count, type, indices, instancecount, baseinstance);
+
+    if (!hasGlDrawElementsInstancedBaseInstanceEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function glDrawElementsInstancedBaseInstanceEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4081,6 +5809,10 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexEXT() const {
+    return mImports.glDrawElementsInstancedBaseVertexEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t count,
                                                           uint32_t type, void* indices,
                                                           int32_t instancecount,
@@ -4088,6 +5820,12 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
     GAPID_INFO("glDrawElementsInstancedBaseVertexEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ", %" PRId32
                ")",
                mode, count, type, indices, instancecount, basevertex);
+
+    if (!hasGlDrawElementsInstancedBaseVertexEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function glDrawElementsInstancedBaseVertexEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4106,6 +5844,10 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexOES() const {
+    return mImports.glDrawElementsInstancedBaseVertexOES != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t count,
                                                           uint32_t type, void* indices,
                                                           int32_t instancecount,
@@ -4113,6 +5855,12 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
     GAPID_INFO("glDrawElementsInstancedBaseVertexOES(%u, %" PRId32 ", %u, %p, %" PRId32 ", %" PRId32
                ")",
                mode, count, type, indices, instancecount, basevertex);
+
+    if (!hasGlDrawElementsInstancedBaseVertexOES()) {
+        GAPID_WARNING(
+                "Application called unsupported function glDrawElementsInstancedBaseVertexOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4131,6 +5879,10 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexBaseInstanceEXT() const {
+    return mImports.glDrawElementsInstancedBaseVertexBaseInstanceEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count,
                                                                       uint32_t type, void* indices,
                                                                       int32_t instancecount,
@@ -4139,6 +5891,13 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
     GAPID_INFO("glDrawElementsInstancedBaseVertexBaseInstanceEXT(%u, %" PRId32 ", %u, %p, %" PRId32
                ", %" PRId32 ", %" PRIu32 ")",
                mode, count, type, indices, instancecount, basevertex, baseinstance);
+
+    if (!hasGlDrawElementsInstancedBaseVertexBaseInstanceEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function "
+                "glDrawElementsInstancedBaseVertexBaseInstanceEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4157,10 +5916,19 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedEXT() const {
+    return mImports.glDrawElementsInstancedEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, uint32_t type,
                                                 void* indices, int32_t primcount) {
     GAPID_INFO("glDrawElementsInstancedEXT(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
                type, indices, primcount);
+
+    if (!hasGlDrawElementsInstancedEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsInstancedEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4179,10 +5947,19 @@ inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawElementsInstancedNV() const {
+    return mImports.glDrawElementsInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uint32_t type,
                                                void* indices, int32_t primcount) {
     GAPID_INFO("glDrawElementsInstancedNV(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count, type,
                indices, primcount);
+
+    if (!hasGlDrawElementsInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glDrawElementsInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4200,12 +5977,21 @@ inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexEXT() const {
+    return mImports.glDrawRangeElementsBaseVertexEXT != nullptr;
+}
+
 inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t start, uint32_t end,
                                                       int32_t count, uint32_t type, void* indices,
                                                       int32_t basevertex) {
     GAPID_INFO("glDrawRangeElementsBaseVertexEXT(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
                ", %u, %p, %" PRId32 ")",
                mode, start, end, count, type, indices, basevertex);
+
+    if (!hasGlDrawRangeElementsBaseVertexEXT()) {
+        GAPID_WARNING("Application called unsupported function glDrawRangeElementsBaseVertexEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4224,12 +6010,21 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t st
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexOES() const {
+    return mImports.glDrawRangeElementsBaseVertexOES != nullptr;
+}
+
 inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t start, uint32_t end,
                                                       int32_t count, uint32_t type, void* indices,
                                                       int32_t basevertex) {
     GAPID_INFO("glDrawRangeElementsBaseVertexOES(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
                ", %u, %p, %" PRId32 ")",
                mode, start, end, count, type, indices, basevertex);
+
+    if (!hasGlDrawRangeElementsBaseVertexOES()) {
+        GAPID_WARNING("Application called unsupported function glDrawRangeElementsBaseVertexOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4248,8 +6043,18 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEGLImageTargetRenderbufferStorageOES() const {
+    return mImports.glEGLImageTargetRenderbufferStorageOES != nullptr;
+}
+
 inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image) {
     GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)", target, image);
+
+    if (!hasGlEGLImageTargetRenderbufferStorageOES()) {
+        GAPID_WARNING(
+                "Application called unsupported function glEGLImageTargetRenderbufferStorageOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4265,8 +6070,17 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEGLImageTargetTexture2DOES() const {
+    return mImports.glEGLImageTargetTexture2DOES != nullptr;
+}
+
 inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) {
     GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)", target, image);
+
+    if (!hasGlEGLImageTargetTexture2DOES()) {
+        GAPID_WARNING("Application called unsupported function glEGLImageTargetTexture2DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4282,8 +6096,17 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnableDriverControlQCOM() const {
+    return mImports.glEnableDriverControlQCOM != nullptr;
+}
+
 inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
     GAPID_INFO("glEnableDriverControlQCOM(%" PRIu32 ")", driverControl);
+
+    if (!hasGlEnableDriverControlQCOM()) {
+        GAPID_WARNING("Application called unsupported function glEnableDriverControlQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4297,8 +6120,15 @@ inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnableiNV() const { return mImports.glEnableiNV != nullptr; }
+
 inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
     GAPID_INFO("glEnableiNV(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlEnableiNV()) {
+        GAPID_WARNING("Application called unsupported function glEnableiNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4312,8 +6142,15 @@ inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnableiOES() const { return mImports.glEnableiOES != nullptr; }
+
 inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
     GAPID_INFO("glEnableiOES(%u, %" PRIu32 ")", target, index);
+
+    if (!hasGlEnableiOES()) {
+        GAPID_WARNING("Application called unsupported function glEnableiOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4327,8 +6164,17 @@ inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndConditionalRenderNV() const {
+    return mImports.glEndConditionalRenderNV != nullptr;
+}
+
 inline void GlesSpy::glEndConditionalRenderNV() {
     GAPID_INFO("glEndConditionalRenderNV()");
+
+    if (!hasGlEndConditionalRenderNV()) {
+        GAPID_WARNING("Application called unsupported function glEndConditionalRenderNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4342,8 +6188,17 @@ inline void GlesSpy::glEndConditionalRenderNV() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndPerfMonitorAMD() const {
+    return mImports.glEndPerfMonitorAMD != nullptr;
+}
+
 inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
     GAPID_INFO("glEndPerfMonitorAMD(%" PRIu32 ")", monitor);
+
+    if (!hasGlEndPerfMonitorAMD()) {
+        GAPID_WARNING("Application called unsupported function glEndPerfMonitorAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4357,8 +6212,17 @@ inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndPerfQueryINTEL() const {
+    return mImports.glEndPerfQueryINTEL != nullptr;
+}
+
 inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
     GAPID_INFO("glEndPerfQueryINTEL(%" PRIu32 ")", queryHandle);
+
+    if (!hasGlEndPerfQueryINTEL()) {
+        GAPID_WARNING("Application called unsupported function glEndPerfQueryINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4372,8 +6236,15 @@ inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndQueryEXT() const { return mImports.glEndQueryEXT != nullptr; }
+
 inline void GlesSpy::glEndQueryEXT(uint32_t target) {
     GAPID_INFO("glEndQueryEXT(%u)", target);
+
+    if (!hasGlEndQueryEXT()) {
+        GAPID_WARNING("Application called unsupported function glEndQueryEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4388,8 +6259,15 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndTilingQCOM() const { return mImports.glEndTilingQCOM != nullptr; }
+
 inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
     GAPID_INFO("glEndTilingQCOM(%u)", preserve_mask);
+
+    if (!hasGlEndTilingQCOM()) {
+        GAPID_WARNING("Application called unsupported function glEndTilingQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4403,8 +6281,17 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetBufferPointervQCOM() const {
+    return mImports.glExtGetBufferPointervQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) {
     GAPID_INFO("glExtGetBufferPointervQCOM(%u, %p)", target, params);
+
+    if (!hasGlExtGetBufferPointervQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetBufferPointervQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4420,9 +6307,18 @@ inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetBuffersQCOM() const {
+    return mImports.glExtGetBuffersQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
                                          int32_t* numBuffers) {
     GAPID_INFO("glExtGetBuffersQCOM(%p, %" PRId32 ", %p)", buffers, maxBuffers, numBuffers);
+
+    if (!hasGlExtGetBuffersQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetBuffersQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4440,10 +6336,19 @@ inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetFramebuffersQCOM() const {
+    return mImports.glExtGetFramebuffersQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t maxFramebuffers,
                                               int32_t* numFramebuffers) {
     GAPID_INFO("glExtGetFramebuffersQCOM(%p, %" PRId32 ", %p)", framebuffers, maxFramebuffers,
                numFramebuffers);
+
+    if (!hasGlExtGetFramebuffersQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetFramebuffersQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4461,10 +6366,19 @@ inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t ma
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetProgramBinarySourceQCOM() const {
+    return mImports.glExtGetProgramBinarySourceQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t shadertype,
                                                      char* source, int32_t* length) {
     GAPID_INFO("glExtGetProgramBinarySourceQCOM(%" PRIu32 ", %u, %p, %p)", program, shadertype,
                source, length);
+
+    if (!hasGlExtGetProgramBinarySourceQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetProgramBinarySourceQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4483,9 +6397,18 @@ inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetProgramsQCOM() const {
+    return mImports.glExtGetProgramsQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxPrograms,
                                           int32_t* numPrograms) {
     GAPID_INFO("glExtGetProgramsQCOM(%p, %" PRId32 ", %p)", programs, maxPrograms, numPrograms);
+
+    if (!hasGlExtGetProgramsQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetProgramsQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4503,10 +6426,19 @@ inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxProgram
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetRenderbuffersQCOM() const {
+    return mImports.glExtGetRenderbuffersQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t maxRenderbuffers,
                                                int32_t* numRenderbuffers) {
     GAPID_INFO("glExtGetRenderbuffersQCOM(%p, %" PRId32 ", %p)", renderbuffers, maxRenderbuffers,
                numRenderbuffers);
+
+    if (!hasGlExtGetRenderbuffersQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetRenderbuffersQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4524,9 +6456,18 @@ inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetShadersQCOM() const {
+    return mImports.glExtGetShadersQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
                                          int32_t* numShaders) {
     GAPID_INFO("glExtGetShadersQCOM(%p, %" PRId32 ", %p)", shaders, maxShaders, numShaders);
+
+    if (!hasGlExtGetShadersQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetShadersQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4544,10 +6485,19 @@ inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetTexLevelParameterivQCOM() const {
+    return mImports.glExtGetTexLevelParameterivQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t face, int32_t level,
                                                      uint32_t pname, int32_t* params) {
     GAPID_INFO("glExtGetTexLevelParameterivQCOM(%" PRIu32 ", %u, %" PRId32 ", %u, %p)", texture,
                face, level, pname, params);
+
+    if (!hasGlExtGetTexLevelParameterivQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetTexLevelParameterivQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4564,6 +6514,10 @@ inline void GlesSpy::glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetTexSubImageQCOM() const {
+    return mImports.glExtGetTexSubImageQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int32_t xoffset,
                                              int32_t yoffset, int32_t zoffset, int32_t width,
                                              int32_t height, int32_t depth, uint32_t format,
@@ -4572,6 +6526,11 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                texels);
+
+    if (!hasGlExtGetTexSubImageQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetTexSubImageQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4589,9 +6548,18 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtGetTexturesQCOM() const {
+    return mImports.glExtGetTexturesQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTextures,
                                           int32_t* numTextures) {
     GAPID_INFO("glExtGetTexturesQCOM(%p, %" PRId32 ", %p)", textures, maxTextures, numTextures);
+
+    if (!hasGlExtGetTexturesQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtGetTexturesQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4609,10 +6577,19 @@ inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTexture
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlExtIsProgramBinaryQCOM() const {
+    return mImports.glExtIsProgramBinaryQCOM != nullptr;
+}
+
 inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
     GAPID_INFO("glExtIsProgramBinaryQCOM(%" PRIu32 ")", program);
 
     uint8_t result = 0;
+
+    if (!hasGlExtIsProgramBinaryQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtIsProgramBinaryQCOM");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -4629,9 +6606,18 @@ inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
     return result;
 }
 
+inline bool GlesSpy::hasGlExtTexObjectStateOverrideiQCOM() const {
+    return mImports.glExtTexObjectStateOverrideiQCOM != nullptr;
+}
+
 inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t pname,
                                                       int32_t param) {
     GAPID_INFO("glExtTexObjectStateOverrideiQCOM(%u, %u, %" PRId32 ")", target, pname, param);
+
+    if (!hasGlExtTexObjectStateOverrideiQCOM()) {
+        GAPID_WARNING("Application called unsupported function glExtTexObjectStateOverrideiQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4645,10 +6631,17 @@ inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFenceSyncAPPLE() const { return mImports.glFenceSyncAPPLE != nullptr; }
+
 inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
     GAPID_INFO("glFenceSyncAPPLE(%u, %u)", condition, flag);
 
     uint64_t result = 0;
+
+    if (!hasGlFenceSyncAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glFenceSyncAPPLE");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -4665,8 +6658,15 @@ inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
     return result;
 }
 
+inline bool GlesSpy::hasGlFinishFenceNV() const { return mImports.glFinishFenceNV != nullptr; }
+
 inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
     GAPID_INFO("glFinishFenceNV(%" PRIu32 ")", fence);
+
+    if (!hasGlFinishFenceNV()) {
+        GAPID_WARNING("Application called unsupported function glFinishFenceNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4680,8 +6680,17 @@ inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFlushMappedBufferRangeEXT() const {
+    return mImports.glFlushMappedBufferRangeEXT != nullptr;
+}
+
 inline void GlesSpy::glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset, int32_t length) {
     GAPID_INFO("glFlushMappedBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ")", target, offset, length);
+
+    if (!hasGlFlushMappedBufferRangeEXT()) {
+        GAPID_WARNING("Application called unsupported function glFlushMappedBufferRangeEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4695,12 +6704,22 @@ inline void GlesSpy::glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTexture2DMultisampleEXT() const {
+    return mImports.glFramebufferTexture2DMultisampleEXT != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTexture2DMultisampleEXT(uint32_t target, uint32_t attachment,
                                                           uint32_t textarget, uint32_t texture,
                                                           int32_t level, int32_t samples) {
     GAPID_INFO("glFramebufferTexture2DMultisampleEXT(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
                ")",
                target, attachment, textarget, texture, level, samples);
+
+    if (!hasGlFramebufferTexture2DMultisampleEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function glFramebufferTexture2DMultisampleEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4716,12 +6735,22 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleEXT(uint32_t target, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTexture2DMultisampleIMG() const {
+    return mImports.glFramebufferTexture2DMultisampleIMG != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint32_t attachment,
                                                           uint32_t textarget, uint32_t texture,
                                                           int32_t level, int32_t samples) {
     GAPID_INFO("glFramebufferTexture2DMultisampleIMG(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
                ")",
                target, attachment, textarget, texture, level, samples);
+
+    if (!hasGlFramebufferTexture2DMultisampleIMG()) {
+        GAPID_WARNING(
+                "Application called unsupported function glFramebufferTexture2DMultisampleIMG");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4737,11 +6766,20 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTexture3DOES() const {
+    return mImports.glFramebufferTexture3DOES != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachment,
                                                uint32_t textarget, uint32_t texture, int32_t level,
                                                int32_t zoffset) {
     GAPID_INFO("glFramebufferTexture3DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                target, attachment, textarget, texture, level, zoffset);
+
+    if (!hasGlFramebufferTexture3DOES()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTexture3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4756,10 +6794,19 @@ inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachm
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTextureOES() const {
+    return mImports.glFramebufferTextureOES != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture,
                                              int32_t level) {
     GAPID_INFO("glFramebufferTextureOES(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
                texture, level);
+
+    if (!hasGlFramebufferTextureOES()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTextureOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4774,12 +6821,21 @@ inline void GlesSpy::glFramebufferTextureOES(uint32_t target, uint32_t attachmen
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTextureMultiviewOVR() const {
+    return mImports.glFramebufferTextureMultiviewOVR != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t attachment,
                                                       uint32_t texture, int32_t level,
                                                       int32_t baseViewIndex, int32_t numViews) {
     GAPID_INFO("glFramebufferTextureMultiviewOVR(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ")",
                target, attachment, texture, level, baseViewIndex, numViews);
+
+    if (!hasGlFramebufferTextureMultiviewOVR()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTextureMultiviewOVR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4795,8 +6851,15 @@ inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenFencesNV() const { return mImports.glGenFencesNV != nullptr; }
+
 inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
     GAPID_INFO("glGenFencesNV(%" PRId32 ", %p)", n, fences);
+
+    if (!hasGlGenFencesNV()) {
+        GAPID_WARNING("Application called unsupported function glGenFencesNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4812,10 +6875,17 @@ inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenPathsNV() const { return mImports.glGenPathsNV != nullptr; }
+
 inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
     GAPID_INFO("glGenPathsNV(%" PRId32 ")", range);
 
     uint32_t result = 0;
+
+    if (!hasGlGenPathsNV()) {
+        GAPID_WARNING("Application called unsupported function glGenPathsNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -4832,8 +6902,17 @@ inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGenPerfMonitorsAMD() const {
+    return mImports.glGenPerfMonitorsAMD != nullptr;
+}
+
 inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     GAPID_INFO("glGenPerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
+
+    if (!hasGlGenPerfMonitorsAMD()) {
+        GAPID_WARNING("Application called unsupported function glGenPerfMonitorsAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4849,8 +6928,17 @@ inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenProgramPipelinesEXT() const {
+    return mImports.glGenProgramPipelinesEXT != nullptr;
+}
+
 inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
     GAPID_INFO("glGenProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
+
+    if (!hasGlGenProgramPipelinesEXT()) {
+        GAPID_WARNING("Application called unsupported function glGenProgramPipelinesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4866,8 +6954,15 @@ inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenQueriesEXT() const { return mImports.glGenQueriesEXT != nullptr; }
+
 inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     GAPID_INFO("glGenQueriesEXT(%" PRId32 ", %p)", count, queries);
+
+    if (!hasGlGenQueriesEXT()) {
+        GAPID_WARNING("Application called unsupported function glGenQueriesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4894,8 +6989,17 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenVertexArraysOES() const {
+    return mImports.glGenVertexArraysOES != nullptr;
+}
+
 inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     GAPID_INFO("glGenVertexArraysOES(%" PRId32 ", %p)", count, arrays);
+
+    if (!hasGlGenVertexArraysOES()) {
+        GAPID_WARNING("Application called unsupported function glGenVertexArraysOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4921,8 +7025,17 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBufferPointervOES() const {
+    return mImports.glGetBufferPointervOES != nullptr;
+}
+
 inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, void** params) {
     GAPID_INFO("glGetBufferPointervOES(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetBufferPointervOES()) {
+        GAPID_WARNING("Application called unsupported function glGetBufferPointervOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4939,10 +7052,19 @@ inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, voi
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetDriverControlStringQCOM() const {
+    return mImports.glGetDriverControlStringQCOM != nullptr;
+}
+
 inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_t bufSize,
                                                   int32_t* length, char* driverControlString) {
     GAPID_INFO("glGetDriverControlStringQCOM(%" PRIu32 ", %" PRId32 ", %p, %p)", driverControl,
                bufSize, length, driverControlString);
+
+    if (!hasGlGetDriverControlStringQCOM()) {
+        GAPID_WARNING("Application called unsupported function glGetDriverControlStringQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4961,8 +7083,17 @@ inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetDriverControlsQCOM() const {
+    return mImports.glGetDriverControlsQCOM != nullptr;
+}
+
 inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_t* driverControls) {
     GAPID_INFO("glGetDriverControlsQCOM(%p, %" PRId32 ", %p)", num, size, driverControls);
+
+    if (!hasGlGetDriverControlsQCOM()) {
+        GAPID_WARNING("Application called unsupported function glGetDriverControlsQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4980,8 +7111,15 @@ inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFenceivNV() const { return mImports.glGetFenceivNV != nullptr; }
+
 inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetFenceivNV(%" PRIu32 ", %u, %p)", fence, pname, params);
+
+    if (!hasGlGetFenceivNV()) {
+        GAPID_WARNING("Application called unsupported function glGetFenceivNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -4997,8 +7135,17 @@ inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* par
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFirstPerfQueryIdINTEL() const {
+    return mImports.glGetFirstPerfQueryIdINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
     GAPID_INFO("glGetFirstPerfQueryIdINTEL(%p)", queryId);
+
+    if (!hasGlGetFirstPerfQueryIdINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetFirstPerfQueryIdINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5014,8 +7161,15 @@ inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFloati_vNV() const { return mImports.glGetFloati_vNV != nullptr; }
+
 inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* data) {
     GAPID_INFO("glGetFloati_vNV(%u, %" PRIu32 ", %p)", target, index, data);
+
+    if (!hasGlGetFloati_vNV()) {
+        GAPID_WARNING("Application called unsupported function glGetFloati_vNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5032,10 +7186,19 @@ inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* dat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetGraphicsResetStatusEXT() const {
+    return mImports.glGetGraphicsResetStatusEXT != nullptr;
+}
+
 inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
     GAPID_INFO("glGetGraphicsResetStatusEXT()");
 
     uint32_t result = 0;
+
+    if (!hasGlGetGraphicsResetStatusEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetGraphicsResetStatusEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5052,10 +7215,19 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetGraphicsResetStatusKHR() const {
+    return mImports.glGetGraphicsResetStatusKHR != nullptr;
+}
+
 inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
     GAPID_INFO("glGetGraphicsResetStatusKHR()");
 
     uint32_t result = 0;
+
+    if (!hasGlGetGraphicsResetStatusKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetGraphicsResetStatusKHR");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5072,12 +7244,21 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetImageHandleNV() const {
+    return mImports.glGetImageHandleNV != nullptr;
+}
+
 inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uint8_t layered,
                                             int32_t layer, uint32_t format) {
     GAPID_INFO("glGetImageHandleNV(%" PRIu32 ", %" PRId32 ", %" PRIu8 ", %" PRId32 ", %u)", texture,
                level, layered, layer, format);
 
     uint64_t result = 0;
+
+    if (!hasGlGetImageHandleNV()) {
+        GAPID_WARNING("Application called unsupported function glGetImageHandleNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5095,8 +7276,17 @@ inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uin
     return result;
 }
 
+inline bool GlesSpy::hasGlGetInteger64vAPPLE() const {
+    return mImports.glGetInteger64vAPPLE != nullptr;
+}
+
 inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
     GAPID_INFO("glGetInteger64vAPPLE(%u, %p)", pname, params);
+
+    if (!hasGlGetInteger64vAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glGetInteger64vAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5112,8 +7302,17 @@ inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetIntegeri_vEXT() const {
+    return mImports.glGetIntegeri_vEXT != nullptr;
+}
+
 inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t* data) {
     GAPID_INFO("glGetIntegeri_vEXT(%u, %" PRIu32 ", %p)", target, index, data);
+
+    if (!hasGlGetIntegeri_vEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetIntegeri_vEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5129,11 +7328,20 @@ inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetInternalformatSampleivNV() const {
+    return mImports.glGetInternalformatSampleivNV != nullptr;
+}
+
 inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t internalformat,
                                                    int32_t samples, uint32_t pname, int32_t bufSize,
                                                    int32_t* params) {
     GAPID_INFO("glGetInternalformatSampleivNV(%u, %u, %" PRId32 ", %u, %" PRId32 ", %p)", target,
                internalformat, samples, pname, bufSize, params);
+
+    if (!hasGlGetInternalformatSampleivNV()) {
+        GAPID_WARNING("Application called unsupported function glGetInternalformatSampleivNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5151,8 +7359,17 @@ inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetNextPerfQueryIdINTEL() const {
+    return mImports.glGetNextPerfQueryIdINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQueryId) {
     GAPID_INFO("glGetNextPerfQueryIdINTEL(%" PRIu32 ", %p)", queryId, nextQueryId);
+
+    if (!hasGlGetNextPerfQueryIdINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetNextPerfQueryIdINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5168,10 +7385,19 @@ inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQ
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetObjectLabelEXT() const {
+    return mImports.glGetObjectLabelEXT != nullptr;
+}
+
 inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t bufSize,
                                          int32_t* length, char* label) {
     GAPID_INFO("glGetObjectLabelEXT(%u, %" PRIu32 ", %" PRId32 ", %p, %p)", type, object, bufSize,
                length, label);
+
+    if (!hasGlGetObjectLabelEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetObjectLabelEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5190,8 +7416,17 @@ inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathCommandsNV() const {
+    return mImports.glGetPathCommandsNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
     GAPID_INFO("glGetPathCommandsNV(%" PRIu32 ", %p)", path, commands);
+
+    if (!hasGlGetPathCommandsNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathCommandsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5207,8 +7442,15 @@ inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathCoordsNV() const { return mImports.glGetPathCoordsNV != nullptr; }
+
 inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
     GAPID_INFO("glGetPathCoordsNV(%" PRIu32 ", %p)", path, coords);
+
+    if (!hasGlGetPathCoordsNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathCoordsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5224,8 +7466,17 @@ inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathDashArrayNV() const {
+    return mImports.glGetPathDashArrayNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
     GAPID_INFO("glGetPathDashArrayNV(%" PRIu32 ", %p)", path, dashArray);
+
+    if (!hasGlGetPathDashArrayNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathDashArrayNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5241,11 +7492,18 @@ inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathLengthNV() const { return mImports.glGetPathLengthNV != nullptr; }
+
 inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int32_t numSegments) {
     GAPID_INFO("glGetPathLengthNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", path, startSegment,
                numSegments);
 
     float result = 0;
+
+    if (!hasGlGetPathLengthNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathLengthNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5263,10 +7521,19 @@ inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int
     return result;
 }
 
+inline bool GlesSpy::hasGlGetPathMetricRangeNV() const {
+    return mImports.glGetPathMetricRangeNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t firstPathName,
                                             int32_t numPaths, int32_t stride, float* metrics) {
     GAPID_INFO("glGetPathMetricRangeNV(%u, %" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)",
                metricQueryMask, firstPathName, numPaths, stride, metrics);
+
+    if (!hasGlGetPathMetricRangeNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathMetricRangeNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5283,11 +7550,20 @@ inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathMetricsNV() const {
+    return mImports.glGetPathMetricsNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPaths,
                                         uint32_t pathNameType, void* paths, uint32_t pathBase,
                                         int32_t stride, float* metrics) {
     GAPID_INFO("glGetPathMetricsNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %" PRId32 ", %p)",
                metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics);
+
+    if (!hasGlGetPathMetricsNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathMetricsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5307,8 +7583,17 @@ inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathParameterfvNV() const {
+    return mImports.glGetPathParameterfvNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float* value) {
     GAPID_INFO("glGetPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
+
+    if (!hasGlGetPathParameterfvNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathParameterfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5324,8 +7609,17 @@ inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathParameterivNV() const {
+    return mImports.glGetPathParameterivNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value) {
     GAPID_INFO("glGetPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
+
+    if (!hasGlGetPathParameterivNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathParameterivNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5341,6 +7635,10 @@ inline void GlesSpy::glGetPathParameterivNV(uint32_t path, uint32_t pname, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPathSpacingNV() const {
+    return mImports.glGetPathSpacingNV != nullptr;
+}
+
 inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
                                         uint32_t pathNameType, void* paths, uint32_t pathBase,
                                         float advanceScale, float kerningScale,
@@ -5348,6 +7646,11 @@ inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
     GAPID_INFO("glGetPathSpacingNV(%u, %" PRId32 ", %u, %p, %" PRIu32 ", %f, %f, %u, %p)",
                pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale,
                transformType, returnedSpacing);
+
+    if (!hasGlGetPathSpacingNV()) {
+        GAPID_WARNING("Application called unsupported function glGetPathSpacingNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5368,6 +7671,10 @@ inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfCounterInfoINTEL() const {
+    return mImports.glGetPerfCounterInfoINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counterId,
                                                uint32_t counterNameLength, char* counterName,
                                                uint32_t counterDescLength, char* counterDesc,
@@ -5380,6 +7687,11 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
                queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc,
                counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum,
                rawCounterMaxValue);
+
+    if (!hasGlGetPerfCounterInfoINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfCounterInfoINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5411,11 +7723,20 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorCounterDataAMD() const {
+    return mImports.glGetPerfMonitorCounterDataAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t pname,
                                                     int32_t dataSize, uint32_t* data,
                                                     int32_t* bytesWritten) {
     GAPID_INFO("glGetPerfMonitorCounterDataAMD(%" PRIu32 ", %u, %" PRId32 ", %p, %p)", monitor,
                pname, dataSize, data, bytesWritten);
+
+    if (!hasGlGetPerfMonitorCounterDataAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorCounterDataAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5434,10 +7755,19 @@ inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t p
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorCounterInfoAMD() const {
+    return mImports.glGetPerfMonitorCounterInfoAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t counter,
                                                     uint32_t pname, void* data) {
     GAPID_INFO("glGetPerfMonitorCounterInfoAMD(%" PRIu32 ", %" PRIu32 ", %u, %p)", group, counter,
                pname, data);
+
+    if (!hasGlGetPerfMonitorCounterInfoAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorCounterInfoAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5454,11 +7784,20 @@ inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t cou
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorCounterStringAMD() const {
+    return mImports.glGetPerfMonitorCounterStringAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t counter,
                                                       int32_t bufSize, int32_t* length,
                                                       char* counterString) {
     GAPID_INFO("glGetPerfMonitorCounterStringAMD(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                group, counter, bufSize, length, counterString);
+
+    if (!hasGlGetPerfMonitorCounterStringAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorCounterStringAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5477,11 +7816,20 @@ inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t c
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorCountersAMD() const {
+    return mImports.glGetPerfMonitorCountersAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCounters,
                                                  int32_t* maxActiveCounters, int32_t counterSize,
                                                  uint32_t* counters) {
     GAPID_INFO("glGetPerfMonitorCountersAMD(%" PRIu32 ", %p, %p, %" PRId32 ", %p)", group,
                numCounters, maxActiveCounters, counterSize, counters);
+
+    if (!hasGlGetPerfMonitorCountersAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorCountersAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5502,10 +7850,19 @@ inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCou
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorGroupStringAMD() const {
+    return mImports.glGetPerfMonitorGroupStringAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufSize,
                                                     int32_t* length, char* groupString) {
     GAPID_INFO("glGetPerfMonitorGroupStringAMD(%" PRIu32 ", %" PRId32 ", %p, %p)", group, bufSize,
                length, groupString);
+
+    if (!hasGlGetPerfMonitorGroupStringAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorGroupStringAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5524,9 +7881,18 @@ inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufS
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfMonitorGroupsAMD() const {
+    return mImports.glGetPerfMonitorGroupsAMD != nullptr;
+}
+
 inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t groupsSize,
                                                uint32_t* groups) {
     GAPID_INFO("glGetPerfMonitorGroupsAMD(%p, %" PRId32 ", %p)", numGroups, groupsSize, groups);
+
+    if (!hasGlGetPerfMonitorGroupsAMD()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfMonitorGroupsAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5544,10 +7910,19 @@ inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t group
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfQueryDataINTEL() const {
+    return mImports.glGetPerfQueryDataINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag, int32_t dataSize,
                                              void* data, uint32_t* bytesWritten) {
     GAPID_INFO("glGetPerfQueryDataINTEL(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                queryHandle, flag, dataSize, data, bytesWritten);
+
+    if (!hasGlGetPerfQueryDataINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfQueryDataINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5566,8 +7941,17 @@ inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfQueryIdByNameINTEL() const {
+    return mImports.glGetPerfQueryIdByNameINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* queryId) {
     GAPID_INFO("glGetPerfQueryIdByNameINTEL(%p, %p)", queryName, queryId);
+
+    if (!hasGlGetPerfQueryIdByNameINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfQueryIdByNameINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5585,12 +7969,21 @@ inline void GlesSpy::glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* quer
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetPerfQueryInfoINTEL() const {
+    return mImports.glGetPerfQueryInfoINTEL != nullptr;
+}
+
 inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNameLength,
                                              char* queryName, uint32_t* dataSize,
                                              uint32_t* noCounters, uint32_t* noInstances,
                                              uint32_t* capsMask) {
     GAPID_INFO("glGetPerfQueryInfoINTEL(%" PRIu32 ", %" PRIu32 ", %p, %p, %p, %p, %p)", queryId,
                queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask);
+
+    if (!hasGlGetPerfQueryInfoINTEL()) {
+        GAPID_WARNING("Application called unsupported function glGetPerfQueryInfoINTEL");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5616,11 +8009,20 @@ inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNam
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramBinaryOES() const {
+    return mImports.glGetProgramBinaryOES != nullptr;
+}
+
 inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size,
                                            int32_t* bytes_written, uint32_t* binary_format,
                                            void* binary) {
     GAPID_INFO("glGetProgramBinaryOES(%" PRIu32 ", %" PRId32 ", %p, %p, %p)", program, buffer_size,
                bytes_written, binary_format, binary);
+
+    if (!hasGlGetProgramBinaryOES()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramBinaryOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5645,10 +8047,19 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramPipelineInfoLogEXT() const {
+    return mImports.glGetProgramPipelineInfoLogEXT != nullptr;
+}
+
 inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t bufSize,
                                                     int32_t* length, char* infoLog) {
     GAPID_INFO("glGetProgramPipelineInfoLogEXT(%" PRIu32 ", %" PRId32 ", %p, %p)", pipeline,
                bufSize, length, infoLog);
+
+    if (!hasGlGetProgramPipelineInfoLogEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramPipelineInfoLogEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5667,8 +8078,17 @@ inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t b
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramPipelineivEXT() const {
+    return mImports.glGetProgramPipelineivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetProgramPipelineivEXT(%" PRIu32 ", %u, %p)", pipeline, pname, params);
+
+    if (!hasGlGetProgramPipelineivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramPipelineivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5685,12 +8105,21 @@ inline void GlesSpy::glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramResourcefvNV() const {
+    return mImports.glGetProgramResourcefvNV != nullptr;
+}
+
 inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t programInterface,
                                               uint32_t index, int32_t propCount, uint32_t* props,
                                               int32_t bufSize, int32_t* length, float* params) {
     GAPID_INFO("glGetProgramResourcefvNV(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %" PRId32
                ", %p, %p)",
                program, programInterface, index, propCount, props, bufSize, length, params);
+
+    if (!hasGlGetProgramResourcefvNV()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramResourcefvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5712,8 +8141,17 @@ inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t program
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjecti64vEXT() const {
+    return mImports.glGetQueryObjecti64vEXT != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter, int64_t* value) {
     GAPID_INFO("glGetQueryObjecti64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjecti64vEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjecti64vEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5731,8 +8169,17 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjectivEXT() const {
+    return mImports.glGetQueryObjectivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetQueryObjectivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjectivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjectivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5750,8 +8197,17 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjectui64vEXT() const {
+    return mImports.glGetQueryObjectui64vEXT != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter, uint64_t* value) {
     GAPID_INFO("glGetQueryObjectui64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjectui64vEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjectui64vEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5769,8 +8225,17 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjectuivEXT() const {
+    return mImports.glGetQueryObjectuivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, uint32_t* value) {
     GAPID_INFO("glGetQueryObjectuivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjectuivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjectuivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5789,8 +8254,15 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryivEXT() const { return mImports.glGetQueryivEXT != nullptr; }
+
 inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetQueryivEXT(%u, %u, %p)", target, parameter, value);
+
+    if (!hasGlGetQueryivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5809,9 +8281,18 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameterIivOES() const {
+    return mImports.glGetSamplerParameterIivOES != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pname,
                                                  int32_t* params) {
     GAPID_INFO("glGetSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameterIivOES()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameterIivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5828,9 +8309,18 @@ inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pnam
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameterIuivOES() const {
+    return mImports.glGetSamplerParameterIuivOES != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
                                                   uint32_t* params) {
     GAPID_INFO("glGetSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameterIuivOES()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameterIuivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5847,10 +8337,17 @@ inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pna
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSyncivAPPLE() const { return mImports.glGetSyncivAPPLE != nullptr; }
+
 inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t bufSize,
                                       int32_t* length, int32_t* values) {
     GAPID_INFO("glGetSyncivAPPLE(%" PRIu64 ", %u, %" PRId32 ", %p, %p)", sync, pname, bufSize,
                length, values);
+
+    if (!hasGlGetSyncivAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glGetSyncivAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5869,8 +8366,17 @@ inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t buf
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameterIivOES() const {
+    return mImports.glGetTexParameterIivOES != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetTexParameterIivOES(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetTexParameterIivOES()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameterIivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5886,8 +8392,17 @@ inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameterIuivOES() const {
+    return mImports.glGetTexParameterIuivOES != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params) {
     GAPID_INFO("glGetTexParameterIuivOES(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetTexParameterIuivOES()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameterIuivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5904,10 +8419,19 @@ inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTextureHandleNV() const {
+    return mImports.glGetTextureHandleNV != nullptr;
+}
+
 inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
     GAPID_INFO("glGetTextureHandleNV(%" PRIu32 ")", texture);
 
     uint64_t result = 0;
+
+    if (!hasGlGetTextureHandleNV()) {
+        GAPID_WARNING("Application called unsupported function glGetTextureHandleNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5924,10 +8448,19 @@ inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetTextureSamplerHandleNV() const {
+    return mImports.glGetTextureSamplerHandleNV != nullptr;
+}
+
 inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t sampler) {
     GAPID_INFO("glGetTextureSamplerHandleNV(%" PRIu32 ", %" PRIu32 ")", texture, sampler);
 
     uint64_t result = 0;
+
+    if (!hasGlGetTextureSamplerHandleNV()) {
+        GAPID_WARNING("Application called unsupported function glGetTextureSamplerHandleNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -5944,10 +8477,19 @@ inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t 
     return result;
 }
 
+inline bool GlesSpy::hasGlGetTranslatedShaderSourceANGLE() const {
+    return mImports.glGetTranslatedShaderSourceANGLE != nullptr;
+}
+
 inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t bufsize,
                                                       int32_t* length, char* source) {
     GAPID_INFO("glGetTranslatedShaderSourceANGLE(%" PRIu32 ", %" PRId32 ", %p, %p)", shader,
                bufsize, length, source);
+
+    if (!hasGlGetTranslatedShaderSourceANGLE()) {
+        GAPID_WARNING("Application called unsupported function glGetTranslatedShaderSourceANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5966,10 +8508,19 @@ inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t b
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetnUniformfvEXT() const {
+    return mImports.glGetnUniformfvEXT != nullptr;
+}
+
 inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int32_t bufSize,
                                         float* params) {
     GAPID_INFO("glGetnUniformfvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
+
+    if (!hasGlGetnUniformfvEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetnUniformfvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -5986,10 +8537,19 @@ inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetnUniformfvKHR() const {
+    return mImports.glGetnUniformfvKHR != nullptr;
+}
+
 inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int32_t bufSize,
                                         float* params) {
     GAPID_INFO("glGetnUniformfvKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
+
+    if (!hasGlGetnUniformfvKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetnUniformfvKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6006,10 +8566,19 @@ inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetnUniformivEXT() const {
+    return mImports.glGetnUniformivEXT != nullptr;
+}
+
 inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int32_t bufSize,
                                         int32_t* params) {
     GAPID_INFO("glGetnUniformivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
+
+    if (!hasGlGetnUniformivEXT()) {
+        GAPID_WARNING("Application called unsupported function glGetnUniformivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6026,10 +8595,19 @@ inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetnUniformivKHR() const {
+    return mImports.glGetnUniformivKHR != nullptr;
+}
+
 inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                         int32_t* params) {
     GAPID_INFO("glGetnUniformivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
+
+    if (!hasGlGetnUniformivKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetnUniformivKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6046,10 +8624,19 @@ inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetnUniformuivKHR() const {
+    return mImports.glGetnUniformuivKHR != nullptr;
+}
+
 inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int32_t bufSize,
                                          uint32_t* params) {
     GAPID_INFO("glGetnUniformuivKHR(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                bufSize, params);
+
+    if (!hasGlGetnUniformuivKHR()) {
+        GAPID_WARNING("Application called unsupported function glGetnUniformuivKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6066,8 +8653,17 @@ inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlInsertEventMarkerEXT() const {
+    return mImports.glInsertEventMarkerEXT != nullptr;
+}
+
 inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     GAPID_INFO("glInsertEventMarkerEXT(%" PRId32 ", %p)", length, marker);
+
+    if (!hasGlInsertEventMarkerEXT()) {
+        GAPID_WARNING("Application called unsupported function glInsertEventMarkerEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6088,10 +8684,19 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlInterpolatePathsNV() const {
+    return mImports.glInterpolatePathsNV != nullptr;
+}
+
 inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB,
                                           float weight) {
     GAPID_INFO("glInterpolatePathsNV(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %f)", resultPath, pathA,
                pathB, weight);
+
+    if (!hasGlInterpolatePathsNV()) {
+        GAPID_WARNING("Application called unsupported function glInterpolatePathsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6105,10 +8710,17 @@ inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsEnablediOES() const { return mImports.glIsEnablediOES != nullptr; }
+
 inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
+
+    if (!hasGlIsEnablediOES()) {
+        GAPID_WARNING("Application called unsupported function glIsEnablediOES");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6125,10 +8737,17 @@ inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsEnablediNV() const { return mImports.glIsEnablediNV != nullptr; }
+
 inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediNV(%u, %" PRIu32 ")", target, index);
 
     uint8_t result = 0;
+
+    if (!hasGlIsEnablediNV()) {
+        GAPID_WARNING("Application called unsupported function glIsEnablediNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6145,10 +8764,17 @@ inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsFenceNV() const { return mImports.glIsFenceNV != nullptr; }
+
 inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
     GAPID_INFO("glIsFenceNV(%" PRIu32 ")", fence);
 
     uint8_t result = 0;
+
+    if (!hasGlIsFenceNV()) {
+        GAPID_WARNING("Application called unsupported function glIsFenceNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6165,10 +8791,19 @@ inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsImageHandleResidentNV() const {
+    return mImports.glIsImageHandleResidentNV != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
     GAPID_INFO("glIsImageHandleResidentNV(%" PRIu64 ")", handle);
 
     uint8_t result = 0;
+
+    if (!hasGlIsImageHandleResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glIsImageHandleResidentNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6185,10 +8820,17 @@ inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsPathNV() const { return mImports.glIsPathNV != nullptr; }
+
 inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
     GAPID_INFO("glIsPathNV(%" PRIu32 ")", path);
 
     uint8_t result = 0;
+
+    if (!hasGlIsPathNV()) {
+        GAPID_WARNING("Application called unsupported function glIsPathNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6205,10 +8847,19 @@ inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsPointInFillPathNV() const {
+    return mImports.glIsPointInFillPathNV != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
     GAPID_INFO("glIsPointInFillPathNV(%" PRIu32 ", %" PRIu32 ", %f, %f)", path, mask, x, y);
 
     uint8_t result = 0;
+
+    if (!hasGlIsPointInFillPathNV()) {
+        GAPID_WARNING("Application called unsupported function glIsPointInFillPathNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6225,10 +8876,19 @@ inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, floa
     return result;
 }
 
+inline bool GlesSpy::hasGlIsPointInStrokePathNV() const {
+    return mImports.glIsPointInStrokePathNV != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y) {
     GAPID_INFO("glIsPointInStrokePathNV(%" PRIu32 ", %f, %f)", path, x, y);
 
     uint8_t result = 0;
+
+    if (!hasGlIsPointInStrokePathNV()) {
+        GAPID_WARNING("Application called unsupported function glIsPointInStrokePathNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6245,10 +8905,19 @@ inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y)
     return result;
 }
 
+inline bool GlesSpy::hasGlIsProgramPipelineEXT() const {
+    return mImports.glIsProgramPipelineEXT != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
     GAPID_INFO("glIsProgramPipelineEXT(%" PRIu32 ")", pipeline);
 
     uint8_t result = 0;
+
+    if (!hasGlIsProgramPipelineEXT()) {
+        GAPID_WARNING("Application called unsupported function glIsProgramPipelineEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6265,10 +8934,17 @@ inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsQueryEXT() const { return mImports.glIsQueryEXT != nullptr; }
+
 inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
     GAPID_INFO("glIsQueryEXT(%" PRIu32 ")", query);
 
     uint8_t result = 0;
+
+    if (!hasGlIsQueryEXT()) {
+        GAPID_WARNING("Application called unsupported function glIsQueryEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6289,10 +8965,17 @@ inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsSyncAPPLE() const { return mImports.glIsSyncAPPLE != nullptr; }
+
 inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
     GAPID_INFO("glIsSyncAPPLE(%" PRIu64 ")", sync);
 
     uint8_t result = 0;
+
+    if (!hasGlIsSyncAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glIsSyncAPPLE");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6309,10 +8992,19 @@ inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsTextureHandleResidentNV() const {
+    return mImports.glIsTextureHandleResidentNV != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
     GAPID_INFO("glIsTextureHandleResidentNV(%" PRIu64 ")", handle);
 
     uint8_t result = 0;
+
+    if (!hasGlIsTextureHandleResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glIsTextureHandleResidentNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6329,10 +9021,19 @@ inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsVertexArrayOES() const {
+    return mImports.glIsVertexArrayOES != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
     GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")", array);
 
     uint8_t result = 0;
+
+    if (!hasGlIsVertexArrayOES()) {
+        GAPID_WARNING("Application called unsupported function glIsVertexArrayOES");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6352,8 +9053,15 @@ inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
     return result;
 }
 
+inline bool GlesSpy::hasGlLabelObjectEXT() const { return mImports.glLabelObjectEXT != nullptr; }
+
 inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t length, char* label) {
     GAPID_INFO("glLabelObjectEXT(%u, %" PRIu32 ", %" PRId32 ", %p)", type, object, length, label);
+
+    if (!hasGlLabelObjectEXT()) {
+        GAPID_WARNING("Application called unsupported function glLabelObjectEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6370,8 +9078,17 @@ inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t le
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMakeImageHandleNonResidentNV() const {
+    return mImports.glMakeImageHandleNonResidentNV != nullptr;
+}
+
 inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
     GAPID_INFO("glMakeImageHandleNonResidentNV(%" PRIu64 ")", handle);
+
+    if (!hasGlMakeImageHandleNonResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glMakeImageHandleNonResidentNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6385,8 +9102,17 @@ inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMakeImageHandleResidentNV() const {
+    return mImports.glMakeImageHandleResidentNV != nullptr;
+}
+
 inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t access) {
     GAPID_INFO("glMakeImageHandleResidentNV(%" PRIu64 ", %u)", handle, access);
+
+    if (!hasGlMakeImageHandleResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glMakeImageHandleResidentNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6400,8 +9126,17 @@ inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t acces
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMakeTextureHandleNonResidentNV() const {
+    return mImports.glMakeTextureHandleNonResidentNV != nullptr;
+}
+
 inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
     GAPID_INFO("glMakeTextureHandleNonResidentNV(%" PRIu64 ")", handle);
+
+    if (!hasGlMakeTextureHandleNonResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glMakeTextureHandleNonResidentNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6415,8 +9150,17 @@ inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMakeTextureHandleResidentNV() const {
+    return mImports.glMakeTextureHandleResidentNV != nullptr;
+}
+
 inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
     GAPID_INFO("glMakeTextureHandleResidentNV(%" PRIu64 ")", handle);
+
+    if (!hasGlMakeTextureHandleResidentNV()) {
+        GAPID_WARNING("Application called unsupported function glMakeTextureHandleResidentNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6430,10 +9174,17 @@ inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMapBufferOES() const { return mImports.glMapBufferOES != nullptr; }
+
 inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
     GAPID_INFO("glMapBufferOES(%u, %u)", target, access);
 
     void* result = nullptr;
+
+    if (!hasGlMapBufferOES()) {
+        GAPID_WARNING("Application called unsupported function glMapBufferOES");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6452,12 +9203,21 @@ inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
     return result;
 }
 
+inline bool GlesSpy::hasGlMapBufferRangeEXT() const {
+    return mImports.glMapBufferRangeEXT != nullptr;
+}
+
 inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32_t length,
                                           uint32_t access) {
     GAPID_INFO("glMapBufferRangeEXT(%u, %" PRId32 ", %" PRId32 ", %u)", target, offset, length,
                access);
 
     void* result = nullptr;
+
+    if (!hasGlMapBufferRangeEXT()) {
+        GAPID_WARNING("Application called unsupported function glMapBufferRangeEXT");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6477,8 +9237,17 @@ inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32
     return result;
 }
 
+inline bool GlesSpy::hasGlMatrixLoad3x2fNV() const {
+    return mImports.glMatrixLoad3x2fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixLoad3x2fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixLoad3x2fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixLoad3x2fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6494,8 +9263,17 @@ inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMatrixLoad3x3fNV() const {
+    return mImports.glMatrixLoad3x3fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixLoad3x3fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixLoad3x3fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixLoad3x3fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6511,8 +9289,17 @@ inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMatrixLoadTranspose3x3fNV() const {
+    return mImports.glMatrixLoadTranspose3x3fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixLoadTranspose3x3fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixLoadTranspose3x3fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixLoadTranspose3x3fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6528,8 +9315,17 @@ inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMatrixMult3x2fNV() const {
+    return mImports.glMatrixMult3x2fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixMult3x2fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixMult3x2fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixMult3x2fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6545,8 +9341,17 @@ inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMatrixMult3x3fNV() const {
+    return mImports.glMatrixMult3x3fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixMult3x3fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixMult3x3fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixMult3x3fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6562,8 +9367,17 @@ inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMatrixMultTranspose3x3fNV() const {
+    return mImports.glMatrixMultTranspose3x3fNV != nullptr;
+}
+
 inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) {
     GAPID_INFO("glMatrixMultTranspose3x3fNV(%u, %p)", matrixMode, m);
+
+    if (!hasGlMatrixMultTranspose3x3fNV()) {
+        GAPID_WARNING("Application called unsupported function glMatrixMultTranspose3x3fNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6579,9 +9393,18 @@ inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawArraysEXT() const {
+    return mImports.glMultiDrawArraysEXT != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t* count,
                                           int32_t primcount) {
     GAPID_INFO("glMultiDrawArraysEXT(%u, %p, %p, %" PRId32 ")", mode, first, count, primcount);
+
+    if (!hasGlMultiDrawArraysEXT()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawArraysEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6600,10 +9423,19 @@ inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawArraysIndirectEXT() const {
+    return mImports.glMultiDrawArraysIndirectEXT != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect, int32_t drawcount,
                                                   int32_t stride) {
     GAPID_INFO("glMultiDrawArraysIndirectEXT(%u, %p, %" PRId32 ", %" PRId32 ")", mode, indirect,
                drawcount, stride);
+
+    if (!hasGlMultiDrawArraysIndirectEXT()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawArraysIndirectEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6620,11 +9452,20 @@ inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawElementsBaseVertexEXT() const {
+    return mImports.glMultiDrawElementsBaseVertexEXT != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* count, uint32_t type,
                                                       void** indices, int32_t primcount,
                                                       int32_t* basevertex) {
     GAPID_INFO("glMultiDrawElementsBaseVertexEXT(%u, %p, %u, %p, %" PRId32 ", %p)", mode, count,
                type, indices, primcount, basevertex);
+
+    if (!hasGlMultiDrawElementsBaseVertexEXT()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawElementsBaseVertexEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6645,11 +9486,20 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* co
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawElementsBaseVertexOES() const {
+    return mImports.glMultiDrawElementsBaseVertexOES != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* count, uint32_t type,
                                                       void** indices, int32_t primcount,
                                                       int32_t* basevertex) {
     GAPID_INFO("glMultiDrawElementsBaseVertexOES(%u, %p, %u, %p, %" PRId32 ", %p)", mode, count,
                type, indices, primcount, basevertex);
+
+    if (!hasGlMultiDrawElementsBaseVertexOES()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawElementsBaseVertexOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6670,10 +9520,19 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* co
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawElementsEXT() const {
+    return mImports.glMultiDrawElementsEXT != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint32_t type,
                                             void** indices, int32_t primcount) {
     GAPID_INFO("glMultiDrawElementsEXT(%u, %p, %u, %p, %" PRId32 ")", mode, count, type, indices,
                primcount);
+
+    if (!hasGlMultiDrawElementsEXT()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawElementsEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6692,10 +9551,19 @@ inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMultiDrawElementsIndirectEXT() const {
+    return mImports.glMultiDrawElementsIndirectEXT != nullptr;
+}
+
 inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type, void* indirect,
                                                     int32_t drawcount, int32_t stride) {
     GAPID_INFO("glMultiDrawElementsIndirectEXT(%u, %u, %p, %" PRId32 ", %" PRId32 ")", mode, type,
                indirect, drawcount, stride);
+
+    if (!hasGlMultiDrawElementsIndirectEXT()) {
+        GAPID_WARNING("Application called unsupported function glMultiDrawElementsIndirectEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6712,8 +9580,17 @@ inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPatchParameteriOES() const {
+    return mImports.glPatchParameteriOES != nullptr;
+}
+
 inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
     GAPID_INFO("glPatchParameteriOES(%u, %" PRId32 ")", pname, value);
+
+    if (!hasGlPatchParameteriOES()) {
+        GAPID_WARNING("Application called unsupported function glPatchParameteriOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6727,10 +9604,17 @@ inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathCommandsNV() const { return mImports.glPathCommandsNV != nullptr; }
+
 inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_t* commands,
                                       int32_t numCoords, uint32_t coordType, void* coords) {
     GAPID_INFO("glPathCommandsNV(%" PRIu32 ", %" PRId32 ", %p, %" PRId32 ", %u, %p)", path,
                numCommands, commands, numCoords, coordType, coords);
+
+    if (!hasGlPathCommandsNV()) {
+        GAPID_WARNING("Application called unsupported function glPathCommandsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6749,10 +9633,17 @@ inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathCoordsNV() const { return mImports.glPathCoordsNV != nullptr; }
+
 inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t coordType,
                                     void* coords) {
     GAPID_INFO("glPathCoordsNV(%" PRIu32 ", %" PRId32 ", %u, %p)", path, numCoords, coordType,
                coords);
+
+    if (!hasGlPathCoordsNV()) {
+        GAPID_WARNING("Application called unsupported function glPathCoordsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6769,8 +9660,17 @@ inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t c
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathCoverDepthFuncNV() const {
+    return mImports.glPathCoverDepthFuncNV != nullptr;
+}
+
 inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
     GAPID_INFO("glPathCoverDepthFuncNV(%u)", func);
+
+    if (!hasGlPathCoverDepthFuncNV()) {
+        GAPID_WARNING("Application called unsupported function glPathCoverDepthFuncNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6784,8 +9684,15 @@ inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathDashArrayNV() const { return mImports.glPathDashArrayNV != nullptr; }
+
 inline void GlesSpy::glPathDashArrayNV(uint32_t path, int32_t dashCount, float* dashArray) {
     GAPID_INFO("glPathDashArrayNV(%" PRIu32 ", %" PRId32 ", %p)", path, dashCount, dashArray);
+
+    if (!hasGlPathDashArrayNV()) {
+        GAPID_WARNING("Application called unsupported function glPathDashArrayNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6802,6 +9709,10 @@ inline void GlesSpy::glPathDashArrayNV(uint32_t path, int32_t dashCount, float* 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathGlyphIndexArrayNV() const {
+    return mImports.glPathGlyphIndexArrayNV != nullptr;
+}
+
 inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_t fontTarget,
                                                  void* fontName, uint32_t fontStyle,
                                                  uint32_t firstGlyphIndex, int32_t numGlyphs,
@@ -6812,6 +9723,11 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
                pathParameterTemplate, emScale);
 
     uint32_t result = 0;
+
+    if (!hasGlPathGlyphIndexArrayNV()) {
+        GAPID_WARNING("Application called unsupported function glPathGlyphIndexArrayNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6834,6 +9750,10 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
     return result;
 }
 
+inline bool GlesSpy::hasGlPathGlyphIndexRangeNV() const {
+    return mImports.glPathGlyphIndexRangeNV != nullptr;
+}
+
 inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* fontName,
                                                  uint32_t fontStyle, uint32_t pathParameterTemplate,
                                                  float emScale, uint32_t baseAndCount) {
@@ -6841,6 +9761,11 @@ inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* font
                fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount);
 
     uint32_t result = 0;
+
+    if (!hasGlPathGlyphIndexRangeNV()) {
+        GAPID_WARNING("Application called unsupported function glPathGlyphIndexRangeNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6861,6 +9786,10 @@ inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* font
     return result;
 }
 
+inline bool GlesSpy::hasGlPathGlyphRangeNV() const {
+    return mImports.glPathGlyphRangeNV != nullptr;
+}
+
 inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTarget, void* fontName,
                                         uint32_t fontStyle, uint32_t firstGlyph, int32_t numGlyphs,
                                         uint32_t handleMissingGlyphs,
@@ -6869,6 +9798,11 @@ inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTar
                ", %f)",
                firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs,
                handleMissingGlyphs, pathParameterTemplate, emScale);
+
+    if (!hasGlPathGlyphRangeNV()) {
+        GAPID_WARNING("Application called unsupported function glPathGlyphRangeNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6887,6 +9821,8 @@ inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTar
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathGlyphsNV() const { return mImports.glPathGlyphsNV != nullptr; }
+
 inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget, void* fontName,
                                     uint32_t fontStyle, int32_t numGlyphs, uint32_t type,
                                     void* charcodes, uint32_t handleMissingGlyphs,
@@ -6894,6 +9830,11 @@ inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget,
     GAPID_INFO("glPathGlyphsNV(%" PRIu32 ", %u, %p, %u, %" PRId32 ", %u, %p, %u, %" PRIu32 ", %f)",
                firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type, charcodes,
                handleMissingGlyphs, pathParameterTemplate, emScale);
+
+    if (!hasGlPathGlyphsNV()) {
+        GAPID_WARNING("Application called unsupported function glPathGlyphsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6914,6 +9855,10 @@ inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathMemoryGlyphIndexArrayNV() const {
+    return mImports.glPathMemoryGlyphIndexArrayNV != nullptr;
+}
+
 inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, uint32_t fontTarget,
                                                        int32_t fontSize, void* fontData,
                                                        int32_t faceIndex, uint32_t firstGlyphIndex,
@@ -6926,6 +9871,11 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
                pathParameterTemplate, emScale);
 
     uint32_t result = 0;
+
+    if (!hasGlPathMemoryGlyphIndexArrayNV()) {
+        GAPID_WARNING("Application called unsupported function glPathMemoryGlyphIndexArrayNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -6948,8 +9898,17 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
     return result;
 }
 
+inline bool GlesSpy::hasGlPathParameterfNV() const {
+    return mImports.glPathParameterfNV != nullptr;
+}
+
 inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float value) {
     GAPID_INFO("glPathParameterfNV(%" PRIu32 ", %u, %f)", path, pname, value);
+
+    if (!hasGlPathParameterfNV()) {
+        GAPID_WARNING("Application called unsupported function glPathParameterfNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6963,8 +9922,17 @@ inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float val
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathParameterfvNV() const {
+    return mImports.glPathParameterfvNV != nullptr;
+}
+
 inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* value) {
     GAPID_INFO("glPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
+
+    if (!hasGlPathParameterfvNV()) {
+        GAPID_WARNING("Application called unsupported function glPathParameterfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6981,8 +9949,17 @@ inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathParameteriNV() const {
+    return mImports.glPathParameteriNV != nullptr;
+}
+
 inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t value) {
     GAPID_INFO("glPathParameteriNV(%" PRIu32 ", %u, %" PRId32 ")", path, pname, value);
+
+    if (!hasGlPathParameteriNV()) {
+        GAPID_WARNING("Application called unsupported function glPathParameteriNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -6996,8 +9973,17 @@ inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathParameterivNV() const {
+    return mImports.glPathParameterivNV != nullptr;
+}
+
 inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t* value) {
     GAPID_INFO("glPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
+
+    if (!hasGlPathParameterivNV()) {
+        GAPID_WARNING("Application called unsupported function glPathParameterivNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7013,8 +9999,17 @@ inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathStencilDepthOffsetNV() const {
+    return mImports.glPathStencilDepthOffsetNV != nullptr;
+}
+
 inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
     GAPID_INFO("glPathStencilDepthOffsetNV(%f, %f)", factor, units);
+
+    if (!hasGlPathStencilDepthOffsetNV()) {
+        GAPID_WARNING("Application called unsupported function glPathStencilDepthOffsetNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7028,8 +10023,17 @@ inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathStencilFuncNV() const {
+    return mImports.glPathStencilFuncNV != nullptr;
+}
+
 inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t mask) {
     GAPID_INFO("glPathStencilFuncNV(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
+
+    if (!hasGlPathStencilFuncNV()) {
+        GAPID_WARNING("Application called unsupported function glPathStencilFuncNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7043,10 +10047,17 @@ inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t ma
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathStringNV() const { return mImports.glPathStringNV != nullptr; }
+
 inline void GlesSpy::glPathStringNV(uint32_t path, uint32_t format, int32_t length,
                                     void* pathString) {
     GAPID_INFO("glPathStringNV(%" PRIu32 ", %u, %" PRId32 ", %p)", path, format, length,
                pathString);
+
+    if (!hasGlPathStringNV()) {
+        GAPID_WARNING("Application called unsupported function glPathStringNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7063,6 +10074,10 @@ inline void GlesSpy::glPathStringNV(uint32_t path, uint32_t format, int32_t leng
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathSubCommandsNV() const {
+    return mImports.glPathSubCommandsNV != nullptr;
+}
+
 inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
                                          int32_t commandsToDelete, int32_t numCommands,
                                          uint8_t* commands, int32_t numCoords, uint32_t coordType,
@@ -7071,6 +10086,11 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
                ", %p, %" PRId32 ", %u, %p)",
                path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType,
                coords);
+
+    if (!hasGlPathSubCommandsNV()) {
+        GAPID_WARNING("Application called unsupported function glPathSubCommandsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7090,10 +10110,17 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPathSubCoordsNV() const { return mImports.glPathSubCoordsNV != nullptr; }
+
 inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_t numCoords,
                                        uint32_t coordType, void* coords) {
     GAPID_INFO("glPathSubCoordsNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %u, %p)", path, coordStart,
                numCoords, coordType, coords);
+
+    if (!hasGlPathSubCoordsNV()) {
+        GAPID_WARNING("Application called unsupported function glPathSubCoordsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7110,6 +10137,10 @@ inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPointAlongPathNV() const {
+    return mImports.glPointAlongPathNV != nullptr;
+}
+
 inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, int32_t numSegments,
                                            float distance, float* x, float* y, float* tangentX,
                                            float* tangentY) {
@@ -7117,6 +10148,11 @@ inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, 
                path, startSegment, numSegments, distance, x, y, tangentX, tangentY);
 
     uint8_t result = 0;
+
+    if (!hasGlPointAlongPathNV()) {
+        GAPID_WARNING("Application called unsupported function glPointAlongPathNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -7144,8 +10180,15 @@ inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, 
     return result;
 }
 
+inline bool GlesSpy::hasGlPolygonModeNV() const { return mImports.glPolygonModeNV != nullptr; }
+
 inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
     GAPID_INFO("glPolygonModeNV(%u, %u)", face, mode);
+
+    if (!hasGlPolygonModeNV()) {
+        GAPID_WARNING("Application called unsupported function glPolygonModeNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7159,8 +10202,17 @@ inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPopGroupMarkerEXT() const {
+    return mImports.glPopGroupMarkerEXT != nullptr;
+}
+
 inline void GlesSpy::glPopGroupMarkerEXT() {
     GAPID_INFO("glPopGroupMarkerEXT()");
+
+    if (!hasGlPopGroupMarkerEXT()) {
+        GAPID_WARNING("Application called unsupported function glPopGroupMarkerEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7174,10 +10226,19 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPrimitiveBoundingBoxOES() const {
+    return mImports.glPrimitiveBoundingBoxOES != nullptr;
+}
+
 inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float minZ, float minW,
                                                float maxX, float maxY, float maxZ, float maxW) {
     GAPID_INFO("glPrimitiveBoundingBoxOES(%f, %f, %f, %f, %f, %f, %f, %f)", minX, minY, minZ, minW,
                maxX, maxY, maxZ, maxW);
+
+    if (!hasGlPrimitiveBoundingBoxOES()) {
+        GAPID_WARNING("Application called unsupported function glPrimitiveBoundingBoxOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7192,10 +10253,19 @@ inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float min
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramBinaryOES() const {
+    return mImports.glProgramBinaryOES != nullptr;
+}
+
 inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format, void* binary,
                                         int32_t binary_size) {
     GAPID_INFO("glProgramBinaryOES(%" PRIu32 ", %u, %p, %" PRId32 ")", program, binary_format,
                binary, binary_size);
+
+    if (!hasGlProgramBinaryOES()) {
+        GAPID_WARNING("Application called unsupported function glProgramBinaryOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7213,8 +10283,17 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramParameteriEXT() const {
+    return mImports.glProgramParameteriEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, int32_t value) {
     GAPID_INFO("glProgramParameteriEXT(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
+
+    if (!hasGlProgramParameteriEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramParameteriEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7228,11 +10307,20 @@ inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramPathFragmentInputGenNV() const {
+    return mImports.glProgramPathFragmentInputGenNV != nullptr;
+}
+
 inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t location,
                                                      uint32_t genMode, int32_t components,
                                                      float* coeffs) {
     GAPID_INFO("glProgramPathFragmentInputGenNV(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                program, location, genMode, components, coeffs);
+
+    if (!hasGlProgramPathFragmentInputGenNV()) {
+        GAPID_WARNING("Application called unsupported function glProgramPathFragmentInputGenNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7249,8 +10337,17 @@ inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t l
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1fEXT() const {
+    return mImports.glProgramUniform1fEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, float v0) {
     GAPID_INFO("glProgramUniform1fEXT(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
+
+    if (!hasGlProgramUniform1fEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1fEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7264,10 +10361,19 @@ inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1fvEXT() const {
+    return mImports.glProgramUniform1fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
     GAPID_INFO("glProgramUniform1fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform1fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7284,9 +10390,18 @@ inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1iEXT() const {
+    return mImports.glProgramUniform1iEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, int32_t v0) {
     GAPID_INFO("glProgramUniform1iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", program, location,
                v0);
+
+    if (!hasGlProgramUniform1iEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1iEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7300,10 +10415,19 @@ inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1ivEXT() const {
+    return mImports.glProgramUniform1ivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
     GAPID_INFO("glProgramUniform1ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform1ivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1ivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7320,9 +10444,18 @@ inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1uiEXT() const {
+    return mImports.glProgramUniform1uiEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, uint32_t v0) {
     GAPID_INFO("glProgramUniform1uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", program, location,
                v0);
+
+    if (!hasGlProgramUniform1uiEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1uiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7336,10 +10469,19 @@ inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1uivEXT() const {
+    return mImports.glProgramUniform1uivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
     GAPID_INFO("glProgramUniform1uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform1uivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1uivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7356,9 +10498,18 @@ inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2fEXT() const {
+    return mImports.glProgramUniform2fEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, float v0, float v1) {
     GAPID_INFO("glProgramUniform2fEXT(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location, v0,
                v1);
+
+    if (!hasGlProgramUniform2fEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2fEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7372,10 +10523,19 @@ inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2fvEXT() const {
+    return mImports.glProgramUniform2fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
     GAPID_INFO("glProgramUniform2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform2fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7392,10 +10552,19 @@ inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2iEXT() const {
+    return mImports.glProgramUniform2iEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1) {
     GAPID_INFO("glProgramUniform2iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", program,
                location, v0, v1);
+
+    if (!hasGlProgramUniform2iEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2iEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7409,10 +10578,19 @@ inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2ivEXT() const {
+    return mImports.glProgramUniform2ivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
     GAPID_INFO("glProgramUniform2ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform2ivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2ivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7429,10 +10607,19 @@ inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2uiEXT() const {
+    return mImports.glProgramUniform2uiEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1) {
     GAPID_INFO("glProgramUniform2uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")",
                program, location, v0, v1);
+
+    if (!hasGlProgramUniform2uiEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2uiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7446,10 +10633,19 @@ inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2uivEXT() const {
+    return mImports.glProgramUniform2uivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
     GAPID_INFO("glProgramUniform2uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform2uivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2uivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7466,10 +10662,19 @@ inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3fEXT() const {
+    return mImports.glProgramUniform3fEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, float v0, float v1,
                                            float v2) {
     GAPID_INFO("glProgramUniform3fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f)", program, location, v0,
                v1, v2);
+
+    if (!hasGlProgramUniform3fEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3fEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7483,10 +10688,19 @@ inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3fvEXT() const {
+    return mImports.glProgramUniform3fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
     GAPID_INFO("glProgramUniform3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform3fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7503,11 +10717,20 @@ inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3iEXT() const {
+    return mImports.glProgramUniform3iEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1, int32_t v2) {
     GAPID_INFO("glProgramUniform3iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ")",
                program, location, v0, v1, v2);
+
+    if (!hasGlProgramUniform3iEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3iEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7521,10 +10744,19 @@ inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3ivEXT() const {
+    return mImports.glProgramUniform3ivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
     GAPID_INFO("glProgramUniform3ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform3ivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3ivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7541,11 +10773,20 @@ inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3uiEXT() const {
+    return mImports.glProgramUniform3uiEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1, uint32_t v2) {
     GAPID_INFO("glProgramUniform3uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
                ")",
                program, location, v0, v1, v2);
+
+    if (!hasGlProgramUniform3uiEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3uiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7559,10 +10800,19 @@ inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3uivEXT() const {
+    return mImports.glProgramUniform3uivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
     GAPID_INFO("glProgramUniform3uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform3uivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3uivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7579,10 +10829,19 @@ inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4fEXT() const {
+    return mImports.glProgramUniform4fEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, float v0, float v1,
                                            float v2, float v3) {
     GAPID_INFO("glProgramUniform4fEXT(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)", program, location,
                v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4fEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4fEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7597,10 +10856,19 @@ inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4fvEXT() const {
+    return mImports.glProgramUniform4fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, int32_t count,
                                             float* value) {
     GAPID_INFO("glProgramUniform4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform4fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7617,11 +10885,20 @@ inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4iEXT() const {
+    return mImports.glProgramUniform4iEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, int32_t v0,
                                            int32_t v1, int32_t v2, int32_t v3) {
     GAPID_INFO("glProgramUniform4iEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ")",
                program, location, v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4iEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4iEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7636,10 +10913,19 @@ inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4ivEXT() const {
+    return mImports.glProgramUniform4ivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, int32_t count,
                                             int32_t* value) {
     GAPID_INFO("glProgramUniform4ivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform4ivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4ivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7656,11 +10942,20 @@ inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4uiEXT() const {
+    return mImports.glProgramUniform4uiEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, uint32_t v0,
                                             uint32_t v1, uint32_t v2, uint32_t v3) {
     GAPID_INFO("glProgramUniform4uiEXT(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
                ", %" PRIu32 ")",
                program, location, v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4uiEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4uiEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7675,10 +10970,19 @@ inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4uivEXT() const {
+    return mImports.glProgramUniform4uivEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location, int32_t count,
                                              uint32_t* value) {
     GAPID_INFO("glProgramUniform4uivEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, value);
+
+    if (!hasGlProgramUniform4uivEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4uivEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7695,10 +10999,19 @@ inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformHandleui64NV() const {
+    return mImports.glProgramUniformHandleui64NV != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t location,
                                                   uint64_t value) {
     GAPID_INFO("glProgramUniformHandleui64NV(%" PRIu32 ", %" PRId32 ", %" PRIu64 ")", program,
                location, value);
+
+    if (!hasGlProgramUniformHandleui64NV()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformHandleui64NV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7712,10 +11025,19 @@ inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t loca
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformHandleui64vNV() const {
+    return mImports.glProgramUniformHandleui64vNV != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t location,
                                                    int32_t count, uint64_t* values) {
     GAPID_INFO("glProgramUniformHandleui64vNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
                location, count, values);
+
+    if (!hasGlProgramUniformHandleui64vNV()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformHandleui64vNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7732,11 +11054,20 @@ inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t loc
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2fvEXT() const {
+    return mImports.glProgramUniformMatrix2fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7753,12 +11084,21 @@ inline void GlesSpy::glProgramUniformMatrix2fvEXT(uint32_t program, int32_t loca
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2x3fvEXT() const {
+    return mImports.glProgramUniformMatrix2x3fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix2x3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2x3fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2x3fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7775,12 +11115,21 @@ inline void GlesSpy::glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2x4fvEXT() const {
+    return mImports.glProgramUniformMatrix2x4fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix2x4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2x4fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2x4fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7797,11 +11146,20 @@ inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3fvEXT() const {
+    return mImports.glProgramUniformMatrix3fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7818,12 +11176,21 @@ inline void GlesSpy::glProgramUniformMatrix3fvEXT(uint32_t program, int32_t loca
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3x2fvEXT() const {
+    return mImports.glProgramUniformMatrix3x2fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix3x2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3x2fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3x2fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7840,12 +11207,21 @@ inline void GlesSpy::glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3x4fvEXT() const {
+    return mImports.glProgramUniformMatrix3x4fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix3x4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3x4fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3x4fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7862,11 +11238,20 @@ inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4fvEXT() const {
+    return mImports.glProgramUniformMatrix4fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4fvEXT(uint32_t program, int32_t location, int32_t count,
                                                   uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix4fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7883,12 +11268,21 @@ inline void GlesSpy::glProgramUniformMatrix4fvEXT(uint32_t program, int32_t loca
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4x2fvEXT() const {
+    return mImports.glProgramUniformMatrix4x2fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix4x2fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4x2fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4x2fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7905,12 +11299,21 @@ inline void GlesSpy::glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4x3fvEXT() const {
+    return mImports.glProgramUniformMatrix4x3fvEXT != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t location,
                                                     int32_t count, uint8_t transpose,
                                                     float* value) {
     GAPID_INFO("glProgramUniformMatrix4x3fvEXT(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4x3fvEXT()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4x3fvEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7927,8 +11330,17 @@ inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t lo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPushGroupMarkerEXT() const {
+    return mImports.glPushGroupMarkerEXT != nullptr;
+}
+
 inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     GAPID_INFO("glPushGroupMarkerEXT(%" PRId32 ", %p)", length, marker);
+
+    if (!hasGlPushGroupMarkerEXT()) {
+        GAPID_WARNING("Application called unsupported function glPushGroupMarkerEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7949,8 +11361,15 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlQueryCounterEXT() const { return mImports.glQueryCounterEXT != nullptr; }
+
 inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
     GAPID_INFO("glQueryCounterEXT(%" PRIu32 ", %u)", query, target);
+
+    if (!hasGlQueryCounterEXT()) {
+        GAPID_WARNING("Application called unsupported function glQueryCounterEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7964,8 +11383,17 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReadBufferIndexedEXT() const {
+    return mImports.glReadBufferIndexedEXT != nullptr;
+}
+
 inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
     GAPID_INFO("glReadBufferIndexedEXT(%u, %" PRId32 ")", src, index);
+
+    if (!hasGlReadBufferIndexedEXT()) {
+        GAPID_WARNING("Application called unsupported function glReadBufferIndexedEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7979,8 +11407,15 @@ inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReadBufferNV() const { return mImports.glReadBufferNV != nullptr; }
+
 inline void GlesSpy::glReadBufferNV(uint32_t mode) {
     GAPID_INFO("glReadBufferNV(%u)", mode);
+
+    if (!hasGlReadBufferNV()) {
+        GAPID_WARNING("Application called unsupported function glReadBufferNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -7994,11 +11429,18 @@ inline void GlesSpy::glReadBufferNV(uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReadnPixelsEXT() const { return mImports.glReadnPixelsEXT != nullptr; }
+
 inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32_t height,
                                       uint32_t format, uint32_t type, int32_t bufSize, void* data) {
     GAPID_INFO("glReadnPixelsEXT(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %u, %u, %" PRId32 ", %p)",
                x, y, width, height, format, type, bufSize, data);
+
+    if (!hasGlReadnPixelsEXT()) {
+        GAPID_WARNING("Application called unsupported function glReadnPixelsEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8015,11 +11457,18 @@ inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReadnPixelsKHR() const { return mImports.glReadnPixelsKHR != nullptr; }
+
 inline void GlesSpy::glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32_t height,
                                       uint32_t format, uint32_t type, int32_t bufSize, void* data) {
     GAPID_INFO("glReadnPixelsKHR(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %u, %u, %" PRId32 ", %p)",
                x, y, width, height, format, type, bufSize, data);
+
+    if (!hasGlReadnPixelsKHR()) {
+        GAPID_WARNING("Application called unsupported function glReadnPixelsKHR");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8036,12 +11485,22 @@ inline void GlesSpy::glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisampleANGLE() const {
+    return mImports.glRenderbufferStorageMultisampleANGLE != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisampleANGLE(uint32_t target, int32_t samples,
                                                            uint32_t internalformat, int32_t width,
                                                            int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleANGLE(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
                ")",
                target, samples, internalformat, width, height);
+
+    if (!hasGlRenderbufferStorageMultisampleANGLE()) {
+        GAPID_WARNING(
+                "Application called unsupported function glRenderbufferStorageMultisampleANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8057,12 +11516,22 @@ inline void GlesSpy::glRenderbufferStorageMultisampleANGLE(uint32_t target, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisampleAPPLE() const {
+    return mImports.glRenderbufferStorageMultisampleAPPLE != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int32_t samples,
                                                            uint32_t internalformat, int32_t width,
                                                            int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleAPPLE(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
                ")",
                target, samples, internalformat, width, height);
+
+    if (!hasGlRenderbufferStorageMultisampleAPPLE()) {
+        GAPID_WARNING(
+                "Application called unsupported function glRenderbufferStorageMultisampleAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8078,11 +11547,21 @@ inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisampleEXT() const {
+    return mImports.glRenderbufferStorageMultisampleEXT != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_t samples,
                                                          uint32_t internalformat, int32_t width,
                                                          int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
+
+    if (!hasGlRenderbufferStorageMultisampleEXT()) {
+        GAPID_WARNING(
+                "Application called unsupported function glRenderbufferStorageMultisampleEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8098,11 +11577,21 @@ inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisampleIMG() const {
+    return mImports.glRenderbufferStorageMultisampleIMG != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_t samples,
                                                          uint32_t internalformat, int32_t width,
                                                          int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleIMG(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
+
+    if (!hasGlRenderbufferStorageMultisampleIMG()) {
+        GAPID_WARNING(
+                "Application called unsupported function glRenderbufferStorageMultisampleIMG");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8118,11 +11607,20 @@ inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisampleNV() const {
+    return mImports.glRenderbufferStorageMultisampleNV != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t samples,
                                                         uint32_t internalformat, int32_t width,
                                                         int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisampleNV(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, internalformat, width, height);
+
+    if (!hasGlRenderbufferStorageMultisampleNV()) {
+        GAPID_WARNING("Application called unsupported function glRenderbufferStorageMultisampleNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8137,8 +11635,18 @@ inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlResolveMultisampleFramebufferAPPLE() const {
+    return mImports.glResolveMultisampleFramebufferAPPLE != nullptr;
+}
+
 inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
     GAPID_INFO("glResolveMultisampleFramebufferAPPLE()");
+
+    if (!hasGlResolveMultisampleFramebufferAPPLE()) {
+        GAPID_WARNING(
+                "Application called unsupported function glResolveMultisampleFramebufferAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8152,8 +11660,17 @@ inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterIivOES() const {
+    return mImports.glSamplerParameterIivOES != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, int32_t* param) {
     GAPID_INFO("glSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterIivOES()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterIivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8170,8 +11687,17 @@ inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterIuivOES() const {
+    return mImports.glSamplerParameterIuivOES != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname, uint32_t* param) {
     GAPID_INFO("glSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterIuivOES()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterIuivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8188,8 +11714,15 @@ inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlScissorArrayvNV() const { return mImports.glScissorArrayvNV != nullptr; }
+
 inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v) {
     GAPID_INFO("glScissorArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
+
+    if (!hasGlScissorArrayvNV()) {
+        GAPID_WARNING("Application called unsupported function glScissorArrayvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8205,11 +11738,20 @@ inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlScissorIndexedNV() const {
+    return mImports.glScissorIndexedNV != nullptr;
+}
+
 inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bottom, int32_t width,
                                         int32_t height) {
     GAPID_INFO("glScissorIndexedNV(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ")",
                index, left, bottom, width, height);
+
+    if (!hasGlScissorIndexedNV()) {
+        GAPID_WARNING("Application called unsupported function glScissorIndexedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8223,8 +11765,17 @@ inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlScissorIndexedvNV() const {
+    return mImports.glScissorIndexedvNV != nullptr;
+}
+
 inline void GlesSpy::glScissorIndexedvNV(uint32_t index, int32_t* v) {
     GAPID_INFO("glScissorIndexedvNV(%" PRIu32 ", %p)", index, v);
+
+    if (!hasGlScissorIndexedvNV()) {
+        GAPID_WARNING("Application called unsupported function glScissorIndexedvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8240,12 +11791,21 @@ inline void GlesSpy::glScissorIndexedvNV(uint32_t index, int32_t* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSelectPerfMonitorCountersAMD() const {
+    return mImports.glSelectPerfMonitorCountersAMD != nullptr;
+}
+
 inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t enable,
                                                     uint32_t group, int32_t numCounters,
                                                     uint32_t* counterList) {
     GAPID_INFO("glSelectPerfMonitorCountersAMD(%" PRIu32 ", %" PRIu8 ", %" PRIu32 ", %" PRId32
                ", %p)",
                monitor, enable, group, numCounters, counterList);
+
+    if (!hasGlSelectPerfMonitorCountersAMD()) {
+        GAPID_WARNING("Application called unsupported function glSelectPerfMonitorCountersAMD");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8262,8 +11822,15 @@ inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t en
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSetFenceNV() const { return mImports.glSetFenceNV != nullptr; }
+
 inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
     GAPID_INFO("glSetFenceNV(%" PRIu32 ", %u)", fence, condition);
+
+    if (!hasGlSetFenceNV()) {
+        GAPID_WARNING("Application called unsupported function glSetFenceNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8277,10 +11844,17 @@ inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStartTilingQCOM() const { return mImports.glStartTilingQCOM != nullptr; }
+
 inline void GlesSpy::glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, uint32_t height,
                                        uint32_t preserveMask) {
     GAPID_INFO("glStartTilingQCOM(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %u)", x, y,
                width, height, preserveMask);
+
+    if (!hasGlStartTilingQCOM()) {
+        GAPID_WARNING("Application called unsupported function glStartTilingQCOM");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8294,6 +11868,10 @@ inline void GlesSpy::glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilFillPathInstancedNV() const {
+    return mImports.glStencilFillPathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                   void* paths, uint32_t pathBase, uint32_t fillMode,
                                                   uint32_t mask, uint32_t transformType,
@@ -8302,6 +11880,11 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
                ", %u, %p)",
                numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType,
                transformValues);
+
+    if (!hasGlStencilFillPathInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilFillPathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8322,8 +11905,17 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilFillPathNV() const {
+    return mImports.glStencilFillPathNV != nullptr;
+}
+
 inline void GlesSpy::glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask) {
     GAPID_INFO("glStencilFillPathNV(%" PRIu32 ", %u, %" PRIu32 ")", path, fillMode, mask);
+
+    if (!hasGlStencilFillPathNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilFillPathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8337,6 +11929,10 @@ inline void GlesSpy::glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilStrokePathInstancedNV() const {
+    return mImports.glStencilStrokePathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                                     void* paths, uint32_t pathBase,
                                                     int32_t reference, uint32_t mask,
@@ -8346,6 +11942,11 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
                ", %" PRIu32 ", %u, %p)",
                numPaths, pathNameType, paths, pathBase, reference, mask, transformType,
                transformValues);
+
+    if (!hasGlStencilStrokePathInstancedNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilStrokePathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8366,9 +11967,18 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilStrokePathNV() const {
+    return mImports.glStencilStrokePathNV != nullptr;
+}
+
 inline void GlesSpy::glStencilStrokePathNV(uint32_t path, int32_t reference, uint32_t mask) {
     GAPID_INFO("glStencilStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", path, reference,
                mask);
+
+    if (!hasGlStencilStrokePathNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilStrokePathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8382,6 +11992,10 @@ inline void GlesSpy::glStencilStrokePathNV(uint32_t path, int32_t reference, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilThenCoverFillPathInstancedNV() const {
+    return mImports.glStencilThenCoverFillPathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
         int32_t numPaths, uint32_t pathNameType, void* paths, uint32_t pathBase, uint32_t fillMode,
         uint32_t mask, uint32_t coverMode, uint32_t transformType, float* transformValues) {
@@ -8389,6 +12003,12 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
                ", %u, %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType,
                transformValues);
+
+    if (!hasGlStencilThenCoverFillPathInstancedNV()) {
+        GAPID_WARNING(
+                "Application called unsupported function glStencilThenCoverFillPathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8410,10 +12030,19 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilThenCoverFillPathNV() const {
+    return mImports.glStencilThenCoverFillPathNV != nullptr;
+}
+
 inline void GlesSpy::glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMode, uint32_t mask,
                                                   uint32_t coverMode) {
     GAPID_INFO("glStencilThenCoverFillPathNV(%" PRIu32 ", %u, %" PRIu32 ", %u)", path, fillMode,
                mask, coverMode);
+
+    if (!hasGlStencilThenCoverFillPathNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilThenCoverFillPathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8428,6 +12057,10 @@ inline void GlesSpy::glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilThenCoverStrokePathInstancedNV() const {
+    return mImports.glStencilThenCoverStrokePathInstancedNV != nullptr;
+}
+
 inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
         int32_t numPaths, uint32_t pathNameType, void* paths, uint32_t pathBase, int32_t reference,
         uint32_t mask, uint32_t coverMode, uint32_t transformType, float* transformValues) {
@@ -8435,6 +12068,12 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
                ", %" PRIu32 ", %u, %u, %p)",
                numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType,
                transformValues);
+
+    if (!hasGlStencilThenCoverStrokePathInstancedNV()) {
+        GAPID_WARNING(
+                "Application called unsupported function glStencilThenCoverStrokePathInstancedNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8456,10 +12095,19 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilThenCoverStrokePathNV() const {
+    return mImports.glStencilThenCoverStrokePathNV != nullptr;
+}
+
 inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t reference, uint32_t mask,
                                                     uint32_t coverMode) {
     GAPID_INFO("glStencilThenCoverStrokePathNV(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %u)", path,
                reference, mask, coverMode);
+
+    if (!hasGlStencilThenCoverStrokePathNV()) {
+        GAPID_WARNING("Application called unsupported function glStencilThenCoverStrokePathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8474,10 +12122,17 @@ inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t refer
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTestFenceNV() const { return mImports.glTestFenceNV != nullptr; }
+
 inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
     GAPID_INFO("glTestFenceNV(%" PRIu32 ")", fence);
 
     uint8_t result = 0;
+
+    if (!hasGlTestFenceNV()) {
+        GAPID_WARNING("Application called unsupported function glTestFenceNV");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -8494,8 +12149,15 @@ inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
     return result;
 }
 
+inline bool GlesSpy::hasGlTexBufferOES() const { return mImports.glTexBufferOES != nullptr; }
+
 inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, uint32_t buffer) {
     GAPID_INFO("glTexBufferOES(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
+
+    if (!hasGlTexBufferOES()) {
+        GAPID_WARNING("Application called unsupported function glTexBufferOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8509,10 +12171,19 @@ inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexBufferRangeOES() const {
+    return mImports.glTexBufferRangeOES != nullptr;
+}
+
 inline void GlesSpy::glTexBufferRangeOES(uint32_t target, uint32_t internalformat, uint32_t buffer,
                                          int32_t offset, int32_t size) {
     GAPID_INFO("glTexBufferRangeOES(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                internalformat, buffer, offset, size);
+
+    if (!hasGlTexBufferRangeOES()) {
+        GAPID_WARNING("Application called unsupported function glTexBufferRangeOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8527,12 +12198,19 @@ inline void GlesSpy::glTexBufferRangeOES(uint32_t target, uint32_t internalforma
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexImage3DOES() const { return mImports.glTexImage3DOES != nullptr; }
+
 inline void GlesSpy::glTexImage3DOES(uint32_t target, int32_t level, uint32_t internalformat,
                                      int32_t width, int32_t height, int32_t depth, int32_t border,
                                      uint32_t format, uint32_t type, void* pixels) {
     GAPID_INFO("glTexImage3DOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %u, %u, %p)",
                target, level, internalformat, width, height, depth, border, format, type, pixels);
+
+    if (!hasGlTexImage3DOES()) {
+        GAPID_WARNING("Application called unsupported function glTexImage3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8550,12 +12228,21 @@ inline void GlesSpy::glTexImage3DOES(uint32_t target, int32_t level, uint32_t in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexPageCommitmentARB() const {
+    return mImports.glTexPageCommitmentARB != nullptr;
+}
+
 inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int32_t xoffset,
                                             int32_t yoffset, int32_t zoffset, int32_t width,
                                             int32_t height, int32_t depth, uint8_t commit) {
     GAPID_INFO("glTexPageCommitmentARB(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ")",
                target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+
+    if (!hasGlTexPageCommitmentARB()) {
+        GAPID_WARNING("Application called unsupported function glTexPageCommitmentARB");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8571,8 +12258,17 @@ inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterIivOES() const {
+    return mImports.glTexParameterIivOES != nullptr;
+}
+
 inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glTexParameterIivOES(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameterIivOES()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterIivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8589,8 +12285,17 @@ inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterIuivOES() const {
+    return mImports.glTexParameterIuivOES != nullptr;
+}
+
 inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint32_t* params) {
     GAPID_INFO("glTexParameterIuivOES(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameterIuivOES()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterIuivOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8607,10 +12312,17 @@ inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage1DEXT() const { return mImports.glTexStorage1DEXT != nullptr; }
+
 inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width) {
     GAPID_INFO("glTexStorage1DEXT(%u, %" PRId32 ", %u, %" PRId32 ")", target, levels, format,
                width);
+
+    if (!hasGlTexStorage1DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage1DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8624,10 +12336,17 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage2DEXT() const { return mImports.glTexStorage2DEXT != nullptr; }
+
 inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height) {
     GAPID_INFO("glTexStorage2DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")", target, levels,
                format, width, height);
+
+    if (!hasGlTexStorage2DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage2DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8642,10 +12361,17 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage3DEXT() const { return mImports.glTexStorage3DEXT != nullptr; }
+
 inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height, int32_t depth) {
     GAPID_INFO("glTexStorage3DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, levels, format, width, height, depth);
+
+    if (!hasGlTexStorage3DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage3DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8660,6 +12386,10 @@ inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexSubImage3DOES() const {
+    return mImports.glTexSubImage3DOES != nullptr;
+}
+
 inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t xoffset,
                                         int32_t yoffset, int32_t zoffset, int32_t width,
                                         int32_t height, int32_t depth, uint32_t format,
@@ -8668,6 +12398,11 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
                ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                pixels);
+
+    if (!hasGlTexSubImage3DOES()) {
+        GAPID_WARNING("Application called unsupported function glTexSubImage3DOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8685,10 +12420,19 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTextureStorage1DEXT() const {
+    return mImports.glTextureStorage1DEXT != nullptr;
+}
+
 inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width) {
     GAPID_INFO("glTextureStorage1DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ")", texture,
                target, levels, format, width);
+
+    if (!hasGlTextureStorage1DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTextureStorage1DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8703,10 +12447,19 @@ inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTextureStorage2DEXT() const {
+    return mImports.glTextureStorage2DEXT != nullptr;
+}
+
 inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width, int32_t height) {
     GAPID_INFO("glTextureStorage2DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                texture, target, levels, format, width, height);
+
+    if (!hasGlTextureStorage2DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTextureStorage2DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8721,12 +12474,21 @@ inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTextureStorage3DEXT() const {
+    return mImports.glTextureStorage3DEXT != nullptr;
+}
+
 inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width, int32_t height,
                                            int32_t depth) {
     GAPID_INFO("glTextureStorage3DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
                ", %" PRId32 ")",
                texture, target, levels, format, width, height, depth);
+
+    if (!hasGlTextureStorage3DEXT()) {
+        GAPID_WARNING("Application called unsupported function glTextureStorage3DEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8741,6 +12503,8 @@ inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTextureViewEXT() const { return mImports.glTextureViewEXT != nullptr; }
+
 inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_t origtexture,
                                       uint32_t internalformat, uint32_t minlevel,
                                       uint32_t numlevels, uint32_t minlayer, uint32_t numlayers) {
@@ -8748,6 +12512,11 @@ inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_
                ", %" PRIu32 ", %" PRIu32 ")",
                texture, target, origtexture, internalformat, minlevel, numlevels, minlayer,
                numlayers);
+
+    if (!hasGlTextureViewEXT()) {
+        GAPID_WARNING("Application called unsupported function glTextureViewEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8764,6 +12533,8 @@ inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTextureViewOES() const { return mImports.glTextureViewOES != nullptr; }
+
 inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_t origtexture,
                                       uint32_t internalformat, uint32_t minlevel,
                                       uint32_t numlevels, uint32_t minlayer, uint32_t numlayers) {
@@ -8771,6 +12542,11 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
                ", %" PRIu32 ", %" PRIu32 ")",
                texture, target, origtexture, internalformat, minlevel, numlevels, minlayer,
                numlayers);
+
+    if (!hasGlTextureViewOES()) {
+        GAPID_WARNING("Application called unsupported function glTextureViewOES");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8787,10 +12563,17 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTransformPathNV() const { return mImports.glTransformPathNV != nullptr; }
+
 inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
                                        uint32_t transformType, float* transformValues) {
     GAPID_INFO("glTransformPathNV(%" PRIu32 ", %" PRIu32 ", %u, %p)", resultPath, srcPath,
                transformType, transformValues);
+
+    if (!hasGlTransformPathNV()) {
+        GAPID_WARNING("Application called unsupported function glTransformPathNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8807,8 +12590,17 @@ inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformHandleui64NV() const {
+    return mImports.glUniformHandleui64NV != nullptr;
+}
+
 inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
     GAPID_INFO("glUniformHandleui64NV(%" PRId32 ", %" PRIu64 ")", location, value);
+
+    if (!hasGlUniformHandleui64NV()) {
+        GAPID_WARNING("Application called unsupported function glUniformHandleui64NV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8822,8 +12614,17 @@ inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformHandleui64vNV() const {
+    return mImports.glUniformHandleui64vNV != nullptr;
+}
+
 inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uint64_t* value) {
     GAPID_INFO("glUniformHandleui64vNV(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+
+    if (!hasGlUniformHandleui64vNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformHandleui64vNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8840,10 +12641,19 @@ inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix2x3fvNV() const {
+    return mImports.glUniformMatrix2x3fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix2x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix2x3fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix2x3fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8860,10 +12670,19 @@ inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix2x4fvNV() const {
+    return mImports.glUniformMatrix2x4fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix2x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix2x4fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix2x4fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8880,10 +12699,19 @@ inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix3x2fvNV() const {
+    return mImports.glUniformMatrix3x2fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix3x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix3x2fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix3x2fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8900,10 +12728,19 @@ inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix3x4fvNV() const {
+    return mImports.glUniformMatrix3x4fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix3x4fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix3x4fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix3x4fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8920,10 +12757,19 @@ inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix4x2fvNV() const {
+    return mImports.glUniformMatrix4x2fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix4x2fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix4x2fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix4x2fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8940,10 +12786,19 @@ inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix4x3fvNV() const {
+    return mImports.glUniformMatrix4x3fvNV != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uint8_t transpose,
                                             float* value) {
     GAPID_INFO("glUniformMatrix4x3fvNV(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix4x3fvNV()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix4x3fvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8960,10 +12815,17 @@ inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUnmapBufferOES() const { return mImports.glUnmapBufferOES != nullptr; }
+
 inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
     GAPID_INFO("glUnmapBufferOES(%u)", target);
 
     uint8_t result = 0;
+
+    if (!hasGlUnmapBufferOES()) {
+        GAPID_WARNING("Application called unsupported function glUnmapBufferOES");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -8980,8 +12842,17 @@ inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
     return result;
 }
 
+inline bool GlesSpy::hasGlUseProgramStagesEXT() const {
+    return mImports.glUseProgramStagesEXT != nullptr;
+}
+
 inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, uint32_t program) {
     GAPID_INFO("glUseProgramStagesEXT(%" PRIu32 ", %u, %" PRIu32 ")", pipeline, stages, program);
+
+    if (!hasGlUseProgramStagesEXT()) {
+        GAPID_WARNING("Application called unsupported function glUseProgramStagesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -8995,8 +12866,17 @@ inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlValidateProgramPipelineEXT() const {
+    return mImports.glValidateProgramPipelineEXT != nullptr;
+}
+
 inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
     GAPID_INFO("glValidateProgramPipelineEXT(%" PRIu32 ")", pipeline);
+
+    if (!hasGlValidateProgramPipelineEXT()) {
+        GAPID_WARNING("Application called unsupported function glValidateProgramPipelineEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9010,8 +12890,17 @@ inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribDivisorANGLE() const {
+    return mImports.glVertexAttribDivisorANGLE != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor) {
     GAPID_INFO("glVertexAttribDivisorANGLE(%" PRIu32 ", %" PRIu32 ")", index, divisor);
+
+    if (!hasGlVertexAttribDivisorANGLE()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribDivisorANGLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9025,8 +12914,17 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribDivisorEXT() const {
+    return mImports.glVertexAttribDivisorEXT != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) {
     GAPID_INFO("glVertexAttribDivisorEXT(%" PRIu32 ", %" PRIu32 ")", index, divisor);
+
+    if (!hasGlVertexAttribDivisorEXT()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribDivisorEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9040,8 +12938,17 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribDivisorNV() const {
+    return mImports.glVertexAttribDivisorNV != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
     GAPID_INFO("glVertexAttribDivisorNV(%" PRIu32 ", %" PRIu32 ")", index, divisor);
+
+    if (!hasGlVertexAttribDivisorNV()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribDivisorNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9055,8 +12962,17 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlViewportArrayvNV() const {
+    return mImports.glViewportArrayvNV != nullptr;
+}
+
 inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v) {
     GAPID_INFO("glViewportArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
+
+    if (!hasGlViewportArrayvNV()) {
+        GAPID_WARNING("Application called unsupported function glViewportArrayvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9073,8 +12989,17 @@ inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v)
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlViewportIndexedfNV() const {
+    return mImports.glViewportIndexedfNV != nullptr;
+}
+
 inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, float w, float h) {
     GAPID_INFO("glViewportIndexedfNV(%" PRIu32 ", %f, %f, %f, %f)", index, x, y, w, h);
+
+    if (!hasGlViewportIndexedfNV()) {
+        GAPID_WARNING("Application called unsupported function glViewportIndexedfNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9088,8 +13013,17 @@ inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlViewportIndexedfvNV() const {
+    return mImports.glViewportIndexedfvNV != nullptr;
+}
+
 inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
     GAPID_INFO("glViewportIndexedfvNV(%" PRIu32 ", %p)", index, v);
+
+    if (!hasGlViewportIndexedfvNV()) {
+        GAPID_WARNING("Application called unsupported function glViewportIndexedfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9105,8 +13039,15 @@ inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlWaitSyncAPPLE() const { return mImports.glWaitSyncAPPLE != nullptr; }
+
 inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout) {
     GAPID_INFO("glWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")", sync, flag, timeout);
+
+    if (!hasGlWaitSyncAPPLE()) {
+        GAPID_WARNING("Application called unsupported function glWaitSyncAPPLE");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9120,10 +13061,17 @@ inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t time
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlWeightPathsNV() const { return mImports.glWeightPathsNV != nullptr; }
+
 inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint32_t* paths,
                                      float* weights) {
     GAPID_INFO("glWeightPathsNV(%" PRIu32 ", %" PRId32 ", %p, %p)", resultPath, numPaths, paths,
                weights);
+
+    if (!hasGlWeightPathsNV()) {
+        GAPID_WARNING("Application called unsupported function glWeightPathsNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9142,8 +13090,17 @@ inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverageModulationNV() const {
+    return mImports.glCoverageModulationNV != nullptr;
+}
+
 inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
     GAPID_INFO("glCoverageModulationNV(%u)", components);
+
+    if (!hasGlCoverageModulationNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverageModulationNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9157,8 +13114,17 @@ inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCoverageModulationTableNV() const {
+    return mImports.glCoverageModulationTableNV != nullptr;
+}
+
 inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
     GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)", n, v);
+
+    if (!hasGlCoverageModulationTableNV()) {
+        GAPID_WARNING("Application called unsupported function glCoverageModulationTableNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9174,8 +13140,17 @@ inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFragmentCoverageColorNV() const {
+    return mImports.glFragmentCoverageColorNV != nullptr;
+}
+
 inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
     GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")", color);
+
+    if (!hasGlFragmentCoverageColorNV()) {
+        GAPID_WARNING("Application called unsupported function glFragmentCoverageColorNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9189,10 +13164,19 @@ inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferSampleLocationsfvNV() const {
+    return mImports.glFramebufferSampleLocationsfvNV != nullptr;
+}
+
 inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start,
                                                       int32_t count, float* v) {
     GAPID_INFO("glFramebufferSampleLocationsfvNV(%u, %" PRIu32 ", %" PRId32 ", %p)", target, start,
                count, v);
+
+    if (!hasGlFramebufferSampleLocationsfvNV()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferSampleLocationsfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9209,8 +13193,17 @@ inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetCoverageModulationTableNV() const {
+    return mImports.glGetCoverageModulationTableNV != nullptr;
+}
+
 inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
     GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)", bufsize, v);
+
+    if (!hasGlGetCoverageModulationTableNV()) {
+        GAPID_WARNING("Application called unsupported function glGetCoverageModulationTableNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9226,10 +13219,20 @@ inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlNamedFramebufferSampleLocationsfvNV() const {
+    return mImports.glNamedFramebufferSampleLocationsfvNV != nullptr;
+}
+
 inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
                                                            int32_t count, float* v) {
     GAPID_INFO("glNamedFramebufferSampleLocationsfvNV(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p)",
                framebuffer, start, count, v);
+
+    if (!hasGlNamedFramebufferSampleLocationsfvNV()) {
+        GAPID_WARNING(
+                "Application called unsupported function glNamedFramebufferSampleLocationsfvNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9246,8 +13249,17 @@ inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRasterSamplesEXT() const {
+    return mImports.glRasterSamplesEXT != nullptr;
+}
+
 inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations) {
     GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")", samples, fixedsamplelocations);
+
+    if (!hasGlRasterSamplesEXT()) {
+        GAPID_WARNING("Application called unsupported function glRasterSamplesEXT");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9263,8 +13275,17 @@ inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsampleloc
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlResolveDepthValuesNV() const {
+    return mImports.glResolveDepthValuesNV != nullptr;
+}
+
 inline void GlesSpy::glResolveDepthValuesNV() {
     GAPID_INFO("glResolveDepthValuesNV()");
+
+    if (!hasGlResolveDepthValuesNV()) {
+        GAPID_WARNING("Application called unsupported function glResolveDepthValuesNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9278,8 +13299,17 @@ inline void GlesSpy::glResolveDepthValuesNV() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSubpixelPrecisionBiasNV() const {
+    return mImports.glSubpixelPrecisionBiasNV != nullptr;
+}
+
 inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
     GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")", xbits, ybits);
+
+    if (!hasGlSubpixelPrecisionBiasNV()) {
+        GAPID_WARNING("Application called unsupported function glSubpixelPrecisionBiasNV");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9293,8 +13323,15 @@ inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendColor() const { return mImports.glBlendColor != nullptr; }
+
 inline void GlesSpy::glBlendColor(float red, float green, float blue, float alpha) {
     GAPID_INFO("glBlendColor(%f, %f, %f, %f)", red, green, blue, alpha);
+
+    if (!hasGlBlendColor()) {
+        GAPID_WARNING("Application called unsupported function glBlendColor");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9313,8 +13350,15 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquation() const { return mImports.glBlendEquation != nullptr; }
+
 inline void GlesSpy::glBlendEquation(uint32_t equation) {
     GAPID_INFO("glBlendEquation(%u)", equation);
+
+    if (!hasGlBlendEquation()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquation");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9347,8 +13391,17 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendEquationSeparate() const {
+    return mImports.glBlendEquationSeparate != nullptr;
+}
+
 inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     GAPID_INFO("glBlendEquationSeparate(%u, %u)", rgb, alpha);
+
+    if (!hasGlBlendEquationSeparate()) {
+        GAPID_WARNING("Application called unsupported function glBlendEquationSeparate");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9394,8 +13447,15 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFunc() const { return mImports.glBlendFunc != nullptr; }
+
 inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     GAPID_INFO("glBlendFunc(%u, %u)", src_factor, dst_factor);
+
+    if (!hasGlBlendFunc()) {
+        GAPID_WARNING("Application called unsupported function glBlendFunc");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9454,10 +13514,19 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlendFuncSeparate() const {
+    return mImports.glBlendFuncSeparate != nullptr;
+}
+
 inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                          uint32_t src_factor_alpha, uint32_t dst_factor_alpha) {
     GAPID_INFO("glBlendFuncSeparate(%u, %u, %u, %u)", src_factor_rgb, dst_factor_rgb,
                src_factor_alpha, dst_factor_alpha);
+
+    if (!hasGlBlendFuncSeparate()) {
+        GAPID_WARNING("Application called unsupported function glBlendFuncSeparate");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9555,8 +13624,15 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDepthFunc() const { return mImports.glDepthFunc != nullptr; }
+
 inline void GlesSpy::glDepthFunc(uint32_t function) {
     GAPID_INFO("glDepthFunc(%u)", function);
+
+    if (!hasGlDepthFunc()) {
+        GAPID_WARNING("Application called unsupported function glDepthFunc");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9587,8 +13663,15 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSampleCoverage() const { return mImports.glSampleCoverage != nullptr; }
+
 inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
     GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")", value, invert);
+
+    if (!hasGlSampleCoverage()) {
+        GAPID_WARNING("Application called unsupported function glSampleCoverage");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9608,8 +13691,15 @@ inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSampleMaski() const { return mImports.glSampleMaski != nullptr; }
+
 inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
     GAPID_INFO("glSampleMaski(%" PRIu32 ", %u)", maskNumber, mask);
+
+    if (!hasGlSampleMaski()) {
+        GAPID_WARNING("Application called unsupported function glSampleMaski");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9624,9 +13714,16 @@ inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlScissor() const { return mImports.glScissor != nullptr; }
+
 inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t height) {
     GAPID_INFO("glScissor(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, width,
                height);
+
+    if (!hasGlScissor()) {
+        GAPID_WARNING("Application called unsupported function glScissor");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9645,8 +13742,15 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilFunc() const { return mImports.glStencilFunc != nullptr; }
+
 inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
     GAPID_INFO("glStencilFunc(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
+
+    if (!hasGlStencilFunc()) {
+        GAPID_WARNING("Application called unsupported function glStencilFunc");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9673,10 +13777,19 @@ inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilFuncSeparate() const {
+    return mImports.glStencilFuncSeparate != nullptr;
+}
+
 inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
                                            int32_t reference_value, uint32_t mask) {
     GAPID_INFO("glStencilFuncSeparate(%u, %u, %" PRId32 ", %" PRIu32 ")", face, function,
                reference_value, mask);
+
+    if (!hasGlStencilFuncSeparate()) {
+        GAPID_WARNING("Application called unsupported function glStencilFuncSeparate");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9711,8 +13824,15 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilOp() const { return mImports.glStencilOp != nullptr; }
+
 inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) {
     GAPID_INFO("glStencilOp(%u, %u, %u)", fail, zfail, zpass);
+
+    if (!hasGlStencilOp()) {
+        GAPID_WARNING("Application called unsupported function glStencilOp");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9763,11 +13883,20 @@ inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilOpSeparate() const {
+    return mImports.glStencilOpSeparate != nullptr;
+}
+
 inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
                                          uint32_t stencil_pass_depth_fail,
                                          uint32_t stencil_pass_depth_pass) {
     GAPID_INFO("glStencilOpSeparate(%u, %u, %u, %u)", face, stencil_fail, stencil_pass_depth_fail,
                stencil_pass_depth_pass);
+
+    if (!hasGlStencilOpSeparate()) {
+        GAPID_WARNING("Application called unsupported function glStencilOpSeparate");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9827,8 +13956,15 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindFramebuffer() const { return mImports.glBindFramebuffer != nullptr; }
+
 inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
     GAPID_INFO("glBindFramebuffer(%u, %" PRIu32 ")", target, framebuffer);
+
+    if (!hasGlBindFramebuffer()) {
+        GAPID_WARNING("Application called unsupported function glBindFramebuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9867,8 +14003,17 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindRenderbuffer() const {
+    return mImports.glBindRenderbuffer != nullptr;
+}
+
 inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) {
     GAPID_INFO("glBindRenderbuffer(%u, %" PRIu32 ")", target, renderbuffer);
+
+    if (!hasGlBindRenderbuffer()) {
+        GAPID_WARNING("Application called unsupported function glBindRenderbuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9896,12 +14041,19 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBlitFramebuffer() const { return mImports.glBlitFramebuffer != nullptr; }
+
 inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                        int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                        uint32_t mask, uint32_t filter) {
     GAPID_INFO("glBlitFramebuffer(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)",
                srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+
+    if (!hasGlBlitFramebuffer()) {
+        GAPID_WARNING("Application called unsupported function glBlitFramebuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9934,10 +14086,19 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCheckFramebufferStatus() const {
+    return mImports.glCheckFramebufferStatus != nullptr;
+}
+
 inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
     GAPID_INFO("glCheckFramebufferStatus(%u)", target);
 
     uint32_t result = 0;
+
+    if (!hasGlCheckFramebufferStatus()) {
+        GAPID_WARNING("Application called unsupported function glCheckFramebufferStatus");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -9966,8 +14127,15 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
     return result;
 }
 
+inline bool GlesSpy::hasGlClear() const { return mImports.glClear != nullptr; }
+
 inline void GlesSpy::glClear(uint32_t mask) {
     GAPID_INFO("glClear(%u)", mask);
+
+    if (!hasGlClear()) {
+        GAPID_WARNING("Application called unsupported function glClear");
+        return;
+    }
 
     Observations observations;
     do {
@@ -9994,10 +14162,17 @@ inline void GlesSpy::glClear(uint32_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearBufferfi() const { return mImports.glClearBufferfi != nullptr; }
+
 inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float depth,
                                      int32_t stencil) {
     GAPID_INFO("glClearBufferfi(%u, %" PRId32 ", %f, %" PRId32 ")", buffer, drawbuffer, depth,
                stencil);
+
+    if (!hasGlClearBufferfi()) {
+        GAPID_WARNING("Application called unsupported function glClearBufferfi");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10017,8 +14192,15 @@ inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearBufferfv() const { return mImports.glClearBufferfv != nullptr; }
+
 inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float* value) {
     GAPID_INFO("glClearBufferfv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
+
+    if (!hasGlClearBufferfv()) {
+        GAPID_WARNING("Application called unsupported function glClearBufferfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10042,8 +14224,15 @@ inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearBufferiv() const { return mImports.glClearBufferiv != nullptr; }
+
 inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_t* value) {
     GAPID_INFO("glClearBufferiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
+
+    if (!hasGlClearBufferiv()) {
+        GAPID_WARNING("Application called unsupported function glClearBufferiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10067,8 +14256,15 @@ inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearBufferuiv() const { return mImports.glClearBufferuiv != nullptr; }
+
 inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint32_t* value) {
     GAPID_INFO("glClearBufferuiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
+
+    if (!hasGlClearBufferuiv()) {
+        GAPID_WARNING("Application called unsupported function glClearBufferuiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10091,8 +14287,15 @@ inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearColor() const { return mImports.glClearColor != nullptr; }
+
 inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
     GAPID_INFO("glClearColor(%f, %f, %f, %f)", r, g, b, a);
+
+    if (!hasGlClearColor()) {
+        GAPID_WARNING("Application called unsupported function glClearColor");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10111,8 +14314,15 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearDepthf() const { return mImports.glClearDepthf != nullptr; }
+
 inline void GlesSpy::glClearDepthf(float depth) {
     GAPID_INFO("glClearDepthf(%f)", depth);
+
+    if (!hasGlClearDepthf()) {
+        GAPID_WARNING("Application called unsupported function glClearDepthf");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10131,8 +14341,15 @@ inline void GlesSpy::glClearDepthf(float depth) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlClearStencil() const { return mImports.glClearStencil != nullptr; }
+
 inline void GlesSpy::glClearStencil(int32_t stencil) {
     GAPID_INFO("glClearStencil(%" PRId32 ")", stencil);
+
+    if (!hasGlClearStencil()) {
+        GAPID_WARNING("Application called unsupported function glClearStencil");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10151,9 +14368,16 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlColorMask() const { return mImports.glColorMask != nullptr; }
+
 inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     GAPID_INFO("glColorMask(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")", red, green, blue,
                alpha);
+
+    if (!hasGlColorMask()) {
+        GAPID_WARNING("Application called unsupported function glColorMask");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10175,8 +14399,17 @@ inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteFramebuffers() const {
+    return mImports.glDeleteFramebuffers != nullptr;
+}
+
 inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers) {
     GAPID_INFO("glDeleteFramebuffers(%" PRId32 ", %p)", count, framebuffers);
+
+    if (!hasGlDeleteFramebuffers()) {
+        GAPID_WARNING("Application called unsupported function glDeleteFramebuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10202,8 +14435,17 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteRenderbuffers() const {
+    return mImports.glDeleteRenderbuffers != nullptr;
+}
+
 inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers) {
     GAPID_INFO("glDeleteRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
+
+    if (!hasGlDeleteRenderbuffers()) {
+        GAPID_WARNING("Application called unsupported function glDeleteRenderbuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10230,8 +14472,15 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDepthMask() const { return mImports.glDepthMask != nullptr; }
+
 inline void GlesSpy::glDepthMask(uint8_t enabled) {
     GAPID_INFO("glDepthMask(%" PRIu8 ")", enabled);
+
+    if (!hasGlDepthMask()) {
+        GAPID_WARNING("Application called unsupported function glDepthMask");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10250,8 +14499,17 @@ inline void GlesSpy::glDepthMask(uint8_t enabled) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferParameteri() const {
+    return mImports.glFramebufferParameteri != nullptr;
+}
+
 inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param) {
     GAPID_INFO("glFramebufferParameteri(%u, %u, %" PRId32 ")", target, pname, param);
+
+    if (!hasGlFramebufferParameteri()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferParameteri");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10281,12 +14539,21 @@ inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferRenderbuffer() const {
+    return mImports.glFramebufferRenderbuffer != nullptr;
+}
+
 inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                                uint32_t framebuffer_attachment,
                                                uint32_t renderbuffer_target,
                                                uint32_t renderbuffer) {
     GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %" PRIu32 ")", framebuffer_target,
                framebuffer_attachment, renderbuffer_target, renderbuffer);
+
+    if (!hasGlFramebufferRenderbuffer()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferRenderbuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10370,12 +14637,21 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTexture2D() const {
+    return mImports.glFramebufferTexture2D != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
                                             uint32_t framebuffer_attachment,
                                             uint32_t texture_target, uint32_t texture,
                                             int32_t level) {
     GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %" PRIu32 ", %" PRId32 ")", framebuffer_target,
                framebuffer_attachment, texture_target, texture, level);
+
+    if (!hasGlFramebufferTexture2D()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTexture2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10482,10 +14758,19 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFramebufferTextureLayer() const {
+    return mImports.glFramebufferTextureLayer != nullptr;
+}
+
 inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachment,
                                                uint32_t texture, int32_t level, int32_t layer) {
     GAPID_INFO("glFramebufferTextureLayer(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
                attachment, texture, level, layer);
+
+    if (!hasGlFramebufferTextureLayer()) {
+        GAPID_WARNING("Application called unsupported function glFramebufferTextureLayer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10531,8 +14816,15 @@ inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachm
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenFramebuffers() const { return mImports.glGenFramebuffers != nullptr; }
+
 inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     GAPID_INFO("glGenFramebuffers(%" PRId32 ", %p)", count, framebuffers);
+
+    if (!hasGlGenFramebuffers()) {
+        GAPID_WARNING("Application called unsupported function glGenFramebuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10560,8 +14852,17 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenRenderbuffers() const {
+    return mImports.glGenRenderbuffers != nullptr;
+}
+
 inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) {
     GAPID_INFO("glGenRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
+
+    if (!hasGlGenRenderbuffers()) {
+        GAPID_WARNING("Application called unsupported function glGenRenderbuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10591,11 +14892,21 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFramebufferAttachmentParameteriv() const {
+    return mImports.glGetFramebufferAttachmentParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target,
                                                            uint32_t attachment, uint32_t parameter,
                                                            int32_t* value) {
     GAPID_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)", framebuffer_target,
                attachment, parameter, value);
+
+    if (!hasGlGetFramebufferAttachmentParameteriv()) {
+        GAPID_WARNING(
+                "Application called unsupported function glGetFramebufferAttachmentParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10696,8 +15007,17 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFramebufferParameteriv() const {
+    return mImports.glGetFramebufferParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetFramebufferParameteriv(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlGetFramebufferParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetFramebufferParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10729,9 +15049,18 @@ inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetRenderbufferParameteriv() const {
+    return mImports.glGetRenderbufferParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter,
                                                   int32_t* values) {
     GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)", target, parameter, values);
+
+    if (!hasGlGetRenderbufferParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetRenderbufferParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10783,9 +15112,18 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlInvalidateFramebuffer() const {
+    return mImports.glInvalidateFramebuffer != nullptr;
+}
+
 inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
                                              uint32_t* attachments) {
     GAPID_INFO("glInvalidateFramebuffer(%u, %" PRId32 ", %p)", target, count, attachments);
+
+    if (!hasGlInvalidateFramebuffer()) {
+        GAPID_WARNING("Application called unsupported function glInvalidateFramebuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10808,12 +15146,21 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlInvalidateSubFramebuffer() const {
+    return mImports.glInvalidateSubFramebuffer != nullptr;
+}
+
 inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAttachments,
                                                 uint32_t* attachments, int32_t x, int32_t y,
                                                 int32_t width, int32_t height) {
     GAPID_INFO("glInvalidateSubFramebuffer(%u, %" PRId32 ", %p, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ")",
                target, numAttachments, attachments, x, y, width, height);
+
+    if (!hasGlInvalidateSubFramebuffer()) {
+        GAPID_WARNING("Application called unsupported function glInvalidateSubFramebuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10838,10 +15185,17 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsFramebuffer() const { return mImports.glIsFramebuffer != nullptr; }
+
 inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     GAPID_INFO("glIsFramebuffer(%" PRIu32 ")", framebuffer);
 
     uint8_t result = 0;
+
+    if (!hasGlIsFramebuffer()) {
+        GAPID_WARNING("Application called unsupported function glIsFramebuffer");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -10862,10 +15216,17 @@ inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsRenderbuffer() const { return mImports.glIsRenderbuffer != nullptr; }
+
 inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
     GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")", renderbuffer);
 
     uint8_t result = 0;
+
+    if (!hasGlIsRenderbuffer()) {
+        GAPID_WARNING("Application called unsupported function glIsRenderbuffer");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -10886,8 +15247,15 @@ inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
     return result;
 }
 
+inline bool GlesSpy::hasGlReadBuffer() const { return mImports.glReadBuffer != nullptr; }
+
 inline void GlesSpy::glReadBuffer(uint32_t src) {
     GAPID_INFO("glReadBuffer(%u)", src);
+
+    if (!hasGlReadBuffer()) {
+        GAPID_WARNING("Application called unsupported function glReadBuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10924,10 +15292,17 @@ inline void GlesSpy::glReadBuffer(uint32_t src) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReadPixels() const { return mImports.glReadPixels != nullptr; }
+
 inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
                                   uint32_t format, uint32_t type, void* data) {
     GAPID_INFO("glReadPixels(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)", x, y,
                width, height, format, type, data);
+
+    if (!hasGlReadPixels()) {
+        GAPID_WARNING("Application called unsupported function glReadPixels");
+        return;
+    }
 
     Observations observations;
     do {
@@ -10986,10 +15361,19 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorage() const {
+    return mImports.glRenderbufferStorage != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width,
                                            int32_t height) {
     GAPID_INFO("glRenderbufferStorage(%u, %u, %" PRId32 ", %" PRId32 ")", target, format, width,
                height);
+
+    if (!hasGlRenderbufferStorage()) {
+        GAPID_WARNING("Application called unsupported function glRenderbufferStorage");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11059,11 +15443,20 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlRenderbufferStorageMultisample() const {
+    return mImports.glRenderbufferStorageMultisample != nullptr;
+}
+
 inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
                                                       uint32_t format, int32_t width,
                                                       int32_t height) {
     GAPID_INFO("glRenderbufferStorageMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")",
                target, samples, format, width, height);
+
+    if (!hasGlRenderbufferStorageMultisample()) {
+        GAPID_WARNING("Application called unsupported function glRenderbufferStorageMultisample");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11122,8 +15515,15 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilMask() const { return mImports.glStencilMask != nullptr; }
+
 inline void GlesSpy::glStencilMask(uint32_t mask) {
     GAPID_INFO("glStencilMask(%" PRIu32 ")", mask);
+
+    if (!hasGlStencilMask()) {
+        GAPID_WARNING("Application called unsupported function glStencilMask");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11143,8 +15543,17 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlStencilMaskSeparate() const {
+    return mImports.glStencilMaskSeparate != nullptr;
+}
+
 inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     GAPID_INFO("glStencilMaskSeparate(%u, %" PRIu32 ")", face, mask);
+
+    if (!hasGlStencilMaskSeparate()) {
+        GAPID_WARNING("Application called unsupported function glStencilMaskSeparate");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11184,8 +15593,15 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisable() const { return mImports.glDisable != nullptr; }
+
 inline void GlesSpy::glDisable(uint32_t capability) {
     GAPID_INFO("glDisable(%u)", capability);
+
+    if (!hasGlDisable()) {
+        GAPID_WARNING("Application called unsupported function glDisable");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11228,8 +15644,15 @@ inline void GlesSpy::glDisable(uint32_t capability) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnable() const { return mImports.glEnable != nullptr; }
+
 inline void GlesSpy::glEnable(uint32_t capability) {
     GAPID_INFO("glEnable(%u)", capability);
+
+    if (!hasGlEnable()) {
+        GAPID_WARNING("Application called unsupported function glEnable");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11272,8 +15695,15 @@ inline void GlesSpy::glEnable(uint32_t capability) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFinish() const { return mImports.glFinish != nullptr; }
+
 inline void GlesSpy::glFinish() {
     GAPID_INFO("glFinish()");
+
+    if (!hasGlFinish()) {
+        GAPID_WARNING("Application called unsupported function glFinish");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11288,8 +15718,15 @@ inline void GlesSpy::glFinish() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFlush() const { return mImports.glFlush != nullptr; }
+
 inline void GlesSpy::glFlush() {
     GAPID_INFO("glFlush()");
+
+    if (!hasGlFlush()) {
+        GAPID_WARNING("Application called unsupported function glFlush");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11304,8 +15741,17 @@ inline void GlesSpy::glFlush() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFlushMappedBufferRange() const {
+    return mImports.glFlushMappedBufferRange != nullptr;
+}
+
 inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, int32_t length) {
     GAPID_INFO("glFlushMappedBufferRange(%u, %" PRId32 ", %" PRId32 ")", target, offset, length);
+
+    if (!hasGlFlushMappedBufferRange()) {
+        GAPID_WARNING("Application called unsupported function glFlushMappedBufferRange");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11332,10 +15778,17 @@ inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetError() const { return mImports.glGetError != nullptr; }
+
 inline uint32_t GlesSpy::glGetError() {
     GAPID_INFO("glGetError()");
 
     uint32_t result = 0;
+
+    if (!hasGlGetError()) {
+        GAPID_WARNING("Application called unsupported function glGetError");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11353,8 +15806,15 @@ inline uint32_t GlesSpy::glGetError() {
     return result;
 }
 
+inline bool GlesSpy::hasGlHint() const { return mImports.glHint != nullptr; }
+
 inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
     GAPID_INFO("glHint(%u, %u)", target, mode);
+
+    if (!hasGlHint()) {
+        GAPID_WARNING("Application called unsupported function glHint");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11390,8 +15850,17 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlActiveShaderProgram() const {
+    return mImports.glActiveShaderProgram != nullptr;
+}
+
 inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) {
     GAPID_INFO("glActiveShaderProgram(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
+
+    if (!hasGlActiveShaderProgram()) {
+        GAPID_WARNING("Application called unsupported function glActiveShaderProgram");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11406,8 +15875,15 @@ inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlAttachShader() const { return mImports.glAttachShader != nullptr; }
+
 inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
     GAPID_INFO("glAttachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
+
+    if (!hasGlAttachShader()) {
+        GAPID_WARNING("Application called unsupported function glAttachShader");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11428,8 +15904,17 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindAttribLocation() const {
+    return mImports.glBindAttribLocation != nullptr;
+}
+
 inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, char* name) {
     GAPID_INFO("glBindAttribLocation(%" PRIu32 ", %" PRIu32 ", %s)", program, location, name);
+
+    if (!hasGlBindAttribLocation()) {
+        GAPID_WARNING("Application called unsupported function glBindAttribLocation");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11449,8 +15934,17 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, c
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindProgramPipeline() const {
+    return mImports.glBindProgramPipeline != nullptr;
+}
+
 inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
     GAPID_INFO("glBindProgramPipeline(%" PRIu32 ")", pipeline);
+
+    if (!hasGlBindProgramPipeline()) {
+        GAPID_WARNING("Application called unsupported function glBindProgramPipeline");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11465,8 +15959,15 @@ inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompileShader() const { return mImports.glCompileShader != nullptr; }
+
 inline void GlesSpy::glCompileShader(uint32_t shader) {
     GAPID_INFO("glCompileShader(%" PRIu32 ")", shader);
+
+    if (!hasGlCompileShader()) {
+        GAPID_WARNING("Application called unsupported function glCompileShader");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11481,10 +15982,17 @@ inline void GlesSpy::glCompileShader(uint32_t shader) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCreateProgram() const { return mImports.glCreateProgram != nullptr; }
+
 inline uint32_t GlesSpy::glCreateProgram() {
     GAPID_INFO("glCreateProgram()");
 
     uint32_t result = 0;
+
+    if (!hasGlCreateProgram()) {
+        GAPID_WARNING("Application called unsupported function glCreateProgram");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11509,10 +16017,17 @@ inline uint32_t GlesSpy::glCreateProgram() {
     return result;
 }
 
+inline bool GlesSpy::hasGlCreateShader() const { return mImports.glCreateShader != nullptr; }
+
 inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
     GAPID_INFO("glCreateShader(%u)", type);
 
     uint32_t result = 0;
+
+    if (!hasGlCreateShader()) {
+        GAPID_WARNING("Application called unsupported function glCreateShader");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11549,10 +16064,19 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
     return result;
 }
 
+inline bool GlesSpy::hasGlCreateShaderProgramv() const {
+    return mImports.glCreateShaderProgramv != nullptr;
+}
+
 inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, char** strings) {
     GAPID_INFO("glCreateShaderProgramv(%u, %" PRId32 ", %p)", type, count, strings);
 
     uint32_t result = 0;
+
+    if (!hasGlCreateShaderProgramv()) {
+        GAPID_WARNING("Application called unsupported function glCreateShaderProgramv");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11581,8 +16105,15 @@ inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, ch
     return result;
 }
 
+inline bool GlesSpy::hasGlDeleteProgram() const { return mImports.glDeleteProgram != nullptr; }
+
 inline void GlesSpy::glDeleteProgram(uint32_t program) {
     GAPID_INFO("glDeleteProgram(%" PRIu32 ")", program);
+
+    if (!hasGlDeleteProgram()) {
+        GAPID_WARNING("Application called unsupported function glDeleteProgram");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11601,8 +16132,17 @@ inline void GlesSpy::glDeleteProgram(uint32_t program) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteProgramPipelines() const {
+    return mImports.glDeleteProgramPipelines != nullptr;
+}
+
 inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
     GAPID_INFO("glDeleteProgramPipelines(%" PRId32 ", %p)", n, pipelines);
+
+    if (!hasGlDeleteProgramPipelines()) {
+        GAPID_WARNING("Application called unsupported function glDeleteProgramPipelines");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11619,8 +16159,15 @@ inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteShader() const { return mImports.glDeleteShader != nullptr; }
+
 inline void GlesSpy::glDeleteShader(uint32_t shader) {
     GAPID_INFO("glDeleteShader(%" PRIu32 ")", shader);
+
+    if (!hasGlDeleteShader()) {
+        GAPID_WARNING("Application called unsupported function glDeleteShader");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11641,8 +16188,15 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDetachShader() const { return mImports.glDetachShader != nullptr; }
+
 inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
     GAPID_INFO("glDetachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
+
+    if (!hasGlDetachShader()) {
+        GAPID_WARNING("Application called unsupported function glDetachShader");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11663,10 +16217,17 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDispatchCompute() const { return mImports.glDispatchCompute != nullptr; }
+
 inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_groups_y,
                                        uint32_t num_groups_z) {
     GAPID_INFO("glDispatchCompute(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", num_groups_x,
                num_groups_y, num_groups_z);
+
+    if (!hasGlDispatchCompute()) {
+        GAPID_WARNING("Application called unsupported function glDispatchCompute");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11682,8 +16243,17 @@ inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_group
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDispatchComputeIndirect() const {
+    return mImports.glDispatchComputeIndirect != nullptr;
+}
+
 inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
     GAPID_INFO("glDispatchComputeIndirect(%" PRId32 ")", indirect);
+
+    if (!hasGlDispatchComputeIndirect()) {
+        GAPID_WARNING("Application called unsupported function glDispatchComputeIndirect");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11698,8 +16268,17 @@ inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenProgramPipelines() const {
+    return mImports.glGenProgramPipelines != nullptr;
+}
+
 inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
     GAPID_INFO("glGenProgramPipelines(%" PRId32 ", %p)", n, pipelines);
+
+    if (!hasGlGenProgramPipelines()) {
+        GAPID_WARNING("Application called unsupported function glGenProgramPipelines");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11716,11 +16295,18 @@ inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetActiveAttrib() const { return mImports.glGetActiveAttrib != nullptr; }
+
 inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                        uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveAttrib(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)", program,
                location, buffer_size, buffer_bytes_written, vector_count, type, name);
+
+    if (!hasGlGetActiveAttrib()) {
+        GAPID_WARNING("Application called unsupported function glGetActiveAttrib");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11754,11 +16340,20 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetActiveUniform() const {
+    return mImports.glGetActiveUniform != nullptr;
+}
+
 inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
                                         int32_t* buffer_bytes_written, int32_t* vector_count,
                                         uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)", program,
                location, buffer_size, buffer_bytes_written, vector_count, type, name);
+
+    if (!hasGlGetActiveUniform()) {
+        GAPID_WARNING("Application called unsupported function glGetActiveUniform");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11792,11 +16387,20 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetActiveUniformBlockName() const {
+    return mImports.glGetActiveUniformBlockName != nullptr;
+}
+
 inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t uniform_block_index,
                                                  int32_t buffer_size, int32_t* buffer_bytes_written,
                                                  char* name) {
     GAPID_INFO("glGetActiveUniformBlockName(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)",
                program, uniform_block_index, buffer_size, buffer_bytes_written, name);
+
+    if (!hasGlGetActiveUniformBlockName()) {
+        GAPID_WARNING("Application called unsupported function glGetActiveUniformBlockName");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11820,10 +16424,19 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetActiveUniformBlockiv() const {
+    return mImports.glGetActiveUniformBlockiv != nullptr;
+}
+
 inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t uniform_block_index,
                                                uint32_t parameter_name, int32_t* parameters) {
     GAPID_INFO("glGetActiveUniformBlockiv(%" PRIu32 ", %" PRIu32 ", %u, %p)", program,
                uniform_block_index, parameter_name, parameters);
+
+    if (!hasGlGetActiveUniformBlockiv()) {
+        GAPID_WARNING("Application called unsupported function glGetActiveUniformBlockiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11854,11 +16467,20 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetActiveUniformsiv() const {
+    return mImports.glGetActiveUniformsiv != nullptr;
+}
+
 inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_count,
                                            uint32_t* uniform_indices, uint32_t parameter_name,
                                            int32_t* parameters) {
     GAPID_INFO("glGetActiveUniformsiv(%" PRIu32 ", %" PRId32 ", %p, %u, %p)", program,
                uniform_count, uniform_indices, parameter_name, parameters);
+
+    if (!hasGlGetActiveUniformsiv()) {
+        GAPID_WARNING("Application called unsupported function glGetActiveUniformsiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11893,10 +16515,19 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_cou
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetAttachedShaders() const {
+    return mImports.glGetAttachedShaders != nullptr;
+}
+
 inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_length,
                                           int32_t* shaders_length_written, uint32_t* shaders) {
     GAPID_INFO("glGetAttachedShaders(%" PRIu32 ", %" PRId32 ", %p, %p)", program, buffer_length,
                shaders_length_written, shaders);
+
+    if (!hasGlGetAttachedShaders()) {
+        GAPID_WARNING("Application called unsupported function glGetAttachedShaders");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11929,10 +16560,19 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetAttribLocation() const {
+    return mImports.glGetAttribLocation != nullptr;
+}
+
 inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetAttribLocation(%" PRIu32 ", %s)", program, name);
 
     int32_t result = 0;
+
+    if (!hasGlGetAttribLocation()) {
+        GAPID_WARNING("Application called unsupported function glGetAttribLocation");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11950,10 +16590,19 @@ inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetFragDataLocation() const {
+    return mImports.glGetFragDataLocation != nullptr;
+}
+
 inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetFragDataLocation(%" PRIu32 ", %p)", program, name);
 
     int32_t result = 0;
+
+    if (!hasGlGetFragDataLocation()) {
+        GAPID_WARNING("Application called unsupported function glGetFragDataLocation");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -11974,10 +16623,19 @@ inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetProgramBinary() const {
+    return mImports.glGetProgramBinary != nullptr;
+}
+
 inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32_t* length,
                                         uint32_t* binaryFormat, void* binary) {
     GAPID_INFO("glGetProgramBinary(%" PRIu32 ", %" PRId32 ", %p, %p, %p)", program, bufSize, length,
                binaryFormat, binary);
+
+    if (!hasGlGetProgramBinary()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramBinary");
+        return;
+    }
 
     Observations observations;
     do {
@@ -11999,10 +16657,19 @@ inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramInfoLog() const {
+    return mImports.glGetProgramInfoLog != nullptr;
+}
+
 inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length,
                                          int32_t* string_length_written, char* info) {
     GAPID_INFO("glGetProgramInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", program, buffer_length,
                string_length_written, info);
+
+    if (!hasGlGetProgramInfoLog()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramInfoLog");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12038,10 +16705,19 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramInterfaceiv() const {
+    return mImports.glGetProgramInterfaceiv != nullptr;
+}
+
 inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programInterface,
                                              uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetProgramInterfaceiv(%" PRIu32 ", %u, %u, %p)", program, programInterface, pname,
                params);
+
+    if (!hasGlGetProgramInterfaceiv()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramInterfaceiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12079,10 +16755,19 @@ inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programI
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramPipelineInfoLog() const {
+    return mImports.glGetProgramPipelineInfoLog != nullptr;
+}
+
 inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufSize,
                                                  int32_t* length, char* infoLog) {
     GAPID_INFO("glGetProgramPipelineInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", pipeline, bufSize,
                length, infoLog);
+
+    if (!hasGlGetProgramPipelineInfoLog()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramPipelineInfoLog");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12102,8 +16787,17 @@ inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufS
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramPipelineiv() const {
+    return mImports.glGetProgramPipelineiv != nullptr;
+}
+
 inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetProgramPipelineiv(%" PRIu32 ", %u, %p)", pipeline, pname, params);
+
+    if (!hasGlGetProgramPipelineiv()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramPipelineiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12131,11 +16825,20 @@ inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramResourceIndex() const {
+    return mImports.glGetProgramResourceIndex != nullptr;
+}
+
 inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t programInterface,
                                                    char* name) {
     GAPID_INFO("glGetProgramResourceIndex(%" PRIu32 ", %u, %p)", program, programInterface, name);
 
     uint32_t result = 0;
+
+    if (!hasGlGetProgramResourceIndex()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramResourceIndex");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12168,12 +16871,21 @@ inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t pr
     return result;
 }
 
+inline bool GlesSpy::hasGlGetProgramResourceLocation() const {
+    return mImports.glGetProgramResourceLocation != nullptr;
+}
+
 inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t programInterface,
                                                      char* name) {
     GAPID_INFO("glGetProgramResourceLocation(%" PRIu32 ", %u, %p)", program, programInterface,
                name);
 
     int32_t result = 0;
+
+    if (!hasGlGetProgramResourceLocation()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramResourceLocation");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12203,11 +16915,20 @@ inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t 
     return result;
 }
 
+inline bool GlesSpy::hasGlGetProgramResourceName() const {
+    return mImports.glGetProgramResourceName != nullptr;
+}
+
 inline void GlesSpy::glGetProgramResourceName(uint32_t program, uint32_t programInterface,
                                               uint32_t index, int32_t bufSize, int32_t* length,
                                               char* name) {
     GAPID_INFO("glGetProgramResourceName(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %p)",
                program, programInterface, index, bufSize, length, name);
+
+    if (!hasGlGetProgramResourceName()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramResourceName");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12238,12 +16959,21 @@ inline void GlesSpy::glGetProgramResourceName(uint32_t program, uint32_t program
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramResourceiv() const {
+    return mImports.glGetProgramResourceiv != nullptr;
+}
+
 inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programInterface,
                                             uint32_t index, int32_t propCount, uint32_t* props,
                                             int32_t bufSize, int32_t* length, int32_t* params) {
     GAPID_INFO("glGetProgramResourceiv(%" PRIu32 ", %u, %" PRIu32 ", %" PRId32 ", %p, %" PRId32
                ", %p, %p)",
                program, programInterface, index, propCount, props, bufSize, length, params);
+
+    if (!hasGlGetProgramResourceiv()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramResourceiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12279,8 +17009,15 @@ inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programIn
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetProgramiv() const { return mImports.glGetProgramiv != nullptr; }
+
 inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetProgramiv(%" PRIu32 ", %u, %p)", program, parameter, value);
+
+    if (!hasGlGetProgramiv()) {
+        GAPID_WARNING("Application called unsupported function glGetProgramiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12329,10 +17066,19 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetShaderInfoLog() const {
+    return mImports.glGetShaderInfoLog != nullptr;
+}
+
 inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
                                         int32_t* string_length_written, char* info) {
     GAPID_INFO("glGetShaderInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, buffer_length,
                string_length_written, info);
+
+    if (!hasGlGetShaderInfoLog()) {
+        GAPID_WARNING("Application called unsupported function glGetShaderInfoLog");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12368,10 +17114,19 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetShaderPrecisionFormat() const {
+    return mImports.glGetShaderPrecisionFormat != nullptr;
+}
+
 inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                                 int32_t* range, int32_t* precision) {
     GAPID_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)", shader_type, precision_type, range,
                precision);
+
+    if (!hasGlGetShaderPrecisionFormat()) {
+        GAPID_WARNING("Application called unsupported function glGetShaderPrecisionFormat");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12409,10 +17164,17 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetShaderSource() const { return mImports.glGetShaderSource != nullptr; }
+
 inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
                                        int32_t* string_length_written, char* source) {
     GAPID_INFO("glGetShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, buffer_length,
                string_length_written, source);
+
+    if (!hasGlGetShaderSource()) {
+        GAPID_WARNING("Application called unsupported function glGetShaderSource");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12448,8 +17210,15 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetShaderiv() const { return mImports.glGetShaderiv != nullptr; }
+
 inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value) {
     GAPID_INFO("glGetShaderiv(%" PRIu32 ", %u, %p)", shader, parameter, value);
+
+    if (!hasGlGetShaderiv()) {
+        GAPID_WARNING("Application called unsupported function glGetShaderiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12507,10 +17276,19 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetUniformBlockIndex() const {
+    return mImports.glGetUniformBlockIndex != nullptr;
+}
+
 inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformBlockName) {
     GAPID_INFO("glGetUniformBlockIndex(%" PRIu32 ", %p)", program, uniformBlockName);
 
     uint32_t result = 0;
+
+    if (!hasGlGetUniformBlockIndex()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformBlockIndex");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12531,10 +17309,19 @@ inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformB
     return result;
 }
 
+inline bool GlesSpy::hasGlGetUniformIndices() const {
+    return mImports.glGetUniformIndices != nullptr;
+}
+
 inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
                                          char** uniformNames, uint32_t* uniformIndices) {
     GAPID_INFO("glGetUniformIndices(%" PRIu32 ", %" PRId32 ", %p, %p)", program, uniformCount,
                uniformNames, uniformIndices);
+
+    if (!hasGlGetUniformIndices()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformIndices");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12554,10 +17341,19 @@ inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetUniformLocation() const {
+    return mImports.glGetUniformLocation != nullptr;
+}
+
 inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetUniformLocation(%" PRIu32 ", %s)", program, name);
 
     int32_t result = 0;
+
+    if (!hasGlGetUniformLocation()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformLocation");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12575,8 +17371,15 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetUniformfv() const { return mImports.glGetUniformfv != nullptr; }
+
 inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* values) {
     GAPID_INFO("glGetUniformfv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
+
+    if (!hasGlGetUniformfv()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12594,8 +17397,15 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetUniformiv() const { return mImports.glGetUniformiv != nullptr; }
+
 inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t* values) {
     GAPID_INFO("glGetUniformiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
+
+    if (!hasGlGetUniformiv()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12613,8 +17423,15 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetUniformuiv() const { return mImports.glGetUniformuiv != nullptr; }
+
 inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params) {
     GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, params);
+
+    if (!hasGlGetUniformuiv()) {
+        GAPID_WARNING("Application called unsupported function glGetUniformuiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12632,10 +17449,17 @@ inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsProgram() const { return mImports.glIsProgram != nullptr; }
+
 inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
     GAPID_INFO("glIsProgram(%" PRIu32 ")", program);
 
     uint8_t result = 0;
+
+    if (!hasGlIsProgram()) {
+        GAPID_WARNING("Application called unsupported function glIsProgram");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12656,10 +17480,19 @@ inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsProgramPipeline() const {
+    return mImports.glIsProgramPipeline != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
     GAPID_INFO("glIsProgramPipeline(%" PRIu32 ")", pipeline);
 
     uint8_t result = 0;
+
+    if (!hasGlIsProgramPipeline()) {
+        GAPID_WARNING("Application called unsupported function glIsProgramPipeline");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12677,10 +17510,17 @@ inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsShader() const { return mImports.glIsShader != nullptr; }
+
 inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
     GAPID_INFO("glIsShader(%" PRIu32 ")", shader);
 
     uint8_t result = 0;
+
+    if (!hasGlIsShader()) {
+        GAPID_WARNING("Application called unsupported function glIsShader");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -12701,8 +17541,15 @@ inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
     return result;
 }
 
+inline bool GlesSpy::hasGlLinkProgram() const { return mImports.glLinkProgram != nullptr; }
+
 inline void GlesSpy::glLinkProgram(uint32_t program) {
     GAPID_INFO("glLinkProgram(%" PRIu32 ")", program);
+
+    if (!hasGlLinkProgram()) {
+        GAPID_WARNING("Application called unsupported function glLinkProgram");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12717,8 +17564,15 @@ inline void GlesSpy::glLinkProgram(uint32_t program) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMemoryBarrier() const { return mImports.glMemoryBarrier != nullptr; }
+
 inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
     GAPID_INFO("glMemoryBarrier(%u)", barriers);
+
+    if (!hasGlMemoryBarrier()) {
+        GAPID_WARNING("Application called unsupported function glMemoryBarrier");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12773,8 +17627,17 @@ inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlMemoryBarrierByRegion() const {
+    return mImports.glMemoryBarrierByRegion != nullptr;
+}
+
 inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
     GAPID_INFO("glMemoryBarrierByRegion(%u)", barriers);
+
+    if (!hasGlMemoryBarrierByRegion()) {
+        GAPID_WARNING("Application called unsupported function glMemoryBarrierByRegion");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12829,10 +17692,17 @@ inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramBinary() const { return mImports.glProgramBinary != nullptr; }
+
 inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, void* binary,
                                      int32_t length) {
     GAPID_INFO("glProgramBinary(%" PRIu32 ", %u, %p, %" PRId32 ")", program, binaryFormat, binary,
                length);
+
+    if (!hasGlProgramBinary()) {
+        GAPID_WARNING("Application called unsupported function glProgramBinary");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12852,8 +17722,17 @@ inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, vo
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramParameteri() const {
+    return mImports.glProgramParameteri != nullptr;
+}
+
 inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32_t value) {
     GAPID_INFO("glProgramParameteri(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
+
+    if (!hasGlProgramParameteri()) {
+        GAPID_WARNING("Application called unsupported function glProgramParameteri");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12878,8 +17757,17 @@ inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1f() const {
+    return mImports.glProgramUniform1f != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, float v0) {
     GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
+
+    if (!hasGlProgramUniform1f()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12894,10 +17782,19 @@ inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1fv() const {
+    return mImports.glProgramUniform1fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
     GAPID_INFO("glProgramUniform1fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform1fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12915,8 +17812,17 @@ inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1i() const {
+    return mImports.glProgramUniform1i != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int32_t v0) {
     GAPID_INFO("glProgramUniform1i(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", program, location, v0);
+
+    if (!hasGlProgramUniform1i()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12931,10 +17837,19 @@ inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1iv() const {
+    return mImports.glProgramUniform1iv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
     GAPID_INFO("glProgramUniform1iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform1iv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12952,8 +17867,17 @@ inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1ui() const {
+    return mImports.glProgramUniform1ui != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uint32_t v0) {
     GAPID_INFO("glProgramUniform1ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", program, location, v0);
+
+    if (!hasGlProgramUniform1ui()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12968,10 +17892,19 @@ inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform1uiv() const {
+    return mImports.glProgramUniform1uiv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
     GAPID_INFO("glProgramUniform1uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform1uiv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform1uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -12989,8 +17922,17 @@ inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2f() const {
+    return mImports.glProgramUniform2f != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, float v0, float v1) {
     GAPID_INFO("glProgramUniform2f(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location, v0, v1);
+
+    if (!hasGlProgramUniform2f()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13005,10 +17947,19 @@ inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2fv() const {
+    return mImports.glProgramUniform2fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
     GAPID_INFO("glProgramUniform2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform2fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13026,10 +17977,19 @@ inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2i() const {
+    return mImports.glProgramUniform2i != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int32_t v0,
                                         int32_t v1) {
     GAPID_INFO("glProgramUniform2i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", program,
                location, v0, v1);
+
+    if (!hasGlProgramUniform2i()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13044,10 +18004,19 @@ inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2iv() const {
+    return mImports.glProgramUniform2iv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
     GAPID_INFO("glProgramUniform2iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform2iv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13065,10 +18034,19 @@ inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2ui() const {
+    return mImports.glProgramUniform2ui != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1) {
     GAPID_INFO("glProgramUniform2ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")", program,
                location, v0, v1);
+
+    if (!hasGlProgramUniform2ui()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13083,10 +18061,19 @@ inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform2uiv() const {
+    return mImports.glProgramUniform2uiv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
     GAPID_INFO("glProgramUniform2uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform2uiv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform2uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13104,10 +18091,19 @@ inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3f() const {
+    return mImports.glProgramUniform3f != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, float v0, float v1,
                                         float v2) {
     GAPID_INFO("glProgramUniform3f(%" PRIu32 ", %" PRId32 ", %f, %f, %f)", program, location, v0,
                v1, v2);
+
+    if (!hasGlProgramUniform3f()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13122,10 +18118,19 @@ inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3fv() const {
+    return mImports.glProgramUniform3fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
     GAPID_INFO("glProgramUniform3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform3fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13143,11 +18148,20 @@ inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3i() const {
+    return mImports.glProgramUniform3i != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                         int32_t v2) {
     GAPID_INFO("glProgramUniform3i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ")",
                program, location, v0, v1, v2);
+
+    if (!hasGlProgramUniform3i()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13162,10 +18176,19 @@ inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3iv() const {
+    return mImports.glProgramUniform3iv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
     GAPID_INFO("glProgramUniform3iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform3iv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13183,11 +18206,20 @@ inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3ui() const {
+    return mImports.glProgramUniform3ui != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1, uint32_t v2) {
     GAPID_INFO("glProgramUniform3ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
                ")",
                program, location, v0, v1, v2);
+
+    if (!hasGlProgramUniform3ui()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13202,10 +18234,19 @@ inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform3uiv() const {
+    return mImports.glProgramUniform3uiv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
     GAPID_INFO("glProgramUniform3uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform3uiv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform3uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13223,10 +18264,19 @@ inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4f() const {
+    return mImports.glProgramUniform4f != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, float v0, float v1,
                                         float v2, float v3) {
     GAPID_INFO("glProgramUniform4f(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)", program, location,
                v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4f()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13241,10 +18291,19 @@ inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4fv() const {
+    return mImports.glProgramUniform4fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int32_t count,
                                          float* value) {
     GAPID_INFO("glProgramUniform4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform4fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13262,11 +18321,20 @@ inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4i() const {
+    return mImports.glProgramUniform4i != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int32_t v0, int32_t v1,
                                         int32_t v2, int32_t v3) {
     GAPID_INFO("glProgramUniform4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ")",
                program, location, v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4i()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13281,10 +18349,19 @@ inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4iv() const {
+    return mImports.glProgramUniform4iv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int32_t count,
                                          int32_t* value) {
     GAPID_INFO("glProgramUniform4iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform4iv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13302,11 +18379,20 @@ inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4ui() const {
+    return mImports.glProgramUniform4ui != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uint32_t v0,
                                          uint32_t v1, uint32_t v2, uint32_t v3) {
     GAPID_INFO("glProgramUniform4ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
                ", %" PRIu32 ")",
                program, location, v0, v1, v2, v3);
+
+    if (!hasGlProgramUniform4ui()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13321,10 +18407,19 @@ inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniform4uiv() const {
+    return mImports.glProgramUniform4uiv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, int32_t count,
                                           uint32_t* value) {
     GAPID_INFO("glProgramUniform4uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
                count, value);
+
+    if (!hasGlProgramUniform4uiv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniform4uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13342,10 +18437,19 @@ inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2fv() const {
+    return mImports.glProgramUniformMatrix2fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13363,10 +18467,19 @@ inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t locatio
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2x3fv() const {
+    return mImports.glProgramUniformMatrix2x3fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix2x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2x3fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2x3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13384,10 +18497,19 @@ inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix2x4fv() const {
+    return mImports.glProgramUniformMatrix2x4fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix2x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix2x4fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix2x4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13405,10 +18527,19 @@ inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3fv() const {
+    return mImports.glProgramUniformMatrix3fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13426,10 +18557,19 @@ inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t locatio
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3x2fv() const {
+    return mImports.glProgramUniformMatrix3x2fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix3x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3x2fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3x2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13447,10 +18587,19 @@ inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix3x4fv() const {
+    return mImports.glProgramUniformMatrix3x4fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix3x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix3x4fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix3x4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13468,10 +18617,19 @@ inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4fv() const {
+    return mImports.glProgramUniformMatrix4fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t location, int32_t count,
                                                uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13489,10 +18647,19 @@ inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t locatio
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4x2fv() const {
+    return mImports.glProgramUniformMatrix4x2fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix4x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4x2fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4x2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13510,10 +18677,19 @@ inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlProgramUniformMatrix4x3fv() const {
+    return mImports.glProgramUniformMatrix4x3fv != nullptr;
+}
+
 inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t location, int32_t count,
                                                  uint8_t transpose, float* value) {
     GAPID_INFO("glProgramUniformMatrix4x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)",
                program, location, count, transpose, value);
+
+    if (!hasGlProgramUniformMatrix4x3fv()) {
+        GAPID_WARNING("Application called unsupported function glProgramUniformMatrix4x3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13531,8 +18707,17 @@ inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t locat
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlReleaseShaderCompiler() const {
+    return mImports.glReleaseShaderCompiler != nullptr;
+}
+
 inline void GlesSpy::glReleaseShaderCompiler() {
     GAPID_INFO("glReleaseShaderCompiler()");
+
+    if (!hasGlReleaseShaderCompiler()) {
+        GAPID_WARNING("Application called unsupported function glReleaseShaderCompiler");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13547,10 +18732,17 @@ inline void GlesSpy::glReleaseShaderCompiler() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlShaderBinary() const { return mImports.glShaderBinary != nullptr; }
+
 inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t binary_format,
                                     void* binary, int32_t binary_size) {
     GAPID_INFO("glShaderBinary(%" PRId32 ", %p, %u, %p, %" PRId32 ")", count, shaders,
                binary_format, binary, binary_size);
+
+    if (!hasGlShaderBinary()) {
+        GAPID_WARNING("Application called unsupported function glShaderBinary");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13573,9 +18765,16 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlShaderSource() const { return mImports.glShaderSource != nullptr; }
+
 inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** source,
                                     int32_t* length) {
     GAPID_INFO("glShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)", shader, count, source, length);
+
+    if (!hasGlShaderSource()) {
+        GAPID_WARNING("Application called unsupported function glShaderSource");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13609,8 +18808,15 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1f() const { return mImports.glUniform1f != nullptr; }
+
 inline void GlesSpy::glUniform1f(int32_t location, float value) {
     GAPID_INFO("glUniform1f(%" PRId32 ", %f)", location, value);
+
+    if (!hasGlUniform1f()) {
+        GAPID_WARNING("Application called unsupported function glUniform1f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13635,8 +18841,15 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1fv() const { return mImports.glUniform1fv != nullptr; }
+
 inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform1fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform1fv()) {
+        GAPID_WARNING("Application called unsupported function glUniform1fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13663,8 +18876,15 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1i() const { return mImports.glUniform1i != nullptr; }
+
 inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
     GAPID_INFO("glUniform1i(%" PRId32 ", %" PRId32 ")", location, value);
+
+    if (!hasGlUniform1i()) {
+        GAPID_WARNING("Application called unsupported function glUniform1i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13689,8 +18909,15 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1iv() const { return mImports.glUniform1iv != nullptr; }
+
 inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform1iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform1iv()) {
+        GAPID_WARNING("Application called unsupported function glUniform1iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13717,8 +18944,15 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1ui() const { return mImports.glUniform1ui != nullptr; }
+
 inline void GlesSpy::glUniform1ui(int32_t location, uint32_t v0) {
     GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")", location, v0);
+
+    if (!hasGlUniform1ui()) {
+        GAPID_WARNING("Application called unsupported function glUniform1ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13733,8 +18967,15 @@ inline void GlesSpy::glUniform1ui(int32_t location, uint32_t v0) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform1uiv() const { return mImports.glUniform1uiv != nullptr; }
+
 inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* value) {
     GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+
+    if (!hasGlUniform1uiv()) {
+        GAPID_WARNING("Application called unsupported function glUniform1uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13752,8 +18993,15 @@ inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* va
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2f() const { return mImports.glUniform2f != nullptr; }
+
 inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
     GAPID_INFO("glUniform2f(%" PRId32 ", %f, %f)", location, value0, value1);
+
+    if (!hasGlUniform2f()) {
+        GAPID_WARNING("Application called unsupported function glUniform2f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13778,8 +19026,15 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2fv() const { return mImports.glUniform2fv != nullptr; }
+
 inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform2fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform2fv()) {
+        GAPID_WARNING("Application called unsupported function glUniform2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13806,8 +19061,15 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2i() const { return mImports.glUniform2i != nullptr; }
+
 inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value1) {
     GAPID_INFO("glUniform2i(%" PRId32 ", %" PRId32 ", %" PRId32 ")", location, value0, value1);
+
+    if (!hasGlUniform2i()) {
+        GAPID_WARNING("Application called unsupported function glUniform2i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13832,8 +19094,15 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2iv() const { return mImports.glUniform2iv != nullptr; }
+
 inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform2iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform2iv()) {
+        GAPID_WARNING("Application called unsupported function glUniform2iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13860,8 +19129,15 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2ui() const { return mImports.glUniform2ui != nullptr; }
+
 inline void GlesSpy::glUniform2ui(int32_t location, uint32_t v0, uint32_t v1) {
     GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")", location, v0, v1);
+
+    if (!hasGlUniform2ui()) {
+        GAPID_WARNING("Application called unsupported function glUniform2ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13876,8 +19152,15 @@ inline void GlesSpy::glUniform2ui(int32_t location, uint32_t v0, uint32_t v1) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform2uiv() const { return mImports.glUniform2uiv != nullptr; }
+
 inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* value) {
     GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+
+    if (!hasGlUniform2uiv()) {
+        GAPID_WARNING("Application called unsupported function glUniform2uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13895,8 +19178,15 @@ inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* va
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3f() const { return mImports.glUniform3f != nullptr; }
+
 inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, float value2) {
     GAPID_INFO("glUniform3f(%" PRId32 ", %f, %f, %f)", location, value0, value1, value2);
+
+    if (!hasGlUniform3f()) {
+        GAPID_WARNING("Application called unsupported function glUniform3f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13921,8 +19211,15 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3fv() const { return mImports.glUniform3fv != nullptr; }
+
 inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform3fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform3fv()) {
+        GAPID_WARNING("Application called unsupported function glUniform3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13949,9 +19246,16 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3i() const { return mImports.glUniform3i != nullptr; }
+
 inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value1, int32_t value2) {
     GAPID_INFO("glUniform3i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", location, value0,
                value1, value2);
+
+    if (!hasGlUniform3i()) {
+        GAPID_WARNING("Application called unsupported function glUniform3i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -13976,8 +19280,15 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3iv() const { return mImports.glUniform3iv != nullptr; }
+
 inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform3iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform3iv()) {
+        GAPID_WARNING("Application called unsupported function glUniform3iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14004,9 +19315,16 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3ui() const { return mImports.glUniform3ui != nullptr; }
+
 inline void GlesSpy::glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2) {
     GAPID_INFO("glUniform3ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", location, v0, v1,
                v2);
+
+    if (!hasGlUniform3ui()) {
+        GAPID_WARNING("Application called unsupported function glUniform3ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14021,8 +19339,15 @@ inline void GlesSpy::glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform3uiv() const { return mImports.glUniform3uiv != nullptr; }
+
 inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* value) {
     GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+
+    if (!hasGlUniform3uiv()) {
+        GAPID_WARNING("Application called unsupported function glUniform3uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14040,10 +19365,17 @@ inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* va
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4f() const { return mImports.glUniform4f != nullptr; }
+
 inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, float value2,
                                  float value3) {
     GAPID_INFO("glUniform4f(%" PRId32 ", %f, %f, %f, %f)", location, value0, value1, value2,
                value3);
+
+    if (!hasGlUniform4f()) {
+        GAPID_WARNING("Application called unsupported function glUniform4f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14068,8 +19400,15 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4fv() const { return mImports.glUniform4fv != nullptr; }
+
 inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform4fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform4fv()) {
+        GAPID_WARNING("Application called unsupported function glUniform4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14096,10 +19435,17 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4i() const { return mImports.glUniform4i != nullptr; }
+
 inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2,
                                  int32_t value3) {
     GAPID_INFO("glUniform4i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                location, value0, value1, value2, value3);
+
+    if (!hasGlUniform4i()) {
+        GAPID_WARNING("Application called unsupported function glUniform4i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14124,8 +19470,15 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4iv() const { return mImports.glUniform4iv != nullptr; }
+
 inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform4iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
+
+    if (!hasGlUniform4iv()) {
+        GAPID_WARNING("Application called unsupported function glUniform4iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14152,10 +19505,17 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4ui() const { return mImports.glUniform4ui != nullptr; }
+
 inline void GlesSpy::glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2,
                                   uint32_t v3) {
     GAPID_INFO("glUniform4ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")",
                location, v0, v1, v2, v3);
+
+    if (!hasGlUniform4ui()) {
+        GAPID_WARNING("Application called unsupported function glUniform4ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14170,8 +19530,15 @@ inline void GlesSpy::glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniform4uiv() const { return mImports.glUniform4uiv != nullptr; }
+
 inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* value) {
     GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+
+    if (!hasGlUniform4uiv()) {
+        GAPID_WARNING("Application called unsupported function glUniform4uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14189,10 +19556,19 @@ inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* va
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformBlockBinding() const {
+    return mImports.glUniformBlockBinding != nullptr;
+}
+
 inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_block_index,
                                            uint32_t uniform_block_binding) {
     GAPID_INFO("glUniformBlockBinding(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", program,
                uniform_block_index, uniform_block_binding);
+
+    if (!hasGlUniformBlockBinding()) {
+        GAPID_WARNING("Application called unsupported function glUniformBlockBinding");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14208,10 +19584,19 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix2fv() const {
+    return mImports.glUniformMatrix2fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
     GAPID_INFO("glUniformMatrix2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
+
+    if (!hasGlUniformMatrix2fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14238,10 +19623,19 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix2x3fv() const {
+    return mImports.glUniformMatrix2x3fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix2x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix2x3fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix2x3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14259,10 +19653,19 @@ inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix2x4fv() const {
+    return mImports.glUniformMatrix2x4fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix2x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix2x4fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix2x4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14280,10 +19683,19 @@ inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix3fv() const {
+    return mImports.glUniformMatrix3fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
     GAPID_INFO("glUniformMatrix3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
+
+    if (!hasGlUniformMatrix3fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14310,10 +19722,19 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix3x2fv() const {
+    return mImports.glUniformMatrix3x2fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix3x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix3x2fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix3x2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14331,10 +19752,19 @@ inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix3x4fv() const {
+    return mImports.glUniformMatrix3x4fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix3x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix3x4fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix3x4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14352,10 +19782,19 @@ inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix4fv() const {
+    return mImports.glUniformMatrix4fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t transpose,
                                         float* values) {
     GAPID_INFO("glUniformMatrix4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, values);
+
+    if (!hasGlUniformMatrix4fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14381,10 +19820,19 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix4x2fv() const {
+    return mImports.glUniformMatrix4x2fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix4x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix4x2fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix4x2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14402,10 +19850,19 @@ inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUniformMatrix4x3fv() const {
+    return mImports.glUniformMatrix4x3fv != nullptr;
+}
+
 inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8_t transpose,
                                           float* value) {
     GAPID_INFO("glUniformMatrix4x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location, count,
                transpose, value);
+
+    if (!hasGlUniformMatrix4x3fv()) {
+        GAPID_WARNING("Application called unsupported function glUniformMatrix4x3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14423,8 +19880,15 @@ inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUseProgram() const { return mImports.glUseProgram != nullptr; }
+
 inline void GlesSpy::glUseProgram(uint32_t program) {
     GAPID_INFO("glUseProgram(%" PRIu32 ")", program);
+
+    if (!hasGlUseProgram()) {
+        GAPID_WARNING("Application called unsupported function glUseProgram");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14443,8 +19907,17 @@ inline void GlesSpy::glUseProgram(uint32_t program) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlUseProgramStages() const {
+    return mImports.glUseProgramStages != nullptr;
+}
+
 inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint32_t program) {
     GAPID_INFO("glUseProgramStages(%" PRIu32 ", %u, %" PRIu32 ")", pipeline, stages, program);
+
+    if (!hasGlUseProgramStages()) {
+        GAPID_WARNING("Application called unsupported function glUseProgramStages");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14471,8 +19944,15 @@ inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlValidateProgram() const { return mImports.glValidateProgram != nullptr; }
+
 inline void GlesSpy::glValidateProgram(uint32_t program) {
     GAPID_INFO("glValidateProgram(%" PRIu32 ")", program);
+
+    if (!hasGlValidateProgram()) {
+        GAPID_WARNING("Application called unsupported function glValidateProgram");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14487,8 +19967,17 @@ inline void GlesSpy::glValidateProgram(uint32_t program) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlValidateProgramPipeline() const {
+    return mImports.glValidateProgramPipeline != nullptr;
+}
+
 inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
     GAPID_INFO("glValidateProgramPipeline(%" PRIu32 ")", pipeline);
+
+    if (!hasGlValidateProgramPipeline()) {
+        GAPID_WARNING("Application called unsupported function glValidateProgramPipeline");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14503,8 +19992,15 @@ inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCullFace() const { return mImports.glCullFace != nullptr; }
+
 inline void GlesSpy::glCullFace(uint32_t mode) {
     GAPID_INFO("glCullFace(%u)", mode);
+
+    if (!hasGlCullFace()) {
+        GAPID_WARNING("Application called unsupported function glCullFace");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14530,8 +20026,15 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDepthRangef() const { return mImports.glDepthRangef != nullptr; }
+
 inline void GlesSpy::glDepthRangef(float near, float far) {
     GAPID_INFO("glDepthRangef(%f, %f)", near, far);
+
+    if (!hasGlDepthRangef()) {
+        GAPID_WARNING("Application called unsupported function glDepthRangef");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14551,8 +20054,15 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFrontFace() const { return mImports.glFrontFace != nullptr; }
+
 inline void GlesSpy::glFrontFace(uint32_t orientation) {
     GAPID_INFO("glFrontFace(%u)", orientation);
+
+    if (!hasGlFrontFace()) {
+        GAPID_WARNING("Application called unsupported function glFrontFace");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14577,8 +20087,17 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetMultisamplefv() const {
+    return mImports.glGetMultisamplefv != nullptr;
+}
+
 inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* val) {
     GAPID_INFO("glGetMultisamplefv(%u, %" PRIu32 ", %p)", pname, index, val);
+
+    if (!hasGlGetMultisamplefv()) {
+        GAPID_WARNING("Application called unsupported function glGetMultisamplefv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14601,8 +20120,15 @@ inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlLineWidth() const { return mImports.glLineWidth != nullptr; }
+
 inline void GlesSpy::glLineWidth(float width) {
     GAPID_INFO("glLineWidth(%f)", width);
+
+    if (!hasGlLineWidth()) {
+        GAPID_WARNING("Application called unsupported function glLineWidth");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14621,8 +20147,15 @@ inline void GlesSpy::glLineWidth(float width) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlPolygonOffset() const { return mImports.glPolygonOffset != nullptr; }
+
 inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
     GAPID_INFO("glPolygonOffset(%f, %f)", scale_factor, units);
+
+    if (!hasGlPolygonOffset()) {
+        GAPID_WARNING("Application called unsupported function glPolygonOffset");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14642,9 +20175,16 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlViewport() const { return mImports.glViewport != nullptr; }
+
 inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t height) {
     GAPID_INFO("glViewport(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, width,
                height);
+
+    if (!hasGlViewport()) {
+        GAPID_WARNING("Application called unsupported function glViewport");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14663,8 +20203,15 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBooleani_v() const { return mImports.glGetBooleani_v != nullptr; }
+
 inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data) {
     GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", target, index, data);
+
+    if (!hasGlGetBooleani_v()) {
+        GAPID_WARNING("Application called unsupported function glGetBooleani_v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -14875,8 +20422,15 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetBooleanv() const { return mImports.glGetBooleanv != nullptr; }
+
 inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
     GAPID_INFO("glGetBooleanv(%u, %p)", param, values);
+
+    if (!hasGlGetBooleanv()) {
+        GAPID_WARNING("Application called unsupported function glGetBooleanv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -15162,8 +20716,15 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetFloatv() const { return mImports.glGetFloatv != nullptr; }
+
 inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     GAPID_INFO("glGetFloatv(%u, %p)", param, values);
+
+    if (!hasGlGetFloatv()) {
+        GAPID_WARNING("Application called unsupported function glGetFloatv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -15438,8 +20999,15 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetInteger64i_v() const { return mImports.glGetInteger64i_v != nullptr; }
+
 inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data) {
     GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", target, index, data);
+
+    if (!hasGlGetInteger64i_v()) {
+        GAPID_WARNING("Application called unsupported function glGetInteger64i_v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -15654,8 +21222,15 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetInteger64v() const { return mImports.glGetInteger64v != nullptr; }
+
 inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
     GAPID_INFO("glGetInteger64v(%u, %p)", pname, data);
+
+    if (!hasGlGetInteger64v()) {
+        GAPID_WARNING("Application called unsupported function glGetInteger64v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -15869,8 +21444,15 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetIntegeri_v() const { return mImports.glGetIntegeri_v != nullptr; }
+
 inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data) {
     GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", target, index, data);
+
+    if (!hasGlGetIntegeri_v()) {
+        GAPID_WARNING("Application called unsupported function glGetIntegeri_v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16084,8 +21666,15 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetIntegerv() const { return mImports.glGetIntegerv != nullptr; }
+
 inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     GAPID_INFO("glGetIntegerv(%u, %p)", param, values);
+
+    if (!hasGlGetIntegerv()) {
+        GAPID_WARNING("Application called unsupported function glGetIntegerv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16578,10 +22167,19 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetInternalformativ() const {
+    return mImports.glGetInternalformativ != nullptr;
+}
+
 inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalformat, uint32_t pname,
                                            int32_t bufSize, int32_t* params) {
     GAPID_INFO("glGetInternalformativ(%u, %u, %u, %" PRId32 ", %p)", target, internalformat, pname,
                bufSize, params);
+
+    if (!hasGlGetInternalformativ()) {
+        GAPID_WARNING("Application called unsupported function glGetInternalformativ");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16673,10 +22271,17 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetString() const { return mImports.glGetString != nullptr; }
+
 inline uint8_t* GlesSpy::glGetString(uint32_t param) {
     GAPID_INFO("glGetString(%u)", param);
 
     uint8_t* result = nullptr;
+
+    if (!hasGlGetString()) {
+        GAPID_WARNING("Application called unsupported function glGetString");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16705,10 +22310,17 @@ inline uint8_t* GlesSpy::glGetString(uint32_t param) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetStringi() const { return mImports.glGetStringi != nullptr; }
+
 inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
     GAPID_INFO("glGetStringi(%u, %" PRIu32 ")", name, index);
 
     uint8_t* result = nullptr;
+
+    if (!hasGlGetStringi()) {
+        GAPID_WARNING("Application called unsupported function glGetStringi");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16734,10 +22346,17 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsEnabled() const { return mImports.glIsEnabled != nullptr; }
+
 inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
     GAPID_INFO("glIsEnabled(%u)", capability);
 
     uint8_t result = 0;
+
+    if (!hasGlIsEnabled()) {
+        GAPID_WARNING("Application called unsupported function glIsEnabled");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16777,10 +22396,17 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
     return result;
 }
 
+inline bool GlesSpy::hasGlClientWaitSync() const { return mImports.glClientWaitSync != nullptr; }
+
 inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
     GAPID_INFO("glClientWaitSync(%" PRIu64 ", %u, %" PRIu64 ")", sync, syncFlags, timeout);
 
     uint32_t result = 0;
+
+    if (!hasGlClientWaitSync()) {
+        GAPID_WARNING("Application called unsupported function glClientWaitSync");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16802,8 +22428,15 @@ inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uin
     return result;
 }
 
+inline bool GlesSpy::hasGlDeleteSync() const { return mImports.glDeleteSync != nullptr; }
+
 inline void GlesSpy::glDeleteSync(uint64_t sync) {
     GAPID_INFO("glDeleteSync(%" PRIu64 ")", sync);
+
+    if (!hasGlDeleteSync()) {
+        GAPID_WARNING("Application called unsupported function glDeleteSync");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16818,10 +22451,17 @@ inline void GlesSpy::glDeleteSync(uint64_t sync) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlFenceSync() const { return mImports.glFenceSync != nullptr; }
+
 inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
     GAPID_INFO("glFenceSync(%u, %u)", condition, syncFlags);
 
     uint64_t result = 0;
+
+    if (!hasGlFenceSync()) {
+        GAPID_WARNING("Application called unsupported function glFenceSync");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16844,10 +22484,17 @@ inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetSynciv() const { return mImports.glGetSynciv != nullptr; }
+
 inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length,
                                  int32_t* values) {
     GAPID_INFO("glGetSynciv(%" PRIu64 ", %u, %" PRId32 ", %p, %p)", sync, pname, bufSize, length,
                values);
+
+    if (!hasGlGetSynciv()) {
+        GAPID_WARNING("Application called unsupported function glGetSynciv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16875,10 +22522,17 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsSync() const { return mImports.glIsSync != nullptr; }
+
 inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
     GAPID_INFO("glIsSync(%" PRIu64 ")", sync);
 
     uint8_t result = 0;
+
+    if (!hasGlIsSync()) {
+        GAPID_WARNING("Application called unsupported function glIsSync");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -16896,8 +22550,15 @@ inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
     return result;
 }
 
+inline bool GlesSpy::hasGlWaitSync() const { return mImports.glWaitSync != nullptr; }
+
 inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
     GAPID_INFO("glWaitSync(%" PRIu64 ", %u, %" PRIu64 ")", sync, syncFlags, timeout);
+
+    if (!hasGlWaitSync()) {
+        GAPID_WARNING("Application called unsupported function glWaitSync");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16912,8 +22573,15 @@ inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t time
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlActiveTexture() const { return mImports.glActiveTexture != nullptr; }
+
 inline void GlesSpy::glActiveTexture(uint32_t unit) {
     GAPID_INFO("glActiveTexture(%u)", unit);
+
+    if (!hasGlActiveTexture()) {
+        GAPID_WARNING("Application called unsupported function glActiveTexture");
+        return;
+    }
 
     Observations observations;
     do {
@@ -16968,12 +22636,21 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindImageTexture() const {
+    return mImports.glBindImageTexture != nullptr;
+}
+
 inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t level,
                                         uint8_t layered, int32_t layer, uint32_t access,
                                         uint32_t format) {
     GAPID_INFO("glBindImageTexture(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRIu8 ", %" PRId32
                ", %u, %u)",
                unit, texture, level, layered, layer, access, format);
+
+    if (!hasGlBindImageTexture()) {
+        GAPID_WARNING("Application called unsupported function glBindImageTexture");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17013,8 +22690,15 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindSampler() const { return mImports.glBindSampler != nullptr; }
+
 inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
     GAPID_INFO("glBindSampler(%" PRIu32 ", %" PRIu32 ")", unit, sampler);
+
+    if (!hasGlBindSampler()) {
+        GAPID_WARNING("Application called unsupported function glBindSampler");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17029,8 +22713,15 @@ inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindTexture() const { return mImports.glBindTexture != nullptr; }
+
 inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
     GAPID_INFO("glBindTexture(%u, %" PRIu32 ")", target, texture);
+
+    if (!hasGlBindTexture()) {
+        GAPID_WARNING("Application called unsupported function glBindTexture");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17073,12 +22764,21 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexImage2D() const {
+    return mImports.glCompressedTexImage2D != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint32_t format,
                                             int32_t width, int32_t height, int32_t border,
                                             int32_t image_size, void* data) {
     GAPID_INFO("glCompressedTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %p)",
                target, level, format, width, height, border, image_size, data);
+
+    if (!hasGlCompressedTexImage2D()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17171,12 +22871,21 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexImage3D() const {
+    return mImports.glCompressedTexImage3D != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint32_t internalformat,
                                             int32_t width, int32_t height, int32_t depth,
                                             int32_t border, int32_t imageSize, void* data) {
     GAPID_INFO("glCompressedTexImage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %p)",
                target, level, internalformat, width, height, depth, border, imageSize, data);
+
+    if (!hasGlCompressedTexImage3D()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexImage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17215,12 +22924,21 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexSubImage2D() const {
+    return mImports.glCompressedTexSubImage2D != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                                int32_t yoffset, int32_t width, int32_t height,
                                                uint32_t format, int32_t image_size, void* data) {
     GAPID_INFO("glCompressedTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, width, height, format, image_size, data);
+
+    if (!hasGlCompressedTexSubImage2D()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexSubImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17266,6 +22984,10 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCompressedTexSubImage3D() const {
+    return mImports.glCompressedTexSubImage3D != nullptr;
+}
+
 inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                                int32_t yoffset, int32_t zoffset, int32_t width,
                                                int32_t height, int32_t depth, uint32_t format,
@@ -17274,6 +22996,11 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize,
                data);
+
+    if (!hasGlCompressedTexSubImage3D()) {
+        GAPID_WARNING("Application called unsupported function glCompressedTexSubImage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17312,11 +23039,18 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyTexImage2D() const { return mImports.glCopyTexImage2D != nullptr; }
+
 inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                       int32_t y, int32_t width, int32_t height, int32_t border) {
     GAPID_INFO("glCopyTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ")",
                target, level, format, x, y, width, height, border);
+
+    if (!hasGlCopyTexImage2D()) {
+        GAPID_WARNING("Application called unsupported function glCopyTexImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17385,12 +23119,21 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyTexSubImage2D() const {
+    return mImports.glCopyTexSubImage2D != nullptr;
+}
+
 inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                          int32_t yoffset, int32_t x, int32_t y, int32_t width,
                                          int32_t height) {
     GAPID_INFO("glCopyTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, x, y, width, height);
+
+    if (!hasGlCopyTexSubImage2D()) {
+        GAPID_WARNING("Application called unsupported function glCopyTexSubImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17417,12 +23160,21 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlCopyTexSubImage3D() const {
+    return mImports.glCopyTexSubImage3D != nullptr;
+}
+
 inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                          int32_t yoffset, int32_t zoffset, int32_t x, int32_t y,
                                          int32_t width, int32_t height) {
     GAPID_INFO("glCopyTexSubImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                target, level, xoffset, yoffset, zoffset, x, y, width, height);
+
+    if (!hasGlCopyTexSubImage3D()) {
+        GAPID_WARNING("Application called unsupported function glCopyTexSubImage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17444,8 +23196,15 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteSamplers() const { return mImports.glDeleteSamplers != nullptr; }
+
 inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
     GAPID_INFO("glDeleteSamplers(%" PRId32 ", %p)", count, samplers);
+
+    if (!hasGlDeleteSamplers()) {
+        GAPID_WARNING("Application called unsupported function glDeleteSamplers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17462,8 +23221,15 @@ inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteTextures() const { return mImports.glDeleteTextures != nullptr; }
+
 inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     GAPID_INFO("glDeleteTextures(%" PRId32 ", %p)", count, textures);
+
+    if (!hasGlDeleteTextures()) {
+        GAPID_WARNING("Application called unsupported function glDeleteTextures");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17487,8 +23253,15 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenSamplers() const { return mImports.glGenSamplers != nullptr; }
+
 inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
     GAPID_INFO("glGenSamplers(%" PRId32 ", %p)", count, samplers);
+
+    if (!hasGlGenSamplers()) {
+        GAPID_WARNING("Application called unsupported function glGenSamplers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17505,8 +23278,15 @@ inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenTextures() const { return mImports.glGenTextures != nullptr; }
+
 inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     GAPID_INFO("glGenTextures(%" PRId32 ", %p)", count, textures);
+
+    if (!hasGlGenTextures()) {
+        GAPID_WARNING("Application called unsupported function glGenTextures");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17536,8 +23316,15 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenerateMipmap() const { return mImports.glGenerateMipmap != nullptr; }
+
 inline void GlesSpy::glGenerateMipmap(uint32_t target) {
     GAPID_INFO("glGenerateMipmap(%u)", target);
+
+    if (!hasGlGenerateMipmap()) {
+        GAPID_WARNING("Application called unsupported function glGenerateMipmap");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17564,8 +23351,17 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameterfv() const {
+    return mImports.glGetSamplerParameterfv != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, float* params) {
     GAPID_INFO("glGetSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameterfv()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameterfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17596,8 +23392,17 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetSamplerParameteriv() const {
+    return mImports.glGetSamplerParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, params);
+
+    if (!hasGlGetSamplerParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetSamplerParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17628,9 +23433,18 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexLevelParameterfv() const {
+    return mImports.glGetTexLevelParameterfv != nullptr;
+}
+
 inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, uint32_t pname,
                                               float* params) {
     GAPID_INFO("glGetTexLevelParameterfv(%u, %" PRId32 ", %u, %p)", target, level, pname, params);
+
+    if (!hasGlGetTexLevelParameterfv()) {
+        GAPID_WARNING("Application called unsupported function glGetTexLevelParameterfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17685,9 +23499,18 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexLevelParameteriv() const {
+    return mImports.glGetTexLevelParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname,
                                               int32_t* params) {
     GAPID_INFO("glGetTexLevelParameteriv(%u, %" PRId32 ", %u, %p)", target, level, pname, params);
+
+    if (!hasGlGetTexLevelParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetTexLevelParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17742,8 +23565,17 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameterfv() const {
+    return mImports.glGetTexParameterfv != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
     GAPID_INFO("glGetTexParameterfv(%u, %u, %p)", target, parameter, values);
+
+    if (!hasGlGetTexParameterfv()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameterfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17827,8 +23659,17 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTexParameteriv() const {
+    return mImports.glGetTexParameteriv != nullptr;
+}
+
 inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
     GAPID_INFO("glGetTexParameteriv(%u, %u, %p)", target, parameter, values);
+
+    if (!hasGlGetTexParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glGetTexParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17912,10 +23753,17 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsSampler() const { return mImports.glIsSampler != nullptr; }
+
 inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
     GAPID_INFO("glIsSampler(%" PRIu32 ")", sampler);
 
     uint8_t result = 0;
+
+    if (!hasGlIsSampler()) {
+        GAPID_WARNING("Application called unsupported function glIsSampler");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -17933,10 +23781,17 @@ inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
     return result;
 }
 
+inline bool GlesSpy::hasGlIsTexture() const { return mImports.glIsTexture != nullptr; }
+
 inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
     GAPID_INFO("glIsTexture(%" PRIu32 ")", texture);
 
     uint8_t result = 0;
+
+    if (!hasGlIsTexture()) {
+        GAPID_WARNING("Application called unsupported function glIsTexture");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -17957,8 +23812,15 @@ inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
     return result;
 }
 
+inline bool GlesSpy::hasGlPixelStorei() const { return mImports.glPixelStorei != nullptr; }
+
 inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
     GAPID_INFO("glPixelStorei(%u, %" PRId32 ")", parameter, value);
+
+    if (!hasGlPixelStorei()) {
+        GAPID_WARNING("Application called unsupported function glPixelStorei");
+        return;
+    }
 
     Observations observations;
     do {
@@ -17997,8 +23859,17 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterf() const {
+    return mImports.glSamplerParameterf != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float param) {
     GAPID_INFO("glSamplerParameterf(%" PRIu32 ", %u, %f)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterf()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterf");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18026,8 +23897,17 @@ inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameterfv() const {
+    return mImports.glSamplerParameterfv != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param) {
     GAPID_INFO("glSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameterfv()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameterfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18058,8 +23938,17 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameteri() const {
+    return mImports.glSamplerParameteri != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32_t param) {
     GAPID_INFO("glSamplerParameteri(%" PRIu32 ", %u, %" PRId32 ")", sampler, pname, param);
+
+    if (!hasGlSamplerParameteri()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameteri");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18087,8 +23976,17 @@ inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlSamplerParameteriv() const {
+    return mImports.glSamplerParameteriv != nullptr;
+}
+
 inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* param) {
     GAPID_INFO("glSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, param);
+
+    if (!hasGlSamplerParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glSamplerParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18119,12 +24017,19 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexImage2D() const { return mImports.glTexImage2D != nullptr; }
+
 inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t internal_format,
                                   int32_t width, int32_t height, int32_t border, uint32_t format,
                                   uint32_t type, void* data) {
     GAPID_INFO("glTexImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %u, %u, %p)",
                target, level, internal_format, width, height, border, format, type, data);
+
+    if (!hasGlTexImage2D()) {
+        GAPID_WARNING("Application called unsupported function glTexImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18254,12 +24159,19 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexImage3D() const { return mImports.glTexImage3D != nullptr; }
+
 inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t internalformat,
                                   int32_t width, int32_t height, int32_t depth, int32_t border,
                                   uint32_t format, uint32_t type, void* pixels) {
     GAPID_INFO("glTexImage3D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %" PRId32 ", %u, %u, %p)",
                target, level, internalformat, width, height, depth, border, format, type, pixels);
+
+    if (!hasGlTexImage3D()) {
+        GAPID_WARNING("Application called unsupported function glTexImage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18325,8 +24237,15 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterf() const { return mImports.glTexParameterf != nullptr; }
+
 inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float value) {
     GAPID_INFO("glTexParameterf(%u, %u, %f)", target, parameter, value);
+
+    if (!hasGlTexParameterf()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterf");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18430,8 +24349,15 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameterfv() const { return mImports.glTexParameterfv != nullptr; }
+
 inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* params) {
     GAPID_INFO("glTexParameterfv(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameterfv()) {
+        GAPID_WARNING("Application called unsupported function glTexParameterfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18494,8 +24420,15 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameteri() const { return mImports.glTexParameteri != nullptr; }
+
 inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_t value) {
     GAPID_INFO("glTexParameteri(%u, %u, %" PRId32 ")", target, parameter, value);
+
+    if (!hasGlTexParameteri()) {
+        GAPID_WARNING("Application called unsupported function glTexParameteri");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18599,8 +24532,15 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexParameteriv() const { return mImports.glTexParameteriv != nullptr; }
+
 inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* params) {
     GAPID_INFO("glTexParameteriv(%u, %u, %p)", target, pname, params);
+
+    if (!hasGlTexParameteriv()) {
+        GAPID_WARNING("Application called unsupported function glTexParameteriv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18663,10 +24603,17 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage2D() const { return mImports.glTexStorage2D != nullptr; }
+
 inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t internalformat,
                                     int32_t width, int32_t height) {
     GAPID_INFO("glTexStorage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")", target, levels,
                internalformat, width, height);
+
+    if (!hasGlTexStorage2D()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18756,12 +24703,21 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage2DMultisample() const {
+    return mImports.glTexStorage2DMultisample != nullptr;
+}
+
 inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
                                                uint32_t internalformat, int32_t width,
                                                int32_t height, uint8_t fixedsamplelocations) {
     GAPID_INFO("glTexStorage2DMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRIu8
                ")",
                target, samples, internalformat, width, height, fixedsamplelocations);
+
+    if (!hasGlTexStorage2DMultisample()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage2DMultisample");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18841,10 +24797,17 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexStorage3D() const { return mImports.glTexStorage3D != nullptr; }
+
 inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t internalformat,
                                     int32_t width, int32_t height, int32_t depth) {
     GAPID_INFO("glTexStorage3D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", target,
                levels, internalformat, width, height, depth);
+
+    if (!hasGlTexStorage3D()) {
+        GAPID_WARNING("Application called unsupported function glTexStorage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -18934,12 +24897,19 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexSubImage2D() const { return mImports.glTexSubImage2D != nullptr; }
+
 inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                      int32_t yoffset, int32_t width, int32_t height,
                                      uint32_t format, uint32_t type, void* data) {
     GAPID_INFO("glTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                ", %u, %u, %p)",
                target, level, xoffset, yoffset, width, height, format, type, data);
+
+    if (!hasGlTexSubImage2D()) {
+        GAPID_WARNING("Application called unsupported function glTexSubImage2D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19062,6 +25032,8 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTexSubImage3D() const { return mImports.glTexSubImage3D != nullptr; }
+
 inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xoffset,
                                      int32_t yoffset, int32_t zoffset, int32_t width,
                                      int32_t height, int32_t depth, uint32_t format, uint32_t type,
@@ -19070,6 +25042,11 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
                ", %" PRId32 ", %" PRId32 ", %u, %u, %p)",
                target, level, xoffset, yoffset, zoffset, width, height, depth, format, type,
                pixels);
+
+    if (!hasGlTexSubImage3D()) {
+        GAPID_WARNING("Application called unsupported function glTexSubImage3D");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19135,8 +25112,17 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBeginTransformFeedback() const {
+    return mImports.glBeginTransformFeedback != nullptr;
+}
+
 inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
     GAPID_INFO("glBeginTransformFeedback(%u)", primitiveMode);
+
+    if (!hasGlBeginTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glBeginTransformFeedback");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19158,8 +25144,17 @@ inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindTransformFeedback() const {
+    return mImports.glBindTransformFeedback != nullptr;
+}
+
 inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
     GAPID_INFO("glBindTransformFeedback(%u, %" PRIu32 ")", target, id);
+
+    if (!hasGlBindTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glBindTransformFeedback");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19179,8 +25174,17 @@ inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteTransformFeedbacks() const {
+    return mImports.glDeleteTransformFeedbacks != nullptr;
+}
+
 inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
     GAPID_INFO("glDeleteTransformFeedbacks(%" PRId32 ", %p)", n, ids);
+
+    if (!hasGlDeleteTransformFeedbacks()) {
+        GAPID_WARNING("Application called unsupported function glDeleteTransformFeedbacks");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19198,8 +25202,17 @@ inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEndTransformFeedback() const {
+    return mImports.glEndTransformFeedback != nullptr;
+}
+
 inline void GlesSpy::glEndTransformFeedback() {
     GAPID_INFO("glEndTransformFeedback()");
+
+    if (!hasGlEndTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glEndTransformFeedback");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19214,8 +25227,17 @@ inline void GlesSpy::glEndTransformFeedback() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenTransformFeedbacks() const {
+    return mImports.glGenTransformFeedbacks != nullptr;
+}
+
 inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
     GAPID_INFO("glGenTransformFeedbacks(%" PRId32 ", %p)", n, ids);
+
+    if (!hasGlGenTransformFeedbacks()) {
+        GAPID_WARNING("Application called unsupported function glGenTransformFeedbacks");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19233,12 +25255,21 @@ inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetTransformFeedbackVarying() const {
+    return mImports.glGetTransformFeedbackVarying != nullptr;
+}
+
 inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t index,
                                                    int32_t bufSize, int32_t* length, int32_t* size,
                                                    uint32_t* type, char* name) {
     GAPID_INFO("glGetTransformFeedbackVarying(%" PRIu32 ", %" PRIu32 ", %" PRId32
                ", %p, %p, %p, %p)",
                program, index, bufSize, length, size, type, name);
+
+    if (!hasGlGetTransformFeedbackVarying()) {
+        GAPID_WARNING("Application called unsupported function glGetTransformFeedbackVarying");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19262,10 +25293,19 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsTransformFeedback() const {
+    return mImports.glIsTransformFeedback != nullptr;
+}
+
 inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
     GAPID_INFO("glIsTransformFeedback(%" PRIu32 ")", id);
 
     uint8_t result = 0;
+
+    if (!hasGlIsTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glIsTransformFeedback");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -19283,8 +25323,17 @@ inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
     return result;
 }
 
+inline bool GlesSpy::hasGlPauseTransformFeedback() const {
+    return mImports.glPauseTransformFeedback != nullptr;
+}
+
 inline void GlesSpy::glPauseTransformFeedback() {
     GAPID_INFO("glPauseTransformFeedback()");
+
+    if (!hasGlPauseTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glPauseTransformFeedback");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19299,8 +25348,17 @@ inline void GlesSpy::glPauseTransformFeedback() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlResumeTransformFeedback() const {
+    return mImports.glResumeTransformFeedback != nullptr;
+}
+
 inline void GlesSpy::glResumeTransformFeedback() {
     GAPID_INFO("glResumeTransformFeedback()");
+
+    if (!hasGlResumeTransformFeedback()) {
+        GAPID_WARNING("Application called unsupported function glResumeTransformFeedback");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19315,10 +25373,19 @@ inline void GlesSpy::glResumeTransformFeedback() {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlTransformFeedbackVaryings() const {
+    return mImports.glTransformFeedbackVaryings != nullptr;
+}
+
 inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count, char** varyings,
                                                  uint32_t bufferMode) {
     GAPID_INFO("glTransformFeedbackVaryings(%" PRIu32 ", %" PRId32 ", %p, %u)", program, count,
                varyings, bufferMode);
+
+    if (!hasGlTransformFeedbackVaryings()) {
+        GAPID_WARNING("Application called unsupported function glTransformFeedbackVaryings");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19343,8 +25410,15 @@ inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindVertexArray() const { return mImports.glBindVertexArray != nullptr; }
+
 inline void GlesSpy::glBindVertexArray(uint32_t array) {
     GAPID_INFO("glBindVertexArray(%" PRIu32 ")", array);
+
+    if (!hasGlBindVertexArray()) {
+        GAPID_WARNING("Application called unsupported function glBindVertexArray");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19367,10 +25441,19 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlBindVertexBuffer() const {
+    return mImports.glBindVertexBuffer != nullptr;
+}
+
 inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, int32_t offset,
                                         int32_t stride) {
     GAPID_INFO("glBindVertexBuffer(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %" PRId32 ")",
                bindingindex, buffer, offset, stride);
+
+    if (!hasGlBindVertexBuffer()) {
+        GAPID_WARNING("Application called unsupported function glBindVertexBuffer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19386,8 +25469,17 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDeleteVertexArrays() const {
+    return mImports.glDeleteVertexArrays != nullptr;
+}
+
 inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
     GAPID_INFO("glDeleteVertexArrays(%" PRId32 ", %p)", count, arrays);
+
+    if (!hasGlDeleteVertexArrays()) {
+        GAPID_WARNING("Application called unsupported function glDeleteVertexArrays");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19413,8 +25505,17 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlDisableVertexAttribArray() const {
+    return mImports.glDisableVertexAttribArray != nullptr;
+}
+
 inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
     GAPID_INFO("glDisableVertexAttribArray(%" PRIu32 ")", location);
+
+    if (!hasGlDisableVertexAttribArray()) {
+        GAPID_WARNING("Application called unsupported function glDisableVertexAttribArray");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19433,8 +25534,17 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlEnableVertexAttribArray() const {
+    return mImports.glEnableVertexAttribArray != nullptr;
+}
+
 inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
     GAPID_INFO("glEnableVertexAttribArray(%" PRIu32 ")", location);
+
+    if (!hasGlEnableVertexAttribArray()) {
+        GAPID_WARNING("Application called unsupported function glEnableVertexAttribArray");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19453,8 +25563,15 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGenVertexArrays() const { return mImports.glGenVertexArrays != nullptr; }
+
 inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     GAPID_INFO("glGenVertexArrays(%" PRId32 ", %p)", count, arrays);
+
+    if (!hasGlGenVertexArrays()) {
+        GAPID_WARNING("Application called unsupported function glGenVertexArrays");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19481,8 +25598,17 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetVertexAttribIiv() const {
+    return mImports.glGetVertexAttribIiv != nullptr;
+}
+
 inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetVertexAttribIiv(%" PRIu32 ", %u, %p)", index, pname, params);
+
+    if (!hasGlGetVertexAttribIiv()) {
+        GAPID_WARNING("Application called unsupported function glGetVertexAttribIiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19517,8 +25643,17 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetVertexAttribIuiv() const {
+    return mImports.glGetVertexAttribIuiv != nullptr;
+}
+
 inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint32_t* params) {
     GAPID_INFO("glGetVertexAttribIuiv(%" PRIu32 ", %u, %p)", index, pname, params);
+
+    if (!hasGlGetVertexAttribIuiv()) {
+        GAPID_WARNING("Application called unsupported function glGetVertexAttribIuiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19553,8 +25688,17 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetVertexAttribPointerv() const {
+    return mImports.glGetVertexAttribPointerv != nullptr;
+}
+
 inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, void** pointer) {
     GAPID_INFO("glGetVertexAttribPointerv(%" PRIu32 ", %u, %p)", index, pname, pointer);
+
+    if (!hasGlGetVertexAttribPointerv()) {
+        GAPID_WARNING("Application called unsupported function glGetVertexAttribPointerv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19577,8 +25721,17 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetVertexAttribfv() const {
+    return mImports.glGetVertexAttribfv != nullptr;
+}
+
 inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* params) {
     GAPID_INFO("glGetVertexAttribfv(%" PRIu32 ", %u, %p)", index, pname, params);
+
+    if (!hasGlGetVertexAttribfv()) {
+        GAPID_WARNING("Application called unsupported function glGetVertexAttribfv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19618,8 +25771,17 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetVertexAttribiv() const {
+    return mImports.glGetVertexAttribiv != nullptr;
+}
+
 inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t* params) {
     GAPID_INFO("glGetVertexAttribiv(%" PRIu32 ", %u, %p)", index, pname, params);
+
+    if (!hasGlGetVertexAttribiv()) {
+        GAPID_WARNING("Application called unsupported function glGetVertexAttribiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19658,10 +25820,17 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlIsVertexArray() const { return mImports.glIsVertexArray != nullptr; }
+
 inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
     GAPID_INFO("glIsVertexArray(%" PRIu32 ")", array);
 
     uint8_t result = 0;
+
+    if (!hasGlIsVertexArray()) {
+        GAPID_WARNING("Application called unsupported function glIsVertexArray");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -19679,8 +25848,15 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
     return result;
 }
 
+inline bool GlesSpy::hasGlVertexAttrib1f() const { return mImports.glVertexAttrib1f != nullptr; }
+
 inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
     GAPID_INFO("glVertexAttrib1f(%" PRIu32 ", %f)", location, value0);
+
+    if (!hasGlVertexAttrib1f()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib1f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19695,8 +25871,15 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib1fv() const { return mImports.glVertexAttrib1fv != nullptr; }
+
 inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
     GAPID_INFO("glVertexAttrib1fv(%" PRIu32 ", %p)", location, value);
+
+    if (!hasGlVertexAttrib1fv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib1fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19714,8 +25897,15 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib2f() const { return mImports.glVertexAttrib2f != nullptr; }
+
 inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float value1) {
     GAPID_INFO("glVertexAttrib2f(%" PRIu32 ", %f, %f)", location, value0, value1);
+
+    if (!hasGlVertexAttrib2f()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib2f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19730,8 +25920,15 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib2fv() const { return mImports.glVertexAttrib2fv != nullptr; }
+
 inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
     GAPID_INFO("glVertexAttrib2fv(%" PRIu32 ", %p)", location, value);
+
+    if (!hasGlVertexAttrib2fv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib2fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19749,8 +25946,15 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib3f() const { return mImports.glVertexAttrib3f != nullptr; }
+
 inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float value1, float value2) {
     GAPID_INFO("glVertexAttrib3f(%" PRIu32 ", %f, %f, %f)", location, value0, value1, value2);
+
+    if (!hasGlVertexAttrib3f()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib3f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19765,8 +25969,15 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib3fv() const { return mImports.glVertexAttrib3fv != nullptr; }
+
 inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
     GAPID_INFO("glVertexAttrib3fv(%" PRIu32 ", %p)", location, value);
+
+    if (!hasGlVertexAttrib3fv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib3fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19784,10 +25995,17 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib4f() const { return mImports.glVertexAttrib4f != nullptr; }
+
 inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float value1, float value2,
                                       float value3) {
     GAPID_INFO("glVertexAttrib4f(%" PRIu32 ", %f, %f, %f, %f)", location, value0, value1, value2,
                value3);
+
+    if (!hasGlVertexAttrib4f()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib4f");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19803,8 +26021,15 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttrib4fv() const { return mImports.glVertexAttrib4fv != nullptr; }
+
 inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
     GAPID_INFO("glVertexAttrib4fv(%" PRIu32 ", %p)", location, value);
+
+    if (!hasGlVertexAttrib4fv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttrib4fv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19822,8 +26047,17 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribBinding() const {
+    return mImports.glVertexAttribBinding != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindingindex) {
     GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", attribindex, bindingindex);
+
+    if (!hasGlVertexAttribBinding()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribBinding");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19838,8 +26072,17 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribDivisor() const {
+    return mImports.glVertexAttribDivisor != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
     GAPID_INFO("glVertexAttribDivisor(%" PRIu32 ", %" PRIu32 ")", index, divisor);
+
+    if (!hasGlVertexAttribDivisor()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribDivisor");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19854,10 +26097,19 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribFormat() const {
+    return mImports.glVertexAttribFormat != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                           uint8_t normalized, uint32_t relativeoffset) {
     GAPID_INFO("glVertexAttribFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRIu32 ")",
                attribindex, size, type, normalized, relativeoffset);
+
+    if (!hasGlVertexAttribFormat()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribFormat");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19888,9 +26140,16 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribI4i() const { return mImports.glVertexAttribI4i != nullptr; }
+
 inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int32_t z, int32_t w) {
     GAPID_INFO("glVertexAttribI4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
                index, x, y, z, w);
+
+    if (!hasGlVertexAttribI4i()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribI4i");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19905,8 +26164,17 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribI4iv() const {
+    return mImports.glVertexAttribI4iv != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
     GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, v);
+
+    if (!hasGlVertexAttribI4iv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribI4iv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19923,11 +26191,20 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribI4ui() const {
+    return mImports.glVertexAttribI4ui != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, uint32_t z,
                                         uint32_t w) {
     GAPID_INFO("glVertexAttribI4ui(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32
                ")",
                index, x, y, z, w);
+
+    if (!hasGlVertexAttribI4ui()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribI4ui");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19942,8 +26219,17 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribI4uiv() const {
+    return mImports.glVertexAttribI4uiv != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
     GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, v);
+
+    if (!hasGlVertexAttribI4uiv()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribI4uiv");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19960,10 +26246,19 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribIFormat() const {
+    return mImports.glVertexAttribIFormat != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type,
                                            uint32_t relativeoffset) {
     GAPID_INFO("glVertexAttribIFormat(%" PRIu32 ", %" PRId32 ", %u, %" PRIu32 ")", attribindex,
                size, type, relativeoffset);
+
+    if (!hasGlVertexAttribIFormat()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribIFormat");
+        return;
+    }
 
     Observations observations;
     do {
@@ -19994,10 +26289,19 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribIPointer() const {
+    return mImports.glVertexAttribIPointer != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type,
                                             int32_t stride, void* pointer) {
     GAPID_INFO("glVertexAttribIPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRId32 ", %p)", index, size,
                type, stride, pointer);
+
+    if (!hasGlVertexAttribIPointer()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribIPointer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20029,10 +26333,19 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexAttribPointer() const {
+    return mImports.glVertexAttribPointer != nullptr;
+}
+
 inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
                                            uint8_t normalized, int32_t stride, void* data) {
     GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRId32 ", %p)",
                location, size, type, normalized, stride, data);
+
+    if (!hasGlVertexAttribPointer()) {
+        GAPID_WARNING("Application called unsupported function glVertexAttribPointer");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20083,8 +26396,17 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlVertexBindingDivisor() const {
+    return mImports.glVertexBindingDivisor != nullptr;
+}
+
 inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor) {
     GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", bindingindex, divisor);
+
+    if (!hasGlVertexBindingDivisor()) {
+        GAPID_WARNING("Application called unsupported function glVertexBindingDivisor");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20099,10 +26421,17 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasEglInitialize() const { return mImports.eglInitialize != nullptr; }
+
 inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
     GAPID_INFO("eglInitialize(%p, %p, %p)", dpy, major, minor);
 
     int result = 0;
+
+    if (!hasEglInitialize()) {
+        GAPID_WARNING("Application called unsupported function eglInitialize");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20131,11 +26460,18 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
     return result;
 }
 
+inline bool GlesSpy::hasEglCreateContext() const { return mImports.eglCreateContext != nullptr; }
+
 inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_context,
                                        int* attrib_list) {
     GAPID_INFO("eglCreateContext(%p, %p, %p, %p)", display, config, share_context, attrib_list);
 
     void* result = nullptr;
+
+    if (!hasEglCreateContext()) {
+        GAPID_WARNING("Application called unsupported function eglCreateContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20218,10 +26554,17 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
     return result;
 }
 
+inline bool GlesSpy::hasEglMakeCurrent() const { return mImports.eglMakeCurrent != nullptr; }
+
 inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* context) {
     GAPID_INFO("eglMakeCurrent(%p, %p, %p, %p)", display, draw, read, context);
 
     int result = 0;
+
+    if (!hasEglMakeCurrent()) {
+        GAPID_WARNING("Application called unsupported function eglMakeCurrent");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20248,10 +26591,17 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
     return result;
 }
 
+inline bool GlesSpy::hasEglSwapBuffers() const { return mImports.eglSwapBuffers != nullptr; }
+
 inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
     GAPID_INFO("eglSwapBuffers(%p, %p)", display, surface);
 
     int result = 0;
+
+    if (!hasEglSwapBuffers()) {
+        GAPID_WARNING("Application called unsupported function eglSwapBuffers");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20272,10 +26622,17 @@ inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
     return result;
 }
 
+inline bool GlesSpy::hasEglQuerySurface() const { return mImports.eglQuerySurface != nullptr; }
+
 inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute, int* value) {
     GAPID_INFO("eglQuerySurface(%p, %p, %d, %p)", display, surface, attribute, value);
 
     int result = 0;
+
+    if (!hasEglQuerySurface()) {
+        GAPID_WARNING("Application called unsupported function eglQuerySurface");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20299,10 +26656,17 @@ inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute,
     return result;
 }
 
+inline bool GlesSpy::hasGlXCreateContext() const { return mImports.glXCreateContext != nullptr; }
+
 inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bool direct) {
     GAPID_INFO("glXCreateContext(%p, %p, %p, %d)", dpy, vis, shareList, direct);
 
     void* result = nullptr;
+
+    if (!hasGlXCreateContext()) {
+        GAPID_WARNING("Application called unsupported function glXCreateContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20383,12 +26747,21 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
     return result;
 }
 
+inline bool GlesSpy::hasGlXCreateNewContext() const {
+    return mImports.glXCreateNewContext != nullptr;
+}
+
 inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_t type,
                                           void* shared, bool direct) {
     GAPID_INFO("glXCreateNewContext(%p, %p, %" PRIu32 ", %p, %d)", display, fbconfig, type, shared,
                direct);
 
     void* result = nullptr;
+
+    if (!hasGlXCreateNewContext()) {
+        GAPID_WARNING("Application called unsupported function glXCreateNewContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20469,10 +26842,19 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
     return result;
 }
 
+inline bool GlesSpy::hasGlXMakeContextCurrent() const {
+    return mImports.glXMakeContextCurrent != nullptr;
+}
+
 inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx) {
     GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)", display, draw, read, ctx);
 
     int result = 0;
+
+    if (!hasGlXMakeContextCurrent()) {
+        GAPID_WARNING("Application called unsupported function glXMakeContextCurrent");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20499,10 +26881,17 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
     return result;
 }
 
+inline bool GlesSpy::hasGlXMakeCurrent() const { return mImports.glXMakeCurrent != nullptr; }
+
 inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
     GAPID_INFO("glXMakeCurrent(%p, %p, %p)", display, drawable, ctx);
 
     int result = 0;
+
+    if (!hasGlXMakeCurrent()) {
+        GAPID_WARNING("Application called unsupported function glXMakeCurrent");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20527,8 +26916,15 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
     return result;
 }
 
+inline bool GlesSpy::hasGlXSwapBuffers() const { return mImports.glXSwapBuffers != nullptr; }
+
 inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
     GAPID_INFO("glXSwapBuffers(%p, %p)", display, drawable);
+
+    if (!hasGlXSwapBuffers()) {
+        GAPID_WARNING("Application called unsupported function glXSwapBuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20545,10 +26941,17 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlXQueryDrawable() const { return mImports.glXQueryDrawable != nullptr; }
+
 inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, int* value) {
     GAPID_INFO("glXQueryDrawable(%p, %p, %d, %p)", display, draw, attribute, value);
 
     int result = 0;
+
+    if (!hasGlXQueryDrawable()) {
+        GAPID_WARNING("Application called unsupported function glXQueryDrawable");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20572,10 +26975,17 @@ inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, i
     return result;
 }
 
+inline bool GlesSpy::hasWglCreateContext() const { return mImports.wglCreateContext != nullptr; }
+
 inline void* GlesSpy::wglCreateContext(void* hdc) {
     GAPID_INFO("wglCreateContext(%p)", hdc);
 
     void* result = nullptr;
+
+    if (!hasWglCreateContext()) {
+        GAPID_WARNING("Application called unsupported function wglCreateContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20652,10 +27062,19 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
     return result;
 }
 
+inline bool GlesSpy::hasWglCreateContextAttribsARB() const {
+    return mImports.wglCreateContextAttribsARB != nullptr;
+}
+
 inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext, int* attribList) {
     GAPID_INFO("wglCreateContextAttribsARB(%p, %p, %p)", hdc, hShareContext, attribList);
 
     void* result = nullptr;
+
+    if (!hasWglCreateContextAttribsARB()) {
+        GAPID_WARNING("Application called unsupported function wglCreateContextAttribsARB");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20736,10 +27155,17 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
     return result;
 }
 
+inline bool GlesSpy::hasWglMakeCurrent() const { return mImports.wglMakeCurrent != nullptr; }
+
 inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
     GAPID_INFO("wglMakeCurrent(%p, %p)", hdc, hglrc);
 
     int result = 0;
+
+    if (!hasWglMakeCurrent()) {
+        GAPID_WARNING("Application called unsupported function wglMakeCurrent");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20762,8 +27188,15 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
     return result;
 }
 
+inline bool GlesSpy::hasWglSwapBuffers() const { return mImports.wglSwapBuffers != nullptr; }
+
 inline void GlesSpy::wglSwapBuffers(void* hdc) {
     GAPID_INFO("wglSwapBuffers(%p)", hdc);
+
+    if (!hasWglSwapBuffers()) {
+        GAPID_WARNING("Application called unsupported function wglSwapBuffers");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20778,10 +27211,17 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasCGLCreateContext() const { return mImports.CGLCreateContext != nullptr; }
+
 inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
     GAPID_INFO("CGLCreateContext(%p, %p, %p)", pix, share, ctx);
 
     int result = 0;
+
+    if (!hasCGLCreateContext()) {
+        GAPID_WARNING("Application called unsupported function CGLCreateContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20862,10 +27302,19 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
     return result;
 }
 
+inline bool GlesSpy::hasCGLSetCurrentContext() const {
+    return mImports.CGLSetCurrentContext != nullptr;
+}
+
 inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
     GAPID_INFO("CGLSetCurrentContext(%p)", ctx);
 
     int result = 0;
+
+    if (!hasCGLSetCurrentContext()) {
+        GAPID_WARNING("Application called unsupported function CGLSetCurrentContext");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20886,10 +27335,17 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
     return result;
 }
 
+inline bool GlesSpy::hasCGLGetSurface() const { return mImports.CGLGetSurface != nullptr; }
+
 inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* sid) {
     GAPID_INFO("CGLGetSurface(%p, %p, %p, %p)", ctx, cid, wid, sid);
 
     int result = 0;
+
+    if (!hasCGLGetSurface()) {
+        GAPID_WARNING("Application called unsupported function CGLGetSurface");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20917,10 +27373,19 @@ inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* 
     return result;
 }
 
+inline bool GlesSpy::hasCGSGetSurfaceBounds() const {
+    return mImports.CGSGetSurfaceBounds != nullptr;
+}
+
 inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, double* bounds) {
     GAPID_INFO("CGSGetSurfaceBounds(%p, %" PRId32 ", %" PRId32 ", %p)", cid, wid, sid, bounds);
 
     int result = 0;
+
+    if (!hasCGSGetSurfaceBounds()) {
+        GAPID_WARNING("Application called unsupported function CGSGetSurfaceBounds");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20942,10 +27407,17 @@ inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, dou
     return result;
 }
 
+inline bool GlesSpy::hasCGLFlushDrawable() const { return mImports.CGLFlushDrawable != nullptr; }
+
 inline int GlesSpy::CGLFlushDrawable(void* ctx) {
     GAPID_INFO("CGLFlushDrawable(%p)", ctx);
 
     int result = 0;
+
+    if (!hasCGLFlushDrawable()) {
+        GAPID_WARNING("Application called unsupported function CGLFlushDrawable");
+        return result;
+    }
 
     Observations observations;
     do {
@@ -20964,8 +27436,17 @@ inline int GlesSpy::CGLFlushDrawable(void* ctx) {
     return result;
 }
 
+inline bool GlesSpy::hasGlGetQueryObjecti64v() const {
+    return mImports.glGetQueryObjecti64v != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value) {
     GAPID_INFO("glGetQueryObjecti64v(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjecti64v()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjecti64v");
+        return;
+    }
 
     Observations observations;
     do {
@@ -20982,8 +27463,17 @@ inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, in
     mEncoder->Object(&coder);
 }
 
+inline bool GlesSpy::hasGlGetQueryObjectui64v() const {
+    return mImports.glGetQueryObjectui64v != nullptr;
+}
+
 inline void GlesSpy::glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value) {
     GAPID_INFO("glGetQueryObjectui64v(%" PRIu32 ", %u, %p)", query, parameter, value);
+
+    if (!hasGlGetQueryObjectui64v()) {
+        GAPID_WARNING("Application called unsupported function glGetQueryObjectui64v");
+        return;
+    }
 
     Observations observations;
     do {
