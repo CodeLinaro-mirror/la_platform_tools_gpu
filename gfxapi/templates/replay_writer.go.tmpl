@@ -162,7 +162,7 @@
   {{range $i, $c := AllCommands $}}
     var {{Template "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
       ID:         {{$i}},§
-      ReturnType: {{Template "Go.Replay.Type" $c.Return.Type}},§
+      ReturnType: {{Template "Go.Replay.ReturnType" $c.Return.Type}},§
       Parameters: {{len $c.CallParameters}},§
     }
   {{end}}
