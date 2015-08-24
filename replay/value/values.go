@@ -24,11 +24,11 @@ import (
 type Bool bool
 
 // Get returns TypeBool and 1 if the Bool is true, otherwise 0.
-func (v Bool) Get(PointerResolver) (protocol.Type, uint64) {
+func (v Bool) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
 	if v {
-		return protocol.TypeBool, 1
+		return protocol.TypeBool, 1, false
 	} else {
-		return protocol.TypeBool, 0
+		return protocol.TypeBool, 0, false
 	}
 }
 
@@ -36,32 +36,32 @@ func (v Bool) Get(PointerResolver) (protocol.Type, uint64) {
 type U8 uint8
 
 // Get returns TypeUint8 and the value zero-extended to a uint64.
-func (v U8) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeUint8, uint64(v)
+func (v U8) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeUint8, uint64(v), false
 }
 
 // S8 is a Value of type TypeInt8.
 type S8 int8
 
 // Get returns TypeInt8 and the value sign-extended to a uint64.
-func (v S8) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeInt8, uint64(v)
+func (v S8) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeInt8, uint64(v), false
 }
 
 // U16 is a Value of type TypeUint16.
 type U16 uint16
 
 // Get returns TypeUint16 and the value zero-extended to a uint64.
-func (v U16) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeUint16, uint64(v)
+func (v U16) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeUint16, uint64(v), false
 }
 
 // S16 is a Value of type TypeInt16.
 type S16 int16
 
 // Get returns TypeInt16 and the value sign-extended to a uint64.
-func (v S16) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeInt16, uint64(v)
+func (v S16) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeInt16, uint64(v), false
 }
 
 // F32 is a Value of type TypeFloat.
@@ -69,24 +69,24 @@ type F32 float32
 
 // Get returns TypeFloat and the IEEE 754 representation of the value packed
 // into the low part of a uint64.
-func (v F32) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeFloat, uint64(math.Float32bits(float32(v)))
+func (v F32) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeFloat, uint64(math.Float32bits(float32(v))), false
 }
 
 // U32 is a Value of type TypeUint32.
 type U32 uint32
 
 // Get returns TypeUint32 and the value zero-extended to a uint64.
-func (v U32) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeUint32, uint64(v)
+func (v U32) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeUint32, uint64(v), false
 }
 
 // S32 is a Value of type TypeInt32.
 type S32 int32
 
 // Get returns TypeInt32 and the value sign-extended to a uint64.
-func (v S32) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeInt32, uint64(v)
+func (v S32) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeInt32, uint64(v), false
 }
 
 // F64 is a Value of type TypeDouble.
@@ -94,33 +94,51 @@ type F64 float64
 
 // Get returns TypeDouble and the IEEE 754 representation of the value packed
 // into a uint64.
-func (v F64) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeDouble, math.Float64bits(float64(v))
+func (v F64) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeDouble, math.Float64bits(float64(v)), false
 }
 
 // U64 is a Value of type TypeUint64.
 type U64 uint64
 
 // Get returns TypeUint64 the value zero-extended to a uint64.
-func (v U64) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeUint64, uint64(v)
+func (v U64) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeUint64, uint64(v), false
 }
 
 // S64 is a Value of type TypeInt64.
 type S64 int64
 
 // Get returns TypeInt64 and the value reinterpreted as a uint64.
-func (v S64) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeInt64, uint64(v)
+func (v S64) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeInt64, uint64(v), false
 }
+
+// AbsoluteStackPointer represents a pointer on the top of the stack in the
+// absolute address-space that will not be altered before being passed to the
+// protocol.
+type AbsoluteStackPointer struct{}
+
+// Get returns TypeAbsolutePointer and the uint64 value of the absolute pointer.
+func (p AbsoluteStackPointer) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeAbsolutePointer, 0, true
+}
+
+// Offset returns the sum of the pointer with offset.
+func (p AbsoluteStackPointer) Offset(offset uint64) Pointer {
+	panic("AbsoluteStackPointer.Offset is not implemented")
+}
+
+// IsValid returns true for all absolute pointers.
+func (p AbsoluteStackPointer) IsValid() bool { return true }
 
 // AbsolutePointer is a pointer in the absolute address-space that will not be
 // altered before being passed to the protocol.
 type AbsolutePointer uint64
 
 // Get returns TypeAbsolutePointer and the uint64 value of the absolute pointer.
-func (p AbsolutePointer) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeAbsolutePointer, uint64(p)
+func (p AbsolutePointer) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeAbsolutePointer, uint64(p), false
 }
 
 // Offset returns the sum of the pointer with offset.
@@ -139,8 +157,9 @@ type RemappedPointer uint64
 
 // Get returns the pointer type and the pointer translated to either an
 // equivalent volatile address-space pointer or absolute pointer.
-func (p RemappedPointer) Get(r PointerResolver) (protocol.Type, uint64) {
-	return r.TranslateRemappedPointer(uint64(p))
+func (p RemappedPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	ty, val = r.TranslateRemappedPointer(uint64(p))
+	return ty, val, false
 }
 
 // Offset returns the sum of the pointer with offset.
@@ -163,8 +182,8 @@ type VolatilePointer uint64
 
 // Get returns TypeVolatilePointer and the uint64 value of the pointer in
 // volatile address-space.
-func (p VolatilePointer) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeVolatilePointer, uint64(p)
+func (p VolatilePointer) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeVolatilePointer, uint64(p), false
 }
 
 // Offset returns the sum of the pointer with offset.
@@ -178,12 +197,13 @@ func (p VolatilePointer) IsValid() bool { return true }
 // VolatileTemporaryPointer is a pointer to in temporary address-space.
 // The temporary address-space sits within a reserved area of the the volatile
 // address space and its offset is calculated dynamically.
+// TODO: REMOVE
 type VolatileTemporaryPointer uint64
 
 // Get returns TypeVolatilePointer and the dynamically calculated offset of the
 // temporary pointer within volatile address-space.
-func (p VolatileTemporaryPointer) Get(r PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeVolatilePointer, r.TranslateTemporaryPointer(uint64(p))
+func (p VolatileTemporaryPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeVolatilePointer, r.TranslateTemporaryPointer(uint64(p)), false
 }
 
 // Offset returns the sum of the pointer with offset.
@@ -199,8 +219,8 @@ func (p VolatileTemporaryPointer) IsValid() bool { return true }
 type ConstantPointer uint64
 
 // Get returns TypeConstantPointer and the uint64 value of the pointer in constant address-space.
-func (p ConstantPointer) Get(PointerResolver) (protocol.Type, uint64) {
-	return protocol.TypeConstantPointer, uint64(p)
+func (p ConstantPointer) Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeConstantPointer, uint64(p), false
 }
 
 // Offset returns the sum of the pointer with offset.

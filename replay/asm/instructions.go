@@ -23,22 +23,17 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-// Instruction is the interface of all instruction types.
-//
-// Encode writes the instruction's opcodes to the binary encoder e, translating
-// any pointers to their final, resolved addresses using the PointerResolver r.
-// An instruction can produce zero, one or many opcodes.
-type Instruction interface {
-	Encode(r value.PointerResolver, e binary.Encoder) error
-}
+const (
+	// Various bit-masks used by this function.
+	// Many opcodes can fit values into the opcode itself.
+	// These masks are used to determine which values fit.
 
-func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
-	mask19 := uint64(0x7ffff)
-	mask20 := uint64(0xfffff)
-	mask26 := uint64(0x3ffffff)
-	mask45 := uint64(0x1fffffffffff)
-	mask46 := uint64(0x3fffffffffff)
-	mask52 := uint64(0xfffffffffffff)
+	mask19 = uint64(0x7ffff)
+	mask20 = uint64(0xfffff)
+	mask26 = uint64(0x3ffffff)
+	mask45 = uint64(0x1fffffffffff)
+	mask46 = uint64(0x3fffffffffff)
+	mask52 = uint64(0xfffffffffffff)
 
 	//     ▏60       ▏50       ▏40       ▏30       ▏20       ▏10
 	// ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●● mask19
@@ -49,7 +44,18 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 	// ○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● mask52
 	//                                            ▕      PUSHI 20     ▕
 	//                                      ▕         EXTEND 26       ▕
+)
 
+// Instruction is the interface of all instruction types.
+//
+// Encode writes the instruction's opcodes to the binary encoder e, translating
+// any pointers to their final, resolved addresses using the PointerResolver r.
+// An instruction can produce zero, one or many opcodes.
+type Instruction interface {
+	Encode(r value.PointerResolver, e binary.Encoder) error
+}
+
+func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 	switch t {
 	case protocol.TypeFloat:
 		push := opcode.PushI{DataType: t, Value: uint32(v >> 23)}
@@ -176,8 +182,11 @@ type Push struct {
 }
 
 func (a Push) Encode(r value.PointerResolver, e binary.Encoder) error {
-	ty, val := a.Value.Get(r)
-	return encodePush(ty, val, e)
+	if ty, val, onStack := a.Value.Get(r); onStack {
+		return nil
+	} else {
+		return encodePush(ty, val, e)
+	}
 }
 
 // Pop is an Instruction that discards Count values from the top of the VM
@@ -219,21 +228,23 @@ type Load struct {
 }
 
 func (a Load) Encode(r value.PointerResolver, e binary.Encoder) error {
-	ty, addr := a.Source.Get(r)
-	switch ty {
-	case protocol.TypeConstantPointer:
-		if addr < 0x100000 {
-			return opcode.LoadC{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
+	ty, addr, onStack := a.Source.Get(r)
+	if !onStack {
+		switch ty {
+		case protocol.TypeConstantPointer:
+			if addr&^mask20 == 0 {
+				return opcode.LoadC{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
+			}
+		case protocol.TypeVolatilePointer:
+			if addr&^mask20 == 0 {
+				return opcode.LoadV{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
+			}
+		default:
+			return fmt.Errorf("Unsupported load source type %T", a.Source)
 		}
-	case protocol.TypeVolatilePointer:
-		if addr < 0x100000 {
-			return opcode.LoadV{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
+		if err := encodePush(ty, addr, e); err != nil {
+			return err
 		}
-	default:
-		return fmt.Errorf("Unsupported load source type %T", a.Source)
-	}
-	if err := encodePush(ty, addr, e); err != nil {
-		return err
 	}
 	return opcode.Load{DataType: a.DataType}.Encode(e)
 }
@@ -245,15 +256,17 @@ type Store struct {
 }
 
 func (a Store) Encode(r value.PointerResolver, e binary.Encoder) error {
-	ty, addr := a.Destination.Get(r)
-	if addr < 0x3ffffff {
-		return opcode.StoreV{Address: uint32(addr)}.Encode(e)
-	} else {
-		if err := encodePush(ty, addr, e); err != nil {
-			return err
+	ty, addr, onStack := a.Destination.Get(r)
+	if !onStack {
+		if addr&^mask26 == 0 {
+			return opcode.StoreV{Address: uint32(addr)}.Encode(e)
+		} else {
+			if err := encodePush(ty, addr, e); err != nil {
+				return err
+			}
 		}
-		return opcode.Store{}.Encode(e)
 	}
+	return opcode.Store{}.Encode(e)
 }
 
 // Strcpy is an Instruction that pops the target address then the source address
@@ -275,14 +288,15 @@ func (a Strcpy) Encode(r value.PointerResolver, e binary.Encoder) error {
 // bytes and writes the resource to Destination.
 type Resource struct {
 	Index       uint32
-	Destination uint64
+	Destination value.Pointer
 }
 
 func (a Resource) Encode(r value.PointerResolver, e binary.Encoder) error {
-	ptr := value.RemappedPointer(a.Destination)
-	ty, val := ptr.Get(r)
-	if err := encodePush(ty, val, e); err != nil {
-		return err
+	ty, val, onStack := a.Destination.Get(r)
+	if !onStack {
+		if err := encodePush(ty, val, e); err != nil {
+			return err
+		}
 	}
 	return opcode.Resource{
 		ID: a.Index,
@@ -296,9 +310,11 @@ type Post struct {
 }
 
 func (a Post) Encode(r value.PointerResolver, e binary.Encoder) error {
-	ty, val := a.Source.Get(r)
-	if err := encodePush(ty, val, e); err != nil {
-		return err
+	ty, val, onStack := a.Source.Get(r)
+	if !onStack {
+		if err := encodePush(ty, val, e); err != nil {
+			return err
+		}
 	}
 	if err := encodePush(protocol.TypeUint32, a.Size, e); err != nil {
 		return err
