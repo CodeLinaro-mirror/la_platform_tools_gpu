@@ -3854,6 +3854,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
         uint8_t* l_ptr = (uint8_t*)(result);
         l_b->mMappingAccess = access;
         l_b->mMappingData = slice(l_ptr, (uint64_t)((GLsizeiptr)(0)), (uint64_t)(length));
+        mapMemory(l_b->mMappingData);
         if ((access & GLbitfield::GL_MAP_READ_BIT) != 0) {
             Slice<uint8_t> l_src =
                     slice(l_b->mData, (uint64_t)(offset), (uint64_t)(offset + (GLintptr)(length)));
@@ -3925,6 +3926,9 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
         observe(observations.mReads);
         result = mImports.glUnmapBuffer(target);
         write(copy__dst__);
+        unmapMemory(l_b->mMappingData);
+        l_b->mMappingOffset = 0;
+        l_b->mMappingData = Slice<uint8_t>();
         break;
     } while (false);
     observe(observations.mWrites);

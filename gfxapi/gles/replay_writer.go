@@ -2155,6 +2155,7 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ptr := U8ᵖ(ϟa.Result) // U8ᵖ
 	b.MappingAccess = ϟa.Access
 	b.MappingData = ptr.Slice(uint64(GLsizeiptr(int32(0))), uint64(ϟa.Length), ϟs)
+	externs{ϟa, ϟs, ϟd, ϟl, ϟb}.mapMemory(b.MappingData)
 	if (GLbitfield_GL_MAP_READ_BIT)&(ϟa.Access) != 0 {
 		src := b.Data.Slice(uint64(ϟa.Offset), uint64((ϟa.Offset)+(GLintptr(ϟa.Length))), ϟs) // U8ˢ
 		dst := b.MappingData                                                                  // U8ˢ
@@ -2198,6 +2199,9 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Call(funcInfoGlUnmapBuffer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
+	externs{ϟa, ϟs, ϟd, ϟl, ϟb}.unmapMemory(b.MappingData)
+	b.MappingOffset = int32(0)
+	b.MappingData = U8ˢ{}
 	_, _, _, _, _, _ = minRequiredVersion_111_major, minRequiredVersion_111_minor, context, GetContext_115_result, ctx, b
 	return nil
 }
