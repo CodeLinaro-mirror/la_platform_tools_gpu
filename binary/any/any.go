@@ -49,63 +49,63 @@ func (e ErrNotBoxedValue) Error() string {
 }
 
 type object_ struct {
-	binary.Generate `java:"ObjectBox" implements:"Box"`
+	binary.Generate `java:"ObjectBox"`
 	value           binary.Object
 }
 
 type bool_ struct {
-	binary.Generate `implements:"Box"`
-	value           bool
+	binary.Generate
+	value bool
 }
 
 type uint8_ struct {
-	binary.Generate `implements:"Box"`
-	value           uint8
+	binary.Generate
+	value uint8
 }
 
 type int8_ struct {
-	binary.Generate `implements:"Box"`
-	value           int8
+	binary.Generate
+	value int8
 }
 
 type uint16_ struct {
-	binary.Generate `implements:"Box"`
-	value           uint16
+	binary.Generate
+	value uint16
 }
 
 type int16_ struct {
-	binary.Generate `implements:"Box"`
-	value           int16
+	binary.Generate
+	value int16
 }
 
 type float32_ struct {
-	binary.Generate `implements:"Box"`
-	value           float32
+	binary.Generate
+	value float32
 }
 
 type uint32_ struct {
-	binary.Generate `implements:"Box"`
-	value           uint32
+	binary.Generate
+	value uint32
 }
 
 type int32_ struct {
-	binary.Generate `implements:"Box"`
-	value           int32
+	binary.Generate
+	value int32
 }
 
 type float64_ struct {
-	binary.Generate `implements:"Box"`
-	value           float64
+	binary.Generate
+	value float64
 }
 
 type uint64_ struct {
-	binary.Generate `implements:"Box"`
-	value           uint64
+	binary.Generate
+	value uint64
 }
 
 type int64_ struct {
-	binary.Generate `implements:"Box"`
-	value           int64
+	binary.Generate
+	value int64
 }
 
 type int_ struct {
@@ -114,7 +114,7 @@ type int_ struct {
 }
 
 type string_ struct {
-	binary.Generate `java:"StringBox" implements:"Box"`
+	binary.Generate `java:"StringBox"`
 	value           string
 }
 
@@ -134,63 +134,63 @@ func (v int_) unbox() interface{}     { return v.value }
 func (v string_) unbox() interface{}  { return v.value }
 
 type objectSlice struct {
-	binary.Generate `implements:"Box"`
-	value           []binary.Object
+	binary.Generate
+	value []binary.Object
 }
 
 type boolSlice struct {
-	binary.Generate `implements:"Box"`
-	value           []bool
+	binary.Generate
+	value []bool
 }
 
 type uint8Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []uint8
+	binary.Generate
+	value []uint8
 }
 
 type int8Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []int8
+	binary.Generate
+	value []int8
 }
 
 type uint16Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []uint16
+	binary.Generate
+	value []uint16
 }
 
 type int16Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []int16
+	binary.Generate
+	value []int16
 }
 
 type float32Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []float32
+	binary.Generate
+	value []float32
 }
 
 type uint32Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []uint32
+	binary.Generate
+	value []uint32
 }
 
 type int32Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []int32
+	binary.Generate
+	value []int32
 }
 
 type float64Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []float64
+	binary.Generate
+	value []float64
 }
 
 type uint64Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []uint64
+	binary.Generate
+	value []uint64
 }
 
 type int64Slice struct {
-	binary.Generate `implements:"Box"`
-	value           []int64
+	binary.Generate
+	value []int64
 }
 
 type intSlice struct {
@@ -199,8 +199,8 @@ type intSlice struct {
 }
 
 type stringSlice struct {
-	binary.Generate `implements:"Box"`
-	value           []string
+	binary.Generate
+	value []string
 }
 
 func (v objectSlice) unbox() interface{}  { return v.value }

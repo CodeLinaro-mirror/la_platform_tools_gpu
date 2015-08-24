@@ -1073,7 +1073,7 @@ const java_binary_tmpl = `{{/*
   import java.io.IOException;¶
   ¶
   {{if .Struct.Exported}}public•{{end}}
-  final class {{File.ClassName .Struct}}{{if $e := .Struct.Tags.Get  "implements"}} extends {{File.ClassName $e}}{{end}} implements BinaryObject {»¶
+  final class {{File.ClassName .Struct}} implements BinaryObject {»¶
     //{{Section "Java.ClassBody"}}¶
     public enum Klass implements BinaryClass {»¶
       //{{Section "Java.KlassBody"}}¶
