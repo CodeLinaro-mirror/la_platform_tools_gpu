@@ -139,8 +139,17 @@ func (settings JavaSettings) Setter(s string) string {
 
 // MethodName converts from a go public method name to a java method name.
 func (settings JavaSettings) MethodName(s string) string {
-	r, n := utf8.DecodeRuneInString(s)
-	return string(unicode.ToLower(r)) + s[n:]
+	i := strings.IndexFunc(s, func(r rune) bool {
+		return !unicode.IsUpper(r)
+	})
+	switch i {
+	case -1:
+		return strings.ToLower(s)
+	case 0:
+		return s
+	default:
+		return strings.ToLower(s[0:i]) + s[i:]
+	}
 }
 
 // returns the module if found, the extracted type name and the modified java name
