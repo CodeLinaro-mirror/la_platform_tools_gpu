@@ -1001,7 +1001,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
 {{define "Java.Field"}}
-  {{Call "Java.Type" .Type}} {{File.FieldName .Name}};¶
+  private {{Call "Java.Type" .Type}} {{File.FieldName .Name}};¶
 {{end}}
 
 {{define "Java.Accessors"}}
@@ -1195,7 +1195,7 @@ const java_client_tmpl = `{{/*
         @Override¶
         public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
           {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
-            return result.myValue;¶
+            return result.getValue();¶
           {{else}}
             myBroadcaster.Send(myCall);¶
             return null;¶
