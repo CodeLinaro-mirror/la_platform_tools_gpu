@@ -93,7 +93,7 @@
         @Override¶
         public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
           {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
-            return result.myValue;¶
+            return result.getValue();¶
           {{else}}
             myBroadcaster.Send(myCall);¶
             return null;¶
