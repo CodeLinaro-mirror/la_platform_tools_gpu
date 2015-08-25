@@ -19013,7 +19013,7 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
         Slice<Vec2f> l_v = make<Vec2f>(1);
         observe(observations.mReads);
         mImports.glUniform2f(location, value0, value1);
-        write(l_v, 0, Vec2f{value0, value1});
+        write(l_v, 0, {value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_FLOAT_VEC2;
@@ -19081,7 +19081,7 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
         Slice<Vec2i> l_v = make<Vec2i>(1);
         observe(observations.mReads);
         mImports.glUniform2i(location, value0, value1);
-        write(l_v, 0, Vec2i{value0, value1});
+        write(l_v, 0, {value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_INT_VEC2;
@@ -19198,7 +19198,7 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
         Slice<Vec3f> l_v = make<Vec3f>(1);
         observe(observations.mReads);
         mImports.glUniform3f(location, value0, value1, value2);
-        write(l_v, 0, Vec3f{value0, value1, value2});
+        write(l_v, 0, {value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_FLOAT_VEC3;
@@ -19267,7 +19267,7 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
         Slice<Vec3i> l_v = make<Vec3i>(1);
         observe(observations.mReads);
         mImports.glUniform3i(location, value0, value1, value2);
-        write(l_v, 0, Vec3i{value0, value1, value2});
+        write(l_v, 0, {value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_INT_VEC3;
@@ -19387,7 +19387,7 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
         Slice<Vec4f> l_v = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glUniform4f(location, value0, value1, value2, value3);
-        write(l_v, 0, Vec4f{value0, value1, value2, value3});
+        write(l_v, 0, {value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_FLOAT_VEC4;
@@ -19457,7 +19457,7 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
         Slice<Vec4i> l_v = make<Vec4i>(1);
         observe(observations.mReads);
         mImports.glUniform4i(location, value0, value1, value2, value3);
-        write(l_v, 0, Vec4i{value0, value1, value2, value3});
+        write(l_v, 0, {value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = GLenum::GL_INT_VEC4;

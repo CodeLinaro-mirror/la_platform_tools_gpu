@@ -448,7 +448,7 @@
   {{else if IsNull             $}}{{Template "C++.Null" $.Type}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Template "C++.Type" $ty.To}}>(new {{Template "C++.Type" $ty.To}}())
   {{else if IsCreate           $}}{{Template "C++.Create" $}}
-  {{else if IsArrayInitializer $}}{{Template "C++.Type" $}}{ {{ForEach $.Values "C++.Read" | JoinWith ", "}} }
+  {{else if IsArrayInitializer $}}{ {{ForEach $.Values "C++.Read" | JoinWith ", "}} }
   {{else if IsClassInitializer $}}{{Template "C++.ClassInitializer" $}}
   {{else if IsSliceIndex       $}}{{Template "C++.SliceIndex" $}}
   {{else if IsSliceRange       $}}slice({{Template "C++.Read" $.Slice}}, {{Template "C++.Read" $.Range.LHS}}, {{Template "C++.Read" $.Range.RHS}})
