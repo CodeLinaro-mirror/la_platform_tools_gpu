@@ -196,7 +196,7 @@ func select_(ctx *context, in *ast.Switch) *semantic.Select {
 			ctx.errorf(in, "switch default is not a single expression")
 		}
 		e := expression(ctx, in.Default.Block.Statements[0])
-		out.Default = &e
+		out.Default = e
 		if out.Type == nil {
 			out.Type = e.ExpressionType()
 		} else if !equal(out.Type, e.ExpressionType()) {
