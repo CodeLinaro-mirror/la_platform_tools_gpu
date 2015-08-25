@@ -16,6 +16,7 @@
 
 
 {{define "Java.Enum"}}
+  {{$name := File.ClassName .Type}}
   §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
   ¶
@@ -24,31 +25,47 @@
   import com.android.tools.rpclib.binary.Encoder;¶
   import java.io.IOException;¶
   ¶
-  public enum {{File.ClassName .Type}} {»¶
-    {{range $i, $e := .Entries}}
-      {{if $i}},¶{{end}}
-      {{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}})
-    {{end}};¶
+  public final class {{$name}} {»¶
+    {{range .Entries}}
+      public static final {{Call "Java.PrimitiveType" $.Type}} {{.Name}} = {{.Value}}{{Call "Java.ConstSuffix" $.Type}};¶
+      public static {{$name}} {{File.MethodName .Name}}() { return new {{$name}}({{.Name}}); }¶
+    {{end}}
     ¶
-    private final {{Call "Java.PrimitiveType" .Type}} {{"value" | File.FieldName}};¶
-    {{File.ClassName .Type}}({{Call "Java.PrimitiveType" .Type}} value) {»¶
-      {{"value" | File.FieldName}} = value;¶
+    public final {{Call "Java.PrimitiveType" .Type}} value;¶
+    ¶
+    public {{$name}}({{Call "Java.PrimitiveType" .Type}} value) {»¶
+      this.value = value;¶
     «}¶
-    public {{Call "Java.PrimitiveType" .Type}} {{"value" | File.Getter}}() { return {{"value" | File.FieldName}}; }¶
     ¶
     public void encode(@NotNull Encoder e) throws IOException {»¶
-      e.{{Call "Java.Method" .Type}}({{"value" | File.FieldName}});¶
+      e.{{Call "Java.Method" .Type}}(value);¶
     «}¶
     ¶
-    public static {{File.ClassName .Type}} decode(@NotNull Decoder d) throws IOException {»¶
+    public static {{$name}} decode(@NotNull Decoder d) throws IOException {»¶
       {{Call "Java.PrimitiveType" .Type}} value = d.{{Call "Java.Method" .Type}}();¶
-      switch (value) {¶
-      {{range $i, $e := .Entries}}
-        case {{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}:»¶
-          return {{$e.Name}};¶«
-      {{end}}
-      }¶
-      throw new IOException("Invalid value for {{File.ClassName .Type}}");¶
+      return new {{$name}}(value);¶
+    «}¶
+    ¶
+    @Override¶
+    public boolean equals(Object o) {»¶
+      if (this == o) return true;¶
+      if (o == null || !(o instanceof {{$name}})) return false;¶
+      return value != (({{$name}})o).value;¶
+    «}¶
+    ¶
+    @Override¶
+    public int hashCode() {»¶
+      return value;¶
+    «}¶
+    ¶
+    @Override¶
+    public String toString() {»¶
+      switch(value) {»¶
+        {{range .Entries}}
+          case {{.Name}}: return "{{.Name}}";¶
+        {{end}}
+        default: return "{{$name}}(" + value + ")";¶
+      «}¶
     «}¶
   «}¶
 {{end}}
