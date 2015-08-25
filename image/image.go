@@ -27,18 +27,18 @@ import (
 type Image struct {
 	binary.Generate
 	Format Format // The format of the image.
-	Width  int    // The width of the image in pixels.
-	Height int    // The height of the image in pixels.
+	Width  uint32 // The width of the image in pixels.
+	Height uint32 // The height of the image in pixels.
 	Data   []byte // The pixel data.
 }
 
 // Info describes a two-dimensional bitmap.
 type Info struct {
-	binary.Generate
-	Format Format     // The format of the image.
-	Width  int        // The width of the image in pixels.
-	Height int        // The height of the image in pixels.
-	Data   *path.Blob // The path to the pixel data of the image.
+	binary.Generate `java:"ImageInfo"`
+	Format          Format     // The format of the image.
+	Width           uint32     // The width of the image in pixels.
+	Height          uint32     // The height of the image in pixels.
+	Data            *path.Blob // The path to the pixel data of the image.
 }
 
 // Convert returns this image Info converted to format specified by p.

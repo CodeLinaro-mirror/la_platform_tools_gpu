@@ -43,8 +43,8 @@ func (t *Texture) ResourceData(s *gfxapi.State, d database.Database, l log.Logge
 		for levelIdx, level := range t.Texture2D {
 			levels[levelIdx] = image.Info{
 				Format: imageFormat(level.Format),
-				Width:  int(level.Width),
-				Height: int(level.Height),
+				Width:  uint32(level.Width),
+				Height: uint32(level.Height),
 				Data:   &path.Blob{ID: level.Data.ResourceID(s, d, l)},
 			}
 		}

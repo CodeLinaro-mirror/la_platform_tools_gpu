@@ -51,8 +51,8 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 
 			id, err := database.Store(&image.LazyConverter{
 				Data:       a.Data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
-				Width:      int(a.Width),
-				Height:     int(a.Height),
+				Width:      uint32(a.Width),
+				Height:     uint32(a.Height),
 				FormatFrom: imageFormat(a.Format),
 				FormatTo:   image.RGBA(),
 			}, d, l)

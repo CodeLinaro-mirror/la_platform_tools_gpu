@@ -23,9 +23,9 @@ import (
 // Thumbnail is a path to the thumbnail for a given object.
 type Thumbnail struct {
 	binary.Generate
-	Object        Path // The path to the thumbnail's object
-	DesiredWidth  int  // The desired width of the thumbnail image.
-	DesiredHeight int  // The desired height of the thumbnail image.
+	Object        Path   // The path to the thumbnail's object
+	DesiredWidth  uint32 // The desired width of the thumbnail image.
+	DesiredHeight uint32 // The desired height of the thumbnail image.
 }
 
 // String returns the string representation of the path.

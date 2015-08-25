@@ -45,8 +45,8 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 
 	return &image.Info{
 		Format: image.Float32(), // TODO: Add support for other formats.
-		Width:  int(fbWidth),
-		Height: int(fbHeight),
+		Width:  fbWidth,
+		Height: fbHeight,
 		Data:   &path.Blob{ID: data},
 	}, nil
 }

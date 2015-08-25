@@ -32,9 +32,9 @@ func init() {
 }
 
 var (
-	binaryIDImage                          = binary.ID{0x7f, 0x00, 0xb8, 0x2c, 0xfa, 0x52, 0x0b, 0xc4, 0xe1, 0x72, 0x5f, 0xec, 0x17, 0x2d, 0x53, 0x23, 0x5e, 0x9e, 0xfb, 0xcf}
-	binaryIDInfo                           = binary.ID{0x1b, 0xb4, 0xa1, 0xf8, 0xa8, 0x8f, 0x5e, 0xcb, 0x78, 0xe8, 0x82, 0x82, 0x38, 0x0d, 0x0d, 0x73, 0x37, 0x9c, 0x8b, 0xd6}
-	binaryIDLazyConverter                  = binary.ID{0x07, 0xf6, 0xa1, 0xac, 0xda, 0xf3, 0xcb, 0x99, 0xe4, 0x63, 0xd3, 0xb6, 0x75, 0x37, 0x74, 0xa4, 0x44, 0x9c, 0xad, 0x10}
+	binaryIDImage                          = binary.ID{0xcf, 0x62, 0x4e, 0xa8, 0xc9, 0xf6, 0xfb, 0x72, 0xd5, 0x3a, 0xa0, 0xf3, 0x96, 0x6a, 0x0e, 0x7b, 0x22, 0x9d, 0xfb, 0xe0}
+	binaryIDInfo                           = binary.ID{0x20, 0x10, 0x3d, 0xd5, 0x64, 0xf2, 0x0d, 0x82, 0x67, 0xb7, 0x02, 0x7e, 0x95, 0xa0, 0x1f, 0x31, 0x7e, 0x97, 0x17, 0xdd}
+	binaryIDLazyConverter                  = binary.ID{0x46, 0x65, 0x65, 0x3e, 0xeb, 0x18, 0x6e, 0xc4, 0x91, 0xe8, 0x4a, 0x4a, 0x31, 0xe4, 0xda, 0xbb, 0x74, 0xd2, 0xcc, 0x4a}
 	binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD = binary.ID{0x00, 0x01, 0xf1, 0x3d, 0xda, 0x93, 0xca, 0x32, 0xc1, 0x10, 0x62, 0x0a, 0x34, 0xd2, 0x97, 0xc3, 0x62, 0x03, 0x7e, 0x27}
 	binaryIDfmtATC_RGB_AMD                 = binary.ID{0x8b, 0x48, 0x62, 0x86, 0x18, 0xe9, 0x20, 0x62, 0x5f, 0xf5, 0x80, 0xa5, 0xba, 0xb9, 0x5e, 0x69, 0x6b, 0xa5, 0x32, 0xf6}
 	binaryIDfmtAlpha                       = binary.ID{0xaa, 0x3d, 0x3b, 0xac, 0x9b, 0x5c, 0x60, 0x12, 0xdd, 0xd9, 0x45, 0x4c, 0xc5, 0xdd, 0xd1, 0x1f, 0xfd, 0x42, 0xf5, 0xdc}
@@ -60,10 +60,10 @@ func doEncodeImage(e binary.Encoder, o *Image) error {
 	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Width)); err != nil {
+	if err := e.Uint32(o.Width); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Height)); err != nil {
+	if err := e.Uint32(o.Height); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Data))); err != nil {
@@ -82,15 +82,15 @@ func doDecodeImage(d binary.Decoder, o *Image) error {
 	} else {
 		o.Format = nil
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Width = int(obj)
+		o.Width = uint32(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Height = int(obj)
+		o.Height = uint32(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
@@ -106,10 +106,10 @@ func doSkipImage(d binary.Decoder) error {
 	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -142,8 +142,8 @@ var schemaImage = &schema.Class{
 	Name:    "Image",
 	Fields: []schema.Field{
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }
@@ -161,10 +161,10 @@ func doEncodeInfo(e binary.Encoder, o *Info) error {
 	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Width)); err != nil {
+	if err := e.Uint32(o.Width); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Height)); err != nil {
+	if err := e.Uint32(o.Height); err != nil {
 		return err
 	}
 	if o.Data != nil {
@@ -184,15 +184,15 @@ func doDecodeInfo(d binary.Decoder, o *Info) error {
 	} else {
 		o.Format = nil
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Width = int(obj)
+		o.Width = uint32(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Height = int(obj)
+		o.Height = uint32(obj)
 	}
 	if obj, err := d.Object(); err != nil {
 		return err
@@ -207,10 +207,10 @@ func doSkipInfo(d binary.Decoder) error {
 	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	if _, err := d.SkipObject(); err != nil {
@@ -239,8 +239,8 @@ var schemaInfo = &schema.Class{
 	Name:    "Info",
 	Fields: []schema.Field{
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Blob", ID: (*path.Blob)(nil).Class().ID()}}},
 	},
 }
@@ -254,10 +254,10 @@ func doEncodeLazyConverter(e binary.Encoder, o *LazyConverter) error {
 	if err := e.ID(o.Data); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Width)); err != nil {
+	if err := e.Uint32(o.Width); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Height)); err != nil {
+	if err := e.Uint32(o.Height); err != nil {
 		return err
 	}
 	if o.FormatFrom != nil {
@@ -282,15 +282,15 @@ func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) error {
 	} else {
 		o.Data = binary.ID(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Width = int(obj)
+		o.Width = uint32(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Height = int(obj)
+		o.Height = uint32(obj)
 	}
 	if obj, err := d.Object(); err != nil {
 		return err
@@ -312,10 +312,10 @@ func doSkipLazyConverter(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	if _, err := d.SkipObject(); err != nil {
@@ -347,8 +347,8 @@ var schemaLazyConverter = &schema.Class{
 	Name:    "LazyConverter",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FormatFrom", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "FormatTo", Type: &schema.Interface{Name: "Format"}},
 	},
