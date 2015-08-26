@@ -30,23 +30,57 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.Atom {
+type readFramebuffer struct {
+	state      *gfxapi.State
+	database   database.Database
+	logger     log.Logger
+	injections map[atom.ID][]func(out atom.Writer)
+}
+
+func NewReadFramebuffer(d database.Database, l log.Logger) *readFramebuffer {
+	return &readFramebuffer{
+		state:      gfxapi.NewState(),
+		database:   d,
+		logger:     l,
+		injections: make(map[atom.ID][]func(out atom.Writer)),
+	}
+}
+
+func (t *readFramebuffer) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
+	if err := a.Mutate(t.state, t.database, t.logger); err != nil {
+		log.Errorf(t.logger, "%v", err)
+	}
+	out.Write(id, a)
+	if r, ok := t.injections[id]; ok {
+		for _, injection := range r {
+			injection(out)
+		}
+		delete(t.injections, id)
+	}
+}
+
+func (t *readFramebuffer) Flush(out atom.Writer) {}
+
+func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan replay.Image) {
 	shaderPrefix := ""
 	if v, err := ParseVersion(device.Version); err == nil && v.IsES {
 		shaderPrefix = "precision highp float;\n"
 	}
 
-	return replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+	t.injections[id] = append(t.injections[id], func(out atom.Writer) {
+		s, d, l := t.state, t.database, t.logger
 		arch := s.Architecture
 		c := getContext(s)
 
 		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
-			return err
+			log.Errorf(l, "%v", err)
+			return
 		}
 		depthW, depthH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
 		if err != nil {
-			return err
+			log.Errorf(l, "%v", err)
+			return
 		}
 
 		const (
@@ -116,16 +150,16 @@ func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.At
 		} {
 			capability := cap
 			if c.Capabilities[capability] {
-				NewGlDisable(capability).Replay(i, s, d, l, b)
+				out.Write(atom.NoID, NewGlDisable(capability))
 				undoList = append(undoList, NewGlEnable(capability))
 			}
 		}
 		if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
-			NewGlEnableVertexAttribArray(aScreenCoordsLocation).Replay(i, s, d, l, b)
+			out.Write(atom.NoID, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
 			undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
 		}
 
-		replayEach(i, s, d, l, b,
+		writeEach(out,
 			// Setup new framebuffer/renderbuffer.
 			NewGlGenFramebuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
@@ -153,10 +187,10 @@ func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.At
 		)
 
 		// Create the shader program
-		replayEach(i, s, d, l, b,
+		writeEach(out,
 			BuildProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
 
-		replayEach(i, s, d, l, b,
+		writeEach(out,
 			NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
 			NewGlLinkProgram(programID),
 			NewGlUseProgram(programID),
@@ -173,12 +207,12 @@ func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.At
 			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 		)
 
-		postColorData(i, s, d, l, b, outW, outH, out)
+		postColorData(s, outW, outH, out, img)
 
 		// Restore conditionally changed state.
-		replayEach(i, s, d, l, b, undoList...)
+		writeEach(out, undoList...)
 
-		replayEach(i, s, d, l, b,
+		writeEach(out,
 			// Restore buffer/vertexAttrib state.
 			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
 			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID),
@@ -205,19 +239,19 @@ func readFramebufferDepth(device *service.Device, out chan replay.Image) atom.At
 			NewGlDeleteShader(vertexShaderID),
 			NewGlDeleteShader(fragmentShaderID),
 		)
-
-		return nil
 	})
 }
 
-func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom {
-	return replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan replay.Image) {
+	t.injections[id] = append(t.injections[id], func(out atom.Writer) {
+		s, d, l := t.state, t.database, t.logger
 		arch := s.Architecture
 		c := getContext(s)
 
 		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
-			return err
+			log.Errorf(l, "%v", err)
+			return
 		}
 
 		var (
@@ -236,12 +270,12 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 		framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
 
 		if inW == outW && inH == outH {
-			postColorData(i, s, d, l, b, outW, outH, out)
+			postColorData(s, outW, outH, out, img)
 		} else {
 			ctx := getContext(s)
 			origScissor := ctx.Rasterizing.Scissor
 
-			replayEach(i, s, d, l, b,
+			writeEach(out,
 				NewGlScissor(0, 0, GLsizei(colorW), GLsizei(colorH)),
 				NewGlGenFramebuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
@@ -255,9 +289,9 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 			)
 
-			postColorData(i, s, d, l, b, outW, outH, out)
+			postColorData(s, outW, outH, out, img)
 
-			replayEach(i, s, d, l, b,
+			writeEach(out,
 				NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, origRenderbufferID),
 				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, origReadFramebufferID),
 				NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
@@ -268,45 +302,44 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 				NewGlScissor(origScissor.X, origScissor.Y, origScissor.Width, origScissor.Height),
 			)
 		}
-
-		return nil
 	})
 }
 
-func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32, img chan<- replay.Image) {
+func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, img chan<- replay.Image) {
 	ctx := getContext(s)
 	origPackAlignment := ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
-		NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, 1).Replay(i, s, d, l, b)
-		defer NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, origPackAlignment).Replay(i, s, d, l, b)
+		out.Write(atom.NoID, NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, 1))
+		defer out.Write(atom.NoID, NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, origPackAlignment))
 	}
 	if origPackBuffer, ok := ctx.BoundBuffers[GLenum_GL_PIXEL_PACK_BUFFER]; ok && origPackBuffer != 0 {
-		NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, 0).Replay(i, s, d, l, b)
-		defer NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, origPackBuffer).Replay(i, s, d, l, b)
+		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, 0))
+		defer out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, origPackBuffer))
 	}
 
 	imageSize := uint64(width * height * 4)
-	NewGlReadPixels(0, 0, GLsizei(width), GLsizei(height), GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp).Replay(i, s, d, l, b)
-	b.Post(value.RemappedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
-		var data []byte
-		if err == nil {
-			data = make([]byte, imageSize)
-			err = d.Data(data)
-		}
-		if err != nil {
-			err = fmt.Errorf("Could not read framebuffer data (expected length %d bytes): %v", imageSize, err)
-			data = nil
-		}
-		img <- replay.Image{Data: data, Error: err}
-		return err
-	})
+	out.Write(atom.NoID, NewGlReadPixels(0, 0, GLsizei(width), GLsizei(height), GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp))
+	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+		b.Post(value.RemappedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
+			var data []byte
+			if err == nil {
+				data = make([]byte, imageSize)
+				err = d.Data(data)
+			}
+			if err != nil {
+				err = fmt.Errorf("Could not read framebuffer data (expected length %d bytes): %v", imageSize, err)
+				data = nil
+			}
+			img <- replay.Image{Data: data, Error: err}
+			return err
+		})
+		return nil
+	}))
 }
 
-func replayEach(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, atoms ...atom.Atom) {
+func writeEach(out atom.Writer, atoms ...atom.Atom) {
 	for _, a := range atoms {
-		if r, ok := a.(replay.Replayer); ok {
-			r.Replay(i, s, d, l, b)
-		}
+		out.Write(atom.NoID, a)
 	}
 }
 

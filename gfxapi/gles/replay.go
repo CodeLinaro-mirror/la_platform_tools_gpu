@@ -89,6 +89,9 @@ func (a api) Replay(
 	// Injector of new atoms.
 	injector := &transform.Injector{}
 
+	// Transform for all framebuffer reads.
+	readFramebuffer := NewReadFramebuffer(d, l)
+
 	profiling := false
 
 	for _, req := range requests {
@@ -96,7 +99,7 @@ func (a api) Replay(
 		case colorBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
-			injector.Inject(req.after, readFramebufferColor(req.width, req.height, req.out))
+			readFramebuffer.Color(req.after, req.width, req.height, req.out)
 
 			cfg := cfg.(drawConfig)
 			switch cfg.wireframeMode {
@@ -109,7 +112,7 @@ func (a api) Replay(
 		case depthBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
-			injector.Inject(req.after, readFramebufferDepth(device, req.out))
+			readFramebuffer.Depth(req.after, device, req.out)
 
 		case timeCallsRequest:
 			profiling = true
@@ -138,6 +141,7 @@ func (a api) Replay(
 	}
 
 	transforms.Add(
+		readFramebuffer,
 		injector,
 		remapAttributes(),
 	)
