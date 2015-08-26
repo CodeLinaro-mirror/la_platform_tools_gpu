@@ -73,14 +73,6 @@ func (c callImportCapture) Format(f fmt.State, r rune) {
 func (r resultImportCapture) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIndicies: %v)",
-		c.device, c.capture, c.api, c.width, c.height, c.atomIndicies,
-	)
-}
-func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "void")
-}
 func (c callSet) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Set(p: %v, v: %v)",
 		c.p, c.v,

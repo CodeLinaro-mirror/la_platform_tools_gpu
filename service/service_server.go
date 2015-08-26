@@ -85,12 +85,6 @@ func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, se
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callPrerenderFramebuffers:
-			if err := server.PrerenderFramebuffers(call.device, call.capture, call.api, call.width, call.height, call.atomIndicies, l); err == nil {
-				return &resultPrerenderFramebuffers{}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callSet:
 			if res, err := server.Set(call.p, call.v, l); err == nil {
 				return &resultSet{value: res}

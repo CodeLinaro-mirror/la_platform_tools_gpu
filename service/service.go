@@ -66,15 +66,6 @@ type Service interface {
 	// returning an identifier to the results.
 	// This function is experimental and will change signature.
 	GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (*path.TimingInfo, error)
-
-	// PrerenderFramebuffers renders the framebuffer contents after each of the
-	// given atoms of interest in the given capture on the given device for the
-	// given graphics API, resized to fit within the given dimensions while keeping
-	// the respective framebuffers original aspect ratio. This function doesn't
-	// return any data, as it is used to pre-populate the cache of framebuffer
-	// thumbnails that later get queried by the client. This function is
-	// experimental and may change signature.
-	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIndicies []uint64, l log.Logger) error
 }
 
 // ApiID is an identifier for an API.

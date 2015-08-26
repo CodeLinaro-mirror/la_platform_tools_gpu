@@ -121,22 +121,6 @@ type resultImportCapture struct {
 	value *path.Capture
 }
 
-// Call PrerenderFramebuffers
-type callPrerenderFramebuffers struct {
-	binary.Generate
-	device       *path.Device
-	capture      *path.Capture
-	api          ApiID
-	width        uint32
-	height       uint32
-	atomIndicies []uint64
-}
-
-// Result PrerenderFramebuffers
-type resultPrerenderFramebuffers struct {
-	binary.Generate
-}
-
 // Call Set
 type callSet struct {
 	binary.Generate

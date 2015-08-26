@@ -123,11 +123,6 @@ func (c client) ImportCapture(name string, Data []uint8, l log.Logger) (res *pat
 	return
 }
 
-func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIndicies []uint64, l log.Logger) error {
-	_, err := c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIndicies: atomIndicies})
-	return err
-}
-
 func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
 	var val interface{}
 	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {
