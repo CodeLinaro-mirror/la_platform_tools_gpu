@@ -30,7 +30,6 @@ func init() {
 	Namespace.Add((*GetState)(nil).Class())
 	Namespace.Add((*GetTimingInfo)(nil).Class())
 	Namespace.Add((*IndexLimits)(nil).Class())
-	Namespace.Add((*PrerenderFramebuffers)(nil).Class())
 	Namespace.Add((*RenderFramebufferColor)(nil).Class())
 	Namespace.Add((*RenderFramebufferDepth)(nil).Class())
 	Namespace.Add((*Set)(nil).Class())
@@ -52,7 +51,6 @@ var (
 	binaryIDGetState                        = binary.ID{0x40, 0xfb, 0x42, 0x18, 0xf5, 0x5c, 0xff, 0x11, 0x85, 0x82, 0xaf, 0xf4, 0x6d, 0xc5, 0xde, 0x19, 0x0b, 0x41, 0xba, 0x38}
 	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
 	binaryIDIndexLimits                     = binary.ID{0x28, 0x48, 0x73, 0xe2, 0x23, 0x35, 0xf2, 0x21, 0xaa, 0x3b, 0x89, 0x14, 0x5f, 0x70, 0xf7, 0x21, 0x59, 0x64, 0xe7, 0xb4}
-	binaryIDPrerenderFramebuffers           = binary.ID{0xca, 0x8f, 0xa3, 0xc5, 0x97, 0xd1, 0x84, 0x55, 0xea, 0x92, 0x85, 0x63, 0xd9, 0x5f, 0x8b, 0x0e, 0xf5, 0x30, 0xe1, 0x59}
 	binaryIDRenderFramebufferColor          = binary.ID{0xfe, 0xe2, 0x14, 0xdf, 0xc8, 0x0d, 0xed, 0x58, 0xe4, 0x56, 0xb8, 0xa9, 0x68, 0xd9, 0xc1, 0xa3, 0x50, 0xae, 0xa6, 0x78}
 	binaryIDRenderFramebufferDepth          = binary.ID{0x92, 0xb5, 0x88, 0x2a, 0x1a, 0x6f, 0xa1, 0x3c, 0xff, 0x7a, 0x90, 0xb3, 0x21, 0xa9, 0xe0, 0x67, 0xf4, 0x2c, 0x9e, 0x82}
 	binaryIDSet                             = binary.ID{0x3e, 0x3e, 0xf7, 0x61, 0xd5, 0x5c, 0x3a, 0x76, 0xc6, 0x39, 0x17, 0x5e, 0x37, 0x26, 0x78, 0xaf, 0xdf, 0x83, 0x9f, 0x4e}
@@ -750,147 +748,6 @@ var schemaIndexLimits = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Min", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Max", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-	},
-}
-
-type binaryClassPrerenderFramebuffers struct{}
-
-func (*PrerenderFramebuffers) Class() binary.Class {
-	return (*binaryClassPrerenderFramebuffers)(nil)
-}
-func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) error {
-	if o.Device != nil {
-		if err := e.Object(o.Device); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if o.Capture != nil {
-		if err := e.Object(o.Capture); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.ID(binary.ID(o.API)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.AtomIndicies))); err != nil {
-		return err
-	}
-	for i := range o.AtomIndicies {
-		if err := e.Uint64(o.AtomIndicies[i]); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Device = obj.(*path.Device)
-	} else {
-		o.Device = nil
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Capture = obj.(*path.Capture)
-	} else {
-		o.Capture = nil
-	}
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.API = service.ApiID(obj)
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.AtomIndicies = make([]uint64, count)
-		for i := range o.AtomIndicies {
-			if obj, err := d.Uint64(); err != nil {
-				return err
-			} else {
-				o.AtomIndicies[i] = uint64(obj)
-			}
-		}
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Width = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Height = uint32(obj)
-	}
-	return nil
-}
-func doSkipPrerenderFramebuffers(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint64(); err != nil {
-				return err
-			}
-		}
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassPrerenderFramebuffers) ID() binary.ID      { return binaryIDPrerenderFramebuffers }
-func (*binaryClassPrerenderFramebuffers) New() binary.Object { return &PrerenderFramebuffers{} }
-func (*binaryClassPrerenderFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodePrerenderFramebuffers(e, obj.(*PrerenderFramebuffers))
-}
-func (*binaryClassPrerenderFramebuffers) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &PrerenderFramebuffers{}
-	return obj, doDecodePrerenderFramebuffers(d, obj)
-}
-func (*binaryClassPrerenderFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodePrerenderFramebuffers(d, obj.(*PrerenderFramebuffers))
-}
-func (*binaryClassPrerenderFramebuffers) Skip(d binary.Decoder) error {
-	return doSkipPrerenderFramebuffers(d)
-}
-func (*binaryClassPrerenderFramebuffers) Schema() *schema.Class { return schemaPrerenderFramebuffers }
-
-var schemaPrerenderFramebuffers = &schema.Class{
-	TypeID:  binaryIDPrerenderFramebuffers,
-	Package: "builder",
-	Name:    "PrerenderFramebuffers",
-	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
-		{Declared: "API", Type: &schema.Primitive{Name: "service.ApiID", Method: schema.ID}},
-		{Declared: "AtomIndicies", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 

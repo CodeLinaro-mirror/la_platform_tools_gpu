@@ -238,38 +238,6 @@ func (s rpcServer) GetTimingInfo(
 	return &path.TimingInfo{ID: id}, err
 }
 
-// PrerenderFramebuffers renders the framebuffer contents after each of the
-// given atoms of interest in the given capture on the given device, resized to
-// fit within the given dimensions while keeping the respective framebuffers
-// original aspect ratio. This function doesn't return any data, as it is used
-// to pre-populate the cache of framebuffer thumbnails that later get queried by
-// the client.
-// This function is experimental and may change signature.
-func (s rpcServer) PrerenderFramebuffers(
-	device *path.Device,
-	capture *path.Capture,
-	apiID service.ApiID,
-	width, height uint32,
-	atomIndicies []uint64,
-	l log.Logger) error {
-
-	if err := device.Validate(); err != nil {
-		return err
-	}
-	if err := capture.Validate(); err != nil {
-		return err
-	}
-	_, err := database.Build(&builder.PrerenderFramebuffers{
-		Device:       device,
-		Capture:      capture,
-		API:          apiID,
-		Width:        width,
-		Height:       height,
-		AtomIndicies: atomIndicies,
-	}, s.Database, l)
-	return err
-}
-
 // Get resolves and returns the object, value or memory at the path p.
 func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
 	if err := p.Validate(); err != nil {
