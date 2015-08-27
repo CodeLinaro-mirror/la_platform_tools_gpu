@@ -127,6 +127,8 @@ func Visit(node Node, visitor func(Node)) {
 		visitor(n.Name)
 		visitor(n.Value)
 
+	case *Fence:
+
 	case *Field:
 		visitor(n.Name)
 		visitor(n.Type)
