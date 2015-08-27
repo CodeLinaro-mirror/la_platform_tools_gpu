@@ -81,13 +81,6 @@ export GO_TEST_FLAGS="-v -x"
 
 go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
 
-# make.go is failing with gcc errors on the build machine,
-# so disable it for now.
-# TODO: Remove this once make.go runs on the build machine.
-if [[ $HOST_OS == "osx-x64" ]]; then
-  exit 0
-fi
-
 # Kill any existing replay daemon before running tests.
 killall replayd || true
 
