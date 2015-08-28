@@ -13,6 +13,7 @@
 // limitations under the License.
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glActiveShaderProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glActiveShaderProgram.xhtml","OpenGL ES 3.2")
 cmd void glActiveShaderProgram(PipelineId pipeline, ProgramId program) {
   minRequiredVersion(3, 1)
   // TODO
@@ -21,6 +22,7 @@ cmd void glActiveShaderProgram(PipelineId pipeline, ProgramId program) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glAttachShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glAttachShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glAttachShader.xhtml","OpenGL ES 3.2")
 cmd void glAttachShader(ProgramId program, ShaderId shader) {
   minRequiredVersion(2, 0)
 
@@ -33,6 +35,7 @@ cmd void glAttachShader(ProgramId program, ShaderId shader) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindAttribLocation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindAttribLocation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindAttribLocation.xhtml","OpenGL ES 3.2")
 cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, string name) {
   minRequiredVersion(2, 0)
 
@@ -42,6 +45,7 @@ cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, str
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindProgramPipeline.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindProgramPipeline.xhtml","OpenGL ES 3.2")
 cmd void glBindProgramPipeline(PipelineId pipeline) {
   minRequiredVersion(3, 1)
   // TODO
@@ -50,6 +54,7 @@ cmd void glBindProgramPipeline(PipelineId pipeline) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCompileShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCompileShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCompileShader.xhtml","OpenGL ES 3.2")
 cmd void glCompileShader(ShaderId shader) {
   minRequiredVersion(2, 0)
 
@@ -59,6 +64,7 @@ cmd void glCompileShader(ShaderId shader) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCreateProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCreateProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCreateProgram.xhtml","OpenGL ES 3.2")
 cmd ProgramId glCreateProgram() {
   minRequiredVersion(2, 0)
 
@@ -71,6 +77,7 @@ cmd ProgramId glCreateProgram() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCreateShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCreateShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCreateShader.xhtml","OpenGL ES 3.2")
 cmd ShaderId glCreateShader(GLenum type) {
   minRequiredVersion(2, 0)
   switch (type) {
@@ -94,6 +101,7 @@ cmd ShaderId glCreateShader(GLenum type) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCreateShaderProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCreateShaderProgram.xhtml","OpenGL ES 3.2")
 cmd ProgramId glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar* const* strings) {
   minRequiredVersion(3, 1)
   switch (type) {
@@ -111,6 +119,7 @@ cmd ProgramId glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar* c
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteProgram.xhtml","OpenGL ES 3.2")
 cmd void glDeleteProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
@@ -119,6 +128,7 @@ cmd void glDeleteProgram(ProgramId program) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteProgramPipelines.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteProgramPipelines.xhtml","OpenGL ES 3.2")
 cmd void glDeleteProgramPipelines(GLsizei n, const PipelineId* pipelines) {
   minRequiredVersion(3, 1)
   // TODO
@@ -127,6 +137,7 @@ cmd void glDeleteProgramPipelines(GLsizei n, const PipelineId* pipelines) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteShader.xhtml","OpenGL ES 3.2")
 cmd void glDeleteShader(ShaderId shader) {
   minRequiredVersion(2, 0)
 
@@ -140,6 +151,7 @@ cmd void glDeleteShader(ShaderId shader) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDetachShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDetachShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDetachShader.xhtml","OpenGL ES 3.2")
 cmd void glDetachShader(ProgramId program, ShaderId shader) {
   minRequiredVersion(2, 0)
 
@@ -150,18 +162,21 @@ cmd void glDetachShader(ProgramId program, ShaderId shader) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDispatchCompute.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDispatchCompute.xhtml","OpenGL ES 3.2")
 cmd void glDispatchCompute(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDispatchComputeIndirect.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDispatchComputeIndirect.xhtml","OpenGL ES 3.2")
 cmd void glDispatchComputeIndirect(GLintptr indirect) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenProgramPipelines.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenProgramPipelines.xhtml","OpenGL ES 3.2")
 cmd void glGenProgramPipelines(GLsizei n, PipelineId* pipelines) {
   minRequiredVersion(3, 1)
   // TODO
@@ -170,6 +185,7 @@ cmd void glGenProgramPipelines(GLsizei n, PipelineId* pipelines) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetActiveAttrib(ProgramId         program,
                            AttributeLocation location,
                            GLsizei           buffer_size,
@@ -194,6 +210,7 @@ cmd void glGetActiveAttrib(ProgramId         program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetActiveUniform(ProgramId program,
                             GLuint    location,
                             GLsizei   buffer_size,
@@ -217,6 +234,7 @@ cmd void glGetActiveUniform(ProgramId program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockName.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniformBlockName.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniformBlockName.xhtml","OpenGL ES 3.2")
 cmd void glGetActiveUniformBlockName(ProgramId      program,
                                      UniformBlockId uniform_block_index,
                                      GLsizei        buffer_size,
@@ -231,6 +249,7 @@ cmd void glGetActiveUniformBlockName(ProgramId      program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockiv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniformBlockiv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniformBlockiv.xhtml","OpenGL ES 3.2")
 cmd void glGetActiveUniformBlockiv(ProgramId      program,
                                    UniformBlockId uniform_block_index,
                                    GLenum         parameter_name,
@@ -253,6 +272,7 @@ cmd void glGetActiveUniformBlockiv(ProgramId      program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.2")
 cmd void glGetActiveUniformsiv(ProgramId     program,
                                GLsizei       uniform_count,
                                const GLuint* uniform_indices,
@@ -277,6 +297,7 @@ cmd void glGetActiveUniformsiv(ProgramId     program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetAttachedShaders.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetAttachedShaders.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetAttachedShaders.xhtml","OpenGL ES 3.2")
 cmd void glGetAttachedShaders(ProgramId program,
                               GLsizei   buffer_length,
                               GLsizei*  shaders_length_written,
@@ -298,6 +319,7 @@ cmd void glGetAttachedShaders(ProgramId program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetAttribLocation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetAttribLocation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetAttribLocation.xhtml","OpenGL ES 3.2")
 cmd GLint glGetAttribLocation(ProgramId program, string name) {
   minRequiredVersion(2, 0)
 
@@ -306,6 +328,7 @@ cmd GLint glGetAttribLocation(ProgramId program, string name) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetFragDataLocation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetFragDataLocation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetFragDataLocation.xhtml","OpenGL ES 3.2")
 cmd GLint glGetFragDataLocation(ProgramId program, const GLchar* name) {
   minRequiredVersion(3, 0)
   // TODO
@@ -314,6 +337,7 @@ cmd GLint glGetFragDataLocation(ProgramId program, const GLchar* name) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetProgramBinary.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramBinary.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramBinary.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramBinary(ProgramId program,
                             GLsizei   bufSize,
                             GLsizei*  length,
@@ -326,6 +350,7 @@ cmd void glGetProgramBinary(ProgramId program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetProgramInfoLog.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramInfoLog.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramInfoLog.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramInfoLog(ProgramId program,
                              GLsizei   buffer_length,
                              GLsizei*  string_length_written,
@@ -340,6 +365,7 @@ cmd void glGetProgramInfoLog(ProgramId program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramInterface.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramInterface.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramInterfaceiv(ProgramId program,
                                  GLenum    programInterface,
                                  GLenum    pname,
@@ -367,6 +393,7 @@ cmd void glGetProgramInterfaceiv(ProgramId program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramPipelineInfoLog.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramPipelineInfoLog.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramPipelineInfoLog(PipelineId pipeline,
                                      GLsizei    bufSize,
                                      GLsizei*   length,
@@ -376,6 +403,7 @@ cmd void glGetProgramPipelineInfoLog(PipelineId pipeline,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramPipeline.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramPipeline.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramPipelineiv(PipelineId pipeline, GLenum pname, GLint* params) {
   minRequiredVersion(3, 1)
   switch (pname) {
@@ -391,6 +419,7 @@ cmd void glGetProgramPipelineiv(PipelineId pipeline, GLenum pname, GLint* params
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResourceIndex.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResourceIndex.xhtml","OpenGL ES 3.2")
 cmd GLuint glGetProgramResourceIndex(ProgramId     program,
                                      GLenum        programInterface,
                                      const GLchar* name) {
@@ -409,6 +438,7 @@ cmd GLuint glGetProgramResourceIndex(ProgramId     program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResourceLocation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResourceLocation.xhtml","OpenGL ES 3.2")
 cmd GLint glGetProgramResourceLocation(ProgramId     program,
                                        GLenum        programInterface,
                                        const GLchar* name) {
@@ -426,6 +456,7 @@ cmd GLint glGetProgramResourceLocation(ProgramId     program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResourceName.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResourceName.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramResourceName(ProgramId program,
                                   GLenum    programInterface,
                                   GLuint    index,
@@ -446,6 +477,7 @@ cmd void glGetProgramResourceName(ProgramId program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramResource.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramResource.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramResourceiv(ProgramId     program,
                                 GLenum        programInterface,
                                 GLuint        index,
@@ -471,6 +503,7 @@ cmd void glGetProgramResourceiv(ProgramId     program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramiv.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetProgramiv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramiv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetProgramiv.xhtml","OpenGL ES 3.2")
 cmd void glGetProgramiv(ProgramId program, GLenum parameter, GLint* value) {
   minRequiredVersion(2, 0)
   switch (parameter) {
@@ -498,6 +531,7 @@ cmd void glGetProgramiv(ProgramId program, GLenum parameter, GLint* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetShaderInfoLog.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetShaderInfoLog.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetShaderInfoLog.xhtml","OpenGL ES 3.2")
 cmd void glGetShaderInfoLog(ShaderId shader,
                             GLsizei  buffer_length,
                             GLsizei* string_length_written,
@@ -514,6 +548,7 @@ cmd void glGetShaderInfoLog(ShaderId shader,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetShaderPrecisionFormat.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetShaderPrecisionFormat.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetShaderPrecisionFormat.xhtml","OpenGL ES 3.2")
 cmd void glGetShaderPrecisionFormat(GLenum shader_type,
                                     GLenum precision_type,
                                     GLint* range,
@@ -543,6 +578,7 @@ cmd void glGetShaderPrecisionFormat(GLenum shader_type,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetShaderSource.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetShaderSource.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetShaderSource.xhtml","OpenGL ES 3.2")
 cmd void glGetShaderSource(ShaderId shader,
                            GLsizei  buffer_length,
                            GLsizei* string_length_written,
@@ -559,6 +595,7 @@ cmd void glGetShaderSource(ShaderId shader,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetShaderiv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetShaderiv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetShaderiv.xhtml","OpenGL ES 3.2")
 cmd void glGetShaderiv(ShaderId shader, GLenum parameter, GLint* value) {
   minRequiredVersion(2, 0)
   switch (parameter) {
@@ -584,6 +621,7 @@ cmd void glGetShaderiv(ShaderId shader, GLenum parameter, GLint* value) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniformBlockIndex.xhtml","OpenGL ES 3.2")
 cmd UniformBlockId glGetUniformBlockIndex(ProgramId program, const GLchar* uniformBlockName) {
   minRequiredVersion(3, 0)
   // TODO
@@ -592,6 +630,7 @@ cmd UniformBlockId glGetUniformBlockIndex(ProgramId program, const GLchar* unifo
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniformIndices.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniformIndices.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniformIndices.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformIndices(ProgramId            program,
                              GLsizei              uniformCount,
                              const GLchar* const* uniformNames,
@@ -603,6 +642,7 @@ cmd void glGetUniformIndices(ProgramId            program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniformLocation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniformLocation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniformLocation.xhtml","OpenGL ES 3.2")
 cmd UniformLocation glGetUniformLocation(ProgramId program, string name) {
   minRequiredVersion(2, 0)
 
@@ -612,6 +652,7 @@ cmd UniformLocation glGetUniformLocation(ProgramId program, string name) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformfv(ProgramId program, UniformLocation location, GLfloat* values) {
   minRequiredVersion(2, 0)
 
@@ -622,6 +663,7 @@ cmd void glGetUniformfv(ProgramId program, UniformLocation location, GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformiv(ProgramId program, UniformLocation location, GLint* values) {
   minRequiredVersion(2, 0)
 
@@ -631,6 +673,7 @@ cmd void glGetUniformiv(ProgramId program, UniformLocation location, GLint* valu
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* params) {
   minRequiredVersion(3, 0)
   // TODO
@@ -639,6 +682,7 @@ cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* pa
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsProgram.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
@@ -647,6 +691,7 @@ cmd GLboolean glIsProgram(ProgramId program) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsProgramPipeline.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsProgramPipeline.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsProgramPipeline(PipelineId pipeline) {
   minRequiredVersion(3, 1)
   // TODO
@@ -656,6 +701,7 @@ cmd GLboolean glIsProgramPipeline(PipelineId pipeline) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsShader.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsShader.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsShader(ShaderId shader) {
   minRequiredVersion(2, 0)
 
@@ -666,6 +712,7 @@ cmd GLboolean glIsShader(ShaderId shader) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glLinkProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glLinkProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glLinkProgram.xhtml","OpenGL ES 3.2")
 cmd void glLinkProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
@@ -676,6 +723,7 @@ cmd void glLinkProgram(ProgramId program) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMemoryBarrier.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMemoryBarrier.xhtml","OpenGL ES 3.2")
 cmd void glMemoryBarrier(GLbitfield barriers) {
   minRequiredVersion(3, 1)
   supportsBits(barriers, GL_ALL_BARRIER_BITS | GL_ATOMIC_COUNTER_BARRIER_BIT | GL_BUFFER_UPDATE_BARRIER_BIT | GL_COMMAND_BARRIER_BIT | GL_ELEMENT_ARRAY_BARRIER_BIT | GL_FRAMEBUFFER_BARRIER_BIT | GL_PIXEL_BUFFER_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT | GL_TEXTURE_UPDATE_BARRIER_BIT | GL_TRANSFORM_FEEDBACK_BARRIER_BIT | GL_UNIFORM_BARRIER_BIT | GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT)
@@ -711,6 +759,7 @@ cmd void glMemoryBarrier(GLbitfield barriers) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMemoryBarrier.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMemoryBarrier.xhtml","OpenGL ES 3.2")
 cmd void glMemoryBarrierByRegion(GLbitfield barriers) {
   minRequiredVersion(3, 1)
   supportsBits(barriers, GL_ALL_BARRIER_BITS | GL_ATOMIC_COUNTER_BARRIER_BIT | GL_BUFFER_UPDATE_BARRIER_BIT | GL_COMMAND_BARRIER_BIT | GL_ELEMENT_ARRAY_BARRIER_BIT | GL_FRAMEBUFFER_BARRIER_BIT | GL_PIXEL_BUFFER_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT | GL_TEXTURE_UPDATE_BARRIER_BIT | GL_TRANSFORM_FEEDBACK_BARRIER_BIT | GL_UNIFORM_BARRIER_BIT | GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT)
@@ -747,6 +796,7 @@ cmd void glMemoryBarrierByRegion(GLbitfield barriers) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glProgramBinary.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramBinary.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramBinary.xhtml","OpenGL ES 3.2")
 cmd void glProgramBinary(ProgramId   program,
                          GLenum      binaryFormat,
                          const void* binary,
@@ -762,6 +812,7 @@ cmd void glProgramBinary(ProgramId   program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glProgramParameteri.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramParameteri.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramParameteri.xhtml","OpenGL ES 3.2")
 cmd void glProgramParameteri(ProgramId program, GLenum pname, GLint value) {
   minRequiredVersion(3, 0)
   switch (pname) {
@@ -779,12 +830,14 @@ cmd void glProgramParameteri(ProgramId program, GLenum pname, GLint value) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1f(ProgramId program, UniformLocation location, GLfloat v0) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -794,12 +847,14 @@ cmd void glProgramUniform1fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1i(ProgramId program, UniformLocation location, GLint v0) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -809,12 +864,14 @@ cmd void glProgramUniform1iv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1ui(ProgramId program, UniformLocation location, GLuint v0) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform1uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
@@ -824,12 +881,14 @@ cmd void glProgramUniform1uiv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2f(ProgramId program, UniformLocation location, GLfloat v0, GLfloat v1) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -839,12 +898,14 @@ cmd void glProgramUniform2fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2i(ProgramId program, UniformLocation location, GLint v0, GLint v1) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -854,12 +915,14 @@ cmd void glProgramUniform2iv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2ui(ProgramId program, UniformLocation location, GLuint v0, GLuint v1) {
   minRequiredVersion(3, 1)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform2uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
@@ -869,6 +932,7 @@ cmd void glProgramUniform2uiv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3f(ProgramId       program,
                             UniformLocation location,
                             GLfloat         v0,
@@ -879,6 +943,7 @@ cmd void glProgramUniform3f(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -888,6 +953,7 @@ cmd void glProgramUniform3fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3i(ProgramId       program,
                             UniformLocation location,
                             GLint           v0,
@@ -898,6 +964,7 @@ cmd void glProgramUniform3i(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -907,6 +974,7 @@ cmd void glProgramUniform3iv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3ui(ProgramId       program,
                              UniformLocation location,
                              GLuint          v0,
@@ -917,6 +985,7 @@ cmd void glProgramUniform3ui(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
@@ -926,6 +995,7 @@ cmd void glProgramUniform3uiv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4f(ProgramId       program,
                             UniformLocation location,
                             GLfloat         v0,
@@ -937,6 +1007,7 @@ cmd void glProgramUniform4f(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -946,6 +1017,7 @@ cmd void glProgramUniform4fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4i(ProgramId       program,
                             UniformLocation location,
                             GLint           v0,
@@ -957,6 +1029,7 @@ cmd void glProgramUniform4i(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
@@ -966,6 +1039,7 @@ cmd void glProgramUniform4iv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4ui(ProgramId       program,
                              UniformLocation location,
                              GLuint          v0,
@@ -977,6 +1051,7 @@ cmd void glProgramUniform4ui(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
@@ -986,6 +1061,7 @@ cmd void glProgramUniform4uiv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix2fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
@@ -996,6 +1072,7 @@ cmd void glProgramUniformMatrix2fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix2x3fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1006,6 +1083,7 @@ cmd void glProgramUniformMatrix2x3fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix2x4fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1016,6 +1094,7 @@ cmd void glProgramUniformMatrix2x4fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix3fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
@@ -1026,6 +1105,7 @@ cmd void glProgramUniformMatrix3fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix3x2fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1036,6 +1116,7 @@ cmd void glProgramUniformMatrix3x2fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix3x4fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1046,6 +1127,7 @@ cmd void glProgramUniformMatrix3x4fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix4fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
@@ -1056,6 +1138,7 @@ cmd void glProgramUniformMatrix4fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix4x2fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1066,6 +1149,7 @@ cmd void glProgramUniformMatrix4x2fv(ProgramId       program,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniformMatrix4x3fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
@@ -1078,6 +1162,7 @@ cmd void glProgramUniformMatrix4x3fv(ProgramId       program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glReleaseShaderCompiler.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glReleaseShaderCompiler.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glReleaseShaderCompiler.xhtml","OpenGL ES 3.2")
 cmd void glReleaseShaderCompiler() {
   minRequiredVersion(2, 0)
 
@@ -1086,6 +1171,7 @@ cmd void glReleaseShaderCompiler() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glShaderBinary.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glShaderBinary.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glShaderBinary.xhtml","OpenGL ES 3.2")
 cmd void glShaderBinary(GLsizei         count,
                         const ShaderId* shaders,
                         GLenum          binary_format,
@@ -1106,6 +1192,7 @@ cmd void glShaderBinary(GLsizei         count,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glShaderSource.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glShaderSource.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glShaderSource.xhtml","OpenGL ES 3.2")
 cmd void glShaderSource(ShaderId             shader,
                         GLsizei              count,
                         const GLchar* const* source,
@@ -1130,6 +1217,7 @@ cmd void glShaderSource(ShaderId             shader,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1f(UniformLocation location, GLfloat value) {
   minRequiredVersion(2, 0)
 
@@ -1146,6 +1234,7 @@ cmd void glUniform1f(UniformLocation location, GLfloat value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
 
@@ -1161,6 +1250,7 @@ cmd void glUniform1fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1i(UniformLocation location, GLint value) {
   minRequiredVersion(2, 0)
 
@@ -1177,6 +1267,7 @@ cmd void glUniform1i(UniformLocation location, GLint value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
 
@@ -1191,6 +1282,7 @@ cmd void glUniform1iv(UniformLocation location, GLsizei count, const GLint* valu
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1ui(UniformLocation location, GLuint v0) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1198,6 +1290,7 @@ cmd void glUniform1ui(UniformLocation location, GLuint v0) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1uiv(UniformLocation location, GLsizei count, const GLuint* value) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1206,6 +1299,7 @@ cmd void glUniform1uiv(UniformLocation location, GLsizei count, const GLuint* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2f(UniformLocation location, GLfloat value0, GLfloat value1) {
   minRequiredVersion(2, 0)
 
@@ -1222,6 +1316,7 @@ cmd void glUniform2f(UniformLocation location, GLfloat value0, GLfloat value1) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
 
@@ -1237,6 +1332,7 @@ cmd void glUniform2fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2i(UniformLocation location, GLint value0, GLint value1) {
   minRequiredVersion(2, 0)
 
@@ -1253,6 +1349,7 @@ cmd void glUniform2i(UniformLocation location, GLint value0, GLint value1) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
 
@@ -1267,6 +1364,7 @@ cmd void glUniform2iv(UniformLocation location, GLsizei count, const GLint* valu
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2ui(UniformLocation location, GLuint v0, GLuint v1) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1274,6 +1372,7 @@ cmd void glUniform2ui(UniformLocation location, GLuint v0, GLuint v1) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2uiv(UniformLocation location, GLsizei count, const GLuint* value) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1282,6 +1381,7 @@ cmd void glUniform2uiv(UniformLocation location, GLsizei count, const GLuint* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3f(UniformLocation location, GLfloat value0, GLfloat value1, GLfloat value2) {
   minRequiredVersion(2, 0)
 
@@ -1298,6 +1398,7 @@ cmd void glUniform3f(UniformLocation location, GLfloat value0, GLfloat value1, G
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
 
@@ -1313,6 +1414,7 @@ cmd void glUniform3fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3i(UniformLocation location, GLint value0, GLint value1, GLint value2) {
   minRequiredVersion(2, 0)
 
@@ -1329,6 +1431,7 @@ cmd void glUniform3i(UniformLocation location, GLint value0, GLint value1, GLint
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
 
@@ -1343,6 +1446,7 @@ cmd void glUniform3iv(UniformLocation location, GLsizei count, const GLint* valu
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1350,6 +1454,7 @@ cmd void glUniform3ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2)
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3uiv(UniformLocation location, GLsizei count, const GLuint* value) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1358,6 +1463,7 @@ cmd void glUniform3uiv(UniformLocation location, GLsizei count, const GLuint* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4f(UniformLocation location,
                      GLfloat         value0,
                      GLfloat         value1,
@@ -1378,6 +1484,7 @@ cmd void glUniform4f(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
 
@@ -1393,6 +1500,7 @@ cmd void glUniform4fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4i(UniformLocation location,
                      GLint           value0,
                      GLint           value1,
@@ -1413,6 +1521,7 @@ cmd void glUniform4i(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
 
@@ -1427,6 +1536,7 @@ cmd void glUniform4iv(UniformLocation location, GLsizei count, const GLint* valu
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1434,6 +1544,7 @@ cmd void glUniform4ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4uiv(UniformLocation location, GLsizei count, const GLuint* value) {
   minRequiredVersion(3, 0)
   // TODO
@@ -1441,6 +1552,7 @@ cmd void glUniform4uiv(UniformLocation location, GLsizei count, const GLuint* va
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniformBlockBinding.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniformBlockBinding.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniformBlockBinding.xhtml","OpenGL ES 3.2")
 cmd void glUniformBlockBinding(ProgramId      program,
                                UniformBlockId uniform_block_index,
                                GLuint         uniform_block_binding) {
@@ -1452,6 +1564,7 @@ cmd void glUniformBlockBinding(ProgramId      program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix2fv(UniformLocation location,
                             GLsizei         count,
                             GLboolean       transpose,
@@ -1469,6 +1582,7 @@ cmd void glUniformMatrix2fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix2x3fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1479,6 +1593,7 @@ cmd void glUniformMatrix2x3fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix2x4fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1490,6 +1605,7 @@ cmd void glUniformMatrix2x4fv(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix3fv(UniformLocation location,
                             GLsizei         count,
                             GLboolean       transpose,
@@ -1507,6 +1623,7 @@ cmd void glUniformMatrix3fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix3x2fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1517,6 +1634,7 @@ cmd void glUniformMatrix3x2fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix3x4fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1528,6 +1646,7 @@ cmd void glUniformMatrix3x4fv(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix4fv(UniformLocation location,
                             GLsizei         count,
                             GLboolean       transpose,
@@ -1544,6 +1663,7 @@ cmd void glUniformMatrix4fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix4x2fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1554,6 +1674,7 @@ cmd void glUniformMatrix4x2fv(UniformLocation location,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniformMatrix4x3fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
@@ -1565,6 +1686,7 @@ cmd void glUniformMatrix4x3fv(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUseProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUseProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUseProgram.xhtml","OpenGL ES 3.2")
 cmd void glUseProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
@@ -1573,6 +1695,7 @@ cmd void glUseProgram(ProgramId program) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUseProgramStages.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUseProgramStages.xhtml","OpenGL ES 3.2")
 cmd void glUseProgramStages(PipelineId pipeline, GLbitfield stages, ProgramId program) {
   minRequiredVersion(3, 1)
   supportsBits(stages, GL_ALL_SHADER_BITS | GL_COMPUTE_SHADER_BIT | GL_FRAGMENT_SHADER_BIT | GL_VERTEX_SHADER_BIT)
@@ -1590,12 +1713,14 @@ cmd void glUseProgramStages(PipelineId pipeline, GLbitfield stages, ProgramId pr
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glValidateProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glValidateProgram.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glValidateProgram.xhtml","OpenGL ES 3.2")
 cmd void glValidateProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glValidateProgramPipeline.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glValidateProgramPipeline.xhtml","OpenGL ES 3.2")
 cmd void glValidateProgramPipeline(PipelineId pipeline) {
   minRequiredVersion(3, 1)
   // TODO

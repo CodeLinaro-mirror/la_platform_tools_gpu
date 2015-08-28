@@ -15,6 +15,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBuffer.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindBuffer.xhtml","OpenGL ES 3.2")
 cmd void glBindBuffer(GLenum target, BufferId buffer) {
   minRequiredVersion(2, 0)
   switch (target) {
@@ -43,6 +44,7 @@ cmd void glBindBuffer(GLenum target, BufferId buffer) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferBase.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindBufferBase.xhtml","OpenGL ES 3.2")
 cmd void glBindBufferBase(GLenum target, GLuint index, BufferId buffer) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -62,6 +64,7 @@ cmd void glBindBufferBase(GLenum target, GLuint index, BufferId buffer) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferRange.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferRange.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindBufferRange.xhtml","OpenGL ES 3.2")
 cmd void glBindBufferRange(GLenum     target,
                            GLuint     index,
                            BufferId   buffer,
@@ -85,6 +88,7 @@ cmd void glBindBufferRange(GLenum     target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBufferData.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBufferData.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBufferData.xhtml","OpenGL ES 3.2")
 cmd void glBufferData(GLenum target, GLsizeiptr size, BufferDataPointer data, GLenum usage) {
   minRequiredVersion(2, 0)
   switch (target) {
@@ -130,6 +134,7 @@ cmd void glBufferData(GLenum target, GLsizeiptr size, BufferDataPointer data, GL
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBufferSubData.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBufferSubData.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBufferSubData.xhtml","OpenGL ES 3.2")
 cmd void glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, BufferDataPointer data) {
   minRequiredVersion(2, 0)
   switch (target) {
@@ -155,6 +160,7 @@ cmd void glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, Buffer
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCopyBufferSubData.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCopyBufferSubData.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCopyBufferSubData.xhtml","OpenGL ES 3.2")
 cmd void glCopyBufferSubData(GLenum     readTarget,
                              GLenum     writeTarget,
                              GLintptr   readOffset,
@@ -187,6 +193,7 @@ cmd void glCopyBufferSubData(GLenum     readTarget,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteBuffers.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteBuffers.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteBuffers.xhtml","OpenGL ES 3.2")
 cmd void glDeleteBuffers(GLsizei count, const BufferId* buffers) {
   minRequiredVersion(2, 0)
 
@@ -200,6 +207,7 @@ cmd void glDeleteBuffers(GLsizei count, const BufferId* buffers) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGenBuffers.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenBuffers.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenBuffers.xhtml","OpenGL ES 3.2")
 cmd void glGenBuffers(GLsizei count, BufferId* buffers) {
   minRequiredVersion(2, 0)
 
@@ -214,6 +222,7 @@ cmd void glGenBuffers(GLsizei count, BufferId* buffers) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferParameter.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferParameter.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetBufferParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64* params) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -241,6 +250,7 @@ cmd void glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64* params) 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferParameter.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferParameter.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetBufferParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
   minRequiredVersion(2, 0)
   switch (target) {
@@ -278,6 +288,7 @@ cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferPointerv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferPointerv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetBufferPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -304,6 +315,7 @@ cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsBuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsBuffer.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsBuffer.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsBuffer(BufferId buffer) {
   minRequiredVersion(2, 0)
 
@@ -313,6 +325,7 @@ cmd GLboolean glIsBuffer(BufferId buffer) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMapBufferRange.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMapBufferRange.xhtml","OpenGL ES 3.2")
 cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -362,6 +375,7 @@ cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GL
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMapBufferRange.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMapBufferRange.xhtml","OpenGL ES 3.2")
 cmd GLboolean glUnmapBuffer(GLenum target) {
   minRequiredVersion(3, 0)
   switch (target) {

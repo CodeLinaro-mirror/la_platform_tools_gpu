@@ -15,6 +15,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnable.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnable.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glDisable(GLenum capability) {
   minRequiredVersion(2, 0)
   switch (capability) {
@@ -40,6 +41,7 @@ cmd void glDisable(GLenum capability) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnable.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnable.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glEnable(GLenum capability) {
   minRequiredVersion(2, 0)
   switch (capability) {
@@ -65,6 +67,7 @@ cmd void glEnable(GLenum capability) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glFinish.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFinish.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFinish.xhtml","OpenGL ES 3.2")
 cmd void glFinish() {
   minRequiredVersion(2, 0)
 
@@ -73,6 +76,7 @@ cmd void glFinish() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glFlush.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFlush.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFlush.xhtml","OpenGL ES 3.2")
 cmd void glFlush() {
   minRequiredVersion(2, 0)
 
@@ -80,6 +84,7 @@ cmd void glFlush() {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glFlushMappedBufferRange.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFlushMappedBufferRange.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFlushMappedBufferRange.xhtml","OpenGL ES 3.2")
 cmd void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -98,6 +103,7 @@ cmd void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr len
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetError.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetError.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetError.xhtml","OpenGL ES 3.2")
 cmd GLenum glGetError() {
   minRequiredVersion(2, 0)
 
@@ -107,6 +113,7 @@ cmd GLenum glGetError() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glHint.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glHint.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glHint.xhtml","OpenGL ES 3.2")
 cmd void glHint(GLenum target, GLenum mode) {
   minRequiredVersion(2, 0)
   switch (target) {
