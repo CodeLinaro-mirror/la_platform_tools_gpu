@@ -85,19 +85,8 @@ func (d *decoder) ID() (binary.ID, error) {
 	return id, nil
 }
 
-func (d *decoder) SkipID() error {
-	if v, err := d.Uint32(); err != nil {
-		return err
-	} else if (v & 1) != 0 {
-		return d.Skip(binary.IDSize)
-	}
-	return nil
-}
-
-func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
-func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
-
+func (e *encoder) Value(obj binary.Object) error { return obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) error { return obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) error {
 	if obj == nil {
 		return e.ID(binary.ID{})
@@ -116,16 +105,6 @@ func (d *decoder) Variant() (binary.Object, error) {
 		return nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
 		return class.Decode(d)
-	}
-}
-
-func (d *decoder) SkipVariant() (binary.ID, error) {
-	if id, err := d.ID(); err != nil {
-		return id, err
-	} else if class := d.Namespace.Lookup(id); class == nil {
-		return id, fmt.Errorf("Unknown type id %v", id)
-	} else {
-		return id, class.Skip(d)
 	}
 }
 
@@ -155,7 +134,9 @@ func (d *decoder) Object() (binary.Object, error) {
 	o, found := d.objects[sid]
 	switch {
 	case found && decode:
-		_, err := d.SkipVariant()
+		// TODO consider whether we want to reintroduce some skipping ability
+		// just for this
+		_, err := d.Variant()
 		return o, err
 	case decode:
 		o, err = d.Variant()
@@ -166,22 +147,6 @@ func (d *decoder) Object() (binary.Object, error) {
 	default:
 		return nil, fmt.Errorf("Unknown object sid %v", sid)
 	}
-}
-
-func (d *decoder) SkipObject() (binary.ID, error) {
-	if v, err := d.Uint32(); err != nil {
-		return binary.ID{}, err
-	} else if (v & 1) == 0 {
-		sid := v >> 1
-		if sid == 0 {
-			return binary.ID{}, nil
-		} else if obj, found := d.objects[sid]; !found {
-			return binary.ID{}, fmt.Errorf("Unknown object sid %v", sid)
-		} else {
-			return obj.Class().ID(), nil
-		}
-	}
-	return d.SkipVariant()
 }
 
 func (d *decoder) Lookup(id binary.ID) binary.Class {

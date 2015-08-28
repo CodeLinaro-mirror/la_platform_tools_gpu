@@ -48,8 +48,3 @@ func (i *Interface) Encode(e binary.Encoder, value interface{}) error {
 func (i *Interface) Decode(d binary.Decoder) (interface{}, error) {
 	return d.Object()
 }
-
-func (i *Interface) Skip(d binary.Decoder) error {
-	_, err := d.SkipObject()
-	return err
-}

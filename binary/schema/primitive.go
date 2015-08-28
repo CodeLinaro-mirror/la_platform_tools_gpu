@@ -178,43 +178,6 @@ func (p *Primitive) Decode(d binary.Decoder) (interface{}, error) {
 	}
 }
 
-// Implements binary.Class
-func (p *Primitive) Skip(d binary.Decoder) error {
-	var err error
-	switch p.Method {
-	case ID:
-		return d.SkipID()
-	case Bool:
-		_, err = d.Bool()
-	case Int8:
-		_, err = d.Int8()
-	case Uint8:
-		_, err = d.Uint8()
-	case Int16:
-		_, err = d.Int16()
-	case Uint16:
-		_, err = d.Uint16()
-	case Int32:
-		_, err = d.Int32()
-	case Uint32:
-		_, err = d.Uint32()
-	case Int64:
-		_, err = d.Int64()
-	case Uint64:
-		_, err = d.Uint64()
-	case Float32:
-		_, err = d.Float32()
-	case Float64:
-		_, err = d.Float64()
-		return err
-	case String:
-		return d.SkipString()
-	default:
-		err = fmt.Errorf("Unknown skip method %q", p.Method)
-	}
-	return err
-}
-
 // This will convert a string to a Method, or return an error if the string was
 // not a valid method name.
 func ParseMethod(s string) (Method, error) {
@@ -229,11 +192,4 @@ func (m Method) String() string {
 		return s
 	}
 	return fmt.Sprintf("Method(%d)", m)
-}
-
-// Skippable returns true if the method has a complimentary skip method on the
-// decoder interface. If this is not true, the normal decoding method is used
-// during skipping.
-func (m Method) Skippable() bool {
-	return m == ID || m == String
 }

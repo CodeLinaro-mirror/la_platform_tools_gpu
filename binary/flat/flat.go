@@ -56,10 +56,8 @@ func (d *decoder) SkipID() error {
 	return d.Skip(binary.IDSize)
 }
 
-func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
-func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
-
+func (e *encoder) Value(obj binary.Object) error { return obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) error { return obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) error {
 	if obj == nil {
 		return e.ID(binary.ID{})
@@ -81,17 +79,6 @@ func (d *decoder) Variant() (binary.Object, error) {
 	}
 }
 
-func (d *decoder) SkipVariant() (binary.ID, error) {
-	if id, err := d.ID(); err != nil {
-		return id, err
-	} else if class := d.Namespace.Lookup(id); class == nil {
-		return id, fmt.Errorf("Unknown type id %v", id)
-	} else {
-		return id, class.Skip(d)
-	}
-}
-
 func (e *encoder) Object(obj binary.Object) error   { return e.Variant(obj) }
 func (d *decoder) Object() (binary.Object, error)   { return d.Variant() }
-func (d *decoder) SkipObject() (binary.ID, error)   { return d.SkipVariant() }
 func (d *decoder) Lookup(id binary.ID) binary.Class { return d.Namespace.Lookup(id) }

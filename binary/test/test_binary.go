@@ -43,12 +43,6 @@ func doDecodeTypeA(d binary.Decoder, o *TypeA) error {
 	}
 	return nil
 }
-func doSkipTypeA(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassTypeA) ID() binary.ID      { return TypeAID }
 func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) error {
@@ -61,8 +55,7 @@ func (*binaryClassTypeA) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTypeA(d, obj.(*TypeA))
 }
-func (*binaryClassTypeA) Skip(d binary.Decoder) error { return doSkipTypeA(d) }
-func (*binaryClassTypeA) Schema() *schema.Class       { return schemaTypeA }
+func (*binaryClassTypeA) Schema() *schema.Class { return schemaTypeA }
 
 var schemaTypeA = &schema.Class{
 	TypeID:  TypeAID,
@@ -92,12 +85,6 @@ func doDecodeTypeB(d binary.Decoder, o *TypeB) error {
 	}
 	return nil
 }
-func doSkipTypeB(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassTypeB) ID() binary.ID      { return TypeBID }
 func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) error {
@@ -110,8 +97,7 @@ func (*binaryClassTypeB) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTypeB(d, obj.(*TypeB))
 }
-func (*binaryClassTypeB) Skip(d binary.Decoder) error { return doSkipTypeB(d) }
-func (*binaryClassTypeB) Schema() *schema.Class       { return schemaTypeB }
+func (*binaryClassTypeB) Schema() *schema.Class { return schemaTypeB }
 
 var schemaTypeB = &schema.Class{
 	TypeID:  TypeBID,

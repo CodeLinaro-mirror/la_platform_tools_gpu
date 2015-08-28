@@ -201,12 +201,6 @@ const go_binary_tmpl = `{{/*
     {{end}}
     return nil¶
   «}¶
-  func doSkip{{.Name}}(d binary.Decoder) error {»¶
-    {{range .Fields}}
-      {{Call "Go.Skip" .Type}}
-    {{end}}
-    return nil¶
-  «}¶
   {{$base := 18}}
   {{$wrap := gt (len .Name) (add $base 7)}}
   func (*binaryClass{{.Name}}) ID() binary.ID{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
@@ -227,9 +221,6 @@ const go_binary_tmpl = `{{/*
     return doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
   «}¶
   {{$wrap := gt (len .Name) (add $base 0)}}
-  func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
-    return doSkip{{.Name}}(d){{if $wrap}}¶{{else}}•{{end}}
-  «}¶
   {{if File.Directive "Schema" true}}
     {{$wrap := gt (len .Name) (add $base 4)}}
     func (*binaryClass{{.Name}}) Schema() *schema.Class{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
@@ -427,77 +418,6 @@ const go_binary_tmpl = `{{/*
       {{Call "Go.Decode" (Var .Type.KeyType "k")}}
       {{Call "Go.Decode" (Var .Type.ValueType "v")}}
       m[k] = v¶
-    «}¶
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Primitive"}}
-  {{if .Method.Skippable}}
-    if err := d.Skip{{.Method}}(); err != nil {»¶
-       return err¶
-    «}¶
-  {{else}}
-    if _, err := d.{{.Method}}(); err != nil {»¶
-      return err¶
-    «}¶
-  {{end}}
-{{end}}
-
-{{define "Go.Skip.Struct"}}
-  if err := d.SkipValue((*{{.Name}})(nil)); err != nil {»¶
-    return err¶
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Pointer"}}
-  if _, err := d.SkipObject(); err != nil {»¶
-    return err¶
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Interface"}}
-  if _, err := d.SkipObject(); err != nil {»¶
-    return err¶
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Any"}}
-  if _, err := d.SkipVariant(); err != nil {»¶
-    return err¶
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Slice"}}
-  if count, err := d.Uint32(); err != nil {»¶
-    return err¶
-  «} else {»¶
-    {{$vt := print .ValueType}}
-    {{if or (eq $vt "uint8") (eq $vt "byte")}}
-      if err := d.Skip(count); err != nil {»¶
-        return err¶
-      «}¶
-    {{else}}
-      for i := uint32(0); i < count; i++ {»¶
-        {{Call "Go.Skip" .ValueType}}
-      «}¶
-    {{end}}
-  «}¶
-{{end}}
-
-{{define "Go.Skip.Array"}}
-  for i := uint32(0); i < {{.Size}}; i++ {»¶
-    {{Call "Go.Skip" .ValueType}}
-  «}¶
-{{end}}
-
-
-{{define "Go.Skip.Map"}}
-  if count, err := d.Uint32(); err != nil {»¶
-    return err¶
-  «} else {»¶
-    for i := uint32(0); i < count; i++ {»¶
-      {{Call "Go.Skip" .KeyType}}
-      {{Call "Go.Skip" .ValueType}}
     «}¶
   «}¶
 {{end}}

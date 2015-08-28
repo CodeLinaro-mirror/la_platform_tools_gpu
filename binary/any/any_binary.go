@@ -88,9 +88,6 @@ func doEncodeAny(e binary.Encoder, o *Any) error {
 func doDecodeAny(d binary.Decoder, o *Any) error {
 	return nil
 }
-func doSkipAny(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassAny) ID() binary.ID      { return binaryIDAny }
 func (*binaryClassAny) New() binary.Object { return &Any{} }
 func (*binaryClassAny) Encode(e binary.Encoder, obj binary.Object) error {
@@ -103,7 +100,6 @@ func (*binaryClassAny) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassAny) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAny(d, obj.(*Any))
 }
-func (*binaryClassAny) Skip(d binary.Decoder) error { return doSkipAny(d) }
 
 type binaryClassboolSlice struct{}
 
@@ -136,18 +132,6 @@ func doDecodeboolSlice(d binary.Decoder, o *boolSlice) error {
 	}
 	return nil
 }
-func doSkipboolSlice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Bool(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassboolSlice) ID() binary.ID      { return binaryIDboolSlice }
 func (*binaryClassboolSlice) New() binary.Object { return &boolSlice{} }
 func (*binaryClassboolSlice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -160,7 +144,6 @@ func (*binaryClassboolSlice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassboolSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeboolSlice(d, obj.(*boolSlice))
 }
-func (*binaryClassboolSlice) Skip(d binary.Decoder) error { return doSkipboolSlice(d) }
 
 type binaryClassbool_ struct{}
 
@@ -181,12 +164,6 @@ func doDecodebool_(d binary.Decoder, o *bool_) error {
 	}
 	return nil
 }
-func doSkipbool_(d binary.Decoder) error {
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassbool_) ID() binary.ID      { return binaryIDbool_ }
 func (*binaryClassbool_) New() binary.Object { return &bool_{} }
 func (*binaryClassbool_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -199,7 +176,6 @@ func (*binaryClassbool_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassbool_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodebool_(d, obj.(*bool_))
 }
-func (*binaryClassbool_) Skip(d binary.Decoder) error { return doSkipbool_(d) }
 
 type binaryClassfloat32Slice struct{}
 
@@ -232,18 +208,6 @@ func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) error {
 	}
 	return nil
 }
-func doSkipfloat32Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Float32(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassfloat32Slice) ID() binary.ID      { return binaryIDfloat32Slice }
 func (*binaryClassfloat32Slice) New() binary.Object { return &float32Slice{} }
 func (*binaryClassfloat32Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -256,7 +220,6 @@ func (*binaryClassfloat32Slice) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassfloat32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefloat32Slice(d, obj.(*float32Slice))
 }
-func (*binaryClassfloat32Slice) Skip(d binary.Decoder) error { return doSkipfloat32Slice(d) }
 
 type binaryClassfloat32_ struct{}
 
@@ -277,12 +240,6 @@ func doDecodefloat32_(d binary.Decoder, o *float32_) error {
 	}
 	return nil
 }
-func doSkipfloat32_(d binary.Decoder) error {
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassfloat32_) ID() binary.ID      { return binaryIDfloat32_ }
 func (*binaryClassfloat32_) New() binary.Object { return &float32_{} }
 func (*binaryClassfloat32_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -295,7 +252,6 @@ func (*binaryClassfloat32_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfloat32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefloat32_(d, obj.(*float32_))
 }
-func (*binaryClassfloat32_) Skip(d binary.Decoder) error { return doSkipfloat32_(d) }
 
 type binaryClassfloat64Slice struct{}
 
@@ -328,18 +284,6 @@ func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) error {
 	}
 	return nil
 }
-func doSkipfloat64Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Float64(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassfloat64Slice) ID() binary.ID      { return binaryIDfloat64Slice }
 func (*binaryClassfloat64Slice) New() binary.Object { return &float64Slice{} }
 func (*binaryClassfloat64Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -352,7 +296,6 @@ func (*binaryClassfloat64Slice) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassfloat64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefloat64Slice(d, obj.(*float64Slice))
 }
-func (*binaryClassfloat64Slice) Skip(d binary.Decoder) error { return doSkipfloat64Slice(d) }
 
 type binaryClassfloat64_ struct{}
 
@@ -373,12 +316,6 @@ func doDecodefloat64_(d binary.Decoder, o *float64_) error {
 	}
 	return nil
 }
-func doSkipfloat64_(d binary.Decoder) error {
-	if _, err := d.Float64(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassfloat64_) ID() binary.ID      { return binaryIDfloat64_ }
 func (*binaryClassfloat64_) New() binary.Object { return &float64_{} }
 func (*binaryClassfloat64_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -391,7 +328,6 @@ func (*binaryClassfloat64_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfloat64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefloat64_(d, obj.(*float64_))
 }
-func (*binaryClassfloat64_) Skip(d binary.Decoder) error { return doSkipfloat64_(d) }
 
 type binaryClassint16Slice struct{}
 
@@ -424,18 +360,6 @@ func doDecodeint16Slice(d binary.Decoder, o *int16Slice) error {
 	}
 	return nil
 }
-func doSkipint16Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int16(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassint16Slice) ID() binary.ID      { return binaryIDint16Slice }
 func (*binaryClassint16Slice) New() binary.Object { return &int16Slice{} }
 func (*binaryClassint16Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -448,7 +372,6 @@ func (*binaryClassint16Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint16Slice(d, obj.(*int16Slice))
 }
-func (*binaryClassint16Slice) Skip(d binary.Decoder) error { return doSkipint16Slice(d) }
 
 type binaryClassint16_ struct{}
 
@@ -469,12 +392,6 @@ func doDecodeint16_(d binary.Decoder, o *int16_) error {
 	}
 	return nil
 }
-func doSkipint16_(d binary.Decoder) error {
-	if _, err := d.Int16(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassint16_) ID() binary.ID      { return binaryIDint16_ }
 func (*binaryClassint16_) New() binary.Object { return &int16_{} }
 func (*binaryClassint16_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -487,7 +404,6 @@ func (*binaryClassint16_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint16_(d, obj.(*int16_))
 }
-func (*binaryClassint16_) Skip(d binary.Decoder) error { return doSkipint16_(d) }
 
 type binaryClassint32Slice struct{}
 
@@ -520,18 +436,6 @@ func doDecodeint32Slice(d binary.Decoder, o *int32Slice) error {
 	}
 	return nil
 }
-func doSkipint32Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassint32Slice) ID() binary.ID      { return binaryIDint32Slice }
 func (*binaryClassint32Slice) New() binary.Object { return &int32Slice{} }
 func (*binaryClassint32Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -544,7 +448,6 @@ func (*binaryClassint32Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint32Slice(d, obj.(*int32Slice))
 }
-func (*binaryClassint32Slice) Skip(d binary.Decoder) error { return doSkipint32Slice(d) }
 
 type binaryClassint32_ struct{}
 
@@ -565,12 +468,6 @@ func doDecodeint32_(d binary.Decoder, o *int32_) error {
 	}
 	return nil
 }
-func doSkipint32_(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassint32_) ID() binary.ID      { return binaryIDint32_ }
 func (*binaryClassint32_) New() binary.Object { return &int32_{} }
 func (*binaryClassint32_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -583,7 +480,6 @@ func (*binaryClassint32_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint32_(d, obj.(*int32_))
 }
-func (*binaryClassint32_) Skip(d binary.Decoder) error { return doSkipint32_(d) }
 
 type binaryClassint64Slice struct{}
 
@@ -616,18 +512,6 @@ func doDecodeint64Slice(d binary.Decoder, o *int64Slice) error {
 	}
 	return nil
 }
-func doSkipint64Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int64(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassint64Slice) ID() binary.ID      { return binaryIDint64Slice }
 func (*binaryClassint64Slice) New() binary.Object { return &int64Slice{} }
 func (*binaryClassint64Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -640,7 +524,6 @@ func (*binaryClassint64Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint64Slice(d, obj.(*int64Slice))
 }
-func (*binaryClassint64Slice) Skip(d binary.Decoder) error { return doSkipint64Slice(d) }
 
 type binaryClassint64_ struct{}
 
@@ -661,12 +544,6 @@ func doDecodeint64_(d binary.Decoder, o *int64_) error {
 	}
 	return nil
 }
-func doSkipint64_(d binary.Decoder) error {
-	if _, err := d.Int64(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassint64_) ID() binary.ID      { return binaryIDint64_ }
 func (*binaryClassint64_) New() binary.Object { return &int64_{} }
 func (*binaryClassint64_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -679,7 +556,6 @@ func (*binaryClassint64_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint64_(d, obj.(*int64_))
 }
-func (*binaryClassint64_) Skip(d binary.Decoder) error { return doSkipint64_(d) }
 
 type binaryClassint8Slice struct{}
 
@@ -712,18 +588,6 @@ func doDecodeint8Slice(d binary.Decoder, o *int8Slice) error {
 	}
 	return nil
 }
-func doSkipint8Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int8(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassint8Slice) ID() binary.ID      { return binaryIDint8Slice }
 func (*binaryClassint8Slice) New() binary.Object { return &int8Slice{} }
 func (*binaryClassint8Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -736,7 +600,6 @@ func (*binaryClassint8Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint8Slice(d, obj.(*int8Slice))
 }
-func (*binaryClassint8Slice) Skip(d binary.Decoder) error { return doSkipint8Slice(d) }
 
 type binaryClassint8_ struct{}
 
@@ -757,12 +620,6 @@ func doDecodeint8_(d binary.Decoder, o *int8_) error {
 	}
 	return nil
 }
-func doSkipint8_(d binary.Decoder) error {
-	if _, err := d.Int8(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassint8_) ID() binary.ID      { return binaryIDint8_ }
 func (*binaryClassint8_) New() binary.Object { return &int8_{} }
 func (*binaryClassint8_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -775,7 +632,6 @@ func (*binaryClassint8_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint8_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint8_(d, obj.(*int8_))
 }
-func (*binaryClassint8_) Skip(d binary.Decoder) error { return doSkipint8_(d) }
 
 type binaryClassintSlice struct{}
 
@@ -808,18 +664,6 @@ func doDecodeintSlice(d binary.Decoder, o *intSlice) error {
 	}
 	return nil
 }
-func doSkipintSlice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassintSlice) ID() binary.ID      { return binaryIDintSlice }
 func (*binaryClassintSlice) New() binary.Object { return &intSlice{} }
 func (*binaryClassintSlice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -832,7 +676,6 @@ func (*binaryClassintSlice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassintSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeintSlice(d, obj.(*intSlice))
 }
-func (*binaryClassintSlice) Skip(d binary.Decoder) error { return doSkipintSlice(d) }
 
 type binaryClassint_ struct{}
 
@@ -853,12 +696,6 @@ func doDecodeint_(d binary.Decoder, o *int_) error {
 	}
 	return nil
 }
-func doSkipint_(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassint_) ID() binary.ID      { return binaryIDint_ }
 func (*binaryClassint_) New() binary.Object { return &int_{} }
 func (*binaryClassint_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -871,7 +708,6 @@ func (*binaryClassint_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassint_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint_(d, obj.(*int_))
 }
-func (*binaryClassint_) Skip(d binary.Decoder) error { return doSkipint_(d) }
 
 type binaryClassobjectSlice struct{}
 
@@ -910,18 +746,6 @@ func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) error {
 	}
 	return nil
 }
-func doSkipobjectSlice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassobjectSlice) ID() binary.ID      { return binaryIDobjectSlice }
 func (*binaryClassobjectSlice) New() binary.Object { return &objectSlice{} }
 func (*binaryClassobjectSlice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -934,7 +758,6 @@ func (*binaryClassobjectSlice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassobjectSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeobjectSlice(d, obj.(*objectSlice))
 }
-func (*binaryClassobjectSlice) Skip(d binary.Decoder) error { return doSkipobjectSlice(d) }
 
 type binaryClassobject_ struct{}
 
@@ -961,12 +784,6 @@ func doDecodeobject_(d binary.Decoder, o *object_) error {
 	}
 	return nil
 }
-func doSkipobject_(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassobject_) ID() binary.ID      { return binaryIDobject_ }
 func (*binaryClassobject_) New() binary.Object { return &object_{} }
 func (*binaryClassobject_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -979,7 +796,6 @@ func (*binaryClassobject_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassobject_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeobject_(d, obj.(*object_))
 }
-func (*binaryClassobject_) Skip(d binary.Decoder) error { return doSkipobject_(d) }
 
 type binaryClassstringSlice struct{}
 
@@ -1012,18 +828,6 @@ func doDecodestringSlice(d binary.Decoder, o *stringSlice) error {
 	}
 	return nil
 }
-func doSkipstringSlice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassstringSlice) ID() binary.ID      { return binaryIDstringSlice }
 func (*binaryClassstringSlice) New() binary.Object { return &stringSlice{} }
 func (*binaryClassstringSlice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1036,7 +840,6 @@ func (*binaryClassstringSlice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassstringSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodestringSlice(d, obj.(*stringSlice))
 }
-func (*binaryClassstringSlice) Skip(d binary.Decoder) error { return doSkipstringSlice(d) }
 
 type binaryClassstring_ struct{}
 
@@ -1057,12 +860,6 @@ func doDecodestring_(d binary.Decoder, o *string_) error {
 	}
 	return nil
 }
-func doSkipstring_(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassstring_) ID() binary.ID      { return binaryIDstring_ }
 func (*binaryClassstring_) New() binary.Object { return &string_{} }
 func (*binaryClassstring_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1075,7 +872,6 @@ func (*binaryClassstring_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassstring_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodestring_(d, obj.(*string_))
 }
-func (*binaryClassstring_) Skip(d binary.Decoder) error { return doSkipstring_(d) }
 
 type binaryClassuint16Slice struct{}
 
@@ -1108,18 +904,6 @@ func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) error {
 	}
 	return nil
 }
-func doSkipuint16Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint16(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassuint16Slice) ID() binary.ID      { return binaryIDuint16Slice }
 func (*binaryClassuint16Slice) New() binary.Object { return &uint16Slice{} }
 func (*binaryClassuint16Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1132,7 +916,6 @@ func (*binaryClassuint16Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint16Slice(d, obj.(*uint16Slice))
 }
-func (*binaryClassuint16Slice) Skip(d binary.Decoder) error { return doSkipuint16Slice(d) }
 
 type binaryClassuint16_ struct{}
 
@@ -1153,12 +936,6 @@ func doDecodeuint16_(d binary.Decoder, o *uint16_) error {
 	}
 	return nil
 }
-func doSkipuint16_(d binary.Decoder) error {
-	if _, err := d.Uint16(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassuint16_) ID() binary.ID      { return binaryIDuint16_ }
 func (*binaryClassuint16_) New() binary.Object { return &uint16_{} }
 func (*binaryClassuint16_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1171,7 +948,6 @@ func (*binaryClassuint16_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint16_(d, obj.(*uint16_))
 }
-func (*binaryClassuint16_) Skip(d binary.Decoder) error { return doSkipuint16_(d) }
 
 type binaryClassuint32Slice struct{}
 
@@ -1204,18 +980,6 @@ func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) error {
 	}
 	return nil
 }
-func doSkipuint32Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassuint32Slice) ID() binary.ID      { return binaryIDuint32Slice }
 func (*binaryClassuint32Slice) New() binary.Object { return &uint32Slice{} }
 func (*binaryClassuint32Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1228,7 +992,6 @@ func (*binaryClassuint32Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint32Slice(d, obj.(*uint32Slice))
 }
-func (*binaryClassuint32Slice) Skip(d binary.Decoder) error { return doSkipuint32Slice(d) }
 
 type binaryClassuint32_ struct{}
 
@@ -1249,12 +1012,6 @@ func doDecodeuint32_(d binary.Decoder, o *uint32_) error {
 	}
 	return nil
 }
-func doSkipuint32_(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassuint32_) ID() binary.ID      { return binaryIDuint32_ }
 func (*binaryClassuint32_) New() binary.Object { return &uint32_{} }
 func (*binaryClassuint32_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1267,7 +1024,6 @@ func (*binaryClassuint32_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint32_(d, obj.(*uint32_))
 }
-func (*binaryClassuint32_) Skip(d binary.Decoder) error { return doSkipuint32_(d) }
 
 type binaryClassuint64Slice struct{}
 
@@ -1300,18 +1056,6 @@ func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) error {
 	}
 	return nil
 }
-func doSkipuint64Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint64(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassuint64Slice) ID() binary.ID      { return binaryIDuint64Slice }
 func (*binaryClassuint64Slice) New() binary.Object { return &uint64Slice{} }
 func (*binaryClassuint64Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1324,7 +1068,6 @@ func (*binaryClassuint64Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint64Slice(d, obj.(*uint64Slice))
 }
-func (*binaryClassuint64Slice) Skip(d binary.Decoder) error { return doSkipuint64Slice(d) }
 
 type binaryClassuint64_ struct{}
 
@@ -1345,12 +1088,6 @@ func doDecodeuint64_(d binary.Decoder, o *uint64_) error {
 	}
 	return nil
 }
-func doSkipuint64_(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassuint64_) ID() binary.ID      { return binaryIDuint64_ }
 func (*binaryClassuint64_) New() binary.Object { return &uint64_{} }
 func (*binaryClassuint64_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1363,7 +1100,6 @@ func (*binaryClassuint64_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint64_(d, obj.(*uint64_))
 }
-func (*binaryClassuint64_) Skip(d binary.Decoder) error { return doSkipuint64_(d) }
 
 type binaryClassuint8Slice struct{}
 
@@ -1390,16 +1126,6 @@ func doDecodeuint8Slice(d binary.Decoder, o *uint8Slice) error {
 	}
 	return nil
 }
-func doSkipuint8Slice(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		if err := d.Skip(count); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 func (*binaryClassuint8Slice) ID() binary.ID      { return binaryIDuint8Slice }
 func (*binaryClassuint8Slice) New() binary.Object { return &uint8Slice{} }
 func (*binaryClassuint8Slice) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1412,7 +1138,6 @@ func (*binaryClassuint8Slice) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint8Slice(d, obj.(*uint8Slice))
 }
-func (*binaryClassuint8Slice) Skip(d binary.Decoder) error { return doSkipuint8Slice(d) }
 
 type binaryClassuint8_ struct{}
 
@@ -1433,12 +1158,6 @@ func doDecodeuint8_(d binary.Decoder, o *uint8_) error {
 	}
 	return nil
 }
-func doSkipuint8_(d binary.Decoder) error {
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassuint8_) ID() binary.ID      { return binaryIDuint8_ }
 func (*binaryClassuint8_) New() binary.Object { return &uint8_{} }
 func (*binaryClassuint8_) Encode(e binary.Encoder, obj binary.Object) error {
@@ -1451,4 +1170,3 @@ func (*binaryClassuint8_) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassuint8_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint8_(d, obj.(*uint8_))
 }
-func (*binaryClassuint8_) Skip(d binary.Decoder) error { return doSkipuint8_(d) }

@@ -12,12 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package objects
+package registry
 
-import (
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-)
+import "android.googlesource.com/platform/tools/gpu/binary"
 
 type binaryClassNil struct{}
 
@@ -26,7 +23,7 @@ var (
 )
 
 func init() {
-	registry.Global.Add(NilClass)
+	Global.Add(NilClass)
 }
 
 func (class *binaryClassNil) ID() binary.ID                                { return binary.ID{} }

@@ -54,15 +54,3 @@ func (s *Struct) Decode(d binary.Decoder) (interface{}, error) {
 	}
 	return o, d.Value(o)
 }
-
-func (s *Struct) Skip(d binary.Decoder) error {
-	class := d.Lookup(s.ID)
-	if class == nil {
-		return fmt.Errorf("Unknown type id %v for %s", s.ID, s)
-	}
-	o := class.New()
-	if o == nil {
-		return fmt.Errorf("Nil object built by class for %s : %T", s, class)
-	}
-	return d.SkipValue(o)
-}

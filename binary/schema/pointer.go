@@ -52,8 +52,3 @@ func (p *Pointer) Encode(e binary.Encoder, value interface{}) error {
 func (p *Pointer) Decode(d binary.Decoder) (interface{}, error) {
 	return d.Object()
 }
-
-func (p *Pointer) Skip(d binary.Decoder) error {
-	_, err := d.SkipObject()
-	return err
-}

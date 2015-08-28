@@ -156,5 +156,3 @@ func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
 func (c *AtomClass) DecodeTo(d binary.Decoder, object binary.Object) error {
 	return c.base.DecodeTo(d, object)
 }
-
-func (c *AtomClass) Skip(d binary.Decoder) error { return c.base.Skip(d) }

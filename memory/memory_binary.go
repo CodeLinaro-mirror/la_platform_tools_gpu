@@ -53,15 +53,6 @@ func doDecodePointer(d binary.Decoder, o *Pointer) error {
 	}
 	return nil
 }
-func doSkipPointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassPointer) ID() binary.ID      { return binaryIDPointer }
 func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
 func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) error {
@@ -74,8 +65,7 @@ func (*binaryClassPointer) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodePointer(d, obj.(*Pointer))
 }
-func (*binaryClassPointer) Skip(d binary.Decoder) error { return doSkipPointer(d) }
-func (*binaryClassPointer) Schema() *schema.Class       { return schemaPointer }
+func (*binaryClassPointer) Schema() *schema.Class { return schemaPointer }
 
 var schemaPointer = &schema.Class{
 	TypeID:  binaryIDPointer,
@@ -114,15 +104,6 @@ func doDecodeRange(d binary.Decoder, o *Range) error {
 	}
 	return nil
 }
-func doSkipRange(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
@@ -135,8 +116,7 @@ func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeRange(d, obj.(*Range))
 }
-func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
-func (*binaryClassRange) Schema() *schema.Class       { return schemaRange }
+func (*binaryClassRange) Schema() *schema.Class { return schemaRange }
 
 var schemaRange = &schema.Class{
 	TypeID:  binaryIDRange,

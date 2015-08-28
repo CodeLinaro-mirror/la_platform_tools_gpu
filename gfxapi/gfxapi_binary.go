@@ -54,18 +54,6 @@ func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	}
 	return nil
 }
-func doSkipTexture(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*image.Info)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
 func (*binaryClassTexture) New() binary.Object { return &Texture{} }
 func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
@@ -78,8 +66,7 @@ func (*binaryClassTexture) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTexture(d, obj.(*Texture))
 }
-func (*binaryClassTexture) Skip(d binary.Decoder) error { return doSkipTexture(d) }
-func (*binaryClassTexture) Schema() *schema.Class       { return schemaTexture }
+func (*binaryClassTexture) Schema() *schema.Class { return schemaTexture }
 
 var schemaTexture = &schema.Class{
 	TypeID:  binaryIDTexture,

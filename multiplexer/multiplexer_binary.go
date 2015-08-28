@@ -45,12 +45,6 @@ func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) error {
 	}
 	return nil
 }
-func doSkipmsgCloseChannel(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassmsgCloseChannel) ID() binary.ID      { return binaryIDmsgCloseChannel }
 func (*binaryClassmsgCloseChannel) New() binary.Object { return &msgCloseChannel{} }
 func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) error {
@@ -63,8 +57,7 @@ func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) (binary.Object, erro
 func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
 }
-func (*binaryClassmsgCloseChannel) Skip(d binary.Decoder) error { return doSkipmsgCloseChannel(d) }
-func (*binaryClassmsgCloseChannel) Schema() *schema.Class       { return schemamsgCloseChannel }
+func (*binaryClassmsgCloseChannel) Schema() *schema.Class { return schemamsgCloseChannel }
 
 var schemamsgCloseChannel = &schema.Class{
 	TypeID:  binaryIDmsgCloseChannel,
@@ -108,19 +101,6 @@ func doDecodemsgData(d binary.Decoder, o *msgData) error {
 	}
 	return nil
 }
-func doSkipmsgData(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		if err := d.Skip(count); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 func (*binaryClassmsgData) ID() binary.ID      { return binaryIDmsgData }
 func (*binaryClassmsgData) New() binary.Object { return &msgData{} }
 func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) error {
@@ -133,8 +113,7 @@ func (*binaryClassmsgData) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodemsgData(d, obj.(*msgData))
 }
-func (*binaryClassmsgData) Skip(d binary.Decoder) error { return doSkipmsgData(d) }
-func (*binaryClassmsgData) Schema() *schema.Class       { return schemamsgData }
+func (*binaryClassmsgData) Schema() *schema.Class { return schemamsgData }
 
 var schemamsgData = &schema.Class{
 	TypeID:  binaryIDmsgData,
@@ -165,12 +144,6 @@ func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) error {
 	}
 	return nil
 }
-func doSkipmsgOpenChannel(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassmsgOpenChannel) ID() binary.ID      { return binaryIDmsgOpenChannel }
 func (*binaryClassmsgOpenChannel) New() binary.Object { return &msgOpenChannel{} }
 func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) error {
@@ -183,8 +156,7 @@ func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) (binary.Object, error
 func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
 }
-func (*binaryClassmsgOpenChannel) Skip(d binary.Decoder) error { return doSkipmsgOpenChannel(d) }
-func (*binaryClassmsgOpenChannel) Schema() *schema.Class       { return schemamsgOpenChannel }
+func (*binaryClassmsgOpenChannel) Schema() *schema.Class { return schemamsgOpenChannel }
 
 var schemamsgOpenChannel = &schema.Class{
 	TypeID:  binaryIDmsgOpenChannel,

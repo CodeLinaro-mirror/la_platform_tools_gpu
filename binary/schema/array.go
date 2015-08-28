@@ -70,15 +70,6 @@ func (a *Array) Decode(d binary.Decoder) (interface{}, error) {
 	return v, nil
 }
 
-func (a *Array) Skip(d binary.Decoder) error {
-	for i := uint32(0); i < a.Size; i++ {
-		if err := a.ValueType.Skip(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func (s *Slice) Basename() string {
 	return fmt.Sprintf("[]%s", s.ValueType.Basename())
 }
@@ -117,17 +108,4 @@ func (s *Slice) Decode(d binary.Decoder) (interface{}, error) {
 		}
 	}
 	return v, nil
-}
-
-func (s *Slice) Skip(d binary.Decoder) error {
-	size, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < size; i++ {
-		if err := s.ValueType.Skip(d); err != nil {
-			return err
-		}
-	}
-	return nil
 }

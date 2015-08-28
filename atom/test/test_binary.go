@@ -54,15 +54,6 @@ func doDecodeAtomA(d binary.Decoder, o *AtomA) error {
 	}
 	return nil
 }
-func doSkipAtomA(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassAtomA) ID() binary.ID      { return AtomAID }
 func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) error {
@@ -75,8 +66,7 @@ func (*binaryClassAtomA) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomA(d, obj.(*AtomA))
 }
-func (*binaryClassAtomA) Skip(d binary.Decoder) error { return doSkipAtomA(d) }
-func (*binaryClassAtomA) Schema() *schema.Class       { return schemaAtomA }
+func (*binaryClassAtomA) Schema() *schema.Class { return schemaAtomA }
 
 var schemaAtomA = &schema.Class{
 	TypeID:  AtomAID,
@@ -115,15 +105,6 @@ func doDecodeAtomB(d binary.Decoder, o *AtomB) error {
 	}
 	return nil
 }
-func doSkipAtomB(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassAtomB) ID() binary.ID      { return AtomBID }
 func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) error {
@@ -136,8 +117,7 @@ func (*binaryClassAtomB) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomB(d, obj.(*AtomB))
 }
-func (*binaryClassAtomB) Skip(d binary.Decoder) error { return doSkipAtomB(d) }
-func (*binaryClassAtomB) Schema() *schema.Class       { return schemaAtomB }
+func (*binaryClassAtomB) Schema() *schema.Class { return schemaAtomB }
 
 var schemaAtomB = &schema.Class{
 	TypeID:  AtomBID,
@@ -168,12 +148,6 @@ func doDecodeAtomC(d binary.Decoder, o *AtomC) error {
 	}
 	return nil
 }
-func doSkipAtomC(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassAtomC) ID() binary.ID      { return AtomCID }
 func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) error {
@@ -186,8 +160,7 @@ func (*binaryClassAtomC) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomC(d, obj.(*AtomC))
 }
-func (*binaryClassAtomC) Skip(d binary.Decoder) error { return doSkipAtomC(d) }
-func (*binaryClassAtomC) Schema() *schema.Class       { return schemaAtomC }
+func (*binaryClassAtomC) Schema() *schema.Class { return schemaAtomC }
 
 var schemaAtomC = &schema.Class{
 	TypeID:  AtomCID,

@@ -41,12 +41,6 @@ func doDecodedelay(d binary.Decoder, o *delay) error {
 	}
 	return nil
 }
-func doSkipdelay(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassdelay) ID() binary.ID      { return binaryIDdelay }
 func (*binaryClassdelay) New() binary.Object { return &delay{} }
 func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) error {
@@ -59,8 +53,7 @@ func (*binaryClassdelay) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodedelay(d, obj.(*delay))
 }
-func (*binaryClassdelay) Skip(d binary.Decoder) error { return doSkipdelay(d) }
-func (*binaryClassdelay) Schema() *schema.Class       { return schemadelay }
+func (*binaryClassdelay) Schema() *schema.Class { return schemadelay }
 
 var schemadelay = &schema.Class{
 	TypeID:  binaryIDdelay,
@@ -90,12 +83,6 @@ func doDecoderequest(d binary.Decoder, o *request) error {
 	}
 	return nil
 }
-func doSkiprequest(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassrequest) ID() binary.ID      { return binaryIDrequest }
 func (*binaryClassrequest) New() binary.Object { return &request{} }
 func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) error {
@@ -108,8 +95,7 @@ func (*binaryClassrequest) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecoderequest(d, obj.(*request))
 }
-func (*binaryClassrequest) Skip(d binary.Decoder) error { return doSkiprequest(d) }
-func (*binaryClassrequest) Schema() *schema.Class       { return schemarequest }
+func (*binaryClassrequest) Schema() *schema.Class { return schemarequest }
 
 var schemarequest = &schema.Class{
 	TypeID:  binaryIDrequest,
@@ -139,12 +125,6 @@ func doDecoderesponse(d binary.Decoder, o *response) error {
 	}
 	return nil
 }
-func doSkipresponse(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassresponse) ID() binary.ID      { return binaryIDresponse }
 func (*binaryClassresponse) New() binary.Object { return &response{} }
 func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) error {
@@ -157,8 +137,7 @@ func (*binaryClassresponse) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecoderesponse(d, obj.(*response))
 }
-func (*binaryClassresponse) Skip(d binary.Decoder) error { return doSkipresponse(d) }
-func (*binaryClassresponse) Schema() *schema.Class       { return schemaresponse }
+func (*binaryClassresponse) Schema() *schema.Class { return schemaresponse }
 
 var schemaresponse = &schema.Class{
 	TypeID:  binaryIDresponse,

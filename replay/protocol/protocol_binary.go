@@ -53,15 +53,6 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
 	}
 	return nil
 }
-func doSkipResourceInfo(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
 func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
@@ -74,8 +65,7 @@ func (*binaryClassResourceInfo) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
 }
-func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipResourceInfo(d) }
-func (*binaryClassResourceInfo) Schema() *schema.Class       { return schemaResourceInfo }
+func (*binaryClassResourceInfo) Schema() *schema.Class { return schemaResourceInfo }
 
 var schemaResourceInfo = &schema.Class{
 	TypeID:  binaryIDResourceInfo,
@@ -160,38 +150,6 @@ func doDecodePayload(d binary.Decoder, o *Payload) error {
 	}
 	return nil
 }
-func doSkipPayload(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		if err := d.Skip(count); err != nil {
-			return err
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*ResourceInfo)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		if err := d.Skip(count); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 func (*binaryClassPayload) ID() binary.ID      { return binaryIDPayload }
 func (*binaryClassPayload) New() binary.Object { return &Payload{} }
 func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) error {
@@ -204,8 +162,7 @@ func (*binaryClassPayload) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodePayload(d, obj.(*Payload))
 }
-func (*binaryClassPayload) Skip(d binary.Decoder) error { return doSkipPayload(d) }
-func (*binaryClassPayload) Schema() *schema.Class       { return schemaPayload }
+func (*binaryClassPayload) Schema() *schema.Class { return schemaPayload }
 
 var schemaPayload = &schema.Class{
 	TypeID:  binaryIDPayload,

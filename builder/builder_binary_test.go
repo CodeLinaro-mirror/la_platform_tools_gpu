@@ -55,15 +55,6 @@ func doDecodetestStruct(d binary.Decoder, o *testStruct) error {
 	}
 	return nil
 }
-func doSkiptestStruct(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClasstestStruct) ID() binary.ID      { return binaryIDtestStruct }
 func (*binaryClasstestStruct) New() binary.Object { return &testStruct{} }
 func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) error {
@@ -76,8 +67,7 @@ func (*binaryClasstestStruct) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodetestStruct(d, obj.(*testStruct))
 }
-func (*binaryClasstestStruct) Skip(d binary.Decoder) error { return doSkiptestStruct(d) }
-func (*binaryClasstestStruct) Schema() *schema.Class       { return schematestStruct }
+func (*binaryClasstestStruct) Schema() *schema.Class { return schematestStruct }
 
 var schematestStruct = &schema.Class{
 	TypeID:  binaryIDtestStruct,
@@ -203,42 +193,6 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) error {
 	}
 	return nil
 }
-func doSkiptestAtom(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Bool(); err != nil {
-				return err
-			}
-		}
-	}
-	if _, err := d.SkipVariant(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
 func (*binaryClasstestAtom) ID() binary.ID      { return binaryIDtestAtom }
 func (*binaryClasstestAtom) New() binary.Object { return &testAtom{} }
 func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) error {
@@ -251,8 +205,7 @@ func (*binaryClasstestAtom) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodetestAtom(d, obj.(*testAtom))
 }
-func (*binaryClasstestAtom) Skip(d binary.Decoder) error { return doSkiptestAtom(d) }
-func (*binaryClasstestAtom) Schema() *schema.Class       { return schematestAtom }
+func (*binaryClasstestAtom) Schema() *schema.Class { return schematestAtom }
 
 var schematestAtom = &schema.Class{
 	TypeID:  binaryIDtestAtom,

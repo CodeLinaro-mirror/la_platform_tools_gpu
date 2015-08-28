@@ -41,12 +41,6 @@ func doDecodeError(d binary.Decoder, o *Error) error {
 	}
 	return nil
 }
-func doSkipError(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassError) ID() binary.ID      { return binaryIDError }
 func (*binaryClassError) New() binary.Object { return &Error{} }
 func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) error {
@@ -59,8 +53,7 @@ func (*binaryClassError) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeError(d, obj.(*Error))
 }
-func (*binaryClassError) Skip(d binary.Decoder) error { return doSkipError(d) }
-func (*binaryClassError) Schema() *schema.Class       { return schemaError }
+func (*binaryClassError) Schema() *schema.Class { return schemaError }
 
 var schemaError = &schema.Class{
 	TypeID:  binaryIDError,

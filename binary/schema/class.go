@@ -102,10 +102,3 @@ func (c *Class) Decode(d binary.Decoder) (binary.Object, error) {
 func (c *Class) DecodeTo(d binary.Decoder, object binary.Object) error {
 	return c.doDecode(d, object.(*Object))
 }
-
-func (c *Class) Skip(d binary.Decoder) error {
-	for _, f := range c.Fields {
-		f.Type.Skip(d)
-	}
-	return nil
-}

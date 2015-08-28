@@ -102,25 +102,6 @@ func doDecodeImage(d binary.Decoder, o *Image) error {
 	}
 	return nil
 }
-func doSkipImage(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		if err := d.Skip(count); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 func (*binaryClassImage) ID() binary.ID      { return binaryIDImage }
 func (*binaryClassImage) New() binary.Object { return &Image{} }
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) error {
@@ -133,8 +114,7 @@ func (*binaryClassImage) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeImage(d, obj.(*Image))
 }
-func (*binaryClassImage) Skip(d binary.Decoder) error { return doSkipImage(d) }
-func (*binaryClassImage) Schema() *schema.Class       { return schemaImage }
+func (*binaryClassImage) Schema() *schema.Class { return schemaImage }
 
 var schemaImage = &schema.Class{
 	TypeID:  binaryIDImage,
@@ -203,21 +183,6 @@ func doDecodeInfo(d binary.Decoder, o *Info) error {
 	}
 	return nil
 }
-func doSkipInfo(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassInfo) ID() binary.ID      { return binaryIDInfo }
 func (*binaryClassInfo) New() binary.Object { return &Info{} }
 func (*binaryClassInfo) Encode(e binary.Encoder, obj binary.Object) error {
@@ -230,8 +195,7 @@ func (*binaryClassInfo) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeInfo(d, obj.(*Info))
 }
-func (*binaryClassInfo) Skip(d binary.Decoder) error { return doSkipInfo(d) }
-func (*binaryClassInfo) Schema() *schema.Class       { return schemaInfo }
+func (*binaryClassInfo) Schema() *schema.Class { return schemaInfo }
 
 var schemaInfo = &schema.Class{
 	TypeID:  binaryIDInfo,
@@ -308,24 +272,6 @@ func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) error {
 	}
 	return nil
 }
-func doSkipLazyConverter(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassLazyConverter) ID() binary.ID      { return binaryIDLazyConverter }
 func (*binaryClassLazyConverter) New() binary.Object { return &LazyConverter{} }
 func (*binaryClassLazyConverter) Encode(e binary.Encoder, obj binary.Object) error {
@@ -338,8 +284,7 @@ func (*binaryClassLazyConverter) Decode(d binary.Decoder) (binary.Object, error)
 func (*binaryClassLazyConverter) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeLazyConverter(d, obj.(*LazyConverter))
 }
-func (*binaryClassLazyConverter) Skip(d binary.Decoder) error { return doSkipLazyConverter(d) }
-func (*binaryClassLazyConverter) Schema() *schema.Class       { return schemaLazyConverter }
+func (*binaryClassLazyConverter) Schema() *schema.Class { return schemaLazyConverter }
 
 var schemaLazyConverter = &schema.Class{
 	TypeID:  binaryIDLazyConverter,
@@ -365,9 +310,6 @@ func doEncodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(e binary.Encoder, o *fmtATC_RGBA_EXP
 func doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d binary.Decoder, o *fmtATC_RGBA_EXPLICIT_ALPHA_AMD) error {
 	return nil
 }
-func doSkipfmtATC_RGBA_EXPLICIT_ALPHA_AMD(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) ID() binary.ID {
 	return binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD
 }
@@ -383,9 +325,6 @@ func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Decode(d binary.Decoder) (bina
 }
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d, obj.(*fmtATC_RGBA_EXPLICIT_ALPHA_AMD))
-}
-func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Skip(d binary.Decoder) error {
-	return doSkipfmtATC_RGBA_EXPLICIT_ALPHA_AMD(d)
 }
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *schema.Class {
 	return schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD
@@ -409,9 +348,6 @@ func doEncodefmtATC_RGB_AMD(e binary.Encoder, o *fmtATC_RGB_AMD) error {
 func doDecodefmtATC_RGB_AMD(d binary.Decoder, o *fmtATC_RGB_AMD) error {
 	return nil
 }
-func doSkipfmtATC_RGB_AMD(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtATC_RGB_AMD) ID() binary.ID      { return binaryIDfmtATC_RGB_AMD }
 func (*binaryClassfmtATC_RGB_AMD) New() binary.Object { return &fmtATC_RGB_AMD{} }
 func (*binaryClassfmtATC_RGB_AMD) Encode(e binary.Encoder, obj binary.Object) error {
@@ -424,8 +360,7 @@ func (*binaryClassfmtATC_RGB_AMD) Decode(d binary.Decoder) (binary.Object, error
 func (*binaryClassfmtATC_RGB_AMD) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtATC_RGB_AMD(d, obj.(*fmtATC_RGB_AMD))
 }
-func (*binaryClassfmtATC_RGB_AMD) Skip(d binary.Decoder) error { return doSkipfmtATC_RGB_AMD(d) }
-func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Class       { return schemafmtATC_RGB_AMD }
+func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Class { return schemafmtATC_RGB_AMD }
 
 var schemafmtATC_RGB_AMD = &schema.Class{
 	TypeID:  binaryIDfmtATC_RGB_AMD,
@@ -445,9 +380,6 @@ func doEncodefmtAlpha(e binary.Encoder, o *fmtAlpha) error {
 func doDecodefmtAlpha(d binary.Decoder, o *fmtAlpha) error {
 	return nil
 }
-func doSkipfmtAlpha(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtAlpha) ID() binary.ID      { return binaryIDfmtAlpha }
 func (*binaryClassfmtAlpha) New() binary.Object { return &fmtAlpha{} }
 func (*binaryClassfmtAlpha) Encode(e binary.Encoder, obj binary.Object) error {
@@ -460,8 +392,7 @@ func (*binaryClassfmtAlpha) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfmtAlpha) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtAlpha(d, obj.(*fmtAlpha))
 }
-func (*binaryClassfmtAlpha) Skip(d binary.Decoder) error { return doSkipfmtAlpha(d) }
-func (*binaryClassfmtAlpha) Schema() *schema.Class       { return schemafmtAlpha }
+func (*binaryClassfmtAlpha) Schema() *schema.Class { return schemafmtAlpha }
 
 var schemafmtAlpha = &schema.Class{
 	TypeID:  binaryIDfmtAlpha,
@@ -481,9 +412,6 @@ func doEncodefmtETC1_RGB8_OES(e binary.Encoder, o *fmtETC1_RGB8_OES) error {
 func doDecodefmtETC1_RGB8_OES(d binary.Decoder, o *fmtETC1_RGB8_OES) error {
 	return nil
 }
-func doSkipfmtETC1_RGB8_OES(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtETC1_RGB8_OES) ID() binary.ID      { return binaryIDfmtETC1_RGB8_OES }
 func (*binaryClassfmtETC1_RGB8_OES) New() binary.Object { return &fmtETC1_RGB8_OES{} }
 func (*binaryClassfmtETC1_RGB8_OES) Encode(e binary.Encoder, obj binary.Object) error {
@@ -496,8 +424,7 @@ func (*binaryClassfmtETC1_RGB8_OES) Decode(d binary.Decoder) (binary.Object, err
 func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtETC1_RGB8_OES(d, obj.(*fmtETC1_RGB8_OES))
 }
-func (*binaryClassfmtETC1_RGB8_OES) Skip(d binary.Decoder) error { return doSkipfmtETC1_RGB8_OES(d) }
-func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Class       { return schemafmtETC1_RGB8_OES }
+func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Class { return schemafmtETC1_RGB8_OES }
 
 var schemafmtETC1_RGB8_OES = &schema.Class{
 	TypeID:  binaryIDfmtETC1_RGB8_OES,
@@ -517,9 +444,6 @@ func doEncodefmtFloat32(e binary.Encoder, o *fmtFloat32) error {
 func doDecodefmtFloat32(d binary.Decoder, o *fmtFloat32) error {
 	return nil
 }
-func doSkipfmtFloat32(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtFloat32) ID() binary.ID      { return binaryIDfmtFloat32 }
 func (*binaryClassfmtFloat32) New() binary.Object { return &fmtFloat32{} }
 func (*binaryClassfmtFloat32) Encode(e binary.Encoder, obj binary.Object) error {
@@ -532,8 +456,7 @@ func (*binaryClassfmtFloat32) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtFloat32(d, obj.(*fmtFloat32))
 }
-func (*binaryClassfmtFloat32) Skip(d binary.Decoder) error { return doSkipfmtFloat32(d) }
-func (*binaryClassfmtFloat32) Schema() *schema.Class       { return schemafmtFloat32 }
+func (*binaryClassfmtFloat32) Schema() *schema.Class { return schemafmtFloat32 }
 
 var schemafmtFloat32 = &schema.Class{
 	TypeID:  binaryIDfmtFloat32,
@@ -553,9 +476,6 @@ func doEncodefmtLuminance(e binary.Encoder, o *fmtLuminance) error {
 func doDecodefmtLuminance(d binary.Decoder, o *fmtLuminance) error {
 	return nil
 }
-func doSkipfmtLuminance(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtLuminance) ID() binary.ID      { return binaryIDfmtLuminance }
 func (*binaryClassfmtLuminance) New() binary.Object { return &fmtLuminance{} }
 func (*binaryClassfmtLuminance) Encode(e binary.Encoder, obj binary.Object) error {
@@ -568,8 +488,7 @@ func (*binaryClassfmtLuminance) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassfmtLuminance) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtLuminance(d, obj.(*fmtLuminance))
 }
-func (*binaryClassfmtLuminance) Skip(d binary.Decoder) error { return doSkipfmtLuminance(d) }
-func (*binaryClassfmtLuminance) Schema() *schema.Class       { return schemafmtLuminance }
+func (*binaryClassfmtLuminance) Schema() *schema.Class { return schemafmtLuminance }
 
 var schemafmtLuminance = &schema.Class{
 	TypeID:  binaryIDfmtLuminance,
@@ -589,9 +508,6 @@ func doEncodefmtLuminanceAlpha(e binary.Encoder, o *fmtLuminanceAlpha) error {
 func doDecodefmtLuminanceAlpha(d binary.Decoder, o *fmtLuminanceAlpha) error {
 	return nil
 }
-func doSkipfmtLuminanceAlpha(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtLuminanceAlpha) ID() binary.ID      { return binaryIDfmtLuminanceAlpha }
 func (*binaryClassfmtLuminanceAlpha) New() binary.Object { return &fmtLuminanceAlpha{} }
 func (*binaryClassfmtLuminanceAlpha) Encode(e binary.Encoder, obj binary.Object) error {
@@ -604,8 +520,7 @@ func (*binaryClassfmtLuminanceAlpha) Decode(d binary.Decoder) (binary.Object, er
 func (*binaryClassfmtLuminanceAlpha) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtLuminanceAlpha(d, obj.(*fmtLuminanceAlpha))
 }
-func (*binaryClassfmtLuminanceAlpha) Skip(d binary.Decoder) error { return doSkipfmtLuminanceAlpha(d) }
-func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Class       { return schemafmtLuminanceAlpha }
+func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Class { return schemafmtLuminanceAlpha }
 
 var schemafmtLuminanceAlpha = &schema.Class{
 	TypeID:  binaryIDfmtLuminanceAlpha,
@@ -625,9 +540,6 @@ func doEncodefmtPNG(e binary.Encoder, o *fmtPNG) error {
 func doDecodefmtPNG(d binary.Decoder, o *fmtPNG) error {
 	return nil
 }
-func doSkipfmtPNG(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtPNG) ID() binary.ID      { return binaryIDfmtPNG }
 func (*binaryClassfmtPNG) New() binary.Object { return &fmtPNG{} }
 func (*binaryClassfmtPNG) Encode(e binary.Encoder, obj binary.Object) error {
@@ -640,8 +552,7 @@ func (*binaryClassfmtPNG) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfmtPNG) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtPNG(d, obj.(*fmtPNG))
 }
-func (*binaryClassfmtPNG) Skip(d binary.Decoder) error { return doSkipfmtPNG(d) }
-func (*binaryClassfmtPNG) Schema() *schema.Class       { return schemafmtPNG }
+func (*binaryClassfmtPNG) Schema() *schema.Class { return schemafmtPNG }
 
 var schemafmtPNG = &schema.Class{
 	TypeID:  binaryIDfmtPNG,
@@ -661,9 +572,6 @@ func doEncodefmtRGB(e binary.Encoder, o *fmtRGB) error {
 func doDecodefmtRGB(d binary.Decoder, o *fmtRGB) error {
 	return nil
 }
-func doSkipfmtRGB(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtRGB) ID() binary.ID      { return binaryIDfmtRGB }
 func (*binaryClassfmtRGB) New() binary.Object { return &fmtRGB{} }
 func (*binaryClassfmtRGB) Encode(e binary.Encoder, obj binary.Object) error {
@@ -676,8 +584,7 @@ func (*binaryClassfmtRGB) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfmtRGB) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtRGB(d, obj.(*fmtRGB))
 }
-func (*binaryClassfmtRGB) Skip(d binary.Decoder) error { return doSkipfmtRGB(d) }
-func (*binaryClassfmtRGB) Schema() *schema.Class       { return schemafmtRGB }
+func (*binaryClassfmtRGB) Schema() *schema.Class { return schemafmtRGB }
 
 var schemafmtRGB = &schema.Class{
 	TypeID:  binaryIDfmtRGB,
@@ -697,9 +604,6 @@ func doEncodefmtRGBA(e binary.Encoder, o *fmtRGBA) error {
 func doDecodefmtRGBA(d binary.Decoder, o *fmtRGBA) error {
 	return nil
 }
-func doSkipfmtRGBA(d binary.Decoder) error {
-	return nil
-}
 func (*binaryClassfmtRGBA) ID() binary.ID      { return binaryIDfmtRGBA }
 func (*binaryClassfmtRGBA) New() binary.Object { return &fmtRGBA{} }
 func (*binaryClassfmtRGBA) Encode(e binary.Encoder, obj binary.Object) error {
@@ -712,8 +616,7 @@ func (*binaryClassfmtRGBA) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassfmtRGBA) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodefmtRGBA(d, obj.(*fmtRGBA))
 }
-func (*binaryClassfmtRGBA) Skip(d binary.Decoder) error { return doSkipfmtRGBA(d) }
-func (*binaryClassfmtRGBA) Schema() *schema.Class       { return schemafmtRGBA }
+func (*binaryClassfmtRGBA) Schema() *schema.Class { return schemafmtRGBA }
 
 var schemafmtRGBA = &schema.Class{
 	TypeID:  binaryIDfmtRGBA,

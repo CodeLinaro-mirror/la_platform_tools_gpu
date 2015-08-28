@@ -78,19 +78,3 @@ func (m *Map) Decode(d binary.Decoder) (interface{}, error) {
 		return v, nil
 	}
 }
-
-func (m *Map) Skip(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := m.KeyType.Skip(d); err != nil {
-				return err
-			}
-			if err := m.ValueType.Skip(d); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}

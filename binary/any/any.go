@@ -330,8 +330,3 @@ func (i *Any) Decode(d binary.Decoder) (interface{}, error) {
 		return Unbox(boxed)
 	}
 }
-
-func (i *Any) Skip(d binary.Decoder) error {
-	_, err := d.SkipVariant()
-	return err
-}
