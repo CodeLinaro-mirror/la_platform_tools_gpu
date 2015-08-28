@@ -58,7 +58,7 @@ var EXE = &cpp.Toolchain{
 	DepsFor:    depsFor,
 	DepFileFor: depFileFor,
 	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	DllName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".so" },
 	ExeName:    func(cfg cpp.Config) string { return cfg.Name },
 	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
@@ -72,7 +72,7 @@ var APK = &cpp.Toolchain{
 	DepsFor:    depsFor,
 	DepFileFor: depFileFor,
 	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	DllName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".so" },
 	ExeName:    func(cfg cpp.Config) string { return cfg.Name + ".apk" },
 	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
