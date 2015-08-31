@@ -15,8 +15,9 @@
 package image
 
 import (
+	"math"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"github.com/google/gxui/math"
 )
 
 type fmtFloat32 struct{ binary.Generate }
@@ -34,12 +35,12 @@ func init() {
 			dst, i, j := make([]byte, width*height*4), 0, 0
 			for y := 0; y < height; y++ {
 				for x := 0; x < width; x++ {
-					r, g, b, a := float32(src[i+0]), float32(src[i+1])/255.0, float32(src[i+2])/65025.0, float32(src[i+3])/160581375.0
+					r, g, b, a := float64(src[i+0]), float64(src[i+1])/255.0, float64(src[i+2])/65025.0, float64(src[i+3])/160581375.0
 					depth := (r + g + b + a) / 255.0
 					d := 0.01 / (1.0 - depth)
-					dst[j+0] = byte(math.Cosf(d+math.TwoPi*0.000)*127.0 + 128.0)
-					dst[j+1] = byte(math.Cosf(d+math.TwoPi*0.333)*127.0 + 128.0)
-					dst[j+2] = byte(math.Cosf(d+math.TwoPi*0.666)*127.0 + 128.0)
+					dst[j+0] = byte(math.Cos(d+math.Pi*2.0*0.000)*127.0 + 128.0)
+					dst[j+1] = byte(math.Cos(d+math.Pi*2.0*0.333)*127.0 + 128.0)
+					dst[j+2] = byte(math.Cos(d+math.Pi*2.0*0.666)*127.0 + 128.0)
 					dst[j+3] = byte(0xFF)
 					i += 4
 					j += 4
