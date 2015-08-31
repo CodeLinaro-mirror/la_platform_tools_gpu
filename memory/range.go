@@ -39,9 +39,9 @@ func max(a, b uint64) uint64 {
 
 // Range represents a region of memory.
 type Range struct {
-	binary.Generate
-	Base uint64 // The address of the first byte in the memory range.
-	Size uint64 // The size in bytes of the memory range.
+	binary.Generate `java:"MemoryRange"`
+	Base            uint64 // The address of the first byte in the memory range.
+	Size            uint64 // The size in bytes of the memory range.
 }
 
 // Expand returns a new Range that is grown to include the address addr.

@@ -28,9 +28,9 @@ var Nullptr = Pointer{Pool: ApplicationPool}
 
 // Pointer is the type representing a memory pointer.
 type Pointer struct {
-	binary.Generate
-	Address uint64 // The memory address.
-	Pool    PoolID // The memory pool.
+	binary.Generate `java:"MemoryPointer"`
+	Address         uint64 // The memory address.
+	Pool            PoolID // The memory pool.
 }
 
 // Offset returns the pointer offset by n bytes.
