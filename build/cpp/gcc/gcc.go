@@ -62,7 +62,8 @@ type tools struct {
 func getTools(cfg cpp.Config) (*tools, error) {
 	var t tools
 
-	if maker.HostOS == "linux" {
+	switch maker.HostOS {
+	case "linux":
 		switch cfg.OS {
 		case "linux":
 			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")
@@ -81,7 +82,22 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		default:
 			return nil, fmt.Errorf("Cross compiling to '%s' is currently not avaliable", cfg.OS)
 		}
-	} else {
+
+	case "osx":
+		switch cfg.OS {
+		case "osx":
+			bin := build.RepoRoot.Path.Join("prebuilts", "clang", "darwin-x86", "sdk", "3.5", "bin")
+			ar, _ := build.File("ar").LookPath()
+			t = tools{
+				cc: bin.Join("clang"),
+				ar: ar,
+			}
+
+		default:
+			return nil, fmt.Errorf("Cross compiling to '%s' is currently not avaliable", cfg.OS)
+	}
+
+	default:
 		cc, _ := build.File("gcc").LookPath()
 		ar, _ := build.File("ar").LookPath()
 		t = tools{cc: cc, ar: ar}
@@ -140,7 +156,7 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	a := []string{"-rcs"}
+	a := []string{"rcs"}
 	a = append(a, output.Absolute())
 	a = append(a, cfg.ArchiverArgs...)
 	for _, input := range inputs {
