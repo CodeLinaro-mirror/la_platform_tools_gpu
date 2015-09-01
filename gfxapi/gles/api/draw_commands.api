@@ -16,6 +16,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawArrays.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArrays.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawArrays.xhtml","OpenGL ES 3.2")
 cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei index_count) {
   minRequiredVersion(2, 0)
   switch (draw_mode) {
@@ -35,6 +36,7 @@ cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei index_count) 
 
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArraysIndirect.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawArraysIndirect.xhtml","OpenGL ES 3.2")
 cmd void glDrawArraysIndirect(GLenum mode, const void* indirect) {
   minRequiredVersion(3, 1)
   switch (mode) {
@@ -52,6 +54,7 @@ cmd void glDrawArraysIndirect(GLenum mode, const void* indirect) {
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.2")
 cmd void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instancecount) {
   minRequiredVersion(3, 0)
   switch (mode) {
@@ -69,6 +72,7 @@ cmd void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei 
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawBuffers.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawBuffers.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawBuffers.xhtml","OpenGL ES 3.2")
 cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
   minRequiredVersion(3, 0)
   // TODO
@@ -78,6 +82,7 @@ cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawElements.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElements.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElements.xhtml","OpenGL ES 3.2")
 cmd void glDrawElements(GLenum         draw_mode,
                         GLsizei        element_count,
                         GLenum         indices_type,
@@ -134,6 +139,7 @@ cmd void glDrawElements(GLenum         draw_mode,
 
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElementsIndirect.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElementsIndirect.xhtml","OpenGL ES 3.2")
 cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) {
   minRequiredVersion(3, 1)
   switch (mode) {
@@ -159,6 +165,7 @@ cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) 
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawElementsInstanced.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElementsInstanced.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawElementsInstanced.xhtml","OpenGL ES 3.2")
 cmd void glDrawElementsInstanced(GLenum      mode,
                                  GLsizei     count,
                                  GLenum      type,
@@ -188,6 +195,7 @@ cmd void glDrawElementsInstanced(GLenum      mode,
 @DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawRangeElements.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawRangeElements.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawRangeElements.xhtml","OpenGL ES 3.2")
 cmd void glDrawRangeElements(GLenum      mode,
                              GLuint      start,
                              GLuint      end,

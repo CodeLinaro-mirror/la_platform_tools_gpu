@@ -15,6 +15,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCullFace.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCullFace.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCullFace.xhtml","OpenGL ES 3.2")
 cmd void glCullFace(GLenum mode) {
   minRequiredVersion(2, 0)
   switch (mode) {
@@ -33,6 +34,7 @@ cmd void glCullFace(GLenum mode) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDepthRangef.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthRangef.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDepthRangef.xhtml","OpenGL ES 3.2")
 cmd void glDepthRangef(GLfloat near, GLfloat far) {
   minRequiredVersion(2, 0)
 
@@ -44,6 +46,7 @@ cmd void glDepthRangef(GLfloat near, GLfloat far) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glFrontFace.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFrontFace.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFrontFace.xhtml","OpenGL ES 3.2")
 cmd void glFrontFace(GLenum orientation) {
   minRequiredVersion(2, 0)
   switch (orientation) {
@@ -60,6 +63,7 @@ cmd void glFrontFace(GLenum orientation) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetMultisamplefv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetMultisamplefv.xhtml","OpenGL ES 3.2")
 cmd void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) {
   minRequiredVersion(3, 1)
   switch (pname) {
@@ -76,6 +80,7 @@ cmd void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glLineWidth.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glLineWidth.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glLineWidth.xhtml","OpenGL ES 3.2")
 cmd void glLineWidth(GLfloat width) {
   minRequiredVersion(2, 0)
 
@@ -86,6 +91,7 @@ cmd void glLineWidth(GLfloat width) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glPolygonOffset.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPolygonOffset.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPolygonOffset.xhtml","OpenGL ES 3.2")
 cmd void glPolygonOffset(GLfloat scale_factor, GLfloat units) {
   minRequiredVersion(2, 0)
 
@@ -97,6 +103,7 @@ cmd void glPolygonOffset(GLfloat scale_factor, GLfloat units) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glViewport.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glViewport.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glViewport.xhtml","OpenGL ES 3.2")
 cmd void glViewport(GLint x, GLint y, GLsizei width, GLsizei height) {
   minRequiredVersion(2, 0)
 

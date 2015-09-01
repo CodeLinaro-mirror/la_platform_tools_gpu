@@ -15,6 +15,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendColor.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendColor.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendColor.xhtml","OpenGL ES 3.2")
 cmd void glBlendColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
   minRequiredVersion(2, 0)
 
@@ -30,6 +31,7 @@ cmd void glBlendColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendEquation.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendEquation.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquation.xhtml","OpenGL ES 3.2")
 cmd void glBlendEquation(GLenum equation) {
   minRequiredVersion(2, 0)
   switch (equation) {
@@ -52,6 +54,7 @@ cmd void glBlendEquation(GLenum equation) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.2")
 cmd void glBlendEquationSeparate(GLenum rgb, GLenum alpha) {
   minRequiredVersion(2, 0)
   switch (rgb) {
@@ -85,6 +88,7 @@ cmd void glBlendEquationSeparate(GLenum rgb, GLenum alpha) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendFunc.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFunc.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFunc.xhtml","OpenGL ES 3.2")
 cmd void glBlendFunc(GLenum src_factor, GLenum dst_factor) {
   minRequiredVersion(2, 0)
   switch (src_factor) {
@@ -120,6 +124,7 @@ cmd void glBlendFunc(GLenum src_factor, GLenum dst_factor) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.2")
 cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
                              GLenum dst_factor_rgb,
                              GLenum src_factor_alpha,
@@ -180,6 +185,7 @@ cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDepthFunc.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthFunc.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDepthFunc.xhtml","OpenGL ES 3.2")
 cmd void glDepthFunc(GLenum function) {
   minRequiredVersion(2, 0)
   switch (function) {
@@ -198,6 +204,7 @@ cmd void glDepthFunc(GLenum function) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glSampleCoverage.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleCoverage.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSampleCoverage.xhtml","OpenGL ES 3.2")
 cmd void glSampleCoverage(GLfloat value, GLboolean invert) {
   minRequiredVersion(2, 0)
 
@@ -207,6 +214,7 @@ cmd void glSampleCoverage(GLfloat value, GLboolean invert) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleMaski.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSampleMaski.xhtml","OpenGL ES 3.2")
 cmd void glSampleMaski(GLuint maskNumber, GLbitfield mask) {
   minRequiredVersion(3, 1)
   // TODO
@@ -215,6 +223,7 @@ cmd void glSampleMaski(GLuint maskNumber, GLbitfield mask) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glScissor.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glScissor.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glScissor.xhtml","OpenGL ES 3.2")
 cmd void glScissor(GLint x, GLint y, GLsizei width, GLsizei height) {
   minRequiredVersion(2, 0)
 
@@ -225,6 +234,7 @@ cmd void glScissor(GLint x, GLint y, GLsizei width, GLsizei height) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFunc.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilFunc.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilFunc.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilFunc.xhtml","OpenGL ES 3.2")
 cmd void glStencilFunc(GLenum func, GLint ref, GLuint mask) {
   minRequiredVersion(2, 0)
   switch (func) {
@@ -241,6 +251,7 @@ cmd void glStencilFunc(GLenum func, GLint ref, GLuint mask) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilFuncSeparate.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilFuncSeparate.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilFuncSeparate.xhtml","OpenGL ES 3.2")
 cmd void glStencilFuncSeparate(GLenum face, GLenum function, GLint reference_value, GLuint mask) {
   minRequiredVersion(2, 0)
   switch (face) {
@@ -265,6 +276,7 @@ cmd void glStencilFuncSeparate(GLenum face, GLenum function, GLint reference_val
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOp.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilOp.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilOp.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilOp.xhtml","OpenGL ES 3.2")
 cmd void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass) {
   minRequiredVersion(2, 0)
   switch (fail) {
@@ -297,6 +309,7 @@ cmd void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilOpSeparate.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilOpSeparate.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilOpSeparate.xhtml","OpenGL ES 3.2")
 cmd void glStencilOpSeparate(GLenum face,
                              GLenum stencil_fail,
                              GLenum stencil_pass_depth_fail,

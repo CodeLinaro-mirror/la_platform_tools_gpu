@@ -14,6 +14,7 @@
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd void glBeginTransformFeedback(GLenum primitiveMode) {
   minRequiredVersion(3, 0)
   switch (primitiveMode) {
@@ -29,6 +30,7 @@ cmd void glBeginTransformFeedback(GLenum primitiveMode) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd void glBindTransformFeedback(GLenum target, TransformFeedbackId id) {
   minRequiredVersion(3, 0)
   switch (target) {
@@ -44,6 +46,7 @@ cmd void glBindTransformFeedback(GLenum target, TransformFeedbackId id) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteTransformFeedbacks.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteTransformFeedbacks.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteTransformFeedbacks.xhtml","OpenGL ES 3.2")
 cmd void glDeleteTransformFeedbacks(GLsizei n, const TransformFeedbackId* ids) {
   minRequiredVersion(3, 0)
   // TODO
@@ -51,6 +54,7 @@ cmd void glDeleteTransformFeedbacks(GLsizei n, const TransformFeedbackId* ids) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBeginTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd void glEndTransformFeedback() {
   minRequiredVersion(3, 0)
   // TODO
@@ -58,6 +62,7 @@ cmd void glEndTransformFeedback() {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGenTransformFeedbacks.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenTransformFeedbacks.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenTransformFeedbacks.xhtml","OpenGL ES 3.2")
 cmd void glGenTransformFeedbacks(GLsizei n, TransformFeedbackId* ids) {
   minRequiredVersion(3, 0)
   // TODO
@@ -65,6 +70,7 @@ cmd void glGenTransformFeedbacks(GLsizei n, TransformFeedbackId* ids) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetTransformFeedbackVarying.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTransformFeedbackVarying.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTransformFeedbackVarying.xhtml","OpenGL ES 3.2")
 cmd void glGetTransformFeedbackVarying(ProgramId program,
                                        GLuint    index,
                                        GLsizei   bufSize,
@@ -78,6 +84,7 @@ cmd void glGetTransformFeedbackVarying(ProgramId program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsTransformFeedback(TransformFeedbackId id) {
   minRequiredVersion(3, 0)
   // TODO
@@ -86,6 +93,7 @@ cmd GLboolean glIsTransformFeedback(TransformFeedbackId id) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glPauseTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPauseTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPauseTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd void glPauseTransformFeedback() {
   minRequiredVersion(3, 0)
   // TODO
@@ -93,6 +101,7 @@ cmd void glPauseTransformFeedback() {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glResumeTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glResumeTransformFeedback.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glResumeTransformFeedback.xhtml","OpenGL ES 3.2")
 cmd void glResumeTransformFeedback() {
   minRequiredVersion(3, 0)
   // TODO
@@ -100,6 +109,7 @@ cmd void glResumeTransformFeedback() {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glTransformFeedbackVaryings.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTransformFeedbackVaryings.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTransformFeedbackVaryings.xhtml","OpenGL ES 3.2")
 cmd void glTransformFeedbackVaryings(ProgramId            program,
                                      GLsizei              count,
                                      const GLchar* const* varyings,

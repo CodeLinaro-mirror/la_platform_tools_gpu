@@ -14,6 +14,7 @@
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindVertexArray.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindVertexArray.xhtml","OpenGL ES 3.2")
 cmd void glBindVertexArray(VertexArrayId array) {
   minRequiredVersion(3, 0)
 
@@ -25,6 +26,7 @@ cmd void glBindVertexArray(VertexArrayId array) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindVertexBuffer.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindVertexBuffer.xhtml","OpenGL ES 3.2")
 cmd void glBindVertexBuffer(GLuint bindingindex, BufferId buffer, GLintptr offset, GLsizei stride) {
   minRequiredVersion(3, 1)
   // TODO
@@ -32,6 +34,7 @@ cmd void glBindVertexBuffer(GLuint bindingindex, BufferId buffer, GLintptr offse
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.2")
 cmd void glDeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
   minRequiredVersion(3, 0)
 
@@ -45,6 +48,7 @@ cmd void glDeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.2")
 cmd void glDisableVertexAttribArray(AttributeLocation location) {
   minRequiredVersion(2, 0)
 
@@ -55,6 +59,7 @@ cmd void glDisableVertexAttribArray(AttributeLocation location) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.2")
 cmd void glEnableVertexAttribArray(AttributeLocation location) {
   minRequiredVersion(2, 0)
 
@@ -64,6 +69,7 @@ cmd void glEnableVertexAttribArray(AttributeLocation location) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGenVertexArrays.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenVertexArrays.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenVertexArrays.xhtml","OpenGL ES 3.2")
 cmd void glGenVertexArrays(GLsizei count, VertexArrayId* arrays) {
   minRequiredVersion(3, 0)
 
@@ -78,6 +84,7 @@ cmd void glGenVertexArrays(GLsizei count, VertexArrayId* arrays) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribIiv(AttributeLocation index, GLenum pname, GLint* params) {
   minRequiredVersion(3, 0)
   switch (pname) {
@@ -99,6 +106,7 @@ cmd void glGetVertexAttribIiv(AttributeLocation index, GLenum pname, GLint* para
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribIuiv(AttributeLocation index, GLenum pname, GLuint* params) {
   minRequiredVersion(3, 0)
   switch (pname) {
@@ -121,6 +129,7 @@ cmd void glGetVertexAttribIuiv(AttributeLocation index, GLenum pname, GLuint* pa
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttribPointerv.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribPointerv(AttributeLocation index, GLenum pname, void** pointer) {
   minRequiredVersion(2, 0)
   switch (pname) {
@@ -137,6 +146,7 @@ cmd void glGetVertexAttribPointerv(AttributeLocation index, GLenum pname, void**
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribfv(AttributeLocation index, GLenum pname, GLfloat* params) {
   minRequiredVersion(2, 0)
   switch (pname) {
@@ -161,6 +171,7 @@ cmd void glGetVertexAttribfv(AttributeLocation index, GLenum pname, GLfloat* par
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* params) {
   minRequiredVersion(2, 0)
   switch (pname) {
@@ -184,6 +195,7 @@ cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* param
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsVertexArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsVertexArray.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsVertexArray.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsVertexArray(VertexArrayId array) {
   minRequiredVersion(3, 0)
   // TODO
@@ -193,6 +205,7 @@ cmd GLboolean glIsVertexArray(VertexArrayId array) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib1f(AttributeLocation location, GLfloat value0) {
   minRequiredVersion(2, 0)
 
@@ -201,6 +214,7 @@ cmd void glVertexAttrib1f(AttributeLocation location, GLfloat value0) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib1fv(AttributeLocation location, const GLfloat* value) {
   minRequiredVersion(2, 0)
 
@@ -210,6 +224,7 @@ cmd void glVertexAttrib1fv(AttributeLocation location, const GLfloat* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib2f(AttributeLocation location, GLfloat value0, GLfloat value1) {
   minRequiredVersion(2, 0)
 
@@ -218,6 +233,7 @@ cmd void glVertexAttrib2f(AttributeLocation location, GLfloat value0, GLfloat va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib2fv(AttributeLocation location, const GLfloat* value) {
   minRequiredVersion(2, 0)
 
@@ -227,6 +243,7 @@ cmd void glVertexAttrib2fv(AttributeLocation location, const GLfloat* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib3f(AttributeLocation location,
                           GLfloat           value0,
                           GLfloat           value1,
@@ -238,6 +255,7 @@ cmd void glVertexAttrib3f(AttributeLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib3fv(AttributeLocation location, const GLfloat* value) {
   minRequiredVersion(2, 0)
 
@@ -247,6 +265,7 @@ cmd void glVertexAttrib3fv(AttributeLocation location, const GLfloat* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib4f(AttributeLocation location,
                           GLfloat           value0,
                           GLfloat           value1,
@@ -259,6 +278,7 @@ cmd void glVertexAttrib4f(AttributeLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttrib4fv(AttributeLocation location, const GLfloat* value) {
   minRequiredVersion(2, 0)
 
@@ -266,6 +286,7 @@ cmd void glVertexAttrib4fv(AttributeLocation location, const GLfloat* value) {
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribBinding.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribBinding.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribBinding(GLuint attribindex, GLuint bindingindex) {
   minRequiredVersion(3, 1)
   // TODO
@@ -273,12 +294,14 @@ cmd void glVertexAttribBinding(GLuint attribindex, GLuint bindingindex) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribDivisor(AttributeLocation index, GLuint divisor) {
   minRequiredVersion(3, 0)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribFormat.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribFormat.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribFormat(GLuint    attribindex,
                               GLint     size,
                               GLenum    type,
@@ -299,6 +322,7 @@ cmd void glVertexAttribFormat(GLuint    attribindex,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribI4i(AttributeLocation index, GLint x, GLint y, GLint z, GLint w) {
   minRequiredVersion(3, 0)
   // TODO
@@ -306,6 +330,7 @@ cmd void glVertexAttribI4i(AttributeLocation index, GLint x, GLint y, GLint z, G
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribI4iv(AttributeLocation index, const GLint* v) {
   minRequiredVersion(3, 0)
   // TODO
@@ -313,6 +338,7 @@ cmd void glVertexAttribI4iv(AttributeLocation index, const GLint* v) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribI4ui(AttributeLocation index, GLuint x, GLuint y, GLuint z, GLuint w) {
   minRequiredVersion(3, 0)
   // TODO
@@ -320,12 +346,14 @@ cmd void glVertexAttribI4ui(AttributeLocation index, GLuint x, GLuint y, GLuint 
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribI4uiv(AttributeLocation index, const GLuint* v) {
   minRequiredVersion(3, 0)
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribFormat.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribFormat.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) {
   minRequiredVersion(3, 1)
   switch (type) {
@@ -342,6 +370,7 @@ cmd void glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLui
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribPointer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribPointer.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribPointer.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribIPointer(AttributeLocation index,
                                 GLint             size,
                                 GLenum            type,
@@ -365,6 +394,7 @@ cmd void glVertexAttribIPointer(AttributeLocation index,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribPointer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribPointer.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribPointer.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribPointer(AttributeLocation location,
                                GLint             size,
                                GLenum            type,
@@ -401,6 +431,7 @@ cmd void glVertexAttribPointer(AttributeLocation location,
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexBindingDivisor.xhtml","OpenGL ES 3.1")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexBindingDivisor.xhtml","OpenGL ES 3.2")
 cmd void glVertexBindingDivisor(GLuint bindingindex, GLuint divisor) {
   minRequiredVersion(3, 1)
   // TODO
