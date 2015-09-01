@@ -8516,12 +8516,6 @@ func doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder, o *GlApplyF
 	}
 	return nil
 }
-func doSkipGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) ID() binary.ID {
 	return binaryIDGlApplyFramebufferAttachmentCMAAINTEL
 }
@@ -8537,9 +8531,6 @@ func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Decode(d binary.Decoder
 }
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
-}
-func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Skip(d binary.Decoder) error {
-	return doSkipGlApplyFramebufferAttachmentCMAAINTEL(d)
 }
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *schema.Class {
 	return schemaGlApplyFramebufferAttachmentCMAAINTEL
@@ -9904,12 +9895,6 @@ func doDecodeGlBlendBarrier(d binary.Decoder, o *GlBlendBarrier) error {
 	}
 	return nil
 }
-func doSkipGlBlendBarrier(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlBlendBarrier) ID() binary.ID      { return binaryIDGlBlendBarrier }
 func (*binaryClassGlBlendBarrier) New() binary.Object { return &GlBlendBarrier{} }
 func (*binaryClassGlBlendBarrier) Encode(e binary.Encoder, obj binary.Object) error {
@@ -9922,8 +9907,7 @@ func (*binaryClassGlBlendBarrier) Decode(d binary.Decoder) (binary.Object, error
 func (*binaryClassGlBlendBarrier) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlBlendBarrier(d, obj.(*GlBlendBarrier))
 }
-func (*binaryClassGlBlendBarrier) Skip(d binary.Decoder) error { return doSkipGlBlendBarrier(d) }
-func (*binaryClassGlBlendBarrier) Schema() *schema.Class       { return schemaGlBlendBarrier }
+func (*binaryClassGlBlendBarrier) Schema() *schema.Class { return schemaGlBlendBarrier }
 
 var schemaGlBlendBarrier = &schema.Class{
 	TypeID:  binaryIDGlBlendBarrier,
@@ -10240,21 +10224,6 @@ func doDecodeGlBlendEquationSeparatei(d binary.Decoder, o *GlBlendEquationSepara
 	}
 	return nil
 }
-func doSkipGlBlendEquationSeparatei(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlBlendEquationSeparatei) ID() binary.ID      { return binaryIDGlBlendEquationSeparatei }
 func (*binaryClassGlBlendEquationSeparatei) New() binary.Object { return &GlBlendEquationSeparatei{} }
 func (*binaryClassGlBlendEquationSeparatei) Encode(e binary.Encoder, obj binary.Object) error {
@@ -10266,9 +10235,6 @@ func (*binaryClassGlBlendEquationSeparatei) Decode(d binary.Decoder) (binary.Obj
 }
 func (*binaryClassGlBlendEquationSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlBlendEquationSeparatei(d, obj.(*GlBlendEquationSeparatei))
-}
-func (*binaryClassGlBlendEquationSeparatei) Skip(d binary.Decoder) error {
-	return doSkipGlBlendEquationSeparatei(d)
 }
 func (*binaryClassGlBlendEquationSeparatei) Schema() *schema.Class {
 	return schemaGlBlendEquationSeparatei
@@ -10465,18 +10431,6 @@ func doDecodeGlBlendEquationi(d binary.Decoder, o *GlBlendEquationi) error {
 	}
 	return nil
 }
-func doSkipGlBlendEquationi(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlBlendEquationi) ID() binary.ID      { return binaryIDGlBlendEquationi }
 func (*binaryClassGlBlendEquationi) New() binary.Object { return &GlBlendEquationi{} }
 func (*binaryClassGlBlendEquationi) Encode(e binary.Encoder, obj binary.Object) error {
@@ -10489,8 +10443,7 @@ func (*binaryClassGlBlendEquationi) Decode(d binary.Decoder) (binary.Object, err
 func (*binaryClassGlBlendEquationi) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlBlendEquationi(d, obj.(*GlBlendEquationi))
 }
-func (*binaryClassGlBlendEquationi) Skip(d binary.Decoder) error { return doSkipGlBlendEquationi(d) }
-func (*binaryClassGlBlendEquationi) Schema() *schema.Class       { return schemaGlBlendEquationi }
+func (*binaryClassGlBlendEquationi) Schema() *schema.Class { return schemaGlBlendEquationi }
 
 var schemaGlBlendEquationi = &schema.Class{
 	TypeID:  binaryIDGlBlendEquationi,
@@ -10810,27 +10763,6 @@ func doDecodeGlBlendFuncSeparatei(d binary.Decoder, o *GlBlendFuncSeparatei) err
 	}
 	return nil
 }
-func doSkipGlBlendFuncSeparatei(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlBlendFuncSeparatei) ID() binary.ID      { return binaryIDGlBlendFuncSeparatei }
 func (*binaryClassGlBlendFuncSeparatei) New() binary.Object { return &GlBlendFuncSeparatei{} }
 func (*binaryClassGlBlendFuncSeparatei) Encode(e binary.Encoder, obj binary.Object) error {
@@ -10842,9 +10774,6 @@ func (*binaryClassGlBlendFuncSeparatei) Decode(d binary.Decoder) (binary.Object,
 }
 func (*binaryClassGlBlendFuncSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlBlendFuncSeparatei(d, obj.(*GlBlendFuncSeparatei))
-}
-func (*binaryClassGlBlendFuncSeparatei) Skip(d binary.Decoder) error {
-	return doSkipGlBlendFuncSeparatei(d)
 }
 func (*binaryClassGlBlendFuncSeparatei) Schema() *schema.Class { return schemaGlBlendFuncSeparatei }
 
@@ -11077,21 +11006,6 @@ func doDecodeGlBlendFunci(d binary.Decoder, o *GlBlendFunci) error {
 	}
 	return nil
 }
-func doSkipGlBlendFunci(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlBlendFunci) ID() binary.ID      { return binaryIDGlBlendFunci }
 func (*binaryClassGlBlendFunci) New() binary.Object { return &GlBlendFunci{} }
 func (*binaryClassGlBlendFunci) Encode(e binary.Encoder, obj binary.Object) error {
@@ -11104,8 +11018,7 @@ func (*binaryClassGlBlendFunci) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassGlBlendFunci) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlBlendFunci(d, obj.(*GlBlendFunci))
 }
-func (*binaryClassGlBlendFunci) Skip(d binary.Decoder) error { return doSkipGlBlendFunci(d) }
-func (*binaryClassGlBlendFunci) Schema() *schema.Class       { return schemaGlBlendFunci }
+func (*binaryClassGlBlendFunci) Schema() *schema.Class { return schemaGlBlendFunci }
 
 var schemaGlBlendFunci = &schema.Class{
 	TypeID:  binaryIDGlBlendFunci,
@@ -12802,27 +12715,6 @@ func doDecodeGlColorMaski(d binary.Decoder, o *GlColorMaski) error {
 	}
 	return nil
 }
-func doSkipGlColorMaski(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlColorMaski) ID() binary.ID      { return binaryIDGlColorMaski }
 func (*binaryClassGlColorMaski) New() binary.Object { return &GlColorMaski{} }
 func (*binaryClassGlColorMaski) Encode(e binary.Encoder, obj binary.Object) error {
@@ -12835,8 +12727,7 @@ func (*binaryClassGlColorMaski) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassGlColorMaski) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlColorMaski(d, obj.(*GlColorMaski))
 }
-func (*binaryClassGlColorMaski) Skip(d binary.Decoder) error { return doSkipGlColorMaski(d) }
-func (*binaryClassGlColorMaski) Schema() *schema.Class       { return schemaGlColorMaski }
+func (*binaryClassGlColorMaski) Schema() *schema.Class { return schemaGlColorMaski }
 
 var schemaGlColorMaski = &schema.Class{
 	TypeID:  binaryIDGlColorMaski,
@@ -14171,57 +14062,6 @@ func doDecodeGlCopyImageSubData(d binary.Decoder, o *GlCopyImageSubData) error {
 	}
 	return nil
 }
-func doSkipGlCopyImageSubData(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlCopyImageSubData) ID() binary.ID      { return binaryIDGlCopyImageSubData }
 func (*binaryClassGlCopyImageSubData) New() binary.Object { return &GlCopyImageSubData{} }
 func (*binaryClassGlCopyImageSubData) Encode(e binary.Encoder, obj binary.Object) error {
@@ -14234,8 +14074,7 @@ func (*binaryClassGlCopyImageSubData) Decode(d binary.Decoder) (binary.Object, e
 func (*binaryClassGlCopyImageSubData) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlCopyImageSubData(d, obj.(*GlCopyImageSubData))
 }
-func (*binaryClassGlCopyImageSubData) Skip(d binary.Decoder) error { return doSkipGlCopyImageSubData(d) }
-func (*binaryClassGlCopyImageSubData) Schema() *schema.Class       { return schemaGlCopyImageSubData }
+func (*binaryClassGlCopyImageSubData) Schema() *schema.Class { return schemaGlCopyImageSubData }
 
 var schemaGlCopyImageSubData = &schema.Class{
 	TypeID:  binaryIDGlCopyImageSubData,
@@ -18279,18 +18118,6 @@ func doDecodeGlDisablei(d binary.Decoder, o *GlDisablei) error {
 	}
 	return nil
 }
-func doSkipGlDisablei(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlDisablei) ID() binary.ID      { return binaryIDGlDisablei }
 func (*binaryClassGlDisablei) New() binary.Object { return &GlDisablei{} }
 func (*binaryClassGlDisablei) Encode(e binary.Encoder, obj binary.Object) error {
@@ -18303,8 +18130,7 @@ func (*binaryClassGlDisablei) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassGlDisablei) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlDisablei(d, obj.(*GlDisablei))
 }
-func (*binaryClassGlDisablei) Skip(d binary.Decoder) error { return doSkipGlDisablei(d) }
-func (*binaryClassGlDisablei) Schema() *schema.Class       { return schemaGlDisablei }
+func (*binaryClassGlDisablei) Schema() *schema.Class { return schemaGlDisablei }
 
 var schemaGlDisablei = &schema.Class{
 	TypeID:  binaryIDGlDisablei,
@@ -19606,27 +19432,6 @@ func doDecodeGlDrawElementsBaseVertex(d binary.Decoder, o *GlDrawElementsBaseVer
 	}
 	return nil
 }
-func doSkipGlDrawElementsBaseVertex(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlDrawElementsBaseVertex) ID() binary.ID      { return binaryIDGlDrawElementsBaseVertex }
 func (*binaryClassGlDrawElementsBaseVertex) New() binary.Object { return &GlDrawElementsBaseVertex{} }
 func (*binaryClassGlDrawElementsBaseVertex) Encode(e binary.Encoder, obj binary.Object) error {
@@ -19638,9 +19443,6 @@ func (*binaryClassGlDrawElementsBaseVertex) Decode(d binary.Decoder) (binary.Obj
 }
 func (*binaryClassGlDrawElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlDrawElementsBaseVertex(d, obj.(*GlDrawElementsBaseVertex))
-}
-func (*binaryClassGlDrawElementsBaseVertex) Skip(d binary.Decoder) error {
-	return doSkipGlDrawElementsBaseVertex(d)
 }
 func (*binaryClassGlDrawElementsBaseVertex) Schema() *schema.Class {
 	return schemaGlDrawElementsBaseVertex
@@ -20238,30 +20040,6 @@ func doDecodeGlDrawElementsInstancedBaseVertex(d binary.Decoder, o *GlDrawElemen
 	}
 	return nil
 }
-func doSkipGlDrawElementsInstancedBaseVertex(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlDrawElementsInstancedBaseVertex) ID() binary.ID {
 	return binaryIDGlDrawElementsInstancedBaseVertex
 }
@@ -20277,9 +20055,6 @@ func (*binaryClassGlDrawElementsInstancedBaseVertex) Decode(d binary.Decoder) (b
 }
 func (*binaryClassGlDrawElementsInstancedBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlDrawElementsInstancedBaseVertex(d, obj.(*GlDrawElementsInstancedBaseVertex))
-}
-func (*binaryClassGlDrawElementsInstancedBaseVertex) Skip(d binary.Decoder) error {
-	return doSkipGlDrawElementsInstancedBaseVertex(d)
 }
 func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *schema.Class {
 	return schemaGlDrawElementsInstancedBaseVertex
@@ -20940,33 +20715,6 @@ func doDecodeGlDrawRangeElementsBaseVertex(d binary.Decoder, o *GlDrawRangeEleme
 	}
 	return nil
 }
-func doSkipGlDrawRangeElementsBaseVertex(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Voidᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlDrawRangeElementsBaseVertex) ID() binary.ID {
 	return binaryIDGlDrawRangeElementsBaseVertex
 }
@@ -20982,9 +20730,6 @@ func (*binaryClassGlDrawRangeElementsBaseVertex) Decode(d binary.Decoder) (binar
 }
 func (*binaryClassGlDrawRangeElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlDrawRangeElementsBaseVertex(d, obj.(*GlDrawRangeElementsBaseVertex))
-}
-func (*binaryClassGlDrawRangeElementsBaseVertex) Skip(d binary.Decoder) error {
-	return doSkipGlDrawRangeElementsBaseVertex(d)
 }
 func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *schema.Class {
 	return schemaGlDrawRangeElementsBaseVertex
@@ -21528,18 +21273,6 @@ func doDecodeGlEnablei(d binary.Decoder, o *GlEnablei) error {
 	}
 	return nil
 }
-func doSkipGlEnablei(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlEnablei) ID() binary.ID      { return binaryIDGlEnablei }
 func (*binaryClassGlEnablei) New() binary.Object { return &GlEnablei{} }
 func (*binaryClassGlEnablei) Encode(e binary.Encoder, obj binary.Object) error {
@@ -21552,8 +21285,7 @@ func (*binaryClassGlEnablei) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassGlEnablei) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlEnablei(d, obj.(*GlEnablei))
 }
-func (*binaryClassGlEnablei) Skip(d binary.Decoder) error { return doSkipGlEnablei(d) }
-func (*binaryClassGlEnablei) Schema() *schema.Class       { return schemaGlEnablei }
+func (*binaryClassGlEnablei) Schema() *schema.Class { return schemaGlEnablei }
 
 var schemaGlEnablei = &schema.Class{
 	TypeID:  binaryIDGlEnablei,
@@ -23882,24 +23614,6 @@ func doDecodeGlFramebufferTexture(d binary.Decoder, o *GlFramebufferTexture) err
 	}
 	return nil
 }
-func doSkipGlFramebufferTexture(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlFramebufferTexture) ID() binary.ID      { return binaryIDGlFramebufferTexture }
 func (*binaryClassGlFramebufferTexture) New() binary.Object { return &GlFramebufferTexture{} }
 func (*binaryClassGlFramebufferTexture) Encode(e binary.Encoder, obj binary.Object) error {
@@ -23911,9 +23625,6 @@ func (*binaryClassGlFramebufferTexture) Decode(d binary.Decoder) (binary.Object,
 }
 func (*binaryClassGlFramebufferTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlFramebufferTexture(d, obj.(*GlFramebufferTexture))
-}
-func (*binaryClassGlFramebufferTexture) Skip(d binary.Decoder) error {
-	return doSkipGlFramebufferTexture(d)
 }
 func (*binaryClassGlFramebufferTexture) Schema() *schema.Class { return schemaGlFramebufferTexture }
 
@@ -27599,15 +27310,6 @@ func doDecodeGlGetGraphicsResetStatus(d binary.Decoder, o *GlGetGraphicsResetSta
 	}
 	return nil
 }
-func doSkipGlGetGraphicsResetStatus(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetGraphicsResetStatus) ID() binary.ID      { return binaryIDGlGetGraphicsResetStatus }
 func (*binaryClassGlGetGraphicsResetStatus) New() binary.Object { return &GlGetGraphicsResetStatus{} }
 func (*binaryClassGlGetGraphicsResetStatus) Encode(e binary.Encoder, obj binary.Object) error {
@@ -27619,9 +27321,6 @@ func (*binaryClassGlGetGraphicsResetStatus) Decode(d binary.Decoder) (binary.Obj
 }
 func (*binaryClassGlGetGraphicsResetStatus) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetGraphicsResetStatus(d, obj.(*GlGetGraphicsResetStatus))
-}
-func (*binaryClassGlGetGraphicsResetStatus) Skip(d binary.Decoder) error {
-	return doSkipGlGetGraphicsResetStatus(d)
 }
 func (*binaryClassGlGetGraphicsResetStatus) Schema() *schema.Class {
 	return schemaGlGetGraphicsResetStatus
@@ -32216,21 +31915,6 @@ func doDecodeGlGetSamplerParameterIiv(d binary.Decoder, o *GlGetSamplerParameter
 	}
 	return nil
 }
-func doSkipGlGetSamplerParameterIiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetSamplerParameterIiv) ID() binary.ID      { return binaryIDGlGetSamplerParameterIiv }
 func (*binaryClassGlGetSamplerParameterIiv) New() binary.Object { return &GlGetSamplerParameterIiv{} }
 func (*binaryClassGlGetSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -32242,9 +31926,6 @@ func (*binaryClassGlGetSamplerParameterIiv) Decode(d binary.Decoder) (binary.Obj
 }
 func (*binaryClassGlGetSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetSamplerParameterIiv(d, obj.(*GlGetSamplerParameterIiv))
-}
-func (*binaryClassGlGetSamplerParameterIiv) Skip(d binary.Decoder) error {
-	return doSkipGlGetSamplerParameterIiv(d)
 }
 func (*binaryClassGlGetSamplerParameterIiv) Schema() *schema.Class {
 	return schemaGlGetSamplerParameterIiv
@@ -32443,21 +32124,6 @@ func doDecodeGlGetSamplerParameterIuiv(d binary.Decoder, o *GlGetSamplerParamete
 	}
 	return nil
 }
-func doSkipGlGetSamplerParameterIuiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetSamplerParameterIuiv) ID() binary.ID      { return binaryIDGlGetSamplerParameterIuiv }
 func (*binaryClassGlGetSamplerParameterIuiv) New() binary.Object { return &GlGetSamplerParameterIuiv{} }
 func (*binaryClassGlGetSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -32469,9 +32135,6 @@ func (*binaryClassGlGetSamplerParameterIuiv) Decode(d binary.Decoder) (binary.Ob
 }
 func (*binaryClassGlGetSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetSamplerParameterIuiv(d, obj.(*GlGetSamplerParameterIuiv))
-}
-func (*binaryClassGlGetSamplerParameterIuiv) Skip(d binary.Decoder) error {
-	return doSkipGlGetSamplerParameterIuiv(d)
 }
 func (*binaryClassGlGetSamplerParameterIuiv) Schema() *schema.Class {
 	return schemaGlGetSamplerParameterIuiv
@@ -33526,21 +33189,6 @@ func doDecodeGlGetTexParameterIiv(d binary.Decoder, o *GlGetTexParameterIiv) err
 	}
 	return nil
 }
-func doSkipGlGetTexParameterIiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetTexParameterIiv) ID() binary.ID      { return binaryIDGlGetTexParameterIiv }
 func (*binaryClassGlGetTexParameterIiv) New() binary.Object { return &GlGetTexParameterIiv{} }
 func (*binaryClassGlGetTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -33552,9 +33200,6 @@ func (*binaryClassGlGetTexParameterIiv) Decode(d binary.Decoder) (binary.Object,
 }
 func (*binaryClassGlGetTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetTexParameterIiv(d, obj.(*GlGetTexParameterIiv))
-}
-func (*binaryClassGlGetTexParameterIiv) Skip(d binary.Decoder) error {
-	return doSkipGlGetTexParameterIiv(d)
 }
 func (*binaryClassGlGetTexParameterIiv) Schema() *schema.Class { return schemaGlGetTexParameterIiv }
 
@@ -33743,21 +33388,6 @@ func doDecodeGlGetTexParameterIuiv(d binary.Decoder, o *GlGetTexParameterIuiv) e
 	}
 	return nil
 }
-func doSkipGlGetTexParameterIuiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetTexParameterIuiv) ID() binary.ID      { return binaryIDGlGetTexParameterIuiv }
 func (*binaryClassGlGetTexParameterIuiv) New() binary.Object { return &GlGetTexParameterIuiv{} }
 func (*binaryClassGlGetTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -33769,9 +33399,6 @@ func (*binaryClassGlGetTexParameterIuiv) Decode(d binary.Decoder) (binary.Object
 }
 func (*binaryClassGlGetTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetTexParameterIuiv(d, obj.(*GlGetTexParameterIuiv))
-}
-func (*binaryClassGlGetTexParameterIuiv) Skip(d binary.Decoder) error {
-	return doSkipGlGetTexParameterIuiv(d)
 }
 func (*binaryClassGlGetTexParameterIuiv) Schema() *schema.Class { return schemaGlGetTexParameterIuiv }
 
@@ -35134,24 +34761,6 @@ func doDecodeGlGetnUniformfv(d binary.Decoder, o *GlGetnUniformfv) error {
 	}
 	return nil
 }
-func doSkipGlGetnUniformfv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLfloatᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetnUniformfv) ID() binary.ID      { return binaryIDGlGetnUniformfv }
 func (*binaryClassGlGetnUniformfv) New() binary.Object { return &GlGetnUniformfv{} }
 func (*binaryClassGlGetnUniformfv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -35164,8 +34773,7 @@ func (*binaryClassGlGetnUniformfv) Decode(d binary.Decoder) (binary.Object, erro
 func (*binaryClassGlGetnUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetnUniformfv(d, obj.(*GlGetnUniformfv))
 }
-func (*binaryClassGlGetnUniformfv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformfv(d) }
-func (*binaryClassGlGetnUniformfv) Schema() *schema.Class       { return schemaGlGetnUniformfv }
+func (*binaryClassGlGetnUniformfv) Schema() *schema.Class { return schemaGlGetnUniformfv }
 
 var schemaGlGetnUniformfv = &schema.Class{
 	TypeID:  binaryIDGlGetnUniformfv,
@@ -35375,24 +34983,6 @@ func doDecodeGlGetnUniformiv(d binary.Decoder, o *GlGetnUniformiv) error {
 	}
 	return nil
 }
-func doSkipGlGetnUniformiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetnUniformiv) ID() binary.ID      { return binaryIDGlGetnUniformiv }
 func (*binaryClassGlGetnUniformiv) New() binary.Object { return &GlGetnUniformiv{} }
 func (*binaryClassGlGetnUniformiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -35405,8 +34995,7 @@ func (*binaryClassGlGetnUniformiv) Decode(d binary.Decoder) (binary.Object, erro
 func (*binaryClassGlGetnUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetnUniformiv(d, obj.(*GlGetnUniformiv))
 }
-func (*binaryClassGlGetnUniformiv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformiv(d) }
-func (*binaryClassGlGetnUniformiv) Schema() *schema.Class       { return schemaGlGetnUniformiv }
+func (*binaryClassGlGetnUniformiv) Schema() *schema.Class { return schemaGlGetnUniformiv }
 
 var schemaGlGetnUniformiv = &schema.Class{
 	TypeID:  binaryIDGlGetnUniformiv,
@@ -35616,24 +35205,6 @@ func doDecodeGlGetnUniformuiv(d binary.Decoder, o *GlGetnUniformuiv) error {
 	}
 	return nil
 }
-func doSkipGlGetnUniformuiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLuintᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlGetnUniformuiv) ID() binary.ID      { return binaryIDGlGetnUniformuiv }
 func (*binaryClassGlGetnUniformuiv) New() binary.Object { return &GlGetnUniformuiv{} }
 func (*binaryClassGlGetnUniformuiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -35646,8 +35217,7 @@ func (*binaryClassGlGetnUniformuiv) Decode(d binary.Decoder) (binary.Object, err
 func (*binaryClassGlGetnUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlGetnUniformuiv(d, obj.(*GlGetnUniformuiv))
 }
-func (*binaryClassGlGetnUniformuiv) Skip(d binary.Decoder) error { return doSkipGlGetnUniformuiv(d) }
-func (*binaryClassGlGetnUniformuiv) Schema() *schema.Class       { return schemaGlGetnUniformuiv }
+func (*binaryClassGlGetnUniformuiv) Schema() *schema.Class { return schemaGlGetnUniformuiv }
 
 var schemaGlGetnUniformuiv = &schema.Class{
 	TypeID:  binaryIDGlGetnUniformuiv,
@@ -36257,21 +35827,6 @@ func doDecodeGlIsEnabledi(d binary.Decoder, o *GlIsEnabledi) error {
 	}
 	return nil
 }
-func doSkipGlIsEnabledi(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlIsEnabledi) ID() binary.ID      { return binaryIDGlIsEnabledi }
 func (*binaryClassGlIsEnabledi) New() binary.Object { return &GlIsEnabledi{} }
 func (*binaryClassGlIsEnabledi) Encode(e binary.Encoder, obj binary.Object) error {
@@ -36284,8 +35839,7 @@ func (*binaryClassGlIsEnabledi) Decode(d binary.Decoder) (binary.Object, error) 
 func (*binaryClassGlIsEnabledi) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlIsEnabledi(d, obj.(*GlIsEnabledi))
 }
-func (*binaryClassGlIsEnabledi) Skip(d binary.Decoder) error { return doSkipGlIsEnabledi(d) }
-func (*binaryClassGlIsEnabledi) Schema() *schema.Class       { return schemaGlIsEnabledi }
+func (*binaryClassGlIsEnabledi) Schema() *schema.Class { return schemaGlIsEnabledi }
 
 var schemaGlIsEnabledi = &schema.Class{
 	TypeID:  binaryIDGlIsEnabledi,
@@ -38878,15 +38432,6 @@ func doDecodeGlMinSampleShading(d binary.Decoder, o *GlMinSampleShading) error {
 	}
 	return nil
 }
-func doSkipGlMinSampleShading(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlMinSampleShading) ID() binary.ID      { return binaryIDGlMinSampleShading }
 func (*binaryClassGlMinSampleShading) New() binary.Object { return &GlMinSampleShading{} }
 func (*binaryClassGlMinSampleShading) Encode(e binary.Encoder, obj binary.Object) error {
@@ -38899,8 +38444,7 @@ func (*binaryClassGlMinSampleShading) Decode(d binary.Decoder) (binary.Object, e
 func (*binaryClassGlMinSampleShading) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlMinSampleShading(d, obj.(*GlMinSampleShading))
 }
-func (*binaryClassGlMinSampleShading) Skip(d binary.Decoder) error { return doSkipGlMinSampleShading(d) }
-func (*binaryClassGlMinSampleShading) Schema() *schema.Class       { return schemaGlMinSampleShading }
+func (*binaryClassGlMinSampleShading) Schema() *schema.Class { return schemaGlMinSampleShading }
 
 var schemaGlMinSampleShading = &schema.Class{
 	TypeID:  binaryIDGlMinSampleShading,
@@ -39761,18 +39305,6 @@ func doDecodeGlPatchParameteri(d binary.Decoder, o *GlPatchParameteri) error {
 	}
 	return nil
 }
-func doSkipGlPatchParameteri(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlPatchParameteri) ID() binary.ID      { return binaryIDGlPatchParameteri }
 func (*binaryClassGlPatchParameteri) New() binary.Object { return &GlPatchParameteri{} }
 func (*binaryClassGlPatchParameteri) Encode(e binary.Encoder, obj binary.Object) error {
@@ -39785,8 +39317,7 @@ func (*binaryClassGlPatchParameteri) Decode(d binary.Decoder) (binary.Object, er
 func (*binaryClassGlPatchParameteri) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlPatchParameteri(d, obj.(*GlPatchParameteri))
 }
-func (*binaryClassGlPatchParameteri) Skip(d binary.Decoder) error { return doSkipGlPatchParameteri(d) }
-func (*binaryClassGlPatchParameteri) Schema() *schema.Class       { return schemaGlPatchParameteri }
+func (*binaryClassGlPatchParameteri) Schema() *schema.Class { return schemaGlPatchParameteri }
 
 var schemaGlPatchParameteri = &schema.Class{
 	TypeID:  binaryIDGlPatchParameteri,
@@ -41946,36 +41477,6 @@ func doDecodeGlPrimitiveBoundingBox(d binary.Decoder, o *GlPrimitiveBoundingBox)
 	}
 	return nil
 }
-func doSkipGlPrimitiveBoundingBox(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlPrimitiveBoundingBox) ID() binary.ID      { return binaryIDGlPrimitiveBoundingBox }
 func (*binaryClassGlPrimitiveBoundingBox) New() binary.Object { return &GlPrimitiveBoundingBox{} }
 func (*binaryClassGlPrimitiveBoundingBox) Encode(e binary.Encoder, obj binary.Object) error {
@@ -41987,9 +41488,6 @@ func (*binaryClassGlPrimitiveBoundingBox) Decode(d binary.Decoder) (binary.Objec
 }
 func (*binaryClassGlPrimitiveBoundingBox) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlPrimitiveBoundingBox(d, obj.(*GlPrimitiveBoundingBox))
-}
-func (*binaryClassGlPrimitiveBoundingBox) Skip(d binary.Decoder) error {
-	return doSkipGlPrimitiveBoundingBox(d)
 }
 func (*binaryClassGlPrimitiveBoundingBox) Schema() *schema.Class { return schemaGlPrimitiveBoundingBox }
 
@@ -48650,36 +48148,6 @@ func doDecodeGlReadnPixels(d binary.Decoder, o *GlReadnPixels) error {
 	}
 	return nil
 }
-func doSkipGlReadnPixels(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Voidᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlReadnPixels) ID() binary.ID      { return binaryIDGlReadnPixels }
 func (*binaryClassGlReadnPixels) New() binary.Object { return &GlReadnPixels{} }
 func (*binaryClassGlReadnPixels) Encode(e binary.Encoder, obj binary.Object) error {
@@ -48692,8 +48160,7 @@ func (*binaryClassGlReadnPixels) Decode(d binary.Decoder) (binary.Object, error)
 func (*binaryClassGlReadnPixels) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlReadnPixels(d, obj.(*GlReadnPixels))
 }
-func (*binaryClassGlReadnPixels) Skip(d binary.Decoder) error { return doSkipGlReadnPixels(d) }
-func (*binaryClassGlReadnPixels) Schema() *schema.Class       { return schemaGlReadnPixels }
+func (*binaryClassGlReadnPixels) Schema() *schema.Class { return schemaGlReadnPixels }
 
 var schemaGlReadnPixels = &schema.Class{
 	TypeID:  binaryIDGlReadnPixels,
@@ -49879,21 +49346,6 @@ func doDecodeGlSamplerParameterIiv(d binary.Decoder, o *GlSamplerParameterIiv) e
 	}
 	return nil
 }
-func doSkipGlSamplerParameterIiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLintᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlSamplerParameterIiv) ID() binary.ID      { return binaryIDGlSamplerParameterIiv }
 func (*binaryClassGlSamplerParameterIiv) New() binary.Object { return &GlSamplerParameterIiv{} }
 func (*binaryClassGlSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -49905,9 +49357,6 @@ func (*binaryClassGlSamplerParameterIiv) Decode(d binary.Decoder) (binary.Object
 }
 func (*binaryClassGlSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlSamplerParameterIiv(d, obj.(*GlSamplerParameterIiv))
-}
-func (*binaryClassGlSamplerParameterIiv) Skip(d binary.Decoder) error {
-	return doSkipGlSamplerParameterIiv(d)
 }
 func (*binaryClassGlSamplerParameterIiv) Schema() *schema.Class { return schemaGlSamplerParameterIiv }
 
@@ -50096,21 +49545,6 @@ func doDecodeGlSamplerParameterIuiv(d binary.Decoder, o *GlSamplerParameterIuiv)
 	}
 	return nil
 }
-func doSkipGlSamplerParameterIuiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLuintᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlSamplerParameterIuiv) ID() binary.ID      { return binaryIDGlSamplerParameterIuiv }
 func (*binaryClassGlSamplerParameterIuiv) New() binary.Object { return &GlSamplerParameterIuiv{} }
 func (*binaryClassGlSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -50122,9 +49556,6 @@ func (*binaryClassGlSamplerParameterIuiv) Decode(d binary.Decoder) (binary.Objec
 }
 func (*binaryClassGlSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlSamplerParameterIuiv(d, obj.(*GlSamplerParameterIuiv))
-}
-func (*binaryClassGlSamplerParameterIuiv) Skip(d binary.Decoder) error {
-	return doSkipGlSamplerParameterIuiv(d)
 }
 func (*binaryClassGlSamplerParameterIuiv) Schema() *schema.Class { return schemaGlSamplerParameterIuiv }
 
@@ -52569,21 +52000,6 @@ func doDecodeGlTexBuffer(d binary.Decoder, o *GlTexBuffer) error {
 	}
 	return nil
 }
-func doSkipGlTexBuffer(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlTexBuffer) ID() binary.ID      { return binaryIDGlTexBuffer }
 func (*binaryClassGlTexBuffer) New() binary.Object { return &GlTexBuffer{} }
 func (*binaryClassGlTexBuffer) Encode(e binary.Encoder, obj binary.Object) error {
@@ -52596,8 +52012,7 @@ func (*binaryClassGlTexBuffer) Decode(d binary.Decoder) (binary.Object, error) {
 func (*binaryClassGlTexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlTexBuffer(d, obj.(*GlTexBuffer))
 }
-func (*binaryClassGlTexBuffer) Skip(d binary.Decoder) error { return doSkipGlTexBuffer(d) }
-func (*binaryClassGlTexBuffer) Schema() *schema.Class       { return schemaGlTexBuffer }
+func (*binaryClassGlTexBuffer) Schema() *schema.Class { return schemaGlTexBuffer }
 
 var schemaGlTexBuffer = &schema.Class{
 	TypeID:  binaryIDGlTexBuffer,
@@ -52802,27 +52217,6 @@ func doDecodeGlTexBufferRange(d binary.Decoder, o *GlTexBufferRange) error {
 	}
 	return nil
 }
-func doSkipGlTexBufferRange(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlTexBufferRange) ID() binary.ID      { return binaryIDGlTexBufferRange }
 func (*binaryClassGlTexBufferRange) New() binary.Object { return &GlTexBufferRange{} }
 func (*binaryClassGlTexBufferRange) Encode(e binary.Encoder, obj binary.Object) error {
@@ -52835,8 +52229,7 @@ func (*binaryClassGlTexBufferRange) Decode(d binary.Decoder) (binary.Object, err
 func (*binaryClassGlTexBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlTexBufferRange(d, obj.(*GlTexBufferRange))
 }
-func (*binaryClassGlTexBufferRange) Skip(d binary.Decoder) error { return doSkipGlTexBufferRange(d) }
-func (*binaryClassGlTexBufferRange) Schema() *schema.Class       { return schemaGlTexBufferRange }
+func (*binaryClassGlTexBufferRange) Schema() *schema.Class { return schemaGlTexBufferRange }
 
 var schemaGlTexBufferRange = &schema.Class{
 	TypeID:  binaryIDGlTexBufferRange,
@@ -53557,21 +52950,6 @@ func doDecodeGlTexParameterIiv(d binary.Decoder, o *GlTexParameterIiv) error {
 	}
 	return nil
 }
-func doSkipGlTexParameterIiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLintᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlTexParameterIiv) ID() binary.ID      { return binaryIDGlTexParameterIiv }
 func (*binaryClassGlTexParameterIiv) New() binary.Object { return &GlTexParameterIiv{} }
 func (*binaryClassGlTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -53584,8 +52962,7 @@ func (*binaryClassGlTexParameterIiv) Decode(d binary.Decoder) (binary.Object, er
 func (*binaryClassGlTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlTexParameterIiv(d, obj.(*GlTexParameterIiv))
 }
-func (*binaryClassGlTexParameterIiv) Skip(d binary.Decoder) error { return doSkipGlTexParameterIiv(d) }
-func (*binaryClassGlTexParameterIiv) Schema() *schema.Class       { return schemaGlTexParameterIiv }
+func (*binaryClassGlTexParameterIiv) Schema() *schema.Class { return schemaGlTexParameterIiv }
 
 var schemaGlTexParameterIiv = &schema.Class{
 	TypeID:  binaryIDGlTexParameterIiv,
@@ -53768,21 +53145,6 @@ func doDecodeGlTexParameterIuiv(d binary.Decoder, o *GlTexParameterIuiv) error {
 	}
 	return nil
 }
-func doSkipGlTexParameterIuiv(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*GLuintᶜᵖ)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlTexParameterIuiv) ID() binary.ID      { return binaryIDGlTexParameterIuiv }
 func (*binaryClassGlTexParameterIuiv) New() binary.Object { return &GlTexParameterIuiv{} }
 func (*binaryClassGlTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) error {
@@ -53795,8 +53157,7 @@ func (*binaryClassGlTexParameterIuiv) Decode(d binary.Decoder) (binary.Object, e
 func (*binaryClassGlTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlTexParameterIuiv(d, obj.(*GlTexParameterIuiv))
 }
-func (*binaryClassGlTexParameterIuiv) Skip(d binary.Decoder) error { return doSkipGlTexParameterIuiv(d) }
-func (*binaryClassGlTexParameterIuiv) Schema() *schema.Class       { return schemaGlTexParameterIuiv }
+func (*binaryClassGlTexParameterIuiv) Schema() *schema.Class { return schemaGlTexParameterIuiv }
 
 var schemaGlTexParameterIuiv = &schema.Class{
 	TypeID:  binaryIDGlTexParameterIuiv,
@@ -54807,33 +54168,6 @@ func doDecodeGlTexStorage3DMultisample(d binary.Decoder, o *GlTexStorage3DMultis
 	}
 	return nil
 }
-func doSkipGlTexStorage3DMultisample(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	return nil
-}
 func (*binaryClassGlTexStorage3DMultisample) ID() binary.ID      { return binaryIDGlTexStorage3DMultisample }
 func (*binaryClassGlTexStorage3DMultisample) New() binary.Object { return &GlTexStorage3DMultisample{} }
 func (*binaryClassGlTexStorage3DMultisample) Encode(e binary.Encoder, obj binary.Object) error {
@@ -54845,9 +54179,6 @@ func (*binaryClassGlTexStorage3DMultisample) Decode(d binary.Decoder) (binary.Ob
 }
 func (*binaryClassGlTexStorage3DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlTexStorage3DMultisample(d, obj.(*GlTexStorage3DMultisample))
-}
-func (*binaryClassGlTexStorage3DMultisample) Skip(d binary.Decoder) error {
-	return doSkipGlTexStorage3DMultisample(d)
 }
 func (*binaryClassGlTexStorage3DMultisample) Schema() *schema.Class {
 	return schemaGlTexStorage3DMultisample
