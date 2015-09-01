@@ -1,18 +1,11 @@
-# clang is failing on the build server, so disable it and fall back
-# the local gcc.  The make.go build is already using the
-# local gcc, so this just uses the same compiler for both
-# parts of the build.
-# TODO: Switch back to using a checked in toolchain
-# and update make.go to use that toolchain.
-
 # Point to pre-built version of gcc and libraries.
-#export GCC_TOOLCHAIN_ROOT=$REPO_ROOT/prebuilts/clang/darwin-x86/host/3.5
-#export PATH=$GCC_TOOLCHAIN_ROOT/bin:$PATH
-#export LD_LIBRARY_PATH=$GCC_TOOLCHAIN_ROOT/lib64:$LD_LIBRARY_PATH
+export GCC_TOOLCHAIN_ROOT=$REPO_ROOT/prebuilts/clang/darwin-x86/sdk/3.5
+export PATH=$GCC_TOOLCHAIN_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$GCC_TOOLCHAIN_ROOT/lib64:$LD_LIBRARY_PATH
 
 # CC and CXX are used by go to find the c & c++ compilers.
-#export CC=clang
-#export CXX=clang++
+export CC=clang
+export CXX=clang++
 
 export GOROOT=$REPO_ROOT/prebuilts/go/darwin-x86
 export GOPATH=$GPU_BUILD_ROOT
