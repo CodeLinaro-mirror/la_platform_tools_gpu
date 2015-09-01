@@ -119,13 +119,25 @@ glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count, int32_t insta
 EXPORT void STDCALL glDrawBuffers(int32_t n, uint32_t* bufs);
 EXPORT void STDCALL
 glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type, void* indices);
+EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint32_t type,
+                                             void* indices, int32_t basevertex);
 EXPORT void STDCALL glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect);
 EXPORT void STDCALL glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type,
                                             void* indices, int32_t instancecount);
+EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t count, uint32_t type,
+                                                      void* indices, int32_t instancecount,
+                                                      int32_t basevertex);
 EXPORT void STDCALL glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
                                         uint32_t type, void* indices);
+EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start, uint32_t end,
+                                                  int32_t count, uint32_t type, void* indices,
+                                                  int32_t basevertex);
+EXPORT void STDCALL glPatchParameteri(uint32_t pname, int32_t value);
+EXPORT void STDCALL glPrimitiveBoundingBox(float minX, float minY, float minZ, float minW,
+                                           float maxX, float maxY, float maxZ, float maxW);
 EXPORT void STDCALL glActiveShaderProgramEXT(uint32_t pipeline, uint32_t program);
 EXPORT void STDCALL glAlphaFuncQCOM(uint32_t func, float ref);
+EXPORT void STDCALL glApplyFramebufferAttachmentCMAAINTEL();
 EXPORT void STDCALL glBeginConditionalRenderNV(uint32_t id, uint32_t mode);
 EXPORT void STDCALL glBeginPerfMonitorAMD(uint32_t monitor);
 EXPORT void STDCALL glBeginPerfQueryINTEL(uint32_t queryHandle);
@@ -178,6 +190,8 @@ EXPORT void STDCALL glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t path
                                                  uint32_t transformType, float* transformValues);
 EXPORT void STDCALL glCoverStrokePathNV(uint32_t path, uint32_t coverMode);
 EXPORT void STDCALL glCoverageMaskNV(uint8_t mask);
+EXPORT void STDCALL glCoverageModulationNV(uint32_t components);
+EXPORT void STDCALL glCoverageModulationTableNV(int32_t n, float* v);
 EXPORT void STDCALL glCoverageOperationNV(uint32_t operation);
 EXPORT void STDCALL glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHandle);
 EXPORT uint32_t STDCALL glCreateShaderProgramvEXT(uint32_t type, int32_t count, char** strings);
@@ -217,16 +231,16 @@ EXPORT void STDCALL glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, u
 EXPORT void STDCALL
 glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type, void* indices,
                                        int32_t instancecount, uint32_t baseinstance);
+EXPORT void STDCALL
+glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type,
+                                                 void* indices, int32_t instancecount,
+                                                 int32_t basevertex, uint32_t baseinstance);
 EXPORT void STDCALL glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t count,
                                                          uint32_t type, void* indices,
                                                          int32_t instancecount, int32_t basevertex);
 EXPORT void STDCALL glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t count,
                                                          uint32_t type, void* indices,
                                                          int32_t instancecount, int32_t basevertex);
-EXPORT void STDCALL
-glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type,
-                                                 void* indices, int32_t instancecount,
-                                                 int32_t basevertex, uint32_t baseinstance);
 EXPORT void STDCALL glDrawElementsInstancedEXT(uint32_t mode, int32_t count, uint32_t type,
                                                void* indices, int32_t primcount);
 EXPORT void STDCALL glDrawElementsInstancedNV(uint32_t mode, int32_t count, uint32_t type,
@@ -272,6 +286,9 @@ glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t pname, int32_t param)
 EXPORT uint64_t STDCALL glFenceSyncAPPLE(uint32_t condition, uint32_t flag);
 EXPORT void STDCALL glFinishFenceNV(uint32_t fence);
 EXPORT void STDCALL glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset, int32_t length);
+EXPORT void STDCALL glFragmentCoverageColorNV(uint32_t color);
+EXPORT void STDCALL
+glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start, int32_t count, float* v);
 EXPORT void STDCALL glFramebufferTexture2DMultisampleEXT(uint32_t target, uint32_t attachment,
                                                          uint32_t textarget, uint32_t texture,
                                                          int32_t level, int32_t samples);
@@ -281,11 +298,11 @@ EXPORT void STDCALL glFramebufferTexture2DMultisampleIMG(uint32_t target, uint32
 EXPORT void STDCALL glFramebufferTexture3DOES(uint32_t target, uint32_t attachment,
                                               uint32_t textarget, uint32_t texture, int32_t level,
                                               int32_t zoffset);
-EXPORT void STDCALL
-glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level);
 EXPORT void STDCALL glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t attachment,
                                                      uint32_t texture, int32_t level,
                                                      int32_t baseViewIndex, int32_t numViews);
+EXPORT void STDCALL
+glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level);
 EXPORT void STDCALL glGenFencesNV(int32_t n, uint32_t* fences);
 EXPORT uint32_t STDCALL glGenPathsNV(int32_t range);
 EXPORT void STDCALL glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors);
@@ -293,6 +310,7 @@ EXPORT void STDCALL glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines);
 EXPORT void STDCALL glGenQueriesEXT(int32_t count, uint32_t* queries);
 EXPORT void STDCALL glGenVertexArraysOES(int32_t count, uint32_t* arrays);
 EXPORT void STDCALL glGetBufferPointervOES(uint32_t target, uint32_t pname, void** params);
+EXPORT void STDCALL glGetCoverageModulationTableNV(int32_t bufsize, float* v);
 EXPORT void STDCALL glGetDriverControlStringQCOM(uint32_t driverControl, int32_t bufSize,
                                                  int32_t* length, char* driverControlString);
 EXPORT void STDCALL glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_t* driverControls);
@@ -392,8 +410,8 @@ glGetnUniformuivKHR(uint32_t program, int32_t location, int32_t bufSize, uint32_
 EXPORT void STDCALL glInsertEventMarkerEXT(int32_t length, char* marker);
 EXPORT void STDCALL
 glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB, float weight);
-EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index);
 EXPORT uint8_t STDCALL glIsEnablediNV(uint32_t target, uint32_t index);
+EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index);
 EXPORT uint8_t STDCALL glIsFenceNV(uint32_t fence);
 EXPORT uint8_t STDCALL glIsImageHandleResidentNV(uint64_t handle);
 EXPORT uint8_t STDCALL glIsPathNV(uint32_t path);
@@ -432,6 +450,8 @@ EXPORT void STDCALL glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint32
                                            void** indices, int32_t primcount);
 EXPORT void STDCALL glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type, void* indirect,
                                                    int32_t drawcount, int32_t stride);
+EXPORT void STDCALL glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
+                                                          int32_t count, float* v);
 EXPORT void STDCALL glPatchParameteriOES(uint32_t pname, int32_t value);
 EXPORT void STDCALL glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_t* commands,
                                      int32_t numCoords, uint32_t coordType, void* coords);
@@ -553,6 +573,7 @@ EXPORT void STDCALL glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t loc
                                                    int32_t count, uint8_t transpose, float* value);
 EXPORT void STDCALL glPushGroupMarkerEXT(int32_t length, char* marker);
 EXPORT void STDCALL glQueryCounterEXT(uint32_t query, uint32_t target);
+EXPORT void STDCALL glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations);
 EXPORT void STDCALL glReadBufferIndexedEXT(uint32_t src, int32_t index);
 EXPORT void STDCALL glReadBufferNV(uint32_t mode);
 EXPORT void STDCALL glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32_t height,
@@ -574,6 +595,7 @@ EXPORT void STDCALL glRenderbufferStorageMultisampleIMG(uint32_t target, int32_t
 EXPORT void STDCALL glRenderbufferStorageMultisampleNV(uint32_t target, int32_t samples,
                                                        uint32_t internalformat, int32_t width,
                                                        int32_t height);
+EXPORT void STDCALL glResolveDepthValuesNV();
 EXPORT void STDCALL glResolveMultisampleFramebufferAPPLE();
 EXPORT void STDCALL glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, int32_t* param);
 EXPORT void STDCALL glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname, uint32_t* param);
@@ -610,6 +632,7 @@ glStencilThenCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pathNameType,
                                         float* transformValues);
 EXPORT void STDCALL
 glStencilThenCoverStrokePathNV(uint32_t path, int32_t reference, uint32_t mask, uint32_t coverMode);
+EXPORT void STDCALL glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits);
 EXPORT uint8_t STDCALL glTestFenceNV(uint32_t fence);
 EXPORT void STDCALL glTexBufferOES(uint32_t target, uint32_t internalformat, uint32_t buffer);
 EXPORT void STDCALL glTexBufferRangeOES(uint32_t target, uint32_t internalformat, uint32_t buffer,
@@ -673,23 +696,18 @@ EXPORT void STDCALL glViewportIndexedfvNV(uint32_t index, float* v);
 EXPORT void STDCALL glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t timeout);
 EXPORT void STDCALL
 glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint32_t* paths, float* weights);
-EXPORT void STDCALL glCoverageModulationNV(uint32_t components);
-EXPORT void STDCALL glCoverageModulationTableNV(int32_t n, float* v);
-EXPORT void STDCALL glFragmentCoverageColorNV(uint32_t color);
-EXPORT void STDCALL
-glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start, int32_t count, float* v);
-EXPORT void STDCALL glGetCoverageModulationTableNV(int32_t bufsize, float* v);
-EXPORT void STDCALL glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
-                                                          int32_t count, float* v);
-EXPORT void STDCALL glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations);
-EXPORT void STDCALL glResolveDepthValuesNV();
-EXPORT void STDCALL glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits);
+EXPORT void STDCALL glBlendBarrier();
 EXPORT void STDCALL glBlendColor(float red, float green, float blue, float alpha);
 EXPORT void STDCALL glBlendEquation(uint32_t equation);
 EXPORT void STDCALL glBlendEquationSeparate(uint32_t rgb, uint32_t alpha);
+EXPORT void STDCALL glBlendEquationSeparatei(uint32_t buf, uint32_t modeRGB, uint32_t modeAlpha);
+EXPORT void STDCALL glBlendEquationi(uint32_t buf, uint32_t mode);
 EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor);
 EXPORT void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                         uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
+EXPORT void STDCALL glBlendFuncSeparatei(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
+                                         uint32_t srcAlpha, uint32_t dstAlpha);
+EXPORT void STDCALL glBlendFunci(uint32_t buf, uint32_t src, uint32_t dst);
 EXPORT void STDCALL glDepthFunc(uint32_t function);
 EXPORT void STDCALL glSampleCoverage(float value, uint8_t invert);
 EXPORT void STDCALL glSampleMaski(uint32_t maskNumber, uint32_t mask);
@@ -717,6 +735,7 @@ EXPORT void STDCALL glClearColor(float r, float g, float b, float a);
 EXPORT void STDCALL glClearDepthf(float depth);
 EXPORT void STDCALL glClearStencil(int32_t stencil);
 EXPORT void STDCALL glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+EXPORT void STDCALL glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 EXPORT void STDCALL glDeleteFramebuffers(int32_t count, uint32_t* framebuffers);
 EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers);
 EXPORT void STDCALL glDepthMask(uint8_t enabled);
@@ -724,6 +743,8 @@ EXPORT void STDCALL glFramebufferParameteri(uint32_t target, uint32_t pname, int
 EXPORT void STDCALL glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                               uint32_t framebuffer_attachment,
                                               uint32_t renderbuffer_target, uint32_t renderbuffer);
+EXPORT void STDCALL
+glFramebufferTexture(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level);
 EXPORT void STDCALL glFramebufferTexture2D(uint32_t framebuffer_target,
                                            uint32_t framebuffer_attachment, uint32_t texture_target,
                                            uint32_t texture, int32_t level);
@@ -746,6 +767,8 @@ EXPORT uint8_t STDCALL glIsRenderbuffer(uint32_t renderbuffer);
 EXPORT void STDCALL glReadBuffer(uint32_t src);
 EXPORT void STDCALL glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
                                  uint32_t format, uint32_t type, void* data);
+EXPORT void STDCALL glReadnPixels(int32_t x, int32_t y, int32_t width, int32_t height,
+                                  uint32_t format, uint32_t type, int32_t bufSize, void* data);
 EXPORT void STDCALL
 glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width, int32_t height);
 EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
@@ -754,11 +777,14 @@ EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t sa
 EXPORT void STDCALL glStencilMask(uint32_t mask);
 EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask);
 EXPORT void STDCALL glDisable(uint32_t capability);
+EXPORT void STDCALL glDisablei(uint32_t target, uint32_t index);
 EXPORT void STDCALL glEnable(uint32_t capability);
+EXPORT void STDCALL glEnablei(uint32_t target, uint32_t index);
 EXPORT void STDCALL glFinish();
 EXPORT void STDCALL glFlush();
 EXPORT void STDCALL glFlushMappedBufferRange(uint32_t target, int32_t offset, int32_t length);
 EXPORT uint32_t STDCALL glGetError();
+EXPORT uint32_t STDCALL glGetGraphicsResetStatus();
 EXPORT void STDCALL glHint(uint32_t target, uint32_t mode);
 EXPORT void STDCALL glActiveShaderProgram(uint32_t pipeline, uint32_t program);
 EXPORT void STDCALL glAttachShader(uint32_t program, uint32_t shader);
@@ -828,6 +854,12 @@ EXPORT int32_t STDCALL glGetUniformLocation(uint32_t program, char* name);
 EXPORT void STDCALL glGetUniformfv(uint32_t program, int32_t location, float* values);
 EXPORT void STDCALL glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
 EXPORT void STDCALL glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params);
+EXPORT void STDCALL
+glGetnUniformfv(uint32_t program, int32_t location, int32_t bufSize, float* params);
+EXPORT void STDCALL
+glGetnUniformiv(uint32_t program, int32_t location, int32_t bufSize, int32_t* params);
+EXPORT void STDCALL
+glGetnUniformuiv(uint32_t program, int32_t location, int32_t bufSize, uint32_t* params);
 EXPORT uint8_t STDCALL glIsProgram(uint32_t program);
 EXPORT uint8_t STDCALL glIsProgramPipeline(uint32_t pipeline);
 EXPORT uint8_t STDCALL glIsShader(uint32_t shader);
@@ -958,6 +990,7 @@ EXPORT void STDCALL glDepthRangef(float near, float far);
 EXPORT void STDCALL glFrontFace(uint32_t orientation);
 EXPORT void STDCALL glGetMultisamplefv(uint32_t pname, uint32_t index, float* val);
 EXPORT void STDCALL glLineWidth(float width);
+EXPORT void STDCALL glMinSampleShading(float value);
 EXPORT void STDCALL glPolygonOffset(float scale_factor, float units);
 EXPORT void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
 EXPORT void STDCALL glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
@@ -972,6 +1005,7 @@ EXPORT void STDCALL glGetInternalformativ(uint32_t target, uint32_t internalform
 EXPORT uint8_t* STDCALL glGetString(uint32_t param);
 EXPORT uint8_t* STDCALL glGetStringi(uint32_t name, uint32_t index);
 EXPORT uint8_t STDCALL glIsEnabled(uint32_t capability);
+EXPORT uint8_t STDCALL glIsEnabledi(uint32_t target, uint32_t index);
 EXPORT uint32_t STDCALL glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
 EXPORT void STDCALL glDeleteSync(uint64_t sync);
 EXPORT uint64_t STDCALL glFenceSync(uint32_t condition, uint32_t syncFlags);
@@ -998,6 +1032,11 @@ EXPORT void STDCALL glCompressedTexSubImage3D(uint32_t target, int32_t level, in
                                               int32_t yoffset, int32_t zoffset, int32_t width,
                                               int32_t height, int32_t depth, uint32_t format,
                                               int32_t imageSize, void* data);
+EXPORT void STDCALL glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
+                                       int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
+                                       uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
+                                       int32_t dstY, int32_t dstZ, int32_t srcWidth,
+                                       int32_t srcHeight, int32_t srcDepth);
 EXPORT void STDCALL glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                      int32_t y, int32_t width, int32_t height, int32_t border);
 EXPORT void STDCALL glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
@@ -1011,27 +1050,38 @@ EXPORT void STDCALL glDeleteTextures(int32_t count, uint32_t* textures);
 EXPORT void STDCALL glGenSamplers(int32_t count, uint32_t* samplers);
 EXPORT void STDCALL glGenTextures(int32_t count, uint32_t* textures);
 EXPORT void STDCALL glGenerateMipmap(uint32_t target);
+EXPORT void STDCALL glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname, uint32_t* params);
 EXPORT void STDCALL glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, float* params);
 EXPORT void STDCALL glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* params);
 EXPORT void STDCALL
 glGetTexLevelParameterfv(uint32_t target, int32_t level, uint32_t pname, float* params);
 EXPORT void STDCALL
 glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint32_t* params);
 EXPORT void STDCALL glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values);
 EXPORT void STDCALL glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values);
 EXPORT uint8_t STDCALL glIsSampler(uint32_t sampler);
 EXPORT uint8_t STDCALL glIsTexture(uint32_t texture);
 EXPORT void STDCALL glPixelStorei(uint32_t parameter, int32_t value);
+EXPORT void STDCALL glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int32_t* param);
+EXPORT void STDCALL glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, uint32_t* param);
 EXPORT void STDCALL glSamplerParameterf(uint32_t sampler, uint32_t pname, float param);
 EXPORT void STDCALL glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param);
 EXPORT void STDCALL glSamplerParameteri(uint32_t sampler, uint32_t pname, int32_t param);
 EXPORT void STDCALL glSamplerParameteriv(uint32_t sampler, uint32_t pname, int32_t* param);
+EXPORT void STDCALL glTexBuffer(uint32_t target, uint32_t internalformat, uint32_t buffer);
+EXPORT void STDCALL glTexBufferRange(uint32_t target, uint32_t internalformat, uint32_t buffer,
+                                     int32_t offset, int32_t size);
 EXPORT void STDCALL glTexImage2D(uint32_t target, int32_t level, int32_t internal_format,
                                  int32_t width, int32_t height, int32_t border, uint32_t format,
                                  uint32_t type, void* data);
 EXPORT void STDCALL glTexImage3D(uint32_t target, int32_t level, int32_t internalformat,
                                  int32_t width, int32_t height, int32_t depth, int32_t border,
                                  uint32_t format, uint32_t type, void* pixels);
+EXPORT void STDCALL glTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_t* params);
 EXPORT void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value);
 EXPORT void STDCALL glTexParameterfv(uint32_t target, uint32_t pname, float* params);
 EXPORT void STDCALL glTexParameteri(uint32_t target, uint32_t parameter, int32_t value);
@@ -1043,6 +1093,9 @@ EXPORT void STDCALL glTexStorage2DMultisample(uint32_t target, int32_t samples,
                                               int32_t height, uint8_t fixedsamplelocations);
 EXPORT void STDCALL glTexStorage3D(uint32_t target, int32_t levels, uint32_t internalformat,
                                    int32_t width, int32_t height, int32_t depth);
+EXPORT void STDCALL
+glTexStorage3DMultisample(uint32_t target, int32_t samples, uint32_t internalformat, int32_t width,
+                          int32_t height, int32_t depth, uint8_t fixedsamplelocations);
 EXPORT void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t width, int32_t height, uint32_t format,
                                     uint32_t type, void* data);
@@ -1227,14 +1280,25 @@ Spy* spy() {
                              reinterpret_cast<void*>(glDrawArraysInstanced));
         gSpy->RegisterSymbol("glDrawBuffers", reinterpret_cast<void*>(glDrawBuffers));
         gSpy->RegisterSymbol("glDrawElements", reinterpret_cast<void*>(glDrawElements));
+        gSpy->RegisterSymbol("glDrawElementsBaseVertex",
+                             reinterpret_cast<void*>(glDrawElementsBaseVertex));
         gSpy->RegisterSymbol("glDrawElementsIndirect",
                              reinterpret_cast<void*>(glDrawElementsIndirect));
         gSpy->RegisterSymbol("glDrawElementsInstanced",
                              reinterpret_cast<void*>(glDrawElementsInstanced));
+        gSpy->RegisterSymbol("glDrawElementsInstancedBaseVertex",
+                             reinterpret_cast<void*>(glDrawElementsInstancedBaseVertex));
         gSpy->RegisterSymbol("glDrawRangeElements", reinterpret_cast<void*>(glDrawRangeElements));
+        gSpy->RegisterSymbol("glDrawRangeElementsBaseVertex",
+                             reinterpret_cast<void*>(glDrawRangeElementsBaseVertex));
+        gSpy->RegisterSymbol("glPatchParameteri", reinterpret_cast<void*>(glPatchParameteri));
+        gSpy->RegisterSymbol("glPrimitiveBoundingBox",
+                             reinterpret_cast<void*>(glPrimitiveBoundingBox));
         gSpy->RegisterSymbol("glActiveShaderProgramEXT",
                              reinterpret_cast<void*>(glActiveShaderProgramEXT));
         gSpy->RegisterSymbol("glAlphaFuncQCOM", reinterpret_cast<void*>(glAlphaFuncQCOM));
+        gSpy->RegisterSymbol("glApplyFramebufferAttachmentCMAAINTEL",
+                             reinterpret_cast<void*>(glApplyFramebufferAttachmentCMAAINTEL));
         gSpy->RegisterSymbol("glBeginConditionalRenderNV",
                              reinterpret_cast<void*>(glBeginConditionalRenderNV));
         gSpy->RegisterSymbol("glBeginPerfMonitorAMD",
@@ -1280,6 +1344,10 @@ Spy* spy() {
                              reinterpret_cast<void*>(glCoverStrokePathInstancedNV));
         gSpy->RegisterSymbol("glCoverStrokePathNV", reinterpret_cast<void*>(glCoverStrokePathNV));
         gSpy->RegisterSymbol("glCoverageMaskNV", reinterpret_cast<void*>(glCoverageMaskNV));
+        gSpy->RegisterSymbol("glCoverageModulationNV",
+                             reinterpret_cast<void*>(glCoverageModulationNV));
+        gSpy->RegisterSymbol("glCoverageModulationTableNV",
+                             reinterpret_cast<void*>(glCoverageModulationTableNV));
         gSpy->RegisterSymbol("glCoverageOperationNV",
                              reinterpret_cast<void*>(glCoverageOperationNV));
         gSpy->RegisterSymbol("glCreatePerfQueryINTEL",
@@ -1328,13 +1396,13 @@ Spy* spy() {
                              reinterpret_cast<void*>(glDrawElementsInstancedANGLE));
         gSpy->RegisterSymbol("glDrawElementsInstancedBaseInstanceEXT",
                              reinterpret_cast<void*>(glDrawElementsInstancedBaseInstanceEXT));
+        gSpy->RegisterSymbol(
+                "glDrawElementsInstancedBaseVertexBaseInstanceEXT",
+                reinterpret_cast<void*>(glDrawElementsInstancedBaseVertexBaseInstanceEXT));
         gSpy->RegisterSymbol("glDrawElementsInstancedBaseVertexEXT",
                              reinterpret_cast<void*>(glDrawElementsInstancedBaseVertexEXT));
         gSpy->RegisterSymbol("glDrawElementsInstancedBaseVertexOES",
                              reinterpret_cast<void*>(glDrawElementsInstancedBaseVertexOES));
-        gSpy->RegisterSymbol(
-                "glDrawElementsInstancedBaseVertexBaseInstanceEXT",
-                reinterpret_cast<void*>(glDrawElementsInstancedBaseVertexBaseInstanceEXT));
         gSpy->RegisterSymbol("glDrawElementsInstancedEXT",
                              reinterpret_cast<void*>(glDrawElementsInstancedEXT));
         gSpy->RegisterSymbol("glDrawElementsInstancedNV",
@@ -1381,16 +1449,20 @@ Spy* spy() {
         gSpy->RegisterSymbol("glFinishFenceNV", reinterpret_cast<void*>(glFinishFenceNV));
         gSpy->RegisterSymbol("glFlushMappedBufferRangeEXT",
                              reinterpret_cast<void*>(glFlushMappedBufferRangeEXT));
+        gSpy->RegisterSymbol("glFragmentCoverageColorNV",
+                             reinterpret_cast<void*>(glFragmentCoverageColorNV));
+        gSpy->RegisterSymbol("glFramebufferSampleLocationsfvNV",
+                             reinterpret_cast<void*>(glFramebufferSampleLocationsfvNV));
         gSpy->RegisterSymbol("glFramebufferTexture2DMultisampleEXT",
                              reinterpret_cast<void*>(glFramebufferTexture2DMultisampleEXT));
         gSpy->RegisterSymbol("glFramebufferTexture2DMultisampleIMG",
                              reinterpret_cast<void*>(glFramebufferTexture2DMultisampleIMG));
         gSpy->RegisterSymbol("glFramebufferTexture3DOES",
                              reinterpret_cast<void*>(glFramebufferTexture3DOES));
-        gSpy->RegisterSymbol("glFramebufferTextureOES",
-                             reinterpret_cast<void*>(glFramebufferTextureOES));
         gSpy->RegisterSymbol("glFramebufferTextureMultiviewOVR",
                              reinterpret_cast<void*>(glFramebufferTextureMultiviewOVR));
+        gSpy->RegisterSymbol("glFramebufferTextureOES",
+                             reinterpret_cast<void*>(glFramebufferTextureOES));
         gSpy->RegisterSymbol("glGenFencesNV", reinterpret_cast<void*>(glGenFencesNV));
         gSpy->RegisterSymbol("glGenPathsNV", reinterpret_cast<void*>(glGenPathsNV));
         gSpy->RegisterSymbol("glGenPerfMonitorsAMD", reinterpret_cast<void*>(glGenPerfMonitorsAMD));
@@ -1400,6 +1472,8 @@ Spy* spy() {
         gSpy->RegisterSymbol("glGenVertexArraysOES", reinterpret_cast<void*>(glGenVertexArraysOES));
         gSpy->RegisterSymbol("glGetBufferPointervOES",
                              reinterpret_cast<void*>(glGetBufferPointervOES));
+        gSpy->RegisterSymbol("glGetCoverageModulationTableNV",
+                             reinterpret_cast<void*>(glGetCoverageModulationTableNV));
         gSpy->RegisterSymbol("glGetDriverControlStringQCOM",
                              reinterpret_cast<void*>(glGetDriverControlStringQCOM));
         gSpy->RegisterSymbol("glGetDriverControlsQCOM",
@@ -1491,8 +1565,8 @@ Spy* spy() {
         gSpy->RegisterSymbol("glInsertEventMarkerEXT",
                              reinterpret_cast<void*>(glInsertEventMarkerEXT));
         gSpy->RegisterSymbol("glInterpolatePathsNV", reinterpret_cast<void*>(glInterpolatePathsNV));
-        gSpy->RegisterSymbol("glIsEnablediOES", reinterpret_cast<void*>(glIsEnablediOES));
         gSpy->RegisterSymbol("glIsEnablediNV", reinterpret_cast<void*>(glIsEnablediNV));
+        gSpy->RegisterSymbol("glIsEnablediOES", reinterpret_cast<void*>(glIsEnablediOES));
         gSpy->RegisterSymbol("glIsFenceNV", reinterpret_cast<void*>(glIsFenceNV));
         gSpy->RegisterSymbol("glIsImageHandleResidentNV",
                              reinterpret_cast<void*>(glIsImageHandleResidentNV));
@@ -1538,6 +1612,8 @@ Spy* spy() {
                              reinterpret_cast<void*>(glMultiDrawElementsEXT));
         gSpy->RegisterSymbol("glMultiDrawElementsIndirectEXT",
                              reinterpret_cast<void*>(glMultiDrawElementsIndirectEXT));
+        gSpy->RegisterSymbol("glNamedFramebufferSampleLocationsfvNV",
+                             reinterpret_cast<void*>(glNamedFramebufferSampleLocationsfvNV));
         gSpy->RegisterSymbol("glPatchParameteriOES", reinterpret_cast<void*>(glPatchParameteriOES));
         gSpy->RegisterSymbol("glPathCommandsNV", reinterpret_cast<void*>(glPathCommandsNV));
         gSpy->RegisterSymbol("glPathCoordsNV", reinterpret_cast<void*>(glPathCoordsNV));
@@ -1644,6 +1720,7 @@ Spy* spy() {
                              reinterpret_cast<void*>(glProgramUniformMatrix4x3fvEXT));
         gSpy->RegisterSymbol("glPushGroupMarkerEXT", reinterpret_cast<void*>(glPushGroupMarkerEXT));
         gSpy->RegisterSymbol("glQueryCounterEXT", reinterpret_cast<void*>(glQueryCounterEXT));
+        gSpy->RegisterSymbol("glRasterSamplesEXT", reinterpret_cast<void*>(glRasterSamplesEXT));
         gSpy->RegisterSymbol("glReadBufferIndexedEXT",
                              reinterpret_cast<void*>(glReadBufferIndexedEXT));
         gSpy->RegisterSymbol("glReadBufferNV", reinterpret_cast<void*>(glReadBufferNV));
@@ -1659,6 +1736,8 @@ Spy* spy() {
                              reinterpret_cast<void*>(glRenderbufferStorageMultisampleIMG));
         gSpy->RegisterSymbol("glRenderbufferStorageMultisampleNV",
                              reinterpret_cast<void*>(glRenderbufferStorageMultisampleNV));
+        gSpy->RegisterSymbol("glResolveDepthValuesNV",
+                             reinterpret_cast<void*>(glResolveDepthValuesNV));
         gSpy->RegisterSymbol("glResolveMultisampleFramebufferAPPLE",
                              reinterpret_cast<void*>(glResolveMultisampleFramebufferAPPLE));
         gSpy->RegisterSymbol("glSamplerParameterIivOES",
@@ -1687,6 +1766,8 @@ Spy* spy() {
                              reinterpret_cast<void*>(glStencilThenCoverStrokePathInstancedNV));
         gSpy->RegisterSymbol("glStencilThenCoverStrokePathNV",
                              reinterpret_cast<void*>(glStencilThenCoverStrokePathNV));
+        gSpy->RegisterSymbol("glSubpixelPrecisionBiasNV",
+                             reinterpret_cast<void*>(glSubpixelPrecisionBiasNV));
         gSpy->RegisterSymbol("glTestFenceNV", reinterpret_cast<void*>(glTestFenceNV));
         gSpy->RegisterSymbol("glTexBufferOES", reinterpret_cast<void*>(glTexBufferOES));
         gSpy->RegisterSymbol("glTexBufferRangeOES", reinterpret_cast<void*>(glTexBufferRangeOES));
@@ -1742,29 +1823,18 @@ Spy* spy() {
                              reinterpret_cast<void*>(glViewportIndexedfvNV));
         gSpy->RegisterSymbol("glWaitSyncAPPLE", reinterpret_cast<void*>(glWaitSyncAPPLE));
         gSpy->RegisterSymbol("glWeightPathsNV", reinterpret_cast<void*>(glWeightPathsNV));
-        gSpy->RegisterSymbol("glCoverageModulationNV",
-                             reinterpret_cast<void*>(glCoverageModulationNV));
-        gSpy->RegisterSymbol("glCoverageModulationTableNV",
-                             reinterpret_cast<void*>(glCoverageModulationTableNV));
-        gSpy->RegisterSymbol("glFragmentCoverageColorNV",
-                             reinterpret_cast<void*>(glFragmentCoverageColorNV));
-        gSpy->RegisterSymbol("glFramebufferSampleLocationsfvNV",
-                             reinterpret_cast<void*>(glFramebufferSampleLocationsfvNV));
-        gSpy->RegisterSymbol("glGetCoverageModulationTableNV",
-                             reinterpret_cast<void*>(glGetCoverageModulationTableNV));
-        gSpy->RegisterSymbol("glNamedFramebufferSampleLocationsfvNV",
-                             reinterpret_cast<void*>(glNamedFramebufferSampleLocationsfvNV));
-        gSpy->RegisterSymbol("glRasterSamplesEXT", reinterpret_cast<void*>(glRasterSamplesEXT));
-        gSpy->RegisterSymbol("glResolveDepthValuesNV",
-                             reinterpret_cast<void*>(glResolveDepthValuesNV));
-        gSpy->RegisterSymbol("glSubpixelPrecisionBiasNV",
-                             reinterpret_cast<void*>(glSubpixelPrecisionBiasNV));
+        gSpy->RegisterSymbol("glBlendBarrier", reinterpret_cast<void*>(glBlendBarrier));
         gSpy->RegisterSymbol("glBlendColor", reinterpret_cast<void*>(glBlendColor));
         gSpy->RegisterSymbol("glBlendEquation", reinterpret_cast<void*>(glBlendEquation));
         gSpy->RegisterSymbol("glBlendEquationSeparate",
                              reinterpret_cast<void*>(glBlendEquationSeparate));
+        gSpy->RegisterSymbol("glBlendEquationSeparatei",
+                             reinterpret_cast<void*>(glBlendEquationSeparatei));
+        gSpy->RegisterSymbol("glBlendEquationi", reinterpret_cast<void*>(glBlendEquationi));
         gSpy->RegisterSymbol("glBlendFunc", reinterpret_cast<void*>(glBlendFunc));
         gSpy->RegisterSymbol("glBlendFuncSeparate", reinterpret_cast<void*>(glBlendFuncSeparate));
+        gSpy->RegisterSymbol("glBlendFuncSeparatei", reinterpret_cast<void*>(glBlendFuncSeparatei));
+        gSpy->RegisterSymbol("glBlendFunci", reinterpret_cast<void*>(glBlendFunci));
         gSpy->RegisterSymbol("glDepthFunc", reinterpret_cast<void*>(glDepthFunc));
         gSpy->RegisterSymbol("glSampleCoverage", reinterpret_cast<void*>(glSampleCoverage));
         gSpy->RegisterSymbol("glSampleMaski", reinterpret_cast<void*>(glSampleMaski));
@@ -1788,6 +1858,7 @@ Spy* spy() {
         gSpy->RegisterSymbol("glClearDepthf", reinterpret_cast<void*>(glClearDepthf));
         gSpy->RegisterSymbol("glClearStencil", reinterpret_cast<void*>(glClearStencil));
         gSpy->RegisterSymbol("glColorMask", reinterpret_cast<void*>(glColorMask));
+        gSpy->RegisterSymbol("glColorMaski", reinterpret_cast<void*>(glColorMaski));
         gSpy->RegisterSymbol("glDeleteFramebuffers", reinterpret_cast<void*>(glDeleteFramebuffers));
         gSpy->RegisterSymbol("glDeleteRenderbuffers",
                              reinterpret_cast<void*>(glDeleteRenderbuffers));
@@ -1796,6 +1867,7 @@ Spy* spy() {
                              reinterpret_cast<void*>(glFramebufferParameteri));
         gSpy->RegisterSymbol("glFramebufferRenderbuffer",
                              reinterpret_cast<void*>(glFramebufferRenderbuffer));
+        gSpy->RegisterSymbol("glFramebufferTexture", reinterpret_cast<void*>(glFramebufferTexture));
         gSpy->RegisterSymbol("glFramebufferTexture2D",
                              reinterpret_cast<void*>(glFramebufferTexture2D));
         gSpy->RegisterSymbol("glFramebufferTextureLayer",
@@ -1816,6 +1888,7 @@ Spy* spy() {
         gSpy->RegisterSymbol("glIsRenderbuffer", reinterpret_cast<void*>(glIsRenderbuffer));
         gSpy->RegisterSymbol("glReadBuffer", reinterpret_cast<void*>(glReadBuffer));
         gSpy->RegisterSymbol("glReadPixels", reinterpret_cast<void*>(glReadPixels));
+        gSpy->RegisterSymbol("glReadnPixels", reinterpret_cast<void*>(glReadnPixels));
         gSpy->RegisterSymbol("glRenderbufferStorage",
                              reinterpret_cast<void*>(glRenderbufferStorage));
         gSpy->RegisterSymbol("glRenderbufferStorageMultisample",
@@ -1824,12 +1897,16 @@ Spy* spy() {
         gSpy->RegisterSymbol("glStencilMaskSeparate",
                              reinterpret_cast<void*>(glStencilMaskSeparate));
         gSpy->RegisterSymbol("glDisable", reinterpret_cast<void*>(glDisable));
+        gSpy->RegisterSymbol("glDisablei", reinterpret_cast<void*>(glDisablei));
         gSpy->RegisterSymbol("glEnable", reinterpret_cast<void*>(glEnable));
+        gSpy->RegisterSymbol("glEnablei", reinterpret_cast<void*>(glEnablei));
         gSpy->RegisterSymbol("glFinish", reinterpret_cast<void*>(glFinish));
         gSpy->RegisterSymbol("glFlush", reinterpret_cast<void*>(glFlush));
         gSpy->RegisterSymbol("glFlushMappedBufferRange",
                              reinterpret_cast<void*>(glFlushMappedBufferRange));
         gSpy->RegisterSymbol("glGetError", reinterpret_cast<void*>(glGetError));
+        gSpy->RegisterSymbol("glGetGraphicsResetStatus",
+                             reinterpret_cast<void*>(glGetGraphicsResetStatus));
         gSpy->RegisterSymbol("glHint", reinterpret_cast<void*>(glHint));
         gSpy->RegisterSymbol("glActiveShaderProgram",
                              reinterpret_cast<void*>(glActiveShaderProgram));
@@ -1893,6 +1970,9 @@ Spy* spy() {
         gSpy->RegisterSymbol("glGetUniformfv", reinterpret_cast<void*>(glGetUniformfv));
         gSpy->RegisterSymbol("glGetUniformiv", reinterpret_cast<void*>(glGetUniformiv));
         gSpy->RegisterSymbol("glGetUniformuiv", reinterpret_cast<void*>(glGetUniformuiv));
+        gSpy->RegisterSymbol("glGetnUniformfv", reinterpret_cast<void*>(glGetnUniformfv));
+        gSpy->RegisterSymbol("glGetnUniformiv", reinterpret_cast<void*>(glGetnUniformiv));
+        gSpy->RegisterSymbol("glGetnUniformuiv", reinterpret_cast<void*>(glGetnUniformuiv));
         gSpy->RegisterSymbol("glIsProgram", reinterpret_cast<void*>(glIsProgram));
         gSpy->RegisterSymbol("glIsProgramPipeline", reinterpret_cast<void*>(glIsProgramPipeline));
         gSpy->RegisterSymbol("glIsShader", reinterpret_cast<void*>(glIsShader));
@@ -1993,6 +2073,7 @@ Spy* spy() {
         gSpy->RegisterSymbol("glFrontFace", reinterpret_cast<void*>(glFrontFace));
         gSpy->RegisterSymbol("glGetMultisamplefv", reinterpret_cast<void*>(glGetMultisamplefv));
         gSpy->RegisterSymbol("glLineWidth", reinterpret_cast<void*>(glLineWidth));
+        gSpy->RegisterSymbol("glMinSampleShading", reinterpret_cast<void*>(glMinSampleShading));
         gSpy->RegisterSymbol("glPolygonOffset", reinterpret_cast<void*>(glPolygonOffset));
         gSpy->RegisterSymbol("glViewport", reinterpret_cast<void*>(glViewport));
         gSpy->RegisterSymbol("glGetBooleani_v", reinterpret_cast<void*>(glGetBooleani_v));
@@ -2007,6 +2088,7 @@ Spy* spy() {
         gSpy->RegisterSymbol("glGetString", reinterpret_cast<void*>(glGetString));
         gSpy->RegisterSymbol("glGetStringi", reinterpret_cast<void*>(glGetStringi));
         gSpy->RegisterSymbol("glIsEnabled", reinterpret_cast<void*>(glIsEnabled));
+        gSpy->RegisterSymbol("glIsEnabledi", reinterpret_cast<void*>(glIsEnabledi));
         gSpy->RegisterSymbol("glClientWaitSync", reinterpret_cast<void*>(glClientWaitSync));
         gSpy->RegisterSymbol("glDeleteSync", reinterpret_cast<void*>(glDeleteSync));
         gSpy->RegisterSymbol("glFenceSync", reinterpret_cast<void*>(glFenceSync));
@@ -2025,6 +2107,7 @@ Spy* spy() {
                              reinterpret_cast<void*>(glCompressedTexSubImage2D));
         gSpy->RegisterSymbol("glCompressedTexSubImage3D",
                              reinterpret_cast<void*>(glCompressedTexSubImage3D));
+        gSpy->RegisterSymbol("glCopyImageSubData", reinterpret_cast<void*>(glCopyImageSubData));
         gSpy->RegisterSymbol("glCopyTexImage2D", reinterpret_cast<void*>(glCopyTexImage2D));
         gSpy->RegisterSymbol("glCopyTexSubImage2D", reinterpret_cast<void*>(glCopyTexSubImage2D));
         gSpy->RegisterSymbol("glCopyTexSubImage3D", reinterpret_cast<void*>(glCopyTexSubImage3D));
@@ -2033,6 +2116,10 @@ Spy* spy() {
         gSpy->RegisterSymbol("glGenSamplers", reinterpret_cast<void*>(glGenSamplers));
         gSpy->RegisterSymbol("glGenTextures", reinterpret_cast<void*>(glGenTextures));
         gSpy->RegisterSymbol("glGenerateMipmap", reinterpret_cast<void*>(glGenerateMipmap));
+        gSpy->RegisterSymbol("glGetSamplerParameterIiv",
+                             reinterpret_cast<void*>(glGetSamplerParameterIiv));
+        gSpy->RegisterSymbol("glGetSamplerParameterIuiv",
+                             reinterpret_cast<void*>(glGetSamplerParameterIuiv));
         gSpy->RegisterSymbol("glGetSamplerParameterfv",
                              reinterpret_cast<void*>(glGetSamplerParameterfv));
         gSpy->RegisterSymbol("glGetSamplerParameteriv",
@@ -2041,17 +2128,28 @@ Spy* spy() {
                              reinterpret_cast<void*>(glGetTexLevelParameterfv));
         gSpy->RegisterSymbol("glGetTexLevelParameteriv",
                              reinterpret_cast<void*>(glGetTexLevelParameteriv));
+        gSpy->RegisterSymbol("glGetTexParameterIiv", reinterpret_cast<void*>(glGetTexParameterIiv));
+        gSpy->RegisterSymbol("glGetTexParameterIuiv",
+                             reinterpret_cast<void*>(glGetTexParameterIuiv));
         gSpy->RegisterSymbol("glGetTexParameterfv", reinterpret_cast<void*>(glGetTexParameterfv));
         gSpy->RegisterSymbol("glGetTexParameteriv", reinterpret_cast<void*>(glGetTexParameteriv));
         gSpy->RegisterSymbol("glIsSampler", reinterpret_cast<void*>(glIsSampler));
         gSpy->RegisterSymbol("glIsTexture", reinterpret_cast<void*>(glIsTexture));
         gSpy->RegisterSymbol("glPixelStorei", reinterpret_cast<void*>(glPixelStorei));
+        gSpy->RegisterSymbol("glSamplerParameterIiv",
+                             reinterpret_cast<void*>(glSamplerParameterIiv));
+        gSpy->RegisterSymbol("glSamplerParameterIuiv",
+                             reinterpret_cast<void*>(glSamplerParameterIuiv));
         gSpy->RegisterSymbol("glSamplerParameterf", reinterpret_cast<void*>(glSamplerParameterf));
         gSpy->RegisterSymbol("glSamplerParameterfv", reinterpret_cast<void*>(glSamplerParameterfv));
         gSpy->RegisterSymbol("glSamplerParameteri", reinterpret_cast<void*>(glSamplerParameteri));
         gSpy->RegisterSymbol("glSamplerParameteriv", reinterpret_cast<void*>(glSamplerParameteriv));
+        gSpy->RegisterSymbol("glTexBuffer", reinterpret_cast<void*>(glTexBuffer));
+        gSpy->RegisterSymbol("glTexBufferRange", reinterpret_cast<void*>(glTexBufferRange));
         gSpy->RegisterSymbol("glTexImage2D", reinterpret_cast<void*>(glTexImage2D));
         gSpy->RegisterSymbol("glTexImage3D", reinterpret_cast<void*>(glTexImage3D));
+        gSpy->RegisterSymbol("glTexParameterIiv", reinterpret_cast<void*>(glTexParameterIiv));
+        gSpy->RegisterSymbol("glTexParameterIuiv", reinterpret_cast<void*>(glTexParameterIuiv));
         gSpy->RegisterSymbol("glTexParameterf", reinterpret_cast<void*>(glTexParameterf));
         gSpy->RegisterSymbol("glTexParameterfv", reinterpret_cast<void*>(glTexParameterfv));
         gSpy->RegisterSymbol("glTexParameteri", reinterpret_cast<void*>(glTexParameteri));
@@ -2060,6 +2158,8 @@ Spy* spy() {
         gSpy->RegisterSymbol("glTexStorage2DMultisample",
                              reinterpret_cast<void*>(glTexStorage2DMultisample));
         gSpy->RegisterSymbol("glTexStorage3D", reinterpret_cast<void*>(glTexStorage3D));
+        gSpy->RegisterSymbol("glTexStorage3DMultisample",
+                             reinterpret_cast<void*>(glTexStorage3DMultisample));
         gSpy->RegisterSymbol("glTexSubImage2D", reinterpret_cast<void*>(glTexSubImage2D));
         gSpy->RegisterSymbol("glTexSubImage3D", reinterpret_cast<void*>(glTexSubImage3D));
         gSpy->RegisterSymbol("glBeginTransformFeedback",
@@ -2508,6 +2608,12 @@ glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type,
     gapic::Lock<Spy> lock__(s);
     s->glDrawElements(draw_mode, element_count, indices_type, indices);
 }
+EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint32_t type,
+                                             void* indices, int32_t basevertex) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+}
 EXPORT void STDCALL glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -2519,11 +2625,36 @@ EXPORT void STDCALL glDrawElementsInstanced(uint32_t mode, int32_t count, uint32
     gapic::Lock<Spy> lock__(s);
     s->glDrawElementsInstanced(mode, count, type, indices, instancecount);
 }
+EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t count, uint32_t type,
+                                                      void* indices, int32_t instancecount,
+                                                      int32_t basevertex) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex);
+}
 EXPORT void STDCALL glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
                                         uint32_t type, void* indices) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glDrawRangeElements(mode, start, end, count, type, indices);
+}
+EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start, uint32_t end,
+                                                  int32_t count, uint32_t type, void* indices,
+                                                  int32_t basevertex) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+}
+EXPORT void STDCALL glPatchParameteri(uint32_t pname, int32_t value) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPatchParameteri(pname, value);
+}
+EXPORT void STDCALL glPrimitiveBoundingBox(float minX, float minY, float minZ, float minW,
+                                           float maxX, float maxY, float maxZ, float maxW) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
 }
 EXPORT void STDCALL glActiveShaderProgramEXT(uint32_t pipeline, uint32_t program) {
     Spy* s = spy();
@@ -2534,6 +2665,11 @@ EXPORT void STDCALL glAlphaFuncQCOM(uint32_t func, float ref) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glAlphaFuncQCOM(func, ref);
+}
+EXPORT void STDCALL glApplyFramebufferAttachmentCMAAINTEL() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glApplyFramebufferAttachmentCMAAINTEL();
 }
 EXPORT void STDCALL glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
     Spy* s = spy();
@@ -2711,6 +2847,16 @@ EXPORT void STDCALL glCoverageMaskNV(uint8_t mask) {
     gapic::Lock<Spy> lock__(s);
     s->glCoverageMaskNV(mask);
 }
+EXPORT void STDCALL glCoverageModulationNV(uint32_t components) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glCoverageModulationNV(components);
+}
+EXPORT void STDCALL glCoverageModulationTableNV(int32_t n, float* v) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glCoverageModulationTableNV(n, v);
+}
 EXPORT void STDCALL glCoverageOperationNV(uint32_t operation) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -2864,6 +3010,15 @@ glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t ty
                                               baseinstance);
 }
 EXPORT void STDCALL
+glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type,
+                                                 void* indices, int32_t instancecount,
+                                                 int32_t basevertex, uint32_t baseinstance) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount,
+                                                        basevertex, baseinstance);
+}
+EXPORT void STDCALL
 glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t count, uint32_t type, void* indices,
                                      int32_t instancecount, int32_t basevertex) {
     Spy* s = spy();
@@ -2876,15 +3031,6 @@ glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t count, uint32_t type
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glDrawElementsInstancedBaseVertexOES(mode, count, type, indices, instancecount, basevertex);
-}
-EXPORT void STDCALL
-glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t mode, int32_t count, uint32_t type,
-                                                 void* indices, int32_t instancecount,
-                                                 int32_t basevertex, uint32_t baseinstance) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount,
-                                                        basevertex, baseinstance);
 }
 EXPORT void STDCALL glDrawElementsInstancedEXT(uint32_t mode, int32_t count, uint32_t type,
                                                void* indices, int32_t primcount) {
@@ -3050,6 +3196,17 @@ EXPORT void STDCALL glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset,
     gapic::Lock<Spy> lock__(s);
     s->glFlushMappedBufferRangeEXT(target, offset, length);
 }
+EXPORT void STDCALL glFragmentCoverageColorNV(uint32_t color) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFragmentCoverageColorNV(color);
+}
+EXPORT void STDCALL
+glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start, int32_t count, float* v) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferSampleLocationsfvNV(target, start, count, v);
+}
 EXPORT void STDCALL glFramebufferTexture2DMultisampleEXT(uint32_t target, uint32_t attachment,
                                                          uint32_t textarget, uint32_t texture,
                                                          int32_t level, int32_t samples) {
@@ -3071,12 +3228,6 @@ EXPORT void STDCALL glFramebufferTexture3DOES(uint32_t target, uint32_t attachme
     gapic::Lock<Spy> lock__(s);
     s->glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset);
 }
-EXPORT void STDCALL
-glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glFramebufferTextureOES(target, attachment, texture, level);
-}
 EXPORT void STDCALL glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t attachment,
                                                      uint32_t texture, int32_t level,
                                                      int32_t baseViewIndex, int32_t numViews) {
@@ -3084,6 +3235,12 @@ EXPORT void STDCALL glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t a
     gapic::Lock<Spy> lock__(s);
     s->glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex,
                                         numViews);
+}
+EXPORT void STDCALL
+glFramebufferTextureOES(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferTextureOES(target, attachment, texture, level);
 }
 EXPORT void STDCALL glGenFencesNV(int32_t n, uint32_t* fences) {
     Spy* s = spy();
@@ -3119,6 +3276,11 @@ EXPORT void STDCALL glGetBufferPointervOES(uint32_t target, uint32_t pname, void
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetBufferPointervOES(target, pname, params);
+}
+EXPORT void STDCALL glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetCoverageModulationTableNV(bufsize, v);
 }
 EXPORT void STDCALL glGetDriverControlStringQCOM(uint32_t driverControl, int32_t bufSize,
                                                  int32_t* length, char* driverControlString) {
@@ -3449,15 +3611,15 @@ glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB, float 
     gapic::Lock<Spy> lock__(s);
     s->glInterpolatePathsNV(resultPath, pathA, pathB, weight);
 }
-EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    return s->glIsEnablediOES(target, index);
-}
 EXPORT uint8_t STDCALL glIsEnablediNV(uint32_t target, uint32_t index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnablediNV(target, index);
+}
+EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glIsEnablediOES(target, index);
 }
 EXPORT uint8_t STDCALL glIsFenceNV(uint32_t fence) {
     Spy* s = spy();
@@ -3612,6 +3774,12 @@ EXPORT void STDCALL glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type,
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride);
+}
+EXPORT void STDCALL glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
+                                                          int32_t count, float* v) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
 }
 EXPORT void STDCALL glPatchParameteriOES(uint32_t pname, int32_t value) {
     Spy* s = spy();
@@ -3994,6 +4162,11 @@ EXPORT void STDCALL glQueryCounterEXT(uint32_t query, uint32_t target) {
     gapic::Lock<Spy> lock__(s);
     s->glQueryCounterEXT(query, target);
 }
+EXPORT void STDCALL glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glRasterSamplesEXT(samples, fixedsamplelocations);
+}
 EXPORT void STDCALL glReadBufferIndexedEXT(uint32_t src, int32_t index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -4050,6 +4223,11 @@ EXPORT void STDCALL glRenderbufferStorageMultisampleNV(uint32_t target, int32_t 
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height);
+}
+EXPORT void STDCALL glResolveDepthValuesNV() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glResolveDepthValuesNV();
 }
 EXPORT void STDCALL glResolveMultisampleFramebufferAPPLE() {
     Spy* s = spy();
@@ -4158,6 +4336,11 @@ EXPORT void STDCALL glStencilThenCoverStrokePathNV(uint32_t path, int32_t refere
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glStencilThenCoverStrokePathNV(path, reference, mask, coverMode);
+}
+EXPORT void STDCALL glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glSubpixelPrecisionBiasNV(xbits, ybits);
 }
 EXPORT uint8_t STDCALL glTestFenceNV(uint32_t fence) {
     Spy* s = spy();
@@ -4371,52 +4554,10 @@ glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint32_t* paths, float* w
     gapic::Lock<Spy> lock__(s);
     s->glWeightPathsNV(resultPath, numPaths, paths, weights);
 }
-EXPORT void STDCALL glCoverageModulationNV(uint32_t components) {
+EXPORT void STDCALL glBlendBarrier() {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glCoverageModulationNV(components);
-}
-EXPORT void STDCALL glCoverageModulationTableNV(int32_t n, float* v) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glCoverageModulationTableNV(n, v);
-}
-EXPORT void STDCALL glFragmentCoverageColorNV(uint32_t color) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glFragmentCoverageColorNV(color);
-}
-EXPORT void STDCALL
-glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t start, int32_t count, float* v) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glFramebufferSampleLocationsfvNV(target, start, count, v);
-}
-EXPORT void STDCALL glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glGetCoverageModulationTableNV(bufsize, v);
-}
-EXPORT void STDCALL glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer, uint32_t start,
-                                                          int32_t count, float* v) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
-}
-EXPORT void STDCALL glRasterSamplesEXT(uint32_t samples, uint8_t fixedsamplelocations) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glRasterSamplesEXT(samples, fixedsamplelocations);
-}
-EXPORT void STDCALL glResolveDepthValuesNV() {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glResolveDepthValuesNV();
-}
-EXPORT void STDCALL glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glSubpixelPrecisionBiasNV(xbits, ybits);
+    s->glBlendBarrier();
 }
 EXPORT void STDCALL glBlendColor(float red, float green, float blue, float alpha) {
     Spy* s = spy();
@@ -4433,6 +4574,16 @@ EXPORT void STDCALL glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     gapic::Lock<Spy> lock__(s);
     s->glBlendEquationSeparate(rgb, alpha);
 }
+EXPORT void STDCALL glBlendEquationSeparatei(uint32_t buf, uint32_t modeRGB, uint32_t modeAlpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
+}
+EXPORT void STDCALL glBlendEquationi(uint32_t buf, uint32_t mode) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendEquationi(buf, mode);
+}
 EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -4443,6 +4594,17 @@ EXPORT void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_fa
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha, dst_factor_alpha);
+}
+EXPORT void STDCALL glBlendFuncSeparatei(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
+                                         uint32_t srcAlpha, uint32_t dstAlpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+}
+EXPORT void STDCALL glBlendFunci(uint32_t buf, uint32_t src, uint32_t dst) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendFunci(buf, src, dst);
 }
 EXPORT void STDCALL glDepthFunc(uint32_t function) {
     Spy* s = spy();
@@ -4555,6 +4717,11 @@ EXPORT void STDCALL glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_
     gapic::Lock<Spy> lock__(s);
     s->glColorMask(red, green, blue, alpha);
 }
+EXPORT void STDCALL glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColorMaski(index, r, g, b, a);
+}
 EXPORT void STDCALL glDeleteFramebuffers(int32_t count, uint32_t* framebuffers) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -4582,6 +4749,12 @@ EXPORT void STDCALL glFramebufferRenderbuffer(uint32_t framebuffer_target,
     gapic::Lock<Spy> lock__(s);
     s->glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment, renderbuffer_target,
                                  renderbuffer);
+}
+EXPORT void STDCALL
+glFramebufferTexture(uint32_t target, uint32_t attachment, uint32_t texture, int32_t level) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferTexture(target, attachment, texture, level);
 }
 EXPORT void STDCALL glFramebufferTexture2D(uint32_t framebuffer_target,
                                            uint32_t framebuffer_attachment, uint32_t texture_target,
@@ -4658,6 +4831,12 @@ EXPORT void STDCALL glReadPixels(int32_t x, int32_t y, int32_t width, int32_t he
     gapic::Lock<Spy> lock__(s);
     s->glReadPixels(x, y, width, height, format, type, data);
 }
+EXPORT void STDCALL glReadnPixels(int32_t x, int32_t y, int32_t width, int32_t height,
+                                  uint32_t format, uint32_t type, int32_t bufSize, void* data) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glReadnPixels(x, y, width, height, format, type, bufSize, data);
+}
 EXPORT void STDCALL
 glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width, int32_t height) {
     Spy* s = spy();
@@ -4686,10 +4865,20 @@ EXPORT void STDCALL glDisable(uint32_t capability) {
     gapic::Lock<Spy> lock__(s);
     s->glDisable(capability);
 }
+EXPORT void STDCALL glDisablei(uint32_t target, uint32_t index) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDisablei(target, index);
+}
 EXPORT void STDCALL glEnable(uint32_t capability) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glEnable(capability);
+}
+EXPORT void STDCALL glEnablei(uint32_t target, uint32_t index) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glEnablei(target, index);
 }
 EXPORT void STDCALL glFinish() {
     Spy* s = spy();
@@ -4710,6 +4899,11 @@ EXPORT uint32_t STDCALL glGetError() {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glGetError();
+}
+EXPORT uint32_t STDCALL glGetGraphicsResetStatus() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glGetGraphicsResetStatus();
 }
 EXPORT void STDCALL glHint(uint32_t target, uint32_t mode) {
     Spy* s = spy();
@@ -4959,6 +5153,24 @@ EXPORT void STDCALL glGetUniformuiv(uint32_t program, int32_t location, uint32_t
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetUniformuiv(program, location, params);
+}
+EXPORT void STDCALL
+glGetnUniformfv(uint32_t program, int32_t location, int32_t bufSize, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetnUniformfv(program, location, bufSize, params);
+}
+EXPORT void STDCALL
+glGetnUniformiv(uint32_t program, int32_t location, int32_t bufSize, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetnUniformiv(program, location, bufSize, params);
+}
+EXPORT void STDCALL
+glGetnUniformuiv(uint32_t program, int32_t location, int32_t bufSize, uint32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetnUniformuiv(program, location, bufSize, params);
 }
 EXPORT uint8_t STDCALL glIsProgram(uint32_t program) {
     Spy* s = spy();
@@ -5438,6 +5650,11 @@ EXPORT void STDCALL glLineWidth(float width) {
     gapic::Lock<Spy> lock__(s);
     s->glLineWidth(width);
 }
+EXPORT void STDCALL glMinSampleShading(float value) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMinSampleShading(value);
+}
 EXPORT void STDCALL glPolygonOffset(float scale_factor, float units) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -5503,6 +5720,11 @@ EXPORT uint8_t STDCALL glIsEnabled(uint32_t capability) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnabled(capability);
+}
+EXPORT uint8_t STDCALL glIsEnabledi(uint32_t target, uint32_t index) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glIsEnabledi(target, index);
 }
 EXPORT uint32_t STDCALL glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
     Spy* s = spy();
@@ -5589,6 +5811,16 @@ EXPORT void STDCALL glCompressedTexSubImage3D(uint32_t target, int32_t level, in
     s->glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                  format, imageSize, data);
 }
+EXPORT void STDCALL glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, int32_t srcLevel,
+                                       int32_t srcX, int32_t srcY, int32_t srcZ, uint32_t dstName,
+                                       uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
+                                       int32_t dstY, int32_t dstZ, int32_t srcWidth,
+                                       int32_t srcHeight, int32_t srcDepth) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget,
+                          dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+}
 EXPORT void STDCALL glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                      int32_t y, int32_t width, int32_t height, int32_t border) {
     Spy* s = spy();
@@ -5634,6 +5866,16 @@ EXPORT void STDCALL glGenerateMipmap(uint32_t target) {
     gapic::Lock<Spy> lock__(s);
     s->glGenerateMipmap(target);
 }
+EXPORT void STDCALL glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetSamplerParameterIiv(sampler, pname, params);
+}
+EXPORT void STDCALL glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname, uint32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetSamplerParameterIuiv(sampler, pname, params);
+}
 EXPORT void STDCALL glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, float* params) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -5655,6 +5897,16 @@ glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname, int32_t
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetTexLevelParameteriv(target, level, pname, params);
+}
+EXPORT void STDCALL glGetTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexParameterIiv(target, pname, params);
+}
+EXPORT void STDCALL glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexParameterIuiv(target, pname, params);
 }
 EXPORT void STDCALL glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
     Spy* s = spy();
@@ -5681,6 +5933,16 @@ EXPORT void STDCALL glPixelStorei(uint32_t parameter, int32_t value) {
     gapic::Lock<Spy> lock__(s);
     s->glPixelStorei(parameter, value);
 }
+EXPORT void STDCALL glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glSamplerParameterIiv(sampler, pname, param);
+}
+EXPORT void STDCALL glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, uint32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glSamplerParameterIuiv(sampler, pname, param);
+}
 EXPORT void STDCALL glSamplerParameterf(uint32_t sampler, uint32_t pname, float param) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -5701,6 +5963,17 @@ EXPORT void STDCALL glSamplerParameteriv(uint32_t sampler, uint32_t pname, int32
     gapic::Lock<Spy> lock__(s);
     s->glSamplerParameteriv(sampler, pname, param);
 }
+EXPORT void STDCALL glTexBuffer(uint32_t target, uint32_t internalformat, uint32_t buffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexBuffer(target, internalformat, buffer);
+}
+EXPORT void STDCALL glTexBufferRange(uint32_t target, uint32_t internalformat, uint32_t buffer,
+                                     int32_t offset, int32_t size) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexBufferRange(target, internalformat, buffer, offset, size);
+}
 EXPORT void STDCALL glTexImage2D(uint32_t target, int32_t level, int32_t internal_format,
                                  int32_t width, int32_t height, int32_t border, uint32_t format,
                                  uint32_t type, void* data) {
@@ -5715,6 +5988,16 @@ EXPORT void STDCALL glTexImage3D(uint32_t target, int32_t level, int32_t interna
     gapic::Lock<Spy> lock__(s);
     s->glTexImage3D(target, level, internalformat, width, height, depth, border, format, type,
                     pixels);
+}
+EXPORT void STDCALL glTexParameterIiv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterIiv(target, pname, params);
+}
+EXPORT void STDCALL glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterIuiv(target, pname, params);
 }
 EXPORT void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value) {
     Spy* s = spy();
@@ -5755,6 +6038,14 @@ EXPORT void STDCALL glTexStorage3D(uint32_t target, int32_t levels, uint32_t int
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glTexStorage3D(target, levels, internalformat, width, height, depth);
+}
+EXPORT void STDCALL
+glTexStorage3DMultisample(uint32_t target, int32_t samples, uint32_t internalformat, int32_t width,
+                          int32_t height, int32_t depth, uint8_t fixedsamplelocations) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexStorage3DMultisample(target, samples, internalformat, width, height, depth,
+                                 fixedsamplelocations);
 }
 EXPORT void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                     int32_t yoffset, int32_t width, int32_t height, uint32_t format,

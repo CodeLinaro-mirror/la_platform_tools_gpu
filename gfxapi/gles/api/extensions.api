@@ -24,6 +24,12 @@ cmd void glAlphaFuncQCOM(GLenum func, GLclampf ref) {
   // TODO
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/INTEL/framebuffer_CMAA.txt","GL_INTEL_framebuffer_CMAA")
+cmd void glApplyFramebufferAttachmentCMAAINTEL() {
+  requiresExtension(GL_INTEL_framebuffer_CMAA)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/conditional_render.txt","GL_NV_conditional_render")
 cmd void glBeginConditionalRenderNV(GLuint id, GLenum mode) {
   requiresExtension(GL_NV_conditional_render)
@@ -288,6 +294,18 @@ cmd void glCoverageMaskNV(GLboolean mask) {
   // TODO
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
+cmd void glCoverageModulationNV(GLenum components) {
+  requiresExtension(GL_NV_framebuffer_mixed_samples)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
+cmd void glCoverageModulationTableNV(GLsizei n, const GLfloat* v) {
+  requiresExtension(GL_NV_framebuffer_mixed_samples)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/EGL_NV_coverage_sample.txt","GL_NV_coverage_sample")
 cmd void glCoverageOperationNV(GLenum operation) {
   requiresExtension(GL_NV_coverage_sample)
@@ -406,12 +424,14 @@ cmd void glDiscardFramebufferEXT(GLenum        target,
 
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/ANGLE/ANGLE_instanced_arrays.txt","GL_ANGLE_instanced_arrays")
 cmd void glDrawArraysInstancedANGLE(GLenum mode, GLint first, GLsizei count, GLsizei primcount) {
   requiresExtension(GL_ANGLE_instanced_arrays)
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_base_instance.txt","GL_EXT_base_instance")
 cmd void glDrawArraysInstancedBaseInstanceEXT(GLenum  mode,
                                               GLint   first,
@@ -422,6 +442,7 @@ cmd void glDrawArraysInstancedBaseInstanceEXT(GLenum  mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/draw_instanced.txt","GL_EXT_draw_instanced")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_instanced_arrays.txt","GL_EXT_instanced_arrays")
 cmd void glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount) {
@@ -431,30 +452,35 @@ cmd void glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsiz
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_draw_instanced.txt","GL_NV_draw_instanced")
 cmd void glDrawArraysInstancedNV(GLenum mode, GLint first, GLsizei count, GLsizei primcount) {
   requiresExtension(GL_NV_draw_instanced)
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers.txt","GL_EXT_draw_buffers")
 cmd void glDrawBuffersEXT(GLsizei n, const GLenum* bufs) {
   requiresExtension(GL_EXT_draw_buffers)
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_multiview_draw_buffers.txt","GL_EXT_multiview_draw_buffers")
 cmd void glDrawBuffersIndexedEXT(GLint n, const GLenum* location, const GLint* indices) {
   requiresExtension(GL_EXT_multiview_draw_buffers)
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_draw_buffers.txt","GL_NV_draw_buffers")
 cmd void glDrawBuffersNV(GLsizei n, const GLenum* bufs) {
   requiresExtension(GL_NV_draw_buffers)
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_elements_base_vertex.txt","GL_EXT_draw_elements_base_vertex")
 cmd void glDrawElementsBaseVertexEXT(GLenum      mode,
                                      GLsizei     count,
@@ -465,6 +491,7 @@ cmd void glDrawElementsBaseVertexEXT(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_elements_base_vertex.txt","GL_OES_draw_elements_base_vertex")
 cmd void glDrawElementsBaseVertexOES(GLenum      mode,
                                      GLsizei     count,
@@ -475,6 +502,7 @@ cmd void glDrawElementsBaseVertexOES(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/ANGLE/ANGLE_instanced_arrays.txt","GL_ANGLE_instanced_arrays")
 cmd void glDrawElementsInstancedANGLE(GLenum      mode,
                                       GLsizei     count,
@@ -485,6 +513,7 @@ cmd void glDrawElementsInstancedANGLE(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_base_instance.txt","GL_EXT_base_instance")
 cmd void glDrawElementsInstancedBaseInstanceEXT(GLenum      mode,
                                                 GLsizei     count,
@@ -496,28 +525,7 @@ cmd void glDrawElementsInstancedBaseInstanceEXT(GLenum      mode,
   // TODO
 }
 
-@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_elements_base_vertex.txt","GL_EXT_draw_elements_base_vertex")
-cmd void glDrawElementsInstancedBaseVertexEXT(GLenum      mode,
-                                              GLsizei     count,
-                                              GLenum      type,
-                                              const void* indices,
-                                              GLsizei     instancecount,
-                                              GLint       basevertex) {
-  requiresExtension(GL_EXT_draw_elements_base_vertex)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_elements_base_vertex.txt","GL_OES_draw_elements_base_vertex")
-cmd void glDrawElementsInstancedBaseVertexOES(GLenum      mode,
-                                              GLsizei     count,
-                                              GLenum      type,
-                                              const void* indices,
-                                              GLsizei     instancecount,
-                                              GLint       basevertex) {
-  requiresExtension(GL_OES_draw_elements_base_vertex)
-  // TODO
-}
-
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_base_instance.txt","GL_EXT_base_instance")
 cmd void glDrawElementsInstancedBaseVertexBaseInstanceEXT(GLenum      mode,
                                                           GLsizei     count,
@@ -530,6 +538,31 @@ cmd void glDrawElementsInstancedBaseVertexBaseInstanceEXT(GLenum      mode,
   // TODO
 }
 
+@DrawCall
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_elements_base_vertex.txt","GL_EXT_draw_elements_base_vertex")
+cmd void glDrawElementsInstancedBaseVertexEXT(GLenum      mode,
+                                              GLsizei     count,
+                                              GLenum      type,
+                                              const void* indices,
+                                              GLsizei     instancecount,
+                                              GLint       basevertex) {
+  requiresExtension(GL_EXT_draw_elements_base_vertex)
+  // TODO
+}
+
+@DrawCall
+@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_elements_base_vertex.txt","GL_OES_draw_elements_base_vertex")
+cmd void glDrawElementsInstancedBaseVertexOES(GLenum      mode,
+                                              GLsizei     count,
+                                              GLenum      type,
+                                              const void* indices,
+                                              GLsizei     instancecount,
+                                              GLint       basevertex) {
+  requiresExtension(GL_OES_draw_elements_base_vertex)
+  // TODO
+}
+
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/draw_instanced.txt","GL_EXT_draw_instanced")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_instanced_arrays.txt","GL_EXT_instanced_arrays")
 cmd void glDrawElementsInstancedEXT(GLenum      mode,
@@ -543,6 +576,7 @@ cmd void glDrawElementsInstancedEXT(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_draw_instanced.txt","GL_NV_draw_instanced")
 cmd void glDrawElementsInstancedNV(GLenum      mode,
                                    GLsizei     count,
@@ -553,6 +587,7 @@ cmd void glDrawElementsInstancedNV(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_elements_base_vertex.txt","GL_EXT_draw_elements_base_vertex")
 cmd void glDrawRangeElementsBaseVertexEXT(GLenum      mode,
                                           GLuint      start,
@@ -565,6 +600,7 @@ cmd void glDrawRangeElementsBaseVertexEXT(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_elements_base_vertex.txt","GL_OES_draw_elements_base_vertex")
 cmd void glDrawRangeElementsBaseVertexOES(GLenum      mode,
                                           GLuint      start,
@@ -753,6 +789,21 @@ cmd void glFlushMappedBufferRangeEXT(GLenum target, GLintptr offset, GLsizeiptr 
   // TODO
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/fragment_coverage_to_color.txt","GL_NV_fragment_coverage_to_color")
+cmd void glFragmentCoverageColorNV(GLuint color) {
+  requiresExtension(GL_NV_fragment_coverage_to_color)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
+cmd void glFramebufferSampleLocationsfvNV(GLenum         target,
+                                          GLuint         start,
+                                          GLsizei        count,
+                                          const GLfloat* v) {
+  requiresExtension(GL_NV_sample_locations)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_multisampled_render_to_texture.txt","GL_EXT_multisampled_render_to_texture")
 cmd void glFramebufferTexture2DMultisampleEXT(GLenum    target,
                                               GLenum    attachment,
@@ -786,12 +837,6 @@ cmd void glFramebufferTexture3DOES(GLenum    target,
   // TODO
 }
 
-@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_geometry_shader.txt","GL_OES_geometry_shader")
-cmd void glFramebufferTextureOES(GLenum target, GLenum attachment, TextureId texture, GLint level) {
-  requiresExtension(GL_OES_geometry_shader)
-  // TODO
-}
-
 @Doc("https://www.khronos.org/registry/gles/extensions/OVR/multiview.txt","GL_OVR_multiview")
 cmd void glFramebufferTextureMultiviewOVR(GLenum    target,
                                           GLenum    attachment,
@@ -800,6 +845,12 @@ cmd void glFramebufferTextureMultiviewOVR(GLenum    target,
                                           GLint     baseViewIndex,
                                           GLsizei   numViews) {
   requiresExtension(GL_OVR_multiview)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_geometry_shader.txt","GL_OES_geometry_shader")
+cmd void glFramebufferTextureOES(GLenum target, GLenum attachment, TextureId texture, GLint level) {
+  requiresExtension(GL_OES_geometry_shader)
   // TODO
 }
 
@@ -860,6 +911,12 @@ cmd void glGenVertexArraysOES(GLsizei count, VertexArrayId* arrays) {
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_mapbuffer.txt","GL_OES_mapbuffer")
 cmd void glGetBufferPointervOES(GLenum target, GLenum pname, void** params) {
   requiresExtension(GL_OES_mapbuffer)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
+cmd void glGetCoverageModulationTableNV(GLsizei bufsize, GLfloat* v) {
+  requiresExtension(GL_NV_framebuffer_mixed_samples)
   // TODO
 }
 
@@ -1331,16 +1388,16 @@ cmd void glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLf
   // TODO
 }
 
-@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd GLboolean glIsEnablediOES(GLenum target, GLuint index) {
-  requiresExtension(GL_OES_draw_buffers_indexed)
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_viewport_array.txt","GL_NV_viewport_array")
+cmd GLboolean glIsEnablediNV(GLenum target, GLuint index) {
+  requiresExtension(GL_NV_viewport_array)
   // TODO
   return ?
 }
 
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_viewport_array.txt","GL_NV_viewport_array")
-cmd GLboolean glIsEnablediNV(GLenum target, GLuint index) {
-  requiresExtension(GL_NV_viewport_array)
+@Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
+cmd GLboolean glIsEnablediOES(GLenum target, GLuint index) {
+  requiresExtension(GL_OES_draw_buffers_indexed)
   // TODO
   return ?
 }
@@ -1560,6 +1617,15 @@ cmd void glMultiDrawElementsIndirectEXT(GLenum      mode,
                                         GLsizei     drawcount,
                                         GLsizei     stride) {
   requiresExtension(GL_EXT_multi_draw_indirect)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
+cmd void glNamedFramebufferSampleLocationsfvNV(FramebufferId  framebuffer,
+                                               GLuint         start,
+                                               GLsizei        count,
+                                               const GLfloat* v) {
+  requiresExtension(GL_NV_sample_locations)
   // TODO
 }
 
@@ -2128,6 +2194,17 @@ cmd void glQueryCounterEXT(QueryId query, GLenum target) {
 
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/raster_multisample.txt","GL_EXT_raster_multisample")
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/texture_filter_minmax.txt","GL_EXT_texture_filter_minmax")
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
+cmd void glRasterSamplesEXT(GLuint samples, GLboolean fixedsamplelocations) {
+  requiresExtension(GL_EXT_raster_multisample)
+  requiresExtension(GL_EXT_texture_filter_minmax)
+  requiresExtension(GL_NV_framebuffer_mixed_samples)
+  // TODO: Multiple extensions
+  // TODO
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_multiview_draw_buffers.txt","GL_EXT_multiview_draw_buffers")
 cmd void glReadBufferIndexedEXT(GLenum src, GLint index) {
   requiresExtension(GL_EXT_multiview_draw_buffers)
@@ -2213,6 +2290,12 @@ cmd void glRenderbufferStorageMultisampleNV(GLenum  target,
                                             GLsizei width,
                                             GLsizei height) {
   requiresExtension(GL_NV_framebuffer_multisample)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
+cmd void glResolveDepthValuesNV() {
+  requiresExtension(GL_NV_sample_locations)
   // TODO
 }
 
@@ -2356,6 +2439,12 @@ cmd void glStencilThenCoverStrokePathNV(GLuint path,
                                         GLuint mask,
                                         GLenum coverMode) {
   requiresExtension(GL_NV_path_rendering)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/NV/conservative_raster.txt","GL_NV_conservative_raster")
+cmd void glSubpixelPrecisionBiasNV(GLuint xbits, GLuint ybits) {
+  requiresExtension(GL_NV_conservative_raster)
   // TODO
 }
 
@@ -2667,71 +2756,6 @@ cmd void glWeightPathsNV(GLuint         resultPath,
                          const GLuint*  paths,
                          const GLfloat* weights) {
   requiresExtension(GL_NV_path_rendering)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
-cmd void glCoverageModulationNV(GLenum components) {
-  requiresExtension(GL_NV_framebuffer_mixed_samples)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
-cmd void glCoverageModulationTableNV(GLsizei n, const GLfloat* v) {
-  requiresExtension(GL_NV_framebuffer_mixed_samples)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/fragment_coverage_to_color.txt","GL_NV_fragment_coverage_to_color")
-cmd void glFragmentCoverageColorNV(GLuint color) {
-  requiresExtension(GL_NV_fragment_coverage_to_color)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
-cmd void glFramebufferSampleLocationsfvNV(GLenum         target,
-                                          GLuint         start,
-                                          GLsizei        count,
-                                          const GLfloat* v) {
-  requiresExtension(GL_NV_sample_locations)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
-cmd void glGetCoverageModulationTableNV(GLsizei bufsize, GLfloat* v) {
-  requiresExtension(GL_NV_framebuffer_mixed_samples)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
-cmd void glNamedFramebufferSampleLocationsfvNV(FramebufferId  framebuffer,
-                                               GLuint         start,
-                                               GLsizei        count,
-                                               const GLfloat* v) {
-  requiresExtension(GL_NV_sample_locations)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/EXT/raster_multisample.txt","GL_EXT_raster_multisample")
-@Doc("https://www.khronos.org/registry/gles/extensions/EXT/texture_filter_minmax.txt","GL_EXT_texture_filter_minmax")
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
-cmd void glRasterSamplesEXT(GLuint samples, GLboolean fixedsamplelocations) {
-  requiresExtension(GL_EXT_raster_multisample)
-  requiresExtension(GL_EXT_texture_filter_minmax)
-  requiresExtension(GL_NV_framebuffer_mixed_samples)
-  // TODO: Multiple extensions
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/sample_locations.txt","GL_NV_sample_locations")
-cmd void glResolveDepthValuesNV() {
-  requiresExtension(GL_NV_sample_locations)
-  // TODO
-}
-
-@Doc("https://www.khronos.org/registry/gles/extensions/NV/conservative_raster.txt","GL_NV_conservative_raster")
-cmd void glSubpixelPrecisionBiasNV(GLuint xbits, GLuint ybits) {
-  requiresExtension(GL_NV_conservative_raster)
   // TODO
 }
 

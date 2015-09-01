@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendBarrier.xhtml","OpenGL ES 3.2")
+cmd void glBlendBarrier() {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendColor.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendColor.xhtml","OpenGL ES 3.1")
@@ -85,6 +91,42 @@ cmd void glBlendEquationSeparate(GLenum rgb, GLenum alpha) {
   ctx.Blending.BlendEquationAlpha = alpha
 }
 
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.2")
+cmd void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) {
+  minRequiredVersion(3, 2)
+  switch (modeRGB) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT, GL_MAX, GL_MIN: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(modeRGB)
+    }
+  }
+  switch (modeAlpha) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT, GL_MAX, GL_MIN: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(modeAlpha)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquation.xhtml","OpenGL ES 3.2")
+cmd void glBlendEquationi(GLuint buf, GLenum mode) {
+  minRequiredVersion(3, 2)
+  switch (mode) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT, GL_MAX, GL_MIN: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(mode)
+    }
+  }
+  // TODO
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendFunc.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFunc.xhtml","OpenGL ES 3.1")
@@ -106,7 +148,7 @@ cmd void glBlendFunc(GLenum src_factor, GLenum dst_factor) {
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
         GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
-        GL_SRC_COLOR, GL_ZERO: {
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
       // version 2.0
     }
     default: {
@@ -145,7 +187,7 @@ cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
         GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
-        GL_SRC_COLOR, GL_ZERO: {
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
       // version 2.0
     }
     default: {
@@ -167,7 +209,7 @@ cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
         GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
-        GL_SRC_COLOR, GL_ZERO: {
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
       // version 2.0
     }
     default: {
@@ -180,6 +222,88 @@ cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
   ctx.Blending.DstRgbBlendFactor = dst_factor_rgb
   ctx.Blending.SrcAlphaBlendFactor = src_factor_alpha
   ctx.Blending.DstAlphaBlendFactor = dst_factor_alpha
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.2")
+cmd void glBlendFuncSeparatei(GLuint buf,
+                              GLenum srcRGB,
+                              GLenum dstRGB,
+                              GLenum srcAlpha,
+                              GLenum dstAlpha) {
+  minRequiredVersion(3, 2)
+  switch (srcRGB) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(srcRGB)
+    }
+  }
+  switch (dstRGB) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(dstRGB)
+    }
+  }
+  switch (srcAlpha) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(srcAlpha)
+    }
+  }
+  switch (dstAlpha) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(dstAlpha)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFunc.xhtml","OpenGL ES 3.2")
+cmd void glBlendFunci(GLuint buf, GLenum src, GLenum dst) {
+  minRequiredVersion(3, 2)
+  switch (src) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(src)
+    }
+  }
+  switch (dst) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(dst)
+    }
+  }
+  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml","OpenGL ES 2.0")

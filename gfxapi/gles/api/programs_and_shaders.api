@@ -87,6 +87,9 @@ cmd ShaderId glCreateShader(GLenum type) {
     case GL_COMPUTE_SHADER: {
       minRequiredVersion(3, 1)
     }
+    case GL_GEOMETRY_SHADER, GL_TESS_CONTROL_SHADER, GL_TESS_EVALUATION_SHADER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(type)
     }
@@ -107,6 +110,9 @@ cmd ProgramId glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar* c
   switch (type) {
     case GL_COMPUTE_SHADER, GL_FRAGMENT_SHADER, GL_VERTEX_SHADER: {
       // version 3.1
+    }
+    case GL_GEOMETRY_SHADER, GL_TESS_CONTROL_SHADER, GL_TESS_EVALUATION_SHADER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(type)
@@ -411,6 +417,9 @@ cmd void glGetProgramPipelineiv(PipelineId pipeline, GLenum pname, GLint* params
         GL_VALIDATE_STATUS, GL_VERTEX_SHADER: {
       // version 3.1
     }
+    case GL_GEOMETRY_SHADER, GL_TESS_CONTROL_SHADER, GL_TESS_EVALUATION_SHADER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(pname)
     }
@@ -519,6 +528,12 @@ cmd void glGetProgramiv(ProgramId program, GLenum parameter, GLint* value) {
     }
     case GL_ACTIVE_ATOMIC_COUNTER_BUFFERS, GL_COMPUTE_WORK_GROUP_SIZE, GL_PROGRAM_SEPARABLE: {
       minRequiredVersion(3, 1)
+    }
+    case GL_GEOMETRY_INPUT_TYPE, GL_GEOMETRY_OUTPUT_TYPE,
+        GL_GEOMETRY_VERTICES_OUT, GL_GEOMETRY_SHADER_INVOCATIONS,
+        GL_TESS_CONTROL_OUTPUT_VERTICES, GL_TESS_GEN_MODE, GL_TESS_GEN_POINT_MODE,
+        GL_TESS_GEN_SPACING, GL_TESS_GEN_VERTEX_ORDER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(parameter)
@@ -676,6 +691,33 @@ cmd void glGetUniformiv(ProgramId program, UniformLocation location, GLint* valu
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* params) {
   minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
+cmd void glGetnUniformfv(ProgramId       program,
+                         UniformLocation location,
+                         GLsizei         bufSize,
+                         GLfloat*        params) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
+cmd void glGetnUniformiv(ProgramId       program,
+                         UniformLocation location,
+                         GLsizei         bufSize,
+                         GLint*          params) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
+cmd void glGetnUniformuiv(ProgramId       program,
+                          UniformLocation location,
+                          GLsizei         bufSize,
+                          GLuint*         params) {
+  minRequiredVersion(3, 2)
   // TODO
 }
 

@@ -15,11 +15,11 @@
 package main
 
 import (
-	"android.googlesource.com/platform/tools/gpu/api/ast"
-	"android.googlesource.com/platform/tools/gpu/api/parser"
+	"android.googlesource.com/platform/tools/gpu/api"
+	"android.googlesource.com/platform/tools/gpu/api/resolver"
+	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	"flag"
 	"fmt"
-	"io/ioutil"
 )
 
 var (
@@ -27,7 +27,7 @@ var (
 	csvDir     = flag.String("csv", "", "Directory for the csv output file")
 	cacheDir   = flag.String("cache", "", "Directory for caching downloaded files")
 	oldApiPath = flag.String("oldapi", "", "Filename of the old api file to use for reference")
-	oldApi     *ast.API
+	oldApi     *semantic.API
 )
 
 func main() {
@@ -37,14 +37,11 @@ func main() {
 		return
 	}
 	if *oldApiPath != "" {
-		f, err := ioutil.ReadFile(*oldApiPath)
-		if err != nil {
-			panic(err)
-		}
-		api, errs := parser.Parse(*oldApiPath, string(f))
+		mappings := resolver.ASTToSemantic{}
+		api, errs := api.Resolve(*oldApiPath, mappings)
 		if len(errs) > 0 {
-			for i, e := range errs {
-				fmt.Printf("%d: %v", i, e)
+			for _, err := range errs {
+				fmt.Printf("%v", err.Message)
 			}
 			return
 		}

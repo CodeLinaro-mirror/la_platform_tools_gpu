@@ -30,6 +30,9 @@ cmd void glBindBuffer(GLenum target, BufferId buffer) {
         GL_SHADER_STORAGE_BUFFER: {
       minRequiredVersion(3, 1)
     }
+    case GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -103,6 +106,9 @@ cmd void glBufferData(GLenum target, GLsizeiptr size, BufferDataPointer data, GL
         GL_SHADER_STORAGE_BUFFER: {
       minRequiredVersion(3, 1)
     }
+    case GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -149,6 +155,9 @@ cmd void glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, Buffer
         GL_SHADER_STORAGE_BUFFER: {
       minRequiredVersion(3, 1)
     }
+    case GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -173,6 +182,10 @@ cmd void glCopyBufferSubData(GLenum     readTarget,
         GL_UNIFORM_BUFFER: {
       // version 3.0
     }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(readTarget)
     }
@@ -182,6 +195,10 @@ cmd void glCopyBufferSubData(GLenum     readTarget,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
         GL_UNIFORM_BUFFER: {
       // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(writeTarget)
@@ -231,6 +248,10 @@ cmd void glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64* params) 
         GL_UNIFORM_BUFFER: {
       // version 3.0
     }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -260,6 +281,10 @@ cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
     case GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER,
         GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
       minRequiredVersion(3, 0)
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)
@@ -296,6 +321,10 @@ cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
         GL_UNIFORM_BUFFER: {
       // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)
@@ -337,6 +366,9 @@ cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GL
     case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
         GL_SHADER_STORAGE_BUFFER: {
       minRequiredVersion(3, 1)
+    }
+    case GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)
@@ -387,6 +419,9 @@ cmd GLboolean glUnmapBuffer(GLenum target) {
     case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
         GL_SHADER_STORAGE_BUFFER: {
       minRequiredVersion(3, 1)
+    }
+    case GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)

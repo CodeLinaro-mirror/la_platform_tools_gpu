@@ -88,6 +88,12 @@ cmd void glLineWidth(GLfloat width) {
   ctx.Rasterizing.LineWidth = width
 }
 
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMinSampleShading.xhtml","OpenGL ES 3.2")
+cmd void glMinSampleShading(GLfloat value) {
+  minRequiredVersion(3, 2)
+  // TODO
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glPolygonOffset.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPolygonOffset.xhtml","OpenGL ES 3.1")

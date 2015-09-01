@@ -1453,6 +1453,31 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlDrawElementsBaseVertex(Stack* stack, bool pushReturn) {
+    int32_t basevertex = stack->pop<int32_t>();
+    void* indices = stack->pop<void*>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t count = stack->pop<int32_t>();
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawElementsBaseVertex(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
+                   type, indices, basevertex);
+        if (glDrawElementsBaseVertex != nullptr) {
+            glDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDrawElementsBaseVertex returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawElementsBaseVertex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawElementsBaseVertex");
+        return false;
+    }
+}
+
 bool callGlDrawElementsIndirect(Stack* stack, bool pushReturn) {
     void* indirect = stack->pop<void*>();
     GLenum type = stack->pop<GLenum>();
@@ -1500,6 +1525,35 @@ bool callGlDrawElementsInstanced(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlDrawElementsInstancedBaseVertex(Stack* stack, bool pushReturn) {
+    int32_t basevertex = stack->pop<int32_t>();
+    int32_t instancecount = stack->pop<int32_t>();
+    void* indices = stack->pop<void*>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t count = stack->pop<int32_t>();
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawElementsInstancedBaseVertex(%u, %" PRId32 ", %u, %p, %" PRId32
+                   ", %" PRId32 ")",
+                   mode, count, type, indices, instancecount, basevertex);
+        if (glDrawElementsInstancedBaseVertex != nullptr) {
+            glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount,
+                                              basevertex);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDrawElementsInstancedBaseVertex returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glDrawElementsInstancedBaseVertex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawElementsInstancedBaseVertex");
+        return false;
+    }
+}
+
 bool callGlDrawRangeElements(Stack* stack, bool pushReturn) {
     void* indices = stack->pop<void*>();
     GLenum type = stack->pop<GLenum>();
@@ -1522,6 +1576,83 @@ bool callGlDrawRangeElements(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glDrawRangeElements");
+        return false;
+    }
+}
+
+bool callGlDrawRangeElementsBaseVertex(Stack* stack, bool pushReturn) {
+    int32_t basevertex = stack->pop<int32_t>();
+    void* indices = stack->pop<void*>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t count = stack->pop<int32_t>();
+    uint32_t end = stack->pop<uint32_t>();
+    uint32_t start = stack->pop<uint32_t>();
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawRangeElementsBaseVertex(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
+                   ", %u, %p, %" PRId32 ")",
+                   mode, start, end, count, type, indices, basevertex);
+        if (glDrawRangeElementsBaseVertex != nullptr) {
+            glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDrawRangeElementsBaseVertex returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawRangeElementsBaseVertex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawRangeElementsBaseVertex");
+        return false;
+    }
+}
+
+bool callGlPatchParameteri(Stack* stack, bool pushReturn) {
+    int32_t value = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPatchParameteri(%u, %" PRId32 ")", pname, value);
+        if (glPatchParameteri != nullptr) {
+            glPatchParameteri(pname, value);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glPatchParameteri returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPatchParameteri");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPatchParameteri");
+        return false;
+    }
+}
+
+bool callGlPrimitiveBoundingBox(Stack* stack, bool pushReturn) {
+    float maxW = stack->pop<float>();
+    float maxZ = stack->pop<float>();
+    float maxY = stack->pop<float>();
+    float maxX = stack->pop<float>();
+    float minW = stack->pop<float>();
+    float minZ = stack->pop<float>();
+    float minY = stack->pop<float>();
+    float minX = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPrimitiveBoundingBox(%f, %f, %f, %f, %f, %f, %f, %f)", minX, minY, minZ, minW,
+                   maxX, maxY, maxZ, maxW);
+        if (glPrimitiveBoundingBox != nullptr) {
+            glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glPrimitiveBoundingBox returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPrimitiveBoundingBox");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPrimitiveBoundingBox");
         return false;
     }
 }
@@ -1564,6 +1695,26 @@ bool callGlAlphaFuncQCOM(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glAlphaFuncQCOM");
+        return false;
+    }
+}
+
+bool callGlApplyFramebufferAttachmentCMAAINTEL(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glApplyFramebufferAttachmentCMAAINTEL()");
+        if (glApplyFramebufferAttachmentCMAAINTEL != nullptr) {
+            glApplyFramebufferAttachmentCMAAINTEL();
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glApplyFramebufferAttachmentCMAAINTEL returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glApplyFramebufferAttachmentCMAAINTEL");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glApplyFramebufferAttachmentCMAAINTEL");
         return false;
     }
 }
@@ -2284,6 +2435,47 @@ bool callGlCoverageMaskNV(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlCoverageModulationNV(Stack* stack, bool pushReturn) {
+    GLenum components = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glCoverageModulationNV(%u)", components);
+        if (glCoverageModulationNV != nullptr) {
+            glCoverageModulationNV(components);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glCoverageModulationNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glCoverageModulationNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glCoverageModulationNV");
+        return false;
+    }
+}
+
+bool callGlCoverageModulationTableNV(Stack* stack, bool pushReturn) {
+    float* v = stack->pop<float*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)", n, v);
+        if (glCoverageModulationTableNV != nullptr) {
+            glCoverageModulationTableNV(n, v);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glCoverageModulationTableNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glCoverageModulationTableNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glCoverageModulationTableNV");
+        return false;
+    }
+}
+
 bool callGlCoverageOperationNV(Stack* stack, bool pushReturn) {
     GLenum operation = stack->pop<GLenum>();
     if (stack->isValid()) {
@@ -2914,6 +3106,40 @@ bool callGlDrawElementsInstancedBaseInstanceEXT(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlDrawElementsInstancedBaseVertexBaseInstanceEXT(Stack* stack, bool pushReturn) {
+    uint32_t baseinstance = stack->pop<uint32_t>();
+    int32_t basevertex = stack->pop<int32_t>();
+    int32_t instancecount = stack->pop<int32_t>();
+    void* indices = stack->pop<void*>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t count = stack->pop<int32_t>();
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawElementsInstancedBaseVertexBaseInstanceEXT(%u, %" PRId32
+                   ", %u, %p, %" PRId32 ", %" PRId32 ", %" PRIu32 ")",
+                   mode, count, type, indices, instancecount, basevertex, baseinstance);
+        if (glDrawElementsInstancedBaseVertexBaseInstanceEXT != nullptr) {
+            glDrawElementsInstancedBaseVertexBaseInstanceEXT(
+                    mode, count, type, indices, instancecount, basevertex, baseinstance);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING(
+                        "glDrawElementsInstancedBaseVertexBaseInstanceEXT returned error: 0x%x",
+                        err);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function "
+                    "glDrawElementsInstancedBaseVertexBaseInstanceEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING(
+                "Error during calling function glDrawElementsInstancedBaseVertexBaseInstanceEXT");
+        return false;
+    }
+}
+
 bool callGlDrawElementsInstancedBaseVertexEXT(Stack* stack, bool pushReturn) {
     int32_t basevertex = stack->pop<int32_t>();
     int32_t instancecount = stack->pop<int32_t>();
@@ -2968,40 +3194,6 @@ bool callGlDrawElementsInstancedBaseVertexOES(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glDrawElementsInstancedBaseVertexOES");
-        return false;
-    }
-}
-
-bool callGlDrawElementsInstancedBaseVertexBaseInstanceEXT(Stack* stack, bool pushReturn) {
-    uint32_t baseinstance = stack->pop<uint32_t>();
-    int32_t basevertex = stack->pop<int32_t>();
-    int32_t instancecount = stack->pop<int32_t>();
-    void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
-    GLenum mode = stack->pop<GLenum>();
-    if (stack->isValid()) {
-        GAPID_INFO("glDrawElementsInstancedBaseVertexBaseInstanceEXT(%u, %" PRId32
-                   ", %u, %p, %" PRId32 ", %" PRId32 ", %" PRIu32 ")",
-                   mode, count, type, indices, instancecount, basevertex, baseinstance);
-        if (glDrawElementsInstancedBaseVertexBaseInstanceEXT != nullptr) {
-            glDrawElementsInstancedBaseVertexBaseInstanceEXT(
-                    mode, count, type, indices, instancecount, basevertex, baseinstance);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING(
-                        "glDrawElementsInstancedBaseVertexBaseInstanceEXT returned error: 0x%x",
-                        err);
-            }
-        } else {
-            GAPID_WARNING(
-                    "Attempted to call unsupported function "
-                    "glDrawElementsInstancedBaseVertexBaseInstanceEXT");
-        }
-        return true;
-    } else {
-        GAPID_WARNING(
-                "Error during calling function glDrawElementsInstancedBaseVertexBaseInstanceEXT");
         return false;
     }
 }
@@ -3672,6 +3864,51 @@ bool callGlFlushMappedBufferRangeEXT(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlFragmentCoverageColorNV(Stack* stack, bool pushReturn) {
+    uint32_t color = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")", color);
+        if (glFragmentCoverageColorNV != nullptr) {
+            glFragmentCoverageColorNV(color);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glFragmentCoverageColorNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFragmentCoverageColorNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFragmentCoverageColorNV");
+        return false;
+    }
+}
+
+bool callGlFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
+    float* v = stack->pop<float*>();
+    int32_t count = stack->pop<int32_t>();
+    uint32_t start = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferSampleLocationsfvNV(%u, %" PRIu32 ", %" PRId32 ", %p)", target,
+                   start, count, v);
+        if (glFramebufferSampleLocationsfvNV != nullptr) {
+            glFramebufferSampleLocationsfvNV(target, start, count, v);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glFramebufferSampleLocationsfvNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glFramebufferSampleLocationsfvNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferSampleLocationsfvNV");
+        return false;
+    }
+}
+
 bool callGlFramebufferTexture2DMultisampleEXT(Stack* stack, bool pushReturn) {
     int32_t samples = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
@@ -3756,30 +3993,6 @@ bool callGlFramebufferTexture3DOES(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlFramebufferTextureOES(Stack* stack, bool pushReturn) {
-    int32_t level = stack->pop<int32_t>();
-    uint32_t texture = stack->pop<uint32_t>();
-    GLenum attachment = stack->pop<GLenum>();
-    GLenum target = stack->pop<GLenum>();
-    if (stack->isValid()) {
-        GAPID_INFO("glFramebufferTextureOES(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
-                   texture, level);
-        if (glFramebufferTextureOES != nullptr) {
-            glFramebufferTextureOES(target, attachment, texture, level);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTextureOES returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glFramebufferTextureOES");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glFramebufferTextureOES");
-        return false;
-    }
-}
-
 bool callGlFramebufferTextureMultiviewOVR(Stack* stack, bool pushReturn) {
     int32_t numViews = stack->pop<int32_t>();
     int32_t baseViewIndex = stack->pop<int32_t>();
@@ -3805,6 +4018,30 @@ bool callGlFramebufferTextureMultiviewOVR(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glFramebufferTextureMultiviewOVR");
+        return false;
+    }
+}
+
+bool callGlFramebufferTextureOES(Stack* stack, bool pushReturn) {
+    int32_t level = stack->pop<int32_t>();
+    uint32_t texture = stack->pop<uint32_t>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferTextureOES(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
+                   texture, level);
+        if (glFramebufferTextureOES != nullptr) {
+            glFramebufferTextureOES(target, attachment, texture, level);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glFramebufferTextureOES returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferTextureOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferTextureOES");
         return false;
     }
 }
@@ -3956,6 +4193,27 @@ bool callGlGetBufferPointervOES(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glGetBufferPointervOES");
+        return false;
+    }
+}
+
+bool callGlGetCoverageModulationTableNV(Stack* stack, bool pushReturn) {
+    float* v = stack->pop<float*>();
+    int32_t bufsize = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)", bufsize, v);
+        if (glGetCoverageModulationTableNV != nullptr) {
+            glGetCoverageModulationTableNV(bufsize, v);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetCoverageModulationTableNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetCoverageModulationTableNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetCoverageModulationTableNV");
         return false;
     }
 }
@@ -5300,31 +5558,6 @@ bool callGlInterpolatePathsNV(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlIsEnablediOES(Stack* stack, bool pushReturn) {
-    uint32_t index = stack->pop<uint32_t>();
-    GLenum target = stack->pop<GLenum>();
-    if (stack->isValid()) {
-        GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")", target, index);
-        if (glIsEnablediOES != nullptr) {
-            uint8_t return_value = glIsEnablediOES(target, index);
-            GAPID_INFO("Returned: %" PRIu8 "", return_value);
-            if (pushReturn) {
-                stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnablediOES returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glIsEnablediOES");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glIsEnablediOES");
-        return false;
-    }
-}
-
 bool callGlIsEnablediNV(Stack* stack, bool pushReturn) {
     uint32_t index = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
@@ -5346,6 +5579,31 @@ bool callGlIsEnablediNV(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glIsEnablediNV");
+        return false;
+    }
+}
+
+bool callGlIsEnablediOES(Stack* stack, bool pushReturn) {
+    uint32_t index = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")", target, index);
+        if (glIsEnablediOES != nullptr) {
+            uint8_t return_value = glIsEnablediOES(target, index);
+            GAPID_INFO("Returned: %" PRIu8 "", return_value);
+            if (pushReturn) {
+                stack->push<uint8_t>(return_value);
+            }
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glIsEnablediOES returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glIsEnablediOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glIsEnablediOES");
         return false;
     }
 }
@@ -6027,6 +6285,32 @@ bool callGlMultiDrawElementsIndirectEXT(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glMultiDrawElementsIndirectEXT");
+        return false;
+    }
+}
+
+bool callGlNamedFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
+    float* v = stack->pop<float*>();
+    int32_t count = stack->pop<int32_t>();
+    uint32_t start = stack->pop<uint32_t>();
+    uint32_t framebuffer = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNamedFramebufferSampleLocationsfvNV(%" PRIu32 ", %" PRIu32 ", %" PRId32
+                   ", %p)",
+                   framebuffer, start, count, v);
+        if (glNamedFramebufferSampleLocationsfvNV != nullptr) {
+            glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glNamedFramebufferSampleLocationsfvNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glNamedFramebufferSampleLocationsfvNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNamedFramebufferSampleLocationsfvNV");
         return false;
     }
 }
@@ -7604,6 +7888,27 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlRasterSamplesEXT(Stack* stack, bool pushReturn) {
+    uint8_t fixedsamplelocations = stack->pop<uint8_t>();
+    uint32_t samples = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")", samples, fixedsamplelocations);
+        if (glRasterSamplesEXT != nullptr) {
+            glRasterSamplesEXT(samples, fixedsamplelocations);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glRasterSamplesEXT returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glRasterSamplesEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glRasterSamplesEXT");
+        return false;
+    }
+}
+
 bool callGlReadBufferIndexedEXT(Stack* stack, bool pushReturn) {
     int32_t index = stack->pop<int32_t>();
     GLenum src = stack->pop<GLenum>();
@@ -7834,6 +8139,25 @@ bool callGlRenderbufferStorageMultisampleNV(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glRenderbufferStorageMultisampleNV");
+        return false;
+    }
+}
+
+bool callGlResolveDepthValuesNV(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glResolveDepthValuesNV()");
+        if (glResolveDepthValuesNV != nullptr) {
+            glResolveDepthValuesNV();
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glResolveDepthValuesNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glResolveDepthValuesNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glResolveDepthValuesNV");
         return false;
     }
 }
@@ -8262,6 +8586,27 @@ bool callGlStencilThenCoverStrokePathNV(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glStencilThenCoverStrokePathNV");
+        return false;
+    }
+}
+
+bool callGlSubpixelPrecisionBiasNV(Stack* stack, bool pushReturn) {
+    uint32_t ybits = stack->pop<uint32_t>();
+    uint32_t xbits = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")", xbits, ybits);
+        if (glSubpixelPrecisionBiasNV != nullptr) {
+            glSubpixelPrecisionBiasNV(xbits, ybits);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glSubpixelPrecisionBiasNV returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glSubpixelPrecisionBiasNV");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glSubpixelPrecisionBiasNV");
         return false;
     }
 }
@@ -9150,196 +9495,21 @@ bool callGlWeightPathsNV(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlCoverageModulationNV(Stack* stack, bool pushReturn) {
-    GLenum components = stack->pop<GLenum>();
+bool callGlBlendBarrier(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        GAPID_INFO("glCoverageModulationNV(%u)", components);
-        if (glCoverageModulationNV != nullptr) {
-            glCoverageModulationNV(components);
+        GAPID_INFO("glBlendBarrier()");
+        if (glBlendBarrier != nullptr) {
+            glBlendBarrier();
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageModulationNV returned error: 0x%x", err);
+                GAPID_WARNING("glBlendBarrier returned error: 0x%x", err);
             }
         } else {
-            GAPID_WARNING("Attempted to call unsupported function glCoverageModulationNV");
+            GAPID_WARNING("Attempted to call unsupported function glBlendBarrier");
         }
         return true;
     } else {
-        GAPID_WARNING("Error during calling function glCoverageModulationNV");
-        return false;
-    }
-}
-
-bool callGlCoverageModulationTableNV(Stack* stack, bool pushReturn) {
-    float* v = stack->pop<float*>();
-    int32_t n = stack->pop<int32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)", n, v);
-        if (glCoverageModulationTableNV != nullptr) {
-            glCoverageModulationTableNV(n, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageModulationTableNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glCoverageModulationTableNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glCoverageModulationTableNV");
-        return false;
-    }
-}
-
-bool callGlFragmentCoverageColorNV(Stack* stack, bool pushReturn) {
-    uint32_t color = stack->pop<uint32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")", color);
-        if (glFragmentCoverageColorNV != nullptr) {
-            glFragmentCoverageColorNV(color);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFragmentCoverageColorNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glFragmentCoverageColorNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glFragmentCoverageColorNV");
-        return false;
-    }
-}
-
-bool callGlFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
-    float* v = stack->pop<float*>();
-    int32_t count = stack->pop<int32_t>();
-    uint32_t start = stack->pop<uint32_t>();
-    GLenum target = stack->pop<GLenum>();
-    if (stack->isValid()) {
-        GAPID_INFO("glFramebufferSampleLocationsfvNV(%u, %" PRIu32 ", %" PRId32 ", %p)", target,
-                   start, count, v);
-        if (glFramebufferSampleLocationsfvNV != nullptr) {
-            glFramebufferSampleLocationsfvNV(target, start, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferSampleLocationsfvNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING(
-                    "Attempted to call unsupported function glFramebufferSampleLocationsfvNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glFramebufferSampleLocationsfvNV");
-        return false;
-    }
-}
-
-bool callGlGetCoverageModulationTableNV(Stack* stack, bool pushReturn) {
-    float* v = stack->pop<float*>();
-    int32_t bufsize = stack->pop<int32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)", bufsize, v);
-        if (glGetCoverageModulationTableNV != nullptr) {
-            glGetCoverageModulationTableNV(bufsize, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetCoverageModulationTableNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glGetCoverageModulationTableNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glGetCoverageModulationTableNV");
-        return false;
-    }
-}
-
-bool callGlNamedFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
-    float* v = stack->pop<float*>();
-    int32_t count = stack->pop<int32_t>();
-    uint32_t start = stack->pop<uint32_t>();
-    uint32_t framebuffer = stack->pop<uint32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glNamedFramebufferSampleLocationsfvNV(%" PRIu32 ", %" PRIu32 ", %" PRId32
-                   ", %p)",
-                   framebuffer, start, count, v);
-        if (glNamedFramebufferSampleLocationsfvNV != nullptr) {
-            glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glNamedFramebufferSampleLocationsfvNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING(
-                    "Attempted to call unsupported function glNamedFramebufferSampleLocationsfvNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glNamedFramebufferSampleLocationsfvNV");
-        return false;
-    }
-}
-
-bool callGlRasterSamplesEXT(Stack* stack, bool pushReturn) {
-    uint8_t fixedsamplelocations = stack->pop<uint8_t>();
-    uint32_t samples = stack->pop<uint32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")", samples, fixedsamplelocations);
-        if (glRasterSamplesEXT != nullptr) {
-            glRasterSamplesEXT(samples, fixedsamplelocations);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRasterSamplesEXT returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glRasterSamplesEXT");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glRasterSamplesEXT");
-        return false;
-    }
-}
-
-bool callGlResolveDepthValuesNV(Stack* stack, bool pushReturn) {
-    if (stack->isValid()) {
-        GAPID_INFO("glResolveDepthValuesNV()");
-        if (glResolveDepthValuesNV != nullptr) {
-            glResolveDepthValuesNV();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glResolveDepthValuesNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glResolveDepthValuesNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glResolveDepthValuesNV");
-        return false;
-    }
-}
-
-bool callGlSubpixelPrecisionBiasNV(Stack* stack, bool pushReturn) {
-    uint32_t ybits = stack->pop<uint32_t>();
-    uint32_t xbits = stack->pop<uint32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")", xbits, ybits);
-        if (glSubpixelPrecisionBiasNV != nullptr) {
-            glSubpixelPrecisionBiasNV(xbits, ybits);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSubpixelPrecisionBiasNV returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glSubpixelPrecisionBiasNV");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glSubpixelPrecisionBiasNV");
+        GAPID_WARNING("Error during calling function glBlendBarrier");
         return false;
     }
 }
@@ -9408,6 +9578,49 @@ bool callGlBlendEquationSeparate(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlBlendEquationSeparatei(Stack* stack, bool pushReturn) {
+    GLenum modeAlpha = stack->pop<GLenum>();
+    GLenum modeRGB = stack->pop<GLenum>();
+    uint32_t buf = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendEquationSeparatei(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
+        if (glBlendEquationSeparatei != nullptr) {
+            glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glBlendEquationSeparatei returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparatei");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendEquationSeparatei");
+        return false;
+    }
+}
+
+bool callGlBlendEquationi(Stack* stack, bool pushReturn) {
+    GLenum mode = stack->pop<GLenum>();
+    uint32_t buf = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendEquationi(%" PRIu32 ", %u)", buf, mode);
+        if (glBlendEquationi != nullptr) {
+            glBlendEquationi(buf, mode);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glBlendEquationi returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquationi");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendEquationi");
+        return false;
+    }
+}
+
 bool callGlBlendFunc(Stack* stack, bool pushReturn) {
     GLenum dst_factor = stack->pop<GLenum>();
     GLenum src_factor = stack->pop<GLenum>();
@@ -9449,6 +9662,53 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glBlendFuncSeparate");
+        return false;
+    }
+}
+
+bool callGlBlendFuncSeparatei(Stack* stack, bool pushReturn) {
+    GLenum dstAlpha = stack->pop<GLenum>();
+    GLenum srcAlpha = stack->pop<GLenum>();
+    GLenum dstRGB = stack->pop<GLenum>();
+    GLenum srcRGB = stack->pop<GLenum>();
+    uint32_t buf = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendFuncSeparatei(%" PRIu32 ", %u, %u, %u, %u)", buf, srcRGB, dstRGB,
+                   srcAlpha, dstAlpha);
+        if (glBlendFuncSeparatei != nullptr) {
+            glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glBlendFuncSeparatei returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparatei");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendFuncSeparatei");
+        return false;
+    }
+}
+
+bool callGlBlendFunci(Stack* stack, bool pushReturn) {
+    GLenum dst = stack->pop<GLenum>();
+    GLenum src = stack->pop<GLenum>();
+    uint32_t buf = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendFunci(%" PRIu32 ", %u, %u)", buf, src, dst);
+        if (glBlendFunci != nullptr) {
+            glBlendFunci(buf, src, dst);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glBlendFunci returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendFunci");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendFunci");
         return false;
     }
 }
@@ -9926,6 +10186,31 @@ bool callGlColorMask(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlColorMaski(Stack* stack, bool pushReturn) {
+    uint8_t a = stack->pop<uint8_t>();
+    uint8_t b = stack->pop<uint8_t>();
+    uint8_t g = stack->pop<uint8_t>();
+    uint8_t r = stack->pop<uint8_t>();
+    uint32_t index = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColorMaski(%" PRIu32 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")",
+                   index, r, g, b, a);
+        if (glColorMaski != nullptr) {
+            glColorMaski(index, r, g, b, a);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glColorMaski returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColorMaski");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColorMaski");
+        return false;
+    }
+}
+
 bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
     uint32_t* framebuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
@@ -10031,6 +10316,30 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glFramebufferRenderbuffer");
+        return false;
+    }
+}
+
+bool callGlFramebufferTexture(Stack* stack, bool pushReturn) {
+    int32_t level = stack->pop<int32_t>();
+    uint32_t texture = stack->pop<uint32_t>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferTexture(%u, %u, %" PRIu32 ", %" PRId32 ")", target, attachment,
+                   texture, level);
+        if (glFramebufferTexture != nullptr) {
+            glFramebufferTexture(target, attachment, texture, level);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glFramebufferTexture returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferTexture");
         return false;
     }
 }
@@ -10342,6 +10651,35 @@ bool callGlReadPixels(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlReadnPixels(Stack* stack, bool pushReturn) {
+    void* data = stack->pop<void*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum format = stack->pop<GLenum>();
+    int32_t height = stack->pop<int32_t>();
+    int32_t width = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glReadnPixels(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %u, %u, %" PRId32 ", %p)",
+                   x, y, width, height, format, type, bufSize, data);
+        if (glReadnPixels != nullptr) {
+            glReadnPixels(x, y, width, height, format, type, bufSize, data);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glReadnPixels returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glReadnPixels");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glReadnPixels");
+        return false;
+    }
+}
+
 bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
@@ -10454,6 +10792,27 @@ bool callGlDisable(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlDisablei(Stack* stack, bool pushReturn) {
+    uint32_t index = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDisablei(%u, %" PRIu32 ")", target, index);
+        if (glDisablei != nullptr) {
+            glDisablei(target, index);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDisablei returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDisablei");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDisablei");
+        return false;
+    }
+}
+
 bool callGlEnable(Stack* stack, bool pushReturn) {
     GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
@@ -10470,6 +10829,27 @@ bool callGlEnable(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glEnable");
+        return false;
+    }
+}
+
+bool callGlEnablei(Stack* stack, bool pushReturn) {
+    uint32_t index = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glEnablei(%u, %" PRIu32 ")", target, index);
+        if (glEnablei != nullptr) {
+            glEnablei(target, index);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glEnablei returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glEnablei");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glEnablei");
         return false;
     }
 }
@@ -10554,6 +10934,29 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glGetError");
+        return false;
+    }
+}
+
+bool callGlGetGraphicsResetStatus(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glGetGraphicsResetStatus()");
+        if (glGetGraphicsResetStatus != nullptr) {
+            GLenum return_value = glGetGraphicsResetStatus();
+            GAPID_INFO("Returned: %u", return_value);
+            if (pushReturn) {
+                stack->push<GLenum>(return_value);
+            }
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetGraphicsResetStatus returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatus");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetGraphicsResetStatus");
         return false;
     }
 }
@@ -11589,6 +11992,78 @@ bool callGlGetUniformuiv(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glGetUniformuiv");
+        return false;
+    }
+}
+
+bool callGlGetnUniformfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    int32_t location = stack->pop<int32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetnUniformfv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+                   bufSize, params);
+        if (glGetnUniformfv != nullptr) {
+            glGetnUniformfv(program, location, bufSize, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetnUniformfv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetnUniformfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetnUniformfv");
+        return false;
+    }
+}
+
+bool callGlGetnUniformiv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    int32_t location = stack->pop<int32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetnUniformiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+                   bufSize, params);
+        if (glGetnUniformiv != nullptr) {
+            glGetnUniformiv(program, location, bufSize, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetnUniformiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetnUniformiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetnUniformiv");
+        return false;
+    }
+}
+
+bool callGlGetnUniformuiv(Stack* stack, bool pushReturn) {
+    uint32_t* params = stack->pop<uint32_t*>();
+    int32_t bufSize = stack->pop<int32_t>();
+    int32_t location = stack->pop<int32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetnUniformuiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
+                   bufSize, params);
+        if (glGetnUniformuiv != nullptr) {
+            glGetnUniformuiv(program, location, bufSize, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetnUniformuiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetnUniformuiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetnUniformuiv");
         return false;
     }
 }
@@ -13621,6 +14096,26 @@ bool callGlLineWidth(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlMinSampleShading(Stack* stack, bool pushReturn) {
+    float value = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMinSampleShading(%f)", value);
+        if (glMinSampleShading != nullptr) {
+            glMinSampleShading(value);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glMinSampleShading returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMinSampleShading");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMinSampleShading");
+        return false;
+    }
+}
+
 bool callGlPolygonOffset(Stack* stack, bool pushReturn) {
     float units = stack->pop<float>();
     float scale_factor = stack->pop<float>();
@@ -13910,6 +14405,31 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glIsEnabled");
+        return false;
+    }
+}
+
+bool callGlIsEnabledi(Stack* stack, bool pushReturn) {
+    uint32_t index = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glIsEnabledi(%u, %" PRIu32 ")", target, index);
+        if (glIsEnabledi != nullptr) {
+            uint8_t return_value = glIsEnabledi(target, index);
+            GAPID_INFO("Returned: %" PRIu8 "", return_value);
+            if (pushReturn) {
+                stack->push<uint8_t>(return_value);
+            }
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glIsEnabledi returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glIsEnabledi");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glIsEnabledi");
         return false;
     }
 }
@@ -14271,6 +14791,45 @@ bool callGlCompressedTexSubImage3D(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlCopyImageSubData(Stack* stack, bool pushReturn) {
+    int32_t srcDepth = stack->pop<int32_t>();
+    int32_t srcHeight = stack->pop<int32_t>();
+    int32_t srcWidth = stack->pop<int32_t>();
+    int32_t dstZ = stack->pop<int32_t>();
+    int32_t dstY = stack->pop<int32_t>();
+    int32_t dstX = stack->pop<int32_t>();
+    int32_t dstLevel = stack->pop<int32_t>();
+    GLenum dstTarget = stack->pop<GLenum>();
+    uint32_t dstName = stack->pop<uint32_t>();
+    int32_t srcZ = stack->pop<int32_t>();
+    int32_t srcY = stack->pop<int32_t>();
+    int32_t srcX = stack->pop<int32_t>();
+    int32_t srcLevel = stack->pop<int32_t>();
+    GLenum srcTarget = stack->pop<GLenum>();
+    uint32_t srcName = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glCopyImageSubData(%" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRIu32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
+                   srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel,
+                   dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+        if (glCopyImageSubData != nullptr) {
+            glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget,
+                               dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glCopyImageSubData returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glCopyImageSubData");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glCopyImageSubData");
+        return false;
+    }
+}
+
 bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -14463,6 +15022,50 @@ bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlGetSamplerParameterIiv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    uint32_t sampler = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetSamplerParameterIiv(%" PRIu32 ", %u, %p)", sampler, pname, params);
+        if (glGetSamplerParameterIiv != nullptr) {
+            glGetSamplerParameterIiv(sampler, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetSamplerParameterIiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetSamplerParameterIiv");
+        return false;
+    }
+}
+
+bool callGlGetSamplerParameterIuiv(Stack* stack, bool pushReturn) {
+    uint32_t* params = stack->pop<uint32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    uint32_t sampler = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetSamplerParameterIuiv(%" PRIu32 ", %u, %p)", sampler, pname, params);
+        if (glGetSamplerParameterIuiv != nullptr) {
+            glGetSamplerParameterIuiv(sampler, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetSamplerParameterIuiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIuiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetSamplerParameterIuiv");
+        return false;
+    }
+}
+
 bool callGlGetSamplerParameterfv(Stack* stack, bool pushReturn) {
     float* params = stack->pop<float*>();
     GLenum pname = stack->pop<GLenum>();
@@ -14551,6 +15154,50 @@ bool callGlGetTexLevelParameteriv(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glGetTexLevelParameteriv");
+        return false;
+    }
+}
+
+bool callGlGetTexParameterIiv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexParameterIiv(%u, %u, %p)", target, pname, params);
+        if (glGetTexParameterIiv != nullptr) {
+            glGetTexParameterIiv(target, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetTexParameterIiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexParameterIiv");
+        return false;
+    }
+}
+
+bool callGlGetTexParameterIuiv(Stack* stack, bool pushReturn) {
+    uint32_t* params = stack->pop<uint32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexParameterIuiv(%u, %u, %p)", target, pname, params);
+        if (glGetTexParameterIuiv != nullptr) {
+            glGetTexParameterIuiv(target, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glGetTexParameterIuiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIuiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexParameterIuiv");
         return false;
     }
 }
@@ -14668,6 +15315,50 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlSamplerParameterIiv(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    uint32_t sampler = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glSamplerParameterIiv(%" PRIu32 ", %u, %p)", sampler, pname, param);
+        if (glSamplerParameterIiv != nullptr) {
+            glSamplerParameterIiv(sampler, pname, param);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glSamplerParameterIiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glSamplerParameterIiv");
+        return false;
+    }
+}
+
+bool callGlSamplerParameterIuiv(Stack* stack, bool pushReturn) {
+    uint32_t* param = stack->pop<uint32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    uint32_t sampler = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glSamplerParameterIuiv(%" PRIu32 ", %u, %p)", sampler, pname, param);
+        if (glSamplerParameterIuiv != nullptr) {
+            glSamplerParameterIuiv(sampler, pname, param);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glSamplerParameterIuiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIuiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glSamplerParameterIuiv");
+        return false;
+    }
+}
+
 bool callGlSamplerParameterf(Stack* stack, bool pushReturn) {
     float param = stack->pop<float>();
     GLenum pname = stack->pop<GLenum>();
@@ -14756,6 +15447,53 @@ bool callGlSamplerParameteriv(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlTexBuffer(Stack* stack, bool pushReturn) {
+    uint32_t buffer = stack->pop<uint32_t>();
+    GLenum internalformat = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexBuffer(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
+        if (glTexBuffer != nullptr) {
+            glTexBuffer(target, internalformat, buffer);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glTexBuffer returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexBuffer");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexBuffer");
+        return false;
+    }
+}
+
+bool callGlTexBufferRange(Stack* stack, bool pushReturn) {
+    int32_t size = stack->pop<int32_t>();
+    int32_t offset = stack->pop<int32_t>();
+    uint32_t buffer = stack->pop<uint32_t>();
+    GLenum internalformat = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexBufferRange(%u, %u, %" PRIu32 ", %" PRId32 ", %" PRId32 ")", target,
+                   internalformat, buffer, offset, size);
+        if (glTexBufferRange != nullptr) {
+            glTexBufferRange(target, internalformat, buffer, offset, size);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glTexBufferRange returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexBufferRange");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexBufferRange");
+        return false;
+    }
+}
+
 bool callGlTexImage2D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     GLenum type = stack->pop<GLenum>();
@@ -14815,6 +15553,50 @@ bool callGlTexImage3D(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glTexImage3D");
+        return false;
+    }
+}
+
+bool callGlTexParameterIiv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterIiv(%u, %u, %p)", target, pname, params);
+        if (glTexParameterIiv != nullptr) {
+            glTexParameterIiv(target, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glTexParameterIiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterIiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterIiv");
+        return false;
+    }
+}
+
+bool callGlTexParameterIuiv(Stack* stack, bool pushReturn) {
+    uint32_t* params = stack->pop<uint32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterIuiv(%u, %u, %p)", target, pname, params);
+        if (glTexParameterIuiv != nullptr) {
+            glTexParameterIuiv(target, pname, params);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glTexParameterIuiv returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterIuiv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterIuiv");
         return false;
     }
 }
@@ -14982,6 +15764,35 @@ bool callGlTexStorage3D(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glTexStorage3D");
+        return false;
+    }
+}
+
+bool callGlTexStorage3DMultisample(Stack* stack, bool pushReturn) {
+    uint8_t fixedsamplelocations = stack->pop<uint8_t>();
+    int32_t depth = stack->pop<int32_t>();
+    int32_t height = stack->pop<int32_t>();
+    int32_t width = stack->pop<int32_t>();
+    GLenum internalformat = stack->pop<GLenum>();
+    int32_t samples = stack->pop<int32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexStorage3DMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRIu8 ")",
+                   target, samples, internalformat, width, height, depth, fixedsamplelocations);
+        if (glTexStorage3DMultisample != nullptr) {
+            glTexStorage3DMultisample(target, samples, internalformat, width, height, depth,
+                                      fixedsamplelocations);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glTexStorage3DMultisample returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexStorage3DMultisample");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexStorage3DMultisample");
         return false;
     }
 }
@@ -16579,11 +17390,17 @@ PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect = nullptr;
 PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced = nullptr;
 PFNGLDRAWBUFFERS glDrawBuffers = nullptr;
 PFNGLDRAWELEMENTS glDrawElements = nullptr;
+PFNGLDRAWELEMENTSBASEVERTEX glDrawElementsBaseVertex = nullptr;
 PFNGLDRAWELEMENTSINDIRECT glDrawElementsIndirect = nullptr;
 PFNGLDRAWELEMENTSINSTANCED glDrawElementsInstanced = nullptr;
+PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX glDrawElementsInstancedBaseVertex = nullptr;
 PFNGLDRAWRANGEELEMENTS glDrawRangeElements = nullptr;
+PFNGLDRAWRANGEELEMENTSBASEVERTEX glDrawRangeElementsBaseVertex = nullptr;
+PFNGLPATCHPARAMETERI glPatchParameteri = nullptr;
+PFNGLPRIMITIVEBOUNDINGBOX glPrimitiveBoundingBox = nullptr;
 PFNGLACTIVESHADERPROGRAMEXT glActiveShaderProgramEXT = nullptr;
 PFNGLALPHAFUNCQCOM glAlphaFuncQCOM = nullptr;
+PFNGLAPPLYFRAMEBUFFERATTACHMENTCMAAINTEL glApplyFramebufferAttachmentCMAAINTEL = nullptr;
 PFNGLBEGINCONDITIONALRENDERNV glBeginConditionalRenderNV = nullptr;
 PFNGLBEGINPERFMONITORAMD glBeginPerfMonitorAMD = nullptr;
 PFNGLBEGINPERFQUERYINTEL glBeginPerfQueryINTEL = nullptr;
@@ -16613,6 +17430,8 @@ PFNGLCOVERFILLPATHNV glCoverFillPathNV = nullptr;
 PFNGLCOVERSTROKEPATHINSTANCEDNV glCoverStrokePathInstancedNV = nullptr;
 PFNGLCOVERSTROKEPATHNV glCoverStrokePathNV = nullptr;
 PFNGLCOVERAGEMASKNV glCoverageMaskNV = nullptr;
+PFNGLCOVERAGEMODULATIONNV glCoverageModulationNV = nullptr;
+PFNGLCOVERAGEMODULATIONTABLENV glCoverageModulationTableNV = nullptr;
 PFNGLCOVERAGEOPERATIONNV glCoverageOperationNV = nullptr;
 PFNGLCREATEPERFQUERYINTEL glCreatePerfQueryINTEL = nullptr;
 PFNGLCREATESHADERPROGRAMVEXT glCreateShaderProgramvEXT = nullptr;
@@ -16641,10 +17460,10 @@ PFNGLDRAWELEMENTSBASEVERTEXEXT glDrawElementsBaseVertexEXT = nullptr;
 PFNGLDRAWELEMENTSBASEVERTEXOES glDrawElementsBaseVertexOES = nullptr;
 PFNGLDRAWELEMENTSINSTANCEDANGLE glDrawElementsInstancedANGLE = nullptr;
 PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT glDrawElementsInstancedBaseInstanceEXT = nullptr;
-PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT glDrawElementsInstancedBaseVertexEXT = nullptr;
-PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES glDrawElementsInstancedBaseVertexOES = nullptr;
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT
         glDrawElementsInstancedBaseVertexBaseInstanceEXT = nullptr;
+PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT glDrawElementsInstancedBaseVertexEXT = nullptr;
+PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES glDrawElementsInstancedBaseVertexOES = nullptr;
 PFNGLDRAWELEMENTSINSTANCEDEXT glDrawElementsInstancedEXT = nullptr;
 PFNGLDRAWELEMENTSINSTANCEDNV glDrawElementsInstancedNV = nullptr;
 PFNGLDRAWRANGEELEMENTSBASEVERTEXEXT glDrawRangeElementsBaseVertexEXT = nullptr;
@@ -16674,11 +17493,13 @@ PFNGLEXTTEXOBJECTSTATEOVERRIDEIQCOM glExtTexObjectStateOverrideiQCOM = nullptr;
 PFNGLFENCESYNCAPPLE glFenceSyncAPPLE = nullptr;
 PFNGLFINISHFENCENV glFinishFenceNV = nullptr;
 PFNGLFLUSHMAPPEDBUFFERRANGEEXT glFlushMappedBufferRangeEXT = nullptr;
+PFNGLFRAGMENTCOVERAGECOLORNV glFragmentCoverageColorNV = nullptr;
+PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV glFramebufferSampleLocationsfvNV = nullptr;
 PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT glFramebufferTexture2DMultisampleEXT = nullptr;
 PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMG glFramebufferTexture2DMultisampleIMG = nullptr;
 PFNGLFRAMEBUFFERTEXTURE3DOES glFramebufferTexture3DOES = nullptr;
-PFNGLFRAMEBUFFERTEXTUREOES glFramebufferTextureOES = nullptr;
 PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR glFramebufferTextureMultiviewOVR = nullptr;
+PFNGLFRAMEBUFFERTEXTUREOES glFramebufferTextureOES = nullptr;
 PFNGLGENFENCESNV glGenFencesNV = nullptr;
 PFNGLGENPATHSNV glGenPathsNV = nullptr;
 PFNGLGENPERFMONITORSAMD glGenPerfMonitorsAMD = nullptr;
@@ -16686,6 +17507,7 @@ PFNGLGENPROGRAMPIPELINESEXT glGenProgramPipelinesEXT = nullptr;
 PFNGLGENQUERIESEXT glGenQueriesEXT = nullptr;
 PFNGLGENVERTEXARRAYSOES glGenVertexArraysOES = nullptr;
 PFNGLGETBUFFERPOINTERVOES glGetBufferPointervOES = nullptr;
+PFNGLGETCOVERAGEMODULATIONTABLENV glGetCoverageModulationTableNV = nullptr;
 PFNGLGETDRIVERCONTROLSTRINGQCOM glGetDriverControlStringQCOM = nullptr;
 PFNGLGETDRIVERCONTROLSQCOM glGetDriverControlsQCOM = nullptr;
 PFNGLGETFENCEIVNV glGetFenceivNV = nullptr;
@@ -16742,8 +17564,8 @@ PFNGLGETNUNIFORMIVKHR glGetnUniformivKHR = nullptr;
 PFNGLGETNUNIFORMUIVKHR glGetnUniformuivKHR = nullptr;
 PFNGLINSERTEVENTMARKEREXT glInsertEventMarkerEXT = nullptr;
 PFNGLINTERPOLATEPATHSNV glInterpolatePathsNV = nullptr;
-PFNGLISENABLEDIOES glIsEnablediOES = nullptr;
 PFNGLISENABLEDINV glIsEnablediNV = nullptr;
+PFNGLISENABLEDIOES glIsEnablediOES = nullptr;
 PFNGLISFENCENV glIsFenceNV = nullptr;
 PFNGLISIMAGEHANDLERESIDENTNV glIsImageHandleResidentNV = nullptr;
 PFNGLISPATHNV glIsPathNV = nullptr;
@@ -16773,6 +17595,7 @@ PFNGLMULTIDRAWELEMENTSBASEVERTEXEXT glMultiDrawElementsBaseVertexEXT = nullptr;
 PFNGLMULTIDRAWELEMENTSBASEVERTEXOES glMultiDrawElementsBaseVertexOES = nullptr;
 PFNGLMULTIDRAWELEMENTSEXT glMultiDrawElementsEXT = nullptr;
 PFNGLMULTIDRAWELEMENTSINDIRECTEXT glMultiDrawElementsIndirectEXT = nullptr;
+PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV glNamedFramebufferSampleLocationsfvNV = nullptr;
 PFNGLPATCHPARAMETERIOES glPatchParameteriOES = nullptr;
 PFNGLPATHCOMMANDSNV glPathCommandsNV = nullptr;
 PFNGLPATHCOORDSNV glPathCoordsNV = nullptr;
@@ -16836,6 +17659,7 @@ PFNGLPROGRAMUNIFORMMATRIX4X2FVEXT glProgramUniformMatrix4x2fvEXT = nullptr;
 PFNGLPROGRAMUNIFORMMATRIX4X3FVEXT glProgramUniformMatrix4x3fvEXT = nullptr;
 PFNGLPUSHGROUPMARKEREXT glPushGroupMarkerEXT = nullptr;
 PFNGLQUERYCOUNTEREXT glQueryCounterEXT = nullptr;
+PFNGLRASTERSAMPLESEXT glRasterSamplesEXT = nullptr;
 PFNGLREADBUFFERINDEXEDEXT glReadBufferIndexedEXT = nullptr;
 PFNGLREADBUFFERNV glReadBufferNV = nullptr;
 PFNGLREADNPIXELSEXT glReadnPixelsEXT = nullptr;
@@ -16845,6 +17669,7 @@ PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLE glRenderbufferStorageMultisampleAPPLE =
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXT glRenderbufferStorageMultisampleEXT = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMG glRenderbufferStorageMultisampleIMG = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV glRenderbufferStorageMultisampleNV = nullptr;
+PFNGLRESOLVEDEPTHVALUESNV glResolveDepthValuesNV = nullptr;
 PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE glResolveMultisampleFramebufferAPPLE = nullptr;
 PFNGLSAMPLERPARAMETERIIVOES glSamplerParameterIivOES = nullptr;
 PFNGLSAMPLERPARAMETERIUIVOES glSamplerParameterIuivOES = nullptr;
@@ -16862,6 +17687,7 @@ PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNV glStencilThenCoverFillPathInstancedNV =
 PFNGLSTENCILTHENCOVERFILLPATHNV glStencilThenCoverFillPathNV = nullptr;
 PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNV glStencilThenCoverStrokePathInstancedNV = nullptr;
 PFNGLSTENCILTHENCOVERSTROKEPATHNV glStencilThenCoverStrokePathNV = nullptr;
+PFNGLSUBPIXELPRECISIONBIASNV glSubpixelPrecisionBiasNV = nullptr;
 PFNGLTESTFENCENV glTestFenceNV = nullptr;
 PFNGLTEXBUFFEROES glTexBufferOES = nullptr;
 PFNGLTEXBUFFERRANGEOES glTexBufferRangeOES = nullptr;
@@ -16898,20 +17724,16 @@ PFNGLVIEWPORTINDEXEDFNV glViewportIndexedfNV = nullptr;
 PFNGLVIEWPORTINDEXEDFVNV glViewportIndexedfvNV = nullptr;
 PFNGLWAITSYNCAPPLE glWaitSyncAPPLE = nullptr;
 PFNGLWEIGHTPATHSNV glWeightPathsNV = nullptr;
-PFNGLCOVERAGEMODULATIONNV glCoverageModulationNV = nullptr;
-PFNGLCOVERAGEMODULATIONTABLENV glCoverageModulationTableNV = nullptr;
-PFNGLFRAGMENTCOVERAGECOLORNV glFragmentCoverageColorNV = nullptr;
-PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV glFramebufferSampleLocationsfvNV = nullptr;
-PFNGLGETCOVERAGEMODULATIONTABLENV glGetCoverageModulationTableNV = nullptr;
-PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV glNamedFramebufferSampleLocationsfvNV = nullptr;
-PFNGLRASTERSAMPLESEXT glRasterSamplesEXT = nullptr;
-PFNGLRESOLVEDEPTHVALUESNV glResolveDepthValuesNV = nullptr;
-PFNGLSUBPIXELPRECISIONBIASNV glSubpixelPrecisionBiasNV = nullptr;
+PFNGLBLENDBARRIER glBlendBarrier = nullptr;
 PFNGLBLENDCOLOR glBlendColor = nullptr;
 PFNGLBLENDEQUATION glBlendEquation = nullptr;
 PFNGLBLENDEQUATIONSEPARATE glBlendEquationSeparate = nullptr;
+PFNGLBLENDEQUATIONSEPARATEI glBlendEquationSeparatei = nullptr;
+PFNGLBLENDEQUATIONI glBlendEquationi = nullptr;
 PFNGLBLENDFUNC glBlendFunc = nullptr;
 PFNGLBLENDFUNCSEPARATE glBlendFuncSeparate = nullptr;
+PFNGLBLENDFUNCSEPARATEI glBlendFuncSeparatei = nullptr;
+PFNGLBLENDFUNCI glBlendFunci = nullptr;
 PFNGLDEPTHFUNC glDepthFunc = nullptr;
 PFNGLSAMPLECOVERAGE glSampleCoverage = nullptr;
 PFNGLSAMPLEMASKI glSampleMaski = nullptr;
@@ -16933,11 +17755,13 @@ PFNGLCLEARCOLOR glClearColor = nullptr;
 PFNGLCLEARDEPTHF glClearDepthf = nullptr;
 PFNGLCLEARSTENCIL glClearStencil = nullptr;
 PFNGLCOLORMASK glColorMask = nullptr;
+PFNGLCOLORMASKI glColorMaski = nullptr;
 PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers = nullptr;
 PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers = nullptr;
 PFNGLDEPTHMASK glDepthMask = nullptr;
 PFNGLFRAMEBUFFERPARAMETERI glFramebufferParameteri = nullptr;
 PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer = nullptr;
+PFNGLFRAMEBUFFERTEXTURE glFramebufferTexture = nullptr;
 PFNGLFRAMEBUFFERTEXTURE2D glFramebufferTexture2D = nullptr;
 PFNGLFRAMEBUFFERTEXTURELAYER glFramebufferTextureLayer = nullptr;
 PFNGLGENFRAMEBUFFERS glGenFramebuffers = nullptr;
@@ -16951,16 +17775,20 @@ PFNGLISFRAMEBUFFER glIsFramebuffer = nullptr;
 PFNGLISRENDERBUFFER glIsRenderbuffer = nullptr;
 PFNGLREADBUFFER glReadBuffer = nullptr;
 PFNGLREADPIXELS glReadPixels = nullptr;
+PFNGLREADNPIXELS glReadnPixels = nullptr;
 PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample = nullptr;
 PFNGLSTENCILMASK glStencilMask = nullptr;
 PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate = nullptr;
 PFNGLDISABLE glDisable = nullptr;
+PFNGLDISABLEI glDisablei = nullptr;
 PFNGLENABLE glEnable = nullptr;
+PFNGLENABLEI glEnablei = nullptr;
 PFNGLFINISH glFinish = nullptr;
 PFNGLFLUSH glFlush = nullptr;
 PFNGLFLUSHMAPPEDBUFFERRANGE glFlushMappedBufferRange = nullptr;
 PFNGLGETERROR glGetError = nullptr;
+PFNGLGETGRAPHICSRESETSTATUS glGetGraphicsResetStatus = nullptr;
 PFNGLHINT glHint = nullptr;
 PFNGLACTIVESHADERPROGRAM glActiveShaderProgram = nullptr;
 PFNGLATTACHSHADER glAttachShader = nullptr;
@@ -17005,6 +17833,9 @@ PFNGLGETUNIFORMLOCATION glGetUniformLocation = nullptr;
 PFNGLGETUNIFORMFV glGetUniformfv = nullptr;
 PFNGLGETUNIFORMIV glGetUniformiv = nullptr;
 PFNGLGETUNIFORMUIV glGetUniformuiv = nullptr;
+PFNGLGETNUNIFORMFV glGetnUniformfv = nullptr;
+PFNGLGETNUNIFORMIV glGetnUniformiv = nullptr;
+PFNGLGETNUNIFORMUIV glGetnUniformuiv = nullptr;
 PFNGLISPROGRAM glIsProgram = nullptr;
 PFNGLISPROGRAMPIPELINE glIsProgramPipeline = nullptr;
 PFNGLISSHADER glIsShader = nullptr;
@@ -17092,6 +17923,7 @@ PFNGLDEPTHRANGEF glDepthRangef = nullptr;
 PFNGLFRONTFACE glFrontFace = nullptr;
 PFNGLGETMULTISAMPLEFV glGetMultisamplefv = nullptr;
 PFNGLLINEWIDTH glLineWidth = nullptr;
+PFNGLMINSAMPLESHADING glMinSampleShading = nullptr;
 PFNGLPOLYGONOFFSET glPolygonOffset = nullptr;
 PFNGLVIEWPORT glViewport = nullptr;
 PFNGLGETBOOLEANI_V glGetBooleani_v = nullptr;
@@ -17105,6 +17937,7 @@ PFNGLGETINTERNALFORMATIV glGetInternalformativ = nullptr;
 PFNGLGETSTRING glGetString = nullptr;
 PFNGLGETSTRINGI glGetStringi = nullptr;
 PFNGLISENABLED glIsEnabled = nullptr;
+PFNGLISENABLEDI glIsEnabledi = nullptr;
 PFNGLCLIENTWAITSYNC glClientWaitSync = nullptr;
 PFNGLDELETESYNC glDeleteSync = nullptr;
 PFNGLFENCESYNC glFenceSync = nullptr;
@@ -17119,6 +17952,7 @@ PFNGLCOMPRESSEDTEXIMAGE2D glCompressedTexImage2D = nullptr;
 PFNGLCOMPRESSEDTEXIMAGE3D glCompressedTexImage3D = nullptr;
 PFNGLCOMPRESSEDTEXSUBIMAGE2D glCompressedTexSubImage2D = nullptr;
 PFNGLCOMPRESSEDTEXSUBIMAGE3D glCompressedTexSubImage3D = nullptr;
+PFNGLCOPYIMAGESUBDATA glCopyImageSubData = nullptr;
 PFNGLCOPYTEXIMAGE2D glCopyTexImage2D = nullptr;
 PFNGLCOPYTEXSUBIMAGE2D glCopyTexSubImage2D = nullptr;
 PFNGLCOPYTEXSUBIMAGE3D glCopyTexSubImage3D = nullptr;
@@ -17127,21 +17961,31 @@ PFNGLDELETETEXTURES glDeleteTextures = nullptr;
 PFNGLGENSAMPLERS glGenSamplers = nullptr;
 PFNGLGENTEXTURES glGenTextures = nullptr;
 PFNGLGENERATEMIPMAP glGenerateMipmap = nullptr;
+PFNGLGETSAMPLERPARAMETERIIV glGetSamplerParameterIiv = nullptr;
+PFNGLGETSAMPLERPARAMETERIUIV glGetSamplerParameterIuiv = nullptr;
 PFNGLGETSAMPLERPARAMETERFV glGetSamplerParameterfv = nullptr;
 PFNGLGETSAMPLERPARAMETERIV glGetSamplerParameteriv = nullptr;
 PFNGLGETTEXLEVELPARAMETERFV glGetTexLevelParameterfv = nullptr;
 PFNGLGETTEXLEVELPARAMETERIV glGetTexLevelParameteriv = nullptr;
+PFNGLGETTEXPARAMETERIIV glGetTexParameterIiv = nullptr;
+PFNGLGETTEXPARAMETERIUIV glGetTexParameterIuiv = nullptr;
 PFNGLGETTEXPARAMETERFV glGetTexParameterfv = nullptr;
 PFNGLGETTEXPARAMETERIV glGetTexParameteriv = nullptr;
 PFNGLISSAMPLER glIsSampler = nullptr;
 PFNGLISTEXTURE glIsTexture = nullptr;
 PFNGLPIXELSTOREI glPixelStorei = nullptr;
+PFNGLSAMPLERPARAMETERIIV glSamplerParameterIiv = nullptr;
+PFNGLSAMPLERPARAMETERIUIV glSamplerParameterIuiv = nullptr;
 PFNGLSAMPLERPARAMETERF glSamplerParameterf = nullptr;
 PFNGLSAMPLERPARAMETERFV glSamplerParameterfv = nullptr;
 PFNGLSAMPLERPARAMETERI glSamplerParameteri = nullptr;
 PFNGLSAMPLERPARAMETERIV glSamplerParameteriv = nullptr;
+PFNGLTEXBUFFER glTexBuffer = nullptr;
+PFNGLTEXBUFFERRANGE glTexBufferRange = nullptr;
 PFNGLTEXIMAGE2D glTexImage2D = nullptr;
 PFNGLTEXIMAGE3D glTexImage3D = nullptr;
+PFNGLTEXPARAMETERIIV glTexParameterIiv = nullptr;
+PFNGLTEXPARAMETERIUIV glTexParameterIuiv = nullptr;
 PFNGLTEXPARAMETERF glTexParameterf = nullptr;
 PFNGLTEXPARAMETERFV glTexParameterfv = nullptr;
 PFNGLTEXPARAMETERI glTexParameteri = nullptr;
@@ -17149,6 +17993,7 @@ PFNGLTEXPARAMETERIV glTexParameteriv = nullptr;
 PFNGLTEXSTORAGE2D glTexStorage2D = nullptr;
 PFNGLTEXSTORAGE2DMULTISAMPLE glTexStorage2DMultisample = nullptr;
 PFNGLTEXSTORAGE3D glTexStorage3D = nullptr;
+PFNGLTEXSTORAGE3DMULTISAMPLE glTexStorage3DMultisample = nullptr;
 PFNGLTEXSUBIMAGE2D glTexSubImage2D = nullptr;
 PFNGLTEXSUBIMAGE3D glTexSubImage3D = nullptr;
 PFNGLBEGINTRANSFORMFEEDBACK glBeginTransformFeedback = nullptr;
@@ -17282,11 +18127,20 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlDrawArraysInstanced, callGlDrawArraysInstanced);
     interpreter->registerFunction(Ids::GlDrawBuffers, callGlDrawBuffers);
     interpreter->registerFunction(Ids::GlDrawElements, callGlDrawElements);
+    interpreter->registerFunction(Ids::GlDrawElementsBaseVertex, callGlDrawElementsBaseVertex);
     interpreter->registerFunction(Ids::GlDrawElementsIndirect, callGlDrawElementsIndirect);
     interpreter->registerFunction(Ids::GlDrawElementsInstanced, callGlDrawElementsInstanced);
+    interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseVertex,
+                                  callGlDrawElementsInstancedBaseVertex);
     interpreter->registerFunction(Ids::GlDrawRangeElements, callGlDrawRangeElements);
+    interpreter->registerFunction(Ids::GlDrawRangeElementsBaseVertex,
+                                  callGlDrawRangeElementsBaseVertex);
+    interpreter->registerFunction(Ids::GlPatchParameteri, callGlPatchParameteri);
+    interpreter->registerFunction(Ids::GlPrimitiveBoundingBox, callGlPrimitiveBoundingBox);
     interpreter->registerFunction(Ids::GlActiveShaderProgramEXT, callGlActiveShaderProgramEXT);
     interpreter->registerFunction(Ids::GlAlphaFuncQCOM, callGlAlphaFuncQCOM);
+    interpreter->registerFunction(Ids::GlApplyFramebufferAttachmentCMAAINTEL,
+                                  callGlApplyFramebufferAttachmentCMAAINTEL);
     interpreter->registerFunction(Ids::GlBeginConditionalRenderNV, callGlBeginConditionalRenderNV);
     interpreter->registerFunction(Ids::GlBeginPerfMonitorAMD, callGlBeginPerfMonitorAMD);
     interpreter->registerFunction(Ids::GlBeginPerfQueryINTEL, callGlBeginPerfQueryINTEL);
@@ -17319,6 +18173,9 @@ void Register(Interpreter* interpreter) {
                                   callGlCoverStrokePathInstancedNV);
     interpreter->registerFunction(Ids::GlCoverStrokePathNV, callGlCoverStrokePathNV);
     interpreter->registerFunction(Ids::GlCoverageMaskNV, callGlCoverageMaskNV);
+    interpreter->registerFunction(Ids::GlCoverageModulationNV, callGlCoverageModulationNV);
+    interpreter->registerFunction(Ids::GlCoverageModulationTableNV,
+                                  callGlCoverageModulationTableNV);
     interpreter->registerFunction(Ids::GlCoverageOperationNV, callGlCoverageOperationNV);
     interpreter->registerFunction(Ids::GlCreatePerfQueryINTEL, callGlCreatePerfQueryINTEL);
     interpreter->registerFunction(Ids::GlCreateShaderProgramvEXT, callGlCreateShaderProgramvEXT);
@@ -17353,12 +18210,12 @@ void Register(Interpreter* interpreter) {
                                   callGlDrawElementsInstancedANGLE);
     interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseInstanceEXT,
                                   callGlDrawElementsInstancedBaseInstanceEXT);
+    interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseVertexBaseInstanceEXT,
+                                  callGlDrawElementsInstancedBaseVertexBaseInstanceEXT);
     interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseVertexEXT,
                                   callGlDrawElementsInstancedBaseVertexEXT);
     interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseVertexOES,
                                   callGlDrawElementsInstancedBaseVertexOES);
-    interpreter->registerFunction(Ids::GlDrawElementsInstancedBaseVertexBaseInstanceEXT,
-                                  callGlDrawElementsInstancedBaseVertexBaseInstanceEXT);
     interpreter->registerFunction(Ids::GlDrawElementsInstancedEXT, callGlDrawElementsInstancedEXT);
     interpreter->registerFunction(Ids::GlDrawElementsInstancedNV, callGlDrawElementsInstancedNV);
     interpreter->registerFunction(Ids::GlDrawRangeElementsBaseVertexEXT,
@@ -17396,14 +18253,17 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlFinishFenceNV, callGlFinishFenceNV);
     interpreter->registerFunction(Ids::GlFlushMappedBufferRangeEXT,
                                   callGlFlushMappedBufferRangeEXT);
+    interpreter->registerFunction(Ids::GlFragmentCoverageColorNV, callGlFragmentCoverageColorNV);
+    interpreter->registerFunction(Ids::GlFramebufferSampleLocationsfvNV,
+                                  callGlFramebufferSampleLocationsfvNV);
     interpreter->registerFunction(Ids::GlFramebufferTexture2DMultisampleEXT,
                                   callGlFramebufferTexture2DMultisampleEXT);
     interpreter->registerFunction(Ids::GlFramebufferTexture2DMultisampleIMG,
                                   callGlFramebufferTexture2DMultisampleIMG);
     interpreter->registerFunction(Ids::GlFramebufferTexture3DOES, callGlFramebufferTexture3DOES);
-    interpreter->registerFunction(Ids::GlFramebufferTextureOES, callGlFramebufferTextureOES);
     interpreter->registerFunction(Ids::GlFramebufferTextureMultiviewOVR,
                                   callGlFramebufferTextureMultiviewOVR);
+    interpreter->registerFunction(Ids::GlFramebufferTextureOES, callGlFramebufferTextureOES);
     interpreter->registerFunction(Ids::GlGenFencesNV, callGlGenFencesNV);
     interpreter->registerFunction(Ids::GlGenPathsNV, callGlGenPathsNV);
     interpreter->registerFunction(Ids::GlGenPerfMonitorsAMD, callGlGenPerfMonitorsAMD);
@@ -17411,6 +18271,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGenQueriesEXT, callGlGenQueriesEXT);
     interpreter->registerFunction(Ids::GlGenVertexArraysOES, callGlGenVertexArraysOES);
     interpreter->registerFunction(Ids::GlGetBufferPointervOES, callGlGetBufferPointervOES);
+    interpreter->registerFunction(Ids::GlGetCoverageModulationTableNV,
+                                  callGlGetCoverageModulationTableNV);
     interpreter->registerFunction(Ids::GlGetDriverControlStringQCOM,
                                   callGlGetDriverControlStringQCOM);
     interpreter->registerFunction(Ids::GlGetDriverControlsQCOM, callGlGetDriverControlsQCOM);
@@ -17482,8 +18344,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetnUniformuivKHR, callGlGetnUniformuivKHR);
     interpreter->registerFunction(Ids::GlInsertEventMarkerEXT, callGlInsertEventMarkerEXT);
     interpreter->registerFunction(Ids::GlInterpolatePathsNV, callGlInterpolatePathsNV);
-    interpreter->registerFunction(Ids::GlIsEnablediOES, callGlIsEnablediOES);
     interpreter->registerFunction(Ids::GlIsEnablediNV, callGlIsEnablediNV);
+    interpreter->registerFunction(Ids::GlIsEnablediOES, callGlIsEnablediOES);
     interpreter->registerFunction(Ids::GlIsFenceNV, callGlIsFenceNV);
     interpreter->registerFunction(Ids::GlIsImageHandleResidentNV, callGlIsImageHandleResidentNV);
     interpreter->registerFunction(Ids::GlIsPathNV, callGlIsPathNV);
@@ -17524,6 +18386,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlMultiDrawElementsEXT, callGlMultiDrawElementsEXT);
     interpreter->registerFunction(Ids::GlMultiDrawElementsIndirectEXT,
                                   callGlMultiDrawElementsIndirectEXT);
+    interpreter->registerFunction(Ids::GlNamedFramebufferSampleLocationsfvNV,
+                                  callGlNamedFramebufferSampleLocationsfvNV);
     interpreter->registerFunction(Ids::GlPatchParameteriOES, callGlPatchParameteriOES);
     interpreter->registerFunction(Ids::GlPathCommandsNV, callGlPathCommandsNV);
     interpreter->registerFunction(Ids::GlPathCoordsNV, callGlPathCoordsNV);
@@ -17600,6 +18464,7 @@ void Register(Interpreter* interpreter) {
                                   callGlProgramUniformMatrix4x3fvEXT);
     interpreter->registerFunction(Ids::GlPushGroupMarkerEXT, callGlPushGroupMarkerEXT);
     interpreter->registerFunction(Ids::GlQueryCounterEXT, callGlQueryCounterEXT);
+    interpreter->registerFunction(Ids::GlRasterSamplesEXT, callGlRasterSamplesEXT);
     interpreter->registerFunction(Ids::GlReadBufferIndexedEXT, callGlReadBufferIndexedEXT);
     interpreter->registerFunction(Ids::GlReadBufferNV, callGlReadBufferNV);
     interpreter->registerFunction(Ids::GlReadnPixelsEXT, callGlReadnPixelsEXT);
@@ -17614,6 +18479,7 @@ void Register(Interpreter* interpreter) {
                                   callGlRenderbufferStorageMultisampleIMG);
     interpreter->registerFunction(Ids::GlRenderbufferStorageMultisampleNV,
                                   callGlRenderbufferStorageMultisampleNV);
+    interpreter->registerFunction(Ids::GlResolveDepthValuesNV, callGlResolveDepthValuesNV);
     interpreter->registerFunction(Ids::GlResolveMultisampleFramebufferAPPLE,
                                   callGlResolveMultisampleFramebufferAPPLE);
     interpreter->registerFunction(Ids::GlSamplerParameterIivOES, callGlSamplerParameterIivOES);
@@ -17639,6 +18505,7 @@ void Register(Interpreter* interpreter) {
                                   callGlStencilThenCoverStrokePathInstancedNV);
     interpreter->registerFunction(Ids::GlStencilThenCoverStrokePathNV,
                                   callGlStencilThenCoverStrokePathNV);
+    interpreter->registerFunction(Ids::GlSubpixelPrecisionBiasNV, callGlSubpixelPrecisionBiasNV);
     interpreter->registerFunction(Ids::GlTestFenceNV, callGlTestFenceNV);
     interpreter->registerFunction(Ids::GlTexBufferOES, callGlTexBufferOES);
     interpreter->registerFunction(Ids::GlTexBufferRangeOES, callGlTexBufferRangeOES);
@@ -17676,24 +18543,16 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlViewportIndexedfvNV, callGlViewportIndexedfvNV);
     interpreter->registerFunction(Ids::GlWaitSyncAPPLE, callGlWaitSyncAPPLE);
     interpreter->registerFunction(Ids::GlWeightPathsNV, callGlWeightPathsNV);
-    interpreter->registerFunction(Ids::GlCoverageModulationNV, callGlCoverageModulationNV);
-    interpreter->registerFunction(Ids::GlCoverageModulationTableNV,
-                                  callGlCoverageModulationTableNV);
-    interpreter->registerFunction(Ids::GlFragmentCoverageColorNV, callGlFragmentCoverageColorNV);
-    interpreter->registerFunction(Ids::GlFramebufferSampleLocationsfvNV,
-                                  callGlFramebufferSampleLocationsfvNV);
-    interpreter->registerFunction(Ids::GlGetCoverageModulationTableNV,
-                                  callGlGetCoverageModulationTableNV);
-    interpreter->registerFunction(Ids::GlNamedFramebufferSampleLocationsfvNV,
-                                  callGlNamedFramebufferSampleLocationsfvNV);
-    interpreter->registerFunction(Ids::GlRasterSamplesEXT, callGlRasterSamplesEXT);
-    interpreter->registerFunction(Ids::GlResolveDepthValuesNV, callGlResolveDepthValuesNV);
-    interpreter->registerFunction(Ids::GlSubpixelPrecisionBiasNV, callGlSubpixelPrecisionBiasNV);
+    interpreter->registerFunction(Ids::GlBlendBarrier, callGlBlendBarrier);
     interpreter->registerFunction(Ids::GlBlendColor, callGlBlendColor);
     interpreter->registerFunction(Ids::GlBlendEquation, callGlBlendEquation);
     interpreter->registerFunction(Ids::GlBlendEquationSeparate, callGlBlendEquationSeparate);
+    interpreter->registerFunction(Ids::GlBlendEquationSeparatei, callGlBlendEquationSeparatei);
+    interpreter->registerFunction(Ids::GlBlendEquationi, callGlBlendEquationi);
     interpreter->registerFunction(Ids::GlBlendFunc, callGlBlendFunc);
     interpreter->registerFunction(Ids::GlBlendFuncSeparate, callGlBlendFuncSeparate);
+    interpreter->registerFunction(Ids::GlBlendFuncSeparatei, callGlBlendFuncSeparatei);
+    interpreter->registerFunction(Ids::GlBlendFunci, callGlBlendFunci);
     interpreter->registerFunction(Ids::GlDepthFunc, callGlDepthFunc);
     interpreter->registerFunction(Ids::GlSampleCoverage, callGlSampleCoverage);
     interpreter->registerFunction(Ids::GlSampleMaski, callGlSampleMaski);
@@ -17715,11 +18574,13 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlClearDepthf, callGlClearDepthf);
     interpreter->registerFunction(Ids::GlClearStencil, callGlClearStencil);
     interpreter->registerFunction(Ids::GlColorMask, callGlColorMask);
+    interpreter->registerFunction(Ids::GlColorMaski, callGlColorMaski);
     interpreter->registerFunction(Ids::GlDeleteFramebuffers, callGlDeleteFramebuffers);
     interpreter->registerFunction(Ids::GlDeleteRenderbuffers, callGlDeleteRenderbuffers);
     interpreter->registerFunction(Ids::GlDepthMask, callGlDepthMask);
     interpreter->registerFunction(Ids::GlFramebufferParameteri, callGlFramebufferParameteri);
     interpreter->registerFunction(Ids::GlFramebufferRenderbuffer, callGlFramebufferRenderbuffer);
+    interpreter->registerFunction(Ids::GlFramebufferTexture, callGlFramebufferTexture);
     interpreter->registerFunction(Ids::GlFramebufferTexture2D, callGlFramebufferTexture2D);
     interpreter->registerFunction(Ids::GlFramebufferTextureLayer, callGlFramebufferTextureLayer);
     interpreter->registerFunction(Ids::GlGenFramebuffers, callGlGenFramebuffers);
@@ -17736,17 +18597,21 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlIsRenderbuffer, callGlIsRenderbuffer);
     interpreter->registerFunction(Ids::GlReadBuffer, callGlReadBuffer);
     interpreter->registerFunction(Ids::GlReadPixels, callGlReadPixels);
+    interpreter->registerFunction(Ids::GlReadnPixels, callGlReadnPixels);
     interpreter->registerFunction(Ids::GlRenderbufferStorage, callGlRenderbufferStorage);
     interpreter->registerFunction(Ids::GlRenderbufferStorageMultisample,
                                   callGlRenderbufferStorageMultisample);
     interpreter->registerFunction(Ids::GlStencilMask, callGlStencilMask);
     interpreter->registerFunction(Ids::GlStencilMaskSeparate, callGlStencilMaskSeparate);
     interpreter->registerFunction(Ids::GlDisable, callGlDisable);
+    interpreter->registerFunction(Ids::GlDisablei, callGlDisablei);
     interpreter->registerFunction(Ids::GlEnable, callGlEnable);
+    interpreter->registerFunction(Ids::GlEnablei, callGlEnablei);
     interpreter->registerFunction(Ids::GlFinish, callGlFinish);
     interpreter->registerFunction(Ids::GlFlush, callGlFlush);
     interpreter->registerFunction(Ids::GlFlushMappedBufferRange, callGlFlushMappedBufferRange);
     interpreter->registerFunction(Ids::GlGetError, callGlGetError);
+    interpreter->registerFunction(Ids::GlGetGraphicsResetStatus, callGlGetGraphicsResetStatus);
     interpreter->registerFunction(Ids::GlHint, callGlHint);
     interpreter->registerFunction(Ids::GlActiveShaderProgram, callGlActiveShaderProgram);
     interpreter->registerFunction(Ids::GlAttachShader, callGlAttachShader);
@@ -17794,6 +18659,9 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetUniformfv, callGlGetUniformfv);
     interpreter->registerFunction(Ids::GlGetUniformiv, callGlGetUniformiv);
     interpreter->registerFunction(Ids::GlGetUniformuiv, callGlGetUniformuiv);
+    interpreter->registerFunction(Ids::GlGetnUniformfv, callGlGetnUniformfv);
+    interpreter->registerFunction(Ids::GlGetnUniformiv, callGlGetnUniformiv);
+    interpreter->registerFunction(Ids::GlGetnUniformuiv, callGlGetnUniformuiv);
     interpreter->registerFunction(Ids::GlIsProgram, callGlIsProgram);
     interpreter->registerFunction(Ids::GlIsProgramPipeline, callGlIsProgramPipeline);
     interpreter->registerFunction(Ids::GlIsShader, callGlIsShader);
@@ -17887,6 +18755,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlFrontFace, callGlFrontFace);
     interpreter->registerFunction(Ids::GlGetMultisamplefv, callGlGetMultisamplefv);
     interpreter->registerFunction(Ids::GlLineWidth, callGlLineWidth);
+    interpreter->registerFunction(Ids::GlMinSampleShading, callGlMinSampleShading);
     interpreter->registerFunction(Ids::GlPolygonOffset, callGlPolygonOffset);
     interpreter->registerFunction(Ids::GlViewport, callGlViewport);
     interpreter->registerFunction(Ids::GlGetBooleaniV, callGlGetBooleaniV);
@@ -17900,6 +18769,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetString, callGlGetString);
     interpreter->registerFunction(Ids::GlGetStringi, callGlGetStringi);
     interpreter->registerFunction(Ids::GlIsEnabled, callGlIsEnabled);
+    interpreter->registerFunction(Ids::GlIsEnabledi, callGlIsEnabledi);
     interpreter->registerFunction(Ids::GlClientWaitSync, callGlClientWaitSync);
     interpreter->registerFunction(Ids::GlDeleteSync, callGlDeleteSync);
     interpreter->registerFunction(Ids::GlFenceSync, callGlFenceSync);
@@ -17914,6 +18784,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlCompressedTexImage3D, callGlCompressedTexImage3D);
     interpreter->registerFunction(Ids::GlCompressedTexSubImage2D, callGlCompressedTexSubImage2D);
     interpreter->registerFunction(Ids::GlCompressedTexSubImage3D, callGlCompressedTexSubImage3D);
+    interpreter->registerFunction(Ids::GlCopyImageSubData, callGlCopyImageSubData);
     interpreter->registerFunction(Ids::GlCopyTexImage2D, callGlCopyTexImage2D);
     interpreter->registerFunction(Ids::GlCopyTexSubImage2D, callGlCopyTexSubImage2D);
     interpreter->registerFunction(Ids::GlCopyTexSubImage3D, callGlCopyTexSubImage3D);
@@ -17922,21 +18793,31 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGenSamplers, callGlGenSamplers);
     interpreter->registerFunction(Ids::GlGenTextures, callGlGenTextures);
     interpreter->registerFunction(Ids::GlGenerateMipmap, callGlGenerateMipmap);
+    interpreter->registerFunction(Ids::GlGetSamplerParameterIiv, callGlGetSamplerParameterIiv);
+    interpreter->registerFunction(Ids::GlGetSamplerParameterIuiv, callGlGetSamplerParameterIuiv);
     interpreter->registerFunction(Ids::GlGetSamplerParameterfv, callGlGetSamplerParameterfv);
     interpreter->registerFunction(Ids::GlGetSamplerParameteriv, callGlGetSamplerParameteriv);
     interpreter->registerFunction(Ids::GlGetTexLevelParameterfv, callGlGetTexLevelParameterfv);
     interpreter->registerFunction(Ids::GlGetTexLevelParameteriv, callGlGetTexLevelParameteriv);
+    interpreter->registerFunction(Ids::GlGetTexParameterIiv, callGlGetTexParameterIiv);
+    interpreter->registerFunction(Ids::GlGetTexParameterIuiv, callGlGetTexParameterIuiv);
     interpreter->registerFunction(Ids::GlGetTexParameterfv, callGlGetTexParameterfv);
     interpreter->registerFunction(Ids::GlGetTexParameteriv, callGlGetTexParameteriv);
     interpreter->registerFunction(Ids::GlIsSampler, callGlIsSampler);
     interpreter->registerFunction(Ids::GlIsTexture, callGlIsTexture);
     interpreter->registerFunction(Ids::GlPixelStorei, callGlPixelStorei);
+    interpreter->registerFunction(Ids::GlSamplerParameterIiv, callGlSamplerParameterIiv);
+    interpreter->registerFunction(Ids::GlSamplerParameterIuiv, callGlSamplerParameterIuiv);
     interpreter->registerFunction(Ids::GlSamplerParameterf, callGlSamplerParameterf);
     interpreter->registerFunction(Ids::GlSamplerParameterfv, callGlSamplerParameterfv);
     interpreter->registerFunction(Ids::GlSamplerParameteri, callGlSamplerParameteri);
     interpreter->registerFunction(Ids::GlSamplerParameteriv, callGlSamplerParameteriv);
+    interpreter->registerFunction(Ids::GlTexBuffer, callGlTexBuffer);
+    interpreter->registerFunction(Ids::GlTexBufferRange, callGlTexBufferRange);
     interpreter->registerFunction(Ids::GlTexImage2D, callGlTexImage2D);
     interpreter->registerFunction(Ids::GlTexImage3D, callGlTexImage3D);
+    interpreter->registerFunction(Ids::GlTexParameterIiv, callGlTexParameterIiv);
+    interpreter->registerFunction(Ids::GlTexParameterIuiv, callGlTexParameterIuiv);
     interpreter->registerFunction(Ids::GlTexParameterf, callGlTexParameterf);
     interpreter->registerFunction(Ids::GlTexParameterfv, callGlTexParameterfv);
     interpreter->registerFunction(Ids::GlTexParameteri, callGlTexParameteri);
@@ -17944,6 +18825,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlTexStorage2D, callGlTexStorage2D);
     interpreter->registerFunction(Ids::GlTexStorage2DMultisample, callGlTexStorage2DMultisample);
     interpreter->registerFunction(Ids::GlTexStorage3D, callGlTexStorage3D);
+    interpreter->registerFunction(Ids::GlTexStorage3DMultisample, callGlTexStorage3DMultisample);
     interpreter->registerFunction(Ids::GlTexSubImage2D, callGlTexSubImage2D);
     interpreter->registerFunction(Ids::GlTexSubImage3D, callGlTexSubImage3D);
     interpreter->registerFunction(Ids::GlBeginTransformFeedback, callGlBeginTransformFeedback);
@@ -18134,16 +19016,29 @@ void Initialize() {
             reinterpret_cast<PFNGLDRAWBUFFERS>(gapic::GetGfxProcAddress("glDrawBuffers", false));
     glDrawElements =
             reinterpret_cast<PFNGLDRAWELEMENTS>(gapic::GetGfxProcAddress("glDrawElements", false));
+    glDrawElementsBaseVertex = reinterpret_cast<PFNGLDRAWELEMENTSBASEVERTEX>(
+            gapic::GetGfxProcAddress("glDrawElementsBaseVertex", false));
     glDrawElementsIndirect = reinterpret_cast<PFNGLDRAWELEMENTSINDIRECT>(
             gapic::GetGfxProcAddress("glDrawElementsIndirect", false));
     glDrawElementsInstanced = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCED>(
             gapic::GetGfxProcAddress("glDrawElementsInstanced", false));
+    glDrawElementsInstancedBaseVertex = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX>(
+            gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertex", false));
     glDrawRangeElements = reinterpret_cast<PFNGLDRAWRANGEELEMENTS>(
             gapic::GetGfxProcAddress("glDrawRangeElements", false));
+    glDrawRangeElementsBaseVertex = reinterpret_cast<PFNGLDRAWRANGEELEMENTSBASEVERTEX>(
+            gapic::GetGfxProcAddress("glDrawRangeElementsBaseVertex", false));
+    glPatchParameteri = reinterpret_cast<PFNGLPATCHPARAMETERI>(
+            gapic::GetGfxProcAddress("glPatchParameteri", false));
+    glPrimitiveBoundingBox = reinterpret_cast<PFNGLPRIMITIVEBOUNDINGBOX>(
+            gapic::GetGfxProcAddress("glPrimitiveBoundingBox", false));
     glActiveShaderProgramEXT = reinterpret_cast<PFNGLACTIVESHADERPROGRAMEXT>(
             gapic::GetGfxProcAddress("glActiveShaderProgramEXT", false));
     glAlphaFuncQCOM = reinterpret_cast<PFNGLALPHAFUNCQCOM>(
             gapic::GetGfxProcAddress("glAlphaFuncQCOM", false));
+    glApplyFramebufferAttachmentCMAAINTEL =
+            reinterpret_cast<PFNGLAPPLYFRAMEBUFFERATTACHMENTCMAAINTEL>(
+                    gapic::GetGfxProcAddress("glApplyFramebufferAttachmentCMAAINTEL", false));
     glBeginConditionalRenderNV = reinterpret_cast<PFNGLBEGINCONDITIONALRENDERNV>(
             gapic::GetGfxProcAddress("glBeginConditionalRenderNV", false));
     glBeginPerfMonitorAMD = reinterpret_cast<PFNGLBEGINPERFMONITORAMD>(
@@ -18202,6 +19097,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glCoverStrokePathNV", false));
     glCoverageMaskNV = reinterpret_cast<PFNGLCOVERAGEMASKNV>(
             gapic::GetGfxProcAddress("glCoverageMaskNV", false));
+    glCoverageModulationNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONNV>(
+            gapic::GetGfxProcAddress("glCoverageModulationNV", false));
+    glCoverageModulationTableNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONTABLENV>(
+            gapic::GetGfxProcAddress("glCoverageModulationTableNV", false));
     glCoverageOperationNV = reinterpret_cast<PFNGLCOVERAGEOPERATIONNV>(
             gapic::GetGfxProcAddress("glCoverageOperationNV", false));
     glCreatePerfQueryINTEL = reinterpret_cast<PFNGLCREATEPERFQUERYINTEL>(
@@ -18260,16 +19159,16 @@ void Initialize() {
     glDrawElementsInstancedBaseInstanceEXT =
             reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT>(
                     gapic::GetGfxProcAddress("glDrawElementsInstancedBaseInstanceEXT", false));
+    glDrawElementsInstancedBaseVertexBaseInstanceEXT =
+            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT>(
+                    gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertexBaseInstanceEXT",
+                                             false));
     glDrawElementsInstancedBaseVertexEXT =
             reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT>(
                     gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertexEXT", false));
     glDrawElementsInstancedBaseVertexOES =
             reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES>(
                     gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertexOES", false));
-    glDrawElementsInstancedBaseVertexBaseInstanceEXT =
-            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT>(
-                    gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertexBaseInstanceEXT",
-                                             false));
     glDrawElementsInstancedEXT = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDEXT>(
             gapic::GetGfxProcAddress("glDrawElementsInstancedEXT", false));
     glDrawElementsInstancedNV = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDNV>(
@@ -18328,6 +19227,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glFinishFenceNV", false));
     glFlushMappedBufferRangeEXT = reinterpret_cast<PFNGLFLUSHMAPPEDBUFFERRANGEEXT>(
             gapic::GetGfxProcAddress("glFlushMappedBufferRangeEXT", false));
+    glFragmentCoverageColorNV = reinterpret_cast<PFNGLFRAGMENTCOVERAGECOLORNV>(
+            gapic::GetGfxProcAddress("glFragmentCoverageColorNV", false));
+    glFramebufferSampleLocationsfvNV = reinterpret_cast<PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV>(
+            gapic::GetGfxProcAddress("glFramebufferSampleLocationsfvNV", false));
     glFramebufferTexture2DMultisampleEXT =
             reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT>(
                     gapic::GetGfxProcAddress("glFramebufferTexture2DMultisampleEXT", false));
@@ -18336,10 +19239,10 @@ void Initialize() {
                     gapic::GetGfxProcAddress("glFramebufferTexture2DMultisampleIMG", false));
     glFramebufferTexture3DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE3DOES>(
             gapic::GetGfxProcAddress("glFramebufferTexture3DOES", false));
-    glFramebufferTextureOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREOES>(
-            gapic::GetGfxProcAddress("glFramebufferTextureOES", false));
     glFramebufferTextureMultiviewOVR = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR>(
             gapic::GetGfxProcAddress("glFramebufferTextureMultiviewOVR", false));
+    glFramebufferTextureOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREOES>(
+            gapic::GetGfxProcAddress("glFramebufferTextureOES", false));
     glGenFencesNV =
             reinterpret_cast<PFNGLGENFENCESNV>(gapic::GetGfxProcAddress("glGenFencesNV", false));
     glGenPathsNV =
@@ -18354,6 +19257,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glGenVertexArraysOES", false));
     glGetBufferPointervOES = reinterpret_cast<PFNGLGETBUFFERPOINTERVOES>(
             gapic::GetGfxProcAddress("glGetBufferPointervOES", false));
+    glGetCoverageModulationTableNV = reinterpret_cast<PFNGLGETCOVERAGEMODULATIONTABLENV>(
+            gapic::GetGfxProcAddress("glGetCoverageModulationTableNV", false));
     glGetDriverControlStringQCOM = reinterpret_cast<PFNGLGETDRIVERCONTROLSTRINGQCOM>(
             gapic::GetGfxProcAddress("glGetDriverControlStringQCOM", false));
     glGetDriverControlsQCOM = reinterpret_cast<PFNGLGETDRIVERCONTROLSQCOM>(
@@ -18466,10 +19371,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glInsertEventMarkerEXT", false));
     glInterpolatePathsNV = reinterpret_cast<PFNGLINTERPOLATEPATHSNV>(
             gapic::GetGfxProcAddress("glInterpolatePathsNV", false));
-    glIsEnablediOES = reinterpret_cast<PFNGLISENABLEDIOES>(
-            gapic::GetGfxProcAddress("glIsEnablediOES", false));
     glIsEnablediNV =
             reinterpret_cast<PFNGLISENABLEDINV>(gapic::GetGfxProcAddress("glIsEnablediNV", false));
+    glIsEnablediOES = reinterpret_cast<PFNGLISENABLEDIOES>(
+            gapic::GetGfxProcAddress("glIsEnablediOES", false));
     glIsFenceNV = reinterpret_cast<PFNGLISFENCENV>(gapic::GetGfxProcAddress("glIsFenceNV", false));
     glIsImageHandleResidentNV = reinterpret_cast<PFNGLISIMAGEHANDLERESIDENTNV>(
             gapic::GetGfxProcAddress("glIsImageHandleResidentNV", false));
@@ -18526,6 +19431,9 @@ void Initialize() {
             gapic::GetGfxProcAddress("glMultiDrawElementsEXT", false));
     glMultiDrawElementsIndirectEXT = reinterpret_cast<PFNGLMULTIDRAWELEMENTSINDIRECTEXT>(
             gapic::GetGfxProcAddress("glMultiDrawElementsIndirectEXT", false));
+    glNamedFramebufferSampleLocationsfvNV =
+            reinterpret_cast<PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV>(
+                    gapic::GetGfxProcAddress("glNamedFramebufferSampleLocationsfvNV", false));
     glPatchParameteriOES = reinterpret_cast<PFNGLPATCHPARAMETERIOES>(
             gapic::GetGfxProcAddress("glPatchParameteriOES", false));
     glPathCommandsNV = reinterpret_cast<PFNGLPATHCOMMANDSNV>(
@@ -18652,6 +19560,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glPushGroupMarkerEXT", false));
     glQueryCounterEXT = reinterpret_cast<PFNGLQUERYCOUNTEREXT>(
             gapic::GetGfxProcAddress("glQueryCounterEXT", false));
+    glRasterSamplesEXT = reinterpret_cast<PFNGLRASTERSAMPLESEXT>(
+            gapic::GetGfxProcAddress("glRasterSamplesEXT", false));
     glReadBufferIndexedEXT = reinterpret_cast<PFNGLREADBUFFERINDEXEDEXT>(
             gapic::GetGfxProcAddress("glReadBufferIndexedEXT", false));
     glReadBufferNV =
@@ -18672,6 +19582,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glRenderbufferStorageMultisampleIMG", false));
     glRenderbufferStorageMultisampleNV = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV>(
             gapic::GetGfxProcAddress("glRenderbufferStorageMultisampleNV", false));
+    glResolveDepthValuesNV = reinterpret_cast<PFNGLRESOLVEDEPTHVALUESNV>(
+            gapic::GetGfxProcAddress("glResolveDepthValuesNV", false));
     glResolveMultisampleFramebufferAPPLE =
             reinterpret_cast<PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE>(
                     gapic::GetGfxProcAddress("glResolveMultisampleFramebufferAPPLE", false));
@@ -18709,6 +19621,8 @@ void Initialize() {
                     gapic::GetGfxProcAddress("glStencilThenCoverStrokePathInstancedNV", false));
     glStencilThenCoverStrokePathNV = reinterpret_cast<PFNGLSTENCILTHENCOVERSTROKEPATHNV>(
             gapic::GetGfxProcAddress("glStencilThenCoverStrokePathNV", false));
+    glSubpixelPrecisionBiasNV = reinterpret_cast<PFNGLSUBPIXELPRECISIONBIASNV>(
+            gapic::GetGfxProcAddress("glSubpixelPrecisionBiasNV", false));
     glTestFenceNV =
             reinterpret_cast<PFNGLTESTFENCENV>(gapic::GetGfxProcAddress("glTestFenceNV", false));
     glTexBufferOES =
@@ -18781,34 +19695,25 @@ void Initialize() {
             gapic::GetGfxProcAddress("glWaitSyncAPPLE", false));
     glWeightPathsNV = reinterpret_cast<PFNGLWEIGHTPATHSNV>(
             gapic::GetGfxProcAddress("glWeightPathsNV", false));
-    glCoverageModulationNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONNV>(
-            gapic::GetGfxProcAddress("glCoverageModulationNV", false));
-    glCoverageModulationTableNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONTABLENV>(
-            gapic::GetGfxProcAddress("glCoverageModulationTableNV", false));
-    glFragmentCoverageColorNV = reinterpret_cast<PFNGLFRAGMENTCOVERAGECOLORNV>(
-            gapic::GetGfxProcAddress("glFragmentCoverageColorNV", false));
-    glFramebufferSampleLocationsfvNV = reinterpret_cast<PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV>(
-            gapic::GetGfxProcAddress("glFramebufferSampleLocationsfvNV", false));
-    glGetCoverageModulationTableNV = reinterpret_cast<PFNGLGETCOVERAGEMODULATIONTABLENV>(
-            gapic::GetGfxProcAddress("glGetCoverageModulationTableNV", false));
-    glNamedFramebufferSampleLocationsfvNV =
-            reinterpret_cast<PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV>(
-                    gapic::GetGfxProcAddress("glNamedFramebufferSampleLocationsfvNV", false));
-    glRasterSamplesEXT = reinterpret_cast<PFNGLRASTERSAMPLESEXT>(
-            gapic::GetGfxProcAddress("glRasterSamplesEXT", false));
-    glResolveDepthValuesNV = reinterpret_cast<PFNGLRESOLVEDEPTHVALUESNV>(
-            gapic::GetGfxProcAddress("glResolveDepthValuesNV", false));
-    glSubpixelPrecisionBiasNV = reinterpret_cast<PFNGLSUBPIXELPRECISIONBIASNV>(
-            gapic::GetGfxProcAddress("glSubpixelPrecisionBiasNV", false));
+    glBlendBarrier =
+            reinterpret_cast<PFNGLBLENDBARRIER>(gapic::GetGfxProcAddress("glBlendBarrier", false));
     glBlendColor =
             reinterpret_cast<PFNGLBLENDCOLOR>(gapic::GetGfxProcAddress("glBlendColor", false));
     glBlendEquation = reinterpret_cast<PFNGLBLENDEQUATION>(
             gapic::GetGfxProcAddress("glBlendEquation", false));
     glBlendEquationSeparate = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATE>(
             gapic::GetGfxProcAddress("glBlendEquationSeparate", false));
+    glBlendEquationSeparatei = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATEI>(
+            gapic::GetGfxProcAddress("glBlendEquationSeparatei", false));
+    glBlendEquationi = reinterpret_cast<PFNGLBLENDEQUATIONI>(
+            gapic::GetGfxProcAddress("glBlendEquationi", false));
     glBlendFunc = reinterpret_cast<PFNGLBLENDFUNC>(gapic::GetGfxProcAddress("glBlendFunc", false));
     glBlendFuncSeparate = reinterpret_cast<PFNGLBLENDFUNCSEPARATE>(
             gapic::GetGfxProcAddress("glBlendFuncSeparate", false));
+    glBlendFuncSeparatei = reinterpret_cast<PFNGLBLENDFUNCSEPARATEI>(
+            gapic::GetGfxProcAddress("glBlendFuncSeparatei", false));
+    glBlendFunci =
+            reinterpret_cast<PFNGLBLENDFUNCI>(gapic::GetGfxProcAddress("glBlendFunci", false));
     glDepthFunc = reinterpret_cast<PFNGLDEPTHFUNC>(gapic::GetGfxProcAddress("glDepthFunc", false));
     glSampleCoverage = reinterpret_cast<PFNGLSAMPLECOVERAGE>(
             gapic::GetGfxProcAddress("glSampleCoverage", false));
@@ -18846,6 +19751,8 @@ void Initialize() {
     glClearStencil =
             reinterpret_cast<PFNGLCLEARSTENCIL>(gapic::GetGfxProcAddress("glClearStencil", false));
     glColorMask = reinterpret_cast<PFNGLCOLORMASK>(gapic::GetGfxProcAddress("glColorMask", false));
+    glColorMaski =
+            reinterpret_cast<PFNGLCOLORMASKI>(gapic::GetGfxProcAddress("glColorMaski", false));
     glDeleteFramebuffers = reinterpret_cast<PFNGLDELETEFRAMEBUFFERS>(
             gapic::GetGfxProcAddress("glDeleteFramebuffers", false));
     glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
@@ -18855,6 +19762,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glFramebufferParameteri", false));
     glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(
             gapic::GetGfxProcAddress("glFramebufferRenderbuffer", false));
+    glFramebufferTexture = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE>(
+            gapic::GetGfxProcAddress("glFramebufferTexture", false));
     glFramebufferTexture2D = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2D>(
             gapic::GetGfxProcAddress("glFramebufferTexture2D", false));
     glFramebufferTextureLayer = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURELAYER>(
@@ -18882,6 +19791,8 @@ void Initialize() {
             reinterpret_cast<PFNGLREADBUFFER>(gapic::GetGfxProcAddress("glReadBuffer", false));
     glReadPixels =
             reinterpret_cast<PFNGLREADPIXELS>(gapic::GetGfxProcAddress("glReadPixels", false));
+    glReadnPixels =
+            reinterpret_cast<PFNGLREADNPIXELS>(gapic::GetGfxProcAddress("glReadnPixels", false));
     glRenderbufferStorage = reinterpret_cast<PFNGLRENDERBUFFERSTORAGE>(
             gapic::GetGfxProcAddress("glRenderbufferStorage", false));
     glRenderbufferStorageMultisample = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLE>(
@@ -18891,12 +19802,16 @@ void Initialize() {
     glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
             gapic::GetGfxProcAddress("glStencilMaskSeparate", false));
     glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable", false));
+    glDisablei = reinterpret_cast<PFNGLDISABLEI>(gapic::GetGfxProcAddress("glDisablei", false));
     glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable", false));
+    glEnablei = reinterpret_cast<PFNGLENABLEI>(gapic::GetGfxProcAddress("glEnablei", false));
     glFinish = reinterpret_cast<PFNGLFINISH>(gapic::GetGfxProcAddress("glFinish", false));
     glFlush = reinterpret_cast<PFNGLFLUSH>(gapic::GetGfxProcAddress("glFlush", false));
     glFlushMappedBufferRange = reinterpret_cast<PFNGLFLUSHMAPPEDBUFFERRANGE>(
             gapic::GetGfxProcAddress("glFlushMappedBufferRange", false));
     glGetError = reinterpret_cast<PFNGLGETERROR>(gapic::GetGfxProcAddress("glGetError", false));
+    glGetGraphicsResetStatus = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUS>(
+            gapic::GetGfxProcAddress("glGetGraphicsResetStatus", false));
     glHint = reinterpret_cast<PFNGLHINT>(gapic::GetGfxProcAddress("glHint", false));
     glActiveShaderProgram = reinterpret_cast<PFNGLACTIVESHADERPROGRAM>(
             gapic::GetGfxProcAddress("glActiveShaderProgram", false));
@@ -18984,6 +19899,12 @@ void Initialize() {
             reinterpret_cast<PFNGLGETUNIFORMIV>(gapic::GetGfxProcAddress("glGetUniformiv", false));
     glGetUniformuiv = reinterpret_cast<PFNGLGETUNIFORMUIV>(
             gapic::GetGfxProcAddress("glGetUniformuiv", false));
+    glGetnUniformfv = reinterpret_cast<PFNGLGETNUNIFORMFV>(
+            gapic::GetGfxProcAddress("glGetnUniformfv", false));
+    glGetnUniformiv = reinterpret_cast<PFNGLGETNUNIFORMIV>(
+            gapic::GetGfxProcAddress("glGetnUniformiv", false));
+    glGetnUniformuiv = reinterpret_cast<PFNGLGETNUNIFORMUIV>(
+            gapic::GetGfxProcAddress("glGetnUniformuiv", false));
     glIsProgram = reinterpret_cast<PFNGLISPROGRAM>(gapic::GetGfxProcAddress("glIsProgram", false));
     glIsProgramPipeline = reinterpret_cast<PFNGLISPROGRAMPIPELINE>(
             gapic::GetGfxProcAddress("glIsProgramPipeline", false));
@@ -19145,6 +20066,8 @@ void Initialize() {
     glGetMultisamplefv = reinterpret_cast<PFNGLGETMULTISAMPLEFV>(
             gapic::GetGfxProcAddress("glGetMultisamplefv", false));
     glLineWidth = reinterpret_cast<PFNGLLINEWIDTH>(gapic::GetGfxProcAddress("glLineWidth", false));
+    glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADING>(
+            gapic::GetGfxProcAddress("glMinSampleShading", false));
     glPolygonOffset = reinterpret_cast<PFNGLPOLYGONOFFSET>(
             gapic::GetGfxProcAddress("glPolygonOffset", false));
     glViewport = reinterpret_cast<PFNGLVIEWPORT>(gapic::GetGfxProcAddress("glViewport", false));
@@ -19167,6 +20090,8 @@ void Initialize() {
     glGetStringi =
             reinterpret_cast<PFNGLGETSTRINGI>(gapic::GetGfxProcAddress("glGetStringi", false));
     glIsEnabled = reinterpret_cast<PFNGLISENABLED>(gapic::GetGfxProcAddress("glIsEnabled", false));
+    glIsEnabledi =
+            reinterpret_cast<PFNGLISENABLEDI>(gapic::GetGfxProcAddress("glIsEnabledi", false));
     glClientWaitSync = reinterpret_cast<PFNGLCLIENTWAITSYNC>(
             gapic::GetGfxProcAddress("glClientWaitSync", false));
     glDeleteSync =
@@ -19191,6 +20116,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glCompressedTexSubImage2D", false));
     glCompressedTexSubImage3D = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE3D>(
             gapic::GetGfxProcAddress("glCompressedTexSubImage3D", false));
+    glCopyImageSubData = reinterpret_cast<PFNGLCOPYIMAGESUBDATA>(
+            gapic::GetGfxProcAddress("glCopyImageSubData", false));
     glCopyTexImage2D = reinterpret_cast<PFNGLCOPYTEXIMAGE2D>(
             gapic::GetGfxProcAddress("glCopyTexImage2D", false));
     glCopyTexSubImage2D = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE2D>(
@@ -19207,6 +20134,10 @@ void Initialize() {
             reinterpret_cast<PFNGLGENTEXTURES>(gapic::GetGfxProcAddress("glGenTextures", false));
     glGenerateMipmap = reinterpret_cast<PFNGLGENERATEMIPMAP>(
             gapic::GetGfxProcAddress("glGenerateMipmap", false));
+    glGetSamplerParameterIiv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIIV>(
+            gapic::GetGfxProcAddress("glGetSamplerParameterIiv", false));
+    glGetSamplerParameterIuiv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIUIV>(
+            gapic::GetGfxProcAddress("glGetSamplerParameterIuiv", false));
     glGetSamplerParameterfv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERFV>(
             gapic::GetGfxProcAddress("glGetSamplerParameterfv", false));
     glGetSamplerParameteriv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIV>(
@@ -19215,6 +20146,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glGetTexLevelParameterfv", false));
     glGetTexLevelParameteriv = reinterpret_cast<PFNGLGETTEXLEVELPARAMETERIV>(
             gapic::GetGfxProcAddress("glGetTexLevelParameteriv", false));
+    glGetTexParameterIiv = reinterpret_cast<PFNGLGETTEXPARAMETERIIV>(
+            gapic::GetGfxProcAddress("glGetTexParameterIiv", false));
+    glGetTexParameterIuiv = reinterpret_cast<PFNGLGETTEXPARAMETERIUIV>(
+            gapic::GetGfxProcAddress("glGetTexParameterIuiv", false));
     glGetTexParameterfv = reinterpret_cast<PFNGLGETTEXPARAMETERFV>(
             gapic::GetGfxProcAddress("glGetTexParameterfv", false));
     glGetTexParameteriv = reinterpret_cast<PFNGLGETTEXPARAMETERIV>(
@@ -19223,6 +20158,10 @@ void Initialize() {
     glIsTexture = reinterpret_cast<PFNGLISTEXTURE>(gapic::GetGfxProcAddress("glIsTexture", false));
     glPixelStorei =
             reinterpret_cast<PFNGLPIXELSTOREI>(gapic::GetGfxProcAddress("glPixelStorei", false));
+    glSamplerParameterIiv = reinterpret_cast<PFNGLSAMPLERPARAMETERIIV>(
+            gapic::GetGfxProcAddress("glSamplerParameterIiv", false));
+    glSamplerParameterIuiv = reinterpret_cast<PFNGLSAMPLERPARAMETERIUIV>(
+            gapic::GetGfxProcAddress("glSamplerParameterIuiv", false));
     glSamplerParameterf = reinterpret_cast<PFNGLSAMPLERPARAMETERF>(
             gapic::GetGfxProcAddress("glSamplerParameterf", false));
     glSamplerParameterfv = reinterpret_cast<PFNGLSAMPLERPARAMETERFV>(
@@ -19231,10 +20170,17 @@ void Initialize() {
             gapic::GetGfxProcAddress("glSamplerParameteri", false));
     glSamplerParameteriv = reinterpret_cast<PFNGLSAMPLERPARAMETERIV>(
             gapic::GetGfxProcAddress("glSamplerParameteriv", false));
+    glTexBuffer = reinterpret_cast<PFNGLTEXBUFFER>(gapic::GetGfxProcAddress("glTexBuffer", false));
+    glTexBufferRange = reinterpret_cast<PFNGLTEXBUFFERRANGE>(
+            gapic::GetGfxProcAddress("glTexBufferRange", false));
     glTexImage2D =
             reinterpret_cast<PFNGLTEXIMAGE2D>(gapic::GetGfxProcAddress("glTexImage2D", false));
     glTexImage3D =
             reinterpret_cast<PFNGLTEXIMAGE3D>(gapic::GetGfxProcAddress("glTexImage3D", false));
+    glTexParameterIiv = reinterpret_cast<PFNGLTEXPARAMETERIIV>(
+            gapic::GetGfxProcAddress("glTexParameterIiv", false));
+    glTexParameterIuiv = reinterpret_cast<PFNGLTEXPARAMETERIUIV>(
+            gapic::GetGfxProcAddress("glTexParameterIuiv", false));
     glTexParameterf = reinterpret_cast<PFNGLTEXPARAMETERF>(
             gapic::GetGfxProcAddress("glTexParameterf", false));
     glTexParameterfv = reinterpret_cast<PFNGLTEXPARAMETERFV>(
@@ -19249,6 +20195,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glTexStorage2DMultisample", false));
     glTexStorage3D =
             reinterpret_cast<PFNGLTEXSTORAGE3D>(gapic::GetGfxProcAddress("glTexStorage3D", false));
+    glTexStorage3DMultisample = reinterpret_cast<PFNGLTEXSTORAGE3DMULTISAMPLE>(
+            gapic::GetGfxProcAddress("glTexStorage3DMultisample", false));
     glTexSubImage2D = reinterpret_cast<PFNGLTEXSUBIMAGE2D>(
             gapic::GetGfxProcAddress("glTexSubImage2D", false));
     glTexSubImage3D = reinterpret_cast<PFNGLTEXSUBIMAGE3D>(

@@ -135,13 +135,28 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLDRAWBUFFERS)(int32_t n, uint32_t *bufs);
     typedef void(STDCALL *PFNGLDRAWELEMENTS)(uint32_t draw_mode, int32_t element_count,
                                              uint32_t indices_type, void *indices);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSBASEVERTEX)(uint32_t mode, int32_t count, uint32_t type,
+                                                       void *indices, int32_t basevertex);
     typedef void(STDCALL *PFNGLDRAWELEMENTSINDIRECT)(uint32_t mode, uint32_t type, void *indirect);
     typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCED)(uint32_t mode, int32_t count, uint32_t type,
                                                       void *indices, int32_t instancecount);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX)(uint32_t mode, int32_t count,
+                                                                uint32_t type, void *indices,
+                                                                int32_t instancecount,
+                                                                int32_t basevertex);
     typedef void(STDCALL *PFNGLDRAWRANGEELEMENTS)(uint32_t mode, uint32_t start, uint32_t end,
                                                   int32_t count, uint32_t type, void *indices);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTSBASEVERTEX)(uint32_t mode, uint32_t start,
+                                                            uint32_t end, int32_t count,
+                                                            uint32_t type, void *indices,
+                                                            int32_t basevertex);
+    typedef void(STDCALL *PFNGLPATCHPARAMETERI)(uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLPRIMITIVEBOUNDINGBOX)(float minX, float minY, float minZ, float minW,
+                                                     float maxX, float maxY, float maxZ,
+                                                     float maxW);
     typedef void(STDCALL *PFNGLACTIVESHADERPROGRAMEXT)(uint32_t pipeline, uint32_t program);
     typedef void(STDCALL *PFNGLALPHAFUNCQCOM)(uint32_t func, float ref);
+    typedef void(STDCALL *PFNGLAPPLYFRAMEBUFFERATTACHMENTCMAAINTEL)();
     typedef void(STDCALL *PFNGLBEGINCONDITIONALRENDERNV)(uint32_t id, uint32_t mode);
     typedef void(STDCALL *PFNGLBEGINPERFMONITORAMD)(uint32_t monitor);
     typedef void(STDCALL *PFNGLBEGINPERFQUERYINTEL)(uint32_t queryHandle);
@@ -210,6 +225,8 @@ struct GlesImports {
                                                            float *transformValues);
     typedef void(STDCALL *PFNGLCOVERSTROKEPATHNV)(uint32_t path, uint32_t coverMode);
     typedef void(STDCALL *PFNGLCOVERAGEMASKNV)(uint8_t mask);
+    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONNV)(uint32_t components);
+    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONTABLENV)(int32_t n, float *v);
     typedef void(STDCALL *PFNGLCOVERAGEOPERATIONNV)(uint32_t operation);
     typedef void(STDCALL *PFNGLCREATEPERFQUERYINTEL)(uint32_t queryId, uint32_t *queryHandle);
     typedef uint32_t(STDCALL *PFNGLCREATESHADERPROGRAMVEXT)(uint32_t type, int32_t count,
@@ -256,6 +273,9 @@ struct GlesImports {
                                                                      uint32_t type, void *indices,
                                                                      int32_t instancecount,
                                                                      uint32_t baseinstance);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT)(
+            uint32_t mode, int32_t count, uint32_t type, void *indices, int32_t instancecount,
+            int32_t basevertex, uint32_t baseinstance);
     typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT)(uint32_t mode, int32_t count,
                                                                    uint32_t type, void *indices,
                                                                    int32_t instancecount,
@@ -264,9 +284,6 @@ struct GlesImports {
                                                                    uint32_t type, void *indices,
                                                                    int32_t instancecount,
                                                                    int32_t basevertex);
-    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT)(
-            uint32_t mode, int32_t count, uint32_t type, void *indices, int32_t instancecount,
-            int32_t basevertex, uint32_t baseinstance);
     typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDEXT)(uint32_t mode, int32_t count,
                                                          uint32_t type, void *indices,
                                                          int32_t primcount);
@@ -322,6 +339,9 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLFINISHFENCENV)(uint32_t fence);
     typedef void(STDCALL *PFNGLFLUSHMAPPEDBUFFERRANGEEXT)(uint32_t target, int32_t offset,
                                                           int32_t length);
+    typedef void(STDCALL *PFNGLFRAGMENTCOVERAGECOLORNV)(uint32_t color);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t target, uint32_t start,
+                                                               int32_t count, float *v);
     typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT)(uint32_t target,
                                                                    uint32_t attachment,
                                                                    uint32_t textarget,
@@ -335,12 +355,12 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE3DOES)(uint32_t target, uint32_t attachment,
                                                         uint32_t textarget, uint32_t texture,
                                                         int32_t level, int32_t zoffset);
-    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREOES)(uint32_t target, uint32_t attachment,
-                                                      uint32_t texture, int32_t level);
     typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR)(uint32_t target, uint32_t attachment,
                                                                uint32_t texture, int32_t level,
                                                                int32_t baseViewIndex,
                                                                int32_t numViews);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREOES)(uint32_t target, uint32_t attachment,
+                                                      uint32_t texture, int32_t level);
     typedef void(STDCALL *PFNGLGENFENCESNV)(int32_t n, uint32_t *fences);
     typedef uint32_t(STDCALL *PFNGLGENPATHSNV)(int32_t range);
     typedef void(STDCALL *PFNGLGENPERFMONITORSAMD)(int32_t n, uint32_t *monitors);
@@ -349,6 +369,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGENVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
     typedef void(STDCALL *PFNGLGETBUFFERPOINTERVOES)(uint32_t target, uint32_t pname,
                                                      void **params);
+    typedef void(STDCALL *PFNGLGETCOVERAGEMODULATIONTABLENV)(int32_t bufsize, float *v);
     typedef void(STDCALL *PFNGLGETDRIVERCONTROLSTRINGQCOM)(uint32_t driverControl, int32_t bufSize,
                                                            int32_t *length,
                                                            char *driverControlString);
@@ -464,8 +485,8 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
     typedef void(STDCALL *PFNGLINTERPOLATEPATHSNV)(uint32_t resultPath, uint32_t pathA,
                                                    uint32_t pathB, float weight);
-    typedef uint8_t(STDCALL *PFNGLISENABLEDIOES)(uint32_t target, uint32_t index);
     typedef uint8_t(STDCALL *PFNGLISENABLEDINV)(uint32_t target, uint32_t index);
+    typedef uint8_t(STDCALL *PFNGLISENABLEDIOES)(uint32_t target, uint32_t index);
     typedef uint8_t(STDCALL *PFNGLISFENCENV)(uint32_t fence);
     typedef uint8_t(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
     typedef uint8_t(STDCALL *PFNGLISPATHNV)(uint32_t path);
@@ -509,6 +530,9 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLMULTIDRAWELEMENTSINDIRECTEXT)(uint32_t mode, uint32_t type,
                                                              void *indirect, int32_t drawcount,
                                                              int32_t stride);
+    typedef void(STDCALL *PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t framebuffer,
+                                                                    uint32_t start, int32_t count,
+                                                                    float *v);
     typedef void(STDCALL *PFNGLPATCHPARAMETERIOES)(uint32_t pname, int32_t value);
     typedef void(STDCALL *PFNGLPATHCOMMANDSNV)(uint32_t path, int32_t numCommands,
                                                uint8_t *commands, int32_t numCoords,
@@ -649,6 +673,7 @@ struct GlesImports {
                                                              float *value);
     typedef void(STDCALL *PFNGLPUSHGROUPMARKEREXT)(int32_t length, char *marker);
     typedef void(STDCALL *PFNGLQUERYCOUNTEREXT)(uint32_t query, uint32_t target);
+    typedef void(STDCALL *PFNGLRASTERSAMPLESEXT)(uint32_t samples, uint8_t fixedsamplelocations);
     typedef void(STDCALL *PFNGLREADBUFFERINDEXEDEXT)(uint32_t src, int32_t index);
     typedef void(STDCALL *PFNGLREADBUFFERNV)(uint32_t mode);
     typedef void(STDCALL *PFNGLREADNPIXELSEXT)(int32_t x, int32_t y, int32_t width, int32_t height,
@@ -674,6 +699,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV)(uint32_t target, int32_t samples,
                                                                  uint32_t internalformat,
                                                                  int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRESOLVEDEPTHVALUESNV)();
     typedef void(STDCALL *PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE)();
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERIIVOES)(uint32_t sampler, uint32_t pname,
                                                        int32_t *param);
@@ -714,6 +740,7 @@ struct GlesImports {
             float *transformValues);
     typedef void(STDCALL *PFNGLSTENCILTHENCOVERSTROKEPATHNV)(uint32_t path, int32_t reference,
                                                              uint32_t mask, uint32_t coverMode);
+    typedef void(STDCALL *PFNGLSUBPIXELPRECISIONBIASNV)(uint32_t xbits, uint32_t ybits);
     typedef uint8_t(STDCALL *PFNGLTESTFENCENV)(uint32_t fence);
     typedef void(STDCALL *PFNGLTEXBUFFEROES)(uint32_t target, uint32_t internalformat,
                                              uint32_t buffer);
@@ -788,25 +815,20 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLWAITSYNCAPPLE)(uint64_t sync, uint32_t flag, uint64_t timeout);
     typedef void(STDCALL *PFNGLWEIGHTPATHSNV)(uint32_t resultPath, int32_t numPaths,
                                               uint32_t *paths, float *weights);
-    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONNV)(uint32_t components);
-    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONTABLENV)(int32_t n, float *v);
-    typedef void(STDCALL *PFNGLFRAGMENTCOVERAGECOLORNV)(uint32_t color);
-    typedef void(STDCALL *PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t target, uint32_t start,
-                                                               int32_t count, float *v);
-    typedef void(STDCALL *PFNGLGETCOVERAGEMODULATIONTABLENV)(int32_t bufsize, float *v);
-    typedef void(STDCALL *PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t framebuffer,
-                                                                    uint32_t start, int32_t count,
-                                                                    float *v);
-    typedef void(STDCALL *PFNGLRASTERSAMPLESEXT)(uint32_t samples, uint8_t fixedsamplelocations);
-    typedef void(STDCALL *PFNGLRESOLVEDEPTHVALUESNV)();
-    typedef void(STDCALL *PFNGLSUBPIXELPRECISIONBIASNV)(uint32_t xbits, uint32_t ybits);
+    typedef void(STDCALL *PFNGLBLENDBARRIER)();
     typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
     typedef void(STDCALL *PFNGLBLENDEQUATION)(uint32_t equation);
     typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(uint32_t rgb, uint32_t alpha);
+    typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATEI)(uint32_t buf, uint32_t modeRGB,
+                                                       uint32_t modeAlpha);
+    typedef void(STDCALL *PFNGLBLENDEQUATIONI)(uint32_t buf, uint32_t mode);
     typedef void(STDCALL *PFNGLBLENDFUNC)(uint32_t src_factor, uint32_t dst_factor);
     typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                                   uint32_t src_factor_alpha,
                                                   uint32_t dst_factor_alpha);
+    typedef void(STDCALL *PFNGLBLENDFUNCSEPARATEI)(uint32_t buf, uint32_t srcRGB, uint32_t dstRGB,
+                                                   uint32_t srcAlpha, uint32_t dstAlpha);
+    typedef void(STDCALL *PFNGLBLENDFUNCI)(uint32_t buf, uint32_t src, uint32_t dst);
     typedef void(STDCALL *PFNGLDEPTHFUNC)(uint32_t function);
     typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, uint8_t invert);
     typedef void(STDCALL *PFNGLSAMPLEMASKI)(uint32_t maskNumber, uint32_t mask);
@@ -836,6 +858,8 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
     typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
     typedef void(STDCALL *PFNGLCOLORMASK)(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+    typedef void(STDCALL *PFNGLCOLORMASKI)(uint32_t index, uint8_t r, uint8_t g, uint8_t b,
+                                           uint8_t a);
     typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
     typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
     typedef void(STDCALL *PFNGLDEPTHMASK)(uint8_t enabled);
@@ -845,6 +869,8 @@ struct GlesImports {
                                                         uint32_t framebuffer_attachment,
                                                         uint32_t renderbuffer_target,
                                                         uint32_t renderbuffer);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE)(uint32_t target, uint32_t attachment,
+                                                   uint32_t texture, int32_t level);
     typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(uint32_t framebuffer_target,
                                                      uint32_t framebuffer_attachment,
                                                      uint32_t texture_target, uint32_t texture,
@@ -872,6 +898,9 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLREADBUFFER)(uint32_t src);
     typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
                                            uint32_t format, uint32_t type, void *data);
+    typedef void(STDCALL *PFNGLREADNPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
+                                            uint32_t format, uint32_t type, int32_t bufSize,
+                                            void *data);
     typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGE)(uint32_t target, uint32_t format, int32_t width,
                                                     int32_t height);
     typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(uint32_t target, int32_t samples,
@@ -880,12 +909,15 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
     typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(uint32_t face, uint32_t mask);
     typedef void(STDCALL *PFNGLDISABLE)(uint32_t capability);
+    typedef void(STDCALL *PFNGLDISABLEI)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLENABLE)(uint32_t capability);
+    typedef void(STDCALL *PFNGLENABLEI)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLFINISH)();
     typedef void(STDCALL *PFNGLFLUSH)();
     typedef void(STDCALL *PFNGLFLUSHMAPPEDBUFFERRANGE)(uint32_t target, int32_t offset,
                                                        int32_t length);
     typedef uint32_t(STDCALL *PFNGLGETERROR)();
+    typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUS)();
     typedef void(STDCALL *PFNGLHINT)(uint32_t target, uint32_t mode);
     typedef void(STDCALL *PFNGLACTIVESHADERPROGRAM)(uint32_t pipeline, uint32_t program);
     typedef void(STDCALL *PFNGLATTACHSHADER)(uint32_t program, uint32_t shader);
@@ -965,6 +997,12 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
     typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
     typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMFV)(uint32_t program, int32_t location, int32_t bufSize,
+                                              float *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMIV)(uint32_t program, int32_t location, int32_t bufSize,
+                                              int32_t *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMUIV)(uint32_t program, int32_t location, int32_t bufSize,
+                                               uint32_t *params);
     typedef uint8_t(STDCALL *PFNGLISPROGRAM)(uint32_t program);
     typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
     typedef uint8_t(STDCALL *PFNGLISSHADER)(uint32_t shader);
@@ -1111,6 +1149,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLFRONTFACE)(uint32_t orientation);
     typedef void(STDCALL *PFNGLGETMULTISAMPLEFV)(uint32_t pname, uint32_t index, float *val);
     typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
+    typedef void(STDCALL *PFNGLMINSAMPLESHADING)(float value);
     typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
     typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
     typedef void(STDCALL *PFNGLGETBOOLEANI_V)(uint32_t target, uint32_t index, uint8_t *data);
@@ -1126,6 +1165,7 @@ struct GlesImports {
     typedef uint8_t *(STDCALL *PFNGLGETSTRING)(uint32_t param);
     typedef uint8_t *(STDCALL *PFNGLGETSTRINGI)(uint32_t name, uint32_t index);
     typedef uint8_t(STDCALL *PFNGLISENABLED)(uint32_t capability);
+    typedef uint8_t(STDCALL *PFNGLISENABLEDI)(uint32_t target, uint32_t index);
     typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, uint32_t syncFlags,
                                                    uint64_t timeout);
     typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
@@ -1159,6 +1199,12 @@ struct GlesImports {
                                                         int32_t height, int32_t depth,
                                                         uint32_t format, int32_t imageSize,
                                                         void *data);
+    typedef void(STDCALL *PFNGLCOPYIMAGESUBDATA)(uint32_t srcName, uint32_t srcTarget,
+                                                 int32_t srcLevel, int32_t srcX, int32_t srcY,
+                                                 int32_t srcZ, uint32_t dstName, uint32_t dstTarget,
+                                                 int32_t dstLevel, int32_t dstX, int32_t dstY,
+                                                 int32_t dstZ, int32_t srcWidth, int32_t srcHeight,
+                                                 int32_t srcDepth);
     typedef void(STDCALL *PFNGLCOPYTEXIMAGE2D)(uint32_t target, int32_t level, uint32_t format,
                                                int32_t x, int32_t y, int32_t width, int32_t height,
                                                int32_t border);
@@ -1173,6 +1219,10 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGENSAMPLERS)(int32_t count, uint32_t *samplers);
     typedef void(STDCALL *PFNGLGENTEXTURES)(int32_t count, uint32_t *textures);
     typedef void(STDCALL *PFNGLGENERATEMIPMAP)(uint32_t target);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIIV)(uint32_t sampler, uint32_t pname,
+                                                       int32_t *params);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIUIV)(uint32_t sampler, uint32_t pname,
+                                                        uint32_t *params);
     typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERFV)(uint32_t sampler, uint32_t pname,
                                                       float *params);
     typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIV)(uint32_t sampler, uint32_t pname,
@@ -1181,6 +1231,10 @@ struct GlesImports {
                                                        uint32_t pname, float *params);
     typedef void(STDCALL *PFNGLGETTEXLEVELPARAMETERIV)(uint32_t target, int32_t level,
                                                        uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIIV)(uint32_t target, uint32_t pname,
+                                                   int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIUIV)(uint32_t target, uint32_t pname,
+                                                    uint32_t *params);
     typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(uint32_t target, uint32_t parameter,
                                                   float *values);
     typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(uint32_t target, uint32_t parameter,
@@ -1188,11 +1242,19 @@ struct GlesImports {
     typedef uint8_t(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
     typedef uint8_t(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
     typedef void(STDCALL *PFNGLPIXELSTOREI)(uint32_t parameter, int32_t value);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIIV)(uint32_t sampler, uint32_t pname,
+                                                    int32_t *param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIUIV)(uint32_t sampler, uint32_t pname,
+                                                     uint32_t *param);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERF)(uint32_t sampler, uint32_t pname, float param);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERFV)(uint32_t sampler, uint32_t pname, float *param);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERI)(uint32_t sampler, uint32_t pname, int32_t param);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERIV)(uint32_t sampler, uint32_t pname,
                                                    int32_t *param);
+    typedef void(STDCALL *PFNGLTEXBUFFER)(uint32_t target, uint32_t internalformat,
+                                          uint32_t buffer);
+    typedef void(STDCALL *PFNGLTEXBUFFERRANGE)(uint32_t target, uint32_t internalformat,
+                                               uint32_t buffer, int32_t offset, int32_t size);
     typedef void(STDCALL *PFNGLTEXIMAGE2D)(uint32_t target, int32_t level, int32_t internal_format,
                                            int32_t width, int32_t height, int32_t border,
                                            uint32_t format, uint32_t type, void *data);
@@ -1200,6 +1262,8 @@ struct GlesImports {
                                            int32_t width, int32_t height, int32_t depth,
                                            int32_t border, uint32_t format, uint32_t type,
                                            void *pixels);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIIV)(uint32_t target, uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIUIV)(uint32_t target, uint32_t pname, uint32_t *params);
     typedef void(STDCALL *PFNGLTEXPARAMETERF)(uint32_t target, uint32_t parameter, float value);
     typedef void(STDCALL *PFNGLTEXPARAMETERFV)(uint32_t target, uint32_t pname, float *params);
     typedef void(STDCALL *PFNGLTEXPARAMETERI)(uint32_t target, uint32_t parameter, int32_t value);
@@ -1214,6 +1278,10 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLTEXSTORAGE3D)(uint32_t target, int32_t levels,
                                              uint32_t internalformat, int32_t width, int32_t height,
                                              int32_t depth);
+    typedef void(STDCALL *PFNGLTEXSTORAGE3DMULTISAMPLE)(uint32_t target, int32_t samples,
+                                                        uint32_t internalformat, int32_t width,
+                                                        int32_t height, int32_t depth,
+                                                        uint8_t fixedsamplelocations);
     typedef void(STDCALL *PFNGLTEXSUBIMAGE2D)(uint32_t target, int32_t level, int32_t xoffset,
                                               int32_t yoffset, int32_t width, int32_t height,
                                               uint32_t format, uint32_t type, void *data);
@@ -1372,11 +1440,17 @@ struct GlesImports {
     PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced;
     PFNGLDRAWBUFFERS glDrawBuffers;
     PFNGLDRAWELEMENTS glDrawElements;
+    PFNGLDRAWELEMENTSBASEVERTEX glDrawElementsBaseVertex;
     PFNGLDRAWELEMENTSINDIRECT glDrawElementsIndirect;
     PFNGLDRAWELEMENTSINSTANCED glDrawElementsInstanced;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX glDrawElementsInstancedBaseVertex;
     PFNGLDRAWRANGEELEMENTS glDrawRangeElements;
+    PFNGLDRAWRANGEELEMENTSBASEVERTEX glDrawRangeElementsBaseVertex;
+    PFNGLPATCHPARAMETERI glPatchParameteri;
+    PFNGLPRIMITIVEBOUNDINGBOX glPrimitiveBoundingBox;
     PFNGLACTIVESHADERPROGRAMEXT glActiveShaderProgramEXT;
     PFNGLALPHAFUNCQCOM glAlphaFuncQCOM;
+    PFNGLAPPLYFRAMEBUFFERATTACHMENTCMAAINTEL glApplyFramebufferAttachmentCMAAINTEL;
     PFNGLBEGINCONDITIONALRENDERNV glBeginConditionalRenderNV;
     PFNGLBEGINPERFMONITORAMD glBeginPerfMonitorAMD;
     PFNGLBEGINPERFQUERYINTEL glBeginPerfQueryINTEL;
@@ -1406,6 +1480,8 @@ struct GlesImports {
     PFNGLCOVERSTROKEPATHINSTANCEDNV glCoverStrokePathInstancedNV;
     PFNGLCOVERSTROKEPATHNV glCoverStrokePathNV;
     PFNGLCOVERAGEMASKNV glCoverageMaskNV;
+    PFNGLCOVERAGEMODULATIONNV glCoverageModulationNV;
+    PFNGLCOVERAGEMODULATIONTABLENV glCoverageModulationTableNV;
     PFNGLCOVERAGEOPERATIONNV glCoverageOperationNV;
     PFNGLCREATEPERFQUERYINTEL glCreatePerfQueryINTEL;
     PFNGLCREATESHADERPROGRAMVEXT glCreateShaderProgramvEXT;
@@ -1434,10 +1510,10 @@ struct GlesImports {
     PFNGLDRAWELEMENTSBASEVERTEXOES glDrawElementsBaseVertexOES;
     PFNGLDRAWELEMENTSINSTANCEDANGLE glDrawElementsInstancedANGLE;
     PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT glDrawElementsInstancedBaseInstanceEXT;
-    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT glDrawElementsInstancedBaseVertexEXT;
-    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES glDrawElementsInstancedBaseVertexOES;
     PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT
             glDrawElementsInstancedBaseVertexBaseInstanceEXT;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT glDrawElementsInstancedBaseVertexEXT;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES glDrawElementsInstancedBaseVertexOES;
     PFNGLDRAWELEMENTSINSTANCEDEXT glDrawElementsInstancedEXT;
     PFNGLDRAWELEMENTSINSTANCEDNV glDrawElementsInstancedNV;
     PFNGLDRAWRANGEELEMENTSBASEVERTEXEXT glDrawRangeElementsBaseVertexEXT;
@@ -1467,11 +1543,13 @@ struct GlesImports {
     PFNGLFENCESYNCAPPLE glFenceSyncAPPLE;
     PFNGLFINISHFENCENV glFinishFenceNV;
     PFNGLFLUSHMAPPEDBUFFERRANGEEXT glFlushMappedBufferRangeEXT;
+    PFNGLFRAGMENTCOVERAGECOLORNV glFragmentCoverageColorNV;
+    PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV glFramebufferSampleLocationsfvNV;
     PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT glFramebufferTexture2DMultisampleEXT;
     PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMG glFramebufferTexture2DMultisampleIMG;
     PFNGLFRAMEBUFFERTEXTURE3DOES glFramebufferTexture3DOES;
-    PFNGLFRAMEBUFFERTEXTUREOES glFramebufferTextureOES;
     PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR glFramebufferTextureMultiviewOVR;
+    PFNGLFRAMEBUFFERTEXTUREOES glFramebufferTextureOES;
     PFNGLGENFENCESNV glGenFencesNV;
     PFNGLGENPATHSNV glGenPathsNV;
     PFNGLGENPERFMONITORSAMD glGenPerfMonitorsAMD;
@@ -1479,6 +1557,7 @@ struct GlesImports {
     PFNGLGENQUERIESEXT glGenQueriesEXT;
     PFNGLGENVERTEXARRAYSOES glGenVertexArraysOES;
     PFNGLGETBUFFERPOINTERVOES glGetBufferPointervOES;
+    PFNGLGETCOVERAGEMODULATIONTABLENV glGetCoverageModulationTableNV;
     PFNGLGETDRIVERCONTROLSTRINGQCOM glGetDriverControlStringQCOM;
     PFNGLGETDRIVERCONTROLSQCOM glGetDriverControlsQCOM;
     PFNGLGETFENCEIVNV glGetFenceivNV;
@@ -1535,8 +1614,8 @@ struct GlesImports {
     PFNGLGETNUNIFORMUIVKHR glGetnUniformuivKHR;
     PFNGLINSERTEVENTMARKEREXT glInsertEventMarkerEXT;
     PFNGLINTERPOLATEPATHSNV glInterpolatePathsNV;
-    PFNGLISENABLEDIOES glIsEnablediOES;
     PFNGLISENABLEDINV glIsEnablediNV;
+    PFNGLISENABLEDIOES glIsEnablediOES;
     PFNGLISFENCENV glIsFenceNV;
     PFNGLISIMAGEHANDLERESIDENTNV glIsImageHandleResidentNV;
     PFNGLISPATHNV glIsPathNV;
@@ -1566,6 +1645,7 @@ struct GlesImports {
     PFNGLMULTIDRAWELEMENTSBASEVERTEXOES glMultiDrawElementsBaseVertexOES;
     PFNGLMULTIDRAWELEMENTSEXT glMultiDrawElementsEXT;
     PFNGLMULTIDRAWELEMENTSINDIRECTEXT glMultiDrawElementsIndirectEXT;
+    PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV glNamedFramebufferSampleLocationsfvNV;
     PFNGLPATCHPARAMETERIOES glPatchParameteriOES;
     PFNGLPATHCOMMANDSNV glPathCommandsNV;
     PFNGLPATHCOORDSNV glPathCoordsNV;
@@ -1629,6 +1709,7 @@ struct GlesImports {
     PFNGLPROGRAMUNIFORMMATRIX4X3FVEXT glProgramUniformMatrix4x3fvEXT;
     PFNGLPUSHGROUPMARKEREXT glPushGroupMarkerEXT;
     PFNGLQUERYCOUNTEREXT glQueryCounterEXT;
+    PFNGLRASTERSAMPLESEXT glRasterSamplesEXT;
     PFNGLREADBUFFERINDEXEDEXT glReadBufferIndexedEXT;
     PFNGLREADBUFFERNV glReadBufferNV;
     PFNGLREADNPIXELSEXT glReadnPixelsEXT;
@@ -1638,6 +1719,7 @@ struct GlesImports {
     PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXT glRenderbufferStorageMultisampleEXT;
     PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMG glRenderbufferStorageMultisampleIMG;
     PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV glRenderbufferStorageMultisampleNV;
+    PFNGLRESOLVEDEPTHVALUESNV glResolveDepthValuesNV;
     PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE glResolveMultisampleFramebufferAPPLE;
     PFNGLSAMPLERPARAMETERIIVOES glSamplerParameterIivOES;
     PFNGLSAMPLERPARAMETERIUIVOES glSamplerParameterIuivOES;
@@ -1655,6 +1737,7 @@ struct GlesImports {
     PFNGLSTENCILTHENCOVERFILLPATHNV glStencilThenCoverFillPathNV;
     PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNV glStencilThenCoverStrokePathInstancedNV;
     PFNGLSTENCILTHENCOVERSTROKEPATHNV glStencilThenCoverStrokePathNV;
+    PFNGLSUBPIXELPRECISIONBIASNV glSubpixelPrecisionBiasNV;
     PFNGLTESTFENCENV glTestFenceNV;
     PFNGLTEXBUFFEROES glTexBufferOES;
     PFNGLTEXBUFFERRANGEOES glTexBufferRangeOES;
@@ -1691,20 +1774,16 @@ struct GlesImports {
     PFNGLVIEWPORTINDEXEDFVNV glViewportIndexedfvNV;
     PFNGLWAITSYNCAPPLE glWaitSyncAPPLE;
     PFNGLWEIGHTPATHSNV glWeightPathsNV;
-    PFNGLCOVERAGEMODULATIONNV glCoverageModulationNV;
-    PFNGLCOVERAGEMODULATIONTABLENV glCoverageModulationTableNV;
-    PFNGLFRAGMENTCOVERAGECOLORNV glFragmentCoverageColorNV;
-    PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV glFramebufferSampleLocationsfvNV;
-    PFNGLGETCOVERAGEMODULATIONTABLENV glGetCoverageModulationTableNV;
-    PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV glNamedFramebufferSampleLocationsfvNV;
-    PFNGLRASTERSAMPLESEXT glRasterSamplesEXT;
-    PFNGLRESOLVEDEPTHVALUESNV glResolveDepthValuesNV;
-    PFNGLSUBPIXELPRECISIONBIASNV glSubpixelPrecisionBiasNV;
+    PFNGLBLENDBARRIER glBlendBarrier;
     PFNGLBLENDCOLOR glBlendColor;
     PFNGLBLENDEQUATION glBlendEquation;
     PFNGLBLENDEQUATIONSEPARATE glBlendEquationSeparate;
+    PFNGLBLENDEQUATIONSEPARATEI glBlendEquationSeparatei;
+    PFNGLBLENDEQUATIONI glBlendEquationi;
     PFNGLBLENDFUNC glBlendFunc;
     PFNGLBLENDFUNCSEPARATE glBlendFuncSeparate;
+    PFNGLBLENDFUNCSEPARATEI glBlendFuncSeparatei;
+    PFNGLBLENDFUNCI glBlendFunci;
     PFNGLDEPTHFUNC glDepthFunc;
     PFNGLSAMPLECOVERAGE glSampleCoverage;
     PFNGLSAMPLEMASKI glSampleMaski;
@@ -1726,11 +1805,13 @@ struct GlesImports {
     PFNGLCLEARDEPTHF glClearDepthf;
     PFNGLCLEARSTENCIL glClearStencil;
     PFNGLCOLORMASK glColorMask;
+    PFNGLCOLORMASKI glColorMaski;
     PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers;
     PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers;
     PFNGLDEPTHMASK glDepthMask;
     PFNGLFRAMEBUFFERPARAMETERI glFramebufferParameteri;
     PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer;
+    PFNGLFRAMEBUFFERTEXTURE glFramebufferTexture;
     PFNGLFRAMEBUFFERTEXTURE2D glFramebufferTexture2D;
     PFNGLFRAMEBUFFERTEXTURELAYER glFramebufferTextureLayer;
     PFNGLGENFRAMEBUFFERS glGenFramebuffers;
@@ -1744,16 +1825,20 @@ struct GlesImports {
     PFNGLISRENDERBUFFER glIsRenderbuffer;
     PFNGLREADBUFFER glReadBuffer;
     PFNGLREADPIXELS glReadPixels;
+    PFNGLREADNPIXELS glReadnPixels;
     PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage;
     PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
     PFNGLSTENCILMASK glStencilMask;
     PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate;
     PFNGLDISABLE glDisable;
+    PFNGLDISABLEI glDisablei;
     PFNGLENABLE glEnable;
+    PFNGLENABLEI glEnablei;
     PFNGLFINISH glFinish;
     PFNGLFLUSH glFlush;
     PFNGLFLUSHMAPPEDBUFFERRANGE glFlushMappedBufferRange;
     PFNGLGETERROR glGetError;
+    PFNGLGETGRAPHICSRESETSTATUS glGetGraphicsResetStatus;
     PFNGLHINT glHint;
     PFNGLACTIVESHADERPROGRAM glActiveShaderProgram;
     PFNGLATTACHSHADER glAttachShader;
@@ -1798,6 +1883,9 @@ struct GlesImports {
     PFNGLGETUNIFORMFV glGetUniformfv;
     PFNGLGETUNIFORMIV glGetUniformiv;
     PFNGLGETUNIFORMUIV glGetUniformuiv;
+    PFNGLGETNUNIFORMFV glGetnUniformfv;
+    PFNGLGETNUNIFORMIV glGetnUniformiv;
+    PFNGLGETNUNIFORMUIV glGetnUniformuiv;
     PFNGLISPROGRAM glIsProgram;
     PFNGLISPROGRAMPIPELINE glIsProgramPipeline;
     PFNGLISSHADER glIsShader;
@@ -1885,6 +1973,7 @@ struct GlesImports {
     PFNGLFRONTFACE glFrontFace;
     PFNGLGETMULTISAMPLEFV glGetMultisamplefv;
     PFNGLLINEWIDTH glLineWidth;
+    PFNGLMINSAMPLESHADING glMinSampleShading;
     PFNGLPOLYGONOFFSET glPolygonOffset;
     PFNGLVIEWPORT glViewport;
     PFNGLGETBOOLEANI_V glGetBooleani_v;
@@ -1898,6 +1987,7 @@ struct GlesImports {
     PFNGLGETSTRING glGetString;
     PFNGLGETSTRINGI glGetStringi;
     PFNGLISENABLED glIsEnabled;
+    PFNGLISENABLEDI glIsEnabledi;
     PFNGLCLIENTWAITSYNC glClientWaitSync;
     PFNGLDELETESYNC glDeleteSync;
     PFNGLFENCESYNC glFenceSync;
@@ -1912,6 +2002,7 @@ struct GlesImports {
     PFNGLCOMPRESSEDTEXIMAGE3D glCompressedTexImage3D;
     PFNGLCOMPRESSEDTEXSUBIMAGE2D glCompressedTexSubImage2D;
     PFNGLCOMPRESSEDTEXSUBIMAGE3D glCompressedTexSubImage3D;
+    PFNGLCOPYIMAGESUBDATA glCopyImageSubData;
     PFNGLCOPYTEXIMAGE2D glCopyTexImage2D;
     PFNGLCOPYTEXSUBIMAGE2D glCopyTexSubImage2D;
     PFNGLCOPYTEXSUBIMAGE3D glCopyTexSubImage3D;
@@ -1920,21 +2011,31 @@ struct GlesImports {
     PFNGLGENSAMPLERS glGenSamplers;
     PFNGLGENTEXTURES glGenTextures;
     PFNGLGENERATEMIPMAP glGenerateMipmap;
+    PFNGLGETSAMPLERPARAMETERIIV glGetSamplerParameterIiv;
+    PFNGLGETSAMPLERPARAMETERIUIV glGetSamplerParameterIuiv;
     PFNGLGETSAMPLERPARAMETERFV glGetSamplerParameterfv;
     PFNGLGETSAMPLERPARAMETERIV glGetSamplerParameteriv;
     PFNGLGETTEXLEVELPARAMETERFV glGetTexLevelParameterfv;
     PFNGLGETTEXLEVELPARAMETERIV glGetTexLevelParameteriv;
+    PFNGLGETTEXPARAMETERIIV glGetTexParameterIiv;
+    PFNGLGETTEXPARAMETERIUIV glGetTexParameterIuiv;
     PFNGLGETTEXPARAMETERFV glGetTexParameterfv;
     PFNGLGETTEXPARAMETERIV glGetTexParameteriv;
     PFNGLISSAMPLER glIsSampler;
     PFNGLISTEXTURE glIsTexture;
     PFNGLPIXELSTOREI glPixelStorei;
+    PFNGLSAMPLERPARAMETERIIV glSamplerParameterIiv;
+    PFNGLSAMPLERPARAMETERIUIV glSamplerParameterIuiv;
     PFNGLSAMPLERPARAMETERF glSamplerParameterf;
     PFNGLSAMPLERPARAMETERFV glSamplerParameterfv;
     PFNGLSAMPLERPARAMETERI glSamplerParameteri;
     PFNGLSAMPLERPARAMETERIV glSamplerParameteriv;
+    PFNGLTEXBUFFER glTexBuffer;
+    PFNGLTEXBUFFERRANGE glTexBufferRange;
     PFNGLTEXIMAGE2D glTexImage2D;
     PFNGLTEXIMAGE3D glTexImage3D;
+    PFNGLTEXPARAMETERIIV glTexParameterIiv;
+    PFNGLTEXPARAMETERIUIV glTexParameterIuiv;
     PFNGLTEXPARAMETERF glTexParameterf;
     PFNGLTEXPARAMETERFV glTexParameterfv;
     PFNGLTEXPARAMETERI glTexParameteri;
@@ -1942,6 +2043,7 @@ struct GlesImports {
     PFNGLTEXSTORAGE2D glTexStorage2D;
     PFNGLTEXSTORAGE2DMULTISAMPLE glTexStorage2DMultisample;
     PFNGLTEXSTORAGE3D glTexStorage3D;
+    PFNGLTEXSTORAGE3DMULTISAMPLE glTexStorage3DMultisample;
     PFNGLTEXSUBIMAGE2D glTexSubImage2D;
     PFNGLTEXSUBIMAGE3D glTexSubImage3D;
     PFNGLBEGINTRANSFORMFEEDBACK glBeginTransformFeedback;

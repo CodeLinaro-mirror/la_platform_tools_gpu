@@ -29,6 +29,9 @@ cmd void glDisable(GLenum capability) {
     case GL_SAMPLE_MASK: {
       minRequiredVersion(3, 1)
     }
+    case GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(capability)
     }
@@ -36,6 +39,23 @@ cmd void glDisable(GLenum capability) {
 
   ctx := GetContext()
   ctx.Capabilities[capability] = false
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
+cmd void glDisablei(GLenum target, GLuint index) {
+  minRequiredVersion(3, 2)
+  switch (target) {
+    case GL_BLEND, GL_CULL_FACE, GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS, GL_DEPTH_TEST,
+        GL_DITHER, GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART_FIXED_INDEX, GL_RASTERIZER_DISCARD,
+        GL_SAMPLE_ALPHA_TO_COVERAGE, GL_SAMPLE_COVERAGE, GL_SAMPLE_MASK, GL_SCISSOR_TEST,
+        GL_STENCIL_TEST: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml","OpenGL ES 2.0")
@@ -55,6 +75,9 @@ cmd void glEnable(GLenum capability) {
     case GL_SAMPLE_MASK: {
       minRequiredVersion(3, 1)
     }
+    case GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(capability)
     }
@@ -62,6 +85,23 @@ cmd void glEnable(GLenum capability) {
 
   ctx := GetContext()
   ctx.Capabilities[capability] = true
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
+cmd void glEnablei(GLenum target, GLuint index) {
+  minRequiredVersion(3, 2)
+  switch (target) {
+    case GL_BLEND, GL_CULL_FACE, GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS, GL_DEPTH_TEST,
+        GL_DITHER, GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART_FIXED_INDEX, GL_RASTERIZER_DISCARD,
+        GL_SAMPLE_ALPHA_TO_COVERAGE, GL_SAMPLE_COVERAGE, GL_SAMPLE_MASK, GL_SCISSOR_TEST,
+        GL_STENCIL_TEST: {
+      // version 3.2
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml","OpenGL ES 2.0")
@@ -93,6 +133,10 @@ cmd void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr len
         GL_UNIFORM_BUFFER: {
       // version 3.0
     }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER, GL_TEXTURE_BUFFER: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -107,6 +151,13 @@ cmd void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr len
 cmd GLenum glGetError() {
   minRequiredVersion(2, 0)
 
+  return ?
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetGraphicsResetStatus.xhtml","OpenGL ES 3.2")
+cmd GLenum glGetGraphicsResetStatus() {
+  minRequiredVersion(3, 2)
+  // TODO
   return ?
 }
 

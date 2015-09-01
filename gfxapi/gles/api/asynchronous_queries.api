@@ -22,6 +22,9 @@ cmd void glBeginQuery(GLenum target, QueryId query) {
         GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN: {
       // version 3.0
     }
+    case GL_PRIMITIVES_GENERATED: {
+      minRequiredVersion(3, 2)
+    }
     default: {
       glErrorInvalidEnum(target)
     }
@@ -51,6 +54,9 @@ cmd void glEndQuery(GLenum target) {
     case GL_ANY_SAMPLES_PASSED, GL_ANY_SAMPLES_PASSED_CONSERVATIVE,
         GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN: {
       // version 3.0
+    }
+    case GL_PRIMITIVES_GENERATED: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)
@@ -100,6 +106,9 @@ cmd void glGetQueryiv(GLenum target, GLenum parameter, GLint* value) {
     case GL_ANY_SAMPLES_PASSED, GL_ANY_SAMPLES_PASSED_CONSERVATIVE,
         GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN: {
       // version 3.0
+    }
+    case GL_PRIMITIVES_GENERATED: {
+      minRequiredVersion(3, 2)
     }
     default: {
       glErrorInvalidEnum(target)

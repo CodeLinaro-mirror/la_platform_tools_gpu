@@ -41,10 +41,10 @@ class generate_types {
 
 extern u32 imageSize(u32 width, u32 height, GLenum format, GLenum type)
 extern s32 stateVariableSize(GLenum v)
-macro void minRequiredVersion(u32 major, u32 minor) {}
-macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {}
-macro void requiresExtension(ExtensionId ext) {}
-macro void glErrorInvalidEnum(GLenum param) {}
+macro void minRequiredVersion(u32 major, u32 minor) {  }
+macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {  }
+macro void requiresExtension(ExtensionId ext) {  }
+macro void glErrorInvalidEnum(GLenum param) {  }
 
 enum ExtensionId {
   GL_AMD_performance_monitor                  = 1 ,
@@ -136,6 +136,7 @@ enum ExtensionId {
   GL_AMD_compressed_ATC_texture               = 87,
   GL_OES_texture_half_float                   = 88,
   GL_OES_vertex_half_float                    = 89,
+  GL_INTEL_framebuffer_CMAA                   = 90,
 }
 
 enum TextureKind {
