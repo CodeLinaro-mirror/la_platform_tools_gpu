@@ -76,6 +76,12 @@ if [ $use_xvfb -eq 1 ]; then
   export DISPLAY=:42
 fi
 
+# Print some debug info on OSX.
+if [[ $HOST_OS == "osx-x64" ]]; then
+  env
+  (echo | $GCC_TOOLCHAIN_ROOT/bin/$CXX -v -c -O2 -g -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -MMD -MF /tmp/foo.dep -std=c++11 -DTARGET_OS_OSX=1 -x c++ -) || true
+fi
+
 export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_TEST_FLAGS="-v -x"
 
