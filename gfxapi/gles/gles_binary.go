@@ -125,6 +125,9 @@ func init() {
 	Namespace.Add((*GLuint64ˢ)(nil).Class())
 	Namespace.Add((*GLuint64ᵖ)(nil).Class())
 	Namespace.Add((*GLuint64ᶜᵖ)(nil).Class())
+	Namespace.Add((*GLuintː2ᵃ)(nil).Class())
+	Namespace.Add((*GLuintː3ᵃ)(nil).Class())
+	Namespace.Add((*GLuintː4ᵃ)(nil).Class())
 	Namespace.Add((*GLuintˢ)(nil).Class())
 	Namespace.Add((*GLuintᵖ)(nil).Class())
 	Namespace.Add((*GLuintᶜᵖ)(nil).Class())
@@ -890,13 +893,31 @@ func init() {
 	Namespace.Add((*Mat2fˢ)(nil).Class())
 	Namespace.Add((*Mat2fᵖ)(nil).Class())
 	Namespace.Add((*Vec3f)(nil).Class())
+	Namespace.Add((*Mat2x3f)(nil).Class())
+	Namespace.Add((*Mat2x3fˢ)(nil).Class())
+	Namespace.Add((*Mat2x3fᵖ)(nil).Class())
+	Namespace.Add((*Vec4f)(nil).Class())
+	Namespace.Add((*Mat2x4f)(nil).Class())
+	Namespace.Add((*Mat2x4fˢ)(nil).Class())
+	Namespace.Add((*Mat2x4fᵖ)(nil).Class())
 	Namespace.Add((*Mat3f)(nil).Class())
 	Namespace.Add((*Mat3fˢ)(nil).Class())
 	Namespace.Add((*Mat3fᵖ)(nil).Class())
-	Namespace.Add((*Vec4f)(nil).Class())
+	Namespace.Add((*Mat3x2f)(nil).Class())
+	Namespace.Add((*Mat3x2fˢ)(nil).Class())
+	Namespace.Add((*Mat3x2fᵖ)(nil).Class())
+	Namespace.Add((*Mat3x4f)(nil).Class())
+	Namespace.Add((*Mat3x4fˢ)(nil).Class())
+	Namespace.Add((*Mat3x4fᵖ)(nil).Class())
 	Namespace.Add((*Mat4f)(nil).Class())
 	Namespace.Add((*Mat4fˢ)(nil).Class())
 	Namespace.Add((*Mat4fᵖ)(nil).Class())
+	Namespace.Add((*Mat4x2f)(nil).Class())
+	Namespace.Add((*Mat4x2fˢ)(nil).Class())
+	Namespace.Add((*Mat4x2fᵖ)(nil).Class())
+	Namespace.Add((*Mat4x3f)(nil).Class())
+	Namespace.Add((*Mat4x3fˢ)(nil).Class())
+	Namespace.Add((*Mat4x3fᵖ)(nil).Class())
 	Namespace.Add((*PipelineIdˢ)(nil).Class())
 	Namespace.Add((*ProgramIdˢ)(nil).Class())
 	Namespace.Add((*QueryIdˢ)(nil).Class())
@@ -919,23 +940,38 @@ func init() {
 	Namespace.Add((*U64ˢ)(nil).Class())
 	Namespace.Add((*U8ᵖ)(nil).Class())
 	Namespace.Add((*Vec2fː2ᵃ)(nil).Class())
+	Namespace.Add((*Vec2fː3ᵃ)(nil).Class())
+	Namespace.Add((*Vec2fː4ᵃ)(nil).Class())
 	Namespace.Add((*Vec2fˢ)(nil).Class())
 	Namespace.Add((*Vec2fᵖ)(nil).Class())
 	Namespace.Add((*Vec2i)(nil).Class())
 	Namespace.Add((*Vec2iˢ)(nil).Class())
 	Namespace.Add((*Vec2iᵖ)(nil).Class())
+	Namespace.Add((*Vec2u)(nil).Class())
+	Namespace.Add((*Vec2uˢ)(nil).Class())
+	Namespace.Add((*Vec2uᵖ)(nil).Class())
+	Namespace.Add((*Vec3fː2ᵃ)(nil).Class())
 	Namespace.Add((*Vec3fː3ᵃ)(nil).Class())
+	Namespace.Add((*Vec3fː4ᵃ)(nil).Class())
 	Namespace.Add((*Vec3fˢ)(nil).Class())
 	Namespace.Add((*Vec3fᵖ)(nil).Class())
 	Namespace.Add((*Vec3i)(nil).Class())
 	Namespace.Add((*Vec3iˢ)(nil).Class())
 	Namespace.Add((*Vec3iᵖ)(nil).Class())
+	Namespace.Add((*Vec3u)(nil).Class())
+	Namespace.Add((*Vec3uˢ)(nil).Class())
+	Namespace.Add((*Vec3uᵖ)(nil).Class())
+	Namespace.Add((*Vec4fː2ᵃ)(nil).Class())
+	Namespace.Add((*Vec4fː3ᵃ)(nil).Class())
 	Namespace.Add((*Vec4fː4ᵃ)(nil).Class())
 	Namespace.Add((*Vec4fˢ)(nil).Class())
 	Namespace.Add((*Vec4fᵖ)(nil).Class())
 	Namespace.Add((*Vec4i)(nil).Class())
 	Namespace.Add((*Vec4iˢ)(nil).Class())
 	Namespace.Add((*Vec4iᵖ)(nil).Class())
+	Namespace.Add((*Vec4u)(nil).Class())
+	Namespace.Add((*Vec4uˢ)(nil).Class())
+	Namespace.Add((*Vec4uᵖ)(nil).Class())
 	Namespace.Add((*VertexArrayIdˢ)(nil).Class())
 	Namespace.Add((*Voidˢ)(nil).Class())
 	Namespace.Add((*Voidᵖˢ)(nil).Class())
@@ -1055,6 +1091,9 @@ var (
 	binaryIDGLuint64ˢ                                        = binary.ID{0x52, 0xf2, 0x5f, 0x2c, 0x15, 0x03, 0xf3, 0x66, 0x9a, 0xaa, 0x21, 0x8c, 0x6f, 0x9e, 0x0f, 0xce, 0x7d, 0xa0, 0xae, 0xa2}
 	binaryIDGLuint64ᵖ                                        = binary.ID{0x9c, 0xd3, 0xef, 0x3e, 0x0a, 0x2e, 0xe3, 0x7a, 0xfa, 0xb1, 0x57, 0x79, 0xb3, 0x72, 0xc4, 0x23, 0xea, 0x0a, 0x58, 0x40}
 	binaryIDGLuint64ᶜᵖ                                       = binary.ID{0xa9, 0x1e, 0x26, 0x95, 0xae, 0xff, 0xfb, 0x7e, 0x60, 0xfc, 0x49, 0x62, 0x43, 0xb1, 0xd9, 0x47, 0x6b, 0x4b, 0xe2, 0x8b}
+	binaryIDGLuintː2ᵃ                                        = binary.ID{0x10, 0x18, 0xd5, 0xd1, 0x32, 0x84, 0xa5, 0x4c, 0x89, 0xfb, 0xa1, 0x37, 0xd2, 0x18, 0x04, 0x0f, 0xa2, 0x4a, 0x1f, 0xa3}
+	binaryIDGLuintː3ᵃ                                        = binary.ID{0x13, 0x1f, 0xe6, 0x76, 0xbe, 0x61, 0xb6, 0x8b, 0x5c, 0x7c, 0x74, 0xdd, 0x53, 0x1f, 0xce, 0xb2, 0xfc, 0xb2, 0xdb, 0xe6}
+	binaryIDGLuintː4ᵃ                                        = binary.ID{0xf7, 0x42, 0xe4, 0x0d, 0xe1, 0x71, 0xd3, 0xff, 0x17, 0xe2, 0x54, 0x69, 0x02, 0xfc, 0xff, 0x7a, 0xd2, 0xbe, 0x12, 0x5a}
 	binaryIDGLuintˢ                                          = binary.ID{0xad, 0x6a, 0x6a, 0x06, 0xe5, 0xcd, 0xb4, 0xaf, 0x49, 0x93, 0x63, 0x85, 0x31, 0xa3, 0x2e, 0x71, 0xf3, 0xcc, 0xf0, 0x49}
 	binaryIDGLuintᵖ                                          = binary.ID{0x27, 0xaa, 0x79, 0xdf, 0x31, 0xad, 0x72, 0xb1, 0x5f, 0xbb, 0x14, 0x90, 0xaf, 0x95, 0x9e, 0x69, 0x80, 0x1f, 0x44, 0xf8}
 	binaryIDGLuintᶜᵖ                                         = binary.ID{0x29, 0x02, 0x1e, 0x6b, 0x99, 0x5e, 0x1b, 0x26, 0x5b, 0x30, 0xf2, 0x71, 0xe4, 0xeb, 0x0b, 0xe9, 0x9d, 0xe9, 0xf8, 0x95}
@@ -1444,19 +1483,19 @@ var (
 	binaryIDGlGetUniformLocation                             = binary.ID{0xd9, 0x4d, 0x1e, 0x3c, 0xe5, 0x99, 0xab, 0xf3, 0x3c, 0x4e, 0x27, 0xad, 0xd6, 0xd0, 0x7c, 0x6d, 0xb9, 0x4b, 0x2d, 0xc4}
 	binaryIDGlGetUniformfv                                   = binary.ID{0x7e, 0x7b, 0x0d, 0xdb, 0xd6, 0x1a, 0x07, 0x5f, 0x78, 0x88, 0xff, 0xad, 0x74, 0x97, 0xf4, 0x30, 0x54, 0xd6, 0x6f, 0x89}
 	binaryIDGlGetUniformiv                                   = binary.ID{0x3d, 0xf7, 0x66, 0xe4, 0xf9, 0xee, 0x98, 0x0e, 0xab, 0xf4, 0xe3, 0xec, 0xd2, 0x9e, 0xc4, 0x2d, 0xe4, 0xb6, 0xdd, 0x06}
-	binaryIDGlGetUniformuiv                                  = binary.ID{0x98, 0x75, 0xe8, 0xa4, 0x60, 0x97, 0x7e, 0xe2, 0xc5, 0x1d, 0x3a, 0xc0, 0x15, 0x80, 0x15, 0x0e, 0xca, 0xc4, 0x37, 0x87}
+	binaryIDGlGetUniformuiv                                  = binary.ID{0xc9, 0x22, 0xd4, 0x3f, 0xfc, 0x48, 0x7a, 0x71, 0xe2, 0x9f, 0xc6, 0x08, 0x19, 0x5c, 0x7d, 0x3c, 0xe2, 0x28, 0x99, 0x31}
 	binaryIDGlGetVertexAttribIiv                             = binary.ID{0xc7, 0x30, 0x61, 0x4c, 0x20, 0x68, 0x23, 0x41, 0xfe, 0x4f, 0xc9, 0xb4, 0x6d, 0x9a, 0x15, 0x18, 0xd1, 0x46, 0x4a, 0x7b}
 	binaryIDGlGetVertexAttribIuiv                            = binary.ID{0x06, 0x4b, 0xf1, 0xc2, 0x18, 0x8c, 0x50, 0x2c, 0x96, 0x2d, 0xc4, 0x26, 0x79, 0xf0, 0x9f, 0xc5, 0xbd, 0xbd, 0x07, 0x38}
 	binaryIDGlGetVertexAttribPointerv                        = binary.ID{0x3e, 0x3b, 0x21, 0x57, 0x6a, 0xb2, 0x67, 0x32, 0xd9, 0x0c, 0xc3, 0xb9, 0xdb, 0x27, 0x0e, 0xd4, 0x00, 0xa7, 0xd5, 0xd8}
 	binaryIDGlGetVertexAttribfv                              = binary.ID{0x43, 0x0f, 0xa7, 0x10, 0x8b, 0x76, 0xec, 0xe5, 0x9d, 0x4f, 0x37, 0xc7, 0x20, 0x96, 0xb0, 0x84, 0xb4, 0x85, 0x68, 0xb4}
 	binaryIDGlGetVertexAttribiv                              = binary.ID{0x85, 0x52, 0xcf, 0x36, 0x59, 0xd7, 0xf7, 0x8f, 0xab, 0x8e, 0xdd, 0x07, 0x4d, 0x93, 0x91, 0x3e, 0xa1, 0x13, 0x39, 0x13}
-	binaryIDGlGetnUniformfv                                  = binary.ID{0x81, 0xa8, 0x5a, 0x4d, 0xc6, 0x09, 0xdf, 0x35, 0x98, 0xbe, 0x06, 0xce, 0xd8, 0x64, 0xc5, 0xa0, 0x13, 0x61, 0xca, 0x93}
+	binaryIDGlGetnUniformfv                                  = binary.ID{0x6c, 0xb4, 0xe5, 0x48, 0x8a, 0x29, 0xf5, 0x25, 0xb0, 0xf2, 0xf8, 0x7b, 0xb7, 0xc6, 0xe8, 0x85, 0xcd, 0xb6, 0xd6, 0xb9}
 	binaryIDGlGetnUniformfvEXT                               = binary.ID{0x1a, 0x85, 0x54, 0x34, 0x80, 0xdd, 0xa1, 0x19, 0x77, 0xcc, 0x6d, 0x09, 0x5b, 0x6b, 0x87, 0x8b, 0x8a, 0xe6, 0x50, 0x31}
 	binaryIDGlGetnUniformfvKHR                               = binary.ID{0xe9, 0x22, 0x0f, 0x57, 0x9e, 0xe6, 0x80, 0x9c, 0x90, 0x4e, 0x7a, 0xcd, 0x76, 0x47, 0x0d, 0xe6, 0x5d, 0x49, 0x99, 0x51}
-	binaryIDGlGetnUniformiv                                  = binary.ID{0x42, 0xdb, 0xda, 0x9a, 0xf9, 0x6d, 0xa7, 0x8b, 0x1e, 0xb3, 0x39, 0x58, 0xe6, 0xb2, 0xe4, 0x9b, 0x50, 0xab, 0xb5, 0x8c}
+	binaryIDGlGetnUniformiv                                  = binary.ID{0xee, 0x5b, 0x2a, 0xf2, 0xc6, 0x58, 0x74, 0xe9, 0x8f, 0x8e, 0xe8, 0x49, 0x03, 0xeb, 0x3e, 0x7a, 0x9b, 0x17, 0x52, 0x43}
 	binaryIDGlGetnUniformivEXT                               = binary.ID{0x8b, 0x9d, 0x78, 0x44, 0x88, 0xf0, 0x34, 0x2f, 0x49, 0x51, 0x8f, 0xb6, 0xf7, 0xc0, 0x2d, 0x6c, 0x5c, 0xad, 0xa8, 0xae}
 	binaryIDGlGetnUniformivKHR                               = binary.ID{0xd0, 0x77, 0xbd, 0x82, 0x7e, 0x23, 0x53, 0x76, 0x88, 0xeb, 0x09, 0x7f, 0xd2, 0xe0, 0x47, 0x77, 0x89, 0x99, 0x3c, 0x28}
-	binaryIDGlGetnUniformuiv                                 = binary.ID{0x31, 0xc5, 0xde, 0xb9, 0x86, 0x17, 0xb4, 0x22, 0xaf, 0xab, 0xdd, 0x81, 0x92, 0xa0, 0xd7, 0xaa, 0x12, 0x1c, 0x85, 0xba}
+	binaryIDGlGetnUniformuiv                                 = binary.ID{0xea, 0x51, 0x19, 0xf9, 0xaa, 0x60, 0x20, 0xc8, 0x85, 0x51, 0x10, 0x32, 0x2a, 0x2d, 0x49, 0x84, 0x7f, 0x77, 0x32, 0xb1}
 	binaryIDGlGetnUniformuivKHR                              = binary.ID{0x3c, 0xb9, 0x2b, 0xd2, 0x34, 0x35, 0x2e, 0x0b, 0xde, 0xc0, 0xcd, 0x60, 0x2d, 0x69, 0x6a, 0x69, 0xf4, 0x6c, 0x43, 0x41}
 	binaryIDGlHint                                           = binary.ID{0x99, 0x8a, 0x57, 0x73, 0xe0, 0x3c, 0x8c, 0x3a, 0x80, 0xb7, 0x02, 0xcc, 0xf5, 0x66, 0x58, 0x95, 0x5a, 0xf5, 0x02, 0x81}
 	binaryIDGlInsertEventMarkerEXT                           = binary.ID{0x25, 0xfc, 0x5a, 0x6d, 0x1f, 0x10, 0x9b, 0xdd, 0x1f, 0x22, 0x18, 0x33, 0xff, 0x80, 0x0d, 0x41, 0x05, 0x25, 0x31, 0x6a}
@@ -1559,73 +1598,73 @@ var (
 	binaryIDGlProgramParameteri                              = binary.ID{0x72, 0x10, 0xc6, 0x95, 0x5a, 0x4d, 0xba, 0x2b, 0x89, 0x10, 0x22, 0x56, 0x86, 0xdc, 0xf8, 0xa3, 0x68, 0x65, 0x22, 0x4a}
 	binaryIDGlProgramParameteriEXT                           = binary.ID{0x0f, 0xed, 0x0d, 0x7f, 0x77, 0x69, 0xe0, 0x24, 0xf3, 0x78, 0x63, 0xad, 0x97, 0x44, 0xf2, 0x20, 0x18, 0xa6, 0x1c, 0x26}
 	binaryIDGlProgramPathFragmentInputGenNV                  = binary.ID{0x7b, 0x5b, 0x3f, 0x42, 0x7a, 0x5f, 0x01, 0xe1, 0xcf, 0x87, 0xd2, 0xa2, 0x33, 0xc0, 0x5b, 0x9b, 0xc8, 0x16, 0x32, 0x9e}
-	binaryIDGlProgramUniform1f                               = binary.ID{0x1e, 0xe5, 0x1a, 0x0e, 0x20, 0xc6, 0xbb, 0xa5, 0x9a, 0x64, 0x51, 0xc3, 0xd8, 0x3e, 0xb5, 0x6b, 0x56, 0x82, 0x6d, 0x6c}
+	binaryIDGlProgramUniform1f                               = binary.ID{0xca, 0xb1, 0xac, 0xd4, 0x35, 0xc6, 0x54, 0xfd, 0x25, 0x48, 0x97, 0xec, 0xec, 0xf3, 0x6d, 0xdf, 0x84, 0x51, 0xa1, 0xe6}
 	binaryIDGlProgramUniform1fEXT                            = binary.ID{0xae, 0xe9, 0x91, 0x57, 0x18, 0x13, 0x69, 0x73, 0x4c, 0xda, 0xb8, 0x06, 0x03, 0xb9, 0x3f, 0x42, 0x24, 0x24, 0x09, 0x58}
-	binaryIDGlProgramUniform1fv                              = binary.ID{0x69, 0x43, 0x5b, 0xdc, 0x12, 0xed, 0x4a, 0x55, 0x24, 0xd5, 0x31, 0x41, 0xb7, 0xc6, 0x34, 0xe9, 0x57, 0x16, 0xa4, 0x74}
+	binaryIDGlProgramUniform1fv                              = binary.ID{0xe1, 0xbd, 0xa3, 0x65, 0x4a, 0x18, 0x0d, 0x40, 0xbc, 0x23, 0xfa, 0x00, 0xf2, 0x1e, 0x49, 0xd0, 0xb1, 0x0d, 0xac, 0x61}
 	binaryIDGlProgramUniform1fvEXT                           = binary.ID{0x2d, 0xea, 0x7a, 0x87, 0xf8, 0x37, 0x85, 0x38, 0x6c, 0xa9, 0xb4, 0x4f, 0x1b, 0x05, 0xd4, 0x49, 0xd9, 0x88, 0x2a, 0xa4}
-	binaryIDGlProgramUniform1i                               = binary.ID{0x62, 0xa0, 0xe2, 0xd9, 0x7e, 0xf7, 0xcc, 0xb4, 0x13, 0x65, 0x88, 0x70, 0x11, 0x2e, 0xdf, 0xf5, 0xd7, 0x46, 0x06, 0x7f}
+	binaryIDGlProgramUniform1i                               = binary.ID{0x27, 0x0e, 0x33, 0xde, 0xe4, 0x06, 0xc2, 0x59, 0x8d, 0x5a, 0x87, 0x05, 0x91, 0xa7, 0xd7, 0x4d, 0x76, 0x8f, 0xcd, 0xb8}
 	binaryIDGlProgramUniform1iEXT                            = binary.ID{0x9b, 0x4e, 0x65, 0xe8, 0x8c, 0x72, 0x5d, 0x5a, 0xc5, 0x39, 0x86, 0x4f, 0x28, 0xe8, 0x38, 0x85, 0xc1, 0x73, 0x27, 0x9e}
-	binaryIDGlProgramUniform1iv                              = binary.ID{0x21, 0xa1, 0x7e, 0xf0, 0xe8, 0x2e, 0x87, 0xdd, 0x2e, 0x0f, 0x35, 0x67, 0x66, 0x14, 0xc3, 0xaf, 0x52, 0x17, 0x18, 0xd0}
+	binaryIDGlProgramUniform1iv                              = binary.ID{0x41, 0xb4, 0x19, 0x77, 0x4c, 0x03, 0xf6, 0x28, 0x26, 0x16, 0x38, 0x9e, 0x43, 0x9a, 0x6a, 0x41, 0xcf, 0xbd, 0x56, 0xfb}
 	binaryIDGlProgramUniform1ivEXT                           = binary.ID{0x9c, 0xf1, 0xa9, 0x82, 0xbc, 0x18, 0x2a, 0xc0, 0x29, 0xc0, 0xc8, 0xff, 0x94, 0x67, 0xa7, 0xcd, 0x24, 0x44, 0xb4, 0x46}
-	binaryIDGlProgramUniform1ui                              = binary.ID{0x5f, 0x1d, 0x26, 0x0b, 0xa8, 0x10, 0x08, 0x00, 0x3a, 0xea, 0x19, 0x14, 0xde, 0xe8, 0x1f, 0x23, 0x69, 0xef, 0x01, 0x6d}
+	binaryIDGlProgramUniform1ui                              = binary.ID{0x40, 0xcd, 0x4b, 0x23, 0x64, 0xf2, 0x99, 0xab, 0x7b, 0x12, 0xdf, 0x47, 0x14, 0x5e, 0x4d, 0xf6, 0x85, 0xbc, 0x83, 0x40}
 	binaryIDGlProgramUniform1uiEXT                           = binary.ID{0xe3, 0x1f, 0x8b, 0x95, 0x37, 0x09, 0x8e, 0xb2, 0xc7, 0x89, 0xdd, 0x4e, 0xc0, 0x63, 0x13, 0x7b, 0xb2, 0x8b, 0x5a, 0x2b}
-	binaryIDGlProgramUniform1uiv                             = binary.ID{0x00, 0x19, 0x38, 0x2c, 0xc6, 0x98, 0xe2, 0xbe, 0x38, 0x4a, 0xde, 0x54, 0xc5, 0xe2, 0x10, 0x94, 0xae, 0x65, 0x7f, 0x64}
+	binaryIDGlProgramUniform1uiv                             = binary.ID{0x9c, 0x3d, 0xc9, 0x3b, 0x54, 0x38, 0x47, 0xcc, 0x80, 0xb3, 0xbc, 0xc7, 0x1a, 0xe1, 0x76, 0x3c, 0xd0, 0xa0, 0xb7, 0x25}
 	binaryIDGlProgramUniform1uivEXT                          = binary.ID{0xbd, 0xe0, 0x8a, 0x9e, 0x96, 0xd0, 0xe9, 0xf3, 0xa0, 0x25, 0x05, 0xca, 0x8b, 0xf0, 0x2d, 0x26, 0x09, 0x35, 0x04, 0xdf}
-	binaryIDGlProgramUniform2f                               = binary.ID{0xfd, 0xf9, 0x56, 0x02, 0x6d, 0x3a, 0x30, 0x65, 0x4b, 0xac, 0x5c, 0x20, 0x19, 0xd3, 0x40, 0xf9, 0xff, 0x46, 0xc3, 0xcc}
+	binaryIDGlProgramUniform2f                               = binary.ID{0x28, 0x92, 0x46, 0xc9, 0x95, 0xff, 0x2a, 0x73, 0xdd, 0x1c, 0xf3, 0xd7, 0x33, 0xd4, 0x2d, 0x63, 0x0c, 0x98, 0x40, 0xae}
 	binaryIDGlProgramUniform2fEXT                            = binary.ID{0x4d, 0xee, 0x10, 0x8c, 0x0f, 0x9a, 0x85, 0x5d, 0x61, 0x8f, 0x85, 0xe7, 0xf5, 0xcd, 0x0d, 0x82, 0x9a, 0xa9, 0xbb, 0x17}
-	binaryIDGlProgramUniform2fv                              = binary.ID{0xf9, 0x1a, 0x56, 0xe4, 0x42, 0x49, 0xc0, 0x74, 0x03, 0xca, 0xfb, 0x4f, 0xce, 0x24, 0x98, 0x47, 0x16, 0x45, 0x7c, 0x3c}
+	binaryIDGlProgramUniform2fv                              = binary.ID{0xed, 0x1f, 0x06, 0x3c, 0xe8, 0xb5, 0x3f, 0x0d, 0x4d, 0x88, 0x8c, 0xff, 0xf3, 0x9c, 0xdd, 0xb8, 0x42, 0x49, 0x5c, 0x82}
 	binaryIDGlProgramUniform2fvEXT                           = binary.ID{0xc6, 0xb0, 0xaf, 0x8f, 0x8e, 0xd3, 0xf8, 0xaa, 0x87, 0x1c, 0xac, 0x79, 0xc4, 0xb1, 0x75, 0x77, 0x53, 0xd4, 0xc8, 0x6e}
-	binaryIDGlProgramUniform2i                               = binary.ID{0xee, 0x91, 0x98, 0xf6, 0x73, 0x5b, 0x21, 0x0b, 0x72, 0x0a, 0x30, 0xee, 0xe8, 0x59, 0xce, 0xce, 0x85, 0x09, 0x89, 0x3f}
+	binaryIDGlProgramUniform2i                               = binary.ID{0xff, 0x97, 0x35, 0x4b, 0x63, 0x04, 0x33, 0x63, 0x5c, 0x60, 0x43, 0xcd, 0xfc, 0xfc, 0xee, 0x02, 0xd8, 0xa5, 0x85, 0x77}
 	binaryIDGlProgramUniform2iEXT                            = binary.ID{0x49, 0x53, 0x31, 0xfd, 0x9f, 0x27, 0x37, 0x0d, 0x21, 0x9a, 0xa4, 0x41, 0xe1, 0x8e, 0x93, 0x21, 0x86, 0xd6, 0xe6, 0x57}
-	binaryIDGlProgramUniform2iv                              = binary.ID{0x0a, 0xdd, 0xab, 0xa0, 0x3b, 0x38, 0x3b, 0xbb, 0xb2, 0xbb, 0xa1, 0xa7, 0xc1, 0x6e, 0xaa, 0x13, 0x18, 0x18, 0x79, 0xf8}
+	binaryIDGlProgramUniform2iv                              = binary.ID{0xb7, 0xc2, 0xab, 0x49, 0x48, 0x06, 0xba, 0x50, 0x1f, 0x6f, 0x39, 0x48, 0xc9, 0xc8, 0xef, 0x3b, 0x11, 0xf2, 0x24, 0x5f}
 	binaryIDGlProgramUniform2ivEXT                           = binary.ID{0xba, 0x05, 0xaf, 0xf5, 0x29, 0xcd, 0x76, 0x7e, 0x76, 0x15, 0x27, 0x2f, 0x56, 0xa5, 0xf8, 0xa9, 0xe7, 0x8c, 0x10, 0x93}
-	binaryIDGlProgramUniform2ui                              = binary.ID{0xcb, 0x80, 0x7b, 0x37, 0x29, 0xb6, 0xbc, 0x74, 0x28, 0x8b, 0x16, 0xd7, 0x99, 0x6b, 0x9f, 0x60, 0xff, 0x1a, 0xf1, 0xc2}
+	binaryIDGlProgramUniform2ui                              = binary.ID{0xe9, 0x3d, 0x78, 0x09, 0xc9, 0x0e, 0xf1, 0x2a, 0x22, 0x4a, 0x4f, 0xa6, 0x05, 0x46, 0xe8, 0xc4, 0x25, 0x5e, 0x9b, 0xf3}
 	binaryIDGlProgramUniform2uiEXT                           = binary.ID{0x58, 0xdb, 0xbb, 0x8b, 0x2d, 0x24, 0x83, 0xc2, 0x74, 0xca, 0xa5, 0xde, 0x8c, 0x04, 0xfe, 0x24, 0x9a, 0x22, 0x00, 0xc5}
-	binaryIDGlProgramUniform2uiv                             = binary.ID{0xa3, 0xaf, 0x58, 0x13, 0xfc, 0x7c, 0x26, 0x2f, 0x6f, 0xec, 0x73, 0xc6, 0x37, 0x9d, 0x2a, 0xda, 0xd0, 0xed, 0x71, 0x80}
+	binaryIDGlProgramUniform2uiv                             = binary.ID{0xf3, 0x72, 0x0b, 0x57, 0xc2, 0x70, 0xa9, 0xf9, 0xc9, 0x7c, 0x70, 0xcc, 0x94, 0xf8, 0x21, 0x34, 0x05, 0x4b, 0x4d, 0xb4}
 	binaryIDGlProgramUniform2uivEXT                          = binary.ID{0xef, 0x47, 0xe4, 0x34, 0xbe, 0x3c, 0x92, 0x63, 0x30, 0xcf, 0xe1, 0xfe, 0x1e, 0x79, 0x8c, 0xa5, 0x3d, 0x41, 0x01, 0xe2}
-	binaryIDGlProgramUniform3f                               = binary.ID{0x7b, 0xeb, 0x1a, 0x52, 0x01, 0x6a, 0x5b, 0x09, 0x3e, 0x94, 0x90, 0xbd, 0xc5, 0x4b, 0x29, 0x39, 0xea, 0x00, 0xf3, 0x63}
+	binaryIDGlProgramUniform3f                               = binary.ID{0x35, 0x35, 0x5c, 0x22, 0x43, 0x52, 0x5b, 0xa9, 0x55, 0xa9, 0x04, 0x91, 0xef, 0x81, 0xc2, 0x76, 0x44, 0xe5, 0x21, 0xad}
 	binaryIDGlProgramUniform3fEXT                            = binary.ID{0x4f, 0x5d, 0x74, 0x63, 0x97, 0x75, 0x9b, 0x51, 0x09, 0x3a, 0xe8, 0x40, 0xb6, 0x08, 0xa8, 0xef, 0x31, 0xd7, 0x32, 0x1f}
-	binaryIDGlProgramUniform3fv                              = binary.ID{0x05, 0xc0, 0x0b, 0xbf, 0xfd, 0xec, 0x29, 0xa9, 0xa8, 0x5f, 0xb4, 0xe1, 0xde, 0xa5, 0xca, 0x80, 0x3f, 0x99, 0xb7, 0xfe}
+	binaryIDGlProgramUniform3fv                              = binary.ID{0x42, 0x06, 0x74, 0x79, 0x66, 0x53, 0x32, 0xaf, 0xff, 0x49, 0xbe, 0x91, 0xe3, 0x51, 0x91, 0x4d, 0xeb, 0x59, 0xd6, 0x61}
 	binaryIDGlProgramUniform3fvEXT                           = binary.ID{0x96, 0x7c, 0x66, 0xa4, 0x73, 0x03, 0x8a, 0xba, 0x8e, 0x62, 0xae, 0x06, 0x65, 0x12, 0x15, 0x62, 0x31, 0x1e, 0x85, 0x2f}
-	binaryIDGlProgramUniform3i                               = binary.ID{0x9a, 0xb8, 0xf8, 0xfe, 0x6c, 0x59, 0x7f, 0x09, 0x3d, 0x5c, 0x07, 0x7a, 0x90, 0x19, 0x40, 0x98, 0x43, 0xbc, 0xab, 0xa9}
+	binaryIDGlProgramUniform3i                               = binary.ID{0xc7, 0x94, 0xbb, 0x5c, 0x68, 0x7d, 0x20, 0x18, 0x8d, 0xa7, 0x52, 0x85, 0x81, 0x6b, 0xe5, 0xe9, 0x06, 0x73, 0xd5, 0x73}
 	binaryIDGlProgramUniform3iEXT                            = binary.ID{0x55, 0x45, 0x38, 0xa2, 0x18, 0xde, 0x30, 0xce, 0xcc, 0x69, 0x1f, 0xba, 0x3e, 0x7f, 0x48, 0xaf, 0xbc, 0x4f, 0x61, 0x65}
-	binaryIDGlProgramUniform3iv                              = binary.ID{0xa0, 0x8c, 0xec, 0x72, 0xbf, 0x0e, 0x1f, 0x30, 0xc2, 0x08, 0x7d, 0x6b, 0x12, 0xe4, 0x92, 0x0b, 0x88, 0x18, 0xa8, 0x7a}
+	binaryIDGlProgramUniform3iv                              = binary.ID{0x51, 0x25, 0xa1, 0x5a, 0x6c, 0xad, 0x25, 0x56, 0xee, 0xaf, 0x08, 0x21, 0x4f, 0x5a, 0x69, 0x2a, 0x57, 0xf9, 0xc8, 0x33}
 	binaryIDGlProgramUniform3ivEXT                           = binary.ID{0x31, 0x24, 0x8b, 0xd3, 0xfc, 0xe0, 0x49, 0x8b, 0xd0, 0x40, 0x23, 0x89, 0x2c, 0xab, 0x9d, 0x47, 0x9d, 0xc5, 0x8c, 0xfd}
-	binaryIDGlProgramUniform3ui                              = binary.ID{0xf9, 0x53, 0x9e, 0x99, 0x91, 0xdc, 0x1c, 0x7c, 0x39, 0xe3, 0xf5, 0xe9, 0x3c, 0x1c, 0x92, 0x96, 0xde, 0xa3, 0xa5, 0xe1}
+	binaryIDGlProgramUniform3ui                              = binary.ID{0x3b, 0x1e, 0x08, 0xcc, 0x1c, 0xc6, 0x46, 0x99, 0xbb, 0x02, 0x6c, 0x51, 0x31, 0xcb, 0x3f, 0x3e, 0x7a, 0x8b, 0x0c, 0xdf}
 	binaryIDGlProgramUniform3uiEXT                           = binary.ID{0x39, 0xe3, 0xfa, 0xeb, 0x4f, 0xd2, 0x6c, 0x0a, 0x06, 0x1d, 0x79, 0x54, 0x69, 0x15, 0x23, 0x17, 0xf2, 0x34, 0x29, 0xf8}
-	binaryIDGlProgramUniform3uiv                             = binary.ID{0x46, 0xfe, 0x77, 0x64, 0xc9, 0xbe, 0x72, 0xa7, 0x26, 0xdd, 0x98, 0x5f, 0x8c, 0xd9, 0x7d, 0x13, 0xb4, 0x26, 0xb5, 0x57}
+	binaryIDGlProgramUniform3uiv                             = binary.ID{0xcf, 0xe8, 0x81, 0xa5, 0x01, 0xa0, 0x05, 0x7a, 0x92, 0x0a, 0x74, 0x1c, 0x2c, 0xde, 0xf2, 0x5d, 0x30, 0xc5, 0x37, 0x41}
 	binaryIDGlProgramUniform3uivEXT                          = binary.ID{0x04, 0xc2, 0xf0, 0x4a, 0x61, 0xcd, 0x46, 0x11, 0x98, 0x6e, 0xd7, 0xec, 0xbc, 0xb7, 0x5a, 0xde, 0xaa, 0x84, 0xac, 0x79}
-	binaryIDGlProgramUniform4f                               = binary.ID{0x16, 0xf1, 0x2f, 0xe2, 0xdc, 0x67, 0x94, 0x89, 0x57, 0xe7, 0x97, 0x7c, 0x53, 0xfa, 0x60, 0x0c, 0x9d, 0x3f, 0xc5, 0xda}
+	binaryIDGlProgramUniform4f                               = binary.ID{0x1a, 0xf5, 0x78, 0xa9, 0xbf, 0x9c, 0xee, 0xac, 0x1d, 0xd4, 0xb9, 0xa8, 0xb7, 0x68, 0xa7, 0x62, 0xef, 0x3a, 0x35, 0x71}
 	binaryIDGlProgramUniform4fEXT                            = binary.ID{0xef, 0x91, 0x36, 0x8d, 0xcf, 0x44, 0x80, 0x8e, 0x36, 0xd9, 0x0c, 0xbf, 0x6f, 0x1f, 0xf5, 0xb8, 0xe1, 0x39, 0x54, 0xb4}
-	binaryIDGlProgramUniform4fv                              = binary.ID{0xfe, 0x29, 0x4f, 0x89, 0x77, 0x95, 0xbe, 0x3a, 0x2b, 0x7d, 0xf7, 0xd8, 0x48, 0x5f, 0x4a, 0x1d, 0x7a, 0xb4, 0x7e, 0xce}
+	binaryIDGlProgramUniform4fv                              = binary.ID{0xd6, 0xdd, 0x4b, 0xe3, 0x71, 0x0c, 0x7d, 0x25, 0x19, 0x8f, 0xe4, 0x46, 0xe6, 0x95, 0x21, 0x9e, 0xc5, 0x6f, 0x32, 0x1d}
 	binaryIDGlProgramUniform4fvEXT                           = binary.ID{0x8f, 0x0e, 0xa6, 0x27, 0x91, 0xd1, 0xf9, 0x26, 0x49, 0x43, 0xf9, 0x81, 0x52, 0x81, 0x25, 0xe4, 0x9a, 0x4f, 0xbe, 0x45}
-	binaryIDGlProgramUniform4i                               = binary.ID{0xab, 0x61, 0xcf, 0xa8, 0x44, 0xca, 0xe5, 0x34, 0x9a, 0xe0, 0x90, 0x32, 0xf3, 0xb3, 0xbb, 0x22, 0x8f, 0xb5, 0x29, 0x90}
+	binaryIDGlProgramUniform4i                               = binary.ID{0xe4, 0x44, 0x42, 0x21, 0x13, 0x71, 0xba, 0x58, 0x4a, 0xb3, 0x59, 0x95, 0x18, 0xff, 0xf9, 0x68, 0xdf, 0x30, 0x45, 0x8e}
 	binaryIDGlProgramUniform4iEXT                            = binary.ID{0x7a, 0xbe, 0xe5, 0xdd, 0xbd, 0xe3, 0xed, 0x9c, 0xca, 0x1b, 0xbd, 0x89, 0xe8, 0x8a, 0xcc, 0x94, 0xaa, 0x84, 0xf3, 0xfb}
-	binaryIDGlProgramUniform4iv                              = binary.ID{0x5e, 0xba, 0xbc, 0xaa, 0xe1, 0x23, 0x47, 0x56, 0x30, 0x8e, 0xc7, 0x2f, 0xc2, 0x39, 0x78, 0x1e, 0x1e, 0x2f, 0x92, 0xb2}
+	binaryIDGlProgramUniform4iv                              = binary.ID{0xfa, 0xf4, 0xea, 0xb9, 0xb7, 0xee, 0x2a, 0x29, 0x0f, 0xcb, 0x86, 0xbf, 0x75, 0x72, 0xb5, 0x80, 0x46, 0xf2, 0xaf, 0xf4}
 	binaryIDGlProgramUniform4ivEXT                           = binary.ID{0x14, 0x83, 0xcf, 0xb4, 0x4f, 0x65, 0x54, 0x7b, 0x69, 0xc3, 0xa0, 0x57, 0x35, 0x93, 0x14, 0x31, 0xd2, 0x48, 0x7c, 0x20}
-	binaryIDGlProgramUniform4ui                              = binary.ID{0xd0, 0x68, 0x33, 0x69, 0x5c, 0x69, 0x2a, 0x21, 0xe8, 0x3d, 0x7a, 0xc4, 0x7d, 0xad, 0xc4, 0x9d, 0x42, 0x5b, 0x35, 0x3b}
+	binaryIDGlProgramUniform4ui                              = binary.ID{0x94, 0x93, 0x10, 0x58, 0xfa, 0x35, 0xb5, 0xc2, 0x1d, 0x3b, 0x07, 0xaa, 0xfc, 0xcb, 0x43, 0x1e, 0xa8, 0xff, 0x7e, 0xf4}
 	binaryIDGlProgramUniform4uiEXT                           = binary.ID{0x2d, 0x74, 0x78, 0x05, 0x9e, 0xd1, 0xbd, 0x44, 0x40, 0x94, 0xef, 0x1f, 0x30, 0xe4, 0x51, 0x05, 0x7d, 0xb4, 0xd2, 0x71}
-	binaryIDGlProgramUniform4uiv                             = binary.ID{0x4d, 0x06, 0x5b, 0xfe, 0x54, 0x8e, 0x3d, 0xb8, 0xe0, 0x69, 0xa3, 0x06, 0xe7, 0x63, 0x14, 0xff, 0xd2, 0x2f, 0xc6, 0x10}
+	binaryIDGlProgramUniform4uiv                             = binary.ID{0x76, 0xb6, 0xfb, 0x5c, 0x3d, 0x64, 0x01, 0x3d, 0xc2, 0x14, 0x4c, 0xa0, 0x70, 0x6c, 0xcf, 0xf2, 0x2c, 0x91, 0x21, 0x55}
 	binaryIDGlProgramUniform4uivEXT                          = binary.ID{0x2c, 0x5b, 0xad, 0x6f, 0xe2, 0x44, 0x53, 0x4c, 0x86, 0xb6, 0x0f, 0x0c, 0x7a, 0x94, 0xba, 0x39, 0xff, 0x79, 0x27, 0x07}
 	binaryIDGlProgramUniformHandleui64NV                     = binary.ID{0x14, 0x5c, 0x76, 0x05, 0xef, 0x3f, 0xfe, 0xf7, 0x52, 0x19, 0x62, 0x4a, 0x4f, 0xba, 0x11, 0x8e, 0xe6, 0x85, 0xaa, 0x68}
 	binaryIDGlProgramUniformHandleui64vNV                    = binary.ID{0x16, 0x8c, 0x1d, 0xc9, 0x9f, 0xe8, 0x22, 0x65, 0xe9, 0xcf, 0x5f, 0x22, 0xa7, 0xbe, 0x6f, 0xdc, 0x1b, 0xbd, 0x5b, 0xcc}
-	binaryIDGlProgramUniformMatrix2fv                        = binary.ID{0xaa, 0x52, 0x19, 0x86, 0x9d, 0xbc, 0xf0, 0xb6, 0x6d, 0x77, 0xe1, 0xc4, 0xac, 0xd9, 0x62, 0xae, 0x96, 0x47, 0xbe, 0x5e}
+	binaryIDGlProgramUniformMatrix2fv                        = binary.ID{0xa0, 0x5f, 0x8d, 0x13, 0x63, 0x0b, 0x3e, 0xec, 0xe3, 0xa4, 0x9d, 0x3a, 0x20, 0x7a, 0xa0, 0xd3, 0xd8, 0x06, 0x6c, 0x12}
 	binaryIDGlProgramUniformMatrix2fvEXT                     = binary.ID{0x7d, 0xef, 0x50, 0xba, 0x8e, 0xe6, 0x9a, 0x2d, 0x13, 0xab, 0x84, 0x10, 0xcb, 0x2e, 0x5f, 0xf4, 0xea, 0x99, 0xe7, 0x3d}
-	binaryIDGlProgramUniformMatrix2x3fv                      = binary.ID{0xab, 0x37, 0x4c, 0x52, 0x07, 0x96, 0x27, 0xf8, 0x22, 0xc2, 0xd5, 0xe0, 0xe7, 0x61, 0xd4, 0x19, 0xc1, 0xce, 0xae, 0x35}
+	binaryIDGlProgramUniformMatrix2x3fv                      = binary.ID{0xf1, 0xd5, 0x07, 0x00, 0x9b, 0x26, 0x8b, 0x18, 0x27, 0x01, 0xa1, 0x7d, 0xd3, 0x57, 0x80, 0x8f, 0x67, 0x93, 0x18, 0x6d}
 	binaryIDGlProgramUniformMatrix2x3fvEXT                   = binary.ID{0x82, 0x66, 0xe9, 0x9e, 0x09, 0x78, 0x2e, 0x83, 0x34, 0xca, 0x0c, 0xb4, 0x34, 0xae, 0xa4, 0xca, 0x4e, 0xf5, 0xc2, 0x8c}
-	binaryIDGlProgramUniformMatrix2x4fv                      = binary.ID{0x79, 0x4b, 0x60, 0xea, 0xd1, 0x5a, 0x85, 0x87, 0xf3, 0x8b, 0xbb, 0x87, 0x98, 0xba, 0x48, 0xb9, 0x9f, 0xf0, 0x20, 0xbe}
+	binaryIDGlProgramUniformMatrix2x4fv                      = binary.ID{0xfc, 0x5e, 0xaf, 0x71, 0xd7, 0x03, 0xe9, 0xe9, 0x3e, 0xa9, 0x35, 0xbd, 0xbf, 0x12, 0xd3, 0x5f, 0x7b, 0xac, 0xc9, 0xac}
 	binaryIDGlProgramUniformMatrix2x4fvEXT                   = binary.ID{0x25, 0x0b, 0x36, 0xa7, 0x7f, 0x3f, 0x50, 0x0a, 0x0d, 0xd6, 0xcb, 0x58, 0x36, 0xa3, 0x31, 0x18, 0x38, 0x60, 0xb6, 0x7f}
-	binaryIDGlProgramUniformMatrix3fv                        = binary.ID{0xef, 0x88, 0x4c, 0x74, 0x15, 0xcd, 0x35, 0xdf, 0xa8, 0x2b, 0x43, 0x60, 0x16, 0x9e, 0x96, 0xf6, 0xd5, 0x99, 0x7e, 0x7d}
+	binaryIDGlProgramUniformMatrix3fv                        = binary.ID{0x13, 0xc2, 0x7f, 0xcc, 0xff, 0x76, 0x88, 0x54, 0x36, 0xd9, 0x22, 0x07, 0xd5, 0x29, 0x32, 0xf4, 0xc8, 0x5d, 0xfb, 0x3a}
 	binaryIDGlProgramUniformMatrix3fvEXT                     = binary.ID{0x46, 0x0c, 0xe4, 0x42, 0xc5, 0xd0, 0x0c, 0x16, 0xf3, 0xce, 0x65, 0x57, 0x31, 0x53, 0xcb, 0xd7, 0x0e, 0xba, 0x45, 0xbe}
-	binaryIDGlProgramUniformMatrix3x2fv                      = binary.ID{0xa8, 0xdc, 0xe4, 0xbe, 0xf1, 0xcf, 0xf9, 0x57, 0x99, 0xd5, 0x1f, 0x33, 0x25, 0x65, 0x66, 0x78, 0xff, 0x24, 0x5d, 0xf6}
+	binaryIDGlProgramUniformMatrix3x2fv                      = binary.ID{0x83, 0xb6, 0x0f, 0x8e, 0x04, 0x1d, 0x30, 0xe1, 0xc8, 0x0b, 0x49, 0x42, 0x78, 0x0c, 0xc2, 0xc5, 0x23, 0x55, 0xb2, 0xea}
 	binaryIDGlProgramUniformMatrix3x2fvEXT                   = binary.ID{0x78, 0x69, 0xf7, 0x79, 0xfe, 0xc8, 0x26, 0x47, 0x42, 0x4c, 0x3a, 0x79, 0xa8, 0x0c, 0xba, 0x96, 0xe6, 0x7e, 0xca, 0x26}
-	binaryIDGlProgramUniformMatrix3x4fv                      = binary.ID{0x6f, 0x08, 0xf5, 0xcd, 0xcf, 0xef, 0x47, 0x72, 0xc9, 0xc7, 0x07, 0x0e, 0xd6, 0x4d, 0xb8, 0x2b, 0x21, 0x80, 0x65, 0xf0}
+	binaryIDGlProgramUniformMatrix3x4fv                      = binary.ID{0xd0, 0x8c, 0x3a, 0x3f, 0xdd, 0x2d, 0x97, 0x5c, 0xc1, 0x4b, 0xaa, 0x6d, 0x08, 0x73, 0xbb, 0x16, 0xff, 0xb0, 0x0b, 0x17}
 	binaryIDGlProgramUniformMatrix3x4fvEXT                   = binary.ID{0x1a, 0x69, 0x9b, 0xa9, 0xf6, 0xf3, 0x80, 0x6c, 0xf3, 0xf8, 0xe2, 0xdf, 0x52, 0x73, 0x22, 0x7e, 0x5c, 0x81, 0x2c, 0x65}
-	binaryIDGlProgramUniformMatrix4fv                        = binary.ID{0xfc, 0xef, 0x13, 0x5c, 0x37, 0xe9, 0x77, 0x02, 0x44, 0x14, 0x68, 0xe8, 0x46, 0xdf, 0xf6, 0x3d, 0x23, 0x96, 0x51, 0x6d}
+	binaryIDGlProgramUniformMatrix4fv                        = binary.ID{0xca, 0x53, 0x16, 0xe5, 0xee, 0xfe, 0xc7, 0x63, 0xb8, 0x4f, 0x0f, 0xbe, 0xa4, 0xdd, 0x55, 0x95, 0xaa, 0xc7, 0xbe, 0xf7}
 	binaryIDGlProgramUniformMatrix4fvEXT                     = binary.ID{0x46, 0xe6, 0x7d, 0x19, 0x2d, 0xeb, 0xc7, 0x05, 0xf0, 0xf5, 0xf3, 0xed, 0x94, 0x0b, 0x5b, 0x8e, 0x15, 0xe7, 0xde, 0x3a}
-	binaryIDGlProgramUniformMatrix4x2fv                      = binary.ID{0xad, 0x7b, 0x7d, 0xd2, 0xe8, 0x3e, 0xd5, 0x4b, 0x66, 0x64, 0xe3, 0x7b, 0xd6, 0xf7, 0xbf, 0x42, 0xfe, 0xd7, 0xae, 0x80}
+	binaryIDGlProgramUniformMatrix4x2fv                      = binary.ID{0xe0, 0x82, 0x32, 0x82, 0x82, 0x04, 0x0c, 0x74, 0x50, 0x7e, 0x46, 0x9e, 0x24, 0x21, 0xbe, 0xe6, 0x15, 0xcb, 0x7e, 0x55}
 	binaryIDGlProgramUniformMatrix4x2fvEXT                   = binary.ID{0xb9, 0x8c, 0x3d, 0xf7, 0x76, 0xf7, 0xbe, 0xf9, 0x9d, 0x36, 0x26, 0xf8, 0x9e, 0xc6, 0x69, 0xfb, 0xfc, 0xb7, 0x74, 0x9d}
-	binaryIDGlProgramUniformMatrix4x3fv                      = binary.ID{0x72, 0xcb, 0x1f, 0x0a, 0xbe, 0x73, 0x29, 0x95, 0x41, 0xe9, 0xfc, 0xd1, 0x84, 0x38, 0xee, 0x1c, 0x74, 0xc4, 0x65, 0x07}
+	binaryIDGlProgramUniformMatrix4x3fv                      = binary.ID{0x66, 0x9c, 0x67, 0xfc, 0x4a, 0xa4, 0x33, 0xee, 0x1b, 0xf8, 0xc2, 0xb0, 0xf8, 0xed, 0xe7, 0xaa, 0x6c, 0x82, 0xc0, 0x4b}
 	binaryIDGlProgramUniformMatrix4x3fvEXT                   = binary.ID{0xe6, 0x8f, 0x11, 0xef, 0x7f, 0x63, 0x02, 0x7e, 0x16, 0x30, 0x89, 0xb2, 0xd8, 0xf5, 0x3d, 0x5f, 0x2f, 0xfa, 0x8b, 0x13}
 	binaryIDGlPushDebugGroup                                 = binary.ID{0x50, 0xe6, 0x87, 0x49, 0x93, 0x8b, 0x07, 0xae, 0xbe, 0xf7, 0x89, 0xc3, 0xe2, 0x18, 0x40, 0x05, 0x77, 0xc1, 0x3b, 0xaf}
 	binaryIDGlPushDebugGroupKHR                              = binary.ID{0xaa, 0xad, 0xf6, 0x49, 0x5c, 0xde, 0xa9, 0xac, 0x02, 0x01, 0x29, 0xd1, 0x00, 0x12, 0x83, 0xfd, 0x7d, 0xbf, 0x7a, 0x2d}
@@ -1730,43 +1769,43 @@ var (
 	binaryIDGlUniform1fv                                     = binary.ID{0xae, 0x33, 0x65, 0x0e, 0x08, 0x5e, 0xc1, 0x6d, 0x32, 0xa8, 0x27, 0x34, 0x37, 0x8a, 0xb0, 0x9d, 0x79, 0x13, 0xa0, 0x2d}
 	binaryIDGlUniform1i                                      = binary.ID{0xcf, 0x50, 0xc7, 0x1d, 0x64, 0xc9, 0x73, 0xfe, 0x85, 0xd0, 0x29, 0x27, 0x6b, 0x85, 0xa8, 0xdb, 0xd7, 0xf2, 0x5a, 0xa0}
 	binaryIDGlUniform1iv                                     = binary.ID{0xbb, 0xbc, 0xcf, 0xe9, 0xc6, 0x93, 0x5e, 0xea, 0x2c, 0x97, 0x8e, 0x17, 0x71, 0x99, 0x67, 0x50, 0x3e, 0x2c, 0x4d, 0x20}
-	binaryIDGlUniform1ui                                     = binary.ID{0x2e, 0xc6, 0x29, 0x1a, 0x31, 0xca, 0x42, 0x34, 0xc7, 0x96, 0x01, 0x4e, 0xb5, 0x64, 0x94, 0x80, 0xf2, 0x8d, 0x59, 0x33}
-	binaryIDGlUniform1uiv                                    = binary.ID{0x7e, 0x3e, 0xba, 0x97, 0x02, 0x28, 0x6c, 0xdd, 0x8f, 0x7b, 0x28, 0x0a, 0xa2, 0xee, 0xab, 0x9d, 0xaa, 0xd4, 0x3e, 0xab}
+	binaryIDGlUniform1ui                                     = binary.ID{0xea, 0xbe, 0xdd, 0xc7, 0x92, 0x5e, 0x06, 0xaa, 0xee, 0x30, 0x95, 0xb0, 0x7c, 0x4d, 0x70, 0x29, 0x6d, 0x7e, 0xc6, 0x19}
+	binaryIDGlUniform1uiv                                    = binary.ID{0x12, 0xdc, 0x5d, 0x45, 0xc7, 0xd4, 0xa2, 0x6a, 0xe6, 0x35, 0xff, 0xbe, 0x8a, 0x49, 0xa9, 0x87, 0xfd, 0xfa, 0x0b, 0xf1}
 	binaryIDGlUniform2f                                      = binary.ID{0xc5, 0x77, 0x1f, 0xb7, 0x87, 0xd2, 0x21, 0xd6, 0x1d, 0x3c, 0x42, 0xea, 0xc0, 0xcc, 0x34, 0x67, 0x97, 0x52, 0x08, 0x0e}
 	binaryIDGlUniform2fv                                     = binary.ID{0xc7, 0x22, 0x25, 0x97, 0x77, 0x22, 0x8f, 0x1a, 0xa0, 0x29, 0xbe, 0x9c, 0x90, 0x49, 0x9a, 0x32, 0xfb, 0x93, 0x8a, 0x30}
 	binaryIDGlUniform2i                                      = binary.ID{0x9a, 0xd2, 0x5d, 0xe1, 0x6e, 0xbd, 0x4b, 0x3b, 0xab, 0x38, 0x0e, 0xe7, 0xc1, 0x1a, 0xd6, 0xff, 0x54, 0x3e, 0xc7, 0x17}
 	binaryIDGlUniform2iv                                     = binary.ID{0xf9, 0xa4, 0xd9, 0x3e, 0xd7, 0x0e, 0xe3, 0x9a, 0x5e, 0x3d, 0x4a, 0xde, 0xad, 0x9b, 0x7c, 0x85, 0x11, 0x6a, 0x04, 0x1f}
-	binaryIDGlUniform2ui                                     = binary.ID{0xfb, 0xd6, 0xeb, 0xff, 0x97, 0xcc, 0x50, 0x34, 0x18, 0x82, 0x2a, 0xba, 0x09, 0xfa, 0x80, 0xb7, 0x11, 0x35, 0x29, 0x2c}
-	binaryIDGlUniform2uiv                                    = binary.ID{0x60, 0x66, 0x72, 0x5f, 0x51, 0x2b, 0x97, 0xeb, 0xe0, 0xd7, 0x28, 0xe3, 0xe6, 0xf3, 0xf1, 0x46, 0xd8, 0x14, 0xc3, 0x77}
+	binaryIDGlUniform2ui                                     = binary.ID{0x53, 0x11, 0x46, 0xed, 0x54, 0x10, 0x12, 0x4f, 0x76, 0xe0, 0x5e, 0xf4, 0x16, 0xd5, 0x8b, 0x6d, 0x7a, 0x8f, 0x71, 0x12}
+	binaryIDGlUniform2uiv                                    = binary.ID{0x0f, 0x9f, 0x33, 0xb6, 0x60, 0x1a, 0xf7, 0x3a, 0x23, 0x19, 0x64, 0x27, 0xdc, 0x7a, 0x44, 0x33, 0x05, 0x3c, 0xba, 0x99}
 	binaryIDGlUniform3f                                      = binary.ID{0x62, 0x49, 0x33, 0x98, 0xc8, 0x47, 0x02, 0x3b, 0x93, 0xd4, 0x48, 0x3b, 0x81, 0xfc, 0x72, 0xc7, 0x3c, 0x50, 0x2e, 0x12}
 	binaryIDGlUniform3fv                                     = binary.ID{0xa4, 0x18, 0xf2, 0x40, 0xce, 0x31, 0x8f, 0xe9, 0xbb, 0x49, 0x24, 0x0a, 0x55, 0x1c, 0xf0, 0x00, 0xec, 0xcc, 0xe1, 0x72}
 	binaryIDGlUniform3i                                      = binary.ID{0xf5, 0x43, 0x5e, 0x4d, 0x69, 0x85, 0xdc, 0x5c, 0xf9, 0xf3, 0x2e, 0x5d, 0xc3, 0x45, 0x3a, 0x32, 0x3e, 0xf1, 0x8c, 0x23}
 	binaryIDGlUniform3iv                                     = binary.ID{0x33, 0xf7, 0x26, 0x18, 0xe9, 0xdd, 0x38, 0x7e, 0xff, 0xdd, 0xd0, 0x42, 0xce, 0x4d, 0x46, 0x97, 0x9c, 0x56, 0xb5, 0x1a}
-	binaryIDGlUniform3ui                                     = binary.ID{0x95, 0x05, 0x9f, 0x1f, 0x11, 0x68, 0x6b, 0x8a, 0xe1, 0x0e, 0xe6, 0x8e, 0x97, 0xf9, 0x7a, 0x0e, 0xc3, 0xc1, 0xe6, 0x36}
-	binaryIDGlUniform3uiv                                    = binary.ID{0xe2, 0xc4, 0xc9, 0xb8, 0x3b, 0xba, 0x43, 0xdb, 0xd9, 0xbf, 0xd8, 0x71, 0xd5, 0x51, 0xa4, 0x65, 0xd5, 0x06, 0x37, 0x3b}
+	binaryIDGlUniform3ui                                     = binary.ID{0xad, 0xe1, 0x0f, 0xf1, 0xf5, 0x79, 0x89, 0xf5, 0xff, 0xd3, 0xef, 0x28, 0x9a, 0x1e, 0x1e, 0xcc, 0x95, 0x27, 0x4e, 0x0c}
+	binaryIDGlUniform3uiv                                    = binary.ID{0x55, 0x3c, 0xd2, 0x27, 0xb0, 0x52, 0x5a, 0x63, 0xaf, 0xd8, 0x3c, 0x51, 0x85, 0xe5, 0x7b, 0x6d, 0x72, 0x58, 0x41, 0xf4}
 	binaryIDGlUniform4f                                      = binary.ID{0xe2, 0x9e, 0xf8, 0x59, 0xaa, 0xc7, 0xb6, 0x64, 0xef, 0x62, 0xc7, 0xc2, 0x32, 0x62, 0x79, 0x66, 0xe5, 0xff, 0x4a, 0x7f}
 	binaryIDGlUniform4fv                                     = binary.ID{0x7d, 0x55, 0xee, 0x1f, 0xbb, 0xb8, 0x48, 0xf6, 0x16, 0x69, 0xaf, 0x25, 0x98, 0xb1, 0xd5, 0xf4, 0x0b, 0x9f, 0x6e, 0xdc}
 	binaryIDGlUniform4i                                      = binary.ID{0x85, 0xa5, 0x42, 0x63, 0x6d, 0x23, 0x58, 0x92, 0x5b, 0x26, 0x1b, 0xe3, 0x26, 0x82, 0x15, 0x47, 0x99, 0xa7, 0xfb, 0x18}
 	binaryIDGlUniform4iv                                     = binary.ID{0x8b, 0x1c, 0xcc, 0xdc, 0x11, 0xcf, 0xc7, 0x8f, 0x7c, 0xf2, 0xbe, 0x8d, 0x4e, 0x45, 0xac, 0x59, 0x68, 0x14, 0x9d, 0x24}
-	binaryIDGlUniform4ui                                     = binary.ID{0x59, 0x87, 0xa2, 0x7a, 0xba, 0x48, 0xae, 0x14, 0xa2, 0xbb, 0xc2, 0x70, 0xde, 0xcf, 0x1d, 0x25, 0x6e, 0xf7, 0xfe, 0xf9}
-	binaryIDGlUniform4uiv                                    = binary.ID{0x00, 0xdf, 0x8e, 0xf7, 0x64, 0xf4, 0xcb, 0xa6, 0x7c, 0x52, 0x0a, 0x21, 0x34, 0x51, 0x87, 0x42, 0x7f, 0x7a, 0x44, 0x34}
+	binaryIDGlUniform4ui                                     = binary.ID{0x2b, 0x3f, 0x4c, 0x7c, 0xf7, 0x5e, 0x21, 0x3d, 0xa4, 0xf1, 0x4c, 0x69, 0x53, 0x3b, 0x2c, 0x02, 0x0c, 0x95, 0x7e, 0x80}
+	binaryIDGlUniform4uiv                                    = binary.ID{0xf4, 0x9e, 0x02, 0x04, 0x0d, 0x78, 0xfa, 0x5f, 0x9f, 0x24, 0x0c, 0xc1, 0x61, 0xa0, 0x81, 0x3b, 0x73, 0x2b, 0xac, 0x7b}
 	binaryIDGlUniformBlockBinding                            = binary.ID{0x3f, 0xee, 0xa1, 0x98, 0x3a, 0x2f, 0x8f, 0x61, 0x1a, 0xd3, 0x78, 0x2c, 0xc1, 0xe8, 0x29, 0xcb, 0xc1, 0xab, 0x69, 0x8f}
 	binaryIDGlUniformHandleui64NV                            = binary.ID{0xf4, 0xb5, 0xbc, 0xe2, 0xc5, 0x0e, 0xda, 0x1a, 0x7a, 0xf7, 0x7d, 0x77, 0x4e, 0x19, 0x15, 0xed, 0xd9, 0xf0, 0x8a, 0xe2}
 	binaryIDGlUniformHandleui64vNV                           = binary.ID{0xd2, 0x60, 0x5d, 0x9c, 0xa4, 0xb8, 0x60, 0xc4, 0x5a, 0x3e, 0x4e, 0x50, 0x48, 0x44, 0x77, 0x07, 0x5d, 0xda, 0x82, 0x84}
 	binaryIDGlUniformMatrix2fv                               = binary.ID{0x27, 0x65, 0xd9, 0xa5, 0xce, 0x5f, 0xda, 0x93, 0xcd, 0x04, 0x03, 0x9a, 0x0a, 0x43, 0x14, 0x43, 0x68, 0xba, 0x64, 0x55}
-	binaryIDGlUniformMatrix2x3fv                             = binary.ID{0x41, 0x68, 0xbc, 0x75, 0x28, 0xb2, 0x45, 0xfa, 0x8e, 0x7a, 0xa8, 0xdc, 0xc6, 0x36, 0xb8, 0xbb, 0x80, 0xa0, 0x9c, 0x7f}
+	binaryIDGlUniformMatrix2x3fv                             = binary.ID{0x86, 0x99, 0x40, 0x0d, 0x48, 0x30, 0x0e, 0x81, 0x39, 0x78, 0xfa, 0xcc, 0xec, 0xb5, 0x7c, 0x24, 0x51, 0xa5, 0x40, 0x45}
 	binaryIDGlUniformMatrix2x3fvNV                           = binary.ID{0xaf, 0x8b, 0x2e, 0x47, 0x33, 0x21, 0x37, 0x57, 0x13, 0x56, 0x41, 0x32, 0xa6, 0x58, 0x9a, 0xb9, 0xf9, 0xbf, 0x01, 0xe2}
-	binaryIDGlUniformMatrix2x4fv                             = binary.ID{0xa1, 0x7d, 0xe6, 0x97, 0x24, 0x7d, 0xad, 0x90, 0x5a, 0x44, 0x54, 0xa9, 0x9b, 0x32, 0xeb, 0xe7, 0x97, 0xe7, 0x64, 0xca}
+	binaryIDGlUniformMatrix2x4fv                             = binary.ID{0x88, 0xf2, 0xb1, 0xb4, 0xb0, 0x09, 0x70, 0x90, 0xb0, 0x1a, 0x1a, 0x0c, 0xd4, 0x58, 0x7d, 0x57, 0x78, 0x0f, 0xc1, 0x9a}
 	binaryIDGlUniformMatrix2x4fvNV                           = binary.ID{0xee, 0x2a, 0x63, 0x13, 0xf3, 0x97, 0x7e, 0x7c, 0x88, 0xb5, 0x04, 0x98, 0x48, 0xe4, 0x7f, 0xff, 0x7d, 0x68, 0x8f, 0xa7}
 	binaryIDGlUniformMatrix3fv                               = binary.ID{0x61, 0xdd, 0x5a, 0xb7, 0x6d, 0x45, 0x86, 0x02, 0x3f, 0xa5, 0x6e, 0x8e, 0xbc, 0x51, 0x0d, 0xa4, 0x6c, 0xcc, 0xde, 0x53}
-	binaryIDGlUniformMatrix3x2fv                             = binary.ID{0x32, 0x43, 0x63, 0x2f, 0x06, 0xca, 0xa6, 0xd6, 0xe1, 0xb0, 0xd4, 0x04, 0x3e, 0x3a, 0xc0, 0x4b, 0xca, 0xbd, 0xf8, 0xbe}
+	binaryIDGlUniformMatrix3x2fv                             = binary.ID{0x18, 0x9f, 0x5c, 0x54, 0xa3, 0x60, 0x60, 0x13, 0xa9, 0x26, 0x6f, 0xa4, 0x88, 0x90, 0x8b, 0x8d, 0x04, 0x90, 0x8c, 0x99}
 	binaryIDGlUniformMatrix3x2fvNV                           = binary.ID{0x89, 0x17, 0x90, 0x3d, 0x24, 0xb9, 0x78, 0x1d, 0x26, 0x39, 0x7f, 0x95, 0x9f, 0x21, 0x14, 0xa3, 0x3f, 0xdb, 0x25, 0x93}
-	binaryIDGlUniformMatrix3x4fv                             = binary.ID{0x0c, 0xf2, 0x89, 0x51, 0x97, 0x94, 0xb5, 0x30, 0xf1, 0x50, 0xc9, 0x7f, 0x67, 0xcd, 0x4c, 0x86, 0x79, 0x5a, 0xe3, 0xba}
+	binaryIDGlUniformMatrix3x4fv                             = binary.ID{0x12, 0xbc, 0x7b, 0x99, 0x9b, 0x92, 0x7c, 0x46, 0xcb, 0x5e, 0xee, 0x0b, 0xd4, 0xc4, 0x37, 0xce, 0xeb, 0xa4, 0x01, 0x01}
 	binaryIDGlUniformMatrix3x4fvNV                           = binary.ID{0x6f, 0x63, 0xf7, 0x17, 0x75, 0xe3, 0x3b, 0x6d, 0x27, 0xb9, 0x57, 0x55, 0xa3, 0xb6, 0x05, 0x06, 0x42, 0xfb, 0x7b, 0xdd}
 	binaryIDGlUniformMatrix4fv                               = binary.ID{0xe6, 0x84, 0x67, 0xea, 0x90, 0x0e, 0x34, 0x23, 0xd8, 0x5b, 0xae, 0x3a, 0x65, 0xc3, 0x53, 0xf2, 0xab, 0x13, 0x17, 0x83}
-	binaryIDGlUniformMatrix4x2fv                             = binary.ID{0x1d, 0xf0, 0xec, 0x91, 0xb0, 0x5d, 0xf3, 0x40, 0x77, 0xa8, 0x59, 0x7a, 0x3c, 0x28, 0xab, 0x0b, 0xea, 0x56, 0xbd, 0xbd}
+	binaryIDGlUniformMatrix4x2fv                             = binary.ID{0xa5, 0x23, 0x08, 0xc2, 0x54, 0xc9, 0x72, 0xa0, 0xbd, 0x89, 0x8b, 0x3a, 0xdb, 0x1d, 0xdd, 0x03, 0x6e, 0x42, 0x7e, 0x62}
 	binaryIDGlUniformMatrix4x2fvNV                           = binary.ID{0xa9, 0xec, 0xae, 0xf7, 0x42, 0xb1, 0xa2, 0x10, 0x9d, 0xf6, 0x70, 0xc3, 0x26, 0xc1, 0x0f, 0x86, 0x04, 0x99, 0xa0, 0xf2}
-	binaryIDGlUniformMatrix4x3fv                             = binary.ID{0xf3, 0x89, 0xf2, 0x23, 0xfa, 0x13, 0x32, 0x11, 0xef, 0xf9, 0x01, 0x60, 0x9c, 0x9c, 0xa7, 0xd2, 0x0b, 0xcd, 0xbd, 0x91}
+	binaryIDGlUniformMatrix4x3fv                             = binary.ID{0xf2, 0xb4, 0x06, 0x41, 0xc3, 0x2e, 0x59, 0x13, 0x25, 0x7a, 0x4a, 0xe7, 0xcd, 0xc3, 0x60, 0x5b, 0xf7, 0x13, 0x02, 0x91}
 	binaryIDGlUniformMatrix4x3fvNV                           = binary.ID{0x7b, 0x61, 0xa7, 0x20, 0x30, 0x0c, 0xd5, 0x36, 0x3d, 0x54, 0x2a, 0x3b, 0xda, 0x5d, 0x3f, 0xf3, 0xff, 0xfb, 0x51, 0xa1}
 	binaryIDGlUnmapBuffer                                    = binary.ID{0xdf, 0x89, 0x91, 0x8a, 0x15, 0x4d, 0x24, 0x5c, 0x66, 0x31, 0x8a, 0x4d, 0x3d, 0x43, 0xd0, 0x6d, 0x2f, 0x5c, 0x23, 0x22}
 	binaryIDGlUnmapBufferOES                                 = binary.ID{0xf4, 0xa9, 0x11, 0x34, 0x5a, 0x78, 0x2d, 0x49, 0x2e, 0x27, 0x11, 0x87, 0x80, 0x18, 0x84, 0x8c, 0x00, 0x80, 0xf9, 0x9d}
@@ -1820,13 +1859,31 @@ var (
 	binaryIDMat2fˢ                                           = binary.ID{0xfd, 0x99, 0x6e, 0x41, 0x72, 0xbc, 0xf9, 0x44, 0xfb, 0x0c, 0x17, 0x18, 0x6e, 0x78, 0x41, 0x4a, 0xe4, 0xf9, 0x01, 0xe9}
 	binaryIDMat2fᵖ                                           = binary.ID{0xaa, 0x78, 0xb0, 0xc3, 0xec, 0xe3, 0xcf, 0x0c, 0x6e, 0xd0, 0xaf, 0xf6, 0x7b, 0x56, 0xa1, 0x18, 0x16, 0x3e, 0xbe, 0x78}
 	binaryIDVec3f                                            = binary.ID{0xa4, 0x58, 0x33, 0xc3, 0xfe, 0xce, 0x96, 0x95, 0x47, 0x66, 0x2e, 0xb4, 0x02, 0xaf, 0x60, 0x31, 0xe9, 0x50, 0x20, 0x5f}
+	binaryIDMat2x3f                                          = binary.ID{0xc5, 0x46, 0x81, 0xe2, 0x30, 0x6d, 0xbc, 0x9d, 0x9b, 0x30, 0x9a, 0x15, 0x8d, 0x69, 0x4e, 0x77, 0xc1, 0xa0, 0x71, 0xd8}
+	binaryIDMat2x3fˢ                                         = binary.ID{0x46, 0x03, 0xc3, 0x00, 0xcf, 0x52, 0xd4, 0x10, 0xab, 0x9f, 0x03, 0x6b, 0x94, 0xbb, 0x07, 0x29, 0x69, 0x1e, 0x4c, 0x0e}
+	binaryIDMat2x3fᵖ                                         = binary.ID{0xe7, 0x50, 0xb1, 0x48, 0xcd, 0x65, 0x97, 0x12, 0xe2, 0x8e, 0x24, 0x77, 0x5e, 0xbd, 0xae, 0x15, 0xa7, 0x14, 0x68, 0xa9}
+	binaryIDVec4f                                            = binary.ID{0xd5, 0x87, 0xc0, 0x3a, 0xd5, 0x96, 0x18, 0x54, 0x87, 0x09, 0x02, 0x96, 0xf3, 0xac, 0x20, 0x2a, 0x32, 0x06, 0x91, 0x5f}
+	binaryIDMat2x4f                                          = binary.ID{0xa3, 0xb0, 0xf5, 0x19, 0x82, 0x39, 0x36, 0x9a, 0xc3, 0x4a, 0xb4, 0xd1, 0xc9, 0x5e, 0x8a, 0x0b, 0xe0, 0x78, 0x88, 0x11}
+	binaryIDMat2x4fˢ                                         = binary.ID{0x49, 0xdf, 0x5e, 0x5b, 0xd0, 0x1d, 0x22, 0x11, 0x2b, 0xe5, 0xcf, 0xd1, 0x95, 0xac, 0xbf, 0xc3, 0x92, 0x0e, 0x70, 0x9e}
+	binaryIDMat2x4fᵖ                                         = binary.ID{0x52, 0x10, 0x5a, 0x3b, 0xb7, 0xfa, 0xe1, 0x13, 0x6d, 0x07, 0xa3, 0x16, 0x76, 0x79, 0xa7, 0xe2, 0x5c, 0xe8, 0xfe, 0xb1}
 	binaryIDMat3f                                            = binary.ID{0x47, 0x2d, 0x69, 0x38, 0x46, 0x76, 0x50, 0xf5, 0x0b, 0x0f, 0x50, 0x2f, 0x41, 0xfb, 0x03, 0xa7, 0xd3, 0xd7, 0x38, 0x51}
 	binaryIDMat3fˢ                                           = binary.ID{0x0e, 0x3f, 0xf2, 0x97, 0xf4, 0x3f, 0x26, 0xb0, 0x40, 0x83, 0x20, 0xad, 0x0b, 0xa3, 0xce, 0xf7, 0x9b, 0xd8, 0x51, 0x10}
 	binaryIDMat3fᵖ                                           = binary.ID{0xd1, 0x68, 0x7a, 0xc6, 0x58, 0xc5, 0x77, 0x79, 0x03, 0x73, 0x9e, 0x3b, 0x4c, 0xf3, 0x45, 0x83, 0xe6, 0xac, 0x4d, 0xe6}
-	binaryIDVec4f                                            = binary.ID{0xd5, 0x87, 0xc0, 0x3a, 0xd5, 0x96, 0x18, 0x54, 0x87, 0x09, 0x02, 0x96, 0xf3, 0xac, 0x20, 0x2a, 0x32, 0x06, 0x91, 0x5f}
+	binaryIDMat3x2f                                          = binary.ID{0x57, 0xab, 0x38, 0x4b, 0x76, 0x54, 0xc5, 0x97, 0xf5, 0x5b, 0x6c, 0x54, 0x79, 0x92, 0x37, 0x34, 0xc4, 0xaa, 0xe0, 0x7c}
+	binaryIDMat3x2fˢ                                         = binary.ID{0x68, 0xd9, 0x5d, 0xa2, 0x6a, 0xd7, 0xa5, 0xcf, 0x3f, 0x67, 0x97, 0x7c, 0xb0, 0x7c, 0x98, 0xf9, 0x11, 0xcc, 0xbb, 0x34}
+	binaryIDMat3x2fᵖ                                         = binary.ID{0x18, 0xf3, 0xea, 0xb2, 0x50, 0x5b, 0xc7, 0x82, 0xce, 0x82, 0x95, 0xbc, 0x7d, 0x2f, 0x6f, 0x18, 0x40, 0xf7, 0xc7, 0x29}
+	binaryIDMat3x4f                                          = binary.ID{0x61, 0xc8, 0x98, 0xc0, 0x41, 0x4c, 0x6a, 0xf3, 0x1f, 0xc2, 0x2c, 0x23, 0x45, 0x97, 0x56, 0x92, 0x92, 0xd9, 0x4a, 0x03}
+	binaryIDMat3x4fˢ                                         = binary.ID{0x9d, 0x0b, 0xf0, 0x16, 0x55, 0xf5, 0x5e, 0x16, 0xbd, 0xc3, 0xf3, 0xf0, 0xa3, 0xdc, 0x3a, 0x13, 0xe2, 0xe9, 0x1d, 0x17}
+	binaryIDMat3x4fᵖ                                         = binary.ID{0x94, 0x0f, 0x0d, 0x3a, 0xdd, 0x06, 0xe4, 0x8b, 0xc8, 0x3f, 0x1d, 0xf2, 0x9b, 0x3b, 0x7a, 0xe4, 0xa8, 0xd5, 0x14, 0xc8}
 	binaryIDMat4f                                            = binary.ID{0xb7, 0xf0, 0xe0, 0x8d, 0x26, 0xbd, 0x22, 0x55, 0x90, 0xcd, 0x63, 0x7d, 0x27, 0x59, 0xbd, 0xa2, 0xa3, 0x72, 0xc2, 0x95}
 	binaryIDMat4fˢ                                           = binary.ID{0xd0, 0xcc, 0x8f, 0x5c, 0xd1, 0x03, 0xe7, 0x55, 0x69, 0x29, 0xad, 0x0e, 0x5c, 0xe3, 0xd2, 0x1f, 0xb7, 0xa9, 0xf1, 0xa1}
 	binaryIDMat4fᵖ                                           = binary.ID{0x72, 0x0c, 0xc7, 0x00, 0x98, 0x6d, 0xc2, 0x9f, 0xab, 0xc1, 0xba, 0x25, 0x74, 0x6b, 0xc6, 0x34, 0x95, 0x4a, 0x43, 0x16}
+	binaryIDMat4x2f                                          = binary.ID{0x7a, 0x91, 0xda, 0x87, 0xe7, 0x44, 0x2c, 0xaa, 0x17, 0xab, 0x32, 0x56, 0x10, 0x7e, 0x77, 0x0e, 0x85, 0x4e, 0xc4, 0x1c}
+	binaryIDMat4x2fˢ                                         = binary.ID{0x85, 0x35, 0x26, 0x73, 0x62, 0xfc, 0xce, 0x87, 0xaf, 0x57, 0x9e, 0x23, 0x64, 0xa7, 0x78, 0x4d, 0xba, 0xd6, 0x4a, 0x2d}
+	binaryIDMat4x2fᵖ                                         = binary.ID{0x2d, 0x38, 0x01, 0x4f, 0x84, 0x5c, 0xae, 0x4c, 0x40, 0xc9, 0x6d, 0xac, 0x14, 0x7d, 0xdb, 0x3b, 0x8c, 0x93, 0xaa, 0xee}
+	binaryIDMat4x3f                                          = binary.ID{0xfe, 0x5a, 0xd1, 0x36, 0xfe, 0xfd, 0x06, 0x3e, 0x2c, 0x2c, 0xe6, 0x60, 0x7a, 0x1c, 0x12, 0x76, 0x41, 0xf3, 0x6b, 0x14}
+	binaryIDMat4x3fˢ                                         = binary.ID{0x60, 0xca, 0xb4, 0xee, 0x1f, 0x3f, 0x1a, 0xdd, 0x70, 0xb1, 0x35, 0xd9, 0x36, 0xe5, 0x7b, 0x25, 0xd6, 0x96, 0x95, 0x4e}
+	binaryIDMat4x3fᵖ                                         = binary.ID{0x0c, 0x6f, 0x05, 0x1b, 0x96, 0xdf, 0x38, 0x44, 0xa6, 0xbe, 0xff, 0xb6, 0x14, 0xa7, 0xc6, 0x5f, 0x66, 0xb6, 0x9d, 0xf0}
 	binaryIDPipelineIdˢ                                      = binary.ID{0x53, 0xe1, 0x5d, 0x1e, 0xdc, 0xbb, 0xc7, 0x46, 0x78, 0x24, 0xf3, 0xe1, 0x67, 0xaf, 0x95, 0x57, 0xfa, 0x65, 0xc2, 0xfb}
 	binaryIDProgramIdˢ                                       = binary.ID{0x52, 0xfe, 0x85, 0xe9, 0xab, 0x13, 0x71, 0x7b, 0x28, 0x75, 0xd3, 0x54, 0x06, 0x68, 0x29, 0x22, 0xb4, 0x3b, 0x8a, 0xb2}
 	binaryIDQueryIdˢ                                         = binary.ID{0x31, 0x42, 0xbd, 0xc9, 0x65, 0x42, 0xa6, 0x82, 0xd0, 0xba, 0x8e, 0x4f, 0x11, 0x84, 0xe4, 0xf5, 0x7a, 0xad, 0xa8, 0x88}
@@ -1849,23 +1906,38 @@ var (
 	binaryIDU64ˢ                                             = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
 	binaryIDU8ᵖ                                              = binary.ID{0xc9, 0x85, 0x15, 0x54, 0xd3, 0x40, 0x31, 0x19, 0x7a, 0xab, 0xf9, 0x64, 0x72, 0x38, 0x96, 0xa9, 0x85, 0xc3, 0xbb, 0x4d}
 	binaryIDVec2fː2ᵃ                                         = binary.ID{0xf3, 0xfe, 0xa2, 0xa3, 0xb6, 0xdd, 0xd4, 0x15, 0x8c, 0x00, 0x2c, 0x4d, 0x78, 0x65, 0x14, 0x70, 0xe7, 0xcb, 0x7b, 0xe7}
+	binaryIDVec2fː3ᵃ                                         = binary.ID{0xe4, 0x73, 0xf7, 0xc4, 0x84, 0xef, 0x4d, 0x17, 0x79, 0xd4, 0x7a, 0x32, 0x60, 0xec, 0x74, 0x13, 0x67, 0x5c, 0xcf, 0xf9}
+	binaryIDVec2fː4ᵃ                                         = binary.ID{0x5a, 0xc5, 0xe9, 0xe5, 0x4c, 0x48, 0xe1, 0x82, 0xb3, 0x65, 0x71, 0x95, 0x43, 0x31, 0x48, 0xa8, 0xa8, 0x75, 0x8c, 0x8c}
 	binaryIDVec2fˢ                                           = binary.ID{0x79, 0x71, 0xb9, 0xc2, 0x40, 0xfa, 0x23, 0xa9, 0x13, 0xc3, 0x59, 0x96, 0xcb, 0x6b, 0x81, 0xed, 0x4d, 0x1f, 0x31, 0x65}
 	binaryIDVec2fᵖ                                           = binary.ID{0x55, 0xdc, 0xba, 0xe1, 0x45, 0x8e, 0x4f, 0xd9, 0x9f, 0x20, 0x5c, 0x36, 0x6e, 0x3a, 0xf9, 0x08, 0xa7, 0xd5, 0xbb, 0xff}
 	binaryIDVec2i                                            = binary.ID{0x03, 0x78, 0x45, 0xfb, 0x2c, 0xf0, 0xd5, 0x8f, 0xd4, 0x78, 0xe6, 0x63, 0x81, 0x85, 0xe3, 0x06, 0x0c, 0x49, 0xd7, 0xba}
 	binaryIDVec2iˢ                                           = binary.ID{0x6b, 0x83, 0xed, 0xc6, 0xad, 0xba, 0x33, 0x3e, 0xcd, 0x20, 0x1a, 0x3a, 0x70, 0x29, 0xa0, 0xc1, 0x65, 0xa0, 0x53, 0x5e}
 	binaryIDVec2iᵖ                                           = binary.ID{0xaa, 0xd3, 0xa9, 0x60, 0x80, 0x64, 0x1c, 0xa9, 0xef, 0xdc, 0xe5, 0x54, 0x9e, 0xaa, 0x32, 0xf4, 0xc3, 0xf4, 0xb3, 0x15}
+	binaryIDVec2u                                            = binary.ID{0x61, 0xa6, 0x5a, 0xdd, 0xf5, 0xcd, 0x36, 0xdf, 0xb8, 0xc7, 0xbe, 0x66, 0x7a, 0xa3, 0x18, 0xef, 0xb4, 0x1b, 0x9c, 0xd9}
+	binaryIDVec2uˢ                                           = binary.ID{0x0d, 0x85, 0x61, 0xf5, 0x8a, 0xfe, 0xec, 0x3f, 0x25, 0x34, 0x31, 0x2e, 0x17, 0xed, 0x48, 0x1a, 0x8d, 0x1f, 0x7e, 0x70}
+	binaryIDVec2uᵖ                                           = binary.ID{0x64, 0x12, 0x44, 0x40, 0x38, 0x9b, 0xb2, 0x35, 0x7f, 0x1f, 0xcb, 0xa9, 0x95, 0xed, 0xb4, 0xf4, 0x12, 0x5d, 0x02, 0x01}
+	binaryIDVec3fː2ᵃ                                         = binary.ID{0x57, 0xac, 0x1e, 0xac, 0xe3, 0x69, 0x5f, 0x50, 0xae, 0xe4, 0xbe, 0x88, 0x79, 0x68, 0x3c, 0x1a, 0x8d, 0xe2, 0xab, 0x41}
 	binaryIDVec3fː3ᵃ                                         = binary.ID{0x13, 0xcd, 0x31, 0x33, 0xcd, 0xd2, 0xb7, 0xe2, 0xaa, 0xc1, 0xb9, 0x3d, 0xbb, 0x10, 0x88, 0x95, 0x1b, 0xcf, 0xd1, 0xde}
+	binaryIDVec3fː4ᵃ                                         = binary.ID{0xbc, 0x5e, 0x35, 0x42, 0x76, 0x42, 0x7e, 0x2f, 0xe1, 0xcc, 0xaf, 0xf0, 0xa0, 0xe6, 0xf9, 0x24, 0x03, 0xbc, 0x4b, 0x0f}
 	binaryIDVec3fˢ                                           = binary.ID{0xba, 0xc9, 0xa5, 0x3c, 0xaa, 0x62, 0xc5, 0x18, 0x36, 0xc6, 0x3c, 0xaa, 0x5c, 0x15, 0xe9, 0x37, 0x5d, 0x11, 0xf4, 0xa1}
 	binaryIDVec3fᵖ                                           = binary.ID{0xed, 0xc9, 0xbf, 0x84, 0x9c, 0xa4, 0x36, 0xf4, 0x8f, 0xaa, 0xc3, 0x7c, 0xb8, 0xfe, 0x6a, 0x3e, 0x9c, 0xc6, 0xd4, 0x87}
 	binaryIDVec3i                                            = binary.ID{0xa2, 0x39, 0xe9, 0x4f, 0xe6, 0xf0, 0x02, 0x02, 0x97, 0x4b, 0x86, 0x0e, 0x33, 0xc4, 0xe8, 0x90, 0x49, 0x20, 0xdb, 0xb1}
 	binaryIDVec3iˢ                                           = binary.ID{0x1a, 0x46, 0x23, 0xaf, 0x7e, 0x76, 0xc7, 0x5b, 0xca, 0xbd, 0x76, 0xaa, 0xaf, 0xb3, 0xdf, 0x90, 0xc7, 0xe5, 0xa0, 0x5f}
 	binaryIDVec3iᵖ                                           = binary.ID{0x07, 0x78, 0x89, 0x2c, 0xfc, 0x6c, 0x17, 0xef, 0x84, 0xd5, 0x65, 0xbb, 0xc1, 0x25, 0x5c, 0xe3, 0xf8, 0xc6, 0x9c, 0x39}
+	binaryIDVec3u                                            = binary.ID{0x80, 0xcf, 0x90, 0x80, 0x27, 0xfc, 0xd4, 0x45, 0x00, 0x63, 0x49, 0x7e, 0xc6, 0x65, 0x86, 0xc6, 0xea, 0x0e, 0xfb, 0x9a}
+	binaryIDVec3uˢ                                           = binary.ID{0x62, 0xfe, 0xe4, 0x89, 0x73, 0x44, 0x40, 0xa4, 0xb0, 0x61, 0xf5, 0xff, 0x6f, 0xd9, 0x46, 0xd6, 0x36, 0x41, 0x08, 0xa9}
+	binaryIDVec3uᵖ                                           = binary.ID{0x35, 0x91, 0xe7, 0x3a, 0xd1, 0x33, 0xa8, 0xca, 0xe9, 0x7c, 0xf3, 0x26, 0x64, 0xcc, 0x62, 0x1f, 0x0d, 0xff, 0xf7, 0x7f}
+	binaryIDVec4fː2ᵃ                                         = binary.ID{0x8a, 0xc7, 0xf7, 0x06, 0x84, 0x38, 0x03, 0x98, 0x0d, 0x71, 0xd4, 0x1c, 0x8f, 0x2e, 0x3a, 0xbb, 0x83, 0xe2, 0x87, 0x3e}
+	binaryIDVec4fː3ᵃ                                         = binary.ID{0x56, 0xf4, 0x1f, 0xe9, 0x97, 0x53, 0x17, 0x2b, 0xc2, 0x6f, 0x37, 0xd3, 0x31, 0xad, 0xe4, 0x6c, 0x1d, 0x47, 0x51, 0x9b}
 	binaryIDVec4fː4ᵃ                                         = binary.ID{0x5b, 0x6d, 0xf1, 0x71, 0x8d, 0x7c, 0xc1, 0x20, 0x2b, 0x99, 0xb2, 0x24, 0xce, 0xb1, 0xf6, 0x8a, 0x90, 0xd9, 0xeb, 0x6c}
 	binaryIDVec4fˢ                                           = binary.ID{0x9e, 0xbf, 0xba, 0xe1, 0x7e, 0xae, 0xbc, 0x30, 0x0c, 0x1b, 0xdf, 0xe9, 0x03, 0x12, 0x2d, 0xa3, 0x28, 0x55, 0xc6, 0x4b}
 	binaryIDVec4fᵖ                                           = binary.ID{0xe4, 0x2d, 0x98, 0xc0, 0x13, 0x9e, 0xf8, 0xb2, 0xcc, 0x7e, 0xd1, 0x80, 0x7f, 0xa4, 0x1b, 0xf5, 0xb8, 0x58, 0x01, 0x73}
 	binaryIDVec4i                                            = binary.ID{0x4d, 0x79, 0xb8, 0xa5, 0x90, 0x3f, 0x4f, 0x88, 0x9e, 0x1e, 0xbd, 0x93, 0x18, 0x75, 0x54, 0x2b, 0xb4, 0x02, 0x4a, 0x1f}
 	binaryIDVec4iˢ                                           = binary.ID{0xee, 0x88, 0xf0, 0x68, 0xd6, 0xb7, 0xfa, 0xda, 0xb5, 0x1a, 0x68, 0x05, 0x6d, 0xbb, 0x69, 0x97, 0x08, 0x4f, 0x37, 0xe3}
 	binaryIDVec4iᵖ                                           = binary.ID{0xe4, 0x08, 0x77, 0x3a, 0xc3, 0xb7, 0x95, 0x08, 0xef, 0xd4, 0xa3, 0xdb, 0x01, 0x8e, 0x39, 0x60, 0x08, 0xdf, 0xbb, 0x2a}
+	binaryIDVec4u                                            = binary.ID{0xbf, 0xf9, 0x9b, 0x15, 0x77, 0x7f, 0x57, 0xa2, 0x89, 0x71, 0x32, 0x98, 0x84, 0x8b, 0x5b, 0xfe, 0x1d, 0x1e, 0x5d, 0xfb}
+	binaryIDVec4uˢ                                           = binary.ID{0x0e, 0xff, 0x6a, 0xfe, 0x00, 0x9a, 0x2e, 0x0a, 0x00, 0xf9, 0xb9, 0x7e, 0x48, 0xb5, 0xfb, 0x2f, 0x97, 0xf2, 0xec, 0x98}
+	binaryIDVec4uᵖ                                           = binary.ID{0x22, 0xd9, 0xe9, 0xe4, 0x3f, 0x7e, 0xc2, 0x64, 0x45, 0x24, 0x32, 0x67, 0xd9, 0x8f, 0x96, 0x2b, 0xf0, 0x64, 0x68, 0x4c}
 	binaryIDVertexArrayIdˢ                                   = binary.ID{0x33, 0x17, 0x79, 0xfd, 0x5c, 0x69, 0x07, 0xce, 0x86, 0x55, 0xd5, 0x6f, 0xde, 0x1e, 0xc6, 0xee, 0x52, 0x0a, 0xd8, 0x01}
 	binaryIDVoidˢ                                            = binary.ID{0x8e, 0x07, 0x40, 0xb5, 0x18, 0x86, 0xc9, 0x8b, 0x33, 0xd0, 0x40, 0xab, 0x75, 0xb9, 0xef, 0x2f, 0x74, 0x66, 0x0a, 0x26}
 	binaryIDVoidᵖˢ                                           = binary.ID{0x36, 0x6e, 0x56, 0x4d, 0x86, 0x80, 0xe4, 0xfc, 0x29, 0xe0, 0xf7, 0x48, 0x32, 0x6d, 0x23, 0xc4, 0xfe, 0x59, 0xeb, 0xd8}
@@ -8225,6 +8297,144 @@ var schemaGLuint64ᶜᵖ = &schema.Class{
 	Name:    "GLuint64ᶜᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGLuintː2ᵃ struct{}
+
+func (*GLuintː2ᵃ) Class() binary.Class {
+	return (*binaryClassGLuintː2ᵃ)(nil)
+}
+func doEncodeGLuintː2ᵃ(e binary.Encoder, o *GLuintː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeGLuintː2ᵃ(d binary.Decoder, o *GLuintː2ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassGLuintː2ᵃ) ID() binary.ID      { return binaryIDGLuintː2ᵃ }
+func (*binaryClassGLuintː2ᵃ) New() binary.Object { return &GLuintː2ᵃ{} }
+func (*binaryClassGLuintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLuintː2ᵃ(e, obj.(*GLuintː2ᵃ))
+}
+func (*binaryClassGLuintː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLuintː2ᵃ{}
+	return obj, doDecodeGLuintː2ᵃ(d, obj)
+}
+func (*binaryClassGLuintː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLuintː2ᵃ(d, obj.(*GLuintː2ᵃ))
+}
+func (*binaryClassGLuintː2ᵃ) Schema() *schema.Class { return schemaGLuintː2ᵃ }
+
+var schemaGLuintː2ᵃ = &schema.Class{
+	TypeID:  binaryIDGLuintː2ᵃ,
+	Package: "gles",
+	Name:    "GLuintː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 2}},
+	},
+}
+
+type binaryClassGLuintː3ᵃ struct{}
+
+func (*GLuintː3ᵃ) Class() binary.Class {
+	return (*binaryClassGLuintː3ᵃ)(nil)
+}
+func doEncodeGLuintː3ᵃ(e binary.Encoder, o *GLuintː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeGLuintː3ᵃ(d binary.Decoder, o *GLuintː3ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassGLuintː3ᵃ) ID() binary.ID      { return binaryIDGLuintː3ᵃ }
+func (*binaryClassGLuintː3ᵃ) New() binary.Object { return &GLuintː3ᵃ{} }
+func (*binaryClassGLuintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLuintː3ᵃ(e, obj.(*GLuintː3ᵃ))
+}
+func (*binaryClassGLuintː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLuintː3ᵃ{}
+	return obj, doDecodeGLuintː3ᵃ(d, obj)
+}
+func (*binaryClassGLuintː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLuintː3ᵃ(d, obj.(*GLuintː3ᵃ))
+}
+func (*binaryClassGLuintː3ᵃ) Schema() *schema.Class { return schemaGLuintː3ᵃ }
+
+var schemaGLuintː3ᵃ = &schema.Class{
+	TypeID:  binaryIDGLuintː3ᵃ,
+	Package: "gles",
+	Name:    "GLuintː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 3}},
+	},
+}
+
+type binaryClassGLuintː4ᵃ struct{}
+
+func (*GLuintː4ᵃ) Class() binary.Class {
+	return (*binaryClassGLuintː4ᵃ)(nil)
+}
+func doEncodeGLuintː4ᵃ(e binary.Encoder, o *GLuintː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeGLuintː4ᵃ(d binary.Decoder, o *GLuintː4ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassGLuintː4ᵃ) ID() binary.ID      { return binaryIDGLuintː4ᵃ }
+func (*binaryClassGLuintː4ᵃ) New() binary.Object { return &GLuintː4ᵃ{} }
+func (*binaryClassGLuintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLuintː4ᵃ(e, obj.(*GLuintː4ᵃ))
+}
+func (*binaryClassGLuintː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLuintː4ᵃ{}
+	return obj, doDecodeGLuintː4ᵃ(d, obj)
+}
+func (*binaryClassGLuintː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLuintː4ᵃ(d, obj.(*GLuintː4ᵃ))
+}
+func (*binaryClassGLuintː4ᵃ) Schema() *schema.Class { return schemaGLuintː4ᵃ }
+
+var schemaGLuintː4ᵃ = &schema.Class{
+	TypeID:  binaryIDGLuintː4ᵃ,
+	Package: "gles",
+	Name:    "GLuintː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 4}},
 	},
 }
 
@@ -35053,7 +35263,7 @@ func doEncodeGlGetUniformuiv(e binary.Encoder, o *GlGetUniformuiv) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Params); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35072,7 +35282,7 @@ func doDecodeGlGetUniformuiv(d binary.Decoder, o *GlGetUniformuiv) error {
 	} else {
 		o.Location = UniformLocation(obj)
 	}
-	if err := d.Value(&o.Params); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35099,7 +35309,7 @@ var schemaGlGetUniformuiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -35448,7 +35658,7 @@ func doEncodeGlGetnUniformfv(e binary.Encoder, o *GlGetnUniformfv) error {
 	if err := e.Int32(int32(o.BufSize)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Params); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35472,7 +35682,7 @@ func doDecodeGlGetnUniformfv(d binary.Decoder, o *GlGetnUniformfv) error {
 	} else {
 		o.BufSize = GLsizei(obj)
 	}
-	if err := d.Value(&o.Params); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35500,7 +35710,7 @@ var schemaGlGetnUniformfv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Name: "GLfloatᵖ", ID: (*GLfloatᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᵖ", ID: (*GLfloatᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -35670,7 +35880,7 @@ func doEncodeGlGetnUniformiv(e binary.Encoder, o *GlGetnUniformiv) error {
 	if err := e.Int32(int32(o.BufSize)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Params); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35694,7 +35904,7 @@ func doDecodeGlGetnUniformiv(d binary.Decoder, o *GlGetnUniformiv) error {
 	} else {
 		o.BufSize = GLsizei(obj)
 	}
-	if err := d.Value(&o.Params); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35722,7 +35932,7 @@ var schemaGlGetnUniformiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -35892,7 +36102,7 @@ func doEncodeGlGetnUniformuiv(e binary.Encoder, o *GlGetnUniformuiv) error {
 	if err := e.Int32(int32(o.BufSize)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Params); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35916,7 +36126,7 @@ func doDecodeGlGetnUniformuiv(d binary.Decoder, o *GlGetnUniformuiv) error {
 	} else {
 		o.BufSize = GLsizei(obj)
 	}
-	if err := d.Value(&o.Params); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -35944,7 +36154,7 @@ var schemaGlGetnUniformuiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -43015,7 +43225,7 @@ func doEncodeGlProgramUniform1f(e binary.Encoder, o *GlProgramUniform1f) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V0)); err != nil {
+	if err := e.Float32(float32(o.Value0)); err != nil {
 		return err
 	}
 	return nil
@@ -43037,7 +43247,7 @@ func doDecodeGlProgramUniform1f(d binary.Decoder, o *GlProgramUniform1f) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLfloat(obj)
+		o.Value0 = GLfloat(obj)
 	}
 	return nil
 }
@@ -43063,7 +43273,7 @@ var schemaGlProgramUniform1f = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
 
@@ -43152,7 +43362,7 @@ func doEncodeGlProgramUniform1fv(e binary.Encoder, o *GlProgramUniform1fv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43176,7 +43386,7 @@ func doDecodeGlProgramUniform1fv(d binary.Decoder, o *GlProgramUniform1fv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43204,7 +43414,7 @@ var schemaGlProgramUniform1fv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -43297,7 +43507,7 @@ func doEncodeGlProgramUniform1i(e binary.Encoder, o *GlProgramUniform1i) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V0)); err != nil {
+	if err := e.Int32(int32(o.Value0)); err != nil {
 		return err
 	}
 	return nil
@@ -43319,7 +43529,7 @@ func doDecodeGlProgramUniform1i(d binary.Decoder, o *GlProgramUniform1i) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLint(obj)
+		o.Value0 = GLint(obj)
 	}
 	return nil
 }
@@ -43345,7 +43555,7 @@ var schemaGlProgramUniform1i = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -43434,7 +43644,7 @@ func doEncodeGlProgramUniform1iv(e binary.Encoder, o *GlProgramUniform1iv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43458,7 +43668,7 @@ func doDecodeGlProgramUniform1iv(d binary.Decoder, o *GlProgramUniform1iv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43486,7 +43696,7 @@ var schemaGlProgramUniform1iv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -43579,7 +43789,7 @@ func doEncodeGlProgramUniform1ui(e binary.Encoder, o *GlProgramUniform1ui) error
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
 	return nil
@@ -43601,7 +43811,7 @@ func doDecodeGlProgramUniform1ui(d binary.Decoder, o *GlProgramUniform1ui) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	return nil
 }
@@ -43627,7 +43837,7 @@ var schemaGlProgramUniform1ui = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -43716,7 +43926,7 @@ func doEncodeGlProgramUniform1uiv(e binary.Encoder, o *GlProgramUniform1uiv) err
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43740,7 +43950,7 @@ func doDecodeGlProgramUniform1uiv(d binary.Decoder, o *GlProgramUniform1uiv) err
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -43768,7 +43978,7 @@ var schemaGlProgramUniform1uiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -43863,10 +44073,10 @@ func doEncodeGlProgramUniform2f(e binary.Encoder, o *GlProgramUniform2f) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V0)); err != nil {
+	if err := e.Float32(float32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V1)); err != nil {
+	if err := e.Float32(float32(o.Value1)); err != nil {
 		return err
 	}
 	return nil
@@ -43888,12 +44098,12 @@ func doDecodeGlProgramUniform2f(d binary.Decoder, o *GlProgramUniform2f) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLfloat(obj)
+		o.Value0 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLfloat(obj)
+		o.Value1 = GLfloat(obj)
 	}
 	return nil
 }
@@ -43919,8 +44129,8 @@ var schemaGlProgramUniform2f = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
 
@@ -44018,7 +44228,7 @@ func doEncodeGlProgramUniform2fv(e binary.Encoder, o *GlProgramUniform2fv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44042,7 +44252,7 @@ func doDecodeGlProgramUniform2fv(d binary.Decoder, o *GlProgramUniform2fv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44070,7 +44280,7 @@ var schemaGlProgramUniform2fv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -44163,10 +44373,10 @@ func doEncodeGlProgramUniform2i(e binary.Encoder, o *GlProgramUniform2i) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V0)); err != nil {
+	if err := e.Int32(int32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V1)); err != nil {
+	if err := e.Int32(int32(o.Value1)); err != nil {
 		return err
 	}
 	return nil
@@ -44188,12 +44398,12 @@ func doDecodeGlProgramUniform2i(d binary.Decoder, o *GlProgramUniform2i) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLint(obj)
+		o.Value0 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLint(obj)
+		o.Value1 = GLint(obj)
 	}
 	return nil
 }
@@ -44219,8 +44429,8 @@ var schemaGlProgramUniform2i = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -44318,7 +44528,7 @@ func doEncodeGlProgramUniform2iv(e binary.Encoder, o *GlProgramUniform2iv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44342,7 +44552,7 @@ func doDecodeGlProgramUniform2iv(d binary.Decoder, o *GlProgramUniform2iv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44370,7 +44580,7 @@ var schemaGlProgramUniform2iv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -44463,10 +44673,10 @@ func doEncodeGlProgramUniform2ui(e binary.Encoder, o *GlProgramUniform2ui) error
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
 	return nil
@@ -44488,12 +44698,12 @@ func doDecodeGlProgramUniform2ui(d binary.Decoder, o *GlProgramUniform2ui) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	return nil
 }
@@ -44519,8 +44729,8 @@ var schemaGlProgramUniform2ui = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -44618,7 +44828,7 @@ func doEncodeGlProgramUniform2uiv(e binary.Encoder, o *GlProgramUniform2uiv) err
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44642,7 +44852,7 @@ func doDecodeGlProgramUniform2uiv(d binary.Decoder, o *GlProgramUniform2uiv) err
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44670,7 +44880,7 @@ var schemaGlProgramUniform2uiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -44765,13 +44975,13 @@ func doEncodeGlProgramUniform3f(e binary.Encoder, o *GlProgramUniform3f) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V0)); err != nil {
+	if err := e.Float32(float32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V1)); err != nil {
+	if err := e.Float32(float32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V2)); err != nil {
+	if err := e.Float32(float32(o.Value2)); err != nil {
 		return err
 	}
 	return nil
@@ -44793,17 +45003,17 @@ func doDecodeGlProgramUniform3f(d binary.Decoder, o *GlProgramUniform3f) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLfloat(obj)
+		o.Value0 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLfloat(obj)
+		o.Value1 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLfloat(obj)
+		o.Value2 = GLfloat(obj)
 	}
 	return nil
 }
@@ -44829,9 +45039,9 @@ var schemaGlProgramUniform3f = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
 
@@ -44938,7 +45148,7 @@ func doEncodeGlProgramUniform3fv(e binary.Encoder, o *GlProgramUniform3fv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44962,7 +45172,7 @@ func doDecodeGlProgramUniform3fv(d binary.Decoder, o *GlProgramUniform3fv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -44990,7 +45200,7 @@ var schemaGlProgramUniform3fv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -45083,13 +45293,13 @@ func doEncodeGlProgramUniform3i(e binary.Encoder, o *GlProgramUniform3i) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V0)); err != nil {
+	if err := e.Int32(int32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V1)); err != nil {
+	if err := e.Int32(int32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V2)); err != nil {
+	if err := e.Int32(int32(o.Value2)); err != nil {
 		return err
 	}
 	return nil
@@ -45111,17 +45321,17 @@ func doDecodeGlProgramUniform3i(d binary.Decoder, o *GlProgramUniform3i) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLint(obj)
+		o.Value0 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLint(obj)
+		o.Value1 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLint(obj)
+		o.Value2 = GLint(obj)
 	}
 	return nil
 }
@@ -45147,9 +45357,9 @@ var schemaGlProgramUniform3i = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -45256,7 +45466,7 @@ func doEncodeGlProgramUniform3iv(e binary.Encoder, o *GlProgramUniform3iv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45280,7 +45490,7 @@ func doDecodeGlProgramUniform3iv(d binary.Decoder, o *GlProgramUniform3iv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45308,7 +45518,7 @@ var schemaGlProgramUniform3iv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -45401,13 +45611,13 @@ func doEncodeGlProgramUniform3ui(e binary.Encoder, o *GlProgramUniform3ui) error
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V2)); err != nil {
+	if err := e.Uint32(uint32(o.Value2)); err != nil {
 		return err
 	}
 	return nil
@@ -45429,17 +45639,17 @@ func doDecodeGlProgramUniform3ui(d binary.Decoder, o *GlProgramUniform3ui) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLuint(obj)
+		o.Value2 = GLuint(obj)
 	}
 	return nil
 }
@@ -45465,9 +45675,9 @@ var schemaGlProgramUniform3ui = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -45574,7 +45784,7 @@ func doEncodeGlProgramUniform3uiv(e binary.Encoder, o *GlProgramUniform3uiv) err
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45598,7 +45808,7 @@ func doDecodeGlProgramUniform3uiv(d binary.Decoder, o *GlProgramUniform3uiv) err
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45626,7 +45836,7 @@ var schemaGlProgramUniform3uiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -45721,16 +45931,16 @@ func doEncodeGlProgramUniform4f(e binary.Encoder, o *GlProgramUniform4f) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V0)); err != nil {
+	if err := e.Float32(float32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V1)); err != nil {
+	if err := e.Float32(float32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V2)); err != nil {
+	if err := e.Float32(float32(o.Value2)); err != nil {
 		return err
 	}
-	if err := e.Float32(float32(o.V3)); err != nil {
+	if err := e.Float32(float32(o.Value3)); err != nil {
 		return err
 	}
 	return nil
@@ -45752,22 +45962,22 @@ func doDecodeGlProgramUniform4f(d binary.Decoder, o *GlProgramUniform4f) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLfloat(obj)
+		o.Value0 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLfloat(obj)
+		o.Value1 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLfloat(obj)
+		o.Value2 = GLfloat(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
-		o.V3 = GLfloat(obj)
+		o.Value3 = GLfloat(obj)
 	}
 	return nil
 }
@@ -45793,10 +46003,10 @@ var schemaGlProgramUniform4f = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "V3", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
 
@@ -45912,7 +46122,7 @@ func doEncodeGlProgramUniform4fv(e binary.Encoder, o *GlProgramUniform4fv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45936,7 +46146,7 @@ func doDecodeGlProgramUniform4fv(d binary.Decoder, o *GlProgramUniform4fv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -45964,7 +46174,7 @@ var schemaGlProgramUniform4fv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -46057,16 +46267,16 @@ func doEncodeGlProgramUniform4i(e binary.Encoder, o *GlProgramUniform4i) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V0)); err != nil {
+	if err := e.Int32(int32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V1)); err != nil {
+	if err := e.Int32(int32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V2)); err != nil {
+	if err := e.Int32(int32(o.Value2)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.V3)); err != nil {
+	if err := e.Int32(int32(o.Value3)); err != nil {
 		return err
 	}
 	return nil
@@ -46088,22 +46298,22 @@ func doDecodeGlProgramUniform4i(d binary.Decoder, o *GlProgramUniform4i) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLint(obj)
+		o.Value0 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLint(obj)
+		o.Value1 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLint(obj)
+		o.Value2 = GLint(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.V3 = GLint(obj)
+		o.Value3 = GLint(obj)
 	}
 	return nil
 }
@@ -46129,10 +46339,10 @@ var schemaGlProgramUniform4i = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "V3", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -46248,7 +46458,7 @@ func doEncodeGlProgramUniform4iv(e binary.Encoder, o *GlProgramUniform4iv) error
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46272,7 +46482,7 @@ func doDecodeGlProgramUniform4iv(d binary.Decoder, o *GlProgramUniform4iv) error
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46300,7 +46510,7 @@ var schemaGlProgramUniform4iv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᶜᵖ", ID: (*GLintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -46393,16 +46603,16 @@ func doEncodeGlProgramUniform4ui(e binary.Encoder, o *GlProgramUniform4ui) error
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V2)); err != nil {
+	if err := e.Uint32(uint32(o.Value2)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V3)); err != nil {
+	if err := e.Uint32(uint32(o.Value3)); err != nil {
 		return err
 	}
 	return nil
@@ -46424,22 +46634,22 @@ func doDecodeGlProgramUniform4ui(d binary.Decoder, o *GlProgramUniform4ui) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLuint(obj)
+		o.Value2 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V3 = GLuint(obj)
+		o.Value3 = GLuint(obj)
 	}
 	return nil
 }
@@ -46465,10 +46675,10 @@ var schemaGlProgramUniform4ui = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V3", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -46584,7 +46794,7 @@ func doEncodeGlProgramUniform4uiv(e binary.Encoder, o *GlProgramUniform4uiv) err
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46608,7 +46818,7 @@ func doDecodeGlProgramUniform4uiv(d binary.Decoder, o *GlProgramUniform4uiv) err
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46636,7 +46846,7 @@ var schemaGlProgramUniform4uiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -46890,7 +47100,7 @@ func doEncodeGlProgramUniformMatrix2fv(e binary.Encoder, o *GlProgramUniformMatr
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46919,7 +47129,7 @@ func doDecodeGlProgramUniformMatrix2fv(d binary.Decoder, o *GlProgramUniformMatr
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -46950,7 +47160,7 @@ var schemaGlProgramUniformMatrix2fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47064,7 +47274,7 @@ func doEncodeGlProgramUniformMatrix2x3fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47093,7 +47303,7 @@ func doDecodeGlProgramUniformMatrix2x3fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47128,7 +47338,7 @@ var schemaGlProgramUniformMatrix2x3fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47242,7 +47452,7 @@ func doEncodeGlProgramUniformMatrix2x4fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47271,7 +47481,7 @@ func doDecodeGlProgramUniformMatrix2x4fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47306,7 +47516,7 @@ var schemaGlProgramUniformMatrix2x4fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47420,7 +47630,7 @@ func doEncodeGlProgramUniformMatrix3fv(e binary.Encoder, o *GlProgramUniformMatr
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47449,7 +47659,7 @@ func doDecodeGlProgramUniformMatrix3fv(d binary.Decoder, o *GlProgramUniformMatr
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47480,7 +47690,7 @@ var schemaGlProgramUniformMatrix3fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47594,7 +47804,7 @@ func doEncodeGlProgramUniformMatrix3x2fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47623,7 +47833,7 @@ func doDecodeGlProgramUniformMatrix3x2fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47658,7 +47868,7 @@ var schemaGlProgramUniformMatrix3x2fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47772,7 +47982,7 @@ func doEncodeGlProgramUniformMatrix3x4fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47801,7 +48011,7 @@ func doDecodeGlProgramUniformMatrix3x4fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47836,7 +48046,7 @@ var schemaGlProgramUniformMatrix3x4fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -47950,7 +48160,7 @@ func doEncodeGlProgramUniformMatrix4fv(e binary.Encoder, o *GlProgramUniformMatr
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -47979,7 +48189,7 @@ func doDecodeGlProgramUniformMatrix4fv(d binary.Decoder, o *GlProgramUniformMatr
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -48010,7 +48220,7 @@ var schemaGlProgramUniformMatrix4fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -48124,7 +48334,7 @@ func doEncodeGlProgramUniformMatrix4x2fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -48153,7 +48363,7 @@ func doDecodeGlProgramUniformMatrix4x2fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -48188,7 +48398,7 @@ var schemaGlProgramUniformMatrix4x2fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -48302,7 +48512,7 @@ func doEncodeGlProgramUniformMatrix4x3fv(e binary.Encoder, o *GlProgramUniformMa
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -48331,7 +48541,7 @@ func doDecodeGlProgramUniformMatrix4x3fv(d binary.Decoder, o *GlProgramUniformMa
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -48366,7 +48576,7 @@ var schemaGlProgramUniformMatrix4x3fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -56587,7 +56797,7 @@ func doEncodeGlUniform1ui(e binary.Encoder, o *GlUniform1ui) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
 	return nil
@@ -56604,7 +56814,7 @@ func doDecodeGlUniform1ui(d binary.Decoder, o *GlUniform1ui) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	return nil
 }
@@ -56629,7 +56839,7 @@ var schemaGlUniform1ui = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -56648,7 +56858,7 @@ func doEncodeGlUniform1uiv(e binary.Encoder, o *GlUniform1uiv) error {
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -56667,7 +56877,7 @@ func doDecodeGlUniform1uiv(d binary.Decoder, o *GlUniform1uiv) error {
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -56694,7 +56904,7 @@ var schemaGlUniform1uiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -56974,10 +57184,10 @@ func doEncodeGlUniform2ui(e binary.Encoder, o *GlUniform2ui) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
 	return nil
@@ -56994,12 +57204,12 @@ func doDecodeGlUniform2ui(d binary.Decoder, o *GlUniform2ui) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	return nil
 }
@@ -57024,8 +57234,8 @@ var schemaGlUniform2ui = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -57044,7 +57254,7 @@ func doEncodeGlUniform2uiv(e binary.Encoder, o *GlUniform2uiv) error {
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57063,7 +57273,7 @@ func doDecodeGlUniform2uiv(d binary.Decoder, o *GlUniform2uiv) error {
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57090,7 +57300,7 @@ var schemaGlUniform2uiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -57388,13 +57598,13 @@ func doEncodeGlUniform3ui(e binary.Encoder, o *GlUniform3ui) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V2)); err != nil {
+	if err := e.Uint32(uint32(o.Value2)); err != nil {
 		return err
 	}
 	return nil
@@ -57411,17 +57621,17 @@ func doDecodeGlUniform3ui(d binary.Decoder, o *GlUniform3ui) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLuint(obj)
+		o.Value2 = GLuint(obj)
 	}
 	return nil
 }
@@ -57446,9 +57656,9 @@ var schemaGlUniform3ui = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -57467,7 +57677,7 @@ func doEncodeGlUniform3uiv(e binary.Encoder, o *GlUniform3uiv) error {
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57486,7 +57696,7 @@ func doDecodeGlUniform3uiv(d binary.Decoder, o *GlUniform3uiv) error {
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57513,7 +57723,7 @@ var schemaGlUniform3uiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -57829,16 +58039,16 @@ func doEncodeGlUniform4ui(e binary.Encoder, o *GlUniform4ui) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V0)); err != nil {
+	if err := e.Uint32(uint32(o.Value0)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V1)); err != nil {
+	if err := e.Uint32(uint32(o.Value1)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V2)); err != nil {
+	if err := e.Uint32(uint32(o.Value2)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.V3)); err != nil {
+	if err := e.Uint32(uint32(o.Value3)); err != nil {
 		return err
 	}
 	return nil
@@ -57855,22 +58065,22 @@ func doDecodeGlUniform4ui(d binary.Decoder, o *GlUniform4ui) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V0 = GLuint(obj)
+		o.Value0 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V1 = GLuint(obj)
+		o.Value1 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V2 = GLuint(obj)
+		o.Value2 = GLuint(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.V3 = GLuint(obj)
+		o.Value3 = GLuint(obj)
 	}
 	return nil
 }
@@ -57895,10 +58105,10 @@ var schemaGlUniform4ui = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V3", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -57917,7 +58127,7 @@ func doEncodeGlUniform4uiv(e binary.Encoder, o *GlUniform4uiv) error {
 	if err := e.Int32(int32(o.Count)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57936,7 +58146,7 @@ func doDecodeGlUniform4uiv(d binary.Decoder, o *GlUniform4uiv) error {
 	} else {
 		o.Count = GLsizei(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -57963,7 +58173,7 @@ var schemaGlUniform4uiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -58249,7 +58459,7 @@ func doEncodeGlUniformMatrix2x3fv(e binary.Encoder, o *GlUniformMatrix2x3fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58273,7 +58483,7 @@ func doDecodeGlUniformMatrix2x3fv(d binary.Decoder, o *GlUniformMatrix2x3fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58301,7 +58511,7 @@ var schemaGlUniformMatrix2x3fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -58397,7 +58607,7 @@ func doEncodeGlUniformMatrix2x4fv(e binary.Encoder, o *GlUniformMatrix2x4fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58421,7 +58631,7 @@ func doDecodeGlUniformMatrix2x4fv(d binary.Decoder, o *GlUniformMatrix2x4fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58449,7 +58659,7 @@ var schemaGlUniformMatrix2x4fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -58619,7 +58829,7 @@ func doEncodeGlUniformMatrix3x2fv(e binary.Encoder, o *GlUniformMatrix3x2fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58643,7 +58853,7 @@ func doDecodeGlUniformMatrix3x2fv(d binary.Decoder, o *GlUniformMatrix3x2fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58671,7 +58881,7 @@ var schemaGlUniformMatrix3x2fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -58767,7 +58977,7 @@ func doEncodeGlUniformMatrix3x4fv(e binary.Encoder, o *GlUniformMatrix3x4fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58791,7 +59001,7 @@ func doDecodeGlUniformMatrix3x4fv(d binary.Decoder, o *GlUniformMatrix3x4fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -58819,7 +59029,7 @@ var schemaGlUniformMatrix3x4fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -58989,7 +59199,7 @@ func doEncodeGlUniformMatrix4x2fv(e binary.Encoder, o *GlUniformMatrix4x2fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -59013,7 +59223,7 @@ func doDecodeGlUniformMatrix4x2fv(d binary.Decoder, o *GlUniformMatrix4x2fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -59041,7 +59251,7 @@ var schemaGlUniformMatrix4x2fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -59137,7 +59347,7 @@ func doEncodeGlUniformMatrix4x3fv(e binary.Encoder, o *GlUniformMatrix4x3fv) err
 	if err := e.Uint8(uint8(o.Transpose)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -59161,7 +59371,7 @@ func doDecodeGlUniformMatrix4x3fv(d binary.Decoder, o *GlUniformMatrix4x3fv) err
 	} else {
 		o.Transpose = GLboolean(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -59189,7 +59399,7 @@ var schemaGlUniformMatrix4x3fv = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLfloatᶜᵖ", ID: (*GLfloatᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -62514,6 +62724,300 @@ var schemaVec3f = &schema.Class{
 	},
 }
 
+type binaryClassMat2x3f struct{}
+
+func (*Mat2x3f) Class() binary.Class {
+	return (*binaryClassMat2x3f)(nil)
+}
+func doEncodeMat2x3f(e binary.Encoder, o *Mat2x3f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat2x3f(d binary.Decoder, o *Mat2x3f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat2x3f) ID() binary.ID      { return binaryIDMat2x3f }
+func (*binaryClassMat2x3f) New() binary.Object { return &Mat2x3f{} }
+func (*binaryClassMat2x3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x3f(e, obj.(*Mat2x3f))
+}
+func (*binaryClassMat2x3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x3f{}
+	return obj, doDecodeMat2x3f(d, obj)
+}
+func (*binaryClassMat2x3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x3f(d, obj.(*Mat2x3f))
+}
+func (*binaryClassMat2x3f) Schema() *schema.Class { return schemaMat2x3f }
+
+var schemaMat2x3f = &schema.Class{
+	TypeID:  binaryIDMat2x3f,
+	Package: "gles",
+	Name:    "Mat2x3f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 2}},
+	},
+}
+
+type binaryClassMat2x3fˢ struct{}
+
+func (*Mat2x3fˢ) Class() binary.Class {
+	return (*binaryClassMat2x3fˢ)(nil)
+}
+func doEncodeMat2x3fˢ(e binary.Encoder, o *Mat2x3fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2x3fˢ(d binary.Decoder, o *Mat2x3fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2x3fˢ) ID() binary.ID      { return binaryIDMat2x3fˢ }
+func (*binaryClassMat2x3fˢ) New() binary.Object { return &Mat2x3fˢ{} }
+func (*binaryClassMat2x3fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x3fˢ(e, obj.(*Mat2x3fˢ))
+}
+func (*binaryClassMat2x3fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x3fˢ{}
+	return obj, doDecodeMat2x3fˢ(d, obj)
+}
+func (*binaryClassMat2x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x3fˢ(d, obj.(*Mat2x3fˢ))
+}
+func (*binaryClassMat2x3fˢ) Schema() *schema.Class { return schemaMat2x3fˢ }
+
+var schemaMat2x3fˢ = &schema.Class{
+	TypeID:  binaryIDMat2x3fˢ,
+	Package: "gles",
+	Name:    "Mat2x3fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat2x3fᵖ struct{}
+
+func (*Mat2x3fᵖ) Class() binary.Class {
+	return (*binaryClassMat2x3fᵖ)(nil)
+}
+func doEncodeMat2x3fᵖ(e binary.Encoder, o *Mat2x3fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2x3fᵖ(d binary.Decoder, o *Mat2x3fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2x3fᵖ) ID() binary.ID      { return binaryIDMat2x3fᵖ }
+func (*binaryClassMat2x3fᵖ) New() binary.Object { return &Mat2x3fᵖ{} }
+func (*binaryClassMat2x3fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x3fᵖ(e, obj.(*Mat2x3fᵖ))
+}
+func (*binaryClassMat2x3fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x3fᵖ{}
+	return obj, doDecodeMat2x3fᵖ(d, obj)
+}
+func (*binaryClassMat2x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x3fᵖ(d, obj.(*Mat2x3fᵖ))
+}
+func (*binaryClassMat2x3fᵖ) Schema() *schema.Class { return schemaMat2x3fᵖ }
+
+var schemaMat2x3fᵖ = &schema.Class{
+	TypeID:  binaryIDMat2x3fᵖ,
+	Package: "gles",
+	Name:    "Mat2x3fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec4f struct{}
+
+func (*Vec4f) Class() binary.Class {
+	return (*binaryClassVec4f)(nil)
+}
+func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
+	for i := range o.Elements {
+		if err := e.Float32(float32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLfloat(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
+func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
+func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4f(e, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4f{}
+	return obj, doDecodeVec4f(d, obj)
+}
+func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4f(d, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Schema() *schema.Class { return schemaVec4f }
+
+var schemaVec4f = &schema.Class{
+	TypeID:  binaryIDVec4f,
+	Package: "gles",
+	Name:    "Vec4f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 4}},
+	},
+}
+
+type binaryClassMat2x4f struct{}
+
+func (*Mat2x4f) Class() binary.Class {
+	return (*binaryClassMat2x4f)(nil)
+}
+func doEncodeMat2x4f(e binary.Encoder, o *Mat2x4f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat2x4f(d binary.Decoder, o *Mat2x4f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat2x4f) ID() binary.ID      { return binaryIDMat2x4f }
+func (*binaryClassMat2x4f) New() binary.Object { return &Mat2x4f{} }
+func (*binaryClassMat2x4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x4f(e, obj.(*Mat2x4f))
+}
+func (*binaryClassMat2x4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x4f{}
+	return obj, doDecodeMat2x4f(d, obj)
+}
+func (*binaryClassMat2x4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x4f(d, obj.(*Mat2x4f))
+}
+func (*binaryClassMat2x4f) Schema() *schema.Class { return schemaMat2x4f }
+
+var schemaMat2x4f = &schema.Class{
+	TypeID:  binaryIDMat2x4f,
+	Package: "gles",
+	Name:    "Mat2x4f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 2}},
+	},
+}
+
+type binaryClassMat2x4fˢ struct{}
+
+func (*Mat2x4fˢ) Class() binary.Class {
+	return (*binaryClassMat2x4fˢ)(nil)
+}
+func doEncodeMat2x4fˢ(e binary.Encoder, o *Mat2x4fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2x4fˢ(d binary.Decoder, o *Mat2x4fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2x4fˢ) ID() binary.ID      { return binaryIDMat2x4fˢ }
+func (*binaryClassMat2x4fˢ) New() binary.Object { return &Mat2x4fˢ{} }
+func (*binaryClassMat2x4fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x4fˢ(e, obj.(*Mat2x4fˢ))
+}
+func (*binaryClassMat2x4fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x4fˢ{}
+	return obj, doDecodeMat2x4fˢ(d, obj)
+}
+func (*binaryClassMat2x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x4fˢ(d, obj.(*Mat2x4fˢ))
+}
+func (*binaryClassMat2x4fˢ) Schema() *schema.Class { return schemaMat2x4fˢ }
+
+var schemaMat2x4fˢ = &schema.Class{
+	TypeID:  binaryIDMat2x4fˢ,
+	Package: "gles",
+	Name:    "Mat2x4fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat2x4fᵖ struct{}
+
+func (*Mat2x4fᵖ) Class() binary.Class {
+	return (*binaryClassMat2x4fᵖ)(nil)
+}
+func doEncodeMat2x4fᵖ(e binary.Encoder, o *Mat2x4fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2x4fᵖ(d binary.Decoder, o *Mat2x4fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2x4fᵖ) ID() binary.ID      { return binaryIDMat2x4fᵖ }
+func (*binaryClassMat2x4fᵖ) New() binary.Object { return &Mat2x4fᵖ{} }
+func (*binaryClassMat2x4fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2x4fᵖ(e, obj.(*Mat2x4fᵖ))
+}
+func (*binaryClassMat2x4fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2x4fᵖ{}
+	return obj, doDecodeMat2x4fᵖ(d, obj)
+}
+func (*binaryClassMat2x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2x4fᵖ(d, obj.(*Mat2x4fᵖ))
+}
+func (*binaryClassMat2x4fᵖ) Schema() *schema.Class { return schemaMat2x4fᵖ }
+
+var schemaMat2x4fᵖ = &schema.Class{
+	TypeID:  binaryIDMat2x4fᵖ,
+	Package: "gles",
+	Name:    "Mat2x4fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassMat3f struct{}
 
 func (*Mat3f) Class() binary.Class {
@@ -62638,49 +63142,251 @@ var schemaMat3fᵖ = &schema.Class{
 	},
 }
 
-type binaryClassVec4f struct{}
+type binaryClassMat3x2f struct{}
 
-func (*Vec4f) Class() binary.Class {
-	return (*binaryClassVec4f)(nil)
+func (*Mat3x2f) Class() binary.Class {
+	return (*binaryClassMat3x2f)(nil)
 }
-func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
+func doEncodeMat3x2f(e binary.Encoder, o *Mat3x2f) error {
 	for i := range o.Elements {
-		if err := e.Float32(float32(o.Elements[i])); err != nil {
+		if err := e.Value(&o.Elements[i]); err != nil {
 			return err
 		}
 	}
 	return nil
 }
-func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
+func doDecodeMat3x2f(d binary.Decoder, o *Mat3x2f) error {
 	for i := range o.Elements {
-		if obj, err := d.Float32(); err != nil {
+		if err := d.Value(&o.Elements[i]); err != nil {
 			return err
-		} else {
-			o.Elements[i] = GLfloat(obj)
 		}
 	}
 	return nil
 }
-func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
-func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
-func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec4f(e, obj.(*Vec4f))
+func (*binaryClassMat3x2f) ID() binary.ID      { return binaryIDMat3x2f }
+func (*binaryClassMat3x2f) New() binary.Object { return &Mat3x2f{} }
+func (*binaryClassMat3x2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x2f(e, obj.(*Mat3x2f))
 }
-func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec4f{}
-	return obj, doDecodeVec4f(d, obj)
+func (*binaryClassMat3x2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x2f{}
+	return obj, doDecodeMat3x2f(d, obj)
 }
-func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec4f(d, obj.(*Vec4f))
+func (*binaryClassMat3x2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x2f(d, obj.(*Mat3x2f))
 }
-func (*binaryClassVec4f) Schema() *schema.Class { return schemaVec4f }
+func (*binaryClassMat3x2f) Schema() *schema.Class { return schemaMat3x2f }
 
-var schemaVec4f = &schema.Class{
-	TypeID:  binaryIDVec4f,
+var schemaMat3x2f = &schema.Class{
+	TypeID:  binaryIDMat3x2f,
 	Package: "gles",
-	Name:    "Vec4f",
+	Name:    "Mat3x2f",
 	Fields: []schema.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 3}},
+	},
+}
+
+type binaryClassMat3x2fˢ struct{}
+
+func (*Mat3x2fˢ) Class() binary.Class {
+	return (*binaryClassMat3x2fˢ)(nil)
+}
+func doEncodeMat3x2fˢ(e binary.Encoder, o *Mat3x2fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3x2fˢ(d binary.Decoder, o *Mat3x2fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3x2fˢ) ID() binary.ID      { return binaryIDMat3x2fˢ }
+func (*binaryClassMat3x2fˢ) New() binary.Object { return &Mat3x2fˢ{} }
+func (*binaryClassMat3x2fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x2fˢ(e, obj.(*Mat3x2fˢ))
+}
+func (*binaryClassMat3x2fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x2fˢ{}
+	return obj, doDecodeMat3x2fˢ(d, obj)
+}
+func (*binaryClassMat3x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x2fˢ(d, obj.(*Mat3x2fˢ))
+}
+func (*binaryClassMat3x2fˢ) Schema() *schema.Class { return schemaMat3x2fˢ }
+
+var schemaMat3x2fˢ = &schema.Class{
+	TypeID:  binaryIDMat3x2fˢ,
+	Package: "gles",
+	Name:    "Mat3x2fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat3x2fᵖ struct{}
+
+func (*Mat3x2fᵖ) Class() binary.Class {
+	return (*binaryClassMat3x2fᵖ)(nil)
+}
+func doEncodeMat3x2fᵖ(e binary.Encoder, o *Mat3x2fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3x2fᵖ(d binary.Decoder, o *Mat3x2fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3x2fᵖ) ID() binary.ID      { return binaryIDMat3x2fᵖ }
+func (*binaryClassMat3x2fᵖ) New() binary.Object { return &Mat3x2fᵖ{} }
+func (*binaryClassMat3x2fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x2fᵖ(e, obj.(*Mat3x2fᵖ))
+}
+func (*binaryClassMat3x2fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x2fᵖ{}
+	return obj, doDecodeMat3x2fᵖ(d, obj)
+}
+func (*binaryClassMat3x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x2fᵖ(d, obj.(*Mat3x2fᵖ))
+}
+func (*binaryClassMat3x2fᵖ) Schema() *schema.Class { return schemaMat3x2fᵖ }
+
+var schemaMat3x2fᵖ = &schema.Class{
+	TypeID:  binaryIDMat3x2fᵖ,
+	Package: "gles",
+	Name:    "Mat3x2fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat3x4f struct{}
+
+func (*Mat3x4f) Class() binary.Class {
+	return (*binaryClassMat3x4f)(nil)
+}
+func doEncodeMat3x4f(e binary.Encoder, o *Mat3x4f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat3x4f(d binary.Decoder, o *Mat3x4f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat3x4f) ID() binary.ID      { return binaryIDMat3x4f }
+func (*binaryClassMat3x4f) New() binary.Object { return &Mat3x4f{} }
+func (*binaryClassMat3x4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x4f(e, obj.(*Mat3x4f))
+}
+func (*binaryClassMat3x4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x4f{}
+	return obj, doDecodeMat3x4f(d, obj)
+}
+func (*binaryClassMat3x4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x4f(d, obj.(*Mat3x4f))
+}
+func (*binaryClassMat3x4f) Schema() *schema.Class { return schemaMat3x4f }
+
+var schemaMat3x4f = &schema.Class{
+	TypeID:  binaryIDMat3x4f,
+	Package: "gles",
+	Name:    "Mat3x4f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 3}},
+	},
+}
+
+type binaryClassMat3x4fˢ struct{}
+
+func (*Mat3x4fˢ) Class() binary.Class {
+	return (*binaryClassMat3x4fˢ)(nil)
+}
+func doEncodeMat3x4fˢ(e binary.Encoder, o *Mat3x4fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3x4fˢ(d binary.Decoder, o *Mat3x4fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3x4fˢ) ID() binary.ID      { return binaryIDMat3x4fˢ }
+func (*binaryClassMat3x4fˢ) New() binary.Object { return &Mat3x4fˢ{} }
+func (*binaryClassMat3x4fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x4fˢ(e, obj.(*Mat3x4fˢ))
+}
+func (*binaryClassMat3x4fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x4fˢ{}
+	return obj, doDecodeMat3x4fˢ(d, obj)
+}
+func (*binaryClassMat3x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x4fˢ(d, obj.(*Mat3x4fˢ))
+}
+func (*binaryClassMat3x4fˢ) Schema() *schema.Class { return schemaMat3x4fˢ }
+
+var schemaMat3x4fˢ = &schema.Class{
+	TypeID:  binaryIDMat3x4fˢ,
+	Package: "gles",
+	Name:    "Mat3x4fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat3x4fᵖ struct{}
+
+func (*Mat3x4fᵖ) Class() binary.Class {
+	return (*binaryClassMat3x4fᵖ)(nil)
+}
+func doEncodeMat3x4fᵖ(e binary.Encoder, o *Mat3x4fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3x4fᵖ(d binary.Decoder, o *Mat3x4fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3x4fᵖ) ID() binary.ID      { return binaryIDMat3x4fᵖ }
+func (*binaryClassMat3x4fᵖ) New() binary.Object { return &Mat3x4fᵖ{} }
+func (*binaryClassMat3x4fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3x4fᵖ(e, obj.(*Mat3x4fᵖ))
+}
+func (*binaryClassMat3x4fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3x4fᵖ{}
+	return obj, doDecodeMat3x4fᵖ(d, obj)
+}
+func (*binaryClassMat3x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3x4fᵖ(d, obj.(*Mat3x4fᵖ))
+}
+func (*binaryClassMat3x4fᵖ) Schema() *schema.Class { return schemaMat3x4fᵖ }
+
+var schemaMat3x4fᵖ = &schema.Class{
+	TypeID:  binaryIDMat3x4fᵖ,
+	Package: "gles",
+	Name:    "Mat3x4fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -62803,6 +63509,254 @@ var schemaMat4fᵖ = &schema.Class{
 	TypeID:  binaryIDMat4fᵖ,
 	Package: "gles",
 	Name:    "Mat4fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat4x2f struct{}
+
+func (*Mat4x2f) Class() binary.Class {
+	return (*binaryClassMat4x2f)(nil)
+}
+func doEncodeMat4x2f(e binary.Encoder, o *Mat4x2f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat4x2f(d binary.Decoder, o *Mat4x2f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat4x2f) ID() binary.ID      { return binaryIDMat4x2f }
+func (*binaryClassMat4x2f) New() binary.Object { return &Mat4x2f{} }
+func (*binaryClassMat4x2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x2f(e, obj.(*Mat4x2f))
+}
+func (*binaryClassMat4x2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x2f{}
+	return obj, doDecodeMat4x2f(d, obj)
+}
+func (*binaryClassMat4x2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x2f(d, obj.(*Mat4x2f))
+}
+func (*binaryClassMat4x2f) Schema() *schema.Class { return schemaMat4x2f }
+
+var schemaMat4x2f = &schema.Class{
+	TypeID:  binaryIDMat4x2f,
+	Package: "gles",
+	Name:    "Mat4x2f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 4}},
+	},
+}
+
+type binaryClassMat4x2fˢ struct{}
+
+func (*Mat4x2fˢ) Class() binary.Class {
+	return (*binaryClassMat4x2fˢ)(nil)
+}
+func doEncodeMat4x2fˢ(e binary.Encoder, o *Mat4x2fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4x2fˢ(d binary.Decoder, o *Mat4x2fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4x2fˢ) ID() binary.ID      { return binaryIDMat4x2fˢ }
+func (*binaryClassMat4x2fˢ) New() binary.Object { return &Mat4x2fˢ{} }
+func (*binaryClassMat4x2fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x2fˢ(e, obj.(*Mat4x2fˢ))
+}
+func (*binaryClassMat4x2fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x2fˢ{}
+	return obj, doDecodeMat4x2fˢ(d, obj)
+}
+func (*binaryClassMat4x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x2fˢ(d, obj.(*Mat4x2fˢ))
+}
+func (*binaryClassMat4x2fˢ) Schema() *schema.Class { return schemaMat4x2fˢ }
+
+var schemaMat4x2fˢ = &schema.Class{
+	TypeID:  binaryIDMat4x2fˢ,
+	Package: "gles",
+	Name:    "Mat4x2fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat4x2fᵖ struct{}
+
+func (*Mat4x2fᵖ) Class() binary.Class {
+	return (*binaryClassMat4x2fᵖ)(nil)
+}
+func doEncodeMat4x2fᵖ(e binary.Encoder, o *Mat4x2fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4x2fᵖ(d binary.Decoder, o *Mat4x2fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4x2fᵖ) ID() binary.ID      { return binaryIDMat4x2fᵖ }
+func (*binaryClassMat4x2fᵖ) New() binary.Object { return &Mat4x2fᵖ{} }
+func (*binaryClassMat4x2fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x2fᵖ(e, obj.(*Mat4x2fᵖ))
+}
+func (*binaryClassMat4x2fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x2fᵖ{}
+	return obj, doDecodeMat4x2fᵖ(d, obj)
+}
+func (*binaryClassMat4x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x2fᵖ(d, obj.(*Mat4x2fᵖ))
+}
+func (*binaryClassMat4x2fᵖ) Schema() *schema.Class { return schemaMat4x2fᵖ }
+
+var schemaMat4x2fᵖ = &schema.Class{
+	TypeID:  binaryIDMat4x2fᵖ,
+	Package: "gles",
+	Name:    "Mat4x2fᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat4x3f struct{}
+
+func (*Mat4x3f) Class() binary.Class {
+	return (*binaryClassMat4x3f)(nil)
+}
+func doEncodeMat4x3f(e binary.Encoder, o *Mat4x3f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat4x3f(d binary.Decoder, o *Mat4x3f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat4x3f) ID() binary.ID      { return binaryIDMat4x3f }
+func (*binaryClassMat4x3f) New() binary.Object { return &Mat4x3f{} }
+func (*binaryClassMat4x3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x3f(e, obj.(*Mat4x3f))
+}
+func (*binaryClassMat4x3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x3f{}
+	return obj, doDecodeMat4x3f(d, obj)
+}
+func (*binaryClassMat4x3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x3f(d, obj.(*Mat4x3f))
+}
+func (*binaryClassMat4x3f) Schema() *schema.Class { return schemaMat4x3f }
+
+var schemaMat4x3f = &schema.Class{
+	TypeID:  binaryIDMat4x3f,
+	Package: "gles",
+	Name:    "Mat4x3f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 4}},
+	},
+}
+
+type binaryClassMat4x3fˢ struct{}
+
+func (*Mat4x3fˢ) Class() binary.Class {
+	return (*binaryClassMat4x3fˢ)(nil)
+}
+func doEncodeMat4x3fˢ(e binary.Encoder, o *Mat4x3fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4x3fˢ(d binary.Decoder, o *Mat4x3fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4x3fˢ) ID() binary.ID      { return binaryIDMat4x3fˢ }
+func (*binaryClassMat4x3fˢ) New() binary.Object { return &Mat4x3fˢ{} }
+func (*binaryClassMat4x3fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x3fˢ(e, obj.(*Mat4x3fˢ))
+}
+func (*binaryClassMat4x3fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x3fˢ{}
+	return obj, doDecodeMat4x3fˢ(d, obj)
+}
+func (*binaryClassMat4x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x3fˢ(d, obj.(*Mat4x3fˢ))
+}
+func (*binaryClassMat4x3fˢ) Schema() *schema.Class { return schemaMat4x3fˢ }
+
+var schemaMat4x3fˢ = &schema.Class{
+	TypeID:  binaryIDMat4x3fˢ,
+	Package: "gles",
+	Name:    "Mat4x3fˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassMat4x3fᵖ struct{}
+
+func (*Mat4x3fᵖ) Class() binary.Class {
+	return (*binaryClassMat4x3fᵖ)(nil)
+}
+func doEncodeMat4x3fᵖ(e binary.Encoder, o *Mat4x3fᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4x3fᵖ(d binary.Decoder, o *Mat4x3fᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4x3fᵖ) ID() binary.ID      { return binaryIDMat4x3fᵖ }
+func (*binaryClassMat4x3fᵖ) New() binary.Object { return &Mat4x3fᵖ{} }
+func (*binaryClassMat4x3fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4x3fᵖ(e, obj.(*Mat4x3fᵖ))
+}
+func (*binaryClassMat4x3fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4x3fᵖ{}
+	return obj, doDecodeMat4x3fᵖ(d, obj)
+}
+func (*binaryClassMat4x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4x3fᵖ(d, obj.(*Mat4x3fᵖ))
+}
+func (*binaryClassMat4x3fᵖ) Schema() *schema.Class { return schemaMat4x3fᵖ }
+
+var schemaMat4x3fᵖ = &schema.Class{
+	TypeID:  binaryIDMat4x3fᵖ,
+	Package: "gles",
+	Name:    "Mat4x3fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -63944,6 +64898,94 @@ var schemaVec2fː2ᵃ = &schema.Class{
 	},
 }
 
+type binaryClassVec2fː3ᵃ struct{}
+
+func (*Vec2fː3ᵃ) Class() binary.Class {
+	return (*binaryClassVec2fː3ᵃ)(nil)
+}
+func doEncodeVec2fː3ᵃ(e binary.Encoder, o *Vec2fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2fː3ᵃ(d binary.Decoder, o *Vec2fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2fː3ᵃ) ID() binary.ID      { return binaryIDVec2fː3ᵃ }
+func (*binaryClassVec2fː3ᵃ) New() binary.Object { return &Vec2fː3ᵃ{} }
+func (*binaryClassVec2fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2fː3ᵃ(e, obj.(*Vec2fː3ᵃ))
+}
+func (*binaryClassVec2fː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2fː3ᵃ{}
+	return obj, doDecodeVec2fː3ᵃ(d, obj)
+}
+func (*binaryClassVec2fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2fː3ᵃ(d, obj.(*Vec2fː3ᵃ))
+}
+func (*binaryClassVec2fː3ᵃ) Schema() *schema.Class { return schemaVec2fː3ᵃ }
+
+var schemaVec2fː3ᵃ = &schema.Class{
+	TypeID:  binaryIDVec2fː3ᵃ,
+	Package: "gles",
+	Name:    "Vec2fː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 3}},
+	},
+}
+
+type binaryClassVec2fː4ᵃ struct{}
+
+func (*Vec2fː4ᵃ) Class() binary.Class {
+	return (*binaryClassVec2fː4ᵃ)(nil)
+}
+func doEncodeVec2fː4ᵃ(e binary.Encoder, o *Vec2fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2fː4ᵃ(d binary.Decoder, o *Vec2fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2fː4ᵃ) ID() binary.ID      { return binaryIDVec2fː4ᵃ }
+func (*binaryClassVec2fː4ᵃ) New() binary.Object { return &Vec2fː4ᵃ{} }
+func (*binaryClassVec2fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2fː4ᵃ(e, obj.(*Vec2fː4ᵃ))
+}
+func (*binaryClassVec2fː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2fː4ᵃ{}
+	return obj, doDecodeVec2fː4ᵃ(d, obj)
+}
+func (*binaryClassVec2fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2fː4ᵃ(d, obj.(*Vec2fː4ᵃ))
+}
+func (*binaryClassVec2fː4ᵃ) Schema() *schema.Class { return schemaVec2fː4ᵃ }
+
+var schemaVec2fː4ᵃ = &schema.Class{
+	TypeID:  binaryIDVec2fː4ᵃ,
+	Package: "gles",
+	Name:    "Vec2fː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 4}},
+	},
+}
+
 type binaryClassVec2fˢ struct{}
 
 func (*Vec2fˢ) Class() binary.Class {
@@ -64150,6 +65192,176 @@ var schemaVec2iᵖ = &schema.Class{
 	},
 }
 
+type binaryClassVec2u struct{}
+
+func (*Vec2u) Class() binary.Class {
+	return (*binaryClassVec2u)(nil)
+}
+func doEncodeVec2u(e binary.Encoder, o *Vec2u) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2u(d binary.Decoder, o *Vec2u) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2u) ID() binary.ID      { return binaryIDVec2u }
+func (*binaryClassVec2u) New() binary.Object { return &Vec2u{} }
+func (*binaryClassVec2u) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2u(e, obj.(*Vec2u))
+}
+func (*binaryClassVec2u) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2u{}
+	return obj, doDecodeVec2u(d, obj)
+}
+func (*binaryClassVec2u) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2u(d, obj.(*Vec2u))
+}
+func (*binaryClassVec2u) Schema() *schema.Class { return schemaVec2u }
+
+var schemaVec2u = &schema.Class{
+	TypeID:  binaryIDVec2u,
+	Package: "gles",
+	Name:    "Vec2u",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 2}},
+	},
+}
+
+type binaryClassVec2uˢ struct{}
+
+func (*Vec2uˢ) Class() binary.Class {
+	return (*binaryClassVec2uˢ)(nil)
+}
+func doEncodeVec2uˢ(e binary.Encoder, o *Vec2uˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2uˢ(d binary.Decoder, o *Vec2uˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2uˢ) ID() binary.ID      { return binaryIDVec2uˢ }
+func (*binaryClassVec2uˢ) New() binary.Object { return &Vec2uˢ{} }
+func (*binaryClassVec2uˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2uˢ(e, obj.(*Vec2uˢ))
+}
+func (*binaryClassVec2uˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2uˢ{}
+	return obj, doDecodeVec2uˢ(d, obj)
+}
+func (*binaryClassVec2uˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2uˢ(d, obj.(*Vec2uˢ))
+}
+func (*binaryClassVec2uˢ) Schema() *schema.Class { return schemaVec2uˢ }
+
+var schemaVec2uˢ = &schema.Class{
+	TypeID:  binaryIDVec2uˢ,
+	Package: "gles",
+	Name:    "Vec2uˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec2uᵖ struct{}
+
+func (*Vec2uᵖ) Class() binary.Class {
+	return (*binaryClassVec2uᵖ)(nil)
+}
+func doEncodeVec2uᵖ(e binary.Encoder, o *Vec2uᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2uᵖ(d binary.Decoder, o *Vec2uᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2uᵖ) ID() binary.ID      { return binaryIDVec2uᵖ }
+func (*binaryClassVec2uᵖ) New() binary.Object { return &Vec2uᵖ{} }
+func (*binaryClassVec2uᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2uᵖ(e, obj.(*Vec2uᵖ))
+}
+func (*binaryClassVec2uᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2uᵖ{}
+	return obj, doDecodeVec2uᵖ(d, obj)
+}
+func (*binaryClassVec2uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2uᵖ(d, obj.(*Vec2uᵖ))
+}
+func (*binaryClassVec2uᵖ) Schema() *schema.Class { return schemaVec2uᵖ }
+
+var schemaVec2uᵖ = &schema.Class{
+	TypeID:  binaryIDVec2uᵖ,
+	Package: "gles",
+	Name:    "Vec2uᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec3fː2ᵃ struct{}
+
+func (*Vec3fː2ᵃ) Class() binary.Class {
+	return (*binaryClassVec3fː2ᵃ)(nil)
+}
+func doEncodeVec3fː2ᵃ(e binary.Encoder, o *Vec3fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3fː2ᵃ(d binary.Decoder, o *Vec3fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3fː2ᵃ) ID() binary.ID      { return binaryIDVec3fː2ᵃ }
+func (*binaryClassVec3fː2ᵃ) New() binary.Object { return &Vec3fː2ᵃ{} }
+func (*binaryClassVec3fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3fː2ᵃ(e, obj.(*Vec3fː2ᵃ))
+}
+func (*binaryClassVec3fː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3fː2ᵃ{}
+	return obj, doDecodeVec3fː2ᵃ(d, obj)
+}
+func (*binaryClassVec3fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3fː2ᵃ(d, obj.(*Vec3fː2ᵃ))
+}
+func (*binaryClassVec3fː2ᵃ) Schema() *schema.Class { return schemaVec3fː2ᵃ }
+
+var schemaVec3fː2ᵃ = &schema.Class{
+	TypeID:  binaryIDVec3fː2ᵃ,
+	Package: "gles",
+	Name:    "Vec3fː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 2}},
+	},
+}
+
 type binaryClassVec3fː3ᵃ struct{}
 
 func (*Vec3fː3ᵃ) Class() binary.Class {
@@ -64191,6 +65403,50 @@ var schemaVec3fː3ᵃ = &schema.Class{
 	Name:    "Vec3fː3ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 3}},
+	},
+}
+
+type binaryClassVec3fː4ᵃ struct{}
+
+func (*Vec3fː4ᵃ) Class() binary.Class {
+	return (*binaryClassVec3fː4ᵃ)(nil)
+}
+func doEncodeVec3fː4ᵃ(e binary.Encoder, o *Vec3fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3fː4ᵃ(d binary.Decoder, o *Vec3fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3fː4ᵃ) ID() binary.ID      { return binaryIDVec3fː4ᵃ }
+func (*binaryClassVec3fː4ᵃ) New() binary.Object { return &Vec3fː4ᵃ{} }
+func (*binaryClassVec3fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3fː4ᵃ(e, obj.(*Vec3fː4ᵃ))
+}
+func (*binaryClassVec3fː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3fː4ᵃ{}
+	return obj, doDecodeVec3fː4ᵃ(d, obj)
+}
+func (*binaryClassVec3fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3fː4ᵃ(d, obj.(*Vec3fː4ᵃ))
+}
+func (*binaryClassVec3fː4ᵃ) Schema() *schema.Class { return schemaVec3fː4ᵃ }
+
+var schemaVec3fː4ᵃ = &schema.Class{
+	TypeID:  binaryIDVec3fː4ᵃ,
+	Package: "gles",
+	Name:    "Vec3fː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 4}},
 	},
 }
 
@@ -64397,6 +65653,220 @@ var schemaVec3iᵖ = &schema.Class{
 	Name:    "Vec3iᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec3u struct{}
+
+func (*Vec3u) Class() binary.Class {
+	return (*binaryClassVec3u)(nil)
+}
+func doEncodeVec3u(e binary.Encoder, o *Vec3u) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3u(d binary.Decoder, o *Vec3u) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3u) ID() binary.ID      { return binaryIDVec3u }
+func (*binaryClassVec3u) New() binary.Object { return &Vec3u{} }
+func (*binaryClassVec3u) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3u(e, obj.(*Vec3u))
+}
+func (*binaryClassVec3u) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3u{}
+	return obj, doDecodeVec3u(d, obj)
+}
+func (*binaryClassVec3u) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3u(d, obj.(*Vec3u))
+}
+func (*binaryClassVec3u) Schema() *schema.Class { return schemaVec3u }
+
+var schemaVec3u = &schema.Class{
+	TypeID:  binaryIDVec3u,
+	Package: "gles",
+	Name:    "Vec3u",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 3}},
+	},
+}
+
+type binaryClassVec3uˢ struct{}
+
+func (*Vec3uˢ) Class() binary.Class {
+	return (*binaryClassVec3uˢ)(nil)
+}
+func doEncodeVec3uˢ(e binary.Encoder, o *Vec3uˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3uˢ(d binary.Decoder, o *Vec3uˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3uˢ) ID() binary.ID      { return binaryIDVec3uˢ }
+func (*binaryClassVec3uˢ) New() binary.Object { return &Vec3uˢ{} }
+func (*binaryClassVec3uˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3uˢ(e, obj.(*Vec3uˢ))
+}
+func (*binaryClassVec3uˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3uˢ{}
+	return obj, doDecodeVec3uˢ(d, obj)
+}
+func (*binaryClassVec3uˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3uˢ(d, obj.(*Vec3uˢ))
+}
+func (*binaryClassVec3uˢ) Schema() *schema.Class { return schemaVec3uˢ }
+
+var schemaVec3uˢ = &schema.Class{
+	TypeID:  binaryIDVec3uˢ,
+	Package: "gles",
+	Name:    "Vec3uˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec3uᵖ struct{}
+
+func (*Vec3uᵖ) Class() binary.Class {
+	return (*binaryClassVec3uᵖ)(nil)
+}
+func doEncodeVec3uᵖ(e binary.Encoder, o *Vec3uᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3uᵖ(d binary.Decoder, o *Vec3uᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3uᵖ) ID() binary.ID      { return binaryIDVec3uᵖ }
+func (*binaryClassVec3uᵖ) New() binary.Object { return &Vec3uᵖ{} }
+func (*binaryClassVec3uᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3uᵖ(e, obj.(*Vec3uᵖ))
+}
+func (*binaryClassVec3uᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3uᵖ{}
+	return obj, doDecodeVec3uᵖ(d, obj)
+}
+func (*binaryClassVec3uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3uᵖ(d, obj.(*Vec3uᵖ))
+}
+func (*binaryClassVec3uᵖ) Schema() *schema.Class { return schemaVec3uᵖ }
+
+var schemaVec3uᵖ = &schema.Class{
+	TypeID:  binaryIDVec3uᵖ,
+	Package: "gles",
+	Name:    "Vec3uᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec4fː2ᵃ struct{}
+
+func (*Vec4fː2ᵃ) Class() binary.Class {
+	return (*binaryClassVec4fː2ᵃ)(nil)
+}
+func doEncodeVec4fː2ᵃ(e binary.Encoder, o *Vec4fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4fː2ᵃ(d binary.Decoder, o *Vec4fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4fː2ᵃ) ID() binary.ID      { return binaryIDVec4fː2ᵃ }
+func (*binaryClassVec4fː2ᵃ) New() binary.Object { return &Vec4fː2ᵃ{} }
+func (*binaryClassVec4fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4fː2ᵃ(e, obj.(*Vec4fː2ᵃ))
+}
+func (*binaryClassVec4fː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4fː2ᵃ{}
+	return obj, doDecodeVec4fː2ᵃ(d, obj)
+}
+func (*binaryClassVec4fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4fː2ᵃ(d, obj.(*Vec4fː2ᵃ))
+}
+func (*binaryClassVec4fː2ᵃ) Schema() *schema.Class { return schemaVec4fː2ᵃ }
+
+var schemaVec4fː2ᵃ = &schema.Class{
+	TypeID:  binaryIDVec4fː2ᵃ,
+	Package: "gles",
+	Name:    "Vec4fː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 2}},
+	},
+}
+
+type binaryClassVec4fː3ᵃ struct{}
+
+func (*Vec4fː3ᵃ) Class() binary.Class {
+	return (*binaryClassVec4fː3ᵃ)(nil)
+}
+func doEncodeVec4fː3ᵃ(e binary.Encoder, o *Vec4fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4fː3ᵃ(d binary.Decoder, o *Vec4fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4fː3ᵃ) ID() binary.ID      { return binaryIDVec4fː3ᵃ }
+func (*binaryClassVec4fː3ᵃ) New() binary.Object { return &Vec4fː3ᵃ{} }
+func (*binaryClassVec4fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4fː3ᵃ(e, obj.(*Vec4fː3ᵃ))
+}
+func (*binaryClassVec4fː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4fː3ᵃ{}
+	return obj, doDecodeVec4fː3ᵃ(d, obj)
+}
+func (*binaryClassVec4fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4fː3ᵃ(d, obj.(*Vec4fː3ᵃ))
+}
+func (*binaryClassVec4fː3ᵃ) Schema() *schema.Class { return schemaVec4fː3ᵃ }
+
+var schemaVec4fː3ᵃ = &schema.Class{
+	TypeID:  binaryIDVec4fː3ᵃ,
+	Package: "gles",
+	Name:    "Vec4fː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 3}},
 	},
 }
 
@@ -64645,6 +66115,132 @@ var schemaVec4iᵖ = &schema.Class{
 	TypeID:  binaryIDVec4iᵖ,
 	Package: "gles",
 	Name:    "Vec4iᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec4u struct{}
+
+func (*Vec4u) Class() binary.Class {
+	return (*binaryClassVec4u)(nil)
+}
+func doEncodeVec4u(e binary.Encoder, o *Vec4u) error {
+	for i := range o.Elements {
+		if err := e.Uint32(uint32(o.Elements[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4u(d binary.Decoder, o *Vec4u) error {
+	for i := range o.Elements {
+		if obj, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = GLuint(obj)
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4u) ID() binary.ID      { return binaryIDVec4u }
+func (*binaryClassVec4u) New() binary.Object { return &Vec4u{} }
+func (*binaryClassVec4u) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4u(e, obj.(*Vec4u))
+}
+func (*binaryClassVec4u) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4u{}
+	return obj, doDecodeVec4u(d, obj)
+}
+func (*binaryClassVec4u) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4u(d, obj.(*Vec4u))
+}
+func (*binaryClassVec4u) Schema() *schema.Class { return schemaVec4u }
+
+var schemaVec4u = &schema.Class{
+	TypeID:  binaryIDVec4u,
+	Package: "gles",
+	Name:    "Vec4u",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 4}},
+	},
+}
+
+type binaryClassVec4uˢ struct{}
+
+func (*Vec4uˢ) Class() binary.Class {
+	return (*binaryClassVec4uˢ)(nil)
+}
+func doEncodeVec4uˢ(e binary.Encoder, o *Vec4uˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4uˢ(d binary.Decoder, o *Vec4uˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4uˢ) ID() binary.ID      { return binaryIDVec4uˢ }
+func (*binaryClassVec4uˢ) New() binary.Object { return &Vec4uˢ{} }
+func (*binaryClassVec4uˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4uˢ(e, obj.(*Vec4uˢ))
+}
+func (*binaryClassVec4uˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4uˢ{}
+	return obj, doDecodeVec4uˢ(d, obj)
+}
+func (*binaryClassVec4uˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4uˢ(d, obj.(*Vec4uˢ))
+}
+func (*binaryClassVec4uˢ) Schema() *schema.Class { return schemaVec4uˢ }
+
+var schemaVec4uˢ = &schema.Class{
+	TypeID:  binaryIDVec4uˢ,
+	Package: "gles",
+	Name:    "Vec4uˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassVec4uᵖ struct{}
+
+func (*Vec4uᵖ) Class() binary.Class {
+	return (*binaryClassVec4uᵖ)(nil)
+}
+func doEncodeVec4uᵖ(e binary.Encoder, o *Vec4uᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4uᵖ(d binary.Decoder, o *Vec4uᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4uᵖ) ID() binary.ID      { return binaryIDVec4uᵖ }
+func (*binaryClassVec4uᵖ) New() binary.Object { return &Vec4uᵖ{} }
+func (*binaryClassVec4uᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4uᵖ(e, obj.(*Vec4uᵖ))
+}
+func (*binaryClassVec4uᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4uᵖ{}
+	return obj, doDecodeVec4uᵖ(d, obj)
+}
+func (*binaryClassVec4uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4uᵖ(d, obj.(*Vec4uᵖ))
+}
+func (*binaryClassVec4uᵖ) Schema() *schema.Class { return schemaVec4uᵖ }
+
+var schemaVec4uᵖ = &schema.Class{
+	TypeID:  binaryIDVec4uᵖ,
+	Package: "gles",
+	Name:    "Vec4uᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},

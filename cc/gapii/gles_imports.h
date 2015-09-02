@@ -1019,13 +1019,13 @@ struct GlesImports {
     typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
     typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
     typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
-    typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *params);
+    typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *values);
     typedef void(STDCALL *PFNGLGETNUNIFORMFV)(uint32_t program, int32_t location, int32_t bufSize,
-                                              float *params);
+                                              float *values);
     typedef void(STDCALL *PFNGLGETNUNIFORMIV)(uint32_t program, int32_t location, int32_t bufSize,
-                                              int32_t *params);
+                                              int32_t *values);
     typedef void(STDCALL *PFNGLGETNUNIFORMUIV)(uint32_t program, int32_t location, int32_t bufSize,
-                                               uint32_t *params);
+                                               uint32_t *values);
     typedef uint8_t(STDCALL *PFNGLISPROGRAM)(uint32_t program);
     typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
     typedef uint8_t(STDCALL *PFNGLISSHADER)(uint32_t shader);
@@ -1035,78 +1035,82 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLPROGRAMBINARY)(uint32_t program, uint32_t binaryFormat, void *binary,
                                               int32_t length);
     typedef void(STDCALL *PFNGLPROGRAMPARAMETERI)(uint32_t program, uint32_t pname, int32_t value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1F)(uint32_t program, int32_t location, float v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1F)(uint32_t program, int32_t location, float value0);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM1FV)(uint32_t program, int32_t location, int32_t count,
-                                                  float *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1I)(uint32_t program, int32_t location, int32_t v0);
+                                                  float *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1I)(uint32_t program, int32_t location,
+                                                 int32_t value0);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM1IV)(uint32_t program, int32_t location, int32_t count,
-                                                  int32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UI)(uint32_t program, int32_t location, uint32_t v0);
+                                                  int32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UI)(uint32_t program, int32_t location,
+                                                  uint32_t value0);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UIV)(uint32_t program, int32_t location,
-                                                   int32_t count, uint32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2F)(uint32_t program, int32_t location, float v0,
-                                                 float v1);
+                                                   int32_t count, uint32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2F)(uint32_t program, int32_t location, float value0,
+                                                 float value1);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM2FV)(uint32_t program, int32_t location, int32_t count,
-                                                  float *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2I)(uint32_t program, int32_t location, int32_t v0,
-                                                 int32_t v1);
+                                                  float *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2I)(uint32_t program, int32_t location, int32_t value0,
+                                                 int32_t value1);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM2IV)(uint32_t program, int32_t location, int32_t count,
-                                                  int32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UI)(uint32_t program, int32_t location, uint32_t v0,
-                                                  uint32_t v1);
+                                                  int32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UI)(uint32_t program, int32_t location,
+                                                  uint32_t value0, uint32_t value1);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UIV)(uint32_t program, int32_t location,
-                                                   int32_t count, uint32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3F)(uint32_t program, int32_t location, float v0,
-                                                 float v1, float v2);
+                                                   int32_t count, uint32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3F)(uint32_t program, int32_t location, float value0,
+                                                 float value1, float value2);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM3FV)(uint32_t program, int32_t location, int32_t count,
-                                                  float *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3I)(uint32_t program, int32_t location, int32_t v0,
-                                                 int32_t v1, int32_t v2);
+                                                  float *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3I)(uint32_t program, int32_t location, int32_t value0,
+                                                 int32_t value1, int32_t value2);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM3IV)(uint32_t program, int32_t location, int32_t count,
-                                                  int32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UI)(uint32_t program, int32_t location, uint32_t v0,
-                                                  uint32_t v1, uint32_t v2);
+                                                  int32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UI)(uint32_t program, int32_t location,
+                                                  uint32_t value0, uint32_t value1,
+                                                  uint32_t value2);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UIV)(uint32_t program, int32_t location,
-                                                   int32_t count, uint32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4F)(uint32_t program, int32_t location, float v0,
-                                                 float v1, float v2, float v3);
+                                                   int32_t count, uint32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4F)(uint32_t program, int32_t location, float value0,
+                                                 float value1, float value2, float value3);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM4FV)(uint32_t program, int32_t location, int32_t count,
-                                                  float *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4I)(uint32_t program, int32_t location, int32_t v0,
-                                                 int32_t v1, int32_t v2, int32_t v3);
+                                                  float *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4I)(uint32_t program, int32_t location, int32_t value0,
+                                                 int32_t value1, int32_t value2, int32_t value3);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM4IV)(uint32_t program, int32_t location, int32_t count,
-                                                  int32_t *value);
-    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UI)(uint32_t program, int32_t location, uint32_t v0,
-                                                  uint32_t v1, uint32_t v2, uint32_t v3);
+                                                  int32_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UI)(uint32_t program, int32_t location,
+                                                  uint32_t value0, uint32_t value1, uint32_t value2,
+                                                  uint32_t value3);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UIV)(uint32_t program, int32_t location,
-                                                   int32_t count, uint32_t *value);
+                                                   int32_t count, uint32_t *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2FV)(uint32_t program, int32_t location,
                                                         int32_t count, uint8_t transpose,
-                                                        float *value);
+                                                        float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X3FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X4FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3FV)(uint32_t program, int32_t location,
                                                         int32_t count, uint8_t transpose,
-                                                        float *value);
+                                                        float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X2FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X4FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4FV)(uint32_t program, int32_t location,
                                                         int32_t count, uint8_t transpose,
-                                                        float *value);
+                                                        float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X2FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X3FV)(uint32_t program, int32_t location,
                                                           int32_t count, uint8_t transpose,
-                                                          float *value);
+                                                          float *values);
     typedef void(STDCALL *PFNGLRELEASESHADERCOMPILER)();
     typedef void(STDCALL *PFNGLSHADERBINARY)(int32_t count, uint32_t *shaders,
                                              uint32_t binary_format, void *binary,
@@ -1117,51 +1121,52 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLUNIFORM1FV)(int32_t location, int32_t count, float *values);
     typedef void(STDCALL *PFNGLUNIFORM1I)(int32_t location, int32_t value);
     typedef void(STDCALL *PFNGLUNIFORM1IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM1UI)(int32_t location, uint32_t v0);
-    typedef void(STDCALL *PFNGLUNIFORM1UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM1UI)(int32_t location, uint32_t value0);
+    typedef void(STDCALL *PFNGLUNIFORM1UIV)(int32_t location, int32_t count, uint32_t *values);
     typedef void(STDCALL *PFNGLUNIFORM2F)(int32_t location, float value0, float value1);
     typedef void(STDCALL *PFNGLUNIFORM2FV)(int32_t location, int32_t count, float *values);
     typedef void(STDCALL *PFNGLUNIFORM2I)(int32_t location, int32_t value0, int32_t value1);
     typedef void(STDCALL *PFNGLUNIFORM2IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM2UI)(int32_t location, uint32_t v0, uint32_t v1);
-    typedef void(STDCALL *PFNGLUNIFORM2UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM2UI)(int32_t location, uint32_t value0, uint32_t value1);
+    typedef void(STDCALL *PFNGLUNIFORM2UIV)(int32_t location, int32_t count, uint32_t *values);
     typedef void(STDCALL *PFNGLUNIFORM3F)(int32_t location, float value0, float value1,
                                           float value2);
     typedef void(STDCALL *PFNGLUNIFORM3FV)(int32_t location, int32_t count, float *values);
     typedef void(STDCALL *PFNGLUNIFORM3I)(int32_t location, int32_t value0, int32_t value1,
                                           int32_t value2);
     typedef void(STDCALL *PFNGLUNIFORM3IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM3UI)(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2);
-    typedef void(STDCALL *PFNGLUNIFORM3UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM3UI)(int32_t location, uint32_t value0, uint32_t value1,
+                                           uint32_t value2);
+    typedef void(STDCALL *PFNGLUNIFORM3UIV)(int32_t location, int32_t count, uint32_t *values);
     typedef void(STDCALL *PFNGLUNIFORM4F)(int32_t location, float value0, float value1,
                                           float value2, float value3);
     typedef void(STDCALL *PFNGLUNIFORM4FV)(int32_t location, int32_t count, float *values);
     typedef void(STDCALL *PFNGLUNIFORM4I)(int32_t location, int32_t value0, int32_t value1,
                                           int32_t value2, int32_t value3);
     typedef void(STDCALL *PFNGLUNIFORM4IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM4UI)(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2,
-                                           uint32_t v3);
-    typedef void(STDCALL *PFNGLUNIFORM4UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM4UI)(int32_t location, uint32_t value0, uint32_t value1,
+                                           uint32_t value2, uint32_t value3);
+    typedef void(STDCALL *PFNGLUNIFORM4UIV)(int32_t location, int32_t count, uint32_t *values);
     typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
                                                     uint32_t uniform_block_binding);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX2FV)(int32_t location, int32_t count, uint8_t transpose,
                                                  float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX2X3FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX2X4FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX3FV)(int32_t location, int32_t count, uint8_t transpose,
                                                  float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX3X2FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX3X4FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX4FV)(int32_t location, int32_t count, uint8_t transpose,
                                                  float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX4X2FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUNIFORMMATRIX4X3FV)(int32_t location, int32_t count,
-                                                   uint8_t transpose, float *value);
+                                                   uint8_t transpose, float *values);
     typedef void(STDCALL *PFNGLUSEPROGRAM)(uint32_t program);
     typedef void(STDCALL *PFNGLUSEPROGRAMSTAGES)(uint32_t pipeline, uint32_t stages,
                                                  uint32_t program);

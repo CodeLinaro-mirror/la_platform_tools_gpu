@@ -21,11 +21,20 @@ import (
 type Vec2i GLintː2ᵃ
 type Vec3i GLintː3ᵃ
 type Vec4i GLintː4ᵃ
+type Vec2u GLuintː2ᵃ
+type Vec3u GLuintː3ᵃ
+type Vec4u GLuintː4ᵃ
 type Vec2f GLfloatː2ᵃ
 type Vec3f GLfloatː3ᵃ
 type Vec4f GLfloatː4ᵃ
 type Mat2f Vec2fː2ᵃ
+type Mat2x3f Vec3fː2ᵃ
+type Mat2x4f Vec4fː2ᵃ
+type Mat3x2f Vec2fː3ᵃ
 type Mat3f Vec3fː3ᵃ
+type Mat3x4f Vec4fː3ᵃ
+type Mat4x2f Vec2fː4ᵃ
+type Mat4x3f Vec3fː4ᵃ
 type Mat4f Vec4fː4ᵃ
 type RenderbufferId uint32
 type TextureId uint32
@@ -2997,56 +3006,6 @@ func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLchar�
 	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// ShaderIdᶜᵖ is a pointer to a ShaderId element.
-type ShaderIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewShaderIdᶜᵖ returns a ShaderIdᶜᵖ that points to addr in the application pool.
-func NewShaderIdᶜᵖ(addr uint64) ShaderIdᶜᵖ {
-	return ShaderIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that ShaderIdᶜᵖ points to.
-func (p ShaderIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the ShaderId element at the pointer.
-func (p ShaderIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderId {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the ShaderId element at the pointer.
-func (p ShaderIdᶜᵖ) Write(value ShaderId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]ShaderId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p ShaderIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p ShaderIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p ShaderIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new ShaderIdˢ from the pointer using start and end indices.
-func (p ShaderIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // Vec2fᵖ is a pointer to a Vec2f element.
 type Vec2fᵖ struct {
 	binary.Generate
@@ -3145,6 +3104,56 @@ func (p Vec2iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Vec2iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Vec2uᵖ is a pointer to a Vec2u element.
+type Vec2uᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVec2uᵖ returns a Vec2uᵖ that points to addr in the application pool.
+func NewVec2uᵖ(addr uint64) Vec2uᵖ {
+	return Vec2uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Vec2uᵖ points to.
+func (p Vec2uᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Read reads and returns the Vec2u element at the pointer.
+func (p Vec2uᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2u {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Vec2u element at the pointer.
+func (p Vec2uᵖ) Write(value Vec2u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Vec2u{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Vec2uᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Vec2uᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Vec2uᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Vec2uˢ from the pointer using start and end indices.
+func (p Vec2uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2uˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec2uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Vec3fᵖ is a pointer to a Vec3f element.
@@ -3247,6 +3256,56 @@ func (p Vec3iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ {
 	return Vec3iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// Vec3uᵖ is a pointer to a Vec3u element.
+type Vec3uᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVec3uᵖ returns a Vec3uᵖ that points to addr in the application pool.
+func NewVec3uᵖ(addr uint64) Vec3uᵖ {
+	return Vec3uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Vec3uᵖ points to.
+func (p Vec3uᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Read reads and returns the Vec3u element at the pointer.
+func (p Vec3uᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3u {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Vec3u element at the pointer.
+func (p Vec3uᵖ) Write(value Vec3u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Vec3u{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Vec3uᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Vec3uᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Vec3uᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Vec3uˢ from the pointer using start and end indices.
+func (p Vec3uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3uˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec3uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // Vec4fᵖ is a pointer to a Vec4f element.
 type Vec4fᵖ struct {
 	binary.Generate
@@ -3347,6 +3406,56 @@ func (p Vec4iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
 	return Vec4iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// Vec4uᵖ is a pointer to a Vec4u element.
+type Vec4uᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVec4uᵖ returns a Vec4uᵖ that points to addr in the application pool.
+func NewVec4uᵖ(addr uint64) Vec4uᵖ {
+	return Vec4uᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Vec4uᵖ points to.
+func (p Vec4uᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Read reads and returns the Vec4u element at the pointer.
+func (p Vec4uᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4u {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Vec4u element at the pointer.
+func (p Vec4uᵖ) Write(value Vec4u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Vec4u{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Vec4uᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Vec4uᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Vec4uᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Vec4uˢ from the pointer using start and end indices.
+func (p Vec4uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4uˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec4uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // Mat2fᵖ is a pointer to a Mat2f element.
 type Mat2fᵖ struct {
 	binary.Generate
@@ -3395,6 +3504,106 @@ func (p Mat2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Mat2x3fᵖ is a pointer to a Mat2x3f element.
+type Mat2x3fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat2x3fᵖ returns a Mat2x3fᵖ that points to addr in the application pool.
+func NewMat2x3fᵖ(addr uint64) Mat2x3fᵖ {
+	return Mat2x3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat2x3fᵖ points to.
+func (p Mat2x3fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 2
+}
+
+// Read reads and returns the Mat2x3f element at the pointer.
+func (p Mat2x3fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat2x3f element at the pointer.
+func (p Mat2x3fᵖ) Write(value Mat2x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat2x3f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat2x3fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat2x3fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat2x3fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat2x3fˢ from the pointer using start and end indices.
+func (p Mat2x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x3fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat2x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Mat2x4fᵖ is a pointer to a Mat2x4f element.
+type Mat2x4fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat2x4fᵖ returns a Mat2x4fᵖ that points to addr in the application pool.
+func NewMat2x4fᵖ(addr uint64) Mat2x4fᵖ {
+	return Mat2x4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat2x4fᵖ points to.
+func (p Mat2x4fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 2
+}
+
+// Read reads and returns the Mat2x4f element at the pointer.
+func (p Mat2x4fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat2x4f element at the pointer.
+func (p Mat2x4fᵖ) Write(value Mat2x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat2x4f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat2x4fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat2x4fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat2x4fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat2x4fˢ from the pointer using start and end indices.
+func (p Mat2x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x4fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat2x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Mat3fᵖ is a pointer to a Mat3f element.
@@ -3447,6 +3656,106 @@ func (p Mat3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ {
 	return Mat3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// Mat3x2fᵖ is a pointer to a Mat3x2f element.
+type Mat3x2fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat3x2fᵖ returns a Mat3x2fᵖ that points to addr in the application pool.
+func NewMat3x2fᵖ(addr uint64) Mat3x2fᵖ {
+	return Mat3x2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat3x2fᵖ points to.
+func (p Mat3x2fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 3
+}
+
+// Read reads and returns the Mat3x2f element at the pointer.
+func (p Mat3x2fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat3x2f element at the pointer.
+func (p Mat3x2fᵖ) Write(value Mat3x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat3x2f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat3x2fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat3x2fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat3x2fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat3x2fˢ from the pointer using start and end indices.
+func (p Mat3x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x2fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat3x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Mat3x4fᵖ is a pointer to a Mat3x4f element.
+type Mat3x4fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat3x4fᵖ returns a Mat3x4fᵖ that points to addr in the application pool.
+func NewMat3x4fᵖ(addr uint64) Mat3x4fᵖ {
+	return Mat3x4fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat3x4fᵖ points to.
+func (p Mat3x4fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 3
+}
+
+// Read reads and returns the Mat3x4f element at the pointer.
+func (p Mat3x4fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat3x4f element at the pointer.
+func (p Mat3x4fᵖ) Write(value Mat3x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat3x4f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat3x4fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat3x4fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat3x4fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat3x4fˢ from the pointer using start and end indices.
+func (p Mat3x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x4fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat3x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // Mat4fᵖ is a pointer to a Mat4f element.
 type Mat4fᵖ struct {
 	binary.Generate
@@ -3495,6 +3804,156 @@ func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Mat4x2fᵖ is a pointer to a Mat4x2f element.
+type Mat4x2fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat4x2fᵖ returns a Mat4x2fᵖ that points to addr in the application pool.
+func NewMat4x2fᵖ(addr uint64) Mat4x2fᵖ {
+	return Mat4x2fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat4x2fᵖ points to.
+func (p Mat4x2fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 4
+}
+
+// Read reads and returns the Mat4x2f element at the pointer.
+func (p Mat4x2fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat4x2f element at the pointer.
+func (p Mat4x2fᵖ) Write(value Mat4x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat4x2f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat4x2fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat4x2fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat4x2fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat4x2fˢ from the pointer using start and end indices.
+func (p Mat4x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x2fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat4x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Mat4x3fᵖ is a pointer to a Mat4x3f element.
+type Mat4x3fᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewMat4x3fᵖ returns a Mat4x3fᵖ that points to addr in the application pool.
+func NewMat4x3fᵖ(addr uint64) Mat4x3fᵖ {
+	return Mat4x3fᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Mat4x3fᵖ points to.
+func (p Mat4x3fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 4
+}
+
+// Read reads and returns the Mat4x3f element at the pointer.
+func (p Mat4x3fᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3f {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Mat4x3f element at the pointer.
+func (p Mat4x3fᵖ) Write(value Mat4x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Mat4x3f{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Mat4x3fᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Mat4x3fᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Mat4x3fᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Mat4x3fˢ from the pointer using start and end indices.
+func (p Mat4x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x3fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// ShaderIdᶜᵖ is a pointer to a ShaderId element.
+type ShaderIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewShaderIdᶜᵖ returns a ShaderIdᶜᵖ that points to addr in the application pool.
+func NewShaderIdᶜᵖ(addr uint64) ShaderIdᶜᵖ {
+	return ShaderIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that ShaderIdᶜᵖ points to.
+func (p ShaderIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the ShaderId element at the pointer.
+func (p ShaderIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderId {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the ShaderId element at the pointer.
+func (p ShaderIdᶜᵖ) Write(value ShaderId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]ShaderId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p ShaderIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p ShaderIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p ShaderIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new ShaderIdˢ from the pointer using start and end indices.
+func (p ShaderIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // GLbooleanᵖ is a pointer to a GLboolean element.
@@ -4275,6 +4734,18 @@ type GLintː4ᵃ struct {
 	binary.Generate
 	Elements [4]GLint
 }
+type GLuintː2ᵃ struct {
+	binary.Generate
+	Elements [2]GLuint
+}
+type GLuintː3ᵃ struct {
+	binary.Generate
+	Elements [3]GLuint
+}
+type GLuintː4ᵃ struct {
+	binary.Generate
+	Elements [4]GLuint
+}
 type GLfloatː2ᵃ struct {
 	binary.Generate
 	Elements [2]GLfloat
@@ -4291,9 +4762,33 @@ type Vec2fː2ᵃ struct {
 	binary.Generate
 	Elements [2]Vec2f
 }
+type Vec3fː2ᵃ struct {
+	binary.Generate
+	Elements [2]Vec3f
+}
+type Vec4fː2ᵃ struct {
+	binary.Generate
+	Elements [2]Vec4f
+}
+type Vec2fː3ᵃ struct {
+	binary.Generate
+	Elements [3]Vec2f
+}
 type Vec3fː3ᵃ struct {
 	binary.Generate
 	Elements [3]Vec3f
+}
+type Vec4fː3ᵃ struct {
+	binary.Generate
+	Elements [3]Vec4f
+}
+type Vec2fː4ᵃ struct {
+	binary.Generate
+	Elements [4]Vec2f
+}
+type Vec3fː4ᵃ struct {
+	binary.Generate
+	Elements [4]Vec3f
 }
 type Vec4fː4ᵃ struct {
 	binary.Generate
@@ -8038,6 +8533,316 @@ func (s Mat2fˢ) String() string {
 	return fmt.Sprintf("Mat2f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
+// Mat2x3fˢ is a slice of Mat2x3f.
+type Mat2x3fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat2x3fˢ returns a Mat2x3fˢ backed by a new memory pool.
+func MakeMat2x3fˢ(count uint64, ϟs *gfxapi.State) Mat2x3fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat2x3fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat2x3fˢ in a new memory pool.
+func (s Mat2x3fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat2x3fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat2x3fˢ points to.
+func (s Mat2x3fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat2x3fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat2x3fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat2x3fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat2x3fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat2x3fˢ returns s cast to a Mat2x3fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat2x3fˢ(s Slice, ϟs *gfxapi.State) Mat2x3fˢ {
+	out := Mat2x3fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat2x3f elements in this Mat2x3fˢ.
+func (s Mat2x3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat2x3f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2x3f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat2x3fˢ) Write(src []Mat2x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat2x3fˢ) Copy(src Mat2x3fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat2x3fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat2x3fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat2x3fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat2x3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x3fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat2x3fᵖ to the i'th element in this Mat2x3fˢ.
+func (s Mat2x3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2x3fᵖ {
+	return Mat2x3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat2x3fˢ using start and end indices.
+func (s Mat2x3fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x3fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat2x3fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat2x3fˢ slice.
+func (s Mat2x3fˢ) String() string {
+	return fmt.Sprintf("Mat2x3f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// Mat2x4fˢ is a slice of Mat2x4f.
+type Mat2x4fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat2x4fˢ returns a Mat2x4fˢ backed by a new memory pool.
+func MakeMat2x4fˢ(count uint64, ϟs *gfxapi.State) Mat2x4fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat2x4fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat2x4fˢ in a new memory pool.
+func (s Mat2x4fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat2x4fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat2x4fˢ points to.
+func (s Mat2x4fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat2x4fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat2x4fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat2x4fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat2x4fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat2x4fˢ returns s cast to a Mat2x4fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat2x4fˢ(s Slice, ϟs *gfxapi.State) Mat2x4fˢ {
+	out := Mat2x4fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat2x4f elements in this Mat2x4fˢ.
+func (s Mat2x4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat2x4f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2x4f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat2x4fˢ) Write(src []Mat2x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat2x4fˢ) Copy(src Mat2x4fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat2x4fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat2x4fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat2x4fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat2x4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2x4fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat2x4fᵖ to the i'th element in this Mat2x4fˢ.
+func (s Mat2x4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2x4fᵖ {
+	return Mat2x4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat2x4fˢ using start and end indices.
+func (s Mat2x4fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x4fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat2x4fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat2x4fˢ slice.
+func (s Mat2x4fˢ) String() string {
+	return fmt.Sprintf("Mat2x4f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
 // Mat3fˢ is a slice of Mat3f.
 type Mat3fˢ struct {
 	binary.Generate
@@ -8193,6 +8998,316 @@ func (s Mat3fˢ) String() string {
 	return fmt.Sprintf("Mat3f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
+// Mat3x2fˢ is a slice of Mat3x2f.
+type Mat3x2fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat3x2fˢ returns a Mat3x2fˢ backed by a new memory pool.
+func MakeMat3x2fˢ(count uint64, ϟs *gfxapi.State) Mat3x2fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat3x2fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat3x2fˢ in a new memory pool.
+func (s Mat3x2fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat3x2fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat3x2fˢ points to.
+func (s Mat3x2fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat3x2fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat3x2fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat3x2fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat3x2fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat3x2fˢ returns s cast to a Mat3x2fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat3x2fˢ(s Slice, ϟs *gfxapi.State) Mat3x2fˢ {
+	out := Mat3x2fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat3x2f elements in this Mat3x2fˢ.
+func (s Mat3x2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat3x2f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3x2f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat3x2fˢ) Write(src []Mat3x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat3x2fˢ) Copy(src Mat3x2fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat3x2fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat3x2fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat3x2fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat3x2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x2fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat3x2fᵖ to the i'th element in this Mat3x2fˢ.
+func (s Mat3x2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3x2fᵖ {
+	return Mat3x2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat3x2fˢ using start and end indices.
+func (s Mat3x2fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x2fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat3x2fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat3x2fˢ slice.
+func (s Mat3x2fˢ) String() string {
+	return fmt.Sprintf("Mat3x2f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// Mat3x4fˢ is a slice of Mat3x4f.
+type Mat3x4fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat3x4fˢ returns a Mat3x4fˢ backed by a new memory pool.
+func MakeMat3x4fˢ(count uint64, ϟs *gfxapi.State) Mat3x4fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat3x4fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat3x4fˢ in a new memory pool.
+func (s Mat3x4fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat3x4fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat3x4fˢ points to.
+func (s Mat3x4fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat3x4fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat3x4fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat3x4fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat3x4fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat3x4fˢ returns s cast to a Mat3x4fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat3x4fˢ(s Slice, ϟs *gfxapi.State) Mat3x4fˢ {
+	out := Mat3x4fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat3x4f elements in this Mat3x4fˢ.
+func (s Mat3x4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat3x4f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3x4f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat3x4fˢ) Write(src []Mat3x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat3x4fˢ) Copy(src Mat3x4fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat3x4fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat3x4fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat3x4fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat3x4fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3x4fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat3x4fᵖ to the i'th element in this Mat3x4fˢ.
+func (s Mat3x4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3x4fᵖ {
+	return Mat3x4fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat3x4fˢ using start and end indices.
+func (s Mat3x4fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x4fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat3x4fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat3x4fˢ slice.
+func (s Mat3x4fˢ) String() string {
+	return fmt.Sprintf("Mat3x4f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
 // Mat4fˢ is a slice of Mat4f.
 type Mat4fˢ struct {
 	binary.Generate
@@ -8346,6 +9461,316 @@ func (s Mat4fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
 // String returns a string description of the Mat4fˢ slice.
 func (s Mat4fˢ) String() string {
 	return fmt.Sprintf("Mat4f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// Mat4x2fˢ is a slice of Mat4x2f.
+type Mat4x2fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat4x2fˢ returns a Mat4x2fˢ backed by a new memory pool.
+func MakeMat4x2fˢ(count uint64, ϟs *gfxapi.State) Mat4x2fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat4x2fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat4x2fˢ in a new memory pool.
+func (s Mat4x2fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat4x2fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat4x2fˢ points to.
+func (s Mat4x2fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat4x2fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat4x2fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat4x2fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat4x2fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat4x2fˢ returns s cast to a Mat4x2fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat4x2fˢ(s Slice, ϟs *gfxapi.State) Mat4x2fˢ {
+	out := Mat4x2fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat4x2f elements in this Mat4x2fˢ.
+func (s Mat4x2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat4x2f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4x2f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat4x2fˢ) Write(src []Mat4x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat4x2fˢ) Copy(src Mat4x2fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat4x2fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat4x2fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat4x2fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat4x2fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x2fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat4x2fᵖ to the i'th element in this Mat4x2fˢ.
+func (s Mat4x2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4x2fᵖ {
+	return Mat4x2fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat4x2fˢ using start and end indices.
+func (s Mat4x2fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x2fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat4x2fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat4x2fˢ slice.
+func (s Mat4x2fˢ) String() string {
+	return fmt.Sprintf("Mat4x2f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// Mat4x3fˢ is a slice of Mat4x3f.
+type Mat4x3fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat4x3fˢ returns a Mat4x3fˢ backed by a new memory pool.
+func MakeMat4x3fˢ(count uint64, ϟs *gfxapi.State) Mat4x3fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat4x3fˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Mat4x3fˢ in a new memory pool.
+func (s Mat4x3fˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat4x3fˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat4x3fˢ points to.
+func (s Mat4x3fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat4x3fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat4x3fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat4x3fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat4x3fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsMat4x3fˢ returns s cast to a Mat4x3fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat4x3fˢ(s Slice, ϟs *gfxapi.State) Mat4x3fˢ {
+	out := Mat4x3fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat4x3f elements in this Mat4x3fˢ.
+func (s Mat4x3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat4x3f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4x3f, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Mat4x3fˢ) Write(src []Mat4x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat4x3fˢ) Copy(src Mat4x3fˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Mat4x3fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Mat4x3fˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Mat4x3fˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Mat4x3fˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4x3fˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Mat4x3fᵖ to the i'th element in this Mat4x3fˢ.
+func (s Mat4x3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4x3fᵖ {
+	return Mat4x3fᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Mat4x3fˢ using start and end indices.
+func (s Mat4x3fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x3fˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Mat4x3fˢ slice.
+func (s Mat4x3fˢ) String() string {
+	return fmt.Sprintf("Mat4x3f(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // PipelineIdˢ is a slice of PipelineId.
@@ -10874,6 +12299,161 @@ func (s Vec2iˢ) String() string {
 	return fmt.Sprintf("Vec2i(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
+// Vec2uˢ is a slice of Vec2u.
+type Vec2uˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec2uˢ returns a Vec2uˢ backed by a new memory pool.
+func MakeVec2uˢ(count uint64, ϟs *gfxapi.State) Vec2uˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec2uˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Vec2uˢ in a new memory pool.
+func (s Vec2uˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec2uˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec2uˢ points to.
+func (s Vec2uˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec2uˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec2uˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec2uˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec2uˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsVec2uˢ returns s cast to a Vec2uˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec2uˢ(s Slice, ϟs *gfxapi.State) Vec2uˢ {
+	out := Vec2uˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec2u elements in this Vec2uˢ.
+func (s Vec2uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec2u {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2u, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Vec2uˢ) Write(src []Vec2u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec2uˢ) Copy(src Vec2uˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Vec2uˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Vec2uˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Vec2uˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Vec2uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2uˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Vec2uᵖ to the i'th element in this Vec2uˢ.
+func (s Vec2uˢ) Index(i uint64, ϟs *gfxapi.State) Vec2uᵖ {
+	return Vec2uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Vec2uˢ using start and end indices.
+func (s Vec2uˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2uˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec2uˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Vec2uˢ slice.
+func (s Vec2uˢ) String() string {
+	return fmt.Sprintf("Vec2u(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
 // Vec3fˢ is a slice of Vec3f.
 type Vec3fˢ struct {
 	binary.Generate
@@ -11184,6 +12764,161 @@ func (s Vec3iˢ) String() string {
 	return fmt.Sprintf("Vec3i(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
+// Vec3uˢ is a slice of Vec3u.
+type Vec3uˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec3uˢ returns a Vec3uˢ backed by a new memory pool.
+func MakeVec3uˢ(count uint64, ϟs *gfxapi.State) Vec3uˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec3uˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Vec3uˢ in a new memory pool.
+func (s Vec3uˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec3uˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec3uˢ points to.
+func (s Vec3uˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec3uˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec3uˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec3uˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec3uˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsVec3uˢ returns s cast to a Vec3uˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec3uˢ(s Slice, ϟs *gfxapi.State) Vec3uˢ {
+	out := Vec3uˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec3u elements in this Vec3uˢ.
+func (s Vec3uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec3u {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3u, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Vec3uˢ) Write(src []Vec3u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec3uˢ) Copy(src Vec3uˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Vec3uˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Vec3uˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Vec3uˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Vec3uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3uˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Vec3uᵖ to the i'th element in this Vec3uˢ.
+func (s Vec3uˢ) Index(i uint64, ϟs *gfxapi.State) Vec3uᵖ {
+	return Vec3uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Vec3uˢ using start and end indices.
+func (s Vec3uˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3uˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec3uˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Vec3uˢ slice.
+func (s Vec3uˢ) String() string {
+	return fmt.Sprintf("Vec3u(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
 // Vec4fˢ is a slice of Vec4f.
 type Vec4fˢ struct {
 	binary.Generate
@@ -11492,6 +13227,161 @@ func (s Vec4iˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
 // String returns a string description of the Vec4iˢ slice.
 func (s Vec4iˢ) String() string {
 	return fmt.Sprintf("Vec4i(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// Vec4uˢ is a slice of Vec4u.
+type Vec4uˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec4uˢ returns a Vec4uˢ backed by a new memory pool.
+func MakeVec4uˢ(count uint64, ϟs *gfxapi.State) Vec4uˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec4uˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the Vec4uˢ in a new memory pool.
+func (s Vec4uˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec4uˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec4uˢ points to.
+func (s Vec4uˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec4uˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec4uˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec4uˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec4uˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsVec4uˢ returns s cast to a Vec4uˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec4uˢ(s Slice, ϟs *gfxapi.State) Vec4uˢ {
+	out := Vec4uˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec4u elements in this Vec4uˢ.
+func (s Vec4uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec4u {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4u, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s Vec4uˢ) Write(src []Vec4u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec4uˢ) Copy(src Vec4uˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Vec4uˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s Vec4uˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s Vec4uˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Vec4uˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4uˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a Vec4uᵖ to the i'th element in this Vec4uˢ.
+func (s Vec4uˢ) Index(i uint64, ϟs *gfxapi.State) Vec4uᵖ {
+	return Vec4uᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the Vec4uˢ using start and end indices.
+func (s Vec4uˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4uˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec4uˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the Vec4uˢ slice.
+func (s Vec4uˢ) String() string {
+	return fmt.Sprintf("Vec4u(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // VertexArrayIdˢ is a slice of VertexArrayId.
@@ -30630,11 +32520,11 @@ type GlGetUniformuiv struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	Params       GLuintᵖ
+	Values       GLuintᵖ
 }
 
 func (a *GlGetUniformuiv) String() string {
-	return fmt.Sprintf("glGetUniformuiv(program: %v, location: %v, params: %v)", a.Program, a.Location, a.Params)
+	return fmt.Sprintf("glGetUniformuiv(program: %v, location: %v, values: %v)", a.Program, a.Location, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -30665,11 +32555,11 @@ type GlGetnUniformfv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	BufSize      GLsizei
-	Params       GLfloatᵖ
+	Values       GLfloatᵖ
 }
 
 func (a *GlGetnUniformfv) String() string {
-	return fmt.Sprintf("glGetnUniformfv(program: %v, location: %v, bufSize: %v, params: %v)", a.Program, a.Location, a.BufSize, a.Params)
+	return fmt.Sprintf("glGetnUniformfv(program: %v, location: %v, bufSize: %v, values: %v)", a.Program, a.Location, a.BufSize, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -30700,11 +32590,11 @@ type GlGetnUniformiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	BufSize      GLsizei
-	Params       GLintᵖ
+	Values       GLintᵖ
 }
 
 func (a *GlGetnUniformiv) String() string {
-	return fmt.Sprintf("glGetnUniformiv(program: %v, location: %v, bufSize: %v, params: %v)", a.Program, a.Location, a.BufSize, a.Params)
+	return fmt.Sprintf("glGetnUniformiv(program: %v, location: %v, bufSize: %v, values: %v)", a.Program, a.Location, a.BufSize, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -30735,11 +32625,11 @@ type GlGetnUniformuiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	BufSize      GLsizei
-	Params       GLuintᵖ
+	Values       GLuintᵖ
 }
 
 func (a *GlGetnUniformuiv) String() string {
-	return fmt.Sprintf("glGetnUniformuiv(program: %v, location: %v, bufSize: %v, params: %v)", a.Program, a.Location, a.BufSize, a.Params)
+	return fmt.Sprintf("glGetnUniformuiv(program: %v, location: %v, bufSize: %v, values: %v)", a.Program, a.Location, a.BufSize, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31033,11 +32923,11 @@ type GlProgramUniform1f struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLfloat
+	Value0       GLfloat
 }
 
 func (a *GlProgramUniform1f) String() string {
-	return fmt.Sprintf("glProgramUniform1f(program: %v, location: %v, v0: %v)", a.Program, a.Location, a.V0)
+	return fmt.Sprintf("glProgramUniform1f(program: %v, location: %v, value0: %v)", a.Program, a.Location, a.Value0)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31068,11 +32958,11 @@ type GlProgramUniform1fv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniform1fv) String() string {
-	return fmt.Sprintf("glProgramUniform1fv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform1fv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31102,11 +32992,11 @@ type GlProgramUniform1i struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLint
+	Value0       GLint
 }
 
 func (a *GlProgramUniform1i) String() string {
-	return fmt.Sprintf("glProgramUniform1i(program: %v, location: %v, v0: %v)", a.Program, a.Location, a.V0)
+	return fmt.Sprintf("glProgramUniform1i(program: %v, location: %v, value0: %v)", a.Program, a.Location, a.Value0)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31137,11 +33027,11 @@ type GlProgramUniform1iv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLintᶜᵖ
+	Values       GLintᶜᵖ
 }
 
 func (a *GlProgramUniform1iv) String() string {
-	return fmt.Sprintf("glProgramUniform1iv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform1iv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31171,11 +33061,11 @@ type GlProgramUniform1ui struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLuint
+	Value0       GLuint
 }
 
 func (a *GlProgramUniform1ui) String() string {
-	return fmt.Sprintf("glProgramUniform1ui(program: %v, location: %v, v0: %v)", a.Program, a.Location, a.V0)
+	return fmt.Sprintf("glProgramUniform1ui(program: %v, location: %v, value0: %v)", a.Program, a.Location, a.Value0)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31206,11 +33096,11 @@ type GlProgramUniform1uiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlProgramUniform1uiv) String() string {
-	return fmt.Sprintf("glProgramUniform1uiv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform1uiv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31240,12 +33130,12 @@ type GlProgramUniform2f struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLfloat
-	V1           GLfloat
+	Value0       GLfloat
+	Value1       GLfloat
 }
 
 func (a *GlProgramUniform2f) String() string {
-	return fmt.Sprintf("glProgramUniform2f(program: %v, location: %v, v0: %v, v1: %v)", a.Program, a.Location, a.V0, a.V1)
+	return fmt.Sprintf("glProgramUniform2f(program: %v, location: %v, value0: %v, value1: %v)", a.Program, a.Location, a.Value0, a.Value1)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31276,11 +33166,11 @@ type GlProgramUniform2fv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniform2fv) String() string {
-	return fmt.Sprintf("glProgramUniform2fv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform2fv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31310,12 +33200,12 @@ type GlProgramUniform2i struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLint
-	V1           GLint
+	Value0       GLint
+	Value1       GLint
 }
 
 func (a *GlProgramUniform2i) String() string {
-	return fmt.Sprintf("glProgramUniform2i(program: %v, location: %v, v0: %v, v1: %v)", a.Program, a.Location, a.V0, a.V1)
+	return fmt.Sprintf("glProgramUniform2i(program: %v, location: %v, value0: %v, value1: %v)", a.Program, a.Location, a.Value0, a.Value1)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31346,11 +33236,11 @@ type GlProgramUniform2iv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLintᶜᵖ
+	Values       GLintᶜᵖ
 }
 
 func (a *GlProgramUniform2iv) String() string {
-	return fmt.Sprintf("glProgramUniform2iv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform2iv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31380,12 +33270,12 @@ type GlProgramUniform2ui struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
+	Value0       GLuint
+	Value1       GLuint
 }
 
 func (a *GlProgramUniform2ui) String() string {
-	return fmt.Sprintf("glProgramUniform2ui(program: %v, location: %v, v0: %v, v1: %v)", a.Program, a.Location, a.V0, a.V1)
+	return fmt.Sprintf("glProgramUniform2ui(program: %v, location: %v, value0: %v, value1: %v)", a.Program, a.Location, a.Value0, a.Value1)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31416,11 +33306,11 @@ type GlProgramUniform2uiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlProgramUniform2uiv) String() string {
-	return fmt.Sprintf("glProgramUniform2uiv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform2uiv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31450,13 +33340,13 @@ type GlProgramUniform3f struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLfloat
-	V1           GLfloat
-	V2           GLfloat
+	Value0       GLfloat
+	Value1       GLfloat
+	Value2       GLfloat
 }
 
 func (a *GlProgramUniform3f) String() string {
-	return fmt.Sprintf("glProgramUniform3f(program: %v, location: %v, v0: %v, v1: %v, v2: %v)", a.Program, a.Location, a.V0, a.V1, a.V2)
+	return fmt.Sprintf("glProgramUniform3f(program: %v, location: %v, value0: %v, value1: %v, value2: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31487,11 +33377,11 @@ type GlProgramUniform3fv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniform3fv) String() string {
-	return fmt.Sprintf("glProgramUniform3fv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform3fv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31521,13 +33411,13 @@ type GlProgramUniform3i struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLint
-	V1           GLint
-	V2           GLint
+	Value0       GLint
+	Value1       GLint
+	Value2       GLint
 }
 
 func (a *GlProgramUniform3i) String() string {
-	return fmt.Sprintf("glProgramUniform3i(program: %v, location: %v, v0: %v, v1: %v, v2: %v)", a.Program, a.Location, a.V0, a.V1, a.V2)
+	return fmt.Sprintf("glProgramUniform3i(program: %v, location: %v, value0: %v, value1: %v, value2: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31558,11 +33448,11 @@ type GlProgramUniform3iv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLintᶜᵖ
+	Values       GLintᶜᵖ
 }
 
 func (a *GlProgramUniform3iv) String() string {
-	return fmt.Sprintf("glProgramUniform3iv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform3iv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31592,13 +33482,13 @@ type GlProgramUniform3ui struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
-	V2           GLuint
+	Value0       GLuint
+	Value1       GLuint
+	Value2       GLuint
 }
 
 func (a *GlProgramUniform3ui) String() string {
-	return fmt.Sprintf("glProgramUniform3ui(program: %v, location: %v, v0: %v, v1: %v, v2: %v)", a.Program, a.Location, a.V0, a.V1, a.V2)
+	return fmt.Sprintf("glProgramUniform3ui(program: %v, location: %v, value0: %v, value1: %v, value2: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31629,11 +33519,11 @@ type GlProgramUniform3uiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlProgramUniform3uiv) String() string {
-	return fmt.Sprintf("glProgramUniform3uiv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform3uiv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31663,14 +33553,14 @@ type GlProgramUniform4f struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLfloat
-	V1           GLfloat
-	V2           GLfloat
-	V3           GLfloat
+	Value0       GLfloat
+	Value1       GLfloat
+	Value2       GLfloat
+	Value3       GLfloat
 }
 
 func (a *GlProgramUniform4f) String() string {
-	return fmt.Sprintf("glProgramUniform4f(program: %v, location: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Program, a.Location, a.V0, a.V1, a.V2, a.V3)
+	return fmt.Sprintf("glProgramUniform4f(program: %v, location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2, a.Value3)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31701,11 +33591,11 @@ type GlProgramUniform4fv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniform4fv) String() string {
-	return fmt.Sprintf("glProgramUniform4fv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform4fv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31735,14 +33625,14 @@ type GlProgramUniform4i struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLint
-	V1           GLint
-	V2           GLint
-	V3           GLint
+	Value0       GLint
+	Value1       GLint
+	Value2       GLint
+	Value3       GLint
 }
 
 func (a *GlProgramUniform4i) String() string {
-	return fmt.Sprintf("glProgramUniform4i(program: %v, location: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Program, a.Location, a.V0, a.V1, a.V2, a.V3)
+	return fmt.Sprintf("glProgramUniform4i(program: %v, location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2, a.Value3)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31773,11 +33663,11 @@ type GlProgramUniform4iv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLintᶜᵖ
+	Values       GLintᶜᵖ
 }
 
 func (a *GlProgramUniform4iv) String() string {
-	return fmt.Sprintf("glProgramUniform4iv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform4iv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31807,14 +33697,14 @@ type GlProgramUniform4ui struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
-	V2           GLuint
-	V3           GLuint
+	Value0       GLuint
+	Value1       GLuint
+	Value2       GLuint
+	Value3       GLuint
 }
 
 func (a *GlProgramUniform4ui) String() string {
-	return fmt.Sprintf("glProgramUniform4ui(program: %v, location: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Program, a.Location, a.V0, a.V1, a.V2, a.V3)
+	return fmt.Sprintf("glProgramUniform4ui(program: %v, location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", a.Program, a.Location, a.Value0, a.Value1, a.Value2, a.Value3)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31845,11 +33735,11 @@ type GlProgramUniform4uiv struct {
 	Program      ProgramId
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlProgramUniform4uiv) String() string {
-	return fmt.Sprintf("glProgramUniform4uiv(program: %v, location: %v, count: %v, value: %v)", a.Program, a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glProgramUniform4uiv(program: %v, location: %v, count: %v, values: %v)", a.Program, a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31881,11 +33771,11 @@ type GlProgramUniformMatrix2fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix2fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix2fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix2fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31917,11 +33807,11 @@ type GlProgramUniformMatrix2x3fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix2x3fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix2x3fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix2x3fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31953,11 +33843,11 @@ type GlProgramUniformMatrix2x4fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix2x4fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix2x4fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix2x4fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31989,11 +33879,11 @@ type GlProgramUniformMatrix3fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix3fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix3fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix3fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32025,11 +33915,11 @@ type GlProgramUniformMatrix3x2fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix3x2fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix3x2fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix3x2fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32061,11 +33951,11 @@ type GlProgramUniformMatrix3x4fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix3x4fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix3x4fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix3x4fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32097,11 +33987,11 @@ type GlProgramUniformMatrix4fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix4fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix4fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix4fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32133,11 +34023,11 @@ type GlProgramUniformMatrix4x2fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix4x2fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix4x2fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix4x2fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32169,11 +34059,11 @@ type GlProgramUniformMatrix4x3fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlProgramUniformMatrix4x3fv) String() string {
-	return fmt.Sprintf("glProgramUniformMatrix4x3fv(program: %v, location: %v, count: %v, transpose: %v, value: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glProgramUniformMatrix4x3fv(program: %v, location: %v, count: %v, transpose: %v, values: %v)", a.Program, a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32438,11 +34328,11 @@ type GlUniform1ui struct {
 	binary.Generate
 	observations atom.Observations
 	Location     UniformLocation
-	V0           GLuint
+	Value0       GLuint
 }
 
 func (a *GlUniform1ui) String() string {
-	return fmt.Sprintf("glUniform1ui(location: %v, v0: %v)", a.Location, a.V0)
+	return fmt.Sprintf("glUniform1ui(location: %v, value0: %v)", a.Location, a.Value0)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32472,11 +34362,11 @@ type GlUniform1uiv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlUniform1uiv) String() string {
-	return fmt.Sprintf("glUniform1uiv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform1uiv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32641,12 +34531,12 @@ type GlUniform2ui struct {
 	binary.Generate
 	observations atom.Observations
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
+	Value0       GLuint
+	Value1       GLuint
 }
 
 func (a *GlUniform2ui) String() string {
-	return fmt.Sprintf("glUniform2ui(location: %v, v0: %v, v1: %v)", a.Location, a.V0, a.V1)
+	return fmt.Sprintf("glUniform2ui(location: %v, value0: %v, value1: %v)", a.Location, a.Value0, a.Value1)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32676,11 +34566,11 @@ type GlUniform2uiv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlUniform2uiv) String() string {
-	return fmt.Sprintf("glUniform2uiv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform2uiv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32847,13 +34737,13 @@ type GlUniform3ui struct {
 	binary.Generate
 	observations atom.Observations
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
-	V2           GLuint
+	Value0       GLuint
+	Value1       GLuint
+	Value2       GLuint
 }
 
 func (a *GlUniform3ui) String() string {
-	return fmt.Sprintf("glUniform3ui(location: %v, v0: %v, v1: %v, v2: %v)", a.Location, a.V0, a.V1, a.V2)
+	return fmt.Sprintf("glUniform3ui(location: %v, value0: %v, value1: %v, value2: %v)", a.Location, a.Value0, a.Value1, a.Value2)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -32883,11 +34773,11 @@ type GlUniform3uiv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlUniform3uiv) String() string {
-	return fmt.Sprintf("glUniform3uiv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform3uiv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33056,14 +34946,14 @@ type GlUniform4ui struct {
 	binary.Generate
 	observations atom.Observations
 	Location     UniformLocation
-	V0           GLuint
-	V1           GLuint
-	V2           GLuint
-	V3           GLuint
+	Value0       GLuint
+	Value1       GLuint
+	Value2       GLuint
+	Value3       GLuint
 }
 
 func (a *GlUniform4ui) String() string {
-	return fmt.Sprintf("glUniform4ui(location: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Location, a.V0, a.V1, a.V2, a.V3)
+	return fmt.Sprintf("glUniform4ui(location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", a.Location, a.Value0, a.Value1, a.Value2, a.Value3)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33093,11 +34983,11 @@ type GlUniform4uiv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        GLsizei
-	Value        GLuintᶜᵖ
+	Values       GLuintᶜᵖ
 }
 
 func (a *GlUniform4uiv) String() string {
-	return fmt.Sprintf("glUniform4uiv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform4uiv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33197,11 +35087,11 @@ type GlUniformMatrix2x3fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix2x3fv) String() string {
-	return fmt.Sprintf("glUniformMatrix2x3fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix2x3fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33232,11 +35122,11 @@ type GlUniformMatrix2x4fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix2x4fv) String() string {
-	return fmt.Sprintf("glUniformMatrix2x4fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix2x4fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33302,11 +35192,11 @@ type GlUniformMatrix3x2fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix3x2fv) String() string {
-	return fmt.Sprintf("glUniformMatrix3x2fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix3x2fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33337,11 +35227,11 @@ type GlUniformMatrix3x4fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix3x4fv) String() string {
-	return fmt.Sprintf("glUniformMatrix3x4fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix3x4fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33407,11 +35297,11 @@ type GlUniformMatrix4x2fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix4x2fv) String() string {
-	return fmt.Sprintf("glUniformMatrix4x2fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix4x2fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33442,11 +35332,11 @@ type GlUniformMatrix4x3fv struct {
 	Location     UniformLocation
 	Count        GLsizei
 	Transpose    GLboolean
-	Value        GLfloatᶜᵖ
+	Values       GLfloatᶜᵖ
 }
 
 func (a *GlUniformMatrix4x3fv) String() string {
-	return fmt.Sprintf("glUniformMatrix4x3fv(location: %v, count: %v, transpose: %v, value: %v)", a.Location, a.Count, a.Transpose, a.Value)
+	return fmt.Sprintf("glUniformMatrix4x3fv(location: %v, count: %v, transpose: %v, values: %v)", a.Location, a.Count, a.Transpose, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -46342,17 +48232,17 @@ func NewGlGetUniformfv(Program ProgramId, Location UniformLocation, Values memor
 func NewGlGetUniformiv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformiv {
 	return &GlGetUniformiv{Program: Program, Location: Location, Values: GLintᵖ{Pointer: Values}}
 }
-func NewGlGetUniformuiv(Program ProgramId, Location UniformLocation, Params memory.Pointer) *GlGetUniformuiv {
-	return &GlGetUniformuiv{Program: Program, Location: Location, Params: GLuintᵖ{Pointer: Params}}
+func NewGlGetUniformuiv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformuiv {
+	return &GlGetUniformuiv{Program: Program, Location: Location, Values: GLuintᵖ{Pointer: Values}}
 }
-func NewGlGetnUniformfv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformfv {
-	return &GlGetnUniformfv{Program: Program, Location: Location, BufSize: BufSize, Params: GLfloatᵖ{Pointer: Params}}
+func NewGlGetnUniformfv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformfv {
+	return &GlGetnUniformfv{Program: Program, Location: Location, BufSize: BufSize, Values: GLfloatᵖ{Pointer: Values}}
 }
-func NewGlGetnUniformiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformiv {
-	return &GlGetnUniformiv{Program: Program, Location: Location, BufSize: BufSize, Params: GLintᵖ{Pointer: Params}}
+func NewGlGetnUniformiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformiv {
+	return &GlGetnUniformiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLintᵖ{Pointer: Values}}
 }
-func NewGlGetnUniformuiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Params memory.Pointer) *GlGetnUniformuiv {
-	return &GlGetnUniformuiv{Program: Program, Location: Location, BufSize: BufSize, Params: GLuintᵖ{Pointer: Params}}
+func NewGlGetnUniformuiv(Program ProgramId, Location UniformLocation, BufSize GLsizei, Values memory.Pointer) *GlGetnUniformuiv {
+	return &GlGetnUniformuiv{Program: Program, Location: Location, BufSize: BufSize, Values: GLuintᵖ{Pointer: Values}}
 }
 func NewGlIsProgram(Program ProgramId, Result GLboolean) *GlIsProgram {
 	return &GlIsProgram{Program: Program, Result: Result}
@@ -46378,104 +48268,104 @@ func NewGlProgramBinary(Program ProgramId, BinaryFormat GLenum, Binary memory.Po
 func NewGlProgramParameteri(Program ProgramId, Pname GLenum, Value GLint) *GlProgramParameteri {
 	return &GlProgramParameteri{Program: Program, Pname: Pname, Value: Value}
 }
-func NewGlProgramUniform1f(Program ProgramId, Location UniformLocation, V0 GLfloat) *GlProgramUniform1f {
-	return &GlProgramUniform1f{Program: Program, Location: Location, V0: V0}
+func NewGlProgramUniform1f(Program ProgramId, Location UniformLocation, Value0 GLfloat) *GlProgramUniform1f {
+	return &GlProgramUniform1f{Program: Program, Location: Location, Value0: Value0}
 }
-func NewGlProgramUniform1fv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1fv {
-	return &GlProgramUniform1fv{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform1fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1fv {
+	return &GlProgramUniform1fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform1i(Program ProgramId, Location UniformLocation, V0 GLint) *GlProgramUniform1i {
-	return &GlProgramUniform1i{Program: Program, Location: Location, V0: V0}
+func NewGlProgramUniform1i(Program ProgramId, Location UniformLocation, Value0 GLint) *GlProgramUniform1i {
+	return &GlProgramUniform1i{Program: Program, Location: Location, Value0: Value0}
 }
-func NewGlProgramUniform1iv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1iv {
-	return &GlProgramUniform1iv{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform1iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1iv {
+	return &GlProgramUniform1iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform1ui(Program ProgramId, Location UniformLocation, V0 GLuint) *GlProgramUniform1ui {
-	return &GlProgramUniform1ui{Program: Program, Location: Location, V0: V0}
+func NewGlProgramUniform1ui(Program ProgramId, Location UniformLocation, Value0 GLuint) *GlProgramUniform1ui {
+	return &GlProgramUniform1ui{Program: Program, Location: Location, Value0: Value0}
 }
-func NewGlProgramUniform1uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform1uiv {
-	return &GlProgramUniform1uiv{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform1uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform1uiv {
+	return &GlProgramUniform1uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform2f(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat) *GlProgramUniform2f {
-	return &GlProgramUniform2f{Program: Program, Location: Location, V0: V0, V1: V1}
+func NewGlProgramUniform2f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat) *GlProgramUniform2f {
+	return &GlProgramUniform2f{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
-func NewGlProgramUniform2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2fv {
-	return &GlProgramUniform2fv{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2fv {
+	return &GlProgramUniform2fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform2i(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint) *GlProgramUniform2i {
-	return &GlProgramUniform2i{Program: Program, Location: Location, V0: V0, V1: V1}
+func NewGlProgramUniform2i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint) *GlProgramUniform2i {
+	return &GlProgramUniform2i{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
-func NewGlProgramUniform2iv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2iv {
-	return &GlProgramUniform2iv{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform2iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2iv {
+	return &GlProgramUniform2iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform2ui(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint) *GlProgramUniform2ui {
-	return &GlProgramUniform2ui{Program: Program, Location: Location, V0: V0, V1: V1}
+func NewGlProgramUniform2ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint) *GlProgramUniform2ui {
+	return &GlProgramUniform2ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1}
 }
-func NewGlProgramUniform2uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform2uiv {
-	return &GlProgramUniform2uiv{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform2uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform2uiv {
+	return &GlProgramUniform2uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform3f(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat, V2 GLfloat) *GlProgramUniform3f {
-	return &GlProgramUniform3f{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
+func NewGlProgramUniform3f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat) *GlProgramUniform3f {
+	return &GlProgramUniform3f{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
-func NewGlProgramUniform3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3fv {
-	return &GlProgramUniform3fv{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3fv {
+	return &GlProgramUniform3fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform3i(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint, V2 GLint) *GlProgramUniform3i {
-	return &GlProgramUniform3i{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
+func NewGlProgramUniform3i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint) *GlProgramUniform3i {
+	return &GlProgramUniform3i{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
-func NewGlProgramUniform3iv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3iv {
-	return &GlProgramUniform3iv{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform3iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3iv {
+	return &GlProgramUniform3iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform3ui(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint) *GlProgramUniform3ui {
-	return &GlProgramUniform3ui{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2}
+func NewGlProgramUniform3ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint) *GlProgramUniform3ui {
+	return &GlProgramUniform3ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
-func NewGlProgramUniform3uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform3uiv {
-	return &GlProgramUniform3uiv{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform3uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform3uiv {
+	return &GlProgramUniform3uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform4f(Program ProgramId, Location UniformLocation, V0 GLfloat, V1 GLfloat, V2 GLfloat, V3 GLfloat) *GlProgramUniform4f {
-	return &GlProgramUniform4f{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
+func NewGlProgramUniform4f(Program ProgramId, Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat, Value3 GLfloat) *GlProgramUniform4f {
+	return &GlProgramUniform4f{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlProgramUniform4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4fv {
-	return &GlProgramUniform4fv{Program: Program, Location: Location, Count: Count, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4fv {
+	return &GlProgramUniform4fv{Program: Program, Location: Location, Count: Count, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform4i(Program ProgramId, Location UniformLocation, V0 GLint, V1 GLint, V2 GLint, V3 GLint) *GlProgramUniform4i {
-	return &GlProgramUniform4i{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
+func NewGlProgramUniform4i(Program ProgramId, Location UniformLocation, Value0 GLint, Value1 GLint, Value2 GLint, Value3 GLint) *GlProgramUniform4i {
+	return &GlProgramUniform4i{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlProgramUniform4iv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4iv {
-	return &GlProgramUniform4iv{Program: Program, Location: Location, Count: Count, Value: GLintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform4iv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4iv {
+	return &GlProgramUniform4iv{Program: Program, Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniform4ui(Program ProgramId, Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint, V3 GLuint) *GlProgramUniform4ui {
-	return &GlProgramUniform4ui{Program: Program, Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
+func NewGlProgramUniform4ui(Program ProgramId, Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint, Value3 GLuint) *GlProgramUniform4ui {
+	return &GlProgramUniform4ui{Program: Program, Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlProgramUniform4uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlProgramUniform4uiv {
-	return &GlProgramUniform4uiv{Program: Program, Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlProgramUniform4uiv(Program ProgramId, Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlProgramUniform4uiv {
+	return &GlProgramUniform4uiv{Program: Program, Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2fv {
-	return &GlProgramUniformMatrix2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2fv {
+	return &GlProgramUniformMatrix2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix2x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2x3fv {
-	return &GlProgramUniformMatrix2x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix2x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2x3fv {
+	return &GlProgramUniformMatrix2x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix2x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix2x4fv {
-	return &GlProgramUniformMatrix2x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix2x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix2x4fv {
+	return &GlProgramUniformMatrix2x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3fv {
-	return &GlProgramUniformMatrix3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3fv {
+	return &GlProgramUniformMatrix3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix3x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3x2fv {
-	return &GlProgramUniformMatrix3x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix3x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3x2fv {
+	return &GlProgramUniformMatrix3x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix3x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix3x4fv {
-	return &GlProgramUniformMatrix3x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix3x4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix3x4fv {
+	return &GlProgramUniformMatrix3x4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4fv {
-	return &GlProgramUniformMatrix4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix4fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4fv {
+	return &GlProgramUniformMatrix4fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix4x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4x2fv {
-	return &GlProgramUniformMatrix4x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix4x2fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4x2fv {
+	return &GlProgramUniformMatrix4x2fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlProgramUniformMatrix4x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlProgramUniformMatrix4x3fv {
-	return &GlProgramUniformMatrix4x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlProgramUniformMatrix4x3fv(Program ProgramId, Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlProgramUniformMatrix4x3fv {
+	return &GlProgramUniformMatrix4x3fv{Program: Program, Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
 func NewGlReleaseShaderCompiler() *GlReleaseShaderCompiler {
 	return &GlReleaseShaderCompiler{}
@@ -46498,11 +48388,11 @@ func NewGlUniform1i(Location UniformLocation, Value GLint) *GlUniform1i {
 func NewGlUniform1iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform1iv {
 	return &GlUniform1iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlUniform1ui(Location UniformLocation, V0 GLuint) *GlUniform1ui {
-	return &GlUniform1ui{Location: Location, V0: V0}
+func NewGlUniform1ui(Location UniformLocation, Value0 GLuint) *GlUniform1ui {
+	return &GlUniform1ui{Location: Location, Value0: Value0}
 }
-func NewGlUniform1uiv(Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlUniform1uiv {
-	return &GlUniform1uiv{Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlUniform1uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform1uiv {
+	return &GlUniform1uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform2f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat) *GlUniform2f {
 	return &GlUniform2f{Location: Location, Value0: Value0, Value1: Value1}
@@ -46516,11 +48406,11 @@ func NewGlUniform2i(Location UniformLocation, Value0 GLint, Value1 GLint) *GlUni
 func NewGlUniform2iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform2iv {
 	return &GlUniform2iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlUniform2ui(Location UniformLocation, V0 GLuint, V1 GLuint) *GlUniform2ui {
-	return &GlUniform2ui{Location: Location, V0: V0, V1: V1}
+func NewGlUniform2ui(Location UniformLocation, Value0 GLuint, Value1 GLuint) *GlUniform2ui {
+	return &GlUniform2ui{Location: Location, Value0: Value0, Value1: Value1}
 }
-func NewGlUniform2uiv(Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlUniform2uiv {
-	return &GlUniform2uiv{Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlUniform2uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform2uiv {
+	return &GlUniform2uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform3f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat) *GlUniform3f {
 	return &GlUniform3f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
@@ -46534,11 +48424,11 @@ func NewGlUniform3i(Location UniformLocation, Value0 GLint, Value1 GLint, Value2
 func NewGlUniform3iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform3iv {
 	return &GlUniform3iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlUniform3ui(Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint) *GlUniform3ui {
-	return &GlUniform3ui{Location: Location, V0: V0, V1: V1, V2: V2}
+func NewGlUniform3ui(Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint) *GlUniform3ui {
+	return &GlUniform3ui{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2}
 }
-func NewGlUniform3uiv(Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlUniform3uiv {
-	return &GlUniform3uiv{Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlUniform3uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform3uiv {
+	return &GlUniform3uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform4f(Location UniformLocation, Value0 GLfloat, Value1 GLfloat, Value2 GLfloat, Value3 GLfloat) *GlUniform4f {
 	return &GlUniform4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
@@ -46552,11 +48442,11 @@ func NewGlUniform4i(Location UniformLocation, Value0 GLint, Value1 GLint, Value2
 func NewGlUniform4iv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform4iv {
 	return &GlUniform4iv{Location: Location, Count: Count, Values: GLintᶜᵖ{Pointer: Values}}
 }
-func NewGlUniform4ui(Location UniformLocation, V0 GLuint, V1 GLuint, V2 GLuint, V3 GLuint) *GlUniform4ui {
-	return &GlUniform4ui{Location: Location, V0: V0, V1: V1, V2: V2, V3: V3}
+func NewGlUniform4ui(Location UniformLocation, Value0 GLuint, Value1 GLuint, Value2 GLuint, Value3 GLuint) *GlUniform4ui {
+	return &GlUniform4ui{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlUniform4uiv(Location UniformLocation, Count GLsizei, Value memory.Pointer) *GlUniform4uiv {
-	return &GlUniform4uiv{Location: Location, Count: Count, Value: GLuintᶜᵖ{Pointer: Value}}
+func NewGlUniform4uiv(Location UniformLocation, Count GLsizei, Values memory.Pointer) *GlUniform4uiv {
+	return &GlUniform4uiv{Location: Location, Count: Count, Values: GLuintᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index UniformBlockId, Uniform_block_binding GLuint) *GlUniformBlockBinding {
 	return &GlUniformBlockBinding{Program: Program, UniformBlockIndex: Uniform_block_index, UniformBlockBinding: Uniform_block_binding}
@@ -46564,29 +48454,29 @@ func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index UniformBloc
 func NewGlUniformMatrix2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2fv {
 	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix2x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix2x3fv {
-	return &GlUniformMatrix2x3fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix2x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2x3fv {
+	return &GlUniformMatrix2x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix2x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix2x4fv {
-	return &GlUniformMatrix2x4fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix2x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix2x4fv {
+	return &GlUniformMatrix2x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformMatrix3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3fv {
 	return &GlUniformMatrix3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix3x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix3x2fv {
-	return &GlUniformMatrix3x2fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix3x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3x2fv {
+	return &GlUniformMatrix3x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix3x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix3x4fv {
-	return &GlUniformMatrix3x4fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix3x4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix3x4fv {
+	return &GlUniformMatrix3x4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformMatrix4fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4fv {
 	return &GlUniformMatrix4fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix4x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix4x2fv {
-	return &GlUniformMatrix4x2fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix4x2fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4x2fv {
+	return &GlUniformMatrix4x2fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
-func NewGlUniformMatrix4x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Value memory.Pointer) *GlUniformMatrix4x3fv {
-	return &GlUniformMatrix4x3fv{Location: Location, Count: Count, Transpose: Transpose, Value: GLfloatᶜᵖ{Pointer: Value}}
+func NewGlUniformMatrix4x3fv(Location UniformLocation, Count GLsizei, Transpose GLboolean, Values memory.Pointer) *GlUniformMatrix4x3fv {
+	return &GlUniformMatrix4x3fv{Location: Location, Count: Count, Transpose: Transpose, Values: GLfloatᶜᵖ{Pointer: Values}}
 }
 func NewGlUseProgram(Program ProgramId) *GlUseProgram {
 	return &GlUseProgram{Program: Program}

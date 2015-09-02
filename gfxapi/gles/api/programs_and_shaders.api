@@ -705,15 +705,18 @@ cmd UniformLocation glGetUniformLocation(ProgramId program, string name) {
   return ?
 }
 
+macro void GetUniformv(ProgramId program, UniformLocation location, any values) {
+  // TODO: Determine size based on uniform type.
+  write(values[0:16])
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformfv(ProgramId program, UniformLocation location, GLfloat* values) {
   minRequiredVersion(2, 0)
-
-  // p := Instances.Programs[program]
-  // uniform := p.Uniforms[location]
+  GetUniformv(program, location, values)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml","OpenGL ES 2.0")
@@ -722,44 +725,49 @@ cmd void glGetUniformfv(ProgramId program, UniformLocation location, GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetUniformiv(ProgramId program, UniformLocation location, GLint* values) {
   minRequiredVersion(2, 0)
-
-  // p := Instances.Programs[program]
-  // uniform := p.Uniforms[location]
+  GetUniformv(program, location, values)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
-cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* params) {
+cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* values) {
   minRequiredVersion(3, 0)
-  // TODO
+  GetUniformv(program, location, values)
+}
+
+macro void GetnUniformfv(ProgramId       program,
+                         UniformLocation location,
+                         GLsizei         bufSize, // bytes
+                         any             values) {
+  write(as!char*(values)[0:bufSize])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetnUniformfv(ProgramId       program,
                          UniformLocation location,
                          GLsizei         bufSize,
-                         GLfloat*        params) {
+                         GLfloat*        values) {
   minRequiredVersion(3, 2)
-  // TODO
+  GetnUniformfv(program, location, bufSize, values)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetnUniformiv(ProgramId       program,
                          UniformLocation location,
                          GLsizei         bufSize,
-                         GLint*          params) {
+                         GLint*          values) {
   minRequiredVersion(3, 2)
-  // TODO
+  GetnUniformfv(program, location, bufSize, values)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetUniform.xhtml","OpenGL ES 3.2")
 cmd void glGetnUniformuiv(ProgramId       program,
                           UniformLocation location,
                           GLsizei         bufSize,
-                          GLuint*         params) {
+                          GLuint*         values) {
   minRequiredVersion(3, 2)
-  // TODO
+  GetnUniformfv(program, location, bufSize, values)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml","OpenGL ES 2.0")
@@ -913,11 +921,25 @@ cmd void glProgramParameteri(ProgramId program, GLenum pname, GLint value) {
   // TODO
 }
 
+macro void ProgramUniformv(ProgramId       program,
+                           UniformLocation location,
+                           any             values,
+                           GLenum          type) {
+  ctx := GetContext()
+  p := ctx.Instances.Programs[program]
+  uniform := p.Uniforms[location]
+  uniform.Value = clone(as!u8[](values))
+  uniform.Type = type
+  p.Uniforms[location] = uniform
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform1f(ProgramId program, UniformLocation location, GLfloat v0) {
+cmd void glProgramUniform1f(ProgramId program, UniformLocation location, GLfloat value0) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!GLfloat(1)
+  v[0] = value0
+  ProgramUniformv(program, location, v, GL_FLOAT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -925,16 +947,19 @@ cmd void glProgramUniform1f(ProgramId program, UniformLocation location, GLfloat
 cmd void glProgramUniform1fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLfloat*  value) {
+                             const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := values[0:count]
+  ProgramUniformv(program, location, v, GL_FLOAT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform1i(ProgramId program, UniformLocation location, GLint v0) {
+cmd void glProgramUniform1i(ProgramId program, UniformLocation location, GLint value0) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!GLint(1)
+  v[0] = value0
+  ProgramUniformv(program, location, v, GL_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -942,16 +967,19 @@ cmd void glProgramUniform1i(ProgramId program, UniformLocation location, GLint v
 cmd void glProgramUniform1iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLint*    value) {
+                             const GLint*    values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := values[0:count]
+  ProgramUniformv(program, location, v, GL_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform1ui(ProgramId program, UniformLocation location, GLuint v0) {
+cmd void glProgramUniform1ui(ProgramId program, UniformLocation location, GLuint value0) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!GLuint(1)
+  v[0] = value0
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -959,16 +987,19 @@ cmd void glProgramUniform1ui(ProgramId program, UniformLocation location, GLuint
 cmd void glProgramUniform1uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
-                              const GLuint*   value) {
+                              const GLuint*   values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := values[0:count]
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform2f(ProgramId program, UniformLocation location, GLfloat v0, GLfloat v1) {
+cmd void glProgramUniform2f(ProgramId program, UniformLocation location, GLfloat value0, GLfloat value1) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec2f(1)
+  v[0] = Vec2f(value0, value1)
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -976,16 +1007,19 @@ cmd void glProgramUniform2f(ProgramId program, UniformLocation location, GLfloat
 cmd void glProgramUniform2fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLfloat*  value) {
+                             const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec2f*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform2i(ProgramId program, UniformLocation location, GLint v0, GLint v1) {
+cmd void glProgramUniform2i(ProgramId program, UniformLocation location, GLint value0, GLint value1) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec2i(1)
+  v[0] = Vec2i(value0, value1)
+  ProgramUniformv(program, location, v, GL_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -993,16 +1027,19 @@ cmd void glProgramUniform2i(ProgramId program, UniformLocation location, GLint v
 cmd void glProgramUniform2iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLint*    value) {
+                             const GLint*    values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec2i*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
-cmd void glProgramUniform2ui(ProgramId program, UniformLocation location, GLuint v0, GLuint v1) {
+cmd void glProgramUniform2ui(ProgramId program, UniformLocation location, GLuint value0, GLuint value1) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec2u(1)
+  v[0] = Vec2u(value0, value1)
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1010,20 +1047,23 @@ cmd void glProgramUniform2ui(ProgramId program, UniformLocation location, GLuint
 cmd void glProgramUniform2uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
-                              const GLuint*   value) {
+                              const GLuint*   values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec2u*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3f(ProgramId       program,
                             UniformLocation location,
-                            GLfloat         v0,
-                            GLfloat         v1,
-                            GLfloat         v2) {
+                            GLfloat         value0,
+                            GLfloat         value1,
+                            GLfloat         value2) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec3f(1)
+  v[0] = Vec3f(value0, value1, value2)
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1031,20 +1071,23 @@ cmd void glProgramUniform3f(ProgramId       program,
 cmd void glProgramUniform3fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLfloat*  value) {
+                             const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec3f*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3i(ProgramId       program,
                             UniformLocation location,
-                            GLint           v0,
-                            GLint           v1,
-                            GLint           v2) {
+                            GLint           value0,
+                            GLint           value1,
+                            GLint           value2) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec3i(1)
+  v[0] = Vec3i(value0, value1, value2)
+  ProgramUniformv(program, location, v, GL_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1052,20 +1095,23 @@ cmd void glProgramUniform3i(ProgramId       program,
 cmd void glProgramUniform3iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLint*    value) {
+                             const GLint*    values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec3i*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform3ui(ProgramId       program,
                              UniformLocation location,
-                             GLuint          v0,
-                             GLuint          v1,
-                             GLuint          v2) {
+                             GLuint          value0,
+                             GLuint          value1,
+                             GLuint          value2) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec3u(1)
+  v[0] = Vec3u(value0, value1, value2)
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1073,21 +1119,24 @@ cmd void glProgramUniform3ui(ProgramId       program,
 cmd void glProgramUniform3uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
-                              const GLuint*   value) {
+                              const GLuint*   values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec3u*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4f(ProgramId       program,
                             UniformLocation location,
-                            GLfloat         v0,
-                            GLfloat         v1,
-                            GLfloat         v2,
-                            GLfloat         v3) {
+                            GLfloat         value0,
+                            GLfloat         value1,
+                            GLfloat         value2,
+                            GLfloat         value3) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec4f(1)
+  v[0] = Vec4f(value0, value1, value2, value3)
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1095,21 +1144,24 @@ cmd void glProgramUniform4f(ProgramId       program,
 cmd void glProgramUniform4fv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLfloat*  value) {
+                             const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec4f*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_FLOAT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4i(ProgramId       program,
                             UniformLocation location,
-                            GLint           v0,
-                            GLint           v1,
-                            GLint           v2,
-                            GLint           v3) {
+                            GLint           value0,
+                            GLint           value1,
+                            GLint           value2,
+                            GLint           value3) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec4i(1)
+  v[0] = Vec4i(value0, value1, value2, value3)
+  ProgramUniformv(program, location, v, GL_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1117,21 +1169,24 @@ cmd void glProgramUniform4i(ProgramId       program,
 cmd void glProgramUniform4iv(ProgramId       program,
                              UniformLocation location,
                              GLsizei         count,
-                             const GLint*    value) {
+                             const GLint*    values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec4i*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glProgramUniform.xhtml","OpenGL ES 3.2")
 cmd void glProgramUniform4ui(ProgramId       program,
                              UniformLocation location,
-                             GLuint          v0,
-                             GLuint          v1,
-                             GLuint          v2,
-                             GLuint          v3) {
+                             GLuint          value0,
+                             GLuint          value1,
+                             GLuint          value2,
+                             GLuint          value3) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := make!Vec4u(1)
+  v[0] = Vec4u(value0, value1, value2, value3)
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1139,9 +1194,24 @@ cmd void glProgramUniform4ui(ProgramId       program,
 cmd void glProgramUniform4uiv(ProgramId       program,
                               UniformLocation location,
                               GLsizei         count,
-                              const GLuint*   value) {
+                              const GLuint*   values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Vec4u*(values)[0:count]
+  ProgramUniformv(program, location, v, GL_UNSIGNED_INT_VEC4)
+}
+
+macro void ProgramUniformMatrixv(ProgramId       program,
+                                 UniformLocation location,
+                                 GLboolean       transpose,
+                                 any             values,
+                                 GLenum          type) {
+  ctx := GetContext()
+  p := ctx.Instances.Programs[program]
+  // TODO: transpose values if the flag is set
+  uniform := p.Uniforms[location]
+  uniform.Value = clone(as!u8[](values))
+  uniform.Type = type
+  p.Uniforms[location] = uniform
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1150,9 +1220,10 @@ cmd void glProgramUniformMatrix2fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
                                    GLboolean       transpose,
-                                   const GLfloat*  value) {
+                                   const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat2f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1161,9 +1232,10 @@ cmd void glProgramUniformMatrix2x3fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat2x3f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT2x3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1172,9 +1244,10 @@ cmd void glProgramUniformMatrix2x4fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat2x4f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT2x4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1183,9 +1256,10 @@ cmd void glProgramUniformMatrix3fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
                                    GLboolean       transpose,
-                                   const GLfloat*  value) {
+                                   const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat3f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1194,9 +1268,10 @@ cmd void glProgramUniformMatrix3x2fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat3x2f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT3x2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1205,9 +1280,10 @@ cmd void glProgramUniformMatrix3x4fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat3x4f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT3x4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1216,9 +1292,10 @@ cmd void glProgramUniformMatrix4fv(ProgramId       program,
                                    UniformLocation location,
                                    GLsizei         count,
                                    GLboolean       transpose,
-                                   const GLfloat*  value) {
+                                   const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat4f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1227,9 +1304,10 @@ cmd void glProgramUniformMatrix4x2fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat4x2f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT4x2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glProgramUniform.xhtml","OpenGL ES 3.1")
@@ -1238,9 +1316,10 @@ cmd void glProgramUniformMatrix4x3fv(ProgramId       program,
                                      UniformLocation location,
                                      GLsizei         count,
                                      GLboolean       transpose,
-                                     const GLfloat*  value) {
+                                     const GLfloat*  values) {
   minRequiredVersion(3, 1)
-  // TODO
+  v := as!Mat4x3f*(values)[0:count]
+  ProgramUniformMatrixv(program, location, transpose, v, GL_FLOAT_MAT4x3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml","OpenGL ES 2.0")
@@ -1299,21 +1378,24 @@ cmd void glShaderSource(ShaderId             shader,
   }
 }
 
+macro void Uniformv(UniformLocation location, any values, GLenum type) {
+  ctx := GetContext()
+  program := ctx.Instances.Programs[ctx.BoundProgram]
+  uniform := program.Uniforms[location]
+  uniform.Value = clone(as!u8[](values))
+  uniform.Type = type
+  program.Uniforms[location] = uniform
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1f(UniformLocation location, GLfloat value) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!GLfloat(1)
   v[0] = value
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1322,14 +1404,8 @@ cmd void glUniform1f(UniformLocation location, GLfloat value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := values[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1338,15 +1414,9 @@ cmd void glUniform1fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1i(UniformLocation location, GLint value) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!GLint(1)
   v[0] = value
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1355,30 +1425,27 @@ cmd void glUniform1i(UniformLocation location, GLint value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform1iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := values[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform1ui(UniformLocation location, GLuint v0) {
+cmd void glUniform1ui(UniformLocation location, GLuint value0) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := make!GLuint(1)
+  v[0] = value0
+  Uniformv(location, v, GL_UNSIGNED_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform1uiv(UniformLocation location, GLsizei count, const GLuint* value) {
+cmd void glUniform1uiv(UniformLocation location, GLsizei count, const GLuint* values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := values[0:count]
+  Uniformv(location, v, GL_UNSIGNED_INT)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1387,15 +1454,9 @@ cmd void glUniform1uiv(UniformLocation location, GLsizei count, const GLuint* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2f(UniformLocation location, GLfloat value0, GLfloat value1) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec2f(1)
   v[0] = Vec2f(value0, value1)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC2
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1404,14 +1465,8 @@ cmd void glUniform2f(UniformLocation location, GLfloat value0, GLfloat value1) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec2f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC2
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1420,15 +1475,9 @@ cmd void glUniform2fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2i(UniformLocation location, GLint value0, GLint value1) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec2i(1)
   v[0] = Vec2i(value0, value1)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC2
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1437,30 +1486,27 @@ cmd void glUniform2i(UniformLocation location, GLint value0, GLint value1) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform2iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec2i*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC2
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform2ui(UniformLocation location, GLuint v0, GLuint v1) {
+cmd void glUniform2ui(UniformLocation location, GLuint value0, GLuint value1) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := make!Vec2u(1)
+  v[0] = Vec2u(value0, value1)
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform2uiv(UniformLocation location, GLsizei count, const GLuint* value) {
+cmd void glUniform2uiv(UniformLocation location, GLsizei count, const GLuint* values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Vec2u*(values)[0:count]
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1469,15 +1515,9 @@ cmd void glUniform2uiv(UniformLocation location, GLsizei count, const GLuint* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3f(UniformLocation location, GLfloat value0, GLfloat value1, GLfloat value2) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec3f(1)
   v[0] = Vec3f(value0, value1, value2)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC3
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1486,14 +1526,8 @@ cmd void glUniform3f(UniformLocation location, GLfloat value0, GLfloat value1, G
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec3f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC3
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1502,15 +1536,9 @@ cmd void glUniform3fv(UniformLocation location, GLsizei count, const GLfloat* va
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3i(UniformLocation location, GLint value0, GLint value1, GLint value2) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec3i(1)
   v[0] = Vec3i(value0, value1, value2)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC3
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1519,30 +1547,27 @@ cmd void glUniform3i(UniformLocation location, GLint value0, GLint value1, GLint
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform3iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec3i*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC3
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform3ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2) {
+cmd void glUniform3ui(UniformLocation location, GLuint value0, GLuint value1, GLuint value2) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := make!Vec3u(1)
+  v[0] = Vec3u(value0, value1, value2)
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform3uiv(UniformLocation location, GLsizei count, const GLuint* value) {
+cmd void glUniform3uiv(UniformLocation location, GLsizei count, const GLuint* values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Vec3u*(values)[0:count]
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1555,15 +1580,9 @@ cmd void glUniform4f(UniformLocation location,
                      GLfloat         value2,
                      GLfloat         value3) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec4f(1)
   v[0] = Vec4f(value0, value1, value2, value3)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC4
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1572,14 +1591,8 @@ cmd void glUniform4f(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4fv(UniformLocation location, GLsizei count, const GLfloat* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec4f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_VEC4
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_FLOAT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1592,15 +1605,9 @@ cmd void glUniform4i(UniformLocation location,
                      GLint           value2,
                      GLint           value3) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := make!Vec4i(1)
   v[0] = Vec4i(value0, value1, value2, value3)
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC4
-  uniform.Value = as!u8[](v)
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1609,30 +1616,27 @@ cmd void glUniform4i(UniformLocation location,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
 cmd void glUniform4iv(UniformLocation location, GLsizei count, const GLint* values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Vec4i*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_INT_VEC4
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  Uniformv(location, v, GL_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform4ui(UniformLocation location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) {
+cmd void glUniform4ui(UniformLocation location, GLuint value0, GLuint value1, GLuint value2, GLuint value3) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := make!Vec4u(1)
+  v[0] = Vec4u(value0, value1, value2, value3)
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glUniform.xhtml","OpenGL ES 3.2")
-cmd void glUniform4uiv(UniformLocation location, GLsizei count, const GLuint* value) {
+cmd void glUniform4uiv(UniformLocation location, GLsizei count, const GLuint* values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Vec4u*(values)[0:count]
+  Uniformv(location, v, GL_UNSIGNED_INT_VEC4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniformBlockBinding.xhtml","OpenGL ES 3.0")
@@ -1646,6 +1650,20 @@ cmd void glUniformBlockBinding(ProgramId      program,
   // TODO
 }
 
+macro void UniformMatrixv(UniformLocation location,
+                          GLboolean       transpose,
+                          any             values,
+                          GLenum          type) {
+  minRequiredVersion(2, 0)
+  // TODO: Transpose if the flag is set.
+  ctx := GetContext()
+  program := ctx.Instances.Programs[ctx.BoundProgram]
+  uniform := program.Uniforms[location]
+  uniform.Value = clone(as!u8[](values))
+  uniform.Type = type
+  program.Uniforms[location] = uniform
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glUniform.xhtml","OpenGL ES 3.1")
@@ -1655,14 +1673,8 @@ cmd void glUniformMatrix2fv(UniformLocation location,
                             GLboolean       transpose,
                             const GLfloat*  values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Mat2f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_MAT2
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1671,9 +1683,10 @@ cmd void glUniformMatrix2fv(UniformLocation location,
 cmd void glUniformMatrix2x3fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat2x3f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT2x3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1682,9 +1695,10 @@ cmd void glUniformMatrix2x3fv(UniformLocation location,
 cmd void glUniformMatrix2x4fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat2x4f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT2x4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1696,14 +1710,8 @@ cmd void glUniformMatrix3fv(UniformLocation location,
                             GLboolean       transpose,
                             const GLfloat*  values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Mat3f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Type = GL_FLOAT_MAT3
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1712,9 +1720,10 @@ cmd void glUniformMatrix3fv(UniformLocation location,
 cmd void glUniformMatrix3x2fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat3x2f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT3x2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1723,9 +1732,10 @@ cmd void glUniformMatrix3x2fv(UniformLocation location,
 cmd void glUniformMatrix3x4fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat3x4f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT3x4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml","OpenGL ES 2.0")
@@ -1737,13 +1747,8 @@ cmd void glUniformMatrix4fv(UniformLocation location,
                             GLboolean       transpose,
                             const GLfloat*  values) {
   minRequiredVersion(2, 0)
-
-  ctx := GetContext()
   v := as!Mat4f*(values)[0:count]
-  program := ctx.Instances.Programs[ctx.BoundProgram]
-  uniform := program.Uniforms[location]
-  uniform.Value = clone(as!u8[](v))
-  program.Uniforms[location] = uniform
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT4)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1752,9 +1757,10 @@ cmd void glUniformMatrix4fv(UniformLocation location,
 cmd void glUniformMatrix4x2fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat4x2f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT4x2)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glUniform.xhtml","OpenGL ES 3.0")
@@ -1763,9 +1769,10 @@ cmd void glUniformMatrix4x2fv(UniformLocation location,
 cmd void glUniformMatrix4x3fv(UniformLocation location,
                               GLsizei         count,
                               GLboolean       transpose,
-                              const GLfloat*  value) {
+                              const GLfloat*  values) {
   minRequiredVersion(3, 0)
-  // TODO
+  v := as!Mat4x3f*(values)[0:count]
+  UniformMatrixv(location, transpose, v, GL_FLOAT_MAT4x3)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml","OpenGL ES 2.0")

@@ -12246,13 +12246,13 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetUniformuiv(Stack* stack, bool pushReturn) {
-    uint32_t* params = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, params);
+        GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
         if (glGetUniformuiv != nullptr) {
-            glGetUniformuiv(program, location, params);
+            glGetUniformuiv(program, location, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetUniformuiv returned error: 0x%x", err);
@@ -12268,15 +12268,15 @@ bool callGlGetUniformuiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetnUniformfv(Stack* stack, bool pushReturn) {
-    float* params = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t bufSize = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetnUniformfv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
-                   bufSize, params);
+                   bufSize, values);
         if (glGetnUniformfv != nullptr) {
-            glGetnUniformfv(program, location, bufSize, params);
+            glGetnUniformfv(program, location, bufSize, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetnUniformfv returned error: 0x%x", err);
@@ -12292,15 +12292,15 @@ bool callGlGetnUniformfv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetnUniformiv(Stack* stack, bool pushReturn) {
-    int32_t* params = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t bufSize = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetnUniformiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
-                   bufSize, params);
+                   bufSize, values);
         if (glGetnUniformiv != nullptr) {
-            glGetnUniformiv(program, location, bufSize, params);
+            glGetnUniformiv(program, location, bufSize, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetnUniformiv returned error: 0x%x", err);
@@ -12316,15 +12316,15 @@ bool callGlGetnUniformiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetnUniformuiv(Stack* stack, bool pushReturn) {
-    uint32_t* params = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t bufSize = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetnUniformuiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program, location,
-                   bufSize, params);
+                   bufSize, values);
         if (glGetnUniformuiv != nullptr) {
-            glGetnUniformuiv(program, location, bufSize, params);
+            glGetnUniformuiv(program, location, bufSize, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetnUniformuiv returned error: 0x%x", err);
@@ -12518,13 +12518,13 @@ bool callGlProgramParameteri(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1f(Stack* stack, bool pushReturn) {
-    float v0 = stack->pop<float>();
+    float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
+        GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)", program, location, value0);
         if (glProgramUniform1f != nullptr) {
-            glProgramUniform1f(program, location, v0);
+            glProgramUniform1f(program, location, value0);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1f returned error: 0x%x", err);
@@ -12540,15 +12540,15 @@ bool callGlProgramUniform1f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform1fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform1fv != nullptr) {
-            glProgramUniform1fv(program, location, count, value);
+            glProgramUniform1fv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1fv returned error: 0x%x", err);
@@ -12564,14 +12564,14 @@ bool callGlProgramUniform1fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1i(Stack* stack, bool pushReturn) {
-    int32_t v0 = stack->pop<int32_t>();
+    int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform1i(%" PRIu32 ", %" PRId32 ", %" PRId32 ")", program, location,
-                   v0);
+                   value0);
         if (glProgramUniform1i != nullptr) {
-            glProgramUniform1i(program, location, v0);
+            glProgramUniform1i(program, location, value0);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1i returned error: 0x%x", err);
@@ -12587,15 +12587,15 @@ bool callGlProgramUniform1i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform1iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform1iv != nullptr) {
-            glProgramUniform1iv(program, location, count, value);
+            glProgramUniform1iv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1iv returned error: 0x%x", err);
@@ -12611,14 +12611,14 @@ bool callGlProgramUniform1iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1ui(Stack* stack, bool pushReturn) {
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform1ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ")", program, location,
-                   v0);
+                   value0);
         if (glProgramUniform1ui != nullptr) {
-            glProgramUniform1ui(program, location, v0);
+            glProgramUniform1ui(program, location, value0);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1ui returned error: 0x%x", err);
@@ -12634,15 +12634,15 @@ bool callGlProgramUniform1ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform1uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform1uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform1uiv != nullptr) {
-            glProgramUniform1uiv(program, location, count, value);
+            glProgramUniform1uiv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform1uiv returned error: 0x%x", err);
@@ -12658,15 +12658,15 @@ bool callGlProgramUniform1uiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2f(Stack* stack, bool pushReturn) {
-    float v1 = stack->pop<float>();
-    float v0 = stack->pop<float>();
+    float value1 = stack->pop<float>();
+    float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glProgramUniform2f(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location, v0,
-                   v1);
+        GAPID_INFO("glProgramUniform2f(%" PRIu32 ", %" PRId32 ", %f, %f)", program, location,
+                   value0, value1);
         if (glProgramUniform2f != nullptr) {
-            glProgramUniform2f(program, location, v0, v1);
+            glProgramUniform2f(program, location, value0, value1);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2f returned error: 0x%x", err);
@@ -12682,15 +12682,15 @@ bool callGlProgramUniform2f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform2fv != nullptr) {
-            glProgramUniform2fv(program, location, count, value);
+            glProgramUniform2fv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2fv returned error: 0x%x", err);
@@ -12706,15 +12706,15 @@ bool callGlProgramUniform2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2i(Stack* stack, bool pushReturn) {
-    int32_t v1 = stack->pop<int32_t>();
-    int32_t v0 = stack->pop<int32_t>();
+    int32_t value1 = stack->pop<int32_t>();
+    int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform2i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
-                   program, location, v0, v1);
+                   program, location, value0, value1);
         if (glProgramUniform2i != nullptr) {
-            glProgramUniform2i(program, location, v0, v1);
+            glProgramUniform2i(program, location, value0, value1);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2i returned error: 0x%x", err);
@@ -12730,15 +12730,15 @@ bool callGlProgramUniform2i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform2iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform2iv != nullptr) {
-            glProgramUniform2iv(program, location, count, value);
+            glProgramUniform2iv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2iv returned error: 0x%x", err);
@@ -12754,15 +12754,15 @@ bool callGlProgramUniform2iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2ui(Stack* stack, bool pushReturn) {
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform2ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32 ")",
-                   program, location, v0, v1);
+                   program, location, value0, value1);
         if (glProgramUniform2ui != nullptr) {
-            glProgramUniform2ui(program, location, v0, v1);
+            glProgramUniform2ui(program, location, value0, value1);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2ui returned error: 0x%x", err);
@@ -12778,15 +12778,15 @@ bool callGlProgramUniform2ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform2uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform2uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform2uiv != nullptr) {
-            glProgramUniform2uiv(program, location, count, value);
+            glProgramUniform2uiv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform2uiv returned error: 0x%x", err);
@@ -12802,16 +12802,16 @@ bool callGlProgramUniform2uiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3f(Stack* stack, bool pushReturn) {
-    float v2 = stack->pop<float>();
-    float v1 = stack->pop<float>();
-    float v0 = stack->pop<float>();
+    float value2 = stack->pop<float>();
+    float value1 = stack->pop<float>();
+    float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3f(%" PRIu32 ", %" PRId32 ", %f, %f, %f)", program, location,
-                   v0, v1, v2);
+                   value0, value1, value2);
         if (glProgramUniform3f != nullptr) {
-            glProgramUniform3f(program, location, v0, v1, v2);
+            glProgramUniform3f(program, location, value0, value1, value2);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3f returned error: 0x%x", err);
@@ -12827,15 +12827,15 @@ bool callGlProgramUniform3f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform3fv != nullptr) {
-            glProgramUniform3fv(program, location, count, value);
+            glProgramUniform3fv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3fv returned error: 0x%x", err);
@@ -12851,17 +12851,17 @@ bool callGlProgramUniform3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3i(Stack* stack, bool pushReturn) {
-    int32_t v2 = stack->pop<int32_t>();
-    int32_t v1 = stack->pop<int32_t>();
-    int32_t v0 = stack->pop<int32_t>();
+    int32_t value2 = stack->pop<int32_t>();
+    int32_t value1 = stack->pop<int32_t>();
+    int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ")",
-                   program, location, v0, v1, v2);
+                   program, location, value0, value1, value2);
         if (glProgramUniform3i != nullptr) {
-            glProgramUniform3i(program, location, v0, v1, v2);
+            glProgramUniform3i(program, location, value0, value1, value2);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3i returned error: 0x%x", err);
@@ -12877,15 +12877,15 @@ bool callGlProgramUniform3i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform3iv != nullptr) {
-            glProgramUniform3iv(program, location, count, value);
+            glProgramUniform3iv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3iv returned error: 0x%x", err);
@@ -12901,17 +12901,17 @@ bool callGlProgramUniform3iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3ui(Stack* stack, bool pushReturn) {
-    uint32_t v2 = stack->pop<uint32_t>();
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value2 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32
                    ", %" PRIu32 ")",
-                   program, location, v0, v1, v2);
+                   program, location, value0, value1, value2);
         if (glProgramUniform3ui != nullptr) {
-            glProgramUniform3ui(program, location, v0, v1, v2);
+            glProgramUniform3ui(program, location, value0, value1, value2);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3ui returned error: 0x%x", err);
@@ -12927,15 +12927,15 @@ bool callGlProgramUniform3ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform3uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform3uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform3uiv != nullptr) {
-            glProgramUniform3uiv(program, location, count, value);
+            glProgramUniform3uiv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform3uiv returned error: 0x%x", err);
@@ -12951,17 +12951,17 @@ bool callGlProgramUniform3uiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4f(Stack* stack, bool pushReturn) {
-    float v3 = stack->pop<float>();
-    float v2 = stack->pop<float>();
-    float v1 = stack->pop<float>();
-    float v0 = stack->pop<float>();
+    float value3 = stack->pop<float>();
+    float value2 = stack->pop<float>();
+    float value1 = stack->pop<float>();
+    float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4f(%" PRIu32 ", %" PRId32 ", %f, %f, %f, %f)", program,
-                   location, v0, v1, v2, v3);
+                   location, value0, value1, value2, value3);
         if (glProgramUniform4f != nullptr) {
-            glProgramUniform4f(program, location, v0, v1, v2, v3);
+            glProgramUniform4f(program, location, value0, value1, value2, value3);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4f returned error: 0x%x", err);
@@ -12977,15 +12977,15 @@ bool callGlProgramUniform4f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform4fv != nullptr) {
-            glProgramUniform4fv(program, location, count, value);
+            glProgramUniform4fv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4fv returned error: 0x%x", err);
@@ -13001,18 +13001,18 @@ bool callGlProgramUniform4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4i(Stack* stack, bool pushReturn) {
-    int32_t v3 = stack->pop<int32_t>();
-    int32_t v2 = stack->pop<int32_t>();
-    int32_t v1 = stack->pop<int32_t>();
-    int32_t v0 = stack->pop<int32_t>();
+    int32_t value3 = stack->pop<int32_t>();
+    int32_t value2 = stack->pop<int32_t>();
+    int32_t value1 = stack->pop<int32_t>();
+    int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4i(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ")",
-                   program, location, v0, v1, v2, v3);
+                   program, location, value0, value1, value2, value3);
         if (glProgramUniform4i != nullptr) {
-            glProgramUniform4i(program, location, v0, v1, v2, v3);
+            glProgramUniform4i(program, location, value0, value1, value2, value3);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4i returned error: 0x%x", err);
@@ -13028,15 +13028,15 @@ bool callGlProgramUniform4i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4iv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform4iv != nullptr) {
-            glProgramUniform4iv(program, location, count, value);
+            glProgramUniform4iv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4iv returned error: 0x%x", err);
@@ -13052,18 +13052,18 @@ bool callGlProgramUniform4iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4ui(Stack* stack, bool pushReturn) {
-    uint32_t v3 = stack->pop<uint32_t>();
-    uint32_t v2 = stack->pop<uint32_t>();
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value3 = stack->pop<uint32_t>();
+    uint32_t value2 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4ui(%" PRIu32 ", %" PRId32 ", %" PRIu32 ", %" PRIu32
                    ", %" PRIu32 ", %" PRIu32 ")",
-                   program, location, v0, v1, v2, v3);
+                   program, location, value0, value1, value2, value3);
         if (glProgramUniform4ui != nullptr) {
-            glProgramUniform4ui(program, location, v0, v1, v2, v3);
+            glProgramUniform4ui(program, location, value0, value1, value2, value3);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4ui returned error: 0x%x", err);
@@ -13079,15 +13079,15 @@ bool callGlProgramUniform4ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniform4uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniform4uiv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p)", program,
-                   location, count, value);
+                   location, count, values);
         if (glProgramUniform4uiv != nullptr) {
-            glProgramUniform4uiv(program, location, count, value);
+            glProgramUniform4uiv(program, location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniform4uiv returned error: 0x%x", err);
@@ -13103,7 +13103,7 @@ bool callGlProgramUniform4uiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13111,9 +13111,9 @@ bool callGlProgramUniformMatrix2fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix2fv != nullptr) {
-            glProgramUniformMatrix2fv(program, location, count, transpose, value);
+            glProgramUniformMatrix2fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix2fv returned error: 0x%x", err);
@@ -13129,7 +13129,7 @@ bool callGlProgramUniformMatrix2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13137,9 +13137,9 @@ bool callGlProgramUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix2x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix2x3fv != nullptr) {
-            glProgramUniformMatrix2x3fv(program, location, count, transpose, value);
+            glProgramUniformMatrix2x3fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix2x3fv returned error: 0x%x", err);
@@ -13155,7 +13155,7 @@ bool callGlProgramUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13163,9 +13163,9 @@ bool callGlProgramUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix2x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix2x4fv != nullptr) {
-            glProgramUniformMatrix2x4fv(program, location, count, transpose, value);
+            glProgramUniformMatrix2x4fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix2x4fv returned error: 0x%x", err);
@@ -13181,7 +13181,7 @@ bool callGlProgramUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13189,9 +13189,9 @@ bool callGlProgramUniformMatrix3fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix3fv != nullptr) {
-            glProgramUniformMatrix3fv(program, location, count, transpose, value);
+            glProgramUniformMatrix3fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix3fv returned error: 0x%x", err);
@@ -13207,7 +13207,7 @@ bool callGlProgramUniformMatrix3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13215,9 +13215,9 @@ bool callGlProgramUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix3x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix3x2fv != nullptr) {
-            glProgramUniformMatrix3x2fv(program, location, count, transpose, value);
+            glProgramUniformMatrix3x2fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix3x2fv returned error: 0x%x", err);
@@ -13233,7 +13233,7 @@ bool callGlProgramUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13241,9 +13241,9 @@ bool callGlProgramUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix3x4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix3x4fv != nullptr) {
-            glProgramUniformMatrix3x4fv(program, location, count, transpose, value);
+            glProgramUniformMatrix3x4fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix3x4fv returned error: 0x%x", err);
@@ -13259,7 +13259,7 @@ bool callGlProgramUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13267,9 +13267,9 @@ bool callGlProgramUniformMatrix4fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix4fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix4fv != nullptr) {
-            glProgramUniformMatrix4fv(program, location, count, transpose, value);
+            glProgramUniformMatrix4fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix4fv returned error: 0x%x", err);
@@ -13285,7 +13285,7 @@ bool callGlProgramUniformMatrix4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13293,9 +13293,9 @@ bool callGlProgramUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix4x2fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix4x2fv != nullptr) {
-            glProgramUniformMatrix4x2fv(program, location, count, transpose, value);
+            glProgramUniformMatrix4x2fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix4x2fv returned error: 0x%x", err);
@@ -13311,7 +13311,7 @@ bool callGlProgramUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlProgramUniformMatrix4x3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
@@ -13319,9 +13319,9 @@ bool callGlProgramUniformMatrix4x3fv(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glProgramUniformMatrix4x3fv(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %" PRIu8
                    ", %p)",
-                   program, location, count, transpose, value);
+                   program, location, count, transpose, values);
         if (glProgramUniformMatrix4x3fv != nullptr) {
-            glProgramUniformMatrix4x3fv(program, location, count, transpose, value);
+            glProgramUniformMatrix4x3fv(program, location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glProgramUniformMatrix4x3fv returned error: 0x%x", err);
@@ -13492,12 +13492,12 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1ui(Stack* stack, bool pushReturn) {
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")", location, v0);
+        GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")", location, value0);
         if (glUniform1ui != nullptr) {
-            glUniform1ui(location, v0);
+            glUniform1ui(location, value0);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform1ui returned error: 0x%x", err);
@@ -13513,13 +13513,13 @@ bool callGlUniform1ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+        GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform1uiv != nullptr) {
-            glUniform1uiv(location, count, value);
+            glUniform1uiv(location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform1uiv returned error: 0x%x", err);
@@ -13623,13 +13623,13 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2ui(Stack* stack, bool pushReturn) {
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")", location, v0, v1);
+        GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")", location, value0, value1);
         if (glUniform2ui != nullptr) {
-            glUniform2ui(location, v0, v1);
+            glUniform2ui(location, value0, value1);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform2ui returned error: 0x%x", err);
@@ -13645,13 +13645,13 @@ bool callGlUniform2ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+        GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform2uiv != nullptr) {
-            glUniform2uiv(location, count, value);
+            glUniform2uiv(location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform2uiv returned error: 0x%x", err);
@@ -13758,15 +13758,15 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3ui(Stack* stack, bool pushReturn) {
-    uint32_t v2 = stack->pop<uint32_t>();
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value2 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", location, v0,
-                   v1, v2);
+        GAPID_INFO("glUniform3ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")", location,
+                   value0, value1, value2);
         if (glUniform3ui != nullptr) {
-            glUniform3ui(location, v0, v1, v2);
+            glUniform3ui(location, value0, value1, value2);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform3ui returned error: 0x%x", err);
@@ -13782,13 +13782,13 @@ bool callGlUniform3ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+        GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform3uiv != nullptr) {
-            glUniform3uiv(location, count, value);
+            glUniform3uiv(location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform3uiv returned error: 0x%x", err);
@@ -13898,16 +13898,16 @@ bool callGlUniform4iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4ui(Stack* stack, bool pushReturn) {
-    uint32_t v3 = stack->pop<uint32_t>();
-    uint32_t v2 = stack->pop<uint32_t>();
-    uint32_t v1 = stack->pop<uint32_t>();
-    uint32_t v0 = stack->pop<uint32_t>();
+    uint32_t value3 = stack->pop<uint32_t>();
+    uint32_t value2 = stack->pop<uint32_t>();
+    uint32_t value1 = stack->pop<uint32_t>();
+    uint32_t value0 = stack->pop<uint32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform4ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %" PRIu32 ")",
-                   location, v0, v1, v2, v3);
+                   location, value0, value1, value2, value3);
         if (glUniform4ui != nullptr) {
-            glUniform4ui(location, v0, v1, v2, v3);
+            glUniform4ui(location, value0, value1, value2, value3);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform4ui returned error: 0x%x", err);
@@ -13923,13 +13923,13 @@ bool callGlUniform4ui(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4uiv(Stack* stack, bool pushReturn) {
-    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t* values = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
+        GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform4uiv != nullptr) {
-            glUniform4uiv(location, count, value);
+            glUniform4uiv(location, count, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniform4uiv returned error: 0x%x", err);
@@ -13992,15 +13992,15 @@ bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix2x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix2x3fv != nullptr) {
-            glUniformMatrix2x3fv(location, count, transpose, value);
+            glUniformMatrix2x3fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix2x3fv returned error: 0x%x", err);
@@ -14016,15 +14016,15 @@ bool callGlUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix2x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix2x4fv != nullptr) {
-            glUniformMatrix2x4fv(location, count, transpose, value);
+            glUniformMatrix2x4fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix2x4fv returned error: 0x%x", err);
@@ -14064,15 +14064,15 @@ bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix3x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix3x2fv != nullptr) {
-            glUniformMatrix3x2fv(location, count, transpose, value);
+            glUniformMatrix3x2fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix3x2fv returned error: 0x%x", err);
@@ -14088,15 +14088,15 @@ bool callGlUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix3x4fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix3x4fv != nullptr) {
-            glUniformMatrix3x4fv(location, count, transpose, value);
+            glUniformMatrix3x4fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix3x4fv returned error: 0x%x", err);
@@ -14136,15 +14136,15 @@ bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix4x2fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix4x2fv != nullptr) {
-            glUniformMatrix4x2fv(location, count, transpose, value);
+            glUniformMatrix4x2fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix4x2fv returned error: 0x%x", err);
@@ -14160,15 +14160,15 @@ bool callGlUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix4x3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     uint8_t transpose = stack->pop<uint8_t>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix4x3fv(%" PRId32 ", %" PRId32 ", %" PRIu8 ", %p)", location,
-                   count, transpose, value);
+                   count, transpose, values);
         if (glUniformMatrix4x3fv != nullptr) {
-            glUniformMatrix4x3fv(location, count, transpose, value);
+            glUniformMatrix4x3fv(location, count, transpose, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glUniformMatrix4x3fv returned error: 0x%x", err);

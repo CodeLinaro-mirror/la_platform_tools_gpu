@@ -5738,6 +5738,14 @@ typedef GLint Vec3i[3];
 
 typedef GLint Vec4i[4];
 
+typedef uint32_t GLuint;
+
+typedef GLuint Vec2u[2];
+
+typedef GLuint Vec3u[3];
+
+typedef GLuint Vec4u[4];
+
 typedef float GLfloat;
 
 typedef GLfloat Vec2f[2];
@@ -5748,7 +5756,19 @@ typedef GLfloat Vec4f[4];
 
 typedef Vec2f Mat2f[2];
 
+typedef Vec3f Mat2x3f[2];
+
+typedef Vec4f Mat2x4f[2];
+
+typedef Vec2f Mat3x2f[3];
+
 typedef Vec3f Mat3f[3];
+
+typedef Vec4f Mat3x4f[3];
+
+typedef Vec2f Mat4x2f[4];
+
+typedef Vec3f Mat4x3f[4];
 
 typedef Vec4f Mat4f[4];
 
@@ -5839,8 +5859,6 @@ typedef char GLchar;
 typedef int16_t GLshort;
 
 typedef uint16_t GLushort;
-
-typedef uint32_t GLuint;
 
 typedef int64_t GLint64;
 

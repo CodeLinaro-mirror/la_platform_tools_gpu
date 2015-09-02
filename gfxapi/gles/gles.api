@@ -389,11 +389,20 @@ class VertexAttribute {
 @internal type GLint[2]   Vec2i
 @internal type GLint[3]   Vec3i
 @internal type GLint[4]   Vec4i
+@internal type GLuint[2]  Vec2u
+@internal type GLuint[3]  Vec3u
+@internal type GLuint[4]  Vec4u
 @internal type GLfloat[2] Vec2f
 @internal type GLfloat[3] Vec3f
 @internal type GLfloat[4] Vec4f
 @internal type Vec2f[2]   Mat2f
+@internal type Vec3f[2]   Mat2x3f
+@internal type Vec4f[2]   Mat2x4f
+@internal type Vec2f[3]   Mat3x2f
 @internal type Vec3f[3]   Mat3f
+@internal type Vec4f[3]   Mat3x4f
+@internal type Vec2f[4]   Mat4x2f
+@internal type Vec3f[4]   Mat4x3f
 @internal type Vec4f[4]   Mat4f
 
 @internal
