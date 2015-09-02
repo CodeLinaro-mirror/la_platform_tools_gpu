@@ -268,9 +268,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	load.OnClick(func(ev gxui.MouseEvent) {
 		go func() {
 			ImportCapture(appCtx, name.Text(), statusLogger)
-			theme.Driver().Call(func() {
-				window.Close()
-			})
+			theme.Driver().Call(window.Close)
 		}()
 	})
 }
@@ -293,6 +291,8 @@ func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Log
 			panic(err)
 		}
 		log.Infof(statusLogger, "Loading...")
-		appCtx.events.Select(p)
+		appCtx.Run(func() {
+			appCtx.events.Select(p)
+		})
 	}
 }
