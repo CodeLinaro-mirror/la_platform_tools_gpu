@@ -1324,7 +1324,7 @@ var (
 	binaryIDGlGetActiveUniformsiv                            = binary.ID{0x58, 0x47, 0x7e, 0x47, 0xb2, 0xaa, 0x8b, 0xfd, 0x75, 0x9b, 0x02, 0xd9, 0x54, 0x53, 0x48, 0x9e, 0xc2, 0xf3, 0xe0, 0x7e}
 	binaryIDGlGetAttachedShaders                             = binary.ID{0x50, 0x20, 0x01, 0x35, 0xf4, 0x86, 0x57, 0xab, 0xd6, 0x53, 0x6f, 0x7c, 0x7f, 0x84, 0xcb, 0x83, 0x7f, 0x43, 0xf5, 0x04}
 	binaryIDGlGetAttribLocation                              = binary.ID{0x75, 0xe9, 0x55, 0x96, 0x01, 0x85, 0x1d, 0xe7, 0xa7, 0xe9, 0xef, 0x2b, 0xd9, 0x77, 0x06, 0x8f, 0xe8, 0xd1, 0xce, 0x85}
-	binaryIDGlGetBooleani_v                                  = binary.ID{0xbe, 0x62, 0xf1, 0x22, 0xe9, 0x23, 0x5a, 0x62, 0x6d, 0x83, 0xf4, 0xa2, 0x9b, 0x26, 0x67, 0xf0, 0xff, 0x5b, 0x49, 0x36}
+	binaryIDGlGetBooleani_v                                  = binary.ID{0x72, 0x5d, 0x37, 0x1b, 0xda, 0x0a, 0x9d, 0x64, 0x3c, 0x91, 0x85, 0x15, 0x33, 0x92, 0xd0, 0xf0, 0x45, 0x3f, 0xa1, 0xef}
 	binaryIDGlGetBooleanv                                    = binary.ID{0xb2, 0x87, 0x76, 0x95, 0xc0, 0xf9, 0xcf, 0x8f, 0x96, 0xf2, 0x88, 0x6c, 0xe2, 0x42, 0xae, 0x98, 0x8b, 0x78, 0x63, 0xfb}
 	binaryIDGlGetBufferParameteri64v                         = binary.ID{0x78, 0xf8, 0xa3, 0xa0, 0xe0, 0x61, 0x42, 0x73, 0x31, 0xfe, 0x9f, 0x5f, 0xe0, 0xe9, 0x27, 0xcb, 0x91, 0xbd, 0x10, 0xb3}
 	binaryIDGlGetBufferParameteriv                           = binary.ID{0xcb, 0x07, 0x1f, 0x27, 0x1d, 0x18, 0xbe, 0xcf, 0x2e, 0xb3, 0x4c, 0x5d, 0x9b, 0x3d, 0x6b, 0xa9, 0xfa, 0xe9, 0x80, 0x54}
@@ -1347,10 +1347,10 @@ var (
 	binaryIDGlGetGraphicsResetStatusEXT                      = binary.ID{0x8d, 0x3f, 0x9e, 0x9d, 0x27, 0xd7, 0x66, 0xad, 0x95, 0x1f, 0xf9, 0x73, 0x27, 0xd8, 0x87, 0x5b, 0x64, 0xba, 0xc5, 0xb7}
 	binaryIDGlGetGraphicsResetStatusKHR                      = binary.ID{0xc0, 0x8b, 0x35, 0xb6, 0x03, 0x19, 0xe0, 0x58, 0xa0, 0x18, 0x9c, 0x30, 0x8c, 0x28, 0xb8, 0x43, 0x1a, 0x24, 0xa7, 0x99}
 	binaryIDGlGetImageHandleNV                               = binary.ID{0xf3, 0x04, 0x85, 0x85, 0xa8, 0xcd, 0xfe, 0x4c, 0x30, 0xd8, 0xd4, 0xb5, 0x55, 0xe3, 0x4c, 0x5d, 0x85, 0xb6, 0x34, 0xb6}
-	binaryIDGlGetInteger64i_v                                = binary.ID{0xa4, 0x2f, 0xa5, 0x68, 0xe0, 0xef, 0xa9, 0x08, 0xfc, 0x9b, 0xaf, 0x2e, 0x72, 0xde, 0xfe, 0xdf, 0x23, 0xc7, 0x4a, 0xdc}
-	binaryIDGlGetInteger64v                                  = binary.ID{0x9f, 0xda, 0xb9, 0x00, 0x1a, 0xfa, 0x37, 0xab, 0xde, 0x4a, 0xe4, 0x80, 0x1f, 0x40, 0xd7, 0x3b, 0xf7, 0xba, 0xbe, 0x63}
+	binaryIDGlGetInteger64i_v                                = binary.ID{0xa0, 0x44, 0x64, 0x5e, 0xb2, 0xd7, 0x06, 0xa6, 0xf2, 0x70, 0xc1, 0xd3, 0x6f, 0x5c, 0x95, 0xae, 0xac, 0xc8, 0xd2, 0xde}
+	binaryIDGlGetInteger64v                                  = binary.ID{0x37, 0x56, 0x84, 0xd7, 0xe6, 0x3b, 0x9f, 0x2d, 0xef, 0xc0, 0xe9, 0x0f, 0x3b, 0xd1, 0x23, 0x87, 0x92, 0xdb, 0x5b, 0xad}
 	binaryIDGlGetInteger64vAPPLE                             = binary.ID{0x33, 0x54, 0x3b, 0x22, 0xfa, 0xa3, 0xfd, 0x97, 0x69, 0x56, 0x4c, 0xff, 0x8a, 0x58, 0xd5, 0x8c, 0x33, 0xea, 0x43, 0xb6}
-	binaryIDGlGetIntegeri_v                                  = binary.ID{0x13, 0xe7, 0x2a, 0x4c, 0x18, 0x89, 0xb5, 0x52, 0xab, 0x71, 0xf4, 0x3d, 0x2c, 0x20, 0xe3, 0x40, 0x31, 0x4f, 0x1e, 0x02}
+	binaryIDGlGetIntegeri_v                                  = binary.ID{0x6c, 0x3c, 0x9b, 0x3f, 0x8c, 0xab, 0x37, 0x44, 0x6c, 0x35, 0x04, 0xff, 0x7a, 0x63, 0xea, 0x6a, 0x45, 0x6e, 0x0b, 0xf5}
 	binaryIDGlGetIntegeri_vEXT                               = binary.ID{0x7a, 0xa7, 0x58, 0x8e, 0x3d, 0x50, 0x9e, 0xcf, 0x3c, 0xc5, 0x3b, 0xb4, 0xc9, 0x80, 0xd8, 0xe0, 0xbd, 0xde, 0x4f, 0xae}
 	binaryIDGlGetIntegerv                                    = binary.ID{0x2f, 0x78, 0x38, 0xf6, 0xf1, 0x85, 0x3d, 0x81, 0xdb, 0x7e, 0xf3, 0xdb, 0x00, 0x9a, 0x52, 0xf1, 0x08, 0xd2, 0x1e, 0x46}
 	binaryIDGlGetInternalformatSampleivNV                    = binary.ID{0x3e, 0x2b, 0xbf, 0x6e, 0x70, 0xfb, 0x62, 0x5e, 0xbb, 0x9a, 0x23, 0x44, 0x92, 0x34, 0x6c, 0xcb, 0x47, 0x20, 0x49, 0x87}
@@ -26483,13 +26483,13 @@ func doEncodeGlGetBooleani_v(e binary.Encoder, o *GlGetBooleani_v) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Target)); err != nil {
+	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Data); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -26501,14 +26501,14 @@ func doDecodeGlGetBooleani_v(d binary.Decoder, o *GlGetBooleani_v) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = GLenum(obj)
+		o.Param = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if err := d.Value(&o.Data); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -26533,9 +26533,9 @@ var schemaGlGetBooleani_v = &schema.Class{
 	Name:    "GlGetBooleani_v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "GLbooleanᵖ", ID: (*GLbooleanᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLbooleanᵖ", ID: (*GLbooleanᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -28052,13 +28052,13 @@ func doEncodeGlGetInteger64i_v(e binary.Encoder, o *GlGetInteger64i_v) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Target)); err != nil {
+	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Data); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28070,14 +28070,14 @@ func doDecodeGlGetInteger64i_v(d binary.Decoder, o *GlGetInteger64i_v) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = GLenum(obj)
+		o.Param = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if err := d.Value(&o.Data); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28102,9 +28102,9 @@ var schemaGlGetInteger64i_v = &schema.Class{
 	Name:    "GlGetInteger64i_v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "GLint64ᵖ", ID: (*GLint64ᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLint64ᵖ", ID: (*GLint64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -28117,10 +28117,10 @@ func doEncodeGlGetInteger64v(e binary.Encoder, o *GlGetInteger64v) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Pname)); err != nil {
+	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Data); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28132,9 +28132,9 @@ func doDecodeGlGetInteger64v(d binary.Decoder, o *GlGetInteger64v) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Pname = GLenum(obj)
+		o.Param = GLenum(obj)
 	}
-	if err := d.Value(&o.Data); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28159,8 +28159,8 @@ var schemaGlGetInteger64v = &schema.Class{
 	Name:    "GlGetInteger64v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "GLint64ᵖ", ID: (*GLint64ᵖ)(nil).Class().ID()}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLint64ᵖ", ID: (*GLint64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -28229,13 +28229,13 @@ func doEncodeGlGetIntegeri_v(e binary.Encoder, o *GlGetIntegeri_v) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Target)); err != nil {
+	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Data); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28247,14 +28247,14 @@ func doDecodeGlGetIntegeri_v(d binary.Decoder, o *GlGetIntegeri_v) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = GLenum(obj)
+		o.Param = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if err := d.Value(&o.Data); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -28279,9 +28279,9 @@ var schemaGlGetIntegeri_v = &schema.Class{
 	Name:    "GlGetIntegeri_v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
 	},
 }
 

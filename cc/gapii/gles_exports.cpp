@@ -1009,12 +1009,12 @@ EXPORT void STDCALL glLineWidth(float width);
 EXPORT void STDCALL glMinSampleShading(float value);
 EXPORT void STDCALL glPolygonOffset(float scale_factor, float units);
 EXPORT void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
-EXPORT void STDCALL glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
+EXPORT void STDCALL glGetBooleani_v(uint32_t param, uint32_t index, uint8_t* values);
 EXPORT void STDCALL glGetBooleanv(uint32_t param, uint8_t* values);
 EXPORT void STDCALL glGetFloatv(uint32_t param, float* values);
-EXPORT void STDCALL glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data);
-EXPORT void STDCALL glGetInteger64v(uint32_t pname, int64_t* data);
-EXPORT void STDCALL glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data);
+EXPORT void STDCALL glGetInteger64i_v(uint32_t param, uint32_t index, int64_t* values);
+EXPORT void STDCALL glGetInteger64v(uint32_t param, int64_t* values);
+EXPORT void STDCALL glGetIntegeri_v(uint32_t param, uint32_t index, int32_t* values);
 EXPORT void STDCALL glGetIntegerv(uint32_t param, int32_t* values);
 EXPORT void STDCALL glGetInternalformativ(uint32_t target, uint32_t internalformat, uint32_t pname,
                                           int32_t bufSize, int32_t* params);
@@ -5755,10 +5755,10 @@ EXPORT void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t heig
     gapic::Lock<Spy> lock__(s);
     s->glViewport(x, y, width, height);
 }
-EXPORT void STDCALL glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data) {
+EXPORT void STDCALL glGetBooleani_v(uint32_t param, uint32_t index, uint8_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glGetBooleani_v(target, index, data);
+    s->glGetBooleani_v(param, index, values);
 }
 EXPORT void STDCALL glGetBooleanv(uint32_t param, uint8_t* values) {
     Spy* s = spy();
@@ -5770,20 +5770,20 @@ EXPORT void STDCALL glGetFloatv(uint32_t param, float* values) {
     gapic::Lock<Spy> lock__(s);
     s->glGetFloatv(param, values);
 }
-EXPORT void STDCALL glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data) {
+EXPORT void STDCALL glGetInteger64i_v(uint32_t param, uint32_t index, int64_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glGetInteger64i_v(target, index, data);
+    s->glGetInteger64i_v(param, index, values);
 }
-EXPORT void STDCALL glGetInteger64v(uint32_t pname, int64_t* data) {
+EXPORT void STDCALL glGetInteger64v(uint32_t param, int64_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glGetInteger64v(pname, data);
+    s->glGetInteger64v(param, values);
 }
-EXPORT void STDCALL glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data) {
+EXPORT void STDCALL glGetIntegeri_v(uint32_t param, uint32_t index, int32_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glGetIntegeri_v(target, index, data);
+    s->glGetIntegeri_v(param, index, values);
 }
 EXPORT void STDCALL glGetIntegerv(uint32_t param, int32_t* values) {
     Spy* s = spy();

@@ -7586,12 +7586,12 @@ typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
 typedef void(STDCALL *PFNGLMINSAMPLESHADING)(float value);
 typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
 typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
-typedef void(STDCALL *PFNGLGETBOOLEANI_V)(GLenum target, uint32_t index, uint8_t *data);
+typedef void(STDCALL *PFNGLGETBOOLEANI_V)(GLenum param, uint32_t index, uint8_t *values);
 typedef void(STDCALL *PFNGLGETBOOLEANV)(GLenum param, uint8_t *values);
 typedef void(STDCALL *PFNGLGETFLOATV)(GLenum param, float *values);
-typedef void(STDCALL *PFNGLGETINTEGER64I_V)(GLenum target, uint32_t index, int64_t *data);
-typedef void(STDCALL *PFNGLGETINTEGER64V)(GLenum pname, int64_t *data);
-typedef void(STDCALL *PFNGLGETINTEGERI_V)(GLenum target, uint32_t index, int32_t *data);
+typedef void(STDCALL *PFNGLGETINTEGER64I_V)(GLenum param, uint32_t index, int64_t *values);
+typedef void(STDCALL *PFNGLGETINTEGER64V)(GLenum param, int64_t *values);
+typedef void(STDCALL *PFNGLGETINTEGERI_V)(GLenum param, uint32_t index, int32_t *values);
 typedef void(STDCALL *PFNGLGETINTEGERV)(GLenum param, int32_t *values);
 typedef void(STDCALL *PFNGLGETINTERNALFORMATIV)(GLenum target, GLenum internalformat, GLenum pname,
                                                 int32_t bufSize, int32_t *params);

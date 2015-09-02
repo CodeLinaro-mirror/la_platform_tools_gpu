@@ -1175,12 +1175,12 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLMINSAMPLESHADING)(float value);
     typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
     typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
-    typedef void(STDCALL *PFNGLGETBOOLEANI_V)(uint32_t target, uint32_t index, uint8_t *data);
+    typedef void(STDCALL *PFNGLGETBOOLEANI_V)(uint32_t param, uint32_t index, uint8_t *values);
     typedef void(STDCALL *PFNGLGETBOOLEANV)(uint32_t param, uint8_t *values);
     typedef void(STDCALL *PFNGLGETFLOATV)(uint32_t param, float *values);
-    typedef void(STDCALL *PFNGLGETINTEGER64I_V)(uint32_t target, uint32_t index, int64_t *data);
-    typedef void(STDCALL *PFNGLGETINTEGER64V)(uint32_t pname, int64_t *data);
-    typedef void(STDCALL *PFNGLGETINTEGERI_V)(uint32_t target, uint32_t index, int32_t *data);
+    typedef void(STDCALL *PFNGLGETINTEGER64I_V)(uint32_t param, uint32_t index, int64_t *values);
+    typedef void(STDCALL *PFNGLGETINTEGER64V)(uint32_t param, int64_t *values);
+    typedef void(STDCALL *PFNGLGETINTEGERI_V)(uint32_t param, uint32_t index, int32_t *values);
     typedef void(STDCALL *PFNGLGETINTEGERV)(uint32_t param, int32_t *values);
     typedef void(STDCALL *PFNGLGETINTERNALFORMATIV)(uint32_t target, uint32_t internalformat,
                                                     uint32_t pname, int32_t bufSize,

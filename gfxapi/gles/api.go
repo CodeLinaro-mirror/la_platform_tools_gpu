@@ -33867,13 +33867,13 @@ func (a *GlViewport) Observations() *atom.Observations { return &a.observations 
 type GlGetBooleani_v struct {
 	binary.Generate
 	observations atom.Observations
-	Target       GLenum
+	Param        GLenum
 	Index        GLuint
-	Data         GLbooleanᵖ
+	Values       GLbooleanᵖ
 }
 
 func (a *GlGetBooleani_v) String() string {
-	return fmt.Sprintf("glGetBooleani_v(target: %v, index: %v, data: %v)", a.Target, a.Index, a.Data)
+	return fmt.Sprintf("glGetBooleani_v(param: %v, index: %v, values: %v)", a.Param, a.Index, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -33967,13 +33967,13 @@ func (a *GlGetFloatv) Observations() *atom.Observations { return &a.observations
 type GlGetInteger64i_v struct {
 	binary.Generate
 	observations atom.Observations
-	Target       GLenum
+	Param        GLenum
 	Index        GLuint
-	Data         GLint64ᵖ
+	Values       GLint64ᵖ
 }
 
 func (a *GlGetInteger64i_v) String() string {
-	return fmt.Sprintf("glGetInteger64i_v(target: %v, index: %v, data: %v)", a.Target, a.Index, a.Data)
+	return fmt.Sprintf("glGetInteger64i_v(param: %v, index: %v, values: %v)", a.Param, a.Index, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -34001,12 +34001,12 @@ func (a *GlGetInteger64i_v) Observations() *atom.Observations { return &a.observ
 type GlGetInteger64v struct {
 	binary.Generate
 	observations atom.Observations
-	Pname        GLenum
-	Data         GLint64ᵖ
+	Param        GLenum
+	Values       GLint64ᵖ
 }
 
 func (a *GlGetInteger64v) String() string {
-	return fmt.Sprintf("glGetInteger64v(pname: %v, data: %v)", a.Pname, a.Data)
+	return fmt.Sprintf("glGetInteger64v(param: %v, values: %v)", a.Param, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -34034,13 +34034,13 @@ func (a *GlGetInteger64v) Observations() *atom.Observations { return &a.observat
 type GlGetIntegeri_v struct {
 	binary.Generate
 	observations atom.Observations
-	Target       GLenum
+	Param        GLenum
 	Index        GLuint
-	Data         GLintᵖ
+	Values       GLintᵖ
 }
 
 func (a *GlGetIntegeri_v) String() string {
-	return fmt.Sprintf("glGetIntegeri_v(target: %v, index: %v, data: %v)", a.Target, a.Index, a.Data)
+	return fmt.Sprintf("glGetIntegeri_v(param: %v, index: %v, values: %v)", a.Param, a.Index, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -46624,8 +46624,8 @@ func NewGlPolygonOffset(Scale_factor GLfloat, Units GLfloat) *GlPolygonOffset {
 func NewGlViewport(X GLint, Y GLint, Width GLsizei, Height GLsizei) *GlViewport {
 	return &GlViewport{X: X, Y: Y, Width: Width, Height: Height}
 }
-func NewGlGetBooleani_v(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetBooleani_v {
-	return &GlGetBooleani_v{Target: Target, Index: Index, Data: GLbooleanᵖ{Pointer: Data}}
+func NewGlGetBooleani_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetBooleani_v {
+	return &GlGetBooleani_v{Param: Param, Index: Index, Values: GLbooleanᵖ{Pointer: Values}}
 }
 func NewGlGetBooleanv(Param GLenum, Values memory.Pointer) *GlGetBooleanv {
 	return &GlGetBooleanv{Param: Param, Values: GLbooleanᵖ{Pointer: Values}}
@@ -46633,14 +46633,14 @@ func NewGlGetBooleanv(Param GLenum, Values memory.Pointer) *GlGetBooleanv {
 func NewGlGetFloatv(Param GLenum, Values memory.Pointer) *GlGetFloatv {
 	return &GlGetFloatv{Param: Param, Values: GLfloatᵖ{Pointer: Values}}
 }
-func NewGlGetInteger64i_v(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetInteger64i_v {
-	return &GlGetInteger64i_v{Target: Target, Index: Index, Data: GLint64ᵖ{Pointer: Data}}
+func NewGlGetInteger64i_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetInteger64i_v {
+	return &GlGetInteger64i_v{Param: Param, Index: Index, Values: GLint64ᵖ{Pointer: Values}}
 }
-func NewGlGetInteger64v(Pname GLenum, Data memory.Pointer) *GlGetInteger64v {
-	return &GlGetInteger64v{Pname: Pname, Data: GLint64ᵖ{Pointer: Data}}
+func NewGlGetInteger64v(Param GLenum, Values memory.Pointer) *GlGetInteger64v {
+	return &GlGetInteger64v{Param: Param, Values: GLint64ᵖ{Pointer: Values}}
 }
-func NewGlGetIntegeri_v(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetIntegeri_v {
-	return &GlGetIntegeri_v{Target: Target, Index: Index, Data: GLintᵖ{Pointer: Data}}
+func NewGlGetIntegeri_v(Param GLenum, Index GLuint, Values memory.Pointer) *GlGetIntegeri_v {
+	return &GlGetIntegeri_v{Param: Param, Index: Index, Values: GLintᵖ{Pointer: Values}}
 }
 func NewGlGetIntegerv(Param GLenum, Values memory.Pointer) *GlGetIntegerv {
 	return &GlGetIntegerv{Param: Param, Values: GLintᵖ{Pointer: Values}}

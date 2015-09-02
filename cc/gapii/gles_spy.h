@@ -1597,17 +1597,17 @@ public:
     inline bool hasGlViewport() const;
     inline void glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
     inline bool hasGlGetBooleani_v() const;
-    inline void glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
+    inline void glGetBooleani_v(uint32_t param, uint32_t index, uint8_t* values);
     inline bool hasGlGetBooleanv() const;
     inline void glGetBooleanv(uint32_t param, uint8_t* values);
     inline bool hasGlGetFloatv() const;
     inline void glGetFloatv(uint32_t param, float* values);
     inline bool hasGlGetInteger64i_v() const;
-    inline void glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data);
+    inline void glGetInteger64i_v(uint32_t param, uint32_t index, int64_t* values);
     inline bool hasGlGetInteger64v() const;
-    inline void glGetInteger64v(uint32_t pname, int64_t* data);
+    inline void glGetInteger64v(uint32_t param, int64_t* values);
     inline bool hasGlGetIntegeri_v() const;
-    inline void glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data);
+    inline void glGetIntegeri_v(uint32_t param, uint32_t index, int32_t* values);
     inline bool hasGlGetIntegerv() const;
     inline void glGetIntegerv(uint32_t param, int32_t* values);
     inline bool hasGlGetInternalformativ() const;
@@ -22928,8 +22928,8 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
 
 inline bool GlesSpy::hasGlGetBooleani_v() const { return mImports.glGetBooleani_v != nullptr; }
 
-inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data) {
-    GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", target, index, data);
+inline void GlesSpy::glGetBooleani_v(uint32_t param, uint32_t index, uint8_t* values) {
+    GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", param, index, values);
 
     if (!hasGlGetBooleani_v()) {
         GAPID_WARNING("Application called unsupported function glGetBooleani_v");
@@ -22940,278 +22940,1546 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
     do {
         uint32_t l_minRequiredVersion_1124_major = 3;
         uint32_t l_minRequiredVersion_1124_minor = 1;
-        switch (target) {
-            case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:                       // fall-through...
-            case GLenum::GL_ALPHA_BITS:                                     // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_BLEND:                                          // fall-through...
-            case GLenum::GL_BLEND_COLOR:                                    // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                                  // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:                           // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                             // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                                  // fall-through...
-            case GLenum::GL_BLUE_BITS:                                      // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                                // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:                     // fall-through...
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_CULL_FACE:                                      // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                                 // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                                // fall-through...
-            case GLenum::GL_DEPTH_BITS:                                     // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                                     // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                                    // fall-through...
-            case GLenum::GL_DEPTH_TEST:                                     // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                                // fall-through...
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:               // fall-through...
-            case GLenum::GL_DITHER:                                         // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:                   // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_FRONT_FACE:                                     // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:                           // fall-through...
-            case GLenum::GL_GREEN_BITS:                                     // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                          // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:               // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:                 // fall-through...
-            case GLenum::GL_LINE_WIDTH:                                     // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:             // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:                   // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:        // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:               // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:                    // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:                // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:                     // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:                 // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:                   // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:                    // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:                      // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:                   // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                         // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                        // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                          // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                            // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                          // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:                  // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:             // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                               // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                          // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:                            // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                             // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:                     // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:              // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:                     // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                              // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:                 // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:                      // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                                 // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:                          // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:                            // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:                           // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                       // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_RED_BITS:                                       // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_SAMPLES:                                        // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:                       // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                                 // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                                // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:                         // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:                          // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                                    // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                                   // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:                          // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                                // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:                  // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:         // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:                     // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:                    // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                               // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:                        // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:                         // fall-through...
-            case GLenum::GL_STENCIL_BITS:                                   // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:                            // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                                   // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                                   // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:                        // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:                        // fall-through...
-            case GLenum::GL_STENCIL_REF:                                    // fall-through...
-            case GLenum::GL_STENCIL_TEST:                                   // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                             // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                              // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                                  // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:                 // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:                       // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                               // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING:                           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                         // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                          // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE:                          // fall-through...
-            case GLenum::GL_VIEWPORT: {
+        uint32_t l_observeGlGetWrites_1125_param = param;
+        GLboolean* l_observeGlGetWrites_1125_v = values;
+        observe(observations.mReads);
+        mImports.glGetBooleani_v(param, index, values);
+        switch (l_observeGlGetWrites_1125_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_1126_major = 2;
+                uint32_t l_minRequiredVersion_1126_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
                 break;
             }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1127_major = 2;
+                uint32_t l_minRequiredVersion_1127_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_1128_major = 2;
+                uint32_t l_minRequiredVersion_1128_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_1129_major = 2;
+                uint32_t l_minRequiredVersion_1129_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1130_major = 2;
+                uint32_t l_minRequiredVersion_1130_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_1131_major = 2;
+                uint32_t l_minRequiredVersion_1131_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_1132_major = 2;
+                uint32_t l_minRequiredVersion_1132_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_1133_major = 2;
+                uint32_t l_minRequiredVersion_1133_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_1134_major = 2;
+                uint32_t l_minRequiredVersion_1134_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_1135_major = 2;
+                uint32_t l_minRequiredVersion_1135_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_1136_major = 2;
+                uint32_t l_minRequiredVersion_1136_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_1137_major = 2;
+                uint32_t l_minRequiredVersion_1137_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_1138_major = 2;
+                uint32_t l_minRequiredVersion_1138_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_1139_major = 2;
+                uint32_t l_minRequiredVersion_1139_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1140_major = 2;
+                uint32_t l_minRequiredVersion_1140_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1141_major = 2;
+                uint32_t l_minRequiredVersion_1141_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1142_major = 2;
+                uint32_t l_minRequiredVersion_1142_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_1143_major = 3;
+                uint32_t l_minRequiredVersion_1143_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_1144_major = 3;
+                uint32_t l_minRequiredVersion_1144_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1145_major = 3;
+                uint32_t l_minRequiredVersion_1145_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1146_major = 3;
+                uint32_t l_minRequiredVersion_1146_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_1147_major = 2;
+                uint32_t l_minRequiredVersion_1147_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_1148_major = 2;
+                uint32_t l_minRequiredVersion_1148_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_1149_major = 2;
+                uint32_t l_minRequiredVersion_1149_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1150_major = 3;
+                uint32_t l_minRequiredVersion_1150_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1151_major = 3;
+                uint32_t l_minRequiredVersion_1151_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1152_major = 3;
+                uint32_t l_minRequiredVersion_1152_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_1153_major = 2;
+                uint32_t l_minRequiredVersion_1153_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1154_major = 2;
+                uint32_t l_minRequiredVersion_1154_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_1155_major = 2;
+                uint32_t l_minRequiredVersion_1155_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_1156_major = 2;
+                uint32_t l_minRequiredVersion_1156_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_1157_major = 2;
+                uint32_t l_minRequiredVersion_1157_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1158_major = 2;
+                uint32_t l_minRequiredVersion_1158_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1159_major = 3;
+                uint32_t l_minRequiredVersion_1159_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_1160_major = 2;
+                uint32_t l_minRequiredVersion_1160_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_1161_major = 3;
+                uint32_t l_minRequiredVersion_1161_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1162_major = 2;
+                uint32_t l_minRequiredVersion_1162_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1163_major = 2;
+                uint32_t l_minRequiredVersion_1163_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_1164_major = 3;
+                uint32_t l_minRequiredVersion_1164_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_1165_major = 3;
+                uint32_t l_minRequiredVersion_1165_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_1166_major = 2;
+                uint32_t l_minRequiredVersion_1166_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_1167_major = 2;
+                uint32_t l_minRequiredVersion_1167_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_1168_major = 2;
+                uint32_t l_minRequiredVersion_1168_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_1169_major = 3;
+                uint32_t l_minRequiredVersion_1169_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_1170_major = 2;
+                uint32_t l_minRequiredVersion_1170_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_1171_major = 2;
+                uint32_t l_minRequiredVersion_1171_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_1172_major = 3;
+                uint32_t l_minRequiredVersion_1172_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_1173_major = 2;
+                uint32_t l_minRequiredVersion_1173_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_1174_major = 3;
+                uint32_t l_minRequiredVersion_1174_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1175_major = 3;
+                uint32_t l_minRequiredVersion_1175_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_1176_major = 3;
+                uint32_t l_minRequiredVersion_1176_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1177_major = 3;
+                uint32_t l_minRequiredVersion_1177_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_1178_major = 3;
+                uint32_t l_minRequiredVersion_1178_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_1179_major = 3;
+                uint32_t l_minRequiredVersion_1179_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1180_major = 3;
+                uint32_t l_minRequiredVersion_1180_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1181_major = 3;
+                uint32_t l_minRequiredVersion_1181_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1182_major = 3;
+                uint32_t l_minRequiredVersion_1182_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1183_major = 3;
+                uint32_t l_minRequiredVersion_1183_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1184_major = 3;
+                uint32_t l_minRequiredVersion_1184_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1185_major = 3;
+                uint32_t l_minRequiredVersion_1185_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1186_major = 3;
+                uint32_t l_minRequiredVersion_1186_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1187_major = 2;
+                uint32_t l_minRequiredVersion_1187_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1188_major = 3;
+                uint32_t l_minRequiredVersion_1188_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1189_major = 3;
+                uint32_t l_minRequiredVersion_1189_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1190_major = 3;
+                uint32_t l_minRequiredVersion_1190_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1191_major = 3;
+                uint32_t l_minRequiredVersion_1191_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1192_major = 3;
+                uint32_t l_minRequiredVersion_1192_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1193_major = 3;
+                uint32_t l_minRequiredVersion_1193_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1194_major = 3;
+                uint32_t l_minRequiredVersion_1194_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1195_major = 3;
+                uint32_t l_minRequiredVersion_1195_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1196_major = 3;
+                uint32_t l_minRequiredVersion_1196_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_1197_major = 3;
+                uint32_t l_minRequiredVersion_1197_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1198_major = 3;
+                uint32_t l_minRequiredVersion_1198_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_1199_major = 3;
+                uint32_t l_minRequiredVersion_1199_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1200_major = 2;
+                uint32_t l_minRequiredVersion_1200_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1201_major = 3;
+                uint32_t l_minRequiredVersion_1201_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1202_major = 3;
+                uint32_t l_minRequiredVersion_1202_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1203_major = 3;
+                uint32_t l_minRequiredVersion_1203_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_1204_major = 3;
+                uint32_t l_minRequiredVersion_1204_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_1205_major = 3;
+                uint32_t l_minRequiredVersion_1205_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_1206_major = 3;
+                uint32_t l_minRequiredVersion_1206_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_1207_major = 3;
+                uint32_t l_minRequiredVersion_1207_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1208_major = 3;
+                uint32_t l_minRequiredVersion_1208_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1209_major = 3;
+                uint32_t l_minRequiredVersion_1209_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1210_major = 3;
+                uint32_t l_minRequiredVersion_1210_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1211_major = 3;
+                uint32_t l_minRequiredVersion_1211_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1212_major = 3;
+                uint32_t l_minRequiredVersion_1212_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1213_major = 3;
+                uint32_t l_minRequiredVersion_1213_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1214_major = 3;
+                uint32_t l_minRequiredVersion_1214_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1215_major = 3;
+                uint32_t l_minRequiredVersion_1215_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1216_major = 2;
+                uint32_t l_minRequiredVersion_1216_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_1217_major = 3;
+                uint32_t l_minRequiredVersion_1217_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_1218_major = 3;
+                uint32_t l_minRequiredVersion_1218_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1219_major = 3;
+                uint32_t l_minRequiredVersion_1219_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_1220_major = 3;
+                uint32_t l_minRequiredVersion_1220_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1221_major = 3;
+                uint32_t l_minRequiredVersion_1221_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1222_major = 3;
+                uint32_t l_minRequiredVersion_1222_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1223_major = 3;
+                uint32_t l_minRequiredVersion_1223_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1224_major = 3;
+                uint32_t l_minRequiredVersion_1224_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1225_major = 3;
+                uint32_t l_minRequiredVersion_1225_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_1226_major = 3;
+                uint32_t l_minRequiredVersion_1226_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1227_major = 3;
+                uint32_t l_minRequiredVersion_1227_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1228_major = 3;
+                uint32_t l_minRequiredVersion_1228_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1229_major = 3;
+                uint32_t l_minRequiredVersion_1229_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1230_major = 3;
+                uint32_t l_minRequiredVersion_1230_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1231_major = 3;
+                uint32_t l_minRequiredVersion_1231_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1232_major = 3;
+                uint32_t l_minRequiredVersion_1232_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1233_major = 3;
+                uint32_t l_minRequiredVersion_1233_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_1234_major = 3;
+                uint32_t l_minRequiredVersion_1234_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1235_major = 3;
+                uint32_t l_minRequiredVersion_1235_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1236_major = 2;
+                uint32_t l_minRequiredVersion_1236_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_1237_major = 3;
+                uint32_t l_minRequiredVersion_1237_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_1238_major = 3;
+                uint32_t l_minRequiredVersion_1238_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_1239_major = 3;
+                uint32_t l_minRequiredVersion_1239_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1240_major = 3;
+                uint32_t l_minRequiredVersion_1240_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1241_major = 3;
+                uint32_t l_minRequiredVersion_1241_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1242_major = 3;
+                uint32_t l_minRequiredVersion_1242_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1243_major = 3;
+                uint32_t l_minRequiredVersion_1243_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1244_major = 3;
+                uint32_t l_minRequiredVersion_1244_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1245_major = 3;
+                uint32_t l_minRequiredVersion_1245_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1246_major = 3;
+                uint32_t l_minRequiredVersion_1246_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1247_major = 3;
+                uint32_t l_minRequiredVersion_1247_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1248_major = 3;
+                uint32_t l_minRequiredVersion_1248_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1249_major = 3;
+                uint32_t l_minRequiredVersion_1249_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1250_major = 3;
+                uint32_t l_minRequiredVersion_1250_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1251_major = 3;
+                uint32_t l_minRequiredVersion_1251_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1252_major = 3;
+                uint32_t l_minRequiredVersion_1252_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1253_major = 3;
+                uint32_t l_minRequiredVersion_1253_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1254_major = 3;
+                uint32_t l_minRequiredVersion_1254_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1255_major = 3;
+                uint32_t l_minRequiredVersion_1255_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1256_major = 3;
+                uint32_t l_minRequiredVersion_1256_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1257_major = 3;
+                uint32_t l_minRequiredVersion_1257_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1258_major = 3;
+                uint32_t l_minRequiredVersion_1258_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1259_major = 3;
+                uint32_t l_minRequiredVersion_1259_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1260_major = 3;
+                uint32_t l_minRequiredVersion_1260_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_1261_major = 3;
+                uint32_t l_minRequiredVersion_1261_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1262_major = 3;
+                uint32_t l_minRequiredVersion_1262_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1263_major = 3;
+                uint32_t l_minRequiredVersion_1263_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1264_major = 2;
+                uint32_t l_minRequiredVersion_1264_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_1265_major = 3;
+                uint32_t l_minRequiredVersion_1265_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1266_major = 2;
+                uint32_t l_minRequiredVersion_1266_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1267_major = 3;
+                uint32_t l_minRequiredVersion_1267_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1268_major = 3;
+                uint32_t l_minRequiredVersion_1268_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1269_major = 3;
+                uint32_t l_minRequiredVersion_1269_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1270_major = 3;
+                uint32_t l_minRequiredVersion_1270_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1271_major = 3;
+                uint32_t l_minRequiredVersion_1271_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_1272_major = 3;
+                uint32_t l_minRequiredVersion_1272_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1273_major = 3;
+                uint32_t l_minRequiredVersion_1273_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_1274_major = 2;
+                uint32_t l_minRequiredVersion_1274_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1275_major = 3;
+                uint32_t l_minRequiredVersion_1275_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_1276_major = 3;
+                uint32_t l_minRequiredVersion_1276_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_1277_major = 3;
+                uint32_t l_minRequiredVersion_1277_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1278_major = 2;
+                uint32_t l_minRequiredVersion_1278_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1279_major = 3;
+                uint32_t l_minRequiredVersion_1279_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1280_major = 3;
+                uint32_t l_minRequiredVersion_1280_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1281_major = 3;
+                uint32_t l_minRequiredVersion_1281_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1282_major = 2;
+                uint32_t l_minRequiredVersion_1282_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1283_major = 3;
+                uint32_t l_minRequiredVersion_1283_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1284_major = 3;
+                uint32_t l_minRequiredVersion_1284_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1285_major = 2;
+                uint32_t l_minRequiredVersion_1285_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_1286_major = 2;
+                uint32_t l_minRequiredVersion_1286_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1287_major = 3;
+                uint32_t l_minRequiredVersion_1287_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1288_major = 3;
+                uint32_t l_minRequiredVersion_1288_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_1289_major = 3;
+                uint32_t l_minRequiredVersion_1289_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_1290_major = 3;
+                uint32_t l_minRequiredVersion_1290_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1291_major = 3;
+                uint32_t l_minRequiredVersion_1291_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1292_major = 2;
+                uint32_t l_minRequiredVersion_1292_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_1293_major = 3;
+                uint32_t l_minRequiredVersion_1293_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1294_major = 3;
+                uint32_t l_minRequiredVersion_1294_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1295_major = 2;
+                uint32_t l_minRequiredVersion_1295_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1296_major = 2;
+                uint32_t l_minRequiredVersion_1296_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1297_major = 3;
+                uint32_t l_minRequiredVersion_1297_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1298_major = 3;
+                uint32_t l_minRequiredVersion_1298_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1299_major = 3;
+                uint32_t l_minRequiredVersion_1299_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_1300_major = 3;
+                uint32_t l_minRequiredVersion_1300_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1301_major = 3;
+                uint32_t l_minRequiredVersion_1301_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1302_major = 3;
+                uint32_t l_minRequiredVersion_1302_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_1303_major = 2;
+                uint32_t l_minRequiredVersion_1303_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_1304_major = 2;
+                uint32_t l_minRequiredVersion_1304_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_1305_major = 2;
+                uint32_t l_minRequiredVersion_1305_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_1306_major = 3;
+                uint32_t l_minRequiredVersion_1306_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_1307_major = 3;
+                uint32_t l_minRequiredVersion_1307_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1308_major = 3;
+                uint32_t l_minRequiredVersion_1308_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_1309_major = 3;
+                uint32_t l_minRequiredVersion_1309_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_1310_major = 3;
+                uint32_t l_minRequiredVersion_1310_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_1311_major = 3;
+                uint32_t l_minRequiredVersion_1311_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1312_major = 3;
+                uint32_t l_minRequiredVersion_1312_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_1313_major = 2;
+                uint32_t l_minRequiredVersion_1313_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1314_major = 2;
+                uint32_t l_minRequiredVersion_1314_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_1315_major = 3;
+                uint32_t l_minRequiredVersion_1315_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_1316_major = 2;
+                uint32_t l_minRequiredVersion_1316_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_1317_major = 2;
+                uint32_t l_minRequiredVersion_1317_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_1318_major = 2;
+                uint32_t l_minRequiredVersion_1318_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_1319_major = 2;
+                uint32_t l_minRequiredVersion_1319_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_1320_major = 2;
+                uint32_t l_minRequiredVersion_1320_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_1321_major = 3;
+                uint32_t l_minRequiredVersion_1321_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_1322_major = 3;
+                uint32_t l_minRequiredVersion_1322_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_1323_major = 2;
+                uint32_t l_minRequiredVersion_1323_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_1324_major = 2;
+                uint32_t l_minRequiredVersion_1324_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_1325_major = 2;
+                uint32_t l_minRequiredVersion_1325_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1326_major = 2;
+                uint32_t l_minRequiredVersion_1326_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_1327_major = 2;
+                uint32_t l_minRequiredVersion_1327_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1328_major = 3;
+                uint32_t l_minRequiredVersion_1328_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1329_major = 3;
+                uint32_t l_minRequiredVersion_1329_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1330_major = 3;
+                uint32_t l_minRequiredVersion_1330_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1331_major = 3;
+                uint32_t l_minRequiredVersion_1331_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_1332_major = 2;
+                uint32_t l_minRequiredVersion_1332_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_1333_major = 2;
+                uint32_t l_minRequiredVersion_1333_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1334_major = 2;
+                uint32_t l_minRequiredVersion_1334_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1335_major = 2;
+                uint32_t l_minRequiredVersion_1335_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_1336_major = 2;
+                uint32_t l_minRequiredVersion_1336_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1337_major = 2;
+                uint32_t l_minRequiredVersion_1337_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1338_major = 2;
+                uint32_t l_minRequiredVersion_1338_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_1339_major = 2;
+                uint32_t l_minRequiredVersion_1339_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1340_major = 2;
+                uint32_t l_minRequiredVersion_1340_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_1341_major = 2;
+                uint32_t l_minRequiredVersion_1341_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_1342_major = 2;
+                uint32_t l_minRequiredVersion_1342_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1343_major = 2;
+                uint32_t l_minRequiredVersion_1343_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1344_major = 2;
+                uint32_t l_minRequiredVersion_1344_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_1345_major = 2;
+                uint32_t l_minRequiredVersion_1345_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_1346_major = 2;
+                uint32_t l_minRequiredVersion_1346_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1347_major = 2;
+                uint32_t l_minRequiredVersion_1347_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1348_major = 2;
+                uint32_t l_minRequiredVersion_1348_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_1349_major = 2;
+                uint32_t l_minRequiredVersion_1349_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_1350_major = 2;
+                uint32_t l_minRequiredVersion_1350_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_1351_major = 3;
+                uint32_t l_minRequiredVersion_1351_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_1352_major = 3;
+                uint32_t l_minRequiredVersion_1352_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_1353_major = 3;
+                uint32_t l_minRequiredVersion_1353_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_1354_major = 3;
+                uint32_t l_minRequiredVersion_1354_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_1355_major = 3;
+                uint32_t l_minRequiredVersion_1355_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_1356_major = 2;
+                uint32_t l_minRequiredVersion_1356_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_1357_major = 3;
+                uint32_t l_minRequiredVersion_1357_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1358_major = 3;
+                uint32_t l_minRequiredVersion_1358_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1125_major = 3;
-                uint32_t l_minRequiredVersion_1125_minor = 2;
+                uint32_t l_minRequiredVersion_1359_major = 3;
+                uint32_t l_minRequiredVersion_1359_minor = 2;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_1360_major = 3;
+                uint32_t l_minRequiredVersion_1360_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_1361_major = 3;
+                uint32_t l_minRequiredVersion_1361_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1362_major = 3;
+                uint32_t l_minRequiredVersion_1362_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1363_major = 3;
+                uint32_t l_minRequiredVersion_1363_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1364_major = 3;
+                uint32_t l_minRequiredVersion_1364_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_1365_major = 3;
+                uint32_t l_minRequiredVersion_1365_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1366_major = 3;
+                uint32_t l_minRequiredVersion_1366_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1367_major = 3;
+                uint32_t l_minRequiredVersion_1367_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1368_major = 3;
+                uint32_t l_minRequiredVersion_1368_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1369_major = 3;
+                uint32_t l_minRequiredVersion_1369_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1370_major = 2;
+                uint32_t l_minRequiredVersion_1370_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_1371_major = 3;
+                uint32_t l_minRequiredVersion_1371_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1372_major = 3;
+                uint32_t l_minRequiredVersion_1372_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_1373_major = 3;
+                uint32_t l_minRequiredVersion_1373_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1374_major = 3;
+                uint32_t l_minRequiredVersion_1374_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1375_major = 3;
+                uint32_t l_minRequiredVersion_1375_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_1376_major = 3;
+                uint32_t l_minRequiredVersion_1376_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_1377_major = 3;
+                uint32_t l_minRequiredVersion_1377_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_1378_major = 3;
+                uint32_t l_minRequiredVersion_1378_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_1379_major = 3;
+                uint32_t l_minRequiredVersion_1379_minor = 1;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_1380_major = 2;
+                uint32_t l_minRequiredVersion_1380_minor = 0;
+                write(slice(l_observeGlGetWrites_1125_v, 0, 4));
                 break;
             }
         }
-        observe(observations.mReads);
-        mImports.glGetBooleani_v(target, index, data);
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetBooleani_v coder(
-            observations, target, index,
+            observations, param, index,
             gapic::coder::gles::GLboolean__P(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
+                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Object(&coder);
 }
 
@@ -23227,287 +24495,16 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1127_major = 2;
-        uint32_t l_minRequiredVersion_1127_minor = 0;
-        switch (param) {
-            case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:          // fall-through...
-            case GLenum::GL_ALPHA_BITS:                        // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_BLEND:                             // fall-through...
-            case GLenum::GL_BLEND_COLOR:                       // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                     // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:              // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                     // fall-through...
-            case GLenum::GL_BLUE_BITS:                         // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                   // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:        // fall-through...
-            case GLenum::GL_CULL_FACE:                         // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                    // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                   // fall-through...
-            case GLenum::GL_DEPTH_BITS:                        // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                        // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                       // fall-through...
-            case GLenum::GL_DEPTH_TEST:                        // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                   // fall-through...
-            case GLenum::GL_DITHER:                            // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:      // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:          // fall-through...
-            case GLenum::GL_FRONT_FACE:                        // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:              // fall-through...
-            case GLenum::GL_GREEN_BITS:                        // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:  // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:    // fall-through...
-            case GLenum::GL_LINE_WIDTH:                        // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:  // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:      // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:             // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                  // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:    // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:        // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                 // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:    // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:         // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:             // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:               // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:              // fall-through...
-            case GLenum::GL_RED_BITS:                          // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:              // fall-through...
-            case GLenum::GL_SAMPLES:                           // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:          // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                    // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                   // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:            // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:             // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                       // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                      // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:             // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                  // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:           // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:            // fall-through...
-            case GLenum::GL_STENCIL_BITS:                      // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:               // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                      // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                      // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:           // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:           // fall-through...
-            case GLenum::GL_STENCIL_REF:                       // fall-through...
-            case GLenum::GL_STENCIL_TEST:                      // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                 // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                     // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:          // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                  // fall-through...
-            case GLenum::GL_VIEWPORT: {
-                break;
-            }
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_1128_major = 3;
-                uint32_t l_minRequiredVersion_1128_minor = 0;
-                break;
-            }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1129_major = 3;
-                uint32_t l_minRequiredVersion_1129_minor = 1;
-                break;
-            }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1130_major = 3;
-                uint32_t l_minRequiredVersion_1130_minor = 2;
-                break;
-            }
-        }
+        uint32_t l_minRequiredVersion_1382_major = 2;
+        uint32_t l_minRequiredVersion_1382_minor = 0;
         Slice<GLboolean> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1133_msg = "No context bound";
+            std::string l_error_1384_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1132_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1132_result;
+        std::shared_ptr<Context> l_GetContext_1383_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1383_result;
         observe(observations.mReads);
         mImports.glGetBooleanv(param, values);
         switch (param) {
@@ -23574,6 +24571,1537 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
                 break;
             }
         }
+        uint32_t l_observeGlGetWrites_1385_param = param;
+        GLboolean* l_observeGlGetWrites_1385_v = values;
+        switch (l_observeGlGetWrites_1385_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_1386_major = 2;
+                uint32_t l_minRequiredVersion_1386_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1387_major = 2;
+                uint32_t l_minRequiredVersion_1387_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_1388_major = 2;
+                uint32_t l_minRequiredVersion_1388_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_1389_major = 2;
+                uint32_t l_minRequiredVersion_1389_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1390_major = 2;
+                uint32_t l_minRequiredVersion_1390_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_1391_major = 2;
+                uint32_t l_minRequiredVersion_1391_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_1392_major = 2;
+                uint32_t l_minRequiredVersion_1392_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_1393_major = 2;
+                uint32_t l_minRequiredVersion_1393_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_1394_major = 2;
+                uint32_t l_minRequiredVersion_1394_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_1395_major = 2;
+                uint32_t l_minRequiredVersion_1395_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_1396_major = 2;
+                uint32_t l_minRequiredVersion_1396_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_1397_major = 2;
+                uint32_t l_minRequiredVersion_1397_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_1398_major = 2;
+                uint32_t l_minRequiredVersion_1398_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_1399_major = 2;
+                uint32_t l_minRequiredVersion_1399_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1400_major = 2;
+                uint32_t l_minRequiredVersion_1400_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1401_major = 2;
+                uint32_t l_minRequiredVersion_1401_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1402_major = 2;
+                uint32_t l_minRequiredVersion_1402_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_1403_major = 3;
+                uint32_t l_minRequiredVersion_1403_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_1404_major = 3;
+                uint32_t l_minRequiredVersion_1404_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1405_major = 3;
+                uint32_t l_minRequiredVersion_1405_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1406_major = 3;
+                uint32_t l_minRequiredVersion_1406_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_1407_major = 2;
+                uint32_t l_minRequiredVersion_1407_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_1408_major = 2;
+                uint32_t l_minRequiredVersion_1408_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_1409_major = 2;
+                uint32_t l_minRequiredVersion_1409_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1410_major = 3;
+                uint32_t l_minRequiredVersion_1410_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1411_major = 3;
+                uint32_t l_minRequiredVersion_1411_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1412_major = 3;
+                uint32_t l_minRequiredVersion_1412_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_1413_major = 2;
+                uint32_t l_minRequiredVersion_1413_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1414_major = 2;
+                uint32_t l_minRequiredVersion_1414_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_1415_major = 2;
+                uint32_t l_minRequiredVersion_1415_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_1416_major = 2;
+                uint32_t l_minRequiredVersion_1416_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_1417_major = 2;
+                uint32_t l_minRequiredVersion_1417_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1418_major = 2;
+                uint32_t l_minRequiredVersion_1418_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1419_major = 3;
+                uint32_t l_minRequiredVersion_1419_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_1420_major = 2;
+                uint32_t l_minRequiredVersion_1420_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_1421_major = 3;
+                uint32_t l_minRequiredVersion_1421_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1422_major = 2;
+                uint32_t l_minRequiredVersion_1422_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1423_major = 2;
+                uint32_t l_minRequiredVersion_1423_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_1424_major = 3;
+                uint32_t l_minRequiredVersion_1424_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_1425_major = 3;
+                uint32_t l_minRequiredVersion_1425_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_1426_major = 2;
+                uint32_t l_minRequiredVersion_1426_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_1427_major = 2;
+                uint32_t l_minRequiredVersion_1427_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_1428_major = 2;
+                uint32_t l_minRequiredVersion_1428_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_1429_major = 3;
+                uint32_t l_minRequiredVersion_1429_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_1430_major = 2;
+                uint32_t l_minRequiredVersion_1430_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_1431_major = 2;
+                uint32_t l_minRequiredVersion_1431_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_1432_major = 3;
+                uint32_t l_minRequiredVersion_1432_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_1433_major = 2;
+                uint32_t l_minRequiredVersion_1433_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_1434_major = 3;
+                uint32_t l_minRequiredVersion_1434_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1435_major = 3;
+                uint32_t l_minRequiredVersion_1435_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_1436_major = 3;
+                uint32_t l_minRequiredVersion_1436_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1437_major = 3;
+                uint32_t l_minRequiredVersion_1437_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_1438_major = 3;
+                uint32_t l_minRequiredVersion_1438_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_1439_major = 3;
+                uint32_t l_minRequiredVersion_1439_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1440_major = 3;
+                uint32_t l_minRequiredVersion_1440_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1441_major = 3;
+                uint32_t l_minRequiredVersion_1441_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1442_major = 3;
+                uint32_t l_minRequiredVersion_1442_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1443_major = 3;
+                uint32_t l_minRequiredVersion_1443_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1444_major = 3;
+                uint32_t l_minRequiredVersion_1444_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1445_major = 3;
+                uint32_t l_minRequiredVersion_1445_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1446_major = 3;
+                uint32_t l_minRequiredVersion_1446_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1447_major = 2;
+                uint32_t l_minRequiredVersion_1447_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1448_major = 3;
+                uint32_t l_minRequiredVersion_1448_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1449_major = 3;
+                uint32_t l_minRequiredVersion_1449_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1450_major = 3;
+                uint32_t l_minRequiredVersion_1450_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1451_major = 3;
+                uint32_t l_minRequiredVersion_1451_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1452_major = 3;
+                uint32_t l_minRequiredVersion_1452_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1453_major = 3;
+                uint32_t l_minRequiredVersion_1453_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1454_major = 3;
+                uint32_t l_minRequiredVersion_1454_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1455_major = 3;
+                uint32_t l_minRequiredVersion_1455_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1456_major = 3;
+                uint32_t l_minRequiredVersion_1456_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_1457_major = 3;
+                uint32_t l_minRequiredVersion_1457_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1458_major = 3;
+                uint32_t l_minRequiredVersion_1458_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_1459_major = 3;
+                uint32_t l_minRequiredVersion_1459_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1460_major = 2;
+                uint32_t l_minRequiredVersion_1460_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1461_major = 3;
+                uint32_t l_minRequiredVersion_1461_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1462_major = 3;
+                uint32_t l_minRequiredVersion_1462_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1463_major = 3;
+                uint32_t l_minRequiredVersion_1463_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_1464_major = 3;
+                uint32_t l_minRequiredVersion_1464_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_1465_major = 3;
+                uint32_t l_minRequiredVersion_1465_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_1466_major = 3;
+                uint32_t l_minRequiredVersion_1466_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_1467_major = 3;
+                uint32_t l_minRequiredVersion_1467_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1468_major = 3;
+                uint32_t l_minRequiredVersion_1468_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1469_major = 3;
+                uint32_t l_minRequiredVersion_1469_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1470_major = 3;
+                uint32_t l_minRequiredVersion_1470_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1471_major = 3;
+                uint32_t l_minRequiredVersion_1471_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1472_major = 3;
+                uint32_t l_minRequiredVersion_1472_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1473_major = 3;
+                uint32_t l_minRequiredVersion_1473_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1474_major = 3;
+                uint32_t l_minRequiredVersion_1474_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1475_major = 3;
+                uint32_t l_minRequiredVersion_1475_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1476_major = 2;
+                uint32_t l_minRequiredVersion_1476_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_1477_major = 3;
+                uint32_t l_minRequiredVersion_1477_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_1478_major = 3;
+                uint32_t l_minRequiredVersion_1478_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1479_major = 3;
+                uint32_t l_minRequiredVersion_1479_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_1480_major = 3;
+                uint32_t l_minRequiredVersion_1480_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1481_major = 3;
+                uint32_t l_minRequiredVersion_1481_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1482_major = 3;
+                uint32_t l_minRequiredVersion_1482_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1483_major = 3;
+                uint32_t l_minRequiredVersion_1483_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1484_major = 3;
+                uint32_t l_minRequiredVersion_1484_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1485_major = 3;
+                uint32_t l_minRequiredVersion_1485_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_1486_major = 3;
+                uint32_t l_minRequiredVersion_1486_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1487_major = 3;
+                uint32_t l_minRequiredVersion_1487_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1488_major = 3;
+                uint32_t l_minRequiredVersion_1488_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1489_major = 3;
+                uint32_t l_minRequiredVersion_1489_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1490_major = 3;
+                uint32_t l_minRequiredVersion_1490_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1491_major = 3;
+                uint32_t l_minRequiredVersion_1491_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1492_major = 3;
+                uint32_t l_minRequiredVersion_1492_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1493_major = 3;
+                uint32_t l_minRequiredVersion_1493_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_1494_major = 3;
+                uint32_t l_minRequiredVersion_1494_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1495_major = 3;
+                uint32_t l_minRequiredVersion_1495_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1496_major = 2;
+                uint32_t l_minRequiredVersion_1496_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_1497_major = 3;
+                uint32_t l_minRequiredVersion_1497_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_1498_major = 3;
+                uint32_t l_minRequiredVersion_1498_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_1499_major = 3;
+                uint32_t l_minRequiredVersion_1499_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1500_major = 3;
+                uint32_t l_minRequiredVersion_1500_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1501_major = 3;
+                uint32_t l_minRequiredVersion_1501_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1502_major = 3;
+                uint32_t l_minRequiredVersion_1502_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1503_major = 3;
+                uint32_t l_minRequiredVersion_1503_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1504_major = 3;
+                uint32_t l_minRequiredVersion_1504_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1505_major = 3;
+                uint32_t l_minRequiredVersion_1505_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1506_major = 3;
+                uint32_t l_minRequiredVersion_1506_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1507_major = 3;
+                uint32_t l_minRequiredVersion_1507_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1508_major = 3;
+                uint32_t l_minRequiredVersion_1508_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1509_major = 3;
+                uint32_t l_minRequiredVersion_1509_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1510_major = 3;
+                uint32_t l_minRequiredVersion_1510_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1511_major = 3;
+                uint32_t l_minRequiredVersion_1511_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1512_major = 3;
+                uint32_t l_minRequiredVersion_1512_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1513_major = 3;
+                uint32_t l_minRequiredVersion_1513_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1514_major = 3;
+                uint32_t l_minRequiredVersion_1514_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1515_major = 3;
+                uint32_t l_minRequiredVersion_1515_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1516_major = 3;
+                uint32_t l_minRequiredVersion_1516_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1517_major = 3;
+                uint32_t l_minRequiredVersion_1517_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1518_major = 3;
+                uint32_t l_minRequiredVersion_1518_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1519_major = 3;
+                uint32_t l_minRequiredVersion_1519_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1520_major = 3;
+                uint32_t l_minRequiredVersion_1520_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_1521_major = 3;
+                uint32_t l_minRequiredVersion_1521_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1522_major = 3;
+                uint32_t l_minRequiredVersion_1522_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1523_major = 3;
+                uint32_t l_minRequiredVersion_1523_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1524_major = 2;
+                uint32_t l_minRequiredVersion_1524_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_1525_major = 3;
+                uint32_t l_minRequiredVersion_1525_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1526_major = 2;
+                uint32_t l_minRequiredVersion_1526_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1527_major = 3;
+                uint32_t l_minRequiredVersion_1527_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1528_major = 3;
+                uint32_t l_minRequiredVersion_1528_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1529_major = 3;
+                uint32_t l_minRequiredVersion_1529_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1530_major = 3;
+                uint32_t l_minRequiredVersion_1530_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1531_major = 3;
+                uint32_t l_minRequiredVersion_1531_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_1532_major = 3;
+                uint32_t l_minRequiredVersion_1532_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1533_major = 3;
+                uint32_t l_minRequiredVersion_1533_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_1534_major = 2;
+                uint32_t l_minRequiredVersion_1534_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1535_major = 3;
+                uint32_t l_minRequiredVersion_1535_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_1536_major = 3;
+                uint32_t l_minRequiredVersion_1536_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_1537_major = 3;
+                uint32_t l_minRequiredVersion_1537_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1538_major = 2;
+                uint32_t l_minRequiredVersion_1538_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1539_major = 3;
+                uint32_t l_minRequiredVersion_1539_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1540_major = 3;
+                uint32_t l_minRequiredVersion_1540_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1541_major = 3;
+                uint32_t l_minRequiredVersion_1541_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1542_major = 2;
+                uint32_t l_minRequiredVersion_1542_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1543_major = 3;
+                uint32_t l_minRequiredVersion_1543_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1544_major = 3;
+                uint32_t l_minRequiredVersion_1544_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1545_major = 2;
+                uint32_t l_minRequiredVersion_1545_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_1546_major = 2;
+                uint32_t l_minRequiredVersion_1546_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1547_major = 3;
+                uint32_t l_minRequiredVersion_1547_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1548_major = 3;
+                uint32_t l_minRequiredVersion_1548_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_1549_major = 3;
+                uint32_t l_minRequiredVersion_1549_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_1550_major = 3;
+                uint32_t l_minRequiredVersion_1550_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1551_major = 3;
+                uint32_t l_minRequiredVersion_1551_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1552_major = 2;
+                uint32_t l_minRequiredVersion_1552_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_1553_major = 3;
+                uint32_t l_minRequiredVersion_1553_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1554_major = 3;
+                uint32_t l_minRequiredVersion_1554_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1555_major = 2;
+                uint32_t l_minRequiredVersion_1555_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1556_major = 2;
+                uint32_t l_minRequiredVersion_1556_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1557_major = 3;
+                uint32_t l_minRequiredVersion_1557_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1558_major = 3;
+                uint32_t l_minRequiredVersion_1558_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1559_major = 3;
+                uint32_t l_minRequiredVersion_1559_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_1560_major = 3;
+                uint32_t l_minRequiredVersion_1560_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1561_major = 3;
+                uint32_t l_minRequiredVersion_1561_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1562_major = 3;
+                uint32_t l_minRequiredVersion_1562_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_1563_major = 2;
+                uint32_t l_minRequiredVersion_1563_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_1564_major = 2;
+                uint32_t l_minRequiredVersion_1564_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_1565_major = 2;
+                uint32_t l_minRequiredVersion_1565_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_1566_major = 3;
+                uint32_t l_minRequiredVersion_1566_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_1567_major = 3;
+                uint32_t l_minRequiredVersion_1567_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1568_major = 3;
+                uint32_t l_minRequiredVersion_1568_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_1569_major = 3;
+                uint32_t l_minRequiredVersion_1569_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_1570_major = 3;
+                uint32_t l_minRequiredVersion_1570_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_1571_major = 3;
+                uint32_t l_minRequiredVersion_1571_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1572_major = 3;
+                uint32_t l_minRequiredVersion_1572_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_1573_major = 2;
+                uint32_t l_minRequiredVersion_1573_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1574_major = 2;
+                uint32_t l_minRequiredVersion_1574_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_1575_major = 3;
+                uint32_t l_minRequiredVersion_1575_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_1576_major = 2;
+                uint32_t l_minRequiredVersion_1576_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_1577_major = 2;
+                uint32_t l_minRequiredVersion_1577_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_1578_major = 2;
+                uint32_t l_minRequiredVersion_1578_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_1579_major = 2;
+                uint32_t l_minRequiredVersion_1579_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_1580_major = 2;
+                uint32_t l_minRequiredVersion_1580_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_1581_major = 3;
+                uint32_t l_minRequiredVersion_1581_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_1582_major = 3;
+                uint32_t l_minRequiredVersion_1582_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_1583_major = 2;
+                uint32_t l_minRequiredVersion_1583_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_1584_major = 2;
+                uint32_t l_minRequiredVersion_1584_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_1585_major = 2;
+                uint32_t l_minRequiredVersion_1585_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1586_major = 2;
+                uint32_t l_minRequiredVersion_1586_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_1587_major = 2;
+                uint32_t l_minRequiredVersion_1587_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1588_major = 3;
+                uint32_t l_minRequiredVersion_1588_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1589_major = 3;
+                uint32_t l_minRequiredVersion_1589_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1590_major = 3;
+                uint32_t l_minRequiredVersion_1590_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1591_major = 3;
+                uint32_t l_minRequiredVersion_1591_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_1592_major = 2;
+                uint32_t l_minRequiredVersion_1592_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_1593_major = 2;
+                uint32_t l_minRequiredVersion_1593_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1594_major = 2;
+                uint32_t l_minRequiredVersion_1594_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1595_major = 2;
+                uint32_t l_minRequiredVersion_1595_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_1596_major = 2;
+                uint32_t l_minRequiredVersion_1596_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1597_major = 2;
+                uint32_t l_minRequiredVersion_1597_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1598_major = 2;
+                uint32_t l_minRequiredVersion_1598_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_1599_major = 2;
+                uint32_t l_minRequiredVersion_1599_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1600_major = 2;
+                uint32_t l_minRequiredVersion_1600_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_1601_major = 2;
+                uint32_t l_minRequiredVersion_1601_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_1602_major = 2;
+                uint32_t l_minRequiredVersion_1602_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1603_major = 2;
+                uint32_t l_minRequiredVersion_1603_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1604_major = 2;
+                uint32_t l_minRequiredVersion_1604_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_1605_major = 2;
+                uint32_t l_minRequiredVersion_1605_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_1606_major = 2;
+                uint32_t l_minRequiredVersion_1606_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1607_major = 2;
+                uint32_t l_minRequiredVersion_1607_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1608_major = 2;
+                uint32_t l_minRequiredVersion_1608_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_1609_major = 2;
+                uint32_t l_minRequiredVersion_1609_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_1610_major = 2;
+                uint32_t l_minRequiredVersion_1610_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_1611_major = 3;
+                uint32_t l_minRequiredVersion_1611_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_1612_major = 3;
+                uint32_t l_minRequiredVersion_1612_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_1613_major = 3;
+                uint32_t l_minRequiredVersion_1613_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_1614_major = 3;
+                uint32_t l_minRequiredVersion_1614_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_1615_major = 3;
+                uint32_t l_minRequiredVersion_1615_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_1616_major = 2;
+                uint32_t l_minRequiredVersion_1616_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_1617_major = 3;
+                uint32_t l_minRequiredVersion_1617_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1618_major = 3;
+                uint32_t l_minRequiredVersion_1618_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1619_major = 3;
+                uint32_t l_minRequiredVersion_1619_minor = 2;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_1620_major = 3;
+                uint32_t l_minRequiredVersion_1620_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_1621_major = 3;
+                uint32_t l_minRequiredVersion_1621_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1622_major = 3;
+                uint32_t l_minRequiredVersion_1622_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1623_major = 3;
+                uint32_t l_minRequiredVersion_1623_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1624_major = 3;
+                uint32_t l_minRequiredVersion_1624_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_1625_major = 3;
+                uint32_t l_minRequiredVersion_1625_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1626_major = 3;
+                uint32_t l_minRequiredVersion_1626_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1627_major = 3;
+                uint32_t l_minRequiredVersion_1627_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1628_major = 3;
+                uint32_t l_minRequiredVersion_1628_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1629_major = 3;
+                uint32_t l_minRequiredVersion_1629_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1630_major = 2;
+                uint32_t l_minRequiredVersion_1630_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_1631_major = 3;
+                uint32_t l_minRequiredVersion_1631_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1632_major = 3;
+                uint32_t l_minRequiredVersion_1632_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_1633_major = 3;
+                uint32_t l_minRequiredVersion_1633_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1634_major = 3;
+                uint32_t l_minRequiredVersion_1634_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1635_major = 3;
+                uint32_t l_minRequiredVersion_1635_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_1636_major = 3;
+                uint32_t l_minRequiredVersion_1636_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_1637_major = 3;
+                uint32_t l_minRequiredVersion_1637_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_1638_major = 3;
+                uint32_t l_minRequiredVersion_1638_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_1639_major = 3;
+                uint32_t l_minRequiredVersion_1639_minor = 1;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_1640_major = 2;
+                uint32_t l_minRequiredVersion_1640_minor = 0;
+                write(slice(l_observeGlGetWrites_1385_v, 0, 4));
+                break;
+            }
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -23595,287 +26123,16 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1134_major = 2;
-        uint32_t l_minRequiredVersion_1134_minor = 0;
-        switch (param) {
-            case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:          // fall-through...
-            case GLenum::GL_ALPHA_BITS:                        // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_BLEND:                             // fall-through...
-            case GLenum::GL_BLEND_COLOR:                       // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                     // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:              // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                     // fall-through...
-            case GLenum::GL_BLUE_BITS:                         // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                   // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:        // fall-through...
-            case GLenum::GL_CULL_FACE:                         // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                    // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                   // fall-through...
-            case GLenum::GL_DEPTH_BITS:                        // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                        // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                       // fall-through...
-            case GLenum::GL_DEPTH_TEST:                        // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                   // fall-through...
-            case GLenum::GL_DITHER:                            // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:      // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:          // fall-through...
-            case GLenum::GL_FRONT_FACE:                        // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:              // fall-through...
-            case GLenum::GL_GREEN_BITS:                        // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:  // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:    // fall-through...
-            case GLenum::GL_LINE_WIDTH:                        // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:  // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:      // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:             // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                  // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:    // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:        // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                 // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:    // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:         // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:             // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:               // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:              // fall-through...
-            case GLenum::GL_RED_BITS:                          // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:              // fall-through...
-            case GLenum::GL_SAMPLES:                           // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:          // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                    // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                   // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:            // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:             // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                       // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                      // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:             // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                  // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:           // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:            // fall-through...
-            case GLenum::GL_STENCIL_BITS:                      // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:               // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                      // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                      // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:           // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:           // fall-through...
-            case GLenum::GL_STENCIL_REF:                       // fall-through...
-            case GLenum::GL_STENCIL_TEST:                      // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                 // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                     // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:          // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                  // fall-through...
-            case GLenum::GL_VIEWPORT: {
-                break;
-            }
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_1135_major = 3;
-                uint32_t l_minRequiredVersion_1135_minor = 0;
-                break;
-            }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1136_major = 3;
-                uint32_t l_minRequiredVersion_1136_minor = 1;
-                break;
-            }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1137_major = 3;
-                uint32_t l_minRequiredVersion_1137_minor = 2;
-                break;
-            }
-        }
+        uint32_t l_minRequiredVersion_1642_major = 2;
+        uint32_t l_minRequiredVersion_1642_minor = 0;
         Slice<GLfloat> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1140_msg = "No context bound";
+            std::string l_error_1644_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1139_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1139_result;
+        std::shared_ptr<Context> l_GetContext_1643_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1643_result;
         observe(observations.mReads);
         mImports.glGetFloatv(param, values);
         switch (param) {
@@ -23931,6 +26188,1537 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
                 break;
             }
         }
+        uint32_t l_observeGlGetWrites_1645_param = param;
+        GLfloat* l_observeGlGetWrites_1645_v = values;
+        switch (l_observeGlGetWrites_1645_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_1646_major = 2;
+                uint32_t l_minRequiredVersion_1646_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1647_major = 2;
+                uint32_t l_minRequiredVersion_1647_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_1648_major = 2;
+                uint32_t l_minRequiredVersion_1648_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_1649_major = 2;
+                uint32_t l_minRequiredVersion_1649_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1650_major = 2;
+                uint32_t l_minRequiredVersion_1650_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_1651_major = 2;
+                uint32_t l_minRequiredVersion_1651_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_1652_major = 2;
+                uint32_t l_minRequiredVersion_1652_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_1653_major = 2;
+                uint32_t l_minRequiredVersion_1653_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_1654_major = 2;
+                uint32_t l_minRequiredVersion_1654_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_1655_major = 2;
+                uint32_t l_minRequiredVersion_1655_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_1656_major = 2;
+                uint32_t l_minRequiredVersion_1656_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_1657_major = 2;
+                uint32_t l_minRequiredVersion_1657_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_1658_major = 2;
+                uint32_t l_minRequiredVersion_1658_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_1659_major = 2;
+                uint32_t l_minRequiredVersion_1659_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1660_major = 2;
+                uint32_t l_minRequiredVersion_1660_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1661_major = 2;
+                uint32_t l_minRequiredVersion_1661_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1662_major = 2;
+                uint32_t l_minRequiredVersion_1662_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_1663_major = 3;
+                uint32_t l_minRequiredVersion_1663_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_1664_major = 3;
+                uint32_t l_minRequiredVersion_1664_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1665_major = 3;
+                uint32_t l_minRequiredVersion_1665_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1666_major = 3;
+                uint32_t l_minRequiredVersion_1666_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_1667_major = 2;
+                uint32_t l_minRequiredVersion_1667_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_1668_major = 2;
+                uint32_t l_minRequiredVersion_1668_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_1669_major = 2;
+                uint32_t l_minRequiredVersion_1669_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1670_major = 3;
+                uint32_t l_minRequiredVersion_1670_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1671_major = 3;
+                uint32_t l_minRequiredVersion_1671_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1672_major = 3;
+                uint32_t l_minRequiredVersion_1672_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_1673_major = 2;
+                uint32_t l_minRequiredVersion_1673_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1674_major = 2;
+                uint32_t l_minRequiredVersion_1674_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_1675_major = 2;
+                uint32_t l_minRequiredVersion_1675_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_1676_major = 2;
+                uint32_t l_minRequiredVersion_1676_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_1677_major = 2;
+                uint32_t l_minRequiredVersion_1677_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1678_major = 2;
+                uint32_t l_minRequiredVersion_1678_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1679_major = 3;
+                uint32_t l_minRequiredVersion_1679_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_1680_major = 2;
+                uint32_t l_minRequiredVersion_1680_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_1681_major = 3;
+                uint32_t l_minRequiredVersion_1681_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1682_major = 2;
+                uint32_t l_minRequiredVersion_1682_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1683_major = 2;
+                uint32_t l_minRequiredVersion_1683_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_1684_major = 3;
+                uint32_t l_minRequiredVersion_1684_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_1685_major = 3;
+                uint32_t l_minRequiredVersion_1685_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_1686_major = 2;
+                uint32_t l_minRequiredVersion_1686_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_1687_major = 2;
+                uint32_t l_minRequiredVersion_1687_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_1688_major = 2;
+                uint32_t l_minRequiredVersion_1688_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_1689_major = 3;
+                uint32_t l_minRequiredVersion_1689_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_1690_major = 2;
+                uint32_t l_minRequiredVersion_1690_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_1691_major = 2;
+                uint32_t l_minRequiredVersion_1691_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_1692_major = 3;
+                uint32_t l_minRequiredVersion_1692_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_1693_major = 2;
+                uint32_t l_minRequiredVersion_1693_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_1694_major = 3;
+                uint32_t l_minRequiredVersion_1694_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1695_major = 3;
+                uint32_t l_minRequiredVersion_1695_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_1696_major = 3;
+                uint32_t l_minRequiredVersion_1696_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1697_major = 3;
+                uint32_t l_minRequiredVersion_1697_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_1698_major = 3;
+                uint32_t l_minRequiredVersion_1698_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_1699_major = 3;
+                uint32_t l_minRequiredVersion_1699_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1700_major = 3;
+                uint32_t l_minRequiredVersion_1700_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1701_major = 3;
+                uint32_t l_minRequiredVersion_1701_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1702_major = 3;
+                uint32_t l_minRequiredVersion_1702_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1703_major = 3;
+                uint32_t l_minRequiredVersion_1703_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1704_major = 3;
+                uint32_t l_minRequiredVersion_1704_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1705_major = 3;
+                uint32_t l_minRequiredVersion_1705_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1706_major = 3;
+                uint32_t l_minRequiredVersion_1706_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1707_major = 2;
+                uint32_t l_minRequiredVersion_1707_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1708_major = 3;
+                uint32_t l_minRequiredVersion_1708_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1709_major = 3;
+                uint32_t l_minRequiredVersion_1709_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1710_major = 3;
+                uint32_t l_minRequiredVersion_1710_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1711_major = 3;
+                uint32_t l_minRequiredVersion_1711_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1712_major = 3;
+                uint32_t l_minRequiredVersion_1712_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1713_major = 3;
+                uint32_t l_minRequiredVersion_1713_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1714_major = 3;
+                uint32_t l_minRequiredVersion_1714_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1715_major = 3;
+                uint32_t l_minRequiredVersion_1715_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1716_major = 3;
+                uint32_t l_minRequiredVersion_1716_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_1717_major = 3;
+                uint32_t l_minRequiredVersion_1717_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1718_major = 3;
+                uint32_t l_minRequiredVersion_1718_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_1719_major = 3;
+                uint32_t l_minRequiredVersion_1719_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1720_major = 2;
+                uint32_t l_minRequiredVersion_1720_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1721_major = 3;
+                uint32_t l_minRequiredVersion_1721_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1722_major = 3;
+                uint32_t l_minRequiredVersion_1722_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1723_major = 3;
+                uint32_t l_minRequiredVersion_1723_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_1724_major = 3;
+                uint32_t l_minRequiredVersion_1724_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_1725_major = 3;
+                uint32_t l_minRequiredVersion_1725_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_1726_major = 3;
+                uint32_t l_minRequiredVersion_1726_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_1727_major = 3;
+                uint32_t l_minRequiredVersion_1727_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1728_major = 3;
+                uint32_t l_minRequiredVersion_1728_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1729_major = 3;
+                uint32_t l_minRequiredVersion_1729_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1730_major = 3;
+                uint32_t l_minRequiredVersion_1730_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1731_major = 3;
+                uint32_t l_minRequiredVersion_1731_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1732_major = 3;
+                uint32_t l_minRequiredVersion_1732_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1733_major = 3;
+                uint32_t l_minRequiredVersion_1733_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1734_major = 3;
+                uint32_t l_minRequiredVersion_1734_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1735_major = 3;
+                uint32_t l_minRequiredVersion_1735_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1736_major = 2;
+                uint32_t l_minRequiredVersion_1736_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_1737_major = 3;
+                uint32_t l_minRequiredVersion_1737_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_1738_major = 3;
+                uint32_t l_minRequiredVersion_1738_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1739_major = 3;
+                uint32_t l_minRequiredVersion_1739_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_1740_major = 3;
+                uint32_t l_minRequiredVersion_1740_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1741_major = 3;
+                uint32_t l_minRequiredVersion_1741_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1742_major = 3;
+                uint32_t l_minRequiredVersion_1742_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1743_major = 3;
+                uint32_t l_minRequiredVersion_1743_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1744_major = 3;
+                uint32_t l_minRequiredVersion_1744_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1745_major = 3;
+                uint32_t l_minRequiredVersion_1745_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_1746_major = 3;
+                uint32_t l_minRequiredVersion_1746_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1747_major = 3;
+                uint32_t l_minRequiredVersion_1747_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1748_major = 3;
+                uint32_t l_minRequiredVersion_1748_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1749_major = 3;
+                uint32_t l_minRequiredVersion_1749_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1750_major = 3;
+                uint32_t l_minRequiredVersion_1750_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1751_major = 3;
+                uint32_t l_minRequiredVersion_1751_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1752_major = 3;
+                uint32_t l_minRequiredVersion_1752_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1753_major = 3;
+                uint32_t l_minRequiredVersion_1753_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_1754_major = 3;
+                uint32_t l_minRequiredVersion_1754_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1755_major = 3;
+                uint32_t l_minRequiredVersion_1755_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1756_major = 2;
+                uint32_t l_minRequiredVersion_1756_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_1757_major = 3;
+                uint32_t l_minRequiredVersion_1757_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_1758_major = 3;
+                uint32_t l_minRequiredVersion_1758_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_1759_major = 3;
+                uint32_t l_minRequiredVersion_1759_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1760_major = 3;
+                uint32_t l_minRequiredVersion_1760_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1761_major = 3;
+                uint32_t l_minRequiredVersion_1761_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1762_major = 3;
+                uint32_t l_minRequiredVersion_1762_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1763_major = 3;
+                uint32_t l_minRequiredVersion_1763_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1764_major = 3;
+                uint32_t l_minRequiredVersion_1764_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1765_major = 3;
+                uint32_t l_minRequiredVersion_1765_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1766_major = 3;
+                uint32_t l_minRequiredVersion_1766_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1767_major = 3;
+                uint32_t l_minRequiredVersion_1767_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1768_major = 3;
+                uint32_t l_minRequiredVersion_1768_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1769_major = 3;
+                uint32_t l_minRequiredVersion_1769_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1770_major = 3;
+                uint32_t l_minRequiredVersion_1770_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1771_major = 3;
+                uint32_t l_minRequiredVersion_1771_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1772_major = 3;
+                uint32_t l_minRequiredVersion_1772_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1773_major = 3;
+                uint32_t l_minRequiredVersion_1773_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1774_major = 3;
+                uint32_t l_minRequiredVersion_1774_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1775_major = 3;
+                uint32_t l_minRequiredVersion_1775_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1776_major = 3;
+                uint32_t l_minRequiredVersion_1776_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1777_major = 3;
+                uint32_t l_minRequiredVersion_1777_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1778_major = 3;
+                uint32_t l_minRequiredVersion_1778_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1779_major = 3;
+                uint32_t l_minRequiredVersion_1779_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1780_major = 3;
+                uint32_t l_minRequiredVersion_1780_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_1781_major = 3;
+                uint32_t l_minRequiredVersion_1781_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1782_major = 3;
+                uint32_t l_minRequiredVersion_1782_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1783_major = 3;
+                uint32_t l_minRequiredVersion_1783_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1784_major = 2;
+                uint32_t l_minRequiredVersion_1784_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_1785_major = 3;
+                uint32_t l_minRequiredVersion_1785_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1786_major = 2;
+                uint32_t l_minRequiredVersion_1786_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1787_major = 3;
+                uint32_t l_minRequiredVersion_1787_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1788_major = 3;
+                uint32_t l_minRequiredVersion_1788_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1789_major = 3;
+                uint32_t l_minRequiredVersion_1789_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_1790_major = 3;
+                uint32_t l_minRequiredVersion_1790_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1791_major = 3;
+                uint32_t l_minRequiredVersion_1791_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_1792_major = 3;
+                uint32_t l_minRequiredVersion_1792_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1793_major = 3;
+                uint32_t l_minRequiredVersion_1793_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_1794_major = 2;
+                uint32_t l_minRequiredVersion_1794_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1795_major = 3;
+                uint32_t l_minRequiredVersion_1795_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_1796_major = 3;
+                uint32_t l_minRequiredVersion_1796_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_1797_major = 3;
+                uint32_t l_minRequiredVersion_1797_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_1798_major = 2;
+                uint32_t l_minRequiredVersion_1798_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1799_major = 3;
+                uint32_t l_minRequiredVersion_1799_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1800_major = 3;
+                uint32_t l_minRequiredVersion_1800_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1801_major = 3;
+                uint32_t l_minRequiredVersion_1801_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1802_major = 2;
+                uint32_t l_minRequiredVersion_1802_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1803_major = 3;
+                uint32_t l_minRequiredVersion_1803_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1804_major = 3;
+                uint32_t l_minRequiredVersion_1804_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1805_major = 2;
+                uint32_t l_minRequiredVersion_1805_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_1806_major = 2;
+                uint32_t l_minRequiredVersion_1806_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1807_major = 3;
+                uint32_t l_minRequiredVersion_1807_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_1808_major = 3;
+                uint32_t l_minRequiredVersion_1808_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_1809_major = 3;
+                uint32_t l_minRequiredVersion_1809_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_1810_major = 3;
+                uint32_t l_minRequiredVersion_1810_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1811_major = 3;
+                uint32_t l_minRequiredVersion_1811_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1812_major = 2;
+                uint32_t l_minRequiredVersion_1812_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_1813_major = 3;
+                uint32_t l_minRequiredVersion_1813_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1814_major = 3;
+                uint32_t l_minRequiredVersion_1814_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1815_major = 2;
+                uint32_t l_minRequiredVersion_1815_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1816_major = 2;
+                uint32_t l_minRequiredVersion_1816_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1817_major = 3;
+                uint32_t l_minRequiredVersion_1817_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1818_major = 3;
+                uint32_t l_minRequiredVersion_1818_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1819_major = 3;
+                uint32_t l_minRequiredVersion_1819_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_1820_major = 3;
+                uint32_t l_minRequiredVersion_1820_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1821_major = 3;
+                uint32_t l_minRequiredVersion_1821_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1822_major = 3;
+                uint32_t l_minRequiredVersion_1822_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_1823_major = 2;
+                uint32_t l_minRequiredVersion_1823_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_1824_major = 2;
+                uint32_t l_minRequiredVersion_1824_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_1825_major = 2;
+                uint32_t l_minRequiredVersion_1825_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_1826_major = 3;
+                uint32_t l_minRequiredVersion_1826_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_1827_major = 3;
+                uint32_t l_minRequiredVersion_1827_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1828_major = 3;
+                uint32_t l_minRequiredVersion_1828_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_1829_major = 3;
+                uint32_t l_minRequiredVersion_1829_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_1830_major = 3;
+                uint32_t l_minRequiredVersion_1830_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_1831_major = 3;
+                uint32_t l_minRequiredVersion_1831_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1832_major = 3;
+                uint32_t l_minRequiredVersion_1832_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_1833_major = 2;
+                uint32_t l_minRequiredVersion_1833_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1834_major = 2;
+                uint32_t l_minRequiredVersion_1834_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_1835_major = 3;
+                uint32_t l_minRequiredVersion_1835_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_1836_major = 2;
+                uint32_t l_minRequiredVersion_1836_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_1837_major = 2;
+                uint32_t l_minRequiredVersion_1837_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_1838_major = 2;
+                uint32_t l_minRequiredVersion_1838_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_1839_major = 2;
+                uint32_t l_minRequiredVersion_1839_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_1840_major = 2;
+                uint32_t l_minRequiredVersion_1840_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_1841_major = 3;
+                uint32_t l_minRequiredVersion_1841_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_1842_major = 3;
+                uint32_t l_minRequiredVersion_1842_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_1843_major = 2;
+                uint32_t l_minRequiredVersion_1843_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_1844_major = 2;
+                uint32_t l_minRequiredVersion_1844_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_1845_major = 2;
+                uint32_t l_minRequiredVersion_1845_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_1846_major = 2;
+                uint32_t l_minRequiredVersion_1846_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_1847_major = 2;
+                uint32_t l_minRequiredVersion_1847_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1848_major = 3;
+                uint32_t l_minRequiredVersion_1848_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1849_major = 3;
+                uint32_t l_minRequiredVersion_1849_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1850_major = 3;
+                uint32_t l_minRequiredVersion_1850_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1851_major = 3;
+                uint32_t l_minRequiredVersion_1851_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_1852_major = 2;
+                uint32_t l_minRequiredVersion_1852_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_1853_major = 2;
+                uint32_t l_minRequiredVersion_1853_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1854_major = 2;
+                uint32_t l_minRequiredVersion_1854_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1855_major = 2;
+                uint32_t l_minRequiredVersion_1855_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_1856_major = 2;
+                uint32_t l_minRequiredVersion_1856_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1857_major = 2;
+                uint32_t l_minRequiredVersion_1857_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1858_major = 2;
+                uint32_t l_minRequiredVersion_1858_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_1859_major = 2;
+                uint32_t l_minRequiredVersion_1859_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1860_major = 2;
+                uint32_t l_minRequiredVersion_1860_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_1861_major = 2;
+                uint32_t l_minRequiredVersion_1861_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_1862_major = 2;
+                uint32_t l_minRequiredVersion_1862_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_1863_major = 2;
+                uint32_t l_minRequiredVersion_1863_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_1864_major = 2;
+                uint32_t l_minRequiredVersion_1864_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_1865_major = 2;
+                uint32_t l_minRequiredVersion_1865_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_1866_major = 2;
+                uint32_t l_minRequiredVersion_1866_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_1867_major = 2;
+                uint32_t l_minRequiredVersion_1867_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1868_major = 2;
+                uint32_t l_minRequiredVersion_1868_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_1869_major = 2;
+                uint32_t l_minRequiredVersion_1869_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_1870_major = 2;
+                uint32_t l_minRequiredVersion_1870_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_1871_major = 3;
+                uint32_t l_minRequiredVersion_1871_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_1872_major = 3;
+                uint32_t l_minRequiredVersion_1872_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_1873_major = 3;
+                uint32_t l_minRequiredVersion_1873_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_1874_major = 3;
+                uint32_t l_minRequiredVersion_1874_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_1875_major = 3;
+                uint32_t l_minRequiredVersion_1875_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_1876_major = 2;
+                uint32_t l_minRequiredVersion_1876_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_1877_major = 3;
+                uint32_t l_minRequiredVersion_1877_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1878_major = 3;
+                uint32_t l_minRequiredVersion_1878_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1879_major = 3;
+                uint32_t l_minRequiredVersion_1879_minor = 2;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_1880_major = 3;
+                uint32_t l_minRequiredVersion_1880_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_1881_major = 3;
+                uint32_t l_minRequiredVersion_1881_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1882_major = 3;
+                uint32_t l_minRequiredVersion_1882_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1883_major = 3;
+                uint32_t l_minRequiredVersion_1883_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1884_major = 3;
+                uint32_t l_minRequiredVersion_1884_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_1885_major = 3;
+                uint32_t l_minRequiredVersion_1885_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1886_major = 3;
+                uint32_t l_minRequiredVersion_1886_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1887_major = 3;
+                uint32_t l_minRequiredVersion_1887_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_1888_major = 3;
+                uint32_t l_minRequiredVersion_1888_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_1889_major = 3;
+                uint32_t l_minRequiredVersion_1889_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_1890_major = 2;
+                uint32_t l_minRequiredVersion_1890_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_1891_major = 3;
+                uint32_t l_minRequiredVersion_1891_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_1892_major = 3;
+                uint32_t l_minRequiredVersion_1892_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_1893_major = 3;
+                uint32_t l_minRequiredVersion_1893_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_1894_major = 3;
+                uint32_t l_minRequiredVersion_1894_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_1895_major = 3;
+                uint32_t l_minRequiredVersion_1895_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_1896_major = 3;
+                uint32_t l_minRequiredVersion_1896_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_1897_major = 3;
+                uint32_t l_minRequiredVersion_1897_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_1898_major = 3;
+                uint32_t l_minRequiredVersion_1898_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_1899_major = 3;
+                uint32_t l_minRequiredVersion_1899_minor = 1;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_1900_major = 2;
+                uint32_t l_minRequiredVersion_1900_minor = 0;
+                write(slice(l_observeGlGetWrites_1645_v, 0, 4));
+                break;
+            }
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -23942,8 +27730,8 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
 
 inline bool GlesSpy::hasGlGetInteger64i_v() const { return mImports.glGetInteger64i_v != nullptr; }
 
-inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data) {
-    GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", target, index, data);
+inline void GlesSpy::glGetInteger64i_v(uint32_t param, uint32_t index, int64_t* values) {
+    GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", param, index, values);
 
     if (!hasGlGetInteger64i_v()) {
         GAPID_WARNING("Application called unsupported function glGetInteger64i_v");
@@ -23952,291 +27740,1555 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1141_major = 3;
-        uint32_t l_minRequiredVersion_1141_minor = 0;
-        switch (target) {
-            case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:                       // fall-through...
-            case GLenum::GL_ALPHA_BITS:                                     // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_BLEND:                                          // fall-through...
-            case GLenum::GL_BLEND_COLOR:                                    // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                                  // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:                           // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                             // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                                  // fall-through...
-            case GLenum::GL_BLUE_BITS:                                      // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                                // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:                     // fall-through...
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_CULL_FACE:                                      // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                                 // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                                // fall-through...
-            case GLenum::GL_DEPTH_BITS:                                     // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                                     // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                                    // fall-through...
-            case GLenum::GL_DEPTH_TEST:                                     // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                                // fall-through...
-            case GLenum::GL_DITHER:                                         // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:                   // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_FRONT_FACE:                                     // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:                           // fall-through...
-            case GLenum::GL_GREEN_BITS:                                     // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:               // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:                 // fall-through...
-            case GLenum::GL_LINE_WIDTH:                                     // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:               // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:                      // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:                   // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                               // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:                            // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                             // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:                     // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                              // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:                 // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:                      // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                                 // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:                          // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:                            // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:                           // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_RED_BITS:                                       // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_SAMPLES:                                        // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:                       // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                                 // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                                // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:                         // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:                          // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                                    // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                                   // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:                          // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                                // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                               // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:                        // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:                         // fall-through...
-            case GLenum::GL_STENCIL_BITS:                                   // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:                            // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                                   // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                                   // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:                        // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:                        // fall-through...
-            case GLenum::GL_STENCIL_REF:                                    // fall-through...
-            case GLenum::GL_STENCIL_TEST:                                   // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                             // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                              // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                                  // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:                       // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                               // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING:                           // fall-through...
-            case GLenum::GL_VIEWPORT: {
+        uint32_t l_minRequiredVersion_1902_major = 3;
+        uint32_t l_minRequiredVersion_1902_minor = 0;
+        uint32_t l_observeGlGetWrites_1903_param = param;
+        GLint64* l_observeGlGetWrites_1903_v = values;
+        observe(observations.mReads);
+        mImports.glGetInteger64i_v(param, index, values);
+        switch (l_observeGlGetWrites_1903_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_1904_major = 2;
+                uint32_t l_minRequiredVersion_1904_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
                 break;
             }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1142_major = 3;
-                uint32_t l_minRequiredVersion_1142_minor = 1;
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_1905_major = 2;
+                uint32_t l_minRequiredVersion_1905_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 2));
                 break;
             }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_1906_major = 2;
+                uint32_t l_minRequiredVersion_1906_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_1907_major = 2;
+                uint32_t l_minRequiredVersion_1907_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1908_major = 2;
+                uint32_t l_minRequiredVersion_1908_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_1909_major = 2;
+                uint32_t l_minRequiredVersion_1909_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_1910_major = 2;
+                uint32_t l_minRequiredVersion_1910_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_1911_major = 2;
+                uint32_t l_minRequiredVersion_1911_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_1912_major = 2;
+                uint32_t l_minRequiredVersion_1912_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_1913_major = 2;
+                uint32_t l_minRequiredVersion_1913_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_1914_major = 2;
+                uint32_t l_minRequiredVersion_1914_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_1915_major = 2;
+                uint32_t l_minRequiredVersion_1915_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_1916_major = 2;
+                uint32_t l_minRequiredVersion_1916_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_1917_major = 2;
+                uint32_t l_minRequiredVersion_1917_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1918_major = 2;
+                uint32_t l_minRequiredVersion_1918_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1919_major = 2;
+                uint32_t l_minRequiredVersion_1919_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_1920_major = 2;
+                uint32_t l_minRequiredVersion_1920_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_1921_major = 3;
+                uint32_t l_minRequiredVersion_1921_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_1922_major = 3;
+                uint32_t l_minRequiredVersion_1922_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1923_major = 3;
+                uint32_t l_minRequiredVersion_1923_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1924_major = 3;
+                uint32_t l_minRequiredVersion_1924_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_1925_major = 2;
+                uint32_t l_minRequiredVersion_1925_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_1926_major = 2;
+                uint32_t l_minRequiredVersion_1926_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_1927_major = 2;
+                uint32_t l_minRequiredVersion_1927_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1928_major = 3;
+                uint32_t l_minRequiredVersion_1928_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1929_major = 3;
+                uint32_t l_minRequiredVersion_1929_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1930_major = 3;
+                uint32_t l_minRequiredVersion_1930_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_1931_major = 2;
+                uint32_t l_minRequiredVersion_1931_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_1932_major = 2;
+                uint32_t l_minRequiredVersion_1932_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_1933_major = 2;
+                uint32_t l_minRequiredVersion_1933_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_1934_major = 2;
+                uint32_t l_minRequiredVersion_1934_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_1935_major = 2;
+                uint32_t l_minRequiredVersion_1935_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_1936_major = 2;
+                uint32_t l_minRequiredVersion_1936_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1937_major = 3;
+                uint32_t l_minRequiredVersion_1937_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_1938_major = 2;
+                uint32_t l_minRequiredVersion_1938_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_1939_major = 3;
+                uint32_t l_minRequiredVersion_1939_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1940_major = 2;
+                uint32_t l_minRequiredVersion_1940_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_1941_major = 2;
+                uint32_t l_minRequiredVersion_1941_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_1942_major = 3;
+                uint32_t l_minRequiredVersion_1942_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_1943_major = 3;
+                uint32_t l_minRequiredVersion_1943_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_1944_major = 2;
+                uint32_t l_minRequiredVersion_1944_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_1945_major = 2;
+                uint32_t l_minRequiredVersion_1945_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_1946_major = 2;
+                uint32_t l_minRequiredVersion_1946_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_1947_major = 3;
+                uint32_t l_minRequiredVersion_1947_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_1948_major = 2;
+                uint32_t l_minRequiredVersion_1948_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_1949_major = 2;
+                uint32_t l_minRequiredVersion_1949_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_1950_major = 3;
+                uint32_t l_minRequiredVersion_1950_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_1951_major = 2;
+                uint32_t l_minRequiredVersion_1951_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_1952_major = 3;
+                uint32_t l_minRequiredVersion_1952_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1953_major = 3;
+                uint32_t l_minRequiredVersion_1953_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_1954_major = 3;
+                uint32_t l_minRequiredVersion_1954_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_1955_major = 3;
+                uint32_t l_minRequiredVersion_1955_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_1956_major = 3;
+                uint32_t l_minRequiredVersion_1956_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_1957_major = 3;
+                uint32_t l_minRequiredVersion_1957_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1958_major = 3;
+                uint32_t l_minRequiredVersion_1958_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1959_major = 3;
+                uint32_t l_minRequiredVersion_1959_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1960_major = 3;
+                uint32_t l_minRequiredVersion_1960_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1961_major = 3;
+                uint32_t l_minRequiredVersion_1961_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1962_major = 3;
+                uint32_t l_minRequiredVersion_1962_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1963_major = 3;
+                uint32_t l_minRequiredVersion_1963_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1964_major = 3;
+                uint32_t l_minRequiredVersion_1964_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1965_major = 2;
+                uint32_t l_minRequiredVersion_1965_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1966_major = 3;
+                uint32_t l_minRequiredVersion_1966_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1967_major = 3;
+                uint32_t l_minRequiredVersion_1967_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1968_major = 3;
+                uint32_t l_minRequiredVersion_1968_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1969_major = 3;
+                uint32_t l_minRequiredVersion_1969_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1970_major = 3;
+                uint32_t l_minRequiredVersion_1970_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1971_major = 3;
+                uint32_t l_minRequiredVersion_1971_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_1972_major = 3;
+                uint32_t l_minRequiredVersion_1972_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1973_major = 3;
+                uint32_t l_minRequiredVersion_1973_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1974_major = 3;
+                uint32_t l_minRequiredVersion_1974_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_1975_major = 3;
+                uint32_t l_minRequiredVersion_1975_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_1976_major = 3;
+                uint32_t l_minRequiredVersion_1976_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_1977_major = 3;
+                uint32_t l_minRequiredVersion_1977_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_1978_major = 2;
+                uint32_t l_minRequiredVersion_1978_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_1979_major = 3;
+                uint32_t l_minRequiredVersion_1979_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_1980_major = 3;
+                uint32_t l_minRequiredVersion_1980_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_1981_major = 3;
+                uint32_t l_minRequiredVersion_1981_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_1982_major = 3;
+                uint32_t l_minRequiredVersion_1982_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_1983_major = 3;
+                uint32_t l_minRequiredVersion_1983_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_1984_major = 3;
+                uint32_t l_minRequiredVersion_1984_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_1985_major = 3;
+                uint32_t l_minRequiredVersion_1985_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1986_major = 3;
+                uint32_t l_minRequiredVersion_1986_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_1987_major = 3;
+                uint32_t l_minRequiredVersion_1987_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_1988_major = 3;
+                uint32_t l_minRequiredVersion_1988_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1989_major = 3;
+                uint32_t l_minRequiredVersion_1989_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_1990_major = 3;
+                uint32_t l_minRequiredVersion_1990_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_1991_major = 3;
+                uint32_t l_minRequiredVersion_1991_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_1992_major = 3;
+                uint32_t l_minRequiredVersion_1992_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_1993_major = 3;
+                uint32_t l_minRequiredVersion_1993_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_1994_major = 2;
+                uint32_t l_minRequiredVersion_1994_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_1995_major = 3;
+                uint32_t l_minRequiredVersion_1995_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_1996_major = 3;
+                uint32_t l_minRequiredVersion_1996_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_1997_major = 3;
+                uint32_t l_minRequiredVersion_1997_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_1998_major = 3;
+                uint32_t l_minRequiredVersion_1998_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_1999_major = 3;
+                uint32_t l_minRequiredVersion_1999_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2000_major = 3;
+                uint32_t l_minRequiredVersion_2000_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2001_major = 3;
+                uint32_t l_minRequiredVersion_2001_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2002_major = 3;
+                uint32_t l_minRequiredVersion_2002_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2003_major = 3;
+                uint32_t l_minRequiredVersion_2003_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_2004_major = 3;
+                uint32_t l_minRequiredVersion_2004_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2005_major = 3;
+                uint32_t l_minRequiredVersion_2005_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2006_major = 3;
+                uint32_t l_minRequiredVersion_2006_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2007_major = 3;
+                uint32_t l_minRequiredVersion_2007_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2008_major = 3;
+                uint32_t l_minRequiredVersion_2008_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2009_major = 3;
+                uint32_t l_minRequiredVersion_2009_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2010_major = 3;
+                uint32_t l_minRequiredVersion_2010_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2011_major = 3;
+                uint32_t l_minRequiredVersion_2011_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_2012_major = 3;
+                uint32_t l_minRequiredVersion_2012_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2013_major = 3;
+                uint32_t l_minRequiredVersion_2013_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2014_major = 2;
+                uint32_t l_minRequiredVersion_2014_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_2015_major = 3;
+                uint32_t l_minRequiredVersion_2015_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_2016_major = 3;
+                uint32_t l_minRequiredVersion_2016_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_2017_major = 3;
+                uint32_t l_minRequiredVersion_2017_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2018_major = 3;
+                uint32_t l_minRequiredVersion_2018_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2019_major = 3;
+                uint32_t l_minRequiredVersion_2019_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2020_major = 3;
+                uint32_t l_minRequiredVersion_2020_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2021_major = 3;
+                uint32_t l_minRequiredVersion_2021_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2022_major = 3;
+                uint32_t l_minRequiredVersion_2022_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2023_major = 3;
+                uint32_t l_minRequiredVersion_2023_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2024_major = 3;
+                uint32_t l_minRequiredVersion_2024_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2025_major = 3;
+                uint32_t l_minRequiredVersion_2025_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2026_major = 3;
+                uint32_t l_minRequiredVersion_2026_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2027_major = 3;
+                uint32_t l_minRequiredVersion_2027_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2028_major = 3;
+                uint32_t l_minRequiredVersion_2028_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2029_major = 3;
+                uint32_t l_minRequiredVersion_2029_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2030_major = 3;
+                uint32_t l_minRequiredVersion_2030_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2031_major = 3;
+                uint32_t l_minRequiredVersion_2031_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2032_major = 3;
+                uint32_t l_minRequiredVersion_2032_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2033_major = 3;
+                uint32_t l_minRequiredVersion_2033_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2034_major = 3;
+                uint32_t l_minRequiredVersion_2034_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2035_major = 3;
+                uint32_t l_minRequiredVersion_2035_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2036_major = 3;
+                uint32_t l_minRequiredVersion_2036_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2037_major = 3;
+                uint32_t l_minRequiredVersion_2037_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2038_major = 3;
+                uint32_t l_minRequiredVersion_2038_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_2039_major = 3;
+                uint32_t l_minRequiredVersion_2039_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2040_major = 3;
+                uint32_t l_minRequiredVersion_2040_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2041_major = 3;
+                uint32_t l_minRequiredVersion_2041_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2042_major = 2;
+                uint32_t l_minRequiredVersion_2042_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_2043_major = 3;
+                uint32_t l_minRequiredVersion_2043_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2044_major = 2;
+                uint32_t l_minRequiredVersion_2044_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2045_major = 3;
+                uint32_t l_minRequiredVersion_2045_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2046_major = 3;
+                uint32_t l_minRequiredVersion_2046_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2047_major = 3;
+                uint32_t l_minRequiredVersion_2047_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2048_major = 3;
+                uint32_t l_minRequiredVersion_2048_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2049_major = 3;
+                uint32_t l_minRequiredVersion_2049_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_2050_major = 3;
+                uint32_t l_minRequiredVersion_2050_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2051_major = 3;
+                uint32_t l_minRequiredVersion_2051_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_2052_major = 2;
+                uint32_t l_minRequiredVersion_2052_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2053_major = 3;
+                uint32_t l_minRequiredVersion_2053_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_2054_major = 3;
+                uint32_t l_minRequiredVersion_2054_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_2055_major = 3;
+                uint32_t l_minRequiredVersion_2055_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2056_major = 2;
+                uint32_t l_minRequiredVersion_2056_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2057_major = 3;
+                uint32_t l_minRequiredVersion_2057_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2058_major = 3;
+                uint32_t l_minRequiredVersion_2058_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2059_major = 3;
+                uint32_t l_minRequiredVersion_2059_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2060_major = 2;
+                uint32_t l_minRequiredVersion_2060_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2061_major = 3;
+                uint32_t l_minRequiredVersion_2061_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2062_major = 3;
+                uint32_t l_minRequiredVersion_2062_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2063_major = 2;
+                uint32_t l_minRequiredVersion_2063_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_2064_major = 2;
+                uint32_t l_minRequiredVersion_2064_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2065_major = 3;
+                uint32_t l_minRequiredVersion_2065_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2066_major = 3;
+                uint32_t l_minRequiredVersion_2066_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_2067_major = 3;
+                uint32_t l_minRequiredVersion_2067_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_2068_major = 3;
+                uint32_t l_minRequiredVersion_2068_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2069_major = 3;
+                uint32_t l_minRequiredVersion_2069_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2070_major = 2;
+                uint32_t l_minRequiredVersion_2070_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_2071_major = 3;
+                uint32_t l_minRequiredVersion_2071_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2072_major = 3;
+                uint32_t l_minRequiredVersion_2072_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2073_major = 2;
+                uint32_t l_minRequiredVersion_2073_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2074_major = 2;
+                uint32_t l_minRequiredVersion_2074_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2075_major = 3;
+                uint32_t l_minRequiredVersion_2075_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2076_major = 3;
+                uint32_t l_minRequiredVersion_2076_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2077_major = 3;
+                uint32_t l_minRequiredVersion_2077_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_2078_major = 3;
+                uint32_t l_minRequiredVersion_2078_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2079_major = 3;
+                uint32_t l_minRequiredVersion_2079_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2080_major = 3;
+                uint32_t l_minRequiredVersion_2080_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_2081_major = 2;
+                uint32_t l_minRequiredVersion_2081_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_2082_major = 2;
+                uint32_t l_minRequiredVersion_2082_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_2083_major = 2;
+                uint32_t l_minRequiredVersion_2083_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_2084_major = 3;
+                uint32_t l_minRequiredVersion_2084_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_2085_major = 3;
+                uint32_t l_minRequiredVersion_2085_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2086_major = 3;
+                uint32_t l_minRequiredVersion_2086_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_2087_major = 3;
+                uint32_t l_minRequiredVersion_2087_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_2088_major = 3;
+                uint32_t l_minRequiredVersion_2088_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_2089_major = 3;
+                uint32_t l_minRequiredVersion_2089_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2090_major = 3;
+                uint32_t l_minRequiredVersion_2090_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_2091_major = 2;
+                uint32_t l_minRequiredVersion_2091_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2092_major = 2;
+                uint32_t l_minRequiredVersion_2092_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_2093_major = 3;
+                uint32_t l_minRequiredVersion_2093_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_2094_major = 2;
+                uint32_t l_minRequiredVersion_2094_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_2095_major = 2;
+                uint32_t l_minRequiredVersion_2095_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_2096_major = 2;
+                uint32_t l_minRequiredVersion_2096_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_2097_major = 2;
+                uint32_t l_minRequiredVersion_2097_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_2098_major = 2;
+                uint32_t l_minRequiredVersion_2098_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_2099_major = 3;
+                uint32_t l_minRequiredVersion_2099_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_2100_major = 3;
+                uint32_t l_minRequiredVersion_2100_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_2101_major = 2;
+                uint32_t l_minRequiredVersion_2101_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_2102_major = 2;
+                uint32_t l_minRequiredVersion_2102_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_2103_major = 2;
+                uint32_t l_minRequiredVersion_2103_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2104_major = 2;
+                uint32_t l_minRequiredVersion_2104_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_2105_major = 2;
+                uint32_t l_minRequiredVersion_2105_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2106_major = 3;
+                uint32_t l_minRequiredVersion_2106_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2107_major = 3;
+                uint32_t l_minRequiredVersion_2107_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2108_major = 3;
+                uint32_t l_minRequiredVersion_2108_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2109_major = 3;
+                uint32_t l_minRequiredVersion_2109_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_2110_major = 2;
+                uint32_t l_minRequiredVersion_2110_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_2111_major = 2;
+                uint32_t l_minRequiredVersion_2111_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2112_major = 2;
+                uint32_t l_minRequiredVersion_2112_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2113_major = 2;
+                uint32_t l_minRequiredVersion_2113_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_2114_major = 2;
+                uint32_t l_minRequiredVersion_2114_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2115_major = 2;
+                uint32_t l_minRequiredVersion_2115_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2116_major = 2;
+                uint32_t l_minRequiredVersion_2116_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_2117_major = 2;
+                uint32_t l_minRequiredVersion_2117_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2118_major = 2;
+                uint32_t l_minRequiredVersion_2118_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_2119_major = 2;
+                uint32_t l_minRequiredVersion_2119_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_2120_major = 2;
+                uint32_t l_minRequiredVersion_2120_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2121_major = 2;
+                uint32_t l_minRequiredVersion_2121_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2122_major = 2;
+                uint32_t l_minRequiredVersion_2122_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_2123_major = 2;
+                uint32_t l_minRequiredVersion_2123_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_2124_major = 2;
+                uint32_t l_minRequiredVersion_2124_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2125_major = 2;
+                uint32_t l_minRequiredVersion_2125_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2126_major = 2;
+                uint32_t l_minRequiredVersion_2126_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_2127_major = 2;
+                uint32_t l_minRequiredVersion_2127_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_2128_major = 2;
+                uint32_t l_minRequiredVersion_2128_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_2129_major = 3;
+                uint32_t l_minRequiredVersion_2129_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_2130_major = 3;
+                uint32_t l_minRequiredVersion_2130_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_2131_major = 3;
+                uint32_t l_minRequiredVersion_2131_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_2132_major = 3;
+                uint32_t l_minRequiredVersion_2132_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_2133_major = 3;
+                uint32_t l_minRequiredVersion_2133_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_2134_major = 2;
+                uint32_t l_minRequiredVersion_2134_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_2135_major = 3;
+                uint32_t l_minRequiredVersion_2135_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2136_major = 3;
+                uint32_t l_minRequiredVersion_2136_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1143_major = 3;
-                uint32_t l_minRequiredVersion_1143_minor = 2;
+                uint32_t l_minRequiredVersion_2137_major = 3;
+                uint32_t l_minRequiredVersion_2137_minor = 2;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_2138_major = 3;
+                uint32_t l_minRequiredVersion_2138_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_2139_major = 3;
+                uint32_t l_minRequiredVersion_2139_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2140_major = 3;
+                uint32_t l_minRequiredVersion_2140_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2141_major = 3;
+                uint32_t l_minRequiredVersion_2141_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2142_major = 3;
+                uint32_t l_minRequiredVersion_2142_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_2143_major = 3;
+                uint32_t l_minRequiredVersion_2143_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2144_major = 3;
+                uint32_t l_minRequiredVersion_2144_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2145_major = 3;
+                uint32_t l_minRequiredVersion_2145_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2146_major = 3;
+                uint32_t l_minRequiredVersion_2146_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2147_major = 3;
+                uint32_t l_minRequiredVersion_2147_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2148_major = 2;
+                uint32_t l_minRequiredVersion_2148_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_2149_major = 3;
+                uint32_t l_minRequiredVersion_2149_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2150_major = 3;
+                uint32_t l_minRequiredVersion_2150_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_2151_major = 3;
+                uint32_t l_minRequiredVersion_2151_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2152_major = 3;
+                uint32_t l_minRequiredVersion_2152_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2153_major = 3;
+                uint32_t l_minRequiredVersion_2153_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_2154_major = 3;
+                uint32_t l_minRequiredVersion_2154_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_2155_major = 3;
+                uint32_t l_minRequiredVersion_2155_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_2156_major = 3;
+                uint32_t l_minRequiredVersion_2156_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_2157_major = 3;
+                uint32_t l_minRequiredVersion_2157_minor = 1;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_2158_major = 2;
+                uint32_t l_minRequiredVersion_2158_minor = 0;
+                write(slice(l_observeGlGetWrites_1903_v, 0, 4));
                 break;
             }
         }
-        observe(observations.mReads);
-        mImports.glGetInteger64i_v(target, index, data);
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetInteger64i_v coder(
-            observations, target, index,
+            observations, param, index,
             gapic::coder::gles::GLint64__P(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
+                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Object(&coder);
 }
 
 inline bool GlesSpy::hasGlGetInteger64v() const { return mImports.glGetInteger64v != nullptr; }
 
-inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
-    GAPID_INFO("glGetInteger64v(%u, %p)", pname, data);
+inline void GlesSpy::glGetInteger64v(uint32_t param, int64_t* values) {
+    GAPID_INFO("glGetInteger64v(%u, %p)", param, values);
 
     if (!hasGlGetInteger64v()) {
         GAPID_WARNING("Application called unsupported function glGetInteger64v");
@@ -24245,290 +29297,1554 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1145_major = 3;
-        uint32_t l_minRequiredVersion_1145_minor = 0;
-        switch (pname) {
-            case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:                       // fall-through...
-            case GLenum::GL_ALPHA_BITS:                                     // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_BLEND:                                          // fall-through...
-            case GLenum::GL_BLEND_COLOR:                                    // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                                  // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:                           // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                             // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                                  // fall-through...
-            case GLenum::GL_BLUE_BITS:                                      // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                                // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:                     // fall-through...
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_CULL_FACE:                                      // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                                 // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                                // fall-through...
-            case GLenum::GL_DEPTH_BITS:                                     // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                                     // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                                    // fall-through...
-            case GLenum::GL_DEPTH_TEST:                                     // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                                // fall-through...
-            case GLenum::GL_DITHER:                                         // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:                   // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_FRONT_FACE:                                     // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:                           // fall-through...
-            case GLenum::GL_GREEN_BITS:                                     // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:               // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:                 // fall-through...
-            case GLenum::GL_LINE_WIDTH:                                     // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:               // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:                      // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:                   // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                               // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:                            // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                             // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:                     // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                              // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:                 // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:                      // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                                 // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:                          // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:                            // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:                           // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_RED_BITS:                                       // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_SAMPLES:                                        // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:                       // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                                 // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                                // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:                         // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:                          // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                                    // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                                   // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:                          // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                                // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                               // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:                        // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:                         // fall-through...
-            case GLenum::GL_STENCIL_BITS:                                   // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:                            // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                                   // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                                   // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:                        // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:                        // fall-through...
-            case GLenum::GL_STENCIL_REF:                                    // fall-through...
-            case GLenum::GL_STENCIL_TEST:                                   // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                             // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                              // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                                  // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:                       // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                               // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING:                           // fall-through...
-            case GLenum::GL_VIEWPORT: {
+        uint32_t l_minRequiredVersion_2160_major = 3;
+        uint32_t l_minRequiredVersion_2160_minor = 0;
+        uint32_t l_observeGlGetWrites_2161_param = param;
+        GLint64* l_observeGlGetWrites_2161_v = values;
+        observe(observations.mReads);
+        mImports.glGetInteger64v(param, values);
+        switch (l_observeGlGetWrites_2161_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_2162_major = 2;
+                uint32_t l_minRequiredVersion_2162_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
                 break;
             }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1146_major = 3;
-                uint32_t l_minRequiredVersion_1146_minor = 1;
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2163_major = 2;
+                uint32_t l_minRequiredVersion_2163_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 2));
                 break;
             }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_2164_major = 2;
+                uint32_t l_minRequiredVersion_2164_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_2165_major = 2;
+                uint32_t l_minRequiredVersion_2165_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2166_major = 2;
+                uint32_t l_minRequiredVersion_2166_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_2167_major = 2;
+                uint32_t l_minRequiredVersion_2167_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_2168_major = 2;
+                uint32_t l_minRequiredVersion_2168_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_2169_major = 2;
+                uint32_t l_minRequiredVersion_2169_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_2170_major = 2;
+                uint32_t l_minRequiredVersion_2170_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_2171_major = 2;
+                uint32_t l_minRequiredVersion_2171_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_2172_major = 2;
+                uint32_t l_minRequiredVersion_2172_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_2173_major = 2;
+                uint32_t l_minRequiredVersion_2173_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_2174_major = 2;
+                uint32_t l_minRequiredVersion_2174_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_2175_major = 2;
+                uint32_t l_minRequiredVersion_2175_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2176_major = 2;
+                uint32_t l_minRequiredVersion_2176_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2177_major = 2;
+                uint32_t l_minRequiredVersion_2177_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2178_major = 2;
+                uint32_t l_minRequiredVersion_2178_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_2179_major = 3;
+                uint32_t l_minRequiredVersion_2179_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_2180_major = 3;
+                uint32_t l_minRequiredVersion_2180_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2181_major = 3;
+                uint32_t l_minRequiredVersion_2181_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2182_major = 3;
+                uint32_t l_minRequiredVersion_2182_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_2183_major = 2;
+                uint32_t l_minRequiredVersion_2183_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_2184_major = 2;
+                uint32_t l_minRequiredVersion_2184_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_2185_major = 2;
+                uint32_t l_minRequiredVersion_2185_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2186_major = 3;
+                uint32_t l_minRequiredVersion_2186_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2187_major = 3;
+                uint32_t l_minRequiredVersion_2187_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2188_major = 3;
+                uint32_t l_minRequiredVersion_2188_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_2189_major = 2;
+                uint32_t l_minRequiredVersion_2189_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2190_major = 2;
+                uint32_t l_minRequiredVersion_2190_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_2191_major = 2;
+                uint32_t l_minRequiredVersion_2191_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_2192_major = 2;
+                uint32_t l_minRequiredVersion_2192_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_2193_major = 2;
+                uint32_t l_minRequiredVersion_2193_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2194_major = 2;
+                uint32_t l_minRequiredVersion_2194_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2195_major = 3;
+                uint32_t l_minRequiredVersion_2195_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_2196_major = 2;
+                uint32_t l_minRequiredVersion_2196_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_2197_major = 3;
+                uint32_t l_minRequiredVersion_2197_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2198_major = 2;
+                uint32_t l_minRequiredVersion_2198_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2199_major = 2;
+                uint32_t l_minRequiredVersion_2199_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_2200_major = 3;
+                uint32_t l_minRequiredVersion_2200_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_2201_major = 3;
+                uint32_t l_minRequiredVersion_2201_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_2202_major = 2;
+                uint32_t l_minRequiredVersion_2202_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_2203_major = 2;
+                uint32_t l_minRequiredVersion_2203_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_2204_major = 2;
+                uint32_t l_minRequiredVersion_2204_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_2205_major = 3;
+                uint32_t l_minRequiredVersion_2205_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_2206_major = 2;
+                uint32_t l_minRequiredVersion_2206_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_2207_major = 2;
+                uint32_t l_minRequiredVersion_2207_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_2208_major = 3;
+                uint32_t l_minRequiredVersion_2208_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_2209_major = 2;
+                uint32_t l_minRequiredVersion_2209_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_2210_major = 3;
+                uint32_t l_minRequiredVersion_2210_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2211_major = 3;
+                uint32_t l_minRequiredVersion_2211_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_2212_major = 3;
+                uint32_t l_minRequiredVersion_2212_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2213_major = 3;
+                uint32_t l_minRequiredVersion_2213_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_2214_major = 3;
+                uint32_t l_minRequiredVersion_2214_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_2215_major = 3;
+                uint32_t l_minRequiredVersion_2215_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2216_major = 3;
+                uint32_t l_minRequiredVersion_2216_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2217_major = 3;
+                uint32_t l_minRequiredVersion_2217_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2218_major = 3;
+                uint32_t l_minRequiredVersion_2218_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2219_major = 3;
+                uint32_t l_minRequiredVersion_2219_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2220_major = 3;
+                uint32_t l_minRequiredVersion_2220_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2221_major = 3;
+                uint32_t l_minRequiredVersion_2221_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2222_major = 3;
+                uint32_t l_minRequiredVersion_2222_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2223_major = 2;
+                uint32_t l_minRequiredVersion_2223_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2224_major = 3;
+                uint32_t l_minRequiredVersion_2224_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2225_major = 3;
+                uint32_t l_minRequiredVersion_2225_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2226_major = 3;
+                uint32_t l_minRequiredVersion_2226_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2227_major = 3;
+                uint32_t l_minRequiredVersion_2227_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2228_major = 3;
+                uint32_t l_minRequiredVersion_2228_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2229_major = 3;
+                uint32_t l_minRequiredVersion_2229_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2230_major = 3;
+                uint32_t l_minRequiredVersion_2230_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2231_major = 3;
+                uint32_t l_minRequiredVersion_2231_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2232_major = 3;
+                uint32_t l_minRequiredVersion_2232_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_2233_major = 3;
+                uint32_t l_minRequiredVersion_2233_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2234_major = 3;
+                uint32_t l_minRequiredVersion_2234_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_2235_major = 3;
+                uint32_t l_minRequiredVersion_2235_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2236_major = 2;
+                uint32_t l_minRequiredVersion_2236_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2237_major = 3;
+                uint32_t l_minRequiredVersion_2237_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2238_major = 3;
+                uint32_t l_minRequiredVersion_2238_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2239_major = 3;
+                uint32_t l_minRequiredVersion_2239_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_2240_major = 3;
+                uint32_t l_minRequiredVersion_2240_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_2241_major = 3;
+                uint32_t l_minRequiredVersion_2241_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_2242_major = 3;
+                uint32_t l_minRequiredVersion_2242_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_2243_major = 3;
+                uint32_t l_minRequiredVersion_2243_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2244_major = 3;
+                uint32_t l_minRequiredVersion_2244_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2245_major = 3;
+                uint32_t l_minRequiredVersion_2245_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2246_major = 3;
+                uint32_t l_minRequiredVersion_2246_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2247_major = 3;
+                uint32_t l_minRequiredVersion_2247_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2248_major = 3;
+                uint32_t l_minRequiredVersion_2248_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2249_major = 3;
+                uint32_t l_minRequiredVersion_2249_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2250_major = 3;
+                uint32_t l_minRequiredVersion_2250_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2251_major = 3;
+                uint32_t l_minRequiredVersion_2251_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2252_major = 2;
+                uint32_t l_minRequiredVersion_2252_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_2253_major = 3;
+                uint32_t l_minRequiredVersion_2253_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_2254_major = 3;
+                uint32_t l_minRequiredVersion_2254_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2255_major = 3;
+                uint32_t l_minRequiredVersion_2255_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_2256_major = 3;
+                uint32_t l_minRequiredVersion_2256_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2257_major = 3;
+                uint32_t l_minRequiredVersion_2257_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2258_major = 3;
+                uint32_t l_minRequiredVersion_2258_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2259_major = 3;
+                uint32_t l_minRequiredVersion_2259_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2260_major = 3;
+                uint32_t l_minRequiredVersion_2260_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2261_major = 3;
+                uint32_t l_minRequiredVersion_2261_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_2262_major = 3;
+                uint32_t l_minRequiredVersion_2262_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2263_major = 3;
+                uint32_t l_minRequiredVersion_2263_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2264_major = 3;
+                uint32_t l_minRequiredVersion_2264_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2265_major = 3;
+                uint32_t l_minRequiredVersion_2265_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2266_major = 3;
+                uint32_t l_minRequiredVersion_2266_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2267_major = 3;
+                uint32_t l_minRequiredVersion_2267_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2268_major = 3;
+                uint32_t l_minRequiredVersion_2268_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2269_major = 3;
+                uint32_t l_minRequiredVersion_2269_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_2270_major = 3;
+                uint32_t l_minRequiredVersion_2270_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2271_major = 3;
+                uint32_t l_minRequiredVersion_2271_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2272_major = 2;
+                uint32_t l_minRequiredVersion_2272_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_2273_major = 3;
+                uint32_t l_minRequiredVersion_2273_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_2274_major = 3;
+                uint32_t l_minRequiredVersion_2274_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_2275_major = 3;
+                uint32_t l_minRequiredVersion_2275_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2276_major = 3;
+                uint32_t l_minRequiredVersion_2276_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2277_major = 3;
+                uint32_t l_minRequiredVersion_2277_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2278_major = 3;
+                uint32_t l_minRequiredVersion_2278_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2279_major = 3;
+                uint32_t l_minRequiredVersion_2279_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2280_major = 3;
+                uint32_t l_minRequiredVersion_2280_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2281_major = 3;
+                uint32_t l_minRequiredVersion_2281_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2282_major = 3;
+                uint32_t l_minRequiredVersion_2282_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2283_major = 3;
+                uint32_t l_minRequiredVersion_2283_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2284_major = 3;
+                uint32_t l_minRequiredVersion_2284_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2285_major = 3;
+                uint32_t l_minRequiredVersion_2285_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2286_major = 3;
+                uint32_t l_minRequiredVersion_2286_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2287_major = 3;
+                uint32_t l_minRequiredVersion_2287_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2288_major = 3;
+                uint32_t l_minRequiredVersion_2288_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2289_major = 3;
+                uint32_t l_minRequiredVersion_2289_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2290_major = 3;
+                uint32_t l_minRequiredVersion_2290_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2291_major = 3;
+                uint32_t l_minRequiredVersion_2291_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2292_major = 3;
+                uint32_t l_minRequiredVersion_2292_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2293_major = 3;
+                uint32_t l_minRequiredVersion_2293_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2294_major = 3;
+                uint32_t l_minRequiredVersion_2294_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2295_major = 3;
+                uint32_t l_minRequiredVersion_2295_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2296_major = 3;
+                uint32_t l_minRequiredVersion_2296_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_2297_major = 3;
+                uint32_t l_minRequiredVersion_2297_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2298_major = 3;
+                uint32_t l_minRequiredVersion_2298_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2299_major = 3;
+                uint32_t l_minRequiredVersion_2299_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2300_major = 2;
+                uint32_t l_minRequiredVersion_2300_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_2301_major = 3;
+                uint32_t l_minRequiredVersion_2301_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2302_major = 2;
+                uint32_t l_minRequiredVersion_2302_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2303_major = 3;
+                uint32_t l_minRequiredVersion_2303_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2304_major = 3;
+                uint32_t l_minRequiredVersion_2304_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2305_major = 3;
+                uint32_t l_minRequiredVersion_2305_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2306_major = 3;
+                uint32_t l_minRequiredVersion_2306_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2307_major = 3;
+                uint32_t l_minRequiredVersion_2307_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_2308_major = 3;
+                uint32_t l_minRequiredVersion_2308_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2309_major = 3;
+                uint32_t l_minRequiredVersion_2309_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_2310_major = 2;
+                uint32_t l_minRequiredVersion_2310_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2311_major = 3;
+                uint32_t l_minRequiredVersion_2311_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_2312_major = 3;
+                uint32_t l_minRequiredVersion_2312_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_2313_major = 3;
+                uint32_t l_minRequiredVersion_2313_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2314_major = 2;
+                uint32_t l_minRequiredVersion_2314_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2315_major = 3;
+                uint32_t l_minRequiredVersion_2315_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2316_major = 3;
+                uint32_t l_minRequiredVersion_2316_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2317_major = 3;
+                uint32_t l_minRequiredVersion_2317_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2318_major = 2;
+                uint32_t l_minRequiredVersion_2318_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2319_major = 3;
+                uint32_t l_minRequiredVersion_2319_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2320_major = 3;
+                uint32_t l_minRequiredVersion_2320_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2321_major = 2;
+                uint32_t l_minRequiredVersion_2321_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_2322_major = 2;
+                uint32_t l_minRequiredVersion_2322_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2323_major = 3;
+                uint32_t l_minRequiredVersion_2323_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2324_major = 3;
+                uint32_t l_minRequiredVersion_2324_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_2325_major = 3;
+                uint32_t l_minRequiredVersion_2325_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_2326_major = 3;
+                uint32_t l_minRequiredVersion_2326_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2327_major = 3;
+                uint32_t l_minRequiredVersion_2327_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2328_major = 2;
+                uint32_t l_minRequiredVersion_2328_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_2329_major = 3;
+                uint32_t l_minRequiredVersion_2329_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2330_major = 3;
+                uint32_t l_minRequiredVersion_2330_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2331_major = 2;
+                uint32_t l_minRequiredVersion_2331_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2332_major = 2;
+                uint32_t l_minRequiredVersion_2332_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2333_major = 3;
+                uint32_t l_minRequiredVersion_2333_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2334_major = 3;
+                uint32_t l_minRequiredVersion_2334_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2335_major = 3;
+                uint32_t l_minRequiredVersion_2335_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_2336_major = 3;
+                uint32_t l_minRequiredVersion_2336_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2337_major = 3;
+                uint32_t l_minRequiredVersion_2337_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2338_major = 3;
+                uint32_t l_minRequiredVersion_2338_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_2339_major = 2;
+                uint32_t l_minRequiredVersion_2339_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_2340_major = 2;
+                uint32_t l_minRequiredVersion_2340_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_2341_major = 2;
+                uint32_t l_minRequiredVersion_2341_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_2342_major = 3;
+                uint32_t l_minRequiredVersion_2342_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_2343_major = 3;
+                uint32_t l_minRequiredVersion_2343_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2344_major = 3;
+                uint32_t l_minRequiredVersion_2344_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_2345_major = 3;
+                uint32_t l_minRequiredVersion_2345_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_2346_major = 3;
+                uint32_t l_minRequiredVersion_2346_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_2347_major = 3;
+                uint32_t l_minRequiredVersion_2347_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2348_major = 3;
+                uint32_t l_minRequiredVersion_2348_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_2349_major = 2;
+                uint32_t l_minRequiredVersion_2349_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2350_major = 2;
+                uint32_t l_minRequiredVersion_2350_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_2351_major = 3;
+                uint32_t l_minRequiredVersion_2351_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_2352_major = 2;
+                uint32_t l_minRequiredVersion_2352_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_2353_major = 2;
+                uint32_t l_minRequiredVersion_2353_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_2354_major = 2;
+                uint32_t l_minRequiredVersion_2354_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_2355_major = 2;
+                uint32_t l_minRequiredVersion_2355_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_2356_major = 2;
+                uint32_t l_minRequiredVersion_2356_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_2357_major = 3;
+                uint32_t l_minRequiredVersion_2357_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_2358_major = 3;
+                uint32_t l_minRequiredVersion_2358_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_2359_major = 2;
+                uint32_t l_minRequiredVersion_2359_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_2360_major = 2;
+                uint32_t l_minRequiredVersion_2360_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_2361_major = 2;
+                uint32_t l_minRequiredVersion_2361_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2362_major = 2;
+                uint32_t l_minRequiredVersion_2362_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_2363_major = 2;
+                uint32_t l_minRequiredVersion_2363_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2364_major = 3;
+                uint32_t l_minRequiredVersion_2364_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2365_major = 3;
+                uint32_t l_minRequiredVersion_2365_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2366_major = 3;
+                uint32_t l_minRequiredVersion_2366_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2367_major = 3;
+                uint32_t l_minRequiredVersion_2367_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_2368_major = 2;
+                uint32_t l_minRequiredVersion_2368_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_2369_major = 2;
+                uint32_t l_minRequiredVersion_2369_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2370_major = 2;
+                uint32_t l_minRequiredVersion_2370_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2371_major = 2;
+                uint32_t l_minRequiredVersion_2371_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_2372_major = 2;
+                uint32_t l_minRequiredVersion_2372_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2373_major = 2;
+                uint32_t l_minRequiredVersion_2373_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2374_major = 2;
+                uint32_t l_minRequiredVersion_2374_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_2375_major = 2;
+                uint32_t l_minRequiredVersion_2375_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2376_major = 2;
+                uint32_t l_minRequiredVersion_2376_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_2377_major = 2;
+                uint32_t l_minRequiredVersion_2377_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_2378_major = 2;
+                uint32_t l_minRequiredVersion_2378_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2379_major = 2;
+                uint32_t l_minRequiredVersion_2379_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2380_major = 2;
+                uint32_t l_minRequiredVersion_2380_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_2381_major = 2;
+                uint32_t l_minRequiredVersion_2381_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_2382_major = 2;
+                uint32_t l_minRequiredVersion_2382_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2383_major = 2;
+                uint32_t l_minRequiredVersion_2383_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2384_major = 2;
+                uint32_t l_minRequiredVersion_2384_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_2385_major = 2;
+                uint32_t l_minRequiredVersion_2385_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_2386_major = 2;
+                uint32_t l_minRequiredVersion_2386_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_2387_major = 3;
+                uint32_t l_minRequiredVersion_2387_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_2388_major = 3;
+                uint32_t l_minRequiredVersion_2388_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_2389_major = 3;
+                uint32_t l_minRequiredVersion_2389_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_2390_major = 3;
+                uint32_t l_minRequiredVersion_2390_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_2391_major = 3;
+                uint32_t l_minRequiredVersion_2391_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_2392_major = 2;
+                uint32_t l_minRequiredVersion_2392_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_2393_major = 3;
+                uint32_t l_minRequiredVersion_2393_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2394_major = 3;
+                uint32_t l_minRequiredVersion_2394_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1147_major = 3;
-                uint32_t l_minRequiredVersion_1147_minor = 2;
+                uint32_t l_minRequiredVersion_2395_major = 3;
+                uint32_t l_minRequiredVersion_2395_minor = 2;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_2396_major = 3;
+                uint32_t l_minRequiredVersion_2396_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_2397_major = 3;
+                uint32_t l_minRequiredVersion_2397_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2398_major = 3;
+                uint32_t l_minRequiredVersion_2398_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2399_major = 3;
+                uint32_t l_minRequiredVersion_2399_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2400_major = 3;
+                uint32_t l_minRequiredVersion_2400_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_2401_major = 3;
+                uint32_t l_minRequiredVersion_2401_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2402_major = 3;
+                uint32_t l_minRequiredVersion_2402_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2403_major = 3;
+                uint32_t l_minRequiredVersion_2403_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2404_major = 3;
+                uint32_t l_minRequiredVersion_2404_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2405_major = 3;
+                uint32_t l_minRequiredVersion_2405_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2406_major = 2;
+                uint32_t l_minRequiredVersion_2406_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_2407_major = 3;
+                uint32_t l_minRequiredVersion_2407_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2408_major = 3;
+                uint32_t l_minRequiredVersion_2408_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_2409_major = 3;
+                uint32_t l_minRequiredVersion_2409_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2410_major = 3;
+                uint32_t l_minRequiredVersion_2410_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2411_major = 3;
+                uint32_t l_minRequiredVersion_2411_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_2412_major = 3;
+                uint32_t l_minRequiredVersion_2412_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_2413_major = 3;
+                uint32_t l_minRequiredVersion_2413_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_2414_major = 3;
+                uint32_t l_minRequiredVersion_2414_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_2415_major = 3;
+                uint32_t l_minRequiredVersion_2415_minor = 1;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_2416_major = 2;
+                uint32_t l_minRequiredVersion_2416_minor = 0;
+                write(slice(l_observeGlGetWrites_2161_v, 0, 4));
                 break;
             }
         }
-        observe(observations.mReads);
-        mImports.glGetInteger64v(pname, data);
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetInteger64v coder(
-            observations, pname, gapic::coder::gles::GLint64__P(gapic::coder::memory::Pointer(
-                                         reinterpret_cast<uintptr_t>(data), 0)));
+            observations, param, gapic::coder::gles::GLint64__P(gapic::coder::memory::Pointer(
+                                         reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Object(&coder);
 }
 
 inline bool GlesSpy::hasGlGetIntegeri_v() const { return mImports.glGetIntegeri_v != nullptr; }
 
-inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* data) {
-    GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", target, index, data);
+inline void GlesSpy::glGetIntegeri_v(uint32_t param, uint32_t index, int32_t* values) {
+    GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", param, index, values);
 
     if (!hasGlGetIntegeri_v()) {
         GAPID_WARNING("Application called unsupported function glGetIntegeri_v");
@@ -24537,283 +30853,1547 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1149_major = 3;
-        uint32_t l_minRequiredVersion_1149_minor = 0;
-        switch (target) {
-            case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:                       // fall-through...
-            case GLenum::GL_ALPHA_BITS:                                     // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_BLEND:                                          // fall-through...
-            case GLenum::GL_BLEND_COLOR:                                    // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                                  // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:                           // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                             // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                                // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                                  // fall-through...
-            case GLenum::GL_BLUE_BITS:                                      // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                                // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:                     // fall-through...
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_CULL_FACE:                                      // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                                 // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                                // fall-through...
-            case GLenum::GL_DEPTH_BITS:                                     // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                              // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                                     // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                                    // fall-through...
-            case GLenum::GL_DEPTH_TEST:                                     // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                                // fall-through...
-            case GLenum::GL_DITHER:                                         // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:                   // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_FRONT_FACE:                                     // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:                           // fall-through...
-            case GLenum::GL_GREEN_BITS:                                     // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:               // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:                 // fall-through...
-            case GLenum::GL_LINE_WIDTH:                                     // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:               // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:                      // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:                   // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                               // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:                            // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                             // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:                     // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                              // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:                 // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:                      // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                                 // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:                          // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:                            // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:                           // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_RED_BITS:                                       // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_SAMPLES:                                        // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:                       // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                                 // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                                // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:                         // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:                          // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                                    // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                                   // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:                          // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                                // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                              // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                               // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:                        // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:                         // fall-through...
-            case GLenum::GL_STENCIL_BITS:                                   // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:                            // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                                   // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                                   // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:                        // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:                        // fall-through...
-            case GLenum::GL_STENCIL_REF:                                    // fall-through...
-            case GLenum::GL_STENCIL_TEST:                                   // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                             // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                              // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                                  // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:                       // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                               // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING:                           // fall-through...
-            case GLenum::GL_VIEWPORT: {
+        uint32_t l_minRequiredVersion_2418_major = 3;
+        uint32_t l_minRequiredVersion_2418_minor = 0;
+        uint32_t l_observeGlGetWrites_2419_param = param;
+        GLint* l_observeGlGetWrites_2419_v = values;
+        observe(observations.mReads);
+        mImports.glGetIntegeri_v(param, index, values);
+        switch (l_observeGlGetWrites_2419_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_2420_major = 2;
+                uint32_t l_minRequiredVersion_2420_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
                 break;
             }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1150_major = 3;
-                uint32_t l_minRequiredVersion_1150_minor = 1;
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2421_major = 2;
+                uint32_t l_minRequiredVersion_2421_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 2));
                 break;
             }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_2422_major = 2;
+                uint32_t l_minRequiredVersion_2422_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_2423_major = 2;
+                uint32_t l_minRequiredVersion_2423_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2424_major = 2;
+                uint32_t l_minRequiredVersion_2424_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_2425_major = 2;
+                uint32_t l_minRequiredVersion_2425_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_2426_major = 2;
+                uint32_t l_minRequiredVersion_2426_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_2427_major = 2;
+                uint32_t l_minRequiredVersion_2427_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_2428_major = 2;
+                uint32_t l_minRequiredVersion_2428_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_2429_major = 2;
+                uint32_t l_minRequiredVersion_2429_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_2430_major = 2;
+                uint32_t l_minRequiredVersion_2430_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_2431_major = 2;
+                uint32_t l_minRequiredVersion_2431_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_2432_major = 2;
+                uint32_t l_minRequiredVersion_2432_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_2433_major = 2;
+                uint32_t l_minRequiredVersion_2433_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2434_major = 2;
+                uint32_t l_minRequiredVersion_2434_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2435_major = 2;
+                uint32_t l_minRequiredVersion_2435_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2436_major = 2;
+                uint32_t l_minRequiredVersion_2436_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_2437_major = 3;
+                uint32_t l_minRequiredVersion_2437_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_2438_major = 3;
+                uint32_t l_minRequiredVersion_2438_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2439_major = 3;
+                uint32_t l_minRequiredVersion_2439_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2440_major = 3;
+                uint32_t l_minRequiredVersion_2440_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_2441_major = 2;
+                uint32_t l_minRequiredVersion_2441_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_2442_major = 2;
+                uint32_t l_minRequiredVersion_2442_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_2443_major = 2;
+                uint32_t l_minRequiredVersion_2443_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2444_major = 3;
+                uint32_t l_minRequiredVersion_2444_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2445_major = 3;
+                uint32_t l_minRequiredVersion_2445_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2446_major = 3;
+                uint32_t l_minRequiredVersion_2446_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_2447_major = 2;
+                uint32_t l_minRequiredVersion_2447_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2448_major = 2;
+                uint32_t l_minRequiredVersion_2448_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_2449_major = 2;
+                uint32_t l_minRequiredVersion_2449_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_2450_major = 2;
+                uint32_t l_minRequiredVersion_2450_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_2451_major = 2;
+                uint32_t l_minRequiredVersion_2451_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2452_major = 2;
+                uint32_t l_minRequiredVersion_2452_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2453_major = 3;
+                uint32_t l_minRequiredVersion_2453_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_2454_major = 2;
+                uint32_t l_minRequiredVersion_2454_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_2455_major = 3;
+                uint32_t l_minRequiredVersion_2455_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2456_major = 2;
+                uint32_t l_minRequiredVersion_2456_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2457_major = 2;
+                uint32_t l_minRequiredVersion_2457_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_2458_major = 3;
+                uint32_t l_minRequiredVersion_2458_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_2459_major = 3;
+                uint32_t l_minRequiredVersion_2459_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_2460_major = 2;
+                uint32_t l_minRequiredVersion_2460_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_2461_major = 2;
+                uint32_t l_minRequiredVersion_2461_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_2462_major = 2;
+                uint32_t l_minRequiredVersion_2462_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_2463_major = 3;
+                uint32_t l_minRequiredVersion_2463_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_2464_major = 2;
+                uint32_t l_minRequiredVersion_2464_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_2465_major = 2;
+                uint32_t l_minRequiredVersion_2465_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_2466_major = 3;
+                uint32_t l_minRequiredVersion_2466_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_2467_major = 2;
+                uint32_t l_minRequiredVersion_2467_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_2468_major = 3;
+                uint32_t l_minRequiredVersion_2468_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2469_major = 3;
+                uint32_t l_minRequiredVersion_2469_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_2470_major = 3;
+                uint32_t l_minRequiredVersion_2470_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2471_major = 3;
+                uint32_t l_minRequiredVersion_2471_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_2472_major = 3;
+                uint32_t l_minRequiredVersion_2472_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_2473_major = 3;
+                uint32_t l_minRequiredVersion_2473_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2474_major = 3;
+                uint32_t l_minRequiredVersion_2474_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2475_major = 3;
+                uint32_t l_minRequiredVersion_2475_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2476_major = 3;
+                uint32_t l_minRequiredVersion_2476_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2477_major = 3;
+                uint32_t l_minRequiredVersion_2477_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2478_major = 3;
+                uint32_t l_minRequiredVersion_2478_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2479_major = 3;
+                uint32_t l_minRequiredVersion_2479_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2480_major = 3;
+                uint32_t l_minRequiredVersion_2480_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2481_major = 2;
+                uint32_t l_minRequiredVersion_2481_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2482_major = 3;
+                uint32_t l_minRequiredVersion_2482_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2483_major = 3;
+                uint32_t l_minRequiredVersion_2483_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2484_major = 3;
+                uint32_t l_minRequiredVersion_2484_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2485_major = 3;
+                uint32_t l_minRequiredVersion_2485_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2486_major = 3;
+                uint32_t l_minRequiredVersion_2486_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2487_major = 3;
+                uint32_t l_minRequiredVersion_2487_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2488_major = 3;
+                uint32_t l_minRequiredVersion_2488_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2489_major = 3;
+                uint32_t l_minRequiredVersion_2489_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2490_major = 3;
+                uint32_t l_minRequiredVersion_2490_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_2491_major = 3;
+                uint32_t l_minRequiredVersion_2491_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2492_major = 3;
+                uint32_t l_minRequiredVersion_2492_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_2493_major = 3;
+                uint32_t l_minRequiredVersion_2493_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2494_major = 2;
+                uint32_t l_minRequiredVersion_2494_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2495_major = 3;
+                uint32_t l_minRequiredVersion_2495_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2496_major = 3;
+                uint32_t l_minRequiredVersion_2496_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2497_major = 3;
+                uint32_t l_minRequiredVersion_2497_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_2498_major = 3;
+                uint32_t l_minRequiredVersion_2498_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_2499_major = 3;
+                uint32_t l_minRequiredVersion_2499_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_2500_major = 3;
+                uint32_t l_minRequiredVersion_2500_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_2501_major = 3;
+                uint32_t l_minRequiredVersion_2501_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2502_major = 3;
+                uint32_t l_minRequiredVersion_2502_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2503_major = 3;
+                uint32_t l_minRequiredVersion_2503_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2504_major = 3;
+                uint32_t l_minRequiredVersion_2504_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2505_major = 3;
+                uint32_t l_minRequiredVersion_2505_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2506_major = 3;
+                uint32_t l_minRequiredVersion_2506_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2507_major = 3;
+                uint32_t l_minRequiredVersion_2507_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2508_major = 3;
+                uint32_t l_minRequiredVersion_2508_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2509_major = 3;
+                uint32_t l_minRequiredVersion_2509_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2510_major = 2;
+                uint32_t l_minRequiredVersion_2510_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_2511_major = 3;
+                uint32_t l_minRequiredVersion_2511_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_2512_major = 3;
+                uint32_t l_minRequiredVersion_2512_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2513_major = 3;
+                uint32_t l_minRequiredVersion_2513_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_2514_major = 3;
+                uint32_t l_minRequiredVersion_2514_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2515_major = 3;
+                uint32_t l_minRequiredVersion_2515_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2516_major = 3;
+                uint32_t l_minRequiredVersion_2516_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2517_major = 3;
+                uint32_t l_minRequiredVersion_2517_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2518_major = 3;
+                uint32_t l_minRequiredVersion_2518_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2519_major = 3;
+                uint32_t l_minRequiredVersion_2519_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_2520_major = 3;
+                uint32_t l_minRequiredVersion_2520_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2521_major = 3;
+                uint32_t l_minRequiredVersion_2521_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2522_major = 3;
+                uint32_t l_minRequiredVersion_2522_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2523_major = 3;
+                uint32_t l_minRequiredVersion_2523_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2524_major = 3;
+                uint32_t l_minRequiredVersion_2524_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2525_major = 3;
+                uint32_t l_minRequiredVersion_2525_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2526_major = 3;
+                uint32_t l_minRequiredVersion_2526_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2527_major = 3;
+                uint32_t l_minRequiredVersion_2527_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_2528_major = 3;
+                uint32_t l_minRequiredVersion_2528_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2529_major = 3;
+                uint32_t l_minRequiredVersion_2529_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2530_major = 2;
+                uint32_t l_minRequiredVersion_2530_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_2531_major = 3;
+                uint32_t l_minRequiredVersion_2531_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_2532_major = 3;
+                uint32_t l_minRequiredVersion_2532_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_2533_major = 3;
+                uint32_t l_minRequiredVersion_2533_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2534_major = 3;
+                uint32_t l_minRequiredVersion_2534_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2535_major = 3;
+                uint32_t l_minRequiredVersion_2535_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2536_major = 3;
+                uint32_t l_minRequiredVersion_2536_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2537_major = 3;
+                uint32_t l_minRequiredVersion_2537_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2538_major = 3;
+                uint32_t l_minRequiredVersion_2538_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2539_major = 3;
+                uint32_t l_minRequiredVersion_2539_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2540_major = 3;
+                uint32_t l_minRequiredVersion_2540_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2541_major = 3;
+                uint32_t l_minRequiredVersion_2541_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2542_major = 3;
+                uint32_t l_minRequiredVersion_2542_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2543_major = 3;
+                uint32_t l_minRequiredVersion_2543_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2544_major = 3;
+                uint32_t l_minRequiredVersion_2544_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2545_major = 3;
+                uint32_t l_minRequiredVersion_2545_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2546_major = 3;
+                uint32_t l_minRequiredVersion_2546_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2547_major = 3;
+                uint32_t l_minRequiredVersion_2547_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2548_major = 3;
+                uint32_t l_minRequiredVersion_2548_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2549_major = 3;
+                uint32_t l_minRequiredVersion_2549_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2550_major = 3;
+                uint32_t l_minRequiredVersion_2550_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2551_major = 3;
+                uint32_t l_minRequiredVersion_2551_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2552_major = 3;
+                uint32_t l_minRequiredVersion_2552_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2553_major = 3;
+                uint32_t l_minRequiredVersion_2553_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2554_major = 3;
+                uint32_t l_minRequiredVersion_2554_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_2555_major = 3;
+                uint32_t l_minRequiredVersion_2555_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2556_major = 3;
+                uint32_t l_minRequiredVersion_2556_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2557_major = 3;
+                uint32_t l_minRequiredVersion_2557_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2558_major = 2;
+                uint32_t l_minRequiredVersion_2558_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_2559_major = 3;
+                uint32_t l_minRequiredVersion_2559_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2560_major = 2;
+                uint32_t l_minRequiredVersion_2560_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2561_major = 3;
+                uint32_t l_minRequiredVersion_2561_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2562_major = 3;
+                uint32_t l_minRequiredVersion_2562_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2563_major = 3;
+                uint32_t l_minRequiredVersion_2563_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2564_major = 3;
+                uint32_t l_minRequiredVersion_2564_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2565_major = 3;
+                uint32_t l_minRequiredVersion_2565_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_2566_major = 3;
+                uint32_t l_minRequiredVersion_2566_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2567_major = 3;
+                uint32_t l_minRequiredVersion_2567_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_2568_major = 2;
+                uint32_t l_minRequiredVersion_2568_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2569_major = 3;
+                uint32_t l_minRequiredVersion_2569_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_2570_major = 3;
+                uint32_t l_minRequiredVersion_2570_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_2571_major = 3;
+                uint32_t l_minRequiredVersion_2571_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2572_major = 2;
+                uint32_t l_minRequiredVersion_2572_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2573_major = 3;
+                uint32_t l_minRequiredVersion_2573_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2574_major = 3;
+                uint32_t l_minRequiredVersion_2574_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2575_major = 3;
+                uint32_t l_minRequiredVersion_2575_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2576_major = 2;
+                uint32_t l_minRequiredVersion_2576_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2577_major = 3;
+                uint32_t l_minRequiredVersion_2577_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2578_major = 3;
+                uint32_t l_minRequiredVersion_2578_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2579_major = 2;
+                uint32_t l_minRequiredVersion_2579_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_2580_major = 2;
+                uint32_t l_minRequiredVersion_2580_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2581_major = 3;
+                uint32_t l_minRequiredVersion_2581_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2582_major = 3;
+                uint32_t l_minRequiredVersion_2582_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_2583_major = 3;
+                uint32_t l_minRequiredVersion_2583_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_2584_major = 3;
+                uint32_t l_minRequiredVersion_2584_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2585_major = 3;
+                uint32_t l_minRequiredVersion_2585_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2586_major = 2;
+                uint32_t l_minRequiredVersion_2586_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_2587_major = 3;
+                uint32_t l_minRequiredVersion_2587_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2588_major = 3;
+                uint32_t l_minRequiredVersion_2588_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2589_major = 2;
+                uint32_t l_minRequiredVersion_2589_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2590_major = 2;
+                uint32_t l_minRequiredVersion_2590_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2591_major = 3;
+                uint32_t l_minRequiredVersion_2591_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2592_major = 3;
+                uint32_t l_minRequiredVersion_2592_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2593_major = 3;
+                uint32_t l_minRequiredVersion_2593_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_2594_major = 3;
+                uint32_t l_minRequiredVersion_2594_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2595_major = 3;
+                uint32_t l_minRequiredVersion_2595_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2596_major = 3;
+                uint32_t l_minRequiredVersion_2596_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_2597_major = 2;
+                uint32_t l_minRequiredVersion_2597_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_2598_major = 2;
+                uint32_t l_minRequiredVersion_2598_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_2599_major = 2;
+                uint32_t l_minRequiredVersion_2599_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_2600_major = 3;
+                uint32_t l_minRequiredVersion_2600_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_2601_major = 3;
+                uint32_t l_minRequiredVersion_2601_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2602_major = 3;
+                uint32_t l_minRequiredVersion_2602_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_2603_major = 3;
+                uint32_t l_minRequiredVersion_2603_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_2604_major = 3;
+                uint32_t l_minRequiredVersion_2604_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_2605_major = 3;
+                uint32_t l_minRequiredVersion_2605_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2606_major = 3;
+                uint32_t l_minRequiredVersion_2606_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_2607_major = 2;
+                uint32_t l_minRequiredVersion_2607_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2608_major = 2;
+                uint32_t l_minRequiredVersion_2608_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_2609_major = 3;
+                uint32_t l_minRequiredVersion_2609_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_2610_major = 2;
+                uint32_t l_minRequiredVersion_2610_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_2611_major = 2;
+                uint32_t l_minRequiredVersion_2611_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_2612_major = 2;
+                uint32_t l_minRequiredVersion_2612_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_2613_major = 2;
+                uint32_t l_minRequiredVersion_2613_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_2614_major = 2;
+                uint32_t l_minRequiredVersion_2614_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_2615_major = 3;
+                uint32_t l_minRequiredVersion_2615_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_2616_major = 3;
+                uint32_t l_minRequiredVersion_2616_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_2617_major = 2;
+                uint32_t l_minRequiredVersion_2617_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_2618_major = 2;
+                uint32_t l_minRequiredVersion_2618_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_2619_major = 2;
+                uint32_t l_minRequiredVersion_2619_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2620_major = 2;
+                uint32_t l_minRequiredVersion_2620_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_2621_major = 2;
+                uint32_t l_minRequiredVersion_2621_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2622_major = 3;
+                uint32_t l_minRequiredVersion_2622_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2623_major = 3;
+                uint32_t l_minRequiredVersion_2623_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2624_major = 3;
+                uint32_t l_minRequiredVersion_2624_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2625_major = 3;
+                uint32_t l_minRequiredVersion_2625_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_2626_major = 2;
+                uint32_t l_minRequiredVersion_2626_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_2627_major = 2;
+                uint32_t l_minRequiredVersion_2627_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2628_major = 2;
+                uint32_t l_minRequiredVersion_2628_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2629_major = 2;
+                uint32_t l_minRequiredVersion_2629_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_2630_major = 2;
+                uint32_t l_minRequiredVersion_2630_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2631_major = 2;
+                uint32_t l_minRequiredVersion_2631_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2632_major = 2;
+                uint32_t l_minRequiredVersion_2632_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_2633_major = 2;
+                uint32_t l_minRequiredVersion_2633_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2634_major = 2;
+                uint32_t l_minRequiredVersion_2634_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_2635_major = 2;
+                uint32_t l_minRequiredVersion_2635_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_2636_major = 2;
+                uint32_t l_minRequiredVersion_2636_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2637_major = 2;
+                uint32_t l_minRequiredVersion_2637_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2638_major = 2;
+                uint32_t l_minRequiredVersion_2638_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_2639_major = 2;
+                uint32_t l_minRequiredVersion_2639_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_2640_major = 2;
+                uint32_t l_minRequiredVersion_2640_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2641_major = 2;
+                uint32_t l_minRequiredVersion_2641_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2642_major = 2;
+                uint32_t l_minRequiredVersion_2642_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_2643_major = 2;
+                uint32_t l_minRequiredVersion_2643_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_2644_major = 2;
+                uint32_t l_minRequiredVersion_2644_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_2645_major = 3;
+                uint32_t l_minRequiredVersion_2645_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_2646_major = 3;
+                uint32_t l_minRequiredVersion_2646_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_2647_major = 3;
+                uint32_t l_minRequiredVersion_2647_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_2648_major = 3;
+                uint32_t l_minRequiredVersion_2648_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_2649_major = 3;
+                uint32_t l_minRequiredVersion_2649_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_2650_major = 2;
+                uint32_t l_minRequiredVersion_2650_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_2651_major = 3;
+                uint32_t l_minRequiredVersion_2651_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2652_major = 3;
+                uint32_t l_minRequiredVersion_2652_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1151_major = 3;
-                uint32_t l_minRequiredVersion_1151_minor = 2;
+                uint32_t l_minRequiredVersion_2653_major = 3;
+                uint32_t l_minRequiredVersion_2653_minor = 2;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_2654_major = 3;
+                uint32_t l_minRequiredVersion_2654_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_2655_major = 3;
+                uint32_t l_minRequiredVersion_2655_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2656_major = 3;
+                uint32_t l_minRequiredVersion_2656_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2657_major = 3;
+                uint32_t l_minRequiredVersion_2657_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2658_major = 3;
+                uint32_t l_minRequiredVersion_2658_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_2659_major = 3;
+                uint32_t l_minRequiredVersion_2659_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2660_major = 3;
+                uint32_t l_minRequiredVersion_2660_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2661_major = 3;
+                uint32_t l_minRequiredVersion_2661_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2662_major = 3;
+                uint32_t l_minRequiredVersion_2662_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2663_major = 3;
+                uint32_t l_minRequiredVersion_2663_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2664_major = 2;
+                uint32_t l_minRequiredVersion_2664_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_2665_major = 3;
+                uint32_t l_minRequiredVersion_2665_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2666_major = 3;
+                uint32_t l_minRequiredVersion_2666_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_2667_major = 3;
+                uint32_t l_minRequiredVersion_2667_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2668_major = 3;
+                uint32_t l_minRequiredVersion_2668_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2669_major = 3;
+                uint32_t l_minRequiredVersion_2669_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_2670_major = 3;
+                uint32_t l_minRequiredVersion_2670_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_2671_major = 3;
+                uint32_t l_minRequiredVersion_2671_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_2672_major = 3;
+                uint32_t l_minRequiredVersion_2672_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_2673_major = 3;
+                uint32_t l_minRequiredVersion_2673_minor = 1;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_2674_major = 2;
+                uint32_t l_minRequiredVersion_2674_minor = 0;
+                write(slice(l_observeGlGetWrites_2419_v, 0, 4));
                 break;
             }
         }
-        observe(observations.mReads);
-        mImports.glGetIntegeri_v(target, index, data);
     } while (false);
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetIntegeri_v coder(
-            observations, target, index, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
-                                                 reinterpret_cast<uintptr_t>(data), 0)));
+            observations, param, index, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
+                                                reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Object(&coder);
 }
 
@@ -24829,287 +32409,16 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1153_major = 2;
-        uint32_t l_minRequiredVersion_1153_minor = 0;
-        switch (param) {
-            case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
-            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
-            case GLenum::GL_ALIASED_POINT_SIZE_RANGE:          // fall-through...
-            case GLenum::GL_ALPHA_BITS:                        // fall-through...
-            case GLenum::GL_ARRAY_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_BLEND:                             // fall-through...
-            case GLenum::GL_BLEND_COLOR:                       // fall-through...
-            case GLenum::GL_BLEND_DST_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_DST_RGB:                     // fall-through...
-            case GLenum::GL_BLEND_EQUATION_ALPHA:              // fall-through...
-            case GLenum::GL_BLEND_EQUATION_RGB:                // fall-through...
-            case GLenum::GL_BLEND_SRC_ALPHA:                   // fall-through...
-            case GLenum::GL_BLEND_SRC_RGB:                     // fall-through...
-            case GLenum::GL_BLUE_BITS:                         // fall-through...
-            case GLenum::GL_COLOR_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_COLOR_WRITEMASK:                   // fall-through...
-            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS:        // fall-through...
-            case GLenum::GL_CULL_FACE:                         // fall-through...
-            case GLenum::GL_CULL_FACE_MODE:                    // fall-through...
-            case GLenum::GL_CURRENT_PROGRAM:                   // fall-through...
-            case GLenum::GL_DEPTH_BITS:                        // fall-through...
-            case GLenum::GL_DEPTH_CLEAR_VALUE:                 // fall-through...
-            case GLenum::GL_DEPTH_FUNC:                        // fall-through...
-            case GLenum::GL_DEPTH_RANGE:                       // fall-through...
-            case GLenum::GL_DEPTH_TEST:                        // fall-through...
-            case GLenum::GL_DEPTH_WRITEMASK:                   // fall-through...
-            case GLenum::GL_DITHER:                            // fall-through...
-            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:      // fall-through...
-            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING:          // fall-through...
-            case GLenum::GL_FRONT_FACE:                        // fall-through...
-            case GLenum::GL_GENERATE_MIPMAP_HINT:              // fall-through...
-            case GLenum::GL_GREEN_BITS:                        // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:  // fall-through...
-            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:    // fall-through...
-            case GLenum::GL_LINE_WIDTH:                        // fall-through...
-            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:  // fall-through...
-            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:      // fall-through...
-            case GLenum::GL_MAX_RENDERBUFFER_SIZE:             // fall-through...
-            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:           // fall-through...
-            case GLenum::GL_MAX_TEXTURE_SIZE:                  // fall-through...
-            case GLenum::GL_MAX_VARYING_VECTORS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIBS:                // fall-through...
-            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:    // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:        // fall-through...
-            case GLenum::GL_MAX_VIEWPORT_DIMS:                 // fall-through...
-            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:    // fall-through...
-            case GLenum::GL_NUM_SHADER_BINARY_FORMATS:         // fall-through...
-            case GLenum::GL_PACK_ALIGNMENT:                    // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FACTOR:             // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_FILL:               // fall-through...
-            case GLenum::GL_POLYGON_OFFSET_UNITS:              // fall-through...
-            case GLenum::GL_RED_BITS:                          // fall-through...
-            case GLenum::GL_RENDERBUFFER_BINDING:              // fall-through...
-            case GLenum::GL_SAMPLES:                           // fall-through...
-            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:          // fall-through...
-            case GLenum::GL_SAMPLE_BUFFERS:                    // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE:                   // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_INVERT:            // fall-through...
-            case GLenum::GL_SAMPLE_COVERAGE_VALUE:             // fall-through...
-            case GLenum::GL_SCISSOR_BOX:                       // fall-through...
-            case GLenum::GL_SCISSOR_TEST:                      // fall-through...
-            case GLenum::GL_SHADER_BINARY_FORMATS:             // fall-through...
-            case GLenum::GL_SHADER_COMPILER:                   // fall-through...
-            case GLenum::GL_STENCIL_BACK_FAIL:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_FUNC:                 // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:      // fall-through...
-            case GLenum::GL_STENCIL_BACK_REF:                  // fall-through...
-            case GLenum::GL_STENCIL_BACK_VALUE_MASK:           // fall-through...
-            case GLenum::GL_STENCIL_BACK_WRITEMASK:            // fall-through...
-            case GLenum::GL_STENCIL_BITS:                      // fall-through...
-            case GLenum::GL_STENCIL_CLEAR_VALUE:               // fall-through...
-            case GLenum::GL_STENCIL_FAIL:                      // fall-through...
-            case GLenum::GL_STENCIL_FUNC:                      // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:           // fall-through...
-            case GLenum::GL_STENCIL_PASS_DEPTH_PASS:           // fall-through...
-            case GLenum::GL_STENCIL_REF:                       // fall-through...
-            case GLenum::GL_STENCIL_TEST:                      // fall-through...
-            case GLenum::GL_STENCIL_VALUE_MASK:                // fall-through...
-            case GLenum::GL_STENCIL_WRITEMASK:                 // fall-through...
-            case GLenum::GL_SUBPIXEL_BITS:                     // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D:                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:          // fall-through...
-            case GLenum::GL_UNPACK_ALIGNMENT:                  // fall-through...
-            case GLenum::GL_VIEWPORT: {
-                break;
-            }
-            case GLenum::GL_COPY_READ_BUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_COPY_WRITE_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_DRAW_BUFFER:                                    // fall-through...
-            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT:                // fall-through...
-            case GLenum::GL_MAJOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MAX_3D_TEXTURE_SIZE:                            // fall-through...
-            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS:                       // fall-through...
-            case GLenum::GL_MAX_COLOR_ATTACHMENTS:                          // fall-through...
-            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:       // fall-through...
-            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_DRAW_BUFFERS:                               // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_INDICES:                           // fall-through...
-            case GLenum::GL_MAX_ELEMENTS_VERTICES:                          // fall-through...
-            case GLenum::GL_MAX_ELEMENT_INDEX:                              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS:                    // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_MAX_SAMPLES:                                    // fall-through...
-            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_LOD_BIAS:                           // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:        // fall-through...
-            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:                         // fall-through...
-            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS:                    // fall-through...
-            case GLenum::GL_MAX_VARYING_COMPONENTS:                         // fall-through...
-            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MINOR_VERSION:                                  // fall-through...
-            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET:                       // fall-through...
-            case GLenum::GL_NUM_EXTENSIONS:                                 // fall-through...
-            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:                     // fall-through...
-            case GLenum::GL_PACK_ROW_LENGTH:                                // fall-through...
-            case GLenum::GL_PACK_SKIP_PIXELS:                               // fall-through...
-            case GLenum::GL_PACK_SKIP_ROWS:                                 // fall-through...
-            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING:                      // fall-through...
-            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING:                    // fall-through...
-            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:                  // fall-through...
-            case GLenum::GL_PROGRAM_BINARY_FORMATS:                         // fall-through...
-            case GLenum::GL_RASTERIZER_DISCARD:                             // fall-through...
-            case GLenum::GL_READ_BUFFER:                                    // fall-through...
-            case GLenum::GL_READ_FRAMEBUFFER_BINDING:                       // fall-through...
-            case GLenum::GL_SAMPLER_BINDING:                                // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY:                       // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_3D:                             // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE:                      // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING:                     // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:              // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:                 // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START:                // fall-through...
-            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED:                      // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_BINDING:                         // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:                // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_SIZE:                            // fall-through...
-            case GLenum::GL_UNIFORM_BUFFER_START:                           // fall-through...
-            case GLenum::GL_UNPACK_IMAGE_HEIGHT:                            // fall-through...
-            case GLenum::GL_UNPACK_ROW_LENGTH:                              // fall-through...
-            case GLenum::GL_UNPACK_SKIP_IMAGES:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
-            case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
-            case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_1154_major = 3;
-                uint32_t l_minRequiredVersion_1154_minor = 0;
-                break;
-            }
-            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
-            case GLenum::GL_IMAGE_BINDING_LAYERED:                    // fall-through...
-            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES:                // fall-through...
-            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT:             // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:       // fall-through...
-            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS:             // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:       // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT:                   // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES:                  // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH:                    // fall-through...
-            case GLenum::GL_MAX_INTEGER_SAMPLES:                      // fall-through...
-            case GLenum::GL_MAX_SAMPLE_MASK_WORDS:                    // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE:            // fall-through...
-            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:       // fall-through...
-            case GLenum::GL_MAX_UNIFORM_LOCATIONS:                    // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS:               // fall-through...
-            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:        // fall-through...
-            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:         // fall-through...
-            case GLenum::GL_PROGRAM_PIPELINE_BINDING:                 // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING:            // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:   // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE:               // fall-through...
-            case GLenum::GL_SHADER_STORAGE_BUFFER_START:              // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE:           // fall-through...
-            case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
-            case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
-            case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_1155_major = 3;
-                uint32_t l_minRequiredVersion_1155_minor = 1;
-                break;
-            }
-            case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
-            case GLenum::GL_CONTEXT_ROBUST_ACCESS:                            // fall-through...
-            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH:                          // fall-through...
-            case GLenum::GL_DEBUG_LOGGED_MESSAGES:                            // fall-through...
-            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:                 // fall-through...
-            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:               // fall-through...
-            case GLenum::GL_LAYER_PROVOKING_VERTEX:                           // fall-through...
-            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:     // fall-through...
-            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:  // fall-through...
-            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS:                       // fall-through...
-            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH:                      // fall-through...
-            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES:                        // fall-through...
-            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH:                         // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS:                           // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:              // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS:                    // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:                   // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES:                     // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS:                  // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:                 // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS:                      // fall-through...
-            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:                  // fall-through...
-            case GLenum::GL_MAX_LABEL_LENGTH:                                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:                 // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:          // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:                // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:               // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:           // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:             // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:         // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:                  // fall-through...
-            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:              // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:       // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:             // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:            // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:        // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:          // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:               // fall-through...
-            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:           // fall-through...
-            case GLenum::GL_MAX_TESS_GEN_LEVEL:                               // fall-through...
-            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS:                        // fall-through...
-            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE:                          // fall-through...
-            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS:                        // fall-through...
-            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:                // fall-through...
-            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE:                         // fall-through...
-            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE:                     // fall-through...
-            case GLenum::GL_PATCH_VERTICES:                                   // fall-through...
-            case GLenum::GL_PRIMITIVE_BOUNDING_BOX:                           // fall-through...
-            case GLenum::GL_RESET_NOTIFICATION_STRATEGY:                      // fall-through...
-            case GLenum::GL_SAMPLE_SHADING:                                   // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:             // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_BUFFER:                           // fall-through...
-            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
-            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_1156_major = 3;
-                uint32_t l_minRequiredVersion_1156_minor = 2;
-                break;
-            }
-        }
+        uint32_t l_minRequiredVersion_2676_major = 2;
+        uint32_t l_minRequiredVersion_2676_minor = 0;
         Slice<GLint> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1159_msg = "No context bound";
+            std::string l_error_2678_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1158_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1158_result;
+        std::shared_ptr<Context> l_GetContext_2677_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2677_result;
         observe(observations.mReads);
         mImports.glGetIntegerv(param, values);
         switch (param) {
@@ -25391,6 +32700,1537 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                 break;
             }
         }
+        uint32_t l_observeGlGetWrites_2679_param = param;
+        GLint* l_observeGlGetWrites_2679_v = values;
+        switch (l_observeGlGetWrites_2679_param) {
+            case GLenum::GL_ACTIVE_TEXTURE: {
+                uint32_t l_minRequiredVersion_2680_major = 2;
+                uint32_t l_minRequiredVersion_2680_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2681_major = 2;
+                uint32_t l_minRequiredVersion_2681_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
+                uint32_t l_minRequiredVersion_2682_major = 2;
+                uint32_t l_minRequiredVersion_2682_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_ALPHA_BITS: {
+                uint32_t l_minRequiredVersion_2683_major = 2;
+                uint32_t l_minRequiredVersion_2683_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2684_major = 2;
+                uint32_t l_minRequiredVersion_2684_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND: {
+                uint32_t l_minRequiredVersion_2685_major = 2;
+                uint32_t l_minRequiredVersion_2685_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_COLOR: {
+                uint32_t l_minRequiredVersion_2686_major = 2;
+                uint32_t l_minRequiredVersion_2686_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_ALPHA: {
+                uint32_t l_minRequiredVersion_2687_major = 2;
+                uint32_t l_minRequiredVersion_2687_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_DST_RGB: {
+                uint32_t l_minRequiredVersion_2688_major = 2;
+                uint32_t l_minRequiredVersion_2688_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
+                uint32_t l_minRequiredVersion_2689_major = 2;
+                uint32_t l_minRequiredVersion_2689_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_EQUATION_RGB: {
+                uint32_t l_minRequiredVersion_2690_major = 2;
+                uint32_t l_minRequiredVersion_2690_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_ALPHA: {
+                uint32_t l_minRequiredVersion_2691_major = 2;
+                uint32_t l_minRequiredVersion_2691_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLEND_SRC_RGB: {
+                uint32_t l_minRequiredVersion_2692_major = 2;
+                uint32_t l_minRequiredVersion_2692_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_BLUE_BITS: {
+                uint32_t l_minRequiredVersion_2693_major = 2;
+                uint32_t l_minRequiredVersion_2693_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2694_major = 2;
+                uint32_t l_minRequiredVersion_2694_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COLOR_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2695_major = 2;
+                uint32_t l_minRequiredVersion_2695_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2696_major = 2;
+                uint32_t l_minRequiredVersion_2696_minor = 0;
+                break;
+            }
+            case GLenum::GL_CONTEXT_FLAGS: {
+                uint32_t l_minRequiredVersion_2697_major = 3;
+                uint32_t l_minRequiredVersion_2697_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CONTEXT_ROBUST_ACCESS: {
+                uint32_t l_minRequiredVersion_2698_major = 3;
+                uint32_t l_minRequiredVersion_2698_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_READ_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2699_major = 3;
+                uint32_t l_minRequiredVersion_2699_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_COPY_WRITE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2700_major = 3;
+                uint32_t l_minRequiredVersion_2700_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE: {
+                uint32_t l_minRequiredVersion_2701_major = 2;
+                uint32_t l_minRequiredVersion_2701_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CULL_FACE_MODE: {
+                uint32_t l_minRequiredVersion_2702_major = 2;
+                uint32_t l_minRequiredVersion_2702_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_CURRENT_PROGRAM: {
+                uint32_t l_minRequiredVersion_2703_major = 2;
+                uint32_t l_minRequiredVersion_2703_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2704_major = 3;
+                uint32_t l_minRequiredVersion_2704_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2705_major = 3;
+                uint32_t l_minRequiredVersion_2705_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2706_major = 3;
+                uint32_t l_minRequiredVersion_2706_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_BITS: {
+                uint32_t l_minRequiredVersion_2707_major = 2;
+                uint32_t l_minRequiredVersion_2707_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2708_major = 2;
+                uint32_t l_minRequiredVersion_2708_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_FUNC: {
+                uint32_t l_minRequiredVersion_2709_major = 2;
+                uint32_t l_minRequiredVersion_2709_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_RANGE: {
+                uint32_t l_minRequiredVersion_2710_major = 2;
+                uint32_t l_minRequiredVersion_2710_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_DEPTH_TEST: {
+                uint32_t l_minRequiredVersion_2711_major = 2;
+                uint32_t l_minRequiredVersion_2711_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DEPTH_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2712_major = 2;
+                uint32_t l_minRequiredVersion_2712_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2713_major = 3;
+                uint32_t l_minRequiredVersion_2713_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DITHER: {
+                uint32_t l_minRequiredVersion_2714_major = 2;
+                uint32_t l_minRequiredVersion_2714_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_BUFFER: {
+                uint32_t l_minRequiredVersion_2715_major = 3;
+                uint32_t l_minRequiredVersion_2715_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_DRAW_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2716_major = 2;
+                uint32_t l_minRequiredVersion_2716_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2717_major = 2;
+                uint32_t l_minRequiredVersion_2717_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
+                uint32_t l_minRequiredVersion_2718_major = 3;
+                uint32_t l_minRequiredVersion_2718_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
+                uint32_t l_minRequiredVersion_2719_major = 3;
+                uint32_t l_minRequiredVersion_2719_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_FRONT_FACE: {
+                uint32_t l_minRequiredVersion_2720_major = 2;
+                uint32_t l_minRequiredVersion_2720_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
+                uint32_t l_minRequiredVersion_2721_major = 2;
+                uint32_t l_minRequiredVersion_2721_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_GREEN_BITS: {
+                uint32_t l_minRequiredVersion_2722_major = 2;
+                uint32_t l_minRequiredVersion_2722_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMAGE_BINDING_LAYERED: {
+                uint32_t l_minRequiredVersion_2723_major = 3;
+                uint32_t l_minRequiredVersion_2723_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+                uint32_t l_minRequiredVersion_2724_major = 2;
+                uint32_t l_minRequiredVersion_2724_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+                uint32_t l_minRequiredVersion_2725_major = 2;
+                uint32_t l_minRequiredVersion_2725_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LAYER_PROVOKING_VERTEX: {
+                uint32_t l_minRequiredVersion_2726_major = 3;
+                uint32_t l_minRequiredVersion_2726_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_LINE_WIDTH: {
+                uint32_t l_minRequiredVersion_2727_major = 2;
+                uint32_t l_minRequiredVersion_2727_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAJOR_VERSION: {
+                uint32_t l_minRequiredVersion_2728_major = 3;
+                uint32_t l_minRequiredVersion_2728_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2729_major = 3;
+                uint32_t l_minRequiredVersion_2729_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
+                uint32_t l_minRequiredVersion_2730_major = 3;
+                uint32_t l_minRequiredVersion_2730_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2731_major = 3;
+                uint32_t l_minRequiredVersion_2731_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                uint32_t l_minRequiredVersion_2732_major = 3;
+                uint32_t l_minRequiredVersion_2732_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
+                uint32_t l_minRequiredVersion_2733_major = 3;
+                uint32_t l_minRequiredVersion_2733_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2734_major = 3;
+                uint32_t l_minRequiredVersion_2734_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2735_major = 3;
+                uint32_t l_minRequiredVersion_2735_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2736_major = 3;
+                uint32_t l_minRequiredVersion_2736_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2737_major = 3;
+                uint32_t l_minRequiredVersion_2737_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2738_major = 3;
+                uint32_t l_minRequiredVersion_2738_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2739_major = 3;
+                uint32_t l_minRequiredVersion_2739_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2740_major = 3;
+                uint32_t l_minRequiredVersion_2740_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2741_major = 2;
+                uint32_t l_minRequiredVersion_2741_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2742_major = 3;
+                uint32_t l_minRequiredVersion_2742_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2743_major = 3;
+                uint32_t l_minRequiredVersion_2743_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2744_major = 3;
+                uint32_t l_minRequiredVersion_2744_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2745_major = 3;
+                uint32_t l_minRequiredVersion_2745_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2746_major = 3;
+                uint32_t l_minRequiredVersion_2746_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2747_major = 3;
+                uint32_t l_minRequiredVersion_2747_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2748_major = 3;
+                uint32_t l_minRequiredVersion_2748_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2749_major = 3;
+                uint32_t l_minRequiredVersion_2749_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2750_major = 3;
+                uint32_t l_minRequiredVersion_2750_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
+                uint32_t l_minRequiredVersion_2751_major = 3;
+                uint32_t l_minRequiredVersion_2751_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2752_major = 3;
+                uint32_t l_minRequiredVersion_2752_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
+                uint32_t l_minRequiredVersion_2753_major = 3;
+                uint32_t l_minRequiredVersion_2753_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2754_major = 2;
+                uint32_t l_minRequiredVersion_2754_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_GROUP_STACK_DEPTH: {
+                uint32_t l_minRequiredVersion_2755_major = 3;
+                uint32_t l_minRequiredVersion_2755_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_LOGGED_MESSAGES: {
+                uint32_t l_minRequiredVersion_2756_major = 3;
+                uint32_t l_minRequiredVersion_2756_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DEBUG_MESSAGE_LENGTH: {
+                uint32_t l_minRequiredVersion_2757_major = 3;
+                uint32_t l_minRequiredVersion_2757_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_DRAW_BUFFERS: {
+                uint32_t l_minRequiredVersion_2758_major = 3;
+                uint32_t l_minRequiredVersion_2758_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENT_INDEX: {
+                uint32_t l_minRequiredVersion_2759_major = 3;
+                uint32_t l_minRequiredVersion_2759_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_INDICES: {
+                uint32_t l_minRequiredVersion_2760_major = 3;
+                uint32_t l_minRequiredVersion_2760_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_ELEMENTS_VERTICES: {
+                uint32_t l_minRequiredVersion_2761_major = 3;
+                uint32_t l_minRequiredVersion_2761_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2762_major = 3;
+                uint32_t l_minRequiredVersion_2762_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2763_major = 3;
+                uint32_t l_minRequiredVersion_2763_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2764_major = 3;
+                uint32_t l_minRequiredVersion_2764_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2765_major = 3;
+                uint32_t l_minRequiredVersion_2765_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2766_major = 3;
+                uint32_t l_minRequiredVersion_2766_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2767_major = 3;
+                uint32_t l_minRequiredVersion_2767_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2768_major = 3;
+                uint32_t l_minRequiredVersion_2768_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2769_major = 3;
+                uint32_t l_minRequiredVersion_2769_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2770_major = 2;
+                uint32_t l_minRequiredVersion_2770_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
+                uint32_t l_minRequiredVersion_2771_major = 3;
+                uint32_t l_minRequiredVersion_2771_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
+                uint32_t l_minRequiredVersion_2772_major = 3;
+                uint32_t l_minRequiredVersion_2772_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2773_major = 3;
+                uint32_t l_minRequiredVersion_2773_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
+                uint32_t l_minRequiredVersion_2774_major = 3;
+                uint32_t l_minRequiredVersion_2774_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2775_major = 3;
+                uint32_t l_minRequiredVersion_2775_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2776_major = 3;
+                uint32_t l_minRequiredVersion_2776_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2777_major = 3;
+                uint32_t l_minRequiredVersion_2777_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2778_major = 3;
+                uint32_t l_minRequiredVersion_2778_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2779_major = 3;
+                uint32_t l_minRequiredVersion_2779_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
+                uint32_t l_minRequiredVersion_2780_major = 3;
+                uint32_t l_minRequiredVersion_2780_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
+                uint32_t l_minRequiredVersion_2781_major = 3;
+                uint32_t l_minRequiredVersion_2781_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2782_major = 3;
+                uint32_t l_minRequiredVersion_2782_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2783_major = 3;
+                uint32_t l_minRequiredVersion_2783_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2784_major = 3;
+                uint32_t l_minRequiredVersion_2784_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2785_major = 3;
+                uint32_t l_minRequiredVersion_2785_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2786_major = 3;
+                uint32_t l_minRequiredVersion_2786_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_INTEGER_SAMPLES: {
+                uint32_t l_minRequiredVersion_2787_major = 3;
+                uint32_t l_minRequiredVersion_2787_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_LABEL_LENGTH: {
+                uint32_t l_minRequiredVersion_2788_major = 3;
+                uint32_t l_minRequiredVersion_2788_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2789_major = 3;
+                uint32_t l_minRequiredVersion_2789_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2790_major = 2;
+                uint32_t l_minRequiredVersion_2790_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
+                uint32_t l_minRequiredVersion_2791_major = 3;
+                uint32_t l_minRequiredVersion_2791_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SAMPLES: {
+                uint32_t l_minRequiredVersion_2792_major = 3;
+                uint32_t l_minRequiredVersion_2792_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
+                uint32_t l_minRequiredVersion_2793_major = 3;
+                uint32_t l_minRequiredVersion_2793_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2794_major = 3;
+                uint32_t l_minRequiredVersion_2794_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2795_major = 3;
+                uint32_t l_minRequiredVersion_2795_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2796_major = 3;
+                uint32_t l_minRequiredVersion_2796_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2797_major = 3;
+                uint32_t l_minRequiredVersion_2797_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2798_major = 3;
+                uint32_t l_minRequiredVersion_2798_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2799_major = 3;
+                uint32_t l_minRequiredVersion_2799_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2800_major = 3;
+                uint32_t l_minRequiredVersion_2800_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2801_major = 3;
+                uint32_t l_minRequiredVersion_2801_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2802_major = 3;
+                uint32_t l_minRequiredVersion_2802_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2803_major = 3;
+                uint32_t l_minRequiredVersion_2803_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2804_major = 3;
+                uint32_t l_minRequiredVersion_2804_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2805_major = 3;
+                uint32_t l_minRequiredVersion_2805_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
+                uint32_t l_minRequiredVersion_2806_major = 3;
+                uint32_t l_minRequiredVersion_2806_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2807_major = 3;
+                uint32_t l_minRequiredVersion_2807_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2808_major = 3;
+                uint32_t l_minRequiredVersion_2808_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2809_major = 3;
+                uint32_t l_minRequiredVersion_2809_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2810_major = 3;
+                uint32_t l_minRequiredVersion_2810_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2811_major = 3;
+                uint32_t l_minRequiredVersion_2811_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2812_major = 3;
+                uint32_t l_minRequiredVersion_2812_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2813_major = 3;
+                uint32_t l_minRequiredVersion_2813_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2814_major = 3;
+                uint32_t l_minRequiredVersion_2814_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_GEN_LEVEL: {
+                uint32_t l_minRequiredVersion_2815_major = 3;
+                uint32_t l_minRequiredVersion_2815_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2816_major = 3;
+                uint32_t l_minRequiredVersion_2816_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2817_major = 3;
+                uint32_t l_minRequiredVersion_2817_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2818_major = 2;
+                uint32_t l_minRequiredVersion_2818_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
+                uint32_t l_minRequiredVersion_2819_major = 3;
+                uint32_t l_minRequiredVersion_2819_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
+                uint32_t l_minRequiredVersion_2820_major = 2;
+                uint32_t l_minRequiredVersion_2820_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2821_major = 3;
+                uint32_t l_minRequiredVersion_2821_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2822_major = 3;
+                uint32_t l_minRequiredVersion_2822_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2823_major = 3;
+                uint32_t l_minRequiredVersion_2823_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                uint32_t l_minRequiredVersion_2824_major = 3;
+                uint32_t l_minRequiredVersion_2824_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
+                uint32_t l_minRequiredVersion_2825_major = 3;
+                uint32_t l_minRequiredVersion_2825_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
+                uint32_t l_minRequiredVersion_2826_major = 3;
+                uint32_t l_minRequiredVersion_2826_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2827_major = 3;
+                uint32_t l_minRequiredVersion_2827_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VARYING_VECTORS: {
+                uint32_t l_minRequiredVersion_2828_major = 2;
+                uint32_t l_minRequiredVersion_2828_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
+                uint32_t l_minRequiredVersion_2829_major = 3;
+                uint32_t l_minRequiredVersion_2829_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
+                uint32_t l_minRequiredVersion_2830_major = 3;
+                uint32_t l_minRequiredVersion_2830_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
+                uint32_t l_minRequiredVersion_2831_major = 3;
+                uint32_t l_minRequiredVersion_2831_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
+                uint32_t l_minRequiredVersion_2832_major = 2;
+                uint32_t l_minRequiredVersion_2832_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
+                uint32_t l_minRequiredVersion_2833_major = 3;
+                uint32_t l_minRequiredVersion_2833_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2834_major = 3;
+                uint32_t l_minRequiredVersion_2834_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
+                uint32_t l_minRequiredVersion_2835_major = 3;
+                uint32_t l_minRequiredVersion_2835_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+                uint32_t l_minRequiredVersion_2836_major = 2;
+                uint32_t l_minRequiredVersion_2836_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
+                uint32_t l_minRequiredVersion_2837_major = 3;
+                uint32_t l_minRequiredVersion_2837_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                uint32_t l_minRequiredVersion_2838_major = 3;
+                uint32_t l_minRequiredVersion_2838_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+                uint32_t l_minRequiredVersion_2839_major = 2;
+                uint32_t l_minRequiredVersion_2839_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
+                uint32_t l_minRequiredVersion_2840_major = 2;
+                uint32_t l_minRequiredVersion_2840_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
+                uint32_t l_minRequiredVersion_2841_major = 3;
+                uint32_t l_minRequiredVersion_2841_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
+                uint32_t l_minRequiredVersion_2842_major = 3;
+                uint32_t l_minRequiredVersion_2842_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MIN_SAMPLE_SHADING_VALUE: {
+                uint32_t l_minRequiredVersion_2843_major = 3;
+                uint32_t l_minRequiredVersion_2843_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                uint32_t l_minRequiredVersion_2844_major = 3;
+                uint32_t l_minRequiredVersion_2844_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
+                uint32_t l_minRequiredVersion_2845_major = 3;
+                uint32_t l_minRequiredVersion_2845_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 2));
+                break;
+            }
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+                uint32_t l_minRequiredVersion_2846_major = 2;
+                uint32_t l_minRequiredVersion_2846_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_EXTENSIONS: {
+                uint32_t l_minRequiredVersion_2847_major = 3;
+                uint32_t l_minRequiredVersion_2847_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2848_major = 3;
+                uint32_t l_minRequiredVersion_2848_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2849_major = 2;
+                uint32_t l_minRequiredVersion_2849_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2850_major = 2;
+                uint32_t l_minRequiredVersion_2850_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2851_major = 3;
+                uint32_t l_minRequiredVersion_2851_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2852_major = 3;
+                uint32_t l_minRequiredVersion_2852_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2853_major = 3;
+                uint32_t l_minRequiredVersion_2853_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PATCH_VERTICES: {
+                uint32_t l_minRequiredVersion_2854_major = 3;
+                uint32_t l_minRequiredVersion_2854_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_PACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2855_major = 3;
+                uint32_t l_minRequiredVersion_2855_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PIXEL_UNPACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2856_major = 3;
+                uint32_t l_minRequiredVersion_2856_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
+                uint32_t l_minRequiredVersion_2857_major = 2;
+                uint32_t l_minRequiredVersion_2857_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                uint32_t l_minRequiredVersion_2858_major = 2;
+                uint32_t l_minRequiredVersion_2858_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
+                uint32_t l_minRequiredVersion_2859_major = 2;
+                uint32_t l_minRequiredVersion_2859_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_BOUNDING_BOX: {
+                uint32_t l_minRequiredVersion_2860_major = 3;
+                uint32_t l_minRequiredVersion_2860_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 8));
+                break;
+            }
+            case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX: {
+                uint32_t l_minRequiredVersion_2861_major = 3;
+                uint32_t l_minRequiredVersion_2861_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_PROGRAM_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2862_major = 3;
+                uint32_t l_minRequiredVersion_2862_minor = 0;
+                break;
+            }
+            case GLenum::GL_PROGRAM_PIPELINE_BINDING: {
+                uint32_t l_minRequiredVersion_2863_major = 3;
+                uint32_t l_minRequiredVersion_2863_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RASTERIZER_DISCARD: {
+                uint32_t l_minRequiredVersion_2864_major = 3;
+                uint32_t l_minRequiredVersion_2864_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_BUFFER: {
+                uint32_t l_minRequiredVersion_2865_major = 3;
+                uint32_t l_minRequiredVersion_2865_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2866_major = 3;
+                uint32_t l_minRequiredVersion_2866_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RED_BITS: {
+                uint32_t l_minRequiredVersion_2867_major = 2;
+                uint32_t l_minRequiredVersion_2867_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2868_major = 2;
+                uint32_t l_minRequiredVersion_2868_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_RESET_NOTIFICATION_STRATEGY: {
+                uint32_t l_minRequiredVersion_2869_major = 3;
+                uint32_t l_minRequiredVersion_2869_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                uint32_t l_minRequiredVersion_2870_major = 2;
+                uint32_t l_minRequiredVersion_2870_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_BUFFERS: {
+                uint32_t l_minRequiredVersion_2871_major = 2;
+                uint32_t l_minRequiredVersion_2871_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                uint32_t l_minRequiredVersion_2872_major = 2;
+                uint32_t l_minRequiredVersion_2872_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
+                uint32_t l_minRequiredVersion_2873_major = 2;
+                uint32_t l_minRequiredVersion_2873_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
+                uint32_t l_minRequiredVersion_2874_major = 2;
+                uint32_t l_minRequiredVersion_2874_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLE_SHADING: {
+                uint32_t l_minRequiredVersion_2875_major = 3;
+                uint32_t l_minRequiredVersion_2875_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLER_BINDING: {
+                uint32_t l_minRequiredVersion_2876_major = 3;
+                uint32_t l_minRequiredVersion_2876_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SAMPLES: {
+                uint32_t l_minRequiredVersion_2877_major = 2;
+                uint32_t l_minRequiredVersion_2877_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SCISSOR_BOX: {
+                uint32_t l_minRequiredVersion_2878_major = 2;
+                uint32_t l_minRequiredVersion_2878_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 4));
+                break;
+            }
+            case GLenum::GL_SCISSOR_TEST: {
+                uint32_t l_minRequiredVersion_2879_major = 2;
+                uint32_t l_minRequiredVersion_2879_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_BINARY_FORMATS: {
+                uint32_t l_minRequiredVersion_2880_major = 2;
+                uint32_t l_minRequiredVersion_2880_minor = 0;
+                break;
+            }
+            case GLenum::GL_SHADER_COMPILER: {
+                uint32_t l_minRequiredVersion_2881_major = 2;
+                uint32_t l_minRequiredVersion_2881_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2882_major = 3;
+                uint32_t l_minRequiredVersion_2882_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2883_major = 3;
+                uint32_t l_minRequiredVersion_2883_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2884_major = 3;
+                uint32_t l_minRequiredVersion_2884_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SHADER_STORAGE_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2885_major = 3;
+                uint32_t l_minRequiredVersion_2885_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                uint32_t l_minRequiredVersion_2886_major = 2;
+                uint32_t l_minRequiredVersion_2886_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                uint32_t l_minRequiredVersion_2887_major = 2;
+                uint32_t l_minRequiredVersion_2887_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2888_major = 2;
+                uint32_t l_minRequiredVersion_2888_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2889_major = 2;
+                uint32_t l_minRequiredVersion_2889_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                uint32_t l_minRequiredVersion_2890_major = 2;
+                uint32_t l_minRequiredVersion_2890_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2891_major = 2;
+                uint32_t l_minRequiredVersion_2891_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2892_major = 2;
+                uint32_t l_minRequiredVersion_2892_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_BITS: {
+                uint32_t l_minRequiredVersion_2893_major = 2;
+                uint32_t l_minRequiredVersion_2893_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
+                uint32_t l_minRequiredVersion_2894_major = 2;
+                uint32_t l_minRequiredVersion_2894_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                uint32_t l_minRequiredVersion_2895_major = 2;
+                uint32_t l_minRequiredVersion_2895_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                uint32_t l_minRequiredVersion_2896_major = 2;
+                uint32_t l_minRequiredVersion_2896_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                uint32_t l_minRequiredVersion_2897_major = 2;
+                uint32_t l_minRequiredVersion_2897_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                uint32_t l_minRequiredVersion_2898_major = 2;
+                uint32_t l_minRequiredVersion_2898_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                uint32_t l_minRequiredVersion_2899_major = 2;
+                uint32_t l_minRequiredVersion_2899_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                uint32_t l_minRequiredVersion_2900_major = 2;
+                uint32_t l_minRequiredVersion_2900_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                uint32_t l_minRequiredVersion_2901_major = 2;
+                uint32_t l_minRequiredVersion_2901_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                uint32_t l_minRequiredVersion_2902_major = 2;
+                uint32_t l_minRequiredVersion_2902_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_SUBPIXEL_BITS: {
+                uint32_t l_minRequiredVersion_2903_major = 2;
+                uint32_t l_minRequiredVersion_2903_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D: {
+                uint32_t l_minRequiredVersion_2904_major = 2;
+                uint32_t l_minRequiredVersion_2904_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_ARRAY: {
+                uint32_t l_minRequiredVersion_2905_major = 3;
+                uint32_t l_minRequiredVersion_2905_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE: {
+                uint32_t l_minRequiredVersion_2906_major = 3;
+                uint32_t l_minRequiredVersion_2906_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: {
+                uint32_t l_minRequiredVersion_2907_major = 3;
+                uint32_t l_minRequiredVersion_2907_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_3D: {
+                uint32_t l_minRequiredVersion_2908_major = 3;
+                uint32_t l_minRequiredVersion_2908_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_BUFFER: {
+                uint32_t l_minRequiredVersion_2909_major = 3;
+                uint32_t l_minRequiredVersion_2909_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
+                uint32_t l_minRequiredVersion_2910_major = 2;
+                uint32_t l_minRequiredVersion_2910_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY: {
+                uint32_t l_minRequiredVersion_2911_major = 3;
+                uint32_t l_minRequiredVersion_2911_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2912_major = 3;
+                uint32_t l_minRequiredVersion_2912_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2913_major = 3;
+                uint32_t l_minRequiredVersion_2913_minor = 2;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_ACTIVE: {
+                uint32_t l_minRequiredVersion_2914_major = 3;
+                uint32_t l_minRequiredVersion_2914_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BINDING: {
+                uint32_t l_minRequiredVersion_2915_major = 3;
+                uint32_t l_minRequiredVersion_2915_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2916_major = 3;
+                uint32_t l_minRequiredVersion_2916_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2917_major = 3;
+                uint32_t l_minRequiredVersion_2917_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2918_major = 3;
+                uint32_t l_minRequiredVersion_2918_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_TRANSFORM_FEEDBACK_PAUSED: {
+                uint32_t l_minRequiredVersion_2919_major = 3;
+                uint32_t l_minRequiredVersion_2919_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_BINDING: {
+                uint32_t l_minRequiredVersion_2920_major = 3;
+                uint32_t l_minRequiredVersion_2920_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2921_major = 3;
+                uint32_t l_minRequiredVersion_2921_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_SIZE: {
+                uint32_t l_minRequiredVersion_2922_major = 3;
+                uint32_t l_minRequiredVersion_2922_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNIFORM_BUFFER_START: {
+                uint32_t l_minRequiredVersion_2923_major = 3;
+                uint32_t l_minRequiredVersion_2923_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                uint32_t l_minRequiredVersion_2924_major = 2;
+                uint32_t l_minRequiredVersion_2924_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_IMAGE_HEIGHT: {
+                uint32_t l_minRequiredVersion_2925_major = 3;
+                uint32_t l_minRequiredVersion_2925_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_ROW_LENGTH: {
+                uint32_t l_minRequiredVersion_2926_major = 3;
+                uint32_t l_minRequiredVersion_2926_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_IMAGES: {
+                uint32_t l_minRequiredVersion_2927_major = 3;
+                uint32_t l_minRequiredVersion_2927_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_PIXELS: {
+                uint32_t l_minRequiredVersion_2928_major = 3;
+                uint32_t l_minRequiredVersion_2928_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_UNPACK_SKIP_ROWS: {
+                uint32_t l_minRequiredVersion_2929_major = 3;
+                uint32_t l_minRequiredVersion_2929_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_ARRAY_BINDING: {
+                uint32_t l_minRequiredVersion_2930_major = 3;
+                uint32_t l_minRequiredVersion_2930_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_DIVISOR: {
+                uint32_t l_minRequiredVersion_2931_major = 3;
+                uint32_t l_minRequiredVersion_2931_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_OFFSET: {
+                uint32_t l_minRequiredVersion_2932_major = 3;
+                uint32_t l_minRequiredVersion_2932_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VERTEX_BINDING_STRIDE: {
+                uint32_t l_minRequiredVersion_2933_major = 3;
+                uint32_t l_minRequiredVersion_2933_minor = 1;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 1));
+                break;
+            }
+            case GLenum::GL_VIEWPORT: {
+                uint32_t l_minRequiredVersion_2934_major = 2;
+                uint32_t l_minRequiredVersion_2934_minor = 0;
+                write(slice(l_observeGlGetWrites_2679_v, 0, 4));
+                break;
+            }
+        }
     } while (false);
     observe(observations.mWrites);
 
@@ -25416,20 +34256,20 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1160_major = 3;
-        uint32_t l_minRequiredVersion_1160_minor = 0;
+        uint32_t l_minRequiredVersion_2936_major = 3;
+        uint32_t l_minRequiredVersion_2936_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1161_major = 3;
-                uint32_t l_minRequiredVersion_1161_minor = 1;
+                uint32_t l_minRequiredVersion_2937_major = 3;
+                uint32_t l_minRequiredVersion_2937_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY: {
-                uint32_t l_minRequiredVersion_1162_major = 3;
-                uint32_t l_minRequiredVersion_1162_minor = 2;
+                uint32_t l_minRequiredVersion_2938_major = 3;
+                uint32_t l_minRequiredVersion_2938_minor = 2;
                 break;
             }
         }
@@ -25491,8 +34331,8 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
                 break;
             }
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1164_major = 3;
-                uint32_t l_minRequiredVersion_1164_minor = 2;
+                uint32_t l_minRequiredVersion_2940_major = 3;
+                uint32_t l_minRequiredVersion_2940_minor = 2;
                 break;
             }
         }
@@ -25528,8 +34368,8 @@ inline uint8_t* GlesSpy::glGetString(uint32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1167_major = 2;
-        uint32_t l_minRequiredVersion_1167_minor = 0;
+        uint32_t l_minRequiredVersion_2943_major = 2;
+        uint32_t l_minRequiredVersion_2943_minor = 0;
         switch (param) {
             case GLenum::GL_EXTENSIONS:                // fall-through...
             case GLenum::GL_RENDERER:                  // fall-through...
@@ -25567,8 +34407,8 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1169_major = 3;
-        uint32_t l_minRequiredVersion_1169_minor = 0;
+        uint32_t l_minRequiredVersion_2945_major = 3;
+        uint32_t l_minRequiredVersion_2945_minor = 0;
         switch (name) {
             case GLenum::GL_EXTENSIONS: {
                 break;
@@ -25603,8 +34443,8 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1171_major = 2;
-        uint32_t l_minRequiredVersion_1171_minor = 0;
+        uint32_t l_minRequiredVersion_2947_major = 2;
+        uint32_t l_minRequiredVersion_2947_minor = 0;
         switch (capability) {
             case GLenum::GL_BLEND:                     // fall-through...
             case GLenum::GL_CULL_FACE:                 // fall-through...
@@ -25619,25 +34459,25 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
             }
             case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:  // fall-through...
             case GLenum::GL_RASTERIZER_DISCARD: {
-                uint32_t l_minRequiredVersion_1172_major = 3;
-                uint32_t l_minRequiredVersion_1172_minor = 0;
+                uint32_t l_minRequiredVersion_2948_major = 3;
+                uint32_t l_minRequiredVersion_2948_minor = 0;
                 break;
             }
             case GLenum::GL_DEBUG_OUTPUT:              // fall-through...
             case GLenum::GL_DEBUG_OUTPUT_SYNCHRONOUS:  // fall-through...
             case GLenum::GL_SAMPLE_MASK: {
-                uint32_t l_minRequiredVersion_1173_major = 3;
-                uint32_t l_minRequiredVersion_1173_minor = 2;
+                uint32_t l_minRequiredVersion_2949_major = 3;
+                uint32_t l_minRequiredVersion_2949_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1176_msg = "No context bound";
+            std::string l_error_2952_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1175_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1175_result;
+        std::shared_ptr<Context> l_GetContext_2951_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2951_result;
         observe(observations.mReads);
         result = mImports.glIsEnabled(capability);
         break;
@@ -25664,8 +34504,8 @@ inline uint8_t GlesSpy::glIsEnabledi(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1177_major = 3;
-        uint32_t l_minRequiredVersion_1177_minor = 2;
+        uint32_t l_minRequiredVersion_2953_major = 3;
+        uint32_t l_minRequiredVersion_2953_minor = 2;
         switch (target) {
             case GLenum::GL_BLEND:                          // fall-through...
             case GLenum::GL_CULL_FACE:                      // fall-through...
@@ -25710,10 +34550,10 @@ inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1179_major = 3;
-        uint32_t l_minRequiredVersion_1179_minor = 0;
-        uint32_t l_supportsBits_1180_seenBits = syncFlags;
-        uint32_t l_supportsBits_1180_validBits = GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT;
+        uint32_t l_minRequiredVersion_2955_major = 3;
+        uint32_t l_minRequiredVersion_2955_minor = 0;
+        uint32_t l_supportsBits_2956_seenBits = syncFlags;
+        uint32_t l_supportsBits_2956_validBits = GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT;
         if ((syncFlags & GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT) != 0) {
         }
         observe(observations.mReads);
@@ -25740,8 +34580,8 @@ inline void GlesSpy::glDeleteSync(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1181_major = 3;
-        uint32_t l_minRequiredVersion_1181_minor = 0;
+        uint32_t l_minRequiredVersion_2957_major = 3;
+        uint32_t l_minRequiredVersion_2957_minor = 0;
         observe(observations.mReads);
         mImports.glDeleteSync(sync);
     } while (false);
@@ -25765,8 +34605,8 @@ inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1182_major = 3;
-        uint32_t l_minRequiredVersion_1182_minor = 0;
+        uint32_t l_minRequiredVersion_2958_major = 3;
+        uint32_t l_minRequiredVersion_2958_minor = 0;
         switch (condition) {
             case GLenum::GL_SYNC_GPU_COMMANDS_COMPLETE: {
                 break;
@@ -25798,8 +34638,8 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1184_major = 3;
-        uint32_t l_minRequiredVersion_1184_minor = 0;
+        uint32_t l_minRequiredVersion_2960_major = 3;
+        uint32_t l_minRequiredVersion_2960_minor = 0;
         observe(observations.mReads);
         mImports.glGetSynciv(sync, pname, bufSize, length, values);
         switch (pname) {
@@ -25842,8 +34682,8 @@ inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1186_major = 3;
-        uint32_t l_minRequiredVersion_1186_minor = 0;
+        uint32_t l_minRequiredVersion_2962_major = 3;
+        uint32_t l_minRequiredVersion_2962_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsSync(sync);
         break;
@@ -25868,8 +34708,8 @@ inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t time
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1187_major = 3;
-        uint32_t l_minRequiredVersion_1187_minor = 0;
+        uint32_t l_minRequiredVersion_2963_major = 3;
+        uint32_t l_minRequiredVersion_2963_minor = 0;
         observe(observations.mReads);
         mImports.glWaitSync(sync, syncFlags, timeout);
     } while (false);
@@ -25891,8 +34731,8 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1188_major = 2;
-        uint32_t l_minRequiredVersion_1188_minor = 0;
+        uint32_t l_minRequiredVersion_2964_major = 2;
+        uint32_t l_minRequiredVersion_2964_minor = 0;
         switch (unit) {
             case GLenum::GL_TEXTURE0:   // fall-through...
             case GLenum::GL_TEXTURE1:   // fall-through...
@@ -25931,11 +34771,11 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1191_msg = "No context bound";
+            std::string l_error_2967_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1190_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1190_result;
+        std::shared_ptr<Context> l_GetContext_2966_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2966_result;
         l_ctx->mActiveTextureUnit = unit;
         observe(observations.mReads);
         mImports.glActiveTexture(unit);
@@ -25964,8 +34804,8 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1192_major = 3;
-        uint32_t l_minRequiredVersion_1192_minor = 1;
+        uint32_t l_minRequiredVersion_2968_major = 3;
+        uint32_t l_minRequiredVersion_2968_minor = 1;
         switch (access) {
             case GLenum::GL_READ_ONLY:   // fall-through...
             case GLenum::GL_READ_WRITE:  // fall-through...
@@ -26012,8 +34852,8 @@ inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1195_major = 3;
-        uint32_t l_minRequiredVersion_1195_minor = 0;
+        uint32_t l_minRequiredVersion_2971_major = 3;
+        uint32_t l_minRequiredVersion_2971_minor = 0;
         observe(observations.mReads);
         mImports.glBindSampler(unit, sampler);
     } while (false);
@@ -26035,8 +34875,8 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1196_major = 2;
-        uint32_t l_minRequiredVersion_1196_minor = 0;
+        uint32_t l_minRequiredVersion_2972_major = 2;
+        uint32_t l_minRequiredVersion_2972_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -26044,30 +34884,30 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1197_major = 3;
-                uint32_t l_minRequiredVersion_1197_minor = 0;
+                uint32_t l_minRequiredVersion_2973_major = 3;
+                uint32_t l_minRequiredVersion_2973_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1198_major = 3;
-                uint32_t l_minRequiredVersion_1198_minor = 1;
+                uint32_t l_minRequiredVersion_2974_major = 3;
+                uint32_t l_minRequiredVersion_2974_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1199_major = 3;
-                uint32_t l_minRequiredVersion_1199_minor = 2;
+                uint32_t l_minRequiredVersion_2975_major = 3;
+                uint32_t l_minRequiredVersion_2975_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1202_msg = "No context bound";
+            std::string l_error_2978_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1201_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1201_result;
+        std::shared_ptr<Context> l_GetContext_2977_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2977_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
             l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture(
                     texture, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
@@ -26103,8 +34943,8 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1203_major = 2;
-        uint32_t l_minRequiredVersion_1203_minor = 0;
+        uint32_t l_minRequiredVersion_2979_major = 2;
+        uint32_t l_minRequiredVersion_2979_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -26127,14 +34967,14 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC:          // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ETC2:                     // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: {
-                uint32_t l_minRequiredVersion_1205_major = 3;
-                uint32_t l_minRequiredVersion_1205_minor = 0;
+                uint32_t l_minRequiredVersion_2981_major = 3;
+                uint32_t l_minRequiredVersion_2981_minor = 0;
                 break;
             }
             case GLenum::GL_ATC_RGB_AMD:                  // fall-through...
             case GLenum::GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:  // fall-through...
             case GLenum::GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD: {
-                uint32_t l_requiresExtension_1206_ext = ExtensionId::GL_AMD_compressed_ATC_texture;
+                uint32_t l_requiresExtension_2982_ext = ExtensionId::GL_AMD_compressed_ATC_texture;
                 break;
             }
             case GLenum::GL_COMPRESSED_RGBA_ASTC_10x10:          // fall-through...
@@ -26165,18 +35005,18 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1207_major = 3;
-                uint32_t l_minRequiredVersion_1207_minor = 2;
+                uint32_t l_minRequiredVersion_2983_major = 3;
+                uint32_t l_minRequiredVersion_2983_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1210_msg = "No context bound";
+            std::string l_error_2986_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1209_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1209_result;
+        std::shared_ptr<Context> l_GetContext_2985_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2985_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
@@ -26246,16 +35086,16 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1211_major = 3;
-        uint32_t l_minRequiredVersion_1211_minor = 0;
+        uint32_t l_minRequiredVersion_2987_major = 3;
+        uint32_t l_minRequiredVersion_2987_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1212_major = 3;
-                uint32_t l_minRequiredVersion_1212_minor = 2;
+                uint32_t l_minRequiredVersion_2988_major = 3;
+                uint32_t l_minRequiredVersion_2988_minor = 2;
                 break;
             }
         }
@@ -26300,18 +35140,18 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1214_major = 3;
-                uint32_t l_minRequiredVersion_1214_minor = 2;
+                uint32_t l_minRequiredVersion_2990_major = 3;
+                uint32_t l_minRequiredVersion_2990_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1217_msg = "No context bound";
+            std::string l_error_2993_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1216_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1216_result;
+        std::shared_ptr<Context> l_GetContext_2992_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2992_result;
         if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
             data != nullptr) {
             read(slice((uint8_t*)(data), (uint64_t)((GLsizei)(0)), (uint64_t)(image_size)));
@@ -26347,8 +35187,8 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1218_major = 2;
-        uint32_t l_minRequiredVersion_1218_minor = 0;
+        uint32_t l_minRequiredVersion_2994_major = 2;
+        uint32_t l_minRequiredVersion_2994_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -26371,8 +35211,8 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC:          // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ETC2:                     // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: {
-                uint32_t l_minRequiredVersion_1220_major = 3;
-                uint32_t l_minRequiredVersion_1220_minor = 0;
+                uint32_t l_minRequiredVersion_2996_major = 3;
+                uint32_t l_minRequiredVersion_2996_minor = 0;
                 break;
             }
             case GLenum::GL_COMPRESSED_RGBA_ASTC_10x10:          // fall-through...
@@ -26403,18 +35243,18 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1221_major = 3;
-                uint32_t l_minRequiredVersion_1221_minor = 2;
+                uint32_t l_minRequiredVersion_2997_major = 3;
+                uint32_t l_minRequiredVersion_2997_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1224_msg = "No context bound";
+            std::string l_error_3000_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1223_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1223_result;
+        std::shared_ptr<Context> l_GetContext_2999_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_2999_result;
         if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
             data != nullptr) {
             read(slice((uint8_t*)(data), (uint64_t)((GLsizei)(0)), (uint64_t)(image_size)));
@@ -26452,16 +35292,16 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1225_major = 3;
-        uint32_t l_minRequiredVersion_1225_minor = 0;
+        uint32_t l_minRequiredVersion_3001_major = 3;
+        uint32_t l_minRequiredVersion_3001_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1226_major = 3;
-                uint32_t l_minRequiredVersion_1226_minor = 2;
+                uint32_t l_minRequiredVersion_3002_major = 3;
+                uint32_t l_minRequiredVersion_3002_minor = 2;
                 break;
             }
         }
@@ -26506,18 +35346,18 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1228_major = 3;
-                uint32_t l_minRequiredVersion_1228_minor = 2;
+                uint32_t l_minRequiredVersion_3004_major = 3;
+                uint32_t l_minRequiredVersion_3004_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1231_msg = "No context bound";
+            std::string l_error_3007_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1230_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1230_result;
+        std::shared_ptr<Context> l_GetContext_3006_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3006_result;
         if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
             data != nullptr) {
             read(slice((uint8_t*)(data), (uint64_t)((GLsizei)(0)), (uint64_t)(image_size)));
@@ -26557,8 +35397,8 @@ inline void GlesSpy::glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1232_major = 3;
-        uint32_t l_minRequiredVersion_1232_minor = 2;
+        uint32_t l_minRequiredVersion_3008_major = 3;
+        uint32_t l_minRequiredVersion_3008_minor = 2;
         switch (srcTarget) {
             case GLenum::GL_RENDERBUFFER:                  // fall-through...
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
@@ -26611,8 +35451,8 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1235_major = 2;
-        uint32_t l_minRequiredVersion_1235_minor = 0;
+        uint32_t l_minRequiredVersion_3011_major = 2;
+        uint32_t l_minRequiredVersion_3011_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -26661,8 +35501,8 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
             case GLenum::GL_RGBA8UI:     // fall-through...
             case GLenum::GL_SRGB8:       // fall-through...
             case GLenum::GL_SRGB8_ALPHA8: {
-                uint32_t l_minRequiredVersion_1237_major = 3;
-                uint32_t l_minRequiredVersion_1237_minor = 0;
+                uint32_t l_minRequiredVersion_3013_major = 3;
+                uint32_t l_minRequiredVersion_3013_minor = 0;
                 break;
             }
         }
@@ -26694,8 +35534,8 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1239_major = 2;
-        uint32_t l_minRequiredVersion_1239_minor = 0;
+        uint32_t l_minRequiredVersion_3015_major = 2;
+        uint32_t l_minRequiredVersion_3015_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -26735,16 +35575,16 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1241_major = 3;
-        uint32_t l_minRequiredVersion_1241_minor = 0;
+        uint32_t l_minRequiredVersion_3017_major = 3;
+        uint32_t l_minRequiredVersion_3017_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1242_major = 3;
-                uint32_t l_minRequiredVersion_1242_minor = 2;
+                uint32_t l_minRequiredVersion_3018_major = 3;
+                uint32_t l_minRequiredVersion_3018_minor = 2;
                 break;
             }
         }
@@ -26770,8 +35610,8 @@ inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1244_major = 3;
-        uint32_t l_minRequiredVersion_1244_minor = 0;
+        uint32_t l_minRequiredVersion_3020_major = 3;
+        uint32_t l_minRequiredVersion_3020_minor = 0;
         read(slice(samplers, (uint64_t)((GLsizei)(0)), (uint64_t)(count)));
         observe(observations.mReads);
         mImports.glDeleteSamplers(count, samplers);
@@ -26796,16 +35636,16 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1245_major = 2;
-        uint32_t l_minRequiredVersion_1245_minor = 0;
+        uint32_t l_minRequiredVersion_3021_major = 2;
+        uint32_t l_minRequiredVersion_3021_minor = 0;
         Slice<TextureId> l_t = slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1247_msg = "No context bound";
+            std::string l_error_3023_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1246_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1246_result;
+        std::shared_ptr<Context> l_GetContext_3022_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3022_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mTextures[read(l_t, (uint64_t)(l_i))] = std::shared_ptr<Texture>();
         }
@@ -26832,8 +35672,8 @@ inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1248_major = 3;
-        uint32_t l_minRequiredVersion_1248_minor = 0;
+        uint32_t l_minRequiredVersion_3024_major = 3;
+        uint32_t l_minRequiredVersion_3024_minor = 0;
         observe(observations.mReads);
         mImports.glGenSamplers(count, samplers);
         write(slice(samplers, (uint64_t)((GLsizei)(0)), (uint64_t)(count)));
@@ -26858,16 +35698,16 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1249_major = 2;
-        uint32_t l_minRequiredVersion_1249_minor = 0;
+        uint32_t l_minRequiredVersion_3025_major = 2;
+        uint32_t l_minRequiredVersion_3025_minor = 0;
         Slice<TextureId> l_t = slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1251_msg = "No context bound";
+            std::string l_error_3027_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1250_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1250_result;
+        std::shared_ptr<Context> l_GetContext_3026_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3026_result;
         observe(observations.mReads);
         mImports.glGenTextures(count, textures);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -26900,8 +35740,8 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1252_major = 2;
-        uint32_t l_minRequiredVersion_1252_minor = 0;
+        uint32_t l_minRequiredVersion_3028_major = 2;
+        uint32_t l_minRequiredVersion_3028_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -26909,13 +35749,13 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1253_major = 3;
-                uint32_t l_minRequiredVersion_1253_minor = 0;
+                uint32_t l_minRequiredVersion_3029_major = 3;
+                uint32_t l_minRequiredVersion_3029_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1254_major = 3;
-                uint32_t l_minRequiredVersion_1254_minor = 2;
+                uint32_t l_minRequiredVersion_3030_major = 3;
+                uint32_t l_minRequiredVersion_3030_minor = 2;
                 break;
             }
         }
@@ -26942,14 +35782,14 @@ inline void GlesSpy::glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1256_major = 3;
-        uint32_t l_minRequiredVersion_1256_minor = 2;
-        SamplerId l_GetSamplerParameter_1257_sampler = sampler;
-        uint32_t l_GetSamplerParameter_1257_pname = pname;
-        GLint* l_GetSamplerParameter_1257_params = params;
+        uint32_t l_minRequiredVersion_3032_major = 3;
+        uint32_t l_minRequiredVersion_3032_minor = 2;
+        SamplerId l_GetSamplerParameter_3033_sampler = sampler;
+        uint32_t l_GetSamplerParameter_3033_pname = pname;
+        GLint* l_GetSamplerParameter_3033_params = params;
         observe(observations.mReads);
         mImports.glGetSamplerParameterIiv(sampler, pname, params);
-        switch (l_GetSamplerParameter_1257_pname) {
+        switch (l_GetSamplerParameter_3033_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -26959,11 +35799,11 @@ inline void GlesSpy::glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, 
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetSamplerParameter_1257_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetSamplerParameter_3033_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                write(slice(l_GetSamplerParameter_1257_params, 0, 4));
+                write(slice(l_GetSamplerParameter_3033_params, 0, 4));
                 break;
             }
         }
@@ -26991,14 +35831,14 @@ inline void GlesSpy::glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1259_major = 3;
-        uint32_t l_minRequiredVersion_1259_minor = 2;
-        SamplerId l_GetSamplerParameter_1260_sampler = sampler;
-        uint32_t l_GetSamplerParameter_1260_pname = pname;
-        GLuint* l_GetSamplerParameter_1260_params = params;
+        uint32_t l_minRequiredVersion_3035_major = 3;
+        uint32_t l_minRequiredVersion_3035_minor = 2;
+        SamplerId l_GetSamplerParameter_3036_sampler = sampler;
+        uint32_t l_GetSamplerParameter_3036_pname = pname;
+        GLuint* l_GetSamplerParameter_3036_params = params;
         observe(observations.mReads);
         mImports.glGetSamplerParameterIuiv(sampler, pname, params);
-        switch (l_GetSamplerParameter_1260_pname) {
+        switch (l_GetSamplerParameter_3036_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -27008,11 +35848,11 @@ inline void GlesSpy::glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname,
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetSamplerParameter_1260_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetSamplerParameter_3036_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                write(slice(l_GetSamplerParameter_1260_params, 0, 4));
+                write(slice(l_GetSamplerParameter_3036_params, 0, 4));
                 break;
             }
         }
@@ -27040,14 +35880,14 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1262_major = 3;
-        uint32_t l_minRequiredVersion_1262_minor = 0;
-        SamplerId l_GetSamplerParameter_1263_sampler = sampler;
-        uint32_t l_GetSamplerParameter_1263_pname = pname;
-        GLfloat* l_GetSamplerParameter_1263_params = params;
+        uint32_t l_minRequiredVersion_3038_major = 3;
+        uint32_t l_minRequiredVersion_3038_minor = 0;
+        SamplerId l_GetSamplerParameter_3039_sampler = sampler;
+        uint32_t l_GetSamplerParameter_3039_pname = pname;
+        GLfloat* l_GetSamplerParameter_3039_params = params;
         observe(observations.mReads);
         mImports.glGetSamplerParameterfv(sampler, pname, params);
-        switch (l_GetSamplerParameter_1263_pname) {
+        switch (l_GetSamplerParameter_3039_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -27057,11 +35897,11 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetSamplerParameter_1263_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetSamplerParameter_3039_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                write(slice(l_GetSamplerParameter_1263_params, 0, 4));
+                write(slice(l_GetSamplerParameter_3039_params, 0, 4));
                 break;
             }
         }
@@ -27089,14 +35929,14 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1265_major = 3;
-        uint32_t l_minRequiredVersion_1265_minor = 0;
-        SamplerId l_GetSamplerParameter_1266_sampler = sampler;
-        uint32_t l_GetSamplerParameter_1266_pname = pname;
-        GLint* l_GetSamplerParameter_1266_params = params;
+        uint32_t l_minRequiredVersion_3041_major = 3;
+        uint32_t l_minRequiredVersion_3041_minor = 0;
+        SamplerId l_GetSamplerParameter_3042_sampler = sampler;
+        uint32_t l_GetSamplerParameter_3042_pname = pname;
+        GLint* l_GetSamplerParameter_3042_params = params;
         observe(observations.mReads);
         mImports.glGetSamplerParameteriv(sampler, pname, params);
-        switch (l_GetSamplerParameter_1266_pname) {
+        switch (l_GetSamplerParameter_3042_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -27106,11 +35946,11 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetSamplerParameter_1266_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetSamplerParameter_3042_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                write(slice(l_GetSamplerParameter_1266_params, 0, 4));
+                write(slice(l_GetSamplerParameter_3042_params, 0, 4));
                 break;
             }
         }
@@ -27139,8 +35979,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1268_major = 3;
-        uint32_t l_minRequiredVersion_1268_minor = 1;
+        uint32_t l_minRequiredVersion_3044_major = 3;
+        uint32_t l_minRequiredVersion_3044_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:             // fall-through...
@@ -27157,8 +35997,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1269_major = 3;
-                uint32_t l_minRequiredVersion_1269_minor = 2;
+                uint32_t l_minRequiredVersion_3045_major = 3;
+                uint32_t l_minRequiredVersion_3045_minor = 2;
                 break;
             }
         }
@@ -27187,8 +36027,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_BUFFER_DATA_STORE_BINDING:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET:              // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_SIZE: {
-                uint32_t l_minRequiredVersion_1271_major = 3;
-                uint32_t l_minRequiredVersion_1271_minor = 2;
+                uint32_t l_minRequiredVersion_3047_major = 3;
+                uint32_t l_minRequiredVersion_3047_minor = 2;
                 break;
             }
         }
@@ -27220,8 +36060,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1273_major = 3;
-        uint32_t l_minRequiredVersion_1273_minor = 1;
+        uint32_t l_minRequiredVersion_3049_major = 3;
+        uint32_t l_minRequiredVersion_3049_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:             // fall-through...
@@ -27238,8 +36078,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1274_major = 3;
-                uint32_t l_minRequiredVersion_1274_minor = 2;
+                uint32_t l_minRequiredVersion_3050_major = 3;
+                uint32_t l_minRequiredVersion_3050_minor = 2;
                 break;
             }
         }
@@ -27268,8 +36108,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_BUFFER_DATA_STORE_BINDING:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET:              // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_SIZE: {
-                uint32_t l_minRequiredVersion_1276_major = 3;
-                uint32_t l_minRequiredVersion_1276_minor = 2;
+                uint32_t l_minRequiredVersion_3052_major = 3;
+                uint32_t l_minRequiredVersion_3052_minor = 2;
                 break;
             }
         }
@@ -27300,44 +36140,44 @@ inline void GlesSpy::glGetTexParameterIiv(uint32_t target, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1278_major = 3;
-        uint32_t l_minRequiredVersion_1278_minor = 2;
-        uint32_t l_GetTexParameter_1279_target = target;
-        uint32_t l_GetTexParameter_1279_parameter = pname;
-        GLint* l_GetTexParameter_1279_params = params;
-        uint32_t l_minRequiredVersion_1280_major = 2;
-        uint32_t l_minRequiredVersion_1280_minor = 0;
-        switch (l_GetTexParameter_1279_target) {
+        uint32_t l_minRequiredVersion_3054_major = 3;
+        uint32_t l_minRequiredVersion_3054_minor = 2;
+        uint32_t l_GetTexParameter_3055_target = target;
+        uint32_t l_GetTexParameter_3055_parameter = pname;
+        GLint* l_GetTexParameter_3055_params = params;
+        uint32_t l_minRequiredVersion_3056_major = 2;
+        uint32_t l_minRequiredVersion_3056_minor = 0;
+        switch (l_GetTexParameter_3055_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1281_major = 3;
-                uint32_t l_minRequiredVersion_1281_minor = 0;
+                uint32_t l_minRequiredVersion_3057_major = 3;
+                uint32_t l_minRequiredVersion_3057_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1282_major = 3;
-                uint32_t l_minRequiredVersion_1282_minor = 1;
+                uint32_t l_minRequiredVersion_3058_major = 3;
+                uint32_t l_minRequiredVersion_3058_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1283_major = 3;
-                uint32_t l_minRequiredVersion_1283_minor = 2;
+                uint32_t l_minRequiredVersion_3059_major = 3;
+                uint32_t l_minRequiredVersion_3059_minor = 2;
                 break;
             }
         }
         observe(observations.mReads);
         mImports.glGetTexParameterIiv(target, pname, params);
-        switch (l_GetTexParameter_1279_parameter) {
+        switch (l_GetTexParameter_3055_parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetTexParameter_1279_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetTexParameter_3055_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:        // fall-through...
@@ -27352,23 +36192,23 @@ inline void GlesSpy::glGetTexParameterIiv(uint32_t target, uint32_t pname, int32
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1285_major = 3;
-                uint32_t l_minRequiredVersion_1285_minor = 0;
-                write(slice(l_GetTexParameter_1279_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3061_major = 3;
+                uint32_t l_minRequiredVersion_3061_minor = 0;
+                write(slice(l_GetTexParameter_3055_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1286_major = 3;
-                uint32_t l_minRequiredVersion_1286_minor = 1;
-                write(slice(l_GetTexParameter_1279_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3062_major = 3;
+                uint32_t l_minRequiredVersion_3062_minor = 1;
+                write(slice(l_GetTexParameter_3055_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1287_major = 3;
-                uint32_t l_minRequiredVersion_1287_minor = 2;
-                write(slice(l_GetTexParameter_1279_params, 0, 4));
+                uint32_t l_minRequiredVersion_3063_major = 3;
+                uint32_t l_minRequiredVersion_3063_minor = 2;
+                write(slice(l_GetTexParameter_3055_params, 0, 4));
                 break;
             }
         }
@@ -27395,44 +36235,44 @@ inline void GlesSpy::glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1289_major = 3;
-        uint32_t l_minRequiredVersion_1289_minor = 2;
-        uint32_t l_GetTexParameter_1290_target = target;
-        uint32_t l_GetTexParameter_1290_parameter = pname;
-        GLuint* l_GetTexParameter_1290_params = params;
-        uint32_t l_minRequiredVersion_1291_major = 2;
-        uint32_t l_minRequiredVersion_1291_minor = 0;
-        switch (l_GetTexParameter_1290_target) {
+        uint32_t l_minRequiredVersion_3065_major = 3;
+        uint32_t l_minRequiredVersion_3065_minor = 2;
+        uint32_t l_GetTexParameter_3066_target = target;
+        uint32_t l_GetTexParameter_3066_parameter = pname;
+        GLuint* l_GetTexParameter_3066_params = params;
+        uint32_t l_minRequiredVersion_3067_major = 2;
+        uint32_t l_minRequiredVersion_3067_minor = 0;
+        switch (l_GetTexParameter_3066_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1292_major = 3;
-                uint32_t l_minRequiredVersion_1292_minor = 0;
+                uint32_t l_minRequiredVersion_3068_major = 3;
+                uint32_t l_minRequiredVersion_3068_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1293_major = 3;
-                uint32_t l_minRequiredVersion_1293_minor = 1;
+                uint32_t l_minRequiredVersion_3069_major = 3;
+                uint32_t l_minRequiredVersion_3069_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1294_major = 3;
-                uint32_t l_minRequiredVersion_1294_minor = 2;
+                uint32_t l_minRequiredVersion_3070_major = 3;
+                uint32_t l_minRequiredVersion_3070_minor = 2;
                 break;
             }
         }
         observe(observations.mReads);
         mImports.glGetTexParameterIuiv(target, pname, params);
-        switch (l_GetTexParameter_1290_parameter) {
+        switch (l_GetTexParameter_3066_parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetTexParameter_1290_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                write(slice(l_GetTexParameter_3066_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:        // fall-through...
@@ -27447,23 +36287,23 @@ inline void GlesSpy::glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1296_major = 3;
-                uint32_t l_minRequiredVersion_1296_minor = 0;
-                write(slice(l_GetTexParameter_1290_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3072_major = 3;
+                uint32_t l_minRequiredVersion_3072_minor = 0;
+                write(slice(l_GetTexParameter_3066_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1297_major = 3;
-                uint32_t l_minRequiredVersion_1297_minor = 1;
-                write(slice(l_GetTexParameter_1290_params, 0, 1), 0, slice(params, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3073_major = 3;
+                uint32_t l_minRequiredVersion_3073_minor = 1;
+                write(slice(l_GetTexParameter_3066_params, 0, 1), 0, slice(params, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1298_major = 3;
-                uint32_t l_minRequiredVersion_1298_minor = 2;
-                write(slice(l_GetTexParameter_1290_params, 0, 4));
+                uint32_t l_minRequiredVersion_3074_major = 3;
+                uint32_t l_minRequiredVersion_3074_minor = 2;
+                write(slice(l_GetTexParameter_3066_params, 0, 4));
                 break;
             }
         }
@@ -27491,44 +36331,44 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1300_major = 2;
-        uint32_t l_minRequiredVersion_1300_minor = 0;
-        uint32_t l_GetTexParameter_1301_target = target;
-        uint32_t l_GetTexParameter_1301_parameter = parameter;
-        GLfloat* l_GetTexParameter_1301_params = values;
-        uint32_t l_minRequiredVersion_1302_major = 2;
-        uint32_t l_minRequiredVersion_1302_minor = 0;
-        switch (l_GetTexParameter_1301_target) {
+        uint32_t l_minRequiredVersion_3076_major = 2;
+        uint32_t l_minRequiredVersion_3076_minor = 0;
+        uint32_t l_GetTexParameter_3077_target = target;
+        uint32_t l_GetTexParameter_3077_parameter = parameter;
+        GLfloat* l_GetTexParameter_3077_params = values;
+        uint32_t l_minRequiredVersion_3078_major = 2;
+        uint32_t l_minRequiredVersion_3078_minor = 0;
+        switch (l_GetTexParameter_3077_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1303_major = 3;
-                uint32_t l_minRequiredVersion_1303_minor = 0;
+                uint32_t l_minRequiredVersion_3079_major = 3;
+                uint32_t l_minRequiredVersion_3079_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1304_major = 3;
-                uint32_t l_minRequiredVersion_1304_minor = 1;
+                uint32_t l_minRequiredVersion_3080_major = 3;
+                uint32_t l_minRequiredVersion_3080_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1305_major = 3;
-                uint32_t l_minRequiredVersion_1305_minor = 2;
+                uint32_t l_minRequiredVersion_3081_major = 3;
+                uint32_t l_minRequiredVersion_3081_minor = 2;
                 break;
             }
         }
         observe(observations.mReads);
         mImports.glGetTexParameterfv(target, parameter, values);
-        switch (l_GetTexParameter_1301_parameter) {
+        switch (l_GetTexParameter_3077_parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetTexParameter_1301_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                write(slice(l_GetTexParameter_3077_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:        // fall-through...
@@ -27543,33 +36383,33 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1307_major = 3;
-                uint32_t l_minRequiredVersion_1307_minor = 0;
-                write(slice(l_GetTexParameter_1301_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3083_major = 3;
+                uint32_t l_minRequiredVersion_3083_minor = 0;
+                write(slice(l_GetTexParameter_3077_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1308_major = 3;
-                uint32_t l_minRequiredVersion_1308_minor = 1;
-                write(slice(l_GetTexParameter_1301_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3084_major = 3;
+                uint32_t l_minRequiredVersion_3084_minor = 1;
+                write(slice(l_GetTexParameter_3077_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1309_major = 3;
-                uint32_t l_minRequiredVersion_1309_minor = 2;
-                write(slice(l_GetTexParameter_1301_params, 0, 4));
+                uint32_t l_minRequiredVersion_3085_major = 3;
+                uint32_t l_minRequiredVersion_3085_minor = 2;
+                write(slice(l_GetTexParameter_3077_params, 0, 4));
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1312_msg = "No context bound";
+            std::string l_error_3088_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1311_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1311_result;
+        std::shared_ptr<Context> l_GetContext_3087_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3087_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -27609,44 +36449,44 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1313_major = 2;
-        uint32_t l_minRequiredVersion_1313_minor = 0;
-        uint32_t l_GetTexParameter_1314_target = target;
-        uint32_t l_GetTexParameter_1314_parameter = parameter;
-        GLint* l_GetTexParameter_1314_params = values;
-        uint32_t l_minRequiredVersion_1315_major = 2;
-        uint32_t l_minRequiredVersion_1315_minor = 0;
-        switch (l_GetTexParameter_1314_target) {
+        uint32_t l_minRequiredVersion_3089_major = 2;
+        uint32_t l_minRequiredVersion_3089_minor = 0;
+        uint32_t l_GetTexParameter_3090_target = target;
+        uint32_t l_GetTexParameter_3090_parameter = parameter;
+        GLint* l_GetTexParameter_3090_params = values;
+        uint32_t l_minRequiredVersion_3091_major = 2;
+        uint32_t l_minRequiredVersion_3091_minor = 0;
+        switch (l_GetTexParameter_3090_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1316_major = 3;
-                uint32_t l_minRequiredVersion_1316_minor = 0;
+                uint32_t l_minRequiredVersion_3092_major = 3;
+                uint32_t l_minRequiredVersion_3092_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1317_major = 3;
-                uint32_t l_minRequiredVersion_1317_minor = 1;
+                uint32_t l_minRequiredVersion_3093_major = 3;
+                uint32_t l_minRequiredVersion_3093_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1318_major = 3;
-                uint32_t l_minRequiredVersion_1318_minor = 2;
+                uint32_t l_minRequiredVersion_3094_major = 3;
+                uint32_t l_minRequiredVersion_3094_minor = 2;
                 break;
             }
         }
         observe(observations.mReads);
         mImports.glGetTexParameteriv(target, parameter, values);
-        switch (l_GetTexParameter_1314_parameter) {
+        switch (l_GetTexParameter_3090_parameter) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                write(slice(l_GetTexParameter_1314_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                write(slice(l_GetTexParameter_3090_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:        // fall-through...
@@ -27661,33 +36501,33 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1320_major = 3;
-                uint32_t l_minRequiredVersion_1320_minor = 0;
-                write(slice(l_GetTexParameter_1314_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3096_major = 3;
+                uint32_t l_minRequiredVersion_3096_minor = 0;
+                write(slice(l_GetTexParameter_3090_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1321_major = 3;
-                uint32_t l_minRequiredVersion_1321_minor = 1;
-                write(slice(l_GetTexParameter_1314_params, 0, 1), 0, slice(values, 0, 1)[0]);
+                uint32_t l_minRequiredVersion_3097_major = 3;
+                uint32_t l_minRequiredVersion_3097_minor = 1;
+                write(slice(l_GetTexParameter_3090_params, 0, 1), 0, slice(values, 0, 1)[0]);
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1322_major = 3;
-                uint32_t l_minRequiredVersion_1322_minor = 2;
-                write(slice(l_GetTexParameter_1314_params, 0, 4));
+                uint32_t l_minRequiredVersion_3098_major = 3;
+                uint32_t l_minRequiredVersion_3098_minor = 2;
+                write(slice(l_GetTexParameter_3090_params, 0, 4));
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1325_msg = "No context bound";
+            std::string l_error_3101_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1324_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1324_result;
+        std::shared_ptr<Context> l_GetContext_3100_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3100_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -27727,8 +36567,8 @@ inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1326_major = 3;
-        uint32_t l_minRequiredVersion_1326_minor = 0;
+        uint32_t l_minRequiredVersion_3102_major = 3;
+        uint32_t l_minRequiredVersion_3102_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsSampler(sampler);
         break;
@@ -27755,15 +36595,15 @@ inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1327_major = 2;
-        uint32_t l_minRequiredVersion_1327_minor = 0;
+        uint32_t l_minRequiredVersion_3103_major = 2;
+        uint32_t l_minRequiredVersion_3103_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1329_msg = "No context bound";
+            std::string l_error_3105_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1328_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1328_result;
+        std::shared_ptr<Context> l_GetContext_3104_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3104_result;
         observe(observations.mReads);
         result = mImports.glIsTexture(texture);
         break;
@@ -27788,8 +36628,8 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1330_major = 2;
-        uint32_t l_minRequiredVersion_1330_minor = 0;
+        uint32_t l_minRequiredVersion_3106_major = 2;
+        uint32_t l_minRequiredVersion_3106_minor = 0;
         switch (parameter) {
             case GLenum::GL_PACK_ALIGNMENT:  // fall-through...
             case GLenum::GL_UNPACK_ALIGNMENT: {
@@ -27805,18 +36645,18 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
             case GLenum::GL_UNPACK_SKIP_IMAGES:   // fall-through...
             case GLenum::GL_UNPACK_SKIP_PIXELS:   // fall-through...
             case GLenum::GL_UNPACK_SKIP_ROWS: {
-                uint32_t l_minRequiredVersion_1331_major = 3;
-                uint32_t l_minRequiredVersion_1331_minor = 0;
+                uint32_t l_minRequiredVersion_3107_major = 3;
+                uint32_t l_minRequiredVersion_3107_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1334_msg = "No context bound";
+            std::string l_error_3110_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1333_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1333_result;
+        std::shared_ptr<Context> l_GetContext_3109_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3109_result;
         l_ctx->mPixelStorage[parameter] = value;
         observe(observations.mReads);
         mImports.glPixelStorei(parameter, value);
@@ -27841,14 +36681,14 @@ inline void GlesSpy::glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1335_major = 3;
-        uint32_t l_minRequiredVersion_1335_minor = 2;
-        SamplerId l_SamplerParameterv_1336_sampler = sampler;
-        uint32_t l_SamplerParameterv_1336_pname = pname;
-        GLint* l_SamplerParameterv_1336_params = param;
-        uint32_t l_minRequiredVersion_1337_major = 3;
-        uint32_t l_minRequiredVersion_1337_minor = 0;
-        switch (l_SamplerParameterv_1336_pname) {
+        uint32_t l_minRequiredVersion_3111_major = 3;
+        uint32_t l_minRequiredVersion_3111_minor = 2;
+        SamplerId l_SamplerParameterv_3112_sampler = sampler;
+        uint32_t l_SamplerParameterv_3112_pname = pname;
+        GLint* l_SamplerParameterv_3112_params = param;
+        uint32_t l_minRequiredVersion_3113_major = 3;
+        uint32_t l_minRequiredVersion_3113_minor = 0;
+        switch (l_SamplerParameterv_3112_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -27858,13 +36698,13 @@ inline void GlesSpy::glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_SamplerParameterv_1336_params, 0, 1));
+                read(slice(l_SamplerParameterv_3112_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1338_major = 3;
-                uint32_t l_minRequiredVersion_1338_minor = 2;
-                read(slice(l_SamplerParameterv_1336_params, 0, 4));
+                uint32_t l_minRequiredVersion_3114_major = 3;
+                uint32_t l_minRequiredVersion_3114_minor = 2;
+                read(slice(l_SamplerParameterv_3112_params, 0, 4));
                 break;
             }
         }
@@ -27894,14 +36734,14 @@ inline void GlesSpy::glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1340_major = 3;
-        uint32_t l_minRequiredVersion_1340_minor = 2;
-        SamplerId l_SamplerParameterv_1341_sampler = sampler;
-        uint32_t l_SamplerParameterv_1341_pname = pname;
-        GLuint* l_SamplerParameterv_1341_params = param;
-        uint32_t l_minRequiredVersion_1342_major = 3;
-        uint32_t l_minRequiredVersion_1342_minor = 0;
-        switch (l_SamplerParameterv_1341_pname) {
+        uint32_t l_minRequiredVersion_3116_major = 3;
+        uint32_t l_minRequiredVersion_3116_minor = 2;
+        SamplerId l_SamplerParameterv_3117_sampler = sampler;
+        uint32_t l_SamplerParameterv_3117_pname = pname;
+        GLuint* l_SamplerParameterv_3117_params = param;
+        uint32_t l_minRequiredVersion_3118_major = 3;
+        uint32_t l_minRequiredVersion_3118_minor = 0;
+        switch (l_SamplerParameterv_3117_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -27911,13 +36751,13 @@ inline void GlesSpy::glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, ui
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_SamplerParameterv_1341_params, 0, 1));
+                read(slice(l_SamplerParameterv_3117_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1343_major = 3;
-                uint32_t l_minRequiredVersion_1343_minor = 2;
-                read(slice(l_SamplerParameterv_1341_params, 0, 4));
+                uint32_t l_minRequiredVersion_3119_major = 3;
+                uint32_t l_minRequiredVersion_3119_minor = 2;
+                read(slice(l_SamplerParameterv_3117_params, 0, 4));
                 break;
             }
         }
@@ -27947,8 +36787,8 @@ inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1345_major = 3;
-        uint32_t l_minRequiredVersion_1345_minor = 0;
+        uint32_t l_minRequiredVersion_3121_major = 3;
+        uint32_t l_minRequiredVersion_3121_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -27985,14 +36825,14 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1347_major = 3;
-        uint32_t l_minRequiredVersion_1347_minor = 0;
-        SamplerId l_SamplerParameterv_1348_sampler = sampler;
-        uint32_t l_SamplerParameterv_1348_pname = pname;
-        GLfloat* l_SamplerParameterv_1348_params = param;
-        uint32_t l_minRequiredVersion_1349_major = 3;
-        uint32_t l_minRequiredVersion_1349_minor = 0;
-        switch (l_SamplerParameterv_1348_pname) {
+        uint32_t l_minRequiredVersion_3123_major = 3;
+        uint32_t l_minRequiredVersion_3123_minor = 0;
+        SamplerId l_SamplerParameterv_3124_sampler = sampler;
+        uint32_t l_SamplerParameterv_3124_pname = pname;
+        GLfloat* l_SamplerParameterv_3124_params = param;
+        uint32_t l_minRequiredVersion_3125_major = 3;
+        uint32_t l_minRequiredVersion_3125_minor = 0;
+        switch (l_SamplerParameterv_3124_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -28002,13 +36842,13 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_SamplerParameterv_1348_params, 0, 1));
+                read(slice(l_SamplerParameterv_3124_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1350_major = 3;
-                uint32_t l_minRequiredVersion_1350_minor = 2;
-                read(slice(l_SamplerParameterv_1348_params, 0, 4));
+                uint32_t l_minRequiredVersion_3126_major = 3;
+                uint32_t l_minRequiredVersion_3126_minor = 2;
+                read(slice(l_SamplerParameterv_3124_params, 0, 4));
                 break;
             }
         }
@@ -28038,8 +36878,8 @@ inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1352_major = 3;
-        uint32_t l_minRequiredVersion_1352_minor = 0;
+        uint32_t l_minRequiredVersion_3128_major = 3;
+        uint32_t l_minRequiredVersion_3128_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -28076,14 +36916,14 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1354_major = 3;
-        uint32_t l_minRequiredVersion_1354_minor = 0;
-        SamplerId l_SamplerParameterv_1355_sampler = sampler;
-        uint32_t l_SamplerParameterv_1355_pname = pname;
-        GLint* l_SamplerParameterv_1355_params = param;
-        uint32_t l_minRequiredVersion_1356_major = 3;
-        uint32_t l_minRequiredVersion_1356_minor = 0;
-        switch (l_SamplerParameterv_1355_pname) {
+        uint32_t l_minRequiredVersion_3130_major = 3;
+        uint32_t l_minRequiredVersion_3130_minor = 0;
+        SamplerId l_SamplerParameterv_3131_sampler = sampler;
+        uint32_t l_SamplerParameterv_3131_pname = pname;
+        GLint* l_SamplerParameterv_3131_params = param;
+        uint32_t l_minRequiredVersion_3132_major = 3;
+        uint32_t l_minRequiredVersion_3132_minor = 0;
+        switch (l_SamplerParameterv_3131_pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
             case GLenum::GL_TEXTURE_MAG_FILTER:    // fall-through...
@@ -28093,13 +36933,13 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
             case GLenum::GL_TEXTURE_WRAP_R:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:        // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_SamplerParameterv_1355_params, 0, 1));
+                read(slice(l_SamplerParameterv_3131_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1357_major = 3;
-                uint32_t l_minRequiredVersion_1357_minor = 2;
-                read(slice(l_SamplerParameterv_1355_params, 0, 4));
+                uint32_t l_minRequiredVersion_3133_major = 3;
+                uint32_t l_minRequiredVersion_3133_minor = 2;
+                read(slice(l_SamplerParameterv_3131_params, 0, 4));
                 break;
             }
         }
@@ -28127,8 +36967,8 @@ inline void GlesSpy::glTexBuffer(uint32_t target, uint32_t internalformat, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1359_major = 3;
-        uint32_t l_minRequiredVersion_1359_minor = 2;
+        uint32_t l_minRequiredVersion_3135_major = 3;
+        uint32_t l_minRequiredVersion_3135_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_BUFFER: {
                 break;
@@ -28194,8 +37034,8 @@ inline void GlesSpy::glTexBufferRange(uint32_t target, uint32_t internalformat, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1362_major = 3;
-        uint32_t l_minRequiredVersion_1362_minor = 2;
+        uint32_t l_minRequiredVersion_3138_major = 3;
+        uint32_t l_minRequiredVersion_3138_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_BUFFER: {
                 break;
@@ -28264,8 +37104,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1365_major = 2;
-        uint32_t l_minRequiredVersion_1365_minor = 0;
+        uint32_t l_minRequiredVersion_3141_major = 2;
+        uint32_t l_minRequiredVersion_3141_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -28293,13 +37133,13 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             case GLenum::GL_RGBA_INTEGER:     // fall-through...
             case GLenum::GL_RGB_INTEGER:      // fall-through...
             case GLenum::GL_RG_INTEGER: {
-                uint32_t l_minRequiredVersion_1367_major = 3;
-                uint32_t l_minRequiredVersion_1367_minor = 0;
+                uint32_t l_minRequiredVersion_3143_major = 3;
+                uint32_t l_minRequiredVersion_3143_minor = 0;
                 break;
             }
             case GLenum::GL_STENCIL_INDEX: {
-                uint32_t l_minRequiredVersion_1368_major = 3;
-                uint32_t l_minRequiredVersion_1368_minor = 2;
+                uint32_t l_minRequiredVersion_3144_major = 3;
+                uint32_t l_minRequiredVersion_3144_minor = 2;
                 break;
             }
         }
@@ -28311,7 +37151,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1370_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_3146_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -28326,18 +37166,18 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:     // fall-through...
             case GLenum::GL_UNSIGNED_INT_5_9_9_9_REV:        // fall-through...
             case GLenum::GL_UNSIGNED_SHORT: {
-                uint32_t l_minRequiredVersion_1371_major = 3;
-                uint32_t l_minRequiredVersion_1371_minor = 0;
+                uint32_t l_minRequiredVersion_3147_major = 3;
+                uint32_t l_minRequiredVersion_3147_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1374_msg = "No context bound";
+            std::string l_error_3150_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1373_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1373_result;
+        std::shared_ptr<Context> l_GetContext_3149_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3149_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
@@ -28415,16 +37255,16 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1375_major = 3;
-        uint32_t l_minRequiredVersion_1375_minor = 0;
+        uint32_t l_minRequiredVersion_3151_major = 3;
+        uint32_t l_minRequiredVersion_3151_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1376_major = 3;
-                uint32_t l_minRequiredVersion_1376_minor = 2;
+                uint32_t l_minRequiredVersion_3152_major = 3;
+                uint32_t l_minRequiredVersion_3152_minor = 2;
                 break;
             }
         }
@@ -28445,14 +37285,14 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
                 break;
             }
             case GLenum::GL_STENCIL_INDEX: {
-                uint32_t l_minRequiredVersion_1378_major = 3;
-                uint32_t l_minRequiredVersion_1378_minor = 2;
+                uint32_t l_minRequiredVersion_3154_major = 3;
+                uint32_t l_minRequiredVersion_3154_minor = 2;
                 break;
             }
         }
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1380_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_3156_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -28476,11 +37316,11 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1383_msg = "No context bound";
+            std::string l_error_3159_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1382_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1382_result;
+        std::shared_ptr<Context> l_GetContext_3158_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3158_result;
         if (data != nullptr &&
             l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
             uint32_t l_size = imageSize((uint32_t)(width), (uint32_t)(height), format, type) *
@@ -28512,40 +37352,40 @@ inline void GlesSpy::glTexParameterIiv(uint32_t target, uint32_t pname, int32_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1384_major = 3;
-        uint32_t l_minRequiredVersion_1384_minor = 2;
-        uint32_t l_TexParameterv_1385_target = target;
-        uint32_t l_TexParameterv_1385_pname = pname;
-        GLint* l_TexParameterv_1385_params = params;
-        switch (l_TexParameterv_1385_target) {
+        uint32_t l_minRequiredVersion_3160_major = 3;
+        uint32_t l_minRequiredVersion_3160_minor = 2;
+        uint32_t l_TexParameterv_3161_target = target;
+        uint32_t l_TexParameterv_3161_pname = pname;
+        GLint* l_TexParameterv_3161_params = params;
+        switch (l_TexParameterv_3161_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1386_major = 3;
-                uint32_t l_minRequiredVersion_1386_minor = 0;
+                uint32_t l_minRequiredVersion_3162_major = 3;
+                uint32_t l_minRequiredVersion_3162_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1387_major = 3;
-                uint32_t l_minRequiredVersion_1387_minor = 1;
+                uint32_t l_minRequiredVersion_3163_major = 3;
+                uint32_t l_minRequiredVersion_3163_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1388_major = 3;
-                uint32_t l_minRequiredVersion_1388_minor = 2;
+                uint32_t l_minRequiredVersion_3164_major = 3;
+                uint32_t l_minRequiredVersion_3164_minor = 2;
                 break;
             }
         }
-        switch (l_TexParameterv_1385_pname) {
+        switch (l_TexParameterv_3161_pname) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_TexParameterv_1385_params, 0, 1));
+                read(slice(l_TexParameterv_3161_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:    // fall-through...
@@ -28559,21 +37399,21 @@ inline void GlesSpy::glTexParameterIiv(uint32_t target, uint32_t pname, int32_t*
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1390_major = 3;
-                uint32_t l_minRequiredVersion_1390_minor = 0;
-                read(slice(l_TexParameterv_1385_params, 0, 1));
+                uint32_t l_minRequiredVersion_3166_major = 3;
+                uint32_t l_minRequiredVersion_3166_minor = 0;
+                read(slice(l_TexParameterv_3161_params, 0, 1));
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1391_major = 3;
-                uint32_t l_minRequiredVersion_1391_minor = 1;
-                read(slice(l_TexParameterv_1385_params, 0, 1));
+                uint32_t l_minRequiredVersion_3167_major = 3;
+                uint32_t l_minRequiredVersion_3167_minor = 1;
+                read(slice(l_TexParameterv_3161_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1392_major = 3;
-                uint32_t l_minRequiredVersion_1392_minor = 2;
-                read(slice(l_TexParameterv_1385_params, 0, 4));
+                uint32_t l_minRequiredVersion_3168_major = 3;
+                uint32_t l_minRequiredVersion_3168_minor = 2;
+                read(slice(l_TexParameterv_3161_params, 0, 4));
                 break;
             }
         }
@@ -28603,40 +37443,40 @@ inline void GlesSpy::glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1394_major = 3;
-        uint32_t l_minRequiredVersion_1394_minor = 2;
-        uint32_t l_TexParameterv_1395_target = target;
-        uint32_t l_TexParameterv_1395_pname = pname;
-        GLuint* l_TexParameterv_1395_params = params;
-        switch (l_TexParameterv_1395_target) {
+        uint32_t l_minRequiredVersion_3170_major = 3;
+        uint32_t l_minRequiredVersion_3170_minor = 2;
+        uint32_t l_TexParameterv_3171_target = target;
+        uint32_t l_TexParameterv_3171_pname = pname;
+        GLuint* l_TexParameterv_3171_params = params;
+        switch (l_TexParameterv_3171_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1396_major = 3;
-                uint32_t l_minRequiredVersion_1396_minor = 0;
+                uint32_t l_minRequiredVersion_3172_major = 3;
+                uint32_t l_minRequiredVersion_3172_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1397_major = 3;
-                uint32_t l_minRequiredVersion_1397_minor = 1;
+                uint32_t l_minRequiredVersion_3173_major = 3;
+                uint32_t l_minRequiredVersion_3173_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1398_major = 3;
-                uint32_t l_minRequiredVersion_1398_minor = 2;
+                uint32_t l_minRequiredVersion_3174_major = 3;
+                uint32_t l_minRequiredVersion_3174_minor = 2;
                 break;
             }
         }
-        switch (l_TexParameterv_1395_pname) {
+        switch (l_TexParameterv_3171_pname) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_TexParameterv_1395_params, 0, 1));
+                read(slice(l_TexParameterv_3171_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:    // fall-through...
@@ -28650,21 +37490,21 @@ inline void GlesSpy::glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1400_major = 3;
-                uint32_t l_minRequiredVersion_1400_minor = 0;
-                read(slice(l_TexParameterv_1395_params, 0, 1));
+                uint32_t l_minRequiredVersion_3176_major = 3;
+                uint32_t l_minRequiredVersion_3176_minor = 0;
+                read(slice(l_TexParameterv_3171_params, 0, 1));
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1401_major = 3;
-                uint32_t l_minRequiredVersion_1401_minor = 1;
-                read(slice(l_TexParameterv_1395_params, 0, 1));
+                uint32_t l_minRequiredVersion_3177_major = 3;
+                uint32_t l_minRequiredVersion_3177_minor = 1;
+                read(slice(l_TexParameterv_3171_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1402_major = 3;
-                uint32_t l_minRequiredVersion_1402_minor = 2;
-                read(slice(l_TexParameterv_1395_params, 0, 4));
+                uint32_t l_minRequiredVersion_3178_major = 3;
+                uint32_t l_minRequiredVersion_3178_minor = 2;
+                read(slice(l_TexParameterv_3171_params, 0, 4));
                 break;
             }
         }
@@ -28692,8 +37532,8 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1404_major = 2;
-        uint32_t l_minRequiredVersion_1404_minor = 0;
+        uint32_t l_minRequiredVersion_3180_major = 2;
+        uint32_t l_minRequiredVersion_3180_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -28701,19 +37541,19 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1405_major = 3;
-                uint32_t l_minRequiredVersion_1405_minor = 0;
+                uint32_t l_minRequiredVersion_3181_major = 3;
+                uint32_t l_minRequiredVersion_3181_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1406_major = 3;
-                uint32_t l_minRequiredVersion_1406_minor = 1;
+                uint32_t l_minRequiredVersion_3182_major = 3;
+                uint32_t l_minRequiredVersion_3182_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1407_major = 3;
-                uint32_t l_minRequiredVersion_1407_minor = 2;
+                uint32_t l_minRequiredVersion_3183_major = 3;
+                uint32_t l_minRequiredVersion_3183_minor = 2;
                 break;
             }
         }
@@ -28735,23 +37575,23 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1409_major = 3;
-                uint32_t l_minRequiredVersion_1409_minor = 0;
+                uint32_t l_minRequiredVersion_3185_major = 3;
+                uint32_t l_minRequiredVersion_3185_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1410_major = 3;
-                uint32_t l_minRequiredVersion_1410_minor = 1;
+                uint32_t l_minRequiredVersion_3186_major = 3;
+                uint32_t l_minRequiredVersion_3186_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1413_msg = "No context bound";
+            std::string l_error_3189_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1412_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1412_result;
+        std::shared_ptr<Context> l_GetContext_3188_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3188_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -28814,40 +37654,40 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1414_major = 2;
-        uint32_t l_minRequiredVersion_1414_minor = 0;
-        uint32_t l_TexParameterv_1415_target = target;
-        uint32_t l_TexParameterv_1415_pname = pname;
-        GLfloat* l_TexParameterv_1415_params = params;
-        switch (l_TexParameterv_1415_target) {
+        uint32_t l_minRequiredVersion_3190_major = 2;
+        uint32_t l_minRequiredVersion_3190_minor = 0;
+        uint32_t l_TexParameterv_3191_target = target;
+        uint32_t l_TexParameterv_3191_pname = pname;
+        GLfloat* l_TexParameterv_3191_params = params;
+        switch (l_TexParameterv_3191_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1416_major = 3;
-                uint32_t l_minRequiredVersion_1416_minor = 0;
+                uint32_t l_minRequiredVersion_3192_major = 3;
+                uint32_t l_minRequiredVersion_3192_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1417_major = 3;
-                uint32_t l_minRequiredVersion_1417_minor = 1;
+                uint32_t l_minRequiredVersion_3193_major = 3;
+                uint32_t l_minRequiredVersion_3193_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1418_major = 3;
-                uint32_t l_minRequiredVersion_1418_minor = 2;
+                uint32_t l_minRequiredVersion_3194_major = 3;
+                uint32_t l_minRequiredVersion_3194_minor = 2;
                 break;
             }
         }
-        switch (l_TexParameterv_1415_pname) {
+        switch (l_TexParameterv_3191_pname) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_TexParameterv_1415_params, 0, 1));
+                read(slice(l_TexParameterv_3191_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:    // fall-through...
@@ -28861,21 +37701,21 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1420_major = 3;
-                uint32_t l_minRequiredVersion_1420_minor = 0;
-                read(slice(l_TexParameterv_1415_params, 0, 1));
+                uint32_t l_minRequiredVersion_3196_major = 3;
+                uint32_t l_minRequiredVersion_3196_minor = 0;
+                read(slice(l_TexParameterv_3191_params, 0, 1));
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1421_major = 3;
-                uint32_t l_minRequiredVersion_1421_minor = 1;
-                read(slice(l_TexParameterv_1415_params, 0, 1));
+                uint32_t l_minRequiredVersion_3197_major = 3;
+                uint32_t l_minRequiredVersion_3197_minor = 1;
+                read(slice(l_TexParameterv_3191_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1422_major = 3;
-                uint32_t l_minRequiredVersion_1422_minor = 2;
-                read(slice(l_TexParameterv_1415_params, 0, 4));
+                uint32_t l_minRequiredVersion_3198_major = 3;
+                uint32_t l_minRequiredVersion_3198_minor = 2;
+                read(slice(l_TexParameterv_3191_params, 0, 4));
                 break;
             }
         }
@@ -28903,8 +37743,8 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1424_major = 2;
-        uint32_t l_minRequiredVersion_1424_minor = 0;
+        uint32_t l_minRequiredVersion_3200_major = 2;
+        uint32_t l_minRequiredVersion_3200_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -28912,19 +37752,19 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1425_major = 3;
-                uint32_t l_minRequiredVersion_1425_minor = 0;
+                uint32_t l_minRequiredVersion_3201_major = 3;
+                uint32_t l_minRequiredVersion_3201_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1426_major = 3;
-                uint32_t l_minRequiredVersion_1426_minor = 1;
+                uint32_t l_minRequiredVersion_3202_major = 3;
+                uint32_t l_minRequiredVersion_3202_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1427_major = 3;
-                uint32_t l_minRequiredVersion_1427_minor = 2;
+                uint32_t l_minRequiredVersion_3203_major = 3;
+                uint32_t l_minRequiredVersion_3203_minor = 2;
                 break;
             }
         }
@@ -28946,23 +37786,23 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1429_major = 3;
-                uint32_t l_minRequiredVersion_1429_minor = 0;
+                uint32_t l_minRequiredVersion_3205_major = 3;
+                uint32_t l_minRequiredVersion_3205_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1430_major = 3;
-                uint32_t l_minRequiredVersion_1430_minor = 1;
+                uint32_t l_minRequiredVersion_3206_major = 3;
+                uint32_t l_minRequiredVersion_3206_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1433_msg = "No context bound";
+            std::string l_error_3209_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1432_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1432_result;
+        std::shared_ptr<Context> l_GetContext_3208_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3208_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -29025,40 +37865,40 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1434_major = 2;
-        uint32_t l_minRequiredVersion_1434_minor = 0;
-        uint32_t l_TexParameterv_1435_target = target;
-        uint32_t l_TexParameterv_1435_pname = pname;
-        GLint* l_TexParameterv_1435_params = params;
-        switch (l_TexParameterv_1435_target) {
+        uint32_t l_minRequiredVersion_3210_major = 2;
+        uint32_t l_minRequiredVersion_3210_minor = 0;
+        uint32_t l_TexParameterv_3211_target = target;
+        uint32_t l_TexParameterv_3211_pname = pname;
+        GLint* l_TexParameterv_3211_params = params;
+        switch (l_TexParameterv_3211_target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1436_major = 3;
-                uint32_t l_minRequiredVersion_1436_minor = 0;
+                uint32_t l_minRequiredVersion_3212_major = 3;
+                uint32_t l_minRequiredVersion_3212_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1437_major = 3;
-                uint32_t l_minRequiredVersion_1437_minor = 1;
+                uint32_t l_minRequiredVersion_3213_major = 3;
+                uint32_t l_minRequiredVersion_3213_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1438_major = 3;
-                uint32_t l_minRequiredVersion_1438_minor = 2;
+                uint32_t l_minRequiredVersion_3214_major = 3;
+                uint32_t l_minRequiredVersion_3214_minor = 2;
                 break;
             }
         }
-        switch (l_TexParameterv_1435_pname) {
+        switch (l_TexParameterv_3211_pname) {
             case GLenum::GL_TEXTURE_MAG_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_MIN_FILTER:  // fall-through...
             case GLenum::GL_TEXTURE_WRAP_S:      // fall-through...
             case GLenum::GL_TEXTURE_WRAP_T: {
-                read(slice(l_TexParameterv_1435_params, 0, 1));
+                read(slice(l_TexParameterv_3211_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BASE_LEVEL:    // fall-through...
@@ -29072,21 +37912,21 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1440_major = 3;
-                uint32_t l_minRequiredVersion_1440_minor = 0;
-                read(slice(l_TexParameterv_1435_params, 0, 1));
+                uint32_t l_minRequiredVersion_3216_major = 3;
+                uint32_t l_minRequiredVersion_3216_minor = 0;
+                read(slice(l_TexParameterv_3211_params, 0, 1));
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1441_major = 3;
-                uint32_t l_minRequiredVersion_1441_minor = 1;
-                read(slice(l_TexParameterv_1435_params, 0, 1));
+                uint32_t l_minRequiredVersion_3217_major = 3;
+                uint32_t l_minRequiredVersion_3217_minor = 1;
+                read(slice(l_TexParameterv_3211_params, 0, 1));
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1442_major = 3;
-                uint32_t l_minRequiredVersion_1442_minor = 2;
-                read(slice(l_TexParameterv_1435_params, 0, 4));
+                uint32_t l_minRequiredVersion_3218_major = 3;
+                uint32_t l_minRequiredVersion_3218_minor = 2;
+                read(slice(l_TexParameterv_3211_params, 0, 4));
                 break;
             }
         }
@@ -29116,8 +37956,8 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1444_major = 3;
-        uint32_t l_minRequiredVersion_1444_minor = 0;
+        uint32_t l_minRequiredVersion_3220_major = 3;
+        uint32_t l_minRequiredVersion_3220_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -29220,8 +38060,8 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:    // fall-through...
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1446_major = 3;
-                uint32_t l_minRequiredVersion_1446_minor = 2;
+                uint32_t l_minRequiredVersion_3222_major = 3;
+                uint32_t l_minRequiredVersion_3222_minor = 2;
                 break;
             }
         }
@@ -29253,8 +38093,8 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1448_major = 3;
-        uint32_t l_minRequiredVersion_1448_minor = 1;
+        uint32_t l_minRequiredVersion_3224_major = 3;
+        uint32_t l_minRequiredVersion_3224_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
                 break;
@@ -29318,8 +38158,8 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
                 break;
             }
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1450_major = 3;
-                uint32_t l_minRequiredVersion_1450_minor = 2;
+                uint32_t l_minRequiredVersion_3226_major = 3;
+                uint32_t l_minRequiredVersion_3226_minor = 2;
                 break;
             }
         }
@@ -29348,16 +38188,16 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1452_major = 3;
-        uint32_t l_minRequiredVersion_1452_minor = 0;
+        uint32_t l_minRequiredVersion_3228_major = 3;
+        uint32_t l_minRequiredVersion_3228_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1453_major = 3;
-                uint32_t l_minRequiredVersion_1453_minor = 2;
+                uint32_t l_minRequiredVersion_3229_major = 3;
+                uint32_t l_minRequiredVersion_3229_minor = 2;
                 break;
             }
         }
@@ -29457,8 +38297,8 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:    // fall-through...
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1455_major = 3;
-                uint32_t l_minRequiredVersion_1455_minor = 2;
+                uint32_t l_minRequiredVersion_3231_major = 3;
+                uint32_t l_minRequiredVersion_3231_minor = 2;
                 break;
             }
         }
@@ -29491,8 +38331,8 @@ inline void GlesSpy::glTexStorage3DMultisample(uint32_t target, int32_t samples,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1457_major = 3;
-        uint32_t l_minRequiredVersion_1457_minor = 2;
+        uint32_t l_minRequiredVersion_3233_major = 3;
+        uint32_t l_minRequiredVersion_3233_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY: {
                 break;
@@ -29585,8 +38425,8 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1460_major = 2;
-        uint32_t l_minRequiredVersion_1460_minor = 0;
+        uint32_t l_minRequiredVersion_3236_major = 2;
+        uint32_t l_minRequiredVersion_3236_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -29614,8 +38454,8 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             case GLenum::GL_RGBA_INTEGER:     // fall-through...
             case GLenum::GL_RGB_INTEGER:      // fall-through...
             case GLenum::GL_RG_INTEGER: {
-                uint32_t l_minRequiredVersion_1462_major = 3;
-                uint32_t l_minRequiredVersion_1462_minor = 0;
+                uint32_t l_minRequiredVersion_3238_major = 3;
+                uint32_t l_minRequiredVersion_3238_minor = 0;
                 break;
             }
         }
@@ -29627,7 +38467,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1464_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_3240_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -29642,18 +38482,18 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:     // fall-through...
             case GLenum::GL_UNSIGNED_INT_5_9_9_9_REV:        // fall-through...
             case GLenum::GL_UNSIGNED_SHORT: {
-                uint32_t l_minRequiredVersion_1465_major = 3;
-                uint32_t l_minRequiredVersion_1465_minor = 0;
+                uint32_t l_minRequiredVersion_3241_major = 3;
+                uint32_t l_minRequiredVersion_3241_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1468_msg = "No context bound";
+            std::string l_error_3244_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1467_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1467_result;
+        std::shared_ptr<Context> l_GetContext_3243_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3243_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         Image l_image = /* clang-format off */
         /* switch(target) */
@@ -29714,16 +38554,16 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1469_major = 3;
-        uint32_t l_minRequiredVersion_1469_minor = 0;
+        uint32_t l_minRequiredVersion_3245_major = 3;
+        uint32_t l_minRequiredVersion_3245_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1470_major = 3;
-                uint32_t l_minRequiredVersion_1470_minor = 2;
+                uint32_t l_minRequiredVersion_3246_major = 3;
+                uint32_t l_minRequiredVersion_3246_minor = 2;
                 break;
             }
         }
@@ -29746,7 +38586,7 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
         }
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1473_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_3249_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -29770,11 +38610,11 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1476_msg = "No context bound";
+            std::string l_error_3252_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1475_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1475_result;
+        std::shared_ptr<Context> l_GetContext_3251_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3251_result;
         if (data != nullptr &&
             l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
             uint32_t l_size = imageSize((uint32_t)(width), (uint32_t)(height), format, type) *
@@ -29808,8 +38648,8 @@ inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1477_major = 3;
-        uint32_t l_minRequiredVersion_1477_minor = 0;
+        uint32_t l_minRequiredVersion_3253_major = 3;
+        uint32_t l_minRequiredVersion_3253_minor = 0;
         switch (primitiveMode) {
             case GLenum::GL_LINES:   // fall-through...
             case GLenum::GL_POINTS:  // fall-through...
@@ -29840,8 +38680,8 @@ inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1479_major = 3;
-        uint32_t l_minRequiredVersion_1479_minor = 0;
+        uint32_t l_minRequiredVersion_3255_major = 3;
+        uint32_t l_minRequiredVersion_3255_minor = 0;
         switch (target) {
             case GLenum::GL_TRANSFORM_FEEDBACK: {
                 break;
@@ -29870,8 +38710,8 @@ inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1481_major = 3;
-        uint32_t l_minRequiredVersion_1481_minor = 0;
+        uint32_t l_minRequiredVersion_3257_major = 3;
+        uint32_t l_minRequiredVersion_3257_minor = 0;
         read(slice(ids, (uint64_t)((GLsizei)(0)), (uint64_t)(n)));
         observe(observations.mReads);
         mImports.glDeleteTransformFeedbacks(n, ids);
@@ -29899,8 +38739,8 @@ inline void GlesSpy::glEndTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1482_major = 3;
-        uint32_t l_minRequiredVersion_1482_minor = 0;
+        uint32_t l_minRequiredVersion_3258_major = 3;
+        uint32_t l_minRequiredVersion_3258_minor = 0;
         observe(observations.mReads);
         mImports.glEndTransformFeedback();
     } while (false);
@@ -29924,8 +38764,8 @@ inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1483_major = 3;
-        uint32_t l_minRequiredVersion_1483_minor = 0;
+        uint32_t l_minRequiredVersion_3259_major = 3;
+        uint32_t l_minRequiredVersion_3259_minor = 0;
         observe(observations.mReads);
         mImports.glGenTransformFeedbacks(n, ids);
         write(slice(ids, (uint64_t)((GLsizei)(0)), (uint64_t)(n)));
@@ -29957,22 +38797,22 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1484_major = 3;
-        uint32_t l_minRequiredVersion_1484_minor = 0;
-        GLsizei l_writeString_1485_buffer_size = bufSize;
-        GLsizei* l_writeString_1485_buffer_bytes_written = length;
-        GLchar* l_writeString_1485_buffer = name;
+        uint32_t l_minRequiredVersion_3260_major = 3;
+        uint32_t l_minRequiredVersion_3260_minor = 0;
+        GLsizei l_writeString_3261_buffer_size = bufSize;
+        GLsizei* l_writeString_3261_buffer_bytes_written = length;
+        GLchar* l_writeString_3261_buffer = name;
         observe(observations.mReads);
         mImports.glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
-        if (l_writeString_1485_buffer != nullptr && l_writeString_1485_buffer_size > (GLsizei)(0)) {
-            GLsizei l_buffer_size2 = l_writeString_1485_buffer_size;
-            if (l_writeString_1485_buffer_bytes_written != nullptr) {
+        if (l_writeString_3261_buffer != nullptr && l_writeString_3261_buffer_size > (GLsizei)(0)) {
+            GLsizei l_buffer_size2 = l_writeString_3261_buffer_size;
+            if (l_writeString_3261_buffer_bytes_written != nullptr) {
                 GLsizei l_length = (GLsizei)(slice(length, 0, 1)[0]);
-                write(slice(l_writeString_1485_buffer_bytes_written, 0, 1), 0, l_length);
-                write(slice(l_writeString_1485_buffer, (uint64_t)((GLsizei)(0)),
+                write(slice(l_writeString_3261_buffer_bytes_written, 0, 1), 0, l_length);
+                write(slice(l_writeString_3261_buffer, (uint64_t)((GLsizei)(0)),
                             (uint64_t)(l_length + (GLsizei)(1))));
             } else {
-                write(slice(l_writeString_1485_buffer, (uint64_t)((GLsizei)(0)),
+                write(slice(l_writeString_3261_buffer, (uint64_t)((GLsizei)(0)),
                             (uint64_t)(l_buffer_size2)));
             }
         }
@@ -30010,8 +38850,8 @@ inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1486_major = 3;
-        uint32_t l_minRequiredVersion_1486_minor = 0;
+        uint32_t l_minRequiredVersion_3262_major = 3;
+        uint32_t l_minRequiredVersion_3262_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsTransformFeedback(id);
         break;
@@ -30038,8 +38878,8 @@ inline void GlesSpy::glPauseTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1487_major = 3;
-        uint32_t l_minRequiredVersion_1487_minor = 0;
+        uint32_t l_minRequiredVersion_3263_major = 3;
+        uint32_t l_minRequiredVersion_3263_minor = 0;
         observe(observations.mReads);
         mImports.glPauseTransformFeedback();
     } while (false);
@@ -30063,8 +38903,8 @@ inline void GlesSpy::glResumeTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1488_major = 3;
-        uint32_t l_minRequiredVersion_1488_minor = 0;
+        uint32_t l_minRequiredVersion_3264_major = 3;
+        uint32_t l_minRequiredVersion_3264_minor = 0;
         observe(observations.mReads);
         mImports.glResumeTransformFeedback();
     } while (false);
@@ -30090,8 +38930,8 @@ inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1489_major = 3;
-        uint32_t l_minRequiredVersion_1489_minor = 0;
+        uint32_t l_minRequiredVersion_3265_major = 3;
+        uint32_t l_minRequiredVersion_3265_minor = 0;
         switch (bufferMode) {
             case GLenum::GL_INTERLEAVED_ATTRIBS:  // fall-through...
             case GLenum::GL_SEPARATE_ATTRIBS: {
@@ -30127,15 +38967,15 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1491_major = 3;
-        uint32_t l_minRequiredVersion_1491_minor = 0;
+        uint32_t l_minRequiredVersion_3267_major = 3;
+        uint32_t l_minRequiredVersion_3267_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1493_msg = "No context bound";
+            std::string l_error_3269_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1492_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1492_result;
+        std::shared_ptr<Context> l_GetContext_3268_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3268_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>(new VertexArray());
@@ -30166,8 +39006,8 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1494_major = 3;
-        uint32_t l_minRequiredVersion_1494_minor = 1;
+        uint32_t l_minRequiredVersion_3270_major = 3;
+        uint32_t l_minRequiredVersion_3270_minor = 1;
         observe(observations.mReads);
         mImports.glBindVertexBuffer(bindingindex, buffer, offset, stride);
     } while (false);
@@ -30192,15 +39032,15 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1495_major = 3;
-        uint32_t l_minRequiredVersion_1495_minor = 0;
+        uint32_t l_minRequiredVersion_3271_major = 3;
+        uint32_t l_minRequiredVersion_3271_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1497_msg = "No context bound";
+            std::string l_error_3273_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1496_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1496_result;
+        std::shared_ptr<Context> l_GetContext_3272_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3272_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -30232,15 +39072,15 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1498_major = 2;
-        uint32_t l_minRequiredVersion_1498_minor = 0;
+        uint32_t l_minRequiredVersion_3274_major = 2;
+        uint32_t l_minRequiredVersion_3274_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1500_msg = "No context bound";
+            std::string l_error_3276_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1499_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1499_result;
+        std::shared_ptr<Context> l_GetContext_3275_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3275_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = false;
         observe(observations.mReads);
         mImports.glDisableVertexAttribArray(location);
@@ -30265,15 +39105,15 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1501_major = 2;
-        uint32_t l_minRequiredVersion_1501_minor = 0;
+        uint32_t l_minRequiredVersion_3277_major = 2;
+        uint32_t l_minRequiredVersion_3277_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1503_msg = "No context bound";
+            std::string l_error_3279_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1502_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1502_result;
+        std::shared_ptr<Context> l_GetContext_3278_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3278_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = true;
         observe(observations.mReads);
         mImports.glEnableVertexAttribArray(location);
@@ -30296,16 +39136,16 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1504_major = 3;
-        uint32_t l_minRequiredVersion_1504_minor = 0;
+        uint32_t l_minRequiredVersion_3280_major = 3;
+        uint32_t l_minRequiredVersion_3280_minor = 0;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1506_msg = "No context bound";
+            std::string l_error_3282_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1505_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1505_result;
+        std::shared_ptr<Context> l_GetContext_3281_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3281_result;
         observe(observations.mReads);
         mImports.glGenVertexArrays(count, arrays);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -30337,8 +39177,8 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1507_major = 3;
-        uint32_t l_minRequiredVersion_1507_minor = 0;
+        uint32_t l_minRequiredVersion_3283_major = 3;
+        uint32_t l_minRequiredVersion_3283_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -30352,8 +39192,8 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1508_major = 3;
-                uint32_t l_minRequiredVersion_1508_minor = 1;
+                uint32_t l_minRequiredVersion_3284_major = 3;
+                uint32_t l_minRequiredVersion_3284_minor = 1;
                 break;
             }
         }
@@ -30382,8 +39222,8 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1510_major = 3;
-        uint32_t l_minRequiredVersion_1510_minor = 0;
+        uint32_t l_minRequiredVersion_3286_major = 3;
+        uint32_t l_minRequiredVersion_3286_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -30397,8 +39237,8 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1511_major = 3;
-                uint32_t l_minRequiredVersion_1511_minor = 1;
+                uint32_t l_minRequiredVersion_3287_major = 3;
+                uint32_t l_minRequiredVersion_3287_minor = 1;
                 break;
             }
         }
@@ -30427,8 +39267,8 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1513_major = 2;
-        uint32_t l_minRequiredVersion_1513_minor = 0;
+        uint32_t l_minRequiredVersion_3289_major = 2;
+        uint32_t l_minRequiredVersion_3289_minor = 0;
         switch (pname) {
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_POINTER: {
                 break;
@@ -30460,8 +39300,8 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1515_major = 2;
-        uint32_t l_minRequiredVersion_1515_minor = 0;
+        uint32_t l_minRequiredVersion_3291_major = 2;
+        uint32_t l_minRequiredVersion_3291_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -30474,13 +39314,13 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
             }
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_1516_major = 3;
-                uint32_t l_minRequiredVersion_1516_minor = 0;
+                uint32_t l_minRequiredVersion_3292_major = 3;
+                uint32_t l_minRequiredVersion_3292_minor = 0;
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1517_major = 3;
-                uint32_t l_minRequiredVersion_1517_minor = 1;
+                uint32_t l_minRequiredVersion_3293_major = 3;
+                uint32_t l_minRequiredVersion_3293_minor = 1;
                 break;
             }
         }
@@ -30510,8 +39350,8 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1519_major = 2;
-        uint32_t l_minRequiredVersion_1519_minor = 0;
+        uint32_t l_minRequiredVersion_3295_major = 2;
+        uint32_t l_minRequiredVersion_3295_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -30524,13 +39364,13 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
             }
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_1520_major = 3;
-                uint32_t l_minRequiredVersion_1520_minor = 0;
+                uint32_t l_minRequiredVersion_3296_major = 3;
+                uint32_t l_minRequiredVersion_3296_minor = 0;
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1521_major = 3;
-                uint32_t l_minRequiredVersion_1521_minor = 1;
+                uint32_t l_minRequiredVersion_3297_major = 3;
+                uint32_t l_minRequiredVersion_3297_minor = 1;
                 break;
             }
         }
@@ -30559,8 +39399,8 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1523_major = 3;
-        uint32_t l_minRequiredVersion_1523_minor = 0;
+        uint32_t l_minRequiredVersion_3299_major = 3;
+        uint32_t l_minRequiredVersion_3299_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsVertexArray(array);
         break;
@@ -30585,8 +39425,8 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1524_major = 2;
-        uint32_t l_minRequiredVersion_1524_minor = 0;
+        uint32_t l_minRequiredVersion_3300_major = 2;
+        uint32_t l_minRequiredVersion_3300_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib1f(location, value0);
     } while (false);
@@ -30608,8 +39448,8 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1525_major = 2;
-        uint32_t l_minRequiredVersion_1525_minor = 0;
+        uint32_t l_minRequiredVersion_3301_major = 2;
+        uint32_t l_minRequiredVersion_3301_minor = 0;
         read(slice(value, 0, 1));
         observe(observations.mReads);
         mImports.glVertexAttrib1fv(location, value);
@@ -30634,8 +39474,8 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1526_major = 2;
-        uint32_t l_minRequiredVersion_1526_minor = 0;
+        uint32_t l_minRequiredVersion_3302_major = 2;
+        uint32_t l_minRequiredVersion_3302_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib2f(location, value0, value1);
     } while (false);
@@ -30657,8 +39497,8 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1527_major = 2;
-        uint32_t l_minRequiredVersion_1527_minor = 0;
+        uint32_t l_minRequiredVersion_3303_major = 2;
+        uint32_t l_minRequiredVersion_3303_minor = 0;
         read(slice(value, 0, 2));
         observe(observations.mReads);
         mImports.glVertexAttrib2fv(location, value);
@@ -30683,8 +39523,8 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1528_major = 2;
-        uint32_t l_minRequiredVersion_1528_minor = 0;
+        uint32_t l_minRequiredVersion_3304_major = 2;
+        uint32_t l_minRequiredVersion_3304_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib3f(location, value0, value1, value2);
     } while (false);
@@ -30706,8 +39546,8 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1529_major = 2;
-        uint32_t l_minRequiredVersion_1529_minor = 0;
+        uint32_t l_minRequiredVersion_3305_major = 2;
+        uint32_t l_minRequiredVersion_3305_minor = 0;
         read(slice(value, 0, 3));
         observe(observations.mReads);
         mImports.glVertexAttrib3fv(location, value);
@@ -30734,8 +39574,8 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1530_major = 2;
-        uint32_t l_minRequiredVersion_1530_minor = 0;
+        uint32_t l_minRequiredVersion_3306_major = 2;
+        uint32_t l_minRequiredVersion_3306_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib4f(location, value0, value1, value2, value3);
     } while (false);
@@ -30758,8 +39598,8 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1531_major = 2;
-        uint32_t l_minRequiredVersion_1531_minor = 0;
+        uint32_t l_minRequiredVersion_3307_major = 2;
+        uint32_t l_minRequiredVersion_3307_minor = 0;
         read(slice(value, 0, 4));
         observe(observations.mReads);
         mImports.glVertexAttrib4fv(location, value);
@@ -30786,8 +39626,8 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1532_major = 3;
-        uint32_t l_minRequiredVersion_1532_minor = 1;
+        uint32_t l_minRequiredVersion_3308_major = 3;
+        uint32_t l_minRequiredVersion_3308_minor = 1;
         observe(observations.mReads);
         mImports.glVertexAttribBinding(attribindex, bindingindex);
     } while (false);
@@ -30811,8 +39651,8 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1533_major = 3;
-        uint32_t l_minRequiredVersion_1533_minor = 0;
+        uint32_t l_minRequiredVersion_3309_major = 3;
+        uint32_t l_minRequiredVersion_3309_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribDivisor(index, divisor);
     } while (false);
@@ -30838,8 +39678,8 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1534_major = 3;
-        uint32_t l_minRequiredVersion_1534_minor = 1;
+        uint32_t l_minRequiredVersion_3310_major = 3;
+        uint32_t l_minRequiredVersion_3310_minor = 1;
         switch (type) {
             case GLenum::GL_BYTE:                         // fall-through...
             case GLenum::GL_FIXED:                        // fall-through...
@@ -30878,8 +39718,8 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1536_major = 3;
-        uint32_t l_minRequiredVersion_1536_minor = 0;
+        uint32_t l_minRequiredVersion_3312_major = 3;
+        uint32_t l_minRequiredVersion_3312_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4i(index, x, y, z, w);
     } while (false);
@@ -30903,8 +39743,8 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1537_major = 3;
-        uint32_t l_minRequiredVersion_1537_minor = 0;
+        uint32_t l_minRequiredVersion_3313_major = 3;
+        uint32_t l_minRequiredVersion_3313_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4iv(index, v);
     } while (false);
@@ -30933,8 +39773,8 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1538_major = 3;
-        uint32_t l_minRequiredVersion_1538_minor = 0;
+        uint32_t l_minRequiredVersion_3314_major = 3;
+        uint32_t l_minRequiredVersion_3314_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4ui(index, x, y, z, w);
     } while (false);
@@ -30958,8 +39798,8 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1539_major = 3;
-        uint32_t l_minRequiredVersion_1539_minor = 0;
+        uint32_t l_minRequiredVersion_3315_major = 3;
+        uint32_t l_minRequiredVersion_3315_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4uiv(index, v);
     } while (false);
@@ -30987,8 +39827,8 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1540_major = 3;
-        uint32_t l_minRequiredVersion_1540_minor = 1;
+        uint32_t l_minRequiredVersion_3316_major = 3;
+        uint32_t l_minRequiredVersion_3316_minor = 1;
         switch (type) {
             case GLenum::GL_BYTE:                         // fall-through...
             case GLenum::GL_FIXED:                        // fall-through...
@@ -31030,11 +39870,11 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1542_major = 3;
-        uint32_t l_minRequiredVersion_1542_minor = 0;
+        uint32_t l_minRequiredVersion_3318_major = 3;
+        uint32_t l_minRequiredVersion_3318_minor = 0;
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1543_ext = ExtensionId::GL_OES_vertex_half_float;
+                uint32_t l_requiresExtension_3319_ext = ExtensionId::GL_OES_vertex_half_float;
                 break;
             }
             case GLenum::GL_BYTE:           // fall-through...
@@ -31074,8 +39914,8 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1545_major = 2;
-        uint32_t l_minRequiredVersion_1545_minor = 0;
+        uint32_t l_minRequiredVersion_3321_major = 2;
+        uint32_t l_minRequiredVersion_3321_minor = 0;
         switch (type) {
             case GLenum::GL_BYTE:           // fall-through...
             case GLenum::GL_FIXED:          // fall-through...
@@ -31086,7 +39926,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1546_ext = ExtensionId::GL_OES_vertex_half_float;
+                uint32_t l_requiresExtension_3322_ext = ExtensionId::GL_OES_vertex_half_float;
                 break;
             }
             case GLenum::GL_HALF_FLOAT:          // fall-through...
@@ -31094,18 +39934,18 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
             case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
             case GLenum::GL_UNSIGNED_INT:        // fall-through...
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
-                uint32_t l_minRequiredVersion_1547_major = 3;
-                uint32_t l_minRequiredVersion_1547_minor = 0;
+                uint32_t l_minRequiredVersion_3323_major = 3;
+                uint32_t l_minRequiredVersion_3323_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1550_msg = "No context bound";
+            std::string l_error_3326_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1549_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1549_result;
+        std::shared_ptr<Context> l_GetContext_3325_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3325_result;
         std::shared_ptr<VertexAttributeArray> l_a = l_ctx->mVertexAttributeArrays[location];
         l_a->mSize = (uint32_t)(size);
         l_a->mType = type;
@@ -31139,8 +39979,8 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1551_major = 3;
-        uint32_t l_minRequiredVersion_1551_minor = 1;
+        uint32_t l_minRequiredVersion_3327_major = 3;
+        uint32_t l_minRequiredVersion_3327_minor = 1;
         observe(observations.mReads);
         mImports.glVertexBindingDivisor(bindingindex, divisor);
     } while (false);
@@ -31261,8 +40101,8 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1552_result = l_ctx;
-        this->EGLContexts[l_context] = l_CreateContext_1552_result;
+        std::shared_ptr<Context> l_CreateContext_3328_result = l_ctx;
+        this->EGLContexts[l_context] = l_CreateContext_3328_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -31297,8 +40137,8 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1553_context = this->EGLContexts[context];
-        this->Contexts[this->CurrentThread] = l_SetContext_1553_context;
+        std::shared_ptr<Context> l_SetContext_3329_context = this->EGLContexts[context];
+        this->Contexts[this->CurrentThread] = l_SetContext_3329_context;
         observe(observations.mReads);
         result = mImports.eglMakeCurrent(display, draw, read, context);
         break;
@@ -31456,8 +40296,8 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1554_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_1554_result;
+        std::shared_ptr<Context> l_CreateContext_3330_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_3330_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -31551,8 +40391,8 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1555_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_1555_result;
+        std::shared_ptr<Context> l_CreateContext_3331_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_3331_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -31587,8 +40427,8 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1556_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1556_context;
+        std::shared_ptr<Context> l_SetContext_3332_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3332_context;
         observe(observations.mReads);
         result = mImports.glXMakeContextCurrent(display, draw, read, ctx);
         break;
@@ -31624,8 +40464,8 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1557_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1557_context;
+        std::shared_ptr<Context> l_SetContext_3333_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3333_context;
         observe(observations.mReads);
         result = mImports.glXMakeCurrent(display, drawable, ctx);
         break;
@@ -31775,8 +40615,8 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1558_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_1558_result;
+        std::shared_ptr<Context> l_CreateContext_3334_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_3334_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -31864,8 +40704,8 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1559_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_1559_result;
+        std::shared_ptr<Context> l_CreateContext_3335_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_3335_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -31898,8 +40738,8 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1560_context = this->WGLContexts[hglrc];
-        this->Contexts[this->CurrentThread] = l_SetContext_1560_context;
+        std::shared_ptr<Context> l_SetContext_3336_context = this->WGLContexts[hglrc];
+        this->Contexts[this->CurrentThread] = l_SetContext_3336_context;
         observe(observations.mReads);
         result = mImports.wglMakeCurrent(hdc, hglrc);
         break;
@@ -32011,8 +40851,8 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1561_result = l_ctx;
-        this->CGLContexts[l_context] = l_CreateContext_1561_result;
+        std::shared_ptr<Context> l_CreateContext_3337_result = l_ctx;
+        this->CGLContexts[l_context] = l_CreateContext_3337_result;
         write(slice(ctx, 0, 1), 0, l_context);
         break;
     } while (false);
@@ -32047,8 +40887,8 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1562_context = this->CGLContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1562_context;
+        std::shared_ptr<Context> l_SetContext_3338_context = this->CGLContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_3338_context;
         observe(observations.mReads);
         result = mImports.CGLSetCurrentContext(ctx);
         break;
@@ -32289,11 +41129,11 @@ inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, cha
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_1564_msg = "No context bound";
+            std::string l_error_3340_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_1563_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1563_result;
+        std::shared_ptr<Context> l_GetContext_3339_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_3339_result;
         l_ctx->mInfo.mName = name;
         l_ctx->mInfo.mVendor = vendor;
         l_ctx->mInfo.mExtensions = extensions;

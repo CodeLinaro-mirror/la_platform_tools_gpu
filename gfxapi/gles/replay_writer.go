@@ -15467,23 +15467,1292 @@ func (ϟa *GlGetBooleani_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1124_major := uint32(3) // u32
 	minRequiredVersion_1124_minor := uint32(1) // u32
-	switch ϟa.Target {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_DITHER, GLenum_GL_DRAW_BUFFER, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE, GLenum_GL_VIEWPORT:
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1125_major := uint32(3) // u32
-		minRequiredVersion_1125_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1125_major, minRequiredVersion_1125_minor
-	default:
-		glErrorInvalidEnum_1126_param := ϟa.Target // GLenum
-		return
-		_ = glErrorInvalidEnum_1126_param
-	}
-	ϟb.Push(value.U32(ϟa.Target))
+	observeGlGetWrites_1125_param := ϟa.Param  // GLenum
+	observeGlGetWrites_1125_v := ϟa.Values     // GLbooleanᵖ
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetBooleani_v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1124_major, minRequiredVersion_1124_minor
+	switch observeGlGetWrites_1125_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_1126_major := uint32(2) // u32
+		minRequiredVersion_1126_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1126_major, minRequiredVersion_1126_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_1127_major := uint32(2) // u32
+		minRequiredVersion_1127_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1127_major, minRequiredVersion_1127_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_1128_major := uint32(2) // u32
+		minRequiredVersion_1128_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1128_major, minRequiredVersion_1128_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_1129_major := uint32(2) // u32
+		minRequiredVersion_1129_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1129_major, minRequiredVersion_1129_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1130_major := uint32(2) // u32
+		minRequiredVersion_1130_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1130_major, minRequiredVersion_1130_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_1131_major := uint32(2) // u32
+		minRequiredVersion_1131_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1131_major, minRequiredVersion_1131_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_1132_major := uint32(2) // u32
+		minRequiredVersion_1132_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1132_major, minRequiredVersion_1132_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_1133_major := uint32(2) // u32
+		minRequiredVersion_1133_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1133_major, minRequiredVersion_1133_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_1134_major := uint32(2) // u32
+		minRequiredVersion_1134_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1134_major, minRequiredVersion_1134_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_1135_major := uint32(2) // u32
+		minRequiredVersion_1135_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1135_major, minRequiredVersion_1135_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_1136_major := uint32(2) // u32
+		minRequiredVersion_1136_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1136_major, minRequiredVersion_1136_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_1137_major := uint32(2) // u32
+		minRequiredVersion_1137_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1137_major, minRequiredVersion_1137_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_1138_major := uint32(2) // u32
+		minRequiredVersion_1138_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1138_major, minRequiredVersion_1138_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_1139_major := uint32(2) // u32
+		minRequiredVersion_1139_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1139_major, minRequiredVersion_1139_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_1140_major := uint32(2) // u32
+		minRequiredVersion_1140_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1140_major, minRequiredVersion_1140_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_1141_major := uint32(2) // u32
+		minRequiredVersion_1141_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1141_major, minRequiredVersion_1141_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1142_major := uint32(2) // u32
+		minRequiredVersion_1142_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1142_major, minRequiredVersion_1142_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_1143_major := uint32(3) // u32
+		minRequiredVersion_1143_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1143_major, minRequiredVersion_1143_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_1144_major := uint32(3) // u32
+		minRequiredVersion_1144_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1144_major, minRequiredVersion_1144_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_1145_major := uint32(3) // u32
+		minRequiredVersion_1145_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1145_major, minRequiredVersion_1145_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_1146_major := uint32(3) // u32
+		minRequiredVersion_1146_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1146_major, minRequiredVersion_1146_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_1147_major := uint32(2) // u32
+		minRequiredVersion_1147_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1147_major, minRequiredVersion_1147_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_1148_major := uint32(2) // u32
+		minRequiredVersion_1148_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1148_major, minRequiredVersion_1148_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_1149_major := uint32(2) // u32
+		minRequiredVersion_1149_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1149_major, minRequiredVersion_1149_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1150_major := uint32(3) // u32
+		minRequiredVersion_1150_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1150_major, minRequiredVersion_1150_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1151_major := uint32(3) // u32
+		minRequiredVersion_1151_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1151_major, minRequiredVersion_1151_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_1152_major := uint32(3) // u32
+		minRequiredVersion_1152_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1152_major, minRequiredVersion_1152_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_1153_major := uint32(2) // u32
+		minRequiredVersion_1153_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1153_major, minRequiredVersion_1153_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_1154_major := uint32(2) // u32
+		minRequiredVersion_1154_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1154_major, minRequiredVersion_1154_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_1155_major := uint32(2) // u32
+		minRequiredVersion_1155_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1155_major, minRequiredVersion_1155_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_1156_major := uint32(2) // u32
+		minRequiredVersion_1156_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1156_major, minRequiredVersion_1156_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_1157_major := uint32(2) // u32
+		minRequiredVersion_1157_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1157_major, minRequiredVersion_1157_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_1158_major := uint32(2) // u32
+		minRequiredVersion_1158_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1158_major, minRequiredVersion_1158_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_1159_major := uint32(3) // u32
+		minRequiredVersion_1159_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1159_major, minRequiredVersion_1159_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_1160_major := uint32(2) // u32
+		minRequiredVersion_1160_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1160_major, minRequiredVersion_1160_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_1161_major := uint32(3) // u32
+		minRequiredVersion_1161_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1161_major, minRequiredVersion_1161_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1162_major := uint32(2) // u32
+		minRequiredVersion_1162_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1162_major, minRequiredVersion_1162_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1163_major := uint32(2) // u32
+		minRequiredVersion_1163_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1163_major, minRequiredVersion_1163_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_1164_major := uint32(3) // u32
+		minRequiredVersion_1164_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1164_major, minRequiredVersion_1164_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_1165_major := uint32(3) // u32
+		minRequiredVersion_1165_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1165_major, minRequiredVersion_1165_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_1166_major := uint32(2) // u32
+		minRequiredVersion_1166_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1166_major, minRequiredVersion_1166_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_1167_major := uint32(2) // u32
+		minRequiredVersion_1167_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1167_major, minRequiredVersion_1167_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_1168_major := uint32(2) // u32
+		minRequiredVersion_1168_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1168_major, minRequiredVersion_1168_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_1169_major := uint32(3) // u32
+		minRequiredVersion_1169_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1169_major, minRequiredVersion_1169_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_1170_major := uint32(2) // u32
+		minRequiredVersion_1170_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1170_major, minRequiredVersion_1170_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_1171_major := uint32(2) // u32
+		minRequiredVersion_1171_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1171_major, minRequiredVersion_1171_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_1172_major := uint32(3) // u32
+		minRequiredVersion_1172_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1172_major, minRequiredVersion_1172_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_1173_major := uint32(2) // u32
+		minRequiredVersion_1173_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1173_major, minRequiredVersion_1173_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_1174_major := uint32(3) // u32
+		minRequiredVersion_1174_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1174_major, minRequiredVersion_1174_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_1175_major := uint32(3) // u32
+		minRequiredVersion_1175_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1175_major, minRequiredVersion_1175_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_1176_major := uint32(3) // u32
+		minRequiredVersion_1176_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1176_major, minRequiredVersion_1176_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_1177_major := uint32(3) // u32
+		minRequiredVersion_1177_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1177_major, minRequiredVersion_1177_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_1178_major := uint32(3) // u32
+		minRequiredVersion_1178_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1178_major, minRequiredVersion_1178_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_1179_major := uint32(3) // u32
+		minRequiredVersion_1179_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1179_major, minRequiredVersion_1179_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_1180_major := uint32(3) // u32
+		minRequiredVersion_1180_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1180_major, minRequiredVersion_1180_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1181_major := uint32(3) // u32
+		minRequiredVersion_1181_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1181_major, minRequiredVersion_1181_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1182_major := uint32(3) // u32
+		minRequiredVersion_1182_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1182_major, minRequiredVersion_1182_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1183_major := uint32(3) // u32
+		minRequiredVersion_1183_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1183_major, minRequiredVersion_1183_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1184_major := uint32(3) // u32
+		minRequiredVersion_1184_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1184_major, minRequiredVersion_1184_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1185_major := uint32(3) // u32
+		minRequiredVersion_1185_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1185_major, minRequiredVersion_1185_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1186_major := uint32(3) // u32
+		minRequiredVersion_1186_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1186_major, minRequiredVersion_1186_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1187_major := uint32(2) // u32
+		minRequiredVersion_1187_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1187_major, minRequiredVersion_1187_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_1188_major := uint32(3) // u32
+		minRequiredVersion_1188_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1188_major, minRequiredVersion_1188_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1189_major := uint32(3) // u32
+		minRequiredVersion_1189_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1189_major, minRequiredVersion_1189_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1190_major := uint32(3) // u32
+		minRequiredVersion_1190_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1190_major, minRequiredVersion_1190_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_1191_major := uint32(3) // u32
+		minRequiredVersion_1191_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1191_major, minRequiredVersion_1191_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_1192_major := uint32(3) // u32
+		minRequiredVersion_1192_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1192_major, minRequiredVersion_1192_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1193_major := uint32(3) // u32
+		minRequiredVersion_1193_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1193_major, minRequiredVersion_1193_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1194_major := uint32(3) // u32
+		minRequiredVersion_1194_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1194_major, minRequiredVersion_1194_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_1195_major := uint32(3) // u32
+		minRequiredVersion_1195_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1195_major, minRequiredVersion_1195_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1196_major := uint32(3) // u32
+		minRequiredVersion_1196_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1196_major, minRequiredVersion_1196_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_1197_major := uint32(3) // u32
+		minRequiredVersion_1197_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1197_major, minRequiredVersion_1197_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_1198_major := uint32(3) // u32
+		minRequiredVersion_1198_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1198_major, minRequiredVersion_1198_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_1199_major := uint32(3) // u32
+		minRequiredVersion_1199_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1199_major, minRequiredVersion_1199_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_1200_major := uint32(2) // u32
+		minRequiredVersion_1200_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1200_major, minRequiredVersion_1200_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1201_major := uint32(3) // u32
+		minRequiredVersion_1201_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1201_major, minRequiredVersion_1201_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1202_major := uint32(3) // u32
+		minRequiredVersion_1202_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1202_major, minRequiredVersion_1202_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_1203_major := uint32(3) // u32
+		minRequiredVersion_1203_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1203_major, minRequiredVersion_1203_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_1204_major := uint32(3) // u32
+		minRequiredVersion_1204_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1204_major, minRequiredVersion_1204_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_1205_major := uint32(3) // u32
+		minRequiredVersion_1205_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1205_major, minRequiredVersion_1205_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_1206_major := uint32(3) // u32
+		minRequiredVersion_1206_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1206_major, minRequiredVersion_1206_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_1207_major := uint32(3) // u32
+		minRequiredVersion_1207_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1207_major, minRequiredVersion_1207_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1208_major := uint32(3) // u32
+		minRequiredVersion_1208_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1208_major, minRequiredVersion_1208_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_1209_major := uint32(3) // u32
+		minRequiredVersion_1209_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1209_major, minRequiredVersion_1209_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_1210_major := uint32(3) // u32
+		minRequiredVersion_1210_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1210_major, minRequiredVersion_1210_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_1211_major := uint32(3) // u32
+		minRequiredVersion_1211_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1211_major, minRequiredVersion_1211_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1212_major := uint32(3) // u32
+		minRequiredVersion_1212_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1212_major, minRequiredVersion_1212_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1213_major := uint32(3) // u32
+		minRequiredVersion_1213_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1213_major, minRequiredVersion_1213_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_1214_major := uint32(3) // u32
+		minRequiredVersion_1214_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1214_major, minRequiredVersion_1214_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1215_major := uint32(3) // u32
+		minRequiredVersion_1215_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1215_major, minRequiredVersion_1215_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_1216_major := uint32(2) // u32
+		minRequiredVersion_1216_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1216_major, minRequiredVersion_1216_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_1217_major := uint32(3) // u32
+		minRequiredVersion_1217_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1217_major, minRequiredVersion_1217_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_1218_major := uint32(3) // u32
+		minRequiredVersion_1218_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1218_major, minRequiredVersion_1218_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_1219_major := uint32(3) // u32
+		minRequiredVersion_1219_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1219_major, minRequiredVersion_1219_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_1220_major := uint32(3) // u32
+		minRequiredVersion_1220_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1220_major, minRequiredVersion_1220_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1221_major := uint32(3) // u32
+		minRequiredVersion_1221_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1221_major, minRequiredVersion_1221_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_1222_major := uint32(3) // u32
+		minRequiredVersion_1222_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1222_major, minRequiredVersion_1222_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_1223_major := uint32(3) // u32
+		minRequiredVersion_1223_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1223_major, minRequiredVersion_1223_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_1224_major := uint32(3) // u32
+		minRequiredVersion_1224_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1224_major, minRequiredVersion_1224_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_1225_major := uint32(3) // u32
+		minRequiredVersion_1225_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1225_major, minRequiredVersion_1225_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_1226_major := uint32(3) // u32
+		minRequiredVersion_1226_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1226_major, minRequiredVersion_1226_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_1227_major := uint32(3) // u32
+		minRequiredVersion_1227_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1227_major, minRequiredVersion_1227_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1228_major := uint32(3) // u32
+		minRequiredVersion_1228_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1228_major, minRequiredVersion_1228_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1229_major := uint32(3) // u32
+		minRequiredVersion_1229_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1229_major, minRequiredVersion_1229_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1230_major := uint32(3) // u32
+		minRequiredVersion_1230_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1230_major, minRequiredVersion_1230_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_1231_major := uint32(3) // u32
+		minRequiredVersion_1231_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1231_major, minRequiredVersion_1231_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1232_major := uint32(3) // u32
+		minRequiredVersion_1232_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1232_major, minRequiredVersion_1232_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_1233_major := uint32(3) // u32
+		minRequiredVersion_1233_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1233_major, minRequiredVersion_1233_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_1234_major := uint32(3) // u32
+		minRequiredVersion_1234_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1234_major, minRequiredVersion_1234_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1235_major := uint32(3) // u32
+		minRequiredVersion_1235_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1235_major, minRequiredVersion_1235_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_1236_major := uint32(2) // u32
+		minRequiredVersion_1236_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1236_major, minRequiredVersion_1236_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_1237_major := uint32(3) // u32
+		minRequiredVersion_1237_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1237_major, minRequiredVersion_1237_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_1238_major := uint32(3) // u32
+		minRequiredVersion_1238_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1238_major, minRequiredVersion_1238_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_1239_major := uint32(3) // u32
+		minRequiredVersion_1239_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1239_major, minRequiredVersion_1239_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_1240_major := uint32(3) // u32
+		minRequiredVersion_1240_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1240_major, minRequiredVersion_1240_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_1241_major := uint32(3) // u32
+		minRequiredVersion_1241_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1241_major, minRequiredVersion_1241_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1242_major := uint32(3) // u32
+		minRequiredVersion_1242_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1242_major, minRequiredVersion_1242_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_1243_major := uint32(3) // u32
+		minRequiredVersion_1243_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1243_major, minRequiredVersion_1243_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_1244_major := uint32(3) // u32
+		minRequiredVersion_1244_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1244_major, minRequiredVersion_1244_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_1245_major := uint32(3) // u32
+		minRequiredVersion_1245_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1245_major, minRequiredVersion_1245_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1246_major := uint32(3) // u32
+		minRequiredVersion_1246_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1246_major, minRequiredVersion_1246_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1247_major := uint32(3) // u32
+		minRequiredVersion_1247_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1247_major, minRequiredVersion_1247_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1248_major := uint32(3) // u32
+		minRequiredVersion_1248_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1248_major, minRequiredVersion_1248_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1249_major := uint32(3) // u32
+		minRequiredVersion_1249_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1249_major, minRequiredVersion_1249_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_1250_major := uint32(3) // u32
+		minRequiredVersion_1250_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1250_major, minRequiredVersion_1250_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1251_major := uint32(3) // u32
+		minRequiredVersion_1251_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1251_major, minRequiredVersion_1251_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1252_major := uint32(3) // u32
+		minRequiredVersion_1252_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1252_major, minRequiredVersion_1252_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_1253_major := uint32(3) // u32
+		minRequiredVersion_1253_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1253_major, minRequiredVersion_1253_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_1254_major := uint32(3) // u32
+		minRequiredVersion_1254_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1254_major, minRequiredVersion_1254_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_1255_major := uint32(3) // u32
+		minRequiredVersion_1255_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1255_major, minRequiredVersion_1255_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_1256_major := uint32(3) // u32
+		minRequiredVersion_1256_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1256_major, minRequiredVersion_1256_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1257_major := uint32(3) // u32
+		minRequiredVersion_1257_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1257_major, minRequiredVersion_1257_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1258_major := uint32(3) // u32
+		minRequiredVersion_1258_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1258_major, minRequiredVersion_1258_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_1259_major := uint32(3) // u32
+		minRequiredVersion_1259_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1259_major, minRequiredVersion_1259_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1260_major := uint32(3) // u32
+		minRequiredVersion_1260_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1260_major, minRequiredVersion_1260_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_1261_major := uint32(3) // u32
+		minRequiredVersion_1261_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1261_major, minRequiredVersion_1261_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_1262_major := uint32(3) // u32
+		minRequiredVersion_1262_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1262_major, minRequiredVersion_1262_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_1263_major := uint32(3) // u32
+		minRequiredVersion_1263_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1263_major, minRequiredVersion_1263_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1264_major := uint32(2) // u32
+		minRequiredVersion_1264_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1264_major, minRequiredVersion_1264_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_1265_major := uint32(3) // u32
+		minRequiredVersion_1265_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1265_major, minRequiredVersion_1265_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_1266_major := uint32(2) // u32
+		minRequiredVersion_1266_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1266_major, minRequiredVersion_1266_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_1267_major := uint32(3) // u32
+		minRequiredVersion_1267_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1267_major, minRequiredVersion_1267_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_1268_major := uint32(3) // u32
+		minRequiredVersion_1268_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1268_major, minRequiredVersion_1268_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_1269_major := uint32(3) // u32
+		minRequiredVersion_1269_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1269_major, minRequiredVersion_1269_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_1270_major := uint32(3) // u32
+		minRequiredVersion_1270_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1270_major, minRequiredVersion_1270_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_1271_major := uint32(3) // u32
+		minRequiredVersion_1271_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1271_major, minRequiredVersion_1271_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_1272_major := uint32(3) // u32
+		minRequiredVersion_1272_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1272_major, minRequiredVersion_1272_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_1273_major := uint32(3) // u32
+		minRequiredVersion_1273_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1273_major, minRequiredVersion_1273_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_1274_major := uint32(2) // u32
+		minRequiredVersion_1274_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1274_major, minRequiredVersion_1274_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_1275_major := uint32(3) // u32
+		minRequiredVersion_1275_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1275_major, minRequiredVersion_1275_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_1276_major := uint32(3) // u32
+		minRequiredVersion_1276_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1276_major, minRequiredVersion_1276_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_1277_major := uint32(3) // u32
+		minRequiredVersion_1277_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1277_major, minRequiredVersion_1277_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_1278_major := uint32(2) // u32
+		minRequiredVersion_1278_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1278_major, minRequiredVersion_1278_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_1279_major := uint32(3) // u32
+		minRequiredVersion_1279_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1279_major, minRequiredVersion_1279_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_1280_major := uint32(3) // u32
+		minRequiredVersion_1280_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1280_major, minRequiredVersion_1280_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1281_major := uint32(3) // u32
+		minRequiredVersion_1281_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1281_major, minRequiredVersion_1281_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1282_major := uint32(2) // u32
+		minRequiredVersion_1282_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1282_major, minRequiredVersion_1282_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_1283_major := uint32(3) // u32
+		minRequiredVersion_1283_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1283_major, minRequiredVersion_1283_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1284_major := uint32(3) // u32
+		minRequiredVersion_1284_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1284_major, minRequiredVersion_1284_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_1285_major := uint32(2) // u32
+		minRequiredVersion_1285_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1285_major, minRequiredVersion_1285_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_1286_major := uint32(2) // u32
+		minRequiredVersion_1286_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1286_major, minRequiredVersion_1286_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1287_major := uint32(3) // u32
+		minRequiredVersion_1287_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1287_major, minRequiredVersion_1287_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1288_major := uint32(3) // u32
+		minRequiredVersion_1288_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1288_major, minRequiredVersion_1288_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_1289_major := uint32(3) // u32
+		minRequiredVersion_1289_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1289_major, minRequiredVersion_1289_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_1290_major := uint32(3) // u32
+		minRequiredVersion_1290_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1290_major, minRequiredVersion_1290_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_1291_major := uint32(3) // u32
+		minRequiredVersion_1291_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1291_major, minRequiredVersion_1291_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1292_major := uint32(2) // u32
+		minRequiredVersion_1292_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1292_major, minRequiredVersion_1292_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_1293_major := uint32(3) // u32
+		minRequiredVersion_1293_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1293_major, minRequiredVersion_1293_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1294_major := uint32(3) // u32
+		minRequiredVersion_1294_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1294_major, minRequiredVersion_1294_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1295_major := uint32(2) // u32
+		minRequiredVersion_1295_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1295_major, minRequiredVersion_1295_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_1296_major := uint32(2) // u32
+		minRequiredVersion_1296_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1296_major, minRequiredVersion_1296_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_1297_major := uint32(3) // u32
+		minRequiredVersion_1297_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1297_major, minRequiredVersion_1297_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_1298_major := uint32(3) // u32
+		minRequiredVersion_1298_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1298_major, minRequiredVersion_1298_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_1299_major := uint32(3) // u32
+		minRequiredVersion_1299_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1299_major, minRequiredVersion_1299_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_1300_major := uint32(3) // u32
+		minRequiredVersion_1300_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1300_major, minRequiredVersion_1300_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_1301_major := uint32(3) // u32
+		minRequiredVersion_1301_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1301_major, minRequiredVersion_1301_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_1302_major := uint32(3) // u32
+		minRequiredVersion_1302_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1302_major, minRequiredVersion_1302_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_1303_major := uint32(2) // u32
+		minRequiredVersion_1303_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1303_major, minRequiredVersion_1303_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_1304_major := uint32(2) // u32
+		minRequiredVersion_1304_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1304_major, minRequiredVersion_1304_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_1305_major := uint32(2) // u32
+		minRequiredVersion_1305_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1305_major, minRequiredVersion_1305_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_1306_major := uint32(3) // u32
+		minRequiredVersion_1306_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1306_major, minRequiredVersion_1306_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_1307_major := uint32(3) // u32
+		minRequiredVersion_1307_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1307_major, minRequiredVersion_1307_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1308_major := uint32(3) // u32
+		minRequiredVersion_1308_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1308_major, minRequiredVersion_1308_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_1309_major := uint32(3) // u32
+		minRequiredVersion_1309_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1309_major, minRequiredVersion_1309_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_1310_major := uint32(3) // u32
+		minRequiredVersion_1310_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1310_major, minRequiredVersion_1310_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_1311_major := uint32(3) // u32
+		minRequiredVersion_1311_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1311_major, minRequiredVersion_1311_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1312_major := uint32(3) // u32
+		minRequiredVersion_1312_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1312_major, minRequiredVersion_1312_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_1313_major := uint32(2) // u32
+		minRequiredVersion_1313_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1313_major, minRequiredVersion_1313_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_1314_major := uint32(2) // u32
+		minRequiredVersion_1314_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1314_major, minRequiredVersion_1314_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_1315_major := uint32(3) // u32
+		minRequiredVersion_1315_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1315_major, minRequiredVersion_1315_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_1316_major := uint32(2) // u32
+		minRequiredVersion_1316_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1316_major, minRequiredVersion_1316_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_1317_major := uint32(2) // u32
+		minRequiredVersion_1317_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1317_major, minRequiredVersion_1317_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_1318_major := uint32(2) // u32
+		minRequiredVersion_1318_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1318_major, minRequiredVersion_1318_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_1319_major := uint32(2) // u32
+		minRequiredVersion_1319_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1319_major, minRequiredVersion_1319_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_1320_major := uint32(2) // u32
+		minRequiredVersion_1320_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1320_major, minRequiredVersion_1320_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_1321_major := uint32(3) // u32
+		minRequiredVersion_1321_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1321_major, minRequiredVersion_1321_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_1322_major := uint32(3) // u32
+		minRequiredVersion_1322_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1322_major, minRequiredVersion_1322_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_1323_major := uint32(2) // u32
+		minRequiredVersion_1323_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1323_major, minRequiredVersion_1323_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_1324_major := uint32(2) // u32
+		minRequiredVersion_1324_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1324_major, minRequiredVersion_1324_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_1325_major := uint32(2) // u32
+		minRequiredVersion_1325_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1325_major, minRequiredVersion_1325_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1326_major := uint32(2) // u32
+		minRequiredVersion_1326_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1326_major, minRequiredVersion_1326_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_1327_major := uint32(2) // u32
+		minRequiredVersion_1327_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1327_major, minRequiredVersion_1327_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_1328_major := uint32(3) // u32
+		minRequiredVersion_1328_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1328_major, minRequiredVersion_1328_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1329_major := uint32(3) // u32
+		minRequiredVersion_1329_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1329_major, minRequiredVersion_1329_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_1330_major := uint32(3) // u32
+		minRequiredVersion_1330_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1330_major, minRequiredVersion_1330_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_1331_major := uint32(3) // u32
+		minRequiredVersion_1331_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1331_major, minRequiredVersion_1331_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_1332_major := uint32(2) // u32
+		minRequiredVersion_1332_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1332_major, minRequiredVersion_1332_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_1333_major := uint32(2) // u32
+		minRequiredVersion_1333_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1333_major, minRequiredVersion_1333_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_1334_major := uint32(2) // u32
+		minRequiredVersion_1334_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1334_major, minRequiredVersion_1334_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_1335_major := uint32(2) // u32
+		minRequiredVersion_1335_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1335_major, minRequiredVersion_1335_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_1336_major := uint32(2) // u32
+		minRequiredVersion_1336_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1336_major, minRequiredVersion_1336_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_1337_major := uint32(2) // u32
+		minRequiredVersion_1337_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1337_major, minRequiredVersion_1337_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_1338_major := uint32(2) // u32
+		minRequiredVersion_1338_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1338_major, minRequiredVersion_1338_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_1339_major := uint32(2) // u32
+		minRequiredVersion_1339_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1339_major, minRequiredVersion_1339_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_1340_major := uint32(2) // u32
+		minRequiredVersion_1340_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1340_major, minRequiredVersion_1340_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_1341_major := uint32(2) // u32
+		minRequiredVersion_1341_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1341_major, minRequiredVersion_1341_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_1342_major := uint32(2) // u32
+		minRequiredVersion_1342_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1342_major, minRequiredVersion_1342_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_1343_major := uint32(2) // u32
+		minRequiredVersion_1343_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1343_major, minRequiredVersion_1343_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_1344_major := uint32(2) // u32
+		minRequiredVersion_1344_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1344_major, minRequiredVersion_1344_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_1345_major := uint32(2) // u32
+		minRequiredVersion_1345_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1345_major, minRequiredVersion_1345_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_1346_major := uint32(2) // u32
+		minRequiredVersion_1346_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1346_major, minRequiredVersion_1346_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_1347_major := uint32(2) // u32
+		minRequiredVersion_1347_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1347_major, minRequiredVersion_1347_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_1348_major := uint32(2) // u32
+		minRequiredVersion_1348_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1348_major, minRequiredVersion_1348_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_1349_major := uint32(2) // u32
+		minRequiredVersion_1349_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1349_major, minRequiredVersion_1349_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_1350_major := uint32(2) // u32
+		minRequiredVersion_1350_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1350_major, minRequiredVersion_1350_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_1351_major := uint32(3) // u32
+		minRequiredVersion_1351_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1351_major, minRequiredVersion_1351_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_1352_major := uint32(3) // u32
+		minRequiredVersion_1352_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1352_major, minRequiredVersion_1352_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_1353_major := uint32(3) // u32
+		minRequiredVersion_1353_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1353_major, minRequiredVersion_1353_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_1354_major := uint32(3) // u32
+		minRequiredVersion_1354_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1354_major, minRequiredVersion_1354_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_1355_major := uint32(3) // u32
+		minRequiredVersion_1355_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1355_major, minRequiredVersion_1355_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_1356_major := uint32(2) // u32
+		minRequiredVersion_1356_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1356_major, minRequiredVersion_1356_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_1357_major := uint32(3) // u32
+		minRequiredVersion_1357_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1357_major, minRequiredVersion_1357_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_1358_major := uint32(3) // u32
+		minRequiredVersion_1358_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1358_major, minRequiredVersion_1358_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1359_major := uint32(3) // u32
+		minRequiredVersion_1359_minor := uint32(2) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1359_major, minRequiredVersion_1359_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_1360_major := uint32(3) // u32
+		minRequiredVersion_1360_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1360_major, minRequiredVersion_1360_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_1361_major := uint32(3) // u32
+		minRequiredVersion_1361_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1361_major, minRequiredVersion_1361_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_1362_major := uint32(3) // u32
+		minRequiredVersion_1362_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1362_major, minRequiredVersion_1362_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_1363_major := uint32(3) // u32
+		minRequiredVersion_1363_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1363_major, minRequiredVersion_1363_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_1364_major := uint32(3) // u32
+		minRequiredVersion_1364_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1364_major, minRequiredVersion_1364_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_1365_major := uint32(3) // u32
+		minRequiredVersion_1365_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1365_major, minRequiredVersion_1365_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_1366_major := uint32(3) // u32
+		minRequiredVersion_1366_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1366_major, minRequiredVersion_1366_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1367_major := uint32(3) // u32
+		minRequiredVersion_1367_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1367_major, minRequiredVersion_1367_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_1368_major := uint32(3) // u32
+		minRequiredVersion_1368_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1368_major, minRequiredVersion_1368_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_1369_major := uint32(3) // u32
+		minRequiredVersion_1369_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1369_major, minRequiredVersion_1369_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_1370_major := uint32(2) // u32
+		minRequiredVersion_1370_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1370_major, minRequiredVersion_1370_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_1371_major := uint32(3) // u32
+		minRequiredVersion_1371_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1371_major, minRequiredVersion_1371_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_1372_major := uint32(3) // u32
+		minRequiredVersion_1372_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1372_major, minRequiredVersion_1372_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_1373_major := uint32(3) // u32
+		minRequiredVersion_1373_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1373_major, minRequiredVersion_1373_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_1374_major := uint32(3) // u32
+		minRequiredVersion_1374_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1374_major, minRequiredVersion_1374_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_1375_major := uint32(3) // u32
+		minRequiredVersion_1375_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1375_major, minRequiredVersion_1375_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_1376_major := uint32(3) // u32
+		minRequiredVersion_1376_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1376_major, minRequiredVersion_1376_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_1377_major := uint32(3) // u32
+		minRequiredVersion_1377_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1377_major, minRequiredVersion_1377_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_1378_major := uint32(3) // u32
+		minRequiredVersion_1378_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1378_major, minRequiredVersion_1378_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_1379_major := uint32(3) // u32
+		minRequiredVersion_1379_minor := uint32(1) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1379_major, minRequiredVersion_1379_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_1380_major := uint32(2) // u32
+		minRequiredVersion_1380_minor := uint32(0) // u32
+		observeGlGetWrites_1125_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1380_major, minRequiredVersion_1380_minor
+	default:
+		glErrorInvalidEnum_1381_param := observeGlGetWrites_1125_param // GLenum
+		return
+		_ = glErrorInvalidEnum_1381_param
+	}
+	_, _, _, _ = minRequiredVersion_1124_major, minRequiredVersion_1124_minor, observeGlGetWrites_1125_param, observeGlGetWrites_1125_v
 	return nil
 }
 
@@ -15492,36 +16761,17 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1127_major := uint32(2) // u32
-	minRequiredVersion_1127_minor := uint32(0) // u32
-	switch ϟa.Param {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_VIEWPORT:
-	case GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_DRAW_BUFFER, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING:
-		minRequiredVersion_1128_major := uint32(3) // u32
-		minRequiredVersion_1128_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1128_major, minRequiredVersion_1128_minor
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1129_major := uint32(3) // u32
-		minRequiredVersion_1129_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1129_major, minRequiredVersion_1129_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1130_major := uint32(3) // u32
-		minRequiredVersion_1130_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1130_major, minRequiredVersion_1130_minor
-	default:
-		glErrorInvalidEnum_1131_param := ϟa.Param // GLenum
-		return
-		_ = glErrorInvalidEnum_1131_param
-	}
+	minRequiredVersion_1382_major := uint32(2)                                                                  // u32
+	minRequiredVersion_1382_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLbooleanˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1133_msg := "No context bound" // string
+		error_1384_msg := "No context bound" // string
 		return
-		_ = error_1133_msg
+		_ = error_1384_msg
 	}
-	GetContext_1132_result := context // Contextʳ
-	ctx := GetContext_1132_result     // Contextʳ
+	GetContext_1383_result := context // Contextʳ
+	ctx := GetContext_1383_result     // Contextʳ
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetBooleanv)
@@ -15616,7 +16866,1287 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	_, _, _, _, _, _ = minRequiredVersion_1127_major, minRequiredVersion_1127_minor, v, context, GetContext_1132_result, ctx
+	observeGlGetWrites_1385_param := ϟa.Param // GLenum
+	observeGlGetWrites_1385_v := ϟa.Values    // GLbooleanᵖ
+	switch observeGlGetWrites_1385_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_1386_major := uint32(2) // u32
+		minRequiredVersion_1386_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1386_major, minRequiredVersion_1386_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_1387_major := uint32(2) // u32
+		minRequiredVersion_1387_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1387_major, minRequiredVersion_1387_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_1388_major := uint32(2) // u32
+		minRequiredVersion_1388_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1388_major, minRequiredVersion_1388_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_1389_major := uint32(2) // u32
+		minRequiredVersion_1389_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1389_major, minRequiredVersion_1389_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1390_major := uint32(2) // u32
+		minRequiredVersion_1390_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1390_major, minRequiredVersion_1390_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_1391_major := uint32(2) // u32
+		minRequiredVersion_1391_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1391_major, minRequiredVersion_1391_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_1392_major := uint32(2) // u32
+		minRequiredVersion_1392_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1392_major, minRequiredVersion_1392_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_1393_major := uint32(2) // u32
+		minRequiredVersion_1393_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1393_major, minRequiredVersion_1393_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_1394_major := uint32(2) // u32
+		minRequiredVersion_1394_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1394_major, minRequiredVersion_1394_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_1395_major := uint32(2) // u32
+		minRequiredVersion_1395_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1395_major, minRequiredVersion_1395_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_1396_major := uint32(2) // u32
+		minRequiredVersion_1396_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1396_major, minRequiredVersion_1396_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_1397_major := uint32(2) // u32
+		minRequiredVersion_1397_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1397_major, minRequiredVersion_1397_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_1398_major := uint32(2) // u32
+		minRequiredVersion_1398_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1398_major, minRequiredVersion_1398_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_1399_major := uint32(2) // u32
+		minRequiredVersion_1399_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1399_major, minRequiredVersion_1399_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_1400_major := uint32(2) // u32
+		minRequiredVersion_1400_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1400_major, minRequiredVersion_1400_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_1401_major := uint32(2) // u32
+		minRequiredVersion_1401_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1401_major, minRequiredVersion_1401_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1402_major := uint32(2) // u32
+		minRequiredVersion_1402_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1402_major, minRequiredVersion_1402_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_1403_major := uint32(3) // u32
+		minRequiredVersion_1403_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1403_major, minRequiredVersion_1403_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_1404_major := uint32(3) // u32
+		minRequiredVersion_1404_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1404_major, minRequiredVersion_1404_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_1405_major := uint32(3) // u32
+		minRequiredVersion_1405_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1405_major, minRequiredVersion_1405_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_1406_major := uint32(3) // u32
+		minRequiredVersion_1406_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1406_major, minRequiredVersion_1406_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_1407_major := uint32(2) // u32
+		minRequiredVersion_1407_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1407_major, minRequiredVersion_1407_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_1408_major := uint32(2) // u32
+		minRequiredVersion_1408_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1408_major, minRequiredVersion_1408_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_1409_major := uint32(2) // u32
+		minRequiredVersion_1409_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1409_major, minRequiredVersion_1409_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1410_major := uint32(3) // u32
+		minRequiredVersion_1410_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1410_major, minRequiredVersion_1410_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1411_major := uint32(3) // u32
+		minRequiredVersion_1411_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1411_major, minRequiredVersion_1411_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_1412_major := uint32(3) // u32
+		minRequiredVersion_1412_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1412_major, minRequiredVersion_1412_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_1413_major := uint32(2) // u32
+		minRequiredVersion_1413_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1413_major, minRequiredVersion_1413_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_1414_major := uint32(2) // u32
+		minRequiredVersion_1414_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1414_major, minRequiredVersion_1414_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_1415_major := uint32(2) // u32
+		minRequiredVersion_1415_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1415_major, minRequiredVersion_1415_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_1416_major := uint32(2) // u32
+		minRequiredVersion_1416_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1416_major, minRequiredVersion_1416_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_1417_major := uint32(2) // u32
+		minRequiredVersion_1417_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1417_major, minRequiredVersion_1417_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_1418_major := uint32(2) // u32
+		minRequiredVersion_1418_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1418_major, minRequiredVersion_1418_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_1419_major := uint32(3) // u32
+		minRequiredVersion_1419_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1419_major, minRequiredVersion_1419_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_1420_major := uint32(2) // u32
+		minRequiredVersion_1420_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1420_major, minRequiredVersion_1420_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_1421_major := uint32(3) // u32
+		minRequiredVersion_1421_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1421_major, minRequiredVersion_1421_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1422_major := uint32(2) // u32
+		minRequiredVersion_1422_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1422_major, minRequiredVersion_1422_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1423_major := uint32(2) // u32
+		minRequiredVersion_1423_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1423_major, minRequiredVersion_1423_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_1424_major := uint32(3) // u32
+		minRequiredVersion_1424_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1424_major, minRequiredVersion_1424_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_1425_major := uint32(3) // u32
+		minRequiredVersion_1425_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1425_major, minRequiredVersion_1425_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_1426_major := uint32(2) // u32
+		minRequiredVersion_1426_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1426_major, minRequiredVersion_1426_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_1427_major := uint32(2) // u32
+		minRequiredVersion_1427_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1427_major, minRequiredVersion_1427_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_1428_major := uint32(2) // u32
+		minRequiredVersion_1428_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1428_major, minRequiredVersion_1428_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_1429_major := uint32(3) // u32
+		minRequiredVersion_1429_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1429_major, minRequiredVersion_1429_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_1430_major := uint32(2) // u32
+		minRequiredVersion_1430_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1430_major, minRequiredVersion_1430_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_1431_major := uint32(2) // u32
+		minRequiredVersion_1431_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1431_major, minRequiredVersion_1431_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_1432_major := uint32(3) // u32
+		minRequiredVersion_1432_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1432_major, minRequiredVersion_1432_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_1433_major := uint32(2) // u32
+		minRequiredVersion_1433_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1433_major, minRequiredVersion_1433_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_1434_major := uint32(3) // u32
+		minRequiredVersion_1434_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1434_major, minRequiredVersion_1434_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_1435_major := uint32(3) // u32
+		minRequiredVersion_1435_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1435_major, minRequiredVersion_1435_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_1436_major := uint32(3) // u32
+		minRequiredVersion_1436_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1436_major, minRequiredVersion_1436_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_1437_major := uint32(3) // u32
+		minRequiredVersion_1437_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1437_major, minRequiredVersion_1437_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_1438_major := uint32(3) // u32
+		minRequiredVersion_1438_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1438_major, minRequiredVersion_1438_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_1439_major := uint32(3) // u32
+		minRequiredVersion_1439_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1439_major, minRequiredVersion_1439_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_1440_major := uint32(3) // u32
+		minRequiredVersion_1440_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1440_major, minRequiredVersion_1440_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1441_major := uint32(3) // u32
+		minRequiredVersion_1441_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1441_major, minRequiredVersion_1441_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1442_major := uint32(3) // u32
+		minRequiredVersion_1442_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1442_major, minRequiredVersion_1442_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1443_major := uint32(3) // u32
+		minRequiredVersion_1443_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1443_major, minRequiredVersion_1443_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1444_major := uint32(3) // u32
+		minRequiredVersion_1444_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1444_major, minRequiredVersion_1444_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1445_major := uint32(3) // u32
+		minRequiredVersion_1445_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1445_major, minRequiredVersion_1445_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1446_major := uint32(3) // u32
+		minRequiredVersion_1446_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1446_major, minRequiredVersion_1446_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1447_major := uint32(2) // u32
+		minRequiredVersion_1447_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1447_major, minRequiredVersion_1447_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_1448_major := uint32(3) // u32
+		minRequiredVersion_1448_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1448_major, minRequiredVersion_1448_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1449_major := uint32(3) // u32
+		minRequiredVersion_1449_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1449_major, minRequiredVersion_1449_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1450_major := uint32(3) // u32
+		minRequiredVersion_1450_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1450_major, minRequiredVersion_1450_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_1451_major := uint32(3) // u32
+		minRequiredVersion_1451_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1451_major, minRequiredVersion_1451_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_1452_major := uint32(3) // u32
+		minRequiredVersion_1452_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1452_major, minRequiredVersion_1452_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1453_major := uint32(3) // u32
+		minRequiredVersion_1453_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1453_major, minRequiredVersion_1453_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1454_major := uint32(3) // u32
+		minRequiredVersion_1454_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1454_major, minRequiredVersion_1454_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_1455_major := uint32(3) // u32
+		minRequiredVersion_1455_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1455_major, minRequiredVersion_1455_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1456_major := uint32(3) // u32
+		minRequiredVersion_1456_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1456_major, minRequiredVersion_1456_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_1457_major := uint32(3) // u32
+		minRequiredVersion_1457_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1457_major, minRequiredVersion_1457_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_1458_major := uint32(3) // u32
+		minRequiredVersion_1458_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1458_major, minRequiredVersion_1458_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_1459_major := uint32(3) // u32
+		minRequiredVersion_1459_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1459_major, minRequiredVersion_1459_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_1460_major := uint32(2) // u32
+		minRequiredVersion_1460_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1460_major, minRequiredVersion_1460_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1461_major := uint32(3) // u32
+		minRequiredVersion_1461_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1461_major, minRequiredVersion_1461_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1462_major := uint32(3) // u32
+		minRequiredVersion_1462_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1462_major, minRequiredVersion_1462_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_1463_major := uint32(3) // u32
+		minRequiredVersion_1463_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1463_major, minRequiredVersion_1463_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_1464_major := uint32(3) // u32
+		minRequiredVersion_1464_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1464_major, minRequiredVersion_1464_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_1465_major := uint32(3) // u32
+		minRequiredVersion_1465_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1465_major, minRequiredVersion_1465_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_1466_major := uint32(3) // u32
+		minRequiredVersion_1466_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1466_major, minRequiredVersion_1466_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_1467_major := uint32(3) // u32
+		minRequiredVersion_1467_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1467_major, minRequiredVersion_1467_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1468_major := uint32(3) // u32
+		minRequiredVersion_1468_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1468_major, minRequiredVersion_1468_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_1469_major := uint32(3) // u32
+		minRequiredVersion_1469_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1469_major, minRequiredVersion_1469_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_1470_major := uint32(3) // u32
+		minRequiredVersion_1470_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1470_major, minRequiredVersion_1470_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_1471_major := uint32(3) // u32
+		minRequiredVersion_1471_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1471_major, minRequiredVersion_1471_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1472_major := uint32(3) // u32
+		minRequiredVersion_1472_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1472_major, minRequiredVersion_1472_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1473_major := uint32(3) // u32
+		minRequiredVersion_1473_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1473_major, minRequiredVersion_1473_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_1474_major := uint32(3) // u32
+		minRequiredVersion_1474_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1474_major, minRequiredVersion_1474_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1475_major := uint32(3) // u32
+		minRequiredVersion_1475_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1475_major, minRequiredVersion_1475_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_1476_major := uint32(2) // u32
+		minRequiredVersion_1476_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1476_major, minRequiredVersion_1476_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_1477_major := uint32(3) // u32
+		minRequiredVersion_1477_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1477_major, minRequiredVersion_1477_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_1478_major := uint32(3) // u32
+		minRequiredVersion_1478_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1478_major, minRequiredVersion_1478_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_1479_major := uint32(3) // u32
+		minRequiredVersion_1479_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1479_major, minRequiredVersion_1479_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_1480_major := uint32(3) // u32
+		minRequiredVersion_1480_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1480_major, minRequiredVersion_1480_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1481_major := uint32(3) // u32
+		minRequiredVersion_1481_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1481_major, minRequiredVersion_1481_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_1482_major := uint32(3) // u32
+		minRequiredVersion_1482_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1482_major, minRequiredVersion_1482_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_1483_major := uint32(3) // u32
+		minRequiredVersion_1483_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1483_major, minRequiredVersion_1483_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_1484_major := uint32(3) // u32
+		minRequiredVersion_1484_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1484_major, minRequiredVersion_1484_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_1485_major := uint32(3) // u32
+		minRequiredVersion_1485_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1485_major, minRequiredVersion_1485_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_1486_major := uint32(3) // u32
+		minRequiredVersion_1486_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1486_major, minRequiredVersion_1486_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_1487_major := uint32(3) // u32
+		minRequiredVersion_1487_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1487_major, minRequiredVersion_1487_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1488_major := uint32(3) // u32
+		minRequiredVersion_1488_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1488_major, minRequiredVersion_1488_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1489_major := uint32(3) // u32
+		minRequiredVersion_1489_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1489_major, minRequiredVersion_1489_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1490_major := uint32(3) // u32
+		minRequiredVersion_1490_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1490_major, minRequiredVersion_1490_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_1491_major := uint32(3) // u32
+		minRequiredVersion_1491_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1491_major, minRequiredVersion_1491_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1492_major := uint32(3) // u32
+		minRequiredVersion_1492_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1492_major, minRequiredVersion_1492_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_1493_major := uint32(3) // u32
+		minRequiredVersion_1493_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1493_major, minRequiredVersion_1493_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_1494_major := uint32(3) // u32
+		minRequiredVersion_1494_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1494_major, minRequiredVersion_1494_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1495_major := uint32(3) // u32
+		minRequiredVersion_1495_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1495_major, minRequiredVersion_1495_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_1496_major := uint32(2) // u32
+		minRequiredVersion_1496_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1496_major, minRequiredVersion_1496_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_1497_major := uint32(3) // u32
+		minRequiredVersion_1497_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1497_major, minRequiredVersion_1497_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_1498_major := uint32(3) // u32
+		minRequiredVersion_1498_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1498_major, minRequiredVersion_1498_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_1499_major := uint32(3) // u32
+		minRequiredVersion_1499_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1499_major, minRequiredVersion_1499_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_1500_major := uint32(3) // u32
+		minRequiredVersion_1500_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1500_major, minRequiredVersion_1500_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_1501_major := uint32(3) // u32
+		minRequiredVersion_1501_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1501_major, minRequiredVersion_1501_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1502_major := uint32(3) // u32
+		minRequiredVersion_1502_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1502_major, minRequiredVersion_1502_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_1503_major := uint32(3) // u32
+		minRequiredVersion_1503_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1503_major, minRequiredVersion_1503_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_1504_major := uint32(3) // u32
+		minRequiredVersion_1504_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1504_major, minRequiredVersion_1504_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_1505_major := uint32(3) // u32
+		minRequiredVersion_1505_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1505_major, minRequiredVersion_1505_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1506_major := uint32(3) // u32
+		minRequiredVersion_1506_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1506_major, minRequiredVersion_1506_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1507_major := uint32(3) // u32
+		minRequiredVersion_1507_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1507_major, minRequiredVersion_1507_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1508_major := uint32(3) // u32
+		minRequiredVersion_1508_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1508_major, minRequiredVersion_1508_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1509_major := uint32(3) // u32
+		minRequiredVersion_1509_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1509_major, minRequiredVersion_1509_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_1510_major := uint32(3) // u32
+		minRequiredVersion_1510_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1510_major, minRequiredVersion_1510_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1511_major := uint32(3) // u32
+		minRequiredVersion_1511_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1511_major, minRequiredVersion_1511_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1512_major := uint32(3) // u32
+		minRequiredVersion_1512_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1512_major, minRequiredVersion_1512_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_1513_major := uint32(3) // u32
+		minRequiredVersion_1513_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1513_major, minRequiredVersion_1513_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_1514_major := uint32(3) // u32
+		minRequiredVersion_1514_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1514_major, minRequiredVersion_1514_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_1515_major := uint32(3) // u32
+		minRequiredVersion_1515_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1515_major, minRequiredVersion_1515_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_1516_major := uint32(3) // u32
+		minRequiredVersion_1516_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1516_major, minRequiredVersion_1516_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1517_major := uint32(3) // u32
+		minRequiredVersion_1517_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1517_major, minRequiredVersion_1517_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1518_major := uint32(3) // u32
+		minRequiredVersion_1518_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1518_major, minRequiredVersion_1518_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_1519_major := uint32(3) // u32
+		minRequiredVersion_1519_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1519_major, minRequiredVersion_1519_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1520_major := uint32(3) // u32
+		minRequiredVersion_1520_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1520_major, minRequiredVersion_1520_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_1521_major := uint32(3) // u32
+		minRequiredVersion_1521_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1521_major, minRequiredVersion_1521_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_1522_major := uint32(3) // u32
+		minRequiredVersion_1522_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1522_major, minRequiredVersion_1522_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_1523_major := uint32(3) // u32
+		minRequiredVersion_1523_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1523_major, minRequiredVersion_1523_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1524_major := uint32(2) // u32
+		minRequiredVersion_1524_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1524_major, minRequiredVersion_1524_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_1525_major := uint32(3) // u32
+		minRequiredVersion_1525_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1525_major, minRequiredVersion_1525_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_1526_major := uint32(2) // u32
+		minRequiredVersion_1526_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1526_major, minRequiredVersion_1526_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_1527_major := uint32(3) // u32
+		minRequiredVersion_1527_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1527_major, minRequiredVersion_1527_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_1528_major := uint32(3) // u32
+		minRequiredVersion_1528_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1528_major, minRequiredVersion_1528_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_1529_major := uint32(3) // u32
+		minRequiredVersion_1529_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1529_major, minRequiredVersion_1529_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_1530_major := uint32(3) // u32
+		minRequiredVersion_1530_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1530_major, minRequiredVersion_1530_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_1531_major := uint32(3) // u32
+		minRequiredVersion_1531_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1531_major, minRequiredVersion_1531_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_1532_major := uint32(3) // u32
+		minRequiredVersion_1532_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1532_major, minRequiredVersion_1532_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_1533_major := uint32(3) // u32
+		minRequiredVersion_1533_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1533_major, minRequiredVersion_1533_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_1534_major := uint32(2) // u32
+		minRequiredVersion_1534_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1534_major, minRequiredVersion_1534_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_1535_major := uint32(3) // u32
+		minRequiredVersion_1535_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1535_major, minRequiredVersion_1535_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_1536_major := uint32(3) // u32
+		minRequiredVersion_1536_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1536_major, minRequiredVersion_1536_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_1537_major := uint32(3) // u32
+		minRequiredVersion_1537_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1537_major, minRequiredVersion_1537_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_1538_major := uint32(2) // u32
+		minRequiredVersion_1538_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1538_major, minRequiredVersion_1538_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_1539_major := uint32(3) // u32
+		minRequiredVersion_1539_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1539_major, minRequiredVersion_1539_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_1540_major := uint32(3) // u32
+		minRequiredVersion_1540_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1540_major, minRequiredVersion_1540_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1541_major := uint32(3) // u32
+		minRequiredVersion_1541_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1541_major, minRequiredVersion_1541_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1542_major := uint32(2) // u32
+		minRequiredVersion_1542_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1542_major, minRequiredVersion_1542_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_1543_major := uint32(3) // u32
+		minRequiredVersion_1543_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1543_major, minRequiredVersion_1543_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1544_major := uint32(3) // u32
+		minRequiredVersion_1544_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1544_major, minRequiredVersion_1544_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_1545_major := uint32(2) // u32
+		minRequiredVersion_1545_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1545_major, minRequiredVersion_1545_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_1546_major := uint32(2) // u32
+		minRequiredVersion_1546_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1546_major, minRequiredVersion_1546_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1547_major := uint32(3) // u32
+		minRequiredVersion_1547_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1547_major, minRequiredVersion_1547_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1548_major := uint32(3) // u32
+		minRequiredVersion_1548_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1548_major, minRequiredVersion_1548_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_1549_major := uint32(3) // u32
+		minRequiredVersion_1549_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1549_major, minRequiredVersion_1549_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_1550_major := uint32(3) // u32
+		minRequiredVersion_1550_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1550_major, minRequiredVersion_1550_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_1551_major := uint32(3) // u32
+		minRequiredVersion_1551_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1551_major, minRequiredVersion_1551_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1552_major := uint32(2) // u32
+		minRequiredVersion_1552_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1552_major, minRequiredVersion_1552_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_1553_major := uint32(3) // u32
+		minRequiredVersion_1553_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1553_major, minRequiredVersion_1553_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1554_major := uint32(3) // u32
+		minRequiredVersion_1554_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1554_major, minRequiredVersion_1554_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1555_major := uint32(2) // u32
+		minRequiredVersion_1555_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1555_major, minRequiredVersion_1555_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_1556_major := uint32(2) // u32
+		minRequiredVersion_1556_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1556_major, minRequiredVersion_1556_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_1557_major := uint32(3) // u32
+		minRequiredVersion_1557_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1557_major, minRequiredVersion_1557_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_1558_major := uint32(3) // u32
+		minRequiredVersion_1558_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1558_major, minRequiredVersion_1558_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_1559_major := uint32(3) // u32
+		minRequiredVersion_1559_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1559_major, minRequiredVersion_1559_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_1560_major := uint32(3) // u32
+		minRequiredVersion_1560_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1560_major, minRequiredVersion_1560_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_1561_major := uint32(3) // u32
+		minRequiredVersion_1561_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1561_major, minRequiredVersion_1561_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_1562_major := uint32(3) // u32
+		minRequiredVersion_1562_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1562_major, minRequiredVersion_1562_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_1563_major := uint32(2) // u32
+		minRequiredVersion_1563_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1563_major, minRequiredVersion_1563_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_1564_major := uint32(2) // u32
+		minRequiredVersion_1564_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1564_major, minRequiredVersion_1564_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_1565_major := uint32(2) // u32
+		minRequiredVersion_1565_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1565_major, minRequiredVersion_1565_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_1566_major := uint32(3) // u32
+		minRequiredVersion_1566_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1566_major, minRequiredVersion_1566_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_1567_major := uint32(3) // u32
+		minRequiredVersion_1567_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1567_major, minRequiredVersion_1567_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1568_major := uint32(3) // u32
+		minRequiredVersion_1568_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1568_major, minRequiredVersion_1568_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_1569_major := uint32(3) // u32
+		minRequiredVersion_1569_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1569_major, minRequiredVersion_1569_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_1570_major := uint32(3) // u32
+		minRequiredVersion_1570_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1570_major, minRequiredVersion_1570_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_1571_major := uint32(3) // u32
+		minRequiredVersion_1571_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1571_major, minRequiredVersion_1571_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1572_major := uint32(3) // u32
+		minRequiredVersion_1572_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1572_major, minRequiredVersion_1572_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_1573_major := uint32(2) // u32
+		minRequiredVersion_1573_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1573_major, minRequiredVersion_1573_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_1574_major := uint32(2) // u32
+		minRequiredVersion_1574_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1574_major, minRequiredVersion_1574_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_1575_major := uint32(3) // u32
+		minRequiredVersion_1575_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1575_major, minRequiredVersion_1575_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_1576_major := uint32(2) // u32
+		minRequiredVersion_1576_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1576_major, minRequiredVersion_1576_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_1577_major := uint32(2) // u32
+		minRequiredVersion_1577_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1577_major, minRequiredVersion_1577_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_1578_major := uint32(2) // u32
+		minRequiredVersion_1578_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1578_major, minRequiredVersion_1578_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_1579_major := uint32(2) // u32
+		minRequiredVersion_1579_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1579_major, minRequiredVersion_1579_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_1580_major := uint32(2) // u32
+		minRequiredVersion_1580_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1580_major, minRequiredVersion_1580_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_1581_major := uint32(3) // u32
+		minRequiredVersion_1581_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1581_major, minRequiredVersion_1581_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_1582_major := uint32(3) // u32
+		minRequiredVersion_1582_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1582_major, minRequiredVersion_1582_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_1583_major := uint32(2) // u32
+		minRequiredVersion_1583_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1583_major, minRequiredVersion_1583_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_1584_major := uint32(2) // u32
+		minRequiredVersion_1584_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1584_major, minRequiredVersion_1584_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_1585_major := uint32(2) // u32
+		minRequiredVersion_1585_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1585_major, minRequiredVersion_1585_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1586_major := uint32(2) // u32
+		minRequiredVersion_1586_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1586_major, minRequiredVersion_1586_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_1587_major := uint32(2) // u32
+		minRequiredVersion_1587_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1587_major, minRequiredVersion_1587_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_1588_major := uint32(3) // u32
+		minRequiredVersion_1588_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1588_major, minRequiredVersion_1588_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1589_major := uint32(3) // u32
+		minRequiredVersion_1589_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1589_major, minRequiredVersion_1589_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_1590_major := uint32(3) // u32
+		minRequiredVersion_1590_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1590_major, minRequiredVersion_1590_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_1591_major := uint32(3) // u32
+		minRequiredVersion_1591_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1591_major, minRequiredVersion_1591_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_1592_major := uint32(2) // u32
+		minRequiredVersion_1592_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1592_major, minRequiredVersion_1592_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_1593_major := uint32(2) // u32
+		minRequiredVersion_1593_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1593_major, minRequiredVersion_1593_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_1594_major := uint32(2) // u32
+		minRequiredVersion_1594_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1594_major, minRequiredVersion_1594_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_1595_major := uint32(2) // u32
+		minRequiredVersion_1595_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1595_major, minRequiredVersion_1595_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_1596_major := uint32(2) // u32
+		minRequiredVersion_1596_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1596_major, minRequiredVersion_1596_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_1597_major := uint32(2) // u32
+		minRequiredVersion_1597_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1597_major, minRequiredVersion_1597_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_1598_major := uint32(2) // u32
+		minRequiredVersion_1598_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1598_major, minRequiredVersion_1598_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_1599_major := uint32(2) // u32
+		minRequiredVersion_1599_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1599_major, minRequiredVersion_1599_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_1600_major := uint32(2) // u32
+		minRequiredVersion_1600_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1600_major, minRequiredVersion_1600_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_1601_major := uint32(2) // u32
+		minRequiredVersion_1601_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1601_major, minRequiredVersion_1601_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_1602_major := uint32(2) // u32
+		minRequiredVersion_1602_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1602_major, minRequiredVersion_1602_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_1603_major := uint32(2) // u32
+		minRequiredVersion_1603_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1603_major, minRequiredVersion_1603_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_1604_major := uint32(2) // u32
+		minRequiredVersion_1604_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1604_major, minRequiredVersion_1604_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_1605_major := uint32(2) // u32
+		minRequiredVersion_1605_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1605_major, minRequiredVersion_1605_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_1606_major := uint32(2) // u32
+		minRequiredVersion_1606_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1606_major, minRequiredVersion_1606_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_1607_major := uint32(2) // u32
+		minRequiredVersion_1607_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1607_major, minRequiredVersion_1607_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_1608_major := uint32(2) // u32
+		minRequiredVersion_1608_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1608_major, minRequiredVersion_1608_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_1609_major := uint32(2) // u32
+		minRequiredVersion_1609_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1609_major, minRequiredVersion_1609_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_1610_major := uint32(2) // u32
+		minRequiredVersion_1610_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1610_major, minRequiredVersion_1610_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_1611_major := uint32(3) // u32
+		minRequiredVersion_1611_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1611_major, minRequiredVersion_1611_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_1612_major := uint32(3) // u32
+		minRequiredVersion_1612_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1612_major, minRequiredVersion_1612_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_1613_major := uint32(3) // u32
+		minRequiredVersion_1613_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1613_major, minRequiredVersion_1613_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_1614_major := uint32(3) // u32
+		minRequiredVersion_1614_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1614_major, minRequiredVersion_1614_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_1615_major := uint32(3) // u32
+		minRequiredVersion_1615_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1615_major, minRequiredVersion_1615_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_1616_major := uint32(2) // u32
+		minRequiredVersion_1616_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1616_major, minRequiredVersion_1616_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_1617_major := uint32(3) // u32
+		minRequiredVersion_1617_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1617_major, minRequiredVersion_1617_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_1618_major := uint32(3) // u32
+		minRequiredVersion_1618_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1618_major, minRequiredVersion_1618_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1619_major := uint32(3) // u32
+		minRequiredVersion_1619_minor := uint32(2) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1619_major, minRequiredVersion_1619_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_1620_major := uint32(3) // u32
+		minRequiredVersion_1620_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1620_major, minRequiredVersion_1620_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_1621_major := uint32(3) // u32
+		minRequiredVersion_1621_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1621_major, minRequiredVersion_1621_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_1622_major := uint32(3) // u32
+		minRequiredVersion_1622_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1622_major, minRequiredVersion_1622_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_1623_major := uint32(3) // u32
+		minRequiredVersion_1623_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1623_major, minRequiredVersion_1623_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_1624_major := uint32(3) // u32
+		minRequiredVersion_1624_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1624_major, minRequiredVersion_1624_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_1625_major := uint32(3) // u32
+		minRequiredVersion_1625_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1625_major, minRequiredVersion_1625_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_1626_major := uint32(3) // u32
+		minRequiredVersion_1626_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1626_major, minRequiredVersion_1626_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1627_major := uint32(3) // u32
+		minRequiredVersion_1627_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1627_major, minRequiredVersion_1627_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_1628_major := uint32(3) // u32
+		minRequiredVersion_1628_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1628_major, minRequiredVersion_1628_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_1629_major := uint32(3) // u32
+		minRequiredVersion_1629_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1629_major, minRequiredVersion_1629_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_1630_major := uint32(2) // u32
+		minRequiredVersion_1630_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1630_major, minRequiredVersion_1630_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_1631_major := uint32(3) // u32
+		minRequiredVersion_1631_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1631_major, minRequiredVersion_1631_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_1632_major := uint32(3) // u32
+		minRequiredVersion_1632_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1632_major, minRequiredVersion_1632_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_1633_major := uint32(3) // u32
+		minRequiredVersion_1633_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1633_major, minRequiredVersion_1633_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_1634_major := uint32(3) // u32
+		minRequiredVersion_1634_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1634_major, minRequiredVersion_1634_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_1635_major := uint32(3) // u32
+		minRequiredVersion_1635_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1635_major, minRequiredVersion_1635_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_1636_major := uint32(3) // u32
+		minRequiredVersion_1636_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1636_major, minRequiredVersion_1636_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_1637_major := uint32(3) // u32
+		minRequiredVersion_1637_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1637_major, minRequiredVersion_1637_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_1638_major := uint32(3) // u32
+		minRequiredVersion_1638_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1638_major, minRequiredVersion_1638_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_1639_major := uint32(3) // u32
+		minRequiredVersion_1639_minor := uint32(1) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1639_major, minRequiredVersion_1639_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_1640_major := uint32(2) // u32
+		minRequiredVersion_1640_minor := uint32(0) // u32
+		observeGlGetWrites_1385_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1640_major, minRequiredVersion_1640_minor
+	default:
+		glErrorInvalidEnum_1641_param := observeGlGetWrites_1385_param // GLenum
+		return
+		_ = glErrorInvalidEnum_1641_param
+	}
+	_, _, _, _, _, _, _, _ = minRequiredVersion_1382_major, minRequiredVersion_1382_minor, v, context, GetContext_1383_result, ctx, observeGlGetWrites_1385_param, observeGlGetWrites_1385_v
 	return nil
 }
 
@@ -15625,36 +18155,17 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1134_major := uint32(2) // u32
-	minRequiredVersion_1134_minor := uint32(0) // u32
-	switch ϟa.Param {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_VIEWPORT:
-	case GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_DRAW_BUFFER, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING:
-		minRequiredVersion_1135_major := uint32(3) // u32
-		minRequiredVersion_1135_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1135_major, minRequiredVersion_1135_minor
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1136_major := uint32(3) // u32
-		minRequiredVersion_1136_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1136_major, minRequiredVersion_1136_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1137_major := uint32(3) // u32
-		minRequiredVersion_1137_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1137_major, minRequiredVersion_1137_minor
-	default:
-		glErrorInvalidEnum_1138_param := ϟa.Param // GLenum
-		return
-		_ = glErrorInvalidEnum_1138_param
-	}
+	minRequiredVersion_1642_major := uint32(2)                                                                  // u32
+	minRequiredVersion_1642_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLfloatˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1140_msg := "No context bound" // string
+		error_1644_msg := "No context bound" // string
 		return
-		_ = error_1140_msg
+		_ = error_1644_msg
 	}
-	GetContext_1139_result := context // Contextʳ
-	ctx := GetContext_1139_result     // Contextʳ
+	GetContext_1643_result := context // Contextʳ
+	ctx := GetContext_1643_result     // Contextʳ
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetFloatv)
@@ -15690,7 +18201,1287 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	_, _, _, _, _, _ = minRequiredVersion_1134_major, minRequiredVersion_1134_minor, v, context, GetContext_1139_result, ctx
+	observeGlGetWrites_1645_param := ϟa.Param // GLenum
+	observeGlGetWrites_1645_v := ϟa.Values    // GLfloatᵖ
+	switch observeGlGetWrites_1645_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_1646_major := uint32(2) // u32
+		minRequiredVersion_1646_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1646_major, minRequiredVersion_1646_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_1647_major := uint32(2) // u32
+		minRequiredVersion_1647_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1647_major, minRequiredVersion_1647_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_1648_major := uint32(2) // u32
+		minRequiredVersion_1648_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1648_major, minRequiredVersion_1648_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_1649_major := uint32(2) // u32
+		minRequiredVersion_1649_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1649_major, minRequiredVersion_1649_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1650_major := uint32(2) // u32
+		minRequiredVersion_1650_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1650_major, minRequiredVersion_1650_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_1651_major := uint32(2) // u32
+		minRequiredVersion_1651_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1651_major, minRequiredVersion_1651_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_1652_major := uint32(2) // u32
+		minRequiredVersion_1652_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1652_major, minRequiredVersion_1652_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_1653_major := uint32(2) // u32
+		minRequiredVersion_1653_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1653_major, minRequiredVersion_1653_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_1654_major := uint32(2) // u32
+		minRequiredVersion_1654_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1654_major, minRequiredVersion_1654_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_1655_major := uint32(2) // u32
+		minRequiredVersion_1655_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1655_major, minRequiredVersion_1655_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_1656_major := uint32(2) // u32
+		minRequiredVersion_1656_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1656_major, minRequiredVersion_1656_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_1657_major := uint32(2) // u32
+		minRequiredVersion_1657_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1657_major, minRequiredVersion_1657_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_1658_major := uint32(2) // u32
+		minRequiredVersion_1658_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1658_major, minRequiredVersion_1658_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_1659_major := uint32(2) // u32
+		minRequiredVersion_1659_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1659_major, minRequiredVersion_1659_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_1660_major := uint32(2) // u32
+		minRequiredVersion_1660_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1660_major, minRequiredVersion_1660_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_1661_major := uint32(2) // u32
+		minRequiredVersion_1661_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1661_major, minRequiredVersion_1661_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1662_major := uint32(2) // u32
+		minRequiredVersion_1662_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1662_major, minRequiredVersion_1662_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_1663_major := uint32(3) // u32
+		minRequiredVersion_1663_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1663_major, minRequiredVersion_1663_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_1664_major := uint32(3) // u32
+		minRequiredVersion_1664_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1664_major, minRequiredVersion_1664_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_1665_major := uint32(3) // u32
+		minRequiredVersion_1665_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1665_major, minRequiredVersion_1665_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_1666_major := uint32(3) // u32
+		minRequiredVersion_1666_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1666_major, minRequiredVersion_1666_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_1667_major := uint32(2) // u32
+		minRequiredVersion_1667_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1667_major, minRequiredVersion_1667_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_1668_major := uint32(2) // u32
+		minRequiredVersion_1668_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1668_major, minRequiredVersion_1668_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_1669_major := uint32(2) // u32
+		minRequiredVersion_1669_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1669_major, minRequiredVersion_1669_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1670_major := uint32(3) // u32
+		minRequiredVersion_1670_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1670_major, minRequiredVersion_1670_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1671_major := uint32(3) // u32
+		minRequiredVersion_1671_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1671_major, minRequiredVersion_1671_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_1672_major := uint32(3) // u32
+		minRequiredVersion_1672_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1672_major, minRequiredVersion_1672_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_1673_major := uint32(2) // u32
+		minRequiredVersion_1673_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1673_major, minRequiredVersion_1673_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_1674_major := uint32(2) // u32
+		minRequiredVersion_1674_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1674_major, minRequiredVersion_1674_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_1675_major := uint32(2) // u32
+		minRequiredVersion_1675_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1675_major, minRequiredVersion_1675_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_1676_major := uint32(2) // u32
+		minRequiredVersion_1676_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1676_major, minRequiredVersion_1676_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_1677_major := uint32(2) // u32
+		minRequiredVersion_1677_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1677_major, minRequiredVersion_1677_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_1678_major := uint32(2) // u32
+		minRequiredVersion_1678_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1678_major, minRequiredVersion_1678_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_1679_major := uint32(3) // u32
+		minRequiredVersion_1679_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1679_major, minRequiredVersion_1679_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_1680_major := uint32(2) // u32
+		minRequiredVersion_1680_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1680_major, minRequiredVersion_1680_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_1681_major := uint32(3) // u32
+		minRequiredVersion_1681_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1681_major, minRequiredVersion_1681_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1682_major := uint32(2) // u32
+		minRequiredVersion_1682_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1682_major, minRequiredVersion_1682_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1683_major := uint32(2) // u32
+		minRequiredVersion_1683_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1683_major, minRequiredVersion_1683_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_1684_major := uint32(3) // u32
+		minRequiredVersion_1684_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1684_major, minRequiredVersion_1684_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_1685_major := uint32(3) // u32
+		minRequiredVersion_1685_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1685_major, minRequiredVersion_1685_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_1686_major := uint32(2) // u32
+		minRequiredVersion_1686_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1686_major, minRequiredVersion_1686_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_1687_major := uint32(2) // u32
+		minRequiredVersion_1687_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1687_major, minRequiredVersion_1687_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_1688_major := uint32(2) // u32
+		minRequiredVersion_1688_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1688_major, minRequiredVersion_1688_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_1689_major := uint32(3) // u32
+		minRequiredVersion_1689_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1689_major, minRequiredVersion_1689_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_1690_major := uint32(2) // u32
+		minRequiredVersion_1690_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1690_major, minRequiredVersion_1690_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_1691_major := uint32(2) // u32
+		minRequiredVersion_1691_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1691_major, minRequiredVersion_1691_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_1692_major := uint32(3) // u32
+		minRequiredVersion_1692_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1692_major, minRequiredVersion_1692_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_1693_major := uint32(2) // u32
+		minRequiredVersion_1693_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1693_major, minRequiredVersion_1693_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_1694_major := uint32(3) // u32
+		minRequiredVersion_1694_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1694_major, minRequiredVersion_1694_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_1695_major := uint32(3) // u32
+		minRequiredVersion_1695_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1695_major, minRequiredVersion_1695_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_1696_major := uint32(3) // u32
+		minRequiredVersion_1696_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1696_major, minRequiredVersion_1696_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_1697_major := uint32(3) // u32
+		minRequiredVersion_1697_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1697_major, minRequiredVersion_1697_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_1698_major := uint32(3) // u32
+		minRequiredVersion_1698_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1698_major, minRequiredVersion_1698_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_1699_major := uint32(3) // u32
+		minRequiredVersion_1699_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1699_major, minRequiredVersion_1699_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_1700_major := uint32(3) // u32
+		minRequiredVersion_1700_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1700_major, minRequiredVersion_1700_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1701_major := uint32(3) // u32
+		minRequiredVersion_1701_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1701_major, minRequiredVersion_1701_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1702_major := uint32(3) // u32
+		minRequiredVersion_1702_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1702_major, minRequiredVersion_1702_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1703_major := uint32(3) // u32
+		minRequiredVersion_1703_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1703_major, minRequiredVersion_1703_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1704_major := uint32(3) // u32
+		minRequiredVersion_1704_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1704_major, minRequiredVersion_1704_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1705_major := uint32(3) // u32
+		minRequiredVersion_1705_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1705_major, minRequiredVersion_1705_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1706_major := uint32(3) // u32
+		minRequiredVersion_1706_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1706_major, minRequiredVersion_1706_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1707_major := uint32(2) // u32
+		minRequiredVersion_1707_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1707_major, minRequiredVersion_1707_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_1708_major := uint32(3) // u32
+		minRequiredVersion_1708_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1708_major, minRequiredVersion_1708_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1709_major := uint32(3) // u32
+		minRequiredVersion_1709_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1709_major, minRequiredVersion_1709_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1710_major := uint32(3) // u32
+		minRequiredVersion_1710_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1710_major, minRequiredVersion_1710_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_1711_major := uint32(3) // u32
+		minRequiredVersion_1711_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1711_major, minRequiredVersion_1711_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_1712_major := uint32(3) // u32
+		minRequiredVersion_1712_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1712_major, minRequiredVersion_1712_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1713_major := uint32(3) // u32
+		minRequiredVersion_1713_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1713_major, minRequiredVersion_1713_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1714_major := uint32(3) // u32
+		minRequiredVersion_1714_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1714_major, minRequiredVersion_1714_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_1715_major := uint32(3) // u32
+		minRequiredVersion_1715_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1715_major, minRequiredVersion_1715_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1716_major := uint32(3) // u32
+		minRequiredVersion_1716_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1716_major, minRequiredVersion_1716_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_1717_major := uint32(3) // u32
+		minRequiredVersion_1717_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1717_major, minRequiredVersion_1717_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_1718_major := uint32(3) // u32
+		minRequiredVersion_1718_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1718_major, minRequiredVersion_1718_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_1719_major := uint32(3) // u32
+		minRequiredVersion_1719_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1719_major, minRequiredVersion_1719_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_1720_major := uint32(2) // u32
+		minRequiredVersion_1720_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1720_major, minRequiredVersion_1720_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1721_major := uint32(3) // u32
+		minRequiredVersion_1721_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1721_major, minRequiredVersion_1721_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1722_major := uint32(3) // u32
+		minRequiredVersion_1722_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1722_major, minRequiredVersion_1722_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_1723_major := uint32(3) // u32
+		minRequiredVersion_1723_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1723_major, minRequiredVersion_1723_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_1724_major := uint32(3) // u32
+		minRequiredVersion_1724_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1724_major, minRequiredVersion_1724_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_1725_major := uint32(3) // u32
+		minRequiredVersion_1725_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1725_major, minRequiredVersion_1725_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_1726_major := uint32(3) // u32
+		minRequiredVersion_1726_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1726_major, minRequiredVersion_1726_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_1727_major := uint32(3) // u32
+		minRequiredVersion_1727_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1727_major, minRequiredVersion_1727_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1728_major := uint32(3) // u32
+		minRequiredVersion_1728_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1728_major, minRequiredVersion_1728_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_1729_major := uint32(3) // u32
+		minRequiredVersion_1729_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1729_major, minRequiredVersion_1729_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_1730_major := uint32(3) // u32
+		minRequiredVersion_1730_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1730_major, minRequiredVersion_1730_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_1731_major := uint32(3) // u32
+		minRequiredVersion_1731_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1731_major, minRequiredVersion_1731_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1732_major := uint32(3) // u32
+		minRequiredVersion_1732_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1732_major, minRequiredVersion_1732_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1733_major := uint32(3) // u32
+		minRequiredVersion_1733_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1733_major, minRequiredVersion_1733_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_1734_major := uint32(3) // u32
+		minRequiredVersion_1734_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1734_major, minRequiredVersion_1734_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1735_major := uint32(3) // u32
+		minRequiredVersion_1735_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1735_major, minRequiredVersion_1735_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_1736_major := uint32(2) // u32
+		minRequiredVersion_1736_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1736_major, minRequiredVersion_1736_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_1737_major := uint32(3) // u32
+		minRequiredVersion_1737_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1737_major, minRequiredVersion_1737_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_1738_major := uint32(3) // u32
+		minRequiredVersion_1738_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1738_major, minRequiredVersion_1738_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_1739_major := uint32(3) // u32
+		minRequiredVersion_1739_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1739_major, minRequiredVersion_1739_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_1740_major := uint32(3) // u32
+		minRequiredVersion_1740_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1740_major, minRequiredVersion_1740_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1741_major := uint32(3) // u32
+		minRequiredVersion_1741_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1741_major, minRequiredVersion_1741_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_1742_major := uint32(3) // u32
+		minRequiredVersion_1742_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1742_major, minRequiredVersion_1742_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_1743_major := uint32(3) // u32
+		minRequiredVersion_1743_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1743_major, minRequiredVersion_1743_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_1744_major := uint32(3) // u32
+		minRequiredVersion_1744_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1744_major, minRequiredVersion_1744_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_1745_major := uint32(3) // u32
+		minRequiredVersion_1745_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1745_major, minRequiredVersion_1745_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_1746_major := uint32(3) // u32
+		minRequiredVersion_1746_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1746_major, minRequiredVersion_1746_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_1747_major := uint32(3) // u32
+		minRequiredVersion_1747_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1747_major, minRequiredVersion_1747_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1748_major := uint32(3) // u32
+		minRequiredVersion_1748_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1748_major, minRequiredVersion_1748_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1749_major := uint32(3) // u32
+		minRequiredVersion_1749_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1749_major, minRequiredVersion_1749_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1750_major := uint32(3) // u32
+		minRequiredVersion_1750_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1750_major, minRequiredVersion_1750_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_1751_major := uint32(3) // u32
+		minRequiredVersion_1751_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1751_major, minRequiredVersion_1751_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1752_major := uint32(3) // u32
+		minRequiredVersion_1752_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1752_major, minRequiredVersion_1752_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_1753_major := uint32(3) // u32
+		minRequiredVersion_1753_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1753_major, minRequiredVersion_1753_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_1754_major := uint32(3) // u32
+		minRequiredVersion_1754_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1754_major, minRequiredVersion_1754_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1755_major := uint32(3) // u32
+		minRequiredVersion_1755_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1755_major, minRequiredVersion_1755_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_1756_major := uint32(2) // u32
+		minRequiredVersion_1756_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1756_major, minRequiredVersion_1756_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_1757_major := uint32(3) // u32
+		minRequiredVersion_1757_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1757_major, minRequiredVersion_1757_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_1758_major := uint32(3) // u32
+		minRequiredVersion_1758_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1758_major, minRequiredVersion_1758_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_1759_major := uint32(3) // u32
+		minRequiredVersion_1759_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1759_major, minRequiredVersion_1759_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_1760_major := uint32(3) // u32
+		minRequiredVersion_1760_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1760_major, minRequiredVersion_1760_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_1761_major := uint32(3) // u32
+		minRequiredVersion_1761_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1761_major, minRequiredVersion_1761_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1762_major := uint32(3) // u32
+		minRequiredVersion_1762_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1762_major, minRequiredVersion_1762_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_1763_major := uint32(3) // u32
+		minRequiredVersion_1763_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1763_major, minRequiredVersion_1763_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_1764_major := uint32(3) // u32
+		minRequiredVersion_1764_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1764_major, minRequiredVersion_1764_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_1765_major := uint32(3) // u32
+		minRequiredVersion_1765_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1765_major, minRequiredVersion_1765_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1766_major := uint32(3) // u32
+		minRequiredVersion_1766_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1766_major, minRequiredVersion_1766_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1767_major := uint32(3) // u32
+		minRequiredVersion_1767_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1767_major, minRequiredVersion_1767_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1768_major := uint32(3) // u32
+		minRequiredVersion_1768_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1768_major, minRequiredVersion_1768_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_1769_major := uint32(3) // u32
+		minRequiredVersion_1769_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1769_major, minRequiredVersion_1769_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_1770_major := uint32(3) // u32
+		minRequiredVersion_1770_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1770_major, minRequiredVersion_1770_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1771_major := uint32(3) // u32
+		minRequiredVersion_1771_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1771_major, minRequiredVersion_1771_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1772_major := uint32(3) // u32
+		minRequiredVersion_1772_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1772_major, minRequiredVersion_1772_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_1773_major := uint32(3) // u32
+		minRequiredVersion_1773_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1773_major, minRequiredVersion_1773_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_1774_major := uint32(3) // u32
+		minRequiredVersion_1774_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1774_major, minRequiredVersion_1774_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_1775_major := uint32(3) // u32
+		minRequiredVersion_1775_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1775_major, minRequiredVersion_1775_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_1776_major := uint32(3) // u32
+		minRequiredVersion_1776_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1776_major, minRequiredVersion_1776_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1777_major := uint32(3) // u32
+		minRequiredVersion_1777_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1777_major, minRequiredVersion_1777_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1778_major := uint32(3) // u32
+		minRequiredVersion_1778_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1778_major, minRequiredVersion_1778_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_1779_major := uint32(3) // u32
+		minRequiredVersion_1779_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1779_major, minRequiredVersion_1779_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1780_major := uint32(3) // u32
+		minRequiredVersion_1780_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1780_major, minRequiredVersion_1780_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_1781_major := uint32(3) // u32
+		minRequiredVersion_1781_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1781_major, minRequiredVersion_1781_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_1782_major := uint32(3) // u32
+		minRequiredVersion_1782_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1782_major, minRequiredVersion_1782_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_1783_major := uint32(3) // u32
+		minRequiredVersion_1783_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1783_major, minRequiredVersion_1783_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1784_major := uint32(2) // u32
+		minRequiredVersion_1784_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1784_major, minRequiredVersion_1784_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_1785_major := uint32(3) // u32
+		minRequiredVersion_1785_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1785_major, minRequiredVersion_1785_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_1786_major := uint32(2) // u32
+		minRequiredVersion_1786_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1786_major, minRequiredVersion_1786_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_1787_major := uint32(3) // u32
+		minRequiredVersion_1787_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1787_major, minRequiredVersion_1787_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_1788_major := uint32(3) // u32
+		minRequiredVersion_1788_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1788_major, minRequiredVersion_1788_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_1789_major := uint32(3) // u32
+		minRequiredVersion_1789_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1789_major, minRequiredVersion_1789_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_1790_major := uint32(3) // u32
+		minRequiredVersion_1790_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1790_major, minRequiredVersion_1790_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_1791_major := uint32(3) // u32
+		minRequiredVersion_1791_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1791_major, minRequiredVersion_1791_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_1792_major := uint32(3) // u32
+		minRequiredVersion_1792_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1792_major, minRequiredVersion_1792_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_1793_major := uint32(3) // u32
+		minRequiredVersion_1793_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1793_major, minRequiredVersion_1793_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_1794_major := uint32(2) // u32
+		minRequiredVersion_1794_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1794_major, minRequiredVersion_1794_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_1795_major := uint32(3) // u32
+		minRequiredVersion_1795_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1795_major, minRequiredVersion_1795_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_1796_major := uint32(3) // u32
+		minRequiredVersion_1796_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1796_major, minRequiredVersion_1796_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_1797_major := uint32(3) // u32
+		minRequiredVersion_1797_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1797_major, minRequiredVersion_1797_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_1798_major := uint32(2) // u32
+		minRequiredVersion_1798_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1798_major, minRequiredVersion_1798_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_1799_major := uint32(3) // u32
+		minRequiredVersion_1799_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1799_major, minRequiredVersion_1799_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_1800_major := uint32(3) // u32
+		minRequiredVersion_1800_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1800_major, minRequiredVersion_1800_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1801_major := uint32(3) // u32
+		minRequiredVersion_1801_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1801_major, minRequiredVersion_1801_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1802_major := uint32(2) // u32
+		minRequiredVersion_1802_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1802_major, minRequiredVersion_1802_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_1803_major := uint32(3) // u32
+		minRequiredVersion_1803_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1803_major, minRequiredVersion_1803_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1804_major := uint32(3) // u32
+		minRequiredVersion_1804_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1804_major, minRequiredVersion_1804_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_1805_major := uint32(2) // u32
+		minRequiredVersion_1805_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1805_major, minRequiredVersion_1805_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_1806_major := uint32(2) // u32
+		minRequiredVersion_1806_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1806_major, minRequiredVersion_1806_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1807_major := uint32(3) // u32
+		minRequiredVersion_1807_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1807_major, minRequiredVersion_1807_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_1808_major := uint32(3) // u32
+		minRequiredVersion_1808_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1808_major, minRequiredVersion_1808_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_1809_major := uint32(3) // u32
+		minRequiredVersion_1809_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1809_major, minRequiredVersion_1809_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_1810_major := uint32(3) // u32
+		minRequiredVersion_1810_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1810_major, minRequiredVersion_1810_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_1811_major := uint32(3) // u32
+		minRequiredVersion_1811_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1811_major, minRequiredVersion_1811_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1812_major := uint32(2) // u32
+		minRequiredVersion_1812_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1812_major, minRequiredVersion_1812_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_1813_major := uint32(3) // u32
+		minRequiredVersion_1813_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1813_major, minRequiredVersion_1813_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1814_major := uint32(3) // u32
+		minRequiredVersion_1814_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1814_major, minRequiredVersion_1814_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1815_major := uint32(2) // u32
+		minRequiredVersion_1815_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1815_major, minRequiredVersion_1815_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_1816_major := uint32(2) // u32
+		minRequiredVersion_1816_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1816_major, minRequiredVersion_1816_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_1817_major := uint32(3) // u32
+		minRequiredVersion_1817_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1817_major, minRequiredVersion_1817_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_1818_major := uint32(3) // u32
+		minRequiredVersion_1818_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1818_major, minRequiredVersion_1818_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_1819_major := uint32(3) // u32
+		minRequiredVersion_1819_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1819_major, minRequiredVersion_1819_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_1820_major := uint32(3) // u32
+		minRequiredVersion_1820_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1820_major, minRequiredVersion_1820_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_1821_major := uint32(3) // u32
+		minRequiredVersion_1821_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1821_major, minRequiredVersion_1821_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_1822_major := uint32(3) // u32
+		minRequiredVersion_1822_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1822_major, minRequiredVersion_1822_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_1823_major := uint32(2) // u32
+		minRequiredVersion_1823_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1823_major, minRequiredVersion_1823_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_1824_major := uint32(2) // u32
+		minRequiredVersion_1824_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1824_major, minRequiredVersion_1824_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_1825_major := uint32(2) // u32
+		minRequiredVersion_1825_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1825_major, minRequiredVersion_1825_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_1826_major := uint32(3) // u32
+		minRequiredVersion_1826_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1826_major, minRequiredVersion_1826_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_1827_major := uint32(3) // u32
+		minRequiredVersion_1827_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1827_major, minRequiredVersion_1827_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_1828_major := uint32(3) // u32
+		minRequiredVersion_1828_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1828_major, minRequiredVersion_1828_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_1829_major := uint32(3) // u32
+		minRequiredVersion_1829_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1829_major, minRequiredVersion_1829_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_1830_major := uint32(3) // u32
+		minRequiredVersion_1830_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1830_major, minRequiredVersion_1830_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_1831_major := uint32(3) // u32
+		minRequiredVersion_1831_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1831_major, minRequiredVersion_1831_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1832_major := uint32(3) // u32
+		minRequiredVersion_1832_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1832_major, minRequiredVersion_1832_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_1833_major := uint32(2) // u32
+		minRequiredVersion_1833_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1833_major, minRequiredVersion_1833_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_1834_major := uint32(2) // u32
+		minRequiredVersion_1834_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1834_major, minRequiredVersion_1834_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_1835_major := uint32(3) // u32
+		minRequiredVersion_1835_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1835_major, minRequiredVersion_1835_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_1836_major := uint32(2) // u32
+		minRequiredVersion_1836_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1836_major, minRequiredVersion_1836_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_1837_major := uint32(2) // u32
+		minRequiredVersion_1837_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1837_major, minRequiredVersion_1837_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_1838_major := uint32(2) // u32
+		minRequiredVersion_1838_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1838_major, minRequiredVersion_1838_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_1839_major := uint32(2) // u32
+		minRequiredVersion_1839_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1839_major, minRequiredVersion_1839_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_1840_major := uint32(2) // u32
+		minRequiredVersion_1840_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1840_major, minRequiredVersion_1840_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_1841_major := uint32(3) // u32
+		minRequiredVersion_1841_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1841_major, minRequiredVersion_1841_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_1842_major := uint32(3) // u32
+		minRequiredVersion_1842_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1842_major, minRequiredVersion_1842_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_1843_major := uint32(2) // u32
+		minRequiredVersion_1843_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1843_major, minRequiredVersion_1843_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_1844_major := uint32(2) // u32
+		minRequiredVersion_1844_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1844_major, minRequiredVersion_1844_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_1845_major := uint32(2) // u32
+		minRequiredVersion_1845_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1845_major, minRequiredVersion_1845_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_1846_major := uint32(2) // u32
+		minRequiredVersion_1846_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1846_major, minRequiredVersion_1846_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_1847_major := uint32(2) // u32
+		minRequiredVersion_1847_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1847_major, minRequiredVersion_1847_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_1848_major := uint32(3) // u32
+		minRequiredVersion_1848_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1848_major, minRequiredVersion_1848_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1849_major := uint32(3) // u32
+		minRequiredVersion_1849_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1849_major, minRequiredVersion_1849_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_1850_major := uint32(3) // u32
+		minRequiredVersion_1850_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1850_major, minRequiredVersion_1850_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_1851_major := uint32(3) // u32
+		minRequiredVersion_1851_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1851_major, minRequiredVersion_1851_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_1852_major := uint32(2) // u32
+		minRequiredVersion_1852_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1852_major, minRequiredVersion_1852_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_1853_major := uint32(2) // u32
+		minRequiredVersion_1853_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1853_major, minRequiredVersion_1853_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_1854_major := uint32(2) // u32
+		minRequiredVersion_1854_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1854_major, minRequiredVersion_1854_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_1855_major := uint32(2) // u32
+		minRequiredVersion_1855_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1855_major, minRequiredVersion_1855_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_1856_major := uint32(2) // u32
+		minRequiredVersion_1856_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1856_major, minRequiredVersion_1856_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_1857_major := uint32(2) // u32
+		minRequiredVersion_1857_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1857_major, minRequiredVersion_1857_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_1858_major := uint32(2) // u32
+		minRequiredVersion_1858_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1858_major, minRequiredVersion_1858_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_1859_major := uint32(2) // u32
+		minRequiredVersion_1859_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1859_major, minRequiredVersion_1859_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_1860_major := uint32(2) // u32
+		minRequiredVersion_1860_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1860_major, minRequiredVersion_1860_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_1861_major := uint32(2) // u32
+		minRequiredVersion_1861_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1861_major, minRequiredVersion_1861_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_1862_major := uint32(2) // u32
+		minRequiredVersion_1862_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1862_major, minRequiredVersion_1862_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_1863_major := uint32(2) // u32
+		minRequiredVersion_1863_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1863_major, minRequiredVersion_1863_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_1864_major := uint32(2) // u32
+		minRequiredVersion_1864_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1864_major, minRequiredVersion_1864_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_1865_major := uint32(2) // u32
+		minRequiredVersion_1865_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1865_major, minRequiredVersion_1865_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_1866_major := uint32(2) // u32
+		minRequiredVersion_1866_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1866_major, minRequiredVersion_1866_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_1867_major := uint32(2) // u32
+		minRequiredVersion_1867_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1867_major, minRequiredVersion_1867_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_1868_major := uint32(2) // u32
+		minRequiredVersion_1868_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1868_major, minRequiredVersion_1868_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_1869_major := uint32(2) // u32
+		minRequiredVersion_1869_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1869_major, minRequiredVersion_1869_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_1870_major := uint32(2) // u32
+		minRequiredVersion_1870_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1870_major, minRequiredVersion_1870_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_1871_major := uint32(3) // u32
+		minRequiredVersion_1871_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1871_major, minRequiredVersion_1871_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_1872_major := uint32(3) // u32
+		minRequiredVersion_1872_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1872_major, minRequiredVersion_1872_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_1873_major := uint32(3) // u32
+		minRequiredVersion_1873_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1873_major, minRequiredVersion_1873_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_1874_major := uint32(3) // u32
+		minRequiredVersion_1874_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1874_major, minRequiredVersion_1874_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_1875_major := uint32(3) // u32
+		minRequiredVersion_1875_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1875_major, minRequiredVersion_1875_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_1876_major := uint32(2) // u32
+		minRequiredVersion_1876_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1876_major, minRequiredVersion_1876_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_1877_major := uint32(3) // u32
+		minRequiredVersion_1877_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1877_major, minRequiredVersion_1877_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_1878_major := uint32(3) // u32
+		minRequiredVersion_1878_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1878_major, minRequiredVersion_1878_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1879_major := uint32(3) // u32
+		minRequiredVersion_1879_minor := uint32(2) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1879_major, minRequiredVersion_1879_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_1880_major := uint32(3) // u32
+		minRequiredVersion_1880_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1880_major, minRequiredVersion_1880_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_1881_major := uint32(3) // u32
+		minRequiredVersion_1881_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1881_major, minRequiredVersion_1881_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_1882_major := uint32(3) // u32
+		minRequiredVersion_1882_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1882_major, minRequiredVersion_1882_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_1883_major := uint32(3) // u32
+		minRequiredVersion_1883_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1883_major, minRequiredVersion_1883_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_1884_major := uint32(3) // u32
+		minRequiredVersion_1884_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1884_major, minRequiredVersion_1884_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_1885_major := uint32(3) // u32
+		minRequiredVersion_1885_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1885_major, minRequiredVersion_1885_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_1886_major := uint32(3) // u32
+		minRequiredVersion_1886_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1886_major, minRequiredVersion_1886_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_1887_major := uint32(3) // u32
+		minRequiredVersion_1887_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1887_major, minRequiredVersion_1887_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_1888_major := uint32(3) // u32
+		minRequiredVersion_1888_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1888_major, minRequiredVersion_1888_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_1889_major := uint32(3) // u32
+		minRequiredVersion_1889_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1889_major, minRequiredVersion_1889_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_1890_major := uint32(2) // u32
+		minRequiredVersion_1890_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1890_major, minRequiredVersion_1890_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_1891_major := uint32(3) // u32
+		minRequiredVersion_1891_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1891_major, minRequiredVersion_1891_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_1892_major := uint32(3) // u32
+		minRequiredVersion_1892_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1892_major, minRequiredVersion_1892_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_1893_major := uint32(3) // u32
+		minRequiredVersion_1893_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1893_major, minRequiredVersion_1893_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_1894_major := uint32(3) // u32
+		minRequiredVersion_1894_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1894_major, minRequiredVersion_1894_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_1895_major := uint32(3) // u32
+		minRequiredVersion_1895_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1895_major, minRequiredVersion_1895_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_1896_major := uint32(3) // u32
+		minRequiredVersion_1896_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1896_major, minRequiredVersion_1896_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_1897_major := uint32(3) // u32
+		minRequiredVersion_1897_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1897_major, minRequiredVersion_1897_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_1898_major := uint32(3) // u32
+		minRequiredVersion_1898_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1898_major, minRequiredVersion_1898_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_1899_major := uint32(3) // u32
+		minRequiredVersion_1899_minor := uint32(1) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1899_major, minRequiredVersion_1899_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_1900_major := uint32(2) // u32
+		minRequiredVersion_1900_minor := uint32(0) // u32
+		observeGlGetWrites_1645_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1900_major, minRequiredVersion_1900_minor
+	default:
+		glErrorInvalidEnum_1901_param := observeGlGetWrites_1645_param // GLenum
+		return
+		_ = glErrorInvalidEnum_1901_param
+	}
+	_, _, _, _, _, _, _, _ = minRequiredVersion_1642_major, minRequiredVersion_1642_minor, v, context, GetContext_1643_result, ctx, observeGlGetWrites_1645_param, observeGlGetWrites_1645_v
 	return nil
 }
 
@@ -15699,29 +19490,1294 @@ func (ϟa *GlGetInteger64i_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1141_major := uint32(3) // u32
-	minRequiredVersion_1141_minor := uint32(0) // u32
-	switch ϟa.Target {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_DRAW_BUFFER, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING, GLenum_GL_VIEWPORT:
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1142_major := uint32(3) // u32
-		minRequiredVersion_1142_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1142_major, minRequiredVersion_1142_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1143_major := uint32(3) // u32
-		minRequiredVersion_1143_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1143_major, minRequiredVersion_1143_minor
-	default:
-		glErrorInvalidEnum_1144_param := ϟa.Target // GLenum
-		return
-		_ = glErrorInvalidEnum_1144_param
-	}
-	ϟb.Push(value.U32(ϟa.Target))
+	minRequiredVersion_1902_major := uint32(3) // u32
+	minRequiredVersion_1902_minor := uint32(0) // u32
+	observeGlGetWrites_1903_param := ϟa.Param  // GLenum
+	observeGlGetWrites_1903_v := ϟa.Values     // GLint64ᵖ
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetInteger64i_v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1141_major, minRequiredVersion_1141_minor
+	switch observeGlGetWrites_1903_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_1904_major := uint32(2) // u32
+		minRequiredVersion_1904_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1904_major, minRequiredVersion_1904_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_1905_major := uint32(2) // u32
+		minRequiredVersion_1905_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1905_major, minRequiredVersion_1905_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_1906_major := uint32(2) // u32
+		minRequiredVersion_1906_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1906_major, minRequiredVersion_1906_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_1907_major := uint32(2) // u32
+		minRequiredVersion_1907_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1907_major, minRequiredVersion_1907_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1908_major := uint32(2) // u32
+		minRequiredVersion_1908_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1908_major, minRequiredVersion_1908_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_1909_major := uint32(2) // u32
+		minRequiredVersion_1909_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1909_major, minRequiredVersion_1909_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_1910_major := uint32(2) // u32
+		minRequiredVersion_1910_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1910_major, minRequiredVersion_1910_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_1911_major := uint32(2) // u32
+		minRequiredVersion_1911_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1911_major, minRequiredVersion_1911_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_1912_major := uint32(2) // u32
+		minRequiredVersion_1912_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1912_major, minRequiredVersion_1912_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_1913_major := uint32(2) // u32
+		minRequiredVersion_1913_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1913_major, minRequiredVersion_1913_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_1914_major := uint32(2) // u32
+		minRequiredVersion_1914_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1914_major, minRequiredVersion_1914_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_1915_major := uint32(2) // u32
+		minRequiredVersion_1915_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1915_major, minRequiredVersion_1915_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_1916_major := uint32(2) // u32
+		minRequiredVersion_1916_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1916_major, minRequiredVersion_1916_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_1917_major := uint32(2) // u32
+		minRequiredVersion_1917_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1917_major, minRequiredVersion_1917_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_1918_major := uint32(2) // u32
+		minRequiredVersion_1918_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1918_major, minRequiredVersion_1918_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_1919_major := uint32(2) // u32
+		minRequiredVersion_1919_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1919_major, minRequiredVersion_1919_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_1920_major := uint32(2) // u32
+		minRequiredVersion_1920_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_1920_major, minRequiredVersion_1920_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_1921_major := uint32(3) // u32
+		minRequiredVersion_1921_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1921_major, minRequiredVersion_1921_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_1922_major := uint32(3) // u32
+		minRequiredVersion_1922_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1922_major, minRequiredVersion_1922_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_1923_major := uint32(3) // u32
+		minRequiredVersion_1923_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1923_major, minRequiredVersion_1923_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_1924_major := uint32(3) // u32
+		minRequiredVersion_1924_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1924_major, minRequiredVersion_1924_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_1925_major := uint32(2) // u32
+		minRequiredVersion_1925_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1925_major, minRequiredVersion_1925_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_1926_major := uint32(2) // u32
+		minRequiredVersion_1926_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1926_major, minRequiredVersion_1926_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_1927_major := uint32(2) // u32
+		minRequiredVersion_1927_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1927_major, minRequiredVersion_1927_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1928_major := uint32(3) // u32
+		minRequiredVersion_1928_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1928_major, minRequiredVersion_1928_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1929_major := uint32(3) // u32
+		minRequiredVersion_1929_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1929_major, minRequiredVersion_1929_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_1930_major := uint32(3) // u32
+		minRequiredVersion_1930_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1930_major, minRequiredVersion_1930_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_1931_major := uint32(2) // u32
+		minRequiredVersion_1931_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1931_major, minRequiredVersion_1931_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_1932_major := uint32(2) // u32
+		minRequiredVersion_1932_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1932_major, minRequiredVersion_1932_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_1933_major := uint32(2) // u32
+		minRequiredVersion_1933_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1933_major, minRequiredVersion_1933_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_1934_major := uint32(2) // u32
+		minRequiredVersion_1934_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1934_major, minRequiredVersion_1934_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_1935_major := uint32(2) // u32
+		minRequiredVersion_1935_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1935_major, minRequiredVersion_1935_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_1936_major := uint32(2) // u32
+		minRequiredVersion_1936_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1936_major, minRequiredVersion_1936_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_1937_major := uint32(3) // u32
+		minRequiredVersion_1937_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1937_major, minRequiredVersion_1937_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_1938_major := uint32(2) // u32
+		minRequiredVersion_1938_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1938_major, minRequiredVersion_1938_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_1939_major := uint32(3) // u32
+		minRequiredVersion_1939_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1939_major, minRequiredVersion_1939_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_1940_major := uint32(2) // u32
+		minRequiredVersion_1940_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1940_major, minRequiredVersion_1940_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_1941_major := uint32(2) // u32
+		minRequiredVersion_1941_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1941_major, minRequiredVersion_1941_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_1942_major := uint32(3) // u32
+		minRequiredVersion_1942_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1942_major, minRequiredVersion_1942_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_1943_major := uint32(3) // u32
+		minRequiredVersion_1943_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1943_major, minRequiredVersion_1943_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_1944_major := uint32(2) // u32
+		minRequiredVersion_1944_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1944_major, minRequiredVersion_1944_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_1945_major := uint32(2) // u32
+		minRequiredVersion_1945_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1945_major, minRequiredVersion_1945_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_1946_major := uint32(2) // u32
+		minRequiredVersion_1946_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1946_major, minRequiredVersion_1946_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_1947_major := uint32(3) // u32
+		minRequiredVersion_1947_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1947_major, minRequiredVersion_1947_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_1948_major := uint32(2) // u32
+		minRequiredVersion_1948_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1948_major, minRequiredVersion_1948_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_1949_major := uint32(2) // u32
+		minRequiredVersion_1949_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1949_major, minRequiredVersion_1949_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_1950_major := uint32(3) // u32
+		minRequiredVersion_1950_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1950_major, minRequiredVersion_1950_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_1951_major := uint32(2) // u32
+		minRequiredVersion_1951_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1951_major, minRequiredVersion_1951_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_1952_major := uint32(3) // u32
+		minRequiredVersion_1952_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1952_major, minRequiredVersion_1952_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_1953_major := uint32(3) // u32
+		minRequiredVersion_1953_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1953_major, minRequiredVersion_1953_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_1954_major := uint32(3) // u32
+		minRequiredVersion_1954_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1954_major, minRequiredVersion_1954_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_1955_major := uint32(3) // u32
+		minRequiredVersion_1955_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1955_major, minRequiredVersion_1955_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_1956_major := uint32(3) // u32
+		minRequiredVersion_1956_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1956_major, minRequiredVersion_1956_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_1957_major := uint32(3) // u32
+		minRequiredVersion_1957_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1957_major, minRequiredVersion_1957_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_1958_major := uint32(3) // u32
+		minRequiredVersion_1958_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1958_major, minRequiredVersion_1958_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1959_major := uint32(3) // u32
+		minRequiredVersion_1959_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1959_major, minRequiredVersion_1959_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1960_major := uint32(3) // u32
+		minRequiredVersion_1960_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1960_major, minRequiredVersion_1960_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_1961_major := uint32(3) // u32
+		minRequiredVersion_1961_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1961_major, minRequiredVersion_1961_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1962_major := uint32(3) // u32
+		minRequiredVersion_1962_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1962_major, minRequiredVersion_1962_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_1963_major := uint32(3) // u32
+		minRequiredVersion_1963_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1963_major, minRequiredVersion_1963_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_1964_major := uint32(3) // u32
+		minRequiredVersion_1964_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1964_major, minRequiredVersion_1964_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1965_major := uint32(2) // u32
+		minRequiredVersion_1965_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1965_major, minRequiredVersion_1965_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_1966_major := uint32(3) // u32
+		minRequiredVersion_1966_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1966_major, minRequiredVersion_1966_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_1967_major := uint32(3) // u32
+		minRequiredVersion_1967_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1967_major, minRequiredVersion_1967_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1968_major := uint32(3) // u32
+		minRequiredVersion_1968_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1968_major, minRequiredVersion_1968_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_1969_major := uint32(3) // u32
+		minRequiredVersion_1969_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1969_major, minRequiredVersion_1969_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_1970_major := uint32(3) // u32
+		minRequiredVersion_1970_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1970_major, minRequiredVersion_1970_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1971_major := uint32(3) // u32
+		minRequiredVersion_1971_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1971_major, minRequiredVersion_1971_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_1972_major := uint32(3) // u32
+		minRequiredVersion_1972_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1972_major, minRequiredVersion_1972_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_1973_major := uint32(3) // u32
+		minRequiredVersion_1973_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1973_major, minRequiredVersion_1973_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_1974_major := uint32(3) // u32
+		minRequiredVersion_1974_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1974_major, minRequiredVersion_1974_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_1975_major := uint32(3) // u32
+		minRequiredVersion_1975_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1975_major, minRequiredVersion_1975_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_1976_major := uint32(3) // u32
+		minRequiredVersion_1976_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1976_major, minRequiredVersion_1976_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_1977_major := uint32(3) // u32
+		minRequiredVersion_1977_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1977_major, minRequiredVersion_1977_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_1978_major := uint32(2) // u32
+		minRequiredVersion_1978_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1978_major, minRequiredVersion_1978_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_1979_major := uint32(3) // u32
+		minRequiredVersion_1979_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1979_major, minRequiredVersion_1979_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_1980_major := uint32(3) // u32
+		minRequiredVersion_1980_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1980_major, minRequiredVersion_1980_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_1981_major := uint32(3) // u32
+		minRequiredVersion_1981_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1981_major, minRequiredVersion_1981_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_1982_major := uint32(3) // u32
+		minRequiredVersion_1982_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1982_major, minRequiredVersion_1982_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_1983_major := uint32(3) // u32
+		minRequiredVersion_1983_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1983_major, minRequiredVersion_1983_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_1984_major := uint32(3) // u32
+		minRequiredVersion_1984_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1984_major, minRequiredVersion_1984_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_1985_major := uint32(3) // u32
+		minRequiredVersion_1985_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1985_major, minRequiredVersion_1985_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1986_major := uint32(3) // u32
+		minRequiredVersion_1986_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1986_major, minRequiredVersion_1986_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_1987_major := uint32(3) // u32
+		minRequiredVersion_1987_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1987_major, minRequiredVersion_1987_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_1988_major := uint32(3) // u32
+		minRequiredVersion_1988_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1988_major, minRequiredVersion_1988_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_1989_major := uint32(3) // u32
+		minRequiredVersion_1989_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1989_major, minRequiredVersion_1989_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_1990_major := uint32(3) // u32
+		minRequiredVersion_1990_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1990_major, minRequiredVersion_1990_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_1991_major := uint32(3) // u32
+		minRequiredVersion_1991_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1991_major, minRequiredVersion_1991_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_1992_major := uint32(3) // u32
+		minRequiredVersion_1992_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1992_major, minRequiredVersion_1992_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_1993_major := uint32(3) // u32
+		minRequiredVersion_1993_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1993_major, minRequiredVersion_1993_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_1994_major := uint32(2) // u32
+		minRequiredVersion_1994_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1994_major, minRequiredVersion_1994_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_1995_major := uint32(3) // u32
+		minRequiredVersion_1995_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1995_major, minRequiredVersion_1995_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_1996_major := uint32(3) // u32
+		minRequiredVersion_1996_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1996_major, minRequiredVersion_1996_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_1997_major := uint32(3) // u32
+		minRequiredVersion_1997_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1997_major, minRequiredVersion_1997_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_1998_major := uint32(3) // u32
+		minRequiredVersion_1998_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1998_major, minRequiredVersion_1998_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_1999_major := uint32(3) // u32
+		minRequiredVersion_1999_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_1999_major, minRequiredVersion_1999_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_2000_major := uint32(3) // u32
+		minRequiredVersion_2000_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2000_major, minRequiredVersion_2000_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_2001_major := uint32(3) // u32
+		minRequiredVersion_2001_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2001_major, minRequiredVersion_2001_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_2002_major := uint32(3) // u32
+		minRequiredVersion_2002_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2002_major, minRequiredVersion_2002_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_2003_major := uint32(3) // u32
+		minRequiredVersion_2003_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2003_major, minRequiredVersion_2003_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_2004_major := uint32(3) // u32
+		minRequiredVersion_2004_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2004_major, minRequiredVersion_2004_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_2005_major := uint32(3) // u32
+		minRequiredVersion_2005_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2005_major, minRequiredVersion_2005_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2006_major := uint32(3) // u32
+		minRequiredVersion_2006_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2006_major, minRequiredVersion_2006_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2007_major := uint32(3) // u32
+		minRequiredVersion_2007_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2007_major, minRequiredVersion_2007_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2008_major := uint32(3) // u32
+		minRequiredVersion_2008_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2008_major, minRequiredVersion_2008_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_2009_major := uint32(3) // u32
+		minRequiredVersion_2009_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2009_major, minRequiredVersion_2009_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2010_major := uint32(3) // u32
+		minRequiredVersion_2010_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2010_major, minRequiredVersion_2010_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_2011_major := uint32(3) // u32
+		minRequiredVersion_2011_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2011_major, minRequiredVersion_2011_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_2012_major := uint32(3) // u32
+		minRequiredVersion_2012_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2012_major, minRequiredVersion_2012_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2013_major := uint32(3) // u32
+		minRequiredVersion_2013_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2013_major, minRequiredVersion_2013_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_2014_major := uint32(2) // u32
+		minRequiredVersion_2014_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2014_major, minRequiredVersion_2014_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_2015_major := uint32(3) // u32
+		minRequiredVersion_2015_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2015_major, minRequiredVersion_2015_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_2016_major := uint32(3) // u32
+		minRequiredVersion_2016_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2016_major, minRequiredVersion_2016_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_2017_major := uint32(3) // u32
+		minRequiredVersion_2017_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2017_major, minRequiredVersion_2017_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_2018_major := uint32(3) // u32
+		minRequiredVersion_2018_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2018_major, minRequiredVersion_2018_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_2019_major := uint32(3) // u32
+		minRequiredVersion_2019_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2019_major, minRequiredVersion_2019_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2020_major := uint32(3) // u32
+		minRequiredVersion_2020_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2020_major, minRequiredVersion_2020_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_2021_major := uint32(3) // u32
+		minRequiredVersion_2021_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2021_major, minRequiredVersion_2021_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_2022_major := uint32(3) // u32
+		minRequiredVersion_2022_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2022_major, minRequiredVersion_2022_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_2023_major := uint32(3) // u32
+		minRequiredVersion_2023_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2023_major, minRequiredVersion_2023_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2024_major := uint32(3) // u32
+		minRequiredVersion_2024_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2024_major, minRequiredVersion_2024_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2025_major := uint32(3) // u32
+		minRequiredVersion_2025_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2025_major, minRequiredVersion_2025_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2026_major := uint32(3) // u32
+		minRequiredVersion_2026_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2026_major, minRequiredVersion_2026_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2027_major := uint32(3) // u32
+		minRequiredVersion_2027_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2027_major, minRequiredVersion_2027_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_2028_major := uint32(3) // u32
+		minRequiredVersion_2028_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2028_major, minRequiredVersion_2028_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2029_major := uint32(3) // u32
+		minRequiredVersion_2029_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2029_major, minRequiredVersion_2029_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2030_major := uint32(3) // u32
+		minRequiredVersion_2030_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2030_major, minRequiredVersion_2030_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_2031_major := uint32(3) // u32
+		minRequiredVersion_2031_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2031_major, minRequiredVersion_2031_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_2032_major := uint32(3) // u32
+		minRequiredVersion_2032_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2032_major, minRequiredVersion_2032_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_2033_major := uint32(3) // u32
+		minRequiredVersion_2033_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2033_major, minRequiredVersion_2033_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_2034_major := uint32(3) // u32
+		minRequiredVersion_2034_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2034_major, minRequiredVersion_2034_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2035_major := uint32(3) // u32
+		minRequiredVersion_2035_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2035_major, minRequiredVersion_2035_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2036_major := uint32(3) // u32
+		minRequiredVersion_2036_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2036_major, minRequiredVersion_2036_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_2037_major := uint32(3) // u32
+		minRequiredVersion_2037_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2037_major, minRequiredVersion_2037_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2038_major := uint32(3) // u32
+		minRequiredVersion_2038_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2038_major, minRequiredVersion_2038_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_2039_major := uint32(3) // u32
+		minRequiredVersion_2039_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2039_major, minRequiredVersion_2039_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_2040_major := uint32(3) // u32
+		minRequiredVersion_2040_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2040_major, minRequiredVersion_2040_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_2041_major := uint32(3) // u32
+		minRequiredVersion_2041_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2041_major, minRequiredVersion_2041_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2042_major := uint32(2) // u32
+		minRequiredVersion_2042_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2042_major, minRequiredVersion_2042_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_2043_major := uint32(3) // u32
+		minRequiredVersion_2043_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2043_major, minRequiredVersion_2043_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_2044_major := uint32(2) // u32
+		minRequiredVersion_2044_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2044_major, minRequiredVersion_2044_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_2045_major := uint32(3) // u32
+		minRequiredVersion_2045_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2045_major, minRequiredVersion_2045_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_2046_major := uint32(3) // u32
+		minRequiredVersion_2046_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2046_major, minRequiredVersion_2046_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_2047_major := uint32(3) // u32
+		minRequiredVersion_2047_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2047_major, minRequiredVersion_2047_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_2048_major := uint32(3) // u32
+		minRequiredVersion_2048_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2048_major, minRequiredVersion_2048_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_2049_major := uint32(3) // u32
+		minRequiredVersion_2049_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2049_major, minRequiredVersion_2049_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_2050_major := uint32(3) // u32
+		minRequiredVersion_2050_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2050_major, minRequiredVersion_2050_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_2051_major := uint32(3) // u32
+		minRequiredVersion_2051_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2051_major, minRequiredVersion_2051_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_2052_major := uint32(2) // u32
+		minRequiredVersion_2052_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2052_major, minRequiredVersion_2052_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_2053_major := uint32(3) // u32
+		minRequiredVersion_2053_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2053_major, minRequiredVersion_2053_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_2054_major := uint32(3) // u32
+		minRequiredVersion_2054_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2054_major, minRequiredVersion_2054_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_2055_major := uint32(3) // u32
+		minRequiredVersion_2055_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2055_major, minRequiredVersion_2055_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_2056_major := uint32(2) // u32
+		minRequiredVersion_2056_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2056_major, minRequiredVersion_2056_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_2057_major := uint32(3) // u32
+		minRequiredVersion_2057_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2057_major, minRequiredVersion_2057_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_2058_major := uint32(3) // u32
+		minRequiredVersion_2058_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2058_major, minRequiredVersion_2058_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2059_major := uint32(3) // u32
+		minRequiredVersion_2059_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2059_major, minRequiredVersion_2059_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2060_major := uint32(2) // u32
+		minRequiredVersion_2060_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2060_major, minRequiredVersion_2060_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_2061_major := uint32(3) // u32
+		minRequiredVersion_2061_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2061_major, minRequiredVersion_2061_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2062_major := uint32(3) // u32
+		minRequiredVersion_2062_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2062_major, minRequiredVersion_2062_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_2063_major := uint32(2) // u32
+		minRequiredVersion_2063_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2063_major, minRequiredVersion_2063_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_2064_major := uint32(2) // u32
+		minRequiredVersion_2064_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2064_major, minRequiredVersion_2064_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2065_major := uint32(3) // u32
+		minRequiredVersion_2065_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2065_major, minRequiredVersion_2065_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2066_major := uint32(3) // u32
+		minRequiredVersion_2066_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2066_major, minRequiredVersion_2066_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_2067_major := uint32(3) // u32
+		minRequiredVersion_2067_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2067_major, minRequiredVersion_2067_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_2068_major := uint32(3) // u32
+		minRequiredVersion_2068_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2068_major, minRequiredVersion_2068_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_2069_major := uint32(3) // u32
+		minRequiredVersion_2069_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2069_major, minRequiredVersion_2069_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2070_major := uint32(2) // u32
+		minRequiredVersion_2070_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2070_major, minRequiredVersion_2070_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_2071_major := uint32(3) // u32
+		minRequiredVersion_2071_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2071_major, minRequiredVersion_2071_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2072_major := uint32(3) // u32
+		minRequiredVersion_2072_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2072_major, minRequiredVersion_2072_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2073_major := uint32(2) // u32
+		minRequiredVersion_2073_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2073_major, minRequiredVersion_2073_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_2074_major := uint32(2) // u32
+		minRequiredVersion_2074_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2074_major, minRequiredVersion_2074_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_2075_major := uint32(3) // u32
+		minRequiredVersion_2075_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2075_major, minRequiredVersion_2075_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_2076_major := uint32(3) // u32
+		minRequiredVersion_2076_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2076_major, minRequiredVersion_2076_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_2077_major := uint32(3) // u32
+		minRequiredVersion_2077_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2077_major, minRequiredVersion_2077_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_2078_major := uint32(3) // u32
+		minRequiredVersion_2078_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2078_major, minRequiredVersion_2078_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_2079_major := uint32(3) // u32
+		minRequiredVersion_2079_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2079_major, minRequiredVersion_2079_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_2080_major := uint32(3) // u32
+		minRequiredVersion_2080_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2080_major, minRequiredVersion_2080_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_2081_major := uint32(2) // u32
+		minRequiredVersion_2081_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2081_major, minRequiredVersion_2081_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_2082_major := uint32(2) // u32
+		minRequiredVersion_2082_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2082_major, minRequiredVersion_2082_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_2083_major := uint32(2) // u32
+		minRequiredVersion_2083_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2083_major, minRequiredVersion_2083_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_2084_major := uint32(3) // u32
+		minRequiredVersion_2084_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2084_major, minRequiredVersion_2084_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_2085_major := uint32(3) // u32
+		minRequiredVersion_2085_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2085_major, minRequiredVersion_2085_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2086_major := uint32(3) // u32
+		minRequiredVersion_2086_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2086_major, minRequiredVersion_2086_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_2087_major := uint32(3) // u32
+		minRequiredVersion_2087_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2087_major, minRequiredVersion_2087_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_2088_major := uint32(3) // u32
+		minRequiredVersion_2088_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2088_major, minRequiredVersion_2088_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_2089_major := uint32(3) // u32
+		minRequiredVersion_2089_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2089_major, minRequiredVersion_2089_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2090_major := uint32(3) // u32
+		minRequiredVersion_2090_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2090_major, minRequiredVersion_2090_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_2091_major := uint32(2) // u32
+		minRequiredVersion_2091_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2091_major, minRequiredVersion_2091_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_2092_major := uint32(2) // u32
+		minRequiredVersion_2092_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2092_major, minRequiredVersion_2092_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_2093_major := uint32(3) // u32
+		minRequiredVersion_2093_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2093_major, minRequiredVersion_2093_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_2094_major := uint32(2) // u32
+		minRequiredVersion_2094_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2094_major, minRequiredVersion_2094_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_2095_major := uint32(2) // u32
+		minRequiredVersion_2095_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2095_major, minRequiredVersion_2095_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_2096_major := uint32(2) // u32
+		minRequiredVersion_2096_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2096_major, minRequiredVersion_2096_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_2097_major := uint32(2) // u32
+		minRequiredVersion_2097_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2097_major, minRequiredVersion_2097_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_2098_major := uint32(2) // u32
+		minRequiredVersion_2098_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2098_major, minRequiredVersion_2098_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_2099_major := uint32(3) // u32
+		minRequiredVersion_2099_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2099_major, minRequiredVersion_2099_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_2100_major := uint32(3) // u32
+		minRequiredVersion_2100_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2100_major, minRequiredVersion_2100_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_2101_major := uint32(2) // u32
+		minRequiredVersion_2101_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2101_major, minRequiredVersion_2101_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_2102_major := uint32(2) // u32
+		minRequiredVersion_2102_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2102_major, minRequiredVersion_2102_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_2103_major := uint32(2) // u32
+		minRequiredVersion_2103_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2103_major, minRequiredVersion_2103_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2104_major := uint32(2) // u32
+		minRequiredVersion_2104_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2104_major, minRequiredVersion_2104_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_2105_major := uint32(2) // u32
+		minRequiredVersion_2105_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2105_major, minRequiredVersion_2105_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_2106_major := uint32(3) // u32
+		minRequiredVersion_2106_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2106_major, minRequiredVersion_2106_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2107_major := uint32(3) // u32
+		minRequiredVersion_2107_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2107_major, minRequiredVersion_2107_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_2108_major := uint32(3) // u32
+		minRequiredVersion_2108_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2108_major, minRequiredVersion_2108_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_2109_major := uint32(3) // u32
+		minRequiredVersion_2109_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2109_major, minRequiredVersion_2109_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_2110_major := uint32(2) // u32
+		minRequiredVersion_2110_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2110_major, minRequiredVersion_2110_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_2111_major := uint32(2) // u32
+		minRequiredVersion_2111_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2111_major, minRequiredVersion_2111_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_2112_major := uint32(2) // u32
+		minRequiredVersion_2112_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2112_major, minRequiredVersion_2112_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_2113_major := uint32(2) // u32
+		minRequiredVersion_2113_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2113_major, minRequiredVersion_2113_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_2114_major := uint32(2) // u32
+		minRequiredVersion_2114_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2114_major, minRequiredVersion_2114_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_2115_major := uint32(2) // u32
+		minRequiredVersion_2115_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2115_major, minRequiredVersion_2115_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_2116_major := uint32(2) // u32
+		minRequiredVersion_2116_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2116_major, minRequiredVersion_2116_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_2117_major := uint32(2) // u32
+		minRequiredVersion_2117_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2117_major, minRequiredVersion_2117_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_2118_major := uint32(2) // u32
+		minRequiredVersion_2118_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2118_major, minRequiredVersion_2118_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_2119_major := uint32(2) // u32
+		minRequiredVersion_2119_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2119_major, minRequiredVersion_2119_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_2120_major := uint32(2) // u32
+		minRequiredVersion_2120_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2120_major, minRequiredVersion_2120_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_2121_major := uint32(2) // u32
+		minRequiredVersion_2121_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2121_major, minRequiredVersion_2121_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_2122_major := uint32(2) // u32
+		minRequiredVersion_2122_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2122_major, minRequiredVersion_2122_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_2123_major := uint32(2) // u32
+		minRequiredVersion_2123_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2123_major, minRequiredVersion_2123_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_2124_major := uint32(2) // u32
+		minRequiredVersion_2124_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2124_major, minRequiredVersion_2124_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_2125_major := uint32(2) // u32
+		minRequiredVersion_2125_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2125_major, minRequiredVersion_2125_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_2126_major := uint32(2) // u32
+		minRequiredVersion_2126_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2126_major, minRequiredVersion_2126_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_2127_major := uint32(2) // u32
+		minRequiredVersion_2127_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2127_major, minRequiredVersion_2127_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_2128_major := uint32(2) // u32
+		minRequiredVersion_2128_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2128_major, minRequiredVersion_2128_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_2129_major := uint32(3) // u32
+		minRequiredVersion_2129_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2129_major, minRequiredVersion_2129_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_2130_major := uint32(3) // u32
+		minRequiredVersion_2130_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2130_major, minRequiredVersion_2130_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_2131_major := uint32(3) // u32
+		minRequiredVersion_2131_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2131_major, minRequiredVersion_2131_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_2132_major := uint32(3) // u32
+		minRequiredVersion_2132_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2132_major, minRequiredVersion_2132_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_2133_major := uint32(3) // u32
+		minRequiredVersion_2133_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2133_major, minRequiredVersion_2133_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_2134_major := uint32(2) // u32
+		minRequiredVersion_2134_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2134_major, minRequiredVersion_2134_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_2135_major := uint32(3) // u32
+		minRequiredVersion_2135_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2135_major, minRequiredVersion_2135_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_2136_major := uint32(3) // u32
+		minRequiredVersion_2136_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2136_major, minRequiredVersion_2136_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2137_major := uint32(3) // u32
+		minRequiredVersion_2137_minor := uint32(2) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2137_major, minRequiredVersion_2137_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_2138_major := uint32(3) // u32
+		minRequiredVersion_2138_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2138_major, minRequiredVersion_2138_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_2139_major := uint32(3) // u32
+		minRequiredVersion_2139_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2139_major, minRequiredVersion_2139_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_2140_major := uint32(3) // u32
+		minRequiredVersion_2140_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2140_major, minRequiredVersion_2140_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_2141_major := uint32(3) // u32
+		minRequiredVersion_2141_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2141_major, minRequiredVersion_2141_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_2142_major := uint32(3) // u32
+		minRequiredVersion_2142_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2142_major, minRequiredVersion_2142_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_2143_major := uint32(3) // u32
+		minRequiredVersion_2143_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2143_major, minRequiredVersion_2143_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_2144_major := uint32(3) // u32
+		minRequiredVersion_2144_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2144_major, minRequiredVersion_2144_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2145_major := uint32(3) // u32
+		minRequiredVersion_2145_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2145_major, minRequiredVersion_2145_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_2146_major := uint32(3) // u32
+		minRequiredVersion_2146_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2146_major, minRequiredVersion_2146_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_2147_major := uint32(3) // u32
+		minRequiredVersion_2147_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2147_major, minRequiredVersion_2147_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_2148_major := uint32(2) // u32
+		minRequiredVersion_2148_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2148_major, minRequiredVersion_2148_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_2149_major := uint32(3) // u32
+		minRequiredVersion_2149_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2149_major, minRequiredVersion_2149_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_2150_major := uint32(3) // u32
+		minRequiredVersion_2150_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2150_major, minRequiredVersion_2150_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_2151_major := uint32(3) // u32
+		minRequiredVersion_2151_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2151_major, minRequiredVersion_2151_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_2152_major := uint32(3) // u32
+		minRequiredVersion_2152_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2152_major, minRequiredVersion_2152_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_2153_major := uint32(3) // u32
+		minRequiredVersion_2153_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2153_major, minRequiredVersion_2153_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_2154_major := uint32(3) // u32
+		minRequiredVersion_2154_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2154_major, minRequiredVersion_2154_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_2155_major := uint32(3) // u32
+		minRequiredVersion_2155_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2155_major, minRequiredVersion_2155_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_2156_major := uint32(3) // u32
+		minRequiredVersion_2156_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2156_major, minRequiredVersion_2156_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_2157_major := uint32(3) // u32
+		minRequiredVersion_2157_minor := uint32(1) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2157_major, minRequiredVersion_2157_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_2158_major := uint32(2) // u32
+		minRequiredVersion_2158_minor := uint32(0) // u32
+		observeGlGetWrites_1903_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2158_major, minRequiredVersion_2158_minor
+	default:
+		glErrorInvalidEnum_2159_param := observeGlGetWrites_1903_param // GLenum
+		return
+		_ = glErrorInvalidEnum_2159_param
+	}
+	_, _, _, _ = minRequiredVersion_1902_major, minRequiredVersion_1902_minor, observeGlGetWrites_1903_param, observeGlGetWrites_1903_v
 	return nil
 }
 
@@ -15730,28 +20786,1293 @@ func (ϟa *GlGetInteger64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1145_major := uint32(3) // u32
-	minRequiredVersion_1145_minor := uint32(0) // u32
-	switch ϟa.Pname {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_DRAW_BUFFER, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING, GLenum_GL_VIEWPORT:
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1146_major := uint32(3) // u32
-		minRequiredVersion_1146_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1146_major, minRequiredVersion_1146_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1147_major := uint32(3) // u32
-		minRequiredVersion_1147_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1147_major, minRequiredVersion_1147_minor
-	default:
-		glErrorInvalidEnum_1148_param := ϟa.Pname // GLenum
-		return
-		_ = glErrorInvalidEnum_1148_param
-	}
-	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Data.value())
+	minRequiredVersion_2160_major := uint32(3) // u32
+	minRequiredVersion_2160_minor := uint32(0) // u32
+	observeGlGetWrites_2161_param := ϟa.Param  // GLenum
+	observeGlGetWrites_2161_v := ϟa.Values     // GLint64ᵖ
+	ϟb.Push(value.U32(ϟa.Param))
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetInteger64v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1145_major, minRequiredVersion_1145_minor
+	switch observeGlGetWrites_2161_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_2162_major := uint32(2) // u32
+		minRequiredVersion_2162_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2162_major, minRequiredVersion_2162_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_2163_major := uint32(2) // u32
+		minRequiredVersion_2163_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2163_major, minRequiredVersion_2163_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_2164_major := uint32(2) // u32
+		minRequiredVersion_2164_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2164_major, minRequiredVersion_2164_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_2165_major := uint32(2) // u32
+		minRequiredVersion_2165_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2165_major, minRequiredVersion_2165_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2166_major := uint32(2) // u32
+		minRequiredVersion_2166_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2166_major, minRequiredVersion_2166_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_2167_major := uint32(2) // u32
+		minRequiredVersion_2167_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2167_major, minRequiredVersion_2167_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_2168_major := uint32(2) // u32
+		minRequiredVersion_2168_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2168_major, minRequiredVersion_2168_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_2169_major := uint32(2) // u32
+		minRequiredVersion_2169_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2169_major, minRequiredVersion_2169_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_2170_major := uint32(2) // u32
+		minRequiredVersion_2170_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2170_major, minRequiredVersion_2170_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_2171_major := uint32(2) // u32
+		minRequiredVersion_2171_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2171_major, minRequiredVersion_2171_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_2172_major := uint32(2) // u32
+		minRequiredVersion_2172_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2172_major, minRequiredVersion_2172_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_2173_major := uint32(2) // u32
+		minRequiredVersion_2173_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2173_major, minRequiredVersion_2173_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_2174_major := uint32(2) // u32
+		minRequiredVersion_2174_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2174_major, minRequiredVersion_2174_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_2175_major := uint32(2) // u32
+		minRequiredVersion_2175_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2175_major, minRequiredVersion_2175_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_2176_major := uint32(2) // u32
+		minRequiredVersion_2176_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2176_major, minRequiredVersion_2176_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_2177_major := uint32(2) // u32
+		minRequiredVersion_2177_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2177_major, minRequiredVersion_2177_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2178_major := uint32(2) // u32
+		minRequiredVersion_2178_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2178_major, minRequiredVersion_2178_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_2179_major := uint32(3) // u32
+		minRequiredVersion_2179_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2179_major, minRequiredVersion_2179_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_2180_major := uint32(3) // u32
+		minRequiredVersion_2180_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2180_major, minRequiredVersion_2180_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_2181_major := uint32(3) // u32
+		minRequiredVersion_2181_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2181_major, minRequiredVersion_2181_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_2182_major := uint32(3) // u32
+		minRequiredVersion_2182_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2182_major, minRequiredVersion_2182_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_2183_major := uint32(2) // u32
+		minRequiredVersion_2183_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2183_major, minRequiredVersion_2183_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_2184_major := uint32(2) // u32
+		minRequiredVersion_2184_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2184_major, minRequiredVersion_2184_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_2185_major := uint32(2) // u32
+		minRequiredVersion_2185_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2185_major, minRequiredVersion_2185_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2186_major := uint32(3) // u32
+		minRequiredVersion_2186_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2186_major, minRequiredVersion_2186_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2187_major := uint32(3) // u32
+		minRequiredVersion_2187_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2187_major, minRequiredVersion_2187_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_2188_major := uint32(3) // u32
+		minRequiredVersion_2188_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2188_major, minRequiredVersion_2188_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_2189_major := uint32(2) // u32
+		minRequiredVersion_2189_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2189_major, minRequiredVersion_2189_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_2190_major := uint32(2) // u32
+		minRequiredVersion_2190_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2190_major, minRequiredVersion_2190_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_2191_major := uint32(2) // u32
+		minRequiredVersion_2191_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2191_major, minRequiredVersion_2191_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_2192_major := uint32(2) // u32
+		minRequiredVersion_2192_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2192_major, minRequiredVersion_2192_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_2193_major := uint32(2) // u32
+		minRequiredVersion_2193_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2193_major, minRequiredVersion_2193_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_2194_major := uint32(2) // u32
+		minRequiredVersion_2194_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2194_major, minRequiredVersion_2194_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_2195_major := uint32(3) // u32
+		minRequiredVersion_2195_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2195_major, minRequiredVersion_2195_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_2196_major := uint32(2) // u32
+		minRequiredVersion_2196_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2196_major, minRequiredVersion_2196_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_2197_major := uint32(3) // u32
+		minRequiredVersion_2197_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2197_major, minRequiredVersion_2197_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2198_major := uint32(2) // u32
+		minRequiredVersion_2198_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2198_major, minRequiredVersion_2198_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2199_major := uint32(2) // u32
+		minRequiredVersion_2199_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2199_major, minRequiredVersion_2199_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_2200_major := uint32(3) // u32
+		minRequiredVersion_2200_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2200_major, minRequiredVersion_2200_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_2201_major := uint32(3) // u32
+		minRequiredVersion_2201_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2201_major, minRequiredVersion_2201_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_2202_major := uint32(2) // u32
+		minRequiredVersion_2202_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2202_major, minRequiredVersion_2202_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_2203_major := uint32(2) // u32
+		minRequiredVersion_2203_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2203_major, minRequiredVersion_2203_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_2204_major := uint32(2) // u32
+		minRequiredVersion_2204_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2204_major, minRequiredVersion_2204_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_2205_major := uint32(3) // u32
+		minRequiredVersion_2205_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2205_major, minRequiredVersion_2205_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_2206_major := uint32(2) // u32
+		minRequiredVersion_2206_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2206_major, minRequiredVersion_2206_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_2207_major := uint32(2) // u32
+		minRequiredVersion_2207_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2207_major, minRequiredVersion_2207_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_2208_major := uint32(3) // u32
+		minRequiredVersion_2208_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2208_major, minRequiredVersion_2208_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_2209_major := uint32(2) // u32
+		minRequiredVersion_2209_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2209_major, minRequiredVersion_2209_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_2210_major := uint32(3) // u32
+		minRequiredVersion_2210_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2210_major, minRequiredVersion_2210_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_2211_major := uint32(3) // u32
+		minRequiredVersion_2211_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2211_major, minRequiredVersion_2211_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_2212_major := uint32(3) // u32
+		minRequiredVersion_2212_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2212_major, minRequiredVersion_2212_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_2213_major := uint32(3) // u32
+		minRequiredVersion_2213_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2213_major, minRequiredVersion_2213_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_2214_major := uint32(3) // u32
+		minRequiredVersion_2214_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2214_major, minRequiredVersion_2214_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_2215_major := uint32(3) // u32
+		minRequiredVersion_2215_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2215_major, minRequiredVersion_2215_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_2216_major := uint32(3) // u32
+		minRequiredVersion_2216_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2216_major, minRequiredVersion_2216_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2217_major := uint32(3) // u32
+		minRequiredVersion_2217_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2217_major, minRequiredVersion_2217_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2218_major := uint32(3) // u32
+		minRequiredVersion_2218_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2218_major, minRequiredVersion_2218_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2219_major := uint32(3) // u32
+		minRequiredVersion_2219_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2219_major, minRequiredVersion_2219_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2220_major := uint32(3) // u32
+		minRequiredVersion_2220_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2220_major, minRequiredVersion_2220_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2221_major := uint32(3) // u32
+		minRequiredVersion_2221_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2221_major, minRequiredVersion_2221_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2222_major := uint32(3) // u32
+		minRequiredVersion_2222_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2222_major, minRequiredVersion_2222_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2223_major := uint32(2) // u32
+		minRequiredVersion_2223_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2223_major, minRequiredVersion_2223_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_2224_major := uint32(3) // u32
+		minRequiredVersion_2224_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2224_major, minRequiredVersion_2224_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2225_major := uint32(3) // u32
+		minRequiredVersion_2225_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2225_major, minRequiredVersion_2225_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2226_major := uint32(3) // u32
+		minRequiredVersion_2226_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2226_major, minRequiredVersion_2226_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_2227_major := uint32(3) // u32
+		minRequiredVersion_2227_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2227_major, minRequiredVersion_2227_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_2228_major := uint32(3) // u32
+		minRequiredVersion_2228_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2228_major, minRequiredVersion_2228_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2229_major := uint32(3) // u32
+		minRequiredVersion_2229_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2229_major, minRequiredVersion_2229_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2230_major := uint32(3) // u32
+		minRequiredVersion_2230_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2230_major, minRequiredVersion_2230_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_2231_major := uint32(3) // u32
+		minRequiredVersion_2231_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2231_major, minRequiredVersion_2231_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2232_major := uint32(3) // u32
+		minRequiredVersion_2232_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2232_major, minRequiredVersion_2232_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_2233_major := uint32(3) // u32
+		minRequiredVersion_2233_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2233_major, minRequiredVersion_2233_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_2234_major := uint32(3) // u32
+		minRequiredVersion_2234_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2234_major, minRequiredVersion_2234_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_2235_major := uint32(3) // u32
+		minRequiredVersion_2235_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2235_major, minRequiredVersion_2235_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_2236_major := uint32(2) // u32
+		minRequiredVersion_2236_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2236_major, minRequiredVersion_2236_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2237_major := uint32(3) // u32
+		minRequiredVersion_2237_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2237_major, minRequiredVersion_2237_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2238_major := uint32(3) // u32
+		minRequiredVersion_2238_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2238_major, minRequiredVersion_2238_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_2239_major := uint32(3) // u32
+		minRequiredVersion_2239_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2239_major, minRequiredVersion_2239_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_2240_major := uint32(3) // u32
+		minRequiredVersion_2240_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2240_major, minRequiredVersion_2240_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_2241_major := uint32(3) // u32
+		minRequiredVersion_2241_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2241_major, minRequiredVersion_2241_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_2242_major := uint32(3) // u32
+		minRequiredVersion_2242_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2242_major, minRequiredVersion_2242_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_2243_major := uint32(3) // u32
+		minRequiredVersion_2243_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2243_major, minRequiredVersion_2243_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2244_major := uint32(3) // u32
+		minRequiredVersion_2244_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2244_major, minRequiredVersion_2244_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_2245_major := uint32(3) // u32
+		minRequiredVersion_2245_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2245_major, minRequiredVersion_2245_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_2246_major := uint32(3) // u32
+		minRequiredVersion_2246_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2246_major, minRequiredVersion_2246_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_2247_major := uint32(3) // u32
+		minRequiredVersion_2247_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2247_major, minRequiredVersion_2247_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2248_major := uint32(3) // u32
+		minRequiredVersion_2248_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2248_major, minRequiredVersion_2248_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2249_major := uint32(3) // u32
+		minRequiredVersion_2249_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2249_major, minRequiredVersion_2249_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_2250_major := uint32(3) // u32
+		minRequiredVersion_2250_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2250_major, minRequiredVersion_2250_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2251_major := uint32(3) // u32
+		minRequiredVersion_2251_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2251_major, minRequiredVersion_2251_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_2252_major := uint32(2) // u32
+		minRequiredVersion_2252_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2252_major, minRequiredVersion_2252_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_2253_major := uint32(3) // u32
+		minRequiredVersion_2253_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2253_major, minRequiredVersion_2253_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_2254_major := uint32(3) // u32
+		minRequiredVersion_2254_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2254_major, minRequiredVersion_2254_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_2255_major := uint32(3) // u32
+		minRequiredVersion_2255_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2255_major, minRequiredVersion_2255_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_2256_major := uint32(3) // u32
+		minRequiredVersion_2256_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2256_major, minRequiredVersion_2256_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2257_major := uint32(3) // u32
+		minRequiredVersion_2257_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2257_major, minRequiredVersion_2257_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_2258_major := uint32(3) // u32
+		minRequiredVersion_2258_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2258_major, minRequiredVersion_2258_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_2259_major := uint32(3) // u32
+		minRequiredVersion_2259_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2259_major, minRequiredVersion_2259_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_2260_major := uint32(3) // u32
+		minRequiredVersion_2260_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2260_major, minRequiredVersion_2260_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_2261_major := uint32(3) // u32
+		minRequiredVersion_2261_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2261_major, minRequiredVersion_2261_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_2262_major := uint32(3) // u32
+		minRequiredVersion_2262_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2262_major, minRequiredVersion_2262_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_2263_major := uint32(3) // u32
+		minRequiredVersion_2263_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2263_major, minRequiredVersion_2263_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2264_major := uint32(3) // u32
+		minRequiredVersion_2264_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2264_major, minRequiredVersion_2264_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2265_major := uint32(3) // u32
+		minRequiredVersion_2265_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2265_major, minRequiredVersion_2265_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2266_major := uint32(3) // u32
+		minRequiredVersion_2266_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2266_major, minRequiredVersion_2266_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_2267_major := uint32(3) // u32
+		minRequiredVersion_2267_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2267_major, minRequiredVersion_2267_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2268_major := uint32(3) // u32
+		minRequiredVersion_2268_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2268_major, minRequiredVersion_2268_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_2269_major := uint32(3) // u32
+		minRequiredVersion_2269_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2269_major, minRequiredVersion_2269_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_2270_major := uint32(3) // u32
+		minRequiredVersion_2270_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2270_major, minRequiredVersion_2270_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2271_major := uint32(3) // u32
+		minRequiredVersion_2271_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2271_major, minRequiredVersion_2271_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_2272_major := uint32(2) // u32
+		minRequiredVersion_2272_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2272_major, minRequiredVersion_2272_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_2273_major := uint32(3) // u32
+		minRequiredVersion_2273_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2273_major, minRequiredVersion_2273_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_2274_major := uint32(3) // u32
+		minRequiredVersion_2274_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2274_major, minRequiredVersion_2274_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_2275_major := uint32(3) // u32
+		minRequiredVersion_2275_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2275_major, minRequiredVersion_2275_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_2276_major := uint32(3) // u32
+		minRequiredVersion_2276_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2276_major, minRequiredVersion_2276_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_2277_major := uint32(3) // u32
+		minRequiredVersion_2277_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2277_major, minRequiredVersion_2277_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2278_major := uint32(3) // u32
+		minRequiredVersion_2278_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2278_major, minRequiredVersion_2278_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_2279_major := uint32(3) // u32
+		minRequiredVersion_2279_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2279_major, minRequiredVersion_2279_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_2280_major := uint32(3) // u32
+		minRequiredVersion_2280_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2280_major, minRequiredVersion_2280_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_2281_major := uint32(3) // u32
+		minRequiredVersion_2281_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2281_major, minRequiredVersion_2281_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2282_major := uint32(3) // u32
+		minRequiredVersion_2282_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2282_major, minRequiredVersion_2282_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2283_major := uint32(3) // u32
+		minRequiredVersion_2283_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2283_major, minRequiredVersion_2283_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2284_major := uint32(3) // u32
+		minRequiredVersion_2284_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2284_major, minRequiredVersion_2284_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2285_major := uint32(3) // u32
+		minRequiredVersion_2285_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2285_major, minRequiredVersion_2285_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_2286_major := uint32(3) // u32
+		minRequiredVersion_2286_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2286_major, minRequiredVersion_2286_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2287_major := uint32(3) // u32
+		minRequiredVersion_2287_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2287_major, minRequiredVersion_2287_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2288_major := uint32(3) // u32
+		minRequiredVersion_2288_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2288_major, minRequiredVersion_2288_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_2289_major := uint32(3) // u32
+		minRequiredVersion_2289_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2289_major, minRequiredVersion_2289_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_2290_major := uint32(3) // u32
+		minRequiredVersion_2290_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2290_major, minRequiredVersion_2290_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_2291_major := uint32(3) // u32
+		minRequiredVersion_2291_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2291_major, minRequiredVersion_2291_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_2292_major := uint32(3) // u32
+		minRequiredVersion_2292_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2292_major, minRequiredVersion_2292_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2293_major := uint32(3) // u32
+		minRequiredVersion_2293_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2293_major, minRequiredVersion_2293_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2294_major := uint32(3) // u32
+		minRequiredVersion_2294_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2294_major, minRequiredVersion_2294_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_2295_major := uint32(3) // u32
+		minRequiredVersion_2295_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2295_major, minRequiredVersion_2295_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2296_major := uint32(3) // u32
+		minRequiredVersion_2296_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2296_major, minRequiredVersion_2296_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_2297_major := uint32(3) // u32
+		minRequiredVersion_2297_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2297_major, minRequiredVersion_2297_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_2298_major := uint32(3) // u32
+		minRequiredVersion_2298_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2298_major, minRequiredVersion_2298_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_2299_major := uint32(3) // u32
+		minRequiredVersion_2299_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2299_major, minRequiredVersion_2299_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2300_major := uint32(2) // u32
+		minRequiredVersion_2300_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2300_major, minRequiredVersion_2300_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_2301_major := uint32(3) // u32
+		minRequiredVersion_2301_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2301_major, minRequiredVersion_2301_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_2302_major := uint32(2) // u32
+		minRequiredVersion_2302_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2302_major, minRequiredVersion_2302_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_2303_major := uint32(3) // u32
+		minRequiredVersion_2303_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2303_major, minRequiredVersion_2303_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_2304_major := uint32(3) // u32
+		minRequiredVersion_2304_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2304_major, minRequiredVersion_2304_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_2305_major := uint32(3) // u32
+		minRequiredVersion_2305_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2305_major, minRequiredVersion_2305_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_2306_major := uint32(3) // u32
+		minRequiredVersion_2306_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2306_major, minRequiredVersion_2306_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_2307_major := uint32(3) // u32
+		minRequiredVersion_2307_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2307_major, minRequiredVersion_2307_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_2308_major := uint32(3) // u32
+		minRequiredVersion_2308_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2308_major, minRequiredVersion_2308_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_2309_major := uint32(3) // u32
+		minRequiredVersion_2309_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2309_major, minRequiredVersion_2309_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_2310_major := uint32(2) // u32
+		minRequiredVersion_2310_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2310_major, minRequiredVersion_2310_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_2311_major := uint32(3) // u32
+		minRequiredVersion_2311_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2311_major, minRequiredVersion_2311_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_2312_major := uint32(3) // u32
+		minRequiredVersion_2312_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2312_major, minRequiredVersion_2312_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_2313_major := uint32(3) // u32
+		minRequiredVersion_2313_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2313_major, minRequiredVersion_2313_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_2314_major := uint32(2) // u32
+		minRequiredVersion_2314_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2314_major, minRequiredVersion_2314_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_2315_major := uint32(3) // u32
+		minRequiredVersion_2315_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2315_major, minRequiredVersion_2315_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_2316_major := uint32(3) // u32
+		minRequiredVersion_2316_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2316_major, minRequiredVersion_2316_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2317_major := uint32(3) // u32
+		minRequiredVersion_2317_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2317_major, minRequiredVersion_2317_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2318_major := uint32(2) // u32
+		minRequiredVersion_2318_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2318_major, minRequiredVersion_2318_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_2319_major := uint32(3) // u32
+		minRequiredVersion_2319_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2319_major, minRequiredVersion_2319_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2320_major := uint32(3) // u32
+		minRequiredVersion_2320_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2320_major, minRequiredVersion_2320_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_2321_major := uint32(2) // u32
+		minRequiredVersion_2321_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2321_major, minRequiredVersion_2321_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_2322_major := uint32(2) // u32
+		minRequiredVersion_2322_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2322_major, minRequiredVersion_2322_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2323_major := uint32(3) // u32
+		minRequiredVersion_2323_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2323_major, minRequiredVersion_2323_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2324_major := uint32(3) // u32
+		minRequiredVersion_2324_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2324_major, minRequiredVersion_2324_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_2325_major := uint32(3) // u32
+		minRequiredVersion_2325_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2325_major, minRequiredVersion_2325_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_2326_major := uint32(3) // u32
+		minRequiredVersion_2326_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2326_major, minRequiredVersion_2326_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_2327_major := uint32(3) // u32
+		minRequiredVersion_2327_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2327_major, minRequiredVersion_2327_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2328_major := uint32(2) // u32
+		minRequiredVersion_2328_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2328_major, minRequiredVersion_2328_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_2329_major := uint32(3) // u32
+		minRequiredVersion_2329_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2329_major, minRequiredVersion_2329_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2330_major := uint32(3) // u32
+		minRequiredVersion_2330_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2330_major, minRequiredVersion_2330_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2331_major := uint32(2) // u32
+		minRequiredVersion_2331_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2331_major, minRequiredVersion_2331_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_2332_major := uint32(2) // u32
+		minRequiredVersion_2332_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2332_major, minRequiredVersion_2332_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_2333_major := uint32(3) // u32
+		minRequiredVersion_2333_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2333_major, minRequiredVersion_2333_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_2334_major := uint32(3) // u32
+		minRequiredVersion_2334_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2334_major, minRequiredVersion_2334_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_2335_major := uint32(3) // u32
+		minRequiredVersion_2335_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2335_major, minRequiredVersion_2335_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_2336_major := uint32(3) // u32
+		minRequiredVersion_2336_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2336_major, minRequiredVersion_2336_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_2337_major := uint32(3) // u32
+		minRequiredVersion_2337_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2337_major, minRequiredVersion_2337_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_2338_major := uint32(3) // u32
+		minRequiredVersion_2338_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2338_major, minRequiredVersion_2338_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_2339_major := uint32(2) // u32
+		minRequiredVersion_2339_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2339_major, minRequiredVersion_2339_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_2340_major := uint32(2) // u32
+		minRequiredVersion_2340_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2340_major, minRequiredVersion_2340_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_2341_major := uint32(2) // u32
+		minRequiredVersion_2341_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2341_major, minRequiredVersion_2341_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_2342_major := uint32(3) // u32
+		minRequiredVersion_2342_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2342_major, minRequiredVersion_2342_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_2343_major := uint32(3) // u32
+		minRequiredVersion_2343_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2343_major, minRequiredVersion_2343_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2344_major := uint32(3) // u32
+		minRequiredVersion_2344_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2344_major, minRequiredVersion_2344_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_2345_major := uint32(3) // u32
+		minRequiredVersion_2345_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2345_major, minRequiredVersion_2345_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_2346_major := uint32(3) // u32
+		minRequiredVersion_2346_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2346_major, minRequiredVersion_2346_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_2347_major := uint32(3) // u32
+		minRequiredVersion_2347_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2347_major, minRequiredVersion_2347_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2348_major := uint32(3) // u32
+		minRequiredVersion_2348_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2348_major, minRequiredVersion_2348_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_2349_major := uint32(2) // u32
+		minRequiredVersion_2349_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2349_major, minRequiredVersion_2349_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_2350_major := uint32(2) // u32
+		minRequiredVersion_2350_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2350_major, minRequiredVersion_2350_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_2351_major := uint32(3) // u32
+		minRequiredVersion_2351_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2351_major, minRequiredVersion_2351_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_2352_major := uint32(2) // u32
+		minRequiredVersion_2352_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2352_major, minRequiredVersion_2352_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_2353_major := uint32(2) // u32
+		minRequiredVersion_2353_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2353_major, minRequiredVersion_2353_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_2354_major := uint32(2) // u32
+		minRequiredVersion_2354_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2354_major, minRequiredVersion_2354_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_2355_major := uint32(2) // u32
+		minRequiredVersion_2355_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2355_major, minRequiredVersion_2355_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_2356_major := uint32(2) // u32
+		minRequiredVersion_2356_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2356_major, minRequiredVersion_2356_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_2357_major := uint32(3) // u32
+		minRequiredVersion_2357_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2357_major, minRequiredVersion_2357_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_2358_major := uint32(3) // u32
+		minRequiredVersion_2358_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2358_major, minRequiredVersion_2358_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_2359_major := uint32(2) // u32
+		minRequiredVersion_2359_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2359_major, minRequiredVersion_2359_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_2360_major := uint32(2) // u32
+		minRequiredVersion_2360_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2360_major, minRequiredVersion_2360_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_2361_major := uint32(2) // u32
+		minRequiredVersion_2361_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2361_major, minRequiredVersion_2361_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2362_major := uint32(2) // u32
+		minRequiredVersion_2362_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2362_major, minRequiredVersion_2362_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_2363_major := uint32(2) // u32
+		minRequiredVersion_2363_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2363_major, minRequiredVersion_2363_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_2364_major := uint32(3) // u32
+		minRequiredVersion_2364_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2364_major, minRequiredVersion_2364_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2365_major := uint32(3) // u32
+		minRequiredVersion_2365_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2365_major, minRequiredVersion_2365_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_2366_major := uint32(3) // u32
+		minRequiredVersion_2366_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2366_major, minRequiredVersion_2366_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_2367_major := uint32(3) // u32
+		minRequiredVersion_2367_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2367_major, minRequiredVersion_2367_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_2368_major := uint32(2) // u32
+		minRequiredVersion_2368_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2368_major, minRequiredVersion_2368_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_2369_major := uint32(2) // u32
+		minRequiredVersion_2369_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2369_major, minRequiredVersion_2369_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_2370_major := uint32(2) // u32
+		minRequiredVersion_2370_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2370_major, minRequiredVersion_2370_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_2371_major := uint32(2) // u32
+		minRequiredVersion_2371_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2371_major, minRequiredVersion_2371_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_2372_major := uint32(2) // u32
+		minRequiredVersion_2372_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2372_major, minRequiredVersion_2372_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_2373_major := uint32(2) // u32
+		minRequiredVersion_2373_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2373_major, minRequiredVersion_2373_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_2374_major := uint32(2) // u32
+		minRequiredVersion_2374_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2374_major, minRequiredVersion_2374_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_2375_major := uint32(2) // u32
+		minRequiredVersion_2375_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2375_major, minRequiredVersion_2375_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_2376_major := uint32(2) // u32
+		minRequiredVersion_2376_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2376_major, minRequiredVersion_2376_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_2377_major := uint32(2) // u32
+		minRequiredVersion_2377_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2377_major, minRequiredVersion_2377_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_2378_major := uint32(2) // u32
+		minRequiredVersion_2378_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2378_major, minRequiredVersion_2378_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_2379_major := uint32(2) // u32
+		minRequiredVersion_2379_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2379_major, minRequiredVersion_2379_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_2380_major := uint32(2) // u32
+		minRequiredVersion_2380_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2380_major, minRequiredVersion_2380_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_2381_major := uint32(2) // u32
+		minRequiredVersion_2381_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2381_major, minRequiredVersion_2381_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_2382_major := uint32(2) // u32
+		minRequiredVersion_2382_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2382_major, minRequiredVersion_2382_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_2383_major := uint32(2) // u32
+		minRequiredVersion_2383_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2383_major, minRequiredVersion_2383_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_2384_major := uint32(2) // u32
+		minRequiredVersion_2384_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2384_major, minRequiredVersion_2384_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_2385_major := uint32(2) // u32
+		minRequiredVersion_2385_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2385_major, minRequiredVersion_2385_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_2386_major := uint32(2) // u32
+		minRequiredVersion_2386_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2386_major, minRequiredVersion_2386_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_2387_major := uint32(3) // u32
+		minRequiredVersion_2387_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2387_major, minRequiredVersion_2387_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_2388_major := uint32(3) // u32
+		minRequiredVersion_2388_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2388_major, minRequiredVersion_2388_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_2389_major := uint32(3) // u32
+		minRequiredVersion_2389_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2389_major, minRequiredVersion_2389_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_2390_major := uint32(3) // u32
+		minRequiredVersion_2390_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2390_major, minRequiredVersion_2390_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_2391_major := uint32(3) // u32
+		minRequiredVersion_2391_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2391_major, minRequiredVersion_2391_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_2392_major := uint32(2) // u32
+		minRequiredVersion_2392_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2392_major, minRequiredVersion_2392_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_2393_major := uint32(3) // u32
+		minRequiredVersion_2393_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2393_major, minRequiredVersion_2393_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_2394_major := uint32(3) // u32
+		minRequiredVersion_2394_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2394_major, minRequiredVersion_2394_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2395_major := uint32(3) // u32
+		minRequiredVersion_2395_minor := uint32(2) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2395_major, minRequiredVersion_2395_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_2396_major := uint32(3) // u32
+		minRequiredVersion_2396_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2396_major, minRequiredVersion_2396_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_2397_major := uint32(3) // u32
+		minRequiredVersion_2397_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2397_major, minRequiredVersion_2397_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_2398_major := uint32(3) // u32
+		minRequiredVersion_2398_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2398_major, minRequiredVersion_2398_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_2399_major := uint32(3) // u32
+		minRequiredVersion_2399_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2399_major, minRequiredVersion_2399_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_2400_major := uint32(3) // u32
+		minRequiredVersion_2400_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2400_major, minRequiredVersion_2400_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_2401_major := uint32(3) // u32
+		minRequiredVersion_2401_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2401_major, minRequiredVersion_2401_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_2402_major := uint32(3) // u32
+		minRequiredVersion_2402_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2402_major, minRequiredVersion_2402_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2403_major := uint32(3) // u32
+		minRequiredVersion_2403_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2403_major, minRequiredVersion_2403_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_2404_major := uint32(3) // u32
+		minRequiredVersion_2404_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2404_major, minRequiredVersion_2404_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_2405_major := uint32(3) // u32
+		minRequiredVersion_2405_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2405_major, minRequiredVersion_2405_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_2406_major := uint32(2) // u32
+		minRequiredVersion_2406_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2406_major, minRequiredVersion_2406_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_2407_major := uint32(3) // u32
+		minRequiredVersion_2407_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2407_major, minRequiredVersion_2407_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_2408_major := uint32(3) // u32
+		minRequiredVersion_2408_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2408_major, minRequiredVersion_2408_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_2409_major := uint32(3) // u32
+		minRequiredVersion_2409_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2409_major, minRequiredVersion_2409_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_2410_major := uint32(3) // u32
+		minRequiredVersion_2410_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2410_major, minRequiredVersion_2410_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_2411_major := uint32(3) // u32
+		minRequiredVersion_2411_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2411_major, minRequiredVersion_2411_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_2412_major := uint32(3) // u32
+		minRequiredVersion_2412_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2412_major, minRequiredVersion_2412_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_2413_major := uint32(3) // u32
+		minRequiredVersion_2413_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2413_major, minRequiredVersion_2413_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_2414_major := uint32(3) // u32
+		minRequiredVersion_2414_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2414_major, minRequiredVersion_2414_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_2415_major := uint32(3) // u32
+		minRequiredVersion_2415_minor := uint32(1) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2415_major, minRequiredVersion_2415_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_2416_major := uint32(2) // u32
+		minRequiredVersion_2416_minor := uint32(0) // u32
+		observeGlGetWrites_2161_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2416_major, minRequiredVersion_2416_minor
+	default:
+		glErrorInvalidEnum_2417_param := observeGlGetWrites_2161_param // GLenum
+		return
+		_ = glErrorInvalidEnum_2417_param
+	}
+	_, _, _, _ = minRequiredVersion_2160_major, minRequiredVersion_2160_minor, observeGlGetWrites_2161_param, observeGlGetWrites_2161_v
 	return nil
 }
 
@@ -15760,29 +22081,1294 @@ func (ϟa *GlGetIntegeri_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1149_major := uint32(3) // u32
-	minRequiredVersion_1149_minor := uint32(0) // u32
-	switch ϟa.Target {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_DRAW_BUFFER, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING, GLenum_GL_VIEWPORT:
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1150_major := uint32(3) // u32
-		minRequiredVersion_1150_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1150_major, minRequiredVersion_1150_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1151_major := uint32(3) // u32
-		minRequiredVersion_1151_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1151_major, minRequiredVersion_1151_minor
-	default:
-		glErrorInvalidEnum_1152_param := ϟa.Target // GLenum
-		return
-		_ = glErrorInvalidEnum_1152_param
-	}
-	ϟb.Push(value.U32(ϟa.Target))
+	minRequiredVersion_2418_major := uint32(3) // u32
+	minRequiredVersion_2418_minor := uint32(0) // u32
+	observeGlGetWrites_2419_param := ϟa.Param  // GLenum
+	observeGlGetWrites_2419_v := ϟa.Values     // GLintᵖ
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetIntegeri_v)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1149_major, minRequiredVersion_1149_minor
+	switch observeGlGetWrites_2419_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_2420_major := uint32(2) // u32
+		minRequiredVersion_2420_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2420_major, minRequiredVersion_2420_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_2421_major := uint32(2) // u32
+		minRequiredVersion_2421_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2421_major, minRequiredVersion_2421_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_2422_major := uint32(2) // u32
+		minRequiredVersion_2422_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2422_major, minRequiredVersion_2422_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_2423_major := uint32(2) // u32
+		minRequiredVersion_2423_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2423_major, minRequiredVersion_2423_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2424_major := uint32(2) // u32
+		minRequiredVersion_2424_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2424_major, minRequiredVersion_2424_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_2425_major := uint32(2) // u32
+		minRequiredVersion_2425_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2425_major, minRequiredVersion_2425_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_2426_major := uint32(2) // u32
+		minRequiredVersion_2426_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2426_major, minRequiredVersion_2426_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_2427_major := uint32(2) // u32
+		minRequiredVersion_2427_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2427_major, minRequiredVersion_2427_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_2428_major := uint32(2) // u32
+		minRequiredVersion_2428_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2428_major, minRequiredVersion_2428_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_2429_major := uint32(2) // u32
+		minRequiredVersion_2429_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2429_major, minRequiredVersion_2429_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_2430_major := uint32(2) // u32
+		minRequiredVersion_2430_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2430_major, minRequiredVersion_2430_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_2431_major := uint32(2) // u32
+		minRequiredVersion_2431_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2431_major, minRequiredVersion_2431_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_2432_major := uint32(2) // u32
+		minRequiredVersion_2432_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2432_major, minRequiredVersion_2432_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_2433_major := uint32(2) // u32
+		minRequiredVersion_2433_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2433_major, minRequiredVersion_2433_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_2434_major := uint32(2) // u32
+		minRequiredVersion_2434_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2434_major, minRequiredVersion_2434_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_2435_major := uint32(2) // u32
+		minRequiredVersion_2435_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2435_major, minRequiredVersion_2435_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2436_major := uint32(2) // u32
+		minRequiredVersion_2436_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2436_major, minRequiredVersion_2436_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_2437_major := uint32(3) // u32
+		minRequiredVersion_2437_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2437_major, minRequiredVersion_2437_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_2438_major := uint32(3) // u32
+		minRequiredVersion_2438_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2438_major, minRequiredVersion_2438_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_2439_major := uint32(3) // u32
+		minRequiredVersion_2439_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2439_major, minRequiredVersion_2439_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_2440_major := uint32(3) // u32
+		minRequiredVersion_2440_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2440_major, minRequiredVersion_2440_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_2441_major := uint32(2) // u32
+		minRequiredVersion_2441_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2441_major, minRequiredVersion_2441_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_2442_major := uint32(2) // u32
+		minRequiredVersion_2442_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2442_major, minRequiredVersion_2442_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_2443_major := uint32(2) // u32
+		minRequiredVersion_2443_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2443_major, minRequiredVersion_2443_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2444_major := uint32(3) // u32
+		minRequiredVersion_2444_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2444_major, minRequiredVersion_2444_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2445_major := uint32(3) // u32
+		minRequiredVersion_2445_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2445_major, minRequiredVersion_2445_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_2446_major := uint32(3) // u32
+		minRequiredVersion_2446_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2446_major, minRequiredVersion_2446_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_2447_major := uint32(2) // u32
+		minRequiredVersion_2447_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2447_major, minRequiredVersion_2447_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_2448_major := uint32(2) // u32
+		minRequiredVersion_2448_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2448_major, minRequiredVersion_2448_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_2449_major := uint32(2) // u32
+		minRequiredVersion_2449_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2449_major, minRequiredVersion_2449_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_2450_major := uint32(2) // u32
+		minRequiredVersion_2450_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2450_major, minRequiredVersion_2450_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_2451_major := uint32(2) // u32
+		minRequiredVersion_2451_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2451_major, minRequiredVersion_2451_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_2452_major := uint32(2) // u32
+		minRequiredVersion_2452_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2452_major, minRequiredVersion_2452_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_2453_major := uint32(3) // u32
+		minRequiredVersion_2453_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2453_major, minRequiredVersion_2453_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_2454_major := uint32(2) // u32
+		minRequiredVersion_2454_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2454_major, minRequiredVersion_2454_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_2455_major := uint32(3) // u32
+		minRequiredVersion_2455_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2455_major, minRequiredVersion_2455_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2456_major := uint32(2) // u32
+		minRequiredVersion_2456_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2456_major, minRequiredVersion_2456_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2457_major := uint32(2) // u32
+		minRequiredVersion_2457_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2457_major, minRequiredVersion_2457_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_2458_major := uint32(3) // u32
+		minRequiredVersion_2458_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2458_major, minRequiredVersion_2458_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_2459_major := uint32(3) // u32
+		minRequiredVersion_2459_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2459_major, minRequiredVersion_2459_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_2460_major := uint32(2) // u32
+		minRequiredVersion_2460_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2460_major, minRequiredVersion_2460_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_2461_major := uint32(2) // u32
+		minRequiredVersion_2461_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2461_major, minRequiredVersion_2461_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_2462_major := uint32(2) // u32
+		minRequiredVersion_2462_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2462_major, minRequiredVersion_2462_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_2463_major := uint32(3) // u32
+		minRequiredVersion_2463_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2463_major, minRequiredVersion_2463_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_2464_major := uint32(2) // u32
+		minRequiredVersion_2464_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2464_major, minRequiredVersion_2464_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_2465_major := uint32(2) // u32
+		minRequiredVersion_2465_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2465_major, minRequiredVersion_2465_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_2466_major := uint32(3) // u32
+		minRequiredVersion_2466_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2466_major, minRequiredVersion_2466_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_2467_major := uint32(2) // u32
+		minRequiredVersion_2467_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2467_major, minRequiredVersion_2467_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_2468_major := uint32(3) // u32
+		minRequiredVersion_2468_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2468_major, minRequiredVersion_2468_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_2469_major := uint32(3) // u32
+		minRequiredVersion_2469_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2469_major, minRequiredVersion_2469_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_2470_major := uint32(3) // u32
+		minRequiredVersion_2470_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2470_major, minRequiredVersion_2470_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_2471_major := uint32(3) // u32
+		minRequiredVersion_2471_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2471_major, minRequiredVersion_2471_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_2472_major := uint32(3) // u32
+		minRequiredVersion_2472_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2472_major, minRequiredVersion_2472_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_2473_major := uint32(3) // u32
+		minRequiredVersion_2473_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2473_major, minRequiredVersion_2473_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_2474_major := uint32(3) // u32
+		minRequiredVersion_2474_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2474_major, minRequiredVersion_2474_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2475_major := uint32(3) // u32
+		minRequiredVersion_2475_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2475_major, minRequiredVersion_2475_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2476_major := uint32(3) // u32
+		minRequiredVersion_2476_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2476_major, minRequiredVersion_2476_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2477_major := uint32(3) // u32
+		minRequiredVersion_2477_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2477_major, minRequiredVersion_2477_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2478_major := uint32(3) // u32
+		minRequiredVersion_2478_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2478_major, minRequiredVersion_2478_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2479_major := uint32(3) // u32
+		minRequiredVersion_2479_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2479_major, minRequiredVersion_2479_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2480_major := uint32(3) // u32
+		minRequiredVersion_2480_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2480_major, minRequiredVersion_2480_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2481_major := uint32(2) // u32
+		minRequiredVersion_2481_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2481_major, minRequiredVersion_2481_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_2482_major := uint32(3) // u32
+		minRequiredVersion_2482_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2482_major, minRequiredVersion_2482_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2483_major := uint32(3) // u32
+		minRequiredVersion_2483_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2483_major, minRequiredVersion_2483_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2484_major := uint32(3) // u32
+		minRequiredVersion_2484_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2484_major, minRequiredVersion_2484_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_2485_major := uint32(3) // u32
+		minRequiredVersion_2485_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2485_major, minRequiredVersion_2485_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_2486_major := uint32(3) // u32
+		minRequiredVersion_2486_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2486_major, minRequiredVersion_2486_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2487_major := uint32(3) // u32
+		minRequiredVersion_2487_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2487_major, minRequiredVersion_2487_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2488_major := uint32(3) // u32
+		minRequiredVersion_2488_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2488_major, minRequiredVersion_2488_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_2489_major := uint32(3) // u32
+		minRequiredVersion_2489_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2489_major, minRequiredVersion_2489_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2490_major := uint32(3) // u32
+		minRequiredVersion_2490_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2490_major, minRequiredVersion_2490_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_2491_major := uint32(3) // u32
+		minRequiredVersion_2491_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2491_major, minRequiredVersion_2491_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_2492_major := uint32(3) // u32
+		minRequiredVersion_2492_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2492_major, minRequiredVersion_2492_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_2493_major := uint32(3) // u32
+		minRequiredVersion_2493_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2493_major, minRequiredVersion_2493_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_2494_major := uint32(2) // u32
+		minRequiredVersion_2494_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2494_major, minRequiredVersion_2494_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2495_major := uint32(3) // u32
+		minRequiredVersion_2495_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2495_major, minRequiredVersion_2495_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2496_major := uint32(3) // u32
+		minRequiredVersion_2496_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2496_major, minRequiredVersion_2496_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_2497_major := uint32(3) // u32
+		minRequiredVersion_2497_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2497_major, minRequiredVersion_2497_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_2498_major := uint32(3) // u32
+		minRequiredVersion_2498_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2498_major, minRequiredVersion_2498_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_2499_major := uint32(3) // u32
+		minRequiredVersion_2499_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2499_major, minRequiredVersion_2499_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_2500_major := uint32(3) // u32
+		minRequiredVersion_2500_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2500_major, minRequiredVersion_2500_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_2501_major := uint32(3) // u32
+		minRequiredVersion_2501_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2501_major, minRequiredVersion_2501_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2502_major := uint32(3) // u32
+		minRequiredVersion_2502_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2502_major, minRequiredVersion_2502_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_2503_major := uint32(3) // u32
+		minRequiredVersion_2503_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2503_major, minRequiredVersion_2503_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_2504_major := uint32(3) // u32
+		minRequiredVersion_2504_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2504_major, minRequiredVersion_2504_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_2505_major := uint32(3) // u32
+		minRequiredVersion_2505_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2505_major, minRequiredVersion_2505_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2506_major := uint32(3) // u32
+		minRequiredVersion_2506_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2506_major, minRequiredVersion_2506_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2507_major := uint32(3) // u32
+		minRequiredVersion_2507_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2507_major, minRequiredVersion_2507_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_2508_major := uint32(3) // u32
+		minRequiredVersion_2508_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2508_major, minRequiredVersion_2508_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2509_major := uint32(3) // u32
+		minRequiredVersion_2509_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2509_major, minRequiredVersion_2509_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_2510_major := uint32(2) // u32
+		minRequiredVersion_2510_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2510_major, minRequiredVersion_2510_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_2511_major := uint32(3) // u32
+		minRequiredVersion_2511_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2511_major, minRequiredVersion_2511_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_2512_major := uint32(3) // u32
+		minRequiredVersion_2512_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2512_major, minRequiredVersion_2512_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_2513_major := uint32(3) // u32
+		minRequiredVersion_2513_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2513_major, minRequiredVersion_2513_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_2514_major := uint32(3) // u32
+		minRequiredVersion_2514_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2514_major, minRequiredVersion_2514_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2515_major := uint32(3) // u32
+		minRequiredVersion_2515_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2515_major, minRequiredVersion_2515_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_2516_major := uint32(3) // u32
+		minRequiredVersion_2516_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2516_major, minRequiredVersion_2516_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_2517_major := uint32(3) // u32
+		minRequiredVersion_2517_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2517_major, minRequiredVersion_2517_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_2518_major := uint32(3) // u32
+		minRequiredVersion_2518_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2518_major, minRequiredVersion_2518_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_2519_major := uint32(3) // u32
+		minRequiredVersion_2519_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2519_major, minRequiredVersion_2519_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_2520_major := uint32(3) // u32
+		minRequiredVersion_2520_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2520_major, minRequiredVersion_2520_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_2521_major := uint32(3) // u32
+		minRequiredVersion_2521_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2521_major, minRequiredVersion_2521_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2522_major := uint32(3) // u32
+		minRequiredVersion_2522_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2522_major, minRequiredVersion_2522_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2523_major := uint32(3) // u32
+		minRequiredVersion_2523_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2523_major, minRequiredVersion_2523_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2524_major := uint32(3) // u32
+		minRequiredVersion_2524_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2524_major, minRequiredVersion_2524_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_2525_major := uint32(3) // u32
+		minRequiredVersion_2525_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2525_major, minRequiredVersion_2525_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2526_major := uint32(3) // u32
+		minRequiredVersion_2526_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2526_major, minRequiredVersion_2526_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_2527_major := uint32(3) // u32
+		minRequiredVersion_2527_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2527_major, minRequiredVersion_2527_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_2528_major := uint32(3) // u32
+		minRequiredVersion_2528_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2528_major, minRequiredVersion_2528_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2529_major := uint32(3) // u32
+		minRequiredVersion_2529_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2529_major, minRequiredVersion_2529_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_2530_major := uint32(2) // u32
+		minRequiredVersion_2530_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2530_major, minRequiredVersion_2530_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_2531_major := uint32(3) // u32
+		minRequiredVersion_2531_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2531_major, minRequiredVersion_2531_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_2532_major := uint32(3) // u32
+		minRequiredVersion_2532_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2532_major, minRequiredVersion_2532_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_2533_major := uint32(3) // u32
+		minRequiredVersion_2533_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2533_major, minRequiredVersion_2533_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_2534_major := uint32(3) // u32
+		minRequiredVersion_2534_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2534_major, minRequiredVersion_2534_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_2535_major := uint32(3) // u32
+		minRequiredVersion_2535_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2535_major, minRequiredVersion_2535_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2536_major := uint32(3) // u32
+		minRequiredVersion_2536_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2536_major, minRequiredVersion_2536_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_2537_major := uint32(3) // u32
+		minRequiredVersion_2537_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2537_major, minRequiredVersion_2537_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_2538_major := uint32(3) // u32
+		minRequiredVersion_2538_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2538_major, minRequiredVersion_2538_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_2539_major := uint32(3) // u32
+		minRequiredVersion_2539_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2539_major, minRequiredVersion_2539_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2540_major := uint32(3) // u32
+		minRequiredVersion_2540_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2540_major, minRequiredVersion_2540_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2541_major := uint32(3) // u32
+		minRequiredVersion_2541_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2541_major, minRequiredVersion_2541_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2542_major := uint32(3) // u32
+		minRequiredVersion_2542_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2542_major, minRequiredVersion_2542_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2543_major := uint32(3) // u32
+		minRequiredVersion_2543_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2543_major, minRequiredVersion_2543_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_2544_major := uint32(3) // u32
+		minRequiredVersion_2544_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2544_major, minRequiredVersion_2544_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2545_major := uint32(3) // u32
+		minRequiredVersion_2545_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2545_major, minRequiredVersion_2545_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2546_major := uint32(3) // u32
+		minRequiredVersion_2546_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2546_major, minRequiredVersion_2546_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_2547_major := uint32(3) // u32
+		minRequiredVersion_2547_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2547_major, minRequiredVersion_2547_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_2548_major := uint32(3) // u32
+		minRequiredVersion_2548_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2548_major, minRequiredVersion_2548_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_2549_major := uint32(3) // u32
+		minRequiredVersion_2549_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2549_major, minRequiredVersion_2549_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_2550_major := uint32(3) // u32
+		minRequiredVersion_2550_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2550_major, minRequiredVersion_2550_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2551_major := uint32(3) // u32
+		minRequiredVersion_2551_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2551_major, minRequiredVersion_2551_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2552_major := uint32(3) // u32
+		minRequiredVersion_2552_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2552_major, minRequiredVersion_2552_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_2553_major := uint32(3) // u32
+		minRequiredVersion_2553_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2553_major, minRequiredVersion_2553_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2554_major := uint32(3) // u32
+		minRequiredVersion_2554_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2554_major, minRequiredVersion_2554_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_2555_major := uint32(3) // u32
+		minRequiredVersion_2555_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2555_major, minRequiredVersion_2555_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_2556_major := uint32(3) // u32
+		minRequiredVersion_2556_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2556_major, minRequiredVersion_2556_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_2557_major := uint32(3) // u32
+		minRequiredVersion_2557_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2557_major, minRequiredVersion_2557_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2558_major := uint32(2) // u32
+		minRequiredVersion_2558_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2558_major, minRequiredVersion_2558_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_2559_major := uint32(3) // u32
+		minRequiredVersion_2559_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2559_major, minRequiredVersion_2559_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_2560_major := uint32(2) // u32
+		minRequiredVersion_2560_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2560_major, minRequiredVersion_2560_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_2561_major := uint32(3) // u32
+		minRequiredVersion_2561_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2561_major, minRequiredVersion_2561_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_2562_major := uint32(3) // u32
+		minRequiredVersion_2562_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2562_major, minRequiredVersion_2562_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_2563_major := uint32(3) // u32
+		minRequiredVersion_2563_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2563_major, minRequiredVersion_2563_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_2564_major := uint32(3) // u32
+		minRequiredVersion_2564_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2564_major, minRequiredVersion_2564_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_2565_major := uint32(3) // u32
+		minRequiredVersion_2565_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2565_major, minRequiredVersion_2565_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_2566_major := uint32(3) // u32
+		minRequiredVersion_2566_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2566_major, minRequiredVersion_2566_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_2567_major := uint32(3) // u32
+		minRequiredVersion_2567_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2567_major, minRequiredVersion_2567_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_2568_major := uint32(2) // u32
+		minRequiredVersion_2568_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2568_major, minRequiredVersion_2568_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_2569_major := uint32(3) // u32
+		minRequiredVersion_2569_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2569_major, minRequiredVersion_2569_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_2570_major := uint32(3) // u32
+		minRequiredVersion_2570_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2570_major, minRequiredVersion_2570_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_2571_major := uint32(3) // u32
+		minRequiredVersion_2571_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2571_major, minRequiredVersion_2571_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_2572_major := uint32(2) // u32
+		minRequiredVersion_2572_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2572_major, minRequiredVersion_2572_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_2573_major := uint32(3) // u32
+		minRequiredVersion_2573_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2573_major, minRequiredVersion_2573_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_2574_major := uint32(3) // u32
+		minRequiredVersion_2574_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2574_major, minRequiredVersion_2574_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2575_major := uint32(3) // u32
+		minRequiredVersion_2575_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2575_major, minRequiredVersion_2575_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2576_major := uint32(2) // u32
+		minRequiredVersion_2576_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2576_major, minRequiredVersion_2576_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_2577_major := uint32(3) // u32
+		minRequiredVersion_2577_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2577_major, minRequiredVersion_2577_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2578_major := uint32(3) // u32
+		minRequiredVersion_2578_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2578_major, minRequiredVersion_2578_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_2579_major := uint32(2) // u32
+		minRequiredVersion_2579_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2579_major, minRequiredVersion_2579_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_2580_major := uint32(2) // u32
+		minRequiredVersion_2580_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2580_major, minRequiredVersion_2580_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2581_major := uint32(3) // u32
+		minRequiredVersion_2581_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2581_major, minRequiredVersion_2581_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2582_major := uint32(3) // u32
+		minRequiredVersion_2582_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2582_major, minRequiredVersion_2582_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_2583_major := uint32(3) // u32
+		minRequiredVersion_2583_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2583_major, minRequiredVersion_2583_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_2584_major := uint32(3) // u32
+		minRequiredVersion_2584_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2584_major, minRequiredVersion_2584_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_2585_major := uint32(3) // u32
+		minRequiredVersion_2585_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2585_major, minRequiredVersion_2585_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2586_major := uint32(2) // u32
+		minRequiredVersion_2586_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2586_major, minRequiredVersion_2586_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_2587_major := uint32(3) // u32
+		minRequiredVersion_2587_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2587_major, minRequiredVersion_2587_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2588_major := uint32(3) // u32
+		minRequiredVersion_2588_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2588_major, minRequiredVersion_2588_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2589_major := uint32(2) // u32
+		minRequiredVersion_2589_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2589_major, minRequiredVersion_2589_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_2590_major := uint32(2) // u32
+		minRequiredVersion_2590_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2590_major, minRequiredVersion_2590_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_2591_major := uint32(3) // u32
+		minRequiredVersion_2591_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2591_major, minRequiredVersion_2591_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_2592_major := uint32(3) // u32
+		minRequiredVersion_2592_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2592_major, minRequiredVersion_2592_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_2593_major := uint32(3) // u32
+		minRequiredVersion_2593_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2593_major, minRequiredVersion_2593_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_2594_major := uint32(3) // u32
+		minRequiredVersion_2594_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2594_major, minRequiredVersion_2594_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_2595_major := uint32(3) // u32
+		minRequiredVersion_2595_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2595_major, minRequiredVersion_2595_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_2596_major := uint32(3) // u32
+		minRequiredVersion_2596_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2596_major, minRequiredVersion_2596_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_2597_major := uint32(2) // u32
+		minRequiredVersion_2597_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2597_major, minRequiredVersion_2597_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_2598_major := uint32(2) // u32
+		minRequiredVersion_2598_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2598_major, minRequiredVersion_2598_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_2599_major := uint32(2) // u32
+		minRequiredVersion_2599_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2599_major, minRequiredVersion_2599_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_2600_major := uint32(3) // u32
+		minRequiredVersion_2600_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2600_major, minRequiredVersion_2600_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_2601_major := uint32(3) // u32
+		minRequiredVersion_2601_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2601_major, minRequiredVersion_2601_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2602_major := uint32(3) // u32
+		minRequiredVersion_2602_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2602_major, minRequiredVersion_2602_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_2603_major := uint32(3) // u32
+		minRequiredVersion_2603_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2603_major, minRequiredVersion_2603_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_2604_major := uint32(3) // u32
+		minRequiredVersion_2604_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2604_major, minRequiredVersion_2604_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_2605_major := uint32(3) // u32
+		minRequiredVersion_2605_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2605_major, minRequiredVersion_2605_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2606_major := uint32(3) // u32
+		minRequiredVersion_2606_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2606_major, minRequiredVersion_2606_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_2607_major := uint32(2) // u32
+		minRequiredVersion_2607_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2607_major, minRequiredVersion_2607_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_2608_major := uint32(2) // u32
+		minRequiredVersion_2608_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2608_major, minRequiredVersion_2608_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_2609_major := uint32(3) // u32
+		minRequiredVersion_2609_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2609_major, minRequiredVersion_2609_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_2610_major := uint32(2) // u32
+		minRequiredVersion_2610_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2610_major, minRequiredVersion_2610_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_2611_major := uint32(2) // u32
+		minRequiredVersion_2611_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2611_major, minRequiredVersion_2611_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_2612_major := uint32(2) // u32
+		minRequiredVersion_2612_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2612_major, minRequiredVersion_2612_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_2613_major := uint32(2) // u32
+		minRequiredVersion_2613_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2613_major, minRequiredVersion_2613_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_2614_major := uint32(2) // u32
+		minRequiredVersion_2614_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2614_major, minRequiredVersion_2614_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_2615_major := uint32(3) // u32
+		minRequiredVersion_2615_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2615_major, minRequiredVersion_2615_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_2616_major := uint32(3) // u32
+		minRequiredVersion_2616_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2616_major, minRequiredVersion_2616_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_2617_major := uint32(2) // u32
+		minRequiredVersion_2617_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2617_major, minRequiredVersion_2617_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_2618_major := uint32(2) // u32
+		minRequiredVersion_2618_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2618_major, minRequiredVersion_2618_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_2619_major := uint32(2) // u32
+		minRequiredVersion_2619_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2619_major, minRequiredVersion_2619_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2620_major := uint32(2) // u32
+		minRequiredVersion_2620_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2620_major, minRequiredVersion_2620_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_2621_major := uint32(2) // u32
+		minRequiredVersion_2621_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2621_major, minRequiredVersion_2621_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_2622_major := uint32(3) // u32
+		minRequiredVersion_2622_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2622_major, minRequiredVersion_2622_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2623_major := uint32(3) // u32
+		minRequiredVersion_2623_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2623_major, minRequiredVersion_2623_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_2624_major := uint32(3) // u32
+		minRequiredVersion_2624_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2624_major, minRequiredVersion_2624_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_2625_major := uint32(3) // u32
+		minRequiredVersion_2625_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2625_major, minRequiredVersion_2625_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_2626_major := uint32(2) // u32
+		minRequiredVersion_2626_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2626_major, minRequiredVersion_2626_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_2627_major := uint32(2) // u32
+		minRequiredVersion_2627_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2627_major, minRequiredVersion_2627_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_2628_major := uint32(2) // u32
+		minRequiredVersion_2628_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2628_major, minRequiredVersion_2628_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_2629_major := uint32(2) // u32
+		minRequiredVersion_2629_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2629_major, minRequiredVersion_2629_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_2630_major := uint32(2) // u32
+		minRequiredVersion_2630_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2630_major, minRequiredVersion_2630_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_2631_major := uint32(2) // u32
+		minRequiredVersion_2631_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2631_major, minRequiredVersion_2631_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_2632_major := uint32(2) // u32
+		minRequiredVersion_2632_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2632_major, minRequiredVersion_2632_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_2633_major := uint32(2) // u32
+		minRequiredVersion_2633_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2633_major, minRequiredVersion_2633_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_2634_major := uint32(2) // u32
+		minRequiredVersion_2634_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2634_major, minRequiredVersion_2634_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_2635_major := uint32(2) // u32
+		minRequiredVersion_2635_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2635_major, minRequiredVersion_2635_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_2636_major := uint32(2) // u32
+		minRequiredVersion_2636_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2636_major, minRequiredVersion_2636_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_2637_major := uint32(2) // u32
+		minRequiredVersion_2637_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2637_major, minRequiredVersion_2637_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_2638_major := uint32(2) // u32
+		minRequiredVersion_2638_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2638_major, minRequiredVersion_2638_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_2639_major := uint32(2) // u32
+		minRequiredVersion_2639_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2639_major, minRequiredVersion_2639_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_2640_major := uint32(2) // u32
+		minRequiredVersion_2640_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2640_major, minRequiredVersion_2640_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_2641_major := uint32(2) // u32
+		minRequiredVersion_2641_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2641_major, minRequiredVersion_2641_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_2642_major := uint32(2) // u32
+		minRequiredVersion_2642_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2642_major, minRequiredVersion_2642_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_2643_major := uint32(2) // u32
+		minRequiredVersion_2643_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2643_major, minRequiredVersion_2643_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_2644_major := uint32(2) // u32
+		minRequiredVersion_2644_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2644_major, minRequiredVersion_2644_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_2645_major := uint32(3) // u32
+		minRequiredVersion_2645_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2645_major, minRequiredVersion_2645_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_2646_major := uint32(3) // u32
+		minRequiredVersion_2646_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2646_major, minRequiredVersion_2646_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_2647_major := uint32(3) // u32
+		minRequiredVersion_2647_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2647_major, minRequiredVersion_2647_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_2648_major := uint32(3) // u32
+		minRequiredVersion_2648_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2648_major, minRequiredVersion_2648_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_2649_major := uint32(3) // u32
+		minRequiredVersion_2649_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2649_major, minRequiredVersion_2649_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_2650_major := uint32(2) // u32
+		minRequiredVersion_2650_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2650_major, minRequiredVersion_2650_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_2651_major := uint32(3) // u32
+		minRequiredVersion_2651_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2651_major, minRequiredVersion_2651_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_2652_major := uint32(3) // u32
+		minRequiredVersion_2652_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2652_major, minRequiredVersion_2652_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2653_major := uint32(3) // u32
+		minRequiredVersion_2653_minor := uint32(2) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2653_major, minRequiredVersion_2653_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_2654_major := uint32(3) // u32
+		minRequiredVersion_2654_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2654_major, minRequiredVersion_2654_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_2655_major := uint32(3) // u32
+		minRequiredVersion_2655_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2655_major, minRequiredVersion_2655_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_2656_major := uint32(3) // u32
+		minRequiredVersion_2656_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2656_major, minRequiredVersion_2656_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_2657_major := uint32(3) // u32
+		minRequiredVersion_2657_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2657_major, minRequiredVersion_2657_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_2658_major := uint32(3) // u32
+		minRequiredVersion_2658_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2658_major, minRequiredVersion_2658_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_2659_major := uint32(3) // u32
+		minRequiredVersion_2659_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2659_major, minRequiredVersion_2659_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_2660_major := uint32(3) // u32
+		minRequiredVersion_2660_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2660_major, minRequiredVersion_2660_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2661_major := uint32(3) // u32
+		minRequiredVersion_2661_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2661_major, minRequiredVersion_2661_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_2662_major := uint32(3) // u32
+		minRequiredVersion_2662_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2662_major, minRequiredVersion_2662_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_2663_major := uint32(3) // u32
+		minRequiredVersion_2663_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2663_major, minRequiredVersion_2663_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_2664_major := uint32(2) // u32
+		minRequiredVersion_2664_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2664_major, minRequiredVersion_2664_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_2665_major := uint32(3) // u32
+		minRequiredVersion_2665_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2665_major, minRequiredVersion_2665_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_2666_major := uint32(3) // u32
+		minRequiredVersion_2666_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2666_major, minRequiredVersion_2666_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_2667_major := uint32(3) // u32
+		minRequiredVersion_2667_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2667_major, minRequiredVersion_2667_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_2668_major := uint32(3) // u32
+		minRequiredVersion_2668_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2668_major, minRequiredVersion_2668_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_2669_major := uint32(3) // u32
+		minRequiredVersion_2669_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2669_major, minRequiredVersion_2669_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_2670_major := uint32(3) // u32
+		minRequiredVersion_2670_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2670_major, minRequiredVersion_2670_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_2671_major := uint32(3) // u32
+		minRequiredVersion_2671_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2671_major, minRequiredVersion_2671_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_2672_major := uint32(3) // u32
+		minRequiredVersion_2672_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2672_major, minRequiredVersion_2672_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_2673_major := uint32(3) // u32
+		minRequiredVersion_2673_minor := uint32(1) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2673_major, minRequiredVersion_2673_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_2674_major := uint32(2) // u32
+		minRequiredVersion_2674_minor := uint32(0) // u32
+		observeGlGetWrites_2419_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2674_major, minRequiredVersion_2674_minor
+	default:
+		glErrorInvalidEnum_2675_param := observeGlGetWrites_2419_param // GLenum
+		return
+		_ = glErrorInvalidEnum_2675_param
+	}
+	_, _, _, _ = minRequiredVersion_2418_major, minRequiredVersion_2418_minor, observeGlGetWrites_2419_param, observeGlGetWrites_2419_v
 	return nil
 }
 
@@ -15791,36 +23377,17 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1153_major := uint32(2) // u32
-	minRequiredVersion_1153_minor := uint32(0) // u32
-	switch ϟa.Param {
-	case GLenum_GL_ACTIVE_TEXTURE, GLenum_GL_ALIASED_LINE_WIDTH_RANGE, GLenum_GL_ALIASED_POINT_SIZE_RANGE, GLenum_GL_ALPHA_BITS, GLenum_GL_ARRAY_BUFFER_BINDING, GLenum_GL_BLEND, GLenum_GL_BLEND_COLOR, GLenum_GL_BLEND_DST_ALPHA, GLenum_GL_BLEND_DST_RGB, GLenum_GL_BLEND_EQUATION_ALPHA, GLenum_GL_BLEND_EQUATION_RGB, GLenum_GL_BLEND_SRC_ALPHA, GLenum_GL_BLEND_SRC_RGB, GLenum_GL_BLUE_BITS, GLenum_GL_COLOR_CLEAR_VALUE, GLenum_GL_COLOR_WRITEMASK, GLenum_GL_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_CULL_FACE, GLenum_GL_CULL_FACE_MODE, GLenum_GL_CURRENT_PROGRAM, GLenum_GL_DEPTH_BITS, GLenum_GL_DEPTH_CLEAR_VALUE, GLenum_GL_DEPTH_FUNC, GLenum_GL_DEPTH_RANGE, GLenum_GL_DEPTH_TEST, GLenum_GL_DEPTH_WRITEMASK, GLenum_GL_DITHER, GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING, GLenum_GL_DRAW_FRAMEBUFFER_BINDING, GLenum_GL_FRONT_FACE, GLenum_GL_GENERATE_MIPMAP_HINT, GLenum_GL_GREEN_BITS, GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT, GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE, GLenum_GL_LINE_WIDTH, GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE, GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS, GLenum_GL_MAX_RENDERBUFFER_SIZE, GLenum_GL_MAX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TEXTURE_SIZE, GLenum_GL_MAX_VARYING_VECTORS, GLenum_GL_MAX_VERTEX_ATTRIBS, GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS, GLenum_GL_MAX_VIEWPORT_DIMS, GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLenum_GL_NUM_SHADER_BINARY_FORMATS, GLenum_GL_PACK_ALIGNMENT, GLenum_GL_POLYGON_OFFSET_FACTOR, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_POLYGON_OFFSET_UNITS, GLenum_GL_RED_BITS, GLenum_GL_RENDERBUFFER_BINDING, GLenum_GL_SAMPLES, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_BUFFERS, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_COVERAGE_INVERT, GLenum_GL_SAMPLE_COVERAGE_VALUE, GLenum_GL_SCISSOR_BOX, GLenum_GL_SCISSOR_TEST, GLenum_GL_SHADER_BINARY_FORMATS, GLenum_GL_SHADER_COMPILER, GLenum_GL_STENCIL_BACK_FAIL, GLenum_GL_STENCIL_BACK_FUNC, GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS, GLenum_GL_STENCIL_BACK_REF, GLenum_GL_STENCIL_BACK_VALUE_MASK, GLenum_GL_STENCIL_BACK_WRITEMASK, GLenum_GL_STENCIL_BITS, GLenum_GL_STENCIL_CLEAR_VALUE, GLenum_GL_STENCIL_FAIL, GLenum_GL_STENCIL_FUNC, GLenum_GL_STENCIL_PASS_DEPTH_FAIL, GLenum_GL_STENCIL_PASS_DEPTH_PASS, GLenum_GL_STENCIL_REF, GLenum_GL_STENCIL_TEST, GLenum_GL_STENCIL_VALUE_MASK, GLenum_GL_STENCIL_WRITEMASK, GLenum_GL_SUBPIXEL_BITS, GLenum_GL_TEXTURE_BINDING_2D, GLenum_GL_TEXTURE_BINDING_CUBE_MAP, GLenum_GL_UNPACK_ALIGNMENT, GLenum_GL_VIEWPORT:
-	case GLenum_GL_COPY_READ_BUFFER_BINDING, GLenum_GL_COPY_WRITE_BUFFER_BINDING, GLenum_GL_DRAW_BUFFER, GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GLenum_GL_MAJOR_VERSION, GLenum_GL_MAX_3D_TEXTURE_SIZE, GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS, GLenum_GL_MAX_COLOR_ATTACHMENTS, GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS, GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MAX_DRAW_BUFFERS, GLenum_GL_MAX_ELEMENTS_INDICES, GLenum_GL_MAX_ELEMENTS_VERTICES, GLenum_GL_MAX_ELEMENT_INDEX, GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS, GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS, GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET, GLenum_GL_MAX_SAMPLES, GLenum_GL_MAX_SERVER_WAIT_TIMEOUT, GLenum_GL_MAX_TEXTURE_LOD_BIAS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS, GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS, GLenum_GL_MAX_UNIFORM_BLOCK_SIZE, GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS, GLenum_GL_MAX_VARYING_COMPONENTS, GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS, GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS, GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS, GLenum_GL_MINOR_VERSION, GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET, GLenum_GL_NUM_EXTENSIONS, GLenum_GL_NUM_PROGRAM_BINARY_FORMATS, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_PIXEL_PACK_BUFFER_BINDING, GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_PROGRAM_BINARY_FORMATS, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_READ_BUFFER, GLenum_GL_READ_FRAMEBUFFER_BINDING, GLenum_GL_SAMPLER_BINDING, GLenum_GL_TEXTURE_BINDING_2D_ARRAY, GLenum_GL_TEXTURE_BINDING_3D, GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE, GLenum_GL_TRANSFORM_FEEDBACK_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START, GLenum_GL_TRANSFORM_FEEDBACK_PAUSED, GLenum_GL_UNIFORM_BUFFER_BINDING, GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_UNIFORM_BUFFER_SIZE, GLenum_GL_UNIFORM_BUFFER_START, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS, GLenum_GL_VERTEX_ARRAY_BINDING:
-		minRequiredVersion_1154_major := uint32(3) // u32
-		minRequiredVersion_1154_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1154_major, minRequiredVersion_1154_minor
-	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING, GLenum_GL_IMAGE_BINDING_LAYERED, GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES, GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS, GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS, GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS, GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT, GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS, GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_FRAMEBUFFER_HEIGHT, GLenum_GL_MAX_FRAMEBUFFER_SAMPLES, GLenum_GL_MAX_FRAMEBUFFER_WIDTH, GLenum_GL_MAX_INTEGER_SAMPLES, GLenum_GL_MAX_SAMPLE_MASK_WORDS, GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE, GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, GLenum_GL_MAX_UNIFORM_LOCATIONS, GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS, GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS, GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, GLenum_GL_PROGRAM_PIPELINE_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_BINDING, GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT, GLenum_GL_SHADER_STORAGE_BUFFER_SIZE, GLenum_GL_SHADER_STORAGE_BUFFER_START, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE, GLenum_GL_VERTEX_BINDING_DIVISOR, GLenum_GL_VERTEX_BINDING_OFFSET, GLenum_GL_VERTEX_BINDING_STRIDE:
-		minRequiredVersion_1155_major := uint32(3) // u32
-		minRequiredVersion_1155_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1155_major, minRequiredVersion_1155_minor
-	case GLenum_GL_CONTEXT_FLAGS, GLenum_GL_CONTEXT_ROBUST_ACCESS, GLenum_GL_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_DEBUG_LOGGED_MESSAGES, GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH, GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS, GLenum_GL_LAYER_PROVOKING_VERTEX, GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS, GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH, GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES, GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH, GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS, GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MAX_FRAMEBUFFER_LAYERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS, GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS, GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES, GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS, GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS, GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS, GLenum_GL_MAX_LABEL_LENGTH, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS, GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS, GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS, GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS, GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS, GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS, GLenum_GL_MAX_TESS_GEN_LEVEL, GLenum_GL_MAX_TESS_PATCH_COMPONENTS, GLenum_GL_MAX_TEXTURE_BUFFER_SIZE, GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS, GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET, GLenum_GL_MIN_SAMPLE_SHADING_VALUE, GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE, GLenum_GL_PATCH_VERTICES, GLenum_GL_PRIMITIVE_BOUNDING_BOX, GLenum_GL_RESET_NOTIFICATION_STRATEGY, GLenum_GL_SAMPLE_SHADING, GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BINDING_BUFFER, GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY, GLenum_GL_TEXTURE_BUFFER_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-		minRequiredVersion_1156_major := uint32(3) // u32
-		minRequiredVersion_1156_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1156_major, minRequiredVersion_1156_minor
-	default:
-		glErrorInvalidEnum_1157_param := ϟa.Param // GLenum
-		return
-		_ = glErrorInvalidEnum_1157_param
-	}
+	minRequiredVersion_2676_major := uint32(2)                                                                  // u32
+	minRequiredVersion_2676_minor := uint32(0)                                                                  // u32
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLintˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1159_msg := "No context bound" // string
+		error_2678_msg := "No context bound" // string
 		return
-		_ = error_1159_msg
+		_ = error_2678_msg
 	}
-	GetContext_1158_result := context // Contextʳ
-	ctx := GetContext_1158_result     // Contextʳ
+	GetContext_2677_result := context // Contextʳ
+	ctx := GetContext_2677_result     // Contextʳ
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetIntegerv)
@@ -15979,7 +23546,1287 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	_, _, _, _, _, _ = minRequiredVersion_1153_major, minRequiredVersion_1153_minor, v, context, GetContext_1158_result, ctx
+	observeGlGetWrites_2679_param := ϟa.Param // GLenum
+	observeGlGetWrites_2679_v := ϟa.Values    // GLintᵖ
+	switch observeGlGetWrites_2679_param {
+	case GLenum_GL_ACTIVE_TEXTURE:
+		minRequiredVersion_2680_major := uint32(2) // u32
+		minRequiredVersion_2680_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2680_major, minRequiredVersion_2680_minor
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
+		minRequiredVersion_2681_major := uint32(2) // u32
+		minRequiredVersion_2681_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2681_major, minRequiredVersion_2681_minor
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
+		minRequiredVersion_2682_major := uint32(2) // u32
+		minRequiredVersion_2682_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2682_major, minRequiredVersion_2682_minor
+	case GLenum_GL_ALPHA_BITS:
+		minRequiredVersion_2683_major := uint32(2) // u32
+		minRequiredVersion_2683_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2683_major, minRequiredVersion_2683_minor
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2684_major := uint32(2) // u32
+		minRequiredVersion_2684_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2684_major, minRequiredVersion_2684_minor
+	case GLenum_GL_BLEND:
+		minRequiredVersion_2685_major := uint32(2) // u32
+		minRequiredVersion_2685_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2685_major, minRequiredVersion_2685_minor
+	case GLenum_GL_BLEND_COLOR:
+		minRequiredVersion_2686_major := uint32(2) // u32
+		minRequiredVersion_2686_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2686_major, minRequiredVersion_2686_minor
+	case GLenum_GL_BLEND_DST_ALPHA:
+		minRequiredVersion_2687_major := uint32(2) // u32
+		minRequiredVersion_2687_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2687_major, minRequiredVersion_2687_minor
+	case GLenum_GL_BLEND_DST_RGB:
+		minRequiredVersion_2688_major := uint32(2) // u32
+		minRequiredVersion_2688_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2688_major, minRequiredVersion_2688_minor
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
+		minRequiredVersion_2689_major := uint32(2) // u32
+		minRequiredVersion_2689_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2689_major, minRequiredVersion_2689_minor
+	case GLenum_GL_BLEND_EQUATION_RGB:
+		minRequiredVersion_2690_major := uint32(2) // u32
+		minRequiredVersion_2690_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2690_major, minRequiredVersion_2690_minor
+	case GLenum_GL_BLEND_SRC_ALPHA:
+		minRequiredVersion_2691_major := uint32(2) // u32
+		minRequiredVersion_2691_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2691_major, minRequiredVersion_2691_minor
+	case GLenum_GL_BLEND_SRC_RGB:
+		minRequiredVersion_2692_major := uint32(2) // u32
+		minRequiredVersion_2692_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2692_major, minRequiredVersion_2692_minor
+	case GLenum_GL_BLUE_BITS:
+		minRequiredVersion_2693_major := uint32(2) // u32
+		minRequiredVersion_2693_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2693_major, minRequiredVersion_2693_minor
+	case GLenum_GL_COLOR_CLEAR_VALUE:
+		minRequiredVersion_2694_major := uint32(2) // u32
+		minRequiredVersion_2694_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2694_major, minRequiredVersion_2694_minor
+	case GLenum_GL_COLOR_WRITEMASK:
+		minRequiredVersion_2695_major := uint32(2) // u32
+		minRequiredVersion_2695_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2695_major, minRequiredVersion_2695_minor
+	case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2696_major := uint32(2) // u32
+		minRequiredVersion_2696_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2696_major, minRequiredVersion_2696_minor
+	case GLenum_GL_CONTEXT_FLAGS:
+		minRequiredVersion_2697_major := uint32(3) // u32
+		minRequiredVersion_2697_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2697_major, minRequiredVersion_2697_minor
+	case GLenum_GL_CONTEXT_ROBUST_ACCESS:
+		minRequiredVersion_2698_major := uint32(3) // u32
+		minRequiredVersion_2698_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2698_major, minRequiredVersion_2698_minor
+	case GLenum_GL_COPY_READ_BUFFER_BINDING:
+		minRequiredVersion_2699_major := uint32(3) // u32
+		minRequiredVersion_2699_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2699_major, minRequiredVersion_2699_minor
+	case GLenum_GL_COPY_WRITE_BUFFER_BINDING:
+		minRequiredVersion_2700_major := uint32(3) // u32
+		minRequiredVersion_2700_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2700_major, minRequiredVersion_2700_minor
+	case GLenum_GL_CULL_FACE:
+		minRequiredVersion_2701_major := uint32(2) // u32
+		minRequiredVersion_2701_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2701_major, minRequiredVersion_2701_minor
+	case GLenum_GL_CULL_FACE_MODE:
+		minRequiredVersion_2702_major := uint32(2) // u32
+		minRequiredVersion_2702_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2702_major, minRequiredVersion_2702_minor
+	case GLenum_GL_CURRENT_PROGRAM:
+		minRequiredVersion_2703_major := uint32(2) // u32
+		minRequiredVersion_2703_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2703_major, minRequiredVersion_2703_minor
+	case GLenum_GL_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2704_major := uint32(3) // u32
+		minRequiredVersion_2704_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2704_major, minRequiredVersion_2704_minor
+	case GLenum_GL_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2705_major := uint32(3) // u32
+		minRequiredVersion_2705_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2705_major, minRequiredVersion_2705_minor
+	case GLenum_GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH:
+		minRequiredVersion_2706_major := uint32(3) // u32
+		minRequiredVersion_2706_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2706_major, minRequiredVersion_2706_minor
+	case GLenum_GL_DEPTH_BITS:
+		minRequiredVersion_2707_major := uint32(2) // u32
+		minRequiredVersion_2707_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2707_major, minRequiredVersion_2707_minor
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
+		minRequiredVersion_2708_major := uint32(2) // u32
+		minRequiredVersion_2708_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2708_major, minRequiredVersion_2708_minor
+	case GLenum_GL_DEPTH_FUNC:
+		minRequiredVersion_2709_major := uint32(2) // u32
+		minRequiredVersion_2709_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2709_major, minRequiredVersion_2709_minor
+	case GLenum_GL_DEPTH_RANGE:
+		minRequiredVersion_2710_major := uint32(2) // u32
+		minRequiredVersion_2710_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2710_major, minRequiredVersion_2710_minor
+	case GLenum_GL_DEPTH_TEST:
+		minRequiredVersion_2711_major := uint32(2) // u32
+		minRequiredVersion_2711_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2711_major, minRequiredVersion_2711_minor
+	case GLenum_GL_DEPTH_WRITEMASK:
+		minRequiredVersion_2712_major := uint32(2) // u32
+		minRequiredVersion_2712_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2712_major, minRequiredVersion_2712_minor
+	case GLenum_GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+		minRequiredVersion_2713_major := uint32(3) // u32
+		minRequiredVersion_2713_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2713_major, minRequiredVersion_2713_minor
+	case GLenum_GL_DITHER:
+		minRequiredVersion_2714_major := uint32(2) // u32
+		minRequiredVersion_2714_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2714_major, minRequiredVersion_2714_minor
+	case GLenum_GL_DRAW_BUFFER:
+		minRequiredVersion_2715_major := uint32(3) // u32
+		minRequiredVersion_2715_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2715_major, minRequiredVersion_2715_minor
+	case GLenum_GL_DRAW_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2716_major := uint32(2) // u32
+		minRequiredVersion_2716_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2716_major, minRequiredVersion_2716_minor
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		minRequiredVersion_2717_major := uint32(2) // u32
+		minRequiredVersion_2717_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2717_major, minRequiredVersion_2717_minor
+	case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
+		minRequiredVersion_2718_major := uint32(3) // u32
+		minRequiredVersion_2718_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2718_major, minRequiredVersion_2718_minor
+	case GLenum_GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+		minRequiredVersion_2719_major := uint32(3) // u32
+		minRequiredVersion_2719_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2719_major, minRequiredVersion_2719_minor
+	case GLenum_GL_FRONT_FACE:
+		minRequiredVersion_2720_major := uint32(2) // u32
+		minRequiredVersion_2720_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2720_major, minRequiredVersion_2720_minor
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
+		minRequiredVersion_2721_major := uint32(2) // u32
+		minRequiredVersion_2721_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2721_major, minRequiredVersion_2721_minor
+	case GLenum_GL_GREEN_BITS:
+		minRequiredVersion_2722_major := uint32(2) // u32
+		minRequiredVersion_2722_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2722_major, minRequiredVersion_2722_minor
+	case GLenum_GL_IMAGE_BINDING_LAYERED:
+		minRequiredVersion_2723_major := uint32(3) // u32
+		minRequiredVersion_2723_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2723_major, minRequiredVersion_2723_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+		minRequiredVersion_2724_major := uint32(2) // u32
+		minRequiredVersion_2724_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2724_major, minRequiredVersion_2724_minor
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+		minRequiredVersion_2725_major := uint32(2) // u32
+		minRequiredVersion_2725_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2725_major, minRequiredVersion_2725_minor
+	case GLenum_GL_LAYER_PROVOKING_VERTEX:
+		minRequiredVersion_2726_major := uint32(3) // u32
+		minRequiredVersion_2726_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2726_major, minRequiredVersion_2726_minor
+	case GLenum_GL_LINE_WIDTH:
+		minRequiredVersion_2727_major := uint32(2) // u32
+		minRequiredVersion_2727_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2727_major, minRequiredVersion_2727_minor
+	case GLenum_GL_MAJOR_VERSION:
+		minRequiredVersion_2728_major := uint32(3) // u32
+		minRequiredVersion_2728_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2728_major, minRequiredVersion_2728_minor
+	case GLenum_GL_MAX_3D_TEXTURE_SIZE:
+		minRequiredVersion_2729_major := uint32(3) // u32
+		minRequiredVersion_2729_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2729_major, minRequiredVersion_2729_minor
+	case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
+		minRequiredVersion_2730_major := uint32(3) // u32
+		minRequiredVersion_2730_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2730_major, minRequiredVersion_2730_minor
+	case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
+		minRequiredVersion_2731_major := uint32(3) // u32
+		minRequiredVersion_2731_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2731_major, minRequiredVersion_2731_minor
+	case GLenum_GL_MAX_COLOR_ATTACHMENTS:
+		minRequiredVersion_2732_major := uint32(3) // u32
+		minRequiredVersion_2732_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2732_major, minRequiredVersion_2732_minor
+	case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
+		minRequiredVersion_2733_major := uint32(3) // u32
+		minRequiredVersion_2733_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2733_major, minRequiredVersion_2733_minor
+	case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
+		minRequiredVersion_2734_major := uint32(3) // u32
+		minRequiredVersion_2734_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2734_major, minRequiredVersion_2734_minor
+	case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2735_major := uint32(3) // u32
+		minRequiredVersion_2735_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2735_major, minRequiredVersion_2735_minor
+	case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2736_major := uint32(3) // u32
+		minRequiredVersion_2736_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2736_major, minRequiredVersion_2736_minor
+	case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2737_major := uint32(3) // u32
+		minRequiredVersion_2737_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2737_major, minRequiredVersion_2737_minor
+	case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2738_major := uint32(3) // u32
+		minRequiredVersion_2738_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2738_major, minRequiredVersion_2738_minor
+	case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2739_major := uint32(3) // u32
+		minRequiredVersion_2739_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2739_major, minRequiredVersion_2739_minor
+	case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2740_major := uint32(3) // u32
+		minRequiredVersion_2740_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2740_major, minRequiredVersion_2740_minor
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2741_major := uint32(2) // u32
+		minRequiredVersion_2741_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2741_major, minRequiredVersion_2741_minor
+	case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
+		minRequiredVersion_2742_major := uint32(3) // u32
+		minRequiredVersion_2742_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2742_major, minRequiredVersion_2742_minor
+	case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2743_major := uint32(3) // u32
+		minRequiredVersion_2743_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2743_major, minRequiredVersion_2743_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2744_major := uint32(3) // u32
+		minRequiredVersion_2744_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2744_major, minRequiredVersion_2744_minor
+	case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
+		minRequiredVersion_2745_major := uint32(3) // u32
+		minRequiredVersion_2745_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2745_major, minRequiredVersion_2745_minor
+	case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
+		minRequiredVersion_2746_major := uint32(3) // u32
+		minRequiredVersion_2746_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2746_major, minRequiredVersion_2746_minor
+	case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2747_major := uint32(3) // u32
+		minRequiredVersion_2747_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2747_major, minRequiredVersion_2747_minor
+	case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2748_major := uint32(3) // u32
+		minRequiredVersion_2748_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2748_major, minRequiredVersion_2748_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
+		minRequiredVersion_2749_major := uint32(3) // u32
+		minRequiredVersion_2749_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2749_major, minRequiredVersion_2749_minor
+	case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
+		minRequiredVersion_2750_major := uint32(3) // u32
+		minRequiredVersion_2750_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2750_major, minRequiredVersion_2750_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
+		minRequiredVersion_2751_major := uint32(3) // u32
+		minRequiredVersion_2751_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2751_major, minRequiredVersion_2751_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
+		minRequiredVersion_2752_major := uint32(3) // u32
+		minRequiredVersion_2752_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2752_major, minRequiredVersion_2752_minor
+	case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
+		minRequiredVersion_2753_major := uint32(3) // u32
+		minRequiredVersion_2753_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2753_major, minRequiredVersion_2753_minor
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+		minRequiredVersion_2754_major := uint32(2) // u32
+		minRequiredVersion_2754_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2754_major, minRequiredVersion_2754_minor
+	case GLenum_GL_MAX_DEBUG_GROUP_STACK_DEPTH:
+		minRequiredVersion_2755_major := uint32(3) // u32
+		minRequiredVersion_2755_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2755_major, minRequiredVersion_2755_minor
+	case GLenum_GL_MAX_DEBUG_LOGGED_MESSAGES:
+		minRequiredVersion_2756_major := uint32(3) // u32
+		minRequiredVersion_2756_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2756_major, minRequiredVersion_2756_minor
+	case GLenum_GL_MAX_DEBUG_MESSAGE_LENGTH:
+		minRequiredVersion_2757_major := uint32(3) // u32
+		minRequiredVersion_2757_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2757_major, minRequiredVersion_2757_minor
+	case GLenum_GL_MAX_DRAW_BUFFERS:
+		minRequiredVersion_2758_major := uint32(3) // u32
+		minRequiredVersion_2758_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2758_major, minRequiredVersion_2758_minor
+	case GLenum_GL_MAX_ELEMENT_INDEX:
+		minRequiredVersion_2759_major := uint32(3) // u32
+		minRequiredVersion_2759_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2759_major, minRequiredVersion_2759_minor
+	case GLenum_GL_MAX_ELEMENTS_INDICES:
+		minRequiredVersion_2760_major := uint32(3) // u32
+		minRequiredVersion_2760_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2760_major, minRequiredVersion_2760_minor
+	case GLenum_GL_MAX_ELEMENTS_VERTICES:
+		minRequiredVersion_2761_major := uint32(3) // u32
+		minRequiredVersion_2761_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2761_major, minRequiredVersion_2761_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2762_major := uint32(3) // u32
+		minRequiredVersion_2762_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2762_major, minRequiredVersion_2762_minor
+	case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
+		minRequiredVersion_2763_major := uint32(3) // u32
+		minRequiredVersion_2763_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2763_major, minRequiredVersion_2763_minor
+	case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
+		minRequiredVersion_2764_major := uint32(3) // u32
+		minRequiredVersion_2764_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2764_major, minRequiredVersion_2764_minor
+	case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
+		minRequiredVersion_2765_major := uint32(3) // u32
+		minRequiredVersion_2765_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2765_major, minRequiredVersion_2765_minor
+	case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2766_major := uint32(3) // u32
+		minRequiredVersion_2766_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2766_major, minRequiredVersion_2766_minor
+	case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2767_major := uint32(3) // u32
+		minRequiredVersion_2767_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2767_major, minRequiredVersion_2767_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
+		minRequiredVersion_2768_major := uint32(3) // u32
+		minRequiredVersion_2768_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2768_major, minRequiredVersion_2768_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
+		minRequiredVersion_2769_major := uint32(3) // u32
+		minRequiredVersion_2769_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2769_major, minRequiredVersion_2769_minor
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+		minRequiredVersion_2770_major := uint32(2) // u32
+		minRequiredVersion_2770_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2770_major, minRequiredVersion_2770_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
+		minRequiredVersion_2771_major := uint32(3) // u32
+		minRequiredVersion_2771_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2771_major, minRequiredVersion_2771_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
+		minRequiredVersion_2772_major := uint32(3) // u32
+		minRequiredVersion_2772_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2772_major, minRequiredVersion_2772_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
+		minRequiredVersion_2773_major := uint32(3) // u32
+		minRequiredVersion_2773_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2773_major, minRequiredVersion_2773_minor
+	case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
+		minRequiredVersion_2774_major := uint32(3) // u32
+		minRequiredVersion_2774_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2774_major, minRequiredVersion_2774_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2775_major := uint32(3) // u32
+		minRequiredVersion_2775_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2775_major, minRequiredVersion_2775_minor
+	case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
+		minRequiredVersion_2776_major := uint32(3) // u32
+		minRequiredVersion_2776_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2776_major, minRequiredVersion_2776_minor
+	case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
+		minRequiredVersion_2777_major := uint32(3) // u32
+		minRequiredVersion_2777_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2777_major, minRequiredVersion_2777_minor
+	case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
+		minRequiredVersion_2778_major := uint32(3) // u32
+		minRequiredVersion_2778_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2778_major, minRequiredVersion_2778_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
+		minRequiredVersion_2779_major := uint32(3) // u32
+		minRequiredVersion_2779_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2779_major, minRequiredVersion_2779_minor
+	case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
+		minRequiredVersion_2780_major := uint32(3) // u32
+		minRequiredVersion_2780_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2780_major, minRequiredVersion_2780_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
+		minRequiredVersion_2781_major := uint32(3) // u32
+		minRequiredVersion_2781_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2781_major, minRequiredVersion_2781_minor
+	case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2782_major := uint32(3) // u32
+		minRequiredVersion_2782_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2782_major, minRequiredVersion_2782_minor
+	case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2783_major := uint32(3) // u32
+		minRequiredVersion_2783_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2783_major, minRequiredVersion_2783_minor
+	case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2784_major := uint32(3) // u32
+		minRequiredVersion_2784_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2784_major, minRequiredVersion_2784_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
+		minRequiredVersion_2785_major := uint32(3) // u32
+		minRequiredVersion_2785_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2785_major, minRequiredVersion_2785_minor
+	case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
+		minRequiredVersion_2786_major := uint32(3) // u32
+		minRequiredVersion_2786_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2786_major, minRequiredVersion_2786_minor
+	case GLenum_GL_MAX_INTEGER_SAMPLES:
+		minRequiredVersion_2787_major := uint32(3) // u32
+		minRequiredVersion_2787_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2787_major, minRequiredVersion_2787_minor
+	case GLenum_GL_MAX_LABEL_LENGTH:
+		minRequiredVersion_2788_major := uint32(3) // u32
+		minRequiredVersion_2788_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2788_major, minRequiredVersion_2788_minor
+	case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2789_major := uint32(3) // u32
+		minRequiredVersion_2789_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2789_major, minRequiredVersion_2789_minor
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
+		minRequiredVersion_2790_major := uint32(2) // u32
+		minRequiredVersion_2790_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2790_major, minRequiredVersion_2790_minor
+	case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
+		minRequiredVersion_2791_major := uint32(3) // u32
+		minRequiredVersion_2791_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2791_major, minRequiredVersion_2791_minor
+	case GLenum_GL_MAX_SAMPLES:
+		minRequiredVersion_2792_major := uint32(3) // u32
+		minRequiredVersion_2792_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2792_major, minRequiredVersion_2792_minor
+	case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
+		minRequiredVersion_2793_major := uint32(3) // u32
+		minRequiredVersion_2793_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2793_major, minRequiredVersion_2793_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
+		minRequiredVersion_2794_major := uint32(3) // u32
+		minRequiredVersion_2794_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2794_major, minRequiredVersion_2794_minor
+	case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
+		minRequiredVersion_2795_major := uint32(3) // u32
+		minRequiredVersion_2795_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2795_major, minRequiredVersion_2795_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2796_major := uint32(3) // u32
+		minRequiredVersion_2796_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2796_major, minRequiredVersion_2796_minor
+	case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
+		minRequiredVersion_2797_major := uint32(3) // u32
+		minRequiredVersion_2797_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2797_major, minRequiredVersion_2797_minor
+	case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
+		minRequiredVersion_2798_major := uint32(3) // u32
+		minRequiredVersion_2798_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2798_major, minRequiredVersion_2798_minor
+	case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
+		minRequiredVersion_2799_major := uint32(3) // u32
+		minRequiredVersion_2799_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2799_major, minRequiredVersion_2799_minor
+	case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2800_major := uint32(3) // u32
+		minRequiredVersion_2800_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2800_major, minRequiredVersion_2800_minor
+	case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2801_major := uint32(3) // u32
+		minRequiredVersion_2801_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2801_major, minRequiredVersion_2801_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2802_major := uint32(3) // u32
+		minRequiredVersion_2802_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2802_major, minRequiredVersion_2802_minor
+	case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
+		minRequiredVersion_2803_major := uint32(3) // u32
+		minRequiredVersion_2803_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2803_major, minRequiredVersion_2803_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
+		minRequiredVersion_2804_major := uint32(3) // u32
+		minRequiredVersion_2804_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2804_major, minRequiredVersion_2804_minor
+	case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
+		minRequiredVersion_2805_major := uint32(3) // u32
+		minRequiredVersion_2805_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2805_major, minRequiredVersion_2805_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
+		minRequiredVersion_2806_major := uint32(3) // u32
+		minRequiredVersion_2806_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2806_major, minRequiredVersion_2806_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
+		minRequiredVersion_2807_major := uint32(3) // u32
+		minRequiredVersion_2807_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2807_major, minRequiredVersion_2807_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
+		minRequiredVersion_2808_major := uint32(3) // u32
+		minRequiredVersion_2808_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2808_major, minRequiredVersion_2808_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
+		minRequiredVersion_2809_major := uint32(3) // u32
+		minRequiredVersion_2809_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2809_major, minRequiredVersion_2809_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
+		minRequiredVersion_2810_major := uint32(3) // u32
+		minRequiredVersion_2810_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2810_major, minRequiredVersion_2810_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2811_major := uint32(3) // u32
+		minRequiredVersion_2811_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2811_major, minRequiredVersion_2811_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2812_major := uint32(3) // u32
+		minRequiredVersion_2812_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2812_major, minRequiredVersion_2812_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
+		minRequiredVersion_2813_major := uint32(3) // u32
+		minRequiredVersion_2813_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2813_major, minRequiredVersion_2813_minor
+	case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
+		minRequiredVersion_2814_major := uint32(3) // u32
+		minRequiredVersion_2814_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2814_major, minRequiredVersion_2814_minor
+	case GLenum_GL_MAX_TESS_GEN_LEVEL:
+		minRequiredVersion_2815_major := uint32(3) // u32
+		minRequiredVersion_2815_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2815_major, minRequiredVersion_2815_minor
+	case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
+		minRequiredVersion_2816_major := uint32(3) // u32
+		minRequiredVersion_2816_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2816_major, minRequiredVersion_2816_minor
+	case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
+		minRequiredVersion_2817_major := uint32(3) // u32
+		minRequiredVersion_2817_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2817_major, minRequiredVersion_2817_minor
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2818_major := uint32(2) // u32
+		minRequiredVersion_2818_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2818_major, minRequiredVersion_2818_minor
+	case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
+		minRequiredVersion_2819_major := uint32(3) // u32
+		minRequiredVersion_2819_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2819_major, minRequiredVersion_2819_minor
+	case GLenum_GL_MAX_TEXTURE_SIZE:
+		minRequiredVersion_2820_major := uint32(2) // u32
+		minRequiredVersion_2820_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2820_major, minRequiredVersion_2820_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS:
+		minRequiredVersion_2821_major := uint32(3) // u32
+		minRequiredVersion_2821_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2821_major, minRequiredVersion_2821_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS:
+		minRequiredVersion_2822_major := uint32(3) // u32
+		minRequiredVersion_2822_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2822_major, minRequiredVersion_2822_minor
+	case GLenum_GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS:
+		minRequiredVersion_2823_major := uint32(3) // u32
+		minRequiredVersion_2823_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2823_major, minRequiredVersion_2823_minor
+	case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
+		minRequiredVersion_2824_major := uint32(3) // u32
+		minRequiredVersion_2824_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2824_major, minRequiredVersion_2824_minor
+	case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
+		minRequiredVersion_2825_major := uint32(3) // u32
+		minRequiredVersion_2825_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2825_major, minRequiredVersion_2825_minor
+	case GLenum_GL_MAX_UNIFORM_LOCATIONS:
+		minRequiredVersion_2826_major := uint32(3) // u32
+		minRequiredVersion_2826_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2826_major, minRequiredVersion_2826_minor
+	case GLenum_GL_MAX_VARYING_COMPONENTS:
+		minRequiredVersion_2827_major := uint32(3) // u32
+		minRequiredVersion_2827_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2827_major, minRequiredVersion_2827_minor
+	case GLenum_GL_MAX_VARYING_VECTORS:
+		minRequiredVersion_2828_major := uint32(2) // u32
+		minRequiredVersion_2828_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2828_major, minRequiredVersion_2828_minor
+	case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
+		minRequiredVersion_2829_major := uint32(3) // u32
+		minRequiredVersion_2829_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2829_major, minRequiredVersion_2829_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
+		minRequiredVersion_2830_major := uint32(3) // u32
+		minRequiredVersion_2830_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2830_major, minRequiredVersion_2830_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
+		minRequiredVersion_2831_major := uint32(3) // u32
+		minRequiredVersion_2831_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2831_major, minRequiredVersion_2831_minor
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
+		minRequiredVersion_2832_major := uint32(2) // u32
+		minRequiredVersion_2832_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2832_major, minRequiredVersion_2832_minor
+	case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
+		minRequiredVersion_2833_major := uint32(3) // u32
+		minRequiredVersion_2833_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2833_major, minRequiredVersion_2833_minor
+	case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
+		minRequiredVersion_2834_major := uint32(3) // u32
+		minRequiredVersion_2834_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2834_major, minRequiredVersion_2834_minor
+	case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
+		minRequiredVersion_2835_major := uint32(3) // u32
+		minRequiredVersion_2835_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2835_major, minRequiredVersion_2835_minor
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+		minRequiredVersion_2836_major := uint32(2) // u32
+		minRequiredVersion_2836_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2836_major, minRequiredVersion_2836_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
+		minRequiredVersion_2837_major := uint32(3) // u32
+		minRequiredVersion_2837_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2837_major, minRequiredVersion_2837_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+		minRequiredVersion_2838_major := uint32(3) // u32
+		minRequiredVersion_2838_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2838_major, minRequiredVersion_2838_minor
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
+		minRequiredVersion_2839_major := uint32(2) // u32
+		minRequiredVersion_2839_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2839_major, minRequiredVersion_2839_minor
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
+		minRequiredVersion_2840_major := uint32(2) // u32
+		minRequiredVersion_2840_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2840_major, minRequiredVersion_2840_minor
+	case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
+		minRequiredVersion_2841_major := uint32(3) // u32
+		minRequiredVersion_2841_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2841_major, minRequiredVersion_2841_minor
+	case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
+		minRequiredVersion_2842_major := uint32(3) // u32
+		minRequiredVersion_2842_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2842_major, minRequiredVersion_2842_minor
+	case GLenum_GL_MIN_SAMPLE_SHADING_VALUE:
+		minRequiredVersion_2843_major := uint32(3) // u32
+		minRequiredVersion_2843_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2843_major, minRequiredVersion_2843_minor
+	case GLenum_GL_MINOR_VERSION:
+		minRequiredVersion_2844_major := uint32(3) // u32
+		minRequiredVersion_2844_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2844_major, minRequiredVersion_2844_minor
+	case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
+		minRequiredVersion_2845_major := uint32(3) // u32
+		minRequiredVersion_2845_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2845_major, minRequiredVersion_2845_minor
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+		minRequiredVersion_2846_major := uint32(2) // u32
+		minRequiredVersion_2846_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2846_major, minRequiredVersion_2846_minor
+	case GLenum_GL_NUM_EXTENSIONS:
+		minRequiredVersion_2847_major := uint32(3) // u32
+		minRequiredVersion_2847_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2847_major, minRequiredVersion_2847_minor
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2848_major := uint32(3) // u32
+		minRequiredVersion_2848_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2848_major, minRequiredVersion_2848_minor
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2849_major := uint32(2) // u32
+		minRequiredVersion_2849_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2849_major, minRequiredVersion_2849_minor
+	case GLenum_GL_PACK_ALIGNMENT:
+		minRequiredVersion_2850_major := uint32(2) // u32
+		minRequiredVersion_2850_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2850_major, minRequiredVersion_2850_minor
+	case GLenum_GL_PACK_ROW_LENGTH:
+		minRequiredVersion_2851_major := uint32(3) // u32
+		minRequiredVersion_2851_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2851_major, minRequiredVersion_2851_minor
+	case GLenum_GL_PACK_SKIP_PIXELS:
+		minRequiredVersion_2852_major := uint32(3) // u32
+		minRequiredVersion_2852_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2852_major, minRequiredVersion_2852_minor
+	case GLenum_GL_PACK_SKIP_ROWS:
+		minRequiredVersion_2853_major := uint32(3) // u32
+		minRequiredVersion_2853_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2853_major, minRequiredVersion_2853_minor
+	case GLenum_GL_PATCH_VERTICES:
+		minRequiredVersion_2854_major := uint32(3) // u32
+		minRequiredVersion_2854_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2854_major, minRequiredVersion_2854_minor
+	case GLenum_GL_PIXEL_PACK_BUFFER_BINDING:
+		minRequiredVersion_2855_major := uint32(3) // u32
+		minRequiredVersion_2855_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2855_major, minRequiredVersion_2855_minor
+	case GLenum_GL_PIXEL_UNPACK_BUFFER_BINDING:
+		minRequiredVersion_2856_major := uint32(3) // u32
+		minRequiredVersion_2856_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2856_major, minRequiredVersion_2856_minor
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
+		minRequiredVersion_2857_major := uint32(2) // u32
+		minRequiredVersion_2857_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2857_major, minRequiredVersion_2857_minor
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		minRequiredVersion_2858_major := uint32(2) // u32
+		minRequiredVersion_2858_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2858_major, minRequiredVersion_2858_minor
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
+		minRequiredVersion_2859_major := uint32(2) // u32
+		minRequiredVersion_2859_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2859_major, minRequiredVersion_2859_minor
+	case GLenum_GL_PRIMITIVE_BOUNDING_BOX:
+		minRequiredVersion_2860_major := uint32(3) // u32
+		minRequiredVersion_2860_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(8), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2860_major, minRequiredVersion_2860_minor
+	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX:
+		minRequiredVersion_2861_major := uint32(3) // u32
+		minRequiredVersion_2861_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2861_major, minRequiredVersion_2861_minor
+	case GLenum_GL_PROGRAM_BINARY_FORMATS:
+		minRequiredVersion_2862_major := uint32(3) // u32
+		minRequiredVersion_2862_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2862_major, minRequiredVersion_2862_minor
+	case GLenum_GL_PROGRAM_PIPELINE_BINDING:
+		minRequiredVersion_2863_major := uint32(3) // u32
+		minRequiredVersion_2863_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2863_major, minRequiredVersion_2863_minor
+	case GLenum_GL_RASTERIZER_DISCARD:
+		minRequiredVersion_2864_major := uint32(3) // u32
+		minRequiredVersion_2864_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2864_major, minRequiredVersion_2864_minor
+	case GLenum_GL_READ_BUFFER:
+		minRequiredVersion_2865_major := uint32(3) // u32
+		minRequiredVersion_2865_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2865_major, minRequiredVersion_2865_minor
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		minRequiredVersion_2866_major := uint32(3) // u32
+		minRequiredVersion_2866_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2866_major, minRequiredVersion_2866_minor
+	case GLenum_GL_RED_BITS:
+		minRequiredVersion_2867_major := uint32(2) // u32
+		minRequiredVersion_2867_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2867_major, minRequiredVersion_2867_minor
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		minRequiredVersion_2868_major := uint32(2) // u32
+		minRequiredVersion_2868_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2868_major, minRequiredVersion_2868_minor
+	case GLenum_GL_RESET_NOTIFICATION_STRATEGY:
+		minRequiredVersion_2869_major := uint32(3) // u32
+		minRequiredVersion_2869_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2869_major, minRequiredVersion_2869_minor
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		minRequiredVersion_2870_major := uint32(2) // u32
+		minRequiredVersion_2870_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2870_major, minRequiredVersion_2870_minor
+	case GLenum_GL_SAMPLE_BUFFERS:
+		minRequiredVersion_2871_major := uint32(2) // u32
+		minRequiredVersion_2871_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2871_major, minRequiredVersion_2871_minor
+	case GLenum_GL_SAMPLE_COVERAGE:
+		minRequiredVersion_2872_major := uint32(2) // u32
+		minRequiredVersion_2872_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2872_major, minRequiredVersion_2872_minor
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
+		minRequiredVersion_2873_major := uint32(2) // u32
+		minRequiredVersion_2873_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2873_major, minRequiredVersion_2873_minor
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
+		minRequiredVersion_2874_major := uint32(2) // u32
+		minRequiredVersion_2874_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2874_major, minRequiredVersion_2874_minor
+	case GLenum_GL_SAMPLE_SHADING:
+		minRequiredVersion_2875_major := uint32(3) // u32
+		minRequiredVersion_2875_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2875_major, minRequiredVersion_2875_minor
+	case GLenum_GL_SAMPLER_BINDING:
+		minRequiredVersion_2876_major := uint32(3) // u32
+		minRequiredVersion_2876_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2876_major, minRequiredVersion_2876_minor
+	case GLenum_GL_SAMPLES:
+		minRequiredVersion_2877_major := uint32(2) // u32
+		minRequiredVersion_2877_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2877_major, minRequiredVersion_2877_minor
+	case GLenum_GL_SCISSOR_BOX:
+		minRequiredVersion_2878_major := uint32(2) // u32
+		minRequiredVersion_2878_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2878_major, minRequiredVersion_2878_minor
+	case GLenum_GL_SCISSOR_TEST:
+		minRequiredVersion_2879_major := uint32(2) // u32
+		minRequiredVersion_2879_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2879_major, minRequiredVersion_2879_minor
+	case GLenum_GL_SHADER_BINARY_FORMATS:
+		minRequiredVersion_2880_major := uint32(2) // u32
+		minRequiredVersion_2880_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2880_major, minRequiredVersion_2880_minor
+	case GLenum_GL_SHADER_COMPILER:
+		minRequiredVersion_2881_major := uint32(2) // u32
+		minRequiredVersion_2881_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2881_major, minRequiredVersion_2881_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_BINDING:
+		minRequiredVersion_2882_major := uint32(3) // u32
+		minRequiredVersion_2882_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2882_major, minRequiredVersion_2882_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2883_major := uint32(3) // u32
+		minRequiredVersion_2883_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2883_major, minRequiredVersion_2883_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_SIZE:
+		minRequiredVersion_2884_major := uint32(3) // u32
+		minRequiredVersion_2884_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2884_major, minRequiredVersion_2884_minor
+	case GLenum_GL_SHADER_STORAGE_BUFFER_START:
+		minRequiredVersion_2885_major := uint32(3) // u32
+		minRequiredVersion_2885_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2885_major, minRequiredVersion_2885_minor
+	case GLenum_GL_STENCIL_BACK_FAIL:
+		minRequiredVersion_2886_major := uint32(2) // u32
+		minRequiredVersion_2886_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2886_major, minRequiredVersion_2886_minor
+	case GLenum_GL_STENCIL_BACK_FUNC:
+		minRequiredVersion_2887_major := uint32(2) // u32
+		minRequiredVersion_2887_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2887_major, minRequiredVersion_2887_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+		minRequiredVersion_2888_major := uint32(2) // u32
+		minRequiredVersion_2888_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2888_major, minRequiredVersion_2888_minor
+	case GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS:
+		minRequiredVersion_2889_major := uint32(2) // u32
+		minRequiredVersion_2889_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2889_major, minRequiredVersion_2889_minor
+	case GLenum_GL_STENCIL_BACK_REF:
+		minRequiredVersion_2890_major := uint32(2) // u32
+		minRequiredVersion_2890_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2890_major, minRequiredVersion_2890_minor
+	case GLenum_GL_STENCIL_BACK_VALUE_MASK:
+		minRequiredVersion_2891_major := uint32(2) // u32
+		minRequiredVersion_2891_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2891_major, minRequiredVersion_2891_minor
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		minRequiredVersion_2892_major := uint32(2) // u32
+		minRequiredVersion_2892_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2892_major, minRequiredVersion_2892_minor
+	case GLenum_GL_STENCIL_BITS:
+		minRequiredVersion_2893_major := uint32(2) // u32
+		minRequiredVersion_2893_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2893_major, minRequiredVersion_2893_minor
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
+		minRequiredVersion_2894_major := uint32(2) // u32
+		minRequiredVersion_2894_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2894_major, minRequiredVersion_2894_minor
+	case GLenum_GL_STENCIL_FAIL:
+		minRequiredVersion_2895_major := uint32(2) // u32
+		minRequiredVersion_2895_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2895_major, minRequiredVersion_2895_minor
+	case GLenum_GL_STENCIL_FUNC:
+		minRequiredVersion_2896_major := uint32(2) // u32
+		minRequiredVersion_2896_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2896_major, minRequiredVersion_2896_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_FAIL:
+		minRequiredVersion_2897_major := uint32(2) // u32
+		minRequiredVersion_2897_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2897_major, minRequiredVersion_2897_minor
+	case GLenum_GL_STENCIL_PASS_DEPTH_PASS:
+		minRequiredVersion_2898_major := uint32(2) // u32
+		minRequiredVersion_2898_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2898_major, minRequiredVersion_2898_minor
+	case GLenum_GL_STENCIL_REF:
+		minRequiredVersion_2899_major := uint32(2) // u32
+		minRequiredVersion_2899_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2899_major, minRequiredVersion_2899_minor
+	case GLenum_GL_STENCIL_TEST:
+		minRequiredVersion_2900_major := uint32(2) // u32
+		minRequiredVersion_2900_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2900_major, minRequiredVersion_2900_minor
+	case GLenum_GL_STENCIL_VALUE_MASK:
+		minRequiredVersion_2901_major := uint32(2) // u32
+		minRequiredVersion_2901_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2901_major, minRequiredVersion_2901_minor
+	case GLenum_GL_STENCIL_WRITEMASK:
+		minRequiredVersion_2902_major := uint32(2) // u32
+		minRequiredVersion_2902_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2902_major, minRequiredVersion_2902_minor
+	case GLenum_GL_SUBPIXEL_BITS:
+		minRequiredVersion_2903_major := uint32(2) // u32
+		minRequiredVersion_2903_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2903_major, minRequiredVersion_2903_minor
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		minRequiredVersion_2904_major := uint32(2) // u32
+		minRequiredVersion_2904_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2904_major, minRequiredVersion_2904_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_ARRAY:
+		minRequiredVersion_2905_major := uint32(3) // u32
+		minRequiredVersion_2905_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2905_major, minRequiredVersion_2905_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+		minRequiredVersion_2906_major := uint32(3) // u32
+		minRequiredVersion_2906_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2906_major, minRequiredVersion_2906_minor
+	case GLenum_GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+		minRequiredVersion_2907_major := uint32(3) // u32
+		minRequiredVersion_2907_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2907_major, minRequiredVersion_2907_minor
+	case GLenum_GL_TEXTURE_BINDING_3D:
+		minRequiredVersion_2908_major := uint32(3) // u32
+		minRequiredVersion_2908_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2908_major, minRequiredVersion_2908_minor
+	case GLenum_GL_TEXTURE_BINDING_BUFFER:
+		minRequiredVersion_2909_major := uint32(3) // u32
+		minRequiredVersion_2909_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2909_major, minRequiredVersion_2909_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		minRequiredVersion_2910_major := uint32(2) // u32
+		minRequiredVersion_2910_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2910_major, minRequiredVersion_2910_minor
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:
+		minRequiredVersion_2911_major := uint32(3) // u32
+		minRequiredVersion_2911_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2911_major, minRequiredVersion_2911_minor
+	case GLenum_GL_TEXTURE_BUFFER_BINDING:
+		minRequiredVersion_2912_major := uint32(3) // u32
+		minRequiredVersion_2912_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2912_major, minRequiredVersion_2912_minor
+	case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2913_major := uint32(3) // u32
+		minRequiredVersion_2913_minor := uint32(2) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2913_major, minRequiredVersion_2913_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_ACTIVE:
+		minRequiredVersion_2914_major := uint32(3) // u32
+		minRequiredVersion_2914_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2914_major, minRequiredVersion_2914_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BINDING:
+		minRequiredVersion_2915_major := uint32(3) // u32
+		minRequiredVersion_2915_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2915_major, minRequiredVersion_2915_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_BINDING:
+		minRequiredVersion_2916_major := uint32(3) // u32
+		minRequiredVersion_2916_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2916_major, minRequiredVersion_2916_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_SIZE:
+		minRequiredVersion_2917_major := uint32(3) // u32
+		minRequiredVersion_2917_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2917_major, minRequiredVersion_2917_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_BUFFER_START:
+		minRequiredVersion_2918_major := uint32(3) // u32
+		minRequiredVersion_2918_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2918_major, minRequiredVersion_2918_minor
+	case GLenum_GL_TRANSFORM_FEEDBACK_PAUSED:
+		minRequiredVersion_2919_major := uint32(3) // u32
+		minRequiredVersion_2919_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2919_major, minRequiredVersion_2919_minor
+	case GLenum_GL_UNIFORM_BUFFER_BINDING:
+		minRequiredVersion_2920_major := uint32(3) // u32
+		minRequiredVersion_2920_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2920_major, minRequiredVersion_2920_minor
+	case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
+		minRequiredVersion_2921_major := uint32(3) // u32
+		minRequiredVersion_2921_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2921_major, minRequiredVersion_2921_minor
+	case GLenum_GL_UNIFORM_BUFFER_SIZE:
+		minRequiredVersion_2922_major := uint32(3) // u32
+		minRequiredVersion_2922_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2922_major, minRequiredVersion_2922_minor
+	case GLenum_GL_UNIFORM_BUFFER_START:
+		minRequiredVersion_2923_major := uint32(3) // u32
+		minRequiredVersion_2923_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2923_major, minRequiredVersion_2923_minor
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		minRequiredVersion_2924_major := uint32(2) // u32
+		minRequiredVersion_2924_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2924_major, minRequiredVersion_2924_minor
+	case GLenum_GL_UNPACK_IMAGE_HEIGHT:
+		minRequiredVersion_2925_major := uint32(3) // u32
+		minRequiredVersion_2925_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2925_major, minRequiredVersion_2925_minor
+	case GLenum_GL_UNPACK_ROW_LENGTH:
+		minRequiredVersion_2926_major := uint32(3) // u32
+		minRequiredVersion_2926_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2926_major, minRequiredVersion_2926_minor
+	case GLenum_GL_UNPACK_SKIP_IMAGES:
+		minRequiredVersion_2927_major := uint32(3) // u32
+		minRequiredVersion_2927_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2927_major, minRequiredVersion_2927_minor
+	case GLenum_GL_UNPACK_SKIP_PIXELS:
+		minRequiredVersion_2928_major := uint32(3) // u32
+		minRequiredVersion_2928_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2928_major, minRequiredVersion_2928_minor
+	case GLenum_GL_UNPACK_SKIP_ROWS:
+		minRequiredVersion_2929_major := uint32(3) // u32
+		minRequiredVersion_2929_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2929_major, minRequiredVersion_2929_minor
+	case GLenum_GL_VERTEX_ARRAY_BINDING:
+		minRequiredVersion_2930_major := uint32(3) // u32
+		minRequiredVersion_2930_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2930_major, minRequiredVersion_2930_minor
+	case GLenum_GL_VERTEX_BINDING_DIVISOR:
+		minRequiredVersion_2931_major := uint32(3) // u32
+		minRequiredVersion_2931_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2931_major, minRequiredVersion_2931_minor
+	case GLenum_GL_VERTEX_BINDING_OFFSET:
+		minRequiredVersion_2932_major := uint32(3) // u32
+		minRequiredVersion_2932_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2932_major, minRequiredVersion_2932_minor
+	case GLenum_GL_VERTEX_BINDING_STRIDE:
+		minRequiredVersion_2933_major := uint32(3) // u32
+		minRequiredVersion_2933_minor := uint32(1) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(1), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2933_major, minRequiredVersion_2933_minor
+	case GLenum_GL_VIEWPORT:
+		minRequiredVersion_2934_major := uint32(2) // u32
+		minRequiredVersion_2934_minor := uint32(0) // u32
+		observeGlGetWrites_2679_v.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_2934_major, minRequiredVersion_2934_minor
+	default:
+		glErrorInvalidEnum_2935_param := observeGlGetWrites_2679_param // GLenum
+		return
+		_ = glErrorInvalidEnum_2935_param
+	}
+	_, _, _, _, _, _, _, _ = minRequiredVersion_2676_major, minRequiredVersion_2676_minor, v, context, GetContext_2677_result, ctx, observeGlGetWrites_2679_param, observeGlGetWrites_2679_v
 	return nil
 }
 
@@ -15988,40 +24835,40 @@ func (ϟa *GlGetInternalformativ) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1160_major := uint32(3) // u32
-	minRequiredVersion_1160_minor := uint32(0) // u32
+	minRequiredVersion_2936_major := uint32(3) // u32
+	minRequiredVersion_2936_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_RENDERBUFFER:
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1161_major := uint32(3) // u32
-		minRequiredVersion_1161_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1161_major, minRequiredVersion_1161_minor
+		minRequiredVersion_2937_major := uint32(3) // u32
+		minRequiredVersion_2937_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_2937_major, minRequiredVersion_2937_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY:
-		minRequiredVersion_1162_major := uint32(3) // u32
-		minRequiredVersion_1162_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1162_major, minRequiredVersion_1162_minor
+		minRequiredVersion_2938_major := uint32(3) // u32
+		minRequiredVersion_2938_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2938_major, minRequiredVersion_2938_minor
 	default:
-		glErrorInvalidEnum_1163_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2939_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1163_param
+		_ = glErrorInvalidEnum_2939_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
 	case GLenum_GL_STENCIL_INDEX8:
-		minRequiredVersion_1164_major := uint32(3) // u32
-		minRequiredVersion_1164_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1164_major, minRequiredVersion_1164_minor
+		minRequiredVersion_2940_major := uint32(3) // u32
+		minRequiredVersion_2940_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2940_major, minRequiredVersion_2940_minor
 	default:
-		glErrorInvalidEnum_1165_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_2941_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1165_param
+		_ = glErrorInvalidEnum_2941_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_NUM_SAMPLE_COUNTS, GLenum_GL_SAMPLES:
 	default:
-		glErrorInvalidEnum_1166_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_2942_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1166_param
+		_ = glErrorInvalidEnum_2942_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -16030,7 +24877,7 @@ func (ϟa *GlGetInternalformativ) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetInternalformativ)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1160_major, minRequiredVersion_1160_minor
+	_, _ = minRequiredVersion_2936_major, minRequiredVersion_2936_minor
 	return nil
 }
 
@@ -16039,19 +24886,19 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1167_major := uint32(2) // u32
-	minRequiredVersion_1167_minor := uint32(0) // u32
+	minRequiredVersion_2943_major := uint32(2) // u32
+	minRequiredVersion_2943_minor := uint32(0) // u32
 	switch ϟa.Param {
 	case GLenum_GL_EXTENSIONS, GLenum_GL_RENDERER, GLenum_GL_SHADING_LANGUAGE_VERSION, GLenum_GL_VENDOR, GLenum_GL_VERSION:
 	default:
-		glErrorInvalidEnum_1168_param := ϟa.Param // GLenum
+		glErrorInvalidEnum_2944_param := ϟa.Param // GLenum
 		return
-		_ = glErrorInvalidEnum_1168_param
+		_ = glErrorInvalidEnum_2944_param
 	}
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Call(funcInfoGlGetString)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1167_major, minRequiredVersion_1167_minor
+	_, _ = minRequiredVersion_2943_major, minRequiredVersion_2943_minor
 	return nil
 }
 
@@ -16060,20 +24907,20 @@ func (ϟa *GlGetStringi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1169_major := uint32(3) // u32
-	minRequiredVersion_1169_minor := uint32(0) // u32
+	minRequiredVersion_2945_major := uint32(3) // u32
+	minRequiredVersion_2945_minor := uint32(0) // u32
 	switch ϟa.Name {
 	case GLenum_GL_EXTENSIONS:
 	default:
-		glErrorInvalidEnum_1170_param := ϟa.Name // GLenum
+		glErrorInvalidEnum_2946_param := ϟa.Name // GLenum
 		return
-		_ = glErrorInvalidEnum_1170_param
+		_ = glErrorInvalidEnum_2946_param
 	}
 	ϟb.Push(value.U32(ϟa.Name))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetStringi)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1169_major, minRequiredVersion_1169_minor
+	_, _ = minRequiredVersion_2945_major, minRequiredVersion_2945_minor
 	return nil
 }
 
@@ -16082,35 +24929,35 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1171_major := uint32(2) // u32
-	minRequiredVersion_1171_minor := uint32(0) // u32
+	minRequiredVersion_2947_major := uint32(2) // u32
+	minRequiredVersion_2947_minor := uint32(0) // u32
 	switch ϟa.Capability {
 	case GLenum_GL_BLEND, GLenum_GL_CULL_FACE, GLenum_GL_DEPTH_TEST, GLenum_GL_DITHER, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SCISSOR_TEST, GLenum_GL_STENCIL_TEST:
 	case GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_RASTERIZER_DISCARD:
-		minRequiredVersion_1172_major := uint32(3) // u32
-		minRequiredVersion_1172_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1172_major, minRequiredVersion_1172_minor
+		minRequiredVersion_2948_major := uint32(3) // u32
+		minRequiredVersion_2948_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2948_major, minRequiredVersion_2948_minor
 	case GLenum_GL_DEBUG_OUTPUT, GLenum_GL_DEBUG_OUTPUT_SYNCHRONOUS, GLenum_GL_SAMPLE_MASK:
-		minRequiredVersion_1173_major := uint32(3) // u32
-		minRequiredVersion_1173_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1173_major, minRequiredVersion_1173_minor
+		minRequiredVersion_2949_major := uint32(3) // u32
+		minRequiredVersion_2949_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2949_major, minRequiredVersion_2949_minor
 	default:
-		glErrorInvalidEnum_1174_param := ϟa.Capability // GLenum
+		glErrorInvalidEnum_2950_param := ϟa.Capability // GLenum
 		return
-		_ = glErrorInvalidEnum_1174_param
+		_ = glErrorInvalidEnum_2950_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1176_msg := "No context bound" // string
+		error_2952_msg := "No context bound" // string
 		return
-		_ = error_1176_msg
+		_ = error_2952_msg
 	}
-	GetContext_1175_result := context // Contextʳ
-	ctx := GetContext_1175_result     // Contextʳ
+	GetContext_2951_result := context // Contextʳ
+	ctx := GetContext_2951_result     // Contextʳ
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlIsEnabled)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1171_major, minRequiredVersion_1171_minor, context, GetContext_1175_result, ctx
+	_, _, _, _, _ = minRequiredVersion_2947_major, minRequiredVersion_2947_minor, context, GetContext_2951_result, ctx
 	return nil
 }
 
@@ -16119,20 +24966,20 @@ func (ϟa *GlIsEnabledi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1177_major := uint32(3) // u32
-	minRequiredVersion_1177_minor := uint32(2) // u32
+	minRequiredVersion_2953_major := uint32(3) // u32
+	minRequiredVersion_2953_minor := uint32(2) // u32
 	switch ϟa.Target {
 	case GLenum_GL_BLEND, GLenum_GL_CULL_FACE, GLenum_GL_DEBUG_OUTPUT, GLenum_GL_DEBUG_OUTPUT_SYNCHRONOUS, GLenum_GL_DEPTH_TEST, GLenum_GL_DITHER, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_MASK, GLenum_GL_SCISSOR_TEST, GLenum_GL_STENCIL_TEST:
 	default:
-		glErrorInvalidEnum_1178_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2954_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1178_param
+		_ = glErrorInvalidEnum_2954_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlIsEnabledi)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1177_major, minRequiredVersion_1177_minor
+	_, _ = minRequiredVersion_2953_major, minRequiredVersion_2953_minor
 	return nil
 }
 
@@ -16141,10 +24988,10 @@ func (ϟa *GlClientWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1179_major := uint32(3)                           // u32
-	minRequiredVersion_1179_minor := uint32(0)                           // u32
-	supportsBits_1180_seenBits := ϟa.SyncFlags                           // GLbitfield
-	supportsBits_1180_validBits := GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT // GLbitfield
+	minRequiredVersion_2955_major := uint32(3)                           // u32
+	minRequiredVersion_2955_minor := uint32(0)                           // u32
+	supportsBits_2956_seenBits := ϟa.SyncFlags                           // GLbitfield
+	supportsBits_2956_validBits := GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT // GLbitfield
 	if (GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT)&(ϟa.SyncFlags) != 0 {
 	}
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
@@ -16156,7 +25003,7 @@ func (ϟa *GlClientWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Timeout.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClientWaitSync)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = minRequiredVersion_1179_major, minRequiredVersion_1179_minor, supportsBits_1180_seenBits, supportsBits_1180_validBits
+	_, _, _, _ = minRequiredVersion_2955_major, minRequiredVersion_2955_minor, supportsBits_2956_seenBits, supportsBits_2956_validBits
 	return nil
 }
 
@@ -16165,8 +25012,8 @@ func (ϟa *GlDeleteSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1181_major := uint32(3) // u32
-	minRequiredVersion_1181_minor := uint32(0) // u32
+	minRequiredVersion_2957_major := uint32(3) // u32
+	minRequiredVersion_2957_minor := uint32(0) // u32
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
 	} else {
@@ -16174,7 +25021,7 @@ func (ϟa *GlDeleteSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlDeleteSync)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1181_major, minRequiredVersion_1181_minor
+	_, _ = minRequiredVersion_2957_major, minRequiredVersion_2957_minor
 	return nil
 }
 
@@ -16183,14 +25030,14 @@ func (ϟa *GlFenceSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1182_major := uint32(3) // u32
-	minRequiredVersion_1182_minor := uint32(0) // u32
+	minRequiredVersion_2958_major := uint32(3) // u32
+	minRequiredVersion_2958_minor := uint32(0) // u32
 	switch ϟa.Condition {
 	case GLenum_GL_SYNC_GPU_COMMANDS_COMPLETE:
 	default:
-		glErrorInvalidEnum_1183_param := ϟa.Condition // GLenum
+		glErrorInvalidEnum_2959_param := ϟa.Condition // GLenum
 		return
-		_ = glErrorInvalidEnum_1183_param
+		_ = glErrorInvalidEnum_2959_param
 	}
 	ϟb.Push(value.U32(ϟa.Condition))
 	ϟb.Push(value.U32(ϟa.SyncFlags))
@@ -16205,7 +25052,7 @@ func (ϟa *GlFenceSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		ϟb.Store(ptr)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1182_major, minRequiredVersion_1182_minor
+	_, _ = minRequiredVersion_2958_major, minRequiredVersion_2958_minor
 	return nil
 }
 
@@ -16214,8 +25061,8 @@ func (ϟa *GlGetSynciv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1184_major := uint32(3) // u32
-	minRequiredVersion_1184_minor := uint32(0) // u32
+	minRequiredVersion_2960_major := uint32(3) // u32
+	minRequiredVersion_2960_minor := uint32(0) // u32
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
 	} else {
@@ -16236,11 +25083,11 @@ func (ϟa *GlGetSynciv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 			}
 		}
 	default:
-		glErrorInvalidEnum_1185_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_2961_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1185_param
+		_ = glErrorInvalidEnum_2961_param
 	}
-	_, _ = minRequiredVersion_1184_major, minRequiredVersion_1184_minor
+	_, _ = minRequiredVersion_2960_major, minRequiredVersion_2960_minor
 	return nil
 }
 
@@ -16249,8 +25096,8 @@ func (ϟa *GlIsSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1186_major := uint32(3) // u32
-	minRequiredVersion_1186_minor := uint32(0) // u32
+	minRequiredVersion_2962_major := uint32(3) // u32
+	minRequiredVersion_2962_minor := uint32(0) // u32
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
 	} else {
@@ -16258,7 +25105,7 @@ func (ϟa *GlIsSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	}
 	ϟb.Call(funcInfoGlIsSync)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1186_major, minRequiredVersion_1186_minor
+	_, _ = minRequiredVersion_2962_major, minRequiredVersion_2962_minor
 	return nil
 }
 
@@ -16267,8 +25114,8 @@ func (ϟa *GlWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1187_major := uint32(3) // u32
-	minRequiredVersion_1187_minor := uint32(0) // u32
+	minRequiredVersion_2963_major := uint32(3) // u32
+	minRequiredVersion_2963_minor := uint32(0) // u32
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
 	} else {
@@ -16278,7 +25125,7 @@ func (ϟa *GlWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(ϟa.Timeout.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlWaitSync)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1187_major, minRequiredVersion_1187_minor
+	_, _ = minRequiredVersion_2963_major, minRequiredVersion_2963_minor
 	return nil
 }
 
@@ -16287,28 +25134,28 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1188_major := uint32(2) // u32
-	minRequiredVersion_1188_minor := uint32(0) // u32
+	minRequiredVersion_2964_major := uint32(2) // u32
+	minRequiredVersion_2964_minor := uint32(0) // u32
 	switch ϟa.Unit {
 	case GLenum_GL_TEXTURE0, GLenum_GL_TEXTURE1, GLenum_GL_TEXTURE10, GLenum_GL_TEXTURE11, GLenum_GL_TEXTURE12, GLenum_GL_TEXTURE13, GLenum_GL_TEXTURE14, GLenum_GL_TEXTURE15, GLenum_GL_TEXTURE16, GLenum_GL_TEXTURE17, GLenum_GL_TEXTURE18, GLenum_GL_TEXTURE19, GLenum_GL_TEXTURE2, GLenum_GL_TEXTURE20, GLenum_GL_TEXTURE21, GLenum_GL_TEXTURE22, GLenum_GL_TEXTURE23, GLenum_GL_TEXTURE24, GLenum_GL_TEXTURE25, GLenum_GL_TEXTURE26, GLenum_GL_TEXTURE27, GLenum_GL_TEXTURE28, GLenum_GL_TEXTURE29, GLenum_GL_TEXTURE3, GLenum_GL_TEXTURE30, GLenum_GL_TEXTURE31, GLenum_GL_TEXTURE4, GLenum_GL_TEXTURE5, GLenum_GL_TEXTURE6, GLenum_GL_TEXTURE7, GLenum_GL_TEXTURE8, GLenum_GL_TEXTURE9:
 	default:
-		glErrorInvalidEnum_1189_param := ϟa.Unit // GLenum
+		glErrorInvalidEnum_2965_param := ϟa.Unit // GLenum
 		return
-		_ = glErrorInvalidEnum_1189_param
+		_ = glErrorInvalidEnum_2965_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1191_msg := "No context bound" // string
+		error_2967_msg := "No context bound" // string
 		return
-		_ = error_1191_msg
+		_ = error_2967_msg
 	}
-	GetContext_1190_result := context // Contextʳ
-	ctx := GetContext_1190_result     // Contextʳ
+	GetContext_2966_result := context // Contextʳ
+	ctx := GetContext_2966_result     // Contextʳ
 	ctx.ActiveTextureUnit = ϟa.Unit
 	ϟb.Push(value.U32(ϟa.Unit))
 	ϟb.Call(funcInfoGlActiveTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1188_major, minRequiredVersion_1188_minor, context, GetContext_1190_result, ctx
+	_, _, _, _, _ = minRequiredVersion_2964_major, minRequiredVersion_2964_minor, context, GetContext_2966_result, ctx
 	return nil
 }
 
@@ -16317,21 +25164,21 @@ func (ϟa *GlBindImageTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1192_major := uint32(3) // u32
-	minRequiredVersion_1192_minor := uint32(1) // u32
+	minRequiredVersion_2968_major := uint32(3) // u32
+	minRequiredVersion_2968_minor := uint32(1) // u32
 	switch ϟa.Access {
 	case GLenum_GL_READ_ONLY, GLenum_GL_READ_WRITE, GLenum_GL_WRITE_ONLY:
 	default:
-		glErrorInvalidEnum_1193_param := ϟa.Access // GLenum
+		glErrorInvalidEnum_2969_param := ϟa.Access // GLenum
 		return
-		_ = glErrorInvalidEnum_1193_param
+		_ = glErrorInvalidEnum_2969_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM:
 	default:
-		glErrorInvalidEnum_1194_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_2970_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1194_param
+		_ = glErrorInvalidEnum_2970_param
 	}
 	ϟb.Push(ϟa.Unit.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -16346,7 +25193,7 @@ func (ϟa *GlBindImageTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Call(funcInfoGlBindImageTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1192_major, minRequiredVersion_1192_minor
+	_, _ = minRequiredVersion_2968_major, minRequiredVersion_2968_minor
 	return nil
 }
 
@@ -16355,13 +25202,13 @@ func (ϟa *GlBindSampler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1195_major := uint32(3) // u32
-	minRequiredVersion_1195_minor := uint32(0) // u32
+	minRequiredVersion_2971_major := uint32(3) // u32
+	minRequiredVersion_2971_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Unit.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindSampler)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1195_major, minRequiredVersion_1195_minor
+	_, _ = minRequiredVersion_2971_major, minRequiredVersion_2971_minor
 	return nil
 }
 
@@ -16370,35 +25217,35 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1196_major := uint32(2) // u32
-	minRequiredVersion_1196_minor := uint32(0) // u32
+	minRequiredVersion_2972_major := uint32(2) // u32
+	minRequiredVersion_2972_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1197_major := uint32(3) // u32
-		minRequiredVersion_1197_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1197_major, minRequiredVersion_1197_minor
+		minRequiredVersion_2973_major := uint32(3) // u32
+		minRequiredVersion_2973_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2973_major, minRequiredVersion_2973_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1198_major := uint32(3) // u32
-		minRequiredVersion_1198_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1198_major, minRequiredVersion_1198_minor
+		minRequiredVersion_2974_major := uint32(3) // u32
+		minRequiredVersion_2974_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_2974_major, minRequiredVersion_2974_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BUFFER, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1199_major := uint32(3) // u32
-		minRequiredVersion_1199_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1199_major, minRequiredVersion_1199_minor
+		minRequiredVersion_2975_major := uint32(3) // u32
+		minRequiredVersion_2975_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2975_major, minRequiredVersion_2975_minor
 	default:
-		glErrorInvalidEnum_1200_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2976_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1200_param
+		_ = glErrorInvalidEnum_2976_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1202_msg := "No context bound" // string
+		error_2978_msg := "No context bound" // string
 		return
-		_ = error_1202_msg
+		_ = error_2978_msg
 	}
-	GetContext_1201_result := context // Contextʳ
-	ctx := GetContext_1201_result     // Contextʳ
+	GetContext_2977_result := context // Contextʳ
+	ctx := GetContext_2977_result     // Contextʳ
 	if !(ctx.Instances.Textures.Contains(ϟa.Texture)) {
 		ctx.Instances.Textures[ϟa.Texture] = (&Texture{ID: ϟa.Texture, Texture2D: GLintːImageᵐ{}, Cubemap: GLintːCubemapLevelᵐ{}, MagFilter: GLenum_GL_LINEAR, MinFilter: GLenum_GL_NEAREST_MIPMAP_LINEAR, WrapS: GLenum_GL_REPEAT, WrapT: GLenum_GL_REPEAT, SwizzleR: GLenum_GL_RED, SwizzleG: GLenum_GL_GREEN, SwizzleB: GLenum_GL_BLUE, SwizzleA: GLenum_GL_ALPHA, MaxAnisotropy: float32(1)}).OnCreate(ϟs)
 	}
@@ -16412,7 +25259,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Call(funcInfoGlBindTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1196_major, minRequiredVersion_1196_minor, context, GetContext_1201_result, ctx, tu
+	_, _, _, _, _, _ = minRequiredVersion_2972_major, minRequiredVersion_2972_minor, context, GetContext_2977_result, ctx, tu
 	return nil
 }
 
@@ -16421,40 +25268,40 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1203_major := uint32(2) // u32
-	minRequiredVersion_1203_minor := uint32(0) // u32
+	minRequiredVersion_2979_major := uint32(2) // u32
+	minRequiredVersion_2979_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1204_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2980_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1204_param
+		_ = glErrorInvalidEnum_2980_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
-		minRequiredVersion_1205_major := uint32(3) // u32
-		minRequiredVersion_1205_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1205_major, minRequiredVersion_1205_minor
+		minRequiredVersion_2981_major := uint32(3) // u32
+		minRequiredVersion_2981_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2981_major, minRequiredVersion_2981_minor
 	case GLenum_GL_ATC_RGB_AMD, GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD, GLenum_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD:
-		requiresExtension_1206_ext := ExtensionId_GL_AMD_compressed_ATC_texture // ExtensionId
-		_ = requiresExtension_1206_ext
+		requiresExtension_2982_ext := ExtensionId_GL_AMD_compressed_ATC_texture // ExtensionId
+		_ = requiresExtension_2982_ext
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:
-		minRequiredVersion_1207_major := uint32(3) // u32
-		minRequiredVersion_1207_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1207_major, minRequiredVersion_1207_minor
+		minRequiredVersion_2983_major := uint32(3) // u32
+		minRequiredVersion_2983_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2983_major, minRequiredVersion_2983_minor
 	default:
-		glErrorInvalidEnum_1208_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_2984_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1208_param
+		_ = glErrorInvalidEnum_2984_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1210_msg := "No context bound" // string
+		error_2986_msg := "No context bound" // string
 		return
-		_ = error_1210_msg
+		_ = error_2986_msg
 	}
-	GetContext_1209_result := context                 // Contextʳ
-	ctx := GetContext_1209_result                     // Contextʳ
+	GetContext_2985_result := context                 // Contextʳ
+	ctx := GetContext_2985_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
@@ -16495,7 +25342,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1203_major, minRequiredVersion_1203_minor, context, GetContext_1209_result, ctx, tu
+	_, _, _, _, _, _ = minRequiredVersion_2979_major, minRequiredVersion_2979_minor, context, GetContext_2985_result, ctx, tu
 	return nil
 }
 
@@ -16504,38 +25351,38 @@ func (ϟa *GlCompressedTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1211_major := uint32(3) // u32
-	minRequiredVersion_1211_minor := uint32(0) // u32
+	minRequiredVersion_2987_major := uint32(3) // u32
+	minRequiredVersion_2987_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1212_major := uint32(3) // u32
-		minRequiredVersion_1212_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1212_major, minRequiredVersion_1212_minor
+		minRequiredVersion_2988_major := uint32(3) // u32
+		minRequiredVersion_2988_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2988_major, minRequiredVersion_2988_minor
 	default:
-		glErrorInvalidEnum_1213_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2989_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1213_param
+		_ = glErrorInvalidEnum_2989_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:
-		minRequiredVersion_1214_major := uint32(3) // u32
-		minRequiredVersion_1214_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1214_major, minRequiredVersion_1214_minor
+		minRequiredVersion_2990_major := uint32(3) // u32
+		minRequiredVersion_2990_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2990_major, minRequiredVersion_2990_minor
 	default:
-		glErrorInvalidEnum_1215_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_2991_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1215_param
+		_ = glErrorInvalidEnum_2991_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1217_msg := "No context bound" // string
+		error_2993_msg := "No context bound" // string
 		return
-		_ = error_1217_msg
+		_ = error_2993_msg
 	}
-	GetContext_1216_result := context // Contextʳ
-	ctx := GetContext_1216_result     // Contextʳ
+	GetContext_2992_result := context // Contextʳ
+	ctx := GetContext_2992_result     // Contextʳ
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(ϟa.Data).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.ImageSize), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
@@ -16550,7 +25397,7 @@ func (ϟa *GlCompressedTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexImage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1211_major, minRequiredVersion_1211_minor, context, GetContext_1216_result, ctx
+	_, _, _, _, _ = minRequiredVersion_2987_major, minRequiredVersion_2987_minor, context, GetContext_2992_result, ctx
 	return nil
 }
 
@@ -16559,37 +25406,37 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1218_major := uint32(2) // u32
-	minRequiredVersion_1218_minor := uint32(0) // u32
+	minRequiredVersion_2994_major := uint32(2) // u32
+	minRequiredVersion_2994_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1219_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_2995_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1219_param
+		_ = glErrorInvalidEnum_2995_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
-		minRequiredVersion_1220_major := uint32(3) // u32
-		minRequiredVersion_1220_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1220_major, minRequiredVersion_1220_minor
+		minRequiredVersion_2996_major := uint32(3) // u32
+		minRequiredVersion_2996_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_2996_major, minRequiredVersion_2996_minor
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:
-		minRequiredVersion_1221_major := uint32(3) // u32
-		minRequiredVersion_1221_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1221_major, minRequiredVersion_1221_minor
+		minRequiredVersion_2997_major := uint32(3) // u32
+		minRequiredVersion_2997_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_2997_major, minRequiredVersion_2997_minor
 	default:
-		glErrorInvalidEnum_1222_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_2998_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1222_param
+		_ = glErrorInvalidEnum_2998_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1224_msg := "No context bound" // string
+		error_3000_msg := "No context bound" // string
 		return
-		_ = error_1224_msg
+		_ = error_3000_msg
 	}
-	GetContext_1223_result := context // Contextʳ
-	ctx := GetContext_1223_result     // Contextʳ
+	GetContext_2999_result := context // Contextʳ
+	ctx := GetContext_2999_result     // Contextʳ
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(ϟa.Data).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.ImageSize), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
@@ -16604,7 +25451,7 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexSubImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1218_major, minRequiredVersion_1218_minor, context, GetContext_1223_result, ctx
+	_, _, _, _, _ = minRequiredVersion_2994_major, minRequiredVersion_2994_minor, context, GetContext_2999_result, ctx
 	return nil
 }
 
@@ -16613,38 +25460,38 @@ func (ϟa *GlCompressedTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1225_major := uint32(3) // u32
-	minRequiredVersion_1225_minor := uint32(0) // u32
+	minRequiredVersion_3001_major := uint32(3) // u32
+	minRequiredVersion_3001_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1226_major := uint32(3) // u32
-		minRequiredVersion_1226_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1226_major, minRequiredVersion_1226_minor
+		minRequiredVersion_3002_major := uint32(3) // u32
+		minRequiredVersion_3002_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3002_major, minRequiredVersion_3002_minor
 	default:
-		glErrorInvalidEnum_1227_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3003_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1227_param
+		_ = glErrorInvalidEnum_3003_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:
-		minRequiredVersion_1228_major := uint32(3) // u32
-		minRequiredVersion_1228_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1228_major, minRequiredVersion_1228_minor
+		minRequiredVersion_3004_major := uint32(3) // u32
+		minRequiredVersion_3004_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3004_major, minRequiredVersion_3004_minor
 	default:
-		glErrorInvalidEnum_1229_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3005_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1229_param
+		_ = glErrorInvalidEnum_3005_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1231_msg := "No context bound" // string
+		error_3007_msg := "No context bound" // string
 		return
-		_ = error_1231_msg
+		_ = error_3007_msg
 	}
-	GetContext_1230_result := context // Contextʳ
-	ctx := GetContext_1230_result     // Contextʳ
+	GetContext_3006_result := context // Contextʳ
+	ctx := GetContext_3006_result     // Contextʳ
 	if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 		U8ᵖ(ϟa.Data).Slice(uint64(GLsizei(int32(0))), uint64(ϟa.ImageSize), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
@@ -16661,7 +25508,7 @@ func (ϟa *GlCompressedTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexSubImage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1225_major, minRequiredVersion_1225_minor, context, GetContext_1230_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3001_major, minRequiredVersion_3001_minor, context, GetContext_3006_result, ctx
 	return nil
 }
 
@@ -16670,21 +25517,21 @@ func (ϟa *GlCopyImageSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1232_major := uint32(3) // u32
-	minRequiredVersion_1232_minor := uint32(2) // u32
+	minRequiredVersion_3008_major := uint32(3) // u32
+	minRequiredVersion_3008_minor := uint32(2) // u32
 	switch ϟa.SrcTarget {
 	case GLenum_GL_RENDERBUFFER, GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		glErrorInvalidEnum_1233_param := ϟa.SrcTarget // GLenum
+		glErrorInvalidEnum_3009_param := ϟa.SrcTarget // GLenum
 		return
-		_ = glErrorInvalidEnum_1233_param
+		_ = glErrorInvalidEnum_3009_param
 	}
 	switch ϟa.DstTarget {
 	case GLenum_GL_RENDERBUFFER, GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		glErrorInvalidEnum_1234_param := ϟa.DstTarget // GLenum
+		glErrorInvalidEnum_3010_param := ϟa.DstTarget // GLenum
 		return
-		_ = glErrorInvalidEnum_1234_param
+		_ = glErrorInvalidEnum_3010_param
 	}
 	ϟb.Push(ϟa.SrcName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcTarget))
@@ -16703,7 +25550,7 @@ func (ϟa *GlCopyImageSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.SrcDepth.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCopyImageSubData)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1232_major, minRequiredVersion_1232_minor
+	_, _ = minRequiredVersion_3008_major, minRequiredVersion_3008_minor
 	return nil
 }
 
@@ -16712,25 +25559,25 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1235_major := uint32(2) // u32
-	minRequiredVersion_1235_minor := uint32(0) // u32
+	minRequiredVersion_3011_major := uint32(2) // u32
+	minRequiredVersion_3011_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1236_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3012_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1236_param
+		_ = glErrorInvalidEnum_3012_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
 	case GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
-		minRequiredVersion_1237_major := uint32(3) // u32
-		minRequiredVersion_1237_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1237_major, minRequiredVersion_1237_minor
+		minRequiredVersion_3013_major := uint32(3) // u32
+		minRequiredVersion_3013_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3013_major, minRequiredVersion_3013_minor
 	default:
-		glErrorInvalidEnum_1238_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3014_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1238_param
+		_ = glErrorInvalidEnum_3014_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -16742,7 +25589,7 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Border.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCopyTexImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1235_major, minRequiredVersion_1235_minor
+	_, _ = minRequiredVersion_3011_major, minRequiredVersion_3011_minor
 	return nil
 }
 
@@ -16751,14 +25598,14 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1239_major := uint32(2) // u32
-	minRequiredVersion_1239_minor := uint32(0) // u32
+	minRequiredVersion_3015_major := uint32(2) // u32
+	minRequiredVersion_3015_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1240_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3016_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1240_param
+		_ = glErrorInvalidEnum_3016_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -16770,7 +25617,7 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Height.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCopyTexSubImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1239_major, minRequiredVersion_1239_minor
+	_, _ = minRequiredVersion_3015_major, minRequiredVersion_3015_minor
 	return nil
 }
 
@@ -16779,18 +25626,18 @@ func (ϟa *GlCopyTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1241_major := uint32(3) // u32
-	minRequiredVersion_1241_minor := uint32(0) // u32
+	minRequiredVersion_3017_major := uint32(3) // u32
+	minRequiredVersion_3017_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1242_major := uint32(3) // u32
-		minRequiredVersion_1242_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1242_major, minRequiredVersion_1242_minor
+		minRequiredVersion_3018_major := uint32(3) // u32
+		minRequiredVersion_3018_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3018_major, minRequiredVersion_3018_minor
 	default:
-		glErrorInvalidEnum_1243_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3019_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1243_param
+		_ = glErrorInvalidEnum_3019_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -16803,7 +25650,7 @@ func (ϟa *GlCopyTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Height.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCopyTexSubImage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1241_major, minRequiredVersion_1241_minor
+	_, _ = minRequiredVersion_3017_major, minRequiredVersion_3017_minor
 	return nil
 }
 
@@ -16812,14 +25659,14 @@ func (ϟa *GlDeleteSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1244_major := uint32(3) // u32
-	minRequiredVersion_1244_minor := uint32(0) // u32
+	minRequiredVersion_3020_major := uint32(3) // u32
+	minRequiredVersion_3020_minor := uint32(0) // u32
 	ϟa.Samplers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Samplers.value())
 	ϟb.Call(funcInfoGlDeleteSamplers)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1244_major, minRequiredVersion_1244_minor
+	_, _ = minRequiredVersion_3020_major, minRequiredVersion_3020_minor
 	return nil
 }
 
@@ -16828,17 +25675,17 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1245_major := uint32(2)                              // u32
-	minRequiredVersion_1245_minor := uint32(0)                              // u32
+	minRequiredVersion_3021_major := uint32(2)                              // u32
+	minRequiredVersion_3021_minor := uint32(0)                              // u32
 	t := ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // TextureIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                            // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1247_msg := "No context bound" // string
+		error_3023_msg := "No context bound" // string
 		return
-		_ = error_1247_msg
+		_ = error_3023_msg
 	}
-	GetContext_1246_result := context // Contextʳ
-	ctx := GetContext_1246_result     // Contextʳ
+	GetContext_3022_result := context // Contextʳ
+	ctx := GetContext_3022_result     // Contextʳ
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.Textures, t.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
@@ -16846,7 +25693,7 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Textures.value())
 	ϟb.Call(funcInfoGlDeleteTextures)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1245_major, minRequiredVersion_1245_minor, t, context, GetContext_1246_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_3021_major, minRequiredVersion_3021_minor, t, context, GetContext_3022_result, ctx
 	return nil
 }
 
@@ -16855,14 +25702,14 @@ func (ϟa *GlGenSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1248_major := uint32(3) // u32
-	minRequiredVersion_1248_minor := uint32(0) // u32
+	minRequiredVersion_3024_major := uint32(3) // u32
+	minRequiredVersion_3024_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Samplers.value())
 	ϟb.Call(funcInfoGlGenSamplers)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Samplers.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _ = minRequiredVersion_1248_major, minRequiredVersion_1248_minor
+	_, _ = minRequiredVersion_3024_major, minRequiredVersion_3024_minor
 	return nil
 }
 
@@ -16871,17 +25718,17 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1249_major := uint32(2)                              // u32
-	minRequiredVersion_1249_minor := uint32(0)                              // u32
+	minRequiredVersion_3025_major := uint32(2)                              // u32
+	minRequiredVersion_3025_minor := uint32(0)                              // u32
 	t := ϟa.Textures.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // TextureIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                            // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1251_msg := "No context bound" // string
+		error_3027_msg := "No context bound" // string
 		return
-		_ = error_1251_msg
+		_ = error_3027_msg
 	}
-	GetContext_1250_result := context // Contextʳ
-	ctx := GetContext_1250_result     // Contextʳ
+	GetContext_3026_result := context // Contextʳ
+	ctx := GetContext_3026_result     // Contextʳ
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Textures.value())
 	ϟb.Call(funcInfoGlGenTextures)
@@ -16892,7 +25739,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		t.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _, _, _ = minRequiredVersion_1249_major, minRequiredVersion_1249_minor, t, context, GetContext_1250_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_3025_major, minRequiredVersion_3025_minor, t, context, GetContext_3026_result, ctx
 	return nil
 }
 
@@ -16901,27 +25748,27 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1252_major := uint32(2) // u32
-	minRequiredVersion_1252_minor := uint32(0) // u32
+	minRequiredVersion_3028_major := uint32(2) // u32
+	minRequiredVersion_3028_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1253_major := uint32(3) // u32
-		minRequiredVersion_1253_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1253_major, minRequiredVersion_1253_minor
+		minRequiredVersion_3029_major := uint32(3) // u32
+		minRequiredVersion_3029_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3029_major, minRequiredVersion_3029_minor
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1254_major := uint32(3) // u32
-		minRequiredVersion_1254_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1254_major, minRequiredVersion_1254_minor
+		minRequiredVersion_3030_major := uint32(3) // u32
+		minRequiredVersion_3030_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3030_major, minRequiredVersion_3030_minor
 	default:
-		glErrorInvalidEnum_1255_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3031_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1255_param
+		_ = glErrorInvalidEnum_3031_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlGenerateMipmap)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1252_major, minRequiredVersion_1252_minor
+	_, _ = minRequiredVersion_3028_major, minRequiredVersion_3028_minor
 	return nil
 }
 
@@ -16930,27 +25777,27 @@ func (ϟa *GlGetSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1256_major := uint32(3)     // u32
-	minRequiredVersion_1256_minor := uint32(2)     // u32
-	GetSamplerParameter_1257_sampler := ϟa.Sampler // SamplerId
-	GetSamplerParameter_1257_pname := ϟa.Pname     // GLenum
-	GetSamplerParameter_1257_params := ϟa.Params   // GLintᵖ
+	minRequiredVersion_3032_major := uint32(3)     // u32
+	minRequiredVersion_3032_minor := uint32(2)     // u32
+	GetSamplerParameter_3033_sampler := ϟa.Sampler // SamplerId
+	GetSamplerParameter_3033_pname := ϟa.Pname     // GLenum
+	GetSamplerParameter_3033_params := ϟa.Params   // GLintᵖ
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetSamplerParameterIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetSamplerParameter_1257_pname {
+	switch GetSamplerParameter_3033_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetSamplerParameter_1257_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3033_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		GetSamplerParameter_1257_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3033_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
-		glErrorInvalidEnum_1258_param := GetSamplerParameter_1257_pname // GLenum
+		glErrorInvalidEnum_3034_param := GetSamplerParameter_3033_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1258_param
+		_ = glErrorInvalidEnum_3034_param
 	}
-	_, _, _, _, _ = minRequiredVersion_1256_major, minRequiredVersion_1256_minor, GetSamplerParameter_1257_sampler, GetSamplerParameter_1257_pname, GetSamplerParameter_1257_params
+	_, _, _, _, _ = minRequiredVersion_3032_major, minRequiredVersion_3032_minor, GetSamplerParameter_3033_sampler, GetSamplerParameter_3033_pname, GetSamplerParameter_3033_params
 	return nil
 }
 
@@ -16959,27 +25806,27 @@ func (ϟa *GlGetSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1259_major := uint32(3)     // u32
-	minRequiredVersion_1259_minor := uint32(2)     // u32
-	GetSamplerParameter_1260_sampler := ϟa.Sampler // SamplerId
-	GetSamplerParameter_1260_pname := ϟa.Pname     // GLenum
-	GetSamplerParameter_1260_params := ϟa.Params   // GLuintᵖ
+	minRequiredVersion_3035_major := uint32(3)     // u32
+	minRequiredVersion_3035_minor := uint32(2)     // u32
+	GetSamplerParameter_3036_sampler := ϟa.Sampler // SamplerId
+	GetSamplerParameter_3036_pname := ϟa.Pname     // GLenum
+	GetSamplerParameter_3036_params := ϟa.Params   // GLuintᵖ
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetSamplerParameterIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetSamplerParameter_1260_pname {
+	switch GetSamplerParameter_3036_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetSamplerParameter_1260_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3036_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		GetSamplerParameter_1260_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3036_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
-		glErrorInvalidEnum_1261_param := GetSamplerParameter_1260_pname // GLenum
+		glErrorInvalidEnum_3037_param := GetSamplerParameter_3036_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1261_param
+		_ = glErrorInvalidEnum_3037_param
 	}
-	_, _, _, _, _ = minRequiredVersion_1259_major, minRequiredVersion_1259_minor, GetSamplerParameter_1260_sampler, GetSamplerParameter_1260_pname, GetSamplerParameter_1260_params
+	_, _, _, _, _ = minRequiredVersion_3035_major, minRequiredVersion_3035_minor, GetSamplerParameter_3036_sampler, GetSamplerParameter_3036_pname, GetSamplerParameter_3036_params
 	return nil
 }
 
@@ -16988,27 +25835,27 @@ func (ϟa *GlGetSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1262_major := uint32(3)     // u32
-	minRequiredVersion_1262_minor := uint32(0)     // u32
-	GetSamplerParameter_1263_sampler := ϟa.Sampler // SamplerId
-	GetSamplerParameter_1263_pname := ϟa.Pname     // GLenum
-	GetSamplerParameter_1263_params := ϟa.Params   // GLfloatᵖ
+	minRequiredVersion_3038_major := uint32(3)     // u32
+	minRequiredVersion_3038_minor := uint32(0)     // u32
+	GetSamplerParameter_3039_sampler := ϟa.Sampler // SamplerId
+	GetSamplerParameter_3039_pname := ϟa.Pname     // GLenum
+	GetSamplerParameter_3039_params := ϟa.Params   // GLfloatᵖ
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetSamplerParameterfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetSamplerParameter_1263_pname {
+	switch GetSamplerParameter_3039_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetSamplerParameter_1263_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3039_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		GetSamplerParameter_1263_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3039_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
-		glErrorInvalidEnum_1264_param := GetSamplerParameter_1263_pname // GLenum
+		glErrorInvalidEnum_3040_param := GetSamplerParameter_3039_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1264_param
+		_ = glErrorInvalidEnum_3040_param
 	}
-	_, _, _, _, _ = minRequiredVersion_1262_major, minRequiredVersion_1262_minor, GetSamplerParameter_1263_sampler, GetSamplerParameter_1263_pname, GetSamplerParameter_1263_params
+	_, _, _, _, _ = minRequiredVersion_3038_major, minRequiredVersion_3038_minor, GetSamplerParameter_3039_sampler, GetSamplerParameter_3039_pname, GetSamplerParameter_3039_params
 	return nil
 }
 
@@ -17017,27 +25864,27 @@ func (ϟa *GlGetSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1265_major := uint32(3)     // u32
-	minRequiredVersion_1265_minor := uint32(0)     // u32
-	GetSamplerParameter_1266_sampler := ϟa.Sampler // SamplerId
-	GetSamplerParameter_1266_pname := ϟa.Pname     // GLenum
-	GetSamplerParameter_1266_params := ϟa.Params   // GLintᵖ
+	minRequiredVersion_3041_major := uint32(3)     // u32
+	minRequiredVersion_3041_minor := uint32(0)     // u32
+	GetSamplerParameter_3042_sampler := ϟa.Sampler // SamplerId
+	GetSamplerParameter_3042_pname := ϟa.Pname     // GLenum
+	GetSamplerParameter_3042_params := ϟa.Params   // GLintᵖ
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetSamplerParameteriv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetSamplerParameter_1266_pname {
+	switch GetSamplerParameter_3042_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetSamplerParameter_1266_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3042_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		GetSamplerParameter_1266_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetSamplerParameter_3042_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
-		glErrorInvalidEnum_1267_param := GetSamplerParameter_1266_pname // GLenum
+		glErrorInvalidEnum_3043_param := GetSamplerParameter_3042_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1267_param
+		_ = glErrorInvalidEnum_3043_param
 	}
-	_, _, _, _, _ = minRequiredVersion_1265_major, minRequiredVersion_1265_minor, GetSamplerParameter_1266_sampler, GetSamplerParameter_1266_pname, GetSamplerParameter_1266_params
+	_, _, _, _, _ = minRequiredVersion_3041_major, minRequiredVersion_3041_minor, GetSamplerParameter_3042_sampler, GetSamplerParameter_3042_pname, GetSamplerParameter_3042_params
 	return nil
 }
 
@@ -17046,29 +25893,29 @@ func (ϟa *GlGetTexLevelParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1268_major := uint32(3) // u32
-	minRequiredVersion_1268_minor := uint32(1) // u32
+	minRequiredVersion_3044_major := uint32(3) // u32
+	minRequiredVersion_3044_minor := uint32(1) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BUFFER, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1269_major := uint32(3) // u32
-		minRequiredVersion_1269_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1269_major, minRequiredVersion_1269_minor
+		minRequiredVersion_3045_major := uint32(3) // u32
+		minRequiredVersion_3045_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3045_major, minRequiredVersion_3045_minor
 	default:
-		glErrorInvalidEnum_1270_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3046_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1270_param
+		_ = glErrorInvalidEnum_3046_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_ALPHA_SIZE, GLenum_GL_TEXTURE_ALPHA_TYPE, GLenum_GL_TEXTURE_BLUE_SIZE, GLenum_GL_TEXTURE_BLUE_TYPE, GLenum_GL_TEXTURE_COMPRESSED, GLenum_GL_TEXTURE_DEPTH, GLenum_GL_TEXTURE_DEPTH_SIZE, GLenum_GL_TEXTURE_DEPTH_TYPE, GLenum_GL_TEXTURE_FIXED_SAMPLE_LOCATIONS, GLenum_GL_TEXTURE_GREEN_SIZE, GLenum_GL_TEXTURE_GREEN_TYPE, GLenum_GL_TEXTURE_HEIGHT, GLenum_GL_TEXTURE_INTERNAL_FORMAT, GLenum_GL_TEXTURE_RED_SIZE, GLenum_GL_TEXTURE_RED_TYPE, GLenum_GL_TEXTURE_SAMPLES, GLenum_GL_TEXTURE_SHARED_SIZE, GLenum_GL_TEXTURE_STENCIL_SIZE, GLenum_GL_TEXTURE_WIDTH:
 	case GLenum_GL_TEXTURE_BUFFER_DATA_STORE_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET, GLenum_GL_TEXTURE_BUFFER_SIZE:
-		minRequiredVersion_1271_major := uint32(3) // u32
-		minRequiredVersion_1271_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1271_major, minRequiredVersion_1271_minor
+		minRequiredVersion_3047_major := uint32(3) // u32
+		minRequiredVersion_3047_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3047_major, minRequiredVersion_3047_minor
 	default:
-		glErrorInvalidEnum_1272_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3048_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1272_param
+		_ = glErrorInvalidEnum_3048_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -17077,7 +25924,7 @@ func (ϟa *GlGetTexLevelParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟb.Call(funcInfoGlGetTexLevelParameterfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _ = minRequiredVersion_1268_major, minRequiredVersion_1268_minor
+	_, _ = minRequiredVersion_3044_major, minRequiredVersion_3044_minor
 	return nil
 }
 
@@ -17086,29 +25933,29 @@ func (ϟa *GlGetTexLevelParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1273_major := uint32(3) // u32
-	minRequiredVersion_1273_minor := uint32(1) // u32
+	minRequiredVersion_3049_major := uint32(3) // u32
+	minRequiredVersion_3049_minor := uint32(1) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_BUFFER, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1274_major := uint32(3) // u32
-		minRequiredVersion_1274_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1274_major, minRequiredVersion_1274_minor
+		minRequiredVersion_3050_major := uint32(3) // u32
+		minRequiredVersion_3050_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3050_major, minRequiredVersion_3050_minor
 	default:
-		glErrorInvalidEnum_1275_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3051_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1275_param
+		_ = glErrorInvalidEnum_3051_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_ALPHA_SIZE, GLenum_GL_TEXTURE_ALPHA_TYPE, GLenum_GL_TEXTURE_BLUE_SIZE, GLenum_GL_TEXTURE_BLUE_TYPE, GLenum_GL_TEXTURE_COMPRESSED, GLenum_GL_TEXTURE_DEPTH, GLenum_GL_TEXTURE_DEPTH_SIZE, GLenum_GL_TEXTURE_DEPTH_TYPE, GLenum_GL_TEXTURE_FIXED_SAMPLE_LOCATIONS, GLenum_GL_TEXTURE_GREEN_SIZE, GLenum_GL_TEXTURE_GREEN_TYPE, GLenum_GL_TEXTURE_HEIGHT, GLenum_GL_TEXTURE_INTERNAL_FORMAT, GLenum_GL_TEXTURE_RED_SIZE, GLenum_GL_TEXTURE_RED_TYPE, GLenum_GL_TEXTURE_SAMPLES, GLenum_GL_TEXTURE_SHARED_SIZE, GLenum_GL_TEXTURE_STENCIL_SIZE, GLenum_GL_TEXTURE_WIDTH:
 	case GLenum_GL_TEXTURE_BUFFER_DATA_STORE_BINDING, GLenum_GL_TEXTURE_BUFFER_OFFSET, GLenum_GL_TEXTURE_BUFFER_SIZE:
-		minRequiredVersion_1276_major := uint32(3) // u32
-		minRequiredVersion_1276_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1276_major, minRequiredVersion_1276_minor
+		minRequiredVersion_3052_major := uint32(3) // u32
+		minRequiredVersion_3052_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3052_major, minRequiredVersion_3052_minor
 	default:
-		glErrorInvalidEnum_1277_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3053_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1277_param
+		_ = glErrorInvalidEnum_3053_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -17117,7 +25964,7 @@ func (ϟa *GlGetTexLevelParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟb.Call(funcInfoGlGetTexLevelParameteriv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _ = minRequiredVersion_1273_major, minRequiredVersion_1273_minor
+	_, _ = minRequiredVersion_3049_major, minRequiredVersion_3049_minor
 	return nil
 }
 
@@ -17126,61 +25973,61 @@ func (ϟa *GlGetTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1278_major := uint32(3) // u32
-	minRequiredVersion_1278_minor := uint32(2) // u32
-	GetTexParameter_1279_target := ϟa.Target   // GLenum
-	GetTexParameter_1279_parameter := ϟa.Pname // GLenum
-	GetTexParameter_1279_params := ϟa.Params   // GLintᵖ
-	minRequiredVersion_1280_major := uint32(2) // u32
-	minRequiredVersion_1280_minor := uint32(0) // u32
-	switch GetTexParameter_1279_target {
+	minRequiredVersion_3054_major := uint32(3) // u32
+	minRequiredVersion_3054_minor := uint32(2) // u32
+	GetTexParameter_3055_target := ϟa.Target   // GLenum
+	GetTexParameter_3055_parameter := ϟa.Pname // GLenum
+	GetTexParameter_3055_params := ϟa.Params   // GLintᵖ
+	minRequiredVersion_3056_major := uint32(2) // u32
+	minRequiredVersion_3056_minor := uint32(0) // u32
+	switch GetTexParameter_3055_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1281_major := uint32(3) // u32
-		minRequiredVersion_1281_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1281_major, minRequiredVersion_1281_minor
+		minRequiredVersion_3057_major := uint32(3) // u32
+		minRequiredVersion_3057_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3057_major, minRequiredVersion_3057_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1282_major := uint32(3) // u32
-		minRequiredVersion_1282_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1282_major, minRequiredVersion_1282_minor
+		minRequiredVersion_3058_major := uint32(3) // u32
+		minRequiredVersion_3058_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3058_major, minRequiredVersion_3058_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1283_major := uint32(3) // u32
-		minRequiredVersion_1283_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1283_major, minRequiredVersion_1283_minor
+		minRequiredVersion_3059_major := uint32(3) // u32
+		minRequiredVersion_3059_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3059_major, minRequiredVersion_3059_minor
 	default:
-		glErrorInvalidEnum_1284_param := GetTexParameter_1279_target // GLenum
+		glErrorInvalidEnum_3060_param := GetTexParameter_3055_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1284_param
+		_ = glErrorInvalidEnum_3060_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetTexParameterIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetTexParameter_1279_parameter {
+	switch GetTexParameter_3055_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetTexParameter_1279_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetTexParameter_3055_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1285_major := uint32(3) // u32
-		minRequiredVersion_1285_minor := uint32(0) // u32
-		GetTexParameter_1279_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1285_major, minRequiredVersion_1285_minor
+		minRequiredVersion_3061_major := uint32(3) // u32
+		minRequiredVersion_3061_minor := uint32(0) // u32
+		GetTexParameter_3055_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3061_major, minRequiredVersion_3061_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS:
-		minRequiredVersion_1286_major := uint32(3) // u32
-		minRequiredVersion_1286_minor := uint32(1) // u32
-		GetTexParameter_1279_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1286_major, minRequiredVersion_1286_minor
+		minRequiredVersion_3062_major := uint32(3) // u32
+		minRequiredVersion_3062_minor := uint32(1) // u32
+		GetTexParameter_3055_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3062_major, minRequiredVersion_3062_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1287_major := uint32(3) // u32
-		minRequiredVersion_1287_minor := uint32(2) // u32
-		GetTexParameter_1279_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1287_major, minRequiredVersion_1287_minor
+		minRequiredVersion_3063_major := uint32(3) // u32
+		minRequiredVersion_3063_minor := uint32(2) // u32
+		GetTexParameter_3055_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3063_major, minRequiredVersion_3063_minor
 	default:
-		glErrorInvalidEnum_1288_param := GetTexParameter_1279_parameter // GLenum
+		glErrorInvalidEnum_3064_param := GetTexParameter_3055_parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1288_param
+		_ = glErrorInvalidEnum_3064_param
 	}
-	_, _, _, _, _, _, _ = minRequiredVersion_1278_major, minRequiredVersion_1278_minor, GetTexParameter_1279_target, GetTexParameter_1279_parameter, GetTexParameter_1279_params, minRequiredVersion_1280_major, minRequiredVersion_1280_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3054_major, minRequiredVersion_3054_minor, GetTexParameter_3055_target, GetTexParameter_3055_parameter, GetTexParameter_3055_params, minRequiredVersion_3056_major, minRequiredVersion_3056_minor
 	return nil
 }
 
@@ -17189,61 +26036,61 @@ func (ϟa *GlGetTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1289_major := uint32(3) // u32
-	minRequiredVersion_1289_minor := uint32(2) // u32
-	GetTexParameter_1290_target := ϟa.Target   // GLenum
-	GetTexParameter_1290_parameter := ϟa.Pname // GLenum
-	GetTexParameter_1290_params := ϟa.Params   // GLuintᵖ
-	minRequiredVersion_1291_major := uint32(2) // u32
-	minRequiredVersion_1291_minor := uint32(0) // u32
-	switch GetTexParameter_1290_target {
+	minRequiredVersion_3065_major := uint32(3) // u32
+	minRequiredVersion_3065_minor := uint32(2) // u32
+	GetTexParameter_3066_target := ϟa.Target   // GLenum
+	GetTexParameter_3066_parameter := ϟa.Pname // GLenum
+	GetTexParameter_3066_params := ϟa.Params   // GLuintᵖ
+	minRequiredVersion_3067_major := uint32(2) // u32
+	minRequiredVersion_3067_minor := uint32(0) // u32
+	switch GetTexParameter_3066_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1292_major := uint32(3) // u32
-		minRequiredVersion_1292_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1292_major, minRequiredVersion_1292_minor
+		minRequiredVersion_3068_major := uint32(3) // u32
+		minRequiredVersion_3068_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3068_major, minRequiredVersion_3068_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1293_major := uint32(3) // u32
-		minRequiredVersion_1293_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1293_major, minRequiredVersion_1293_minor
+		minRequiredVersion_3069_major := uint32(3) // u32
+		minRequiredVersion_3069_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3069_major, minRequiredVersion_3069_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1294_major := uint32(3) // u32
-		minRequiredVersion_1294_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1294_major, minRequiredVersion_1294_minor
+		minRequiredVersion_3070_major := uint32(3) // u32
+		minRequiredVersion_3070_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3070_major, minRequiredVersion_3070_minor
 	default:
-		glErrorInvalidEnum_1295_param := GetTexParameter_1290_target // GLenum
+		glErrorInvalidEnum_3071_param := GetTexParameter_3066_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1295_param
+		_ = glErrorInvalidEnum_3071_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetTexParameterIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetTexParameter_1290_parameter {
+	switch GetTexParameter_3066_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetTexParameter_1290_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetTexParameter_3066_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1296_major := uint32(3) // u32
-		minRequiredVersion_1296_minor := uint32(0) // u32
-		GetTexParameter_1290_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1296_major, minRequiredVersion_1296_minor
+		minRequiredVersion_3072_major := uint32(3) // u32
+		minRequiredVersion_3072_minor := uint32(0) // u32
+		GetTexParameter_3066_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3072_major, minRequiredVersion_3072_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS:
-		minRequiredVersion_1297_major := uint32(3) // u32
-		minRequiredVersion_1297_minor := uint32(1) // u32
-		GetTexParameter_1290_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1297_major, minRequiredVersion_1297_minor
+		minRequiredVersion_3073_major := uint32(3) // u32
+		minRequiredVersion_3073_minor := uint32(1) // u32
+		GetTexParameter_3066_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3073_major, minRequiredVersion_3073_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1298_major := uint32(3) // u32
-		minRequiredVersion_1298_minor := uint32(2) // u32
-		GetTexParameter_1290_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1298_major, minRequiredVersion_1298_minor
+		minRequiredVersion_3074_major := uint32(3) // u32
+		minRequiredVersion_3074_minor := uint32(2) // u32
+		GetTexParameter_3066_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3074_major, minRequiredVersion_3074_minor
 	default:
-		glErrorInvalidEnum_1299_param := GetTexParameter_1290_parameter // GLenum
+		glErrorInvalidEnum_3075_param := GetTexParameter_3066_parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1299_param
+		_ = glErrorInvalidEnum_3075_param
 	}
-	_, _, _, _, _, _, _ = minRequiredVersion_1289_major, minRequiredVersion_1289_minor, GetTexParameter_1290_target, GetTexParameter_1290_parameter, GetTexParameter_1290_params, minRequiredVersion_1291_major, minRequiredVersion_1291_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3065_major, minRequiredVersion_3065_minor, GetTexParameter_3066_target, GetTexParameter_3066_parameter, GetTexParameter_3066_params, minRequiredVersion_3067_major, minRequiredVersion_3067_minor
 	return nil
 }
 
@@ -17252,68 +26099,68 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1300_major := uint32(2)     // u32
-	minRequiredVersion_1300_minor := uint32(0)     // u32
-	GetTexParameter_1301_target := ϟa.Target       // GLenum
-	GetTexParameter_1301_parameter := ϟa.Parameter // GLenum
-	GetTexParameter_1301_params := ϟa.Values       // GLfloatᵖ
-	minRequiredVersion_1302_major := uint32(2)     // u32
-	minRequiredVersion_1302_minor := uint32(0)     // u32
-	switch GetTexParameter_1301_target {
+	minRequiredVersion_3076_major := uint32(2)     // u32
+	minRequiredVersion_3076_minor := uint32(0)     // u32
+	GetTexParameter_3077_target := ϟa.Target       // GLenum
+	GetTexParameter_3077_parameter := ϟa.Parameter // GLenum
+	GetTexParameter_3077_params := ϟa.Values       // GLfloatᵖ
+	minRequiredVersion_3078_major := uint32(2)     // u32
+	minRequiredVersion_3078_minor := uint32(0)     // u32
+	switch GetTexParameter_3077_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1303_major := uint32(3) // u32
-		minRequiredVersion_1303_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1303_major, minRequiredVersion_1303_minor
+		minRequiredVersion_3079_major := uint32(3) // u32
+		minRequiredVersion_3079_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3079_major, minRequiredVersion_3079_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1304_major := uint32(3) // u32
-		minRequiredVersion_1304_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1304_major, minRequiredVersion_1304_minor
+		minRequiredVersion_3080_major := uint32(3) // u32
+		minRequiredVersion_3080_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3080_major, minRequiredVersion_3080_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1305_major := uint32(3) // u32
-		minRequiredVersion_1305_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1305_major, minRequiredVersion_1305_minor
+		minRequiredVersion_3081_major := uint32(3) // u32
+		minRequiredVersion_3081_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3081_major, minRequiredVersion_3081_minor
 	default:
-		glErrorInvalidEnum_1306_param := GetTexParameter_1301_target // GLenum
+		glErrorInvalidEnum_3082_param := GetTexParameter_3077_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1306_param
+		_ = glErrorInvalidEnum_3082_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetTexParameterfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetTexParameter_1301_parameter {
+	switch GetTexParameter_3077_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetTexParameter_1301_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetTexParameter_3077_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1307_major := uint32(3) // u32
-		minRequiredVersion_1307_minor := uint32(0) // u32
-		GetTexParameter_1301_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1307_major, minRequiredVersion_1307_minor
+		minRequiredVersion_3083_major := uint32(3) // u32
+		minRequiredVersion_3083_minor := uint32(0) // u32
+		GetTexParameter_3077_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3083_major, minRequiredVersion_3083_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS:
-		minRequiredVersion_1308_major := uint32(3) // u32
-		minRequiredVersion_1308_minor := uint32(1) // u32
-		GetTexParameter_1301_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1308_major, minRequiredVersion_1308_minor
+		minRequiredVersion_3084_major := uint32(3) // u32
+		minRequiredVersion_3084_minor := uint32(1) // u32
+		GetTexParameter_3077_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3084_major, minRequiredVersion_3084_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1309_major := uint32(3) // u32
-		minRequiredVersion_1309_minor := uint32(2) // u32
-		GetTexParameter_1301_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1309_major, minRequiredVersion_1309_minor
+		minRequiredVersion_3085_major := uint32(3) // u32
+		minRequiredVersion_3085_minor := uint32(2) // u32
+		GetTexParameter_3077_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3085_major, minRequiredVersion_3085_minor
 	default:
-		glErrorInvalidEnum_1310_param := GetTexParameter_1301_parameter // GLenum
+		glErrorInvalidEnum_3086_param := GetTexParameter_3077_parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1310_param
+		_ = glErrorInvalidEnum_3086_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1312_msg := "No context bound" // string
+		error_3088_msg := "No context bound" // string
 		return
-		_ = error_1312_msg
+		_ = error_3088_msg
 	}
-	GetContext_1311_result := context                 // Contextʳ
-	ctx := GetContext_1311_result                     // Contextʳ
+	GetContext_3087_result := context                 // Contextʳ
+	ctx := GetContext_3087_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	t := ctx.Instances.Textures.Get(id)               // Textureʳ
@@ -17343,7 +26190,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1300_major, minRequiredVersion_1300_minor, GetTexParameter_1301_target, GetTexParameter_1301_parameter, GetTexParameter_1301_params, minRequiredVersion_1302_major, minRequiredVersion_1302_minor, context, GetContext_1311_result, ctx, tu, id, t
+	_, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3076_major, minRequiredVersion_3076_minor, GetTexParameter_3077_target, GetTexParameter_3077_parameter, GetTexParameter_3077_params, minRequiredVersion_3078_major, minRequiredVersion_3078_minor, context, GetContext_3087_result, ctx, tu, id, t
 	return nil
 }
 
@@ -17352,68 +26199,68 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1313_major := uint32(2)     // u32
-	minRequiredVersion_1313_minor := uint32(0)     // u32
-	GetTexParameter_1314_target := ϟa.Target       // GLenum
-	GetTexParameter_1314_parameter := ϟa.Parameter // GLenum
-	GetTexParameter_1314_params := ϟa.Values       // GLintᵖ
-	minRequiredVersion_1315_major := uint32(2)     // u32
-	minRequiredVersion_1315_minor := uint32(0)     // u32
-	switch GetTexParameter_1314_target {
+	minRequiredVersion_3089_major := uint32(2)     // u32
+	minRequiredVersion_3089_minor := uint32(0)     // u32
+	GetTexParameter_3090_target := ϟa.Target       // GLenum
+	GetTexParameter_3090_parameter := ϟa.Parameter // GLenum
+	GetTexParameter_3090_params := ϟa.Values       // GLintᵖ
+	minRequiredVersion_3091_major := uint32(2)     // u32
+	minRequiredVersion_3091_minor := uint32(0)     // u32
+	switch GetTexParameter_3090_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1316_major := uint32(3) // u32
-		minRequiredVersion_1316_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1316_major, minRequiredVersion_1316_minor
+		minRequiredVersion_3092_major := uint32(3) // u32
+		minRequiredVersion_3092_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3092_major, minRequiredVersion_3092_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1317_major := uint32(3) // u32
-		minRequiredVersion_1317_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1317_major, minRequiredVersion_1317_minor
+		minRequiredVersion_3093_major := uint32(3) // u32
+		minRequiredVersion_3093_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3093_major, minRequiredVersion_3093_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1318_major := uint32(3) // u32
-		minRequiredVersion_1318_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1318_major, minRequiredVersion_1318_minor
+		minRequiredVersion_3094_major := uint32(3) // u32
+		minRequiredVersion_3094_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3094_major, minRequiredVersion_3094_minor
 	default:
-		glErrorInvalidEnum_1319_param := GetTexParameter_1314_target // GLenum
+		glErrorInvalidEnum_3095_param := GetTexParameter_3090_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1319_param
+		_ = glErrorInvalidEnum_3095_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetTexParameteriv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	switch GetTexParameter_1314_parameter {
+	switch GetTexParameter_3090_parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		GetTexParameter_1314_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		GetTexParameter_3090_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1320_major := uint32(3) // u32
-		minRequiredVersion_1320_minor := uint32(0) // u32
-		GetTexParameter_1314_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1320_major, minRequiredVersion_1320_minor
+		minRequiredVersion_3096_major := uint32(3) // u32
+		minRequiredVersion_3096_minor := uint32(0) // u32
+		GetTexParameter_3090_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3096_major, minRequiredVersion_3096_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS:
-		minRequiredVersion_1321_major := uint32(3) // u32
-		minRequiredVersion_1321_minor := uint32(1) // u32
-		GetTexParameter_1314_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1321_major, minRequiredVersion_1321_minor
+		minRequiredVersion_3097_major := uint32(3) // u32
+		minRequiredVersion_3097_minor := uint32(1) // u32
+		GetTexParameter_3090_params.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3097_major, minRequiredVersion_3097_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1322_major := uint32(3) // u32
-		minRequiredVersion_1322_minor := uint32(2) // u32
-		GetTexParameter_1314_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1322_major, minRequiredVersion_1322_minor
+		minRequiredVersion_3098_major := uint32(3) // u32
+		minRequiredVersion_3098_minor := uint32(2) // u32
+		GetTexParameter_3090_params.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3098_major, minRequiredVersion_3098_minor
 	default:
-		glErrorInvalidEnum_1323_param := GetTexParameter_1314_parameter // GLenum
+		glErrorInvalidEnum_3099_param := GetTexParameter_3090_parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1323_param
+		_ = glErrorInvalidEnum_3099_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1325_msg := "No context bound" // string
+		error_3101_msg := "No context bound" // string
 		return
-		_ = error_1325_msg
+		_ = error_3101_msg
 	}
-	GetContext_1324_result := context                 // Contextʳ
-	ctx := GetContext_1324_result                     // Contextʳ
+	GetContext_3100_result := context                 // Contextʳ
+	ctx := GetContext_3100_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	t := ctx.Instances.Textures.Get(id)               // Textureʳ
@@ -17443,7 +26290,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 			return result
 		}
 	}(), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1313_major, minRequiredVersion_1313_minor, GetTexParameter_1314_target, GetTexParameter_1314_parameter, GetTexParameter_1314_params, minRequiredVersion_1315_major, minRequiredVersion_1315_minor, context, GetContext_1324_result, ctx, tu, id, t
+	_, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3089_major, minRequiredVersion_3089_minor, GetTexParameter_3090_target, GetTexParameter_3090_parameter, GetTexParameter_3090_params, minRequiredVersion_3091_major, minRequiredVersion_3091_minor, context, GetContext_3100_result, ctx, tu, id, t
 	return nil
 }
 
@@ -17452,12 +26299,12 @@ func (ϟa *GlIsSampler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1326_major := uint32(3) // u32
-	minRequiredVersion_1326_minor := uint32(0) // u32
+	minRequiredVersion_3102_major := uint32(3) // u32
+	minRequiredVersion_3102_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlIsSampler)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1326_major, minRequiredVersion_1326_minor
+	_, _ = minRequiredVersion_3102_major, minRequiredVersion_3102_minor
 	return nil
 }
 
@@ -17466,16 +26313,16 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1327_major := uint32(2)   // u32
-	minRequiredVersion_1327_minor := uint32(0)   // u32
+	minRequiredVersion_3103_major := uint32(2)   // u32
+	minRequiredVersion_3103_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1329_msg := "No context bound" // string
+		error_3105_msg := "No context bound" // string
 		return
-		_ = error_1329_msg
+		_ = error_3105_msg
 	}
-	GetContext_1328_result := context // Contextʳ
-	ctx := GetContext_1328_result     // Contextʳ
+	GetContext_3104_result := context // Contextʳ
+	ctx := GetContext_3104_result     // Contextʳ
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
@@ -17483,7 +26330,7 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}
 	ϟb.Call(funcInfoGlIsTexture)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1327_major, minRequiredVersion_1327_minor, context, GetContext_1328_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3103_major, minRequiredVersion_3103_minor, context, GetContext_3104_result, ctx
 	return nil
 }
 
@@ -17492,33 +26339,33 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1330_major := uint32(2) // u32
-	minRequiredVersion_1330_minor := uint32(0) // u32
+	minRequiredVersion_3106_major := uint32(2) // u32
+	minRequiredVersion_3106_minor := uint32(0) // u32
 	switch ϟa.Parameter {
 	case GLenum_GL_PACK_ALIGNMENT, GLenum_GL_UNPACK_ALIGNMENT:
 	case GLenum_GL_PACK_IMAGE_HEIGHT, GLenum_GL_PACK_ROW_LENGTH, GLenum_GL_PACK_SKIP_IMAGES, GLenum_GL_PACK_SKIP_PIXELS, GLenum_GL_PACK_SKIP_ROWS, GLenum_GL_UNPACK_IMAGE_HEIGHT, GLenum_GL_UNPACK_ROW_LENGTH, GLenum_GL_UNPACK_SKIP_IMAGES, GLenum_GL_UNPACK_SKIP_PIXELS, GLenum_GL_UNPACK_SKIP_ROWS:
-		minRequiredVersion_1331_major := uint32(3) // u32
-		minRequiredVersion_1331_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1331_major, minRequiredVersion_1331_minor
+		minRequiredVersion_3107_major := uint32(3) // u32
+		minRequiredVersion_3107_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3107_major, minRequiredVersion_3107_minor
 	default:
-		glErrorInvalidEnum_1332_param := ϟa.Parameter // GLenum
+		glErrorInvalidEnum_3108_param := ϟa.Parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1332_param
+		_ = glErrorInvalidEnum_3108_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1334_msg := "No context bound" // string
+		error_3110_msg := "No context bound" // string
 		return
-		_ = error_1334_msg
+		_ = error_3110_msg
 	}
-	GetContext_1333_result := context // Contextʳ
-	ctx := GetContext_1333_result     // Contextʳ
+	GetContext_3109_result := context // Contextʳ
+	ctx := GetContext_3109_result     // Contextʳ
 	ctx.PixelStorage[ϟa.Parameter] = ϟa.Value
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPixelStorei)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1330_major, minRequiredVersion_1330_minor, context, GetContext_1333_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3106_major, minRequiredVersion_3106_minor, context, GetContext_3109_result, ctx
 	return nil
 }
 
@@ -17527,32 +26374,32 @@ func (ϟa *GlSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1335_major := uint32(3)   // u32
-	minRequiredVersion_1335_minor := uint32(2)   // u32
-	SamplerParameterv_1336_sampler := ϟa.Sampler // SamplerId
-	SamplerParameterv_1336_pname := ϟa.Pname     // GLenum
-	SamplerParameterv_1336_params := ϟa.Param    // GLintᶜᵖ
-	minRequiredVersion_1337_major := uint32(3)   // u32
-	minRequiredVersion_1337_minor := uint32(0)   // u32
-	switch SamplerParameterv_1336_pname {
+	minRequiredVersion_3111_major := uint32(3)   // u32
+	minRequiredVersion_3111_minor := uint32(2)   // u32
+	SamplerParameterv_3112_sampler := ϟa.Sampler // SamplerId
+	SamplerParameterv_3112_pname := ϟa.Pname     // GLenum
+	SamplerParameterv_3112_params := ϟa.Param    // GLintᶜᵖ
+	minRequiredVersion_3113_major := uint32(3)   // u32
+	minRequiredVersion_3113_minor := uint32(0)   // u32
+	switch SamplerParameterv_3112_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		SamplerParameterv_1336_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		SamplerParameterv_3112_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1338_major := uint32(3) // u32
-		minRequiredVersion_1338_minor := uint32(2) // u32
-		SamplerParameterv_1336_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1338_major, minRequiredVersion_1338_minor
+		minRequiredVersion_3114_major := uint32(3) // u32
+		minRequiredVersion_3114_minor := uint32(2) // u32
+		SamplerParameterv_3112_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3114_major, minRequiredVersion_3114_minor
 	default:
-		glErrorInvalidEnum_1339_param := SamplerParameterv_1336_pname // GLenum
+		glErrorInvalidEnum_3115_param := SamplerParameterv_3112_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1339_param
+		_ = glErrorInvalidEnum_3115_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value())
 	ϟb.Call(funcInfoGlSamplerParameterIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1335_major, minRequiredVersion_1335_minor, SamplerParameterv_1336_sampler, SamplerParameterv_1336_pname, SamplerParameterv_1336_params, minRequiredVersion_1337_major, minRequiredVersion_1337_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3111_major, minRequiredVersion_3111_minor, SamplerParameterv_3112_sampler, SamplerParameterv_3112_pname, SamplerParameterv_3112_params, minRequiredVersion_3113_major, minRequiredVersion_3113_minor
 	return nil
 }
 
@@ -17561,32 +26408,32 @@ func (ϟa *GlSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1340_major := uint32(3)   // u32
-	minRequiredVersion_1340_minor := uint32(2)   // u32
-	SamplerParameterv_1341_sampler := ϟa.Sampler // SamplerId
-	SamplerParameterv_1341_pname := ϟa.Pname     // GLenum
-	SamplerParameterv_1341_params := ϟa.Param    // GLuintᶜᵖ
-	minRequiredVersion_1342_major := uint32(3)   // u32
-	minRequiredVersion_1342_minor := uint32(0)   // u32
-	switch SamplerParameterv_1341_pname {
+	minRequiredVersion_3116_major := uint32(3)   // u32
+	minRequiredVersion_3116_minor := uint32(2)   // u32
+	SamplerParameterv_3117_sampler := ϟa.Sampler // SamplerId
+	SamplerParameterv_3117_pname := ϟa.Pname     // GLenum
+	SamplerParameterv_3117_params := ϟa.Param    // GLuintᶜᵖ
+	minRequiredVersion_3118_major := uint32(3)   // u32
+	minRequiredVersion_3118_minor := uint32(0)   // u32
+	switch SamplerParameterv_3117_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		SamplerParameterv_1341_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		SamplerParameterv_3117_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1343_major := uint32(3) // u32
-		minRequiredVersion_1343_minor := uint32(2) // u32
-		SamplerParameterv_1341_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1343_major, minRequiredVersion_1343_minor
+		minRequiredVersion_3119_major := uint32(3) // u32
+		minRequiredVersion_3119_minor := uint32(2) // u32
+		SamplerParameterv_3117_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3119_major, minRequiredVersion_3119_minor
 	default:
-		glErrorInvalidEnum_1344_param := SamplerParameterv_1341_pname // GLenum
+		glErrorInvalidEnum_3120_param := SamplerParameterv_3117_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1344_param
+		_ = glErrorInvalidEnum_3120_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value())
 	ϟb.Call(funcInfoGlSamplerParameterIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1340_major, minRequiredVersion_1340_minor, SamplerParameterv_1341_sampler, SamplerParameterv_1341_pname, SamplerParameterv_1341_params, minRequiredVersion_1342_major, minRequiredVersion_1342_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3116_major, minRequiredVersion_3116_minor, SamplerParameterv_3117_sampler, SamplerParameterv_3117_pname, SamplerParameterv_3117_params, minRequiredVersion_3118_major, minRequiredVersion_3118_minor
 	return nil
 }
 
@@ -17595,21 +26442,21 @@ func (ϟa *GlSamplerParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1345_major := uint32(3) // u32
-	minRequiredVersion_1345_minor := uint32(0) // u32
+	minRequiredVersion_3121_major := uint32(3) // u32
+	minRequiredVersion_3121_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		glErrorInvalidEnum_1346_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3122_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1346_param
+		_ = glErrorInvalidEnum_3122_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterf)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1345_major, minRequiredVersion_1345_minor
+	_, _ = minRequiredVersion_3121_major, minRequiredVersion_3121_minor
 	return nil
 }
 
@@ -17618,32 +26465,32 @@ func (ϟa *GlSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1347_major := uint32(3)   // u32
-	minRequiredVersion_1347_minor := uint32(0)   // u32
-	SamplerParameterv_1348_sampler := ϟa.Sampler // SamplerId
-	SamplerParameterv_1348_pname := ϟa.Pname     // GLenum
-	SamplerParameterv_1348_params := ϟa.Param    // GLfloatᶜᵖ
-	minRequiredVersion_1349_major := uint32(3)   // u32
-	minRequiredVersion_1349_minor := uint32(0)   // u32
-	switch SamplerParameterv_1348_pname {
+	minRequiredVersion_3123_major := uint32(3)   // u32
+	minRequiredVersion_3123_minor := uint32(0)   // u32
+	SamplerParameterv_3124_sampler := ϟa.Sampler // SamplerId
+	SamplerParameterv_3124_pname := ϟa.Pname     // GLenum
+	SamplerParameterv_3124_params := ϟa.Param    // GLfloatᶜᵖ
+	minRequiredVersion_3125_major := uint32(3)   // u32
+	minRequiredVersion_3125_minor := uint32(0)   // u32
+	switch SamplerParameterv_3124_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		SamplerParameterv_1348_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		SamplerParameterv_3124_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1350_major := uint32(3) // u32
-		minRequiredVersion_1350_minor := uint32(2) // u32
-		SamplerParameterv_1348_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1350_major, minRequiredVersion_1350_minor
+		minRequiredVersion_3126_major := uint32(3) // u32
+		minRequiredVersion_3126_minor := uint32(2) // u32
+		SamplerParameterv_3124_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3126_major, minRequiredVersion_3126_minor
 	default:
-		glErrorInvalidEnum_1351_param := SamplerParameterv_1348_pname // GLenum
+		glErrorInvalidEnum_3127_param := SamplerParameterv_3124_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1351_param
+		_ = glErrorInvalidEnum_3127_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value())
 	ϟb.Call(funcInfoGlSamplerParameterfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1347_major, minRequiredVersion_1347_minor, SamplerParameterv_1348_sampler, SamplerParameterv_1348_pname, SamplerParameterv_1348_params, minRequiredVersion_1349_major, minRequiredVersion_1349_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3123_major, minRequiredVersion_3123_minor, SamplerParameterv_3124_sampler, SamplerParameterv_3124_pname, SamplerParameterv_3124_params, minRequiredVersion_3125_major, minRequiredVersion_3125_minor
 	return nil
 }
 
@@ -17652,21 +26499,21 @@ func (ϟa *GlSamplerParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1352_major := uint32(3) // u32
-	minRequiredVersion_1352_minor := uint32(0) // u32
+	minRequiredVersion_3128_major := uint32(3) // u32
+	minRequiredVersion_3128_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		glErrorInvalidEnum_1353_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3129_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1353_param
+		_ = glErrorInvalidEnum_3129_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameteri)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1352_major, minRequiredVersion_1352_minor
+	_, _ = minRequiredVersion_3128_major, minRequiredVersion_3128_minor
 	return nil
 }
 
@@ -17675,32 +26522,32 @@ func (ϟa *GlSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1354_major := uint32(3)   // u32
-	minRequiredVersion_1354_minor := uint32(0)   // u32
-	SamplerParameterv_1355_sampler := ϟa.Sampler // SamplerId
-	SamplerParameterv_1355_pname := ϟa.Pname     // GLenum
-	SamplerParameterv_1355_params := ϟa.Param    // GLintᶜᵖ
-	minRequiredVersion_1356_major := uint32(3)   // u32
-	minRequiredVersion_1356_minor := uint32(0)   // u32
-	switch SamplerParameterv_1355_pname {
+	minRequiredVersion_3130_major := uint32(3)   // u32
+	minRequiredVersion_3130_minor := uint32(0)   // u32
+	SamplerParameterv_3131_sampler := ϟa.Sampler // SamplerId
+	SamplerParameterv_3131_pname := ϟa.Pname     // GLenum
+	SamplerParameterv_3131_params := ϟa.Param    // GLintᶜᵖ
+	minRequiredVersion_3132_major := uint32(3)   // u32
+	minRequiredVersion_3132_minor := uint32(0)   // u32
+	switch SamplerParameterv_3131_pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		SamplerParameterv_1355_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		SamplerParameterv_3131_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1357_major := uint32(3) // u32
-		minRequiredVersion_1357_minor := uint32(2) // u32
-		SamplerParameterv_1355_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1357_major, minRequiredVersion_1357_minor
+		minRequiredVersion_3133_major := uint32(3) // u32
+		minRequiredVersion_3133_minor := uint32(2) // u32
+		SamplerParameterv_3131_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3133_major, minRequiredVersion_3133_minor
 	default:
-		glErrorInvalidEnum_1358_param := SamplerParameterv_1355_pname // GLenum
+		glErrorInvalidEnum_3134_param := SamplerParameterv_3131_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1358_param
+		_ = glErrorInvalidEnum_3134_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Param.value())
 	ϟb.Call(funcInfoGlSamplerParameteriv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _ = minRequiredVersion_1354_major, minRequiredVersion_1354_minor, SamplerParameterv_1355_sampler, SamplerParameterv_1355_pname, SamplerParameterv_1355_params, minRequiredVersion_1356_major, minRequiredVersion_1356_minor
+	_, _, _, _, _, _, _ = minRequiredVersion_3130_major, minRequiredVersion_3130_minor, SamplerParameterv_3131_sampler, SamplerParameterv_3131_pname, SamplerParameterv_3131_params, minRequiredVersion_3132_major, minRequiredVersion_3132_minor
 	return nil
 }
 
@@ -17709,21 +26556,21 @@ func (ϟa *GlTexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1359_major := uint32(3) // u32
-	minRequiredVersion_1359_minor := uint32(2) // u32
+	minRequiredVersion_3135_major := uint32(3) // u32
+	minRequiredVersion_3135_minor := uint32(2) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_BUFFER:
 	default:
-		glErrorInvalidEnum_1360_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3136_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1360_param
+		_ = glErrorInvalidEnum_3136_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_R16, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGBA16, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI:
 	default:
-		glErrorInvalidEnum_1361_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3137_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1361_param
+		_ = glErrorInvalidEnum_3137_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -17734,7 +26581,7 @@ func (ϟa *GlTexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}
 	ϟb.Call(funcInfoGlTexBuffer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1359_major, minRequiredVersion_1359_minor
+	_, _ = minRequiredVersion_3135_major, minRequiredVersion_3135_minor
 	return nil
 }
 
@@ -17743,21 +26590,21 @@ func (ϟa *GlTexBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1362_major := uint32(3) // u32
-	minRequiredVersion_1362_minor := uint32(2) // u32
+	minRequiredVersion_3138_major := uint32(3) // u32
+	minRequiredVersion_3138_minor := uint32(2) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_BUFFER:
 	default:
-		glErrorInvalidEnum_1363_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3139_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1363_param
+		_ = glErrorInvalidEnum_3139_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_R16, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGBA16, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI:
 	default:
-		glErrorInvalidEnum_1364_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3140_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1364_param
+		_ = glErrorInvalidEnum_3140_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -17770,7 +26617,7 @@ func (ϟa *GlTexBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexBufferRange)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1362_major, minRequiredVersion_1362_minor
+	_, _ = minRequiredVersion_3138_major, minRequiredVersion_3138_minor
 	return nil
 }
 
@@ -17779,52 +26626,52 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1365_major := uint32(2) // u32
-	minRequiredVersion_1365_minor := uint32(0) // u32
+	minRequiredVersion_3141_major := uint32(2) // u32
+	minRequiredVersion_3141_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1366_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3142_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1366_param
+		_ = glErrorInvalidEnum_3142_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
 	case GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
-		minRequiredVersion_1367_major := uint32(3) // u32
-		minRequiredVersion_1367_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1367_major, minRequiredVersion_1367_minor
+		minRequiredVersion_3143_major := uint32(3) // u32
+		minRequiredVersion_3143_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3143_major, minRequiredVersion_3143_minor
 	case GLenum_GL_STENCIL_INDEX:
-		minRequiredVersion_1368_major := uint32(3) // u32
-		minRequiredVersion_1368_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1368_major, minRequiredVersion_1368_minor
+		minRequiredVersion_3144_major := uint32(3) // u32
+		minRequiredVersion_3144_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3144_major, minRequiredVersion_3144_minor
 	default:
-		glErrorInvalidEnum_1369_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3145_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1369_param
+		_ = glErrorInvalidEnum_3145_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1370_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
-		_ = requiresExtension_1370_ext
+		requiresExtension_3146_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
+		_ = requiresExtension_3146_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT:
-		minRequiredVersion_1371_major := uint32(3) // u32
-		minRequiredVersion_1371_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1371_major, minRequiredVersion_1371_minor
+		minRequiredVersion_3147_major := uint32(3) // u32
+		minRequiredVersion_3147_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3147_major, minRequiredVersion_3147_minor
 	default:
-		glErrorInvalidEnum_1372_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3148_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1372_param
+		_ = glErrorInvalidEnum_3148_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1374_msg := "No context bound" // string
+		error_3150_msg := "No context bound" // string
 		return
-		_ = error_1374_msg
+		_ = error_3150_msg
 	}
-	GetContext_1373_result := context                 // Contextʳ
-	ctx := GetContext_1373_result                     // Contextʳ
+	GetContext_3149_result := context                 // Contextʳ
+	ctx := GetContext_3149_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
@@ -17874,7 +26721,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1365_major, minRequiredVersion_1365_minor, context, GetContext_1373_result, ctx, tu
+	_, _, _, _, _, _ = minRequiredVersion_3141_major, minRequiredVersion_3141_minor, context, GetContext_3149_result, ctx, tu
 	return nil
 }
 
@@ -17883,48 +26730,48 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1375_major := uint32(3) // u32
-	minRequiredVersion_1375_minor := uint32(0) // u32
+	minRequiredVersion_3151_major := uint32(3) // u32
+	minRequiredVersion_3151_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1376_major := uint32(3) // u32
-		minRequiredVersion_1376_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1376_major, minRequiredVersion_1376_minor
+		minRequiredVersion_3152_major := uint32(3) // u32
+		minRequiredVersion_3152_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3152_major, minRequiredVersion_3152_minor
 	default:
-		glErrorInvalidEnum_1377_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3153_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1377_param
+		_ = glErrorInvalidEnum_3153_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGB, GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
 	case GLenum_GL_STENCIL_INDEX:
-		minRequiredVersion_1378_major := uint32(3) // u32
-		minRequiredVersion_1378_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1378_major, minRequiredVersion_1378_minor
+		minRequiredVersion_3154_major := uint32(3) // u32
+		minRequiredVersion_3154_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3154_major, minRequiredVersion_3154_minor
 	default:
-		glErrorInvalidEnum_1379_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3155_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1379_param
+		_ = glErrorInvalidEnum_3155_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1380_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
-		_ = requiresExtension_1380_ext
+		requiresExtension_3156_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
+		_ = requiresExtension_3156_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	default:
-		glErrorInvalidEnum_1381_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3157_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1381_param
+		_ = glErrorInvalidEnum_3157_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1383_msg := "No context bound" // string
+		error_3159_msg := "No context bound" // string
 		return
-		_ = error_1383_msg
+		_ = error_3159_msg
 	}
-	GetContext_1382_result := context // Contextʳ
-	ctx := GetContext_1382_result     // Contextʳ
+	GetContext_3158_result := context // Contextʳ
+	ctx := GetContext_3158_result     // Contextʳ
 	if ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) && ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) {
 		size := (externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)) * (uint32(ϟa.Depth)) // u32
 		U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -17942,7 +26789,7 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexImage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1375_major, minRequiredVersion_1375_minor, context, GetContext_1382_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3151_major, minRequiredVersion_3151_minor, context, GetContext_3158_result, ctx
 	return nil
 }
 
@@ -17951,59 +26798,59 @@ func (ϟa *GlTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1384_major := uint32(3) // u32
-	minRequiredVersion_1384_minor := uint32(2) // u32
-	TexParameterv_1385_target := ϟa.Target     // GLenum
-	TexParameterv_1385_pname := ϟa.Pname       // GLenum
-	TexParameterv_1385_params := ϟa.Params     // GLintᶜᵖ
-	switch TexParameterv_1385_target {
+	minRequiredVersion_3160_major := uint32(3) // u32
+	minRequiredVersion_3160_minor := uint32(2) // u32
+	TexParameterv_3161_target := ϟa.Target     // GLenum
+	TexParameterv_3161_pname := ϟa.Pname       // GLenum
+	TexParameterv_3161_params := ϟa.Params     // GLintᶜᵖ
+	switch TexParameterv_3161_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1386_major := uint32(3) // u32
-		minRequiredVersion_1386_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1386_major, minRequiredVersion_1386_minor
+		minRequiredVersion_3162_major := uint32(3) // u32
+		minRequiredVersion_3162_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3162_major, minRequiredVersion_3162_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1387_major := uint32(3) // u32
-		minRequiredVersion_1387_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1387_major, minRequiredVersion_1387_minor
+		minRequiredVersion_3163_major := uint32(3) // u32
+		minRequiredVersion_3163_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3163_major, minRequiredVersion_3163_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1388_major := uint32(3) // u32
-		minRequiredVersion_1388_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1388_major, minRequiredVersion_1388_minor
+		minRequiredVersion_3164_major := uint32(3) // u32
+		minRequiredVersion_3164_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3164_major, minRequiredVersion_3164_minor
 	default:
-		glErrorInvalidEnum_1389_param := TexParameterv_1385_target // GLenum
+		glErrorInvalidEnum_3165_param := TexParameterv_3161_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1389_param
+		_ = glErrorInvalidEnum_3165_param
 	}
-	switch TexParameterv_1385_pname {
+	switch TexParameterv_3161_pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		TexParameterv_1385_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		TexParameterv_3161_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1390_major := uint32(3) // u32
-		minRequiredVersion_1390_minor := uint32(0) // u32
-		TexParameterv_1385_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1390_major, minRequiredVersion_1390_minor
+		minRequiredVersion_3166_major := uint32(3) // u32
+		minRequiredVersion_3166_minor := uint32(0) // u32
+		TexParameterv_3161_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3166_major, minRequiredVersion_3166_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1391_major := uint32(3) // u32
-		minRequiredVersion_1391_minor := uint32(1) // u32
-		TexParameterv_1385_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1391_major, minRequiredVersion_1391_minor
+		minRequiredVersion_3167_major := uint32(3) // u32
+		minRequiredVersion_3167_minor := uint32(1) // u32
+		TexParameterv_3161_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3167_major, minRequiredVersion_3167_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1392_major := uint32(3) // u32
-		minRequiredVersion_1392_minor := uint32(2) // u32
-		TexParameterv_1385_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1392_major, minRequiredVersion_1392_minor
+		minRequiredVersion_3168_major := uint32(3) // u32
+		minRequiredVersion_3168_minor := uint32(2) // u32
+		TexParameterv_3161_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3168_major, minRequiredVersion_3168_minor
 	default:
-		glErrorInvalidEnum_1393_param := TexParameterv_1385_pname // GLenum
+		glErrorInvalidEnum_3169_param := TexParameterv_3161_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1393_param
+		_ = glErrorInvalidEnum_3169_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlTexParameterIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1384_major, minRequiredVersion_1384_minor, TexParameterv_1385_target, TexParameterv_1385_pname, TexParameterv_1385_params
+	_, _, _, _, _ = minRequiredVersion_3160_major, minRequiredVersion_3160_minor, TexParameterv_3161_target, TexParameterv_3161_pname, TexParameterv_3161_params
 	return nil
 }
 
@@ -18012,59 +26859,59 @@ func (ϟa *GlTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1394_major := uint32(3) // u32
-	minRequiredVersion_1394_minor := uint32(2) // u32
-	TexParameterv_1395_target := ϟa.Target     // GLenum
-	TexParameterv_1395_pname := ϟa.Pname       // GLenum
-	TexParameterv_1395_params := ϟa.Params     // GLuintᶜᵖ
-	switch TexParameterv_1395_target {
+	minRequiredVersion_3170_major := uint32(3) // u32
+	minRequiredVersion_3170_minor := uint32(2) // u32
+	TexParameterv_3171_target := ϟa.Target     // GLenum
+	TexParameterv_3171_pname := ϟa.Pname       // GLenum
+	TexParameterv_3171_params := ϟa.Params     // GLuintᶜᵖ
+	switch TexParameterv_3171_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1396_major := uint32(3) // u32
-		minRequiredVersion_1396_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1396_major, minRequiredVersion_1396_minor
+		minRequiredVersion_3172_major := uint32(3) // u32
+		minRequiredVersion_3172_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3172_major, minRequiredVersion_3172_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1397_major := uint32(3) // u32
-		minRequiredVersion_1397_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1397_major, minRequiredVersion_1397_minor
+		minRequiredVersion_3173_major := uint32(3) // u32
+		minRequiredVersion_3173_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3173_major, minRequiredVersion_3173_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1398_major := uint32(3) // u32
-		minRequiredVersion_1398_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1398_major, minRequiredVersion_1398_minor
+		minRequiredVersion_3174_major := uint32(3) // u32
+		minRequiredVersion_3174_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3174_major, minRequiredVersion_3174_minor
 	default:
-		glErrorInvalidEnum_1399_param := TexParameterv_1395_target // GLenum
+		glErrorInvalidEnum_3175_param := TexParameterv_3171_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1399_param
+		_ = glErrorInvalidEnum_3175_param
 	}
-	switch TexParameterv_1395_pname {
+	switch TexParameterv_3171_pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		TexParameterv_1395_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		TexParameterv_3171_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1400_major := uint32(3) // u32
-		minRequiredVersion_1400_minor := uint32(0) // u32
-		TexParameterv_1395_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1400_major, minRequiredVersion_1400_minor
+		minRequiredVersion_3176_major := uint32(3) // u32
+		minRequiredVersion_3176_minor := uint32(0) // u32
+		TexParameterv_3171_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3176_major, minRequiredVersion_3176_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1401_major := uint32(3) // u32
-		minRequiredVersion_1401_minor := uint32(1) // u32
-		TexParameterv_1395_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1401_major, minRequiredVersion_1401_minor
+		minRequiredVersion_3177_major := uint32(3) // u32
+		minRequiredVersion_3177_minor := uint32(1) // u32
+		TexParameterv_3171_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3177_major, minRequiredVersion_3177_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1402_major := uint32(3) // u32
-		minRequiredVersion_1402_minor := uint32(2) // u32
-		TexParameterv_1395_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1402_major, minRequiredVersion_1402_minor
+		minRequiredVersion_3178_major := uint32(3) // u32
+		minRequiredVersion_3178_minor := uint32(2) // u32
+		TexParameterv_3171_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3178_major, minRequiredVersion_3178_minor
 	default:
-		glErrorInvalidEnum_1403_param := TexParameterv_1395_pname // GLenum
+		glErrorInvalidEnum_3179_param := TexParameterv_3171_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1403_param
+		_ = glErrorInvalidEnum_3179_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlTexParameterIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1394_major, minRequiredVersion_1394_minor, TexParameterv_1395_target, TexParameterv_1395_pname, TexParameterv_1395_params
+	_, _, _, _, _ = minRequiredVersion_3170_major, minRequiredVersion_3170_minor, TexParameterv_3171_target, TexParameterv_3171_pname, TexParameterv_3171_params
 	return nil
 }
 
@@ -18073,50 +26920,50 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1404_major := uint32(2) // u32
-	minRequiredVersion_1404_minor := uint32(0) // u32
+	minRequiredVersion_3180_major := uint32(2) // u32
+	minRequiredVersion_3180_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1405_major := uint32(3) // u32
-		minRequiredVersion_1405_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1405_major, minRequiredVersion_1405_minor
+		minRequiredVersion_3181_major := uint32(3) // u32
+		minRequiredVersion_3181_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3181_major, minRequiredVersion_3181_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1406_major := uint32(3) // u32
-		minRequiredVersion_1406_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1406_major, minRequiredVersion_1406_minor
+		minRequiredVersion_3182_major := uint32(3) // u32
+		minRequiredVersion_3182_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3182_major, minRequiredVersion_3182_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1407_major := uint32(3) // u32
-		minRequiredVersion_1407_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1407_major, minRequiredVersion_1407_minor
+		minRequiredVersion_3183_major := uint32(3) // u32
+		minRequiredVersion_3183_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3183_major, minRequiredVersion_3183_minor
 	default:
-		glErrorInvalidEnum_1408_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3184_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1408_param
+		_ = glErrorInvalidEnum_3184_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1409_major := uint32(3) // u32
-		minRequiredVersion_1409_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1409_major, minRequiredVersion_1409_minor
+		minRequiredVersion_3185_major := uint32(3) // u32
+		minRequiredVersion_3185_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3185_major, minRequiredVersion_3185_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1410_major := uint32(3) // u32
-		minRequiredVersion_1410_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1410_major, minRequiredVersion_1410_minor
+		minRequiredVersion_3186_major := uint32(3) // u32
+		minRequiredVersion_3186_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3186_major, minRequiredVersion_3186_minor
 	default:
-		glErrorInvalidEnum_1411_param := ϟa.Parameter // GLenum
+		glErrorInvalidEnum_3187_param := ϟa.Parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1411_param
+		_ = glErrorInvalidEnum_3187_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1413_msg := "No context bound" // string
+		error_3189_msg := "No context bound" // string
 		return
-		_ = error_1413_msg
+		_ = error_3189_msg
 	}
-	GetContext_1412_result := context                 // Contextʳ
-	ctx := GetContext_1412_result                     // Contextʳ
+	GetContext_3188_result := context                 // Contextʳ
+	ctx := GetContext_3188_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	t := ctx.Instances.Textures.Get(id)               // Textureʳ
@@ -18148,7 +26995,7 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterf)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _ = minRequiredVersion_1404_major, minRequiredVersion_1404_minor, context, GetContext_1412_result, ctx, tu, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_3180_major, minRequiredVersion_3180_minor, context, GetContext_3188_result, ctx, tu, id, t
 	return nil
 }
 
@@ -18157,59 +27004,59 @@ func (ϟa *GlTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1414_major := uint32(2) // u32
-	minRequiredVersion_1414_minor := uint32(0) // u32
-	TexParameterv_1415_target := ϟa.Target     // GLenum
-	TexParameterv_1415_pname := ϟa.Pname       // GLenum
-	TexParameterv_1415_params := ϟa.Params     // GLfloatᶜᵖ
-	switch TexParameterv_1415_target {
+	minRequiredVersion_3190_major := uint32(2) // u32
+	minRequiredVersion_3190_minor := uint32(0) // u32
+	TexParameterv_3191_target := ϟa.Target     // GLenum
+	TexParameterv_3191_pname := ϟa.Pname       // GLenum
+	TexParameterv_3191_params := ϟa.Params     // GLfloatᶜᵖ
+	switch TexParameterv_3191_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1416_major := uint32(3) // u32
-		minRequiredVersion_1416_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1416_major, minRequiredVersion_1416_minor
+		minRequiredVersion_3192_major := uint32(3) // u32
+		minRequiredVersion_3192_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3192_major, minRequiredVersion_3192_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1417_major := uint32(3) // u32
-		minRequiredVersion_1417_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1417_major, minRequiredVersion_1417_minor
+		minRequiredVersion_3193_major := uint32(3) // u32
+		minRequiredVersion_3193_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3193_major, minRequiredVersion_3193_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1418_major := uint32(3) // u32
-		minRequiredVersion_1418_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1418_major, minRequiredVersion_1418_minor
+		minRequiredVersion_3194_major := uint32(3) // u32
+		minRequiredVersion_3194_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3194_major, minRequiredVersion_3194_minor
 	default:
-		glErrorInvalidEnum_1419_param := TexParameterv_1415_target // GLenum
+		glErrorInvalidEnum_3195_param := TexParameterv_3191_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1419_param
+		_ = glErrorInvalidEnum_3195_param
 	}
-	switch TexParameterv_1415_pname {
+	switch TexParameterv_3191_pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		TexParameterv_1415_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		TexParameterv_3191_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1420_major := uint32(3) // u32
-		minRequiredVersion_1420_minor := uint32(0) // u32
-		TexParameterv_1415_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1420_major, minRequiredVersion_1420_minor
+		minRequiredVersion_3196_major := uint32(3) // u32
+		minRequiredVersion_3196_minor := uint32(0) // u32
+		TexParameterv_3191_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3196_major, minRequiredVersion_3196_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1421_major := uint32(3) // u32
-		minRequiredVersion_1421_minor := uint32(1) // u32
-		TexParameterv_1415_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1421_major, minRequiredVersion_1421_minor
+		minRequiredVersion_3197_major := uint32(3) // u32
+		minRequiredVersion_3197_minor := uint32(1) // u32
+		TexParameterv_3191_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3197_major, minRequiredVersion_3197_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1422_major := uint32(3) // u32
-		minRequiredVersion_1422_minor := uint32(2) // u32
-		TexParameterv_1415_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1422_major, minRequiredVersion_1422_minor
+		minRequiredVersion_3198_major := uint32(3) // u32
+		minRequiredVersion_3198_minor := uint32(2) // u32
+		TexParameterv_3191_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3198_major, minRequiredVersion_3198_minor
 	default:
-		glErrorInvalidEnum_1423_param := TexParameterv_1415_pname // GLenum
+		glErrorInvalidEnum_3199_param := TexParameterv_3191_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1423_param
+		_ = glErrorInvalidEnum_3199_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlTexParameterfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1414_major, minRequiredVersion_1414_minor, TexParameterv_1415_target, TexParameterv_1415_pname, TexParameterv_1415_params
+	_, _, _, _, _ = minRequiredVersion_3190_major, minRequiredVersion_3190_minor, TexParameterv_3191_target, TexParameterv_3191_pname, TexParameterv_3191_params
 	return nil
 }
 
@@ -18218,50 +27065,50 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1424_major := uint32(2) // u32
-	minRequiredVersion_1424_minor := uint32(0) // u32
+	minRequiredVersion_3200_major := uint32(2) // u32
+	minRequiredVersion_3200_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1425_major := uint32(3) // u32
-		minRequiredVersion_1425_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1425_major, minRequiredVersion_1425_minor
+		minRequiredVersion_3201_major := uint32(3) // u32
+		minRequiredVersion_3201_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3201_major, minRequiredVersion_3201_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1426_major := uint32(3) // u32
-		minRequiredVersion_1426_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1426_major, minRequiredVersion_1426_minor
+		minRequiredVersion_3202_major := uint32(3) // u32
+		minRequiredVersion_3202_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3202_major, minRequiredVersion_3202_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1427_major := uint32(3) // u32
-		minRequiredVersion_1427_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1427_major, minRequiredVersion_1427_minor
+		minRequiredVersion_3203_major := uint32(3) // u32
+		minRequiredVersion_3203_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3203_major, minRequiredVersion_3203_minor
 	default:
-		glErrorInvalidEnum_1428_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3204_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1428_param
+		_ = glErrorInvalidEnum_3204_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1429_major := uint32(3) // u32
-		minRequiredVersion_1429_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1429_major, minRequiredVersion_1429_minor
+		minRequiredVersion_3205_major := uint32(3) // u32
+		minRequiredVersion_3205_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3205_major, minRequiredVersion_3205_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1430_major := uint32(3) // u32
-		minRequiredVersion_1430_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1430_major, minRequiredVersion_1430_minor
+		minRequiredVersion_3206_major := uint32(3) // u32
+		minRequiredVersion_3206_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3206_major, minRequiredVersion_3206_minor
 	default:
-		glErrorInvalidEnum_1431_param := ϟa.Parameter // GLenum
+		glErrorInvalidEnum_3207_param := ϟa.Parameter // GLenum
 		return
-		_ = glErrorInvalidEnum_1431_param
+		_ = glErrorInvalidEnum_3207_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1433_msg := "No context bound" // string
+		error_3209_msg := "No context bound" // string
 		return
-		_ = error_1433_msg
+		_ = error_3209_msg
 	}
-	GetContext_1432_result := context                 // Contextʳ
-	ctx := GetContext_1432_result                     // Contextʳ
+	GetContext_3208_result := context                 // Contextʳ
+	ctx := GetContext_3208_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	id := tu.Bindings.Get(ϟa.Target)                  // TextureId
 	t := ctx.Instances.Textures.Get(id)               // Textureʳ
@@ -18293,7 +27140,7 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameteri)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _ = minRequiredVersion_1424_major, minRequiredVersion_1424_minor, context, GetContext_1432_result, ctx, tu, id, t
+	_, _, _, _, _, _, _, _ = minRequiredVersion_3200_major, minRequiredVersion_3200_minor, context, GetContext_3208_result, ctx, tu, id, t
 	return nil
 }
 
@@ -18302,59 +27149,59 @@ func (ϟa *GlTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1434_major := uint32(2) // u32
-	minRequiredVersion_1434_minor := uint32(0) // u32
-	TexParameterv_1435_target := ϟa.Target     // GLenum
-	TexParameterv_1435_pname := ϟa.Pname       // GLenum
-	TexParameterv_1435_params := ϟa.Params     // GLintᶜᵖ
-	switch TexParameterv_1435_target {
+	minRequiredVersion_3210_major := uint32(2) // u32
+	minRequiredVersion_3210_minor := uint32(0) // u32
+	TexParameterv_3211_target := ϟa.Target     // GLenum
+	TexParameterv_3211_pname := ϟa.Pname       // GLenum
+	TexParameterv_3211_params := ϟa.Params     // GLintᶜᵖ
+	switch TexParameterv_3211_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
-		minRequiredVersion_1436_major := uint32(3) // u32
-		minRequiredVersion_1436_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1436_major, minRequiredVersion_1436_minor
+		minRequiredVersion_3212_major := uint32(3) // u32
+		minRequiredVersion_3212_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3212_major, minRequiredVersion_3212_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_1437_major := uint32(3) // u32
-		minRequiredVersion_1437_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1437_major, minRequiredVersion_1437_minor
+		minRequiredVersion_3213_major := uint32(3) // u32
+		minRequiredVersion_3213_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3213_major, minRequiredVersion_3213_minor
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1438_major := uint32(3) // u32
-		minRequiredVersion_1438_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1438_major, minRequiredVersion_1438_minor
+		minRequiredVersion_3214_major := uint32(3) // u32
+		minRequiredVersion_3214_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3214_major, minRequiredVersion_3214_minor
 	default:
-		glErrorInvalidEnum_1439_param := TexParameterv_1435_target // GLenum
+		glErrorInvalidEnum_3215_param := TexParameterv_3211_target // GLenum
 		return
-		_ = glErrorInvalidEnum_1439_param
+		_ = glErrorInvalidEnum_3215_param
 	}
-	switch TexParameterv_1435_pname {
+	switch TexParameterv_3211_pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
-		TexParameterv_1435_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		TexParameterv_3211_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R:
-		minRequiredVersion_1440_major := uint32(3) // u32
-		minRequiredVersion_1440_minor := uint32(0) // u32
-		TexParameterv_1435_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1440_major, minRequiredVersion_1440_minor
+		minRequiredVersion_3216_major := uint32(3) // u32
+		minRequiredVersion_3216_minor := uint32(0) // u32
+		TexParameterv_3211_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3216_major, minRequiredVersion_3216_minor
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE:
-		minRequiredVersion_1441_major := uint32(3) // u32
-		minRequiredVersion_1441_minor := uint32(1) // u32
-		TexParameterv_1435_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1441_major, minRequiredVersion_1441_minor
+		minRequiredVersion_3217_major := uint32(3) // u32
+		minRequiredVersion_3217_minor := uint32(1) // u32
+		TexParameterv_3211_params.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3217_major, minRequiredVersion_3217_minor
 	case GLenum_GL_TEXTURE_BORDER_COLOR:
-		minRequiredVersion_1442_major := uint32(3) // u32
-		minRequiredVersion_1442_minor := uint32(2) // u32
-		TexParameterv_1435_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = minRequiredVersion_1442_major, minRequiredVersion_1442_minor
+		minRequiredVersion_3218_major := uint32(3) // u32
+		minRequiredVersion_3218_minor := uint32(2) // u32
+		TexParameterv_3211_params.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = minRequiredVersion_3218_major, minRequiredVersion_3218_minor
 	default:
-		glErrorInvalidEnum_1443_param := TexParameterv_1435_pname // GLenum
+		glErrorInvalidEnum_3219_param := TexParameterv_3211_pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1443_param
+		_ = glErrorInvalidEnum_3219_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlTexParameteriv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1434_major, minRequiredVersion_1434_minor, TexParameterv_1435_target, TexParameterv_1435_pname, TexParameterv_1435_params
+	_, _, _, _, _ = minRequiredVersion_3210_major, minRequiredVersion_3210_minor, TexParameterv_3211_target, TexParameterv_3211_pname, TexParameterv_3211_params
 	return nil
 }
 
@@ -18363,25 +27210,25 @@ func (ϟa *GlTexStorage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1444_major := uint32(3) // u32
-	minRequiredVersion_1444_minor := uint32(0) // u32
+	minRequiredVersion_3220_major := uint32(3) // u32
+	minRequiredVersion_3220_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	default:
-		glErrorInvalidEnum_1445_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3221_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1445_param
+		_ = glErrorInvalidEnum_3221_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8, GLenum_GL_STENCIL_INDEX8:
-		minRequiredVersion_1446_major := uint32(3) // u32
-		minRequiredVersion_1446_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1446_major, minRequiredVersion_1446_minor
+		minRequiredVersion_3222_major := uint32(3) // u32
+		minRequiredVersion_3222_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3222_major, minRequiredVersion_3222_minor
 	default:
-		glErrorInvalidEnum_1447_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3223_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1447_param
+		_ = glErrorInvalidEnum_3223_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -18390,7 +27237,7 @@ func (ϟa *GlTexStorage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Height.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexStorage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1444_major, minRequiredVersion_1444_minor
+	_, _ = minRequiredVersion_3220_major, minRequiredVersion_3220_minor
 	return nil
 }
 
@@ -18399,25 +27246,25 @@ func (ϟa *GlTexStorage2DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1448_major := uint32(3) // u32
-	minRequiredVersion_1448_minor := uint32(1) // u32
+	minRequiredVersion_3224_major := uint32(3) // u32
+	minRequiredVersion_3224_minor := uint32(1) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
 	default:
-		glErrorInvalidEnum_1449_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3225_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1449_param
+		_ = glErrorInvalidEnum_3225_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
 	case GLenum_GL_STENCIL_INDEX8:
-		minRequiredVersion_1450_major := uint32(3) // u32
-		minRequiredVersion_1450_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1450_major, minRequiredVersion_1450_minor
+		minRequiredVersion_3226_major := uint32(3) // u32
+		minRequiredVersion_3226_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3226_major, minRequiredVersion_3226_minor
 	default:
-		glErrorInvalidEnum_1451_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3227_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1451_param
+		_ = glErrorInvalidEnum_3227_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -18427,7 +27274,7 @@ func (ϟa *GlTexStorage2DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Fixedsamplelocations.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexStorage2DMultisample)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1448_major, minRequiredVersion_1448_minor
+	_, _ = minRequiredVersion_3224_major, minRequiredVersion_3224_minor
 	return nil
 }
 
@@ -18436,29 +27283,29 @@ func (ϟa *GlTexStorage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1452_major := uint32(3) // u32
-	minRequiredVersion_1452_minor := uint32(0) // u32
+	minRequiredVersion_3228_major := uint32(3) // u32
+	minRequiredVersion_3228_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1453_major := uint32(3) // u32
-		minRequiredVersion_1453_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1453_major, minRequiredVersion_1453_minor
+		minRequiredVersion_3229_major := uint32(3) // u32
+		minRequiredVersion_3229_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3229_major, minRequiredVersion_3229_minor
 	default:
-		glErrorInvalidEnum_1454_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3230_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1454_param
+		_ = glErrorInvalidEnum_3230_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
 	case GLenum_GL_COMPRESSED_RGBA_ASTC_10x10, GLenum_GL_COMPRESSED_RGBA_ASTC_10x5, GLenum_GL_COMPRESSED_RGBA_ASTC_10x6, GLenum_GL_COMPRESSED_RGBA_ASTC_10x8, GLenum_GL_COMPRESSED_RGBA_ASTC_12x10, GLenum_GL_COMPRESSED_RGBA_ASTC_12x12, GLenum_GL_COMPRESSED_RGBA_ASTC_4x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x4, GLenum_GL_COMPRESSED_RGBA_ASTC_5x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x5, GLenum_GL_COMPRESSED_RGBA_ASTC_6x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x5, GLenum_GL_COMPRESSED_RGBA_ASTC_8x6, GLenum_GL_COMPRESSED_RGBA_ASTC_8x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8, GLenum_GL_STENCIL_INDEX8:
-		minRequiredVersion_1455_major := uint32(3) // u32
-		minRequiredVersion_1455_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1455_major, minRequiredVersion_1455_minor
+		minRequiredVersion_3231_major := uint32(3) // u32
+		minRequiredVersion_3231_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3231_major, minRequiredVersion_3231_minor
 	default:
-		glErrorInvalidEnum_1456_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3232_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1456_param
+		_ = glErrorInvalidEnum_3232_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -18468,7 +27315,7 @@ func (ϟa *GlTexStorage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Depth.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexStorage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1452_major, minRequiredVersion_1452_minor
+	_, _ = minRequiredVersion_3228_major, minRequiredVersion_3228_minor
 	return nil
 }
 
@@ -18477,21 +27324,21 @@ func (ϟa *GlTexStorage3DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1457_major := uint32(3) // u32
-	minRequiredVersion_1457_minor := uint32(2) // u32
+	minRequiredVersion_3233_major := uint32(3) // u32
+	minRequiredVersion_3233_minor := uint32(2) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY:
 	default:
-		glErrorInvalidEnum_1458_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3234_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1458_param
+		_ = glErrorInvalidEnum_3234_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8, GLenum_GL_STENCIL_INDEX8:
 	default:
-		glErrorInvalidEnum_1459_param := ϟa.Internalformat // GLenum
+		glErrorInvalidEnum_3235_param := ϟa.Internalformat // GLenum
 		return
-		_ = glErrorInvalidEnum_1459_param
+		_ = glErrorInvalidEnum_3235_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -18502,7 +27349,7 @@ func (ϟa *GlTexStorage3DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Fixedsamplelocations.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexStorage3DMultisample)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1457_major, minRequiredVersion_1457_minor
+	_, _ = minRequiredVersion_3233_major, minRequiredVersion_3233_minor
 	return nil
 }
 
@@ -18511,48 +27358,48 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1460_major := uint32(2) // u32
-	minRequiredVersion_1460_minor := uint32(0) // u32
+	minRequiredVersion_3236_major := uint32(2) // u32
+	minRequiredVersion_3236_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		glErrorInvalidEnum_1461_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3237_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1461_param
+		_ = glErrorInvalidEnum_3237_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
 	case GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
-		minRequiredVersion_1462_major := uint32(3) // u32
-		minRequiredVersion_1462_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1462_major, minRequiredVersion_1462_minor
+		minRequiredVersion_3238_major := uint32(3) // u32
+		minRequiredVersion_3238_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3238_major, minRequiredVersion_3238_minor
 	default:
-		glErrorInvalidEnum_1463_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3239_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1463_param
+		_ = glErrorInvalidEnum_3239_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1464_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
-		_ = requiresExtension_1464_ext
+		requiresExtension_3240_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
+		_ = requiresExtension_3240_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT:
-		minRequiredVersion_1465_major := uint32(3) // u32
-		minRequiredVersion_1465_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1465_major, minRequiredVersion_1465_minor
+		minRequiredVersion_3241_major := uint32(3) // u32
+		minRequiredVersion_3241_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3241_major, minRequiredVersion_3241_minor
 	default:
-		glErrorInvalidEnum_1466_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3242_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1466_param
+		_ = glErrorInvalidEnum_3242_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1468_msg := "No context bound" // string
+		error_3244_msg := "No context bound" // string
 		return
-		_ = error_1468_msg
+		_ = error_3244_msg
 	}
-	GetContext_1467_result := context                 // Contextʳ
-	ctx := GetContext_1467_result                     // Contextʳ
+	GetContext_3243_result := context                 // Contextʳ
+	ctx := GetContext_3243_result                     // Contextʳ
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	image := func() (result Image) {
 		switch ϟa.Target {
@@ -18614,7 +27461,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexSubImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1460_major, minRequiredVersion_1460_minor, context, GetContext_1467_result, ctx, tu, image, pbo, url, src_width, src_stride, src_size, dst_stride, dst_offset, src_data, line_bytes
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_3236_major, minRequiredVersion_3236_minor, context, GetContext_3243_result, ctx, tu, image, pbo, url, src_width, src_stride, src_size, dst_stride, dst_offset, src_data, line_bytes
 	return nil
 }
 
@@ -18623,44 +27470,44 @@ func (ϟa *GlTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1469_major := uint32(3) // u32
-	minRequiredVersion_1469_minor := uint32(0) // u32
+	minRequiredVersion_3245_major := uint32(3) // u32
+	minRequiredVersion_3245_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_3D:
 	case GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
-		minRequiredVersion_1470_major := uint32(3) // u32
-		minRequiredVersion_1470_minor := uint32(2) // u32
-		_, _ = minRequiredVersion_1470_major, minRequiredVersion_1470_minor
+		minRequiredVersion_3246_major := uint32(3) // u32
+		minRequiredVersion_3246_minor := uint32(2) // u32
+		_, _ = minRequiredVersion_3246_major, minRequiredVersion_3246_minor
 	default:
-		glErrorInvalidEnum_1471_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3247_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1471_param
+		_ = glErrorInvalidEnum_3247_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGB, GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
 	default:
-		glErrorInvalidEnum_1472_param := ϟa.Format // GLenum
+		glErrorInvalidEnum_3248_param := ϟa.Format // GLenum
 		return
-		_ = glErrorInvalidEnum_1472_param
+		_ = glErrorInvalidEnum_3248_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1473_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
-		_ = requiresExtension_1473_ext
+		requiresExtension_3249_ext := ExtensionId_GL_OES_texture_half_float // ExtensionId
+		_ = requiresExtension_3249_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	default:
-		glErrorInvalidEnum_1474_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3250_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1474_param
+		_ = glErrorInvalidEnum_3250_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1476_msg := "No context bound" // string
+		error_3252_msg := "No context bound" // string
 		return
-		_ = error_1476_msg
+		_ = error_3252_msg
 	}
-	GetContext_1475_result := context // Contextʳ
-	ctx := GetContext_1475_result     // Contextʳ
+	GetContext_3251_result := context // Contextʳ
+	ctx := GetContext_3251_result     // Contextʳ
 	if ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) && ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) {
 		size := (externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)) * (uint32(ϟa.Depth)) // u32
 		U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -18679,7 +27526,7 @@ func (ϟa *GlTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexSubImage3D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1469_major, minRequiredVersion_1469_minor, context, GetContext_1475_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3245_major, minRequiredVersion_3245_minor, context, GetContext_3251_result, ctx
 	return nil
 }
 
@@ -18688,19 +27535,19 @@ func (ϟa *GlBeginTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1477_major := uint32(3) // u32
-	minRequiredVersion_1477_minor := uint32(0) // u32
+	minRequiredVersion_3253_major := uint32(3) // u32
+	minRequiredVersion_3253_minor := uint32(0) // u32
 	switch ϟa.PrimitiveMode {
 	case GLenum_GL_LINES, GLenum_GL_POINTS, GLenum_GL_TRIANGLES:
 	default:
-		glErrorInvalidEnum_1478_param := ϟa.PrimitiveMode // GLenum
+		glErrorInvalidEnum_3254_param := ϟa.PrimitiveMode // GLenum
 		return
-		_ = glErrorInvalidEnum_1478_param
+		_ = glErrorInvalidEnum_3254_param
 	}
 	ϟb.Push(value.U32(ϟa.PrimitiveMode))
 	ϟb.Call(funcInfoGlBeginTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1477_major, minRequiredVersion_1477_minor
+	_, _ = minRequiredVersion_3253_major, minRequiredVersion_3253_minor
 	return nil
 }
 
@@ -18709,20 +27556,20 @@ func (ϟa *GlBindTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1479_major := uint32(3) // u32
-	minRequiredVersion_1479_minor := uint32(0) // u32
+	minRequiredVersion_3255_major := uint32(3) // u32
+	minRequiredVersion_3255_minor := uint32(0) // u32
 	switch ϟa.Target {
 	case GLenum_GL_TRANSFORM_FEEDBACK:
 	default:
-		glErrorInvalidEnum_1480_param := ϟa.Target // GLenum
+		glErrorInvalidEnum_3256_param := ϟa.Target // GLenum
 		return
-		_ = glErrorInvalidEnum_1480_param
+		_ = glErrorInvalidEnum_3256_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1479_major, minRequiredVersion_1479_minor
+	_, _ = minRequiredVersion_3255_major, minRequiredVersion_3255_minor
 	return nil
 }
 
@@ -18731,14 +27578,14 @@ func (ϟa *GlDeleteTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1481_major := uint32(3) // u32
-	minRequiredVersion_1481_minor := uint32(0) // u32
+	minRequiredVersion_3257_major := uint32(3) // u32
+	minRequiredVersion_3257_minor := uint32(0) // u32
 	ϟa.Ids.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Ids.value())
 	ϟb.Call(funcInfoGlDeleteTransformFeedbacks)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1481_major, minRequiredVersion_1481_minor
+	_, _ = minRequiredVersion_3257_major, minRequiredVersion_3257_minor
 	return nil
 }
 
@@ -18747,11 +27594,11 @@ func (ϟa *GlEndTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1482_major := uint32(3) // u32
-	minRequiredVersion_1482_minor := uint32(0) // u32
+	minRequiredVersion_3258_major := uint32(3) // u32
+	minRequiredVersion_3258_minor := uint32(0) // u32
 	ϟb.Call(funcInfoGlEndTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1482_major, minRequiredVersion_1482_minor
+	_, _ = minRequiredVersion_3258_major, minRequiredVersion_3258_minor
 	return nil
 }
 
@@ -18760,14 +27607,14 @@ func (ϟa *GlGenTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1483_major := uint32(3) // u32
-	minRequiredVersion_1483_minor := uint32(0) // u32
+	minRequiredVersion_3259_major := uint32(3) // u32
+	minRequiredVersion_3259_minor := uint32(0) // u32
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Ids.value())
 	ϟb.Call(funcInfoGlGenTransformFeedbacks)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Ids.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.N), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _ = minRequiredVersion_1483_major, minRequiredVersion_1483_minor
+	_, _ = minRequiredVersion_3259_major, minRequiredVersion_3259_minor
 	return nil
 }
 
@@ -18776,11 +27623,11 @@ func (ϟa *GlGetTransformFeedbackVarying) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1484_major := uint32(3)         // u32
-	minRequiredVersion_1484_minor := uint32(0)         // u32
-	writeString_1485_buffer_size := ϟa.BufSize         // GLsizei
-	writeString_1485_buffer_bytes_written := ϟa.Length // GLsizeiᵖ
-	writeString_1485_buffer := ϟa.Name                 // GLcharᵖ
+	minRequiredVersion_3260_major := uint32(3)         // u32
+	minRequiredVersion_3260_minor := uint32(0)         // u32
+	writeString_3261_buffer_size := ϟa.BufSize         // GLsizei
+	writeString_3261_buffer_bytes_written := ϟa.Length // GLsizeiᵖ
+	writeString_3261_buffer := ϟa.Name                 // GLcharᵖ
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
@@ -18794,21 +27641,21 @@ func (ϟa *GlGetTransformFeedbackVarying) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetTransformFeedbackVarying)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	if ((writeString_1485_buffer) != (GLcharᵖ{})) && ((writeString_1485_buffer_size) > (GLsizei(int32(0)))) {
-		buffer_size2 := writeString_1485_buffer_size // GLsizei
-		if (writeString_1485_buffer_bytes_written) != (GLsizeiᵖ{}) {
+	if ((writeString_3261_buffer) != (GLcharᵖ{})) && ((writeString_3261_buffer_size) > (GLsizei(int32(0)))) {
+		buffer_size2 := writeString_3261_buffer_size // GLsizei
+		if (writeString_3261_buffer_bytes_written) != (GLsizeiᵖ{}) {
 			length := GLsizei(ϟa.Length.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil)) // GLsizei
-			writeString_1485_buffer_bytes_written.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(length, ϟa, ϟs, ϟd, ϟl, ϟb)
-			writeString_1485_buffer.Slice(uint64(GLsizei(int32(0))), uint64((length)+(GLsizei(int32(1)))), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+			writeString_3261_buffer_bytes_written.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(length, ϟa, ϟs, ϟd, ϟl, ϟb)
+			writeString_3261_buffer.Slice(uint64(GLsizei(int32(0))), uint64((length)+(GLsizei(int32(1)))), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 			_ = length
 		} else {
-			writeString_1485_buffer.Slice(uint64(GLsizei(int32(0))), uint64(buffer_size2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+			writeString_3261_buffer.Slice(uint64(GLsizei(int32(0))), uint64(buffer_size2), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 		_ = buffer_size2
 	}
 	ϟa.Size.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Size.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
-	_, _, _, _, _ = minRequiredVersion_1484_major, minRequiredVersion_1484_minor, writeString_1485_buffer_size, writeString_1485_buffer_bytes_written, writeString_1485_buffer
+	_, _, _, _, _ = minRequiredVersion_3260_major, minRequiredVersion_3260_minor, writeString_3261_buffer_size, writeString_3261_buffer_bytes_written, writeString_3261_buffer
 	return nil
 }
 
@@ -18817,12 +27664,12 @@ func (ϟa *GlIsTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1486_major := uint32(3) // u32
-	minRequiredVersion_1486_minor := uint32(0) // u32
+	minRequiredVersion_3262_major := uint32(3) // u32
+	minRequiredVersion_3262_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlIsTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1486_major, minRequiredVersion_1486_minor
+	_, _ = minRequiredVersion_3262_major, minRequiredVersion_3262_minor
 	return nil
 }
 
@@ -18831,11 +27678,11 @@ func (ϟa *GlPauseTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1487_major := uint32(3) // u32
-	minRequiredVersion_1487_minor := uint32(0) // u32
+	minRequiredVersion_3263_major := uint32(3) // u32
+	minRequiredVersion_3263_minor := uint32(0) // u32
 	ϟb.Call(funcInfoGlPauseTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1487_major, minRequiredVersion_1487_minor
+	_, _ = minRequiredVersion_3263_major, minRequiredVersion_3263_minor
 	return nil
 }
 
@@ -18844,11 +27691,11 @@ func (ϟa *GlResumeTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1488_major := uint32(3) // u32
-	minRequiredVersion_1488_minor := uint32(0) // u32
+	minRequiredVersion_3264_major := uint32(3) // u32
+	minRequiredVersion_3264_minor := uint32(0) // u32
 	ϟb.Call(funcInfoGlResumeTransformFeedback)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1488_major, minRequiredVersion_1488_minor
+	_, _ = minRequiredVersion_3264_major, minRequiredVersion_3264_minor
 	return nil
 }
 
@@ -18857,14 +27704,14 @@ func (ϟa *GlTransformFeedbackVaryings) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1489_major := uint32(3) // u32
-	minRequiredVersion_1489_minor := uint32(0) // u32
+	minRequiredVersion_3265_major := uint32(3) // u32
+	minRequiredVersion_3265_minor := uint32(0) // u32
 	switch ϟa.BufferMode {
 	case GLenum_GL_INTERLEAVED_ATTRIBS, GLenum_GL_SEPARATE_ATTRIBS:
 	default:
-		glErrorInvalidEnum_1490_param := ϟa.BufferMode // GLenum
+		glErrorInvalidEnum_3266_param := ϟa.BufferMode // GLenum
 		return
-		_ = glErrorInvalidEnum_1490_param
+		_ = glErrorInvalidEnum_3266_param
 	}
 	names := ϟa.Varyings.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // GLcharᶜᵖˢ
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
@@ -18881,7 +27728,7 @@ func (ϟa *GlTransformFeedbackVaryings) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟb.Push(value.U32(ϟa.BufferMode))
 	ϟb.Call(funcInfoGlTransformFeedbackVaryings)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = minRequiredVersion_1489_major, minRequiredVersion_1489_minor, names
+	_, _, _ = minRequiredVersion_3265_major, minRequiredVersion_3265_minor, names
 	return nil
 }
 
@@ -18890,16 +27737,16 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1491_major := uint32(3)   // u32
-	minRequiredVersion_1491_minor := uint32(0)   // u32
+	minRequiredVersion_3267_major := uint32(3)   // u32
+	minRequiredVersion_3267_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1493_msg := "No context bound" // string
+		error_3269_msg := "No context bound" // string
 		return
-		_ = error_1493_msg
+		_ = error_3269_msg
 	}
-	GetContext_1492_result := context // Contextʳ
-	ctx := GetContext_1492_result     // Contextʳ
+	GetContext_3268_result := context // Contextʳ
+	ctx := GetContext_3268_result     // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
 		ctx.Instances.VertexArrays[ϟa.Array] = &VertexArray{}
 	}
@@ -18911,7 +27758,7 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Call(funcInfoGlBindVertexArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1491_major, minRequiredVersion_1491_minor, context, GetContext_1492_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3267_major, minRequiredVersion_3267_minor, context, GetContext_3268_result, ctx
 	return nil
 }
 
@@ -18920,8 +27767,8 @@ func (ϟa *GlBindVertexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1494_major := uint32(3) // u32
-	minRequiredVersion_1494_minor := uint32(1) // u32
+	minRequiredVersion_3270_major := uint32(3) // u32
+	minRequiredVersion_3270_minor := uint32(1) // u32
 	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Buffer.value(ϟb, ϟa, ϟs))
@@ -18932,7 +27779,7 @@ func (ϟa *GlBindVertexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindVertexBuffer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1494_major, minRequiredVersion_1494_minor
+	_, _ = minRequiredVersion_3270_major, minRequiredVersion_3270_minor
 	return nil
 }
 
@@ -18941,16 +27788,16 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1495_major := uint32(3)   // u32
-	minRequiredVersion_1495_minor := uint32(0)   // u32
+	minRequiredVersion_3271_major := uint32(3)   // u32
+	minRequiredVersion_3271_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1497_msg := "No context bound" // string
+		error_3273_msg := "No context bound" // string
 		return
-		_ = error_1497_msg
+		_ = error_3273_msg
 	}
-	GetContext_1496_result := context                                     // Contextʳ
-	ctx := GetContext_1496_result                                         // Contextʳ
+	GetContext_3272_result := context                                     // Contextʳ
+	ctx := GetContext_3272_result                                         // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
@@ -18959,7 +27806,7 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlDeleteVertexArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1495_major, minRequiredVersion_1495_minor, context, GetContext_1496_result, ctx, a
+	_, _, _, _, _, _ = minRequiredVersion_3271_major, minRequiredVersion_3271_minor, context, GetContext_3272_result, ctx, a
 	return nil
 }
 
@@ -18968,21 +27815,21 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1498_major := uint32(2)   // u32
-	minRequiredVersion_1498_minor := uint32(0)   // u32
+	minRequiredVersion_3274_major := uint32(2)   // u32
+	minRequiredVersion_3274_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1500_msg := "No context bound" // string
+		error_3276_msg := "No context bound" // string
 		return
-		_ = error_1500_msg
+		_ = error_3276_msg
 	}
-	GetContext_1499_result := context // Contextʳ
-	ctx := GetContext_1499_result     // Contextʳ
+	GetContext_3275_result := context // Contextʳ
+	ctx := GetContext_3275_result     // Contextʳ
 	ctx.VertexAttributeArrays.Get(ϟa.Location).Enabled = false
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDisableVertexAttribArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1498_major, minRequiredVersion_1498_minor, context, GetContext_1499_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3274_major, minRequiredVersion_3274_minor, context, GetContext_3275_result, ctx
 	return nil
 }
 
@@ -18991,21 +27838,21 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1501_major := uint32(2)   // u32
-	minRequiredVersion_1501_minor := uint32(0)   // u32
+	minRequiredVersion_3277_major := uint32(2)   // u32
+	minRequiredVersion_3277_minor := uint32(0)   // u32
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1503_msg := "No context bound" // string
+		error_3279_msg := "No context bound" // string
 		return
-		_ = error_1503_msg
+		_ = error_3279_msg
 	}
-	GetContext_1502_result := context // Contextʳ
-	ctx := GetContext_1502_result     // Contextʳ
+	GetContext_3278_result := context // Contextʳ
+	ctx := GetContext_3278_result     // Contextʳ
 	ctx.VertexAttributeArrays.Get(ϟa.Location).Enabled = true
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEnableVertexAttribArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1501_major, minRequiredVersion_1501_minor, context, GetContext_1502_result, ctx
+	_, _, _, _, _ = minRequiredVersion_3277_major, minRequiredVersion_3277_minor, context, GetContext_3278_result, ctx
 	return nil
 }
 
@@ -19014,17 +27861,17 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1504_major := uint32(3)                            // u32
-	minRequiredVersion_1504_minor := uint32(0)                            // u32
+	minRequiredVersion_3280_major := uint32(3)                            // u32
+	minRequiredVersion_3280_minor := uint32(0)                            // u32
 	a := ϟa.Arrays.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                          // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1506_msg := "No context bound" // string
+		error_3282_msg := "No context bound" // string
 		return
-		_ = error_1506_msg
+		_ = error_3282_msg
 	}
-	GetContext_1505_result := context // Contextʳ
-	ctx := GetContext_1505_result     // Contextʳ
+	GetContext_3281_result := context // Contextʳ
+	ctx := GetContext_3281_result     // Contextʳ
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlGenVertexArrays)
@@ -19035,7 +27882,7 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		a.Index(uint64(i), ϟs).Write(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _, _, _ = minRequiredVersion_1504_major, minRequiredVersion_1504_minor, a, context, GetContext_1505_result, ctx
+	_, _, _, _, _, _ = minRequiredVersion_3280_major, minRequiredVersion_3280_minor, a, context, GetContext_3281_result, ctx
 	return nil
 }
 
@@ -19044,25 +27891,25 @@ func (ϟa *GlGetVertexAttribIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1507_major := uint32(3) // u32
-	minRequiredVersion_1507_minor := uint32(0) // u32
+	minRequiredVersion_3283_major := uint32(3) // u32
+	minRequiredVersion_3283_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
 	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_1508_major := uint32(3) // u32
-		minRequiredVersion_1508_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1508_major, minRequiredVersion_1508_minor
+		minRequiredVersion_3284_major := uint32(3) // u32
+		minRequiredVersion_3284_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3284_major, minRequiredVersion_3284_minor
 	default:
-		glErrorInvalidEnum_1509_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3285_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1509_param
+		_ = glErrorInvalidEnum_3285_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribIiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1507_major, minRequiredVersion_1507_minor
+	_, _ = minRequiredVersion_3283_major, minRequiredVersion_3283_minor
 	return nil
 }
 
@@ -19071,25 +27918,25 @@ func (ϟa *GlGetVertexAttribIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1510_major := uint32(3) // u32
-	minRequiredVersion_1510_minor := uint32(0) // u32
+	minRequiredVersion_3286_major := uint32(3) // u32
+	minRequiredVersion_3286_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
 	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_1511_major := uint32(3) // u32
-		minRequiredVersion_1511_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1511_major, minRequiredVersion_1511_minor
+		minRequiredVersion_3287_major := uint32(3) // u32
+		minRequiredVersion_3287_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3287_major, minRequiredVersion_3287_minor
 	default:
-		glErrorInvalidEnum_1512_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3288_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1512_param
+		_ = glErrorInvalidEnum_3288_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribIuiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1510_major, minRequiredVersion_1510_minor
+	_, _ = minRequiredVersion_3286_major, minRequiredVersion_3286_minor
 	return nil
 }
 
@@ -19098,21 +27945,21 @@ func (ϟa *GlGetVertexAttribPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1513_major := uint32(2) // u32
-	minRequiredVersion_1513_minor := uint32(0) // u32
+	minRequiredVersion_3289_major := uint32(2) // u32
+	minRequiredVersion_3289_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_VERTEX_ATTRIB_ARRAY_POINTER:
 	default:
-		glErrorInvalidEnum_1514_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3290_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1514_param
+		_ = glErrorInvalidEnum_3290_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Pointer.value())
 	ϟb.Call(funcInfoGlGetVertexAttribPointerv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1513_major, minRequiredVersion_1513_minor
+	_, _ = minRequiredVersion_3289_major, minRequiredVersion_3289_minor
 	return nil
 }
 
@@ -19121,29 +27968,29 @@ func (ϟa *GlGetVertexAttribfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1515_major := uint32(2) // u32
-	minRequiredVersion_1515_minor := uint32(0) // u32
+	minRequiredVersion_3291_major := uint32(2) // u32
+	minRequiredVersion_3291_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
 	case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
-		minRequiredVersion_1516_major := uint32(3) // u32
-		minRequiredVersion_1516_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1516_major, minRequiredVersion_1516_minor
+		minRequiredVersion_3292_major := uint32(3) // u32
+		minRequiredVersion_3292_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3292_major, minRequiredVersion_3292_minor
 	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_1517_major := uint32(3) // u32
-		minRequiredVersion_1517_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1517_major, minRequiredVersion_1517_minor
+		minRequiredVersion_3293_major := uint32(3) // u32
+		minRequiredVersion_3293_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3293_major, minRequiredVersion_3293_minor
 	default:
-		glErrorInvalidEnum_1518_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3294_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1518_param
+		_ = glErrorInvalidEnum_3294_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribfv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1515_major, minRequiredVersion_1515_minor
+	_, _ = minRequiredVersion_3291_major, minRequiredVersion_3291_minor
 	return nil
 }
 
@@ -19152,29 +27999,29 @@ func (ϟa *GlGetVertexAttribiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1519_major := uint32(2) // u32
-	minRequiredVersion_1519_minor := uint32(0) // u32
+	minRequiredVersion_3295_major := uint32(2) // u32
+	minRequiredVersion_3295_minor := uint32(0) // u32
 	switch ϟa.Pname {
 	case GLenum_GL_CURRENT_VERTEX_ATTRIB, GLenum_GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, GLenum_GL_VERTEX_ATTRIB_ARRAY_ENABLED, GLenum_GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, GLenum_GL_VERTEX_ATTRIB_ARRAY_SIZE, GLenum_GL_VERTEX_ATTRIB_ARRAY_STRIDE, GLenum_GL_VERTEX_ATTRIB_ARRAY_TYPE:
 	case GLenum_GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER:
-		minRequiredVersion_1520_major := uint32(3) // u32
-		minRequiredVersion_1520_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1520_major, minRequiredVersion_1520_minor
+		minRequiredVersion_3296_major := uint32(3) // u32
+		minRequiredVersion_3296_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3296_major, minRequiredVersion_3296_minor
 	case GLenum_GL_VERTEX_ATTRIB_BINDING:
-		minRequiredVersion_1521_major := uint32(3) // u32
-		minRequiredVersion_1521_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_1521_major, minRequiredVersion_1521_minor
+		minRequiredVersion_3297_major := uint32(3) // u32
+		minRequiredVersion_3297_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_3297_major, minRequiredVersion_3297_minor
 	default:
-		glErrorInvalidEnum_1522_param := ϟa.Pname // GLenum
+		glErrorInvalidEnum_3298_param := ϟa.Pname // GLenum
 		return
-		_ = glErrorInvalidEnum_1522_param
+		_ = glErrorInvalidEnum_3298_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
 	ϟb.Call(funcInfoGlGetVertexAttribiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1519_major, minRequiredVersion_1519_minor
+	_, _ = minRequiredVersion_3295_major, minRequiredVersion_3295_minor
 	return nil
 }
 
@@ -19183,8 +28030,8 @@ func (ϟa *GlIsVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1523_major := uint32(3) // u32
-	minRequiredVersion_1523_minor := uint32(0) // u32
+	minRequiredVersion_3299_major := uint32(3) // u32
+	minRequiredVersion_3299_minor := uint32(0) // u32
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
@@ -19192,7 +28039,7 @@ func (ϟa *GlIsVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlIsVertexArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1523_major, minRequiredVersion_1523_minor
+	_, _ = minRequiredVersion_3299_major, minRequiredVersion_3299_minor
 	return nil
 }
 
@@ -19201,13 +28048,13 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1524_major := uint32(2) // u32
-	minRequiredVersion_1524_minor := uint32(0) // u32
+	minRequiredVersion_3300_major := uint32(2) // u32
+	minRequiredVersion_3300_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib1f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1524_major, minRequiredVersion_1524_minor
+	_, _ = minRequiredVersion_3300_major, minRequiredVersion_3300_minor
 	return nil
 }
 
@@ -19216,14 +28063,14 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1525_major := uint32(2) // u32
-	minRequiredVersion_1525_minor := uint32(0) // u32
+	minRequiredVersion_3301_major := uint32(2) // u32
+	minRequiredVersion_3301_minor := uint32(0) // u32
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib1fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1525_major, minRequiredVersion_1525_minor
+	_, _ = minRequiredVersion_3301_major, minRequiredVersion_3301_minor
 	return nil
 }
 
@@ -19232,14 +28079,14 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1526_major := uint32(2) // u32
-	minRequiredVersion_1526_minor := uint32(0) // u32
+	minRequiredVersion_3302_major := uint32(2) // u32
+	minRequiredVersion_3302_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib2f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1526_major, minRequiredVersion_1526_minor
+	_, _ = minRequiredVersion_3302_major, minRequiredVersion_3302_minor
 	return nil
 }
 
@@ -19248,14 +28095,14 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1527_major := uint32(2) // u32
-	minRequiredVersion_1527_minor := uint32(0) // u32
+	minRequiredVersion_3303_major := uint32(2) // u32
+	minRequiredVersion_3303_minor := uint32(0) // u32
 	ϟa.Value.Slice(uint64(0), uint64(2), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib2fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1527_major, minRequiredVersion_1527_minor
+	_, _ = minRequiredVersion_3303_major, minRequiredVersion_3303_minor
 	return nil
 }
 
@@ -19264,15 +28111,15 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1528_major := uint32(2) // u32
-	minRequiredVersion_1528_minor := uint32(0) // u32
+	minRequiredVersion_3304_major := uint32(2) // u32
+	minRequiredVersion_3304_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value2.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib3f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1528_major, minRequiredVersion_1528_minor
+	_, _ = minRequiredVersion_3304_major, minRequiredVersion_3304_minor
 	return nil
 }
 
@@ -19281,14 +28128,14 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1529_major := uint32(2) // u32
-	minRequiredVersion_1529_minor := uint32(0) // u32
+	minRequiredVersion_3305_major := uint32(2) // u32
+	minRequiredVersion_3305_minor := uint32(0) // u32
 	ϟa.Value.Slice(uint64(0), uint64(3), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib3fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1529_major, minRequiredVersion_1529_minor
+	_, _ = minRequiredVersion_3305_major, minRequiredVersion_3305_minor
 	return nil
 }
 
@@ -19297,8 +28144,8 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1530_major := uint32(2) // u32
-	minRequiredVersion_1530_minor := uint32(0) // u32
+	minRequiredVersion_3306_major := uint32(2) // u32
+	minRequiredVersion_3306_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value1.value(ϟb, ϟa, ϟs))
@@ -19306,7 +28153,7 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Value3.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib4f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1530_major, minRequiredVersion_1530_minor
+	_, _ = minRequiredVersion_3306_major, minRequiredVersion_3306_minor
 	return nil
 }
 
@@ -19315,14 +28162,14 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1531_major := uint32(2) // u32
-	minRequiredVersion_1531_minor := uint32(0) // u32
+	minRequiredVersion_3307_major := uint32(2) // u32
+	minRequiredVersion_3307_minor := uint32(0) // u32
 	ϟa.Value.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib4fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1531_major, minRequiredVersion_1531_minor
+	_, _ = minRequiredVersion_3307_major, minRequiredVersion_3307_minor
 	return nil
 }
 
@@ -19331,13 +28178,13 @@ func (ϟa *GlVertexAttribBinding) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1532_major := uint32(3) // u32
-	minRequiredVersion_1532_minor := uint32(1) // u32
+	minRequiredVersion_3308_major := uint32(3) // u32
+	minRequiredVersion_3308_minor := uint32(1) // u32
 	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribBinding)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1532_major, minRequiredVersion_1532_minor
+	_, _ = minRequiredVersion_3308_major, minRequiredVersion_3308_minor
 	return nil
 }
 
@@ -19346,13 +28193,13 @@ func (ϟa *GlVertexAttribDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1533_major := uint32(3) // u32
-	minRequiredVersion_1533_minor := uint32(0) // u32
+	minRequiredVersion_3309_major := uint32(3) // u32
+	minRequiredVersion_3309_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribDivisor)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1533_major, minRequiredVersion_1533_minor
+	_, _ = minRequiredVersion_3309_major, minRequiredVersion_3309_minor
 	return nil
 }
 
@@ -19361,14 +28208,14 @@ func (ϟa *GlVertexAttribFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1534_major := uint32(3) // u32
-	minRequiredVersion_1534_minor := uint32(1) // u32
+	minRequiredVersion_3310_major := uint32(3) // u32
+	minRequiredVersion_3310_minor := uint32(1) // u32
 	switch ϟa.Type {
 	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		glErrorInvalidEnum_1535_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3311_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1535_param
+		_ = glErrorInvalidEnum_3311_param
 	}
 	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -19377,7 +28224,7 @@ func (ϟa *GlVertexAttribFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Relativeoffset.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1534_major, minRequiredVersion_1534_minor
+	_, _ = minRequiredVersion_3310_major, minRequiredVersion_3310_minor
 	return nil
 }
 
@@ -19386,8 +28233,8 @@ func (ϟa *GlVertexAttribI4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1536_major := uint32(3) // u32
-	minRequiredVersion_1536_minor := uint32(0) // u32
+	minRequiredVersion_3312_major := uint32(3) // u32
+	minRequiredVersion_3312_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -19395,7 +28242,7 @@ func (ϟa *GlVertexAttribI4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.W.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1536_major, minRequiredVersion_1536_minor
+	_, _ = minRequiredVersion_3312_major, minRequiredVersion_3312_minor
 	return nil
 }
 
@@ -19404,13 +28251,13 @@ func (ϟa *GlVertexAttribI4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1537_major := uint32(3) // u32
-	minRequiredVersion_1537_minor := uint32(0) // u32
+	minRequiredVersion_3313_major := uint32(3) // u32
+	minRequiredVersion_3313_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
 	ϟb.Call(funcInfoGlVertexAttribI4iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1537_major, minRequiredVersion_1537_minor
+	_, _ = minRequiredVersion_3313_major, minRequiredVersion_3313_minor
 	return nil
 }
 
@@ -19419,8 +28266,8 @@ func (ϟa *GlVertexAttribI4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1538_major := uint32(3) // u32
-	minRequiredVersion_1538_minor := uint32(0) // u32
+	minRequiredVersion_3314_major := uint32(3) // u32
+	minRequiredVersion_3314_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -19428,7 +28275,7 @@ func (ϟa *GlVertexAttribI4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.W.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4ui)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1538_major, minRequiredVersion_1538_minor
+	_, _ = minRequiredVersion_3314_major, minRequiredVersion_3314_minor
 	return nil
 }
 
@@ -19437,13 +28284,13 @@ func (ϟa *GlVertexAttribI4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1539_major := uint32(3) // u32
-	minRequiredVersion_1539_minor := uint32(0) // u32
+	minRequiredVersion_3315_major := uint32(3) // u32
+	minRequiredVersion_3315_minor := uint32(0) // u32
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
 	ϟb.Call(funcInfoGlVertexAttribI4uiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1539_major, minRequiredVersion_1539_minor
+	_, _ = minRequiredVersion_3315_major, minRequiredVersion_3315_minor
 	return nil
 }
 
@@ -19452,14 +28299,14 @@ func (ϟa *GlVertexAttribIFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1540_major := uint32(3) // u32
-	minRequiredVersion_1540_minor := uint32(1) // u32
+	minRequiredVersion_3316_major := uint32(3) // u32
+	minRequiredVersion_3316_minor := uint32(1) // u32
 	switch ϟa.Type {
 	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		glErrorInvalidEnum_1541_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3317_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1541_param
+		_ = glErrorInvalidEnum_3317_param
 	}
 	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -19467,7 +28314,7 @@ func (ϟa *GlVertexAttribIFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Relativeoffset.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribIFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1540_major, minRequiredVersion_1540_minor
+	_, _ = minRequiredVersion_3316_major, minRequiredVersion_3316_minor
 	return nil
 }
 
@@ -19476,17 +28323,17 @@ func (ϟa *GlVertexAttribIPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1542_major := uint32(3) // u32
-	minRequiredVersion_1542_minor := uint32(0) // u32
+	minRequiredVersion_3318_major := uint32(3) // u32
+	minRequiredVersion_3318_minor := uint32(0) // u32
 	switch ϟa.Type {
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1543_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
-		_ = requiresExtension_1543_ext
+		requiresExtension_3319_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+		_ = requiresExtension_3319_ext
 	case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		glErrorInvalidEnum_1544_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3320_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1544_param
+		_ = glErrorInvalidEnum_3320_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -19495,7 +28342,7 @@ func (ϟa *GlVertexAttribIPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Pointer.value())
 	ϟb.Call(funcInfoGlVertexAttribIPointer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1542_major, minRequiredVersion_1542_minor
+	_, _ = minRequiredVersion_3318_major, minRequiredVersion_3318_minor
 	return nil
 }
 
@@ -19504,30 +28351,30 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1545_major := uint32(2) // u32
-	minRequiredVersion_1545_minor := uint32(0) // u32
+	minRequiredVersion_3321_major := uint32(2) // u32
+	minRequiredVersion_3321_minor := uint32(0) // u32
 	switch ϟa.Type {
 	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
 	case GLenum_GL_HALF_FLOAT_OES:
-		requiresExtension_1546_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
-		_ = requiresExtension_1546_ext
+		requiresExtension_3322_ext := ExtensionId_GL_OES_vertex_half_float // ExtensionId
+		_ = requiresExtension_3322_ext
 	case GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
-		minRequiredVersion_1547_major := uint32(3) // u32
-		minRequiredVersion_1547_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_1547_major, minRequiredVersion_1547_minor
+		minRequiredVersion_3323_major := uint32(3) // u32
+		minRequiredVersion_3323_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_3323_major, minRequiredVersion_3323_minor
 	default:
-		glErrorInvalidEnum_1548_param := ϟa.Type // GLenum
+		glErrorInvalidEnum_3324_param := ϟa.Type // GLenum
 		return
-		_ = glErrorInvalidEnum_1548_param
+		_ = glErrorInvalidEnum_3324_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1550_msg := "No context bound" // string
+		error_3326_msg := "No context bound" // string
 		return
-		_ = error_1550_msg
+		_ = error_3326_msg
 	}
-	GetContext_1549_result := context               // Contextʳ
-	ctx := GetContext_1549_result                   // Contextʳ
+	GetContext_3325_result := context               // Contextʳ
+	ctx := GetContext_3325_result                   // Contextʳ
 	a := ctx.VertexAttributeArrays.Get(ϟa.Location) // VertexAttributeArrayʳ
 	a.Size = uint32(ϟa.Size)
 	a.Type = ϟa.Type
@@ -19543,7 +28390,7 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribPointer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _ = minRequiredVersion_1545_major, minRequiredVersion_1545_minor, context, GetContext_1549_result, ctx, a
+	_, _, _, _, _, _ = minRequiredVersion_3321_major, minRequiredVersion_3321_minor, context, GetContext_3325_result, ctx, a
 	return nil
 }
 
@@ -19552,13 +28399,13 @@ func (ϟa *GlVertexBindingDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1551_major := uint32(3) // u32
-	minRequiredVersion_1551_minor := uint32(1) // u32
+	minRequiredVersion_3327_major := uint32(3) // u32
+	minRequiredVersion_3327_minor := uint32(1) // u32
 	ϟb.Push(ϟa.Bindingindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexBindingDivisor)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_1551_major, minRequiredVersion_1551_minor
+	_, _ = minRequiredVersion_3327_major, minRequiredVersion_3327_minor
 	return nil
 }
 
@@ -19627,12 +28474,12 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_1564_msg := "No context bound" // string
+		error_3340_msg := "No context bound" // string
 		return
-		_ = error_1564_msg
+		_ = error_3340_msg
 	}
-	GetContext_1563_result := context // Contextʳ
-	ctx := GetContext_1563_result     // Contextʳ
+	GetContext_3339_result := context // Contextʳ
+	ctx := GetContext_3339_result     // Contextʳ
 	ctx.Info.Name = ϟa.Name
 	ctx.Info.Vendor = ϟa.Vendor
 	ctx.Info.Extensions = ϟa.Extensions
@@ -19673,7 +28520,7 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.Bool(ϟa.PreserveBuffersOnSwap))
 	ϟb.Call(funcInfoContextInfo)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _ = context, GetContext_1563_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
+	_, _, _, _, _, _, _, _, _, _ = context, GetContext_3339_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil
 }
 

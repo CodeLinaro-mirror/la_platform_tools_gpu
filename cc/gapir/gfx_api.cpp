@@ -14434,13 +14434,13 @@ bool callGlViewport(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetBooleaniV(Stack* stack, bool pushReturn) {
-    uint8_t* data = stack->pop<uint8_t*>();
+    uint8_t* values = stack->pop<uint8_t*>();
     uint32_t index = stack->pop<uint32_t>();
-    GLenum target = stack->pop<GLenum>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", target, index, data);
+        GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetBooleani_v != nullptr) {
-            glGetBooleani_v(target, index, data);
+            glGetBooleani_v(param, index, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetBooleani_v returned error: 0x%x", err);
@@ -14498,13 +14498,13 @@ bool callGlGetFloatv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetInteger64iV(Stack* stack, bool pushReturn) {
-    int64_t* data = stack->pop<int64_t*>();
+    int64_t* values = stack->pop<int64_t*>();
     uint32_t index = stack->pop<uint32_t>();
-    GLenum target = stack->pop<GLenum>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", target, index, data);
+        GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetInteger64i_v != nullptr) {
-            glGetInteger64i_v(target, index, data);
+            glGetInteger64i_v(param, index, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetInteger64i_v returned error: 0x%x", err);
@@ -14520,12 +14520,12 @@ bool callGlGetInteger64iV(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetInteger64v(Stack* stack, bool pushReturn) {
-    int64_t* data = stack->pop<int64_t*>();
-    GLenum pname = stack->pop<GLenum>();
+    int64_t* values = stack->pop<int64_t*>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetInteger64v(%u, %p)", pname, data);
+        GAPID_INFO("glGetInteger64v(%u, %p)", param, values);
         if (glGetInteger64v != nullptr) {
-            glGetInteger64v(pname, data);
+            glGetInteger64v(param, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetInteger64v returned error: 0x%x", err);
@@ -14541,13 +14541,13 @@ bool callGlGetInteger64v(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetIntegeriV(Stack* stack, bool pushReturn) {
-    int32_t* data = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     uint32_t index = stack->pop<uint32_t>();
-    GLenum target = stack->pop<GLenum>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", target, index, data);
+        GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetIntegeri_v != nullptr) {
-            glGetIntegeri_v(target, index, data);
+            glGetIntegeri_v(param, index, values);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glGetIntegeri_v returned error: 0x%x", err);

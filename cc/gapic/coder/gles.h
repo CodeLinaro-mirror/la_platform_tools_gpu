@@ -8991,26 +8991,26 @@ namespace gles {
     class GlGetBooleani_v: public Encodable {
     public:
         GlGetBooleani_v() = default;
-        GlGetBooleani_v(atom::Observations observations, uint32_t Target, uint32_t Index, GLboolean__P Data) :
+        GlGetBooleani_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLboolean__P Values) :
             mobservations(observations),
-            mTarget(Target),
+            mParam(Param),
             mIndex(Index),
-            mData(Data) {}
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbe, 0x62, 0xf1, 0x22, 0xe9, 0x23, 0x5a, 0x62, 0x6d, 0x83, 0xf4, 0xa2, 0x9b, 0x26, 0x67, 0xf0, 0xff, 0x5b, 0x49, 0x36,  } };
+            static gapic::Id ID{ { 0x72, 0x5d, 0x37, 0x1b, 0xda, 0x0a, 0x9d, 0x64, 0x3c, 0x91, 0x85, 0x15, 0x33, 0x92, 0xd0, 0xf0, 0x45, 0x3f, 0xa1, 0xef,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mTarget);
+            e->Uint32(this->mParam);
             e->Uint32(this->mIndex);
-            e->Value(this->mData);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
-        uint32_t mTarget;
+        uint32_t mParam;
         uint32_t mIndex;
-        GLboolean__P mData;
+        GLboolean__P mValues;
     };
 
     class GlGetBooleanv: public Encodable {
@@ -9578,48 +9578,48 @@ namespace gles {
     class GlGetInteger64i_v: public Encodable {
     public:
         GlGetInteger64i_v() = default;
-        GlGetInteger64i_v(atom::Observations observations, uint32_t Target, uint32_t Index, GLint64__P Data) :
+        GlGetInteger64i_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLint64__P Values) :
             mobservations(observations),
-            mTarget(Target),
+            mParam(Param),
             mIndex(Index),
-            mData(Data) {}
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa4, 0x2f, 0xa5, 0x68, 0xe0, 0xef, 0xa9, 0x08, 0xfc, 0x9b, 0xaf, 0x2e, 0x72, 0xde, 0xfe, 0xdf, 0x23, 0xc7, 0x4a, 0xdc,  } };
+            static gapic::Id ID{ { 0xa0, 0x44, 0x64, 0x5e, 0xb2, 0xd7, 0x06, 0xa6, 0xf2, 0x70, 0xc1, 0xd3, 0x6f, 0x5c, 0x95, 0xae, 0xac, 0xc8, 0xd2, 0xde,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mTarget);
+            e->Uint32(this->mParam);
             e->Uint32(this->mIndex);
-            e->Value(this->mData);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
-        uint32_t mTarget;
+        uint32_t mParam;
         uint32_t mIndex;
-        GLint64__P mData;
+        GLint64__P mValues;
     };
 
     class GlGetInteger64v: public Encodable {
     public:
         GlGetInteger64v() = default;
-        GlGetInteger64v(atom::Observations observations, uint32_t Pname, GLint64__P Data) :
+        GlGetInteger64v(atom::Observations observations, uint32_t Param, GLint64__P Values) :
             mobservations(observations),
-            mPname(Pname),
-            mData(Data) {}
+            mParam(Param),
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9f, 0xda, 0xb9, 0x00, 0x1a, 0xfa, 0x37, 0xab, 0xde, 0x4a, 0xe4, 0x80, 0x1f, 0x40, 0xd7, 0x3b, 0xf7, 0xba, 0xbe, 0x63,  } };
+            static gapic::Id ID{ { 0x37, 0x56, 0x84, 0xd7, 0xe6, 0x3b, 0x9f, 0x2d, 0xef, 0xc0, 0xe9, 0x0f, 0x3b, 0xd1, 0x23, 0x87, 0x92, 0xdb, 0x5b, 0xad,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mPname);
-            e->Value(this->mData);
+            e->Uint32(this->mParam);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
-        uint32_t mPname;
-        GLint64__P mData;
+        uint32_t mParam;
+        GLint64__P mValues;
     };
 
     class GlGetInteger64vAPPLE: public Encodable {
@@ -9647,26 +9647,26 @@ namespace gles {
     class GlGetIntegeri_v: public Encodable {
     public:
         GlGetIntegeri_v() = default;
-        GlGetIntegeri_v(atom::Observations observations, uint32_t Target, uint32_t Index, GLint__P Data) :
+        GlGetIntegeri_v(atom::Observations observations, uint32_t Param, uint32_t Index, GLint__P Values) :
             mobservations(observations),
-            mTarget(Target),
+            mParam(Param),
             mIndex(Index),
-            mData(Data) {}
+            mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x13, 0xe7, 0x2a, 0x4c, 0x18, 0x89, 0xb5, 0x52, 0xab, 0x71, 0xf4, 0x3d, 0x2c, 0x20, 0xe3, 0x40, 0x31, 0x4f, 0x1e, 0x02,  } };
+            static gapic::Id ID{ { 0x6c, 0x3c, 0x9b, 0x3f, 0x8c, 0xab, 0x37, 0x44, 0x6c, 0x35, 0x04, 0xff, 0x7a, 0x63, 0xea, 0x6a, 0x45, 0x6e, 0x0b, 0xf5,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mTarget);
+            e->Uint32(this->mParam);
             e->Uint32(this->mIndex);
-            e->Value(this->mData);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
-        uint32_t mTarget;
+        uint32_t mParam;
         uint32_t mIndex;
-        GLint__P mData;
+        GLint__P mValues;
     };
 
     class GlGetIntegeri_vEXT: public Encodable {
