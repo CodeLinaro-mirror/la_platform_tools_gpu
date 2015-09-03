@@ -15,9 +15,10 @@
 package preprocessor
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"regexp"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 var (
@@ -315,7 +316,7 @@ func fakeExpressionEvaluator(tp *Preprocessor) (ast.IntValue, []error) {
 	for tp.Next().Token != nil {
 		count++
 	}
-	return ast.IntValue(count % 2), tp.GetErrors()
+	return ast.IntValue(count % 2), tp.Errors()
 }
 
 func TestPreprocessor(t *testing.T) {

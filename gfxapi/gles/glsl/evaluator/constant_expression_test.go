@@ -15,12 +15,13 @@
 package evaluator
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/sema"
 	"regexp"
 	"strings"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/sema"
 )
 
 var constantExpressions = []string{

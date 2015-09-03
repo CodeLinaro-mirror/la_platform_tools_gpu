@@ -15,10 +15,11 @@
 package preprocessor
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	"android.googlesource.com/platform/tools/gpu/parse"
 	"bytes"
 	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
 // ifEntry is a structure containing the data necessary for proper evaluation of #if*
@@ -41,14 +42,14 @@ type preprocessorImpl struct {
 	err   ast.ErrorCollector
 	lexer *lexer
 
-	macros       map[string]macroDefinition // All currently defined macros
+	macros       map[string]macroDefinition // All currently defined macros.
 	ifStack      []ifEntry                  // The stack of all encountered #if directives.
 	line         int                        // The current line.
 	currentToken *tokenExpansion
 	evaluator    ExpressionEvaluator
 }
 
-func (p *preprocessorImpl) GetErrors() []error {
+func (p *preprocessorImpl) Errors() []error {
 	return ast.ConcatErrors(p.lexer.err.GetErrors(), p.err.GetErrors())
 }
 

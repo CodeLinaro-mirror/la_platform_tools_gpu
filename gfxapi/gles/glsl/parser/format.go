@@ -15,9 +15,10 @@
 package parser
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"fmt"
 	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 // indentLen is the size of indent for pretty printing.

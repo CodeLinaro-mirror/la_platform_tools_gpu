@@ -15,10 +15,11 @@
 package parser
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"fmt"
 	"strings"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 func fmtFun(input string) string {

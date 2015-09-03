@@ -15,11 +15,12 @@
 package sema
 
 import (
+	"regexp"
+	"testing"
+
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/evaluator"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
-	"regexp"
-	"testing"
 )
 
 var semaTests = []struct {

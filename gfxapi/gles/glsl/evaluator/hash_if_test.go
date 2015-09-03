@@ -15,10 +15,11 @@
 package evaluator
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
 	"strings"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
 )
 
 // At this place in the dependency graph, we have all we need to fully test preprocessor #if

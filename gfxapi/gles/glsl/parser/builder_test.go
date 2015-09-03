@@ -15,11 +15,12 @@
 package parser
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	pp "android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/preprocessor"
 	"fmt"
 	"regexp"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	pp "android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/preprocessor"
 )
 
 func fun(body string) string { return "int fun(int a) { " + body + " }" }

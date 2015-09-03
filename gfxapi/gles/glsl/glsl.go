@@ -24,11 +24,12 @@ of this package.
 package glsl
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/evaluator"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/sema"
-	"fmt"
 )
 
 // Parse preprocesses and parses an OpenGL ES Shading language program present in the first

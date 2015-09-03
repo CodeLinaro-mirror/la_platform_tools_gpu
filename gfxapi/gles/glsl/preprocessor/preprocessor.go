@@ -34,8 +34,8 @@ import "android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 
 // Internal interface which glues preprocessor wrapper class to the actual implementation.
 type worker interface {
-	Work() []tokenExpansion // Do a single unit of work, and return the resulting token sequence.
-	GetErrors() []error     // Return any errors encountered.
+	Work() []tokenExpansion // Performs a single unit of work, and return the resulting token sequence.
+	Errors() []error        // Returns any errors encountered.
 }
 
 // Implementation of worker, which reads tokens from a list and processes them. Used for
@@ -46,7 +46,7 @@ type listWorker struct {
 }
 
 func (w *listWorker) Work() []tokenExpansion { return w.pp.processMacro(w.reader.Next(), w.reader) }
-func (w *listWorker) GetErrors() []error     { return nil }
+func (w *listWorker) Errors() []error        { return nil }
 
 // ExpressionEvaluator is a function type. These functions are used to process #if expressions.
 // If you want to implement your own expression evaluator, pass a function which given a
@@ -91,8 +91,8 @@ func (p *Preprocessor) Next() TokenInfo {
 	return ret
 }
 
-// Return the list of detected preprocessor errors.
-func (p *Preprocessor) GetErrors() []error { return p.impl.GetErrors() }
+// Errors returns the list of detected preprocessor errors.
+func (p *Preprocessor) Errors() []error { return p.impl.Errors() }
 
 func PreprocessStream(data string, eval ExpressionEvaluator, file int) *Preprocessor {
 	return &Preprocessor{
@@ -108,6 +108,6 @@ func Preprocess(data string, eval ExpressionEvaluator, file int) (tokens []Token
 		tokens = append(tokens, t)
 	}
 
-	err = pp.GetErrors()
+	err = pp.Errors()
 	return
 }
