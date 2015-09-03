@@ -35,15 +35,24 @@ cmd void switchThread(ThreadID threadID) {
 }
 
 @synthetic
-cmd void backbufferInfo(GLsizei width,
-                        GLsizei height,
-                        GLenum  color_fmt,
-                        GLenum  depth_fmt,
-                        GLenum  stencil_fmt,
-                        bool    resetViewportScissor,
-                        bool    preserveBuffersOnSwap) {
+cmd void contextInfo(string  name,
+                     string  vendor,
+                     string  extensions,
+                     string  version,
+                     GLsizei backbuffer_width,
+                     GLsizei backbuffer_height,
+                     GLenum  backbuffer_color_fmt,
+                     GLenum  backbuffer_depth_fmt,
+                     GLenum  backbuffer_stencil_fmt,
+                     bool    reset_viewport_scissor,
+                     bool    preserve_buffers_on_swap) {
   ctx := GetContext()
-  ctx.PreserveBuffersOnSwap = preserveBuffersOnSwap
+  ctx.Info.Name = name
+  ctx.Info.Vendor = vendor
+  ctx.Info.Extensions = extensions
+  ctx.Info.Version = version
+  ctx.Info.PreserveBuffersOnSwap = preserve_buffers_on_swap
+
   backbuffer := ctx.Instances.Framebuffers[0]
 
   color_id := as!RenderbufferId(backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object)
@@ -55,23 +64,23 @@ cmd void backbufferInfo(GLsizei width,
   stencil_id := as!RenderbufferId(backbuffer.Attachments[GL_STENCIL_ATTACHMENT].Object)
   stencil_buffer := ctx.Instances.Renderbuffers[stencil_id]
 
-  color_buffer.Width = width
-  color_buffer.Height = height
-  color_buffer.Format = color_fmt
+  color_buffer.Width = backbuffer_width
+  color_buffer.Height = backbuffer_height
+  color_buffer.Format = backbuffer_color_fmt
 
-  depth_buffer.Width = width
-  depth_buffer.Height = height
-  depth_buffer.Format = depth_fmt
+  depth_buffer.Width = backbuffer_width
+  depth_buffer.Height = backbuffer_height
+  depth_buffer.Format = backbuffer_depth_fmt
 
-  stencil_buffer.Width = width
-  stencil_buffer.Height = height
-  stencil_buffer.Format = stencil_fmt
+  stencil_buffer.Width = backbuffer_width
+  stencil_buffer.Height = backbuffer_height
+  stencil_buffer.Format = backbuffer_stencil_fmt
 
-  if resetViewportScissor {
-    ctx.Rasterizing.Scissor.Width = width
-    ctx.Rasterizing.Scissor.Height = height
-    ctx.Rasterizing.Viewport.Width = width
-    ctx.Rasterizing.Viewport.Height = height
+  if reset_viewport_scissor {
+    ctx.Rasterizing.Scissor.Width = backbuffer_width
+    ctx.Rasterizing.Scissor.Height = backbuffer_height
+    ctx.Rasterizing.Viewport.Width = backbuffer_width
+    ctx.Rasterizing.Viewport.Height = backbuffer_height
   }
 }
 

@@ -168,12 +168,20 @@ func checkReplay(t *testing.T, expectedContext replay.Context, expectedBatchCoun
 	}
 }
 
-func setBackbuffer(width, height int, preserveBuffersOnSwap bool) atom.Atom {
-	color := gles.GLenum_GL_RGB565
-	depth := gles.GLenum_GL_DEPTH_COMPONENT16
-	stencil := gles.GLenum_GL_STENCIL_INDEX8
-	return gles.NewBackbufferInfo(gles.GLsizei(width), gles.GLsizei(height), color, depth, stencil,
-		true /* resetViewportScissor */, preserveBuffersOnSwap)
+func setContextInfo(width, height int, preserveBuffersOnSwap bool) atom.Atom {
+	return &gles.ContextInfo{
+		Name:                  "test-driver",
+		Vendor:                "Super-Awesome-Graphics-Inc",
+		Extensions:            "",
+		Version:               "OpenGL ES 2.0",
+		BackbufferWidth:       gles.GLsizei(width),
+		BackbufferHeight:      gles.GLsizei(height),
+		BackbufferColorFmt:    gles.GLenum_GL_RGB565,
+		BackbufferDepthFmt:    gles.GLenum_GL_DEPTH_COMPONENT16,
+		BackbufferStencilFmt:  gles.GLenum_GL_STENCIL_INDEX8,
+		ResetViewportScissor:  true,
+		PreserveBuffersOnSwap: preserveBuffersOnSwap,
+	}
 }
 
 func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) *atom.List {
@@ -189,7 +197,7 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
-		setBackbuffer(width, height, preserveBuffersOnSwap),
+		setContextInfo(width, height, preserveBuffersOnSwap),
 	)
 	return atoms
 }
@@ -290,7 +298,7 @@ func TestResizeRenderer(t *testing.T) {
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 	)
 	triangle := atoms.Add(
-		setBackbuffer(64, 64, false), // Resize just before clearing and drawing.
+		setContextInfo(64, 64, false), // Resize just before clearing and drawing.
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),

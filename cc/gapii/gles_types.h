@@ -5920,6 +5920,35 @@ struct Buffer {
 
 typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferIdToBuffer__R;
 
+struct ContextCreationInfo {
+    inline ContextCreationInfo()
+        : mName(""),
+          mVendor(""),
+          mExtensions(""),
+          mVersion(""),
+          mVersionMajor(0),
+          mVersionMinor(0),
+          mPreserveBuffersOnSwap(false) {}
+    inline ContextCreationInfo(std::string Name, std::string Vendor, std::string Extensions,
+                               std::string Version, GLint VersionMajor, GLint VersionMinor,
+                               bool PreserveBuffersOnSwap)
+        : mName(Name),
+          mVendor(Vendor),
+          mExtensions(Extensions),
+          mVersion(Version),
+          mVersionMajor(VersionMajor),
+          mVersionMinor(VersionMinor),
+          mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+
+    std::string mName;
+    std::string mVendor;
+    std::string mExtensions;
+    std::string mVersion;
+    GLint mVersionMajor;
+    GLint mVersionMinor;
+    bool mPreserveBuffersOnSwap;
+};
+
 struct Color {
     inline Color() : mRed(0), mGreen(0), mBlue(0), mAlpha(0) {}
     inline Color(GLfloat Red, GLfloat Green, GLfloat Blue, GLfloat Alpha)
@@ -6317,6 +6346,7 @@ struct Objects {
 struct Context {
     inline Context()
         : mIdentifier(0),
+          mInfo(ContextCreationInfo()),
           mBlending(BlendState()),
           mRasterizing(RasterizerState()),
           mClearing(ClearState()),
@@ -6331,17 +6361,18 @@ struct Context {
           mCapabilities(GLenumToBool()),
           mGenerateMipmapHint(GLenum::GL_DONT_CARE),
           mPixelStorage(GLenumToGLint()),
-          mInstances(Objects()),
-          mPreserveBuffersOnSwap(false) {}
-    inline Context(ContextID Identifier, BlendState Blending, RasterizerState Rasterizing,
-                   ClearState Clearing, GLenumToFramebufferId BoundFramebuffers,
+          mInstances(Objects()) {}
+    inline Context(ContextID Identifier, ContextCreationInfo Info, BlendState Blending,
+                   RasterizerState Rasterizing, ClearState Clearing,
+                   GLenumToFramebufferId BoundFramebuffers,
                    GLenumToRenderbufferId BoundRenderbuffers, GLenumToBufferId BoundBuffers,
                    ProgramId BoundProgram, VertexArrayId BoundVertexArray,
                    AttributeLocationToVertexAttributeArray__R VertexAttributeArrays,
                    GLenumToTextureUnit__R TextureUnits, uint32_t ActiveTextureUnit,
                    GLenumToBool Capabilities, uint32_t GenerateMipmapHint,
-                   GLenumToGLint PixelStorage, Objects Instances, bool PreserveBuffersOnSwap)
+                   GLenumToGLint PixelStorage, Objects Instances)
         : mIdentifier(Identifier),
+          mInfo(Info),
           mBlending(Blending),
           mRasterizing(Rasterizing),
           mClearing(Clearing),
@@ -6356,10 +6387,10 @@ struct Context {
           mCapabilities(Capabilities),
           mGenerateMipmapHint(GenerateMipmapHint),
           mPixelStorage(PixelStorage),
-          mInstances(Instances),
-          mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+          mInstances(Instances) {}
 
     ContextID mIdentifier;
+    ContextCreationInfo mInfo;
     BlendState mBlending;
     RasterizerState mRasterizing;
     ClearState mClearing;
@@ -6375,7 +6406,6 @@ struct Context {
     uint32_t mGenerateMipmapHint;
     GLenumToGLint mPixelStorage;
     Objects mInstances;
-    bool mPreserveBuffersOnSwap;
 };
 
 typedef std::unordered_map<CGLContextObj, std::shared_ptr<Context>> CGLContextObjToContext__R;

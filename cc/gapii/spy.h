@@ -47,9 +47,10 @@ public:
     }
 
 private:
-    void backbufferInfo(int32_t width, int32_t height,
-                        uint32_t color_fmt, uint32_t depth_fmt, uint32_t stencil_fmt,
-                        bool resetViewportScissor);
+    void setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
+                        uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
+                        uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,
+                        bool preserve_buffers_on_swap);
 
     std::shared_ptr<gapic::Encoder> mEncoder;
     std::unordered_map<std::string, void*> mSymbols;

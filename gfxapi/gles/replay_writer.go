@@ -765,7 +765,7 @@ var funcInfoArchitecture = builder.FunctionInfo{ID: 730, ReturnType: protocol.Ty
 var funcInfoReplayCreateRenderer = builder.FunctionInfo{ID: 731, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoReplayBindRenderer = builder.FunctionInfo{ID: 732, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoSwitchThread = builder.FunctionInfo{ID: 733, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 734, ReturnType: protocol.TypeVoid, Parameters: 7}
+var funcInfoContextInfo = builder.FunctionInfo{ID: 734, ReturnType: protocol.TypeVoid, Parameters: 11}
 var funcInfoStartTimer = builder.FunctionInfo{ID: 735, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoStopTimer = builder.FunctionInfo{ID: 736, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 737, ReturnType: protocol.TypeVoid, Parameters: 0}
@@ -17607,15 +17607,19 @@ func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	return nil
 }
 
-var _ = replay.Replayer(&BackbufferInfo{}) // interface compliance check
-func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
+var _ = replay.Replayer(&ContextInfo{}) // interface compliance check
+func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_1278_result := context            // Contextʳ
 	ctx := GetContext_1278_result                // Contextʳ
-	ctx.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
+	ctx.Info.Name = ϟa.Name
+	ctx.Info.Vendor = ϟa.Vendor
+	ctx.Info.Extensions = ϟa.Extensions
+	ctx.Info.Version = ϟa.Version
+	ctx.Info.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
@@ -17623,29 +17627,33 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	depth_buffer := ctx.Instances.Renderbuffers.Get(depth_id)                                     // Renderbufferʳ
 	stencil_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_STENCIL_ATTACHMENT).Object) // RenderbufferId
 	stencil_buffer := ctx.Instances.Renderbuffers.Get(stencil_id)                                 // Renderbufferʳ
-	color_buffer.Width = ϟa.Width
-	color_buffer.Height = ϟa.Height
-	color_buffer.Format = ϟa.ColorFmt
-	depth_buffer.Width = ϟa.Width
-	depth_buffer.Height = ϟa.Height
-	depth_buffer.Format = ϟa.DepthFmt
-	stencil_buffer.Width = ϟa.Width
-	stencil_buffer.Height = ϟa.Height
-	stencil_buffer.Format = ϟa.StencilFmt
+	color_buffer.Width = ϟa.BackbufferWidth
+	color_buffer.Height = ϟa.BackbufferHeight
+	color_buffer.Format = ϟa.BackbufferColorFmt
+	depth_buffer.Width = ϟa.BackbufferWidth
+	depth_buffer.Height = ϟa.BackbufferHeight
+	depth_buffer.Format = ϟa.BackbufferDepthFmt
+	stencil_buffer.Width = ϟa.BackbufferWidth
+	stencil_buffer.Height = ϟa.BackbufferHeight
+	stencil_buffer.Format = ϟa.BackbufferStencilFmt
 	if ϟa.ResetViewportScissor {
-		ctx.Rasterizing.Scissor.Width = ϟa.Width
-		ctx.Rasterizing.Scissor.Height = ϟa.Height
-		ctx.Rasterizing.Viewport.Width = ϟa.Width
-		ctx.Rasterizing.Viewport.Height = ϟa.Height
+		ctx.Rasterizing.Scissor.Width = ϟa.BackbufferWidth
+		ctx.Rasterizing.Scissor.Height = ϟa.BackbufferHeight
+		ctx.Rasterizing.Viewport.Width = ϟa.BackbufferWidth
+		ctx.Rasterizing.Viewport.Height = ϟa.BackbufferHeight
 	}
-	ϟb.Push(ϟa.Width.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Height.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.U32(ϟa.ColorFmt))
-	ϟb.Push(value.U32(ϟa.DepthFmt))
-	ϟb.Push(value.U32(ϟa.StencilFmt))
+	ϟb.Push(ϟb.String(ϟa.Name))
+	ϟb.Push(ϟb.String(ϟa.Vendor))
+	ϟb.Push(ϟb.String(ϟa.Extensions))
+	ϟb.Push(ϟb.String(ϟa.Version))
+	ϟb.Push(ϟa.BackbufferWidth.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BackbufferHeight.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.BackbufferColorFmt))
+	ϟb.Push(value.U32(ϟa.BackbufferDepthFmt))
+	ϟb.Push(value.U32(ϟa.BackbufferStencilFmt))
 	ϟb.Push(value.Bool(ϟa.ResetViewportScissor))
 	ϟb.Push(value.Bool(ϟa.PreserveBuffersOnSwap))
-	ϟb.Call(funcInfoBackbufferInfo)
+	ϟb.Call(funcInfoContextInfo)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = context, GetContext_1278_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil

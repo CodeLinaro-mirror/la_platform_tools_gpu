@@ -511,8 +511,20 @@ class Objects {
 @internal type u32 ContextID
 
 @internal
+class ContextCreationInfo {
+  string Name
+  string Vendor
+  string Extensions
+  string Version
+  GLint  VersionMajor // TODO: Needs setting.
+  GLint  VersionMinor // TODO: Needs setting.
+  bool   PreserveBuffersOnSwap
+}
+
+@internal
 class Context {
   ContextID                                         Identifier
+  ContextCreationInfo                               Info
   BlendState                                        Blending
   RasterizerState                                   Rasterizing
   ClearState                                        Clearing
@@ -528,7 +540,6 @@ class Context {
   GLenum                                            GenerateMipmapHint    = GL_DONT_CARE
   map!(GLenum, GLint)                               PixelStorage
   Objects                                           Instances
-  bool                                              PreserveBuffersOnSwap
 }
 
 type u64 ThreadID

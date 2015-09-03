@@ -166,8 +166,8 @@ func (t *timingInfoGpuTransform) Transform(id atom.ID, a atom.Atom, out atom.Wri
 
 	// Skip atoms until we have a valid context for issuing timing queries.
 	if !t.hasValidContext {
-		// Wait for the first BackbufferInfo atom, indicating the existence of a valid context.
-		if _, ok := a.(*BackbufferInfo); ok {
+		// Wait for the first ContextInfo atom, indicating the existence of a valid context.
+		if _, ok := a.(*ContextInfo); ok {
 			t.hasValidContext = true
 			t.detectTimerSupport()
 

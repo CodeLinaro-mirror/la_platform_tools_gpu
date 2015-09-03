@@ -1889,9 +1889,11 @@ public:
     inline void replayCreateRenderer(uint32_t id);
     inline void replayBindRenderer(uint32_t id);
     inline void switchThread(uint64_t threadID);
-    inline void backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
-                               uint32_t depth_fmt, uint32_t stencil_fmt, bool resetViewportScissor,
-                               bool preserveBuffersOnSwap);
+    inline void contextInfo(char* name, char* vendor, char* extensions, char* version,
+                            int32_t backbuffer_width, int32_t backbuffer_height,
+                            uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
+                            uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,
+                            bool preserve_buffers_on_swap);
     inline void startTimer(uint8_t index);
     inline uint64_t stopTimer(uint8_t index);
     inline void flushPostBuffer();
@@ -29229,11 +29231,11 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -29424,11 +29426,11 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -29519,11 +29521,11 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -29743,11 +29745,11 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -29832,11 +29834,11 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -29979,11 +29981,11 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(
-                new Context(0, BlendState(), RasterizerState(), ClearState(),
+                new Context(0, ContextCreationInfo(), BlendState(), RasterizerState(), ClearState(),
                             GLenumToFramebufferId(), GLenumToRenderbufferId(), GLenumToBufferId(),
                             0, 0, AttributeLocationToVertexAttributeArray__R(),
                             GLenumToTextureUnit__R(), GLenum::GL_TEXTURE0, GLenumToBool(),
-                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects(), false));
+                            GLenum::GL_DONT_CARE, GLenumToGLint(), Objects()));
         l_ctx->mIdentifier = l_identifier;
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
@@ -30294,18 +30296,26 @@ inline void GlesSpy::switchThread(uint64_t threadID) {
     mEncoder->Object(&coder);
 }
 
-inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
-                                    uint32_t depth_fmt, uint32_t stencil_fmt,
-                                    bool resetViewportScissor, bool preserveBuffersOnSwap) {
-    GAPID_INFO("backbufferInfo(%" PRId32 ", %" PRId32 ", %u, %u, %u, %d, %d)", width, height,
-               color_fmt, depth_fmt, stencil_fmt, resetViewportScissor, preserveBuffersOnSwap);
+inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, char* version,
+                                 int32_t backbuffer_width, int32_t backbuffer_height,
+                                 uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
+                                 uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,
+                                 bool preserve_buffers_on_swap) {
+    GAPID_INFO("contextInfo(%s, %s, %s, %s, %" PRId32 ", %" PRId32 ", %u, %u, %u, %d, %d)", name,
+               vendor, extensions, version, backbuffer_width, backbuffer_height,
+               backbuffer_color_fmt, backbuffer_depth_fmt, backbuffer_stencil_fmt,
+               reset_viewport_scissor, preserve_buffers_on_swap);
 
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_1278_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1278_result;
-        l_ctx->mPreserveBuffersOnSwap = preserveBuffersOnSwap;
+        l_ctx->mInfo.mName = name;
+        l_ctx->mInfo.mVendor = vendor;
+        l_ctx->mInfo.mExtensions = extensions;
+        l_ctx->mInfo.mVersion = version;
+        l_ctx->mInfo.mPreserveBuffersOnSwap = preserve_buffers_on_swap;
         std::shared_ptr<Framebuffer> l_backbuffer =
                 l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)];
         RenderbufferId l_color_id =
@@ -30318,28 +30328,29 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
                 (RenderbufferId)(l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT].mObject);
         std::shared_ptr<Renderbuffer> l_stencil_buffer =
                 l_ctx->mInstances.mRenderbuffers[l_stencil_id];
-        l_color_buffer->mWidth = width;
-        l_color_buffer->mHeight = height;
-        l_color_buffer->mFormat = color_fmt;
-        l_depth_buffer->mWidth = width;
-        l_depth_buffer->mHeight = height;
-        l_depth_buffer->mFormat = depth_fmt;
-        l_stencil_buffer->mWidth = width;
-        l_stencil_buffer->mHeight = height;
-        l_stencil_buffer->mFormat = stencil_fmt;
-        if (resetViewportScissor) {
-            l_ctx->mRasterizing.mScissor.mWidth = width;
-            l_ctx->mRasterizing.mScissor.mHeight = height;
-            l_ctx->mRasterizing.mViewport.mWidth = width;
-            l_ctx->mRasterizing.mViewport.mHeight = height;
+        l_color_buffer->mWidth = backbuffer_width;
+        l_color_buffer->mHeight = backbuffer_height;
+        l_color_buffer->mFormat = backbuffer_color_fmt;
+        l_depth_buffer->mWidth = backbuffer_width;
+        l_depth_buffer->mHeight = backbuffer_height;
+        l_depth_buffer->mFormat = backbuffer_depth_fmt;
+        l_stencil_buffer->mWidth = backbuffer_width;
+        l_stencil_buffer->mHeight = backbuffer_height;
+        l_stencil_buffer->mFormat = backbuffer_stencil_fmt;
+        if (reset_viewport_scissor) {
+            l_ctx->mRasterizing.mScissor.mWidth = backbuffer_width;
+            l_ctx->mRasterizing.mScissor.mHeight = backbuffer_height;
+            l_ctx->mRasterizing.mViewport.mWidth = backbuffer_width;
+            l_ctx->mRasterizing.mViewport.mHeight = backbuffer_height;
         }
         observe(observations.mReads);
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::BackbufferInfo coder(observations, width, height, color_fmt, depth_fmt,
-                                             stencil_fmt, resetViewportScissor,
-                                             preserveBuffersOnSwap);
+    gapic::coder::gles::ContextInfo coder(observations, name, vendor, extensions, version,
+                                          backbuffer_width, backbuffer_height, backbuffer_color_fmt,
+                                          backbuffer_depth_fmt, backbuffer_stencil_fmt,
+                                          reset_viewport_scissor, preserve_buffers_on_swap);
     mEncoder->Object(&coder);
 }
 

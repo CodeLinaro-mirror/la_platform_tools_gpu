@@ -11268,14 +11268,18 @@ func (ϟa *SwitchThread) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+func (ϟa *ContextInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
 	_, _ = ϟc, ϟb
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_1278_result := context            // Contextʳ
 	ctx := GetContext_1278_result                // Contextʳ
-	ctx.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
+	ctx.Info.Name = ϟa.Name
+	ctx.Info.Vendor = ϟa.Vendor
+	ctx.Info.Extensions = ϟa.Extensions
+	ctx.Info.Version = ϟa.Version
+	ctx.Info.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
@@ -11283,20 +11287,20 @@ func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	depth_buffer := ctx.Instances.Renderbuffers.Get(depth_id)                                     // Renderbufferʳ
 	stencil_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_STENCIL_ATTACHMENT).Object) // RenderbufferId
 	stencil_buffer := ctx.Instances.Renderbuffers.Get(stencil_id)                                 // Renderbufferʳ
-	color_buffer.Width = ϟa.Width
-	color_buffer.Height = ϟa.Height
-	color_buffer.Format = ϟa.ColorFmt
-	depth_buffer.Width = ϟa.Width
-	depth_buffer.Height = ϟa.Height
-	depth_buffer.Format = ϟa.DepthFmt
-	stencil_buffer.Width = ϟa.Width
-	stencil_buffer.Height = ϟa.Height
-	stencil_buffer.Format = ϟa.StencilFmt
+	color_buffer.Width = ϟa.BackbufferWidth
+	color_buffer.Height = ϟa.BackbufferHeight
+	color_buffer.Format = ϟa.BackbufferColorFmt
+	depth_buffer.Width = ϟa.BackbufferWidth
+	depth_buffer.Height = ϟa.BackbufferHeight
+	depth_buffer.Format = ϟa.BackbufferDepthFmt
+	stencil_buffer.Width = ϟa.BackbufferWidth
+	stencil_buffer.Height = ϟa.BackbufferHeight
+	stencil_buffer.Format = ϟa.BackbufferStencilFmt
 	if ϟa.ResetViewportScissor {
-		ctx.Rasterizing.Scissor.Width = ϟa.Width
-		ctx.Rasterizing.Scissor.Height = ϟa.Height
-		ctx.Rasterizing.Viewport.Width = ϟa.Width
-		ctx.Rasterizing.Viewport.Height = ϟa.Height
+		ctx.Rasterizing.Scissor.Width = ϟa.BackbufferWidth
+		ctx.Rasterizing.Scissor.Height = ϟa.BackbufferHeight
+		ctx.Rasterizing.Viewport.Width = ϟa.BackbufferWidth
+		ctx.Rasterizing.Viewport.Height = ϟa.BackbufferHeight
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = context, GetContext_1278_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer

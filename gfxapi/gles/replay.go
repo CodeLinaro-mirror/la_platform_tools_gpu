@@ -129,7 +129,7 @@ func (a api) Replay(
 		// undefined-framebuffer pattern.
 		preserveBuffersOnSwap := false
 		for _, a := range atoms.Atoms {
-			if b, ok := a.(*BackbufferInfo); ok && b.PreserveBuffersOnSwap {
+			if b, ok := a.(*ContextInfo); ok && b.PreserveBuffersOnSwap {
 				preserveBuffersOnSwap = true
 				break
 			}

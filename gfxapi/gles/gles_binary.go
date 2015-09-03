@@ -20,7 +20,6 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Architecture)(nil).Class())
-	Namespace.Add((*BackbufferInfo)(nil).Class())
 	Namespace.Add((*Color)(nil).Class())
 	Namespace.Add((*BlendState)(nil).Class())
 	Namespace.Add((*SliceInfo)(nil).Class())
@@ -50,6 +49,7 @@ func init() {
 	Namespace.Add((*Charˢ)(nil).Class())
 	Namespace.Add((*Charᵖ)(nil).Class())
 	Namespace.Add((*ClearState)(nil).Class())
+	Namespace.Add((*ContextCreationInfo)(nil).Class())
 	Namespace.Add((*Rect)(nil).Class())
 	Namespace.Add((*RasterizerState)(nil).Class())
 	Namespace.Add((*VertexPointer)(nil).Class())
@@ -70,6 +70,7 @@ func init() {
 	Namespace.Add((*Query)(nil).Class())
 	Namespace.Add((*Objects)(nil).Class())
 	Namespace.Add((*Context)(nil).Class())
+	Namespace.Add((*ContextInfo)(nil).Class())
 	Namespace.Add((*EGLConfig)(nil).Class())
 	Namespace.Add((*EGLContext)(nil).Class())
 	Namespace.Add((*EGLDisplay)(nil).Class())
@@ -938,7 +939,6 @@ func init() {
 
 var (
 	binaryIDArchitecture                                     = binary.ID{0x14, 0x53, 0xe8, 0x31, 0x7d, 0x20, 0x5f, 0xbd, 0xad, 0x68, 0x48, 0x67, 0xeb, 0xf6, 0x1c, 0x4f, 0xe8, 0xfc, 0x0e, 0x01}
-	binaryIDBackbufferInfo                                   = binary.ID{0x33, 0x30, 0x13, 0x32, 0x31, 0x5d, 0xce, 0x13, 0x1f, 0xa4, 0xe4, 0x27, 0x10, 0xed, 0xd6, 0x58, 0xad, 0x0a, 0x87, 0xac}
 	binaryIDColor                                            = binary.ID{0xd0, 0x81, 0x98, 0xcb, 0xe9, 0x4c, 0xb5, 0x68, 0xdf, 0xab, 0x2e, 0xde, 0xed, 0x47, 0x59, 0xd3, 0xa7, 0xaa, 0x6c, 0x98}
 	binaryIDBlendState                                       = binary.ID{0xa0, 0x25, 0x10, 0x49, 0xe6, 0xb8, 0xfb, 0x31, 0xf9, 0x74, 0xa1, 0x14, 0x8f, 0x6d, 0x7e, 0x3b, 0x51, 0x1d, 0x3b, 0x7f}
 	binaryIDSliceInfo                                        = binary.ID{0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9}
@@ -968,6 +968,7 @@ var (
 	binaryIDCharˢ                                            = binary.ID{0x70, 0x6d, 0x95, 0x73, 0x2e, 0xce, 0x6e, 0x8c, 0xc5, 0x05, 0x19, 0x07, 0x10, 0xbd, 0x46, 0x47, 0x9e, 0x83, 0x55, 0x5c}
 	binaryIDCharᵖ                                            = binary.ID{0xac, 0x44, 0x67, 0xfc, 0xf8, 0x14, 0x79, 0xb0, 0x1e, 0xd5, 0xf7, 0xb0, 0xbb, 0xcb, 0x2b, 0x24, 0x88, 0xf4, 0x59, 0xc7}
 	binaryIDClearState                                       = binary.ID{0x08, 0xa6, 0xc5, 0x64, 0x5c, 0xc4, 0x9c, 0xf0, 0xad, 0xc5, 0x82, 0x38, 0x2d, 0x37, 0x08, 0xe6, 0x5d, 0x51, 0x63, 0xa0}
+	binaryIDContextCreationInfo                              = binary.ID{0x57, 0x4c, 0x3d, 0x13, 0xcd, 0x72, 0x8e, 0x42, 0x9a, 0xb3, 0x20, 0x5d, 0xd8, 0x35, 0xc9, 0xb8, 0x11, 0xb7, 0xfb, 0xbd}
 	binaryIDRect                                             = binary.ID{0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2}
 	binaryIDRasterizerState                                  = binary.ID{0xba, 0xcc, 0xd9, 0x38, 0xef, 0x30, 0x2c, 0x2e, 0x7b, 0xd7, 0x18, 0x82, 0x47, 0x5c, 0x0f, 0xca, 0xd0, 0x70, 0x0c, 0x27}
 	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
@@ -987,7 +988,8 @@ var (
 	binaryIDVertexArray                                      = binary.ID{0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33}
 	binaryIDQuery                                            = binary.ID{0x62, 0x44, 0x8a, 0xcf, 0x74, 0x8f, 0xd4, 0xae, 0x50, 0xd3, 0xfd, 0x27, 0xe3, 0x02, 0x90, 0xfe, 0x17, 0x13, 0x0c, 0xa3}
 	binaryIDObjects                                          = binary.ID{0x12, 0x48, 0x34, 0xe0, 0x63, 0x96, 0xd4, 0xef, 0x29, 0xea, 0xb8, 0xa4, 0xe1, 0x96, 0x9f, 0x3f, 0xb0, 0xc8, 0x1b, 0xf7}
-	binaryIDContext                                          = binary.ID{0x57, 0xab, 0x80, 0xd6, 0xb0, 0x07, 0x70, 0xaa, 0xcd, 0xee, 0xe2, 0xd4, 0xde, 0x3c, 0x80, 0xf6, 0x36, 0x38, 0x87, 0x0d}
+	binaryIDContext                                          = binary.ID{0x92, 0x55, 0x7b, 0x90, 0xd5, 0x4e, 0xb8, 0x01, 0x1b, 0x60, 0x0f, 0x47, 0xad, 0x43, 0x29, 0x41, 0x62, 0x52, 0x54, 0xf3}
+	binaryIDContextInfo                                      = binary.ID{0xd2, 0x67, 0x34, 0x96, 0xd3, 0x4b, 0x64, 0xb2, 0x96, 0xea, 0x8e, 0xc7, 0xbc, 0x38, 0x93, 0xa1, 0xea, 0x4e, 0xcc, 0x96}
 	binaryIDEGLConfig                                        = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
 	binaryIDEGLContext                                       = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
 	binaryIDEGLDisplay                                       = binary.ID{0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10}
@@ -1927,109 +1929,6 @@ var schemaArchitecture = &schema.Class{
 		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-	},
-}
-
-type binaryClassBackbufferInfo struct{}
-
-func (*BackbufferInfo) Class() binary.Class {
-	return (*binaryClassBackbufferInfo)(nil)
-}
-func doEncodeBackbufferInfo(e binary.Encoder, o *BackbufferInfo) error {
-	if err := e.Value(&o.observations); err != nil {
-		return err
-	}
-	if err := e.Int32(int32(o.Width)); err != nil {
-		return err
-	}
-	if err := e.Int32(int32(o.Height)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.ColorFmt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.DepthFmt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.StencilFmt)); err != nil {
-		return err
-	}
-	if err := e.Bool(o.ResetViewportScissor); err != nil {
-		return err
-	}
-	if err := e.Bool(o.PreserveBuffersOnSwap); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeBackbufferInfo(d binary.Decoder, o *BackbufferInfo) error {
-	if err := d.Value(&o.observations); err != nil {
-		return err
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Width = GLsizei(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Height = GLsizei(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.ColorFmt = GLenum(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.DepthFmt = GLenum(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.StencilFmt = GLenum(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.ResetViewportScissor = bool(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.PreserveBuffersOnSwap = bool(obj)
-	}
-	return nil
-}
-func (*binaryClassBackbufferInfo) ID() binary.ID      { return binaryIDBackbufferInfo }
-func (*binaryClassBackbufferInfo) New() binary.Object { return &BackbufferInfo{} }
-func (*binaryClassBackbufferInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeBackbufferInfo(e, obj.(*BackbufferInfo))
-}
-func (*binaryClassBackbufferInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &BackbufferInfo{}
-	return obj, doDecodeBackbufferInfo(d, obj)
-}
-func (*binaryClassBackbufferInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeBackbufferInfo(d, obj.(*BackbufferInfo))
-}
-func (*binaryClassBackbufferInfo) Schema() *schema.Class { return schemaBackbufferInfo }
-
-var schemaBackbufferInfo = &schema.Class{
-	TypeID:  binaryIDBackbufferInfo,
-	Package: "gles",
-	Name:    "BackbufferInfo",
-	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "ColorFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "DepthFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "StencilFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "PreserveBuffersOnSwap", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -3492,6 +3391,102 @@ var schemaClearState = &schema.Class{
 		{Declared: "ClearColor", Type: &schema.Struct{Name: "Color", ID: (*Color)(nil).Class().ID()}},
 		{Declared: "ClearDepth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "ClearStencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
+type binaryClassContextCreationInfo struct{}
+
+func (*ContextCreationInfo) Class() binary.Class {
+	return (*binaryClassContextCreationInfo)(nil)
+}
+func doEncodeContextCreationInfo(e binary.Encoder, o *ContextCreationInfo) error {
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.String(o.Vendor); err != nil {
+		return err
+	}
+	if err := e.String(o.Extensions); err != nil {
+		return err
+	}
+	if err := e.String(o.Version); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.VersionMajor)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.VersionMinor)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.PreserveBuffersOnSwap); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeContextCreationInfo(d binary.Decoder, o *ContextCreationInfo) error {
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Vendor = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Extensions = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Version = string(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.VersionMajor = GLint(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.VersionMinor = GLint(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.PreserveBuffersOnSwap = bool(obj)
+	}
+	return nil
+}
+func (*binaryClassContextCreationInfo) ID() binary.ID      { return binaryIDContextCreationInfo }
+func (*binaryClassContextCreationInfo) New() binary.Object { return &ContextCreationInfo{} }
+func (*binaryClassContextCreationInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeContextCreationInfo(e, obj.(*ContextCreationInfo))
+}
+func (*binaryClassContextCreationInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ContextCreationInfo{}
+	return obj, doDecodeContextCreationInfo(d, obj)
+}
+func (*binaryClassContextCreationInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeContextCreationInfo(d, obj.(*ContextCreationInfo))
+}
+func (*binaryClassContextCreationInfo) Schema() *schema.Class { return schemaContextCreationInfo }
+
+var schemaContextCreationInfo = &schema.Class{
+	TypeID:  binaryIDContextCreationInfo,
+	Package: "gles",
+	Name:    "ContextCreationInfo",
+	Fields: []schema.Field{
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "VersionMajor", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "VersionMinor", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "PreserveBuffersOnSwap", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -5365,6 +5360,9 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 	if err := e.Uint32(uint32(o.Identifier)); err != nil {
 		return err
 	}
+	if err := e.Value(&o.Info); err != nil {
+		return err
+	}
 	if err := e.Value(&o.Blending); err != nil {
 		return err
 	}
@@ -5474,9 +5472,6 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 	if err := e.Value(&o.Instances); err != nil {
 		return err
 	}
-	if err := e.Bool(o.PreserveBuffersOnSwap); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodeContext(d binary.Decoder, o *Context) error {
@@ -5484,6 +5479,9 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 		return err
 	} else {
 		o.Identifier = ContextID(obj)
+	}
+	if err := d.Value(&o.Info); err != nil {
+		return err
 	}
 	if err := d.Value(&o.Blending); err != nil {
 		return err
@@ -5668,11 +5666,6 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if err := d.Value(&o.Instances); err != nil {
 		return err
 	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.PreserveBuffersOnSwap = bool(obj)
-	}
 	return nil
 }
 func (*binaryClassContext) ID() binary.ID      { return binaryIDContext }
@@ -5695,6 +5688,7 @@ var schemaContext = &schema.Class{
 	Name:    "Context",
 	Fields: []schema.Field{
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		{Declared: "Info", Type: &schema.Struct{Name: "ContextCreationInfo", ID: (*ContextCreationInfo)(nil).Class().ID()}},
 		{Declared: "Blending", Type: &schema.Struct{Name: "BlendState", ID: (*BlendState)(nil).Class().ID()}},
 		{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState", ID: (*RasterizerState)(nil).Class().ID()}},
 		{Declared: "Clearing", Type: &schema.Struct{Name: "ClearState", ID: (*ClearState)(nil).Class().ID()}},
@@ -5710,6 +5704,144 @@ var schemaContext = &schema.Class{
 		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PixelStorage", Type: &schema.Map{Alias: "GLenumːGLintᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}}},
 		{Declared: "Instances", Type: &schema.Struct{Name: "Objects", ID: (*Objects)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassContextInfo struct{}
+
+func (*ContextInfo) Class() binary.Class {
+	return (*binaryClassContextInfo)(nil)
+}
+func doEncodeContextInfo(e binary.Encoder, o *ContextInfo) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.String(o.Vendor); err != nil {
+		return err
+	}
+	if err := e.String(o.Extensions); err != nil {
+		return err
+	}
+	if err := e.String(o.Version); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BackbufferWidth)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.BackbufferHeight)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.BackbufferColorFmt)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.BackbufferDepthFmt)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.BackbufferStencilFmt)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.ResetViewportScissor); err != nil {
+		return err
+	}
+	if err := e.Bool(o.PreserveBuffersOnSwap); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeContextInfo(d binary.Decoder, o *ContextInfo) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Vendor = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Extensions = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Version = string(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BackbufferWidth = GLsizei(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BackbufferHeight = GLsizei(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.BackbufferColorFmt = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.BackbufferDepthFmt = GLenum(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.BackbufferStencilFmt = GLenum(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.ResetViewportScissor = bool(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.PreserveBuffersOnSwap = bool(obj)
+	}
+	return nil
+}
+func (*binaryClassContextInfo) ID() binary.ID      { return binaryIDContextInfo }
+func (*binaryClassContextInfo) New() binary.Object { return &ContextInfo{} }
+func (*binaryClassContextInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeContextInfo(e, obj.(*ContextInfo))
+}
+func (*binaryClassContextInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ContextInfo{}
+	return obj, doDecodeContextInfo(d, obj)
+}
+func (*binaryClassContextInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeContextInfo(d, obj.(*ContextInfo))
+}
+func (*binaryClassContextInfo) Schema() *schema.Class { return schemaContextInfo }
+
+var schemaContextInfo = &schema.Class{
+	TypeID:  binaryIDContextInfo,
+	Package: "gles",
+	Name:    "ContextInfo",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "BackbufferWidth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "BackbufferHeight", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "BackbufferColorFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "BackbufferDepthFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "BackbufferStencilFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "PreserveBuffersOnSwap", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }

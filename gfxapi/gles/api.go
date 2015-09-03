@@ -38216,42 +38216,46 @@ func (c *SwitchThread) Flags() atom.Flags                { return 0 }
 func (a *SwitchThread) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
-// BackbufferInfo
+// ContextInfo
 ////////////////////////////////////////////////////////////////////////////////
-type BackbufferInfo struct {
+type ContextInfo struct {
 	binary.Generate
 	observations          atom.Observations
-	Width                 GLsizei
-	Height                GLsizei
-	ColorFmt              GLenum
-	DepthFmt              GLenum
-	StencilFmt            GLenum
+	Name                  string
+	Vendor                string
+	Extensions            string
+	Version               string
+	BackbufferWidth       GLsizei
+	BackbufferHeight      GLsizei
+	BackbufferColorFmt    GLenum
+	BackbufferDepthFmt    GLenum
+	BackbufferStencilFmt  GLenum
 	ResetViewportScissor  bool
 	PreserveBuffersOnSwap bool
 }
 
-func (a *BackbufferInfo) String() string {
-	return fmt.Sprintf("backbufferInfo(width: %v, height: %v, color_fmt: %v, depth_fmt: %v, stencil_fmt: %v, resetViewportScissor: %v, preserveBuffersOnSwap: %v)", a.Width, a.Height, a.ColorFmt, a.DepthFmt, a.StencilFmt, a.ResetViewportScissor, a.PreserveBuffersOnSwap)
+func (a *ContextInfo) String() string {
+	return fmt.Sprintf("contextInfo(name: %v, vendor: %v, extensions: %v, version: %v, backbuffer_width: %v, backbuffer_height: %v, backbuffer_color_fmt: %v, backbuffer_depth_fmt: %v, backbuffer_stencil_fmt: %v, reset_viewport_scissor: %v, preserve_buffers_on_swap: %v)", a.Name, a.Vendor, a.Extensions, a.Version, a.BackbufferWidth, a.BackbufferHeight, a.BackbufferColorFmt, a.BackbufferDepthFmt, a.BackbufferStencilFmt, a.ResetViewportScissor, a.PreserveBuffersOnSwap)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
 // the data id.
-// The BackbufferInfo pointer is returned so that calls can be chained.
-func (a *BackbufferInfo) AddRead(rng memory.Range, id binary.ID) *BackbufferInfo {
+// The ContextInfo pointer is returned so that calls can be chained.
+func (a *ContextInfo) AddRead(rng memory.Range, id binary.ID) *ContextInfo {
 	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
 	return a
 }
 
 // AddWrite appends a new write observation to the atom of the range rng with
 // the data id.
-// The BackbufferInfo pointer is returned so that calls can be chained.
-func (a *BackbufferInfo) AddWrite(rng memory.Range, id binary.ID) *BackbufferInfo {
+// The ContextInfo pointer is returned so that calls can be chained.
+func (a *ContextInfo) AddWrite(rng memory.Range, id binary.ID) *ContextInfo {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *BackbufferInfo) API() gfxapi.ID                   { return api{}.ID() }
-func (c *BackbufferInfo) Flags() atom.Flags                { return 0 }
-func (a *BackbufferInfo) Observations() *atom.Observations { return &a.observations }
+func (c *ContextInfo) API() gfxapi.ID                   { return api{}.ID() }
+func (c *ContextInfo) Flags() atom.Flags                { return 0 }
+func (a *ContextInfo) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
 // StartTimer
@@ -38628,11 +38632,26 @@ type Objects struct {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// class ContextCreationInfo
+////////////////////////////////////////////////////////////////////////////////
+type ContextCreationInfo struct {
+	binary.Generate
+	Name                  string
+	Vendor                string
+	Extensions            string
+	Version               string
+	VersionMajor          GLint
+	VersionMinor          GLint
+	PreserveBuffersOnSwap bool
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // class Context
 ////////////////////////////////////////////////////////////////////////////////
 type Context struct {
 	binary.Generate
 	Identifier            ContextID
+	Info                  ContextCreationInfo
 	Blending              BlendState
 	Rasterizing           RasterizerState
 	Clearing              ClearState
@@ -38648,7 +38667,6 @@ type Context struct {
 	GenerateMipmapHint    GLenum
 	PixelStorage          GLenumːGLintᵐ
 	Instances             Objects
-	PreserveBuffersOnSwap bool
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46589,8 +46607,8 @@ func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer {
 func NewSwitchThread(ThreadID ThreadID) *SwitchThread {
 	return &SwitchThread{ThreadID: ThreadID}
 }
-func NewBackbufferInfo(Width GLsizei, Height GLsizei, Color_fmt GLenum, Depth_fmt GLenum, Stencil_fmt GLenum, ResetViewportScissor bool, PreserveBuffersOnSwap bool) *BackbufferInfo {
-	return &BackbufferInfo{Width: Width, Height: Height, ColorFmt: Color_fmt, DepthFmt: Depth_fmt, StencilFmt: Stencil_fmt, ResetViewportScissor: ResetViewportScissor, PreserveBuffersOnSwap: PreserveBuffersOnSwap}
+func NewContextInfo(Name string, Vendor string, Extensions string, Version string, Backbuffer_width GLsizei, Backbuffer_height GLsizei, Backbuffer_color_fmt GLenum, Backbuffer_depth_fmt GLenum, Backbuffer_stencil_fmt GLenum, Reset_viewport_scissor bool, Preserve_buffers_on_swap bool) *ContextInfo {
+	return &ContextInfo{Name: Name, Vendor: Vendor, Extensions: Extensions, Version: Version, BackbufferWidth: Backbuffer_width, BackbufferHeight: Backbuffer_height, BackbufferColorFmt: Backbuffer_color_fmt, BackbufferDepthFmt: Backbuffer_depth_fmt, BackbufferStencilFmt: Backbuffer_stencil_fmt, ResetViewportScissor: Reset_viewport_scissor, PreserveBuffersOnSwap: Preserve_buffers_on_swap}
 }
 func NewStartTimer(Index uint8) *StartTimer {
 	return &StartTimer{Index: Index}
