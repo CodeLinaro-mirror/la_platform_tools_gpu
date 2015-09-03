@@ -258,9 +258,9 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)),
+		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
-		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
 
 	ctx := replay.Context{
@@ -294,14 +294,14 @@ func TestResizeRenderer(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
-			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
+		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)),
 	)
 	triangle := atoms.Add(
 		setContextInfo(64, 64, false), // Resize just before clearing and drawing.
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
-		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
+		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3).
+			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 	)
 
 	ctx := replay.Context{
