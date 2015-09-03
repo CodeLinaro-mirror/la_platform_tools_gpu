@@ -186,6 +186,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		a = append(a, "-dynamiclib")
 		a = append(a, "-compatibility_version", "1.0.0")
 		a = append(a, "-current_version", "1.0.0")
+		a = append(a, "-stdlib=libc++")
 	default:
 		a = append(a, "-shared")
 	}
@@ -215,6 +216,9 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	a := append([]string{
 		optFlags(cfg),
 	}, cfg.LinkerArgs...)
+	if cfg.OS == "osx" {
+		a = append(a, "-stdlib=libc++")
+	}
 	for _, lsp := range cfg.LibrarySearchPaths {
 		a = append(a, fmt.Sprintf("-L%s", lsp))
 	}
