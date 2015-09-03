@@ -6728,12 +6728,12 @@ typedef void(STDCALL *PFNGLCOLORMASKIOES)(uint32_t index, uint8_t r, uint8_t g, 
 typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE3DOES)(GLenum target, int32_t level,
                                                     GLenum internalformat, int32_t width,
                                                     int32_t height, int32_t depth, int32_t border,
-                                                    int32_t imageSize, void *data);
+                                                    int32_t image_size, void *data);
 typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE3DOES)(GLenum target, int32_t level,
                                                        int32_t xoffset, int32_t yoffset,
                                                        int32_t zoffset, int32_t width,
                                                        int32_t height, int32_t depth, GLenum format,
-                                                       int32_t imageSize, void *data);
+                                                       int32_t image_size, void *data);
 typedef void(STDCALL *PFNGLCOPYBUFFERSUBDATANV)(GLenum readTarget, GLenum writeTarget,
                                                 int32_t readOffset, int32_t writeOffset,
                                                 int32_t size);

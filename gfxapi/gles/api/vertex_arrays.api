@@ -155,6 +155,10 @@ macro void ReadVertexArrays(ref!Context ctx, u32 first_index, u32 index_count, u
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindVertexArray.xhtml","OpenGL ES 3.2")
 cmd void glBindVertexArray(VertexArrayId array) {
   minRequiredVersion(3, 0)
+  BindVertexArray(array)
+}
+
+macro void BindVertexArray(VertexArrayId array) {
   ctx := GetContext()
   // TODO: glErrorInvalidOperationIf(!((array == 0) || (array in ctx.UsedNames.VertexArrays)))
   if !(array in ctx.Instances.VertexArrays) {
@@ -193,6 +197,10 @@ cmd void glBindVertexBuffer(BindingIndex binding_index, BufferId buffer, GLintpt
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.2")
 cmd void glDeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
   minRequiredVersion(3, 0)
+  DeleteVertexArrays(count, arrays)
+}
+
+macro void DeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
   glErrorInvalidValueIf(count < 0)
   ctx := GetContext()
   a := arrays[0:count]
@@ -240,6 +248,10 @@ cmd void glEnableVertexAttribArray(AttributeLocation location) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenVertexArrays.xhtml","OpenGL ES 3.2")
 cmd void glGenVertexArrays(GLsizei count, VertexArrayId* arrays) {
   minRequiredVersion(3, 0)
+  GenVertexArrays(count, arrays)
+}
+
+macro void GenVertexArrays(GLsizei count, VertexArrayId* arrays) {
   glErrorInvalidValueIf(count < 0)
   a := arrays[0:count]
   ctx := GetContext()
@@ -335,6 +347,10 @@ cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* param
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsVertexArray.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsVertexArray(VertexArrayId array) {
   minRequiredVersion(3, 0)
+  return IsVertexArray(array)
+}
+
+macro GLboolean IsVertexArray(VertexArrayId array) {
   ctx := GetContext()
   return as!GLboolean((array != 0) && (array in ctx.Instances.VertexArrays))
 }
@@ -453,6 +469,10 @@ cmd void glVertexAttribBinding(AttributeLocation index, BindingIndex binding_ind
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.2")
 cmd void glVertexAttribDivisor(AttributeLocation index, GLuint divisor) {
   minRequiredVersion(3, 0)
+  VertexAttribDivisor(index, divisor)
+}
+
+macro void VertexAttribDivisor(AttributeLocation index, GLuint divisor) {
   ctx := GetContext()
   binding_index := as!BindingIndex(index)
   VertexAttribBinding(ctx, index, binding_index)

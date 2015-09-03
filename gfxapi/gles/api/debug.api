@@ -15,6 +15,10 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDebugMessageCallback.xhtml","OpenGL ES 3.2")
 cmd void glDebugMessageCallback(GLDEBUGPROC callback, const void* userParam) {
   minRequiredVersion(3, 2)
+  DebugMessageCallback(callback, userParam)
+}
+
+macro void DebugMessageCallback(GLDEBUGPROC callback, const void* userParam) {
   // TODO
 }
 
@@ -26,6 +30,10 @@ cmd void glDebugMessageControl(GLenum        source,
                                const GLuint* ids,
                                GLboolean     enabled) {
   minRequiredVersion(3, 2)
+  DebugMessageControl(source, type, severity, count, ids, enabled)
+}
+
+macro void DebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) {
   switch (source) {
     case GL_DEBUG_SOURCE_API, GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_OTHER,
         GL_DEBUG_SOURCE_SHADER_COMPILER, GL_DEBUG_SOURCE_THIRD_PARTY,
@@ -68,6 +76,10 @@ cmd void glDebugMessageInsert(GLenum        source,
                               GLsizei       length,
                               const GLchar* message) {
   minRequiredVersion(3, 2)
+  DebugMessageInsert(source, type, id, severity, length, message)
+}
+
+macro void DebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message) {
   switch (source) {
     case GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_THIRD_PARTY: {
       // version 3.2
@@ -149,6 +161,10 @@ cmd void glGetObjectLabel(GLenum   identifier,
                           GLsizei* length,
                           GLchar*  label) {
   minRequiredVersion(3, 2)
+  GetObjectLabel(identifier, name, bufSize, length, label)
+}
+
+macro void GetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei* length, GLchar* label) {
   switch (identifier) {
     case GL_BUFFER, GL_FRAMEBUFFER, GL_PROGRAM, GL_PROGRAM_PIPELINE, GL_QUERY, GL_RENDERBUFFER,
         GL_SAMPLER, GL_SHADER, GL_TEXTURE, GL_TRANSFORM_FEEDBACK, GL_VERTEX_ARRAY: {
@@ -165,6 +181,10 @@ cmd void glGetObjectLabel(GLenum   identifier,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetObjectPtrLabel.xhtml","OpenGL ES 3.2")
 cmd void glGetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, GLchar* label) {
   minRequiredVersion(3, 2)
+  GetObjectPtrLabel(ptr, bufSize, length, label)
+}
+
+macro void GetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, GLchar* label) {
   // TODO
   writeString(bufSize, length, label)
 }
@@ -172,6 +192,10 @@ cmd void glGetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetPointerv(GLenum pname, void** params) {
   minRequiredVersion(3, 2)
+  GetPointerv(pname, params)
+}
+
+macro void GetPointerv(GLenum pname, void** params) {
   switch (pname) {
     case GL_DEBUG_CALLBACK_FUNCTION, GL_DEBUG_CALLBACK_USER_PARAM: {
       // version 3.2
@@ -187,6 +211,10 @@ cmd void glGetPointerv(GLenum pname, void** params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectLabel.xhtml","OpenGL ES 3.2")
 cmd void glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar* label) {
   minRequiredVersion(3, 2)
+  ObjectLabel(identifier, name, length, label)
+}
+
+macro void ObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar* label) {
   switch (identifier) {
     case GL_BUFFER, GL_FRAMEBUFFER, GL_PROGRAM, GL_PROGRAM_PIPELINE, GL_QUERY, GL_RENDERBUFFER,
         GL_SAMPLER, GL_SHADER, GL_TEXTURE, GL_TRANSFORM_FEEDBACK, GL_VERTEX_ARRAY: {
@@ -203,6 +231,10 @@ cmd void glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLc
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glObjectPtrLabel.xhtml","OpenGL ES 3.2")
 cmd void glObjectPtrLabel(const void* ptr, GLsizei length, const GLchar* label) {
   minRequiredVersion(3, 2)
+  ObjectPtrLabel(ptr, length, label)
+}
+
+macro void ObjectPtrLabel(const void* ptr, GLsizei length, const GLchar* label) {
   // TODO
   readString(length, label)
 }
@@ -210,12 +242,20 @@ cmd void glObjectPtrLabel(const void* ptr, GLsizei length, const GLchar* label) 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPopDebugGroup.xhtml","OpenGL ES 3.2")
 cmd void glPopDebugGroup() {
   minRequiredVersion(3, 2)
+  PopDebugGroup()
+}
+
+macro void PopDebugGroup() {
   // TODO
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPushDebugGroup.xhtml","OpenGL ES 3.2")
 cmd void glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar* message) {
   minRequiredVersion(3, 2)
+  PushDebugGroup(source, id, length, message)
+}
+
+macro void PushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar* message) {
   switch (source) {
     case GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_SOURCE_THIRD_PARTY: {
       // version 3.2

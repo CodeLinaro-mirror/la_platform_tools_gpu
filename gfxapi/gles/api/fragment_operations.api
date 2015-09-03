@@ -15,6 +15,10 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendBarrier.xhtml","OpenGL ES 3.2")
 cmd void glBlendBarrier() {
   minRequiredVersion(3, 2)
+  BlendBarrier()
+}
+
+macro void BlendBarrier() {
   // TODO
 }
 
@@ -94,6 +98,10 @@ cmd void glBlendEquationSeparate(GLenum rgb, GLenum alpha) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.2")
 cmd void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) {
   minRequiredVersion(3, 2)
+  BlendEquationSeparatei(buf, modeRGB, modeAlpha)
+}
+
+macro void BlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) {
   switch (modeRGB) {
     case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT, GL_MAX, GL_MIN: {
       // version 3.2
@@ -116,6 +124,10 @@ cmd void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha) 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendEquation.xhtml","OpenGL ES 3.2")
 cmd void glBlendEquationi(GLuint buf, GLenum mode) {
   minRequiredVersion(3, 2)
+  BlendEquationi(buf, mode)
+}
+
+macro void BlendEquationi(GLuint buf, GLenum mode) {
   switch (mode) {
     case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT, GL_MAX, GL_MIN: {
       // version 3.2
@@ -231,6 +243,10 @@ cmd void glBlendFuncSeparatei(GLuint buf,
                               GLenum srcAlpha,
                               GLenum dstAlpha) {
   minRequiredVersion(3, 2)
+  BlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha)
+}
+
+macro void BlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) {
   switch (srcRGB) {
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
@@ -281,6 +297,10 @@ cmd void glBlendFuncSeparatei(GLuint buf,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFunc.xhtml","OpenGL ES 3.2")
 cmd void glBlendFunci(GLuint buf, GLenum src, GLenum dst) {
   minRequiredVersion(3, 2)
+  BlendFunci(buf, src, dst)
+}
+
+macro void BlendFunci(GLuint buf, GLenum src, GLenum dst) {
   switch (src) {
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,

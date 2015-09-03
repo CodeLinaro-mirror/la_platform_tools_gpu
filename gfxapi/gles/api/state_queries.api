@@ -128,6 +128,10 @@ cmd void glGetInteger64i_v(GLenum param, GLuint index, GLint64* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGet.xhtml","OpenGL ES 3.2")
 cmd void glGetInteger64v(GLenum param, GLint64* values) {
   minRequiredVersion(3, 0)
+  GetInteger64v(param, values)
+}
+
+macro void GetInteger64v(GLenum param, GLint64* values) {
   observeGlGetWrites(param, values)
 }
 
@@ -458,6 +462,10 @@ cmd GLboolean glIsEnabled(GLenum capability) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsEnabled.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsEnabledi(GLenum target, GLuint index) {
   minRequiredVersion(3, 2)
+  return IsEnabledi(target, index)
+}
+
+macro GLboolean IsEnabledi(GLenum target, GLuint index) {
   switch (target) {
     case GL_BLEND, GL_CULL_FACE, GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS, GL_DEPTH_TEST,
         GL_DITHER, GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART_FIXED_INDEX, GL_RASTERIZER_DISCARD,

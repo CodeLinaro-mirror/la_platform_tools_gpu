@@ -176,6 +176,10 @@ cmd void glCopyBufferSubData(GLenum     readTarget,
                              GLintptr   writeOffset,
                              GLsizeiptr size) {
   minRequiredVersion(3, 0)
+  CopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size)
+}
+
+macro void CopyBufferSubData(GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) {
   switch (readTarget) {
     case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -318,6 +322,10 @@ cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetBufferPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
   minRequiredVersion(3, 0)
+  GetBufferPointerv(target, pname, params)
+}
+
+macro void GetBufferPointerv(GLenum target, GLenum pname, void** params) {
   switch (target) {
     case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -361,6 +369,10 @@ cmd GLboolean glIsBuffer(BufferId buffer) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMapBufferRange.xhtml","OpenGL ES 3.2")
 cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) {
   minRequiredVersion(3, 0)
+  return MapBufferRange(target, offset, length, access)
+}
+
+macro void* MapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) {
   switch (target) {
     case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -416,6 +428,10 @@ cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GL
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMapBufferRange.xhtml","OpenGL ES 3.2")
 cmd GLboolean glUnmapBuffer(GLenum target) {
   minRequiredVersion(3, 0)
+  return UnmapBuffer(target)
+}
+
+macro GLboolean UnmapBuffer(GLenum target) {
   switch (target) {
     case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -445,3 +461,4 @@ cmd GLboolean glUnmapBuffer(GLenum target) {
 
   return ?
 }
+

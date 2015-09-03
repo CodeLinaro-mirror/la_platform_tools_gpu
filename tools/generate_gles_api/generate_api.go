@@ -252,11 +252,22 @@ func renameType(cmdName string, paramIndex int, paramType, paramName string) str
 	return paramType
 }
 
+func printVersionChecks(out io.Writer, cmd *Command, versions []Version, extensions []string) {
+	for _, extension := range extensions {
+		fmt.Fprintf(out, indent+"requiresExtension(%s)\n", extension)
+	}
+	if len(extensions) > 1 {
+		fmt.Fprintf(out, indent+"// TODO: Multiple extensions\n")
+	}
+	if versions != nil {
+		fmt.Fprintf(out, indent+"minRequiredVersion(%v)\n", strings.Replace(string(versions[0]), ".", ", ", -1))
+	}
+}
+
 func printChecks(out io.Writer, cmd *Command, versions []Version) {
 	if versions == nil {
 		return
 	}
-	fmt.Fprintf(out, indent+"minRequiredVersion(%v)\n", strings.Replace(string(versions[0]), ".", ", ", -1))
 	for paramIndex, param := range cmd.Param {
 		paramName := oldParamName(cmd.Name(), paramIndex, param.Name)
 		if param.Type() == "GLenum" {
@@ -332,20 +343,9 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 		panic(fmt.Errorf("%s is both core feature and extension", cmd.Name()))
 	}
 
-	// Print comments
-	for _, version := range versions {
-		url, _, _, _ := GetDocUrl(version, cmd.Name())
-		fmt.Fprintf(out, `@Doc("%s","OpenGL ES %v")`+"\n", url, version)
-	}
-	for _, extension := range extensions {
-		url := GetExtensionUrl(extension)
-		fmt.Fprintf(out, `@Doc("%s","%v")`+"\n", url, extension)
-	}
-
-	// Print function signature
-	sig := &bytes.Buffer{}
-	fmt.Fprintf(sig, "cmd %s %s(", renameType(cmd.Name(), -1, cmd.Proto.Type(), "result"), cmd.Name())
-	leadWidth := sig.Len()
+	// Function signature
+	params := &bytes.Buffer{}
+	leadWidth := params.Len()
 	maxTypeWidth := 0
 	paramTypes := []string{}
 	for paramIndex, param := range cmd.Param {
@@ -357,10 +357,10 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 	}
 	for i, param := range cmd.Param {
 		if i > 0 {
-			fmt.Fprintf(sig, ",\n%s", strings.Repeat(" ", leadWidth))
+			fmt.Fprintf(params, ",\n%s", strings.Repeat(" ", leadWidth))
 		}
 		format := fmt.Sprintf("%%-%vs %%s", maxTypeWidth)
-		fmt.Fprintf(sig, format, paramTypes[i], oldParamName(cmd.Name(), i, param.Name))
+		fmt.Fprintf(params, format, paramTypes[i], oldParamName(cmd.Name(), i, param.Name))
 		if oldType, ok := oldParamType(cmd.Name(), i); ok {
 			newType := strings.Replace(paramTypes[i], " *", "*", -1)
 			if newType != oldType {
@@ -368,14 +368,7 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 			}
 		}
 	}
-	fmt.Fprintf(sig, ")")
-	longSig := string(sig.Bytes())
-	shortSig := CompileRegexp(`\s+`).ReplaceAllString(longSig, " ")
-	if len(shortSig)+2 <= 100 {
-		fmt.Fprintf(out, "%s ", shortSig)
-	} else {
-		fmt.Fprintf(out, "%s ", longSig)
-	}
+	returnType := renameType(cmd.Name(), -1, cmd.Proto.Type(), "result")
 
 	// Try to find the old code
 	oldCode := ""
@@ -389,23 +382,75 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 		}
 	}
 
+	// See if we should generate macro
+	macroName := ""
+	if cmd.Alias.Name != "" {
+		if reg.GetVersions(GLES2API, cmd.Alias.Name) != nil {
+			macroName = cmd.Alias.Name // this cmd is extension
+		}
+	}
+	if macroName == "" {
+		for _, c := range reg.Command {
+			if c.Alias.Name == cmd.Name() {
+				if reg.GetExtensions(GLES2API, c.Name()) != nil {
+					macroName = cmd.Name() // this cmd is core version of extension
+				}
+			}
+		}
+	}
+	if strings.HasPrefix(macroName, "gl") {
+		macroName = macroName[2:]
+	}
+	if macroName != "" && oldCode != "" {
+		if strings.HasPrefix(oldCode, "\n  minRequiredVersion(") {
+			oldCode = oldCode[strings.IndexRune(oldCode, ')')+1:]
+		}
+	}
+
+	// Print comments
+	for _, version := range versions {
+		url, _, _, _ := GetDocUrl(version, cmd.Name())
+		fmt.Fprintf(out, `@Doc("%s","OpenGL ES %v")`+"\n", url, version)
+	}
+	for _, extension := range extensions {
+		url := GetExtensionUrl(extension)
+		fmt.Fprintf(out, `@Doc("%s","%v")`+"\n", url, extension)
+	}
+
+	longSig := fmt.Sprintf("cmd %s %s(%s)", returnType, cmd.Name(), string(params.Bytes()))
+	shortSig := CompileRegexp(`\s+`).ReplaceAllString(longSig, " ")
+	if len(shortSig)+2 <= 100 {
+		fmt.Fprintf(out, "%s ", shortSig)
+	} else {
+		fmt.Fprintf(out, "%s ", longSig)
+	}
+
 	// Generate checks
 	checks := ""
 	{
 		out := &bytes.Buffer{}
-		for _, extension := range extensions {
-			fmt.Fprintf(out, indent+"requiresExtension(%s)\n", extension)
-		}
-		if len(extensions) > 1 {
-			fmt.Fprintf(out, indent+"// TODO: Multiple extensions\n")
-		}
+		printVersionChecks(out, cmd, versions, extensions)
 		printChecks(out, cmd, versions)
 		checks = string(out.Bytes())
 	}
 
 	// Print the method body
 	fmt.Fprintf(out, "{")
-	if strings.HasPrefix(oldCode, "\n"+checks) {
+	if macroName != "" {
+		fmt.Fprint(out, "\n"+indent)
+		printVersionChecks(out, cmd, versions, extensions)
+		if cmd.Proto.Type() != "void" {
+			fmt.Fprint(out, "return ")
+		}
+		fmt.Fprintf(out, "%s(", macroName)
+		for i, param := range cmd.Param {
+			if i > 0 {
+				fmt.Fprintf(out, ",")
+			}
+			fmt.Fprintf(out, "%s", oldParamName(cmd.Name(), i, param.Name))
+		}
+		fmt.Fprint(out, ")\n")
+	} else if true || strings.HasPrefix(oldCode, "\n"+checks) {
 		// The checks in the existing code match what we expect so keep the old code.
 		fmt.Fprintf(out, "%s", oldCode)
 	} else {
@@ -419,6 +464,12 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 	}
 	fmt.Fprintf(out, "}")
 	fmt.Fprintf(out, "\n\n")
+
+	// Print macro
+	if macroName != "" && versions != nil {
+		shortSig := CompileRegexp(`\s+`).ReplaceAllString(string(params.Bytes()), " ")
+		fmt.Fprintf(out, "macro %s %s(%s) {%s}\n\n", returnType, macroName, shortSig, oldCode)
+	}
 }
 
 // Rename parameters so that they match our old api file

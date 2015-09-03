@@ -44,6 +44,10 @@ cmd void glDisable(GLenum capability) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glDisablei(GLenum target, GLuint index) {
   minRequiredVersion(3, 2)
+  Disablei(target, index)
+}
+
+macro void Disablei(GLenum target, GLuint index) {
   switch (target) {
     case GL_BLEND, GL_CULL_FACE, GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS, GL_DEPTH_TEST,
         GL_DITHER, GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART_FIXED_INDEX, GL_RASTERIZER_DISCARD,
@@ -90,6 +94,10 @@ cmd void glEnable(GLenum capability) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glEnablei(GLenum target, GLuint index) {
   minRequiredVersion(3, 2)
+  Enablei(target, index)
+}
+
+macro void Enablei(GLenum target, GLuint index) {
   switch (target) {
     case GL_BLEND, GL_CULL_FACE, GL_DEBUG_OUTPUT, GL_DEBUG_OUTPUT_SYNCHRONOUS, GL_DEPTH_TEST,
         GL_DITHER, GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART_FIXED_INDEX, GL_RASTERIZER_DISCARD,
@@ -127,6 +135,10 @@ cmd void glFlush() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFlushMappedBufferRange.xhtml","OpenGL ES 3.2")
 cmd void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length) {
   minRequiredVersion(3, 0)
+  FlushMappedBufferRange(target, offset, length)
+}
+
+macro void FlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length) {
   switch (target) {
     case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
         GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -157,6 +169,10 @@ cmd GLenum glGetError() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetGraphicsResetStatus.xhtml","OpenGL ES 3.2")
 cmd GLenum glGetGraphicsResetStatus() {
   minRequiredVersion(3, 2)
+  return GetGraphicsResetStatus()
+}
+
+macro GLenum GetGraphicsResetStatus() {
   // TODO
   return ?
 }

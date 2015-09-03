@@ -214,13 +214,13 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE3DOES)(uint32_t target, int32_t level,
                                                         uint32_t internalformat, int32_t width,
                                                         int32_t height, int32_t depth,
-                                                        int32_t border, int32_t imageSize,
+                                                        int32_t border, int32_t image_size,
                                                         void *data);
     typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE3DOES)(uint32_t target, int32_t level,
                                                            int32_t xoffset, int32_t yoffset,
                                                            int32_t zoffset, int32_t width,
                                                            int32_t height, int32_t depth,
-                                                           uint32_t format, int32_t imageSize,
+                                                           uint32_t format, int32_t image_size,
                                                            void *data);
     typedef void(STDCALL *PFNGLCOPYBUFFERSUBDATANV)(uint32_t readTarget, uint32_t writeTarget,
                                                     int32_t readOffset, int32_t writeOffset,

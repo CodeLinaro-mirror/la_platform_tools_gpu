@@ -82,6 +82,10 @@ cmd void glBlitFramebuffer(GLint      srcX0,
                            GLbitfield mask,
                            GLenum     filter) {
   minRequiredVersion(3, 0)
+  BlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter)
+}
+
+macro void BlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) {
   supportsBits(mask, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT)
   if (GL_COLOR_BUFFER_BIT in mask) {
   }
@@ -264,6 +268,10 @@ cmd void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean a
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glColorMask.xhtml","OpenGL ES 3.2")
 cmd void glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   minRequiredVersion(3, 2)
+  ColorMaski(index, r, g, b, a)
+}
+
+macro void ColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   // TODO
 }
 
@@ -311,6 +319,10 @@ cmd void glDepthMask(GLboolean enabled) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawBuffers.xhtml","OpenGL ES 3.2")
 cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
   minRequiredVersion(3, 0)
+  DrawBuffers(n, bufs)
+}
+
+macro void DrawBuffers(GLsizei n, const GLenum* bufs) {
   // TODO
   b := bufs[0:n]
 }
@@ -409,6 +421,10 @@ cmd void glFramebufferRenderbuffer(GLenum         framebuffer_target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFramebufferTexture.xhtml","OpenGL ES 3.2")
 cmd void glFramebufferTexture(GLenum target, GLenum attachment, TextureId texture, GLint level) {
   minRequiredVersion(3, 2)
+  FramebufferTexture(target, attachment, texture, level)
+}
+
+macro void FramebufferTexture(GLenum target, GLenum attachment, TextureId texture, GLint level) {
   switch (target) {
     case GL_DRAW_FRAMEBUFFER, GL_FRAMEBUFFER, GL_READ_FRAMEBUFFER: {
       // version 3.2
@@ -854,6 +870,10 @@ cmd void glReadnPixels(GLint   x,
                        GLsizei bufSize,
                        void*   data) {
   minRequiredVersion(3, 2)
+  ReadnPixels(x, y, width, height, format, type, bufSize, data)
+}
+
+macro void ReadnPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data) {
   switch (format) {
     case GL_RGBA, GL_RGBA_INTEGER: {
       // version 3.2
@@ -925,6 +945,10 @@ cmd void glRenderbufferStorageMultisample(GLenum  target,
                                           GLsizei width,
                                           GLsizei height) {
   minRequiredVersion(3, 0)
+  RenderbufferStorageMultisample(target, samples, format, width, height)
+}
+
+macro void RenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum format, GLsizei width, GLsizei height) {
   switch (target) {
     case GL_RENDERBUFFER: {
       // version 3.0
