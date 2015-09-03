@@ -18,14 +18,16 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type fmtATC_RGB_AMD struct{ binary.Generate }
 
-func (*fmtATC_RGB_AMD) String() string { return "ATC_RGB_AMD" }
+func (*fmtATC_RGB_AMD) String() string    { return "ATC_RGB_AMD" }
+func (*fmtATC_RGB_AMD) Size(w, h int) int { return (max(w, 4) * max(h, 4)) / 2 }
 func (*fmtATC_RGB_AMD) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 4)
 }
 
 type fmtATC_RGBA_EXPLICIT_ALPHA_AMD struct{ binary.Generate }
 
-func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) String() string { return "ATC_RGBA_EXPLICIT_ALPHA_AMD" }
+func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) String() string    { return "ATC_RGBA_EXPLICIT_ALPHA_AMD" }
+func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) Size(w, h int) int { return (max(w, 4) * max(h, 4)) }
 func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 8)
 }

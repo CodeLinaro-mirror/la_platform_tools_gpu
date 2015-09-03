@@ -26,6 +26,7 @@ import (
 type fmtPNG struct{ binary.Generate }
 
 func (*fmtPNG) String() string                 { return "PNG" }
+func (*fmtPNG) Size(w, h int) int              { return -1 }
 func (*fmtPNG) Check(d []byte, w, h int) error { return nil }
 
 // PNG returns a format representing the the texture compression format with the

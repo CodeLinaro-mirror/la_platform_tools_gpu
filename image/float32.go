@@ -23,6 +23,7 @@ import (
 type fmtFloat32 struct{ binary.Generate }
 
 func (*fmtFloat32) String() string                 { return "Float32" }
+func (*fmtFloat32) Size(w, h int) int              { return w * h * 4 }
 func (*fmtFloat32) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }
 
 // RGBA returns a format containing an 8-bit red, green, blue and alpha channel

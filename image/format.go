@@ -21,13 +21,17 @@ import (
 )
 
 // Format is the interface for an image and/or pixel format.
-//
-// Check returns an error if the combination of data, image width and image
-// height is invalid for the given format, otherwise Check returns nil.
 type Format interface {
 	binary.Object
 
+	// Check returns an error if the combination of data, image width and image
+	// height is invalid for the given format, otherwise Check returns nil.
 	Check(data []byte, width, height int) error
+
+	// Size returns the number of bytes required to hold an image of the specified
+	// dimensions in this format. If the size varies based on the image data, then
+	// Size returns -1.
+	Size(width, height int) int
 }
 
 func checkSize(data []byte, width, height int, bpp int) error {
@@ -43,6 +47,7 @@ func checkSize(data []byte, width, height int, bpp int) error {
 type fmtRGBA struct{ binary.Generate }
 
 func (*fmtRGBA) String() string                 { return "RGBA" }
+func (*fmtRGBA) Size(w, h int) int              { return w * h * 4 }
 func (*fmtRGBA) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }
 
 // RGBA returns a format containing an 8-bit red, green, blue and alpha channel

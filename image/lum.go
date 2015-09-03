@@ -19,6 +19,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 type fmtLuminance struct{ binary.Generate }
 
 func (*fmtLuminance) String() string                 { return "Luminance" }
+func (*fmtLuminance) Size(w, h int) int              { return w * h }
 func (*fmtLuminance) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }
 
 // Luminance returns a format containing a single 8-bit luminance channel per

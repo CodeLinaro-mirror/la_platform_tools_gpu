@@ -19,6 +19,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 type fmtRGB struct{ binary.Generate }
 
 func (*fmtRGB) String() string                 { return "RGB" }
+func (*fmtRGB) Size(w, h int) int              { return w * h * 3 }
 func (*fmtRGB) Check(d []byte, w, h int) error { return checkSize(d, w, h, 24) }
 
 // RGB returns a format containing an 8-bit red, green and blue channel per
