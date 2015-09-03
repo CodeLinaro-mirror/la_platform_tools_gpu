@@ -115,6 +115,9 @@ func depthToU16(in []byte) []byte {
 }
 
 func checkDepthBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID, done *sync.WaitGroup) {
+	if done != nil {
+		defer done.Done()
+	}
 	select {
 	case img := <-gles.API().(replay.QueryDepthBuffer).QueryDepthBuffer(ctx, mgr, after):
 		if img.Error != nil {
@@ -134,9 +137,6 @@ func checkDepthBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, 
 	case <-time.Tick(replayTimeout):
 		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
 		panic(fmt.Errorf("Timeout reading DepthBuffer at %d for %s", after, name))
-	}
-	if done != nil {
-		done.Done()
 	}
 }
 
