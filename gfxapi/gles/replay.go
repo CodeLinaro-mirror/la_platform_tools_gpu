@@ -315,7 +315,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(vertexArrays) > 0 {
 		out.Write(id,
-			NewGlDeleteVertexArraysOES(GLsizei(len(vertexArrays)), memory.Tmp).
+			NewGlDeleteVertexArrays(GLsizei(len(vertexArrays)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, vertexArrays)))
 	}
 
