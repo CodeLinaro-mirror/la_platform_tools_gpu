@@ -149,8 +149,13 @@ func (a api) Replay(
 	// Device-dependent transforms.
 	transforms.Add(
 		decompressTextures(device, &path.Capture{ID: ctx.Capture}, d, l),
-		precisionStrip(device, d, l),
 		halfFloatOESToHalfFloatARB(device))
+
+	if c, err := compat(device, d, l); err == nil {
+		transforms.Add(c)
+	} else {
+		log.E(l, "Failed to create compatability transform: %v", err)
+	}
 
 	// Cleanup
 	transforms.Add(&destroyResourcesAtEOS{
