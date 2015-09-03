@@ -16,94 +16,112 @@ package resolver
 
 import "android.googlesource.com/platform/tools/gpu/api/semantic"
 
-type fenceInfo struct {
-	pre   bool
-	post  bool
-	fence *semantic.Fence
-}
+// order is a bitfield describing whether a statement or block belongs before
+// (pre) or after (post) the command's fence. Some statements and blocks
+// straddle the fence, in which case both the pre and post bits will be set.
+type order int
 
-func (f *fenceInfo) merge(child fenceInfo) {
-	f.pre = f.pre || child.pre
-	f.post = f.post || child.post
-	if f.fence == nil {
-		f.fence = child.fence
-	}
+const (
+	pre  = order(1) // statement is pre-fence
+	post = order(2) // statement is post-fence
+)
+
+func (o order) isPre() bool  { return (o & pre) != 0 }
+func (o order) isPost() bool { return (o & post) != 0 }
+
+type fenceTracker struct {
+	ctx      *context
+	explicit bool // explcitly declared fence found.
+	orders   map[semantic.Node]order
 }
 
 func addFence(ctx *context, block *semantic.Block) {
-	t := detectFence(ctx, block, nil, true)
-	if t.fence == nil {
+	t := fenceTracker{ctx: ctx, orders: map[semantic.Node]order{}}
+	t.analyse(block)
+	if !t.explicit && !t.insertFence(block) {
 		block.Statements = append(block.Statements, &semantic.Fence{})
 	}
 }
 
-func detectFence(ctx *context, n semantic.Node, fence *semantic.Fence, istop bool) fenceInfo {
+// analyse traverses the statements and expressions for semantic node n and its
+// children, assessing and returning whether each node is pre or post w.r.t the
+// fence. An entry is added to the fenceTracker.orders map for each visited
+// node.
+func (t *fenceTracker) analyse(n semantic.Node) order {
+	o := order(0)
 	switch n := n.(type) {
 	case *semantic.Fence:
-		if fence == nil {
-			return fenceInfo{fence: n, pre: istop}
-		} else {
-			ctx.errorf(n, "duplicate fence found")
-			return fenceInfo{fence: fence}
+		if !n.Explicit {
+			t.ctx.icef(n.AST, "unexpected fence found")
 		}
-	case *semantic.Block:
-		info := fenceInfo{fence: fence, pre: istop}
-		for index, s := range n.Statements {
-			child := detectFence(ctx, s, info.fence, false)
-			info.merge(child)
-			// if we are both pre and post without a fence, we have reached a boundary
-			if info.pre && info.post && (info.fence == nil) {
-				info.fence = &semantic.Fence{Statement: s}
-				n.Statements[index] = info.fence
-			}
+		if t.explicit {
+			t.ctx.errorf(n, "multiple explicit fences found")
 		}
-		return info
-	case *semantic.Branch, *semantic.Select, *semantic.Switch, *semantic.Iteration:
-		info := detectFenceChildren(ctx, n, fence)
-		if fence == nil && info.fence != nil {
-			ctx.errorf(info.fence.Statement, "fence not allowed in %T", n)
-		}
-		return info
+		t.explicit = true
+	case *semantic.Read:
+		o = pre | t.analyse(n.Slice)
+	case *semantic.Unknown:
+		o = post
+	case *semantic.Write:
+		o = post | t.analyse(n.Slice)
 	case *semantic.Copy:
-		if fence != nil {
-			if fence.Explicit { // Explict fence overrides implicit copy fence.
-				return fenceInfo{fence: fence}
-			}
-			ctx.errorf(n, "copy after fence")
-		}
-		info := detectFenceChildren(ctx, n, fence)
-		// copy is both pre and post
-		info.pre = true
-		info.post = true
-		return info
-	case *semantic.Read, *semantic.SliceIndex:
-		if fence != nil {
-			ctx.errorf(n, "%T after fence", n)
-		}
-		info := detectFenceChildren(ctx, n, fence)
-		info.pre = true
-		return info
+		o = pre | post
+	case *semantic.SliceIndex:
+		o = pre | t.analyse(n.Index) | t.analyse(n.Slice)
 	case *semantic.SliceAssign:
-		// Need to not directly test the slice index as it will look like a read
-		info := detectFenceChildren(ctx, n.To, fence)
-		info.merge(detectFence(ctx, n.Value, info.fence, false))
-		info.post = true
-		return info
-	case *semantic.Write, *semantic.Unknown, *semantic.Return:
-		info := detectFenceChildren(ctx, n, fence)
-		info.post = true
-		return info
+		o = post | t.analyse(n.Value)
+	case *semantic.Return:
+		o = post
 	case semantic.Type:
-		return fenceInfo{fence: fence}
+	// Don't traverse types
 	default:
-		return detectFenceChildren(ctx, n, fence)
+		semantic.Visit(n, func(c semantic.Node) { o |= t.analyse(c) })
 	}
+	if o != 0 {
+		t.orders[n] = o
+	}
+	return o
 }
 
-func detectFenceChildren(ctx *context, n semantic.Node, fence *semantic.Fence) fenceInfo {
-	info := fenceInfo{fence: fence}
-	semantic.Visit(n, func(v semantic.Node) {
-		info.merge(detectFence(ctx, v, info.fence, false))
-	})
-	return info
+func (t *fenceTracker) insertFence(n semantic.Node) (inserted bool) {
+	switch n := n.(type) {
+	case *semantic.Block:
+		for i := 0; i < len(n.Statements); i++ {
+			s := n.Statements[i]
+			o := t.orders[s]
+			if inserted {
+				// fence already found, but continue looking over the statements
+				// to ensure that no more pre-statements are found.
+				if o.isPre() {
+					t.ctx.errorf(s, "pre-statement after fence")
+					return true
+				}
+				continue
+			}
+
+			if o.isPost() {
+				// first post statement or block containing post statement found.
+				// insert a fence.
+				switch {
+				case !o.isPre(): // pre -> post transision between statements.
+					n.Statements = append(n.Statements, nil)
+					copy(n.Statements[i+1:], n.Statements[i:])
+					n.Statements[i] = &semantic.Fence{}
+					i++ // step past the newly inserted fence
+
+				case t.insertFence(s): // inserted in sub-block
+
+				default: // pre and post statement found.
+					n.Statements[i] = &semantic.Fence{Statement: n.Statements[i]}
+				}
+				inserted = true
+			}
+		}
+		return inserted
+	case *semantic.Iteration, *semantic.Switch, *semantic.Branch:
+		t.ctx.errorf(n, "fence not permitted in %T", n)
+		return true
+	default:
+		return false
+	}
 }
