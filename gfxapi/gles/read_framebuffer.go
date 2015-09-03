@@ -62,11 +62,6 @@ func (t *readFramebuffer) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 func (t *readFramebuffer) Flush(out atom.Writer) {}
 
 func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan replay.Image) {
-	shaderPrefix := ""
-	if v, err := ParseVersion(device.Version); err == nil && v.IsES {
-		shaderPrefix = "precision highp float;\n"
-	}
-
 	t.injections[id] = append(t.injections[id], func(out atom.Writer) {
 		s, d, l := t.state, t.database, t.logger
 		arch := s.Architecture
@@ -86,9 +81,10 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 		const (
 			uTextureLocation      UniformLocation   = 0
 			aScreenCoordsLocation AttributeLocation = 0
-		)
-		var (
-			vertexShaderSource = shaderPrefix + `
+			vsSource                                = `
+				#version 110
+				precision highp float;
+
 				attribute vec2 aScreenCoords;
 				varying vec2 vTexCoords;
 
@@ -96,7 +92,10 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 					vTexCoords = aScreenCoords / 2.0 + vec2(0.5, 0.5);
 					gl_Position = vec4(aScreenCoords.xy, 0.0, 1.0);
 				}`
-			fragmentShaderSource = shaderPrefix + `
+			fsSource = `
+				#version 110
+				precision highp float;
+
 				uniform sampler2D uTexture;
 				varying vec2 vTexCoords;
 
@@ -106,9 +105,11 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 				}
 
 				void main() {
-					float sample = texture2D(uTexture, vTexCoords).r;
-					gl_FragColor = float2rgba(sample);
+					float v = texture2D(uTexture, vTexCoords).r;
+					gl_FragColor = float2rgba(v);
 				}`
+		)
+		var (
 			origProgramID            = c.BoundProgram
 			origRenderbufferID       = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
 			origReadFramebufferID    = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
@@ -188,7 +189,7 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 
 		// Create the shader program
 		writeEach(out,
-			BuildProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
+			BuildProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vsSource, fsSource)...)
 
 		writeEach(out,
 			NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
