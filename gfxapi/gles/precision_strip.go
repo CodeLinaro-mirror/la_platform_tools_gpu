@@ -39,7 +39,7 @@ func precisionStrip(device *service.Device, d database.Database, l log.Logger) a
 		if cmd, ok := a.(*GlShaderSource); ok {
 			shader := getContext(s).Instances.Shaders.Get(cmd.Shader)
 
-			tree, err := glsl.Parse(shader.Source, ast.LangVertexShader)
+			tree, _, err := glsl.Parse(shader.Source, ast.LangVertexShader)
 			if len(err) > 0 {
 				panic(fmt.Errorf("Failed to parse shader source at atom %d '%s': %s", i, shader.Source, err[0]))
 			}

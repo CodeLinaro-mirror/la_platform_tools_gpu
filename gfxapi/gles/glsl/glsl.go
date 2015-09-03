@@ -25,6 +25,8 @@ package glsl
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/evaluator"
@@ -32,12 +34,49 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/sema"
 )
 
+// Version describes a GLSL shader version.
+type Version struct {
+	Major, Minor, Point int
+}
+
+// String returns the string form of the GLSL version.
+func (v Version) String() string {
+	return fmt.Sprintf("%d%d%d", v.Major, v.Minor, v.Point)
+}
+
+// GreaterThan returns true if this Version is greater than Version{major, minor}.
+func (v Version) GreaterThan(major, minor int) bool {
+	switch {
+	case v.Major > major:
+		return true
+	case v.Major < major:
+		return false
+	case v.Minor > minor:
+		return true
+	default:
+		return false
+	}
+}
+
+// ParseVersion parses and returns the Version from the string s.
+func ParseVersion(s string) Version {
+	if i, err := strconv.Atoi(s); err == nil {
+		major := (i / 100) % 10
+		minor := (i / 10) % 10
+		point := i % 10
+		return Version{Major: major, Minor: minor, Point: point}
+	} else {
+		return Version{Major: 1}
+	}
+}
+
 // Parse preprocesses and parses an OpenGL ES Shading language program present in the first
 // argument. The second argument specifies the language, whose syntax to employ during parsing.
 // The parsed AST is returned in the first result. If any parsing errors are encountered, they
 // are returned in the second result.
-func Parse(src string, lang ast.Language) (program interface{}, err []error) {
-	return parser.Parse(src, lang, evaluator.EvaluatePreprocessorExpression)
+func Parse(src string, lang ast.Language) (program interface{}, version Version, err []error) {
+	prog, v, err := parser.Parse(src, lang, evaluator.EvaluatePreprocessorExpression)
+	return prog, ParseVersion(v), err
 }
 
 // Formatter is a helper function which turns any AST node into something that can be printed with
@@ -50,3 +89,16 @@ func Formatter(node interface{}) fmt.Formatter { return parser.Formatter(node) }
 // expression, array sizes and values of constant variables. Any encountered errors are returned
 // as a result.
 func Analyze(program interface{}) (err []error) { return sema.Analyze(program, evaluator.Evaluate) }
+
+// Format returns the source for the given shader AST tree and version.
+func Format(tree interface{}, version Version) string {
+	src := fmt.Sprintf("%v", Formatter(tree))
+	if version.Point == 0 && version.Minor == 0 && version.Major == 0 {
+		return src
+	}
+	if strings.HasPrefix(src, "\n") {
+		return fmt.Sprintf("#version %v%s", version, src)
+	} else {
+		return fmt.Sprintf("#version %v\n%s", version, src)
+	}
+}

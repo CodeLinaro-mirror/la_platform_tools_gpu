@@ -198,13 +198,13 @@ var shaderBuilderTests = []testInfo{
 
 func testBuilder(t *testing.T, lang ast.Language, tests []testInfo) {
 	for _, test := range tests {
-		expectedInfos, err := pp.Preprocess(test.Program, nil, 0)
+		expectedInfos, _, err := pp.Preprocess(test.Program, nil, 0)
 		if len(err) > 0 {
 			t.Logf("Program: %s", test.Program)
 			t.Errorf("Unexpected preprocessor error: %s", err[0])
 			continue
 		}
-		ast, obtainedErrors := Parse(test.Program, lang, nil)
+		ast, _, obtainedErrors := Parse(test.Program, lang, nil)
 		if test.Error != "" {
 			if len(obtainedErrors) == 0 {
 				t.Logf("Program: %s", test.Program)
@@ -232,7 +232,7 @@ func testBuilder(t *testing.T, lang ast.Language, tests []testInfo) {
 			}
 
 			formatted := fmt.Sprint(Formatter(ast))
-			obtainedInfos, err := pp.Preprocess(formatted, nil, 0)
+			obtainedInfos, _, err := pp.Preprocess(formatted, nil, 0)
 			if len(err) > 0 {
 				t.Logf("Program:        %s", test.Program)
 				t.Logf("Builder output: %s", formatted)

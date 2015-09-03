@@ -35,6 +35,7 @@ import "android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 // Internal interface which glues preprocessor wrapper class to the actual implementation.
 type worker interface {
 	Work() []tokenExpansion // Performs a single unit of work, and return the resulting token sequence.
+	Version() string        // Returns the shader version (if declared).
 	Errors() []error        // Returns any errors encountered.
 }
 
@@ -46,6 +47,7 @@ type listWorker struct {
 }
 
 func (w *listWorker) Work() []tokenExpansion { return w.pp.processMacro(w.reader.Next(), w.reader) }
+func (w *listWorker) Version() string        { return "" }
 func (w *listWorker) Errors() []error        { return nil }
 
 // ExpressionEvaluator is a function type. These functions are used to process #if expressions.
@@ -91,6 +93,9 @@ func (p *Preprocessor) Next() TokenInfo {
 	return ret
 }
 
+// Version returns the shader version (if declared).
+func (p *Preprocessor) Version() string { return p.impl.Version() }
+
 // Errors returns the list of detected preprocessor errors.
 func (p *Preprocessor) Errors() []error { return p.impl.Errors() }
 
@@ -102,12 +107,12 @@ func PreprocessStream(data string, eval ExpressionEvaluator, file int) *Preproce
 
 // Preprocess preprocesses a GLES Shading language program string into a sequence of tokens. Any
 // preprocessing errors are returned in the second return value.
-func Preprocess(data string, eval ExpressionEvaluator, file int) (tokens []TokenInfo, err []error) {
+func Preprocess(data string, eval ExpressionEvaluator, file int) (tokens []TokenInfo, version string, err []error) {
 	pp := PreprocessStream(data, eval, file)
 	for t := pp.Next(); t.Token != nil; t = pp.Next() {
 		tokens = append(tokens, t)
 	}
 
-	err = pp.Errors()
+	version, err = pp.Version(), pp.Errors()
 	return
 }

@@ -55,7 +55,7 @@ func runTest(t *testing.T, src string, expected string) {
 		ByteOrder:        endian.Little,
 	}
 
-	if tree, err := glsl.Parse(expected, ast.LangVertexShader); len(err) == 0 {
+	if tree, _, err := glsl.Parse(expected, ast.LangVertexShader); len(err) == 0 {
 		expected = fmt.Sprint(glsl.Formatter(tree))
 	} else {
 		t.Errorf("Unexpected error parsing the expected output: %s.", err[0])

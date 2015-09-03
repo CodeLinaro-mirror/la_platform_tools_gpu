@@ -134,7 +134,7 @@ var semaTests = []struct {
 func TestSema(t *testing.T) {
 	for _, test := range semaTests {
 		t.Logf("Program: %s", test.program)
-		ast, err := parser.Parse(test.program, ast.LangVertexShader,
+		ast, _, err := parser.Parse(test.program, ast.LangVertexShader,
 			evaluator.EvaluatePreprocessorExpression)
 		if len(err) > 0 {
 			t.Errorf("Unexpected error parsing input: %s", err[0])

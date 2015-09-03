@@ -47,7 +47,7 @@ func TestHashIf(t *testing.T) {
 		#endif`
 
 		t.Logf("Program: %s", test)
-		_, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+		_, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 		if len(err) > 0 {
 			t.Errorf("Unexpected error parsing input: %s", err[0])
 			continue
@@ -64,7 +64,7 @@ func TestFalsePreprocessorExpressionError(t *testing.T) {
 	#endif`
 
 	t.Logf("Program: %s", test)
-	_, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+	_, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 	if len(err) == 0 {
 		t.Errorf("Parsing unexpectedly succeeded.")
 		return
@@ -76,7 +76,7 @@ func TestFalsePreprocessorExpressionError(t *testing.T) {
 
 func TestHashIfUnknownSymbol(t *testing.T) {
 	test := "#if foo bar baz\n#endif"
-	_, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+	_, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 	if len(err) == 0 {
 		t.Errorf("Parsing unexpectedly succeeded.")
 		return
@@ -89,7 +89,7 @@ func TestHashIfUnknownSymbol(t *testing.T) {
 
 func TestHashIfUnknown(t *testing.T) {
 	test := "#if 1 +\n#endif"
-	_, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+	_, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 	if len(err) == 0 {
 		t.Errorf("Parsing unexpectedly succeeded.")
 		return

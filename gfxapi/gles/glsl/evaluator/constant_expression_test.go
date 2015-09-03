@@ -140,7 +140,7 @@ func TestConstantExpressions(t *testing.T) {
 			test = "const int VAR = 1; " + test
 		}
 		t.Logf("Program: %s", test)
-		program, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+		program, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 		if len(err) > 0 {
 			t.Errorf("Unexpected error parsing input: %s", err[0])
 			continue
@@ -159,7 +159,7 @@ func TestNegativeArraySizeError(t *testing.T) {
 	test := "bool x[(1 == -1) ? 1 : -1];"
 	t.Logf("Program: %s", test)
 
-	program, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
+	program, _, err := parser.Parse(test, ast.LangVertexShader, EvaluatePreprocessorExpression)
 	if len(err) > 0 {
 		t.Errorf("Unexpected error parsing input: %s", err[0])
 		return
@@ -186,7 +186,7 @@ func TestConstantExpressionErrors(t *testing.T) {
 	for _, test := range constantExpressionErrors {
 		expr := "bool x[(" + test.expr + ")?1:-1];"
 		t.Logf("Program: %s", expr)
-		program, err := parser.Parse(expr, ast.LangVertexShader, EvaluatePreprocessorExpression)
+		program, _, err := parser.Parse(expr, ast.LangVertexShader, EvaluatePreprocessorExpression)
 		if len(err) > 0 {
 			t.Errorf("Unexpected error parsing input: %s", err[0])
 			continue

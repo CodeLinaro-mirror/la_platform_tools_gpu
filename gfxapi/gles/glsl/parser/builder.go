@@ -1198,9 +1198,9 @@ func (eval PreprocessorExpressionEvaluator) parseEvaluatePreprocessorExpression(
 // The result is an object of type *ast.Ast in case of vertex and fragment shaders. In case of
 // preprocessor expressions the result is an ast.Expression interface. The function also returns
 // any errors it encounters during processing.
-func Parse(in string, language ast.Language,
-	eval PreprocessorExpressionEvaluator) (program interface{}, err []error) {
-
-	return parseImpl(pp.PreprocessStream(in, eval.parseEvaluatePreprocessorExpression, 0),
-		language, eval)
+func Parse(in string, language ast.Language, eval PreprocessorExpressionEvaluator) (program interface{}, version string, err []error) {
+	s := pp.PreprocessStream(in, eval.parseEvaluatePreprocessorExpression, 0)
+	program, err = parseImpl(s, language, eval)
+	version = s.Version()
+	return
 }

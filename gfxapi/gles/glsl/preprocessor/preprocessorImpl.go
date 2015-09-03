@@ -43,10 +43,15 @@ type preprocessorImpl struct {
 	lexer *lexer
 
 	macros       map[string]macroDefinition // All currently defined macros.
+	version      string                     // The shader version declared with #version.
 	ifStack      []ifEntry                  // The stack of all encountered #if directives.
 	line         int                        // The current line.
 	currentToken *tokenExpansion
 	evaluator    ExpressionEvaluator
+}
+
+func (p *preprocessorImpl) Version() string {
+	return p.version
 }
 
 func (p *preprocessorImpl) Errors() []error {
@@ -99,7 +104,6 @@ func (r *listReader) Peek() (t tokenExpansion) {
 // processList is a helper function for processMacro. It calls processMacro on all tokens in the
 // list.
 func (p *preprocessorImpl) processList(r *listReader) (result []tokenExpansion) {
-
 	for len(r.list) > 0 {
 		token := r.Next()
 		result = append(result, p.processMacro(token, r)...)
@@ -441,8 +445,17 @@ func (p *preprocessorImpl) processDirective(info TokenInfo) {
 		}
 		return
 
-	// TODO: support #version, #pragma and #extension instead of silently ignoring them.
-	case ppVersion, ppPragma, ppExtension:
+	case ppVersion:
+		args := p.getDirectiveArguments(info, false)
+		if len(args) > 0 {
+			p.version = args[0].Token.String()
+		} else {
+			p.err.Errorf("expected version number after #version")
+		}
+		return
+
+		// TODO: support #pragma and #extension instead of silently ignoring them.
+	case ppPragma, ppExtension:
 		_ = p.getDirectiveArguments(info, false)
 		return
 
