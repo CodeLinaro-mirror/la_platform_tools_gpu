@@ -23798,6 +23798,14 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
+            case GLenum::GL_MAJOR_VERSION: {
+                write(l_v, 0, l_ctx->mInfo.mVersionMajor);
+                break;
+            }
+            case GLenum::GL_MINOR_VERSION: {
+                write(l_v, 0, l_ctx->mInfo.mVersionMinor);
+                break;
+            }
         }
     } while (false);
     observe(observations.mWrites);

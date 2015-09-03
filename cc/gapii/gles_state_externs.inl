@@ -238,6 +238,10 @@ inline int stateVariableSize(uint32_t v) {
         return 1;
     case GLenum::GL_GPU_DISJOINT_EXT:
         return 1;
+    case GLenum::GL_MAJOR_VERSION:
+        return 1;
+    case GLenum::GL_MINOR_VERSION:
+        return 1;
     default:
         return 0; // TODO: Assert?
     }

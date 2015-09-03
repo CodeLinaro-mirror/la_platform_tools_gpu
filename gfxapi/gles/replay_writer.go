@@ -14466,6 +14466,10 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_GPU_DISJOINT_EXT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
+	case GLenum_GL_MAJOR_VERSION:
+		v.Index(uint64(0), ϟs).Write(ctx.Info.VersionMajor, ϟa, ϟs, ϟd, ϟl, ϟb)
+	case GLenum_GL_MINOR_VERSION:
+		v.Index(uint64(0), ϟs).Write(ctx.Info.VersionMinor, ϟa, ϟs, ϟd, ϟl, ϟb)
 	default:
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)

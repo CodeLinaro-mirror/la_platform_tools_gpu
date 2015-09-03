@@ -1080,7 +1080,10 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
       v[0] = ?
     case GL_GPU_DISJOINT_EXT:
       v[0] = ?
-
+    case GL_MAJOR_VERSION:
+      v[0] = ctx.Info.VersionMajor
+    case GL_MINOR_VERSION:
+      v[0] = ctx.Info.VersionMinor
   // TODO: implement the following which depend on:
   //   glStencilOp, glStencilOpSeparate, glStencilFuncSeparate.
   // GL_STENCIL_BACK_FAIL
