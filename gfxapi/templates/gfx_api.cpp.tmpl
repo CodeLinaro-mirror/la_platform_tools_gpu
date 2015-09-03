@@ -135,6 +135,17 @@
           if (err != GLenum::GL_NO_ERROR) {
             GAPID_WARNING("{{$name}} returned error: 0x%x", err);
           }
+          {{if eq $name "glShaderSource"}}
+            GAPID_INFO("Shader source: %s", source[0]);
+          {{else if eq $name "glCompileShader"}}
+            int success = 0;
+            glGetShaderiv(shader, GLenum::GL_COMPILE_STATUS, &success);
+            if (success == 0) {
+              char buf[2048];
+              glGetShaderInfoLog(shader, 2048, nullptr, buf);
+              GAPID_WARNING("Shader failed to compile: %s", buf);
+            }
+          {{end}}
         {{end}}
       } else {
         GAPID_WARNING("Attempted to call unsupported function {{$name}}");

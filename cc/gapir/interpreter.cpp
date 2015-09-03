@@ -82,12 +82,17 @@ uint32_t Interpreter::extract26bitData(uint32_t opcode) const {
 }
 
 bool Interpreter::call(uint32_t opcode) {
-    auto func = mFunctions.find(opcode & FUNCTION_ID_MASK);
+    auto id = opcode & FUNCTION_ID_MASK;
+    auto func = mFunctions.find(id);
     if (func == mFunctions.end()) {
-        GAPID_WARNING("Invalid function id: %u", opcode & FUNCTION_ID_MASK);
+        GAPID_WARNING("Invalid function id: %u", id);
         return false;
     } else {
-        return func->second(&mStack, (opcode & PUSH_RETURN_MASK) != 0);
+        if (!func->second(&mStack, (opcode & PUSH_RETURN_MASK) != 0)) {
+            GAPID_WARNING("Error raised when calling function with id: %u", id);
+            return false;
+        }
+        return true;
     }
 }
 

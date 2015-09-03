@@ -11076,6 +11076,13 @@ bool callGlCompileShader(Stack* stack, bool pushReturn) {
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glCompileShader returned error: 0x%x", err);
             }
+            int success = 0;
+            glGetShaderiv(shader, GLenum::GL_COMPILE_STATUS, &success);
+            if (success == 0) {
+                char buf[2048];
+                glGetShaderInfoLog(shader, 2048, nullptr, buf);
+                GAPID_WARNING("Shader failed to compile: %s", buf);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompileShader");
         }
@@ -13123,6 +13130,7 @@ bool callGlShaderSource(Stack* stack, bool pushReturn) {
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glShaderSource returned error: 0x%x", err);
             }
+            GAPID_INFO("Shader source: %s", source[0]);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glShaderSource");
         }
