@@ -138,6 +138,9 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		// "-fcolor-diagnostics", clang-only
 		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 	}, cfg.CompilerArgs...)
+	if cfg.OS == "osx" {
+		a = append(a, "-stdlib=libc++")
+	}
 	for _, isp := range cfg.IncludeSearchPaths {
 		a = append(a, fmt.Sprintf("-I%s", isp))
 	}
