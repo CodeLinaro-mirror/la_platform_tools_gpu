@@ -21,6 +21,11 @@
 
 #import <OpenGL/OpenGL.h>
 #import <AppKit/AppKit.h>
+// Some versions of AppKit include these GL defines.
+#undef GL_EXTENSIONS
+#undef GL_RENDERER
+#undef GL_VENDOR
+#undef GL_VERSION
 
 namespace gapir {
 namespace {
