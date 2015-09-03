@@ -130,7 +130,16 @@ func trace(name string, f interface{}) func(values ...interface{}) (interface{},
 
 // IsNil returns true if v is nil.
 func (f *Functions) IsNil(v interface{}) bool {
-	return v == nil
+	if v == nil {
+		return true
+	}
+	r := reflect.ValueOf(v)
+	switch r.Kind() {
+	case reflect.Ptr, reflect.Interface, reflect.Slice, reflect.Map:
+		return r.IsNil()
+	default:
+		return false
+	}
 }
 
 // Error raises an error terminating execution of the template.
