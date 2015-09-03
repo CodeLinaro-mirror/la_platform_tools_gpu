@@ -15,6 +15,8 @@
 package gles
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -24,8 +26,34 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+type features struct {
+	uncompressedTextureFormats map[GLenum]struct{}
+	compressedTextureFormats   map[GLenum]struct{}
+}
+
+func getFeatures(version, extensions string) (features, error) {
+	v, err := ParseVersion(version)
+	if err != nil {
+		return features{}, err
+	}
+
+	f := features{
+		uncompressedTextureFormats: getSupportedUncompressedTextureFormats(*v, extensions),
+		compressedTextureFormats:   getSupportedCompressedTextureFormats(extensions),
+	}
+
+	return f, nil
+}
+
 func compat(device *service.Device, d database.Database, l log.Logger) (atom.Transformer, error) {
 	l = log.Enter(l, "compat")
+
+	target, err := getFeatures(device.Version, device.Extensions)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"Error '%v' when getting feature list for version: '%s', extensions: '%s'.",
+			err, device.Version, device.Extensions)
+	}
 
 	s := gfxapi.NewState()
 	return atom.Transform("compat", func(i atom.ID, a atom.Atom, out atom.Writer) {
@@ -57,6 +85,33 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 			a.Mutate(s, d, l)
 			out.Write(i, a)
 			return
+
+		case *GlTexImage2D:
+			if _, supported := target.uncompressedTextureFormats[a.Format]; !supported {
+				if err := convertTexImage2D(i, a, s, d, l, out); err == nil {
+					return
+				} else {
+					log.E(l, "Failed to convert texture: %v", err)
+				}
+			}
+
+		case *GlTexSubImage2D:
+			if _, supported := target.uncompressedTextureFormats[a.Format]; !supported {
+				if err := convertTexSubImage2D(i, a, s, d, l, out); err == nil {
+					return
+				} else {
+					log.E(l, "Failed to convert texture: %v", err)
+				}
+			}
+
+		case *GlCompressedTexImage2D:
+			if _, supported := target.compressedTextureFormats[a.Format]; !supported {
+				if err := decompressTexImage2D(i, a, s, d, l, out); err == nil {
+					return
+				} else {
+					log.E(l, "Failed to decompress texture: %v", err)
+				}
+			}
 		}
 
 		a.Mutate(s, d, l)

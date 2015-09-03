@@ -82,6 +82,10 @@ type LazyConverter struct {
 	Height     uint32
 	FormatFrom Format
 	FormatTo   Format
+
+	// Number of bytes between lines in the source image.
+	// If 0 then lines are contiguous.
+	StrideFrom int
 }
 
 // BuildLazy returns the byte array holding the converted image for the
@@ -90,6 +94,17 @@ func (r *LazyConverter) BuildLazy(c interface{}, d database.Database, l log.Logg
 	data, err := database.Resolve(r.Data, d, l)
 	if err != nil {
 		return nil, err
+	}
+	rowLength := r.FormatFrom.Size(int(r.Width), 1)
+	if r.StrideFrom != 0 && r.StrideFrom != rowLength {
+		// Remove any padding from the source image
+		packed := make([]byte, r.FormatFrom.Size(int(r.Width), int(r.Height)))
+		src, dst := data.([]byte), packed
+		for y := 0; y < int(r.Height); y++ {
+			copy(dst, src[:rowLength])
+			dst, src = dst[rowLength:], src[r.StrideFrom:]
+		}
+		data = packed
 	}
 
 	data, err = Convert(data.([]byte), int(r.Width), int(r.Height), r.FormatFrom, r.FormatTo)
