@@ -425,8 +425,12 @@
           {{Template "Go.Block" $c.Block}}
     {{end}}
     default:
+    {{if IsNil $.Default}}
       v := {{Template "Go.Read" $.Value}}
       return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+    {{else}}
+      {{Template "Go.Block" $.Default}}
+    {{end}}
   }
 {{end}}
 

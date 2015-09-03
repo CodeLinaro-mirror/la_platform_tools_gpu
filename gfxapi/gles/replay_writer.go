@@ -1507,8 +1507,8 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_37_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_37_major, minRequiredVersion_37_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_38_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_38_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
@@ -1558,8 +1558,8 @@ func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 		minRequiredVersion_42_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_42_major, minRequiredVersion_42_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_43_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_43_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlEndQuery)
@@ -1603,8 +1603,8 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.Parameter {
 	case GLenum_GL_QUERY_RESULT, GLenum_GL_QUERY_RESULT_AVAILABLE:
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_47_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_47_param
 	}
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -1634,14 +1634,14 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_49_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_49_major, minRequiredVersion_49_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_50_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_50_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_CURRENT_QUERY:
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_51_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_51_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -1696,8 +1696,8 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_57_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_57_major, minRequiredVersion_57_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_58_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_58_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_59_result := context              // Contextʳ
@@ -1732,8 +1732,8 @@ func (ϟa *GlBindBufferBase) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_61_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_61_major, minRequiredVersion_61_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_62_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_62_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -1762,8 +1762,8 @@ func (ϟa *GlBindBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		minRequiredVersion_64_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_64_major, minRequiredVersion_64_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_65_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_65_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -1802,8 +1802,8 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_69_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_69_major, minRequiredVersion_69_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_70_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_70_param
 	}
 	switch ϟa.Usage {
 	case GLenum_GL_DYNAMIC_DRAW, GLenum_GL_STATIC_DRAW, GLenum_GL_STREAM_DRAW:
@@ -1812,8 +1812,8 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_71_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_71_major, minRequiredVersion_71_minor
 	default:
-		v := ϟa.Usage
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_72_param := ϟa.Usage // GLenum
+		_ = glErrorInvalidEnum_72_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_73_result := context              // Contextʳ
@@ -1866,8 +1866,8 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_77_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_77_major, minRequiredVersion_77_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_78_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_78_param
 	}
 	ϟa.Data.Slice(uint64(GLsizeiptr(int32(0))), uint64(ϟa.Size), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(value.U32(ϟa.Target))
@@ -1894,8 +1894,8 @@ func (ϟa *GlCopyBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_80_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_80_major, minRequiredVersion_80_minor
 	default:
-		v := ϟa.ReadTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_81_param := ϟa.ReadTarget // GLenum
+		_ = glErrorInvalidEnum_81_param
 	}
 	switch ϟa.WriteTarget {
 	case GLenum_GL_ARRAY_BUFFER, GLenum_GL_COPY_READ_BUFFER, GLenum_GL_COPY_WRITE_BUFFER, GLenum_GL_ELEMENT_ARRAY_BUFFER, GLenum_GL_PIXEL_PACK_BUFFER, GLenum_GL_PIXEL_UNPACK_BUFFER, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER, GLenum_GL_UNIFORM_BUFFER:
@@ -1904,8 +1904,8 @@ func (ϟa *GlCopyBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_82_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_82_major, minRequiredVersion_82_minor
 	default:
-		v := ϟa.WriteTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_83_param := ϟa.WriteTarget // GLenum
+		_ = glErrorInvalidEnum_83_param
 	}
 	ϟb.Push(value.U32(ϟa.ReadTarget))
 	ϟb.Push(value.U32(ϟa.WriteTarget))
@@ -1979,14 +1979,14 @@ func (ϟa *GlGetBufferParameteri64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_89_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_89_major, minRequiredVersion_89_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_90_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_90_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_BUFFER_ACCESS_FLAGS, GLenum_GL_BUFFER_MAPPED, GLenum_GL_BUFFER_MAP_LENGTH, GLenum_GL_BUFFER_MAP_OFFSET, GLenum_GL_BUFFER_SIZE, GLenum_GL_BUFFER_USAGE:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_91_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_91_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2015,8 +2015,8 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_94_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_94_major, minRequiredVersion_94_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_95_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_95_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_BUFFER_SIZE, GLenum_GL_BUFFER_USAGE:
@@ -2025,8 +2025,8 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_96_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_96_major, minRequiredVersion_96_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_97_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_97_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_98_result := context              // Contextʳ
@@ -2068,14 +2068,14 @@ func (ϟa *GlGetBufferPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_100_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_100_major, minRequiredVersion_100_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_101_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_101_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_BUFFER_MAP_POINTER:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_102_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_102_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2125,8 +2125,8 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_107_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_107_major, minRequiredVersion_107_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_108_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_108_param
 	}
 	supportsBits_109_seenBits := ϟa.Access                                                                                                                                                                                                                                      // GLbitfield
 	supportsBits_109_validBits := (GLbitfield_GL_MAP_FLUSH_EXPLICIT_BIT) | ((GLbitfield_GL_MAP_INVALIDATE_BUFFER_BIT) | ((GLbitfield_GL_MAP_INVALIDATE_RANGE_BIT) | ((GLbitfield_GL_MAP_READ_BIT) | ((GLbitfield_GL_MAP_UNSYNCHRONIZED_BIT) | (GLbitfield_GL_MAP_WRITE_BIT))))) // GLbitfield
@@ -2184,8 +2184,8 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		minRequiredVersion_113_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_113_major, minRequiredVersion_113_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_114_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_114_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                    // Contextʳ
 	GetContext_115_result := context                                // Contextʳ
@@ -2220,8 +2220,8 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_117_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_117_major, minRequiredVersion_117_minor
 	default:
-		v := ϟa.DrawMode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_118_param := ϟa.DrawMode // GLenum
+		_ = glErrorInvalidEnum_118_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                    // Contextʳ
 	GetContext_119_result := context                                                // Contextʳ
@@ -2303,8 +2303,8 @@ func (ϟa *GlDrawArraysIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 		minRequiredVersion_123_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_123_major, minRequiredVersion_123_minor
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_124_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_124_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Indirect.value())
@@ -2328,8 +2328,8 @@ func (ϟa *GlDrawArraysInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_126_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_126_major, minRequiredVersion_126_minor
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_127_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_127_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
@@ -2370,8 +2370,8 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_130_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_130_major, minRequiredVersion_130_minor
 	default:
-		v := ϟa.DrawMode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_131_param := ϟa.DrawMode // GLenum
+		_ = glErrorInvalidEnum_131_param
 	}
 	switch ϟa.IndicesType {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT:
@@ -2380,8 +2380,8 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_132_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_132_major, minRequiredVersion_132_minor
 	default:
-		v := ϟa.IndicesType
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_133_param := ϟa.IndicesType // GLenum
+		_ = glErrorInvalidEnum_133_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)               // Contextʳ
 	GetContext_134_result := context                           // Contextʳ
@@ -2542,14 +2542,14 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	switch ϟa.Mode {
 	case GLenum_GL_LINES, GLenum_GL_LINES_ADJACENCY, GLenum_GL_LINE_LOOP, GLenum_GL_LINE_STRIP, GLenum_GL_LINE_STRIP_ADJACENCY, GLenum_GL_PATCHES, GLenum_GL_POINTS, GLenum_GL_TRIANGLES, GLenum_GL_TRIANGLES_ADJACENCY, GLenum_GL_TRIANGLE_FAN, GLenum_GL_TRIANGLE_STRIP, GLenum_GL_TRIANGLE_STRIP_ADJACENCY:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_141_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_141_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_142_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_142_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -2576,14 +2576,14 @@ func (ϟa *GlDrawElementsIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_144_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_144_major, minRequiredVersion_144_minor
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_145_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_145_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_146_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_146_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -2608,14 +2608,14 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_148_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_148_major, minRequiredVersion_148_minor
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_149_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_149_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_150_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_150_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -2638,14 +2638,14 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 	switch ϟa.Mode {
 	case GLenum_GL_LINES, GLenum_GL_LINES_ADJACENCY, GLenum_GL_LINE_LOOP, GLenum_GL_LINE_STRIP, GLenum_GL_LINE_STRIP_ADJACENCY, GLenum_GL_PATCHES, GLenum_GL_POINTS, GLenum_GL_TRIANGLES, GLenum_GL_TRIANGLES_ADJACENCY, GLenum_GL_TRIANGLE_FAN, GLenum_GL_TRIANGLE_STRIP, GLenum_GL_TRIANGLE_STRIP_ADJACENCY:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_152_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_152_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_153_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_153_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -2673,14 +2673,14 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_155_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_155_major, minRequiredVersion_155_minor
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_156_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_156_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_157_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_157_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -2704,14 +2704,14 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 	switch ϟa.Mode {
 	case GLenum_GL_LINES, GLenum_GL_LINES_ADJACENCY, GLenum_GL_LINE_LOOP, GLenum_GL_LINE_STRIP, GLenum_GL_LINE_STRIP_ADJACENCY, GLenum_GL_PATCHES, GLenum_GL_POINTS, GLenum_GL_TRIANGLES, GLenum_GL_TRIANGLES_ADJACENCY, GLenum_GL_TRIANGLE_FAN, GLenum_GL_TRIANGLE_STRIP, GLenum_GL_TRIANGLE_STRIP_ADJACENCY:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_159_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_159_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_160_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_160_param
 	}
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -2736,8 +2736,8 @@ func (ϟa *GlPatchParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	switch ϟa.Pname {
 	case GLenum_GL_PATCH_VERTICES:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_162_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_162_param
 	}
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -8536,8 +8536,8 @@ func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_511_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_511_major, minRequiredVersion_511_minor
 	default:
-		v := ϟa.Equation
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_512_param := ϟa.Equation // GLenum
+		_ = glErrorInvalidEnum_512_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_513_result := context             // Contextʳ
@@ -8565,8 +8565,8 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_515_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_515_major, minRequiredVersion_515_minor
 	default:
-		v := ϟa.Rgb
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_516_param := ϟa.Rgb // GLenum
+		_ = glErrorInvalidEnum_516_param
 	}
 	switch ϟa.Alpha {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT:
@@ -8575,8 +8575,8 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_517_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_517_major, minRequiredVersion_517_minor
 	default:
-		v := ϟa.Alpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_518_param := ϟa.Alpha // GLenum
+		_ = glErrorInvalidEnum_518_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_519_result := context             // Contextʳ
@@ -8601,14 +8601,14 @@ func (ϟa *GlBlendEquationSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	switch ϟa.ModeRGB {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
 	default:
-		v := ϟa.ModeRGB
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_521_param := ϟa.ModeRGB // GLenum
+		_ = glErrorInvalidEnum_521_param
 	}
 	switch ϟa.ModeAlpha {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
 	default:
-		v := ϟa.ModeAlpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_522_param := ϟa.ModeAlpha // GLenum
+		_ = glErrorInvalidEnum_522_param
 	}
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ModeRGB))
@@ -8629,8 +8629,8 @@ func (ϟa *GlBlendEquationi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	switch ϟa.Mode {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_524_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_524_param
 	}
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -8650,14 +8650,14 @@ func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.SrcFactor {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.SrcFactor
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_526_param := ϟa.SrcFactor // GLenum
+		_ = glErrorInvalidEnum_526_param
 	}
 	switch ϟa.DstFactor {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.DstFactor
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_527_param := ϟa.DstFactor // GLenum
+		_ = glErrorInvalidEnum_527_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_528_result := context             // Contextʳ
@@ -8684,26 +8684,26 @@ func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.SrcFactorRgb {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.SrcFactorRgb
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_530_param := ϟa.SrcFactorRgb // GLenum
+		_ = glErrorInvalidEnum_530_param
 	}
 	switch ϟa.DstFactorRgb {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.DstFactorRgb
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_531_param := ϟa.DstFactorRgb // GLenum
+		_ = glErrorInvalidEnum_531_param
 	}
 	switch ϟa.SrcFactorAlpha {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.SrcFactorAlpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_532_param := ϟa.SrcFactorAlpha // GLenum
+		_ = glErrorInvalidEnum_532_param
 	}
 	switch ϟa.DstFactorAlpha {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.DstFactorAlpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_533_param := ϟa.DstFactorAlpha // GLenum
+		_ = glErrorInvalidEnum_533_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_534_result := context             // Contextʳ
@@ -8732,26 +8732,26 @@ func (ϟa *GlBlendFuncSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	switch ϟa.SrcRGB {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.SrcRGB
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_536_param := ϟa.SrcRGB // GLenum
+		_ = glErrorInvalidEnum_536_param
 	}
 	switch ϟa.DstRGB {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.DstRGB
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_537_param := ϟa.DstRGB // GLenum
+		_ = glErrorInvalidEnum_537_param
 	}
 	switch ϟa.SrcAlpha {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.SrcAlpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_538_param := ϟa.SrcAlpha // GLenum
+		_ = glErrorInvalidEnum_538_param
 	}
 	switch ϟa.DstAlpha {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.DstAlpha
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_539_param := ϟa.DstAlpha // GLenum
+		_ = glErrorInvalidEnum_539_param
 	}
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcRGB))
@@ -8774,14 +8774,14 @@ func (ϟa *GlBlendFunci) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Src {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.Src
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_541_param := ϟa.Src // GLenum
+		_ = glErrorInvalidEnum_541_param
 	}
 	switch ϟa.Dst {
 	case GLenum_GL_CONSTANT_ALPHA, GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_ALPHA, GLenum_GL_DST_COLOR, GLenum_GL_ONE, GLenum_GL_ONE_MINUS_CONSTANT_ALPHA, GLenum_GL_ONE_MINUS_CONSTANT_COLOR, GLenum_GL_ONE_MINUS_DST_ALPHA, GLenum_GL_ONE_MINUS_DST_COLOR, GLenum_GL_ONE_MINUS_SRC_ALPHA, GLenum_GL_ONE_MINUS_SRC_COLOR, GLenum_GL_SRC_ALPHA, GLenum_GL_SRC_ALPHA_SATURATE, GLenum_GL_SRC_COLOR, GLenum_GL_ZERO:
 	default:
-		v := ϟa.Dst
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_542_param := ϟa.Dst // GLenum
+		_ = glErrorInvalidEnum_542_param
 	}
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Src))
@@ -8802,8 +8802,8 @@ func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Function {
 	case GLenum_GL_ALWAYS, GLenum_GL_EQUAL, GLenum_GL_GEQUAL, GLenum_GL_GREATER, GLenum_GL_LEQUAL, GLenum_GL_LESS, GLenum_GL_NEVER, GLenum_GL_NOTEQUAL:
 	default:
-		v := ϟa.Function
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_544_param := ϟa.Function // GLenum
+		_ = glErrorInvalidEnum_544_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_545_result := context             // Contextʳ
@@ -8882,8 +8882,8 @@ func (ϟa *GlStencilFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	switch ϟa.Func {
 	case GLenum_GL_ALWAYS, GLenum_GL_EQUAL, GLenum_GL_GEQUAL, GLenum_GL_GREATER, GLenum_GL_LEQUAL, GLenum_GL_LESS, GLenum_GL_NEVER, GLenum_GL_NOTEQUAL:
 	default:
-		v := ϟa.Func
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_552_param := ϟa.Func // GLenum
+		_ = glErrorInvalidEnum_552_param
 	}
 	ϟb.Push(value.U32(ϟa.Func))
 	ϟb.Push(ϟa.Ref.value(ϟb, ϟa, ϟs))
@@ -8904,14 +8904,14 @@ func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Face {
 	case GLenum_GL_BACK, GLenum_GL_FRONT, GLenum_GL_FRONT_AND_BACK:
 	default:
-		v := ϟa.Face
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_554_param := ϟa.Face // GLenum
+		_ = glErrorInvalidEnum_554_param
 	}
 	switch ϟa.Function {
 	case GLenum_GL_ALWAYS, GLenum_GL_EQUAL, GLenum_GL_GEQUAL, GLenum_GL_GREATER, GLenum_GL_LEQUAL, GLenum_GL_LESS, GLenum_GL_NEVER, GLenum_GL_NOTEQUAL:
 	default:
-		v := ϟa.Function
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_555_param := ϟa.Function // GLenum
+		_ = glErrorInvalidEnum_555_param
 	}
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Function))
@@ -8933,20 +8933,20 @@ func (ϟa *GlStencilOp) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Fail {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.Fail
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_557_param := ϟa.Fail // GLenum
+		_ = glErrorInvalidEnum_557_param
 	}
 	switch ϟa.Zfail {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.Zfail
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_558_param := ϟa.Zfail // GLenum
+		_ = glErrorInvalidEnum_558_param
 	}
 	switch ϟa.Zpass {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.Zpass
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_559_param := ϟa.Zpass // GLenum
+		_ = glErrorInvalidEnum_559_param
 	}
 	ϟb.Push(value.U32(ϟa.Fail))
 	ϟb.Push(value.U32(ϟa.Zfail))
@@ -8967,26 +8967,26 @@ func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.Face {
 	case GLenum_GL_BACK, GLenum_GL_FRONT, GLenum_GL_FRONT_AND_BACK:
 	default:
-		v := ϟa.Face
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_561_param := ϟa.Face // GLenum
+		_ = glErrorInvalidEnum_561_param
 	}
 	switch ϟa.StencilFail {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.StencilFail
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_562_param := ϟa.StencilFail // GLenum
+		_ = glErrorInvalidEnum_562_param
 	}
 	switch ϟa.StencilPassDepthFail {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.StencilPassDepthFail
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_563_param := ϟa.StencilPassDepthFail // GLenum
+		_ = glErrorInvalidEnum_563_param
 	}
 	switch ϟa.StencilPassDepthPass {
 	case GLenum_GL_DECR, GLenum_GL_DECR_WRAP, GLenum_GL_INCR, GLenum_GL_INCR_WRAP, GLenum_GL_INVERT, GLenum_GL_KEEP, GLenum_GL_REPLACE, GLenum_GL_ZERO:
 	default:
-		v := ϟa.StencilPassDepthPass
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_564_param := ϟa.StencilPassDepthPass // GLenum
+		_ = glErrorInvalidEnum_564_param
 	}
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.StencilFail))
@@ -9012,8 +9012,8 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		minRequiredVersion_566_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_566_major, minRequiredVersion_566_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_567_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_567_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_568_result := context             // Contextʳ
@@ -9049,8 +9049,8 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	switch ϟa.Target {
 	case GLenum_GL_RENDERBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_570_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_570_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_571_result := context             // Contextʳ
@@ -9089,8 +9089,8 @@ func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	switch ϟa.Filter {
 	case GLenum_GL_LINEAR, GLenum_GL_NEAREST:
 	default:
-		v := ϟa.Filter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_574_param := ϟa.Filter // GLenum
+		_ = glErrorInvalidEnum_574_param
 	}
 	ϟb.Push(ϟa.SrcX0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcY0.value(ϟb, ϟa, ϟs))
@@ -9122,8 +9122,8 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_576_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_576_major, minRequiredVersion_576_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_577_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_577_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlCheckFramebufferStatus)
@@ -9166,8 +9166,8 @@ func (ϟa *GlClearBufferfi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	switch ϟa.Buffer {
 	case GLenum_GL_DEPTH_STENCIL:
 	default:
-		v := ϟa.Buffer
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_581_param := ϟa.Buffer // GLenum
+		_ = glErrorInvalidEnum_581_param
 	}
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -9189,8 +9189,8 @@ func (ϟa *GlClearBufferfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	switch ϟa.Buffer {
 	case GLenum_GL_COLOR, GLenum_GL_DEPTH:
 	default:
-		v := ϟa.Buffer
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_583_param := ϟa.Buffer // GLenum
+		_ = glErrorInvalidEnum_583_param
 	}
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -9211,8 +9211,8 @@ func (ϟa *GlClearBufferiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	switch ϟa.Buffer {
 	case GLenum_GL_COLOR, GLenum_GL_STENCIL:
 	default:
-		v := ϟa.Buffer
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_585_param := ϟa.Buffer // GLenum
+		_ = glErrorInvalidEnum_585_param
 	}
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -9233,8 +9233,8 @@ func (ϟa *GlClearBufferuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	switch ϟa.Buffer {
 	case GLenum_GL_COLOR:
 	default:
-		v := ϟa.Buffer
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_587_param := ϟa.Buffer // GLenum
+		_ = glErrorInvalidEnum_587_param
 	}
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -9416,8 +9416,8 @@ func (ϟa *GlFramebufferParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	switch ϟa.Target {
 	case GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_FRAMEBUFFER, GLenum_GL_READ_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_604_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_604_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS, GLenum_GL_FRAMEBUFFER_DEFAULT_HEIGHT, GLenum_GL_FRAMEBUFFER_DEFAULT_SAMPLES, GLenum_GL_FRAMEBUFFER_DEFAULT_WIDTH:
@@ -9426,8 +9426,8 @@ func (ϟa *GlFramebufferParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_605_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_605_major, minRequiredVersion_605_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_606_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_606_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9452,8 +9452,8 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_608_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_608_major, minRequiredVersion_608_minor
 	default:
-		v := ϟa.FramebufferTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_609_param := ϟa.FramebufferTarget // GLenum
+		_ = glErrorInvalidEnum_609_param
 	}
 	switch ϟa.FramebufferAttachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
@@ -9462,14 +9462,14 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_610_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_610_major, minRequiredVersion_610_minor
 	default:
-		v := ϟa.FramebufferAttachment
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_611_param := ϟa.FramebufferAttachment // GLenum
+		_ = glErrorInvalidEnum_611_param
 	}
 	switch ϟa.RenderbufferTarget {
 	case GLenum_GL_RENDERBUFFER:
 	default:
-		v := ϟa.RenderbufferTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_612_param := ϟa.RenderbufferTarget // GLenum
+		_ = glErrorInvalidEnum_612_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_613_result := context             // Contextʳ
@@ -9524,14 +9524,14 @@ func (ϟa *GlFramebufferTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	switch ϟa.Target {
 	case GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_FRAMEBUFFER, GLenum_GL_READ_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_615_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_615_param
 	}
 	switch ϟa.Attachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_COLOR_ATTACHMENT1, GLenum_GL_COLOR_ATTACHMENT10, GLenum_GL_COLOR_ATTACHMENT11, GLenum_GL_COLOR_ATTACHMENT12, GLenum_GL_COLOR_ATTACHMENT13, GLenum_GL_COLOR_ATTACHMENT14, GLenum_GL_COLOR_ATTACHMENT15, GLenum_GL_COLOR_ATTACHMENT2, GLenum_GL_COLOR_ATTACHMENT3, GLenum_GL_COLOR_ATTACHMENT4, GLenum_GL_COLOR_ATTACHMENT5, GLenum_GL_COLOR_ATTACHMENT6, GLenum_GL_COLOR_ATTACHMENT7, GLenum_GL_COLOR_ATTACHMENT8, GLenum_GL_COLOR_ATTACHMENT9, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_DEPTH_STENCIL_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
 	default:
-		v := ϟa.Attachment
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_616_param := ϟa.Attachment // GLenum
+		_ = glErrorInvalidEnum_616_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -9561,8 +9561,8 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_618_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_618_major, minRequiredVersion_618_minor
 	default:
-		v := ϟa.FramebufferTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_619_param := ϟa.FramebufferTarget // GLenum
+		_ = glErrorInvalidEnum_619_param
 	}
 	switch ϟa.FramebufferAttachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
@@ -9571,8 +9571,8 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_620_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_620_major, minRequiredVersion_620_minor
 	default:
-		v := ϟa.FramebufferAttachment
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_621_param := ϟa.FramebufferAttachment // GLenum
+		_ = glErrorInvalidEnum_621_param
 	}
 	switch ϟa.TextureTarget {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
@@ -9581,8 +9581,8 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_622_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_622_major, minRequiredVersion_622_minor
 	default:
-		v := ϟa.TextureTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_623_param := ϟa.TextureTarget // GLenum
+		_ = glErrorInvalidEnum_623_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_624_result := context             // Contextʳ
@@ -9662,14 +9662,14 @@ func (ϟa *GlFramebufferTextureLayer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Target {
 	case GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_FRAMEBUFFER, GLenum_GL_READ_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_626_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_626_param
 	}
 	switch ϟa.Attachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_COLOR_ATTACHMENT1, GLenum_GL_COLOR_ATTACHMENT10, GLenum_GL_COLOR_ATTACHMENT11, GLenum_GL_COLOR_ATTACHMENT12, GLenum_GL_COLOR_ATTACHMENT13, GLenum_GL_COLOR_ATTACHMENT14, GLenum_GL_COLOR_ATTACHMENT15, GLenum_GL_COLOR_ATTACHMENT2, GLenum_GL_COLOR_ATTACHMENT3, GLenum_GL_COLOR_ATTACHMENT4, GLenum_GL_COLOR_ATTACHMENT5, GLenum_GL_COLOR_ATTACHMENT6, GLenum_GL_COLOR_ATTACHMENT7, GLenum_GL_COLOR_ATTACHMENT8, GLenum_GL_COLOR_ATTACHMENT9, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_DEPTH_STENCIL_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
 	default:
-		v := ϟa.Attachment
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_627_param := ϟa.Attachment // GLenum
+		_ = glErrorInvalidEnum_627_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -9750,8 +9750,8 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 		minRequiredVersion_633_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_633_major, minRequiredVersion_633_minor
 	default:
-		v := ϟa.FramebufferTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_634_param := ϟa.FramebufferTarget // GLenum
+		_ = glErrorInvalidEnum_634_param
 	}
 	switch ϟa.Attachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
@@ -9760,8 +9760,8 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 		minRequiredVersion_635_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_635_major, minRequiredVersion_635_minor
 	default:
-		v := ϟa.Attachment
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_636_param := ϟa.Attachment // GLenum
+		_ = glErrorInvalidEnum_636_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE, GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL:
@@ -9774,8 +9774,8 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 		minRequiredVersion_638_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_638_major, minRequiredVersion_638_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_639_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_639_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_640_result := context             // Contextʳ
@@ -9833,8 +9833,8 @@ func (ϟa *GlGetFramebufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	switch ϟa.Target {
 	case GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_FRAMEBUFFER, GLenum_GL_READ_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_642_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_642_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS, GLenum_GL_FRAMEBUFFER_DEFAULT_HEIGHT, GLenum_GL_FRAMEBUFFER_DEFAULT_SAMPLES, GLenum_GL_FRAMEBUFFER_DEFAULT_WIDTH:
@@ -9843,8 +9843,8 @@ func (ϟa *GlGetFramebufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 		minRequiredVersion_643_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_643_major, minRequiredVersion_643_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_644_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_644_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9865,8 +9865,8 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 	switch ϟa.Target {
 	case GLenum_GL_RENDERBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_646_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_646_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_RENDERBUFFER_ALPHA_SIZE, GLenum_GL_RENDERBUFFER_BLUE_SIZE, GLenum_GL_RENDERBUFFER_DEPTH_SIZE, GLenum_GL_RENDERBUFFER_GREEN_SIZE, GLenum_GL_RENDERBUFFER_HEIGHT, GLenum_GL_RENDERBUFFER_INTERNAL_FORMAT, GLenum_GL_RENDERBUFFER_RED_SIZE, GLenum_GL_RENDERBUFFER_STENCIL_SIZE, GLenum_GL_RENDERBUFFER_WIDTH:
@@ -9875,8 +9875,8 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 		minRequiredVersion_647_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_647_major, minRequiredVersion_647_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_648_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_648_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_649_result := context             // Contextʳ
@@ -9916,8 +9916,8 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	switch ϟa.Target {
 	case GLenum_GL_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_651_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_651_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -9938,8 +9938,8 @@ func (ϟa *GlInvalidateSubFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	switch ϟa.Target {
 	case GLenum_GL_FRAMEBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_653_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_653_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.NumAttachments.value(ϟb, ϟa, ϟs))
@@ -10006,8 +10006,8 @@ func (ϟa *GlReadBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Src {
 	case GLenum_GL_BACK, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_COLOR_ATTACHMENT1, GLenum_GL_COLOR_ATTACHMENT10, GLenum_GL_COLOR_ATTACHMENT11, GLenum_GL_COLOR_ATTACHMENT12, GLenum_GL_COLOR_ATTACHMENT13, GLenum_GL_COLOR_ATTACHMENT14, GLenum_GL_COLOR_ATTACHMENT15, GLenum_GL_COLOR_ATTACHMENT2, GLenum_GL_COLOR_ATTACHMENT3, GLenum_GL_COLOR_ATTACHMENT4, GLenum_GL_COLOR_ATTACHMENT5, GLenum_GL_COLOR_ATTACHMENT6, GLenum_GL_COLOR_ATTACHMENT7, GLenum_GL_COLOR_ATTACHMENT8, GLenum_GL_COLOR_ATTACHMENT9, GLenum_GL_NONE:
 	default:
-		v := ϟa.Src
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_659_param := ϟa.Src // GLenum
+		_ = glErrorInvalidEnum_659_param
 	}
 	ϟb.Push(value.U32(ϟa.Src))
 	ϟb.Call(funcInfoGlReadBuffer)
@@ -10026,8 +10026,8 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Format {
 	case GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER:
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_661_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_661_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT:
@@ -10036,8 +10036,8 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_662_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_662_major, minRequiredVersion_662_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_663_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_663_param
 	}
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -10063,14 +10063,14 @@ func (ϟa *GlReadnPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	switch ϟa.Format {
 	case GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER:
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_665_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_665_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_FLOAT, GLenum_GL_INT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_666_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_666_param
 	}
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -10096,8 +10096,8 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Target {
 	case GLenum_GL_RENDERBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_668_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_668_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGBA4, GLenum_GL_STENCIL_INDEX8:
@@ -10106,8 +10106,8 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_669_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_669_major, minRequiredVersion_669_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_670_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_670_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_671_result := context             // Contextʳ
@@ -10137,14 +10137,14 @@ func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 	switch ϟa.Target {
 	case GLenum_GL_RENDERBUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_673_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_673_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_SRGB8_ALPHA8, GLenum_GL_STENCIL_INDEX8:
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_674_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_674_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -10186,8 +10186,8 @@ func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Face {
 	case GLenum_GL_BACK, GLenum_GL_FRONT, GLenum_GL_FRONT_AND_BACK:
 	default:
-		v := ϟa.Face
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_678_param := ϟa.Face // GLenum
+		_ = glErrorInvalidEnum_678_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_679_result := context             // Contextʳ
@@ -10234,8 +10234,8 @@ func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 		minRequiredVersion_683_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_683_major, minRequiredVersion_683_minor
 	default:
-		v := ϟa.Capability
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_684_param := ϟa.Capability // GLenum
+		_ = glErrorInvalidEnum_684_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_685_result := context             // Contextʳ
@@ -10258,8 +10258,8 @@ func (ϟa *GlDisablei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	switch ϟa.Target {
 	case GLenum_GL_BLEND, GLenum_GL_CULL_FACE, GLenum_GL_DEBUG_OUTPUT, GLenum_GL_DEBUG_OUTPUT_SYNCHRONOUS, GLenum_GL_DEPTH_TEST, GLenum_GL_DITHER, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_MASK, GLenum_GL_SCISSOR_TEST, GLenum_GL_STENCIL_TEST:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_687_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_687_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -10291,8 +10291,8 @@ func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 		minRequiredVersion_691_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_691_major, minRequiredVersion_691_minor
 	default:
-		v := ϟa.Capability
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_692_param := ϟa.Capability // GLenum
+		_ = glErrorInvalidEnum_692_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_693_result := context             // Contextʳ
@@ -10315,8 +10315,8 @@ func (ϟa *GlEnablei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	switch ϟa.Target {
 	case GLenum_GL_BLEND, GLenum_GL_CULL_FACE, GLenum_GL_DEBUG_OUTPUT, GLenum_GL_DEBUG_OUTPUT_SYNCHRONOUS, GLenum_GL_DEPTH_TEST, GLenum_GL_DITHER, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_MASK, GLenum_GL_SCISSOR_TEST, GLenum_GL_STENCIL_TEST:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_695_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_695_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -10366,8 +10366,8 @@ func (ϟa *GlFlushMappedBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_699_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_699_major, minRequiredVersion_699_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_700_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_700_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Offset.value(ϟb, ϟa, ϟs))
@@ -10418,14 +10418,14 @@ func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 		minRequiredVersion_704_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_704_major, minRequiredVersion_704_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_705_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_705_param
 	}
 	switch ϟa.Mode {
 	case GLenum_GL_DONT_CARE, GLenum_GL_FASTEST, GLenum_GL_NICEST:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_706_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_706_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_707_result := context             // Contextʳ
@@ -10589,8 +10589,8 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_719_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_719_major, minRequiredVersion_719_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_720_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_720_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_721_result := context             // Contextʳ
@@ -10629,8 +10629,8 @@ func (ϟa *GlCreateShaderProgramv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_723_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_723_major, minRequiredVersion_723_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_724_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_724_param
 	}
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -10888,8 +10888,8 @@ func (ϟa *GlGetActiveUniformBlockiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.ParameterName {
 	case GLenum_GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS, GLenum_GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES, GLenum_GL_UNIFORM_BLOCK_BINDING, GLenum_GL_UNIFORM_BLOCK_DATA_SIZE, GLenum_GL_UNIFORM_BLOCK_NAME_LENGTH, GLenum_GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER, GLenum_GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER:
 	default:
-		v := ϟa.ParameterName
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_739_param := ϟa.ParameterName // GLenum
+		_ = glErrorInvalidEnum_739_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10916,8 +10916,8 @@ func (ϟa *GlGetActiveUniformsiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.ParameterName {
 	case GLenum_GL_UNIFORM_ARRAY_STRIDE, GLenum_GL_UNIFORM_BLOCK_INDEX, GLenum_GL_UNIFORM_IS_ROW_MAJOR, GLenum_GL_UNIFORM_MATRIX_STRIDE, GLenum_GL_UNIFORM_NAME_LENGTH, GLenum_GL_UNIFORM_OFFSET, GLenum_GL_UNIFORM_SIZE, GLenum_GL_UNIFORM_TYPE:
 	default:
-		v := ϟa.ParameterName
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_741_param := ϟa.ParameterName // GLenum
+		_ = glErrorInvalidEnum_741_param
 	}
 	ϟa.UniformIndices.Slice(uint64(GLsizei(int32(0))), uint64(ϟa.UniformCount), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -11093,14 +11093,14 @@ func (ϟa *GlGetProgramInterfaceiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	switch ϟa.ProgramInterface {
 	case GLenum_GL_ATOMIC_COUNTER_BUFFER, GLenum_GL_BUFFER_VARIABLE, GLenum_GL_PROGRAM_INPUT, GLenum_GL_PROGRAM_OUTPUT, GLenum_GL_SHADER_STORAGE_BLOCK, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER, GLenum_GL_TRANSFORM_FEEDBACK_VARYING, GLenum_GL_UNIFORM, GLenum_GL_UNIFORM_BLOCK:
 	default:
-		v := ϟa.ProgramInterface
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_752_param := ϟa.ProgramInterface // GLenum
+		_ = glErrorInvalidEnum_752_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_ACTIVE_RESOURCES, GLenum_GL_MAX_NAME_LENGTH, GLenum_GL_MAX_NUM_ACTIVE_VARIABLES:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_753_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_753_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11147,8 +11147,8 @@ func (ϟa *GlGetProgramPipelineiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_756_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_756_major, minRequiredVersion_756_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_757_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_757_param
 	}
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -11169,8 +11169,8 @@ func (ϟa *GlGetProgramResourceIndex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.ProgramInterface {
 	case GLenum_GL_BUFFER_VARIABLE, GLenum_GL_PROGRAM_INPUT, GLenum_GL_PROGRAM_OUTPUT, GLenum_GL_SHADER_STORAGE_BLOCK, GLenum_GL_TRANSFORM_FEEDBACK_VARYING, GLenum_GL_UNIFORM, GLenum_GL_UNIFORM_BLOCK:
 	default:
-		v := ϟa.ProgramInterface
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_759_param := ϟa.ProgramInterface // GLenum
+		_ = glErrorInvalidEnum_759_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11195,8 +11195,8 @@ func (ϟa *GlGetProgramResourceLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 	switch ϟa.ProgramInterface {
 	case GLenum_GL_PROGRAM_INPUT, GLenum_GL_PROGRAM_OUTPUT, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER, GLenum_GL_UNIFORM:
 	default:
-		v := ϟa.ProgramInterface
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_761_param := ϟa.ProgramInterface // GLenum
+		_ = glErrorInvalidEnum_761_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11221,8 +11221,8 @@ func (ϟa *GlGetProgramResourceName) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	switch ϟa.ProgramInterface {
 	case GLenum_GL_BUFFER_VARIABLE, GLenum_GL_PROGRAM_INPUT, GLenum_GL_PROGRAM_OUTPUT, GLenum_GL_SHADER_STORAGE_BLOCK, GLenum_GL_TRANSFORM_FEEDBACK_VARYING, GLenum_GL_UNIFORM, GLenum_GL_UNIFORM_BLOCK:
 	default:
-		v := ϟa.ProgramInterface
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_763_param := ϟa.ProgramInterface // GLenum
+		_ = glErrorInvalidEnum_763_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11250,8 +11250,8 @@ func (ϟa *GlGetProgramResourceiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	switch ϟa.ProgramInterface {
 	case GLenum_GL_ATOMIC_COUNTER_BUFFER, GLenum_GL_BUFFER_VARIABLE, GLenum_GL_PROGRAM_INPUT, GLenum_GL_PROGRAM_OUTPUT, GLenum_GL_SHADER_STORAGE_BLOCK, GLenum_GL_TRANSFORM_FEEDBACK_BUFFER, GLenum_GL_TRANSFORM_FEEDBACK_VARYING, GLenum_GL_UNIFORM, GLenum_GL_UNIFORM_BLOCK:
 	default:
-		v := ϟa.ProgramInterface
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_765_param := ϟa.ProgramInterface // GLenum
+		_ = glErrorInvalidEnum_765_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11293,8 +11293,8 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_769_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_769_major, minRequiredVersion_769_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_770_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_770_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11366,14 +11366,14 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	switch ϟa.ShaderType {
 	case GLenum_GL_FRAGMENT_SHADER, GLenum_GL_VERTEX_SHADER:
 	default:
-		v := ϟa.ShaderType
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_775_param := ϟa.ShaderType // GLenum
+		_ = glErrorInvalidEnum_775_param
 	}
 	switch ϟa.PrecisionType {
 	case GLenum_GL_HIGH_FLOAT, GLenum_GL_HIGH_INT, GLenum_GL_LOW_FLOAT, GLenum_GL_LOW_INT, GLenum_GL_MEDIUM_FLOAT, GLenum_GL_MEDIUM_INT:
 	default:
-		v := ϟa.PrecisionType
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_776_param := ϟa.PrecisionType // GLenum
+		_ = glErrorInvalidEnum_776_param
 	}
 	ϟb.Push(value.U32(ϟa.ShaderType))
 	ϟb.Push(value.U32(ϟa.PrecisionType))
@@ -11443,8 +11443,8 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	switch ϟa.Parameter {
 	case GLenum_GL_COMPILE_STATUS, GLenum_GL_DELETE_STATUS, GLenum_GL_INFO_LOG_LENGTH, GLenum_GL_SHADER_SOURCE_LENGTH, GLenum_GL_SHADER_TYPE:
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_781_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_781_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_782_result := context             // Contextʳ
@@ -11889,8 +11889,8 @@ func (ϟa *GlProgramBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	minRequiredVersion_802_minor := uint32(0) // u32
 	switch ϟa.BinaryFormat {
 	default:
-		v := ϟa.BinaryFormat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_803_param := ϟa.BinaryFormat // GLenum
+		_ = glErrorInvalidEnum_803_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11920,8 +11920,8 @@ func (ϟa *GlProgramParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_805_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_805_major, minRequiredVersion_805_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_806_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_806_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -12798,8 +12798,8 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	minRequiredVersion_841_minor := uint32(0) // u32
 	switch ϟa.BinaryFormat {
 	default:
-		v := ϟa.BinaryFormat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_842_param := ϟa.BinaryFormat // GLenum
+		_ = glErrorInvalidEnum_842_param
 	}
 	for i := GLsizei(GLsizei(int32(0))); i < ϟa.Count; i++ {
 	}
@@ -13824,8 +13824,8 @@ func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	switch ϟa.Mode {
 	case GLenum_GL_BACK, GLenum_GL_FRONT, GLenum_GL_FRONT_AND_BACK:
 	default:
-		v := ϟa.Mode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_905_param := ϟa.Mode // GLenum
+		_ = glErrorInvalidEnum_905_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_906_result := context             // Contextʳ
@@ -13868,8 +13868,8 @@ func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Orientation {
 	case GLenum_GL_CCW, GLenum_GL_CW:
 	default:
-		v := ϟa.Orientation
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_910_param := ϟa.Orientation // GLenum
+		_ = glErrorInvalidEnum_910_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_911_result := context             // Contextʳ
@@ -13892,8 +13892,8 @@ func (ϟa *GlGetMultisamplefv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	switch ϟa.Pname {
 	case GLenum_GL_SAMPLE_POSITION:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_913_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_913_param
 	}
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -13991,8 +13991,8 @@ func (ϟa *GlGetBooleani_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_922_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_922_major, minRequiredVersion_922_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_923_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_923_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -14025,8 +14025,8 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		minRequiredVersion_927_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_927_major, minRequiredVersion_927_minor
 	default:
-		v := ϟa.Param
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_928_param := ϟa.Param // GLenum
+		_ = glErrorInvalidEnum_928_param
 	}
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLbooleanˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
@@ -14152,8 +14152,8 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		minRequiredVersion_933_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_933_major, minRequiredVersion_933_minor
 	default:
-		v := ϟa.Param
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_934_param := ϟa.Param // GLenum
+		_ = glErrorInvalidEnum_934_param
 	}
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLfloatˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
@@ -14216,8 +14216,8 @@ func (ϟa *GlGetInteger64i_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		minRequiredVersion_938_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_938_major, minRequiredVersion_938_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_939_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_939_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -14246,8 +14246,8 @@ func (ϟa *GlGetInteger64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_942_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_942_major, minRequiredVersion_942_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_943_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_943_param
 	}
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Data.value())
@@ -14275,8 +14275,8 @@ func (ϟa *GlGetIntegeri_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_946_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_946_major, minRequiredVersion_946_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_947_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_947_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -14309,8 +14309,8 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		minRequiredVersion_951_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_951_major, minRequiredVersion_951_minor
 	default:
-		v := ϟa.Param
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_952_param := ϟa.Param // GLenum
+		_ = glErrorInvalidEnum_952_param
 	}
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLintˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
@@ -14492,8 +14492,8 @@ func (ϟa *GlGetInternalformativ) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_956_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_956_major, minRequiredVersion_956_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_957_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_957_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
@@ -14502,14 +14502,14 @@ func (ϟa *GlGetInternalformativ) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_958_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_958_major, minRequiredVersion_958_minor
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_959_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_959_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_NUM_SAMPLE_COUNTS, GLenum_GL_SAMPLES:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_960_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_960_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -14532,8 +14532,8 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Param {
 	case GLenum_GL_EXTENSIONS, GLenum_GL_RENDERER, GLenum_GL_SHADING_LANGUAGE_VERSION, GLenum_GL_VENDOR, GLenum_GL_VERSION:
 	default:
-		v := ϟa.Param
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_962_param := ϟa.Param // GLenum
+		_ = glErrorInvalidEnum_962_param
 	}
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Call(funcInfoGlGetString)
@@ -14552,8 +14552,8 @@ func (ϟa *GlGetStringi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Name {
 	case GLenum_GL_EXTENSIONS:
 	default:
-		v := ϟa.Name
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_964_param := ϟa.Name // GLenum
+		_ = glErrorInvalidEnum_964_param
 	}
 	ϟb.Push(value.U32(ϟa.Name))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -14581,8 +14581,8 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		minRequiredVersion_967_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_967_major, minRequiredVersion_967_minor
 	default:
-		v := ϟa.Capability
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_968_param := ϟa.Capability // GLenum
+		_ = glErrorInvalidEnum_968_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_969_result := context             // Contextʳ
@@ -14604,8 +14604,8 @@ func (ϟa *GlIsEnabledi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Target {
 	case GLenum_GL_BLEND, GLenum_GL_CULL_FACE, GLenum_GL_DEBUG_OUTPUT, GLenum_GL_DEBUG_OUTPUT_SYNCHRONOUS, GLenum_GL_DEPTH_TEST, GLenum_GL_DITHER, GLenum_GL_POLYGON_OFFSET_FILL, GLenum_GL_PRIMITIVE_RESTART_FIXED_INDEX, GLenum_GL_RASTERIZER_DISCARD, GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE, GLenum_GL_SAMPLE_COVERAGE, GLenum_GL_SAMPLE_MASK, GLenum_GL_SCISSOR_TEST, GLenum_GL_STENCIL_TEST:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_971_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_971_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -14667,8 +14667,8 @@ func (ϟa *GlFenceSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Condition {
 	case GLenum_GL_SYNC_GPU_COMMANDS_COMPLETE:
 	default:
-		v := ϟa.Condition
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_976_param := ϟa.Condition // GLenum
+		_ = glErrorInvalidEnum_976_param
 	}
 	ϟb.Push(value.U32(ϟa.Condition))
 	ϟb.Push(value.U32(ϟa.SyncFlags))
@@ -14697,8 +14697,8 @@ func (ϟa *GlGetSynciv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Pname {
 	case GLenum_GL_OBJECT_TYPE, GLenum_GL_SYNC_CONDITION, GLenum_GL_SYNC_FLAGS, GLenum_GL_SYNC_STATUS:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_978_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_978_param
 	}
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -14763,8 +14763,8 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	switch ϟa.Unit {
 	case GLenum_GL_TEXTURE0, GLenum_GL_TEXTURE1, GLenum_GL_TEXTURE10, GLenum_GL_TEXTURE11, GLenum_GL_TEXTURE12, GLenum_GL_TEXTURE13, GLenum_GL_TEXTURE14, GLenum_GL_TEXTURE15, GLenum_GL_TEXTURE16, GLenum_GL_TEXTURE17, GLenum_GL_TEXTURE18, GLenum_GL_TEXTURE19, GLenum_GL_TEXTURE2, GLenum_GL_TEXTURE20, GLenum_GL_TEXTURE21, GLenum_GL_TEXTURE22, GLenum_GL_TEXTURE23, GLenum_GL_TEXTURE24, GLenum_GL_TEXTURE25, GLenum_GL_TEXTURE26, GLenum_GL_TEXTURE27, GLenum_GL_TEXTURE28, GLenum_GL_TEXTURE29, GLenum_GL_TEXTURE3, GLenum_GL_TEXTURE30, GLenum_GL_TEXTURE31, GLenum_GL_TEXTURE4, GLenum_GL_TEXTURE5, GLenum_GL_TEXTURE6, GLenum_GL_TEXTURE7, GLenum_GL_TEXTURE8, GLenum_GL_TEXTURE9:
 	default:
-		v := ϟa.Unit
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_982_param := ϟa.Unit // GLenum
+		_ = glErrorInvalidEnum_982_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_983_result := context             // Contextʳ
@@ -14787,14 +14787,14 @@ func (ϟa *GlBindImageTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	switch ϟa.Access {
 	case GLenum_GL_READ_ONLY, GLenum_GL_READ_WRITE, GLenum_GL_WRITE_ONLY:
 	default:
-		v := ϟa.Access
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_985_param := ϟa.Access // GLenum
+		_ = glErrorInvalidEnum_985_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM:
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_986_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_986_param
 	}
 	ϟb.Push(ϟa.Unit.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -14850,8 +14850,8 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		minRequiredVersion_991_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_991_major, minRequiredVersion_991_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_992_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_992_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_993_result := context             // Contextʳ
@@ -14883,8 +14883,8 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_995_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_995_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
@@ -14899,8 +14899,8 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_998_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_998_major, minRequiredVersion_998_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_999_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_999_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1000_result := context                 // Contextʳ
@@ -14963,8 +14963,8 @@ func (ϟa *GlCompressedTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_1002_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1002_major, minRequiredVersion_1002_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1003_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1003_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
@@ -14973,8 +14973,8 @@ func (ϟa *GlCompressedTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		minRequiredVersion_1004_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1004_major, minRequiredVersion_1004_minor
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1005_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1005_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15001,8 +15001,8 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1007_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1007_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
@@ -15014,8 +15014,8 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_1009_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1009_major, minRequiredVersion_1009_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1010_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1010_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15046,8 +15046,8 @@ func (ϟa *GlCompressedTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_1012_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1012_major, minRequiredVersion_1012_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1013_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1013_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2:
@@ -15056,8 +15056,8 @@ func (ϟa *GlCompressedTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_1014_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1014_major, minRequiredVersion_1014_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1015_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1015_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15086,14 +15086,14 @@ func (ϟa *GlCopyImageSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	switch ϟa.SrcTarget {
 	case GLenum_GL_RENDERBUFFER, GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.SrcTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1017_param := ϟa.SrcTarget // GLenum
+		_ = glErrorInvalidEnum_1017_param
 	}
 	switch ϟa.DstTarget {
 	case GLenum_GL_RENDERBUFFER, GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.DstTarget
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1018_param := ϟa.DstTarget // GLenum
+		_ = glErrorInvalidEnum_1018_param
 	}
 	ϟb.Push(ϟa.SrcName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcTarget))
@@ -15126,8 +15126,8 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1020_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1020_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
@@ -15136,8 +15136,8 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1021_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1021_major, minRequiredVersion_1021_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1022_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1022_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15163,8 +15163,8 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1024_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1024_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15194,8 +15194,8 @@ func (ϟa *GlCopyTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1026_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1026_major, minRequiredVersion_1026_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1027_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1027_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15307,8 +15307,8 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1036_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1036_major, minRequiredVersion_1036_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1037_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1037_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlGenerateMipmap)
@@ -15327,8 +15327,8 @@ func (ϟa *GlGetSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1039_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1039_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15349,8 +15349,8 @@ func (ϟa *GlGetSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1041_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1041_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15375,8 +15375,8 @@ func (ϟa *GlGetSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_1043_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1043_major, minRequiredVersion_1043_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1044_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1044_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15401,8 +15401,8 @@ func (ϟa *GlGetSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 		minRequiredVersion_1046_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1046_major, minRequiredVersion_1046_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1047_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1047_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15427,8 +15427,8 @@ func (ϟa *GlGetTexLevelParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_1049_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1049_major, minRequiredVersion_1049_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1050_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1050_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_ALPHA_SIZE, GLenum_GL_TEXTURE_ALPHA_TYPE, GLenum_GL_TEXTURE_BLUE_SIZE, GLenum_GL_TEXTURE_BLUE_TYPE, GLenum_GL_TEXTURE_COMPRESSED, GLenum_GL_TEXTURE_DEPTH, GLenum_GL_TEXTURE_DEPTH_SIZE, GLenum_GL_TEXTURE_DEPTH_TYPE, GLenum_GL_TEXTURE_FIXED_SAMPLE_LOCATIONS, GLenum_GL_TEXTURE_GREEN_SIZE, GLenum_GL_TEXTURE_GREEN_TYPE, GLenum_GL_TEXTURE_HEIGHT, GLenum_GL_TEXTURE_INTERNAL_FORMAT, GLenum_GL_TEXTURE_RED_SIZE, GLenum_GL_TEXTURE_RED_TYPE, GLenum_GL_TEXTURE_SAMPLES, GLenum_GL_TEXTURE_SHARED_SIZE, GLenum_GL_TEXTURE_STENCIL_SIZE, GLenum_GL_TEXTURE_WIDTH:
@@ -15437,8 +15437,8 @@ func (ϟa *GlGetTexLevelParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_1051_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1051_major, minRequiredVersion_1051_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1052_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1052_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15464,8 +15464,8 @@ func (ϟa *GlGetTexLevelParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_1054_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1054_major, minRequiredVersion_1054_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1055_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1055_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_ALPHA_SIZE, GLenum_GL_TEXTURE_ALPHA_TYPE, GLenum_GL_TEXTURE_BLUE_SIZE, GLenum_GL_TEXTURE_BLUE_TYPE, GLenum_GL_TEXTURE_COMPRESSED, GLenum_GL_TEXTURE_DEPTH, GLenum_GL_TEXTURE_DEPTH_SIZE, GLenum_GL_TEXTURE_DEPTH_TYPE, GLenum_GL_TEXTURE_FIXED_SAMPLE_LOCATIONS, GLenum_GL_TEXTURE_GREEN_SIZE, GLenum_GL_TEXTURE_GREEN_TYPE, GLenum_GL_TEXTURE_HEIGHT, GLenum_GL_TEXTURE_INTERNAL_FORMAT, GLenum_GL_TEXTURE_RED_SIZE, GLenum_GL_TEXTURE_RED_TYPE, GLenum_GL_TEXTURE_SAMPLES, GLenum_GL_TEXTURE_SHARED_SIZE, GLenum_GL_TEXTURE_STENCIL_SIZE, GLenum_GL_TEXTURE_WIDTH:
@@ -15474,8 +15474,8 @@ func (ϟa *GlGetTexLevelParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 		minRequiredVersion_1056_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1056_major, minRequiredVersion_1056_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1057_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1057_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -15497,14 +15497,14 @@ func (ϟa *GlGetTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1059_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1059_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1060_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1060_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15525,14 +15525,14 @@ func (ϟa *GlGetTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1062_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1062_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_IMAGE_FORMAT_COMPATIBILITY_TYPE, GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_IMMUTABLE_FORMAT, GLenum_GL_TEXTURE_IMMUTABLE_LEVELS, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1063_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1063_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15565,8 +15565,8 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1067_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1067_major, minRequiredVersion_1067_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1068_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1068_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -15583,8 +15583,8 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1071_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1071_major, minRequiredVersion_1071_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1072_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_1072_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1073_result := context                 // Contextʳ
@@ -15649,8 +15649,8 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1077_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1077_major, minRequiredVersion_1077_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1078_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1078_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -15667,8 +15667,8 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1081_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1081_major, minRequiredVersion_1081_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1082_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_1082_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1083_result := context                 // Contextʳ
@@ -15760,8 +15760,8 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		minRequiredVersion_1088_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1088_major, minRequiredVersion_1088_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1089_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_1089_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_1090_result := context            // Contextʳ
@@ -15785,8 +15785,8 @@ func (ϟa *GlSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1092_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1092_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15807,8 +15807,8 @@ func (ϟa *GlSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1094_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1094_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15829,8 +15829,8 @@ func (ϟa *GlSamplerParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1096_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1096_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15855,8 +15855,8 @@ func (ϟa *GlSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 		minRequiredVersion_1098_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1098_major, minRequiredVersion_1098_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1099_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1099_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15877,8 +15877,8 @@ func (ϟa *GlSamplerParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1101_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1101_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15903,8 +15903,8 @@ func (ϟa *GlSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 		minRequiredVersion_1103_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1103_major, minRequiredVersion_1103_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1104_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1104_param
 	}
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15925,14 +15925,14 @@ func (ϟa *GlTexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_BUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1106_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1106_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_R16, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGBA16, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI:
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1107_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1107_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -15957,14 +15957,14 @@ func (ϟa *GlTexBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_BUFFER:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1109_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1109_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_R16, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_RG16, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGBA16, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI:
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1110_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1110_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -15991,8 +15991,8 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1112_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1112_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
@@ -16005,8 +16005,8 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_1114_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1114_major, minRequiredVersion_1114_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1115_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1115_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
@@ -16018,8 +16018,8 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_1117_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1117_major, minRequiredVersion_1117_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1118_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1118_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1119_result := context                 // Contextʳ
@@ -16091,8 +16091,8 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_1121_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1121_major, minRequiredVersion_1121_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1122_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1122_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGB, GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
@@ -16101,8 +16101,8 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		minRequiredVersion_1123_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1123_major, minRequiredVersion_1123_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1124_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1124_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_HALF_FLOAT_OES:
@@ -16110,8 +16110,8 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		_ = requiresExtension_1125_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1126_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1126_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -16139,14 +16139,14 @@ func (ϟa *GlTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1128_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1128_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1129_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1129_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -16167,14 +16167,14 @@ func (ϟa *GlTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_2D_ARRAY, GLenum_GL_TEXTURE_2D_MULTISAMPLE, GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GLenum_GL_TEXTURE_3D, GLenum_GL_TEXTURE_CUBE_MAP, GLenum_GL_TEXTURE_CUBE_MAP_ARRAY:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1131_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1131_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_DEPTH_STENCIL_TEXTURE_MODE, GLenum_GL_TEXTURE_BASE_LEVEL, GLenum_GL_TEXTURE_BORDER_COLOR, GLenum_GL_TEXTURE_COMPARE_FUNC, GLenum_GL_TEXTURE_COMPARE_MODE, GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MAX_LEVEL, GLenum_GL_TEXTURE_MAX_LOD, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_MIN_LOD, GLenum_GL_TEXTURE_SWIZZLE_A, GLenum_GL_TEXTURE_SWIZZLE_B, GLenum_GL_TEXTURE_SWIZZLE_G, GLenum_GL_TEXTURE_SWIZZLE_R, GLenum_GL_TEXTURE_WRAP_R, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1132_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1132_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -16207,8 +16207,8 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1136_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1136_major, minRequiredVersion_1136_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1137_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1137_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -16221,8 +16221,8 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1139_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1139_major, minRequiredVersion_1139_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1140_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_1140_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1141_result := context                 // Contextʳ
@@ -16284,8 +16284,8 @@ func (ϟa *GlTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1145_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1145_major, minRequiredVersion_1145_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1146_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1146_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -16302,8 +16302,8 @@ func (ϟa *GlTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1149_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1149_major, minRequiredVersion_1149_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1150_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1150_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -16336,8 +16336,8 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1154_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1154_major, minRequiredVersion_1154_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1155_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1155_param
 	}
 	switch ϟa.Parameter {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -16350,8 +16350,8 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1157_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1157_major, minRequiredVersion_1157_minor
 	default:
-		v := ϟa.Parameter
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1158_param := ϟa.Parameter // GLenum
+		_ = glErrorInvalidEnum_1158_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1159_result := context                 // Contextʳ
@@ -16413,8 +16413,8 @@ func (ϟa *GlTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1163_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1163_major, minRequiredVersion_1163_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1164_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1164_param
 	}
 	switch ϟa.Pname {
 	case GLenum_GL_TEXTURE_MAG_FILTER, GLenum_GL_TEXTURE_MIN_FILTER, GLenum_GL_TEXTURE_WRAP_S, GLenum_GL_TEXTURE_WRAP_T:
@@ -16431,8 +16431,8 @@ func (ϟa *GlTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 		minRequiredVersion_1167_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1167_major, minRequiredVersion_1167_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1168_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1168_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -16453,8 +16453,8 @@ func (ϟa *GlTexStorage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1170_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1170_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
@@ -16463,8 +16463,8 @@ func (ϟa *GlTexStorage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_1171_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1171_major, minRequiredVersion_1171_minor
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1172_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1172_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -16487,8 +16487,8 @@ func (ϟa *GlTexStorage2DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1174_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1174_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
@@ -16497,8 +16497,8 @@ func (ϟa *GlTexStorage2DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 		minRequiredVersion_1175_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1175_major, minRequiredVersion_1175_minor
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1176_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1176_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -16526,8 +16526,8 @@ func (ϟa *GlTexStorage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_1178_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1178_major, minRequiredVersion_1178_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1179_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1179_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_COMPRESSED_R11_EAC, GLenum_GL_COMPRESSED_RG11_EAC, GLenum_GL_COMPRESSED_RGB8_ETC2, GLenum_GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_COMPRESSED_RGBA8_ETC2_EAC, GLenum_GL_COMPRESSED_SIGNED_R11_EAC, GLenum_GL_COMPRESSED_SIGNED_RG11_EAC, GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GLenum_GL_COMPRESSED_SRGB8_ETC2, GLenum_GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2, GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8:
@@ -16536,8 +16536,8 @@ func (ϟa *GlTexStorage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		minRequiredVersion_1180_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1180_major, minRequiredVersion_1180_minor
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1181_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1181_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -16561,14 +16561,14 @@ func (ϟa *GlTexStorage3DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE_ARRAY:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1183_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1183_param
 	}
 	switch ϟa.Internalformat {
 	case GLenum_GL_DEPTH24_STENCIL8, GLenum_GL_DEPTH32F_STENCIL8, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_DEPTH_COMPONENT24, GLenum_GL_DEPTH_COMPONENT32F, GLenum_GL_R11F_G11F_B10F, GLenum_GL_R16F, GLenum_GL_R16I, GLenum_GL_R16UI, GLenum_GL_R32F, GLenum_GL_R32I, GLenum_GL_R32UI, GLenum_GL_R8, GLenum_GL_R8I, GLenum_GL_R8UI, GLenum_GL_R8_SNORM, GLenum_GL_RG16F, GLenum_GL_RG16I, GLenum_GL_RG16UI, GLenum_GL_RG32F, GLenum_GL_RG32I, GLenum_GL_RG32UI, GLenum_GL_RG8, GLenum_GL_RG8I, GLenum_GL_RG8UI, GLenum_GL_RG8_SNORM, GLenum_GL_RGB10_A2, GLenum_GL_RGB10_A2UI, GLenum_GL_RGB16F, GLenum_GL_RGB16I, GLenum_GL_RGB16UI, GLenum_GL_RGB32F, GLenum_GL_RGB32I, GLenum_GL_RGB32UI, GLenum_GL_RGB565, GLenum_GL_RGB5_A1, GLenum_GL_RGB8, GLenum_GL_RGB8I, GLenum_GL_RGB8UI, GLenum_GL_RGB8_SNORM, GLenum_GL_RGB9_E5, GLenum_GL_RGBA16F, GLenum_GL_RGBA16I, GLenum_GL_RGBA16UI, GLenum_GL_RGBA32F, GLenum_GL_RGBA32I, GLenum_GL_RGBA32UI, GLenum_GL_RGBA4, GLenum_GL_RGBA8, GLenum_GL_RGBA8I, GLenum_GL_RGBA8UI, GLenum_GL_RGBA8_SNORM, GLenum_GL_SRGB8, GLenum_GL_SRGB8_ALPHA8, GLenum_GL_STENCIL_INDEX8:
 	default:
-		v := ϟa.Internalformat
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1184_param := ϟa.Internalformat // GLenum
+		_ = glErrorInvalidEnum_1184_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -16593,8 +16593,8 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1186_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1186_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RGB, GLenum_GL_RGBA:
@@ -16603,8 +16603,8 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1187_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1187_major, minRequiredVersion_1187_minor
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1188_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1188_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
@@ -16616,8 +16616,8 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1190_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1190_major, minRequiredVersion_1190_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1191_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1191_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)      // Contextʳ
 	GetContext_1192_result := context                 // Contextʳ
@@ -16701,14 +16701,14 @@ func (ϟa *GlTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		minRequiredVersion_1194_minor := uint32(2) // u32
 		_, _ = minRequiredVersion_1194_major, minRequiredVersion_1194_minor
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1195_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1195_param
 	}
 	switch ϟa.Format {
 	case GLenum_GL_ALPHA, GLenum_GL_DEPTH_COMPONENT, GLenum_GL_DEPTH_STENCIL, GLenum_GL_LUMINANCE, GLenum_GL_LUMINANCE_ALPHA, GLenum_GL_RED, GLenum_GL_RED_INTEGER, GLenum_GL_RG, GLenum_GL_RGB, GLenum_GL_RGBA, GLenum_GL_RGBA_INTEGER, GLenum_GL_RGB_INTEGER, GLenum_GL_RG_INTEGER:
 	default:
-		v := ϟa.Format
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1196_param := ϟa.Format // GLenum
+		_ = glErrorInvalidEnum_1196_param
 	}
 	switch ϟa.Type {
 	case GLenum_GL_HALF_FLOAT_OES:
@@ -16716,8 +16716,8 @@ func (ϟa *GlTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		_ = requiresExtension_1197_ext
 	case GLenum_GL_BYTE, GLenum_GL_FLOAT, GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV, GLenum_GL_UNSIGNED_INT_24_8, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_INT_5_9_9_9_REV, GLenum_GL_UNSIGNED_SHORT, GLenum_GL_UNSIGNED_SHORT_4_4_4_4, GLenum_GL_UNSIGNED_SHORT_5_5_5_1, GLenum_GL_UNSIGNED_SHORT_5_6_5:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1198_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1198_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -16746,8 +16746,8 @@ func (ϟa *GlBeginTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	switch ϟa.PrimitiveMode {
 	case GLenum_GL_LINES, GLenum_GL_POINTS, GLenum_GL_TRIANGLES:
 	default:
-		v := ϟa.PrimitiveMode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1200_param := ϟa.PrimitiveMode // GLenum
+		_ = glErrorInvalidEnum_1200_param
 	}
 	ϟb.Push(value.U32(ϟa.PrimitiveMode))
 	ϟb.Call(funcInfoGlBeginTransformFeedback)
@@ -16766,8 +16766,8 @@ func (ϟa *GlBindTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	switch ϟa.Target {
 	case GLenum_GL_TRANSFORM_FEEDBACK:
 	default:
-		v := ϟa.Target
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1202_param := ϟa.Target // GLenum
+		_ = glErrorInvalidEnum_1202_param
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
@@ -16894,8 +16894,8 @@ func (ϟa *GlTransformFeedbackVaryings) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	switch ϟa.BufferMode {
 	case GLenum_GL_INTERLEAVED_ATTRIBS, GLenum_GL_SEPARATE_ATTRIBS:
 	default:
-		v := ϟa.BufferMode
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1211_param := ϟa.BufferMode // GLenum
+		_ = glErrorInvalidEnum_1211_param
 	}
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17054,8 +17054,8 @@ func (ϟa *GlGetVertexAttribIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 		minRequiredVersion_1224_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1224_major, minRequiredVersion_1224_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1225_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1225_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17080,8 +17080,8 @@ func (ϟa *GlGetVertexAttribIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_1227_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1227_major, minRequiredVersion_1227_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1228_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1228_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17102,8 +17102,8 @@ func (ϟa *GlGetVertexAttribPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	switch ϟa.Pname {
 	case GLenum_GL_VERTEX_ATTRIB_ARRAY_POINTER:
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1230_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1230_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17132,8 +17132,8 @@ func (ϟa *GlGetVertexAttribfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1233_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1233_major, minRequiredVersion_1233_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1234_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1234_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17162,8 +17162,8 @@ func (ϟa *GlGetVertexAttribiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		minRequiredVersion_1237_minor := uint32(1) // u32
 		_, _ = minRequiredVersion_1237_major, minRequiredVersion_1237_minor
 	default:
-		v := ϟa.Pname
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1238_param := ϟa.Pname // GLenum
+		_ = glErrorInvalidEnum_1238_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17362,8 +17362,8 @@ func (ϟa *GlVertexAttribFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	switch ϟa.Type {
 	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1251_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1251_param
 	}
 	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -17452,8 +17452,8 @@ func (ϟa *GlVertexAttribIFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	switch ϟa.Type {
 	case GLenum_GL_BYTE, GLenum_GL_FIXED, GLenum_GL_FLOAT, GLenum_GL_HALF_FLOAT, GLenum_GL_INT, GLenum_GL_INT_2_10_10_10_REV, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_INT_2_10_10_10_REV, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1257_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1257_param
 	}
 	ϟb.Push(ϟa.Attribindex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -17478,8 +17478,8 @@ func (ϟa *GlVertexAttribIPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		_ = requiresExtension_1259_ext
 	case GLenum_GL_BYTE, GLenum_GL_INT, GLenum_GL_SHORT, GLenum_GL_UNSIGNED_BYTE, GLenum_GL_UNSIGNED_INT, GLenum_GL_UNSIGNED_SHORT:
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1260_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1260_param
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -17509,8 +17509,8 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 		minRequiredVersion_1263_minor := uint32(0) // u32
 		_, _ = minRequiredVersion_1263_major, minRequiredVersion_1263_minor
 	default:
-		v := ϟa.Type
-		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+		glErrorInvalidEnum_1264_param := ϟa.Type // GLenum
+		_ = glErrorInvalidEnum_1264_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)    // Contextʳ
 	GetContext_1265_result := context               // Contextʳ
