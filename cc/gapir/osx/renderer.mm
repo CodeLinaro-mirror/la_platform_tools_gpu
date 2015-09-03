@@ -19,6 +19,8 @@
 
 #include <gapic/log.h>
 
+#include <string>
+
 #import <OpenGL/OpenGL.h>
 #import <AppKit/AppKit.h>
 
@@ -46,6 +48,8 @@ private:
     int mDepthSize;
     int mStencilSize;
     bool mBound;
+    std::string mExtensions;
+    bool mQueriedExtensions;
     NSWindow* mWindow;
     NSOpenGLContext* mContext;
 };
@@ -56,6 +60,7 @@ RendererImpl::RendererImpl()
         , mDepthSize(0)
         , mStencilSize(0)
         , mBound(false)
+        , mQueriedExtensions(false)
         , mWindow(nullptr)
         , mContext(nullptr) {
 
@@ -133,6 +138,7 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         NSOpenGLPFAStencilSize, (NSOpenGLPixelFormatAttribute)stencilSize,
         NSOpenGLPFAAccelerated,
         NSOpenGLPFABackingStore,
+        NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion3_2Core,
         (NSOpenGLPixelFormatAttribute)0
     };
 
@@ -166,6 +172,12 @@ void RendererImpl::bind() {
         // Initialize the graphics API
         // TODO: Inefficient - consider moving the imports into this renderer
         gfxapi::Initialize();
+
+        int major = 0;
+        int minor = 0;
+        gfxapi::glGetIntegerv(gfxapi::GLenum::GL_MAJOR_VERSION, &major);
+        gfxapi::glGetIntegerv(gfxapi::GLenum::GL_MINOR_VERSION, &minor);
+        GAPID_WARNING("Bound OpenGL %d.%d renderer", major, minor);
     }
 }
 
@@ -182,8 +194,19 @@ const char* RendererImpl::name() {
 }
 
 const char* RendererImpl::extensions() {
-    return reinterpret_cast<const char*>(
-        gfxapi::glGetString(gfxapi::GLenum::GL_EXTENSIONS));
+    if (!mQueriedExtensions) {
+        mQueriedExtensions = true;
+        int32_t n, i;
+        gfxapi::glGetIntegerv(gfxapi::GLenum::GL_NUM_EXTENSIONS, &n);
+        for (i = 0; i < n; i++) {
+            if (i > 0) {
+              mExtensions += " ";
+            }
+            mExtensions += reinterpret_cast<const char*>(
+                gfxapi::glGetStringi(gfxapi::GLenum::GL_EXTENSIONS, i));
+        }
+    }
+    return &mExtensions[0];
 }
 
 const char* RendererImpl::vendor() {
