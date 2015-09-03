@@ -31,12 +31,15 @@
 
 namespace gapic {
 
-Logger Logger::instance;
+Logger& Logger::instance() {
+    static Logger l;
+    return l;
+}
 
 void Logger::init(const char* path) {
     if (FILE* f = fopen(path, "w")) {
         GAPID_INFO("Logging to %s", path);
-        instance.mFile = f;
+        instance().mFile = f;
     } else {
         GAPID_WARNING("Can't open file for logging (%s): %s", path, strerror(errno));
     }
@@ -45,7 +48,7 @@ void Logger::init(const char* path) {
 void Logger::log(unsigned level, const char* location, const char* format, ...) {
     va_list args;
     va_start(args, format);
-    instance.logImpl(level, location, format, args);
+    instance().logImpl(level, location, format, args);
     va_end(args);
 
     if (level == LOG_LEVEL_FATAL) {
