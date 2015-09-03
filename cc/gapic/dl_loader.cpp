@@ -19,9 +19,12 @@
 #include "target.h"
 
 #if TARGET_OS == GAPID_OS_WINDOWS
-#include <windows.h>
+#   include <windows.h>
+#elif TARGET_OS == GAPID_OS_OSX
+#   include <dlfcn.h>
+#   include <unistd.h>
 #else
-#include <dlfcn.h>
+#   include <dlfcn.h>
 #endif
 
 namespace gapic {
@@ -51,7 +54,22 @@ DlLoader::DlLoader(const char* name) {
     if (name == nullptr) {
         mLibrary = nullptr;
     } else {
+#if TARGET_OS == GAPID_OS_OSX
+        // DYLD_FRAMEWORK_PATH takes precedence even with absolute paths.
+        // Use a symlink to get to the real library.
+        // Credit to apitrace (https://github.com/apitrace) for this nasty, but
+        // effective work-around.
+        // TODO: not thread-safe.
+        char tmp[] = "/tmp/dlopen.XXXXXX";
+        if (mktemp(tmp) != nullptr) {
+            if (symlink(name, tmp) == 0) {
+                mLibrary = dlopen(tmp, RTLD_NOW | RTLD_LOCAL | RTLD_FIRST);
+                remove(tmp);
+            }
+        }
+#else // TARGET_OS == GAPID_OS_OSX
         mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
+#endif // TARGET_OS == GAPID_OS_OSX
         if (mLibrary == nullptr) {
             GAPID_FATAL("Can't load library %s: %s", name, dlerror());
         }
@@ -71,4 +89,3 @@ void* DlLoader::lookup(const char* name) {
 #endif
 
 }  // namespace gapic
-
