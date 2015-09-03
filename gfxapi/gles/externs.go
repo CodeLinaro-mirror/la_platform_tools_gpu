@@ -54,16 +54,7 @@ func (e externs) unmapMemory(slice Slice) {
 }
 
 func (e externs) elSize(ty GLenum) uint64 {
-	switch ty {
-	case GLenum_GL_UNSIGNED_BYTE:
-		return 1
-	case GLenum_GL_UNSIGNED_SHORT:
-		return 2
-	case GLenum_GL_UNSIGNED_INT:
-		return 4
-	default:
-		panic(fmt.Errorf("Unsupported index type %v", ty))
-	}
+	return uint64(DataTypeSize(ty))
 }
 
 func (e externs) calcIndexLimits(data U8ᵖ, ty GLenum, offset, count uint32) builder.IndexLimits {
