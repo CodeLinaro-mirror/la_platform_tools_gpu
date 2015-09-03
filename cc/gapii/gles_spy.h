@@ -27766,15 +27766,15 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             /* case false: */(((l_pbo == (BufferId)(0)) == (false))) ? (slice(l_ctx->mInstances.mBuffers[l_pbo]->mData.begin(), (uint64_t)(data), (uint64_t)(data) + (uint64_t)(l_src_size))) :
             /* default: */ Slice<uint8_t>() /* clang-format on */;
         uint32_t l_line_bytes = imageSize((uint32_t)(width), 1, format, type);
-        observe(observations.mReads);
-        mImports.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type,
-                                 data);
         for (uint32_t l_y = 0; l_y < (uint32_t)(height); ++l_y) {
             uint32_t l_src = l_src_stride * l_y;
             uint32_t l_dst = l_dst_stride * l_y + l_dst_offset;
             copy(slice(l_image.mData, (uint64_t)(l_dst), (uint64_t)(l_dst + l_line_bytes)),
                  slice(l_src_data, (uint64_t)(l_src), (uint64_t)(l_src + l_line_bytes)));
         }
+        observe(observations.mReads);
+        mImports.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type,
+                                 data);
     } while (false);
     observe(observations.mWrites);
 

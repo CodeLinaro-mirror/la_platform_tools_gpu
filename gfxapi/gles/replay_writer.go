@@ -16670,6 +16670,12 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		}
 	}() // U8ˢ
 	line_bytes := externs{ϟa, ϟs, ϟd, ϟl, ϟb}.imageSize(uint32(ϟa.Width), uint32(1), ϟa.Format, ϟa.Type) // u32
+	for y := uint32(uint32(0)); y < uint32(ϟa.Height); y++ {
+		src := (src_stride) * (y)                  // u32
+		dst := ((dst_stride) * (y)) + (dst_offset) // u32
+		image.Data.Slice(uint64(dst), uint64((dst)+(line_bytes)), ϟs).Copy(src_data.Slice(uint64(src), uint64((src)+(line_bytes)), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = src, dst
+	}
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Xoffset.value(ϟb, ϟa, ϟs))
@@ -16681,12 +16687,6 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexSubImage2D)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	for y := uint32(uint32(0)); y < uint32(ϟa.Height); y++ {
-		src := (src_stride) * (y)                  // u32
-		dst := ((dst_stride) * (y)) + (dst_offset) // u32
-		image.Data.Slice(uint64(dst), uint64((dst)+(line_bytes)), ϟs).Copy(src_data.Slice(uint64(src), uint64((src)+(line_bytes)), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb)
-		_, _ = src, dst
-	}
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = minRequiredVersion_1185_major, minRequiredVersion_1185_minor, context, GetContext_1192_result, ctx, tu, image, pbo, url, src_width, src_stride, src_size, dst_stride, dst_offset, src_data, line_bytes
 	return nil
 }
