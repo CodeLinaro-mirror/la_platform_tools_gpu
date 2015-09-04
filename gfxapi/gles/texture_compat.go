@@ -194,7 +194,7 @@ func convertTexSubImage2D(i atom.ID, a *GlTexSubImage2D, s *gfxapi.State, d data
 
 // getSupportedUncompressedTextureFormats returns the set of supported
 // uncompressed texture formats for a given version and extension list.
-func getSupportedUncompressedTextureFormats(version Version, extensions string) map[GLenum]struct{} {
+func getSupportedUncompressedTextureFormats(version Version, extensions string) (map[GLenum]struct{}, error) {
 	s := struct{}{}
 	if version.IsES {
 		switch { // OpenGL ES
@@ -213,7 +213,7 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 				GLenum_GL_LUMINANCE_ALPHA: s,
 				GLenum_GL_LUMINANCE:       s,
 				GLenum_GL_ALPHA:           s,
-			}
+			}, nil
 
 		case version.Major >= 2:
 			return map[GLenum]struct{}{
@@ -222,7 +222,7 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 				GLenum_GL_RGBA:            s,
 				GLenum_GL_LUMINANCE:       s,
 				GLenum_GL_LUMINANCE_ALPHA: s,
-			}
+			}, nil
 		}
 	} else {
 		switch { // OpenGL
@@ -243,7 +243,7 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 				GLenum_GL_STENCIL_INDEX:   s,
 				GLenum_GL_DEPTH_COMPONENT: s,
 				GLenum_GL_DEPTH_STENCIL:   s,
-			}
+			}, nil
 
 		case version.Major == 3 && version.Minor >= 3:
 			return map[GLenum]struct{}{
@@ -255,7 +255,7 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 				GLenum_GL_BGRA:            s,
 				GLenum_GL_DEPTH_COMPONENT: s,
 				GLenum_GL_DEPTH_STENCIL:   s,
-			}
+			}, nil
 
 		case version.Major >= 2:
 			return map[GLenum]struct{}{
@@ -274,10 +274,11 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 				// HACK: Not officially supported, but is with most compatability modes.
 				// Required for depth-buffer readback. Consider removing.
 				GLenum_GL_DEPTH_STENCIL: s,
-			}
+			}, nil
 		}
 	}
-	panic(fmt.Errorf("Unexpected version %v", version))
+
+	return nil, fmt.Errorf("Unsupported version %+v", version)
 }
 
 // getSupportedCompressedTextureFormats returns the set of supported compressed

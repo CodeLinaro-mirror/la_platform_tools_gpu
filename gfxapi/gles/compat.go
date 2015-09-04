@@ -56,14 +56,19 @@ type features struct {
 	compressedTextureFormats   map[GLenum]struct{}
 }
 
-func getFeatures(version, extensions string) (features, error) {
+func getFeatures(version, extensions string, l log.Logger) (features, error) {
 	v, err := ParseVersion(version)
 	if err != nil {
 		return features{}, err
 	}
 
+	utfs, err := getSupportedUncompressedTextureFormats(*v, extensions)
+	if err != nil {
+		log.W(l, "getSupportedUncompressedTextureFormats returned error: %v", err)
+	}
+
 	f := features{
-		uncompressedTextureFormats: getSupportedUncompressedTextureFormats(*v, extensions),
+		uncompressedTextureFormats: utfs,
 		compressedTextureFormats:   getSupportedCompressedTextureFormats(extensions),
 	}
 
@@ -81,7 +86,7 @@ func getFeatures(version, extensions string) (features, error) {
 func compat(device *service.Device, d database.Database, l log.Logger) (atom.Transformer, error) {
 	l = log.Enter(l, "compat")
 
-	target, err := getFeatures(device.Version, device.Extensions)
+	target, err := getFeatures(device.Version, device.Extensions, l)
 	if err != nil {
 		return nil, fmt.Errorf(
 			"Error '%v' when getting feature list for version: '%s', extensions: '%s'.",
@@ -99,7 +104,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 				break
 			}
 
-			source, err := getFeatures(a.Version, a.Extensions)
+			source, err := getFeatures(a.Version, a.Extensions, l)
 			if err != nil {
 				log.E(l, "Error '%v' when getting feature list for version: '%s', extensions: '%s'.",
 					err, a.Version, a.Extensions)
