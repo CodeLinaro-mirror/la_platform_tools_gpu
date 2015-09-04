@@ -74,7 +74,7 @@
     {{$name := Macro "Go.CmdName" $}}
     var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
     func (ϟa *{{$name}}) {{if GetAnnotation $ "replay_custom"}}default{{end}}Replay(§
-        ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
+        ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
     ϟc := getState(ϟs)
     _ = ϟc
 

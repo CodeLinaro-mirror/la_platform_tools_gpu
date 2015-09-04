@@ -104,6 +104,13 @@ type Return struct {
 	Value    Expression  // the value to be returned
 }
 
+// Abort represents the abort statement, used to immediately terminate execution
+// of a command, usually because of an error.
+type Abort struct {
+	AST       *ast.Abort // the underlying syntax node this was built from
+	Statement Node
+}
+
 // Fence is a marker to indicate the point between all statements to be
 // executed before (pre-fence) the call to the API function and all statements
 // to be executed after (post-fence) the call to the API function.

@@ -304,6 +304,7 @@
 */}}
 {{define "Go.Statement.Default"}}
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Template "Go.Read" $.Local.Value}} {{Template "Go.TypeComment" (TypeOf $.Local)}}
+  {{else if IsAbort        $}}{{Template "Go.Abort" $}}
   {{else if IsAssert       $}}
   {{else if IsAssign       $}}{{Template "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
   {{else if IsArrayAssign  $}}{{Template "Go.ArrayAssign" $}}
@@ -320,6 +321,18 @@
   {{else if IsSwitch       $}}{{Template "Go.Switch" $}}
   {{else}}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute an abort statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Abort"}}
+  {{AssertType $ "Abort"}}
+
+  return
 {{end}}
 
 

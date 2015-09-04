@@ -67,6 +67,13 @@ type Import struct {
 
 func (t Import) Node() parse.Node { return t.CST }
 
+// Abort is the AST node that represents «abort» statement
+type Abort struct {
+	CST *parse.Branch // underlying parse branch for this node
+}
+
+func (t Abort) Node() parse.Node { return t.CST }
+
 // Fence is the AST node that represents «fence» statement
 type Fence struct {
 	CST *parse.Branch // underlying parse branch for this node
