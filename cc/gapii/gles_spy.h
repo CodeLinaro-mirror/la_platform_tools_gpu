@@ -2957,6 +2957,10 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
         uint32_t l_minRequiredVersion_39_minor = 0;
         Slice<QueryId> l_q = slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_41_msg = "No context bound";
+            break;
+        }
         std::shared_ptr<Context> l_GetContext_40_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_40_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -2985,8 +2989,8 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_41_major = 3;
-        uint32_t l_minRequiredVersion_41_minor = 0;
+        uint32_t l_minRequiredVersion_42_major = 3;
+        uint32_t l_minRequiredVersion_42_minor = 0;
         switch (target) {
             case GLenum::GL_ANY_SAMPLES_PASSED:               // fall-through...
             case GLenum::GL_ANY_SAMPLES_PASSED_CONSERVATIVE:  // fall-through...
@@ -2994,8 +2998,8 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
                 break;
             }
             case GLenum::GL_PRIMITIVES_GENERATED: {
-                uint32_t l_minRequiredVersion_42_major = 3;
-                uint32_t l_minRequiredVersion_42_minor = 2;
+                uint32_t l_minRequiredVersion_43_major = 3;
+                uint32_t l_minRequiredVersion_43_minor = 2;
                 break;
             }
         }
@@ -3020,12 +3024,16 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_44_major = 3;
-        uint32_t l_minRequiredVersion_44_minor = 0;
+        uint32_t l_minRequiredVersion_45_major = 3;
+        uint32_t l_minRequiredVersion_45_minor = 0;
         Slice<QueryId> l_q = slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_45_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_47_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_46_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
         observe(observations.mReads);
         mImports.glGenQueries(count, queries);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -3057,8 +3065,8 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_46_major = 3;
-        uint32_t l_minRequiredVersion_46_minor = 0;
+        uint32_t l_minRequiredVersion_48_major = 3;
+        uint32_t l_minRequiredVersion_48_minor = 0;
         switch (parameter) {
             case GLenum::GL_QUERY_RESULT:  // fall-through...
             case GLenum::GL_QUERY_RESULT_AVAILABLE: {
@@ -3090,8 +3098,8 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_48_major = 3;
-        uint32_t l_minRequiredVersion_48_minor = 0;
+        uint32_t l_minRequiredVersion_50_major = 3;
+        uint32_t l_minRequiredVersion_50_minor = 0;
         switch (target) {
             case GLenum::GL_ANY_SAMPLES_PASSED:               // fall-through...
             case GLenum::GL_ANY_SAMPLES_PASSED_CONSERVATIVE:  // fall-through...
@@ -3099,8 +3107,8 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
                 break;
             }
             case GLenum::GL_PRIMITIVES_GENERATED: {
-                uint32_t l_minRequiredVersion_49_major = 3;
-                uint32_t l_minRequiredVersion_49_minor = 2;
+                uint32_t l_minRequiredVersion_51_major = 3;
+                uint32_t l_minRequiredVersion_51_minor = 2;
                 break;
             }
         }
@@ -3136,11 +3144,15 @@ inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_52_major = 3;
-        uint32_t l_minRequiredVersion_52_minor = 0;
+        uint32_t l_minRequiredVersion_54_major = 3;
+        uint32_t l_minRequiredVersion_54_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_53_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_53_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_56_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_55_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_55_result;
         observe(observations.mReads);
         result = mImports.glIsQuery(query);
         break;
@@ -3165,8 +3177,8 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_54_major = 2;
-        uint32_t l_minRequiredVersion_54_minor = 0;
+        uint32_t l_minRequiredVersion_57_major = 2;
+        uint32_t l_minRequiredVersion_57_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:  // fall-through...
             case GLenum::GL_ELEMENT_ARRAY_BUFFER: {
@@ -3178,27 +3190,31 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
             case GLenum::GL_PIXEL_UNPACK_BUFFER:        // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
-                uint32_t l_minRequiredVersion_55_major = 3;
-                uint32_t l_minRequiredVersion_55_minor = 0;
+                uint32_t l_minRequiredVersion_58_major = 3;
+                uint32_t l_minRequiredVersion_58_minor = 0;
                 break;
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:     // fall-through...
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER:  // fall-through...
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_56_major = 3;
-                uint32_t l_minRequiredVersion_56_minor = 1;
+                uint32_t l_minRequiredVersion_59_major = 3;
+                uint32_t l_minRequiredVersion_59_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_57_major = 3;
-                uint32_t l_minRequiredVersion_57_minor = 2;
+                uint32_t l_minRequiredVersion_60_major = 3;
+                uint32_t l_minRequiredVersion_60_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_59_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_59_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_63_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_62_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_62_result;
         if (!(l_ctx->mInstances.mBuffers.count(buffer) > 0)) {
             l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>(
                     new Buffer(Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0,
@@ -3226,8 +3242,8 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_60_major = 3;
-        uint32_t l_minRequiredVersion_60_minor = 0;
+        uint32_t l_minRequiredVersion_64_major = 3;
+        uint32_t l_minRequiredVersion_64_minor = 0;
         switch (target) {
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
@@ -3235,8 +3251,8 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:  // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_61_major = 3;
-                uint32_t l_minRequiredVersion_61_minor = 1;
+                uint32_t l_minRequiredVersion_65_major = 3;
+                uint32_t l_minRequiredVersion_65_minor = 1;
                 break;
             }
         }
@@ -3263,8 +3279,8 @@ inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_63_major = 3;
-        uint32_t l_minRequiredVersion_63_minor = 0;
+        uint32_t l_minRequiredVersion_67_major = 3;
+        uint32_t l_minRequiredVersion_67_minor = 0;
         switch (target) {
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
@@ -3272,8 +3288,8 @@ inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:  // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_64_major = 3;
-                uint32_t l_minRequiredVersion_64_minor = 1;
+                uint32_t l_minRequiredVersion_68_major = 3;
+                uint32_t l_minRequiredVersion_68_minor = 1;
                 break;
             }
         }
@@ -3298,8 +3314,8 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_66_major = 2;
-        uint32_t l_minRequiredVersion_66_minor = 0;
+        uint32_t l_minRequiredVersion_70_major = 2;
+        uint32_t l_minRequiredVersion_70_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:  // fall-through...
             case GLenum::GL_ELEMENT_ARRAY_BUFFER: {
@@ -3311,21 +3327,21 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
             case GLenum::GL_PIXEL_UNPACK_BUFFER:        // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
-                uint32_t l_minRequiredVersion_67_major = 3;
-                uint32_t l_minRequiredVersion_67_minor = 0;
+                uint32_t l_minRequiredVersion_71_major = 3;
+                uint32_t l_minRequiredVersion_71_minor = 0;
                 break;
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:     // fall-through...
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER:  // fall-through...
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_68_major = 3;
-                uint32_t l_minRequiredVersion_68_minor = 1;
+                uint32_t l_minRequiredVersion_72_major = 3;
+                uint32_t l_minRequiredVersion_72_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_69_major = 3;
-                uint32_t l_minRequiredVersion_69_minor = 2;
+                uint32_t l_minRequiredVersion_73_major = 3;
+                uint32_t l_minRequiredVersion_73_minor = 2;
                 break;
             }
         }
@@ -3341,14 +3357,18 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
             case GLenum::GL_STATIC_READ:   // fall-through...
             case GLenum::GL_STREAM_COPY:   // fall-through...
             case GLenum::GL_STREAM_READ: {
-                uint32_t l_minRequiredVersion_71_major = 3;
-                uint32_t l_minRequiredVersion_71_minor = 0;
+                uint32_t l_minRequiredVersion_75_major = 3;
+                uint32_t l_minRequiredVersion_75_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_73_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_73_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_78_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_77_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_77_result;
         BufferId l_id = l_ctx->mBoundBuffers[target];
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
         l_b->mData = /* clang-format off */
@@ -3383,8 +3403,8 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_74_major = 2;
-        uint32_t l_minRequiredVersion_74_minor = 0;
+        uint32_t l_minRequiredVersion_79_major = 2;
+        uint32_t l_minRequiredVersion_79_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:  // fall-through...
             case GLenum::GL_ELEMENT_ARRAY_BUFFER: {
@@ -3396,21 +3416,21 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
             case GLenum::GL_PIXEL_UNPACK_BUFFER:        // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
-                uint32_t l_minRequiredVersion_75_major = 3;
-                uint32_t l_minRequiredVersion_75_minor = 0;
+                uint32_t l_minRequiredVersion_80_major = 3;
+                uint32_t l_minRequiredVersion_80_minor = 0;
                 break;
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:     // fall-through...
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER:  // fall-through...
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_76_major = 3;
-                uint32_t l_minRequiredVersion_76_minor = 1;
+                uint32_t l_minRequiredVersion_81_major = 3;
+                uint32_t l_minRequiredVersion_81_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_77_major = 3;
-                uint32_t l_minRequiredVersion_77_minor = 2;
+                uint32_t l_minRequiredVersion_82_major = 3;
+                uint32_t l_minRequiredVersion_82_minor = 2;
                 break;
             }
         }
@@ -3443,8 +3463,8 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_79_major = 3;
-        uint32_t l_minRequiredVersion_79_minor = 0;
+        uint32_t l_minRequiredVersion_84_major = 3;
+        uint32_t l_minRequiredVersion_84_minor = 0;
         switch (readTarget) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -3461,8 +3481,8 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_80_major = 3;
-                uint32_t l_minRequiredVersion_80_minor = 2;
+                uint32_t l_minRequiredVersion_85_major = 3;
+                uint32_t l_minRequiredVersion_85_minor = 2;
                 break;
             }
         }
@@ -3482,8 +3502,8 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_82_major = 3;
-                uint32_t l_minRequiredVersion_82_minor = 2;
+                uint32_t l_minRequiredVersion_87_major = 3;
+                uint32_t l_minRequiredVersion_87_minor = 2;
                 break;
             }
         }
@@ -3509,12 +3529,16 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_84_major = 2;
-        uint32_t l_minRequiredVersion_84_minor = 0;
+        uint32_t l_minRequiredVersion_89_major = 2;
+        uint32_t l_minRequiredVersion_89_minor = 0;
         Slice<BufferId> l_b = slice(buffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_85_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_85_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_91_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_90_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_90_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mBuffers[read(l_b, (uint64_t)(l_i))] = std::shared_ptr<Buffer>();
         }
@@ -3541,12 +3565,16 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_86_major = 2;
-        uint32_t l_minRequiredVersion_86_minor = 0;
+        uint32_t l_minRequiredVersion_92_major = 2;
+        uint32_t l_minRequiredVersion_92_minor = 0;
         Slice<BufferId> l_b = slice(buffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_87_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_87_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_94_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_93_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_93_result;
         observe(observations.mReads);
         mImports.glGenBuffers(count, buffers);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -3580,8 +3608,8 @@ inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_88_major = 3;
-        uint32_t l_minRequiredVersion_88_minor = 0;
+        uint32_t l_minRequiredVersion_95_major = 3;
+        uint32_t l_minRequiredVersion_95_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -3598,8 +3626,8 @@ inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, i
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_89_major = 3;
-                uint32_t l_minRequiredVersion_89_minor = 2;
+                uint32_t l_minRequiredVersion_96_major = 3;
+                uint32_t l_minRequiredVersion_96_minor = 2;
                 break;
             }
         }
@@ -3639,8 +3667,8 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_92_major = 2;
-        uint32_t l_minRequiredVersion_92_minor = 0;
+        uint32_t l_minRequiredVersion_99_major = 2;
+        uint32_t l_minRequiredVersion_99_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:  // fall-through...
             case GLenum::GL_ELEMENT_ARRAY_BUFFER: {
@@ -3652,8 +3680,8 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
             case GLenum::GL_PIXEL_UNPACK_BUFFER:        // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER:  // fall-through...
             case GLenum::GL_UNIFORM_BUFFER: {
-                uint32_t l_minRequiredVersion_93_major = 3;
-                uint32_t l_minRequiredVersion_93_minor = 0;
+                uint32_t l_minRequiredVersion_100_major = 3;
+                uint32_t l_minRequiredVersion_100_minor = 0;
                 break;
             }
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:     // fall-through...
@@ -3661,8 +3689,8 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_94_major = 3;
-                uint32_t l_minRequiredVersion_94_minor = 2;
+                uint32_t l_minRequiredVersion_101_major = 3;
+                uint32_t l_minRequiredVersion_101_minor = 2;
                 break;
             }
         }
@@ -3675,14 +3703,18 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
             case GLenum::GL_BUFFER_MAPPED:        // fall-through...
             case GLenum::GL_BUFFER_MAP_LENGTH:    // fall-through...
             case GLenum::GL_BUFFER_MAP_OFFSET: {
-                uint32_t l_minRequiredVersion_96_major = 3;
-                uint32_t l_minRequiredVersion_96_minor = 0;
+                uint32_t l_minRequiredVersion_103_major = 3;
+                uint32_t l_minRequiredVersion_103_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_98_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_98_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_106_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_105_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_105_result;
         BufferId l_id = l_ctx->mBoundBuffers[target];
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
         observe(observations.mReads);
@@ -3716,8 +3748,8 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_99_major = 3;
-        uint32_t l_minRequiredVersion_99_minor = 0;
+        uint32_t l_minRequiredVersion_107_major = 3;
+        uint32_t l_minRequiredVersion_107_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -3734,8 +3766,8 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_100_major = 3;
-                uint32_t l_minRequiredVersion_100_minor = 2;
+                uint32_t l_minRequiredVersion_108_major = 3;
+                uint32_t l_minRequiredVersion_108_minor = 2;
                 break;
             }
         }
@@ -3770,11 +3802,15 @@ inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_103_major = 2;
-        uint32_t l_minRequiredVersion_103_minor = 0;
+        uint32_t l_minRequiredVersion_111_major = 2;
+        uint32_t l_minRequiredVersion_111_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_104_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_104_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_113_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_112_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_112_result;
         observe(observations.mReads);
         result = mImports.glIsBuffer(buffer);
         break;
@@ -3803,8 +3839,8 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_105_major = 3;
-        uint32_t l_minRequiredVersion_105_minor = 0;
+        uint32_t l_minRequiredVersion_114_major = 3;
+        uint32_t l_minRequiredVersion_114_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -3820,18 +3856,18 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER:  // fall-through...
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_106_major = 3;
-                uint32_t l_minRequiredVersion_106_minor = 1;
+                uint32_t l_minRequiredVersion_115_major = 3;
+                uint32_t l_minRequiredVersion_115_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_107_major = 3;
-                uint32_t l_minRequiredVersion_107_minor = 2;
+                uint32_t l_minRequiredVersion_116_major = 3;
+                uint32_t l_minRequiredVersion_116_minor = 2;
                 break;
             }
         }
-        uint32_t l_supportsBits_109_seenBits = access;
-        uint32_t l_supportsBits_109_validBits =
+        uint32_t l_supportsBits_118_seenBits = access;
+        uint32_t l_supportsBits_118_validBits =
                 GLbitfield::GL_MAP_FLUSH_EXPLICIT_BIT | GLbitfield::GL_MAP_INVALIDATE_BUFFER_BIT |
                 GLbitfield::GL_MAP_INVALIDATE_RANGE_BIT | GLbitfield::GL_MAP_READ_BIT |
                 GLbitfield::GL_MAP_UNSYNCHRONIZED_BIT | GLbitfield::GL_MAP_WRITE_BIT;
@@ -3848,8 +3884,12 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
         if ((access & GLbitfield::GL_MAP_WRITE_BIT) != 0) {
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_110_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_110_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_120_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_119_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_119_result;
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_ctx->mBoundBuffers[target]];
         observe(observations.mReads);
         result = mImports.glMapBufferRange(target, offset, length, access);
@@ -3890,8 +3930,8 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_111_major = 3;
-        uint32_t l_minRequiredVersion_111_minor = 0;
+        uint32_t l_minRequiredVersion_121_major = 3;
+        uint32_t l_minRequiredVersion_121_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -3907,19 +3947,23 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER:  // fall-through...
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER: {
-                uint32_t l_minRequiredVersion_112_major = 3;
-                uint32_t l_minRequiredVersion_112_minor = 1;
+                uint32_t l_minRequiredVersion_122_major = 3;
+                uint32_t l_minRequiredVersion_122_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_113_major = 3;
-                uint32_t l_minRequiredVersion_113_minor = 2;
+                uint32_t l_minRequiredVersion_123_major = 3;
+                uint32_t l_minRequiredVersion_123_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_115_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_115_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_126_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_125_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_125_result;
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_ctx->mBoundBuffers[target]];
         Slice<uint8_t> copy__dst__ =
                 copy(slice(l_b->mData, (uint64_t)(l_b->mMappingOffset),
@@ -3953,8 +3997,8 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_116_major = 2;
-        uint32_t l_minRequiredVersion_116_minor = 0;
+        uint32_t l_minRequiredVersion_127_major = 2;
+        uint32_t l_minRequiredVersion_127_minor = 0;
         switch (draw_mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -3970,43 +4014,47 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_117_major = 3;
-                uint32_t l_minRequiredVersion_117_minor = 2;
+                uint32_t l_minRequiredVersion_128_major = 3;
+                uint32_t l_minRequiredVersion_128_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_119_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_119_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_131_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_130_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
         uint32_t l_last_index = (uint32_t)(first_index) + (uint32_t)(index_count)-1;
-        std::shared_ptr<Context> l_ReadVertexArrays_120_ctx = l_ctx;
-        uint32_t l_ReadVertexArrays_120_first_index = (uint32_t)(first_index);
-        uint32_t l_ReadVertexArrays_120_last_index = l_last_index;
+        std::shared_ptr<Context> l_ReadVertexArrays_132_ctx = l_ctx;
+        uint32_t l_ReadVertexArrays_132_first_index = (uint32_t)(first_index);
+        uint32_t l_ReadVertexArrays_132_last_index = l_last_index;
         for (int32_t l_i = 0;
-             l_i < int32_t((l_ReadVertexArrays_120_ctx->mVertexAttributeArrays.size())); ++l_i) {
+             l_i < int32_t((l_ReadVertexArrays_132_ctx->mVertexAttributeArrays.size())); ++l_i) {
             std::shared_ptr<VertexAttributeArray> l_arr =
-                    l_ReadVertexArrays_120_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
+                    l_ReadVertexArrays_132_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
             if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                uint32_t l_vertexAttribTypeSize_121_t = l_arr->mType;
-                uint32_t l_vertexAttribTypeSize_121_result = /* clang-format off */
-                /* switch(l_vertexAttribTypeSize_121_t) */
-                    /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_BYTE))) ? (1) :
-                    /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
-                    /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_SHORT))) ? (2) :
-                    /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
-                    /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_FIXED))) ? (4) :
-                    /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_FLOAT))) ? (4) :
-                    /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
-                    /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
+                uint32_t l_vertexAttribTypeSize_133_t = l_arr->mType;
+                uint32_t l_vertexAttribTypeSize_133_result = /* clang-format off */
+                /* switch(l_vertexAttribTypeSize_133_t) */
+                    /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_BYTE))) ? (1) :
+                    /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                    /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_SHORT))) ? (2) :
+                    /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                    /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_FIXED))) ? (4) :
+                    /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_FLOAT))) ? (4) :
+                    /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                    /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_133_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                     /* default: */ 0 /* clang-format on */;
-                uint32_t l_elsize = l_vertexAttribTypeSize_121_result * l_arr->mSize;
+                uint32_t l_elsize = l_vertexAttribTypeSize_133_result * l_arr->mSize;
                 uint32_t l_elstride = /* clang-format off */
                 /* switch(l_arr->mStride == (GLsizei)(0)) */
                     /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_elsize) :
                     /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                     /* default: */ 0 /* clang-format on */;
-                for (uint32_t l_v = l_ReadVertexArrays_120_first_index;
-                     l_v < l_ReadVertexArrays_120_last_index + 1; ++l_v) {
+                for (uint32_t l_v = l_ReadVertexArrays_132_first_index;
+                     l_v < l_ReadVertexArrays_132_last_index + 1; ++l_v) {
                     uint32_t l_offset = l_elstride * l_v;
                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                (uint64_t)(l_offset + l_elsize)));
@@ -4036,8 +4084,8 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_122_major = 3;
-        uint32_t l_minRequiredVersion_122_minor = 1;
+        uint32_t l_minRequiredVersion_134_major = 3;
+        uint32_t l_minRequiredVersion_134_minor = 1;
         switch (mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4053,8 +4101,8 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_123_major = 3;
-                uint32_t l_minRequiredVersion_123_minor = 2;
+                uint32_t l_minRequiredVersion_135_major = 3;
+                uint32_t l_minRequiredVersion_135_minor = 2;
                 break;
             }
         }
@@ -4085,8 +4133,8 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_125_major = 3;
-        uint32_t l_minRequiredVersion_125_minor = 0;
+        uint32_t l_minRequiredVersion_137_major = 3;
+        uint32_t l_minRequiredVersion_137_minor = 0;
         switch (mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4102,8 +4150,8 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_126_major = 3;
-                uint32_t l_minRequiredVersion_126_minor = 2;
+                uint32_t l_minRequiredVersion_138_major = 3;
+                uint32_t l_minRequiredVersion_138_minor = 2;
                 break;
             }
         }
@@ -4129,8 +4177,8 @@ inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_128_major = 3;
-        uint32_t l_minRequiredVersion_128_minor = 0;
+        uint32_t l_minRequiredVersion_140_major = 3;
+        uint32_t l_minRequiredVersion_140_minor = 0;
         observe(observations.mReads);
         mImports.glDrawBuffers(n, bufs);
     } while (false);
@@ -4156,8 +4204,8 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_129_major = 2;
-        uint32_t l_minRequiredVersion_129_minor = 0;
+        uint32_t l_minRequiredVersion_141_major = 2;
+        uint32_t l_minRequiredVersion_141_minor = 0;
         switch (draw_mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4173,8 +4221,8 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_130_major = 3;
-                uint32_t l_minRequiredVersion_130_minor = 2;
+                uint32_t l_minRequiredVersion_142_major = 3;
+                uint32_t l_minRequiredVersion_142_minor = 2;
                 break;
             }
         }
@@ -4184,14 +4232,18 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                 break;
             }
             case GLenum::GL_UNSIGNED_INT: {
-                uint32_t l_minRequiredVersion_132_major = 3;
-                uint32_t l_minRequiredVersion_132_minor = 0;
+                uint32_t l_minRequiredVersion_144_major = 3;
+                uint32_t l_minRequiredVersion_144_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_134_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_134_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_147_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_146_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_146_result;
         uint32_t l_count = (uint32_t)(element_count);
         BufferId l_id = l_ctx->mBoundBuffers[GLenum::GL_ELEMENT_ARRAY_BUFFER];
         if (l_id != (BufferId)(0)) {
@@ -4199,36 +4251,36 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             uint32_t l_offset = (uint32_t)((uint64_t)(indices));
             uint32_t l_first = minIndex(l_index_data.begin(), indices_type, l_offset, l_count);
             uint32_t l_last = maxIndex(l_index_data.begin(), indices_type, l_offset, l_count);
-            std::shared_ptr<Context> l_ReadVertexArrays_135_ctx = l_ctx;
-            uint32_t l_ReadVertexArrays_135_first_index = l_first;
-            uint32_t l_ReadVertexArrays_135_last_index = l_last;
+            std::shared_ptr<Context> l_ReadVertexArrays_148_ctx = l_ctx;
+            uint32_t l_ReadVertexArrays_148_first_index = l_first;
+            uint32_t l_ReadVertexArrays_148_last_index = l_last;
             for (int32_t l_i = 0;
-                 l_i < int32_t((l_ReadVertexArrays_135_ctx->mVertexAttributeArrays.size()));
+                 l_i < int32_t((l_ReadVertexArrays_148_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
-                        l_ReadVertexArrays_135_ctx
+                        l_ReadVertexArrays_148_ctx
                                 ->mVertexAttributeArrays[(AttributeLocation)(l_i)];
                 if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                    uint32_t l_vertexAttribTypeSize_136_t = l_arr->mType;
-                    uint32_t l_vertexAttribTypeSize_136_result = /* clang-format off */
-                    /* switch(l_vertexAttribTypeSize_136_t) */
-                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_BYTE))) ? (1) :
-                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_SHORT))) ? (2) :
-                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_FIXED))) ? (4) :
-                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_FLOAT))) ? (4) :
-                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
-                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_136_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
+                    uint32_t l_vertexAttribTypeSize_149_t = l_arr->mType;
+                    uint32_t l_vertexAttribTypeSize_149_result = /* clang-format off */
+                    /* switch(l_vertexAttribTypeSize_149_t) */
+                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_BYTE))) ? (1) :
+                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_SHORT))) ? (2) :
+                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_FIXED))) ? (4) :
+                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_FLOAT))) ? (4) :
+                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_149_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
-                    uint32_t l_elsize = l_vertexAttribTypeSize_136_result * l_arr->mSize;
+                    uint32_t l_elsize = l_vertexAttribTypeSize_149_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
                     /* switch(l_arr->mStride == (GLsizei)(0)) */
                         /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_elsize) :
                         /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                         /* default: */ 0 /* clang-format on */;
-                    for (uint32_t l_v = l_ReadVertexArrays_135_first_index;
-                         l_v < l_ReadVertexArrays_135_last_index + 1; ++l_v) {
+                    for (uint32_t l_v = l_ReadVertexArrays_148_first_index;
+                         l_v < l_ReadVertexArrays_148_last_index + 1; ++l_v) {
                         uint32_t l_offset = l_elstride * l_v;
                         read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                    (uint64_t)(l_offset + l_elsize)));
@@ -4239,51 +4291,51 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             uint8_t* l_index_data = (uint8_t*)(indices);
             uint32_t l_first = minIndex(l_index_data, indices_type, 0, l_count);
             uint32_t l_last = maxIndex(l_index_data, indices_type, 0, l_count);
-            std::shared_ptr<Context> l_ReadVertexArrays_137_ctx = l_ctx;
-            uint32_t l_ReadVertexArrays_137_first_index = l_first;
-            uint32_t l_ReadVertexArrays_137_last_index = l_last;
+            std::shared_ptr<Context> l_ReadVertexArrays_150_ctx = l_ctx;
+            uint32_t l_ReadVertexArrays_150_first_index = l_first;
+            uint32_t l_ReadVertexArrays_150_last_index = l_last;
             for (int32_t l_i = 0;
-                 l_i < int32_t((l_ReadVertexArrays_137_ctx->mVertexAttributeArrays.size()));
+                 l_i < int32_t((l_ReadVertexArrays_150_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
-                        l_ReadVertexArrays_137_ctx
+                        l_ReadVertexArrays_150_ctx
                                 ->mVertexAttributeArrays[(AttributeLocation)(l_i)];
                 if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                    uint32_t l_vertexAttribTypeSize_138_t = l_arr->mType;
-                    uint32_t l_vertexAttribTypeSize_138_result = /* clang-format off */
-                    /* switch(l_vertexAttribTypeSize_138_t) */
-                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_BYTE))) ? (1) :
-                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_SHORT))) ? (2) :
-                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_FIXED))) ? (4) :
-                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_FLOAT))) ? (4) :
-                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
-                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_138_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
+                    uint32_t l_vertexAttribTypeSize_151_t = l_arr->mType;
+                    uint32_t l_vertexAttribTypeSize_151_result = /* clang-format off */
+                    /* switch(l_vertexAttribTypeSize_151_t) */
+                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_BYTE))) ? (1) :
+                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_SHORT))) ? (2) :
+                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_FIXED))) ? (4) :
+                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_FLOAT))) ? (4) :
+                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_151_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
-                    uint32_t l_elsize = l_vertexAttribTypeSize_138_result * l_arr->mSize;
+                    uint32_t l_elsize = l_vertexAttribTypeSize_151_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
                     /* switch(l_arr->mStride == (GLsizei)(0)) */
                         /* case true: */(((l_arr->mStride == (GLsizei)(0)) == (true))) ? (l_elsize) :
                         /* case false: */(((l_arr->mStride == (GLsizei)(0)) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                         /* default: */ 0 /* clang-format on */;
-                    for (uint32_t l_v = l_ReadVertexArrays_137_first_index;
-                         l_v < l_ReadVertexArrays_137_last_index + 1; ++l_v) {
+                    for (uint32_t l_v = l_ReadVertexArrays_150_first_index;
+                         l_v < l_ReadVertexArrays_150_last_index + 1; ++l_v) {
                         uint32_t l_offset = l_elstride * l_v;
                         read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                    (uint64_t)(l_offset + l_elsize)));
                     }
                 }
             }
-            uint32_t l_IndexSize_139_indices_type = indices_type;
-            uint32_t l_IndexSize_139_result = /* clang-format off */
-            /* switch(l_IndexSize_139_indices_type) */
-                /* case GLenum::GL_UNSIGNED_BYTE: */(((l_IndexSize_139_indices_type) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
-                /* case GLenum::GL_UNSIGNED_SHORT: */(((l_IndexSize_139_indices_type) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
-                /* case GLenum::GL_UNSIGNED_INT: */(((l_IndexSize_139_indices_type) == (GLenum::GL_UNSIGNED_INT))) ? (4) :
+            uint32_t l_IndexSize_152_indices_type = indices_type;
+            uint32_t l_IndexSize_152_result = /* clang-format off */
+            /* switch(l_IndexSize_152_indices_type) */
+                /* case GLenum::GL_UNSIGNED_BYTE: */(((l_IndexSize_152_indices_type) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case GLenum::GL_UNSIGNED_SHORT: */(((l_IndexSize_152_indices_type) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case GLenum::GL_UNSIGNED_INT: */(((l_IndexSize_152_indices_type) == (GLenum::GL_UNSIGNED_INT))) ? (4) :
                 /* default: */ 0 /* clang-format on */;
             read(slice(l_index_data, (uint64_t)(0),
-                       (uint64_t)((uint32_t)(element_count)*l_IndexSize_139_result)));
+                       (uint64_t)((uint32_t)(element_count)*l_IndexSize_152_result)));
         }
         observe(observations.mReads);
         mImports.glDrawElements(draw_mode, element_count, indices_type, indices);
@@ -4313,8 +4365,8 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_140_major = 3;
-        uint32_t l_minRequiredVersion_140_minor = 2;
+        uint32_t l_minRequiredVersion_153_major = 3;
+        uint32_t l_minRequiredVersion_153_minor = 2;
         switch (mode) {
             case GLenum::GL_LINES:                 // fall-through...
             case GLenum::GL_LINES_ADJACENCY:       // fall-through...
@@ -4365,8 +4417,8 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_143_major = 3;
-        uint32_t l_minRequiredVersion_143_minor = 1;
+        uint32_t l_minRequiredVersion_156_major = 3;
+        uint32_t l_minRequiredVersion_156_minor = 1;
         switch (mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4382,8 +4434,8 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* 
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_144_major = 3;
-                uint32_t l_minRequiredVersion_144_minor = 2;
+                uint32_t l_minRequiredVersion_157_major = 3;
+                uint32_t l_minRequiredVersion_157_minor = 2;
                 break;
             }
         }
@@ -4421,8 +4473,8 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_147_major = 3;
-        uint32_t l_minRequiredVersion_147_minor = 0;
+        uint32_t l_minRequiredVersion_160_major = 3;
+        uint32_t l_minRequiredVersion_160_minor = 0;
         switch (mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4438,8 +4490,8 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint3
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_148_major = 3;
-                uint32_t l_minRequiredVersion_148_minor = 2;
+                uint32_t l_minRequiredVersion_161_major = 3;
+                uint32_t l_minRequiredVersion_161_minor = 2;
                 break;
             }
         }
@@ -4481,8 +4533,8 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t co
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_151_major = 3;
-        uint32_t l_minRequiredVersion_151_minor = 2;
+        uint32_t l_minRequiredVersion_164_major = 3;
+        uint32_t l_minRequiredVersion_164_minor = 2;
         switch (mode) {
             case GLenum::GL_LINES:                 // fall-through...
             case GLenum::GL_LINES_ADJACENCY:       // fall-through...
@@ -4536,8 +4588,8 @@ inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_154_major = 3;
-        uint32_t l_minRequiredVersion_154_minor = 0;
+        uint32_t l_minRequiredVersion_167_major = 3;
+        uint32_t l_minRequiredVersion_167_minor = 0;
         switch (mode) {
             case GLenum::GL_LINES:         // fall-through...
             case GLenum::GL_LINE_LOOP:     // fall-through...
@@ -4553,8 +4605,8 @@ inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t
             case GLenum::GL_PATCHES:               // fall-through...
             case GLenum::GL_TRIANGLES_ADJACENCY:   // fall-through...
             case GLenum::GL_TRIANGLE_STRIP_ADJACENCY: {
-                uint32_t l_minRequiredVersion_155_major = 3;
-                uint32_t l_minRequiredVersion_155_minor = 2;
+                uint32_t l_minRequiredVersion_168_major = 3;
+                uint32_t l_minRequiredVersion_168_minor = 2;
                 break;
             }
         }
@@ -4595,8 +4647,8 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_158_major = 3;
-        uint32_t l_minRequiredVersion_158_minor = 2;
+        uint32_t l_minRequiredVersion_171_major = 3;
+        uint32_t l_minRequiredVersion_171_minor = 2;
         switch (mode) {
             case GLenum::GL_LINES:                 // fall-through...
             case GLenum::GL_LINES_ADJACENCY:       // fall-through...
@@ -4645,8 +4697,8 @@ inline void GlesSpy::glPatchParameteri(uint32_t pname, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_161_major = 3;
-        uint32_t l_minRequiredVersion_161_minor = 2;
+        uint32_t l_minRequiredVersion_174_major = 3;
+        uint32_t l_minRequiredVersion_174_minor = 2;
         switch (pname) {
             case GLenum::GL_PATCH_VERTICES: {
                 break;
@@ -4677,8 +4729,8 @@ inline void GlesSpy::glPrimitiveBoundingBox(float minX, float minY, float minZ, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_163_major = 3;
-        uint32_t l_minRequiredVersion_163_minor = 2;
+        uint32_t l_minRequiredVersion_176_major = 3;
+        uint32_t l_minRequiredVersion_176_minor = 2;
         observe(observations.mReads);
         mImports.glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
     } while (false);
@@ -4703,7 +4755,7 @@ inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t progra
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_164_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_177_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glActiveShaderProgramEXT(pipeline, program);
     } while (false);
@@ -4725,7 +4777,7 @@ inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_165_ext = ExtensionId::GL_QCOM_alpha_test;
+        uint32_t l_requiresExtension_178_ext = ExtensionId::GL_QCOM_alpha_test;
         observe(observations.mReads);
         mImports.glAlphaFuncQCOM(func, ref);
     } while (false);
@@ -4750,7 +4802,7 @@ inline void GlesSpy::glApplyFramebufferAttachmentCMAAINTEL() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_166_ext = ExtensionId::GL_INTEL_framebuffer_CMAA;
+        uint32_t l_requiresExtension_179_ext = ExtensionId::GL_INTEL_framebuffer_CMAA;
         observe(observations.mReads);
         mImports.glApplyFramebufferAttachmentCMAAINTEL();
     } while (false);
@@ -4774,7 +4826,7 @@ inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_167_ext = ExtensionId::GL_NV_conditional_render;
+        uint32_t l_requiresExtension_180_ext = ExtensionId::GL_NV_conditional_render;
         observe(observations.mReads);
         mImports.glBeginConditionalRenderNV(id, mode);
     } while (false);
@@ -4798,7 +4850,7 @@ inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_168_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_181_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glBeginPerfMonitorAMD(monitor);
     } while (false);
@@ -4822,7 +4874,7 @@ inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_169_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_182_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glBeginPerfQueryINTEL(queryHandle);
     } while (false);
@@ -4844,8 +4896,8 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_170_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_171_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_183_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_184_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         observe(observations.mReads);
         mImports.glBeginQueryEXT(target, query);
     } while (false);
@@ -4869,7 +4921,7 @@ inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_172_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_185_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glBindProgramPipelineEXT(pipeline);
     } while (false);
@@ -4893,10 +4945,14 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_173_ext = ExtensionId::GL_OES_vertex_array_object;
+        uint32_t l_requiresExtension_186_ext = ExtensionId::GL_OES_vertex_array_object;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_174_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_174_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_188_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_187_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_187_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>(new VertexArray());
@@ -4923,7 +4979,7 @@ inline void GlesSpy::glBlendBarrierNV() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_175_ext = ExtensionId::GL_NV_blend_equation_advanced;
+        uint32_t l_requiresExtension_189_ext = ExtensionId::GL_NV_blend_equation_advanced;
         observe(observations.mReads);
         mImports.glBlendBarrierNV();
     } while (false);
@@ -4948,7 +5004,7 @@ inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_176_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_190_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glBlendEquationSeparateiOES(buf, modeRGB, modeAlpha);
     } while (false);
@@ -4972,7 +5028,7 @@ inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_177_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_191_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glBlendEquationiOES(buf, mode);
     } while (false);
@@ -4998,7 +5054,7 @@ inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_178_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_192_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glBlendFuncSeparateiOES(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
     } while (false);
@@ -5021,7 +5077,7 @@ inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_179_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_193_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glBlendFunciOES(buf, src, dst);
     } while (false);
@@ -5045,7 +5101,7 @@ inline void GlesSpy::glBlendParameteriNV(uint32_t pname, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_180_ext = ExtensionId::GL_NV_blend_equation_advanced;
+        uint32_t l_requiresExtension_194_ext = ExtensionId::GL_NV_blend_equation_advanced;
         observe(observations.mReads);
         mImports.glBlendParameteriNV(pname, value);
     } while (false);
@@ -5074,7 +5130,7 @@ inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_181_ext = ExtensionId::GL_ANGLE_framebuffer_blit;
+        uint32_t l_requiresExtension_195_ext = ExtensionId::GL_ANGLE_framebuffer_blit;
         observe(observations.mReads);
         mImports.glBlitFramebufferANGLE(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1,
                                         mask, filter);
@@ -5104,7 +5160,7 @@ inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t s
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_182_ext = ExtensionId::GL_NV_framebuffer_blit;
+        uint32_t l_requiresExtension_196_ext = ExtensionId::GL_NV_framebuffer_blit;
         observe(observations.mReads);
         mImports.glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask,
                                      filter);
@@ -5130,7 +5186,7 @@ inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* dat
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_183_ext = ExtensionId::GL_EXT_buffer_storage;
+        uint32_t l_requiresExtension_197_ext = ExtensionId::GL_EXT_buffer_storage;
         observe(observations.mReads);
         mImports.glBufferStorageEXT(target, size, data, flag);
     } while (false);
@@ -5159,7 +5215,7 @@ inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_184_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_198_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         result = mImports.glClientWaitSyncAPPLE(sync, flag, timeout);
         break;
@@ -5185,7 +5241,7 @@ inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_185_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_199_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glColorMaskiOES(index, r, g, b, a);
     } while (false);
@@ -5214,7 +5270,7 @@ inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_186_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_200_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glCompressedTexImage3DOES(target, level, internalformat, width, height, depth,
                                            border, imageSize, data);
@@ -5248,7 +5304,7 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_187_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_201_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glCompressedTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width,
                                               height, depth, format, imageSize, data);
@@ -5278,7 +5334,7 @@ inline void GlesSpy::glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTa
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_188_ext = ExtensionId::GL_NV_copy_buffer;
+        uint32_t l_requiresExtension_202_ext = ExtensionId::GL_NV_copy_buffer;
         observe(observations.mReads);
         mImports.glCopyBufferSubDataNV(readTarget, writeTarget, readOffset, writeOffset, size);
     } while (false);
@@ -5311,7 +5367,7 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_189_ext = ExtensionId::GL_OES_copy_image;
+        uint32_t l_requiresExtension_203_ext = ExtensionId::GL_OES_copy_image;
         observe(observations.mReads);
         mImports.glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName,
                                        dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight,
@@ -5337,7 +5393,7 @@ inline void GlesSpy::glCopyPathNV(uint32_t resultPath, uint32_t srcPath) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_190_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_204_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glCopyPathNV(resultPath, srcPath);
     } while (false);
@@ -5365,7 +5421,7 @@ inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_191_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_205_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glCopyTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, x, y, width,
                                         height);
@@ -5393,7 +5449,7 @@ inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_192_ext = ExtensionId::GL_APPLE_copy_texture_levels;
+        uint32_t l_requiresExtension_206_ext = ExtensionId::GL_APPLE_copy_texture_levels;
         observe(observations.mReads);
         mImports.glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel,
                                           sourceLevelCount);
@@ -5422,7 +5478,7 @@ inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathN
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_193_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_207_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode,
                                             transformType, transformValues);
@@ -5451,7 +5507,7 @@ inline void GlesSpy::glCoverFillPathNV(uint32_t path, uint32_t coverMode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_194_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_208_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glCoverFillPathNV(path, coverMode);
     } while (false);
@@ -5479,7 +5535,7 @@ inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pat
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_195_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_209_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode,
                                               transformType, transformValues);
@@ -5510,7 +5566,7 @@ inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_196_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_210_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glCoverStrokePathNV(path, coverMode);
     } while (false);
@@ -5532,7 +5588,7 @@ inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_197_ext = ExtensionId::GL_NV_coverage_sample;
+        uint32_t l_requiresExtension_211_ext = ExtensionId::GL_NV_coverage_sample;
         observe(observations.mReads);
         mImports.glCoverageMaskNV(mask);
     } while (false);
@@ -5556,7 +5612,7 @@ inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_198_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
+        uint32_t l_requiresExtension_212_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
         observe(observations.mReads);
         mImports.glCoverageModulationNV(components);
     } while (false);
@@ -5580,7 +5636,7 @@ inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_199_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
+        uint32_t l_requiresExtension_213_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
         observe(observations.mReads);
         mImports.glCoverageModulationTableNV(n, v);
     } while (false);
@@ -5606,7 +5662,7 @@ inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_200_ext = ExtensionId::GL_NV_coverage_sample;
+        uint32_t l_requiresExtension_214_ext = ExtensionId::GL_NV_coverage_sample;
         observe(observations.mReads);
         mImports.glCoverageOperationNV(operation);
     } while (false);
@@ -5630,7 +5686,7 @@ inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHan
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_201_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_215_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glCreatePerfQueryINTEL(queryId, queryHandle);
     } while (false);
@@ -5658,7 +5714,7 @@ inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_202_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_216_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         result = mImports.glCreateShaderProgramvEXT(type, count, strings);
         break;
@@ -5687,7 +5743,7 @@ inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_203_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_217_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         mImports.glDeleteFencesNV(n, fences);
     } while (false);
@@ -5711,7 +5767,7 @@ inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_204_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_218_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glDeletePathsNV(path, range);
     } while (false);
@@ -5735,7 +5791,7 @@ inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_205_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_219_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glDeletePerfMonitorsAMD(n, monitors);
     } while (false);
@@ -5761,7 +5817,7 @@ inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_206_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_220_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glDeletePerfQueryINTEL(queryHandle);
     } while (false);
@@ -5785,7 +5841,7 @@ inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_207_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_221_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glDeleteProgramPipelinesEXT(n, pipelines);
     } while (false);
@@ -5811,12 +5867,16 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_208_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_209_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_222_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_223_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         Slice<QueryId> l_q = slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_210_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_210_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_225_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_224_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_224_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mQueries[read(l_q, (uint64_t)(l_i))] = std::shared_ptr<Query>();
         }
@@ -5843,7 +5903,7 @@ inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_211_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_226_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         mImports.glDeleteSyncAPPLE(sync);
     } while (false);
@@ -5867,10 +5927,14 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_212_ext = ExtensionId::GL_OES_vertex_array_object;
+        uint32_t l_requiresExtension_227_ext = ExtensionId::GL_OES_vertex_array_object;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_213_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_213_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_229_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_228_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_228_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -5902,7 +5966,7 @@ inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float*
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_214_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_230_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glDepthRangeArrayfvNV(first, count, v);
     } while (false);
@@ -5929,7 +5993,7 @@ inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_215_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_231_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glDepthRangeIndexedfNV(index, n, f);
     } while (false);
@@ -5953,7 +6017,7 @@ inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_216_ext = ExtensionId::GL_QCOM_driver_control;
+        uint32_t l_requiresExtension_232_ext = ExtensionId::GL_QCOM_driver_control;
         observe(observations.mReads);
         mImports.glDisableDriverControlQCOM(driverControl);
     } while (false);
@@ -5975,7 +6039,7 @@ inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_217_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_233_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glDisableiNV(target, index);
     } while (false);
@@ -5997,7 +6061,7 @@ inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_218_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_234_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glDisableiOES(target, index);
     } while (false);
@@ -6022,7 +6086,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_219_ext = ExtensionId::GL_EXT_discard_framebuffer;
+        uint32_t l_requiresExtension_235_ext = ExtensionId::GL_EXT_discard_framebuffer;
         observe(observations.mReads);
         mImports.glDiscardFramebufferEXT(target, numAttachments, attachments);
     } while (false);
@@ -6051,7 +6115,7 @@ inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_220_ext = ExtensionId::GL_ANGLE_instanced_arrays;
+        uint32_t l_requiresExtension_236_ext = ExtensionId::GL_ANGLE_instanced_arrays;
         observe(observations.mReads);
         mImports.glDrawArraysInstancedANGLE(mode, first, count, primcount);
     } while (false);
@@ -6081,7 +6145,7 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_221_ext = ExtensionId::GL_EXT_base_instance;
+        uint32_t l_requiresExtension_237_ext = ExtensionId::GL_EXT_base_instance;
         observe(observations.mReads);
         mImports.glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount,
                                                       baseinstance);
@@ -6109,8 +6173,8 @@ inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_222_ext = ExtensionId::GL_EXT_draw_instanced;
-        uint32_t l_requiresExtension_223_ext = ExtensionId::GL_EXT_instanced_arrays;
+        uint32_t l_requiresExtension_238_ext = ExtensionId::GL_EXT_draw_instanced;
+        uint32_t l_requiresExtension_239_ext = ExtensionId::GL_EXT_instanced_arrays;
         observe(observations.mReads);
         mImports.glDrawArraysInstancedEXT(mode, start, count, primcount);
     } while (false);
@@ -6136,7 +6200,7 @@ inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_224_ext = ExtensionId::GL_NV_draw_instanced;
+        uint32_t l_requiresExtension_240_ext = ExtensionId::GL_NV_draw_instanced;
         observe(observations.mReads);
         mImports.glDrawArraysInstancedNV(mode, first, count, primcount);
     } while (false);
@@ -6158,7 +6222,7 @@ inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_225_ext = ExtensionId::GL_EXT_draw_buffers;
+        uint32_t l_requiresExtension_241_ext = ExtensionId::GL_EXT_draw_buffers;
         observe(observations.mReads);
         mImports.glDrawBuffersEXT(n, bufs);
     } while (false);
@@ -6184,7 +6248,7 @@ inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_226_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
+        uint32_t l_requiresExtension_242_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
         observe(observations.mReads);
         mImports.glDrawBuffersIndexedEXT(n, location, indices);
     } while (false);
@@ -6210,7 +6274,7 @@ inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_227_ext = ExtensionId::GL_NV_draw_buffers;
+        uint32_t l_requiresExtension_243_ext = ExtensionId::GL_NV_draw_buffers;
         observe(observations.mReads);
         mImports.glDrawBuffersNV(n, bufs);
     } while (false);
@@ -6238,7 +6302,7 @@ inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_228_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_244_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawElementsBaseVertexEXT(mode, count, type, indices, basevertex);
     } while (false);
@@ -6268,7 +6332,7 @@ inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_229_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_245_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawElementsBaseVertexOES(mode, count, type, indices, basevertex);
     } while (false);
@@ -6298,7 +6362,7 @@ inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_230_ext = ExtensionId::GL_ANGLE_instanced_arrays;
+        uint32_t l_requiresExtension_246_ext = ExtensionId::GL_ANGLE_instanced_arrays;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedANGLE(mode, count, type, indices, primcount);
     } while (false);
@@ -6332,7 +6396,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_231_ext = ExtensionId::GL_EXT_base_instance;
+        uint32_t l_requiresExtension_247_ext = ExtensionId::GL_EXT_base_instance;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount,
                                                         baseinstance);
@@ -6369,7 +6433,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_232_ext = ExtensionId::GL_EXT_base_instance;
+        uint32_t l_requiresExtension_248_ext = ExtensionId::GL_EXT_base_instance;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedBaseVertexBaseInstanceEXT(
                 mode, count, type, indices, instancecount, basevertex, baseinstance);
@@ -6404,7 +6468,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_233_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_249_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedBaseVertexEXT(mode, count, type, indices, instancecount,
                                                       basevertex);
@@ -6439,7 +6503,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_234_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_250_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedBaseVertexOES(mode, count, type, indices, instancecount,
                                                       basevertex);
@@ -6470,8 +6534,8 @@ inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, ui
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_235_ext = ExtensionId::GL_EXT_draw_instanced;
-        uint32_t l_requiresExtension_236_ext = ExtensionId::GL_EXT_instanced_arrays;
+        uint32_t l_requiresExtension_251_ext = ExtensionId::GL_EXT_draw_instanced;
+        uint32_t l_requiresExtension_252_ext = ExtensionId::GL_EXT_instanced_arrays;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedEXT(mode, count, type, indices, primcount);
     } while (false);
@@ -6501,7 +6565,7 @@ inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_237_ext = ExtensionId::GL_NV_draw_instanced;
+        uint32_t l_requiresExtension_253_ext = ExtensionId::GL_NV_draw_instanced;
         observe(observations.mReads);
         mImports.glDrawElementsInstancedNV(mode, count, type, indices, primcount);
     } while (false);
@@ -6533,7 +6597,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t st
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_238_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_254_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawRangeElementsBaseVertexEXT(mode, start, end, count, type, indices,
                                                   basevertex);
@@ -6566,7 +6630,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_239_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_255_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glDrawRangeElementsBaseVertexOES(mode, start, end, count, type, indices,
                                                   basevertex);
@@ -6596,7 +6660,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_240_ext = ExtensionId::GL_OES_EGL_image;
+        uint32_t l_requiresExtension_256_ext = ExtensionId::GL_OES_EGL_image;
         observe(observations.mReads);
         mImports.glEGLImageTargetRenderbufferStorageOES(target, image);
     } while (false);
@@ -6622,7 +6686,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_241_ext = ExtensionId::GL_OES_EGL_image;
+        uint32_t l_requiresExtension_257_ext = ExtensionId::GL_OES_EGL_image;
         observe(observations.mReads);
         mImports.glEGLImageTargetTexture2DOES(target, image);
     } while (false);
@@ -6648,7 +6712,7 @@ inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_242_ext = ExtensionId::GL_QCOM_driver_control;
+        uint32_t l_requiresExtension_258_ext = ExtensionId::GL_QCOM_driver_control;
         observe(observations.mReads);
         mImports.glEnableDriverControlQCOM(driverControl);
     } while (false);
@@ -6670,7 +6734,7 @@ inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_243_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_259_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glEnableiNV(target, index);
     } while (false);
@@ -6692,7 +6756,7 @@ inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_244_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_260_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         mImports.glEnableiOES(target, index);
     } while (false);
@@ -6716,7 +6780,7 @@ inline void GlesSpy::glEndConditionalRenderNV() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_245_ext = ExtensionId::GL_NV_conditional_render;
+        uint32_t l_requiresExtension_261_ext = ExtensionId::GL_NV_conditional_render;
         observe(observations.mReads);
         mImports.glEndConditionalRenderNV();
     } while (false);
@@ -6740,7 +6804,7 @@ inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_246_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_262_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glEndPerfMonitorAMD(monitor);
     } while (false);
@@ -6764,7 +6828,7 @@ inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_247_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_263_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glEndPerfQueryINTEL(queryHandle);
     } while (false);
@@ -6786,8 +6850,8 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_248_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_249_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_264_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_265_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         observe(observations.mReads);
         mImports.glEndQueryEXT(target);
     } while (false);
@@ -6809,7 +6873,7 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_250_ext = ExtensionId::GL_QCOM_tiled_rendering;
+        uint32_t l_requiresExtension_266_ext = ExtensionId::GL_QCOM_tiled_rendering;
         observe(observations.mReads);
         mImports.glEndTilingQCOM(preserve_mask);
     } while (false);
@@ -6833,7 +6897,7 @@ inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_251_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_267_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetBufferPointervQCOM(target, params);
     } while (false);
@@ -6860,7 +6924,7 @@ inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_252_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_268_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers);
     } while (false);
@@ -6890,7 +6954,7 @@ inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t ma
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_253_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_269_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers);
     } while (false);
@@ -6920,7 +6984,7 @@ inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_254_ext = ExtensionId::GL_QCOM_extended_get2;
+        uint32_t l_requiresExtension_270_ext = ExtensionId::GL_QCOM_extended_get2;
         observe(observations.mReads);
         mImports.glExtGetProgramBinarySourceQCOM(program, shadertype, source, length);
     } while (false);
@@ -6950,7 +7014,7 @@ inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxProgram
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_255_ext = ExtensionId::GL_QCOM_extended_get2;
+        uint32_t l_requiresExtension_271_ext = ExtensionId::GL_QCOM_extended_get2;
         observe(observations.mReads);
         mImports.glExtGetProgramsQCOM(programs, maxPrograms, numPrograms);
     } while (false);
@@ -6980,7 +7044,7 @@ inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_256_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_272_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers);
     } while (false);
@@ -7009,7 +7073,7 @@ inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_257_ext = ExtensionId::GL_QCOM_extended_get2;
+        uint32_t l_requiresExtension_273_ext = ExtensionId::GL_QCOM_extended_get2;
         observe(observations.mReads);
         mImports.glExtGetShadersQCOM(shaders, maxShaders, numShaders);
     } while (false);
@@ -7039,7 +7103,7 @@ inline void GlesSpy::glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_258_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_274_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params);
     } while (false);
@@ -7072,7 +7136,7 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_259_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_275_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height,
                                          depth, format, type, texels);
@@ -7101,7 +7165,7 @@ inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTexture
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_260_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_276_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtGetTexturesQCOM(textures, maxTextures, numTextures);
     } while (false);
@@ -7131,7 +7195,7 @@ inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_261_ext = ExtensionId::GL_QCOM_extended_get2;
+        uint32_t l_requiresExtension_277_ext = ExtensionId::GL_QCOM_extended_get2;
         observe(observations.mReads);
         result = mImports.glExtIsProgramBinaryQCOM(program);
         break;
@@ -7159,7 +7223,7 @@ inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_262_ext = ExtensionId::GL_QCOM_extended_get;
+        uint32_t l_requiresExtension_278_ext = ExtensionId::GL_QCOM_extended_get;
         observe(observations.mReads);
         mImports.glExtTexObjectStateOverrideiQCOM(target, pname, param);
     } while (false);
@@ -7183,7 +7247,7 @@ inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_263_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_279_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         result = mImports.glFenceSyncAPPLE(condition, flag);
         break;
@@ -7208,7 +7272,7 @@ inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_264_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_280_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         mImports.glFinishFenceNV(fence);
     } while (false);
@@ -7232,7 +7296,7 @@ inline void GlesSpy::glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_265_ext = ExtensionId::GL_EXT_map_buffer_range;
+        uint32_t l_requiresExtension_281_ext = ExtensionId::GL_EXT_map_buffer_range;
         observe(observations.mReads);
         mImports.glFlushMappedBufferRangeEXT(target, offset, length);
     } while (false);
@@ -7256,7 +7320,7 @@ inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_266_ext = ExtensionId::GL_NV_fragment_coverage_to_color;
+        uint32_t l_requiresExtension_282_ext = ExtensionId::GL_NV_fragment_coverage_to_color;
         observe(observations.mReads);
         mImports.glFragmentCoverageColorNV(color);
     } while (false);
@@ -7282,7 +7346,7 @@ inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_267_ext = ExtensionId::GL_NV_sample_locations;
+        uint32_t l_requiresExtension_283_ext = ExtensionId::GL_NV_sample_locations;
         observe(observations.mReads);
         mImports.glFramebufferSampleLocationsfvNV(target, start, count, v);
     } while (false);
@@ -7314,7 +7378,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleEXT(uint32_t target, uint3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_268_ext = ExtensionId::GL_EXT_multisampled_render_to_texture;
+        uint32_t l_requiresExtension_284_ext = ExtensionId::GL_EXT_multisampled_render_to_texture;
         observe(observations.mReads);
         mImports.glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level,
                                                       samples);
@@ -7345,7 +7409,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_269_ext = ExtensionId::GL_IMG_multisampled_render_to_texture;
+        uint32_t l_requiresExtension_285_ext = ExtensionId::GL_IMG_multisampled_render_to_texture;
         observe(observations.mReads);
         mImports.glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level,
                                                       samples);
@@ -7374,7 +7438,7 @@ inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachm
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_270_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_286_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset);
     } while (false);
@@ -7403,7 +7467,7 @@ inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_271_ext = ExtensionId::GL_OVR_multiview;
+        uint32_t l_requiresExtension_287_ext = ExtensionId::GL_OVR_multiview;
         observe(observations.mReads);
         mImports.glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex,
                                                   numViews);
@@ -7431,7 +7495,7 @@ inline void GlesSpy::glFramebufferTextureOES(uint32_t target, uint32_t attachmen
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_272_ext = ExtensionId::GL_OES_geometry_shader;
+        uint32_t l_requiresExtension_288_ext = ExtensionId::GL_OES_geometry_shader;
         observe(observations.mReads);
         mImports.glFramebufferTextureOES(target, attachment, texture, level);
     } while (false);
@@ -7454,7 +7518,7 @@ inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_273_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_289_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         mImports.glGenFencesNV(n, fences);
     } while (false);
@@ -7480,7 +7544,7 @@ inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_274_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_290_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glGenPathsNV(range);
         break;
@@ -7507,7 +7571,7 @@ inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_275_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_291_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGenPerfMonitorsAMD(n, monitors);
     } while (false);
@@ -7533,7 +7597,7 @@ inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_276_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_292_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glGenProgramPipelinesEXT(n, pipelines);
     } while (false);
@@ -7557,12 +7621,16 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_277_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_278_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_293_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_294_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         Slice<QueryId> l_q = slice(queries, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_279_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_279_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_296_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_295_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_295_result;
         observe(observations.mReads);
         mImports.glGenQueriesEXT(count, queries);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -7594,11 +7662,15 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_280_ext = ExtensionId::GL_OES_vertex_array_object;
+        uint32_t l_requiresExtension_297_ext = ExtensionId::GL_OES_vertex_array_object;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_281_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_281_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_299_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_298_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_298_result;
         observe(observations.mReads);
         mImports.glGenVertexArraysOES(count, arrays);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -7630,7 +7702,7 @@ inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, voi
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_282_ext = ExtensionId::GL_OES_mapbuffer;
+        uint32_t l_requiresExtension_300_ext = ExtensionId::GL_OES_mapbuffer;
         observe(observations.mReads);
         mImports.glGetBufferPointervOES(target, pname, params);
     } while (false);
@@ -7657,7 +7729,7 @@ inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_283_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
+        uint32_t l_requiresExtension_301_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
         observe(observations.mReads);
         mImports.glGetCoverageModulationTableNV(bufsize, v);
     } while (false);
@@ -7685,7 +7757,7 @@ inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_284_ext = ExtensionId::GL_QCOM_driver_control;
+        uint32_t l_requiresExtension_302_ext = ExtensionId::GL_QCOM_driver_control;
         observe(observations.mReads);
         mImports.glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString);
     } while (false);
@@ -7714,7 +7786,7 @@ inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_285_ext = ExtensionId::GL_QCOM_driver_control;
+        uint32_t l_requiresExtension_303_ext = ExtensionId::GL_QCOM_driver_control;
         observe(observations.mReads);
         mImports.glGetDriverControlsQCOM(num, size, driverControls);
     } while (false);
@@ -7740,7 +7812,7 @@ inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_286_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_304_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         mImports.glGetFenceivNV(fence, pname, params);
     } while (false);
@@ -7766,7 +7838,7 @@ inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_287_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_305_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetFirstPerfQueryIdINTEL(queryId);
     } while (false);
@@ -7790,7 +7862,7 @@ inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* dat
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_288_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_306_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glGetFloati_vNV(target, index, data);
     } while (false);
@@ -7819,7 +7891,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_289_ext = ExtensionId::GL_EXT_robustness;
+        uint32_t l_requiresExtension_307_ext = ExtensionId::GL_EXT_robustness;
         observe(observations.mReads);
         result = mImports.glGetGraphicsResetStatusEXT();
         break;
@@ -7848,7 +7920,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_290_ext = ExtensionId::GL_KHR_robustness;
+        uint32_t l_requiresExtension_308_ext = ExtensionId::GL_KHR_robustness;
         observe(observations.mReads);
         result = mImports.glGetGraphicsResetStatusKHR();
         break;
@@ -7879,7 +7951,7 @@ inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_291_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_309_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         result = mImports.glGetImageHandleNV(texture, level, layered, layer, format);
         break;
@@ -7907,7 +7979,7 @@ inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_292_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_310_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         mImports.glGetInteger64vAPPLE(pname, params);
     } while (false);
@@ -7933,7 +8005,7 @@ inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_293_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
+        uint32_t l_requiresExtension_311_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
         observe(observations.mReads);
         mImports.glGetIntegeri_vEXT(target, index, data);
     } while (false);
@@ -7962,7 +8034,7 @@ inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_294_ext = ExtensionId::GL_NV_internalformat_sample_query;
+        uint32_t l_requiresExtension_312_ext = ExtensionId::GL_NV_internalformat_sample_query;
         observe(observations.mReads);
         mImports.glGetInternalformatSampleivNV(target, internalformat, samples, pname, bufSize,
                                                params);
@@ -7990,7 +8062,7 @@ inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQ
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_295_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_313_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetNextPerfQueryIdINTEL(queryId, nextQueryId);
     } while (false);
@@ -8018,7 +8090,7 @@ inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_296_ext = ExtensionId::GL_EXT_debug_label;
+        uint32_t l_requiresExtension_314_ext = ExtensionId::GL_EXT_debug_label;
         observe(observations.mReads);
         mImports.glGetObjectLabelEXT(type, object, bufSize, length, label);
     } while (false);
@@ -8047,7 +8119,7 @@ inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_297_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_315_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathCommandsNV(path, commands);
     } while (false);
@@ -8071,7 +8143,7 @@ inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_298_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_316_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathCoordsNV(path, coords);
     } while (false);
@@ -8097,7 +8169,7 @@ inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_299_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_317_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathDashArrayNV(path, dashArray);
     } while (false);
@@ -8124,7 +8196,7 @@ inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_300_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_318_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glGetPathLengthNV(path, startSegment, numSegments);
         break;
@@ -8154,7 +8226,7 @@ inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t f
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_301_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_319_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathMetricRangeNV(metricQueryMask, firstPathName, numPaths, stride, metrics);
     } while (false);
@@ -8184,7 +8256,7 @@ inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPat
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_302_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_320_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase,
                                     stride, metrics);
@@ -8214,7 +8286,7 @@ inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_303_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_321_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathParameterfvNV(path, pname, value);
     } while (false);
@@ -8240,7 +8312,7 @@ inline void GlesSpy::glGetPathParameterivNV(uint32_t path, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_304_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_322_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathParameterivNV(path, pname, value);
     } while (false);
@@ -8271,7 +8343,7 @@ inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_305_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_323_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase,
                                     advanceScale, kerningScale, transformType, returnedSpacing);
@@ -8312,7 +8384,7 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_306_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_324_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName,
                                            counterDescLength, counterDesc, counterOffset,
@@ -8357,7 +8429,7 @@ inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t p
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_307_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_325_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorCounterDataAMD(monitor, pname, dataSize, data, bytesWritten);
     } while (false);
@@ -8388,7 +8460,7 @@ inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t cou
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_308_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_326_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorCounterInfoAMD(group, counter, pname, data);
     } while (false);
@@ -8418,7 +8490,7 @@ inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t c
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_309_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_327_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorCounterStringAMD(group, counter, bufSize, length, counterString);
     } while (false);
@@ -8450,7 +8522,7 @@ inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCou
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_310_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_328_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorCountersAMD(group, numCounters, maxActiveCounters, counterSize,
                                              counters);
@@ -8483,7 +8555,7 @@ inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufS
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_311_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_329_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorGroupStringAMD(group, bufSize, length, groupString);
     } while (false);
@@ -8513,7 +8585,7 @@ inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t group
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_312_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_330_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glGetPerfMonitorGroupsAMD(numGroups, groupsSize, groups);
     } while (false);
@@ -8543,7 +8615,7 @@ inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_313_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_331_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetPerfQueryDataINTEL(queryHandle, flag, dataSize, data, bytesWritten);
     } while (false);
@@ -8572,7 +8644,7 @@ inline void GlesSpy::glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* quer
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_314_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_332_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetPerfQueryIdByNameINTEL(queryName, queryId);
     } while (false);
@@ -8604,7 +8676,7 @@ inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNam
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_315_ext = ExtensionId::GL_INTEL_performance_query;
+        uint32_t l_requiresExtension_333_ext = ExtensionId::GL_INTEL_performance_query;
         observe(observations.mReads);
         mImports.glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters,
                                          noInstances, capsMask);
@@ -8643,7 +8715,7 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_316_ext = ExtensionId::GL_OES_get_program_binary;
+        uint32_t l_requiresExtension_334_ext = ExtensionId::GL_OES_get_program_binary;
         observe(observations.mReads);
         mImports.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
         GLsizei l_l = (GLsizei)(slice(bytes_written, 0, 1)[0]);
@@ -8680,7 +8752,7 @@ inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t b
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_317_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_335_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glGetProgramPipelineInfoLogEXT(pipeline, bufSize, length, infoLog);
     } while (false);
@@ -8709,7 +8781,7 @@ inline void GlesSpy::glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_318_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_336_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glGetProgramPipelineivEXT(pipeline, pname, params);
     } while (false);
@@ -8740,7 +8812,7 @@ inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t program
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_319_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_337_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glGetProgramResourcefvNV(program, programInterface, index, propCount, props,
                                           bufSize, length, params);
@@ -8772,7 +8844,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_320_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_338_ext = ExtensionId::GL_EXT_disjoint_timer_query;
         observe(observations.mReads);
         mImports.glGetQueryObjecti64vEXT(query, parameter, value);
         write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
@@ -8800,7 +8872,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_321_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_339_ext = ExtensionId::GL_EXT_disjoint_timer_query;
         observe(observations.mReads);
         mImports.glGetQueryObjectivEXT(query, parameter, value);
         write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
@@ -8828,7 +8900,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_322_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_340_ext = ExtensionId::GL_EXT_disjoint_timer_query;
         observe(observations.mReads);
         mImports.glGetQueryObjectui64vEXT(query, parameter, value);
         write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
@@ -8856,8 +8928,8 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_323_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_324_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_341_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_342_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         observe(observations.mReads);
         mImports.glGetQueryObjectuivEXT(query, parameter, value);
         write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
@@ -8883,8 +8955,8 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_325_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_326_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_343_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_344_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         observe(observations.mReads);
         mImports.glGetQueryivEXT(target, parameter, value);
         write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
@@ -8913,7 +8985,7 @@ inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pnam
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_327_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_345_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glGetSamplerParameterIivOES(sampler, pname, params);
     } while (false);
@@ -8941,7 +9013,7 @@ inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pna
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_328_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_346_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glGetSamplerParameterIuivOES(sampler, pname, params);
     } while (false);
@@ -8968,7 +9040,7 @@ inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t buf
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_329_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_347_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         mImports.glGetSyncivAPPLE(sync, pname, bufSize, length, values);
     } while (false);
@@ -8997,7 +9069,7 @@ inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_330_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_348_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glGetTexParameterIivOES(target, pname, params);
     } while (false);
@@ -9023,7 +9095,7 @@ inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_331_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_349_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glGetTexParameterIuivOES(target, pname, params);
     } while (false);
@@ -9052,7 +9124,7 @@ inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_332_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_350_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         result = mImports.glGetTextureHandleNV(texture);
         break;
@@ -9081,7 +9153,7 @@ inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_333_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_351_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         result = mImports.glGetTextureSamplerHandleNV(texture, sampler);
         break;
@@ -9110,7 +9182,7 @@ inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t b
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_334_ext = ExtensionId::GL_ANGLE_translated_shader_source;
+        uint32_t l_requiresExtension_352_ext = ExtensionId::GL_ANGLE_translated_shader_source;
         observe(observations.mReads);
         mImports.glGetTranslatedShaderSourceANGLE(shader, bufsize, length, source);
     } while (false);
@@ -9141,7 +9213,7 @@ inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_335_ext = ExtensionId::GL_EXT_robustness;
+        uint32_t l_requiresExtension_353_ext = ExtensionId::GL_EXT_robustness;
         observe(observations.mReads);
         mImports.glGetnUniformfvEXT(program, location, bufSize, params);
     } while (false);
@@ -9170,7 +9242,7 @@ inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_336_ext = ExtensionId::GL_KHR_robustness;
+        uint32_t l_requiresExtension_354_ext = ExtensionId::GL_KHR_robustness;
         observe(observations.mReads);
         mImports.glGetnUniformfvKHR(program, location, bufSize, params);
     } while (false);
@@ -9199,7 +9271,7 @@ inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_337_ext = ExtensionId::GL_EXT_robustness;
+        uint32_t l_requiresExtension_355_ext = ExtensionId::GL_EXT_robustness;
         observe(observations.mReads);
         mImports.glGetnUniformivEXT(program, location, bufSize, params);
     } while (false);
@@ -9228,7 +9300,7 @@ inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_338_ext = ExtensionId::GL_KHR_robustness;
+        uint32_t l_requiresExtension_356_ext = ExtensionId::GL_KHR_robustness;
         observe(observations.mReads);
         mImports.glGetnUniformivKHR(program, location, bufSize, params);
     } while (false);
@@ -9257,7 +9329,7 @@ inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_339_ext = ExtensionId::GL_KHR_robustness;
+        uint32_t l_requiresExtension_357_ext = ExtensionId::GL_KHR_robustness;
         observe(observations.mReads);
         mImports.glGetnUniformuivKHR(program, location, bufSize, params);
     } while (false);
@@ -9284,7 +9356,7 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_340_ext = ExtensionId::GL_EXT_debug_marker;
+        uint32_t l_requiresExtension_358_ext = ExtensionId::GL_EXT_debug_marker;
         if (length > (GLsizei)(0)) {
             read(slice(marker, (uint64_t)((GLsizei)(0)), (uint64_t)(length)));
         } else {
@@ -9317,7 +9389,7 @@ inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_341_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_359_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glInterpolatePathsNV(resultPath, pathA, pathB, weight);
     } while (false);
@@ -9341,7 +9413,7 @@ inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_342_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_360_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         result = mImports.glIsEnablediNV(target, index);
         break;
@@ -9368,7 +9440,7 @@ inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_343_ext = ExtensionId::GL_OES_draw_buffers_indexed;
+        uint32_t l_requiresExtension_361_ext = ExtensionId::GL_OES_draw_buffers_indexed;
         observe(observations.mReads);
         result = mImports.glIsEnablediOES(target, index);
         break;
@@ -9395,7 +9467,7 @@ inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_344_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_362_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         result = mImports.glIsFenceNV(fence);
         break;
@@ -9424,7 +9496,7 @@ inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_345_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_363_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         result = mImports.glIsImageHandleResidentNV(handle);
         break;
@@ -9451,7 +9523,7 @@ inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_346_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_364_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glIsPathNV(path);
         break;
@@ -9480,7 +9552,7 @@ inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, floa
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_347_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_365_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glIsPointInFillPathNV(path, mask, x, y);
         break;
@@ -9509,7 +9581,7 @@ inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_348_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_366_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glIsPointInStrokePathNV(path, x, y);
         break;
@@ -9538,7 +9610,7 @@ inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_349_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_367_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         result = mImports.glIsProgramPipelineEXT(pipeline);
         break;
@@ -9565,11 +9637,15 @@ inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_350_ext = ExtensionId::GL_EXT_disjoint_timer_query;
-        uint32_t l_requiresExtension_351_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
+        uint32_t l_requiresExtension_368_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_369_ext = ExtensionId::GL_EXT_occlusion_query_boolean;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_352_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_352_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_371_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_370_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_370_result;
         observe(observations.mReads);
         result = mImports.glIsQueryEXT(query);
         break;
@@ -9596,7 +9672,7 @@ inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_353_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_372_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         result = mImports.glIsSyncAPPLE(sync);
         break;
@@ -9625,7 +9701,7 @@ inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_354_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_373_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         result = mImports.glIsTextureHandleResidentNV(handle);
         break;
@@ -9654,10 +9730,14 @@ inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_355_ext = ExtensionId::GL_OES_vertex_array_object;
+        uint32_t l_requiresExtension_374_ext = ExtensionId::GL_OES_vertex_array_object;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_356_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_356_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_376_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_375_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_375_result;
         observe(observations.mReads);
         result = mImports.glIsVertexArrayOES(array);
         break;
@@ -9682,7 +9762,7 @@ inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t le
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_357_ext = ExtensionId::GL_EXT_debug_label;
+        uint32_t l_requiresExtension_377_ext = ExtensionId::GL_EXT_debug_label;
         observe(observations.mReads);
         mImports.glLabelObjectEXT(type, object, length, label);
     } while (false);
@@ -9709,7 +9789,7 @@ inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_358_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_378_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glMakeImageHandleNonResidentNV(handle);
     } while (false);
@@ -9733,7 +9813,7 @@ inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t acces
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_359_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_379_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glMakeImageHandleResidentNV(handle, access);
     } while (false);
@@ -9757,7 +9837,7 @@ inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_360_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_380_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glMakeTextureHandleNonResidentNV(handle);
     } while (false);
@@ -9781,7 +9861,7 @@ inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_361_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_381_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glMakeTextureHandleResidentNV(handle);
     } while (false);
@@ -9805,7 +9885,7 @@ inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_362_ext = ExtensionId::GL_OES_mapbuffer;
+        uint32_t l_requiresExtension_382_ext = ExtensionId::GL_OES_mapbuffer;
         observe(observations.mReads);
         result = mImports.glMapBufferOES(target, access);
         break;
@@ -9838,7 +9918,7 @@ inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_363_ext = ExtensionId::GL_EXT_map_buffer_range;
+        uint32_t l_requiresExtension_383_ext = ExtensionId::GL_EXT_map_buffer_range;
         observe(observations.mReads);
         result = mImports.glMapBufferRangeEXT(target, offset, length, access);
         break;
@@ -9868,7 +9948,7 @@ inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_364_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_384_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixLoad3x2fNV(matrixMode, m);
     } while (false);
@@ -9894,7 +9974,7 @@ inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_365_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_385_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixLoad3x3fNV(matrixMode, m);
     } while (false);
@@ -9920,7 +10000,7 @@ inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_366_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_386_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixLoadTranspose3x3fNV(matrixMode, m);
     } while (false);
@@ -9946,7 +10026,7 @@ inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_367_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_387_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixMult3x2fNV(matrixMode, m);
     } while (false);
@@ -9972,7 +10052,7 @@ inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_368_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_388_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixMult3x3fNV(matrixMode, m);
     } while (false);
@@ -9998,7 +10078,7 @@ inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_369_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_389_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glMatrixMultTranspose3x3fNV(matrixMode, m);
     } while (false);
@@ -10025,7 +10105,7 @@ inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_370_ext = ExtensionId::GL_EXT_multi_draw_arrays;
+        uint32_t l_requiresExtension_390_ext = ExtensionId::GL_EXT_multi_draw_arrays;
         observe(observations.mReads);
         mImports.glMultiDrawArraysEXT(mode, first, count, primcount);
     } while (false);
@@ -10056,7 +10136,7 @@ inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_371_ext = ExtensionId::GL_EXT_multi_draw_indirect;
+        uint32_t l_requiresExtension_391_ext = ExtensionId::GL_EXT_multi_draw_indirect;
         observe(observations.mReads);
         mImports.glMultiDrawArraysIndirectEXT(mode, indirect, drawcount, stride);
     } while (false);
@@ -10086,7 +10166,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* co
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_372_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_392_ext = ExtensionId::GL_EXT_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glMultiDrawElementsBaseVertexEXT(mode, count, type, indices, primcount,
                                                   basevertex);
@@ -10120,7 +10200,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* co
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_373_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
+        uint32_t l_requiresExtension_393_ext = ExtensionId::GL_OES_draw_elements_base_vertex;
         observe(observations.mReads);
         mImports.glMultiDrawElementsBaseVertexOES(mode, count, type, indices, primcount,
                                                   basevertex);
@@ -10153,7 +10233,7 @@ inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_374_ext = ExtensionId::GL_EXT_multi_draw_arrays;
+        uint32_t l_requiresExtension_394_ext = ExtensionId::GL_EXT_multi_draw_arrays;
         observe(observations.mReads);
         mImports.glMultiDrawElementsEXT(mode, count, type, indices, primcount);
     } while (false);
@@ -10184,7 +10264,7 @@ inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_375_ext = ExtensionId::GL_EXT_multi_draw_indirect;
+        uint32_t l_requiresExtension_395_ext = ExtensionId::GL_EXT_multi_draw_indirect;
         observe(observations.mReads);
         mImports.glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride);
     } while (false);
@@ -10214,7 +10294,7 @@ inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_376_ext = ExtensionId::GL_NV_sample_locations;
+        uint32_t l_requiresExtension_396_ext = ExtensionId::GL_NV_sample_locations;
         observe(observations.mReads);
         mImports.glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
     } while (false);
@@ -10241,7 +10321,7 @@ inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_377_ext = ExtensionId::GL_OES_tessellation_shader;
+        uint32_t l_requiresExtension_397_ext = ExtensionId::GL_OES_tessellation_shader;
         observe(observations.mReads);
         mImports.glPatchParameteriOES(pname, value);
     } while (false);
@@ -10265,7 +10345,7 @@ inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_378_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_398_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords);
     } while (false);
@@ -10294,7 +10374,7 @@ inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t c
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_379_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_399_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathCoordsNV(path, numCoords, coordType, coords);
     } while (false);
@@ -10321,7 +10401,7 @@ inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_380_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_400_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathCoverDepthFuncNV(func);
     } while (false);
@@ -10343,7 +10423,7 @@ inline void GlesSpy::glPathDashArrayNV(uint32_t path, int32_t dashCount, float* 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_381_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_401_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathDashArrayNV(path, dashCount, dashArray);
     } while (false);
@@ -10378,7 +10458,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_382_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_402_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glPathGlyphIndexArrayNV(firstPathName, fontTarget, fontName, fontStyle,
                                                   firstGlyphIndex, numGlyphs, pathParameterTemplate,
@@ -10416,7 +10496,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* font
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_383_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_403_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glPathGlyphIndexRangeNV(fontTarget, fontName, fontStyle,
                                                   pathParameterTemplate, emScale, baseAndCount);
@@ -10453,7 +10533,7 @@ inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTar
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_384_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_404_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph,
                                     numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale);
@@ -10485,7 +10565,7 @@ inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_385_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_405_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathGlyphsNV(firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type,
                                 charcodes, handleMissingGlyphs, pathParameterTemplate, emScale);
@@ -10526,7 +10606,7 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_386_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_406_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glPathMemoryGlyphIndexArrayNV(firstPathName, fontTarget, fontSize,
                                                         fontData, faceIndex, firstGlyphIndex,
@@ -10559,7 +10639,7 @@ inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float val
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_387_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_407_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathParameterfNV(path, pname, value);
     } while (false);
@@ -10583,7 +10663,7 @@ inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* v
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_388_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_408_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathParameterfvNV(path, pname, value);
     } while (false);
@@ -10610,7 +10690,7 @@ inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t v
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_389_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_409_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathParameteriNV(path, pname, value);
     } while (false);
@@ -10634,7 +10714,7 @@ inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t*
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_390_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_410_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathParameterivNV(path, pname, value);
     } while (false);
@@ -10660,7 +10740,7 @@ inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_391_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_411_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathStencilDepthOffsetNV(factor, units);
     } while (false);
@@ -10684,7 +10764,7 @@ inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t ma
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_392_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_412_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathStencilFuncNV(func, ref, mask);
     } while (false);
@@ -10708,7 +10788,7 @@ inline void GlesSpy::glPathStringNV(uint32_t path, uint32_t format, int32_t leng
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_393_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_413_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathStringNV(path, format, length, pathString);
     } while (false);
@@ -10741,7 +10821,7 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_394_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_414_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands,
                                      numCoords, coordType, coords);
@@ -10771,7 +10851,7 @@ inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_395_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_415_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords);
     } while (false);
@@ -10803,7 +10883,7 @@ inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_396_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_416_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         result = mImports.glPointAlongPathNV(path, startSegment, numSegments, distance, x, y,
                                              tangentX, tangentY);
@@ -10839,7 +10919,7 @@ inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_397_ext = ExtensionId::GL_NV_polygon_mode;
+        uint32_t l_requiresExtension_417_ext = ExtensionId::GL_NV_polygon_mode;
         observe(observations.mReads);
         mImports.glPolygonModeNV(face, mode);
     } while (false);
@@ -10863,7 +10943,7 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_398_ext = ExtensionId::GL_EXT_debug_marker;
+        uint32_t l_requiresExtension_418_ext = ExtensionId::GL_EXT_debug_marker;
         observe(observations.mReads);
         mImports.glPopGroupMarkerEXT();
     } while (false);
@@ -10889,7 +10969,7 @@ inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float min
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_399_ext = ExtensionId::GL_OES_primitive_bounding_box;
+        uint32_t l_requiresExtension_419_ext = ExtensionId::GL_OES_primitive_bounding_box;
         observe(observations.mReads);
         mImports.glPrimitiveBoundingBoxOES(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
     } while (false);
@@ -10916,7 +10996,7 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_400_ext = ExtensionId::GL_OES_get_program_binary;
+        uint32_t l_requiresExtension_420_ext = ExtensionId::GL_OES_get_program_binary;
         observe(observations.mReads);
         mImports.glProgramBinaryOES(program, binary_format, binary, binary_size);
     } while (false);
@@ -10944,7 +11024,7 @@ inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_401_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_421_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramParameteriEXT(program, pname, value);
     } while (false);
@@ -10971,7 +11051,7 @@ inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t l
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_402_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_422_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glProgramPathFragmentInputGenNV(program, location, genMode, components, coeffs);
     } while (false);
@@ -10998,7 +11078,7 @@ inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, f
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_403_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_423_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1fEXT(program, location, v0);
     } while (false);
@@ -11024,7 +11104,7 @@ inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_404_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_424_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1fvEXT(program, location, count, value);
     } while (false);
@@ -11052,7 +11132,7 @@ inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_405_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_425_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1iEXT(program, location, v0);
     } while (false);
@@ -11078,7 +11158,7 @@ inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_406_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_426_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1ivEXT(program, location, count, value);
     } while (false);
@@ -11106,7 +11186,7 @@ inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_407_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_427_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1uiEXT(program, location, v0);
     } while (false);
@@ -11132,7 +11212,7 @@ inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_408_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_428_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform1uivEXT(program, location, count, value);
     } while (false);
@@ -11160,7 +11240,7 @@ inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, f
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_409_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_429_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2fEXT(program, location, v0, v1);
     } while (false);
@@ -11186,7 +11266,7 @@ inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_410_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_430_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2fvEXT(program, location, count, value);
     } while (false);
@@ -11215,7 +11295,7 @@ inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_411_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_431_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2iEXT(program, location, v0, v1);
     } while (false);
@@ -11241,7 +11321,7 @@ inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_412_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_432_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2ivEXT(program, location, count, value);
     } while (false);
@@ -11270,7 +11350,7 @@ inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_413_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_433_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2uiEXT(program, location, v0, v1);
     } while (false);
@@ -11296,7 +11376,7 @@ inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_414_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_434_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform2uivEXT(program, location, count, value);
     } while (false);
@@ -11325,7 +11405,7 @@ inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, f
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_415_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_435_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3fEXT(program, location, v0, v1, v2);
     } while (false);
@@ -11351,7 +11431,7 @@ inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_416_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_436_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3fvEXT(program, location, count, value);
     } while (false);
@@ -11381,7 +11461,7 @@ inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_417_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_437_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3iEXT(program, location, v0, v1, v2);
     } while (false);
@@ -11407,7 +11487,7 @@ inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_418_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_438_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3ivEXT(program, location, count, value);
     } while (false);
@@ -11437,7 +11517,7 @@ inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_419_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_439_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3uiEXT(program, location, v0, v1, v2);
     } while (false);
@@ -11463,7 +11543,7 @@ inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_420_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_440_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform3uivEXT(program, location, count, value);
     } while (false);
@@ -11492,7 +11572,7 @@ inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, f
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_421_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_441_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4fEXT(program, location, v0, v1, v2, v3);
     } while (false);
@@ -11519,7 +11599,7 @@ inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_422_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_442_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4fvEXT(program, location, count, value);
     } while (false);
@@ -11549,7 +11629,7 @@ inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_423_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_443_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4iEXT(program, location, v0, v1, v2, v3);
     } while (false);
@@ -11576,7 +11656,7 @@ inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_424_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_444_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4ivEXT(program, location, count, value);
     } while (false);
@@ -11606,7 +11686,7 @@ inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_425_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_445_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4uiEXT(program, location, v0, v1, v2, v3);
     } while (false);
@@ -11633,7 +11713,7 @@ inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_426_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_446_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniform4uivEXT(program, location, count, value);
     } while (false);
@@ -11662,7 +11742,7 @@ inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t loca
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_427_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_447_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glProgramUniformHandleui64NV(program, location, value);
     } while (false);
@@ -11688,7 +11768,7 @@ inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t loc
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_428_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_448_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glProgramUniformHandleui64vNV(program, location, count, values);
     } while (false);
@@ -11718,7 +11798,7 @@ inline void GlesSpy::glProgramUniformMatrix2fvEXT(uint32_t program, int32_t loca
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_429_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_449_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11749,7 +11829,7 @@ inline void GlesSpy::glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_430_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_450_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11780,7 +11860,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_431_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_451_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11810,7 +11890,7 @@ inline void GlesSpy::glProgramUniformMatrix3fvEXT(uint32_t program, int32_t loca
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_432_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_452_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11841,7 +11921,7 @@ inline void GlesSpy::glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_433_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_453_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11872,7 +11952,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_434_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_454_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11902,7 +11982,7 @@ inline void GlesSpy::glProgramUniformMatrix4fvEXT(uint32_t program, int32_t loca
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_435_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_455_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11933,7 +12013,7 @@ inline void GlesSpy::glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_436_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_456_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11964,7 +12044,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t lo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_437_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_457_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value);
     } while (false);
@@ -11991,7 +12071,7 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_438_ext = ExtensionId::GL_EXT_debug_marker;
+        uint32_t l_requiresExtension_458_ext = ExtensionId::GL_EXT_debug_marker;
         if (length > (GLsizei)(0)) {
             read(slice(marker, (uint64_t)((GLsizei)(0)), (uint64_t)(length)));
         } else {
@@ -12020,7 +12100,7 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_439_ext = ExtensionId::GL_EXT_disjoint_timer_query;
+        uint32_t l_requiresExtension_459_ext = ExtensionId::GL_EXT_disjoint_timer_query;
         observe(observations.mReads);
         mImports.glQueryCounterEXT(query, target);
     } while (false);
@@ -12044,9 +12124,9 @@ inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsampleloc
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_440_ext = ExtensionId::GL_EXT_raster_multisample;
-        uint32_t l_requiresExtension_441_ext = ExtensionId::GL_EXT_texture_filter_minmax;
-        uint32_t l_requiresExtension_442_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
+        uint32_t l_requiresExtension_460_ext = ExtensionId::GL_EXT_raster_multisample;
+        uint32_t l_requiresExtension_461_ext = ExtensionId::GL_EXT_texture_filter_minmax;
+        uint32_t l_requiresExtension_462_ext = ExtensionId::GL_NV_framebuffer_mixed_samples;
         observe(observations.mReads);
         mImports.glRasterSamplesEXT(samples, fixedsamplelocations);
     } while (false);
@@ -12070,7 +12150,7 @@ inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_443_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
+        uint32_t l_requiresExtension_463_ext = ExtensionId::GL_EXT_multiview_draw_buffers;
         observe(observations.mReads);
         mImports.glReadBufferIndexedEXT(src, index);
     } while (false);
@@ -12092,7 +12172,7 @@ inline void GlesSpy::glReadBufferNV(uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_444_ext = ExtensionId::GL_NV_read_buffer;
+        uint32_t l_requiresExtension_464_ext = ExtensionId::GL_NV_read_buffer;
         observe(observations.mReads);
         mImports.glReadBufferNV(mode);
     } while (false);
@@ -12117,7 +12197,7 @@ inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_445_ext = ExtensionId::GL_EXT_robustness;
+        uint32_t l_requiresExtension_465_ext = ExtensionId::GL_EXT_robustness;
         observe(observations.mReads);
         mImports.glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data);
     } while (false);
@@ -12145,7 +12225,7 @@ inline void GlesSpy::glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_446_ext = ExtensionId::GL_KHR_robustness;
+        uint32_t l_requiresExtension_466_ext = ExtensionId::GL_KHR_robustness;
         observe(observations.mReads);
         mImports.glReadnPixelsKHR(x, y, width, height, format, type, bufSize, data);
     } while (false);
@@ -12177,7 +12257,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleANGLE(uint32_t target, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_447_ext = ExtensionId::GL_ANGLE_framebuffer_multisample;
+        uint32_t l_requiresExtension_467_ext = ExtensionId::GL_ANGLE_framebuffer_multisample;
         observe(observations.mReads);
         mImports.glRenderbufferStorageMultisampleANGLE(target, samples, internalformat, width,
                                                        height);
@@ -12208,7 +12288,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_448_ext = ExtensionId::GL_APPLE_framebuffer_multisample;
+        uint32_t l_requiresExtension_468_ext = ExtensionId::GL_APPLE_framebuffer_multisample;
         observe(observations.mReads);
         mImports.glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width,
                                                        height);
@@ -12238,7 +12318,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_449_ext = ExtensionId::GL_EXT_multisampled_render_to_texture;
+        uint32_t l_requiresExtension_469_ext = ExtensionId::GL_EXT_multisampled_render_to_texture;
         observe(observations.mReads);
         mImports.glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width,
                                                      height);
@@ -12268,7 +12348,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_450_ext = ExtensionId::GL_IMG_multisampled_render_to_texture;
+        uint32_t l_requiresExtension_470_ext = ExtensionId::GL_IMG_multisampled_render_to_texture;
         observe(observations.mReads);
         mImports.glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width,
                                                      height);
@@ -12297,7 +12377,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_451_ext = ExtensionId::GL_NV_framebuffer_multisample;
+        uint32_t l_requiresExtension_471_ext = ExtensionId::GL_NV_framebuffer_multisample;
         observe(observations.mReads);
         mImports.glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height);
     } while (false);
@@ -12322,7 +12402,7 @@ inline void GlesSpy::glResolveDepthValuesNV() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_452_ext = ExtensionId::GL_NV_sample_locations;
+        uint32_t l_requiresExtension_472_ext = ExtensionId::GL_NV_sample_locations;
         observe(observations.mReads);
         mImports.glResolveDepthValuesNV();
     } while (false);
@@ -12347,7 +12427,7 @@ inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_453_ext = ExtensionId::GL_APPLE_framebuffer_multisample;
+        uint32_t l_requiresExtension_473_ext = ExtensionId::GL_APPLE_framebuffer_multisample;
         observe(observations.mReads);
         mImports.glResolveMultisampleFramebufferAPPLE();
     } while (false);
@@ -12371,7 +12451,7 @@ inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_454_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_474_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glSamplerParameterIivOES(sampler, pname, param);
     } while (false);
@@ -12398,7 +12478,7 @@ inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_455_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_475_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glSamplerParameterIuivOES(sampler, pname, param);
     } while (false);
@@ -12423,7 +12503,7 @@ inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_456_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_476_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glScissorArrayvNV(first, count, v);
     } while (false);
@@ -12452,7 +12532,7 @@ inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_457_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_477_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glScissorIndexedNV(index, left, bottom, width, height);
     } while (false);
@@ -12476,7 +12556,7 @@ inline void GlesSpy::glScissorIndexedvNV(uint32_t index, int32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_458_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_478_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glScissorIndexedvNV(index, v);
     } while (false);
@@ -12506,7 +12586,7 @@ inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t en
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_459_ext = ExtensionId::GL_AMD_performance_monitor;
+        uint32_t l_requiresExtension_479_ext = ExtensionId::GL_AMD_performance_monitor;
         observe(observations.mReads);
         mImports.glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters, counterList);
     } while (false);
@@ -12531,7 +12611,7 @@ inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_460_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_480_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         mImports.glSetFenceNV(fence, condition);
     } while (false);
@@ -12555,7 +12635,7 @@ inline void GlesSpy::glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_461_ext = ExtensionId::GL_QCOM_tiled_rendering;
+        uint32_t l_requiresExtension_481_ext = ExtensionId::GL_QCOM_tiled_rendering;
         observe(observations.mReads);
         mImports.glStartTilingQCOM(x, y, width, height, preserveMask);
     } while (false);
@@ -12585,7 +12665,7 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_462_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_482_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode,
                                               mask, transformType, transformValues);
@@ -12616,7 +12696,7 @@ inline void GlesSpy::glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_463_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_483_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilFillPathNV(path, fillMode, mask);
     } while (false);
@@ -12647,7 +12727,7 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_464_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_484_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference,
                                                 mask, transformType, transformValues);
@@ -12679,7 +12759,7 @@ inline void GlesSpy::glStencilStrokePathNV(uint32_t path, int32_t reference, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_465_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_485_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilStrokePathNV(path, reference, mask);
     } while (false);
@@ -12709,7 +12789,7 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_466_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_486_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilThenCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase,
                                                        fillMode, mask, coverMode, transformType,
@@ -12743,7 +12823,7 @@ inline void GlesSpy::glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMo
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_467_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_487_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilThenCoverFillPathNV(path, fillMode, mask, coverMode);
     } while (false);
@@ -12774,7 +12854,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_468_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_488_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilThenCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase,
                                                          reference, mask, coverMode, transformType,
@@ -12808,7 +12888,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t refer
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_469_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_489_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glStencilThenCoverStrokePathNV(path, reference, mask, coverMode);
     } while (false);
@@ -12833,7 +12913,7 @@ inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_470_ext = ExtensionId::GL_NV_conservative_raster;
+        uint32_t l_requiresExtension_490_ext = ExtensionId::GL_NV_conservative_raster;
         observe(observations.mReads);
         mImports.glSubpixelPrecisionBiasNV(xbits, ybits);
     } while (false);
@@ -12857,7 +12937,7 @@ inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_471_ext = ExtensionId::GL_NV_fence;
+        uint32_t l_requiresExtension_491_ext = ExtensionId::GL_NV_fence;
         observe(observations.mReads);
         result = mImports.glTestFenceNV(fence);
         break;
@@ -12882,7 +12962,7 @@ inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, ui
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_472_ext = ExtensionId::GL_OES_texture_buffer;
+        uint32_t l_requiresExtension_492_ext = ExtensionId::GL_OES_texture_buffer;
         observe(observations.mReads);
         mImports.glTexBufferOES(target, internalformat, buffer);
     } while (false);
@@ -12908,7 +12988,7 @@ inline void GlesSpy::glTexBufferRangeOES(uint32_t target, uint32_t internalforma
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_473_ext = ExtensionId::GL_OES_texture_buffer;
+        uint32_t l_requiresExtension_493_ext = ExtensionId::GL_OES_texture_buffer;
         observe(observations.mReads);
         mImports.glTexBufferRangeOES(target, internalformat, buffer, offset, size);
     } while (false);
@@ -12935,7 +13015,7 @@ inline void GlesSpy::glTexImage3DOES(uint32_t target, int32_t level, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_474_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_494_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glTexImage3DOES(target, level, internalformat, width, height, depth, border,
                                  format, type, pixels);
@@ -12967,7 +13047,7 @@ inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_475_ext = ExtensionId::GL_EXT_sparse_texture;
+        uint32_t l_requiresExtension_495_ext = ExtensionId::GL_EXT_sparse_texture;
         observe(observations.mReads);
         mImports.glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height,
                                         depth, commit);
@@ -12993,7 +13073,7 @@ inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_476_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_496_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glTexParameterIivOES(target, pname, params);
     } while (false);
@@ -13020,7 +13100,7 @@ inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_477_ext = ExtensionId::GL_OES_texture_border_clamp;
+        uint32_t l_requiresExtension_497_ext = ExtensionId::GL_OES_texture_border_clamp;
         observe(observations.mReads);
         mImports.glTexParameterIuivOES(target, pname, params);
     } while (false);
@@ -13047,7 +13127,7 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_478_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_498_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTexStorage1DEXT(target, levels, format, width);
     } while (false);
@@ -13071,7 +13151,7 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_479_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_499_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTexStorage2DEXT(target, levels, format, width, height);
     } while (false);
@@ -13096,7 +13176,7 @@ inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_480_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_500_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTexStorage3DEXT(target, levels, format, width, height, depth);
     } while (false);
@@ -13127,7 +13207,7 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_481_ext = ExtensionId::GL_OES_texture_3D;
+        uint32_t l_requiresExtension_501_ext = ExtensionId::GL_OES_texture_3D;
         observe(observations.mReads);
         mImports.glTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                     format, type, pixels);
@@ -13157,7 +13237,7 @@ inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_482_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_502_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTextureStorage1DEXT(texture, target, levels, format, width);
     } while (false);
@@ -13184,7 +13264,7 @@ inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_483_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_503_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTextureStorage2DEXT(texture, target, levels, format, width, height);
     } while (false);
@@ -13213,7 +13293,7 @@ inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, in
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_484_ext = ExtensionId::GL_EXT_texture_storage;
+        uint32_t l_requiresExtension_504_ext = ExtensionId::GL_EXT_texture_storage;
         observe(observations.mReads);
         mImports.glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
     } while (false);
@@ -13241,7 +13321,7 @@ inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_485_ext = ExtensionId::GL_EXT_texture_view;
+        uint32_t l_requiresExtension_505_ext = ExtensionId::GL_EXT_texture_view;
         observe(observations.mReads);
         mImports.glTextureViewEXT(texture, target, origtexture, internalformat, minlevel, numlevels,
                                   minlayer, numlayers);
@@ -13271,7 +13351,7 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_486_ext = ExtensionId::GL_OES_texture_view;
+        uint32_t l_requiresExtension_506_ext = ExtensionId::GL_OES_texture_view;
         observe(observations.mReads);
         mImports.glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels,
                                   minlayer, numlayers);
@@ -13298,7 +13378,7 @@ inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_487_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_507_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glTransformPathNV(resultPath, srcPath, transformType, transformValues);
     } while (false);
@@ -13325,7 +13405,7 @@ inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_488_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_508_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glUniformHandleui64NV(location, value);
     } while (false);
@@ -13349,7 +13429,7 @@ inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_489_ext = ExtensionId::GL_NV_bindless_texture;
+        uint32_t l_requiresExtension_509_ext = ExtensionId::GL_NV_bindless_texture;
         observe(observations.mReads);
         mImports.glUniformHandleui64vNV(location, count, value);
     } while (false);
@@ -13378,7 +13458,7 @@ inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_490_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_510_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix2x3fvNV(location, count, transpose, value);
     } while (false);
@@ -13407,7 +13487,7 @@ inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_491_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_511_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix2x4fvNV(location, count, transpose, value);
     } while (false);
@@ -13436,7 +13516,7 @@ inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_492_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_512_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix3x2fvNV(location, count, transpose, value);
     } while (false);
@@ -13465,7 +13545,7 @@ inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_493_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_513_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix3x4fvNV(location, count, transpose, value);
     } while (false);
@@ -13494,7 +13574,7 @@ inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_494_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_514_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix4x2fvNV(location, count, transpose, value);
     } while (false);
@@ -13523,7 +13603,7 @@ inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uin
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_495_ext = ExtensionId::GL_NV_non_square_matrices;
+        uint32_t l_requiresExtension_515_ext = ExtensionId::GL_NV_non_square_matrices;
         observe(observations.mReads);
         mImports.glUniformMatrix4x3fvNV(location, count, transpose, value);
     } while (false);
@@ -13550,7 +13630,7 @@ inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_496_ext = ExtensionId::GL_OES_mapbuffer;
+        uint32_t l_requiresExtension_516_ext = ExtensionId::GL_OES_mapbuffer;
         observe(observations.mReads);
         result = mImports.glUnmapBufferOES(target);
         break;
@@ -13577,7 +13657,7 @@ inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_497_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_517_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glUseProgramStagesEXT(pipeline, stages, program);
     } while (false);
@@ -13601,7 +13681,7 @@ inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_498_ext = ExtensionId::GL_EXT_separate_shader_objects;
+        uint32_t l_requiresExtension_518_ext = ExtensionId::GL_EXT_separate_shader_objects;
         observe(observations.mReads);
         mImports.glValidateProgramPipelineEXT(pipeline);
     } while (false);
@@ -13625,7 +13705,7 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_499_ext = ExtensionId::GL_ANGLE_instanced_arrays;
+        uint32_t l_requiresExtension_519_ext = ExtensionId::GL_ANGLE_instanced_arrays;
         observe(observations.mReads);
         mImports.glVertexAttribDivisorANGLE(index, divisor);
     } while (false);
@@ -13649,7 +13729,7 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_500_ext = ExtensionId::GL_EXT_instanced_arrays;
+        uint32_t l_requiresExtension_520_ext = ExtensionId::GL_EXT_instanced_arrays;
         observe(observations.mReads);
         mImports.glVertexAttribDivisorEXT(index, divisor);
     } while (false);
@@ -13673,7 +13753,7 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_501_ext = ExtensionId::GL_NV_instanced_arrays;
+        uint32_t l_requiresExtension_521_ext = ExtensionId::GL_NV_instanced_arrays;
         observe(observations.mReads);
         mImports.glVertexAttribDivisorNV(index, divisor);
     } while (false);
@@ -13697,7 +13777,7 @@ inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_502_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_522_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glViewportArrayvNV(first, count, v);
     } while (false);
@@ -13724,7 +13804,7 @@ inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, floa
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_503_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_523_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glViewportIndexedfNV(index, x, y, w, h);
     } while (false);
@@ -13748,7 +13828,7 @@ inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_504_ext = ExtensionId::GL_NV_viewport_array;
+        uint32_t l_requiresExtension_524_ext = ExtensionId::GL_NV_viewport_array;
         observe(observations.mReads);
         mImports.glViewportIndexedfvNV(index, v);
     } while (false);
@@ -13772,7 +13852,7 @@ inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t time
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_505_ext = ExtensionId::GL_APPLE_sync;
+        uint32_t l_requiresExtension_525_ext = ExtensionId::GL_APPLE_sync;
         observe(observations.mReads);
         mImports.glWaitSyncAPPLE(sync, flag, timeout);
     } while (false);
@@ -13796,7 +13876,7 @@ inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_506_ext = ExtensionId::GL_NV_path_rendering;
+        uint32_t l_requiresExtension_526_ext = ExtensionId::GL_NV_path_rendering;
         observe(observations.mReads);
         mImports.glWeightPathsNV(resultPath, numPaths, paths, weights);
     } while (false);
@@ -13823,8 +13903,8 @@ inline void GlesSpy::glBlendBarrier() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_507_major = 3;
-        uint32_t l_minRequiredVersion_507_minor = 2;
+        uint32_t l_minRequiredVersion_527_major = 3;
+        uint32_t l_minRequiredVersion_527_minor = 2;
         observe(observations.mReads);
         mImports.glBlendBarrier();
     } while (false);
@@ -13846,11 +13926,15 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_508_major = 2;
-        uint32_t l_minRequiredVersion_508_minor = 0;
+        uint32_t l_minRequiredVersion_528_major = 2;
+        uint32_t l_minRequiredVersion_528_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_509_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_509_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_530_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_529_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_529_result;
         l_ctx->mBlending.mBlendColor = Color(red, green, blue, alpha);
         observe(observations.mReads);
         mImports.glBlendColor(red, green, blue, alpha);
@@ -13873,8 +13957,8 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_510_major = 2;
-        uint32_t l_minRequiredVersion_510_minor = 0;
+        uint32_t l_minRequiredVersion_531_major = 2;
+        uint32_t l_minRequiredVersion_531_minor = 0;
         switch (equation) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
             case GLenum::GL_FUNC_REVERSE_SUBTRACT:  // fall-through...
@@ -13883,14 +13967,18 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
             }
             case GLenum::GL_MAX:  // fall-through...
             case GLenum::GL_MIN: {
-                uint32_t l_minRequiredVersion_511_major = 3;
-                uint32_t l_minRequiredVersion_511_minor = 0;
+                uint32_t l_minRequiredVersion_532_major = 3;
+                uint32_t l_minRequiredVersion_532_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_513_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_513_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_535_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_534_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_534_result;
         l_ctx->mBlending.mBlendEquationRgb = equation;
         l_ctx->mBlending.mBlendEquationAlpha = equation;
         observe(observations.mReads);
@@ -13916,8 +14004,8 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_514_major = 2;
-        uint32_t l_minRequiredVersion_514_minor = 0;
+        uint32_t l_minRequiredVersion_536_major = 2;
+        uint32_t l_minRequiredVersion_536_minor = 0;
         switch (rgb) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
             case GLenum::GL_FUNC_REVERSE_SUBTRACT:  // fall-through...
@@ -13926,8 +14014,8 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
             }
             case GLenum::GL_MAX:  // fall-through...
             case GLenum::GL_MIN: {
-                uint32_t l_minRequiredVersion_515_major = 3;
-                uint32_t l_minRequiredVersion_515_minor = 0;
+                uint32_t l_minRequiredVersion_537_major = 3;
+                uint32_t l_minRequiredVersion_537_minor = 0;
                 break;
             }
         }
@@ -13939,14 +14027,18 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
             }
             case GLenum::GL_MAX:  // fall-through...
             case GLenum::GL_MIN: {
-                uint32_t l_minRequiredVersion_517_major = 3;
-                uint32_t l_minRequiredVersion_517_minor = 0;
+                uint32_t l_minRequiredVersion_539_major = 3;
+                uint32_t l_minRequiredVersion_539_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_519_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_519_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_542_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_541_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_541_result;
         l_ctx->mBlending.mBlendEquationRgb = rgb;
         l_ctx->mBlending.mBlendEquationAlpha = alpha;
         observe(observations.mReads);
@@ -13972,8 +14064,8 @@ inline void GlesSpy::glBlendEquationSeparatei(uint32_t buf, uint32_t modeRGB, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_520_major = 3;
-        uint32_t l_minRequiredVersion_520_minor = 2;
+        uint32_t l_minRequiredVersion_543_major = 3;
+        uint32_t l_minRequiredVersion_543_minor = 2;
         switch (modeRGB) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
             case GLenum::GL_FUNC_REVERSE_SUBTRACT:  // fall-through...
@@ -14013,8 +14105,8 @@ inline void GlesSpy::glBlendEquationi(uint32_t buf, uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_523_major = 3;
-        uint32_t l_minRequiredVersion_523_minor = 2;
+        uint32_t l_minRequiredVersion_546_major = 3;
+        uint32_t l_minRequiredVersion_546_minor = 2;
         switch (mode) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
             case GLenum::GL_FUNC_REVERSE_SUBTRACT:  // fall-through...
@@ -14045,8 +14137,8 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_525_major = 2;
-        uint32_t l_minRequiredVersion_525_minor = 0;
+        uint32_t l_minRequiredVersion_548_major = 2;
+        uint32_t l_minRequiredVersion_548_minor = 0;
         switch (src_factor) {
             case GLenum::GL_CONSTANT_ALPHA:            // fall-through...
             case GLenum::GL_CONSTANT_COLOR:            // fall-through...
@@ -14086,8 +14178,12 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_528_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_528_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_552_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_551_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_551_result;
         l_ctx->mBlending.mSrcRgbBlendFactor = src_factor;
         l_ctx->mBlending.mSrcAlphaBlendFactor = src_factor;
         l_ctx->mBlending.mDstRgbBlendFactor = dst_factor;
@@ -14117,8 +14213,8 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_529_major = 2;
-        uint32_t l_minRequiredVersion_529_minor = 0;
+        uint32_t l_minRequiredVersion_553_major = 2;
+        uint32_t l_minRequiredVersion_553_minor = 0;
         switch (src_factor_rgb) {
             case GLenum::GL_CONSTANT_ALPHA:            // fall-through...
             case GLenum::GL_CONSTANT_COLOR:            // fall-through...
@@ -14196,8 +14292,12 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_534_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_534_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_559_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_558_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_558_result;
         l_ctx->mBlending.mSrcRgbBlendFactor = src_factor_rgb;
         l_ctx->mBlending.mDstRgbBlendFactor = dst_factor_rgb;
         l_ctx->mBlending.mSrcAlphaBlendFactor = src_factor_alpha;
@@ -14229,8 +14329,8 @@ inline void GlesSpy::glBlendFuncSeparatei(uint32_t buf, uint32_t srcRGB, uint32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_535_major = 3;
-        uint32_t l_minRequiredVersion_535_minor = 2;
+        uint32_t l_minRequiredVersion_560_major = 3;
+        uint32_t l_minRequiredVersion_560_minor = 2;
         switch (srcRGB) {
             case GLenum::GL_CONSTANT_ALPHA:            // fall-through...
             case GLenum::GL_CONSTANT_COLOR:            // fall-through...
@@ -14329,8 +14429,8 @@ inline void GlesSpy::glBlendFunci(uint32_t buf, uint32_t src, uint32_t dst) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_540_major = 3;
-        uint32_t l_minRequiredVersion_540_minor = 2;
+        uint32_t l_minRequiredVersion_565_major = 3;
+        uint32_t l_minRequiredVersion_565_minor = 2;
         switch (src) {
             case GLenum::GL_CONSTANT_ALPHA:            // fall-through...
             case GLenum::GL_CONSTANT_COLOR:            // fall-through...
@@ -14390,8 +14490,8 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_543_major = 2;
-        uint32_t l_minRequiredVersion_543_minor = 0;
+        uint32_t l_minRequiredVersion_568_major = 2;
+        uint32_t l_minRequiredVersion_568_minor = 0;
         switch (function) {
             case GLenum::GL_ALWAYS:   // fall-through...
             case GLenum::GL_EQUAL:    // fall-through...
@@ -14405,8 +14505,12 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_545_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_545_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_571_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_570_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_570_result;
         l_ctx->mRasterizing.mDepthTestFunction = function;
         observe(observations.mReads);
         mImports.glDepthFunc(function);
@@ -14429,11 +14533,15 @@ inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_546_major = 2;
-        uint32_t l_minRequiredVersion_546_minor = 0;
+        uint32_t l_minRequiredVersion_572_major = 2;
+        uint32_t l_minRequiredVersion_572_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_547_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_547_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_574_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_573_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_573_result;
         l_ctx->mRasterizing.mSampleCoverageValue = value;
         l_ctx->mRasterizing.mSampleCoverageInvert = invert;
         observe(observations.mReads);
@@ -14457,8 +14565,8 @@ inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_548_major = 3;
-        uint32_t l_minRequiredVersion_548_minor = 1;
+        uint32_t l_minRequiredVersion_575_major = 3;
+        uint32_t l_minRequiredVersion_575_minor = 1;
         observe(observations.mReads);
         mImports.glSampleMaski(maskNumber, mask);
     } while (false);
@@ -14481,11 +14589,15 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_549_major = 2;
-        uint32_t l_minRequiredVersion_549_minor = 0;
+        uint32_t l_minRequiredVersion_576_major = 2;
+        uint32_t l_minRequiredVersion_576_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_550_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_550_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_578_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_577_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_577_result;
         l_ctx->mRasterizing.mScissor = Rect(x, y, width, height);
         observe(observations.mReads);
         mImports.glScissor(x, y, width, height);
@@ -14508,8 +14620,8 @@ inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_551_major = 2;
-        uint32_t l_minRequiredVersion_551_minor = 0;
+        uint32_t l_minRequiredVersion_579_major = 2;
+        uint32_t l_minRequiredVersion_579_minor = 0;
         switch (func) {
             case GLenum::GL_ALWAYS:   // fall-through...
             case GLenum::GL_EQUAL:    // fall-through...
@@ -14547,8 +14659,8 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_553_major = 2;
-        uint32_t l_minRequiredVersion_553_minor = 0;
+        uint32_t l_minRequiredVersion_581_major = 2;
+        uint32_t l_minRequiredVersion_581_minor = 0;
         switch (face) {
             case GLenum::GL_BACK:   // fall-through...
             case GLenum::GL_FRONT:  // fall-through...
@@ -14590,8 +14702,8 @@ inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_556_major = 2;
-        uint32_t l_minRequiredVersion_556_minor = 0;
+        uint32_t l_minRequiredVersion_584_major = 2;
+        uint32_t l_minRequiredVersion_584_minor = 0;
         switch (fail) {
             case GLenum::GL_DECR:       // fall-through...
             case GLenum::GL_DECR_WRAP:  // fall-through...
@@ -14654,8 +14766,8 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_560_major = 2;
-        uint32_t l_minRequiredVersion_560_minor = 0;
+        uint32_t l_minRequiredVersion_588_major = 2;
+        uint32_t l_minRequiredVersion_588_minor = 0;
         switch (face) {
             case GLenum::GL_BACK:   // fall-through...
             case GLenum::GL_FRONT:  // fall-through...
@@ -14722,22 +14834,26 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_565_major = 2;
-        uint32_t l_minRequiredVersion_565_minor = 0;
+        uint32_t l_minRequiredVersion_593_major = 2;
+        uint32_t l_minRequiredVersion_593_minor = 0;
         switch (target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_566_major = 3;
-                uint32_t l_minRequiredVersion_566_minor = 0;
+                uint32_t l_minRequiredVersion_594_major = 3;
+                uint32_t l_minRequiredVersion_594_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_568_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_568_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_597_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_596_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_596_result;
         if (!(l_ctx->mInstances.mFramebuffers.count(framebuffer) > 0)) {
             l_ctx->mInstances.mFramebuffers[framebuffer] = std::shared_ptr<Framebuffer>(
                     new Framebuffer(GLenumToFramebufferAttachmentInfo()));
@@ -14771,16 +14887,20 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_569_major = 2;
-        uint32_t l_minRequiredVersion_569_minor = 0;
+        uint32_t l_minRequiredVersion_598_major = 2;
+        uint32_t l_minRequiredVersion_598_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_571_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_571_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_601_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_600_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_600_result;
         if (!(l_ctx->mInstances.mRenderbuffers.count(renderbuffer) > 0)) {
             l_ctx->mInstances.mRenderbuffers[renderbuffer] =
                     std::shared_ptr<Renderbuffer>(new Renderbuffer(0, 0, Slice<uint8_t>(), 0));
@@ -14811,10 +14931,10 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_572_major = 3;
-        uint32_t l_minRequiredVersion_572_minor = 0;
-        uint32_t l_supportsBits_573_seenBits = mask;
-        uint32_t l_supportsBits_573_validBits = GLbitfield::GL_COLOR_BUFFER_BIT |
+        uint32_t l_minRequiredVersion_602_major = 3;
+        uint32_t l_minRequiredVersion_602_minor = 0;
+        uint32_t l_supportsBits_603_seenBits = mask;
+        uint32_t l_supportsBits_603_validBits = GLbitfield::GL_COLOR_BUFFER_BIT |
                                                 GLbitfield::GL_DEPTH_BUFFER_BIT |
                                                 GLbitfield::GL_STENCIL_BUFFER_BIT;
         if ((mask & GLbitfield::GL_COLOR_BUFFER_BIT) != 0) {
@@ -14856,16 +14976,16 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_575_major = 2;
-        uint32_t l_minRequiredVersion_575_minor = 0;
+        uint32_t l_minRequiredVersion_605_major = 2;
+        uint32_t l_minRequiredVersion_605_minor = 0;
         switch (target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_576_major = 3;
-                uint32_t l_minRequiredVersion_576_minor = 0;
+                uint32_t l_minRequiredVersion_606_major = 3;
+                uint32_t l_minRequiredVersion_606_minor = 0;
                 break;
             }
         }
@@ -14893,10 +15013,10 @@ inline void GlesSpy::glClear(uint32_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_578_major = 2;
-        uint32_t l_minRequiredVersion_578_minor = 0;
-        uint32_t l_supportsBits_579_seenBits = mask;
-        uint32_t l_supportsBits_579_validBits = GLbitfield::GL_COLOR_BUFFER_BIT |
+        uint32_t l_minRequiredVersion_608_major = 2;
+        uint32_t l_minRequiredVersion_608_minor = 0;
+        uint32_t l_supportsBits_609_seenBits = mask;
+        uint32_t l_supportsBits_609_validBits = GLbitfield::GL_COLOR_BUFFER_BIT |
                                                 GLbitfield::GL_DEPTH_BUFFER_BIT |
                                                 GLbitfield::GL_STENCIL_BUFFER_BIT;
         if ((mask & GLbitfield::GL_COLOR_BUFFER_BIT) != 0) {
@@ -14930,8 +15050,8 @@ inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_580_major = 3;
-        uint32_t l_minRequiredVersion_580_minor = 0;
+        uint32_t l_minRequiredVersion_610_major = 3;
+        uint32_t l_minRequiredVersion_610_minor = 0;
         switch (buffer) {
             case GLenum::GL_DEPTH_STENCIL: {
                 break;
@@ -14958,8 +15078,8 @@ inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_582_major = 3;
-        uint32_t l_minRequiredVersion_582_minor = 0;
+        uint32_t l_minRequiredVersion_612_major = 3;
+        uint32_t l_minRequiredVersion_612_minor = 0;
         switch (buffer) {
             case GLenum::GL_COLOR:  // fall-through...
             case GLenum::GL_DEPTH: {
@@ -14990,8 +15110,8 @@ inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_584_major = 3;
-        uint32_t l_minRequiredVersion_584_minor = 0;
+        uint32_t l_minRequiredVersion_614_major = 3;
+        uint32_t l_minRequiredVersion_614_minor = 0;
         switch (buffer) {
             case GLenum::GL_COLOR:  // fall-through...
             case GLenum::GL_STENCIL: {
@@ -15022,8 +15142,8 @@ inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_586_major = 3;
-        uint32_t l_minRequiredVersion_586_minor = 0;
+        uint32_t l_minRequiredVersion_616_major = 3;
+        uint32_t l_minRequiredVersion_616_minor = 0;
         switch (buffer) {
             case GLenum::GL_COLOR: {
                 break;
@@ -15053,11 +15173,15 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_588_major = 2;
-        uint32_t l_minRequiredVersion_588_minor = 0;
+        uint32_t l_minRequiredVersion_618_major = 2;
+        uint32_t l_minRequiredVersion_618_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_589_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_589_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_620_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_619_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_619_result;
         l_ctx->mClearing.mClearColor = Color(r, g, b, a);
         observe(observations.mReads);
         mImports.glClearColor(r, g, b, a);
@@ -15080,11 +15204,15 @@ inline void GlesSpy::glClearDepthf(float depth) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_590_major = 2;
-        uint32_t l_minRequiredVersion_590_minor = 0;
+        uint32_t l_minRequiredVersion_621_major = 2;
+        uint32_t l_minRequiredVersion_621_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_591_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_591_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_623_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_622_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_622_result;
         l_ctx->mClearing.mClearDepth = depth;
         observe(observations.mReads);
         mImports.glClearDepthf(depth);
@@ -15107,11 +15235,15 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_592_major = 2;
-        uint32_t l_minRequiredVersion_592_minor = 0;
+        uint32_t l_minRequiredVersion_624_major = 2;
+        uint32_t l_minRequiredVersion_624_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_593_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_593_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_626_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_625_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_625_result;
         l_ctx->mClearing.mClearStencil = stencil;
         observe(observations.mReads);
         mImports.glClearStencil(stencil);
@@ -15135,11 +15267,15 @@ inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_594_major = 2;
-        uint32_t l_minRequiredVersion_594_minor = 0;
+        uint32_t l_minRequiredVersion_627_major = 2;
+        uint32_t l_minRequiredVersion_627_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_595_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_595_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_629_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_628_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_628_result;
         l_ctx->mRasterizing.mColorMaskRed = red;
         l_ctx->mRasterizing.mColorMaskGreen = green;
         l_ctx->mRasterizing.mColorMaskBlue = blue;
@@ -15166,8 +15302,8 @@ inline void GlesSpy::glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_596_major = 3;
-        uint32_t l_minRequiredVersion_596_minor = 2;
+        uint32_t l_minRequiredVersion_630_major = 3;
+        uint32_t l_minRequiredVersion_630_minor = 2;
         observe(observations.mReads);
         mImports.glColorMaski(index, r, g, b, a);
     } while (false);
@@ -15191,12 +15327,16 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_597_major = 2;
-        uint32_t l_minRequiredVersion_597_minor = 0;
+        uint32_t l_minRequiredVersion_631_major = 2;
+        uint32_t l_minRequiredVersion_631_minor = 0;
         Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_598_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_598_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_633_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_632_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_632_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mFramebuffers[read(l_f, (uint64_t)(l_i))] =
                     std::shared_ptr<Framebuffer>();
@@ -15227,13 +15367,17 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_599_major = 2;
-        uint32_t l_minRequiredVersion_599_minor = 0;
+        uint32_t l_minRequiredVersion_634_major = 2;
+        uint32_t l_minRequiredVersion_634_minor = 0;
         Slice<RenderbufferId> l_r =
                 slice(renderbuffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_600_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_600_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_636_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_635_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_635_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mRenderbuffers[read(l_r, (uint64_t)(l_i))] =
                     std::shared_ptr<Renderbuffer>();
@@ -15262,11 +15406,15 @@ inline void GlesSpy::glDepthMask(uint8_t enabled) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_601_major = 2;
-        uint32_t l_minRequiredVersion_601_minor = 0;
+        uint32_t l_minRequiredVersion_637_major = 2;
+        uint32_t l_minRequiredVersion_637_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_602_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_602_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_639_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_638_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_638_result;
         l_ctx->mRasterizing.mDepthMask = enabled;
         observe(observations.mReads);
         mImports.glDepthMask(enabled);
@@ -15291,8 +15439,8 @@ inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_603_major = 3;
-        uint32_t l_minRequiredVersion_603_minor = 1;
+        uint32_t l_minRequiredVersion_640_major = 3;
+        uint32_t l_minRequiredVersion_640_minor = 1;
         switch (target) {
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_FRAMEBUFFER:       // fall-through...
@@ -15308,8 +15456,8 @@ inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, in
                 break;
             }
             case GLenum::GL_FRAMEBUFFER_DEFAULT_LAYERS: {
-                uint32_t l_minRequiredVersion_605_major = 3;
-                uint32_t l_minRequiredVersion_605_minor = 2;
+                uint32_t l_minRequiredVersion_642_major = 3;
+                uint32_t l_minRequiredVersion_642_minor = 2;
                 break;
             }
         }
@@ -15340,16 +15488,16 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_607_major = 2;
-        uint32_t l_minRequiredVersion_607_minor = 0;
+        uint32_t l_minRequiredVersion_644_major = 2;
+        uint32_t l_minRequiredVersion_644_minor = 0;
         switch (framebuffer_target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_608_major = 3;
-                uint32_t l_minRequiredVersion_608_minor = 0;
+                uint32_t l_minRequiredVersion_645_major = 3;
+                uint32_t l_minRequiredVersion_645_minor = 0;
                 break;
             }
         }
@@ -15375,8 +15523,8 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
             case GLenum::GL_COLOR_ATTACHMENT8:   // fall-through...
             case GLenum::GL_COLOR_ATTACHMENT9:   // fall-through...
             case GLenum::GL_DEPTH_STENCIL_ATTACHMENT: {
-                uint32_t l_minRequiredVersion_610_major = 3;
-                uint32_t l_minRequiredVersion_610_minor = 0;
+                uint32_t l_minRequiredVersion_647_major = 3;
+                uint32_t l_minRequiredVersion_647_minor = 0;
                 break;
             }
         }
@@ -15386,8 +15534,12 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_613_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_613_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_651_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_650_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_650_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
@@ -15436,8 +15588,8 @@ inline void GlesSpy::glFramebufferTexture(uint32_t target, uint32_t attachment, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_614_major = 3;
-        uint32_t l_minRequiredVersion_614_minor = 2;
+        uint32_t l_minRequiredVersion_652_major = 3;
+        uint32_t l_minRequiredVersion_652_minor = 2;
         switch (target) {
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_FRAMEBUFFER:       // fall-through...
@@ -15496,16 +15648,16 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_617_major = 2;
-        uint32_t l_minRequiredVersion_617_minor = 0;
+        uint32_t l_minRequiredVersion_655_major = 2;
+        uint32_t l_minRequiredVersion_655_minor = 0;
         switch (framebuffer_target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_618_major = 3;
-                uint32_t l_minRequiredVersion_618_minor = 0;
+                uint32_t l_minRequiredVersion_656_major = 3;
+                uint32_t l_minRequiredVersion_656_minor = 0;
                 break;
             }
         }
@@ -15531,8 +15683,8 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
             case GLenum::GL_COLOR_ATTACHMENT8:   // fall-through...
             case GLenum::GL_COLOR_ATTACHMENT9:   // fall-through...
             case GLenum::GL_DEPTH_STENCIL_ATTACHMENT: {
-                uint32_t l_minRequiredVersion_620_major = 3;
-                uint32_t l_minRequiredVersion_620_minor = 0;
+                uint32_t l_minRequiredVersion_658_major = 3;
+                uint32_t l_minRequiredVersion_658_minor = 0;
                 break;
             }
         }
@@ -15547,14 +15699,18 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_622_major = 3;
-                uint32_t l_minRequiredVersion_622_minor = 1;
+                uint32_t l_minRequiredVersion_660_major = 3;
+                uint32_t l_minRequiredVersion_660_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_624_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_624_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_663_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_662_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_662_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
@@ -15615,8 +15771,8 @@ inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachm
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_625_major = 3;
-        uint32_t l_minRequiredVersion_625_minor = 0;
+        uint32_t l_minRequiredVersion_664_major = 3;
+        uint32_t l_minRequiredVersion_664_minor = 0;
         switch (target) {
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_FRAMEBUFFER:       // fall-through...
@@ -15669,12 +15825,16 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_628_major = 2;
-        uint32_t l_minRequiredVersion_628_minor = 0;
+        uint32_t l_minRequiredVersion_667_major = 2;
+        uint32_t l_minRequiredVersion_667_minor = 0;
         Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_629_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_629_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_669_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_668_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_668_result;
         observe(observations.mReads);
         mImports.glGenFramebuffers(count, framebuffers);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -15707,13 +15867,17 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_630_major = 2;
-        uint32_t l_minRequiredVersion_630_minor = 0;
+        uint32_t l_minRequiredVersion_670_major = 2;
+        uint32_t l_minRequiredVersion_670_minor = 0;
         Slice<RenderbufferId> l_r =
                 slice(renderbuffers, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_631_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_631_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_672_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_671_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_671_result;
         observe(observations.mReads);
         mImports.glGenRenderbuffers(count, renderbuffers);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -15751,16 +15915,16 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_632_major = 2;
-        uint32_t l_minRequiredVersion_632_minor = 0;
+        uint32_t l_minRequiredVersion_673_major = 2;
+        uint32_t l_minRequiredVersion_673_minor = 0;
         switch (framebuffer_target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_633_major = 3;
-                uint32_t l_minRequiredVersion_633_minor = 0;
+                uint32_t l_minRequiredVersion_674_major = 3;
+                uint32_t l_minRequiredVersion_674_minor = 0;
                 break;
             }
         }
@@ -15789,8 +15953,8 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
             case GLenum::GL_DEPTH:                     // fall-through...
             case GLenum::GL_DEPTH_STENCIL_ATTACHMENT:  // fall-through...
             case GLenum::GL_STENCIL: {
-                uint32_t l_minRequiredVersion_635_major = 3;
-                uint32_t l_minRequiredVersion_635_minor = 0;
+                uint32_t l_minRequiredVersion_676_major = 3;
+                uint32_t l_minRequiredVersion_676_minor = 0;
                 break;
             }
         }
@@ -15810,19 +15974,23 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
             case GLenum::GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE:        // fall-through...
             case GLenum::GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE:    // fall-through...
             case GLenum::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER: {
-                uint32_t l_minRequiredVersion_637_major = 3;
-                uint32_t l_minRequiredVersion_637_minor = 0;
+                uint32_t l_minRequiredVersion_678_major = 3;
+                uint32_t l_minRequiredVersion_678_minor = 0;
                 break;
             }
             case GLenum::GL_FRAMEBUFFER_ATTACHMENT_LAYERED: {
-                uint32_t l_minRequiredVersion_638_major = 3;
-                uint32_t l_minRequiredVersion_638_minor = 2;
+                uint32_t l_minRequiredVersion_679_major = 3;
+                uint32_t l_minRequiredVersion_679_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_640_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_640_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_682_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_681_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_681_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
@@ -15867,8 +16035,8 @@ inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_641_major = 3;
-        uint32_t l_minRequiredVersion_641_minor = 1;
+        uint32_t l_minRequiredVersion_683_major = 3;
+        uint32_t l_minRequiredVersion_683_minor = 1;
         switch (target) {
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_FRAMEBUFFER:       // fall-through...
@@ -15884,8 +16052,8 @@ inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname
                 break;
             }
             case GLenum::GL_FRAMEBUFFER_DEFAULT_LAYERS: {
-                uint32_t l_minRequiredVersion_643_major = 3;
-                uint32_t l_minRequiredVersion_643_minor = 2;
+                uint32_t l_minRequiredVersion_685_major = 3;
+                uint32_t l_minRequiredVersion_685_minor = 2;
                 break;
             }
         }
@@ -15915,8 +16083,8 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_645_major = 2;
-        uint32_t l_minRequiredVersion_645_minor = 0;
+        uint32_t l_minRequiredVersion_687_major = 2;
+        uint32_t l_minRequiredVersion_687_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
@@ -15935,14 +16103,18 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
                 break;
             }
             case GLenum::GL_RENDERBUFFER_SAMPLES: {
-                uint32_t l_minRequiredVersion_647_major = 3;
-                uint32_t l_minRequiredVersion_647_minor = 0;
+                uint32_t l_minRequiredVersion_689_major = 3;
+                uint32_t l_minRequiredVersion_689_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_649_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_649_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_692_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_691_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_691_result;
         RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
         std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
         observe(observations.mReads);
@@ -15978,8 +16150,8 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_650_major = 3;
-        uint32_t l_minRequiredVersion_650_minor = 0;
+        uint32_t l_minRequiredVersion_693_major = 3;
+        uint32_t l_minRequiredVersion_693_minor = 0;
         switch (target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
@@ -16015,8 +16187,8 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_652_major = 3;
-        uint32_t l_minRequiredVersion_652_minor = 0;
+        uint32_t l_minRequiredVersion_695_major = 3;
+        uint32_t l_minRequiredVersion_695_minor = 0;
         switch (target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
@@ -16050,11 +16222,15 @@ inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_654_major = 2;
-        uint32_t l_minRequiredVersion_654_minor = 0;
+        uint32_t l_minRequiredVersion_697_major = 2;
+        uint32_t l_minRequiredVersion_697_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_655_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_655_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_699_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_698_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_698_result;
         observe(observations.mReads);
         result = mImports.glIsFramebuffer(framebuffer);
         break;
@@ -16081,11 +16257,15 @@ inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_656_major = 2;
-        uint32_t l_minRequiredVersion_656_minor = 0;
+        uint32_t l_minRequiredVersion_700_major = 2;
+        uint32_t l_minRequiredVersion_700_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_657_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_657_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_702_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_701_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_701_result;
         observe(observations.mReads);
         result = mImports.glIsRenderbuffer(renderbuffer);
         break;
@@ -16110,8 +16290,8 @@ inline void GlesSpy::glReadBuffer(uint32_t src) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_658_major = 3;
-        uint32_t l_minRequiredVersion_658_minor = 0;
+        uint32_t l_minRequiredVersion_703_major = 3;
+        uint32_t l_minRequiredVersion_703_minor = 0;
         switch (src) {
             case GLenum::GL_BACK:                // fall-through...
             case GLenum::GL_COLOR_ATTACHMENT0:   // fall-through...
@@ -16157,8 +16337,8 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_660_major = 2;
-        uint32_t l_minRequiredVersion_660_minor = 0;
+        uint32_t l_minRequiredVersion_705_major = 2;
+        uint32_t l_minRequiredVersion_705_minor = 0;
         switch (format) {
             case GLenum::GL_RGBA:  // fall-through...
             case GLenum::GL_RGBA_INTEGER: {
@@ -16173,8 +16353,8 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
                 break;
             }
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
-                uint32_t l_minRequiredVersion_662_major = 3;
-                uint32_t l_minRequiredVersion_662_minor = 1;
+                uint32_t l_minRequiredVersion_707_major = 3;
+                uint32_t l_minRequiredVersion_707_minor = 1;
                 break;
             }
         }
@@ -16207,8 +16387,8 @@ inline void GlesSpy::glReadnPixels(int32_t x, int32_t y, int32_t width, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_664_major = 3;
-        uint32_t l_minRequiredVersion_664_minor = 2;
+        uint32_t l_minRequiredVersion_709_major = 3;
+        uint32_t l_minRequiredVersion_709_minor = 2;
         switch (format) {
             case GLenum::GL_RGBA:  // fall-through...
             case GLenum::GL_RGBA_INTEGER: {
@@ -16252,8 +16432,8 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_667_major = 2;
-        uint32_t l_minRequiredVersion_667_minor = 0;
+        uint32_t l_minRequiredVersion_712_major = 2;
+        uint32_t l_minRequiredVersion_712_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
@@ -16296,14 +16476,18 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
             case GLenum::GL_RGBA8I:              // fall-through...
             case GLenum::GL_RGBA8UI:             // fall-through...
             case GLenum::GL_SRGB8_ALPHA8: {
-                uint32_t l_minRequiredVersion_669_major = 3;
-                uint32_t l_minRequiredVersion_669_minor = 0;
+                uint32_t l_minRequiredVersion_714_major = 3;
+                uint32_t l_minRequiredVersion_714_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_671_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_671_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_717_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_716_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_716_result;
         RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
         std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
         l_rb->mFormat = format;
@@ -16335,8 +16519,8 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_672_major = 3;
-        uint32_t l_minRequiredVersion_672_minor = 0;
+        uint32_t l_minRequiredVersion_718_major = 3;
+        uint32_t l_minRequiredVersion_718_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
@@ -16402,11 +16586,15 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_675_major = 2;
-        uint32_t l_minRequiredVersion_675_minor = 0;
+        uint32_t l_minRequiredVersion_721_major = 2;
+        uint32_t l_minRequiredVersion_721_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_676_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_676_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_723_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_722_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_722_result;
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = mask;
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = mask;
         observe(observations.mReads);
@@ -16432,8 +16620,8 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_677_major = 2;
-        uint32_t l_minRequiredVersion_677_minor = 0;
+        uint32_t l_minRequiredVersion_724_major = 2;
+        uint32_t l_minRequiredVersion_724_minor = 0;
         switch (face) {
             case GLenum::GL_BACK:   // fall-through...
             case GLenum::GL_FRONT:  // fall-through...
@@ -16442,8 +16630,12 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_679_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_679_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_727_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_726_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_726_result;
         switch (face) {
             case GLenum::GL_FRONT: {
                 l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = mask;
@@ -16480,8 +16672,8 @@ inline void GlesSpy::glDisable(uint32_t capability) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_680_major = 2;
-        uint32_t l_minRequiredVersion_680_minor = 0;
+        uint32_t l_minRequiredVersion_728_major = 2;
+        uint32_t l_minRequiredVersion_728_minor = 0;
         switch (capability) {
             case GLenum::GL_BLEND:                     // fall-through...
             case GLenum::GL_CULL_FACE:                 // fall-through...
@@ -16496,25 +16688,29 @@ inline void GlesSpy::glDisable(uint32_t capability) {
             }
             case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:  // fall-through...
             case GLenum::GL_RASTERIZER_DISCARD: {
-                uint32_t l_minRequiredVersion_681_major = 3;
-                uint32_t l_minRequiredVersion_681_minor = 0;
+                uint32_t l_minRequiredVersion_729_major = 3;
+                uint32_t l_minRequiredVersion_729_minor = 0;
                 break;
             }
             case GLenum::GL_SAMPLE_MASK: {
-                uint32_t l_minRequiredVersion_682_major = 3;
-                uint32_t l_minRequiredVersion_682_minor = 1;
+                uint32_t l_minRequiredVersion_730_major = 3;
+                uint32_t l_minRequiredVersion_730_minor = 1;
                 break;
             }
             case GLenum::GL_DEBUG_OUTPUT:  // fall-through...
             case GLenum::GL_DEBUG_OUTPUT_SYNCHRONOUS: {
-                uint32_t l_minRequiredVersion_683_major = 3;
-                uint32_t l_minRequiredVersion_683_minor = 2;
+                uint32_t l_minRequiredVersion_731_major = 3;
+                uint32_t l_minRequiredVersion_731_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_685_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_685_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_734_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_733_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_733_result;
         l_ctx->mCapabilities[capability] = false;
         observe(observations.mReads);
         mImports.glDisable(capability);
@@ -16537,8 +16733,8 @@ inline void GlesSpy::glDisablei(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_686_major = 3;
-        uint32_t l_minRequiredVersion_686_minor = 2;
+        uint32_t l_minRequiredVersion_735_major = 3;
+        uint32_t l_minRequiredVersion_735_minor = 2;
         switch (target) {
             case GLenum::GL_BLEND:                          // fall-through...
             case GLenum::GL_CULL_FACE:                      // fall-through...
@@ -16578,8 +16774,8 @@ inline void GlesSpy::glEnable(uint32_t capability) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_688_major = 2;
-        uint32_t l_minRequiredVersion_688_minor = 0;
+        uint32_t l_minRequiredVersion_737_major = 2;
+        uint32_t l_minRequiredVersion_737_minor = 0;
         switch (capability) {
             case GLenum::GL_BLEND:                     // fall-through...
             case GLenum::GL_CULL_FACE:                 // fall-through...
@@ -16594,25 +16790,29 @@ inline void GlesSpy::glEnable(uint32_t capability) {
             }
             case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:  // fall-through...
             case GLenum::GL_RASTERIZER_DISCARD: {
-                uint32_t l_minRequiredVersion_689_major = 3;
-                uint32_t l_minRequiredVersion_689_minor = 0;
+                uint32_t l_minRequiredVersion_738_major = 3;
+                uint32_t l_minRequiredVersion_738_minor = 0;
                 break;
             }
             case GLenum::GL_SAMPLE_MASK: {
-                uint32_t l_minRequiredVersion_690_major = 3;
-                uint32_t l_minRequiredVersion_690_minor = 1;
+                uint32_t l_minRequiredVersion_739_major = 3;
+                uint32_t l_minRequiredVersion_739_minor = 1;
                 break;
             }
             case GLenum::GL_DEBUG_OUTPUT:  // fall-through...
             case GLenum::GL_DEBUG_OUTPUT_SYNCHRONOUS: {
-                uint32_t l_minRequiredVersion_691_major = 3;
-                uint32_t l_minRequiredVersion_691_minor = 2;
+                uint32_t l_minRequiredVersion_740_major = 3;
+                uint32_t l_minRequiredVersion_740_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_693_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_693_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_743_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_742_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_742_result;
         l_ctx->mCapabilities[capability] = true;
         observe(observations.mReads);
         mImports.glEnable(capability);
@@ -16635,8 +16835,8 @@ inline void GlesSpy::glEnablei(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_694_major = 3;
-        uint32_t l_minRequiredVersion_694_minor = 2;
+        uint32_t l_minRequiredVersion_744_major = 3;
+        uint32_t l_minRequiredVersion_744_minor = 2;
         switch (target) {
             case GLenum::GL_BLEND:                          // fall-through...
             case GLenum::GL_CULL_FACE:                      // fall-through...
@@ -16676,8 +16876,8 @@ inline void GlesSpy::glFinish() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_696_major = 2;
-        uint32_t l_minRequiredVersion_696_minor = 0;
+        uint32_t l_minRequiredVersion_746_major = 2;
+        uint32_t l_minRequiredVersion_746_minor = 0;
         observe(observations.mReads);
         mImports.glFinish();
     } while (false);
@@ -16699,8 +16899,8 @@ inline void GlesSpy::glFlush() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_697_major = 2;
-        uint32_t l_minRequiredVersion_697_minor = 0;
+        uint32_t l_minRequiredVersion_747_major = 2;
+        uint32_t l_minRequiredVersion_747_minor = 0;
         observe(observations.mReads);
         mImports.glFlush();
     } while (false);
@@ -16724,8 +16924,8 @@ inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_698_major = 3;
-        uint32_t l_minRequiredVersion_698_minor = 0;
+        uint32_t l_minRequiredVersion_748_major = 3;
+        uint32_t l_minRequiredVersion_748_minor = 0;
         switch (target) {
             case GLenum::GL_ARRAY_BUFFER:               // fall-through...
             case GLenum::GL_COPY_READ_BUFFER:           // fall-through...
@@ -16742,8 +16942,8 @@ inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, i
             case GLenum::GL_DRAW_INDIRECT_BUFFER:      // fall-through...
             case GLenum::GL_SHADER_STORAGE_BUFFER:     // fall-through...
             case GLenum::GL_TEXTURE_BUFFER: {
-                uint32_t l_minRequiredVersion_699_major = 3;
-                uint32_t l_minRequiredVersion_699_minor = 2;
+                uint32_t l_minRequiredVersion_749_major = 3;
+                uint32_t l_minRequiredVersion_749_minor = 2;
                 break;
             }
         }
@@ -16770,8 +16970,8 @@ inline uint32_t GlesSpy::glGetError() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_701_major = 2;
-        uint32_t l_minRequiredVersion_701_minor = 0;
+        uint32_t l_minRequiredVersion_751_major = 2;
+        uint32_t l_minRequiredVersion_751_minor = 0;
         observe(observations.mReads);
         result = mImports.glGetError();
         break;
@@ -16800,8 +17000,8 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatus() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_702_major = 3;
-        uint32_t l_minRequiredVersion_702_minor = 2;
+        uint32_t l_minRequiredVersion_752_major = 3;
+        uint32_t l_minRequiredVersion_752_minor = 2;
         observe(observations.mReads);
         result = mImports.glGetGraphicsResetStatus();
         break;
@@ -16826,15 +17026,15 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_703_major = 2;
-        uint32_t l_minRequiredVersion_703_minor = 0;
+        uint32_t l_minRequiredVersion_753_major = 2;
+        uint32_t l_minRequiredVersion_753_minor = 0;
         switch (target) {
             case GLenum::GL_GENERATE_MIPMAP_HINT: {
                 break;
             }
             case GLenum::GL_FRAGMENT_SHADER_DERIVATIVE_HINT: {
-                uint32_t l_minRequiredVersion_704_major = 3;
-                uint32_t l_minRequiredVersion_704_minor = 0;
+                uint32_t l_minRequiredVersion_754_major = 3;
+                uint32_t l_minRequiredVersion_754_minor = 0;
                 break;
             }
         }
@@ -16846,8 +17046,12 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_707_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_707_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_758_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_757_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_757_result;
         l_ctx->mGenerateMipmapHint = mode;
         observe(observations.mReads);
         mImports.glHint(target, mode);
@@ -16872,8 +17076,8 @@ inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_708_major = 3;
-        uint32_t l_minRequiredVersion_708_minor = 1;
+        uint32_t l_minRequiredVersion_759_major = 3;
+        uint32_t l_minRequiredVersion_759_minor = 1;
         observe(observations.mReads);
         mImports.glActiveShaderProgram(pipeline, program);
     } while (false);
@@ -16895,11 +17099,15 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_709_major = 2;
-        uint32_t l_minRequiredVersion_709_minor = 0;
+        uint32_t l_minRequiredVersion_760_major = 2;
+        uint32_t l_minRequiredVersion_760_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_710_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_710_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_762_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_761_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_761_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_p->mShaders[l_s->mType] = shader;
@@ -16926,11 +17134,15 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, c
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_711_major = 2;
-        uint32_t l_minRequiredVersion_711_minor = 0;
+        uint32_t l_minRequiredVersion_763_major = 2;
+        uint32_t l_minRequiredVersion_763_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_712_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_712_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_765_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_764_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_764_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         l_p->mAttributeBindings[name] = location;
         observe(observations.mReads);
@@ -16956,8 +17168,8 @@ inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_713_major = 3;
-        uint32_t l_minRequiredVersion_713_minor = 1;
+        uint32_t l_minRequiredVersion_766_major = 3;
+        uint32_t l_minRequiredVersion_766_minor = 1;
         observe(observations.mReads);
         mImports.glBindProgramPipeline(pipeline);
     } while (false);
@@ -16979,8 +17191,8 @@ inline void GlesSpy::glCompileShader(uint32_t shader) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_714_major = 2;
-        uint32_t l_minRequiredVersion_714_minor = 0;
+        uint32_t l_minRequiredVersion_767_major = 2;
+        uint32_t l_minRequiredVersion_767_minor = 0;
         observe(observations.mReads);
         mImports.glCompileShader(shader);
     } while (false);
@@ -17004,11 +17216,15 @@ inline uint32_t GlesSpy::glCreateProgram() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_715_major = 2;
-        uint32_t l_minRequiredVersion_715_minor = 0;
+        uint32_t l_minRequiredVersion_768_major = 2;
+        uint32_t l_minRequiredVersion_768_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_716_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_716_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_770_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_769_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_769_result;
         observe(observations.mReads);
         result = mImports.glCreateProgram();
         ProgramId l_id = (ProgramId)(result);
@@ -17039,29 +17255,33 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_717_major = 2;
-        uint32_t l_minRequiredVersion_717_minor = 0;
+        uint32_t l_minRequiredVersion_771_major = 2;
+        uint32_t l_minRequiredVersion_771_minor = 0;
         switch (type) {
             case GLenum::GL_FRAGMENT_SHADER:  // fall-through...
             case GLenum::GL_VERTEX_SHADER: {
                 break;
             }
             case GLenum::GL_COMPUTE_SHADER: {
-                uint32_t l_minRequiredVersion_718_major = 3;
-                uint32_t l_minRequiredVersion_718_minor = 1;
+                uint32_t l_minRequiredVersion_772_major = 3;
+                uint32_t l_minRequiredVersion_772_minor = 1;
                 break;
             }
             case GLenum::GL_GEOMETRY_SHADER:      // fall-through...
             case GLenum::GL_TESS_CONTROL_SHADER:  // fall-through...
             case GLenum::GL_TESS_EVALUATION_SHADER: {
-                uint32_t l_minRequiredVersion_719_major = 3;
-                uint32_t l_minRequiredVersion_719_minor = 2;
+                uint32_t l_minRequiredVersion_773_major = 3;
+                uint32_t l_minRequiredVersion_773_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_721_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_721_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_776_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_775_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_775_result;
         observe(observations.mReads);
         result = mImports.glCreateShader(type);
         ShaderId l_id = (ShaderId)(result);
@@ -17095,8 +17315,8 @@ inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, ch
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_722_major = 3;
-        uint32_t l_minRequiredVersion_722_minor = 1;
+        uint32_t l_minRequiredVersion_777_major = 3;
+        uint32_t l_minRequiredVersion_777_minor = 1;
         switch (type) {
             case GLenum::GL_COMPUTE_SHADER:   // fall-through...
             case GLenum::GL_FRAGMENT_SHADER:  // fall-through...
@@ -17106,8 +17326,8 @@ inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, ch
             case GLenum::GL_GEOMETRY_SHADER:      // fall-through...
             case GLenum::GL_TESS_CONTROL_SHADER:  // fall-through...
             case GLenum::GL_TESS_EVALUATION_SHADER: {
-                uint32_t l_minRequiredVersion_723_major = 3;
-                uint32_t l_minRequiredVersion_723_minor = 2;
+                uint32_t l_minRequiredVersion_778_major = 3;
+                uint32_t l_minRequiredVersion_778_minor = 2;
                 break;
             }
         }
@@ -17139,11 +17359,15 @@ inline void GlesSpy::glDeleteProgram(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_725_major = 2;
-        uint32_t l_minRequiredVersion_725_minor = 0;
+        uint32_t l_minRequiredVersion_780_major = 2;
+        uint32_t l_minRequiredVersion_780_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_726_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_726_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_782_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_781_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_781_result;
         l_ctx->mInstances.mPrograms[program] = std::shared_ptr<Program>();
         observe(observations.mReads);
         mImports.glDeleteProgram(program);
@@ -17168,8 +17392,8 @@ inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_727_major = 3;
-        uint32_t l_minRequiredVersion_727_minor = 1;
+        uint32_t l_minRequiredVersion_783_major = 3;
+        uint32_t l_minRequiredVersion_783_minor = 1;
         observe(observations.mReads);
         mImports.glDeleteProgramPipelines(n, pipelines);
     } while (false);
@@ -17193,11 +17417,15 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_728_major = 2;
-        uint32_t l_minRequiredVersion_728_minor = 0;
+        uint32_t l_minRequiredVersion_784_major = 2;
+        uint32_t l_minRequiredVersion_784_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_729_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_729_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_786_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_785_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_785_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_s->mDeletable = true;
         l_ctx->mInstances.mShaders[shader] = std::shared_ptr<Shader>();
@@ -17222,11 +17450,15 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_730_major = 2;
-        uint32_t l_minRequiredVersion_730_minor = 0;
+        uint32_t l_minRequiredVersion_787_major = 2;
+        uint32_t l_minRequiredVersion_787_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_731_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_731_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_789_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_788_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_788_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_p->mShaders[l_s->mType] = 0;
@@ -17253,8 +17485,8 @@ inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_group
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_732_major = 3;
-        uint32_t l_minRequiredVersion_732_minor = 1;
+        uint32_t l_minRequiredVersion_790_major = 3;
+        uint32_t l_minRequiredVersion_790_minor = 1;
         observe(observations.mReads);
         mImports.glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
     } while (false);
@@ -17279,8 +17511,8 @@ inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_733_major = 3;
-        uint32_t l_minRequiredVersion_733_minor = 1;
+        uint32_t l_minRequiredVersion_791_major = 3;
+        uint32_t l_minRequiredVersion_791_minor = 1;
         observe(observations.mReads);
         mImports.glDispatchComputeIndirect(indirect);
     } while (false);
@@ -17304,8 +17536,8 @@ inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_734_major = 3;
-        uint32_t l_minRequiredVersion_734_minor = 1;
+        uint32_t l_minRequiredVersion_792_major = 3;
+        uint32_t l_minRequiredVersion_792_minor = 1;
         observe(observations.mReads);
         mImports.glGenProgramPipelines(n, pipelines);
     } while (false);
@@ -17332,8 +17564,8 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_735_major = 2;
-        uint32_t l_minRequiredVersion_735_minor = 0;
+        uint32_t l_minRequiredVersion_793_major = 2;
+        uint32_t l_minRequiredVersion_793_minor = 0;
         observe(observations.mReads);
         mImports.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written,
                                    vector_count, type, name);
@@ -17379,8 +17611,8 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_736_major = 2;
-        uint32_t l_minRequiredVersion_736_minor = 0;
+        uint32_t l_minRequiredVersion_794_major = 2;
+        uint32_t l_minRequiredVersion_794_minor = 0;
         observe(observations.mReads);
         mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written,
                                     vector_count, type, name);
@@ -17426,8 +17658,8 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_737_major = 3;
-        uint32_t l_minRequiredVersion_737_minor = 0;
+        uint32_t l_minRequiredVersion_795_major = 3;
+        uint32_t l_minRequiredVersion_795_minor = 0;
         observe(observations.mReads);
         mImports.glGetActiveUniformBlockName(program, uniform_block_index, buffer_size,
                                              buffer_bytes_written, name);
@@ -17462,8 +17694,8 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_738_major = 3;
-        uint32_t l_minRequiredVersion_738_minor = 0;
+        uint32_t l_minRequiredVersion_796_major = 3;
+        uint32_t l_minRequiredVersion_796_minor = 0;
         switch (parameter_name) {
             case GLenum::GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS:                // fall-through...
             case GLenum::GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES:         // fall-through...
@@ -17506,8 +17738,8 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_cou
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_740_major = 3;
-        uint32_t l_minRequiredVersion_740_minor = 0;
+        uint32_t l_minRequiredVersion_798_major = 3;
+        uint32_t l_minRequiredVersion_798_minor = 0;
         switch (parameter_name) {
             case GLenum::GL_UNIFORM_ARRAY_STRIDE:   // fall-through...
             case GLenum::GL_UNIFORM_BLOCK_INDEX:    // fall-through...
@@ -17553,20 +17785,24 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_742_major = 2;
-        uint32_t l_minRequiredVersion_742_minor = 0;
+        uint32_t l_minRequiredVersion_800_major = 2;
+        uint32_t l_minRequiredVersion_800_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_743_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_743_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_802_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_801_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_801_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
-        int32_t l_min_744_a = (int32_t)(buffer_length);
-        int32_t l_min_744_b = int32_t((l_p->mShaders.size()));
-        int32_t l_min_744_result = /* clang-format off */
-        /* switch(l_min_744_a < l_min_744_b) */
-            /* case true: */(((l_min_744_a < l_min_744_b) == (true))) ? (l_min_744_a) :
-            /* case false: */(((l_min_744_a < l_min_744_b) == (false))) ? (l_min_744_b) :
+        int32_t l_min_803_a = (int32_t)(buffer_length);
+        int32_t l_min_803_b = int32_t((l_p->mShaders.size()));
+        int32_t l_min_803_result = /* clang-format off */
+        /* switch(l_min_803_a < l_min_803_b) */
+            /* case true: */(((l_min_803_a < l_min_803_b) == (true))) ? (l_min_803_a) :
+            /* case false: */(((l_min_803_a < l_min_803_b) == (false))) ? (l_min_803_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_744_result;
+        int32_t l_l = l_min_803_result;
         observe(observations.mReads);
         mImports.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
         write(slice(shaders_length_written, 0, 1), 0, (GLsizei)(l_l));
@@ -17598,8 +17834,8 @@ inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_745_major = 2;
-        uint32_t l_minRequiredVersion_745_minor = 0;
+        uint32_t l_minRequiredVersion_804_major = 2;
+        uint32_t l_minRequiredVersion_804_minor = 0;
         observe(observations.mReads);
         result = mImports.glGetAttribLocation(program, name);
         break;
@@ -17628,8 +17864,8 @@ inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_746_major = 3;
-        uint32_t l_minRequiredVersion_746_minor = 0;
+        uint32_t l_minRequiredVersion_805_major = 3;
+        uint32_t l_minRequiredVersion_805_minor = 0;
         observe(observations.mReads);
         result = mImports.glGetFragDataLocation(program, name);
         break;
@@ -17661,8 +17897,8 @@ inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_747_major = 3;
-        uint32_t l_minRequiredVersion_747_minor = 0;
+        uint32_t l_minRequiredVersion_806_major = 3;
+        uint32_t l_minRequiredVersion_806_minor = 0;
         observe(observations.mReads);
         mImports.glGetProgramBinary(program, bufSize, length, binaryFormat, binary);
     } while (false);
@@ -17695,20 +17931,24 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_748_major = 2;
-        uint32_t l_minRequiredVersion_748_minor = 0;
+        uint32_t l_minRequiredVersion_807_major = 2;
+        uint32_t l_minRequiredVersion_807_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_749_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_749_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_809_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_808_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_808_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
-        int32_t l_min_750_a = (int32_t)(buffer_length);
-        int32_t l_min_750_b = int32_t((l_p->mInfoLog.count()));
-        int32_t l_min_750_result = /* clang-format off */
-        /* switch(l_min_750_a < l_min_750_b) */
-            /* case true: */(((l_min_750_a < l_min_750_b) == (true))) ? (l_min_750_a) :
-            /* case false: */(((l_min_750_a < l_min_750_b) == (false))) ? (l_min_750_b) :
+        int32_t l_min_810_a = (int32_t)(buffer_length);
+        int32_t l_min_810_b = int32_t((l_p->mInfoLog.count()));
+        int32_t l_min_810_result = /* clang-format off */
+        /* switch(l_min_810_a < l_min_810_b) */
+            /* case true: */(((l_min_810_a < l_min_810_b) == (true))) ? (l_min_810_a) :
+            /* case false: */(((l_min_810_a < l_min_810_b) == (false))) ? (l_min_810_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_750_result;
+        int32_t l_l = l_min_810_result;
         Slice<GLchar> copy__dst__ = copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
                                          slice(l_p->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -17743,8 +17983,8 @@ inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programI
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_751_major = 3;
-        uint32_t l_minRequiredVersion_751_minor = 1;
+        uint32_t l_minRequiredVersion_811_major = 3;
+        uint32_t l_minRequiredVersion_811_minor = 1;
         switch (programInterface) {
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:       // fall-through...
             case GLenum::GL_BUFFER_VARIABLE:             // fall-through...
@@ -17793,8 +18033,8 @@ inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufS
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_754_major = 3;
-        uint32_t l_minRequiredVersion_754_minor = 1;
+        uint32_t l_minRequiredVersion_814_major = 3;
+        uint32_t l_minRequiredVersion_814_minor = 1;
         observe(observations.mReads);
         mImports.glGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog);
     } while (false);
@@ -17823,8 +18063,8 @@ inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_755_major = 3;
-        uint32_t l_minRequiredVersion_755_minor = 1;
+        uint32_t l_minRequiredVersion_815_major = 3;
+        uint32_t l_minRequiredVersion_815_minor = 1;
         switch (pname) {
             case GLenum::GL_ACTIVE_PROGRAM:   // fall-through...
             case GLenum::GL_COMPUTE_SHADER:   // fall-through...
@@ -17837,8 +18077,8 @@ inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, i
             case GLenum::GL_GEOMETRY_SHADER:      // fall-through...
             case GLenum::GL_TESS_CONTROL_SHADER:  // fall-through...
             case GLenum::GL_TESS_EVALUATION_SHADER: {
-                uint32_t l_minRequiredVersion_756_major = 3;
-                uint32_t l_minRequiredVersion_756_minor = 2;
+                uint32_t l_minRequiredVersion_816_major = 3;
+                uint32_t l_minRequiredVersion_816_minor = 2;
                 break;
             }
         }
@@ -17871,8 +18111,8 @@ inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t pr
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_758_major = 3;
-        uint32_t l_minRequiredVersion_758_minor = 1;
+        uint32_t l_minRequiredVersion_818_major = 3;
+        uint32_t l_minRequiredVersion_818_minor = 1;
         switch (programInterface) {
             case GLenum::GL_BUFFER_VARIABLE:             // fall-through...
             case GLenum::GL_PROGRAM_INPUT:               // fall-through...
@@ -17918,8 +18158,8 @@ inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_760_major = 3;
-        uint32_t l_minRequiredVersion_760_minor = 1;
+        uint32_t l_minRequiredVersion_820_major = 3;
+        uint32_t l_minRequiredVersion_820_minor = 1;
         switch (programInterface) {
             case GLenum::GL_PROGRAM_INPUT:              // fall-through...
             case GLenum::GL_PROGRAM_OUTPUT:             // fall-through...
@@ -17961,8 +18201,8 @@ inline void GlesSpy::glGetProgramResourceName(uint32_t program, uint32_t program
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_762_major = 3;
-        uint32_t l_minRequiredVersion_762_minor = 1;
+        uint32_t l_minRequiredVersion_822_major = 3;
+        uint32_t l_minRequiredVersion_822_minor = 1;
         switch (programInterface) {
             case GLenum::GL_BUFFER_VARIABLE:             // fall-through...
             case GLenum::GL_PROGRAM_INPUT:               // fall-through...
@@ -18006,8 +18246,8 @@ inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programIn
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_764_major = 3;
-        uint32_t l_minRequiredVersion_764_minor = 1;
+        uint32_t l_minRequiredVersion_824_major = 3;
+        uint32_t l_minRequiredVersion_824_minor = 1;
         switch (programInterface) {
             case GLenum::GL_ATOMIC_COUNTER_BUFFER:       // fall-through...
             case GLenum::GL_BUFFER_VARIABLE:             // fall-through...
@@ -18050,8 +18290,8 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_766_major = 2;
-        uint32_t l_minRequiredVersion_766_minor = 0;
+        uint32_t l_minRequiredVersion_826_major = 2;
+        uint32_t l_minRequiredVersion_826_minor = 0;
         switch (parameter) {
             case GLenum::GL_ACTIVE_ATTRIBUTES:            // fall-through...
             case GLenum::GL_ACTIVE_ATTRIBUTE_MAX_LENGTH:  // fall-through...
@@ -18070,15 +18310,15 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
             case GLenum::GL_TRANSFORM_FEEDBACK_BUFFER_MODE:        // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_VARYINGS:           // fall-through...
             case GLenum::GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH: {
-                uint32_t l_minRequiredVersion_767_major = 3;
-                uint32_t l_minRequiredVersion_767_minor = 0;
+                uint32_t l_minRequiredVersion_827_major = 3;
+                uint32_t l_minRequiredVersion_827_minor = 0;
                 break;
             }
             case GLenum::GL_ACTIVE_ATOMIC_COUNTER_BUFFERS:  // fall-through...
             case GLenum::GL_COMPUTE_WORK_GROUP_SIZE:        // fall-through...
             case GLenum::GL_PROGRAM_SEPARABLE: {
-                uint32_t l_minRequiredVersion_768_major = 3;
-                uint32_t l_minRequiredVersion_768_minor = 1;
+                uint32_t l_minRequiredVersion_828_major = 3;
+                uint32_t l_minRequiredVersion_828_minor = 1;
                 break;
             }
             case GLenum::GL_GEOMETRY_INPUT_TYPE:           // fall-through...
@@ -18090,8 +18330,8 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
             case GLenum::GL_TESS_GEN_POINT_MODE:           // fall-through...
             case GLenum::GL_TESS_GEN_SPACING:              // fall-through...
             case GLenum::GL_TESS_GEN_VERTEX_ORDER: {
-                uint32_t l_minRequiredVersion_769_major = 3;
-                uint32_t l_minRequiredVersion_769_minor = 2;
+                uint32_t l_minRequiredVersion_829_major = 3;
+                uint32_t l_minRequiredVersion_829_minor = 2;
                 break;
             }
         }
@@ -18124,20 +18364,24 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_771_major = 2;
-        uint32_t l_minRequiredVersion_771_minor = 0;
+        uint32_t l_minRequiredVersion_831_major = 2;
+        uint32_t l_minRequiredVersion_831_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_772_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_772_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_833_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_832_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_832_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-        int32_t l_min_773_a = (int32_t)(buffer_length);
-        int32_t l_min_773_b = int32_t((l_s->mInfoLog.count()));
-        int32_t l_min_773_result = /* clang-format off */
-        /* switch(l_min_773_a < l_min_773_b) */
-            /* case true: */(((l_min_773_a < l_min_773_b) == (true))) ? (l_min_773_a) :
-            /* case false: */(((l_min_773_a < l_min_773_b) == (false))) ? (l_min_773_b) :
+        int32_t l_min_834_a = (int32_t)(buffer_length);
+        int32_t l_min_834_b = int32_t((l_s->mInfoLog.count()));
+        int32_t l_min_834_result = /* clang-format off */
+        /* switch(l_min_834_a < l_min_834_b) */
+            /* case true: */(((l_min_834_a < l_min_834_b) == (true))) ? (l_min_834_a) :
+            /* case false: */(((l_min_834_a < l_min_834_b) == (false))) ? (l_min_834_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_773_result;
+        int32_t l_l = l_min_834_result;
         Slice<GLchar> copy__dst__ = copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
                                          slice(l_s->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -18172,8 +18416,8 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_774_major = 2;
-        uint32_t l_minRequiredVersion_774_minor = 0;
+        uint32_t l_minRequiredVersion_835_major = 2;
+        uint32_t l_minRequiredVersion_835_minor = 0;
         switch (shader_type) {
             case GLenum::GL_FRAGMENT_SHADER:  // fall-through...
             case GLenum::GL_VERTEX_SHADER: {
@@ -18220,20 +18464,24 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_777_major = 2;
-        uint32_t l_minRequiredVersion_777_minor = 0;
+        uint32_t l_minRequiredVersion_838_major = 2;
+        uint32_t l_minRequiredVersion_838_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_778_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_778_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_840_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_839_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_839_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-        int32_t l_min_779_a = (int32_t)(buffer_length);
-        int32_t l_min_779_b = int32_t((l_s->mSource.size()));
-        int32_t l_min_779_result = /* clang-format off */
-        /* switch(l_min_779_a < l_min_779_b) */
-            /* case true: */(((l_min_779_a < l_min_779_b) == (true))) ? (l_min_779_a) :
-            /* case false: */(((l_min_779_a < l_min_779_b) == (false))) ? (l_min_779_b) :
+        int32_t l_min_841_a = (int32_t)(buffer_length);
+        int32_t l_min_841_b = int32_t((l_s->mSource.size()));
+        int32_t l_min_841_result = /* clang-format off */
+        /* switch(l_min_841_a < l_min_841_b) */
+            /* case true: */(((l_min_841_a < l_min_841_b) == (true))) ? (l_min_841_a) :
+            /* case false: */(((l_min_841_a < l_min_841_b) == (false))) ? (l_min_841_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_779_result;
+        int32_t l_l = l_min_841_result;
         Slice<char> copy__dst__ = copy(slice((char*)(source), (uint64_t)(0), (uint64_t)(l_l)),
                                        slice(slice(l_s->mSource), (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -18264,8 +18512,8 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_780_major = 2;
-        uint32_t l_minRequiredVersion_780_minor = 0;
+        uint32_t l_minRequiredVersion_842_major = 2;
+        uint32_t l_minRequiredVersion_842_minor = 0;
         switch (parameter) {
             case GLenum::GL_COMPILE_STATUS:        // fall-through...
             case GLenum::GL_DELETE_STATUS:         // fall-through...
@@ -18276,8 +18524,12 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_782_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_782_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_845_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_844_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_844_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         observe(observations.mReads);
         mImports.glGetShaderiv(shader, parameter, value);
@@ -18334,8 +18586,8 @@ inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformB
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_783_major = 3;
-        uint32_t l_minRequiredVersion_783_minor = 0;
+        uint32_t l_minRequiredVersion_846_major = 3;
+        uint32_t l_minRequiredVersion_846_minor = 0;
         observe(observations.mReads);
         result = mImports.glGetUniformBlockIndex(program, uniformBlockName);
         break;
@@ -18367,8 +18619,8 @@ inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_784_major = 3;
-        uint32_t l_minRequiredVersion_784_minor = 0;
+        uint32_t l_minRequiredVersion_847_major = 3;
+        uint32_t l_minRequiredVersion_847_minor = 0;
         observe(observations.mReads);
         mImports.glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices);
     } while (false);
@@ -18399,8 +18651,8 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_785_major = 2;
-        uint32_t l_minRequiredVersion_785_minor = 0;
+        uint32_t l_minRequiredVersion_848_major = 2;
+        uint32_t l_minRequiredVersion_848_minor = 0;
         observe(observations.mReads);
         result = mImports.glGetUniformLocation(program, name);
         break;
@@ -18425,8 +18677,8 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_786_major = 2;
-        uint32_t l_minRequiredVersion_786_minor = 0;
+        uint32_t l_minRequiredVersion_849_major = 2;
+        uint32_t l_minRequiredVersion_849_minor = 0;
         observe(observations.mReads);
         mImports.glGetUniformfv(program, location, values);
     } while (false);
@@ -18451,8 +18703,8 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_787_major = 2;
-        uint32_t l_minRequiredVersion_787_minor = 0;
+        uint32_t l_minRequiredVersion_850_major = 2;
+        uint32_t l_minRequiredVersion_850_minor = 0;
         observe(observations.mReads);
         mImports.glGetUniformiv(program, location, values);
     } while (false);
@@ -18477,8 +18729,8 @@ inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_788_major = 3;
-        uint32_t l_minRequiredVersion_788_minor = 0;
+        uint32_t l_minRequiredVersion_851_major = 3;
+        uint32_t l_minRequiredVersion_851_minor = 0;
         observe(observations.mReads);
         mImports.glGetUniformuiv(program, location, params);
     } while (false);
@@ -18505,8 +18757,8 @@ inline void GlesSpy::glGetnUniformfv(uint32_t program, int32_t location, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_789_major = 3;
-        uint32_t l_minRequiredVersion_789_minor = 2;
+        uint32_t l_minRequiredVersion_852_major = 3;
+        uint32_t l_minRequiredVersion_852_minor = 2;
         observe(observations.mReads);
         mImports.glGetnUniformfv(program, location, bufSize, params);
     } while (false);
@@ -18533,8 +18785,8 @@ inline void GlesSpy::glGetnUniformiv(uint32_t program, int32_t location, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_790_major = 3;
-        uint32_t l_minRequiredVersion_790_minor = 2;
+        uint32_t l_minRequiredVersion_853_major = 3;
+        uint32_t l_minRequiredVersion_853_minor = 2;
         observe(observations.mReads);
         mImports.glGetnUniformiv(program, location, bufSize, params);
     } while (false);
@@ -18561,8 +18813,8 @@ inline void GlesSpy::glGetnUniformuiv(uint32_t program, int32_t location, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_791_major = 3;
-        uint32_t l_minRequiredVersion_791_minor = 2;
+        uint32_t l_minRequiredVersion_854_major = 3;
+        uint32_t l_minRequiredVersion_854_minor = 2;
         observe(observations.mReads);
         mImports.glGetnUniformuiv(program, location, bufSize, params);
     } while (false);
@@ -18589,11 +18841,15 @@ inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_792_major = 2;
-        uint32_t l_minRequiredVersion_792_minor = 0;
+        uint32_t l_minRequiredVersion_855_major = 2;
+        uint32_t l_minRequiredVersion_855_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_793_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_793_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_857_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_856_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_856_result;
         observe(observations.mReads);
         result = mImports.glIsProgram(program);
         break;
@@ -18622,8 +18878,8 @@ inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_794_major = 3;
-        uint32_t l_minRequiredVersion_794_minor = 1;
+        uint32_t l_minRequiredVersion_858_major = 3;
+        uint32_t l_minRequiredVersion_858_minor = 1;
         observe(observations.mReads);
         result = mImports.glIsProgramPipeline(pipeline);
         break;
@@ -18650,11 +18906,15 @@ inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_795_major = 2;
-        uint32_t l_minRequiredVersion_795_minor = 0;
+        uint32_t l_minRequiredVersion_859_major = 2;
+        uint32_t l_minRequiredVersion_859_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_796_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_796_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_861_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_860_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_860_result;
         observe(observations.mReads);
         result = mImports.glIsShader(shader);
         break;
@@ -18679,8 +18939,8 @@ inline void GlesSpy::glLinkProgram(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_797_major = 2;
-        uint32_t l_minRequiredVersion_797_minor = 0;
+        uint32_t l_minRequiredVersion_862_major = 2;
+        uint32_t l_minRequiredVersion_862_minor = 0;
         observe(observations.mReads);
         mImports.glLinkProgram(program);
     } while (false);
@@ -18702,10 +18962,10 @@ inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_798_major = 3;
-        uint32_t l_minRequiredVersion_798_minor = 1;
-        uint32_t l_supportsBits_799_seenBits = barriers;
-        uint32_t l_supportsBits_799_validBits =
+        uint32_t l_minRequiredVersion_863_major = 3;
+        uint32_t l_minRequiredVersion_863_minor = 1;
+        uint32_t l_supportsBits_864_seenBits = barriers;
+        uint32_t l_supportsBits_864_validBits =
                 GLbitfield::GL_ALL_BARRIER_BITS | GLbitfield::GL_ATOMIC_COUNTER_BARRIER_BIT |
                 GLbitfield::GL_BUFFER_UPDATE_BARRIER_BIT | GLbitfield::GL_COMMAND_BARRIER_BIT |
                 GLbitfield::GL_ELEMENT_ARRAY_BARRIER_BIT | GLbitfield::GL_FRAMEBUFFER_BARRIER_BIT |
@@ -18767,10 +19027,10 @@ inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_800_major = 3;
-        uint32_t l_minRequiredVersion_800_minor = 1;
-        uint32_t l_supportsBits_801_seenBits = barriers;
-        uint32_t l_supportsBits_801_validBits =
+        uint32_t l_minRequiredVersion_865_major = 3;
+        uint32_t l_minRequiredVersion_865_minor = 1;
+        uint32_t l_supportsBits_866_seenBits = barriers;
+        uint32_t l_supportsBits_866_validBits =
                 GLbitfield::GL_ALL_BARRIER_BITS | GLbitfield::GL_ATOMIC_COUNTER_BARRIER_BIT |
                 GLbitfield::GL_BUFFER_UPDATE_BARRIER_BIT | GLbitfield::GL_COMMAND_BARRIER_BIT |
                 GLbitfield::GL_ELEMENT_ARRAY_BARRIER_BIT | GLbitfield::GL_FRAMEBUFFER_BARRIER_BIT |
@@ -18832,8 +19092,8 @@ inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, vo
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_802_major = 3;
-        uint32_t l_minRequiredVersion_802_minor = 0;
+        uint32_t l_minRequiredVersion_867_major = 3;
+        uint32_t l_minRequiredVersion_867_minor = 0;
         switch (binaryFormat) {}
         observe(observations.mReads);
         mImports.glProgramBinary(program, binaryFormat, binary, length);
@@ -18862,15 +19122,15 @@ inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_804_major = 3;
-        uint32_t l_minRequiredVersion_804_minor = 0;
+        uint32_t l_minRequiredVersion_869_major = 3;
+        uint32_t l_minRequiredVersion_869_minor = 0;
         switch (pname) {
             case GLenum::GL_PROGRAM_BINARY_RETRIEVABLE_HINT: {
                 break;
             }
             case GLenum::GL_PROGRAM_SEPARABLE: {
-                uint32_t l_minRequiredVersion_805_major = 3;
-                uint32_t l_minRequiredVersion_805_minor = 1;
+                uint32_t l_minRequiredVersion_870_major = 3;
+                uint32_t l_minRequiredVersion_870_minor = 1;
                 break;
             }
         }
@@ -18897,8 +19157,8 @@ inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_807_major = 3;
-        uint32_t l_minRequiredVersion_807_minor = 1;
+        uint32_t l_minRequiredVersion_872_major = 3;
+        uint32_t l_minRequiredVersion_872_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1f(program, location, v0);
     } while (false);
@@ -18924,8 +19184,8 @@ inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_808_major = 3;
-        uint32_t l_minRequiredVersion_808_minor = 1;
+        uint32_t l_minRequiredVersion_873_major = 3;
+        uint32_t l_minRequiredVersion_873_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1fv(program, location, count, value);
     } while (false);
@@ -18952,8 +19212,8 @@ inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_809_major = 3;
-        uint32_t l_minRequiredVersion_809_minor = 1;
+        uint32_t l_minRequiredVersion_874_major = 3;
+        uint32_t l_minRequiredVersion_874_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1i(program, location, v0);
     } while (false);
@@ -18979,8 +19239,8 @@ inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_810_major = 3;
-        uint32_t l_minRequiredVersion_810_minor = 1;
+        uint32_t l_minRequiredVersion_875_major = 3;
+        uint32_t l_minRequiredVersion_875_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1iv(program, location, count, value);
     } while (false);
@@ -19007,8 +19267,8 @@ inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_811_major = 3;
-        uint32_t l_minRequiredVersion_811_minor = 1;
+        uint32_t l_minRequiredVersion_876_major = 3;
+        uint32_t l_minRequiredVersion_876_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1ui(program, location, v0);
     } while (false);
@@ -19034,8 +19294,8 @@ inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_812_major = 3;
-        uint32_t l_minRequiredVersion_812_minor = 1;
+        uint32_t l_minRequiredVersion_877_major = 3;
+        uint32_t l_minRequiredVersion_877_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform1uiv(program, location, count, value);
     } while (false);
@@ -19062,8 +19322,8 @@ inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_813_major = 3;
-        uint32_t l_minRequiredVersion_813_minor = 1;
+        uint32_t l_minRequiredVersion_878_major = 3;
+        uint32_t l_minRequiredVersion_878_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2f(program, location, v0, v1);
     } while (false);
@@ -19089,8 +19349,8 @@ inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_814_major = 3;
-        uint32_t l_minRequiredVersion_814_minor = 1;
+        uint32_t l_minRequiredVersion_879_major = 3;
+        uint32_t l_minRequiredVersion_879_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2fv(program, location, count, value);
     } while (false);
@@ -19119,8 +19379,8 @@ inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_815_major = 3;
-        uint32_t l_minRequiredVersion_815_minor = 1;
+        uint32_t l_minRequiredVersion_880_major = 3;
+        uint32_t l_minRequiredVersion_880_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2i(program, location, v0, v1);
     } while (false);
@@ -19146,8 +19406,8 @@ inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_816_major = 3;
-        uint32_t l_minRequiredVersion_816_minor = 1;
+        uint32_t l_minRequiredVersion_881_major = 3;
+        uint32_t l_minRequiredVersion_881_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2iv(program, location, count, value);
     } while (false);
@@ -19176,8 +19436,8 @@ inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_817_major = 3;
-        uint32_t l_minRequiredVersion_817_minor = 1;
+        uint32_t l_minRequiredVersion_882_major = 3;
+        uint32_t l_minRequiredVersion_882_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2ui(program, location, v0, v1);
     } while (false);
@@ -19203,8 +19463,8 @@ inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_818_major = 3;
-        uint32_t l_minRequiredVersion_818_minor = 1;
+        uint32_t l_minRequiredVersion_883_major = 3;
+        uint32_t l_minRequiredVersion_883_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform2uiv(program, location, count, value);
     } while (false);
@@ -19233,8 +19493,8 @@ inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_819_major = 3;
-        uint32_t l_minRequiredVersion_819_minor = 1;
+        uint32_t l_minRequiredVersion_884_major = 3;
+        uint32_t l_minRequiredVersion_884_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3f(program, location, v0, v1, v2);
     } while (false);
@@ -19260,8 +19520,8 @@ inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_820_major = 3;
-        uint32_t l_minRequiredVersion_820_minor = 1;
+        uint32_t l_minRequiredVersion_885_major = 3;
+        uint32_t l_minRequiredVersion_885_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3fv(program, location, count, value);
     } while (false);
@@ -19291,8 +19551,8 @@ inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_821_major = 3;
-        uint32_t l_minRequiredVersion_821_minor = 1;
+        uint32_t l_minRequiredVersion_886_major = 3;
+        uint32_t l_minRequiredVersion_886_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3i(program, location, v0, v1, v2);
     } while (false);
@@ -19318,8 +19578,8 @@ inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_822_major = 3;
-        uint32_t l_minRequiredVersion_822_minor = 1;
+        uint32_t l_minRequiredVersion_887_major = 3;
+        uint32_t l_minRequiredVersion_887_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3iv(program, location, count, value);
     } while (false);
@@ -19349,8 +19609,8 @@ inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_823_major = 3;
-        uint32_t l_minRequiredVersion_823_minor = 1;
+        uint32_t l_minRequiredVersion_888_major = 3;
+        uint32_t l_minRequiredVersion_888_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3ui(program, location, v0, v1, v2);
     } while (false);
@@ -19376,8 +19636,8 @@ inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_824_major = 3;
-        uint32_t l_minRequiredVersion_824_minor = 1;
+        uint32_t l_minRequiredVersion_889_major = 3;
+        uint32_t l_minRequiredVersion_889_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform3uiv(program, location, count, value);
     } while (false);
@@ -19406,8 +19666,8 @@ inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_825_major = 3;
-        uint32_t l_minRequiredVersion_825_minor = 1;
+        uint32_t l_minRequiredVersion_890_major = 3;
+        uint32_t l_minRequiredVersion_890_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4f(program, location, v0, v1, v2, v3);
     } while (false);
@@ -19433,8 +19693,8 @@ inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_826_major = 3;
-        uint32_t l_minRequiredVersion_826_minor = 1;
+        uint32_t l_minRequiredVersion_891_major = 3;
+        uint32_t l_minRequiredVersion_891_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4fv(program, location, count, value);
     } while (false);
@@ -19464,8 +19724,8 @@ inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_827_major = 3;
-        uint32_t l_minRequiredVersion_827_minor = 1;
+        uint32_t l_minRequiredVersion_892_major = 3;
+        uint32_t l_minRequiredVersion_892_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4i(program, location, v0, v1, v2, v3);
     } while (false);
@@ -19491,8 +19751,8 @@ inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_828_major = 3;
-        uint32_t l_minRequiredVersion_828_minor = 1;
+        uint32_t l_minRequiredVersion_893_major = 3;
+        uint32_t l_minRequiredVersion_893_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4iv(program, location, count, value);
     } while (false);
@@ -19522,8 +19782,8 @@ inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_829_major = 3;
-        uint32_t l_minRequiredVersion_829_minor = 1;
+        uint32_t l_minRequiredVersion_894_major = 3;
+        uint32_t l_minRequiredVersion_894_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4ui(program, location, v0, v1, v2, v3);
     } while (false);
@@ -19549,8 +19809,8 @@ inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_830_major = 3;
-        uint32_t l_minRequiredVersion_830_minor = 1;
+        uint32_t l_minRequiredVersion_895_major = 3;
+        uint32_t l_minRequiredVersion_895_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniform4uiv(program, location, count, value);
     } while (false);
@@ -19579,8 +19839,8 @@ inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t locatio
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_831_major = 3;
-        uint32_t l_minRequiredVersion_831_minor = 1;
+        uint32_t l_minRequiredVersion_896_major = 3;
+        uint32_t l_minRequiredVersion_896_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2fv(program, location, count, transpose, value);
     } while (false);
@@ -19609,8 +19869,8 @@ inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_832_major = 3;
-        uint32_t l_minRequiredVersion_832_minor = 1;
+        uint32_t l_minRequiredVersion_897_major = 3;
+        uint32_t l_minRequiredVersion_897_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2x3fv(program, location, count, transpose, value);
     } while (false);
@@ -19639,8 +19899,8 @@ inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_833_major = 3;
-        uint32_t l_minRequiredVersion_833_minor = 1;
+        uint32_t l_minRequiredVersion_898_major = 3;
+        uint32_t l_minRequiredVersion_898_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix2x4fv(program, location, count, transpose, value);
     } while (false);
@@ -19669,8 +19929,8 @@ inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t locatio
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_834_major = 3;
-        uint32_t l_minRequiredVersion_834_minor = 1;
+        uint32_t l_minRequiredVersion_899_major = 3;
+        uint32_t l_minRequiredVersion_899_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3fv(program, location, count, transpose, value);
     } while (false);
@@ -19699,8 +19959,8 @@ inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_835_major = 3;
-        uint32_t l_minRequiredVersion_835_minor = 1;
+        uint32_t l_minRequiredVersion_900_major = 3;
+        uint32_t l_minRequiredVersion_900_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3x2fv(program, location, count, transpose, value);
     } while (false);
@@ -19729,8 +19989,8 @@ inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_836_major = 3;
-        uint32_t l_minRequiredVersion_836_minor = 1;
+        uint32_t l_minRequiredVersion_901_major = 3;
+        uint32_t l_minRequiredVersion_901_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix3x4fv(program, location, count, transpose, value);
     } while (false);
@@ -19759,8 +20019,8 @@ inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t locatio
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_837_major = 3;
-        uint32_t l_minRequiredVersion_837_minor = 1;
+        uint32_t l_minRequiredVersion_902_major = 3;
+        uint32_t l_minRequiredVersion_902_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4fv(program, location, count, transpose, value);
     } while (false);
@@ -19789,8 +20049,8 @@ inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_838_major = 3;
-        uint32_t l_minRequiredVersion_838_minor = 1;
+        uint32_t l_minRequiredVersion_903_major = 3;
+        uint32_t l_minRequiredVersion_903_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4x2fv(program, location, count, transpose, value);
     } while (false);
@@ -19819,8 +20079,8 @@ inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t locat
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_839_major = 3;
-        uint32_t l_minRequiredVersion_839_minor = 1;
+        uint32_t l_minRequiredVersion_904_major = 3;
+        uint32_t l_minRequiredVersion_904_minor = 1;
         observe(observations.mReads);
         mImports.glProgramUniformMatrix4x3fv(program, location, count, transpose, value);
     } while (false);
@@ -19847,8 +20107,8 @@ inline void GlesSpy::glReleaseShaderCompiler() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_840_major = 2;
-        uint32_t l_minRequiredVersion_840_minor = 0;
+        uint32_t l_minRequiredVersion_905_major = 2;
+        uint32_t l_minRequiredVersion_905_minor = 0;
         observe(observations.mReads);
         mImports.glReleaseShaderCompiler();
     } while (false);
@@ -19872,8 +20132,8 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_841_major = 2;
-        uint32_t l_minRequiredVersion_841_minor = 0;
+        uint32_t l_minRequiredVersion_906_major = 2;
+        uint32_t l_minRequiredVersion_906_minor = 0;
         switch (binary_format) {}
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
         }
@@ -19904,13 +20164,17 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_843_major = 2;
-        uint32_t l_minRequiredVersion_843_minor = 0;
+        uint32_t l_minRequiredVersion_908_major = 2;
+        uint32_t l_minRequiredVersion_908_minor = 0;
         Slice<GLchar*> l_sources = slice(source, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         Slice<GLint> l_lengths = slice(length, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_844_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_844_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_910_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_909_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_909_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             std::string l_str = /* clang-format off */
@@ -19946,11 +20210,15 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_845_major = 2;
-        uint32_t l_minRequiredVersion_845_minor = 0;
+        uint32_t l_minRequiredVersion_911_major = 2;
+        uint32_t l_minRequiredVersion_911_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_846_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_846_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_913_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_912_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_912_result;
         Slice<GLfloat> l_v = make<GLfloat>(1);
         observe(observations.mReads);
         mImports.glUniform1f(location, value);
@@ -19979,11 +20247,15 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_847_major = 2;
-        uint32_t l_minRequiredVersion_847_minor = 0;
+        uint32_t l_minRequiredVersion_914_major = 2;
+        uint32_t l_minRequiredVersion_914_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_848_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_848_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_916_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_915_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_915_result;
         Slice<GLfloat> l_v = slice(values, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20014,11 +20286,15 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_849_major = 2;
-        uint32_t l_minRequiredVersion_849_minor = 0;
+        uint32_t l_minRequiredVersion_917_major = 2;
+        uint32_t l_minRequiredVersion_917_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_850_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_850_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_919_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_918_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_918_result;
         Slice<GLint> l_v = make<GLint>(1);
         observe(observations.mReads);
         mImports.glUniform1i(location, value);
@@ -20047,11 +20323,15 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_851_major = 2;
-        uint32_t l_minRequiredVersion_851_minor = 0;
+        uint32_t l_minRequiredVersion_920_major = 2;
+        uint32_t l_minRequiredVersion_920_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_852_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_852_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_922_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_921_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_921_result;
         Slice<GLint> l_v = slice(values, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20082,8 +20362,8 @@ inline void GlesSpy::glUniform1ui(int32_t location, uint32_t v0) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_853_major = 3;
-        uint32_t l_minRequiredVersion_853_minor = 0;
+        uint32_t l_minRequiredVersion_923_major = 3;
+        uint32_t l_minRequiredVersion_923_minor = 0;
         observe(observations.mReads);
         mImports.glUniform1ui(location, v0);
     } while (false);
@@ -20105,8 +20385,8 @@ inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* va
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_854_major = 3;
-        uint32_t l_minRequiredVersion_854_minor = 0;
+        uint32_t l_minRequiredVersion_924_major = 3;
+        uint32_t l_minRequiredVersion_924_minor = 0;
         observe(observations.mReads);
         mImports.glUniform1uiv(location, count, value);
     } while (false);
@@ -20131,11 +20411,15 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_855_major = 2;
-        uint32_t l_minRequiredVersion_855_minor = 0;
+        uint32_t l_minRequiredVersion_925_major = 2;
+        uint32_t l_minRequiredVersion_925_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_856_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_856_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_927_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_926_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_926_result;
         Slice<Vec2f> l_v = make<Vec2f>(1);
         observe(observations.mReads);
         mImports.glUniform2f(location, value0, value1);
@@ -20164,11 +20448,15 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_857_major = 2;
-        uint32_t l_minRequiredVersion_857_minor = 0;
+        uint32_t l_minRequiredVersion_928_major = 2;
+        uint32_t l_minRequiredVersion_928_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_858_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_858_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_930_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_929_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_929_result;
         Slice<Vec2f> l_v = slice((Vec2f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20199,11 +20487,15 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_859_major = 2;
-        uint32_t l_minRequiredVersion_859_minor = 0;
+        uint32_t l_minRequiredVersion_931_major = 2;
+        uint32_t l_minRequiredVersion_931_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_860_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_860_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_933_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_932_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_932_result;
         Slice<Vec2i> l_v = make<Vec2i>(1);
         observe(observations.mReads);
         mImports.glUniform2i(location, value0, value1);
@@ -20232,11 +20524,15 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_861_major = 2;
-        uint32_t l_minRequiredVersion_861_minor = 0;
+        uint32_t l_minRequiredVersion_934_major = 2;
+        uint32_t l_minRequiredVersion_934_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_862_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_862_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_936_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_935_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_935_result;
         Slice<Vec2i> l_v = slice((Vec2i*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20267,8 +20563,8 @@ inline void GlesSpy::glUniform2ui(int32_t location, uint32_t v0, uint32_t v1) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_863_major = 3;
-        uint32_t l_minRequiredVersion_863_minor = 0;
+        uint32_t l_minRequiredVersion_937_major = 3;
+        uint32_t l_minRequiredVersion_937_minor = 0;
         observe(observations.mReads);
         mImports.glUniform2ui(location, v0, v1);
     } while (false);
@@ -20290,8 +20586,8 @@ inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* va
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_864_major = 3;
-        uint32_t l_minRequiredVersion_864_minor = 0;
+        uint32_t l_minRequiredVersion_938_major = 3;
+        uint32_t l_minRequiredVersion_938_minor = 0;
         observe(observations.mReads);
         mImports.glUniform2uiv(location, count, value);
     } while (false);
@@ -20316,11 +20612,15 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_865_major = 2;
-        uint32_t l_minRequiredVersion_865_minor = 0;
+        uint32_t l_minRequiredVersion_939_major = 2;
+        uint32_t l_minRequiredVersion_939_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_866_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_866_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_941_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_940_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_940_result;
         Slice<Vec3f> l_v = make<Vec3f>(1);
         observe(observations.mReads);
         mImports.glUniform3f(location, value0, value1, value2);
@@ -20349,11 +20649,15 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_867_major = 2;
-        uint32_t l_minRequiredVersion_867_minor = 0;
+        uint32_t l_minRequiredVersion_942_major = 2;
+        uint32_t l_minRequiredVersion_942_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_868_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_868_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_944_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_943_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_943_result;
         Slice<Vec3f> l_v = slice((Vec3f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20385,11 +20689,15 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_869_major = 2;
-        uint32_t l_minRequiredVersion_869_minor = 0;
+        uint32_t l_minRequiredVersion_945_major = 2;
+        uint32_t l_minRequiredVersion_945_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_870_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_870_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_947_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_946_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_946_result;
         Slice<Vec3i> l_v = make<Vec3i>(1);
         observe(observations.mReads);
         mImports.glUniform3i(location, value0, value1, value2);
@@ -20418,11 +20726,15 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_871_major = 2;
-        uint32_t l_minRequiredVersion_871_minor = 0;
+        uint32_t l_minRequiredVersion_948_major = 2;
+        uint32_t l_minRequiredVersion_948_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_872_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_872_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_950_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_949_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_949_result;
         Slice<Vec3i> l_v = slice((Vec3i*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20454,8 +20766,8 @@ inline void GlesSpy::glUniform3ui(int32_t location, uint32_t v0, uint32_t v1, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_873_major = 3;
-        uint32_t l_minRequiredVersion_873_minor = 0;
+        uint32_t l_minRequiredVersion_951_major = 3;
+        uint32_t l_minRequiredVersion_951_minor = 0;
         observe(observations.mReads);
         mImports.glUniform3ui(location, v0, v1, v2);
     } while (false);
@@ -20477,8 +20789,8 @@ inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* va
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_874_major = 3;
-        uint32_t l_minRequiredVersion_874_minor = 0;
+        uint32_t l_minRequiredVersion_952_major = 3;
+        uint32_t l_minRequiredVersion_952_minor = 0;
         observe(observations.mReads);
         mImports.glUniform3uiv(location, count, value);
     } while (false);
@@ -20505,11 +20817,15 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_875_major = 2;
-        uint32_t l_minRequiredVersion_875_minor = 0;
+        uint32_t l_minRequiredVersion_953_major = 2;
+        uint32_t l_minRequiredVersion_953_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_876_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_876_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_955_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_954_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_954_result;
         Slice<Vec4f> l_v = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glUniform4f(location, value0, value1, value2, value3);
@@ -20538,11 +20854,15 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_877_major = 2;
-        uint32_t l_minRequiredVersion_877_minor = 0;
+        uint32_t l_minRequiredVersion_956_major = 2;
+        uint32_t l_minRequiredVersion_956_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_878_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_878_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_958_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_957_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_957_result;
         Slice<Vec4f> l_v = slice((Vec4f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20575,11 +20895,15 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_879_major = 2;
-        uint32_t l_minRequiredVersion_879_minor = 0;
+        uint32_t l_minRequiredVersion_959_major = 2;
+        uint32_t l_minRequiredVersion_959_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_880_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_880_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_961_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_960_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_960_result;
         Slice<Vec4i> l_v = make<Vec4i>(1);
         observe(observations.mReads);
         mImports.glUniform4i(location, value0, value1, value2, value3);
@@ -20608,11 +20932,15 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_881_major = 2;
-        uint32_t l_minRequiredVersion_881_minor = 0;
+        uint32_t l_minRequiredVersion_962_major = 2;
+        uint32_t l_minRequiredVersion_962_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_882_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_882_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_964_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_963_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_963_result;
         Slice<Vec4i> l_v = slice((Vec4i*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20645,8 +20973,8 @@ inline void GlesSpy::glUniform4ui(int32_t location, uint32_t v0, uint32_t v1, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_883_major = 3;
-        uint32_t l_minRequiredVersion_883_minor = 0;
+        uint32_t l_minRequiredVersion_965_major = 3;
+        uint32_t l_minRequiredVersion_965_minor = 0;
         observe(observations.mReads);
         mImports.glUniform4ui(location, v0, v1, v2, v3);
     } while (false);
@@ -20668,8 +20996,8 @@ inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* va
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_884_major = 3;
-        uint32_t l_minRequiredVersion_884_minor = 0;
+        uint32_t l_minRequiredVersion_966_major = 3;
+        uint32_t l_minRequiredVersion_966_minor = 0;
         observe(observations.mReads);
         mImports.glUniform4uiv(location, count, value);
     } while (false);
@@ -20698,8 +21026,8 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_885_major = 3;
-        uint32_t l_minRequiredVersion_885_minor = 0;
+        uint32_t l_minRequiredVersion_967_major = 3;
+        uint32_t l_minRequiredVersion_967_minor = 0;
         observe(observations.mReads);
         mImports.glUniformBlockBinding(program, uniform_block_index, uniform_block_binding);
     } while (false);
@@ -20726,11 +21054,15 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_886_major = 2;
-        uint32_t l_minRequiredVersion_886_minor = 0;
+        uint32_t l_minRequiredVersion_968_major = 2;
+        uint32_t l_minRequiredVersion_968_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_887_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_887_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_970_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_969_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_969_result;
         Slice<Mat2f> l_v = slice((Mat2f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20765,8 +21097,8 @@ inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_888_major = 3;
-        uint32_t l_minRequiredVersion_888_minor = 0;
+        uint32_t l_minRequiredVersion_971_major = 3;
+        uint32_t l_minRequiredVersion_971_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix2x3fv(location, count, transpose, value);
     } while (false);
@@ -20795,8 +21127,8 @@ inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_889_major = 3;
-        uint32_t l_minRequiredVersion_889_minor = 0;
+        uint32_t l_minRequiredVersion_972_major = 3;
+        uint32_t l_minRequiredVersion_972_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix2x4fv(location, count, transpose, value);
     } while (false);
@@ -20825,11 +21157,15 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_890_major = 2;
-        uint32_t l_minRequiredVersion_890_minor = 0;
+        uint32_t l_minRequiredVersion_973_major = 2;
+        uint32_t l_minRequiredVersion_973_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_891_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_891_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_975_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_974_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_974_result;
         Slice<Mat3f> l_v = slice((Mat3f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20864,8 +21200,8 @@ inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_892_major = 3;
-        uint32_t l_minRequiredVersion_892_minor = 0;
+        uint32_t l_minRequiredVersion_976_major = 3;
+        uint32_t l_minRequiredVersion_976_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix3x2fv(location, count, transpose, value);
     } while (false);
@@ -20894,8 +21230,8 @@ inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_893_major = 3;
-        uint32_t l_minRequiredVersion_893_minor = 0;
+        uint32_t l_minRequiredVersion_977_major = 3;
+        uint32_t l_minRequiredVersion_977_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix3x4fv(location, count, transpose, value);
     } while (false);
@@ -20924,11 +21260,15 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_894_major = 2;
-        uint32_t l_minRequiredVersion_894_minor = 0;
+        uint32_t l_minRequiredVersion_978_major = 2;
+        uint32_t l_minRequiredVersion_978_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_895_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_895_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_980_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_979_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_979_result;
         Slice<Mat4f> l_v = slice((Mat4f*)(values), (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -20962,8 +21302,8 @@ inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_896_major = 3;
-        uint32_t l_minRequiredVersion_896_minor = 0;
+        uint32_t l_minRequiredVersion_981_major = 3;
+        uint32_t l_minRequiredVersion_981_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix4x2fv(location, count, transpose, value);
     } while (false);
@@ -20992,8 +21332,8 @@ inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_897_major = 3;
-        uint32_t l_minRequiredVersion_897_minor = 0;
+        uint32_t l_minRequiredVersion_982_major = 3;
+        uint32_t l_minRequiredVersion_982_minor = 0;
         observe(observations.mReads);
         mImports.glUniformMatrix4x3fv(location, count, transpose, value);
     } while (false);
@@ -21018,11 +21358,15 @@ inline void GlesSpy::glUseProgram(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_898_major = 2;
-        uint32_t l_minRequiredVersion_898_minor = 0;
+        uint32_t l_minRequiredVersion_983_major = 2;
+        uint32_t l_minRequiredVersion_983_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_899_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_899_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_985_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_984_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_984_result;
         l_ctx->mBoundProgram = program;
         observe(observations.mReads);
         mImports.glUseProgram(program);
@@ -21047,10 +21391,10 @@ inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_900_major = 3;
-        uint32_t l_minRequiredVersion_900_minor = 1;
-        uint32_t l_supportsBits_901_seenBits = stages;
-        uint32_t l_supportsBits_901_validBits =
+        uint32_t l_minRequiredVersion_986_major = 3;
+        uint32_t l_minRequiredVersion_986_minor = 1;
+        uint32_t l_supportsBits_987_seenBits = stages;
+        uint32_t l_supportsBits_987_validBits =
                 GLbitfield::GL_ALL_SHADER_BITS | GLbitfield::GL_COMPUTE_SHADER_BIT |
                 GLbitfield::GL_FRAGMENT_SHADER_BIT | GLbitfield::GL_VERTEX_SHADER_BIT;
         if ((stages & GLbitfield::GL_ALL_SHADER_BITS) != 0) {
@@ -21082,8 +21426,8 @@ inline void GlesSpy::glValidateProgram(uint32_t program) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_902_major = 2;
-        uint32_t l_minRequiredVersion_902_minor = 0;
+        uint32_t l_minRequiredVersion_988_major = 2;
+        uint32_t l_minRequiredVersion_988_minor = 0;
         observe(observations.mReads);
         mImports.glValidateProgram(program);
     } while (false);
@@ -21107,8 +21451,8 @@ inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_903_major = 3;
-        uint32_t l_minRequiredVersion_903_minor = 1;
+        uint32_t l_minRequiredVersion_989_major = 3;
+        uint32_t l_minRequiredVersion_989_minor = 1;
         observe(observations.mReads);
         mImports.glValidateProgramPipeline(pipeline);
     } while (false);
@@ -21130,8 +21474,8 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_904_major = 2;
-        uint32_t l_minRequiredVersion_904_minor = 0;
+        uint32_t l_minRequiredVersion_990_major = 2;
+        uint32_t l_minRequiredVersion_990_minor = 0;
         switch (mode) {
             case GLenum::GL_BACK:   // fall-through...
             case GLenum::GL_FRONT:  // fall-through...
@@ -21140,8 +21484,12 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_906_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_906_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_993_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_992_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_992_result;
         l_ctx->mRasterizing.mCullFace = mode;
         observe(observations.mReads);
         mImports.glCullFace(mode);
@@ -21164,11 +21512,15 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_907_major = 2;
-        uint32_t l_minRequiredVersion_907_minor = 0;
+        uint32_t l_minRequiredVersion_994_major = 2;
+        uint32_t l_minRequiredVersion_994_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_908_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_908_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_996_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_995_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_995_result;
         l_ctx->mRasterizing.mDepthNear = near;
         l_ctx->mRasterizing.mDepthFar = far;
         observe(observations.mReads);
@@ -21192,8 +21544,8 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_909_major = 2;
-        uint32_t l_minRequiredVersion_909_minor = 0;
+        uint32_t l_minRequiredVersion_997_major = 2;
+        uint32_t l_minRequiredVersion_997_minor = 0;
         switch (orientation) {
             case GLenum::GL_CCW:  // fall-through...
             case GLenum::GL_CW: {
@@ -21201,8 +21553,12 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_911_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_911_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1000_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_999_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_999_result;
         l_ctx->mRasterizing.mFrontFace = orientation;
         observe(observations.mReads);
         mImports.glFrontFace(orientation);
@@ -21227,8 +21583,8 @@ inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* v
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_912_major = 3;
-        uint32_t l_minRequiredVersion_912_minor = 1;
+        uint32_t l_minRequiredVersion_1001_major = 3;
+        uint32_t l_minRequiredVersion_1001_minor = 1;
         switch (pname) {
             case GLenum::GL_SAMPLE_POSITION: {
                 break;
@@ -21258,11 +21614,15 @@ inline void GlesSpy::glLineWidth(float width) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_914_major = 2;
-        uint32_t l_minRequiredVersion_914_minor = 0;
+        uint32_t l_minRequiredVersion_1003_major = 2;
+        uint32_t l_minRequiredVersion_1003_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_915_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_915_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1005_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1004_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1004_result;
         l_ctx->mRasterizing.mLineWidth = width;
         observe(observations.mReads);
         mImports.glLineWidth(width);
@@ -21287,8 +21647,8 @@ inline void GlesSpy::glMinSampleShading(float value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_916_major = 3;
-        uint32_t l_minRequiredVersion_916_minor = 2;
+        uint32_t l_minRequiredVersion_1006_major = 3;
+        uint32_t l_minRequiredVersion_1006_minor = 2;
         observe(observations.mReads);
         mImports.glMinSampleShading(value);
     } while (false);
@@ -21310,11 +21670,15 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_917_major = 2;
-        uint32_t l_minRequiredVersion_917_minor = 0;
+        uint32_t l_minRequiredVersion_1007_major = 2;
+        uint32_t l_minRequiredVersion_1007_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_918_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_918_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1009_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1008_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1008_result;
         l_ctx->mRasterizing.mPolygonOffsetUnits = units;
         l_ctx->mRasterizing.mPolygonOffsetFactor = scale_factor;
         observe(observations.mReads);
@@ -21339,11 +21703,15 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_919_major = 2;
-        uint32_t l_minRequiredVersion_919_minor = 0;
+        uint32_t l_minRequiredVersion_1010_major = 2;
+        uint32_t l_minRequiredVersion_1010_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_920_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_920_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1012_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1011_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1011_result;
         l_ctx->mRasterizing.mViewport = Rect(x, y, width, height);
         observe(observations.mReads);
         mImports.glViewport(x, y, width, height);
@@ -21366,8 +21734,8 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_921_major = 3;
-        uint32_t l_minRequiredVersion_921_minor = 1;
+        uint32_t l_minRequiredVersion_1013_major = 3;
+        uint32_t l_minRequiredVersion_1013_minor = 1;
         switch (target) {
             case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
@@ -21626,8 +21994,8 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_922_major = 3;
-                uint32_t l_minRequiredVersion_922_minor = 2;
+                uint32_t l_minRequiredVersion_1014_major = 3;
+                uint32_t l_minRequiredVersion_1014_minor = 2;
                 break;
             }
         }
@@ -21655,8 +22023,8 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_924_major = 2;
-        uint32_t l_minRequiredVersion_924_minor = 0;
+        uint32_t l_minRequiredVersion_1016_major = 2;
+        uint32_t l_minRequiredVersion_1016_minor = 0;
         switch (param) {
             case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
@@ -21810,8 +22178,8 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
             case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
             case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
             case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_925_major = 3;
-                uint32_t l_minRequiredVersion_925_minor = 0;
+                uint32_t l_minRequiredVersion_1017_major = 3;
+                uint32_t l_minRequiredVersion_1017_minor = 0;
                 break;
             }
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
@@ -21853,8 +22221,8 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_926_major = 3;
-                uint32_t l_minRequiredVersion_926_minor = 1;
+                uint32_t l_minRequiredVersion_1018_major = 3;
+                uint32_t l_minRequiredVersion_1018_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -21923,15 +22291,19 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_927_major = 3;
-                uint32_t l_minRequiredVersion_927_minor = 2;
+                uint32_t l_minRequiredVersion_1019_major = 3;
+                uint32_t l_minRequiredVersion_1019_minor = 2;
                 break;
             }
         }
         Slice<GLboolean> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_929_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_929_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1022_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1021_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1021_result;
         observe(observations.mReads);
         mImports.glGetBooleanv(param, values);
         switch (param) {
@@ -22019,8 +22391,8 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_930_major = 2;
-        uint32_t l_minRequiredVersion_930_minor = 0;
+        uint32_t l_minRequiredVersion_1023_major = 2;
+        uint32_t l_minRequiredVersion_1023_minor = 0;
         switch (param) {
             case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
@@ -22174,8 +22546,8 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
             case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
             case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
             case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_931_major = 3;
-                uint32_t l_minRequiredVersion_931_minor = 0;
+                uint32_t l_minRequiredVersion_1024_major = 3;
+                uint32_t l_minRequiredVersion_1024_minor = 0;
                 break;
             }
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
@@ -22217,8 +22589,8 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_932_major = 3;
-                uint32_t l_minRequiredVersion_932_minor = 1;
+                uint32_t l_minRequiredVersion_1025_major = 3;
+                uint32_t l_minRequiredVersion_1025_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -22287,15 +22659,19 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_933_major = 3;
-                uint32_t l_minRequiredVersion_933_minor = 2;
+                uint32_t l_minRequiredVersion_1026_major = 3;
+                uint32_t l_minRequiredVersion_1026_minor = 2;
                 break;
             }
         }
         Slice<GLfloat> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_935_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_935_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1029_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1028_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1028_result;
         observe(observations.mReads);
         mImports.glGetFloatv(param, values);
         switch (param) {
@@ -22372,8 +22748,8 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_936_major = 3;
-        uint32_t l_minRequiredVersion_936_minor = 0;
+        uint32_t l_minRequiredVersion_1030_major = 3;
+        uint32_t l_minRequiredVersion_1030_minor = 0;
         switch (target) {
             case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
@@ -22566,8 +22942,8 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_937_major = 3;
-                uint32_t l_minRequiredVersion_937_minor = 1;
+                uint32_t l_minRequiredVersion_1031_major = 3;
+                uint32_t l_minRequiredVersion_1031_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -22636,8 +23012,8 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t target, uint32_t index, int64_t*
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_938_major = 3;
-                uint32_t l_minRequiredVersion_938_minor = 2;
+                uint32_t l_minRequiredVersion_1032_major = 3;
+                uint32_t l_minRequiredVersion_1032_minor = 2;
                 break;
             }
         }
@@ -22665,8 +23041,8 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_940_major = 3;
-        uint32_t l_minRequiredVersion_940_minor = 0;
+        uint32_t l_minRequiredVersion_1034_major = 3;
+        uint32_t l_minRequiredVersion_1034_minor = 0;
         switch (pname) {
             case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
@@ -22859,8 +23235,8 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_941_major = 3;
-                uint32_t l_minRequiredVersion_941_minor = 1;
+                uint32_t l_minRequiredVersion_1035_major = 3;
+                uint32_t l_minRequiredVersion_1035_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -22929,8 +23305,8 @@ inline void GlesSpy::glGetInteger64v(uint32_t pname, int64_t* data) {
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_942_major = 3;
-                uint32_t l_minRequiredVersion_942_minor = 2;
+                uint32_t l_minRequiredVersion_1036_major = 3;
+                uint32_t l_minRequiredVersion_1036_minor = 2;
                 break;
             }
         }
@@ -22957,8 +23333,8 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_944_major = 3;
-        uint32_t l_minRequiredVersion_944_minor = 0;
+        uint32_t l_minRequiredVersion_1038_major = 3;
+        uint32_t l_minRequiredVersion_1038_minor = 0;
         switch (target) {
             case GLenum::GL_ACTIVE_TEXTURE:                                 // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:                       // fall-through...
@@ -23151,8 +23527,8 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_945_major = 3;
-                uint32_t l_minRequiredVersion_945_minor = 1;
+                uint32_t l_minRequiredVersion_1039_major = 3;
+                uint32_t l_minRequiredVersion_1039_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -23221,8 +23597,8 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t target, uint32_t index, int32_t* d
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_946_major = 3;
-                uint32_t l_minRequiredVersion_946_minor = 2;
+                uint32_t l_minRequiredVersion_1040_major = 3;
+                uint32_t l_minRequiredVersion_1040_minor = 2;
                 break;
             }
         }
@@ -23249,8 +23625,8 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_948_major = 2;
-        uint32_t l_minRequiredVersion_948_minor = 0;
+        uint32_t l_minRequiredVersion_1042_major = 2;
+        uint32_t l_minRequiredVersion_1042_minor = 0;
         switch (param) {
             case GLenum::GL_ACTIVE_TEXTURE:                    // fall-through...
             case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:          // fall-through...
@@ -23404,8 +23780,8 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             case GLenum::GL_UNPACK_SKIP_PIXELS:                             // fall-through...
             case GLenum::GL_UNPACK_SKIP_ROWS:                               // fall-through...
             case GLenum::GL_VERTEX_ARRAY_BINDING: {
-                uint32_t l_minRequiredVersion_949_major = 3;
-                uint32_t l_minRequiredVersion_949_minor = 0;
+                uint32_t l_minRequiredVersion_1043_major = 3;
+                uint32_t l_minRequiredVersion_1043_minor = 0;
                 break;
             }
             case GLenum::GL_DISPATCH_INDIRECT_BUFFER_BINDING:         // fall-through...
@@ -23447,8 +23823,8 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             case GLenum::GL_VERTEX_BINDING_DIVISOR:                   // fall-through...
             case GLenum::GL_VERTEX_BINDING_OFFSET:                    // fall-through...
             case GLenum::GL_VERTEX_BINDING_STRIDE: {
-                uint32_t l_minRequiredVersion_950_major = 3;
-                uint32_t l_minRequiredVersion_950_minor = 1;
+                uint32_t l_minRequiredVersion_1044_major = 3;
+                uint32_t l_minRequiredVersion_1044_minor = 1;
                 break;
             }
             case GLenum::GL_CONTEXT_FLAGS:                                    // fall-through...
@@ -23517,15 +23893,19 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             case GLenum::GL_TEXTURE_BINDING_CUBE_MAP_ARRAY:                   // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_BINDING:                           // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                uint32_t l_minRequiredVersion_951_major = 3;
-                uint32_t l_minRequiredVersion_951_minor = 2;
+                uint32_t l_minRequiredVersion_1045_major = 3;
+                uint32_t l_minRequiredVersion_1045_minor = 2;
                 break;
             }
         }
         Slice<GLint> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_953_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_953_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1048_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1047_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1047_result;
         observe(observations.mReads);
         mImports.glGetIntegerv(param, values);
         switch (param) {
@@ -23832,20 +24212,20 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_954_major = 3;
-        uint32_t l_minRequiredVersion_954_minor = 0;
+        uint32_t l_minRequiredVersion_1049_major = 3;
+        uint32_t l_minRequiredVersion_1049_minor = 0;
         switch (target) {
             case GLenum::GL_RENDERBUFFER: {
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_955_major = 3;
-                uint32_t l_minRequiredVersion_955_minor = 1;
+                uint32_t l_minRequiredVersion_1050_major = 3;
+                uint32_t l_minRequiredVersion_1050_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY: {
-                uint32_t l_minRequiredVersion_956_major = 3;
-                uint32_t l_minRequiredVersion_956_minor = 2;
+                uint32_t l_minRequiredVersion_1051_major = 3;
+                uint32_t l_minRequiredVersion_1051_minor = 2;
                 break;
             }
         }
@@ -23907,8 +24287,8 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
                 break;
             }
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_958_major = 3;
-                uint32_t l_minRequiredVersion_958_minor = 2;
+                uint32_t l_minRequiredVersion_1053_major = 3;
+                uint32_t l_minRequiredVersion_1053_minor = 2;
                 break;
             }
         }
@@ -23944,8 +24324,8 @@ inline uint8_t* GlesSpy::glGetString(uint32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_961_major = 2;
-        uint32_t l_minRequiredVersion_961_minor = 0;
+        uint32_t l_minRequiredVersion_1056_major = 2;
+        uint32_t l_minRequiredVersion_1056_minor = 0;
         switch (param) {
             case GLenum::GL_EXTENSIONS:                // fall-through...
             case GLenum::GL_RENDERER:                  // fall-through...
@@ -23983,8 +24363,8 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_963_major = 3;
-        uint32_t l_minRequiredVersion_963_minor = 0;
+        uint32_t l_minRequiredVersion_1058_major = 3;
+        uint32_t l_minRequiredVersion_1058_minor = 0;
         switch (name) {
             case GLenum::GL_EXTENSIONS: {
                 break;
@@ -24019,8 +24399,8 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_965_major = 2;
-        uint32_t l_minRequiredVersion_965_minor = 0;
+        uint32_t l_minRequiredVersion_1060_major = 2;
+        uint32_t l_minRequiredVersion_1060_minor = 0;
         switch (capability) {
             case GLenum::GL_BLEND:                     // fall-through...
             case GLenum::GL_CULL_FACE:                 // fall-through...
@@ -24035,21 +24415,25 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
             }
             case GLenum::GL_PRIMITIVE_RESTART_FIXED_INDEX:  // fall-through...
             case GLenum::GL_RASTERIZER_DISCARD: {
-                uint32_t l_minRequiredVersion_966_major = 3;
-                uint32_t l_minRequiredVersion_966_minor = 0;
+                uint32_t l_minRequiredVersion_1061_major = 3;
+                uint32_t l_minRequiredVersion_1061_minor = 0;
                 break;
             }
             case GLenum::GL_DEBUG_OUTPUT:              // fall-through...
             case GLenum::GL_DEBUG_OUTPUT_SYNCHRONOUS:  // fall-through...
             case GLenum::GL_SAMPLE_MASK: {
-                uint32_t l_minRequiredVersion_967_major = 3;
-                uint32_t l_minRequiredVersion_967_minor = 2;
+                uint32_t l_minRequiredVersion_1062_major = 3;
+                uint32_t l_minRequiredVersion_1062_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_969_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_969_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1065_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1064_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1064_result;
         observe(observations.mReads);
         result = mImports.glIsEnabled(capability);
         break;
@@ -24076,8 +24460,8 @@ inline uint8_t GlesSpy::glIsEnabledi(uint32_t target, uint32_t index) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_970_major = 3;
-        uint32_t l_minRequiredVersion_970_minor = 2;
+        uint32_t l_minRequiredVersion_1066_major = 3;
+        uint32_t l_minRequiredVersion_1066_minor = 2;
         switch (target) {
             case GLenum::GL_BLEND:                          // fall-through...
             case GLenum::GL_CULL_FACE:                      // fall-through...
@@ -24122,10 +24506,10 @@ inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_972_major = 3;
-        uint32_t l_minRequiredVersion_972_minor = 0;
-        uint32_t l_supportsBits_973_seenBits = syncFlags;
-        uint32_t l_supportsBits_973_validBits = GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT;
+        uint32_t l_minRequiredVersion_1068_major = 3;
+        uint32_t l_minRequiredVersion_1068_minor = 0;
+        uint32_t l_supportsBits_1069_seenBits = syncFlags;
+        uint32_t l_supportsBits_1069_validBits = GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT;
         if ((syncFlags & GLbitfield::GL_SYNC_FLUSH_COMMANDS_BIT) != 0) {
         }
         observe(observations.mReads);
@@ -24152,8 +24536,8 @@ inline void GlesSpy::glDeleteSync(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_974_major = 3;
-        uint32_t l_minRequiredVersion_974_minor = 0;
+        uint32_t l_minRequiredVersion_1070_major = 3;
+        uint32_t l_minRequiredVersion_1070_minor = 0;
         observe(observations.mReads);
         mImports.glDeleteSync(sync);
     } while (false);
@@ -24177,8 +24561,8 @@ inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_975_major = 3;
-        uint32_t l_minRequiredVersion_975_minor = 0;
+        uint32_t l_minRequiredVersion_1071_major = 3;
+        uint32_t l_minRequiredVersion_1071_minor = 0;
         switch (condition) {
             case GLenum::GL_SYNC_GPU_COMMANDS_COMPLETE: {
                 break;
@@ -24210,8 +24594,8 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_977_major = 3;
-        uint32_t l_minRequiredVersion_977_minor = 0;
+        uint32_t l_minRequiredVersion_1073_major = 3;
+        uint32_t l_minRequiredVersion_1073_minor = 0;
         switch (pname) {
             case GLenum::GL_OBJECT_TYPE:     // fall-through...
             case GLenum::GL_SYNC_CONDITION:  // fall-through...
@@ -24248,8 +24632,8 @@ inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_979_major = 3;
-        uint32_t l_minRequiredVersion_979_minor = 0;
+        uint32_t l_minRequiredVersion_1075_major = 3;
+        uint32_t l_minRequiredVersion_1075_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsSync(sync);
         break;
@@ -24274,8 +24658,8 @@ inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t time
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_980_major = 3;
-        uint32_t l_minRequiredVersion_980_minor = 0;
+        uint32_t l_minRequiredVersion_1076_major = 3;
+        uint32_t l_minRequiredVersion_1076_minor = 0;
         observe(observations.mReads);
         mImports.glWaitSync(sync, syncFlags, timeout);
     } while (false);
@@ -24297,8 +24681,8 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_981_major = 2;
-        uint32_t l_minRequiredVersion_981_minor = 0;
+        uint32_t l_minRequiredVersion_1077_major = 2;
+        uint32_t l_minRequiredVersion_1077_minor = 0;
         switch (unit) {
             case GLenum::GL_TEXTURE0:   // fall-through...
             case GLenum::GL_TEXTURE1:   // fall-through...
@@ -24336,8 +24720,12 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_983_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_983_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1080_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1079_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1079_result;
         l_ctx->mActiveTextureUnit = unit;
         observe(observations.mReads);
         mImports.glActiveTexture(unit);
@@ -24366,8 +24754,8 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_984_major = 3;
-        uint32_t l_minRequiredVersion_984_minor = 1;
+        uint32_t l_minRequiredVersion_1081_major = 3;
+        uint32_t l_minRequiredVersion_1081_minor = 1;
         switch (access) {
             case GLenum::GL_READ_ONLY:   // fall-through...
             case GLenum::GL_READ_WRITE:  // fall-through...
@@ -24414,8 +24802,8 @@ inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_987_major = 3;
-        uint32_t l_minRequiredVersion_987_minor = 0;
+        uint32_t l_minRequiredVersion_1084_major = 3;
+        uint32_t l_minRequiredVersion_1084_minor = 0;
         observe(observations.mReads);
         mImports.glBindSampler(unit, sampler);
     } while (false);
@@ -24437,8 +24825,8 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_988_major = 2;
-        uint32_t l_minRequiredVersion_988_minor = 0;
+        uint32_t l_minRequiredVersion_1085_major = 2;
+        uint32_t l_minRequiredVersion_1085_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -24446,26 +24834,30 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_989_major = 3;
-                uint32_t l_minRequiredVersion_989_minor = 0;
+                uint32_t l_minRequiredVersion_1086_major = 3;
+                uint32_t l_minRequiredVersion_1086_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_990_major = 3;
-                uint32_t l_minRequiredVersion_990_minor = 1;
+                uint32_t l_minRequiredVersion_1087_major = 3;
+                uint32_t l_minRequiredVersion_1087_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_991_major = 3;
-                uint32_t l_minRequiredVersion_991_minor = 2;
+                uint32_t l_minRequiredVersion_1088_major = 3;
+                uint32_t l_minRequiredVersion_1088_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_993_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_993_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1091_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1090_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1090_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
             l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture(
                     texture, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
@@ -24501,8 +24893,8 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_994_major = 2;
-        uint32_t l_minRequiredVersion_994_minor = 0;
+        uint32_t l_minRequiredVersion_1092_major = 2;
+        uint32_t l_minRequiredVersion_1092_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -24525,14 +24917,14 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC:          // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ETC2:                     // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: {
-                uint32_t l_minRequiredVersion_996_major = 3;
-                uint32_t l_minRequiredVersion_996_minor = 0;
+                uint32_t l_minRequiredVersion_1094_major = 3;
+                uint32_t l_minRequiredVersion_1094_minor = 0;
                 break;
             }
             case GLenum::GL_ATC_RGB_AMD:                  // fall-through...
             case GLenum::GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:  // fall-through...
             case GLenum::GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD: {
-                uint32_t l_requiresExtension_997_ext = ExtensionId::GL_AMD_compressed_ATC_texture;
+                uint32_t l_requiresExtension_1095_ext = ExtensionId::GL_AMD_compressed_ATC_texture;
                 break;
             }
             case GLenum::GL_COMPRESSED_RGBA_ASTC_10x10:          // fall-through...
@@ -24563,14 +24955,18 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_998_major = 3;
-                uint32_t l_minRequiredVersion_998_minor = 2;
+                uint32_t l_minRequiredVersion_1096_major = 3;
+                uint32_t l_minRequiredVersion_1096_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1000_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1000_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1099_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1098_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1098_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
@@ -24640,16 +25036,16 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1001_major = 3;
-        uint32_t l_minRequiredVersion_1001_minor = 0;
+        uint32_t l_minRequiredVersion_1100_major = 3;
+        uint32_t l_minRequiredVersion_1100_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1002_major = 3;
-                uint32_t l_minRequiredVersion_1002_minor = 2;
+                uint32_t l_minRequiredVersion_1101_major = 3;
+                uint32_t l_minRequiredVersion_1101_minor = 2;
                 break;
             }
         }
@@ -24694,8 +25090,8 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1004_major = 3;
-                uint32_t l_minRequiredVersion_1004_minor = 2;
+                uint32_t l_minRequiredVersion_1103_major = 3;
+                uint32_t l_minRequiredVersion_1103_minor = 2;
                 break;
             }
         }
@@ -24730,8 +25126,8 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1006_major = 2;
-        uint32_t l_minRequiredVersion_1006_minor = 0;
+        uint32_t l_minRequiredVersion_1105_major = 2;
+        uint32_t l_minRequiredVersion_1105_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -24754,8 +25150,8 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC:          // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ETC2:                     // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: {
-                uint32_t l_minRequiredVersion_1008_major = 3;
-                uint32_t l_minRequiredVersion_1008_minor = 0;
+                uint32_t l_minRequiredVersion_1107_major = 3;
+                uint32_t l_minRequiredVersion_1107_minor = 0;
                 break;
             }
             case GLenum::GL_COMPRESSED_RGBA_ASTC_10x10:          // fall-through...
@@ -24786,8 +25182,8 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1009_major = 3;
-                uint32_t l_minRequiredVersion_1009_minor = 2;
+                uint32_t l_minRequiredVersion_1108_major = 3;
+                uint32_t l_minRequiredVersion_1108_minor = 2;
                 break;
             }
         }
@@ -24824,16 +25220,16 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1011_major = 3;
-        uint32_t l_minRequiredVersion_1011_minor = 0;
+        uint32_t l_minRequiredVersion_1110_major = 3;
+        uint32_t l_minRequiredVersion_1110_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1012_major = 3;
-                uint32_t l_minRequiredVersion_1012_minor = 2;
+                uint32_t l_minRequiredVersion_1111_major = 3;
+                uint32_t l_minRequiredVersion_1111_minor = 2;
                 break;
             }
         }
@@ -24878,8 +25274,8 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8: {
-                uint32_t l_minRequiredVersion_1014_major = 3;
-                uint32_t l_minRequiredVersion_1014_minor = 2;
+                uint32_t l_minRequiredVersion_1113_major = 3;
+                uint32_t l_minRequiredVersion_1113_minor = 2;
                 break;
             }
         }
@@ -24918,8 +25314,8 @@ inline void GlesSpy::glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1016_major = 3;
-        uint32_t l_minRequiredVersion_1016_minor = 2;
+        uint32_t l_minRequiredVersion_1115_major = 3;
+        uint32_t l_minRequiredVersion_1115_minor = 2;
         switch (srcTarget) {
             case GLenum::GL_RENDERBUFFER:                  // fall-through...
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
@@ -24972,8 +25368,8 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1019_major = 2;
-        uint32_t l_minRequiredVersion_1019_minor = 0;
+        uint32_t l_minRequiredVersion_1118_major = 2;
+        uint32_t l_minRequiredVersion_1118_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -25022,8 +25418,8 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
             case GLenum::GL_RGBA8UI:     // fall-through...
             case GLenum::GL_SRGB8:       // fall-through...
             case GLenum::GL_SRGB8_ALPHA8: {
-                uint32_t l_minRequiredVersion_1021_major = 3;
-                uint32_t l_minRequiredVersion_1021_minor = 0;
+                uint32_t l_minRequiredVersion_1120_major = 3;
+                uint32_t l_minRequiredVersion_1120_minor = 0;
                 break;
             }
         }
@@ -25055,8 +25451,8 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1023_major = 2;
-        uint32_t l_minRequiredVersion_1023_minor = 0;
+        uint32_t l_minRequiredVersion_1122_major = 2;
+        uint32_t l_minRequiredVersion_1122_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -25096,16 +25492,16 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1025_major = 3;
-        uint32_t l_minRequiredVersion_1025_minor = 0;
+        uint32_t l_minRequiredVersion_1124_major = 3;
+        uint32_t l_minRequiredVersion_1124_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1026_major = 3;
-                uint32_t l_minRequiredVersion_1026_minor = 2;
+                uint32_t l_minRequiredVersion_1125_major = 3;
+                uint32_t l_minRequiredVersion_1125_minor = 2;
                 break;
             }
         }
@@ -25131,8 +25527,8 @@ inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1028_major = 3;
-        uint32_t l_minRequiredVersion_1028_minor = 0;
+        uint32_t l_minRequiredVersion_1127_major = 3;
+        uint32_t l_minRequiredVersion_1127_minor = 0;
         observe(observations.mReads);
         mImports.glDeleteSamplers(count, samplers);
     } while (false);
@@ -25156,12 +25552,16 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1029_major = 2;
-        uint32_t l_minRequiredVersion_1029_minor = 0;
+        uint32_t l_minRequiredVersion_1128_major = 2;
+        uint32_t l_minRequiredVersion_1128_minor = 0;
         Slice<TextureId> l_t = slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1030_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1030_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1130_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1129_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1129_result;
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mTextures[read(l_t, (uint64_t)(l_i))] = std::shared_ptr<Texture>();
         }
@@ -25188,8 +25588,8 @@ inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1031_major = 3;
-        uint32_t l_minRequiredVersion_1031_minor = 0;
+        uint32_t l_minRequiredVersion_1131_major = 3;
+        uint32_t l_minRequiredVersion_1131_minor = 0;
         observe(observations.mReads);
         mImports.glGenSamplers(count, samplers);
     } while (false);
@@ -25213,12 +25613,16 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1032_major = 2;
-        uint32_t l_minRequiredVersion_1032_minor = 0;
+        uint32_t l_minRequiredVersion_1132_major = 2;
+        uint32_t l_minRequiredVersion_1132_minor = 0;
         Slice<TextureId> l_t = slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1033_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1033_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1134_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1133_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1133_result;
         observe(observations.mReads);
         mImports.glGenTextures(count, textures);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -25251,8 +25655,8 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1034_major = 2;
-        uint32_t l_minRequiredVersion_1034_minor = 0;
+        uint32_t l_minRequiredVersion_1135_major = 2;
+        uint32_t l_minRequiredVersion_1135_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -25260,13 +25664,13 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1035_major = 3;
-                uint32_t l_minRequiredVersion_1035_minor = 0;
+                uint32_t l_minRequiredVersion_1136_major = 3;
+                uint32_t l_minRequiredVersion_1136_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1036_major = 3;
-                uint32_t l_minRequiredVersion_1036_minor = 2;
+                uint32_t l_minRequiredVersion_1137_major = 3;
+                uint32_t l_minRequiredVersion_1137_minor = 2;
                 break;
             }
         }
@@ -25293,8 +25697,8 @@ inline void GlesSpy::glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1038_major = 3;
-        uint32_t l_minRequiredVersion_1038_minor = 2;
+        uint32_t l_minRequiredVersion_1139_major = 3;
+        uint32_t l_minRequiredVersion_1139_minor = 2;
         switch (pname) {
             case GLenum::GL_TEXTURE_BORDER_COLOR:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
@@ -25335,8 +25739,8 @@ inline void GlesSpy::glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1040_major = 3;
-        uint32_t l_minRequiredVersion_1040_minor = 2;
+        uint32_t l_minRequiredVersion_1141_major = 3;
+        uint32_t l_minRequiredVersion_1141_minor = 2;
         switch (pname) {
             case GLenum::GL_TEXTURE_BORDER_COLOR:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
@@ -25377,8 +25781,8 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1042_major = 3;
-        uint32_t l_minRequiredVersion_1042_minor = 0;
+        uint32_t l_minRequiredVersion_1143_major = 3;
+        uint32_t l_minRequiredVersion_1143_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -25392,8 +25796,8 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1043_major = 3;
-                uint32_t l_minRequiredVersion_1043_minor = 2;
+                uint32_t l_minRequiredVersion_1144_major = 3;
+                uint32_t l_minRequiredVersion_1144_minor = 2;
                 break;
             }
         }
@@ -25423,8 +25827,8 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1045_major = 3;
-        uint32_t l_minRequiredVersion_1045_minor = 0;
+        uint32_t l_minRequiredVersion_1146_major = 3;
+        uint32_t l_minRequiredVersion_1146_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -25438,8 +25842,8 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1046_major = 3;
-                uint32_t l_minRequiredVersion_1046_minor = 2;
+                uint32_t l_minRequiredVersion_1147_major = 3;
+                uint32_t l_minRequiredVersion_1147_minor = 2;
                 break;
             }
         }
@@ -25470,8 +25874,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1048_major = 3;
-        uint32_t l_minRequiredVersion_1048_minor = 1;
+        uint32_t l_minRequiredVersion_1149_major = 3;
+        uint32_t l_minRequiredVersion_1149_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:             // fall-through...
@@ -25488,8 +25892,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1049_major = 3;
-                uint32_t l_minRequiredVersion_1049_minor = 2;
+                uint32_t l_minRequiredVersion_1150_major = 3;
+                uint32_t l_minRequiredVersion_1150_minor = 2;
                 break;
             }
         }
@@ -25518,8 +25922,8 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_BUFFER_DATA_STORE_BINDING:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET:              // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_SIZE: {
-                uint32_t l_minRequiredVersion_1051_major = 3;
-                uint32_t l_minRequiredVersion_1051_minor = 2;
+                uint32_t l_minRequiredVersion_1152_major = 3;
+                uint32_t l_minRequiredVersion_1152_minor = 2;
                 break;
             }
         }
@@ -25550,8 +25954,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1053_major = 3;
-        uint32_t l_minRequiredVersion_1053_minor = 1;
+        uint32_t l_minRequiredVersion_1154_major = 3;
+        uint32_t l_minRequiredVersion_1154_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:             // fall-through...
@@ -25568,8 +25972,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER:                // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1054_major = 3;
-                uint32_t l_minRequiredVersion_1054_minor = 2;
+                uint32_t l_minRequiredVersion_1155_major = 3;
+                uint32_t l_minRequiredVersion_1155_minor = 2;
                 break;
             }
         }
@@ -25598,8 +26002,8 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
             case GLenum::GL_TEXTURE_BUFFER_DATA_STORE_BINDING:  // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_OFFSET:              // fall-through...
             case GLenum::GL_TEXTURE_BUFFER_SIZE: {
-                uint32_t l_minRequiredVersion_1056_major = 3;
-                uint32_t l_minRequiredVersion_1056_minor = 2;
+                uint32_t l_minRequiredVersion_1157_major = 3;
+                uint32_t l_minRequiredVersion_1157_minor = 2;
                 break;
             }
         }
@@ -25629,8 +26033,8 @@ inline void GlesSpy::glGetTexParameterIiv(uint32_t target, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1058_major = 3;
-        uint32_t l_minRequiredVersion_1058_minor = 2;
+        uint32_t l_minRequiredVersion_1159_major = 3;
+        uint32_t l_minRequiredVersion_1159_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:              // fall-through...
@@ -25691,8 +26095,8 @@ inline void GlesSpy::glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1061_major = 3;
-        uint32_t l_minRequiredVersion_1061_minor = 2;
+        uint32_t l_minRequiredVersion_1162_major = 3;
+        uint32_t l_minRequiredVersion_1162_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:              // fall-through...
@@ -25754,8 +26158,8 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1064_major = 2;
-        uint32_t l_minRequiredVersion_1064_minor = 0;
+        uint32_t l_minRequiredVersion_1165_major = 2;
+        uint32_t l_minRequiredVersion_1165_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -25763,19 +26167,19 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1065_major = 3;
-                uint32_t l_minRequiredVersion_1065_minor = 0;
+                uint32_t l_minRequiredVersion_1166_major = 3;
+                uint32_t l_minRequiredVersion_1166_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1066_major = 3;
-                uint32_t l_minRequiredVersion_1066_minor = 1;
+                uint32_t l_minRequiredVersion_1167_major = 3;
+                uint32_t l_minRequiredVersion_1167_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1067_major = 3;
-                uint32_t l_minRequiredVersion_1067_minor = 2;
+                uint32_t l_minRequiredVersion_1168_major = 3;
+                uint32_t l_minRequiredVersion_1168_minor = 2;
                 break;
             }
         }
@@ -25798,26 +26202,30 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1069_major = 3;
-                uint32_t l_minRequiredVersion_1069_minor = 0;
+                uint32_t l_minRequiredVersion_1170_major = 3;
+                uint32_t l_minRequiredVersion_1170_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1070_major = 3;
-                uint32_t l_minRequiredVersion_1070_minor = 1;
+                uint32_t l_minRequiredVersion_1171_major = 3;
+                uint32_t l_minRequiredVersion_1171_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1071_major = 3;
-                uint32_t l_minRequiredVersion_1071_minor = 2;
+                uint32_t l_minRequiredVersion_1172_major = 3;
+                uint32_t l_minRequiredVersion_1172_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1073_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1073_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1175_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1174_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1174_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -25859,8 +26267,8 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1074_major = 2;
-        uint32_t l_minRequiredVersion_1074_minor = 0;
+        uint32_t l_minRequiredVersion_1176_major = 2;
+        uint32_t l_minRequiredVersion_1176_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -25868,19 +26276,19 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1075_major = 3;
-                uint32_t l_minRequiredVersion_1075_minor = 0;
+                uint32_t l_minRequiredVersion_1177_major = 3;
+                uint32_t l_minRequiredVersion_1177_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1076_major = 3;
-                uint32_t l_minRequiredVersion_1076_minor = 1;
+                uint32_t l_minRequiredVersion_1178_major = 3;
+                uint32_t l_minRequiredVersion_1178_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1077_major = 3;
-                uint32_t l_minRequiredVersion_1077_minor = 2;
+                uint32_t l_minRequiredVersion_1179_major = 3;
+                uint32_t l_minRequiredVersion_1179_minor = 2;
                 break;
             }
         }
@@ -25903,26 +26311,30 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
             case GLenum::GL_TEXTURE_SWIZZLE_G:         // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:         // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1079_major = 3;
-                uint32_t l_minRequiredVersion_1079_minor = 0;
+                uint32_t l_minRequiredVersion_1181_major = 3;
+                uint32_t l_minRequiredVersion_1181_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE:       // fall-through...
             case GLenum::GL_IMAGE_FORMAT_COMPATIBILITY_TYPE:  // fall-through...
             case GLenum::GL_TEXTURE_IMMUTABLE_LEVELS: {
-                uint32_t l_minRequiredVersion_1080_major = 3;
-                uint32_t l_minRequiredVersion_1080_minor = 1;
+                uint32_t l_minRequiredVersion_1182_major = 3;
+                uint32_t l_minRequiredVersion_1182_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1081_major = 3;
-                uint32_t l_minRequiredVersion_1081_minor = 2;
+                uint32_t l_minRequiredVersion_1183_major = 3;
+                uint32_t l_minRequiredVersion_1183_minor = 2;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1083_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1083_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1186_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1185_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1185_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -25964,8 +26376,8 @@ inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1084_major = 3;
-        uint32_t l_minRequiredVersion_1084_minor = 0;
+        uint32_t l_minRequiredVersion_1187_major = 3;
+        uint32_t l_minRequiredVersion_1187_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsSampler(sampler);
         break;
@@ -25992,11 +26404,15 @@ inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1085_major = 2;
-        uint32_t l_minRequiredVersion_1085_minor = 0;
+        uint32_t l_minRequiredVersion_1188_major = 2;
+        uint32_t l_minRequiredVersion_1188_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1086_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1086_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1190_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1189_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1189_result;
         observe(observations.mReads);
         result = mImports.glIsTexture(texture);
         break;
@@ -26021,8 +26437,8 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1087_major = 2;
-        uint32_t l_minRequiredVersion_1087_minor = 0;
+        uint32_t l_minRequiredVersion_1191_major = 2;
+        uint32_t l_minRequiredVersion_1191_minor = 0;
         switch (parameter) {
             case GLenum::GL_PACK_ALIGNMENT:  // fall-through...
             case GLenum::GL_UNPACK_ALIGNMENT: {
@@ -26038,14 +26454,18 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
             case GLenum::GL_UNPACK_SKIP_IMAGES:   // fall-through...
             case GLenum::GL_UNPACK_SKIP_PIXELS:   // fall-through...
             case GLenum::GL_UNPACK_SKIP_ROWS: {
-                uint32_t l_minRequiredVersion_1088_major = 3;
-                uint32_t l_minRequiredVersion_1088_minor = 0;
+                uint32_t l_minRequiredVersion_1192_major = 3;
+                uint32_t l_minRequiredVersion_1192_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1090_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1090_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1195_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1194_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1194_result;
         l_ctx->mPixelStorage[parameter] = value;
         observe(observations.mReads);
         mImports.glPixelStorei(parameter, value);
@@ -26070,8 +26490,8 @@ inline void GlesSpy::glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1091_major = 3;
-        uint32_t l_minRequiredVersion_1091_minor = 2;
+        uint32_t l_minRequiredVersion_1196_major = 3;
+        uint32_t l_minRequiredVersion_1196_minor = 2;
         switch (pname) {
             case GLenum::GL_TEXTURE_BORDER_COLOR:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
@@ -26112,8 +26532,8 @@ inline void GlesSpy::glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1093_major = 3;
-        uint32_t l_minRequiredVersion_1093_minor = 2;
+        uint32_t l_minRequiredVersion_1198_major = 3;
+        uint32_t l_minRequiredVersion_1198_minor = 2;
         switch (pname) {
             case GLenum::GL_TEXTURE_BORDER_COLOR:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
@@ -26154,8 +26574,8 @@ inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1095_major = 3;
-        uint32_t l_minRequiredVersion_1095_minor = 0;
+        uint32_t l_minRequiredVersion_1200_major = 3;
+        uint32_t l_minRequiredVersion_1200_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -26192,8 +26612,8 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1097_major = 3;
-        uint32_t l_minRequiredVersion_1097_minor = 0;
+        uint32_t l_minRequiredVersion_1202_major = 3;
+        uint32_t l_minRequiredVersion_1202_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -26207,8 +26627,8 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1098_major = 3;
-                uint32_t l_minRequiredVersion_1098_minor = 2;
+                uint32_t l_minRequiredVersion_1203_major = 3;
+                uint32_t l_minRequiredVersion_1203_minor = 2;
                 break;
             }
         }
@@ -26238,8 +26658,8 @@ inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1100_major = 3;
-        uint32_t l_minRequiredVersion_1100_minor = 0;
+        uint32_t l_minRequiredVersion_1205_major = 3;
+        uint32_t l_minRequiredVersion_1205_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -26276,8 +26696,8 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1102_major = 3;
-        uint32_t l_minRequiredVersion_1102_minor = 0;
+        uint32_t l_minRequiredVersion_1207_major = 3;
+        uint32_t l_minRequiredVersion_1207_minor = 0;
         switch (pname) {
             case GLenum::GL_TEXTURE_COMPARE_FUNC:  // fall-through...
             case GLenum::GL_TEXTURE_COMPARE_MODE:  // fall-through...
@@ -26291,8 +26711,8 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1103_major = 3;
-                uint32_t l_minRequiredVersion_1103_minor = 2;
+                uint32_t l_minRequiredVersion_1208_major = 3;
+                uint32_t l_minRequiredVersion_1208_minor = 2;
                 break;
             }
         }
@@ -26320,8 +26740,8 @@ inline void GlesSpy::glTexBuffer(uint32_t target, uint32_t internalformat, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1105_major = 3;
-        uint32_t l_minRequiredVersion_1105_minor = 2;
+        uint32_t l_minRequiredVersion_1210_major = 3;
+        uint32_t l_minRequiredVersion_1210_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_BUFFER: {
                 break;
@@ -26387,8 +26807,8 @@ inline void GlesSpy::glTexBufferRange(uint32_t target, uint32_t internalformat, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1108_major = 3;
-        uint32_t l_minRequiredVersion_1108_minor = 2;
+        uint32_t l_minRequiredVersion_1213_major = 3;
+        uint32_t l_minRequiredVersion_1213_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_BUFFER: {
                 break;
@@ -26457,8 +26877,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1111_major = 2;
-        uint32_t l_minRequiredVersion_1111_minor = 0;
+        uint32_t l_minRequiredVersion_1216_major = 2;
+        uint32_t l_minRequiredVersion_1216_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -26486,13 +26906,13 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             case GLenum::GL_RGBA_INTEGER:     // fall-through...
             case GLenum::GL_RGB_INTEGER:      // fall-through...
             case GLenum::GL_RG_INTEGER: {
-                uint32_t l_minRequiredVersion_1113_major = 3;
-                uint32_t l_minRequiredVersion_1113_minor = 0;
+                uint32_t l_minRequiredVersion_1218_major = 3;
+                uint32_t l_minRequiredVersion_1218_minor = 0;
                 break;
             }
             case GLenum::GL_STENCIL_INDEX: {
-                uint32_t l_minRequiredVersion_1114_major = 3;
-                uint32_t l_minRequiredVersion_1114_minor = 2;
+                uint32_t l_minRequiredVersion_1219_major = 3;
+                uint32_t l_minRequiredVersion_1219_minor = 2;
                 break;
             }
         }
@@ -26504,7 +26924,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1116_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_1221_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -26519,14 +26939,18 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:     // fall-through...
             case GLenum::GL_UNSIGNED_INT_5_9_9_9_REV:        // fall-through...
             case GLenum::GL_UNSIGNED_SHORT: {
-                uint32_t l_minRequiredVersion_1117_major = 3;
-                uint32_t l_minRequiredVersion_1117_minor = 0;
+                uint32_t l_minRequiredVersion_1222_major = 3;
+                uint32_t l_minRequiredVersion_1222_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1119_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1119_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1225_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1224_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1224_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         switch (target) {
             case GLenum::GL_TEXTURE_2D: {
@@ -26604,16 +27028,16 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1120_major = 3;
-        uint32_t l_minRequiredVersion_1120_minor = 0;
+        uint32_t l_minRequiredVersion_1226_major = 3;
+        uint32_t l_minRequiredVersion_1226_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1121_major = 3;
-                uint32_t l_minRequiredVersion_1121_minor = 2;
+                uint32_t l_minRequiredVersion_1227_major = 3;
+                uint32_t l_minRequiredVersion_1227_minor = 2;
                 break;
             }
         }
@@ -26634,14 +27058,14 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
                 break;
             }
             case GLenum::GL_STENCIL_INDEX: {
-                uint32_t l_minRequiredVersion_1123_major = 3;
-                uint32_t l_minRequiredVersion_1123_minor = 2;
+                uint32_t l_minRequiredVersion_1229_major = 3;
+                uint32_t l_minRequiredVersion_1229_minor = 2;
                 break;
             }
         }
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1125_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_1231_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -26688,8 +27112,8 @@ inline void GlesSpy::glTexParameterIiv(uint32_t target, uint32_t pname, int32_t*
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1127_major = 3;
-        uint32_t l_minRequiredVersion_1127_minor = 2;
+        uint32_t l_minRequiredVersion_1233_major = 3;
+        uint32_t l_minRequiredVersion_1233_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:              // fall-through...
@@ -26748,8 +27172,8 @@ inline void GlesSpy::glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1130_major = 3;
-        uint32_t l_minRequiredVersion_1130_minor = 2;
+        uint32_t l_minRequiredVersion_1236_major = 3;
+        uint32_t l_minRequiredVersion_1236_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                    // fall-through...
             case GLenum::GL_TEXTURE_2D_ARRAY:              // fall-through...
@@ -26806,8 +27230,8 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1133_major = 2;
-        uint32_t l_minRequiredVersion_1133_minor = 0;
+        uint32_t l_minRequiredVersion_1239_major = 2;
+        uint32_t l_minRequiredVersion_1239_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -26815,19 +27239,19 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1134_major = 3;
-                uint32_t l_minRequiredVersion_1134_minor = 0;
+                uint32_t l_minRequiredVersion_1240_major = 3;
+                uint32_t l_minRequiredVersion_1240_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1135_major = 3;
-                uint32_t l_minRequiredVersion_1135_minor = 1;
+                uint32_t l_minRequiredVersion_1241_major = 3;
+                uint32_t l_minRequiredVersion_1241_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1136_major = 3;
-                uint32_t l_minRequiredVersion_1136_minor = 2;
+                uint32_t l_minRequiredVersion_1242_major = 3;
+                uint32_t l_minRequiredVersion_1242_minor = 2;
                 break;
             }
         }
@@ -26849,19 +27273,23 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1138_major = 3;
-                uint32_t l_minRequiredVersion_1138_minor = 0;
+                uint32_t l_minRequiredVersion_1244_major = 3;
+                uint32_t l_minRequiredVersion_1244_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1139_major = 3;
-                uint32_t l_minRequiredVersion_1139_minor = 1;
+                uint32_t l_minRequiredVersion_1245_major = 3;
+                uint32_t l_minRequiredVersion_1245_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1141_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1141_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1248_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1247_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1247_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -26924,8 +27352,8 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1142_major = 2;
-        uint32_t l_minRequiredVersion_1142_minor = 0;
+        uint32_t l_minRequiredVersion_1249_major = 2;
+        uint32_t l_minRequiredVersion_1249_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -26933,19 +27361,19 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1143_major = 3;
-                uint32_t l_minRequiredVersion_1143_minor = 0;
+                uint32_t l_minRequiredVersion_1250_major = 3;
+                uint32_t l_minRequiredVersion_1250_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1144_major = 3;
-                uint32_t l_minRequiredVersion_1144_minor = 1;
+                uint32_t l_minRequiredVersion_1251_major = 3;
+                uint32_t l_minRequiredVersion_1251_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1145_major = 3;
-                uint32_t l_minRequiredVersion_1145_minor = 2;
+                uint32_t l_minRequiredVersion_1252_major = 3;
+                uint32_t l_minRequiredVersion_1252_minor = 2;
                 break;
             }
         }
@@ -26967,18 +27395,18 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1147_major = 3;
-                uint32_t l_minRequiredVersion_1147_minor = 0;
+                uint32_t l_minRequiredVersion_1254_major = 3;
+                uint32_t l_minRequiredVersion_1254_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1148_major = 3;
-                uint32_t l_minRequiredVersion_1148_minor = 1;
+                uint32_t l_minRequiredVersion_1255_major = 3;
+                uint32_t l_minRequiredVersion_1255_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1149_major = 3;
-                uint32_t l_minRequiredVersion_1149_minor = 2;
+                uint32_t l_minRequiredVersion_1256_major = 3;
+                uint32_t l_minRequiredVersion_1256_minor = 2;
                 break;
             }
         }
@@ -27006,8 +27434,8 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1151_major = 2;
-        uint32_t l_minRequiredVersion_1151_minor = 0;
+        uint32_t l_minRequiredVersion_1258_major = 2;
+        uint32_t l_minRequiredVersion_1258_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -27015,19 +27443,19 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1152_major = 3;
-                uint32_t l_minRequiredVersion_1152_minor = 0;
+                uint32_t l_minRequiredVersion_1259_major = 3;
+                uint32_t l_minRequiredVersion_1259_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1153_major = 3;
-                uint32_t l_minRequiredVersion_1153_minor = 1;
+                uint32_t l_minRequiredVersion_1260_major = 3;
+                uint32_t l_minRequiredVersion_1260_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1154_major = 3;
-                uint32_t l_minRequiredVersion_1154_minor = 2;
+                uint32_t l_minRequiredVersion_1261_major = 3;
+                uint32_t l_minRequiredVersion_1261_minor = 2;
                 break;
             }
         }
@@ -27049,19 +27477,23 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1156_major = 3;
-                uint32_t l_minRequiredVersion_1156_minor = 0;
+                uint32_t l_minRequiredVersion_1263_major = 3;
+                uint32_t l_minRequiredVersion_1263_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1157_major = 3;
-                uint32_t l_minRequiredVersion_1157_minor = 1;
+                uint32_t l_minRequiredVersion_1264_major = 3;
+                uint32_t l_minRequiredVersion_1264_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1159_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1159_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1267_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1266_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1266_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         TextureId l_id = l_tu->mBindings[target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
@@ -27124,8 +27556,8 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1160_major = 2;
-        uint32_t l_minRequiredVersion_1160_minor = 0;
+        uint32_t l_minRequiredVersion_1268_major = 2;
+        uint32_t l_minRequiredVersion_1268_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -27133,19 +27565,19 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
             }
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
-                uint32_t l_minRequiredVersion_1161_major = 3;
-                uint32_t l_minRequiredVersion_1161_minor = 0;
+                uint32_t l_minRequiredVersion_1269_major = 3;
+                uint32_t l_minRequiredVersion_1269_minor = 0;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_1162_major = 3;
-                uint32_t l_minRequiredVersion_1162_minor = 1;
+                uint32_t l_minRequiredVersion_1270_major = 3;
+                uint32_t l_minRequiredVersion_1270_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1163_major = 3;
-                uint32_t l_minRequiredVersion_1163_minor = 2;
+                uint32_t l_minRequiredVersion_1271_major = 3;
+                uint32_t l_minRequiredVersion_1271_minor = 2;
                 break;
             }
         }
@@ -27167,18 +27599,18 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
             case GLenum::GL_TEXTURE_SWIZZLE_G:     // fall-through...
             case GLenum::GL_TEXTURE_SWIZZLE_R:     // fall-through...
             case GLenum::GL_TEXTURE_WRAP_R: {
-                uint32_t l_minRequiredVersion_1165_major = 3;
-                uint32_t l_minRequiredVersion_1165_minor = 0;
+                uint32_t l_minRequiredVersion_1273_major = 3;
+                uint32_t l_minRequiredVersion_1273_minor = 0;
                 break;
             }
             case GLenum::GL_DEPTH_STENCIL_TEXTURE_MODE: {
-                uint32_t l_minRequiredVersion_1166_major = 3;
-                uint32_t l_minRequiredVersion_1166_minor = 1;
+                uint32_t l_minRequiredVersion_1274_major = 3;
+                uint32_t l_minRequiredVersion_1274_minor = 1;
                 break;
             }
             case GLenum::GL_TEXTURE_BORDER_COLOR: {
-                uint32_t l_minRequiredVersion_1167_major = 3;
-                uint32_t l_minRequiredVersion_1167_minor = 2;
+                uint32_t l_minRequiredVersion_1275_major = 3;
+                uint32_t l_minRequiredVersion_1275_minor = 2;
                 break;
             }
         }
@@ -27208,8 +27640,8 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1169_major = 3;
-        uint32_t l_minRequiredVersion_1169_minor = 0;
+        uint32_t l_minRequiredVersion_1277_major = 3;
+        uint32_t l_minRequiredVersion_1277_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP: {
@@ -27312,8 +27744,8 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:    // fall-through...
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1171_major = 3;
-                uint32_t l_minRequiredVersion_1171_minor = 2;
+                uint32_t l_minRequiredVersion_1279_major = 3;
+                uint32_t l_minRequiredVersion_1279_minor = 2;
                 break;
             }
         }
@@ -27345,8 +27777,8 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1173_major = 3;
-        uint32_t l_minRequiredVersion_1173_minor = 1;
+        uint32_t l_minRequiredVersion_1281_major = 3;
+        uint32_t l_minRequiredVersion_1281_minor = 1;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
                 break;
@@ -27410,8 +27842,8 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
                 break;
             }
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1175_major = 3;
-                uint32_t l_minRequiredVersion_1175_minor = 2;
+                uint32_t l_minRequiredVersion_1283_major = 3;
+                uint32_t l_minRequiredVersion_1283_minor = 2;
                 break;
             }
         }
@@ -27440,16 +27872,16 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1177_major = 3;
-        uint32_t l_minRequiredVersion_1177_minor = 0;
+        uint32_t l_minRequiredVersion_1285_major = 3;
+        uint32_t l_minRequiredVersion_1285_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1178_major = 3;
-                uint32_t l_minRequiredVersion_1178_minor = 2;
+                uint32_t l_minRequiredVersion_1286_major = 3;
+                uint32_t l_minRequiredVersion_1286_minor = 2;
                 break;
             }
         }
@@ -27549,8 +27981,8 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6:    // fall-through...
             case GLenum::GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8:    // fall-through...
             case GLenum::GL_STENCIL_INDEX8: {
-                uint32_t l_minRequiredVersion_1180_major = 3;
-                uint32_t l_minRequiredVersion_1180_minor = 2;
+                uint32_t l_minRequiredVersion_1288_major = 3;
+                uint32_t l_minRequiredVersion_1288_minor = 2;
                 break;
             }
         }
@@ -27583,8 +28015,8 @@ inline void GlesSpy::glTexStorage3DMultisample(uint32_t target, int32_t samples,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1182_major = 3;
-        uint32_t l_minRequiredVersion_1182_minor = 2;
+        uint32_t l_minRequiredVersion_1290_major = 3;
+        uint32_t l_minRequiredVersion_1290_minor = 2;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE_ARRAY: {
                 break;
@@ -27677,8 +28109,8 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1185_major = 2;
-        uint32_t l_minRequiredVersion_1185_minor = 0;
+        uint32_t l_minRequiredVersion_1293_major = 2;
+        uint32_t l_minRequiredVersion_1293_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
@@ -27706,8 +28138,8 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             case GLenum::GL_RGBA_INTEGER:     // fall-through...
             case GLenum::GL_RGB_INTEGER:      // fall-through...
             case GLenum::GL_RG_INTEGER: {
-                uint32_t l_minRequiredVersion_1187_major = 3;
-                uint32_t l_minRequiredVersion_1187_minor = 0;
+                uint32_t l_minRequiredVersion_1295_major = 3;
+                uint32_t l_minRequiredVersion_1295_minor = 0;
                 break;
             }
         }
@@ -27719,7 +28151,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1189_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_1297_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -27734,14 +28166,18 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:     // fall-through...
             case GLenum::GL_UNSIGNED_INT_5_9_9_9_REV:        // fall-through...
             case GLenum::GL_UNSIGNED_SHORT: {
-                uint32_t l_minRequiredVersion_1190_major = 3;
-                uint32_t l_minRequiredVersion_1190_minor = 0;
+                uint32_t l_minRequiredVersion_1298_major = 3;
+                uint32_t l_minRequiredVersion_1298_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1192_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1192_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1301_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1300_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1300_result;
         std::shared_ptr<TextureUnit> l_tu = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit];
         Image l_image = /* clang-format off */
         /* switch(target) */
@@ -27803,16 +28239,16 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1193_major = 3;
-        uint32_t l_minRequiredVersion_1193_minor = 0;
+        uint32_t l_minRequiredVersion_1302_major = 3;
+        uint32_t l_minRequiredVersion_1302_minor = 0;
         switch (target) {
             case GLenum::GL_TEXTURE_2D_ARRAY:  // fall-through...
             case GLenum::GL_TEXTURE_3D: {
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_ARRAY: {
-                uint32_t l_minRequiredVersion_1194_major = 3;
-                uint32_t l_minRequiredVersion_1194_minor = 2;
+                uint32_t l_minRequiredVersion_1303_major = 3;
+                uint32_t l_minRequiredVersion_1303_minor = 2;
                 break;
             }
         }
@@ -27835,7 +28271,7 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
         }
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1197_ext = ExtensionId::GL_OES_texture_half_float;
+                uint32_t l_requiresExtension_1306_ext = ExtensionId::GL_OES_texture_half_float;
                 break;
             }
             case GLenum::GL_BYTE:                            // fall-through...
@@ -27884,8 +28320,8 @@ inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1199_major = 3;
-        uint32_t l_minRequiredVersion_1199_minor = 0;
+        uint32_t l_minRequiredVersion_1308_major = 3;
+        uint32_t l_minRequiredVersion_1308_minor = 0;
         switch (primitiveMode) {
             case GLenum::GL_LINES:   // fall-through...
             case GLenum::GL_POINTS:  // fall-through...
@@ -27916,8 +28352,8 @@ inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1201_major = 3;
-        uint32_t l_minRequiredVersion_1201_minor = 0;
+        uint32_t l_minRequiredVersion_1310_major = 3;
+        uint32_t l_minRequiredVersion_1310_minor = 0;
         switch (target) {
             case GLenum::GL_TRANSFORM_FEEDBACK: {
                 break;
@@ -27946,8 +28382,8 @@ inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1203_major = 3;
-        uint32_t l_minRequiredVersion_1203_minor = 0;
+        uint32_t l_minRequiredVersion_1312_major = 3;
+        uint32_t l_minRequiredVersion_1312_minor = 0;
         observe(observations.mReads);
         mImports.glDeleteTransformFeedbacks(n, ids);
     } while (false);
@@ -27974,8 +28410,8 @@ inline void GlesSpy::glEndTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1204_major = 3;
-        uint32_t l_minRequiredVersion_1204_minor = 0;
+        uint32_t l_minRequiredVersion_1313_major = 3;
+        uint32_t l_minRequiredVersion_1313_minor = 0;
         observe(observations.mReads);
         mImports.glEndTransformFeedback();
     } while (false);
@@ -27999,8 +28435,8 @@ inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1205_major = 3;
-        uint32_t l_minRequiredVersion_1205_minor = 0;
+        uint32_t l_minRequiredVersion_1314_major = 3;
+        uint32_t l_minRequiredVersion_1314_minor = 0;
         observe(observations.mReads);
         mImports.glGenTransformFeedbacks(n, ids);
     } while (false);
@@ -28031,8 +28467,8 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1206_major = 3;
-        uint32_t l_minRequiredVersion_1206_minor = 0;
+        uint32_t l_minRequiredVersion_1315_major = 3;
+        uint32_t l_minRequiredVersion_1315_minor = 0;
         observe(observations.mReads);
         mImports.glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
     } while (false);
@@ -28067,8 +28503,8 @@ inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1207_major = 3;
-        uint32_t l_minRequiredVersion_1207_minor = 0;
+        uint32_t l_minRequiredVersion_1316_major = 3;
+        uint32_t l_minRequiredVersion_1316_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsTransformFeedback(id);
         break;
@@ -28095,8 +28531,8 @@ inline void GlesSpy::glPauseTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1208_major = 3;
-        uint32_t l_minRequiredVersion_1208_minor = 0;
+        uint32_t l_minRequiredVersion_1317_major = 3;
+        uint32_t l_minRequiredVersion_1317_minor = 0;
         observe(observations.mReads);
         mImports.glPauseTransformFeedback();
     } while (false);
@@ -28120,8 +28556,8 @@ inline void GlesSpy::glResumeTransformFeedback() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1209_major = 3;
-        uint32_t l_minRequiredVersion_1209_minor = 0;
+        uint32_t l_minRequiredVersion_1318_major = 3;
+        uint32_t l_minRequiredVersion_1318_minor = 0;
         observe(observations.mReads);
         mImports.glResumeTransformFeedback();
     } while (false);
@@ -28147,8 +28583,8 @@ inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1210_major = 3;
-        uint32_t l_minRequiredVersion_1210_minor = 0;
+        uint32_t l_minRequiredVersion_1319_major = 3;
+        uint32_t l_minRequiredVersion_1319_minor = 0;
         switch (bufferMode) {
             case GLenum::GL_INTERLEAVED_ATTRIBS:  // fall-through...
             case GLenum::GL_SEPARATE_ATTRIBS: {
@@ -28180,11 +28616,15 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1212_major = 3;
-        uint32_t l_minRequiredVersion_1212_minor = 0;
+        uint32_t l_minRequiredVersion_1321_major = 3;
+        uint32_t l_minRequiredVersion_1321_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1213_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1213_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1323_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1322_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1322_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>(new VertexArray());
@@ -28215,8 +28655,8 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1214_major = 3;
-        uint32_t l_minRequiredVersion_1214_minor = 1;
+        uint32_t l_minRequiredVersion_1324_major = 3;
+        uint32_t l_minRequiredVersion_1324_minor = 1;
         observe(observations.mReads);
         mImports.glBindVertexBuffer(bindingindex, buffer, offset, stride);
     } while (false);
@@ -28241,11 +28681,15 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1215_major = 3;
-        uint32_t l_minRequiredVersion_1215_minor = 0;
+        uint32_t l_minRequiredVersion_1325_major = 3;
+        uint32_t l_minRequiredVersion_1325_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1216_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1216_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1327_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1326_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1326_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -28277,11 +28721,15 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1217_major = 2;
-        uint32_t l_minRequiredVersion_1217_minor = 0;
+        uint32_t l_minRequiredVersion_1328_major = 2;
+        uint32_t l_minRequiredVersion_1328_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1218_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1218_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1330_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1329_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1329_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = false;
         observe(observations.mReads);
         mImports.glDisableVertexAttribArray(location);
@@ -28306,11 +28754,15 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1219_major = 2;
-        uint32_t l_minRequiredVersion_1219_minor = 0;
+        uint32_t l_minRequiredVersion_1331_major = 2;
+        uint32_t l_minRequiredVersion_1331_minor = 0;
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1220_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1220_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1333_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1332_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1332_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = true;
         observe(observations.mReads);
         mImports.glEnableVertexAttribArray(location);
@@ -28333,12 +28785,16 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1221_major = 3;
-        uint32_t l_minRequiredVersion_1221_minor = 0;
+        uint32_t l_minRequiredVersion_1334_major = 3;
+        uint32_t l_minRequiredVersion_1334_minor = 0;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)((GLsizei)(0)), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1222_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1222_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1336_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1335_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1335_result;
         observe(observations.mReads);
         mImports.glGenVertexArrays(count, arrays);
         for (GLsizei l_i = (GLsizei)(0); l_i < count; ++l_i) {
@@ -28370,8 +28826,8 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1223_major = 3;
-        uint32_t l_minRequiredVersion_1223_minor = 0;
+        uint32_t l_minRequiredVersion_1337_major = 3;
+        uint32_t l_minRequiredVersion_1337_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -28385,8 +28841,8 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1224_major = 3;
-                uint32_t l_minRequiredVersion_1224_minor = 1;
+                uint32_t l_minRequiredVersion_1338_major = 3;
+                uint32_t l_minRequiredVersion_1338_minor = 1;
                 break;
             }
         }
@@ -28415,8 +28871,8 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1226_major = 3;
-        uint32_t l_minRequiredVersion_1226_minor = 0;
+        uint32_t l_minRequiredVersion_1340_major = 3;
+        uint32_t l_minRequiredVersion_1340_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -28430,8 +28886,8 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1227_major = 3;
-                uint32_t l_minRequiredVersion_1227_minor = 1;
+                uint32_t l_minRequiredVersion_1341_major = 3;
+                uint32_t l_minRequiredVersion_1341_minor = 1;
                 break;
             }
         }
@@ -28460,8 +28916,8 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1229_major = 2;
-        uint32_t l_minRequiredVersion_1229_minor = 0;
+        uint32_t l_minRequiredVersion_1343_major = 2;
+        uint32_t l_minRequiredVersion_1343_minor = 0;
         switch (pname) {
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_POINTER: {
                 break;
@@ -28493,8 +28949,8 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1231_major = 2;
-        uint32_t l_minRequiredVersion_1231_minor = 0;
+        uint32_t l_minRequiredVersion_1345_major = 2;
+        uint32_t l_minRequiredVersion_1345_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -28507,13 +28963,13 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
             }
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_1232_major = 3;
-                uint32_t l_minRequiredVersion_1232_minor = 0;
+                uint32_t l_minRequiredVersion_1346_major = 3;
+                uint32_t l_minRequiredVersion_1346_minor = 0;
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1233_major = 3;
-                uint32_t l_minRequiredVersion_1233_minor = 1;
+                uint32_t l_minRequiredVersion_1347_major = 3;
+                uint32_t l_minRequiredVersion_1347_minor = 1;
                 break;
             }
         }
@@ -28543,8 +28999,8 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1235_major = 2;
-        uint32_t l_minRequiredVersion_1235_minor = 0;
+        uint32_t l_minRequiredVersion_1349_major = 2;
+        uint32_t l_minRequiredVersion_1349_minor = 0;
         switch (pname) {
             case GLenum::GL_CURRENT_VERTEX_ATTRIB:               // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING:  // fall-through...
@@ -28557,13 +29013,13 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
             }
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_DIVISOR:  // fall-through...
             case GLenum::GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
-                uint32_t l_minRequiredVersion_1236_major = 3;
-                uint32_t l_minRequiredVersion_1236_minor = 0;
+                uint32_t l_minRequiredVersion_1350_major = 3;
+                uint32_t l_minRequiredVersion_1350_minor = 0;
                 break;
             }
             case GLenum::GL_VERTEX_ATTRIB_BINDING: {
-                uint32_t l_minRequiredVersion_1237_major = 3;
-                uint32_t l_minRequiredVersion_1237_minor = 1;
+                uint32_t l_minRequiredVersion_1351_major = 3;
+                uint32_t l_minRequiredVersion_1351_minor = 1;
                 break;
             }
         }
@@ -28592,8 +29048,8 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1239_major = 3;
-        uint32_t l_minRequiredVersion_1239_minor = 0;
+        uint32_t l_minRequiredVersion_1353_major = 3;
+        uint32_t l_minRequiredVersion_1353_minor = 0;
         observe(observations.mReads);
         result = mImports.glIsVertexArray(array);
         break;
@@ -28618,8 +29074,8 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1240_major = 2;
-        uint32_t l_minRequiredVersion_1240_minor = 0;
+        uint32_t l_minRequiredVersion_1354_major = 2;
+        uint32_t l_minRequiredVersion_1354_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib1f(location, value0);
     } while (false);
@@ -28641,8 +29097,8 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1241_major = 2;
-        uint32_t l_minRequiredVersion_1241_minor = 0;
+        uint32_t l_minRequiredVersion_1355_major = 2;
+        uint32_t l_minRequiredVersion_1355_minor = 0;
         read(slice(value, 0, 1));
         observe(observations.mReads);
         mImports.glVertexAttrib1fv(location, value);
@@ -28667,8 +29123,8 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1242_major = 2;
-        uint32_t l_minRequiredVersion_1242_minor = 0;
+        uint32_t l_minRequiredVersion_1356_major = 2;
+        uint32_t l_minRequiredVersion_1356_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib2f(location, value0, value1);
     } while (false);
@@ -28690,8 +29146,8 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1243_major = 2;
-        uint32_t l_minRequiredVersion_1243_minor = 0;
+        uint32_t l_minRequiredVersion_1357_major = 2;
+        uint32_t l_minRequiredVersion_1357_minor = 0;
         read(slice(value, 0, 2));
         observe(observations.mReads);
         mImports.glVertexAttrib2fv(location, value);
@@ -28716,8 +29172,8 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1244_major = 2;
-        uint32_t l_minRequiredVersion_1244_minor = 0;
+        uint32_t l_minRequiredVersion_1358_major = 2;
+        uint32_t l_minRequiredVersion_1358_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib3f(location, value0, value1, value2);
     } while (false);
@@ -28739,8 +29195,8 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1245_major = 2;
-        uint32_t l_minRequiredVersion_1245_minor = 0;
+        uint32_t l_minRequiredVersion_1359_major = 2;
+        uint32_t l_minRequiredVersion_1359_minor = 0;
         read(slice(value, 0, 3));
         observe(observations.mReads);
         mImports.glVertexAttrib3fv(location, value);
@@ -28767,8 +29223,8 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1246_major = 2;
-        uint32_t l_minRequiredVersion_1246_minor = 0;
+        uint32_t l_minRequiredVersion_1360_major = 2;
+        uint32_t l_minRequiredVersion_1360_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttrib4f(location, value0, value1, value2, value3);
     } while (false);
@@ -28791,8 +29247,8 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1247_major = 2;
-        uint32_t l_minRequiredVersion_1247_minor = 0;
+        uint32_t l_minRequiredVersion_1361_major = 2;
+        uint32_t l_minRequiredVersion_1361_minor = 0;
         read(slice(value, 0, 4));
         observe(observations.mReads);
         mImports.glVertexAttrib4fv(location, value);
@@ -28819,8 +29275,8 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1248_major = 3;
-        uint32_t l_minRequiredVersion_1248_minor = 1;
+        uint32_t l_minRequiredVersion_1362_major = 3;
+        uint32_t l_minRequiredVersion_1362_minor = 1;
         observe(observations.mReads);
         mImports.glVertexAttribBinding(attribindex, bindingindex);
     } while (false);
@@ -28844,8 +29300,8 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1249_major = 3;
-        uint32_t l_minRequiredVersion_1249_minor = 0;
+        uint32_t l_minRequiredVersion_1363_major = 3;
+        uint32_t l_minRequiredVersion_1363_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribDivisor(index, divisor);
     } while (false);
@@ -28871,8 +29327,8 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1250_major = 3;
-        uint32_t l_minRequiredVersion_1250_minor = 1;
+        uint32_t l_minRequiredVersion_1364_major = 3;
+        uint32_t l_minRequiredVersion_1364_minor = 1;
         switch (type) {
             case GLenum::GL_BYTE:                         // fall-through...
             case GLenum::GL_FIXED:                        // fall-through...
@@ -28911,8 +29367,8 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1252_major = 3;
-        uint32_t l_minRequiredVersion_1252_minor = 0;
+        uint32_t l_minRequiredVersion_1366_major = 3;
+        uint32_t l_minRequiredVersion_1366_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4i(index, x, y, z, w);
     } while (false);
@@ -28936,8 +29392,8 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1253_major = 3;
-        uint32_t l_minRequiredVersion_1253_minor = 0;
+        uint32_t l_minRequiredVersion_1367_major = 3;
+        uint32_t l_minRequiredVersion_1367_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4iv(index, v);
     } while (false);
@@ -28966,8 +29422,8 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1254_major = 3;
-        uint32_t l_minRequiredVersion_1254_minor = 0;
+        uint32_t l_minRequiredVersion_1368_major = 3;
+        uint32_t l_minRequiredVersion_1368_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4ui(index, x, y, z, w);
     } while (false);
@@ -28991,8 +29447,8 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1255_major = 3;
-        uint32_t l_minRequiredVersion_1255_minor = 0;
+        uint32_t l_minRequiredVersion_1369_major = 3;
+        uint32_t l_minRequiredVersion_1369_minor = 0;
         observe(observations.mReads);
         mImports.glVertexAttribI4uiv(index, v);
     } while (false);
@@ -29020,8 +29476,8 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1256_major = 3;
-        uint32_t l_minRequiredVersion_1256_minor = 1;
+        uint32_t l_minRequiredVersion_1370_major = 3;
+        uint32_t l_minRequiredVersion_1370_minor = 1;
         switch (type) {
             case GLenum::GL_BYTE:                         // fall-through...
             case GLenum::GL_FIXED:                        // fall-through...
@@ -29063,11 +29519,11 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1258_major = 3;
-        uint32_t l_minRequiredVersion_1258_minor = 0;
+        uint32_t l_minRequiredVersion_1372_major = 3;
+        uint32_t l_minRequiredVersion_1372_minor = 0;
         switch (type) {
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1259_ext = ExtensionId::GL_OES_vertex_half_float;
+                uint32_t l_requiresExtension_1373_ext = ExtensionId::GL_OES_vertex_half_float;
                 break;
             }
             case GLenum::GL_BYTE:           // fall-through...
@@ -29107,8 +29563,8 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1261_major = 2;
-        uint32_t l_minRequiredVersion_1261_minor = 0;
+        uint32_t l_minRequiredVersion_1375_major = 2;
+        uint32_t l_minRequiredVersion_1375_minor = 0;
         switch (type) {
             case GLenum::GL_BYTE:           // fall-through...
             case GLenum::GL_FIXED:          // fall-through...
@@ -29119,7 +29575,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
                 break;
             }
             case GLenum::GL_HALF_FLOAT_OES: {
-                uint32_t l_requiresExtension_1262_ext = ExtensionId::GL_OES_vertex_half_float;
+                uint32_t l_requiresExtension_1376_ext = ExtensionId::GL_OES_vertex_half_float;
                 break;
             }
             case GLenum::GL_HALF_FLOAT:          // fall-through...
@@ -29127,14 +29583,18 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
             case GLenum::GL_INT_2_10_10_10_REV:  // fall-through...
             case GLenum::GL_UNSIGNED_INT:        // fall-through...
             case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV: {
-                uint32_t l_minRequiredVersion_1263_major = 3;
-                uint32_t l_minRequiredVersion_1263_minor = 0;
+                uint32_t l_minRequiredVersion_1377_major = 3;
+                uint32_t l_minRequiredVersion_1377_minor = 0;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1265_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1265_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1380_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1379_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1379_result;
         std::shared_ptr<VertexAttributeArray> l_a = l_ctx->mVertexAttributeArrays[location];
         l_a->mSize = (uint32_t)(size);
         l_a->mType = type;
@@ -29168,8 +29628,8 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_1266_major = 3;
-        uint32_t l_minRequiredVersion_1266_minor = 1;
+        uint32_t l_minRequiredVersion_1381_major = 3;
+        uint32_t l_minRequiredVersion_1381_minor = 1;
         observe(observations.mReads);
         mImports.glVertexBindingDivisor(bindingindex, divisor);
     } while (false);
@@ -29290,8 +29750,8 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1267_result = l_ctx;
-        this->EGLContexts[l_context] = l_CreateContext_1267_result;
+        std::shared_ptr<Context> l_CreateContext_1382_result = l_ctx;
+        this->EGLContexts[l_context] = l_CreateContext_1382_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -29326,8 +29786,8 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1268_context = this->EGLContexts[context];
-        this->Contexts[this->CurrentThread] = l_SetContext_1268_context;
+        std::shared_ptr<Context> l_SetContext_1383_context = this->EGLContexts[context];
+        this->Contexts[this->CurrentThread] = l_SetContext_1383_context;
         observe(observations.mReads);
         result = mImports.eglMakeCurrent(display, draw, read, context);
         break;
@@ -29485,8 +29945,8 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1269_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_1269_result;
+        std::shared_ptr<Context> l_CreateContext_1384_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_1384_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -29580,8 +30040,8 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1270_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_1270_result;
+        std::shared_ptr<Context> l_CreateContext_1385_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_1385_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -29616,8 +30076,8 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1271_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1271_context;
+        std::shared_ptr<Context> l_SetContext_1386_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_1386_context;
         observe(observations.mReads);
         result = mImports.glXMakeContextCurrent(display, draw, read, ctx);
         break;
@@ -29653,8 +30113,8 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1272_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1272_context;
+        std::shared_ptr<Context> l_SetContext_1387_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_1387_context;
         observe(observations.mReads);
         result = mImports.glXMakeCurrent(display, drawable, ctx);
         break;
@@ -29804,8 +30264,8 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1273_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_1273_result;
+        std::shared_ptr<Context> l_CreateContext_1388_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_1388_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -29893,8 +30353,8 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1274_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_1274_result;
+        std::shared_ptr<Context> l_CreateContext_1389_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_1389_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -29927,8 +30387,8 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1275_context = this->WGLContexts[hglrc];
-        this->Contexts[this->CurrentThread] = l_SetContext_1275_context;
+        std::shared_ptr<Context> l_SetContext_1390_context = this->WGLContexts[hglrc];
+        this->Contexts[this->CurrentThread] = l_SetContext_1390_context;
         observe(observations.mReads);
         result = mImports.wglMakeCurrent(hdc, hglrc);
         break;
@@ -30040,8 +30500,8 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
             l_ctx->mTextureUnits[GLenum::GL_TEXTURE0 + (uint32_t)(l_i)] =
                     std::shared_ptr<TextureUnit>(new TextureUnit(GLenumToTextureId()));
         }
-        std::shared_ptr<Context> l_CreateContext_1276_result = l_ctx;
-        this->CGLContexts[l_context] = l_CreateContext_1276_result;
+        std::shared_ptr<Context> l_CreateContext_1391_result = l_ctx;
+        this->CGLContexts[l_context] = l_CreateContext_1391_result;
         write(slice(ctx, 0, 1), 0, l_context);
         break;
     } while (false);
@@ -30076,8 +30536,8 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_1277_context = this->CGLContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_1277_context;
+        std::shared_ptr<Context> l_SetContext_1392_context = this->CGLContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_1392_context;
         observe(observations.mReads);
         result = mImports.CGLSetCurrentContext(ctx);
         break;
@@ -30317,8 +30777,12 @@ inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, cha
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_1278_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_1278_result;
+        if (l_context == std::shared_ptr<Context>()) {
+            std::string l_error_1394_msg = "No context bound";
+            break;
+        }
+        std::shared_ptr<Context> l_GetContext_1393_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_1393_result;
         l_ctx->mInfo.mName = name;
         l_ctx->mInfo.mVendor = vendor;
         l_ctx->mInfo.mExtensions = extensions;

@@ -47,7 +47,8 @@ extern s32 stateVariableSize(GLenum v)
 macro void minRequiredVersion(u32 major, u32 minor) {  }
 macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {  }
 macro void requiresExtension(ExtensionId ext) {  }
-macro void glErrorInvalidEnum(GLenum param) {  }
+macro void error(string msg) { abort }
+macro void glErrorInvalidEnum(GLenum param) { abort }
 
 enum ExtensionId {
   GL_AMD_performance_monitor                  = 1 ,
@@ -551,7 +552,9 @@ map!(ThreadID, ref!Context) Contexts
 
 macro ref!Context GetContext() {
   context := Contexts[CurrentThread]
-  assert(context != null)
+  if context == null {
+    error("No context bound")
+  }
   return context
 }
 
@@ -854,4 +857,3 @@ cmd void glGetQueryObjecti64v(QueryId query, GLenum parameter, s64* value) {
 cmd void glGetQueryObjectui64v(QueryId query, GLenum parameter, u64* value) {
   value[0] = ?
 }
-
