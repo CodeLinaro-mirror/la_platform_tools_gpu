@@ -26,6 +26,7 @@ import (
 const preloadPath = "/data/gapii.so"
 
 var abiToSo = map[string]string{
+	"armeabi":     "android-arm",
 	"armeabi-v7a": "android-arm",
 	"arm64-v8a":   "android-arm64",
 }
