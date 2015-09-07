@@ -75,3 +75,14 @@ var builtinSymbols = [...]ast.Symbol{
 	&ast.FunctionDecl{SymName: "dFdy"},
 	&ast.FunctionDecl{SymName: "fwidth"},
 }
+
+// FindBuiltin searches and returns the builtins for the symbol with the
+// specified name. If no builtin has the specified name then nil is returned.
+func FindBuiltin(name string) ast.Symbol {
+	for _, b := range builtinSymbols {
+		if b.Name() == name {
+			return b
+		}
+	}
+	return nil
+}

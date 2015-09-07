@@ -38,7 +38,7 @@ const uint32_t GLX_HEIGHT = 0x801E;
 
 const uint32_t kCGLCPSurfaceBackingSize = 304;
 
-bool isLittleEndian() {
+inline bool isLittleEndian() {
     union {
         uint32_t i;
         char c[4];
@@ -97,8 +97,7 @@ EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface r
         bool preserveBuffersOnSwap = swapBehavior == EGL_BUFFER_PRESERVED;
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(
-                width, height,
+        setContextInfo(width, height,
                 GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
                 resetViewportScissor,
                 preserveBuffersOnSwap);
@@ -115,8 +114,7 @@ BOOL Spy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 #if TARGET_OS == GAPID_OS_WINDOWS
         wgl::FramebufferInfo info;
         wgl::getFramebufferInfo(hdc, info);
-        GlesSpy::backbufferInfo(
-                info.width, info.height,
+        setContextInfo(info.width, info.height,
                 info.colorFormat, info.depthFormat, info.stencilFormat,
                 /* resetViewportScissor */ true,
                 /* preserveBuffersOnSwap */ false);
@@ -134,17 +132,18 @@ CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
         CGSConnectionID cid;
         CGSWindowID wid;
         CGSSurfaceID sid;
-        double bounds[4];
+        double bounds[4] = {0, 0, 0, 0};
 
         if (mImports.CGLGetSurface(ctx, &cid, &wid, &sid) == 0) {
             mImports.CGSGetSurfaceBounds(cid, wid, sid, bounds);
+        } else {
+            GAPID_WARNING("Could not get CGL surface");
         }
         int width = bounds[2] - bounds[0];  // size.x - origin.x
         int height = bounds[3] - bounds[1]; // size.y - origin.y
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(
-                width, height,
+        setContextInfo(width, height,
                 GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
                 /* resetViewportScissor */ true,
                 /* preserveBuffersOnSwap */ false);
@@ -163,8 +162,7 @@ Bool Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable rea
         mImports.glXQueryDrawable(display, draw, GLX_HEIGHT, &height);
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(
-                width, height,
+        setContextInfo(width, height,
                 GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
                 /* resetViewportScissor */ true,
                 /* preserveBuffersOnSwap */ false);
@@ -184,14 +182,29 @@ Bool Spy::glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx) {
         mImports.glXQueryDrawable(display, drawable, GLX_HEIGHT, &height);
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(
-                width, height,
+        setContextInfo(width, height,
                 GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
                 /* resetViewportScissor */ true,
                 /* preserveBuffersOnSwap */ false);
     }
 
     return res;
+}
+
+void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
+                         uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
+                         uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,
+                         bool preserve_buffers_on_swap) {
+    std::shared_ptr<Context> ctx = GlesSpy::Contexts[GlesSpy::CurrentThread];
+    char* name = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_RENDERER));
+    char* vendor = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_VENDOR));
+    char* extensions = ""; // TODO
+    char* version = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_VERSION));
+    GlesSpy::contextInfo(name, vendor, extensions, version,
+                         backbuffer_width, backbuffer_height,
+                         backbuffer_color_fmt, backbuffer_depth_fmt,
+                         backbuffer_stencil_fmt, reset_viewport_scissor,
+                         preserve_buffers_on_swap);
 }
 
 } // namespace gapii

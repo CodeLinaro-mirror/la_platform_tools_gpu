@@ -15,10 +15,11 @@
 package parser
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"fmt"
 	"strings"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 func fmtFun(input string) string {
@@ -124,6 +125,9 @@ var fmtTests = []string{
 	"smooth sampler2D a;\nflat isampler3D b;\n",
 	"centroid in int a;\ncentroid out float b;\n",
 	"const int a;\nin float b;\nout int c;\n",
+
+	"#version 200\nint foo();\n",
+	"#version 130\nvoid f(bool a) {\n\tif(a) ;\n}\n",
 }
 
 // Note to reader:
@@ -135,12 +139,21 @@ var fmtTests = []string{
 // a failure here, feel free to reformat the input if the result is still readable. In the tests
 // we use \t for indentation. When comparing pretty printer output, the tabs are replaced with
 // whatever makeIdent(1) produces.
-func compare(t *testing.T, expected string, ast interface{}, verbatim bool) {
+func compare(t *testing.T, expected string, ast interface{}, version string, verbatim bool) {
 	f := "%v"
 	if verbatim {
 		f = "%#v"
 	}
+
 	formatted := fmt.Sprintf(f, Formatter(ast))
+
+	if version != "" {
+		if verbatim {
+			formatted = fmt.Sprintf("#version %s%s", version, formatted) // new-line is prefix of next line
+		} else {
+			formatted = fmt.Sprintf("#version %s\n%s", version, formatted)
+		}
+	}
 
 	if !verbatim {
 		expected = strings.Replace(expected, "\t", makeIndent(1), -1)
@@ -171,13 +184,13 @@ func compare(t *testing.T, expected string, ast interface{}, verbatim bool) {
 
 func TestFormat(t *testing.T) {
 	for _, input := range fmtTests {
-		ast, err := Parse(input, ast.LangVertexShader, nil)
+		ast, version, err := Parse(input, ast.LangVertexShader, nil)
 		if len(err) > 0 {
 			t.Errorf("Error parsing input: %s", err[0])
 			return
 		}
 
-		compare(t, input, ast, false)
-		compare(t, input, ast, true)
+		compare(t, input, ast, version, false)
+		compare(t, input, ast, version, true)
 	}
 }

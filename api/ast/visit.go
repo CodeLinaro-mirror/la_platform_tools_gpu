@@ -19,6 +19,8 @@ import "fmt"
 // Visit invokes visitor for all the children of the supplied node.
 func Visit(node Node, visitor func(Node)) {
 	switch n := node.(type) {
+	case *Abort:
+
 	case *Alias:
 		visitor(n.Name)
 		visitor(n.To)

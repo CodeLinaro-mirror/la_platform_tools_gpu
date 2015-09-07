@@ -42,43 +42,6 @@ namespace gles {
         bool mLittleEndian;
     };
 
-    class BackbufferInfo: public Encodable {
-    public:
-        BackbufferInfo() = default;
-        BackbufferInfo(atom::Observations observations, int32_t Width, int32_t Height, uint32_t ColorFmt, uint32_t DepthFmt, uint32_t StencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
-            mobservations(observations),
-            mWidth(Width),
-            mHeight(Height),
-            mColorFmt(ColorFmt),
-            mDepthFmt(DepthFmt),
-            mStencilFmt(StencilFmt),
-            mResetViewportScissor(ResetViewportScissor),
-            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x33, 0x30, 0x13, 0x32, 0x31, 0x5d, 0xce, 0x13, 0x1f, 0xa4, 0xe4, 0x27, 0x10, 0xed, 0xd6, 0x58, 0xad, 0x0a, 0x87, 0xac,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mobservations);
-            e->Int32(this->mWidth);
-            e->Int32(this->mHeight);
-            e->Uint32(this->mColorFmt);
-            e->Uint32(this->mDepthFmt);
-            e->Uint32(this->mStencilFmt);
-            e->Bool(this->mResetViewportScissor);
-            e->Bool(this->mPreserveBuffersOnSwap);
-        }
-
-        atom::Observations mobservations;
-        int32_t mWidth;
-        int32_t mHeight;
-        uint32_t mColorFmt;
-        uint32_t mDepthFmt;
-        uint32_t mStencilFmt;
-        bool mResetViewportScissor;
-        bool mPreserveBuffersOnSwap;
-    };
-
     class Color: public Encodable {
     public:
         Color() = default;
@@ -651,6 +614,40 @@ namespace gles {
         int32_t mClearStencil;
     };
 
+    class ContextCreationInfo: public Encodable {
+    public:
+        ContextCreationInfo() = default;
+        ContextCreationInfo(char* Name, char* Vendor, char* Extensions, char* Version, int32_t VersionMajor, int32_t VersionMinor, bool PreserveBuffersOnSwap) :
+            mName(Name),
+            mVendor(Vendor),
+            mExtensions(Extensions),
+            mVersion(Version),
+            mVersionMajor(VersionMajor),
+            mVersionMinor(VersionMinor),
+            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x57, 0x4c, 0x3d, 0x13, 0xcd, 0x72, 0x8e, 0x42, 0x9a, 0xb3, 0x20, 0x5d, 0xd8, 0x35, 0xc9, 0xb8, 0x11, 0xb7, 0xfb, 0xbd,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->String(this->mName);
+            e->String(this->mVendor);
+            e->String(this->mExtensions);
+            e->String(this->mVersion);
+            e->Int32(this->mVersionMajor);
+            e->Int32(this->mVersionMinor);
+            e->Bool(this->mPreserveBuffersOnSwap);
+        }
+
+        char* mName;
+        char* mVendor;
+        char* mExtensions;
+        char* mVersion;
+        int32_t mVersionMajor;
+        int32_t mVersionMinor;
+        bool mPreserveBuffersOnSwap;
+    };
+
     class Rect: public Encodable {
     public:
         Rect() = default;
@@ -1163,8 +1160,9 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,TextureUnit*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
+        Context(uint32_t Identifier, ContextCreationInfo Info, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,TextureUnit*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
             mIdentifier(Identifier),
+            mInfo(Info),
             mBlending(Blending),
             mRasterizing(Rasterizing),
             mClearing(Clearing),
@@ -1179,14 +1177,14 @@ namespace gles {
             mCapabilities(Capabilities),
             mGenerateMipmapHint(GenerateMipmapHint),
             mPixelStorage(PixelStorage),
-            mInstances(Instances),
-            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+            mInstances(Instances) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x57, 0xab, 0x80, 0xd6, 0xb0, 0x07, 0x70, 0xaa, 0xcd, 0xee, 0xe2, 0xd4, 0xde, 0x3c, 0x80, 0xf6, 0x36, 0x38, 0x87, 0x0d,  } };
+            static gapic::Id ID{ { 0x92, 0x55, 0x7b, 0x90, 0xd5, 0x4e, 0xb8, 0x01, 0x1b, 0x60, 0x0f, 0x47, 0xad, 0x43, 0x29, 0x41, 0x62, 0x52, 0x54, 0xf3,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mIdentifier);
+            e->Value(this->mInfo);
             e->Value(this->mBlending);
             e->Value(this->mRasterizing);
             e->Value(this->mClearing);
@@ -1202,10 +1200,10 @@ namespace gles {
             e->Uint32(this->mGenerateMipmapHint);
             GAPID_FATAL("C++ map encoding not supported");
             e->Value(this->mInstances);
-            e->Bool(this->mPreserveBuffersOnSwap);
         }
 
         uint32_t mIdentifier;
+        ContextCreationInfo mInfo;
         BlendState mBlending;
         RasterizerState mRasterizing;
         ClearState mClearing;
@@ -1221,6 +1219,54 @@ namespace gles {
         uint32_t mGenerateMipmapHint;
         std::unordered_map<uint32_t,int32_t>* mPixelStorage;
         Objects mInstances;
+    };
+
+    class ContextInfo: public Encodable {
+    public:
+        ContextInfo() = default;
+        ContextInfo(atom::Observations observations, char* Name, char* Vendor, char* Extensions, char* Version, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
+            mobservations(observations),
+            mName(Name),
+            mVendor(Vendor),
+            mExtensions(Extensions),
+            mVersion(Version),
+            mBackbufferWidth(BackbufferWidth),
+            mBackbufferHeight(BackbufferHeight),
+            mBackbufferColorFmt(BackbufferColorFmt),
+            mBackbufferDepthFmt(BackbufferDepthFmt),
+            mBackbufferStencilFmt(BackbufferStencilFmt),
+            mResetViewportScissor(ResetViewportScissor),
+            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xd2, 0x67, 0x34, 0x96, 0xd3, 0x4b, 0x64, 0xb2, 0x96, 0xea, 0x8e, 0xc7, 0xbc, 0x38, 0x93, 0xa1, 0xea, 0x4e, 0xcc, 0x96,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mobservations);
+            e->String(this->mName);
+            e->String(this->mVendor);
+            e->String(this->mExtensions);
+            e->String(this->mVersion);
+            e->Int32(this->mBackbufferWidth);
+            e->Int32(this->mBackbufferHeight);
+            e->Uint32(this->mBackbufferColorFmt);
+            e->Uint32(this->mBackbufferDepthFmt);
+            e->Uint32(this->mBackbufferStencilFmt);
+            e->Bool(this->mResetViewportScissor);
+            e->Bool(this->mPreserveBuffersOnSwap);
+        }
+
+        atom::Observations mobservations;
+        char* mName;
+        char* mVendor;
+        char* mExtensions;
+        char* mVersion;
+        int32_t mBackbufferWidth;
+        int32_t mBackbufferHeight;
+        uint32_t mBackbufferColorFmt;
+        uint32_t mBackbufferDepthFmt;
+        uint32_t mBackbufferStencilFmt;
+        bool mResetViewportScissor;
         bool mPreserveBuffersOnSwap;
     };
 

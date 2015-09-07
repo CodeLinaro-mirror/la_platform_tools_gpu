@@ -6616,10 +6616,10 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_BackbufferInfo := schema.Of((*BackbufferInfo)(nil).Class())
-	sc_BackbufferInfo.Metadata = append(sc_BackbufferInfo.Metadata, &atom.Metadata{
+	sc_ContextInfo := schema.Of((*ContextInfo)(nil).Class())
+	sc_ContextInfo.Metadata = append(sc_ContextInfo.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "backbufferInfo",
+		DisplayName:      "contextInfo",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

@@ -22,6 +22,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/device"
+	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -257,5 +258,93 @@ func TestRevertPostbackAtom(t *testing.T) {
 	}
 	if postbackErr != expectedErr {
 		t.Errorf("Postback was not informed of RevertAtom")
+	}
+}
+
+func TestMapMemory(t *testing.T) {
+	for _, test := range []struct {
+		name     string
+		f        func(*Builder)
+		expected []asm.Instruction
+	}{
+		{
+			"No mapping",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Push(value.RemappedPointer(0x100004))
+				b.Call(FunctionInfo{123, protocol.TypeVolatilePointer, 1})
+				b.CommitAtom()
+			},
+			[]asm.Instruction{
+				asm.Label{Value: 10},
+				asm.Push{Value: value.RemappedPointer(0x100004)},
+				asm.Call{FunctionID: 123},
+			},
+		},
+		{
+			"MapMemory",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Call(FunctionInfo{100, protocol.TypeAbsolutePointer, 0})
+				b.MapMemory(memory.Range{Base: 0x100000, Size: 0x10})
+				b.CommitAtom()
+
+				b.BeginAtom(20)
+				b.Push(value.RemappedPointer(0x100004))
+				b.Call(FunctionInfo{123, protocol.TypeVoid, 1})
+				b.CommitAtom()
+			},
+			[]asm.Instruction{
+				asm.Label{Value: 10},
+				asm.Call{FunctionID: 100, PushReturn: true},
+				asm.Store{Destination: value.VolatilePointer(0x0)}, // mapping-storage address
+
+				asm.Label{Value: 20},
+				asm.Load{DataType: protocol.TypeAbsolutePointer, Source: value.VolatilePointer(0x0)}, // mapping-storage address
+				asm.Push{Value: value.AbsolutePointer(0x4)},
+				asm.Add{Count: 2},
+				asm.Call{FunctionID: 123},
+			},
+		},
+		{
+			"UnmapMemory",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Call(FunctionInfo{100, protocol.TypeAbsolutePointer, 0})
+				b.MapMemory(memory.Range{Base: 0x100000, Size: 0x10})
+				b.CommitAtom()
+
+				b.BeginAtom(20)
+				b.UnmapMemory(memory.Range{Base: 0x100000, Size: 0x10})
+				b.CommitAtom()
+
+				b.BeginAtom(30)
+				b.Push(value.RemappedPointer(0x100004))
+				b.Call(FunctionInfo{123, protocol.TypeVoid, 1})
+				b.CommitAtom()
+			},
+			[]asm.Instruction{
+				asm.Label{Value: 10},
+				asm.Call{FunctionID: 100, PushReturn: true},
+				asm.Store{Destination: value.VolatilePointer(0x0)}, // mapping-storage address
+
+				asm.Label{Value: 20},
+
+				asm.Label{Value: 30},
+				asm.Push{Value: value.RemappedPointer(0x100004)},
+				asm.Call{FunctionID: 123},
+			},
+		},
+	} {
+		b := New(device.Architecture{
+			PointerAlignment: 4,
+			PointerSize:      4,
+			IntegerSize:      4,
+			ByteOrder:        endian.Little,
+		})
+		test.f(b)
+		if !check.SlicesEqual(t, b.instructions, test.expected) {
+			t.Errorf("Test '%s' failed:", test.name)
+		}
 	}
 }

@@ -15,11 +15,12 @@
 package sema
 
 import (
+	"regexp"
+	"testing"
+
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/evaluator"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
-	"regexp"
-	"testing"
 )
 
 var semaTests = []struct {
@@ -133,7 +134,7 @@ var semaTests = []struct {
 func TestSema(t *testing.T) {
 	for _, test := range semaTests {
 		t.Logf("Program: %s", test.program)
-		ast, err := parser.Parse(test.program, ast.LangVertexShader,
+		ast, _, err := parser.Parse(test.program, ast.LangVertexShader,
 			evaluator.EvaluatePreprocessorExpression)
 		if len(err) > 0 {
 			t.Errorf("Unexpected error parsing input: %s", err[0])

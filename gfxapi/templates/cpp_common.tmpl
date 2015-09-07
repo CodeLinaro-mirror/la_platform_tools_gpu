@@ -287,6 +287,7 @@
 */}}
 {{define "C++.Statement.Default"}}
   {{     if IsDeclareLocal $}}{{Template "C++.Type" (TypeOf $.Local)}} {{Template "C++.LocalName" $.Local}} = {{Template "C++.Read" $.Local.Value}};
+  {{else if IsAbort        $}}{{Template "C++.Abort" $}}
   {{else if IsAssign       $}}{{Template "C++.Assign" $}}
   {{else if IsArrayAssign  $}}{{Template "C++.ArrayAssign" $}}
   {{else if IsMapAssign    $}}{{Template "C++.MapAssign" $}}
@@ -305,6 +306,17 @@
   {{end}}
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform an abort statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Abort"}}
+  {{AssertType $ "Abort"}}
+
+  break;
+{{end}}
 
 {{/*
 -------------------------------------------------------------------------------

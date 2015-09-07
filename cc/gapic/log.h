@@ -90,8 +90,8 @@ public:
     static void log(unsigned level, const char* location, const char* format, ...);
 
 private:
-    // The single logger instance
-    static Logger instance;
+    // instance returns the single logger instance.
+    static Logger& instance();
 
     Logger();
     ~Logger();

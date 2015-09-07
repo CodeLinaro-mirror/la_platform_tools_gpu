@@ -51,10 +51,7 @@ func run() error {
 		return err
 	}
 
-	// Profiling
-	go func() {
-		http.ListenAndServe("localhost:6060", nil)
-	}()
+	go http.ListenAndServe("localhost:6060", nil) // Profiling
 
 	config := client.Config{
 		DataPath:       dataAbsPath,

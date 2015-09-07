@@ -19,6 +19,7 @@ import "fmt"
 // Visit invokes visitor for all the children of the supplied node.
 func Visit(node Node, visitor func(Node)) {
 	switch n := node.(type) {
+	case *Abort:
 	case *API:
 		(*Symbols)(&n.members).Visit(func(_ string, n Node) { visitor(n) })
 	case *ArrayAssign:

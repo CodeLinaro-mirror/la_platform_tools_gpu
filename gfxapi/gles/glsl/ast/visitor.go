@@ -17,7 +17,7 @@ package ast
 // ChildVisitor is a callback function used by VisitChildren to visit nodes.
 type ChildVisitor func(interface{})
 
-// VisitChildren  is a helper function which calls the provided callback for each child node of
+// VisitChildren is a helper function which calls the provided callback for each child node of
 // the argument.
 func VisitChildren(n interface{}, v ChildVisitor) {
 	switch n := n.(type) {

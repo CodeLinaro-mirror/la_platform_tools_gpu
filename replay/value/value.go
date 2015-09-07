@@ -29,7 +29,9 @@ type Value interface {
 	// For example a boolean value would either be 0 or 1, a uint32 value would be
 	// zero-extended, a float64 would be the IEEE 754 representation
 	// reinterpreted as a uint64.
-	Get(PointerResolver) (protocol.Type, uint64)
+	// If onStack returns true then the value is stored on the top of the VM
+	// stack, and val should be ignored.
+	Get(PointerResolver) (ty protocol.Type, val uint64, onStack bool)
 }
 
 // Pointer is a pointer-typed Value.

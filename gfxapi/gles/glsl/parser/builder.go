@@ -89,7 +89,7 @@ func (s *scope) GetValueSymbol(b *builder, name string) ast.ValueSymbol {
 	if vs, ok := sym.(ast.ValueSymbol); ok {
 		return vs
 	}
-	b.Error("%q used in a value context.", sym.Name())
+	b.Errorf("%q used in a value context.", sym.Name())
 	return nil
 }
 
@@ -101,7 +101,7 @@ func (s *scope) AddDecl(b *builder, d ast.Symbol) {
 		_, d2fun := d2.(ast.Function)
 		// Function overloads are ok
 		if !(d2fun && dfun) {
-			b.Error("Declaration of '%s' already exists in this scope.", d.Name())
+			b.Errorf("Declaration of '%s' already exists in this scope.", d.Name())
 		}
 	}
 	s.decls = append(s.decls, d)
@@ -201,7 +201,7 @@ func (b *builder) parseExternalDeclaration() interface{} {
 		lparenCst := b.nextCst()
 
 		if quals != nil {
-			b.Error("Type qualifiers are not allowed on function return types.")
+			b.Errorf("Type qualifiers are not allowed on function return types.")
 		}
 
 		return b.parseFunctionDeclaration(name, declType, nameCst, lparenCst)
@@ -215,7 +215,7 @@ func (b *builder) parseLayoutDeclaration(quals *ast.TypeQualifiers) *ast.LayoutD
 	if quals.Storage != ast.StorUniform || quals.Interpolation != ast.IntNone ||
 		quals.Invariant || quals.Layout == nil {
 
-		b.Error("Invalid combination of qualifiers for a layout qualifier declaration.")
+		b.Errorf("Invalid combination of qualifiers for a layout qualifier declaration.")
 	}
 	return &ast.LayoutDecl{
 		Layout:       quals.Layout,
@@ -235,7 +235,7 @@ func (b *builder) parseInterfaceOrInvariantDeclaration(quals *ast.TypeQualifiers
 
 		return b.parseInterfaceDeclaration(quals.Layout, quals.StorageCst)
 	}
-	b.Error("Invalid combination of qualifiers: %v.", quals)
+	b.Errorf("Invalid combination of qualifiers: %v.", quals)
 	return nil
 }
 
@@ -250,7 +250,7 @@ func (b *builder) parseInvariantDeclaration(invariantCst *parse.Leaf) (ret *ast.
 		sym := b.currentScope.GetValueSymbol(b, name)
 		nameCst := b.nextCst()
 		if sym == nil {
-			b.Error("Undeclared identifier '%s'.", name)
+			b.Errorf("Undeclared identifier '%s'.", name)
 		} else {
 			ret.Vars = append(ret.Vars, &ast.VarRefExpr{Sym: sym, SymCst: nameCst})
 		}
@@ -260,7 +260,7 @@ func (b *builder) parseInvariantDeclaration(invariantCst *parse.Leaf) (ret *ast.
 		case pp.OpSemicolon:
 			ret.SemicolonCst = b.nextCst()
 			if len(ret.Vars) == 0 {
-				b.Error("Empty invariant declaration.")
+				b.Errorf("Empty invariant declaration.")
 			}
 			return
 		}
@@ -512,7 +512,7 @@ func (b *builder) parseSimpleStatement() interface{} {
 func (b *builder) parseCondition() (ret interface{}) {
 	if b.guessIsDeclaration() {
 		vd := &ast.VariableSym{SymType: b.parseTypeSpecifier()}
-		ret = &ast.VarDeclCond{vd}
+		ret = &ast.VarDeclCond{Sym: vd}
 
 		if _, ok := b.peekToken().(pp.Identifier); !ok {
 			b.unexpectedTokenError("identifier")
@@ -528,14 +528,14 @@ func (b *builder) parseCondition() (ret interface{}) {
 		return
 	} else {
 		expr := b.parseExpression()
-		return &ast.ExpressionCond{expr}
+		return &ast.ExpressionCond{Expr: expr}
 	}
 }
 
 func (b *builder) parseExpressionOrDeclarationStatement() interface{} {
 	if b.guessIsDeclaration() {
 		decl := b.parseExternalDeclaration()
-		return &ast.DeclarationStmt{decl}
+		return &ast.DeclarationStmt{Decl: decl}
 	} else {
 		expr := &ast.ExpressionStmt{Expr: b.parseExpression()}
 		expr.SemicolonCst = b.expectSkip(pp.OpSemicolon, pp.OpSemicolon).Cst
@@ -561,7 +561,7 @@ func (b *builder) parseInitDeclaratorList(name string, quals *ast.TypeQualifiers
 				size = b.parseConstantExpression()
 			}
 			if right := b.expect(pp.OpRBracket).Cst; right != nil {
-				declType = &ast.ArrayType{declType, size, left, right, 0}
+				declType = &ast.ArrayType{Base: declType, Size: size, LBracketCst: left, RBracketCst: right}
 			} else {
 				return
 			}
@@ -610,7 +610,7 @@ func (b *builder) parseFunctionDeclaration(name string, ret ast.Type,
 	nameCst, lparenCst *parse.Leaf) (fun *ast.FunctionDecl) {
 
 	if ret, ok := ret.(*ast.StructType); ok && ret.StructDef {
-		b.Error("Structure definitions are not allowed in function return values.")
+		b.Errorf("Structure definitions are not allowed in function return values.")
 	}
 
 	fun = &ast.FunctionDecl{
@@ -654,7 +654,7 @@ func (b *builder) parseFunctionDeclaration(name string, ret ast.Type,
 	for i, p := range fun.Params {
 		if p.SymName == "" {
 			if definition {
-				b.Error("Formal parameter %d of function '%s' lacks a name.", i+1, name)
+				b.Errorf("Formal parameter %d of function '%s' lacks a name.", i+1, name)
 			}
 		} else {
 			b.currentScope.AddDecl(b, p)
@@ -703,12 +703,12 @@ func (b *builder) parseParameterDeclaration() (ret *ast.FuncParameterSym) {
 		return
 	}
 	if declType, ok := ret.SymType.(*ast.StructType); ok && declType.StructDef {
-		b.Error("Structure definitions are not allowed in function prototypes.")
+		b.Errorf("Structure definitions are not allowed in function prototypes.")
 	}
 
 	if array, ok := ret.SymType.(*ast.ArrayType); ok {
 		if array.Size == nil {
-			b.Error("Array size must be specified for function parameters.")
+			b.Errorf("Array size must be specified for function parameters.")
 		}
 	}
 
@@ -723,14 +723,14 @@ func (b *builder) parseParameterDeclaration() (ret *ast.FuncParameterSym) {
 	}
 	ret.ArrayAfterVar = true
 	if _, ok := ret.SymType.(*ast.ArrayType); ok {
-		b.Error("Declaring an array of arrays.")
+		b.Errorf("Declaring an array of arrays.")
 	}
 
 	left := b.nextCst()
 	size := b.parseConstantExpression()
 	right := b.expectSkip(pp.OpRBracket, pp.OpRBracket).Cst
 
-	ret.SymType = &ast.ArrayType{ret.SymType, size, left, right, 0}
+	ret.SymType = &ast.ArrayType{Base: ret.SymType, Size: size, LBracketCst: left, RBracketCst: right}
 	return
 }
 
@@ -762,7 +762,7 @@ func (b *builder) parseTypeSpecifier() (t ast.Type) {
 	}
 	if precision != ast.NoneP {
 		if !setPrecision(t, precision, cst) {
-			b.Error("Type %v cannot be used with a precision specifier.", Formatter(t))
+			b.Errorf("Type %v cannot be used with a precision specifier.", Formatter(t))
 		}
 	}
 	return
@@ -838,7 +838,7 @@ func (b *builder) getType(t pp.TokenInfo) ast.Type {
 		return nil
 	}
 	if d, ok := b.currentScope.GetSymbol(t.Token.String()).(*ast.StructSym); ok {
-		return &ast.StructType{d, false, t.Cst}
+		return &ast.StructType{Sym: d, StructDef: false, NameCst: t.Cst}
 	}
 	return nil
 }
@@ -871,29 +871,29 @@ func (b *builder) parseTypeQualifiers() (ret *ast.TypeQualifiers) {
 		switch b.peekToken() {
 		case pp.KwInvariant:
 			if ret.Invariant {
-				b.Error("Invariant qualifier specified twice.")
+				b.Errorf("Invariant qualifier specified twice.")
 			}
 			if ret.Layout != nil {
-				b.Error("Incorrect combination of type qualifiers. 'invariant' " +
+				b.Errorf("Incorrect combination of type qualifiers. 'invariant' " +
 					"cannot be combined with layout qualifiers.")
 
 			}
 			if ret.Interpolation != ast.IntNone || ret.Storage != ast.StorNone {
-				b.Error("Incorrect order of type qualifiers. 'invariant' " +
+				b.Errorf("Incorrect order of type qualifiers. 'invariant' " +
 					"must go before interpolation and storage qualifiers.")
 			}
 			ret.Invariant = true
 			ret.InvariantCst = b.nextCst()
 		case pp.KwSmooth, pp.KwFlat:
 			if ret.Interpolation != ast.IntNone {
-				b.Error("Interpolation qualifier specified twice.")
+				b.Errorf("Interpolation qualifier specified twice.")
 			}
 			if ret.Layout != nil {
-				b.Error("Incorrect combination of type qualifiers. Interpolation " +
+				b.Errorf("Incorrect combination of type qualifiers. Interpolation " +
 					"qualifiers cannot be combined with layout qualifiers.")
 			}
 			if ret.Storage != ast.StorNone {
-				b.Error("Incorrect order of type qualifiers. Interpolation " +
+				b.Errorf("Incorrect order of type qualifiers. Interpolation " +
 					"qualifiers must go before storage qualifiers.")
 			}
 			if b.peekToken() == pp.KwSmooth {
@@ -904,21 +904,21 @@ func (b *builder) parseTypeQualifiers() (ret *ast.TypeQualifiers) {
 			ret.InterpolationCst = b.nextCst()
 		case pp.KwLayout:
 			if ret.Layout != nil {
-				b.Error("Layout qualifier specified twice.")
+				b.Errorf("Layout qualifier specified twice.")
 			}
 			if ret.Interpolation != ast.IntNone || ret.Invariant {
-				b.Error("Incorrect combination of type qualifiers. 'layout' " +
+				b.Errorf("Incorrect combination of type qualifiers. 'layout' " +
 					"cannot be combined with interpolation and invariant " +
 					"qualifiers.")
 			}
 			if ret.Storage != ast.StorNone {
-				b.Error("Incorrect order of type qualifiers. 'layout' " +
+				b.Errorf("Incorrect order of type qualifiers. 'layout' " +
 					"must go before storage qualifiers.")
 			}
 			ret.Layout = b.parseLayoutQualifier()
 		case pp.KwCentroid:
 			if ret.Storage != ast.StorNone {
-				b.Error("Storage qualifier specified twice.")
+				b.Errorf("Storage qualifier specified twice.")
 			}
 			ret.CentroidStorageCst = b.nextCst()
 			switch b.peekToken() {
@@ -933,7 +933,7 @@ func (b *builder) parseTypeQualifiers() (ret *ast.TypeQualifiers) {
 			}
 		case pp.KwConst, pp.KwIn, pp.KwOut, pp.KwUniform, pp.KwAttribute, pp.KwVarying:
 			if ret.Storage != ast.StorNone {
-				b.Error("Storage qualifier specified twice.")
+				b.Errorf("Storage qualifier specified twice.")
 			}
 			ret.Storage = storageQualifierMap[b.peekToken()]
 			ret.StorageCst = b.nextCst()
@@ -1008,7 +1008,7 @@ func (b *builder) parsePrecisionDeclaration() (ret *ast.PrecisionDecl) {
 			return
 		}
 	}
-	b.Error("Invalid type for a precision declaration.")
+	b.Errorf("Invalid type for a precision declaration.")
 	return
 }
 
@@ -1083,7 +1083,7 @@ func (b *builder) parseStructSpecifier() (ret *ast.StructType) {
 	}
 
 	if len(sym.Vars) == 0 {
-		b.Error("Structs must not be empty, but struct '%s' contains no declarations.", sym.SymName)
+		b.Errorf("Structs must not be empty, but struct '%s' contains no declarations.", sym.SymName)
 	}
 	return
 }
@@ -1097,7 +1097,7 @@ func (b *builder) parseStructDeclaration() *ast.MultiVarDecl {
 	declType := b.parseTypeSpecifier()
 
 	if declType, ok := declType.(*ast.StructType); ok && declType.StructDef {
-		b.Error("Nested structure definitions are not supported.")
+		b.Errorf("Nested structure definitions are not supported.")
 	}
 
 	if !b.isIdentifier(b.peekToken()) {
@@ -1113,7 +1113,7 @@ func (b *builder) parseConstantExpression() ast.Expression {
 	return b.parseConditionalExpression()
 }
 
-func (b *builder) Error(msg string, args ...interface{}) {
+func (b *builder) Errorf(msg string, args ...interface{}) {
 	b.err.Errorf(msg, args...)
 }
 
@@ -1123,7 +1123,7 @@ func (b *builder) unexpectedTokenError(expected ...interface{}) {
 
 func (b *builder) unexpectedTokenErrorSkip(skipTo pp.Token, expected ...interface{}) pp.TokenInfo {
 	line, col := b.pp.Peek().Cst.Token().Cursor()
-	b.Error("%d:%d: Unexpected token (%v), was expecting one of: %v", line, col,
+	b.Errorf("%d:%d: Unexpected token (%v), was expecting one of: %v", line, col,
 		b.peekToken(), expected)
 	if skipTo == nil {
 		return b.pp.Next()
@@ -1144,7 +1144,7 @@ func (b *builder) expectSkip(token pp.Token, skipTo pp.Token) pp.TokenInfo {
 	return b.unexpectedTokenErrorSkip(skipTo, token)
 }
 
-func (b *builder) GetErrors() []error { return ast.ConcatErrors(b.pp.GetErrors(), b.err.GetErrors()) }
+func (b *builder) GetErrors() []error { return ast.ConcatErrors(b.pp.Errors(), b.err.GetErrors()) }
 
 func parseImpl(tp *pp.Preprocessor, language ast.Language,
 	eval PreprocessorExpressionEvaluator) (program interface{}, err []error) {
@@ -1198,9 +1198,9 @@ func (eval PreprocessorExpressionEvaluator) parseEvaluatePreprocessorExpression(
 // The result is an object of type *ast.Ast in case of vertex and fragment shaders. In case of
 // preprocessor expressions the result is an ast.Expression interface. The function also returns
 // any errors it encounters during processing.
-func Parse(in string, language ast.Language,
-	eval PreprocessorExpressionEvaluator) (program interface{}, err []error) {
-
-	return parseImpl(pp.PreprocessStream(in, eval.parseEvaluatePreprocessorExpression, 0),
-		language, eval)
+func Parse(in string, language ast.Language, eval PreprocessorExpressionEvaluator) (program interface{}, version string, err []error) {
+	s := pp.PreprocessStream(in, eval.parseEvaluatePreprocessorExpression, 0)
+	program, err = parseImpl(s, language, eval)
+	version = s.Version()
+	return
 }

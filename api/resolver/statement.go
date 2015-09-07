@@ -90,6 +90,8 @@ func statement(ctx *context, in ast.Node) semantic.Node {
 	case *ast.Generic:
 		ctx.errorf(in.Name, "unexpected identifier %s", in.Name.Value)
 		return invalid{}
+	case *ast.Abort:
+		return &semantic.Abort{AST: in}
 	case *ast.Fence:
 		return &semantic.Fence{AST: in, Explicit: true}
 	default:

@@ -42,6 +42,7 @@ var (
 		semantic.Float32Value(1.0),
 		semantic.Float64Value(1.0),
 		// semantic node types
+		semantic.Abort{},
 		semantic.API{},
 		semantic.ArrayAssign{},
 		semantic.ArrayInitializer{},

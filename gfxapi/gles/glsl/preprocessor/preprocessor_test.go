@@ -15,9 +15,10 @@
 package preprocessor
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"regexp"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 var (
@@ -43,218 +44,219 @@ func (top tokenOnlyPrinter) String() string {
 }
 
 var preprocessorTests = []struct {
-	Input          string
-	ExpectedTokens []Token
-	ExpectedErrors []string
+	Input           string
+	ExpectedTokens  []Token
+	ExpectedVersion string
+	ExpectedErrors  []string
 }{
-	{"const", []Token{KwConst}, nil},
-	{"A", []Token{A}, nil},
-	{"47", []Token{ast.IntValue(47)}, nil},
-	{"47u", []Token{ast.UintValue(47)}, nil},
-	{"47.5", []Token{ast.FloatValue(47.5)}, nil},
-	{"47.5e1", []Token{ast.FloatValue(475)}, nil},
-	{"47.5e+1", []Token{ast.FloatValue(475)}, nil},
-	{".75", []Token{ast.FloatValue(0.75)}, nil},
-	{"4.75", []Token{ast.FloatValue(4.75)}, nil},
-	{"<<=", []Token{ast.BoShlAssign}, nil},
-	{"<=", []Token{ast.BoLessEq}, nil},
-	{"<<", []Token{ast.BoShl}, nil},
-	{"<", []Token{ast.BoLess}, nil},
-	{"=", []Token{ast.BoAssign}, nil},
-	{"'", nil, []string{"Unknown token"}},
+	{"const", []Token{KwConst}, "", nil},
+	{"A", []Token{A}, "", nil},
+	{"47", []Token{ast.IntValue(47)}, "", nil},
+	{"47u", []Token{ast.UintValue(47)}, "", nil},
+	{"47.5", []Token{ast.FloatValue(47.5)}, "", nil},
+	{"47.5e1", []Token{ast.FloatValue(475)}, "", nil},
+	{"47.5e+1", []Token{ast.FloatValue(475)}, "", nil},
+	{".75", []Token{ast.FloatValue(0.75)}, "", nil},
+	{"4.75", []Token{ast.FloatValue(4.75)}, "", nil},
+	{"<<=", []Token{ast.BoShlAssign}, "", nil},
+	{"<=", []Token{ast.BoLessEq}, "", nil},
+	{"<<", []Token{ast.BoShl}, "", nil},
+	{"<", []Token{ast.BoLess}, "", nil},
+	{"=", []Token{ast.BoAssign}, "", nil},
+	{"'", nil, "", []string{"Unknown token"}},
 
 	{"true; 1u;",
-		[]Token{KwTrue, OpSemicolon, ast.UintValue(1), OpSemicolon}, nil},
+		[]Token{KwTrue, OpSemicolon, ast.UintValue(1), OpSemicolon}, "", nil},
 	{"\n\nvoid\r\rA  (\t\t)\v\v;\n\r\v",
-		[]Token{ast.TVoid, A, OpLParen, OpRParen, OpSemicolon}, nil},
+		[]Token{ast.TVoid, A, OpLParen, OpRParen, OpSemicolon}, "", nil},
 
 	{`  void // int
         A /* [
         *///]
         (/**/)
-        ;// `, []Token{ast.TVoid, A, OpLParen, OpRParen, OpSemicolon}, nil},
+        ;// `, []Token{ast.TVoid, A, OpLParen, OpRParen, OpSemicolon}, "", nil},
 
-	{"/*...", nil, []string{"Unterminated block comment"}},
-	{"/*...*", nil, []string{"Unterminated block comment"}},
+	{"/*...", nil, "", []string{"Unterminated block comment"}},
+	{"/*...*", nil, "", []string{"Unterminated block comment"}},
 
 	{`#define A B
-	A`, []Token{B}, nil},
+	A`, []Token{B}, "", nil},
 
 	{`#define int void
-	int`, []Token{ast.TVoid}, nil},
+	int`, []Token{ast.TVoid}, "", nil},
 
 	{`#define
-	a`, []Token{a}, []string{"#define needs an argument"}},
+	a`, []Token{a}, "", []string{"#define needs an argument"}},
 
 	{`#define A a b c
 	#define b c a
-	A`, []Token{a, c, a, c}, nil},
+	A`, []Token{a, c, a, c}, "", nil},
 
 	{`#define B A B C
-	B`, []Token{A, B, C}, nil},
+	B`, []Token{A, B, C}, "", nil},
 
 	{`#define A a B
 	#define B b A
-	A B`, []Token{a, b, A, b, a, B}, nil},
+	A B`, []Token{a, b, A, b, a, B}, "", nil},
 
 	{`#define A
 	#ifdef A
 	a
 	#else
 	b
-	#endif`, []Token{a}, nil},
+	#endif`, []Token{a}, "", nil},
 
 	{`#define A
 	#ifndef A
 	a
 	#else
 	b
-	#endif`, []Token{b}, nil},
+	#endif`, []Token{b}, "", nil},
 
 	{`#define A
 	#ifdef B
 	a
 	#else
 	b
-	#endif`, []Token{b}, nil},
+	#endif`, []Token{b}, "", nil},
 
-	{"#ifdef AAA", nil, []string{"Unterminated #if"}},
+	{"#ifdef AAA", nil, "", []string{"Unterminated #if"}},
 
 	{`#ifdef A
 	#else
 	#else
-	#endif`, nil, []string{"multiple #else"}},
+	#endif`, nil, "", []string{"multiple #else"}},
 
-	{"#else", nil, []string{"Unmatched #else"}},
+	{"#else", nil, "", []string{"Unmatched #else"}},
 
-	{"#endif", nil, []string{"Unmatched #endif"}},
+	{"#endif", nil, "", []string{"Unmatched #endif"}},
 
-	{"#ifdef\n#endif", nil, []string{"#ifdef needs an argument"}},
-	{"#define A B\n#define A C", nil, []string{"'A' already defined"}},
-	{"#undef A", nil, []string{"'A' not defined"}},
-	{"#error Hello world", nil, []string{"Hello world"}},
+	{"#ifdef\n#endif", nil, "", []string{"#ifdef needs an argument"}},
+	{"#define A B\n#define A C", nil, "", []string{"'A' already defined"}},
+	{"#undef A", nil, "", []string{"'A' not defined"}},
+	{"#error Hello world", nil, "", []string{"Hello world"}},
 
-	{"#define A B\n#undef A\nA", []Token{A}, nil},
+	{"#define A B\n#undef A\nA", []Token{A}, "", nil},
 
 	{`#define A(x) b
-	A(a)`, []Token{b}, nil},
+	A(a)`, []Token{b}, "", nil},
 
 	{`#define A(x) x
-	A(a)`, []Token{a}, nil},
+	A(a)`, []Token{a}, "", nil},
 
 	{`#define A(x) a x c
-	A(b)`, []Token{a, b, c}, nil},
+	A(b)`, []Token{a, b, c}, "", nil},
 
 	{`#define A(x) a x
 	#define B(x, y) A(x y)
-	B(b, c)`, []Token{a, b, c}, nil},
+	B(b, c)`, []Token{a, b, c}, "", nil},
 
 	{`#define A(x) a x
 	#define B(x) x(b)
-	B(A)`, []Token{a, b}, nil},
+	B(A)`, []Token{a, b}, "", nil},
 
 	{`#define A(x) a B(x)
 	#define B(x) A(x) b
 	B(c)
-	A(c)`, []Token{a, B, OpLParen, c, OpRParen, b, a, A, OpLParen, c, OpRParen, b}, nil},
+	A(c)`, []Token{a, B, OpLParen, c, OpRParen, b, a, A, OpLParen, c, OpRParen, b}, "", nil},
 
 	{`#define A(x) x b
 	#define B(x) a A(x
-	B(c))`, []Token{a, c, b}, nil},
+	B(c))`, []Token{a, c, b}, "", nil},
 
 	{`#define C(x, y) x y
-	C(a)`, []Token{a}, []string{"Incorrect number of arguments to macro 'C': expected 2, got 1."}},
+	C(a)`, []Token{a}, "", []string{"Incorrect number of arguments to macro 'C': expected 2, got 1."}},
 
 	{`#define A(x) x x
 	A(a
 	#undef A
 	#define A b
-	A)`, []Token{a, b, a, b}, nil},
+	A)`, []Token{a, b, a, b}, "", nil},
 
 	{`#define A(x) x
-	A(a`, []Token{A}, []string{"Unexpected end of file while processing a macro."}},
+	A(a`, []Token{A}, "", []string{"Unexpected end of file while processing a macro."}},
 
 	{`#define A(x, y) x y
-	A((a,(b)),c)`, []Token{OpLParen, a, ast.BoComma, OpLParen, b, OpRParen, OpRParen, c}, nil},
+	A((a,(b)),c)`, []Token{OpLParen, a, ast.BoComma, OpLParen, b, OpRParen, OpRParen, c}, "", nil},
 
 	{`#define A a B
 	#define B b A
 	#define C(x) c x
-	C(A)`, []Token{c, a, b, A}, nil},
+	C(A)`, []Token{c, a, b, A}, "", nil},
 
-	{"#define f(x, x) x", nil, []string{"Macro 'f' contains two arguments named 'x'."}},
+	{"#define f(x, x) x", nil, "", []string{"Macro 'f' contains two arguments named 'x'."}},
 
 	{`#define A(x) x
 	#define B(x) A(C)(x)
 	#define C(x) A(x)
-	B(a)`, []Token{a}, nil},
+	B(a)`, []Token{a}, "", nil},
 
 	{`#define A (a) a
-	A(b)`, []Token{OpLParen, a, OpRParen, a, OpLParen, b, OpRParen}, nil},
+	A(b)`, []Token{OpLParen, a, OpRParen, a, OpLParen, b, OpRParen}, "", nil},
 
-	{"+\\\n+", []Token{ast.UoPreinc}, nil},
+	{"+\\\n+", []Token{ast.UoPreinc}, "", nil},
 
 	{`#define A(int) int
-	A(b)`, []Token{b}, nil},
+	A(b)`, []Token{b}, "", nil},
 
-	{"#define A(", nil, []string{"Macro definition ended unexpectedly."}},
-	{"#define A(*,b)", nil, []string{"Expected an identifier, got '\\*'."}},
-	{"#define A(a*b)", nil, []string{"Expected ',', '\\)', got '\\*'."}},
+	{"#define A(", nil, "", []string{"Macro definition ended unexpectedly."}},
+	{"#define A(*,b)", nil, "", []string{"Expected an identifier, got '\\*'."}},
+	{"#define A(a*b)", nil, "", []string{"Expected ',', '\\)', got '\\*'."}},
 
 	{`#ifdef A
 	#undef Ignored
-	#endif`, nil, nil},
+	#endif`, nil, "", nil},
 
 	{`#ifdef A
 	#error Ignored
-	#endif`, nil, nil},
+	#endif`, nil, "", nil},
 
 	{`#define A B(a
 	#define B(x) b
 	#define C(x) c x
-	C(A)`, []Token{c, B}, []string{"Unexpected end of file while processing a macro."}},
+	C(A)`, []Token{c, B}, "", []string{"Unexpected end of file while processing a macro."}},
 
 	{`#define A(x) a A(x
-	A(b))`, []Token{a, A, OpLParen, b, OpRParen}, nil},
+	A(b))`, []Token{a, A, OpLParen, b, OpRParen}, "", nil},
 
 	{`#define A1(x) A2(x
 	#define A2(x) A3(x
 	#define A3(x) x
 	#define B(x) B(A1(x))
-	B(a))`, []Token{B, OpLParen, a}, nil},
+	B(a))`, []Token{B, OpLParen, a}, "", nil},
 
 	{`__LINE__ a __LINE__
 	b __LINE__ b
-	__LINE__`, []Token{ast.IntValue(1), a, ast.IntValue(1), b, ast.IntValue(2), b, ast.IntValue(3)}, nil},
+	__LINE__`, []Token{ast.IntValue(1), a, ast.IntValue(1), b, ast.IntValue(2), b, ast.IntValue(3)}, "", nil},
 
-	{`__FILE__`, []Token{ast.IntValue(0)}, nil},
-	{`__VERSION__`, []Token{ast.IntValue(300)}, nil},
-	{`GL_ES`, []Token{ast.IntValue(1)}, nil},
+	{`__FILE__`, []Token{ast.IntValue(0)}, "", nil},
+	{`__VERSION__`, []Token{ast.IntValue(300)}, "", nil},
+	{`GL_ES`, []Token{ast.IntValue(1)}, "", nil},
 
 	// #if tests... see note on fakeExpressionEvaluator.
 	{`#if 1
 	A
 	#else
 	B
-	#endif`, []Token{A}, nil},
+	#endif`, []Token{A}, "", nil},
 
 	{`#if 1 2
 	A
 	#else
 	B
-	#endif`, []Token{B}, nil},
+	#endif`, []Token{B}, "", nil},
 
 	{`#if 1
 	A
 	#elif 1
 	B
-	#endif`, []Token{A}, nil},
+	#endif`, []Token{A}, "", nil},
 
 	{`#if 1 2
 	A
 	#elif 1
 	B
-	#endif`, []Token{B}, nil},
+	#endif`, []Token{B}, "", nil},
 
 	{`#if 1 2
 	A
@@ -262,7 +264,7 @@ var preprocessorTests = []struct {
 	B
 	#else
 	C
-	#endif`, []Token{C}, nil},
+	#endif`, []Token{C}, "", nil},
 
 	{`#if 1 2
 	A
@@ -270,40 +272,44 @@ var preprocessorTests = []struct {
 	C
 	#elif 1 2
 	B
-	#endif`, []Token{C}, []string{"#elif after #else"}},
+	#endif`, []Token{C}, "", []string{"#elif after #else"}},
 
-	{`#elif 1`, nil, []string{"Unmatched #elif"}},
+	{`#elif 1`, nil, "", []string{"Unmatched #elif"}},
 
 	{`#define A 1 2
 	#if A
 	a
 	#else
 	b
-	#endif`, []Token{b}, nil},
+	#endif`, []Token{b}, "", nil},
 
 	{`#define A
 	#if defined(A)
 	a
 	#else
 	b
-	#endif`, []Token{a}, nil},
+	#endif`, []Token{a}, "", nil},
 
 	{`#define A
 	#if defined A
 	a
 	#else
 	b
-	#endif`, []Token{a}, nil},
+	#endif`, []Token{a}, "", nil},
 
 	{`#if defined A
 	a
 	#else
 	b
-	#endif`, []Token{a}, nil},
+	#endif`, []Token{a}, "", nil},
 
 	{`#if defined
 	a
-	#endif`, []Token{}, []string{"Operator 'defined' used incorrectly."}},
+	#endif`, []Token{}, "", []string{"Operator 'defined' used incorrectly."}},
+
+	{`#version 100
+	a
+	`, []Token{a}, "100", nil},
 }
 
 // We cannot test #if expressions here, as the expression evaluator is located in the ast package
@@ -315,15 +321,20 @@ func fakeExpressionEvaluator(tp *Preprocessor) (ast.IntValue, []error) {
 	for tp.Next().Token != nil {
 		count++
 	}
-	return ast.IntValue(count % 2), tp.GetErrors()
+	return ast.IntValue(count % 2), tp.Errors()
 }
 
 func TestPreprocessor(t *testing.T) {
 	for _, test := range preprocessorTests {
 		bad := false
-		gotTokens, gotErrors := Preprocess(test.Input, fakeExpressionEvaluator, 0)
+		gotTokens, gotVersion, gotErrors := Preprocess(test.Input, fakeExpressionEvaluator, 0)
 
 		for i := 0; i < len(test.ExpectedTokens) && i < len(gotTokens); i++ {
+			if test.ExpectedVersion != gotVersion {
+				t.Errorf("Version mismatch. Expected '%v', got '%v'.", test.ExpectedVersion, gotVersion)
+				bad = true
+				break
+			}
 			if test.ExpectedTokens[i].String() != gotTokens[i].Token.String() {
 				t.Errorf("Token mismatch at position %d. "+
 					"Expected '%v', got '%v'.",

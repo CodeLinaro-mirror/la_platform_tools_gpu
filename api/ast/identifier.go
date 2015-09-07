@@ -37,6 +37,7 @@ func (t Generic) Node() parse.Node { return t.CST }
 const (
 	// Keyword strings represent places in the syntax where a word has special
 	// meaning.
+	KeywordAbort     = "abort"
 	KeywordAPI       = "api"
 	KeywordAlias     = "alias"
 	KeywordBitfield  = "bitfield"

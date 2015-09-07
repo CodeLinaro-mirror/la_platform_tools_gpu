@@ -210,6 +210,15 @@ func (c Extend) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpExtend, c.Value))
 }
 
+// Add represents the ADD virtual machine opcode.
+type Add struct {
+	Count uint32 // Number of top value stack elements to pop and sum.
+}
+
+func (c Add) Encode(e binary.Encoder) error {
+	return e.Uint32(packCX(protocol.OpAdd, c.Count))
+}
+
 // Extend represents the LABEL virtual machine opcode.
 type Label struct {
 	Value uint32 // 26 bit label name.
@@ -255,6 +264,8 @@ func Decode(d binary.Decoder) (interface{}, error) {
 		return Strcpy{MaxSize: unpackX(i)}, nil
 	case protocol.OpExtend:
 		return Extend{Value: unpackX(i)}, nil
+	case protocol.OpAdd:
+		return Add{Count: unpackX(i)}, nil
 	case protocol.OpLabel:
 		return Label{Value: unpackX(i)}, nil
 	default:

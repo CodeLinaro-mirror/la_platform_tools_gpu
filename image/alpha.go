@@ -19,6 +19,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 type fmtAlpha struct{ binary.Generate }
 
 func (*fmtAlpha) String() string                 { return "Alpha" }
+func (*fmtAlpha) Size(w, h int) int              { return w * h }
 func (*fmtAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }
 
 // Alpha returns a format containing a single 8-bit alpha channel per pixel.

@@ -64,7 +64,8 @@ type Builder struct {
 	heap, temp      allocator
 	resourceIDToIdx map[binary.ID]uint32
 	resources       []protocol.ResourceInfo
-	mappedMemory    memory.RangeList
+	reservedMemory  memory.RangeList
+	mappedMemory    mappedMemoryRangeList
 	instructions    []asm.Instruction
 	decoders        []Postback
 	stack           []stackItem
@@ -89,7 +90,8 @@ func New(architecture device.Architecture) *Builder {
 		temp:            allocator{alignment: uint64(architecture.PointerAlignment)},
 		resourceIDToIdx: map[binary.ID]uint32{},
 		resources:       []protocol.ResourceInfo{},
-		mappedMemory:    memory.RangeList{},
+		reservedMemory:  memory.RangeList{},
+		mappedMemory:    mappedMemoryRangeList{},
 		instructions:    []asm.Instruction{},
 		architecture:    architecture,
 		Remappings:      make(map[interface{}]value.Pointer),
@@ -101,7 +103,17 @@ func (b *Builder) pushStack(t protocol.Type) {
 }
 
 func (b *Builder) popStack() {
+	if len(b.stack) == 0 {
+		panic("Stack underflow")
+	}
 	b.stack = b.stack[:len(b.stack)-1]
+}
+
+func (b *Builder) peekStack() stackItem {
+	if len(b.stack) == 0 {
+		panic("Stack underflow")
+	}
+	return b.stack[len(b.stack)-1]
 }
 
 func (b *Builder) removeInstruction(at int) {
@@ -110,6 +122,30 @@ func (b *Builder) removeInstruction(at int) {
 	} else {
 		b.instructions[at] = asm.Nop{}
 	}
+}
+
+func (b *Builder) remap(ptr value.Pointer) value.Pointer {
+	p, ok := ptr.(value.RemappedPointer)
+	if !ok {
+		return ptr
+	}
+
+	idx := interval.IndexOf(&b.mappedMemory, uint64(p))
+	if idx < 0 {
+		return ptr
+	}
+
+	m := b.mappedMemory[idx]
+	b.instructions = append(b.instructions,
+		// load target address
+		asm.Load{DataType: protocol.TypeAbsolutePointer, Source: m.Target},
+		// push relative offset from target address
+		asm.Push{Value: value.AbsolutePointer(uint64(p) - m.Base)},
+		// apply offset
+		asm.Add{Count: 2},
+	)
+
+	return value.AbsoluteStackPointer{}
 }
 
 // Architecture returns the architecture for the target replay device.
@@ -128,6 +164,7 @@ func (b *Builder) AllocateMemory(size uint64) value.Pointer {
 // in the temporary volatile address-space big enough to hold size bytes. The
 // memory block will be freed on the next call to EndAtom, upon which reading or
 // writing to this memory will result in undefined behavior.
+// TODO: REMOVE
 func (b *Builder) AllocateTemporaryMemory(size uint64) value.Pointer {
 	return value.VolatileTemporaryPointer(b.temp.alloc(size))
 }
@@ -138,6 +175,7 @@ func (b *Builder) AllocateTemporaryMemory(size uint64) value.Pointer {
 // to each of the allocated chunks and the size of the entire allocation. The
 // allocation block will be freed on the next call to EndAtom, upon which
 // reading or writing to this memory will result in undefined behavior.
+// TODO: REMOVE
 func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Pointer, size uint64) {
 	alignment := uint64(b.architecture.PointerAlignment)
 	ptrs = make([]value.Pointer, len(sizes))
@@ -215,7 +253,7 @@ func (b *Builder) RevertAtom(err error) {
 		panic("RevertAtom called without a call to BeginAtom")
 	}
 	b.inAtom = false
-	// TODO: Revert calls to: AllocateMemory, Buffer, String, MapMemory, Write.
+	// TODO: Revert calls to: AllocateMemory, Buffer, String, ReserveMemory, MapMemory, UnmapMemory, Write.
 	b.temp.reset()
 	b.stack = b.stack[:0]
 	if len(b.instructions) > 0 {
@@ -341,7 +379,7 @@ func (b *Builder) Load(ty protocol.Type, addr value.Pointer) {
 	b.pushStack(ty)
 	b.instructions = append(b.instructions, asm.Load{
 		DataType: ty,
-		Source:   addr,
+		Source:   b.remap(addr),
 	})
 }
 
@@ -352,7 +390,7 @@ func (b *Builder) Store(addr value.Pointer) {
 	}
 	b.popStack()
 	b.instructions = append(b.instructions, asm.Store{
-		Destination: addr,
+		Destination: b.remap(addr),
 	})
 }
 
@@ -376,7 +414,7 @@ func (b *Builder) Post(addr value.Pointer, size uint64, p Postback) {
 		panic(fmt.Errorf("Pointer address %v is not valid", addr))
 	}
 	b.instructions = append(b.instructions, asm.Post{
-		Source: addr,
+		Source: b.remap(addr),
 		Size:   size,
 	})
 	b.decoders = append(b.decoders, p)
@@ -384,18 +422,24 @@ func (b *Builder) Post(addr value.Pointer, size uint64, p Postback) {
 
 // Push pushes val to the top of the stack.
 func (b *Builder) Push(val value.Value) {
-	if pv, ok := val.(value.Pointer); ok && !pv.IsValid() {
-		panic(fmt.Errorf("PointerValue %v is not valid", val))
+	if p, ok := val.(value.Pointer); ok {
+		if !p.IsValid() {
+			panic(fmt.Errorf("PointerValue %v is not valid", val))
+		}
+		val = b.remap(p)
 	}
+
 	// HACK: RemappedPointers will use the temporary volatileMemoryLayout to
 	// decide the protocol type of the pointer. This will always be
 	// 'unobserved' and therefor a TypeAbsolutePointer instead of a
 	// TypeVolatilePointer. Nothing really cares at the moment though.
-	ty, _ := val.Get(volatileMemoryLayout{})
+	ty, _, onStack := val.Get(volatileMemoryLayout{})
 	b.pushStack(ty)
-	b.instructions = append(b.instructions, asm.Push{
-		Value: val,
-	})
+	if !onStack {
+		b.instructions = append(b.instructions, asm.Push{
+			Value: val,
+		})
+	}
 }
 
 // Pop removes the top count values from the top of the stack.
@@ -408,9 +452,47 @@ func (b *Builder) Pop(count uint32) {
 	})
 }
 
-// MapMemory adds rng as a memory range that needs allocating for replay.
+// ReserveMemory adds rng as a memory range that needs allocating for replay.
+func (b *Builder) ReserveMemory(rng memory.Range) {
+	interval.Merge(&b.reservedMemory, rng.Span(), true)
+}
+
+// MapMemory maps the memory range rng relative to the absolute pointer that is
+// on the top of the stack. Any RemappedPointers that are used while the pointer
+// is mapped will be automatically adjusted to the remapped address.
+// The mapped memory range can be unmapped with a call to UnmapMemory.
 func (b *Builder) MapMemory(rng memory.Range) {
-	interval.Merge(&b.mappedMemory, rng.Span(), true)
+	if ty := b.peekStack().ty; ty != protocol.TypeAbsolutePointer {
+		panic(fmt.Errorf("MapMemory can only map to absolute pointers. Got type: %v", ty))
+	}
+
+	// Allocate memory to hold the target mapped base address.
+	target := b.AllocateMemory(uint64(b.architecture.PointerSize))
+	b.Store(target)
+
+	s := rng.Span()
+	i := interval.Merge(&b.mappedMemory, s, false)
+	if b.mappedMemory[i].Span() != s {
+		panic(fmt.Errorf("MapMemory range (%v) collides with existing mapped range (%v)",
+			rng, b.mappedMemory[i]))
+	}
+
+	b.mappedMemory[i].Target = target
+}
+
+// UnmapMemory unmaps the memory range rng that was previously mapped with a
+// call to MapMemory. If the memory range is not exactly a range previously
+// mapped with a call to MapMemory then this function panics.
+func (b *Builder) UnmapMemory(rng memory.Range) {
+	i := interval.IndexOf(&b.mappedMemory, rng.Base)
+	if i < 0 {
+		panic(fmt.Errorf("Range (%v) was not mapped", rng))
+	}
+	if b.mappedMemory[i].Span() != rng.Span() {
+		panic(fmt.Errorf("Range passed to UnmapMemory (%v) is not exactly the same range passed to MapMemory (%v)",
+			rng, b.mappedMemory[i]))
+	}
+	interval.Remove(&b.mappedMemory, rng.Span())
 }
 
 // Write fills the memory range in capture address-space rng with the data
@@ -428,10 +510,10 @@ func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 		}
 		b.instructions = append(b.instructions, asm.Resource{
 			Index:       idx,
-			Destination: rng.Base,
+			Destination: b.remap(value.RemappedPointer(rng.Base)),
 		})
 	}
-	b.MapMemory(rng)
+	b.ReserveMemory(rng)
 }
 
 // Build compiles the replay instructions, returning a Payload that can be
@@ -443,13 +525,14 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 		log.Infof(logger, "Instruction count: %d", len(b.instructions))
 	}
 
-	vml := b.layoutVolatileMemory(logger)
-
 	byteOrder := b.architecture.ByteOrder
 
 	opcodes := &bytes.Buffer{}
 	e := flat.Encoder(endian.Writer(opcodes, byteOrder))
 	id := uint32(0)
+
+	vml := b.layoutVolatileMemory(logger, e)
+
 	for _, i := range b.instructions {
 		if label, ok := i.(asm.Label); ok {
 			id = label.Value
@@ -494,7 +577,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 	return payload, responseDecoder, nil
 }
 
-func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout {
+func (b *Builder) layoutVolatileMemory(logger log.Logger, e binary.Encoder) *volatileMemoryLayout {
 	// Volatile memory layout:
 	//
 	//  low ┌──────────────────┐
@@ -502,35 +585,35 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 	//      ├──────────────────┤
 	//      │       temp       │
 	//      ├──────────────────┤
-	//      │ remapped range 0 │
+	//      │ reserved range 0 │
 	//      ├──────────────────┤
 	//      ├──────────────────┤
-	//      │ remapped range N │
+	//      │ reserved range N │
 	// high └──────────────────┘
 
 	tempBase := b.heap.size
-	remapBase := tempBase + b.temp.size
+	reservedBase := tempBase + b.temp.size
 
-	remapped := allocator{alignment: b.heap.alignment}
-	remappedBases := make([]uint64, len(b.mappedMemory))
-	for i, m := range b.mappedMemory {
-		remappedBases[i] = remapBase + remapped.alloc(m.Size)
+	reserved := allocator{alignment: b.heap.alignment}
+	reservedBases := make([]uint64, len(b.reservedMemory))
+	for i, m := range b.reservedMemory {
+		reservedBases[i] = reservedBase + reserved.alloc(m.Size)
 	}
 
-	size := remapBase + remapped.size
+	size := reservedBase + reserved.size
 	vml := &volatileMemoryLayout{
-		mappedMemory:  b.mappedMemory,
-		tempBase:      tempBase,
-		remappedBases: remappedBases,
-		size:          size,
+		tempBase:       tempBase,
+		reservedBases:  reservedBases,
+		size:           size,
+		reservedMemory: b.reservedMemory,
 	}
 
 	if config.DebugReplayBuilder {
 		log.Infof(logger, "Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
 		log.Infof(logger, "  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
-		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
-		for _, m := range b.mappedMemory {
+		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, reservedBase-1)
+		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", reservedBase, size-1)
+		for _, m := range b.reservedMemory {
 			log.Infof(logger, "    Block:   %v", m)
 		}
 	}
@@ -539,14 +622,15 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 }
 
 type volatileMemoryLayout struct {
-	mappedMemory  memory.RangeList // Mapped memory ranges.
-	tempBase      uint64           // Base address of the temp space.
-	remappedBases []uint64         // Base address for each remapped entry in mappedMemory.
-	size          uint64           // Total size of volatile memory.
+	tempBase       uint64           // Base address of the temp space.
+	reservedBases  []uint64         // Base address for each reserved entry in reservedMemory.
+	size           uint64           // Total size of volatile memory.
+	reservedMemory memory.RangeList // Reserved memory ranges.
 }
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
 // the replay/value package.
+// TODO: REMOVE
 func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
 	return l.tempBase + offset
 }
@@ -554,7 +638,7 @@ func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
 // TranslateRemappedPointer implements the PointerResolver interface method in
 // the replay/value package.
 func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.Type, uint64) {
-	bufferIdx := interval.IndexOf(&l.mappedMemory, offset)
+	bufferIdx := interval.IndexOf(&l.reservedMemory, offset)
 	if bufferIdx < 0 {
 		// Pointer is not observed. This can be legal - for example
 		// glVertexAttribPointer may have been passed a pointer that was never
@@ -564,7 +648,7 @@ func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.
 		// Must match value used in cc/gapir/memory_manager.h
 		return protocol.TypeAbsolutePointer, 0xBADF00D
 	}
-	bufferStart := l.mappedMemory[bufferIdx].First()
-	pointer := l.remappedBases[bufferIdx] + offset - uint64(bufferStart)
+	bufferStart := l.reservedMemory[bufferIdx].First()
+	pointer := l.reservedBases[bufferIdx] + offset - uint64(bufferStart)
 	return protocol.TypeVolatilePointer, pointer
 }

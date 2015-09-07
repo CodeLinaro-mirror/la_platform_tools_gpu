@@ -57,8 +57,8 @@ func (p U8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p U8ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p U8ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -107,8 +107,8 @@ func (p U16ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p U16ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p U16ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -157,8 +157,8 @@ func (p U32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p U32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p U32ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -207,8 +207,8 @@ func (p Intᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Intᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Intᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -257,8 +257,8 @@ func (p Charᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Charᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Charᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -326,8 +326,8 @@ func (p Charᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Charᵖᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Charᵖᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -376,8 +376,8 @@ func (p S8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p S8ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p S8ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -426,8 +426,8 @@ func (p S16ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p S16ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p S16ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -476,8 +476,8 @@ func (p F32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p F32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p F32ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -526,8 +526,8 @@ func (p S32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p S32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p S32ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -576,8 +576,8 @@ func (p F64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p F64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p F64ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -626,8 +626,8 @@ func (p U64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p U64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p U64ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -676,8 +676,8 @@ func (p S64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p S64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p S64ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -726,8 +726,8 @@ func (p Boolᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Boolᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Boolᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -766,8 +766,8 @@ func (p Voidᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Voidᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Voidᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -816,8 +816,8 @@ func (p Remappedᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Remappedᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+func (p Remappedᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -941,7 +941,7 @@ func (s Boolˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -953,14 +953,14 @@ func (s Boolˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Boolˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
+func (s Boolˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1109,7 +1109,7 @@ func (s Charˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -1121,14 +1121,14 @@ func (s Charˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Charˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
+func (s Charˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1286,7 +1286,7 @@ func (s Charᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
@@ -1307,14 +1307,14 @@ func (s Charᵖˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Charᵖˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1452,7 +1452,7 @@ func (s F32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -1464,14 +1464,14 @@ func (s F32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s F32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
+func (s F32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1609,7 +1609,7 @@ func (s F64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -1621,14 +1621,14 @@ func (s F64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s F64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
+func (s F64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1766,7 +1766,7 @@ func (s Intˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -1778,14 +1778,14 @@ func (s Intˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Intˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
+func (s Intˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1923,7 +1923,7 @@ func (s Remappedˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v remapped
@@ -1950,7 +1950,7 @@ func (s Remappedˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
@@ -1974,10 +1974,10 @@ func (s Remappedˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	}
 	return s
 }
-func (s Remappedˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
+func (s Remappedˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2115,7 +2115,7 @@ func (s S16ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2127,14 +2127,14 @@ func (s S16ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s S16ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
+func (s S16ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2272,7 +2272,7 @@ func (s S32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2284,14 +2284,14 @@ func (s S32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s S32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
+func (s S32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2429,7 +2429,7 @@ func (s S64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2441,14 +2441,14 @@ func (s S64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s S64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
+func (s S64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2586,7 +2586,7 @@ func (s S8ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟ
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2598,14 +2598,14 @@ func (s S8ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s S8ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
+func (s S8ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2743,7 +2743,7 @@ func (s U16ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2755,14 +2755,14 @@ func (s U16ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s U16ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
+func (s U16ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2900,7 +2900,7 @@ func (s U32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -2912,14 +2912,14 @@ func (s U32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s U32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
+func (s U32ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -3057,7 +3057,7 @@ func (s U64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -3069,14 +3069,14 @@ func (s U64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s U64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
+func (s U64ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -3214,7 +3214,7 @@ func (s U8ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟ
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -3226,14 +3226,14 @@ func (s U8ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s U8ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
+func (s U8ˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -3321,7 +3321,7 @@ func (s Voidˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
@@ -3333,14 +3333,14 @@ func (s Voidˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Voidˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
+func (s Voidˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -5804,4 +5804,6 @@ type Slice interface {
 	Info() SliceInfo
 	// ElementSize returns the size in bytes of a single element in the slice.
 	ElementSize(ϟs *gfxapi.State) uint64
+	// Range returns the memory range this slice represents in the underlying pool.
+	Range(ϟs *gfxapi.State) memory.Range
 }

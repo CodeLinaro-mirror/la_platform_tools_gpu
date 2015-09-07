@@ -15,7 +15,6 @@
 package gles
 
 import (
-	"fmt"
 	"strings"
 	"testing"
 
@@ -24,15 +23,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
-
-// glDevice represents a target device requiring precision strip
-var glDevice = &service.Device{Version: "OpenGL 3.0"}
 
 type mockWriter struct {
 	atoms []atom.Atom
@@ -46,7 +41,9 @@ func p(addr uint64) memory.Pointer {
 	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-func runTest(t *testing.T, src string, expected string) {
+type glShaderSourceCompatTest glslCompatTest
+
+func (c glShaderSourceCompatTest) run(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
@@ -55,28 +52,33 @@ func runTest(t *testing.T, src string, expected string) {
 		ByteOrder:        endian.Little,
 	}
 
-	if tree, err := glsl.Parse(expected, ast.LangVertexShader); len(err) == 0 {
-		expected = fmt.Sprint(glsl.Formatter(tree))
-	} else {
-		t.Errorf("Unexpected error parsing the expected output: %s.", err[0])
+	device := &service.Device{Version: c.target}
+	transform, err := compat(device, d, l)
+	if err != nil {
+		log.E(l, "Failed to create compatability transform: %v", err)
+		return
 	}
 
-	in := []atom.Atom{
-		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
-		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
-		NewGlCreateShader(GLenum_GL_VERTEX_SHADER, 0x10),
-		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
-			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
-			AddRead(atom.Data(a, d, l, p(0x100010), int32(len(src)))).
-			AddRead(atom.Data(a, d, l, p(0x100020), src)),
+	shaderType := GLenum_GL_VERTEX_SHADER
+	if c.lang == ast.LangFragmentShader {
+		shaderType = GLenum_GL_FRAGMENT_SHADER
 	}
 
 	mw := &mockWriter{}
-	ps := precisionStrip(glDevice, d, l)
-	for _, a := range in {
-		ps.Transform(atom.NoID, a, mw)
+	for _, a := range []atom.Atom{
+		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
+		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
+		NewContextInfo("", "", "", "OpenGL ES 2.0", 64, 64, GLenum_GL_RGB565, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_STENCIL_INDEX8, true, true),
+		NewGlCreateShader(shaderType, 0x10),
+		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
+			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
+			AddRead(atom.Data(a, d, l, p(0x100010), int32(len(c.source)))).
+			AddRead(atom.Data(a, d, l, p(0x100020), c.source)),
+	} {
+		transform.Transform(atom.NoID, a, mw)
 	}
 
+	// Find the output glShaderSource atom.
 	var cmd *GlShaderSource
 	for _, a := range mw.atoms {
 		if a, ok := a.(*GlShaderSource); ok {
@@ -104,72 +106,20 @@ func runTest(t *testing.T, src string, expected string) {
 	}
 
 	srcPtr := cmd.Source.Read(cmd, s, d, l, nil) // 0'th glShaderSource string pointer
-
 	got := strings.TrimRight(string(srcPtr.StringSlice(s, d, l).Read(cmd, s, d, l, nil)), "\x00")
+
+	expected, err := glslCompat(c.source, c.lang, &service.Device{Version: c.target})
+	if err != nil {
+		t.Errorf("Unexpected error returned by glslCompat: %v", err)
+	}
 	if got != expected {
-		t.Errorf("Received unexpected string at %v: got `%s`, expected `%s`.", srcPtr, got, expected)
-		t.Errorf("Application memory pool writes:\n%v", s.Memory[memory.ApplicationPool])
+		t.Errorf("Converting to target '%s' produced unexpected output.\nGot:\n%s\nExpected:\n%v",
+			c.target, got, expected)
 	}
 }
 
-func TestStripTop(t *testing.T) {
-	runTest(t, "precision highp int;", "")
-}
-
-func TestStripNested(t *testing.T) {
-	runTest(t, "void main() { precision highp int; }", "void main() { }")
-}
-
-func TestStripIf(t *testing.T) {
-	runTest(t, "void f(bool a) { if(a) precision highp int; }", "void f(bool a) { if(a); }")
-}
-
-func TestStripElse(t *testing.T) {
-	runTest(t, "void f(bool a) { if(a) a=true; else precision highp int; }",
-		"void f(bool a) { if(a) a=true; else ; }")
-}
-
-func TestStripWhile(t *testing.T) {
-	runTest(t, "void f(bool a) { while(a) precision highp int; }",
-		"void f(bool a) { while(a) ; }")
-}
-
-func TestStripDo(t *testing.T) {
-	runTest(t, "void f(bool a) { do precision highp int; while(a); }",
-		"void f(bool a) { do ; while(a); }")
-}
-
-func TestStripFor(t *testing.T) {
-	runTest(t, "void f(bool a) { for(int b=0; b<1; ++b) precision highp int; }",
-		"void f(bool a) { for(int b=0; b<1; ++b) ; }")
-}
-
-func TestStripFunction(t *testing.T) {
-	runTest(t, "highp int f(lowp int b);", "int f(int b);")
-}
-
-func TestStripVarDecl(t *testing.T) {
-	runTest(t, "highp int a;", "int a;")
-}
-
-func TestStripConversion(t *testing.T) {
-	runTest(t, "int a; int b = lowp int(a);", "int a; int b = int(a);")
-}
-
-func TestStripPassthrough(t *testing.T) {
-	d, l := database.Database(nil), log.Testing(t)
-	s := precisionStrip(glDevice, d, l)
-	mw := &mockWriter{}
-	a := &GlGetError{}
-
-	s.Transform(0, a, mw)
-
-	if len(mw.atoms) != 1 {
-		t.Errorf("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
-	}
-
-	if mw.atoms[0] != a {
-		t.Errorf("Received wrong atom: got `%v`, expected `%v`.", mw.atoms[0], a)
-		return
+func TestShaderCompat(t *testing.T) {
+	for _, test := range glslCompatTests {
+		glShaderSourceCompatTest(test).run(t)
 	}
 }

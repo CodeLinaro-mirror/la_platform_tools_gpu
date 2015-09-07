@@ -18,7 +18,8 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type fmtETC1_RGB8_OES struct{ binary.Generate }
 
-func (*fmtETC1_RGB8_OES) String() string { return "ETC1_RGB8_OES" }
+func (*fmtETC1_RGB8_OES) String() string    { return "ETC1_RGB8_OES" }
+func (*fmtETC1_RGB8_OES) Size(w, h int) int { return (max(w, 4) * max(h, 4)) / 2 }
 func (*fmtETC1_RGB8_OES) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 4)
 }

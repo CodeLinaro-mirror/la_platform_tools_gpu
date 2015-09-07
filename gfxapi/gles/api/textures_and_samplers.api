@@ -1803,13 +1803,13 @@ cmd void glTexSubImage2D(GLenum         target,
   }
   line_bytes := imageSize(as!u32(width), 1, format, type)
 
-  fence
-
   for y in (0 .. as!u32(height)) {
     src := (src_stride*y)
     dst := (dst_stride*y) + dst_offset
     copy(image.Data[dst:dst+line_bytes], src_data[src:src+line_bytes])
   }
+
+  fence
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glTexSubImage3D.xhtml","OpenGL ES 3.0")

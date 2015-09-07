@@ -24,7 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
-	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 var (
@@ -129,7 +128,7 @@ func (a api) Replay(
 		// undefined-framebuffer pattern.
 		preserveBuffersOnSwap := false
 		for _, a := range atoms.Atoms {
-			if b, ok := a.(*BackbufferInfo); ok && b.PreserveBuffersOnSwap {
+			if b, ok := a.(*ContextInfo); ok && b.PreserveBuffersOnSwap {
 				preserveBuffersOnSwap = true
 				break
 			}
@@ -147,10 +146,13 @@ func (a api) Replay(
 	)
 
 	// Device-dependent transforms.
-	transforms.Add(
-		decompressTextures(device, &path.Capture{ID: ctx.Capture}, d, l),
-		precisionStrip(device, d, l),
-		halfFloatOESToHalfFloatARB(device))
+	transforms.Add(halfFloatOESToHalfFloatARB(device))
+
+	if c, err := compat(device, d, l); err == nil {
+		transforms.Add(c)
+	} else {
+		log.E(l, "Failed to create compatability transform: %v", err)
+	}
 
 	// Cleanup
 	transforms.Add(&destroyResourcesAtEOS{
@@ -313,7 +315,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(vertexArrays) > 0 {
 		out.Write(id,
-			NewGlDeleteVertexArraysOES(GLsizei(len(vertexArrays)), memory.Tmp).
+			NewGlDeleteVertexArrays(GLsizei(len(vertexArrays)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, vertexArrays)))
 	}
 

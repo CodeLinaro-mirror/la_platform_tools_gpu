@@ -71,6 +71,7 @@
 {{define "Go.Null"}}
   {{AssertType $ "Type"}}
   {{     if IsPointer       $}}{{Template "Go.Type" $}}{}
+  {{else if IsSlice         $}}{{Template "Go.Type" $}}{}
   {{else if IsReference     $}}{{Template "Go.Type" $}}(nil)
   {{else if IsBool          $}}false
   {{else if IsInt           $}}int(0)
@@ -303,6 +304,7 @@
 */}}
 {{define "Go.Statement.Default"}}
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Template "Go.Read" $.Local.Value}} {{Template "Go.TypeComment" (TypeOf $.Local)}}
+  {{else if IsAbort        $}}{{Template "Go.Abort" $}}
   {{else if IsAssert       $}}
   {{else if IsAssign       $}}{{Template "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
   {{else if IsArrayAssign  $}}{{Template "Go.ArrayAssign" $}}
@@ -319,6 +321,18 @@
   {{else if IsSwitch       $}}{{Template "Go.Switch" $}}
   {{else}}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute an abort statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Abort"}}
+  {{AssertType $ "Abort"}}
+
+  return
 {{end}}
 
 
@@ -424,8 +438,12 @@
           {{Template "Go.Block" $c.Block}}
     {{end}}
     default:
+    {{if IsNil $.Default}}
       v := {{Template "Go.Read" $.Value}}
       return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+    {{else}}
+      {{Template "Go.Block" $.Default}}
+    {{end}}
   }
 {{end}}
 
@@ -514,10 +532,10 @@
     {{/*
       If the expression is inferred, then it is the output of a command.
       When building a replay, Read with ϟb would replace the output memory with
-      observed memory which is undesirable, so instead just map the memory and
-      perform regular (non-replay-builder) read logic.
+      observed memory which is undesirable, so instead just perform regular
+      (non-replay-builder) read logic.
     */}}
-    MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)
+    Read(ϟa, ϟs, ϟd, ϟl, nil)
   {{else}}
     Read(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{end}}
@@ -868,7 +886,7 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the replay builder type for the given command return type.
+  Emits the replay builder type for the given command non-return type.
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Replay.Type"}}
@@ -893,6 +911,21 @@
   {{else if IsString    $}}protocol.TypeVolatilePointer
   {{else if IsPointer   $}}protocol.TypeVolatilePointer {{/* TODO: Might be absolute... */}}
   {{else}}{{Error "macro Go.Replay.Type called with unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the replay builder type for the given command return type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Replay.ReturnType"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym $}}{{Template "Go.Replay.ReturnType" $.To}}
+  {{else if IsPointer   $}}protocol.TypeAbsolutePointer
+  {{else}}{{Template "Go.Replay.Type" $}}
   {{end}}
 {{end}}
 

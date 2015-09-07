@@ -16,10 +16,11 @@
 package sema
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
 	"fmt"
 	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
 )
 
 func isNumeric(t *ast.BuiltinType) bool { return isFundNumeric(ast.GetFundamentalType(t.Type)) }

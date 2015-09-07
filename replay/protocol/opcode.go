@@ -34,7 +34,8 @@ const (
 	OpClone    = 11
 	OpStrcpy   = 12
 	OpExtend   = 13
-	OpLabel    = 14
+	OpAdd      = 14
+	OpLabel    = 15
 )
 
 // String returns the human-readable name of the opcode.
@@ -68,6 +69,8 @@ func (t Opcode) String() string {
 		return "Strcpy"
 	case OpExtend:
 		return "Extend"
+	case OpAdd:
+		return "Add"
 	case OpLabel:
 		return "Label"
 	default:

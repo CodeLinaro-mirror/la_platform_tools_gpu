@@ -271,7 +271,7 @@ func (b *builder) parseShaderPrimaryExpression() ast.Expression {
 		paren := b.peekToken() == pp.OpLParen
 		_, isFun := sym.(ast.Function)
 		if sym == nil {
-			b.Error("Undeclared identifier '%s'.", t)
+			b.Errorf("Undeclared identifier '%s'.", t)
 		} else {
 			if paren != isFun {
 				var s string
@@ -280,7 +280,7 @@ func (b *builder) parseShaderPrimaryExpression() ast.Expression {
 				} else {
 					s = " not"
 				}
-				b.Error("Syntax error: '%s' is%s a function.", sym.Name(), s)
+				b.Errorf("Syntax error: '%s' is%s a function.", sym.Name(), s)
 			}
 		}
 		ref := &ast.VarRefExpr{sym, cst}

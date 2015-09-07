@@ -183,7 +183,7 @@ private:
             if (stack->mStack[stack->mTop].type() != baseType) {
                 stack->mValid = false;
                 GAPID_WARNING(
-                        "Pop type (%s) doesn't match with the type at the top of the stack (%s)\n",
+                        "Pop type (%s) doesn't match with the type at the top of the stack (%s)",
                         baseTypeName(baseType),
                         baseTypeName(stack->mStack[stack->mTop].type()));
                 return T();
@@ -217,7 +217,8 @@ private:
             T t;
             if (!getTo(&t)) {
                 GAPID_WARNING(
-                    "Error: read stack value inappropriate type %s wanted %s\n", baseTypeName(mType), baseTypeName(TypeToBaseType<T>::type));
+                    "Error: read stack value inappropriate type %s wanted %s",
+                    baseTypeName(mType), baseTypeName(TypeToBaseType<T>::type));
                 return T();
             }
             return t;

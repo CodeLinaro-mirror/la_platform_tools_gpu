@@ -46,6 +46,9 @@ func requireStatement(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if g := return_(p, cst); g != nil {
 		return g
 	}
+	if g := abort(p, cst); g != nil {
+		return g
+	}
 	if g := fence(p, cst); g != nil {
 		return g
 	}
@@ -148,6 +151,19 @@ func return_(p *parse.Parser, cst *parse.Branch) *ast.Return {
 		s.Value = requireExpression(p, cst)
 	})
 	return s
+}
+
+// 'abort' statement
+func abort(p *parse.Parser, cst *parse.Branch) *ast.Abort {
+	if !peekKeyword(ast.KeywordAbort, p) {
+		return nil
+	}
+	f := &ast.Abort{}
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		requireKeyword(ast.KeywordAbort, p, cst)
+		f.CST = cst
+	})
+	return f
 }
 
 // 'fence' statement

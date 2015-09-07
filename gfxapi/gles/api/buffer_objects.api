@@ -395,6 +395,8 @@ cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GL
 
   b.MappingAccess = access
   b.MappingData = ptr[0:length]
+  mapMemory(b.MappingData)
+
   if GL_MAP_READ_BIT in access {
     src := b.Data[offset:offset + as!GLintptr(length)]
     dst := b.MappingData
@@ -433,6 +435,9 @@ cmd GLboolean glUnmapBuffer(GLenum target) {
   // if GL_MAP_WRITE_BIT in b.MappingAccess { // TEMP HACK: Commented as 'fence not allowed in *semantic.Branch'
   copy(b.Data[b.MappingOffset:b.MappingOffset + len(b.MappingData)], b.MappingData)
   // }
+  unmapMemory(b.MappingData)
+  b.MappingOffset = null
+  b.MappingData   = null
+
   return ?
 }
-
