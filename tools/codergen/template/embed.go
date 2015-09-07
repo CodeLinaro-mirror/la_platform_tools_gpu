@@ -1261,7 +1261,7 @@ const java_enum_tmpl = `{{/*
     public boolean equals(Object o) {»¶
       if (this == o) return true;¶
       if (o == null || !(o instanceof {{$name}})) return false;¶
-      return value != (({{$name}})o).value;¶
+      return value == (({{$name}})o).value;¶
     «}¶
     ¶
     @Override¶
