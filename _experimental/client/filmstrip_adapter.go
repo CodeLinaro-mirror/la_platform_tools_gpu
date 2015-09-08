@@ -76,7 +76,7 @@ func (a *FilmStripAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	p := a.capture.Atoms().Index(atomIndex)
 
 	i := theme.CreateImage()
-	i.SetAspectMode(gxui.AspectCorrectCrop)
+	i.SetAspectMode(gxui.AspectCorrectLetterbox)
 	i.SetExplicitSize(math.Size{W: w, H: h})
 
 	b := theme.CreateButton()
