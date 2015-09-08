@@ -27,6 +27,7 @@
   {{AssertType $ "API"}}
   {{Template "C++.AOSP.Copyright"}}
 ¶
+  #include "gles_exports.h"
   #include "{{Global "API"}}_imports.h"
   #include "{{Global "API"}}_types.h"
   #include "spy.h"
@@ -56,6 +57,25 @@
   EXPORT void* STDCALL glXGetProcAddressARB(const char* name);
   »} // extern "C"
 ¶
+
+namespace gapii {
+
+const Symbol kGLESExports[] = {
+{{range $i, $c := AllCommands $}}
+  {{$name := Macro "CmdName" $c}}
+  {{if not (GetAnnotation $c "synthetic")}}
+    {"{{$name}}", reinterpret_cast<void*>({{$name}})},
+  {{end}}
+{{end}}
+  {"eglGetProcAddress",    reinterpret_cast<void*>(eglGetProcAddress)},
+  {"wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress)},
+  {"glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress)},
+  {"glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB)},
+  {NULL, NULL}
+};
+
+} // namespace gapii
+
   namespace {«
 ¶
   gapic::Mutex         gMutex;  // Guards gSpy.
@@ -68,16 +88,9 @@
       GAPID_INFO("Constructing spy...");
       gSpy.reset(new Spy());
       GAPID_INFO("Registering spy symbols...");
-      {{range $i, $c := AllCommands $}}
-        {{$name := Macro "CmdName" $c}}
-        {{if not (GetAnnotation $c "synthetic")}}
-          gSpy->RegisterSymbol("{{$name}}", reinterpret_cast<void*>({{$name}}));
-        {{end}}
-      {{end}}
-      gSpy->RegisterSymbol("eglGetProcAddress",    reinterpret_cast<void*>(eglGetProcAddress));
-      gSpy->RegisterSymbol("wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress));
-      gSpy->RegisterSymbol("glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress));
-      gSpy->RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
+      for (int i = 0; kGLESExports[i].mName != NULL; ++i) {
+      	gSpy->RegisterSymbol(kGLESExports[i].mName, kGLESExports[i].mFunc);
+      }
     }
     return gSpy.get();
   }
