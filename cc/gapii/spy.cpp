@@ -51,6 +51,10 @@ inline bool isLittleEndian() {
 
 namespace gapii {
 
+// TODO: put on a flag.
+bool gObserveFramebufferOnEOF = false;
+
+
 // Use a "localabstract" pipe on Android to prevent depending on the traced application
 // having the INTERNET permission set, required for opening and listening on a TCP socket.
 Spy::Spy() {
@@ -59,9 +63,9 @@ Spy::Spy() {
 #else // TARGET_OS
     auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
 #endif
-    auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
-    encoder->String("GapiiTraceFile_V1.0");
-    GlesSpy::init(encoder);
+    mEncoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
+    mEncoder->String("GapiiTraceFile_V1.0");
+    GlesSpy::init(mEncoder);
     GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
 }
 
@@ -206,6 +210,114 @@ void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
                          backbuffer_color_fmt, backbuffer_depth_fmt,
                          backbuffer_stencil_fmt, reset_viewport_scissor,
                          preserve_buffers_on_swap);
+}
+
+int Spy::eglSwapBuffers(void* display, void* surface) {
+    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    return GlesSpy::eglSwapBuffers(display, surface);
+}
+
+void Spy::wglSwapBuffers(void* hdc) {
+    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    GlesSpy::wglSwapBuffers(hdc);
+}
+
+void Spy::glXSwapBuffers(void* display, void* drawable) {
+    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    GlesSpy::glXSwapBuffers(display, drawable);
+}
+
+int Spy::CGLFlushDrawable(void* ctx) {
+    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    return GlesSpy::CGLFlushDrawable(ctx);
+}
+
+// observeFramebuffer captures the currently bound framebuffer, and writes
+// it to a FramebufferObservation atom.
+void Spy::observeFramebuffer() {
+    uint32_t w = 0;
+    uint32_t h = 0;
+    if (!getFramebufferAttachmentSize(w, h)) {
+        return; // Could not get the framebuffer size.
+    }
+    uint32_t size = w * h * 4;
+    uint8_t* data = new uint8_t[size];
+    if (data != nullptr) {
+        mImports.glReadPixels(0, 0, int32_t(w), int32_t(h),
+                GLenum::GL_RGBA, GLenum::GL_UNSIGNED_BYTE, data);
+        gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Array<uint8_t>(data, size));
+        mEncoder->Object(&coder);
+        delete [] data;
+    } else {
+        GAPID_WARNING("Failed to allocate buffer to observe framebuffer of size %ux%u", w, h);
+    }
+}
+
+// TODO: When gfx api macros produce functions instead of inlining, move this logic
+// to the gles.api file.
+bool Spy::getFramebufferAttachmentSize(uint32_t& width, uint32_t& height) {
+    std::shared_ptr<Context> ctx = GlesSpy::Contexts[GlesSpy::CurrentThread];
+    if (ctx == nullptr) {
+      return false;
+    }
+
+    auto framebufferID = ctx->mBoundFramebuffers.find(GLenum::GL_READ_FRAMEBUFFER);
+    if (framebufferID == ctx->mBoundFramebuffers.end()) {
+        return false;
+    }
+
+    auto framebuffer = ctx->mInstances.mFramebuffers.find(framebufferID->second);
+    if (framebuffer == ctx->mInstances.mFramebuffers.end()) {
+        return false;
+    }
+
+    auto attachment = framebuffer->second->mAttachments.find(GLenum::GL_COLOR_ATTACHMENT0);
+    if (attachment == framebuffer->second->mAttachments.end()) {
+        return false;
+    }
+
+    switch (attachment->second.mType) {
+        case GLenum::GL_TEXTURE: {
+            auto t = ctx->mInstances.mTextures.find(attachment->second.mObject);
+            if (t == ctx->mInstances.mTextures.end()) {
+                return false;
+            }
+            switch (t->second->mKind) {
+                case TextureKind::TEXTURE2D: {
+                    auto l = t->second->mTexture2D.find(attachment->second.mTextureLevel);
+                    if (l == t->second->mTexture2D.end()) {
+                        return false;
+                    }
+                    width = uint32_t(l->second.mWidth);
+                    height = uint32_t(l->second.mHeight);
+                    return true;
+                }
+                case TextureKind::CUBEMAP: {
+                    auto l = t->second->mCubemap.find(attachment->second.mTextureLevel);
+                    if (l == t->second->mCubemap.end()) {
+                        return false;
+                    }
+                    auto f = l->second.mFaces.find(attachment->second.mCubeMapFace);
+                    if (f == l->second.mFaces.end()) {
+                        return false;
+                    }
+                    width = uint32_t(f->second.mWidth);
+                    height = uint32_t(f->second.mHeight);
+                    return true;
+                }
+            }
+        }
+        case GLenum::GL_RENDERBUFFER: {
+            auto r = ctx->mInstances.mRenderbuffers.find(attachment->second.mObject);
+            if (r == ctx->mInstances.mRenderbuffers.end()) {
+                return false;
+            }
+            width = uint32_t(r->second->mWidth);
+            height = uint32_t(r->second->mHeight);
+            return true;
+        }
+    }
+    return false;
 }
 
 } // namespace gapii

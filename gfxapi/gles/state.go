@@ -28,6 +28,8 @@ func (s *State) getContext() *Context {
 	return s.Contexts[s.CurrentThread]
 }
 
+// TODO: When gfx api macros produce functions instead of inlining, move this logic
+// to the gles.api file.
 func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (width, height uint32, err error) {
 	c := s.getContext()
 	if c == nil {
