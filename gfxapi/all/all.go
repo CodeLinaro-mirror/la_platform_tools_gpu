@@ -16,6 +16,7 @@
 package all
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
@@ -24,6 +25,7 @@ import (
 var GraphicsNamespace = registry.NewNamespace()
 
 func init() {
+	GraphicsNamespace.Add((*atom.FramebufferObservation)(nil).Class())
 	GraphicsNamespace.AddFallbacks(gles.Namespace)
 }
 
