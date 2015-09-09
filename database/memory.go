@@ -53,6 +53,9 @@ func (d *memory) Store(id binary.ID, v interface{}, logger log.Logger) error {
 
 // store function must be called with a locked mutex
 func (d *memory) store(id binary.ID, v interface{}, logger log.Logger) error {
+	if v == nil {
+		panic("Store nil in database (that is bad)")
+	}
 	r, got := d.records[id]
 	if !got {
 		d.records[id] = &record{value: v}
