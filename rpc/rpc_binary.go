@@ -28,18 +28,12 @@ func (*Error) Class() binary.Class {
 	return (*binaryClassError)(nil)
 }
 func doEncodeError(e binary.Encoder, o *Error) error {
-	if err := e.String(o.message); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.message)
+	return e.Error()
 }
 func doDecodeError(d binary.Decoder, o *Error) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.message = string(obj)
-	}
-	return nil
+	o.message = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassError) ID() binary.ID      { return binaryIDError }
 func (*binaryClassError) New() binary.Object { return &Error{} }

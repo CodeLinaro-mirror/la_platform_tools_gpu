@@ -80,7 +80,7 @@ func (d *decoder) ID() (binary.ID, error) {
 	}
 	id, found := d.ids[sid]
 	if !found {
-		fmt.Errorf("Unknown id sid %v", sid)
+		return id, d.SetError(fmt.Errorf("Unknown id sid %v", sid))
 	}
 	return id, nil
 }
@@ -102,7 +102,7 @@ func (d *decoder) Variant() (binary.Object, error) {
 	if id, err := d.ID(); err != nil {
 		return nil, err
 	} else if class := d.Namespace.Lookup(id); class == nil {
-		return nil, fmt.Errorf("Unknown type id %v", id)
+		return nil, d.SetError(fmt.Errorf("Unknown type id %v", id))
 	} else {
 		return class.Decode(d)
 	}
@@ -145,7 +145,7 @@ func (d *decoder) Object() (binary.Object, error) {
 	case found:
 		return o, nil
 	default:
-		return nil, fmt.Errorf("Unknown object sid %v", sid)
+		return nil, d.SetError(fmt.Errorf("Unknown object sid %v", sid))
 	}
 }
 

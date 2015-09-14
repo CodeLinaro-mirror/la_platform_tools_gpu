@@ -173,8 +173,8 @@ func TestCallResolveResource(t *testing.T) {
 
 func TestCallUseResource(t *testing.T) {
 	client, server := create(t)
-	client.UseResource(testResourceID, log.Testing(t))
-	verifyCalls(t, server, nil, fmt.Sprintf("UseResource(%v)", testResourceID))
+	err := client.UseResource(testResourceID, log.Testing(t))
+	verifyCalls(t, server, err, fmt.Sprintf("UseResource(%v)", testResourceID))
 }
 
 func TestCallGetSingleListNode(t *testing.T) {

@@ -31,15 +31,11 @@ func (*Texture) Class() binary.Class {
 	return (*binaryClassTexture)(nil)
 }
 func doEncodeTexture(e binary.Encoder, o *Texture) error {
-	if err := e.Uint32(uint32(len(o.Levels))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.Levels)))
 	for i := range o.Levels {
-		if err := e.Value(&o.Levels[i]); err != nil {
-			return err
-		}
+		e.Value(&o.Levels[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	if count, err := d.Uint32(); err != nil {
@@ -47,12 +43,10 @@ func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	} else {
 		o.Levels = make([]image.Info, count)
 		for i := range o.Levels {
-			if err := d.Value(&o.Levels[i]); err != nil {
-				return err
-			}
+			d.Value(&o.Levels[i])
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
 func (*binaryClassTexture) New() binary.Object { return &Texture{} }

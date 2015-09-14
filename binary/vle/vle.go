@@ -15,10 +15,9 @@
 package vle
 
 import (
+	"fmt"
 	"io"
-	"io/ioutil"
 	"math"
-	"os"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
@@ -36,11 +35,13 @@ func Writer(w io.Writer) binary.Writer {
 type reader struct {
 	reader io.Reader
 	tmp    [9]byte
+	err    error
 }
 
 type writer struct {
 	writer io.Writer
 	tmp    [9]byte
+	err    error
 }
 
 func shuffle32(v uint32) uint32 {
@@ -118,28 +119,28 @@ func (w *writer) uintv(v uint64) error {
 }
 
 func (r *reader) Data(p []byte) error {
+	if r.err != nil {
+		return fmt.Errorf("Reading was stopped due to an earlier error: %v", r.err)
+	}
 	_, err := io.ReadFull(r.reader, p)
+	r.err = err
 	return err
 }
 
 func (w *writer) Data(data []byte) error {
+	if w.err != nil {
+		return fmt.Errorf("Writing was stopped due to an earlier error: %v", w.err)
+	}
 	n, err := w.writer.Write(data)
 	if err != nil {
+		w.err = err
 		return err
 	}
 	if n != len(data) {
+		w.err = io.ErrShortWrite
 		return io.ErrShortWrite
 	}
 	return nil
-}
-
-func (r *reader) Skip(count uint32) error {
-	if s, ok := r.reader.(io.Seeker); ok {
-		_, err := s.Seek(int64(count), os.SEEK_CUR)
-		return err
-	}
-	_, err := io.CopyN(ioutil.Discard, r.reader, int64(count))
-	return err
 }
 
 func (r *reader) Bool() (bool, error) {
@@ -164,8 +165,12 @@ func (w *writer) Int8(v int8) error {
 }
 
 func (r *reader) Uint8() (uint8, error) {
+	if r.err != nil {
+		return 0, fmt.Errorf("Reading was stopped due to an earlier error: %v", r.err)
+	}
 	b := r.tmp[:1]
 	_, err := io.ReadFull(r.reader, b[:1])
+	r.err = err
 	return b[0], err
 }
 
@@ -215,17 +220,33 @@ func (r *reader) String() (string, error) {
 	return string(s), err
 }
 
-func (r *reader) SkipString() error {
-	c, err := r.Uint32()
-	if err != nil || c == 0 {
-		return err
-	}
-	return r.Skip(c)
-}
-
 func (w *writer) String(v string) error {
 	if err := w.Uint32(uint32(len(v))); err != nil {
 		return err
 	}
 	return w.Data([]byte(v))
+}
+
+func (r *reader) Error() error {
+	return r.err
+}
+
+func (w *writer) Error() error {
+	return w.err
+}
+
+func (r *reader) SetError(err error) error {
+	if r.err != nil {
+		err = fmt.Errorf("Error %v whilst in error state %v", err, r.err)
+	}
+	r.err = err
+	return err
+}
+
+func (w *writer) SetError(err error) error {
+	if w.err != nil {
+		err = fmt.Errorf("Error %v whilst in error state %v", err, w.err)
+	}
+	w.err = err
+	return err
 }

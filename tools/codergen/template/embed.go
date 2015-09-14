@@ -193,13 +193,13 @@ const go_binary_tmpl = `{{/*
     {{range .Fields}}
       {{Call "Go.Encode" (Var .Type "o." .Name)}}
     {{end}}
-    return nil¶
+    return e.Error()¶
   «}¶
   func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
     {{range .Fields}}
       {{Call "Go.Decode" (Var .Type "o." .Name)}}
     {{end}}
-    return nil¶
+    return d.Error()¶
   «}¶
   {{$base := 18}}
   {{$wrap := gt (len .Name) (add $base 7)}}
@@ -246,68 +246,39 @@ const go_binary_tmpl = `{{/*
 
 {{define "Go.Encode.Primitive"}}
   {{if eq .Type.Native .Type.Name}}
-    if err := e.{{.Type.Method}}({{.Name}}); err != nil {»¶
-      return err¶
-    «}¶
+    e.{{.Type.Method}}({{.Name}})¶
   {{else}}
-    if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil {»¶
-      return err¶
-    «}¶
+    e.{{.Type.Method}}({{.Type.Native}}({{.Name}}))¶
   {{end}}
 {{end}}
 
 {{define "Go.Encode.Struct"}}
-  if err := e.Value(&{{.Name}}); err != nil {»¶
-    return err¶
-  «}¶
+  e.Value(&{{.Name}})¶
 {{end}}
 
 {{define "Go.Encode.Pointer"}}
   if {{.Name}} != nil {»¶
-    if err := e.Object({{.Name}}); err != nil {»¶
-      return err¶
-    «}¶
-  «} else if err := e.Object(nil); err != nil {»¶
-    return err¶
+    e.Object({{.Name}})¶
+  «} else {»¶
+    e.Object(nil)¶
   «}¶
 {{end}}
 
 {{define "Go.Encode.Interface"}}
-  if {{.Name}} != nil {»¶
-    if err := e.Object({{.Name}}); err != nil {»¶
-      return err¶
-    «}¶
-  «} else if err := e.Object(nil); err != nil {»¶
-    return err¶
-  «}¶
+  e.Object({{.Name}})¶
 {{end}}
 
 {{define "Go.Encode.Any"}}
-  if {{.Name}} != nil {»¶
-    var boxed binary.Object¶
-    boxed, err := any.Box({{.Name}})¶
-    if err != nil {»¶
-      return err¶
-    «}¶
-    if err := e.Variant(boxed); err != nil {»¶
-      return err¶
-    «}¶
-  «} else if err := e.Variant(nil); err != nil {»¶
-    return err¶
-  «}¶
+  any.Encode(e, {{.Name}})¶
 {{end}}
 
 {{define "Go.Encode_Length"}}
-  if err := e.Uint32(uint32(len({{.Name}}))); err != nil {»¶
-    return err¶
-  «}¶
+  e.Uint32(uint32(len({{.Name}})))¶
 {{end}}
 
 {{define "Go.Encode#[]uint8"}}
   {{template "Go.Encode_Length" $}}
-  if err := e.Data({{.Name}}); err != nil {»¶
-    return err¶
-  «}¶
+  e.Data({{.Name}})¶
 {{end}}
 
 {{define "Go.Encode.Slice"}}
@@ -332,23 +303,15 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Primitive"}}
-  if obj, err := d.{{.Type.Method}}(); err != nil {»¶
-    return err¶
-  «} else {»¶
-    {{.Name}} = {{.Type.Name}}(obj)¶
-  «}¶
+  {{.Name}} = {{.Type.Name}}(binary.Read{{.Type.Method}}(d))¶
 {{end}}
 
 {{define "Go.Decode.Struct"}}
-  if err := d.Value(&{{.Name}}); err != nil {»¶
-    return err¶
-  «}¶
+  d.Value(&{{.Name}})¶
 {{end}}
 
 {{define "Go.Decode.Pointer"}}
-  if obj, err := d.Object(); err != nil {»¶
-    return err¶
-  «} else if obj != nil {»¶
+  if obj, err := d.Object(); obj != nil && err == nil {»¶
     {{.Name}} = obj.({{.Type}})¶
   «} else {»¶
     {{.Name}} = nil¶
@@ -356,9 +319,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Interface"}}
-  if obj, err := d.Object(); err != nil {»¶
-    return err¶
-  «} else if obj != nil {»¶
+  if obj, err := d.Object(); obj != nil && err == nil {»¶
     {{.Name}} = obj.({{.Type.Name}})¶
   «} else {»¶
     {{.Name}} = nil¶
@@ -366,15 +327,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Any"}}
-  if boxed, err := d.Variant(); err != nil {»¶
-    return err¶
-  «} else if boxed != nil {»¶
-    if {{.Name}}, err = any.Unbox(boxed); err != nil {»¶
-      return err¶
-    «}¶
-  «} else {»¶
-    {{.Name}} = nil¶
-  «}¶
+  {{.Name}}, _ = any.Decode(d)¶
 {{end}}
 
 {{define "Go.Decode_Length"}}
@@ -386,9 +339,7 @@ const go_binary_tmpl = `{{/*
 
 {{define "Go.Decode#[]uint8"}}
   {{template "Go.Decode_Length" $}}
-    if err := d.Data({{.Name}}); err != nil {»¶
-      return err¶
-      «}¶
+    d.Data({{.Name}})¶
   «}¶
 {{end}}
 

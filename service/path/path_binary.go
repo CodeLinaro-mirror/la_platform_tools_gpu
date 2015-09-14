@@ -65,32 +65,18 @@ func (*ArrayIndex) Class() binary.Class {
 	return (*binaryClassArrayIndex)(nil)
 }
 func doEncodeArrayIndex(e binary.Encoder, o *ArrayIndex) error {
-	if o.Array != nil {
-		if err := e.Object(o.Array); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Index); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Array)
+	e.Uint64(o.Index)
+	return e.Error()
 }
 func doDecodeArrayIndex(d binary.Decoder, o *ArrayIndex) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Array = obj.(Path)
 	} else {
 		o.Array = nil
 	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Index = uint64(obj)
-	}
-	return nil
+	o.Index = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassArrayIndex) ID() binary.ID      { return binaryIDArrayIndex }
 func (*binaryClassArrayIndex) New() binary.Object { return &ArrayIndex{} }
@@ -122,45 +108,18 @@ func (*As) Class() binary.Class {
 	return (*binaryClassAs)(nil)
 }
 func doEncodeAs(e binary.Encoder, o *As) error {
-	if o.Object != nil {
-		if err := e.Object(o.Object); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if o.Type != nil {
-		var boxed binary.Object
-		boxed, err := any.Box(o.Type)
-		if err != nil {
-			return err
-		}
-		if err := e.Variant(boxed); err != nil {
-			return err
-		}
-	} else if err := e.Variant(nil); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Object)
+	any.Encode(e, o.Type)
+	return e.Error()
 }
 func doDecodeAs(d binary.Decoder, o *As) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Object = obj.(Path)
 	} else {
 		o.Object = nil
 	}
-	if boxed, err := d.Variant(); err != nil {
-		return err
-	} else if boxed != nil {
-		if o.Type, err = any.Unbox(boxed); err != nil {
-			return err
-		}
-	} else {
-		o.Type = nil
-	}
-	return nil
+	o.Type, _ = any.Decode(d)
+	return d.Error()
 }
 func (*binaryClassAs) ID() binary.ID      { return binaryIDAs }
 func (*binaryClassAs) New() binary.Object { return &As{} }
@@ -192,18 +151,12 @@ func (*Capture) Class() binary.Class {
 	return (*binaryClassCapture)(nil)
 }
 func doEncodeCapture(e binary.Encoder, o *Capture) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.ID)
+	return e.Error()
 }
 func doDecodeCapture(d binary.Decoder, o *Capture) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
+	o.ID = binary.ID(binary.ReadID(d))
+	return d.Error()
 }
 func (*binaryClassCapture) ID() binary.ID      { return binaryIDCapture }
 func (*binaryClassCapture) New() binary.Object { return &Capture{} }
@@ -235,23 +188,19 @@ func (*Atoms) Class() binary.Class {
 }
 func doEncodeAtoms(e binary.Encoder, o *Atoms) error {
 	if o.Capture != nil {
-		if err := e.Object(o.Capture); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Capture)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeAtoms(d binary.Decoder, o *Atoms) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Capture = obj.(*Capture)
 	} else {
 		o.Capture = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassAtoms) ID() binary.ID      { return binaryIDAtoms }
 func (*binaryClassAtoms) New() binary.Object { return &Atoms{} }
@@ -283,31 +232,21 @@ func (*Atom) Class() binary.Class {
 }
 func doEncodeAtom(e binary.Encoder, o *Atom) error {
 	if o.Atoms != nil {
-		if err := e.Object(o.Atoms); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Atoms)
+	} else {
+		e.Object(nil)
 	}
-	if err := e.Uint64(o.Index); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(o.Index)
+	return e.Error()
 }
 func doDecodeAtom(d binary.Decoder, o *Atom) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Atoms = obj.(*Atoms)
 	} else {
 		o.Atoms = nil
 	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Index = uint64(obj)
-	}
-	return nil
+	o.Index = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassAtom) ID() binary.ID      { return binaryIDAtom }
 func (*binaryClassAtom) New() binary.Object { return &Atom{} }
@@ -339,18 +278,12 @@ func (*Blob) Class() binary.Class {
 	return (*binaryClassBlob)(nil)
 }
 func doEncodeBlob(e binary.Encoder, o *Blob) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.ID)
+	return e.Error()
 }
 func doDecodeBlob(d binary.Decoder, o *Blob) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
+	o.ID = binary.ID(binary.ReadID(d))
+	return d.Error()
 }
 func (*binaryClassBlob) ID() binary.ID      { return binaryIDBlob }
 func (*binaryClassBlob) New() binary.Object { return &Blob{} }
@@ -381,18 +314,12 @@ func (*Device) Class() binary.Class {
 	return (*binaryClassDevice)(nil)
 }
 func doEncodeDevice(e binary.Encoder, o *Device) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.ID)
+	return e.Error()
 }
 func doDecodeDevice(d binary.Decoder, o *Device) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
+	o.ID = binary.ID(binary.ReadID(d))
+	return d.Error()
 }
 func (*binaryClassDevice) ID() binary.ID      { return binaryIDDevice }
 func (*binaryClassDevice) New() binary.Object { return &Device{} }
@@ -423,32 +350,18 @@ func (*Field) Class() binary.Class {
 	return (*binaryClassField)(nil)
 }
 func doEncodeField(e binary.Encoder, o *Field) error {
-	if o.Struct != nil {
-		if err := e.Object(o.Struct); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Struct)
+	e.String(o.Name)
+	return e.Error()
 }
 func doDecodeField(d binary.Decoder, o *Field) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Struct = obj.(Path)
 	} else {
 		o.Struct = nil
 	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	return nil
+	o.Name = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassField) ID() binary.ID      { return binaryIDField }
 func (*binaryClassField) New() binary.Object { return &Field{} }
@@ -481,23 +394,19 @@ func (*Hierarchy) Class() binary.Class {
 }
 func doEncodeHierarchy(e binary.Encoder, o *Hierarchy) error {
 	if o.Capture != nil {
-		if err := e.Object(o.Capture); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Capture)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Capture = obj.(*Capture)
 	} else {
 		o.Capture = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassHierarchy) ID() binary.ID      { return binaryIDHierarchy }
 func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
@@ -528,18 +437,12 @@ func (*ImageInfo) Class() binary.Class {
 	return (*binaryClassImageInfo)(nil)
 }
 func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.ID)
+	return e.Error()
 }
 func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
+	o.ID = binary.ID(binary.ReadID(d))
+	return d.Error()
 }
 func (*binaryClassImageInfo) ID() binary.ID      { return binaryIDImageInfo }
 func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
@@ -570,45 +473,18 @@ func (*MapIndex) Class() binary.Class {
 	return (*binaryClassMapIndex)(nil)
 }
 func doEncodeMapIndex(e binary.Encoder, o *MapIndex) error {
-	if o.Map != nil {
-		if err := e.Object(o.Map); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if o.Key != nil {
-		var boxed binary.Object
-		boxed, err := any.Box(o.Key)
-		if err != nil {
-			return err
-		}
-		if err := e.Variant(boxed); err != nil {
-			return err
-		}
-	} else if err := e.Variant(nil); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Map)
+	any.Encode(e, o.Key)
+	return e.Error()
 }
 func doDecodeMapIndex(d binary.Decoder, o *MapIndex) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Map = obj.(Path)
 	} else {
 		o.Map = nil
 	}
-	if boxed, err := d.Variant(); err != nil {
-		return err
-	} else if boxed != nil {
-		if o.Key, err = any.Unbox(boxed); err != nil {
-			return err
-		}
-	} else {
-		o.Key = nil
-	}
-	return nil
+	o.Key, _ = any.Decode(d)
+	return d.Error()
 }
 func (*binaryClassMapIndex) ID() binary.ID      { return binaryIDMapIndex }
 func (*binaryClassMapIndex) New() binary.Object { return &MapIndex{} }
@@ -641,47 +517,25 @@ func (*MemoryRange) Class() binary.Class {
 }
 func doEncodeMemoryRange(e binary.Encoder, o *MemoryRange) error {
 	if o.After != nil {
-		if err := e.Object(o.After); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.After)
+	} else {
+		e.Object(nil)
 	}
-	if err := e.Uint64(o.Pool); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Address); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Size); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(o.Pool)
+	e.Uint64(o.Address)
+	e.Uint64(o.Size)
+	return e.Error()
 }
 func doDecodeMemoryRange(d binary.Decoder, o *MemoryRange) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.After = obj.(*Atom)
 	} else {
 		o.After = nil
 	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Pool = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Size = uint64(obj)
-	}
-	return nil
+	o.Pool = uint64(binary.ReadUint64(d))
+	o.Address = uint64(binary.ReadUint64(d))
+	o.Size = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassMemoryRange) ID() binary.ID      { return binaryIDMemoryRange }
 func (*binaryClassMemoryRange) New() binary.Object { return &MemoryRange{} }
@@ -716,23 +570,19 @@ func (*Report) Class() binary.Class {
 }
 func doEncodeReport(e binary.Encoder, o *Report) error {
 	if o.Capture != nil {
-		if err := e.Object(o.Capture); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Capture)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeReport(d binary.Decoder, o *Report) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Capture = obj.(*Capture)
 	} else {
 		o.Capture = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassReport) ID() binary.ID      { return binaryIDReport }
 func (*binaryClassReport) New() binary.Object { return &Report{} }
@@ -763,32 +613,22 @@ func (*Resource) Class() binary.Class {
 	return (*binaryClassResource)(nil)
 }
 func doEncodeResource(e binary.Encoder, o *Resource) error {
-	if err := e.ID(binary.ID(o.ID)); err != nil {
-		return err
-	}
+	e.ID(binary.ID(o.ID))
 	if o.After != nil {
-		if err := e.Object(o.After); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.After)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeResource(d binary.Decoder, o *Resource) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = ResourceID(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	o.ID = ResourceID(binary.ReadID(d))
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.After = obj.(*Atom)
 	} else {
 		o.After = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassResource) ID() binary.ID      { return binaryIDResource }
 func (*binaryClassResource) New() binary.Object { return &Resource{} }
@@ -821,23 +661,19 @@ func (*Resources) Class() binary.Class {
 }
 func doEncodeResources(e binary.Encoder, o *Resources) error {
 	if o.Capture != nil {
-		if err := e.Object(o.Capture); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Capture)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeResources(d binary.Decoder, o *Resources) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Capture = obj.(*Capture)
 	} else {
 		o.Capture = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassResources) ID() binary.ID      { return binaryIDResources }
 func (*binaryClassResources) New() binary.Object { return &Resources{} }
@@ -868,40 +704,20 @@ func (*Slice) Class() binary.Class {
 	return (*binaryClassSlice)(nil)
 }
 func doEncodeSlice(e binary.Encoder, o *Slice) error {
-	if o.Array != nil {
-		if err := e.Object(o.Array); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Start); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.End); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Array)
+	e.Uint64(o.Start)
+	e.Uint64(o.End)
+	return e.Error()
 }
 func doDecodeSlice(d binary.Decoder, o *Slice) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Array = obj.(Path)
 	} else {
 		o.Array = nil
 	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Start = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.End = uint64(obj)
-	}
-	return nil
+	o.Start = uint64(binary.ReadUint64(d))
+	o.End = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassSlice) ID() binary.ID      { return binaryIDSlice }
 func (*binaryClassSlice) New() binary.Object { return &Slice{} }
@@ -935,23 +751,19 @@ func (*State) Class() binary.Class {
 }
 func doEncodeState(e binary.Encoder, o *State) error {
 	if o.After != nil {
-		if err := e.Object(o.After); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.After)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeState(d binary.Decoder, o *State) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.After = obj.(*Atom)
 	} else {
 		o.After = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassState) ID() binary.ID      { return binaryIDState }
 func (*binaryClassState) New() binary.Object { return &State{} }
@@ -982,40 +794,20 @@ func (*Thumbnail) Class() binary.Class {
 	return (*binaryClassThumbnail)(nil)
 }
 func doEncodeThumbnail(e binary.Encoder, o *Thumbnail) error {
-	if o.Object != nil {
-		if err := e.Object(o.Object); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.DesiredWidth); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.DesiredHeight); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Object)
+	e.Uint32(o.DesiredWidth)
+	e.Uint32(o.DesiredHeight)
+	return e.Error()
 }
 func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Object = obj.(Path)
 	} else {
 		o.Object = nil
 	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.DesiredWidth = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.DesiredHeight = uint32(obj)
-	}
-	return nil
+	o.DesiredWidth = uint32(binary.ReadUint32(d))
+	o.DesiredHeight = uint32(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassThumbnail) ID() binary.ID      { return binaryIDThumbnail }
 func (*binaryClassThumbnail) New() binary.Object { return &Thumbnail{} }
@@ -1048,18 +840,12 @@ func (*TimingInfo) Class() binary.Class {
 	return (*binaryClassTimingInfo)(nil)
 }
 func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.ID)
+	return e.Error()
 }
 func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
+	o.ID = binary.ID(binary.ReadID(d))
+	return d.Error()
 }
 func (*binaryClassTimingInfo) ID() binary.ID      { return binaryIDTimingInfo }
 func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }

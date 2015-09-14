@@ -53,54 +53,28 @@ func (*Image) Class() binary.Class {
 	return (*binaryClassImage)(nil)
 }
 func doEncodeImage(e binary.Encoder, o *Image) error {
-	if o.Format != nil {
-		if err := e.Object(o.Format); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Data))); err != nil {
-		return err
-	}
-	if err := e.Data(o.Data); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.Format)
+	e.Uint32(o.Width)
+	e.Uint32(o.Height)
+	e.Uint32(uint32(len(o.Data)))
+	e.Data(o.Data)
+	return e.Error()
 }
 func doDecodeImage(d binary.Decoder, o *Image) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Format = obj.(Format)
 	} else {
 		o.Format = nil
 	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Width = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Height = uint32(obj)
-	}
+	o.Width = uint32(binary.ReadUint32(d))
+	o.Height = uint32(binary.ReadUint32(d))
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Data = make([]byte, count)
-		if err := d.Data(o.Data); err != nil {
-			return err
-		}
+		d.Data(o.Data)
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassImage) ID() binary.ID      { return binaryIDImage }
 func (*binaryClassImage) New() binary.Object { return &Image{} }
@@ -134,54 +108,30 @@ func (*Info) Class() binary.Class {
 	return (*binaryClassInfo)(nil)
 }
 func doEncodeInfo(e binary.Encoder, o *Info) error {
-	if o.Format != nil {
-		if err := e.Object(o.Format); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Height); err != nil {
-		return err
-	}
+	e.Object(o.Format)
+	e.Uint32(o.Width)
+	e.Uint32(o.Height)
 	if o.Data != nil {
-		if err := e.Object(o.Data); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Data)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeInfo(d binary.Decoder, o *Info) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Format = obj.(Format)
 	} else {
 		o.Format = nil
 	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Width = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Height = uint32(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	o.Width = uint32(binary.ReadUint32(d))
+	o.Height = uint32(binary.ReadUint32(d))
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Data = obj.(*path.Blob)
 	} else {
 		o.Data = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassInfo) ID() binary.ID      { return binaryIDInfo }
 func (*binaryClassInfo) New() binary.Object { return &Info{} }
@@ -215,70 +165,30 @@ func (*LazyConverter) Class() binary.Class {
 	return (*binaryClassLazyConverter)(nil)
 }
 func doEncodeLazyConverter(e binary.Encoder, o *LazyConverter) error {
-	if err := e.ID(o.Data); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Height); err != nil {
-		return err
-	}
-	if o.FormatFrom != nil {
-		if err := e.Object(o.FormatFrom); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if o.FormatTo != nil {
-		if err := e.Object(o.FormatTo); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Int32(int32(o.StrideFrom)); err != nil {
-		return err
-	}
-	return nil
+	e.ID(o.Data)
+	e.Uint32(o.Width)
+	e.Uint32(o.Height)
+	e.Object(o.FormatFrom)
+	e.Object(o.FormatTo)
+	e.Int32(int32(o.StrideFrom))
+	return e.Error()
 }
 func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.Data = binary.ID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Width = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Height = uint32(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	o.Data = binary.ID(binary.ReadID(d))
+	o.Width = uint32(binary.ReadUint32(d))
+	o.Height = uint32(binary.ReadUint32(d))
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.FormatFrom = obj.(Format)
 	} else {
 		o.FormatFrom = nil
 	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.FormatTo = obj.(Format)
 	} else {
 		o.FormatTo = nil
 	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.StrideFrom = int(obj)
-	}
-	return nil
+	o.StrideFrom = int(binary.ReadInt32(d))
+	return d.Error()
 }
 func (*binaryClassLazyConverter) ID() binary.ID      { return binaryIDLazyConverter }
 func (*binaryClassLazyConverter) New() binary.Object { return &LazyConverter{} }
@@ -314,10 +224,10 @@ func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) Class() binary.Class {
 	return (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD)(nil)
 }
 func doEncodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(e binary.Encoder, o *fmtATC_RGBA_EXPLICIT_ALPHA_AMD) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d binary.Decoder, o *fmtATC_RGBA_EXPLICIT_ALPHA_AMD) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) ID() binary.ID {
 	return binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD
@@ -352,10 +262,10 @@ func (*fmtATC_RGB_AMD) Class() binary.Class {
 	return (*binaryClassfmtATC_RGB_AMD)(nil)
 }
 func doEncodefmtATC_RGB_AMD(e binary.Encoder, o *fmtATC_RGB_AMD) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtATC_RGB_AMD(d binary.Decoder, o *fmtATC_RGB_AMD) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtATC_RGB_AMD) ID() binary.ID      { return binaryIDfmtATC_RGB_AMD }
 func (*binaryClassfmtATC_RGB_AMD) New() binary.Object { return &fmtATC_RGB_AMD{} }
@@ -384,10 +294,10 @@ func (*fmtAlpha) Class() binary.Class {
 	return (*binaryClassfmtAlpha)(nil)
 }
 func doEncodefmtAlpha(e binary.Encoder, o *fmtAlpha) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtAlpha(d binary.Decoder, o *fmtAlpha) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtAlpha) ID() binary.ID      { return binaryIDfmtAlpha }
 func (*binaryClassfmtAlpha) New() binary.Object { return &fmtAlpha{} }
@@ -416,10 +326,10 @@ func (*fmtETC1_RGB8_OES) Class() binary.Class {
 	return (*binaryClassfmtETC1_RGB8_OES)(nil)
 }
 func doEncodefmtETC1_RGB8_OES(e binary.Encoder, o *fmtETC1_RGB8_OES) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtETC1_RGB8_OES(d binary.Decoder, o *fmtETC1_RGB8_OES) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtETC1_RGB8_OES) ID() binary.ID      { return binaryIDfmtETC1_RGB8_OES }
 func (*binaryClassfmtETC1_RGB8_OES) New() binary.Object { return &fmtETC1_RGB8_OES{} }
@@ -448,10 +358,10 @@ func (*fmtFloat32) Class() binary.Class {
 	return (*binaryClassfmtFloat32)(nil)
 }
 func doEncodefmtFloat32(e binary.Encoder, o *fmtFloat32) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtFloat32(d binary.Decoder, o *fmtFloat32) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtFloat32) ID() binary.ID      { return binaryIDfmtFloat32 }
 func (*binaryClassfmtFloat32) New() binary.Object { return &fmtFloat32{} }
@@ -480,10 +390,10 @@ func (*fmtLuminance) Class() binary.Class {
 	return (*binaryClassfmtLuminance)(nil)
 }
 func doEncodefmtLuminance(e binary.Encoder, o *fmtLuminance) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtLuminance(d binary.Decoder, o *fmtLuminance) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtLuminance) ID() binary.ID      { return binaryIDfmtLuminance }
 func (*binaryClassfmtLuminance) New() binary.Object { return &fmtLuminance{} }
@@ -512,10 +422,10 @@ func (*fmtLuminanceAlpha) Class() binary.Class {
 	return (*binaryClassfmtLuminanceAlpha)(nil)
 }
 func doEncodefmtLuminanceAlpha(e binary.Encoder, o *fmtLuminanceAlpha) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtLuminanceAlpha(d binary.Decoder, o *fmtLuminanceAlpha) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtLuminanceAlpha) ID() binary.ID      { return binaryIDfmtLuminanceAlpha }
 func (*binaryClassfmtLuminanceAlpha) New() binary.Object { return &fmtLuminanceAlpha{} }
@@ -544,10 +454,10 @@ func (*fmtPNG) Class() binary.Class {
 	return (*binaryClassfmtPNG)(nil)
 }
 func doEncodefmtPNG(e binary.Encoder, o *fmtPNG) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtPNG(d binary.Decoder, o *fmtPNG) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtPNG) ID() binary.ID      { return binaryIDfmtPNG }
 func (*binaryClassfmtPNG) New() binary.Object { return &fmtPNG{} }
@@ -576,10 +486,10 @@ func (*fmtRGB) Class() binary.Class {
 	return (*binaryClassfmtRGB)(nil)
 }
 func doEncodefmtRGB(e binary.Encoder, o *fmtRGB) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtRGB(d binary.Decoder, o *fmtRGB) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtRGB) ID() binary.ID      { return binaryIDfmtRGB }
 func (*binaryClassfmtRGB) New() binary.Object { return &fmtRGB{} }
@@ -608,10 +518,10 @@ func (*fmtRGBA) Class() binary.Class {
 	return (*binaryClassfmtRGBA)(nil)
 }
 func doEncodefmtRGBA(e binary.Encoder, o *fmtRGBA) error {
-	return nil
+	return e.Error()
 }
 func doDecodefmtRGBA(d binary.Decoder, o *fmtRGBA) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassfmtRGBA) ID() binary.ID      { return binaryIDfmtRGBA }
 func (*binaryClassfmtRGBA) New() binary.Object { return &fmtRGBA{} }

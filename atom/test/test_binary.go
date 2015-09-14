@@ -33,26 +33,14 @@ func (*AtomA) Class() binary.Class {
 	return (*binaryClassAtomA)(nil)
 }
 func doEncodeAtomA(e binary.Encoder, o *AtomA) error {
-	if err := e.Uint64(uint64(o.ID)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.AtomFlags)); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(uint64(o.ID))
+	e.Uint32(uint32(o.AtomFlags))
+	return e.Error()
 }
 func doDecodeAtomA(d binary.Decoder, o *AtomA) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.ID = atom.ID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.AtomFlags = atom.Flags(obj)
-	}
-	return nil
+	o.ID = atom.ID(binary.ReadUint64(d))
+	o.AtomFlags = atom.Flags(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassAtomA) ID() binary.ID      { return AtomAID }
 func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
@@ -84,26 +72,14 @@ func (*AtomB) Class() binary.Class {
 	return (*binaryClassAtomB)(nil)
 }
 func doEncodeAtomB(e binary.Encoder, o *AtomB) error {
-	if err := e.Uint64(uint64(o.ID)); err != nil {
-		return err
-	}
-	if err := e.Bool(o.Bool); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(uint64(o.ID))
+	e.Bool(o.Bool)
+	return e.Error()
 }
 func doDecodeAtomB(d binary.Decoder, o *AtomB) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.ID = atom.ID(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Bool = bool(obj)
-	}
-	return nil
+	o.ID = atom.ID(binary.ReadUint64(d))
+	o.Bool = bool(binary.ReadBool(d))
+	return d.Error()
 }
 func (*binaryClassAtomB) ID() binary.ID      { return AtomBID }
 func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
@@ -135,18 +111,12 @@ func (*AtomC) Class() binary.Class {
 	return (*binaryClassAtomC)(nil)
 }
 func doEncodeAtomC(e binary.Encoder, o *AtomC) error {
-	if err := e.String(o.String); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.String)
+	return e.Error()
 }
 func doDecodeAtomC(d binary.Decoder, o *AtomC) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.String = string(obj)
-	}
-	return nil
+	o.String = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassAtomC) ID() binary.ID      { return AtomCID }
 func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }

@@ -28,18 +28,12 @@ func (*delay) Class() binary.Class {
 	return (*binaryClassdelay)(nil)
 }
 func doEncodedelay(e binary.Encoder, o *delay) error {
-	if err := e.String(o.data); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.data)
+	return e.Error()
 }
 func doDecodedelay(d binary.Decoder, o *delay) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.data = string(obj)
-	}
-	return nil
+	o.data = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassdelay) ID() binary.ID      { return binaryIDdelay }
 func (*binaryClassdelay) New() binary.Object { return &delay{} }
@@ -70,18 +64,12 @@ func (*request) Class() binary.Class {
 	return (*binaryClassrequest)(nil)
 }
 func doEncoderequest(e binary.Encoder, o *request) error {
-	if err := e.String(o.data); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.data)
+	return e.Error()
 }
 func doDecoderequest(d binary.Decoder, o *request) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.data = string(obj)
-	}
-	return nil
+	o.data = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassrequest) ID() binary.ID      { return binaryIDrequest }
 func (*binaryClassrequest) New() binary.Object { return &request{} }
@@ -112,18 +100,12 @@ func (*response) Class() binary.Class {
 	return (*binaryClassresponse)(nil)
 }
 func doEncoderesponse(e binary.Encoder, o *response) error {
-	if err := e.String(o.data); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.data)
+	return e.Error()
 }
 func doDecoderesponse(d binary.Decoder, o *response) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.data = string(obj)
-	}
-	return nil
+	o.data = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassresponse) ID() binary.ID      { return binaryIDresponse }
 func (*binaryClassresponse) New() binary.Object { return &response{} }

@@ -83,10 +83,10 @@ func (*Any) Class() binary.Class {
 	return (*binaryClassAny)(nil)
 }
 func doEncodeAny(e binary.Encoder, o *Any) error {
-	return nil
+	return e.Error()
 }
 func doDecodeAny(d binary.Decoder, o *Any) error {
-	return nil
+	return d.Error()
 }
 func (*binaryClassAny) ID() binary.ID      { return binaryIDAny }
 func (*binaryClassAny) New() binary.Object { return &Any{} }
@@ -107,15 +107,11 @@ func (*boolSlice) Class() binary.Class {
 	return (*binaryClassboolSlice)(nil)
 }
 func doEncodeboolSlice(e binary.Encoder, o *boolSlice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Bool(o.value[i]); err != nil {
-			return err
-		}
+		e.Bool(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeboolSlice(d binary.Decoder, o *boolSlice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -123,14 +119,10 @@ func doDecodeboolSlice(d binary.Decoder, o *boolSlice) error {
 	} else {
 		o.value = make([]bool, count)
 		for i := range o.value {
-			if obj, err := d.Bool(); err != nil {
-				return err
-			} else {
-				o.value[i] = bool(obj)
-			}
+			o.value[i] = bool(binary.ReadBool(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassboolSlice) ID() binary.ID      { return binaryIDboolSlice }
 func (*binaryClassboolSlice) New() binary.Object { return &boolSlice{} }
@@ -151,18 +143,12 @@ func (*bool_) Class() binary.Class {
 	return (*binaryClassbool_)(nil)
 }
 func doEncodebool_(e binary.Encoder, o *bool_) error {
-	if err := e.Bool(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Bool(o.value)
+	return e.Error()
 }
 func doDecodebool_(d binary.Decoder, o *bool_) error {
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.value = bool(obj)
-	}
-	return nil
+	o.value = bool(binary.ReadBool(d))
+	return d.Error()
 }
 func (*binaryClassbool_) ID() binary.ID      { return binaryIDbool_ }
 func (*binaryClassbool_) New() binary.Object { return &bool_{} }
@@ -183,15 +169,11 @@ func (*float32Slice) Class() binary.Class {
 	return (*binaryClassfloat32Slice)(nil)
 }
 func doEncodefloat32Slice(e binary.Encoder, o *float32Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Float32(o.value[i]); err != nil {
-			return err
-		}
+		e.Float32(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -199,14 +181,10 @@ func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) error {
 	} else {
 		o.value = make([]float32, count)
 		for i := range o.value {
-			if obj, err := d.Float32(); err != nil {
-				return err
-			} else {
-				o.value[i] = float32(obj)
-			}
+			o.value[i] = float32(binary.ReadFloat32(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassfloat32Slice) ID() binary.ID      { return binaryIDfloat32Slice }
 func (*binaryClassfloat32Slice) New() binary.Object { return &float32Slice{} }
@@ -227,18 +205,12 @@ func (*float32_) Class() binary.Class {
 	return (*binaryClassfloat32_)(nil)
 }
 func doEncodefloat32_(e binary.Encoder, o *float32_) error {
-	if err := e.Float32(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Float32(o.value)
+	return e.Error()
 }
 func doDecodefloat32_(d binary.Decoder, o *float32_) error {
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.value = float32(obj)
-	}
-	return nil
+	o.value = float32(binary.ReadFloat32(d))
+	return d.Error()
 }
 func (*binaryClassfloat32_) ID() binary.ID      { return binaryIDfloat32_ }
 func (*binaryClassfloat32_) New() binary.Object { return &float32_{} }
@@ -259,15 +231,11 @@ func (*float64Slice) Class() binary.Class {
 	return (*binaryClassfloat64Slice)(nil)
 }
 func doEncodefloat64Slice(e binary.Encoder, o *float64Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Float64(o.value[i]); err != nil {
-			return err
-		}
+		e.Float64(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -275,14 +243,10 @@ func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) error {
 	} else {
 		o.value = make([]float64, count)
 		for i := range o.value {
-			if obj, err := d.Float64(); err != nil {
-				return err
-			} else {
-				o.value[i] = float64(obj)
-			}
+			o.value[i] = float64(binary.ReadFloat64(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassfloat64Slice) ID() binary.ID      { return binaryIDfloat64Slice }
 func (*binaryClassfloat64Slice) New() binary.Object { return &float64Slice{} }
@@ -303,18 +267,12 @@ func (*float64_) Class() binary.Class {
 	return (*binaryClassfloat64_)(nil)
 }
 func doEncodefloat64_(e binary.Encoder, o *float64_) error {
-	if err := e.Float64(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Float64(o.value)
+	return e.Error()
 }
 func doDecodefloat64_(d binary.Decoder, o *float64_) error {
-	if obj, err := d.Float64(); err != nil {
-		return err
-	} else {
-		o.value = float64(obj)
-	}
-	return nil
+	o.value = float64(binary.ReadFloat64(d))
+	return d.Error()
 }
 func (*binaryClassfloat64_) ID() binary.ID      { return binaryIDfloat64_ }
 func (*binaryClassfloat64_) New() binary.Object { return &float64_{} }
@@ -335,15 +293,11 @@ func (*int16Slice) Class() binary.Class {
 	return (*binaryClassint16Slice)(nil)
 }
 func doEncodeint16Slice(e binary.Encoder, o *int16Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Int16(o.value[i]); err != nil {
-			return err
-		}
+		e.Int16(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeint16Slice(d binary.Decoder, o *int16Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -351,14 +305,10 @@ func doDecodeint16Slice(d binary.Decoder, o *int16Slice) error {
 	} else {
 		o.value = make([]int16, count)
 		for i := range o.value {
-			if obj, err := d.Int16(); err != nil {
-				return err
-			} else {
-				o.value[i] = int16(obj)
-			}
+			o.value[i] = int16(binary.ReadInt16(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassint16Slice) ID() binary.ID      { return binaryIDint16Slice }
 func (*binaryClassint16Slice) New() binary.Object { return &int16Slice{} }
@@ -379,18 +329,12 @@ func (*int16_) Class() binary.Class {
 	return (*binaryClassint16_)(nil)
 }
 func doEncodeint16_(e binary.Encoder, o *int16_) error {
-	if err := e.Int16(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Int16(o.value)
+	return e.Error()
 }
 func doDecodeint16_(d binary.Decoder, o *int16_) error {
-	if obj, err := d.Int16(); err != nil {
-		return err
-	} else {
-		o.value = int16(obj)
-	}
-	return nil
+	o.value = int16(binary.ReadInt16(d))
+	return d.Error()
 }
 func (*binaryClassint16_) ID() binary.ID      { return binaryIDint16_ }
 func (*binaryClassint16_) New() binary.Object { return &int16_{} }
@@ -411,15 +355,11 @@ func (*int32Slice) Class() binary.Class {
 	return (*binaryClassint32Slice)(nil)
 }
 func doEncodeint32Slice(e binary.Encoder, o *int32Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Int32(o.value[i]); err != nil {
-			return err
-		}
+		e.Int32(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeint32Slice(d binary.Decoder, o *int32Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -427,14 +367,10 @@ func doDecodeint32Slice(d binary.Decoder, o *int32Slice) error {
 	} else {
 		o.value = make([]int32, count)
 		for i := range o.value {
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				o.value[i] = int32(obj)
-			}
+			o.value[i] = int32(binary.ReadInt32(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassint32Slice) ID() binary.ID      { return binaryIDint32Slice }
 func (*binaryClassint32Slice) New() binary.Object { return &int32Slice{} }
@@ -455,18 +391,12 @@ func (*int32_) Class() binary.Class {
 	return (*binaryClassint32_)(nil)
 }
 func doEncodeint32_(e binary.Encoder, o *int32_) error {
-	if err := e.Int32(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Int32(o.value)
+	return e.Error()
 }
 func doDecodeint32_(d binary.Decoder, o *int32_) error {
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.value = int32(obj)
-	}
-	return nil
+	o.value = int32(binary.ReadInt32(d))
+	return d.Error()
 }
 func (*binaryClassint32_) ID() binary.ID      { return binaryIDint32_ }
 func (*binaryClassint32_) New() binary.Object { return &int32_{} }
@@ -487,15 +417,11 @@ func (*int64Slice) Class() binary.Class {
 	return (*binaryClassint64Slice)(nil)
 }
 func doEncodeint64Slice(e binary.Encoder, o *int64Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Int64(o.value[i]); err != nil {
-			return err
-		}
+		e.Int64(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeint64Slice(d binary.Decoder, o *int64Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -503,14 +429,10 @@ func doDecodeint64Slice(d binary.Decoder, o *int64Slice) error {
 	} else {
 		o.value = make([]int64, count)
 		for i := range o.value {
-			if obj, err := d.Int64(); err != nil {
-				return err
-			} else {
-				o.value[i] = int64(obj)
-			}
+			o.value[i] = int64(binary.ReadInt64(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassint64Slice) ID() binary.ID      { return binaryIDint64Slice }
 func (*binaryClassint64Slice) New() binary.Object { return &int64Slice{} }
@@ -531,18 +453,12 @@ func (*int64_) Class() binary.Class {
 	return (*binaryClassint64_)(nil)
 }
 func doEncodeint64_(e binary.Encoder, o *int64_) error {
-	if err := e.Int64(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Int64(o.value)
+	return e.Error()
 }
 func doDecodeint64_(d binary.Decoder, o *int64_) error {
-	if obj, err := d.Int64(); err != nil {
-		return err
-	} else {
-		o.value = int64(obj)
-	}
-	return nil
+	o.value = int64(binary.ReadInt64(d))
+	return d.Error()
 }
 func (*binaryClassint64_) ID() binary.ID      { return binaryIDint64_ }
 func (*binaryClassint64_) New() binary.Object { return &int64_{} }
@@ -563,15 +479,11 @@ func (*int8Slice) Class() binary.Class {
 	return (*binaryClassint8Slice)(nil)
 }
 func doEncodeint8Slice(e binary.Encoder, o *int8Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Int8(o.value[i]); err != nil {
-			return err
-		}
+		e.Int8(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeint8Slice(d binary.Decoder, o *int8Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -579,14 +491,10 @@ func doDecodeint8Slice(d binary.Decoder, o *int8Slice) error {
 	} else {
 		o.value = make([]int8, count)
 		for i := range o.value {
-			if obj, err := d.Int8(); err != nil {
-				return err
-			} else {
-				o.value[i] = int8(obj)
-			}
+			o.value[i] = int8(binary.ReadInt8(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassint8Slice) ID() binary.ID      { return binaryIDint8Slice }
 func (*binaryClassint8Slice) New() binary.Object { return &int8Slice{} }
@@ -607,18 +515,12 @@ func (*int8_) Class() binary.Class {
 	return (*binaryClassint8_)(nil)
 }
 func doEncodeint8_(e binary.Encoder, o *int8_) error {
-	if err := e.Int8(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Int8(o.value)
+	return e.Error()
 }
 func doDecodeint8_(d binary.Decoder, o *int8_) error {
-	if obj, err := d.Int8(); err != nil {
-		return err
-	} else {
-		o.value = int8(obj)
-	}
-	return nil
+	o.value = int8(binary.ReadInt8(d))
+	return d.Error()
 }
 func (*binaryClassint8_) ID() binary.ID      { return binaryIDint8_ }
 func (*binaryClassint8_) New() binary.Object { return &int8_{} }
@@ -639,15 +541,11 @@ func (*intSlice) Class() binary.Class {
 	return (*binaryClassintSlice)(nil)
 }
 func doEncodeintSlice(e binary.Encoder, o *intSlice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Int32(int32(o.value[i])); err != nil {
-			return err
-		}
+		e.Int32(int32(o.value[i]))
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeintSlice(d binary.Decoder, o *intSlice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -655,14 +553,10 @@ func doDecodeintSlice(d binary.Decoder, o *intSlice) error {
 	} else {
 		o.value = make([]int, count)
 		for i := range o.value {
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				o.value[i] = int(obj)
-			}
+			o.value[i] = int(binary.ReadInt32(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassintSlice) ID() binary.ID      { return binaryIDintSlice }
 func (*binaryClassintSlice) New() binary.Object { return &intSlice{} }
@@ -683,18 +577,12 @@ func (*int_) Class() binary.Class {
 	return (*binaryClassint_)(nil)
 }
 func doEncodeint_(e binary.Encoder, o *int_) error {
-	if err := e.Int32(int32(o.value)); err != nil {
-		return err
-	}
-	return nil
+	e.Int32(int32(o.value))
+	return e.Error()
 }
 func doDecodeint_(d binary.Decoder, o *int_) error {
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.value = int(obj)
-	}
-	return nil
+	o.value = int(binary.ReadInt32(d))
+	return d.Error()
 }
 func (*binaryClassint_) ID() binary.ID      { return binaryIDint_ }
 func (*binaryClassint_) New() binary.Object { return &int_{} }
@@ -715,19 +603,11 @@ func (*objectSlice) Class() binary.Class {
 	return (*binaryClassobjectSlice)(nil)
 }
 func doEncodeobjectSlice(e binary.Encoder, o *objectSlice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if o.value[i] != nil {
-			if err := e.Object(o.value[i]); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
+		e.Object(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -735,16 +615,14 @@ func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) error {
 	} else {
 		o.value = make([]binary.Object, count)
 		for i := range o.value {
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
+			if obj, err := d.Object(); obj != nil && err == nil {
 				o.value[i] = obj.(binary.Object)
 			} else {
 				o.value[i] = nil
 			}
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassobjectSlice) ID() binary.ID      { return binaryIDobjectSlice }
 func (*binaryClassobjectSlice) New() binary.Object { return &objectSlice{} }
@@ -765,24 +643,16 @@ func (*object_) Class() binary.Class {
 	return (*binaryClassobject_)(nil)
 }
 func doEncodeobject_(e binary.Encoder, o *object_) error {
-	if o.value != nil {
-		if err := e.Object(o.value); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
+	e.Object(o.value)
+	return e.Error()
 }
 func doDecodeobject_(d binary.Decoder, o *object_) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.value = obj.(binary.Object)
 	} else {
 		o.value = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassobject_) ID() binary.ID      { return binaryIDobject_ }
 func (*binaryClassobject_) New() binary.Object { return &object_{} }
@@ -803,15 +673,11 @@ func (*stringSlice) Class() binary.Class {
 	return (*binaryClassstringSlice)(nil)
 }
 func doEncodestringSlice(e binary.Encoder, o *stringSlice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.String(o.value[i]); err != nil {
-			return err
-		}
+		e.String(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodestringSlice(d binary.Decoder, o *stringSlice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -819,14 +685,10 @@ func doDecodestringSlice(d binary.Decoder, o *stringSlice) error {
 	} else {
 		o.value = make([]string, count)
 		for i := range o.value {
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				o.value[i] = string(obj)
-			}
+			o.value[i] = string(binary.ReadString(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassstringSlice) ID() binary.ID      { return binaryIDstringSlice }
 func (*binaryClassstringSlice) New() binary.Object { return &stringSlice{} }
@@ -847,18 +709,12 @@ func (*string_) Class() binary.Class {
 	return (*binaryClassstring_)(nil)
 }
 func doEncodestring_(e binary.Encoder, o *string_) error {
-	if err := e.String(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.value)
+	return e.Error()
 }
 func doDecodestring_(d binary.Decoder, o *string_) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.value = string(obj)
-	}
-	return nil
+	o.value = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassstring_) ID() binary.ID      { return binaryIDstring_ }
 func (*binaryClassstring_) New() binary.Object { return &string_{} }
@@ -879,15 +735,11 @@ func (*uint16Slice) Class() binary.Class {
 	return (*binaryClassuint16Slice)(nil)
 }
 func doEncodeuint16Slice(e binary.Encoder, o *uint16Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Uint16(o.value[i]); err != nil {
-			return err
-		}
+		e.Uint16(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -895,14 +747,10 @@ func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) error {
 	} else {
 		o.value = make([]uint16, count)
 		for i := range o.value {
-			if obj, err := d.Uint16(); err != nil {
-				return err
-			} else {
-				o.value[i] = uint16(obj)
-			}
+			o.value[i] = uint16(binary.ReadUint16(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassuint16Slice) ID() binary.ID      { return binaryIDuint16Slice }
 func (*binaryClassuint16Slice) New() binary.Object { return &uint16Slice{} }
@@ -923,18 +771,12 @@ func (*uint16_) Class() binary.Class {
 	return (*binaryClassuint16_)(nil)
 }
 func doEncodeuint16_(e binary.Encoder, o *uint16_) error {
-	if err := e.Uint16(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Uint16(o.value)
+	return e.Error()
 }
 func doDecodeuint16_(d binary.Decoder, o *uint16_) error {
-	if obj, err := d.Uint16(); err != nil {
-		return err
-	} else {
-		o.value = uint16(obj)
-	}
-	return nil
+	o.value = uint16(binary.ReadUint16(d))
+	return d.Error()
 }
 func (*binaryClassuint16_) ID() binary.ID      { return binaryIDuint16_ }
 func (*binaryClassuint16_) New() binary.Object { return &uint16_{} }
@@ -955,15 +797,11 @@ func (*uint32Slice) Class() binary.Class {
 	return (*binaryClassuint32Slice)(nil)
 }
 func doEncodeuint32Slice(e binary.Encoder, o *uint32Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Uint32(o.value[i]); err != nil {
-			return err
-		}
+		e.Uint32(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -971,14 +809,10 @@ func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) error {
 	} else {
 		o.value = make([]uint32, count)
 		for i := range o.value {
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				o.value[i] = uint32(obj)
-			}
+			o.value[i] = uint32(binary.ReadUint32(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassuint32Slice) ID() binary.ID      { return binaryIDuint32Slice }
 func (*binaryClassuint32Slice) New() binary.Object { return &uint32Slice{} }
@@ -999,18 +833,12 @@ func (*uint32_) Class() binary.Class {
 	return (*binaryClassuint32_)(nil)
 }
 func doEncodeuint32_(e binary.Encoder, o *uint32_) error {
-	if err := e.Uint32(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(o.value)
+	return e.Error()
 }
 func doDecodeuint32_(d binary.Decoder, o *uint32_) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.value = uint32(obj)
-	}
-	return nil
+	o.value = uint32(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassuint32_) ID() binary.ID      { return binaryIDuint32_ }
 func (*binaryClassuint32_) New() binary.Object { return &uint32_{} }
@@ -1031,15 +859,11 @@ func (*uint64Slice) Class() binary.Class {
 	return (*binaryClassuint64Slice)(nil)
 }
 func doEncodeuint64Slice(e binary.Encoder, o *uint64Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if err := e.Uint64(o.value[i]); err != nil {
-			return err
-		}
+		e.Uint64(o.value[i])
 	}
-	return nil
+	return e.Error()
 }
 func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) error {
 	if count, err := d.Uint32(); err != nil {
@@ -1047,14 +871,10 @@ func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) error {
 	} else {
 		o.value = make([]uint64, count)
 		for i := range o.value {
-			if obj, err := d.Uint64(); err != nil {
-				return err
-			} else {
-				o.value[i] = uint64(obj)
-			}
+			o.value[i] = uint64(binary.ReadUint64(d))
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassuint64Slice) ID() binary.ID      { return binaryIDuint64Slice }
 func (*binaryClassuint64Slice) New() binary.Object { return &uint64Slice{} }
@@ -1075,18 +895,12 @@ func (*uint64_) Class() binary.Class {
 	return (*binaryClassuint64_)(nil)
 }
 func doEncodeuint64_(e binary.Encoder, o *uint64_) error {
-	if err := e.Uint64(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(o.value)
+	return e.Error()
 }
 func doDecodeuint64_(d binary.Decoder, o *uint64_) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.value = uint64(obj)
-	}
-	return nil
+	o.value = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassuint64_) ID() binary.ID      { return binaryIDuint64_ }
 func (*binaryClassuint64_) New() binary.Object { return &uint64_{} }
@@ -1107,24 +921,18 @@ func (*uint8Slice) Class() binary.Class {
 	return (*binaryClassuint8Slice)(nil)
 }
 func doEncodeuint8Slice(e binary.Encoder, o *uint8Slice) error {
-	if err := e.Uint32(uint32(len(o.value))); err != nil {
-		return err
-	}
-	if err := e.Data(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(uint32(len(o.value)))
+	e.Data(o.value)
+	return e.Error()
 }
 func doDecodeuint8Slice(d binary.Decoder, o *uint8Slice) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.value = make([]uint8, count)
-		if err := d.Data(o.value); err != nil {
-			return err
-		}
+		d.Data(o.value)
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassuint8Slice) ID() binary.ID      { return binaryIDuint8Slice }
 func (*binaryClassuint8Slice) New() binary.Object { return &uint8Slice{} }
@@ -1145,18 +953,12 @@ func (*uint8_) Class() binary.Class {
 	return (*binaryClassuint8_)(nil)
 }
 func doEncodeuint8_(e binary.Encoder, o *uint8_) error {
-	if err := e.Uint8(o.value); err != nil {
-		return err
-	}
-	return nil
+	e.Uint8(o.value)
+	return e.Error()
 }
 func doDecodeuint8_(d binary.Decoder, o *uint8_) error {
-	if obj, err := d.Uint8(); err != nil {
-		return err
-	} else {
-		o.value = uint8(obj)
-	}
-	return nil
+	o.value = uint8(binary.ReadUint8(d))
+	return d.Error()
 }
 func (*binaryClassuint8_) ID() binary.ID      { return binaryIDuint8_ }
 func (*binaryClassuint8_) New() binary.Object { return &uint8_{} }

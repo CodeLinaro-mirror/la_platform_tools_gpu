@@ -30,18 +30,12 @@ func (*TypeA) Class() binary.Class {
 	return (*binaryClassTypeA)(nil)
 }
 func doEncodeTypeA(e binary.Encoder, o *TypeA) error {
-	if err := e.String(o.Data); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.Data)
+	return e.Error()
 }
 func doDecodeTypeA(d binary.Decoder, o *TypeA) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Data = string(obj)
-	}
-	return nil
+	o.Data = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassTypeA) ID() binary.ID      { return TypeAID }
 func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
@@ -72,18 +66,12 @@ func (*TypeB) Class() binary.Class {
 	return (*binaryClassTypeB)(nil)
 }
 func doEncodeTypeB(e binary.Encoder, o *TypeB) error {
-	if err := e.String(o.Data); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.Data)
+	return e.Error()
 }
 func doDecodeTypeB(d binary.Decoder, o *TypeB) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Data = string(obj)
-	}
-	return nil
+	o.Data = string(binary.ReadString(d))
+	return d.Error()
 }
 func (*binaryClassTypeB) ID() binary.ID      { return TypeBID }
 func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }

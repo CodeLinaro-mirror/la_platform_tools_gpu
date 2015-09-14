@@ -226,6 +226,8 @@ type any interface {
 // If v is not boxable then ErrUnboxable is returned.
 func Box(v interface{}) (binary.Object, error) {
 	switch v := v.(type) {
+	case nil:
+		return nil, nil
 	case binary.Object:
 		return &object_{value: v}, nil
 	case bool:
@@ -291,7 +293,9 @@ func Box(v interface{}) (binary.Object, error) {
 // Unbox returns the value in o wrapped by a call to Box.
 // If o is not a boxed value ErrNotBoxedValue is returned.
 func Unbox(o binary.Object) (interface{}, error) {
-	if o, any := o.(any); any {
+	if o == nil {
+		return nil, nil
+	} else if o, any := o.(any); any {
 		return o.unbox(), nil
 	}
 	return nil, ErrNotBoxedValue{Object: o}
@@ -315,18 +319,32 @@ func (i *Any) String() string {
 	return "<any>"
 }
 
-func (i *Any) Encode(e binary.Encoder, value interface{}) error {
+func Encode(e binary.Encoder, value interface{}) error {
 	if boxed, err := Box(value); err != nil {
-		return err
+		return e.SetError(err)
 	} else {
 		return e.Variant(boxed)
 	}
 }
 
-func (i *Any) Decode(d binary.Decoder) (interface{}, error) {
+func Decode(d binary.Decoder) (interface{}, error) {
 	if boxed, err := d.Variant(); err != nil {
 		return nil, err
 	} else {
-		return Unbox(boxed)
+		if unboxed, err := Unbox(boxed); err != nil {
+			return nil, d.SetError(err)
+		} else {
+			return unboxed, nil
+		}
 	}
+}
+
+func (i *Any) Encode(e binary.Encoder, value interface{}) error {
+	// Note this is calling the non-member function (not itself).
+	return Encode(e, value)
+}
+
+func (i *Any) Decode(d binary.Decoder) (interface{}, error) {
+	// Note this is calling the non-member function (not itself).
+	return Decode(d)
 }

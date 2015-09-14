@@ -52,10 +52,6 @@ func (d *decoder) ID() (binary.ID, error) {
 	return id, d.Data(id[:])
 }
 
-func (d *decoder) SkipID() error {
-	return d.Skip(binary.IDSize)
-}
-
 func (e *encoder) Value(obj binary.Object) error { return obj.Class().Encode(e, obj) }
 func (d *decoder) Value(obj binary.Object) error { return obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) error {

@@ -28,32 +28,22 @@ func (*testStruct) Class() binary.Class {
 	return (*binaryClasstestStruct)(nil)
 }
 func doEncodetestStruct(e binary.Encoder, o *testStruct) error {
-	if err := e.String(o.Str); err != nil {
-		return err
-	}
+	e.String(o.Str)
 	if o.Ptr != nil {
-		if err := e.Object(o.Ptr); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Ptr)
+	} else {
+		e.Object(nil)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodetestStruct(d binary.Decoder, o *testStruct) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Str = string(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	o.Str = string(binary.ReadString(d))
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
 		o.Ptr = nil
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClasstestStruct) ID() binary.ID      { return binaryIDtestStruct }
 func (*binaryClasstestStruct) New() binary.Object { return &testStruct{} }
@@ -85,87 +75,38 @@ func (*testAtom) Class() binary.Class {
 	return (*binaryClasstestAtom)(nil)
 }
 func doEncodetestAtom(e binary.Encoder, o *testAtom) error {
-	if err := e.ID(binary.ID(o.api)); err != nil {
-		return err
-	}
-	if err := e.String(o.Str); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Sli))); err != nil {
-		return err
-	}
+	e.ID(binary.ID(o.api))
+	e.String(o.Str)
+	e.Uint32(uint32(len(o.Sli)))
 	for i := range o.Sli {
-		if err := e.Bool(o.Sli[i]); err != nil {
-			return err
-		}
+		e.Bool(o.Sli[i])
 	}
-	if o.Any != nil {
-		var boxed binary.Object
-		boxed, err := any.Box(o.Any)
-		if err != nil {
-			return err
-		}
-		if err := e.Variant(boxed); err != nil {
-			return err
-		}
-	} else if err := e.Variant(nil); err != nil {
-		return err
-	}
+	any.Encode(e, o.Any)
 	if o.Ptr != nil {
-		if err := e.Object(o.Ptr); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(o.Ptr)
+	} else {
+		e.Object(nil)
 	}
-	if err := e.Uint32(uint32(len(o.Map))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(o.Map)))
 	for k, v := range o.Map {
-		if err := e.String(k); err != nil {
-			return err
-		}
-		if err := e.String(v); err != nil {
-			return err
-		}
+		e.String(k)
+		e.String(v)
 	}
-	return nil
+	return e.Error()
 }
 func doDecodetestAtom(d binary.Decoder, o *testAtom) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.api = gfxapi.ID(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Str = string(obj)
-	}
+	o.api = gfxapi.ID(binary.ReadID(d))
+	o.Str = string(binary.ReadString(d))
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Sli = make([]bool, count)
 		for i := range o.Sli {
-			if obj, err := d.Bool(); err != nil {
-				return err
-			} else {
-				o.Sli[i] = bool(obj)
-			}
+			o.Sli[i] = bool(binary.ReadBool(d))
 		}
 	}
-	if boxed, err := d.Variant(); err != nil {
-		return err
-	} else if boxed != nil {
-		if o.Any, err = any.Unbox(boxed); err != nil {
-			return err
-		}
-	} else {
-		o.Any = nil
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
+	o.Any, _ = any.Decode(d)
+	if obj, err := d.Object(); obj != nil && err == nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
 		o.Ptr = nil
@@ -178,20 +119,12 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) error {
 		for i := uint32(0); i < count; i++ {
 			var k string
 			var v string
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				k = string(obj)
-			}
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				v = string(obj)
-			}
+			k = string(binary.ReadString(d))
+			v = string(binary.ReadString(d))
 			m[k] = v
 		}
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClasstestAtom) ID() binary.ID      { return binaryIDtestAtom }
 func (*binaryClasstestAtom) New() binary.Object { return &testAtom{} }

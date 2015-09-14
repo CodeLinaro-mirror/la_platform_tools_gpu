@@ -44,6 +44,12 @@ type Writer interface {
 	Float64(float64) error
 	// String encodes a string to the Writer.
 	String(string) error
+	// If there is an error writing any output, all further writing becomes
+	// a no-op. Error() returns the error which stopped writing to the stream.
+	// If writing has not stopped it returns nil.
+	Error() error
+	// Set the error state and stop writing to the stream.
+	SetError(error) error
 }
 
 // WriteUint writes the unsigned integer v of either 8, 16, 32 or 64 bits to w.

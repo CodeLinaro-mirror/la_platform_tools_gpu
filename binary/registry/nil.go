@@ -31,4 +31,3 @@ func (*binaryClassNil) New() binary.Object                                 { ret
 func (*binaryClassNil) Encode(e binary.Encoder, obj binary.Object) error   { return nil }
 func (*binaryClassNil) Decode(d binary.Decoder) (binary.Object, error)     { return nil, nil }
 func (*binaryClassNil) DecodeTo(d binary.Decoder, obj binary.Object) error { return nil }
-func (*binaryClassNil) Skip(d binary.Decoder) error                        { return nil }

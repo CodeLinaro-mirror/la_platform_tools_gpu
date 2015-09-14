@@ -32,26 +32,14 @@ func (*ResourceInfo) Class() binary.Class {
 	return (*binaryClassResourceInfo)(nil)
 }
 func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) error {
-	if err := e.String(o.ID); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Size); err != nil {
-		return err
-	}
-	return nil
+	e.String(o.ID)
+	e.Uint32(o.Size)
+	return e.Error()
 }
 func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.ID = string(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Size = uint32(obj)
-	}
-	return nil
+	o.ID = string(binary.ReadString(d))
+	o.Size = uint32(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
 func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
@@ -83,72 +71,42 @@ func (*Payload) Class() binary.Class {
 	return (*binaryClassPayload)(nil)
 }
 func doEncodePayload(e binary.Encoder, o *Payload) error {
-	if err := e.Uint32(o.StackSize); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.VolatileMemorySize); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Constants))); err != nil {
-		return err
-	}
-	if err := e.Data(o.Constants); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Resources))); err != nil {
-		return err
-	}
+	e.Uint32(o.StackSize)
+	e.Uint32(o.VolatileMemorySize)
+	e.Uint32(uint32(len(o.Constants)))
+	e.Data(o.Constants)
+	e.Uint32(uint32(len(o.Resources)))
 	for i := range o.Resources {
-		if err := e.Value(&o.Resources[i]); err != nil {
-			return err
-		}
+		e.Value(&o.Resources[i])
 	}
-	if err := e.Uint32(uint32(len(o.Opcodes))); err != nil {
-		return err
-	}
-	if err := e.Data(o.Opcodes); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(uint32(len(o.Opcodes)))
+	e.Data(o.Opcodes)
+	return e.Error()
 }
 func doDecodePayload(d binary.Decoder, o *Payload) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.StackSize = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.VolatileMemorySize = uint32(obj)
-	}
+	o.StackSize = uint32(binary.ReadUint32(d))
+	o.VolatileMemorySize = uint32(binary.ReadUint32(d))
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Constants = make([]byte, count)
-		if err := d.Data(o.Constants); err != nil {
-			return err
-		}
+		d.Data(o.Constants)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			if err := d.Value(&o.Resources[i]); err != nil {
-				return err
-			}
+			d.Value(&o.Resources[i])
 		}
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Opcodes = make([]byte, count)
-		if err := d.Data(o.Opcodes); err != nil {
-			return err
-		}
+		d.Data(o.Opcodes)
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassPayload) ID() binary.ID      { return binaryIDPayload }
 func (*binaryClassPayload) New() binary.Object { return &Payload{} }

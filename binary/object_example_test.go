@@ -62,10 +62,6 @@ func (*ExampleClass) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return err
 }
 
-func (*ExampleClass) Skip(d binary.Decoder) error {
-	return d.SkipString()
-}
-
 func init() {
 	registry.Global.Add((*ExampleObject)(nil).Class())
 }

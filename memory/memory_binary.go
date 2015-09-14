@@ -32,26 +32,14 @@ func (*Pointer) Class() binary.Class {
 	return (*binaryClassPointer)(nil)
 }
 func doEncodePointer(e binary.Encoder, o *Pointer) error {
-	if err := e.Uint64(o.Address); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
+	return e.Error()
 }
 func doDecodePointer(d binary.Decoder, o *Pointer) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = PoolID(obj)
-	}
-	return nil
+	o.Address = uint64(binary.ReadUint64(d))
+	o.Pool = PoolID(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassPointer) ID() binary.ID      { return binaryIDPointer }
 func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
@@ -83,26 +71,14 @@ func (*Range) Class() binary.Class {
 	return (*binaryClassRange)(nil)
 }
 func doEncodeRange(e binary.Encoder, o *Range) error {
-	if err := e.Uint64(o.Base); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Size); err != nil {
-		return err
-	}
-	return nil
+	e.Uint64(o.Base)
+	e.Uint64(o.Size)
+	return e.Error()
 }
 func doDecodeRange(d binary.Decoder, o *Range) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Size = uint64(obj)
-	}
-	return nil
+	o.Base = uint64(binary.ReadUint64(d))
+	o.Size = uint64(binary.ReadUint64(d))
+	return d.Error()
 }
 func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }

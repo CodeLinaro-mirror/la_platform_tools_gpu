@@ -32,18 +32,12 @@ func (*msgCloseChannel) Class() binary.Class {
 	return (*binaryClassmsgCloseChannel)(nil)
 }
 func doEncodemsgCloseChannel(e binary.Encoder, o *msgCloseChannel) error {
-	if err := e.Uint32(uint32(o.channelId)); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(uint32(o.channelId))
+	return e.Error()
 }
 func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.channelId = channelId(obj)
-	}
-	return nil
+	o.channelId = channelId(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassmsgCloseChannel) ID() binary.ID      { return binaryIDmsgCloseChannel }
 func (*binaryClassmsgCloseChannel) New() binary.Object { return &msgCloseChannel{} }
@@ -74,32 +68,20 @@ func (*msgData) Class() binary.Class {
 	return (*binaryClassmsgData)(nil)
 }
 func doEncodemsgData(e binary.Encoder, o *msgData) error {
-	if err := e.Uint32(uint32(o.c)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.d))); err != nil {
-		return err
-	}
-	if err := e.Data(o.d); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(uint32(o.c))
+	e.Uint32(uint32(len(o.d)))
+	e.Data(o.d)
+	return e.Error()
 }
 func doDecodemsgData(d binary.Decoder, o *msgData) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.c = channelId(obj)
-	}
+	o.c = channelId(binary.ReadUint32(d))
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.d = make([]byte, count)
-		if err := d.Data(o.d); err != nil {
-			return err
-		}
+		d.Data(o.d)
 	}
-	return nil
+	return d.Error()
 }
 func (*binaryClassmsgData) ID() binary.ID      { return binaryIDmsgData }
 func (*binaryClassmsgData) New() binary.Object { return &msgData{} }
@@ -131,18 +113,12 @@ func (*msgOpenChannel) Class() binary.Class {
 	return (*binaryClassmsgOpenChannel)(nil)
 }
 func doEncodemsgOpenChannel(e binary.Encoder, o *msgOpenChannel) error {
-	if err := e.Uint32(uint32(o.channelId)); err != nil {
-		return err
-	}
-	return nil
+	e.Uint32(uint32(o.channelId))
+	return e.Error()
 }
 func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.channelId = channelId(obj)
-	}
-	return nil
+	o.channelId = channelId(binary.ReadUint32(d))
+	return d.Error()
 }
 func (*binaryClassmsgOpenChannel) ID() binary.ID      { return binaryIDmsgOpenChannel }
 func (*binaryClassmsgOpenChannel) New() binary.Object { return &msgOpenChannel{} }

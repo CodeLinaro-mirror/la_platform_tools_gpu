@@ -19,8 +19,6 @@ type Decoder interface {
 	Reader
 	// ID decodes a binary.ID from the stream.
 	ID() (ID, error)
-	//	// SkipID skips over a binary.ID in the stream.
-	//	SkipID() error
 	// Value decodes an Object from the stream.
 	Value(Object) error
 	// Variant decodes and returns an Object from the stream. The Class in the
@@ -33,4 +31,10 @@ type Decoder interface {
 	Object() (Object, error)
 	// Lookup the class that would be used to encode an id in this encoder.
 	Lookup(ID) Class
+}
+
+// ReadID decodes a binary.ID from the stream.
+func ReadID(d Decoder) ID {
+	id, _ := d.ID()
+	return id
 }
