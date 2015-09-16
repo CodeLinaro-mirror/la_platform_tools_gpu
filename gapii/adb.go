@@ -54,7 +54,7 @@ func getSoPath(a *adb.Action, debug bool) (string, error) {
 	if debug {
 		flavor = "debug"
 	}
-	return filepath.Join(gopath, "bin", soName, flavor, "spy.so"), nil
+	return filepath.Join(gopath, "bin", soName, flavor, "libgapii.so"), nil
 }
 
 // AdbStart launches an activity on an android device with the gapii tracer
@@ -112,7 +112,7 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, debug bool) error {
 	}()
 
 	log.Infof(l, "Forwarding port %v", spyport)
-	err = d.Forward(spyport, adb.NamedAbstractSocket("gfxspy"))
+	err = d.Forward(spyport, adb.NamedAbstractSocket("gapii"))
 	if err != nil {
 		log.Errorf(l, "Failed setting up port forwarding: %s", err)
 		return err

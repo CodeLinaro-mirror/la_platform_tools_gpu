@@ -298,7 +298,7 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 			},
 		}),
 		Spy: base.Extend(cpp.Config{
-			Name:               "spy",
+			Name:               "gapii",
 			IncludeSearchPaths: build.FileSet{CCRoot},
 		}),
 		Replayd: base.Extend(cpp.Config{

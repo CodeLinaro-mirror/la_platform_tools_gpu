@@ -55,7 +55,7 @@ namespace gapii {
 // having the INTERNET permission set, required for opening and listening on a TCP socket.
 Spy::Spy() {
 #if TARGET_OS == GAPID_OS_ANDROID
-    auto writer = ConnectionWriter::listenPipe("gfxspy", true);
+    auto writer = ConnectionWriter::listenPipe("gapii", true);
 #else // TARGET_OS
     auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
 #endif
