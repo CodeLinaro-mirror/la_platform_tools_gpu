@@ -27,7 +27,7 @@ const (
 	findLocalDeviceAttempts          = 5
 	msBetweenFindLocalDeviceAttempts = 500
 	localDeviceName                  = "Local machine" // TODO: Remove hard-coded string.
-	replaydPort                      = 9283            // Note: Not the usual replayd port.
+	gapirPort                        = 9283            // Note: Not the usual gapir port.
 )
 
 // FindLocalDevice returns the replay Device for the local host. If the local
@@ -36,7 +36,7 @@ func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
 	replay.ConfigureLocalReplayDevice(
 		true, // disable disk-cache
 		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.Replayd)),
-		replaydPort,
+		gapirPort,
 	)
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {

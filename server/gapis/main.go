@@ -30,7 +30,7 @@ var (
 	rpc                  = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
 	dataPath             = flag.String("data", "data", "Path to the server's data folder")
 	logfilePath          = flag.String("logfile", filepath.Join("logs", "server.log"), "Path to the server's logfile")
-	localDevicePort      = flag.Int("local_replayd_port", 9284, "Port number of the \"replayd\" running on the local device")
+	localDevicePort      = flag.Int("local_gapir_port", 9284, "Port number of the \"gapir\" running on the local device")
 	shutdownOnDisconnect = flag.Bool("shutdown_on_disconnect", false, "Shutdown server when no connections remain")
 )
 

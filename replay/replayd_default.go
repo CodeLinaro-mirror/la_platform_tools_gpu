@@ -16,4 +16,4 @@
 
 package replay
 
-const Replayd = "replayd"
+const Replayd = "gapir"

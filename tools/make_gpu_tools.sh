@@ -82,12 +82,12 @@ export GO_TEST_FLAGS="-v -x"
 go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
 
 # Kill any existing replay daemon before running tests.
-killall replayd || true
+killall gapir || true
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true --disable=code cc
 
 # Kill any existing replay daemon before running tests.
-killall replayd || true
+killall gapir || true
 
 # Run non-integration tests.
 go list android.googlesource.com/platform/tools/gpu/... | egrep -v '/integration/?' | xargs go test $GO_TEST_FLAGS
@@ -101,7 +101,7 @@ if [ ! -z $XVFB_PID ]; then
   kill $XVFB_PID
 fi
 
-killall replayd || true
+killall gapir || true
 
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true -targetos=windows --disable=code cc:replayd
@@ -124,7 +124,7 @@ if [[ -n "$DIST_DIR" ]]; then
           ZIP="$DIST_DIR/gpu-tools-$TARGET_OS-$BUILD_FLAVOR-$BUILD_NUMBER.zip"
           rm -f $ZIP
 
-          for ARTIFACT in gapis replayd; do
+          for ARTIFACT in gapis gapir; do
             zip -9rq $ZIP bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
           done
       fi

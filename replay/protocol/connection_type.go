@@ -23,6 +23,6 @@ const (
 	ConnectionTypeDeviceInfo = ConnectionType(0)
 	// ConnectionTypeReplay is the type of connection used to issue a replay.
 	ConnectionTypeReplay = ConnectionType(1)
-	// ConnectionTypeShutdown is used to request a shutdown of replayd.
+	// ConnectionTypeShutdown is used to request a shutdown of gapir.
 	ConnectionTypeShutdown = ConnectionType(2)
 )

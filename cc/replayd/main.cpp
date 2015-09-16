@@ -104,13 +104,13 @@ void listenConnections(const char* listenerPort, const char* cachePath,
 void android_main(struct android_app*) {
     app_dummy();
     MemoryManager memoryManager(memorySizes);
-    listenConnections("9285", "/sdcard/replayd_cache", &memoryManager);
+    listenConnections("9285", "/sdcard/gapir_cache", &memoryManager);
 }
 
 #else  // TARGET_OS == GAPID_OS_ANDROID
 // Main function for PC
 int main(int argc, char* argv[]) {
-    GAPID_LOGGER_INIT("logs/replay.log");
+    GAPID_LOGGER_INIT("logs/gapir.log");
 
     bool useCache = true;
     const char* portStr = "9284";
@@ -129,7 +129,7 @@ int main(int argc, char* argv[]) {
     }
     const char* cachePath = useCache ? ("data" PATH_DELIMITER_STR "ccache") : nullptr;
     MemoryManager memoryManager(memorySizes);
-    GAPID_INFO("replayd listening on port %s", portStr);
+    GAPID_INFO("gapir listening on port %s", portStr);
     listenConnections(portStr, cachePath, &memoryManager);
     return EXIT_SUCCESS;
 }

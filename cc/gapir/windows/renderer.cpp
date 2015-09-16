@@ -24,7 +24,7 @@
 namespace gapir {
 namespace {
 
-const TCHAR* wndClassName = TEXT("replayd");
+const TCHAR* wndClassName = TEXT("gapir");
 
 WNDCLASS registerWindowClass() {
     WNDCLASS wc;

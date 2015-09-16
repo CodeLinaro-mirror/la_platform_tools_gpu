@@ -191,10 +191,10 @@ func (t Target) Build(env build.Environment) {
 	// Investigate linker flags to use build.Files(gapiiLib)
 	cpp.MakeDynamicLibrary("spy", gapiiSource, t.Spy, env)
 
-	// Build replayd from the gapir static library and Main.cpp.
+	// Build gapir from the gapir static library and Main.cpp.
 	replaydSource := build.Files(ReplaydRoot.Join("main.cpp"))
 	replaydInputs := replaydSource.Append(gapirLib, gapicLib)
-	replayd := cpp.MakeExecutable("replayd", replaydInputs, t.Replayd, env)
+	replayd := cpp.MakeExecutable("gapir", replaydInputs, t.Replayd, env)
 
 	// Build tests.
 	gapicTestSource := GapicRoot.Glob(t.SourceFiles...).
@@ -302,7 +302,7 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 			IncludeSearchPaths: build.FileSet{CCRoot},
 		}),
 		Replayd: base.Extend(cpp.Config{
-			Name: "replayd",
+			Name: "gapir",
 			IncludeSearchPaths: build.FileSet{
 				CCRoot,
 			},

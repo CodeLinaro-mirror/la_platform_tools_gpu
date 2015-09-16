@@ -32,7 +32,7 @@ func main() { Run() }
 
 const (
 	GPURoot = "android.googlesource.com/platform/tools/gpu"
-	// Request to send to replayd to have it shutdown. Note we do not use the
+	// Request to send to gapir to have it shutdown. Note we do not use the
 	// value in replay/protocol/connection_type.go to avoid introducing a
 	// dependency on the code we are trying to build.
 	ReplaydShutdownRequest = 2
@@ -93,7 +93,7 @@ func init() {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
 		cc.Graph(cctargets)
-		Apps.Gapir = Virtual("cc:replayd")
+		Apps.Gapir = Virtual("cc:gapir")
 		Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		Creator("cc:spy").DependsOn("code")
 		Creator("cc:gapii").DependsOn("code")
@@ -164,14 +164,14 @@ func Codergen(name string, args ...string) {
 }
 
 func ShutdownReplayd() Entity {
-	e := Virtual("shutdownreplayd")
+	e := Virtual("shutdowngapir")
 	NewStep(func(*Step) error {
 		for _, endpoint := range []string{"localhost:9283", "localhost:9284"} {
 			const maxRetries = 10
 			for i := 0; i < maxRetries; i++ {
 				conn, err := net.Dial("tcp", endpoint)
 				if err != nil {
-					// Assume this means there is no replayd
+					// Assume this means there is no gapir
 					break
 				}
 				defer conn.Close()

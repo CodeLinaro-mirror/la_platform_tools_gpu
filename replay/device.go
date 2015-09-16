@@ -25,17 +25,17 @@ import (
 )
 
 // DisableLocalDeviceCache can be used to disable the disk-cache for the local
-// device. If true, it is passed as a flag to replayd on spawning. This can be
+// device. If true, it is passed as a flag to gapir on spawning. This can be
 // used for disabling the cache for tests.
 var disableLocalDeviceCache = false
 
 // localReplayBinary is the full path to the local binary.
 var localReplayBinary = Replayd
 
-// Port number of the "replayd" running on the local device
+// Port number of the "gapir" running on the local device
 var localDevicePort = 9284
 
-// ConfigureLocalReplayDevice adjusts the settings for replayd.
+// ConfigureLocalReplayDevice adjusts the settings for gapir.
 func ConfigureLocalReplayDevice(disableCache bool, binary string, port int) {
 	disableLocalDeviceCache = disableCache
 	localReplayBinary = binary

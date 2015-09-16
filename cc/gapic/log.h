@@ -19,7 +19,7 @@
 
 // General logging functions for the replay system. All logging should be done through these macros.
 // On android the log is written to the general log output with tag name "Caze". On PCs it is
-// written to "logs/replay.log" if possible or to the stderr otherwise.
+// written to "logs/gapir.log" if possible or to the stderr otherwise.
 //
 // The replay system supports the following log levels with the specified meanings:
 // * LOG_LEVEL_FATAL:   Fatal error, no recovery is possible, the system will die immediately
