@@ -121,6 +121,18 @@ type resultImportCapture struct {
 	value *path.Capture
 }
 
+// Call LoadCapture
+type callLoadCapture struct {
+	binary.Generate
+	path string
+}
+
+// Result LoadCapture
+type resultLoadCapture struct {
+	binary.Generate
+	value *path.Capture
+}
+
 // Call Set
 type callSet struct {
 	binary.Generate

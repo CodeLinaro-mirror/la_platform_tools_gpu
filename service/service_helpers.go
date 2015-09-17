@@ -73,6 +73,14 @@ func (c callImportCapture) Format(f fmt.State, r rune) {
 func (r resultImportCapture) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callLoadCapture) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "LoadCapture(path: %v)",
+		c.path,
+	)
+}
+func (r resultLoadCapture) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callSet) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Set(p: %v, v: %v)",
 		c.p, c.v,

@@ -43,6 +43,10 @@ type Service interface {
 	// the new capture identifier.
 	ImportCapture(name string, Data []uint8, l log.Logger) (*path.Capture, error)
 
+	// LoadCapture imports capture data from a file, returning the new capture
+	// identifier.
+	LoadCapture(path string, l log.Logger) (*path.Capture, error)
+
 	// GetCaptures returns the full list of capture identifiers avaliable on the
 	// server.
 	GetCaptures(l log.Logger) ([]*path.Capture, error)

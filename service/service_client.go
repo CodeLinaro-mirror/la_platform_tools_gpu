@@ -123,6 +123,16 @@ func (c client) ImportCapture(name string, Data []uint8, l log.Logger) (res *pat
 	return
 }
 
+func (c client) LoadCapture(path string, l log.Logger) (res *path.Capture, err error) {
+	var val interface{}
+	if val, err = c.Send(&callLoadCapture{path: path}); err == nil {
+		res = val.(*resultLoadCapture).value
+	} else {
+		log.Errorf(l, "Service LoadCapture failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
 	var val interface{}
 	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {

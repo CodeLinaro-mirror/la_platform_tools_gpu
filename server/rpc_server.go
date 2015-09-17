@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"os"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -35,6 +36,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
+	"path/filepath"
 )
 
 type rpcServer struct {
@@ -132,13 +134,11 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 	return result, nil
 }
 
-// Import imports capture data emitted by the graphics spy, returning the new
-// capture identifier.
-func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path.Capture, error) {
+func (s rpcServer) readCapture(name string, in io.Reader, l log.Logger) (*path.Capture, error) {
 	list := atom.NewList()
-	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
+	d := cyclic.Decoder(vle.Reader(in))
 	tag, err := d.String()
-	if err != nil  {
+	if err != nil {
 		return nil, err
 	}
 	if tag != gapii.CaptureTag {
@@ -162,6 +162,22 @@ func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path
 		return nil, nil
 	}
 	return builder.ImportCapture(name, list, s.Database, l)
+}
+
+// Import imports capture data emitted by the graphics spy, returning the new
+// capture identifier.
+func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path.Capture, error) {
+	return s.readCapture(name, bytes.NewBuffer(data), l)
+}
+
+// LoadCapture imports capture data from a file, returning the new capture identifier.
+func (s rpcServer) LoadCapture(path string, l log.Logger) (*path.Capture, error) {
+	name := filepath.Base(path)
+	in, err := os.Open(path);
+	if err != nil {
+		return nil, err
+	}
+	return s.readCapture(name, in, l)
 }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.

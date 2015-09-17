@@ -85,6 +85,12 @@ func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, se
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callLoadCapture:
+			if res, err := server.LoadCapture(call.path, l); err == nil {
+				return &resultLoadCapture{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callSet:
 			if res, err := server.Set(call.p, call.v, l); err == nil {
 				return &resultSet{value: res}

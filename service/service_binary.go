@@ -42,6 +42,7 @@ func init() {
 	Namespace.Add((*callGetSchema)(nil).Class())
 	Namespace.Add((*callGetTimingInfo)(nil).Class())
 	Namespace.Add((*callImportCapture)(nil).Class())
+	Namespace.Add((*callLoadCapture)(nil).Class())
 	Namespace.Add((*callSet)(nil).Class())
 	Namespace.Add((*resultFollow)(nil).Class())
 	Namespace.Add((*resultGet)(nil).Class())
@@ -52,6 +53,7 @@ func init() {
 	Namespace.Add((*resultGetSchema)(nil).Class())
 	Namespace.Add((*resultGetTimingInfo)(nil).Class())
 	Namespace.Add((*resultImportCapture)(nil).Class())
+	Namespace.Add((*resultLoadCapture)(nil).Class())
 	Namespace.Add((*resultSet)(nil).Class())
 }
 
@@ -77,6 +79,7 @@ var (
 	binaryIDcallGetSchema             = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetTimingInfo         = binary.ID{0x00, 0xed, 0x86, 0x08, 0xac, 0xd7, 0xd9, 0x7d, 0x3f, 0xf4, 0x38, 0xf4, 0xb3, 0xde, 0xc8, 0x9b, 0xd6, 0xc9, 0xc2, 0xb0}
 	binaryIDcallImportCapture         = binary.ID{0xe2, 0xda, 0xa8, 0x47, 0x4b, 0x9b, 0xdc, 0x6a, 0xd8, 0xa4, 0xf9, 0x9a, 0xa7, 0x93, 0xe9, 0x4d, 0x48, 0x07, 0x7b, 0x8e}
+	binaryIDcallLoadCapture           = binary.ID{0xb2, 0x95, 0x69, 0x89, 0x7f, 0xd1, 0x6e, 0x0a, 0x1a, 0x9d, 0xfb, 0x55, 0x06, 0xfb, 0xe9, 0xe5, 0xfb, 0xa2, 0x5a, 0x6a}
 	binaryIDcallSet                   = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
 	binaryIDresultFollow              = binary.ID{0x9b, 0xd0, 0xad, 0xb0, 0x41, 0x98, 0x0d, 0xf5, 0x6e, 0x07, 0xe3, 0x9b, 0xc2, 0x03, 0x48, 0xfa, 0xca, 0xef, 0x4a, 0xb3}
 	binaryIDresultGet                 = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
@@ -87,6 +90,7 @@ var (
 	binaryIDresultGetSchema           = binary.ID{0xd0, 0x54, 0xb1, 0x58, 0x23, 0xd7, 0x0d, 0x2b, 0x65, 0xee, 0xcc, 0x2a, 0xb8, 0x12, 0x27, 0x6c, 0x8f, 0xcd, 0x75, 0x8a}
 	binaryIDresultGetTimingInfo       = binary.ID{0xb0, 0x3b, 0x55, 0xec, 0xe2, 0xf1, 0x87, 0x15, 0x8c, 0x11, 0x5d, 0x12, 0x3a, 0xc7, 0x1f, 0x7f, 0xfd, 0xe9, 0x20, 0xd3}
 	binaryIDresultImportCapture       = binary.ID{0x61, 0xc5, 0x87, 0xa8, 0xdf, 0xc8, 0x2b, 0xa5, 0xf4, 0x63, 0xfc, 0x02, 0x50, 0xfd, 0x0e, 0x61, 0x31, 0xa2, 0x8f, 0xee}
+	binaryIDresultLoadCapture         = binary.ID{0x40, 0xbb, 0xab, 0xc1, 0x8a, 0xd3, 0x5f, 0x8b, 0x4e, 0x2e, 0xdd, 0x58, 0xcc, 0xbb, 0x9e, 0x59, 0x98, 0x98, 0x19, 0x26}
 	binaryIDresultSet                 = binary.ID{0x86, 0x91, 0xf0, 0x3f, 0xf8, 0x37, 0xf5, 0x8d, 0x70, 0xeb, 0xc0, 0x87, 0x00, 0x9e, 0x42, 0xd4, 0x8e, 0x89, 0xc3, 0xdb}
 )
 
@@ -1130,6 +1134,42 @@ var schemacallImportCapture = &schema.Class{
 	},
 }
 
+type binaryClasscallLoadCapture struct{}
+
+func (*callLoadCapture) Class() binary.Class {
+	return (*binaryClasscallLoadCapture)(nil)
+}
+func doEncodecallLoadCapture(e binary.Encoder, o *callLoadCapture) error {
+	e.String(o.path)
+	return e.Error()
+}
+func doDecodecallLoadCapture(d binary.Decoder, o *callLoadCapture) error {
+	o.path = string(binary.ReadString(d))
+	return d.Error()
+}
+func (*binaryClasscallLoadCapture) ID() binary.ID      { return binaryIDcallLoadCapture }
+func (*binaryClasscallLoadCapture) New() binary.Object { return &callLoadCapture{} }
+func (*binaryClasscallLoadCapture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecallLoadCapture(e, obj.(*callLoadCapture))
+}
+func (*binaryClasscallLoadCapture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &callLoadCapture{}
+	return obj, doDecodecallLoadCapture(d, obj)
+}
+func (*binaryClasscallLoadCapture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecallLoadCapture(d, obj.(*callLoadCapture))
+}
+func (*binaryClasscallLoadCapture) Schema() *schema.Class { return schemacallLoadCapture }
+
+var schemacallLoadCapture = &schema.Class{
+	TypeID:  binaryIDcallLoadCapture,
+	Package: "service",
+	Name:    "callLoadCapture",
+	Fields: []schema.Field{
+		{Declared: "path", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
 type binaryClasscallSet struct{}
 
 func (*callSet) Class() binary.Class {
@@ -1568,6 +1608,50 @@ var schemaresultImportCapture = &schema.Class{
 	TypeID:  binaryIDresultImportCapture,
 	Package: "service",
 	Name:    "resultImportCapture",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassresultLoadCapture struct{}
+
+func (*resultLoadCapture) Class() binary.Class {
+	return (*binaryClassresultLoadCapture)(nil)
+}
+func doEncoderesultLoadCapture(e binary.Encoder, o *resultLoadCapture) error {
+	if o.value != nil {
+		e.Object(o.value)
+	} else {
+		e.Object(nil)
+	}
+	return e.Error()
+}
+func doDecoderesultLoadCapture(d binary.Decoder, o *resultLoadCapture) error {
+	if obj, err := d.Object(); obj != nil && err == nil {
+		o.value = obj.(*path.Capture)
+	} else {
+		o.value = nil
+	}
+	return d.Error()
+}
+func (*binaryClassresultLoadCapture) ID() binary.ID      { return binaryIDresultLoadCapture }
+func (*binaryClassresultLoadCapture) New() binary.Object { return &resultLoadCapture{} }
+func (*binaryClassresultLoadCapture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderesultLoadCapture(e, obj.(*resultLoadCapture))
+}
+func (*binaryClassresultLoadCapture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &resultLoadCapture{}
+	return obj, doDecoderesultLoadCapture(d, obj)
+}
+func (*binaryClassresultLoadCapture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderesultLoadCapture(d, obj.(*resultLoadCapture))
+}
+func (*binaryClassresultLoadCapture) Schema() *schema.Class { return schemaresultLoadCapture }
+
+var schemaresultLoadCapture = &schema.Class{
+	TypeID:  binaryIDresultLoadCapture,
+	Package: "service",
+	Name:    "resultLoadCapture",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 	},
