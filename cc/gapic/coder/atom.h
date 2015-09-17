@@ -70,7 +70,7 @@ namespace atom {
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mAtoms.size());
             for (int i = 0; i < this->mAtoms.size(); i++) {
-                e->Object(this->mAtoms[i]);
+                e->Variant(this->mAtoms[i]);
             }
         }
 

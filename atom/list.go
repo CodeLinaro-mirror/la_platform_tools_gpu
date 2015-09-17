@@ -19,7 +19,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // List is a list of atoms.
 type List struct {
 	binary.Generate `java:"AtomList"`
-	Atoms           []Atom
+	Atoms           []Atom `variant:"true"`
 }
 
 func NewList(atoms ...Atom) *List {

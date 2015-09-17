@@ -44,6 +44,7 @@
 {{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Interface"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Variant"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Pointer"}}{{Call "Go.Import" .Type}}{{end}}
 {{define "Go.Import.Array"}}{{Call "Go.Import" .ValueType}}{{end}}
 {{define "Go.Import.Slice"}}{{Call "Go.Import" .ValueType}}{{end}}

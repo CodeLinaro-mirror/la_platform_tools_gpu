@@ -91,6 +91,11 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, 
 		}
 	case *types.Slice:
 		vt := fromType(pkg, from.Elem(), "", imports, binObj)
+		if tags.Flag("variant") {
+			if it, ok := vt.(*schema.Interface); ok {
+				vt = &schema.Variant{ Name: it.Name};
+			}
+		}
 		return &schema.Slice{Alias: alias, ValueType: vt}
 	case *types.Array:
 		length := uint32(from.Len())

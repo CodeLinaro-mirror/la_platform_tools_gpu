@@ -26,6 +26,7 @@ func init() {
 	Namespace.Add((*Primitive)(nil).Class())
 	Namespace.Add((*Slice)(nil).Class())
 	Namespace.Add((*Struct)(nil).Class())
+	Namespace.Add((*Variant)(nil).Class())
 }
 
 var (
@@ -40,6 +41,7 @@ var (
 	binaryIDPrimitive   = binary.ID{0x45, 0x4d, 0x9e, 0x7d, 0xe6, 0x4f, 0x50, 0x74, 0x95, 0x13, 0x60, 0xbd, 0xea, 0x00, 0x71, 0x93, 0x9e, 0x3e, 0xc2, 0x4e}
 	binaryIDSlice       = binary.ID{0x3b, 0x75, 0xee, 0x59, 0x18, 0x1a, 0x4d, 0x74, 0x50, 0xf2, 0x50, 0x7f, 0xf9, 0x4f, 0x79, 0x99, 0x38, 0x58, 0x96, 0xd2}
 	binaryIDStruct      = binary.ID{0xdf, 0xe3, 0x9e, 0xf2, 0x8e, 0x9c, 0xea, 0x9b, 0x93, 0x49, 0x47, 0x76, 0xef, 0x9d, 0xe2, 0x46, 0xd9, 0x68, 0x92, 0x94}
+	binaryIDVariant     = binary.ID{0xb6, 0xa7, 0xe3, 0x12, 0xce, 0xc0, 0x5a, 0x83, 0xa7, 0x37, 0x24, 0x57, 0x28, 0x9d, 0xa4, 0xf6, 0x01, 0x5f, 0xf8, 0xc8}
 )
 
 type binaryClassArray struct{}
@@ -418,4 +420,30 @@ func (*binaryClassStruct) Decode(d binary.Decoder) (binary.Object, error) {
 }
 func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeStruct(d, obj.(*Struct))
+}
+
+type binaryClassVariant struct{}
+
+func (*Variant) Class() binary.Class {
+	return (*binaryClassVariant)(nil)
+}
+func doEncodeVariant(e binary.Encoder, o *Variant) error {
+	e.String(o.Name)
+	return e.Error()
+}
+func doDecodeVariant(d binary.Decoder, o *Variant) error {
+	o.Name = string(binary.ReadString(d))
+	return d.Error()
+}
+func (*binaryClassVariant) ID() binary.ID      { return binaryIDVariant }
+func (*binaryClassVariant) New() binary.Object { return &Variant{} }
+func (*binaryClassVariant) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVariant(e, obj.(*Variant))
+}
+func (*binaryClassVariant) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Variant{}
+	return obj, doDecodeVariant(d, obj)
+}
+func (*binaryClassVariant) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVariant(d, obj.(*Variant))
 }

@@ -105,6 +105,8 @@ func (m *Module) ModuleAndName(v interface{}) (*Module, string) {
 		name = v.Name
 	case *schema.Interface:
 		name = v.Name
+	case *schema.Variant:
+		name = v.Name
 	case *schema.Primitive:
 		name = v.Name
 	default:

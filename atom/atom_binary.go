@@ -137,7 +137,7 @@ func (*List) Class() binary.Class {
 func doEncodeList(e binary.Encoder, o *List) error {
 	e.Uint32(uint32(len(o.Atoms)))
 	for i := range o.Atoms {
-		e.Object(o.Atoms[i])
+		e.Variant(o.Atoms[i])
 	}
 	return e.Error()
 }
@@ -147,7 +147,7 @@ func doDecodeList(d binary.Decoder, o *List) error {
 	} else {
 		o.Atoms = make([]Atom, count)
 		for i := range o.Atoms {
-			if obj, err := d.Object(); obj != nil && err == nil {
+			if obj, err := d.Variant(); obj != nil && err == nil {
 				o.Atoms[i] = obj.(Atom)
 			} else {
 				o.Atoms[i] = nil
@@ -175,7 +175,7 @@ var schemaList = &schema.Class{
 	Package: "atom",
 	Name:    "List",
 	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "Atom"}}},
+		{Declared: "Atoms", Type: &schema.Slice{Alias: "", ValueType: &schema.Variant{Name: "Atom"}}},
 	},
 }
 

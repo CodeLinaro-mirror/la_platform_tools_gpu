@@ -111,6 +111,10 @@
   e.Object({{.Name}})¶
 {{end}}
 
+{{define "Go.Encode.Variant"}}
+  e.Variant({{.Name}})¶
+{{end}}
+
 {{define "Go.Encode.Any"}}
   any.Encode(e, {{.Name}})¶
 {{end}}
@@ -169,6 +173,14 @@
   «}¶
 {{end}}
 
+{{define "Go.Decode.Variant"}}
+  if obj, err := d.Variant(); obj != nil && err == nil {»¶
+    {{.Name}} = obj.({{.Type.Name}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
+
 {{define "Go.Decode.Any"}}
   {{.Name}}, _ = any.Decode(d)¶
 {{end}}
@@ -220,6 +232,7 @@
 {{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID: (*{{.Name}})(nil).Class().ID()}{{end}}
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
 {{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
 {{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}}}{{end}}

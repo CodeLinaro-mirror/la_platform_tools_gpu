@@ -48,3 +48,36 @@ func (i *Interface) Encode(e binary.Encoder, value interface{}) error {
 func (i *Interface) Decode(d binary.Decoder) (interface{}, error) {
 	return d.Object()
 }
+
+// Variant is the Type descriptor for a field who's underlying type is dynamic, but is encoded with Variant not Object.
+type Variant struct {
+	binary.Generate
+	Name string // The simple name of the type.
+}
+
+func (i *Variant) Basename() string {
+	return i.Name
+}
+
+func (i *Variant) Typename() string {
+	return i.Name
+}
+
+func (i *Variant) String() string {
+	return i.Name
+}
+
+func (i *Variant) Encode(e binary.Encoder, value interface{}) error {
+	if value != nil { // TODO proper nil test needed?
+		if err := e.Variant(value.(binary.Object)); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *Variant) Decode(d binary.Decoder) (interface{}, error) {
+	return d.Object()
+}

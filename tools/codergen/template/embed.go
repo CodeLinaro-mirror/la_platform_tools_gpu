@@ -50,6 +50,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type.Struct"}}{{.Name | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
+{{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
@@ -92,6 +93,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
+{{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
 
 {{define "Cpp.Encode#[]uint8"}}
   e->Uint32({{.Name}}.size());¶
@@ -268,6 +270,10 @@ const go_binary_tmpl = `{{/*
   e.Object({{.Name}})¶
 {{end}}
 
+{{define "Go.Encode.Variant"}}
+  e.Variant({{.Name}})¶
+{{end}}
+
 {{define "Go.Encode.Any"}}
   any.Encode(e, {{.Name}})¶
 {{end}}
@@ -326,6 +332,14 @@ const go_binary_tmpl = `{{/*
   «}¶
 {{end}}
 
+{{define "Go.Decode.Variant"}}
+  if obj, err := d.Variant(); obj != nil && err == nil {»¶
+    {{.Name}} = obj.({{.Type.Name}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
+
 {{define "Go.Decode.Any"}}
   {{.Name}}, _ = any.Decode(d)¶
 {{end}}
@@ -377,6 +391,7 @@ const go_binary_tmpl = `{{/*
 {{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID: (*{{.Name}})(nil).Class().ID()}{{end}}
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
 {{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
 {{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}}}{{end}}
@@ -605,6 +620,7 @@ const go_common_tmpl = `{{/*
 {{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Interface"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Variant"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Pointer"}}{{Call "Go.Import" .Type}}{{end}}
 {{define "Go.Import.Array"}}{{Call "Go.Import" .ValueType}}{{end}}
 {{define "Go.Import.Slice"}}{{Call "Go.Import" .ValueType}}{{end}}
@@ -809,6 +825,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
+{{define "Java.Encode.Variant"}}e.variant({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.variant(Box.wrap({{.Name}}));{{end}}
 
 {{define "Java.Encode#[]uint8"}}
@@ -848,6 +865,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
+{{define "Java.Decode.Variant"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.variant());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = ((Box)d.variant()).unwrap();{{end}}
 
 {{define "Java.Decode#[]uint8"}}
@@ -1137,6 +1155,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
+{{define "Java.Type.Variant"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
@@ -1144,6 +1163,7 @@ const java_common_tmpl = `{{/*
 
 {{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
+{{define "Java.Import.Variant"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}

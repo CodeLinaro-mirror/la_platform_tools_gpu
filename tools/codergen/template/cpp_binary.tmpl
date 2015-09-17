@@ -28,6 +28,7 @@
 {{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type.Struct"}}{{.Name | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
+{{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
@@ -70,6 +71,7 @@
 {{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
+{{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
 
 {{define "Cpp.Encode#[]uint8"}}
   e->Uint32({{.Name}}.size());¶

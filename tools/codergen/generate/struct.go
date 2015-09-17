@@ -116,6 +116,8 @@ func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i 
 		i = walkStructs(t.Name, byname, structs, i)
 	case *schema.Interface:
 		i = walkStructs(t.Name, byname, structs, i)
+	case *schema.Variant:
+		i = walkStructs(t.Name, byname, structs, i)
 	case *schema.Pointer:
 		i = walkType(t.Type, byname, structs, i)
 	case *schema.Array:
