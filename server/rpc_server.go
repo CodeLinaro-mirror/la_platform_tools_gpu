@@ -30,6 +30,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/all"
+	"android.googlesource.com/platform/tools/gpu/gapii"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -136,14 +137,25 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path.Capture, error) {
 	list := atom.NewList()
 	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
+	tag, err := d.String()
+	if err != nil  {
+		return nil, err
+	}
+	if tag != gapii.CaptureTag {
+		return nil, fmt.Errorf("Invalid capture tag '%s'", tag)
+	}
 	for {
-		if obj, err := d.Object(); err != nil {
+		if obj, err := d.Variant(); err != nil {
 			if err != io.EOF {
 				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), err)
 			}
 			break
 		} else {
-			list.Atoms = append(list.Atoms, obj.(atom.Atom))
+			atom, ok := obj.(atom.Atom)
+			if !ok {
+				return nil, fmt.Errorf("Expected atom, got '%T' after decoding %d atoms", obj, len(list.Atoms))
+			}
+			list.Atoms = append(list.Atoms, atom)
 		}
 	}
 	if len(list.Atoms) == 0 {

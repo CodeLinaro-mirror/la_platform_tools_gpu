@@ -189,7 +189,7 @@
     observe(observations.mWrites);
 ¶
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     {{if not (IsVoid $.Return.Type)}}¶
       return result;

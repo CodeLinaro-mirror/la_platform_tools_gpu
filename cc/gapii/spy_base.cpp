@@ -49,7 +49,7 @@ void SpyBase::observe(gapic::Array<Observation>& observations) {
         gapic::Id id = gapic::Id::Hash(array.data(), array.size());
         if (mResources.count(id) == 0) {
             gapic::coder::atom::Resource resource(id, array);
-            mEncoder->Object(&resource);
+            mEncoder->Variant(&resource);
             mResources.emplace(id);
         }
         v.push_back(Observation(Range(p.start, array.size()), id));

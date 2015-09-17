@@ -24,6 +24,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
+const CaptureTag = "GapiiTraceFile_V1.0"
+
 func closed(s chan struct{}) bool {
 	select {
 	case <-s:

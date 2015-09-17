@@ -60,6 +60,7 @@ Spy::Spy() {
     auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
 #endif
     auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
+    encoder->String("GapiiTraceFile_V1.0");
     GlesSpy::init(encoder);
     GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
 }

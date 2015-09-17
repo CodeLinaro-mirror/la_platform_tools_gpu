@@ -1975,7 +1975,7 @@ inline void GlesSpy::glBlendBarrierKHR() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendBarrierKHR coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationSeparateiEXT() const {
@@ -2000,7 +2000,7 @@ inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationSeparateiEXT coder(observations, buf, modeRGB, modeAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationiEXT() const {
@@ -2024,7 +2024,7 @@ inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationiEXT coder(observations, buf, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFuncSeparateiEXT() const {
@@ -2051,7 +2051,7 @@ inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint
 
     gapic::coder::gles::GlBlendFuncSeparateiEXT coder(observations, buf, srcRGB, dstRGB, srcAlpha,
                                                       dstAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFunciEXT() const { return mImports.glBlendFunciEXT != nullptr; }
@@ -2073,7 +2073,7 @@ inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendFunciEXT coder(observations, buf, src, dst);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlColorMaskiEXT() const { return mImports.glColorMaskiEXT != nullptr; }
@@ -2096,7 +2096,7 @@ inline void GlesSpy::glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8
     observe(observations.mWrites);
 
     gapic::coder::gles::GlColorMaskiEXT coder(observations, index, r, g, b, a);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyImageSubDataEXT() const {
@@ -2132,7 +2132,7 @@ inline void GlesSpy::glCopyImageSubDataEXT(uint32_t srcName, uint32_t srcTarget,
     gapic::coder::gles::GlCopyImageSubDataEXT coder(
             observations, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget,
             dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDebugMessageCallbackKHR() const {
@@ -2160,7 +2160,7 @@ inline void GlesSpy::glDebugMessageCallbackKHR(void* callback, void* userParam) 
                                   reinterpret_cast<uintptr_t>(callback), 0)),
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(userParam), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDebugMessageControlKHR() const {
@@ -2191,7 +2191,7 @@ inline void GlesSpy::glDebugMessageControlKHR(uint32_t source, uint32_t type, ui
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ids), 0)),
             enabled);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDebugMessageInsertKHR() const {
@@ -2230,7 +2230,7 @@ inline void GlesSpy::glDebugMessageInsertKHR(uint32_t source, uint32_t type, uin
             observations, source, type, id, severity, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(message), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisableiEXT() const { return mImports.glDisableiEXT != nullptr; }
@@ -2252,7 +2252,7 @@ inline void GlesSpy::glDisableiEXT(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisableiEXT coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnableiEXT() const { return mImports.glEnableiEXT != nullptr; }
@@ -2274,7 +2274,7 @@ inline void GlesSpy::glEnableiEXT(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnableiEXT coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTextureEXT() const {
@@ -2301,7 +2301,7 @@ inline void GlesSpy::glFramebufferTextureEXT(uint32_t target, uint32_t attachmen
 
     gapic::coder::gles::GlFramebufferTextureEXT coder(observations, target, attachment, texture,
                                                       level);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetDebugMessageLogKHR() const {
@@ -2377,7 +2377,7 @@ inline uint32_t GlesSpy::glGetDebugMessageLogKHR(uint32_t count, int32_t bufSize
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(messageLog), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -2425,7 +2425,7 @@ inline void GlesSpy::glGetObjectLabelKHR(uint32_t identifier, uint32_t name, int
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetObjectPtrLabelKHR() const {
@@ -2471,7 +2471,7 @@ inline void GlesSpy::glGetObjectPtrLabelKHR(void* ptr, int32_t bufSize, int32_t*
                              gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPointervKHR() const { return mImports.glGetPointervKHR != nullptr; }
@@ -2496,7 +2496,7 @@ inline void GlesSpy::glGetPointervKHR(uint32_t pname, void** params) {
     gapic::coder::gles::GlGetPointervKHR coder(
             observations, pname, gapic::coder::gles::Void__P__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIivEXT() const {
@@ -2547,7 +2547,7 @@ inline void GlesSpy::glGetSamplerParameterIivEXT(uint32_t sampler, uint32_t pnam
             observations, sampler, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIuivEXT() const {
@@ -2598,7 +2598,7 @@ inline void GlesSpy::glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pna
             observations, sampler, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIivEXT() const {
@@ -2694,7 +2694,7 @@ inline void GlesSpy::glGetTexParameterIivEXT(uint32_t target, uint32_t pname, in
     gapic::coder::gles::GlGetTexParameterIivEXT coder(
             observations, target, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                  reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIuivEXT() const {
@@ -2791,7 +2791,7 @@ inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, u
             observations, target, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsEnablediEXT() const { return mImports.glIsEnablediEXT != nullptr; }
@@ -2816,7 +2816,7 @@ inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsEnablediEXT coder(observations, target, index, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -2842,7 +2842,7 @@ inline void GlesSpy::glMinSampleShadingOES(float value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMinSampleShadingOES coder(observations, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlObjectLabelKHR() const { return mImports.glObjectLabelKHR != nullptr; }
@@ -2879,7 +2879,7 @@ inline void GlesSpy::glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_
             observations, identifier, name, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlObjectPtrLabelKHR() const {
@@ -2917,7 +2917,7 @@ inline void GlesSpy::glObjectPtrLabelKHR(void* ptr, int32_t length, char* label)
                                   reinterpret_cast<uintptr_t>(ptr), 0)),
             length, gapic::coder::gles::GLchar__CP(
                             gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPatchParameteriEXT() const {
@@ -2941,7 +2941,7 @@ inline void GlesSpy::glPatchParameteriEXT(uint32_t pname, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPatchParameteriEXT coder(observations, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPopDebugGroupKHR() const {
@@ -2965,7 +2965,7 @@ inline void GlesSpy::glPopDebugGroupKHR() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPopDebugGroupKHR coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPrimitiveBoundingBoxEXT() const {
@@ -2992,7 +2992,7 @@ inline void GlesSpy::glPrimitiveBoundingBoxEXT(float minX, float minY, float min
 
     gapic::coder::gles::GlPrimitiveBoundingBoxEXT coder(observations, minX, minY, minZ, minW, maxX,
                                                         maxY, maxZ, maxW);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPushDebugGroupKHR() const {
@@ -3031,7 +3031,7 @@ inline void GlesSpy::glPushDebugGroupKHR(uint32_t source, uint32_t id, int32_t l
             observations, source, id, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(message), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIivEXT() const {
@@ -3085,7 +3085,7 @@ inline void GlesSpy::glSamplerParameterIivEXT(uint32_t sampler, uint32_t pname, 
             observations, sampler, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIuivEXT() const {
@@ -3139,7 +3139,7 @@ inline void GlesSpy::glSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname,
             observations, sampler, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexBufferEXT() const { return mImports.glTexBufferEXT != nullptr; }
@@ -3161,7 +3161,7 @@ inline void GlesSpy::glTexBufferEXT(uint32_t target, uint32_t internalformat, ui
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexBufferEXT coder(observations, target, internalformat, buffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexBufferRangeEXT() const {
@@ -3188,7 +3188,7 @@ inline void GlesSpy::glTexBufferRangeEXT(uint32_t target, uint32_t internalforma
 
     gapic::coder::gles::GlTexBufferRangeEXT coder(observations, target, internalformat, buffer,
                                                   offset, size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIivEXT() const {
@@ -3280,7 +3280,7 @@ inline void GlesSpy::glTexParameterIivEXT(uint32_t target, uint32_t pname, int32
             observations, target, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIuivEXT() const {
@@ -3372,7 +3372,7 @@ inline void GlesSpy::glTexParameterIuivEXT(uint32_t target, uint32_t pname, uint
             observations, target, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage3DMultisampleOES() const {
@@ -3405,7 +3405,7 @@ inline void GlesSpy::glTexStorage3DMultisampleOES(uint32_t target, int32_t sampl
     gapic::coder::gles::GlTexStorage3DMultisampleOES coder(observations, target, samples,
                                                            internalformat, width, height, depth,
                                                            fixedsamplelocations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginQuery() const { return mImports.glBeginQuery != nullptr; }
@@ -3440,7 +3440,7 @@ inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginQuery coder(observations, target, query);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteQueries() const { return mImports.glDeleteQueries != nullptr; }
@@ -3476,7 +3476,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     gapic::coder::gles::GlDeleteQueries coder(
             observations, count, gapic::coder::gles::QueryId__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(queries), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndQuery() const { return mImports.glEndQuery != nullptr; }
@@ -3511,7 +3511,7 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndQuery coder(observations, target);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenQueries() const { return mImports.glGenQueries != nullptr; }
@@ -3550,7 +3550,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     gapic::coder::gles::GlGenQueries coder(
             observations, count, gapic::coder::gles::QueryId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(queries), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjectuiv() const {
@@ -3585,7 +3585,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
             observations, query, parameter,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryiv() const { return mImports.glGetQueryiv != nullptr; }
@@ -3629,7 +3629,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
             observations, target, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsQuery() const { return mImports.glIsQuery != nullptr; }
@@ -3662,7 +3662,7 @@ inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsQuery coder(observations, query, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -3729,7 +3729,7 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindBuffer coder(observations, target, buffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindBufferBase() const { return mImports.glBindBufferBase != nullptr; }
@@ -3764,7 +3764,7 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindBufferBase coder(observations, target, index, buffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindBufferRange() const { return mImports.glBindBufferRange != nullptr; }
@@ -3801,7 +3801,7 @@ inline void GlesSpy::glBindBufferRange(uint32_t target, uint32_t index, uint32_t
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindBufferRange coder(observations, target, index, buffer, offset, size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBufferData() const { return mImports.glBufferData != nullptr; }
@@ -3890,7 +3890,7 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
             gapic::coder::gles::BufferDataPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)),
             usage);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBufferSubData() const { return mImports.glBufferSubData != nullptr; }
@@ -3946,7 +3946,7 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
             observations, target, offset, size,
             gapic::coder::gles::BufferDataPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyBufferSubData() const {
@@ -4016,7 +4016,7 @@ inline void GlesSpy::glCopyBufferSubData(uint32_t readTarget, uint32_t writeTarg
 
     gapic::coder::gles::GlCopyBufferSubData coder(observations, readTarget, writeTarget, readOffset,
                                                   writeOffset, size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteBuffers() const { return mImports.glDeleteBuffers != nullptr; }
@@ -4052,7 +4052,7 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     gapic::coder::gles::GlDeleteBuffers coder(
             observations, count, gapic::coder::gles::BufferId__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(buffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenBuffers() const { return mImports.glGenBuffers != nullptr; }
@@ -4093,7 +4093,7 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     gapic::coder::gles::GlGenBuffers coder(
             observations, count, gapic::coder::gles::BufferId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(buffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBufferParameteri64v() const {
@@ -4153,7 +4153,7 @@ inline void GlesSpy::glGetBufferParameteri64v(uint32_t target, uint32_t pname, i
             observations, target, pname,
             gapic::coder::gles::GLint64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBufferParameteriv() const {
@@ -4234,7 +4234,7 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
             observations, target, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBufferPointerv() const {
@@ -4289,7 +4289,7 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
             observations, target, pname,
             gapic::coder::gles::Void__P__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsBuffer() const { return mImports.glIsBuffer != nullptr; }
@@ -4322,7 +4322,7 @@ inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsBuffer coder(observations, buffer, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -4415,7 +4415,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
             observations, target, offset, length, access,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -4484,7 +4484,7 @@ inline uint8_t GlesSpy::glUnmapBuffer(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUnmapBuffer coder(observations, target, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -4515,7 +4515,7 @@ inline void GlesSpy::glDebugMessageCallback(void* callback, void* userParam) {
                                   reinterpret_cast<uintptr_t>(callback), 0)),
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(userParam), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDebugMessageControl() const {
@@ -4581,7 +4581,7 @@ inline void GlesSpy::glDebugMessageControl(uint32_t source, uint32_t type, uint3
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ids), 0)),
             enabled);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDebugMessageInsert() const {
@@ -4648,7 +4648,7 @@ inline void GlesSpy::glDebugMessageInsert(uint32_t source, uint32_t type, uint32
             observations, source, type, id, severity, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(message), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetDebugMessageLog() const {
@@ -4726,7 +4726,7 @@ inline uint32_t GlesSpy::glGetDebugMessageLog(uint32_t count, int32_t bufSize, u
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(messageLog), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -4788,7 +4788,7 @@ inline void GlesSpy::glGetObjectLabel(uint32_t identifier, uint32_t name, int32_
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetObjectPtrLabel() const {
@@ -4834,7 +4834,7 @@ inline void GlesSpy::glGetObjectPtrLabel(void* ptr, int32_t bufSize, int32_t* le
                              gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPointerv() const { return mImports.glGetPointerv != nullptr; }
@@ -4866,7 +4866,7 @@ inline void GlesSpy::glGetPointerv(uint32_t pname, void** params) {
     gapic::coder::gles::GlGetPointerv coder(
             observations, pname, gapic::coder::gles::Void__P__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlObjectLabel() const { return mImports.glObjectLabel != nullptr; }
@@ -4918,7 +4918,7 @@ inline void GlesSpy::glObjectLabel(uint32_t identifier, uint32_t name, int32_t l
             observations, identifier, name, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlObjectPtrLabel() const { return mImports.glObjectPtrLabel != nullptr; }
@@ -4955,7 +4955,7 @@ inline void GlesSpy::glObjectPtrLabel(void* ptr, int32_t length, char* label) {
                                   reinterpret_cast<uintptr_t>(ptr), 0)),
             length, gapic::coder::gles::GLchar__CP(
                             gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPopDebugGroup() const { return mImports.glPopDebugGroup != nullptr; }
@@ -4978,7 +4978,7 @@ inline void GlesSpy::glPopDebugGroup() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPopDebugGroup coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPushDebugGroup() const { return mImports.glPushDebugGroup != nullptr; }
@@ -5020,7 +5020,7 @@ inline void GlesSpy::glPushDebugGroup(uint32_t source, uint32_t id, int32_t leng
             observations, source, id, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(message), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArrays() const { return mImports.glDrawArrays != nullptr; }
@@ -5105,7 +5105,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDrawArrays coder(observations, draw_mode, first_index, index_count);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysIndirect() const {
@@ -5152,7 +5152,7 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t mode, void* indirect) {
     gapic::coder::gles::GlDrawArraysIndirect coder(
             observations, mode, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                         reinterpret_cast<uintptr_t>(indirect), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstanced() const {
@@ -5200,7 +5200,7 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t
 
     gapic::coder::gles::GlDrawArraysInstanced coder(observations, mode, first, count,
                                                     instancecount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawBuffers() const { return mImports.glDrawBuffers != nullptr; }
@@ -5225,7 +5225,7 @@ inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
     gapic::coder::gles::GlDrawBuffers coder(
             observations, n, gapic::coder::gles::GLenum__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(bufs), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElements() const { return mImports.glDrawElements != nullptr; }
@@ -5384,7 +5384,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             observations, draw_mode, element_count, indices_type,
             gapic::coder::gles::IndicesPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsBaseVertex() const {
@@ -5438,7 +5438,7 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsIndirect() const {
@@ -5492,7 +5492,7 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t mode, uint32_t type, void* 
     gapic::coder::gles::GlDrawElementsIndirect coder(
             observations, mode, type, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(indirect), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstanced() const {
@@ -5550,7 +5550,7 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t mode, int32_t count, uint3
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertex() const {
@@ -5607,7 +5607,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t co
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawRangeElements() const {
@@ -5664,7 +5664,7 @@ inline void GlesSpy::glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t
             observations, mode, start, end, count, type,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertex() const {
@@ -5720,7 +5720,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPatchParameteri() const { return mImports.glPatchParameteri != nullptr; }
@@ -5748,7 +5748,7 @@ inline void GlesSpy::glPatchParameteri(uint32_t pname, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPatchParameteri coder(observations, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPrimitiveBoundingBox() const {
@@ -5776,7 +5776,7 @@ inline void GlesSpy::glPrimitiveBoundingBox(float minX, float minY, float minZ, 
 
     gapic::coder::gles::GlPrimitiveBoundingBox coder(observations, minX, minY, minZ, minW, maxX,
                                                      maxY, maxZ, maxW);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlActiveShaderProgramEXT() const {
@@ -5800,7 +5800,7 @@ inline void GlesSpy::glActiveShaderProgramEXT(uint32_t pipeline, uint32_t progra
     observe(observations.mWrites);
 
     gapic::coder::gles::GlActiveShaderProgramEXT coder(observations, pipeline, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlAlphaFuncQCOM() const { return mImports.glAlphaFuncQCOM != nullptr; }
@@ -5822,7 +5822,7 @@ inline void GlesSpy::glAlphaFuncQCOM(uint32_t func, float ref) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlAlphaFuncQCOM coder(observations, func, ref);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlApplyFramebufferAttachmentCMAAINTEL() const {
@@ -5847,7 +5847,7 @@ inline void GlesSpy::glApplyFramebufferAttachmentCMAAINTEL() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlApplyFramebufferAttachmentCMAAINTEL coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginConditionalRenderNV() const {
@@ -5871,7 +5871,7 @@ inline void GlesSpy::glBeginConditionalRenderNV(uint32_t id, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginConditionalRenderNV coder(observations, id, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginPerfMonitorAMD() const {
@@ -5895,7 +5895,7 @@ inline void GlesSpy::glBeginPerfMonitorAMD(uint32_t monitor) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginPerfMonitorAMD coder(observations, monitor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginPerfQueryINTEL() const {
@@ -5919,7 +5919,7 @@ inline void GlesSpy::glBeginPerfQueryINTEL(uint32_t queryHandle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginPerfQueryINTEL coder(observations, queryHandle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginQueryEXT() const { return mImports.glBeginQueryEXT != nullptr; }
@@ -5942,7 +5942,7 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginQueryEXT coder(observations, target, query);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindProgramPipelineEXT() const {
@@ -5966,7 +5966,7 @@ inline void GlesSpy::glBindProgramPipelineEXT(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindProgramPipelineEXT coder(observations, pipeline);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindVertexArrayOES() const {
@@ -6002,7 +6002,7 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindVertexArrayOES coder(observations, array);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendBarrierNV() const { return mImports.glBlendBarrierNV != nullptr; }
@@ -6024,7 +6024,7 @@ inline void GlesSpy::glBlendBarrierNV() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendBarrierNV coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationSeparateiOES() const {
@@ -6049,7 +6049,7 @@ inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationSeparateiOES coder(observations, buf, modeRGB, modeAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationiOES() const {
@@ -6073,7 +6073,7 @@ inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationiOES coder(observations, buf, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFuncSeparateiOES() const {
@@ -6100,7 +6100,7 @@ inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint
 
     gapic::coder::gles::GlBlendFuncSeparateiOES coder(observations, buf, srcRGB, dstRGB, srcAlpha,
                                                       dstAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFunciOES() const { return mImports.glBlendFunciOES != nullptr; }
@@ -6122,7 +6122,7 @@ inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendFunciOES coder(observations, buf, src, dst);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendParameteriNV() const {
@@ -6146,7 +6146,7 @@ inline void GlesSpy::glBlendParameteriNV(uint32_t pname, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendParameteriNV coder(observations, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlitFramebufferANGLE() const {
@@ -6177,7 +6177,7 @@ inline void GlesSpy::glBlitFramebufferANGLE(int32_t srcX0, int32_t srcY0, int32_
 
     gapic::coder::gles::GlBlitFramebufferANGLE coder(observations, srcX0, srcY0, srcX1, srcY1,
                                                      dstX0, dstY0, dstX1, dstY1, mask, filter);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlitFramebufferNV() const {
@@ -6207,7 +6207,7 @@ inline void GlesSpy::glBlitFramebufferNV(int32_t srcX0, int32_t srcY0, int32_t s
 
     gapic::coder::gles::GlBlitFramebufferNV coder(observations, srcX0, srcY0, srcX1, srcY1, dstX0,
                                                   dstY0, dstX1, dstY1, mask, filter);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBufferStorageEXT() const {
@@ -6234,7 +6234,7 @@ inline void GlesSpy::glBufferStorageEXT(uint32_t target, int32_t size, void* dat
             observations, target, size, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(data), 0)),
             flag);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClientWaitSyncAPPLE() const {
@@ -6261,7 +6261,7 @@ inline uint32_t GlesSpy::glClientWaitSyncAPPLE(uint64_t sync, uint32_t flag, uin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClientWaitSyncAPPLE coder(observations, sync, flag, timeout, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -6286,7 +6286,7 @@ inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8
     observe(observations.mWrites);
 
     gapic::coder::gles::GlColorMaskiOES coder(observations, index, r, g, b, a);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexImage3DOES() const {
@@ -6319,7 +6319,7 @@ inline void GlesSpy::glCompressedTexImage3DOES(uint32_t target, int32_t level,
             observations, target, level, internalformat, width, height, depth, border, imageSize,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexSubImage3DOES() const {
@@ -6353,7 +6353,7 @@ inline void GlesSpy::glCompressedTexSubImage3DOES(uint32_t target, int32_t level
             observations, target, level, xoffset, yoffset, zoffset, width, height, depth, format,
             imageSize, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyBufferSubDataNV() const {
@@ -6380,7 +6380,7 @@ inline void GlesSpy::glCopyBufferSubDataNV(uint32_t readTarget, uint32_t writeTa
 
     gapic::coder::gles::GlCopyBufferSubDataNV coder(observations, readTarget, writeTarget,
                                                     readOffset, writeOffset, size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyImageSubDataOES() const {
@@ -6416,7 +6416,7 @@ inline void GlesSpy::glCopyImageSubDataOES(uint32_t srcName, uint32_t srcTarget,
     gapic::coder::gles::GlCopyImageSubDataOES coder(
             observations, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget,
             dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyPathNV() const { return mImports.glCopyPathNV != nullptr; }
@@ -6438,7 +6438,7 @@ inline void GlesSpy::glCopyPathNV(uint32_t resultPath, uint32_t srcPath) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCopyPathNV coder(observations, resultPath, srcPath);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyTexSubImage3DOES() const {
@@ -6468,7 +6468,7 @@ inline void GlesSpy::glCopyTexSubImage3DOES(uint32_t target, int32_t level, int3
 
     gapic::coder::gles::GlCopyTexSubImage3DOES coder(observations, target, level, xoffset, yoffset,
                                                      zoffset, x, y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyTextureLevelsAPPLE() const {
@@ -6496,7 +6496,7 @@ inline void GlesSpy::glCopyTextureLevelsAPPLE(uint32_t destinationTexture, uint3
 
     gapic::coder::gles::GlCopyTextureLevelsAPPLE coder(
             observations, destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverFillPathInstancedNV() const {
@@ -6530,7 +6530,7 @@ inline void GlesSpy::glCoverFillPathInstancedNV(int32_t numPaths, uint32_t pathN
             pathBase, coverMode, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverFillPathNV() const { return mImports.glCoverFillPathNV != nullptr; }
@@ -6552,7 +6552,7 @@ inline void GlesSpy::glCoverFillPathNV(uint32_t path, uint32_t coverMode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCoverFillPathNV coder(observations, path, coverMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverStrokePathInstancedNV() const {
@@ -6587,7 +6587,7 @@ inline void GlesSpy::glCoverStrokePathInstancedNV(int32_t numPaths, uint32_t pat
             pathBase, coverMode, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverStrokePathNV() const {
@@ -6611,7 +6611,7 @@ inline void GlesSpy::glCoverStrokePathNV(uint32_t path, uint32_t coverMode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCoverStrokePathNV coder(observations, path, coverMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverageMaskNV() const { return mImports.glCoverageMaskNV != nullptr; }
@@ -6633,7 +6633,7 @@ inline void GlesSpy::glCoverageMaskNV(uint8_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCoverageMaskNV coder(observations, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverageModulationNV() const {
@@ -6657,7 +6657,7 @@ inline void GlesSpy::glCoverageModulationNV(uint32_t components) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCoverageModulationNV coder(observations, components);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverageModulationTableNV() const {
@@ -6683,7 +6683,7 @@ inline void GlesSpy::glCoverageModulationTableNV(int32_t n, float* v) {
     gapic::coder::gles::GlCoverageModulationTableNV coder(
             observations, n, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCoverageOperationNV() const {
@@ -6707,7 +6707,7 @@ inline void GlesSpy::glCoverageOperationNV(uint32_t operation) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCoverageOperationNV coder(observations, operation);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCreatePerfQueryINTEL() const {
@@ -6733,7 +6733,7 @@ inline void GlesSpy::glCreatePerfQueryINTEL(uint32_t queryId, uint32_t* queryHan
     gapic::coder::gles::GlCreatePerfQueryINTEL coder(
             observations, queryId, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                            reinterpret_cast<uintptr_t>(queryHandle), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCreateShaderProgramvEXT() const {
@@ -6764,7 +6764,7 @@ inline uint32_t GlesSpy::glCreateShaderProgramvEXT(uint32_t type, int32_t count,
             gapic::coder::gles::GLchar__CP__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(strings), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -6790,7 +6790,7 @@ inline void GlesSpy::glDeleteFencesNV(int32_t n, uint32_t* fences) {
     gapic::coder::gles::GlDeleteFencesNV coder(
             observations, n, gapic::coder::gles::GLuint__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(fences), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeletePathsNV() const { return mImports.glDeletePathsNV != nullptr; }
@@ -6812,7 +6812,7 @@ inline void GlesSpy::glDeletePathsNV(uint32_t path, int32_t range) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeletePathsNV coder(observations, path, range);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeletePerfMonitorsAMD() const {
@@ -6838,7 +6838,7 @@ inline void GlesSpy::glDeletePerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     gapic::coder::gles::GlDeletePerfMonitorsAMD coder(
             observations, n, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(monitors), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeletePerfQueryINTEL() const {
@@ -6862,7 +6862,7 @@ inline void GlesSpy::glDeletePerfQueryINTEL(uint32_t queryHandle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeletePerfQueryINTEL coder(observations, queryHandle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteProgramPipelinesEXT() const {
@@ -6888,7 +6888,7 @@ inline void GlesSpy::glDeleteProgramPipelinesEXT(int32_t n, uint32_t* pipelines)
     gapic::coder::gles::GlDeleteProgramPipelinesEXT coder(
             observations, n, gapic::coder::gles::PipelineId__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(pipelines), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteQueriesEXT() const {
@@ -6926,7 +6926,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     gapic::coder::gles::GlDeleteQueriesEXT coder(
             observations, count, gapic::coder::gles::QueryId__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(queries), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteSyncAPPLE() const { return mImports.glDeleteSyncAPPLE != nullptr; }
@@ -6948,7 +6948,7 @@ inline void GlesSpy::glDeleteSyncAPPLE(uint64_t sync) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeleteSyncAPPLE coder(observations, sync);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteVertexArraysOES() const {
@@ -6987,7 +6987,7 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
             observations, count,
             gapic::coder::gles::VertexArrayId__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(arrays), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDepthRangeArrayfvNV() const {
@@ -7014,7 +7014,7 @@ inline void GlesSpy::glDepthRangeArrayfvNV(uint32_t first, int32_t count, float*
             observations, first, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDepthRangeIndexedfNV() const {
@@ -7038,7 +7038,7 @@ inline void GlesSpy::glDepthRangeIndexedfNV(uint32_t index, float n, float f) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDepthRangeIndexedfNV coder(observations, index, n, f);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisableDriverControlQCOM() const {
@@ -7062,7 +7062,7 @@ inline void GlesSpy::glDisableDriverControlQCOM(uint32_t driverControl) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisableDriverControlQCOM coder(observations, driverControl);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisableiNV() const { return mImports.glDisableiNV != nullptr; }
@@ -7084,7 +7084,7 @@ inline void GlesSpy::glDisableiNV(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisableiNV coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisableiOES() const { return mImports.glDisableiOES != nullptr; }
@@ -7106,7 +7106,7 @@ inline void GlesSpy::glDisableiOES(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisableiOES coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDiscardFramebufferEXT() const {
@@ -7134,7 +7134,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
             observations, target, numAttachments,
             gapic::coder::gles::GLenum__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attachments), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedANGLE() const {
@@ -7161,7 +7161,7 @@ inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, in
 
     gapic::coder::gles::GlDrawArraysInstancedANGLE coder(observations, mode, first, count,
                                                          primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedBaseInstanceEXT() const {
@@ -7192,7 +7192,7 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
 
     gapic::coder::gles::GlDrawArraysInstancedBaseInstanceEXT coder(observations, mode, first, count,
                                                                    instancecount, baseinstance);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedEXT() const {
@@ -7219,7 +7219,7 @@ inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int3
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDrawArraysInstancedEXT coder(observations, mode, start, count, primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedNV() const {
@@ -7245,7 +7245,7 @@ inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDrawArraysInstancedNV coder(observations, mode, first, count, primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawBuffersEXT() const { return mImports.glDrawBuffersEXT != nullptr; }
@@ -7269,7 +7269,7 @@ inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
     gapic::coder::gles::GlDrawBuffersEXT coder(
             observations, n, gapic::coder::gles::GLenum__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(bufs), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawBuffersIndexedEXT() const {
@@ -7297,7 +7297,7 @@ inline void GlesSpy::glDrawBuffersIndexedEXT(int32_t n, uint32_t* location, int3
                                      reinterpret_cast<uintptr_t>(location), 0)),
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawBuffersNV() const { return mImports.glDrawBuffersNV != nullptr; }
@@ -7321,7 +7321,7 @@ inline void GlesSpy::glDrawBuffersNV(int32_t n, uint32_t* bufs) {
     gapic::coder::gles::GlDrawBuffersNV coder(
             observations, n, gapic::coder::gles::GLenum__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(bufs), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsBaseVertexEXT() const {
@@ -7351,7 +7351,7 @@ inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, u
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsBaseVertexOES() const {
@@ -7381,7 +7381,7 @@ inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, u
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedANGLE() const {
@@ -7411,7 +7411,7 @@ inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, 
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseInstanceEXT() const {
@@ -7446,7 +7446,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, baseinstance);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexBaseInstanceEXT() const {
@@ -7483,7 +7483,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex, baseinstance);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexEXT() const {
@@ -7518,7 +7518,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexOES() const {
@@ -7553,7 +7553,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedEXT() const {
@@ -7584,7 +7584,7 @@ inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, ui
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedNV() const {
@@ -7614,7 +7614,7 @@ inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uin
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexEXT() const {
@@ -7647,7 +7647,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t st
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexOES() const {
@@ -7680,7 +7680,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEGLImageTargetRenderbufferStorageOES() const {
@@ -7707,7 +7707,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
     gapic::coder::gles::GlEGLImageTargetRenderbufferStorageOES coder(
             observations, target, gapic::coder::gles::GLeglImageOES(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(image), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEGLImageTargetTexture2DOES() const {
@@ -7733,7 +7733,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
     gapic::coder::gles::GlEGLImageTargetTexture2DOES coder(
             observations, target, gapic::coder::gles::GLeglImageOES(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(image), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnableDriverControlQCOM() const {
@@ -7757,7 +7757,7 @@ inline void GlesSpy::glEnableDriverControlQCOM(uint32_t driverControl) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnableDriverControlQCOM coder(observations, driverControl);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnableiNV() const { return mImports.glEnableiNV != nullptr; }
@@ -7779,7 +7779,7 @@ inline void GlesSpy::glEnableiNV(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnableiNV coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnableiOES() const { return mImports.glEnableiOES != nullptr; }
@@ -7801,7 +7801,7 @@ inline void GlesSpy::glEnableiOES(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnableiOES coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndConditionalRenderNV() const {
@@ -7825,7 +7825,7 @@ inline void GlesSpy::glEndConditionalRenderNV() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndConditionalRenderNV coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndPerfMonitorAMD() const {
@@ -7849,7 +7849,7 @@ inline void GlesSpy::glEndPerfMonitorAMD(uint32_t monitor) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndPerfMonitorAMD coder(observations, monitor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndPerfQueryINTEL() const {
@@ -7873,7 +7873,7 @@ inline void GlesSpy::glEndPerfQueryINTEL(uint32_t queryHandle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndPerfQueryINTEL coder(observations, queryHandle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndQueryEXT() const { return mImports.glEndQueryEXT != nullptr; }
@@ -7896,7 +7896,7 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndQueryEXT coder(observations, target);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndTilingQCOM() const { return mImports.glEndTilingQCOM != nullptr; }
@@ -7918,7 +7918,7 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndTilingQCOM coder(observations, preserve_mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetBufferPointervQCOM() const {
@@ -7944,7 +7944,7 @@ inline void GlesSpy::glExtGetBufferPointervQCOM(uint32_t target, void** params) 
     gapic::coder::gles::GlExtGetBufferPointervQCOM coder(
             observations, target, gapic::coder::gles::Void__P__P(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetBuffersQCOM() const {
@@ -7973,7 +7973,7 @@ inline void GlesSpy::glExtGetBuffersQCOM(uint32_t* buffers, int32_t maxBuffers,
                                   reinterpret_cast<uintptr_t>(buffers), 0)),
             maxBuffers, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                 reinterpret_cast<uintptr_t>(numBuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetFramebuffersQCOM() const {
@@ -8003,7 +8003,7 @@ inline void GlesSpy::glExtGetFramebuffersQCOM(uint32_t* framebuffers, int32_t ma
                                   reinterpret_cast<uintptr_t>(framebuffers), 0)),
             maxFramebuffers, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(numFramebuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetProgramBinarySourceQCOM() const {
@@ -8034,7 +8034,7 @@ inline void GlesSpy::glExtGetProgramBinarySourceQCOM(uint32_t program, uint32_t 
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(source), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetProgramsQCOM() const {
@@ -8063,7 +8063,7 @@ inline void GlesSpy::glExtGetProgramsQCOM(uint32_t* programs, int32_t maxProgram
                                   reinterpret_cast<uintptr_t>(programs), 0)),
             maxPrograms, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                  reinterpret_cast<uintptr_t>(numPrograms), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetRenderbuffersQCOM() const {
@@ -8093,7 +8093,7 @@ inline void GlesSpy::glExtGetRenderbuffersQCOM(uint32_t* renderbuffers, int32_t 
                                   reinterpret_cast<uintptr_t>(renderbuffers), 0)),
             maxRenderbuffers, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                       reinterpret_cast<uintptr_t>(numRenderbuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetShadersQCOM() const {
@@ -8122,7 +8122,7 @@ inline void GlesSpy::glExtGetShadersQCOM(uint32_t* shaders, int32_t maxShaders,
                                   reinterpret_cast<uintptr_t>(shaders), 0)),
             maxShaders, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                 reinterpret_cast<uintptr_t>(numShaders), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetTexLevelParameterivQCOM() const {
@@ -8151,7 +8151,7 @@ inline void GlesSpy::glExtGetTexLevelParameterivQCOM(uint32_t texture, uint32_t 
             observations, texture, face, level, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetTexSubImageQCOM() const {
@@ -8185,7 +8185,7 @@ inline void GlesSpy::glExtGetTexSubImageQCOM(uint32_t target, int32_t level, int
             observations, target, level, xoffset, yoffset, zoffset, width, height, depth, format,
             type, gapic::coder::gles::Void__P(
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(texels), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtGetTexturesQCOM() const {
@@ -8214,7 +8214,7 @@ inline void GlesSpy::glExtGetTexturesQCOM(uint32_t* textures, int32_t maxTexture
                                   reinterpret_cast<uintptr_t>(textures), 0)),
             maxTextures, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                  reinterpret_cast<uintptr_t>(numTextures), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlExtIsProgramBinaryQCOM() const {
@@ -8241,7 +8241,7 @@ inline uint8_t GlesSpy::glExtIsProgramBinaryQCOM(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlExtIsProgramBinaryQCOM coder(observations, program, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -8268,7 +8268,7 @@ inline void GlesSpy::glExtTexObjectStateOverrideiQCOM(uint32_t target, uint32_t 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlExtTexObjectStateOverrideiQCOM coder(observations, target, pname, param);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFenceSyncAPPLE() const { return mImports.glFenceSyncAPPLE != nullptr; }
@@ -8293,7 +8293,7 @@ inline uint64_t GlesSpy::glFenceSyncAPPLE(uint32_t condition, uint32_t flag) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFenceSyncAPPLE coder(observations, condition, flag, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -8317,7 +8317,7 @@ inline void GlesSpy::glFinishFenceNV(uint32_t fence) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFinishFenceNV coder(observations, fence);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFlushMappedBufferRangeEXT() const {
@@ -8341,7 +8341,7 @@ inline void GlesSpy::glFlushMappedBufferRangeEXT(uint32_t target, int32_t offset
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFlushMappedBufferRangeEXT coder(observations, target, offset, length);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFragmentCoverageColorNV() const {
@@ -8365,7 +8365,7 @@ inline void GlesSpy::glFragmentCoverageColorNV(uint32_t color) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFragmentCoverageColorNV coder(observations, color);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferSampleLocationsfvNV() const {
@@ -8394,7 +8394,7 @@ inline void GlesSpy::glFramebufferSampleLocationsfvNV(uint32_t target, uint32_t 
             observations, target, start, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTexture2DMultisampleEXT() const {
@@ -8425,7 +8425,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleEXT(uint32_t target, uint3
 
     gapic::coder::gles::GlFramebufferTexture2DMultisampleEXT coder(
             observations, target, attachment, textarget, texture, level, samples);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTexture2DMultisampleIMG() const {
@@ -8456,7 +8456,7 @@ inline void GlesSpy::glFramebufferTexture2DMultisampleIMG(uint32_t target, uint3
 
     gapic::coder::gles::GlFramebufferTexture2DMultisampleIMG coder(
             observations, target, attachment, textarget, texture, level, samples);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTexture3DOES() const {
@@ -8484,7 +8484,7 @@ inline void GlesSpy::glFramebufferTexture3DOES(uint32_t target, uint32_t attachm
 
     gapic::coder::gles::GlFramebufferTexture3DOES coder(observations, target, attachment, textarget,
                                                         texture, level, zoffset);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTextureMultiviewOVR() const {
@@ -8514,7 +8514,7 @@ inline void GlesSpy::glFramebufferTextureMultiviewOVR(uint32_t target, uint32_t 
 
     gapic::coder::gles::GlFramebufferTextureMultiviewOVR coder(
             observations, target, attachment, texture, level, baseViewIndex, numViews);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTextureOES() const {
@@ -8541,7 +8541,7 @@ inline void GlesSpy::glFramebufferTextureOES(uint32_t target, uint32_t attachmen
 
     gapic::coder::gles::GlFramebufferTextureOES coder(observations, target, attachment, texture,
                                                       level);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenFencesNV() const { return mImports.glGenFencesNV != nullptr; }
@@ -8565,7 +8565,7 @@ inline void GlesSpy::glGenFencesNV(int32_t n, uint32_t* fences) {
     gapic::coder::gles::GlGenFencesNV coder(
             observations, n, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(fences), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenPathsNV() const { return mImports.glGenPathsNV != nullptr; }
@@ -8590,7 +8590,7 @@ inline uint32_t GlesSpy::glGenPathsNV(int32_t range) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGenPathsNV coder(observations, range, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -8618,7 +8618,7 @@ inline void GlesSpy::glGenPerfMonitorsAMD(int32_t n, uint32_t* monitors) {
     gapic::coder::gles::GlGenPerfMonitorsAMD coder(
             observations, n, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(monitors), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenProgramPipelinesEXT() const {
@@ -8644,7 +8644,7 @@ inline void GlesSpy::glGenProgramPipelinesEXT(int32_t n, uint32_t* pipelines) {
     gapic::coder::gles::GlGenProgramPipelinesEXT coder(
             observations, n, gapic::coder::gles::PipelineId__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(pipelines), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenQueriesEXT() const { return mImports.glGenQueriesEXT != nullptr; }
@@ -8683,7 +8683,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     gapic::coder::gles::GlGenQueriesEXT coder(
             observations, count, gapic::coder::gles::QueryId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(queries), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenVertexArraysOES() const {
@@ -8723,7 +8723,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     gapic::coder::gles::GlGenVertexArraysOES coder(
             observations, count, gapic::coder::gles::VertexArrayId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(arrays), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBufferPointervOES() const {
@@ -8750,7 +8750,7 @@ inline void GlesSpy::glGetBufferPointervOES(uint32_t target, uint32_t pname, voi
             observations, target, pname,
             gapic::coder::gles::Void__P__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetCoverageModulationTableNV() const {
@@ -8776,7 +8776,7 @@ inline void GlesSpy::glGetCoverageModulationTableNV(int32_t bufsize, float* v) {
     gapic::coder::gles::GlGetCoverageModulationTableNV coder(
             observations, bufsize, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                            reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetDriverControlStringQCOM() const {
@@ -8807,7 +8807,7 @@ inline void GlesSpy::glGetDriverControlStringQCOM(uint32_t driverControl, int32_
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(driverControlString), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetDriverControlsQCOM() const {
@@ -8835,7 +8835,7 @@ inline void GlesSpy::glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_
                                   reinterpret_cast<uintptr_t>(num), 0)),
             size, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                           reinterpret_cast<uintptr_t>(driverControls), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFenceivNV() const { return mImports.glGetFenceivNV != nullptr; }
@@ -8859,7 +8859,7 @@ inline void GlesSpy::glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* par
     gapic::coder::gles::GlGetFenceivNV coder(
             observations, fence, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFirstPerfQueryIdINTEL() const {
@@ -8885,7 +8885,7 @@ inline void GlesSpy::glGetFirstPerfQueryIdINTEL(uint32_t* queryId) {
     gapic::coder::gles::GlGetFirstPerfQueryIdINTEL coder(
             observations, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(queryId), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFloati_vNV() const { return mImports.glGetFloati_vNV != nullptr; }
@@ -8910,7 +8910,7 @@ inline void GlesSpy::glGetFloati_vNV(uint32_t target, uint32_t index, float* dat
             observations, target, index,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetGraphicsResetStatusEXT() const {
@@ -8937,7 +8937,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetGraphicsResetStatusEXT coder(observations, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -8966,7 +8966,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusKHR() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetGraphicsResetStatusKHR coder(observations, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -8998,7 +8998,7 @@ inline uint64_t GlesSpy::glGetImageHandleNV(uint32_t texture, int32_t level, uin
 
     gapic::coder::gles::GlGetImageHandleNV coder(observations, texture, level, layered, layer,
                                                  format, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -9026,7 +9026,7 @@ inline void GlesSpy::glGetInteger64vAPPLE(uint32_t pname, int64_t* params) {
     gapic::coder::gles::GlGetInteger64vAPPLE coder(
             observations, pname, gapic::coder::gles::GLint64__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetIntegeri_vEXT() const {
@@ -9052,7 +9052,7 @@ inline void GlesSpy::glGetIntegeri_vEXT(uint32_t target, uint32_t index, int32_t
     gapic::coder::gles::GlGetIntegeri_vEXT coder(
             observations, target, index, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                  reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetInternalformatSampleivNV() const {
@@ -9083,7 +9083,7 @@ inline void GlesSpy::glGetInternalformatSampleivNV(uint32_t target, uint32_t int
             observations, target, internalformat, samples, pname, bufSize,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetNextPerfQueryIdINTEL() const {
@@ -9109,7 +9109,7 @@ inline void GlesSpy::glGetNextPerfQueryIdINTEL(uint32_t queryId, uint32_t* nextQ
     gapic::coder::gles::GlGetNextPerfQueryIdINTEL coder(
             observations, queryId, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                            reinterpret_cast<uintptr_t>(nextQueryId), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetObjectLabelEXT() const {
@@ -9140,7 +9140,7 @@ inline void GlesSpy::glGetObjectLabelEXT(uint32_t type, uint32_t object, int32_t
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathCommandsNV() const {
@@ -9166,7 +9166,7 @@ inline void GlesSpy::glGetPathCommandsNV(uint32_t path, uint8_t* commands) {
     gapic::coder::gles::GlGetPathCommandsNV coder(
             observations, path, gapic::coder::gles::GLubyte__P(gapic::coder::memory::Pointer(
                                         reinterpret_cast<uintptr_t>(commands), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathCoordsNV() const { return mImports.glGetPathCoordsNV != nullptr; }
@@ -9190,7 +9190,7 @@ inline void GlesSpy::glGetPathCoordsNV(uint32_t path, float* coords) {
     gapic::coder::gles::GlGetPathCoordsNV coder(
             observations, path, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                         reinterpret_cast<uintptr_t>(coords), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathDashArrayNV() const {
@@ -9216,7 +9216,7 @@ inline void GlesSpy::glGetPathDashArrayNV(uint32_t path, float* dashArray) {
     gapic::coder::gles::GlGetPathDashArrayNV coder(
             observations, path, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                         reinterpret_cast<uintptr_t>(dashArray), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathLengthNV() const { return mImports.glGetPathLengthNV != nullptr; }
@@ -9243,7 +9243,7 @@ inline float GlesSpy::glGetPathLengthNV(uint32_t path, int32_t startSegment, int
 
     gapic::coder::gles::GlGetPathLengthNV coder(observations, path, startSegment, numSegments,
                                                 result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -9274,7 +9274,7 @@ inline void GlesSpy::glGetPathMetricRangeNV(uint32_t metricQueryMask, uint32_t f
             observations, metricQueryMask, firstPathName, numPaths, stride,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(metrics), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathMetricsNV() const {
@@ -9307,7 +9307,7 @@ inline void GlesSpy::glGetPathMetricsNV(uint32_t metricQueryMask, int32_t numPat
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(paths), 0)),
             pathBase, stride, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                       reinterpret_cast<uintptr_t>(metrics), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathParameterfvNV() const {
@@ -9333,7 +9333,7 @@ inline void GlesSpy::glGetPathParameterfvNV(uint32_t path, uint32_t pname, float
     gapic::coder::gles::GlGetPathParameterfvNV coder(
             observations, path, pname, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                                reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathParameterivNV() const {
@@ -9359,7 +9359,7 @@ inline void GlesSpy::glGetPathParameterivNV(uint32_t path, uint32_t pname, int32
     gapic::coder::gles::GlGetPathParameterivNV coder(
             observations, path, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPathSpacingNV() const {
@@ -9395,7 +9395,7 @@ inline void GlesSpy::glGetPathSpacingNV(uint32_t pathListMode, int32_t numPaths,
             pathBase, advanceScale, kerningScale, transformType,
             gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(returnedSpacing), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfCounterInfoINTEL() const {
@@ -9447,7 +9447,7 @@ inline void GlesSpy::glGetPerfCounterInfoINTEL(uint32_t queryId, uint32_t counte
                     reinterpret_cast<uintptr_t>(counterDataTypeEnum), 0)),
             gapic::coder::gles::GLuint64__P(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(rawCounterMaxValue), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorCounterDataAMD() const {
@@ -9479,7 +9479,7 @@ inline void GlesSpy::glGetPerfMonitorCounterDataAMD(uint32_t monitor, uint32_t p
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(bytesWritten), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorCounterInfoAMD() const {
@@ -9508,7 +9508,7 @@ inline void GlesSpy::glGetPerfMonitorCounterInfoAMD(uint32_t group, uint32_t cou
             observations, group, counter, pname,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorCounterStringAMD() const {
@@ -9540,7 +9540,7 @@ inline void GlesSpy::glGetPerfMonitorCounterStringAMD(uint32_t group, uint32_t c
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(counterString), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorCountersAMD() const {
@@ -9574,7 +9574,7 @@ inline void GlesSpy::glGetPerfMonitorCountersAMD(uint32_t group, int32_t* numCou
                     reinterpret_cast<uintptr_t>(maxActiveCounters), 0)),
             counterSize, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                  reinterpret_cast<uintptr_t>(counters), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorGroupStringAMD() const {
@@ -9605,7 +9605,7 @@ inline void GlesSpy::glGetPerfMonitorGroupStringAMD(uint32_t group, int32_t bufS
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(groupString), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfMonitorGroupsAMD() const {
@@ -9634,7 +9634,7 @@ inline void GlesSpy::glGetPerfMonitorGroupsAMD(int32_t* numGroups, int32_t group
                                   reinterpret_cast<uintptr_t>(numGroups), 0)),
             groupsSize, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                 reinterpret_cast<uintptr_t>(groups), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfQueryDataINTEL() const {
@@ -9665,7 +9665,7 @@ inline void GlesSpy::glGetPerfQueryDataINTEL(uint32_t queryHandle, uint32_t flag
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)),
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(bytesWritten), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfQueryIdByNameINTEL() const {
@@ -9693,7 +9693,7 @@ inline void GlesSpy::glGetPerfQueryIdByNameINTEL(char* queryName, uint32_t* quer
                                   reinterpret_cast<uintptr_t>(queryName), 0)),
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(queryId), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetPerfQueryInfoINTEL() const {
@@ -9733,7 +9733,7 @@ inline void GlesSpy::glGetPerfQueryInfoINTEL(uint32_t queryId, uint32_t queryNam
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(noInstances), 0)),
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(capsMask), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramBinaryOES() const {
@@ -9771,7 +9771,7 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binary_format), 0)),
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binary), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramPipelineInfoLogEXT() const {
@@ -9802,7 +9802,7 @@ inline void GlesSpy::glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t b
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(infoLog), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramPipelineivEXT() const {
@@ -9829,7 +9829,7 @@ inline void GlesSpy::glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname
             observations, pipeline, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramResourcefvNV() const {
@@ -9865,7 +9865,7 @@ inline void GlesSpy::glGetProgramResourcefvNV(uint32_t program, uint32_t program
                              gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjecti64vEXT() const {
@@ -9893,7 +9893,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
             observations, query, parameter,
             gapic::coder::gles::GLint64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjectivEXT() const {
@@ -9921,7 +9921,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
             observations, query, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjectui64vEXT() const {
@@ -9949,7 +9949,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
             observations, query, parameter,
             gapic::coder::gles::GLuint64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjectuivEXT() const {
@@ -9978,7 +9978,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
             observations, query, parameter,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryivEXT() const { return mImports.glGetQueryivEXT != nullptr; }
@@ -10005,7 +10005,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
             observations, target, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIivOES() const {
@@ -10033,7 +10033,7 @@ inline void GlesSpy::glGetSamplerParameterIivOES(uint32_t sampler, uint32_t pnam
             observations, sampler, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIuivOES() const {
@@ -10061,7 +10061,7 @@ inline void GlesSpy::glGetSamplerParameterIuivOES(uint32_t sampler, uint32_t pna
             observations, sampler, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSyncivAPPLE() const { return mImports.glGetSyncivAPPLE != nullptr; }
@@ -10090,7 +10090,7 @@ inline void GlesSpy::glGetSyncivAPPLE(uint64_t sync, uint32_t pname, int32_t buf
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIivOES() const {
@@ -10116,7 +10116,7 @@ inline void GlesSpy::glGetTexParameterIivOES(uint32_t target, uint32_t pname, in
     gapic::coder::gles::GlGetTexParameterIivOES coder(
             observations, target, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                  reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIuivOES() const {
@@ -10143,7 +10143,7 @@ inline void GlesSpy::glGetTexParameterIuivOES(uint32_t target, uint32_t pname, u
             observations, target, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTextureHandleNV() const {
@@ -10170,7 +10170,7 @@ inline uint64_t GlesSpy::glGetTextureHandleNV(uint32_t texture) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetTextureHandleNV coder(observations, texture, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10199,7 +10199,7 @@ inline uint64_t GlesSpy::glGetTextureSamplerHandleNV(uint32_t texture, uint32_t 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetTextureSamplerHandleNV coder(observations, texture, sampler, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10232,7 +10232,7 @@ inline void GlesSpy::glGetTranslatedShaderSourceANGLE(uint32_t shader, int32_t b
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(source), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformfvEXT() const {
@@ -10261,7 +10261,7 @@ inline void GlesSpy::glGetnUniformfvEXT(uint32_t program, int32_t location, int3
             observations, program, location, bufSize,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformfvKHR() const {
@@ -10290,7 +10290,7 @@ inline void GlesSpy::glGetnUniformfvKHR(uint32_t program, int32_t location, int3
             observations, program, location, bufSize,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformivEXT() const {
@@ -10319,7 +10319,7 @@ inline void GlesSpy::glGetnUniformivEXT(uint32_t program, int32_t location, int3
             observations, program, location, bufSize,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformivKHR() const {
@@ -10348,7 +10348,7 @@ inline void GlesSpy::glGetnUniformivKHR(uint32_t program, int32_t location, int3
             observations, program, location, bufSize,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformuivKHR() const {
@@ -10377,7 +10377,7 @@ inline void GlesSpy::glGetnUniformuivKHR(uint32_t program, int32_t location, int
             observations, program, location, bufSize,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlInsertEventMarkerEXT() const {
@@ -10408,7 +10408,7 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     gapic::coder::gles::GlInsertEventMarkerEXT coder(
             observations, length, gapic::coder::gles::GLchar__CP(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(marker), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlInterpolatePathsNV() const {
@@ -10434,7 +10434,7 @@ inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, u
     observe(observations.mWrites);
 
     gapic::coder::gles::GlInterpolatePathsNV coder(observations, resultPath, pathA, pathB, weight);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsEnablediNV() const { return mImports.glIsEnablediNV != nullptr; }
@@ -10459,7 +10459,7 @@ inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsEnablediNV coder(observations, target, index, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10486,7 +10486,7 @@ inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsEnablediOES coder(observations, target, index, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10513,7 +10513,7 @@ inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsFenceNV coder(observations, fence, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10542,7 +10542,7 @@ inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsImageHandleResidentNV coder(observations, handle, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10569,7 +10569,7 @@ inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsPathNV coder(observations, path, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10598,7 +10598,7 @@ inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, floa
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsPointInFillPathNV coder(observations, path, mask, x, y, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10627,7 +10627,7 @@ inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y)
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsPointInStrokePathNV coder(observations, path, x, y, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10656,7 +10656,7 @@ inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsProgramPipelineEXT coder(observations, pipeline, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10691,7 +10691,7 @@ inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsQueryEXT coder(observations, query, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10718,7 +10718,7 @@ inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsSyncAPPLE coder(observations, sync, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10747,7 +10747,7 @@ inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsTextureHandleResidentNV coder(observations, handle, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10783,7 +10783,7 @@ inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsVertexArrayOES coder(observations, array, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10810,7 +10810,7 @@ inline void GlesSpy::glLabelObjectEXT(uint32_t type, uint32_t object, int32_t le
             observations, type, object, length,
             gapic::coder::gles::GLchar__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(label), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMakeImageHandleNonResidentNV() const {
@@ -10834,7 +10834,7 @@ inline void GlesSpy::glMakeImageHandleNonResidentNV(uint64_t handle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMakeImageHandleNonResidentNV coder(observations, handle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMakeImageHandleResidentNV() const {
@@ -10858,7 +10858,7 @@ inline void GlesSpy::glMakeImageHandleResidentNV(uint64_t handle, uint32_t acces
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMakeImageHandleResidentNV coder(observations, handle, access);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMakeTextureHandleNonResidentNV() const {
@@ -10882,7 +10882,7 @@ inline void GlesSpy::glMakeTextureHandleNonResidentNV(uint64_t handle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMakeTextureHandleNonResidentNV coder(observations, handle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMakeTextureHandleResidentNV() const {
@@ -10906,7 +10906,7 @@ inline void GlesSpy::glMakeTextureHandleResidentNV(uint64_t handle) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMakeTextureHandleResidentNV coder(observations, handle);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMapBufferOES() const { return mImports.glMapBufferOES != nullptr; }
@@ -10933,7 +10933,7 @@ inline void* GlesSpy::glMapBufferOES(uint32_t target, uint32_t access) {
     gapic::coder::gles::GlMapBufferOES coder(
             observations, target, access, gapic::coder::gles::Void__P(gapic::coder::memory::Pointer(
                                                   reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10967,7 +10967,7 @@ inline void* GlesSpy::glMapBufferRangeEXT(uint32_t target, int32_t offset, int32
             observations, target, offset, length, access,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -10995,7 +10995,7 @@ inline void GlesSpy::glMatrixLoad3x2fNV(uint32_t matrixMode, float* m) {
     gapic::coder::gles::GlMatrixLoad3x2fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMatrixLoad3x3fNV() const {
@@ -11021,7 +11021,7 @@ inline void GlesSpy::glMatrixLoad3x3fNV(uint32_t matrixMode, float* m) {
     gapic::coder::gles::GlMatrixLoad3x3fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMatrixLoadTranspose3x3fNV() const {
@@ -11047,7 +11047,7 @@ inline void GlesSpy::glMatrixLoadTranspose3x3fNV(uint32_t matrixMode, float* m) 
     gapic::coder::gles::GlMatrixLoadTranspose3x3fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMatrixMult3x2fNV() const {
@@ -11073,7 +11073,7 @@ inline void GlesSpy::glMatrixMult3x2fNV(uint32_t matrixMode, float* m) {
     gapic::coder::gles::GlMatrixMult3x2fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMatrixMult3x3fNV() const {
@@ -11099,7 +11099,7 @@ inline void GlesSpy::glMatrixMult3x3fNV(uint32_t matrixMode, float* m) {
     gapic::coder::gles::GlMatrixMult3x3fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMatrixMultTranspose3x3fNV() const {
@@ -11125,7 +11125,7 @@ inline void GlesSpy::glMatrixMultTranspose3x3fNV(uint32_t matrixMode, float* m) 
     gapic::coder::gles::GlMatrixMultTranspose3x3fNV coder(
             observations, matrixMode, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(m), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawArraysEXT() const {
@@ -11155,7 +11155,7 @@ inline void GlesSpy::glMultiDrawArraysEXT(uint32_t mode, int32_t* first, int32_t
             gapic::coder::gles::GLsizei__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(count), 0)),
             primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawArraysIndirectEXT() const {
@@ -11184,7 +11184,7 @@ inline void GlesSpy::glMultiDrawArraysIndirectEXT(uint32_t mode, void* indirect,
             observations, mode, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                         reinterpret_cast<uintptr_t>(indirect), 0)),
             drawcount, stride);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawElementsBaseVertexEXT() const {
@@ -11218,7 +11218,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexEXT(uint32_t mode, int32_t* co
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                reinterpret_cast<uintptr_t>(basevertex), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawElementsBaseVertexOES() const {
@@ -11252,7 +11252,7 @@ inline void GlesSpy::glMultiDrawElementsBaseVertexOES(uint32_t mode, int32_t* co
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                reinterpret_cast<uintptr_t>(basevertex), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawElementsEXT() const {
@@ -11283,7 +11283,7 @@ inline void GlesSpy::glMultiDrawElementsEXT(uint32_t mode, int32_t* count, uint3
             type, gapic::coder::gles::Void__CP__CP(
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMultiDrawElementsIndirectEXT() const {
@@ -11312,7 +11312,7 @@ inline void GlesSpy::glMultiDrawElementsIndirectEXT(uint32_t mode, uint32_t type
             observations, mode, type, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(indirect), 0)),
             drawcount, stride);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlNamedFramebufferSampleLocationsfvNV() const {
@@ -11342,7 +11342,7 @@ inline void GlesSpy::glNamedFramebufferSampleLocationsfvNV(uint32_t framebuffer,
             observations, framebuffer, start, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPatchParameteriOES() const {
@@ -11366,7 +11366,7 @@ inline void GlesSpy::glPatchParameteriOES(uint32_t pname, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPatchParameteriOES coder(observations, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathCommandsNV() const { return mImports.glPathCommandsNV != nullptr; }
@@ -11395,7 +11395,7 @@ inline void GlesSpy::glPathCommandsNV(uint32_t path, int32_t numCommands, uint8_
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(commands), 0)),
             numCoords, coordType, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(coords), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathCoordsNV() const { return mImports.glPathCoordsNV != nullptr; }
@@ -11422,7 +11422,7 @@ inline void GlesSpy::glPathCoordsNV(uint32_t path, int32_t numCoords, uint32_t c
             observations, path, numCoords, coordType,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(coords), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathCoverDepthFuncNV() const {
@@ -11446,7 +11446,7 @@ inline void GlesSpy::glPathCoverDepthFuncNV(uint32_t func) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPathCoverDepthFuncNV coder(observations, func);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathDashArrayNV() const { return mImports.glPathDashArrayNV != nullptr; }
@@ -11471,7 +11471,7 @@ inline void GlesSpy::glPathDashArrayNV(uint32_t path, int32_t dashCount, float* 
             observations, path, dashCount,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(dashArray), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathGlyphIndexArrayNV() const {
@@ -11510,7 +11510,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexArrayNV(uint32_t firstPathName, uint32_
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(fontName), 0)),
             fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -11546,7 +11546,7 @@ inline uint32_t GlesSpy::glPathGlyphIndexRangeNV(uint32_t fontTarget, void* font
             observations, fontTarget, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                               reinterpret_cast<uintptr_t>(fontName), 0)),
             fontStyle, pathParameterTemplate, emScale, baseAndCount, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -11583,7 +11583,7 @@ inline void GlesSpy::glPathGlyphRangeNV(uint32_t firstPathName, uint32_t fontTar
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(fontName), 0)),
             fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathGlyphsNV() const { return mImports.glPathGlyphsNV != nullptr; }
@@ -11617,7 +11617,7 @@ inline void GlesSpy::glPathGlyphsNV(uint32_t firstPathName, uint32_t fontTarget,
             fontStyle, numGlyphs, type, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(charcodes), 0)),
             handleMissingGlyphs, pathParameterTemplate, emScale);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathMemoryGlyphIndexArrayNV() const {
@@ -11658,7 +11658,7 @@ inline uint32_t GlesSpy::glPathMemoryGlyphIndexArrayNV(uint32_t firstPathName, u
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(fontData), 0)),
             faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -11684,7 +11684,7 @@ inline void GlesSpy::glPathParameterfNV(uint32_t path, uint32_t pname, float val
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPathParameterfNV coder(observations, path, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathParameterfvNV() const {
@@ -11711,7 +11711,7 @@ inline void GlesSpy::glPathParameterfvNV(uint32_t path, uint32_t pname, float* v
             observations, path, pname,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathParameteriNV() const {
@@ -11735,7 +11735,7 @@ inline void GlesSpy::glPathParameteriNV(uint32_t path, uint32_t pname, int32_t v
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPathParameteriNV coder(observations, path, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathParameterivNV() const {
@@ -11761,7 +11761,7 @@ inline void GlesSpy::glPathParameterivNV(uint32_t path, uint32_t pname, int32_t*
     gapic::coder::gles::GlPathParameterivNV coder(
             observations, path, pname, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                                reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathStencilDepthOffsetNV() const {
@@ -11785,7 +11785,7 @@ inline void GlesSpy::glPathStencilDepthOffsetNV(float factor, float units) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPathStencilDepthOffsetNV coder(observations, factor, units);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathStencilFuncNV() const {
@@ -11809,7 +11809,7 @@ inline void GlesSpy::glPathStencilFuncNV(uint32_t func, int32_t ref, uint32_t ma
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPathStencilFuncNV coder(observations, func, ref, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathStringNV() const { return mImports.glPathStringNV != nullptr; }
@@ -11836,7 +11836,7 @@ inline void GlesSpy::glPathStringNV(uint32_t path, uint32_t format, int32_t leng
             observations, path, format, length,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pathString), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathSubCommandsNV() const {
@@ -11872,7 +11872,7 @@ inline void GlesSpy::glPathSubCommandsNV(uint32_t path, int32_t commandStart,
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(commands), 0)),
             numCoords, coordType, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(coords), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPathSubCoordsNV() const { return mImports.glPathSubCoordsNV != nullptr; }
@@ -11899,7 +11899,7 @@ inline void GlesSpy::glPathSubCoordsNV(uint32_t path, int32_t coordStart, int32_
             observations, path, coordStart, numCoords, coordType,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(coords), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPointAlongPathNV() const {
@@ -11940,7 +11940,7 @@ inline uint8_t GlesSpy::glPointAlongPathNV(uint32_t path, int32_t startSegment, 
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(tangentY), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -11964,7 +11964,7 @@ inline void GlesSpy::glPolygonModeNV(uint32_t face, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPolygonModeNV coder(observations, face, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPopGroupMarkerEXT() const {
@@ -11988,7 +11988,7 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPopGroupMarkerEXT coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPrimitiveBoundingBoxOES() const {
@@ -12015,7 +12015,7 @@ inline void GlesSpy::glPrimitiveBoundingBoxOES(float minX, float minY, float min
 
     gapic::coder::gles::GlPrimitiveBoundingBoxOES coder(observations, minX, minY, minZ, minW, maxX,
                                                         maxY, maxZ, maxW);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramBinaryOES() const {
@@ -12045,7 +12045,7 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binary), 0)),
             binary_size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramParameteriEXT() const {
@@ -12069,7 +12069,7 @@ inline void GlesSpy::glProgramParameteriEXT(uint32_t program, uint32_t pname, in
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramParameteriEXT coder(observations, program, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramPathFragmentInputGenNV() const {
@@ -12099,7 +12099,7 @@ inline void GlesSpy::glProgramPathFragmentInputGenNV(uint32_t program, int32_t l
             observations, program, location, genMode, components,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(coeffs), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1fEXT() const {
@@ -12123,7 +12123,7 @@ inline void GlesSpy::glProgramUniform1fEXT(uint32_t program, int32_t location, f
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1fEXT coder(observations, program, location, v0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1fvEXT() const {
@@ -12152,7 +12152,7 @@ inline void GlesSpy::glProgramUniform1fvEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1iEXT() const {
@@ -12177,7 +12177,7 @@ inline void GlesSpy::glProgramUniform1iEXT(uint32_t program, int32_t location, i
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1iEXT coder(observations, program, location, v0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1ivEXT() const {
@@ -12206,7 +12206,7 @@ inline void GlesSpy::glProgramUniform1ivEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1uiEXT() const {
@@ -12231,7 +12231,7 @@ inline void GlesSpy::glProgramUniform1uiEXT(uint32_t program, int32_t location, 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1uiEXT coder(observations, program, location, v0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1uivEXT() const {
@@ -12260,7 +12260,7 @@ inline void GlesSpy::glProgramUniform1uivEXT(uint32_t program, int32_t location,
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2fEXT() const {
@@ -12285,7 +12285,7 @@ inline void GlesSpy::glProgramUniform2fEXT(uint32_t program, int32_t location, f
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2fEXT coder(observations, program, location, v0, v1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2fvEXT() const {
@@ -12314,7 +12314,7 @@ inline void GlesSpy::glProgramUniform2fvEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2iEXT() const {
@@ -12340,7 +12340,7 @@ inline void GlesSpy::glProgramUniform2iEXT(uint32_t program, int32_t location, i
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2iEXT coder(observations, program, location, v0, v1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2ivEXT() const {
@@ -12369,7 +12369,7 @@ inline void GlesSpy::glProgramUniform2ivEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2uiEXT() const {
@@ -12395,7 +12395,7 @@ inline void GlesSpy::glProgramUniform2uiEXT(uint32_t program, int32_t location, 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2uiEXT coder(observations, program, location, v0, v1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2uivEXT() const {
@@ -12424,7 +12424,7 @@ inline void GlesSpy::glProgramUniform2uivEXT(uint32_t program, int32_t location,
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3fEXT() const {
@@ -12450,7 +12450,7 @@ inline void GlesSpy::glProgramUniform3fEXT(uint32_t program, int32_t location, f
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform3fEXT coder(observations, program, location, v0, v1, v2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3fvEXT() const {
@@ -12479,7 +12479,7 @@ inline void GlesSpy::glProgramUniform3fvEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3iEXT() const {
@@ -12506,7 +12506,7 @@ inline void GlesSpy::glProgramUniform3iEXT(uint32_t program, int32_t location, i
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform3iEXT coder(observations, program, location, v0, v1, v2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3ivEXT() const {
@@ -12535,7 +12535,7 @@ inline void GlesSpy::glProgramUniform3ivEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3uiEXT() const {
@@ -12562,7 +12562,7 @@ inline void GlesSpy::glProgramUniform3uiEXT(uint32_t program, int32_t location, 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform3uiEXT coder(observations, program, location, v0, v1, v2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3uivEXT() const {
@@ -12591,7 +12591,7 @@ inline void GlesSpy::glProgramUniform3uivEXT(uint32_t program, int32_t location,
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4fEXT() const {
@@ -12618,7 +12618,7 @@ inline void GlesSpy::glProgramUniform4fEXT(uint32_t program, int32_t location, f
 
     gapic::coder::gles::GlProgramUniform4fEXT coder(observations, program, location, v0, v1, v2,
                                                     v3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4fvEXT() const {
@@ -12647,7 +12647,7 @@ inline void GlesSpy::glProgramUniform4fvEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4iEXT() const {
@@ -12675,7 +12675,7 @@ inline void GlesSpy::glProgramUniform4iEXT(uint32_t program, int32_t location, i
 
     gapic::coder::gles::GlProgramUniform4iEXT coder(observations, program, location, v0, v1, v2,
                                                     v3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4ivEXT() const {
@@ -12704,7 +12704,7 @@ inline void GlesSpy::glProgramUniform4ivEXT(uint32_t program, int32_t location, 
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4uiEXT() const {
@@ -12732,7 +12732,7 @@ inline void GlesSpy::glProgramUniform4uiEXT(uint32_t program, int32_t location, 
 
     gapic::coder::gles::GlProgramUniform4uiEXT coder(observations, program, location, v0, v1, v2,
                                                      v3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4uivEXT() const {
@@ -12761,7 +12761,7 @@ inline void GlesSpy::glProgramUniform4uivEXT(uint32_t program, int32_t location,
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformHandleui64NV() const {
@@ -12787,7 +12787,7 @@ inline void GlesSpy::glProgramUniformHandleui64NV(uint32_t program, int32_t loca
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniformHandleui64NV coder(observations, program, location, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformHandleui64vNV() const {
@@ -12816,7 +12816,7 @@ inline void GlesSpy::glProgramUniformHandleui64vNV(uint32_t program, int32_t loc
             observations, program, location, count,
             gapic::coder::gles::GLuint64__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2fvEXT() const {
@@ -12846,7 +12846,7 @@ inline void GlesSpy::glProgramUniformMatrix2fvEXT(uint32_t program, int32_t loca
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2x3fvEXT() const {
@@ -12877,7 +12877,7 @@ inline void GlesSpy::glProgramUniformMatrix2x3fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2x4fvEXT() const {
@@ -12908,7 +12908,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3fvEXT() const {
@@ -12938,7 +12938,7 @@ inline void GlesSpy::glProgramUniformMatrix3fvEXT(uint32_t program, int32_t loca
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3x2fvEXT() const {
@@ -12969,7 +12969,7 @@ inline void GlesSpy::glProgramUniformMatrix3x2fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3x4fvEXT() const {
@@ -13000,7 +13000,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4fvEXT() const {
@@ -13030,7 +13030,7 @@ inline void GlesSpy::glProgramUniformMatrix4fvEXT(uint32_t program, int32_t loca
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4x2fvEXT() const {
@@ -13061,7 +13061,7 @@ inline void GlesSpy::glProgramUniformMatrix4x2fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4x3fvEXT() const {
@@ -13092,7 +13092,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fvEXT(uint32_t program, int32_t lo
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPushGroupMarkerEXT() const {
@@ -13123,7 +13123,7 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     gapic::coder::gles::GlPushGroupMarkerEXT coder(
             observations, length, gapic::coder::gles::GLchar__CP(gapic::coder::memory::Pointer(
                                           reinterpret_cast<uintptr_t>(marker), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlQueryCounterEXT() const { return mImports.glQueryCounterEXT != nullptr; }
@@ -13145,7 +13145,7 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlQueryCounterEXT coder(observations, query, target);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRasterSamplesEXT() const {
@@ -13171,7 +13171,7 @@ inline void GlesSpy::glRasterSamplesEXT(uint32_t samples, uint8_t fixedsampleloc
     observe(observations.mWrites);
 
     gapic::coder::gles::GlRasterSamplesEXT coder(observations, samples, fixedsamplelocations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadBufferIndexedEXT() const {
@@ -13195,7 +13195,7 @@ inline void GlesSpy::glReadBufferIndexedEXT(uint32_t src, int32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlReadBufferIndexedEXT coder(observations, src, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadBufferNV() const { return mImports.glReadBufferNV != nullptr; }
@@ -13217,7 +13217,7 @@ inline void GlesSpy::glReadBufferNV(uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlReadBufferNV coder(observations, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadnPixelsEXT() const { return mImports.glReadnPixelsEXT != nullptr; }
@@ -13245,7 +13245,7 @@ inline void GlesSpy::glReadnPixelsEXT(int32_t x, int32_t y, int32_t width, int32
             observations, x, y, width, height, format, type, bufSize,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadnPixelsKHR() const { return mImports.glReadnPixelsKHR != nullptr; }
@@ -13273,7 +13273,7 @@ inline void GlesSpy::glReadnPixelsKHR(int32_t x, int32_t y, int32_t width, int32
             observations, x, y, width, height, format, type, bufSize,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisampleANGLE() const {
@@ -13304,7 +13304,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleANGLE(uint32_t target, int3
 
     gapic::coder::gles::GlRenderbufferStorageMultisampleANGLE coder(observations, target, samples,
                                                                     internalformat, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisampleAPPLE() const {
@@ -13335,7 +13335,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleAPPLE(uint32_t target, int3
 
     gapic::coder::gles::GlRenderbufferStorageMultisampleAPPLE coder(observations, target, samples,
                                                                     internalformat, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisampleEXT() const {
@@ -13365,7 +13365,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleEXT(uint32_t target, int32_
 
     gapic::coder::gles::GlRenderbufferStorageMultisampleEXT coder(observations, target, samples,
                                                                   internalformat, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisampleIMG() const {
@@ -13395,7 +13395,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleIMG(uint32_t target, int32_
 
     gapic::coder::gles::GlRenderbufferStorageMultisampleIMG coder(observations, target, samples,
                                                                   internalformat, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisampleNV() const {
@@ -13423,7 +13423,7 @@ inline void GlesSpy::glRenderbufferStorageMultisampleNV(uint32_t target, int32_t
 
     gapic::coder::gles::GlRenderbufferStorageMultisampleNV coder(observations, target, samples,
                                                                  internalformat, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlResolveDepthValuesNV() const {
@@ -13447,7 +13447,7 @@ inline void GlesSpy::glResolveDepthValuesNV() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlResolveDepthValuesNV coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlResolveMultisampleFramebufferAPPLE() const {
@@ -13472,7 +13472,7 @@ inline void GlesSpy::glResolveMultisampleFramebufferAPPLE() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlResolveMultisampleFramebufferAPPLE coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIivOES() const {
@@ -13499,7 +13499,7 @@ inline void GlesSpy::glSamplerParameterIivOES(uint32_t sampler, uint32_t pname, 
             observations, sampler, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIuivOES() const {
@@ -13526,7 +13526,7 @@ inline void GlesSpy::glSamplerParameterIuivOES(uint32_t sampler, uint32_t pname,
             observations, sampler, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlScissorArrayvNV() const { return mImports.glScissorArrayvNV != nullptr; }
@@ -13550,7 +13550,7 @@ inline void GlesSpy::glScissorArrayvNV(uint32_t first, int32_t count, int32_t* v
     gapic::coder::gles::GlScissorArrayvNV coder(
             observations, first, count, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlScissorIndexedNV() const {
@@ -13577,7 +13577,7 @@ inline void GlesSpy::glScissorIndexedNV(uint32_t index, int32_t left, int32_t bo
     observe(observations.mWrites);
 
     gapic::coder::gles::GlScissorIndexedNV coder(observations, index, left, bottom, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlScissorIndexedvNV() const {
@@ -13603,7 +13603,7 @@ inline void GlesSpy::glScissorIndexedvNV(uint32_t index, int32_t* v) {
     gapic::coder::gles::GlScissorIndexedvNV coder(
             observations, index, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSelectPerfMonitorCountersAMD() const {
@@ -13634,7 +13634,7 @@ inline void GlesSpy::glSelectPerfMonitorCountersAMD(uint32_t monitor, uint8_t en
             observations, monitor, enable, group, numCounters,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(counterList), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSetFenceNV() const { return mImports.glSetFenceNV != nullptr; }
@@ -13656,7 +13656,7 @@ inline void GlesSpy::glSetFenceNV(uint32_t fence, uint32_t condition) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSetFenceNV coder(observations, fence, condition);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStartTilingQCOM() const { return mImports.glStartTilingQCOM != nullptr; }
@@ -13680,7 +13680,7 @@ inline void GlesSpy::glStartTilingQCOM(uint32_t x, uint32_t y, uint32_t width, u
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStartTilingQCOM coder(observations, x, y, width, height, preserveMask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilFillPathInstancedNV() const {
@@ -13717,7 +13717,7 @@ inline void GlesSpy::glStencilFillPathInstancedNV(int32_t numPaths, uint32_t pat
             pathBase, fillMode, mask, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilFillPathNV() const {
@@ -13741,7 +13741,7 @@ inline void GlesSpy::glStencilFillPathNV(uint32_t path, uint32_t fillMode, uint3
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilFillPathNV coder(observations, path, fillMode, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilStrokePathInstancedNV() const {
@@ -13779,7 +13779,7 @@ inline void GlesSpy::glStencilStrokePathInstancedNV(int32_t numPaths, uint32_t p
             pathBase, reference, mask, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilStrokePathNV() const {
@@ -13804,7 +13804,7 @@ inline void GlesSpy::glStencilStrokePathNV(uint32_t path, int32_t reference, uin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilStrokePathNV coder(observations, path, reference, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilThenCoverFillPathInstancedNV() const {
@@ -13842,7 +13842,7 @@ inline void GlesSpy::glStencilThenCoverFillPathInstancedNV(
             pathBase, fillMode, mask, coverMode, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilThenCoverFillPathNV() const {
@@ -13869,7 +13869,7 @@ inline void GlesSpy::glStencilThenCoverFillPathNV(uint32_t path, uint32_t fillMo
 
     gapic::coder::gles::GlStencilThenCoverFillPathNV coder(observations, path, fillMode, mask,
                                                            coverMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilThenCoverStrokePathInstancedNV() const {
@@ -13907,7 +13907,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathInstancedNV(
             pathBase, reference, mask, coverMode, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilThenCoverStrokePathNV() const {
@@ -13934,7 +13934,7 @@ inline void GlesSpy::glStencilThenCoverStrokePathNV(uint32_t path, int32_t refer
 
     gapic::coder::gles::GlStencilThenCoverStrokePathNV coder(observations, path, reference, mask,
                                                              coverMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSubpixelPrecisionBiasNV() const {
@@ -13958,7 +13958,7 @@ inline void GlesSpy::glSubpixelPrecisionBiasNV(uint32_t xbits, uint32_t ybits) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSubpixelPrecisionBiasNV coder(observations, xbits, ybits);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTestFenceNV() const { return mImports.glTestFenceNV != nullptr; }
@@ -13983,7 +13983,7 @@ inline uint8_t GlesSpy::glTestFenceNV(uint32_t fence) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTestFenceNV coder(observations, fence, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -14007,7 +14007,7 @@ inline void GlesSpy::glTexBufferOES(uint32_t target, uint32_t internalformat, ui
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexBufferOES coder(observations, target, internalformat, buffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexBufferRangeOES() const {
@@ -14034,7 +14034,7 @@ inline void GlesSpy::glTexBufferRangeOES(uint32_t target, uint32_t internalforma
 
     gapic::coder::gles::GlTexBufferRangeOES coder(observations, target, internalformat, buffer,
                                                   offset, size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexImage3DOES() const { return mImports.glTexImage3DOES != nullptr; }
@@ -14064,7 +14064,7 @@ inline void GlesSpy::glTexImage3DOES(uint32_t target, int32_t level, uint32_t in
             observations, target, level, internalformat, width, height, depth, border, format, type,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pixels), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexPageCommitmentARB() const {
@@ -14094,7 +14094,7 @@ inline void GlesSpy::glTexPageCommitmentARB(uint32_t target, int32_t level, int3
 
     gapic::coder::gles::GlTexPageCommitmentARB coder(observations, target, level, xoffset, yoffset,
                                                      zoffset, width, height, depth, commit);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIivOES() const {
@@ -14121,7 +14121,7 @@ inline void GlesSpy::glTexParameterIivOES(uint32_t target, uint32_t pname, int32
             observations, target, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIuivOES() const {
@@ -14148,7 +14148,7 @@ inline void GlesSpy::glTexParameterIuivOES(uint32_t target, uint32_t pname, uint
             observations, target, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage1DEXT() const { return mImports.glTexStorage1DEXT != nullptr; }
@@ -14172,7 +14172,7 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexStorage1DEXT coder(observations, target, levels, format, width);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage2DEXT() const { return mImports.glTexStorage2DEXT != nullptr; }
@@ -14197,7 +14197,7 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
 
     gapic::coder::gles::GlTexStorage2DEXT coder(observations, target, levels, format, width,
                                                 height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage3DEXT() const { return mImports.glTexStorage3DEXT != nullptr; }
@@ -14222,7 +14222,7 @@ inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t
 
     gapic::coder::gles::GlTexStorage3DEXT coder(observations, target, levels, format, width, height,
                                                 depth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexSubImage3DOES() const {
@@ -14256,7 +14256,7 @@ inline void GlesSpy::glTexSubImage3DOES(uint32_t target, int32_t level, int32_t 
             observations, target, level, xoffset, yoffset, zoffset, width, height, depth, format,
             type, gapic::coder::gles::Void__CP(
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pixels), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTextureStorage1DEXT() const {
@@ -14283,7 +14283,7 @@ inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, in
 
     gapic::coder::gles::GlTextureStorage1DEXT coder(observations, texture, target, levels, format,
                                                     width);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTextureStorage2DEXT() const {
@@ -14310,7 +14310,7 @@ inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, in
 
     gapic::coder::gles::GlTextureStorage2DEXT coder(observations, texture, target, levels, format,
                                                     width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTextureStorage3DEXT() const {
@@ -14339,7 +14339,7 @@ inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, in
 
     gapic::coder::gles::GlTextureStorage3DEXT coder(observations, texture, target, levels, format,
                                                     width, height, depth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTextureViewEXT() const { return mImports.glTextureViewEXT != nullptr; }
@@ -14369,7 +14369,7 @@ inline void GlesSpy::glTextureViewEXT(uint32_t texture, uint32_t target, uint32_
     gapic::coder::gles::GlTextureViewEXT coder(observations, texture, target, origtexture,
                                                internalformat, minlevel, numlevels, minlayer,
                                                numlayers);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTextureViewOES() const { return mImports.glTextureViewOES != nullptr; }
@@ -14399,7 +14399,7 @@ inline void GlesSpy::glTextureViewOES(uint32_t texture, uint32_t target, uint32_
     gapic::coder::gles::GlTextureViewOES coder(observations, texture, target, origtexture,
                                                internalformat, minlevel, numlevels, minlayer,
                                                numlayers);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTransformPathNV() const { return mImports.glTransformPathNV != nullptr; }
@@ -14426,7 +14426,7 @@ inline void GlesSpy::glTransformPathNV(uint32_t resultPath, uint32_t srcPath,
             observations, resultPath, srcPath, transformType,
             gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(transformValues), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformHandleui64NV() const {
@@ -14450,7 +14450,7 @@ inline void GlesSpy::glUniformHandleui64NV(int32_t location, uint64_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniformHandleui64NV coder(observations, location, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformHandleui64vNV() const {
@@ -14477,7 +14477,7 @@ inline void GlesSpy::glUniformHandleui64vNV(int32_t location, int32_t count, uin
             observations, location, count,
             gapic::coder::gles::GLuint64__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix2x3fvNV() const {
@@ -14506,7 +14506,7 @@ inline void GlesSpy::glUniformMatrix2x3fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix2x4fvNV() const {
@@ -14535,7 +14535,7 @@ inline void GlesSpy::glUniformMatrix2x4fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix3x2fvNV() const {
@@ -14564,7 +14564,7 @@ inline void GlesSpy::glUniformMatrix3x2fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix3x4fvNV() const {
@@ -14593,7 +14593,7 @@ inline void GlesSpy::glUniformMatrix3x4fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix4x2fvNV() const {
@@ -14622,7 +14622,7 @@ inline void GlesSpy::glUniformMatrix4x2fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix4x3fvNV() const {
@@ -14651,7 +14651,7 @@ inline void GlesSpy::glUniformMatrix4x3fvNV(int32_t location, int32_t count, uin
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUnmapBufferOES() const { return mImports.glUnmapBufferOES != nullptr; }
@@ -14676,7 +14676,7 @@ inline uint8_t GlesSpy::glUnmapBufferOES(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUnmapBufferOES coder(observations, target, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -14702,7 +14702,7 @@ inline void GlesSpy::glUseProgramStagesEXT(uint32_t pipeline, uint32_t stages, u
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUseProgramStagesEXT coder(observations, pipeline, stages, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlValidateProgramPipelineEXT() const {
@@ -14726,7 +14726,7 @@ inline void GlesSpy::glValidateProgramPipelineEXT(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlValidateProgramPipelineEXT coder(observations, pipeline);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribDivisorANGLE() const {
@@ -14750,7 +14750,7 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribDivisorANGLE coder(observations, index, divisor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribDivisorEXT() const {
@@ -14774,7 +14774,7 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribDivisorEXT coder(observations, index, divisor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribDivisorNV() const {
@@ -14798,7 +14798,7 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribDivisorNV coder(observations, index, divisor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlViewportArrayvNV() const {
@@ -14825,7 +14825,7 @@ inline void GlesSpy::glViewportArrayvNV(uint32_t first, int32_t count, float* v)
             observations, first, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlViewportIndexedfNV() const {
@@ -14849,7 +14849,7 @@ inline void GlesSpy::glViewportIndexedfNV(uint32_t index, float x, float y, floa
     observe(observations.mWrites);
 
     gapic::coder::gles::GlViewportIndexedfNV coder(observations, index, x, y, w, h);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlViewportIndexedfvNV() const {
@@ -14875,7 +14875,7 @@ inline void GlesSpy::glViewportIndexedfvNV(uint32_t index, float* v) {
     gapic::coder::gles::GlViewportIndexedfvNV coder(
             observations, index, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlWaitSyncAPPLE() const { return mImports.glWaitSyncAPPLE != nullptr; }
@@ -14897,7 +14897,7 @@ inline void GlesSpy::glWaitSyncAPPLE(uint64_t sync, uint32_t flag, uint64_t time
     observe(observations.mWrites);
 
     gapic::coder::gles::GlWaitSyncAPPLE coder(observations, sync, flag, timeout);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlWeightPathsNV() const { return mImports.glWeightPathsNV != nullptr; }
@@ -14926,7 +14926,7 @@ inline void GlesSpy::glWeightPathsNV(uint32_t resultPath, int32_t numPaths, uint
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(paths), 0)),
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(weights), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendBarrier() const { return mImports.glBlendBarrier != nullptr; }
@@ -14949,7 +14949,7 @@ inline void GlesSpy::glBlendBarrier() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendBarrier coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendColor() const { return mImports.glBlendColor != nullptr; }
@@ -14980,7 +14980,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendColor coder(observations, red, green, blue, alpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquation() const { return mImports.glBlendEquation != nullptr; }
@@ -15025,7 +15025,7 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquation coder(observations, equation);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationSeparate() const {
@@ -15085,7 +15085,7 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationSeparate coder(observations, rgb, alpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationSeparatei() const {
@@ -15128,7 +15128,7 @@ inline void GlesSpy::glBlendEquationSeparatei(uint32_t buf, uint32_t modeRGB, ui
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationSeparatei coder(observations, buf, modeRGB, modeAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendEquationi() const { return mImports.glBlendEquationi != nullptr; }
@@ -15160,7 +15160,7 @@ inline void GlesSpy::glBlendEquationi(uint32_t buf, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendEquationi coder(observations, buf, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFunc() const { return mImports.glBlendFunc != nullptr; }
@@ -15232,7 +15232,7 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendFunc coder(observations, src_factor, dst_factor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFuncSeparate() const {
@@ -15348,7 +15348,7 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
 
     gapic::coder::gles::GlBlendFuncSeparate coder(observations, src_factor_rgb, dst_factor_rgb,
                                                   src_factor_alpha, dst_factor_alpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFuncSeparatei() const {
@@ -15452,7 +15452,7 @@ inline void GlesSpy::glBlendFuncSeparatei(uint32_t buf, uint32_t srcRGB, uint32_
 
     gapic::coder::gles::GlBlendFuncSeparatei coder(observations, buf, srcRGB, dstRGB, srcAlpha,
                                                    dstAlpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlendFunci() const { return mImports.glBlendFunci != nullptr; }
@@ -15513,7 +15513,7 @@ inline void GlesSpy::glBlendFunci(uint32_t buf, uint32_t src, uint32_t dst) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBlendFunci coder(observations, buf, src, dst);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDepthFunc() const { return mImports.glDepthFunc != nullptr; }
@@ -15556,7 +15556,7 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDepthFunc coder(observations, function);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSampleCoverage() const { return mImports.glSampleCoverage != nullptr; }
@@ -15588,7 +15588,7 @@ inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSampleCoverage coder(observations, value, invert);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSampleMaski() const { return mImports.glSampleMaski != nullptr; }
@@ -15611,7 +15611,7 @@ inline void GlesSpy::glSampleMaski(uint32_t maskNumber, uint32_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSampleMaski coder(observations, maskNumber, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlScissor() const { return mImports.glScissor != nullptr; }
@@ -15643,7 +15643,7 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
     observe(observations.mWrites);
 
     gapic::coder::gles::GlScissor coder(observations, x, y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilFunc() const { return mImports.glStencilFunc != nullptr; }
@@ -15678,7 +15678,7 @@ inline void GlesSpy::glStencilFunc(uint32_t func, int32_t ref, uint32_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilFunc coder(observations, func, ref, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilFuncSeparate() const {
@@ -15725,7 +15725,7 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
 
     gapic::coder::gles::GlStencilFuncSeparate coder(observations, face, function, reference_value,
                                                     mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilOp() const { return mImports.glStencilOp != nullptr; }
@@ -15784,7 +15784,7 @@ inline void GlesSpy::glStencilOp(uint32_t fail, uint32_t zfail, uint32_t zpass) 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilOp coder(observations, fail, zfail, zpass);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilOpSeparate() const {
@@ -15857,7 +15857,7 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
 
     gapic::coder::gles::GlStencilOpSeparate coder(observations, face, stencil_fail,
                                                   stencil_pass_depth_fail, stencil_pass_depth_pass);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindFramebuffer() const { return mImports.glBindFramebuffer != nullptr; }
@@ -15908,7 +15908,7 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindFramebuffer coder(observations, target, framebuffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindRenderbuffer() const {
@@ -15950,7 +15950,7 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindRenderbuffer coder(observations, target, renderbuffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBlitFramebuffer() const { return mImports.glBlitFramebuffer != nullptr; }
@@ -15995,7 +15995,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
 
     gapic::coder::gles::GlBlitFramebuffer coder(observations, srcX0, srcY0, srcX1, srcY1, dstX0,
                                                 dstY0, dstX1, dstY1, mask, filter);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCheckFramebufferStatus() const {
@@ -16034,7 +16034,7 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCheckFramebufferStatus coder(observations, target, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -16071,7 +16071,7 @@ inline void GlesSpy::glClear(uint32_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClear coder(observations, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearBufferfi() const { return mImports.glClearBufferfi != nullptr; }
@@ -16105,7 +16105,7 @@ inline void GlesSpy::glClearBufferfi(uint32_t buffer, int32_t drawbuffer, float 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClearBufferfi coder(observations, buffer, drawbuffer, depth, stencil);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearBufferfv() const { return mImports.glClearBufferfv != nullptr; }
@@ -16150,7 +16150,7 @@ inline void GlesSpy::glClearBufferfv(uint32_t buffer, int32_t drawbuffer, float*
             observations, buffer, drawbuffer,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearBufferiv() const { return mImports.glClearBufferiv != nullptr; }
@@ -16195,7 +16195,7 @@ inline void GlesSpy::glClearBufferiv(uint32_t buffer, int32_t drawbuffer, int32_
             observations, buffer, drawbuffer,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearBufferuiv() const { return mImports.glClearBufferuiv != nullptr; }
@@ -16232,7 +16232,7 @@ inline void GlesSpy::glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint3
             observations, buffer, drawbuffer,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearColor() const { return mImports.glClearColor != nullptr; }
@@ -16263,7 +16263,7 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClearColor coder(observations, r, g, b, a);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearDepthf() const { return mImports.glClearDepthf != nullptr; }
@@ -16294,7 +16294,7 @@ inline void GlesSpy::glClearDepthf(float depth) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClearDepthf coder(observations, depth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlClearStencil() const { return mImports.glClearStencil != nullptr; }
@@ -16325,7 +16325,7 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClearStencil coder(observations, stencil);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlColorMask() const { return mImports.glColorMask != nullptr; }
@@ -16360,7 +16360,7 @@ inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8
     observe(observations.mWrites);
 
     gapic::coder::gles::GlColorMask coder(observations, red, green, blue, alpha);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlColorMaski() const { return mImports.glColorMaski != nullptr; }
@@ -16384,7 +16384,7 @@ inline void GlesSpy::glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlColorMaski coder(observations, index, r, g, b, a);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteFramebuffers() const {
@@ -16424,7 +16424,7 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
             observations, count,
             gapic::coder::gles::FramebufferId__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(framebuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteRenderbuffers() const {
@@ -16465,7 +16465,7 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
             observations, count,
             gapic::coder::gles::RenderbufferId__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(renderbuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDepthMask() const { return mImports.glDepthMask != nullptr; }
@@ -16496,7 +16496,7 @@ inline void GlesSpy::glDepthMask(uint8_t enabled) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDepthMask coder(observations, enabled);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferParameteri() const {
@@ -16541,7 +16541,7 @@ inline void GlesSpy::glFramebufferParameteri(uint32_t target, uint32_t pname, in
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFramebufferParameteri coder(observations, target, pname, param);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferRenderbuffer() const {
@@ -16643,7 +16643,7 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
     gapic::coder::gles::GlFramebufferRenderbuffer coder(observations, framebuffer_target,
                                                         framebuffer_attachment, renderbuffer_target,
                                                         renderbuffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTexture() const {
@@ -16701,7 +16701,7 @@ inline void GlesSpy::glFramebufferTexture(uint32_t target, uint32_t attachment, 
 
     gapic::coder::gles::GlFramebufferTexture coder(observations, target, attachment, texture,
                                                    level);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTexture2D() const {
@@ -16826,7 +16826,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
     gapic::coder::gles::GlFramebufferTexture2D coder(observations, framebuffer_target,
                                                      framebuffer_attachment, texture_target,
                                                      texture, level);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFramebufferTextureLayer() const {
@@ -16884,7 +16884,7 @@ inline void GlesSpy::glFramebufferTextureLayer(uint32_t target, uint32_t attachm
 
     gapic::coder::gles::GlFramebufferTextureLayer coder(observations, target, attachment, texture,
                                                         level, layer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenFramebuffers() const { return mImports.glGenFramebuffers != nullptr; }
@@ -16924,7 +16924,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     gapic::coder::gles::GlGenFramebuffers coder(
             observations, count, gapic::coder::gles::FramebufferId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(framebuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenRenderbuffers() const {
@@ -16968,7 +16968,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
             observations, count,
             gapic::coder::gles::RenderbufferId__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(renderbuffers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFramebufferAttachmentParameteriv() const {
@@ -17092,7 +17092,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
             observations, framebuffer_target, attachment, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFramebufferParameteriv() const {
@@ -17140,7 +17140,7 @@ inline void GlesSpy::glGetFramebufferParameteriv(uint32_t target, uint32_t pname
     gapic::coder::gles::GlGetFramebufferParameteriv coder(
             observations, target, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                  reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetRenderbufferParameteriv() const {
@@ -17207,7 +17207,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
             observations, target, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlInvalidateFramebuffer() const {
@@ -17242,7 +17242,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
             observations, target, count,
             gapic::coder::gles::GLenum__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attachments), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlInvalidateSubFramebuffer() const {
@@ -17283,7 +17283,7 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
             gapic::coder::gles::GLenum__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attachments), 0)),
             x, y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsFramebuffer() const { return mImports.glIsFramebuffer != nullptr; }
@@ -17316,7 +17316,7 @@ inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsFramebuffer coder(observations, framebuffer, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -17351,7 +17351,7 @@ inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsRenderbuffer coder(observations, renderbuffer, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -17398,7 +17398,7 @@ inline void GlesSpy::glReadBuffer(uint32_t src) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlReadBuffer coder(observations, src);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadPixels() const { return mImports.glReadPixels != nullptr; }
@@ -17458,7 +17458,7 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
             observations, x, y, width, height, format, type,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReadnPixels() const { return mImports.glReadnPixels != nullptr; }
@@ -17519,7 +17519,7 @@ inline void GlesSpy::glReadnPixels(int32_t x, int32_t y, int32_t width, int32_t 
             observations, x, y, width, height, format, type, bufSize,
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorage() const {
@@ -17605,7 +17605,7 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
     observe(observations.mWrites);
 
     gapic::coder::gles::GlRenderbufferStorage coder(observations, target, format, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlRenderbufferStorageMultisample() const {
@@ -17677,7 +17677,7 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
 
     gapic::coder::gles::GlRenderbufferStorageMultisample coder(observations, target, samples,
                                                                format, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilMask() const { return mImports.glStencilMask != nullptr; }
@@ -17709,7 +17709,7 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilMask coder(observations, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlStencilMaskSeparate() const {
@@ -17763,7 +17763,7 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlStencilMaskSeparate coder(observations, face, mask);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisable() const { return mImports.glDisable != nullptr; }
@@ -17824,7 +17824,7 @@ inline void GlesSpy::glDisable(uint32_t capability) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisable coder(observations, capability);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisablei() const { return mImports.glDisablei != nullptr; }
@@ -17865,7 +17865,7 @@ inline void GlesSpy::glDisablei(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisablei coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnable() const { return mImports.glEnable != nullptr; }
@@ -17926,7 +17926,7 @@ inline void GlesSpy::glEnable(uint32_t capability) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnable coder(observations, capability);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnablei() const { return mImports.glEnablei != nullptr; }
@@ -17967,7 +17967,7 @@ inline void GlesSpy::glEnablei(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnablei coder(observations, target, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFinish() const { return mImports.glFinish != nullptr; }
@@ -17990,7 +17990,7 @@ inline void GlesSpy::glFinish() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFinish coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFlush() const { return mImports.glFlush != nullptr; }
@@ -18013,7 +18013,7 @@ inline void GlesSpy::glFlush() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFlush coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFlushMappedBufferRange() const {
@@ -18059,7 +18059,7 @@ inline void GlesSpy::glFlushMappedBufferRange(uint32_t target, int32_t offset, i
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFlushMappedBufferRange coder(observations, target, offset, length);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetError() const { return mImports.glGetError != nullptr; }
@@ -18085,7 +18085,7 @@ inline uint32_t GlesSpy::glGetError() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetError coder(observations, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -18115,7 +18115,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatus() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetGraphicsResetStatus coder(observations, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -18165,7 +18165,7 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlHint coder(observations, target, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlActiveShaderProgram() const {
@@ -18190,7 +18190,7 @@ inline void GlesSpy::glActiveShaderProgram(uint32_t pipeline, uint32_t program) 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlActiveShaderProgram coder(observations, pipeline, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlAttachShader() const { return mImports.glAttachShader != nullptr; }
@@ -18223,7 +18223,7 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlAttachShader coder(observations, program, shader);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindAttribLocation() const {
@@ -18257,7 +18257,7 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, c
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindAttribLocation coder(observations, program, location, name);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindProgramPipeline() const {
@@ -18282,7 +18282,7 @@ inline void GlesSpy::glBindProgramPipeline(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindProgramPipeline coder(observations, pipeline);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompileShader() const { return mImports.glCompileShader != nullptr; }
@@ -18305,7 +18305,7 @@ inline void GlesSpy::glCompileShader(uint32_t shader) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCompileShader coder(observations, shader);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCreateProgram() const { return mImports.glCreateProgram != nullptr; }
@@ -18342,7 +18342,7 @@ inline uint32_t GlesSpy::glCreateProgram() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCreateProgram coder(observations, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -18400,7 +18400,7 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCreateShader coder(observations, type, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -18459,7 +18459,7 @@ inline uint32_t GlesSpy::glCreateShaderProgramv(uint32_t type, int32_t count, ch
             gapic::coder::gles::GLchar__CP__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(strings), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -18492,7 +18492,7 @@ inline void GlesSpy::glDeleteProgram(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeleteProgram coder(observations, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteProgramPipelines() const {
@@ -18520,7 +18520,7 @@ inline void GlesSpy::glDeleteProgramPipelines(int32_t n, uint32_t* pipelines) {
     gapic::coder::gles::GlDeleteProgramPipelines coder(
             observations, n, gapic::coder::gles::PipelineId__CP(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(pipelines), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteShader() const { return mImports.glDeleteShader != nullptr; }
@@ -18553,7 +18553,7 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeleteShader coder(observations, shader);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDetachShader() const { return mImports.glDetachShader != nullptr; }
@@ -18586,7 +18586,7 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDetachShader coder(observations, program, shader);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDispatchCompute() const { return mImports.glDispatchCompute != nullptr; }
@@ -18612,7 +18612,7 @@ inline void GlesSpy::glDispatchCompute(uint32_t num_groups_x, uint32_t num_group
 
     gapic::coder::gles::GlDispatchCompute coder(observations, num_groups_x, num_groups_y,
                                                 num_groups_z);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDispatchComputeIndirect() const {
@@ -18637,7 +18637,7 @@ inline void GlesSpy::glDispatchComputeIndirect(int32_t indirect) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDispatchComputeIndirect coder(observations, indirect);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenProgramPipelines() const {
@@ -18665,7 +18665,7 @@ inline void GlesSpy::glGenProgramPipelines(int32_t n, uint32_t* pipelines) {
     gapic::coder::gles::GlGenProgramPipelines coder(
             observations, n, gapic::coder::gles::PipelineId__P(gapic::coder::memory::Pointer(
                                      reinterpret_cast<uintptr_t>(pipelines), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetActiveAttrib() const { return mImports.glGetActiveAttrib != nullptr; }
@@ -18718,7 +18718,7 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(type), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetActiveUniform() const {
@@ -18773,7 +18773,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(type), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetActiveUniformBlockName() const {
@@ -18822,7 +18822,7 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
                     reinterpret_cast<uintptr_t>(buffer_bytes_written), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetActiveUniformBlockiv() const {
@@ -18865,7 +18865,7 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
             observations, program, uniform_block_index, parameter_name,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(parameters), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetActiveUniformsiv() const {
@@ -18913,7 +18913,7 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_cou
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniform_indices), 0)),
             parameter_name, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                     reinterpret_cast<uintptr_t>(parameters), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetAttachedShaders() const {
@@ -18965,7 +18965,7 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
                     reinterpret_cast<uintptr_t>(shaders_length_written), 0)),
             gapic::coder::gles::ShaderId__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(shaders), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetAttribLocation() const {
@@ -18993,7 +18993,7 @@ inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetAttribLocation coder(observations, program, name, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19023,7 +19023,7 @@ inline int32_t GlesSpy::glGetFragDataLocation(uint32_t program, char* name) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetFragDataLocation coder(observations, program, name, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19067,7 +19067,7 @@ inline void GlesSpy::glGetProgramBinary(uint32_t program, int32_t bufSize, int32
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binaryFormat), 0)),
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binary), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramInfoLog() const {
@@ -19122,7 +19122,7 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
                     reinterpret_cast<uintptr_t>(string_length_written), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(info), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramInterfaceiv() const {
@@ -19173,7 +19173,7 @@ inline void GlesSpy::glGetProgramInterfaceiv(uint32_t program, uint32_t programI
             observations, program, programInterface, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramPipelineInfoLog() const {
@@ -19220,7 +19220,7 @@ inline void GlesSpy::glGetProgramPipelineInfoLog(uint32_t pipeline, int32_t bufS
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(infoLog), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramPipelineiv() const {
@@ -19266,7 +19266,7 @@ inline void GlesSpy::glGetProgramPipelineiv(uint32_t pipeline, uint32_t pname, i
             observations, pipeline, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramResourceIndex() const {
@@ -19307,7 +19307,7 @@ inline uint32_t GlesSpy::glGetProgramResourceIndex(uint32_t program, uint32_t pr
 
     gapic::coder::gles::GlGetProgramResourceIndex coder(observations, program, programInterface,
                                                         name, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19348,7 +19348,7 @@ inline int32_t GlesSpy::glGetProgramResourceLocation(uint32_t program, uint32_t 
 
     gapic::coder::gles::GlGetProgramResourceLocation coder(observations, program, programInterface,
                                                            name, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19409,7 +19409,7 @@ inline void GlesSpy::glGetProgramResourceName(uint32_t program, uint32_t program
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramResourceiv() const {
@@ -19467,7 +19467,7 @@ inline void GlesSpy::glGetProgramResourceiv(uint32_t program, uint32_t programIn
                              gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetProgramiv() const { return mImports.glGetProgramiv != nullptr; }
@@ -19537,7 +19537,7 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
             observations, program, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetShaderInfoLog() const {
@@ -19592,7 +19592,7 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
                     reinterpret_cast<uintptr_t>(string_length_written), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(info), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetShaderPrecisionFormat() const {
@@ -19642,7 +19642,7 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(range), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(precision), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetShaderSource() const { return mImports.glGetShaderSource != nullptr; }
@@ -19695,7 +19695,7 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
                     reinterpret_cast<uintptr_t>(string_length_written), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(source), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetShaderiv() const { return mImports.glGetShaderiv != nullptr; }
@@ -19765,7 +19765,7 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
             observations, shader, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetUniformBlockIndex() const {
@@ -19794,7 +19794,7 @@ inline uint32_t GlesSpy::glGetUniformBlockIndex(uint32_t program, char* uniformB
 
     gapic::coder::gles::GlGetUniformBlockIndex coder(observations, program, uniformBlockName,
                                                      result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19834,7 +19834,7 @@ inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniformNames), 0)),
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniformIndices), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetUniformLocation() const {
@@ -19862,7 +19862,7 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetUniformLocation coder(observations, program, name, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -19894,7 +19894,7 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
             observations, program, location,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetUniformiv() const { return mImports.glGetUniformiv != nullptr; }
@@ -19924,7 +19924,7 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
             observations, program, location,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetUniformuiv() const { return mImports.glGetUniformuiv != nullptr; }
@@ -19954,7 +19954,7 @@ inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_
             observations, program, location,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformfv() const { return mImports.glGetnUniformfv != nullptr; }
@@ -19988,7 +19988,7 @@ inline void GlesSpy::glGetnUniformfv(uint32_t program, int32_t location, int32_t
             observations, program, location, bufSize,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformiv() const { return mImports.glGetnUniformiv != nullptr; }
@@ -20022,7 +20022,7 @@ inline void GlesSpy::glGetnUniformiv(uint32_t program, int32_t location, int32_t
             observations, program, location, bufSize,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetnUniformuiv() const { return mImports.glGetnUniformuiv != nullptr; }
@@ -20056,7 +20056,7 @@ inline void GlesSpy::glGetnUniformuiv(uint32_t program, int32_t location, int32_
             observations, program, location, bufSize,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsProgram() const { return mImports.glIsProgram != nullptr; }
@@ -20089,7 +20089,7 @@ inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsProgram coder(observations, program, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -20119,7 +20119,7 @@ inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsProgramPipeline coder(observations, pipeline, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -20154,7 +20154,7 @@ inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsShader coder(observations, shader, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -20179,7 +20179,7 @@ inline void GlesSpy::glLinkProgram(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlLinkProgram coder(observations, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMemoryBarrier() const { return mImports.glMemoryBarrier != nullptr; }
@@ -20242,7 +20242,7 @@ inline void GlesSpy::glMemoryBarrier(uint32_t barriers) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMemoryBarrier coder(observations, barriers);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMemoryBarrierByRegion() const {
@@ -20307,7 +20307,7 @@ inline void GlesSpy::glMemoryBarrierByRegion(uint32_t barriers) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMemoryBarrierByRegion coder(observations, barriers);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramBinary() const { return mImports.glProgramBinary != nullptr; }
@@ -20338,7 +20338,7 @@ inline void GlesSpy::glProgramBinary(uint32_t program, uint32_t binaryFormat, vo
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(binary), 0)),
             length);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramParameteri() const {
@@ -20373,7 +20373,7 @@ inline void GlesSpy::glProgramParameteri(uint32_t program, uint32_t pname, int32
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramParameteri coder(observations, program, pname, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1f() const {
@@ -20416,7 +20416,7 @@ inline void GlesSpy::glProgramUniform1f(uint32_t program, int32_t location, floa
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1f coder(observations, program, location, value0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1fv() const {
@@ -20463,7 +20463,7 @@ inline void GlesSpy::glProgramUniform1fv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1i() const {
@@ -20507,7 +20507,7 @@ inline void GlesSpy::glProgramUniform1i(uint32_t program, int32_t location, int3
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1i coder(observations, program, location, value0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1iv() const {
@@ -20554,7 +20554,7 @@ inline void GlesSpy::glProgramUniform1iv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1ui() const {
@@ -20598,7 +20598,7 @@ inline void GlesSpy::glProgramUniform1ui(uint32_t program, int32_t location, uin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform1ui coder(observations, program, location, value0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform1uiv() const {
@@ -20645,7 +20645,7 @@ inline void GlesSpy::glProgramUniform1uiv(uint32_t program, int32_t location, in
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2f() const {
@@ -20690,7 +20690,7 @@ inline void GlesSpy::glProgramUniform2f(uint32_t program, int32_t location, floa
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2f coder(observations, program, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2fv() const {
@@ -20737,7 +20737,7 @@ inline void GlesSpy::glProgramUniform2fv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2i() const {
@@ -20782,7 +20782,7 @@ inline void GlesSpy::glProgramUniform2i(uint32_t program, int32_t location, int3
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2i coder(observations, program, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2iv() const {
@@ -20829,7 +20829,7 @@ inline void GlesSpy::glProgramUniform2iv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2ui() const {
@@ -20874,7 +20874,7 @@ inline void GlesSpy::glProgramUniform2ui(uint32_t program, int32_t location, uin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlProgramUniform2ui coder(observations, program, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform2uiv() const {
@@ -20921,7 +20921,7 @@ inline void GlesSpy::glProgramUniform2uiv(uint32_t program, int32_t location, in
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3f() const {
@@ -20967,7 +20967,7 @@ inline void GlesSpy::glProgramUniform3f(uint32_t program, int32_t location, floa
 
     gapic::coder::gles::GlProgramUniform3f coder(observations, program, location, value0, value1,
                                                  value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3fv() const {
@@ -21014,7 +21014,7 @@ inline void GlesSpy::glProgramUniform3fv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3i() const {
@@ -21061,7 +21061,7 @@ inline void GlesSpy::glProgramUniform3i(uint32_t program, int32_t location, int3
 
     gapic::coder::gles::GlProgramUniform3i coder(observations, program, location, value0, value1,
                                                  value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3iv() const {
@@ -21108,7 +21108,7 @@ inline void GlesSpy::glProgramUniform3iv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3ui() const {
@@ -21155,7 +21155,7 @@ inline void GlesSpy::glProgramUniform3ui(uint32_t program, int32_t location, uin
 
     gapic::coder::gles::GlProgramUniform3ui coder(observations, program, location, value0, value1,
                                                   value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform3uiv() const {
@@ -21202,7 +21202,7 @@ inline void GlesSpy::glProgramUniform3uiv(uint32_t program, int32_t location, in
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4f() const {
@@ -21248,7 +21248,7 @@ inline void GlesSpy::glProgramUniform4f(uint32_t program, int32_t location, floa
 
     gapic::coder::gles::GlProgramUniform4f coder(observations, program, location, value0, value1,
                                                  value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4fv() const {
@@ -21295,7 +21295,7 @@ inline void GlesSpy::glProgramUniform4fv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4i() const {
@@ -21342,7 +21342,7 @@ inline void GlesSpy::glProgramUniform4i(uint32_t program, int32_t location, int3
 
     gapic::coder::gles::GlProgramUniform4i coder(observations, program, location, value0, value1,
                                                  value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4iv() const {
@@ -21389,7 +21389,7 @@ inline void GlesSpy::glProgramUniform4iv(uint32_t program, int32_t location, int
             observations, program, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4ui() const {
@@ -21436,7 +21436,7 @@ inline void GlesSpy::glProgramUniform4ui(uint32_t program, int32_t location, uin
 
     gapic::coder::gles::GlProgramUniform4ui coder(observations, program, location, value0, value1,
                                                   value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniform4uiv() const {
@@ -21483,7 +21483,7 @@ inline void GlesSpy::glProgramUniform4uiv(uint32_t program, int32_t location, in
             observations, program, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2fv() const {
@@ -21532,7 +21532,7 @@ inline void GlesSpy::glProgramUniformMatrix2fv(uint32_t program, int32_t locatio
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2x3fv() const {
@@ -21581,7 +21581,7 @@ inline void GlesSpy::glProgramUniformMatrix2x3fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix2x4fv() const {
@@ -21630,7 +21630,7 @@ inline void GlesSpy::glProgramUniformMatrix2x4fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3fv() const {
@@ -21679,7 +21679,7 @@ inline void GlesSpy::glProgramUniformMatrix3fv(uint32_t program, int32_t locatio
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3x2fv() const {
@@ -21728,7 +21728,7 @@ inline void GlesSpy::glProgramUniformMatrix3x2fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix3x4fv() const {
@@ -21777,7 +21777,7 @@ inline void GlesSpy::glProgramUniformMatrix3x4fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4fv() const {
@@ -21826,7 +21826,7 @@ inline void GlesSpy::glProgramUniformMatrix4fv(uint32_t program, int32_t locatio
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4x2fv() const {
@@ -21875,7 +21875,7 @@ inline void GlesSpy::glProgramUniformMatrix4x2fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlProgramUniformMatrix4x3fv() const {
@@ -21924,7 +21924,7 @@ inline void GlesSpy::glProgramUniformMatrix4x3fv(uint32_t program, int32_t locat
             observations, program, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlReleaseShaderCompiler() const {
@@ -21949,7 +21949,7 @@ inline void GlesSpy::glReleaseShaderCompiler() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlReleaseShaderCompiler coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlShaderBinary() const { return mImports.glShaderBinary != nullptr; }
@@ -21984,7 +21984,7 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
             binary_format, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                    reinterpret_cast<uintptr_t>(binary), 0)),
             binary_size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlShaderSource() const { return mImports.glShaderSource != nullptr; }
@@ -22032,7 +22032,7 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(source), 0)),
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1f() const { return mImports.glUniform1f != nullptr; }
@@ -22072,7 +22072,7 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform1f coder(observations, location, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1fv() const { return mImports.glUniform1fv != nullptr; }
@@ -22114,7 +22114,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
             observations, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1i() const { return mImports.glUniform1i != nullptr; }
@@ -22154,7 +22154,7 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform1i coder(observations, location, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1iv() const { return mImports.glUniform1iv != nullptr; }
@@ -22196,7 +22196,7 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
             observations, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1ui() const { return mImports.glUniform1ui != nullptr; }
@@ -22236,7 +22236,7 @@ inline void GlesSpy::glUniform1ui(int32_t location, uint32_t value0) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform1ui coder(observations, location, value0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform1uiv() const { return mImports.glUniform1uiv != nullptr; }
@@ -22278,7 +22278,7 @@ inline void GlesSpy::glUniform1uiv(int32_t location, int32_t count, uint32_t* va
             observations, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2f() const { return mImports.glUniform2f != nullptr; }
@@ -22318,7 +22318,7 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform2f coder(observations, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2fv() const { return mImports.glUniform2fv != nullptr; }
@@ -22360,7 +22360,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
             observations, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2i() const { return mImports.glUniform2i != nullptr; }
@@ -22400,7 +22400,7 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform2i coder(observations, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2iv() const { return mImports.glUniform2iv != nullptr; }
@@ -22442,7 +22442,7 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
             observations, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2ui() const { return mImports.glUniform2ui != nullptr; }
@@ -22482,7 +22482,7 @@ inline void GlesSpy::glUniform2ui(int32_t location, uint32_t value0, uint32_t va
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform2ui coder(observations, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform2uiv() const { return mImports.glUniform2uiv != nullptr; }
@@ -22524,7 +22524,7 @@ inline void GlesSpy::glUniform2uiv(int32_t location, int32_t count, uint32_t* va
             observations, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3f() const { return mImports.glUniform3f != nullptr; }
@@ -22564,7 +22564,7 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform3f coder(observations, location, value0, value1, value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3fv() const { return mImports.glUniform3fv != nullptr; }
@@ -22606,7 +22606,7 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
             observations, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3i() const { return mImports.glUniform3i != nullptr; }
@@ -22647,7 +22647,7 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform3i coder(observations, location, value0, value1, value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3iv() const { return mImports.glUniform3iv != nullptr; }
@@ -22689,7 +22689,7 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
             observations, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3ui() const { return mImports.glUniform3ui != nullptr; }
@@ -22731,7 +22731,7 @@ inline void GlesSpy::glUniform3ui(int32_t location, uint32_t value0, uint32_t va
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform3ui coder(observations, location, value0, value1, value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform3uiv() const { return mImports.glUniform3uiv != nullptr; }
@@ -22773,7 +22773,7 @@ inline void GlesSpy::glUniform3uiv(int32_t location, int32_t count, uint32_t* va
             observations, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4f() const { return mImports.glUniform4f != nullptr; }
@@ -22815,7 +22815,7 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform4f coder(observations, location, value0, value1, value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4fv() const { return mImports.glUniform4fv != nullptr; }
@@ -22857,7 +22857,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
             observations, location, count,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4i() const { return mImports.glUniform4i != nullptr; }
@@ -22899,7 +22899,7 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform4i coder(observations, location, value0, value1, value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4iv() const { return mImports.glUniform4iv != nullptr; }
@@ -22941,7 +22941,7 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
             observations, location, count,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4ui() const { return mImports.glUniform4ui != nullptr; }
@@ -22983,7 +22983,7 @@ inline void GlesSpy::glUniform4ui(int32_t location, uint32_t value0, uint32_t va
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUniform4ui coder(observations, location, value0, value1, value2, value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniform4uiv() const { return mImports.glUniform4uiv != nullptr; }
@@ -23025,7 +23025,7 @@ inline void GlesSpy::glUniform4uiv(int32_t location, int32_t count, uint32_t* va
             observations, location, count,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformBlockBinding() const {
@@ -23053,7 +23053,7 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
 
     gapic::coder::gles::GlUniformBlockBinding coder(observations, program, uniform_block_index,
                                                     uniform_block_binding);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix2fv() const {
@@ -23102,7 +23102,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, uint8_t
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix2x3fv() const {
@@ -23151,7 +23151,7 @@ inline void GlesSpy::glUniformMatrix2x3fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix2x4fv() const {
@@ -23200,7 +23200,7 @@ inline void GlesSpy::glUniformMatrix2x4fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix3fv() const {
@@ -23249,7 +23249,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, uint8_t
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix3x2fv() const {
@@ -23298,7 +23298,7 @@ inline void GlesSpy::glUniformMatrix3x2fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix3x4fv() const {
@@ -23347,7 +23347,7 @@ inline void GlesSpy::glUniformMatrix3x4fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix4fv() const {
@@ -23396,7 +23396,7 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, uint8_t
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix4x2fv() const {
@@ -23445,7 +23445,7 @@ inline void GlesSpy::glUniformMatrix4x2fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUniformMatrix4x3fv() const {
@@ -23494,7 +23494,7 @@ inline void GlesSpy::glUniformMatrix4x3fv(int32_t location, int32_t count, uint8
             observations, location, count, transpose,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUseProgram() const { return mImports.glUseProgram != nullptr; }
@@ -23525,7 +23525,7 @@ inline void GlesSpy::glUseProgram(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUseProgram coder(observations, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlUseProgramStages() const {
@@ -23562,7 +23562,7 @@ inline void GlesSpy::glUseProgramStages(uint32_t pipeline, uint32_t stages, uint
     observe(observations.mWrites);
 
     gapic::coder::gles::GlUseProgramStages coder(observations, pipeline, stages, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlValidateProgram() const { return mImports.glValidateProgram != nullptr; }
@@ -23585,7 +23585,7 @@ inline void GlesSpy::glValidateProgram(uint32_t program) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlValidateProgram coder(observations, program);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlValidateProgramPipeline() const {
@@ -23610,7 +23610,7 @@ inline void GlesSpy::glValidateProgramPipeline(uint32_t pipeline) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlValidateProgramPipeline coder(observations, pipeline);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCullFace() const { return mImports.glCullFace != nullptr; }
@@ -23648,7 +23648,7 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlCullFace coder(observations, mode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDepthRangef() const { return mImports.glDepthRangef != nullptr; }
@@ -23680,7 +23680,7 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDepthRangef coder(observations, near, far);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFrontFace() const { return mImports.glFrontFace != nullptr; }
@@ -23717,7 +23717,7 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFrontFace coder(observations, orientation);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetMultisamplefv() const {
@@ -23751,7 +23751,7 @@ inline void GlesSpy::glGetMultisamplefv(uint32_t pname, uint32_t index, float* v
             observations, pname, index,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(val), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlLineWidth() const { return mImports.glLineWidth != nullptr; }
@@ -23782,7 +23782,7 @@ inline void GlesSpy::glLineWidth(float width) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlLineWidth coder(observations, width);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlMinSampleShading() const {
@@ -23807,7 +23807,7 @@ inline void GlesSpy::glMinSampleShading(float value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlMinSampleShading coder(observations, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlPolygonOffset() const { return mImports.glPolygonOffset != nullptr; }
@@ -23839,7 +23839,7 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPolygonOffset coder(observations, scale_factor, units);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlViewport() const { return mImports.glViewport != nullptr; }
@@ -23871,7 +23871,7 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
     observe(observations.mWrites);
 
     gapic::coder::gles::GlViewport coder(observations, x, y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBooleani_v() const { return mImports.glGetBooleani_v != nullptr; }
@@ -25428,7 +25428,7 @@ inline void GlesSpy::glGetBooleani_v(uint32_t param, uint32_t index, uint8_t* va
             observations, param, index,
             gapic::coder::gles::GLboolean__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetBooleanv() const { return mImports.glGetBooleanv != nullptr; }
@@ -27056,7 +27056,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
     gapic::coder::gles::GlGetBooleanv coder(
             observations, param, gapic::coder::gles::GLboolean__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetFloatv() const { return mImports.glGetFloatv != nullptr; }
@@ -28673,7 +28673,7 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     gapic::coder::gles::GlGetFloatv coder(
             observations, param, gapic::coder::gles::GLfloat__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetInteger64i_v() const { return mImports.glGetInteger64i_v != nullptr; }
@@ -30230,7 +30230,7 @@ inline void GlesSpy::glGetInteger64i_v(uint32_t param, uint32_t index, int64_t* 
             observations, param, index,
             gapic::coder::gles::GLint64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetInteger64v() const { return mImports.glGetInteger64v != nullptr; }
@@ -31786,7 +31786,7 @@ inline void GlesSpy::glGetInteger64v(uint32_t param, int64_t* values) {
     gapic::coder::gles::GlGetInteger64v coder(
             observations, param, gapic::coder::gles::GLint64__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetIntegeri_v() const { return mImports.glGetIntegeri_v != nullptr; }
@@ -33342,7 +33342,7 @@ inline void GlesSpy::glGetIntegeri_v(uint32_t param, uint32_t index, int32_t* va
     gapic::coder::gles::GlGetIntegeri_v coder(
             observations, param, index, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetIntegerv() const { return mImports.glGetIntegerv != nullptr; }
@@ -35185,7 +35185,7 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     gapic::coder::gles::GlGetIntegerv coder(
             observations, param, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetInternalformativ() const {
@@ -35299,7 +35299,7 @@ inline void GlesSpy::glGetInternalformativ(uint32_t target, uint32_t internalfor
             observations, target, internalformat, pname, bufSize,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetString() const { return mImports.glGetString != nullptr; }
@@ -35336,7 +35336,7 @@ inline uint8_t* GlesSpy::glGetString(uint32_t param) {
     gapic::coder::gles::GlGetString coder(
             observations, param, gapic::coder::gles::GLubyte__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35372,7 +35372,7 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
             observations, name, index,
             gapic::coder::gles::GLubyte__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35433,7 +35433,7 @@ inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsEnabled coder(observations, capability, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35479,7 +35479,7 @@ inline uint8_t GlesSpy::glIsEnabledi(uint32_t target, uint32_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsEnabledi coder(observations, target, index, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35511,7 +35511,7 @@ inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlClientWaitSync coder(observations, sync, syncFlags, timeout, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35536,7 +35536,7 @@ inline void GlesSpy::glDeleteSync(uint64_t sync) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDeleteSync coder(observations, sync);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlFenceSync() const { return mImports.glFenceSync != nullptr; }
@@ -35567,7 +35567,7 @@ inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlFenceSync coder(observations, condition, syncFlags, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35613,7 +35613,7 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(length), 0)),
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsSync() const { return mImports.glIsSync != nullptr; }
@@ -35639,7 +35639,7 @@ inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsSync coder(observations, sync, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -35664,7 +35664,7 @@ inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t time
     observe(observations.mWrites);
 
     gapic::coder::gles::GlWaitSync coder(observations, sync, syncFlags, timeout);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlActiveTexture() const { return mImports.glActiveTexture != nullptr; }
@@ -35731,7 +35731,7 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlActiveTexture coder(observations, unit);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindImageTexture() const {
@@ -35785,7 +35785,7 @@ inline void GlesSpy::glBindImageTexture(uint32_t unit, uint32_t texture, int32_t
 
     gapic::coder::gles::GlBindImageTexture coder(observations, unit, texture, level, layered, layer,
                                                  access, format);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindSampler() const { return mImports.glBindSampler != nullptr; }
@@ -35808,7 +35808,7 @@ inline void GlesSpy::glBindSampler(uint32_t unit, uint32_t sampler) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindSampler coder(observations, unit, sampler);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindTexture() const { return mImports.glBindTexture != nullptr; }
@@ -35870,7 +35870,7 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindTexture coder(observations, target, texture);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexImage2D() const {
@@ -36013,7 +36013,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             observations, target, level, format, width, height, border, image_size,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexImage3D() const {
@@ -36114,7 +36114,7 @@ inline void GlesSpy::glCompressedTexImage3D(uint32_t target, int32_t level, uint
             observations, target, level, internalformat, width, height, depth, border, image_size,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexSubImage2D() const {
@@ -36217,7 +36217,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
             observations, target, level, xoffset, yoffset, width, height, format, image_size,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCompressedTexSubImage3D() const {
@@ -36320,7 +36320,7 @@ inline void GlesSpy::glCompressedTexSubImage3D(uint32_t target, int32_t level, i
             observations, target, level, xoffset, yoffset, zoffset, width, height, depth, format,
             image_size, gapic::coder::gles::TexturePointer(gapic::coder::memory::Pointer(
                                 reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyImageSubData() const {
@@ -36381,7 +36381,7 @@ inline void GlesSpy::glCopyImageSubData(uint32_t srcName, uint32_t srcTarget, in
     gapic::coder::gles::GlCopyImageSubData coder(observations, srcName, srcTarget, srcLevel, srcX,
                                                  srcY, srcZ, dstName, dstTarget, dstLevel, dstX,
                                                  dstY, dstZ, srcWidth, srcHeight, srcDepth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyTexImage2D() const { return mImports.glCopyTexImage2D != nullptr; }
@@ -36461,7 +36461,7 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
 
     gapic::coder::gles::GlCopyTexImage2D coder(observations, target, level, format, x, y, width,
                                                height, border);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyTexSubImage2D() const {
@@ -36502,7 +36502,7 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
 
     gapic::coder::gles::GlCopyTexSubImage2D coder(observations, target, level, xoffset, yoffset, x,
                                                   y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlCopyTexSubImage3D() const {
@@ -36543,7 +36543,7 @@ inline void GlesSpy::glCopyTexSubImage3D(uint32_t target, int32_t level, int32_t
 
     gapic::coder::gles::GlCopyTexSubImage3D coder(observations, target, level, xoffset, yoffset,
                                                   zoffset, x, y, width, height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteSamplers() const { return mImports.glDeleteSamplers != nullptr; }
@@ -36569,7 +36569,7 @@ inline void GlesSpy::glDeleteSamplers(int32_t count, uint32_t* samplers) {
     gapic::coder::gles::GlDeleteSamplers coder(
             observations, count, gapic::coder::gles::SamplerId__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(samplers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteTextures() const { return mImports.glDeleteTextures != nullptr; }
@@ -36605,7 +36605,7 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     gapic::coder::gles::GlDeleteTextures coder(
             observations, count, gapic::coder::gles::TextureId__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(textures), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenSamplers() const { return mImports.glGenSamplers != nullptr; }
@@ -36631,7 +36631,7 @@ inline void GlesSpy::glGenSamplers(int32_t count, uint32_t* samplers) {
     gapic::coder::gles::GlGenSamplers coder(
             observations, count, gapic::coder::gles::SamplerId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(samplers), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenTextures() const { return mImports.glGenTextures != nullptr; }
@@ -36673,7 +36673,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     gapic::coder::gles::GlGenTextures coder(
             observations, count, gapic::coder::gles::TextureId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(textures), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenerateMipmap() const { return mImports.glGenerateMipmap != nullptr; }
@@ -36713,7 +36713,7 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGenerateMipmap coder(observations, target);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIiv() const {
@@ -36762,7 +36762,7 @@ inline void GlesSpy::glGetSamplerParameterIiv(uint32_t sampler, uint32_t pname, 
             observations, sampler, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterIuiv() const {
@@ -36811,7 +36811,7 @@ inline void GlesSpy::glGetSamplerParameterIuiv(uint32_t sampler, uint32_t pname,
             observations, sampler, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameterfv() const {
@@ -36860,7 +36860,7 @@ inline void GlesSpy::glGetSamplerParameterfv(uint32_t sampler, uint32_t pname, f
             observations, sampler, pname,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetSamplerParameteriv() const {
@@ -36909,7 +36909,7 @@ inline void GlesSpy::glGetSamplerParameteriv(uint32_t sampler, uint32_t pname, i
             observations, sampler, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexLevelParameterfv() const {
@@ -36990,7 +36990,7 @@ inline void GlesSpy::glGetTexLevelParameterfv(uint32_t target, int32_t level, ui
             observations, target, level, pname,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexLevelParameteriv() const {
@@ -37071,7 +37071,7 @@ inline void GlesSpy::glGetTexLevelParameteriv(uint32_t target, int32_t level, ui
             observations, target, level, pname,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIiv() const {
@@ -37166,7 +37166,7 @@ inline void GlesSpy::glGetTexParameterIiv(uint32_t target, uint32_t pname, int32
     gapic::coder::gles::GlGetTexParameterIiv coder(
             observations, target, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                  reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterIuiv() const {
@@ -37262,7 +37262,7 @@ inline void GlesSpy::glGetTexParameterIuiv(uint32_t target, uint32_t pname, uint
             observations, target, pname,
             gapic::coder::gles::GLuint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameterfv() const {
@@ -37380,7 +37380,7 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
             observations, target, parameter,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTexParameteriv() const {
@@ -37498,7 +37498,7 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
             observations, target, parameter,
             gapic::coder::gles::GLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(values), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsSampler() const { return mImports.glIsSampler != nullptr; }
@@ -37524,7 +37524,7 @@ inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsSampler coder(observations, sampler, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -37559,7 +37559,7 @@ inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsTexture coder(observations, texture, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -37612,7 +37612,7 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPixelStorei coder(observations, parameter, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIiv() const {
@@ -37665,7 +37665,7 @@ inline void GlesSpy::glSamplerParameterIiv(uint32_t sampler, uint32_t pname, int
             observations, sampler, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterIuiv() const {
@@ -37718,7 +37718,7 @@ inline void GlesSpy::glSamplerParameterIuiv(uint32_t sampler, uint32_t pname, ui
             observations, sampler, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterf() const {
@@ -37756,7 +37756,7 @@ inline void GlesSpy::glSamplerParameterf(uint32_t sampler, uint32_t pname, float
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSamplerParameterf coder(observations, sampler, pname, param);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameterfv() const {
@@ -37809,7 +37809,7 @@ inline void GlesSpy::glSamplerParameterfv(uint32_t sampler, uint32_t pname, floa
             observations, sampler, pname,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameteri() const {
@@ -37847,7 +37847,7 @@ inline void GlesSpy::glSamplerParameteri(uint32_t sampler, uint32_t pname, int32
     observe(observations.mWrites);
 
     gapic::coder::gles::GlSamplerParameteri coder(observations, sampler, pname, param);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlSamplerParameteriv() const {
@@ -37900,7 +37900,7 @@ inline void GlesSpy::glSamplerParameteriv(uint32_t sampler, uint32_t pname, int3
             observations, sampler, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(param), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexBuffer() const { return mImports.glTexBuffer != nullptr; }
@@ -37965,7 +37965,7 @@ inline void GlesSpy::glTexBuffer(uint32_t target, uint32_t internalformat, uint3
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexBuffer coder(observations, target, internalformat, buffer);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexBufferRange() const { return mImports.glTexBufferRange != nullptr; }
@@ -38033,7 +38033,7 @@ inline void GlesSpy::glTexBufferRange(uint32_t target, uint32_t internalformat, 
 
     gapic::coder::gles::GlTexBufferRange coder(observations, target, internalformat, buffer, offset,
                                                size);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexImage2D() const { return mImports.glTexImage2D != nullptr; }
@@ -38184,7 +38184,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
             observations, target, level, internal_format, width, height, border, format, type,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexImage3D() const { return mImports.glTexImage3D != nullptr; }
@@ -38285,7 +38285,7 @@ inline void GlesSpy::glTexImage3D(uint32_t target, int32_t level, int32_t intern
             observations, target, level, internalformat, width, height, depth, border, format, type,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIiv() const { return mImports.glTexParameterIiv != nullptr; }
@@ -38374,7 +38374,7 @@ inline void GlesSpy::glTexParameterIiv(uint32_t target, uint32_t pname, int32_t*
             observations, target, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterIuiv() const {
@@ -38465,7 +38465,7 @@ inline void GlesSpy::glTexParameterIuiv(uint32_t target, uint32_t pname, uint32_
             observations, target, pname,
             gapic::coder::gles::GLuint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterf() const { return mImports.glTexParameterf != nullptr; }
@@ -38587,7 +38587,7 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexParameterf coder(observations, target, parameter, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameterfv() const { return mImports.glTexParameterfv != nullptr; }
@@ -38676,7 +38676,7 @@ inline void GlesSpy::glTexParameterfv(uint32_t target, uint32_t pname, float* pa
             observations, target, pname,
             gapic::coder::gles::GLfloat__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameteri() const { return mImports.glTexParameteri != nullptr; }
@@ -38798,7 +38798,7 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
     observe(observations.mWrites);
 
     gapic::coder::gles::GlTexParameteri coder(observations, target, parameter, value);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexParameteriv() const { return mImports.glTexParameteriv != nullptr; }
@@ -38887,7 +38887,7 @@ inline void GlesSpy::glTexParameteriv(uint32_t target, uint32_t pname, int32_t* 
             observations, target, pname,
             gapic::coder::gles::GLint__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage2D() const { return mImports.glTexStorage2D != nullptr; }
@@ -39020,7 +39020,7 @@ inline void GlesSpy::glTexStorage2D(uint32_t target, int32_t levels, uint32_t in
 
     gapic::coder::gles::GlTexStorage2D coder(observations, target, levels, internalformat, width,
                                              height);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage2DMultisample() const {
@@ -39119,7 +39119,7 @@ inline void GlesSpy::glTexStorage2DMultisample(uint32_t target, int32_t samples,
 
     gapic::coder::gles::GlTexStorage2DMultisample coder(
             observations, target, samples, internalformat, width, height, fixedsamplelocations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage3D() const { return mImports.glTexStorage3D != nullptr; }
@@ -39257,7 +39257,7 @@ inline void GlesSpy::glTexStorage3D(uint32_t target, int32_t levels, uint32_t in
 
     gapic::coder::gles::GlTexStorage3D coder(observations, target, levels, internalformat, width,
                                              height, depth);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexStorage3DMultisample() const {
@@ -39354,7 +39354,7 @@ inline void GlesSpy::glTexStorage3DMultisample(uint32_t target, int32_t samples,
     gapic::coder::gles::GlTexStorage3DMultisample coder(observations, target, samples,
                                                         internalformat, width, height, depth,
                                                         fixedsamplelocations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexSubImage2D() const { return mImports.glTexSubImage2D != nullptr; }
@@ -39482,7 +39482,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
             observations, target, level, xoffset, yoffset, width, height, format, type,
             gapic::coder::gles::TexturePointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTexSubImage3D() const { return mImports.glTexSubImage3D != nullptr; }
@@ -39579,7 +39579,7 @@ inline void GlesSpy::glTexSubImage3D(uint32_t target, int32_t level, int32_t xof
             observations, target, level, xoffset, yoffset, zoffset, width, height, depth, format,
             type, gapic::coder::gles::TexturePointer(
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBeginTransformFeedback() const {
@@ -39611,7 +39611,7 @@ inline void GlesSpy::glBeginTransformFeedback(uint32_t primitiveMode) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBeginTransformFeedback coder(observations, primitiveMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindTransformFeedback() const {
@@ -39641,7 +39641,7 @@ inline void GlesSpy::glBindTransformFeedback(uint32_t target, uint32_t id) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindTransformFeedback coder(observations, target, id);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteTransformFeedbacks() const {
@@ -39670,7 +39670,7 @@ inline void GlesSpy::glDeleteTransformFeedbacks(int32_t n, uint32_t* ids) {
             observations, n,
             gapic::coder::gles::TransformFeedbackId__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ids), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEndTransformFeedback() const {
@@ -39695,7 +39695,7 @@ inline void GlesSpy::glEndTransformFeedback() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEndTransformFeedback coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenTransformFeedbacks() const {
@@ -39724,7 +39724,7 @@ inline void GlesSpy::glGenTransformFeedbacks(int32_t n, uint32_t* ids) {
             observations, n,
             gapic::coder::gles::TransformFeedbackId__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ids), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetTransformFeedbackVarying() const {
@@ -39779,7 +39779,7 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(type), 0)),
             gapic::coder::gles::GLchar__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsTransformFeedback() const {
@@ -39807,7 +39807,7 @@ inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsTransformFeedback coder(observations, id, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -39834,7 +39834,7 @@ inline void GlesSpy::glPauseTransformFeedback() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlPauseTransformFeedback coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlResumeTransformFeedback() const {
@@ -39859,7 +39859,7 @@ inline void GlesSpy::glResumeTransformFeedback() {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlResumeTransformFeedback coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlTransformFeedbackVaryings() const {
@@ -39900,7 +39900,7 @@ inline void GlesSpy::glTransformFeedbackVaryings(uint32_t program, int32_t count
             gapic::coder::gles::GLchar__CP__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(varyings), 0)),
             bufferMode);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindVertexArray() const { return mImports.glBindVertexArray != nullptr; }
@@ -39935,7 +39935,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlBindVertexArray coder(observations, array);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlBindVertexBuffer() const {
@@ -39963,7 +39963,7 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t bindingindex, uint32_t buffer, 
 
     gapic::coder::gles::GlBindVertexBuffer coder(observations, bindingindex, buffer, offset,
                                                  stride);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDeleteVertexArrays() const {
@@ -40003,7 +40003,7 @@ inline void GlesSpy::glDeleteVertexArrays(int32_t count, uint32_t* arrays) {
             observations, count,
             gapic::coder::gles::VertexArrayId__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(arrays), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlDisableVertexAttribArray() const {
@@ -40036,7 +40036,7 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlDisableVertexAttribArray coder(observations, location);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlEnableVertexAttribArray() const {
@@ -40069,7 +40069,7 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlEnableVertexAttribArray coder(observations, location);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGenVertexArrays() const { return mImports.glGenVertexArrays != nullptr; }
@@ -40108,7 +40108,7 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     gapic::coder::gles::GlGenVertexArrays coder(
             observations, count, gapic::coder::gles::VertexArrayId__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(arrays), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetVertexAttribIiv() const {
@@ -40153,7 +40153,7 @@ inline void GlesSpy::glGetVertexAttribIiv(uint32_t index, uint32_t pname, int32_
     gapic::coder::gles::GlGetVertexAttribIiv coder(
             observations, index, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetVertexAttribIuiv() const {
@@ -40198,7 +40198,7 @@ inline void GlesSpy::glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint3
     gapic::coder::gles::GlGetVertexAttribIuiv coder(
             observations, index, pname, gapic::coder::gles::GLuint__P(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetVertexAttribPointerv() const {
@@ -40231,7 +40231,7 @@ inline void GlesSpy::glGetVertexAttribPointerv(uint32_t index, uint32_t pname, v
             observations, index, pname,
             gapic::coder::gles::Void__P__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pointer), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetVertexAttribfv() const {
@@ -40281,7 +40281,7 @@ inline void GlesSpy::glGetVertexAttribfv(uint32_t index, uint32_t pname, float* 
             observations, index, pname,
             gapic::coder::gles::GLfloat__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetVertexAttribiv() const {
@@ -40330,7 +40330,7 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
     gapic::coder::gles::GlGetVertexAttribiv coder(
             observations, index, pname, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                                 reinterpret_cast<uintptr_t>(params), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlIsVertexArray() const { return mImports.glIsVertexArray != nullptr; }
@@ -40356,7 +40356,7 @@ inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlIsVertexArray coder(observations, array, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -40381,7 +40381,7 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttrib1f coder(observations, location, value0);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib1fv() const { return mImports.glVertexAttrib1fv != nullptr; }
@@ -40407,7 +40407,7 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
     gapic::coder::gles::GlVertexAttrib1fv coder(
             observations, location, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                             reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib2f() const { return mImports.glVertexAttrib2f != nullptr; }
@@ -40430,7 +40430,7 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttrib2f coder(observations, location, value0, value1);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib2fv() const { return mImports.glVertexAttrib2fv != nullptr; }
@@ -40456,7 +40456,7 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
     gapic::coder::gles::GlVertexAttrib2fv coder(
             observations, location, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                             reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib3f() const { return mImports.glVertexAttrib3f != nullptr; }
@@ -40479,7 +40479,7 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttrib3f coder(observations, location, value0, value1, value2);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib3fv() const { return mImports.glVertexAttrib3fv != nullptr; }
@@ -40505,7 +40505,7 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
     gapic::coder::gles::GlVertexAttrib3fv coder(
             observations, location, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                             reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib4f() const { return mImports.glVertexAttrib4f != nullptr; }
@@ -40531,7 +40531,7 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 
     gapic::coder::gles::GlVertexAttrib4f coder(observations, location, value0, value1, value2,
                                                value3);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttrib4fv() const { return mImports.glVertexAttrib4fv != nullptr; }
@@ -40557,7 +40557,7 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
     gapic::coder::gles::GlVertexAttrib4fv coder(
             observations, location, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                             reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribBinding() const {
@@ -40582,7 +40582,7 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t attribindex, uint32_t bindin
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribBinding coder(observations, attribindex, bindingindex);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribDivisor() const {
@@ -40607,7 +40607,7 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribDivisor coder(observations, index, divisor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribFormat() const {
@@ -40650,7 +40650,7 @@ inline void GlesSpy::glVertexAttribFormat(uint32_t attribindex, int32_t size, ui
 
     gapic::coder::gles::GlVertexAttribFormat coder(observations, attribindex, size, type,
                                                    normalized, relativeoffset);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribI4i() const { return mImports.glVertexAttribI4i != nullptr; }
@@ -40674,7 +40674,7 @@ inline void GlesSpy::glVertexAttribI4i(uint32_t index, int32_t x, int32_t y, int
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribI4i coder(observations, index, x, y, z, w);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribI4iv() const {
@@ -40701,7 +40701,7 @@ inline void GlesSpy::glVertexAttribI4iv(uint32_t index, int32_t* v) {
     gapic::coder::gles::GlVertexAttribI4iv coder(
             observations, index, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribI4ui() const {
@@ -40729,7 +40729,7 @@ inline void GlesSpy::glVertexAttribI4ui(uint32_t index, uint32_t x, uint32_t y, 
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexAttribI4ui coder(observations, index, x, y, z, w);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribI4uiv() const {
@@ -40756,7 +40756,7 @@ inline void GlesSpy::glVertexAttribI4uiv(uint32_t index, uint32_t* v) {
     gapic::coder::gles::GlVertexAttribI4uiv coder(
             observations, index, gapic::coder::gles::GLuint__CP(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(v), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribIFormat() const {
@@ -40799,7 +40799,7 @@ inline void GlesSpy::glVertexAttribIFormat(uint32_t attribindex, int32_t size, u
 
     gapic::coder::gles::GlVertexAttribIFormat coder(observations, attribindex, size, type,
                                                     relativeoffset);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribIPointer() const {
@@ -40843,7 +40843,7 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
             observations, index, size, type, stride,
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(pointer), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexAttribPointer() const {
@@ -40910,7 +40910,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
             observations, location, size, type, normalized, stride,
             gapic::coder::gles::VertexPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(data), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlVertexBindingDivisor() const {
@@ -40935,7 +40935,7 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t bindingindex, uint32_t divi
     observe(observations.mWrites);
 
     gapic::coder::gles::GlVertexBindingDivisor coder(observations, bindingindex, divisor);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasEglInitialize() const { return mImports.eglInitialize != nullptr; }
@@ -40972,7 +40972,7 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
             gapic::coder::gles::EGLint__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(minor), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41066,7 +41066,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attrib_list), 0)),
             gapic::coder::gles::EGLContext(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41103,7 +41103,7 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
             gapic::coder::gles::EGLContext(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(context), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41134,7 +41134,7 @@ inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
             gapic::coder::gles::Void__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(surface), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41168,7 +41168,7 @@ inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute,
             attribute, gapic::coder::gles::EGLint__P(gapic::coder::memory::Pointer(
                                reinterpret_cast<uintptr_t>(value), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41259,7 +41259,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(shareList), 0)),
             direct, gapic::coder::gles::GLXContext(
                             gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41354,7 +41354,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
                           gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(shared), 0)),
             direct, gapic::coder::gles::GLXContext(
                             gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41393,7 +41393,7 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
             gapic::coder::gles::GLXContext(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ctx), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41428,7 +41428,7 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
             gapic::coder::gles::GLXContext(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ctx), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41455,7 +41455,7 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
                                   reinterpret_cast<uintptr_t>(display), 0)),
             gapic::coder::gles::GLXDrawable(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(drawable), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlXQueryDrawable() const { return mImports.glXQueryDrawable != nullptr; }
@@ -41487,7 +41487,7 @@ inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, i
             attribute, gapic::coder::gles::Int__P(gapic::coder::memory::Pointer(
                                reinterpret_cast<uintptr_t>(value), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41574,7 +41574,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
                                   reinterpret_cast<uintptr_t>(hdc), 0)),
             gapic::coder::gles::HGLRC(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41667,7 +41667,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attribList), 0)),
             gapic::coder::gles::HGLRC(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(result), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41700,7 +41700,7 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
             gapic::coder::gles::HGLRC(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(hglrc), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41725,7 +41725,7 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
     gapic::coder::gles::WglSwapBuffers coder(observations,
                                              gapic::coder::gles::HDC(gapic::coder::memory::Pointer(
                                                      reinterpret_cast<uintptr_t>(hdc), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasCGLCreateContext() const { return mImports.CGLCreateContext != nullptr; }
@@ -41814,7 +41814,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
             gapic::coder::gles::CGLContextObj__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(ctx), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41847,7 +41847,7 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
             observations, gapic::coder::gles::CGLContextObj(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(ctx), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41885,7 +41885,7 @@ inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* 
             gapic::coder::gles::CGSSurfaceID__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(sid), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41919,7 +41919,7 @@ inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, dou
             wid, sid, gapic::coder::gles::F64__P(gapic::coder::memory::Pointer(
                               reinterpret_cast<uintptr_t>(bounds), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41948,7 +41948,7 @@ inline int GlesSpy::CGLFlushDrawable(void* ctx) {
             observations, gapic::coder::gles::CGLContextObj(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(ctx), 0)),
             result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -41977,7 +41977,7 @@ inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, in
             observations, query, parameter,
             gapic::coder::gles::S64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline bool GlesSpy::hasGlGetQueryObjectui64v() const {
@@ -42004,7 +42004,7 @@ inline void GlesSpy::glGetQueryObjectui64v(uint32_t query, uint32_t parameter, u
             observations, query, parameter,
             gapic::coder::gles::U64__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(value), 0)));
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_size,
@@ -42020,7 +42020,7 @@ inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_s
 
     gapic::coder::gles::Architecture coder(observations, pointer_alignment, pointer_size,
                                            integer_size, little_endian);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::replayCreateRenderer(uint32_t id) {
@@ -42033,7 +42033,7 @@ inline void GlesSpy::replayCreateRenderer(uint32_t id) {
     observe(observations.mWrites);
 
     gapic::coder::gles::ReplayCreateRenderer coder(observations, id);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::replayBindRenderer(uint32_t id) {
@@ -42046,7 +42046,7 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
     observe(observations.mWrites);
 
     gapic::coder::gles::ReplayBindRenderer coder(observations, id);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::switchThread(uint64_t threadID) {
@@ -42060,7 +42060,7 @@ inline void GlesSpy::switchThread(uint64_t threadID) {
     observe(observations.mWrites);
 
     gapic::coder::gles::SwitchThread coder(observations, threadID);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, char* version,
@@ -42122,7 +42122,7 @@ inline void GlesSpy::contextInfo(char* name, char* vendor, char* extensions, cha
                                           backbuffer_width, backbuffer_height, backbuffer_color_fmt,
                                           backbuffer_depth_fmt, backbuffer_stencil_fmt,
                                           reset_viewport_scissor, preserve_buffers_on_swap);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline void GlesSpy::startTimer(uint8_t index) {
@@ -42135,7 +42135,7 @@ inline void GlesSpy::startTimer(uint8_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::StartTimer coder(observations, index);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 inline uint64_t GlesSpy::stopTimer(uint8_t index) {
@@ -42151,7 +42151,7 @@ inline uint64_t GlesSpy::stopTimer(uint8_t index) {
     observe(observations.mWrites);
 
     gapic::coder::gles::StopTimer coder(observations, index, result);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 
     return result;
 }
@@ -42166,7 +42166,7 @@ inline void GlesSpy::flushPostBuffer() {
     observe(observations.mWrites);
 
     gapic::coder::gles::FlushPostBuffer coder(observations);
-    mEncoder->Object(&coder);
+    mEncoder->Variant(&coder);
 }
 
 }  // namespace gapii
