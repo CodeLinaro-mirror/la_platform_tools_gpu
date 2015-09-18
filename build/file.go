@@ -181,11 +181,7 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	if err != nil {
 		return err
 	}
-	verbose := 0
-	if env.Verbose {
-		verbose = 1
-	}
-	return maker.ExecAt(wd.Absolute(), verbose, path.Absolute(), args...)
+	return maker.ExecAt(wd.Absolute(), env.Verbose, path.Absolute(), args...)
 }
 
 // LookPath returns the path to f, searching the system PATHs.

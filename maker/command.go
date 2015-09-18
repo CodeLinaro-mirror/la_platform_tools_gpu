@@ -40,7 +40,7 @@ func ExecAt(wd string, verbose int, path string, args ...string) error {
 	if verbose > 0 {
 		log.Printf("-> %s", strings.Join(cmd.Args, " "))
 	}
-	if verbose > 1 {
+	if verbose > 2 {
 		log.Printf("Working directory: %v", cmd.Dir)
 		log.Printf("Environment:")
 		for _, v := range cmd.Env {

@@ -92,7 +92,7 @@ func init() {
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
-		cc.Graph(cctargets)
+		cc.Graph(cctargets, Config.Verbose)
 		Apps.Gapir = Virtual("cc:gapir")
 		Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		Creator("cc:spy").DependsOn("code")

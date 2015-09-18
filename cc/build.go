@@ -34,7 +34,6 @@ var (
 	keyalias   = flag.String("alias", "androiddebugkey", "The alias of the key used to sign APKs")
 	logfile    = flag.String("logfile", "", "Writes logging to a file instead of stdout")
 	forcebuild = flag.Bool("f", false, "All build steps will be forced")
-	verbose    = flag.Bool("verbose", false, "Enable verbose logging")
 	debug      = flag.Bool("d", false, "Generate debug binaries")
 )
 
@@ -51,7 +50,7 @@ var (
 	GtestRoot    = ExternalRoot.Join("gtest")
 )
 
-func getEnvironment(logger log.Logger) build.Environment {
+func getEnvironment(logger log.Logger, verbose int) build.Environment {
 	return build.Environment{
 		Intermediates: build.RepoRoot.Path.Join("tools", "gpu", "pkg"),
 		Roots: build.RootList{
@@ -64,16 +63,16 @@ func getEnvironment(logger log.Logger) build.Environment {
 		Keyalias:   *keyalias,
 		Logger:     logger,
 		ForceBuild: *forcebuild,
-		Verbose:    *verbose,
+		Verbose:    verbose,
 	}
 }
 
 // Generate "maker" graph for building the cpp code.
-func Graph(targetNames []string) {
+func Graph(targetNames []string, verbose int) {
 	// Note this logger is captured in the build graph. There is no good place
 	// to call logger.Close()
 	logger := getLogger()
-	if run(targetNames, logger) == 1 {
+	if run(targetNames, verbose, logger) == 1 {
 		panic("There were errors making the build graph")
 	}
 }
@@ -90,8 +89,8 @@ func getLogger() log.Logger {
 	}
 }
 
-func run(targetNames []string, logger log.Logger) int {
-	env := getEnvironment(logger)
+func run(targetNames []string, verbose int, logger log.Logger) int {
+	env := getEnvironment(logger, verbose)
 	buildTargets := getBuildTargets()
 
 	targets := make([]Target, len(targetNames))
