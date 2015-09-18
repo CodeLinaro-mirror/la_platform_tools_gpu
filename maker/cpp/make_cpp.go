@@ -17,7 +17,7 @@ package cpp
 import (
 	"path/filepath"
 
-	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker"
 )

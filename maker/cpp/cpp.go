@@ -17,7 +17,7 @@ package cpp
 import (
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
 )
 
 type misotool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error

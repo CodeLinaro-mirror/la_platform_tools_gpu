@@ -18,11 +18,11 @@ import (
 	"flag"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
-	"android.googlesource.com/platform/tools/gpu/build/cpp"
-	"android.googlesource.com/platform/tools/gpu/build/cpp/gcc"
-	"android.googlesource.com/platform/tools/gpu/build/cpp/msvc"
-	"android.googlesource.com/platform/tools/gpu/build/cpp/ndk"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp/gcc"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp/msvc"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp/ndk"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker"
 )

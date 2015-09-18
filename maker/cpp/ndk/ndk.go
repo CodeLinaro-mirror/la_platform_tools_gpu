@@ -21,8 +21,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
-	"android.googlesource.com/platform/tools/gpu/build/cpp"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker"
 )

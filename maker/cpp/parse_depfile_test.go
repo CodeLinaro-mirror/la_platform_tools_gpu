@@ -17,7 +17,7 @@ package cpp
 import (
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
 )
 
 func eq(a, b build.FileSet) bool {

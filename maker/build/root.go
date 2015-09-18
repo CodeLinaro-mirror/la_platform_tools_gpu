@@ -24,7 +24,7 @@ import (
 var RepoRoot = func() Root {
 	gopaths := filepath.SplitList(os.Getenv("GOPATH"))
 	for _, gopath := range gopaths {
-		if File(gopath).Join("src", "android.googlesource.com", "platform", "tools", "gpu", "build", "root.go").Exists() {
+		if File(gopath).Join("src", "android.googlesource.com", "platform", "tools", "gpu", "maker", "build", "root.go").Exists() {
 			return Root{Name: "repo", Path: File(File(gopath).Join("..", "..").Absolute())}
 		}
 	}

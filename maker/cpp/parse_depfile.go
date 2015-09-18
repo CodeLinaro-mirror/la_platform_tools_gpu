@@ -19,7 +19,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
