@@ -12,12 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package graph
 
 import (
 	"log"
 	"regexp"
 	"time"
+
+	"android.googlesource.com/platform/tools/gpu/maker"
+)
+
+const (
+	// Default is the name of the entity that is built if none are supplied on the
+	// command line.
+	Default = "default"
 )
 
 // Entity represents an object in the build graph.
@@ -38,7 +46,7 @@ type Entity interface {
 }
 
 var (
-	entities    = map[string]Entity{}
+	Entities    = map[string]Entity{}
 	entityHooks = []func(e Entity){}
 )
 
@@ -54,7 +62,7 @@ func FindEntity(name string) Entity {
 	if name == "" {
 		return nil
 	}
-	e, _ := entities[name]
+	e, _ := Entities[name]
 	return e
 }
 
@@ -66,7 +74,7 @@ func FindPathEntity(name string) Entity {
 	if e := FindEntity(name); e != nil {
 		return e
 	}
-	if abs, err := OSPath(name); err == nil {
+	if abs, err := maker.OSPath(name); err == nil {
 		if e := FindEntity(abs); e != nil {
 			return e
 		}
@@ -79,7 +87,7 @@ func FindPathEntity(name string) Entity {
 func FindEntities(pattern string) []Entity {
 	re := regexp.MustCompile("(?i)" + pattern)
 	matches := []Entity{}
-	for name, e := range entities {
+	for name, e := range Entities {
 		if re.MatchString(name) {
 			matches = append(matches, e)
 		}
@@ -112,11 +120,11 @@ func EntityOf(v interface{}) Entity {
 func AddEntity(e Entity) {
 	name := e.Name()
 	if name != "" {
-		_, found := entities[name]
+		_, found := Entities[name]
 		if found {
 			log.Fatalf("Attempt to remap entity name %s", name)
 		}
-		entities[name] = e
+		Entities[name] = e
 	}
 	for _, h := range entityHooks {
 		h(e)

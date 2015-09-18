@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package run
 
 import (
 	"flag"
@@ -22,12 +22,9 @@ import (
 	"runtime"
 	"sort"
 	"strings"
-)
 
-const (
-	// Default is the name of the entity that is built if none are supplied on the
-	// command line.
-	Default = "default"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
 )
 
 var (
@@ -60,46 +57,50 @@ func Run() {
 	do := flag.String("do", "make", "The action to perform, one of make, show or clean.")
 	early := flag.Bool("early", false, "Stops the build at the first error, also disables parallel builds.")
 	threads := flag.Int("threads", runtime.NumCPU(), "Set number of OS threads to use. 0 disables parallel builds.")
+	targetOS := flag.String("targetos", config.TargetOS, "target OS to build")
 	var disables stringSetFlag
 	flag.Var(&disables, "disable", "Disable a specific node")
 	flag.Parse()
+	var runner graph.Runner = &parallelRunner{}
 	if *threads > 0 {
 		runtime.GOMAXPROCS(*threads)
 	} else {
-		Config.DisableParallel = true
+		runner = &blockingRunner{}
 	}
 	if *early {
-		Config.StopOnError = true
-		Config.DisableParallel = true
+		config.StopOnError = true
+		runner = &blockingRunner{}
 	}
-	Config.Verbose = *verbose
+
+	config.Verbose = *verbose
+	config.TargetOS = *targetOS
 	// Build the entity graph
 	for _, f := range prepares {
 		f()
 	}
 	// Force disabled status from the command line
 	for _, d := range disables.Strings() {
-		if s := Creator(d); s != nil {
+		if s := graph.Creator(d); s != nil {
 			s.Disable()
 		}
 	}
 	// Prepare the active path
 	targets := flag.Args()
-	meta := List("")
+	meta := graph.List("")
 	for _, match := range targets {
-		e := FindPathEntity(match)
+		e := graph.FindPathEntity(match)
 		if e != nil {
-			if Creator(e) != nil {
+			if graph.Creator(e) != nil {
 				meta.DependsOn(e)
 			}
 		} else {
 			// not an exact entry, so fuzzy search time
-			entities := FindEntities(match)
+			entities := graph.FindEntities(match)
 			if len(entities) == 0 {
 				log.Fatalf("no entities match for %q", match)
 			}
 			for _, e := range entities {
-				if Creator(e) != nil {
+				if graph.Creator(e) != nil {
 					meta.DependsOn(e)
 				}
 			}
@@ -108,23 +109,23 @@ func Run() {
 	// Perform the requested action
 	switch *do {
 	case "make":
-		if len(meta.inputs) == 0 {
-			meta.DependsOn(Default)
+		if len(meta.Inputs) == 0 {
+			meta.DependsOn(graph.Default)
 		}
-		meta.start()
-		<-meta.done
-		if Errors.Failed() {
-			fmt.Printf("Failed: %s\n", Errors.Last())
+		meta.Process(runner)
+		err := meta.Wait()
+		if err != nil {
+			fmt.Printf("Failed: %s\n", err)
 			os.Exit(1)
 		} else {
 			fmt.Printf("Succeeded\n")
 		}
 	case "show":
-		if len(meta.inputs) == 0 {
+		if len(meta.Inputs) == 0 {
 			fmt.Printf("targets available are:\n")
 			strings := sort.StringSlice{}
-			for _, e := range entities {
-				if IsVirtual(e) {
+			for _, e := range graph.Entities {
+				if graph.IsVirtual(e) {
 					strings = append(strings, e.Name())
 				}
 			}
@@ -140,41 +141,5 @@ func Run() {
 		log.Fatalf("Clean not yet supported")
 	default:
 		log.Fatalf("Unknown action %q", *do)
-	}
-}
-
-type dumper map[*Step]struct{}
-
-func (d dumper) dump(s *Step, seen []*Step) {
-	if s == nil {
-		fmt.Println()
-		return
-	}
-	fmt.Printf(" [%d]", len(s.inputs))
-	if s.disabled {
-		fmt.Println(" - disabled")
-		return
-	}
-	if _, done := d[s]; done {
-		fmt.Println(" - already seen")
-		for i := range seen {
-			if seen[i] == s {
-				err := "Error: Cyclic dependency chain found:\n"
-				for i := range seen {
-					err += fmt.Sprintf("  [%d]: %v\n", i, seen[i])
-				}
-				panic(err)
-			}
-		}
-		return
-	}
-	fmt.Println()
-	d[s] = struct{}{}
-	for i, e := range s.inputs {
-		for i := 0; i < len(seen); i++ {
-			fmt.Print("  ")
-		}
-		fmt.Printf("(%d) %s", i+1, e)
-		d.dump(Creator(e), append(seen, s))
 	}
 }

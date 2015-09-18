@@ -19,9 +19,9 @@ package msvc
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/maker/cpp"
-	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 var MSVC = &cpp.Toolchain{

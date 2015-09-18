@@ -12,20 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package graph
 
 import (
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"time"
+
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 // File returns an Entity that represents a file. The entities name will be the
 // absolute path of the file. The entity map will be checked for a matching file
 // entry and if one is not found, a new one will be added and returned.
 func File(path ...string) *file {
-	abs, err := OSPath(path...)
+	abs, err := maker.OSPath(path...)
 	if err != nil {
 		log.Fatalf("%s", err)
 	}
@@ -83,6 +86,16 @@ func FilesOf(path string, filter func(os.FileInfo) bool) []*file {
 	return files
 }
 
+// FindTool finds an executable on the host search path, and returns a File
+// entity for the tool if found.
+func FindTool(name string) Entity {
+	path, err := exec.LookPath(name)
+	if err != nil {
+		return nil
+	}
+	return File(path)
+}
+
 // IsFile returns true if the supplied entity is of file type.
 func IsFile(e Entity) bool {
 	_, is := e.(*file)
@@ -125,7 +138,7 @@ func (f *file) NeedsUpdate(t time.Time) bool {
 func (f *file) Updated() { f.stat, _ = os.Stat(f.abs) }
 
 func dirOf(name string) *file {
-	path, _ := PathSplit(name)
+	path, _ := maker.PathSplit(name)
 	if len(path) == 0 {
 		return nil
 	}
@@ -133,7 +146,7 @@ func dirOf(name string) *file {
 }
 
 func makeDir(s *Step) error {
-	for _, out := range s.outputs {
+	for _, out := range s.Outputs {
 		if err := os.MkdirAll(out.Name(), os.ModePerm); err != nil {
 			return err
 		}

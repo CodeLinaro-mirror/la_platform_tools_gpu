@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package do
 
 import (
 	"fmt"
@@ -22,11 +22,9 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-)
 
-var (
-	// EnvVars holds the environment overrides used when spawning external commands.
-	EnvVars = map[string][]string{}
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
 )
 
 // ExecAt executes "path" with the specified arguments with the working
@@ -65,13 +63,13 @@ func ExecAt(wd string, verbose int, path string, args ...string) error {
 	return nil
 }
 
-// Command builds and returns a new Step that runs the specified external binary
+// Exec builds and returns a new Step that runs the specified external binary
 // with the supplied arguments. The newly created Step will be made to depend on
 // the binary.
-func Command(binary Entity, args ...string) *Step {
-	wd := Paths.Root
-	return NewStep(func(step *Step) error {
-		return ExecAt(wd, Config.Verbose, binary.Name(), args...)
+func Exec(binary graph.Entity, args ...string) *graph.Step {
+	wd := config.Paths.Root
+	return graph.NewStep(func(step *graph.Step) error {
+		return ExecAt(wd, config.Verbose, binary.Name(), args...)
 	}).DependsOn(binary)
 }
 
@@ -89,7 +87,7 @@ func getEnvVars() []string {
 
 	sep := fmt.Sprintf("%c", filepath.ListSeparator)
 
-	for key, values := range EnvVars {
+	for key, values := range config.EnvVars {
 		keyUpper := strings.ToUpper(key)
 		if existing, found := env[keyUpper]; found {
 			values = append(values, existing.value)

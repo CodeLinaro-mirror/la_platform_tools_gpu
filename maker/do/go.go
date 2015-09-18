@@ -12,24 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package do
+
+import (
+	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
+)
 
 const GoPkgResources = "go_packages"
 
+var (
+	goTool graph.Entity
+)
+
+func init() {
+	goTool = graph.FindTool("go")
+}
+
 // GoCommand runs "go" with the specified arguments.
-func GoCommand(args ...string) *Step {
-	return Command(goTool, args...).Access(GoPkgResources)
+func GoCommand(args ...string) *graph.Step {
+	return Exec(goTool, args...).Access(GoPkgResources)
 }
 
 // GoInstall builds a new Step that runs "go install" on the supplied module.
 // It will return the resulting binary entity.
 // The step will depend on the go tool, and will be set to always run if
 // depended on.
-func GoInstall(root string, relative string) Entity {
-	module := Path(root, relative)
-	_, name := PathSplit(module)
-	dst := File(Paths.Bin, name+HostExecutableExtension)
-	if Creator(dst) == nil {
+func GoInstall(root string, relative string) graph.Entity {
+	module := maker.Path(root, relative)
+	_, name := maker.PathSplit(module)
+	dst := graph.File(config.Paths.Bin, name+config.HostExecutableExtension)
+	if graph.Creator(dst) == nil {
 		GoCommand("install", module).Creates(dst).AlwaysRun()
 	}
 	return dst
@@ -37,21 +51,21 @@ func GoInstall(root string, relative string) Entity {
 
 // GoTest creates a new Step that runs "go test" on the supplied module.
 // It returns a virtual entity that represents the test output.
-func GoTest(module string) Entity {
-	test := Virtual("")
+func GoTest(module string) graph.Entity {
+	test := graph.Virtual("")
 	GoCommand("test", module).Creates(test)
-	List("go_test").DependsOn(test)
+	graph.List("go_test").DependsOn(test)
 	return test
 }
 
 // GoRun returns a Step that runs "go run" with the supplied go file
 // and arguments.
-func GoRun(gofile string, args ...string) *Step {
+func GoRun(gofile string, args ...string) *graph.Step {
 	return GoCommand(append([]string{"run", gofile}, args...)...)
 }
 
 // GoSrcPath returns the full path to a file or directory inside the GoPath.
 func GoSrcPath(path string) string {
 	// TODO: search GoPath
-	return Path(GoPath[0], "src", path)
+	return maker.Path(config.GoPath[0], "src", path)
 }

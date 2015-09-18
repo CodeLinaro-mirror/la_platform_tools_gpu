@@ -18,17 +18,17 @@ import (
 	"flag"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker/build"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
 	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 	"android.googlesource.com/platform/tools/gpu/maker/cpp/gcc"
 	"android.googlesource.com/platform/tools/gpu/maker/cpp/msvc"
 	"android.googlesource.com/platform/tools/gpu/maker/cpp/ndk"
-	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 var (
-	keystore   = flag.String("keystore", GPURoot.Join("build", "keystore", "debug.keystore").Absolute(), "The keystore used to sign APKs")
+	keystore   = flag.String("keystore", GPURoot.Join("maker", "keystore", "debug.keystore").Absolute(), "The keystore used to sign APKs")
 	storepass  = flag.String("storepass", "android", "The password to the keystore")
 	keypass    = flag.String("keypass", "android", "The password to the keystore's key")
 	keyalias   = flag.String("alias", "androiddebugkey", "The alias of the key used to sign APKs")
@@ -208,7 +208,7 @@ func (t Target) Build(env build.Environment) {
 	gapirTestInputs := gapirTestSource.Append(gtestLib, gmockLib, gapirLib, gapicLib)
 	gapirTest := cpp.MakeExecutable("gapir-tests", gapirTestInputs, t.GapirTests, env)
 
-	if t.Replayd.OS == maker.HostOS {
+	if t.Replayd.OS == config.HostOS {
 		cpp.MakeRunTest(gapicTest, t.GapicTests)
 
 		cpp.MakeRunTest(gapirTest, t.GapirTests)

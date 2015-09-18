@@ -12,9 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build windows
+package run
 
-package maker
+import (
+	"time"
 
-const HostOS = "windows"
-const HostExecutableExtension = ".exe"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
+)
+
+func newest(t1, t2 time.Time) time.Time {
+	if !t1.IsZero() && (t2.IsZero() || t1.After(t2)) {
+		return t1
+	}
+	return t2
+}
+
+type useTimestamp struct{}
+
+func (useTimestamp) IsOutOfDate(s *graph.Step) bool {
+	// Find the newest input
+	t := time.Time{}
+	for _, e := range s.Inputs {
+		t = newest(t, e.Timestamp())
+	}
+	if t.IsZero() {
+		// No timestamped inputs, so always run
+		return true
+	}
+	// Ask the outputs if they want an update
+	for _, e := range s.Outputs {
+		if e.NeedsUpdate(t) {
+			return true
+		}
+	}
+	return false
+}

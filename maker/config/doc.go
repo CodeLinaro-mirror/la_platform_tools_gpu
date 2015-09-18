@@ -12,9 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build darwin
-
-package maker
-
-const HostOS = "osx"
-const HostExecutableExtension = ""
+// Package config provides support for expressing and configuring the environment of a maker build.
+package config

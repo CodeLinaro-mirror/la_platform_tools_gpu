@@ -12,37 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+// +build darwin
 
-import (
-	"sort"
-	"sync"
-)
+package config
 
-type lock struct {
-	name string
-	mu   sync.Mutex
-}
-
-var locks = map[string]*lock{}
-
-func addLock(name string) {
-	_, ok := locks[name]
-	if !ok {
-		locks[name] = &lock{name: name}
-	}
-}
-
-func withLocks(accesses []string, do func()) {
-	// sort the names for consistent aquire order
-	sort.Strings(accesses)
-	// aquire all the mutexes in order
-	for _, name := range accesses {
-		locks[name].mu.Lock()
-	}
-	do()
-	// unlock order does not matter
-	for _, name := range accesses {
-		locks[name].mu.Unlock()
-	}
-}
+const HostOS = "osx"
+const HostExecutableExtension = ""

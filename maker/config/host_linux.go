@@ -14,7 +14,7 @@
 
 // +build linux
 
-package maker
+package config
 
 const HostOS = "linux"
 const HostExecutableExtension = ""

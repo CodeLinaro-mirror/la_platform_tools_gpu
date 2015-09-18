@@ -19,7 +19,7 @@ import (
 	"os"
 
 	"android.googlesource.com/platform/tools/gpu/maker/build"
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
 )
 
 // Settings for the particular SDK/NDK build/platform we're using.
@@ -76,7 +76,7 @@ func ResolvePaths() (Paths, error) {
 		return Paths{}, err
 	}
 
-	paths.Jarsigner = java.Join("bin", "jarsigner"+maker.HostExecutableExtension)
+	paths.Jarsigner = java.Join("bin", "jarsigner"+config.HostExecutableExtension)
 	if !paths.Jarsigner.Exists() {
 		return Paths{}, fmt.Errorf("Java SDK does not contain jarsigner")
 	}
@@ -86,12 +86,12 @@ func ResolvePaths() (Paths, error) {
 		return Paths{}, fmt.Errorf("Android SDK does not contain required build-tools: %s", ndkBuildTools)
 	}
 
-	paths.AAPT = buildtools.Join("aapt" + maker.HostExecutableExtension)
+	paths.AAPT = buildtools.Join("aapt" + config.HostExecutableExtension)
 	if !paths.AAPT.Exists() {
 		return Paths{}, fmt.Errorf("Android SDK does not contain aapt tool")
 	}
 
-	paths.Zipalign = buildtools.Join("zipalign" + maker.HostExecutableExtension)
+	paths.Zipalign = buildtools.Join("zipalign" + config.HostExecutableExtension)
 	if !paths.Zipalign.Exists() {
 		return Paths{}, fmt.Errorf("Android SDK does not contain zipalign tool")
 	}

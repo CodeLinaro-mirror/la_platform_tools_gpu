@@ -12,24 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package config
 
 import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 var (
-	// Config holds the current configuration of the maker system.
-	Config struct {
-		// Verbose enables increased logging output.
-		Verbose int
-		// DisableParallel turns of all parallel build support.
-		DisableParallel bool
-		// StopOnError makes the system quit faster once an error has been found.
-		StopOnError bool
-	}
+	// Verbose enables increased logging output.
+	Verbose int
+	// StopOnError makes the system quit faster once an error has been found.
+	StopOnError bool
+
 	// Paths holds the set of path roots for the build.
 	Paths struct {
 		// The root path of the build
@@ -39,9 +37,14 @@ var (
 		// The application binary directory.
 		Bin string
 	}
+
 	//GoPath is the GOPATH environment setting
 	GoPath []string
-	goTool Entity
+
+	// EnvVars holds the environment overrides used when spawning external commands.
+	EnvVars = map[string][]string{}
+
+	TargetOS string = HostOS
 )
 
 func init() {
@@ -50,12 +53,11 @@ func init() {
 		log.Fatalf("GOPATH %q not valid", os.Getenv("GOPATH"))
 	}
 	for i := range GoPath {
-		GoPath[i] = CommonPath(GoPath[i])
+		GoPath[i] = maker.CommonPath(GoPath[i])
 	}
 	root := GoPath[0]
 	Paths.Root = root
-	Paths.Deps = Path(root, "deps")
-	Paths.Bin = Path(root, "bin")
+	Paths.Deps = maker.Path(root, "deps")
+	Paths.Bin = maker.Path(root, "bin")
 	EnvVars["PATH"] = []string{Paths.Bin}
-	goTool = FindTool("go")
 }

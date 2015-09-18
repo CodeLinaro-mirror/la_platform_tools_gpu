@@ -21,10 +21,10 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/maker/build"
-	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 )
 
 type ndkTarget struct {
@@ -98,9 +98,9 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		return nil, fmt.Errorf("NDK architecture '%s' not supported", cfg.Architecture)
 	}
 
-	system, ok := osToSystem[maker.HostOS]
+	system, ok := osToSystem[config.HostOS]
 	if !ok {
-		return nil, fmt.Errorf("NDK host OS '%s' not supported", maker.HostOS)
+		return nil, fmt.Errorf("NDK host OS '%s' not supported", config.HostOS)
 	}
 
 	stlBase := paths.NDK.Join("sources", "cxx-stl", "gnu-libstdc++", target.version)
@@ -116,9 +116,9 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
 
 	return &tools{
-		as: bin.Join(target.name + "-as" + maker.HostExecutableExtension),
-		cc: bin.Join(target.name + "-gcc" + maker.HostExecutableExtension),
-		ar: bin.Join(target.name + "-ar" + maker.HostExecutableExtension),
+		as: bin.Join(target.name + "-as" + config.HostExecutableExtension),
+		cc: bin.Join(target.name + "-gcc" + config.HostExecutableExtension),
+		ar: bin.Join(target.name + "-ar" + config.HostExecutableExtension),
 		incdirs: build.FileSet{
 			stlBase.Join("include"),
 			stlBase.Join("libs", target.abi, "include"),

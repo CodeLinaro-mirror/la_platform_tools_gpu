@@ -19,10 +19,10 @@ import (
 	"fmt"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/maker/build"
-	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/build"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 )
 
 var GCC = &cpp.Toolchain{
@@ -62,7 +62,7 @@ type tools struct {
 func getTools(cfg cpp.Config) (*tools, error) {
 	var t tools
 
-	switch maker.HostOS {
+	switch config.HostOS {
 	case "linux":
 		switch cfg.OS {
 		case "linux":

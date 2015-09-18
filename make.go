@@ -15,7 +15,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"net"
 	"os"
@@ -23,12 +22,14 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/cc"
-	. "android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/do"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
+	"android.googlesource.com/platform/tools/gpu/maker/run"
 )
 
-var targetOS = flag.String("targetos", HostOS, "target OS to build")
-
-func main() { Run() }
+func main() { run.Run() }
 
 const (
 	GPURoot = "android.googlesource.com/platform/tools/gpu"
@@ -39,133 +40,133 @@ const (
 )
 
 var (
-	gapirpath    = Path(gpusrc, "cc/gapir")
-	gapiipath    = Path(gpusrc, "cc/gapii")
-	gapiiwinpath = Path(gpusrc, "cc/gapii/windows")
-	gapiiosxpath = Path(gpusrc, "cc/gapii/osx")
-	cppcoder     = Path(gpusrc, "cc/gapic/coder")
-	javabase     = Path(Paths.Root, "../")
+	gapirpath    = maker.Path(gpusrc, "cc/gapir")
+	gapiipath    = maker.Path(gpusrc, "cc/gapii")
+	gapiiwinpath = maker.Path(gpusrc, "cc/gapii/windows")
+	gapiiosxpath = maker.Path(gpusrc, "cc/gapii/osx")
+	cppcoder     = maker.Path(gpusrc, "cc/gapic/coder")
+	javabase     = maker.Path(config.Paths.Root, "../")
 	javapaths    = []string{
-		Path(javabase, "base/rpclib/src/main/java/com/android/tools/rpclib"),
-		Path(javabase, "base/rpclib/src/test/java/com/android/tools/rpclib"),
-		Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace"),
+		maker.Path(javabase, "base/rpclib/src/main/java/com/android/tools/rpclib"),
+		maker.Path(javabase, "base/rpclib/src/test/java/com/android/tools/rpclib"),
+		maker.Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace"),
 	}
-	gpusrc = GoSrcPath(GPURoot)
+	gpusrc = do.GoSrcPath(GPURoot)
 
 	Tools struct {
-		Embed    Entity
-		Apic     Entity
-		Codergen Entity
-		Gapit    Entity
+		Embed    graph.Entity
+		Apic     graph.Entity
+		Codergen graph.Entity
+		Gapit    graph.Entity
 	}
 
 	Apps struct {
-		Gapis Entity
-		Gapir Entity
-		Gapid Entity
+		Gapis graph.Entity
+		Gapir graph.Entity
+		Gapid graph.Entity
 	}
 )
 
 func init() {
-	Register(func() {
+	run.Register(func() {
 		// Install rules for the build tools
-		Tools.Embed = GoInstall(GPURoot, "tools/embed")
-		Tools.Apic = GoInstall(GPURoot, "api/apic")
-		Tools.Codergen = GoInstall(GPURoot, "tools/codergen")
-		Tools.Gapit = GoInstall(GPURoot, "tools/gapit")
-		List("gapit").DependsOn(Tools.Gapit)
-		List("tools").DependsStruct(Tools)
+		Tools.Embed = do.GoInstall(GPURoot, "tools/embed")
+		Tools.Apic = do.GoInstall(GPURoot, "api/apic")
+		Tools.Codergen = do.GoInstall(GPURoot, "tools/codergen")
+		Tools.Gapit = do.GoInstall(GPURoot, "tools/gapit")
+		graph.List("gapit").DependsOn(Tools.Gapit)
+		graph.List("tools").DependsStruct(Tools)
 		// All the embed rules
-		embedCopyright := Embed(Path(gpusrc, "tools/copyright"))
-		embedCodergen := Embed(Path(gpusrc, "tools/codergen/template"))
-		Creator(Tools.Apic).DependsOn(embedCopyright)
-		Creator(Tools.Codergen).DependsOn(embedCopyright, embedCodergen)
+		embedCopyright := Embed(maker.Path(gpusrc, "tools/copyright"))
+		embedCodergen := Embed(maker.Path(gpusrc, "tools/codergen/template"))
+		graph.Creator(Tools.Apic).DependsOn(embedCopyright)
+		graph.Creator(Tools.Codergen).DependsOn(embedCopyright, embedCodergen)
 		// All the apic rules
 		GfxApi("test", "gfxapi_test.api")
 		GfxApi("gles", "gles.api")
 		// The codergen rule
 		Codergen("codergen", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
 		//
-		List("code").DependsOn("embed", "apic", "codergen")
+		graph.List("code").DependsOn("embed", "apic", "codergen")
 		// The native code rules
-		cctargets := []string{*targetOS}
+		cctargets := []string{config.TargetOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
-		cc.Graph(cctargets, Config.Verbose)
-		Apps.Gapir = Virtual("cc:gapir")
-		Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
-		Creator("cc:spy").DependsOn("code")
-		Creator("cc:gapii").DependsOn("code")
+		cc.Graph(cctargets, config.Verbose)
+		Apps.Gapir = graph.Virtual("cc:gapir")
+		graph.Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
+		graph.Creator("cc:spy").DependsOn("code")
+		graph.Creator("cc:gapii").DependsOn("code")
 		// The testing rules
-		gotest := GoTest(GPURoot + "/...")
+		gotest := do.GoTest(GPURoot + "/...")
 		// Runtime dependencies
-		Creator(Tools.Gapit).DependsOn("cc:spy")
-		List("runtime").DependsOn(Apps.Gapir, "cc:spy", "cc:gapii")
-		Creator(gotest).DependsOn("code", "runtime")
-		if *targetOS == HostOS {
-			List("test").DependsOn("go_test", "cc_test")
+		graph.Creator(Tools.Gapit).DependsOn("cc:spy")
+		graph.List("runtime").DependsOn(Apps.Gapir, "cc:spy", "cc:gapii")
+		graph.Creator(gotest).DependsOn("code", "runtime")
+		if config.TargetOS == config.HostOS {
+			graph.List("test").DependsOn("go_test", "cc_test")
 		} else {
-			List("test").DependsOn("go_test")
+			graph.List("test").DependsOn("go_test")
 		}
 		// The main binary rules
-		Apps.Gapis = GoInstall(GPURoot, "server/gapis")
-		Creator(Apps.Gapis).DependsOn("code")
-		Apps.Gapid = GoInstall(GPURoot, "_experimental/client/gapid")
-		Creator(Apps.Gapid).DependsOn("code")
-		List("apps").DependsStruct(Apps)
+		Apps.Gapis = do.GoInstall(GPURoot, "server/gapis")
+		graph.Creator(Apps.Gapis).DependsOn("code")
+		Apps.Gapid = do.GoInstall(GPURoot, "_experimental/client/gapid")
+		graph.Creator(Apps.Gapid).DependsOn("code")
+		graph.List("apps").DependsStruct(Apps)
 		// Application launchers
-		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
-		Command(Apps.Gapid, "--gxuidebug").Creates(Virtual("gapid")).DependsOn(Apps.Gapis, "runtime")
+		do.Exec(Apps.Gapis).Creates(graph.Virtual("gapis")).DependsOn(Apps.Gapir)
+		do.Exec(Apps.Gapid, "--gxuidebug").Creates(graph.Virtual("gapid")).DependsOn(Apps.Gapis, "runtime")
 		// Utilties
-		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
-		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), javapaths...).Creates(Virtual("clean_java"))
-		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
+		do.GoRun(maker.Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(graph.Virtual("clean_gpu"))
+		do.GoRun(maker.Path(gpusrc, "tools/clean_generated/main.go"), javapaths...).Creates(graph.Virtual("clean_java"))
+		do.GoRun(maker.Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(graph.Virtual("copyright")).DependsOn(embedCopyright)
 		// The default rules
-		List(Default).DependsOn("apps", "test")
+		graph.List(graph.Default).DependsOn("apps", "test")
 	})
 }
 
-func Embed(path string) Entity {
-	out := File(path, "embed.go")
+func Embed(path string) graph.Entity {
+	out := graph.File(path, "embed.go")
 	args := []string{"--out", out.Name()}
-	files := FilesOf(path, func(i os.FileInfo) bool {
+	files := graph.FilesOf(path, func(i os.FileInfo) bool {
 		return !i.IsDir() && !strings.HasSuffix(i.Name(), ".go") && !strings.HasSuffix(i.Name(), ".md")
 	})
 	for _, f := range files {
 		args = append(args, f.Name())
 	}
-	s := Command(Tools.Embed, args...).Creates(out)
+	s := do.Exec(Tools.Embed, args...).Creates(out)
 	for _, f := range files {
 		s.DependsOn(f)
 	}
-	List("embed").DependsOn(out)
+	graph.List("embed").DependsOn(out)
 	return out
 }
 
 func Apic(path string, api string, template string) {
-	dst := Dir(path)
-	a := File(api)
-	t := File(template)
-	_, apiname := PathSplit(api)
-	_, templatename := PathSplit(template)
-	deps := File(Paths.Deps, fmt.Sprintf("%v_%v.deps", apiname, templatename))
-	s := Command(Tools.Apic,
+	dst := graph.Dir(path)
+	a := graph.File(api)
+	t := graph.File(template)
+	_, apiname := maker.PathSplit(api)
+	_, templatename := maker.PathSplit(template)
+	deps := graph.File(config.Paths.Deps, fmt.Sprintf("%v_%v.deps", apiname, templatename))
+	s := do.Exec(Tools.Apic,
 		"template",
 		"--dir", dst.Name(),
 		"--deps", deps.Name(),
-		a.Name(), t.Name()).DependsOn(a, t, dst, Dir(Paths.Deps))
+		a.Name(), t.Name()).DependsOn(a, t, dst, graph.Dir(config.Paths.Deps))
 	s.UseDepsFile(deps)
-	List("apic").DependsOn(deps)
+	graph.List("apic").DependsOn(deps)
 }
 
 func Codergen(name string, args ...string) {
-	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("apic").Access(GoPkgResources)
+	do.Exec(Tools.Codergen, args...).Creates(graph.Virtual(name)).DependsOn("apic").Access(do.GoPkgResources)
 }
 
-func ShutdownReplayd() Entity {
-	e := Virtual("shutdowngapir")
-	NewStep(func(*Step) error {
+func ShutdownReplayd() graph.Entity {
+	e := graph.Virtual("shutdowngapir")
+	graph.NewStep(func(*graph.Step) error {
 		for _, endpoint := range []string{"localhost:9283", "localhost:9284"} {
 			const maxRetries = 10
 			for i := 0; i < maxRetries; i++ {
@@ -195,29 +196,29 @@ func ShutdownReplayd() Entity {
 }
 
 func GfxApi(pkg string, api string) {
-	out := Path(gpusrc, "gfxapi", pkg)
-	in := Path(out, api)
-	templates := Path(gpusrc, "gfxapi", "templates")
+	out := maker.Path(gpusrc, "gfxapi", pkg)
+	in := maker.Path(out, api)
+	templates := maker.Path(gpusrc, "gfxapi", "templates")
 	istest := strings.HasSuffix(pkg, "test")
 	// go code
-	Apic(out, in, Path(templates, "api.go.tmpl"))
-	Apic(out, in, Path(templates, "replay_writer.go.tmpl"))
-	Apic(out, in, Path(templates, "schema.go.tmpl"))
-	Apic(out, in, Path(templates, "state_mutator.go.tmpl"))
+	Apic(out, in, maker.Path(templates, "api.go.tmpl"))
+	Apic(out, in, maker.Path(templates, "replay_writer.go.tmpl"))
+	Apic(out, in, maker.Path(templates, "schema.go.tmpl"))
+	Apic(out, in, maker.Path(templates, "state_mutator.go.tmpl"))
 	if istest {
 		return
 	}
 	// gapir code
-	Apic(gapirpath, in, Path(templates, "gfx_api.cpp.tmpl"))
-	Apic(gapirpath, in, Path(templates, "gfx_api.h.tmpl"))
+	Apic(gapirpath, in, maker.Path(templates, "gfx_api.cpp.tmpl"))
+	Apic(gapirpath, in, maker.Path(templates, "gfx_api.h.tmpl"))
 	// gapii code
-	Apic(gapiipath, in, Path(templates, "api_exports.cpp.tmpl"))
-	Apic(gapiipath, in, Path(templates, "api_imports.cpp.tmpl"))
-	Apic(gapiipath, in, Path(templates, "api_imports.h.tmpl"))
-	Apic(gapiipath, in, Path(templates, "api_spy.h.tmpl"))
-	Apic(gapiipath, in, Path(templates, "api_types.h.tmpl"))
-	Apic(gapiiwinpath, in, Path(templates, "opengl32_exports.def.tmpl"))
-	Apic(gapiiwinpath, in, Path(templates, "opengl32_resolve.cpp.tmpl"))
-	Apic(gapiiwinpath, in, Path(templates, "opengl32_x64.asm.tmpl"))
-	Apic(gapiiosxpath, in, Path(templates, "opengl_framework_exports.cpp.tmpl"))
+	Apic(gapiipath, in, maker.Path(templates, "api_exports.cpp.tmpl"))
+	Apic(gapiipath, in, maker.Path(templates, "api_imports.cpp.tmpl"))
+	Apic(gapiipath, in, maker.Path(templates, "api_imports.h.tmpl"))
+	Apic(gapiipath, in, maker.Path(templates, "api_spy.h.tmpl"))
+	Apic(gapiipath, in, maker.Path(templates, "api_types.h.tmpl"))
+	Apic(gapiiwinpath, in, maker.Path(templates, "opengl32_exports.def.tmpl"))
+	Apic(gapiiwinpath, in, maker.Path(templates, "opengl32_resolve.cpp.tmpl"))
+	Apic(gapiiwinpath, in, maker.Path(templates, "opengl32_x64.asm.tmpl"))
+	Apic(gapiiosxpath, in, maker.Path(templates, "opengl_framework_exports.cpp.tmpl"))
 }

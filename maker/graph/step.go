@@ -12,16 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package maker
+package graph
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"reflect"
 	"sync"
-	"time"
 )
 
 // Step represents an action that creates it's outputs from it's inputs.
@@ -30,15 +28,16 @@ import (
 // and may depend on many entities.
 // It is an error to have a cycle in the build graph.
 type Step struct {
-	inputs   []Entity
-	outputs  []Entity
-	disabled bool
-	always   bool
-	action   func(*Step) error
-	once     sync.Once
-	done     chan struct{}
-	err      error
-	accesses []string
+	Inputs  []Entity // This set of entities this step depends on.
+	Outputs []Entity // The set of entities this step updates.
+
+	disabled  bool
+	always    bool
+	action    func(*Step) error
+	once      sync.Once
+	done      chan struct{}
+	err       error
+	lockNames []string
 }
 
 var (
@@ -66,9 +65,6 @@ func NewStep(a func(*Step) error) *Step {
 		action: a,
 		done:   make(chan struct{}),
 	}
-	if Config.DisableParallel {
-		s.Access("single_thread")
-	}
 	for _, h := range stepHooks {
 		h(s)
 	}
@@ -84,7 +80,7 @@ func (s *Step) Creates(out ...Entity) *Step {
 		}
 		steps[e] = s
 	}
-	s.outputs = append(s.outputs, out...)
+	s.Outputs = append(s.Outputs, out...)
 	for _, h := range stepHooks {
 		h(s)
 	}
@@ -97,7 +93,7 @@ func (s *Step) DependsOn(in ...interface{}) *Step {
 	for _, v := range in {
 		e := EntityOf(v)
 		if !s.HasInput(e) {
-			s.inputs = append(s.inputs, e)
+			s.Inputs = append(s.Inputs, e)
 		}
 	}
 	for _, h := range stepHooks {
@@ -109,7 +105,7 @@ func (s *Step) DependsOn(in ...interface{}) *Step {
 // Access adds the supplied shared resource names to the list of resources
 // accessed by this step.
 func (s *Step) Access(v ...string) *Step {
-	s.accesses = append(s.accesses, v...)
+	s.lockNames = append(s.lockNames, v...)
 	for _, name := range v {
 		addLock(name)
 	}
@@ -118,7 +114,7 @@ func (s *Step) Access(v ...string) *Step {
 
 // HasInput returns true if the step already has the supplied entity in it's inputs.
 func (s *Step) HasInput(e Entity) bool {
-	for _, in := range s.inputs {
+	for _, in := range s.Inputs {
 		if in == e {
 			return true
 		}
@@ -128,7 +124,7 @@ func (s *Step) HasInput(e Entity) bool {
 
 // HasOutput returns true if the step already has the supplied entity in it's outputs.
 func (s *Step) HasOutput(e Entity) bool {
-	for _, out := range s.outputs {
+	for _, out := range s.Outputs {
 		if out == e {
 			return true
 		}
@@ -151,10 +147,15 @@ func (s *Step) AlwaysRun() *Step {
 
 // String returns the name of the first output if present, for logging.
 func (s *Step) String() string {
-	if len(s.outputs) > 0 {
-		return s.outputs[0].Name()
+	if len(s.Outputs) > 0 {
+		return s.Outputs[0].Name()
 	}
 	return ""
+}
+
+// Return the disabled state of the step for debugging
+func (s *Step) Disabled() bool {
+	return s.disabled
 }
 
 // UseDepsFile reads in a deps file and uses it to populuate the inputs and
@@ -183,7 +184,7 @@ func (s *Step) UseDepsFile(deps Entity) {
 	}
 }
 
-// DependsStruct adds all the fields of the supplied struct as input dependacies
+// DependsStruct adds all the fields of the supplied struct as input dependencies
 // of the step.
 // It is an error if the struct has any fields that are not public fields of
 // types that implement Entity.
@@ -195,77 +196,36 @@ func (s *Step) DependsStruct(v interface{}) {
 	}
 }
 
-func (s *Step) updateInputs() {
-	if s.disabled {
-		return
-	}
-	deps := make([]*Step, 0, len(s.inputs))
-	// Bring all inputs up to date in parallel
-	for _, e := range s.inputs {
-		dep := Creator(e)
-		if dep != nil {
-			deps = append(deps, dep)
-			go dep.start()
+func (s *Step) Process(r Runner) {
+	s.once.Do(func() {
+		// Signal we are complete as we exit this function
+		defer close(s.done)
+		if s.disabled {
+			// the step is disabled, so process does nothing, and produces no error.
+			return
 		}
-	}
-	// Wait for all inputs to be ready
-	for _, dep := range deps {
-		<-dep.done
-		if dep.err != nil && s.err == nil {
-			if dep.String() != "" {
-				Errors.Add(s, fmt.Errorf("%v in %s", dep.err, dep))
-			} else {
-				Errors.Add(s, dep.err)
+		s.err = r.UpdateInputs(s)
+		if s.err != nil {
+			return
+		}
+		if !r.Aborting() && (s.always || r.IsOutOfDate(s)) {
+			lock(s)
+			defer unlock(s)
+			if s.action == nil {
+				return
+			}
+			s.err = s.action(s)
+			// Mark all our outputs as potentially updated
+			for _, e := range s.Outputs {
+				e.Updated()
 			}
 		}
-	}
-}
-
-func (s *Step) shouldRun() bool {
-	if s.disabled {
-		return false
-	}
-	if s.always {
-		return true
-	}
-	// Find the newest input
-	t := time.Time{}
-	for _, e := range s.inputs {
-		t = Newest(t, e.Timestamp())
-	}
-	if t.IsZero() {
-		// No timestamped inputs, so always run
-		return true
-	}
-	// Ask the outputs if they want an update
-	for _, e := range s.outputs {
-		if e.NeedsUpdate(t) {
-			return true
-		}
-	}
-	return false
-}
-
-func (s *Step) run() {
-	if s.action == nil || (Config.StopOnError && Errors.Failed()) {
-		return
-	}
-	if err := s.action(s); err != nil {
-		log.Printf("Error: %s", Errors.Add(s, err))
-	}
-	// Mark all our ouptuts as potentially updated
-	for _, e := range s.outputs {
-		e.Updated()
-	}
-}
-
-func (s *Step) start() {
-	s.once.Do(func() {
-		s.updateInputs()
-		if s.err == nil && s.shouldRun() {
-			withLocks(s.accesses, s.run)
-		}
-		// Signal we are complete
-		close(s.done)
 	})
+}
+
+// Wait blocks until the step is complete.
+// This does not mean that the step has run it's actions, it may have decided it does not need to.
+func (s *Step) Wait() error {
+	<-s.done
+	return s.err
 }

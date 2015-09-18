@@ -21,7 +21,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/do"
 )
 
 // File represents the path to a file or directory.
@@ -181,7 +181,7 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	if err != nil {
 		return err
 	}
-	return maker.ExecAt(wd.Absolute(), env.Verbose, path.Absolute(), args...)
+	return do.ExecAt(wd.Absolute(), env.Verbose, path.Absolute(), args...)
 }
 
 // LookPath returns the path to f, searching the system PATHs.
