@@ -61,7 +61,7 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 
 func logger(env build.Environment, name string) log.Logger {
 	rootLogger := env.Logger
-	if env.Verbose {
+	if env.Verbose > 0 {
 		log.Infof(rootLogger, "Building %s", name)
 	}
 	return log.Enter(rootLogger, name)
