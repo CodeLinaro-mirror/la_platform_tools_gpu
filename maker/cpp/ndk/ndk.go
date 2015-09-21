@@ -27,21 +27,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/maker/cpp"
 )
 
-type ndkTarget struct {
-	name    string
-	version string
-	abi     string
-}
-
-var ndkArchToTarget = map[string]ndkTarget{
-	"arm":    {"arm-linux-androideabi", "4.9", "armeabi-v7a"},
-	"arm64":  {"aarch64-linux-android", "4.9", "arm64-v8a"},
-	"mips":   {"mipsel-linux-android", "4.9", "mips"},
-	"mips64": {"mips64el-linux-android", "4.9", "mips64"},
-	"x86":    {"x86", "4.9", "x86"},
-	"x86_64": {"x86_64", "4.9", "x86_64"},
-}
-
 // Toolchain for building an Android executable env, without being packaged into an
 // APK (user-debug only).
 var EXE = &cpp.Toolchain{
@@ -87,38 +72,33 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		return nil, err
 	}
 
-	target, ok := ndkArchToTarget[cfg.Architecture]
-	if !ok {
-		return nil, fmt.Errorf("NDK architecture '%s' not supported", cfg.Architecture)
-	}
-
 	system := config.HostOS.System
 	if system == "" {
 		return nil, fmt.Errorf("NDK host OS '%s' not supported", config.HostOS)
 	}
 
-	stlBase := paths.NDK.Join("sources", "cxx-stl", "gnu-libstdc++", target.version)
+	stlBase := paths.NDK.Join("sources", "cxx-stl", "gnu-libstdc++", cfg.ABI.Version)
 	if !stlBase.Exists() {
-		return nil, fmt.Errorf("NDK gnu-libstdc++ for version %s not found", target.version)
+		return nil, fmt.Errorf("NDK gnu-libstdc++ for version %s not found", cfg.ABI.Version)
 	}
-	arch := fmt.Sprintf("arch-%s", cfg.Architecture)
-	bin := paths.NDK.Join("toolchains", target.name+"-"+target.version, "prebuilt", system, "bin")
+	arch := fmt.Sprintf("arch-%s", cfg.ABI.Architecture)
+	bin := paths.NDK.Join("toolchains", cfg.ABI.Toolchain+"-"+cfg.ABI.Version, "prebuilt", system, "bin")
 	if !bin.Exists() {
-		return nil, fmt.Errorf("NDK toolchain for %s version %s not found", target.name, target.version)
+		return nil, fmt.Errorf("NDK toolchain for %s version %s not found", cfg.ABI.Name, cfg.ABI.Version)
 	}
 
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
 
 	return &tools{
-		as: bin.Join(target.name + "-as" + config.HostOS.ExecutableExtension),
-		cc: bin.Join(target.name + "-gcc" + config.HostOS.ExecutableExtension),
-		ar: bin.Join(target.name + "-ar" + config.HostOS.ExecutableExtension),
+		as: bin.Join(cfg.ABI.Toolchain + "-as" + config.HostOS.ExecutableExtension),
+		cc: bin.Join(cfg.ABI.Toolchain + "-gcc" + config.HostOS.ExecutableExtension),
+		ar: bin.Join(cfg.ABI.Toolchain + "-ar" + config.HostOS.ExecutableExtension),
 		incdirs: build.FileSet{
 			stlBase.Join("include"),
-			stlBase.Join("libs", target.abi, "include"),
+			stlBase.Join("libs", cfg.ABI.Name, "include"),
 		},
 		libdirs: build.FileSet{
-			stlBase.Join("libs", target.abi),
+			stlBase.Join("libs", cfg.ABI.Name),
 		},
 		libs: build.FileSet{
 			"libgnustl_static.a",
@@ -267,7 +247,7 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	if err := ioutil.WriteFile(strings.Absolute(), stringsXml(cfg.Name), 0666); err != nil {
 		return fmt.Errorf("Failed to build strings.xml: %v", err)
 	}
-	so := root.Join("lib", ndkArchToTarget[cfg.Architecture].abi, "lib"+cfg.Name+".so")
+	so := root.Join("lib", cfg.ABI.Name, "lib"+cfg.Name+".so")
 	so.MkdirAll()
 	if err := linkSo(inputs, so, cfg, env); err != nil {
 		return err

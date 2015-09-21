@@ -18,7 +18,7 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/maker/build"
-"android.googlesource.com/platform/tools/gpu/maker/config"
+	"android.googlesource.com/platform/tools/gpu/maker/config"
 )
 
 type misotool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
@@ -59,8 +59,7 @@ type Config struct {
 	OutputDir          build.File        // The output directory
 	Toolchain          *Toolchain        // The toolchain used to build.
 	OptimizationLevel  OptimizationLevel // The optimization level to use.
-	OS                 *config.OS        // The target operating system, e.g. "windows".
-	Architecture       string            // The target architecture, e.g. "x64".
+	ABI                *config.ABI       // The abi to target e.g. windows x86_64
 	Flavor             string            // Flavor is used to separate different build configurations, e.g. "release".
 	Defines            map[string]string // The list of defines used for compilation.
 	CompilerArgs       []string          // Custom complier flags.
@@ -89,11 +88,8 @@ func (c Config) Extend(n Config) Config {
 	if n.Toolchain != nil {
 		c.Toolchain = n.Toolchain
 	}
-	if n.OS != nil {
-		c.OS = n.OS
-	}
-	if n.Architecture != "" {
-		c.Architecture = n.Architecture
+	if n.ABI != nil {
+		c.ABI = n.ABI
 	}
 	if n.Flavor != "" {
 		c.Flavor = n.Flavor
@@ -118,7 +114,7 @@ func (c Config) Extend(n Config) Config {
 
 // Triplet returns a string combining the os, architecture and flavour of cfg.
 func Triplet(cfg Config) string {
-	return strings.Join([]string{cfg.OS.Name, cfg.Architecture, cfg.Flavor}, "-")
+	return strings.Join([]string{cfg.ABI.OS.Name, cfg.ABI.Architecture.Name, cfg.Flavor}, "-")
 }
 
 // IntermediatePath returns a File in the intermediate directory for generating

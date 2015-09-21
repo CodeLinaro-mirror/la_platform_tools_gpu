@@ -223,7 +223,7 @@ func MakeExecutable(name string, inputs build.FileSet, cfg Config, env build.Env
 // The test is automatically included in the "test" target.
 func MakeRunTest(test build.File, cfg Config) {
 	// We only run tests on the host OS.
-	if cfg.OS == config.HostOS {
+	if cfg.ABI.OS == config.HostOS {
 		// cfg.Defines["LOG_LEVEL"] = "0" // Disable all log messages except for GAPID_FATAL.
 		phony := graph.Virtual("cc:" + test.Name() + ":run")
 		do.Exec(makeEntity(test)).Creates(phony)
@@ -235,7 +235,7 @@ func MakeRunTest(test build.File, cfg Config) {
 // happens on the host OS.
 func MakeCopy(src build.File, dest build.File, cfg Config, env build.Environment) {
 	logger := env.Logger
-	if cfg.OS == config.HostOS {
+	if cfg.ABI.OS == config.HostOS {
 		makeStep(cfg.Name, dest, build.Files(src), env.ForceBuild,
 			func(*graph.Step) error {
 				log.Infof(logger, "Copying %s -> %s", src, dest)
