@@ -79,7 +79,7 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	arch := fmt.Sprintf("arch-%s", cfg.ABI.Architecture)
 	bin := Paths.NDK.Join("toolchains", cfg.ABI.Toolchain+"-"+cfg.ABI.Version, "prebuilt", system, "bin")
 	if !bin.Exists() {
-		return nil, fmt.Errorf("NDK toolchain for %s version %s not found", cfg.ABI.Name, cfg.ABI.Version)
+		return nil, fmt.Errorf("NDK toolchain for %s version %s not found (%s)", cfg.ABI.Name, cfg.ABI.Version, bin.Absolute())
 	}
 
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)

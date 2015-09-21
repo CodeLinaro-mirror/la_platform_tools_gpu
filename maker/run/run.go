@@ -74,6 +74,9 @@ func Run() {
 
 	config.Verbose = *verbose
 	config.TargetOS = config.FindOS(*targetOS)
+	if config.TargetOS == nil {
+		panic(fmt.Errorf("Invalid target OS %s", *targetOS))
+	}
 	// Build the entity graph
 	for _, f := range prepares {
 		f()

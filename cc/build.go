@@ -18,6 +18,8 @@ import (
 	"flag"
 	"strings"
 
+	"os"
+
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/maker/config"
@@ -67,16 +69,6 @@ func getEnvironment(logger log.Logger, verbose int) build.Environment {
 	}
 }
 
-// Generate "maker" graph for building the cpp code.
-func Graph(targetNames []string, verbose int) {
-	// Note this logger is captured in the build graph. There is no good place
-	// to call logger.Close()
-	logger := getLogger()
-	if run(targetNames, verbose, logger) == 1 {
-		panic("There were errors making the build graph")
-	}
-}
-
 func getLogger() log.Logger {
 	if len(*logfile) > 0 {
 		logger, err := log.File(*logfile)
@@ -89,33 +81,8 @@ func getLogger() log.Logger {
 	}
 }
 
-func run(targetNames []string, verbose int, logger log.Logger) int {
-	env := getEnvironment(logger, verbose)
-	buildTargets := getBuildTargets()
-
-	targets := make([]Target, len(targetNames))
-	for i, targetName := range targetNames {
-		if target, found := buildTargets[targetName]; found {
-			targets[i] = target
-		} else {
-			available := []string{}
-			for t := range buildTargets {
-				available = append(available, t)
-			}
-			log.Errorf(logger, "Unknown target '%s'. Available targets: %v", targetName, available)
-			return 1
-		}
-	}
-
-	for i := range targets {
-		env.Logger = log.Enter(log.Fork(logger), targetNames[i])
-		targets[i].Build(env)
-	}
-
-	return 0
-}
-
 type Target struct {
+	Name        string
 	SourceFiles []string
 	Gtest       cpp.Config
 	Gmock       cpp.Config
@@ -144,6 +111,7 @@ func (t Target) Extend(n Target) Target {
 }
 
 func (t Target) Build(env build.Environment) {
+	env.Logger = log.Enter(log.Fork(env.Logger), t.Name)
 	// Build gtest into a library
 	gtestSource := GtestRoot.Join("src").Glob("gtest-all.cc", "gtest_main.cc")
 	gtestLib := cpp.MakeStaticLibrary(gtestSource, t.Gtest, env, true)
@@ -236,8 +204,6 @@ func base(toolchain *cpp.Toolchain, abi *config.ABI) Target {
 		base.OptimizationLevel = cpp.FullOptimization
 	}
 
-	base.OutputDir = BinRoot.Join(abi.OS.Name+"-"+abi.Architecture.Name, base.Flavor)
-
 	if toolchain == gcc.GCC {
 		base.LibrarySearchPaths = build.Files("/usr/local/lib")
 	}
@@ -249,7 +215,10 @@ func base(toolchain *cpp.Toolchain, abi *config.ABI) Target {
 		base.Flavor += "-msvc"
 	}
 
+	base.OutputDir = BinRoot.Join(abi.OS.Name+"-"+abi.Architecture.Name, base.Flavor)
+
 	return Target{
+		Name:        abi.Name,
 		SourceFiles: []string{"*.cpp", "*.cc"},
 		Gtest: base.Extend(cpp.Config{
 			Name: "gtest",
@@ -313,123 +282,128 @@ func base(toolchain *cpp.Toolchain, abi *config.ABI) Target {
 	}
 }
 
-func getBuildTargets() map[string]Target {
+// Generate "maker" graph for building the cpp code.
+func Graph() {
+	// Note this logger is captured in the build graph. There is no good place
+	// to call logger.Close()
+	logger := getLogger()
+	env := getEnvironment(logger, config.Verbose)
+
 	noext := ""
 
-	linux := base(gcc.GCC, config.GetABI(config.Linux, config.X86_64)).Extend(Target{
-		GapicTests: cpp.Config{
-			Libraries: build.FileSet{"pthread"},
-		},
-		GapirTests: cpp.Config{
-			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
-		},
-		Replayd: cpp.Config{
-			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
-		},
-		Spy: cpp.Config{
-			Libraries: build.FileSet{"pthread"},
-		},
-	})
-
-	osx := base(gcc.GCC, config.GetABI(config.OSX, config.X86_64)).Extend(Target{
-		SourceFiles: []string{"*.mm"},
-		Gapii: cpp.Config{
-			AdditionalSources: build.FileSet{
-				GapiiRoot.Join("osx", "opengl_framework_exports.cpp")}},
-		Spy: cpp.Config{
-			Name:      "OpenGL",
-			OutputExt: &noext,
-		},
-		GapirTests: cpp.Config{
-			LinkerArgs: []string{
-				"-framework", "Cocoa",
-				"-framework", "OpenGL",
+	switch config.TargetOS {
+	case config.Linux:
+		base(gcc.GCC, config.GetABI(config.Linux, config.X86_64)).Extend(Target{
+			GapicTests: cpp.Config{
+				Libraries: build.FileSet{"pthread"},
 			},
-			Libraries: build.FileSet{"pthread"},
-		},
-		Replayd: cpp.Config{
-			LinkerArgs: []string{
-				"-framework", "Cocoa",
-				"-framework", "OpenGL",
+			GapirTests: cpp.Config{
+				Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
 			},
-			Libraries: build.FileSet{"pthread"},
-		},
-	})
-	osx.Spy.OutputDir = osx.Spy.OutputDir.Join("OpenGL.framework", "Versions", "A")
+			Replayd: cpp.Config{
+				Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
+			},
+			Spy: cpp.Config{
+				Libraries: build.FileSet{"pthread"},
+			},
+		}).Build(env)
 
-	windows := base(gcc.GCC, config.GetABI(config.Windows, config.X86_64)).Extend(Target{
-		Gapii: cpp.Config{
-			AdditionalSources: build.FileSet{
-				GapiiRoot.Join("windows", "opengl32_resolve.cpp")}},
-		Spy: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-		GapirTests: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-		Replayd: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-	})
+	case config.OSX:
+		osx := base(gcc.GCC, config.GetABI(config.OSX, config.X86_64)).Extend(Target{
+			SourceFiles: []string{"*.mm"},
+			Gapii: cpp.Config{
+				AdditionalSources: build.FileSet{
+					GapiiRoot.Join("osx", "opengl_framework_exports.cpp")}},
+			Spy: cpp.Config{
+				Name:      "OpenGL",
+				OutputExt: &noext,
+			},
+			GapirTests: cpp.Config{
+				LinkerArgs: []string{
+					"-framework", "Cocoa",
+					"-framework", "OpenGL",
+				},
+				Libraries: build.FileSet{"pthread"},
+			},
+			Replayd: cpp.Config{
+				LinkerArgs: []string{
+					"-framework", "Cocoa",
+					"-framework", "OpenGL",
+				},
+				Libraries: build.FileSet{"pthread"},
+			},
+		})
+		osx.Spy.OutputDir = osx.Spy.OutputDir.Join("OpenGL.framework", "Versions", "A")
+		osx.Build(env)
 
-	windows_msvc := base(msvc.MSVC, config.GetABI(config.Windows, config.X86_64)).Extend(Target{
-		Gapii: cpp.Config{
-			AdditionalSources: build.FileSet{
-				GapiiRoot.Join("windows", "opengl32_resolve.cpp")}},
-		Spy: cpp.Config{
-			Name:              "opengl32",
-			AdditionalSources: build.FileSet{GapiiRoot.Join("windows", "opengl32_x64.asm")},
-			ModuleDefinition:  GapiiRoot.Join("windows", "opengl32_exports.def"),
-			Libraries:         build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-		GapirTests: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-		Replayd: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-		},
-	})
-
-	// A bit of the Android crazy linker from the NDK. This is used to
-	// relink the program to use spy interceptors on non-rooted devices.
-	crazy := ndk.Paths.NDK.Join("sources", "android", "crazy_linker", "src")
-	crazy_source := build.FileSet{
-		crazy.Join("crazy_linker_elf_symbols.cpp"),
-		crazy.Join("crazy_linker_elf_view.cpp"),
-		crazy.Join("crazy_linker_error.cpp"),
-		crazy.Join("linker_phdr.cpp"),
+	case config.Windows:
+		base(gcc.GCC, config.GetABI(config.Windows, config.X86_64)).Extend(Target{
+			Gapii: cpp.Config{
+				AdditionalSources: build.FileSet{
+					GapiiRoot.Join("windows", "opengl32_resolve.cpp")}},
+			Spy: cpp.Config{
+				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+			},
+			GapirTests: cpp.Config{
+				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+			},
+			Replayd: cpp.Config{
+				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+			},
+		}).Build(env)
+		if config.HostOS == config.Windows {
+			base(msvc.MSVC, config.GetABI(config.Windows, config.X86_64)).Extend(Target{
+				Gapii: cpp.Config{
+					AdditionalSources: build.FileSet{
+						GapiiRoot.Join("windows", "opengl32_resolve.cpp")}},
+				Spy: cpp.Config{
+					Name:              "opengl32",
+					AdditionalSources: build.FileSet{GapiiRoot.Join("windows", "opengl32_x64.asm")},
+					ModuleDefinition:  GapiiRoot.Join("windows", "opengl32_exports.def"),
+					Libraries:         build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+				},
+				GapirTests: cpp.Config{
+					Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+				},
+				Replayd: cpp.Config{
+					Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+				},
+			}).Build(env)
+		}
 	}
+	if os.Getenv("ANDROID_NDK_ROOT") != "" {
+		// A bit of the Android crazy linker from the NDK. This is used to
+		// relink the program to use spy interceptors on non-rooted devices.
+		crazy := ndk.Paths.NDK.Join("sources", "android", "crazy_linker", "src")
+		crazy_source := build.FileSet{
+			crazy.Join("crazy_linker_elf_symbols.cpp"),
+			crazy.Join("crazy_linker_elf_view.cpp"),
+			crazy.Join("crazy_linker_error.cpp"),
+			crazy.Join("linker_phdr.cpp"),
+		}
 
-	android_target := Target{
-		GapicTests: cpp.Config{
-			Toolchain: ndk.EXE,
-			Libraries: build.FileSet{"log", "android", "z", "m"},
-		},
-		GapirTests: cpp.Config{
-			Toolchain: ndk.EXE,
-			Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
-		},
-		Replayd: cpp.Config{
-			Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
-			IncludeSearchPaths: build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue")},
-			AdditionalSources:  build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
-		},
-		Spy: cpp.Config{
-			Libraries:          build.FileSet{"log", "z", "m", "dl"},
-			IncludeSearchPaths: build.FileSet{crazy},
-			AdditionalSources: crazy_source.Append(
-				GapiiRoot.Join("android", "link_interceptor.cpp")),
-		},
-	}
-	android_arm := base(ndk.APK, config.GetABI(config.Android, config.Arm)).Extend(android_target)
-	android_arm64 := base(ndk.APK, config.GetABI(config.Android, config.Arm64)).Extend(android_target)
-
-	return map[string]Target{
-		"linux":         linux,
-		"osx":           osx,
-		"windows":       windows,
-		"windows-msvc":  windows_msvc,
-		"android-arm":   android_arm,
-		"android-arm64": android_arm64,
+		android_target := Target{
+			GapicTests: cpp.Config{
+				Toolchain: ndk.EXE,
+				Libraries: build.FileSet{"log", "android", "z", "m"},
+			},
+			GapirTests: cpp.Config{
+				Toolchain: ndk.EXE,
+				Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
+			},
+			Replayd: cpp.Config{
+				Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
+				IncludeSearchPaths: build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue")},
+				AdditionalSources:  build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
+			},
+			Spy: cpp.Config{
+				Libraries:          build.FileSet{"log", "z", "m", "dl"},
+				IncludeSearchPaths: build.FileSet{crazy},
+				AdditionalSources: crazy_source.Append(
+					GapiiRoot.Join("android", "link_interceptor.cpp")),
+			},
+		}
+		base(ndk.APK, config.GetABI(config.Android, config.Arm)).Extend(android_target).Build(env)
+		base(ndk.APK, config.GetABI(config.Android, config.Arm64)).Extend(android_target).Build(env)
 	}
 }

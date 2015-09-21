@@ -89,11 +89,7 @@ func init() {
 		//
 		graph.List("code").DependsOn("embed", "apic", "codergen")
 		// The native code rules
-		cctargets := []string{config.TargetOS.Name}
-		if os.Getenv("ANDROID_NDK_ROOT") != "" {
-			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
-		}
-		cc.Graph(cctargets, config.Verbose)
+		cc.Graph()
 		Apps.Gapir = graph.Virtual("cc:gapir")
 		graph.Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		graph.Creator("cc:spy").DependsOn("code")
