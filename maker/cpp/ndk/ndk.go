@@ -67,22 +67,17 @@ type tools struct {
 }
 
 func getTools(cfg cpp.Config) (*tools, error) {
-	paths, err := ResolvePaths()
-	if err != nil {
-		return nil, err
-	}
-
 	system := config.HostOS.System
 	if system == "" {
 		return nil, fmt.Errorf("NDK host OS '%s' not supported", config.HostOS)
 	}
 
-	stlBase := paths.NDK.Join("sources", "cxx-stl", "gnu-libstdc++", cfg.ABI.Version)
+	stlBase := Paths.NDK.Join("sources", "cxx-stl", "gnu-libstdc++", cfg.ABI.Version)
 	if !stlBase.Exists() {
 		return nil, fmt.Errorf("NDK gnu-libstdc++ for version %s not found", cfg.ABI.Version)
 	}
 	arch := fmt.Sprintf("arch-%s", cfg.ABI.Architecture)
-	bin := paths.NDK.Join("toolchains", cfg.ABI.Toolchain+"-"+cfg.ABI.Version, "prebuilt", system, "bin")
+	bin := Paths.NDK.Join("toolchains", cfg.ABI.Toolchain+"-"+cfg.ABI.Version, "prebuilt", system, "bin")
 	if !bin.Exists() {
 		return nil, fmt.Errorf("NDK toolchain for %s version %s not found", cfg.ABI.Name, cfg.ABI.Version)
 	}
@@ -103,7 +98,7 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		libs: build.FileSet{
 			"libgnustl_static.a",
 		},
-		sysroot: paths.NDK.Join("platforms", ndkPlatform, arch),
+		sysroot: Paths.NDK.Join("platforms", ndkPlatform, arch),
 	}, nil
 }
 
@@ -222,11 +217,6 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = log.Enter(env.Logger, "NDK.LinkApk")
 
-	paths, err := ResolvePaths()
-	if err != nil {
-		return err
-	}
-
 	// Create an intermediate directory to hold the files going into the apk.
 	log.Debugf(env.Logger, "Creating APK files")
 	root := build.File(cpp.IntermediatePath(output, "", cfg, env).Dir())
@@ -257,23 +247,23 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 
 	// Build the apk, unsigned. This pulls in AndroidManifest.xml and strings.xml
 	log.Debugf(env.Logger, "Building unsigned APK")
-	if err := paths.AAPT.Exec(env,
+	if err := Paths.AAPT.Exec(env,
 		"package", "-v", "-f",
 		"-M", manifest.Absolute(),
 		"-S", res.Absolute(),
-		"-I", paths.AndroidJar.Absolute(),
+		"-I", Paths.AndroidJar.Absolute(),
 		"-F", unaligned.Absolute()); err != nil {
 		return err
 	}
 
 	log.Debugf(env.Logger, "Adding .so to APK")
-	if err := paths.AAPT.ExecAt(env, root,
+	if err := Paths.AAPT.ExecAt(env, root,
 		"add", "-f", unaligned.Absolute(), so.RelativeTo(root)); err != nil {
 		return err
 	}
 
 	log.Debugf(env.Logger, "Signing APK")
-	if err := paths.Jarsigner.Exec(env,
+	if err := Paths.Jarsigner.Exec(env,
 		"-verbose",
 		"-keystore", env.Keystore.Absolute(),
 		"-storepass", env.Storepass,
@@ -283,7 +273,7 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	}
 
 	log.Debugf(env.Logger, "Zip-aligning APK")
-	if err := paths.Zipalign.Exec(env,
+	if err := Paths.Zipalign.Exec(env,
 		"-v", "-f", "4",
 		unaligned.Absolute(), output.Absolute()); err != nil {
 		return err

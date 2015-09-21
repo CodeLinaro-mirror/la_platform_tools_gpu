@@ -392,7 +392,7 @@ func getBuildTargets() map[string]Target {
 
 	// A bit of the Android crazy linker from the NDK. This is used to
 	// relink the program to use spy interceptors on non-rooted devices.
-	crazy := ndkRoot().Join("sources", "android", "crazy_linker", "src")
+	crazy := ndk.Paths.NDK.Join("sources", "android", "crazy_linker", "src")
 	crazy_source := build.FileSet{
 		crazy.Join("crazy_linker_elf_symbols.cpp"),
 		crazy.Join("crazy_linker_elf_view.cpp"),
@@ -411,8 +411,8 @@ func getBuildTargets() map[string]Target {
 		},
 		Replayd: cpp.Config{
 			Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
-			IncludeSearchPaths: build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue")},
-			AdditionalSources:  build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
+			IncludeSearchPaths: build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue")},
+			AdditionalSources:  build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
 		},
 		Spy: cpp.Config{
 			Libraries:          build.FileSet{"log", "z", "m", "dl"},
@@ -432,9 +432,4 @@ func getBuildTargets() map[string]Target {
 		"android-arm":   android_arm,
 		"android-arm64": android_arm64,
 	}
-}
-
-func ndkRoot() build.File {
-	paths, _ := ndk.ResolvePaths()
-	return paths.NDK
 }

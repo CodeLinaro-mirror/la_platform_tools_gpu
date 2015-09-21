@@ -29,79 +29,77 @@ const (
 	javaEnvVar = "JAVA_HOME"
 )
 
-var paths = Paths{}
-
 // Paths contains the list of directories and files required by the NDK
 // toolchain. It is acquired by calling ResolvePaths.
-type Paths struct {
-	resolved   bool
+var Paths = struct {
 	NDK        build.File // The Android NDK root directory.
 	SDK        build.File // The Android SDK root directory.
 	Jarsigner  build.File // The jarsigner executable path.
 	AAPT       build.File // The Android SDK aapt executable path.
 	Zipalign   build.File // The Android SDK zipalign executable path.
 	AndroidJar build.File // The Android SDK android.jar file.
+}{}
+
+func resolveEnvVarDir(env string) (build.File, error) {
+	f := build.File(os.Getenv(env))
+	switch {
+	case f == "":
+		return "", fmt.Errorf("Environment variable '%s' not set", env)
+
+	case !f.Exists():
+		return "", fmt.Errorf("Environment variable '%s' directory '%s' does not exist", env, f)
+	}
+	return f, nil
 }
 
-// ResolvePaths uses the system environment variables to find all the NDK, SDK
-// and Java directories and executables required by the NDK toolchain.
-func ResolvePaths() (Paths, error) {
-	if paths.resolved {
-		return paths, nil
-	}
+func init() {
+	// Uses the system environment variables to find all the NDK, SDK
+	// and Java directories and executables required by the NDK toolchain.
 
-	resolveEnvVarDir := func(dir *build.File, env string) error {
-		f := build.File(os.Getenv(env))
-		switch {
-		case f == "":
-			return fmt.Errorf("Environment variable '%s' not set", env)
-
-		case !f.Exists():
-			return fmt.Errorf("Environment variable '%s' directory '%s' does not exist", env, f)
-		}
-		*dir = f
-		return nil
-	}
-
-	var java build.File
-
+	var err error
 	// Resolve root directories from environment variables
-	if err := resolveEnvVarDir(&paths.NDK, ndkEnvVar); err != nil {
-		return Paths{}, err
+	Paths.NDK, err = resolveEnvVarDir(ndkEnvVar)
+	if err != nil {
+		// NDK not set, disable android ta
+		for _, abi := range config.ABIs {
+			if abi.OS == config.Android {
+				abi.Disabled = true
+			}
+		}
+		return
 	}
-	if err := resolveEnvVarDir(&paths.SDK, sdkEnvVar); err != nil {
-		return Paths{}, err
+	Paths.SDK, err = resolveEnvVarDir(sdkEnvVar)
+	if err != nil {
+		panic(err)
 	}
-	if err := resolveEnvVarDir(&java, javaEnvVar); err != nil {
-		return Paths{}, err
+	java, err := resolveEnvVarDir(javaEnvVar)
+	if err != nil {
+		panic(err)
 	}
 
-	paths.Jarsigner = java.Join("bin", "jarsigner"+config.HostOS.ExecutableExtension)
-	if !paths.Jarsigner.Exists() {
-		return Paths{}, fmt.Errorf("Java SDK does not contain jarsigner")
+	Paths.Jarsigner = java.Join("bin", "jarsigner"+config.HostOS.ExecutableExtension)
+	if !Paths.Jarsigner.Exists() {
+		panic(fmt.Errorf("Java SDK does not contain jarsigner"))
 	}
 
-	buildtools := paths.SDK.Join("build-tools", ndkBuildTools)
+	buildtools := Paths.SDK.Join("build-tools", ndkBuildTools)
 	if !buildtools.Exists() {
-		return Paths{}, fmt.Errorf("Android SDK does not contain required build-tools: %s", ndkBuildTools)
+		panic(fmt.Errorf("Android SDK does not contain required build-tools: %s", ndkBuildTools))
 	}
 
-	paths.AAPT = buildtools.Join("aapt" + config.HostOS.ExecutableExtension)
-	if !paths.AAPT.Exists() {
-		return Paths{}, fmt.Errorf("Android SDK does not contain aapt tool")
+	Paths.AAPT = buildtools.Join("aapt" + config.HostOS.ExecutableExtension)
+	if !Paths.AAPT.Exists() {
+		panic(fmt.Errorf("Android SDK does not contain aapt tool"))
 	}
 
-	paths.Zipalign = buildtools.Join("zipalign" + config.HostOS.ExecutableExtension)
-	if !paths.Zipalign.Exists() {
-		return Paths{}, fmt.Errorf("Android SDK does not contain zipalign tool")
+	Paths.Zipalign = buildtools.Join("zipalign" + config.HostOS.ExecutableExtension)
+	if !Paths.Zipalign.Exists() {
+		panic(fmt.Errorf("Android SDK does not contain zipalign tool"))
 	}
 
 	sdkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
-	paths.AndroidJar = paths.SDK.Join("platforms", sdkPlatform, "android.jar")
-	if !paths.AndroidJar.Exists() {
-		return Paths{}, fmt.Errorf("Android SDK does not contain required platform: %s", sdkPlatform)
+	Paths.AndroidJar = Paths.SDK.Join("platforms", sdkPlatform, "android.jar")
+	if !Paths.AndroidJar.Exists() {
+		panic(fmt.Errorf("Android SDK does not contain required platform: %s", sdkPlatform))
 	}
-
-	paths.resolved = true
-	return paths, nil
 }
