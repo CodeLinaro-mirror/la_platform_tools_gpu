@@ -88,8 +88,10 @@ bool ServerConnection::getResources(const std::vector<std::string>& resourceIds,
 
     size_t received = mConn->recv(target, size);
     if (received != size) {
-        GAPID_WARNING("GET resource returned unexpected size. "
-            "Expected: 0x%x, Got: 0x%x. Error: %s\n", int(size), int(received), mConn->error());
+        GAPID_WARNING("GET %lu resources returned unexpected size. "
+            "Expected: 0x%x, Got: 0x%x. Error: %s\n",
+            resourceIds.size(),
+            int(size), int(received), mConn->error());
         return false;
     }
 
