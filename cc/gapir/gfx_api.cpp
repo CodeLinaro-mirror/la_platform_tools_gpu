@@ -21,10 +21,6 @@ bool callGlBlendBarrierKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendBarrierKHR()");
         if (glBlendBarrierKHR != nullptr) {
             glBlendBarrierKHR();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendBarrierKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendBarrierKHR");
         }
@@ -43,10 +39,6 @@ bool callGlBlendEquationSeparateiEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationSeparateiEXT(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
         if (glBlendEquationSeparateiEXT != nullptr) {
             glBlendEquationSeparateiEXT(buf, modeRGB, modeAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationSeparateiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparateiEXT");
         }
@@ -64,10 +56,6 @@ bool callGlBlendEquationiEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationiEXT(%" PRIu32 ", %u)", buf, mode);
         if (glBlendEquationiEXT != nullptr) {
             glBlendEquationiEXT(buf, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationiEXT");
         }
@@ -89,10 +77,6 @@ bool callGlBlendFuncSeparateiEXT(Stack* stack, bool pushReturn) {
                    srcAlpha, dstAlpha);
         if (glBlendFuncSeparateiEXT != nullptr) {
             glBlendFuncSeparateiEXT(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFuncSeparateiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparateiEXT");
         }
@@ -111,10 +95,6 @@ bool callGlBlendFunciEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendFunciEXT(%" PRIu32 ", %u, %u)", buf, src, dst);
         if (glBlendFunciEXT != nullptr) {
             glBlendFunciEXT(buf, src, dst);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFunciEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFunciEXT");
         }
@@ -136,10 +116,6 @@ bool callGlColorMaskiEXT(Stack* stack, bool pushReturn) {
                    index, r, g, b, a);
         if (glColorMaskiEXT != nullptr) {
             glColorMaskiEXT(index, r, g, b, a);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glColorMaskiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glColorMaskiEXT");
         }
@@ -176,10 +152,6 @@ bool callGlCopyImageSubDataEXT(Stack* stack, bool pushReturn) {
             glCopyImageSubDataEXT(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName,
                                   dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight,
                                   srcDepth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyImageSubDataEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyImageSubDataEXT");
         }
@@ -197,10 +169,6 @@ bool callGlDebugMessageCallbackKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDebugMessageCallbackKHR(%p, %p)", callback, userParam);
         if (glDebugMessageCallbackKHR != nullptr) {
             glDebugMessageCallbackKHR(callback, userParam);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageCallbackKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageCallbackKHR");
         }
@@ -223,10 +191,6 @@ bool callGlDebugMessageControlKHR(Stack* stack, bool pushReturn) {
                    type, severity, count, ids, enabled);
         if (glDebugMessageControlKHR != nullptr) {
             glDebugMessageControlKHR(source, type, severity, count, ids, enabled);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageControlKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageControlKHR");
         }
@@ -249,10 +213,6 @@ bool callGlDebugMessageInsertKHR(Stack* stack, bool pushReturn) {
                    type, id, severity, length, message);
         if (glDebugMessageInsertKHR != nullptr) {
             glDebugMessageInsertKHR(source, type, id, severity, length, message);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageInsertKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageInsertKHR");
         }
@@ -270,10 +230,6 @@ bool callGlDisableiEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisableiEXT(%u, %" PRIu32 ")", target, index);
         if (glDisableiEXT != nullptr) {
             glDisableiEXT(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisableiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisableiEXT");
         }
@@ -291,10 +247,6 @@ bool callGlEnableiEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnableiEXT(%u, %" PRIu32 ")", target, index);
         if (glEnableiEXT != nullptr) {
             glEnableiEXT(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnableiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnableiEXT");
         }
@@ -315,10 +267,6 @@ bool callGlFramebufferTextureEXT(Stack* stack, bool pushReturn) {
                    texture, level);
         if (glFramebufferTextureEXT != nullptr) {
             glFramebufferTextureEXT(target, attachment, texture, level);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTextureEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTextureEXT");
         }
@@ -348,10 +296,6 @@ bool callGlGetDebugMessageLogKHR(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetDebugMessageLogKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetDebugMessageLogKHR");
         }
@@ -373,10 +317,6 @@ bool callGlGetObjectLabelKHR(Stack* stack, bool pushReturn) {
                    bufSize, length, label);
         if (glGetObjectLabelKHR != nullptr) {
             glGetObjectLabelKHR(identifier, name, bufSize, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetObjectLabelKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetObjectLabelKHR");
         }
@@ -396,10 +336,6 @@ bool callGlGetObjectPtrLabelKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetObjectPtrLabelKHR(%p, %" PRId32 ", %p, %p)", ptr, bufSize, length, label);
         if (glGetObjectPtrLabelKHR != nullptr) {
             glGetObjectPtrLabelKHR(ptr, bufSize, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetObjectPtrLabelKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetObjectPtrLabelKHR");
         }
@@ -417,10 +353,6 @@ bool callGlGetPointervKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPointervKHR(%u, %p)", pname, params);
         if (glGetPointervKHR != nullptr) {
             glGetPointervKHR(pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPointervKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPointervKHR");
         }
@@ -439,10 +371,6 @@ bool callGlGetSamplerParameterIivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIivEXT != nullptr) {
             glGetSamplerParameterIivEXT(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIivEXT");
         }
@@ -461,10 +389,6 @@ bool callGlGetSamplerParameterIuivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIuivEXT != nullptr) {
             glGetSamplerParameterIuivEXT(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIuivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIuivEXT");
         }
@@ -483,10 +407,6 @@ bool callGlGetTexParameterIivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIivEXT(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIivEXT != nullptr) {
             glGetTexParameterIivEXT(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIivEXT");
         }
@@ -505,10 +425,6 @@ bool callGlGetTexParameterIuivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIuivEXT != nullptr) {
             glGetTexParameterIuivEXT(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIuivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIuivEXT");
         }
@@ -530,10 +446,6 @@ bool callGlIsEnablediEXT(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnablediEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsEnablediEXT");
         }
@@ -550,10 +462,6 @@ bool callGlMinSampleShadingOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMinSampleShadingOES(%f)", value);
         if (glMinSampleShadingOES != nullptr) {
             glMinSampleShadingOES(value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMinSampleShadingOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMinSampleShadingOES");
         }
@@ -574,10 +482,6 @@ bool callGlObjectLabelKHR(Stack* stack, bool pushReturn) {
                    label);
         if (glObjectLabelKHR != nullptr) {
             glObjectLabelKHR(identifier, name, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glObjectLabelKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glObjectLabelKHR");
         }
@@ -596,10 +500,6 @@ bool callGlObjectPtrLabelKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glObjectPtrLabelKHR(%p, %" PRId32 ", %p)", ptr, length, label);
         if (glObjectPtrLabelKHR != nullptr) {
             glObjectPtrLabelKHR(ptr, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glObjectPtrLabelKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glObjectPtrLabelKHR");
         }
@@ -617,10 +517,6 @@ bool callGlPatchParameteriEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPatchParameteriEXT(%u, %" PRId32 ")", pname, value);
         if (glPatchParameteriEXT != nullptr) {
             glPatchParameteriEXT(pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPatchParameteriEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPatchParameteriEXT");
         }
@@ -636,10 +532,6 @@ bool callGlPopDebugGroupKHR(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPopDebugGroupKHR()");
         if (glPopDebugGroupKHR != nullptr) {
             glPopDebugGroupKHR();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPopDebugGroupKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPopDebugGroupKHR");
         }
@@ -664,10 +556,6 @@ bool callGlPrimitiveBoundingBoxEXT(Stack* stack, bool pushReturn) {
                    minW, maxX, maxY, maxZ, maxW);
         if (glPrimitiveBoundingBoxEXT != nullptr) {
             glPrimitiveBoundingBoxEXT(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPrimitiveBoundingBoxEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPrimitiveBoundingBoxEXT");
         }
@@ -688,10 +576,6 @@ bool callGlPushDebugGroupKHR(Stack* stack, bool pushReturn) {
                    message);
         if (glPushDebugGroupKHR != nullptr) {
             glPushDebugGroupKHR(source, id, length, message);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPushDebugGroupKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPushDebugGroupKHR");
         }
@@ -710,10 +594,6 @@ bool callGlSamplerParameterIivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIivEXT != nullptr) {
             glSamplerParameterIivEXT(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIivEXT");
         }
@@ -732,10 +612,6 @@ bool callGlSamplerParameterIuivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIuivEXT(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIuivEXT != nullptr) {
             glSamplerParameterIuivEXT(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIuivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIuivEXT");
         }
@@ -754,10 +630,6 @@ bool callGlTexBufferEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexBufferEXT(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
         if (glTexBufferEXT != nullptr) {
             glTexBufferEXT(target, internalformat, buffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBufferEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBufferEXT");
         }
@@ -779,10 +651,6 @@ bool callGlTexBufferRangeEXT(Stack* stack, bool pushReturn) {
                    internalformat, buffer, offset, size);
         if (glTexBufferRangeEXT != nullptr) {
             glTexBufferRangeEXT(target, internalformat, buffer, offset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBufferRangeEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBufferRangeEXT");
         }
@@ -801,10 +669,6 @@ bool callGlTexParameterIivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIivEXT(%u, %u, %p)", target, pname, params);
         if (glTexParameterIivEXT != nullptr) {
             glTexParameterIivEXT(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIivEXT");
         }
@@ -823,10 +687,6 @@ bool callGlTexParameterIuivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIuivEXT(%u, %u, %p)", target, pname, params);
         if (glTexParameterIuivEXT != nullptr) {
             glTexParameterIuivEXT(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIuivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIuivEXT");
         }
@@ -852,10 +712,6 @@ bool callGlTexStorage3DMultisampleOES(Stack* stack, bool pushReturn) {
         if (glTexStorage3DMultisampleOES != nullptr) {
             glTexStorage3DMultisampleOES(target, samples, internalformat, width, height, depth,
                                          fixedsamplelocations);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage3DMultisampleOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage3DMultisampleOES");
         }
@@ -873,10 +729,6 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginQuery(%u, %" PRIu32 ")", target, query);
         if (glBeginQuery != nullptr) {
             glBeginQuery(target, query);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginQuery returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginQuery");
         }
@@ -894,10 +746,6 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteQueries(%" PRId32 ", %p)", count, queries);
         if (glDeleteQueries != nullptr) {
             glDeleteQueries(count, queries);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteQueries returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteQueries");
         }
@@ -914,10 +762,6 @@ bool callGlEndQuery(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndQuery(%u)", target);
         if (glEndQuery != nullptr) {
             glEndQuery(target);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndQuery returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndQuery");
         }
@@ -935,10 +779,6 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenQueries(%" PRId32 ", %p)", count, queries);
         if (glGenQueries != nullptr) {
             glGenQueries(count, queries);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenQueries returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenQueries");
         }
@@ -957,10 +797,6 @@ bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjectuiv(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjectuiv != nullptr) {
             glGetQueryObjectuiv(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjectuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectuiv");
         }
@@ -979,10 +815,6 @@ bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryiv(%u, %u, %p)", target, parameter, value);
         if (glGetQueryiv != nullptr) {
             glGetQueryiv(target, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryiv");
         }
@@ -1003,10 +835,6 @@ bool callGlIsQuery(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsQuery returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsQuery");
         }
@@ -1024,10 +852,6 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindBuffer(%u, %" PRIu32 ")", target, buffer);
         if (glBindBuffer != nullptr) {
             glBindBuffer(target, buffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindBuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindBuffer");
         }
@@ -1046,10 +870,6 @@ bool callGlBindBufferBase(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindBufferBase(%u, %" PRIu32 ", %" PRIu32 ")", target, index, buffer);
         if (glBindBufferBase != nullptr) {
             glBindBufferBase(target, index, buffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindBufferBase returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindBufferBase");
         }
@@ -1071,10 +891,6 @@ bool callGlBindBufferRange(Stack* stack, bool pushReturn) {
                    target, index, buffer, offset, size);
         if (glBindBufferRange != nullptr) {
             glBindBufferRange(target, index, buffer, offset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindBufferRange returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindBufferRange");
         }
@@ -1094,10 +910,6 @@ bool callGlBufferData(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBufferData(%u, %" PRId32 ", %p, %u)", target, size, data, usage);
         if (glBufferData != nullptr) {
             glBufferData(target, size, data, usage);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBufferData returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBufferData");
         }
@@ -1117,10 +929,6 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBufferSubData(%u, %" PRId32 ", %" PRId32 ", %p)", target, offset, size, data);
         if (glBufferSubData != nullptr) {
             glBufferSubData(target, offset, size, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBufferSubData returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBufferSubData");
         }
@@ -1142,10 +950,6 @@ bool callGlCopyBufferSubData(Stack* stack, bool pushReturn) {
                    writeTarget, readOffset, writeOffset, size);
         if (glCopyBufferSubData != nullptr) {
             glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyBufferSubData returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyBufferSubData");
         }
@@ -1163,10 +967,6 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteBuffers(%" PRId32 ", %p)", count, buffers);
         if (glDeleteBuffers != nullptr) {
             glDeleteBuffers(count, buffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteBuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteBuffers");
         }
@@ -1184,10 +984,6 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenBuffers(%" PRId32 ", %p)", count, buffers);
         if (glGenBuffers != nullptr) {
             glGenBuffers(count, buffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenBuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenBuffers");
         }
@@ -1206,10 +1002,6 @@ bool callGlGetBufferParameteri64v(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBufferParameteri64v(%u, %u, %p)", target, pname, params);
         if (glGetBufferParameteri64v != nullptr) {
             glGetBufferParameteri64v(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBufferParameteri64v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBufferParameteri64v");
         }
@@ -1228,10 +1020,6 @@ bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)", target, parameter, value);
         if (glGetBufferParameteriv != nullptr) {
             glGetBufferParameteriv(target, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBufferParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBufferParameteriv");
         }
@@ -1250,10 +1038,6 @@ bool callGlGetBufferPointerv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBufferPointerv(%u, %u, %p)", target, pname, params);
         if (glGetBufferPointerv != nullptr) {
             glGetBufferPointerv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBufferPointerv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBufferPointerv");
         }
@@ -1273,10 +1057,6 @@ bool callGlIsBuffer(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsBuffer returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsBuffer");
@@ -1302,10 +1082,6 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMapBufferRange returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMapBufferRange");
         }
@@ -1326,10 +1102,6 @@ bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUnmapBuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUnmapBuffer");
         }
@@ -1347,10 +1119,6 @@ bool callGlDebugMessageCallback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDebugMessageCallback(%p, %p)", callback, userParam);
         if (glDebugMessageCallback != nullptr) {
             glDebugMessageCallback(callback, userParam);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageCallback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageCallback");
         }
@@ -1373,10 +1141,6 @@ bool callGlDebugMessageControl(Stack* stack, bool pushReturn) {
                    severity, count, ids, enabled);
         if (glDebugMessageControl != nullptr) {
             glDebugMessageControl(source, type, severity, count, ids, enabled);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageControl returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageControl");
         }
@@ -1399,10 +1163,6 @@ bool callGlDebugMessageInsert(Stack* stack, bool pushReturn) {
                    id, severity, length, message);
         if (glDebugMessageInsert != nullptr) {
             glDebugMessageInsert(source, type, id, severity, length, message);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDebugMessageInsert returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDebugMessageInsert");
         }
@@ -1432,10 +1192,6 @@ bool callGlGetDebugMessageLog(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetDebugMessageLog returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetDebugMessageLog");
         }
@@ -1457,10 +1213,6 @@ bool callGlGetObjectLabel(Stack* stack, bool pushReturn) {
                    bufSize, length, label);
         if (glGetObjectLabel != nullptr) {
             glGetObjectLabel(identifier, name, bufSize, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetObjectLabel returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetObjectLabel");
         }
@@ -1480,10 +1232,6 @@ bool callGlGetObjectPtrLabel(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetObjectPtrLabel(%p, %" PRId32 ", %p, %p)", ptr, bufSize, length, label);
         if (glGetObjectPtrLabel != nullptr) {
             glGetObjectPtrLabel(ptr, bufSize, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetObjectPtrLabel returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetObjectPtrLabel");
         }
@@ -1501,10 +1249,6 @@ bool callGlGetPointerv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPointerv(%u, %p)", pname, params);
         if (glGetPointerv != nullptr) {
             glGetPointerv(pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPointerv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPointerv");
         }
@@ -1525,10 +1269,6 @@ bool callGlObjectLabel(Stack* stack, bool pushReturn) {
                    label);
         if (glObjectLabel != nullptr) {
             glObjectLabel(identifier, name, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glObjectLabel returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glObjectLabel");
         }
@@ -1547,10 +1287,6 @@ bool callGlObjectPtrLabel(Stack* stack, bool pushReturn) {
         GAPID_INFO("glObjectPtrLabel(%p, %" PRId32 ", %p)", ptr, length, label);
         if (glObjectPtrLabel != nullptr) {
             glObjectPtrLabel(ptr, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glObjectPtrLabel returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glObjectPtrLabel");
         }
@@ -1566,10 +1302,6 @@ bool callGlPopDebugGroup(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPopDebugGroup()");
         if (glPopDebugGroup != nullptr) {
             glPopDebugGroup();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPopDebugGroup returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPopDebugGroup");
         }
@@ -1590,10 +1322,6 @@ bool callGlPushDebugGroup(Stack* stack, bool pushReturn) {
                    message);
         if (glPushDebugGroup != nullptr) {
             glPushDebugGroup(source, id, length, message);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPushDebugGroup returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPushDebugGroup");
         }
@@ -1613,10 +1341,6 @@ bool callGlDrawArrays(Stack* stack, bool pushReturn) {
                    indices_count);
         if (glDrawArrays != nullptr) {
             glDrawArrays(draw_mode, first_index, indices_count);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArrays returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArrays");
         }
@@ -1634,10 +1358,6 @@ bool callGlDrawArraysIndirect(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawArraysIndirect(%u, %p)", draw_mode, indirect);
         if (glDrawArraysIndirect != nullptr) {
             glDrawArraysIndirect(draw_mode, indirect);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysIndirect returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArraysIndirect");
         }
@@ -1658,10 +1378,6 @@ bool callGlDrawArraysInstanced(Stack* stack, bool pushReturn) {
                    first_index, indices_count, instance_count);
         if (glDrawArraysInstanced != nullptr) {
             glDrawArraysInstanced(draw_mode, first_index, indices_count, instance_count);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysInstanced returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArraysInstanced");
         }
@@ -1682,10 +1398,6 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
                    indices_type, indices);
         if (glDrawElements != nullptr) {
             glDrawElements(draw_mode, indices_count, indices_type, indices);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElements returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElements");
         }
@@ -1707,10 +1419,6 @@ bool callGlDrawElementsBaseVertex(Stack* stack, bool pushReturn) {
                    indices_count, indices_type, indices, base_vertex);
         if (glDrawElementsBaseVertex != nullptr) {
             glDrawElementsBaseVertex(draw_mode, indices_count, indices_type, indices, base_vertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsBaseVertex returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsBaseVertex");
         }
@@ -1729,10 +1437,6 @@ bool callGlDrawElementsIndirect(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)", draw_mode, indices_type, indirect);
         if (glDrawElementsIndirect != nullptr) {
             glDrawElementsIndirect(draw_mode, indices_type, indirect);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsIndirect returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsIndirect");
         }
@@ -1755,10 +1459,6 @@ bool callGlDrawElementsInstanced(Stack* stack, bool pushReturn) {
         if (glDrawElementsInstanced != nullptr) {
             glDrawElementsInstanced(draw_mode, indices_count, indices_type, indices,
                                     instance_count);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstanced returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsInstanced");
         }
@@ -1783,10 +1483,6 @@ bool callGlDrawElementsInstancedBaseVertex(Stack* stack, bool pushReturn) {
         if (glDrawElementsInstancedBaseVertex != nullptr) {
             glDrawElementsInstancedBaseVertex(draw_mode, indices_count, indices_type, indices,
                                               instance_count, base_vertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedBaseVertex returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawElementsInstancedBaseVertex");
@@ -1810,10 +1506,6 @@ bool callGlDrawRangeElements(Stack* stack, bool pushReturn) {
                    draw_mode, start, end, indices_count, indices_type, indices);
         if (glDrawRangeElements != nullptr) {
             glDrawRangeElements(draw_mode, start, end, indices_count, indices_type, indices);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawRangeElements returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawRangeElements");
         }
@@ -1839,10 +1531,6 @@ bool callGlDrawRangeElementsBaseVertex(Stack* stack, bool pushReturn) {
         if (glDrawRangeElementsBaseVertex != nullptr) {
             glDrawRangeElementsBaseVertex(draw_mode, start, end, indices_count, indices_type,
                                           indices, base_vertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawRangeElementsBaseVertex returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawRangeElementsBaseVertex");
         }
@@ -1860,10 +1548,6 @@ bool callGlPatchParameteri(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPatchParameteri(%u, %" PRId32 ")", pname, value);
         if (glPatchParameteri != nullptr) {
             glPatchParameteri(pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPatchParameteri returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPatchParameteri");
         }
@@ -1888,10 +1572,6 @@ bool callGlPrimitiveBoundingBox(Stack* stack, bool pushReturn) {
                    maxX, maxY, maxZ, maxW);
         if (glPrimitiveBoundingBox != nullptr) {
             glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPrimitiveBoundingBox returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPrimitiveBoundingBox");
         }
@@ -1909,10 +1589,6 @@ bool callGlActiveShaderProgramEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glActiveShaderProgramEXT(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
         if (glActiveShaderProgramEXT != nullptr) {
             glActiveShaderProgramEXT(pipeline, program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glActiveShaderProgramEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glActiveShaderProgramEXT");
         }
@@ -1930,10 +1606,6 @@ bool callGlAlphaFuncQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glAlphaFuncQCOM(%u, %f)", func, ref);
         if (glAlphaFuncQCOM != nullptr) {
             glAlphaFuncQCOM(func, ref);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glAlphaFuncQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glAlphaFuncQCOM");
         }
@@ -1949,10 +1621,6 @@ bool callGlApplyFramebufferAttachmentCMAAINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glApplyFramebufferAttachmentCMAAINTEL()");
         if (glApplyFramebufferAttachmentCMAAINTEL != nullptr) {
             glApplyFramebufferAttachmentCMAAINTEL();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glApplyFramebufferAttachmentCMAAINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glApplyFramebufferAttachmentCMAAINTEL");
@@ -1971,10 +1639,6 @@ bool callGlBeginConditionalRenderNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginConditionalRenderNV(%" PRIu32 ", %u)", id, mode);
         if (glBeginConditionalRenderNV != nullptr) {
             glBeginConditionalRenderNV(id, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginConditionalRenderNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginConditionalRenderNV");
         }
@@ -1991,10 +1655,6 @@ bool callGlBeginPerfMonitorAMD(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginPerfMonitorAMD(%" PRIu32 ")", monitor);
         if (glBeginPerfMonitorAMD != nullptr) {
             glBeginPerfMonitorAMD(monitor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginPerfMonitorAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginPerfMonitorAMD");
         }
@@ -2011,10 +1671,6 @@ bool callGlBeginPerfQueryINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginPerfQueryINTEL(%" PRIu32 ")", queryHandle);
         if (glBeginPerfQueryINTEL != nullptr) {
             glBeginPerfQueryINTEL(queryHandle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginPerfQueryINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginPerfQueryINTEL");
         }
@@ -2032,10 +1688,6 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginQueryEXT(%u, %" PRIu32 ")", target, query);
         if (glBeginQueryEXT != nullptr) {
             glBeginQueryEXT(target, query);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginQueryEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginQueryEXT");
         }
@@ -2052,10 +1704,6 @@ bool callGlBindProgramPipelineEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindProgramPipelineEXT(%" PRIu32 ")", pipeline);
         if (glBindProgramPipelineEXT != nullptr) {
             glBindProgramPipelineEXT(pipeline);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindProgramPipelineEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindProgramPipelineEXT");
         }
@@ -2072,10 +1720,6 @@ bool callGlBindVertexArrayOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindVertexArrayOES(%" PRIu32 ")", array);
         if (glBindVertexArrayOES != nullptr) {
             glBindVertexArrayOES(array);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindVertexArrayOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindVertexArrayOES");
         }
@@ -2091,10 +1735,6 @@ bool callGlBlendBarrierNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendBarrierNV()");
         if (glBlendBarrierNV != nullptr) {
             glBlendBarrierNV();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendBarrierNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendBarrierNV");
         }
@@ -2113,10 +1753,6 @@ bool callGlBlendEquationSeparateiOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationSeparateiOES(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
         if (glBlendEquationSeparateiOES != nullptr) {
             glBlendEquationSeparateiOES(buf, modeRGB, modeAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationSeparateiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparateiOES");
         }
@@ -2134,10 +1770,6 @@ bool callGlBlendEquationiOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationiOES(%" PRIu32 ", %u)", buf, mode);
         if (glBlendEquationiOES != nullptr) {
             glBlendEquationiOES(buf, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationiOES");
         }
@@ -2159,10 +1791,6 @@ bool callGlBlendFuncSeparateiOES(Stack* stack, bool pushReturn) {
                    srcAlpha, dstAlpha);
         if (glBlendFuncSeparateiOES != nullptr) {
             glBlendFuncSeparateiOES(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFuncSeparateiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparateiOES");
         }
@@ -2181,10 +1809,6 @@ bool callGlBlendFunciOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendFunciOES(%" PRIu32 ", %u, %u)", buf, src, dst);
         if (glBlendFunciOES != nullptr) {
             glBlendFunciOES(buf, src, dst);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFunciOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFunciOES");
         }
@@ -2202,10 +1826,6 @@ bool callGlBlendParameteriNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendParameteriNV(%u, %" PRId32 ")", pname, value);
         if (glBlendParameteriNV != nullptr) {
             glBlendParameteriNV(pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendParameteriNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendParameteriNV");
         }
@@ -2234,10 +1854,6 @@ bool callGlBlitFramebufferANGLE(Stack* stack, bool pushReturn) {
         if (glBlitFramebufferANGLE != nullptr) {
             glBlitFramebufferANGLE(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask,
                                    filter);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlitFramebufferANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlitFramebufferANGLE");
         }
@@ -2266,10 +1882,6 @@ bool callGlBlitFramebufferNV(Stack* stack, bool pushReturn) {
         if (glBlitFramebufferNV != nullptr) {
             glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask,
                                 filter);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlitFramebufferNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlitFramebufferNV");
         }
@@ -2289,10 +1901,6 @@ bool callGlBufferStorageEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBufferStorageEXT(%u, %" PRId32 ", %p, %u)", target, size, data, flag);
         if (glBufferStorageEXT != nullptr) {
             glBufferStorageEXT(target, size, data, flag);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBufferStorageEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBufferStorageEXT");
         }
@@ -2315,10 +1923,6 @@ bool callGlClientWaitSyncAPPLE(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClientWaitSyncAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClientWaitSyncAPPLE");
         }
@@ -2340,10 +1944,6 @@ bool callGlColorMaskiOES(Stack* stack, bool pushReturn) {
                    index, r, g, b, a);
         if (glColorMaskiOES != nullptr) {
             glColorMaskiOES(index, r, g, b, a);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glColorMaskiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glColorMaskiOES");
         }
@@ -2371,10 +1971,6 @@ bool callGlCompressedTexImage3DOES(Stack* stack, bool pushReturn) {
         if (glCompressedTexImage3DOES != nullptr) {
             glCompressedTexImage3DOES(target, level, internalformat, width, height, depth, border,
                                       imageSize, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexImage3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexImage3DOES");
         }
@@ -2405,10 +2001,6 @@ bool callGlCompressedTexSubImage3DOES(Stack* stack, bool pushReturn) {
         if (glCompressedTexSubImage3DOES != nullptr) {
             glCompressedTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height,
                                          depth, format, imageSize, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexSubImage3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexSubImage3DOES");
         }
@@ -2430,10 +2022,6 @@ bool callGlCopyBufferSubDataNV(Stack* stack, bool pushReturn) {
                    readTarget, writeTarget, readOffset, writeOffset, size);
         if (glCopyBufferSubDataNV != nullptr) {
             glCopyBufferSubDataNV(readTarget, writeTarget, readOffset, writeOffset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyBufferSubDataNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyBufferSubDataNV");
         }
@@ -2470,10 +2058,6 @@ bool callGlCopyImageSubDataOES(Stack* stack, bool pushReturn) {
             glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName,
                                   dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight,
                                   srcDepth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyImageSubDataOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyImageSubDataOES");
         }
@@ -2491,10 +2075,6 @@ bool callGlCopyPathNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCopyPathNV(%" PRIu32 ", %" PRIu32 ")", resultPath, srcPath);
         if (glCopyPathNV != nullptr) {
             glCopyPathNV(resultPath, srcPath);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyPathNV");
         }
@@ -2521,10 +2101,6 @@ bool callGlCopyTexSubImage3DOES(Stack* stack, bool pushReturn) {
                    target, level, xoffset, yoffset, zoffset, x, y, width, height);
         if (glCopyTexSubImage3DOES != nullptr) {
             glCopyTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyTexSubImage3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyTexSubImage3DOES");
         }
@@ -2546,10 +2122,6 @@ bool callGlCopyTextureLevelsAPPLE(Stack* stack, bool pushReturn) {
         if (glCopyTextureLevelsAPPLE != nullptr) {
             glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel,
                                      sourceLevelCount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyTextureLevelsAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyTextureLevelsAPPLE");
         }
@@ -2575,10 +2147,6 @@ bool callGlCoverFillPathInstancedNV(Stack* stack, bool pushReturn) {
         if (glCoverFillPathInstancedNV != nullptr) {
             glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode,
                                        transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverFillPathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverFillPathInstancedNV");
         }
@@ -2596,10 +2164,6 @@ bool callGlCoverFillPathNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverFillPathNV(%" PRIu32 ", %u)", path, coverMode);
         if (glCoverFillPathNV != nullptr) {
             glCoverFillPathNV(path, coverMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverFillPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverFillPathNV");
         }
@@ -2625,10 +2189,6 @@ bool callGlCoverStrokePathInstancedNV(Stack* stack, bool pushReturn) {
         if (glCoverStrokePathInstancedNV != nullptr) {
             glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode,
                                          transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverStrokePathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverStrokePathInstancedNV");
         }
@@ -2646,10 +2206,6 @@ bool callGlCoverStrokePathNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverStrokePathNV(%" PRIu32 ", %u)", path, coverMode);
         if (glCoverStrokePathNV != nullptr) {
             glCoverStrokePathNV(path, coverMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverStrokePathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverStrokePathNV");
         }
@@ -2666,10 +2222,6 @@ bool callGlCoverageMaskNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverageMaskNV(%" PRIu8 ")", mask);
         if (glCoverageMaskNV != nullptr) {
             glCoverageMaskNV(mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageMaskNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverageMaskNV");
         }
@@ -2686,10 +2238,6 @@ bool callGlCoverageModulationNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverageModulationNV(%u)", components);
         if (glCoverageModulationNV != nullptr) {
             glCoverageModulationNV(components);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageModulationNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverageModulationNV");
         }
@@ -2707,10 +2255,6 @@ bool callGlCoverageModulationTableNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverageModulationTableNV(%" PRId32 ", %p)", n, v);
         if (glCoverageModulationTableNV != nullptr) {
             glCoverageModulationTableNV(n, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageModulationTableNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverageModulationTableNV");
         }
@@ -2727,10 +2271,6 @@ bool callGlCoverageOperationNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCoverageOperationNV(%u)", operation);
         if (glCoverageOperationNV != nullptr) {
             glCoverageOperationNV(operation);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCoverageOperationNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCoverageOperationNV");
         }
@@ -2748,10 +2288,6 @@ bool callGlCreatePerfQueryINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCreatePerfQueryINTEL(%" PRIu32 ", %p)", queryId, queryHandle);
         if (glCreatePerfQueryINTEL != nullptr) {
             glCreatePerfQueryINTEL(queryId, queryHandle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCreatePerfQueryINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreatePerfQueryINTEL");
         }
@@ -2774,10 +2310,6 @@ bool callGlCreateShaderProgramvEXT(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCreateShaderProgramvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateShaderProgramvEXT");
         }
@@ -2795,10 +2327,6 @@ bool callGlDeleteFencesNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteFencesNV(%" PRId32 ", %p)", n, fences);
         if (glDeleteFencesNV != nullptr) {
             glDeleteFencesNV(n, fences);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteFencesNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteFencesNV");
         }
@@ -2816,10 +2344,6 @@ bool callGlDeletePathsNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeletePathsNV(%" PRIu32 ", %" PRId32 ")", path, range);
         if (glDeletePathsNV != nullptr) {
             glDeletePathsNV(path, range);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeletePathsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeletePathsNV");
         }
@@ -2837,10 +2361,6 @@ bool callGlDeletePerfMonitorsAMD(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeletePerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
         if (glDeletePerfMonitorsAMD != nullptr) {
             glDeletePerfMonitorsAMD(n, monitors);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeletePerfMonitorsAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeletePerfMonitorsAMD");
         }
@@ -2857,10 +2377,6 @@ bool callGlDeletePerfQueryINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeletePerfQueryINTEL(%" PRIu32 ")", queryHandle);
         if (glDeletePerfQueryINTEL != nullptr) {
             glDeletePerfQueryINTEL(queryHandle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeletePerfQueryINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeletePerfQueryINTEL");
         }
@@ -2878,10 +2394,6 @@ bool callGlDeleteProgramPipelinesEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
         if (glDeleteProgramPipelinesEXT != nullptr) {
             glDeleteProgramPipelinesEXT(n, pipelines);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteProgramPipelinesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteProgramPipelinesEXT");
         }
@@ -2899,10 +2411,6 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteQueriesEXT(%" PRId32 ", %p)", count, queries);
         if (glDeleteQueriesEXT != nullptr) {
             glDeleteQueriesEXT(count, queries);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteQueriesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteQueriesEXT");
         }
@@ -2919,10 +2427,6 @@ bool callGlDeleteSyncAPPLE(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteSyncAPPLE(%" PRIu64 ")", sync);
         if (glDeleteSyncAPPLE != nullptr) {
             glDeleteSyncAPPLE(sync);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteSyncAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteSyncAPPLE");
         }
@@ -2940,10 +2444,6 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteVertexArraysOES(%" PRId32 ", %p)", count, arrays);
         if (glDeleteVertexArraysOES != nullptr) {
             glDeleteVertexArraysOES(count, arrays);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteVertexArraysOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteVertexArraysOES");
         }
@@ -2962,10 +2462,6 @@ bool callGlDepthRangeArrayfvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDepthRangeArrayfvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
         if (glDepthRangeArrayfvNV != nullptr) {
             glDepthRangeArrayfvNV(first, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDepthRangeArrayfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDepthRangeArrayfvNV");
         }
@@ -2984,10 +2480,6 @@ bool callGlDepthRangeIndexedfNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDepthRangeIndexedfNV(%" PRIu32 ", %f, %f)", index, n, f);
         if (glDepthRangeIndexedfNV != nullptr) {
             glDepthRangeIndexedfNV(index, n, f);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDepthRangeIndexedfNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDepthRangeIndexedfNV");
         }
@@ -3004,10 +2496,6 @@ bool callGlDisableDriverControlQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisableDriverControlQCOM(%" PRIu32 ")", driverControl);
         if (glDisableDriverControlQCOM != nullptr) {
             glDisableDriverControlQCOM(driverControl);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisableDriverControlQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisableDriverControlQCOM");
         }
@@ -3025,10 +2513,6 @@ bool callGlDisableiNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisableiNV(%u, %" PRIu32 ")", target, index);
         if (glDisableiNV != nullptr) {
             glDisableiNV(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisableiNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisableiNV");
         }
@@ -3046,10 +2530,6 @@ bool callGlDisableiOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisableiOES(%u, %" PRIu32 ")", target, index);
         if (glDisableiOES != nullptr) {
             glDisableiOES(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisableiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisableiOES");
         }
@@ -3069,10 +2549,6 @@ bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
                    attachments);
         if (glDiscardFramebufferEXT != nullptr) {
             glDiscardFramebufferEXT(target, numAttachments, attachments);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDiscardFramebufferEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDiscardFramebufferEXT");
         }
@@ -3093,10 +2569,6 @@ bool callGlDrawArraysInstancedANGLE(Stack* stack, bool pushReturn) {
                    first, count, primcount);
         if (glDrawArraysInstancedANGLE != nullptr) {
             glDrawArraysInstancedANGLE(mode, first, count, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysInstancedANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArraysInstancedANGLE");
         }
@@ -3119,10 +2591,6 @@ bool callGlDrawArraysInstancedBaseInstanceEXT(Stack* stack, bool pushReturn) {
                    mode, first, count, instancecount, baseinstance);
         if (glDrawArraysInstancedBaseInstanceEXT != nullptr) {
             glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount, baseinstance);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysInstancedBaseInstanceEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawArraysInstancedBaseInstanceEXT");
@@ -3144,10 +2612,6 @@ bool callGlDrawArraysInstancedEXT(Stack* stack, bool pushReturn) {
                    start, count, primcount);
         if (glDrawArraysInstancedEXT != nullptr) {
             glDrawArraysInstancedEXT(mode, start, count, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysInstancedEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArraysInstancedEXT");
         }
@@ -3168,10 +2632,6 @@ bool callGlDrawArraysInstancedNV(Stack* stack, bool pushReturn) {
                    first, count, primcount);
         if (glDrawArraysInstancedNV != nullptr) {
             glDrawArraysInstancedNV(mode, first, count, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawArraysInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawArraysInstancedNV");
         }
@@ -3189,10 +2649,6 @@ bool callGlDrawBuffersEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawBuffersEXT(%" PRId32 ", %p)", n, bufs);
         if (glDrawBuffersEXT != nullptr) {
             glDrawBuffersEXT(n, bufs);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawBuffersEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawBuffersEXT");
         }
@@ -3211,10 +2667,6 @@ bool callGlDrawBuffersIndexedEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawBuffersIndexedEXT(%" PRId32 ", %p, %p)", n, location, indices);
         if (glDrawBuffersIndexedEXT != nullptr) {
             glDrawBuffersIndexedEXT(n, location, indices);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawBuffersIndexedEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawBuffersIndexedEXT");
         }
@@ -3232,10 +2684,6 @@ bool callGlDrawBuffersNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawBuffersNV(%" PRId32 ", %p)", n, bufs);
         if (glDrawBuffersNV != nullptr) {
             glDrawBuffersNV(n, bufs);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawBuffersNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawBuffersNV");
         }
@@ -3257,10 +2705,6 @@ bool callGlDrawElementsBaseVertexEXT(Stack* stack, bool pushReturn) {
                    type, indices, basevertex);
         if (glDrawElementsBaseVertexEXT != nullptr) {
             glDrawElementsBaseVertexEXT(mode, count, type, indices, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsBaseVertexEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsBaseVertexEXT");
         }
@@ -3282,10 +2726,6 @@ bool callGlDrawElementsBaseVertexOES(Stack* stack, bool pushReturn) {
                    type, indices, basevertex);
         if (glDrawElementsBaseVertexOES != nullptr) {
             glDrawElementsBaseVertexOES(mode, count, type, indices, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsBaseVertexOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsBaseVertexOES");
         }
@@ -3307,10 +2747,6 @@ bool callGlDrawElementsInstancedANGLE(Stack* stack, bool pushReturn) {
                    count, type, indices, primcount);
         if (glDrawElementsInstancedANGLE != nullptr) {
             glDrawElementsInstancedANGLE(mode, count, type, indices, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsInstancedANGLE");
         }
@@ -3335,10 +2771,6 @@ bool callGlDrawElementsInstancedBaseInstanceEXT(Stack* stack, bool pushReturn) {
         if (glDrawElementsInstancedBaseInstanceEXT != nullptr) {
             glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount,
                                                    baseinstance);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedBaseInstanceEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function "
@@ -3366,12 +2798,6 @@ bool callGlDrawElementsInstancedBaseVertexBaseInstanceEXT(Stack* stack, bool pus
         if (glDrawElementsInstancedBaseVertexBaseInstanceEXT != nullptr) {
             glDrawElementsInstancedBaseVertexBaseInstanceEXT(
                     mode, count, type, indices, instancecount, basevertex, baseinstance);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING(
-                        "glDrawElementsInstancedBaseVertexBaseInstanceEXT returned error: 0x%x",
-                        err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function "
@@ -3399,10 +2825,6 @@ bool callGlDrawElementsInstancedBaseVertexEXT(Stack* stack, bool pushReturn) {
         if (glDrawElementsInstancedBaseVertexEXT != nullptr) {
             glDrawElementsInstancedBaseVertexEXT(mode, count, type, indices, instancecount,
                                                  basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedBaseVertexEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawElementsInstancedBaseVertexEXT");
@@ -3428,10 +2850,6 @@ bool callGlDrawElementsInstancedBaseVertexOES(Stack* stack, bool pushReturn) {
         if (glDrawElementsInstancedBaseVertexOES != nullptr) {
             glDrawElementsInstancedBaseVertexOES(mode, count, type, indices, instancecount,
                                                  basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedBaseVertexOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawElementsInstancedBaseVertexOES");
@@ -3454,10 +2872,6 @@ bool callGlDrawElementsInstancedEXT(Stack* stack, bool pushReturn) {
                    type, indices, primcount);
         if (glDrawElementsInstancedEXT != nullptr) {
             glDrawElementsInstancedEXT(mode, count, type, indices, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsInstancedEXT");
         }
@@ -3479,10 +2893,6 @@ bool callGlDrawElementsInstancedNV(Stack* stack, bool pushReturn) {
                    type, indices, primcount);
         if (glDrawElementsInstancedNV != nullptr) {
             glDrawElementsInstancedNV(mode, count, type, indices, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawElementsInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawElementsInstancedNV");
         }
@@ -3507,10 +2917,6 @@ bool callGlDrawRangeElementsBaseVertexEXT(Stack* stack, bool pushReturn) {
                    mode, start, end, count, type, indices, basevertex);
         if (glDrawRangeElementsBaseVertexEXT != nullptr) {
             glDrawRangeElementsBaseVertexEXT(mode, start, end, count, type, indices, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawRangeElementsBaseVertexEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawRangeElementsBaseVertexEXT");
@@ -3536,10 +2942,6 @@ bool callGlDrawRangeElementsBaseVertexOES(Stack* stack, bool pushReturn) {
                    mode, start, end, count, type, indices, basevertex);
         if (glDrawRangeElementsBaseVertexOES != nullptr) {
             glDrawRangeElementsBaseVertexOES(mode, start, end, count, type, indices, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawRangeElementsBaseVertexOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glDrawRangeElementsBaseVertexOES");
@@ -3558,10 +2960,6 @@ bool callGlEGLImageTargetRenderbufferStorageOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)", target, image);
         if (glEGLImageTargetRenderbufferStorageOES != nullptr) {
             glEGLImageTargetRenderbufferStorageOES(target, image);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEGLImageTargetRenderbufferStorageOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function "
@@ -3581,10 +2979,6 @@ bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)", target, image);
         if (glEGLImageTargetTexture2DOES != nullptr) {
             glEGLImageTargetTexture2DOES(target, image);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEGLImageTargetTexture2DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEGLImageTargetTexture2DOES");
         }
@@ -3601,10 +2995,6 @@ bool callGlEnableDriverControlQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnableDriverControlQCOM(%" PRIu32 ")", driverControl);
         if (glEnableDriverControlQCOM != nullptr) {
             glEnableDriverControlQCOM(driverControl);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnableDriverControlQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnableDriverControlQCOM");
         }
@@ -3622,10 +3012,6 @@ bool callGlEnableiNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnableiNV(%u, %" PRIu32 ")", target, index);
         if (glEnableiNV != nullptr) {
             glEnableiNV(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnableiNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnableiNV");
         }
@@ -3643,10 +3029,6 @@ bool callGlEnableiOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnableiOES(%u, %" PRIu32 ")", target, index);
         if (glEnableiOES != nullptr) {
             glEnableiOES(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnableiOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnableiOES");
         }
@@ -3662,10 +3044,6 @@ bool callGlEndConditionalRenderNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndConditionalRenderNV()");
         if (glEndConditionalRenderNV != nullptr) {
             glEndConditionalRenderNV();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndConditionalRenderNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndConditionalRenderNV");
         }
@@ -3682,10 +3060,6 @@ bool callGlEndPerfMonitorAMD(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndPerfMonitorAMD(%" PRIu32 ")", monitor);
         if (glEndPerfMonitorAMD != nullptr) {
             glEndPerfMonitorAMD(monitor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndPerfMonitorAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndPerfMonitorAMD");
         }
@@ -3702,10 +3076,6 @@ bool callGlEndPerfQueryINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndPerfQueryINTEL(%" PRIu32 ")", queryHandle);
         if (glEndPerfQueryINTEL != nullptr) {
             glEndPerfQueryINTEL(queryHandle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndPerfQueryINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndPerfQueryINTEL");
         }
@@ -3722,10 +3092,6 @@ bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndQueryEXT(%u)", target);
         if (glEndQueryEXT != nullptr) {
             glEndQueryEXT(target);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndQueryEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndQueryEXT");
         }
@@ -3742,10 +3108,6 @@ bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndTilingQCOM(%u)", preserve_mask);
         if (glEndTilingQCOM != nullptr) {
             glEndTilingQCOM(preserve_mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndTilingQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndTilingQCOM");
         }
@@ -3763,10 +3125,6 @@ bool callGlExtGetBufferPointervQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtGetBufferPointervQCOM(%u, %p)", target, params);
         if (glExtGetBufferPointervQCOM != nullptr) {
             glExtGetBufferPointervQCOM(target, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetBufferPointervQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetBufferPointervQCOM");
         }
@@ -3785,10 +3143,6 @@ bool callGlExtGetBuffersQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtGetBuffersQCOM(%p, %" PRId32 ", %p)", buffers, maxBuffers, numBuffers);
         if (glExtGetBuffersQCOM != nullptr) {
             glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetBuffersQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetBuffersQCOM");
         }
@@ -3808,10 +3162,6 @@ bool callGlExtGetFramebuffersQCOM(Stack* stack, bool pushReturn) {
                    numFramebuffers);
         if (glExtGetFramebuffersQCOM != nullptr) {
             glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetFramebuffersQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetFramebuffersQCOM");
         }
@@ -3832,10 +3182,6 @@ bool callGlExtGetProgramBinarySourceQCOM(Stack* stack, bool pushReturn) {
                    source, length);
         if (glExtGetProgramBinarySourceQCOM != nullptr) {
             glExtGetProgramBinarySourceQCOM(program, shadertype, source, length);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetProgramBinarySourceQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetProgramBinarySourceQCOM");
         }
@@ -3854,10 +3200,6 @@ bool callGlExtGetProgramsQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtGetProgramsQCOM(%p, %" PRId32 ", %p)", programs, maxPrograms, numPrograms);
         if (glExtGetProgramsQCOM != nullptr) {
             glExtGetProgramsQCOM(programs, maxPrograms, numPrograms);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetProgramsQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetProgramsQCOM");
         }
@@ -3877,10 +3219,6 @@ bool callGlExtGetRenderbuffersQCOM(Stack* stack, bool pushReturn) {
                    maxRenderbuffers, numRenderbuffers);
         if (glExtGetRenderbuffersQCOM != nullptr) {
             glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetRenderbuffersQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetRenderbuffersQCOM");
         }
@@ -3899,10 +3237,6 @@ bool callGlExtGetShadersQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtGetShadersQCOM(%p, %" PRId32 ", %p)", shaders, maxShaders, numShaders);
         if (glExtGetShadersQCOM != nullptr) {
             glExtGetShadersQCOM(shaders, maxShaders, numShaders);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetShadersQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetShadersQCOM");
         }
@@ -3924,10 +3258,6 @@ bool callGlExtGetTexLevelParameterivQCOM(Stack* stack, bool pushReturn) {
                    face, level, pname, params);
         if (glExtGetTexLevelParameterivQCOM != nullptr) {
             glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetTexLevelParameterivQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetTexLevelParameterivQCOM");
         }
@@ -3958,10 +3288,6 @@ bool callGlExtGetTexSubImageQCOM(Stack* stack, bool pushReturn) {
         if (glExtGetTexSubImageQCOM != nullptr) {
             glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                     format, type, texels);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetTexSubImageQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetTexSubImageQCOM");
         }
@@ -3980,10 +3306,6 @@ bool callGlExtGetTexturesQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtGetTexturesQCOM(%p, %" PRId32 ", %p)", textures, maxTextures, numTextures);
         if (glExtGetTexturesQCOM != nullptr) {
             glExtGetTexturesQCOM(textures, maxTextures, numTextures);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtGetTexturesQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtGetTexturesQCOM");
         }
@@ -4004,10 +3326,6 @@ bool callGlExtIsProgramBinaryQCOM(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtIsProgramBinaryQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glExtIsProgramBinaryQCOM");
         }
@@ -4026,10 +3344,6 @@ bool callGlExtTexObjectStateOverrideiQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glExtTexObjectStateOverrideiQCOM(%u, %u, %" PRId32 ")", target, pname, param);
         if (glExtTexObjectStateOverrideiQCOM != nullptr) {
             glExtTexObjectStateOverrideiQCOM(target, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glExtTexObjectStateOverrideiQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glExtTexObjectStateOverrideiQCOM");
@@ -4052,10 +3366,6 @@ bool callGlFenceSyncAPPLE(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFenceSyncAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFenceSyncAPPLE");
         }
@@ -4072,10 +3382,6 @@ bool callGlFinishFenceNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFinishFenceNV(%" PRIu32 ")", fence);
         if (glFinishFenceNV != nullptr) {
             glFinishFenceNV(fence);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFinishFenceNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFinishFenceNV");
         }
@@ -4095,10 +3401,6 @@ bool callGlFlushMappedBufferRangeEXT(Stack* stack, bool pushReturn) {
                    length);
         if (glFlushMappedBufferRangeEXT != nullptr) {
             glFlushMappedBufferRangeEXT(target, offset, length);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFlushMappedBufferRangeEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFlushMappedBufferRangeEXT");
         }
@@ -4115,10 +3417,6 @@ bool callGlFragmentCoverageColorNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFragmentCoverageColorNV(%" PRIu32 ")", color);
         if (glFragmentCoverageColorNV != nullptr) {
             glFragmentCoverageColorNV(color);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFragmentCoverageColorNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFragmentCoverageColorNV");
         }
@@ -4139,10 +3437,6 @@ bool callGlFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
                    start, count, v);
         if (glFramebufferSampleLocationsfvNV != nullptr) {
             glFramebufferSampleLocationsfvNV(target, start, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferSampleLocationsfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glFramebufferSampleLocationsfvNV");
@@ -4168,10 +3462,6 @@ bool callGlFramebufferTexture2DMultisampleEXT(Stack* stack, bool pushReturn) {
         if (glFramebufferTexture2DMultisampleEXT != nullptr) {
             glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level,
                                                  samples);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTexture2DMultisampleEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glFramebufferTexture2DMultisampleEXT");
@@ -4197,10 +3487,6 @@ bool callGlFramebufferTexture2DMultisampleIMG(Stack* stack, bool pushReturn) {
         if (glFramebufferTexture2DMultisampleIMG != nullptr) {
             glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level,
                                                  samples);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTexture2DMultisampleIMG returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glFramebufferTexture2DMultisampleIMG");
@@ -4224,10 +3510,6 @@ bool callGlFramebufferTexture3DOES(Stack* stack, bool pushReturn) {
                    target, attachment, textarget, texture, level, zoffset);
         if (glFramebufferTexture3DOES != nullptr) {
             glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTexture3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture3DOES");
         }
@@ -4252,10 +3534,6 @@ bool callGlFramebufferTextureMultiviewOVR(Stack* stack, bool pushReturn) {
         if (glFramebufferTextureMultiviewOVR != nullptr) {
             glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex,
                                              numViews);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTextureMultiviewOVR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glFramebufferTextureMultiviewOVR");
@@ -4277,10 +3555,6 @@ bool callGlFramebufferTextureOES(Stack* stack, bool pushReturn) {
                    texture, level);
         if (glFramebufferTextureOES != nullptr) {
             glFramebufferTextureOES(target, attachment, texture, level);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTextureOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTextureOES");
         }
@@ -4298,10 +3572,6 @@ bool callGlGenFencesNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenFencesNV(%" PRId32 ", %p)", n, fences);
         if (glGenFencesNV != nullptr) {
             glGenFencesNV(n, fences);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenFencesNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenFencesNV");
         }
@@ -4322,10 +3592,6 @@ bool callGlGenPathsNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenPathsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenPathsNV");
         }
@@ -4343,10 +3609,6 @@ bool callGlGenPerfMonitorsAMD(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenPerfMonitorsAMD(%" PRId32 ", %p)", n, monitors);
         if (glGenPerfMonitorsAMD != nullptr) {
             glGenPerfMonitorsAMD(n, monitors);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenPerfMonitorsAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenPerfMonitorsAMD");
         }
@@ -4364,10 +3626,6 @@ bool callGlGenProgramPipelinesEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenProgramPipelinesEXT(%" PRId32 ", %p)", n, pipelines);
         if (glGenProgramPipelinesEXT != nullptr) {
             glGenProgramPipelinesEXT(n, pipelines);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenProgramPipelinesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenProgramPipelinesEXT");
         }
@@ -4385,10 +3643,6 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenQueriesEXT(%" PRId32 ", %p)", count, queries);
         if (glGenQueriesEXT != nullptr) {
             glGenQueriesEXT(count, queries);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenQueriesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenQueriesEXT");
         }
@@ -4406,10 +3660,6 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenVertexArraysOES(%" PRId32 ", %p)", count, arrays);
         if (glGenVertexArraysOES != nullptr) {
             glGenVertexArraysOES(count, arrays);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenVertexArraysOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenVertexArraysOES");
         }
@@ -4428,10 +3678,6 @@ bool callGlGetBufferPointervOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBufferPointervOES(%u, %u, %p)", target, pname, params);
         if (glGetBufferPointervOES != nullptr) {
             glGetBufferPointervOES(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBufferPointervOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBufferPointervOES");
         }
@@ -4449,10 +3695,6 @@ bool callGlGetCoverageModulationTableNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetCoverageModulationTableNV(%" PRId32 ", %p)", bufsize, v);
         if (glGetCoverageModulationTableNV != nullptr) {
             glGetCoverageModulationTableNV(bufsize, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetCoverageModulationTableNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetCoverageModulationTableNV");
         }
@@ -4473,10 +3715,6 @@ bool callGlGetDriverControlStringQCOM(Stack* stack, bool pushReturn) {
                    bufSize, length, driverControlString);
         if (glGetDriverControlStringQCOM != nullptr) {
             glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetDriverControlStringQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetDriverControlStringQCOM");
         }
@@ -4495,10 +3733,6 @@ bool callGlGetDriverControlsQCOM(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetDriverControlsQCOM(%p, %" PRId32 ", %p)", num, size, driverControls);
         if (glGetDriverControlsQCOM != nullptr) {
             glGetDriverControlsQCOM(num, size, driverControls);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetDriverControlsQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetDriverControlsQCOM");
         }
@@ -4517,10 +3751,6 @@ bool callGlGetFenceivNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetFenceivNV(%" PRIu32 ", %u, %p)", fence, pname, params);
         if (glGetFenceivNV != nullptr) {
             glGetFenceivNV(fence, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFenceivNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFenceivNV");
         }
@@ -4537,10 +3767,6 @@ bool callGlGetFirstPerfQueryIdINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetFirstPerfQueryIdINTEL(%p)", queryId);
         if (glGetFirstPerfQueryIdINTEL != nullptr) {
             glGetFirstPerfQueryIdINTEL(queryId);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFirstPerfQueryIdINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFirstPerfQueryIdINTEL");
         }
@@ -4559,10 +3785,6 @@ bool callGlGetFloatiVNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetFloati_vNV(%u, %" PRIu32 ", %p)", target, index, data);
         if (glGetFloati_vNV != nullptr) {
             glGetFloati_vNV(target, index, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFloati_vNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFloati_vNV");
         }
@@ -4582,10 +3804,6 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetGraphicsResetStatusEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT");
         }
@@ -4604,10 +3822,6 @@ bool callGlGetGraphicsResetStatusKHR(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %u", return_value);
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetGraphicsResetStatusKHR returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusKHR");
@@ -4634,10 +3848,6 @@ bool callGlGetImageHandleNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetImageHandleNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetImageHandleNV");
         }
@@ -4655,10 +3865,6 @@ bool callGlGetInteger64vAPPLE(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetInteger64vAPPLE(%u, %p)", pname, params);
         if (glGetInteger64vAPPLE != nullptr) {
             glGetInteger64vAPPLE(pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetInteger64vAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetInteger64vAPPLE");
         }
@@ -4677,10 +3883,6 @@ bool callGlGetIntegeriVEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetIntegeri_vEXT(%u, %" PRIu32 ", %p)", target, index, data);
         if (glGetIntegeri_vEXT != nullptr) {
             glGetIntegeri_vEXT(target, index, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetIntegeri_vEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetIntegeri_vEXT");
         }
@@ -4703,10 +3905,6 @@ bool callGlGetInternalformatSampleivNV(Stack* stack, bool pushReturn) {
                    target, internalformat, samples, pname, bufSize, params);
         if (glGetInternalformatSampleivNV != nullptr) {
             glGetInternalformatSampleivNV(target, internalformat, samples, pname, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetInternalformatSampleivNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetInternalformatSampleivNV");
         }
@@ -4724,10 +3922,6 @@ bool callGlGetNextPerfQueryIdINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetNextPerfQueryIdINTEL(%" PRIu32 ", %p)", queryId, nextQueryId);
         if (glGetNextPerfQueryIdINTEL != nullptr) {
             glGetNextPerfQueryIdINTEL(queryId, nextQueryId);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetNextPerfQueryIdINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetNextPerfQueryIdINTEL");
         }
@@ -4749,10 +3943,6 @@ bool callGlGetObjectLabelEXT(Stack* stack, bool pushReturn) {
                    bufSize, length, label);
         if (glGetObjectLabelEXT != nullptr) {
             glGetObjectLabelEXT(type, object, bufSize, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetObjectLabelEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetObjectLabelEXT");
         }
@@ -4770,10 +3960,6 @@ bool callGlGetPathCommandsNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPathCommandsNV(%" PRIu32 ", %p)", path, commands);
         if (glGetPathCommandsNV != nullptr) {
             glGetPathCommandsNV(path, commands);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathCommandsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathCommandsNV");
         }
@@ -4791,10 +3977,6 @@ bool callGlGetPathCoordsNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPathCoordsNV(%" PRIu32 ", %p)", path, coords);
         if (glGetPathCoordsNV != nullptr) {
             glGetPathCoordsNV(path, coords);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathCoordsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathCoordsNV");
         }
@@ -4812,10 +3994,6 @@ bool callGlGetPathDashArrayNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPathDashArrayNV(%" PRIu32 ", %p)", path, dashArray);
         if (glGetPathDashArrayNV != nullptr) {
             glGetPathDashArrayNV(path, dashArray);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathDashArrayNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathDashArrayNV");
         }
@@ -4839,10 +4017,6 @@ bool callGlGetPathLengthNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<float>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathLengthNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathLengthNV");
         }
@@ -4864,10 +4038,6 @@ bool callGlGetPathMetricRangeNV(Stack* stack, bool pushReturn) {
                    metricQueryMask, firstPathName, numPaths, stride, metrics);
         if (glGetPathMetricRangeNV != nullptr) {
             glGetPathMetricRangeNV(metricQueryMask, firstPathName, numPaths, stride, metrics);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathMetricRangeNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathMetricRangeNV");
         }
@@ -4892,10 +4062,6 @@ bool callGlGetPathMetricsNV(Stack* stack, bool pushReturn) {
         if (glGetPathMetricsNV != nullptr) {
             glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase, stride,
                                metrics);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathMetricsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathMetricsNV");
         }
@@ -4914,10 +4080,6 @@ bool callGlGetPathParameterfvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
         if (glGetPathParameterfvNV != nullptr) {
             glGetPathParameterfvNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathParameterfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathParameterfvNV");
         }
@@ -4936,10 +4098,6 @@ bool callGlGetPathParameterivNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
         if (glGetPathParameterivNV != nullptr) {
             glGetPathParameterivNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathParameterivNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathParameterivNV");
         }
@@ -4967,10 +4125,6 @@ bool callGlGetPathSpacingNV(Stack* stack, bool pushReturn) {
         if (glGetPathSpacingNV != nullptr) {
             glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale,
                                kerningScale, transformType, returnedSpacing);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPathSpacingNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPathSpacingNV");
         }
@@ -5004,10 +4158,6 @@ bool callGlGetPerfCounterInfoINTEL(Stack* stack, bool pushReturn) {
                                       counterDescLength, counterDesc, counterOffset,
                                       counterDataSize, counterTypeEnum, counterDataTypeEnum,
                                       rawCounterMaxValue);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfCounterInfoINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfCounterInfoINTEL");
         }
@@ -5029,10 +4179,6 @@ bool callGlGetPerfMonitorCounterDataAMD(Stack* stack, bool pushReturn) {
                    pname, dataSize, data, bytesWritten);
         if (glGetPerfMonitorCounterDataAMD != nullptr) {
             glGetPerfMonitorCounterDataAMD(monitor, pname, dataSize, data, bytesWritten);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorCounterDataAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfMonitorCounterDataAMD");
         }
@@ -5053,10 +4199,6 @@ bool callGlGetPerfMonitorCounterInfoAMD(Stack* stack, bool pushReturn) {
                    counter, pname, data);
         if (glGetPerfMonitorCounterInfoAMD != nullptr) {
             glGetPerfMonitorCounterInfoAMD(group, counter, pname, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorCounterInfoAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfMonitorCounterInfoAMD");
         }
@@ -5079,10 +4221,6 @@ bool callGlGetPerfMonitorCounterStringAMD(Stack* stack, bool pushReturn) {
                    group, counter, bufSize, length, counterString);
         if (glGetPerfMonitorCounterStringAMD != nullptr) {
             glGetPerfMonitorCounterStringAMD(group, counter, bufSize, length, counterString);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorCounterStringAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glGetPerfMonitorCounterStringAMD");
@@ -5106,10 +4244,6 @@ bool callGlGetPerfMonitorCountersAMD(Stack* stack, bool pushReturn) {
         if (glGetPerfMonitorCountersAMD != nullptr) {
             glGetPerfMonitorCountersAMD(group, numCounters, maxActiveCounters, counterSize,
                                         counters);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorCountersAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfMonitorCountersAMD");
         }
@@ -5130,10 +4264,6 @@ bool callGlGetPerfMonitorGroupStringAMD(Stack* stack, bool pushReturn) {
                    bufSize, length, groupString);
         if (glGetPerfMonitorGroupStringAMD != nullptr) {
             glGetPerfMonitorGroupStringAMD(group, bufSize, length, groupString);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorGroupStringAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfMonitorGroupStringAMD");
         }
@@ -5152,10 +4282,6 @@ bool callGlGetPerfMonitorGroupsAMD(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPerfMonitorGroupsAMD(%p, %" PRId32 ", %p)", numGroups, groupsSize, groups);
         if (glGetPerfMonitorGroupsAMD != nullptr) {
             glGetPerfMonitorGroupsAMD(numGroups, groupsSize, groups);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfMonitorGroupsAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfMonitorGroupsAMD");
         }
@@ -5177,10 +4303,6 @@ bool callGlGetPerfQueryDataINTEL(Stack* stack, bool pushReturn) {
                    queryHandle, flag, dataSize, data, bytesWritten);
         if (glGetPerfQueryDataINTEL != nullptr) {
             glGetPerfQueryDataINTEL(queryHandle, flag, dataSize, data, bytesWritten);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfQueryDataINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfQueryDataINTEL");
         }
@@ -5198,10 +4320,6 @@ bool callGlGetPerfQueryIdByNameINTEL(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetPerfQueryIdByNameINTEL(%p, %p)", queryName, queryId);
         if (glGetPerfQueryIdByNameINTEL != nullptr) {
             glGetPerfQueryIdByNameINTEL(queryName, queryId);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfQueryIdByNameINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfQueryIdByNameINTEL");
         }
@@ -5226,10 +4344,6 @@ bool callGlGetPerfQueryInfoINTEL(Stack* stack, bool pushReturn) {
         if (glGetPerfQueryInfoINTEL != nullptr) {
             glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters,
                                     noInstances, capsMask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetPerfQueryInfoINTEL returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetPerfQueryInfoINTEL");
         }
@@ -5251,10 +4365,6 @@ bool callGlGetProgramBinaryOES(Stack* stack, bool pushReturn) {
                    buffer_size, bytes_written, binary_format, binary);
         if (glGetProgramBinaryOES != nullptr) {
             glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramBinaryOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramBinaryOES");
         }
@@ -5275,10 +4385,6 @@ bool callGlGetProgramPipelineInfoLogEXT(Stack* stack, bool pushReturn) {
                    bufSize, length, infoLog);
         if (glGetProgramPipelineInfoLogEXT != nullptr) {
             glGetProgramPipelineInfoLogEXT(pipeline, bufSize, length, infoLog);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramPipelineInfoLogEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramPipelineInfoLogEXT");
         }
@@ -5297,10 +4403,6 @@ bool callGlGetProgramPipelineivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetProgramPipelineivEXT(%" PRIu32 ", %u, %p)", pipeline, pname, params);
         if (glGetProgramPipelineivEXT != nullptr) {
             glGetProgramPipelineivEXT(pipeline, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramPipelineivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramPipelineivEXT");
         }
@@ -5327,10 +4429,6 @@ bool callGlGetProgramResourcefvNV(Stack* stack, bool pushReturn) {
         if (glGetProgramResourcefvNV != nullptr) {
             glGetProgramResourcefvNV(program, programInterface, index, propCount, props, bufSize,
                                      length, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramResourcefvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramResourcefvNV");
         }
@@ -5349,10 +4447,6 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjecti64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjecti64vEXT != nullptr) {
             glGetQueryObjecti64vEXT(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjecti64vEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjecti64vEXT");
         }
@@ -5371,10 +4465,6 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjectivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjectivEXT != nullptr) {
             glGetQueryObjectivEXT(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjectivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectivEXT");
         }
@@ -5393,10 +4483,6 @@ bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjectui64vEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjectui64vEXT != nullptr) {
             glGetQueryObjectui64vEXT(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjectui64vEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectui64vEXT");
         }
@@ -5415,10 +4501,6 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjectuivEXT(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjectuivEXT != nullptr) {
             glGetQueryObjectuivEXT(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjectuivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectuivEXT");
         }
@@ -5437,10 +4519,6 @@ bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryivEXT(%u, %u, %p)", target, parameter, value);
         if (glGetQueryivEXT != nullptr) {
             glGetQueryivEXT(target, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryivEXT");
         }
@@ -5459,10 +4537,6 @@ bool callGlGetSamplerParameterIivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIivOES != nullptr) {
             glGetSamplerParameterIivOES(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIivOES");
         }
@@ -5481,10 +4555,6 @@ bool callGlGetSamplerParameterIuivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIuivOES != nullptr) {
             glGetSamplerParameterIuivOES(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIuivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIuivOES");
         }
@@ -5506,10 +4576,6 @@ bool callGlGetSyncivAPPLE(Stack* stack, bool pushReturn) {
                    length, values);
         if (glGetSyncivAPPLE != nullptr) {
             glGetSyncivAPPLE(sync, pname, bufSize, length, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSyncivAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSyncivAPPLE");
         }
@@ -5528,10 +4594,6 @@ bool callGlGetTexParameterIivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIivOES(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIivOES != nullptr) {
             glGetTexParameterIivOES(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIivOES");
         }
@@ -5550,10 +4612,6 @@ bool callGlGetTexParameterIuivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIuivOES(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIuivOES != nullptr) {
             glGetTexParameterIuivOES(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIuivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIuivOES");
         }
@@ -5573,10 +4631,6 @@ bool callGlGetTextureHandleNV(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu64 "", return_value);
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTextureHandleNV returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTextureHandleNV");
@@ -5599,10 +4653,6 @@ bool callGlGetTextureSamplerHandleNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTextureSamplerHandleNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTextureSamplerHandleNV");
         }
@@ -5623,10 +4673,6 @@ bool callGlGetTranslatedShaderSourceANGLE(Stack* stack, bool pushReturn) {
                    bufsize, length, source);
         if (glGetTranslatedShaderSourceANGLE != nullptr) {
             glGetTranslatedShaderSourceANGLE(shader, bufsize, length, source);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTranslatedShaderSourceANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glGetTranslatedShaderSourceANGLE");
@@ -5648,10 +4694,6 @@ bool callGlGetnUniformfvEXT(Stack* stack, bool pushReturn) {
                    location, bufSize, params);
         if (glGetnUniformfvEXT != nullptr) {
             glGetnUniformfvEXT(program, location, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformfvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformfvEXT");
         }
@@ -5672,10 +4714,6 @@ bool callGlGetnUniformfvKHR(Stack* stack, bool pushReturn) {
                    location, bufSize, params);
         if (glGetnUniformfvKHR != nullptr) {
             glGetnUniformfvKHR(program, location, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformfvKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformfvKHR");
         }
@@ -5696,10 +4734,6 @@ bool callGlGetnUniformivEXT(Stack* stack, bool pushReturn) {
                    location, bufSize, params);
         if (glGetnUniformivEXT != nullptr) {
             glGetnUniformivEXT(program, location, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformivEXT");
         }
@@ -5720,10 +4754,6 @@ bool callGlGetnUniformivKHR(Stack* stack, bool pushReturn) {
                    location, bufSize, params);
         if (glGetnUniformivKHR != nullptr) {
             glGetnUniformivKHR(program, location, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformivKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformivKHR");
         }
@@ -5744,10 +4774,6 @@ bool callGlGetnUniformuivKHR(Stack* stack, bool pushReturn) {
                    location, bufSize, params);
         if (glGetnUniformuivKHR != nullptr) {
             glGetnUniformuivKHR(program, location, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformuivKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformuivKHR");
         }
@@ -5765,10 +4791,6 @@ bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glInsertEventMarkerEXT(%" PRId32 ", %p)", length, marker);
         if (glInsertEventMarkerEXT != nullptr) {
             glInsertEventMarkerEXT(length, marker);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glInsertEventMarkerEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glInsertEventMarkerEXT");
         }
@@ -5789,10 +4811,6 @@ bool callGlInterpolatePathsNV(Stack* stack, bool pushReturn) {
                    pathA, pathB, weight);
         if (glInterpolatePathsNV != nullptr) {
             glInterpolatePathsNV(resultPath, pathA, pathB, weight);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glInterpolatePathsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glInterpolatePathsNV");
         }
@@ -5813,10 +4831,6 @@ bool callGlIsEnablediNV(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnablediNV returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsEnablediNV");
@@ -5839,10 +4853,6 @@ bool callGlIsEnablediOES(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnablediOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsEnablediOES");
         }
@@ -5862,10 +4872,6 @@ bool callGlIsFenceNV(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsFenceNV returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsFenceNV");
@@ -5887,10 +4893,6 @@ bool callGlIsImageHandleResidentNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsImageHandleResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsImageHandleResidentNV");
         }
@@ -5910,10 +4912,6 @@ bool callGlIsPathNV(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsPathNV returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsPathNV");
@@ -5938,10 +4936,6 @@ bool callGlIsPointInFillPathNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsPointInFillPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsPointInFillPathNV");
         }
@@ -5964,10 +4958,6 @@ bool callGlIsPointInStrokePathNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsPointInStrokePathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsPointInStrokePathNV");
         }
@@ -5987,10 +4977,6 @@ bool callGlIsProgramPipelineEXT(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsProgramPipelineEXT returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsProgramPipelineEXT");
@@ -6012,10 +4998,6 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsQueryEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsQueryEXT");
         }
@@ -6035,10 +5017,6 @@ bool callGlIsSyncAPPLE(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsSyncAPPLE returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsSyncAPPLE");
@@ -6060,10 +5038,6 @@ bool callGlIsTextureHandleResidentNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsTextureHandleResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsTextureHandleResidentNV");
         }
@@ -6083,10 +5057,6 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsVertexArrayOES returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsVertexArrayOES");
@@ -6108,10 +5078,6 @@ bool callGlLabelObjectEXT(Stack* stack, bool pushReturn) {
                    label);
         if (glLabelObjectEXT != nullptr) {
             glLabelObjectEXT(type, object, length, label);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glLabelObjectEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glLabelObjectEXT");
         }
@@ -6128,10 +5094,6 @@ bool callGlMakeImageHandleNonResidentNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMakeImageHandleNonResidentNV(%" PRIu64 ")", handle);
         if (glMakeImageHandleNonResidentNV != nullptr) {
             glMakeImageHandleNonResidentNV(handle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMakeImageHandleNonResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMakeImageHandleNonResidentNV");
         }
@@ -6149,10 +5111,6 @@ bool callGlMakeImageHandleResidentNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMakeImageHandleResidentNV(%" PRIu64 ", %u)", handle, access);
         if (glMakeImageHandleResidentNV != nullptr) {
             glMakeImageHandleResidentNV(handle, access);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMakeImageHandleResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMakeImageHandleResidentNV");
         }
@@ -6169,10 +5127,6 @@ bool callGlMakeTextureHandleNonResidentNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMakeTextureHandleNonResidentNV(%" PRIu64 ")", handle);
         if (glMakeTextureHandleNonResidentNV != nullptr) {
             glMakeTextureHandleNonResidentNV(handle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMakeTextureHandleNonResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glMakeTextureHandleNonResidentNV");
@@ -6190,10 +5144,6 @@ bool callGlMakeTextureHandleResidentNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMakeTextureHandleResidentNV(%" PRIu64 ")", handle);
         if (glMakeTextureHandleResidentNV != nullptr) {
             glMakeTextureHandleResidentNV(handle);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMakeTextureHandleResidentNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMakeTextureHandleResidentNV");
         }
@@ -6214,10 +5164,6 @@ bool callGlMapBufferOES(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %p", return_value);
             if (pushReturn) {
                 stack->push<void*>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMapBufferOES returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMapBufferOES");
@@ -6243,10 +5189,6 @@ bool callGlMapBufferRangeEXT(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMapBufferRangeEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMapBufferRangeEXT");
         }
@@ -6264,10 +5206,6 @@ bool callGlMatrixLoad3x2fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixLoad3x2fNV(%u, %p)", matrixMode, m);
         if (glMatrixLoad3x2fNV != nullptr) {
             glMatrixLoad3x2fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixLoad3x2fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixLoad3x2fNV");
         }
@@ -6285,10 +5223,6 @@ bool callGlMatrixLoad3x3fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixLoad3x3fNV(%u, %p)", matrixMode, m);
         if (glMatrixLoad3x3fNV != nullptr) {
             glMatrixLoad3x3fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixLoad3x3fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixLoad3x3fNV");
         }
@@ -6306,10 +5240,6 @@ bool callGlMatrixLoadTranspose3x3fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixLoadTranspose3x3fNV(%u, %p)", matrixMode, m);
         if (glMatrixLoadTranspose3x3fNV != nullptr) {
             glMatrixLoadTranspose3x3fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixLoadTranspose3x3fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixLoadTranspose3x3fNV");
         }
@@ -6327,10 +5257,6 @@ bool callGlMatrixMult3x2fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixMult3x2fNV(%u, %p)", matrixMode, m);
         if (glMatrixMult3x2fNV != nullptr) {
             glMatrixMult3x2fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixMult3x2fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixMult3x2fNV");
         }
@@ -6348,10 +5274,6 @@ bool callGlMatrixMult3x3fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixMult3x3fNV(%u, %p)", matrixMode, m);
         if (glMatrixMult3x3fNV != nullptr) {
             glMatrixMult3x3fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixMult3x3fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixMult3x3fNV");
         }
@@ -6369,10 +5291,6 @@ bool callGlMatrixMultTranspose3x3fNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMatrixMultTranspose3x3fNV(%u, %p)", matrixMode, m);
         if (glMatrixMultTranspose3x3fNV != nullptr) {
             glMatrixMultTranspose3x3fNV(matrixMode, m);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMatrixMultTranspose3x3fNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMatrixMultTranspose3x3fNV");
         }
@@ -6392,10 +5310,6 @@ bool callGlMultiDrawArraysEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMultiDrawArraysEXT(%u, %p, %p, %" PRId32 ")", mode, first, count, primcount);
         if (glMultiDrawArraysEXT != nullptr) {
             glMultiDrawArraysEXT(mode, first, count, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawArraysEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMultiDrawArraysEXT");
         }
@@ -6416,10 +5330,6 @@ bool callGlMultiDrawArraysIndirectEXT(Stack* stack, bool pushReturn) {
                    drawcount, stride);
         if (glMultiDrawArraysIndirectEXT != nullptr) {
             glMultiDrawArraysIndirectEXT(mode, indirect, drawcount, stride);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawArraysIndirectEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMultiDrawArraysIndirectEXT");
         }
@@ -6442,10 +5352,6 @@ bool callGlMultiDrawElementsBaseVertexEXT(Stack* stack, bool pushReturn) {
                    type, indices, primcount, basevertex);
         if (glMultiDrawElementsBaseVertexEXT != nullptr) {
             glMultiDrawElementsBaseVertexEXT(mode, count, type, indices, primcount, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawElementsBaseVertexEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glMultiDrawElementsBaseVertexEXT");
@@ -6469,10 +5375,6 @@ bool callGlMultiDrawElementsBaseVertexOES(Stack* stack, bool pushReturn) {
                    type, indices, primcount, basevertex);
         if (glMultiDrawElementsBaseVertexOES != nullptr) {
             glMultiDrawElementsBaseVertexOES(mode, count, type, indices, primcount, basevertex);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawElementsBaseVertexOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glMultiDrawElementsBaseVertexOES");
@@ -6495,10 +5397,6 @@ bool callGlMultiDrawElementsEXT(Stack* stack, bool pushReturn) {
                    indices, primcount);
         if (glMultiDrawElementsEXT != nullptr) {
             glMultiDrawElementsEXT(mode, count, type, indices, primcount);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawElementsEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMultiDrawElementsEXT");
         }
@@ -6520,10 +5418,6 @@ bool callGlMultiDrawElementsIndirectEXT(Stack* stack, bool pushReturn) {
                    type, indirect, drawcount, stride);
         if (glMultiDrawElementsIndirectEXT != nullptr) {
             glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMultiDrawElementsIndirectEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMultiDrawElementsIndirectEXT");
         }
@@ -6545,10 +5439,6 @@ bool callGlNamedFramebufferSampleLocationsfvNV(Stack* stack, bool pushReturn) {
                    framebuffer, start, count, v);
         if (glNamedFramebufferSampleLocationsfvNV != nullptr) {
             glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glNamedFramebufferSampleLocationsfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glNamedFramebufferSampleLocationsfvNV");
@@ -6567,10 +5457,6 @@ bool callGlPatchParameteriOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPatchParameteriOES(%u, %" PRId32 ")", pname, value);
         if (glPatchParameteriOES != nullptr) {
             glPatchParameteriOES(pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPatchParameteriOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPatchParameteriOES");
         }
@@ -6593,10 +5479,6 @@ bool callGlPathCommandsNV(Stack* stack, bool pushReturn) {
                    numCommands, commands, numCoords, coordType, coords);
         if (glPathCommandsNV != nullptr) {
             glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathCommandsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathCommandsNV");
         }
@@ -6617,10 +5499,6 @@ bool callGlPathCoordsNV(Stack* stack, bool pushReturn) {
                    coords);
         if (glPathCoordsNV != nullptr) {
             glPathCoordsNV(path, numCoords, coordType, coords);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathCoordsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathCoordsNV");
         }
@@ -6637,10 +5515,6 @@ bool callGlPathCoverDepthFuncNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathCoverDepthFuncNV(%u)", func);
         if (glPathCoverDepthFuncNV != nullptr) {
             glPathCoverDepthFuncNV(func);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathCoverDepthFuncNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathCoverDepthFuncNV");
         }
@@ -6659,10 +5533,6 @@ bool callGlPathDashArrayNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathDashArrayNV(%" PRIu32 ", %" PRId32 ", %p)", path, dashCount, dashArray);
         if (glPathDashArrayNV != nullptr) {
             glPathDashArrayNV(path, dashCount, dashArray);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathDashArrayNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathDashArrayNV");
         }
@@ -6695,10 +5565,6 @@ bool callGlPathGlyphIndexArrayNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathGlyphIndexArrayNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathGlyphIndexArrayNV");
         }
@@ -6725,10 +5591,6 @@ bool callGlPathGlyphIndexRangeNV(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %u", return_value);
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathGlyphIndexRangeNV returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathGlyphIndexRangeNV");
@@ -6758,10 +5620,6 @@ bool callGlPathGlyphRangeNV(Stack* stack, bool pushReturn) {
         if (glPathGlyphRangeNV != nullptr) {
             glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph,
                                numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathGlyphRangeNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathGlyphRangeNV");
         }
@@ -6791,10 +5649,6 @@ bool callGlPathGlyphsNV(Stack* stack, bool pushReturn) {
         if (glPathGlyphsNV != nullptr) {
             glPathGlyphsNV(firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type,
                            charcodes, handleMissingGlyphs, pathParameterTemplate, emScale);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathGlyphsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathGlyphsNV");
         }
@@ -6828,10 +5682,6 @@ bool callGlPathMemoryGlyphIndexArrayNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathMemoryGlyphIndexArrayNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathMemoryGlyphIndexArrayNV");
         }
@@ -6850,10 +5700,6 @@ bool callGlPathParameterfNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathParameterfNV(%" PRIu32 ", %u, %f)", path, pname, value);
         if (glPathParameterfNV != nullptr) {
             glPathParameterfNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathParameterfNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathParameterfNV");
         }
@@ -6872,10 +5718,6 @@ bool callGlPathParameterfvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathParameterfvNV(%" PRIu32 ", %u, %p)", path, pname, value);
         if (glPathParameterfvNV != nullptr) {
             glPathParameterfvNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathParameterfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathParameterfvNV");
         }
@@ -6894,10 +5736,6 @@ bool callGlPathParameteriNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathParameteriNV(%" PRIu32 ", %u, %" PRId32 ")", path, pname, value);
         if (glPathParameteriNV != nullptr) {
             glPathParameteriNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathParameteriNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathParameteriNV");
         }
@@ -6916,10 +5754,6 @@ bool callGlPathParameterivNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathParameterivNV(%" PRIu32 ", %u, %p)", path, pname, value);
         if (glPathParameterivNV != nullptr) {
             glPathParameterivNV(path, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathParameterivNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathParameterivNV");
         }
@@ -6937,10 +5771,6 @@ bool callGlPathStencilDepthOffsetNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathStencilDepthOffsetNV(%f, %f)", factor, units);
         if (glPathStencilDepthOffsetNV != nullptr) {
             glPathStencilDepthOffsetNV(factor, units);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathStencilDepthOffsetNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathStencilDepthOffsetNV");
         }
@@ -6959,10 +5789,6 @@ bool callGlPathStencilFuncNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPathStencilFuncNV(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
         if (glPathStencilFuncNV != nullptr) {
             glPathStencilFuncNV(func, ref, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathStencilFuncNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathStencilFuncNV");
         }
@@ -6983,10 +5809,6 @@ bool callGlPathStringNV(Stack* stack, bool pushReturn) {
                    pathString);
         if (glPathStringNV != nullptr) {
             glPathStringNV(path, format, length, pathString);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathStringNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathStringNV");
         }
@@ -7014,10 +5836,6 @@ bool callGlPathSubCommandsNV(Stack* stack, bool pushReturn) {
         if (glPathSubCommandsNV != nullptr) {
             glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands,
                                 numCoords, coordType, coords);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathSubCommandsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathSubCommandsNV");
         }
@@ -7039,10 +5857,6 @@ bool callGlPathSubCoordsNV(Stack* stack, bool pushReturn) {
                    coordStart, numCoords, coordType, coords);
         if (glPathSubCoordsNV != nullptr) {
             glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPathSubCoordsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPathSubCoordsNV");
         }
@@ -7072,10 +5886,6 @@ bool callGlPointAlongPathNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPointAlongPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPointAlongPathNV");
         }
@@ -7093,10 +5903,6 @@ bool callGlPolygonModeNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPolygonModeNV(%u, %u)", face, mode);
         if (glPolygonModeNV != nullptr) {
             glPolygonModeNV(face, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPolygonModeNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPolygonModeNV");
         }
@@ -7112,10 +5918,6 @@ bool callGlPopGroupMarkerEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPopGroupMarkerEXT()");
         if (glPopGroupMarkerEXT != nullptr) {
             glPopGroupMarkerEXT();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPopGroupMarkerEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPopGroupMarkerEXT");
         }
@@ -7140,10 +5942,6 @@ bool callGlPrimitiveBoundingBoxOES(Stack* stack, bool pushReturn) {
                    minW, maxX, maxY, maxZ, maxW);
         if (glPrimitiveBoundingBoxOES != nullptr) {
             glPrimitiveBoundingBoxOES(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPrimitiveBoundingBoxOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPrimitiveBoundingBoxOES");
         }
@@ -7164,10 +5962,6 @@ bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
                    binary, binary_size);
         if (glProgramBinaryOES != nullptr) {
             glProgramBinaryOES(program, binary_format, binary, binary_size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramBinaryOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramBinaryOES");
         }
@@ -7186,10 +5980,6 @@ bool callGlProgramParameteriEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glProgramParameteriEXT(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
         if (glProgramParameteriEXT != nullptr) {
             glProgramParameteriEXT(program, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramParameteriEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramParameteriEXT");
         }
@@ -7211,10 +6001,6 @@ bool callGlProgramPathFragmentInputGenNV(Stack* stack, bool pushReturn) {
                    program, location, genMode, components, coeffs);
         if (glProgramPathFragmentInputGenNV != nullptr) {
             glProgramPathFragmentInputGenNV(program, location, genMode, components, coeffs);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramPathFragmentInputGenNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramPathFragmentInputGenNV");
         }
@@ -7233,10 +6019,6 @@ bool callGlProgramUniform1fEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glProgramUniform1fEXT(%" PRIu32 ", %" PRId32 ", %f)", program, location, v0);
         if (glProgramUniform1fEXT != nullptr) {
             glProgramUniform1fEXT(program, location, v0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1fEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1fEXT");
         }
@@ -7257,10 +6039,6 @@ bool callGlProgramUniform1fvEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform1fvEXT != nullptr) {
             glProgramUniform1fvEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1fvEXT");
         }
@@ -7280,10 +6058,6 @@ bool callGlProgramUniform1iEXT(Stack* stack, bool pushReturn) {
                    location, v0);
         if (glProgramUniform1iEXT != nullptr) {
             glProgramUniform1iEXT(program, location, v0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1iEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1iEXT");
         }
@@ -7304,10 +6078,6 @@ bool callGlProgramUniform1ivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform1ivEXT != nullptr) {
             glProgramUniform1ivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1ivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1ivEXT");
         }
@@ -7327,10 +6097,6 @@ bool callGlProgramUniform1uiEXT(Stack* stack, bool pushReturn) {
                    location, v0);
         if (glProgramUniform1uiEXT != nullptr) {
             glProgramUniform1uiEXT(program, location, v0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1uiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1uiEXT");
         }
@@ -7351,10 +6117,6 @@ bool callGlProgramUniform1uivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform1uivEXT != nullptr) {
             glProgramUniform1uivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1uivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1uivEXT");
         }
@@ -7375,10 +6137,6 @@ bool callGlProgramUniform2fEXT(Stack* stack, bool pushReturn) {
                    v1);
         if (glProgramUniform2fEXT != nullptr) {
             glProgramUniform2fEXT(program, location, v0, v1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2fEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2fEXT");
         }
@@ -7399,10 +6157,6 @@ bool callGlProgramUniform2fvEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform2fvEXT != nullptr) {
             glProgramUniform2fvEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2fvEXT");
         }
@@ -7423,10 +6177,6 @@ bool callGlProgramUniform2iEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1);
         if (glProgramUniform2iEXT != nullptr) {
             glProgramUniform2iEXT(program, location, v0, v1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2iEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2iEXT");
         }
@@ -7447,10 +6197,6 @@ bool callGlProgramUniform2ivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform2ivEXT != nullptr) {
             glProgramUniform2ivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2ivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2ivEXT");
         }
@@ -7471,10 +6217,6 @@ bool callGlProgramUniform2uiEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1);
         if (glProgramUniform2uiEXT != nullptr) {
             glProgramUniform2uiEXT(program, location, v0, v1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2uiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2uiEXT");
         }
@@ -7495,10 +6237,6 @@ bool callGlProgramUniform2uivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform2uivEXT != nullptr) {
             glProgramUniform2uivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2uivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2uivEXT");
         }
@@ -7520,10 +6258,6 @@ bool callGlProgramUniform3fEXT(Stack* stack, bool pushReturn) {
                    v0, v1, v2);
         if (glProgramUniform3fEXT != nullptr) {
             glProgramUniform3fEXT(program, location, v0, v1, v2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3fEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3fEXT");
         }
@@ -7544,10 +6278,6 @@ bool callGlProgramUniform3fvEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform3fvEXT != nullptr) {
             glProgramUniform3fvEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3fvEXT");
         }
@@ -7570,10 +6300,6 @@ bool callGlProgramUniform3iEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1, v2);
         if (glProgramUniform3iEXT != nullptr) {
             glProgramUniform3iEXT(program, location, v0, v1, v2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3iEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3iEXT");
         }
@@ -7594,10 +6320,6 @@ bool callGlProgramUniform3ivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform3ivEXT != nullptr) {
             glProgramUniform3ivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3ivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3ivEXT");
         }
@@ -7620,10 +6342,6 @@ bool callGlProgramUniform3uiEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1, v2);
         if (glProgramUniform3uiEXT != nullptr) {
             glProgramUniform3uiEXT(program, location, v0, v1, v2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3uiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3uiEXT");
         }
@@ -7644,10 +6362,6 @@ bool callGlProgramUniform3uivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform3uivEXT != nullptr) {
             glProgramUniform3uivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3uivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3uivEXT");
         }
@@ -7670,10 +6384,6 @@ bool callGlProgramUniform4fEXT(Stack* stack, bool pushReturn) {
                    location, v0, v1, v2, v3);
         if (glProgramUniform4fEXT != nullptr) {
             glProgramUniform4fEXT(program, location, v0, v1, v2, v3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4fEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4fEXT");
         }
@@ -7694,10 +6404,6 @@ bool callGlProgramUniform4fvEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform4fvEXT != nullptr) {
             glProgramUniform4fvEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4fvEXT");
         }
@@ -7721,10 +6427,6 @@ bool callGlProgramUniform4iEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1, v2, v3);
         if (glProgramUniform4iEXT != nullptr) {
             glProgramUniform4iEXT(program, location, v0, v1, v2, v3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4iEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4iEXT");
         }
@@ -7745,10 +6447,6 @@ bool callGlProgramUniform4ivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform4ivEXT != nullptr) {
             glProgramUniform4ivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4ivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4ivEXT");
         }
@@ -7772,10 +6470,6 @@ bool callGlProgramUniform4uiEXT(Stack* stack, bool pushReturn) {
                    program, location, v0, v1, v2, v3);
         if (glProgramUniform4uiEXT != nullptr) {
             glProgramUniform4uiEXT(program, location, v0, v1, v2, v3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4uiEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4uiEXT");
         }
@@ -7796,10 +6490,6 @@ bool callGlProgramUniform4uivEXT(Stack* stack, bool pushReturn) {
                    location, count, value);
         if (glProgramUniform4uivEXT != nullptr) {
             glProgramUniform4uivEXT(program, location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4uivEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4uivEXT");
         }
@@ -7819,10 +6509,6 @@ bool callGlProgramUniformHandleui64NV(Stack* stack, bool pushReturn) {
                    location, value);
         if (glProgramUniformHandleui64NV != nullptr) {
             glProgramUniformHandleui64NV(program, location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformHandleui64NV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformHandleui64NV");
         }
@@ -7843,10 +6529,6 @@ bool callGlProgramUniformHandleui64vNV(Stack* stack, bool pushReturn) {
                    program, location, count, values);
         if (glProgramUniformHandleui64vNV != nullptr) {
             glProgramUniformHandleui64vNV(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformHandleui64vNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformHandleui64vNV");
         }
@@ -7869,10 +6551,6 @@ bool callGlProgramUniformMatrix2fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix2fvEXT != nullptr) {
             glProgramUniformMatrix2fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2fvEXT");
         }
@@ -7895,10 +6573,6 @@ bool callGlProgramUniformMatrix2x3fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix2x3fvEXT != nullptr) {
             glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2x3fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2x3fvEXT");
         }
@@ -7921,10 +6595,6 @@ bool callGlProgramUniformMatrix2x4fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix2x4fvEXT != nullptr) {
             glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2x4fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2x4fvEXT");
         }
@@ -7947,10 +6617,6 @@ bool callGlProgramUniformMatrix3fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix3fvEXT != nullptr) {
             glProgramUniformMatrix3fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3fvEXT");
         }
@@ -7973,10 +6639,6 @@ bool callGlProgramUniformMatrix3x2fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix3x2fvEXT != nullptr) {
             glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3x2fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3x2fvEXT");
         }
@@ -7999,10 +6661,6 @@ bool callGlProgramUniformMatrix3x4fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix3x4fvEXT != nullptr) {
             glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3x4fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3x4fvEXT");
         }
@@ -8025,10 +6683,6 @@ bool callGlProgramUniformMatrix4fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix4fvEXT != nullptr) {
             glProgramUniformMatrix4fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4fvEXT");
         }
@@ -8051,10 +6705,6 @@ bool callGlProgramUniformMatrix4x2fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix4x2fvEXT != nullptr) {
             glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4x2fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4x2fvEXT");
         }
@@ -8077,10 +6727,6 @@ bool callGlProgramUniformMatrix4x3fvEXT(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, value);
         if (glProgramUniformMatrix4x3fvEXT != nullptr) {
             glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4x3fvEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4x3fvEXT");
         }
@@ -8098,10 +6744,6 @@ bool callGlPushGroupMarkerEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPushGroupMarkerEXT(%" PRId32 ", %p)", length, marker);
         if (glPushGroupMarkerEXT != nullptr) {
             glPushGroupMarkerEXT(length, marker);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPushGroupMarkerEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPushGroupMarkerEXT");
         }
@@ -8119,10 +6761,6 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glQueryCounterEXT(%" PRIu32 ", %u)", query, target);
         if (glQueryCounterEXT != nullptr) {
             glQueryCounterEXT(query, target);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glQueryCounterEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glQueryCounterEXT");
         }
@@ -8140,10 +6778,6 @@ bool callGlRasterSamplesEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glRasterSamplesEXT(%" PRIu32 ", %" PRIu8 ")", samples, fixedsamplelocations);
         if (glRasterSamplesEXT != nullptr) {
             glRasterSamplesEXT(samples, fixedsamplelocations);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRasterSamplesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glRasterSamplesEXT");
         }
@@ -8161,10 +6795,6 @@ bool callGlReadBufferIndexedEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glReadBufferIndexedEXT(%u, %" PRId32 ")", src, index);
         if (glReadBufferIndexedEXT != nullptr) {
             glReadBufferIndexedEXT(src, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadBufferIndexedEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadBufferIndexedEXT");
         }
@@ -8181,10 +6811,6 @@ bool callGlReadBufferNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glReadBufferNV(%u)", mode);
         if (glReadBufferNV != nullptr) {
             glReadBufferNV(mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadBufferNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadBufferNV");
         }
@@ -8210,10 +6836,6 @@ bool callGlReadnPixelsEXT(Stack* stack, bool pushReturn) {
                    x, y, width, height, format, type, bufSize, data);
         if (glReadnPixelsEXT != nullptr) {
             glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadnPixelsEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadnPixelsEXT");
         }
@@ -8239,10 +6861,6 @@ bool callGlReadnPixelsKHR(Stack* stack, bool pushReturn) {
                    x, y, width, height, format, type, bufSize, data);
         if (glReadnPixelsKHR != nullptr) {
             glReadnPixelsKHR(x, y, width, height, format, type, bufSize, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadnPixelsKHR returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadnPixelsKHR");
         }
@@ -8265,10 +6883,6 @@ bool callGlRenderbufferStorageMultisampleANGLE(Stack* stack, bool pushReturn) {
                    target, samples, internalformat, width, height);
         if (glRenderbufferStorageMultisampleANGLE != nullptr) {
             glRenderbufferStorageMultisampleANGLE(target, samples, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisampleANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisampleANGLE");
@@ -8292,10 +6906,6 @@ bool callGlRenderbufferStorageMultisampleAPPLE(Stack* stack, bool pushReturn) {
                    target, samples, internalformat, width, height);
         if (glRenderbufferStorageMultisampleAPPLE != nullptr) {
             glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisampleAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisampleAPPLE");
@@ -8319,10 +6929,6 @@ bool callGlRenderbufferStorageMultisampleEXT(Stack* stack, bool pushReturn) {
                    target, samples, internalformat, width, height);
         if (glRenderbufferStorageMultisampleEXT != nullptr) {
             glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisampleEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisampleEXT");
@@ -8346,10 +6952,6 @@ bool callGlRenderbufferStorageMultisampleIMG(Stack* stack, bool pushReturn) {
                    target, samples, internalformat, width, height);
         if (glRenderbufferStorageMultisampleIMG != nullptr) {
             glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisampleIMG returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisampleIMG");
@@ -8373,10 +6975,6 @@ bool callGlRenderbufferStorageMultisampleNV(Stack* stack, bool pushReturn) {
                    target, samples, internalformat, width, height);
         if (glRenderbufferStorageMultisampleNV != nullptr) {
             glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisampleNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisampleNV");
@@ -8393,10 +6991,6 @@ bool callGlResolveDepthValuesNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glResolveDepthValuesNV()");
         if (glResolveDepthValuesNV != nullptr) {
             glResolveDepthValuesNV();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glResolveDepthValuesNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glResolveDepthValuesNV");
         }
@@ -8412,10 +7006,6 @@ bool callGlResolveMultisampleFramebufferAPPLE(Stack* stack, bool pushReturn) {
         GAPID_INFO("glResolveMultisampleFramebufferAPPLE()");
         if (glResolveMultisampleFramebufferAPPLE != nullptr) {
             glResolveMultisampleFramebufferAPPLE();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glResolveMultisampleFramebufferAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glResolveMultisampleFramebufferAPPLE");
@@ -8435,10 +7025,6 @@ bool callGlSamplerParameterIivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIivOES != nullptr) {
             glSamplerParameterIivOES(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIivOES");
         }
@@ -8457,10 +7043,6 @@ bool callGlSamplerParameterIuivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIuivOES(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIuivOES != nullptr) {
             glSamplerParameterIuivOES(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIuivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIuivOES");
         }
@@ -8479,10 +7061,6 @@ bool callGlScissorArrayvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glScissorArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
         if (glScissorArrayvNV != nullptr) {
             glScissorArrayvNV(first, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glScissorArrayvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glScissorArrayvNV");
         }
@@ -8505,10 +7083,6 @@ bool callGlScissorIndexedNV(Stack* stack, bool pushReturn) {
                    index, left, bottom, width, height);
         if (glScissorIndexedNV != nullptr) {
             glScissorIndexedNV(index, left, bottom, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glScissorIndexedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glScissorIndexedNV");
         }
@@ -8526,10 +7100,6 @@ bool callGlScissorIndexedvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glScissorIndexedvNV(%" PRIu32 ", %p)", index, v);
         if (glScissorIndexedvNV != nullptr) {
             glScissorIndexedvNV(index, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glScissorIndexedvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glScissorIndexedvNV");
         }
@@ -8552,10 +7122,6 @@ bool callGlSelectPerfMonitorCountersAMD(Stack* stack, bool pushReturn) {
                    monitor, enable, group, numCounters, counterList);
         if (glSelectPerfMonitorCountersAMD != nullptr) {
             glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters, counterList);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSelectPerfMonitorCountersAMD returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSelectPerfMonitorCountersAMD");
         }
@@ -8573,10 +7139,6 @@ bool callGlSetFenceNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSetFenceNV(%" PRIu32 ", %u)", fence, condition);
         if (glSetFenceNV != nullptr) {
             glSetFenceNV(fence, condition);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSetFenceNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSetFenceNV");
         }
@@ -8598,10 +7160,6 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
                    y, width, height, preserveMask);
         if (glStartTilingQCOM != nullptr) {
             glStartTilingQCOM(x, y, width, height, preserveMask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStartTilingQCOM returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStartTilingQCOM");
         }
@@ -8629,10 +7187,6 @@ bool callGlStencilFillPathInstancedNV(Stack* stack, bool pushReturn) {
         if (glStencilFillPathInstancedNV != nullptr) {
             glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask,
                                          transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilFillPathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilFillPathInstancedNV");
         }
@@ -8651,10 +7205,6 @@ bool callGlStencilFillPathNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glStencilFillPathNV(%" PRIu32 ", %u, %" PRIu32 ")", path, fillMode, mask);
         if (glStencilFillPathNV != nullptr) {
             glStencilFillPathNV(path, fillMode, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilFillPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilFillPathNV");
         }
@@ -8682,10 +7232,6 @@ bool callGlStencilStrokePathInstancedNV(Stack* stack, bool pushReturn) {
         if (glStencilStrokePathInstancedNV != nullptr) {
             glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask,
                                            transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilStrokePathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilStrokePathInstancedNV");
         }
@@ -8705,10 +7251,6 @@ bool callGlStencilStrokePathNV(Stack* stack, bool pushReturn) {
                    mask);
         if (glStencilStrokePathNV != nullptr) {
             glStencilStrokePathNV(path, reference, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilStrokePathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilStrokePathNV");
         }
@@ -8737,10 +7279,6 @@ bool callGlStencilThenCoverFillPathInstancedNV(Stack* stack, bool pushReturn) {
         if (glStencilThenCoverFillPathInstancedNV != nullptr) {
             glStencilThenCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode,
                                                   mask, coverMode, transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilThenCoverFillPathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glStencilThenCoverFillPathInstancedNV");
@@ -8762,10 +7300,6 @@ bool callGlStencilThenCoverFillPathNV(Stack* stack, bool pushReturn) {
                    mask, coverMode);
         if (glStencilThenCoverFillPathNV != nullptr) {
             glStencilThenCoverFillPathNV(path, fillMode, mask, coverMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilThenCoverFillPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilThenCoverFillPathNV");
         }
@@ -8795,10 +7329,6 @@ bool callGlStencilThenCoverStrokePathInstancedNV(Stack* stack, bool pushReturn) 
             glStencilThenCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase,
                                                     reference, mask, coverMode, transformType,
                                                     transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilThenCoverStrokePathInstancedNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function "
@@ -8821,10 +7351,6 @@ bool callGlStencilThenCoverStrokePathNV(Stack* stack, bool pushReturn) {
                    path, reference, mask, coverMode);
         if (glStencilThenCoverStrokePathNV != nullptr) {
             glStencilThenCoverStrokePathNV(path, reference, mask, coverMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilThenCoverStrokePathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilThenCoverStrokePathNV");
         }
@@ -8842,10 +7368,6 @@ bool callGlSubpixelPrecisionBiasNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSubpixelPrecisionBiasNV(%" PRIu32 ", %" PRIu32 ")", xbits, ybits);
         if (glSubpixelPrecisionBiasNV != nullptr) {
             glSubpixelPrecisionBiasNV(xbits, ybits);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSubpixelPrecisionBiasNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSubpixelPrecisionBiasNV");
         }
@@ -8866,10 +7388,6 @@ bool callGlTestFenceNV(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTestFenceNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTestFenceNV");
         }
@@ -8888,10 +7406,6 @@ bool callGlTexBufferOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexBufferOES(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
         if (glTexBufferOES != nullptr) {
             glTexBufferOES(target, internalformat, buffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBufferOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBufferOES");
         }
@@ -8913,10 +7427,6 @@ bool callGlTexBufferRangeOES(Stack* stack, bool pushReturn) {
                    internalformat, buffer, offset, size);
         if (glTexBufferRangeOES != nullptr) {
             glTexBufferRangeOES(target, internalformat, buffer, offset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBufferRangeOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBufferRangeOES");
         }
@@ -8946,10 +7456,6 @@ bool callGlTexImage3DOES(Stack* stack, bool pushReturn) {
         if (glTexImage3DOES != nullptr) {
             glTexImage3DOES(target, level, internalformat, width, height, depth, border, format,
                             type, pixels);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexImage3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexImage3DOES");
         }
@@ -8977,10 +7483,6 @@ bool callGlTexPageCommitmentARB(Stack* stack, bool pushReturn) {
         if (glTexPageCommitmentARB != nullptr) {
             glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                    commit);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexPageCommitmentARB returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexPageCommitmentARB");
         }
@@ -8999,10 +7501,6 @@ bool callGlTexParameterIivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIivOES(%u, %u, %p)", target, pname, params);
         if (glTexParameterIivOES != nullptr) {
             glTexParameterIivOES(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIivOES");
         }
@@ -9021,10 +7519,6 @@ bool callGlTexParameterIuivOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIuivOES(%u, %u, %p)", target, pname, params);
         if (glTexParameterIuivOES != nullptr) {
             glTexParameterIuivOES(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIuivOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIuivOES");
         }
@@ -9045,10 +7539,6 @@ bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
                    width);
         if (glTexStorage1DEXT != nullptr) {
             glTexStorage1DEXT(target, levels, format, width);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage1DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage1DEXT");
         }
@@ -9070,10 +7560,6 @@ bool callGlTexStorage2DEXT(Stack* stack, bool pushReturn) {
                    levels, format, width, height);
         if (glTexStorage2DEXT != nullptr) {
             glTexStorage2DEXT(target, levels, format, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage2DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage2DEXT");
         }
@@ -9096,10 +7582,6 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
                    target, levels, format, width, height, depth);
         if (glTexStorage3DEXT != nullptr) {
             glTexStorage3DEXT(target, levels, format, width, height, depth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage3DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage3DEXT");
         }
@@ -9130,10 +7612,6 @@ bool callGlTexSubImage3DOES(Stack* stack, bool pushReturn) {
         if (glTexSubImage3DOES != nullptr) {
             glTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                format, type, pixels);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexSubImage3DOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexSubImage3DOES");
         }
@@ -9155,10 +7633,6 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
                    target, levels, format, width);
         if (glTextureStorage1DEXT != nullptr) {
             glTextureStorage1DEXT(texture, target, levels, format, width);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTextureStorage1DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTextureStorage1DEXT");
         }
@@ -9182,10 +7656,6 @@ bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
                    texture, target, levels, format, width, height);
         if (glTextureStorage2DEXT != nullptr) {
             glTextureStorage2DEXT(texture, target, levels, format, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTextureStorage2DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTextureStorage2DEXT");
         }
@@ -9210,10 +7680,6 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
                    texture, target, levels, format, width, height, depth);
         if (glTextureStorage3DEXT != nullptr) {
             glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTextureStorage3DEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTextureStorage3DEXT");
         }
@@ -9241,10 +7707,6 @@ bool callGlTextureViewEXT(Stack* stack, bool pushReturn) {
         if (glTextureViewEXT != nullptr) {
             glTextureViewEXT(texture, target, origtexture, internalformat, minlevel, numlevels,
                              minlayer, numlayers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTextureViewEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTextureViewEXT");
         }
@@ -9272,10 +7734,6 @@ bool callGlTextureViewOES(Stack* stack, bool pushReturn) {
         if (glTextureViewOES != nullptr) {
             glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels,
                              minlayer, numlayers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTextureViewOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTextureViewOES");
         }
@@ -9296,10 +7754,6 @@ bool callGlTransformPathNV(Stack* stack, bool pushReturn) {
                    transformType, transformValues);
         if (glTransformPathNV != nullptr) {
             glTransformPathNV(resultPath, srcPath, transformType, transformValues);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTransformPathNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTransformPathNV");
         }
@@ -9317,10 +7771,6 @@ bool callGlUniformHandleui64NV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniformHandleui64NV(%" PRId32 ", %" PRIu64 ")", location, value);
         if (glUniformHandleui64NV != nullptr) {
             glUniformHandleui64NV(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformHandleui64NV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformHandleui64NV");
         }
@@ -9339,10 +7789,6 @@ bool callGlUniformHandleui64vNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniformHandleui64vNV(%" PRId32 ", %" PRId32 ", %p)", location, count, value);
         if (glUniformHandleui64vNV != nullptr) {
             glUniformHandleui64vNV(location, count, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformHandleui64vNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformHandleui64vNV");
         }
@@ -9363,10 +7809,6 @@ bool callGlUniformMatrix2x3fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix2x3fvNV != nullptr) {
             glUniformMatrix2x3fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix2x3fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2x3fvNV");
         }
@@ -9387,10 +7829,6 @@ bool callGlUniformMatrix2x4fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix2x4fvNV != nullptr) {
             glUniformMatrix2x4fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix2x4fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2x4fvNV");
         }
@@ -9411,10 +7849,6 @@ bool callGlUniformMatrix3x2fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix3x2fvNV != nullptr) {
             glUniformMatrix3x2fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix3x2fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3x2fvNV");
         }
@@ -9435,10 +7869,6 @@ bool callGlUniformMatrix3x4fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix3x4fvNV != nullptr) {
             glUniformMatrix3x4fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix3x4fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3x4fvNV");
         }
@@ -9459,10 +7889,6 @@ bool callGlUniformMatrix4x2fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix4x2fvNV != nullptr) {
             glUniformMatrix4x2fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix4x2fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4x2fvNV");
         }
@@ -9483,10 +7909,6 @@ bool callGlUniformMatrix4x3fvNV(Stack* stack, bool pushReturn) {
                    count, transpose, value);
         if (glUniformMatrix4x3fvNV != nullptr) {
             glUniformMatrix4x3fvNV(location, count, transpose, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix4x3fvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4x3fvNV");
         }
@@ -9507,10 +7929,6 @@ bool callGlUnmapBufferOES(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUnmapBufferOES returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUnmapBufferOES");
         }
@@ -9530,10 +7948,6 @@ bool callGlUseProgramStagesEXT(Stack* stack, bool pushReturn) {
                    program);
         if (glUseProgramStagesEXT != nullptr) {
             glUseProgramStagesEXT(pipeline, stages, program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUseProgramStagesEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUseProgramStagesEXT");
         }
@@ -9550,10 +7964,6 @@ bool callGlValidateProgramPipelineEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glValidateProgramPipelineEXT(%" PRIu32 ")", pipeline);
         if (glValidateProgramPipelineEXT != nullptr) {
             glValidateProgramPipelineEXT(pipeline);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glValidateProgramPipelineEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glValidateProgramPipelineEXT");
         }
@@ -9571,10 +7981,6 @@ bool callGlVertexAttribDivisorANGLE(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribDivisorANGLE(%" PRIu32 ", %" PRIu32 ")", index, divisor);
         if (glVertexAttribDivisorANGLE != nullptr) {
             glVertexAttribDivisorANGLE(index, divisor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribDivisorANGLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribDivisorANGLE");
         }
@@ -9592,10 +7998,6 @@ bool callGlVertexAttribDivisorEXT(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribDivisorEXT(%" PRIu32 ", %" PRIu32 ")", index, divisor);
         if (glVertexAttribDivisorEXT != nullptr) {
             glVertexAttribDivisorEXT(index, divisor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribDivisorEXT returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribDivisorEXT");
         }
@@ -9613,10 +8015,6 @@ bool callGlVertexAttribDivisorNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribDivisorNV(%" PRIu32 ", %" PRIu32 ")", index, divisor);
         if (glVertexAttribDivisorNV != nullptr) {
             glVertexAttribDivisorNV(index, divisor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribDivisorNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribDivisorNV");
         }
@@ -9635,10 +8033,6 @@ bool callGlViewportArrayvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glViewportArrayvNV(%" PRIu32 ", %" PRId32 ", %p)", first, count, v);
         if (glViewportArrayvNV != nullptr) {
             glViewportArrayvNV(first, count, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glViewportArrayvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glViewportArrayvNV");
         }
@@ -9659,10 +8053,6 @@ bool callGlViewportIndexedfNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glViewportIndexedfNV(%" PRIu32 ", %f, %f, %f, %f)", index, x, y, w, h);
         if (glViewportIndexedfNV != nullptr) {
             glViewportIndexedfNV(index, x, y, w, h);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glViewportIndexedfNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glViewportIndexedfNV");
         }
@@ -9680,10 +8070,6 @@ bool callGlViewportIndexedfvNV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glViewportIndexedfvNV(%" PRIu32 ", %p)", index, v);
         if (glViewportIndexedfvNV != nullptr) {
             glViewportIndexedfvNV(index, v);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glViewportIndexedfvNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glViewportIndexedfvNV");
         }
@@ -9702,10 +8088,6 @@ bool callGlWaitSyncAPPLE(Stack* stack, bool pushReturn) {
         GAPID_INFO("glWaitSyncAPPLE(%" PRIu64 ", %u, %" PRIu64 ")", sync, flag, timeout);
         if (glWaitSyncAPPLE != nullptr) {
             glWaitSyncAPPLE(sync, flag, timeout);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glWaitSyncAPPLE returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glWaitSyncAPPLE");
         }
@@ -9726,10 +8108,6 @@ bool callGlWeightPathsNV(Stack* stack, bool pushReturn) {
                    weights);
         if (glWeightPathsNV != nullptr) {
             glWeightPathsNV(resultPath, numPaths, paths, weights);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glWeightPathsNV returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glWeightPathsNV");
         }
@@ -9745,10 +8123,6 @@ bool callGlBlendBarrier(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendBarrier()");
         if (glBlendBarrier != nullptr) {
             glBlendBarrier();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendBarrier returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendBarrier");
         }
@@ -9768,10 +8142,6 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendColor(%f, %f, %f, %f)", red, green, blue, alpha);
         if (glBlendColor != nullptr) {
             glBlendColor(red, green, blue, alpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendColor returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendColor");
         }
@@ -9788,10 +8158,6 @@ bool callGlBlendEquation(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquation(%u)", equation);
         if (glBlendEquation != nullptr) {
             glBlendEquation(equation);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquation returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquation");
         }
@@ -9809,10 +8175,6 @@ bool callGlBlendEquationSeparate(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationSeparate(%u, %u)", rgb, alpha);
         if (glBlendEquationSeparate != nullptr) {
             glBlendEquationSeparate(rgb, alpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationSeparate returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparate");
         }
@@ -9831,10 +8193,6 @@ bool callGlBlendEquationSeparatei(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationSeparatei(%" PRIu32 ", %u, %u)", buf, modeRGB, modeAlpha);
         if (glBlendEquationSeparatei != nullptr) {
             glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationSeparatei returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparatei");
         }
@@ -9852,10 +8210,6 @@ bool callGlBlendEquationi(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendEquationi(%" PRIu32 ", %u)", buf, mode);
         if (glBlendEquationi != nullptr) {
             glBlendEquationi(buf, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendEquationi returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendEquationi");
         }
@@ -9873,10 +8227,6 @@ bool callGlBlendFunc(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendFunc(%u, %u)", src_factor, dst_factor);
         if (glBlendFunc != nullptr) {
             glBlendFunc(src_factor, dst_factor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFunc returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFunc");
         }
@@ -9897,10 +8247,6 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
                    src_factor_alpha, dst_factor_alpha);
         if (glBlendFuncSeparate != nullptr) {
             glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha, dst_factor_alpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFuncSeparate returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparate");
         }
@@ -9922,10 +8268,6 @@ bool callGlBlendFuncSeparatei(Stack* stack, bool pushReturn) {
                    srcAlpha, dstAlpha);
         if (glBlendFuncSeparatei != nullptr) {
             glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFuncSeparatei returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparatei");
         }
@@ -9944,10 +8286,6 @@ bool callGlBlendFunci(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBlendFunci(%" PRIu32 ", %u, %u)", buf, src, dst);
         if (glBlendFunci != nullptr) {
             glBlendFunci(buf, src, dst);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlendFunci returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlendFunci");
         }
@@ -9964,10 +8302,6 @@ bool callGlDepthFunc(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDepthFunc(%u)", function);
         if (glDepthFunc != nullptr) {
             glDepthFunc(function);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDepthFunc returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDepthFunc");
         }
@@ -9985,10 +8319,6 @@ bool callGlSampleCoverage(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")", value, invert);
         if (glSampleCoverage != nullptr) {
             glSampleCoverage(value, invert);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSampleCoverage returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSampleCoverage");
         }
@@ -10006,10 +8336,6 @@ bool callGlSampleMaski(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSampleMaski(%" PRIu32 ", %u)", maskNumber, mask);
         if (glSampleMaski != nullptr) {
             glSampleMaski(maskNumber, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSampleMaski returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSampleMaski");
         }
@@ -10030,10 +8356,6 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
                    height);
         if (glScissor != nullptr) {
             glScissor(x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glScissor returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glScissor");
         }
@@ -10052,10 +8374,6 @@ bool callGlStencilFunc(Stack* stack, bool pushReturn) {
         GAPID_INFO("glStencilFunc(%u, %" PRId32 ", %" PRIu32 ")", func, ref, mask);
         if (glStencilFunc != nullptr) {
             glStencilFunc(func, ref, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilFunc returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilFunc");
         }
@@ -10076,10 +8394,6 @@ bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
                    reference_value, mask);
         if (glStencilFuncSeparate != nullptr) {
             glStencilFuncSeparate(face, function, reference_value, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilFuncSeparate returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilFuncSeparate");
         }
@@ -10098,10 +8412,6 @@ bool callGlStencilOp(Stack* stack, bool pushReturn) {
         GAPID_INFO("glStencilOp(%u, %u, %u)", fail, zfail, zpass);
         if (glStencilOp != nullptr) {
             glStencilOp(fail, zfail, zpass);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilOp returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilOp");
         }
@@ -10123,10 +8433,6 @@ bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
         if (glStencilOpSeparate != nullptr) {
             glStencilOpSeparate(face, stencil_fail, stencil_pass_depth_fail,
                                 stencil_pass_depth_pass);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilOpSeparate returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilOpSeparate");
         }
@@ -10144,10 +8450,6 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindFramebuffer(%u, %" PRIu32 ")", target, framebuffer);
         if (glBindFramebuffer != nullptr) {
             glBindFramebuffer(target, framebuffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindFramebuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindFramebuffer");
         }
@@ -10165,10 +8467,6 @@ bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindRenderbuffer(%u, %" PRIu32 ")", target, renderbuffer);
         if (glBindRenderbuffer != nullptr) {
             glBindRenderbuffer(target, renderbuffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindRenderbuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindRenderbuffer");
         }
@@ -10196,10 +8494,6 @@ bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
                    srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
         if (glBlitFramebuffer != nullptr) {
             glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBlitFramebuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBlitFramebuffer");
         }
@@ -10220,10 +8514,6 @@ bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCheckFramebufferStatus returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCheckFramebufferStatus");
         }
@@ -10240,10 +8530,6 @@ bool callGlClear(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClear(%u)", mask);
         if (glClear != nullptr) {
             glClear(mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClear returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClear");
         }
@@ -10264,10 +8550,6 @@ bool callGlClearBufferfi(Stack* stack, bool pushReturn) {
                    stencil);
         if (glClearBufferfi != nullptr) {
             glClearBufferfi(buffer, drawbuffer, depth, stencil);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearBufferfi returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearBufferfi");
         }
@@ -10286,10 +8568,6 @@ bool callGlClearBufferfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearBufferfv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
         if (glClearBufferfv != nullptr) {
             glClearBufferfv(buffer, drawbuffer, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearBufferfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearBufferfv");
         }
@@ -10308,10 +8586,6 @@ bool callGlClearBufferiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearBufferiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
         if (glClearBufferiv != nullptr) {
             glClearBufferiv(buffer, drawbuffer, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearBufferiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearBufferiv");
         }
@@ -10330,10 +8604,6 @@ bool callGlClearBufferuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearBufferuiv(%u, %" PRId32 ", %p)", buffer, drawbuffer, value);
         if (glClearBufferuiv != nullptr) {
             glClearBufferuiv(buffer, drawbuffer, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearBufferuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearBufferuiv");
         }
@@ -10353,10 +8623,6 @@ bool callGlClearColor(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearColor(%f, %f, %f, %f)", r, g, b, a);
         if (glClearColor != nullptr) {
             glClearColor(r, g, b, a);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearColor returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearColor");
         }
@@ -10373,10 +8639,6 @@ bool callGlClearDepthf(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearDepthf(%f)", depth);
         if (glClearDepthf != nullptr) {
             glClearDepthf(depth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearDepthf returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearDepthf");
         }
@@ -10393,10 +8655,6 @@ bool callGlClearStencil(Stack* stack, bool pushReturn) {
         GAPID_INFO("glClearStencil(%" PRId32 ")", stencil);
         if (glClearStencil != nullptr) {
             glClearStencil(stencil);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClearStencil returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClearStencil");
         }
@@ -10417,10 +8675,6 @@ bool callGlColorMask(Stack* stack, bool pushReturn) {
                    alpha);
         if (glColorMask != nullptr) {
             glColorMask(red, green, blue, alpha);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glColorMask returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glColorMask");
         }
@@ -10442,10 +8696,6 @@ bool callGlColorMaski(Stack* stack, bool pushReturn) {
                    index, r, g, b, a);
         if (glColorMaski != nullptr) {
             glColorMaski(index, r, g, b, a);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glColorMaski returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glColorMaski");
         }
@@ -10463,10 +8713,6 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteFramebuffers(%" PRId32 ", %p)", count, framebuffers);
         if (glDeleteFramebuffers != nullptr) {
             glDeleteFramebuffers(count, framebuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteFramebuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteFramebuffers");
         }
@@ -10484,10 +8730,6 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
         if (glDeleteRenderbuffers != nullptr) {
             glDeleteRenderbuffers(count, renderbuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteRenderbuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteRenderbuffers");
         }
@@ -10504,10 +8746,6 @@ bool callGlDepthMask(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDepthMask(%" PRIu8 ")", enabled);
         if (glDepthMask != nullptr) {
             glDepthMask(enabled);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDepthMask returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDepthMask");
         }
@@ -10525,10 +8763,6 @@ bool callGlDrawBuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)", n, bufs);
         if (glDrawBuffers != nullptr) {
             glDrawBuffers(n, bufs);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawBuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDrawBuffers");
         }
@@ -10547,10 +8781,6 @@ bool callGlFramebufferParameteri(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFramebufferParameteri(%u, %u, %" PRId32 ")", target, pname, param);
         if (glFramebufferParameteri != nullptr) {
             glFramebufferParameteri(target, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferParameteri returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferParameteri");
         }
@@ -10572,10 +8802,6 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
         if (glFramebufferRenderbuffer != nullptr) {
             glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
                                       renderbuffer_target, renderbuffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferRenderbuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferRenderbuffer");
         }
@@ -10596,10 +8822,6 @@ bool callGlFramebufferTexture(Stack* stack, bool pushReturn) {
                    texture, level);
         if (glFramebufferTexture != nullptr) {
             glFramebufferTexture(target, attachment, texture, level);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTexture returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture");
         }
@@ -10622,10 +8844,6 @@ bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
         if (glFramebufferTexture2D != nullptr) {
             glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
                                    texture, level);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTexture2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture2D");
         }
@@ -10647,10 +8865,6 @@ bool callGlFramebufferTextureLayer(Stack* stack, bool pushReturn) {
                    target, attachment, texture, level, layer);
         if (glFramebufferTextureLayer != nullptr) {
             glFramebufferTextureLayer(target, attachment, texture, level, layer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFramebufferTextureLayer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFramebufferTextureLayer");
         }
@@ -10668,10 +8882,6 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenFramebuffers(%" PRId32 ", %p)", count, framebuffers);
         if (glGenFramebuffers != nullptr) {
             glGenFramebuffers(count, framebuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenFramebuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenFramebuffers");
         }
@@ -10689,10 +8899,6 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenRenderbuffers(%" PRId32 ", %p)", count, renderbuffers);
         if (glGenRenderbuffers != nullptr) {
             glGenRenderbuffers(count, renderbuffers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenRenderbuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenRenderbuffers");
         }
@@ -10713,10 +8919,6 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
                    attachment, parameter, value);
         if (glGetFramebufferAttachmentParameteriv != nullptr) {
             glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFramebufferAttachmentParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glGetFramebufferAttachmentParameteriv");
@@ -10736,10 +8938,6 @@ bool callGlGetFramebufferParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetFramebufferParameteriv(%u, %u, %p)", target, pname, params);
         if (glGetFramebufferParameteriv != nullptr) {
             glGetFramebufferParameteriv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFramebufferParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFramebufferParameteriv");
         }
@@ -10758,10 +8956,6 @@ bool callGlGetRenderbufferParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)", target, parameter, values);
         if (glGetRenderbufferParameteriv != nullptr) {
             glGetRenderbufferParameteriv(target, parameter, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetRenderbufferParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetRenderbufferParameteriv");
         }
@@ -10780,10 +8974,6 @@ bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glInvalidateFramebuffer(%u, %" PRId32 ", %p)", target, count, attachments);
         if (glInvalidateFramebuffer != nullptr) {
             glInvalidateFramebuffer(target, count, attachments);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glInvalidateFramebuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glInvalidateFramebuffer");
         }
@@ -10808,10 +8998,6 @@ bool callGlInvalidateSubFramebuffer(Stack* stack, bool pushReturn) {
                    target, numAttachments, attachments, x, y, width, height);
         if (glInvalidateSubFramebuffer != nullptr) {
             glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glInvalidateSubFramebuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glInvalidateSubFramebuffer");
         }
@@ -10831,10 +9017,6 @@ bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsFramebuffer returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsFramebuffer");
@@ -10856,10 +9038,6 @@ bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsRenderbuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsRenderbuffer");
         }
@@ -10876,10 +9054,6 @@ bool callGlReadBuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glReadBuffer(%u)", src);
         if (glReadBuffer != nullptr) {
             glReadBuffer(src);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadBuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadBuffer");
         }
@@ -10903,10 +9077,6 @@ bool callGlReadPixels(Stack* stack, bool pushReturn) {
                    x, y, width, height, format, type, data);
         if (glReadPixels != nullptr) {
             glReadPixels(x, y, width, height, format, type, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadPixels returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadPixels");
         }
@@ -10932,10 +9102,6 @@ bool callGlReadnPixels(Stack* stack, bool pushReturn) {
                    x, y, width, height, format, type, bufSize, data);
         if (glReadnPixels != nullptr) {
             glReadnPixels(x, y, width, height, format, type, bufSize, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReadnPixels returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReadnPixels");
         }
@@ -10956,10 +9122,6 @@ bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
                    height);
         if (glRenderbufferStorage != nullptr) {
             glRenderbufferStorage(target, format, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorage returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glRenderbufferStorage");
         }
@@ -10982,10 +9144,6 @@ bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
                    target, samples, format, width, height);
         if (glRenderbufferStorageMultisample != nullptr) {
             glRenderbufferStorageMultisample(target, samples, format, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glRenderbufferStorageMultisample returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisample");
@@ -11003,10 +9161,6 @@ bool callGlStencilMask(Stack* stack, bool pushReturn) {
         GAPID_INFO("glStencilMask(%" PRIu32 ")", mask);
         if (glStencilMask != nullptr) {
             glStencilMask(mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilMask returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilMask");
         }
@@ -11024,10 +9178,6 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
         GAPID_INFO("glStencilMaskSeparate(%u, %" PRIu32 ")", face, mask);
         if (glStencilMaskSeparate != nullptr) {
             glStencilMaskSeparate(face, mask);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glStencilMaskSeparate returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glStencilMaskSeparate");
         }
@@ -11044,10 +9194,6 @@ bool callGlDisable(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisable(%u)", capability);
         if (glDisable != nullptr) {
             glDisable(capability);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisable returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisable");
         }
@@ -11065,10 +9211,6 @@ bool callGlDisablei(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisablei(%u, %" PRIu32 ")", target, index);
         if (glDisablei != nullptr) {
             glDisablei(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisablei returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisablei");
         }
@@ -11085,10 +9227,6 @@ bool callGlEnable(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnable(%u)", capability);
         if (glEnable != nullptr) {
             glEnable(capability);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnable returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnable");
         }
@@ -11106,10 +9244,6 @@ bool callGlEnablei(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnablei(%u, %" PRIu32 ")", target, index);
         if (glEnablei != nullptr) {
             glEnablei(target, index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnablei returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnablei");
         }
@@ -11125,10 +9259,6 @@ bool callGlFinish(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFinish()");
         if (glFinish != nullptr) {
             glFinish();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFinish returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFinish");
         }
@@ -11144,10 +9274,6 @@ bool callGlFlush(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFlush()");
         if (glFlush != nullptr) {
             glFlush();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFlush returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFlush");
         }
@@ -11167,10 +9293,6 @@ bool callGlFlushMappedBufferRange(Stack* stack, bool pushReturn) {
                    length);
         if (glFlushMappedBufferRange != nullptr) {
             glFlushMappedBufferRange(target, offset, length);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFlushMappedBufferRange returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFlushMappedBufferRange");
         }
@@ -11189,10 +9311,6 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %u", return_value);
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetError returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetError");
@@ -11213,10 +9331,6 @@ bool callGlGetGraphicsResetStatus(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetGraphicsResetStatus returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatus");
         }
@@ -11234,10 +9348,6 @@ bool callGlHint(Stack* stack, bool pushReturn) {
         GAPID_INFO("glHint(%u, %u)", target, mode);
         if (glHint != nullptr) {
             glHint(target, mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glHint returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glHint");
         }
@@ -11255,10 +9365,6 @@ bool callGlActiveShaderProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glActiveShaderProgram(%" PRIu32 ", %" PRIu32 ")", pipeline, program);
         if (glActiveShaderProgram != nullptr) {
             glActiveShaderProgram(pipeline, program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glActiveShaderProgram returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glActiveShaderProgram");
         }
@@ -11276,10 +9382,6 @@ bool callGlAttachShader(Stack* stack, bool pushReturn) {
         GAPID_INFO("glAttachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
         if (glAttachShader != nullptr) {
             glAttachShader(program, shader);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glAttachShader returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glAttachShader");
         }
@@ -11298,10 +9400,6 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindAttribLocation(%" PRIu32 ", %" PRIu32 ", %s)", program, location, name);
         if (glBindAttribLocation != nullptr) {
             glBindAttribLocation(program, location, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindAttribLocation returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindAttribLocation");
         }
@@ -11318,10 +9416,6 @@ bool callGlBindProgramPipeline(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindProgramPipeline(%" PRIu32 ")", pipeline);
         if (glBindProgramPipeline != nullptr) {
             glBindProgramPipeline(pipeline);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindProgramPipeline returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindProgramPipeline");
         }
@@ -11338,17 +9432,6 @@ bool callGlCompileShader(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCompileShader(%" PRIu32 ")", shader);
         if (glCompileShader != nullptr) {
             glCompileShader(shader);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompileShader returned error: 0x%x", err);
-            }
-            int success = 0;
-            glGetShaderiv(shader, GLenum::GL_COMPILE_STATUS, &success);
-            if (success == 0) {
-                char buf[2048];
-                glGetShaderInfoLog(shader, 2048, nullptr, buf);
-                GAPID_WARNING("Shader failed to compile: %s", buf);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompileShader");
         }
@@ -11367,10 +9450,6 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu32 "", return_value);
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCreateProgram returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateProgram");
@@ -11391,10 +9470,6 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu32 "", return_value);
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCreateShader returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateShader");
@@ -11418,10 +9493,6 @@ bool callGlCreateShaderProgramv(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCreateShaderProgramv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateShaderProgramv");
         }
@@ -11438,10 +9509,6 @@ bool callGlDeleteProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteProgram(%" PRIu32 ")", program);
         if (glDeleteProgram != nullptr) {
             glDeleteProgram(program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteProgram returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteProgram");
         }
@@ -11459,10 +9526,6 @@ bool callGlDeleteProgramPipelines(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteProgramPipelines(%" PRId32 ", %p)", n, pipelines);
         if (glDeleteProgramPipelines != nullptr) {
             glDeleteProgramPipelines(n, pipelines);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteProgramPipelines returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteProgramPipelines");
         }
@@ -11479,10 +9542,6 @@ bool callGlDeleteShader(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteShader(%" PRIu32 ")", shader);
         if (glDeleteShader != nullptr) {
             glDeleteShader(shader);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteShader returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteShader");
         }
@@ -11500,10 +9559,6 @@ bool callGlDetachShader(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDetachShader(%" PRIu32 ", %" PRIu32 ")", program, shader);
         if (glDetachShader != nullptr) {
             glDetachShader(program, shader);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDetachShader returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDetachShader");
         }
@@ -11523,10 +9578,6 @@ bool callGlDispatchCompute(Stack* stack, bool pushReturn) {
                    num_groups_y, num_groups_z);
         if (glDispatchCompute != nullptr) {
             glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDispatchCompute returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDispatchCompute");
         }
@@ -11543,10 +9594,6 @@ bool callGlDispatchComputeIndirect(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDispatchComputeIndirect(%" PRId32 ")", indirect);
         if (glDispatchComputeIndirect != nullptr) {
             glDispatchComputeIndirect(indirect);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDispatchComputeIndirect returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDispatchComputeIndirect");
         }
@@ -11564,10 +9611,6 @@ bool callGlGenProgramPipelines(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenProgramPipelines(%" PRId32 ", %p)", n, pipelines);
         if (glGenProgramPipelines != nullptr) {
             glGenProgramPipelines(n, pipelines);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenProgramPipelines returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenProgramPipelines");
         }
@@ -11592,10 +9635,6 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
         if (glGetActiveAttrib != nullptr) {
             glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                               type, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetActiveAttrib returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveAttrib");
         }
@@ -11620,10 +9659,6 @@ bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
         if (glGetActiveUniform != nullptr) {
             glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
                                type, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetActiveUniform returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniform");
         }
@@ -11646,10 +9681,6 @@ bool callGlGetActiveUniformBlockName(Stack* stack, bool pushReturn) {
         if (glGetActiveUniformBlockName != nullptr) {
             glGetActiveUniformBlockName(program, uniform_block_index, buffer_size,
                                         buffer_bytes_written, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetActiveUniformBlockName returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformBlockName");
         }
@@ -11670,10 +9701,6 @@ bool callGlGetActiveUniformBlockiv(Stack* stack, bool pushReturn) {
                    uniform_block_index, parameter_name, parameters);
         if (glGetActiveUniformBlockiv != nullptr) {
             glGetActiveUniformBlockiv(program, uniform_block_index, parameter_name, parameters);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetActiveUniformBlockiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformBlockiv");
         }
@@ -11696,10 +9723,6 @@ bool callGlGetActiveUniformsiv(Stack* stack, bool pushReturn) {
         if (glGetActiveUniformsiv != nullptr) {
             glGetActiveUniformsiv(program, uniform_count, uniform_indices, parameter_name,
                                   parameters);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetActiveUniformsiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformsiv");
         }
@@ -11720,10 +9743,6 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
                    shaders_length_written, shaders);
         if (glGetAttachedShaders != nullptr) {
             glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetAttachedShaders returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetAttachedShaders");
         }
@@ -11744,10 +9763,6 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRId32 "", return_value);
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetAttribLocation returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetAttribLocation");
@@ -11770,10 +9785,6 @@ bool callGlGetFragDataLocation(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFragDataLocation returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFragDataLocation");
         }
@@ -11795,10 +9806,6 @@ bool callGlGetProgramBinary(Stack* stack, bool pushReturn) {
                    length, binaryFormat, binary);
         if (glGetProgramBinary != nullptr) {
             glGetProgramBinary(program, bufSize, length, binaryFormat, binary);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramBinary returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramBinary");
         }
@@ -11819,10 +9826,6 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
                    string_length_written, info);
         if (glGetProgramInfoLog != nullptr) {
             glGetProgramInfoLog(program, buffer_length, string_length_written, info);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramInfoLog returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramInfoLog");
         }
@@ -11843,10 +9846,6 @@ bool callGlGetProgramInterfaceiv(Stack* stack, bool pushReturn) {
                    pname, params);
         if (glGetProgramInterfaceiv != nullptr) {
             glGetProgramInterfaceiv(program, programInterface, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramInterfaceiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramInterfaceiv");
         }
@@ -11867,10 +9866,6 @@ bool callGlGetProgramPipelineInfoLog(Stack* stack, bool pushReturn) {
                    bufSize, length, infoLog);
         if (glGetProgramPipelineInfoLog != nullptr) {
             glGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramPipelineInfoLog returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramPipelineInfoLog");
         }
@@ -11889,10 +9884,6 @@ bool callGlGetProgramPipelineiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetProgramPipelineiv(%" PRIu32 ", %u, %p)", pipeline, pname, params);
         if (glGetProgramPipelineiv != nullptr) {
             glGetProgramPipelineiv(pipeline, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramPipelineiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramPipelineiv");
         }
@@ -11915,10 +9906,6 @@ bool callGlGetProgramResourceIndex(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu32 "", return_value);
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramResourceIndex returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramResourceIndex");
@@ -11943,10 +9930,6 @@ bool callGlGetProgramResourceLocation(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramResourceLocation returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramResourceLocation");
         }
@@ -11969,10 +9952,6 @@ bool callGlGetProgramResourceName(Stack* stack, bool pushReturn) {
                    program, programInterface, index, bufSize, length, name);
         if (glGetProgramResourceName != nullptr) {
             glGetProgramResourceName(program, programInterface, index, bufSize, length, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramResourceName returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramResourceName");
         }
@@ -11999,10 +9978,6 @@ bool callGlGetProgramResourceiv(Stack* stack, bool pushReturn) {
         if (glGetProgramResourceiv != nullptr) {
             glGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize,
                                    length, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramResourceiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramResourceiv");
         }
@@ -12021,10 +9996,6 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetProgramiv(%" PRIu32 ", %u, %p)", program, parameter, value);
         if (glGetProgramiv != nullptr) {
             glGetProgramiv(program, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetProgramiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetProgramiv");
         }
@@ -12045,10 +10016,6 @@ bool callGlGetShaderInfoLog(Stack* stack, bool pushReturn) {
                    string_length_written, info);
         if (glGetShaderInfoLog != nullptr) {
             glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetShaderInfoLog returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetShaderInfoLog");
         }
@@ -12069,10 +10036,6 @@ bool callGlGetShaderPrecisionFormat(Stack* stack, bool pushReturn) {
                    precision);
         if (glGetShaderPrecisionFormat != nullptr) {
             glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetShaderPrecisionFormat returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetShaderPrecisionFormat");
         }
@@ -12093,10 +10056,6 @@ bool callGlGetShaderSource(Stack* stack, bool pushReturn) {
                    string_length_written, source);
         if (glGetShaderSource != nullptr) {
             glGetShaderSource(shader, buffer_length, string_length_written, source);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetShaderSource returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetShaderSource");
         }
@@ -12115,10 +10074,6 @@ bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetShaderiv(%" PRIu32 ", %u, %p)", shader, parameter, value);
         if (glGetShaderiv != nullptr) {
             glGetShaderiv(shader, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetShaderiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetShaderiv");
         }
@@ -12140,10 +10095,6 @@ bool callGlGetUniformBlockIndex(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformBlockIndex returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformBlockIndex");
         }
@@ -12164,10 +10115,6 @@ bool callGlGetUniformIndices(Stack* stack, bool pushReturn) {
                    uniformNames, uniformIndices);
         if (glGetUniformIndices != nullptr) {
             glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformIndices returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformIndices");
         }
@@ -12189,10 +10136,6 @@ bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformLocation returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformLocation");
         }
@@ -12211,10 +10154,6 @@ bool callGlGetUniformfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetUniformfv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
         if (glGetUniformfv != nullptr) {
             glGetUniformfv(program, location, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformfv");
         }
@@ -12233,10 +10172,6 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetUniformiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
         if (glGetUniformiv != nullptr) {
             glGetUniformiv(program, location, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformiv");
         }
@@ -12255,10 +10190,6 @@ bool callGlGetUniformuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetUniformuiv(%" PRIu32 ", %" PRId32 ", %p)", program, location, values);
         if (glGetUniformuiv != nullptr) {
             glGetUniformuiv(program, location, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetUniformuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformuiv");
         }
@@ -12279,10 +10210,6 @@ bool callGlGetnUniformfv(Stack* stack, bool pushReturn) {
                    bufSize, values);
         if (glGetnUniformfv != nullptr) {
             glGetnUniformfv(program, location, bufSize, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformfv");
         }
@@ -12303,10 +10230,6 @@ bool callGlGetnUniformiv(Stack* stack, bool pushReturn) {
                    bufSize, values);
         if (glGetnUniformiv != nullptr) {
             glGetnUniformiv(program, location, bufSize, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformiv");
         }
@@ -12327,10 +10250,6 @@ bool callGlGetnUniformuiv(Stack* stack, bool pushReturn) {
                    bufSize, values);
         if (glGetnUniformuiv != nullptr) {
             glGetnUniformuiv(program, location, bufSize, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetnUniformuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetnUniformuiv");
         }
@@ -12350,10 +10269,6 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsProgram returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsProgram");
@@ -12375,10 +10290,6 @@ bool callGlIsProgramPipeline(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsProgramPipeline returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsProgramPipeline");
         }
@@ -12399,10 +10310,6 @@ bool callGlIsShader(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsShader returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsShader");
         }
@@ -12419,10 +10326,6 @@ bool callGlLinkProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glLinkProgram(%" PRIu32 ")", program);
         if (glLinkProgram != nullptr) {
             glLinkProgram(program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glLinkProgram returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glLinkProgram");
         }
@@ -12439,10 +10342,6 @@ bool callGlMemoryBarrier(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMemoryBarrier(%u)", barriers);
         if (glMemoryBarrier != nullptr) {
             glMemoryBarrier(barriers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMemoryBarrier returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMemoryBarrier");
         }
@@ -12459,10 +10358,6 @@ bool callGlMemoryBarrierByRegion(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMemoryBarrierByRegion(%u)", barriers);
         if (glMemoryBarrierByRegion != nullptr) {
             glMemoryBarrierByRegion(barriers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMemoryBarrierByRegion returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMemoryBarrierByRegion");
         }
@@ -12483,10 +10378,6 @@ bool callGlProgramBinary(Stack* stack, bool pushReturn) {
                    binary, length);
         if (glProgramBinary != nullptr) {
             glProgramBinary(program, binaryFormat, binary, length);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramBinary returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramBinary");
         }
@@ -12505,10 +10396,6 @@ bool callGlProgramParameteri(Stack* stack, bool pushReturn) {
         GAPID_INFO("glProgramParameteri(%" PRIu32 ", %u, %" PRId32 ")", program, pname, value);
         if (glProgramParameteri != nullptr) {
             glProgramParameteri(program, pname, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramParameteri returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramParameteri");
         }
@@ -12527,10 +10414,6 @@ bool callGlProgramUniform1f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glProgramUniform1f(%" PRIu32 ", %" PRId32 ", %f)", program, location, value0);
         if (glProgramUniform1f != nullptr) {
             glProgramUniform1f(program, location, value0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1f");
         }
@@ -12551,10 +10434,6 @@ bool callGlProgramUniform1fv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform1fv != nullptr) {
             glProgramUniform1fv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1fv");
         }
@@ -12574,10 +10453,6 @@ bool callGlProgramUniform1i(Stack* stack, bool pushReturn) {
                    value0);
         if (glProgramUniform1i != nullptr) {
             glProgramUniform1i(program, location, value0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1i");
         }
@@ -12598,10 +10473,6 @@ bool callGlProgramUniform1iv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform1iv != nullptr) {
             glProgramUniform1iv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1iv");
         }
@@ -12621,10 +10492,6 @@ bool callGlProgramUniform1ui(Stack* stack, bool pushReturn) {
                    value0);
         if (glProgramUniform1ui != nullptr) {
             glProgramUniform1ui(program, location, value0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1ui");
         }
@@ -12645,10 +10512,6 @@ bool callGlProgramUniform1uiv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform1uiv != nullptr) {
             glProgramUniform1uiv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform1uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform1uiv");
         }
@@ -12669,10 +10532,6 @@ bool callGlProgramUniform2f(Stack* stack, bool pushReturn) {
                    value0, value1);
         if (glProgramUniform2f != nullptr) {
             glProgramUniform2f(program, location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2f");
         }
@@ -12693,10 +10552,6 @@ bool callGlProgramUniform2fv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform2fv != nullptr) {
             glProgramUniform2fv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2fv");
         }
@@ -12717,10 +10572,6 @@ bool callGlProgramUniform2i(Stack* stack, bool pushReturn) {
                    program, location, value0, value1);
         if (glProgramUniform2i != nullptr) {
             glProgramUniform2i(program, location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2i");
         }
@@ -12741,10 +10592,6 @@ bool callGlProgramUniform2iv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform2iv != nullptr) {
             glProgramUniform2iv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2iv");
         }
@@ -12765,10 +10612,6 @@ bool callGlProgramUniform2ui(Stack* stack, bool pushReturn) {
                    program, location, value0, value1);
         if (glProgramUniform2ui != nullptr) {
             glProgramUniform2ui(program, location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2ui");
         }
@@ -12789,10 +10632,6 @@ bool callGlProgramUniform2uiv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform2uiv != nullptr) {
             glProgramUniform2uiv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform2uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform2uiv");
         }
@@ -12814,10 +10653,6 @@ bool callGlProgramUniform3f(Stack* stack, bool pushReturn) {
                    value0, value1, value2);
         if (glProgramUniform3f != nullptr) {
             glProgramUniform3f(program, location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3f");
         }
@@ -12838,10 +10673,6 @@ bool callGlProgramUniform3fv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform3fv != nullptr) {
             glProgramUniform3fv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3fv");
         }
@@ -12864,10 +10695,6 @@ bool callGlProgramUniform3i(Stack* stack, bool pushReturn) {
                    program, location, value0, value1, value2);
         if (glProgramUniform3i != nullptr) {
             glProgramUniform3i(program, location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3i");
         }
@@ -12888,10 +10715,6 @@ bool callGlProgramUniform3iv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform3iv != nullptr) {
             glProgramUniform3iv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3iv");
         }
@@ -12914,10 +10737,6 @@ bool callGlProgramUniform3ui(Stack* stack, bool pushReturn) {
                    program, location, value0, value1, value2);
         if (glProgramUniform3ui != nullptr) {
             glProgramUniform3ui(program, location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3ui");
         }
@@ -12938,10 +10757,6 @@ bool callGlProgramUniform3uiv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform3uiv != nullptr) {
             glProgramUniform3uiv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform3uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform3uiv");
         }
@@ -12964,10 +10779,6 @@ bool callGlProgramUniform4f(Stack* stack, bool pushReturn) {
                    location, value0, value1, value2, value3);
         if (glProgramUniform4f != nullptr) {
             glProgramUniform4f(program, location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4f");
         }
@@ -12988,10 +10799,6 @@ bool callGlProgramUniform4fv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform4fv != nullptr) {
             glProgramUniform4fv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4fv");
         }
@@ -13015,10 +10822,6 @@ bool callGlProgramUniform4i(Stack* stack, bool pushReturn) {
                    program, location, value0, value1, value2, value3);
         if (glProgramUniform4i != nullptr) {
             glProgramUniform4i(program, location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4i");
         }
@@ -13039,10 +10842,6 @@ bool callGlProgramUniform4iv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform4iv != nullptr) {
             glProgramUniform4iv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4iv");
         }
@@ -13066,10 +10865,6 @@ bool callGlProgramUniform4ui(Stack* stack, bool pushReturn) {
                    program, location, value0, value1, value2, value3);
         if (glProgramUniform4ui != nullptr) {
             glProgramUniform4ui(program, location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4ui");
         }
@@ -13090,10 +10885,6 @@ bool callGlProgramUniform4uiv(Stack* stack, bool pushReturn) {
                    location, count, values);
         if (glProgramUniform4uiv != nullptr) {
             glProgramUniform4uiv(program, location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniform4uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniform4uiv");
         }
@@ -13116,10 +10907,6 @@ bool callGlProgramUniformMatrix2fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix2fv != nullptr) {
             glProgramUniformMatrix2fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2fv");
         }
@@ -13142,10 +10929,6 @@ bool callGlProgramUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix2x3fv != nullptr) {
             glProgramUniformMatrix2x3fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2x3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2x3fv");
         }
@@ -13168,10 +10951,6 @@ bool callGlProgramUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix2x4fv != nullptr) {
             glProgramUniformMatrix2x4fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix2x4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix2x4fv");
         }
@@ -13194,10 +10973,6 @@ bool callGlProgramUniformMatrix3fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix3fv != nullptr) {
             glProgramUniformMatrix3fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3fv");
         }
@@ -13220,10 +10995,6 @@ bool callGlProgramUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix3x2fv != nullptr) {
             glProgramUniformMatrix3x2fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3x2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3x2fv");
         }
@@ -13246,10 +11017,6 @@ bool callGlProgramUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix3x4fv != nullptr) {
             glProgramUniformMatrix3x4fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix3x4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix3x4fv");
         }
@@ -13272,10 +11039,6 @@ bool callGlProgramUniformMatrix4fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix4fv != nullptr) {
             glProgramUniformMatrix4fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4fv");
         }
@@ -13298,10 +11061,6 @@ bool callGlProgramUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix4x2fv != nullptr) {
             glProgramUniformMatrix4x2fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4x2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4x2fv");
         }
@@ -13324,10 +11083,6 @@ bool callGlProgramUniformMatrix4x3fv(Stack* stack, bool pushReturn) {
                    program, location, count, transpose, values);
         if (glProgramUniformMatrix4x3fv != nullptr) {
             glProgramUniformMatrix4x3fv(program, location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glProgramUniformMatrix4x3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glProgramUniformMatrix4x3fv");
         }
@@ -13343,10 +11098,6 @@ bool callGlReleaseShaderCompiler(Stack* stack, bool pushReturn) {
         GAPID_INFO("glReleaseShaderCompiler()");
         if (glReleaseShaderCompiler != nullptr) {
             glReleaseShaderCompiler();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glReleaseShaderCompiler returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glReleaseShaderCompiler");
         }
@@ -13368,10 +11119,6 @@ bool callGlShaderBinary(Stack* stack, bool pushReturn) {
                    binary_format, binary, binary_size);
         if (glShaderBinary != nullptr) {
             glShaderBinary(count, shaders, binary_format, binary, binary_size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glShaderBinary returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glShaderBinary");
         }
@@ -13392,11 +11139,6 @@ bool callGlShaderSource(Stack* stack, bool pushReturn) {
                    length);
         if (glShaderSource != nullptr) {
             glShaderSource(shader, count, source, length);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glShaderSource returned error: 0x%x", err);
-            }
-            GAPID_INFO("Shader source: %s", source[0]);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glShaderSource");
         }
@@ -13414,10 +11156,6 @@ bool callGlUniform1f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1f(%" PRId32 ", %f)", location, value);
         if (glUniform1f != nullptr) {
             glUniform1f(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1f");
         }
@@ -13436,10 +11174,6 @@ bool callGlUniform1fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform1fv != nullptr) {
             glUniform1fv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1fv");
         }
@@ -13457,10 +11191,6 @@ bool callGlUniform1i(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1i(%" PRId32 ", %" PRId32 ")", location, value);
         if (glUniform1i != nullptr) {
             glUniform1i(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1i");
         }
@@ -13479,10 +11209,6 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform1iv != nullptr) {
             glUniform1iv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1iv");
         }
@@ -13500,10 +11226,6 @@ bool callGlUniform1ui(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1ui(%" PRId32 ", %" PRIu32 ")", location, value0);
         if (glUniform1ui != nullptr) {
             glUniform1ui(location, value0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1ui");
         }
@@ -13522,10 +11244,6 @@ bool callGlUniform1uiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform1uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform1uiv != nullptr) {
             glUniform1uiv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform1uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1uiv");
         }
@@ -13544,10 +11262,6 @@ bool callGlUniform2f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2f(%" PRId32 ", %f, %f)", location, value0, value1);
         if (glUniform2f != nullptr) {
             glUniform2f(location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2f");
         }
@@ -13566,10 +11280,6 @@ bool callGlUniform2fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform2fv != nullptr) {
             glUniform2fv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2fv");
         }
@@ -13588,10 +11298,6 @@ bool callGlUniform2i(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2i(%" PRId32 ", %" PRId32 ", %" PRId32 ")", location, value0, value1);
         if (glUniform2i != nullptr) {
             glUniform2i(location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2i");
         }
@@ -13610,10 +11316,6 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform2iv != nullptr) {
             glUniform2iv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2iv");
         }
@@ -13632,10 +11334,6 @@ bool callGlUniform2ui(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2ui(%" PRId32 ", %" PRIu32 ", %" PRIu32 ")", location, value0, value1);
         if (glUniform2ui != nullptr) {
             glUniform2ui(location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2ui");
         }
@@ -13654,10 +11352,6 @@ bool callGlUniform2uiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform2uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform2uiv != nullptr) {
             glUniform2uiv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform2uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2uiv");
         }
@@ -13677,10 +11371,6 @@ bool callGlUniform3f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform3f(%" PRId32 ", %f, %f, %f)", location, value0, value1, value2);
         if (glUniform3f != nullptr) {
             glUniform3f(location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3f");
         }
@@ -13699,10 +11389,6 @@ bool callGlUniform3fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform3fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform3fv != nullptr) {
             glUniform3fv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3fv");
         }
@@ -13723,10 +11409,6 @@ bool callGlUniform3i(Stack* stack, bool pushReturn) {
                    value0, value1, value2);
         if (glUniform3i != nullptr) {
             glUniform3i(location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3i");
         }
@@ -13745,10 +11427,6 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform3iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform3iv != nullptr) {
             glUniform3iv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3iv");
         }
@@ -13769,10 +11447,6 @@ bool callGlUniform3ui(Stack* stack, bool pushReturn) {
                    value0, value1, value2);
         if (glUniform3ui != nullptr) {
             glUniform3ui(location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3ui");
         }
@@ -13791,10 +11465,6 @@ bool callGlUniform3uiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform3uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform3uiv != nullptr) {
             glUniform3uiv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform3uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3uiv");
         }
@@ -13816,10 +11486,6 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
                    value3);
         if (glUniform4f != nullptr) {
             glUniform4f(location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4f");
         }
@@ -13838,10 +11504,6 @@ bool callGlUniform4fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform4fv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform4fv != nullptr) {
             glUniform4fv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4fv");
         }
@@ -13863,10 +11525,6 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
                    location, value0, value1, value2, value3);
         if (glUniform4i != nullptr) {
             glUniform4i(location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4i");
         }
@@ -13885,10 +11543,6 @@ bool callGlUniform4iv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform4iv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform4iv != nullptr) {
             glUniform4iv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4iv");
         }
@@ -13910,10 +11564,6 @@ bool callGlUniform4ui(Stack* stack, bool pushReturn) {
                    location, value0, value1, value2, value3);
         if (glUniform4ui != nullptr) {
             glUniform4ui(location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4ui");
         }
@@ -13932,10 +11582,6 @@ bool callGlUniform4uiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUniform4uiv(%" PRId32 ", %" PRId32 ", %p)", location, count, values);
         if (glUniform4uiv != nullptr) {
             glUniform4uiv(location, count, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniform4uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4uiv");
         }
@@ -13955,10 +11601,6 @@ bool callGlUniformBlockBinding(Stack* stack, bool pushReturn) {
                    uniform_block_index, uniform_block_binding);
         if (glUniformBlockBinding != nullptr) {
             glUniformBlockBinding(program, uniform_block_index, uniform_block_binding);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformBlockBinding returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformBlockBinding");
         }
@@ -13979,10 +11621,6 @@ bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
                    transpose, values);
         if (glUniformMatrix2fv != nullptr) {
             glUniformMatrix2fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2fv");
         }
@@ -14003,10 +11641,6 @@ bool callGlUniformMatrix2x3fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix2x3fv != nullptr) {
             glUniformMatrix2x3fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix2x3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2x3fv");
         }
@@ -14027,10 +11661,6 @@ bool callGlUniformMatrix2x4fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix2x4fv != nullptr) {
             glUniformMatrix2x4fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix2x4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2x4fv");
         }
@@ -14051,10 +11681,6 @@ bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
                    transpose, values);
         if (glUniformMatrix3fv != nullptr) {
             glUniformMatrix3fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3fv");
         }
@@ -14075,10 +11701,6 @@ bool callGlUniformMatrix3x2fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix3x2fv != nullptr) {
             glUniformMatrix3x2fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix3x2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3x2fv");
         }
@@ -14099,10 +11721,6 @@ bool callGlUniformMatrix3x4fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix3x4fv != nullptr) {
             glUniformMatrix3x4fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix3x4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3x4fv");
         }
@@ -14123,10 +11741,6 @@ bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
                    transpose, values);
         if (glUniformMatrix4fv != nullptr) {
             glUniformMatrix4fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4fv");
         }
@@ -14147,10 +11761,6 @@ bool callGlUniformMatrix4x2fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix4x2fv != nullptr) {
             glUniformMatrix4x2fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix4x2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4x2fv");
         }
@@ -14171,10 +11781,6 @@ bool callGlUniformMatrix4x3fv(Stack* stack, bool pushReturn) {
                    count, transpose, values);
         if (glUniformMatrix4x3fv != nullptr) {
             glUniformMatrix4x3fv(location, count, transpose, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUniformMatrix4x3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4x3fv");
         }
@@ -14191,10 +11797,6 @@ bool callGlUseProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUseProgram(%" PRIu32 ")", program);
         if (glUseProgram != nullptr) {
             glUseProgram(program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUseProgram returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUseProgram");
         }
@@ -14213,10 +11815,6 @@ bool callGlUseProgramStages(Stack* stack, bool pushReturn) {
         GAPID_INFO("glUseProgramStages(%" PRIu32 ", %u, %" PRIu32 ")", pipeline, stages, program);
         if (glUseProgramStages != nullptr) {
             glUseProgramStages(pipeline, stages, program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glUseProgramStages returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUseProgramStages");
         }
@@ -14233,10 +11831,6 @@ bool callGlValidateProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glValidateProgram(%" PRIu32 ")", program);
         if (glValidateProgram != nullptr) {
             glValidateProgram(program);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glValidateProgram returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glValidateProgram");
         }
@@ -14253,10 +11847,6 @@ bool callGlValidateProgramPipeline(Stack* stack, bool pushReturn) {
         GAPID_INFO("glValidateProgramPipeline(%" PRIu32 ")", pipeline);
         if (glValidateProgramPipeline != nullptr) {
             glValidateProgramPipeline(pipeline);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glValidateProgramPipeline returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glValidateProgramPipeline");
         }
@@ -14273,10 +11863,6 @@ bool callGlCullFace(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCullFace(%u)", mode);
         if (glCullFace != nullptr) {
             glCullFace(mode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCullFace returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCullFace");
         }
@@ -14294,10 +11880,6 @@ bool callGlDepthRangef(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDepthRangef(%f, %f)", near, far);
         if (glDepthRangef != nullptr) {
             glDepthRangef(near, far);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDepthRangef returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDepthRangef");
         }
@@ -14314,10 +11896,6 @@ bool callGlFrontFace(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFrontFace(%u)", orientation);
         if (glFrontFace != nullptr) {
             glFrontFace(orientation);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFrontFace returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFrontFace");
         }
@@ -14336,10 +11914,6 @@ bool callGlGetMultisamplefv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetMultisamplefv(%u, %" PRIu32 ", %p)", pname, index, val);
         if (glGetMultisamplefv != nullptr) {
             glGetMultisamplefv(pname, index, val);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetMultisamplefv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetMultisamplefv");
         }
@@ -14356,10 +11930,6 @@ bool callGlLineWidth(Stack* stack, bool pushReturn) {
         GAPID_INFO("glLineWidth(%f)", width);
         if (glLineWidth != nullptr) {
             glLineWidth(width);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glLineWidth returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glLineWidth");
         }
@@ -14376,10 +11946,6 @@ bool callGlMinSampleShading(Stack* stack, bool pushReturn) {
         GAPID_INFO("glMinSampleShading(%f)", value);
         if (glMinSampleShading != nullptr) {
             glMinSampleShading(value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glMinSampleShading returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glMinSampleShading");
         }
@@ -14397,10 +11963,6 @@ bool callGlPolygonOffset(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPolygonOffset(%f, %f)", scale_factor, units);
         if (glPolygonOffset != nullptr) {
             glPolygonOffset(scale_factor, units);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPolygonOffset returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPolygonOffset");
         }
@@ -14421,10 +11983,6 @@ bool callGlViewport(Stack* stack, bool pushReturn) {
                    height);
         if (glViewport != nullptr) {
             glViewport(x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glViewport returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glViewport");
         }
@@ -14443,10 +12001,6 @@ bool callGlGetBooleaniV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBooleani_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetBooleani_v != nullptr) {
             glGetBooleani_v(param, index, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBooleani_v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBooleani_v");
         }
@@ -14464,10 +12018,6 @@ bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetBooleanv(%u, %p)", param, values);
         if (glGetBooleanv != nullptr) {
             glGetBooleanv(param, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetBooleanv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetBooleanv");
         }
@@ -14485,10 +12035,6 @@ bool callGlGetFloatv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetFloatv(%u, %p)", param, values);
         if (glGetFloatv != nullptr) {
             glGetFloatv(param, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetFloatv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetFloatv");
         }
@@ -14507,10 +12053,6 @@ bool callGlGetInteger64iV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetInteger64i_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetInteger64i_v != nullptr) {
             glGetInteger64i_v(param, index, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetInteger64i_v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetInteger64i_v");
         }
@@ -14528,10 +12070,6 @@ bool callGlGetInteger64v(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetInteger64v(%u, %p)", param, values);
         if (glGetInteger64v != nullptr) {
             glGetInteger64v(param, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetInteger64v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetInteger64v");
         }
@@ -14550,10 +12088,6 @@ bool callGlGetIntegeriV(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetIntegeri_v(%u, %" PRIu32 ", %p)", param, index, values);
         if (glGetIntegeri_v != nullptr) {
             glGetIntegeri_v(param, index, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetIntegeri_v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetIntegeri_v");
         }
@@ -14571,10 +12105,6 @@ bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetIntegerv(%u, %p)", param, values);
         if (glGetIntegerv != nullptr) {
             glGetIntegerv(param, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetIntegerv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetIntegerv");
         }
@@ -14596,10 +12126,6 @@ bool callGlGetInternalformativ(Stack* stack, bool pushReturn) {
                    pname, bufSize, params);
         if (glGetInternalformativ != nullptr) {
             glGetInternalformativ(target, internalformat, pname, bufSize, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetInternalformativ returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetInternalformativ");
         }
@@ -14619,10 +12145,6 @@ bool callGlGetString(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %p", return_value);
             if (pushReturn) {
                 stack->push<uint8_t*>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetString returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetString");
@@ -14645,10 +12167,6 @@ bool callGlGetStringi(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetStringi returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetStringi");
         }
@@ -14668,10 +12186,6 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnabled returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsEnabled");
@@ -14693,10 +12207,6 @@ bool callGlIsEnabledi(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsEnabledi returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsEnabledi");
@@ -14720,10 +12230,6 @@ bool callGlClientWaitSync(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<GLenum>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glClientWaitSync returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glClientWaitSync");
         }
@@ -14740,10 +12246,6 @@ bool callGlDeleteSync(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteSync(%" PRIu64 ")", sync);
         if (glDeleteSync != nullptr) {
             glDeleteSync(sync);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteSync returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteSync");
         }
@@ -14764,10 +12266,6 @@ bool callGlFenceSync(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu64 "", return_value);
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glFenceSync returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glFenceSync");
@@ -14790,10 +12288,6 @@ bool callGlGetSynciv(Stack* stack, bool pushReturn) {
                    length, values);
         if (glGetSynciv != nullptr) {
             glGetSynciv(sync, pname, bufSize, length, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSynciv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSynciv");
         }
@@ -14814,10 +12308,6 @@ bool callGlIsSync(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsSync returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsSync");
         }
@@ -14836,10 +12326,6 @@ bool callGlWaitSync(Stack* stack, bool pushReturn) {
         GAPID_INFO("glWaitSync(%" PRIu64 ", %u, %" PRIu64 ")", sync, syncFlags, timeout);
         if (glWaitSync != nullptr) {
             glWaitSync(sync, syncFlags, timeout);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glWaitSync returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glWaitSync");
         }
@@ -14856,10 +12342,6 @@ bool callGlActiveTexture(Stack* stack, bool pushReturn) {
         GAPID_INFO("glActiveTexture(%u)", unit);
         if (glActiveTexture != nullptr) {
             glActiveTexture(unit);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glActiveTexture returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glActiveTexture");
         }
@@ -14884,10 +12366,6 @@ bool callGlBindImageTexture(Stack* stack, bool pushReturn) {
                    unit, texture, level, layered, layer, access, format);
         if (glBindImageTexture != nullptr) {
             glBindImageTexture(unit, texture, level, layered, layer, access, format);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindImageTexture returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindImageTexture");
         }
@@ -14905,10 +12383,6 @@ bool callGlBindSampler(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindSampler(%" PRIu32 ", %" PRIu32 ")", unit, sampler);
         if (glBindSampler != nullptr) {
             glBindSampler(unit, sampler);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindSampler returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindSampler");
         }
@@ -14926,10 +12400,6 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindTexture(%u, %" PRIu32 ")", target, texture);
         if (glBindTexture != nullptr) {
             glBindTexture(target, texture);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindTexture returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindTexture");
         }
@@ -14955,10 +12425,6 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
                    target, level, format, width, height, border, image_size, data);
         if (glCompressedTexImage2D != nullptr) {
             glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexImage2D");
         }
@@ -14986,10 +12452,6 @@ bool callGlCompressedTexImage3D(Stack* stack, bool pushReturn) {
         if (glCompressedTexImage3D != nullptr) {
             glCompressedTexImage3D(target, level, internalformat, width, height, depth, border,
                                    image_size, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexImage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexImage3D");
         }
@@ -15017,10 +12479,6 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
         if (glCompressedTexSubImage2D != nullptr) {
             glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
                                       image_size, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexSubImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexSubImage2D");
         }
@@ -15051,10 +12509,6 @@ bool callGlCompressedTexSubImage3D(Stack* stack, bool pushReturn) {
         if (glCompressedTexSubImage3D != nullptr) {
             glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height,
                                       depth, format, image_size, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCompressedTexSubImage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexSubImage3D");
         }
@@ -15090,10 +12544,6 @@ bool callGlCopyImageSubData(Stack* stack, bool pushReturn) {
         if (glCopyImageSubData != nullptr) {
             glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget,
                                dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyImageSubData returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyImageSubData");
         }
@@ -15119,10 +12569,6 @@ bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
                    target, level, format, x, y, width, height, border);
         if (glCopyTexImage2D != nullptr) {
             glCopyTexImage2D(target, level, format, x, y, width, height, border);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyTexImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyTexImage2D");
         }
@@ -15148,10 +12594,6 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
                    target, level, xoffset, yoffset, x, y, width, height);
         if (glCopyTexSubImage2D != nullptr) {
             glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyTexSubImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyTexSubImage2D");
         }
@@ -15178,10 +12620,6 @@ bool callGlCopyTexSubImage3D(Stack* stack, bool pushReturn) {
                    target, level, xoffset, yoffset, zoffset, x, y, width, height);
         if (glCopyTexSubImage3D != nullptr) {
             glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glCopyTexSubImage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCopyTexSubImage3D");
         }
@@ -15199,10 +12637,6 @@ bool callGlDeleteSamplers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteSamplers(%" PRId32 ", %p)", count, samplers);
         if (glDeleteSamplers != nullptr) {
             glDeleteSamplers(count, samplers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteSamplers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteSamplers");
         }
@@ -15220,10 +12654,6 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteTextures(%" PRId32 ", %p)", count, textures);
         if (glDeleteTextures != nullptr) {
             glDeleteTextures(count, textures);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteTextures returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteTextures");
         }
@@ -15241,10 +12671,6 @@ bool callGlGenSamplers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenSamplers(%" PRId32 ", %p)", count, samplers);
         if (glGenSamplers != nullptr) {
             glGenSamplers(count, samplers);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenSamplers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenSamplers");
         }
@@ -15262,10 +12688,6 @@ bool callGlGenTextures(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenTextures(%" PRId32 ", %p)", count, textures);
         if (glGenTextures != nullptr) {
             glGenTextures(count, textures);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenTextures returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenTextures");
         }
@@ -15282,10 +12704,6 @@ bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenerateMipmap(%u)", target);
         if (glGenerateMipmap != nullptr) {
             glGenerateMipmap(target);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenerateMipmap returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenerateMipmap");
         }
@@ -15304,10 +12722,6 @@ bool callGlGetSamplerParameterIiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIiv(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIiv != nullptr) {
             glGetSamplerParameterIiv(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIiv");
         }
@@ -15326,10 +12740,6 @@ bool callGlGetSamplerParameterIuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterIuiv(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterIuiv != nullptr) {
             glGetSamplerParameterIuiv(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterIuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterIuiv");
         }
@@ -15348,10 +12758,6 @@ bool callGlGetSamplerParameterfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameterfv != nullptr) {
             glGetSamplerParameterfv(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameterfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameterfv");
         }
@@ -15370,10 +12776,6 @@ bool callGlGetSamplerParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, params);
         if (glGetSamplerParameteriv != nullptr) {
             glGetSamplerParameteriv(sampler, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetSamplerParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetSamplerParameteriv");
         }
@@ -15394,10 +12796,6 @@ bool callGlGetTexLevelParameterfv(Stack* stack, bool pushReturn) {
                    params);
         if (glGetTexLevelParameterfv != nullptr) {
             glGetTexLevelParameterfv(target, level, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexLevelParameterfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexLevelParameterfv");
         }
@@ -15418,10 +12816,6 @@ bool callGlGetTexLevelParameteriv(Stack* stack, bool pushReturn) {
                    params);
         if (glGetTexLevelParameteriv != nullptr) {
             glGetTexLevelParameteriv(target, level, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexLevelParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexLevelParameteriv");
         }
@@ -15440,10 +12834,6 @@ bool callGlGetTexParameterIiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIiv(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIiv != nullptr) {
             glGetTexParameterIiv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIiv");
         }
@@ -15462,10 +12852,6 @@ bool callGlGetTexParameterIuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterIuiv(%u, %u, %p)", target, pname, params);
         if (glGetTexParameterIuiv != nullptr) {
             glGetTexParameterIuiv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterIuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterIuiv");
         }
@@ -15484,10 +12870,6 @@ bool callGlGetTexParameterfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameterfv(%u, %u, %p)", target, parameter, values);
         if (glGetTexParameterfv != nullptr) {
             glGetTexParameterfv(target, parameter, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameterfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameterfv");
         }
@@ -15506,10 +12888,6 @@ bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetTexParameteriv(%u, %u, %p)", target, parameter, values);
         if (glGetTexParameteriv != nullptr) {
             glGetTexParameteriv(target, parameter, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTexParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTexParameteriv");
         }
@@ -15529,10 +12907,6 @@ bool callGlIsSampler(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %" PRIu8 "", return_value);
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsSampler returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsSampler");
@@ -15554,10 +12928,6 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsTexture returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsTexture");
         }
@@ -15575,10 +12945,6 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPixelStorei(%u, %" PRId32 ")", parameter, value);
         if (glPixelStorei != nullptr) {
             glPixelStorei(parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPixelStorei returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPixelStorei");
         }
@@ -15597,10 +12963,6 @@ bool callGlSamplerParameterIiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIiv(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIiv != nullptr) {
             glSamplerParameterIiv(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIiv");
         }
@@ -15619,10 +12981,6 @@ bool callGlSamplerParameterIuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterIuiv(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterIuiv != nullptr) {
             glSamplerParameterIuiv(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterIuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterIuiv");
         }
@@ -15641,10 +12999,6 @@ bool callGlSamplerParameterf(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterf(%" PRIu32 ", %u, %f)", sampler, pname, param);
         if (glSamplerParameterf != nullptr) {
             glSamplerParameterf(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterf returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterf");
         }
@@ -15663,10 +13017,6 @@ bool callGlSamplerParameterfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameterfv(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameterfv != nullptr) {
             glSamplerParameterfv(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameterfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameterfv");
         }
@@ -15685,10 +13035,6 @@ bool callGlSamplerParameteri(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameteri(%" PRIu32 ", %u, %" PRId32 ")", sampler, pname, param);
         if (glSamplerParameteri != nullptr) {
             glSamplerParameteri(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameteri returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameteri");
         }
@@ -15707,10 +13053,6 @@ bool callGlSamplerParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glSamplerParameteriv(%" PRIu32 ", %u, %p)", sampler, pname, param);
         if (glSamplerParameteriv != nullptr) {
             glSamplerParameteriv(sampler, pname, param);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glSamplerParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glSamplerParameteriv");
         }
@@ -15729,10 +13071,6 @@ bool callGlTexBuffer(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexBuffer(%u, %u, %" PRIu32 ")", target, internalformat, buffer);
         if (glTexBuffer != nullptr) {
             glTexBuffer(target, internalformat, buffer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBuffer");
         }
@@ -15754,10 +13092,6 @@ bool callGlTexBufferRange(Stack* stack, bool pushReturn) {
                    internalformat, buffer, offset, size);
         if (glTexBufferRange != nullptr) {
             glTexBufferRange(target, internalformat, buffer, offset, size);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexBufferRange returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexBufferRange");
         }
@@ -15784,10 +13118,6 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
                    target, level, internal_format, width, height, border, format, type, data);
         if (glTexImage2D != nullptr) {
             glTexImage2D(target, level, internal_format, width, height, border, format, type, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexImage2D");
         }
@@ -15816,10 +13146,6 @@ bool callGlTexImage3D(Stack* stack, bool pushReturn) {
         if (glTexImage3D != nullptr) {
             glTexImage3D(target, level, internalformat, width, height, depth, border, format, type,
                          data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexImage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexImage3D");
         }
@@ -15838,10 +13164,6 @@ bool callGlTexParameterIiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIiv(%u, %u, %p)", target, pname, params);
         if (glTexParameterIiv != nullptr) {
             glTexParameterIiv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIiv");
         }
@@ -15860,10 +13182,6 @@ bool callGlTexParameterIuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterIuiv(%u, %u, %p)", target, pname, params);
         if (glTexParameterIuiv != nullptr) {
             glTexParameterIuiv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterIuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterIuiv");
         }
@@ -15882,10 +13200,6 @@ bool callGlTexParameterf(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterf(%u, %u, %f)", target, parameter, value);
         if (glTexParameterf != nullptr) {
             glTexParameterf(target, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterf returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterf");
         }
@@ -15904,10 +13218,6 @@ bool callGlTexParameterfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameterfv(%u, %u, %p)", target, pname, params);
         if (glTexParameterfv != nullptr) {
             glTexParameterfv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameterfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameterfv");
         }
@@ -15926,10 +13236,6 @@ bool callGlTexParameteri(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameteri(%u, %u, %" PRId32 ")", target, parameter, value);
         if (glTexParameteri != nullptr) {
             glTexParameteri(target, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameteri returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameteri");
         }
@@ -15948,10 +13254,6 @@ bool callGlTexParameteriv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glTexParameteriv(%u, %u, %p)", target, pname, params);
         if (glTexParameteriv != nullptr) {
             glTexParameteriv(target, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexParameteriv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexParameteriv");
         }
@@ -15973,10 +13275,6 @@ bool callGlTexStorage2D(Stack* stack, bool pushReturn) {
                    internalformat, width, height);
         if (glTexStorage2D != nullptr) {
             glTexStorage2D(target, levels, internalformat, width, height);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage2D");
         }
@@ -16001,10 +13299,6 @@ bool callGlTexStorage2DMultisample(Stack* stack, bool pushReturn) {
         if (glTexStorage2DMultisample != nullptr) {
             glTexStorage2DMultisample(target, samples, internalformat, width, height,
                                       fixedsamplelocations);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage2DMultisample returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage2DMultisample");
         }
@@ -16027,10 +13321,6 @@ bool callGlTexStorage3D(Stack* stack, bool pushReturn) {
                    target, levels, internalformat, width, height, depth);
         if (glTexStorage3D != nullptr) {
             glTexStorage3D(target, levels, internalformat, width, height, depth);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage3D");
         }
@@ -16056,10 +13346,6 @@ bool callGlTexStorage3DMultisample(Stack* stack, bool pushReturn) {
         if (glTexStorage3DMultisample != nullptr) {
             glTexStorage3DMultisample(target, samples, internalformat, width, height, depth,
                                       fixedsamplelocations);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexStorage3DMultisample returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexStorage3DMultisample");
         }
@@ -16086,10 +13372,6 @@ bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
                    target, level, xoffset, yoffset, width, height, format, type, data);
         if (glTexSubImage2D != nullptr) {
             glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexSubImage2D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexSubImage2D");
         }
@@ -16120,10 +13402,6 @@ bool callGlTexSubImage3D(Stack* stack, bool pushReturn) {
         if (glTexSubImage3D != nullptr) {
             glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format,
                             type, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTexSubImage3D returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTexSubImage3D");
         }
@@ -16140,10 +13418,6 @@ bool callGlBeginTransformFeedback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBeginTransformFeedback(%u)", primitiveMode);
         if (glBeginTransformFeedback != nullptr) {
             glBeginTransformFeedback(primitiveMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBeginTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBeginTransformFeedback");
         }
@@ -16161,10 +13435,6 @@ bool callGlBindTransformFeedback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindTransformFeedback(%u, %" PRIu32 ")", target, id);
         if (glBindTransformFeedback != nullptr) {
             glBindTransformFeedback(target, id);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindTransformFeedback");
         }
@@ -16182,10 +13452,6 @@ bool callGlDeleteTransformFeedbacks(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteTransformFeedbacks(%" PRId32 ", %p)", n, ids);
         if (glDeleteTransformFeedbacks != nullptr) {
             glDeleteTransformFeedbacks(n, ids);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteTransformFeedbacks returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteTransformFeedbacks");
         }
@@ -16201,10 +13467,6 @@ bool callGlEndTransformFeedback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEndTransformFeedback()");
         if (glEndTransformFeedback != nullptr) {
             glEndTransformFeedback();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEndTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEndTransformFeedback");
         }
@@ -16222,10 +13484,6 @@ bool callGlGenTransformFeedbacks(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenTransformFeedbacks(%" PRId32 ", %p)", n, ids);
         if (glGenTransformFeedbacks != nullptr) {
             glGenTransformFeedbacks(n, ids);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenTransformFeedbacks returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenTransformFeedbacks");
         }
@@ -16250,10 +13508,6 @@ bool callGlGetTransformFeedbackVarying(Stack* stack, bool pushReturn) {
                    program, index, bufSize, length, size, type, name);
         if (glGetTransformFeedbackVarying != nullptr) {
             glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetTransformFeedbackVarying returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetTransformFeedbackVarying");
         }
@@ -16274,10 +13528,6 @@ bool callGlIsTransformFeedback(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsTransformFeedback");
         }
@@ -16293,10 +13543,6 @@ bool callGlPauseTransformFeedback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glPauseTransformFeedback()");
         if (glPauseTransformFeedback != nullptr) {
             glPauseTransformFeedback();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glPauseTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glPauseTransformFeedback");
         }
@@ -16312,10 +13558,6 @@ bool callGlResumeTransformFeedback(Stack* stack, bool pushReturn) {
         GAPID_INFO("glResumeTransformFeedback()");
         if (glResumeTransformFeedback != nullptr) {
             glResumeTransformFeedback();
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glResumeTransformFeedback returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glResumeTransformFeedback");
         }
@@ -16336,10 +13578,6 @@ bool callGlTransformFeedbackVaryings(Stack* stack, bool pushReturn) {
                    varyings, bufferMode);
         if (glTransformFeedbackVaryings != nullptr) {
             glTransformFeedbackVaryings(program, count, varyings, bufferMode);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glTransformFeedbackVaryings returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glTransformFeedbackVaryings");
         }
@@ -16356,10 +13594,6 @@ bool callGlBindVertexArray(Stack* stack, bool pushReturn) {
         GAPID_INFO("glBindVertexArray(%" PRIu32 ")", array);
         if (glBindVertexArray != nullptr) {
             glBindVertexArray(array);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindVertexArray returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindVertexArray");
         }
@@ -16380,10 +13614,6 @@ bool callGlBindVertexBuffer(Stack* stack, bool pushReturn) {
                    binding_index, buffer, offset, stride);
         if (glBindVertexBuffer != nullptr) {
             glBindVertexBuffer(binding_index, buffer, offset, stride);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glBindVertexBuffer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glBindVertexBuffer");
         }
@@ -16401,10 +13631,6 @@ bool callGlDeleteVertexArrays(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDeleteVertexArrays(%" PRId32 ", %p)", count, arrays);
         if (glDeleteVertexArrays != nullptr) {
             glDeleteVertexArrays(count, arrays);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDeleteVertexArrays returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDeleteVertexArrays");
         }
@@ -16421,10 +13647,6 @@ bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
         GAPID_INFO("glDisableVertexAttribArray(%" PRIu32 ")", location);
         if (glDisableVertexAttribArray != nullptr) {
             glDisableVertexAttribArray(location);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDisableVertexAttribArray returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glDisableVertexAttribArray");
         }
@@ -16441,10 +13663,6 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
         GAPID_INFO("glEnableVertexAttribArray(%" PRIu32 ")", location);
         if (glEnableVertexAttribArray != nullptr) {
             glEnableVertexAttribArray(location);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glEnableVertexAttribArray returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glEnableVertexAttribArray");
         }
@@ -16462,10 +13680,6 @@ bool callGlGenVertexArrays(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGenVertexArrays(%" PRId32 ", %p)", count, arrays);
         if (glGenVertexArrays != nullptr) {
             glGenVertexArrays(count, arrays);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGenVertexArrays returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGenVertexArrays");
         }
@@ -16484,10 +13698,6 @@ bool callGlGetVertexAttribIiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetVertexAttribIiv(%" PRIu32 ", %u, %p)", index, pname, params);
         if (glGetVertexAttribIiv != nullptr) {
             glGetVertexAttribIiv(index, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetVertexAttribIiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetVertexAttribIiv");
         }
@@ -16506,10 +13716,6 @@ bool callGlGetVertexAttribIuiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetVertexAttribIuiv(%" PRIu32 ", %u, %p)", index, pname, params);
         if (glGetVertexAttribIuiv != nullptr) {
             glGetVertexAttribIuiv(index, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetVertexAttribIuiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetVertexAttribIuiv");
         }
@@ -16528,10 +13734,6 @@ bool callGlGetVertexAttribPointerv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetVertexAttribPointerv(%" PRIu32 ", %u, %p)", index, pname, pointer);
         if (glGetVertexAttribPointerv != nullptr) {
             glGetVertexAttribPointerv(index, pname, pointer);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetVertexAttribPointerv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetVertexAttribPointerv");
         }
@@ -16550,10 +13752,6 @@ bool callGlGetVertexAttribfv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetVertexAttribfv(%" PRIu32 ", %u, %p)", index, pname, params);
         if (glGetVertexAttribfv != nullptr) {
             glGetVertexAttribfv(index, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetVertexAttribfv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetVertexAttribfv");
         }
@@ -16572,10 +13770,6 @@ bool callGlGetVertexAttribiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetVertexAttribiv(%" PRIu32 ", %u, %p)", index, pname, params);
         if (glGetVertexAttribiv != nullptr) {
             glGetVertexAttribiv(index, pname, params);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetVertexAttribiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetVertexAttribiv");
         }
@@ -16596,10 +13790,6 @@ bool callGlIsVertexArray(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<uint8_t>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glIsVertexArray returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glIsVertexArray");
         }
@@ -16617,10 +13807,6 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib1f(%" PRIu32 ", %f)", location, value0);
         if (glVertexAttrib1f != nullptr) {
             glVertexAttrib1f(location, value0);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib1f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib1f");
         }
@@ -16638,10 +13824,6 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib1fv(%" PRIu32 ", %p)", location, value);
         if (glVertexAttrib1fv != nullptr) {
             glVertexAttrib1fv(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib1fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib1fv");
         }
@@ -16660,10 +13842,6 @@ bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib2f(%" PRIu32 ", %f, %f)", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
             glVertexAttrib2f(location, value0, value1);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib2f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib2f");
         }
@@ -16681,10 +13859,6 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib2fv(%" PRIu32 ", %p)", location, value);
         if (glVertexAttrib2fv != nullptr) {
             glVertexAttrib2fv(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib2fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib2fv");
         }
@@ -16704,10 +13878,6 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib3f(%" PRIu32 ", %f, %f, %f)", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
             glVertexAttrib3f(location, value0, value1, value2);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib3f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib3f");
         }
@@ -16725,10 +13895,6 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib3fv(%" PRIu32 ", %p)", location, value);
         if (glVertexAttrib3fv != nullptr) {
             glVertexAttrib3fv(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib3fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib3fv");
         }
@@ -16750,10 +13916,6 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
                    value2, value3);
         if (glVertexAttrib4f != nullptr) {
             glVertexAttrib4f(location, value0, value1, value2, value3);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib4f returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib4f");
         }
@@ -16771,10 +13933,6 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttrib4fv(%" PRIu32 ", %p)", location, value);
         if (glVertexAttrib4fv != nullptr) {
             glVertexAttrib4fv(location, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttrib4fv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttrib4fv");
         }
@@ -16792,10 +13950,6 @@ bool callGlVertexAttribBinding(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribBinding(%" PRIu32 ", %" PRIu32 ")", index, binding_index);
         if (glVertexAttribBinding != nullptr) {
             glVertexAttribBinding(index, binding_index);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribBinding returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribBinding");
         }
@@ -16813,10 +13967,6 @@ bool callGlVertexAttribDivisor(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribDivisor(%" PRIu32 ", %" PRIu32 ")", index, divisor);
         if (glVertexAttribDivisor != nullptr) {
             glVertexAttribDivisor(index, divisor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribDivisor returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribDivisor");
         }
@@ -16838,10 +13988,6 @@ bool callGlVertexAttribFormat(Stack* stack, bool pushReturn) {
                    index, size, type, normalized, relativeoffset);
         if (glVertexAttribFormat != nullptr) {
             glVertexAttribFormat(index, size, type, normalized, relativeoffset);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribFormat returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribFormat");
         }
@@ -16864,10 +14010,6 @@ bool callGlVertexAttribI4i(Stack* stack, bool pushReturn) {
                    index, x, y, z, w);
         if (glVertexAttribI4i != nullptr) {
             glVertexAttribI4i(index, x, y, z, w);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribI4i returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribI4i");
         }
@@ -16885,10 +14027,6 @@ bool callGlVertexAttribI4iv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribI4iv(%" PRIu32 ", %p)", index, values);
         if (glVertexAttribI4iv != nullptr) {
             glVertexAttribI4iv(index, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribI4iv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribI4iv");
         }
@@ -16911,10 +14049,6 @@ bool callGlVertexAttribI4ui(Stack* stack, bool pushReturn) {
                    index, x, y, z, w);
         if (glVertexAttribI4ui != nullptr) {
             glVertexAttribI4ui(index, x, y, z, w);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribI4ui returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribI4ui");
         }
@@ -16932,10 +14066,6 @@ bool callGlVertexAttribI4uiv(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexAttribI4uiv(%" PRIu32 ", %p)", index, values);
         if (glVertexAttribI4uiv != nullptr) {
             glVertexAttribI4uiv(index, values);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribI4uiv returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribI4uiv");
         }
@@ -16956,10 +14086,6 @@ bool callGlVertexAttribIFormat(Stack* stack, bool pushReturn) {
                    type, relativeoffset);
         if (glVertexAttribIFormat != nullptr) {
             glVertexAttribIFormat(index, size, type, relativeoffset);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribIFormat returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribIFormat");
         }
@@ -16981,10 +14107,6 @@ bool callGlVertexAttribIPointer(Stack* stack, bool pushReturn) {
                    location, size, type, stride, data);
         if (glVertexAttribIPointer != nullptr) {
             glVertexAttribIPointer(location, size, type, stride, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribIPointer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribIPointer");
         }
@@ -17008,10 +14130,6 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
                    location, size, type, normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexAttribPointer returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexAttribPointer");
         }
@@ -17029,10 +14147,6 @@ bool callGlVertexBindingDivisor(Stack* stack, bool pushReturn) {
         GAPID_INFO("glVertexBindingDivisor(%" PRIu32 ", %" PRIu32 ")", binding_index, divisor);
         if (glVertexBindingDivisor != nullptr) {
             glVertexBindingDivisor(binding_index, divisor);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glVertexBindingDivisor returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glVertexBindingDivisor");
         }
@@ -17054,10 +14168,6 @@ bool callEglInitialize(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %d", return_value);
             if (pushReturn) {
                 stack->push<int>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("eglInitialize returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglInitialize");
@@ -17082,10 +14192,6 @@ bool callEglCreateContext(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("eglCreateContext returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglCreateContext");
         }
@@ -17109,10 +14215,6 @@ bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("eglMakeCurrent returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglMakeCurrent");
         }
@@ -17133,10 +14235,6 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %d", return_value);
             if (pushReturn) {
                 stack->push<int>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("eglSwapBuffers returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglSwapBuffers");
@@ -17161,10 +14259,6 @@ bool callEglQuerySurface(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("eglQuerySurface returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglQuerySurface");
         }
@@ -17187,10 +14281,6 @@ bool callGlXCreateContext(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %p", return_value);
             if (pushReturn) {
                 stack->push<void*>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXCreateContext returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXCreateContext");
@@ -17217,10 +14307,6 @@ bool callGlXCreateNewContext(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXCreateNewContext returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXCreateNewContext");
         }
@@ -17244,10 +14330,6 @@ bool callGlXMakeContextCurrent(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXMakeContextCurrent returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXMakeContextCurrent");
         }
@@ -17270,10 +14352,6 @@ bool callGlXMakeCurrent(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXMakeCurrent returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXMakeCurrent");
         }
@@ -17291,10 +14369,6 @@ bool callGlXSwapBuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("glXSwapBuffers(%p, %p)", display, drawable);
         if (glXSwapBuffers != nullptr) {
             glXSwapBuffers(display, drawable);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXSwapBuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXSwapBuffers");
         }
@@ -17318,10 +14392,6 @@ bool callGlXQueryDrawable(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glXQueryDrawable returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXQueryDrawable");
         }
@@ -17341,10 +14411,6 @@ bool callWglCreateContext(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %p", return_value);
             if (pushReturn) {
                 stack->push<void*>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("wglCreateContext returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglCreateContext");
@@ -17368,10 +14434,6 @@ bool callWglCreateContextAttribsARB(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("wglCreateContextAttribsARB returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglCreateContextAttribsARB");
         }
@@ -17393,10 +14455,6 @@ bool callWglMakeCurrent(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("wglMakeCurrent returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglMakeCurrent");
         }
@@ -17413,10 +14471,6 @@ bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
         GAPID_INFO("wglSwapBuffers(%p)", hdc);
         if (wglSwapBuffers != nullptr) {
             wglSwapBuffers(hdc);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("wglSwapBuffers returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglSwapBuffers");
         }
@@ -17439,10 +14493,6 @@ bool callCGLCreateContext(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("CGLCreateContext returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLCreateContext");
         }
@@ -17462,10 +14512,6 @@ bool callCGLSetCurrentContext(Stack* stack, bool pushReturn) {
             GAPID_INFO("Returned: %d", return_value);
             if (pushReturn) {
                 stack->push<int>(return_value);
-            }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("CGLSetCurrentContext returned error: 0x%x", err);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLSetCurrentContext");
@@ -17490,10 +14536,6 @@ bool callCGLGetSurface(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("CGLGetSurface returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLGetSurface");
         }
@@ -17517,10 +14559,6 @@ bool callCGSGetSurfaceBounds(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("CGSGetSurfaceBounds returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGSGetSurfaceBounds");
         }
@@ -17541,10 +14579,6 @@ bool callCGLFlushDrawable(Stack* stack, bool pushReturn) {
             if (pushReturn) {
                 stack->push<int>(return_value);
             }
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("CGLFlushDrawable returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLFlushDrawable");
         }
@@ -17563,10 +14597,6 @@ bool callGlGetQueryObjecti64v(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjecti64v(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjecti64v != nullptr) {
             glGetQueryObjecti64v(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjecti64v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjecti64v");
         }
@@ -17585,10 +14615,6 @@ bool callGlGetQueryObjectui64v(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetQueryObjectui64v(%" PRIu32 ", %u, %p)", query, parameter, value);
         if (glGetQueryObjectui64v != nullptr) {
             glGetQueryObjectui64v(query, parameter, value);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glGetQueryObjectui64v returned error: 0x%x", err);
-            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectui64v");
         }
