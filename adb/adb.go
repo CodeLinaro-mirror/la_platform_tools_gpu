@@ -23,8 +23,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 // ErrADBNotFound is returned when the ADB executable is not found.
@@ -39,19 +37,15 @@ var ErrDeviceUnauthorized = errors.New("Device unauthorized")
 var adb string
 
 func init() {
-	// Search for ADB using ANDROID_HOME
+	search := "adb"
+	// If ANDROID_HOME is set, build a fully rooted path
+	// We still want to call LookPath to pick up the extension and check the binary exists
 	if home := os.Getenv("ANDROID_HOME"); home != "" {
-		path, err := filepath.Abs(filepath.Join(home, "platform-tools", "adb") + maker.HostExecutableExtension)
-		if err == nil {
-			if _, err := os.Stat(path); err == nil {
-				adb = path
-				return
-			}
-		}
+		search = filepath.Join(home, "platform-tools", search)
 	}
 
-	// Fallback to searching on PATH.
-	if p, err := exec.LookPath("adb"); err == nil {
+	// Search the path if no directory prefix, otherwise just check the executable.
+	if p, err := exec.LookPath(search); err == nil {
 		if p, err = filepath.Abs(p); err == nil {
 			adb = p
 		}
