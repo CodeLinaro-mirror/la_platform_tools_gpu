@@ -57,7 +57,7 @@ func Run() {
 	do := flag.String("do", "make", "The action to perform, one of make, show or clean.")
 	early := flag.Bool("early", false, "Stops the build at the first error, also disables parallel builds.")
 	threads := flag.Int("threads", runtime.NumCPU(), "Set number of OS threads to use. 0 disables parallel builds.")
-	targetOS := flag.String("targetos", config.TargetOS, "target OS to build")
+	targetOS := flag.String("targetos", config.TargetOS.Name, "target OS to build")
 	var disables stringSetFlag
 	flag.Var(&disables, "disable", "Disable a specific node")
 	flag.Parse()
@@ -73,7 +73,7 @@ func Run() {
 	}
 
 	config.Verbose = *verbose
-	config.TargetOS = *targetOS
+	config.TargetOS = config.FindOS(*targetOS)
 	// Build the entity graph
 	for _, f := range prepares {
 		f()

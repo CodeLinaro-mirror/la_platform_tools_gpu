@@ -89,7 +89,7 @@ func init() {
 		//
 		graph.List("code").DependsOn("embed", "apic", "codergen")
 		// The native code rules
-		cctargets := []string{config.TargetOS}
+		cctargets := []string{config.TargetOS.Name}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}

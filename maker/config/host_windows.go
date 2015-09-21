@@ -16,5 +16,4 @@
 
 package config
 
-const HostOS = "windows"
-const HostExecutableExtension = ".exe"
+var HostOS = Windows

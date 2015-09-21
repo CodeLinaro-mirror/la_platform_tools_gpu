@@ -44,7 +44,7 @@ var (
 	// EnvVars holds the environment overrides used when spawning external commands.
 	EnvVars = map[string][]string{}
 
-	TargetOS string = HostOS
+	TargetOS = HostOS
 )
 
 func init() {

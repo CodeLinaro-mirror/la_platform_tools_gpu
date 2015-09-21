@@ -34,22 +34,10 @@ var GCC = &cpp.Toolchain{
 	DepFileFor: depFileFor,
 	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	DllName: func(cfg cpp.Config) string {
-		switch cfg.OS {
-		case "windows":
-			return cfg.Name + ".dll"
-		case "osx":
-			return cfg.Name + ".dylib"
-		default:
-			return cfg.Name + ".so"
-		}
+		return cfg.Name + cfg.OS.DllExtension
 	},
 	ExeName: func(cfg cpp.Config) string {
-		switch cfg.OS {
-		case "windows":
-			return cfg.Name + ".exe"
-		default:
-			return cfg.Name
-		}
+		return cfg.Name + cfg.OS.ExecutableExtension
 	},
 	ObjExt: func(cpp.Config) string { return ".o" },
 }
@@ -63,16 +51,16 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	var t tools
 
 	switch config.HostOS {
-	case "linux":
+	case config.Linux:
 		switch cfg.OS {
-		case "linux":
+		case config.Linux:
 			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")
 			t = tools{
 				cc: bin.Join("x86_64-linux-gcc"),
 				ar: bin.Join("x86_64-linux-ar"),
 			}
 
-		case "windows":
+		case config.Windows:
 			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-w64-mingw32-4.8", "bin")
 			t = tools{
 				cc: bin.Join("x86_64-w64-mingw32-gcc"),
@@ -83,9 +71,9 @@ func getTools(cfg cpp.Config) (*tools, error) {
 			return nil, fmt.Errorf("Cross compiling to '%s' is currently not avaliable", cfg.OS)
 		}
 
-	case "osx":
+	case config.OSX:
 		switch cfg.OS {
-		case "osx":
+		case config.OSX:
 			bin := build.RepoRoot.Path.Join("prebuilts", "clang", "darwin-x86", "sdk", "3.5", "bin")
 			ar, _ := build.File("ar").LookPath()
 			t = tools{
@@ -138,7 +126,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		// "-fcolor-diagnostics", clang-only
 		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 	}, cfg.CompilerArgs...)
-	if cfg.OS == "osx" {
+	if cfg.OS == config.OSX {
 		a = append(a, "-stdlib=libc++")
 	}
 	for _, isp := range cfg.IncludeSearchPaths {
@@ -182,7 +170,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	}, cfg.LinkerArgs...)
 
 	switch cfg.OS {
-	case "osx":
+	case config.OSX:
 		a = append(a, "-dynamiclib")
 		a = append(a, "-compatibility_version", "1.0.0")
 		a = append(a, "-current_version", "1.0.0")
@@ -216,7 +204,7 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	a := append([]string{
 		optFlags(cfg),
 	}, cfg.LinkerArgs...)
-	if cfg.OS == "osx" {
+	if cfg.OS == config.OSX {
 		a = append(a, "-stdlib=libc++")
 	}
 	for _, lsp := range cfg.LibrarySearchPaths {

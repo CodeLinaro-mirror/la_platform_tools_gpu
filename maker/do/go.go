@@ -42,7 +42,7 @@ func GoCommand(args ...string) *graph.Step {
 func GoInstall(root string, relative string) graph.Entity {
 	module := maker.Path(root, relative)
 	_, name := maker.PathSplit(module)
-	dst := graph.File(config.Paths.Bin, name+config.HostExecutableExtension)
+	dst := graph.File(config.Paths.Bin, name+config.HostOS.ExecutableExtension)
 	if graph.Creator(dst) == nil {
 		GoCommand("install", module).Creates(dst).AlwaysRun()
 	}

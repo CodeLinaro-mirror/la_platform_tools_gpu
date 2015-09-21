@@ -42,12 +42,6 @@ var ndkArchToTarget = map[string]ndkTarget{
 	"x86_64": {"x86_64", "4.9", "x86_64"},
 }
 
-var osToSystem = map[string]string{
-	"windows": "windows-x86_64",
-	"linux":   "linux-x86_64",
-	"osx":     "darwin-x86_64",
-}
-
 // Toolchain for building an Android executable env, without being packaged into an
 // APK (user-debug only).
 var EXE = &cpp.Toolchain{
@@ -98,8 +92,8 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		return nil, fmt.Errorf("NDK architecture '%s' not supported", cfg.Architecture)
 	}
 
-	system, ok := osToSystem[config.HostOS]
-	if !ok {
+	system := config.HostOS.System
+	if system == "" {
 		return nil, fmt.Errorf("NDK host OS '%s' not supported", config.HostOS)
 	}
 
@@ -116,9 +110,9 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
 
 	return &tools{
-		as: bin.Join(target.name + "-as" + config.HostExecutableExtension),
-		cc: bin.Join(target.name + "-gcc" + config.HostExecutableExtension),
-		ar: bin.Join(target.name + "-ar" + config.HostExecutableExtension),
+		as: bin.Join(target.name + "-as" + config.HostOS.ExecutableExtension),
+		cc: bin.Join(target.name + "-gcc" + config.HostOS.ExecutableExtension),
+		ar: bin.Join(target.name + "-ar" + config.HostOS.ExecutableExtension),
 		incdirs: build.FileSet{
 			stlBase.Join("include"),
 			stlBase.Join("libs", target.abi, "include"),

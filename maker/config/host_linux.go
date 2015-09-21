@@ -16,5 +16,4 @@
 
 package config
 
-const HostOS = "linux"
-const HostExecutableExtension = ""
+var HostOS = Linux

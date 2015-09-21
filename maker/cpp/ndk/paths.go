@@ -76,7 +76,7 @@ func ResolvePaths() (Paths, error) {
 		return Paths{}, err
 	}
 
-	paths.Jarsigner = java.Join("bin", "jarsigner"+config.HostExecutableExtension)
+	paths.Jarsigner = java.Join("bin", "jarsigner"+config.HostOS.ExecutableExtension)
 	if !paths.Jarsigner.Exists() {
 		return Paths{}, fmt.Errorf("Java SDK does not contain jarsigner")
 	}
@@ -86,12 +86,12 @@ func ResolvePaths() (Paths, error) {
 		return Paths{}, fmt.Errorf("Android SDK does not contain required build-tools: %s", ndkBuildTools)
 	}
 
-	paths.AAPT = buildtools.Join("aapt" + config.HostExecutableExtension)
+	paths.AAPT = buildtools.Join("aapt" + config.HostOS.ExecutableExtension)
 	if !paths.AAPT.Exists() {
 		return Paths{}, fmt.Errorf("Android SDK does not contain aapt tool")
 	}
 
-	paths.Zipalign = buildtools.Join("zipalign" + config.HostExecutableExtension)
+	paths.Zipalign = buildtools.Join("zipalign" + config.HostOS.ExecutableExtension)
 	if !paths.Zipalign.Exists() {
 		return Paths{}, fmt.Errorf("Android SDK does not contain zipalign tool")
 	}
