@@ -37,7 +37,7 @@ type readFramebuffer struct {
 	injections map[atom.ID][]func(out atom.Writer)
 }
 
-func NewReadFramebuffer(d database.Database, l log.Logger) *readFramebuffer {
+func newReadFramebuffer(d database.Database, l log.Logger) *readFramebuffer {
 	return &readFramebuffer{
 		state:      gfxapi.NewState(),
 		database:   d,
@@ -260,13 +260,13 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 			outH = int32(height)
 		)
 
-		// Generate new unused object IDs.
-		renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
-		framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
-
 		if inW == outW && inH == outH {
 			postColorData(s, outW, outH, out, img)
 		} else {
+			// Generate new unused object IDs.
+			renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
+			framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
+
 			ctx := getContext(s)
 			origScissor := ctx.Rasterizing.Scissor
 

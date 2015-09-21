@@ -89,7 +89,7 @@ func (a api) Replay(
 	injector := &transform.Injector{}
 
 	// Transform for all framebuffer reads.
-	readFramebuffer := NewReadFramebuffer(d, l)
+	readFramebuffer := newReadFramebuffer(d, l)
 
 	profiling := false
 
