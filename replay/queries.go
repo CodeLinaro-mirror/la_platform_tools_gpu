@@ -34,6 +34,17 @@ const (
 	AllWireframe
 )
 
+// QueryIssues is the interface implemented by types that can verify the replay
+// performs as expected and without errors. The returned chan will receive a
+// stream of issues detected while replaying the capture and the chan will close
+// after the last issue is sent (if any).
+// If the capture includes FramebufferObservation atoms, this also includes
+// checking the replayed framebuffer matches (within reasonable error) the
+// framebuffer observed at capture time.
+type QueryIssues interface {
+	QueryIssues(ctx Context, mgr *Manager) <-chan Issue
+}
+
 // QueryColorBuffer is the interface implemented by types that can return the
 // content of the color buffer at a particular point in a capture.
 type QueryColorBuffer interface {
@@ -50,6 +61,12 @@ type QueryDepthBuffer interface {
 // duration of each call in a capture.
 type QueryCallDurations interface {
 	QueryCallDurations(ctx Context, mgr *Manager, flags service.TimingFlags) <-chan CallTiming
+}
+
+// Issue represents a single replay issue reported by QueryIssues.
+type Issue struct {
+	Atom  atom.ID // The atom that reported the issue.
+	Error error   // The error that occurred generating the timing, if there was one.
 }
 
 // CallTiming represents the call timing information for a replay.

@@ -25,6 +25,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
@@ -73,6 +74,29 @@ func checkImage(t *testing.T, name string, got image.Image, threshold float64) {
 		err := compareImages(t, expected, got)
 		if err > threshold {
 			t.Errorf("%v had error of %v%% which is above the threshold of %v%%", name, err*100, threshold*100)
+		}
+	}
+}
+
+func checkIssues(t *testing.T, ctx replay.Context, mgr *replay.Manager, expected []replay.Issue, done *sync.WaitGroup) {
+	if done != nil {
+		defer done.Done()
+	}
+	issues := gles.API().(replay.QueryIssues).QueryIssues(ctx, mgr)
+	timeout := time.Tick(replayTimeout)
+	got := []replay.Issue{}
+	for {
+		select {
+		case issue, more := <-issues:
+			if more {
+				got = append(got, issue)
+			} else {
+				check.SlicesDeepEqual(t, got, expected)
+				return
+			}
+		case <-timeout:
+			// Panic instead of erroring so we see the status of the go-routine we're waiting for.
+			panic(fmt.Errorf("Timeout querying for issue"))
 		}
 	}
 }
@@ -183,6 +207,9 @@ func setContextInfo(width, height int, preserveBuffersOnSwap bool) atom.Atom {
 		PreserveBuffersOnSwap: preserveBuffersOnSwap,
 	}
 }
+
+// firstAtomID is the identifier of the first atom after initContext.
+const firstAtomID atom.ID = 3
 
 func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) *atom.List {
 	eglDisplay := p(0x1000)
@@ -339,5 +366,50 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapA, done)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapB, done)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapC, done)
+	done.Wait()
+}
+
+// TestIssues tests the QueryIssues replay command with various streams.
+func TestIssues(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
+	a := device.Info().Architecture()
+
+	done := &sync.WaitGroup{}
+
+	for _, test := range []struct {
+		name     string
+		atoms    []atom.Atom
+		expected []replay.Issue
+	}{
+		{
+			"glClear - no errors",
+			[]atom.Atom{
+				gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
+				gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
+			},
+			[]replay.Issue{},
+		}, {
+			"glActiveTexture - invalid enum",
+			[]atom.Atom{&directCall{atom: gles.NewGlActiveTexture(gles.GLenum_GL_TEXTURE0 - 1)}},
+			[]replay.Issue{
+				replay.Issue{
+					Atom:  firstAtomID,
+					Error: fmt.Errorf("glGetError() returned %v", gles.GLenum_GL_INVALID_ENUM),
+				},
+			},
+		},
+	} {
+		atoms := initContext(a, d, l, 64, 64, true)
+		atoms.Add(test.atoms...)
+		ctx := replay.Context{
+			Capture: utils.StoreCapture(t, atoms, d, l).ID,
+			Device:  device.ID(),
+		}
+		done.Add(1)
+		go checkIssues(t, ctx, mgr, test.expected, done)
+	}
+
 	done.Wait()
 }
