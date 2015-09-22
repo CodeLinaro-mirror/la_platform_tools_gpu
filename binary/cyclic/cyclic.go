@@ -41,6 +41,7 @@ func Decoder(reader binary.Reader) *decoder {
 		Namespace: registry.Global,
 		entities:  map[uint32]*binary.Entity{},
 		objects:   map[uint32]binary.Object{},
+		substack:  binary.Substack{},
 	}
 }
 
@@ -55,6 +56,7 @@ type decoder struct {
 	Namespace *registry.Namespace
 	entities  map[uint32]*binary.Entity
 	objects   map[uint32]binary.Object
+	substack  binary.Substack
 }
 
 func (e *encoder) Entity(s *binary.Entity, compact bool) {
@@ -91,8 +93,41 @@ func (d *decoder) Entity(compact bool) *binary.Entity {
 	return s
 }
 
-func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
+func (e *encoder) Value(obj binary.Object) {
+	panic("Call to Value on cyclic encoder")
+}
+
+func (e *encoder) Struct(obj binary.Object) error {
+	obj.Class().Encode(e, obj)
+	return e.Error()
+}
+
+func (d *decoder) Value(obj binary.Object) {
+	panic("Call to Value on cyclic decoder")
+}
+
+func (d *decoder) Struct(ent *binary.Entity, obj binary.Object) error {
+	if u := d.Namespace.LookupUpgrader(ent.Signature()); u == nil {
+		return d.SetError(fmt.Errorf("Unknown type id %v", ent))
+	} else {
+		d.substack.PushSubspace(ent)
+		u.DecodeTo(d, obj)
+		return d.Error()
+	}
+}
+
+func (d *decoder) StructPop(obj binary.Object) error {
+	if ent, err := d.PopEntity(); err != nil {
+		return err
+	} else {
+		return d.Struct(ent, obj)
+	}
+}
+
+func (d *decoder) PopEntity() (*binary.Entity, error) {
+	return d.substack.Pop()
+}
+
 func (e *encoder) Variant(obj binary.Object) {
 	if obj == nil {
 		e.Entity(nil, true)
@@ -108,11 +143,12 @@ func (d *decoder) Variant() binary.Object {
 	if entity == nil {
 		return nil
 	}
-	if class := d.Lookup(entity); class == nil {
+	if u := d.Lookup(entity); u == nil {
 		d.SetError(fmt.Errorf("Unknown type %q", entity.Signature()))
 		return nil
 	} else {
-		return class.Decode(d)
+		d.substack.PushSubspace(entity)
+		return u.Decode(d)
 	}
 }
 
@@ -154,6 +190,6 @@ func (d *decoder) Object() binary.Object {
 	return o
 }
 
-func (d *decoder) Lookup(entity *binary.Entity) binary.Class {
-	return d.Namespace.Lookup(entity.Signature())
+func (d *decoder) Lookup(entity *binary.Entity) binary.UpgradeDecoder {
+	return d.Namespace.LookupUpgrader(entity.Signature())
 }

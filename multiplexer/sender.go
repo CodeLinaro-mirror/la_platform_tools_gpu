@@ -17,8 +17,7 @@ package multiplexer
 import (
 	"io"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
@@ -65,7 +64,7 @@ type sendItem interface {
 	channel() channelId
 }
 
-func encodeOpenChannel(e binary.Encoder, s channelId) error {
+func encodeOpenChannel(e encoder, s channelId) error {
 	if err := msgTypeOpenChannel.encode(e); err != nil {
 		return err
 	}
@@ -73,7 +72,7 @@ func encodeOpenChannel(e binary.Encoder, s channelId) error {
 	return e.Error()
 }
 
-func encodeCloseChannel(e binary.Encoder, s channelId) error {
+func encodeCloseChannel(e encoder, s channelId) error {
 	if err := msgTypeCloseChannel.encode(e); err != nil {
 		return err
 	}
@@ -81,7 +80,7 @@ func encodeCloseChannel(e binary.Encoder, s channelId) error {
 	return e.Error()
 }
 
-func encodeData(e binary.Encoder, s channelId, d []byte) error {
+func encodeData(e encoder, s channelId, d []byte) error {
 	if err := msgTypeData.encode(e); err != nil {
 		return err
 	}
@@ -114,9 +113,7 @@ func (s *sender) begin(bufSize, mtu int, out io.Writer) {
 
 	go func() {
 		close(done)
-		// We get away with using a single encoder between multiple channels because we
-		// do not use Encoder.Object() which is the only method that has state.
-		e := cyclic.Encoder(vle.Writer(out))
+		e := flat.Encoder(vle.Writer(out))
 		m := sendMap{}
 		for {
 			if len(m) == 0 {

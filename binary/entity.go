@@ -80,6 +80,14 @@ func (e *Entity) Format(f fmt.State, c rune) {
 	fmt.Fprint(f, "}")
 }
 
+func (c *Entity) Subspace() EntityList {
+	var s EntityList
+	for _, f := range c.Fields {
+		s = append(s, f.Type.Subspace()...)
+	}
+	return s
+}
+
 // FieldList is a slice of fields.
 type FieldList []Field
 
@@ -96,6 +104,7 @@ type Type interface {
 	EncodeValue(e Encoder, value interface{})
 	DecodeValue(d Decoder) interface{}
 	Format(f fmt.State, c rune)
+	Subspace() EntityList
 }
 
 func trimPackage(n string) string {

@@ -12,30 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package multiplexer
+package test
 
-import "sync/atomic"
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-type channelId uint32
-
-func remote(i channelId) channelId {
-	return ^i
+type X_V1 struct {
+	binary.Frozen `name:"X"`
+	a             int32
+	b             int32
 }
 
-func (i *channelId) increment() (old channelId) {
-	return channelId(atomic.AddUint32((*uint32)(i), 1) - 1)
+type X struct {
+	binary.Generate
+	a int32
+	b int32
+	c string
 }
 
-func (i channelId) encode(e encoder) error {
-	e.Uint32(uint32(i))
-	return e.Error()
+func (before *X_V1) upgrade(after *X) {
+	after.a = before.a
+	after.b = before.b
+	after.c = "Hello"
 }
 
-func (i *channelId) decode(d decoder) error {
-	val := d.Uint32()
-	if d.Error() != nil {
-		return d.Error()
-	}
-	*i = channelId(val)
-	return nil
+type Y struct {
+	binary.Generate
+	begin string
+	x     X
+	end   string
 }

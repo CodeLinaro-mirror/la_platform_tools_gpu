@@ -17,6 +17,9 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*TypeA)(nil).Class())
 	Namespace.Add((*TypeB)(nil).Class())
+	Namespace.Add((*X)(nil).Class())
+	Namespace.Add((*Y)(nil).Class())
+	Namespace.Add((*X_V1)(nil).Class())
 }
 
 type binaryClassTypeA struct{}
@@ -82,5 +85,128 @@ var schemaTypeB = &binary.Entity{
 	Identity: "TypeB",
 	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
+type binaryClassX struct{}
+
+func (*X) Class() binary.Class {
+	return (*binaryClassX)(nil)
+}
+func doEncodeX(e binary.Encoder, o *X) {
+	e.Int32(o.a)
+	e.Int32(o.b)
+	e.String(o.c)
+}
+func doDecodeX(d binary.Decoder, o *X) {
+	o.a = int32(d.Int32())
+	o.b = int32(d.Int32())
+	o.c = string(d.String())
+}
+func (*binaryClassX) New() binary.Object { return &X{} }
+func (*binaryClassX) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeX(e, obj.(*X))
+}
+func (*binaryClassX) Decode(d binary.Decoder) binary.Object {
+	obj := &X{}
+	doDecodeX(d, obj)
+	return obj
+}
+func (*binaryClassX) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeX(d, obj.(*X))
+}
+func (*binaryClassX) Schema() *binary.Entity { return schemaX }
+
+var schemaX = &binary.Entity{
+	Package:  "test",
+	Identity: "X",
+	Fields: []binary.Field{
+		{Declared: "a", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "b", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "c", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
+type binaryClassY struct{}
+
+func (*Y) Class() binary.Class {
+	return (*binaryClassY)(nil)
+}
+func doEncodeY(e binary.Encoder, o *Y) {
+	e.String(o.begin)
+	e.Struct(&o.x)
+	e.String(o.end)
+}
+func doDecodeY(d binary.Decoder, o *Y) {
+	o.begin = string(d.String())
+	var ent_05812f806fd444a2f25ef8af1732c40dd2f23b10 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_05812f806fd444a2f25ef8af1732c40dd2f23b10 = ent
+	}
+	d.Struct(ent_05812f806fd444a2f25ef8af1732c40dd2f23b10, &o.x)
+	o.end = string(d.String())
+}
+func (*binaryClassY) New() binary.Object { return &Y{} }
+func (*binaryClassY) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeY(e, obj.(*Y))
+}
+func (*binaryClassY) Decode(d binary.Decoder) binary.Object {
+	obj := &Y{}
+	doDecodeY(d, obj)
+	return obj
+}
+func (*binaryClassY) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeY(d, obj.(*Y))
+}
+func (*binaryClassY) Schema() *binary.Entity { return schemaY }
+
+var schemaY = &binary.Entity{
+	Package:  "test",
+	Identity: "Y",
+	Fields: []binary.Field{
+		{Declared: "begin", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "x", Type: &schema.Struct{Entity: (*X)(nil).Class().Schema()}},
+		{Declared: "end", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
+type binaryClassX_V1 struct{ binary.FrozenClassBase }
+
+func (*X_V1) Class() binary.Class {
+	return &binaryClassX_V1{}
+}
+func doDecodeX_V1(d binary.Decoder, o *X_V1) error {
+	o.a = int32(d.Int32())
+	o.b = int32(d.Int32())
+	return d.Error()
+}
+func doUpgradeDecodeǀX_V1ǁX(d binary.Decoder, o *X) {
+	old := &X_V1{}
+	doDecodeX_V1(d, old)
+	if d.Error() != nil {
+		return
+	}
+	old.upgrade(o) // This upgrade() method is not code generated.
+}
+func (*binaryClassX_V1) Decode(d binary.Decoder) binary.Object {
+	obj := &X{}
+	doUpgradeDecodeǀX_V1ǁX(d, obj)
+	return obj
+}
+func (*binaryClassX_V1) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doUpgradeDecodeǀX_V1ǁX(d, obj.(*X))
+}
+
+func (*binaryClassX_V1) Schema() *binary.Entity { return schemaX_V1 }
+
+var schemaX_V1 = &binary.Entity{
+	Package:  "test",
+	Identity: "X_V1",
+	Fields: []binary.Field{
+		{Declared: "a", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "b", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }

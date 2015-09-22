@@ -55,6 +55,10 @@ func (i *Interface) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
 }
 
+func (i *Interface) Subspace() binary.EntityList {
+	return nil
+}
+
 // Variant is the Type descriptor for a field who's underlying type is dynamic, but is encoded with Variant not Object.
 type Variant struct {
 	Name string // The simple name of the type.
@@ -88,4 +92,8 @@ func (i *Variant) EncodeValue(e binary.Encoder, value interface{}) {
 
 func (i *Variant) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
+}
+
+func (i *Variant) Subspace() binary.EntityList {
+	return nil
 }

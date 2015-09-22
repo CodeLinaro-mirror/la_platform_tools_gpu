@@ -16,12 +16,35 @@ package flat
 
 import (
 	"bytes"
+	"reflect"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
+
+func EncodeValue(t *testing.T, entry test.Entry, e *encoder, buf *bytes.Buffer) {
+	for i, o := range entry.Values {
+		e.Value(o)
+		if err := e.Error(); err != nil {
+			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
+		}
+	}
+	test.VerifyData(t, entry, buf)
+}
+
+func DecodeValue(t *testing.T, entry test.Entry, d *decoder, reader *bytes.Reader) {
+	for i, o := range entry.Values {
+		got := reflect.New(reflect.TypeOf(o).Elem()).Interface().(binary.Object)
+		d.Value(got)
+		if err := d.Error(); err != nil {
+			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
+		} else if !reflect.DeepEqual(o, got) {
+			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
+		}
+	}
+}
 
 func TestValue(t *testing.T) {
 	for _, entry := range []test.Entry{
@@ -57,8 +80,8 @@ func TestValue(t *testing.T) {
 		},
 	} {
 		b := &bytes.Buffer{}
-		test.EncodeValue(t, entry, Encoder(vle.Writer(b)), b)
+		EncodeValue(t, entry, Encoder(vle.Writer(b)), b)
 		r := bytes.NewReader(entry.Data)
-		test.DecodeValue(t, entry, Decoder(vle.Reader(r)), r)
+		DecodeValue(t, entry, Decoder(vle.Reader(r)), r)
 	}
 }

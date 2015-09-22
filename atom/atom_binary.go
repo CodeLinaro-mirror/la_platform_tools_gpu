@@ -114,19 +114,33 @@ func (*Group) Class() binary.Class {
 }
 func doEncodeGroup(e binary.Encoder, o *Group) {
 	e.String(o.Name)
-	e.Value(&o.Range)
+	e.Struct(&o.Range)
 	e.Uint32(uint32(len(o.SubGroups)))
 	for i := range o.SubGroups {
-		e.Value(&o.SubGroups[i])
+		e.Struct(&o.SubGroups[i])
 	}
 }
 func doDecodeGroup(d binary.Decoder, o *Group) {
 	o.Name = string(d.String())
-	d.Value(&o.Range)
+	var ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c = ent
+	}
+	d.Struct(ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c, &o.Range)
+	var ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
-			d.Value(&o.SubGroups[i])
+			d.Struct(ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579, &o.SubGroups[i])
 		}
 	}
 }
@@ -250,11 +264,18 @@ func (*Observation) Class() binary.Class {
 	return (*binaryClassObservation)(nil)
 }
 func doEncodeObservation(e binary.Encoder, o *Observation) {
-	e.Value(&o.Range)
+	e.Struct(&o.Range)
 	e.Data(o.ID[:20])
 }
 func doDecodeObservation(d binary.Decoder, o *Observation) {
-	d.Value(&o.Range)
+	var ent_a07589894b4560331859dd95294109982b0f1446 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a07589894b4560331859dd95294109982b0f1446 = ent
+	}
+	d.Struct(ent_a07589894b4560331859dd95294109982b0f1446, &o.Range)
 	d.Data(o.ID[:20])
 }
 func (*binaryClassObservation) New() binary.Object { return &Observation{} }
@@ -288,24 +309,38 @@ func (*Observations) Class() binary.Class {
 func doEncodeObservations(e binary.Encoder, o *Observations) {
 	e.Uint32(uint32(len(o.Reads)))
 	for i := range o.Reads {
-		e.Value(&o.Reads[i])
+		e.Struct(&o.Reads[i])
 	}
 	e.Uint32(uint32(len(o.Writes)))
 	for i := range o.Writes {
-		e.Value(&o.Writes[i])
+		e.Struct(&o.Writes[i])
 	}
 }
 func doDecodeObservations(d binary.Decoder, o *Observations) {
+	var ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146 = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Reads = make([]Observation, count)
 		for i := range o.Reads {
-			d.Value(&o.Reads[i])
+			d.Struct(ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146, &o.Reads[i])
 		}
+	}
+	var ent_e330f623e42ac06d54144296a88d22f3aea3292a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_e330f623e42ac06d54144296a88d22f3aea3292a = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Writes = make([]Observation, count)
 		for i := range o.Writes {
-			d.Value(&o.Writes[i])
+			d.Struct(ent_e330f623e42ac06d54144296a88d22f3aea3292a, &o.Writes[i])
 		}
 	}
 }

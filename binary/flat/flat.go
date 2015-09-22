@@ -21,12 +21,12 @@ import (
 )
 
 // Encoder creates a binary.Encoder that writes to the supplied binary.Writer.
-func Encoder(writer binary.Writer) binary.Encoder {
+func Encoder(writer binary.Writer) *encoder {
 	return &encoder{Writer: writer}
 }
 
 // Decoder creates a binary.Decoder that reads from the provided binary.Reader.
-func Decoder(reader binary.Reader) binary.Decoder {
+func Decoder(reader binary.Reader) *decoder {
 	return &decoder{Reader: reader}
 }
 
@@ -38,6 +38,30 @@ type decoder struct {
 	binary.Reader
 }
 
+func (e *encoder) Value(obj binary.Object) {
+	obj.Class().Encode(e, obj)
+}
+
+func (e *encoder) Struct(obj binary.Object) error {
+	// Permitted until the code generation is smarter.
+	obj.Class().Encode(e, obj)
+	return e.Error()
+}
+
+func (d *decoder) Value(obj binary.Object) {
+	obj.Class().DecodeTo(d, obj)
+}
+
+func (d *decoder) Struct(_ *binary.Entity, obj binary.Object) error {
+	// Permitted until the code generation is smarter.
+	obj.Class().DecodeTo(d, obj)
+	return d.Error()
+}
+
+func (d *decoder) PopEntity() (*binary.Entity, error) {
+	panic("d.PopEntity() called on flat decoder")
+}
+
 func (e *encoder) Entity(*binary.Entity, bool) {
 	panic(fmt.Errorf("Flat encoders do not support Schema objects"))
 }
@@ -46,16 +70,21 @@ func (d *decoder) Entity(bool) *binary.Entity {
 	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
 }
 
-func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) {
-	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
+	panic("e.Variant() called on flat decoder")
 }
 
 func (d *decoder) Variant() binary.Object {
-	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
+	panic("d.Variant() called on flat decoder")
 }
 
-func (e *encoder) Object(obj binary.Object)           { e.Variant(obj) }
-func (d *decoder) Object() binary.Object              { return d.Variant() }
-func (d *decoder) Lookup(*binary.Entity) binary.Class { return nil }
+func (e *encoder) Object(obj binary.Object) {
+	panic("e.Object() called on flat encoder")
+}
+func (d *decoder) Object() binary.Object {
+	panic("d.Object() called on flat decoder")
+}
+
+func (d *decoder) Lookup(ent *binary.Entity) binary.UpgradeDecoder {
+	panic("d.Lookup() called on flat decoder")
+}

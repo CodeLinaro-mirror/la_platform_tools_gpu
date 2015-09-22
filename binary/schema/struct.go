@@ -55,14 +55,14 @@ func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {
 }
 
 func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
-	class := d.Lookup(s.Entity)
-	if class == nil {
+	u := d.Lookup(s.Entity)
+	if u == nil {
 		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity, s))
+		return nil
 	}
-	o := class.New()
-	if o == nil {
-		d.SetError(fmt.Errorf("Nil object built by class for %s : %T", s, class))
-	}
-	d.Value(o)
-	return o
+	return u.Decode(d)
+}
+
+func (s *Struct) Subspace() binary.EntityList {
+	return binary.EntityList{s.Entity}
 }

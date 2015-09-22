@@ -16,7 +16,6 @@ package test
 
 import (
 	"bytes"
-	"reflect"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -73,48 +72,5 @@ func VerifyData(t *testing.T, entry Entry, got *bytes.Buffer) {
 		t.Errorf(`%v gave unexpected bytes.
 Expected: %# x
 Got:      %# x`, entry.Name, entry.Data, got.Bytes())
-	}
-}
-
-func EncodeValue(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer) {
-	for i, o := range entry.Values {
-		e.Value(o)
-		if e.Error() != nil {
-			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, e.Error())
-		}
-	}
-	VerifyData(t, entry, buf)
-}
-
-func EncodeObject(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer) {
-	for i, o := range entry.Values {
-		e.Object(o)
-		if e.Error() != nil {
-			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, e.Error())
-		}
-	}
-	VerifyData(t, entry, buf)
-}
-
-func DecodeValue(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Reader) {
-	for i, o := range entry.Values {
-		got := reflect.New(reflect.TypeOf(o).Elem()).Interface().(binary.Object)
-		d.Value(got)
-		if d.Error() != nil {
-			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, d.Error())
-		} else if !reflect.DeepEqual(o, got) {
-			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
-		}
-	}
-}
-
-func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Reader) {
-	for i, o := range entry.Values {
-		got := d.Object()
-		if d.Error() != nil {
-			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, d.Error())
-		} else if !reflect.DeepEqual(o, got) {
-			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
-		}
 	}
 }

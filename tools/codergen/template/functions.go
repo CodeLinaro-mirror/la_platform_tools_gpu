@@ -22,14 +22,17 @@ import (
 )
 
 type variable struct {
-	Name string
-	Type interface{}
+	Name   string
+	Type   interface{}
+	Unique string
 }
 
 func (*Templates) Var(t binary.Type, args ...interface{}) *variable {
+	all := append([]interface{}{t, "ǂ"}, args...)
 	return &variable{
-		Name: fmt.Sprint(args...),
-		Type: t,
+		Name:   fmt.Sprint(args...),
+		Type:   t,
+		Unique: binary.NewID([]byte(fmt.Sprint(all...))).String(),
 	}
 }
 
@@ -63,4 +66,8 @@ func (*Templates) TrimPackage(n string) string {
 		return n
 	}
 	return n[i+1:]
+}
+
+func (*Templates) Error(format string, args ...interface{}) (string, error) {
+	return "", fmt.Errorf(format, args...)
 }

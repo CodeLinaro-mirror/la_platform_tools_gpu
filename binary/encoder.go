@@ -22,6 +22,8 @@ type Encoder interface {
 	Entity(e *Entity, compact bool)
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object)
+	// Object encodes a struct with no type preamble and no sharing.
+	Struct(obj Object) error
 	// Variant encodes an Object with no sharing. The type of obj must have
 	// been previously registered with binary.registry.Add.
 	Variant(obj Object)
