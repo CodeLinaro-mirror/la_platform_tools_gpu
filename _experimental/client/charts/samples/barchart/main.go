@@ -48,9 +48,9 @@ func (ChartData) Limits() (int, int) { return -100, 10000 }
 
 func (ChartData) BarBrush(bar int, stack int, highlighted bool) gxui.Brush {
 	color := []gxui.Color{
-		gxui.Color{R: 0.00, G: 0.53, B: 0.74, A: 1},
-		gxui.Color{R: 0.00, G: 0.73, B: 0.44, A: 1},
-		gxui.Color{R: 0.63, G: 0.20, B: 0.24, A: 1},
+		{R: 0.00, G: 0.53, B: 0.74, A: 1},
+		{R: 0.00, G: 0.73, B: 0.44, A: 1},
+		{R: 0.63, G: 0.20, B: 0.24, A: 1},
 	}[stack]
 	if highlighted {
 		color = color.MulRGB(1.5).Saturate()

@@ -248,7 +248,7 @@ func BenchmarkDecodeUint64(b *testing.B) {
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
 		buf.Rewind()
-		for _ = range values {
+		for range values {
 			d.Uint64()
 		}
 	}
@@ -275,7 +275,7 @@ func BenchmarkDecodeObject(b *testing.B) {
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
 		buf.Rewind()
-		for _ = range values {
+		for range values {
 			d.Object()
 		}
 	}
@@ -290,7 +290,7 @@ func BenchmarkUint64(b *testing.B) {
 		for _, v := range values {
 			e.Uint64(v)
 		}
-		for _ = range values {
+		for range values {
 			d.Uint64()
 		}
 	}

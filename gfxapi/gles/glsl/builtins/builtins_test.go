@@ -15,9 +15,10 @@
 package builtins
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"math"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 const fudge = 2e-5

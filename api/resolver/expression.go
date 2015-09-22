@@ -119,7 +119,7 @@ func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semant
 			ctx.errorf(in, "method call on non method %s of %T", target.Function.Name, target.Object)
 			return out
 		}
-		params = params[1:len(params)]
+		params = params[1:]
 	}
 	if !isVoid(target.Function.Return.Type) {
 		params = params[0 : len(params)-1]

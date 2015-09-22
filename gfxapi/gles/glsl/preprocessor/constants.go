@@ -15,8 +15,9 @@
 package preprocessor
 
 import (
-	"android.googlesource.com/platform/tools/gpu/parse"
 	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
 // An interface for all the tokens returned by the preprocessor.
@@ -101,9 +102,9 @@ var (
 )
 
 var precisionKeywords = map[Token]struct{}{
-	KwHighp:   struct{}{},
-	KwMediump: struct{}{},
-	KwLowp:    struct{}{},
+	KwHighp:   {},
+	KwMediump: {},
+	KwLowp:    {},
 }
 
 // Is token a precision keyword?

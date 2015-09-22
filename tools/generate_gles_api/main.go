@@ -15,11 +15,12 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/api"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
-	"flag"
-	"fmt"
 )
 
 var (

@@ -18,8 +18,8 @@ import "testing"
 
 func TestParseVersion(t *testing.T) {
 	test := map[string]Version{
-		"100": Version{1, 0, 0},
-		"123": Version{1, 2, 3},
+		"100": {1, 0, 0},
+		"123": {1, 2, 3},
 	}
 	for str, expected := range test {
 		got := ParseVersion(str)

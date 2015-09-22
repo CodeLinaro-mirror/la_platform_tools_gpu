@@ -15,11 +15,12 @@
 package preprocessor
 
 import (
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
-	"android.googlesource.com/platform/tools/gpu/parse"
 	"strconv"
 	"strings"
 	"unicode/utf8"
+
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
 type lexer struct {

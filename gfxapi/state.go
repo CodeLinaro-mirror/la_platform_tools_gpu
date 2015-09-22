@@ -61,7 +61,7 @@ func NewState() *State {
 			ByteOrder:        endian.Little,
 		},
 		Memory: map[memory.PoolID]*memory.Pool{
-			memory.ApplicationPool: &memory.Pool{},
+			memory.ApplicationPool: {},
 		},
 		NextPoolID: memory.ApplicationPool + 1,
 		APIs:       map[API]binary.Object{},

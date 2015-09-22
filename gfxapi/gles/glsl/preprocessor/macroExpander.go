@@ -72,7 +72,7 @@ func (e argumentExpander) expand(args [][]tokenExpansion) []tokenExpansion {
 
 // TokenInfo expands to itself.
 func (e TokenInfo) expand([][]tokenExpansion) []tokenExpansion {
-	return []tokenExpansion{tokenExpansion{e, make(hideSet, 1)}}
+	return []tokenExpansion{{e, make(hideSet, 1)}}
 }
 
 // __LINE__ expands to the current line number

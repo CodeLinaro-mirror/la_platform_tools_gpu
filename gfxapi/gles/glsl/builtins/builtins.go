@@ -19,10 +19,11 @@
 package builtins
 
 import (
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"fmt"
 	"math"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 )
 
 // Data needed for vectorization of a function.
@@ -116,7 +117,7 @@ const (
 // For a definitive list, see The OpenGL ES Shading Language specification, section 8.
 var BuiltinFunctions = []ast.BuiltinFunction{
 	// 8.4 Floating-Point Pack and Unpack Functions
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint},
 		SymName: "packSnorm2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Type: ast.TVec2}}),
@@ -128,7 +129,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 			return ast.UintValue(int16(x)) + ast.UintValue(int16(y))<<16
 		},
 	},
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint},
 		SymName: "packUnorm2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Type: ast.TVec2}}),
@@ -140,7 +141,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 			return ast.UintValue(uint16(x)) + ast.UintValue(uint16(y))<<16
 		},
 	},
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.HighP, Type: ast.TVec2},
 		SymName: "unpackSnorm2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint}}),
@@ -153,7 +154,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 			})
 		},
 	},
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.HighP, Type: ast.TVec2},
 		SymName: "unpackUnorm2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint}}),
@@ -166,7 +167,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 			})
 		},
 	},
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint},
 		SymName: "packHalf2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Precision: ast.MediumP, Type: ast.TVec2}}),
@@ -177,7 +178,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 			return ast.UintValue(x) + ast.UintValue(y)<<16
 		},
 	},
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Precision: ast.MediumP, Type: ast.TVec2},
 		SymName: "unpackHalf2x16",
 		Params:  makeParams([]ast.Type{&ast.BuiltinType{Precision: ast.HighP, Type: ast.TUint}}),
@@ -190,7 +191,7 @@ var BuiltinFunctions = []ast.BuiltinFunction{
 	},
 
 	// 8.5 Geometric functions (cross only, the rest are in init())
-	ast.BuiltinFunction{
+	{
 		RetType: &ast.BuiltinType{Type: ast.TVec3},
 		SymName: "cross",
 		Params: makeParams([]ast.Type{&ast.BuiltinType{Type: ast.TVec3},

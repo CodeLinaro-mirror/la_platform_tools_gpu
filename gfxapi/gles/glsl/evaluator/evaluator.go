@@ -16,9 +16,10 @@
 package evaluator
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/parser"
-	"fmt"
 )
 
 type evalError string

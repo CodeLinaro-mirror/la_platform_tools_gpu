@@ -49,7 +49,7 @@ func DownloadDoc(version Version, cmdName string) *CommandDoc {
 		}
 	}
 	accpets, _ := getAcceptedValues(cmdName, "result", version)
-	params := map[int]ParamDoc{-1: ParamDoc{"result", summary, accpets}}
+	params := map[int]ParamDoc{-1: {"result", summary, accpets}}
 	for paramIndex, paramNameTag := range paramNameTags {
 		if name := paramNameTag.Text(); name != "void" {
 			doc := parseParamDoc(name, paramDocs[name])

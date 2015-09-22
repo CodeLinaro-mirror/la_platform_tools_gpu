@@ -95,7 +95,7 @@ func getTools(cfg cpp.Config) (*tools, error) {
 
 		default:
 			return nil, fmt.Errorf("Cross compiling to '%s' is currently not avaliable", cfg.OS)
-	}
+		}
 
 	default:
 		cc, _ := build.File("gcc").LookPath()

@@ -74,7 +74,7 @@ func init() {
 		l.Current = []*regexp.Regexp{Regexp(l.License, current, false)}
 		l.Old = []*regexp.Regexp{Regexp(l.License, Info{}, true)}
 	}
-	for name, _ := range embedded {
+	for name := range embedded {
 		re := Regexp(name, Info{}, true)
 		if strings.HasPrefix(name, externalPrefix) {
 			External = append(External, re)
