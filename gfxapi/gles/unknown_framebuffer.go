@@ -20,22 +20,23 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // undefinedFramebuffer adds a transform that will render a pattern into the
 // color buffer at the end of each frame.
-func undefinedFramebuffer(d database.Database, l log.Logger) atom.Transformer {
+func undefinedFramebuffer(device *service.Device, d database.Database, l log.Logger) atom.Transformer {
 	s := gfxapi.NewState()
 	return atom.Transform("DirtyFramebuffer", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		a.Mutate(s, d, l)
 		out.Write(i, a)
 		if a.Flags().IsEndOfFrame() {
-			drawUndefinedFramebuffer(a, s, d, l, out)
+			drawUndefinedFramebuffer(a, device, s, d, l, out)
 		}
 	})
 }
 
-func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database, l log.Logger, out atom.Writer) error {
+func drawUndefinedFramebuffer(a atom.Atom, device *service.Device, s *gfxapi.State, d database.Database, l log.Logger, out atom.Writer) error {
 	const (
 		aScreenCoordsLocation AttributeLocation = 0
 
@@ -60,13 +61,13 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 					}`
 	)
 
+	arch := s.Architecture
+	version, _ := ParseVersion(device.Version)
 	c := getContext(s)
 
 	var (
-		origProgramID            = c.BoundProgram
-		origArrayBufferID        = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
-		origElementArrayBufferID = c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
-		origVertexAttrib         = *(c.VertexAttributeArrays[aScreenCoordsLocation])
+		origProgramID     = c.BoundProgram
+		origArrayBufferID = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
 	)
 
 	// Generate new unused object IDs.
@@ -76,29 +77,22 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 		_, ok := c.Instances.Shaders[ShaderId(x)]
 		return ok || ShaderId(x) == vertexShaderID
 	}))
+	bufferID := BufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Buffers[BufferId(x)]; return ok }))
+	arrayID := VertexArrayId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.VertexArrays[VertexArrayId(x)]; return ok }))
 
 	// 2D vertices positions for a full screen 2D triangle strip.
 	positions := []float32{-1., -1., 1., -1., -1., 1., 1., 1.}
 
+	t := tweaker{out: out, state: s, ctx: getContext(s), database: d, logger: l}
+
 	// Temporarily change rasterizing/blending state and enable VAP 0.
-	undoList := []atom.Atom{}
-	for _, cap := range []GLenum{
-		GLenum_GL_BLEND,
-		GLenum_GL_CULL_FACE,
-		GLenum_GL_DEPTH_TEST,
-		GLenum_GL_SCISSOR_TEST,
-		GLenum_GL_STENCIL_TEST,
-	} {
-		capability := cap
-		if c.Capabilities[capability] {
-			out.Write(atom.NoID, NewGlDisable(capability))
-			undoList = append(undoList, NewGlEnable(capability))
-		}
-	}
-	if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
-		out.Write(atom.NoID, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
-		undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
-	}
+	t.glDisable(GLenum_GL_BLEND)
+	t.glDisable(GLenum_GL_CULL_FACE)
+	t.glDisable(GLenum_GL_DEPTH_TEST)
+	t.glDisable(GLenum_GL_SCISSOR_TEST)
+	t.glDisable(GLenum_GL_STENCIL_TEST)
+	t.bindOrSaveVertexArray(version, arrayID, aScreenCoordsLocation)
+	out.Write(atom.NoID, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
 
 	// Create the shader program
 	for _, a := range BuildProgram(s.Architecture, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource) {
@@ -108,24 +102,20 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 	out.Write(atom.NoID, NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"))
 	out.Write(atom.NoID, NewGlLinkProgram(programID))
 	out.Write(atom.NoID, NewGlUseProgram(programID))
-	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0))
-	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0))
-	out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Tmp))
-	out.Write(atom.NoID, NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
+	out.Write(atom.NoID, NewGlGenBuffers(1, memory.Tmp).
+		AddWrite(atom.Data(arch, d, l, memory.Tmp, bufferID)))
+	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, bufferID))
+	out.Write(atom.NoID, NewGlBufferData(GLenum_GL_ARRAY_BUFFER, GLsizeiptr(4*len(positions)), memory.Tmp, GLenum_GL_STATIC_DRAW).
 		AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, positions)))
+	out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Nullptr))
+	out.Write(atom.NoID, NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4))
 
-	// Restore conditionally changed state.
-	for _, a := range undoList {
-		out.Write(atom.NoID, a)
-	}
+	t.revert()
 
-	// Restore buffer/vertexAttrib state.
-	if origVertexAttrib.Buffer != 0 || origVertexAttrib.Pointer.Address != 0 {
-		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexAttrib.Buffer))
-		out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, GLint(origVertexAttrib.Size), origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
-	}
-	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID))
+	// Restore buffer state.
 	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID))
+	out.Write(atom.NoID, NewGlDeleteBuffers(1, memory.Tmp).
+		AddRead(atom.Data(arch, d, l, memory.Tmp, bufferID)))
 
 	// Restore program state.
 	out.Write(atom.NoID, NewGlUseProgram(origProgramID))

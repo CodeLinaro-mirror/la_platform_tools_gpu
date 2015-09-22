@@ -66,6 +66,7 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 		s, d, l := t.state, t.database, t.logger
 		arch := s.Architecture
 		c := getContext(s)
+		version, _ := ParseVersion(device.Version)
 
 		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
@@ -110,14 +111,13 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 				}`
 		)
 		var (
-			origProgramID            = c.BoundProgram
-			origRenderbufferID       = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
-			origReadFramebufferID    = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
-			origDrawFramebufferID    = c.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER]
-			origTextureID            = c.TextureUnits[c.ActiveTextureUnit].Bindings[GLenum_GL_TEXTURE_2D]
-			origArrayBufferID        = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
-			origElementArrayBufferID = c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
-			origActiveTextureUnit    = int32(c.ActiveTextureUnit - GLenum_GL_TEXTURE0)
+			origProgramID         = c.BoundProgram
+			origRenderbufferID    = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
+			origReadFramebufferID = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
+			origDrawFramebufferID = c.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER]
+			origTextureID         = c.TextureUnits[c.ActiveTextureUnit].Bindings[GLenum_GL_TEXTURE_2D]
+			origArrayBufferID     = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
+			origActiveTextureUnit = int32(c.ActiveTextureUnit - GLenum_GL_TEXTURE0)
 
 			inW  = int32(depthW)
 			inH  = int32(depthH)
@@ -135,30 +135,23 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 			_, ok := c.Instances.Shaders[ShaderId(x)]
 			return ok || ShaderId(x) == vertexShaderID
 		}))
+		bufferID := BufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Buffers[BufferId(x)]; return ok }))
+		arrayID := VertexArrayId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.VertexArrays[VertexArrayId(x)]; return ok }))
 
 		// 2D vertices positions for a full screen 2D triangle strip.
 		positions := []float32{-1., -1., 1., -1., -1., 1., 1., 1.}
 
+		t := tweaker{out: out, state: s, ctx: getContext(s), database: d, logger: l}
+
 		// Temporarily change rasterizing/blending state and enable VAP 0.
-		undoList := []atom.Atom{}
-		for _, cap := range []GLenum{
-			GLenum_GL_BLEND,
-			GLenum_GL_CULL_FACE,
-			GLenum_GL_DEPTH_TEST,
-			GLenum_GL_SCISSOR_TEST,
-			GLenum_GL_STENCIL_TEST,
-			GLenum_GL_ALPHA_TEST,
-		} {
-			capability := cap
-			if c.Capabilities[capability] {
-				out.Write(atom.NoID, NewGlDisable(capability))
-				undoList = append(undoList, NewGlEnable(capability))
-			}
-		}
-		if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
-			out.Write(atom.NoID, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
-			undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
-		}
+		t.glDisable(GLenum_GL_BLEND)
+		t.glDisable(GLenum_GL_CULL_FACE)
+		t.glDisable(GLenum_GL_DEPTH_TEST)
+		t.glDisable(GLenum_GL_SCISSOR_TEST)
+		t.glDisable(GLenum_GL_STENCIL_TEST)
+		t.glDisable(GLenum_GL_ALPHA_TEST)
+		t.bindOrSaveVertexArray(version, arrayID, aScreenCoordsLocation)
+		out.Write(atom.NoID, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
 
 		writeEach(out,
 			// Setup new framebuffer/renderbuffer.
@@ -198,11 +191,13 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 			NewGlBindTexture(GLenum_GL_TEXTURE_2D, textureID),
 			NewGlGetUniformLocation(programID, "uTexture", uTextureLocation),
 			NewGlUniform1i(uTextureLocation, GLint(origActiveTextureUnit)),
-			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0),
-			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0),
-			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Tmp),
-			NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
-				AddRead(atom.Data(arch, d, l, memory.Tmp, positions)),
+			NewGlGenBuffers(1, memory.Tmp).
+				AddWrite(atom.Data(arch, d, l, memory.Tmp, bufferID)),
+			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, bufferID),
+			NewGlBufferData(GLenum_GL_ARRAY_BUFFER, GLsizeiptr(4*len(positions)), memory.Tmp, GLenum_GL_STATIC_DRAW).
+				AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, positions)),
+			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Nullptr),
+			NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4),
 
 			// Bind new framebuffer for reading.
 			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
@@ -211,14 +206,13 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 		postColorData(s, outW, outH, out, img)
 
 		// Restore conditionally changed state.
-		writeEach(out, undoList...)
+		t.revert()
 
 		writeEach(out,
 			// Restore buffer/vertexAttrib state.
-			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
 			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID),
-			// Note: we're not restoring the original VertexAttribPointer as we may re-enter an inconsistent state, which would abort the current replay batch.
-			// NewGlVertexAttribPointer(aScreenCoordsLocation, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, VertexPointer(origVertexAttrib.Data)),
+			NewGlDeleteBuffers(1, memory.Tmp).
+				AddRead(atom.Data(arch, d, l, memory.Tmp, bufferID)),
 
 			// Restore texture state.
 			NewGlBindTexture(GLenum_GL_TEXTURE_2D, origTextureID),
@@ -347,7 +341,7 @@ func writeEach(out atom.Writer, atoms ...atom.Atom) {
 func newUnusedID(existenceTest func(uint32) bool) uint32 {
 	for {
 		x := rand.Uint32()
-		if !existenceTest(x) {
+		if !existenceTest(x) && x != 0 {
 			return x
 		}
 	}

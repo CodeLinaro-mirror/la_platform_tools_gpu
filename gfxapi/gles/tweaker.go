@@ -14,13 +14,22 @@
 
 package gles
 
-import "android.googlesource.com/platform/tools/gpu/atom"
+import (
+	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
+)
 
 // tweaker provides a set of methods for temporarily changing the GLES state.
 type tweaker struct {
-	out  atom.Writer
-	ctx  *Context
-	undo []func()
+	out      atom.Writer
+	state    *gfxapi.State
+	ctx      *Context
+	database database.Database
+	logger   log.Logger
+	undo     []func()
 }
 
 // revert undoes all the changes made by the tweaker.
@@ -110,5 +119,40 @@ func (t *tweaker) glBlendFuncSeparate(srcRGB, dstRGB, srcA, dstA GLenum) {
 			t.ctx.Blending.DstRgbBlendFactor,
 			t.ctx.Blending.SrcAlphaBlendFactor,
 			t.ctx.Blending.DstAlphaBlendFactor = srcRGB, dstRGB, srcA, dstA
+	}
+}
+
+// This will either bind new VAO (GLES 3.x) or save state of the default one (GLES 2.0).
+func (t *tweaker) bindOrSaveVertexArray(version *Version, newArray VertexArrayId, locations ...AttributeLocation) {
+	if version.Major >= 3 {
+		// GLES 3.0 and 3.1 introduce a lot of new state which would be hard to restore.
+		// It is much easier to just create a fresh Vertex Array Object to work with.
+		origArray := t.ctx.BoundVertexArray
+		a, d, l := t.state.Architecture, t.database, t.logger
+		t.out.Write(atom.NoID, NewGlGenVertexArrays(1, memory.Tmp).
+			AddWrite(atom.Data(a, d, l, memory.Tmp, newArray)))
+		t.out.Write(atom.NoID, NewGlBindVertexArray(newArray))
+		t.undo = append(t.undo, func() {
+			t.out.Write(atom.NoID, NewGlBindVertexArray(origArray))
+			t.out.Write(atom.NoID, NewGlDeleteVertexArrays(1, memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, newArray)))
+		})
+	} else {
+		// GLES 2.0 does not have Vertex Array Objects, but the state is fairly simple.
+		origArrayBufferID := t.ctx.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
+		for _, location := range locations {
+			location := location
+			origVertexAttrib := *(t.ctx.VertexAttributeArrays[location])
+			t.undo = append(t.undo, func() {
+				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexAttrib.Buffer))
+				if origVertexAttrib.Enabled {
+					t.out.Write(atom.NoID, NewGlEnableVertexAttribArray(location))
+				} else {
+					t.out.Write(atom.NoID, NewGlDisableVertexAttribArray(location))
+				}
+				t.out.Write(atom.NoID, NewGlVertexAttribPointer(location, GLint(origVertexAttrib.Size), origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
+				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID))
+			})
+		}
 	}
 }

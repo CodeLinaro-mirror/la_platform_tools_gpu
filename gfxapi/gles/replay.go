@@ -135,7 +135,7 @@ func (a api) Replay(
 		}
 
 		if !preserveBuffersOnSwap {
-			transforms.Add(skipDrawCalls, undefinedFramebuffer(d, l))
+			transforms.Add(skipDrawCalls, undefinedFramebuffer(device, d, l))
 		}
 	}
 
