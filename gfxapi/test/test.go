@@ -23,7 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (uint32, uint32, error) {
+func (api) GetFramebufferAttachmentSize(state *gfxapi.State, attachment gfxapi.FramebufferAttachment) (width uint32, height uint32, err error) {
 	return 0, 0, nil
 }
 

@@ -68,12 +68,12 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 		c := getContext(s)
 		version, _ := ParseVersion(device.Version)
 
-		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		colorW, colorH, _, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
 		}
-		depthW, depthH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
+		depthW, depthH, _, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentDepth)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
@@ -243,7 +243,7 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 		arch := s.Architecture
 		c := getContext(s)
 
-		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		colorW, colorH, _, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
