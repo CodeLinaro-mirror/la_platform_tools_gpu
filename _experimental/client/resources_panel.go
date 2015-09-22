@@ -251,7 +251,7 @@ func (t updateImage) Run(c task.CancelSignal) {
 		}
 		if data, err := t.context.rpc.LoadBlob(img.Data); err == nil {
 			t.context.Run(func() {
-				tex := NewColorTexture(t.context.theme.Driver(), int(img.Width), int(img.Height), data)
+				tex := NewTexture(t.context.theme.Driver(), int(img.Width), int(img.Height), data)
 				tex.SetFlipY(false)
 				t.image.SetTexture(tex)
 				t.context.toolTipController.AddToolTip(t.image, 0.7, func(math.Point) gxui.Control {

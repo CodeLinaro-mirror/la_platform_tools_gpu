@@ -109,7 +109,7 @@ func (t updateFramebufferThumbnail) Run(c task.CancelSignal) {
 	if w, h, d, err := t.context.rpc.RequestColorBuffer(t.device, t.after, settings); err == nil {
 		c.Check()
 		t.context.Run(func() {
-			tex := NewColorTexture(t.context.theme.Driver(), w, h, d)
+			tex := NewTexture(t.context.theme.Driver(), w, h, d)
 			t.image.SetTexture(tex)
 			t.context.toolTipController.AddToolTip(t.image, 0.7, func(math.Point) gxui.Control {
 				large := t.context.theme.CreateImage()

@@ -161,7 +161,7 @@ func (t updateColorBuffer) Run(c task.CancelSignal) {
 	if w, h, d, err := t.context.rpc.RequestColorBuffer(t.device, t.after, settings); err == nil {
 		c.Check()
 		t.context.Run(func() {
-			t.image.SetTexture(NewColorTexture(t.context.theme.Driver(), w, h, d))
+			t.image.SetTexture(NewTexture(t.context.theme.Driver(), w, h, d))
 		})
 	}
 }
