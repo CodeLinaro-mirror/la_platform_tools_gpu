@@ -22,12 +22,12 @@ import (
 
 type fmtFloat32 struct{ binary.Generate }
 
+func (f *fmtFloat32) Key() interface{}             { return *f }
 func (*fmtFloat32) String() string                 { return "Float32" }
 func (*fmtFloat32) Size(w, h int) int              { return w * h * 4 }
 func (*fmtFloat32) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }
 
-// RGBA returns a format containing an 8-bit red, green, blue and alpha channel
-// per pixel.
+// Float32 returns a format containing a single float channel per pixel.
 func Float32() Format { return &fmtFloat32{} }
 
 func init() {

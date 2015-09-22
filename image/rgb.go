@@ -18,6 +18,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type fmtRGB struct{ binary.Generate }
 
+func (f *fmtRGB) Key() interface{}             { return *f }
 func (*fmtRGB) String() string                 { return "RGB" }
 func (*fmtRGB) Size(w, h int) int              { return w * h * 3 }
 func (*fmtRGB) Check(d []byte, w, h int) error { return checkSize(d, w, h, 24) }

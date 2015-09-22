@@ -25,6 +25,7 @@ import (
 
 type fmtPNG struct{ binary.Generate }
 
+func (f *fmtPNG) Key() interface{}             { return *f }
 func (*fmtPNG) String() string                 { return "PNG" }
 func (*fmtPNG) Size(w, h int) int              { return -1 }
 func (*fmtPNG) Check(d []byte, w, h int) error { return nil }
