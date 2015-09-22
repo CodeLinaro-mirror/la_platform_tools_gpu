@@ -15,7 +15,10 @@
 package do
 
 import (
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"fmt"
+
+	"path"
+
 	"android.googlesource.com/platform/tools/gpu/maker/config"
 	"android.googlesource.com/platform/tools/gpu/maker/graph"
 )
@@ -31,8 +34,12 @@ func init() {
 }
 
 // GoCommand runs "go" with the specified arguments.
-func GoCommand(args ...string) *graph.Step {
-	return Exec(goTool, args...).Access(GoPkgResources)
+func GoCommand(args ...interface{}) *graph.Step {
+	strings := make([]string, len(args))
+	for i, a := range args {
+		strings[i] = fmt.Sprint(a)
+	}
+	return Exec(goTool, strings...).Access(GoPkgResources)
 }
 
 // GoInstall builds a new Step that runs "go install" on the supplied module.
@@ -40,9 +47,9 @@ func GoCommand(args ...string) *graph.Step {
 // The step will depend on the go tool, and will be set to always run if
 // depended on.
 func GoInstall(root string, relative string) graph.Entity {
-	module := maker.Path(root, relative)
-	_, name := maker.PathSplit(module)
-	dst := graph.File(config.Paths.Bin, name+config.HostOS.ExecutableExtension)
+	module := path.Join(root, relative)
+	name := path.Base(module)
+	dst := config.Paths.Bin.File(name + config.HostOS.ExecutableExtension)
 	if graph.Creator(dst) == nil {
 		GoCommand("install", module).Creates(dst).AlwaysRun()
 	}
@@ -60,12 +67,12 @@ func GoTest(module string) graph.Entity {
 
 // GoRun returns a Step that runs "go run" with the supplied go file
 // and arguments.
-func GoRun(gofile string, args ...string) *graph.Step {
-	return GoCommand(append([]string{"run", gofile}, args...)...)
+func GoRun(gofile *graph.Path, args ...interface{}) *graph.Step {
+	return GoCommand(append([]interface{}{"run", gofile}, args...)...)
 }
 
 // GoSrcPath returns the full path to a file or directory inside the GoPath.
-func GoSrcPath(path string) string {
+func GoSrcPath(path string) *graph.Path {
 	// TODO: search GoPath
-	return maker.Path(config.GoPath[0], "src", path)
+	return config.Paths.GoBase.Child("src", path)
 }

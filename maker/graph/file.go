@@ -21,26 +21,42 @@ import (
 	"os/exec"
 	"time"
 
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"path/filepath"
 )
+
+// canonicalPath is an internal function that resolves paths with any kind of slash to the os specific fully resolved
+// form.
+func canonicalPath(path ...string) (string, error) {
+	return filepath.Abs(filepath.FromSlash(filepath.Join(path...)))
+}
 
 // File returns an Entity that represents a file. The entities name will be the
 // absolute path of the file. The entity map will be checked for a matching file
 // entry and if one is not found, a new one will be added and returned.
-func File(path ...string) *file {
-	abs, err := maker.OSPath(path...)
+// base can be either a string or *Path, all strings will have slash translation applied.
+func File(base interface{}, join ...string) *Path {
+	path := make([]string, 1+len(join))
+	switch base := base.(type) {
+	case *Path:
+		path[0] = base.Name()
+	case string:
+		path[0] = filepath.FromSlash(base)
+	}
+	copy(path[1:], join)
+	abs, err := canonicalPath(path...)
 	if err != nil {
 		log.Fatalf("%s", err)
 	}
+	abs = filepath.Clean(abs)
 	e := FindEntity(abs)
 	if e != nil {
-		f, is := e.(*file)
+		f, is := e.(*Path)
 		if !is {
 			log.Fatalf("%s is not a file entity (%T)", abs, e)
 		}
 		return f
 	}
-	f := &file{abs: abs}
+	f := &Path{abs: abs}
 	f.stat, _ = os.Stat(f.abs)
 	AddEntity(f)
 	return f
@@ -51,44 +67,23 @@ func File(path ...string) *file {
 // matching directory entry and if one is not found, a new one will be added and
 // returned.
 // It also adds the rules to create the directory if needed.
-func Dir(path ...string) *file {
-	d := File(path...)
+// base can be either a string or *Path, all strings will have slash translation applied.
+func Dir(base interface{}, join ...string) *Path {
+	d := File(base, join...)
 	if Creator(d) == nil {
-		NewStep(makeDir).Creates(d)
+		NewStep(func(s *Step) error {
+			if err := os.MkdirAll(d.abs, os.ModePerm); err != nil {
+				return err
+			}
+			return nil
+		}).Creates(d)
 	}
 	return d
 }
 
-// DirOf attempts to make a Dir for the parent of the specified File.
-func DirOf(path interface{}) *file {
-	switch path := path.(type) {
-	case string:
-		return dirOf(path)
-	case *file:
-		return dirOf(path.Name())
-	default:
-		log.Fatalf("cannot get parent dir from %T", path)
-		return nil
-	}
-}
-
-// FilesOf reads the list of files in path, filters them with the supplied
-// filter and returns the set of file entities that matched.
-func FilesOf(path string, filter func(os.FileInfo) bool) []*file {
-	dir := Dir(path)
-	infos, _ := ioutil.ReadDir(dir.Name())
-	files := []*file{}
-	for _, i := range infos {
-		if filter(i) {
-			files = append(files, File(dir.Name(), i.Name()))
-		}
-	}
-	return files
-}
-
 // FindTool finds an executable on the host search path, and returns a File
 // entity for the tool if found.
-func FindTool(name string) Entity {
+func FindTool(name string) *Path {
 	path, err := exec.LookPath(name)
 	if err != nil {
 		return nil
@@ -96,25 +91,21 @@ func FindTool(name string) Entity {
 	return File(path)
 }
 
-// IsFile returns true if the supplied entity is of file type.
-func IsFile(e Entity) bool {
-	_, is := e.(*file)
-	return is
-}
-
-type file struct {
-	abs  string
-	stat os.FileInfo
+// Path is the common type used for both file and directory entities in the build graph.
+type Path struct {
+	abs   string
+	stat  os.FileInfo
+	isDir bool
 }
 
 // Name returns the full absolute path to the file.
-func (f *file) Name() string { return f.abs }
+func (f *Path) Name() string { return f.abs }
 
 // String returns the Name of the file.
-func (f *file) String() string { return f.abs }
+func (f *Path) String() string { return f.abs }
 
 // Timestamp returns the last modified time reported by the file system.
-func (f *file) Timestamp() time.Time {
+func (f *Path) Timestamp() time.Time {
 	if f.stat == nil {
 		return time.Time{}
 	}
@@ -127,7 +118,7 @@ func (f *file) Timestamp() time.Time {
 
 // NeedsUpdate returns true if the file does not exist, or is older than the
 // supplied timestamp.
-func (f *file) NeedsUpdate(t time.Time) bool {
+func (f *Path) NeedsUpdate(t time.Time) bool {
 	if f.stat == nil {
 		return true
 	}
@@ -135,21 +126,40 @@ func (f *file) NeedsUpdate(t time.Time) bool {
 }
 
 // Updated refreshes the exists and timestamp information for the file.
-func (f *file) Updated() { f.stat, _ = os.Stat(f.abs) }
+func (f *Path) Updated() { f.stat, _ = os.Stat(f.abs) }
 
-func dirOf(name string) *file {
-	path, _ := maker.PathSplit(name)
+// Files reads the list of files in path.
+func (p *Path) Files() Set {
+	infos, _ := ioutil.ReadDir(p.abs)
+	list := Set{}
+	for _, i := range infos {
+		if !i.IsDir() {
+			list = list.Append(File(p, i.Name()))
+		}
+	}
+	return list
+}
+
+// Parent returns the parent directory of this path.
+func (p *Path) Parent() *Path {
+	path := filepath.Dir(p.abs)
 	if len(path) == 0 {
 		return nil
 	}
 	return Dir(path)
 }
 
-func makeDir(s *Step) error {
-	for _, out := range s.Outputs {
-		if err := os.MkdirAll(out.Name(), os.ModePerm); err != nil {
-			return err
-		}
-	}
-	return nil
+// Child returns a child directory of this path.
+func (p *Path) Child(join ...string) *Path {
+	return Dir(p, join...)
+}
+
+// File returns a file in this directory.
+func (p *Path) File(join ...string) *Path {
+	return File(p, join...)
+}
+
+// Basename returns the last path component of this filename.
+func (p *Path) Basename() string {
+	return filepath.Base(p.abs)
 }

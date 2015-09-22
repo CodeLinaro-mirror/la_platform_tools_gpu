@@ -15,7 +15,6 @@
 package do
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -28,14 +27,8 @@ import (
 // the dst entity.
 // The step will depend on the src, and the existance of the directory dst is
 // inside.
-func CopyFile(dst, src graph.Entity) {
+func CopyFile(dst, src *graph.Path) {
 	graph.NewStep(func(s *graph.Step) error {
-		if !graph.IsFile(src) {
-			return fmt.Errorf("cannot copy from %s, not a file", src.Name())
-		}
-		if !graph.IsFile(dst) {
-			return fmt.Errorf("cannot copy to %s, not a file", dst.Name())
-		}
 		if config.Verbose > 0 {
 			log.Printf("-> cp %v to %v", src, dst)
 		}
@@ -54,5 +47,5 @@ func CopyFile(dst, src graph.Entity) {
 			return err
 		}
 		return nil
-	}).Creates(dst).DependsOn(src, graph.DirOf(dst))
+	}).Creates(dst).DependsOn(src, dst.Parent())
 }

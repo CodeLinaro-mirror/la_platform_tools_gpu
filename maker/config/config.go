@@ -19,7 +19,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"android.googlesource.com/platform/tools/gpu/maker"
+	"android.googlesource.com/platform/tools/gpu/maker/graph"
 )
 
 var (
@@ -30,16 +30,18 @@ var (
 
 	// Paths holds the set of path roots for the build.
 	Paths struct {
-		// The root path of the build
-		Root string
+		// The root path of the repo workspace
+		Repo *graph.Path
+		// The default GOPATH entry
+		GoBase *graph.Path
 		// The dependancy cache directory
-		Deps string
+		Deps *graph.Path
 		// The application binary directory.
-		Bin string
+		Bin *graph.Path
 	}
 
 	//GoPath is the GOPATH environment setting
-	GoPath []string
+	GoPath graph.Set
 
 	// EnvVars holds the environment overrides used when spawning external commands.
 	EnvVars = map[string][]string{}
@@ -48,16 +50,20 @@ var (
 )
 
 func init() {
-	GoPath = filepath.SplitList(os.Getenv("GOPATH"))
-	if len(GoPath) == 0 {
+	gopath := filepath.SplitList(os.Getenv("GOPATH"))
+	if len(gopath) == 0 {
 		log.Fatalf("GOPATH %q not valid", os.Getenv("GOPATH"))
 	}
-	for i := range GoPath {
-		GoPath[i] = maker.CommonPath(GoPath[i])
+	GoPath = make(graph.Set, len(gopath))
+	for i, p := range gopath {
+		dir := graph.Dir(p)
+		if i == 0 {
+			Paths.GoBase = dir
+		}
+		GoPath[i] = dir
 	}
-	root := GoPath[0]
-	Paths.Root = root
-	Paths.Deps = maker.Path(root, "deps")
-	Paths.Bin = maker.Path(root, "bin")
-	EnvVars["PATH"] = []string{Paths.Bin}
+	Paths.Repo = Paths.GoBase.Parent().Parent()
+	Paths.Deps = Paths.GoBase.Child("deps")
+	Paths.Bin = Paths.GoBase.Child("bin")
+	EnvVars["PATH"] = []string{Paths.Bin.Name()}
 }

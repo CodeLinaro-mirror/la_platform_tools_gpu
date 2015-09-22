@@ -31,7 +31,7 @@ const code = "code"
 
 var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
 
-func makeEntity(f build.File) graph.Entity {
+func makeEntity(f build.File) *graph.Path {
 	return graph.File(f.Absolute())
 }
 
@@ -47,7 +47,7 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 	s := graph.NewStep(a)
 	e := makeEntity(output)
 	s.Creates(e)
-	s.DependsOn(graph.DirOf(e))
+	s.DependsOn(e.Parent())
 	s.DependsOn(makeEntities(source)...)
 	// This is a bit sad, but codergen does not know what its outputs are.
 	s.DependsOn(code)
@@ -106,7 +106,7 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 		if !valid {
 			depFileFor := cfg.Toolchain.DepFileFor
 			if depFileFor != nil {
-				s.DependsOn(graph.DirOf(depFileFor(object, cfg, env).Absolute()))
+				s.DependsOn(graph.Dir(depFileFor(object, cfg, env).Dir()))
 			}
 			s.DependsOn(code)
 			s.AlwaysRun()

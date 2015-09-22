@@ -67,7 +67,7 @@ func ExecAt(wd string, verbose int, path string, args ...string) error {
 // with the supplied arguments. The newly created Step will be made to depend on
 // the binary.
 func Exec(binary graph.Entity, args ...string) *graph.Step {
-	wd := config.Paths.Root
+	wd := config.Paths.Repo.Name()
 	return graph.NewStep(func(step *graph.Step) error {
 		return ExecAt(wd, config.Verbose, binary.Name(), args...)
 	}).DependsOn(binary)

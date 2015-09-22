@@ -28,8 +28,8 @@ import (
 // and may depend on many entities.
 // It is an error to have a cycle in the build graph.
 type Step struct {
-	Inputs  []Entity // This set of entities this step depends on.
-	Outputs []Entity // The set of entities this step updates.
+	Inputs  Set // This set of entities this step depends on.
+	Outputs Set // The set of entities this step updates.
 
 	disabled  bool
 	always    bool

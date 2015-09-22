@@ -18,8 +18,6 @@ import (
 	"log"
 	"regexp"
 	"time"
-
-	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 const (
@@ -74,7 +72,7 @@ func FindPathEntity(name string) Entity {
 	if e := FindEntity(name); e != nil {
 		return e
 	}
-	if abs, err := maker.OSPath(name); err == nil {
+	if abs, err := canonicalPath(name); err == nil {
 		if e := FindEntity(abs); e != nil {
 			return e
 		}
