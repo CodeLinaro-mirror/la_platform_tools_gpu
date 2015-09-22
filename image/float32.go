@@ -15,9 +15,11 @@
 package image
 
 import (
+	"bytes"
 	"math"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 )
 
 type fmtFloat32 struct{ binary.Generate }
@@ -33,12 +35,12 @@ func Float32() Format { return &fmtFloat32{} }
 func init() {
 	RegisterConverter(Float32(), RGBA(),
 		func(src []byte, width, height int) ([]byte, error) {
+			r := endian.Reader(bytes.NewBuffer(src), endian.Little)
 			dst, i, j := make([]byte, width*height*4), 0, 0
 			for y := 0; y < height; y++ {
 				for x := 0; x < width; x++ {
-					r, g, b, a := float64(src[i+0]), float64(src[i+1])/255.0, float64(src[i+2])/65025.0, float64(src[i+3])/160581375.0
-					depth := (r + g + b + a) / 255.0
-					d := 0.01 / (1.0 - depth)
+					depth, _ := r.Float32()
+					d := 0.01 / (1.0 - float64(depth))
 					dst[j+0] = byte(math.Cos(d+math.Pi*2.0*0.000)*127.0 + 128.0)
 					dst[j+1] = byte(math.Cos(d+math.Pi*2.0*0.333)*127.0 + 128.0)
 					dst[j+2] = byte(math.Cos(d+math.Pi*2.0*0.666)*127.0 + 128.0)

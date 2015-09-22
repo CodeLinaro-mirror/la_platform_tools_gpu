@@ -16,6 +16,7 @@ package replay
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -75,9 +76,8 @@ type CallTiming struct {
 	Error      error              // The error that occurred generating the timing, if there was one.
 }
 
-// Image represents pixel data from an api query.
-// The exact format of the data depends on the query that generated it.
+// Image holds the result of an image query.
 type Image struct {
-	Data  []byte // The pixel data for the image
-	Error error  // The error that occurred generating the image if there was one.
+	Image *image.Image // The image data.
+	Error error        // The error that occurred generating the image if there was one.
 }
