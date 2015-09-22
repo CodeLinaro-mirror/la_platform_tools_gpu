@@ -15,8 +15,9 @@
 package device
 
 import (
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 )
 
 // Architecture holds architecture information about a device.

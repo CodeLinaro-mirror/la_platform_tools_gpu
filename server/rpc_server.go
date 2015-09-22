@@ -20,6 +20,7 @@ import (
 	"io"
 	"net"
 	"os"
+	"path/filepath"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -30,13 +31,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/gapii"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
-	"path/filepath"
 )
 
 type rpcServer struct {
@@ -173,7 +173,7 @@ func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path
 // LoadCapture imports capture data from a file, returning the new capture identifier.
 func (s rpcServer) LoadCapture(path string, l log.Logger) (*path.Capture, error) {
 	name := filepath.Base(path)
-	in, err := os.Open(path);
+	in, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}

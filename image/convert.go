@@ -77,11 +77,11 @@ func Convert(data []byte, width int, height int, srcFmt Format, dstFmt Format) (
 // LazyConverter is a lazy request to decode a compressed texture.
 type LazyConverter struct {
 	binary.Generate `java:"disable"`
-	Data       binary.ID
-	Width      uint32
-	Height     uint32
-	FormatFrom Format
-	FormatTo   Format
+	Data            binary.ID
+	Width           uint32
+	Height          uint32
+	FormatFrom      Format
+	FormatTo        Format
 
 	// Number of bytes between lines in the source image.
 	// If 0 then lines are contiguous.
