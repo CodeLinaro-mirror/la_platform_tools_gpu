@@ -941,7 +941,7 @@ func (ϟa *GlBlendBarrierKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendBarrierKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendBarrierKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlBlendBarrierKHR)
 }
@@ -961,7 +961,7 @@ func (ϟa *GlBlendEquationSeparateiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationSeparateiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationSeparateiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ModeRGB))
@@ -984,7 +984,7 @@ func (ϟa *GlBlendEquationiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -1006,7 +1006,7 @@ func (ϟa *GlBlendFuncSeparateiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFuncSeparateiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFuncSeparateiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcRGB))
@@ -1031,7 +1031,7 @@ func (ϟa *GlBlendFunciEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFunciEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFunciEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Src))
@@ -1054,7 +1054,7 @@ func (ϟa *GlColorMaskiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glColorMaskiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlColorMaskiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.R.value(ϟb, ϟa, ϟs))
@@ -1079,7 +1079,7 @@ func (ϟa *GlCopyImageSubDataEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyImageSubDataEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyImageSubDataEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcTarget))
@@ -1114,7 +1114,7 @@ func (ϟa *GlDebugMessageCallbackKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageCallbackKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageCallbackKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Callback.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.UserParam.value())
@@ -1137,7 +1137,7 @@ func (ϟa *GlDebugMessageControlKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageControlKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageControlKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -1173,7 +1173,7 @@ func (ϟa *GlDebugMessageInsertKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageInsertKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageInsertKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -1199,7 +1199,7 @@ func (ϟa *GlDisableiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisableiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisableiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -1221,7 +1221,7 @@ func (ϟa *GlEnableiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnableiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnableiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -1243,7 +1243,7 @@ func (ϟa *GlFramebufferTextureEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTextureEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTextureEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -1300,7 +1300,7 @@ func (ϟa *GlGetDebugMessageLogKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetDebugMessageLogKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetDebugMessageLogKHR() return value will be stored on the stack.
 func (ϟa *GlGetDebugMessageLogKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -1344,7 +1344,7 @@ func (ϟa *GlGetObjectLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectLabelKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
@@ -1384,7 +1384,7 @@ func (ϟa *GlGetObjectPtrLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectPtrLabelKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectPtrLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Ptr.value())
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -1409,7 +1409,7 @@ func (ϟa *GlGetPointervKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPointervKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPointervKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
@@ -1446,7 +1446,7 @@ func (ϟa *GlGetSamplerParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1484,7 +1484,7 @@ func (ϟa *GlGetSamplerParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIuivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1556,7 +1556,7 @@ func (ϟa *GlGetTexParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1628,7 +1628,7 @@ func (ϟa *GlGetTexParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIuivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1652,7 +1652,7 @@ func (ϟa *GlIsEnablediEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsEnablediEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsEnablediEXT() return value will be stored on the stack.
 func (ϟa *GlIsEnablediEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -1675,7 +1675,7 @@ func (ϟa *GlMinSampleShadingOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMinSampleShadingOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMinSampleShadingOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMinSampleShadingOES)
@@ -1706,7 +1706,7 @@ func (ϟa *GlObjectLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectLabelKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
@@ -1740,7 +1740,7 @@ func (ϟa *GlObjectPtrLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectPtrLabelKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectPtrLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Ptr.value())
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
@@ -1763,7 +1763,7 @@ func (ϟa *GlPatchParameteriEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPatchParameteriEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPatchParameteriEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -1785,7 +1785,7 @@ func (ϟa *GlPopDebugGroupKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPopDebugGroupKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPopDebugGroupKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlPopDebugGroupKHR)
 }
@@ -1805,7 +1805,7 @@ func (ϟa *GlPrimitiveBoundingBoxEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPrimitiveBoundingBoxEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPrimitiveBoundingBoxEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.MinX.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MinY.value(ϟb, ϟa, ϟs))
@@ -1843,7 +1843,7 @@ func (ϟa *GlPushDebugGroupKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPushDebugGroupKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPushDebugGroupKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
@@ -1887,7 +1887,7 @@ func (ϟa *GlSamplerParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1930,7 +1930,7 @@ func (ϟa *GlSamplerParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIuivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -1953,7 +1953,7 @@ func (ϟa *GlTexBufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBufferEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBufferEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -1980,7 +1980,7 @@ func (ϟa *GlTexBufferRangeEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBufferRangeEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBufferRangeEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -2056,7 +2056,7 @@ func (ϟa *GlTexParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2126,7 +2126,7 @@ func (ϟa *GlTexParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIuivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2149,7 +2149,7 @@ func (ϟa *GlTexStorage3DMultisampleOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage3DMultisampleOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage3DMultisampleOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -2188,7 +2188,7 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginQuery().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginQuery) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
@@ -2227,7 +2227,7 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteQueries().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteQueries) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Queries.value())
@@ -2261,7 +2261,7 @@ func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndQuery().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndQuery) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlEndQuery)
@@ -2298,7 +2298,7 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenQueries().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenQueries) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Queries.value())
@@ -2329,7 +2329,7 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjectuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjectuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -2376,7 +2376,7 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -2409,7 +2409,7 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsQuery().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsQuery() return value will be stored on the stack.
 func (ϟa *GlIsQuery) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
@@ -2467,7 +2467,7 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
@@ -2505,7 +2505,7 @@ func (ϟa *GlBindBufferBase) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindBufferBase().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindBufferBase) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -2544,7 +2544,7 @@ func (ϟa *GlBindBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindBufferRange().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindBufferRange) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -2628,7 +2628,7 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBufferData().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBufferData) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -2673,7 +2673,7 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBufferSubData().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBufferSubData) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Offset.value(ϟb, ϟa, ϟs))
@@ -2720,7 +2720,7 @@ func (ϟa *GlCopyBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyBufferSubData().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyBufferSubData) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.ReadTarget))
 	ϟb.Push(value.U32(ϟa.WriteTarget))
@@ -2758,7 +2758,7 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteBuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Buffers.value())
@@ -2796,7 +2796,7 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenBuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Buffers.value())
@@ -2838,7 +2838,7 @@ func (ϟa *GlGetBufferParameteri64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBufferParameteri64v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBufferParameteri64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2910,7 +2910,7 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBufferParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -2953,7 +2953,7 @@ func (ϟa *GlGetBufferPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBufferPointerv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBufferPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -2986,7 +2986,7 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsBuffer() return value will be stored on the stack.
 func (ϟa *GlIsBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
@@ -3062,7 +3062,7 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMapBufferRange().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glMapBufferRange() return value will be stored on the stack.
 func (ϟa *GlMapBufferRange) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -3121,7 +3121,7 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUnmapBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glUnmapBuffer() return value will be stored on the stack.
 func (ϟa *GlUnmapBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -3144,7 +3144,7 @@ func (ϟa *GlDebugMessageCallback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageCallback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageCallback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Callback.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.UserParam.value())
@@ -3189,7 +3189,7 @@ func (ϟa *GlDebugMessageControl) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageControl().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageControl) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -3247,7 +3247,7 @@ func (ϟa *GlDebugMessageInsert) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDebugMessageInsert().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageInsert) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -3303,7 +3303,7 @@ func (ϟa *GlGetDebugMessageLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetDebugMessageLog().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetDebugMessageLog() return value will be stored on the stack.
 func (ϟa *GlGetDebugMessageLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -3355,7 +3355,7 @@ func (ϟa *GlGetObjectLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectLabel().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
@@ -3396,7 +3396,7 @@ func (ϟa *GlGetObjectPtrLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectPtrLabel().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectPtrLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Ptr.value())
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -3429,7 +3429,7 @@ func (ϟa *GlGetPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPointerv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
@@ -3469,7 +3469,7 @@ func (ϟa *GlObjectLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectLabel().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
@@ -3504,7 +3504,7 @@ func (ϟa *GlObjectPtrLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectPtrLabel().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectPtrLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Ptr.value())
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
@@ -3528,7 +3528,7 @@ func (ϟa *GlPopDebugGroup) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPopDebugGroup().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPopDebugGroup) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlPopDebugGroup)
 }
@@ -3566,7 +3566,7 @@ func (ϟa *GlPushDebugGroup) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPushDebugGroup().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPushDebugGroup) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
@@ -3676,7 +3676,7 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArrays().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.FirstIndex.value(ϟb, ϟa, ϟs))
@@ -3728,7 +3728,7 @@ func (ϟa *GlDrawArraysIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysIndirect().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysIndirect) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.Indirect.value())
@@ -3840,7 +3840,7 @@ func (ϟa *GlDrawArraysInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysInstanced().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysInstanced) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.FirstIndex.value(ϟb, ϟa, ϟs))
@@ -4059,7 +4059,7 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElements().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElements) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.IndicesCount.value(ϟb, ϟa, ϟs))
@@ -4278,7 +4278,7 @@ func (ϟa *GlDrawElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsBaseVertex().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsBaseVertex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.IndicesCount.value(ϟb, ϟa, ϟs))
@@ -4344,7 +4344,7 @@ func (ϟa *GlDrawElementsIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsIndirect().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsIndirect) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(value.U32(ϟa.IndicesType))
@@ -4562,7 +4562,7 @@ func (ϟa *GlDrawElementsInstanced) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstanced().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstanced) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.IndicesCount.value(ϟb, ϟa, ϟs))
@@ -4782,7 +4782,7 @@ func (ϟa *GlDrawElementsInstancedBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.St
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedBaseVertex().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedBaseVertex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.IndicesCount.value(ϟb, ϟa, ϟs))
@@ -5007,7 +5007,7 @@ func (ϟa *GlDrawRangeElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawRangeElements().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawRangeElements) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -5232,7 +5232,7 @@ func (ϟa *GlDrawRangeElementsBaseVertex) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawRangeElementsBaseVertex().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawRangeElementsBaseVertex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -5264,7 +5264,7 @@ func (ϟa *GlPatchParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPatchParameteri().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPatchParameteri) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -5287,7 +5287,7 @@ func (ϟa *GlPrimitiveBoundingBox) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPrimitiveBoundingBox().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPrimitiveBoundingBox) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.MinX.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MinY.value(ϟb, ϟa, ϟs))
@@ -5315,7 +5315,7 @@ func (ϟa *GlActiveShaderProgramEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glActiveShaderProgramEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlActiveShaderProgramEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -5341,7 +5341,7 @@ func (ϟa *GlAlphaFuncQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glAlphaFuncQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlAlphaFuncQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Func))
 	ϟb.Push(ϟa.Ref.value(ϟb, ϟa, ϟs))
@@ -5363,7 +5363,7 @@ func (ϟa *GlApplyFramebufferAttachmentCMAAINTEL) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glApplyFramebufferAttachmentCMAAINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlApplyFramebufferAttachmentCMAAINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlApplyFramebufferAttachmentCMAAINTEL)
 }
@@ -5383,7 +5383,7 @@ func (ϟa *GlBeginConditionalRenderNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginConditionalRenderNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginConditionalRenderNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -5405,7 +5405,7 @@ func (ϟa *GlBeginPerfMonitorAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginPerfMonitorAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginPerfMonitorAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Monitor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBeginPerfMonitorAMD)
@@ -5426,7 +5426,7 @@ func (ϟa *GlBeginPerfQueryINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginPerfQueryINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginPerfQueryINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBeginPerfQueryINTEL)
@@ -5448,7 +5448,7 @@ func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginQueryEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginQueryEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
@@ -5474,7 +5474,7 @@ func (ϟa *GlBindProgramPipelineEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindProgramPipelineEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindProgramPipelineEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindProgramPipelineEXT)
@@ -5507,7 +5507,7 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindVertexArrayOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindVertexArrayOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
@@ -5532,7 +5532,7 @@ func (ϟa *GlBlendBarrierNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendBarrierNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendBarrierNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlBlendBarrierNV)
 }
@@ -5552,7 +5552,7 @@ func (ϟa *GlBlendEquationSeparateiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationSeparateiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationSeparateiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ModeRGB))
@@ -5575,7 +5575,7 @@ func (ϟa *GlBlendEquationiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -5597,7 +5597,7 @@ func (ϟa *GlBlendFuncSeparateiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFuncSeparateiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFuncSeparateiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcRGB))
@@ -5622,7 +5622,7 @@ func (ϟa *GlBlendFunciOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFunciOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFunciOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Src))
@@ -5645,7 +5645,7 @@ func (ϟa *GlBlendParameteriNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendParameteriNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendParameteriNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -5667,7 +5667,7 @@ func (ϟa *GlBlitFramebufferANGLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlitFramebufferANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlitFramebufferANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcX0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcY0.value(ϟb, ϟa, ϟs))
@@ -5697,7 +5697,7 @@ func (ϟa *GlBlitFramebufferNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlitFramebufferNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlitFramebufferNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcX0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcY0.value(ϟb, ϟa, ϟs))
@@ -5727,7 +5727,7 @@ func (ϟa *GlBufferStorageEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBufferStorageEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBufferStorageEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -5752,7 +5752,7 @@ func (ϟa *GlClientWaitSyncAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClientWaitSyncAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glClientWaitSyncAPPLE() return value will be stored on the stack.
 func (ϟa *GlClientWaitSyncAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
@@ -5780,7 +5780,7 @@ func (ϟa *GlColorMaskiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glColorMaskiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlColorMaskiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.R.value(ϟb, ϟa, ϟs))
@@ -5805,7 +5805,7 @@ func (ϟa *GlCompressedTexImage3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexImage3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexImage3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -5834,7 +5834,7 @@ func (ϟa *GlCompressedTexSubImage3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexSubImage3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexSubImage3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -5865,7 +5865,7 @@ func (ϟa *GlCopyBufferSubDataNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyBufferSubDataNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyBufferSubDataNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.ReadTarget))
 	ϟb.Push(value.U32(ϟa.WriteTarget))
@@ -5890,7 +5890,7 @@ func (ϟa *GlCopyImageSubDataOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyImageSubDataOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyImageSubDataOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcTarget))
@@ -5925,7 +5925,7 @@ func (ϟa *GlCopyPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcPath.value(ϟb, ϟa, ϟs))
@@ -5947,7 +5947,7 @@ func (ϟa *GlCopyTexSubImage3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyTexSubImage3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyTexSubImage3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -5976,7 +5976,7 @@ func (ϟa *GlCopyTextureLevelsAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyTextureLevelsAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyTextureLevelsAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.DestinationTexture.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SourceTexture.value(ϟb, ϟa, ϟs))
@@ -6000,7 +6000,7 @@ func (ϟa *GlCoverFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverFillPathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -6027,7 +6027,7 @@ func (ϟa *GlCoverFillPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverFillPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverFillPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
@@ -6049,7 +6049,7 @@ func (ϟa *GlCoverStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverStrokePathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -6076,7 +6076,7 @@ func (ϟa *GlCoverStrokePathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverStrokePathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverStrokePathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
@@ -6098,7 +6098,7 @@ func (ϟa *GlCoverageMaskNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverageMaskNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverageMaskNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCoverageMaskNV)
@@ -6119,7 +6119,7 @@ func (ϟa *GlCoverageModulationNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverageModulationNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverageModulationNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Components))
 	ϟb.Call(funcInfoGlCoverageModulationNV)
@@ -6140,7 +6140,7 @@ func (ϟa *GlCoverageModulationTableNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverageModulationTableNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverageModulationTableNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
@@ -6162,7 +6162,7 @@ func (ϟa *GlCoverageOperationNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCoverageOperationNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverageOperationNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Operation))
 	ϟb.Call(funcInfoGlCoverageOperationNV)
@@ -6183,7 +6183,7 @@ func (ϟa *GlCreatePerfQueryINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCreatePerfQueryINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCreatePerfQueryINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.QueryHandle.value())
@@ -6206,7 +6206,7 @@ func (ϟa *GlCreateShaderProgramvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCreateShaderProgramvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glCreateShaderProgramvEXT() return value will be stored on the stack.
 func (ϟa *GlCreateShaderProgramvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
@@ -6230,7 +6230,7 @@ func (ϟa *GlDeleteFencesNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteFencesNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteFencesNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Fences.value())
@@ -6252,7 +6252,7 @@ func (ϟa *GlDeletePathsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeletePathsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeletePathsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Range.value(ϟb, ϟa, ϟs))
@@ -6274,7 +6274,7 @@ func (ϟa *GlDeletePerfMonitorsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeletePerfMonitorsAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeletePerfMonitorsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Monitors.value())
@@ -6296,7 +6296,7 @@ func (ϟa *GlDeletePerfQueryINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeletePerfQueryINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeletePerfQueryINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeletePerfQueryINTEL)
@@ -6317,7 +6317,7 @@ func (ϟa *GlDeleteProgramPipelinesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteProgramPipelinesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteProgramPipelinesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Pipelines.value())
@@ -6352,7 +6352,7 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteQueriesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteQueriesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Queries.value())
@@ -6374,7 +6374,7 @@ func (ϟa *GlDeleteSyncAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteSyncAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteSyncAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -6411,7 +6411,7 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteVertexArraysOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteVertexArraysOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
@@ -6433,7 +6433,7 @@ func (ϟa *GlDepthRangeArrayfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDepthRangeArrayfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDepthRangeArrayfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6456,7 +6456,7 @@ func (ϟa *GlDepthRangeIndexedfNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDepthRangeIndexedfNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDepthRangeIndexedfNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
@@ -6479,7 +6479,7 @@ func (ϟa *GlDisableDriverControlQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisableDriverControlQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisableDriverControlQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.DriverControl.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDisableDriverControlQCOM)
@@ -6500,7 +6500,7 @@ func (ϟa *GlDisableiNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisableiNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisableiNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -6522,7 +6522,7 @@ func (ϟa *GlDisableiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisableiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisableiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -6544,7 +6544,7 @@ func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDiscardFramebufferEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDiscardFramebufferEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.NumAttachments.value(ϟb, ϟa, ϟs))
@@ -6567,7 +6567,7 @@ func (ϟa *GlDrawArraysInstancedANGLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysInstancedANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysInstancedANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
@@ -6591,7 +6591,7 @@ func (ϟa *GlDrawArraysInstancedBaseInstanceEXT) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysInstancedBaseInstanceEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysInstancedBaseInstanceEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
@@ -6617,7 +6617,7 @@ func (ϟa *GlDrawArraysInstancedEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysInstancedEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysInstancedEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -6641,7 +6641,7 @@ func (ϟa *GlDrawArraysInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawArraysInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
@@ -6665,7 +6665,7 @@ func (ϟa *GlDrawBuffersEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawBuffersEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Bufs.value())
@@ -6687,7 +6687,7 @@ func (ϟa *GlDrawBuffersIndexedEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawBuffersIndexedEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersIndexedEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Location.value())
@@ -6710,7 +6710,7 @@ func (ϟa *GlDrawBuffersNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawBuffersNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Bufs.value())
@@ -6732,7 +6732,7 @@ func (ϟa *GlDrawElementsBaseVertexEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsBaseVertexEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsBaseVertexEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6757,7 +6757,7 @@ func (ϟa *GlDrawElementsBaseVertexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsBaseVertexOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsBaseVertexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6782,7 +6782,7 @@ func (ϟa *GlDrawElementsInstancedANGLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6807,7 +6807,7 @@ func (ϟa *GlDrawElementsInstancedBaseInstanceEXT) Replay(ϟi atom.ID, ϟs *gfxa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedBaseInstanceEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedBaseInstanceEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6833,7 +6833,7 @@ func (ϟa *GlDrawElementsInstancedBaseVertexBaseInstanceEXT) Replay(ϟi atom.ID,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedBaseVertexBaseInstanceEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedBaseVertexBaseInstanceEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6860,7 +6860,7 @@ func (ϟa *GlDrawElementsInstancedBaseVertexEXT) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedBaseVertexEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedBaseVertexEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6886,7 +6886,7 @@ func (ϟa *GlDrawElementsInstancedBaseVertexOES) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedBaseVertexOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedBaseVertexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6913,7 +6913,7 @@ func (ϟa *GlDrawElementsInstancedEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6938,7 +6938,7 @@ func (ϟa *GlDrawElementsInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawElementsInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawElementsInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -6963,7 +6963,7 @@ func (ϟa *GlDrawRangeElementsBaseVertexEXT) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawRangeElementsBaseVertexEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawRangeElementsBaseVertexEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -6990,7 +6990,7 @@ func (ϟa *GlDrawRangeElementsBaseVertexOES) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawRangeElementsBaseVertexOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawRangeElementsBaseVertexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -7017,7 +7017,7 @@ func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEGLImageTargetRenderbufferStorageOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
@@ -7039,7 +7039,7 @@ func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEGLImageTargetTexture2DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEGLImageTargetTexture2DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
@@ -7061,7 +7061,7 @@ func (ϟa *GlEnableDriverControlQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnableDriverControlQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnableDriverControlQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.DriverControl.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEnableDriverControlQCOM)
@@ -7082,7 +7082,7 @@ func (ϟa *GlEnableiNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnableiNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnableiNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -7104,7 +7104,7 @@ func (ϟa *GlEnableiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnableiOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnableiOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -7126,7 +7126,7 @@ func (ϟa *GlEndConditionalRenderNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndConditionalRenderNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndConditionalRenderNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlEndConditionalRenderNV)
 }
@@ -7146,7 +7146,7 @@ func (ϟa *GlEndPerfMonitorAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndPerfMonitorAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndPerfMonitorAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Monitor.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEndPerfMonitorAMD)
@@ -7167,7 +7167,7 @@ func (ϟa *GlEndPerfQueryINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndPerfQueryINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndPerfQueryINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEndPerfQueryINTEL)
@@ -7189,7 +7189,7 @@ func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndQueryEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndQueryEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlEndQueryEXT)
@@ -7210,7 +7210,7 @@ func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndTilingQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndTilingQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.PreserveMask))
 	ϟb.Call(funcInfoGlEndTilingQCOM)
@@ -7231,7 +7231,7 @@ func (ϟa *GlExtGetBufferPointervQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetBufferPointervQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetBufferPointervQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Params.value())
@@ -7253,7 +7253,7 @@ func (ϟa *GlExtGetBuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetBuffersQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetBuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buffers.value())
 	ϟb.Push(ϟa.MaxBuffers.value(ϟb, ϟa, ϟs))
@@ -7276,7 +7276,7 @@ func (ϟa *GlExtGetFramebuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetFramebuffersQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetFramebuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Framebuffers.value())
 	ϟb.Push(ϟa.MaxFramebuffers.value(ϟb, ϟa, ϟs))
@@ -7299,7 +7299,7 @@ func (ϟa *GlExtGetProgramBinarySourceQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.Stat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetProgramBinarySourceQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetProgramBinarySourceQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -7327,7 +7327,7 @@ func (ϟa *GlExtGetProgramsQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetProgramsQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetProgramsQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Programs.value())
 	ϟb.Push(ϟa.MaxPrograms.value(ϟb, ϟa, ϟs))
@@ -7350,7 +7350,7 @@ func (ϟa *GlExtGetRenderbuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetRenderbuffersQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetRenderbuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Renderbuffers.value())
 	ϟb.Push(ϟa.MaxRenderbuffers.value(ϟb, ϟa, ϟs))
@@ -7373,7 +7373,7 @@ func (ϟa *GlExtGetShadersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetShadersQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetShadersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Shaders.value())
 	ϟb.Push(ϟa.MaxShaders.value(ϟb, ϟa, ϟs))
@@ -7396,7 +7396,7 @@ func (ϟa *GlExtGetTexLevelParameterivQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.Stat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetTexLevelParameterivQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetTexLevelParameterivQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -7425,7 +7425,7 @@ func (ϟa *GlExtGetTexSubImageQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetTexSubImageQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetTexSubImageQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -7456,7 +7456,7 @@ func (ϟa *GlExtGetTexturesQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetTexturesQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetTexturesQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Textures.value())
 	ϟb.Push(ϟa.MaxTextures.value(ϟb, ϟa, ϟs))
@@ -7480,7 +7480,7 @@ func (ϟa *GlExtIsProgramBinaryQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtIsProgramBinaryQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glExtIsProgramBinaryQCOM() return value will be stored on the stack.
 func (ϟa *GlExtIsProgramBinaryQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -7506,7 +7506,7 @@ func (ϟa *GlExtTexObjectStateOverrideiQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtTexObjectStateOverrideiQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtTexObjectStateOverrideiQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -7530,7 +7530,7 @@ func (ϟa *GlFenceSyncAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFenceSyncAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glFenceSyncAPPLE() return value will be stored on the stack.
 func (ϟa *GlFenceSyncAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Condition))
@@ -7562,7 +7562,7 @@ func (ϟa *GlFinishFenceNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFinishFenceNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFinishFenceNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFinishFenceNV)
@@ -7583,7 +7583,7 @@ func (ϟa *GlFlushMappedBufferRangeEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFlushMappedBufferRangeEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFlushMappedBufferRangeEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Offset.value(ϟb, ϟa, ϟs))
@@ -7606,7 +7606,7 @@ func (ϟa *GlFragmentCoverageColorNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFragmentCoverageColorNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFragmentCoverageColorNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Color.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFragmentCoverageColorNV)
@@ -7627,7 +7627,7 @@ func (ϟa *GlFramebufferSampleLocationsfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferSampleLocationsfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferSampleLocationsfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
@@ -7651,7 +7651,7 @@ func (ϟa *GlFramebufferTexture2DMultisampleEXT) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTexture2DMultisampleEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTexture2DMultisampleEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -7681,7 +7681,7 @@ func (ϟa *GlFramebufferTexture2DMultisampleIMG) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTexture2DMultisampleIMG().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTexture2DMultisampleIMG) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -7711,7 +7711,7 @@ func (ϟa *GlFramebufferTexture3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTexture3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTexture3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -7741,7 +7741,7 @@ func (ϟa *GlFramebufferTextureMultiviewOVR) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTextureMultiviewOVR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTextureMultiviewOVR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -7771,7 +7771,7 @@ func (ϟa *GlFramebufferTextureOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTextureOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTextureOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -7799,7 +7799,7 @@ func (ϟa *GlGenFencesNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenFencesNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenFencesNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Fences.value())
@@ -7822,7 +7822,7 @@ func (ϟa *GlGenPathsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenPathsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGenPathsNV() return value will be stored on the stack.
 func (ϟa *GlGenPathsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Range.value(ϟb, ϟa, ϟs))
@@ -7844,7 +7844,7 @@ func (ϟa *GlGenPerfMonitorsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenPerfMonitorsAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenPerfMonitorsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Monitors.value())
@@ -7866,7 +7866,7 @@ func (ϟa *GlGenProgramPipelinesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenProgramPipelinesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenProgramPipelinesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Pipelines.value())
@@ -7904,7 +7904,7 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenQueriesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenQueriesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Queries.value())
@@ -7941,7 +7941,7 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenVertexArraysOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenVertexArraysOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
@@ -7963,7 +7963,7 @@ func (ϟa *GlGetBufferPointervOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBufferPointervOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBufferPointervOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -7986,7 +7986,7 @@ func (ϟa *GlGetCoverageModulationTableNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetCoverageModulationTableNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetCoverageModulationTableNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Bufsize.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
@@ -8008,7 +8008,7 @@ func (ϟa *GlGetDriverControlStringQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetDriverControlStringQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetDriverControlStringQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.DriverControl.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -8032,7 +8032,7 @@ func (ϟa *GlGetDriverControlsQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetDriverControlsQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetDriverControlsQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Num.value())
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -8055,7 +8055,7 @@ func (ϟa *GlGetFenceivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFenceivNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFenceivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -8078,7 +8078,7 @@ func (ϟa *GlGetFirstPerfQueryIdINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFirstPerfQueryIdINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFirstPerfQueryIdINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value())
 	ϟb.Call(funcInfoGlGetFirstPerfQueryIdINTEL)
@@ -8099,7 +8099,7 @@ func (ϟa *GlGetFloati_vNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFloati_vNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFloati_vNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -8123,7 +8123,7 @@ func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetGraphicsResetStatusEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetGraphicsResetStatusEXT() return value will be stored on the stack.
 func (ϟa *GlGetGraphicsResetStatusEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlGetGraphicsResetStatusEXT)
@@ -8145,7 +8145,7 @@ func (ϟa *GlGetGraphicsResetStatusKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetGraphicsResetStatusKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetGraphicsResetStatusKHR() return value will be stored on the stack.
 func (ϟa *GlGetGraphicsResetStatusKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlGetGraphicsResetStatusKHR)
@@ -8167,7 +8167,7 @@ func (ϟa *GlGetImageHandleNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetImageHandleNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetImageHandleNV() return value will be stored on the stack.
 func (ϟa *GlGetImageHandleNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -8197,7 +8197,7 @@ func (ϟa *GlGetInteger64vAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetInteger64vAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInteger64vAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Params.value())
@@ -8219,7 +8219,7 @@ func (ϟa *GlGetIntegeri_vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetIntegeri_vEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetIntegeri_vEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -8242,7 +8242,7 @@ func (ϟa *GlGetInternalformatSampleivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetInternalformatSampleivNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInternalformatSampleivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -8268,7 +8268,7 @@ func (ϟa *GlGetNextPerfQueryIdINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetNextPerfQueryIdINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetNextPerfQueryIdINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NextQueryId.value())
@@ -8290,7 +8290,7 @@ func (ϟa *GlGetObjectLabelEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectLabelEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectLabelEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Object.value(ϟb, ϟa, ϟs))
@@ -8315,7 +8315,7 @@ func (ϟa *GlGetPathCommandsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathCommandsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Commands.value())
@@ -8337,7 +8337,7 @@ func (ϟa *GlGetPathCoordsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathCoordsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Coords.value())
@@ -8359,7 +8359,7 @@ func (ϟa *GlGetPathDashArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathDashArrayNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathDashArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.DashArray.value())
@@ -8382,7 +8382,7 @@ func (ϟa *GlGetPathLengthNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathLengthNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetPathLengthNV() return value will be stored on the stack.
 func (ϟa *GlGetPathLengthNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
@@ -8406,7 +8406,7 @@ func (ϟa *GlGetPathMetricRangeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathMetricRangeNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathMetricRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MetricQueryMask))
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
@@ -8431,7 +8431,7 @@ func (ϟa *GlGetPathMetricsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathMetricsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathMetricsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MetricQueryMask))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
@@ -8458,7 +8458,7 @@ func (ϟa *GlGetPathParameterfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathParameterfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathParameterfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -8481,7 +8481,7 @@ func (ϟa *GlGetPathParameterivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathParameterivNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathParameterivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -8504,7 +8504,7 @@ func (ϟa *GlGetPathSpacingNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPathSpacingNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathSpacingNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.PathListMode))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
@@ -8533,7 +8533,7 @@ func (ϟa *GlGetPerfCounterInfoINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfCounterInfoINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfCounterInfoINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CounterId.value(ϟb, ϟa, ϟs))
@@ -8564,7 +8564,7 @@ func (ϟa *GlGetPerfMonitorCounterDataAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorCounterDataAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorCounterDataAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Monitor.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -8589,7 +8589,7 @@ func (ϟa *GlGetPerfMonitorCounterInfoAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorCounterInfoAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorCounterInfoAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Counter.value(ϟb, ϟa, ϟs))
@@ -8613,7 +8613,7 @@ func (ϟa *GlGetPerfMonitorCounterStringAMD) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorCounterStringAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorCounterStringAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Counter.value(ϟb, ϟa, ϟs))
@@ -8638,7 +8638,7 @@ func (ϟa *GlGetPerfMonitorCountersAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorCountersAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorCountersAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCounters.value())
@@ -8663,7 +8663,7 @@ func (ϟa *GlGetPerfMonitorGroupStringAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorGroupStringAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorGroupStringAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -8687,7 +8687,7 @@ func (ϟa *GlGetPerfMonitorGroupsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorGroupsAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorGroupsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumGroups.value())
 	ϟb.Push(ϟa.GroupsSize.value(ϟb, ϟa, ϟs))
@@ -8710,7 +8710,7 @@ func (ϟa *GlGetPerfQueryDataINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfQueryDataINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfQueryDataINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Flag.value(ϟb, ϟa, ϟs))
@@ -8735,7 +8735,7 @@ func (ϟa *GlGetPerfQueryIdByNameINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfQueryIdByNameINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfQueryIdByNameINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryName.value())
 	ϟb.Push(ϟa.QueryId.value())
@@ -8757,7 +8757,7 @@ func (ϟa *GlGetPerfQueryInfoINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfQueryInfoINTEL().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfQueryInfoINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.QueryNameLength.value(ϟb, ϟa, ϟs))
@@ -8788,7 +8788,7 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramBinaryOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramBinaryOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -8817,7 +8817,7 @@ func (ϟa *GlGetProgramPipelineInfoLogEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramPipelineInfoLogEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramPipelineInfoLogEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -8841,7 +8841,7 @@ func (ϟa *GlGetProgramPipelineivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramPipelineivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramPipelineivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -8864,7 +8864,7 @@ func (ϟa *GlGetProgramResourcefvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramResourcefvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramResourcefvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -8897,7 +8897,7 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjecti64vEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjecti64vEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -8925,7 +8925,7 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjectivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjectivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -8953,7 +8953,7 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjectui64vEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjectui64vEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -8982,7 +8982,7 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjectuivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjectuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -9011,7 +9011,7 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -9034,7 +9034,7 @@ func (ϟa *GlGetSamplerParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9057,7 +9057,7 @@ func (ϟa *GlGetSamplerParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIuivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9080,7 +9080,7 @@ func (ϟa *GlGetSyncivAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSyncivAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSyncivAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -9109,7 +9109,7 @@ func (ϟa *GlGetTexParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9132,7 +9132,7 @@ func (ϟa *GlGetTexParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIuivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -9156,7 +9156,7 @@ func (ϟa *GlGetTextureHandleNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTextureHandleNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetTextureHandleNV() return value will be stored on the stack.
 func (ϟa *GlGetTextureHandleNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -9183,7 +9183,7 @@ func (ϟa *GlGetTextureSamplerHandleNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTextureSamplerHandleNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetTextureSamplerHandleNV() return value will be stored on the stack.
 func (ϟa *GlGetTextureSamplerHandleNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -9210,7 +9210,7 @@ func (ϟa *GlGetTranslatedShaderSourceANGLE) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTranslatedShaderSourceANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTranslatedShaderSourceANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -9238,7 +9238,7 @@ func (ϟa *GlGetnUniformfvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformfvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformfvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -9270,7 +9270,7 @@ func (ϟa *GlGetnUniformfvKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformfvKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformfvKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -9302,7 +9302,7 @@ func (ϟa *GlGetnUniformivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -9334,7 +9334,7 @@ func (ϟa *GlGetnUniformivKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformivKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformivKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -9366,7 +9366,7 @@ func (ϟa *GlGetnUniformuivKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformuivKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformuivKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -9403,7 +9403,7 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glInsertEventMarkerEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlInsertEventMarkerEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Marker.value())
@@ -9425,7 +9425,7 @@ func (ϟa *GlInterpolatePathsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glInterpolatePathsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlInterpolatePathsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathA.value(ϟb, ϟa, ϟs))
@@ -9450,7 +9450,7 @@ func (ϟa *GlIsEnablediNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsEnablediNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsEnablediNV() return value will be stored on the stack.
 func (ϟa *GlIsEnablediNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -9474,7 +9474,7 @@ func (ϟa *GlIsEnablediOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsEnablediOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsEnablediOES() return value will be stored on the stack.
 func (ϟa *GlIsEnablediOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -9498,7 +9498,7 @@ func (ϟa *GlIsFenceNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsFenceNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsFenceNV() return value will be stored on the stack.
 func (ϟa *GlIsFenceNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
@@ -9521,7 +9521,7 @@ func (ϟa *GlIsImageHandleResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsImageHandleResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsImageHandleResidentNV() return value will be stored on the stack.
 func (ϟa *GlIsImageHandleResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
@@ -9544,7 +9544,7 @@ func (ϟa *GlIsPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsPathNV() return value will be stored on the stack.
 func (ϟa *GlIsPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
@@ -9567,7 +9567,7 @@ func (ϟa *GlIsPointInFillPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsPointInFillPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsPointInFillPathNV() return value will be stored on the stack.
 func (ϟa *GlIsPointInFillPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
@@ -9593,7 +9593,7 @@ func (ϟa *GlIsPointInStrokePathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsPointInStrokePathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsPointInStrokePathNV() return value will be stored on the stack.
 func (ϟa *GlIsPointInStrokePathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
@@ -9618,7 +9618,7 @@ func (ϟa *GlIsProgramPipelineEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsProgramPipelineEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsProgramPipelineEXT() return value will be stored on the stack.
 func (ϟa *GlIsProgramPipelineEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
@@ -9650,7 +9650,7 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsQueryEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsQueryEXT() return value will be stored on the stack.
 func (ϟa *GlIsQueryEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
@@ -9677,7 +9677,7 @@ func (ϟa *GlIsSyncAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsSyncAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsSyncAPPLE() return value will be stored on the stack.
 func (ϟa *GlIsSyncAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
@@ -9704,7 +9704,7 @@ func (ϟa *GlIsTextureHandleResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsTextureHandleResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsTextureHandleResidentNV() return value will be stored on the stack.
 func (ϟa *GlIsTextureHandleResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
@@ -9735,7 +9735,7 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsVertexArrayOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsVertexArrayOES() return value will be stored on the stack.
 func (ϟa *GlIsVertexArrayOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
@@ -9761,7 +9761,7 @@ func (ϟa *GlLabelObjectEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glLabelObjectEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLabelObjectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Object.value(ϟb, ϟa, ϟs))
@@ -9785,7 +9785,7 @@ func (ϟa *GlMakeImageHandleNonResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMakeImageHandleNonResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMakeImageHandleNonResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMakeImageHandleNonResidentNV)
@@ -9806,7 +9806,7 @@ func (ϟa *GlMakeImageHandleResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMakeImageHandleResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMakeImageHandleResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Access))
@@ -9828,7 +9828,7 @@ func (ϟa *GlMakeTextureHandleNonResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMakeTextureHandleNonResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMakeTextureHandleNonResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMakeTextureHandleNonResidentNV)
@@ -9849,7 +9849,7 @@ func (ϟa *GlMakeTextureHandleResidentNV) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMakeTextureHandleResidentNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMakeTextureHandleResidentNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Handle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMakeTextureHandleResidentNV)
@@ -9871,7 +9871,7 @@ func (ϟa *GlMapBufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMapBufferOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glMapBufferOES() return value will be stored on the stack.
 func (ϟa *GlMapBufferOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -9895,7 +9895,7 @@ func (ϟa *GlMapBufferRangeEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMapBufferRangeEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glMapBufferRangeEXT() return value will be stored on the stack.
 func (ϟa *GlMapBufferRangeEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -9920,7 +9920,7 @@ func (ϟa *GlMatrixLoad3x2fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixLoad3x2fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoad3x2fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -9942,7 +9942,7 @@ func (ϟa *GlMatrixLoad3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixLoad3x3fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoad3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -9964,7 +9964,7 @@ func (ϟa *GlMatrixLoadTranspose3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixLoadTranspose3x3fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoadTranspose3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -9986,7 +9986,7 @@ func (ϟa *GlMatrixMult3x2fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixMult3x2fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMult3x2fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -10008,7 +10008,7 @@ func (ϟa *GlMatrixMult3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixMult3x3fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMult3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -10030,7 +10030,7 @@ func (ϟa *GlMatrixMultTranspose3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMatrixMultTranspose3x3fNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMultTranspose3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
 	ϟb.Push(ϟa.M.value())
@@ -10052,7 +10052,7 @@ func (ϟa *GlMultiDrawArraysEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawArraysEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawArraysEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.First.value())
@@ -10076,7 +10076,7 @@ func (ϟa *GlMultiDrawArraysIndirectEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawArraysIndirectEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawArraysIndirectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Indirect.value())
@@ -10100,7 +10100,7 @@ func (ϟa *GlMultiDrawElementsBaseVertexEXT) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawElementsBaseVertexEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsBaseVertexEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value())
@@ -10126,7 +10126,7 @@ func (ϟa *GlMultiDrawElementsBaseVertexOES) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawElementsBaseVertexOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsBaseVertexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value())
@@ -10152,7 +10152,7 @@ func (ϟa *GlMultiDrawElementsEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawElementsEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value())
@@ -10177,7 +10177,7 @@ func (ϟa *GlMultiDrawElementsIndirectEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultiDrawElementsIndirectEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsIndirectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(value.U32(ϟa.Type))
@@ -10202,7 +10202,7 @@ func (ϟa *GlNamedFramebufferSampleLocationsfvNV) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glNamedFramebufferSampleLocationsfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlNamedFramebufferSampleLocationsfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
@@ -10230,7 +10230,7 @@ func (ϟa *GlPatchParameteriOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPatchParameteriOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPatchParameteriOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -10252,7 +10252,7 @@ func (ϟa *GlPathCommandsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathCommandsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCommands.value(ϟb, ϟa, ϟs))
@@ -10278,7 +10278,7 @@ func (ϟa *GlPathCoordsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathCoordsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCoords.value(ϟb, ϟa, ϟs))
@@ -10302,7 +10302,7 @@ func (ϟa *GlPathCoverDepthFuncNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathCoverDepthFuncNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathCoverDepthFuncNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Func))
 	ϟb.Call(funcInfoGlPathCoverDepthFuncNV)
@@ -10323,7 +10323,7 @@ func (ϟa *GlPathDashArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathDashArrayNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathDashArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.DashCount.value(ϟb, ϟa, ϟs))
@@ -10347,7 +10347,7 @@ func (ϟa *GlPathGlyphIndexArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathGlyphIndexArrayNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glPathGlyphIndexArrayNV() return value will be stored on the stack.
 func (ϟa *GlPathGlyphIndexArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
@@ -10377,7 +10377,7 @@ func (ϟa *GlPathGlyphIndexRangeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathGlyphIndexRangeNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glPathGlyphIndexRangeNV() return value will be stored on the stack.
 func (ϟa *GlPathGlyphIndexRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.FontTarget))
@@ -10404,7 +10404,7 @@ func (ϟa *GlPathGlyphRangeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathGlyphRangeNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathGlyphRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
@@ -10433,7 +10433,7 @@ func (ϟa *GlPathGlyphsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathGlyphsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathGlyphsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
@@ -10464,7 +10464,7 @@ func (ϟa *GlPathMemoryGlyphIndexArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathMemoryGlyphIndexArrayNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glPathMemoryGlyphIndexArrayNV() return value will be stored on the stack.
 func (ϟa *GlPathMemoryGlyphIndexArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
@@ -10494,7 +10494,7 @@ func (ϟa *GlPathParameterfNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathParameterfNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathParameterfNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -10517,7 +10517,7 @@ func (ϟa *GlPathParameterfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathParameterfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathParameterfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -10540,7 +10540,7 @@ func (ϟa *GlPathParameteriNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathParameteriNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathParameteriNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -10563,7 +10563,7 @@ func (ϟa *GlPathParameterivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathParameterivNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathParameterivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -10586,7 +10586,7 @@ func (ϟa *GlPathStencilDepthOffsetNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathStencilDepthOffsetNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathStencilDepthOffsetNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Factor.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Units.value(ϟb, ϟa, ϟs))
@@ -10608,7 +10608,7 @@ func (ϟa *GlPathStencilFuncNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathStencilFuncNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathStencilFuncNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Func))
 	ϟb.Push(ϟa.Ref.value(ϟb, ϟa, ϟs))
@@ -10631,7 +10631,7 @@ func (ϟa *GlPathStringNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathStringNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathStringNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Format))
@@ -10655,7 +10655,7 @@ func (ϟa *GlPathSubCommandsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathSubCommandsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathSubCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CommandStart.value(ϟb, ϟa, ϟs))
@@ -10683,7 +10683,7 @@ func (ϟa *GlPathSubCoordsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPathSubCoordsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPathSubCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CoordStart.value(ϟb, ϟa, ϟs))
@@ -10709,7 +10709,7 @@ func (ϟa *GlPointAlongPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPointAlongPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glPointAlongPathNV() return value will be stored on the stack.
 func (ϟa *GlPointAlongPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
@@ -10738,7 +10738,7 @@ func (ϟa *GlPolygonModeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPolygonModeNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPolygonModeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -10760,7 +10760,7 @@ func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPopGroupMarkerEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPopGroupMarkerEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlPopGroupMarkerEXT)
 }
@@ -10780,7 +10780,7 @@ func (ϟa *GlPrimitiveBoundingBoxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPrimitiveBoundingBoxOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPrimitiveBoundingBoxOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.MinX.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MinY.value(ϟb, ϟa, ϟs))
@@ -10808,7 +10808,7 @@ func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramBinaryOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramBinaryOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10836,7 +10836,7 @@ func (ϟa *GlProgramParameteriEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramParameteriEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramParameteriEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10863,7 +10863,7 @@ func (ϟa *GlProgramPathFragmentInputGenNV) Replay(ϟi atom.ID, ϟs *gfxapi.Stat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramPathFragmentInputGenNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramPathFragmentInputGenNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10892,7 +10892,7 @@ func (ϟa *GlProgramUniform1fEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1fEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1fEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10923,7 +10923,7 @@ func (ϟa *GlProgramUniform1fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10955,7 +10955,7 @@ func (ϟa *GlProgramUniform1iEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1iEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1iEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -10986,7 +10986,7 @@ func (ϟa *GlProgramUniform1ivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1ivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11018,7 +11018,7 @@ func (ϟa *GlProgramUniform1uiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1uiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1uiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11049,7 +11049,7 @@ func (ϟa *GlProgramUniform1uivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1uivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1uivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11081,7 +11081,7 @@ func (ϟa *GlProgramUniform2fEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2fEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2fEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11113,7 +11113,7 @@ func (ϟa *GlProgramUniform2fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11145,7 +11145,7 @@ func (ϟa *GlProgramUniform2iEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2iEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2iEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11177,7 +11177,7 @@ func (ϟa *GlProgramUniform2ivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2ivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11209,7 +11209,7 @@ func (ϟa *GlProgramUniform2uiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2uiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2uiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11241,7 +11241,7 @@ func (ϟa *GlProgramUniform2uivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2uivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2uivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11273,7 +11273,7 @@ func (ϟa *GlProgramUniform3fEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3fEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3fEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11306,7 +11306,7 @@ func (ϟa *GlProgramUniform3fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11338,7 +11338,7 @@ func (ϟa *GlProgramUniform3iEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3iEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3iEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11371,7 +11371,7 @@ func (ϟa *GlProgramUniform3ivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3ivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11403,7 +11403,7 @@ func (ϟa *GlProgramUniform3uiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3uiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3uiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11436,7 +11436,7 @@ func (ϟa *GlProgramUniform3uivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3uivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3uivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11468,7 +11468,7 @@ func (ϟa *GlProgramUniform4fEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4fEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4fEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11502,7 +11502,7 @@ func (ϟa *GlProgramUniform4fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11534,7 +11534,7 @@ func (ϟa *GlProgramUniform4iEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4iEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4iEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11568,7 +11568,7 @@ func (ϟa *GlProgramUniform4ivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4ivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11600,7 +11600,7 @@ func (ϟa *GlProgramUniform4uiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4uiEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4uiEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11634,7 +11634,7 @@ func (ϟa *GlProgramUniform4uivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4uivEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4uivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11666,7 +11666,7 @@ func (ϟa *GlProgramUniformHandleui64NV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformHandleui64NV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformHandleui64NV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11697,7 +11697,7 @@ func (ϟa *GlProgramUniformHandleui64vNV) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformHandleui64vNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformHandleui64vNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11729,7 +11729,7 @@ func (ϟa *GlProgramUniformMatrix2fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11762,7 +11762,7 @@ func (ϟa *GlProgramUniformMatrix2x3fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2x3fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2x3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11795,7 +11795,7 @@ func (ϟa *GlProgramUniformMatrix2x4fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2x4fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2x4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11828,7 +11828,7 @@ func (ϟa *GlProgramUniformMatrix3fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11861,7 +11861,7 @@ func (ϟa *GlProgramUniformMatrix3x2fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3x2fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3x2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11894,7 +11894,7 @@ func (ϟa *GlProgramUniformMatrix3x4fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3x4fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3x4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11927,7 +11927,7 @@ func (ϟa *GlProgramUniformMatrix4fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11960,7 +11960,7 @@ func (ϟa *GlProgramUniformMatrix4x2fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4x2fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4x2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -11993,7 +11993,7 @@ func (ϟa *GlProgramUniformMatrix4x3fvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4x3fvEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4x3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -12031,7 +12031,7 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPushGroupMarkerEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPushGroupMarkerEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Marker.value())
@@ -12053,7 +12053,7 @@ func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glQueryCounterEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlQueryCounterEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -12081,7 +12081,7 @@ func (ϟa *GlRasterSamplesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRasterSamplesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRasterSamplesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Fixedsamplelocations.value(ϟb, ϟa, ϟs))
@@ -12103,7 +12103,7 @@ func (ϟa *GlReadBufferIndexedEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadBufferIndexedEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadBufferIndexedEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Src))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -12125,7 +12125,7 @@ func (ϟa *GlReadBufferNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadBufferNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadBufferNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Call(funcInfoGlReadBufferNV)
@@ -12146,7 +12146,7 @@ func (ϟa *GlReadnPixelsEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadnPixelsEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadnPixelsEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -12174,7 +12174,7 @@ func (ϟa *GlReadnPixelsKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadnPixelsKHR().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadnPixelsKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -12202,7 +12202,7 @@ func (ϟa *GlRenderbufferStorageMultisampleANGLE) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisampleANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisampleANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -12227,7 +12227,7 @@ func (ϟa *GlRenderbufferStorageMultisampleAPPLE) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisampleAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisampleAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -12252,7 +12252,7 @@ func (ϟa *GlRenderbufferStorageMultisampleEXT) Replay(ϟi atom.ID, ϟs *gfxapi.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisampleEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisampleEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -12277,7 +12277,7 @@ func (ϟa *GlRenderbufferStorageMultisampleIMG) Replay(ϟi atom.ID, ϟs *gfxapi.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisampleIMG().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisampleIMG) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -12302,7 +12302,7 @@ func (ϟa *GlRenderbufferStorageMultisampleNV) Replay(ϟi atom.ID, ϟs *gfxapi.S
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisampleNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisampleNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -12327,7 +12327,7 @@ func (ϟa *GlResolveDepthValuesNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glResolveDepthValuesNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlResolveDepthValuesNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlResolveDepthValuesNV)
 }
@@ -12347,7 +12347,7 @@ func (ϟa *GlResolveMultisampleFramebufferAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glResolveMultisampleFramebufferAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlResolveMultisampleFramebufferAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlResolveMultisampleFramebufferAPPLE)
 }
@@ -12367,7 +12367,7 @@ func (ϟa *GlSamplerParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -12390,7 +12390,7 @@ func (ϟa *GlSamplerParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIuivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -12413,7 +12413,7 @@ func (ϟa *GlScissorArrayvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glScissorArrayvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlScissorArrayvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -12436,7 +12436,7 @@ func (ϟa *GlScissorIndexedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glScissorIndexedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlScissorIndexedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Left.value(ϟb, ϟa, ϟs))
@@ -12461,7 +12461,7 @@ func (ϟa *GlScissorIndexedvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glScissorIndexedvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlScissorIndexedvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
@@ -12483,7 +12483,7 @@ func (ϟa *GlSelectPerfMonitorCountersAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSelectPerfMonitorCountersAMD().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSelectPerfMonitorCountersAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Monitor.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Enable.value(ϟb, ϟa, ϟs))
@@ -12508,7 +12508,7 @@ func (ϟa *GlSetFenceNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSetFenceNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSetFenceNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Condition))
@@ -12530,7 +12530,7 @@ func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStartTilingQCOM().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStartTilingQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -12555,7 +12555,7 @@ func (ϟa *GlStencilFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilFillPathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -12583,7 +12583,7 @@ func (ϟa *GlStencilFillPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilFillPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilFillPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FillMode))
@@ -12606,7 +12606,7 @@ func (ϟa *GlStencilStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilStrokePathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -12634,7 +12634,7 @@ func (ϟa *GlStencilStrokePathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilStrokePathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilStrokePathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Reference.value(ϟb, ϟa, ϟs))
@@ -12657,7 +12657,7 @@ func (ϟa *GlStencilThenCoverFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilThenCoverFillPathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilThenCoverFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -12686,7 +12686,7 @@ func (ϟa *GlStencilThenCoverFillPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilThenCoverFillPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilThenCoverFillPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FillMode))
@@ -12710,7 +12710,7 @@ func (ϟa *GlStencilThenCoverStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfx
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilThenCoverStrokePathInstancedNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilThenCoverStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
@@ -12739,7 +12739,7 @@ func (ϟa *GlStencilThenCoverStrokePathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilThenCoverStrokePathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilThenCoverStrokePathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Reference.value(ϟb, ϟa, ϟs))
@@ -12763,7 +12763,7 @@ func (ϟa *GlSubpixelPrecisionBiasNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSubpixelPrecisionBiasNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSubpixelPrecisionBiasNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Xbits.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Ybits.value(ϟb, ϟa, ϟs))
@@ -12786,7 +12786,7 @@ func (ϟa *GlTestFenceNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTestFenceNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glTestFenceNV() return value will be stored on the stack.
 func (ϟa *GlTestFenceNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
@@ -12808,7 +12808,7 @@ func (ϟa *GlTexBufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBufferOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBufferOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -12835,7 +12835,7 @@ func (ϟa *GlTexBufferRangeOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBufferRangeOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBufferRangeOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -12864,7 +12864,7 @@ func (ϟa *GlTexImage3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexImage3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexImage3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -12894,7 +12894,7 @@ func (ϟa *GlTexPageCommitmentARB) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexPageCommitmentARB().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexPageCommitmentARB) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -12923,7 +12923,7 @@ func (ϟa *GlTexParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -12946,7 +12946,7 @@ func (ϟa *GlTexParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIuivOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -12969,7 +12969,7 @@ func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage1DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage1DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -12993,7 +12993,7 @@ func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage2DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage2DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -13018,7 +13018,7 @@ func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage3DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage3DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -13044,7 +13044,7 @@ func (ϟa *GlTexSubImage3DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexSubImage3DOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexSubImage3DOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -13075,7 +13075,7 @@ func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTextureStorage1DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTextureStorage1DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -13104,7 +13104,7 @@ func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTextureStorage2DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTextureStorage2DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -13134,7 +13134,7 @@ func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTextureStorage3DEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTextureStorage3DEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -13165,7 +13165,7 @@ func (ϟa *GlTextureViewEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTextureViewEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTextureViewEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -13197,7 +13197,7 @@ func (ϟa *GlTextureViewOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTextureViewOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTextureViewOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
@@ -13229,7 +13229,7 @@ func (ϟa *GlTransformPathNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTransformPathNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTransformPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcPath.value(ϟb, ϟa, ϟs))
@@ -13253,7 +13253,7 @@ func (ϟa *GlUniformHandleui64NV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformHandleui64NV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformHandleui64NV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13279,7 +13279,7 @@ func (ϟa *GlUniformHandleui64vNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformHandleui64vNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformHandleui64vNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13306,7 +13306,7 @@ func (ϟa *GlUniformMatrix2x3fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix2x3fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix2x3fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13334,7 +13334,7 @@ func (ϟa *GlUniformMatrix2x4fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix2x4fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix2x4fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13362,7 +13362,7 @@ func (ϟa *GlUniformMatrix3x2fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix3x2fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix3x2fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13390,7 +13390,7 @@ func (ϟa *GlUniformMatrix3x4fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix3x4fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix3x4fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13418,7 +13418,7 @@ func (ϟa *GlUniformMatrix4x2fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix4x2fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix4x2fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13446,7 +13446,7 @@ func (ϟa *GlUniformMatrix4x3fvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix4x3fvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix4x3fvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -13475,7 +13475,7 @@ func (ϟa *GlUnmapBufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUnmapBufferOES().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glUnmapBufferOES() return value will be stored on the stack.
 func (ϟa *GlUnmapBufferOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -13497,7 +13497,7 @@ func (ϟa *GlUseProgramStagesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUseProgramStagesEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUseProgramStagesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Stages))
@@ -13524,7 +13524,7 @@ func (ϟa *GlValidateProgramPipelineEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glValidateProgramPipelineEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlValidateProgramPipelineEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlValidateProgramPipelineEXT)
@@ -13545,7 +13545,7 @@ func (ϟa *GlVertexAttribDivisorANGLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribDivisorANGLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribDivisorANGLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
@@ -13567,7 +13567,7 @@ func (ϟa *GlVertexAttribDivisorEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribDivisorEXT().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribDivisorEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
@@ -13589,7 +13589,7 @@ func (ϟa *GlVertexAttribDivisorNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribDivisorNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribDivisorNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
@@ -13611,7 +13611,7 @@ func (ϟa *GlViewportArrayvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glViewportArrayvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlViewportArrayvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -13634,7 +13634,7 @@ func (ϟa *GlViewportIndexedfNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glViewportIndexedfNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlViewportIndexedfNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
@@ -13659,7 +13659,7 @@ func (ϟa *GlViewportIndexedfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glViewportIndexedfvNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlViewportIndexedfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.V.value())
@@ -13681,7 +13681,7 @@ func (ϟa *GlWaitSyncAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glWaitSyncAPPLE().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlWaitSyncAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -13708,7 +13708,7 @@ func (ϟa *GlWeightPathsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glWeightPathsNV().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlWeightPathsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
@@ -13733,7 +13733,7 @@ func (ϟa *GlBlendBarrier) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendBarrier().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendBarrier) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlBlendBarrier)
 }
@@ -13763,7 +13763,7 @@ func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendColor().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendColor) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Red.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Green.value(ϟb, ϟa, ϟs))
@@ -13809,7 +13809,7 @@ func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Equation))
 	ϟb.Call(funcInfoGlBlendEquation)
@@ -13863,7 +13863,7 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationSeparate().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationSeparate) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Rgb))
 	ϟb.Push(value.U32(ϟa.Alpha))
@@ -13900,7 +13900,7 @@ func (ϟa *GlBlendEquationSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationSeparatei().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationSeparatei) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ModeRGB))
@@ -13931,7 +13931,7 @@ func (ϟa *GlBlendEquationi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendEquationi().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendEquationi) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -13980,7 +13980,7 @@ func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFunc().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFunc) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.SrcFactor))
 	ϟb.Push(value.U32(ϟa.DstFactor))
@@ -14043,7 +14043,7 @@ func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFuncSeparate().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFuncSeparate) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.SrcFactorRgb))
 	ϟb.Push(value.U32(ϟa.DstFactorRgb))
@@ -14096,7 +14096,7 @@ func (ϟa *GlBlendFuncSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFuncSeparatei().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFuncSeparatei) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcRGB))
@@ -14136,7 +14136,7 @@ func (ϟa *GlBlendFunci) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlendFunci().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlendFunci) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Buf.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Src))
@@ -14176,7 +14176,7 @@ func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDepthFunc().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDepthFunc) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Function))
 	ϟb.Call(funcInfoGlDepthFunc)
@@ -14208,7 +14208,7 @@ func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSampleCoverage().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSampleCoverage) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Invert.value(ϟb, ϟa, ϟs))
@@ -14231,7 +14231,7 @@ func (ϟa *GlSampleMaski) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSampleMaski().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSampleMaski) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.MaskNumber.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Mask))
@@ -14263,7 +14263,7 @@ func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glScissor().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlScissor) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -14295,7 +14295,7 @@ func (ϟa *GlStencilFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilFunc().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilFunc) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Func))
 	ϟb.Push(ϟa.Ref.value(ϟb, ϟa, ϟs))
@@ -14333,7 +14333,7 @@ func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilFuncSeparate().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilFuncSeparate) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Function))
@@ -14379,7 +14379,7 @@ func (ϟa *GlStencilOp) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilOp().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilOp) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Fail))
 	ϟb.Push(value.U32(ϟa.Zfail))
@@ -14431,7 +14431,7 @@ func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilOpSeparate().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilOpSeparate) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.StencilFail))
@@ -14484,7 +14484,7 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindFramebuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
@@ -14530,7 +14530,7 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindRenderbuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindRenderbuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
@@ -14572,7 +14572,7 @@ func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBlitFramebuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBlitFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcX0.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcY0.value(ϟb, ϟa, ϟs))
@@ -14615,7 +14615,7 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCheckFramebufferStatus().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glCheckFramebufferStatus() return value will be stored on the stack.
 func (ϟa *GlCheckFramebufferStatus) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -14648,7 +14648,7 @@ func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClear().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClear) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.Call(funcInfoGlClear)
@@ -14682,7 +14682,7 @@ func (ϟa *GlClearBufferfi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearBufferfi().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearBufferfi) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -14727,7 +14727,7 @@ func (ϟa *GlClearBufferfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearBufferfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearBufferfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -14771,7 +14771,7 @@ func (ϟa *GlClearBufferiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearBufferiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearBufferiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -14808,7 +14808,7 @@ func (ϟa *GlClearBufferuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearBufferuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearBufferuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
@@ -14841,7 +14841,7 @@ func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearColor().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearColor) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.R.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.G.value(ϟb, ϟa, ϟs))
@@ -14875,7 +14875,7 @@ func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearDepthf().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearDepthf) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Depth.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClearDepthf)
@@ -14906,7 +14906,7 @@ func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClearStencil().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClearStencil) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Stencil.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClearStencil)
@@ -14940,7 +14940,7 @@ func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glColorMask().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlColorMask) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Red.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Green.value(ϟb, ϟa, ϟs))
@@ -14965,7 +14965,7 @@ func (ϟa *GlColorMaski) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glColorMaski().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlColorMaski) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.R.value(ϟb, ϟa, ϟs))
@@ -15003,7 +15003,7 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteFramebuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteFramebuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Framebuffers.value())
@@ -15038,7 +15038,7 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteRenderbuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteRenderbuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Renderbuffers.value())
@@ -15070,7 +15070,7 @@ func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDepthMask().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDepthMask) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Enabled.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDepthMask)
@@ -15093,7 +15093,7 @@ func (ϟa *GlDrawBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawBuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Bufs.value())
@@ -15134,7 +15134,7 @@ func (ϟa *GlFramebufferParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferParameteri().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferParameteri) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15221,7 +15221,7 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferRenderbuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferRenderbuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
@@ -15264,7 +15264,7 @@ func (ϟa *GlFramebufferTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTexture().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTexture) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -15384,7 +15384,7 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTexture2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTexture2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
@@ -15428,7 +15428,7 @@ func (ϟa *GlFramebufferTextureLayer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFramebufferTextureLayer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFramebufferTextureLayer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -15473,7 +15473,7 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenFramebuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenFramebuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Framebuffers.value())
@@ -15511,7 +15511,7 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenRenderbuffers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenRenderbuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Renderbuffers.value())
@@ -15612,7 +15612,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFramebufferAttachmentParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFramebufferAttachmentParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.Attachment))
@@ -15656,7 +15656,7 @@ func (ϟa *GlGetFramebufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFramebufferParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFramebufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -15722,7 +15722,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetRenderbufferParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetRenderbufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -15754,7 +15754,7 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glInvalidateFramebuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlInvalidateFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
@@ -15786,7 +15786,7 @@ func (ϟa *GlInvalidateSubFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glInvalidateSubFramebuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlInvalidateSubFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.NumAttachments.value(ϟb, ϟa, ϟs))
@@ -15823,7 +15823,7 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsFramebuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsFramebuffer() return value will be stored on the stack.
 func (ϟa *GlIsFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
@@ -15859,7 +15859,7 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsRenderbuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsRenderbuffer() return value will be stored on the stack.
 func (ϟa *GlIsRenderbuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
@@ -15893,7 +15893,7 @@ func (ϟa *GlReadBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Src))
 	ϟb.Call(funcInfoGlReadBuffer)
@@ -15946,7 +15946,7 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadPixels().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadPixels) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -16005,7 +16005,7 @@ func (ϟa *GlReadnPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReadnPixels().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReadnPixels) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -16065,7 +16065,7 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorage().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorage) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Format))
@@ -16104,7 +16104,7 @@ func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glRenderbufferStorageMultisample().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlRenderbufferStorageMultisample) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -16140,7 +16140,7 @@ func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilMask().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilMask) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlStencilMask)
@@ -16189,7 +16189,7 @@ func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glStencilMaskSeparate().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlStencilMaskSeparate) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
@@ -16240,7 +16240,7 @@ func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisable().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisable) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlDisable)
@@ -16269,7 +16269,7 @@ func (ϟa *GlDisablei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisablei().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisablei) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -16320,7 +16320,7 @@ func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnable().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnable) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlEnable)
@@ -16349,7 +16349,7 @@ func (ϟa *GlEnablei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnablei().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnablei) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -16372,7 +16372,7 @@ func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFinish().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFinish) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlFinish)
 }
@@ -16393,7 +16393,7 @@ func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFlush().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFlush) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlFlush)
 }
@@ -16425,7 +16425,7 @@ func (ϟa *GlFlushMappedBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFlushMappedBufferRange().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFlushMappedBufferRange) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Offset.value(ϟb, ϟa, ϟs))
@@ -16450,7 +16450,7 @@ func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetError().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetError() return value will be stored on the stack.
 func (ϟa *GlGetError) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlGetError)
@@ -16473,7 +16473,7 @@ func (ϟa *GlGetGraphicsResetStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetGraphicsResetStatus().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetGraphicsResetStatus() return value will be stored on the stack.
 func (ϟa *GlGetGraphicsResetStatus) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlGetGraphicsResetStatus)
@@ -16522,7 +16522,7 @@ func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glHint().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlHint) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Mode))
@@ -16545,7 +16545,7 @@ func (ϟa *GlActiveShaderProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glActiveShaderProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlActiveShaderProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -16583,7 +16583,7 @@ func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glAttachShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlAttachShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -16624,7 +16624,7 @@ func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindAttribLocation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindAttribLocation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -16652,7 +16652,7 @@ func (ϟa *GlBindProgramPipeline) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindProgramPipeline().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindProgramPipeline) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBindProgramPipeline)
@@ -16674,7 +16674,7 @@ func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompileShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompileShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -16711,7 +16711,7 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCreateProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glCreateProgram() return value will be stored on the stack.
 func (ϟa *GlCreateProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlCreateProgram)
@@ -16770,7 +16770,7 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCreateShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glCreateShader() return value will be stored on the stack.
 func (ϟa *GlCreateShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
@@ -16827,7 +16827,7 @@ func (ϟa *GlCreateShaderProgramv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCreateShaderProgramv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glCreateShaderProgramv() return value will be stored on the stack.
 func (ϟa *GlCreateShaderProgramv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
@@ -16870,7 +16870,7 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -16897,7 +16897,7 @@ func (ϟa *GlDeleteProgramPipelines) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteProgramPipelines().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteProgramPipelines) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Pipelines.value())
@@ -16931,7 +16931,7 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -16968,7 +16968,7 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDetachShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDetachShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -16999,7 +16999,7 @@ func (ϟa *GlDispatchCompute) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDispatchCompute().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDispatchCompute) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumGroupsX.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumGroupsY.value(ϟb, ϟa, ϟs))
@@ -17023,7 +17023,7 @@ func (ϟa *GlDispatchComputeIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDispatchComputeIndirect().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDispatchComputeIndirect) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Indirect.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDispatchComputeIndirect)
@@ -17046,7 +17046,7 @@ func (ϟa *GlGenProgramPipelines) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenProgramPipelines().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenProgramPipelines) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Pipelines.value())
@@ -17086,7 +17086,7 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetActiveAttrib().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetActiveAttrib) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17135,7 +17135,7 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetActiveUniform().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetActiveUniform) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17182,7 +17182,7 @@ func (ϟa *GlGetActiveUniformBlockName) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetActiveUniformBlockName().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetActiveUniformBlockName) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17220,7 +17220,7 @@ func (ϟa *GlGetActiveUniformBlockiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetActiveUniformBlockiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetActiveUniformBlockiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17258,7 +17258,7 @@ func (ϟa *GlGetActiveUniformsiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetActiveUniformsiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetActiveUniformsiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17316,7 +17316,7 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetAttachedShaders().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetAttachedShaders) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17346,7 +17346,7 @@ func (ϟa *GlGetAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetAttribLocation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetAttribLocation() return value will be stored on the stack.
 func (ϟa *GlGetAttribLocation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -17375,7 +17375,7 @@ func (ϟa *GlGetFragDataLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFragDataLocation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetFragDataLocation() return value will be stored on the stack.
 func (ϟa *GlGetFragDataLocation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -17412,7 +17412,7 @@ func (ϟa *GlGetProgramBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramBinary().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17466,7 +17466,7 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramInfoLog().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17510,7 +17510,7 @@ func (ϟa *GlGetProgramInterfaceiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramInterfaceiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramInterfaceiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17554,7 +17554,7 @@ func (ϟa *GlGetProgramPipelineInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramPipelineInfoLog().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramPipelineInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
@@ -17591,7 +17591,7 @@ func (ϟa *GlGetProgramPipelineiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramPipelineiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramPipelineiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -17623,7 +17623,7 @@ func (ϟa *GlGetProgramResourceIndex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramResourceIndex().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetProgramResourceIndex() return value will be stored on the stack.
 func (ϟa *GlGetProgramResourceIndex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -17660,7 +17660,7 @@ func (ϟa *GlGetProgramResourceLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramResourceLocation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetProgramResourceLocation() return value will be stored on the stack.
 func (ϟa *GlGetProgramResourceLocation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -17711,7 +17711,7 @@ func (ϟa *GlGetProgramResourceName) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramResourceName().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramResourceName) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17758,7 +17758,7 @@ func (ϟa *GlGetProgramResourceiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramResourceiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramResourceiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17811,7 +17811,7 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetProgramiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetProgramiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -17863,7 +17863,7 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetShaderInfoLog().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetShaderInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -17908,7 +17908,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetShaderPrecisionFormat().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetShaderPrecisionFormat) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.ShaderType))
 	ϟb.Push(value.U32(ϟa.PrecisionType))
@@ -17957,7 +17957,7 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetShaderSource().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetShaderSource) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -18042,7 +18042,7 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetShaderiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetShaderiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -18071,7 +18071,7 @@ func (ϟa *GlGetUniformBlockIndex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformBlockIndex().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetUniformBlockIndex() return value will be stored on the stack.
 func (ϟa *GlGetUniformBlockIndex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -18105,7 +18105,7 @@ func (ϟa *GlGetUniformIndices) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformIndices().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetUniformIndices) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18135,7 +18135,7 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformLocation().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetUniformLocation() return value will be stored on the stack.
 func (ϟa *GlGetUniformLocation) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -18176,7 +18176,7 @@ func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetUniformfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18212,7 +18212,7 @@ func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetUniformiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18248,7 +18248,7 @@ func (ϟa *GlGetUniformuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetUniformuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetUniformuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18285,7 +18285,7 @@ func (ϟa *GlGetnUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18323,7 +18323,7 @@ func (ϟa *GlGetnUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18361,7 +18361,7 @@ func (ϟa *GlGetnUniformuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetnUniformuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetnUniformuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18403,7 +18403,7 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsProgram() return value will be stored on the stack.
 func (ϟa *GlIsProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -18431,7 +18431,7 @@ func (ϟa *GlIsProgramPipeline) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsProgramPipeline().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsProgramPipeline() return value will be stored on the stack.
 func (ϟa *GlIsProgramPipeline) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
@@ -18463,7 +18463,7 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsShader().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsShader() return value will be stored on the stack.
 func (ϟa *GlIsShader) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
@@ -18490,7 +18490,7 @@ func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glLinkProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLinkProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18546,7 +18546,7 @@ func (ϟa *GlMemoryBarrier) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMemoryBarrier().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMemoryBarrier) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Barriers))
 	ϟb.Call(funcInfoGlMemoryBarrier)
@@ -18598,7 +18598,7 @@ func (ϟa *GlMemoryBarrierByRegion) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMemoryBarrierByRegion().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMemoryBarrierByRegion) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Barriers))
 	ϟb.Call(funcInfoGlMemoryBarrierByRegion)
@@ -18627,7 +18627,7 @@ func (ϟa *GlProgramBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramBinary().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18667,7 +18667,7 @@ func (ϟa *GlProgramParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramParameteri().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramParameteri) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18714,7 +18714,7 @@ func (ϟa *GlProgramUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18764,7 +18764,7 @@ func (ϟa *GlProgramUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18816,7 +18816,7 @@ func (ϟa *GlProgramUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18866,7 +18866,7 @@ func (ϟa *GlProgramUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18918,7 +18918,7 @@ func (ϟa *GlProgramUniform1ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -18968,7 +18968,7 @@ func (ϟa *GlProgramUniform1uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform1uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform1uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19020,7 +19020,7 @@ func (ϟa *GlProgramUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19071,7 +19071,7 @@ func (ϟa *GlProgramUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19123,7 +19123,7 @@ func (ϟa *GlProgramUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19174,7 +19174,7 @@ func (ϟa *GlProgramUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19226,7 +19226,7 @@ func (ϟa *GlProgramUniform2ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19277,7 +19277,7 @@ func (ϟa *GlProgramUniform2uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform2uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform2uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19329,7 +19329,7 @@ func (ϟa *GlProgramUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19381,7 +19381,7 @@ func (ϟa *GlProgramUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19433,7 +19433,7 @@ func (ϟa *GlProgramUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19485,7 +19485,7 @@ func (ϟa *GlProgramUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19537,7 +19537,7 @@ func (ϟa *GlProgramUniform3ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19589,7 +19589,7 @@ func (ϟa *GlProgramUniform3uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform3uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform3uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19641,7 +19641,7 @@ func (ϟa *GlProgramUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19694,7 +19694,7 @@ func (ϟa *GlProgramUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19746,7 +19746,7 @@ func (ϟa *GlProgramUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19799,7 +19799,7 @@ func (ϟa *GlProgramUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19851,7 +19851,7 @@ func (ϟa *GlProgramUniform4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19904,7 +19904,7 @@ func (ϟa *GlProgramUniform4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniform4uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniform4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -19956,7 +19956,7 @@ func (ϟa *GlProgramUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20009,7 +20009,7 @@ func (ϟa *GlProgramUniformMatrix2x3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2x3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20062,7 +20062,7 @@ func (ϟa *GlProgramUniformMatrix2x4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix2x4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix2x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20115,7 +20115,7 @@ func (ϟa *GlProgramUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20168,7 +20168,7 @@ func (ϟa *GlProgramUniformMatrix3x2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3x2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20221,7 +20221,7 @@ func (ϟa *GlProgramUniformMatrix3x4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix3x4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix3x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20274,7 +20274,7 @@ func (ϟa *GlProgramUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20327,7 +20327,7 @@ func (ϟa *GlProgramUniformMatrix4x2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4x2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20380,7 +20380,7 @@ func (ϟa *GlProgramUniformMatrix4x3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glProgramUniformMatrix4x3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlProgramUniformMatrix4x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -20414,7 +20414,7 @@ func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glReleaseShaderCompiler().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlReleaseShaderCompiler) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlReleaseShaderCompiler)
 }
@@ -20445,7 +20445,7 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glShaderBinary().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlShaderBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Shaders.value())
@@ -20499,7 +20499,7 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glShaderSource().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlShaderSource) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
@@ -20546,7 +20546,7 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20590,7 +20590,7 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20636,7 +20636,7 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20680,7 +20680,7 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20726,7 +20726,7 @@ func (ϟa *GlUniform1ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20770,7 +20770,7 @@ func (ϟa *GlUniform1uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform1uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform1uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20816,7 +20816,7 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20861,7 +20861,7 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20907,7 +20907,7 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20952,7 +20952,7 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -20998,7 +20998,7 @@ func (ϟa *GlUniform2ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21043,7 +21043,7 @@ func (ϟa *GlUniform2uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform2uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform2uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21089,7 +21089,7 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21135,7 +21135,7 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21181,7 +21181,7 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21227,7 +21227,7 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21273,7 +21273,7 @@ func (ϟa *GlUniform3ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21319,7 +21319,7 @@ func (ϟa *GlUniform3uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform3uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform3uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21365,7 +21365,7 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21412,7 +21412,7 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21458,7 +21458,7 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21505,7 +21505,7 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21551,7 +21551,7 @@ func (ϟa *GlUniform4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21598,7 +21598,7 @@ func (ϟa *GlUniform4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniform4uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniform4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21626,7 +21626,7 @@ func (ϟa *GlUniformBlockBinding) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformBlockBinding().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformBlockBinding) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -21674,7 +21674,7 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21723,7 +21723,7 @@ func (ϟa *GlUniformMatrix2x3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix2x3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix2x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21772,7 +21772,7 @@ func (ϟa *GlUniformMatrix2x4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix2x4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix2x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21821,7 +21821,7 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21870,7 +21870,7 @@ func (ϟa *GlUniformMatrix3x2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix3x2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix3x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21919,7 +21919,7 @@ func (ϟa *GlUniformMatrix3x4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix3x4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix3x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -21968,7 +21968,7 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -22017,7 +22017,7 @@ func (ϟa *GlUniformMatrix4x2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix4x2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix4x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -22066,7 +22066,7 @@ func (ϟa *GlUniformMatrix4x3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUniformMatrix4x3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUniformMatrix4x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -22104,7 +22104,7 @@ func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUseProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUseProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -22140,7 +22140,7 @@ func (ϟa *GlUseProgramStages) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glUseProgramStages().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlUseProgramStages) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Stages))
@@ -22168,7 +22168,7 @@ func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glValidateProgram().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlValidateProgram) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -22194,7 +22194,7 @@ func (ϟa *GlValidateProgramPipeline) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glValidateProgramPipeline().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlValidateProgramPipeline) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlValidateProgramPipeline)
@@ -22232,7 +22232,7 @@ func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCullFace().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCullFace) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Call(funcInfoGlCullFace)
@@ -22264,7 +22264,7 @@ func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDepthRangef().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDepthRangef) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Near.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Far.value(ϟb, ϟa, ϟs))
@@ -22303,7 +22303,7 @@ func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFrontFace().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFrontFace) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Orientation))
 	ϟb.Call(funcInfoGlFrontFace)
@@ -22333,7 +22333,7 @@ func (ϟa *GlGetMultisamplefv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetMultisamplefv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetMultisamplefv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -22366,7 +22366,7 @@ func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glLineWidth().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLineWidth) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Width.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLineWidth)
@@ -22388,7 +22388,7 @@ func (ϟa *GlMinSampleShading) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glMinSampleShading().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMinSampleShading) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMinSampleShading)
@@ -22420,7 +22420,7 @@ func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPolygonOffset().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPolygonOffset) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ScaleFactor.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Units.value(ϟb, ϟa, ϟs))
@@ -22452,7 +22452,7 @@ func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glViewport().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlViewport) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
@@ -23757,7 +23757,7 @@ func (ϟa *GlGetBooleani_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBooleani_v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBooleani_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -25160,7 +25160,7 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetBooleanv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBooleanv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
@@ -26503,7 +26503,7 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFloatv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFloatv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
@@ -27806,7 +27806,7 @@ func (ϟa *GlGetInteger64i_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetInteger64i_v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInteger64i_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -29110,7 +29110,7 @@ func (ϟa *GlGetInteger64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetInteger64v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInteger64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
@@ -30413,7 +30413,7 @@ func (ϟa *GlGetIntegeri_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetIntegeri_v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetIntegeri_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
@@ -31880,7 +31880,7 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetIntegerv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetIntegerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Values.value())
@@ -31936,7 +31936,7 @@ func (ϟa *GlGetInternalformativ) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetInternalformativ().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInternalformativ) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -31970,7 +31970,7 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetString().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetString() return value will be stored on the stack.
 func (ϟa *GlGetString) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
@@ -32001,7 +32001,7 @@ func (ϟa *GlGetStringi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetStringi().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glGetStringi() return value will be stored on the stack.
 func (ϟa *GlGetStringi) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Name))
@@ -32049,7 +32049,7 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsEnabled().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsEnabled() return value will be stored on the stack.
 func (ϟa *GlIsEnabled) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Capability))
@@ -32080,7 +32080,7 @@ func (ϟa *GlIsEnabledi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsEnabledi().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsEnabledi() return value will be stored on the stack.
 func (ϟa *GlIsEnabledi) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
@@ -32109,7 +32109,7 @@ func (ϟa *GlClientWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glClientWaitSync().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glClientWaitSync() return value will be stored on the stack.
 func (ϟa *GlClientWaitSync) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
@@ -32138,7 +32138,7 @@ func (ϟa *GlDeleteSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteSync().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteSync) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -32172,7 +32172,7 @@ func (ϟa *GlFenceSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glFenceSync().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glFenceSync() return value will be stored on the stack.
 func (ϟa *GlFenceSync) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Condition))
@@ -32218,7 +32218,7 @@ func (ϟa *GlGetSynciv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSynciv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSynciv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -32249,7 +32249,7 @@ func (ϟa *GlIsSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsSync().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsSync() return value will be stored on the stack.
 func (ϟa *GlIsSync) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
@@ -32276,7 +32276,7 @@ func (ϟa *GlWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glWaitSync().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlWaitSync) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Sync.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint64, ϟa.Sync.value(ϟb, ϟa, ϟs))
@@ -32320,7 +32320,7 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glActiveTexture().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlActiveTexture) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Unit))
 	ϟb.Call(funcInfoGlActiveTexture)
@@ -32356,7 +32356,7 @@ func (ϟa *GlBindImageTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindImageTexture().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindImageTexture) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Unit.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -32388,7 +32388,7 @@ func (ϟa *GlBindSampler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindSampler().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindSampler) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Unit.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
@@ -32443,7 +32443,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindTexture().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindTexture) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -32532,7 +32532,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32594,7 +32594,7 @@ func (ϟa *GlCompressedTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexImage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexImage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32656,7 +32656,7 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexSubImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexSubImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32719,7 +32719,7 @@ func (ϟa *GlCompressedTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCompressedTexSubImage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCompressedTexSubImage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32765,7 +32765,7 @@ func (ϟa *GlCopyImageSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyImageSubData().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyImageSubData) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.SrcName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.SrcTarget))
@@ -32819,7 +32819,7 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyTexImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyTexImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32855,7 +32855,7 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyTexSubImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyTexSubImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32895,7 +32895,7 @@ func (ϟa *GlCopyTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glCopyTexSubImage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCopyTexSubImage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -32926,7 +32926,7 @@ func (ϟa *GlDeleteSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteSamplers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteSamplers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Samplers.value())
@@ -32961,7 +32961,7 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteTextures().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteTextures) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Textures.value())
@@ -32985,7 +32985,7 @@ func (ϟa *GlGenSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenSamplers().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenSamplers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Samplers.value())
@@ -33023,7 +33023,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenTextures().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenTextures) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Textures.value())
@@ -33061,7 +33061,7 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenerateMipmap().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenerateMipmap) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlGenerateMipmap)
@@ -33096,7 +33096,7 @@ func (ϟa *GlGetSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33133,7 +33133,7 @@ func (ϟa *GlGetSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterIuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33170,7 +33170,7 @@ func (ϟa *GlGetSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameterfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33207,7 +33207,7 @@ func (ϟa *GlGetSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetSamplerParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetSamplerParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33254,7 +33254,7 @@ func (ϟa *GlGetTexLevelParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexLevelParameterfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexLevelParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -33302,7 +33302,7 @@ func (ϟa *GlGetTexLevelParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexLevelParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexLevelParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -33374,7 +33374,7 @@ func (ϟa *GlGetTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33445,7 +33445,7 @@ func (ϟa *GlGetTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterIuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33553,7 +33553,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameterfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -33661,7 +33661,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTexParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTexParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -33686,7 +33686,7 @@ func (ϟa *GlIsSampler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsSampler().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsSampler() return value will be stored on the stack.
 func (ϟa *GlIsSampler) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
@@ -33718,7 +33718,7 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsTexture().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsTexture() return value will be stored on the stack.
 func (ϟa *GlIsTexture) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
@@ -33765,7 +33765,7 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPixelStorei().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPixelStorei) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
@@ -33806,7 +33806,7 @@ func (ϟa *GlSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33848,7 +33848,7 @@ func (ϟa *GlSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterIuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33879,7 +33879,7 @@ func (ϟa *GlSamplerParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterf().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterf) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33921,7 +33921,7 @@ func (ϟa *GlSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameterfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33952,7 +33952,7 @@ func (ϟa *GlSamplerParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameteri().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameteri) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -33994,7 +33994,7 @@ func (ϟa *GlSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glSamplerParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlSamplerParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -34032,7 +34032,7 @@ func (ϟa *GlTexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -34074,7 +34074,7 @@ func (ϟa *GlTexBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexBufferRange().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexBufferRange) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Internalformat))
@@ -34186,7 +34186,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -34261,7 +34261,7 @@ func (ϟa *GlTexImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexImage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexImage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -34337,7 +34337,7 @@ func (ϟa *GlTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -34406,7 +34406,7 @@ func (ϟa *GlTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterIuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -34498,7 +34498,7 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterf().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterf) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -34567,7 +34567,7 @@ func (ϟa *GlTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameterfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -34659,7 +34659,7 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameteri().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameteri) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
@@ -34728,7 +34728,7 @@ func (ϟa *GlTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexParameteriv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -34770,7 +34770,7 @@ func (ϟa *GlTexStorage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -34814,7 +34814,7 @@ func (ϟa *GlTexStorage2DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage2DMultisample().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage2DMultisample) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -34863,7 +34863,7 @@ func (ϟa *GlTexStorage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Levels.value(ϟb, ϟa, ϟs))
@@ -34904,7 +34904,7 @@ func (ϟa *GlTexStorage3DMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexStorage3DMultisample().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexStorage3DMultisample) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
@@ -35022,7 +35022,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexSubImage2D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexSubImage2D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -35093,7 +35093,7 @@ func (ϟa *GlTexSubImage3D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTexSubImage3D().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTexSubImage3D) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
@@ -35132,7 +35132,7 @@ func (ϟa *GlBeginTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBeginTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBeginTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.PrimitiveMode))
 	ϟb.Call(funcInfoGlBeginTransformFeedback)
@@ -35161,7 +35161,7 @@ func (ϟa *GlBindTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
@@ -35185,7 +35185,7 @@ func (ϟa *GlDeleteTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteTransformFeedbacks().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteTransformFeedbacks) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Ids.value())
@@ -35208,7 +35208,7 @@ func (ϟa *GlEndTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEndTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEndTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlEndTransformFeedback)
 }
@@ -35230,7 +35230,7 @@ func (ϟa *GlGenTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenTransformFeedbacks().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenTransformFeedbacks) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Ids.value())
@@ -35270,7 +35270,7 @@ func (ϟa *GlGetTransformFeedbackVarying) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetTransformFeedbackVarying().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetTransformFeedbackVarying) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -35303,7 +35303,7 @@ func (ϟa *GlIsTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsTransformFeedback() return value will be stored on the stack.
 func (ϟa *GlIsTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
@@ -35326,7 +35326,7 @@ func (ϟa *GlPauseTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glPauseTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPauseTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlPauseTransformFeedback)
 }
@@ -35347,7 +35347,7 @@ func (ϟa *GlResumeTransformFeedback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glResumeTransformFeedback().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlResumeTransformFeedback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoGlResumeTransformFeedback)
 }
@@ -35380,7 +35380,7 @@ func (ϟa *GlTransformFeedbackVaryings) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glTransformFeedbackVaryings().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlTransformFeedbackVaryings) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -35430,7 +35430,7 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindVertexArray().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindVertexArray) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
@@ -35497,7 +35497,7 @@ func (ϟa *GlBindVertexBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glBindVertexBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlBindVertexBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
@@ -35551,7 +35551,7 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDeleteVertexArrays().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteVertexArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
@@ -35588,7 +35588,7 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glDisableVertexAttribArray().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDisableVertexAttribArray) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDisableVertexAttribArray)
@@ -35624,7 +35624,7 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glEnableVertexAttribArray().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlEnableVertexAttribArray) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEnableVertexAttribArray)
@@ -35664,7 +35664,7 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGenVertexArrays().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenVertexArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Arrays.value())
@@ -35752,7 +35752,7 @@ func (ϟa *GlGetVertexAttribIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetVertexAttribIiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetVertexAttribIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -35841,7 +35841,7 @@ func (ϟa *GlGetVertexAttribIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetVertexAttribIuiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetVertexAttribIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -35883,7 +35883,7 @@ func (ϟa *GlGetVertexAttribPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetVertexAttribPointerv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetVertexAttribPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -35972,7 +35972,7 @@ func (ϟa *GlGetVertexAttribfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetVertexAttribfv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetVertexAttribfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -36061,7 +36061,7 @@ func (ϟa *GlGetVertexAttribiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetVertexAttribiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetVertexAttribiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
@@ -36094,7 +36094,7 @@ func (ϟa *GlIsVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glIsVertexArray().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glIsVertexArray() return value will be stored on the stack.
 func (ϟa *GlIsVertexArray) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
@@ -36138,7 +36138,7 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib1f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib1f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
@@ -36179,7 +36179,7 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib1fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib1fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
@@ -36219,7 +36219,7 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib2f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib2f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
@@ -36261,7 +36261,7 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib2fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
@@ -36301,7 +36301,7 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib3f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib3f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
@@ -36344,7 +36344,7 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib3fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
@@ -36384,7 +36384,7 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib4f().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib4f) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value0.value(ϟb, ϟa, ϟs))
@@ -36428,7 +36428,7 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttrib4fv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
@@ -36476,7 +36476,7 @@ func (ϟa *GlVertexAttribBinding) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribBinding().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribBinding) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
@@ -36523,7 +36523,7 @@ func (ϟa *GlVertexAttribDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribDivisor().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribDivisor) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
@@ -36624,7 +36624,7 @@ func (ϟa *GlVertexAttribFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribFormat().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribFormat) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -36667,7 +36667,7 @@ func (ϟa *GlVertexAttribI4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribI4i().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4i) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
@@ -36711,7 +36711,7 @@ func (ϟa *GlVertexAttribI4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribI4iv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Values.value())
@@ -36751,7 +36751,7 @@ func (ϟa *GlVertexAttribI4ui) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribI4ui().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4ui) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
@@ -36795,7 +36795,7 @@ func (ϟa *GlVertexAttribI4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribI4uiv().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Values.value())
@@ -36896,7 +36896,7 @@ func (ϟa *GlVertexAttribIFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribIFormat().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribIFormat) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -37126,7 +37126,7 @@ func (ϟa *GlVertexAttribIPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribIPointer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribIPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -37357,7 +37357,7 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexAttribPointer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
@@ -37402,7 +37402,7 @@ func (ϟa *GlVertexBindingDivisor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glVertexBindingDivisor().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexBindingDivisor) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.BindingIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Divisor.value(ϟb, ϟa, ϟs))
@@ -37423,7 +37423,7 @@ func (ϟa *GlGetQueryObjecti64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjecti64v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjecti64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -37449,7 +37449,7 @@ func (ϟa *GlGetQueryObjectui64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetQueryObjectui64v().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetQueryObjectui64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
@@ -37474,7 +37474,7 @@ func (ϟa *ReplayCreateRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke replayCreateRenderer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *ReplayCreateRenderer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Id))
 	ϟb.Call(funcInfoReplayCreateRenderer)
@@ -37493,7 +37493,7 @@ func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke replayBindRenderer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *ReplayBindRenderer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Id))
 	ϟb.Call(funcInfoReplayBindRenderer)
@@ -37548,7 +37548,7 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke contextInfo().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *ContextInfo) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Push(ϟb.String(ϟa.Vendor))
@@ -37577,7 +37577,7 @@ func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke startTimer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *StartTimer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U8(ϟa.Index))
 	ϟb.Call(funcInfoStartTimer)
@@ -37597,7 +37597,7 @@ func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke stopTimer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The stopTimer() return value will be stored on the stack.
 func (ϟa *StopTimer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U8(ϟa.Index))
@@ -37617,7 +37617,7 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 
 // Call builds the replay instructions to push the arguments to the stack and invoke flushPostBuffer().
-// Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.
+// Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *FlushPostBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoFlushPostBuffer)
 }

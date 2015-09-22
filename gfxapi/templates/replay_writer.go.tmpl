@@ -93,7 +93,7 @@
     }
 
     // Call builds the replay instructions to push the arguments to the stack and invoke {{$.Name}}().
-    // Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.{{if not (IsVoid $.Return.Type)}}
+    // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.{{if not (IsVoid $.Return.Type)}}
     // The {{$.Name}}() return value will be stored on the stack.{{end}}
     func (ϟa *{{$name}}) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
       {{/* Push all the parameters on the stack */}}
