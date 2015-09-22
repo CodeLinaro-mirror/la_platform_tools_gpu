@@ -65,3 +65,41 @@ func (i Info) Convert(p *path.As, d database.Database, l log.Logger) (interface{
 	return nil, fmt.Errorf("Cannot convert ImageInfo at %s to type %T",
 		p.Path(), p.Type)
 }
+
+// Convert returns the Image converted to the format to.
+func (i *Image) Convert(to Format) (*Image, error) {
+	data, err := Convert(i.Data, int(i.Width), int(i.Height), i.Format, to)
+	if err != nil {
+		return nil, err
+	}
+	return &Image{Data: data, Width: i.Width, Height: i.Height, Format: to}, nil
+}
+
+// Difference returns the normalized square error between the two images.
+// A return value of 0 denotes identical images, a return value of 1 denotes
+// a complete mismatch (black vs white).
+func Difference(a, b *Image) (float64, error) {
+	if a.Width != b.Width || a.Height != b.Height {
+		return 1, fmt.Errorf("Image dimensions are not identical. %dx%d vs %dx%d",
+			a.Width, a.Height, b.Width, b.Height)
+	}
+
+	a, err := a.Convert(RGBA())
+	if err != nil {
+		return 1, err
+	}
+	b, err = b.Convert(RGBA())
+	if err != nil {
+		return 1, err
+	}
+
+	p, q := a.Data, b.Data
+	sqrErr := float64(0)
+	c := a.Width * a.Height * 4
+	for i := uint32(0); i < c; i++ {
+		sqrErr += sqr((float64(p[i]) - float64(q[i])) / 0xff)
+	}
+	return sqrErr / float64(c), nil
+}
+
+func sqr(f float64) float64 { return f * f }
