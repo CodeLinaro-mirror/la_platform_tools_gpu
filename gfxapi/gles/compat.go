@@ -183,7 +183,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 			if target.vertexArrayObjects == required {
 				if c := getContext(s); clientVAsBound(c) {
 					first := int(a.FirstIndex)
-					last := first + int(a.IndexCount) - 1
+					last := first + int(a.IndicesCount) - 1
 					defer moveClientVBsToVAs(first, last, i, a, s, c, d, l, out)()
 				}
 			}
@@ -208,7 +208,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, id))
 
 					// By moving the draw call's observations earlier, populate the element array buffer.
-					size, base := DataTypeSize(a.IndicesType)*int(a.ElementCount), a.Indices.Pointer
+					size, base := DataTypeSize(a.IndicesType)*int(a.IndicesCount), a.Indices.Pointer
 					glBufferData := NewGlBufferData(GLenum_GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(size), base, GLenum_GL_STATIC_DRAW)
 					glBufferData.observations = a.observations
 					out.Write(atom.NoID, glBufferData)
@@ -226,7 +226,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 						// atom's reads now so that the indices can be read from the
 						// application pool.
 						a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
-						limits := e.calcIndexLimits(U8ᵖ(a.Indices), a.IndicesType, 0, uint32(a.ElementCount))
+						limits := e.calcIndexLimits(U8ᵖ(a.Indices), a.IndicesType, 0, uint32(a.IndicesCount))
 						defer moveClientVBsToVAs(int(limits.Min), int(limits.Max), i, a, s, c, d, l, out)()
 					}
 
@@ -243,7 +243,7 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					// pooled buffer.
 					data := c.Instances.Buffers[ib].Data.Index(0, s)
 					base := uint32(a.Indices.Pointer.Address)
-					limits := e.calcIndexLimits(data, a.IndicesType, base, uint32(a.ElementCount))
+					limits := e.calcIndexLimits(data, a.IndicesType, base, uint32(a.IndicesCount))
 					defer moveClientVBsToVAs(int(limits.Min), int(limits.Max), i, a, s, c, d, l, out)()
 				}
 			}

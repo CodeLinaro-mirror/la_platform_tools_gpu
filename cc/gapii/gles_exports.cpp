@@ -129,26 +129,29 @@ EXPORT void STDCALL glObjectLabel(uint32_t identifier, uint32_t name, int32_t le
 EXPORT void STDCALL glObjectPtrLabel(void* ptr, int32_t length, char* label);
 EXPORT void STDCALL glPopDebugGroup();
 EXPORT void STDCALL glPushDebugGroup(uint32_t source, uint32_t id, int32_t length, char* message);
-EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count);
-EXPORT void STDCALL glDrawArraysIndirect(uint32_t mode, void* indirect);
+EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t indices_count);
+EXPORT void STDCALL glDrawArraysIndirect(uint32_t draw_mode, void* indirect);
+EXPORT void STDCALL glDrawArraysInstanced(uint32_t draw_mode, int32_t first_index,
+                                          int32_t indices_count, int32_t instance_count);
 EXPORT void STDCALL
-glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count, int32_t instancecount);
-EXPORT void STDCALL glDrawBuffers(int32_t n, uint32_t* bufs);
+glDrawElements(uint32_t draw_mode, int32_t indices_count, uint32_t indices_type, void* indices);
+EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indices_count,
+                                             uint32_t indices_type, void* indices,
+                                             int32_t base_vertex);
 EXPORT void STDCALL
-glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type, void* indices);
-EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint32_t type,
-                                             void* indices, int32_t basevertex);
-EXPORT void STDCALL glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect);
-EXPORT void STDCALL glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type,
-                                            void* indices, int32_t instancecount);
-EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t count, uint32_t type,
-                                                      void* indices, int32_t instancecount,
-                                                      int32_t basevertex);
-EXPORT void STDCALL glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
-                                        uint32_t type, void* indices);
-EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start, uint32_t end,
-                                                  int32_t count, uint32_t type, void* indices,
-                                                  int32_t basevertex);
+glDrawElementsIndirect(uint32_t draw_mode, uint32_t indices_type, void* indirect);
+EXPORT void STDCALL glDrawElementsInstanced(uint32_t draw_mode, int32_t indices_count,
+                                            uint32_t indices_type, void* indices,
+                                            int32_t instance_count);
+EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32_t indices_count,
+                                                      uint32_t indices_type, void* indices,
+                                                      int32_t instance_count, int32_t base_vertex);
+EXPORT void STDCALL glDrawRangeElements(uint32_t draw_mode, uint32_t start, uint32_t end,
+                                        int32_t indices_count, uint32_t indices_type,
+                                        void* indices);
+EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t start, uint32_t end,
+                                                  int32_t indices_count, uint32_t indices_type,
+                                                  void* indices, int32_t base_vertex);
 EXPORT void STDCALL glPatchParameteri(uint32_t pname, int32_t value);
 EXPORT void STDCALL glPrimitiveBoundingBox(float minX, float minY, float minZ, float minW,
                                            float maxX, float maxY, float maxZ, float maxW);
@@ -756,6 +759,7 @@ EXPORT void STDCALL glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t b
 EXPORT void STDCALL glDeleteFramebuffers(int32_t count, uint32_t* framebuffers);
 EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers);
 EXPORT void STDCALL glDepthMask(uint8_t enabled);
+EXPORT void STDCALL glDrawBuffers(int32_t n, uint32_t* bufs);
 EXPORT void STDCALL glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param);
 EXPORT void STDCALL glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                               uint32_t framebuffer_attachment,
@@ -1277,7 +1281,6 @@ const Symbol kGLESExports[] = {
         {"glDrawArrays", reinterpret_cast<void*>(glDrawArrays)},
         {"glDrawArraysIndirect", reinterpret_cast<void*>(glDrawArraysIndirect)},
         {"glDrawArraysInstanced", reinterpret_cast<void*>(glDrawArraysInstanced)},
-        {"glDrawBuffers", reinterpret_cast<void*>(glDrawBuffers)},
         {"glDrawElements", reinterpret_cast<void*>(glDrawElements)},
         {"glDrawElementsBaseVertex", reinterpret_cast<void*>(glDrawElementsBaseVertex)},
         {"glDrawElementsIndirect", reinterpret_cast<void*>(glDrawElementsIndirect)},
@@ -1679,6 +1682,7 @@ const Symbol kGLESExports[] = {
         {"glDeleteFramebuffers", reinterpret_cast<void*>(glDeleteFramebuffers)},
         {"glDeleteRenderbuffers", reinterpret_cast<void*>(glDeleteRenderbuffers)},
         {"glDepthMask", reinterpret_cast<void*>(glDepthMask)},
+        {"glDrawBuffers", reinterpret_cast<void*>(glDrawBuffers)},
         {"glFramebufferParameteri", reinterpret_cast<void*>(glFramebufferParameteri)},
         {"glFramebufferRenderbuffer", reinterpret_cast<void*>(glFramebufferRenderbuffer)},
         {"glFramebufferTexture", reinterpret_cast<void*>(glFramebufferTexture)},
@@ -2392,69 +2396,70 @@ EXPORT void STDCALL glPushDebugGroup(uint32_t source, uint32_t id, int32_t lengt
     gapic::Lock<Spy> lock__(s);
     s->glPushDebugGroup(source, id, length, message);
 }
-EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
+EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t indices_count) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawArrays(draw_mode, first_index, index_count);
+    s->glDrawArrays(draw_mode, first_index, indices_count);
 }
-EXPORT void STDCALL glDrawArraysIndirect(uint32_t mode, void* indirect) {
+EXPORT void STDCALL glDrawArraysIndirect(uint32_t draw_mode, void* indirect) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawArraysIndirect(mode, indirect);
+    s->glDrawArraysIndirect(draw_mode, indirect);
 }
-EXPORT void STDCALL
-glDrawArraysInstanced(uint32_t mode, int32_t first, int32_t count, int32_t instancecount) {
+EXPORT void STDCALL glDrawArraysInstanced(uint32_t draw_mode, int32_t first_index,
+                                          int32_t indices_count, int32_t instance_count) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawArraysInstanced(mode, first, count, instancecount);
-}
-EXPORT void STDCALL glDrawBuffers(int32_t n, uint32_t* bufs) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glDrawBuffers(n, bufs);
+    s->glDrawArraysInstanced(draw_mode, first_index, indices_count, instance_count);
 }
 EXPORT void STDCALL
-glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type, void* indices) {
+glDrawElements(uint32_t draw_mode, int32_t indices_count, uint32_t indices_type, void* indices) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawElements(draw_mode, element_count, indices_type, indices);
+    s->glDrawElements(draw_mode, indices_count, indices_type, indices);
 }
-EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t mode, int32_t count, uint32_t type,
-                                             void* indices, int32_t basevertex) {
+EXPORT void STDCALL glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indices_count,
+                                             uint32_t indices_type, void* indices,
+                                             int32_t base_vertex) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+    s->glDrawElementsBaseVertex(draw_mode, indices_count, indices_type, indices, base_vertex);
 }
-EXPORT void STDCALL glDrawElementsIndirect(uint32_t mode, uint32_t type, void* indirect) {
+EXPORT void STDCALL
+glDrawElementsIndirect(uint32_t draw_mode, uint32_t indices_type, void* indirect) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawElementsIndirect(mode, type, indirect);
+    s->glDrawElementsIndirect(draw_mode, indices_type, indirect);
 }
-EXPORT void STDCALL glDrawElementsInstanced(uint32_t mode, int32_t count, uint32_t type,
-                                            void* indices, int32_t instancecount) {
+EXPORT void STDCALL glDrawElementsInstanced(uint32_t draw_mode, int32_t indices_count,
+                                            uint32_t indices_type, void* indices,
+                                            int32_t instance_count) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawElementsInstanced(mode, count, type, indices, instancecount);
+    s->glDrawElementsInstanced(draw_mode, indices_count, indices_type, indices, instance_count);
 }
-EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t mode, int32_t count, uint32_t type,
-                                                      void* indices, int32_t instancecount,
-                                                      int32_t basevertex) {
+EXPORT void STDCALL glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32_t indices_count,
+                                                      uint32_t indices_type, void* indices,
+                                                      int32_t instance_count, int32_t base_vertex) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex);
+    s->glDrawElementsInstancedBaseVertex(draw_mode, indices_count, indices_type, indices,
+                                         instance_count, base_vertex);
 }
-EXPORT void STDCALL glDrawRangeElements(uint32_t mode, uint32_t start, uint32_t end, int32_t count,
-                                        uint32_t type, void* indices) {
+EXPORT void STDCALL glDrawRangeElements(uint32_t draw_mode, uint32_t start, uint32_t end,
+                                        int32_t indices_count, uint32_t indices_type,
+                                        void* indices) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawRangeElements(mode, start, end, count, type, indices);
+    s->glDrawRangeElements(draw_mode, start, end, indices_count, indices_type, indices);
 }
-EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t mode, uint32_t start, uint32_t end,
-                                                  int32_t count, uint32_t type, void* indices,
-                                                  int32_t basevertex) {
+EXPORT void STDCALL glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t start, uint32_t end,
+                                                  int32_t indices_count, uint32_t indices_type,
+                                                  void* indices, int32_t base_vertex) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+    s->glDrawRangeElementsBaseVertex(draw_mode, start, end, indices_count, indices_type, indices,
+                                     base_vertex);
 }
 EXPORT void STDCALL glPatchParameteri(uint32_t pname, int32_t value) {
     Spy* s = spy();
@@ -4547,6 +4552,11 @@ EXPORT void STDCALL glDepthMask(uint8_t enabled) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glDepthMask(enabled);
+}
+EXPORT void STDCALL glDrawBuffers(int32_t n, uint32_t* bufs) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawBuffers(n, bufs);
 }
 EXPORT void STDCALL glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param) {
     Spy* s = spy();

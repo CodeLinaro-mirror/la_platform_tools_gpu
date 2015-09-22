@@ -649,15 +649,6 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlDrawBuffers := schema.Of((*GlDrawBuffers)(nil).Class())
-	sc_GlDrawBuffers.Metadata = append(sc_GlDrawBuffers.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glDrawBuffers",
-		DrawCall:         true,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
 	sc_GlDrawElements := schema.Of((*GlDrawElements)(nil).Class())
 	sc_GlDrawElements.Metadata = append(sc_GlDrawElements.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -3974,6 +3965,15 @@ func init() {
 	sc_GlDepthMask.Metadata = append(sc_GlDepthMask.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDepthMask",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawBuffers := schema.Of((*GlDrawBuffers)(nil).Class())
+	sc_GlDrawBuffers.Metadata = append(sc_GlDrawBuffers.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawBuffers",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

@@ -5631,6 +5631,13 @@ static const uint32_t GL_MATERIAL_SIDE_HINT_PGI = 107052;
 static const uint32_t GL_MAX_VERTEX_HINT_PGI = 107053;
 }
 
+namespace Constants {
+static const uint32_t MAX_VERTEX_ATTRIBS = 16;
+static const uint32_t MAX_VERTEX_ATTRIB_BINDINGS = 16;
+static const uint32_t MAX_VERTEX_ATTRIB_STRIDE = 2048;
+static const uint32_t MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 2047;
+}
+
 namespace ExtensionId {
 static const uint32_t GL_AMD_performance_monitor = 1;
 static const uint32_t GL_ANGLE_framebuffer_blit = 2;
@@ -5892,16 +5899,19 @@ struct VertexAttributeArray {
           mNormalized((GLboolean)(0)),
           mStride((GLsizei)(0)),
           mBuffer((BufferId)(0)),
-          mPointer(nullptr) {}
+          mPointer(nullptr),
+          mDivisor(0) {}
     inline VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, GLboolean Normalized,
-                                GLsizei Stride, BufferId Buffer, VertexPointer Pointer)
+                                GLsizei Stride, BufferId Buffer, VertexPointer Pointer,
+                                uint32_t Divisor)
         : mEnabled(Enabled),
           mSize(Size),
           mType(Type),
           mNormalized(Normalized),
           mStride(Stride),
           mBuffer(Buffer),
-          mPointer(Pointer) {}
+          mPointer(Pointer),
+          mDivisor(Divisor) {}
 
     bool mEnabled;
     uint32_t mSize;
@@ -5910,6 +5920,7 @@ struct VertexAttributeArray {
     GLsizei mStride;
     BufferId mBuffer;
     VertexPointer mPointer;
+    uint32_t mDivisor;
 };
 
 typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>

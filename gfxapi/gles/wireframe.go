@@ -194,7 +194,7 @@ func getIndices(
 
 	switch a := a.(type) {
 	case *GlDrawArrays:
-		indices := make([]index, a.IndexCount)
+		indices := make([]index, a.IndicesCount)
 		for i := range indices {
 			indices[i] = index(a.FirstIndex) + index(i)
 		}
@@ -207,7 +207,7 @@ func getIndices(
 			GLenum_GL_UNSIGNED_INT:   4,
 		}[a.IndicesType]
 		indexBufferID := c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
-		size := uint64(a.ElementCount) * indexSize
+		size := uint64(a.IndicesCount) * indexSize
 
 		var decoder binary.Decoder
 		if indexBufferID == 0 {

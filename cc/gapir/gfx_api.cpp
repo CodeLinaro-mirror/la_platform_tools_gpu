@@ -1605,14 +1605,14 @@ bool callGlPushDebugGroup(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawArrays(Stack* stack, bool pushReturn) {
-    int32_t index_count = stack->pop<int32_t>();
+    int32_t indices_count = stack->pop<int32_t>();
     int32_t first_index = stack->pop<int32_t>();
     GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDrawArrays(%u, %" PRId32 ", %" PRId32 ")", draw_mode, first_index,
-                   index_count);
+                   indices_count);
         if (glDrawArrays != nullptr) {
-            glDrawArrays(draw_mode, first_index, index_count);
+            glDrawArrays(draw_mode, first_index, indices_count);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawArrays returned error: 0x%x", err);
@@ -1629,11 +1629,11 @@ bool callGlDrawArrays(Stack* stack, bool pushReturn) {
 
 bool callGlDrawArraysIndirect(Stack* stack, bool pushReturn) {
     void* indirect = stack->pop<void*>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawArraysIndirect(%u, %p)", mode, indirect);
+        GAPID_INFO("glDrawArraysIndirect(%u, %p)", draw_mode, indirect);
         if (glDrawArraysIndirect != nullptr) {
-            glDrawArraysIndirect(mode, indirect);
+            glDrawArraysIndirect(draw_mode, indirect);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawArraysIndirect returned error: 0x%x", err);
@@ -1649,15 +1649,15 @@ bool callGlDrawArraysIndirect(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawArraysInstanced(Stack* stack, bool pushReturn) {
-    int32_t instancecount = stack->pop<int32_t>();
-    int32_t count = stack->pop<int32_t>();
-    int32_t first = stack->pop<int32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    int32_t instance_count = stack->pop<int32_t>();
+    int32_t indices_count = stack->pop<int32_t>();
+    int32_t first_index = stack->pop<int32_t>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawArraysInstanced(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", mode, first,
-                   count, instancecount);
+        GAPID_INFO("glDrawArraysInstanced(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ")", draw_mode,
+                   first_index, indices_count, instance_count);
         if (glDrawArraysInstanced != nullptr) {
-            glDrawArraysInstanced(mode, first, count, instancecount);
+            glDrawArraysInstanced(draw_mode, first_index, indices_count, instance_count);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawArraysInstanced returned error: 0x%x", err);
@@ -1672,37 +1672,16 @@ bool callGlDrawArraysInstanced(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlDrawBuffers(Stack* stack, bool pushReturn) {
-    GLenum* bufs = stack->pop<GLenum*>();
-    int32_t n = stack->pop<int32_t>();
-    if (stack->isValid()) {
-        GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)", n, bufs);
-        if (glDrawBuffers != nullptr) {
-            glDrawBuffers(n, bufs);
-            const GLenum err = glGetError();
-            if (err != GLenum::GL_NO_ERROR) {
-                GAPID_WARNING("glDrawBuffers returned error: 0x%x", err);
-            }
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glDrawBuffers");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glDrawBuffers");
-        return false;
-    }
-}
-
 bool callGlDrawElements(Stack* stack, bool pushReturn) {
     void* indices = stack->pop<void*>();
     GLenum indices_type = stack->pop<GLenum>();
-    int32_t element_count = stack->pop<int32_t>();
+    int32_t indices_count = stack->pop<int32_t>();
     GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)", draw_mode, element_count,
+        GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)", draw_mode, indices_count,
                    indices_type, indices);
         if (glDrawElements != nullptr) {
-            glDrawElements(draw_mode, element_count, indices_type, indices);
+            glDrawElements(draw_mode, indices_count, indices_type, indices);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawElements returned error: 0x%x", err);
@@ -1718,16 +1697,16 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawElementsBaseVertex(Stack* stack, bool pushReturn) {
-    int32_t basevertex = stack->pop<int32_t>();
+    int32_t base_vertex = stack->pop<int32_t>();
     void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum indices_type = stack->pop<GLenum>();
+    int32_t indices_count = stack->pop<int32_t>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawElementsBaseVertex(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
-                   type, indices, basevertex);
+        GAPID_INFO("glDrawElementsBaseVertex(%u, %" PRId32 ", %u, %p, %" PRId32 ")", draw_mode,
+                   indices_count, indices_type, indices, base_vertex);
         if (glDrawElementsBaseVertex != nullptr) {
-            glDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+            glDrawElementsBaseVertex(draw_mode, indices_count, indices_type, indices, base_vertex);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawElementsBaseVertex returned error: 0x%x", err);
@@ -1744,12 +1723,12 @@ bool callGlDrawElementsBaseVertex(Stack* stack, bool pushReturn) {
 
 bool callGlDrawElementsIndirect(Stack* stack, bool pushReturn) {
     void* indirect = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum indices_type = stack->pop<GLenum>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)", mode, type, indirect);
+        GAPID_INFO("glDrawElementsIndirect(%u, %u, %p)", draw_mode, indices_type, indirect);
         if (glDrawElementsIndirect != nullptr) {
-            glDrawElementsIndirect(mode, type, indirect);
+            glDrawElementsIndirect(draw_mode, indices_type, indirect);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawElementsIndirect returned error: 0x%x", err);
@@ -1765,16 +1744,17 @@ bool callGlDrawElementsIndirect(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawElementsInstanced(Stack* stack, bool pushReturn) {
-    int32_t instancecount = stack->pop<int32_t>();
+    int32_t instance_count = stack->pop<int32_t>();
     void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum indices_type = stack->pop<GLenum>();
+    int32_t indices_count = stack->pop<int32_t>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawElementsInstanced(%u, %" PRId32 ", %u, %p, %" PRId32 ")", mode, count,
-                   type, indices, instancecount);
+        GAPID_INFO("glDrawElementsInstanced(%u, %" PRId32 ", %u, %p, %" PRId32 ")", draw_mode,
+                   indices_count, indices_type, indices, instance_count);
         if (glDrawElementsInstanced != nullptr) {
-            glDrawElementsInstanced(mode, count, type, indices, instancecount);
+            glDrawElementsInstanced(draw_mode, indices_count, indices_type, indices,
+                                    instance_count);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawElementsInstanced returned error: 0x%x", err);
@@ -1790,19 +1770,19 @@ bool callGlDrawElementsInstanced(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawElementsInstancedBaseVertex(Stack* stack, bool pushReturn) {
-    int32_t basevertex = stack->pop<int32_t>();
-    int32_t instancecount = stack->pop<int32_t>();
+    int32_t base_vertex = stack->pop<int32_t>();
+    int32_t instance_count = stack->pop<int32_t>();
     void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum indices_type = stack->pop<GLenum>();
+    int32_t indices_count = stack->pop<int32_t>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDrawElementsInstancedBaseVertex(%u, %" PRId32 ", %u, %p, %" PRId32
                    ", %" PRId32 ")",
-                   mode, count, type, indices, instancecount, basevertex);
+                   draw_mode, indices_count, indices_type, indices, instance_count, base_vertex);
         if (glDrawElementsInstancedBaseVertex != nullptr) {
-            glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount,
-                                              basevertex);
+            glDrawElementsInstancedBaseVertex(draw_mode, indices_count, indices_type, indices,
+                                              instance_count, base_vertex);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawElementsInstancedBaseVertex returned error: 0x%x", err);
@@ -1820,16 +1800,16 @@ bool callGlDrawElementsInstancedBaseVertex(Stack* stack, bool pushReturn) {
 
 bool callGlDrawRangeElements(Stack* stack, bool pushReturn) {
     void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
+    GLenum indices_type = stack->pop<GLenum>();
+    int32_t indices_count = stack->pop<int32_t>();
     uint32_t end = stack->pop<uint32_t>();
     uint32_t start = stack->pop<uint32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawRangeElements(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %u, %p)", mode,
-                   start, end, count, type, indices);
+        GAPID_INFO("glDrawRangeElements(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32 ", %u, %p)",
+                   draw_mode, start, end, indices_count, indices_type, indices);
         if (glDrawRangeElements != nullptr) {
-            glDrawRangeElements(mode, start, end, count, type, indices);
+            glDrawRangeElements(draw_mode, start, end, indices_count, indices_type, indices);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawRangeElements returned error: 0x%x", err);
@@ -1845,19 +1825,20 @@ bool callGlDrawRangeElements(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawRangeElementsBaseVertex(Stack* stack, bool pushReturn) {
-    int32_t basevertex = stack->pop<int32_t>();
+    int32_t base_vertex = stack->pop<int32_t>();
     void* indices = stack->pop<void*>();
-    GLenum type = stack->pop<GLenum>();
-    int32_t count = stack->pop<int32_t>();
+    GLenum indices_type = stack->pop<GLenum>();
+    int32_t indices_count = stack->pop<int32_t>();
     uint32_t end = stack->pop<uint32_t>();
     uint32_t start = stack->pop<uint32_t>();
-    GLenum mode = stack->pop<GLenum>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDrawRangeElementsBaseVertex(%u, %" PRIu32 ", %" PRIu32 ", %" PRId32
                    ", %u, %p, %" PRId32 ")",
-                   mode, start, end, count, type, indices, basevertex);
+                   draw_mode, start, end, indices_count, indices_type, indices, base_vertex);
         if (glDrawRangeElementsBaseVertex != nullptr) {
-            glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+            glDrawRangeElementsBaseVertex(draw_mode, start, end, indices_count, indices_type,
+                                          indices, base_vertex);
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
                 GAPID_WARNING("glDrawRangeElementsBaseVertex returned error: 0x%x", err);
@@ -10537,6 +10518,27 @@ bool callGlDepthMask(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlDrawBuffers(Stack* stack, bool pushReturn) {
+    GLenum* bufs = stack->pop<GLenum*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawBuffers(%" PRId32 ", %p)", n, bufs);
+        if (glDrawBuffers != nullptr) {
+            glDrawBuffers(n, bufs);
+            const GLenum err = glGetError();
+            if (err != GLenum::GL_NO_ERROR) {
+                GAPID_WARNING("glDrawBuffers returned error: 0x%x", err);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawBuffers");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawBuffers");
+        return false;
+    }
+}
+
 bool callGlFramebufferParameteri(Stack* stack, bool pushReturn) {
     int32_t param = stack->pop<int32_t>();
     GLenum pname = stack->pop<GLenum>();
@@ -17670,7 +17672,6 @@ PFNGLPUSHDEBUGGROUP glPushDebugGroup = nullptr;
 PFNGLDRAWARRAYS glDrawArrays = nullptr;
 PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect = nullptr;
 PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced = nullptr;
-PFNGLDRAWBUFFERS glDrawBuffers = nullptr;
 PFNGLDRAWELEMENTS glDrawElements = nullptr;
 PFNGLDRAWELEMENTSBASEVERTEX glDrawElementsBaseVertex = nullptr;
 PFNGLDRAWELEMENTSINDIRECT glDrawElementsIndirect = nullptr;
@@ -18041,6 +18042,7 @@ PFNGLCOLORMASKI glColorMaski = nullptr;
 PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers = nullptr;
 PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers = nullptr;
 PFNGLDEPTHMASK glDepthMask = nullptr;
+PFNGLDRAWBUFFERS glDrawBuffers = nullptr;
 PFNGLFRAMEBUFFERPARAMETERI glFramebufferParameteri = nullptr;
 PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer = nullptr;
 PFNGLFRAMEBUFFERTEXTURE glFramebufferTexture = nullptr;
@@ -18418,7 +18420,6 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlDrawArrays, callGlDrawArrays);
     interpreter->registerFunction(Ids::GlDrawArraysIndirect, callGlDrawArraysIndirect);
     interpreter->registerFunction(Ids::GlDrawArraysInstanced, callGlDrawArraysInstanced);
-    interpreter->registerFunction(Ids::GlDrawBuffers, callGlDrawBuffers);
     interpreter->registerFunction(Ids::GlDrawElements, callGlDrawElements);
     interpreter->registerFunction(Ids::GlDrawElementsBaseVertex, callGlDrawElementsBaseVertex);
     interpreter->registerFunction(Ids::GlDrawElementsIndirect, callGlDrawElementsIndirect);
@@ -18871,6 +18872,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlDeleteFramebuffers, callGlDeleteFramebuffers);
     interpreter->registerFunction(Ids::GlDeleteRenderbuffers, callGlDeleteRenderbuffers);
     interpreter->registerFunction(Ids::GlDepthMask, callGlDepthMask);
+    interpreter->registerFunction(Ids::GlDrawBuffers, callGlDrawBuffers);
     interpreter->registerFunction(Ids::GlFramebufferParameteri, callGlFramebufferParameteri);
     interpreter->registerFunction(Ids::GlFramebufferRenderbuffer, callGlFramebufferRenderbuffer);
     interpreter->registerFunction(Ids::GlFramebufferTexture, callGlFramebufferTexture);
@@ -19327,8 +19329,6 @@ void Initialize() {
             gapic::GetGfxProcAddress("glDrawArraysIndirect", false));
     glDrawArraysInstanced = reinterpret_cast<PFNGLDRAWARRAYSINSTANCED>(
             gapic::GetGfxProcAddress("glDrawArraysInstanced", false));
-    glDrawBuffers =
-            reinterpret_cast<PFNGLDRAWBUFFERS>(gapic::GetGfxProcAddress("glDrawBuffers", false));
     glDrawElements =
             reinterpret_cast<PFNGLDRAWELEMENTS>(gapic::GetGfxProcAddress("glDrawElements", false));
     glDrawElementsBaseVertex = reinterpret_cast<PFNGLDRAWELEMENTSBASEVERTEX>(
@@ -20073,6 +20073,8 @@ void Initialize() {
     glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
             gapic::GetGfxProcAddress("glDeleteRenderbuffers", false));
     glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(gapic::GetGfxProcAddress("glDepthMask", false));
+    glDrawBuffers =
+            reinterpret_cast<PFNGLDRAWBUFFERS>(gapic::GetGfxProcAddress("glDrawBuffers", false));
     glFramebufferParameteri = reinterpret_cast<PFNGLFRAMEBUFFERPARAMETERI>(
             gapic::GetGfxProcAddress("glFramebufferParameteri", false));
     glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(

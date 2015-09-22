@@ -1784,56 +1784,6 @@ func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
 	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLenumᶜᵖ is a pointer to a GLenum element.
-type GLenumᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
-func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
-	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
-func (p GLenumᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLenum element at the pointer.
-func (p GLenumᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLenum element at the pointer.
-func (p GLenumᶜᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLenumᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLenumᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLenumᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLenumˢ from the pointer using start and end indices.
-func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // GLfloatᶜᵖ is a pointer to a GLfloat element.
 type GLfloatᶜᵖ struct {
 	binary.Generate
@@ -2190,6 +2140,56 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLenumᶜᵖ is a pointer to a GLenum element.
+type GLenumᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
+func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
+	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
+func (p GLenumᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLenumᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLenumᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLenumᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // FramebufferIdᵖ is a pointer to a FramebufferId element.
@@ -17019,11 +17019,11 @@ type GlDrawArrays struct {
 	observations atom.Observations
 	DrawMode     GLenum
 	FirstIndex   GLint
-	IndexCount   GLsizei
+	IndicesCount GLsizei
 }
 
 func (a *GlDrawArrays) String() string {
-	return fmt.Sprintf("glDrawArrays(draw_mode: %v, first_index: %v, index_count: %v)", a.DrawMode, a.FirstIndex, a.IndexCount)
+	return fmt.Sprintf("glDrawArrays(draw_mode: %v, first_index: %v, indices_count: %v)", a.DrawMode, a.FirstIndex, a.IndicesCount)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17051,12 +17051,12 @@ func (a *GlDrawArrays) Observations() *atom.Observations { return &a.observation
 type GlDrawArraysIndirect struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         GLenum
+	DrawMode     GLenum
 	Indirect     Voidᶜᵖ
 }
 
 func (a *GlDrawArraysIndirect) String() string {
-	return fmt.Sprintf("glDrawArraysIndirect(mode: %v, indirect: %v)", a.Mode, a.Indirect)
+	return fmt.Sprintf("glDrawArraysIndirect(draw_mode: %v, indirect: %v)", a.DrawMode, a.Indirect)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17084,14 +17084,14 @@ func (a *GlDrawArraysIndirect) Observations() *atom.Observations { return &a.obs
 type GlDrawArraysInstanced struct {
 	binary.Generate
 	observations  atom.Observations
-	Mode          GLenum
-	First         GLint
-	Count         GLsizei
-	Instancecount GLsizei
+	DrawMode      GLenum
+	FirstIndex    GLint
+	IndicesCount  GLsizei
+	InstanceCount GLsizei
 }
 
 func (a *GlDrawArraysInstanced) String() string {
-	return fmt.Sprintf("glDrawArraysInstanced(mode: %v, first: %v, count: %v, instancecount: %v)", a.Mode, a.First, a.Count, a.Instancecount)
+	return fmt.Sprintf("glDrawArraysInstanced(draw_mode: %v, first_index: %v, indices_count: %v, instance_count: %v)", a.DrawMode, a.FirstIndex, a.IndicesCount, a.InstanceCount)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17114,52 +17114,19 @@ func (c *GlDrawArraysInstanced) Flags() atom.Flags                { return 0 | a
 func (a *GlDrawArraysInstanced) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
-// GlDrawBuffers
-////////////////////////////////////////////////////////////////////////////////
-type GlDrawBuffers struct {
-	binary.Generate
-	observations atom.Observations
-	N            GLsizei
-	Bufs         GLenumᶜᵖ
-}
-
-func (a *GlDrawBuffers) String() string {
-	return fmt.Sprintf("glDrawBuffers(n: %v, bufs: %v)", a.N, a.Bufs)
-}
-
-// AddRead appends a new read observation to the atom of the range rng with
-// the data id.
-// The GlDrawBuffers pointer is returned so that calls can be chained.
-func (a *GlDrawBuffers) AddRead(rng memory.Range, id binary.ID) *GlDrawBuffers {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
-	return a
-}
-
-// AddWrite appends a new write observation to the atom of the range rng with
-// the data id.
-// The GlDrawBuffers pointer is returned so that calls can be chained.
-func (a *GlDrawBuffers) AddWrite(rng memory.Range, id binary.ID) *GlDrawBuffers {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
-	return a
-}
-func (c *GlDrawBuffers) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawBuffers) Flags() atom.Flags                { return 0 | atom.DrawCall }
-func (a *GlDrawBuffers) Observations() *atom.Observations { return &a.observations }
-
-////////////////////////////////////////////////////////////////////////////////
 // GlDrawElements
 ////////////////////////////////////////////////////////////////////////////////
 type GlDrawElements struct {
 	binary.Generate
 	observations atom.Observations
 	DrawMode     GLenum
-	ElementCount GLsizei
+	IndicesCount GLsizei
 	IndicesType  GLenum
 	Indices      IndicesPointer
 }
 
 func (a *GlDrawElements) String() string {
-	return fmt.Sprintf("glDrawElements(draw_mode: %v, element_count: %v, indices_type: %v, indices: %v)", a.DrawMode, a.ElementCount, a.IndicesType, a.Indices)
+	return fmt.Sprintf("glDrawElements(draw_mode: %v, indices_count: %v, indices_type: %v, indices: %v)", a.DrawMode, a.IndicesCount, a.IndicesType, a.Indices)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17187,15 +17154,15 @@ func (a *GlDrawElements) Observations() *atom.Observations { return &a.observati
 type GlDrawElementsBaseVertex struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         GLenum
-	Count        GLsizei
-	Type         GLenum
-	Indices      Voidᶜᵖ
-	Basevertex   GLint
+	DrawMode     GLenum
+	IndicesCount GLsizei
+	IndicesType  GLenum
+	Indices      IndicesPointer
+	BaseVertex   GLint
 }
 
 func (a *GlDrawElementsBaseVertex) String() string {
-	return fmt.Sprintf("glDrawElementsBaseVertex(mode: %v, count: %v, type: %v, indices: %v, basevertex: %v)", a.Mode, a.Count, a.Type, a.Indices, a.Basevertex)
+	return fmt.Sprintf("glDrawElementsBaseVertex(draw_mode: %v, indices_count: %v, indices_type: %v, indices: %v, base_vertex: %v)", a.DrawMode, a.IndicesCount, a.IndicesType, a.Indices, a.BaseVertex)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17223,13 +17190,13 @@ func (a *GlDrawElementsBaseVertex) Observations() *atom.Observations { return &a
 type GlDrawElementsIndirect struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         GLenum
-	Type         GLenum
+	DrawMode     GLenum
+	IndicesType  GLenum
 	Indirect     Voidᶜᵖ
 }
 
 func (a *GlDrawElementsIndirect) String() string {
-	return fmt.Sprintf("glDrawElementsIndirect(mode: %v, type: %v, indirect: %v)", a.Mode, a.Type, a.Indirect)
+	return fmt.Sprintf("glDrawElementsIndirect(draw_mode: %v, indices_type: %v, indirect: %v)", a.DrawMode, a.IndicesType, a.Indirect)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17257,15 +17224,15 @@ func (a *GlDrawElementsIndirect) Observations() *atom.Observations { return &a.o
 type GlDrawElementsInstanced struct {
 	binary.Generate
 	observations  atom.Observations
-	Mode          GLenum
-	Count         GLsizei
-	Type          GLenum
-	Indices       Voidᶜᵖ
-	Instancecount GLsizei
+	DrawMode      GLenum
+	IndicesCount  GLsizei
+	IndicesType   GLenum
+	Indices       IndicesPointer
+	InstanceCount GLsizei
 }
 
 func (a *GlDrawElementsInstanced) String() string {
-	return fmt.Sprintf("glDrawElementsInstanced(mode: %v, count: %v, type: %v, indices: %v, instancecount: %v)", a.Mode, a.Count, a.Type, a.Indices, a.Instancecount)
+	return fmt.Sprintf("glDrawElementsInstanced(draw_mode: %v, indices_count: %v, indices_type: %v, indices: %v, instance_count: %v)", a.DrawMode, a.IndicesCount, a.IndicesType, a.Indices, a.InstanceCount)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17293,16 +17260,16 @@ func (a *GlDrawElementsInstanced) Observations() *atom.Observations { return &a.
 type GlDrawElementsInstancedBaseVertex struct {
 	binary.Generate
 	observations  atom.Observations
-	Mode          GLenum
-	Count         GLsizei
-	Type          GLenum
-	Indices       Voidᶜᵖ
-	Instancecount GLsizei
-	Basevertex    GLint
+	DrawMode      GLenum
+	IndicesCount  GLsizei
+	IndicesType   GLenum
+	Indices       IndicesPointer
+	InstanceCount GLsizei
+	BaseVertex    GLint
 }
 
 func (a *GlDrawElementsInstancedBaseVertex) String() string {
-	return fmt.Sprintf("glDrawElementsInstancedBaseVertex(mode: %v, count: %v, type: %v, indices: %v, instancecount: %v, basevertex: %v)", a.Mode, a.Count, a.Type, a.Indices, a.Instancecount, a.Basevertex)
+	return fmt.Sprintf("glDrawElementsInstancedBaseVertex(draw_mode: %v, indices_count: %v, indices_type: %v, indices: %v, instance_count: %v, base_vertex: %v)", a.DrawMode, a.IndicesCount, a.IndicesType, a.Indices, a.InstanceCount, a.BaseVertex)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17330,16 +17297,16 @@ func (a *GlDrawElementsInstancedBaseVertex) Observations() *atom.Observations { 
 type GlDrawRangeElements struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         GLenum
+	DrawMode     GLenum
 	Start        GLuint
 	End          GLuint
-	Count        GLsizei
-	Type         GLenum
-	Indices      Voidᶜᵖ
+	IndicesCount GLsizei
+	IndicesType  GLenum
+	Indices      IndicesPointer
 }
 
 func (a *GlDrawRangeElements) String() string {
-	return fmt.Sprintf("glDrawRangeElements(mode: %v, start: %v, end: %v, count: %v, type: %v, indices: %v)", a.Mode, a.Start, a.End, a.Count, a.Type, a.Indices)
+	return fmt.Sprintf("glDrawRangeElements(draw_mode: %v, start: %v, end: %v, indices_count: %v, indices_type: %v, indices: %v)", a.DrawMode, a.Start, a.End, a.IndicesCount, a.IndicesType, a.Indices)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -17367,17 +17334,17 @@ func (a *GlDrawRangeElements) Observations() *atom.Observations { return &a.obse
 type GlDrawRangeElementsBaseVertex struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         GLenum
+	DrawMode     GLenum
 	Start        GLuint
 	End          GLuint
-	Count        GLsizei
-	Type         GLenum
-	Indices      Voidᶜᵖ
-	Basevertex   GLint
+	IndicesCount GLsizei
+	IndicesType  GLenum
+	Indices      IndicesPointer
+	BaseVertex   GLint
 }
 
 func (a *GlDrawRangeElementsBaseVertex) String() string {
-	return fmt.Sprintf("glDrawRangeElementsBaseVertex(mode: %v, start: %v, end: %v, count: %v, type: %v, indices: %v, basevertex: %v)", a.Mode, a.Start, a.End, a.Count, a.Type, a.Indices, a.Basevertex)
+	return fmt.Sprintf("glDrawRangeElementsBaseVertex(draw_mode: %v, start: %v, end: %v, indices_count: %v, indices_type: %v, indices: %v, base_vertex: %v)", a.DrawMode, a.Start, a.End, a.IndicesCount, a.IndicesType, a.Indices, a.BaseVertex)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -30016,6 +29983,39 @@ func (c *GlDepthMask) Flags() atom.Flags                { return 0 }
 func (a *GlDepthMask) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlDrawBuffers
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawBuffers struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLsizei
+	Bufs         GLenumᶜᵖ
+}
+
+func (a *GlDrawBuffers) String() string {
+	return fmt.Sprintf("glDrawBuffers(n: %v, bufs: %v)", a.N, a.Bufs)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawBuffers pointer is returned so that calls can be chained.
+func (a *GlDrawBuffers) AddRead(rng memory.Range, id binary.ID) *GlDrawBuffers {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawBuffers pointer is returned so that calls can be chained.
+func (a *GlDrawBuffers) AddWrite(rng memory.Range, id binary.ID) *GlDrawBuffers {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawBuffers) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawBuffers) Flags() atom.Flags                { return 0 }
+func (a *GlDrawBuffers) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferParameteri
 ////////////////////////////////////////////////////////////////////////////////
 type GlFramebufferParameteri struct {
@@ -40826,6 +40826,7 @@ type VertexAttributeArray struct {
 	Stride     GLsizei
 	Buffer     BufferId
 	Pointer    VertexPointer
+	Divisor    uint32
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46561,6 +46562,18 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
+// enum Constants
+////////////////////////////////////////////////////////////////////////////////
+type Constants uint32
+
+const (
+	Constants_MAX_VERTEX_ATTRIBS                = Constants(16)
+	Constants_MAX_VERTEX_ATTRIB_BINDINGS        = Constants(16)
+	Constants_MAX_VERTEX_ATTRIB_STRIDE          = Constants(2048)
+	Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = Constants(2047)
+)
+
+////////////////////////////////////////////////////////////////////////////////
 // enum ExtensionId
 ////////////////////////////////////////////////////////////////////////////////
 type ExtensionId uint32
@@ -46894,38 +46907,35 @@ func NewGlPopDebugGroup() *GlPopDebugGroup {
 func NewGlPushDebugGroup(Source GLenum, Id GLuint, Length GLsizei, Message memory.Pointer) *GlPushDebugGroup {
 	return &GlPushDebugGroup{Source: Source, Id: Id, Length: Length, Message: GLcharᶜᵖ{Pointer: Message}}
 }
-func NewGlDrawArrays(Draw_mode GLenum, First_index GLint, Index_count GLsizei) *GlDrawArrays {
-	return &GlDrawArrays{DrawMode: Draw_mode, FirstIndex: First_index, IndexCount: Index_count}
+func NewGlDrawArrays(Draw_mode GLenum, First_index GLint, Indices_count GLsizei) *GlDrawArrays {
+	return &GlDrawArrays{DrawMode: Draw_mode, FirstIndex: First_index, IndicesCount: Indices_count}
 }
-func NewGlDrawArraysIndirect(Mode GLenum, Indirect memory.Pointer) *GlDrawArraysIndirect {
-	return &GlDrawArraysIndirect{Mode: Mode, Indirect: Voidᶜᵖ{Pointer: Indirect}}
+func NewGlDrawArraysIndirect(Draw_mode GLenum, Indirect memory.Pointer) *GlDrawArraysIndirect {
+	return &GlDrawArraysIndirect{DrawMode: Draw_mode, Indirect: Voidᶜᵖ{Pointer: Indirect}}
 }
-func NewGlDrawArraysInstanced(Mode GLenum, First GLint, Count GLsizei, Instancecount GLsizei) *GlDrawArraysInstanced {
-	return &GlDrawArraysInstanced{Mode: Mode, First: First, Count: Count, Instancecount: Instancecount}
+func NewGlDrawArraysInstanced(Draw_mode GLenum, First_index GLint, Indices_count GLsizei, Instance_count GLsizei) *GlDrawArraysInstanced {
+	return &GlDrawArraysInstanced{DrawMode: Draw_mode, FirstIndex: First_index, IndicesCount: Indices_count, InstanceCount: Instance_count}
 }
-func NewGlDrawBuffers(N GLsizei, Bufs memory.Pointer) *GlDrawBuffers {
-	return &GlDrawBuffers{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
+func NewGlDrawElements(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer) *GlDrawElements {
+	return &GlDrawElements{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
 }
-func NewGlDrawElements(Draw_mode GLenum, Element_count GLsizei, Indices_type GLenum, Indices memory.Pointer) *GlDrawElements {
-	return &GlDrawElements{DrawMode: Draw_mode, ElementCount: Element_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
+func NewGlDrawElementsBaseVertex(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Base_vertex GLint) *GlDrawElementsBaseVertex {
+	return &GlDrawElementsBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, BaseVertex: Base_vertex}
 }
-func NewGlDrawElementsBaseVertex(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawElementsBaseVertex {
-	return &GlDrawElementsBaseVertex{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+func NewGlDrawElementsIndirect(Draw_mode GLenum, Indices_type GLenum, Indirect memory.Pointer) *GlDrawElementsIndirect {
+	return &GlDrawElementsIndirect{DrawMode: Draw_mode, IndicesType: Indices_type, Indirect: Voidᶜᵖ{Pointer: Indirect}}
 }
-func NewGlDrawElementsIndirect(Mode GLenum, Type GLenum, Indirect memory.Pointer) *GlDrawElementsIndirect {
-	return &GlDrawElementsIndirect{Mode: Mode, Type: Type, Indirect: Voidᶜᵖ{Pointer: Indirect}}
+func NewGlDrawElementsInstanced(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Instance_count GLsizei) *GlDrawElementsInstanced {
+	return &GlDrawElementsInstanced{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, InstanceCount: Instance_count}
 }
-func NewGlDrawElementsInstanced(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei) *GlDrawElementsInstanced {
-	return &GlDrawElementsInstanced{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount}
+func NewGlDrawElementsInstancedBaseVertex(Draw_mode GLenum, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Instance_count GLsizei, Base_vertex GLint) *GlDrawElementsInstancedBaseVertex {
+	return &GlDrawElementsInstancedBaseVertex{DrawMode: Draw_mode, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, InstanceCount: Instance_count, BaseVertex: Base_vertex}
 }
-func NewGlDrawElementsInstancedBaseVertex(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint) *GlDrawElementsInstancedBaseVertex {
-	return &GlDrawElementsInstancedBaseVertex{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
+func NewGlDrawRangeElements(Draw_mode GLenum, Start GLuint, End GLuint, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer) *GlDrawRangeElements {
+	return &GlDrawRangeElements{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
 }
-func NewGlDrawRangeElements(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer) *GlDrawRangeElements {
-	return &GlDrawRangeElements{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}}
-}
-func NewGlDrawRangeElementsBaseVertex(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawRangeElementsBaseVertex {
-	return &GlDrawRangeElementsBaseVertex{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+func NewGlDrawRangeElementsBaseVertex(Draw_mode GLenum, Start GLuint, End GLuint, Indices_count GLsizei, Indices_type GLenum, Indices memory.Pointer, Base_vertex GLint) *GlDrawRangeElementsBaseVertex {
+	return &GlDrawRangeElementsBaseVertex{DrawMode: Draw_mode, Start: Start, End: End, IndicesCount: Indices_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}, BaseVertex: Base_vertex}
 }
 func NewGlPatchParameteri(Pname GLenum, Value GLint) *GlPatchParameteri {
 	return &GlPatchParameteri{Pname: Pname, Value: Value}
@@ -48012,6 +48022,9 @@ func NewGlDeleteRenderbuffers(Count GLsizei, Renderbuffers memory.Pointer) *GlDe
 }
 func NewGlDepthMask(Enabled GLboolean) *GlDepthMask {
 	return &GlDepthMask{Enabled: Enabled}
+}
+func NewGlDrawBuffers(N GLsizei, Bufs memory.Pointer) *GlDrawBuffers {
+	return &GlDrawBuffers{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
 }
 func NewGlFramebufferParameteri(Target GLenum, Pname GLenum, Param GLint) *GlFramebufferParameteri {
 	return &GlFramebufferParameteri{Target: Target, Pname: Pname, Param: Param}

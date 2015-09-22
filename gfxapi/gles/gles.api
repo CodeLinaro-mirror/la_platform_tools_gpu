@@ -50,9 +50,25 @@ macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {  }
 macro void requiresExtension(ExtensionId ext) {  }
 macro void error(string msg) { abort }
 macro void glErrorInvalidEnum(GLenum param) { abort }
-macro void glErrorInvalidEnumIf(bool condition) { if (condition) { abort }  }
-macro void glErrorInvalidOperationIf(bool condition) { if (condition) { abort }  }
-macro void glErrorInvalidValueIf(bool condition) { if (condition) { abort }  }
+
+macro void glErrorInvalidEnumIf(bool condition) {
+  if (condition) {
+    abort
+  }
+}
+
+macro void glErrorInvalidOperationIf(bool condition) {
+  if (condition) {
+    abort
+  }
+}
+
+macro void glErrorInvalidValueIf(bool condition) {
+  if (condition) {
+    abort
+  }
+}
+
 
 enum ExtensionId {
   GL_AMD_performance_monitor                  = 1 ,
@@ -435,6 +451,7 @@ class VertexAttributeArray {
   GLsizei       Stride     = 0        // Byte offset between each consecutive attribute, or 0 for tight.
   BufferId      Buffer     = 0
   VertexPointer Pointer               // Used if Buffer == 0
+  u32           Divisor    = 0
 }
 
 @internal
@@ -827,23 +844,6 @@ cmd CGLError CGLFlushDrawable(CGLContextObj ctx) {
 /////////////////////////////////////////////////////////////////
 // GLES 2 APIs
 /////////////////////////////////////////////////////////////////
-
-macro void ReadVertexArrays(ref!Context ctx, u32 first_index, u32 last_index) {
-  for i in (0 .. len(ctx.VertexAttributeArrays)) {  // TODO: HACK: We need to iterate a map.
-    arr := ctx.VertexAttributeArrays[as!AttributeLocation(i)]
-    if arr.Enabled && arr.Buffer == 0 {
-      elsize := vertexAttribTypeSize(arr.Type) * arr.Size
-      elstride := switch (arr.Stride == 0) {
-        case true:  elsize
-        case false: as!u32(arr.Stride)
-      }
-      for v in (first_index .. (last_index + 1)) {
-        offset := elstride * v
-        read(arr.Pointer[offset:offset + elsize])
-      }
-    }
-  }
-}
 
 macro u32 IndexSize(GLenum indices_type) {
   return switch (indices_type) {

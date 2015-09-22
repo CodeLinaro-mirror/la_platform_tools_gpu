@@ -1019,7 +1019,7 @@ var (
 	binaryIDRect                                             = binary.ID{0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2}
 	binaryIDRasterizerState                                  = binary.ID{0xba, 0xcc, 0xd9, 0x38, 0xef, 0x30, 0x2c, 0x2e, 0x7b, 0xd7, 0x18, 0x82, 0x47, 0x5c, 0x0f, 0xca, 0xd0, 0x70, 0x0c, 0x27}
 	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
-	binaryIDVertexAttributeArray                             = binary.ID{0xd6, 0xdb, 0x80, 0x6a, 0xa4, 0x37, 0x8a, 0xfb, 0x6f, 0x2b, 0xda, 0x40, 0x36, 0x4d, 0x5a, 0x43, 0xf8, 0x16, 0x3e, 0x41}
+	binaryIDVertexAttributeArray                             = binary.ID{0xcb, 0x68, 0xf3, 0x4a, 0x4f, 0x52, 0x58, 0xb4, 0x19, 0xd9, 0xed, 0x71, 0xbf, 0x8e, 0x35, 0x26, 0x23, 0xa0, 0x97, 0x8b}
 	binaryIDTextureUnit                                      = binary.ID{0xbd, 0xaf, 0x42, 0x01, 0x29, 0xb0, 0x1b, 0x44, 0xb0, 0xcb, 0x60, 0x4f, 0x3f, 0x18, 0x2e, 0xa4, 0x44, 0x07, 0x1e, 0x30}
 	binaryIDRenderbuffer                                     = binary.ID{0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd}
 	binaryIDImage                                            = binary.ID{0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb}
@@ -1251,9 +1251,9 @@ var (
 	binaryIDGlDiscardFramebufferEXT                          = binary.ID{0x1f, 0x32, 0x59, 0x0d, 0xc9, 0xef, 0xe6, 0x56, 0xc5, 0x79, 0x69, 0x74, 0x4a, 0x61, 0xd0, 0x20, 0x19, 0x53, 0x62, 0x68}
 	binaryIDGlDispatchCompute                                = binary.ID{0x34, 0x18, 0xc8, 0x09, 0x8f, 0x91, 0x7d, 0x44, 0x06, 0xae, 0x46, 0x8b, 0x63, 0xa3, 0xc8, 0xa5, 0x60, 0xc5, 0xb9, 0x72}
 	binaryIDGlDispatchComputeIndirect                        = binary.ID{0x3b, 0x23, 0xac, 0xf8, 0x0a, 0xde, 0xd3, 0x52, 0x4f, 0x9a, 0xe1, 0x70, 0x15, 0x06, 0xb6, 0x4b, 0x67, 0xa5, 0x18, 0x2b}
-	binaryIDGlDrawArrays                                     = binary.ID{0x5e, 0xa1, 0xf5, 0xa4, 0x27, 0x85, 0xd2, 0xe8, 0xbc, 0xd3, 0x16, 0x49, 0x4d, 0x5b, 0x01, 0xf0, 0x62, 0xbd, 0xf6, 0xdd}
-	binaryIDGlDrawArraysIndirect                             = binary.ID{0xab, 0x8f, 0x91, 0x3e, 0x0c, 0xb5, 0x87, 0xab, 0x8d, 0x50, 0x08, 0x9b, 0x6a, 0x7e, 0x8b, 0xa6, 0xa1, 0x9b, 0x7c, 0x3b}
-	binaryIDGlDrawArraysInstanced                            = binary.ID{0x6c, 0x09, 0xf8, 0x1a, 0xb7, 0x4b, 0xa4, 0x4e, 0xee, 0x89, 0xa6, 0xfa, 0x7d, 0xe5, 0x62, 0x21, 0xb1, 0xaf, 0x59, 0x8a}
+	binaryIDGlDrawArrays                                     = binary.ID{0x58, 0x22, 0x2d, 0xa2, 0x8c, 0x4f, 0xb2, 0xc3, 0x9a, 0x07, 0xbd, 0x35, 0x4a, 0xe8, 0x0c, 0xfe, 0x63, 0xf0, 0xcf, 0x31}
+	binaryIDGlDrawArraysIndirect                             = binary.ID{0xeb, 0x2d, 0xd0, 0x5e, 0xca, 0x21, 0xc9, 0x00, 0x7d, 0x18, 0x9f, 0x05, 0x77, 0x15, 0x97, 0xae, 0x0d, 0x76, 0x32, 0x32}
+	binaryIDGlDrawArraysInstanced                            = binary.ID{0xa9, 0xfa, 0xe5, 0x83, 0xcd, 0x91, 0x04, 0x01, 0x0b, 0xb6, 0x6b, 0xc4, 0x94, 0x80, 0xf8, 0xd7, 0x3b, 0xce, 0x00, 0x72}
 	binaryIDGlDrawArraysInstancedANGLE                       = binary.ID{0xb2, 0xdf, 0x12, 0xaf, 0x14, 0x83, 0x33, 0x84, 0x1c, 0xaf, 0x73, 0xdb, 0xdd, 0x0d, 0xf2, 0xf1, 0xca, 0x22, 0x0f, 0xfc}
 	binaryIDGlDrawArraysInstancedBaseInstanceEXT             = binary.ID{0xe6, 0xd6, 0x8c, 0x07, 0x49, 0x60, 0x3c, 0x43, 0x64, 0xed, 0xb4, 0x70, 0xb2, 0xb7, 0x29, 0x12, 0x37, 0x02, 0x03, 0x21}
 	binaryIDGlDrawArraysInstancedEXT                         = binary.ID{0x84, 0x9b, 0x79, 0x10, 0x73, 0x08, 0x4c, 0xe5, 0x6e, 0x7e, 0x7a, 0x2a, 0xa6, 0x7f, 0xfa, 0x59, 0x87, 0x62, 0xa5, 0x25}
@@ -1263,22 +1263,22 @@ var (
 	binaryIDGlDrawBuffersIndexedEXT                          = binary.ID{0x3b, 0x0d, 0x4a, 0xc2, 0xfd, 0x1b, 0xf6, 0xc5, 0x75, 0xfe, 0xdc, 0xdc, 0x21, 0xb5, 0xee, 0x5e, 0x7b, 0x27, 0x8b, 0x8f}
 	binaryIDGlDrawBuffersNV                                  = binary.ID{0xc6, 0x1b, 0x87, 0xe0, 0x77, 0x2c, 0xb7, 0x3d, 0x12, 0x20, 0xc1, 0xe0, 0x5a, 0xca, 0x0a, 0x1d, 0x1c, 0x3d, 0xf6, 0x68}
 	binaryIDIndicesPointer                                   = binary.ID{0x7e, 0xb8, 0x8d, 0x27, 0x89, 0x30, 0x52, 0x1b, 0x7e, 0x06, 0x18, 0xa0, 0x43, 0x8e, 0x88, 0xaa, 0x0c, 0xe6, 0x72, 0x10}
-	binaryIDGlDrawElements                                   = binary.ID{0xc3, 0x58, 0xa6, 0xb5, 0xe7, 0x4e, 0xbd, 0x61, 0xec, 0x16, 0x06, 0xd9, 0x56, 0x28, 0x29, 0x63, 0xd7, 0x60, 0x26, 0xe0}
-	binaryIDGlDrawElementsBaseVertex                         = binary.ID{0x7b, 0xcf, 0x5b, 0x52, 0xeb, 0x7f, 0xfd, 0x8f, 0xf8, 0x1f, 0x8f, 0xdb, 0xf2, 0x13, 0xb0, 0x7f, 0x07, 0x42, 0x8d, 0xcb}
+	binaryIDGlDrawElements                                   = binary.ID{0xa2, 0x8b, 0x26, 0x09, 0x0e, 0x50, 0xcc, 0x9e, 0x69, 0xf7, 0xe6, 0x1e, 0xd6, 0xcc, 0xd2, 0x12, 0x02, 0x76, 0x28, 0xb8}
+	binaryIDGlDrawElementsBaseVertex                         = binary.ID{0x0b, 0x5f, 0xa6, 0xd9, 0x5b, 0xbd, 0x5f, 0x7b, 0xd3, 0x57, 0x63, 0x9a, 0x33, 0x2a, 0x2a, 0xe6, 0x5f, 0x9f, 0x62, 0x1b}
 	binaryIDGlDrawElementsBaseVertexEXT                      = binary.ID{0xc6, 0x01, 0x2e, 0xdc, 0x7b, 0x58, 0xf2, 0xb8, 0x08, 0x31, 0x59, 0x03, 0xe4, 0x97, 0x8b, 0x6b, 0x18, 0xe8, 0x31, 0xc7}
 	binaryIDGlDrawElementsBaseVertexOES                      = binary.ID{0xbe, 0x27, 0x39, 0x73, 0xfa, 0x5b, 0xd9, 0x8b, 0x5e, 0xd7, 0x41, 0x62, 0x63, 0x34, 0xc0, 0x0a, 0x19, 0x33, 0x8a, 0x3d}
-	binaryIDGlDrawElementsIndirect                           = binary.ID{0xd5, 0x00, 0xcf, 0x09, 0x73, 0x64, 0x3c, 0x94, 0x29, 0xe9, 0x2d, 0x19, 0x51, 0x2e, 0x90, 0x74, 0xd8, 0x45, 0xfa, 0x99}
-	binaryIDGlDrawElementsInstanced                          = binary.ID{0x91, 0xe0, 0xbc, 0x3c, 0xfd, 0x58, 0x09, 0x0c, 0xaa, 0x9f, 0xc2, 0xe0, 0xd0, 0x66, 0xfa, 0x0c, 0x14, 0x72, 0x88, 0xa1}
+	binaryIDGlDrawElementsIndirect                           = binary.ID{0xfc, 0xf9, 0x38, 0x40, 0x3f, 0x25, 0x6e, 0x15, 0xcb, 0xed, 0x63, 0x2c, 0x8b, 0x16, 0x56, 0x04, 0x34, 0xc0, 0x0c, 0x94}
+	binaryIDGlDrawElementsInstanced                          = binary.ID{0x26, 0xd8, 0x86, 0x70, 0x27, 0x1d, 0x78, 0x88, 0x4b, 0x5d, 0x41, 0x19, 0x71, 0x9d, 0xab, 0xa5, 0x53, 0x47, 0x48, 0xe5}
 	binaryIDGlDrawElementsInstancedANGLE                     = binary.ID{0x83, 0x76, 0x1f, 0xd9, 0x3f, 0xed, 0x34, 0x62, 0x16, 0xcf, 0x29, 0x29, 0x19, 0x3c, 0x6c, 0xe3, 0x6c, 0xd3, 0x26, 0xc2}
 	binaryIDGlDrawElementsInstancedBaseInstanceEXT           = binary.ID{0x3d, 0xde, 0x19, 0x3a, 0xb5, 0x36, 0x1b, 0x45, 0x80, 0x89, 0xdc, 0x02, 0x58, 0x66, 0xcf, 0x60, 0x51, 0x5b, 0xb7, 0xb6}
-	binaryIDGlDrawElementsInstancedBaseVertex                = binary.ID{0xf6, 0x6c, 0xb5, 0xcd, 0x59, 0xc2, 0x7f, 0x89, 0x91, 0x80, 0xe2, 0x2c, 0x8a, 0xd3, 0x0c, 0x85, 0x32, 0x54, 0x00, 0xde}
+	binaryIDGlDrawElementsInstancedBaseVertex                = binary.ID{0xf3, 0xd4, 0xf8, 0x69, 0x06, 0xa0, 0x27, 0xc8, 0xf9, 0x1f, 0xa4, 0x0a, 0xec, 0xbe, 0xbe, 0x5f, 0xaa, 0xa1, 0xe5, 0x5d}
 	binaryIDGlDrawElementsInstancedBaseVertexBaseInstanceEXT = binary.ID{0x5b, 0xfd, 0x0a, 0x10, 0x30, 0x0e, 0xb7, 0x0e, 0xbd, 0xdd, 0x9f, 0x38, 0x86, 0xb0, 0xf4, 0xd2, 0x45, 0x92, 0x56, 0xed}
 	binaryIDGlDrawElementsInstancedBaseVertexEXT             = binary.ID{0xba, 0xd4, 0x6d, 0x5d, 0xf5, 0x36, 0xe1, 0xe1, 0xd8, 0x3c, 0x37, 0x9b, 0x3c, 0xc0, 0x0a, 0xc5, 0x9b, 0x2d, 0x3f, 0x37}
 	binaryIDGlDrawElementsInstancedBaseVertexOES             = binary.ID{0x12, 0xc0, 0xab, 0x32, 0x0e, 0xae, 0x13, 0x66, 0xd8, 0xfc, 0x60, 0x52, 0xbc, 0x4c, 0x9e, 0x27, 0xd3, 0xc9, 0x08, 0xc1}
 	binaryIDGlDrawElementsInstancedEXT                       = binary.ID{0x0d, 0x88, 0x26, 0x49, 0xf0, 0x60, 0x4e, 0xb6, 0x87, 0xe0, 0x20, 0xff, 0x37, 0xf7, 0x5e, 0x1c, 0xcc, 0x64, 0xd8, 0x79}
 	binaryIDGlDrawElementsInstancedNV                        = binary.ID{0x93, 0xc6, 0x5d, 0xbb, 0x00, 0x86, 0xef, 0x5b, 0x74, 0xd3, 0xaf, 0xb0, 0xd0, 0x0b, 0x5d, 0x39, 0x3e, 0x12, 0x83, 0x46}
-	binaryIDGlDrawRangeElements                              = binary.ID{0xd9, 0x92, 0x7c, 0x94, 0x49, 0xdf, 0x20, 0x5c, 0x2f, 0xc4, 0x45, 0x7f, 0x52, 0xaf, 0x90, 0xc6, 0xc6, 0xf3, 0x05, 0xfc}
-	binaryIDGlDrawRangeElementsBaseVertex                    = binary.ID{0x80, 0xfa, 0xf4, 0xfc, 0x70, 0xbb, 0x83, 0xe0, 0x61, 0x66, 0xf4, 0x9b, 0xe9, 0xf5, 0x48, 0x9d, 0xd9, 0x08, 0xdb, 0x18}
+	binaryIDGlDrawRangeElements                              = binary.ID{0x3d, 0x48, 0x0c, 0x4f, 0x75, 0xb9, 0x87, 0x6e, 0x10, 0xe0, 0x0d, 0x37, 0x80, 0x25, 0xed, 0x1b, 0x4c, 0x57, 0x37, 0xd9}
+	binaryIDGlDrawRangeElementsBaseVertex                    = binary.ID{0x3d, 0x02, 0x31, 0xaa, 0xa4, 0x15, 0xf5, 0xd6, 0x10, 0x7c, 0x9b, 0x49, 0xe2, 0xa1, 0x79, 0x51, 0x9c, 0x33, 0x88, 0x8a}
 	binaryIDGlDrawRangeElementsBaseVertexEXT                 = binary.ID{0x92, 0x94, 0x02, 0xd3, 0x32, 0xb2, 0x99, 0xa2, 0x4a, 0xff, 0x98, 0x22, 0x13, 0xc7, 0x03, 0x86, 0x09, 0xed, 0x4e, 0xb2}
 	binaryIDGlDrawRangeElementsBaseVertexOES                 = binary.ID{0x7c, 0xf8, 0x8a, 0x03, 0x92, 0x54, 0x07, 0xb7, 0x9f, 0xd7, 0x4a, 0x4e, 0x8a, 0x4a, 0xeb, 0xe6, 0x85, 0x22, 0xe5, 0xdb}
 	binaryIDGlEGLImageTargetRenderbufferStorageOES           = binary.ID{0x9e, 0xae, 0xc5, 0x0e, 0x81, 0x91, 0x4d, 0x5f, 0xf3, 0x64, 0xf6, 0x07, 0xea, 0x99, 0x07, 0x09, 0x76, 0x25, 0xd8, 0x7f}
@@ -3401,6 +3401,7 @@ func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) err
 	e.Int32(int32(o.Stride))
 	e.Uint32(uint32(o.Buffer))
 	e.Value(&o.Pointer)
+	e.Uint32(o.Divisor)
 	return e.Error()
 }
 func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
@@ -3411,6 +3412,7 @@ func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) err
 	o.Stride = GLsizei(binary.ReadInt32(d))
 	o.Buffer = BufferId(binary.ReadUint32(d))
 	d.Value(&o.Pointer)
+	o.Divisor = uint32(binary.ReadUint32(d))
 	return d.Error()
 }
 func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
@@ -3439,6 +3441,7 @@ var schemaVertexAttributeArray = &schema.Class{
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
+		{Declared: "Divisor", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -14113,14 +14116,14 @@ func doEncodeGlDrawArrays(e binary.Encoder, o *GlDrawArrays) error {
 	e.Value(&o.observations)
 	e.Uint32(uint32(o.DrawMode))
 	e.Int32(int32(o.FirstIndex))
-	e.Int32(int32(o.IndexCount))
+	e.Int32(int32(o.IndicesCount))
 	return e.Error()
 }
 func doDecodeGlDrawArrays(d binary.Decoder, o *GlDrawArrays) error {
 	d.Value(&o.observations)
 	o.DrawMode = GLenum(binary.ReadUint32(d))
 	o.FirstIndex = GLint(binary.ReadInt32(d))
-	o.IndexCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawArrays) ID() binary.ID      { return binaryIDGlDrawArrays }
@@ -14145,7 +14148,7 @@ var schemaGlDrawArrays = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "IndexCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -14156,13 +14159,13 @@ func (*GlDrawArraysIndirect) Class() binary.Class {
 }
 func doEncodeGlDrawArraysIndirect(e binary.Encoder, o *GlDrawArraysIndirect) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
+	e.Uint32(uint32(o.DrawMode))
 	e.Value(&o.Indirect)
 	return e.Error()
 }
 func doDecodeGlDrawArraysIndirect(d binary.Decoder, o *GlDrawArraysIndirect) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indirect)
 	return d.Error()
 }
@@ -14186,7 +14189,7 @@ var schemaGlDrawArraysIndirect = &schema.Class{
 	Name:    "GlDrawArraysIndirect",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indirect", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 	},
 }
@@ -14198,18 +14201,18 @@ func (*GlDrawArraysInstanced) Class() binary.Class {
 }
 func doEncodeGlDrawArraysInstanced(e binary.Encoder, o *GlDrawArraysInstanced) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
-	e.Int32(int32(o.First))
-	e.Int32(int32(o.Count))
-	e.Int32(int32(o.Instancecount))
+	e.Uint32(uint32(o.DrawMode))
+	e.Int32(int32(o.FirstIndex))
+	e.Int32(int32(o.IndicesCount))
+	e.Int32(int32(o.InstanceCount))
 	return e.Error()
 }
 func doDecodeGlDrawArraysInstanced(d binary.Decoder, o *GlDrawArraysInstanced) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
-	o.First = GLint(binary.ReadInt32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Instancecount = GLsizei(binary.ReadInt32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
+	o.FirstIndex = GLint(binary.ReadInt32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.InstanceCount = GLsizei(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawArraysInstanced) ID() binary.ID      { return binaryIDGlDrawArraysInstanced }
@@ -14232,10 +14235,10 @@ var schemaGlDrawArraysInstanced = &schema.Class{
 	Name:    "GlDrawArraysInstanced",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "InstanceCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -14667,7 +14670,7 @@ func (*GlDrawElements) Class() binary.Class {
 func doEncodeGlDrawElements(e binary.Encoder, o *GlDrawElements) error {
 	e.Value(&o.observations)
 	e.Uint32(uint32(o.DrawMode))
-	e.Int32(int32(o.ElementCount))
+	e.Int32(int32(o.IndicesCount))
 	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
 	return e.Error()
@@ -14675,7 +14678,7 @@ func doEncodeGlDrawElements(e binary.Encoder, o *GlDrawElements) error {
 func doDecodeGlDrawElements(d binary.Decoder, o *GlDrawElements) error {
 	d.Value(&o.observations)
 	o.DrawMode = GLenum(binary.ReadUint32(d))
-	o.ElementCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
 	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
 	return d.Error()
@@ -14701,7 +14704,7 @@ var schemaGlDrawElements = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "ElementCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
 	},
@@ -14714,20 +14717,20 @@ func (*GlDrawElementsBaseVertex) Class() binary.Class {
 }
 func doEncodeGlDrawElementsBaseVertex(e binary.Encoder, o *GlDrawElementsBaseVertex) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
-	e.Int32(int32(o.Count))
-	e.Uint32(uint32(o.Type))
+	e.Uint32(uint32(o.DrawMode))
+	e.Int32(int32(o.IndicesCount))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
-	e.Int32(int32(o.Basevertex))
+	e.Int32(int32(o.BaseVertex))
 	return e.Error()
 }
 func doDecodeGlDrawElementsBaseVertex(d binary.Decoder, o *GlDrawElementsBaseVertex) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
-	o.Basevertex = GLint(binary.ReadInt32(d))
+	o.BaseVertex = GLint(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawElementsBaseVertex) ID() binary.ID      { return binaryIDGlDrawElementsBaseVertex }
@@ -14752,11 +14755,11 @@ var schemaGlDrawElementsBaseVertex = &schema.Class{
 	Name:    "GlDrawElementsBaseVertex",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
-		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
+		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -14881,15 +14884,15 @@ func (*GlDrawElementsIndirect) Class() binary.Class {
 }
 func doEncodeGlDrawElementsIndirect(e binary.Encoder, o *GlDrawElementsIndirect) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
-	e.Uint32(uint32(o.Type))
+	e.Uint32(uint32(o.DrawMode))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indirect)
 	return e.Error()
 }
 func doDecodeGlDrawElementsIndirect(d binary.Decoder, o *GlDrawElementsIndirect) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indirect)
 	return d.Error()
 }
@@ -14913,8 +14916,8 @@ var schemaGlDrawElementsIndirect = &schema.Class{
 	Name:    "GlDrawElementsIndirect",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indirect", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
 	},
 }
@@ -14926,20 +14929,20 @@ func (*GlDrawElementsInstanced) Class() binary.Class {
 }
 func doEncodeGlDrawElementsInstanced(e binary.Encoder, o *GlDrawElementsInstanced) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
-	e.Int32(int32(o.Count))
-	e.Uint32(uint32(o.Type))
+	e.Uint32(uint32(o.DrawMode))
+	e.Int32(int32(o.IndicesCount))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
-	e.Int32(int32(o.Instancecount))
+	e.Int32(int32(o.InstanceCount))
 	return e.Error()
 }
 func doDecodeGlDrawElementsInstanced(d binary.Decoder, o *GlDrawElementsInstanced) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
-	o.Instancecount = GLsizei(binary.ReadInt32(d))
+	o.InstanceCount = GLsizei(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawElementsInstanced) ID() binary.ID      { return binaryIDGlDrawElementsInstanced }
@@ -14964,11 +14967,11 @@ var schemaGlDrawElementsInstanced = &schema.Class{
 	Name:    "GlDrawElementsInstanced",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
-		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
+		{Declared: "InstanceCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -15096,22 +15099,22 @@ func (*GlDrawElementsInstancedBaseVertex) Class() binary.Class {
 }
 func doEncodeGlDrawElementsInstancedBaseVertex(e binary.Encoder, o *GlDrawElementsInstancedBaseVertex) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
-	e.Int32(int32(o.Count))
-	e.Uint32(uint32(o.Type))
+	e.Uint32(uint32(o.DrawMode))
+	e.Int32(int32(o.IndicesCount))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
-	e.Int32(int32(o.Instancecount))
-	e.Int32(int32(o.Basevertex))
+	e.Int32(int32(o.InstanceCount))
+	e.Int32(int32(o.BaseVertex))
 	return e.Error()
 }
 func doDecodeGlDrawElementsInstancedBaseVertex(d binary.Decoder, o *GlDrawElementsInstancedBaseVertex) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
-	o.Instancecount = GLsizei(binary.ReadInt32(d))
-	o.Basevertex = GLint(binary.ReadInt32(d))
+	o.InstanceCount = GLsizei(binary.ReadInt32(d))
+	o.BaseVertex = GLint(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawElementsInstancedBaseVertex) ID() binary.ID {
@@ -15140,12 +15143,12 @@ var schemaGlDrawElementsInstancedBaseVertex = &schema.Class{
 	Name:    "GlDrawElementsInstancedBaseVertex",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
-		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
+		{Declared: "InstanceCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -15449,21 +15452,21 @@ func (*GlDrawRangeElements) Class() binary.Class {
 }
 func doEncodeGlDrawRangeElements(e binary.Encoder, o *GlDrawRangeElements) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
+	e.Uint32(uint32(o.DrawMode))
 	e.Uint32(uint32(o.Start))
 	e.Uint32(uint32(o.End))
-	e.Int32(int32(o.Count))
-	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.IndicesCount))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
 	return e.Error()
 }
 func doDecodeGlDrawRangeElements(d binary.Decoder, o *GlDrawRangeElements) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
 	o.Start = GLuint(binary.ReadUint32(d))
 	o.End = GLuint(binary.ReadUint32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
 	return d.Error()
 }
@@ -15487,12 +15490,12 @@ var schemaGlDrawRangeElements = &schema.Class{
 	Name:    "GlDrawRangeElements",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
 	},
 }
 
@@ -15503,24 +15506,24 @@ func (*GlDrawRangeElementsBaseVertex) Class() binary.Class {
 }
 func doEncodeGlDrawRangeElementsBaseVertex(e binary.Encoder, o *GlDrawRangeElementsBaseVertex) error {
 	e.Value(&o.observations)
-	e.Uint32(uint32(o.Mode))
+	e.Uint32(uint32(o.DrawMode))
 	e.Uint32(uint32(o.Start))
 	e.Uint32(uint32(o.End))
-	e.Int32(int32(o.Count))
-	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.IndicesCount))
+	e.Uint32(uint32(o.IndicesType))
 	e.Value(&o.Indices)
-	e.Int32(int32(o.Basevertex))
+	e.Int32(int32(o.BaseVertex))
 	return e.Error()
 }
 func doDecodeGlDrawRangeElementsBaseVertex(d binary.Decoder, o *GlDrawRangeElementsBaseVertex) error {
 	d.Value(&o.observations)
-	o.Mode = GLenum(binary.ReadUint32(d))
+	o.DrawMode = GLenum(binary.ReadUint32(d))
 	o.Start = GLuint(binary.ReadUint32(d))
 	o.End = GLuint(binary.ReadUint32(d))
-	o.Count = GLsizei(binary.ReadInt32(d))
-	o.Type = GLenum(binary.ReadUint32(d))
+	o.IndicesCount = GLsizei(binary.ReadInt32(d))
+	o.IndicesType = GLenum(binary.ReadUint32(d))
 	d.Value(&o.Indices)
-	o.Basevertex = GLint(binary.ReadInt32(d))
+	o.BaseVertex = GLint(binary.ReadInt32(d))
 	return d.Error()
 }
 func (*binaryClassGlDrawRangeElementsBaseVertex) ID() binary.ID {
@@ -15549,13 +15552,13 @@ var schemaGlDrawRangeElementsBaseVertex = &schema.Class{
 	Name:    "GlDrawRangeElementsBaseVertex",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Name: "Voidᶜᵖ", ID: (*Voidᶜᵖ)(nil).Class().ID()}},
-		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
+		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -46750,6 +46753,42 @@ var schemagenerate_types = &schema.Class{
 }
 
 var ConstantValues schema.Constants
+
+var _Constants_map = map[Constants]string{}
+
+func init() {
+	_Constants_map[16] = "MAX_VERTEX_ATTRIBS"
+	_Constants_map[16] = "MAX_VERTEX_ATTRIB_BINDINGS"
+	_Constants_map[2047] = "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET"
+	_Constants_map[2048] = "MAX_VERTEX_ATTRIB_STRIDE"
+
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Constants", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: "MAX_VERTEX_ATTRIBS", Value: uint32(16)},
+			{Name: "MAX_VERTEX_ATTRIB_BINDINGS", Value: uint32(16)},
+			{Name: "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET", Value: uint32(2047)},
+			{Name: "MAX_VERTEX_ATTRIB_STRIDE", Value: uint32(2048)},
+		},
+	})
+}
+
+func (v Constants) String() string {
+	if s, ok := _Constants_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Constants(%d)", v)
+}
+
+func (v *Constants) Parse(s string) error {
+	for k, t := range _Constants_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Constants", s)
+}
 
 var _ExtensionId_map = map[ExtensionId]string{}
 

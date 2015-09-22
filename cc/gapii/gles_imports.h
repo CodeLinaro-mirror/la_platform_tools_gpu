@@ -151,28 +151,30 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLPUSHDEBUGGROUP)(uint32_t source, uint32_t id, int32_t length,
                                                char *message);
     typedef void(STDCALL *PFNGLDRAWARRAYS)(uint32_t draw_mode, int32_t first_index,
-                                           int32_t index_count);
-    typedef void(STDCALL *PFNGLDRAWARRAYSINDIRECT)(uint32_t mode, void *indirect);
-    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCED)(uint32_t mode, int32_t first, int32_t count,
-                                                    int32_t instancecount);
-    typedef void(STDCALL *PFNGLDRAWBUFFERS)(int32_t n, uint32_t *bufs);
-    typedef void(STDCALL *PFNGLDRAWELEMENTS)(uint32_t draw_mode, int32_t element_count,
+                                           int32_t indices_count);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINDIRECT)(uint32_t draw_mode, void *indirect);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCED)(uint32_t draw_mode, int32_t first_index,
+                                                    int32_t indices_count, int32_t instance_count);
+    typedef void(STDCALL *PFNGLDRAWELEMENTS)(uint32_t draw_mode, int32_t indices_count,
                                              uint32_t indices_type, void *indices);
-    typedef void(STDCALL *PFNGLDRAWELEMENTSBASEVERTEX)(uint32_t mode, int32_t count, uint32_t type,
-                                                       void *indices, int32_t basevertex);
-    typedef void(STDCALL *PFNGLDRAWELEMENTSINDIRECT)(uint32_t mode, uint32_t type, void *indirect);
-    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCED)(uint32_t mode, int32_t count, uint32_t type,
-                                                      void *indices, int32_t instancecount);
-    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX)(uint32_t mode, int32_t count,
-                                                                uint32_t type, void *indices,
-                                                                int32_t instancecount,
-                                                                int32_t basevertex);
-    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTS)(uint32_t mode, uint32_t start, uint32_t end,
-                                                  int32_t count, uint32_t type, void *indices);
-    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTSBASEVERTEX)(uint32_t mode, uint32_t start,
-                                                            uint32_t end, int32_t count,
-                                                            uint32_t type, void *indices,
-                                                            int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSBASEVERTEX)(uint32_t draw_mode, int32_t indices_count,
+                                                       uint32_t indices_type, void *indices,
+                                                       int32_t base_vertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINDIRECT)(uint32_t draw_mode, uint32_t indices_type,
+                                                     void *indirect);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCED)(uint32_t draw_mode, int32_t indices_count,
+                                                      uint32_t indices_type, void *indices,
+                                                      int32_t instance_count);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEX)(
+            uint32_t draw_mode, int32_t indices_count, uint32_t indices_type, void *indices,
+            int32_t instance_count, int32_t base_vertex);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTS)(uint32_t draw_mode, uint32_t start, uint32_t end,
+                                                  int32_t indices_count, uint32_t indices_type,
+                                                  void *indices);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTSBASEVERTEX)(uint32_t draw_mode, uint32_t start,
+                                                            uint32_t end, int32_t indices_count,
+                                                            uint32_t indices_type, void *indices,
+                                                            int32_t base_vertex);
     typedef void(STDCALL *PFNGLPATCHPARAMETERI)(uint32_t pname, int32_t value);
     typedef void(STDCALL *PFNGLPRIMITIVEBOUNDINGBOX)(float minX, float minY, float minZ, float minW,
                                                      float maxX, float maxY, float maxZ,
@@ -886,6 +888,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
     typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
     typedef void(STDCALL *PFNGLDEPTHMASK)(uint8_t enabled);
+    typedef void(STDCALL *PFNGLDRAWBUFFERS)(int32_t n, uint32_t *bufs);
     typedef void(STDCALL *PFNGLFRAMEBUFFERPARAMETERI)(uint32_t target, uint32_t pname,
                                                       int32_t param);
     typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(uint32_t framebuffer_target,
@@ -1477,7 +1480,6 @@ struct GlesImports {
     PFNGLDRAWARRAYS glDrawArrays;
     PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect;
     PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced;
-    PFNGLDRAWBUFFERS glDrawBuffers;
     PFNGLDRAWELEMENTS glDrawElements;
     PFNGLDRAWELEMENTSBASEVERTEX glDrawElementsBaseVertex;
     PFNGLDRAWELEMENTSINDIRECT glDrawElementsIndirect;
@@ -1848,6 +1850,7 @@ struct GlesImports {
     PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers;
     PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers;
     PFNGLDEPTHMASK glDepthMask;
+    PFNGLDRAWBUFFERS glDrawBuffers;
     PFNGLFRAMEBUFFERPARAMETERI glFramebufferParameteri;
     PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer;
     PFNGLFRAMEBUFFERTEXTURE glFramebufferTexture;

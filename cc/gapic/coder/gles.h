@@ -759,16 +759,17 @@ namespace gles {
     class VertexAttributeArray: public Encodable {
     public:
         VertexAttributeArray() = default;
-        VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, uint32_t Buffer, VertexPointer Pointer) :
+        VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, uint32_t Buffer, VertexPointer Pointer, uint32_t Divisor) :
             mEnabled(Enabled),
             mSize(Size),
             mType(Type),
             mNormalized(Normalized),
             mStride(Stride),
             mBuffer(Buffer),
-            mPointer(Pointer) {}
+            mPointer(Pointer),
+            mDivisor(Divisor) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd6, 0xdb, 0x80, 0x6a, 0xa4, 0x37, 0x8a, 0xfb, 0x6f, 0x2b, 0xda, 0x40, 0x36, 0x4d, 0x5a, 0x43, 0xf8, 0x16, 0x3e, 0x41,  } };
+            static gapic::Id ID{ { 0xcb, 0x68, 0xf3, 0x4a, 0x4f, 0x52, 0x58, 0xb4, 0x19, 0xd9, 0xed, 0x71, 0xbf, 0x8e, 0x35, 0x26, 0x23, 0xa0, 0x97, 0x8b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -779,6 +780,7 @@ namespace gles {
             e->Int32(this->mStride);
             e->Uint32(this->mBuffer);
             e->Value(this->mPointer);
+            e->Uint32(this->mDivisor);
         }
 
         bool mEnabled;
@@ -788,6 +790,7 @@ namespace gles {
         int32_t mStride;
         uint32_t mBuffer;
         VertexPointer mPointer;
+        uint32_t mDivisor;
     };
 
     class TextureUnit: public Encodable {
@@ -6242,76 +6245,76 @@ namespace gles {
     class GlDrawArrays: public Encodable {
     public:
         GlDrawArrays() = default;
-        GlDrawArrays(atom::Observations observations, uint32_t DrawMode, int32_t FirstIndex, int32_t IndexCount) :
+        GlDrawArrays(atom::Observations observations, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount) :
             mobservations(observations),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
-            mIndexCount(IndexCount) {}
+            mIndicesCount(IndicesCount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5e, 0xa1, 0xf5, 0xa4, 0x27, 0x85, 0xd2, 0xe8, 0xbc, 0xd3, 0x16, 0x49, 0x4d, 0x5b, 0x01, 0xf0, 0x62, 0xbd, 0xf6, 0xdd,  } };
+            static gapic::Id ID{ { 0x58, 0x22, 0x2d, 0xa2, 0x8c, 0x4f, 0xb2, 0xc3, 0x9a, 0x07, 0xbd, 0x35, 0x4a, 0xe8, 0x0c, 0xfe, 0x63, 0xf0, 0xcf, 0x31,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mDrawMode);
             e->Int32(this->mFirstIndex);
-            e->Int32(this->mIndexCount);
+            e->Int32(this->mIndicesCount);
         }
 
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mFirstIndex;
-        int32_t mIndexCount;
+        int32_t mIndicesCount;
     };
 
     class GlDrawArraysIndirect: public Encodable {
     public:
         GlDrawArraysIndirect() = default;
-        GlDrawArraysIndirect(atom::Observations observations, uint32_t Mode, Void__CP Indirect) :
+        GlDrawArraysIndirect(atom::Observations observations, uint32_t DrawMode, Void__CP Indirect) :
             mobservations(observations),
-            mMode(Mode),
+            mDrawMode(DrawMode),
             mIndirect(Indirect) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xab, 0x8f, 0x91, 0x3e, 0x0c, 0xb5, 0x87, 0xab, 0x8d, 0x50, 0x08, 0x9b, 0x6a, 0x7e, 0x8b, 0xa6, 0xa1, 0x9b, 0x7c, 0x3b,  } };
+            static gapic::Id ID{ { 0xeb, 0x2d, 0xd0, 0x5e, 0xca, 0x21, 0xc9, 0x00, 0x7d, 0x18, 0x9f, 0x05, 0x77, 0x15, 0x97, 0xae, 0x0d, 0x76, 0x32, 0x32,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
+            e->Uint32(this->mDrawMode);
             e->Value(this->mIndirect);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
+        uint32_t mDrawMode;
         Void__CP mIndirect;
     };
 
     class GlDrawArraysInstanced: public Encodable {
     public:
         GlDrawArraysInstanced() = default;
-        GlDrawArraysInstanced(atom::Observations observations, uint32_t Mode, int32_t First, int32_t Count, int32_t Instancecount) :
+        GlDrawArraysInstanced(atom::Observations observations, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount, int32_t InstanceCount) :
             mobservations(observations),
-            mMode(Mode),
-            mFirst(First),
-            mCount(Count),
-            mInstancecount(Instancecount) {}
+            mDrawMode(DrawMode),
+            mFirstIndex(FirstIndex),
+            mIndicesCount(IndicesCount),
+            mInstanceCount(InstanceCount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6c, 0x09, 0xf8, 0x1a, 0xb7, 0x4b, 0xa4, 0x4e, 0xee, 0x89, 0xa6, 0xfa, 0x7d, 0xe5, 0x62, 0x21, 0xb1, 0xaf, 0x59, 0x8a,  } };
+            static gapic::Id ID{ { 0xa9, 0xfa, 0xe5, 0x83, 0xcd, 0x91, 0x04, 0x01, 0x0b, 0xb6, 0x6b, 0xc4, 0x94, 0x80, 0xf8, 0xd7, 0x3b, 0xce, 0x00, 0x72,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
-            e->Int32(this->mFirst);
-            e->Int32(this->mCount);
-            e->Int32(this->mInstancecount);
+            e->Uint32(this->mDrawMode);
+            e->Int32(this->mFirstIndex);
+            e->Int32(this->mIndicesCount);
+            e->Int32(this->mInstanceCount);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
-        int32_t mFirst;
-        int32_t mCount;
-        int32_t mInstancecount;
+        uint32_t mDrawMode;
+        int32_t mFirstIndex;
+        int32_t mIndicesCount;
+        int32_t mInstanceCount;
     };
 
     class GlDrawArraysInstancedANGLE: public Encodable {
@@ -6539,27 +6542,27 @@ namespace gles {
     class GlDrawElements: public Encodable {
     public:
         GlDrawElements() = default;
-        GlDrawElements(atom::Observations observations, uint32_t DrawMode, int32_t ElementCount, uint32_t IndicesType, IndicesPointer Indices) :
+        GlDrawElements(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
             mobservations(observations),
             mDrawMode(DrawMode),
-            mElementCount(ElementCount),
+            mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
             mIndices(Indices) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc3, 0x58, 0xa6, 0xb5, 0xe7, 0x4e, 0xbd, 0x61, 0xec, 0x16, 0x06, 0xd9, 0x56, 0x28, 0x29, 0x63, 0xd7, 0x60, 0x26, 0xe0,  } };
+            static gapic::Id ID{ { 0xa2, 0x8b, 0x26, 0x09, 0x0e, 0x50, 0xcc, 0x9e, 0x69, 0xf7, 0xe6, 0x1e, 0xd6, 0xcc, 0xd2, 0x12, 0x02, 0x76, 0x28, 0xb8,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mDrawMode);
-            e->Int32(this->mElementCount);
+            e->Int32(this->mIndicesCount);
             e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
         }
 
         atom::Observations mobservations;
         uint32_t mDrawMode;
-        int32_t mElementCount;
+        int32_t mIndicesCount;
         uint32_t mIndicesType;
         IndicesPointer mIndices;
     };
@@ -6567,32 +6570,32 @@ namespace gles {
     class GlDrawElementsBaseVertex: public Encodable {
     public:
         GlDrawElementsBaseVertex() = default;
-        GlDrawElementsBaseVertex(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawElementsBaseVertex(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
             mobservations(observations),
-            mMode(Mode),
-            mCount(Count),
-            mType(Type),
+            mDrawMode(DrawMode),
+            mIndicesCount(IndicesCount),
+            mIndicesType(IndicesType),
             mIndices(Indices),
-            mBasevertex(Basevertex) {}
+            mBaseVertex(BaseVertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7b, 0xcf, 0x5b, 0x52, 0xeb, 0x7f, 0xfd, 0x8f, 0xf8, 0x1f, 0x8f, 0xdb, 0xf2, 0x13, 0xb0, 0x7f, 0x07, 0x42, 0x8d, 0xcb,  } };
+            static gapic::Id ID{ { 0x0b, 0x5f, 0xa6, 0xd9, 0x5b, 0xbd, 0x5f, 0x7b, 0xd3, 0x57, 0x63, 0x9a, 0x33, 0x2a, 0x2a, 0xe6, 0x5f, 0x9f, 0x62, 0x1b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
-            e->Int32(this->mCount);
-            e->Uint32(this->mType);
+            e->Uint32(this->mDrawMode);
+            e->Int32(this->mIndicesCount);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
-            e->Int32(this->mBasevertex);
+            e->Int32(this->mBaseVertex);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
-        int32_t mCount;
-        uint32_t mType;
-        Void__CP mIndices;
-        int32_t mBasevertex;
+        uint32_t mDrawMode;
+        int32_t mIndicesCount;
+        uint32_t mIndicesType;
+        IndicesPointer mIndices;
+        int32_t mBaseVertex;
     };
 
     class GlDrawElementsBaseVertexEXT: public Encodable {
@@ -6660,57 +6663,57 @@ namespace gles {
     class GlDrawElementsIndirect: public Encodable {
     public:
         GlDrawElementsIndirect() = default;
-        GlDrawElementsIndirect(atom::Observations observations, uint32_t Mode, uint32_t Type, Void__CP Indirect) :
+        GlDrawElementsIndirect(atom::Observations observations, uint32_t DrawMode, uint32_t IndicesType, Void__CP Indirect) :
             mobservations(observations),
-            mMode(Mode),
-            mType(Type),
+            mDrawMode(DrawMode),
+            mIndicesType(IndicesType),
             mIndirect(Indirect) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd5, 0x00, 0xcf, 0x09, 0x73, 0x64, 0x3c, 0x94, 0x29, 0xe9, 0x2d, 0x19, 0x51, 0x2e, 0x90, 0x74, 0xd8, 0x45, 0xfa, 0x99,  } };
+            static gapic::Id ID{ { 0xfc, 0xf9, 0x38, 0x40, 0x3f, 0x25, 0x6e, 0x15, 0xcb, 0xed, 0x63, 0x2c, 0x8b, 0x16, 0x56, 0x04, 0x34, 0xc0, 0x0c, 0x94,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
-            e->Uint32(this->mType);
+            e->Uint32(this->mDrawMode);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndirect);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
-        uint32_t mType;
+        uint32_t mDrawMode;
+        uint32_t mIndicesType;
         Void__CP mIndirect;
     };
 
     class GlDrawElementsInstanced: public Encodable {
     public:
         GlDrawElementsInstanced() = default;
-        GlDrawElementsInstanced(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount) :
+        GlDrawElementsInstanced(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount) :
             mobservations(observations),
-            mMode(Mode),
-            mCount(Count),
-            mType(Type),
+            mDrawMode(DrawMode),
+            mIndicesCount(IndicesCount),
+            mIndicesType(IndicesType),
             mIndices(Indices),
-            mInstancecount(Instancecount) {}
+            mInstanceCount(InstanceCount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x91, 0xe0, 0xbc, 0x3c, 0xfd, 0x58, 0x09, 0x0c, 0xaa, 0x9f, 0xc2, 0xe0, 0xd0, 0x66, 0xfa, 0x0c, 0x14, 0x72, 0x88, 0xa1,  } };
+            static gapic::Id ID{ { 0x26, 0xd8, 0x86, 0x70, 0x27, 0x1d, 0x78, 0x88, 0x4b, 0x5d, 0x41, 0x19, 0x71, 0x9d, 0xab, 0xa5, 0x53, 0x47, 0x48, 0xe5,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
-            e->Int32(this->mCount);
-            e->Uint32(this->mType);
+            e->Uint32(this->mDrawMode);
+            e->Int32(this->mIndicesCount);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
-            e->Int32(this->mInstancecount);
+            e->Int32(this->mInstanceCount);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
-        int32_t mCount;
-        uint32_t mType;
-        Void__CP mIndices;
-        int32_t mInstancecount;
+        uint32_t mDrawMode;
+        int32_t mIndicesCount;
+        uint32_t mIndicesType;
+        IndicesPointer mIndices;
+        int32_t mInstanceCount;
     };
 
     class GlDrawElementsInstancedANGLE: public Encodable {
@@ -6781,35 +6784,35 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertex: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertex() = default;
-        GlDrawElementsInstancedBaseVertex(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex) :
+        GlDrawElementsInstancedBaseVertex(atom::Observations observations, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount, int32_t BaseVertex) :
             mobservations(observations),
-            mMode(Mode),
-            mCount(Count),
-            mType(Type),
+            mDrawMode(DrawMode),
+            mIndicesCount(IndicesCount),
+            mIndicesType(IndicesType),
             mIndices(Indices),
-            mInstancecount(Instancecount),
-            mBasevertex(Basevertex) {}
+            mInstanceCount(InstanceCount),
+            mBaseVertex(BaseVertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf6, 0x6c, 0xb5, 0xcd, 0x59, 0xc2, 0x7f, 0x89, 0x91, 0x80, 0xe2, 0x2c, 0x8a, 0xd3, 0x0c, 0x85, 0x32, 0x54, 0x00, 0xde,  } };
+            static gapic::Id ID{ { 0xf3, 0xd4, 0xf8, 0x69, 0x06, 0xa0, 0x27, 0xc8, 0xf9, 0x1f, 0xa4, 0x0a, 0xec, 0xbe, 0xbe, 0x5f, 0xaa, 0xa1, 0xe5, 0x5d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
-            e->Int32(this->mCount);
-            e->Uint32(this->mType);
+            e->Uint32(this->mDrawMode);
+            e->Int32(this->mIndicesCount);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
-            e->Int32(this->mInstancecount);
-            e->Int32(this->mBasevertex);
+            e->Int32(this->mInstanceCount);
+            e->Int32(this->mBaseVertex);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
-        int32_t mCount;
-        uint32_t mType;
-        Void__CP mIndices;
-        int32_t mInstancecount;
-        int32_t mBasevertex;
+        uint32_t mDrawMode;
+        int32_t mIndicesCount;
+        uint32_t mIndicesType;
+        IndicesPointer mIndices;
+        int32_t mInstanceCount;
+        int32_t mBaseVertex;
     };
 
     class GlDrawElementsInstancedBaseVertexBaseInstanceEXT: public Encodable {
@@ -6982,72 +6985,72 @@ namespace gles {
     class GlDrawRangeElements: public Encodable {
     public:
         GlDrawRangeElements() = default;
-        GlDrawRangeElements(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, Void__CP Indices) :
+        GlDrawRangeElements(atom::Observations observations, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
             mobservations(observations),
-            mMode(Mode),
+            mDrawMode(DrawMode),
             mStart(Start),
             mEnd(End),
-            mCount(Count),
-            mType(Type),
+            mIndicesCount(IndicesCount),
+            mIndicesType(IndicesType),
             mIndices(Indices) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd9, 0x92, 0x7c, 0x94, 0x49, 0xdf, 0x20, 0x5c, 0x2f, 0xc4, 0x45, 0x7f, 0x52, 0xaf, 0x90, 0xc6, 0xc6, 0xf3, 0x05, 0xfc,  } };
+            static gapic::Id ID{ { 0x3d, 0x48, 0x0c, 0x4f, 0x75, 0xb9, 0x87, 0x6e, 0x10, 0xe0, 0x0d, 0x37, 0x80, 0x25, 0xed, 0x1b, 0x4c, 0x57, 0x37, 0xd9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
+            e->Uint32(this->mDrawMode);
             e->Uint32(this->mStart);
             e->Uint32(this->mEnd);
-            e->Int32(this->mCount);
-            e->Uint32(this->mType);
+            e->Int32(this->mIndicesCount);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
+        uint32_t mDrawMode;
         uint32_t mStart;
         uint32_t mEnd;
-        int32_t mCount;
-        uint32_t mType;
-        Void__CP mIndices;
+        int32_t mIndicesCount;
+        uint32_t mIndicesType;
+        IndicesPointer mIndices;
     };
 
     class GlDrawRangeElementsBaseVertex: public Encodable {
     public:
         GlDrawRangeElementsBaseVertex() = default;
-        GlDrawRangeElementsBaseVertex(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawRangeElementsBaseVertex(atom::Observations observations, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
             mobservations(observations),
-            mMode(Mode),
+            mDrawMode(DrawMode),
             mStart(Start),
             mEnd(End),
-            mCount(Count),
-            mType(Type),
+            mIndicesCount(IndicesCount),
+            mIndicesType(IndicesType),
             mIndices(Indices),
-            mBasevertex(Basevertex) {}
+            mBaseVertex(BaseVertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x80, 0xfa, 0xf4, 0xfc, 0x70, 0xbb, 0x83, 0xe0, 0x61, 0x66, 0xf4, 0x9b, 0xe9, 0xf5, 0x48, 0x9d, 0xd9, 0x08, 0xdb, 0x18,  } };
+            static gapic::Id ID{ { 0x3d, 0x02, 0x31, 0xaa, 0xa4, 0x15, 0xf5, 0xd6, 0x10, 0x7c, 0x9b, 0x49, 0xe2, 0xa1, 0x79, 0x51, 0x9c, 0x33, 0x88, 0x8a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
-            e->Uint32(this->mMode);
+            e->Uint32(this->mDrawMode);
             e->Uint32(this->mStart);
             e->Uint32(this->mEnd);
-            e->Int32(this->mCount);
-            e->Uint32(this->mType);
+            e->Int32(this->mIndicesCount);
+            e->Uint32(this->mIndicesType);
             e->Value(this->mIndices);
-            e->Int32(this->mBasevertex);
+            e->Int32(this->mBaseVertex);
         }
 
         atom::Observations mobservations;
-        uint32_t mMode;
+        uint32_t mDrawMode;
         uint32_t mStart;
         uint32_t mEnd;
-        int32_t mCount;
-        uint32_t mType;
-        Void__CP mIndices;
-        int32_t mBasevertex;
+        int32_t mIndicesCount;
+        uint32_t mIndicesType;
+        IndicesPointer mIndices;
+        int32_t mBaseVertex;
     };
 
     class GlDrawRangeElementsBaseVertexEXT: public Encodable {

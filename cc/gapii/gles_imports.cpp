@@ -150,7 +150,6 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glDrawArraysIndirect", true));
     glDrawArraysInstanced = reinterpret_cast<PFNGLDRAWARRAYSINSTANCED>(
             GetGfxProcAddress("glDrawArraysInstanced", true));
-    glDrawBuffers = reinterpret_cast<PFNGLDRAWBUFFERS>(GetGfxProcAddress("glDrawBuffers", true));
     glDrawElements = reinterpret_cast<PFNGLDRAWELEMENTS>(GetGfxProcAddress("glDrawElements", true));
     glDrawElementsBaseVertex = reinterpret_cast<PFNGLDRAWELEMENTSBASEVERTEX>(
             GetGfxProcAddress("glDrawElementsBaseVertex", true));
@@ -865,6 +864,7 @@ void GlesImports::Resolve() {
     glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
             GetGfxProcAddress("glDeleteRenderbuffers", true));
     glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(GetGfxProcAddress("glDepthMask", true));
+    glDrawBuffers = reinterpret_cast<PFNGLDRAWBUFFERS>(GetGfxProcAddress("glDrawBuffers", true));
     glFramebufferParameteri = reinterpret_cast<PFNGLFRAMEBUFFERPARAMETERI>(
             GetGfxProcAddress("glFramebufferParameteri", true));
     glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(

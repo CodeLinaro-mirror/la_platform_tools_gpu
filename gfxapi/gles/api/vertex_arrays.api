@@ -12,6 +12,58 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@internal
+enum Constants {
+  MAX_VERTEX_ATTRIBS                = 16  ,
+  MAX_VERTEX_ATTRIB_BINDINGS        = 16  ,
+  MAX_VERTEX_ATTRIB_STRIDE          = 2048,
+  MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 2047
+}
+
+macro GLint VertexAttribTypeSize(GLenum type) {
+  return switch (type) {
+    case GL_BYTE, GL_UNSIGNED_BYTE:                                     1
+    case GL_SHORT, GL_UNSIGNED_SHORT, GL_HALF_FLOAT, GL_HALF_FLOAT_OES: 2
+    case GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_FIXED:                   4
+    case GL_INT_2_10_10_10_REV, GL_UNSIGNED_INT_2_10_10_10_REV:         4
+  }
+}
+
+macro void ReadVertexArrays(ref!Context ctx, u32 first_index, u32 index_count, u32 instance_count) {
+  if (index_count > 0) && (instance_count > 0) {
+    // Only the default vertex array can contain client data pointer.
+    if ctx.BoundVertexArray == 0 {
+      for i in (0 .. as!AttributeLocation(MAX_VERTEX_ATTRIBS)) {
+        arr := ctx.VertexAttributeArrays[i]
+        if arr.Enabled {
+          if (arr.Buffer == 0) && (arr.Pointer != null) {
+            size := VertexAttribTypeSize(arr.Type) * as!GLint(arr.Size)
+            stride := switch (arr.Stride == 0) {
+              case true:  size
+              case false: as!GLint(arr.Stride)
+            }
+            divisor := as!u32(arr.Divisor)
+            if divisor == 0 {
+              for v in (first_index .. (first_index + index_count)) {
+                offset := as!GLint(stride) * as!GLint(v)
+                read(arr.Pointer[offset:offset + size])
+              }
+            } else {
+              last_instance := instance_count - 1
+              last_index := last_instance / divisor
+              // First index is not added to instanced arrays.
+              for v in (0 .. (last_index + 1)) {
+                offset := as!GLint(stride) * as!GLint(v)
+                read(arr.Pointer[offset:offset + size])
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindVertexArray.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindVertexArray.xhtml","OpenGL ES 3.2")
