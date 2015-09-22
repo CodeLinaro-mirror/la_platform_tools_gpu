@@ -58258,3 +58258,33 @@ func (v *TextureKind) Parse(s string) error {
 	}
 	return fmt.Errorf("%s not in TextureKind", s)
 }
+
+var _VertexArrayId_map = map[VertexArrayId]string{}
+
+func init() {
+	_VertexArrayId_map[4294901761] = "DefaultVertexArrayId"
+
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: "DefaultVertexArrayId", Value: uint32(4294901761)},
+		},
+	})
+}
+
+func (v VertexArrayId) String() string {
+	if s, ok := _VertexArrayId_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("VertexArrayId(%d)", v)
+}
+
+func (v *VertexArrayId) Parse(s string) error {
+	for k, t := range _VertexArrayId_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in VertexArrayId", s)
+}

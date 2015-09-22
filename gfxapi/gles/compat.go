@@ -37,6 +37,10 @@ const (
 	required
 )
 
+// If the default vertex array object (id 0) is not allowed on
+// the target platform, we remap the uses to this array.
+const DefaultVertexArrayId = VertexArrayId(0xFFFF0001)
+
 func (s support) String() string {
 	switch s {
 	case unsupported:
@@ -115,14 +119,26 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 
 			if target.vertexArrayObjects == required &&
 				source.vertexArrayObjects != required {
-				// Capture does not have to support VAO, but replay device requires it.
-				// Satisfy the target by creating and binding a single VAO.
+				// Replay device requires VAO, but capture did not enforce it.
+				// Satisfy the target by creating and binding a single VAO
+				// which we will use instead of the default VAO (id 0).
 				a.Mutate(s, d, l)
 				out.Write(i, a)
 				out.Write(atom.NoID, NewGlGenVertexArrays(1, memory.Tmp).
-					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, VertexArrayId(1))))
-				out.Write(atom.NoID, NewGlBindVertexArray(1))
+					AddWrite(atom.Data(s.Architecture, d, l, memory.Tmp, VertexArrayId(DefaultVertexArrayId))))
+				out.Write(atom.NoID, NewGlBindVertexArray(DefaultVertexArrayId))
 				return
+			}
+
+		case *GlBindVertexArray:
+			if a.Array == VertexArrayId(0) {
+				ctx := getContext(s)
+				if target.vertexArrayObjects == required &&
+					contexts[ctx].vertexArrayObjects != required {
+					a.Mutate(s, d, l)
+					out.Write(atom.NoID, NewGlBindVertexArray(DefaultVertexArrayId))
+					return
+				}
 			}
 
 		case *GlShaderSource:
