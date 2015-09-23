@@ -793,6 +793,24 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlBindFragDataLocationEXT := schema.Of((*GlBindFragDataLocationEXT)(nil).Class())
+	sc_GlBindFragDataLocationEXT.Metadata = append(sc_GlBindFragDataLocationEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBindFragDataLocationEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBindFragDataLocationIndexedEXT := schema.Of((*GlBindFragDataLocationIndexedEXT)(nil).Class())
+	sc_GlBindFragDataLocationIndexedEXT.Metadata = append(sc_GlBindFragDataLocationIndexedEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBindFragDataLocationIndexedEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlBindProgramPipelineEXT := schema.Of((*GlBindProgramPipelineEXT)(nil).Class())
 	sc_GlBindProgramPipelineEXT.Metadata = append(sc_GlBindProgramPipelineEXT.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -1756,6 +1774,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlGetFragDataIndexEXT := schema.Of((*GlGetFragDataIndexEXT)(nil).Class())
+	sc_GlGetFragDataIndexEXT.Metadata = append(sc_GlGetFragDataIndexEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetFragDataIndexEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlGetGraphicsResetStatusEXT := schema.Of((*GlGetGraphicsResetStatusEXT)(nil).Class())
 	sc_GlGetGraphicsResetStatusEXT.Metadata = append(sc_GlGetGraphicsResetStatusEXT.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -2021,6 +2048,15 @@ func init() {
 	sc_GlGetProgramPipelineivEXT.Metadata = append(sc_GlGetProgramPipelineivEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetProgramPipelineivEXT",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetProgramResourceLocationIndexEXT := schema.Of((*GlGetProgramResourceLocationIndexEXT)(nil).Class())
+	sc_GlGetProgramResourceLocationIndexEXT.Metadata = append(sc_GlGetProgramResourceLocationIndexEXT.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetProgramResourceLocationIndexEXT",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
@@ -3367,10 +3403,10 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlTexPageCommitmentARB := schema.Of((*GlTexPageCommitmentARB)(nil).Class())
-	sc_GlTexPageCommitmentARB.Metadata = append(sc_GlTexPageCommitmentARB.Metadata, &atom.Metadata{
+	sc_GlTexPageCommitmentEXT := schema.Of((*GlTexPageCommitmentEXT)(nil).Class())
+	sc_GlTexPageCommitmentEXT.Metadata = append(sc_GlTexPageCommitmentEXT.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "glTexPageCommitmentARB",
+		DisplayName:      "glTexPageCommitmentEXT",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

@@ -17709,6 +17709,75 @@ func (c *GlBeginQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlBeginQueryEXT) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlBindFragDataLocationEXT
+////////////////////////////////////////////////////////////////////////////////
+type GlBindFragDataLocationEXT struct {
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Color        GLuint
+	Name         GLcharᶜᵖ
+}
+
+func (a *GlBindFragDataLocationEXT) String() string {
+	return fmt.Sprintf("glBindFragDataLocationEXT(program: %v, color: %v, name: %v)", a.Program, a.Color, a.Name)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindFragDataLocationEXT pointer is returned so that calls can be chained.
+func (a *GlBindFragDataLocationEXT) AddRead(rng memory.Range, id binary.ID) *GlBindFragDataLocationEXT {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindFragDataLocationEXT pointer is returned so that calls can be chained.
+func (a *GlBindFragDataLocationEXT) AddWrite(rng memory.Range, id binary.ID) *GlBindFragDataLocationEXT {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindFragDataLocationEXT) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBindFragDataLocationEXT) Flags() atom.Flags                { return 0 }
+func (a *GlBindFragDataLocationEXT) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBindFragDataLocationIndexedEXT
+////////////////////////////////////////////////////////////////////////////////
+type GlBindFragDataLocationIndexedEXT struct {
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	ColorNumber  GLuint
+	Index        GLuint
+	Name         GLcharᶜᵖ
+}
+
+func (a *GlBindFragDataLocationIndexedEXT) String() string {
+	return fmt.Sprintf("glBindFragDataLocationIndexedEXT(program: %v, colorNumber: %v, index: %v, name: %v)", a.Program, a.ColorNumber, a.Index, a.Name)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindFragDataLocationIndexedEXT pointer is returned so that calls can be chained.
+func (a *GlBindFragDataLocationIndexedEXT) AddRead(rng memory.Range, id binary.ID) *GlBindFragDataLocationIndexedEXT {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindFragDataLocationIndexedEXT pointer is returned so that calls can be chained.
+func (a *GlBindFragDataLocationIndexedEXT) AddWrite(rng memory.Range, id binary.ID) *GlBindFragDataLocationIndexedEXT {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindFragDataLocationIndexedEXT) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBindFragDataLocationIndexedEXT) Flags() atom.Flags                { return 0 }
+func (a *GlBindFragDataLocationIndexedEXT) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // GlBindProgramPipelineEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindProgramPipelineEXT struct {
@@ -21423,6 +21492,40 @@ func (c *GlGetFloati_vNV) Flags() atom.Flags                { return 0 }
 func (a *GlGetFloati_vNV) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlGetFragDataIndexEXT
+////////////////////////////////////////////////////////////////////////////////
+type GlGetFragDataIndexEXT struct {
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Name         GLcharᶜᵖ
+	Result       GLint
+}
+
+func (a *GlGetFragDataIndexEXT) String() string {
+	return fmt.Sprintf("glGetFragDataIndexEXT(program: %v, name: %v) → %v", a.Program, a.Name, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetFragDataIndexEXT pointer is returned so that calls can be chained.
+func (a *GlGetFragDataIndexEXT) AddRead(rng memory.Range, id binary.ID) *GlGetFragDataIndexEXT {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetFragDataIndexEXT pointer is returned so that calls can be chained.
+func (a *GlGetFragDataIndexEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetFragDataIndexEXT {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetFragDataIndexEXT) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetFragDataIndexEXT) Flags() atom.Flags                { return 0 }
+func (a *GlGetFragDataIndexEXT) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // GlGetGraphicsResetStatusEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetGraphicsResetStatusEXT struct {
@@ -22477,6 +22580,43 @@ func (a *GlGetProgramPipelineivEXT) AddWrite(rng memory.Range, id binary.ID) *Gl
 func (c *GlGetProgramPipelineivEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetProgramPipelineivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetProgramPipelineivEXT) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetProgramResourceLocationIndexEXT
+////////////////////////////////////////////////////////////////////////////////
+type GlGetProgramResourceLocationIndexEXT struct {
+	binary.Generate
+	observations     atom.Observations
+	Program          ProgramId
+	ProgramInterface GLenum
+	Name             GLcharᶜᵖ
+	Result           GLint
+}
+
+func (a *GlGetProgramResourceLocationIndexEXT) String() string {
+	return fmt.Sprintf("glGetProgramResourceLocationIndexEXT(program: %v, programInterface: %v, name: %v) → %v", a.Program, a.ProgramInterface, a.Name, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetProgramResourceLocationIndexEXT pointer is returned so that calls can be chained.
+func (a *GlGetProgramResourceLocationIndexEXT) AddRead(rng memory.Range, id binary.ID) *GlGetProgramResourceLocationIndexEXT {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetProgramResourceLocationIndexEXT pointer is returned so that calls can be chained.
+func (a *GlGetProgramResourceLocationIndexEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetProgramResourceLocationIndexEXT {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetProgramResourceLocationIndexEXT) API() gfxapi.ID    { return api{}.ID() }
+func (c *GlGetProgramResourceLocationIndexEXT) Flags() atom.Flags { return 0 }
+func (a *GlGetProgramResourceLocationIndexEXT) Observations() *atom.Observations {
+	return &a.observations
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramResourcefvNV
@@ -27711,9 +27851,9 @@ func (c *GlTexImage3DOES) Flags() atom.Flags                { return 0 }
 func (a *GlTexImage3DOES) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
-// GlTexPageCommitmentARB
+// GlTexPageCommitmentEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexPageCommitmentARB struct {
+type GlTexPageCommitmentEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Target       GLenum
@@ -27727,28 +27867,28 @@ type GlTexPageCommitmentARB struct {
 	Commit       GLboolean
 }
 
-func (a *GlTexPageCommitmentARB) String() string {
-	return fmt.Sprintf("glTexPageCommitmentARB(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, commit: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Commit)
+func (a *GlTexPageCommitmentEXT) String() string {
+	return fmt.Sprintf("glTexPageCommitmentEXT(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, commit: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Commit)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
 // the data id.
-// The GlTexPageCommitmentARB pointer is returned so that calls can be chained.
-func (a *GlTexPageCommitmentARB) AddRead(rng memory.Range, id binary.ID) *GlTexPageCommitmentARB {
+// The GlTexPageCommitmentEXT pointer is returned so that calls can be chained.
+func (a *GlTexPageCommitmentEXT) AddRead(rng memory.Range, id binary.ID) *GlTexPageCommitmentEXT {
 	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
 	return a
 }
 
 // AddWrite appends a new write observation to the atom of the range rng with
 // the data id.
-// The GlTexPageCommitmentARB pointer is returned so that calls can be chained.
-func (a *GlTexPageCommitmentARB) AddWrite(rng memory.Range, id binary.ID) *GlTexPageCommitmentARB {
+// The GlTexPageCommitmentEXT pointer is returned so that calls can be chained.
+func (a *GlTexPageCommitmentEXT) AddWrite(rng memory.Range, id binary.ID) *GlTexPageCommitmentEXT {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexPageCommitmentARB) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlTexPageCommitmentARB) Flags() atom.Flags                { return 0 }
-func (a *GlTexPageCommitmentARB) Observations() *atom.Observations { return &a.observations }
+func (c *GlTexPageCommitmentEXT) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexPageCommitmentEXT) Flags() atom.Flags                { return 0 }
+func (a *GlTexPageCommitmentEXT) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameterIivOES
@@ -41379,6 +41519,7 @@ const (
 	GLenum_GL_DST_COLOR                                                  = GLenum(774)
 	GLenum_GL_ONE_MINUS_DST_COLOR                                        = GLenum(775)
 	GLenum_GL_SRC_ALPHA_SATURATE                                         = GLenum(776)
+	GLenum_GL_SRC_ALPHA_SATURATE_EXT                                     = GLenum(776)
 	GLenum_GL_FRONT_LEFT                                                 = GLenum(1024)
 	GLenum_GL_FRONT_RIGHT                                                = GLenum(1025)
 	GLenum_GL_BACK_LEFT                                                  = GLenum(1026)
@@ -43386,6 +43527,7 @@ const (
 	GLenum_GL_SOURCE1_ALPHA_ARB                                          = GLenum(34185)
 	GLenum_GL_SOURCE1_ALPHA_EXT                                          = GLenum(34185)
 	GLenum_GL_SRC1_ALPHA                                                 = GLenum(34185)
+	GLenum_GL_SRC1_ALPHA_EXT                                             = GLenum(34185)
 	GLenum_GL_SOURCE2_ALPHA                                              = GLenum(34186)
 	GLenum_GL_SOURCE2_ALPHA_ARB                                          = GLenum(34186)
 	GLenum_GL_SOURCE2_ALPHA_EXT                                          = GLenum(34186)
@@ -44372,9 +44514,13 @@ const (
 	GLenum_GL_MAX_PROGRAM_LOOP_DEPTH_NV                                  = GLenum(35063)
 	GLenum_GL_MAX_PROGRAM_LOOP_COUNT_NV                                  = GLenum(35064)
 	GLenum_GL_SRC1_COLOR                                                 = GLenum(35065)
+	GLenum_GL_SRC1_COLOR_EXT                                             = GLenum(35065)
 	GLenum_GL_ONE_MINUS_SRC1_COLOR                                       = GLenum(35066)
+	GLenum_GL_ONE_MINUS_SRC1_COLOR_EXT                                   = GLenum(35066)
 	GLenum_GL_ONE_MINUS_SRC1_ALPHA                                       = GLenum(35067)
+	GLenum_GL_ONE_MINUS_SRC1_ALPHA_EXT                                   = GLenum(35067)
 	GLenum_GL_MAX_DUAL_SOURCE_DRAW_BUFFERS                               = GLenum(35068)
+	GLenum_GL_MAX_DUAL_SOURCE_DRAW_BUFFERS_EXT                           = GLenum(35068)
 	GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER                                = GLenum(35069)
 	GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT                            = GLenum(35069)
 	GLenum_GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV                             = GLenum(35069)
@@ -46393,6 +46539,7 @@ const (
 	GLenum_GL_TOP_LEVEL_ARRAY_STRIDE                                     = GLenum(37645)
 	GLenum_GL_LOCATION                                                   = GLenum(37646)
 	GLenum_GL_LOCATION_INDEX                                             = GLenum(37647)
+	GLenum_GL_LOCATION_INDEX_EXT                                         = GLenum(37647)
 	GLenum_GL_FRAMEBUFFER_DEFAULT_WIDTH                                  = GLenum(37648)
 	GLenum_GL_FRAMEBUFFER_DEFAULT_HEIGHT                                 = GLenum(37649)
 	GLenum_GL_FRAMEBUFFER_DEFAULT_LAYERS                                 = GLenum(37650)
@@ -46732,6 +46879,7 @@ const (
 	ExtensionId_GL_OES_texture_half_float                   = ExtensionId(88)
 	ExtensionId_GL_OES_vertex_half_float                    = ExtensionId(89)
 	ExtensionId_GL_INTEL_framebuffer_CMAA                   = ExtensionId(90)
+	ExtensionId_GL_EXT_blend_func_extended                  = ExtensionId(91)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47026,6 +47174,12 @@ func NewGlBeginPerfQueryINTEL(QueryHandle GLuint) *GlBeginPerfQueryINTEL {
 }
 func NewGlBeginQueryEXT(Target GLenum, Query QueryId) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{Target: Target, Query: Query}
+}
+func NewGlBindFragDataLocationEXT(Program ProgramId, Color GLuint, Name memory.Pointer) *GlBindFragDataLocationEXT {
+	return &GlBindFragDataLocationEXT{Program: Program, Color: Color, Name: GLcharᶜᵖ{Pointer: Name}}
+}
+func NewGlBindFragDataLocationIndexedEXT(Program ProgramId, ColorNumber GLuint, Index GLuint, Name memory.Pointer) *GlBindFragDataLocationIndexedEXT {
+	return &GlBindFragDataLocationIndexedEXT{Program: Program, ColorNumber: ColorNumber, Index: Index, Name: GLcharᶜᵖ{Pointer: Name}}
 }
 func NewGlBindProgramPipelineEXT(Pipeline PipelineId) *GlBindProgramPipelineEXT {
 	return &GlBindProgramPipelineEXT{Pipeline: Pipeline}
@@ -47348,6 +47502,9 @@ func NewGlGetFirstPerfQueryIdINTEL(QueryId memory.Pointer) *GlGetFirstPerfQueryI
 func NewGlGetFloati_vNV(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetFloati_vNV {
 	return &GlGetFloati_vNV{Target: Target, Index: Index, Data: GLfloatᵖ{Pointer: Data}}
 }
+func NewGlGetFragDataIndexEXT(Program ProgramId, Name memory.Pointer, Result GLint) *GlGetFragDataIndexEXT {
+	return &GlGetFragDataIndexEXT{Program: Program, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+}
 func NewGlGetGraphicsResetStatusEXT(Result GLenum) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{Result: Result}
 }
@@ -47437,6 +47594,9 @@ func NewGlGetProgramPipelineInfoLogEXT(Pipeline PipelineId, BufSize GLsizei, Len
 }
 func NewGlGetProgramPipelineivEXT(Pipeline PipelineId, Pname GLenum, Params memory.Pointer) *GlGetProgramPipelineivEXT {
 	return &GlGetProgramPipelineivEXT{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+}
+func NewGlGetProgramResourceLocationIndexEXT(Program ProgramId, ProgramInterface GLenum, Name memory.Pointer, Result GLint) *GlGetProgramResourceLocationIndexEXT {
+	return &GlGetProgramResourceLocationIndexEXT{Program: Program, ProgramInterface: ProgramInterface, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
 }
 func NewGlGetProgramResourcefvNV(Program ProgramId, ProgramInterface GLenum, Index GLuint, PropCount GLsizei, Props memory.Pointer, BufSize GLsizei, Length memory.Pointer, Params memory.Pointer) *GlGetProgramResourcefvNV {
 	return &GlGetProgramResourcefvNV{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ{Pointer: Props}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Params: GLfloatᵖ{Pointer: Params}}
@@ -47885,8 +48045,8 @@ func NewGlTexBufferRangeOES(Target GLenum, Internalformat GLenum, Buffer BufferI
 func NewGlTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexImage3DOES {
 	return &GlTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: TexturePointer{Pointer: Pixels}}
 }
-func NewGlTexPageCommitmentARB(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Commit GLboolean) *GlTexPageCommitmentARB {
-	return &GlTexPageCommitmentARB{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Commit: Commit}
+func NewGlTexPageCommitmentEXT(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Commit GLboolean) *GlTexPageCommitmentEXT {
+	return &GlTexPageCommitmentEXT{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Commit: Commit}
 }
 func NewGlTexParameterIivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterIivOES {
 	return &GlTexParameterIivOES{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}

@@ -182,6 +182,10 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glBeginPerfQueryINTEL", true));
     glBeginQueryEXT =
             reinterpret_cast<PFNGLBEGINQUERYEXT>(GetGfxProcAddress("glBeginQueryEXT", true));
+    glBindFragDataLocationEXT = reinterpret_cast<PFNGLBINDFRAGDATALOCATIONEXT>(
+            GetGfxProcAddress("glBindFragDataLocationEXT", true));
+    glBindFragDataLocationIndexedEXT = reinterpret_cast<PFNGLBINDFRAGDATALOCATIONINDEXEDEXT>(
+            GetGfxProcAddress("glBindFragDataLocationIndexedEXT", true));
     glBindProgramPipelineEXT = reinterpret_cast<PFNGLBINDPROGRAMPIPELINEEXT>(
             GetGfxProcAddress("glBindProgramPipelineEXT", true));
     glBindVertexArrayOES = reinterpret_cast<PFNGLBINDVERTEXARRAYOES>(
@@ -395,6 +399,8 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glGetFirstPerfQueryIdINTEL", true));
     glGetFloati_vNV =
             reinterpret_cast<PFNGLGETFLOATI_VNV>(GetGfxProcAddress("glGetFloati_vNV", true));
+    glGetFragDataIndexEXT = reinterpret_cast<PFNGLGETFRAGDATAINDEXEXT>(
+            GetGfxProcAddress("glGetFragDataIndexEXT", true));
     glGetGraphicsResetStatusEXT = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSEXT>(
             GetGfxProcAddress("glGetGraphicsResetStatusEXT", true));
     glGetGraphicsResetStatusKHR = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSKHR>(
@@ -455,6 +461,9 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glGetProgramPipelineInfoLogEXT", true));
     glGetProgramPipelineivEXT = reinterpret_cast<PFNGLGETPROGRAMPIPELINEIVEXT>(
             GetGfxProcAddress("glGetProgramPipelineivEXT", true));
+    glGetProgramResourceLocationIndexEXT =
+            reinterpret_cast<PFNGLGETPROGRAMRESOURCELOCATIONINDEXEXT>(
+                    GetGfxProcAddress("glGetProgramResourceLocationIndexEXT", true));
     glGetProgramResourcefvNV = reinterpret_cast<PFNGLGETPROGRAMRESOURCEFVNV>(
             GetGfxProcAddress("glGetProgramResourcefvNV", true));
     glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
@@ -746,8 +755,8 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glTexBufferRangeOES", true));
     glTexImage3DOES =
             reinterpret_cast<PFNGLTEXIMAGE3DOES>(GetGfxProcAddress("glTexImage3DOES", true));
-    glTexPageCommitmentARB = reinterpret_cast<PFNGLTEXPAGECOMMITMENTARB>(
-            GetGfxProcAddress("glTexPageCommitmentARB", true));
+    glTexPageCommitmentEXT = reinterpret_cast<PFNGLTEXPAGECOMMITMENTEXT>(
+            GetGfxProcAddress("glTexPageCommitmentEXT", true));
     glTexParameterIivOES = reinterpret_cast<PFNGLTEXPARAMETERIIVOES>(
             GetGfxProcAddress("glTexParameterIivOES", true));
     glTexParameterIuivOES = reinterpret_cast<PFNGLTEXPARAMETERIUIVOES>(

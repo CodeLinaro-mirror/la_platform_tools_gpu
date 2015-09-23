@@ -57,6 +57,19 @@ cmd void glBeginQueryEXT(GLenum target, QueryId query) {
 
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
+cmd void glBindFragDataLocationEXT(ProgramId program, GLuint color, const GLchar* name) {
+  requiresExtension(GL_EXT_blend_func_extended)
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
+cmd void glBindFragDataLocationIndexedEXT(ProgramId     program,
+                                          GLuint        colorNumber,
+                                          GLuint        index,
+                                          const GLchar* name) {
+  requiresExtension(GL_EXT_blend_func_extended)
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_separate_shader_objects.txt","GL_EXT_separate_shader_objects")
 cmd void glBindProgramPipelineEXT(PipelineId pipeline) {
   requiresExtension(GL_EXT_separate_shader_objects)
@@ -931,6 +944,12 @@ cmd void glGetFloati_vNV(GLenum target, GLuint index, GLfloat* data) {
   // TODO
 }
 
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
+cmd GLint glGetFragDataIndexEXT(ProgramId program, const GLchar* name) {
+  requiresExtension(GL_EXT_blend_func_extended)
+  return ?
+}
+
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt","GL_EXT_robustness")
 cmd GLenum glGetGraphicsResetStatusEXT() {
   requiresExtension(GL_EXT_robustness)
@@ -1185,6 +1204,14 @@ cmd void glGetProgramPipelineInfoLogEXT(PipelineId pipeline,
 cmd void glGetProgramPipelineivEXT(PipelineId pipeline, GLenum pname, GLint* params) {
   requiresExtension(GL_EXT_separate_shader_objects)
   // TODO
+}
+
+@Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
+cmd GLint glGetProgramResourceLocationIndexEXT(ProgramId     program,
+                                               GLenum        programInterface,
+                                               const GLchar* name) {
+  requiresExtension(GL_EXT_blend_func_extended)
+  return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/path_rendering.txt","GL_NV_path_rendering")
@@ -2456,7 +2483,7 @@ cmd void glTexImage3DOES(GLenum         target,
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_sparse_texture.txt","GL_EXT_sparse_texture")
-cmd void glTexPageCommitmentARB(GLenum    target,
+cmd void glTexPageCommitmentEXT(GLenum    target,
                                 GLint     level,
                                 GLint     xoffset,
                                 GLint     yoffset,

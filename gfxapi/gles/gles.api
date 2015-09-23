@@ -161,6 +161,7 @@ enum ExtensionId {
   GL_OES_texture_half_float                   = 88,
   GL_OES_vertex_half_float                    = 89,
   GL_INTEL_framebuffer_CMAA                   = 90,
+  GL_EXT_blend_func_extended                  = 91,
 }
 
 enum TextureKind {
