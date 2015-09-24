@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -82,7 +83,39 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 		}))
 		return nil
 	}))
-	// TODO: Check FramebufferObservation atoms match the replayed framebuffer.
+
+	if a, ok := a.(*atom.FramebufferObservation); ok {
+		// Check that the framebuffer matches the FramebufferObservation's image.
+		w, h, _, err := getState(t.state).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
+		if err != nil {
+			t.onIssue(i, log.Error, fmt.Errorf("Failed to resolve framebuffer dimensions: %v", err))
+			return
+		}
+		if a.Width != w || a.Height != h {
+			t.onIssue(i, log.Error, fmt.Errorf("Framebuffer dimensions were not as expected. Expected: %dx%d, Got: %dx%d",
+				a.Width, a.Height, w, h))
+			return
+		}
+		postColorData(t.state, int32(w), int32(h), out, func(img replay.Image) {
+			if img.Error != nil {
+				t.onIssue(i, log.Error, fmt.Errorf("Failed to fetch framebuffer color: %v", img.Error))
+				return
+			}
+			expected := &image.Image{Width: a.Width, Height: a.Height, Data: a.Data, Format: image.RGBA()}
+			diff, err := image.Difference(img.Image, expected)
+			if err != nil {
+				t.onIssue(i, log.Error, fmt.Errorf("Could not compare FramebufferObservation: %v", err))
+				return
+			}
+
+			const theshold = 0.01 // TODO: Add as option to query.
+
+			if diff > theshold {
+				t.onIssue(i, log.Error, fmt.Errorf("FramebufferObservation did not match replayed framebuffer. Difference: %v%%",
+					diff*100))
+			}
+		})
+	}
 }
 
 func (t *findIssues) Flush(out atom.Writer) {
