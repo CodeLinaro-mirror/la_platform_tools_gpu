@@ -246,7 +246,7 @@ void Spy::observeFramebuffer() {
         mImports.glReadPixels(0, 0, int32_t(w), int32_t(h),
                 GLenum::GL_RGBA, GLenum::GL_UNSIGNED_BYTE, data);
         gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Array<uint8_t>(data, size));
-        mEncoder->Object(&coder);
+        mEncoder->Variant(&coder);
         delete [] data;
     } else {
         GAPID_WARNING("Failed to allocate buffer to observe framebuffer of size %ux%u", w, h);
