@@ -32,6 +32,13 @@ type Format interface {
 	// dimensions in this format. If the size varies based on the image data, then
 	// Size returns -1.
 	Size(width, height int) int
+
+	// Key returns an object that can be used for equality-testing of the format
+	// and can be used as a key in a map. Formats of the same type and parameters
+	// will always return equal keys.
+	// Formats can be deserialized into new objects so testing equality on the
+	// Format object directly is not safe.
+	Key() interface{}
 }
 
 func checkSize(data []byte, width, height int, bpp int) error {
@@ -46,6 +53,7 @@ func checkSize(data []byte, width, height int, bpp int) error {
 
 type fmtRGBA struct{ binary.Generate }
 
+func (f *fmtRGBA) Key() interface{}             { return *f }
 func (*fmtRGBA) String() string                 { return "RGBA" }
 func (*fmtRGBA) Size(w, h int) int              { return w * h * 4 }
 func (*fmtRGBA) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }

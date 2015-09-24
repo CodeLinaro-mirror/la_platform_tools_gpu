@@ -55,6 +55,12 @@ func (i *ImageInfo) Validate() error {
 	return nil
 }
 
+// As returns the path to the ImageInfo with the image converted to the
+// requested format.
+func (i *ImageInfo) As(fmt binary.Object) Value {
+	return &As{Object: i, Type: fmt}
+}
+
 // FindImageInfo returns the first ImageInfo found traversing the path p.
 // If no ImageInfo was found, then nil is returned.
 func FindImageInfo(p Path) *ImageInfo {

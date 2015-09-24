@@ -275,6 +275,13 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 					log.E(l, "Failed to decompress texture: %v", err)
 				}
 			}
+
+		default:
+			if a.Flags().IsDrawCall() {
+				if c := getContext(s); clientVAsBound(c) {
+					log.W(l, "Draw call %T with client-pointers not handled by the compatability layer", a)
+				}
+			}
 		}
 
 		a.Mutate(s, d, l)

@@ -18,6 +18,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type fmtLuminance struct{ binary.Generate }
 
+func (f *fmtLuminance) Key() interface{}             { return *f }
 func (*fmtLuminance) String() string                 { return "Luminance" }
 func (*fmtLuminance) Size(w, h int) int              { return w * h }
 func (*fmtLuminance) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }

@@ -12,19 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package client
+package gles
 
-import (
-	"image"
+import "android.googlesource.com/platform/tools/gpu/replay"
 
-	"github.com/google/gxui"
-)
-
-// NewTexture returns a gxui.Texture from the rgba-8888 data.
-func NewTexture(driver gxui.Driver, width, height int, rgba []byte) gxui.Texture {
-	img := image.NewNRGBA(image.Rect(0, 0, width, height))
-	img.Pix = rgba
-	tex := driver.CreateTexture(img, 1)
-	tex.SetFlipY(true)
-	return tex
-}
+// directCall must conform to the replay.Replayer interface.
+var _ = replay.Replayer(&directCall{})

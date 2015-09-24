@@ -51,7 +51,7 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 	}, nil
 }
 
-// BuildLazy returns the *service.Binary data for the given RenderFramebufferDepth
+// BuildLazy returns the []byte data for the given RenderFramebufferDepth
 // request.
 func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
@@ -77,12 +77,12 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 		return nil, fmt.Errorf("The graphics API %s does not support reading depth buffers", api.Name())
 	}
 
-	img := <-query.QueryDepthBuffer(ctx, mgr, atom.ID(r.After.Index))
-	if img.Error != nil {
-		err := fmt.Errorf("Failed to retrieve framebuffer: %v", img.Error)
+	res := <-query.QueryDepthBuffer(ctx, mgr, atom.ID(r.After.Index))
+	if res.Error != nil {
+		err := fmt.Errorf("Failed to retrieve framebuffer: %v", res.Error)
 		log.Errorf(l, "%v", err)
 		return nil, err
 	}
 
-	return img.Data, nil
+	return res.Image.Data, nil
 }

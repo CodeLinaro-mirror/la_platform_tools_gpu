@@ -15,13 +15,16 @@
 package gles
 
 import (
+	"bytes"
 	"fmt"
 	"math/rand"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -37,7 +40,7 @@ type readFramebuffer struct {
 	injections map[atom.ID][]func(out atom.Writer)
 }
 
-func NewReadFramebuffer(d database.Database, l log.Logger) *readFramebuffer {
+func newReadFramebuffer(d database.Database, l log.Logger) *readFramebuffer {
 	return &readFramebuffer{
 		state:      gfxapi.NewState(),
 		database:   d,
@@ -68,12 +71,12 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 		c := getContext(s)
 		version, _ := ParseVersion(device.Version)
 
-		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		colorW, colorH, _, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
 		}
-		depthW, depthH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
+		depthW, depthH, depthFmt, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentDepth)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
@@ -203,7 +206,32 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 		)
 
-		postColorData(s, outW, outH, out, img)
+		postColorData(s, outW, outH, out, func(i replay.Image) {
+			if i.Error == nil {
+				// Unpack depth data inplace
+				r := endian.Reader(bytes.NewReader(i.Image.Data), endian.Big)
+				w := endian.Writer(bytes.NewBuffer(i.Image.Data[:0]), endian.Little)
+				switch depthFmt {
+				case GLenum_GL_DEPTH_COMPONENT16:
+					for p, c := int32(0), outW*outH; p < c; p++ {
+						i, _ := r.Uint32()
+						w.Float32(float32(float64(i&0xffff0000) / 0xffff0000))
+					}
+				case GLenum_GL_DEPTH_COMPONENT32:
+					for p, c := int32(0), outW*outH; p < c; p++ {
+						i, _ := r.Uint32()
+						w.Float32(float32(float64(i) / 0xffffffff))
+					}
+				default: // Assume 24-bit depth.
+					for p, c := int32(0), outW*outH; p < c; p++ {
+						i, _ := r.Uint32()
+						w.Float32(float32(float64(i&0xffffff00) / 0xffffff00))
+					}
+				}
+				i.Image.Format = image.Float32()
+			}
+			img <- i
+		})
 
 		// Restore conditionally changed state.
 		t.revert()
@@ -243,7 +271,7 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 		arch := s.Architecture
 		c := getContext(s)
 
-		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		colorW, colorH, _, err := getState(s).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
 			log.Errorf(l, "%v", err)
 			return
@@ -260,13 +288,13 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 			outH = int32(height)
 		)
 
-		// Generate new unused object IDs.
-		renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
-		framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
-
 		if inW == outW && inH == outH {
-			postColorData(s, outW, outH, out, img)
+			postColorData(s, outW, outH, out, func(i replay.Image) { img <- i })
 		} else {
+			// Generate new unused object IDs.
+			renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
+			framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
+
 			ctx := getContext(s)
 			origScissor := ctx.Rasterizing.Scissor
 
@@ -284,7 +312,7 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 			)
 
-			postColorData(s, outW, outH, out, img)
+			postColorData(s, outW, outH, out, func(i replay.Image) { img <- i })
 
 			writeEach(out,
 				NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, origRenderbufferID),
@@ -300,7 +328,7 @@ func (t *readFramebuffer) Color(id atom.ID, width, height uint32, img chan repla
 	})
 }
 
-func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, img chan<- replay.Image) {
+func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, callback func(replay.Image)) {
 	ctx := getContext(s)
 	origPackAlignment := ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
@@ -325,7 +353,15 @@ func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, img ch
 				err = fmt.Errorf("Could not read framebuffer data (expected length %d bytes): %v", imageSize, err)
 				data = nil
 			}
-			img <- replay.Image{Data: data, Error: err}
+			callback(replay.Image{
+				Image: &image.Image{
+					Data:   data,
+					Width:  uint32(width),
+					Height: uint32(height),
+					Format: image.RGBA(),
+				},
+				Error: err,
+			})
 			return err
 		})
 		return nil

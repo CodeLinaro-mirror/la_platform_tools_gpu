@@ -14,6 +14,29 @@ class Encoder;
 
 namespace coder {
 namespace atom {
+    class FramebufferObservation: public Encodable {
+    public:
+        FramebufferObservation() = default;
+        FramebufferObservation(uint32_t Width, uint32_t Height, Array<uint8_t> Data) :
+            mWidth(Width),
+            mHeight(Height),
+            mData(Data) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xe0, 0x9e, 0x6d, 0xd4, 0xc1, 0x93, 0x96, 0x93, 0x6f, 0xad, 0xb8, 0x8e, 0xe0, 0x2f, 0x0c, 0x32, 0xe0, 0x5e, 0x33, 0xcc,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint32(this->mWidth);
+            e->Uint32(this->mHeight);
+            e->Uint32(this->mData.size());
+            e->Data(this->mData.data(), this->mData.size());
+        }
+
+        uint32_t mWidth;
+        uint32_t mHeight;
+        Array<uint8_t> mData;
+    };
+
     class Range: public Encodable {
     public:
         Range() = default;

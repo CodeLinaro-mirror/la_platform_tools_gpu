@@ -38,6 +38,11 @@ public:
     Bool glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
     Bool glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx);
 
+    int eglSwapBuffers(void* display, void* surface);
+    void wglSwapBuffers(void* hdc);
+    void glXSwapBuffers(void* display, void* drawable);
+    int CGLFlushDrawable(void* ctx);
+
     inline void RegisterSymbol(const std::string& name, void* symbol) {
         mSymbols.emplace(name, symbol);
     }
@@ -47,6 +52,15 @@ public:
     }
 
 private:
+    // observeFramebuffer captures the currently bound framebuffer's color
+    // buffer, and writes it to a FramebufferObservation atom.
+    void observeFramebuffer();
+
+    // getFramebufferAttachmentSize attempts to retrieve the currently bound
+    // framebuffer's color buffer dimensions, returning true on success or
+    // false if the dimensions could not be retrieved.
+    bool getFramebufferAttachmentSize(uint32_t& width, uint32_t& height);
+
     void setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
                         uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
                         uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,

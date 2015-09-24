@@ -27,7 +27,7 @@ import (
 // converted image data is returned, otherwise an error is returned.
 type Converter func(data []byte, width int, height int) ([]byte, error)
 
-type srcDstFmt struct{ src, dst Format }
+type srcDstFmt struct{ src, dst interface{} }
 
 var registeredConverters = make(map[srcDstFmt]Converter)
 
@@ -35,7 +35,7 @@ var registeredConverters = make(map[srcDstFmt]Converter)
 // formats. If a converter already exists for converting from src to dst, then
 // this function panics.
 func RegisterConverter(src, dst Format, c Converter) {
-	key := srcDstFmt{src, dst}
+	key := srcDstFmt{src.Key(), dst.Key()}
 	if _, found := registeredConverters[key]; found {
 		panic(fmt.Errorf("Converter from %s to %s already registered", src, dst))
 	}
@@ -57,13 +57,13 @@ func Convert(data []byte, width int, height int, srcFmt Format, dstFmt Format) (
 		return nil, fmt.Errorf("Source data of format %s is invalid: %s", srcFmt, err)
 	}
 
-	if conv, found := registeredConverters[srcDstFmt{srcFmt, dstFmt}]; found {
+	if conv, found := registeredConverters[srcDstFmt{srcFmt.Key(), dstFmt.Key()}]; found {
 		return conv(data, width, height)
 	}
 
 	// Try going via RGBA
-	if convA, found := registeredConverters[srcDstFmt{srcFmt, RGBA()}]; found {
-		if convB, found := registeredConverters[srcDstFmt{RGBA(), dstFmt}]; found {
+	if convA, found := registeredConverters[srcDstFmt{srcFmt.Key(), RGBA().Key()}]; found {
+		if convB, found := registeredConverters[srcDstFmt{RGBA().Key(), dstFmt.Key()}]; found {
 			if data, err := convA(data, width, height); err != nil {
 				return convB(data, width, height)
 			}

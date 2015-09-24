@@ -281,12 +281,12 @@ func (r *rpc) RequestColorBuffer(device *path.Device, after *path.Atom, settings
 func (r *rpc) RequestDepthBuffer(device *path.Device, after *path.Atom) (w, h int, d []byte, e error) {
 	l := r.beginRPC("RequestDepthBuffer")
 
-	imageID, err := r.client.GetFramebufferDepth(device, after, l)
+	path, err := r.client.GetFramebufferDepth(device, after, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}
 
-	imageInfo, err := service.GetImageInfo(imageID, r.client, l)
+	imageInfo, err := service.GetImageInfo(path.As(image.RGBA()), r.client, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}

@@ -16,8 +16,10 @@ package client
 
 import (
 	"fmt"
+	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"github.com/google/gxui"
 )
 
@@ -78,7 +80,7 @@ func (n atomTreeNode) ItemIndex(item gxui.AdapterItem) int {
 
 func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
 	p := n.ctx.capture.Atoms().Index(n.item.atomIndex)
-	a := n.ctx.atoms[p.Index].(*Atom)
+	a := n.ctx.atoms[p.Index].(atom.Atom)
 
 	layout := t.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
@@ -102,8 +104,8 @@ func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
 
 	layout.AddChild(createLabel(n.ctx.appCtx, "(", CODE_COLOR))
 	needcomma := false
-	for i := 0; i < a.ParameterCount(); i++ {
-		f, v := a.Parameter(i)
+	for _, param := range atomParameters(a) {
+		f, v := param.field, param.value
 
 		if c := createField(n.ctx.appCtx, p.Field(f.Name()), f.Type, v); c != nil {
 			if needcomma {
@@ -117,7 +119,7 @@ func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
 
 	layout.AddChild(createLabel(n.ctx.appCtx, ")", CODE_COLOR))
 
-	if f, v := a.Result(); f != nil {
+	if f, v := atomResult(a); f != nil {
 		layout.AddChild(createLabel(n.ctx.appCtx, " -> ", COMMAND_COLOR))
 		if c := createField(n.ctx.appCtx, p.Field(f.Name()), f.Type, v); c != nil {
 			layout.AddChild(c)
@@ -126,4 +128,61 @@ func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
 	}
 
 	return layout
+}
+
+func underlyingType(t reflect.Type) reflect.Type {
+	for t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	return t
+}
+
+func underlyingValue(v reflect.Value) reflect.Value {
+	for v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
+	return v
+}
+
+type atomParameter struct {
+	field schema.Field
+	value interface{}
+}
+
+func atomParameters(a atom.Atom) []atomParameter {
+	switch a := a.(type) {
+	case *Atom:
+		c := a.ParameterCount()
+		p := make([]atomParameter, c)
+		for i := 0; i < c; i++ {
+			p[i].field, p[i].value = a.Parameter(i)
+		}
+		return p
+	default:
+		v := underlyingValue(reflect.ValueOf(a))
+		t := v.Type()
+		c := t.NumField()
+		p := make([]atomParameter, 0, c)
+		for i := 0; i < c; i++ {
+			if f := t.Field(i); !f.Anonymous {
+				f := schema.Field{Declared: f.Name}
+				p = append(p, atomParameter{field: f, value: v.Field(i).Interface()})
+			}
+		}
+		return p
+	}
+}
+
+func atomResult(a atom.Atom) (*schema.Field, interface{}) {
+	switch a := a.(type) {
+	case *Atom:
+		return a.Result()
+	default:
+		for _, p := range atomParameters(a) {
+			if p.field.Declared == "Result" {
+				return &p.field, p.value
+			}
+		}
+		return nil, nil
+	}
 }

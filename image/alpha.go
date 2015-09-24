@@ -18,6 +18,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type fmtAlpha struct{ binary.Generate }
 
+func (f *fmtAlpha) Key() interface{}             { return *f }
 func (*fmtAlpha) String() string                 { return "Alpha" }
 func (*fmtAlpha) Size(w, h int) int              { return w * h }
 func (*fmtAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }

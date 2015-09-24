@@ -15,19 +15,18 @@
 package gles
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
-	"image"
 	"sync"
 	"testing"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -65,14 +64,41 @@ func p(addr uint64) memory.Pointer {
 	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-func checkImage(t *testing.T, name string, got image.Image, threshold float64) {
+func checkImage(t *testing.T, name string, got *image.Image, threshold float64) {
 	if *generateReferenceImages {
 		storeReferenceImage(t, name, got)
 	} else {
 		expected := loadReferenceImage(t, name)
-		err := compareImages(t, expected, got)
-		if err > threshold {
-			t.Errorf("%v had error of %v%% which is above the threshold of %v%%", name, err*100, threshold*100)
+		diff, err := image.Difference(got, expected)
+		if err != nil {
+			t.Errorf("image.Difference returned error: %v", err)
+			return
+		}
+		if diff > threshold {
+			t.Errorf("%v had error of %v%% which is above the threshold of %v%%", name, diff*100, threshold*100)
+		}
+	}
+}
+
+func checkIssues(t *testing.T, ctx replay.Context, mgr *replay.Manager, expected []replay.Issue, done *sync.WaitGroup) {
+	if done != nil {
+		defer done.Done()
+	}
+	issues := gles.API().(replay.QueryIssues).QueryIssues(ctx, mgr)
+	timeout := time.Tick(replayTimeout)
+	got := []replay.Issue{}
+	for {
+		select {
+		case issue, more := <-issues:
+			if more {
+				got = append(got, issue)
+			} else {
+				check.SlicesDeepEqual(t, got, expected)
+				return
+			}
+		case <-timeout:
+			// Panic instead of erroring so we see the status of the go-routine we're waiting for.
+			panic(fmt.Errorf("Timeout querying for issue"))
 		}
 	}
 }
@@ -82,36 +108,16 @@ func checkColorBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, 
 		defer done.Done()
 	}
 	select {
-	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, replay.NoWireframe):
-		if img.Error != nil {
-			t.Errorf("Failed to read ColorBuffer at %d for %s. Reason: %v", after, name, img.Error)
+	case res := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, replay.NoWireframe):
+		if res.Error != nil {
+			t.Errorf("Failed to read ColorBuffer at %d for %s. Reason: %v", after, name, res.Error)
 			return
 		}
-		if w*h*4 != uint32(len(img.Data)) {
-			t.Errorf("ColorBuffer does not contain the expected number of bytes. Expected: %v, got: %v", w*h*4, len(img.Data))
-			return
-		}
-		got := &image.NRGBA{
-			Pix:    img.Data,
-			Stride: int(w * 4),
-			Rect:   image.Rect(0, 0, int(w), int(h)),
-		}
-		checkImage(t, name, got, threshold)
+		checkImage(t, name, res.Image, threshold)
 	case <-time.Tick(replayTimeout):
 		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
 		panic(fmt.Errorf("Timeout reading ColorBuffer at %d for %s", after, name))
 	}
-}
-
-func depthToU16(in []byte) []byte {
-	buf := &bytes.Buffer{}
-	w := endian.Writer(buf, endian.Big)
-	for len(in) > 0 {
-		a, b := uint16(in[0]), uint16(in[1])
-		w.Uint16((a << 8) | b)
-		in = in[4:]
-	}
-	return buf.Bytes()
 }
 
 func checkDepthBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID, done *sync.WaitGroup) {
@@ -119,21 +125,12 @@ func checkDepthBuffer(t *testing.T, ctx replay.Context, mgr *replay.Manager, w, 
 		defer done.Done()
 	}
 	select {
-	case img := <-gles.API().(replay.QueryDepthBuffer).QueryDepthBuffer(ctx, mgr, after):
-		if img.Error != nil {
-			t.Errorf("Failed to read DepthBuffer at %d for %s. Reason: %v", after, name, img.Error)
+	case res := <-gles.API().(replay.QueryDepthBuffer).QueryDepthBuffer(ctx, mgr, after):
+		if res.Error != nil {
+			t.Errorf("Failed to read DepthBuffer at %d for %s. Reason: %v", after, name, res.Error)
 			return
 		}
-		if w*h*4 != uint32(len(img.Data)) {
-			t.Errorf("DepthBuffer does not contain the expected number of bytes. Expected: %v, got: %v", w*h*4, len(img.Data))
-			return
-		}
-		got := &image.Gray16{
-			Pix:    depthToU16(img.Data),
-			Stride: int(w * 2),
-			Rect:   image.Rect(0, 0, int(w), int(h)),
-		}
-		checkImage(t, name, got, threshold)
+		checkImage(t, name, res.Image, threshold)
 	case <-time.Tick(replayTimeout):
 		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
 		panic(fmt.Errorf("Timeout reading DepthBuffer at %d for %s", after, name))
@@ -183,6 +180,9 @@ func setContextInfo(width, height int, preserveBuffersOnSwap bool) atom.Atom {
 		PreserveBuffersOnSwap: preserveBuffersOnSwap,
 	}
 }
+
+// firstAtomID is the identifier of the first atom after initContext.
+const firstAtomID atom.ID = 3
 
 func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) *atom.List {
 	eglDisplay := p(0x1000)
@@ -339,5 +339,50 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapA, done)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapB, done)
 	go checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapC, done)
+	done.Wait()
+}
+
+// TestIssues tests the QueryIssues replay command with various streams.
+func TestIssues(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
+	a := device.Info().Architecture()
+
+	done := &sync.WaitGroup{}
+
+	for _, test := range []struct {
+		name     string
+		atoms    []atom.Atom
+		expected []replay.Issue
+	}{
+		{
+			"glClear - no errors",
+			[]atom.Atom{
+				gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
+				gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
+			},
+			[]replay.Issue{},
+		}, {
+			"glActiveTexture - invalid enum",
+			[]atom.Atom{&directCall{atom: gles.NewGlActiveTexture(gles.GLenum_GL_TEXTURE0 - 1)}},
+			[]replay.Issue{
+				replay.Issue{
+					Atom:  firstAtomID,
+					Error: fmt.Errorf("glGetError() returned %v", gles.GLenum_GL_INVALID_ENUM),
+				},
+			},
+		},
+	} {
+		atoms := initContext(a, d, l, 64, 64, true)
+		atoms.Add(test.atoms...)
+		ctx := replay.Context{
+			Capture: utils.StoreCapture(t, atoms, d, l).ID,
+			Device:  device.ID(),
+		}
+		done.Add(1)
+		go checkIssues(t, ctx, mgr, test.expected, done)
+	}
+
 	done.Wait()
 }

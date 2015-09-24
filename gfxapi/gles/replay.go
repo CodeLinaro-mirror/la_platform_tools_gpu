@@ -28,12 +28,16 @@ import (
 
 var (
 	// Interface compliance tests
+	_ = replay.QueryIssues(api{})
 	_ = replay.QueryColorBuffer(api{})
 	_ = replay.QueryDepthBuffer(api{})
 	_ = replay.QueryCallDurations(api{})
 )
 
-// drawConfig is a replay Config used by colorBufferRequest and
+// issuesConfig is a replay.Config used by issuesRequests.
+type issuesConfig struct{}
+
+// drawConfig is a replay.Config used by colorBufferRequest and
 // depthBufferRequests.
 type drawConfig struct {
 	wireframeMode      replay.WireframeMode
@@ -45,6 +49,11 @@ type drawConfig struct {
 // batched with any other request.
 func uniqueConfig() replay.Config {
 	return &struct{}{}
+}
+
+// issuesRequest requests all issues found during replay to be reported to out.
+type issuesRequest struct {
+	out chan<- replay.Issue
 }
 
 // colorBufferRequest requests a postback of the framebuffer's color attachment.
@@ -79,6 +88,9 @@ func (a api) Replay(
 
 	transforms := atom.Transforms{}
 
+	// Gathers and reports any issues found.
+	var issues *findIssues
+
 	// Terminate after all atoms of interest.
 	earlyTerminator := &transform.EarlyTerminator{}
 
@@ -89,12 +101,19 @@ func (a api) Replay(
 	injector := &transform.Injector{}
 
 	// Transform for all framebuffer reads.
-	readFramebuffer := NewReadFramebuffer(d, l)
+	readFramebuffer := newReadFramebuffer(d, l)
 
-	profiling := false
+	optimize := true
 
 	for _, req := range requests {
 		switch req := req.(type) {
+		case issuesRequest:
+			optimize = false
+			if issues == nil {
+				issues = newFindIssues(d, l)
+			}
+			issues.reportTo(req.out)
+
 		case colorBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
@@ -114,13 +133,12 @@ func (a api) Replay(
 			readFramebuffer.Depth(req.after, device, req.out)
 
 		case timeCallsRequest:
-			profiling = true
+			optimize = false
 			transforms.Add(timingInfo(req.flags, req.out, device, d, l))
 		}
 	}
 
-	if !profiling {
-		// Not profiling. Add optimisation transforms.
+	if optimize {
 		transforms.Add(earlyTerminator)
 
 		// Check to see if any contexts use the 'preserveBuffersOnSwap' flag.
@@ -154,6 +172,10 @@ func (a api) Replay(
 		log.E(l, "Failed to create compatability transform: %v", err)
 	}
 
+	if issues != nil {
+		transforms.Add(issues) // Issue reporting required.
+	}
+
 	// Cleanup
 	transforms.Add(&destroyResourcesAtEOS{
 		state:  gfxapi.NewState(),
@@ -171,6 +193,16 @@ func (a api) Replay(
 	transforms.Transform(atoms, out)
 
 	return nil
+}
+
+func (a api) QueryIssues(ctx replay.Context, mgr *replay.Manager) <-chan replay.Issue {
+	out := make(chan replay.Issue, 64)
+	c := issuesConfig{}
+	r := issuesRequest{out: out}
+	if err := mgr.Replay(ctx, c, r, a); err != nil {
+		out <- replay.Issue{Atom: atom.NoID, Error: err}
+	}
+	return out
 }
 
 func (a api) QueryColorBuffer(

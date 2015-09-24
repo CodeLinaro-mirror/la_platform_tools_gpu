@@ -5770,9 +5770,6 @@ func (api) Name() string {
 func (api) ID() gfxapi.ID {
 	return apiID
 }
-func (api) GetFramebufferAttachmentSize(state *gfxapi.State, attachment gfxapi.FramebufferAttachment) (width uint32, height uint32, err error) {
-	return getState(state).getFramebufferAttachmentSize(attachment)
-}
 func API() gfxapi.API {
 	return api{}
 }

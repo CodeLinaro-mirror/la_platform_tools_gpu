@@ -164,7 +164,7 @@ func (r executor) handleDataResponse(postbacks io.Writer) error {
 }
 
 func (r executor) handleGetData() error {
-	logger := log.Enter(r.logger, "handleGetData")
+	l := log.Enter(r.logger, "handleGetData")
 	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
 	resourceCount, err := d.Uint32()
@@ -180,16 +180,19 @@ func (r executor) handleGetData() error {
 		}
 		resourceIDs[i], err = binary.ParseID(idString)
 		if err != nil {
+			log.E(l, "Failed to parse resource ID %v: %v", idString, err)
 			return err
 		}
 	}
 
 	for _, rid := range resourceIDs {
-		data, err := database.Resolve(rid, r.database, logger)
+		data, err := database.Resolve(rid, r.database, l)
 		if err != nil {
+			log.E(l, "Failed to resolve resource with ID %v: %v", rid, err)
 			return err
 		}
 		if _, err := r.connection.Write(data.([]byte)); err != nil {
+			log.E(l, "Failed to send resource with ID %v: %v", rid, err)
 			return err
 		}
 	}

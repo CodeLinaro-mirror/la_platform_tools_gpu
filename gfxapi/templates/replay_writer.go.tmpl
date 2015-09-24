@@ -63,28 +63,63 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the replay function for the specified command
+  Emits the Replay() and Call() functions for the specified command.
 -------------------------------------------------------------------------------
 */}}
 {{define "DeclareCommandReplay"}}
   {{AssertType $ "Function"}}
 
   {{if not (GetAnnotation $ "no_replay")}}
-
     {{$name := Macro "Go.CmdName" $}}
     var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
-    func (ϟa *{{$name}}) {{if GetAnnotation $ "replay_custom"}}default{{end}}Replay(§
+    {{if GetAnnotation $ "replay_custom"}}
+      func (ϟa *{{$name}}) defaultReplay(§
+    {{else}}
+      // Replay emits the replay instructions to call {{$.Name}}(), and performs the
+      // necessary state-mutation and memory observations to ϟs.{{if not (IsVoid $.Return.Type)}}
+      // The {{$.Name}}() return value will be stored on the stack.{{end}}
+      func (ϟa *{{$name}}) Replay(§
+    {{end}}
         ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
-    ϟc := getState(ϟs)
-    _ = ϟc
+      ϟc := getState(ϟs)
+      _ = ϟc
 
-    {{Global "CurrentCommand" $}}
+      {{Global "CurrentCommand" $}}
 
-    {{/* Simulate the call */}}
-    {{Template "Go.CommandLogic" $}}
+      {{/* Simulate the call */}}
+      {{Template "Go.CommandLogic" $}}
 
-    return nil
-  }
+      return nil
+    }
+
+    // Call builds the replay instructions to push the arguments to the stack and invoke {{$.Name}}().
+    // Unlike Build(), Call() does not perform any state-mutation or memory observations to ϟs.{{if not (IsVoid $.Return.Type)}}
+    // The {{$.Name}}() return value will be stored on the stack.{{end}}
+    func (ϟa *{{$name}}) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+      {{/* Push all the parameters on the stack */}}
+      {{range $p := $.CallParameters}}
+        {{$type := TypeOf $p}}
+        {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+        {{Template "PushInput" "Type" $type "Name" $name}}
+      {{end}}
+
+      {{/* Call the function */}}
+      ϟb.Call({{Template "BuilderFunctionInfo" $}})
+
+      {{/* Store the return value into a remapping table, if required */}}
+      {{$rty := TypeOf $.Return}}
+      {{if (GetAnnotation $rty "replay_remap")}}
+        if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
+          ptr, found := ϟb.Remappings[key]
+          if !found {
+            ptr = ϟb.AllocateMemory({{Template "Go.SizeOf" $rty}})
+            ϟb.Remappings[key] = ptr
+          }
+          ϟb.Clone(0)
+          ϟb.Store(ptr)
+        }
+      {{end}}
+    }
   {{end}}
 {{end}}
 
@@ -212,29 +247,8 @@
     {{end}}
   {{end}}
 
-  {{/* Push all the parameters on the stack */}}
-  {{range $p := $c.CallParameters}}
-    {{$type := TypeOf $p}}
-    {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-    {{Template "PushInput" "Type" $type "Name" $name}}
-  {{end}}
-
-  {{/* Call the function */}}
-  ϟb.Call({{Template "BuilderFunctionInfo" $c}})
-
-  {{/* Store the return value into a remapping table, if required */}}
-  {{$rty := TypeOf $c.Return}}
-  {{if (GetAnnotation $rty "replay_remap")}}
-    if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-      ptr, found := ϟb.Remappings[key]
-      if !found {
-        ptr = ϟb.AllocateMemory({{Template "Go.SizeOf" $rty}})
-        ϟb.Remappings[key] = ptr
-      }
-      ϟb.Clone(0)
-      ϟb.Store(ptr)
-    }
-  {{end}}
+  {{/* Perform the call */}}
+  ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 
   {{/* Merge the observed writes into the application pool */}}
   ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])

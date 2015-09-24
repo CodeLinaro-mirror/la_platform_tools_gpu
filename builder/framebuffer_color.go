@@ -56,7 +56,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 	}, nil
 }
 
-// BuildLazy returns the *service.Binary data for the given RenderFramebufferColor
+// BuildLazy returns the []byte data for the given RenderFramebufferColor
 // request.
 func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
@@ -93,12 +93,12 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 		return nil, fmt.Errorf("Unknown wireframe mode %v", r.WireframeMode)
 	}
 
-	img := <-query.QueryColorBuffer(ctx, mgr, atom.ID(r.After.Index), r.Width, r.Height, wireframeMode)
-	if img.Error != nil {
-		err := fmt.Errorf("Failed to retrieve framebuffer: %v", img.Error)
+	res := <-query.QueryColorBuffer(ctx, mgr, atom.ID(r.After.Index), r.Width, r.Height, wireframeMode)
+	if res.Error != nil {
+		err := fmt.Errorf("Failed to retrieve framebuffer: %v", res.Error)
 		log.Errorf(l, "%v", err)
 		return nil, err
 	}
 
-	return img.Data, nil
+	return res.Image.Data, nil
 }
