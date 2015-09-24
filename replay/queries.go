@@ -17,6 +17,7 @@ package replay
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/image"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -66,8 +67,9 @@ type QueryCallDurations interface {
 
 // Issue represents a single replay issue reported by QueryIssues.
 type Issue struct {
-	Atom  atom.ID // The atom that reported the issue.
-	Error error   // The error that occurred generating the timing, if there was one.
+	Atom     atom.ID      // The atom that reported the issue.
+	Severity log.Severity // The severity of the issue.
+	Error    error        // The issue's error.
 }
 
 // CallTiming represents the call timing information for a replay.

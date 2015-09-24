@@ -49,8 +49,8 @@ func newFindIssues(d database.Database, l log.Logger) *findIssues {
 // reportTo adds the chan c to the list of issue listeners.
 func (t *findIssues) reportTo(c chan<- replay.Issue) { t.out = append(t.out, c) }
 
-func (t *findIssues) onIssue(i atom.ID, e error) {
-	issue := replay.Issue{Atom: i, Error: e}
+func (t *findIssues) onIssue(i atom.ID, s log.Severity, e error) {
+	issue := replay.Issue{Atom: i, Severity: s, Error: e}
 	for _, o := range t.out {
 		o <- issue
 	}
@@ -58,7 +58,7 @@ func (t *findIssues) onIssue(i atom.ID, e error) {
 
 func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 	if err := a.Mutate(t.state, t.database, t.logger); err != nil {
-		t.onIssue(i, err)
+		t.onIssue(i, log.Error, err)
 	}
 	out.Write(i, a)
 	// Check the result of glGetError after every command.
@@ -72,11 +72,11 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 			}
 			v, err := d.Uint32()
 			if err != nil {
-				t.onIssue(i, fmt.Errorf("Failed to decode glGetError postback: %v", err))
+				t.onIssue(i, log.Error, fmt.Errorf("Failed to decode glGetError postback: %v", err))
 				return err
 			}
 			if e := GLenum(v); e != GLenum_GL_NO_ERROR {
-				t.onIssue(i, fmt.Errorf("glGetError() returned %s", e))
+				t.onIssue(i, log.Error, fmt.Errorf("glGetError() returned %s", e))
 			}
 			return nil
 		}))

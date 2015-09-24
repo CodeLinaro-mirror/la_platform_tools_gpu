@@ -368,8 +368,9 @@ func TestIssues(t *testing.T) {
 			[]atom.Atom{&directCall{atom: gles.NewGlActiveTexture(gles.GLenum_GL_TEXTURE0 - 1)}},
 			[]replay.Issue{
 				replay.Issue{
-					Atom:  firstAtomID,
-					Error: fmt.Errorf("glGetError() returned %v", gles.GLenum_GL_INVALID_ENUM),
+					Atom:     firstAtomID,
+					Severity: log.Error,
+					Error:    fmt.Errorf("glGetError() returned %v", gles.GLenum_GL_INVALID_ENUM),
 				},
 			},
 		},
