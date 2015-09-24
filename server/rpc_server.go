@@ -148,6 +148,10 @@ func (s rpcServer) readCapture(name string, in io.Reader, l log.Logger) (*path.C
 		if obj, err := d.Variant(); err != nil {
 			if err != io.EOF {
 				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), err)
+				if len(list.Atoms) > 0 {
+					a := list.Atoms[len(list.Atoms)-1]
+					log.Warningf(l, "Last atom succesfully decoded: %T %v", a, a)
+				}
 			}
 			break
 		} else {
