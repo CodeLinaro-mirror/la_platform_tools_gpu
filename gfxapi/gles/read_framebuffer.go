@@ -214,17 +214,17 @@ func (t *readFramebuffer) Depth(id atom.ID, device *service.Device, img chan rep
 				switch depthFmt {
 				case GLenum_GL_DEPTH_COMPONENT16:
 					for p, c := int32(0), outW*outH; p < c; p++ {
-						i, _ := r.Uint32()
+						i := r.Uint32()
 						w.Float32(float32(float64(i&0xffff0000) / 0xffff0000))
 					}
 				case GLenum_GL_DEPTH_COMPONENT32:
 					for p, c := int32(0), outW*outH; p < c; p++ {
-						i, _ := r.Uint32()
+						i := r.Uint32()
 						w.Float32(float32(float64(i) / 0xffffffff))
 					}
 				default: // Assume 24-bit depth.
 					for p, c := int32(0), outW*outH; p < c; p++ {
-						i, _ := r.Uint32()
+						i := r.Uint32()
 						w.Float32(float32(float64(i&0xffffff00) / 0xffffff00))
 					}
 				}
@@ -347,7 +347,8 @@ func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, callba
 			var data []byte
 			if err == nil {
 				data = make([]byte, imageSize)
-				err = d.Data(data)
+				d.Data(data)
+				err = d.Error()
 			}
 			if err != nil {
 				err = fmt.Errorf("Could not read framebuffer data (expected length %d bytes): %v", imageSize, err)

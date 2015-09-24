@@ -123,7 +123,7 @@ func decodeIndices(d binary.Decoder, indicesType GLenum) ([]index, error) {
 	switch indicesType {
 	case GLenum_GL_UNSIGNED_BYTE:
 		for {
-			if val, err := d.Uint8(); err == nil {
+			if val := d.Uint8(); d.Error() == nil {
 				indices = append(indices, index(val))
 			} else {
 				return indices, nil
@@ -132,7 +132,7 @@ func decodeIndices(d binary.Decoder, indicesType GLenum) ([]index, error) {
 
 	case GLenum_GL_UNSIGNED_SHORT:
 		for {
-			if val, err := d.Uint16(); err == nil {
+			if val := d.Uint16(); d.Error() == nil {
 				indices = append(indices, index(val))
 			} else {
 				return indices, nil
@@ -141,7 +141,7 @@ func decodeIndices(d binary.Decoder, indicesType GLenum) ([]index, error) {
 
 	case GLenum_GL_UNSIGNED_INT:
 		for {
-			if val, err := d.Uint32(); err == nil {
+			if val := d.Uint32(); d.Error() == nil {
 				indices = append(indices, index(val))
 			} else {
 				return indices, nil

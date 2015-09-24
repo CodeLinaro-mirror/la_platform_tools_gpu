@@ -19,31 +19,31 @@ import "fmt"
 // Reader provides methods for decoding values.
 type Reader interface {
 	// Data reads the data bytes in their entirety.
-	Data([]byte) error
+	Data([]byte)
 	// Bool decodes and returns a boolean value from the Reader.
-	Bool() (bool, error)
+	Bool() bool
 	// Int8 decodes and returns a signed, 8 bit integer value from the Reader.
-	Int8() (int8, error)
+	Int8() int8
 	// Uint8 decodes and returns an unsigned, 8 bit integer value from the Reader.
-	Uint8() (uint8, error)
+	Uint8() uint8
 	// Int16 decodes and returns a signed, 16 bit integer value from the Reader.
-	Int16() (int16, error)
+	Int16() int16
 	// Uint16 decodes and returns an unsigned, 16 bit integer value from the Reader.
-	Uint16() (uint16, error)
+	Uint16() uint16
 	// Int32 decodes and returns a signed, 32 bit integer value from the Reader.
-	Int32() (int32, error)
+	Int32() int32
 	// Uint32 decodes and returns an unsigned, 32 bit integer value from the Reader.
-	Uint32() (uint32, error)
+	Uint32() uint32
 	// Float32 decodes and returns a 32 bit floating-point value from the Reader.
-	Float32() (float32, error)
+	Float32() float32
 	// Int64 decodes and returns a signed, 64 bit integer value from the Reader.
-	Int64() (int64, error)
+	Int64() int64
 	// Uint64 decodes and returns an unsigned, 64 bit integer value from the Reader.
-	Uint64() (uint64, error)
+	Uint64() uint64
 	// Float64 decodes and returns a 64 bit floating-point value from the Reader.
-	Float64() (float64, error)
+	Float64() float64
 	// String decodes and returns a string from the Reader.
-	String() (string, error)
+	String() string
 	// If there is an error reading any input, all further reading returns the
 	// zero value of the type read. Error() returns the error which stopped
 	// reading from the stream. If reading has not stopped it returns nil.
@@ -54,114 +54,36 @@ type Reader interface {
 
 // ReadUint reads an unsigned integer of either 8, 16, 32 or 64 bits from r,
 // returning the result as a uint64.
-func ReadUint(r Reader, bits int) (uint64, error) {
+func ReadUint(r Reader, bits int) uint64 {
 	switch bits {
 	case 8:
-		v, err := r.Uint8()
-		return uint64(v), err
+		return uint64(r.Uint8())
 	case 16:
-		v, err := r.Uint16()
-		return uint64(v), err
+		return uint64(r.Uint16())
 	case 32:
-		v, err := r.Uint32()
-		return uint64(v), err
+		return uint64(r.Uint32())
 	case 64:
-		v, err := r.Uint64()
-		return v, err
+		return r.Uint64()
 	default:
-		return 0, fmt.Errorf("Unsupported integer bit count %v", bits)
+		r.SetError(fmt.Errorf("Unsupported integer bit count %v", bits))
+		return 0
 	}
 }
 
 // ReadInt reads a signed integer of either 8, 16, 32 or 64 bits from r,
 // returning the result as a int64.
-func ReadInt(r Reader, bits int) (int64, error) {
+func ReadInt(r Reader, bits int) int64 {
 	switch bits {
 	case 8:
-		v, err := r.Int8()
-		return int64(v), err
+		return int64(r.Int8())
 	case 16:
-		v, err := r.Int16()
-		return int64(v), err
+		return int64(r.Int16())
 	case 32:
-		v, err := r.Int32()
-		return int64(v), err
+		return int64(r.Int32())
 	case 64:
-		v, err := r.Int64()
-		return v, err
+		return r.Int64()
 	default:
-		return 0, fmt.Errorf("Unsupported integer bit count %v", bits)
+		r.SetError(fmt.Errorf("Unsupported integer bit count %v", bits))
+		return 0
 	}
-}
-
-// ReadBool decodes and returns a boolean value from the Reader.
-func ReadBool(r Reader) bool {
-	v, _ := r.Bool()
-	return v
-}
-
-// ReadInt8 decodes and returns a signed, 8 bit integer value from the Reader.
-func ReadInt8(r Reader) int8 {
-	v, _ := r.Int8()
-	return v
-}
-
-// ReadUint8 decodes and returns an unsigned, 8 bit integer value from the Reader.
-func ReadUint8(r Reader) uint8 {
-	v, _ := r.Uint8()
-	return v
-}
-
-// ReadInt16 decodes and returns a signed, 16 bit integer value from the Reader.
-func ReadInt16(r Reader) int16 {
-	v, _ := r.Int16()
-	return v
-}
-
-// ReadUint16 decodes and returns an unsigned, 16 bit integer value from the Reader.
-func ReadUint16(r Reader) uint16 {
-	v, _ := r.Uint16()
-	return v
-}
-
-// ReadInt32 decodes and returns a signed, 32 bit integer value from the Reader.
-func ReadInt32(r Reader) int32 {
-	v, _ := r.Int32()
-	return v
-}
-
-// ReadUint32 decodes and returns an unsigned, 32 bit integer value from the Reader.
-func ReadUint32(r Reader) uint32 {
-	v, _ := r.Uint32()
-	return v
-}
-
-// ReadFloat32 decodes and returns a 32 bit floating-point value from the Reader.
-func ReadFloat32(r Reader) float32 {
-	v, _ := r.Float32()
-	return v
-}
-
-// ReadInt64 decodes and returns a signed, 64 bit integer value from the Reader.
-func ReadInt64(r Reader) int64 {
-	v, _ := r.Int64()
-	return v
-}
-
-// ReadUint64 decodes and returns an unsigned, 64 bit integer value from the Reader.
-func ReadUint64(r Reader) uint64 {
-	v, _ := r.Uint64()
-	return v
-}
-
-// ReadFloat64 decodes and returns a 64 bit floating-point value from the Reader.
-func ReadFloat64(r Reader) float64 {
-	v, _ := r.Float64()
-	return v
-}
-
-// ReadString decodes and returns a string from the Reader.
-func ReadString(r Reader) string {
-	v, _ := r.String()
-	return v
 }

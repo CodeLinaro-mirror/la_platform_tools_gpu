@@ -43,38 +43,38 @@ type decoder struct {
 	Namespace *registry.Namespace
 }
 
-func (e *encoder) ID(id binary.ID) error {
-	return e.Data(id[:])
+func (e *encoder) ID(id binary.ID) {
+	e.Data(id[:])
 }
 
-func (d *decoder) ID() (binary.ID, error) {
+func (d *decoder) ID() binary.ID {
 	id := binary.ID{}
-	return id, d.Data(id[:])
+	d.Data(id[:])
+	return id
 }
 
-func (e *encoder) Value(obj binary.Object) error { return obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) error { return obj.Class().DecodeTo(d, obj) }
-func (e *encoder) Variant(obj binary.Object) error {
+func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
+func (e *encoder) Variant(obj binary.Object) {
 	if obj == nil {
-		return e.ID(binary.ID{})
+		e.ID(binary.ID{})
+		return
 	}
 	class := obj.Class()
-	if err := e.ID(class.ID()); err != nil {
-		return err
-	}
-	return class.Encode(e, obj)
+	e.ID(class.ID())
+	class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (binary.Object, error) {
-	if id, err := d.ID(); err != nil {
-		return nil, err
-	} else if class := d.Namespace.Lookup(id); class == nil {
-		return nil, fmt.Errorf("Unknown type id %v", id)
+func (d *decoder) Variant() binary.Object {
+	id := d.ID()
+	if class := d.Namespace.Lookup(id); class == nil {
+		d.SetError(fmt.Errorf("Unknown type id %v", id))
+		return nil
 	} else {
 		return class.Decode(d)
 	}
 }
 
-func (e *encoder) Object(obj binary.Object) error   { return e.Variant(obj) }
-func (d *decoder) Object() (binary.Object, error)   { return d.Variant() }
+func (e *encoder) Object(obj binary.Object)         { e.Variant(obj) }
+func (d *decoder) Object() binary.Object            { return d.Variant() }
 func (d *decoder) Lookup(id binary.ID) binary.Class { return d.Namespace.Lookup(id) }

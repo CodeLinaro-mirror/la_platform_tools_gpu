@@ -18,14 +18,14 @@ package binary
 type Encoder interface {
 	Writer
 	// ID writes a binary.ID to the stream.
-	ID(ID) error
+	ID(ID)
 	// Object encodes an Object with no type preamble and no sharing.
-	Value(obj Object) error
+	Value(obj Object)
 	// Variant encodes an Object with no sharing. The type of obj must have
 	// been previously registered with binary.registry.Add.
-	Variant(obj Object) error
+	Variant(obj Object)
 	// Object encodes an Object, optionally encoding objects only on the first
 	// time it sees them. The type of obj must have been previously registered
 	// with binary.registry.Add.
-	Object(obj Object) error
+	Object(obj Object)
 }

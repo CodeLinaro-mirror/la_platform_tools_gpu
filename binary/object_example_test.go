@@ -43,23 +43,20 @@ func (*ExampleClass) New() binary.Object {
 	return &ExampleObject{}
 }
 
-func (*ExampleClass) Encode(e binary.Encoder, obj binary.Object) error {
+func (*ExampleClass) Encode(e binary.Encoder, obj binary.Object) {
 	o := obj.(*ExampleObject)
-	return e.String(o.Data)
+	e.String(o.Data)
 }
 
-func (*ExampleClass) Decode(d binary.Decoder) (binary.Object, error) {
+func (*ExampleClass) Decode(d binary.Decoder) binary.Object {
 	o := &ExampleObject{}
-	var err error
-	o.Data, err = d.String()
-	return o, err
+	o.Data = d.String()
+	return o
 }
 
-func (*ExampleClass) DecodeTo(d binary.Decoder, obj binary.Object) error {
+func (*ExampleClass) DecodeTo(d binary.Decoder, obj binary.Object) {
 	o := obj.(*ExampleObject)
-	var err error
-	o.Data, err = d.String()
-	return err
+	o.Data = d.String()
 }
 
 func init() {
@@ -78,15 +75,17 @@ func Example_object() {
 	d := cyclic.Decoder(vle.Reader(in))
 
 	// Encode an object onto the stream
-	if err := e.Object(&ExampleObject{"MyObject"}); err != nil {
-		log.Fatalf("Encode gave unexpected error: %v", err)
+	e.Object(&ExampleObject{"MyObject"})
+	if e.Error() != nil {
+		log.Fatalf("Encode gave unexpected error: %v", e.Error())
 	}
 
 	// Read the object back
-	if o, err := d.Object(); err == nil {
+	o := d.Object()
+	if d.Error() == nil {
 		fmt.Printf("read %q\n", o.(*ExampleObject).Data)
 	} else {
-		log.Fatalf("Decode gave unexpected error: %v", err)
+		log.Fatalf("Decode gave unexpected error: %v", d.Error())
 	}
 
 	// Output:

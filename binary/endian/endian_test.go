@@ -121,9 +121,11 @@ func TestReadWrite(t *testing.T) {
 			}},
 	} {
 		b := &bytes.Buffer{}
-		rv := reflect.ValueOf(Reader(b, Little))
+		reader := Reader(b, Little)
+		rv := reflect.ValueOf(reader)
 		r := rv.MethodByName(e.name)
-		wv := reflect.ValueOf(Writer(b, Little))
+		writer := Writer(b, Little)
+		wv := reflect.ValueOf(writer)
 		w := wv.MethodByName(e.name)
 		s := reflect.ValueOf(e.values)
 		for i := 0; i < s.Len(); i++ {
@@ -138,14 +140,12 @@ Got:      %# x`, e.name, e.data, b.Bytes())
 			expected := s.Index(i)
 			result := r.Call(nil)
 			got := result[0]
-			err := result[1]
-			if !err.IsNil() {
-				t.Errorf("%v %d gave unexpected error: %v", e.name, i, err)
+			if reader.Error() != nil {
+				t.Errorf("%v %d gave unexpected error: %v", e.name, i, reader.Error())
 			}
 			if !reflect.DeepEqual(expected.Interface(), got.Interface()) {
 				t.Errorf("%v %d gave unexpected value. Expected: %v, got: %v", e.name, i, expected.Interface(), got.Interface())
 			}
-
 		}
 	}
 }

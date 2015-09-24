@@ -73,32 +73,26 @@ func (c *Class) ID() binary.ID {
 
 func (c *Class) New() binary.Object { return &Object{Type: c} }
 
-func (c *Class) Encode(e binary.Encoder, object binary.Object) error {
+func (c *Class) Encode(e binary.Encoder, object binary.Object) {
 	o := object.(*Object)
 	for i, f := range c.Fields {
-		if err := f.Type.Encode(e, o.Fields[i]); err != nil {
-			return err
-		}
+		f.Type.Encode(e, o.Fields[i])
 	}
-	return nil
 }
 
-func (c *Class) doDecode(d binary.Decoder, o *Object) error {
+func (c *Class) doDecode(d binary.Decoder, o *Object) {
 	o.Fields = make([]interface{}, len(c.Fields))
-	var err error
 	for i, f := range c.Fields {
-		if o.Fields[i], err = f.Type.Decode(d); err != nil {
-			return err
-		}
+		o.Fields[i] = f.Type.Decode(d)
 	}
-	return nil
 }
 
-func (c *Class) Decode(d binary.Decoder) (binary.Object, error) {
+func (c *Class) Decode(d binary.Decoder) binary.Object {
 	o := &Object{Type: c}
-	return o, c.doDecode(d, o)
+	c.doDecode(d, o)
+	return o
 }
 
-func (c *Class) DecodeTo(d binary.Decoder, object binary.Object) error {
-	return c.doDecode(d, object.(*Object))
+func (c *Class) DecodeTo(d binary.Decoder, object binary.Object) {
+	c.doDecode(d, object.(*Object))
 }

@@ -68,31 +68,22 @@ func (c calcIndexLimits) BuildLazy(_ interface{}, d database.Database, l log.Log
 	}
 	r := endian.Reader(bytes.NewReader(data.([]byte)), byteOrder)
 
-	var decode func() (uint32, error)
+	var decode func() uint32
 	switch c.indexSize {
 	case 1:
-		decode = func() (uint32, error) {
-			v, err := r.Uint8()
-			return uint32(v), err
-		}
-
+		decode = func() uint32 { return uint32(r.Uint8()) }
 	case 2:
-		decode = func() (uint32, error) {
-			v, err := r.Uint16()
-			return uint32(v), err
-		}
-
+		decode = func() uint32 { return uint32(r.Uint16()) }
 	case 4:
 		decode = r.Uint32
-
 	default:
 		return nil, fmt.Errorf("Unsupported index size %v", c.indexSize)
 	}
 
 	for i := 0; i < c.count; i++ {
-		v, err := decode()
-		if err != nil {
-			return nil, err
+		v := decode()
+		if r.Error() != nil {
+			return nil, r.Error()
 		}
 		if min > v {
 			min = v

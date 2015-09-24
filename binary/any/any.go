@@ -319,32 +319,33 @@ func (i *Any) String() string {
 	return "<any>"
 }
 
-func Encode(e binary.Encoder, value interface{}) error {
+func Encode(e binary.Encoder, value interface{}) {
 	if boxed, err := Box(value); err != nil {
-		return e.SetError(err)
+		e.SetError(err)
 	} else {
-		return e.Variant(boxed)
+		e.Variant(boxed)
 	}
 }
 
-func Decode(d binary.Decoder) (interface{}, error) {
-	if boxed, err := d.Variant(); err != nil {
-		return nil, err
+func Decode(d binary.Decoder) interface{} {
+	boxed := d.Variant()
+	if d.Error() != nil {
+		return nil
+	}
+	if unboxed, err := Unbox(boxed); err != nil {
+		d.SetError(err)
+		return nil
 	} else {
-		if unboxed, err := Unbox(boxed); err != nil {
-			return nil, d.SetError(err)
-		} else {
-			return unboxed, nil
-		}
+		return unboxed
 	}
 }
 
-func (i *Any) Encode(e binary.Encoder, value interface{}) error {
+func (i *Any) Encode(e binary.Encoder, value interface{}) {
 	// Note this is calling the non-member function (not itself).
-	return Encode(e, value)
+	Encode(e, value)
 }
 
-func (i *Any) Decode(d binary.Decoder) (interface{}, error) {
+func (i *Any) Decode(d binary.Decoder) interface{} {
 	// Note this is calling the non-member function (not itself).
 	return Decode(d)
 }

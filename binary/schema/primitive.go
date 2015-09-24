@@ -112,40 +112,40 @@ func (p *Primitive) String() string {
 	return p.Name
 }
 
-func (p *Primitive) Encode(e binary.Encoder, value interface{}) error {
+func (p *Primitive) Encode(e binary.Encoder, value interface{}) {
 	switch p.Method {
 	case ID:
-		return e.ID(value.(binary.ID))
+		e.ID(value.(binary.ID))
 	case Bool:
-		return e.Bool(value.(bool))
+		e.Bool(value.(bool))
 	case Int8:
-		return e.Int8(value.(int8))
+		e.Int8(value.(int8))
 	case Uint8:
-		return e.Uint8(value.(uint8))
+		e.Uint8(value.(uint8))
 	case Int16:
-		return e.Int16(value.(int16))
+		e.Int16(value.(int16))
 	case Uint16:
-		return e.Uint16(value.(uint16))
+		e.Uint16(value.(uint16))
 	case Int32:
-		return e.Int32(value.(int32))
+		e.Int32(value.(int32))
 	case Uint32:
-		return e.Uint32(value.(uint32))
+		e.Uint32(value.(uint32))
 	case Int64:
-		return e.Int64(value.(int64))
+		e.Int64(value.(int64))
 	case Uint64:
-		return e.Uint64(value.(uint64))
+		e.Uint64(value.(uint64))
 	case Float32:
-		return e.Float32(value.(float32))
+		e.Float32(value.(float32))
 	case Float64:
-		return e.Float64(value.(float64))
+		e.Float64(value.(float64))
 	case String:
-		return e.String(value.(string))
+		e.String(value.(string))
 	default:
-		return fmt.Errorf("Unknown encode method %q", p.Method)
+		e.SetError(fmt.Errorf("Unknown encode method %q", p.Method))
 	}
 }
 
-func (p *Primitive) Decode(d binary.Decoder) (interface{}, error) {
+func (p *Primitive) Decode(d binary.Decoder) interface{} {
 	switch p.Method {
 	case ID:
 		return d.ID()
@@ -174,7 +174,8 @@ func (p *Primitive) Decode(d binary.Decoder) (interface{}, error) {
 	case String:
 		return d.String()
 	default:
-		return nil, fmt.Errorf("Unknown decode method %q", p.Method)
+		d.SetError(fmt.Errorf("Unknown decode method %q", p.Method))
+		return nil
 	}
 }
 

@@ -191,17 +191,15 @@ const go_binary_tmpl = `{{/*
   func (*{{.Name}}) Class() binary.Class {»¶
     return (*binaryClass{{.Name}})(nil)¶
   «}¶
-  func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {»¶
+  func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) {»¶
     {{range .Fields}}
       {{Call "Go.Encode" (Var .Type "o." .Name)}}
     {{end}}
-    return e.Error()¶
   «}¶
-  func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
+  func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) {»¶
     {{range .Fields}}
       {{Call "Go.Decode" (Var .Type "o." .Name)}}
     {{end}}
-    return d.Error()¶
   «}¶
   {{$base := 18}}
   {{$wrap := gt (len .Name) (add $base 7)}}
@@ -212,15 +210,16 @@ const go_binary_tmpl = `{{/*
   func (*binaryClass{{.Name}}) New() binary.Object{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
     return &{{.Name}}{}{{if $wrap}}¶{{else}}•{{end}}
   «}¶
-  func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {»¶
-    return doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
+  func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) {»¶
+    doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
   «}¶
-  func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {»¶
+  func (*binaryClass{{.Name}}) Decode(d binary.Decoder) binary.Object {»¶
     obj := &{{.Name}}{}¶
-    return obj, doDecode{{.Name}}(d, obj)¶
+    doDecode{{.Name}}(d, obj)¶
+    return obj¶
   «}¶
-  func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {»¶
-    return doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
+  func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶
+    doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
   «}¶
   {{$wrap := gt (len .Name) (add $base 0)}}
   {{if File.Directive "Schema" true}}
@@ -309,7 +308,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Primitive"}}
-  {{.Name}} = {{.Type.Name}}(binary.Read{{.Type.Method}}(d))¶
+  {{.Name}} = {{.Type.Name}}(d.{{.Type.Method}}())¶
 {{end}}
 
 {{define "Go.Decode.Struct"}}
@@ -317,7 +316,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Pointer"}}
-  if obj, err := d.Object(); obj != nil && err == nil {»¶
+  if obj := d.Object(); obj != nil {»¶
     {{.Name}} = obj.({{.Type}})¶
   «} else {»¶
     {{.Name}} = nil¶
@@ -325,7 +324,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Interface"}}
-  if obj, err := d.Object(); obj != nil && err == nil {»¶
+  if obj := d.Object(); obj != nil {»¶
     {{.Name}} = obj.({{.Type.Name}})¶
   «} else {»¶
     {{.Name}} = nil¶
@@ -333,7 +332,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Variant"}}
-  if obj, err := d.Variant(); obj != nil && err == nil {»¶
+  if obj := d.Variant(); obj != nil {»¶
     {{.Name}} = obj.({{.Type.Name}})¶
   «} else {»¶
     {{.Name}} = nil¶
@@ -341,13 +340,11 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Any"}}
-  {{.Name}}, _ = any.Decode(d)¶
+  {{.Name}} = any.Decode(d)¶
 {{end}}
 
 {{define "Go.Decode_Length"}}
-  if count, err := d.Uint32(); err != nil {»¶
-    return err¶
-  «} else {»¶
+  if count := d.Uint32(); count > 0 {»¶
     {{.Name}} = make({{.Type}}, count)¶
 {{end}}
 
@@ -372,9 +369,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Map"}}
-  if count, err := d.Uint32(); err != nil {»¶
-    return err¶
-  «} else {»¶
+  if count := d.Uint32(); count > 0 {»¶
     {{.Name}} = make({{.Type}}, count)¶
     m := {{.Name}}¶
     for i := uint32(0); i < count; i++ {»¶

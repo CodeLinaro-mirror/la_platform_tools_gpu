@@ -70,7 +70,8 @@ func TestPostbackString(t *testing.T) {
 				return err
 			}
 			data := make([]byte, len(expected))
-			err = d.Data(data)
+			d.Data(data)
+			err = d.Error()
 			if err != nil {
 				t.Errorf("Postback returned error: %v", err)
 				return err
@@ -98,7 +99,8 @@ func TestMultiPostback(t *testing.T) {
 				t.Errorf("Postback returned error: %v", err)
 				return err
 			}
-			data, err := d.Bool()
+			data := d.Bool()
+			err = d.Error()
 			if err != nil {
 				t.Errorf("Postback returned error: %v", err)
 				return err
@@ -117,7 +119,8 @@ func TestMultiPostback(t *testing.T) {
 				t.Errorf("Postback returned error: %v", err)
 				return err
 			}
-			data, err := d.Bool()
+			data := d.Bool()
+			err = d.Error()
 			if err != nil {
 				t.Errorf("Postback returned error: %v", err)
 				return err
@@ -136,7 +139,8 @@ func TestMultiPostback(t *testing.T) {
 				t.Errorf("Postback returned error: %v", err)
 				return err
 			}
-			data, err := d.Float64()
+			data := d.Float64()
+			err = d.Error()
 			if err != nil {
 				t.Errorf("Postback returned error: %v", err)
 				return err

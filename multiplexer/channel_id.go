@@ -31,14 +31,15 @@ func (i *channelId) increment() (old channelId) {
 }
 
 func (i channelId) encode(e binary.Encoder) error {
-	return e.Uint32(uint32(i))
+	e.Uint32(uint32(i))
+	return e.Error()
 }
 
 func (i *channelId) decode(d binary.Decoder) error {
-	if val, err := d.Uint32(); err == nil {
-		*i = channelId(val)
-		return nil
-	} else {
-		return err
+	val := d.Uint32()
+	if d.Error() != nil {
+		return d.Error()
 	}
+	*i = channelId(val)
+	return nil
 }

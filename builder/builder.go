@@ -45,14 +45,17 @@ type Context struct {
 
 func encode(v binary.Object) ([]byte, error) {
 	buf := &bytes.Buffer{}
-	if err := cyclic.Encoder(vle.Writer(buf)).Object(v); err != nil {
-		return nil, err
+	e := cyclic.Encoder(vle.Writer(buf))
+	if e.Object(v); e.Error() != nil {
+		return nil, e.Error()
 	}
 	return buf.Bytes(), nil
 }
 
 func decode(data []byte) (binary.Object, error) {
-	return cyclic.Decoder(vle.Reader(bytes.NewBuffer(data))).Object()
+	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
+	o := d.Object()
+	return o, d.Error()
 }
 
 // extractResources returns a new atom list with all the resources extracted

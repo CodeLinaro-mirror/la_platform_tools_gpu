@@ -268,7 +268,7 @@ func (t *timingInfoGpuTransform) checkDisjoint(checkType disjointCheckType, out 
 				return err
 			}
 			var value int32
-			if value, err = d.Int32(); err == nil {
+			if value = d.Int32(); d.Error() == nil {
 				switch checkType {
 				case resetOnly:
 					t.disjoint = false
@@ -312,8 +312,8 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 					if err != nil {
 						return err
 					}
-					var value int32
-					if value, err = d.Int32(); err == nil && value != 0 {
+					value := d.Int32()
+					if err = d.Error(); err == nil && value != 0 {
 						if t.disjoint {
 							query.state = queryDisjoint
 						} else {
@@ -339,8 +339,9 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 				if err != nil {
 					return err
 				}
-				var value uint64
-				if value, err = d.Uint64(); err == nil {
+				value := d.Uint64()
+				err = d.Error()
+				if err == nil {
 					query.value = value
 				}
 				return err

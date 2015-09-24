@@ -137,17 +137,17 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 func (s rpcServer) readCapture(name string, in io.Reader, l log.Logger) (*path.Capture, error) {
 	list := atom.NewList()
 	d := cyclic.Decoder(vle.Reader(in))
-	tag, err := d.String()
-	if err != nil {
-		return nil, err
+	tag := d.String()
+	if d.Error() != nil {
+		return nil, d.Error()
 	}
 	if tag != gapii.CaptureTag {
 		return nil, fmt.Errorf("Invalid capture tag '%s'", tag)
 	}
 	for {
-		if obj, err := d.Variant(); err != nil {
-			if err != io.EOF {
-				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), err)
+		if obj := d.Variant(); d.Error() != nil {
+			if d.Error() != io.EOF {
+				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), d.Error())
 				if len(list.Atoms) > 0 {
 					a := list.Atoms[len(list.Atoms)-1]
 					log.Warningf(l, "Last atom succesfully decoded: %T %v", a, a)

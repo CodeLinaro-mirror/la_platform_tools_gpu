@@ -76,9 +76,7 @@ func Hash(v interface{}) (binary.ID, error) {
 	if err != nil {
 		return id, err
 	}
-	if err := e.Object(o); err != nil {
-		return id, err
-	}
+	e.Object(o)
 	copy(id[:], h.Sum(nil))
-	return id, nil
+	return id, e.Error()
 }

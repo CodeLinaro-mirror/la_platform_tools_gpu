@@ -39,18 +39,19 @@ func (s *Struct) String() string {
 	return s.Name
 }
 
-func (s *Struct) Encode(e binary.Encoder, value interface{}) error {
-	return e.Value(value.(binary.Object))
+func (s *Struct) Encode(e binary.Encoder, value interface{}) {
+	e.Value(value.(binary.Object))
 }
 
-func (s *Struct) Decode(d binary.Decoder) (interface{}, error) {
+func (s *Struct) Decode(d binary.Decoder) interface{} {
 	class := d.Lookup(s.ID)
 	if class == nil {
-		return nil, fmt.Errorf("Unknown type id %v for %s", s.ID, s)
+		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.ID, s))
 	}
 	o := class.New()
 	if o == nil {
-		return nil, fmt.Errorf("Nil object built by class for %s : %T", s, class)
+		d.SetError(fmt.Errorf("Nil object built by class for %s : %T", s, class))
 	}
-	return o, d.Value(o)
+	d.Value(o)
+	return o
 }

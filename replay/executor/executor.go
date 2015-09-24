@@ -66,8 +66,8 @@ func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
 	e := flat.Encoder(endian.Writer(buf, r.architecture.ByteOrder))
-	if err := e.Value(&r.payload); err != nil {
-		return err
+	if e.Value(&r.payload); e.Error() != nil {
+		return e.Error()
 	}
 	data := buf.Bytes()
 
@@ -111,25 +111,20 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 	e := flat.Encoder(endian.Writer(connection, r.architecture.ByteOrder))
 	d := flat.Decoder(endian.Reader(connection, r.architecture.ByteOrder))
 
-	if err := e.Uint8(uint8(protocol.ConnectionTypeReplay)); err != nil {
-		return err
-	}
-
-	if err := e.String(replayID.String()); err != nil {
-		return err
-	}
-
-	if err := e.Uint32(replaySize); err != nil {
-		return err
+	e.Uint8(uint8(protocol.ConnectionTypeReplay))
+	e.String(replayID.String())
+	e.Uint32(replaySize)
+	if e.Error() != nil {
+		return e.Error()
 	}
 
 	for {
-		msg, err := d.Uint8()
+		msg := d.Uint8()
 		switch {
-		case err == io.EOF:
+		case d.Error() == io.EOF:
 			return nil
-		case err != nil:
-			return err
+		case d.Error() != nil:
+			return d.Error()
 		}
 
 		switch protocol.MessageType(msg) {
@@ -150,9 +145,9 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 func (r executor) handleDataResponse(postbacks io.Writer) error {
 	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
-	n, err := d.Uint32()
-	if err != nil {
-		return err
+	n := d.Uint32()
+	if d.Error() != nil {
+		return d.Error()
 	}
 
 	c, err := io.CopyN(postbacks, r.connection, int64(n))
@@ -167,17 +162,18 @@ func (r executor) handleGetData() error {
 	l := log.Enter(r.logger, "handleGetData")
 	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
-	resourceCount, err := d.Uint32()
-	if err != nil {
-		return err
+	resourceCount := d.Uint32()
+	if d.Error() != nil {
+		return d.Error()
 	}
 
 	resourceIDs := make([]binary.ID, resourceCount)
 	for i := range resourceIDs {
-		idString, err := d.String()
-		if err != nil {
-			return err
+		idString := d.String()
+		if d.Error() != nil {
+			return d.Error()
 		}
+		var err error
 		resourceIDs[i], err = binary.ParseID(idString)
 		if err != nil {
 			log.E(l, "Failed to parse resource ID %v: %v", idString, err)

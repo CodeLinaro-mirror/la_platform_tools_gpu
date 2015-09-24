@@ -53,81 +53,74 @@ type decoder struct {
 	ids       map[uint32]binary.ID
 }
 
-func (e *encoder) ID(id binary.ID) error {
+func (e *encoder) ID(id binary.ID) {
 	if sid, found := e.ids[id]; found {
-		return e.Uint32(sid << 1)
+		e.Uint32(sid << 1)
 	} else {
 		sid = uint32(len(e.ids)) + 1
 		e.ids[id] = sid
-		if err := e.Uint32((sid << 1) | 1); err != nil {
-			return err
-		}
-		return e.Data(id[:])
+		e.Uint32((sid << 1) | 1)
+		e.Data(id[:])
 	}
 }
 
-func (d *decoder) ID() (binary.ID, error) {
+func (d *decoder) ID() binary.ID {
 	id := binary.ID{}
-	v, err := d.Uint32()
-	if err != nil {
-		return id, err
-	}
+	v := d.Uint32()
 	sid := v >> 1
 	if (v & 1) != 0 {
-		err := d.Data(id[:])
+		d.Data(id[:])
 		d.ids[sid] = id
-		return id, err
+		return id
 	}
 	id, found := d.ids[sid]
 	if !found {
-		return id, d.SetError(fmt.Errorf("Unknown id sid %v", sid))
+		d.SetError(fmt.Errorf("Unknown id sid %v", sid))
 	}
-	return id, nil
+	return id
 }
 
-func (e *encoder) Value(obj binary.Object) error { return obj.Class().Encode(e, obj) }
-func (d *decoder) Value(obj binary.Object) error { return obj.Class().DecodeTo(d, obj) }
-func (e *encoder) Variant(obj binary.Object) error {
+func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
+func (e *encoder) Variant(obj binary.Object) {
 	if obj == nil {
-		return e.ID(binary.ID{})
+		e.ID(binary.ID{})
+		return
 	}
 	class := obj.Class()
-	if err := e.ID(class.ID()); err != nil {
-		return err
-	}
-	return class.Encode(e, obj)
+	e.ID(class.ID())
+	class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (binary.Object, error) {
-	if id, err := d.ID(); err != nil {
-		return nil, err
-	} else if class := d.Namespace.Lookup(id); class == nil {
-		return nil, d.SetError(fmt.Errorf("Unknown type id %v", id))
+func (d *decoder) Variant() binary.Object {
+	id := d.ID()
+	if class := d.Namespace.Lookup(id); class == nil {
+		d.SetError(fmt.Errorf("Unknown type id %v", id))
+		return nil
 	} else {
 		return class.Decode(d)
 	}
 }
 
-func (e *encoder) Object(obj binary.Object) error {
+func (e *encoder) Object(obj binary.Object) {
 	if obj == nil {
-		return e.Uint32(0)
+		e.Uint32(0)
+		return
 	}
 	if sid, found := e.objects[obj]; found {
-		return e.Uint32(sid << 1)
+		e.Uint32(sid << 1)
 	} else {
 		sid = uint32(len(e.objects)) + 1
 		e.objects[obj] = sid
-		if err := e.Uint32((sid << 1) | 1); err != nil {
-			return err
-		}
-		return e.Variant(obj)
+		e.Uint32((sid << 1) | 1)
+		e.Variant(obj)
 	}
 }
 
-func (d *decoder) Object() (binary.Object, error) {
-	v, err := d.Uint32()
-	if err != nil || v == 0 {
-		return nil, err
+func (d *decoder) Object() binary.Object {
+	v := d.Uint32()
+	if v == 0 {
+		return nil
 	}
 	sid := v >> 1
 	decode := (v & 1) != 0
@@ -136,17 +129,15 @@ func (d *decoder) Object() (binary.Object, error) {
 	case found && decode:
 		// TODO consider whether we want to reintroduce some skipping ability
 		// just for this
-		_, err := d.Variant()
-		return o, err
+		d.Variant()
 	case decode:
-		o, err = d.Variant()
+		o = d.Variant()
 		d.objects[sid] = o
-		return o, err
 	case found:
-		return o, nil
 	default:
-		return nil, d.SetError(fmt.Errorf("Unknown object sid %v", sid))
+		d.SetError(fmt.Errorf("Unknown object sid %v", sid))
 	}
+	return o
 }
 
 func (d *decoder) Lookup(id binary.ID) binary.Class {

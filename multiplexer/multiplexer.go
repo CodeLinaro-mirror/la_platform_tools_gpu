@@ -130,8 +130,9 @@ func (m *Multiplexer) recv() {
 		switch ty {
 		case msgTypeOpenChannel:
 			msg := &msgOpenChannel{}
-			if err := d.Value(msg); err != nil {
-				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+			d.Value(msg)
+			if d.Error() != nil {
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, d.Error())
 				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
@@ -140,8 +141,9 @@ func (m *Multiplexer) recv() {
 
 		case msgTypeCloseChannel:
 			msg := &msgCloseChannel{}
-			if err := d.Value(msg); err != nil {
-				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+			d.Value(msg)
+			if d.Error() != nil {
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, d.Error())
 				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
@@ -149,8 +151,9 @@ func (m *Multiplexer) recv() {
 
 		case msgTypeData:
 			msg := &msgData{}
-			if err := d.Value(msg); err != nil {
-				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+			d.Value(msg)
+			if d.Error() != nil {
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, d.Error())
 				log.Warningf(m.logger, "%v", m.err)
 				return
 			}

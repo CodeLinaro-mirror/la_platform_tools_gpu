@@ -56,268 +56,209 @@ type writer struct {
 	err       error
 }
 
-func (r *reader) earlierError() error {
-	return fmt.Errorf("Reading was stopped due to an earlier error: %v", r.err)
-}
-
-func (w *writer) earlierError() error {
-	return fmt.Errorf("Writing was stopped due to an earlier error: %v", w.err)
-}
-
-func (r *reader) Data(p []byte) error {
+func (r *reader) Data(p []byte) {
 	if r.err != nil {
-		return r.earlierError()
+		return
 	}
 	n, err := io.ReadFull(r.reader, p)
 	if err != nil {
 		r.err = err
 		err = fmt.Errorf("%v after reading %d bytes", err, n)
 	}
-	return err
 }
 
-func (w *writer) Data(data []byte) error {
+func (w *writer) Data(data []byte) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	n, err := w.writer.Write(data)
 	if err != nil {
 		w.err = err
-		return err
-	}
-	if n != len(data) {
+	} else if n != len(data) {
 		w.err = io.ErrShortWrite
-		return io.ErrShortWrite
 	}
-	return nil
 }
 
-func (r *reader) Bool() (bool, error) {
-	if r.err != nil {
-		return false, r.earlierError()
-	}
-	b, err := r.Uint8()
-	return b != 0, err
+func (r *reader) Bool() bool {
+	return r.Uint8() != 0
 }
 
-func (w *writer) Bool(v bool) error {
-	if w.err != nil {
-		return w.earlierError()
-	}
+func (w *writer) Bool(v bool) {
 	if v {
-		return w.Uint8(1)
+		w.Uint8(1)
+	} else {
+		w.Uint8(0)
 	}
-	return w.Uint8(0)
 }
 
-func (r *reader) Int8() (int8, error) {
+func (r *reader) Int8() int8 {
+	return int8(r.Uint8())
+}
+
+func (w *writer) Int8(v int8) {
+	w.Uint8(uint8(v))
+}
+
+func (r *reader) Uint8() uint8 {
 	if r.err != nil {
-		return 0, r.earlierError()
-	}
-	i, err := r.Uint8()
-	return int8(i), err
-}
-
-func (w *writer) Int8(v int8) error {
-	if w.err != nil {
-		return w.earlierError()
-	}
-	return w.Uint8(uint8(v))
-}
-
-func (r *reader) Uint8() (uint8, error) {
-	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
 	b := r.tmp[:1]
-	_, err := io.ReadFull(r.reader, b[:1])
-	r.err = err
-	return b[0], err
+	_, r.err = io.ReadFull(r.reader, b[:1])
+	return b[0]
 }
 
-func (w *writer) Uint8(v uint8) error {
-	if w.err != nil {
-		return w.earlierError()
-	}
+func (w *writer) Uint8(v uint8) {
 	w.tmp[0] = v
-	return w.Data(w.tmp[:1])
+	w.Data(w.tmp[:1])
 }
 
-func (r *reader) Int16() (int16, error) {
+func (r *reader) Int16() int16 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:2])
-	r.err = err
-	return int16(r.byteOrder.Uint16(r.tmp[:])), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:2])
+	return int16(r.byteOrder.Uint16(r.tmp[:]))
 }
 
-func (w *writer) Int16(v int16) error {
+func (w *writer) Int16(v int16) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint16(w.tmp[:], uint16(v))
-	_, err := w.writer.Write(w.tmp[:2])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:2])
 }
 
-func (r *reader) Uint16() (uint16, error) {
+func (r *reader) Uint16() uint16 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:2])
-	r.err = err
-	return r.byteOrder.Uint16(r.tmp[:]), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:2])
+	return r.byteOrder.Uint16(r.tmp[:])
 }
 
-func (w *writer) Uint16(v uint16) error {
+func (w *writer) Uint16(v uint16) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint16(w.tmp[:], v)
-	_, err := w.writer.Write(w.tmp[:2])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:2])
 }
 
-func (r *reader) Int32() (int32, error) {
+func (r *reader) Int32() int32 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:4])
-	r.err = err
-	return int32(r.byteOrder.Uint32(r.tmp[:])), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:4])
+	return int32(r.byteOrder.Uint32(r.tmp[:]))
 }
 
-func (w *writer) Int32(v int32) error {
+func (w *writer) Int32(v int32) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint32(w.tmp[:], uint32(v))
-	_, err := w.writer.Write(w.tmp[:4])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:4])
 }
 
-func (r *reader) Uint32() (uint32, error) {
+func (r *reader) Uint32() uint32 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:4])
-	r.err = err
-	return r.byteOrder.Uint32(r.tmp[:]), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:4])
+	return r.byteOrder.Uint32(r.tmp[:])
 }
 
-func (w *writer) Uint32(v uint32) error {
+func (w *writer) Uint32(v uint32) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint32(w.tmp[:], v)
-	_, err := w.writer.Write(w.tmp[:4])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:4])
 }
 
-func (r *reader) Int64() (int64, error) {
+func (r *reader) Int64() int64 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:8])
-	r.err = err
-	return int64(r.byteOrder.Uint64(r.tmp[:])), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:8])
+	return int64(r.byteOrder.Uint64(r.tmp[:]))
 }
 
-func (w *writer) Int64(v int64) error {
+func (w *writer) Int64(v int64) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint64(w.tmp[:], uint64(v))
-	_, err := w.writer.Write(w.tmp[:8])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:8])
 }
 
-func (r *reader) Uint64() (uint64, error) {
+func (r *reader) Uint64() uint64 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:8])
-	r.err = err
-	return r.byteOrder.Uint64(r.tmp[:]), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:8])
+	return r.byteOrder.Uint64(r.tmp[:])
 }
 
-func (w *writer) Uint64(v uint64) error {
+func (w *writer) Uint64(v uint64) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint64(w.tmp[:], v)
-	_, err := w.writer.Write(w.tmp[:8])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:8])
 }
 
-func (r *reader) Float32() (float32, error) {
+func (r *reader) Float32() float32 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:4])
-	r.err = err
-	return math.Float32frombits(r.byteOrder.Uint32(r.tmp[:])), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:4])
+	return math.Float32frombits(r.byteOrder.Uint32(r.tmp[:]))
 }
 
-func (w *writer) Float32(v float32) error {
+func (w *writer) Float32(v float32) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint32(w.tmp[:], math.Float32bits(v))
-	_, err := w.writer.Write(w.tmp[:4])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:4])
 }
 
-func (r *reader) Float64() (float64, error) {
+func (r *reader) Float64() float64 {
 	if r.err != nil {
-		return 0, r.earlierError()
+		return 0
 	}
-	_, err := io.ReadFull(r.reader, r.tmp[:8])
-	r.err = err
-	return math.Float64frombits(r.byteOrder.Uint64(r.tmp[:])), err
+	_, r.err = io.ReadFull(r.reader, r.tmp[:8])
+	return math.Float64frombits(r.byteOrder.Uint64(r.tmp[:]))
 }
 
-func (w *writer) Float64(v float64) error {
+func (w *writer) Float64(v float64) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
 	w.byteOrder.PutUint64(w.tmp[:], math.Float64bits(v))
-	_, err := w.writer.Write(w.tmp[:8])
-	w.err = err
-	return err
+	_, w.err = w.writer.Write(w.tmp[:8])
 }
 
-func (r *reader) String() (string, error) {
+func (r *reader) String() string {
 	s := []byte{}
 	for {
-		if c, err := r.Uint8(); err != nil {
-			return "", err
-		} else if c == 0 {
+		c := r.Uint8()
+		if c == 0 {
 			break
-		} else {
-			s = append(s, c)
 		}
+		s = append(s, c)
 	}
-	return string(s), nil
+	return string(s)
 }
 
-func (w *writer) String(v string) error {
+func (w *writer) String(v string) {
 	if w.err != nil {
-		return w.earlierError()
+		return
 	}
-	if _, err := w.writer.Write([]byte(v)); err != nil {
-		w.err = err
-		return err
-	}
-	return w.Uint8(0)
+	w.writer.Write([]byte(v))
+	w.Uint8(0)
 }
 
 func (w *writer) Error() error {

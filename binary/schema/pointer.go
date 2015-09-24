@@ -38,17 +38,14 @@ func (p *Pointer) String() string {
 	return p.Typename()
 }
 
-func (p *Pointer) Encode(e binary.Encoder, value interface{}) error {
+func (p *Pointer) Encode(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
-		if err := e.Object(value.(binary.Object)); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(value.(binary.Object))
+	} else {
+		e.Object(nil)
 	}
-	return nil
 }
 
-func (p *Pointer) Decode(d binary.Decoder) (interface{}, error) {
+func (p *Pointer) Decode(d binary.Decoder) interface{} {
 	return d.Object()
 }

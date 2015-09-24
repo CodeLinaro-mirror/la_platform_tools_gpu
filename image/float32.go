@@ -39,7 +39,7 @@ func init() {
 			dst, i, j := make([]byte, width*height*4), 0, 0
 			for y := 0; y < height; y++ {
 				for x := 0; x < width; x++ {
-					depth, _ := r.Float32()
+					depth := r.Float32()
 					d := 0.01 / (1.0 - float64(depth))
 					dst[j+0] = byte(math.Cos(d+math.Pi*2.0*0.000)*127.0 + 128.0)
 					dst[j+1] = byte(math.Cos(d+math.Pi*2.0*0.333)*127.0 + 128.0)

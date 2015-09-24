@@ -72,13 +72,13 @@ func (c Client) Send(call binary.Object) (interface{}, error) {
 	}
 
 	// Write the RPC header
-	if err := e.Data(header[:]); err != nil {
-		return nil, err
+	if e.Data(header[:]); d.Error() != nil {
+		return nil, d.Error()
 	}
 
 	// Write the call
-	if err := e.Object(call); err != nil {
-		return nil, err
+	if e.Object(call); d.Error() != nil {
+		return nil, d.Error()
 	}
 
 	// Flush the bufio writer
@@ -87,9 +87,9 @@ func (c Client) Send(call binary.Object) (interface{}, error) {
 	}
 
 	// Wait for and read the response
-	res, err := d.Object()
-	if err != nil {
-		return nil, err
+	res := d.Object()
+	if d.Error() != nil {
+		return nil, d.Error()
 	}
 
 	// Check to see if the response was an error

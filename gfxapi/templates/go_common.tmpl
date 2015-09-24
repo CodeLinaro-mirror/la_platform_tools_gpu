@@ -106,16 +106,16 @@
   {{AssertType $.ErrHandler "string" "nil"}}
 
   {{     if not $.ErrHandler}}{{Template "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
-  {{else if IsStaticArray $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-  {{else if IsMap         $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-  {{else if IsClass       $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-  {{else if IsPointer     $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsStaticArray $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsMap         $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsClass       $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsPointer     $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
   {{else if IsPseudonym   $.Type}}
     {{$ty := $.Type.To}}
-    {{     if IsStaticArray $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-    {{else if IsMap         $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-    {{else if IsClass       $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-    {{else if IsPointer     $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+    {{     if IsStaticArray $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+    {{else if IsMap         $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+    {{else if IsClass       $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+    {{else if IsPointer     $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else}}{{Template "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
     {{end}}
   {{else}}{{Template "Go.DecodePOD" "Type" $.Type "Name" $.Name "ErrHandler" $.ErrHandler}}
@@ -141,22 +141,22 @@
   {{$v        := Macro "Go.DecodePOD_cast" $.Cast}}
   {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
 
-  {{     if IsEnum        $.Type}}if ϟv, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(ϟv) } else { {{$.ErrHandler}} }
-  {{else if IsBool        $.Type}}if ϟv, err := d.Bool();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsChar        $.Type}}if ϟv, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU8          $.Type}}if ϟv, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS8          $.Type}}if ϟv, err := d.Int8();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU16         $.Type}}if ϟv, err := d.Uint16();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS16         $.Type}}if ϟv, err := d.Int16();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsF32         $.Type}}if ϟv, err := d.Float32(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU32         $.Type}}if ϟv, err := d.Uint32();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS32         $.Type}}if ϟv, err := d.Int32();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsF64         $.Type}}if ϟv, err := d.Float64(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU64         $.Type}}if ϟv, err := d.Uint64();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS64         $.Type}}if ϟv, err := d.Int64();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsString      $.Type}}if ϟv, err := d.String();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsInt         $.Type}}if ϟv, err := binary.ReadInt(d,  {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsUint        $.Type}}if ϟv, err := binary.ReadUint(d, {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{     if IsEnum        $.Type}}if ϟv := d.Uint32();  d.Error() == nil { {{$.Name}} = {{$.Type.Name}}(ϟv) } else { {{$.ErrHandler}} }
+  {{else if IsBool        $.Type}}if ϟv := d.Bool();    d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsChar        $.Type}}if ϟv := d.Uint8();   d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU8          $.Type}}if ϟv := d.Uint8();   d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS8          $.Type}}if ϟv := d.Int8();    d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU16         $.Type}}if ϟv := d.Uint16();  d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS16         $.Type}}if ϟv := d.Int16();   d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF32         $.Type}}if ϟv := d.Float32(); d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU32         $.Type}}if ϟv := d.Uint32();  d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS32         $.Type}}if ϟv := d.Int32();   d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF64         $.Type}}if ϟv := d.Float64(); d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU64         $.Type}}if ϟv := d.Uint64();  d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS64         $.Type}}if ϟv := d.Int64();   d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsString      $.Type}}if ϟv := d.String();  d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsInt         $.Type}}if ϟv := binary.ReadInt(d,  {{$int_size}}); d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsUint        $.Type}}if ϟv := binary.ReadUint(d, {{$int_size}}); d.Error() == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
   {{else if IsVoid        $.Type}}
   {{else}}{{Error "macro Go.DecodePOD '%v' called with unsupported type: %v" $.Name $.Type.Name}}
   {{end}}
@@ -179,26 +179,26 @@
   {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
 
   {{     if not $.ErrHandler}}{{Template "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
-  {{else if IsStaticArray $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
-  {{else if IsMap         $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
-  {{else if IsClass       $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
-  {{else if IsPointer     $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
-  {{else if IsEnum        $ty}}if err := e.Uint32(uint32({{$.Name}}));   err != nil { {{$.ErrHandler}} }
-  {{else if IsBool        $ty}}if err := e.Bool(bool({{$.Name}}));       err != nil { {{$.ErrHandler}} }
-  {{else if IsChar        $ty}}if err := e.Uint8(uint8({{$.Name}}));     err != nil { {{$.ErrHandler}} }
-  {{else if IsU8          $ty}}if err := e.Uint8(uint8({{$.Name}}));     err != nil { {{$.ErrHandler}} }
-  {{else if IsS8          $ty}}if err := e.Int8(int8({{$.Name}}));       err != nil { {{$.ErrHandler}} }
-  {{else if IsU16         $ty}}if err := e.Uint16(uint16({{$.Name}}));   err != nil { {{$.ErrHandler}} }
-  {{else if IsS16         $ty}}if err := e.Int16(int16({{$.Name}}));     err != nil { {{$.ErrHandler}} }
-  {{else if IsF32         $ty}}if err := e.Float32(float32({{$.Name}})); err != nil { {{$.ErrHandler}} }
-  {{else if IsU32         $ty}}if err := e.Uint32(uint32({{$.Name}}));   err != nil { {{$.ErrHandler}} }
-  {{else if IsS32         $ty}}if err := e.Int32(int32({{$.Name}}));     err != nil { {{$.ErrHandler}} }
-  {{else if IsF64         $ty}}if err := e.Float64(float64({{$.Name}})); err != nil { {{$.ErrHandler}} }
-  {{else if IsU64         $ty}}if err := e.Uint64(uint64({{$.Name}}));   err != nil { {{$.ErrHandler}} }
-  {{else if IsS64         $ty}}if err := e.Int64(int64({{$.Name}}));     err != nil { {{$.ErrHandler}} }
-  {{else if IsString      $ty}}if err := e.String(string({{$.Name}}));   err != nil { {{$.ErrHandler}} }
-  {{else if IsInt         $ty}}if err := binary.WriteInt(e,  {{$int_size}},  int64({{$.Name}})); err != nil { {{$.ErrHandler}} }
-  {{else if IsUint        $ty}}if err := binary.WriteUint(e, {{$int_size}}, uint64({{$.Name}})); err != nil { {{$.ErrHandler}} }
+  {{else if IsStaticArray $ty}}if e.Value(&{{$.Name}});           e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsMap         $ty}}if e.Value(&{{$.Name}});           e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsClass       $ty}}if e.Value(&{{$.Name}});           e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsPointer     $ty}}if e.Value(&{{$.Name}});           e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsEnum        $ty}}if e.Uint32(uint32({{$.Name}}));   e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsBool        $ty}}if e.Bool(bool({{$.Name}}));       e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsChar        $ty}}if e.Uint8(uint8({{$.Name}}));     e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsU8          $ty}}if e.Uint8(uint8({{$.Name}}));     e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsS8          $ty}}if e.Int8(int8({{$.Name}}));       e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsU16         $ty}}if e.Uint16(uint16({{$.Name}}));   e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsS16         $ty}}if e.Int16(int16({{$.Name}}));     e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsF32         $ty}}if e.Float32(float32({{$.Name}})); e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsU32         $ty}}if e.Uint32(uint32({{$.Name}}));   e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsS32         $ty}}if e.Int32(int32({{$.Name}}));     e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsF64         $ty}}if e.Float64(float64({{$.Name}})); e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsU64         $ty}}if e.Uint64(uint64({{$.Name}}));   e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsS64         $ty}}if e.Int64(int64({{$.Name}}));     e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsString      $ty}}if e.String(string({{$.Name}}));   e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsInt         $ty}}if binary.WriteInt(e,  {{$int_size}},  int64({{$.Name}})); e.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsUint        $ty}}if binary.WriteUint(e, {{$int_size}}, uint64({{$.Name}})); e.Error() != nil { {{$.ErrHandler}} }
   {{else if IsVoid        $ty}}
   {{else}}{{Error "macro Go.Encode '%v' called with unsupported type: %v" $.Name $.Type.Name}}
   {{end}}

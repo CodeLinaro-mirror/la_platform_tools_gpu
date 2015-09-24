@@ -114,7 +114,7 @@ func TestRoundTripInt8(t *testing.T) {
 		e.Int8(v)
 	}
 	for i, v := range values {
-		got, _ := d.Int8()
+		got := d.Int8()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -129,7 +129,7 @@ func TestRoundTripUint8(t *testing.T) {
 		e.Uint8(v)
 	}
 	for i, v := range values {
-		got, _ := d.Uint8()
+		got := d.Uint8()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -144,7 +144,7 @@ func TestRoundTripInt16(t *testing.T) {
 		e.Int16(v)
 	}
 	for i, v := range values {
-		got, _ := d.Int16()
+		got := d.Int16()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -159,7 +159,7 @@ func TestRoundTripUint16i(t *testing.T) {
 		e.Uint16(v)
 	}
 	for i, v := range values {
-		got, _ := d.Uint16()
+		got := d.Uint16()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -174,7 +174,7 @@ func TestRoundTripInt32(t *testing.T) {
 		e.Int32(v)
 	}
 	for i, v := range values {
-		got, _ := d.Int32()
+		got := d.Int32()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -189,7 +189,7 @@ func TestRoundTripUint32(t *testing.T) {
 		e.Uint32(v)
 	}
 	for i, v := range values {
-		got, _ := d.Uint32()
+		got := d.Uint32()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -204,7 +204,7 @@ func TestRoundTripInt64(t *testing.T) {
 		e.Int64(v)
 	}
 	for i, v := range values {
-		got, _ := d.Int64()
+		got := d.Int64()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break
@@ -219,7 +219,7 @@ func TestRoundTripUint64(t *testing.T) {
 		e.Uint64(v)
 	}
 	for i, v := range values {
-		got, _ := d.Uint64()
+		got := d.Uint64()
 		if v != got {
 			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
 			break

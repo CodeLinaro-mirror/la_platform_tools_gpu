@@ -71,7 +71,8 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 			if err != nil {
 				return err
 			}
-			v, err := d.Uint32()
+			v := d.Uint32()
+			err = d.Error()
 			if err != nil {
 				t.onIssue(i, log.Error, fmt.Errorf("Failed to decode glGetError postback: %v", err))
 				return err

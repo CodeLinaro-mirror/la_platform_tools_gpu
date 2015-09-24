@@ -43,38 +43,21 @@ func (m *Map) String() string {
 	return m.Typename()
 }
 
-func (m *Map) Encode(e binary.Encoder, value interface{}) error {
+func (m *Map) Encode(e binary.Encoder, value interface{}) {
 	v := value.(map[interface{}]interface{})
-	if err := e.Uint32(uint32(len(v))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(v)))
 	for k, o := range v {
-		if err := m.KeyType.Encode(e, k); err != nil {
-			return err
-		}
-		if err := m.ValueType.Encode(e, o); err != nil {
-			return err
-		}
+		m.KeyType.Encode(e, k)
+		m.ValueType.Encode(e, o)
 	}
-	return nil
 }
 
-func (m *Map) Decode(d binary.Decoder) (interface{}, error) {
-	if count, err := d.Uint32(); err != nil {
-		return nil, err
-	} else {
-		v := make(map[interface{}]interface{}, count)
-		for i := uint32(0); i < count; i++ {
-			k, err := m.KeyType.Decode(d)
-			if err != nil {
-				return v, err
-			}
-			o, err := m.ValueType.Decode(d)
-			if err != nil {
-				return v, err
-			}
-			v[k] = o
-		}
-		return v, nil
+func (m *Map) Decode(d binary.Decoder) interface{} {
+	count := d.Uint32()
+	v := make(map[interface{}]interface{}, count)
+	for i := uint32(0); i < count; i++ {
+		k := m.KeyType.Decode(d)
+		v[k] = m.ValueType.Decode(d)
 	}
+	return v
 }

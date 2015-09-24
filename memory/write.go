@@ -27,45 +27,44 @@ import (
 func Write(w binary.Writer, arch device.Architecture, v interface{}) error {
 	switch v := v.(type) {
 	case Pointer:
-		return binary.WriteUint(w, arch.PointerSize*8, v.Address)
+		binary.WriteUint(w, arch.PointerSize*8, v.Address)
+		return w.Error()
 	}
 
 	r := reflect.ValueOf(v)
 	t := r.Type()
 	switch t.Kind() {
 	case reflect.Float32:
-		return w.Float32(float32(r.Float()))
+		w.Float32(float32(r.Float()))
 
 	case reflect.Float64:
-		return w.Float64(r.Float())
+		w.Float64(r.Float())
 
 	case reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		return binary.WriteInt(w, t.Bits(), r.Int())
+		binary.WriteInt(w, t.Bits(), r.Int())
 
 	case reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		return binary.WriteUint(w, t.Bits(), r.Uint())
+		binary.WriteUint(w, t.Bits(), r.Uint())
 
 	case reflect.Int:
-		return binary.WriteInt(w, arch.IntegerSize*8, r.Int())
+		binary.WriteInt(w, arch.IntegerSize*8, r.Int())
 
 	case reflect.Uint:
-		return binary.WriteUint(w, arch.IntegerSize*8, r.Uint())
+		binary.WriteUint(w, arch.IntegerSize*8, r.Uint())
 
 	case reflect.Array, reflect.Slice:
 		for i := 0; i < r.Len(); i++ {
-			if err := Write(w, arch, r.Index(i).Interface()); err != nil {
-				return err
-			}
+			Write(w, arch, r.Index(i).Interface())
 		}
-		return nil
 
 	case reflect.String:
-		return w.String(r.String())
+		w.String(r.String())
 
 	case reflect.Bool:
-		return w.Bool(r.Bool())
+		w.Bool(r.Bool())
 
 	default:
 		return fmt.Errorf("Cannot write type: %s", t.Name())
 	}
+	return w.Error()
 }

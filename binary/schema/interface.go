@@ -34,18 +34,15 @@ func (i *Interface) String() string {
 	return i.Name
 }
 
-func (i *Interface) Encode(e binary.Encoder, value interface{}) error {
+func (i *Interface) Encode(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
-		if err := e.Object(value.(binary.Object)); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
+		e.Object(value.(binary.Object))
+	} else {
+		e.Object(nil)
 	}
-	return nil
 }
 
-func (i *Interface) Decode(d binary.Decoder) (interface{}, error) {
+func (i *Interface) Decode(d binary.Decoder) interface{} {
 	return d.Object()
 }
 
@@ -67,17 +64,14 @@ func (i *Variant) String() string {
 	return i.Name
 }
 
-func (i *Variant) Encode(e binary.Encoder, value interface{}) error {
+func (i *Variant) Encode(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
-		if err := e.Variant(value.(binary.Object)); err != nil {
-			return err
-		}
-	} else if err := e.Variant(nil); err != nil {
-		return err
+		e.Variant(value.(binary.Object))
+	} else {
+		e.Variant(nil)
 	}
-	return nil
 }
 
-func (i *Variant) Decode(d binary.Decoder) (interface{}, error) {
+func (i *Variant) Decode(d binary.Decoder) interface{} {
 	return d.Object()
 }

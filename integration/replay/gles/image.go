@@ -79,7 +79,7 @@ func toGoImage(in *gpuimg.Image) (goimg.Image, error) {
 		dst := endian.Writer(buf, endian.Big) // Yes. Big-endian. Really.
 
 		for i, c := 0, int(in.Width*in.Height); i < c; i++ {
-			v, _ := src.Float32()
+			v := src.Float32()
 			dst.Uint16(uint16(v * 0xffff))
 		}
 

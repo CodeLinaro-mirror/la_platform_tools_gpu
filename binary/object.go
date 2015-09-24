@@ -36,15 +36,15 @@ type Class interface {
 	// Encode writes the supplied object to the supplied Encoder.
 	// The object must be a type the Class understands, the implementation is
 	// allowed to panic if it is not.
-	Encode(Encoder, Object) error
+	Encode(Encoder, Object)
 
 	// Decode reads a single object from the supplied Decoder.
-	Decode(Decoder) (Object, error)
+	Decode(Decoder) Object
 
 	// DecodeTo reads into the supplied object from the supplied Decoder.
 	// The object must be a type the Class understands, the implementation is
 	// allowed to panic if it is not.
-	DecodeTo(Decoder, Object) error
+	DecodeTo(Decoder, Object)
 }
 
 // Generate is used to tag structures that need an auto generated Class.

@@ -152,25 +152,27 @@ func (c *atomClass) New() binary.Object {
 	return &Atom{class: c, object: c.base.New().(*schema.Object)}
 }
 
-func (c *atomClass) Encode(e binary.Encoder, object binary.Object) error {
+func (c *atomClass) Encode(e binary.Encoder, object binary.Object) {
 	a := object.(*Atom)
-	return c.base.Encode(e, a.object)
+	c.base.Encode(e, a.object)
 }
 
-func (c *atomClass) Decode(d binary.Decoder) (binary.Object, error) {
+func (c *atomClass) Decode(d binary.Decoder) binary.Object {
 	a := &Atom{class: c}
-	o, err := c.base.Decode(d)
-	if err != nil {
-		return a, err
+	o := c.base.Decode(d)
+	if d.Error() != nil {
+		return a
 	}
 	a.object = o.(*schema.Object)
 	if c.observations >= 0 {
 		if c.observations >= len(a.object.Fields) {
-			return a, fmt.Errorf("Missing Observations field in %s", c.base.Name)
+			d.SetError(fmt.Errorf("Missing Observations field in %s", c.base.Name))
+			return a
 		}
 		value := a.object.Fields[c.observations]
 		if observations, ok := value.(*atom.Observations); !ok {
-			return a, fmt.Errorf("Observations field is of type %T in %s", value, c.base.Name)
+			d.SetError(fmt.Errorf("Observations field is of type %T in %s", value, c.base.Name))
+			return a
 		} else {
 			a.observations = observations
 		}
@@ -181,9 +183,9 @@ func (c *atomClass) Decode(d binary.Decoder) (binary.Object, error) {
 	if a.class.meta.EndOfFrame {
 		a.flags |= atom.EndOfFrame
 	}
-	return a, nil
+	return a
 }
 
-func (c *atomClass) DecodeTo(d binary.Decoder, object binary.Object) error {
-	return c.base.DecodeTo(d, object)
+func (c *atomClass) DecodeTo(d binary.Decoder, object binary.Object) {
+	c.base.DecodeTo(d, object)
 }

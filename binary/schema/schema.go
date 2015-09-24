@@ -30,8 +30,8 @@ import (
 type Type interface {
 	binary.Object
 	String() string
-	Encode(e binary.Encoder, value interface{}) error
-	Decode(d binary.Decoder) (interface{}, error)
+	Encode(e binary.Encoder, value interface{})
+	Decode(d binary.Decoder) interface{}
 	Typename() string
 	Basename() string
 }

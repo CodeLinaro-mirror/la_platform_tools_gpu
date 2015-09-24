@@ -62,8 +62,9 @@ Got:      %# x`, entry.Name, entry.Data, got.Bytes())
 
 func EncodeValue(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer) {
 	for i, o := range entry.Values {
-		if err := e.Value(o); err != nil {
-			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
+		e.Value(o)
+		if e.Error() != nil {
+			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, e.Error())
 		}
 	}
 	VerifyData(t, entry, buf)
@@ -71,8 +72,9 @@ func EncodeValue(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer)
 
 func EncodeObject(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer) {
 	for i, o := range entry.Values {
-		if err := e.Object(o); err != nil {
-			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, err)
+		e.Object(o)
+		if e.Error() != nil {
+			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, e.Error())
 		}
 	}
 	VerifyData(t, entry, buf)
@@ -81,8 +83,9 @@ func EncodeObject(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer
 func DecodeValue(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Reader) {
 	for i, o := range entry.Values {
 		got := reflect.New(reflect.TypeOf(o).Elem()).Interface().(binary.Object)
-		if err := d.Value(got); err != nil {
-			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
+		d.Value(got)
+		if d.Error() != nil {
+			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, d.Error())
 		} else if !reflect.DeepEqual(o, got) {
 			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
 		}
@@ -91,8 +94,9 @@ func DecodeValue(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Read
 
 func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Reader) {
 	for i, o := range entry.Values {
-		if got, err := d.Object(); err != nil {
-			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, err)
+		got := d.Object()
+		if d.Error() != nil {
+			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, d.Error())
 		} else if !reflect.DeepEqual(o, got) {
 			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
 		}

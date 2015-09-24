@@ -91,7 +91,8 @@ type Call struct {
 }
 
 func (c Call) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
+	e.Uint32(packCX(protocol.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
+	return e.Error()
 }
 
 // PushI represents the PUSH_I virtual machine opcode.
@@ -101,7 +102,8 @@ type PushI struct {
 }
 
 func (c PushI) Encode(e binary.Encoder) error {
-	return e.Uint32(packCYZ(protocol.OpPushI, uint32(c.DataType), c.Value))
+	e.Uint32(packCYZ(protocol.OpPushI, uint32(c.DataType), c.Value))
+	return e.Error()
 }
 
 // LoadC represents the LOAD_C virtual machine opcode.
@@ -111,7 +113,8 @@ type LoadC struct {
 }
 
 func (c LoadC) Encode(e binary.Encoder) error {
-	return e.Uint32(packCYZ(protocol.OpLoadC, uint32(c.DataType), c.Address))
+	e.Uint32(packCYZ(protocol.OpLoadC, uint32(c.DataType), c.Address))
+	return e.Error()
 }
 
 // LoadV represents the LOAD_V virtual machine opcode.
@@ -121,7 +124,8 @@ type LoadV struct {
 }
 
 func (c LoadV) Encode(e binary.Encoder) error {
-	return e.Uint32(packCYZ(protocol.OpLoadV, uint32(c.DataType), c.Address))
+	e.Uint32(packCYZ(protocol.OpLoadV, uint32(c.DataType), c.Address))
+	return e.Error()
 }
 
 // Load represents the LOAD virtual machine opcode.
@@ -130,7 +134,8 @@ type Load struct {
 }
 
 func (c Load) Encode(e binary.Encoder) error {
-	return e.Uint32(packCYZ(protocol.OpLoad, uint32(c.DataType), 0))
+	e.Uint32(packCYZ(protocol.OpLoad, uint32(c.DataType), 0))
+	return e.Error()
 }
 
 // Pop represents the POP virtual machine opcode.
@@ -139,7 +144,8 @@ type Pop struct {
 }
 
 func (c Pop) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpPop, c.Count))
+	e.Uint32(packCX(protocol.OpPop, c.Count))
+	return e.Error()
 }
 
 // StoreV represents the STORE_V virtual machine opcode.
@@ -148,14 +154,16 @@ type StoreV struct {
 }
 
 func (c StoreV) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpStoreV, c.Address))
+	e.Uint32(packCX(protocol.OpStoreV, c.Address))
+	return e.Error()
 }
 
 // Store represents the STORE virtual machine opcode.
 type Store struct{}
 
 func (c Store) Encode(e binary.Encoder) error {
-	return e.Uint32(packC(protocol.OpStore))
+	e.Uint32(packC(protocol.OpStore))
+	return e.Error()
 }
 
 // Resource represents the RESOURCE virtual machine opcode.
@@ -164,14 +172,16 @@ type Resource struct {
 }
 
 func (c Resource) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpResource, c.ID))
+	e.Uint32(packCX(protocol.OpResource, c.ID))
+	return e.Error()
 }
 
 // Post represents the POST virtual machine opcode.
 type Post struct{}
 
 func (c Post) Encode(e binary.Encoder) error {
-	return e.Uint32(packC(protocol.OpPost))
+	e.Uint32(packC(protocol.OpPost))
+	return e.Error()
 }
 
 // Copy represents the COPY virtual machine opcode.
@@ -180,7 +190,8 @@ type Copy struct {
 }
 
 func (c Copy) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpCopy, c.Count))
+	e.Uint32(packCX(protocol.OpCopy, c.Count))
+	return e.Error()
 }
 
 // Clone represents the CLONE virtual machine opcode.
@@ -189,7 +200,8 @@ type Clone struct {
 }
 
 func (c Clone) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpClone, c.Index))
+	e.Uint32(packCX(protocol.OpClone, c.Index))
+	return e.Error()
 }
 
 // Strcpy represents the STRCPY virtual machine opcode.
@@ -198,7 +210,8 @@ type Strcpy struct {
 }
 
 func (c Strcpy) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpStrcpy, c.MaxSize))
+	e.Uint32(packCX(protocol.OpStrcpy, c.MaxSize))
+	return e.Error()
 }
 
 // Extend represents the EXTEND virtual machine opcode.
@@ -207,7 +220,8 @@ type Extend struct {
 }
 
 func (c Extend) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpExtend, c.Value))
+	e.Uint32(packCX(protocol.OpExtend, c.Value))
+	return e.Error()
 }
 
 // Add represents the ADD virtual machine opcode.
@@ -216,7 +230,8 @@ type Add struct {
 }
 
 func (c Add) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpAdd, c.Count))
+	e.Uint32(packCX(protocol.OpAdd, c.Count))
+	return e.Error()
 }
 
 // Extend represents the LABEL virtual machine opcode.
@@ -225,14 +240,15 @@ type Label struct {
 }
 
 func (c Label) Encode(e binary.Encoder) error {
-	return e.Uint32(packCX(protocol.OpLabel, c.Value))
+	e.Uint32(packCX(protocol.OpLabel, c.Value))
+	return e.Error()
 }
 
 // Decode returns the opcode decoded from decoder d.
 func Decode(d binary.Decoder) (interface{}, error) {
-	i, err := d.Uint32()
-	if err != nil {
-		return nil, err
+	i := d.Uint32()
+	if d.Error() != nil {
+		return nil, d.Error()
 	}
 	code := unpackC(i)
 	switch code {

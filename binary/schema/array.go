@@ -51,23 +51,19 @@ func (a *Array) String() string {
 	return a.Typename()
 }
 
-func (a *Array) Encode(e binary.Encoder, value interface{}) error {
+func (a *Array) Encode(e binary.Encoder, value interface{}) {
 	v := value.([]interface{})
 	for i := range v {
 		a.ValueType.Encode(e, v[i])
 	}
-	return nil
 }
 
-func (a *Array) Decode(d binary.Decoder) (interface{}, error) {
-	var err error
+func (a *Array) Decode(d binary.Decoder) interface{} {
 	v := make([]interface{}, a.Size)
 	for i := range v {
-		if v[i], err = a.ValueType.Decode(d); err != nil {
-			return v, err
-		}
+		v[i] = a.ValueType.Decode(d)
 	}
-	return v, nil
+	return v
 }
 
 func (s *Slice) Basename() string {
@@ -85,27 +81,19 @@ func (s *Slice) String() string {
 	return s.Typename()
 }
 
-func (s *Slice) Encode(e binary.Encoder, value interface{}) error {
+func (s *Slice) Encode(e binary.Encoder, value interface{}) {
 	v := value.([]interface{})
-	if err := e.Uint32(uint32(len(v))); err != nil {
-		return err
-	}
+	e.Uint32(uint32(len(v)))
 	for i := range v {
 		s.ValueType.Encode(e, v[i])
 	}
-	return nil
 }
 
-func (s *Slice) Decode(d binary.Decoder) (interface{}, error) {
-	size, err := d.Uint32()
-	if err != nil {
-		return nil, err
-	}
+func (s *Slice) Decode(d binary.Decoder) interface{} {
+	size := d.Uint32()
 	v := make([]interface{}, size)
 	for i := range v {
-		if v[i], err = s.ValueType.Decode(d); err != nil {
-			return v, err
-		}
+		v[i] = s.ValueType.Decode(d)
 	}
-	return v, nil
+	return v
 }

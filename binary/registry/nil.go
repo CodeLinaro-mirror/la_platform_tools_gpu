@@ -26,8 +26,8 @@ func init() {
 	Global.Add(NilClass)
 }
 
-func (class *binaryClassNil) ID() binary.ID                                { return binary.ID{} }
-func (*binaryClassNil) New() binary.Object                                 { return nil }
-func (*binaryClassNil) Encode(e binary.Encoder, obj binary.Object) error   { return nil }
-func (*binaryClassNil) Decode(d binary.Decoder) (binary.Object, error)     { return nil, nil }
-func (*binaryClassNil) DecodeTo(d binary.Decoder, obj binary.Object) error { return nil }
+func (class *binaryClassNil) ID() binary.ID                          { return binary.ID{} }
+func (*binaryClassNil) New() binary.Object                           { return nil }
+func (*binaryClassNil) Encode(e binary.Encoder, obj binary.Object)   {}
+func (*binaryClassNil) Decode(d binary.Decoder) binary.Object        { return nil }
+func (*binaryClassNil) DecodeTo(d binary.Decoder, obj binary.Object) {}

@@ -64,51 +64,47 @@ func shuffle64(v uint64) uint64 {
 		((v & 0xff00000000000000) >> 56)
 }
 
-func (r *reader) intv() (int64, error) {
-	uv, err := r.uintv()
+func (r *reader) intv() int64 {
+	uv := r.uintv()
 	v := int64(uv >> 1)
 	if uv&1 != 0 {
 		v = ^v
 	}
-	return v, err
+	return v
 }
 
-func (w *writer) intv(v int64) error {
+func (w *writer) intv(v int64) {
 	uv := uint64(v) << 1
 	if v < 0 {
 		uv = ^uv
 	}
-	return w.uintv(uv)
+	w.uintv(uv)
 }
 
-func (r *reader) uintv() (uint64, error) {
-	tag, err := r.Uint8()
-	if err != nil {
-		return 0, err
-	}
+func (r *reader) uintv() uint64 {
+	tag := r.Uint8()
 	count := uint(0)
 	for ; ((0x80 >> count) & tag) != 0; count++ {
 	}
 	v := uint64(tag & (byte(0xff) >> count))
 	if count == 0 {
-		return v, nil
+		return v
 	}
-	if err := r.Data(r.tmp[:count]); err != nil {
-		return 0, err
-	}
+	r.Data(r.tmp[:count])
 	for i := uint(0); i < count; i++ {
 		v = (v << 8) | uint64(r.tmp[i])
 	}
-	return v, nil
+	return v
 }
 
-func (w *writer) uintv(v uint64) error {
+func (w *writer) uintv(v uint64) {
 	space := uint64(0x7f)
 	tag := byte(0)
 	for o := 8; true; o-- {
 		if v <= space {
 			w.tmp[o] = byte(v) | byte(tag)
-			return w.Data(w.tmp[o:])
+			w.Data(w.tmp[o:])
+			return
 		}
 		w.tmp[o] = byte(v)
 		v >>= 8
@@ -118,113 +114,101 @@ func (w *writer) uintv(v uint64) error {
 	panic("Cannot get here")
 }
 
-func (r *reader) Data(p []byte) error {
+func (r *reader) Data(p []byte) {
 	if r.err != nil {
-		return fmt.Errorf("Reading was stopped due to an earlier error: %v", r.err)
+		return
 	}
-	_, err := io.ReadFull(r.reader, p)
-	r.err = err
-	return err
+	_, r.err = io.ReadFull(r.reader, p)
 }
 
-func (w *writer) Data(data []byte) error {
+func (w *writer) Data(data []byte) {
 	if w.err != nil {
-		return fmt.Errorf("Writing was stopped due to an earlier error: %v", w.err)
+		return
 	}
 	n, err := w.writer.Write(data)
 	if err != nil {
 		w.err = err
-		return err
+		return
 	}
 	if n != len(data) {
 		w.err = io.ErrShortWrite
-		return io.ErrShortWrite
+		return
 	}
-	return nil
 }
 
-func (r *reader) Bool() (bool, error) {
-	b, err := r.Uint8()
-	return b != 0, err
+func (r *reader) Bool() bool {
+	b := r.Uint8()
+	return b != 0
 }
 
-func (w *writer) Bool(v bool) error {
+func (w *writer) Bool(v bool) {
 	if v {
-		return w.Uint8(1)
+		w.Uint8(1)
+	} else {
+		w.Uint8(0)
 	}
-	return w.Uint8(0)
 }
 
-func (r *reader) Int8() (int8, error) {
-	i, err := r.Uint8()
-	return int8(i), err
+func (r *reader) Int8() int8 {
+	return int8(r.Uint8())
 }
 
-func (w *writer) Int8(v int8) error {
-	return w.Uint8(uint8(v))
+func (w *writer) Int8(v int8) {
+	w.Uint8(uint8(v))
 }
 
-func (r *reader) Uint8() (uint8, error) {
+func (r *reader) Uint8() uint8 {
 	if r.err != nil {
-		return 0, fmt.Errorf("Reading was stopped due to an earlier error: %v", r.err)
+		return 0
 	}
 	b := r.tmp[:1]
-	_, err := io.ReadFull(r.reader, b[:1])
-	r.err = err
-	return b[0], err
+	_, r.err = io.ReadFull(r.reader, b[:1])
+	return b[0]
 }
 
-func (w *writer) Uint8(v uint8) error {
+func (w *writer) Uint8(v uint8) {
 	w.tmp[0] = v
-	return w.Data(w.tmp[:1])
+	w.Data(w.tmp[:1])
 }
 
-func (r *reader) Int16() (int16, error)   { v, err := r.intv(); return int16(v), err }
-func (w *writer) Int16(v int16) error     { return w.intv(int64(v)) }
-func (r *reader) Uint16() (uint16, error) { v, err := r.uintv(); return uint16(v), err }
-func (w *writer) Uint16(v uint16) error   { return w.uintv(uint64(v)) }
-func (r *reader) Int32() (int32, error)   { v, err := r.intv(); return int32(v), err }
-func (w *writer) Int32(v int32) error     { return w.intv(int64(v)) }
-func (r *reader) Uint32() (uint32, error) { v, err := r.uintv(); return uint32(v), err }
-func (w *writer) Uint32(v uint32) error   { return w.uintv(uint64(v)) }
-func (r *reader) Int64() (int64, error)   { return r.intv() }
-func (w *writer) Int64(v int64) error     { return w.intv(v) }
-func (r *reader) Uint64() (uint64, error) { return r.uintv() }
-func (w *writer) Uint64(v uint64) error   { return w.uintv(v) }
+func (r *reader) Int16() int16    { return int16(r.intv()) }
+func (w *writer) Int16(v int16)   { w.intv(int64(v)) }
+func (r *reader) Uint16() uint16  { return uint16(r.uintv()) }
+func (w *writer) Uint16(v uint16) { w.uintv(uint64(v)) }
+func (r *reader) Int32() int32    { return int32(r.intv()) }
+func (w *writer) Int32(v int32)   { w.intv(int64(v)) }
+func (r *reader) Uint32() uint32  { return uint32(r.uintv()) }
+func (w *writer) Uint32(v uint32) { w.uintv(uint64(v)) }
+func (r *reader) Int64() int64    { return r.intv() }
+func (w *writer) Int64(v int64)   { w.intv(v) }
+func (r *reader) Uint64() uint64  { return r.uintv() }
+func (w *writer) Uint64(v uint64) { w.uintv(v) }
 
-func (r *reader) Float32() (float32, error) {
-	bits, err := r.Uint32()
-	return math.Float32frombits(shuffle32(bits)), err
+func (r *reader) Float32() float32 {
+	return math.Float32frombits(shuffle32(r.Uint32()))
 }
 
-func (w *writer) Float32(v float32) error {
-	return w.Uint32(shuffle32(math.Float32bits(v)))
+func (w *writer) Float32(v float32) {
+	w.Uint32(shuffle32(math.Float32bits(v)))
 }
 
-func (r *reader) Float64() (float64, error) {
-	bits, err := r.Uint64()
-	return math.Float64frombits(shuffle64(bits)), err
+func (r *reader) Float64() float64 {
+	return math.Float64frombits(shuffle64(r.Uint64()))
 }
 
-func (w *writer) Float64(v float64) error {
-	return w.Uint64(shuffle64(math.Float64bits(v)))
+func (w *writer) Float64(v float64) {
+	w.Uint64(shuffle64(math.Float64bits(v)))
 }
 
-func (r *reader) String() (string, error) {
-	c, err := r.Uint32()
-	if err != nil || c == 0 {
-		return "", err
-	}
-	s := make([]byte, c)
-	err = r.Data(s)
-	return string(s), err
+func (r *reader) String() string {
+	s := make([]byte, r.Uint32())
+	r.Data(s)
+	return string(s)
 }
 
-func (w *writer) String(v string) error {
-	if err := w.Uint32(uint32(len(v))); err != nil {
-		return err
-	}
-	return w.Data([]byte(v))
+func (w *writer) String(v string) {
+	w.Uint32(uint32(len(v)))
+	w.Data([]byte(v))
 }
 
 func (r *reader) Error() error {

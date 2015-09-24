@@ -114,56 +114,31 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 	enc := flat.Encoder(endian.Writer(connection, endian.Little))
 	dec := flat.Decoder(endian.Reader(connection, endian.Little))
 
-	if err := enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); err != nil {
-		return err
+	if enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); enc.Error() != nil {
+		return enc.Error()
 	}
 
-	protocolVersion, err := dec.Uint32()
-	if err != nil {
-		return err
+	protocolVersion := dec.Uint32()
+	if dec.Error() != nil {
+		return dec.Error()
 	}
 
 	td := d.Info()
 
 	switch protocolVersion {
 	case 1:
-		td.PointerSize, err = dec.Uint8()
-		if err != nil {
-			return err
-		}
-
-		td.PointerAlignment, err = dec.Uint8()
-		if err != nil {
-			return err
-		}
-
+		td.PointerSize = dec.Uint8()
+		td.PointerAlignment = dec.Uint8()
 		// TODO: Integer size
 		// TODO: Endianness
-
-		td.MaxMemorySize, err = dec.Uint64()
-		if err != nil {
-			return err
-		}
-
-		var os deviceOS
-		if val, err := dec.Uint8(); err == nil {
-			os = deviceOS(val)
-		} else {
-			return err
-		}
-		td.OS = os.String()
-
-		if td.Extensions, err = dec.String(); err != nil {
-			return err
-		}
-		if td.Renderer, err = dec.String(); err != nil {
-			return err
-		}
-		if td.Vendor, err = dec.String(); err != nil {
-			return err
-		}
-		if td.Version, err = dec.String(); err != nil {
-			return err
+		td.MaxMemorySize = dec.Uint64()
+		td.OS = deviceOS(dec.Uint8()).String()
+		td.Extensions = dec.String()
+		td.Renderer = dec.String()
+		td.Vendor = dec.String()
+		td.Version = dec.String()
+		if dec.Error() != nil {
+			return dec.Error()
 		}
 
 	default:

@@ -117,7 +117,8 @@ func TestUnknownTypeError(t *testing.T) {
 		0x09,
 		'B', 'a', 'd', 'O', 'b', 'j', 'e', 'c', 't',
 	})))
-	if _, err := d.Object(); err == nil {
+	d.Object()
+	if d.Error() == nil {
 		t.Errorf("Expected error decoding unknown type")
 	}
 }

@@ -18,23 +18,17 @@ package binary
 type Decoder interface {
 	Reader
 	// ID decodes a binary.ID from the stream.
-	ID() (ID, error)
+	ID() ID
 	// Value decodes an Object from the stream.
-	Value(Object) error
+	Value(Object)
 	// Variant decodes and returns an Object from the stream. The Class in the
 	// stream must have been previously registered with binary.registry.Add.
-	Variant() (Object, error)
+	Variant() Object
 	// Object decodes and returns an Object from the stream. Object instances
 	// that were encoded multiple times may be decoded and returned as a shared,
 	// single instance. The Class in the stream must have been previously
 	// registered with binary.registry.Add.
-	Object() (Object, error)
+	Object() Object
 	// Lookup the class that would be used to encode an id in this encoder.
 	Lookup(ID) Class
-}
-
-// ReadID decodes a binary.ID from the stream.
-func ReadID(d Decoder) ID {
-	id, _ := d.ID()
-	return id
 }

@@ -71,7 +71,8 @@ func (t *timingInfoCpuTransform) stopTimer(toID atom.ID, index uint8, flags serv
 		b.Post(value.VolatileTemporaryPointer(0), 8, func(d binary.Decoder, err error) error {
 			var nanoseconds uint64
 			if err == nil {
-				nanoseconds, err = d.Uint64()
+				nanoseconds = d.Uint64()
+				err = d.Error()
 			}
 			if err != nil {
 				t.out <- replay.CallTiming{Error: err}

@@ -222,7 +222,7 @@
       i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
       for {
         i++
-        if b, _ := d.Uint8(); b == 0 {
+        if b := d.Uint8(); b == 0 {
           return Charˢ(p.Slice(0, i, ϟs))
         }
       }
@@ -351,14 +351,14 @@
       for i := range res {
         {{if $el_is_ptr}}
           if s.Root.Pool == memory.ApplicationPool {
-            ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-            if err != nil {
-              panic(err)
+            ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+            if d.Error() != nil {
+              panic(d.Error())
             }
             res[i] = New{{$el_ty}}(ptr)
           } else {
         {{end}}
-          {{Template "Go.Decode" "Name" "res[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Decode" "Name" "res[i]" "Type" $s.To "ErrHandler" "panic(d.Error())"}}
         {{if $el_is_ptr}} } {{end}}
       }
       return res
@@ -373,12 +373,12 @@
       for i := uint64(0); i < count; i++ {
         {{if $el_is_ptr}}
           if s.Root.Pool == memory.ApplicationPool {
-            if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-              panic(err)
+            if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+              panic(e.Error())
             }
           } else {
         {{end}}
-          {{Template "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(e.Error())"}}
         {{if $el_is_ptr}} } {{end}}
       }
       s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -416,7 +416,7 @@
         ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
         for i := uint64(0); i < s.Count; i++ {
           var v {{$el_ty}}
-          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(d.Error())"}}
           if key, remap := v.remap(ϟa, ϟs); remap {
             loadRemap(ϟb, key, {{Template "Go.Replay.Type" $s.To}}, {{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
           } else {
@@ -429,8 +429,8 @@
         {{/* Pointers need remapping to replay addresses */}}
         ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
         for i := uint64(0); i < s.Count; i++ {
-          v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-          if err != nil { panic(err) }
+          v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+          if d.Error() != nil { panic(d.Error()) }
           ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" (printf "New%s(v)" $el_ty)}})
           ϟb.Store(ptr)
           ptr += step
@@ -455,7 +455,7 @@
         ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
         for i := uint64(0); i < s.Count; i++ {
           var v {{$el_ty}}
-          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(d.Error())"}}
           if key, remap := v.remap(ϟa, ϟs); remap {
             dst, found := ϟb.Remappings[key]
             if !found {

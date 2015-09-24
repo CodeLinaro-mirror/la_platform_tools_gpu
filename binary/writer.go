@@ -19,31 +19,31 @@ import "fmt"
 // Writer provides methods for encoding values.
 type Writer interface {
 	// Data writes the data bytes in their entirety.
-	Data([]byte) error
+	Data([]byte)
 	// Bool encodes a boolean value to the Writer.
-	Bool(bool) error
+	Bool(bool)
 	// Int8 encodes a signed, 8 bit integer value to the Writer.
-	Int8(int8) error
+	Int8(int8)
 	// Uint8 encodes an unsigned, 8 bit integer value to the Writer.
-	Uint8(uint8) error
+	Uint8(uint8)
 	// Int16 encodes a signed, 16 bit integer value to the Writer.
-	Int16(int16) error
+	Int16(int16)
 	// Uint16 encodes an unsigned, 16 bit integer value to the Writer.
-	Uint16(uint16) error
+	Uint16(uint16)
 	// Int32 encodes a signed, 32 bit integer value to the Writer.
-	Int32(int32) error
+	Int32(int32)
 	// Uint32 encodes an usigned, 32 bit integer value to the Writer.
-	Uint32(uint32) error
+	Uint32(uint32)
 	// Float32 encodes a 32 bit floating-point value to the Writer.
-	Float32(float32) error
+	Float32(float32)
 	// Int64 encodes a signed, 64 bit integer value to the Writer.
-	Int64(int64) error
+	Int64(int64)
 	// Uint64 encodes an unsigned, 64 bit integer value to the Encoders's io.Writer.
-	Uint64(uint64) error
+	Uint64(uint64)
 	// Float64 encodes a 64 bit floating-point value to the Writer.
-	Float64(float64) error
+	Float64(float64)
 	// String encodes a string to the Writer.
-	String(string) error
+	String(string)
 	// If there is an error writing any output, all further writing becomes
 	// a no-op. Error() returns the error which stopped writing to the stream.
 	// If writing has not stopped it returns nil.
@@ -53,33 +53,33 @@ type Writer interface {
 }
 
 // WriteUint writes the unsigned integer v of either 8, 16, 32 or 64 bits to w.
-func WriteUint(w Writer, bits int, v uint64) error {
+func WriteUint(w Writer, bits int, v uint64) {
 	switch bits {
 	case 8:
-		return w.Uint8(uint8(v))
+		w.Uint8(uint8(v))
 	case 16:
-		return w.Uint16(uint16(v))
+		w.Uint16(uint16(v))
 	case 32:
-		return w.Uint32(uint32(v))
+		w.Uint32(uint32(v))
 	case 64:
-		return w.Uint64(uint64(v))
+		w.Uint64(uint64(v))
 	default:
-		return fmt.Errorf("Unsupported integer bit count %v", bits)
+		w.SetError(fmt.Errorf("Unsupported integer bit count %v", bits))
 	}
 }
 
 // WriteInt writes the signed integer v of either 8, 16, 32 or 64 bits to w.
-func WriteInt(w Writer, bits int, v int64) error {
+func WriteInt(w Writer, bits int, v int64) {
 	switch bits {
 	case 8:
-		return w.Int8(int8(v))
+		w.Int8(int8(v))
 	case 16:
-		return w.Int16(int16(v))
+		w.Int16(int16(v))
 	case 32:
-		return w.Int32(int32(v))
+		w.Int32(int32(v))
 	case 64:
-		return w.Int64(int64(v))
+		w.Int64(int64(v))
 	default:
-		return fmt.Errorf("Unsupported integer bit count %v", bits)
+		w.SetError(fmt.Errorf("Unsupported integer bit count %v", bits))
 	}
 }
