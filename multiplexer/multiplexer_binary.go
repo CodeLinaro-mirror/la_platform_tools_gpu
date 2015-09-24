@@ -31,25 +31,24 @@ type binaryClassmsgCloseChannel struct{}
 func (*msgCloseChannel) Class() binary.Class {
 	return (*binaryClassmsgCloseChannel)(nil)
 }
-func doEncodemsgCloseChannel(e binary.Encoder, o *msgCloseChannel) error {
+func doEncodemsgCloseChannel(e binary.Encoder, o *msgCloseChannel) {
 	e.Uint32(uint32(o.channelId))
-	return e.Error()
 }
-func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) error {
-	o.channelId = channelId(binary.ReadUint32(d))
-	return d.Error()
+func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) {
+	o.channelId = channelId(d.Uint32())
 }
 func (*binaryClassmsgCloseChannel) ID() binary.ID      { return binaryIDmsgCloseChannel }
 func (*binaryClassmsgCloseChannel) New() binary.Object { return &msgCloseChannel{} }
-func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
+func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
 }
-func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) binary.Object {
 	obj := &msgCloseChannel{}
-	return obj, doDecodemsgCloseChannel(d, obj)
+	doDecodemsgCloseChannel(d, obj)
+	return obj
 }
-func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
+func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
 }
 func (*binaryClassmsgCloseChannel) Schema() *schema.Class { return schemamsgCloseChannel }
 
@@ -67,33 +66,30 @@ type binaryClassmsgData struct{}
 func (*msgData) Class() binary.Class {
 	return (*binaryClassmsgData)(nil)
 }
-func doEncodemsgData(e binary.Encoder, o *msgData) error {
+func doEncodemsgData(e binary.Encoder, o *msgData) {
 	e.Uint32(uint32(o.c))
 	e.Uint32(uint32(len(o.d)))
 	e.Data(o.d)
-	return e.Error()
 }
-func doDecodemsgData(d binary.Decoder, o *msgData) error {
-	o.c = channelId(binary.ReadUint32(d))
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodemsgData(d binary.Decoder, o *msgData) {
+	o.c = channelId(d.Uint32())
+	if count := d.Uint32(); count > 0 {
 		o.d = make([]byte, count)
 		d.Data(o.d)
 	}
-	return d.Error()
 }
 func (*binaryClassmsgData) ID() binary.ID      { return binaryIDmsgData }
 func (*binaryClassmsgData) New() binary.Object { return &msgData{} }
-func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodemsgData(e, obj.(*msgData))
+func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodemsgData(e, obj.(*msgData))
 }
-func (*binaryClassmsgData) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassmsgData) Decode(d binary.Decoder) binary.Object {
 	obj := &msgData{}
-	return obj, doDecodemsgData(d, obj)
+	doDecodemsgData(d, obj)
+	return obj
 }
-func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodemsgData(d, obj.(*msgData))
+func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodemsgData(d, obj.(*msgData))
 }
 func (*binaryClassmsgData) Schema() *schema.Class { return schemamsgData }
 
@@ -112,25 +108,24 @@ type binaryClassmsgOpenChannel struct{}
 func (*msgOpenChannel) Class() binary.Class {
 	return (*binaryClassmsgOpenChannel)(nil)
 }
-func doEncodemsgOpenChannel(e binary.Encoder, o *msgOpenChannel) error {
+func doEncodemsgOpenChannel(e binary.Encoder, o *msgOpenChannel) {
 	e.Uint32(uint32(o.channelId))
-	return e.Error()
 }
-func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) error {
-	o.channelId = channelId(binary.ReadUint32(d))
-	return d.Error()
+func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) {
+	o.channelId = channelId(d.Uint32())
 }
 func (*binaryClassmsgOpenChannel) ID() binary.ID      { return binaryIDmsgOpenChannel }
 func (*binaryClassmsgOpenChannel) New() binary.Object { return &msgOpenChannel{} }
-func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
+func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
 }
-func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) binary.Object {
 	obj := &msgOpenChannel{}
-	return obj, doDecodemsgOpenChannel(d, obj)
+	doDecodemsgOpenChannel(d, obj)
+	return obj
 }
-func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
+func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
 }
 func (*binaryClassmsgOpenChannel) Schema() *schema.Class { return schemamsgOpenChannel }
 

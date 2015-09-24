@@ -31,27 +31,26 @@ type binaryClassResourceInfo struct{}
 func (*ResourceInfo) Class() binary.Class {
 	return (*binaryClassResourceInfo)(nil)
 }
-func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) error {
+func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) {
 	e.String(o.ID)
 	e.Uint32(o.Size)
-	return e.Error()
 }
-func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
-	o.ID = string(binary.ReadString(d))
-	o.Size = uint32(binary.ReadUint32(d))
-	return d.Error()
+func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
+	o.ID = string(d.String())
+	o.Size = uint32(d.Uint32())
 }
 func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
 func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
-func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeResourceInfo(e, obj.(*ResourceInfo))
+func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeResourceInfo(e, obj.(*ResourceInfo))
 }
-func (*binaryClassResourceInfo) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassResourceInfo) Decode(d binary.Decoder) binary.Object {
 	obj := &ResourceInfo{}
-	return obj, doDecodeResourceInfo(d, obj)
+	doDecodeResourceInfo(d, obj)
+	return obj
 }
-func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
+func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeResourceInfo(d, obj.(*ResourceInfo))
 }
 func (*binaryClassResourceInfo) Schema() *schema.Class { return schemaResourceInfo }
 
@@ -70,7 +69,7 @@ type binaryClassPayload struct{}
 func (*Payload) Class() binary.Class {
 	return (*binaryClassPayload)(nil)
 }
-func doEncodePayload(e binary.Encoder, o *Payload) error {
+func doEncodePayload(e binary.Encoder, o *Payload) {
 	e.Uint32(o.StackSize)
 	e.Uint32(o.VolatileMemorySize)
 	e.Uint32(uint32(len(o.Constants)))
@@ -81,44 +80,37 @@ func doEncodePayload(e binary.Encoder, o *Payload) error {
 	}
 	e.Uint32(uint32(len(o.Opcodes)))
 	e.Data(o.Opcodes)
-	return e.Error()
 }
-func doDecodePayload(d binary.Decoder, o *Payload) error {
-	o.StackSize = uint32(binary.ReadUint32(d))
-	o.VolatileMemorySize = uint32(binary.ReadUint32(d))
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodePayload(d binary.Decoder, o *Payload) {
+	o.StackSize = uint32(d.Uint32())
+	o.VolatileMemorySize = uint32(d.Uint32())
+	if count := d.Uint32(); count > 0 {
 		o.Constants = make([]byte, count)
 		d.Data(o.Constants)
 	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+	if count := d.Uint32(); count > 0 {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
 			d.Value(&o.Resources[i])
 		}
 	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+	if count := d.Uint32(); count > 0 {
 		o.Opcodes = make([]byte, count)
 		d.Data(o.Opcodes)
 	}
-	return d.Error()
 }
 func (*binaryClassPayload) ID() binary.ID      { return binaryIDPayload }
 func (*binaryClassPayload) New() binary.Object { return &Payload{} }
-func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodePayload(e, obj.(*Payload))
+func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodePayload(e, obj.(*Payload))
 }
-func (*binaryClassPayload) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassPayload) Decode(d binary.Decoder) binary.Object {
 	obj := &Payload{}
-	return obj, doDecodePayload(d, obj)
+	doDecodePayload(d, obj)
+	return obj
 }
-func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodePayload(d, obj.(*Payload))
+func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodePayload(d, obj.(*Payload))
 }
 func (*binaryClassPayload) Schema() *schema.Class { return schemaPayload }
 

@@ -31,27 +31,26 @@ type binaryClassPointer struct{}
 func (*Pointer) Class() binary.Class {
 	return (*binaryClassPointer)(nil)
 }
-func doEncodePointer(e binary.Encoder, o *Pointer) error {
+func doEncodePointer(e binary.Encoder, o *Pointer) {
 	e.Uint64(o.Address)
 	e.Uint32(uint32(o.Pool))
-	return e.Error()
 }
-func doDecodePointer(d binary.Decoder, o *Pointer) error {
-	o.Address = uint64(binary.ReadUint64(d))
-	o.Pool = PoolID(binary.ReadUint32(d))
-	return d.Error()
+func doDecodePointer(d binary.Decoder, o *Pointer) {
+	o.Address = uint64(d.Uint64())
+	o.Pool = PoolID(d.Uint32())
 }
 func (*binaryClassPointer) ID() binary.ID      { return binaryIDPointer }
 func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
-func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodePointer(e, obj.(*Pointer))
+func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodePointer(e, obj.(*Pointer))
 }
-func (*binaryClassPointer) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassPointer) Decode(d binary.Decoder) binary.Object {
 	obj := &Pointer{}
-	return obj, doDecodePointer(d, obj)
+	doDecodePointer(d, obj)
+	return obj
 }
-func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodePointer(d, obj.(*Pointer))
+func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodePointer(d, obj.(*Pointer))
 }
 func (*binaryClassPointer) Schema() *schema.Class { return schemaPointer }
 
@@ -70,27 +69,26 @@ type binaryClassRange struct{}
 func (*Range) Class() binary.Class {
 	return (*binaryClassRange)(nil)
 }
-func doEncodeRange(e binary.Encoder, o *Range) error {
+func doEncodeRange(e binary.Encoder, o *Range) {
 	e.Uint64(o.Base)
 	e.Uint64(o.Size)
-	return e.Error()
 }
-func doDecodeRange(d binary.Decoder, o *Range) error {
-	o.Base = uint64(binary.ReadUint64(d))
-	o.Size = uint64(binary.ReadUint64(d))
-	return d.Error()
+func doDecodeRange(d binary.Decoder, o *Range) {
+	o.Base = uint64(d.Uint64())
+	o.Size = uint64(d.Uint64())
 }
 func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }
-func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeRange(e, obj.(*Range))
+func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeRange(e, obj.(*Range))
 }
-func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 	obj := &Range{}
-	return obj, doDecodeRange(d, obj)
+	doDecodeRange(d, obj)
+	return obj
 }
-func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeRange(d, obj.(*Range))
+func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeRange(d, obj.(*Range))
 }
 func (*binaryClassRange) Schema() *schema.Class { return schemaRange }
 

@@ -27,29 +27,28 @@ type binaryClassdirectCall struct{}
 func (*directCall) Class() binary.Class {
 	return (*binaryClassdirectCall)(nil)
 }
-func doEncodedirectCall(e binary.Encoder, o *directCall) error {
+func doEncodedirectCall(e binary.Encoder, o *directCall) {
 	e.Object(o.atom)
-	return e.Error()
 }
-func doDecodedirectCall(d binary.Decoder, o *directCall) error {
-	if obj, err := d.Object(); obj != nil && err == nil {
+func doDecodedirectCall(d binary.Decoder, o *directCall) {
+	if obj := d.Object(); obj != nil {
 		o.atom = obj.(caller)
 	} else {
 		o.atom = nil
 	}
-	return d.Error()
 }
 func (*binaryClassdirectCall) ID() binary.ID      { return binaryIDdirectCall }
 func (*binaryClassdirectCall) New() binary.Object { return &directCall{} }
-func (*binaryClassdirectCall) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodedirectCall(e, obj.(*directCall))
+func (*binaryClassdirectCall) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodedirectCall(e, obj.(*directCall))
 }
-func (*binaryClassdirectCall) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassdirectCall) Decode(d binary.Decoder) binary.Object {
 	obj := &directCall{}
-	return obj, doDecodedirectCall(d, obj)
+	doDecodedirectCall(d, obj)
+	return obj
 }
-func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodedirectCall(d, obj.(*directCall))
+func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodedirectCall(d, obj.(*directCall))
 }
 func (*binaryClassdirectCall) Schema() *schema.Class { return schemadirectCall }
 

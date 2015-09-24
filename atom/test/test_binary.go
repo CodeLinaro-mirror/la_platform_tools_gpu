@@ -32,27 +32,26 @@ type binaryClassAtomA struct{}
 func (*AtomA) Class() binary.Class {
 	return (*binaryClassAtomA)(nil)
 }
-func doEncodeAtomA(e binary.Encoder, o *AtomA) error {
+func doEncodeAtomA(e binary.Encoder, o *AtomA) {
 	e.Uint64(uint64(o.ID))
 	e.Uint32(uint32(o.AtomFlags))
-	return e.Error()
 }
-func doDecodeAtomA(d binary.Decoder, o *AtomA) error {
-	o.ID = atom.ID(binary.ReadUint64(d))
-	o.AtomFlags = atom.Flags(binary.ReadUint32(d))
-	return d.Error()
+func doDecodeAtomA(d binary.Decoder, o *AtomA) {
+	o.ID = atom.ID(d.Uint64())
+	o.AtomFlags = atom.Flags(d.Uint32())
 }
 func (*binaryClassAtomA) ID() binary.ID      { return AtomAID }
 func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
-func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomA(e, obj.(*AtomA))
+func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAtomA(e, obj.(*AtomA))
 }
-func (*binaryClassAtomA) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassAtomA) Decode(d binary.Decoder) binary.Object {
 	obj := &AtomA{}
-	return obj, doDecodeAtomA(d, obj)
+	doDecodeAtomA(d, obj)
+	return obj
 }
-func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomA(d, obj.(*AtomA))
+func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAtomA(d, obj.(*AtomA))
 }
 func (*binaryClassAtomA) Schema() *schema.Class { return schemaAtomA }
 
@@ -71,27 +70,26 @@ type binaryClassAtomB struct{}
 func (*AtomB) Class() binary.Class {
 	return (*binaryClassAtomB)(nil)
 }
-func doEncodeAtomB(e binary.Encoder, o *AtomB) error {
+func doEncodeAtomB(e binary.Encoder, o *AtomB) {
 	e.Uint64(uint64(o.ID))
 	e.Bool(o.Bool)
-	return e.Error()
 }
-func doDecodeAtomB(d binary.Decoder, o *AtomB) error {
-	o.ID = atom.ID(binary.ReadUint64(d))
-	o.Bool = bool(binary.ReadBool(d))
-	return d.Error()
+func doDecodeAtomB(d binary.Decoder, o *AtomB) {
+	o.ID = atom.ID(d.Uint64())
+	o.Bool = bool(d.Bool())
 }
 func (*binaryClassAtomB) ID() binary.ID      { return AtomBID }
 func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
-func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomB(e, obj.(*AtomB))
+func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAtomB(e, obj.(*AtomB))
 }
-func (*binaryClassAtomB) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassAtomB) Decode(d binary.Decoder) binary.Object {
 	obj := &AtomB{}
-	return obj, doDecodeAtomB(d, obj)
+	doDecodeAtomB(d, obj)
+	return obj
 }
-func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomB(d, obj.(*AtomB))
+func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAtomB(d, obj.(*AtomB))
 }
 func (*binaryClassAtomB) Schema() *schema.Class { return schemaAtomB }
 
@@ -110,25 +108,24 @@ type binaryClassAtomC struct{}
 func (*AtomC) Class() binary.Class {
 	return (*binaryClassAtomC)(nil)
 }
-func doEncodeAtomC(e binary.Encoder, o *AtomC) error {
+func doEncodeAtomC(e binary.Encoder, o *AtomC) {
 	e.String(o.String)
-	return e.Error()
 }
-func doDecodeAtomC(d binary.Decoder, o *AtomC) error {
-	o.String = string(binary.ReadString(d))
-	return d.Error()
+func doDecodeAtomC(d binary.Decoder, o *AtomC) {
+	o.String = string(d.String())
 }
 func (*binaryClassAtomC) ID() binary.ID      { return AtomCID }
 func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
-func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomC(e, obj.(*AtomC))
+func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAtomC(e, obj.(*AtomC))
 }
-func (*binaryClassAtomC) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassAtomC) Decode(d binary.Decoder) binary.Object {
 	obj := &AtomC{}
-	return obj, doDecodeAtomC(d, obj)
+	doDecodeAtomC(d, obj)
+	return obj
 }
-func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomC(d, obj.(*AtomC))
+func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAtomC(d, obj.(*AtomC))
 }
 func (*binaryClassAtomC) Schema() *schema.Class { return schemaAtomC }
 

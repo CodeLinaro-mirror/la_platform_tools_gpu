@@ -1041,7 +1041,7 @@ func (p GLcharᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
-		if b, _ := d.Uint8(); b == 0 {
+		if b := d.Uint8(); b == 0 {
 			return Charˢ(p.Slice(0, i, ϟs))
 		}
 	}
@@ -1102,7 +1102,7 @@ func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
-		if b, _ := d.Uint8(); b == 0 {
+		if b := d.Uint8(); b == 0 {
 			return Charˢ(p.Slice(0, i, ϟs))
 		}
 	}
@@ -1313,7 +1313,7 @@ func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		i++
-		if b, _ := d.Uint8(); b == 0 {
+		if b := d.Uint8(); b == 0 {
 			return Charˢ(p.Slice(0, i, ϟs))
 		}
 	}
@@ -4866,10 +4866,10 @@ func (s BufferIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]BufferId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = BufferId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -4882,8 +4882,8 @@ func (s BufferIdˢ) Write(src []BufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -4912,10 +4912,10 @@ func (s BufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v BufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = BufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -4940,10 +4940,10 @@ func (s BufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v BufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = BufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -5063,14 +5063,14 @@ func (s CGLContextObjˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
-			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			res[i] = NewCGLContextObj(ptr)
 		} else {
-			if err := d.Value(&res[i]); err != nil {
-				panic(err)
+			if d.Value(&res[i]); d.Error() != nil {
+				panic(d.Error())
 			}
 		}
 	}
@@ -5085,12 +5085,12 @@ func (s CGLContextObjˢ) Write(src []CGLContextObj, ϟa atom.Atom, ϟs *gfxapi.S
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
 		if s.Root.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-				panic(err)
+			if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+				panic(e.Error())
 			}
 		} else {
-			if err := e.Value(&src[i]); err != nil {
-				panic(err)
+			if e.Value(&src[i]); e.Error() != nil {
+				panic(e.Error())
 			}
 		}
 	}
@@ -5123,9 +5123,9 @@ func (s CGLContextObjˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
-			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			ϟb.Push(NewCGLContextObj(v).value(ϟb, ϟa, ϟs))
 			ϟb.Store(ptr)
@@ -5249,14 +5249,14 @@ func (s CGSConnectionIDˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
-			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			res[i] = NewCGSConnectionID(ptr)
 		} else {
-			if err := d.Value(&res[i]); err != nil {
-				panic(err)
+			if d.Value(&res[i]); d.Error() != nil {
+				panic(d.Error())
 			}
 		}
 	}
@@ -5271,12 +5271,12 @@ func (s CGSConnectionIDˢ) Write(src []CGSConnectionID, ϟa atom.Atom, ϟs *gfxa
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
 		if s.Root.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-				panic(err)
+			if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+				panic(e.Error())
 			}
 		} else {
-			if err := e.Value(&src[i]); err != nil {
-				panic(err)
+			if e.Value(&src[i]); e.Error() != nil {
+				panic(e.Error())
 			}
 		}
 	}
@@ -5309,9 +5309,9 @@ func (s CGSConnectionIDˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
-			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			ϟb.Push(NewCGSConnectionID(v).value(ϟb, ϟa, ϟs))
 			ϟb.Store(ptr)
@@ -5430,10 +5430,10 @@ func (s CGSSurfaceIDˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]CGSSurfaceID, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int32(); err == nil {
+		if ϟv := d.Int32(); d.Error() == nil {
 			res[i] = CGSSurfaceID(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -5446,8 +5446,8 @@ func (s CGSSurfaceIDˢ) Write(src []CGSSurfaceID, ϟa atom.Atom, ϟs *gfxapi.Sta
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int32(int32(src[i])); err != nil {
-			panic(err)
+		if e.Int32(int32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -5587,10 +5587,10 @@ func (s CGSWindowIDˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]CGSWindowID, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int32(); err == nil {
+		if ϟv := d.Int32(); d.Error() == nil {
 			res[i] = CGSWindowID(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -5603,8 +5603,8 @@ func (s CGSWindowIDˢ) Write(src []CGSWindowID, ϟa atom.Atom, ϟs *gfxapi.State
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int32(int32(src[i])); err != nil {
-			panic(err)
+		if e.Int32(int32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -5755,10 +5755,10 @@ func (s Charˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟ
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]byte, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint8(); err == nil {
+		if ϟv := d.Uint8(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -5771,8 +5771,8 @@ func (s Charˢ) Write(src []byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint8(uint8(src[i])); err != nil {
-			panic(err)
+		if e.Uint8(uint8(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -5912,10 +5912,10 @@ func (s EGLintˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]EGLint, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); err == nil {
+		if ϟv := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); d.Error() == nil {
 			res[i] = EGLint(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -5928,8 +5928,8 @@ func (s EGLintˢ) Write(src []EGLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := binary.WriteInt(e, ϟs.Architecture.IntegerSize*8, int64(src[i])); err != nil {
-			panic(err)
+		if binary.WriteInt(e, ϟs.Architecture.IntegerSize*8, int64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6069,10 +6069,10 @@ func (s F64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]float64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Float64(); err == nil {
+		if ϟv := d.Float64(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -6085,8 +6085,8 @@ func (s F64ˢ) Write(src []float64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Float64(float64(src[i])); err != nil {
-			panic(err)
+		if e.Float64(float64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6226,10 +6226,10 @@ func (s FramebufferIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]FramebufferId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = FramebufferId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -6242,8 +6242,8 @@ func (s FramebufferIdˢ) Write(src []FramebufferId, ϟa atom.Atom, ϟs *gfxapi.S
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6272,10 +6272,10 @@ func (s FramebufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v FramebufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = FramebufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -6300,10 +6300,10 @@ func (s FramebufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v FramebufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = FramebufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -6418,10 +6418,10 @@ func (s GLbooleanˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLboolean, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint8(); err == nil {
+		if ϟv := d.Uint8(); d.Error() == nil {
 			res[i] = GLboolean(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -6434,8 +6434,8 @@ func (s GLbooleanˢ) Write(src []GLboolean, ϟa atom.Atom, ϟs *gfxapi.State, ϟ
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint8(uint8(src[i])); err != nil {
-			panic(err)
+		if e.Uint8(uint8(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6586,10 +6586,10 @@ func (s GLcharˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLchar, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint8(); err == nil {
+		if ϟv := d.Uint8(); d.Error() == nil {
 			res[i] = GLchar(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -6602,8 +6602,8 @@ func (s GLcharˢ) Write(src []GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint8(uint8(src[i])); err != nil {
-			panic(err)
+		if e.Uint8(uint8(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6748,14 +6748,14 @@ func (s GLcharᶜᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
-			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			res[i] = NewGLcharᶜᵖ(ptr)
 		} else {
-			if err := d.Value(&res[i]); err != nil {
-				panic(err)
+			if d.Value(&res[i]); d.Error() != nil {
+				panic(d.Error())
 			}
 		}
 	}
@@ -6770,12 +6770,12 @@ func (s GLcharᶜᵖˢ) Write(src []GLcharᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.Sta
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
 		if s.Root.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-				panic(err)
+			if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+				panic(e.Error())
 			}
 		} else {
-			if err := e.Value(&src[i]); err != nil {
-				panic(err)
+			if e.Value(&src[i]); e.Error() != nil {
+				panic(e.Error())
 			}
 		}
 	}
@@ -6808,9 +6808,9 @@ func (s GLcharᶜᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
-			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			ϟb.Push(NewGLcharᶜᵖ(v).value())
 			ϟb.Store(ptr)
@@ -6929,10 +6929,10 @@ func (s GLenumˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLenum, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = GLenum(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -6945,8 +6945,8 @@ func (s GLenumˢ) Write(src []GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7086,10 +7086,10 @@ func (s GLfloatˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLfloat, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Float32(); err == nil {
+		if ϟv := d.Float32(); d.Error() == nil {
 			res[i] = GLfloat(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7102,8 +7102,8 @@ func (s GLfloatˢ) Write(src []GLfloat, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Float32(float32(src[i])); err != nil {
-			panic(err)
+		if e.Float32(float32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7243,10 +7243,10 @@ func (s GLint64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLint64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int64(); err == nil {
+		if ϟv := d.Int64(); d.Error() == nil {
 			res[i] = GLint64(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7259,8 +7259,8 @@ func (s GLint64ˢ) Write(src []GLint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int64(int64(src[i])); err != nil {
-			panic(err)
+		if e.Int64(int64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7400,10 +7400,10 @@ func (s GLintˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLint, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int32(); err == nil {
+		if ϟv := d.Int32(); d.Error() == nil {
 			res[i] = GLint(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7416,8 +7416,8 @@ func (s GLintˢ) Write(src []GLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int32(int32(src[i])); err != nil {
-			panic(err)
+		if e.Int32(int32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7557,10 +7557,10 @@ func (s GLsizeiˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLsizei, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int32(); err == nil {
+		if ϟv := d.Int32(); d.Error() == nil {
 			res[i] = GLsizei(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7573,8 +7573,8 @@ func (s GLsizeiˢ) Write(src []GLsizei, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int32(int32(src[i])); err != nil {
-			panic(err)
+		if e.Int32(int32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7714,10 +7714,10 @@ func (s GLubyteˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLubyte, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint8(); err == nil {
+		if ϟv := d.Uint8(); d.Error() == nil {
 			res[i] = GLubyte(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7730,8 +7730,8 @@ func (s GLubyteˢ) Write(src []GLubyte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint8(uint8(src[i])); err != nil {
-			panic(err)
+		if e.Uint8(uint8(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -7871,10 +7871,10 @@ func (s GLuint64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLuint64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint64(); err == nil {
+		if ϟv := d.Uint64(); d.Error() == nil {
 			res[i] = GLuint64(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -7887,8 +7887,8 @@ func (s GLuint64ˢ) Write(src []GLuint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint64(uint64(src[i])); err != nil {
-			panic(err)
+		if e.Uint64(uint64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8028,10 +8028,10 @@ func (s GLuintˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, 
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLuint, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = GLuint(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8044,8 +8044,8 @@ func (s GLuintˢ) Write(src []GLuint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd data
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8292,10 +8292,10 @@ func (s Intˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); err == nil {
+		if ϟv := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8308,8 +8308,8 @@ func (s Intˢ) Write(src []int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := binary.WriteInt(e, ϟs.Architecture.IntegerSize*8, int64(src[i])); err != nil {
-			panic(err)
+		if binary.WriteInt(e, ϟs.Architecture.IntegerSize*8, int64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8449,8 +8449,8 @@ func (s Mat2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8463,8 +8463,8 @@ func (s Mat2fˢ) Write(src []Mat2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8604,8 +8604,8 @@ func (s Mat2x3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2x3f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8618,8 +8618,8 @@ func (s Mat2x3fˢ) Write(src []Mat2x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8759,8 +8759,8 @@ func (s Mat2x4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2x4f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8773,8 +8773,8 @@ func (s Mat2x4fˢ) Write(src []Mat2x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -8914,8 +8914,8 @@ func (s Mat3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -8928,8 +8928,8 @@ func (s Mat3fˢ) Write(src []Mat3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9069,8 +9069,8 @@ func (s Mat3x2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3x2f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9083,8 +9083,8 @@ func (s Mat3x2fˢ) Write(src []Mat3x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9224,8 +9224,8 @@ func (s Mat3x4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3x4f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9238,8 +9238,8 @@ func (s Mat3x4fˢ) Write(src []Mat3x4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9379,8 +9379,8 @@ func (s Mat4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9393,8 +9393,8 @@ func (s Mat4fˢ) Write(src []Mat4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9534,8 +9534,8 @@ func (s Mat4x2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4x2f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9548,8 +9548,8 @@ func (s Mat4x2fˢ) Write(src []Mat4x2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9689,8 +9689,8 @@ func (s Mat4x3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4x3f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9703,8 +9703,8 @@ func (s Mat4x3fˢ) Write(src []Mat4x3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -9844,10 +9844,10 @@ func (s PipelineIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]PipelineId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = PipelineId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -9860,8 +9860,8 @@ func (s PipelineIdˢ) Write(src []PipelineId, ϟa atom.Atom, ϟs *gfxapi.State, 
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10001,10 +10001,10 @@ func (s ProgramIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]ProgramId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = ProgramId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10017,8 +10017,8 @@ func (s ProgramIdˢ) Write(src []ProgramId, ϟa atom.Atom, ϟs *gfxapi.State, ϟ
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10047,10 +10047,10 @@ func (s ProgramIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ProgramId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = ProgramId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -10075,10 +10075,10 @@ func (s ProgramIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ProgramId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = ProgramId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -10193,10 +10193,10 @@ func (s QueryIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]QueryId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = QueryId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10209,8 +10209,8 @@ func (s QueryIdˢ) Write(src []QueryId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10239,10 +10239,10 @@ func (s QueryIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v QueryId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = QueryId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -10267,10 +10267,10 @@ func (s QueryIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v QueryId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = QueryId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -10385,10 +10385,10 @@ func (s RenderbufferIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]RenderbufferId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = RenderbufferId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10401,8 +10401,8 @@ func (s RenderbufferIdˢ) Write(src []RenderbufferId, ϟa atom.Atom, ϟs *gfxapi
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10431,10 +10431,10 @@ func (s RenderbufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v RenderbufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = RenderbufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -10459,10 +10459,10 @@ func (s RenderbufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v RenderbufferId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = RenderbufferId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -10577,10 +10577,10 @@ func (s S64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Int64(); err == nil {
+		if ϟv := d.Int64(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10593,8 +10593,8 @@ func (s S64ˢ) Write(src []int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Int64(int64(src[i])); err != nil {
-			panic(err)
+		if e.Int64(int64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10734,10 +10734,10 @@ func (s SamplerIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]SamplerId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = SamplerId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10750,8 +10750,8 @@ func (s SamplerIdˢ) Write(src []SamplerId, ϟa atom.Atom, ϟs *gfxapi.State, ϟ
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10891,10 +10891,10 @@ func (s ShaderIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]ShaderId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = ShaderId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -10907,8 +10907,8 @@ func (s ShaderIdˢ) Write(src []ShaderId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -10937,10 +10937,10 @@ func (s ShaderIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ShaderId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = ShaderId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -10965,10 +10965,10 @@ func (s ShaderIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ShaderId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = ShaderId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -11083,10 +11083,10 @@ func (s TextureIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]TextureId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = TextureId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11099,8 +11099,8 @@ func (s TextureIdˢ) Write(src []TextureId, ϟa atom.Atom, ϟs *gfxapi.State, ϟ
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -11129,10 +11129,10 @@ func (s TextureIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v TextureId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = TextureId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -11157,10 +11157,10 @@ func (s TextureIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v TextureId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = TextureId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -11275,10 +11275,10 @@ func (s TransformFeedbackIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]TransformFeedbackId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = TransformFeedbackId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11291,8 +11291,8 @@ func (s TransformFeedbackIdˢ) Write(src []TransformFeedbackId, ϟa atom.Atom, �
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -11432,10 +11432,10 @@ func (s U16ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint16, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint16(); err == nil {
+		if ϟv := d.Uint16(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11448,8 +11448,8 @@ func (s U16ˢ) Write(src []uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint16(uint16(src[i])); err != nil {
-			panic(err)
+		if e.Uint16(uint16(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -11589,10 +11589,10 @@ func (s U32ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint32, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11605,8 +11605,8 @@ func (s U32ˢ) Write(src []uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -11746,10 +11746,10 @@ func (s U64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint64, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint64(); err == nil {
+		if ϟv := d.Uint64(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11762,8 +11762,8 @@ func (s U64ˢ) Write(src []uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint64(uint64(src[i])); err != nil {
-			panic(err)
+		if e.Uint64(uint64(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -11903,10 +11903,10 @@ func (s U8ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint8, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint8(); err == nil {
+		if ϟv := d.Uint8(); d.Error() == nil {
 			res[i] = ϟv
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -11919,8 +11919,8 @@ func (s U8ˢ) Write(src []uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint8(uint8(src[i])); err != nil {
-			panic(err)
+		if e.Uint8(uint8(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12060,8 +12060,8 @@ func (s Vec2fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12074,8 +12074,8 @@ func (s Vec2fˢ) Write(src []Vec2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12215,8 +12215,8 @@ func (s Vec2iˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2i, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12229,8 +12229,8 @@ func (s Vec2iˢ) Write(src []Vec2i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12370,8 +12370,8 @@ func (s Vec2uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2u, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12384,8 +12384,8 @@ func (s Vec2uˢ) Write(src []Vec2u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12525,8 +12525,8 @@ func (s Vec3fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12539,8 +12539,8 @@ func (s Vec3fˢ) Write(src []Vec3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12680,8 +12680,8 @@ func (s Vec3iˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3i, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12694,8 +12694,8 @@ func (s Vec3iˢ) Write(src []Vec3i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12835,8 +12835,8 @@ func (s Vec3uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3u, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -12849,8 +12849,8 @@ func (s Vec3uˢ) Write(src []Vec3u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -12990,8 +12990,8 @@ func (s Vec4fˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4f, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -13004,8 +13004,8 @@ func (s Vec4fˢ) Write(src []Vec4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -13145,8 +13145,8 @@ func (s Vec4iˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4i, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -13159,8 +13159,8 @@ func (s Vec4iˢ) Write(src []Vec4i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -13300,8 +13300,8 @@ func (s Vec4uˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, �
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4u, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if err := d.Value(&res[i]); err != nil {
-			panic(err)
+		if d.Value(&res[i]); d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return res
@@ -13314,8 +13314,8 @@ func (s Vec4uˢ) Write(src []Vec4u, ϟa atom.Atom, ϟs *gfxapi.State, ϟd databa
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Value(&src[i]); err != nil {
-			panic(err)
+		if e.Value(&src[i]); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -13455,10 +13455,10 @@ func (s VertexArrayIdˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]VertexArrayId, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if ϟv, err := d.Uint32(); err == nil {
+		if ϟv := d.Uint32(); d.Error() == nil {
 			res[i] = VertexArrayId(ϟv)
 		} else {
-			panic(err)
+			panic(d.Error())
 		}
 	}
 	return res
@@ -13471,8 +13471,8 @@ func (s VertexArrayIdˢ) Write(src []VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.S
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
 		}
 	}
 	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -13501,10 +13501,10 @@ func (s VertexArrayIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v VertexArrayId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = VertexArrayId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
@@ -13529,10 +13529,10 @@ func (s VertexArrayIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v VertexArrayId
-			if ϟv, err := d.Uint32(); err == nil {
+			if ϟv := d.Uint32(); d.Error() == nil {
 				v = VertexArrayId(ϟv)
 			} else {
-				panic(err)
+				panic(d.Error())
 			}
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				dst, found := ϟb.Remappings[key]
@@ -13759,14 +13759,14 @@ func (s Voidᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
-			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			res[i] = NewVoidᵖ(ptr)
 		} else {
-			if err := d.Value(&res[i]); err != nil {
-				panic(err)
+			if d.Value(&res[i]); d.Error() != nil {
+				panic(d.Error())
 			}
 		}
 	}
@@ -13781,12 +13781,12 @@ func (s Voidᵖˢ) Write(src []Voidᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
 		if s.Root.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-				panic(err)
+			if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+				panic(e.Error())
 			}
 		} else {
-			if err := e.Value(&src[i]); err != nil {
-				panic(err)
+			if e.Value(&src[i]); e.Error() != nil {
+				panic(e.Error())
 			}
 		}
 	}
@@ -13819,9 +13819,9 @@ func (s Voidᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
-			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			ϟb.Push(NewVoidᵖ(v).value())
 			ϟb.Store(ptr)
@@ -13945,14 +13945,14 @@ func (s Voidᶜᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
-			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			ptr := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			res[i] = NewVoidᶜᵖ(ptr)
 		} else {
-			if err := d.Value(&res[i]); err != nil {
-				panic(err)
+			if d.Value(&res[i]); d.Error() != nil {
+				panic(d.Error())
 			}
 		}
 	}
@@ -13967,12 +13967,12 @@ func (s Voidᶜᵖˢ) Write(src []Voidᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, 
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
 		if s.Root.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
-				panic(err)
+			if binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); e.Error() != nil {
+				panic(e.Error())
 			}
 		} else {
-			if err := e.Value(&src[i]); err != nil {
-				panic(err)
+			if e.Value(&src[i]); e.Error() != nil {
+				panic(e.Error())
 			}
 		}
 	}
@@ -14005,9 +14005,9 @@ func (s Voidᶜᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
-			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if err != nil {
-				panic(err)
+			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if d.Error() != nil {
+				panic(d.Error())
 			}
 			ϟb.Push(NewVoidᶜᵖ(v).value())
 			ϟb.Store(ptr)

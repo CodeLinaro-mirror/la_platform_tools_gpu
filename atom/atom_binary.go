@@ -45,35 +45,32 @@ type binaryClassFramebufferObservation struct{}
 func (*FramebufferObservation) Class() binary.Class {
 	return (*binaryClassFramebufferObservation)(nil)
 }
-func doEncodeFramebufferObservation(e binary.Encoder, o *FramebufferObservation) error {
+func doEncodeFramebufferObservation(e binary.Encoder, o *FramebufferObservation) {
 	e.Uint32(o.Width)
 	e.Uint32(o.Height)
 	e.Uint32(uint32(len(o.Data)))
 	e.Data(o.Data)
-	return e.Error()
 }
-func doDecodeFramebufferObservation(d binary.Decoder, o *FramebufferObservation) error {
-	o.Width = uint32(binary.ReadUint32(d))
-	o.Height = uint32(binary.ReadUint32(d))
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodeFramebufferObservation(d binary.Decoder, o *FramebufferObservation) {
+	o.Width = uint32(d.Uint32())
+	o.Height = uint32(d.Uint32())
+	if count := d.Uint32(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
 	}
-	return d.Error()
 }
 func (*binaryClassFramebufferObservation) ID() binary.ID      { return binaryIDFramebufferObservation }
 func (*binaryClassFramebufferObservation) New() binary.Object { return &FramebufferObservation{} }
-func (*binaryClassFramebufferObservation) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeFramebufferObservation(e, obj.(*FramebufferObservation))
+func (*binaryClassFramebufferObservation) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeFramebufferObservation(e, obj.(*FramebufferObservation))
 }
-func (*binaryClassFramebufferObservation) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassFramebufferObservation) Decode(d binary.Decoder) binary.Object {
 	obj := &FramebufferObservation{}
-	return obj, doDecodeFramebufferObservation(d, obj)
+	doDecodeFramebufferObservation(d, obj)
+	return obj
 }
-func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeFramebufferObservation(d, obj.(*FramebufferObservation))
+func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeFramebufferObservation(d, obj.(*FramebufferObservation))
 }
 func (*binaryClassFramebufferObservation) Schema() *schema.Class { return schemaFramebufferObservation }
 
@@ -93,27 +90,26 @@ type binaryClassRange struct{}
 func (*Range) Class() binary.Class {
 	return (*binaryClassRange)(nil)
 }
-func doEncodeRange(e binary.Encoder, o *Range) error {
+func doEncodeRange(e binary.Encoder, o *Range) {
 	e.Uint64(o.Start)
 	e.Uint64(o.End)
-	return e.Error()
 }
-func doDecodeRange(d binary.Decoder, o *Range) error {
-	o.Start = uint64(binary.ReadUint64(d))
-	o.End = uint64(binary.ReadUint64(d))
-	return d.Error()
+func doDecodeRange(d binary.Decoder, o *Range) {
+	o.Start = uint64(d.Uint64())
+	o.End = uint64(d.Uint64())
 }
 func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }
-func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeRange(e, obj.(*Range))
+func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeRange(e, obj.(*Range))
 }
-func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 	obj := &Range{}
-	return obj, doDecodeRange(d, obj)
+	doDecodeRange(d, obj)
+	return obj
 }
-func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeRange(d, obj.(*Range))
+func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeRange(d, obj.(*Range))
 }
 func (*binaryClassRange) Schema() *schema.Class { return schemaRange }
 
@@ -132,39 +128,36 @@ type binaryClassGroup struct{}
 func (*Group) Class() binary.Class {
 	return (*binaryClassGroup)(nil)
 }
-func doEncodeGroup(e binary.Encoder, o *Group) error {
+func doEncodeGroup(e binary.Encoder, o *Group) {
 	e.String(o.Name)
 	e.Value(&o.Range)
 	e.Uint32(uint32(len(o.SubGroups)))
 	for i := range o.SubGroups {
 		e.Value(&o.SubGroups[i])
 	}
-	return e.Error()
 }
-func doDecodeGroup(d binary.Decoder, o *Group) error {
-	o.Name = string(binary.ReadString(d))
+func doDecodeGroup(d binary.Decoder, o *Group) {
+	o.Name = string(d.String())
 	d.Value(&o.Range)
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+	if count := d.Uint32(); count > 0 {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
 			d.Value(&o.SubGroups[i])
 		}
 	}
-	return d.Error()
 }
 func (*binaryClassGroup) ID() binary.ID      { return binaryIDGroup }
 func (*binaryClassGroup) New() binary.Object { return &Group{} }
-func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeGroup(e, obj.(*Group))
+func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGroup(e, obj.(*Group))
 }
-func (*binaryClassGroup) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassGroup) Decode(d binary.Decoder) binary.Object {
 	obj := &Group{}
-	return obj, doDecodeGroup(d, obj)
+	doDecodeGroup(d, obj)
+	return obj
 }
-func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeGroup(d, obj.(*Group))
+func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGroup(d, obj.(*Group))
 }
 func (*binaryClassGroup) Schema() *schema.Class { return schemaGroup }
 
@@ -184,39 +177,36 @@ type binaryClassList struct{}
 func (*List) Class() binary.Class {
 	return (*binaryClassList)(nil)
 }
-func doEncodeList(e binary.Encoder, o *List) error {
+func doEncodeList(e binary.Encoder, o *List) {
 	e.Uint32(uint32(len(o.Atoms)))
 	for i := range o.Atoms {
 		e.Variant(o.Atoms[i])
 	}
-	return e.Error()
 }
-func doDecodeList(d binary.Decoder, o *List) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodeList(d binary.Decoder, o *List) {
+	if count := d.Uint32(); count > 0 {
 		o.Atoms = make([]Atom, count)
 		for i := range o.Atoms {
-			if obj, err := d.Variant(); obj != nil && err == nil {
+			if obj := d.Variant(); obj != nil {
 				o.Atoms[i] = obj.(Atom)
 			} else {
 				o.Atoms[i] = nil
 			}
 		}
 	}
-	return d.Error()
 }
 func (*binaryClassList) ID() binary.ID      { return binaryIDList }
 func (*binaryClassList) New() binary.Object { return &List{} }
-func (*binaryClassList) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeList(e, obj.(*List))
+func (*binaryClassList) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeList(e, obj.(*List))
 }
-func (*binaryClassList) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassList) Decode(d binary.Decoder) binary.Object {
 	obj := &List{}
-	return obj, doDecodeList(d, obj)
+	doDecodeList(d, obj)
+	return obj
 }
-func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeList(d, obj.(*List))
+func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeList(d, obj.(*List))
 }
 func (*binaryClassList) Schema() *schema.Class { return schemaList }
 
@@ -234,33 +224,32 @@ type binaryClassMetadata struct{}
 func (*Metadata) Class() binary.Class {
 	return (*binaryClassMetadata)(nil)
 }
-func doEncodeMetadata(e binary.Encoder, o *Metadata) error {
+func doEncodeMetadata(e binary.Encoder, o *Metadata) {
 	e.ID(binary.ID(o.API))
 	e.String(o.DisplayName)
 	e.Bool(o.EndOfFrame)
 	e.Bool(o.DrawCall)
 	e.String(o.DocumentationUrl)
-	return e.Error()
 }
-func doDecodeMetadata(d binary.Decoder, o *Metadata) error {
-	o.API = gfxapi.ID(binary.ReadID(d))
-	o.DisplayName = string(binary.ReadString(d))
-	o.EndOfFrame = bool(binary.ReadBool(d))
-	o.DrawCall = bool(binary.ReadBool(d))
-	o.DocumentationUrl = string(binary.ReadString(d))
-	return d.Error()
+func doDecodeMetadata(d binary.Decoder, o *Metadata) {
+	o.API = gfxapi.ID(d.ID())
+	o.DisplayName = string(d.String())
+	o.EndOfFrame = bool(d.Bool())
+	o.DrawCall = bool(d.Bool())
+	o.DocumentationUrl = string(d.String())
 }
 func (*binaryClassMetadata) ID() binary.ID      { return binaryIDMetadata }
 func (*binaryClassMetadata) New() binary.Object { return &Metadata{} }
-func (*binaryClassMetadata) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMetadata(e, obj.(*Metadata))
+func (*binaryClassMetadata) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMetadata(e, obj.(*Metadata))
 }
-func (*binaryClassMetadata) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassMetadata) Decode(d binary.Decoder) binary.Object {
 	obj := &Metadata{}
-	return obj, doDecodeMetadata(d, obj)
+	doDecodeMetadata(d, obj)
+	return obj
 }
-func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMetadata(d, obj.(*Metadata))
+func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMetadata(d, obj.(*Metadata))
 }
 func (*binaryClassMetadata) Schema() *schema.Class { return schemaMetadata }
 
@@ -282,27 +271,26 @@ type binaryClassObservation struct{}
 func (*Observation) Class() binary.Class {
 	return (*binaryClassObservation)(nil)
 }
-func doEncodeObservation(e binary.Encoder, o *Observation) error {
+func doEncodeObservation(e binary.Encoder, o *Observation) {
 	e.Value(&o.Range)
 	e.ID(o.ID)
-	return e.Error()
 }
-func doDecodeObservation(d binary.Decoder, o *Observation) error {
+func doDecodeObservation(d binary.Decoder, o *Observation) {
 	d.Value(&o.Range)
-	o.ID = binary.ID(binary.ReadID(d))
-	return d.Error()
+	o.ID = binary.ID(d.ID())
 }
 func (*binaryClassObservation) ID() binary.ID      { return binaryIDObservation }
 func (*binaryClassObservation) New() binary.Object { return &Observation{} }
-func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeObservation(e, obj.(*Observation))
+func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeObservation(e, obj.(*Observation))
 }
-func (*binaryClassObservation) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassObservation) Decode(d binary.Decoder) binary.Object {
 	obj := &Observation{}
-	return obj, doDecodeObservation(d, obj)
+	doDecodeObservation(d, obj)
+	return obj
 }
-func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeObservation(d, obj.(*Observation))
+func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeObservation(d, obj.(*Observation))
 }
 func (*binaryClassObservation) Schema() *schema.Class { return schemaObservation }
 
@@ -321,7 +309,7 @@ type binaryClassObservations struct{}
 func (*Observations) Class() binary.Class {
 	return (*binaryClassObservations)(nil)
 }
-func doEncodeObservations(e binary.Encoder, o *Observations) error {
+func doEncodeObservations(e binary.Encoder, o *Observations) {
 	e.Uint32(uint32(len(o.Reads)))
 	for i := range o.Reads {
 		e.Value(&o.Reads[i])
@@ -330,38 +318,33 @@ func doEncodeObservations(e binary.Encoder, o *Observations) error {
 	for i := range o.Writes {
 		e.Value(&o.Writes[i])
 	}
-	return e.Error()
 }
-func doDecodeObservations(d binary.Decoder, o *Observations) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodeObservations(d binary.Decoder, o *Observations) {
+	if count := d.Uint32(); count > 0 {
 		o.Reads = make([]Observation, count)
 		for i := range o.Reads {
 			d.Value(&o.Reads[i])
 		}
 	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+	if count := d.Uint32(); count > 0 {
 		o.Writes = make([]Observation, count)
 		for i := range o.Writes {
 			d.Value(&o.Writes[i])
 		}
 	}
-	return d.Error()
 }
 func (*binaryClassObservations) ID() binary.ID      { return binaryIDObservations }
 func (*binaryClassObservations) New() binary.Object { return &Observations{} }
-func (*binaryClassObservations) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeObservations(e, obj.(*Observations))
+func (*binaryClassObservations) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeObservations(e, obj.(*Observations))
 }
-func (*binaryClassObservations) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassObservations) Decode(d binary.Decoder) binary.Object {
 	obj := &Observations{}
-	return obj, doDecodeObservations(d, obj)
+	doDecodeObservations(d, obj)
+	return obj
 }
-func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeObservations(d, obj.(*Observations))
+func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeObservations(d, obj.(*Observations))
 }
 func (*binaryClassObservations) Schema() *schema.Class { return schemaObservations }
 
@@ -380,33 +363,30 @@ type binaryClassResource struct{}
 func (*Resource) Class() binary.Class {
 	return (*binaryClassResource)(nil)
 }
-func doEncodeResource(e binary.Encoder, o *Resource) error {
+func doEncodeResource(e binary.Encoder, o *Resource) {
 	e.ID(o.ID)
 	e.Uint32(uint32(len(o.Data)))
 	e.Data(o.Data)
-	return e.Error()
 }
-func doDecodeResource(d binary.Decoder, o *Resource) error {
-	o.ID = binary.ID(binary.ReadID(d))
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodeResource(d binary.Decoder, o *Resource) {
+	o.ID = binary.ID(d.ID())
+	if count := d.Uint32(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
 	}
-	return d.Error()
 }
 func (*binaryClassResource) ID() binary.ID      { return binaryIDResource }
 func (*binaryClassResource) New() binary.Object { return &Resource{} }
-func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeResource(e, obj.(*Resource))
+func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeResource(e, obj.(*Resource))
 }
-func (*binaryClassResource) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
 	obj := &Resource{}
-	return obj, doDecodeResource(d, obj)
+	doDecodeResource(d, obj)
+	return obj
 }
-func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeResource(d, obj.(*Resource))
+func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeResource(d, obj.(*Resource))
 }
 func (*binaryClassResource) Schema() *schema.Class { return schemaResource }
 

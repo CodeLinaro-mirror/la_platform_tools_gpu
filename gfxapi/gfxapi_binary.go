@@ -30,35 +30,32 @@ type binaryClassTexture struct{}
 func (*Texture) Class() binary.Class {
 	return (*binaryClassTexture)(nil)
 }
-func doEncodeTexture(e binary.Encoder, o *Texture) error {
+func doEncodeTexture(e binary.Encoder, o *Texture) {
 	e.Uint32(uint32(len(o.Levels)))
 	for i := range o.Levels {
 		e.Value(&o.Levels[i])
 	}
-	return e.Error()
 }
-func doDecodeTexture(d binary.Decoder, o *Texture) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodeTexture(d binary.Decoder, o *Texture) {
+	if count := d.Uint32(); count > 0 {
 		o.Levels = make([]image.Info, count)
 		for i := range o.Levels {
 			d.Value(&o.Levels[i])
 		}
 	}
-	return d.Error()
 }
 func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
 func (*binaryClassTexture) New() binary.Object { return &Texture{} }
-func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeTexture(e, obj.(*Texture))
+func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeTexture(e, obj.(*Texture))
 }
-func (*binaryClassTexture) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassTexture) Decode(d binary.Decoder) binary.Object {
 	obj := &Texture{}
-	return obj, doDecodeTexture(d, obj)
+	doDecodeTexture(d, obj)
+	return obj
 }
-func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeTexture(d, obj.(*Texture))
+func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeTexture(d, obj.(*Texture))
 }
 func (*binaryClassTexture) Schema() *schema.Class { return schemaTexture }
 

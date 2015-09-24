@@ -27,35 +27,34 @@ type binaryClasstestStruct struct{}
 func (*testStruct) Class() binary.Class {
 	return (*binaryClasstestStruct)(nil)
 }
-func doEncodetestStruct(e binary.Encoder, o *testStruct) error {
+func doEncodetestStruct(e binary.Encoder, o *testStruct) {
 	e.String(o.Str)
 	if o.Ptr != nil {
 		e.Object(o.Ptr)
 	} else {
 		e.Object(nil)
 	}
-	return e.Error()
 }
-func doDecodetestStruct(d binary.Decoder, o *testStruct) error {
-	o.Str = string(binary.ReadString(d))
-	if obj, err := d.Object(); obj != nil && err == nil {
+func doDecodetestStruct(d binary.Decoder, o *testStruct) {
+	o.Str = string(d.String())
+	if obj := d.Object(); obj != nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
 		o.Ptr = nil
 	}
-	return d.Error()
 }
 func (*binaryClasstestStruct) ID() binary.ID      { return binaryIDtestStruct }
 func (*binaryClasstestStruct) New() binary.Object { return &testStruct{} }
-func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodetestStruct(e, obj.(*testStruct))
+func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodetestStruct(e, obj.(*testStruct))
 }
-func (*binaryClasstestStruct) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClasstestStruct) Decode(d binary.Decoder) binary.Object {
 	obj := &testStruct{}
-	return obj, doDecodetestStruct(d, obj)
+	doDecodetestStruct(d, obj)
+	return obj
 }
-func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodetestStruct(d, obj.(*testStruct))
+func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodetestStruct(d, obj.(*testStruct))
 }
 func (*binaryClasstestStruct) Schema() *schema.Class { return schematestStruct }
 
@@ -74,7 +73,7 @@ type binaryClasstestAtom struct{}
 func (*testAtom) Class() binary.Class {
 	return (*binaryClasstestAtom)(nil)
 }
-func doEncodetestAtom(e binary.Encoder, o *testAtom) error {
+func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 	e.ID(binary.ID(o.api))
 	e.String(o.Str)
 	e.Uint32(uint32(len(o.Sli)))
@@ -92,51 +91,46 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) error {
 		e.String(k)
 		e.String(v)
 	}
-	return e.Error()
 }
-func doDecodetestAtom(d binary.Decoder, o *testAtom) error {
-	o.api = gfxapi.ID(binary.ReadID(d))
-	o.Str = string(binary.ReadString(d))
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+func doDecodetestAtom(d binary.Decoder, o *testAtom) {
+	o.api = gfxapi.ID(d.ID())
+	o.Str = string(d.String())
+	if count := d.Uint32(); count > 0 {
 		o.Sli = make([]bool, count)
 		for i := range o.Sli {
-			o.Sli[i] = bool(binary.ReadBool(d))
+			o.Sli[i] = bool(d.Bool())
 		}
 	}
-	o.Any, _ = any.Decode(d)
-	if obj, err := d.Object(); obj != nil && err == nil {
+	o.Any = any.Decode(d)
+	if obj := d.Object(); obj != nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
 		o.Ptr = nil
 	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
+	if count := d.Uint32(); count > 0 {
 		o.Map = make(map[string]string, count)
 		m := o.Map
 		for i := uint32(0); i < count; i++ {
 			var k string
 			var v string
-			k = string(binary.ReadString(d))
-			v = string(binary.ReadString(d))
+			k = string(d.String())
+			v = string(d.String())
 			m[k] = v
 		}
 	}
-	return d.Error()
 }
 func (*binaryClasstestAtom) ID() binary.ID      { return binaryIDtestAtom }
 func (*binaryClasstestAtom) New() binary.Object { return &testAtom{} }
-func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodetestAtom(e, obj.(*testAtom))
+func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodetestAtom(e, obj.(*testAtom))
 }
-func (*binaryClasstestAtom) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClasstestAtom) Decode(d binary.Decoder) binary.Object {
 	obj := &testAtom{}
-	return obj, doDecodetestAtom(d, obj)
+	doDecodetestAtom(d, obj)
+	return obj
 }
-func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodetestAtom(d, obj.(*testAtom))
+func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodetestAtom(d, obj.(*testAtom))
 }
 func (*binaryClasstestAtom) Schema() *schema.Class { return schematestAtom }
 

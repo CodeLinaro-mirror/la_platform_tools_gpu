@@ -27,25 +27,24 @@ type binaryClassError struct{}
 func (*Error) Class() binary.Class {
 	return (*binaryClassError)(nil)
 }
-func doEncodeError(e binary.Encoder, o *Error) error {
+func doEncodeError(e binary.Encoder, o *Error) {
 	e.String(o.message)
-	return e.Error()
 }
-func doDecodeError(d binary.Decoder, o *Error) error {
-	o.message = string(binary.ReadString(d))
-	return d.Error()
+func doDecodeError(d binary.Decoder, o *Error) {
+	o.message = string(d.String())
 }
 func (*binaryClassError) ID() binary.ID      { return binaryIDError }
 func (*binaryClassError) New() binary.Object { return &Error{} }
-func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeError(e, obj.(*Error))
+func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeError(e, obj.(*Error))
 }
-func (*binaryClassError) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassError) Decode(d binary.Decoder) binary.Object {
 	obj := &Error{}
-	return obj, doDecodeError(d, obj)
+	doDecodeError(d, obj)
+	return obj
 }
-func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeError(d, obj.(*Error))
+func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeError(d, obj.(*Error))
 }
 func (*binaryClassError) Schema() *schema.Class { return schemaError }
 

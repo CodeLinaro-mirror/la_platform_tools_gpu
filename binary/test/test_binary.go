@@ -29,25 +29,24 @@ type binaryClassTypeA struct{}
 func (*TypeA) Class() binary.Class {
 	return (*binaryClassTypeA)(nil)
 }
-func doEncodeTypeA(e binary.Encoder, o *TypeA) error {
+func doEncodeTypeA(e binary.Encoder, o *TypeA) {
 	e.String(o.Data)
-	return e.Error()
 }
-func doDecodeTypeA(d binary.Decoder, o *TypeA) error {
-	o.Data = string(binary.ReadString(d))
-	return d.Error()
+func doDecodeTypeA(d binary.Decoder, o *TypeA) {
+	o.Data = string(d.String())
 }
 func (*binaryClassTypeA) ID() binary.ID      { return TypeAID }
 func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
-func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeTypeA(e, obj.(*TypeA))
+func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeTypeA(e, obj.(*TypeA))
 }
-func (*binaryClassTypeA) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassTypeA) Decode(d binary.Decoder) binary.Object {
 	obj := &TypeA{}
-	return obj, doDecodeTypeA(d, obj)
+	doDecodeTypeA(d, obj)
+	return obj
 }
-func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeTypeA(d, obj.(*TypeA))
+func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeTypeA(d, obj.(*TypeA))
 }
 func (*binaryClassTypeA) Schema() *schema.Class { return schemaTypeA }
 
@@ -65,25 +64,24 @@ type binaryClassTypeB struct{}
 func (*TypeB) Class() binary.Class {
 	return (*binaryClassTypeB)(nil)
 }
-func doEncodeTypeB(e binary.Encoder, o *TypeB) error {
+func doEncodeTypeB(e binary.Encoder, o *TypeB) {
 	e.String(o.Data)
-	return e.Error()
 }
-func doDecodeTypeB(d binary.Decoder, o *TypeB) error {
-	o.Data = string(binary.ReadString(d))
-	return d.Error()
+func doDecodeTypeB(d binary.Decoder, o *TypeB) {
+	o.Data = string(d.String())
 }
 func (*binaryClassTypeB) ID() binary.ID      { return TypeBID }
 func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
-func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeTypeB(e, obj.(*TypeB))
+func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeTypeB(e, obj.(*TypeB))
 }
-func (*binaryClassTypeB) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassTypeB) Decode(d binary.Decoder) binary.Object {
 	obj := &TypeB{}
-	return obj, doDecodeTypeB(d, obj)
+	doDecodeTypeB(d, obj)
+	return obj
 }
-func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeTypeB(d, obj.(*TypeB))
+func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeTypeB(d, obj.(*TypeB))
 }
 func (*binaryClassTypeB) Schema() *schema.Class { return schemaTypeB }
 

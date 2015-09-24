@@ -27,25 +27,24 @@ type binaryClassdelay struct{}
 func (*delay) Class() binary.Class {
 	return (*binaryClassdelay)(nil)
 }
-func doEncodedelay(e binary.Encoder, o *delay) error {
+func doEncodedelay(e binary.Encoder, o *delay) {
 	e.String(o.data)
-	return e.Error()
 }
-func doDecodedelay(d binary.Decoder, o *delay) error {
-	o.data = string(binary.ReadString(d))
-	return d.Error()
+func doDecodedelay(d binary.Decoder, o *delay) {
+	o.data = string(d.String())
 }
 func (*binaryClassdelay) ID() binary.ID      { return binaryIDdelay }
 func (*binaryClassdelay) New() binary.Object { return &delay{} }
-func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodedelay(e, obj.(*delay))
+func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodedelay(e, obj.(*delay))
 }
-func (*binaryClassdelay) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassdelay) Decode(d binary.Decoder) binary.Object {
 	obj := &delay{}
-	return obj, doDecodedelay(d, obj)
+	doDecodedelay(d, obj)
+	return obj
 }
-func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodedelay(d, obj.(*delay))
+func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodedelay(d, obj.(*delay))
 }
 func (*binaryClassdelay) Schema() *schema.Class { return schemadelay }
 
@@ -63,25 +62,24 @@ type binaryClassrequest struct{}
 func (*request) Class() binary.Class {
 	return (*binaryClassrequest)(nil)
 }
-func doEncoderequest(e binary.Encoder, o *request) error {
+func doEncoderequest(e binary.Encoder, o *request) {
 	e.String(o.data)
-	return e.Error()
 }
-func doDecoderequest(d binary.Decoder, o *request) error {
-	o.data = string(binary.ReadString(d))
-	return d.Error()
+func doDecoderequest(d binary.Decoder, o *request) {
+	o.data = string(d.String())
 }
 func (*binaryClassrequest) ID() binary.ID      { return binaryIDrequest }
 func (*binaryClassrequest) New() binary.Object { return &request{} }
-func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderequest(e, obj.(*request))
+func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) {
+	doEncoderequest(e, obj.(*request))
 }
-func (*binaryClassrequest) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassrequest) Decode(d binary.Decoder) binary.Object {
 	obj := &request{}
-	return obj, doDecoderequest(d, obj)
+	doDecoderequest(d, obj)
+	return obj
 }
-func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderequest(d, obj.(*request))
+func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecoderequest(d, obj.(*request))
 }
 func (*binaryClassrequest) Schema() *schema.Class { return schemarequest }
 
@@ -99,25 +97,24 @@ type binaryClassresponse struct{}
 func (*response) Class() binary.Class {
 	return (*binaryClassresponse)(nil)
 }
-func doEncoderesponse(e binary.Encoder, o *response) error {
+func doEncoderesponse(e binary.Encoder, o *response) {
 	e.String(o.data)
-	return e.Error()
 }
-func doDecoderesponse(d binary.Decoder, o *response) error {
-	o.data = string(binary.ReadString(d))
-	return d.Error()
+func doDecoderesponse(d binary.Decoder, o *response) {
+	o.data = string(d.String())
 }
 func (*binaryClassresponse) ID() binary.ID      { return binaryIDresponse }
 func (*binaryClassresponse) New() binary.Object { return &response{} }
-func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesponse(e, obj.(*response))
+func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) {
+	doEncoderesponse(e, obj.(*response))
 }
-func (*binaryClassresponse) Decode(d binary.Decoder) (binary.Object, error) {
+func (*binaryClassresponse) Decode(d binary.Decoder) binary.Object {
 	obj := &response{}
-	return obj, doDecoderesponse(d, obj)
+	doDecoderesponse(d, obj)
+	return obj
 }
-func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesponse(d, obj.(*response))
+func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecoderesponse(d, obj.(*response))
 }
 func (*binaryClassresponse) Schema() *schema.Class { return schemaresponse }
 
