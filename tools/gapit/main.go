@@ -32,7 +32,7 @@ var (
 	verbose  = flag.Bool("v", false, "verbose messages")
 	device   = flag.String("device", "", "the device to capture on")
 	spyport  = flag.Int("i", 9286, "gapii TCP port to connect to")
-	duration = flag.Duration("d", 10*time.Second, "duration to trace for")
+	duration = flag.Duration("d", 0, "duration to trace for")
 	output   = flag.String("out", "", "the file to generate")
 	debug    = flag.Bool("debug", false, "use the debug spy .so")
 	local    = flag.Bool("local", false, "capture a local program instead of using ADB")
@@ -125,7 +125,12 @@ func capture(logger log.Logger, out string) error {
 
 	stop := make(chan struct{})
 	go func() {
-		time.Sleep(*duration)
+		if d := *duration; d == 0 {
+			println("Press enter to stop capturing...")
+			os.Stdin.Read([]byte{0})
+		} else {
+			time.Sleep(d)
+		}
 		close(stop)
 	}()
 	_, err = gapii.Capture(logger, *spyport, file, stop)
