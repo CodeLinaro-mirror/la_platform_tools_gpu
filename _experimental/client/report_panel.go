@@ -31,17 +31,22 @@ func CreateReportPanel(appCtx *ApplicationContext) gxui.Control {
 	l.SetAdapter(adapter)
 
 	var capture *path.Capture
+	var device *path.Device
 
 	t := task.New()
 	update := func() {
 		if capture != nil {
-			t.Run(updateReportAdapter{appCtx, capture, adapter})
+			t.Run(updateReportAdapter{appCtx, capture, device, adapter})
 		}
 	}
 
 	appCtx.events.OnSelect(func(p path.Path) {
 		if c := path.FindCapture(p); p != nil && !path.Equal(c, capture) {
 			capture = c
+			update()
+		}
+		if d := path.FindDevice(p); p != nil && !path.Equal(d, device) {
+			device = d
 			update()
 		}
 	})
@@ -52,11 +57,12 @@ func CreateReportPanel(appCtx *ApplicationContext) gxui.Control {
 type updateReportAdapter struct {
 	context *ApplicationContext
 	capture *path.Capture
+	device  *path.Device
 	adapter *ReportAdapter
 }
 
 func (t updateReportAdapter) Run(c task.CancelSignal) {
-	report, err := t.context.rpc.LoadReport(t.capture)
+	report, err := t.context.rpc.LoadReport(t.capture, t.device)
 	if err != nil {
 		return
 	}
@@ -81,7 +87,7 @@ func (a *ReportAdapter) Count() int {
 }
 
 func (a *ReportAdapter) Size(theme gxui.Theme) math.Size {
-	return math.Size{math.MaxSize.W, 16}
+	return math.Size{W: math.MaxSize.W, H: 16}
 }
 
 func (a *ReportAdapter) ItemAt(index int) gxui.AdapterItem {

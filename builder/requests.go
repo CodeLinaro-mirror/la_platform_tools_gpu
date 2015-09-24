@@ -75,12 +75,6 @@ type RenderFramebufferColor struct {
 	WireframeMode service.WireframeMode
 }
 
-// BuildReport generates a service.Report for the given capture.
-type BuildReport struct {
-	binary.Generate
-	Capture *path.Capture
-}
-
 // Get resolves the object, value or memory at Path.
 type Get struct {
 	binary.Generate

@@ -24,6 +24,7 @@ import (
 type Report struct {
 	binary.Generate
 	Capture *Capture // The path to the capture containing the report.
+	Device  *Device  // The optional path the the device used to generate replay information.
 }
 
 // String returns the string representation of the path.
@@ -31,7 +32,7 @@ func (n *Report) String() string { return n.Path() }
 
 // Path implements the Path interface.
 func (n *Report) Path() string {
-	return fmt.Sprintf("%v.Report", n.Capture)
+	return fmt.Sprintf("%v.Report<%v>", n.Capture, n.Device)
 }
 
 // Base implements the Path interface, returning the path to the report.

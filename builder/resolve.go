@@ -114,7 +114,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = atoms
 
 		case *path.Report:
-			report, err := database.Build(&BuildReport{Capture: p.Capture}, d, l)
+			report, err := database.Build(&BuildReport{Capture: p.Capture, Device: p.Device}, d, l)
 			if err != nil {
 				return nil, err
 			}

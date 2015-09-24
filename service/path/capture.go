@@ -60,9 +60,10 @@ func (c *Capture) Atoms() *Atoms {
 	return &Atoms{Capture: c}
 }
 
-// Report returns the path to the capture's report.
-func (c *Capture) Report() *Report {
-	return &Report{Capture: c}
+// Report returns the path to the capture's report. If d is not nil, then the
+// report will include items from replaying the capture on the specified device.
+func (c *Capture) Report(d *Device) *Report {
+	return &Report{Capture: c, Device: d}
 }
 
 // Hierarchy returns the path to the capture's hierarchy.

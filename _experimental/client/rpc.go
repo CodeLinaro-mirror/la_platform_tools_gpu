@@ -138,10 +138,10 @@ func (r *rpc) LoadTiming(device *path.Device, capture *path.Capture, flags servi
 	return *timingInfo, nil
 }
 
-func (r *rpc) LoadReport(capture *path.Capture) (service.Report, error) {
+func (r *rpc) LoadReport(capture *path.Capture, device *path.Device) (service.Report, error) {
 	l := r.beginRPC("LoadReport")
 
-	report, err := r.client.Get(capture.Report(), l)
+	report, err := r.client.Get(capture.Report(device), l)
 	if err != nil {
 		return service.Report{}, nil
 	}
