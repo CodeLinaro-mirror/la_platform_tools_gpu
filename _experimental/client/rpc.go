@@ -19,7 +19,6 @@ import (
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -29,45 +28,8 @@ import (
 
 type rpc struct {
 	logger log.Logger
-	client service.Client
+	client service.Service
 	ready  <-chan struct{}
-}
-
-func (r *rpc) init(logger log.Logger, client service.Client, constants map[string]schema.ConstantSet) {
-	ready := make(chan struct{})
-
-	r.logger = logger
-	r.ready = ready
-
-	go func() {
-		// make the decoder namespace try the global namespace before the schema one
-		schemaNamespace := registry.NewNamespace()
-		namespace := registry.NewNamespace(registry.Global, schemaNamespace)
-
-		s, err := client.GetSchema(r.logger)
-		if err != nil {
-			log.Errorf(r.logger, "Error resolving schema: %v", err)
-			return
-		}
-		log.Infof(r.logger, "Schema with %d classes, %d constant sets", len(s.Classes), len(s.Constants))
-		atoms := 0
-		for _, class := range s.Classes {
-			// Find the atom metadata, if present
-			if meta := atom.FindMetadata(class); meta != nil {
-				atoms++
-				schemaNamespace.Add(NewAtomClass(class, meta))
-			} else {
-				schemaNamespace.Add(class)
-			}
-		}
-		log.Infof(r.logger, "Schema with %d atoms", atoms)
-		for _, s := range s.Constants {
-			constants[s.Type.String()] = s
-		}
-		// Replace the current RPC
-		r.client = service.NewClient(client.Multiplexer(), namespace)
-		close(ready)
-	}()
 }
 
 func (r *rpc) beginRPC(name string) log.Logger {

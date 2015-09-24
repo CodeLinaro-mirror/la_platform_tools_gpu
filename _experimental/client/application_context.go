@@ -15,21 +15,16 @@
 package client
 
 import (
-	"net"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/gapis"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/multiplexer"
-	"android.googlesource.com/platform/tools/gpu/process"
-	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 	"github.com/google/gxui/gxfont"
 )
-
-const mtu = 1024
 
 var (
 	rpcResourceRetryDelay = time.Millisecond * 250
@@ -50,24 +45,11 @@ type ApplicationContext struct {
 	constants         map[string]schema.ConstantSet
 }
 
-func connectServer(config Config) (net.Conn, error) {
-	args := []string{
-		"--rpc", config.Gapis,
-		"--data", config.DataPath,
-		"--shutdown_on_disconnect",
-	}
-	return process.ConnectStartIfNeeded(config.Gapis, "gapis", args...)
-}
-
 func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationContext, error) {
 	dropDownOverlay := theme.CreateBubbleOverlay()
 	toolTipOverlay := theme.CreateBubbleOverlay()
 
 	logger := &log.Splitter{}
-	rpcSocket, err := connectServer(config)
-	if err != nil {
-		return nil, err
-	}
 
 	monospace, _ := theme.Driver().CreateFont(gxfont.Monospace, 12)
 
@@ -82,9 +64,25 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		constants:         map[string]schema.ConstantSet{},
 	}
 
-	client := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, rpcSocket, mtu, logger, nil), nil)
-	appCtx.rpc.init(logger, client, appCtx.constants)
+	ready := make(chan struct{})
+	appCtx.rpc = rpc{logger: logger, ready: ready}
 	appCtx.events.Init()
+
+	go func() {
+		client, schema, err := gapis.Connect(config.Gapis, config.DataPath, logger)
+		if err != nil {
+			log.E(logger, "Failed to connect to GAPIS: %v", err)
+			return
+		}
+
+		for _, s := range schema.Constants {
+			appCtx.constants[s.Type.String()] = s
+		}
+
+		appCtx.rpc.client = client
+		close(ready)
+	}()
+
 	return appCtx, nil
 }
 

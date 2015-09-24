@@ -20,6 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/gapis"
 	"github.com/google/gxui"
 )
 
@@ -151,7 +152,7 @@ type atomParameter struct {
 
 func atomParameters(a atom.Atom) []atomParameter {
 	switch a := a.(type) {
-	case *Atom:
+	case *gapis.Atom:
 		c := a.ParameterCount()
 		p := make([]atomParameter, c)
 		for i := 0; i < c; i++ {
@@ -175,7 +176,7 @@ func atomParameters(a atom.Atom) []atomParameter {
 
 func atomResult(a atom.Atom) (*schema.Field, interface{}) {
 	switch a := a.(type) {
-	case *Atom:
+	case *gapis.Atom:
 		return a.Result()
 	default:
 		for _, p := range atomParameters(a) {

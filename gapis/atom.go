@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package client
+package gapis
 
 import (
 	"fmt"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -25,108 +26,138 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
+// Atom is a wrapper around a schema.Object that describes an atom object.
+// Atom conforms to the atom.Atom interface, and provides a number of methods
+// for accessing the parameters, return value and observations.
 type Atom struct {
 	object       *schema.Object
-	class        *AtomClass
+	class        *atomClass
 	observations *atom.Observations
 	flags        atom.Flags
 }
 
 var _ atom.Atom = &Atom{} // Verify that Atom implements atom.Atom.
 
+// API returns the graphics API id this atom belongs to.
 func (a *Atom) API() gfxapi.ID {
 	return a.class.meta.API
 }
 
+// Flags returns the flags of the atom.
 func (a *Atom) Flags() atom.Flags {
 	return a.flags
 }
 
+// Observations returns all the memory observations made by the atom.
 func (a *Atom) Observations() *atom.Observations {
 	return a.observations
 }
 
+// Mutate is not supported by the Atom type, but is exposed in order to comform
+// to the atom.Atom interface. Mutate will always return an error.
 func (*Atom) Mutate(*gfxapi.State, database.Database, log.Logger) error {
 	return fmt.Errorf("Mutate not implemented for client atoms")
 }
 
+// ParameterCount returns the number of parameters this atom accepts. This count
+// does not include the return value.
 func (a *Atom) ParameterCount() int {
-	if r, _ := a.Result(); r != nil {
-		return len(a.object.Fields) - 1
-	} else {
-		return len(a.object.Fields)
-	}
+	return len(a.class.parameters)
 }
 
+// Parameter returns the index'th parameter Field and value.
 func (a *Atom) Parameter(index int) (schema.Field, interface{}) {
+	index = a.class.parameters[index]
 	return a.object.Type.Fields[index], a.object.Fields[index]
 }
 
+// SetParameter sets the atom's index'th parameter to the specified value.
 func (a *Atom) SetParameter(index int, value interface{}) {
+	index = a.class.parameters[index]
 	a.object.Fields[index] = value
 }
 
+// Result returns the atom's return Field and value. If the atom does not have
+// a return value then nil, nil is returned.
 func (a *Atom) Result() (*schema.Field, interface{}) {
-	idx := len(a.object.Type.Fields) - 1
-	if idx >= 0 && a.object.Type.Fields[idx].Name() == "Result" {
-		return &a.object.Type.Fields[idx], a.object.Fields[idx]
+	if a.class.result < 0 {
+		return nil, nil
 	}
-	return nil, nil
+	return &a.object.Type.Fields[a.class.result], a.object.Fields[a.class.result]
 }
 
+// SetResult sets the atom's result to the specified value.
 func (a *Atom) SetResult(value interface{}) {
-	idx := len(a.object.Type.Fields) - 1
-	if idx >= 0 && a.object.Type.Fields[idx].Name() == "Result" {
-		a.object.Fields[idx] = value
-	} else {
+	if a.class.result < 0 {
 		panic("Atom has no result")
 	}
+	a.object.Fields[a.class.result] = value
 }
 
+// Class returns the serialize information and functionality for this type.
 func (a *Atom) Class() binary.Class {
 	return a.class
 }
 
-type AtomClass struct {
+// String returns the string description of the atom and its arguments.
+func (a *Atom) String() string {
+	params := make([]string, a.ParameterCount())
+	for i := range params {
+		_, v := a.Parameter(i)
+		params[i] = fmt.Sprintf("%v", v)
+	}
+	return fmt.Sprintf("%v(%v)", a.class.base.Name, strings.Join(params, ", "))
+}
+
+// atomClass is an implementation of binary.Class used for atoms described by
+// the schema.
+type atomClass struct {
 	base         *schema.Class
 	meta         *atom.Metadata
-	observations int
+	observations int   // index on fields, or -1
+	parameters   []int // indices on fields
+	result       int   // index on fields, or -1
 }
 
 var observationsId = (*atom.Observations)(nil).Class().ID()
 
-func NewAtomClass(base *schema.Class, meta *atom.Metadata) *AtomClass {
-	class := &AtomClass{base: base, meta: meta, observations: -1}
+func newAtomClass(base *schema.Class, meta *atom.Metadata) *atomClass {
+	class := &atomClass{base: base, meta: meta, observations: -1}
 	// Find the observations, if present
 	for i, f := range base.Fields {
 		if s, ok := f.Type.(*schema.Struct); ok {
 			if s.ID == observationsId {
 				class.observations = i
-				break
+				continue
 			}
 		}
+		if f.Name() == "Result" {
+			class.result = i
+			continue
+		}
+		class.parameters = append(class.parameters, i)
 	}
 	return class
 }
 
-func (c *AtomClass) Schema() *schema.Class {
+func (c *atomClass) Schema() *schema.Class {
 	return c.base
 }
 
-func (c *AtomClass) ID() binary.ID {
+func (c *atomClass) ID() binary.ID {
 	return c.base.ID()
 }
 
-func (c *AtomClass) New() binary.Object {
+func (c *atomClass) New() binary.Object {
 	return &Atom{class: c, object: c.base.New().(*schema.Object)}
 }
 
-func (c *AtomClass) Encode(e binary.Encoder, object binary.Object) error {
+func (c *atomClass) Encode(e binary.Encoder, object binary.Object) error {
 	a := object.(*Atom)
 	return c.base.Encode(e, a.object)
 }
 
-func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
+func (c *atomClass) Decode(d binary.Decoder) (binary.Object, error) {
 	a := &Atom{class: c}
 	o, err := c.base.Decode(d)
 	if err != nil {
@@ -153,6 +184,6 @@ func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
 	return a, nil
 }
 
-func (c *AtomClass) DecodeTo(d binary.Decoder, object binary.Object) error {
+func (c *atomClass) DecodeTo(d binary.Decoder, object binary.Object) error {
 	return c.base.DecodeTo(d, object)
 }
