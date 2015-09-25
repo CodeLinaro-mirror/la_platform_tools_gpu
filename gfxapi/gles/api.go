@@ -18,6 +18,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
+type DrawBufferIndex GLuint
 type BindingIndex GLuint
 type AttributeLocation GLuint
 type Vec2i GLintː2ᵃ
@@ -14737,7 +14738,7 @@ func (a *GlBlendBarrierKHR) Observations() *atom.Observations { return &a.observ
 type GlBlendEquationSeparateiEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	ModeRGB      GLenum
 	ModeAlpha    GLenum
 }
@@ -14771,7 +14772,7 @@ func (a *GlBlendEquationSeparateiEXT) Observations() *atom.Observations { return
 type GlBlendEquationiEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Mode         GLenum
 }
 
@@ -14804,7 +14805,7 @@ func (a *GlBlendEquationiEXT) Observations() *atom.Observations { return &a.obse
 type GlBlendFuncSeparateiEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	SrcRGB       GLenum
 	DstRGB       GLenum
 	SrcAlpha     GLenum
@@ -14840,7 +14841,7 @@ func (a *GlBlendFuncSeparateiEXT) Observations() *atom.Observations { return &a.
 type GlBlendFunciEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Src          GLenum
 	Dst          GLenum
 }
@@ -14874,7 +14875,7 @@ func (a *GlBlendFunciEXT) Observations() *atom.Observations { return &a.observat
 type GlColorMaskiEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Index        GLuint
+	Index        DrawBufferIndex
 	R            GLboolean
 	G            GLboolean
 	B            GLboolean
@@ -17878,7 +17879,7 @@ func (a *GlBlendBarrierNV) Observations() *atom.Observations { return &a.observa
 type GlBlendEquationSeparateiOES struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	ModeRGB      GLenum
 	ModeAlpha    GLenum
 }
@@ -17912,7 +17913,7 @@ func (a *GlBlendEquationSeparateiOES) Observations() *atom.Observations { return
 type GlBlendEquationiOES struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Mode         GLenum
 }
 
@@ -17945,7 +17946,7 @@ func (a *GlBlendEquationiOES) Observations() *atom.Observations { return &a.obse
 type GlBlendFuncSeparateiOES struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	SrcRGB       GLenum
 	DstRGB       GLenum
 	SrcAlpha     GLenum
@@ -17981,7 +17982,7 @@ func (a *GlBlendFuncSeparateiOES) Observations() *atom.Observations { return &a.
 type GlBlendFunciOES struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Src          GLenum
 	Dst          GLenum
 }
@@ -18200,7 +18201,7 @@ func (a *GlClientWaitSyncAPPLE) Observations() *atom.Observations { return &a.ob
 type GlColorMaskiOES struct {
 	binary.Generate
 	observations atom.Observations
-	Index        GLuint
+	Index        DrawBufferIndex
 	R            GLboolean
 	G            GLboolean
 	B            GLboolean
@@ -29116,7 +29117,7 @@ func (a *GlBlendEquationSeparate) Observations() *atom.Observations { return &a.
 type GlBlendEquationSeparatei struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	ModeRGB      GLenum
 	ModeAlpha    GLenum
 }
@@ -29150,7 +29151,7 @@ func (a *GlBlendEquationSeparatei) Observations() *atom.Observations { return &a
 type GlBlendEquationi struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Mode         GLenum
 }
 
@@ -29251,7 +29252,7 @@ func (a *GlBlendFuncSeparate) Observations() *atom.Observations { return &a.obse
 type GlBlendFuncSeparatei struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	SrcRGB       GLenum
 	DstRGB       GLenum
 	SrcAlpha     GLenum
@@ -29287,7 +29288,7 @@ func (a *GlBlendFuncSeparatei) Observations() *atom.Observations { return &a.obs
 type GlBlendFunci struct {
 	binary.Generate
 	observations atom.Observations
-	Buf          GLuint
+	Buf          DrawBufferIndex
 	Src          GLenum
 	Dst          GLenum
 }
@@ -30035,7 +30036,7 @@ func (a *GlColorMask) Observations() *atom.Observations { return &a.observations
 type GlColorMaski struct {
 	binary.Generate
 	observations atom.Observations
-	Index        GLuint
+	Index        DrawBufferIndex
 	R            GLboolean
 	G            GLboolean
 	B            GLboolean
@@ -46917,19 +46918,19 @@ func (g *State) Init() {
 func NewGlBlendBarrierKHR() *GlBlendBarrierKHR {
 	return &GlBlendBarrierKHR{}
 }
-func NewGlBlendEquationSeparateiEXT(Buf GLuint, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparateiEXT {
+func NewGlBlendEquationSeparateiEXT(Buf DrawBufferIndex, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparateiEXT {
 	return &GlBlendEquationSeparateiEXT{Buf: Buf, ModeRGB: ModeRGB, ModeAlpha: ModeAlpha}
 }
-func NewGlBlendEquationiEXT(Buf GLuint, Mode GLenum) *GlBlendEquationiEXT {
+func NewGlBlendEquationiEXT(Buf DrawBufferIndex, Mode GLenum) *GlBlendEquationiEXT {
 	return &GlBlendEquationiEXT{Buf: Buf, Mode: Mode}
 }
-func NewGlBlendFuncSeparateiEXT(Buf GLuint, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparateiEXT {
+func NewGlBlendFuncSeparateiEXT(Buf DrawBufferIndex, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparateiEXT {
 	return &GlBlendFuncSeparateiEXT{Buf: Buf, SrcRGB: SrcRGB, DstRGB: DstRGB, SrcAlpha: SrcAlpha, DstAlpha: DstAlpha}
 }
-func NewGlBlendFunciEXT(Buf GLuint, Src GLenum, Dst GLenum) *GlBlendFunciEXT {
+func NewGlBlendFunciEXT(Buf DrawBufferIndex, Src GLenum, Dst GLenum) *GlBlendFunciEXT {
 	return &GlBlendFunciEXT{Buf: Buf, Src: Src, Dst: Dst}
 }
-func NewGlColorMaskiEXT(Index GLuint, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaskiEXT {
+func NewGlColorMaskiEXT(Index DrawBufferIndex, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaskiEXT {
 	return &GlColorMaskiEXT{Index: Index, R: R, G: G, B: B, A: A}
 }
 func NewGlCopyImageSubDataEXT(SrcName GLuint, SrcTarget GLenum, SrcLevel GLint, SrcX GLint, SrcY GLint, SrcZ GLint, DstName GLuint, DstTarget GLenum, DstLevel GLint, DstX GLint, DstY GLint, DstZ GLint, SrcWidth GLsizei, SrcHeight GLsizei, SrcDepth GLsizei) *GlCopyImageSubDataEXT {
@@ -47190,16 +47191,16 @@ func NewGlBindVertexArrayOES(Array VertexArrayId) *GlBindVertexArrayOES {
 func NewGlBlendBarrierNV() *GlBlendBarrierNV {
 	return &GlBlendBarrierNV{}
 }
-func NewGlBlendEquationSeparateiOES(Buf GLuint, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparateiOES {
+func NewGlBlendEquationSeparateiOES(Buf DrawBufferIndex, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparateiOES {
 	return &GlBlendEquationSeparateiOES{Buf: Buf, ModeRGB: ModeRGB, ModeAlpha: ModeAlpha}
 }
-func NewGlBlendEquationiOES(Buf GLuint, Mode GLenum) *GlBlendEquationiOES {
+func NewGlBlendEquationiOES(Buf DrawBufferIndex, Mode GLenum) *GlBlendEquationiOES {
 	return &GlBlendEquationiOES{Buf: Buf, Mode: Mode}
 }
-func NewGlBlendFuncSeparateiOES(Buf GLuint, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparateiOES {
+func NewGlBlendFuncSeparateiOES(Buf DrawBufferIndex, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparateiOES {
 	return &GlBlendFuncSeparateiOES{Buf: Buf, SrcRGB: SrcRGB, DstRGB: DstRGB, SrcAlpha: SrcAlpha, DstAlpha: DstAlpha}
 }
-func NewGlBlendFunciOES(Buf GLuint, Src GLenum, Dst GLenum) *GlBlendFunciOES {
+func NewGlBlendFunciOES(Buf DrawBufferIndex, Src GLenum, Dst GLenum) *GlBlendFunciOES {
 	return &GlBlendFunciOES{Buf: Buf, Src: Src, Dst: Dst}
 }
 func NewGlBlendParameteriNV(Pname GLenum, Value GLint) *GlBlendParameteriNV {
@@ -47217,7 +47218,7 @@ func NewGlBufferStorageEXT(Target GLenum, Size GLsizeiptr, Data memory.Pointer, 
 func NewGlClientWaitSyncAPPLE(Sync GLsync, Flag GLbitfield, Timeout GLuint64, Result GLenum) *GlClientWaitSyncAPPLE {
 	return &GlClientWaitSyncAPPLE{Sync: Sync, Flag: Flag, Timeout: Timeout, Result: Result}
 }
-func NewGlColorMaskiOES(Index GLuint, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaskiOES {
+func NewGlColorMaskiOES(Index DrawBufferIndex, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaskiOES {
 	return &GlColorMaskiOES{Index: Index, R: R, G: G, B: B, A: A}
 }
 func NewGlCompressedTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage3DOES {
@@ -48153,10 +48154,10 @@ func NewGlBlendEquation(Equation GLenum) *GlBlendEquation {
 func NewGlBlendEquationSeparate(Rgb GLenum, Alpha GLenum) *GlBlendEquationSeparate {
 	return &GlBlendEquationSeparate{Rgb: Rgb, Alpha: Alpha}
 }
-func NewGlBlendEquationSeparatei(Buf GLuint, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparatei {
+func NewGlBlendEquationSeparatei(Buf DrawBufferIndex, ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparatei {
 	return &GlBlendEquationSeparatei{Buf: Buf, ModeRGB: ModeRGB, ModeAlpha: ModeAlpha}
 }
-func NewGlBlendEquationi(Buf GLuint, Mode GLenum) *GlBlendEquationi {
+func NewGlBlendEquationi(Buf DrawBufferIndex, Mode GLenum) *GlBlendEquationi {
 	return &GlBlendEquationi{Buf: Buf, Mode: Mode}
 }
 func NewGlBlendFunc(Src_factor GLenum, Dst_factor GLenum) *GlBlendFunc {
@@ -48165,10 +48166,10 @@ func NewGlBlendFunc(Src_factor GLenum, Dst_factor GLenum) *GlBlendFunc {
 func NewGlBlendFuncSeparate(Src_factor_rgb GLenum, Dst_factor_rgb GLenum, Src_factor_alpha GLenum, Dst_factor_alpha GLenum) *GlBlendFuncSeparate {
 	return &GlBlendFuncSeparate{SrcFactorRgb: Src_factor_rgb, DstFactorRgb: Dst_factor_rgb, SrcFactorAlpha: Src_factor_alpha, DstFactorAlpha: Dst_factor_alpha}
 }
-func NewGlBlendFuncSeparatei(Buf GLuint, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparatei {
+func NewGlBlendFuncSeparatei(Buf DrawBufferIndex, SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparatei {
 	return &GlBlendFuncSeparatei{Buf: Buf, SrcRGB: SrcRGB, DstRGB: DstRGB, SrcAlpha: SrcAlpha, DstAlpha: DstAlpha}
 }
-func NewGlBlendFunci(Buf GLuint, Src GLenum, Dst GLenum) *GlBlendFunci {
+func NewGlBlendFunci(Buf DrawBufferIndex, Src GLenum, Dst GLenum) *GlBlendFunci {
 	return &GlBlendFunci{Buf: Buf, Src: Src, Dst: Dst}
 }
 func NewGlDepthFunc(Function GLenum) *GlDepthFunc {
@@ -48234,7 +48235,7 @@ func NewGlClearStencil(Stencil GLint) *GlClearStencil {
 func NewGlColorMask(Red GLboolean, Green GLboolean, Blue GLboolean, Alpha GLboolean) *GlColorMask {
 	return &GlColorMask{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
 }
-func NewGlColorMaski(Index GLuint, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaski {
+func NewGlColorMaski(Index DrawBufferIndex, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaski {
 	return &GlColorMaski{Index: Index, R: R, G: G, B: B, A: A}
 }
 func NewGlDeleteFramebuffers(Count GLsizei, Framebuffers memory.Pointer) *GlDeleteFramebuffers {

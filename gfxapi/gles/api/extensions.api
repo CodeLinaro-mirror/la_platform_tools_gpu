@@ -89,29 +89,29 @@ cmd void glBlendBarrierNV() {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd void glBlendEquationSeparateiOES(GLuint buf, GLenum modeRGB, GLenum modeAlpha) {
+cmd void glBlendEquationSeparateiOES(DrawBufferIndex buf, GLenum modeRGB, GLenum modeAlpha) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   BlendEquationSeparatei(buf, modeRGB, modeAlpha)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd void glBlendEquationiOES(GLuint buf, GLenum mode) {
+cmd void glBlendEquationiOES(DrawBufferIndex buf, GLenum mode) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   BlendEquationi(buf, mode)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd void glBlendFuncSeparateiOES(GLuint buf,
-                                 GLenum srcRGB,
-                                 GLenum dstRGB,
-                                 GLenum srcAlpha,
-                                 GLenum dstAlpha) {
+cmd void glBlendFuncSeparateiOES(DrawBufferIndex buf,
+                                 GLenum          srcRGB,
+                                 GLenum          dstRGB,
+                                 GLenum          srcAlpha,
+                                 GLenum          dstAlpha) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   BlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd void glBlendFunciOES(GLuint buf, GLenum src, GLenum dst) {
+cmd void glBlendFunciOES(DrawBufferIndex buf, GLenum src, GLenum dst) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   BlendFunci(buf, src, dst)
 }
@@ -165,7 +165,7 @@ cmd GLenum glClientWaitSyncAPPLE(GLsync sync, GLbitfield flag, GLuint64 timeout)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd void glColorMaskiOES(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
+cmd void glColorMaskiOES(DrawBufferIndex index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   ColorMaski(index, r, g, b, a)
 }

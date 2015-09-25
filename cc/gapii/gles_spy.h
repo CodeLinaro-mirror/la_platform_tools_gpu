@@ -2005,7 +2005,7 @@ inline void GlesSpy::glBlendEquationSeparateiEXT(uint32_t buf, uint32_t modeRGB,
     Observations observations;
     do {
         uint32_t l_requiresExtension_2_ext = ExtensionId::GL_EXT_draw_buffers_indexed;
-        GLuint l_BlendEquationSeparatei_3_buf = buf;
+        DrawBufferIndex l_BlendEquationSeparatei_3_buf = buf;
         uint32_t l_BlendEquationSeparatei_3_modeRGB = modeRGB;
         uint32_t l_BlendEquationSeparatei_3_modeAlpha = modeAlpha;
         switch (l_BlendEquationSeparatei_3_modeRGB) {
@@ -2050,7 +2050,7 @@ inline void GlesSpy::glBlendEquationiEXT(uint32_t buf, uint32_t mode) {
     Observations observations;
     do {
         uint32_t l_requiresExtension_6_ext = ExtensionId::GL_EXT_draw_buffers_indexed;
-        GLuint l_BlendEquationi_7_buf = buf;
+        DrawBufferIndex l_BlendEquationi_7_buf = buf;
         uint32_t l_BlendEquationi_7_mode = mode;
         switch (l_BlendEquationi_7_mode) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
@@ -2087,7 +2087,7 @@ inline void GlesSpy::glBlendFuncSeparateiEXT(uint32_t buf, uint32_t srcRGB, uint
     Observations observations;
     do {
         uint32_t l_requiresExtension_9_ext = ExtensionId::GL_EXT_draw_buffers_indexed;
-        GLuint l_BlendFuncSeparatei_10_buf = buf;
+        DrawBufferIndex l_BlendFuncSeparatei_10_buf = buf;
         uint32_t l_BlendFuncSeparatei_10_srcRGB = srcRGB;
         uint32_t l_BlendFuncSeparatei_10_dstRGB = dstRGB;
         uint32_t l_BlendFuncSeparatei_10_srcAlpha = srcAlpha;
@@ -2191,7 +2191,7 @@ inline void GlesSpy::glBlendFunciEXT(uint32_t buf, uint32_t src, uint32_t dst) {
     Observations observations;
     do {
         uint32_t l_requiresExtension_15_ext = ExtensionId::GL_EXT_draw_buffers_indexed;
-        GLuint l_BlendFunci_16_buf = buf;
+        DrawBufferIndex l_BlendFunci_16_buf = buf;
         uint32_t l_BlendFunci_16_src = src;
         uint32_t l_BlendFunci_16_dst = dst;
         switch (l_BlendFunci_16_src) {
@@ -2255,7 +2255,7 @@ inline void GlesSpy::glColorMaskiEXT(uint32_t index, uint8_t r, uint8_t g, uint8
     Observations observations;
     do {
         uint32_t l_requiresExtension_19_ext = ExtensionId::GL_EXT_draw_buffers_indexed;
-        GLuint l_ColorMaski_20_index = index;
+        DrawBufferIndex l_ColorMaski_20_index = index;
         GLboolean l_ColorMaski_20_r = r;
         GLboolean l_ColorMaski_20_g = g;
         GLboolean l_ColorMaski_20_b = b;
@@ -7923,7 +7923,7 @@ inline void GlesSpy::glBlendEquationSeparateiOES(uint32_t buf, uint32_t modeRGB,
     Observations observations;
     do {
         uint32_t l_requiresExtension_474_ext = ExtensionId::GL_OES_draw_buffers_indexed;
-        GLuint l_BlendEquationSeparatei_475_buf = buf;
+        DrawBufferIndex l_BlendEquationSeparatei_475_buf = buf;
         uint32_t l_BlendEquationSeparatei_475_modeRGB = modeRGB;
         uint32_t l_BlendEquationSeparatei_475_modeAlpha = modeAlpha;
         switch (l_BlendEquationSeparatei_475_modeRGB) {
@@ -7968,7 +7968,7 @@ inline void GlesSpy::glBlendEquationiOES(uint32_t buf, uint32_t mode) {
     Observations observations;
     do {
         uint32_t l_requiresExtension_478_ext = ExtensionId::GL_OES_draw_buffers_indexed;
-        GLuint l_BlendEquationi_479_buf = buf;
+        DrawBufferIndex l_BlendEquationi_479_buf = buf;
         uint32_t l_BlendEquationi_479_mode = mode;
         switch (l_BlendEquationi_479_mode) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
@@ -8005,7 +8005,7 @@ inline void GlesSpy::glBlendFuncSeparateiOES(uint32_t buf, uint32_t srcRGB, uint
     Observations observations;
     do {
         uint32_t l_requiresExtension_481_ext = ExtensionId::GL_OES_draw_buffers_indexed;
-        GLuint l_BlendFuncSeparatei_482_buf = buf;
+        DrawBufferIndex l_BlendFuncSeparatei_482_buf = buf;
         uint32_t l_BlendFuncSeparatei_482_srcRGB = srcRGB;
         uint32_t l_BlendFuncSeparatei_482_dstRGB = dstRGB;
         uint32_t l_BlendFuncSeparatei_482_srcAlpha = srcAlpha;
@@ -8109,7 +8109,7 @@ inline void GlesSpy::glBlendFunciOES(uint32_t buf, uint32_t src, uint32_t dst) {
     Observations observations;
     do {
         uint32_t l_requiresExtension_487_ext = ExtensionId::GL_OES_draw_buffers_indexed;
-        GLuint l_BlendFunci_488_buf = buf;
+        DrawBufferIndex l_BlendFunci_488_buf = buf;
         uint32_t l_BlendFunci_488_src = src;
         uint32_t l_BlendFunci_488_dst = dst;
         switch (l_BlendFunci_488_src) {
@@ -8348,7 +8348,7 @@ inline void GlesSpy::glColorMaskiOES(uint32_t index, uint8_t r, uint8_t g, uint8
     Observations observations;
     do {
         uint32_t l_requiresExtension_501_ext = ExtensionId::GL_OES_draw_buffers_indexed;
-        GLuint l_ColorMaski_502_index = index;
+        DrawBufferIndex l_ColorMaski_502_index = index;
         GLboolean l_ColorMaski_502_r = r;
         GLboolean l_ColorMaski_502_g = g;
         GLboolean l_ColorMaski_502_b = b;
@@ -23732,7 +23732,7 @@ inline void GlesSpy::glBlendEquationSeparatei(uint32_t buf, uint32_t modeRGB, ui
     do {
         uint32_t l_minRequiredVersion_1671_major = 3;
         uint32_t l_minRequiredVersion_1671_minor = 2;
-        GLuint l_BlendEquationSeparatei_1672_buf = buf;
+        DrawBufferIndex l_BlendEquationSeparatei_1672_buf = buf;
         uint32_t l_BlendEquationSeparatei_1672_modeRGB = modeRGB;
         uint32_t l_BlendEquationSeparatei_1672_modeAlpha = modeAlpha;
         switch (l_BlendEquationSeparatei_1672_modeRGB) {
@@ -23776,7 +23776,7 @@ inline void GlesSpy::glBlendEquationi(uint32_t buf, uint32_t mode) {
     do {
         uint32_t l_minRequiredVersion_1675_major = 3;
         uint32_t l_minRequiredVersion_1675_minor = 2;
-        GLuint l_BlendEquationi_1676_buf = buf;
+        DrawBufferIndex l_BlendEquationi_1676_buf = buf;
         uint32_t l_BlendEquationi_1676_mode = mode;
         switch (l_BlendEquationi_1676_mode) {
             case GLenum::GL_FUNC_ADD:               // fall-through...
@@ -24002,7 +24002,7 @@ inline void GlesSpy::glBlendFuncSeparatei(uint32_t buf, uint32_t srcRGB, uint32_
     do {
         uint32_t l_minRequiredVersion_1690_major = 3;
         uint32_t l_minRequiredVersion_1690_minor = 2;
-        GLuint l_BlendFuncSeparatei_1691_buf = buf;
+        DrawBufferIndex l_BlendFuncSeparatei_1691_buf = buf;
         uint32_t l_BlendFuncSeparatei_1691_srcRGB = srcRGB;
         uint32_t l_BlendFuncSeparatei_1691_dstRGB = dstRGB;
         uint32_t l_BlendFuncSeparatei_1691_srcAlpha = srcAlpha;
@@ -24107,7 +24107,7 @@ inline void GlesSpy::glBlendFunci(uint32_t buf, uint32_t src, uint32_t dst) {
     do {
         uint32_t l_minRequiredVersion_1696_major = 3;
         uint32_t l_minRequiredVersion_1696_minor = 2;
-        GLuint l_BlendFunci_1697_buf = buf;
+        DrawBufferIndex l_BlendFunci_1697_buf = buf;
         uint32_t l_BlendFunci_1697_src = src;
         uint32_t l_BlendFunci_1697_dst = dst;
         switch (l_BlendFunci_1697_src) {
@@ -25029,7 +25029,7 @@ inline void GlesSpy::glColorMaski(uint32_t index, uint8_t r, uint8_t g, uint8_t 
     do {
         uint32_t l_minRequiredVersion_1769_major = 3;
         uint32_t l_minRequiredVersion_1769_minor = 2;
-        GLuint l_ColorMaski_1770_index = index;
+        DrawBufferIndex l_ColorMaski_1770_index = index;
         GLboolean l_ColorMaski_1770_r = r;
         GLboolean l_ColorMaski_1770_g = g;
         GLboolean l_ColorMaski_1770_b = b;

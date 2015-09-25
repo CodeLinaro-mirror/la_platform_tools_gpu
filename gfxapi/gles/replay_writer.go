@@ -785,6 +785,9 @@ var funcInfoStartTimer = builder.FunctionInfo{ID: 750, ReturnType: protocol.Type
 var funcInfoStopTimer = builder.FunctionInfo{ID: 751, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 752, ReturnType: protocol.TypeVoid, Parameters: 0}
 
+func (c DrawBufferIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return GLuint(c).value(ϟb, ϟa, ϟs)
+}
 func (c BindingIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
@@ -958,7 +961,7 @@ func (ϟa *GlBlendEquationSeparateiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_2_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
-	BlendEquationSeparatei_3_buf := ϟa.Buf                             // GLuint
+	BlendEquationSeparatei_3_buf := ϟa.Buf                             // DrawBufferIndex
 	BlendEquationSeparatei_3_modeRGB := ϟa.ModeRGB                     // GLenum
 	BlendEquationSeparatei_3_modeAlpha := ϟa.ModeAlpha                 // GLenum
 	switch BlendEquationSeparatei_3_modeRGB {
@@ -998,7 +1001,7 @@ func (ϟa *GlBlendEquationiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_6_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
-	BlendEquationi_7_buf := ϟa.Buf                                     // GLuint
+	BlendEquationi_7_buf := ϟa.Buf                                     // DrawBufferIndex
 	BlendEquationi_7_mode := ϟa.Mode                                   // GLenum
 	switch BlendEquationi_7_mode {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
@@ -1029,7 +1032,7 @@ func (ϟa *GlBlendFuncSeparateiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_9_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
-	BlendFuncSeparatei_10_buf := ϟa.Buf                                // GLuint
+	BlendFuncSeparatei_10_buf := ϟa.Buf                                // DrawBufferIndex
 	BlendFuncSeparatei_10_srcRGB := ϟa.SrcRGB                          // GLenum
 	BlendFuncSeparatei_10_dstRGB := ϟa.DstRGB                          // GLenum
 	BlendFuncSeparatei_10_srcAlpha := ϟa.SrcAlpha                      // GLenum
@@ -1087,7 +1090,7 @@ func (ϟa *GlBlendFunciEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_15_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
-	BlendFunci_16_buf := ϟa.Buf                                         // GLuint
+	BlendFunci_16_buf := ϟa.Buf                                         // DrawBufferIndex
 	BlendFunci_16_src := ϟa.Src                                         // GLenum
 	BlendFunci_16_dst := ϟa.Dst                                         // GLenum
 	switch BlendFunci_16_src {
@@ -1127,7 +1130,7 @@ func (ϟa *GlColorMaskiEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_19_ext := ExtensionId_GL_EXT_draw_buffers_indexed // ExtensionId
-	ColorMaski_20_index := ϟa.Index                                     // GLuint
+	ColorMaski_20_index := ϟa.Index                                     // DrawBufferIndex
 	ColorMaski_20_r := ϟa.R                                             // GLboolean
 	ColorMaski_20_g := ϟa.G                                             // GLboolean
 	ColorMaski_20_b := ϟa.B                                             // GLboolean
@@ -6060,7 +6063,7 @@ func (ϟa *GlBlendEquationSeparateiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_474_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
-	BlendEquationSeparatei_475_buf := ϟa.Buf                             // GLuint
+	BlendEquationSeparatei_475_buf := ϟa.Buf                             // DrawBufferIndex
 	BlendEquationSeparatei_475_modeRGB := ϟa.ModeRGB                     // GLenum
 	BlendEquationSeparatei_475_modeAlpha := ϟa.ModeAlpha                 // GLenum
 	switch BlendEquationSeparatei_475_modeRGB {
@@ -6100,7 +6103,7 @@ func (ϟa *GlBlendEquationiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_478_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
-	BlendEquationi_479_buf := ϟa.Buf                                     // GLuint
+	BlendEquationi_479_buf := ϟa.Buf                                     // DrawBufferIndex
 	BlendEquationi_479_mode := ϟa.Mode                                   // GLenum
 	switch BlendEquationi_479_mode {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
@@ -6131,7 +6134,7 @@ func (ϟa *GlBlendFuncSeparateiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_481_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
-	BlendFuncSeparatei_482_buf := ϟa.Buf                                 // GLuint
+	BlendFuncSeparatei_482_buf := ϟa.Buf                                 // DrawBufferIndex
 	BlendFuncSeparatei_482_srcRGB := ϟa.SrcRGB                           // GLenum
 	BlendFuncSeparatei_482_dstRGB := ϟa.DstRGB                           // GLenum
 	BlendFuncSeparatei_482_srcAlpha := ϟa.SrcAlpha                       // GLenum
@@ -6189,7 +6192,7 @@ func (ϟa *GlBlendFunciOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_487_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
-	BlendFunci_488_buf := ϟa.Buf                                         // GLuint
+	BlendFunci_488_buf := ϟa.Buf                                         // DrawBufferIndex
 	BlendFunci_488_src := ϟa.Src                                         // GLenum
 	BlendFunci_488_dst := ϟa.Dst                                         // GLenum
 	switch BlendFunci_488_src {
@@ -6397,7 +6400,7 @@ func (ϟa *GlColorMaskiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	requiresExtension_501_ext := ExtensionId_GL_OES_draw_buffers_indexed // ExtensionId
-	ColorMaski_502_index := ϟa.Index                                     // GLuint
+	ColorMaski_502_index := ϟa.Index                                     // DrawBufferIndex
 	ColorMaski_502_r := ϟa.R                                             // GLboolean
 	ColorMaski_502_g := ϟa.G                                             // GLboolean
 	ColorMaski_502_b := ϟa.B                                             // GLboolean
@@ -19992,7 +19995,7 @@ func (ϟa *GlBlendEquationSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1671_major := uint32(3)            // u32
 	minRequiredVersion_1671_minor := uint32(2)            // u32
-	BlendEquationSeparatei_1672_buf := ϟa.Buf             // GLuint
+	BlendEquationSeparatei_1672_buf := ϟa.Buf             // DrawBufferIndex
 	BlendEquationSeparatei_1672_modeRGB := ϟa.ModeRGB     // GLenum
 	BlendEquationSeparatei_1672_modeAlpha := ϟa.ModeAlpha // GLenum
 	switch BlendEquationSeparatei_1672_modeRGB {
@@ -20033,7 +20036,7 @@ func (ϟa *GlBlendEquationi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1675_major := uint32(3) // u32
 	minRequiredVersion_1675_minor := uint32(2) // u32
-	BlendEquationi_1676_buf := ϟa.Buf          // GLuint
+	BlendEquationi_1676_buf := ϟa.Buf          // DrawBufferIndex
 	BlendEquationi_1676_mode := ϟa.Mode        // GLenum
 	switch BlendEquationi_1676_mode {
 	case GLenum_GL_FUNC_ADD, GLenum_GL_FUNC_REVERSE_SUBTRACT, GLenum_GL_FUNC_SUBTRACT, GLenum_GL_MAX, GLenum_GL_MIN:
@@ -20179,7 +20182,7 @@ func (ϟa *GlBlendFuncSeparatei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1690_major := uint32(3)      // u32
 	minRequiredVersion_1690_minor := uint32(2)      // u32
-	BlendFuncSeparatei_1691_buf := ϟa.Buf           // GLuint
+	BlendFuncSeparatei_1691_buf := ϟa.Buf           // DrawBufferIndex
 	BlendFuncSeparatei_1691_srcRGB := ϟa.SrcRGB     // GLenum
 	BlendFuncSeparatei_1691_dstRGB := ϟa.DstRGB     // GLenum
 	BlendFuncSeparatei_1691_srcAlpha := ϟa.SrcAlpha // GLenum
@@ -20238,7 +20241,7 @@ func (ϟa *GlBlendFunci) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1696_major := uint32(3) // u32
 	minRequiredVersion_1696_minor := uint32(2) // u32
-	BlendFunci_1697_buf := ϟa.Buf              // GLuint
+	BlendFunci_1697_buf := ϟa.Buf              // DrawBufferIndex
 	BlendFunci_1697_src := ϟa.Src              // GLenum
 	BlendFunci_1697_dst := ϟa.Dst              // GLenum
 	switch BlendFunci_1697_src {
@@ -21094,7 +21097,7 @@ func (ϟa *GlColorMaski) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	minRequiredVersion_1769_major := uint32(3) // u32
 	minRequiredVersion_1769_minor := uint32(2) // u32
-	ColorMaski_1770_index := ϟa.Index          // GLuint
+	ColorMaski_1770_index := ϟa.Index          // DrawBufferIndex
 	ColorMaski_1770_r := ϟa.R                  // GLboolean
 	ColorMaski_1770_g := ϟa.G                  // GLboolean
 	ColorMaski_1770_b := ϟa.B                  // GLboolean

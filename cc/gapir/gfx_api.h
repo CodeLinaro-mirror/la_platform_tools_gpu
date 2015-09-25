@@ -6494,6 +6494,7 @@ enum class TextureKind : uint32_t {
 };
 
 typedef uint32_t GLuint;
+typedef GLuint DrawBufferIndex;
 typedef GLuint BindingIndex;
 typedef GLuint AttributeLocation;
 typedef int32_t GLint;

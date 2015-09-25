@@ -1142,20 +1142,20 @@ var (
 	binaryIDGlBlendColor                                     = binary.ID{0x67, 0x3c, 0x0a, 0xe9, 0x85, 0x95, 0x30, 0xb5, 0xaf, 0x96, 0xd3, 0x43, 0xed, 0x97, 0xff, 0xd4, 0xf6, 0x14, 0x21, 0xd7}
 	binaryIDGlBlendEquation                                  = binary.ID{0x4a, 0xbd, 0xaa, 0x8a, 0x2f, 0x42, 0xdc, 0xff, 0x13, 0x37, 0xfb, 0xb1, 0x2a, 0x25, 0x1d, 0x32, 0x36, 0x31, 0x12, 0xe0}
 	binaryIDGlBlendEquationSeparate                          = binary.ID{0x3e, 0x0d, 0xbd, 0xc2, 0x0b, 0x0a, 0x81, 0xd4, 0x58, 0xa4, 0x37, 0x7d, 0x58, 0xdc, 0x4f, 0xcc, 0x5b, 0xa6, 0x09, 0xf4}
-	binaryIDGlBlendEquationSeparatei                         = binary.ID{0xa0, 0x50, 0x7e, 0x2f, 0xaa, 0x35, 0xfd, 0x06, 0x2c, 0x5d, 0x74, 0xce, 0x50, 0x1c, 0xcb, 0xd9, 0xbd, 0xa8, 0xb3, 0x4b}
-	binaryIDGlBlendEquationSeparateiEXT                      = binary.ID{0xf3, 0x45, 0x3b, 0x0f, 0x05, 0x52, 0x80, 0x2d, 0x3e, 0xa6, 0xd1, 0x1f, 0xac, 0x46, 0x48, 0x15, 0x1c, 0x06, 0xcc, 0x55}
-	binaryIDGlBlendEquationSeparateiOES                      = binary.ID{0x4a, 0xe5, 0x2d, 0x1d, 0x21, 0xc7, 0xf6, 0x3f, 0xbd, 0x11, 0x55, 0xa4, 0x6c, 0xdb, 0xb0, 0xbd, 0xb6, 0x99, 0x7d, 0x23}
-	binaryIDGlBlendEquationi                                 = binary.ID{0x8f, 0x4b, 0x62, 0xb6, 0x3c, 0x0b, 0xed, 0xef, 0xaf, 0x68, 0x1a, 0x36, 0x2e, 0x0f, 0x28, 0xf0, 0x8c, 0x77, 0xd5, 0xc8}
-	binaryIDGlBlendEquationiEXT                              = binary.ID{0x6e, 0x7e, 0x7e, 0x2d, 0x2a, 0x0f, 0x67, 0x48, 0xeb, 0x35, 0x4a, 0x3e, 0x2d, 0xfe, 0xf5, 0x4e, 0xc1, 0xd6, 0xc6, 0xa5}
-	binaryIDGlBlendEquationiOES                              = binary.ID{0x46, 0x89, 0x07, 0x45, 0xab, 0x6f, 0x7f, 0x81, 0x2a, 0x1d, 0x62, 0xfe, 0x98, 0x1b, 0xef, 0x0f, 0x6a, 0xf3, 0xcd, 0x34}
+	binaryIDGlBlendEquationSeparatei                         = binary.ID{0x2e, 0x43, 0x71, 0xd3, 0x30, 0xca, 0x4e, 0x00, 0xd7, 0x83, 0x79, 0xbd, 0x18, 0x65, 0xe5, 0x63, 0xc9, 0x23, 0x43, 0xac}
+	binaryIDGlBlendEquationSeparateiEXT                      = binary.ID{0x46, 0xe2, 0xf0, 0xe9, 0x44, 0x39, 0x2e, 0x0e, 0x06, 0x64, 0xdb, 0xc9, 0x6e, 0x40, 0x9b, 0x0a, 0x11, 0x7f, 0x00, 0xf8}
+	binaryIDGlBlendEquationSeparateiOES                      = binary.ID{0xa8, 0x51, 0xb3, 0x36, 0x26, 0x44, 0x3f, 0xdb, 0x19, 0x5e, 0x40, 0x52, 0x20, 0xc4, 0x0f, 0x0e, 0x29, 0xbc, 0xc9, 0x32}
+	binaryIDGlBlendEquationi                                 = binary.ID{0xe6, 0x21, 0x9f, 0x0c, 0x97, 0x2e, 0xa4, 0xbb, 0xc5, 0xd8, 0x24, 0x8c, 0x8f, 0xa8, 0xa2, 0x85, 0xcc, 0x1c, 0xf6, 0x2e}
+	binaryIDGlBlendEquationiEXT                              = binary.ID{0xe8, 0x8c, 0x36, 0x92, 0xc5, 0xad, 0xb8, 0x9d, 0x48, 0xa8, 0xce, 0xa5, 0x8e, 0x6b, 0x2c, 0x8f, 0xf6, 0x55, 0xa9, 0x0f}
+	binaryIDGlBlendEquationiOES                              = binary.ID{0xf8, 0x76, 0xfa, 0x64, 0xf3, 0x4a, 0x42, 0x3b, 0x47, 0x05, 0x53, 0xe0, 0xf2, 0x8d, 0x9b, 0x52, 0xd5, 0xb1, 0x9f, 0x77}
 	binaryIDGlBlendFunc                                      = binary.ID{0xb8, 0x52, 0x83, 0x14, 0x14, 0xff, 0x0c, 0xad, 0xe0, 0x0f, 0x97, 0xb6, 0x07, 0x6c, 0x80, 0xd4, 0x78, 0xf1, 0xf0, 0x91}
 	binaryIDGlBlendFuncSeparate                              = binary.ID{0x66, 0xd2, 0xff, 0xf8, 0xf7, 0x95, 0xda, 0x57, 0x16, 0xfb, 0x01, 0x2c, 0x5f, 0x29, 0x53, 0xd5, 0xf7, 0xd0, 0xc0, 0xd2}
-	binaryIDGlBlendFuncSeparatei                             = binary.ID{0x36, 0xfd, 0xfb, 0x4e, 0x1b, 0x21, 0x89, 0x7d, 0x89, 0x42, 0x2f, 0xa1, 0xe4, 0x88, 0xac, 0x65, 0xd5, 0x26, 0x89, 0xdd}
-	binaryIDGlBlendFuncSeparateiEXT                          = binary.ID{0x8e, 0x9e, 0x4c, 0xf4, 0x1b, 0x8a, 0x3e, 0xdf, 0x02, 0x8a, 0x9f, 0x13, 0x8e, 0xe6, 0xbf, 0x13, 0xf8, 0x76, 0x02, 0x6b}
-	binaryIDGlBlendFuncSeparateiOES                          = binary.ID{0x2c, 0x76, 0x35, 0x73, 0x1d, 0xd7, 0xb3, 0xc1, 0x3e, 0x36, 0xb8, 0xe5, 0x38, 0x47, 0x5e, 0xdc, 0x05, 0x26, 0x2a, 0x33}
-	binaryIDGlBlendFunci                                     = binary.ID{0x16, 0x4d, 0x1f, 0xcd, 0x52, 0x67, 0x50, 0x5a, 0x97, 0xa5, 0xd0, 0x07, 0xae, 0x7b, 0xbf, 0x4b, 0x34, 0xe0, 0x8a, 0xeb}
-	binaryIDGlBlendFunciEXT                                  = binary.ID{0x27, 0xc9, 0xc1, 0x56, 0x96, 0xae, 0x08, 0xa5, 0x85, 0x80, 0x37, 0x7f, 0x12, 0x66, 0x30, 0x07, 0x9d, 0x63, 0xf6, 0xc7}
-	binaryIDGlBlendFunciOES                                  = binary.ID{0xc9, 0x53, 0x38, 0x83, 0x1e, 0x92, 0x13, 0xb6, 0x19, 0x21, 0xd3, 0xf3, 0x64, 0x74, 0x4c, 0xdd, 0x9f, 0x49, 0x17, 0xb3}
+	binaryIDGlBlendFuncSeparatei                             = binary.ID{0x2e, 0x14, 0x23, 0xe7, 0xb3, 0x33, 0x76, 0x50, 0x60, 0xb2, 0xb4, 0x53, 0x7d, 0x7c, 0xaa, 0x8b, 0x29, 0xf4, 0xa8, 0x49}
+	binaryIDGlBlendFuncSeparateiEXT                          = binary.ID{0x66, 0x4a, 0xc8, 0xf6, 0x5d, 0xc5, 0xd7, 0xca, 0x93, 0x87, 0xa2, 0xb5, 0x63, 0xc1, 0x22, 0x67, 0xac, 0xc1, 0xa0, 0x0a}
+	binaryIDGlBlendFuncSeparateiOES                          = binary.ID{0xc0, 0x19, 0x67, 0x01, 0x65, 0x7a, 0x1e, 0xec, 0xed, 0x1f, 0xdb, 0x2b, 0xe6, 0x37, 0xea, 0x9f, 0x48, 0x81, 0x76, 0xa1}
+	binaryIDGlBlendFunci                                     = binary.ID{0x4d, 0xb3, 0xb5, 0x87, 0x07, 0xdb, 0x39, 0xbd, 0x6e, 0x16, 0x27, 0x66, 0x11, 0xbe, 0x9e, 0xe6, 0x3e, 0x38, 0x81, 0xf7}
+	binaryIDGlBlendFunciEXT                                  = binary.ID{0xa7, 0xe6, 0x71, 0xeb, 0xaa, 0xa4, 0xec, 0x05, 0x44, 0xcd, 0x68, 0xa9, 0xaa, 0xd7, 0x0e, 0x7f, 0xc7, 0x5d, 0xdb, 0xc3}
+	binaryIDGlBlendFunciOES                                  = binary.ID{0xea, 0x72, 0xc7, 0x18, 0x2a, 0x5c, 0x81, 0x02, 0xa0, 0x28, 0x45, 0x0d, 0xb0, 0x8d, 0x1b, 0x26, 0x37, 0x22, 0xba, 0x5a}
 	binaryIDGlBlendParameteriNV                              = binary.ID{0x48, 0x2f, 0xa6, 0x47, 0x3c, 0x55, 0xe9, 0x34, 0xb2, 0x7d, 0x97, 0x4d, 0x20, 0x49, 0x54, 0xa4, 0x7f, 0x18, 0xdd, 0xf3}
 	binaryIDGlBlitFramebuffer                                = binary.ID{0x45, 0x48, 0x95, 0x3e, 0x8c, 0x6b, 0x0e, 0x84, 0xbc, 0x13, 0x5a, 0xbb, 0x7d, 0x86, 0x03, 0xfb, 0xe8, 0x5b, 0x96, 0xad}
 	binaryIDGlBlitFramebufferANGLE                           = binary.ID{0xcb, 0x1b, 0x9d, 0x45, 0x94, 0xe6, 0xef, 0x95, 0xfc, 0xad, 0x7a, 0x65, 0x7f, 0x6a, 0x2f, 0x67, 0x92, 0xe7, 0x18, 0xbd}
@@ -1176,9 +1176,9 @@ var (
 	binaryIDGlClientWaitSync                                 = binary.ID{0x0b, 0x68, 0xeb, 0x64, 0xf5, 0xef, 0x38, 0xd0, 0x9f, 0xbf, 0x73, 0x4c, 0xf2, 0xdd, 0xc5, 0xe5, 0xd8, 0xd7, 0xe1, 0x84}
 	binaryIDGlClientWaitSyncAPPLE                            = binary.ID{0x66, 0xc0, 0xa1, 0x35, 0xec, 0x45, 0x5d, 0xed, 0x8d, 0x2e, 0x77, 0x60, 0x07, 0xde, 0x10, 0x29, 0x7b, 0x8f, 0x5a, 0xa8}
 	binaryIDGlColorMask                                      = binary.ID{0x08, 0x8e, 0x3b, 0xb6, 0x7d, 0x88, 0x07, 0x6c, 0x0b, 0x69, 0xba, 0xf5, 0x56, 0x97, 0xc3, 0xde, 0x2a, 0xa6, 0xc7, 0x5b}
-	binaryIDGlColorMaski                                     = binary.ID{0x5c, 0xd5, 0x40, 0xfd, 0xb5, 0xf0, 0x99, 0x23, 0xa7, 0x39, 0xb4, 0x70, 0x0c, 0x66, 0x0f, 0xb3, 0xfb, 0xbb, 0x81, 0x5b}
-	binaryIDGlColorMaskiEXT                                  = binary.ID{0xd8, 0xb9, 0x63, 0xa6, 0xb9, 0xe9, 0xbf, 0xba, 0xc9, 0x91, 0x91, 0x63, 0xa1, 0x78, 0x8c, 0xa4, 0x0f, 0x1c, 0x17, 0x95}
-	binaryIDGlColorMaskiOES                                  = binary.ID{0x22, 0xb2, 0xa8, 0x79, 0x8c, 0x2b, 0x70, 0x10, 0x7c, 0xc2, 0x79, 0xf6, 0xce, 0xe5, 0x03, 0x13, 0xd8, 0x40, 0x22, 0xc2}
+	binaryIDGlColorMaski                                     = binary.ID{0x1c, 0xc8, 0xbd, 0x4e, 0x4b, 0xe0, 0x46, 0x00, 0x7a, 0x8c, 0xb7, 0x01, 0x86, 0x26, 0x4f, 0xf7, 0x4d, 0x6d, 0xe3, 0x11}
+	binaryIDGlColorMaskiEXT                                  = binary.ID{0xc7, 0x7a, 0xb7, 0x9b, 0x2f, 0x23, 0xa7, 0xe9, 0x8d, 0x01, 0x17, 0x6d, 0xe8, 0x4e, 0x51, 0xfd, 0xf8, 0x80, 0xb6, 0x26}
+	binaryIDGlColorMaskiOES                                  = binary.ID{0x31, 0xb6, 0xcc, 0xca, 0xab, 0xa2, 0xe9, 0x0c, 0x85, 0xdb, 0x49, 0x74, 0xf2, 0xac, 0x13, 0x21, 0xa0, 0xb5, 0x45, 0xf7}
 	binaryIDGlCompileShader                                  = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
 	binaryIDTexturePointer                                   = binary.ID{0x34, 0x65, 0x45, 0xf1, 0x2d, 0xda, 0x70, 0xcb, 0x48, 0xb2, 0x29, 0x9b, 0xb3, 0x7f, 0xe4, 0xa6, 0x96, 0xb2, 0x64, 0xe7}
 	binaryIDGlCompressedTexImage2D                           = binary.ID{0x49, 0x15, 0xd8, 0xed, 0xda, 0xa2, 0x48, 0x84, 0xe3, 0x07, 0xe1, 0x7d, 0x93, 0x8f, 0xb0, 0x65, 0xfa, 0x8d, 0x6b, 0x77}
@@ -8516,7 +8516,7 @@ func doEncodeGlBlendEquationSeparatei(e binary.Encoder, o *GlBlendEquationSepara
 }
 func doDecodeGlBlendEquationSeparatei(d binary.Decoder, o *GlBlendEquationSeparatei) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
 }
@@ -8543,7 +8543,7 @@ var schemaGlBlendEquationSeparatei = &schema.Class{
 	Name:    "GlBlendEquationSeparatei",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8562,7 +8562,7 @@ func doEncodeGlBlendEquationSeparateiEXT(e binary.Encoder, o *GlBlendEquationSep
 }
 func doDecodeGlBlendEquationSeparateiEXT(d binary.Decoder, o *GlBlendEquationSeparateiEXT) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
 }
@@ -8593,7 +8593,7 @@ var schemaGlBlendEquationSeparateiEXT = &schema.Class{
 	Name:    "GlBlendEquationSeparateiEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8612,7 +8612,7 @@ func doEncodeGlBlendEquationSeparateiOES(e binary.Encoder, o *GlBlendEquationSep
 }
 func doDecodeGlBlendEquationSeparateiOES(d binary.Decoder, o *GlBlendEquationSeparateiOES) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
 }
@@ -8643,7 +8643,7 @@ var schemaGlBlendEquationSeparateiOES = &schema.Class{
 	Name:    "GlBlendEquationSeparateiOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8661,7 +8661,7 @@ func doEncodeGlBlendEquationi(e binary.Encoder, o *GlBlendEquationi) {
 }
 func doDecodeGlBlendEquationi(d binary.Decoder, o *GlBlendEquationi) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
 func (*binaryClassGlBlendEquationi) ID() binary.ID      { return binaryIDGlBlendEquationi }
@@ -8685,7 +8685,7 @@ var schemaGlBlendEquationi = &schema.Class{
 	Name:    "GlBlendEquationi",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -8702,7 +8702,7 @@ func doEncodeGlBlendEquationiEXT(e binary.Encoder, o *GlBlendEquationiEXT) {
 }
 func doDecodeGlBlendEquationiEXT(d binary.Decoder, o *GlBlendEquationiEXT) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
 func (*binaryClassGlBlendEquationiEXT) ID() binary.ID      { return binaryIDGlBlendEquationiEXT }
@@ -8726,7 +8726,7 @@ var schemaGlBlendEquationiEXT = &schema.Class{
 	Name:    "GlBlendEquationiEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -8743,7 +8743,7 @@ func doEncodeGlBlendEquationiOES(e binary.Encoder, o *GlBlendEquationiOES) {
 }
 func doDecodeGlBlendEquationiOES(d binary.Decoder, o *GlBlendEquationiOES) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
 func (*binaryClassGlBlendEquationiOES) ID() binary.ID      { return binaryIDGlBlendEquationiOES }
@@ -8767,7 +8767,7 @@ var schemaGlBlendEquationiOES = &schema.Class{
 	Name:    "GlBlendEquationiOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -8875,7 +8875,7 @@ func doEncodeGlBlendFuncSeparatei(e binary.Encoder, o *GlBlendFuncSeparatei) {
 }
 func doDecodeGlBlendFuncSeparatei(d binary.Decoder, o *GlBlendFuncSeparatei) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.SrcRGB = GLenum(d.Uint32())
 	o.DstRGB = GLenum(d.Uint32())
 	o.SrcAlpha = GLenum(d.Uint32())
@@ -8902,7 +8902,7 @@ var schemaGlBlendFuncSeparatei = &schema.Class{
 	Name:    "GlBlendFuncSeparatei",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8925,7 +8925,7 @@ func doEncodeGlBlendFuncSeparateiEXT(e binary.Encoder, o *GlBlendFuncSeparateiEX
 }
 func doDecodeGlBlendFuncSeparateiEXT(d binary.Decoder, o *GlBlendFuncSeparateiEXT) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.SrcRGB = GLenum(d.Uint32())
 	o.DstRGB = GLenum(d.Uint32())
 	o.SrcAlpha = GLenum(d.Uint32())
@@ -8954,7 +8954,7 @@ var schemaGlBlendFuncSeparateiEXT = &schema.Class{
 	Name:    "GlBlendFuncSeparateiEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8977,7 +8977,7 @@ func doEncodeGlBlendFuncSeparateiOES(e binary.Encoder, o *GlBlendFuncSeparateiOE
 }
 func doDecodeGlBlendFuncSeparateiOES(d binary.Decoder, o *GlBlendFuncSeparateiOES) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.SrcRGB = GLenum(d.Uint32())
 	o.DstRGB = GLenum(d.Uint32())
 	o.SrcAlpha = GLenum(d.Uint32())
@@ -9006,7 +9006,7 @@ var schemaGlBlendFuncSeparateiOES = &schema.Class{
 	Name:    "GlBlendFuncSeparateiOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9027,7 +9027,7 @@ func doEncodeGlBlendFunci(e binary.Encoder, o *GlBlendFunci) {
 }
 func doDecodeGlBlendFunci(d binary.Decoder, o *GlBlendFunci) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
@@ -9052,7 +9052,7 @@ var schemaGlBlendFunci = &schema.Class{
 	Name:    "GlBlendFunci",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -9071,7 +9071,7 @@ func doEncodeGlBlendFunciEXT(e binary.Encoder, o *GlBlendFunciEXT) {
 }
 func doDecodeGlBlendFunciEXT(d binary.Decoder, o *GlBlendFunciEXT) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
@@ -9096,7 +9096,7 @@ var schemaGlBlendFunciEXT = &schema.Class{
 	Name:    "GlBlendFunciEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -9115,7 +9115,7 @@ func doEncodeGlBlendFunciOES(e binary.Encoder, o *GlBlendFunciOES) {
 }
 func doDecodeGlBlendFunciOES(d binary.Decoder, o *GlBlendFunciOES) {
 	d.Value(&o.observations)
-	o.Buf = GLuint(d.Uint32())
+	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
@@ -9140,7 +9140,7 @@ var schemaGlBlendFunciOES = &schema.Class{
 	Name:    "GlBlendFunciOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Buf", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -10097,7 +10097,7 @@ func doEncodeGlColorMaski(e binary.Encoder, o *GlColorMaski) {
 }
 func doDecodeGlColorMaski(d binary.Decoder, o *GlColorMaski) {
 	d.Value(&o.observations)
-	o.Index = GLuint(d.Uint32())
+	o.Index = DrawBufferIndex(d.Uint32())
 	o.R = GLboolean(d.Uint8())
 	o.G = GLboolean(d.Uint8())
 	o.B = GLboolean(d.Uint8())
@@ -10124,7 +10124,7 @@ var schemaGlColorMaski = &schema.Class{
 	Name:    "GlColorMaski",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "B", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10147,7 +10147,7 @@ func doEncodeGlColorMaskiEXT(e binary.Encoder, o *GlColorMaskiEXT) {
 }
 func doDecodeGlColorMaskiEXT(d binary.Decoder, o *GlColorMaskiEXT) {
 	d.Value(&o.observations)
-	o.Index = GLuint(d.Uint32())
+	o.Index = DrawBufferIndex(d.Uint32())
 	o.R = GLboolean(d.Uint8())
 	o.G = GLboolean(d.Uint8())
 	o.B = GLboolean(d.Uint8())
@@ -10174,7 +10174,7 @@ var schemaGlColorMaskiEXT = &schema.Class{
 	Name:    "GlColorMaskiEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "B", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10197,7 +10197,7 @@ func doEncodeGlColorMaskiOES(e binary.Encoder, o *GlColorMaskiOES) {
 }
 func doDecodeGlColorMaskiOES(d binary.Decoder, o *GlColorMaskiOES) {
 	d.Value(&o.observations)
-	o.Index = GLuint(d.Uint32())
+	o.Index = DrawBufferIndex(d.Uint32())
 	o.R = GLboolean(d.Uint8())
 	o.G = GLboolean(d.Uint8())
 	o.B = GLboolean(d.Uint8())
@@ -10224,7 +10224,7 @@ var schemaGlColorMaskiOES = &schema.Class{
 	Name:    "GlColorMaskiOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "B", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},

@@ -19,35 +19,35 @@ cmd void glBlendBarrierKHR() {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd void glBlendEquationSeparateiEXT(GLuint buf, GLenum modeRGB, GLenum modeAlpha) {
+cmd void glBlendEquationSeparateiEXT(DrawBufferIndex buf, GLenum modeRGB, GLenum modeAlpha) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   BlendEquationSeparatei(buf, modeRGB, modeAlpha)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd void glBlendEquationiEXT(GLuint buf, GLenum mode) {
+cmd void glBlendEquationiEXT(DrawBufferIndex buf, GLenum mode) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   BlendEquationi(buf, mode)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd void glBlendFuncSeparateiEXT(GLuint buf,
-                                 GLenum srcRGB,
-                                 GLenum dstRGB,
-                                 GLenum srcAlpha,
-                                 GLenum dstAlpha) {
+cmd void glBlendFuncSeparateiEXT(DrawBufferIndex buf,
+                                 GLenum          srcRGB,
+                                 GLenum          dstRGB,
+                                 GLenum          srcAlpha,
+                                 GLenum          dstAlpha) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   BlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd void glBlendFunciEXT(GLuint buf, GLenum src, GLenum dst) {
+cmd void glBlendFunciEXT(DrawBufferIndex buf, GLenum src, GLenum dst) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   BlendFunci(buf, src, dst)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd void glColorMaskiEXT(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
+cmd void glColorMaskiEXT(DrawBufferIndex index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   ColorMaski(index, r, g, b, a)
 }

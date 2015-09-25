@@ -266,12 +266,12 @@ cmd void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean a
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glColorMask.xhtml","OpenGL ES 3.2")
-cmd void glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
+cmd void glColorMaski(DrawBufferIndex index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   minRequiredVersion(3, 2)
   ColorMaski(index, r, g, b, a)
 }
 
-macro void ColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
+macro void ColorMaski(DrawBufferIndex index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) {
   // TODO
 }
 
