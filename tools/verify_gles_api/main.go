@@ -204,7 +204,7 @@ func VerifyCommand(reg *Registry, cmd *Command, api KhronosAPI) {
 
 	// Check parameter types.
 	if len(cmd.Param) != len(apiCmd.CallParameters()) {
-		fmt.Printf("%s: Expected %v parameters but seen %v\n", cmd.Param, apiCmd.CallParameters())
+		fmt.Printf("%s: Expected %v parameters but seen %v\n", cmdName, len(cmd.Param), len(apiCmd.CallParameters()))
 	} else {
 		for i, p := range cmd.Param {
 			VerifyType(cmdName, i, p.Type(), apiCmd.FullParameters[i].Type)
