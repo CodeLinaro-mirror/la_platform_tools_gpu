@@ -231,7 +231,8 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 		go func() {
 			buf := &bytes.Buffer{}
-			count, err := gapii.Capture(statusLogger, *spyport, buf, stop)
+			options := gapii.Options{}
+			count, err := gapii.Capture(statusLogger, *spyport, buf, options, stop)
 			if count > 0 {
 				data := buf.Bytes()
 				log.Infof(statusLogger, "Importing...")

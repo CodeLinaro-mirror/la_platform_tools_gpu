@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+#include "connection_header.h"
+#include "connection_stream.h"
 #include "spy.h"
-#include "connection_writer.h"
 
 #include <gapic/encoder.h>
 #include <gapic/log.h>
@@ -51,19 +52,31 @@ inline bool isLittleEndian() {
 
 namespace gapii {
 
-// TODO: put on a flag.
-bool gObserveFramebufferOnEOF = false;
+Spy::Spy()
+  : mObserveFramebufferOnEOF(false)
+  , mObserveFramebufferOnDrawCall(false) {
 
-
-// Use a "localabstract" pipe on Android to prevent depending on the traced application
-// having the INTERNET permission set, required for opening and listening on a TCP socket.
-Spy::Spy() {
 #if TARGET_OS == GAPID_OS_ANDROID
-    auto writer = ConnectionWriter::listenPipe("gapii", true);
+  // Use a "localabstract" pipe on Android to prevent depending on the traced application
+  // having the INTERNET permission set, required for opening and listening on a TCP socket.
+    auto conn = ConnectionStream::listenPipe("gapii", true);
 #else // TARGET_OS
-    auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
-#endif
-    mEncoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
+    auto conn = ConnectionStream::listenSocket("127.0.0.1", "9286");
+#endif // TARGET_OS
+
+    ConnectionHeader header;
+    if (header.read(conn.get())) {
+        mObserveFramebufferOnEOF = header.mObserveFramebufferOnEOF != 0;
+        mObserveFramebufferOnDrawCall = header.mObserveFramebufferOnDrawCall != 0;
+    } else {
+        GAPID_WARNING("Failed to read connection header");
+    }
+
+    GAPID_INFO("GAPII connection established. Settings:");
+    GAPID_INFO("Observe framebuffers on EOF:       %s", mObserveFramebufferOnEOF ? "yes" : "no");
+    GAPID_INFO("Observe framebuffers on draw call: %s", mObserveFramebufferOnDrawCall ? "yes" : "no");
+
+    mEncoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(conn));
     mEncoder->String("GapiiTraceFile_V1.0");
     GlesSpy::init(mEncoder);
     GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
@@ -213,22 +226,22 @@ void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
 }
 
 int Spy::eglSwapBuffers(void* display, void* surface) {
-    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
     return GlesSpy::eglSwapBuffers(display, surface);
 }
 
 void Spy::wglSwapBuffers(void* hdc) {
-    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
     GlesSpy::wglSwapBuffers(hdc);
 }
 
 void Spy::glXSwapBuffers(void* display, void* drawable) {
-    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
     GlesSpy::glXSwapBuffers(display, drawable);
 }
 
 int Spy::CGLFlushDrawable(void* ctx) {
-    if (gObserveFramebufferOnEOF) { observeFramebuffer(); }
+    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
     return GlesSpy::CGLFlushDrawable(ctx);
 }
 

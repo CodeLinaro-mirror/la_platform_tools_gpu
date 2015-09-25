@@ -36,6 +36,7 @@ var (
 	output   = flag.String("out", "", "the file to generate")
 	debug    = flag.Bool("debug", false, "use the debug spy .so")
 	local    = flag.Bool("local", false, "capture a local program instead of using ADB")
+	observe  = flag.String("observe", "", "comma-seperated list of points to capture the framebuffer [frame, draw]")
 )
 
 const usage = `gapit: A tool to trace graphics calls on android.
@@ -59,25 +60,41 @@ func run() error {
 	if *verbose == false {
 		info = nil
 	}
+
+	options := gapii.Options{}
+	if *observe != "" {
+		for _, o := range strings.Split(*observe, ",") {
+			o = strings.TrimSpace(o)
+			switch o {
+			case "draws", "draw", "d":
+				options.ObserveFramebufferOnDrawCall = true
+			case "frames", "frame", "f":
+				options.ObserveFramebufferOnEOF = true
+			default:
+				return fmt.Errorf("Unknown observation type %s", o)
+			}
+		}
+	}
+
 	logger := log.Writer(info, os.Stdout, os.Stderr, nil)
 	defer log.Close(logger)
 
 	if *local {
-		return captureLocal(logger)
+		return captureLocal(logger, options)
 	} else {
-		return captureADB(logger)
+		return captureADB(logger, options)
 	}
 }
 
-func captureLocal(logger log.Logger) error {
+func captureLocal(logger log.Logger, options gapii.Options) error {
 	out := *output
 	if out == "" {
 		out = "capture.gfxtrace"
 	}
-	return capture(logger, out)
+	return capture(logger, options, out)
 }
 
-func captureADB(logger log.Logger) error {
+func captureADB(logger log.Logger, options gapii.Options) error {
 	activity := flag.Arg(0)
 	d, err := getDevice(logger, *device)
 	if err != nil {
@@ -111,10 +128,10 @@ func captureADB(logger log.Logger) error {
 		return err
 	}
 
-	return capture(logger, out)
+	return capture(logger, options, out)
 }
 
-func capture(logger log.Logger, out string) error {
+func capture(logger log.Logger, options gapii.Options, out string) error {
 	log.Infof(logger, "Creating file %s", out)
 	os.MkdirAll(filepath.Dir(out), 0755)
 	file, err := os.Create(out)
@@ -133,7 +150,7 @@ func capture(logger log.Logger, out string) error {
 		}
 		close(stop)
 	}()
-	_, err = gapii.Capture(logger, *spyport, file, stop)
+	_, err = gapii.Capture(logger, *spyport, file, options, stop)
 	if err != nil {
 		return err
 	}

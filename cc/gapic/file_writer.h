@@ -31,7 +31,7 @@ public:
     ~FileWriter();
 
     // StreamWriter compliance
-    virtual void Write(const void* data, uint64_t size) override;
+    virtual uint64_t write(const void* data, uint64_t size) override;
 
 private:
     FILE* mFile;

@@ -68,6 +68,9 @@ private:
 
     std::shared_ptr<gapic::Encoder> mEncoder;
     std::unordered_map<std::string, void*> mSymbols;
+
+    bool mObserveFramebufferOnEOF;
+    bool mObserveFramebufferOnDrawCall;
 };
 
 } // namespace gapii

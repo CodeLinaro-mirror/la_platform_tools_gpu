@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-#ifndef GAPII_CONNECTION_WRITER_H
-#define GAPII_CONNECTION_WRITER_H
+#ifndef GAPII_CONNECTION_STREAM_H
+#define GAPII_CONNECTION_STREAM_H
 
+#include <gapic/stream_reader.h>
 #include <gapic/stream_writer.h>
 
 #include <memory>
@@ -30,28 +31,30 @@ class Connection;
 
 namespace gapii {
 
-// ConnectionWriter is an implementation of the StreamWriter interface that writes to
-// an incoming TCP connection.
-class ConnectionWriter : public gapic::StreamWriter {
+// ConnectionStream is an implementation of the StreamReader and StreamWriter
+// interfaces that reads and writes to an incoming TCP connection.
+class ConnectionStream : public gapic::StreamWriter, public gapic::StreamReader {
 public:
     // listenSocket blocks and waits for a TCP connection to be made on the specified host and
-    // port, returning a ConnectionWriter once a connection is established.
-    static std::shared_ptr<ConnectionWriter> listenSocket(const char* hostname, const char* port);
+    // port, returning a ConnectionStream once a connection is established.
+    static std::shared_ptr<ConnectionStream> listenSocket(const char* hostname, const char* port);
 
     // listenPipe blocks and waits for a UNIX connection to be made on the specified pipe name,
-    // optionally abstract, returning a ConnectionWriter once a connection is established.
-    static std::shared_ptr<ConnectionWriter> listenPipe(const char* pipename, bool abstract);
+    // optionally abstract, returning a ConnectionStream once a connection is established.
+    static std::shared_ptr<ConnectionStream> listenPipe(const char* pipename, bool abstract);
+
+    // gapic::StreamReader compliance
+    virtual uint64_t read(void* data, uint64_t max_size) override;
 
     // gapic::StreamWriter compliance
-    virtual void Write(const void* data, uint64_t size) override;
+    virtual uint64_t write(const void* data, uint64_t size) override;
 
 private:
-    ConnectionWriter(std::unique_ptr<gapic::Connection>);
+    ConnectionStream(std::unique_ptr<gapic::Connection>);
 
     std::unique_ptr<gapic::Connection> mConnection;
 };
 
 } // namespace gapii
 
-#endif  // GAPII_CONNECTION_WRITER_H
-
+#endif  // GAPII_CONNECTION_STREAM_H
