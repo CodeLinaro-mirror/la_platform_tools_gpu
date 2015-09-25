@@ -26,6 +26,13 @@ import (
 
 const CaptureTag = "GapiiTraceFile_V1.0"
 
+type Options struct {
+	// If true, then a framebuffer-observation will be made after every end-of-frame.
+	ObserveFramebufferOnEOF bool
+	// If true, then a framebuffer-observation will be made after every draw call.
+	ObserveFramebufferOnDrawCall bool
+}
+
 func closed(s chan struct{}) bool {
 	select {
 	case <-s:
@@ -61,7 +68,7 @@ func (s siSize) String() string {
 	return fmt.Sprintf(f, v)
 }
 
-func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int64, error) {
+func capture(logger log.Logger, port int, w io.Writer, o Options, stop chan struct{}) (int64, error) {
 	if closed(stop) {
 		return 0, nil
 	}
@@ -70,6 +77,10 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 		return 0, nil // Treat failure-to-connect as target-not-ready instead of an error.
 	}
 	defer conn.Close()
+	if err := sendHeader(conn, o); err != nil {
+		return 0, err
+	}
+
 	var count, nextSize siSize
 	startTime := time.Now()
 	nextTime := startTime
@@ -104,12 +115,12 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 }
 
 // Capture opens up the specified port and then waits for a capture to be
-// delivered.
+// delivered using the specified capture options.
 // It copies the capture into the supplied writer.
-func Capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int64, error) {
+func Capture(logger log.Logger, port int, w io.Writer, options Options, stop chan struct{}) (int64, error) {
 	log.Infof(logger, "Waiting for connection to localhost:%d...", port)
 	for {
-		count, err := capture(logger, port, w, stop)
+		count, err := capture(logger, port, w, options, stop)
 		if err != nil {
 			return count, err
 		}

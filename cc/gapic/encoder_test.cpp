@@ -32,11 +32,12 @@ class BufferWriter : public StreamWriter {
 public:
     inline BufferWriter(std::vector<uint8_t>* buffer) : mBuffer(buffer) {}
 
-    virtual inline void Write(const void* data, uint64_t size) {
+    virtual inline uint64_t write(const void* data, uint64_t size) override {
         const uint8_t* p = reinterpret_cast<const uint8_t*>(data);
         for (uint64_t i = 0; i < size; i++) {
             mBuffer->push_back(p[i]);
         }
+        return size;
     }
 
 private:

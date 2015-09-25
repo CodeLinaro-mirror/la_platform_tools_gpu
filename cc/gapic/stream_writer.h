@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef GAPIC_WRITER_H
-#define GAPIC_WRITER_H
+#ifndef GAPIC_STREAM_WRITER_H
+#define GAPIC_STREAM_WRITER_H
 
 #include <stdint.h>
 
@@ -24,12 +24,26 @@ namespace gapic {
 // StreamWriter is a pure-virtual interface used to write data streams.
 class StreamWriter {
 public:
-    virtual void Write(const void* data, uint64_t size) = 0;
+    // write attempts to write size bytes from data to the stream, blocking
+    // until all data is written. Returns the number of bytes successfully
+    // written, which may be less than size if the stream was closed or there
+    // was an error.
+    virtual uint64_t write(const void* data, uint64_t size) = 0;
+
+    // write attempts to write the bytes of s to the stream, returning true on
+    // success or false if the write was partial or a complete failure.
+    // Note: T must be a plain-old-data type.
+    template <typename T> inline bool write(const T& s);
 
 protected:
     virtual ~StreamWriter() {}
 };
 
+template <typename T>
+inline bool StreamWriter::write(const T& s) {
+    return write(&s, sizeof(s)) == sizeof(s);
+}
+
 } // namespace gapic
 
-#endif // GAPIC_WRITER_H
+#endif // GAPIC_STREAM_WRITER_H

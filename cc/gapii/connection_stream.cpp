@@ -14,33 +14,37 @@
  * limitations under the License.
  */
 
-#include "connection_writer.h"
+#include "connection_stream.h"
 
 #include <gapic/log.h>
 #include <gapic/socket_connection.h>
 
 namespace gapii {
 
-std::shared_ptr<ConnectionWriter> ConnectionWriter::listenSocket(
+std::shared_ptr<ConnectionStream> ConnectionStream::listenSocket(
         const char* hostname, const char* port) {
     auto c = gapic::SocketConnection::createSocket(hostname, port);
     GAPID_INFO("GAPII awaiting connection on socket %s:%s", hostname, port);
-    return std::shared_ptr<ConnectionWriter>(new ConnectionWriter(c->accept()));
+    return std::shared_ptr<ConnectionStream>(new ConnectionStream(c->accept()));
 }
 
-std::shared_ptr<ConnectionWriter> ConnectionWriter::listenPipe(
+std::shared_ptr<ConnectionStream> ConnectionStream::listenPipe(
         const char* pipename, bool abstract) {
     auto c = gapic::SocketConnection::createPipe(pipename, abstract);
     GAPID_INFO("GAPII awaiting connection on pipe %s%s",
         pipename, (abstract ? " (abstract)" : ""));
-    return std::shared_ptr<ConnectionWriter>(new ConnectionWriter(c->accept()));
+    return std::shared_ptr<ConnectionStream>(new ConnectionStream(c->accept()));
 }
 
-ConnectionWriter::ConnectionWriter(std::unique_ptr<gapic::Connection> connection)
+ConnectionStream::ConnectionStream(std::unique_ptr<gapic::Connection> connection)
     : mConnection(std::move(connection)) {}
 
-void ConnectionWriter::Write(const void* data, uint64_t size) {
-    mConnection->send(data, size);
+uint64_t ConnectionStream::read(void* data, uint64_t max_size) {
+    return mConnection->recv(data, max_size);
+}
+
+uint64_t ConnectionStream::write(const void* data, uint64_t size) {
+    return mConnection->send(data, size);
 }
 
 } // namespace gapii

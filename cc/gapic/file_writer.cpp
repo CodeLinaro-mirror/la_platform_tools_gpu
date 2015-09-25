@@ -27,8 +27,8 @@ FileWriter::~FileWriter() {
     fclose(mFile);
 }
 
-void FileWriter::Write(const void* data, uint64_t size) {
-    fwrite(data, static_cast<size_t>(size), 1, mFile);
+uint64_t FileWriter::write(const void* data, uint64_t size) {
+    return fwrite(data, static_cast<size_t>(size), 1, mFile);
 }
 
 } // namespace gapic

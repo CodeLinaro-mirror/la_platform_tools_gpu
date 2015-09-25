@@ -25,15 +25,15 @@ Encoder::Encoder(std::shared_ptr<StreamWriter> output) : mOutput(output), mLastO
 
 void Encoder::Bool(bool v) {
     uint8_t b = v ? 1 : 0;
-    mOutput->Write(&b, 1);
+    mOutput->write(&b, 1);
 }
 
 void Encoder::Int8(int8_t v) {
-    mOutput->Write(&v, 1);
+    mOutput->write(&v, 1);
 }
 
 void Encoder::Uint8(uint8_t v) {
-    mOutput->Write(&v, 1);
+    mOutput->write(&v, 1);
 }
 
 void Encoder::Uint16(uint16_t v) {
@@ -43,7 +43,7 @@ void Encoder::Uint16(uint16_t v) {
     for (int o = 8; true; o--) {
         if (v <= space) {
             buf[o] = uint8_t(v) | uint8_t(tag);
-            mOutput->Write(buf + o, 9 - o);
+            mOutput->write(buf + o, 9 - o);
             return;
         }
         buf[o] = uint8_t(v);
@@ -75,7 +75,7 @@ void Encoder::Uint32(uint32_t v) {
     for (int o = 8; true; o--) {
         if (v <= space) {
             buf[o] = uint8_t(v) | uint8_t(tag);
-            mOutput->Write(buf + o, 9 - o);
+            mOutput->write(buf + o, 9 - o);
             return;
         }
         buf[o] = uint8_t(v);
@@ -111,7 +111,7 @@ void Encoder::Uint64(uint64_t v) {
     for (int o = 8; true; o--) {
         if (v <= space) {
             buf[o] = uint8_t(v) | uint8_t(tag);
-            mOutput->Write(buf + o, 9 - o);
+            mOutput->write(buf + o, 9 - o);
             return;
         }
         buf[o] = uint8_t(v);
@@ -134,11 +134,11 @@ void Encoder::Pointer(const void* p) {
 void Encoder::String(const char* v) {
     uint32_t len = v != nullptr ? static_cast<uint32_t>(strlen(v)) : 0;
     Uint32(len);
-    mOutput->Write(v, len);
+    mOutput->write(v, len);
 }
 
 void Encoder::Data(const void* ptr, int32_t size) {
-    mOutput->Write(ptr, size);
+    mOutput->write(ptr, size);
 }
 
 void Encoder::Id(const gapic::Id& id) {
@@ -149,7 +149,7 @@ void Encoder::Id(const gapic::Id& id) {
         uint32_t sid = mIds.size() + 1;
         mIds[id] = sid;
         Uint32((sid << 1) | 1);
-        mOutput->Write(&id.data, 20);
+        mOutput->write(&id.data, 20);
     }
 }
 
