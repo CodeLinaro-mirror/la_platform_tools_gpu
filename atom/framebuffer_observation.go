@@ -29,8 +29,8 @@ import (
 // verify that replay gave the same results as what was captured.
 type FramebufferObservation struct {
 	binary.Generate `java:"disable"`
-	Width, Height uint32 // Framebuffer dimensions in pixels
-	Data          []byte // The RGBA color-buffer data
+	Width, Height   uint32 // Framebuffer dimensions in pixels
+	Data            []byte // The RGBA color-buffer data
 }
 
 func (a *FramebufferObservation) String() string {
