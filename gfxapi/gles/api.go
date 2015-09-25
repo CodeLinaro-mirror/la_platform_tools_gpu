@@ -18,6 +18,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
+type BufferBindingIndex GLuint
 type DrawBufferIndex GLuint
 type BindingIndex GLuint
 type AttributeLocation GLuint
@@ -16228,7 +16229,7 @@ type GlBindBufferBase struct {
 	binary.Generate
 	observations atom.Observations
 	Target       GLenum
-	Index        GLuint
+	Index        BufferBindingIndex
 	Buffer       BufferId
 }
 
@@ -16262,7 +16263,7 @@ type GlBindBufferRange struct {
 	binary.Generate
 	observations atom.Observations
 	Target       GLenum
-	Index        GLuint
+	Index        BufferBindingIndex
 	Buffer       BufferId
 	Offset       GLintptr
 	Size         GLsizeiptr
@@ -47047,10 +47048,10 @@ func NewGlIsQuery(Query QueryId, Result GLboolean) *GlIsQuery {
 func NewGlBindBuffer(Target GLenum, Buffer BufferId) *GlBindBuffer {
 	return &GlBindBuffer{Target: Target, Buffer: Buffer}
 }
-func NewGlBindBufferBase(Target GLenum, Index GLuint, Buffer BufferId) *GlBindBufferBase {
+func NewGlBindBufferBase(Target GLenum, Index BufferBindingIndex, Buffer BufferId) *GlBindBufferBase {
 	return &GlBindBufferBase{Target: Target, Index: Index, Buffer: Buffer}
 }
-func NewGlBindBufferRange(Target GLenum, Index GLuint, Buffer BufferId, Offset GLintptr, Size GLsizeiptr) *GlBindBufferRange {
+func NewGlBindBufferRange(Target GLenum, Index BufferBindingIndex, Buffer BufferId, Offset GLintptr, Size GLsizeiptr) *GlBindBufferRange {
 	return &GlBindBufferRange{Target: Target, Index: Index, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlBufferData(Target GLenum, Size GLsizeiptr, Data memory.Pointer, Usage GLenum) *GlBufferData {

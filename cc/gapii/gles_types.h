@@ -5747,6 +5747,8 @@ static const uint32_t CUBEMAP = 2;
 
 typedef uint32_t GLuint;
 
+typedef GLuint BufferBindingIndex;
+
 typedef GLuint DrawBufferIndex;
 
 typedef GLuint BindingIndex;

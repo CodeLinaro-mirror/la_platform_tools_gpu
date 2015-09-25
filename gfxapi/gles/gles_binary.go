@@ -1121,8 +1121,8 @@ var (
 	binaryIDGlBeginTransformFeedback                         = binary.ID{0xe1, 0x82, 0xce, 0xb1, 0x56, 0x27, 0x48, 0x8f, 0x9e, 0xc8, 0x36, 0x88, 0x26, 0x5b, 0xd3, 0xc3, 0xc3, 0x88, 0x5b, 0x87}
 	binaryIDGlBindAttribLocation                             = binary.ID{0xab, 0xe2, 0x34, 0x53, 0x26, 0xbc, 0x1d, 0x86, 0xd6, 0x8b, 0xd8, 0xaa, 0xd9, 0x38, 0x2f, 0xca, 0x5a, 0x1d, 0xc0, 0x10}
 	binaryIDGlBindBuffer                                     = binary.ID{0x77, 0x0e, 0x5d, 0x2a, 0xdd, 0x4c, 0x52, 0xb8, 0x60, 0xdb, 0x05, 0x08, 0x8a, 0x39, 0x2b, 0x58, 0xe4, 0xf7, 0x72, 0xad}
-	binaryIDGlBindBufferBase                                 = binary.ID{0x85, 0xaa, 0x5a, 0x2d, 0x08, 0x1e, 0x5b, 0xc4, 0x31, 0xb8, 0x21, 0x28, 0x4a, 0xeb, 0xae, 0x06, 0x86, 0x94, 0x6f, 0xb5}
-	binaryIDGlBindBufferRange                                = binary.ID{0xd9, 0x09, 0xe3, 0x91, 0xd0, 0xef, 0xce, 0xc4, 0x6c, 0xa8, 0xd2, 0x16, 0x2f, 0x3c, 0x7f, 0xa7, 0x4e, 0x62, 0xe6, 0x1d}
+	binaryIDGlBindBufferBase                                 = binary.ID{0x84, 0xfb, 0x90, 0xd0, 0x60, 0x3f, 0xb7, 0x64, 0x51, 0x70, 0x64, 0x7a, 0xc4, 0xaf, 0xb5, 0xaf, 0x10, 0x0c, 0xfc, 0xa9}
+	binaryIDGlBindBufferRange                                = binary.ID{0x1b, 0xf9, 0xe5, 0xe7, 0x12, 0x25, 0xeb, 0x3d, 0xa0, 0xfe, 0xc3, 0xd3, 0xa6, 0x50, 0x91, 0x9f, 0xab, 0x7d, 0x9a, 0x93}
 	binaryIDGlBindFragDataLocationEXT                        = binary.ID{0xd2, 0x9e, 0x51, 0x97, 0x73, 0x66, 0x9d, 0x88, 0x3d, 0x6a, 0x47, 0xf3, 0x17, 0x52, 0x39, 0x7f, 0xa6, 0x3b, 0x64, 0xd9}
 	binaryIDGlBindFragDataLocationIndexedEXT                 = binary.ID{0xa9, 0x83, 0x81, 0xb6, 0x3d, 0x0c, 0x19, 0x40, 0x1a, 0x52, 0xfd, 0xa2, 0xf0, 0x04, 0x45, 0xc4, 0x6e, 0xb2, 0x09, 0xf2}
 	binaryIDGlBindFramebuffer                                = binary.ID{0x69, 0x1e, 0xac, 0x99, 0x53, 0x08, 0xb7, 0x91, 0x2d, 0x45, 0xb5, 0x58, 0xa6, 0x56, 0x07, 0xea, 0xba, 0x86, 0x4b, 0x07}
@@ -7627,7 +7627,7 @@ func doEncodeGlBindBufferBase(e binary.Encoder, o *GlBindBufferBase) {
 func doDecodeGlBindBufferBase(d binary.Decoder, o *GlBindBufferBase) {
 	d.Value(&o.observations)
 	o.Target = GLenum(d.Uint32())
-	o.Index = GLuint(d.Uint32())
+	o.Index = BufferBindingIndex(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
 func (*binaryClassGlBindBufferBase) ID() binary.ID      { return binaryIDGlBindBufferBase }
@@ -7652,7 +7652,7 @@ var schemaGlBindBufferBase = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 	},
 }
@@ -7673,7 +7673,7 @@ func doEncodeGlBindBufferRange(e binary.Encoder, o *GlBindBufferRange) {
 func doDecodeGlBindBufferRange(d binary.Decoder, o *GlBindBufferRange) {
 	d.Value(&o.observations)
 	o.Target = GLenum(d.Uint32())
-	o.Index = GLuint(d.Uint32())
+	o.Index = BufferBindingIndex(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 	o.Offset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
@@ -7700,7 +7700,7 @@ var schemaGlBindBufferRange = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+type GLuint BufferBindingIndex
+
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBuffer.xhtml","OpenGL ES 3.1")
@@ -48,7 +50,7 @@ cmd void glBindBuffer(GLenum target, BufferId buffer) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferBase.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindBufferBase.xhtml","OpenGL ES 3.2")
-cmd void glBindBufferBase(GLenum target, GLuint index, BufferId buffer) {
+cmd void glBindBufferBase(GLenum target, BufferBindingIndex index, BufferId buffer) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
@@ -68,11 +70,11 @@ cmd void glBindBufferBase(GLenum target, GLuint index, BufferId buffer) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferRange.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferRange.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindBufferRange.xhtml","OpenGL ES 3.2")
-cmd void glBindBufferRange(GLenum     target,
-                           GLuint     index,
-                           BufferId   buffer,
-                           GLintptr   offset,
-                           GLsizeiptr size) {
+cmd void glBindBufferRange(GLenum             target,
+                           BufferBindingIndex index,
+                           BufferId           buffer,
+                           GLintptr           offset,
+                           GLsizeiptr         size) {
   minRequiredVersion(3, 0)
   switch (target) {
     case GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {

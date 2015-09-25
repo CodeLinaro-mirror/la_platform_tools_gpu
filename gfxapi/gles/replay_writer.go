@@ -785,6 +785,9 @@ var funcInfoStartTimer = builder.FunctionInfo{ID: 750, ReturnType: protocol.Type
 var funcInfoStopTimer = builder.FunctionInfo{ID: 751, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 752, ReturnType: protocol.TypeVoid, Parameters: 0}
 
+func (c BufferBindingIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return GLuint(c).value(ϟb, ϟa, ϟs)
+}
 func (c DrawBufferIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
