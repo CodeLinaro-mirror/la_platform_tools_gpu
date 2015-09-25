@@ -792,43 +792,43 @@ func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxap
 	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c TextureId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c FramebufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c BufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c ShaderId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c ProgramId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c VertexArrayId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c QueryId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c UniformLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.S32(int32(c))
+	return GLint(c).value(ϟb, ϟa, ϟs)
 }
 func (c SamplerId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c PipelineId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c UniformBlockId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c TransformFeedbackId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
 func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))

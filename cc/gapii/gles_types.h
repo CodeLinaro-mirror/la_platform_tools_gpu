@@ -5791,31 +5791,31 @@ typedef Vec3f Mat4x3f[4];
 
 typedef Vec4f Mat4f[4];
 
-typedef uint32_t RenderbufferId;
+typedef GLuint RenderbufferId;
 
-typedef uint32_t TextureId;
+typedef GLuint TextureId;
 
-typedef uint32_t FramebufferId;
+typedef GLuint FramebufferId;
 
-typedef uint32_t BufferId;
+typedef GLuint BufferId;
 
-typedef uint32_t ShaderId;
+typedef GLuint ShaderId;
 
-typedef uint32_t ProgramId;
+typedef GLuint ProgramId;
 
-typedef uint32_t VertexArrayId;
+typedef GLuint VertexArrayId;
 
-typedef uint32_t QueryId;
+typedef GLuint QueryId;
 
-typedef int32_t UniformLocation;
+typedef GLint UniformLocation;
 
-typedef uint32_t SamplerId;
+typedef GLuint SamplerId;
 
-typedef uint32_t PipelineId;
+typedef GLuint PipelineId;
 
-typedef uint32_t UniformBlockId;
+typedef GLuint UniformBlockId;
 
-typedef uint32_t TransformFeedbackId;
+typedef GLuint TransformFeedbackId;
 
 typedef void* IndicesPointer;
 

@@ -38,19 +38,19 @@ type Mat3x4f Vec4fː3ᵃ
 type Mat4x2f Vec2fː4ᵃ
 type Mat4x3f Vec3fː4ᵃ
 type Mat4f Vec4fː4ᵃ
-type RenderbufferId uint32
-type TextureId uint32
-type FramebufferId uint32
-type BufferId uint32
-type ShaderId uint32
-type ProgramId uint32
-type VertexArrayId uint32
-type QueryId uint32
-type UniformLocation int32
-type SamplerId uint32
-type PipelineId uint32
-type UniformBlockId uint32
-type TransformFeedbackId uint32
+type RenderbufferId GLuint
+type TextureId GLuint
+type FramebufferId GLuint
+type BufferId GLuint
+type ShaderId GLuint
+type ProgramId GLuint
+type VertexArrayId GLuint
+type QueryId GLuint
+type UniformLocation GLint
+type SamplerId GLuint
+type PipelineId GLuint
+type UniformBlockId GLuint
+type TransformFeedbackId GLuint
 
 // IndicesPointer is a pointer to a void element.
 type IndicesPointer struct {
