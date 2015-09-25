@@ -5938,7 +5938,7 @@ func (ϟa *GlBindFragDataLocationEXT) Call(ϟs *gfxapi.State, ϟd database.Datab
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Color.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlBindFragDataLocationEXT)
 }
 
@@ -5966,7 +5966,7 @@ func (ϟa *GlBindFragDataLocationIndexedEXT) Call(ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Push(ϟa.ColorNumber.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlBindFragDataLocationIndexedEXT)
 }
 
@@ -11136,7 +11136,7 @@ func (ϟa *GlGetFragDataIndexEXT) Call(ϟs *gfxapi.State, ϟd database.Database,
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlGetFragDataIndexEXT)
 }
 
@@ -13200,7 +13200,7 @@ func (ϟa *GlGetProgramResourceLocationIndexEXT) Call(ϟs *gfxapi.State, ϟd dat
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.ProgramInterface))
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlGetProgramResourceLocationIndexEXT)
 }
 

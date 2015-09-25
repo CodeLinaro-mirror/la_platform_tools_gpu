@@ -2761,39 +2761,39 @@ namespace gles {
     class GlBindFragDataLocationEXT: public Encodable {
     public:
         GlBindFragDataLocationEXT() = default;
-        GlBindFragDataLocationEXT(atom::Observations observations, uint32_t Program, uint32_t Color, GLchar__CP Name) :
+        GlBindFragDataLocationEXT(atom::Observations observations, uint32_t Program, uint32_t Color, char* Name) :
             mobservations(observations),
             mProgram(Program),
             mColor(Color),
             mName(Name) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd2, 0x9e, 0x51, 0x97, 0x73, 0x66, 0x9d, 0x88, 0x3d, 0x6a, 0x47, 0xf3, 0x17, 0x52, 0x39, 0x7f, 0xa6, 0x3b, 0x64, 0xd9,  } };
+            static gapic::Id ID{ { 0xdc, 0x27, 0x13, 0xb5, 0x37, 0x29, 0xd0, 0xfa, 0xd3, 0x8b, 0x3a, 0xf1, 0x10, 0x94, 0xce, 0xa7, 0xfc, 0x0d, 0x93, 0xfd,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mColor);
-            e->Value(this->mName);
+            e->String(this->mName);
         }
 
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mColor;
-        GLchar__CP mName;
+        char* mName;
     };
 
     class GlBindFragDataLocationIndexedEXT: public Encodable {
     public:
         GlBindFragDataLocationIndexedEXT() = default;
-        GlBindFragDataLocationIndexedEXT(atom::Observations observations, uint32_t Program, uint32_t ColorNumber, uint32_t Index, GLchar__CP Name) :
+        GlBindFragDataLocationIndexedEXT(atom::Observations observations, uint32_t Program, uint32_t ColorNumber, uint32_t Index, char* Name) :
             mobservations(observations),
             mProgram(Program),
             mColorNumber(ColorNumber),
             mIndex(Index),
             mName(Name) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa9, 0x83, 0x81, 0xb6, 0x3d, 0x0c, 0x19, 0x40, 0x1a, 0x52, 0xfd, 0xa2, 0xf0, 0x04, 0x45, 0xc4, 0x6e, 0xb2, 0x09, 0xf2,  } };
+            static gapic::Id ID{ { 0x3d, 0xfb, 0x8c, 0x8f, 0xfa, 0x97, 0xf9, 0xdf, 0x2a, 0x46, 0x65, 0xd9, 0xeb, 0x16, 0x39, 0x3e, 0xd1, 0x22, 0x8d, 0x98,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2801,14 +2801,14 @@ namespace gles {
             e->Uint32(this->mProgram);
             e->Uint32(this->mColorNumber);
             e->Uint32(this->mIndex);
-            e->Value(this->mName);
+            e->String(this->mName);
         }
 
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mColorNumber;
         uint32_t mIndex;
-        GLchar__CP mName;
+        char* mName;
     };
 
     class GlBindFramebuffer: public Encodable {
@@ -9573,25 +9573,25 @@ namespace gles {
     class GlGetFragDataIndexEXT: public Encodable {
     public:
         GlGetFragDataIndexEXT() = default;
-        GlGetFragDataIndexEXT(atom::Observations observations, uint32_t Program, GLchar__CP Name, int32_t Result) :
+        GlGetFragDataIndexEXT(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
             mobservations(observations),
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x07, 0x5d, 0x6a, 0xe6, 0x0f, 0x5a, 0xbb, 0x4f, 0x71, 0x01, 0x10, 0x07, 0xfb, 0x31, 0x6a, 0x41, 0xac, 0xfa, 0x0d, 0x3e,  } };
+            static gapic::Id ID{ { 0xac, 0x92, 0x79, 0xcf, 0x60, 0x5d, 0x8e, 0x33, 0x4c, 0x32, 0xd0, 0x58, 0x1b, 0x62, 0x74, 0x07, 0x6e, 0x26, 0xd4, 0x8c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
-            e->Value(this->mName);
+            e->String(this->mName);
             e->Int32(this->mResult);
         }
 
         atom::Observations mobservations;
         uint32_t mProgram;
-        GLchar__CP mName;
+        char* mName;
         int32_t mResult;
     };
 
@@ -11061,28 +11061,28 @@ namespace gles {
     class GlGetProgramResourceLocationIndexEXT: public Encodable {
     public:
         GlGetProgramResourceLocationIndexEXT() = default;
-        GlGetProgramResourceLocationIndexEXT(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, GLchar__CP Name, int32_t Result) :
+        GlGetProgramResourceLocationIndexEXT(atom::Observations observations, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
             mobservations(observations),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
             mName(Name),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x4f, 0xdf, 0x37, 0xfd, 0x19, 0xe4, 0xf2, 0x01, 0xe7, 0xf0, 0x62, 0x65, 0x75, 0x76, 0x8d, 0x90, 0xfd, 0x43, 0x96, 0x3d,  } };
+            static gapic::Id ID{ { 0x4d, 0x13, 0x07, 0x51, 0x41, 0xca, 0x6e, 0x73, 0x7c, 0x0f, 0xc4, 0x9f, 0x72, 0x88, 0x6d, 0x99, 0x79, 0xac, 0x1a, 0x6c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mProgramInterface);
-            e->Value(this->mName);
+            e->String(this->mName);
             e->Int32(this->mResult);
         }
 
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
-        GLchar__CP mName;
+        char* mName;
         int32_t mResult;
     };
 

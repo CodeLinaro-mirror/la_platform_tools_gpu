@@ -17718,7 +17718,7 @@ type GlBindFragDataLocationEXT struct {
 	observations atom.Observations
 	Program      ProgramId
 	Color        GLuint
-	Name         GLcharᶜᵖ
+	Name         string
 }
 
 func (a *GlBindFragDataLocationEXT) String() string {
@@ -17753,7 +17753,7 @@ type GlBindFragDataLocationIndexedEXT struct {
 	Program      ProgramId
 	ColorNumber  GLuint
 	Index        GLuint
-	Name         GLcharᶜᵖ
+	Name         string
 }
 
 func (a *GlBindFragDataLocationIndexedEXT) String() string {
@@ -21500,7 +21500,7 @@ type GlGetFragDataIndexEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Program      ProgramId
-	Name         GLcharᶜᵖ
+	Name         string
 	Result       GLint
 }
 
@@ -22591,7 +22591,7 @@ type GlGetProgramResourceLocationIndexEXT struct {
 	observations     atom.Observations
 	Program          ProgramId
 	ProgramInterface GLenum
-	Name             GLcharᶜᵖ
+	Name             string
 	Result           GLint
 }
 
@@ -47177,11 +47177,11 @@ func NewGlBeginPerfQueryINTEL(QueryHandle GLuint) *GlBeginPerfQueryINTEL {
 func NewGlBeginQueryEXT(Target GLenum, Query QueryId) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{Target: Target, Query: Query}
 }
-func NewGlBindFragDataLocationEXT(Program ProgramId, Color GLuint, Name memory.Pointer) *GlBindFragDataLocationEXT {
-	return &GlBindFragDataLocationEXT{Program: Program, Color: Color, Name: GLcharᶜᵖ{Pointer: Name}}
+func NewGlBindFragDataLocationEXT(Program ProgramId, Color GLuint, Name string) *GlBindFragDataLocationEXT {
+	return &GlBindFragDataLocationEXT{Program: Program, Color: Color, Name: Name}
 }
-func NewGlBindFragDataLocationIndexedEXT(Program ProgramId, ColorNumber GLuint, Index GLuint, Name memory.Pointer) *GlBindFragDataLocationIndexedEXT {
-	return &GlBindFragDataLocationIndexedEXT{Program: Program, ColorNumber: ColorNumber, Index: Index, Name: GLcharᶜᵖ{Pointer: Name}}
+func NewGlBindFragDataLocationIndexedEXT(Program ProgramId, ColorNumber GLuint, Index GLuint, Name string) *GlBindFragDataLocationIndexedEXT {
+	return &GlBindFragDataLocationIndexedEXT{Program: Program, ColorNumber: ColorNumber, Index: Index, Name: Name}
 }
 func NewGlBindProgramPipelineEXT(Pipeline PipelineId) *GlBindProgramPipelineEXT {
 	return &GlBindProgramPipelineEXT{Pipeline: Pipeline}
@@ -47504,8 +47504,8 @@ func NewGlGetFirstPerfQueryIdINTEL(QueryId memory.Pointer) *GlGetFirstPerfQueryI
 func NewGlGetFloati_vNV(Target GLenum, Index GLuint, Data memory.Pointer) *GlGetFloati_vNV {
 	return &GlGetFloati_vNV{Target: Target, Index: Index, Data: GLfloatᵖ{Pointer: Data}}
 }
-func NewGlGetFragDataIndexEXT(Program ProgramId, Name memory.Pointer, Result GLint) *GlGetFragDataIndexEXT {
-	return &GlGetFragDataIndexEXT{Program: Program, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+func NewGlGetFragDataIndexEXT(Program ProgramId, Name string, Result GLint) *GlGetFragDataIndexEXT {
+	return &GlGetFragDataIndexEXT{Program: Program, Name: Name, Result: Result}
 }
 func NewGlGetGraphicsResetStatusEXT(Result GLenum) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{Result: Result}
@@ -47597,8 +47597,8 @@ func NewGlGetProgramPipelineInfoLogEXT(Pipeline PipelineId, BufSize GLsizei, Len
 func NewGlGetProgramPipelineivEXT(Pipeline PipelineId, Pname GLenum, Params memory.Pointer) *GlGetProgramPipelineivEXT {
 	return &GlGetProgramPipelineivEXT{Pipeline: Pipeline, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
 }
-func NewGlGetProgramResourceLocationIndexEXT(Program ProgramId, ProgramInterface GLenum, Name memory.Pointer, Result GLint) *GlGetProgramResourceLocationIndexEXT {
-	return &GlGetProgramResourceLocationIndexEXT{Program: Program, ProgramInterface: ProgramInterface, Name: GLcharᶜᵖ{Pointer: Name}, Result: Result}
+func NewGlGetProgramResourceLocationIndexEXT(Program ProgramId, ProgramInterface GLenum, Name string, Result GLint) *GlGetProgramResourceLocationIndexEXT {
+	return &GlGetProgramResourceLocationIndexEXT{Program: Program, ProgramInterface: ProgramInterface, Name: Name, Result: Result}
 }
 func NewGlGetProgramResourcefvNV(Program ProgramId, ProgramInterface GLenum, Index GLuint, PropCount GLsizei, Props memory.Pointer, BufSize GLsizei, Length memory.Pointer, Params memory.Pointer) *GlGetProgramResourcefvNV {
 	return &GlGetProgramResourcefvNV{Program: Program, ProgramInterface: ProgramInterface, Index: Index, PropCount: PropCount, Props: GLenumᶜᵖ{Pointer: Props}, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Params: GLfloatᵖ{Pointer: Params}}

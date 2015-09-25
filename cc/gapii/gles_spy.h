@@ -7757,7 +7757,7 @@ inline bool GlesSpy::hasGlBindFragDataLocationEXT() const {
 }
 
 inline void GlesSpy::glBindFragDataLocationEXT(uint32_t program, uint32_t color, char* name) {
-    GAPID_INFO("glBindFragDataLocationEXT(%" PRIu32 ", %" PRIu32 ", %p)", program, color, name);
+    GAPID_INFO("glBindFragDataLocationEXT(%" PRIu32 ", %" PRIu32 ", %s)", program, color, name);
 
     if (!hasGlBindFragDataLocationEXT()) {
         GAPID_WARNING("Application called unsupported function glBindFragDataLocationEXT");
@@ -7772,10 +7772,7 @@ inline void GlesSpy::glBindFragDataLocationEXT(uint32_t program, uint32_t color,
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlBindFragDataLocationEXT coder(
-            observations, program, color,
-            gapic::coder::gles::GLchar__CP(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
+    gapic::coder::gles::GlBindFragDataLocationEXT coder(observations, program, color, name);
     mEncoder->Variant(&coder);
 }
 
@@ -7785,7 +7782,7 @@ inline bool GlesSpy::hasGlBindFragDataLocationIndexedEXT() const {
 
 inline void GlesSpy::glBindFragDataLocationIndexedEXT(uint32_t program, uint32_t colorNumber,
                                                       uint32_t index, char* name) {
-    GAPID_INFO("glBindFragDataLocationIndexedEXT(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %p)",
+    GAPID_INFO("glBindFragDataLocationIndexedEXT(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %s)",
                program, colorNumber, index, name);
 
     if (!hasGlBindFragDataLocationIndexedEXT()) {
@@ -7801,10 +7798,8 @@ inline void GlesSpy::glBindFragDataLocationIndexedEXT(uint32_t program, uint32_t
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlBindFragDataLocationIndexedEXT coder(
-            observations, program, colorNumber, index,
-            gapic::coder::gles::GLchar__CP(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
+    gapic::coder::gles::GlBindFragDataLocationIndexedEXT coder(observations, program, colorNumber,
+                                                               index, name);
     mEncoder->Variant(&coder);
 }
 
@@ -13600,7 +13595,7 @@ inline bool GlesSpy::hasGlGetFragDataIndexEXT() const {
 }
 
 inline int32_t GlesSpy::glGetFragDataIndexEXT(uint32_t program, char* name) {
-    GAPID_INFO("glGetFragDataIndexEXT(%" PRIu32 ", %p)", program, name);
+    GAPID_INFO("glGetFragDataIndexEXT(%" PRIu32 ", %s)", program, name);
 
     int32_t result = 0;
 
@@ -13618,10 +13613,7 @@ inline int32_t GlesSpy::glGetFragDataIndexEXT(uint32_t program, char* name) {
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlGetFragDataIndexEXT coder(
-            observations, program, gapic::coder::gles::GLchar__CP(gapic::coder::memory::Pointer(
-                                           reinterpret_cast<uintptr_t>(name), 0)),
-            result);
+    gapic::coder::gles::GlGetFragDataIndexEXT coder(observations, program, name, result);
     mEncoder->Variant(&coder);
 
     return result;
@@ -16097,7 +16089,7 @@ inline bool GlesSpy::hasGlGetProgramResourceLocationIndexEXT() const {
 inline int32_t GlesSpy::glGetProgramResourceLocationIndexEXT(uint32_t program,
                                                              uint32_t programInterface,
                                                              char* name) {
-    GAPID_INFO("glGetProgramResourceLocationIndexEXT(%" PRIu32 ", %u, %p)", program,
+    GAPID_INFO("glGetProgramResourceLocationIndexEXT(%" PRIu32 ", %u, %s)", program,
                programInterface, name);
 
     int32_t result = 0;
@@ -16117,11 +16109,8 @@ inline int32_t GlesSpy::glGetProgramResourceLocationIndexEXT(uint32_t program,
     } while (false);
     observe(observations.mWrites);
 
-    gapic::coder::gles::GlGetProgramResourceLocationIndexEXT coder(
-            observations, program, programInterface,
-            gapic::coder::gles::GLchar__CP(
-                    gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)),
-            result);
+    gapic::coder::gles::GlGetProgramResourceLocationIndexEXT coder(observations, program,
+                                                                   programInterface, name, result);
     mEncoder->Variant(&coder);
 
     return result;

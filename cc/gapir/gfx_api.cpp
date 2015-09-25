@@ -1703,7 +1703,7 @@ bool callGlBindFragDataLocationEXT(Stack* stack, bool pushReturn) {
     uint32_t color = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindFragDataLocationEXT(%" PRIu32 ", %" PRIu32 ", %p)", program, color, name);
+        GAPID_INFO("glBindFragDataLocationEXT(%" PRIu32 ", %" PRIu32 ", %s)", program, color, name);
         if (glBindFragDataLocationEXT != nullptr) {
             glBindFragDataLocationEXT(program, color, name);
         } else {
@@ -1722,7 +1722,7 @@ bool callGlBindFragDataLocationIndexedEXT(Stack* stack, bool pushReturn) {
     uint32_t colorNumber = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindFragDataLocationIndexedEXT(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %p)",
+        GAPID_INFO("glBindFragDataLocationIndexedEXT(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %s)",
                    program, colorNumber, index, name);
         if (glBindFragDataLocationIndexedEXT != nullptr) {
             glBindFragDataLocationIndexedEXT(program, colorNumber, index, name);
@@ -3838,7 +3838,7 @@ bool callGlGetFragDataIndexEXT(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetFragDataIndexEXT(%" PRIu32 ", %p)", program, name);
+        GAPID_INFO("glGetFragDataIndexEXT(%" PRIu32 ", %s)", program, name);
         if (glGetFragDataIndexEXT != nullptr) {
             int32_t return_value = glGetFragDataIndexEXT(program, name);
             GAPID_INFO("Returned: %" PRId32 "", return_value);
@@ -4478,7 +4478,7 @@ bool callGlGetProgramResourceLocationIndexEXT(Stack* stack, bool pushReturn) {
     GLenum programInterface = stack->pop<GLenum>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramResourceLocationIndexEXT(%" PRIu32 ", %u, %p)", program,
+        GAPID_INFO("glGetProgramResourceLocationIndexEXT(%" PRIu32 ", %u, %s)", program,
                    programInterface, name);
         if (glGetProgramResourceLocationIndexEXT != nullptr) {
             int32_t return_value =

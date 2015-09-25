@@ -58,15 +58,15 @@ cmd void glBeginQueryEXT(GLenum target, QueryId query) {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
-cmd void glBindFragDataLocationEXT(ProgramId program, GLuint color, const GLchar* name) {
+cmd void glBindFragDataLocationEXT(ProgramId program, GLuint color, string name) {
   requiresExtension(GL_EXT_blend_func_extended)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
-cmd void glBindFragDataLocationIndexedEXT(ProgramId     program,
-                                          GLuint        colorNumber,
-                                          GLuint        index,
-                                          const GLchar* name) {
+cmd void glBindFragDataLocationIndexedEXT(ProgramId program,
+                                          GLuint    colorNumber,
+                                          GLuint    index,
+                                          string    name) {
   requiresExtension(GL_EXT_blend_func_extended)
 }
 
@@ -945,7 +945,7 @@ cmd void glGetFloati_vNV(GLenum target, GLuint index, GLfloat* data) {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
-cmd GLint glGetFragDataIndexEXT(ProgramId program, const GLchar* name) {
+cmd GLint glGetFragDataIndexEXT(ProgramId program, string name) {
   requiresExtension(GL_EXT_blend_func_extended)
   return ?
 }
@@ -1207,9 +1207,9 @@ cmd void glGetProgramPipelineivEXT(PipelineId pipeline, GLenum pname, GLint* par
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_blend_func_extended.txt","GL_EXT_blend_func_extended")
-cmd GLint glGetProgramResourceLocationIndexEXT(ProgramId     program,
-                                               GLenum        programInterface,
-                                               const GLchar* name) {
+cmd GLint glGetProgramResourceLocationIndexEXT(ProgramId program,
+                                               GLenum    programInterface,
+                                               string    name) {
   requiresExtension(GL_EXT_blend_func_extended)
   return ?
 }
