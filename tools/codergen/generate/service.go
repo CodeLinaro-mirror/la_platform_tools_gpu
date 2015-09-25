@@ -49,7 +49,7 @@ type Call struct {
 
 // Params returns the schema field list that represent the method parameters.
 func (c Call) Params() schema.FieldList {
-	return c.Struct.Class.Fields
+	return c.Struct.Entity.Fields
 }
 
 // Result wraps the return values of a serice method.
@@ -59,19 +59,19 @@ type Result struct {
 
 // Type returns the schema type of the return value if present, nil if not.
 func (r Result) Type() schema.Type {
-	if len(r.Struct.Class.Fields) < 1 {
+	if len(r.Struct.Entity.Fields) < 1 {
 		return nil
 	}
-	return r.Struct.Class.Fields[0].Type
+	return r.Struct.Entity.Fields[0].Type
 }
 
 // Params returns the schema field list that represent the method parameters.
 func (r Result) List() schema.FieldList {
-	return r.Struct.Class.Fields
+	return r.Struct.Entity.Fields
 }
 
 func serviceStruct(m *Module, name string, tuple *types.Tuple, count int, b *types.Interface) *Struct {
-	class := schema.Class{Name: name, Package: m.Source.Types.Name()}
+	class := schema.Entity{Name: name, Package: m.Source.Types.Name()}
 	for i := 0; i < count; i++ {
 		entry := tuple.At(i)
 		class.Fields = append(class.Fields, schema.Field{
@@ -79,7 +79,7 @@ func serviceStruct(m *Module, name string, tuple *types.Tuple, count int, b *typ
 			Type:     fromType(m.Source.Types, entry.Type(), "", &m.Imports, b),
 		})
 	}
-	s := &Struct{Class: class}
+	s := &Struct{Entity: class}
 	// The generated structs will not be parsed by codergen, so they must be self registered.
 	m.Structs = append(m.Structs, s)
 	return s
@@ -117,9 +117,9 @@ func (m *Module) addService(n *types.TypeName, b *types.Interface) error {
 		method := &Method{Name: decl.Name()}
 		method.Call.Struct = serviceStruct(m, "call"+decl.Name(), sig.Params(), paramCount-1, b)
 		method.Result.Struct = serviceStruct(m, "result"+decl.Name(), sig.Results(), resultCount-1, b)
-		if resultCount > 1 && method.Result.Struct.Class.Fields[0].Declared == "" {
+		if resultCount > 1 && method.Result.Struct.Entity.Fields[0].Declared == "" {
 			// for methods with an unnamed first return value, default the name to "value" to match legacy behaviour.
-			method.Result.Struct.Class.Fields[0].Declared = "value"
+			method.Result.Struct.Entity.Fields[0].Declared = "value"
 		}
 		method.Call.UpdateID()
 		method.Result.UpdateID()

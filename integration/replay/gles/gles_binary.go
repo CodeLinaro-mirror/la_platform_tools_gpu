@@ -50,9 +50,9 @@ func (*binaryClassdirectCall) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodedirectCall(d, obj.(*directCall))
 }
-func (*binaryClassdirectCall) Schema() *schema.Class { return schemadirectCall }
+func (*binaryClassdirectCall) Schema() *schema.Entity { return schemadirectCall }
 
-var schemadirectCall = &schema.Class{
+var schemadirectCall = &schema.Entity{
 	TypeID:  binaryIDdirectCall,
 	Package: "gles",
 	Name:    "directCall",

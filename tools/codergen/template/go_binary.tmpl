@@ -65,11 +65,11 @@
   {{$wrap := gt (len .Name) (add $base 0)}}
   {{if File.Directive "Schema" true}}
     {{$wrap := gt (len .Name) (add $base 4)}}
-    func (*binaryClass{{.Name}}) Schema() *schema.Class{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    func (*binaryClass{{.Name}}) Schema() *schema.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
       return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
     «}¶
     ¶
-    var schema{{.Name}} = &schema.Class{»¶
+    var schema{{.Name}} = &schema.Entity{»¶
       TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
       Name:║"{{.Name}}",¶

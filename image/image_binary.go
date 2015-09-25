@@ -85,9 +85,9 @@ func (*binaryClassImage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImage(d, obj.(*Image))
 }
-func (*binaryClassImage) Schema() *schema.Class { return schemaImage }
+func (*binaryClassImage) Schema() *schema.Entity { return schemaImage }
 
-var schemaImage = &schema.Class{
+var schemaImage = &schema.Entity{
 	TypeID:  binaryIDImage,
 	Package: "image",
 	Name:    "Image",
@@ -141,9 +141,9 @@ func (*binaryClassInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeInfo(d, obj.(*Info))
 }
-func (*binaryClassInfo) Schema() *schema.Class { return schemaInfo }
+func (*binaryClassInfo) Schema() *schema.Entity { return schemaInfo }
 
-var schemaInfo = &schema.Class{
+var schemaInfo = &schema.Entity{
 	TypeID:  binaryIDInfo,
 	Package: "image",
 	Name:    "Info",
@@ -197,9 +197,9 @@ func (*binaryClassLazyConverter) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassLazyConverter) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeLazyConverter(d, obj.(*LazyConverter))
 }
-func (*binaryClassLazyConverter) Schema() *schema.Class { return schemaLazyConverter }
+func (*binaryClassLazyConverter) Schema() *schema.Entity { return schemaLazyConverter }
 
-var schemaLazyConverter = &schema.Class{
+var schemaLazyConverter = &schema.Entity{
 	TypeID:  binaryIDLazyConverter,
 	Package: "image",
 	Name:    "LazyConverter",
@@ -239,11 +239,11 @@ func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Decode(d binary.Decoder) binar
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d, obj.(*fmtATC_RGBA_EXPLICIT_ALPHA_AMD))
 }
-func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *schema.Class {
+func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *schema.Entity {
 	return schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD
 }
 
-var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &schema.Class{
+var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &schema.Entity{
 	TypeID:  binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
@@ -272,9 +272,9 @@ func (*binaryClassfmtATC_RGB_AMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtATC_RGB_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGB_AMD(d, obj.(*fmtATC_RGB_AMD))
 }
-func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Class { return schemafmtATC_RGB_AMD }
+func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Entity { return schemafmtATC_RGB_AMD }
 
-var schemafmtATC_RGB_AMD = &schema.Class{
+var schemafmtATC_RGB_AMD = &schema.Entity{
 	TypeID:  binaryIDfmtATC_RGB_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGB_AMD",
@@ -303,9 +303,9 @@ func (*binaryClassfmtAlpha) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtAlpha(d, obj.(*fmtAlpha))
 }
-func (*binaryClassfmtAlpha) Schema() *schema.Class { return schemafmtAlpha }
+func (*binaryClassfmtAlpha) Schema() *schema.Entity { return schemafmtAlpha }
 
-var schemafmtAlpha = &schema.Class{
+var schemafmtAlpha = &schema.Entity{
 	TypeID:  binaryIDfmtAlpha,
 	Package: "image",
 	Name:    "fmtAlpha",
@@ -334,9 +334,9 @@ func (*binaryClassfmtETC1_RGB8_OES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtETC1_RGB8_OES(d, obj.(*fmtETC1_RGB8_OES))
 }
-func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Class { return schemafmtETC1_RGB8_OES }
+func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Entity { return schemafmtETC1_RGB8_OES }
 
-var schemafmtETC1_RGB8_OES = &schema.Class{
+var schemafmtETC1_RGB8_OES = &schema.Entity{
 	TypeID:  binaryIDfmtETC1_RGB8_OES,
 	Package: "image",
 	Name:    "fmtETC1_RGB8_OES",
@@ -365,9 +365,9 @@ func (*binaryClassfmtFloat32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtFloat32(d, obj.(*fmtFloat32))
 }
-func (*binaryClassfmtFloat32) Schema() *schema.Class { return schemafmtFloat32 }
+func (*binaryClassfmtFloat32) Schema() *schema.Entity { return schemafmtFloat32 }
 
-var schemafmtFloat32 = &schema.Class{
+var schemafmtFloat32 = &schema.Entity{
 	TypeID:  binaryIDfmtFloat32,
 	Package: "image",
 	Name:    "fmtFloat32",
@@ -396,9 +396,9 @@ func (*binaryClassfmtLuminance) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtLuminance) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminance(d, obj.(*fmtLuminance))
 }
-func (*binaryClassfmtLuminance) Schema() *schema.Class { return schemafmtLuminance }
+func (*binaryClassfmtLuminance) Schema() *schema.Entity { return schemafmtLuminance }
 
-var schemafmtLuminance = &schema.Class{
+var schemafmtLuminance = &schema.Entity{
 	TypeID:  binaryIDfmtLuminance,
 	Package: "image",
 	Name:    "fmtLuminance",
@@ -427,9 +427,9 @@ func (*binaryClassfmtLuminanceAlpha) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtLuminanceAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminanceAlpha(d, obj.(*fmtLuminanceAlpha))
 }
-func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Class { return schemafmtLuminanceAlpha }
+func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Entity { return schemafmtLuminanceAlpha }
 
-var schemafmtLuminanceAlpha = &schema.Class{
+var schemafmtLuminanceAlpha = &schema.Entity{
 	TypeID:  binaryIDfmtLuminanceAlpha,
 	Package: "image",
 	Name:    "fmtLuminanceAlpha",
@@ -458,9 +458,9 @@ func (*binaryClassfmtPNG) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtPNG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtPNG(d, obj.(*fmtPNG))
 }
-func (*binaryClassfmtPNG) Schema() *schema.Class { return schemafmtPNG }
+func (*binaryClassfmtPNG) Schema() *schema.Entity { return schemafmtPNG }
 
-var schemafmtPNG = &schema.Class{
+var schemafmtPNG = &schema.Entity{
 	TypeID:  binaryIDfmtPNG,
 	Package: "image",
 	Name:    "fmtPNG",
@@ -489,9 +489,9 @@ func (*binaryClassfmtRGB) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtRGB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGB(d, obj.(*fmtRGB))
 }
-func (*binaryClassfmtRGB) Schema() *schema.Class { return schemafmtRGB }
+func (*binaryClassfmtRGB) Schema() *schema.Entity { return schemafmtRGB }
 
-var schemafmtRGB = &schema.Class{
+var schemafmtRGB = &schema.Entity{
 	TypeID:  binaryIDfmtRGB,
 	Package: "image",
 	Name:    "fmtRGB",
@@ -520,9 +520,9 @@ func (*binaryClassfmtRGBA) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtRGBA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGBA(d, obj.(*fmtRGBA))
 }
-func (*binaryClassfmtRGBA) Schema() *schema.Class { return schemafmtRGBA }
+func (*binaryClassfmtRGBA) Schema() *schema.Entity { return schemafmtRGBA }
 
-var schemafmtRGBA = &schema.Class{
+var schemafmtRGBA = &schema.Entity{
 	TypeID:  binaryIDfmtRGBA,
 	Package: "image",
 	Name:    "fmtRGBA",

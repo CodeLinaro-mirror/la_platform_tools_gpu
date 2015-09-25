@@ -258,9 +258,9 @@ func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSliceInfo(d, obj.(*SliceInfo))
 }
-func (*binaryClassSliceInfo) Schema() *schema.Class { return schemaSliceInfo }
+func (*binaryClassSliceInfo) Schema() *schema.Entity { return schemaSliceInfo }
 
-var schemaSliceInfo = &schema.Class{
+var schemaSliceInfo = &schema.Entity{
 	TypeID:  binaryIDSliceInfo,
 	Package: "test",
 	Name:    "SliceInfo",
@@ -295,9 +295,9 @@ func (*binaryClassBoolˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBoolˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBoolˢ(d, obj.(*Boolˢ))
 }
-func (*binaryClassBoolˢ) Schema() *schema.Class { return schemaBoolˢ }
+func (*binaryClassBoolˢ) Schema() *schema.Entity { return schemaBoolˢ }
 
-var schemaBoolˢ = &schema.Class{
+var schemaBoolˢ = &schema.Entity{
 	TypeID:  binaryIDBoolˢ,
 	Package: "test",
 	Name:    "Boolˢ",
@@ -330,9 +330,9 @@ func (*binaryClassBoolᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBoolᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBoolᵖ(d, obj.(*Boolᵖ))
 }
-func (*binaryClassBoolᵖ) Schema() *schema.Class { return schemaBoolᵖ }
+func (*binaryClassBoolᵖ) Schema() *schema.Entity { return schemaBoolᵖ }
 
-var schemaBoolᵖ = &schema.Class{
+var schemaBoolᵖ = &schema.Entity{
 	TypeID:  binaryIDBoolᵖ,
 	Package: "test",
 	Name:    "Boolᵖ",
@@ -365,9 +365,9 @@ func (*binaryClassCharˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharˢ(d, obj.(*Charˢ))
 }
-func (*binaryClassCharˢ) Schema() *schema.Class { return schemaCharˢ }
+func (*binaryClassCharˢ) Schema() *schema.Entity { return schemaCharˢ }
 
-var schemaCharˢ = &schema.Class{
+var schemaCharˢ = &schema.Entity{
 	TypeID:  binaryIDCharˢ,
 	Package: "test",
 	Name:    "Charˢ",
@@ -400,9 +400,9 @@ func (*binaryClassCharᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖ(d, obj.(*Charᵖ))
 }
-func (*binaryClassCharᵖ) Schema() *schema.Class { return schemaCharᵖ }
+func (*binaryClassCharᵖ) Schema() *schema.Entity { return schemaCharᵖ }
 
-var schemaCharᵖ = &schema.Class{
+var schemaCharᵖ = &schema.Entity{
 	TypeID:  binaryIDCharᵖ,
 	Package: "test",
 	Name:    "Charᵖ",
@@ -435,9 +435,9 @@ func (*binaryClassCharᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖˢ(d, obj.(*Charᵖˢ))
 }
-func (*binaryClassCharᵖˢ) Schema() *schema.Class { return schemaCharᵖˢ }
+func (*binaryClassCharᵖˢ) Schema() *schema.Entity { return schemaCharᵖˢ }
 
-var schemaCharᵖˢ = &schema.Class{
+var schemaCharᵖˢ = &schema.Entity{
 	TypeID:  binaryIDCharᵖˢ,
 	Package: "test",
 	Name:    "Charᵖˢ",
@@ -470,9 +470,9 @@ func (*binaryClassCharᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖᵖ(d, obj.(*Charᵖᵖ))
 }
-func (*binaryClassCharᵖᵖ) Schema() *schema.Class { return schemaCharᵖᵖ }
+func (*binaryClassCharᵖᵖ) Schema() *schema.Entity { return schemaCharᵖᵖ }
 
-var schemaCharᵖᵖ = &schema.Class{
+var schemaCharᵖᵖ = &schema.Entity{
 	TypeID:  binaryIDCharᵖᵖ,
 	Package: "test",
 	Name:    "Charᵖᵖ",
@@ -507,9 +507,9 @@ func (*binaryClassCmdBool) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdBool(d, obj.(*CmdBool))
 }
-func (*binaryClassCmdBool) Schema() *schema.Class { return schemaCmdBool }
+func (*binaryClassCmdBool) Schema() *schema.Entity { return schemaCmdBool }
 
-var schemaCmdBool = &schema.Class{
+var schemaCmdBool = &schema.Entity{
 	TypeID:  binaryIDCmdBool,
 	Package: "test",
 	Name:    "CmdBool",
@@ -545,9 +545,9 @@ func (*binaryClassCmdCharptrToString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdCharptrToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCharptrToString(d, obj.(*CmdCharptrToString))
 }
-func (*binaryClassCmdCharptrToString) Schema() *schema.Class { return schemaCmdCharptrToString }
+func (*binaryClassCmdCharptrToString) Schema() *schema.Entity { return schemaCmdCharptrToString }
 
-var schemaCmdCharptrToString = &schema.Class{
+var schemaCmdCharptrToString = &schema.Entity{
 	TypeID:  binaryIDCmdCharptrToString,
 	Package: "test",
 	Name:    "CmdCharptrToString",
@@ -585,9 +585,9 @@ func (*binaryClassCmdCharsliceToString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdCharsliceToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCharsliceToString(d, obj.(*CmdCharsliceToString))
 }
-func (*binaryClassCmdCharsliceToString) Schema() *schema.Class { return schemaCmdCharsliceToString }
+func (*binaryClassCmdCharsliceToString) Schema() *schema.Entity { return schemaCmdCharsliceToString }
 
-var schemaCmdCharsliceToString = &schema.Class{
+var schemaCmdCharsliceToString = &schema.Entity{
 	TypeID:  binaryIDCmdCharsliceToString,
 	Package: "test",
 	Name:    "CmdCharsliceToString",
@@ -622,9 +622,9 @@ func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
 }
-func (*binaryClassU8ᵖ) Schema() *schema.Class { return schemaU8ᵖ }
+func (*binaryClassU8ᵖ) Schema() *schema.Entity { return schemaU8ᵖ }
 
-var schemaU8ᵖ = &schema.Class{
+var schemaU8ᵖ = &schema.Entity{
 	TypeID:  binaryIDU8ᵖ,
 	Package: "test",
 	Name:    "U8ᵖ",
@@ -661,9 +661,9 @@ func (*binaryClassCmdClone) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdClone) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdClone(d, obj.(*CmdClone))
 }
-func (*binaryClassCmdClone) Schema() *schema.Class { return schemaCmdClone }
+func (*binaryClassCmdClone) Schema() *schema.Entity { return schemaCmdClone }
 
-var schemaCmdClone = &schema.Class{
+var schemaCmdClone = &schema.Entity{
 	TypeID:  binaryIDCmdClone,
 	Package: "test",
 	Name:    "CmdClone",
@@ -702,9 +702,9 @@ func (*binaryClassCmdCopy) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdCopy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCopy(d, obj.(*CmdCopy))
 }
-func (*binaryClassCmdCopy) Schema() *schema.Class { return schemaCmdCopy }
+func (*binaryClassCmdCopy) Schema() *schema.Entity { return schemaCmdCopy }
 
-var schemaCmdCopy = &schema.Class{
+var schemaCmdCopy = &schema.Entity{
 	TypeID:  binaryIDCmdCopy,
 	Package: "test",
 	Name:    "CmdCopy",
@@ -741,9 +741,9 @@ func (*binaryClassCmdF32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdF32(d, obj.(*CmdF32))
 }
-func (*binaryClassCmdF32) Schema() *schema.Class { return schemaCmdF32 }
+func (*binaryClassCmdF32) Schema() *schema.Entity { return schemaCmdF32 }
 
-var schemaCmdF32 = &schema.Class{
+var schemaCmdF32 = &schema.Entity{
 	TypeID:  binaryIDCmdF32,
 	Package: "test",
 	Name:    "CmdF32",
@@ -779,9 +779,9 @@ func (*binaryClassCmdF64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdF64(d, obj.(*CmdF64))
 }
-func (*binaryClassCmdF64) Schema() *schema.Class { return schemaCmdF64 }
+func (*binaryClassCmdF64) Schema() *schema.Entity { return schemaCmdF64 }
 
-var schemaCmdF64 = &schema.Class{
+var schemaCmdF64 = &schema.Entity{
 	TypeID:  binaryIDCmdF64,
 	Package: "test",
 	Name:    "CmdF64",
@@ -817,9 +817,9 @@ func (*binaryClassCmdMake) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdMake) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdMake(d, obj.(*CmdMake))
 }
-func (*binaryClassCmdMake) Schema() *schema.Class { return schemaCmdMake }
+func (*binaryClassCmdMake) Schema() *schema.Entity { return schemaCmdMake }
 
-var schemaCmdMake = &schema.Class{
+var schemaCmdMake = &schema.Entity{
 	TypeID:  binaryIDCmdMake,
 	Package: "test",
 	Name:    "CmdMake",
@@ -853,9 +853,9 @@ func (*binaryClassVoidᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖ(d, obj.(*Voidᵖ))
 }
-func (*binaryClassVoidᵖ) Schema() *schema.Class { return schemaVoidᵖ }
+func (*binaryClassVoidᵖ) Schema() *schema.Entity { return schemaVoidᵖ }
 
-var schemaVoidᵖ = &schema.Class{
+var schemaVoidᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᵖ,
 	Package: "test",
 	Name:    "Voidᵖ",
@@ -890,9 +890,9 @@ func (*binaryClassCmdPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdPointer(d, obj.(*CmdPointer))
 }
-func (*binaryClassCmdPointer) Schema() *schema.Class { return schemaCmdPointer }
+func (*binaryClassCmdPointer) Schema() *schema.Entity { return schemaCmdPointer }
 
-var schemaCmdPointer = &schema.Class{
+var schemaCmdPointer = &schema.Entity{
 	TypeID:  binaryIDCmdPointer,
 	Package: "test",
 	Name:    "CmdPointer",
@@ -928,9 +928,9 @@ func (*binaryClassCmdRemapped) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdRemapped(d, obj.(*CmdRemapped))
 }
-func (*binaryClassCmdRemapped) Schema() *schema.Class { return schemaCmdRemapped }
+func (*binaryClassCmdRemapped) Schema() *schema.Entity { return schemaCmdRemapped }
 
-var schemaCmdRemapped = &schema.Class{
+var schemaCmdRemapped = &schema.Entity{
 	TypeID:  binaryIDCmdRemapped,
 	Package: "test",
 	Name:    "CmdRemapped",
@@ -966,9 +966,9 @@ func (*binaryClassCmdS16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS16(d, obj.(*CmdS16))
 }
-func (*binaryClassCmdS16) Schema() *schema.Class { return schemaCmdS16 }
+func (*binaryClassCmdS16) Schema() *schema.Entity { return schemaCmdS16 }
 
-var schemaCmdS16 = &schema.Class{
+var schemaCmdS16 = &schema.Entity{
 	TypeID:  binaryIDCmdS16,
 	Package: "test",
 	Name:    "CmdS16",
@@ -1004,9 +1004,9 @@ func (*binaryClassCmdS32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS32(d, obj.(*CmdS32))
 }
-func (*binaryClassCmdS32) Schema() *schema.Class { return schemaCmdS32 }
+func (*binaryClassCmdS32) Schema() *schema.Entity { return schemaCmdS32 }
 
-var schemaCmdS32 = &schema.Class{
+var schemaCmdS32 = &schema.Entity{
 	TypeID:  binaryIDCmdS32,
 	Package: "test",
 	Name:    "CmdS32",
@@ -1042,9 +1042,9 @@ func (*binaryClassCmdS64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS64(d, obj.(*CmdS64))
 }
-func (*binaryClassCmdS64) Schema() *schema.Class { return schemaCmdS64 }
+func (*binaryClassCmdS64) Schema() *schema.Entity { return schemaCmdS64 }
 
-var schemaCmdS64 = &schema.Class{
+var schemaCmdS64 = &schema.Entity{
 	TypeID:  binaryIDCmdS64,
 	Package: "test",
 	Name:    "CmdS64",
@@ -1080,9 +1080,9 @@ func (*binaryClassCmdS8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS8(d, obj.(*CmdS8))
 }
-func (*binaryClassCmdS8) Schema() *schema.Class { return schemaCmdS8 }
+func (*binaryClassCmdS8) Schema() *schema.Entity { return schemaCmdS8 }
 
-var schemaCmdS8 = &schema.Class{
+var schemaCmdS8 = &schema.Entity{
 	TypeID:  binaryIDCmdS8,
 	Package: "test",
 	Name:    "CmdS8",
@@ -1116,9 +1116,9 @@ func (*binaryClassU16ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ᵖ(d, obj.(*U16ᵖ))
 }
-func (*binaryClassU16ᵖ) Schema() *schema.Class { return schemaU16ᵖ }
+func (*binaryClassU16ᵖ) Schema() *schema.Entity { return schemaU16ᵖ }
 
-var schemaU16ᵖ = &schema.Class{
+var schemaU16ᵖ = &schema.Entity{
 	TypeID:  binaryIDU16ᵖ,
 	Package: "test",
 	Name:    "U16ᵖ",
@@ -1155,9 +1155,9 @@ func (*binaryClassCmdSliceCasts) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdSliceCasts) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdSliceCasts(d, obj.(*CmdSliceCasts))
 }
-func (*binaryClassCmdSliceCasts) Schema() *schema.Class { return schemaCmdSliceCasts }
+func (*binaryClassCmdSliceCasts) Schema() *schema.Entity { return schemaCmdSliceCasts }
 
-var schemaCmdSliceCasts = &schema.Class{
+var schemaCmdSliceCasts = &schema.Entity{
 	TypeID:  binaryIDCmdSliceCasts,
 	Package: "test",
 	Name:    "CmdSliceCasts",
@@ -1194,9 +1194,9 @@ func (*binaryClassCmdString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdString(d, obj.(*CmdString))
 }
-func (*binaryClassCmdString) Schema() *schema.Class { return schemaCmdString }
+func (*binaryClassCmdString) Schema() *schema.Entity { return schemaCmdString }
 
-var schemaCmdString = &schema.Class{
+var schemaCmdString = &schema.Entity{
 	TypeID:  binaryIDCmdString,
 	Package: "test",
 	Name:    "CmdString",
@@ -1232,9 +1232,9 @@ func (*binaryClassCmdU16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU16(d, obj.(*CmdU16))
 }
-func (*binaryClassCmdU16) Schema() *schema.Class { return schemaCmdU16 }
+func (*binaryClassCmdU16) Schema() *schema.Entity { return schemaCmdU16 }
 
-var schemaCmdU16 = &schema.Class{
+var schemaCmdU16 = &schema.Entity{
 	TypeID:  binaryIDCmdU16,
 	Package: "test",
 	Name:    "CmdU16",
@@ -1270,9 +1270,9 @@ func (*binaryClassCmdU32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU32(d, obj.(*CmdU32))
 }
-func (*binaryClassCmdU32) Schema() *schema.Class { return schemaCmdU32 }
+func (*binaryClassCmdU32) Schema() *schema.Entity { return schemaCmdU32 }
 
-var schemaCmdU32 = &schema.Class{
+var schemaCmdU32 = &schema.Entity{
 	TypeID:  binaryIDCmdU32,
 	Package: "test",
 	Name:    "CmdU32",
@@ -1308,9 +1308,9 @@ func (*binaryClassCmdU64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU64(d, obj.(*CmdU64))
 }
-func (*binaryClassCmdU64) Schema() *schema.Class { return schemaCmdU64 }
+func (*binaryClassCmdU64) Schema() *schema.Entity { return schemaCmdU64 }
 
-var schemaCmdU64 = &schema.Class{
+var schemaCmdU64 = &schema.Entity{
 	TypeID:  binaryIDCmdU64,
 	Package: "test",
 	Name:    "CmdU64",
@@ -1346,9 +1346,9 @@ func (*binaryClassCmdU8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU8(d, obj.(*CmdU8))
 }
-func (*binaryClassCmdU8) Schema() *schema.Class { return schemaCmdU8 }
+func (*binaryClassCmdU8) Schema() *schema.Entity { return schemaCmdU8 }
 
-var schemaCmdU8 = &schema.Class{
+var schemaCmdU8 = &schema.Entity{
 	TypeID:  binaryIDCmdU8,
 	Package: "test",
 	Name:    "CmdU8",
@@ -1384,9 +1384,9 @@ func (*binaryClassCmdUnknownRet) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdUnknownRet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownRet(d, obj.(*CmdUnknownRet))
 }
-func (*binaryClassCmdUnknownRet) Schema() *schema.Class { return schemaCmdUnknownRet }
+func (*binaryClassCmdUnknownRet) Schema() *schema.Entity { return schemaCmdUnknownRet }
 
-var schemaCmdUnknownRet = &schema.Class{
+var schemaCmdUnknownRet = &schema.Entity{
 	TypeID:  binaryIDCmdUnknownRet,
 	Package: "test",
 	Name:    "CmdUnknownRet",
@@ -1420,9 +1420,9 @@ func (*binaryClassIntᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntᵖ(d, obj.(*Intᵖ))
 }
-func (*binaryClassIntᵖ) Schema() *schema.Class { return schemaIntᵖ }
+func (*binaryClassIntᵖ) Schema() *schema.Entity { return schemaIntᵖ }
 
-var schemaIntᵖ = &schema.Class{
+var schemaIntᵖ = &schema.Entity{
 	TypeID:  binaryIDIntᵖ,
 	Package: "test",
 	Name:    "Intᵖ",
@@ -1457,9 +1457,9 @@ func (*binaryClassCmdUnknownWritePtr) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdUnknownWritePtr) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownWritePtr(d, obj.(*CmdUnknownWritePtr))
 }
-func (*binaryClassCmdUnknownWritePtr) Schema() *schema.Class { return schemaCmdUnknownWritePtr }
+func (*binaryClassCmdUnknownWritePtr) Schema() *schema.Entity { return schemaCmdUnknownWritePtr }
 
-var schemaCmdUnknownWritePtr = &schema.Class{
+var schemaCmdUnknownWritePtr = &schema.Entity{
 	TypeID:  binaryIDCmdUnknownWritePtr,
 	Package: "test",
 	Name:    "CmdUnknownWritePtr",
@@ -1495,9 +1495,9 @@ func (*binaryClassCmdUnknownWriteSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdUnknownWriteSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownWriteSlice(d, obj.(*CmdUnknownWriteSlice))
 }
-func (*binaryClassCmdUnknownWriteSlice) Schema() *schema.Class { return schemaCmdUnknownWriteSlice }
+func (*binaryClassCmdUnknownWriteSlice) Schema() *schema.Entity { return schemaCmdUnknownWriteSlice }
 
-var schemaCmdUnknownWriteSlice = &schema.Class{
+var schemaCmdUnknownWriteSlice = &schema.Entity{
 	TypeID:  binaryIDCmdUnknownWriteSlice,
 	Package: "test",
 	Name:    "CmdUnknownWriteSlice",
@@ -1531,9 +1531,9 @@ func (*binaryClassCmdVoid) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoid) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid(d, obj.(*CmdVoid))
 }
-func (*binaryClassCmdVoid) Schema() *schema.Class { return schemaCmdVoid }
+func (*binaryClassCmdVoid) Schema() *schema.Entity { return schemaCmdVoid }
 
-var schemaCmdVoid = &schema.Class{
+var schemaCmdVoid = &schema.Entity{
 	TypeID:  binaryIDCmdVoid,
 	Package: "test",
 	Name:    "CmdVoid",
@@ -1566,9 +1566,9 @@ func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
 }
-func (*binaryClassU32ᵖ) Schema() *schema.Class { return schemaU32ᵖ }
+func (*binaryClassU32ᵖ) Schema() *schema.Entity { return schemaU32ᵖ }
 
-var schemaU32ᵖ = &schema.Class{
+var schemaU32ᵖ = &schema.Entity{
 	TypeID:  binaryIDU32ᵖ,
 	Package: "test",
 	Name:    "U32ᵖ",
@@ -1607,9 +1607,9 @@ func (*binaryClassCmdVoid3InArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoid3InArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3InArrays(d, obj.(*CmdVoid3InArrays))
 }
-func (*binaryClassCmdVoid3InArrays) Schema() *schema.Class { return schemaCmdVoid3InArrays }
+func (*binaryClassCmdVoid3InArrays) Schema() *schema.Entity { return schemaCmdVoid3InArrays }
 
-var schemaCmdVoid3InArrays = &schema.Class{
+var schemaCmdVoid3InArrays = &schema.Entity{
 	TypeID:  binaryIDCmdVoid3InArrays,
 	Package: "test",
 	Name:    "CmdVoid3InArrays",
@@ -1651,9 +1651,9 @@ func (*binaryClassCmdVoid3Remapped) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoid3Remapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3Remapped(d, obj.(*CmdVoid3Remapped))
 }
-func (*binaryClassCmdVoid3Remapped) Schema() *schema.Class { return schemaCmdVoid3Remapped }
+func (*binaryClassCmdVoid3Remapped) Schema() *schema.Entity { return schemaCmdVoid3Remapped }
 
-var schemaCmdVoid3Remapped = &schema.Class{
+var schemaCmdVoid3Remapped = &schema.Entity{
 	TypeID:  binaryIDCmdVoid3Remapped,
 	Package: "test",
 	Name:    "CmdVoid3Remapped",
@@ -1695,9 +1695,9 @@ func (*binaryClassCmdVoid3Strings) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoid3Strings) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3Strings(d, obj.(*CmdVoid3Strings))
 }
-func (*binaryClassCmdVoid3Strings) Schema() *schema.Class { return schemaCmdVoid3Strings }
+func (*binaryClassCmdVoid3Strings) Schema() *schema.Entity { return schemaCmdVoid3Strings }
 
-var schemaCmdVoid3Strings = &schema.Class{
+var schemaCmdVoid3Strings = &schema.Entity{
 	TypeID:  binaryIDCmdVoid3Strings,
 	Package: "test",
 	Name:    "CmdVoid3Strings",
@@ -1735,9 +1735,9 @@ func (*binaryClassCmdVoidBool) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidBool(d, obj.(*CmdVoidBool))
 }
-func (*binaryClassCmdVoidBool) Schema() *schema.Class { return schemaCmdVoidBool }
+func (*binaryClassCmdVoidBool) Schema() *schema.Entity { return schemaCmdVoidBool }
 
-var schemaCmdVoidBool = &schema.Class{
+var schemaCmdVoidBool = &schema.Entity{
 	TypeID:  binaryIDCmdVoidBool,
 	Package: "test",
 	Name:    "CmdVoidBool",
@@ -1773,9 +1773,9 @@ func (*binaryClassCmdVoidF32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidF32(d, obj.(*CmdVoidF32))
 }
-func (*binaryClassCmdVoidF32) Schema() *schema.Class { return schemaCmdVoidF32 }
+func (*binaryClassCmdVoidF32) Schema() *schema.Entity { return schemaCmdVoidF32 }
 
-var schemaCmdVoidF32 = &schema.Class{
+var schemaCmdVoidF32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidF32,
 	Package: "test",
 	Name:    "CmdVoidF32",
@@ -1811,9 +1811,9 @@ func (*binaryClassCmdVoidF64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidF64(d, obj.(*CmdVoidF64))
 }
-func (*binaryClassCmdVoidF64) Schema() *schema.Class { return schemaCmdVoidF64 }
+func (*binaryClassCmdVoidF64) Schema() *schema.Entity { return schemaCmdVoidF64 }
 
-var schemaCmdVoidF64 = &schema.Class{
+var schemaCmdVoidF64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidF64,
 	Package: "test",
 	Name:    "CmdVoidF64",
@@ -1851,11 +1851,11 @@ func (*binaryClassCmdVoidInArrayOfPointers) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassCmdVoidInArrayOfPointers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidInArrayOfPointers(d, obj.(*CmdVoidInArrayOfPointers))
 }
-func (*binaryClassCmdVoidInArrayOfPointers) Schema() *schema.Class {
+func (*binaryClassCmdVoidInArrayOfPointers) Schema() *schema.Entity {
 	return schemaCmdVoidInArrayOfPointers
 }
 
-var schemaCmdVoidInArrayOfPointers = &schema.Class{
+var schemaCmdVoidInArrayOfPointers = &schema.Entity{
 	TypeID:  binaryIDCmdVoidInArrayOfPointers,
 	Package: "test",
 	Name:    "CmdVoidInArrayOfPointers",
@@ -1890,9 +1890,9 @@ func (*binaryClassRemappedᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRemappedᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRemappedᵖ(d, obj.(*Remappedᵖ))
 }
-func (*binaryClassRemappedᵖ) Schema() *schema.Class { return schemaRemappedᵖ }
+func (*binaryClassRemappedᵖ) Schema() *schema.Entity { return schemaRemappedᵖ }
 
-var schemaRemappedᵖ = &schema.Class{
+var schemaRemappedᵖ = &schema.Entity{
 	TypeID:  binaryIDRemappedᵖ,
 	Package: "test",
 	Name:    "Remappedᵖ",
@@ -1927,11 +1927,11 @@ func (*binaryClassCmdVoidInArrayOfRemapped) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassCmdVoidInArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidInArrayOfRemapped(d, obj.(*CmdVoidInArrayOfRemapped))
 }
-func (*binaryClassCmdVoidInArrayOfRemapped) Schema() *schema.Class {
+func (*binaryClassCmdVoidInArrayOfRemapped) Schema() *schema.Entity {
 	return schemaCmdVoidInArrayOfRemapped
 }
 
-var schemaCmdVoidInArrayOfRemapped = &schema.Class{
+var schemaCmdVoidInArrayOfRemapped = &schema.Entity{
 	TypeID:  binaryIDCmdVoidInArrayOfRemapped,
 	Package: "test",
 	Name:    "CmdVoidInArrayOfRemapped",
@@ -1967,11 +1967,11 @@ func (*binaryClassCmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassCmdVoidOutArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidOutArrayOfRemapped(d, obj.(*CmdVoidOutArrayOfRemapped))
 }
-func (*binaryClassCmdVoidOutArrayOfRemapped) Schema() *schema.Class {
+func (*binaryClassCmdVoidOutArrayOfRemapped) Schema() *schema.Entity {
 	return schemaCmdVoidOutArrayOfRemapped
 }
 
-var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
+var schemaCmdVoidOutArrayOfRemapped = &schema.Entity{
 	TypeID:  binaryIDCmdVoidOutArrayOfRemapped,
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfRemapped",
@@ -2011,11 +2011,11 @@ func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Decode(d binary.Decoder) bin
 func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidOutArrayOfUnknownRemapped(d, obj.(*CmdVoidOutArrayOfUnknownRemapped))
 }
-func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Schema() *schema.Class {
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Schema() *schema.Entity {
 	return schemaCmdVoidOutArrayOfUnknownRemapped
 }
 
-var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Class{
+var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Entity{
 	TypeID:  binaryIDCmdVoidOutArrayOfUnknownRemapped,
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfUnknownRemapped",
@@ -2051,9 +2051,9 @@ func (*binaryClassCmdVoidReadBool) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadBool(d, obj.(*CmdVoidReadBool))
 }
-func (*binaryClassCmdVoidReadBool) Schema() *schema.Class { return schemaCmdVoidReadBool }
+func (*binaryClassCmdVoidReadBool) Schema() *schema.Entity { return schemaCmdVoidReadBool }
 
-var schemaCmdVoidReadBool = &schema.Class{
+var schemaCmdVoidReadBool = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadBool,
 	Package: "test",
 	Name:    "CmdVoidReadBool",
@@ -2087,9 +2087,9 @@ func (*binaryClassF32ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF32ᵖ(d, obj.(*F32ᵖ))
 }
-func (*binaryClassF32ᵖ) Schema() *schema.Class { return schemaF32ᵖ }
+func (*binaryClassF32ᵖ) Schema() *schema.Entity { return schemaF32ᵖ }
 
-var schemaF32ᵖ = &schema.Class{
+var schemaF32ᵖ = &schema.Entity{
 	TypeID:  binaryIDF32ᵖ,
 	Package: "test",
 	Name:    "F32ᵖ",
@@ -2124,9 +2124,9 @@ func (*binaryClassCmdVoidReadF32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadF32(d, obj.(*CmdVoidReadF32))
 }
-func (*binaryClassCmdVoidReadF32) Schema() *schema.Class { return schemaCmdVoidReadF32 }
+func (*binaryClassCmdVoidReadF32) Schema() *schema.Entity { return schemaCmdVoidReadF32 }
 
-var schemaCmdVoidReadF32 = &schema.Class{
+var schemaCmdVoidReadF32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadF32,
 	Package: "test",
 	Name:    "CmdVoidReadF32",
@@ -2160,9 +2160,9 @@ func (*binaryClassF64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ᵖ(d, obj.(*F64ᵖ))
 }
-func (*binaryClassF64ᵖ) Schema() *schema.Class { return schemaF64ᵖ }
+func (*binaryClassF64ᵖ) Schema() *schema.Entity { return schemaF64ᵖ }
 
-var schemaF64ᵖ = &schema.Class{
+var schemaF64ᵖ = &schema.Entity{
 	TypeID:  binaryIDF64ᵖ,
 	Package: "test",
 	Name:    "F64ᵖ",
@@ -2197,9 +2197,9 @@ func (*binaryClassCmdVoidReadF64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadF64(d, obj.(*CmdVoidReadF64))
 }
-func (*binaryClassCmdVoidReadF64) Schema() *schema.Class { return schemaCmdVoidReadF64 }
+func (*binaryClassCmdVoidReadF64) Schema() *schema.Entity { return schemaCmdVoidReadF64 }
 
-var schemaCmdVoidReadF64 = &schema.Class{
+var schemaCmdVoidReadF64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadF64,
 	Package: "test",
 	Name:    "CmdVoidReadF64",
@@ -2239,9 +2239,9 @@ func (*binaryClassCmdVoidReadPtrs) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadPtrs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadPtrs(d, obj.(*CmdVoidReadPtrs))
 }
-func (*binaryClassCmdVoidReadPtrs) Schema() *schema.Class { return schemaCmdVoidReadPtrs }
+func (*binaryClassCmdVoidReadPtrs) Schema() *schema.Entity { return schemaCmdVoidReadPtrs }
 
-var schemaCmdVoidReadPtrs = &schema.Class{
+var schemaCmdVoidReadPtrs = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadPtrs,
 	Package: "test",
 	Name:    "CmdVoidReadPtrs",
@@ -2277,9 +2277,9 @@ func (*binaryClassS16ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS16ᵖ(d, obj.(*S16ᵖ))
 }
-func (*binaryClassS16ᵖ) Schema() *schema.Class { return schemaS16ᵖ }
+func (*binaryClassS16ᵖ) Schema() *schema.Entity { return schemaS16ᵖ }
 
-var schemaS16ᵖ = &schema.Class{
+var schemaS16ᵖ = &schema.Entity{
 	TypeID:  binaryIDS16ᵖ,
 	Package: "test",
 	Name:    "S16ᵖ",
@@ -2314,9 +2314,9 @@ func (*binaryClassCmdVoidReadS16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS16(d, obj.(*CmdVoidReadS16))
 }
-func (*binaryClassCmdVoidReadS16) Schema() *schema.Class { return schemaCmdVoidReadS16 }
+func (*binaryClassCmdVoidReadS16) Schema() *schema.Entity { return schemaCmdVoidReadS16 }
 
-var schemaCmdVoidReadS16 = &schema.Class{
+var schemaCmdVoidReadS16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadS16,
 	Package: "test",
 	Name:    "CmdVoidReadS16",
@@ -2350,9 +2350,9 @@ func (*binaryClassS32ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS32ᵖ(d, obj.(*S32ᵖ))
 }
-func (*binaryClassS32ᵖ) Schema() *schema.Class { return schemaS32ᵖ }
+func (*binaryClassS32ᵖ) Schema() *schema.Entity { return schemaS32ᵖ }
 
-var schemaS32ᵖ = &schema.Class{
+var schemaS32ᵖ = &schema.Entity{
 	TypeID:  binaryIDS32ᵖ,
 	Package: "test",
 	Name:    "S32ᵖ",
@@ -2387,9 +2387,9 @@ func (*binaryClassCmdVoidReadS32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS32(d, obj.(*CmdVoidReadS32))
 }
-func (*binaryClassCmdVoidReadS32) Schema() *schema.Class { return schemaCmdVoidReadS32 }
+func (*binaryClassCmdVoidReadS32) Schema() *schema.Entity { return schemaCmdVoidReadS32 }
 
-var schemaCmdVoidReadS32 = &schema.Class{
+var schemaCmdVoidReadS32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadS32,
 	Package: "test",
 	Name:    "CmdVoidReadS32",
@@ -2423,9 +2423,9 @@ func (*binaryClassS64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ᵖ(d, obj.(*S64ᵖ))
 }
-func (*binaryClassS64ᵖ) Schema() *schema.Class { return schemaS64ᵖ }
+func (*binaryClassS64ᵖ) Schema() *schema.Entity { return schemaS64ᵖ }
 
-var schemaS64ᵖ = &schema.Class{
+var schemaS64ᵖ = &schema.Entity{
 	TypeID:  binaryIDS64ᵖ,
 	Package: "test",
 	Name:    "S64ᵖ",
@@ -2460,9 +2460,9 @@ func (*binaryClassCmdVoidReadS64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS64(d, obj.(*CmdVoidReadS64))
 }
-func (*binaryClassCmdVoidReadS64) Schema() *schema.Class { return schemaCmdVoidReadS64 }
+func (*binaryClassCmdVoidReadS64) Schema() *schema.Entity { return schemaCmdVoidReadS64 }
 
-var schemaCmdVoidReadS64 = &schema.Class{
+var schemaCmdVoidReadS64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadS64,
 	Package: "test",
 	Name:    "CmdVoidReadS64",
@@ -2496,9 +2496,9 @@ func (*binaryClassS8ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS8ᵖ(d, obj.(*S8ᵖ))
 }
-func (*binaryClassS8ᵖ) Schema() *schema.Class { return schemaS8ᵖ }
+func (*binaryClassS8ᵖ) Schema() *schema.Entity { return schemaS8ᵖ }
 
-var schemaS8ᵖ = &schema.Class{
+var schemaS8ᵖ = &schema.Entity{
 	TypeID:  binaryIDS8ᵖ,
 	Package: "test",
 	Name:    "S8ᵖ",
@@ -2533,9 +2533,9 @@ func (*binaryClassCmdVoidReadS8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS8(d, obj.(*CmdVoidReadS8))
 }
-func (*binaryClassCmdVoidReadS8) Schema() *schema.Class { return schemaCmdVoidReadS8 }
+func (*binaryClassCmdVoidReadS8) Schema() *schema.Entity { return schemaCmdVoidReadS8 }
 
-var schemaCmdVoidReadS8 = &schema.Class{
+var schemaCmdVoidReadS8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadS8,
 	Package: "test",
 	Name:    "CmdVoidReadS8",
@@ -2571,9 +2571,9 @@ func (*binaryClassCmdVoidReadU16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU16(d, obj.(*CmdVoidReadU16))
 }
-func (*binaryClassCmdVoidReadU16) Schema() *schema.Class { return schemaCmdVoidReadU16 }
+func (*binaryClassCmdVoidReadU16) Schema() *schema.Entity { return schemaCmdVoidReadU16 }
 
-var schemaCmdVoidReadU16 = &schema.Class{
+var schemaCmdVoidReadU16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadU16,
 	Package: "test",
 	Name:    "CmdVoidReadU16",
@@ -2609,9 +2609,9 @@ func (*binaryClassCmdVoidReadU32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU32(d, obj.(*CmdVoidReadU32))
 }
-func (*binaryClassCmdVoidReadU32) Schema() *schema.Class { return schemaCmdVoidReadU32 }
+func (*binaryClassCmdVoidReadU32) Schema() *schema.Entity { return schemaCmdVoidReadU32 }
 
-var schemaCmdVoidReadU32 = &schema.Class{
+var schemaCmdVoidReadU32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadU32,
 	Package: "test",
 	Name:    "CmdVoidReadU32",
@@ -2645,9 +2645,9 @@ func (*binaryClassU64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ᵖ(d, obj.(*U64ᵖ))
 }
-func (*binaryClassU64ᵖ) Schema() *schema.Class { return schemaU64ᵖ }
+func (*binaryClassU64ᵖ) Schema() *schema.Entity { return schemaU64ᵖ }
 
-var schemaU64ᵖ = &schema.Class{
+var schemaU64ᵖ = &schema.Entity{
 	TypeID:  binaryIDU64ᵖ,
 	Package: "test",
 	Name:    "U64ᵖ",
@@ -2682,9 +2682,9 @@ func (*binaryClassCmdVoidReadU64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU64(d, obj.(*CmdVoidReadU64))
 }
-func (*binaryClassCmdVoidReadU64) Schema() *schema.Class { return schemaCmdVoidReadU64 }
+func (*binaryClassCmdVoidReadU64) Schema() *schema.Entity { return schemaCmdVoidReadU64 }
 
-var schemaCmdVoidReadU64 = &schema.Class{
+var schemaCmdVoidReadU64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadU64,
 	Package: "test",
 	Name:    "CmdVoidReadU64",
@@ -2720,9 +2720,9 @@ func (*binaryClassCmdVoidReadU8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidReadU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU8(d, obj.(*CmdVoidReadU8))
 }
-func (*binaryClassCmdVoidReadU8) Schema() *schema.Class { return schemaCmdVoidReadU8 }
+func (*binaryClassCmdVoidReadU8) Schema() *schema.Entity { return schemaCmdVoidReadU8 }
 
-var schemaCmdVoidReadU8 = &schema.Class{
+var schemaCmdVoidReadU8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidReadU8,
 	Package: "test",
 	Name:    "CmdVoidReadU8",
@@ -2758,9 +2758,9 @@ func (*binaryClassCmdVoidS16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS16(d, obj.(*CmdVoidS16))
 }
-func (*binaryClassCmdVoidS16) Schema() *schema.Class { return schemaCmdVoidS16 }
+func (*binaryClassCmdVoidS16) Schema() *schema.Entity { return schemaCmdVoidS16 }
 
-var schemaCmdVoidS16 = &schema.Class{
+var schemaCmdVoidS16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidS16,
 	Package: "test",
 	Name:    "CmdVoidS16",
@@ -2796,9 +2796,9 @@ func (*binaryClassCmdVoidS32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS32(d, obj.(*CmdVoidS32))
 }
-func (*binaryClassCmdVoidS32) Schema() *schema.Class { return schemaCmdVoidS32 }
+func (*binaryClassCmdVoidS32) Schema() *schema.Entity { return schemaCmdVoidS32 }
 
-var schemaCmdVoidS32 = &schema.Class{
+var schemaCmdVoidS32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidS32,
 	Package: "test",
 	Name:    "CmdVoidS32",
@@ -2834,9 +2834,9 @@ func (*binaryClassCmdVoidS64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS64(d, obj.(*CmdVoidS64))
 }
-func (*binaryClassCmdVoidS64) Schema() *schema.Class { return schemaCmdVoidS64 }
+func (*binaryClassCmdVoidS64) Schema() *schema.Entity { return schemaCmdVoidS64 }
 
-var schemaCmdVoidS64 = &schema.Class{
+var schemaCmdVoidS64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidS64,
 	Package: "test",
 	Name:    "CmdVoidS64",
@@ -2872,9 +2872,9 @@ func (*binaryClassCmdVoidS8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS8(d, obj.(*CmdVoidS8))
 }
-func (*binaryClassCmdVoidS8) Schema() *schema.Class { return schemaCmdVoidS8 }
+func (*binaryClassCmdVoidS8) Schema() *schema.Entity { return schemaCmdVoidS8 }
 
-var schemaCmdVoidS8 = &schema.Class{
+var schemaCmdVoidS8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidS8,
 	Package: "test",
 	Name:    "CmdVoidS8",
@@ -2910,9 +2910,9 @@ func (*binaryClassCmdVoidString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidString(d, obj.(*CmdVoidString))
 }
-func (*binaryClassCmdVoidString) Schema() *schema.Class { return schemaCmdVoidString }
+func (*binaryClassCmdVoidString) Schema() *schema.Entity { return schemaCmdVoidString }
 
-var schemaCmdVoidString = &schema.Class{
+var schemaCmdVoidString = &schema.Entity{
 	TypeID:  binaryIDCmdVoidString,
 	Package: "test",
 	Name:    "CmdVoidString",
@@ -2948,9 +2948,9 @@ func (*binaryClassCmdVoidU16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU16(d, obj.(*CmdVoidU16))
 }
-func (*binaryClassCmdVoidU16) Schema() *schema.Class { return schemaCmdVoidU16 }
+func (*binaryClassCmdVoidU16) Schema() *schema.Entity { return schemaCmdVoidU16 }
 
-var schemaCmdVoidU16 = &schema.Class{
+var schemaCmdVoidU16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidU16,
 	Package: "test",
 	Name:    "CmdVoidU16",
@@ -2986,9 +2986,9 @@ func (*binaryClassCmdVoidU32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU32(d, obj.(*CmdVoidU32))
 }
-func (*binaryClassCmdVoidU32) Schema() *schema.Class { return schemaCmdVoidU32 }
+func (*binaryClassCmdVoidU32) Schema() *schema.Entity { return schemaCmdVoidU32 }
 
-var schemaCmdVoidU32 = &schema.Class{
+var schemaCmdVoidU32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidU32,
 	Package: "test",
 	Name:    "CmdVoidU32",
@@ -3024,9 +3024,9 @@ func (*binaryClassCmdVoidU64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU64(d, obj.(*CmdVoidU64))
 }
-func (*binaryClassCmdVoidU64) Schema() *schema.Class { return schemaCmdVoidU64 }
+func (*binaryClassCmdVoidU64) Schema() *schema.Entity { return schemaCmdVoidU64 }
 
-var schemaCmdVoidU64 = &schema.Class{
+var schemaCmdVoidU64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidU64,
 	Package: "test",
 	Name:    "CmdVoidU64",
@@ -3062,9 +3062,9 @@ func (*binaryClassCmdVoidU8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU8(d, obj.(*CmdVoidU8))
 }
-func (*binaryClassCmdVoidU8) Schema() *schema.Class { return schemaCmdVoidU8 }
+func (*binaryClassCmdVoidU8) Schema() *schema.Entity { return schemaCmdVoidU8 }
 
-var schemaCmdVoidU8 = &schema.Class{
+var schemaCmdVoidU8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidU8,
 	Package: "test",
 	Name:    "CmdVoidU8",
@@ -3100,9 +3100,9 @@ func (*binaryClassCmdVoidWriteBool) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteBool(d, obj.(*CmdVoidWriteBool))
 }
-func (*binaryClassCmdVoidWriteBool) Schema() *schema.Class { return schemaCmdVoidWriteBool }
+func (*binaryClassCmdVoidWriteBool) Schema() *schema.Entity { return schemaCmdVoidWriteBool }
 
-var schemaCmdVoidWriteBool = &schema.Class{
+var schemaCmdVoidWriteBool = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteBool,
 	Package: "test",
 	Name:    "CmdVoidWriteBool",
@@ -3138,9 +3138,9 @@ func (*binaryClassCmdVoidWriteF32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteF32(d, obj.(*CmdVoidWriteF32))
 }
-func (*binaryClassCmdVoidWriteF32) Schema() *schema.Class { return schemaCmdVoidWriteF32 }
+func (*binaryClassCmdVoidWriteF32) Schema() *schema.Entity { return schemaCmdVoidWriteF32 }
 
-var schemaCmdVoidWriteF32 = &schema.Class{
+var schemaCmdVoidWriteF32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteF32,
 	Package: "test",
 	Name:    "CmdVoidWriteF32",
@@ -3176,9 +3176,9 @@ func (*binaryClassCmdVoidWriteF64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteF64(d, obj.(*CmdVoidWriteF64))
 }
-func (*binaryClassCmdVoidWriteF64) Schema() *schema.Class { return schemaCmdVoidWriteF64 }
+func (*binaryClassCmdVoidWriteF64) Schema() *schema.Entity { return schemaCmdVoidWriteF64 }
 
-var schemaCmdVoidWriteF64 = &schema.Class{
+var schemaCmdVoidWriteF64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteF64,
 	Package: "test",
 	Name:    "CmdVoidWriteF64",
@@ -3218,9 +3218,9 @@ func (*binaryClassCmdVoidWritePtrs) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWritePtrs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWritePtrs(d, obj.(*CmdVoidWritePtrs))
 }
-func (*binaryClassCmdVoidWritePtrs) Schema() *schema.Class { return schemaCmdVoidWritePtrs }
+func (*binaryClassCmdVoidWritePtrs) Schema() *schema.Entity { return schemaCmdVoidWritePtrs }
 
-var schemaCmdVoidWritePtrs = &schema.Class{
+var schemaCmdVoidWritePtrs = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWritePtrs,
 	Package: "test",
 	Name:    "CmdVoidWritePtrs",
@@ -3258,9 +3258,9 @@ func (*binaryClassCmdVoidWriteS16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS16(d, obj.(*CmdVoidWriteS16))
 }
-func (*binaryClassCmdVoidWriteS16) Schema() *schema.Class { return schemaCmdVoidWriteS16 }
+func (*binaryClassCmdVoidWriteS16) Schema() *schema.Entity { return schemaCmdVoidWriteS16 }
 
-var schemaCmdVoidWriteS16 = &schema.Class{
+var schemaCmdVoidWriteS16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteS16,
 	Package: "test",
 	Name:    "CmdVoidWriteS16",
@@ -3296,9 +3296,9 @@ func (*binaryClassCmdVoidWriteS32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS32(d, obj.(*CmdVoidWriteS32))
 }
-func (*binaryClassCmdVoidWriteS32) Schema() *schema.Class { return schemaCmdVoidWriteS32 }
+func (*binaryClassCmdVoidWriteS32) Schema() *schema.Entity { return schemaCmdVoidWriteS32 }
 
-var schemaCmdVoidWriteS32 = &schema.Class{
+var schemaCmdVoidWriteS32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteS32,
 	Package: "test",
 	Name:    "CmdVoidWriteS32",
@@ -3334,9 +3334,9 @@ func (*binaryClassCmdVoidWriteS64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS64(d, obj.(*CmdVoidWriteS64))
 }
-func (*binaryClassCmdVoidWriteS64) Schema() *schema.Class { return schemaCmdVoidWriteS64 }
+func (*binaryClassCmdVoidWriteS64) Schema() *schema.Entity { return schemaCmdVoidWriteS64 }
 
-var schemaCmdVoidWriteS64 = &schema.Class{
+var schemaCmdVoidWriteS64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteS64,
 	Package: "test",
 	Name:    "CmdVoidWriteS64",
@@ -3372,9 +3372,9 @@ func (*binaryClassCmdVoidWriteS8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS8(d, obj.(*CmdVoidWriteS8))
 }
-func (*binaryClassCmdVoidWriteS8) Schema() *schema.Class { return schemaCmdVoidWriteS8 }
+func (*binaryClassCmdVoidWriteS8) Schema() *schema.Entity { return schemaCmdVoidWriteS8 }
 
-var schemaCmdVoidWriteS8 = &schema.Class{
+var schemaCmdVoidWriteS8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteS8,
 	Package: "test",
 	Name:    "CmdVoidWriteS8",
@@ -3410,9 +3410,9 @@ func (*binaryClassCmdVoidWriteU16) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU16(d, obj.(*CmdVoidWriteU16))
 }
-func (*binaryClassCmdVoidWriteU16) Schema() *schema.Class { return schemaCmdVoidWriteU16 }
+func (*binaryClassCmdVoidWriteU16) Schema() *schema.Entity { return schemaCmdVoidWriteU16 }
 
-var schemaCmdVoidWriteU16 = &schema.Class{
+var schemaCmdVoidWriteU16 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteU16,
 	Package: "test",
 	Name:    "CmdVoidWriteU16",
@@ -3448,9 +3448,9 @@ func (*binaryClassCmdVoidWriteU32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU32(d, obj.(*CmdVoidWriteU32))
 }
-func (*binaryClassCmdVoidWriteU32) Schema() *schema.Class { return schemaCmdVoidWriteU32 }
+func (*binaryClassCmdVoidWriteU32) Schema() *schema.Entity { return schemaCmdVoidWriteU32 }
 
-var schemaCmdVoidWriteU32 = &schema.Class{
+var schemaCmdVoidWriteU32 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteU32,
 	Package: "test",
 	Name:    "CmdVoidWriteU32",
@@ -3486,9 +3486,9 @@ func (*binaryClassCmdVoidWriteU64) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU64(d, obj.(*CmdVoidWriteU64))
 }
-func (*binaryClassCmdVoidWriteU64) Schema() *schema.Class { return schemaCmdVoidWriteU64 }
+func (*binaryClassCmdVoidWriteU64) Schema() *schema.Entity { return schemaCmdVoidWriteU64 }
 
-var schemaCmdVoidWriteU64 = &schema.Class{
+var schemaCmdVoidWriteU64 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteU64,
 	Package: "test",
 	Name:    "CmdVoidWriteU64",
@@ -3524,9 +3524,9 @@ func (*binaryClassCmdVoidWriteU8) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCmdVoidWriteU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU8(d, obj.(*CmdVoidWriteU8))
 }
-func (*binaryClassCmdVoidWriteU8) Schema() *schema.Class { return schemaCmdVoidWriteU8 }
+func (*binaryClassCmdVoidWriteU8) Schema() *schema.Entity { return schemaCmdVoidWriteU8 }
 
-var schemaCmdVoidWriteU8 = &schema.Class{
+var schemaCmdVoidWriteU8 = &schema.Entity{
 	TypeID:  binaryIDCmdVoidWriteU8,
 	Package: "test",
 	Name:    "CmdVoidWriteU8",
@@ -3560,9 +3560,9 @@ func (*binaryClassF32ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF32ˢ(d, obj.(*F32ˢ))
 }
-func (*binaryClassF32ˢ) Schema() *schema.Class { return schemaF32ˢ }
+func (*binaryClassF32ˢ) Schema() *schema.Entity { return schemaF32ˢ }
 
-var schemaF32ˢ = &schema.Class{
+var schemaF32ˢ = &schema.Entity{
 	TypeID:  binaryIDF32ˢ,
 	Package: "test",
 	Name:    "F32ˢ",
@@ -3595,9 +3595,9 @@ func (*binaryClassF64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ˢ(d, obj.(*F64ˢ))
 }
-func (*binaryClassF64ˢ) Schema() *schema.Class { return schemaF64ˢ }
+func (*binaryClassF64ˢ) Schema() *schema.Entity { return schemaF64ˢ }
 
-var schemaF64ˢ = &schema.Class{
+var schemaF64ˢ = &schema.Entity{
 	TypeID:  binaryIDF64ˢ,
 	Package: "test",
 	Name:    "F64ˢ",
@@ -3630,9 +3630,9 @@ func (*binaryClassImported) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImported) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImported(d, obj.(*Imported))
 }
-func (*binaryClassImported) Schema() *schema.Class { return schemaImported }
+func (*binaryClassImported) Schema() *schema.Entity { return schemaImported }
 
-var schemaImported = &schema.Class{
+var schemaImported = &schema.Entity{
 	TypeID:  binaryIDImported,
 	Package: "test",
 	Name:    "Imported",
@@ -3665,9 +3665,9 @@ func (*binaryClassIncluded) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIncluded) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIncluded(d, obj.(*Included))
 }
-func (*binaryClassIncluded) Schema() *schema.Class { return schemaIncluded }
+func (*binaryClassIncluded) Schema() *schema.Entity { return schemaIncluded }
 
-var schemaIncluded = &schema.Class{
+var schemaIncluded = &schema.Entity{
 	TypeID:  binaryIDIncluded,
 	Package: "test",
 	Name:    "Included",
@@ -3700,9 +3700,9 @@ func (*binaryClassIntˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntˢ(d, obj.(*Intˢ))
 }
-func (*binaryClassIntˢ) Schema() *schema.Class { return schemaIntˢ }
+func (*binaryClassIntˢ) Schema() *schema.Entity { return schemaIntˢ }
 
-var schemaIntˢ = &schema.Class{
+var schemaIntˢ = &schema.Entity{
 	TypeID:  binaryIDIntˢ,
 	Package: "test",
 	Name:    "Intˢ",
@@ -3735,9 +3735,9 @@ func (*binaryClassRemappedˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRemappedˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRemappedˢ(d, obj.(*Remappedˢ))
 }
-func (*binaryClassRemappedˢ) Schema() *schema.Class { return schemaRemappedˢ }
+func (*binaryClassRemappedˢ) Schema() *schema.Entity { return schemaRemappedˢ }
 
-var schemaRemappedˢ = &schema.Class{
+var schemaRemappedˢ = &schema.Entity{
 	TypeID:  binaryIDRemappedˢ,
 	Package: "test",
 	Name:    "Remappedˢ",
@@ -3770,9 +3770,9 @@ func (*binaryClassS16ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS16ˢ(d, obj.(*S16ˢ))
 }
-func (*binaryClassS16ˢ) Schema() *schema.Class { return schemaS16ˢ }
+func (*binaryClassS16ˢ) Schema() *schema.Entity { return schemaS16ˢ }
 
-var schemaS16ˢ = &schema.Class{
+var schemaS16ˢ = &schema.Entity{
 	TypeID:  binaryIDS16ˢ,
 	Package: "test",
 	Name:    "S16ˢ",
@@ -3805,9 +3805,9 @@ func (*binaryClassS32ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS32ˢ(d, obj.(*S32ˢ))
 }
-func (*binaryClassS32ˢ) Schema() *schema.Class { return schemaS32ˢ }
+func (*binaryClassS32ˢ) Schema() *schema.Entity { return schemaS32ˢ }
 
-var schemaS32ˢ = &schema.Class{
+var schemaS32ˢ = &schema.Entity{
 	TypeID:  binaryIDS32ˢ,
 	Package: "test",
 	Name:    "S32ˢ",
@@ -3840,9 +3840,9 @@ func (*binaryClassS64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ˢ(d, obj.(*S64ˢ))
 }
-func (*binaryClassS64ˢ) Schema() *schema.Class { return schemaS64ˢ }
+func (*binaryClassS64ˢ) Schema() *schema.Entity { return schemaS64ˢ }
 
-var schemaS64ˢ = &schema.Class{
+var schemaS64ˢ = &schema.Entity{
 	TypeID:  binaryIDS64ˢ,
 	Package: "test",
 	Name:    "S64ˢ",
@@ -3875,9 +3875,9 @@ func (*binaryClassS8ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS8ˢ(d, obj.(*S8ˢ))
 }
-func (*binaryClassS8ˢ) Schema() *schema.Class { return schemaS8ˢ }
+func (*binaryClassS8ˢ) Schema() *schema.Entity { return schemaS8ˢ }
 
-var schemaS8ˢ = &schema.Class{
+var schemaS8ˢ = &schema.Entity{
 	TypeID:  binaryIDS8ˢ,
 	Package: "test",
 	Name:    "S8ˢ",
@@ -3910,9 +3910,9 @@ func (*binaryClassU8ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ˢ(d, obj.(*U8ˢ))
 }
-func (*binaryClassU8ˢ) Schema() *schema.Class { return schemaU8ˢ }
+func (*binaryClassU8ˢ) Schema() *schema.Entity { return schemaU8ˢ }
 
-var schemaU8ˢ = &schema.Class{
+var schemaU8ˢ = &schema.Entity{
 	TypeID:  binaryIDU8ˢ,
 	Package: "test",
 	Name:    "U8ˢ",
@@ -3945,9 +3945,9 @@ func (*binaryClassU16ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ˢ(d, obj.(*U16ˢ))
 }
-func (*binaryClassU16ˢ) Schema() *schema.Class { return schemaU16ˢ }
+func (*binaryClassU16ˢ) Schema() *schema.Entity { return schemaU16ˢ }
 
-var schemaU16ˢ = &schema.Class{
+var schemaU16ˢ = &schema.Entity{
 	TypeID:  binaryIDU16ˢ,
 	Package: "test",
 	Name:    "U16ˢ",
@@ -3980,9 +3980,9 @@ func (*binaryClassU32ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ˢ(d, obj.(*U32ˢ))
 }
-func (*binaryClassU32ˢ) Schema() *schema.Class { return schemaU32ˢ }
+func (*binaryClassU32ˢ) Schema() *schema.Entity { return schemaU32ˢ }
 
-var schemaU32ˢ = &schema.Class{
+var schemaU32ˢ = &schema.Entity{
 	TypeID:  binaryIDU32ˢ,
 	Package: "test",
 	Name:    "U32ˢ",
@@ -4023,9 +4023,9 @@ func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
 }
-func (*binaryClassState) Schema() *schema.Class { return schemaState }
+func (*binaryClassState) Schema() *schema.Entity { return schemaState }
 
-var schemaState = &schema.Class{
+var schemaState = &schema.Entity{
 	TypeID:  binaryIDState,
 	Package: "test",
 	Name:    "State",
@@ -4064,9 +4064,9 @@ func (*binaryClassTester) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTester) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTester(d, obj.(*Tester))
 }
-func (*binaryClassTester) Schema() *schema.Class { return schemaTester }
+func (*binaryClassTester) Schema() *schema.Entity { return schemaTester }
 
-var schemaTester = &schema.Class{
+var schemaTester = &schema.Entity{
 	TypeID:  binaryIDTester,
 	Package: "test",
 	Name:    "Tester",
@@ -4100,9 +4100,9 @@ func (*binaryClassU64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ˢ(d, obj.(*U64ˢ))
 }
-func (*binaryClassU64ˢ) Schema() *schema.Class { return schemaU64ˢ }
+func (*binaryClassU64ˢ) Schema() *schema.Entity { return schemaU64ˢ }
 
-var schemaU64ˢ = &schema.Class{
+var schemaU64ˢ = &schema.Entity{
 	TypeID:  binaryIDU64ˢ,
 	Package: "test",
 	Name:    "U64ˢ",
@@ -4135,9 +4135,9 @@ func (*binaryClassVoidˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidˢ(d, obj.(*Voidˢ))
 }
-func (*binaryClassVoidˢ) Schema() *schema.Class { return schemaVoidˢ }
+func (*binaryClassVoidˢ) Schema() *schema.Entity { return schemaVoidˢ }
 
-var schemaVoidˢ = &schema.Class{
+var schemaVoidˢ = &schema.Entity{
 	TypeID:  binaryIDVoidˢ,
 	Package: "test",
 	Name:    "Voidˢ",

@@ -108,9 +108,9 @@ func (*binaryClassboolSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassboolSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeboolSlice(d, obj.(*boolSlice))
 }
-func (*binaryClassboolSlice) Schema() *schema.Class { return schemaboolSlice }
+func (*binaryClassboolSlice) Schema() *schema.Entity { return schemaboolSlice }
 
-var schemaboolSlice = &schema.Class{
+var schemaboolSlice = &schema.Entity{
 	TypeID:  binaryIDboolSlice,
 	Package: "any",
 	Name:    "boolSlice",
@@ -143,9 +143,9 @@ func (*binaryClassbool_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassbool_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodebool_(d, obj.(*bool_))
 }
-func (*binaryClassbool_) Schema() *schema.Class { return schemabool_ }
+func (*binaryClassbool_) Schema() *schema.Entity { return schemabool_ }
 
-var schemabool_ = &schema.Class{
+var schemabool_ = &schema.Entity{
 	TypeID:  binaryIDbool_,
 	Package: "any",
 	Name:    "bool_",
@@ -186,9 +186,9 @@ func (*binaryClassfloat32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat32Slice(d, obj.(*float32Slice))
 }
-func (*binaryClassfloat32Slice) Schema() *schema.Class { return schemafloat32Slice }
+func (*binaryClassfloat32Slice) Schema() *schema.Entity { return schemafloat32Slice }
 
-var schemafloat32Slice = &schema.Class{
+var schemafloat32Slice = &schema.Entity{
 	TypeID:  binaryIDfloat32Slice,
 	Package: "any",
 	Name:    "float32Slice",
@@ -221,9 +221,9 @@ func (*binaryClassfloat32_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat32_(d, obj.(*float32_))
 }
-func (*binaryClassfloat32_) Schema() *schema.Class { return schemafloat32_ }
+func (*binaryClassfloat32_) Schema() *schema.Entity { return schemafloat32_ }
 
-var schemafloat32_ = &schema.Class{
+var schemafloat32_ = &schema.Entity{
 	TypeID:  binaryIDfloat32_,
 	Package: "any",
 	Name:    "float32_",
@@ -264,9 +264,9 @@ func (*binaryClassfloat64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat64Slice(d, obj.(*float64Slice))
 }
-func (*binaryClassfloat64Slice) Schema() *schema.Class { return schemafloat64Slice }
+func (*binaryClassfloat64Slice) Schema() *schema.Entity { return schemafloat64Slice }
 
-var schemafloat64Slice = &schema.Class{
+var schemafloat64Slice = &schema.Entity{
 	TypeID:  binaryIDfloat64Slice,
 	Package: "any",
 	Name:    "float64Slice",
@@ -299,9 +299,9 @@ func (*binaryClassfloat64_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat64_(d, obj.(*float64_))
 }
-func (*binaryClassfloat64_) Schema() *schema.Class { return schemafloat64_ }
+func (*binaryClassfloat64_) Schema() *schema.Entity { return schemafloat64_ }
 
-var schemafloat64_ = &schema.Class{
+var schemafloat64_ = &schema.Entity{
 	TypeID:  binaryIDfloat64_,
 	Package: "any",
 	Name:    "float64_",
@@ -342,9 +342,9 @@ func (*binaryClassint16Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint16Slice(d, obj.(*int16Slice))
 }
-func (*binaryClassint16Slice) Schema() *schema.Class { return schemaint16Slice }
+func (*binaryClassint16Slice) Schema() *schema.Entity { return schemaint16Slice }
 
-var schemaint16Slice = &schema.Class{
+var schemaint16Slice = &schema.Entity{
 	TypeID:  binaryIDint16Slice,
 	Package: "any",
 	Name:    "int16Slice",
@@ -377,9 +377,9 @@ func (*binaryClassint16_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint16_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint16_(d, obj.(*int16_))
 }
-func (*binaryClassint16_) Schema() *schema.Class { return schemaint16_ }
+func (*binaryClassint16_) Schema() *schema.Entity { return schemaint16_ }
 
-var schemaint16_ = &schema.Class{
+var schemaint16_ = &schema.Entity{
 	TypeID:  binaryIDint16_,
 	Package: "any",
 	Name:    "int16_",
@@ -420,9 +420,9 @@ func (*binaryClassint32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint32Slice(d, obj.(*int32Slice))
 }
-func (*binaryClassint32Slice) Schema() *schema.Class { return schemaint32Slice }
+func (*binaryClassint32Slice) Schema() *schema.Entity { return schemaint32Slice }
 
-var schemaint32Slice = &schema.Class{
+var schemaint32Slice = &schema.Entity{
 	TypeID:  binaryIDint32Slice,
 	Package: "any",
 	Name:    "int32Slice",
@@ -455,9 +455,9 @@ func (*binaryClassint32_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint32_(d, obj.(*int32_))
 }
-func (*binaryClassint32_) Schema() *schema.Class { return schemaint32_ }
+func (*binaryClassint32_) Schema() *schema.Entity { return schemaint32_ }
 
-var schemaint32_ = &schema.Class{
+var schemaint32_ = &schema.Entity{
 	TypeID:  binaryIDint32_,
 	Package: "any",
 	Name:    "int32_",
@@ -498,9 +498,9 @@ func (*binaryClassint64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint64Slice(d, obj.(*int64Slice))
 }
-func (*binaryClassint64Slice) Schema() *schema.Class { return schemaint64Slice }
+func (*binaryClassint64Slice) Schema() *schema.Entity { return schemaint64Slice }
 
-var schemaint64Slice = &schema.Class{
+var schemaint64Slice = &schema.Entity{
 	TypeID:  binaryIDint64Slice,
 	Package: "any",
 	Name:    "int64Slice",
@@ -533,9 +533,9 @@ func (*binaryClassint64_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint64_(d, obj.(*int64_))
 }
-func (*binaryClassint64_) Schema() *schema.Class { return schemaint64_ }
+func (*binaryClassint64_) Schema() *schema.Entity { return schemaint64_ }
 
-var schemaint64_ = &schema.Class{
+var schemaint64_ = &schema.Entity{
 	TypeID:  binaryIDint64_,
 	Package: "any",
 	Name:    "int64_",
@@ -576,9 +576,9 @@ func (*binaryClassint8Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint8Slice(d, obj.(*int8Slice))
 }
-func (*binaryClassint8Slice) Schema() *schema.Class { return schemaint8Slice }
+func (*binaryClassint8Slice) Schema() *schema.Entity { return schemaint8Slice }
 
-var schemaint8Slice = &schema.Class{
+var schemaint8Slice = &schema.Entity{
 	TypeID:  binaryIDint8Slice,
 	Package: "any",
 	Name:    "int8Slice",
@@ -611,9 +611,9 @@ func (*binaryClassint8_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint8_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint8_(d, obj.(*int8_))
 }
-func (*binaryClassint8_) Schema() *schema.Class { return schemaint8_ }
+func (*binaryClassint8_) Schema() *schema.Entity { return schemaint8_ }
 
-var schemaint8_ = &schema.Class{
+var schemaint8_ = &schema.Entity{
 	TypeID:  binaryIDint8_,
 	Package: "any",
 	Name:    "int8_",
@@ -654,9 +654,9 @@ func (*binaryClassintSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassintSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeintSlice(d, obj.(*intSlice))
 }
-func (*binaryClassintSlice) Schema() *schema.Class { return schemaintSlice }
+func (*binaryClassintSlice) Schema() *schema.Entity { return schemaintSlice }
 
-var schemaintSlice = &schema.Class{
+var schemaintSlice = &schema.Entity{
 	TypeID:  binaryIDintSlice,
 	Package: "any",
 	Name:    "intSlice",
@@ -689,9 +689,9 @@ func (*binaryClassint_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint_(d, obj.(*int_))
 }
-func (*binaryClassint_) Schema() *schema.Class { return schemaint_ }
+func (*binaryClassint_) Schema() *schema.Entity { return schemaint_ }
 
-var schemaint_ = &schema.Class{
+var schemaint_ = &schema.Entity{
 	TypeID:  binaryIDint_,
 	Package: "any",
 	Name:    "int_",
@@ -736,9 +736,9 @@ func (*binaryClassobjectSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassobjectSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeobjectSlice(d, obj.(*objectSlice))
 }
-func (*binaryClassobjectSlice) Schema() *schema.Class { return schemaobjectSlice }
+func (*binaryClassobjectSlice) Schema() *schema.Entity { return schemaobjectSlice }
 
-var schemaobjectSlice = &schema.Class{
+var schemaobjectSlice = &schema.Entity{
 	TypeID:  binaryIDobjectSlice,
 	Package: "any",
 	Name:    "objectSlice",
@@ -775,9 +775,9 @@ func (*binaryClassobject_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassobject_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeobject_(d, obj.(*object_))
 }
-func (*binaryClassobject_) Schema() *schema.Class { return schemaobject_ }
+func (*binaryClassobject_) Schema() *schema.Entity { return schemaobject_ }
 
-var schemaobject_ = &schema.Class{
+var schemaobject_ = &schema.Entity{
 	TypeID:  binaryIDobject_,
 	Package: "any",
 	Name:    "object_",
@@ -818,9 +818,9 @@ func (*binaryClassstringSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassstringSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodestringSlice(d, obj.(*stringSlice))
 }
-func (*binaryClassstringSlice) Schema() *schema.Class { return schemastringSlice }
+func (*binaryClassstringSlice) Schema() *schema.Entity { return schemastringSlice }
 
-var schemastringSlice = &schema.Class{
+var schemastringSlice = &schema.Entity{
 	TypeID:  binaryIDstringSlice,
 	Package: "any",
 	Name:    "stringSlice",
@@ -853,9 +853,9 @@ func (*binaryClassstring_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassstring_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodestring_(d, obj.(*string_))
 }
-func (*binaryClassstring_) Schema() *schema.Class { return schemastring_ }
+func (*binaryClassstring_) Schema() *schema.Entity { return schemastring_ }
 
-var schemastring_ = &schema.Class{
+var schemastring_ = &schema.Entity{
 	TypeID:  binaryIDstring_,
 	Package: "any",
 	Name:    "string_",
@@ -896,9 +896,9 @@ func (*binaryClassuint16Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint16Slice(d, obj.(*uint16Slice))
 }
-func (*binaryClassuint16Slice) Schema() *schema.Class { return schemauint16Slice }
+func (*binaryClassuint16Slice) Schema() *schema.Entity { return schemauint16Slice }
 
-var schemauint16Slice = &schema.Class{
+var schemauint16Slice = &schema.Entity{
 	TypeID:  binaryIDuint16Slice,
 	Package: "any",
 	Name:    "uint16Slice",
@@ -931,9 +931,9 @@ func (*binaryClassuint16_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint16_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint16_(d, obj.(*uint16_))
 }
-func (*binaryClassuint16_) Schema() *schema.Class { return schemauint16_ }
+func (*binaryClassuint16_) Schema() *schema.Entity { return schemauint16_ }
 
-var schemauint16_ = &schema.Class{
+var schemauint16_ = &schema.Entity{
 	TypeID:  binaryIDuint16_,
 	Package: "any",
 	Name:    "uint16_",
@@ -974,9 +974,9 @@ func (*binaryClassuint32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint32Slice(d, obj.(*uint32Slice))
 }
-func (*binaryClassuint32Slice) Schema() *schema.Class { return schemauint32Slice }
+func (*binaryClassuint32Slice) Schema() *schema.Entity { return schemauint32Slice }
 
-var schemauint32Slice = &schema.Class{
+var schemauint32Slice = &schema.Entity{
 	TypeID:  binaryIDuint32Slice,
 	Package: "any",
 	Name:    "uint32Slice",
@@ -1009,9 +1009,9 @@ func (*binaryClassuint32_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint32_(d, obj.(*uint32_))
 }
-func (*binaryClassuint32_) Schema() *schema.Class { return schemauint32_ }
+func (*binaryClassuint32_) Schema() *schema.Entity { return schemauint32_ }
 
-var schemauint32_ = &schema.Class{
+var schemauint32_ = &schema.Entity{
 	TypeID:  binaryIDuint32_,
 	Package: "any",
 	Name:    "uint32_",
@@ -1052,9 +1052,9 @@ func (*binaryClassuint64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint64Slice(d, obj.(*uint64Slice))
 }
-func (*binaryClassuint64Slice) Schema() *schema.Class { return schemauint64Slice }
+func (*binaryClassuint64Slice) Schema() *schema.Entity { return schemauint64Slice }
 
-var schemauint64Slice = &schema.Class{
+var schemauint64Slice = &schema.Entity{
 	TypeID:  binaryIDuint64Slice,
 	Package: "any",
 	Name:    "uint64Slice",
@@ -1087,9 +1087,9 @@ func (*binaryClassuint64_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint64_(d, obj.(*uint64_))
 }
-func (*binaryClassuint64_) Schema() *schema.Class { return schemauint64_ }
+func (*binaryClassuint64_) Schema() *schema.Entity { return schemauint64_ }
 
-var schemauint64_ = &schema.Class{
+var schemauint64_ = &schema.Entity{
 	TypeID:  binaryIDuint64_,
 	Package: "any",
 	Name:    "uint64_",
@@ -1126,9 +1126,9 @@ func (*binaryClassuint8Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint8Slice(d, obj.(*uint8Slice))
 }
-func (*binaryClassuint8Slice) Schema() *schema.Class { return schemauint8Slice }
+func (*binaryClassuint8Slice) Schema() *schema.Entity { return schemauint8Slice }
 
-var schemauint8Slice = &schema.Class{
+var schemauint8Slice = &schema.Entity{
 	TypeID:  binaryIDuint8Slice,
 	Package: "any",
 	Name:    "uint8Slice",
@@ -1161,9 +1161,9 @@ func (*binaryClassuint8_) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint8_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint8_(d, obj.(*uint8_))
 }
-func (*binaryClassuint8_) Schema() *schema.Class { return schemauint8_ }
+func (*binaryClassuint8_) Schema() *schema.Entity { return schemauint8_ }
 
-var schemauint8_ = &schema.Class{
+var schemauint8_ = &schema.Entity{
 	TypeID:  binaryIDuint8_,
 	Package: "any",
 	Name:    "uint8_",

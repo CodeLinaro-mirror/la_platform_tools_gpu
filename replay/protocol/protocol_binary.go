@@ -52,9 +52,9 @@ func (*binaryClassResourceInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResourceInfo(d, obj.(*ResourceInfo))
 }
-func (*binaryClassResourceInfo) Schema() *schema.Class { return schemaResourceInfo }
+func (*binaryClassResourceInfo) Schema() *schema.Entity { return schemaResourceInfo }
 
-var schemaResourceInfo = &schema.Class{
+var schemaResourceInfo = &schema.Entity{
 	TypeID:  binaryIDResourceInfo,
 	Package: "protocol",
 	Name:    "ResourceInfo",
@@ -112,9 +112,9 @@ func (*binaryClassPayload) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePayload(d, obj.(*Payload))
 }
-func (*binaryClassPayload) Schema() *schema.Class { return schemaPayload }
+func (*binaryClassPayload) Schema() *schema.Entity { return schemaPayload }
 
-var schemaPayload = &schema.Class{
+var schemaPayload = &schema.Entity{
 	TypeID:  binaryIDPayload,
 	Package: "protocol",
 	Name:    "Payload",

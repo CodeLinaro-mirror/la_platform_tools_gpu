@@ -18,7 +18,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 // Object is an instance of a Class.
 type Object struct {
-	Type   *Class
+	Type   *Entity
 	Fields []interface{}
 }
 

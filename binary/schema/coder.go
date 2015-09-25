@@ -25,7 +25,7 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*Class)(nil).Class())
+	Namespace.Add((*Entity)(nil).Class())
 	Namespace.Add((*ConstantSet)(nil).Class())
 }
 
@@ -96,7 +96,7 @@ func decodeType(d binary.Decoder) Type {
 	case PrimitiveTag:
 		t := &Primitive{}
 		t.Name = d.String()
-		t.Method = Method(d.Int32())
+		t.Method = Method(d.Uint8())
 		return t
 	case StructTag:
 		t := &Struct{}
@@ -139,7 +139,7 @@ func decodeType(d binary.Decoder) Type {
 	}
 }
 
-func encodeClass(e binary.Encoder, c *Class) {
+func encodeClass(e binary.Encoder, c *Entity) {
 	e.ID(c.TypeID)
 	e.String(c.Package)
 	e.String(c.Name)
@@ -155,7 +155,7 @@ func encodeClass(e binary.Encoder, c *Class) {
 	}
 }
 
-func decodeClass(d binary.Decoder, c *Class) {
+func decodeClass(d binary.Decoder, c *Entity) {
 	c.TypeID = d.ID()
 	c.Package = d.String()
 	c.Name = d.String()
@@ -191,19 +191,19 @@ func decodeConstants(d binary.Decoder, c *ConstantSet) {
 
 type binaryClassClass struct{}
 
-func (*Class) Class() binary.Class           { return (*binaryClassClass)(nil) }
+func (*Entity) Class() binary.Class          { return (*binaryClassClass)(nil) }
 func (*binaryClassClass) ID() binary.ID      { return binaryIDClass }
-func (*binaryClassClass) New() binary.Object { return &Class{} }
+func (*binaryClassClass) New() binary.Object { return &Entity{} }
 func (*binaryClassClass) Encode(e binary.Encoder, obj binary.Object) {
-	encodeClass(e, obj.(*Class))
+	encodeClass(e, obj.(*Entity))
 }
 func (*binaryClassClass) Decode(d binary.Decoder) binary.Object {
-	c := &Class{}
+	c := &Entity{}
 	decodeClass(d, c)
 	return c
 }
 func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) {
-	decodeClass(d, obj.(*Class))
+	decodeClass(d, obj.(*Entity))
 }
 
 type binaryClassConstantSet struct{}

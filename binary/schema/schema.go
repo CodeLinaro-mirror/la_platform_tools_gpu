@@ -36,12 +36,12 @@ type Type interface {
 }
 
 type schema interface {
-	Schema() *Class
+	Schema() *Entity
 }
 
 // Returns the schema class for a binary class, if it has one.
-func Of(class binary.Class) *Class {
-	if s, ok := class.(*Class); ok {
+func Of(class binary.Class) *Entity {
+	if s, ok := class.(*Entity); ok {
 		return s
 	}
 	if s, ok := class.(schema); ok {
@@ -52,6 +52,6 @@ func Of(class binary.Class) *Class {
 
 // Lookup looks up a Class by the given type id.
 // If there is no match, it will return nil.
-func Lookup(id binary.ID) *Class {
+func Lookup(id binary.ID) *Entity {
 	return Of(registry.Global.Lookup(id))
 }

@@ -121,7 +121,7 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger, shutd
 // This includes all the types included in or referenced from the atom stream.
 func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 	result := service.Schema{}
-	result.Classes = make([]*schema.Class, 0, registry.Global.Count())
+	result.Classes = make([]*schema.Entity, 0, registry.Global.Count())
 	all.GraphicsNamespace.Visit(func(c binary.Class) {
 		class := schema.Lookup(c.ID())
 		if class != nil {

@@ -101,9 +101,9 @@ func (*binaryClassBuildReport) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBuildReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBuildReport(d, obj.(*BuildReport))
 }
-func (*binaryClassBuildReport) Schema() *schema.Class { return schemaBuildReport }
+func (*binaryClassBuildReport) Schema() *schema.Entity { return schemaBuildReport }
 
-var schemaBuildReport = &schema.Class{
+var schemaBuildReport = &schema.Entity{
 	TypeID:  binaryIDBuildReport,
 	Package: "builder",
 	Name:    "BuildReport",
@@ -141,9 +141,9 @@ func (*binaryClassFollow) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFollow) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFollow(d, obj.(*Follow))
 }
-func (*binaryClassFollow) Schema() *schema.Class { return schemaFollow }
+func (*binaryClassFollow) Schema() *schema.Entity { return schemaFollow }
 
-var schemaFollow = &schema.Class{
+var schemaFollow = &schema.Entity{
 	TypeID:  binaryIDFollow,
 	Package: "builder",
 	Name:    "Follow",
@@ -180,9 +180,9 @@ func (*binaryClassGet) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGet(d, obj.(*Get))
 }
-func (*binaryClassGet) Schema() *schema.Class { return schemaGet }
+func (*binaryClassGet) Schema() *schema.Entity { return schemaGet }
 
-var schemaGet = &schema.Class{
+var schemaGet = &schema.Entity{
 	TypeID:  binaryIDGet,
 	Package: "builder",
 	Name:    "Get",
@@ -235,9 +235,9 @@ func (*binaryClassGetFramebufferColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetFramebufferColor(d, obj.(*GetFramebufferColor))
 }
-func (*binaryClassGetFramebufferColor) Schema() *schema.Class { return schemaGetFramebufferColor }
+func (*binaryClassGetFramebufferColor) Schema() *schema.Entity { return schemaGetFramebufferColor }
 
-var schemaGetFramebufferColor = &schema.Class{
+var schemaGetFramebufferColor = &schema.Entity{
 	TypeID:  binaryIDGetFramebufferColor,
 	Package: "builder",
 	Name:    "GetFramebufferColor",
@@ -290,9 +290,9 @@ func (*binaryClassGetFramebufferDepth) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetFramebufferDepth(d, obj.(*GetFramebufferDepth))
 }
-func (*binaryClassGetFramebufferDepth) Schema() *schema.Class { return schemaGetFramebufferDepth }
+func (*binaryClassGetFramebufferDepth) Schema() *schema.Entity { return schemaGetFramebufferDepth }
 
-var schemaGetFramebufferDepth = &schema.Class{
+var schemaGetFramebufferDepth = &schema.Entity{
 	TypeID:  binaryIDGetFramebufferDepth,
 	Package: "builder",
 	Name:    "GetFramebufferDepth",
@@ -334,9 +334,9 @@ func (*binaryClassGetHierarchy) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetHierarchy(d, obj.(*GetHierarchy))
 }
-func (*binaryClassGetHierarchy) Schema() *schema.Class { return schemaGetHierarchy }
+func (*binaryClassGetHierarchy) Schema() *schema.Entity { return schemaGetHierarchy }
 
-var schemaGetHierarchy = &schema.Class{
+var schemaGetHierarchy = &schema.Entity{
 	TypeID:  binaryIDGetHierarchy,
 	Package: "builder",
 	Name:    "GetHierarchy",
@@ -377,9 +377,9 @@ func (*binaryClassGetResourceData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetResourceData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetResourceData(d, obj.(*GetResourceData))
 }
-func (*binaryClassGetResourceData) Schema() *schema.Class { return schemaGetResourceData }
+func (*binaryClassGetResourceData) Schema() *schema.Entity { return schemaGetResourceData }
 
-var schemaGetResourceData = &schema.Class{
+var schemaGetResourceData = &schema.Entity{
 	TypeID:  binaryIDGetResourceData,
 	Package: "builder",
 	Name:    "GetResourceData",
@@ -420,9 +420,9 @@ func (*binaryClassGetResources) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetResources(d, obj.(*GetResources))
 }
-func (*binaryClassGetResources) Schema() *schema.Class { return schemaGetResources }
+func (*binaryClassGetResources) Schema() *schema.Entity { return schemaGetResources }
 
-var schemaGetResources = &schema.Class{
+var schemaGetResources = &schema.Entity{
 	TypeID:  binaryIDGetResources,
 	Package: "builder",
 	Name:    "GetResources",
@@ -463,9 +463,9 @@ func (*binaryClassGetState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetState(d, obj.(*GetState))
 }
-func (*binaryClassGetState) Schema() *schema.Class { return schemaGetState }
+func (*binaryClassGetState) Schema() *schema.Entity { return schemaGetState }
 
-var schemaGetState = &schema.Class{
+var schemaGetState = &schema.Entity{
 	TypeID:  binaryIDGetState,
 	Package: "builder",
 	Name:    "GetState",
@@ -518,9 +518,9 @@ func (*binaryClassGetTimingInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetTimingInfo(d, obj.(*GetTimingInfo))
 }
-func (*binaryClassGetTimingInfo) Schema() *schema.Class { return schemaGetTimingInfo }
+func (*binaryClassGetTimingInfo) Schema() *schema.Entity { return schemaGetTimingInfo }
 
-var schemaGetTimingInfo = &schema.Class{
+var schemaGetTimingInfo = &schema.Entity{
 	TypeID:  binaryIDGetTimingInfo,
 	Package: "builder",
 	Name:    "GetTimingInfo",
@@ -557,9 +557,9 @@ func (*binaryClassIndexLimits) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIndexLimits(d, obj.(*IndexLimits))
 }
-func (*binaryClassIndexLimits) Schema() *schema.Class { return schemaIndexLimits }
+func (*binaryClassIndexLimits) Schema() *schema.Entity { return schemaIndexLimits }
 
-var schemaIndexLimits = &schema.Class{
+var schemaIndexLimits = &schema.Entity{
 	TypeID:  binaryIDIndexLimits,
 	Package: "builder",
 	Name:    "IndexLimits",
@@ -617,9 +617,9 @@ func (*binaryClassRenderFramebufferColor) Decode(d binary.Decoder) binary.Object
 func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderFramebufferColor(d, obj.(*RenderFramebufferColor))
 }
-func (*binaryClassRenderFramebufferColor) Schema() *schema.Class { return schemaRenderFramebufferColor }
+func (*binaryClassRenderFramebufferColor) Schema() *schema.Entity { return schemaRenderFramebufferColor }
 
-var schemaRenderFramebufferColor = &schema.Class{
+var schemaRenderFramebufferColor = &schema.Entity{
 	TypeID:  binaryIDRenderFramebufferColor,
 	Package: "builder",
 	Name:    "RenderFramebufferColor",
@@ -678,9 +678,9 @@ func (*binaryClassRenderFramebufferDepth) Decode(d binary.Decoder) binary.Object
 func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderFramebufferDepth(d, obj.(*RenderFramebufferDepth))
 }
-func (*binaryClassRenderFramebufferDepth) Schema() *schema.Class { return schemaRenderFramebufferDepth }
+func (*binaryClassRenderFramebufferDepth) Schema() *schema.Entity { return schemaRenderFramebufferDepth }
 
-var schemaRenderFramebufferDepth = &schema.Class{
+var schemaRenderFramebufferDepth = &schema.Entity{
 	TypeID:  binaryIDRenderFramebufferDepth,
 	Package: "builder",
 	Name:    "RenderFramebufferDepth",
@@ -722,9 +722,9 @@ func (*binaryClassSet) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSet(d, obj.(*Set))
 }
-func (*binaryClassSet) Schema() *schema.Class { return schemaSet }
+func (*binaryClassSet) Schema() *schema.Entity { return schemaSet }
 
-var schemaSet = &schema.Class{
+var schemaSet = &schema.Entity{
 	TypeID:  binaryIDSet,
 	Package: "builder",
 	Name:    "Set",
@@ -762,11 +762,11 @@ func (*binaryClassatomFramebufferDimensions) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassatomFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeatomFramebufferDimensions(d, obj.(*atomFramebufferDimensions))
 }
-func (*binaryClassatomFramebufferDimensions) Schema() *schema.Class {
+func (*binaryClassatomFramebufferDimensions) Schema() *schema.Entity {
 	return schemaatomFramebufferDimensions
 }
 
-var schemaatomFramebufferDimensions = &schema.Class{
+var schemaatomFramebufferDimensions = &schema.Entity{
 	TypeID:  binaryIDatomFramebufferDimensions,
 	Package: "builder",
 	Name:    "atomFramebufferDimensions",
@@ -807,9 +807,9 @@ func (*binaryClasscalcIndexLimits) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscalcIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecalcIndexLimits(d, obj.(*calcIndexLimits))
 }
-func (*binaryClasscalcIndexLimits) Schema() *schema.Class { return schemacalcIndexLimits }
+func (*binaryClasscalcIndexLimits) Schema() *schema.Entity { return schemacalcIndexLimits }
 
-var schemacalcIndexLimits = &schema.Class{
+var schemacalcIndexLimits = &schema.Entity{
 	TypeID:  binaryIDcalcIndexLimits,
 	Package: "builder",
 	Name:    "calcIndexLimits",
@@ -857,11 +857,11 @@ func (*binaryClasscaptureFramebufferDimensions) Decode(d binary.Decoder) binary.
 func (*binaryClasscaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecaptureFramebufferDimensions(d, obj.(*captureFramebufferDimensions))
 }
-func (*binaryClasscaptureFramebufferDimensions) Schema() *schema.Class {
+func (*binaryClasscaptureFramebufferDimensions) Schema() *schema.Entity {
 	return schemacaptureFramebufferDimensions
 }
 
-var schemacaptureFramebufferDimensions = &schema.Class{
+var schemacaptureFramebufferDimensions = &schema.Entity{
 	TypeID:  binaryIDcaptureFramebufferDimensions,
 	Package: "builder",
 	Name:    "captureFramebufferDimensions",
@@ -906,11 +906,11 @@ func (*binaryClassgetCaptureFramebufferDimensions) Decode(d binary.Decoder) bina
 func (*binaryClassgetCaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodegetCaptureFramebufferDimensions(d, obj.(*getCaptureFramebufferDimensions))
 }
-func (*binaryClassgetCaptureFramebufferDimensions) Schema() *schema.Class {
+func (*binaryClassgetCaptureFramebufferDimensions) Schema() *schema.Entity {
 	return schemagetCaptureFramebufferDimensions
 }
 
-var schemagetCaptureFramebufferDimensions = &schema.Class{
+var schemagetCaptureFramebufferDimensions = &schema.Entity{
 	TypeID:  binaryIDgetCaptureFramebufferDimensions,
 	Package: "builder",
 	Name:    "getCaptureFramebufferDimensions",

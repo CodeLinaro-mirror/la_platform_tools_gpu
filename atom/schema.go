@@ -33,7 +33,7 @@ type Metadata struct {
 
 // FindMetadata finds the atom metadata for the given schema class.
 // Returns nil if the class was not for an atom.
-func FindMetadata(class *schema.Class) *Metadata {
+func FindMetadata(class *schema.Entity) *Metadata {
 	for _, m := range class.Metadata {
 		if meta, ok := m.(*Metadata); ok {
 			return meta

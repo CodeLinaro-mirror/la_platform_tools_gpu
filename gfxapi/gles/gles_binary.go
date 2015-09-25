@@ -2000,9 +2000,9 @@ func (*binaryClassArchitecture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassArchitecture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeArchitecture(d, obj.(*Architecture))
 }
-func (*binaryClassArchitecture) Schema() *schema.Class { return schemaArchitecture }
+func (*binaryClassArchitecture) Schema() *schema.Entity { return schemaArchitecture }
 
-var schemaArchitecture = &schema.Class{
+var schemaArchitecture = &schema.Entity{
 	TypeID:  binaryIDArchitecture,
 	Package: "gles",
 	Name:    "Architecture",
@@ -2045,9 +2045,9 @@ func (*binaryClassColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeColor(d, obj.(*Color))
 }
-func (*binaryClassColor) Schema() *schema.Class { return schemaColor }
+func (*binaryClassColor) Schema() *schema.Entity { return schemaColor }
 
-var schemaColor = &schema.Class{
+var schemaColor = &schema.Entity{
 	TypeID:  binaryIDColor,
 	Package: "gles",
 	Name:    "Color",
@@ -2095,9 +2095,9 @@ func (*binaryClassBlendState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBlendState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBlendState(d, obj.(*BlendState))
 }
-func (*binaryClassBlendState) Schema() *schema.Class { return schemaBlendState }
+func (*binaryClassBlendState) Schema() *schema.Entity { return schemaBlendState }
 
-var schemaBlendState = &schema.Class{
+var schemaBlendState = &schema.Entity{
 	TypeID:  binaryIDBlendState,
 	Package: "gles",
 	Name:    "BlendState",
@@ -2140,9 +2140,9 @@ func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSliceInfo(d, obj.(*SliceInfo))
 }
-func (*binaryClassSliceInfo) Schema() *schema.Class { return schemaSliceInfo }
+func (*binaryClassSliceInfo) Schema() *schema.Entity { return schemaSliceInfo }
 
-var schemaSliceInfo = &schema.Class{
+var schemaSliceInfo = &schema.Entity{
 	TypeID:  binaryIDSliceInfo,
 	Package: "gles",
 	Name:    "SliceInfo",
@@ -2177,9 +2177,9 @@ func (*binaryClassU8ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ˢ(d, obj.(*U8ˢ))
 }
-func (*binaryClassU8ˢ) Schema() *schema.Class { return schemaU8ˢ }
+func (*binaryClassU8ˢ) Schema() *schema.Entity { return schemaU8ˢ }
 
-var schemaU8ˢ = &schema.Class{
+var schemaU8ˢ = &schema.Entity{
 	TypeID:  binaryIDU8ˢ,
 	Package: "gles",
 	Name:    "U8ˢ",
@@ -2222,9 +2222,9 @@ func (*binaryClassBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBuffer(d, obj.(*Buffer))
 }
-func (*binaryClassBuffer) Schema() *schema.Class { return schemaBuffer }
+func (*binaryClassBuffer) Schema() *schema.Entity { return schemaBuffer }
 
-var schemaBuffer = &schema.Class{
+var schemaBuffer = &schema.Entity{
 	TypeID:  binaryIDBuffer,
 	Package: "gles",
 	Name:    "Buffer",
@@ -2262,9 +2262,9 @@ func (*binaryClassBufferDataPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferDataPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferDataPointer(d, obj.(*BufferDataPointer))
 }
-func (*binaryClassBufferDataPointer) Schema() *schema.Class { return schemaBufferDataPointer }
+func (*binaryClassBufferDataPointer) Schema() *schema.Entity { return schemaBufferDataPointer }
 
-var schemaBufferDataPointer = &schema.Class{
+var schemaBufferDataPointer = &schema.Entity{
 	TypeID:  binaryIDBufferDataPointer,
 	Package: "gles",
 	Name:    "BufferDataPointer",
@@ -2297,9 +2297,9 @@ func (*binaryClassBufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdˢ(d, obj.(*BufferIdˢ))
 }
-func (*binaryClassBufferIdˢ) Schema() *schema.Class { return schemaBufferIdˢ }
+func (*binaryClassBufferIdˢ) Schema() *schema.Entity { return schemaBufferIdˢ }
 
-var schemaBufferIdˢ = &schema.Class{
+var schemaBufferIdˢ = &schema.Entity{
 	TypeID:  binaryIDBufferIdˢ,
 	Package: "gles",
 	Name:    "BufferIdˢ",
@@ -2332,9 +2332,9 @@ func (*binaryClassBufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdᵖ(d, obj.(*BufferIdᵖ))
 }
-func (*binaryClassBufferIdᵖ) Schema() *schema.Class { return schemaBufferIdᵖ }
+func (*binaryClassBufferIdᵖ) Schema() *schema.Entity { return schemaBufferIdᵖ }
 
-var schemaBufferIdᵖ = &schema.Class{
+var schemaBufferIdᵖ = &schema.Entity{
 	TypeID:  binaryIDBufferIdᵖ,
 	Package: "gles",
 	Name:    "BufferIdᵖ",
@@ -2367,9 +2367,9 @@ func (*binaryClassBufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdᶜᵖ(d, obj.(*BufferIdᶜᵖ))
 }
-func (*binaryClassBufferIdᶜᵖ) Schema() *schema.Class { return schemaBufferIdᶜᵖ }
+func (*binaryClassBufferIdᶜᵖ) Schema() *schema.Entity { return schemaBufferIdᶜᵖ }
 
-var schemaBufferIdᶜᵖ = &schema.Class{
+var schemaBufferIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDBufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "BufferIdᶜᵖ",
@@ -2402,9 +2402,9 @@ func (*binaryClassCGLContextObj) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObj) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObj(d, obj.(*CGLContextObj))
 }
-func (*binaryClassCGLContextObj) Schema() *schema.Class { return schemaCGLContextObj }
+func (*binaryClassCGLContextObj) Schema() *schema.Entity { return schemaCGLContextObj }
 
-var schemaCGLContextObj = &schema.Class{
+var schemaCGLContextObj = &schema.Entity{
 	TypeID:  binaryIDCGLContextObj,
 	Package: "gles",
 	Name:    "CGLContextObj",
@@ -2437,9 +2437,9 @@ func (*binaryClassCGLContextObjˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObjˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObjˢ(d, obj.(*CGLContextObjˢ))
 }
-func (*binaryClassCGLContextObjˢ) Schema() *schema.Class { return schemaCGLContextObjˢ }
+func (*binaryClassCGLContextObjˢ) Schema() *schema.Entity { return schemaCGLContextObjˢ }
 
-var schemaCGLContextObjˢ = &schema.Class{
+var schemaCGLContextObjˢ = &schema.Entity{
 	TypeID:  binaryIDCGLContextObjˢ,
 	Package: "gles",
 	Name:    "CGLContextObjˢ",
@@ -2472,9 +2472,9 @@ func (*binaryClassCGLContextObjᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObjᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObjᵖ(d, obj.(*CGLContextObjᵖ))
 }
-func (*binaryClassCGLContextObjᵖ) Schema() *schema.Class { return schemaCGLContextObjᵖ }
+func (*binaryClassCGLContextObjᵖ) Schema() *schema.Entity { return schemaCGLContextObjᵖ }
 
-var schemaCGLContextObjᵖ = &schema.Class{
+var schemaCGLContextObjᵖ = &schema.Entity{
 	TypeID:  binaryIDCGLContextObjᵖ,
 	Package: "gles",
 	Name:    "CGLContextObjᵖ",
@@ -2507,9 +2507,9 @@ func (*binaryClassCGLPixelFormatObj) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLPixelFormatObj) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLPixelFormatObj(d, obj.(*CGLPixelFormatObj))
 }
-func (*binaryClassCGLPixelFormatObj) Schema() *schema.Class { return schemaCGLPixelFormatObj }
+func (*binaryClassCGLPixelFormatObj) Schema() *schema.Entity { return schemaCGLPixelFormatObj }
 
-var schemaCGLPixelFormatObj = &schema.Class{
+var schemaCGLPixelFormatObj = &schema.Entity{
 	TypeID:  binaryIDCGLPixelFormatObj,
 	Package: "gles",
 	Name:    "CGLPixelFormatObj",
@@ -2550,9 +2550,9 @@ func (*binaryClassCGLCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLCreateContext(d, obj.(*CGLCreateContext))
 }
-func (*binaryClassCGLCreateContext) Schema() *schema.Class { return schemaCGLCreateContext }
+func (*binaryClassCGLCreateContext) Schema() *schema.Entity { return schemaCGLCreateContext }
 
-var schemaCGLCreateContext = &schema.Class{
+var schemaCGLCreateContext = &schema.Entity{
 	TypeID:  binaryIDCGLCreateContext,
 	Package: "gles",
 	Name:    "CGLCreateContext",
@@ -2593,9 +2593,9 @@ func (*binaryClassCGLFlushDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLFlushDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLFlushDrawable(d, obj.(*CGLFlushDrawable))
 }
-func (*binaryClassCGLFlushDrawable) Schema() *schema.Class { return schemaCGLFlushDrawable }
+func (*binaryClassCGLFlushDrawable) Schema() *schema.Entity { return schemaCGLFlushDrawable }
 
-var schemaCGLFlushDrawable = &schema.Class{
+var schemaCGLFlushDrawable = &schema.Entity{
 	TypeID:  binaryIDCGLFlushDrawable,
 	Package: "gles",
 	Name:    "CGLFlushDrawable",
@@ -2630,9 +2630,9 @@ func (*binaryClassCGSConnectionIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionIDᵖ(d, obj.(*CGSConnectionIDᵖ))
 }
-func (*binaryClassCGSConnectionIDᵖ) Schema() *schema.Class { return schemaCGSConnectionIDᵖ }
+func (*binaryClassCGSConnectionIDᵖ) Schema() *schema.Entity { return schemaCGSConnectionIDᵖ }
 
-var schemaCGSConnectionIDᵖ = &schema.Class{
+var schemaCGSConnectionIDᵖ = &schema.Entity{
 	TypeID:  binaryIDCGSConnectionIDᵖ,
 	Package: "gles",
 	Name:    "CGSConnectionIDᵖ",
@@ -2665,9 +2665,9 @@ func (*binaryClassCGSWindowIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSWindowIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSWindowIDᵖ(d, obj.(*CGSWindowIDᵖ))
 }
-func (*binaryClassCGSWindowIDᵖ) Schema() *schema.Class { return schemaCGSWindowIDᵖ }
+func (*binaryClassCGSWindowIDᵖ) Schema() *schema.Entity { return schemaCGSWindowIDᵖ }
 
-var schemaCGSWindowIDᵖ = &schema.Class{
+var schemaCGSWindowIDᵖ = &schema.Entity{
 	TypeID:  binaryIDCGSWindowIDᵖ,
 	Package: "gles",
 	Name:    "CGSWindowIDᵖ",
@@ -2700,9 +2700,9 @@ func (*binaryClassCGSSurfaceIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSSurfaceIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSSurfaceIDᵖ(d, obj.(*CGSSurfaceIDᵖ))
 }
-func (*binaryClassCGSSurfaceIDᵖ) Schema() *schema.Class { return schemaCGSSurfaceIDᵖ }
+func (*binaryClassCGSSurfaceIDᵖ) Schema() *schema.Entity { return schemaCGSSurfaceIDᵖ }
 
-var schemaCGSSurfaceIDᵖ = &schema.Class{
+var schemaCGSSurfaceIDᵖ = &schema.Entity{
 	TypeID:  binaryIDCGSSurfaceIDᵖ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDᵖ",
@@ -2745,9 +2745,9 @@ func (*binaryClassCGLGetSurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLGetSurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLGetSurface(d, obj.(*CGLGetSurface))
 }
-func (*binaryClassCGLGetSurface) Schema() *schema.Class { return schemaCGLGetSurface }
+func (*binaryClassCGLGetSurface) Schema() *schema.Entity { return schemaCGLGetSurface }
 
-var schemaCGLGetSurface = &schema.Class{
+var schemaCGLGetSurface = &schema.Entity{
 	TypeID:  binaryIDCGLGetSurface,
 	Package: "gles",
 	Name:    "CGLGetSurface",
@@ -2789,9 +2789,9 @@ func (*binaryClassCGLSetCurrentContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLSetCurrentContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLSetCurrentContext(d, obj.(*CGLSetCurrentContext))
 }
-func (*binaryClassCGLSetCurrentContext) Schema() *schema.Class { return schemaCGLSetCurrentContext }
+func (*binaryClassCGLSetCurrentContext) Schema() *schema.Entity { return schemaCGLSetCurrentContext }
 
-var schemaCGLSetCurrentContext = &schema.Class{
+var schemaCGLSetCurrentContext = &schema.Entity{
 	TypeID:  binaryIDCGLSetCurrentContext,
 	Package: "gles",
 	Name:    "CGLSetCurrentContext",
@@ -2826,9 +2826,9 @@ func (*binaryClassCGSConnectionID) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionID) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionID(d, obj.(*CGSConnectionID))
 }
-func (*binaryClassCGSConnectionID) Schema() *schema.Class { return schemaCGSConnectionID }
+func (*binaryClassCGSConnectionID) Schema() *schema.Entity { return schemaCGSConnectionID }
 
-var schemaCGSConnectionID = &schema.Class{
+var schemaCGSConnectionID = &schema.Entity{
 	TypeID:  binaryIDCGSConnectionID,
 	Package: "gles",
 	Name:    "CGSConnectionID",
@@ -2861,9 +2861,9 @@ func (*binaryClassCGSConnectionIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionIDˢ(d, obj.(*CGSConnectionIDˢ))
 }
-func (*binaryClassCGSConnectionIDˢ) Schema() *schema.Class { return schemaCGSConnectionIDˢ }
+func (*binaryClassCGSConnectionIDˢ) Schema() *schema.Entity { return schemaCGSConnectionIDˢ }
 
-var schemaCGSConnectionIDˢ = &schema.Class{
+var schemaCGSConnectionIDˢ = &schema.Entity{
 	TypeID:  binaryIDCGSConnectionIDˢ,
 	Package: "gles",
 	Name:    "CGSConnectionIDˢ",
@@ -2896,9 +2896,9 @@ func (*binaryClassF64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ᵖ(d, obj.(*F64ᵖ))
 }
-func (*binaryClassF64ᵖ) Schema() *schema.Class { return schemaF64ᵖ }
+func (*binaryClassF64ᵖ) Schema() *schema.Entity { return schemaF64ᵖ }
 
-var schemaF64ᵖ = &schema.Class{
+var schemaF64ᵖ = &schema.Entity{
 	TypeID:  binaryIDF64ᵖ,
 	Package: "gles",
 	Name:    "F64ᵖ",
@@ -2941,9 +2941,9 @@ func (*binaryClassCGSGetSurfaceBounds) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSGetSurfaceBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSGetSurfaceBounds(d, obj.(*CGSGetSurfaceBounds))
 }
-func (*binaryClassCGSGetSurfaceBounds) Schema() *schema.Class { return schemaCGSGetSurfaceBounds }
+func (*binaryClassCGSGetSurfaceBounds) Schema() *schema.Entity { return schemaCGSGetSurfaceBounds }
 
-var schemaCGSGetSurfaceBounds = &schema.Class{
+var schemaCGSGetSurfaceBounds = &schema.Entity{
 	TypeID:  binaryIDCGSGetSurfaceBounds,
 	Package: "gles",
 	Name:    "CGSGetSurfaceBounds",
@@ -2981,9 +2981,9 @@ func (*binaryClassCGSSurfaceIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSSurfaceIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSSurfaceIDˢ(d, obj.(*CGSSurfaceIDˢ))
 }
-func (*binaryClassCGSSurfaceIDˢ) Schema() *schema.Class { return schemaCGSSurfaceIDˢ }
+func (*binaryClassCGSSurfaceIDˢ) Schema() *schema.Entity { return schemaCGSSurfaceIDˢ }
 
-var schemaCGSSurfaceIDˢ = &schema.Class{
+var schemaCGSSurfaceIDˢ = &schema.Entity{
 	TypeID:  binaryIDCGSSurfaceIDˢ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDˢ",
@@ -3016,9 +3016,9 @@ func (*binaryClassCGSWindowIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSWindowIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSWindowIDˢ(d, obj.(*CGSWindowIDˢ))
 }
-func (*binaryClassCGSWindowIDˢ) Schema() *schema.Class { return schemaCGSWindowIDˢ }
+func (*binaryClassCGSWindowIDˢ) Schema() *schema.Entity { return schemaCGSWindowIDˢ }
 
-var schemaCGSWindowIDˢ = &schema.Class{
+var schemaCGSWindowIDˢ = &schema.Entity{
 	TypeID:  binaryIDCGSWindowIDˢ,
 	Package: "gles",
 	Name:    "CGSWindowIDˢ",
@@ -3051,9 +3051,9 @@ func (*binaryClassCharˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharˢ(d, obj.(*Charˢ))
 }
-func (*binaryClassCharˢ) Schema() *schema.Class { return schemaCharˢ }
+func (*binaryClassCharˢ) Schema() *schema.Entity { return schemaCharˢ }
 
-var schemaCharˢ = &schema.Class{
+var schemaCharˢ = &schema.Entity{
 	TypeID:  binaryIDCharˢ,
 	Package: "gles",
 	Name:    "Charˢ",
@@ -3086,9 +3086,9 @@ func (*binaryClassCharᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖ(d, obj.(*Charᵖ))
 }
-func (*binaryClassCharᵖ) Schema() *schema.Class { return schemaCharᵖ }
+func (*binaryClassCharᵖ) Schema() *schema.Entity { return schemaCharᵖ }
 
-var schemaCharᵖ = &schema.Class{
+var schemaCharᵖ = &schema.Entity{
 	TypeID:  binaryIDCharᵖ,
 	Package: "gles",
 	Name:    "Charᵖ",
@@ -3125,9 +3125,9 @@ func (*binaryClassClearState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassClearState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeClearState(d, obj.(*ClearState))
 }
-func (*binaryClassClearState) Schema() *schema.Class { return schemaClearState }
+func (*binaryClassClearState) Schema() *schema.Entity { return schemaClearState }
 
-var schemaClearState = &schema.Class{
+var schemaClearState = &schema.Entity{
 	TypeID:  binaryIDClearState,
 	Package: "gles",
 	Name:    "ClearState",
@@ -3174,9 +3174,9 @@ func (*binaryClassContextCreationInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContextCreationInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContextCreationInfo(d, obj.(*ContextCreationInfo))
 }
-func (*binaryClassContextCreationInfo) Schema() *schema.Class { return schemaContextCreationInfo }
+func (*binaryClassContextCreationInfo) Schema() *schema.Entity { return schemaContextCreationInfo }
 
-var schemaContextCreationInfo = &schema.Class{
+var schemaContextCreationInfo = &schema.Entity{
 	TypeID:  binaryIDContextCreationInfo,
 	Package: "gles",
 	Name:    "ContextCreationInfo",
@@ -3221,9 +3221,9 @@ func (*binaryClassRect) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRect(d, obj.(*Rect))
 }
-func (*binaryClassRect) Schema() *schema.Class { return schemaRect }
+func (*binaryClassRect) Schema() *schema.Entity { return schemaRect }
 
-var schemaRect = &schema.Class{
+var schemaRect = &schema.Entity{
 	TypeID:  binaryIDRect,
 	Package: "gles",
 	Name:    "Rect",
@@ -3307,9 +3307,9 @@ func (*binaryClassRasterizerState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRasterizerState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRasterizerState(d, obj.(*RasterizerState))
 }
-func (*binaryClassRasterizerState) Schema() *schema.Class { return schemaRasterizerState }
+func (*binaryClassRasterizerState) Schema() *schema.Entity { return schemaRasterizerState }
 
-var schemaRasterizerState = &schema.Class{
+var schemaRasterizerState = &schema.Entity{
 	TypeID:  binaryIDRasterizerState,
 	Package: "gles",
 	Name:    "RasterizerState",
@@ -3359,9 +3359,9 @@ func (*binaryClassVertexAttributeValue) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttributeValue) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttributeValue(d, obj.(*VertexAttributeValue))
 }
-func (*binaryClassVertexAttributeValue) Schema() *schema.Class { return schemaVertexAttributeValue }
+func (*binaryClassVertexAttributeValue) Schema() *schema.Entity { return schemaVertexAttributeValue }
 
-var schemaVertexAttributeValue = &schema.Class{
+var schemaVertexAttributeValue = &schema.Entity{
 	TypeID:  binaryIDVertexAttributeValue,
 	Package: "gles",
 	Name:    "VertexAttributeValue",
@@ -3408,9 +3408,9 @@ func (*binaryClassTextureUnit) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureUnit) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureUnit(d, obj.(*TextureUnit))
 }
-func (*binaryClassTextureUnit) Schema() *schema.Class { return schemaTextureUnit }
+func (*binaryClassTextureUnit) Schema() *schema.Entity { return schemaTextureUnit }
 
-var schemaTextureUnit = &schema.Class{
+var schemaTextureUnit = &schema.Entity{
 	TypeID:  binaryIDTextureUnit,
 	Package: "gles",
 	Name:    "TextureUnit",
@@ -3449,9 +3449,9 @@ func (*binaryClassRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbuffer(d, obj.(*Renderbuffer))
 }
-func (*binaryClassRenderbuffer) Schema() *schema.Class { return schemaRenderbuffer }
+func (*binaryClassRenderbuffer) Schema() *schema.Entity { return schemaRenderbuffer }
 
-var schemaRenderbuffer = &schema.Class{
+var schemaRenderbuffer = &schema.Entity{
 	TypeID:  binaryIDRenderbuffer,
 	Package: "gles",
 	Name:    "Renderbuffer",
@@ -3495,9 +3495,9 @@ func (*binaryClassImage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImage(d, obj.(*Image))
 }
-func (*binaryClassImage) Schema() *schema.Class { return schemaImage }
+func (*binaryClassImage) Schema() *schema.Entity { return schemaImage }
 
-var schemaImage = &schema.Class{
+var schemaImage = &schema.Entity{
 	TypeID:  binaryIDImage,
 	Package: "gles",
 	Name:    "Image",
@@ -3548,9 +3548,9 @@ func (*binaryClassCubemapLevel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCubemapLevel(d, obj.(*CubemapLevel))
 }
-func (*binaryClassCubemapLevel) Schema() *schema.Class { return schemaCubemapLevel }
+func (*binaryClassCubemapLevel) Schema() *schema.Entity { return schemaCubemapLevel }
 
-var schemaCubemapLevel = &schema.Class{
+var schemaCubemapLevel = &schema.Entity{
 	TypeID:  binaryIDCubemapLevel,
 	Package: "gles",
 	Name:    "CubemapLevel",
@@ -3637,9 +3637,9 @@ func (*binaryClassTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexture(d, obj.(*Texture))
 }
-func (*binaryClassTexture) Schema() *schema.Class { return schemaTexture }
+func (*binaryClassTexture) Schema() *schema.Entity { return schemaTexture }
 
-var schemaTexture = &schema.Class{
+var schemaTexture = &schema.Entity{
 	TypeID:  binaryIDTexture,
 	Package: "gles",
 	Name:    "Texture",
@@ -3691,11 +3691,11 @@ func (*binaryClassFramebufferAttachmentInfo) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassFramebufferAttachmentInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferAttachmentInfo(d, obj.(*FramebufferAttachmentInfo))
 }
-func (*binaryClassFramebufferAttachmentInfo) Schema() *schema.Class {
+func (*binaryClassFramebufferAttachmentInfo) Schema() *schema.Entity {
 	return schemaFramebufferAttachmentInfo
 }
 
-var schemaFramebufferAttachmentInfo = &schema.Class{
+var schemaFramebufferAttachmentInfo = &schema.Entity{
 	TypeID:  binaryIDFramebufferAttachmentInfo,
 	Package: "gles",
 	Name:    "FramebufferAttachmentInfo",
@@ -3745,9 +3745,9 @@ func (*binaryClassFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebuffer(d, obj.(*Framebuffer))
 }
-func (*binaryClassFramebuffer) Schema() *schema.Class { return schemaFramebuffer }
+func (*binaryClassFramebuffer) Schema() *schema.Entity { return schemaFramebuffer }
 
-var schemaFramebuffer = &schema.Class{
+var schemaFramebuffer = &schema.Entity{
 	TypeID:  binaryIDFramebuffer,
 	Package: "gles",
 	Name:    "Framebuffer",
@@ -3780,9 +3780,9 @@ func (*binaryClassGLcharˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharˢ(d, obj.(*GLcharˢ))
 }
-func (*binaryClassGLcharˢ) Schema() *schema.Class { return schemaGLcharˢ }
+func (*binaryClassGLcharˢ) Schema() *schema.Entity { return schemaGLcharˢ }
 
-var schemaGLcharˢ = &schema.Class{
+var schemaGLcharˢ = &schema.Entity{
 	TypeID:  binaryIDGLcharˢ,
 	Package: "gles",
 	Name:    "GLcharˢ",
@@ -3825,9 +3825,9 @@ func (*binaryClassShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShader(d, obj.(*Shader))
 }
-func (*binaryClassShader) Schema() *schema.Class { return schemaShader }
+func (*binaryClassShader) Schema() *schema.Entity { return schemaShader }
 
-var schemaShader = &schema.Class{
+var schemaShader = &schema.Entity{
 	TypeID:  binaryIDShader,
 	Package: "gles",
 	Name:    "Shader",
@@ -3869,9 +3869,9 @@ func (*binaryClassVertexAttribute) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttribute) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttribute(d, obj.(*VertexAttribute))
 }
-func (*binaryClassVertexAttribute) Schema() *schema.Class { return schemaVertexAttribute }
+func (*binaryClassVertexAttribute) Schema() *schema.Entity { return schemaVertexAttribute }
 
-var schemaVertexAttribute = &schema.Class{
+var schemaVertexAttribute = &schema.Entity{
 	TypeID:  binaryIDVertexAttribute,
 	Package: "gles",
 	Name:    "VertexAttribute",
@@ -3910,9 +3910,9 @@ func (*binaryClassUniform) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassUniform) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeUniform(d, obj.(*Uniform))
 }
-func (*binaryClassUniform) Schema() *schema.Class { return schemaUniform }
+func (*binaryClassUniform) Schema() *schema.Entity { return schemaUniform }
 
-var schemaUniform = &schema.Class{
+var schemaUniform = &schema.Entity{
 	TypeID:  binaryIDUniform,
 	Package: "gles",
 	Name:    "Uniform",
@@ -4015,9 +4015,9 @@ func (*binaryClassProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgram(d, obj.(*Program))
 }
-func (*binaryClassProgram) Schema() *schema.Class { return schemaProgram }
+func (*binaryClassProgram) Schema() *schema.Entity { return schemaProgram }
 
-var schemaProgram = &schema.Class{
+var schemaProgram = &schema.Entity{
 	TypeID:  binaryIDProgram,
 	Package: "gles",
 	Name:    "Program",
@@ -4062,9 +4062,9 @@ func (*binaryClassVertexBufferBinding) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexBufferBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexBufferBinding(d, obj.(*VertexBufferBinding))
 }
-func (*binaryClassVertexBufferBinding) Schema() *schema.Class { return schemaVertexBufferBinding }
+func (*binaryClassVertexBufferBinding) Schema() *schema.Entity { return schemaVertexBufferBinding }
 
-var schemaVertexBufferBinding = &schema.Class{
+var schemaVertexBufferBinding = &schema.Entity{
 	TypeID:  binaryIDVertexBufferBinding,
 	Package: "gles",
 	Name:    "VertexBufferBinding",
@@ -4100,9 +4100,9 @@ func (*binaryClassVertexPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexPointer(d, obj.(*VertexPointer))
 }
-func (*binaryClassVertexPointer) Schema() *schema.Class { return schemaVertexPointer }
+func (*binaryClassVertexPointer) Schema() *schema.Entity { return schemaVertexPointer }
 
-var schemaVertexPointer = &schema.Class{
+var schemaVertexPointer = &schema.Entity{
 	TypeID:  binaryIDVertexPointer,
 	Package: "gles",
 	Name:    "VertexPointer",
@@ -4151,9 +4151,9 @@ func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
 }
-func (*binaryClassVertexAttributeArray) Schema() *schema.Class { return schemaVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) Schema() *schema.Entity { return schemaVertexAttributeArray }
 
-var schemaVertexAttributeArray = &schema.Class{
+var schemaVertexAttributeArray = &schema.Entity{
 	TypeID:  binaryIDVertexAttributeArray,
 	Package: "gles",
 	Name:    "VertexAttributeArray",
@@ -4240,9 +4240,9 @@ func (*binaryClassVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArray(d, obj.(*VertexArray))
 }
-func (*binaryClassVertexArray) Schema() *schema.Class { return schemaVertexArray }
+func (*binaryClassVertexArray) Schema() *schema.Entity { return schemaVertexArray }
 
-var schemaVertexArray = &schema.Class{
+var schemaVertexArray = &schema.Entity{
 	TypeID:  binaryIDVertexArray,
 	Package: "gles",
 	Name:    "VertexArray",
@@ -4274,9 +4274,9 @@ func (*binaryClassQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQuery(d, obj.(*Query))
 }
-func (*binaryClassQuery) Schema() *schema.Class { return schemaQuery }
+func (*binaryClassQuery) Schema() *schema.Entity { return schemaQuery }
 
-var schemaQuery = &schema.Class{
+var schemaQuery = &schema.Entity{
 	TypeID:  binaryIDQuery,
 	Package: "gles",
 	Name:    "Query",
@@ -4497,9 +4497,9 @@ func (*binaryClassObjects) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObjects) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObjects(d, obj.(*Objects))
 }
-func (*binaryClassObjects) Schema() *schema.Class { return schemaObjects }
+func (*binaryClassObjects) Schema() *schema.Entity { return schemaObjects }
 
-var schemaObjects = &schema.Class{
+var schemaObjects = &schema.Entity{
 	TypeID:  binaryIDObjects,
 	Package: "gles",
 	Name:    "Objects",
@@ -4677,9 +4677,9 @@ func (*binaryClassContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContext(d, obj.(*Context))
 }
-func (*binaryClassContext) Schema() *schema.Class { return schemaContext }
+func (*binaryClassContext) Schema() *schema.Entity { return schemaContext }
 
-var schemaContext = &schema.Class{
+var schemaContext = &schema.Entity{
 	TypeID:  binaryIDContext,
 	Package: "gles",
 	Name:    "Context",
@@ -4750,9 +4750,9 @@ func (*binaryClassContextInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContextInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContextInfo(d, obj.(*ContextInfo))
 }
-func (*binaryClassContextInfo) Schema() *schema.Class { return schemaContextInfo }
+func (*binaryClassContextInfo) Schema() *schema.Entity { return schemaContextInfo }
 
-var schemaContextInfo = &schema.Class{
+var schemaContextInfo = &schema.Entity{
 	TypeID:  binaryIDContextInfo,
 	Package: "gles",
 	Name:    "ContextInfo",
@@ -4796,9 +4796,9 @@ func (*binaryClassEGLConfig) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLConfig) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLConfig(d, obj.(*EGLConfig))
 }
-func (*binaryClassEGLConfig) Schema() *schema.Class { return schemaEGLConfig }
+func (*binaryClassEGLConfig) Schema() *schema.Entity { return schemaEGLConfig }
 
-var schemaEGLConfig = &schema.Class{
+var schemaEGLConfig = &schema.Entity{
 	TypeID:  binaryIDEGLConfig,
 	Package: "gles",
 	Name:    "EGLConfig",
@@ -4831,9 +4831,9 @@ func (*binaryClassEGLContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLContext(d, obj.(*EGLContext))
 }
-func (*binaryClassEGLContext) Schema() *schema.Class { return schemaEGLContext }
+func (*binaryClassEGLContext) Schema() *schema.Entity { return schemaEGLContext }
 
-var schemaEGLContext = &schema.Class{
+var schemaEGLContext = &schema.Entity{
 	TypeID:  binaryIDEGLContext,
 	Package: "gles",
 	Name:    "EGLContext",
@@ -4866,9 +4866,9 @@ func (*binaryClassEGLDisplay) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLDisplay) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLDisplay(d, obj.(*EGLDisplay))
 }
-func (*binaryClassEGLDisplay) Schema() *schema.Class { return schemaEGLDisplay }
+func (*binaryClassEGLDisplay) Schema() *schema.Entity { return schemaEGLDisplay }
 
-var schemaEGLDisplay = &schema.Class{
+var schemaEGLDisplay = &schema.Entity{
 	TypeID:  binaryIDEGLDisplay,
 	Package: "gles",
 	Name:    "EGLDisplay",
@@ -4901,9 +4901,9 @@ func (*binaryClassEGLSurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLSurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLSurface(d, obj.(*EGLSurface))
 }
-func (*binaryClassEGLSurface) Schema() *schema.Class { return schemaEGLSurface }
+func (*binaryClassEGLSurface) Schema() *schema.Entity { return schemaEGLSurface }
 
-var schemaEGLSurface = &schema.Class{
+var schemaEGLSurface = &schema.Entity{
 	TypeID:  binaryIDEGLSurface,
 	Package: "gles",
 	Name:    "EGLSurface",
@@ -4936,9 +4936,9 @@ func (*binaryClassEGLintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLintˢ(d, obj.(*EGLintˢ))
 }
-func (*binaryClassEGLintˢ) Schema() *schema.Class { return schemaEGLintˢ }
+func (*binaryClassEGLintˢ) Schema() *schema.Entity { return schemaEGLintˢ }
 
-var schemaEGLintˢ = &schema.Class{
+var schemaEGLintˢ = &schema.Entity{
 	TypeID:  binaryIDEGLintˢ,
 	Package: "gles",
 	Name:    "EGLintˢ",
@@ -4971,9 +4971,9 @@ func (*binaryClassEGLintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLintᵖ(d, obj.(*EGLintᵖ))
 }
-func (*binaryClassEGLintᵖ) Schema() *schema.Class { return schemaEGLintᵖ }
+func (*binaryClassEGLintᵖ) Schema() *schema.Entity { return schemaEGLintᵖ }
 
-var schemaEGLintᵖ = &schema.Class{
+var schemaEGLintᵖ = &schema.Entity{
 	TypeID:  binaryIDEGLintᵖ,
 	Package: "gles",
 	Name:    "EGLintᵖ",
@@ -5016,9 +5016,9 @@ func (*binaryClassEglCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglCreateContext(d, obj.(*EglCreateContext))
 }
-func (*binaryClassEglCreateContext) Schema() *schema.Class { return schemaEglCreateContext }
+func (*binaryClassEglCreateContext) Schema() *schema.Entity { return schemaEglCreateContext }
 
-var schemaEglCreateContext = &schema.Class{
+var schemaEglCreateContext = &schema.Entity{
 	TypeID:  binaryIDEglCreateContext,
 	Package: "gles",
 	Name:    "EglCreateContext",
@@ -5064,9 +5064,9 @@ func (*binaryClassEglInitialize) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglInitialize) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglInitialize(d, obj.(*EglInitialize))
 }
-func (*binaryClassEglInitialize) Schema() *schema.Class { return schemaEglInitialize }
+func (*binaryClassEglInitialize) Schema() *schema.Entity { return schemaEglInitialize }
 
-var schemaEglInitialize = &schema.Class{
+var schemaEglInitialize = &schema.Entity{
 	TypeID:  binaryIDEglInitialize,
 	Package: "gles",
 	Name:    "EglInitialize",
@@ -5113,9 +5113,9 @@ func (*binaryClassEglMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglMakeCurrent(d, obj.(*EglMakeCurrent))
 }
-func (*binaryClassEglMakeCurrent) Schema() *schema.Class { return schemaEglMakeCurrent }
+func (*binaryClassEglMakeCurrent) Schema() *schema.Entity { return schemaEglMakeCurrent }
 
-var schemaEglMakeCurrent = &schema.Class{
+var schemaEglMakeCurrent = &schema.Entity{
 	TypeID:  binaryIDEglMakeCurrent,
 	Package: "gles",
 	Name:    "EglMakeCurrent",
@@ -5163,9 +5163,9 @@ func (*binaryClassEglQuerySurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglQuerySurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglQuerySurface(d, obj.(*EglQuerySurface))
 }
-func (*binaryClassEglQuerySurface) Schema() *schema.Class { return schemaEglQuerySurface }
+func (*binaryClassEglQuerySurface) Schema() *schema.Entity { return schemaEglQuerySurface }
 
-var schemaEglQuerySurface = &schema.Class{
+var schemaEglQuerySurface = &schema.Entity{
 	TypeID:  binaryIDEglQuerySurface,
 	Package: "gles",
 	Name:    "EglQuerySurface",
@@ -5203,9 +5203,9 @@ func (*binaryClassVoidᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖ(d, obj.(*Voidᵖ))
 }
-func (*binaryClassVoidᵖ) Schema() *schema.Class { return schemaVoidᵖ }
+func (*binaryClassVoidᵖ) Schema() *schema.Entity { return schemaVoidᵖ }
 
-var schemaVoidᵖ = &schema.Class{
+var schemaVoidᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᵖ,
 	Package: "gles",
 	Name:    "Voidᵖ",
@@ -5244,9 +5244,9 @@ func (*binaryClassEglSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglSwapBuffers(d, obj.(*EglSwapBuffers))
 }
-func (*binaryClassEglSwapBuffers) Schema() *schema.Class { return schemaEglSwapBuffers }
+func (*binaryClassEglSwapBuffers) Schema() *schema.Entity { return schemaEglSwapBuffers }
 
-var schemaEglSwapBuffers = &schema.Class{
+var schemaEglSwapBuffers = &schema.Entity{
 	TypeID:  binaryIDEglSwapBuffers,
 	Package: "gles",
 	Name:    "EglSwapBuffers",
@@ -5282,9 +5282,9 @@ func (*binaryClassF64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ˢ(d, obj.(*F64ˢ))
 }
-func (*binaryClassF64ˢ) Schema() *schema.Class { return schemaF64ˢ }
+func (*binaryClassF64ˢ) Schema() *schema.Entity { return schemaF64ˢ }
 
-var schemaF64ˢ = &schema.Class{
+var schemaF64ˢ = &schema.Entity{
 	TypeID:  binaryIDF64ˢ,
 	Package: "gles",
 	Name:    "F64ˢ",
@@ -5317,9 +5317,9 @@ func (*binaryClassFlushPostBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFlushPostBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFlushPostBuffer(d, obj.(*FlushPostBuffer))
 }
-func (*binaryClassFlushPostBuffer) Schema() *schema.Class { return schemaFlushPostBuffer }
+func (*binaryClassFlushPostBuffer) Schema() *schema.Entity { return schemaFlushPostBuffer }
 
-var schemaFlushPostBuffer = &schema.Class{
+var schemaFlushPostBuffer = &schema.Entity{
 	TypeID:  binaryIDFlushPostBuffer,
 	Package: "gles",
 	Name:    "FlushPostBuffer",
@@ -5352,9 +5352,9 @@ func (*binaryClassFramebufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdˢ(d, obj.(*FramebufferIdˢ))
 }
-func (*binaryClassFramebufferIdˢ) Schema() *schema.Class { return schemaFramebufferIdˢ }
+func (*binaryClassFramebufferIdˢ) Schema() *schema.Entity { return schemaFramebufferIdˢ }
 
-var schemaFramebufferIdˢ = &schema.Class{
+var schemaFramebufferIdˢ = &schema.Entity{
 	TypeID:  binaryIDFramebufferIdˢ,
 	Package: "gles",
 	Name:    "FramebufferIdˢ",
@@ -5387,9 +5387,9 @@ func (*binaryClassFramebufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdᵖ(d, obj.(*FramebufferIdᵖ))
 }
-func (*binaryClassFramebufferIdᵖ) Schema() *schema.Class { return schemaFramebufferIdᵖ }
+func (*binaryClassFramebufferIdᵖ) Schema() *schema.Entity { return schemaFramebufferIdᵖ }
 
-var schemaFramebufferIdᵖ = &schema.Class{
+var schemaFramebufferIdᵖ = &schema.Entity{
 	TypeID:  binaryIDFramebufferIdᵖ,
 	Package: "gles",
 	Name:    "FramebufferIdᵖ",
@@ -5422,9 +5422,9 @@ func (*binaryClassFramebufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdᶜᵖ(d, obj.(*FramebufferIdᶜᵖ))
 }
-func (*binaryClassFramebufferIdᶜᵖ) Schema() *schema.Class { return schemaFramebufferIdᶜᵖ }
+func (*binaryClassFramebufferIdᶜᵖ) Schema() *schema.Entity { return schemaFramebufferIdᶜᵖ }
 
-var schemaFramebufferIdᶜᵖ = &schema.Class{
+var schemaFramebufferIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDFramebufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "FramebufferIdᶜᵖ",
@@ -5457,9 +5457,9 @@ func (*binaryClassGLDEBUGPROC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLDEBUGPROC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLDEBUGPROC(d, obj.(*GLDEBUGPROC))
 }
-func (*binaryClassGLDEBUGPROC) Schema() *schema.Class { return schemaGLDEBUGPROC }
+func (*binaryClassGLDEBUGPROC) Schema() *schema.Entity { return schemaGLDEBUGPROC }
 
-var schemaGLDEBUGPROC = &schema.Class{
+var schemaGLDEBUGPROC = &schema.Entity{
 	TypeID:  binaryIDGLDEBUGPROC,
 	Package: "gles",
 	Name:    "GLDEBUGPROC",
@@ -5492,9 +5492,9 @@ func (*binaryClassGLXContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLXContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLXContext(d, obj.(*GLXContext))
 }
-func (*binaryClassGLXContext) Schema() *schema.Class { return schemaGLXContext }
+func (*binaryClassGLXContext) Schema() *schema.Entity { return schemaGLXContext }
 
-var schemaGLXContext = &schema.Class{
+var schemaGLXContext = &schema.Entity{
 	TypeID:  binaryIDGLXContext,
 	Package: "gles",
 	Name:    "GLXContext",
@@ -5527,9 +5527,9 @@ func (*binaryClassGLXDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLXDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLXDrawable(d, obj.(*GLXDrawable))
 }
-func (*binaryClassGLXDrawable) Schema() *schema.Class { return schemaGLXDrawable }
+func (*binaryClassGLXDrawable) Schema() *schema.Entity { return schemaGLXDrawable }
 
-var schemaGLXDrawable = &schema.Class{
+var schemaGLXDrawable = &schema.Entity{
 	TypeID:  binaryIDGLXDrawable,
 	Package: "gles",
 	Name:    "GLXDrawable",
@@ -5562,9 +5562,9 @@ func (*binaryClassGLbooleanˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLbooleanˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLbooleanˢ(d, obj.(*GLbooleanˢ))
 }
-func (*binaryClassGLbooleanˢ) Schema() *schema.Class { return schemaGLbooleanˢ }
+func (*binaryClassGLbooleanˢ) Schema() *schema.Entity { return schemaGLbooleanˢ }
 
-var schemaGLbooleanˢ = &schema.Class{
+var schemaGLbooleanˢ = &schema.Entity{
 	TypeID:  binaryIDGLbooleanˢ,
 	Package: "gles",
 	Name:    "GLbooleanˢ",
@@ -5597,9 +5597,9 @@ func (*binaryClassGLbooleanᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLbooleanᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLbooleanᵖ(d, obj.(*GLbooleanᵖ))
 }
-func (*binaryClassGLbooleanᵖ) Schema() *schema.Class { return schemaGLbooleanᵖ }
+func (*binaryClassGLbooleanᵖ) Schema() *schema.Entity { return schemaGLbooleanᵖ }
 
-var schemaGLbooleanᵖ = &schema.Class{
+var schemaGLbooleanᵖ = &schema.Entity{
 	TypeID:  binaryIDGLbooleanᵖ,
 	Package: "gles",
 	Name:    "GLbooleanᵖ",
@@ -5632,9 +5632,9 @@ func (*binaryClassGLcharᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᵖ(d, obj.(*GLcharᵖ))
 }
-func (*binaryClassGLcharᵖ) Schema() *schema.Class { return schemaGLcharᵖ }
+func (*binaryClassGLcharᵖ) Schema() *schema.Entity { return schemaGLcharᵖ }
 
-var schemaGLcharᵖ = &schema.Class{
+var schemaGLcharᵖ = &schema.Entity{
 	TypeID:  binaryIDGLcharᵖ,
 	Package: "gles",
 	Name:    "GLcharᵖ",
@@ -5667,9 +5667,9 @@ func (*binaryClassGLcharᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖ(d, obj.(*GLcharᶜᵖ))
 }
-func (*binaryClassGLcharᶜᵖ) Schema() *schema.Class { return schemaGLcharᶜᵖ }
+func (*binaryClassGLcharᶜᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖ }
 
-var schemaGLcharᶜᵖ = &schema.Class{
+var schemaGLcharᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLcharᶜᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖ",
@@ -5702,9 +5702,9 @@ func (*binaryClassGLcharᶜᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖˢ(d, obj.(*GLcharᶜᵖˢ))
 }
-func (*binaryClassGLcharᶜᵖˢ) Schema() *schema.Class { return schemaGLcharᶜᵖˢ }
+func (*binaryClassGLcharᶜᵖˢ) Schema() *schema.Entity { return schemaGLcharᶜᵖˢ }
 
-var schemaGLcharᶜᵖˢ = &schema.Class{
+var schemaGLcharᶜᵖˢ = &schema.Entity{
 	TypeID:  binaryIDGLcharᶜᵖˢ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖˢ",
@@ -5737,9 +5737,9 @@ func (*binaryClassGLcharᶜᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖᵖ(d, obj.(*GLcharᶜᵖᵖ))
 }
-func (*binaryClassGLcharᶜᵖᵖ) Schema() *schema.Class { return schemaGLcharᶜᵖᵖ }
+func (*binaryClassGLcharᶜᵖᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖᵖ }
 
-var schemaGLcharᶜᵖᵖ = &schema.Class{
+var schemaGLcharᶜᵖᵖ = &schema.Entity{
 	TypeID:  binaryIDGLcharᶜᵖᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖᵖ",
@@ -5772,9 +5772,9 @@ func (*binaryClassGLcharᶜᵖᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖᶜᵖ(d, obj.(*GLcharᶜᵖᶜᵖ))
 }
-func (*binaryClassGLcharᶜᵖᶜᵖ) Schema() *schema.Class { return schemaGLcharᶜᵖᶜᵖ }
+func (*binaryClassGLcharᶜᵖᶜᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖᶜᵖ }
 
-var schemaGLcharᶜᵖᶜᵖ = &schema.Class{
+var schemaGLcharᶜᵖᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLcharᶜᵖᶜᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖᶜᵖ",
@@ -5807,9 +5807,9 @@ func (*binaryClassGLeglImageOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLeglImageOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLeglImageOES(d, obj.(*GLeglImageOES))
 }
-func (*binaryClassGLeglImageOES) Schema() *schema.Class { return schemaGLeglImageOES }
+func (*binaryClassGLeglImageOES) Schema() *schema.Entity { return schemaGLeglImageOES }
 
-var schemaGLeglImageOES = &schema.Class{
+var schemaGLeglImageOES = &schema.Entity{
 	TypeID:  binaryIDGLeglImageOES,
 	Package: "gles",
 	Name:    "GLeglImageOES",
@@ -5842,9 +5842,9 @@ func (*binaryClassGLenumˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumˢ(d, obj.(*GLenumˢ))
 }
-func (*binaryClassGLenumˢ) Schema() *schema.Class { return schemaGLenumˢ }
+func (*binaryClassGLenumˢ) Schema() *schema.Entity { return schemaGLenumˢ }
 
-var schemaGLenumˢ = &schema.Class{
+var schemaGLenumˢ = &schema.Entity{
 	TypeID:  binaryIDGLenumˢ,
 	Package: "gles",
 	Name:    "GLenumˢ",
@@ -5877,9 +5877,9 @@ func (*binaryClassGLenumᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumᵖ(d, obj.(*GLenumᵖ))
 }
-func (*binaryClassGLenumᵖ) Schema() *schema.Class { return schemaGLenumᵖ }
+func (*binaryClassGLenumᵖ) Schema() *schema.Entity { return schemaGLenumᵖ }
 
-var schemaGLenumᵖ = &schema.Class{
+var schemaGLenumᵖ = &schema.Entity{
 	TypeID:  binaryIDGLenumᵖ,
 	Package: "gles",
 	Name:    "GLenumᵖ",
@@ -5912,9 +5912,9 @@ func (*binaryClassGLenumᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumᶜᵖ(d, obj.(*GLenumᶜᵖ))
 }
-func (*binaryClassGLenumᶜᵖ) Schema() *schema.Class { return schemaGLenumᶜᵖ }
+func (*binaryClassGLenumᶜᵖ) Schema() *schema.Entity { return schemaGLenumᶜᵖ }
 
-var schemaGLenumᶜᵖ = &schema.Class{
+var schemaGLenumᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLenumᶜᵖ,
 	Package: "gles",
 	Name:    "GLenumᶜᵖ",
@@ -5951,9 +5951,9 @@ func (*binaryClassGLfloatː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː2ᵃ(d, obj.(*GLfloatː2ᵃ))
 }
-func (*binaryClassGLfloatː2ᵃ) Schema() *schema.Class { return schemaGLfloatː2ᵃ }
+func (*binaryClassGLfloatː2ᵃ) Schema() *schema.Entity { return schemaGLfloatː2ᵃ }
 
-var schemaGLfloatː2ᵃ = &schema.Class{
+var schemaGLfloatː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLfloatː2ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː2ᵃ",
@@ -5990,9 +5990,9 @@ func (*binaryClassGLfloatː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː3ᵃ(d, obj.(*GLfloatː3ᵃ))
 }
-func (*binaryClassGLfloatː3ᵃ) Schema() *schema.Class { return schemaGLfloatː3ᵃ }
+func (*binaryClassGLfloatː3ᵃ) Schema() *schema.Entity { return schemaGLfloatː3ᵃ }
 
-var schemaGLfloatː3ᵃ = &schema.Class{
+var schemaGLfloatː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLfloatː3ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː3ᵃ",
@@ -6029,9 +6029,9 @@ func (*binaryClassGLfloatː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː4ᵃ(d, obj.(*GLfloatː4ᵃ))
 }
-func (*binaryClassGLfloatː4ᵃ) Schema() *schema.Class { return schemaGLfloatː4ᵃ }
+func (*binaryClassGLfloatː4ᵃ) Schema() *schema.Entity { return schemaGLfloatː4ᵃ }
 
-var schemaGLfloatː4ᵃ = &schema.Class{
+var schemaGLfloatː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLfloatː4ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː4ᵃ",
@@ -6064,9 +6064,9 @@ func (*binaryClassGLfloatˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatˢ(d, obj.(*GLfloatˢ))
 }
-func (*binaryClassGLfloatˢ) Schema() *schema.Class { return schemaGLfloatˢ }
+func (*binaryClassGLfloatˢ) Schema() *schema.Entity { return schemaGLfloatˢ }
 
-var schemaGLfloatˢ = &schema.Class{
+var schemaGLfloatˢ = &schema.Entity{
 	TypeID:  binaryIDGLfloatˢ,
 	Package: "gles",
 	Name:    "GLfloatˢ",
@@ -6099,9 +6099,9 @@ func (*binaryClassGLfloatᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatᵖ(d, obj.(*GLfloatᵖ))
 }
-func (*binaryClassGLfloatᵖ) Schema() *schema.Class { return schemaGLfloatᵖ }
+func (*binaryClassGLfloatᵖ) Schema() *schema.Entity { return schemaGLfloatᵖ }
 
-var schemaGLfloatᵖ = &schema.Class{
+var schemaGLfloatᵖ = &schema.Entity{
 	TypeID:  binaryIDGLfloatᵖ,
 	Package: "gles",
 	Name:    "GLfloatᵖ",
@@ -6134,9 +6134,9 @@ func (*binaryClassGLfloatᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatᶜᵖ(d, obj.(*GLfloatᶜᵖ))
 }
-func (*binaryClassGLfloatᶜᵖ) Schema() *schema.Class { return schemaGLfloatᶜᵖ }
+func (*binaryClassGLfloatᶜᵖ) Schema() *schema.Entity { return schemaGLfloatᶜᵖ }
 
-var schemaGLfloatᶜᵖ = &schema.Class{
+var schemaGLfloatᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLfloatᶜᵖ,
 	Package: "gles",
 	Name:    "GLfloatᶜᵖ",
@@ -6169,9 +6169,9 @@ func (*binaryClassGLint64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLint64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLint64ˢ(d, obj.(*GLint64ˢ))
 }
-func (*binaryClassGLint64ˢ) Schema() *schema.Class { return schemaGLint64ˢ }
+func (*binaryClassGLint64ˢ) Schema() *schema.Entity { return schemaGLint64ˢ }
 
-var schemaGLint64ˢ = &schema.Class{
+var schemaGLint64ˢ = &schema.Entity{
 	TypeID:  binaryIDGLint64ˢ,
 	Package: "gles",
 	Name:    "GLint64ˢ",
@@ -6204,9 +6204,9 @@ func (*binaryClassGLint64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLint64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLint64ᵖ(d, obj.(*GLint64ᵖ))
 }
-func (*binaryClassGLint64ᵖ) Schema() *schema.Class { return schemaGLint64ᵖ }
+func (*binaryClassGLint64ᵖ) Schema() *schema.Entity { return schemaGLint64ᵖ }
 
-var schemaGLint64ᵖ = &schema.Class{
+var schemaGLint64ᵖ = &schema.Entity{
 	TypeID:  binaryIDGLint64ᵖ,
 	Package: "gles",
 	Name:    "GLint64ᵖ",
@@ -6243,9 +6243,9 @@ func (*binaryClassGLintː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː2ᵃ(d, obj.(*GLintː2ᵃ))
 }
-func (*binaryClassGLintː2ᵃ) Schema() *schema.Class { return schemaGLintː2ᵃ }
+func (*binaryClassGLintː2ᵃ) Schema() *schema.Entity { return schemaGLintː2ᵃ }
 
-var schemaGLintː2ᵃ = &schema.Class{
+var schemaGLintː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLintː2ᵃ,
 	Package: "gles",
 	Name:    "GLintː2ᵃ",
@@ -6282,9 +6282,9 @@ func (*binaryClassGLintː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː3ᵃ(d, obj.(*GLintː3ᵃ))
 }
-func (*binaryClassGLintː3ᵃ) Schema() *schema.Class { return schemaGLintː3ᵃ }
+func (*binaryClassGLintː3ᵃ) Schema() *schema.Entity { return schemaGLintː3ᵃ }
 
-var schemaGLintː3ᵃ = &schema.Class{
+var schemaGLintː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLintː3ᵃ,
 	Package: "gles",
 	Name:    "GLintː3ᵃ",
@@ -6321,9 +6321,9 @@ func (*binaryClassGLintː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː4ᵃ(d, obj.(*GLintː4ᵃ))
 }
-func (*binaryClassGLintː4ᵃ) Schema() *schema.Class { return schemaGLintː4ᵃ }
+func (*binaryClassGLintː4ᵃ) Schema() *schema.Entity { return schemaGLintː4ᵃ }
 
-var schemaGLintː4ᵃ = &schema.Class{
+var schemaGLintː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLintː4ᵃ,
 	Package: "gles",
 	Name:    "GLintː4ᵃ",
@@ -6356,9 +6356,9 @@ func (*binaryClassGLintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintˢ(d, obj.(*GLintˢ))
 }
-func (*binaryClassGLintˢ) Schema() *schema.Class { return schemaGLintˢ }
+func (*binaryClassGLintˢ) Schema() *schema.Entity { return schemaGLintˢ }
 
-var schemaGLintˢ = &schema.Class{
+var schemaGLintˢ = &schema.Entity{
 	TypeID:  binaryIDGLintˢ,
 	Package: "gles",
 	Name:    "GLintˢ",
@@ -6391,9 +6391,9 @@ func (*binaryClassGLintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintᵖ(d, obj.(*GLintᵖ))
 }
-func (*binaryClassGLintᵖ) Schema() *schema.Class { return schemaGLintᵖ }
+func (*binaryClassGLintᵖ) Schema() *schema.Entity { return schemaGLintᵖ }
 
-var schemaGLintᵖ = &schema.Class{
+var schemaGLintᵖ = &schema.Entity{
 	TypeID:  binaryIDGLintᵖ,
 	Package: "gles",
 	Name:    "GLintᵖ",
@@ -6426,9 +6426,9 @@ func (*binaryClassGLintᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintᶜᵖ(d, obj.(*GLintᶜᵖ))
 }
-func (*binaryClassGLintᶜᵖ) Schema() *schema.Class { return schemaGLintᶜᵖ }
+func (*binaryClassGLintᶜᵖ) Schema() *schema.Entity { return schemaGLintᶜᵖ }
 
-var schemaGLintᶜᵖ = &schema.Class{
+var schemaGLintᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLintᶜᵖ,
 	Package: "gles",
 	Name:    "GLintᶜᵖ",
@@ -6461,9 +6461,9 @@ func (*binaryClassGLsizeiˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiˢ(d, obj.(*GLsizeiˢ))
 }
-func (*binaryClassGLsizeiˢ) Schema() *schema.Class { return schemaGLsizeiˢ }
+func (*binaryClassGLsizeiˢ) Schema() *schema.Entity { return schemaGLsizeiˢ }
 
-var schemaGLsizeiˢ = &schema.Class{
+var schemaGLsizeiˢ = &schema.Entity{
 	TypeID:  binaryIDGLsizeiˢ,
 	Package: "gles",
 	Name:    "GLsizeiˢ",
@@ -6496,9 +6496,9 @@ func (*binaryClassGLsizeiᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiᵖ(d, obj.(*GLsizeiᵖ))
 }
-func (*binaryClassGLsizeiᵖ) Schema() *schema.Class { return schemaGLsizeiᵖ }
+func (*binaryClassGLsizeiᵖ) Schema() *schema.Entity { return schemaGLsizeiᵖ }
 
-var schemaGLsizeiᵖ = &schema.Class{
+var schemaGLsizeiᵖ = &schema.Entity{
 	TypeID:  binaryIDGLsizeiᵖ,
 	Package: "gles",
 	Name:    "GLsizeiᵖ",
@@ -6531,9 +6531,9 @@ func (*binaryClassGLsizeiᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiᶜᵖ(d, obj.(*GLsizeiᶜᵖ))
 }
-func (*binaryClassGLsizeiᶜᵖ) Schema() *schema.Class { return schemaGLsizeiᶜᵖ }
+func (*binaryClassGLsizeiᶜᵖ) Schema() *schema.Entity { return schemaGLsizeiᶜᵖ }
 
-var schemaGLsizeiᶜᵖ = &schema.Class{
+var schemaGLsizeiᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLsizeiᶜᵖ,
 	Package: "gles",
 	Name:    "GLsizeiᶜᵖ",
@@ -6566,9 +6566,9 @@ func (*binaryClassGLubyteˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteˢ(d, obj.(*GLubyteˢ))
 }
-func (*binaryClassGLubyteˢ) Schema() *schema.Class { return schemaGLubyteˢ }
+func (*binaryClassGLubyteˢ) Schema() *schema.Entity { return schemaGLubyteˢ }
 
-var schemaGLubyteˢ = &schema.Class{
+var schemaGLubyteˢ = &schema.Entity{
 	TypeID:  binaryIDGLubyteˢ,
 	Package: "gles",
 	Name:    "GLubyteˢ",
@@ -6601,9 +6601,9 @@ func (*binaryClassGLubyteᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteᵖ(d, obj.(*GLubyteᵖ))
 }
-func (*binaryClassGLubyteᵖ) Schema() *schema.Class { return schemaGLubyteᵖ }
+func (*binaryClassGLubyteᵖ) Schema() *schema.Entity { return schemaGLubyteᵖ }
 
-var schemaGLubyteᵖ = &schema.Class{
+var schemaGLubyteᵖ = &schema.Entity{
 	TypeID:  binaryIDGLubyteᵖ,
 	Package: "gles",
 	Name:    "GLubyteᵖ",
@@ -6636,9 +6636,9 @@ func (*binaryClassGLubyteᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteᶜᵖ(d, obj.(*GLubyteᶜᵖ))
 }
-func (*binaryClassGLubyteᶜᵖ) Schema() *schema.Class { return schemaGLubyteᶜᵖ }
+func (*binaryClassGLubyteᶜᵖ) Schema() *schema.Entity { return schemaGLubyteᶜᵖ }
 
-var schemaGLubyteᶜᵖ = &schema.Class{
+var schemaGLubyteᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLubyteᶜᵖ,
 	Package: "gles",
 	Name:    "GLubyteᶜᵖ",
@@ -6671,9 +6671,9 @@ func (*binaryClassGLuint64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ˢ(d, obj.(*GLuint64ˢ))
 }
-func (*binaryClassGLuint64ˢ) Schema() *schema.Class { return schemaGLuint64ˢ }
+func (*binaryClassGLuint64ˢ) Schema() *schema.Entity { return schemaGLuint64ˢ }
 
-var schemaGLuint64ˢ = &schema.Class{
+var schemaGLuint64ˢ = &schema.Entity{
 	TypeID:  binaryIDGLuint64ˢ,
 	Package: "gles",
 	Name:    "GLuint64ˢ",
@@ -6706,9 +6706,9 @@ func (*binaryClassGLuint64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ᵖ(d, obj.(*GLuint64ᵖ))
 }
-func (*binaryClassGLuint64ᵖ) Schema() *schema.Class { return schemaGLuint64ᵖ }
+func (*binaryClassGLuint64ᵖ) Schema() *schema.Entity { return schemaGLuint64ᵖ }
 
-var schemaGLuint64ᵖ = &schema.Class{
+var schemaGLuint64ᵖ = &schema.Entity{
 	TypeID:  binaryIDGLuint64ᵖ,
 	Package: "gles",
 	Name:    "GLuint64ᵖ",
@@ -6741,9 +6741,9 @@ func (*binaryClassGLuint64ᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ᶜᵖ(d, obj.(*GLuint64ᶜᵖ))
 }
-func (*binaryClassGLuint64ᶜᵖ) Schema() *schema.Class { return schemaGLuint64ᶜᵖ }
+func (*binaryClassGLuint64ᶜᵖ) Schema() *schema.Entity { return schemaGLuint64ᶜᵖ }
 
-var schemaGLuint64ᶜᵖ = &schema.Class{
+var schemaGLuint64ᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLuint64ᶜᵖ,
 	Package: "gles",
 	Name:    "GLuint64ᶜᵖ",
@@ -6780,9 +6780,9 @@ func (*binaryClassGLuintː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː2ᵃ(d, obj.(*GLuintː2ᵃ))
 }
-func (*binaryClassGLuintː2ᵃ) Schema() *schema.Class { return schemaGLuintː2ᵃ }
+func (*binaryClassGLuintː2ᵃ) Schema() *schema.Entity { return schemaGLuintː2ᵃ }
 
-var schemaGLuintː2ᵃ = &schema.Class{
+var schemaGLuintː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLuintː2ᵃ,
 	Package: "gles",
 	Name:    "GLuintː2ᵃ",
@@ -6819,9 +6819,9 @@ func (*binaryClassGLuintː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː3ᵃ(d, obj.(*GLuintː3ᵃ))
 }
-func (*binaryClassGLuintː3ᵃ) Schema() *schema.Class { return schemaGLuintː3ᵃ }
+func (*binaryClassGLuintː3ᵃ) Schema() *schema.Entity { return schemaGLuintː3ᵃ }
 
-var schemaGLuintː3ᵃ = &schema.Class{
+var schemaGLuintː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLuintː3ᵃ,
 	Package: "gles",
 	Name:    "GLuintː3ᵃ",
@@ -6858,9 +6858,9 @@ func (*binaryClassGLuintː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː4ᵃ(d, obj.(*GLuintː4ᵃ))
 }
-func (*binaryClassGLuintː4ᵃ) Schema() *schema.Class { return schemaGLuintː4ᵃ }
+func (*binaryClassGLuintː4ᵃ) Schema() *schema.Entity { return schemaGLuintː4ᵃ }
 
-var schemaGLuintː4ᵃ = &schema.Class{
+var schemaGLuintː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDGLuintː4ᵃ,
 	Package: "gles",
 	Name:    "GLuintː4ᵃ",
@@ -6893,9 +6893,9 @@ func (*binaryClassGLuintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintˢ(d, obj.(*GLuintˢ))
 }
-func (*binaryClassGLuintˢ) Schema() *schema.Class { return schemaGLuintˢ }
+func (*binaryClassGLuintˢ) Schema() *schema.Entity { return schemaGLuintˢ }
 
-var schemaGLuintˢ = &schema.Class{
+var schemaGLuintˢ = &schema.Entity{
 	TypeID:  binaryIDGLuintˢ,
 	Package: "gles",
 	Name:    "GLuintˢ",
@@ -6928,9 +6928,9 @@ func (*binaryClassGLuintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintᵖ(d, obj.(*GLuintᵖ))
 }
-func (*binaryClassGLuintᵖ) Schema() *schema.Class { return schemaGLuintᵖ }
+func (*binaryClassGLuintᵖ) Schema() *schema.Entity { return schemaGLuintᵖ }
 
-var schemaGLuintᵖ = &schema.Class{
+var schemaGLuintᵖ = &schema.Entity{
 	TypeID:  binaryIDGLuintᵖ,
 	Package: "gles",
 	Name:    "GLuintᵖ",
@@ -6963,9 +6963,9 @@ func (*binaryClassGLuintᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintᶜᵖ(d, obj.(*GLuintᶜᵖ))
 }
-func (*binaryClassGLuintᶜᵖ) Schema() *schema.Class { return schemaGLuintᶜᵖ }
+func (*binaryClassGLuintᶜᵖ) Schema() *schema.Entity { return schemaGLuintᶜᵖ }
 
-var schemaGLuintᶜᵖ = &schema.Class{
+var schemaGLuintᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDGLuintᶜᵖ,
 	Package: "gles",
 	Name:    "GLuintᶜᵖ",
@@ -6998,9 +6998,9 @@ func (*binaryClassGLvoidˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLvoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLvoidˢ(d, obj.(*GLvoidˢ))
 }
-func (*binaryClassGLvoidˢ) Schema() *schema.Class { return schemaGLvoidˢ }
+func (*binaryClassGLvoidˢ) Schema() *schema.Entity { return schemaGLvoidˢ }
 
-var schemaGLvoidˢ = &schema.Class{
+var schemaGLvoidˢ = &schema.Entity{
 	TypeID:  binaryIDGLvoidˢ,
 	Package: "gles",
 	Name:    "GLvoidˢ",
@@ -7033,9 +7033,9 @@ func (*binaryClassGLvoidᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLvoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLvoidᵖ(d, obj.(*GLvoidᵖ))
 }
-func (*binaryClassGLvoidᵖ) Schema() *schema.Class { return schemaGLvoidᵖ }
+func (*binaryClassGLvoidᵖ) Schema() *schema.Entity { return schemaGLvoidᵖ }
 
-var schemaGLvoidᵖ = &schema.Class{
+var schemaGLvoidᵖ = &schema.Entity{
 	TypeID:  binaryIDGLvoidᵖ,
 	Package: "gles",
 	Name:    "GLvoidᵖ",
@@ -7072,9 +7072,9 @@ func (*binaryClassGlActiveShaderProgram) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlActiveShaderProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveShaderProgram(d, obj.(*GlActiveShaderProgram))
 }
-func (*binaryClassGlActiveShaderProgram) Schema() *schema.Class { return schemaGlActiveShaderProgram }
+func (*binaryClassGlActiveShaderProgram) Schema() *schema.Entity { return schemaGlActiveShaderProgram }
 
-var schemaGlActiveShaderProgram = &schema.Class{
+var schemaGlActiveShaderProgram = &schema.Entity{
 	TypeID:  binaryIDGlActiveShaderProgram,
 	Package: "gles",
 	Name:    "GlActiveShaderProgram",
@@ -7113,11 +7113,11 @@ func (*binaryClassGlActiveShaderProgramEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlActiveShaderProgramEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveShaderProgramEXT(d, obj.(*GlActiveShaderProgramEXT))
 }
-func (*binaryClassGlActiveShaderProgramEXT) Schema() *schema.Class {
+func (*binaryClassGlActiveShaderProgramEXT) Schema() *schema.Entity {
 	return schemaGlActiveShaderProgramEXT
 }
 
-var schemaGlActiveShaderProgramEXT = &schema.Class{
+var schemaGlActiveShaderProgramEXT = &schema.Entity{
 	TypeID:  binaryIDGlActiveShaderProgramEXT,
 	Package: "gles",
 	Name:    "GlActiveShaderProgramEXT",
@@ -7154,9 +7154,9 @@ func (*binaryClassGlActiveTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlActiveTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveTexture(d, obj.(*GlActiveTexture))
 }
-func (*binaryClassGlActiveTexture) Schema() *schema.Class { return schemaGlActiveTexture }
+func (*binaryClassGlActiveTexture) Schema() *schema.Entity { return schemaGlActiveTexture }
 
-var schemaGlActiveTexture = &schema.Class{
+var schemaGlActiveTexture = &schema.Entity{
 	TypeID:  binaryIDGlActiveTexture,
 	Package: "gles",
 	Name:    "GlActiveTexture",
@@ -7194,9 +7194,9 @@ func (*binaryClassGlAlphaFuncQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlAlphaFuncQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlAlphaFuncQCOM(d, obj.(*GlAlphaFuncQCOM))
 }
-func (*binaryClassGlAlphaFuncQCOM) Schema() *schema.Class { return schemaGlAlphaFuncQCOM }
+func (*binaryClassGlAlphaFuncQCOM) Schema() *schema.Entity { return schemaGlAlphaFuncQCOM }
 
-var schemaGlAlphaFuncQCOM = &schema.Class{
+var schemaGlAlphaFuncQCOM = &schema.Entity{
 	TypeID:  binaryIDGlAlphaFuncQCOM,
 	Package: "gles",
 	Name:    "GlAlphaFuncQCOM",
@@ -7235,11 +7235,11 @@ func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Decode(d binary.Decoder
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
 }
-func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *schema.Class {
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *schema.Entity {
 	return schemaGlApplyFramebufferAttachmentCMAAINTEL
 }
 
-var schemaGlApplyFramebufferAttachmentCMAAINTEL = &schema.Class{
+var schemaGlApplyFramebufferAttachmentCMAAINTEL = &schema.Entity{
 	TypeID:  binaryIDGlApplyFramebufferAttachmentCMAAINTEL,
 	Package: "gles",
 	Name:    "GlApplyFramebufferAttachmentCMAAINTEL",
@@ -7276,9 +7276,9 @@ func (*binaryClassGlAttachShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlAttachShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlAttachShader(d, obj.(*GlAttachShader))
 }
-func (*binaryClassGlAttachShader) Schema() *schema.Class { return schemaGlAttachShader }
+func (*binaryClassGlAttachShader) Schema() *schema.Entity { return schemaGlAttachShader }
 
-var schemaGlAttachShader = &schema.Class{
+var schemaGlAttachShader = &schema.Entity{
 	TypeID:  binaryIDGlAttachShader,
 	Package: "gles",
 	Name:    "GlAttachShader",
@@ -7321,11 +7321,11 @@ func (*binaryClassGlBeginConditionalRenderNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlBeginConditionalRenderNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginConditionalRenderNV(d, obj.(*GlBeginConditionalRenderNV))
 }
-func (*binaryClassGlBeginConditionalRenderNV) Schema() *schema.Class {
+func (*binaryClassGlBeginConditionalRenderNV) Schema() *schema.Entity {
 	return schemaGlBeginConditionalRenderNV
 }
 
-var schemaGlBeginConditionalRenderNV = &schema.Class{
+var schemaGlBeginConditionalRenderNV = &schema.Entity{
 	TypeID:  binaryIDGlBeginConditionalRenderNV,
 	Package: "gles",
 	Name:    "GlBeginConditionalRenderNV",
@@ -7362,9 +7362,9 @@ func (*binaryClassGlBeginPerfMonitorAMD) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBeginPerfMonitorAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginPerfMonitorAMD(d, obj.(*GlBeginPerfMonitorAMD))
 }
-func (*binaryClassGlBeginPerfMonitorAMD) Schema() *schema.Class { return schemaGlBeginPerfMonitorAMD }
+func (*binaryClassGlBeginPerfMonitorAMD) Schema() *schema.Entity { return schemaGlBeginPerfMonitorAMD }
 
-var schemaGlBeginPerfMonitorAMD = &schema.Class{
+var schemaGlBeginPerfMonitorAMD = &schema.Entity{
 	TypeID:  binaryIDGlBeginPerfMonitorAMD,
 	Package: "gles",
 	Name:    "GlBeginPerfMonitorAMD",
@@ -7400,9 +7400,9 @@ func (*binaryClassGlBeginPerfQueryINTEL) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBeginPerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginPerfQueryINTEL(d, obj.(*GlBeginPerfQueryINTEL))
 }
-func (*binaryClassGlBeginPerfQueryINTEL) Schema() *schema.Class { return schemaGlBeginPerfQueryINTEL }
+func (*binaryClassGlBeginPerfQueryINTEL) Schema() *schema.Entity { return schemaGlBeginPerfQueryINTEL }
 
-var schemaGlBeginPerfQueryINTEL = &schema.Class{
+var schemaGlBeginPerfQueryINTEL = &schema.Entity{
 	TypeID:  binaryIDGlBeginPerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlBeginPerfQueryINTEL",
@@ -7440,9 +7440,9 @@ func (*binaryClassGlBeginQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBeginQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginQuery(d, obj.(*GlBeginQuery))
 }
-func (*binaryClassGlBeginQuery) Schema() *schema.Class { return schemaGlBeginQuery }
+func (*binaryClassGlBeginQuery) Schema() *schema.Entity { return schemaGlBeginQuery }
 
-var schemaGlBeginQuery = &schema.Class{
+var schemaGlBeginQuery = &schema.Entity{
 	TypeID:  binaryIDGlBeginQuery,
 	Package: "gles",
 	Name:    "GlBeginQuery",
@@ -7481,9 +7481,9 @@ func (*binaryClassGlBeginQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBeginQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginQueryEXT(d, obj.(*GlBeginQueryEXT))
 }
-func (*binaryClassGlBeginQueryEXT) Schema() *schema.Class { return schemaGlBeginQueryEXT }
+func (*binaryClassGlBeginQueryEXT) Schema() *schema.Entity { return schemaGlBeginQueryEXT }
 
-var schemaGlBeginQueryEXT = &schema.Class{
+var schemaGlBeginQueryEXT = &schema.Entity{
 	TypeID:  binaryIDGlBeginQueryEXT,
 	Package: "gles",
 	Name:    "GlBeginQueryEXT",
@@ -7520,11 +7520,11 @@ func (*binaryClassGlBeginTransformFeedback) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBeginTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginTransformFeedback(d, obj.(*GlBeginTransformFeedback))
 }
-func (*binaryClassGlBeginTransformFeedback) Schema() *schema.Class {
+func (*binaryClassGlBeginTransformFeedback) Schema() *schema.Entity {
 	return schemaGlBeginTransformFeedback
 }
 
-var schemaGlBeginTransformFeedback = &schema.Class{
+var schemaGlBeginTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlBeginTransformFeedback,
 	Package: "gles",
 	Name:    "GlBeginTransformFeedback",
@@ -7564,9 +7564,9 @@ func (*binaryClassGlBindAttribLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindAttribLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindAttribLocation(d, obj.(*GlBindAttribLocation))
 }
-func (*binaryClassGlBindAttribLocation) Schema() *schema.Class { return schemaGlBindAttribLocation }
+func (*binaryClassGlBindAttribLocation) Schema() *schema.Entity { return schemaGlBindAttribLocation }
 
-var schemaGlBindAttribLocation = &schema.Class{
+var schemaGlBindAttribLocation = &schema.Entity{
 	TypeID:  binaryIDGlBindAttribLocation,
 	Package: "gles",
 	Name:    "GlBindAttribLocation",
@@ -7606,9 +7606,9 @@ func (*binaryClassGlBindBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBuffer(d, obj.(*GlBindBuffer))
 }
-func (*binaryClassGlBindBuffer) Schema() *schema.Class { return schemaGlBindBuffer }
+func (*binaryClassGlBindBuffer) Schema() *schema.Entity { return schemaGlBindBuffer }
 
-var schemaGlBindBuffer = &schema.Class{
+var schemaGlBindBuffer = &schema.Entity{
 	TypeID:  binaryIDGlBindBuffer,
 	Package: "gles",
 	Name:    "GlBindBuffer",
@@ -7649,9 +7649,9 @@ func (*binaryClassGlBindBufferBase) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBufferBase) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBufferBase(d, obj.(*GlBindBufferBase))
 }
-func (*binaryClassGlBindBufferBase) Schema() *schema.Class { return schemaGlBindBufferBase }
+func (*binaryClassGlBindBufferBase) Schema() *schema.Entity { return schemaGlBindBufferBase }
 
-var schemaGlBindBufferBase = &schema.Class{
+var schemaGlBindBufferBase = &schema.Entity{
 	TypeID:  binaryIDGlBindBufferBase,
 	Package: "gles",
 	Name:    "GlBindBufferBase",
@@ -7697,9 +7697,9 @@ func (*binaryClassGlBindBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBufferRange(d, obj.(*GlBindBufferRange))
 }
-func (*binaryClassGlBindBufferRange) Schema() *schema.Class { return schemaGlBindBufferRange }
+func (*binaryClassGlBindBufferRange) Schema() *schema.Entity { return schemaGlBindBufferRange }
 
-var schemaGlBindBufferRange = &schema.Class{
+var schemaGlBindBufferRange = &schema.Entity{
 	TypeID:  binaryIDGlBindBufferRange,
 	Package: "gles",
 	Name:    "GlBindBufferRange",
@@ -7743,11 +7743,11 @@ func (*binaryClassGlBindFragDataLocationEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlBindFragDataLocationEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFragDataLocationEXT(d, obj.(*GlBindFragDataLocationEXT))
 }
-func (*binaryClassGlBindFragDataLocationEXT) Schema() *schema.Class {
+func (*binaryClassGlBindFragDataLocationEXT) Schema() *schema.Entity {
 	return schemaGlBindFragDataLocationEXT
 }
 
-var schemaGlBindFragDataLocationEXT = &schema.Class{
+var schemaGlBindFragDataLocationEXT = &schema.Entity{
 	TypeID:  binaryIDGlBindFragDataLocationEXT,
 	Package: "gles",
 	Name:    "GlBindFragDataLocationEXT",
@@ -7795,11 +7795,11 @@ func (*binaryClassGlBindFragDataLocationIndexedEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlBindFragDataLocationIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFragDataLocationIndexedEXT(d, obj.(*GlBindFragDataLocationIndexedEXT))
 }
-func (*binaryClassGlBindFragDataLocationIndexedEXT) Schema() *schema.Class {
+func (*binaryClassGlBindFragDataLocationIndexedEXT) Schema() *schema.Entity {
 	return schemaGlBindFragDataLocationIndexedEXT
 }
 
-var schemaGlBindFragDataLocationIndexedEXT = &schema.Class{
+var schemaGlBindFragDataLocationIndexedEXT = &schema.Entity{
 	TypeID:  binaryIDGlBindFragDataLocationIndexedEXT,
 	Package: "gles",
 	Name:    "GlBindFragDataLocationIndexedEXT",
@@ -7840,9 +7840,9 @@ func (*binaryClassGlBindFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFramebuffer(d, obj.(*GlBindFramebuffer))
 }
-func (*binaryClassGlBindFramebuffer) Schema() *schema.Class { return schemaGlBindFramebuffer }
+func (*binaryClassGlBindFramebuffer) Schema() *schema.Entity { return schemaGlBindFramebuffer }
 
-var schemaGlBindFramebuffer = &schema.Class{
+var schemaGlBindFramebuffer = &schema.Entity{
 	TypeID:  binaryIDGlBindFramebuffer,
 	Package: "gles",
 	Name:    "GlBindFramebuffer",
@@ -7891,9 +7891,9 @@ func (*binaryClassGlBindImageTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindImageTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindImageTexture(d, obj.(*GlBindImageTexture))
 }
-func (*binaryClassGlBindImageTexture) Schema() *schema.Class { return schemaGlBindImageTexture }
+func (*binaryClassGlBindImageTexture) Schema() *schema.Entity { return schemaGlBindImageTexture }
 
-var schemaGlBindImageTexture = &schema.Class{
+var schemaGlBindImageTexture = &schema.Entity{
 	TypeID:  binaryIDGlBindImageTexture,
 	Package: "gles",
 	Name:    "GlBindImageTexture",
@@ -7935,9 +7935,9 @@ func (*binaryClassGlBindProgramPipeline) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBindProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindProgramPipeline(d, obj.(*GlBindProgramPipeline))
 }
-func (*binaryClassGlBindProgramPipeline) Schema() *schema.Class { return schemaGlBindProgramPipeline }
+func (*binaryClassGlBindProgramPipeline) Schema() *schema.Entity { return schemaGlBindProgramPipeline }
 
-var schemaGlBindProgramPipeline = &schema.Class{
+var schemaGlBindProgramPipeline = &schema.Entity{
 	TypeID:  binaryIDGlBindProgramPipeline,
 	Package: "gles",
 	Name:    "GlBindProgramPipeline",
@@ -7973,11 +7973,11 @@ func (*binaryClassGlBindProgramPipelineEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBindProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindProgramPipelineEXT(d, obj.(*GlBindProgramPipelineEXT))
 }
-func (*binaryClassGlBindProgramPipelineEXT) Schema() *schema.Class {
+func (*binaryClassGlBindProgramPipelineEXT) Schema() *schema.Entity {
 	return schemaGlBindProgramPipelineEXT
 }
 
-var schemaGlBindProgramPipelineEXT = &schema.Class{
+var schemaGlBindProgramPipelineEXT = &schema.Entity{
 	TypeID:  binaryIDGlBindProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlBindProgramPipelineEXT",
@@ -8015,9 +8015,9 @@ func (*binaryClassGlBindRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindRenderbuffer(d, obj.(*GlBindRenderbuffer))
 }
-func (*binaryClassGlBindRenderbuffer) Schema() *schema.Class { return schemaGlBindRenderbuffer }
+func (*binaryClassGlBindRenderbuffer) Schema() *schema.Entity { return schemaGlBindRenderbuffer }
 
-var schemaGlBindRenderbuffer = &schema.Class{
+var schemaGlBindRenderbuffer = &schema.Entity{
 	TypeID:  binaryIDGlBindRenderbuffer,
 	Package: "gles",
 	Name:    "GlBindRenderbuffer",
@@ -8056,9 +8056,9 @@ func (*binaryClassGlBindSampler) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindSampler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindSampler(d, obj.(*GlBindSampler))
 }
-func (*binaryClassGlBindSampler) Schema() *schema.Class { return schemaGlBindSampler }
+func (*binaryClassGlBindSampler) Schema() *schema.Entity { return schemaGlBindSampler }
 
-var schemaGlBindSampler = &schema.Class{
+var schemaGlBindSampler = &schema.Entity{
 	TypeID:  binaryIDGlBindSampler,
 	Package: "gles",
 	Name:    "GlBindSampler",
@@ -8097,9 +8097,9 @@ func (*binaryClassGlBindTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindTexture(d, obj.(*GlBindTexture))
 }
-func (*binaryClassGlBindTexture) Schema() *schema.Class { return schemaGlBindTexture }
+func (*binaryClassGlBindTexture) Schema() *schema.Entity { return schemaGlBindTexture }
 
-var schemaGlBindTexture = &schema.Class{
+var schemaGlBindTexture = &schema.Entity{
 	TypeID:  binaryIDGlBindTexture,
 	Package: "gles",
 	Name:    "GlBindTexture",
@@ -8138,11 +8138,11 @@ func (*binaryClassGlBindTransformFeedback) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBindTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindTransformFeedback(d, obj.(*GlBindTransformFeedback))
 }
-func (*binaryClassGlBindTransformFeedback) Schema() *schema.Class {
+func (*binaryClassGlBindTransformFeedback) Schema() *schema.Entity {
 	return schemaGlBindTransformFeedback
 }
 
-var schemaGlBindTransformFeedback = &schema.Class{
+var schemaGlBindTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlBindTransformFeedback,
 	Package: "gles",
 	Name:    "GlBindTransformFeedback",
@@ -8179,9 +8179,9 @@ func (*binaryClassGlBindVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexArray(d, obj.(*GlBindVertexArray))
 }
-func (*binaryClassGlBindVertexArray) Schema() *schema.Class { return schemaGlBindVertexArray }
+func (*binaryClassGlBindVertexArray) Schema() *schema.Entity { return schemaGlBindVertexArray }
 
-var schemaGlBindVertexArray = &schema.Class{
+var schemaGlBindVertexArray = &schema.Entity{
 	TypeID:  binaryIDGlBindVertexArray,
 	Package: "gles",
 	Name:    "GlBindVertexArray",
@@ -8217,9 +8217,9 @@ func (*binaryClassGlBindVertexArrayOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexArrayOES(d, obj.(*GlBindVertexArrayOES))
 }
-func (*binaryClassGlBindVertexArrayOES) Schema() *schema.Class { return schemaGlBindVertexArrayOES }
+func (*binaryClassGlBindVertexArrayOES) Schema() *schema.Entity { return schemaGlBindVertexArrayOES }
 
-var schemaGlBindVertexArrayOES = &schema.Class{
+var schemaGlBindVertexArrayOES = &schema.Entity{
 	TypeID:  binaryIDGlBindVertexArrayOES,
 	Package: "gles",
 	Name:    "GlBindVertexArrayOES",
@@ -8261,9 +8261,9 @@ func (*binaryClassGlBindVertexBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexBuffer(d, obj.(*GlBindVertexBuffer))
 }
-func (*binaryClassGlBindVertexBuffer) Schema() *schema.Class { return schemaGlBindVertexBuffer }
+func (*binaryClassGlBindVertexBuffer) Schema() *schema.Entity { return schemaGlBindVertexBuffer }
 
-var schemaGlBindVertexBuffer = &schema.Class{
+var schemaGlBindVertexBuffer = &schema.Entity{
 	TypeID:  binaryIDGlBindVertexBuffer,
 	Package: "gles",
 	Name:    "GlBindVertexBuffer",
@@ -8300,9 +8300,9 @@ func (*binaryClassGlBlendBarrier) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrier) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrier(d, obj.(*GlBlendBarrier))
 }
-func (*binaryClassGlBlendBarrier) Schema() *schema.Class { return schemaGlBlendBarrier }
+func (*binaryClassGlBlendBarrier) Schema() *schema.Entity { return schemaGlBlendBarrier }
 
-var schemaGlBlendBarrier = &schema.Class{
+var schemaGlBlendBarrier = &schema.Entity{
 	TypeID:  binaryIDGlBlendBarrier,
 	Package: "gles",
 	Name:    "GlBlendBarrier",
@@ -8335,9 +8335,9 @@ func (*binaryClassGlBlendBarrierKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrierKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrierKHR(d, obj.(*GlBlendBarrierKHR))
 }
-func (*binaryClassGlBlendBarrierKHR) Schema() *schema.Class { return schemaGlBlendBarrierKHR }
+func (*binaryClassGlBlendBarrierKHR) Schema() *schema.Entity { return schemaGlBlendBarrierKHR }
 
-var schemaGlBlendBarrierKHR = &schema.Class{
+var schemaGlBlendBarrierKHR = &schema.Entity{
 	TypeID:  binaryIDGlBlendBarrierKHR,
 	Package: "gles",
 	Name:    "GlBlendBarrierKHR",
@@ -8370,9 +8370,9 @@ func (*binaryClassGlBlendBarrierNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrierNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrierNV(d, obj.(*GlBlendBarrierNV))
 }
-func (*binaryClassGlBlendBarrierNV) Schema() *schema.Class { return schemaGlBlendBarrierNV }
+func (*binaryClassGlBlendBarrierNV) Schema() *schema.Entity { return schemaGlBlendBarrierNV }
 
-var schemaGlBlendBarrierNV = &schema.Class{
+var schemaGlBlendBarrierNV = &schema.Entity{
 	TypeID:  binaryIDGlBlendBarrierNV,
 	Package: "gles",
 	Name:    "GlBlendBarrierNV",
@@ -8413,9 +8413,9 @@ func (*binaryClassGlBlendColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendColor(d, obj.(*GlBlendColor))
 }
-func (*binaryClassGlBlendColor) Schema() *schema.Class { return schemaGlBlendColor }
+func (*binaryClassGlBlendColor) Schema() *schema.Entity { return schemaGlBlendColor }
 
-var schemaGlBlendColor = &schema.Class{
+var schemaGlBlendColor = &schema.Entity{
 	TypeID:  binaryIDGlBlendColor,
 	Package: "gles",
 	Name:    "GlBlendColor",
@@ -8454,9 +8454,9 @@ func (*binaryClassGlBlendEquation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquation(d, obj.(*GlBlendEquation))
 }
-func (*binaryClassGlBlendEquation) Schema() *schema.Class { return schemaGlBlendEquation }
+func (*binaryClassGlBlendEquation) Schema() *schema.Entity { return schemaGlBlendEquation }
 
-var schemaGlBlendEquation = &schema.Class{
+var schemaGlBlendEquation = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquation,
 	Package: "gles",
 	Name:    "GlBlendEquation",
@@ -8494,11 +8494,11 @@ func (*binaryClassGlBlendEquationSeparate) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendEquationSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparate(d, obj.(*GlBlendEquationSeparate))
 }
-func (*binaryClassGlBlendEquationSeparate) Schema() *schema.Class {
+func (*binaryClassGlBlendEquationSeparate) Schema() *schema.Entity {
 	return schemaGlBlendEquationSeparate
 }
 
-var schemaGlBlendEquationSeparate = &schema.Class{
+var schemaGlBlendEquationSeparate = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparate,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparate",
@@ -8539,11 +8539,11 @@ func (*binaryClassGlBlendEquationSeparatei) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBlendEquationSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparatei(d, obj.(*GlBlendEquationSeparatei))
 }
-func (*binaryClassGlBlendEquationSeparatei) Schema() *schema.Class {
+func (*binaryClassGlBlendEquationSeparatei) Schema() *schema.Entity {
 	return schemaGlBlendEquationSeparatei
 }
 
-var schemaGlBlendEquationSeparatei = &schema.Class{
+var schemaGlBlendEquationSeparatei = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparatei,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparatei",
@@ -8589,11 +8589,11 @@ func (*binaryClassGlBlendEquationSeparateiEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlBlendEquationSeparateiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparateiEXT(d, obj.(*GlBlendEquationSeparateiEXT))
 }
-func (*binaryClassGlBlendEquationSeparateiEXT) Schema() *schema.Class {
+func (*binaryClassGlBlendEquationSeparateiEXT) Schema() *schema.Entity {
 	return schemaGlBlendEquationSeparateiEXT
 }
 
-var schemaGlBlendEquationSeparateiEXT = &schema.Class{
+var schemaGlBlendEquationSeparateiEXT = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparateiEXT,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiEXT",
@@ -8639,11 +8639,11 @@ func (*binaryClassGlBlendEquationSeparateiOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlBlendEquationSeparateiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparateiOES(d, obj.(*GlBlendEquationSeparateiOES))
 }
-func (*binaryClassGlBlendEquationSeparateiOES) Schema() *schema.Class {
+func (*binaryClassGlBlendEquationSeparateiOES) Schema() *schema.Entity {
 	return schemaGlBlendEquationSeparateiOES
 }
 
-var schemaGlBlendEquationSeparateiOES = &schema.Class{
+var schemaGlBlendEquationSeparateiOES = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparateiOES,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiOES",
@@ -8683,9 +8683,9 @@ func (*binaryClassGlBlendEquationi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationi(d, obj.(*GlBlendEquationi))
 }
-func (*binaryClassGlBlendEquationi) Schema() *schema.Class { return schemaGlBlendEquationi }
+func (*binaryClassGlBlendEquationi) Schema() *schema.Entity { return schemaGlBlendEquationi }
 
-var schemaGlBlendEquationi = &schema.Class{
+var schemaGlBlendEquationi = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationi,
 	Package: "gles",
 	Name:    "GlBlendEquationi",
@@ -8724,9 +8724,9 @@ func (*binaryClassGlBlendEquationiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationiEXT(d, obj.(*GlBlendEquationiEXT))
 }
-func (*binaryClassGlBlendEquationiEXT) Schema() *schema.Class { return schemaGlBlendEquationiEXT }
+func (*binaryClassGlBlendEquationiEXT) Schema() *schema.Entity { return schemaGlBlendEquationiEXT }
 
-var schemaGlBlendEquationiEXT = &schema.Class{
+var schemaGlBlendEquationiEXT = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationiEXT,
 	Package: "gles",
 	Name:    "GlBlendEquationiEXT",
@@ -8765,9 +8765,9 @@ func (*binaryClassGlBlendEquationiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationiOES(d, obj.(*GlBlendEquationiOES))
 }
-func (*binaryClassGlBlendEquationiOES) Schema() *schema.Class { return schemaGlBlendEquationiOES }
+func (*binaryClassGlBlendEquationiOES) Schema() *schema.Entity { return schemaGlBlendEquationiOES }
 
-var schemaGlBlendEquationiOES = &schema.Class{
+var schemaGlBlendEquationiOES = &schema.Entity{
 	TypeID:  binaryIDGlBlendEquationiOES,
 	Package: "gles",
 	Name:    "GlBlendEquationiOES",
@@ -8806,9 +8806,9 @@ func (*binaryClassGlBlendFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunc(d, obj.(*GlBlendFunc))
 }
-func (*binaryClassGlBlendFunc) Schema() *schema.Class { return schemaGlBlendFunc }
+func (*binaryClassGlBlendFunc) Schema() *schema.Entity { return schemaGlBlendFunc }
 
-var schemaGlBlendFunc = &schema.Class{
+var schemaGlBlendFunc = &schema.Entity{
 	TypeID:  binaryIDGlBlendFunc,
 	Package: "gles",
 	Name:    "GlBlendFunc",
@@ -8851,9 +8851,9 @@ func (*binaryClassGlBlendFuncSeparate) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFuncSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparate(d, obj.(*GlBlendFuncSeparate))
 }
-func (*binaryClassGlBlendFuncSeparate) Schema() *schema.Class { return schemaGlBlendFuncSeparate }
+func (*binaryClassGlBlendFuncSeparate) Schema() *schema.Entity { return schemaGlBlendFuncSeparate }
 
-var schemaGlBlendFuncSeparate = &schema.Class{
+var schemaGlBlendFuncSeparate = &schema.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparate,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparate",
@@ -8900,9 +8900,9 @@ func (*binaryClassGlBlendFuncSeparatei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFuncSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparatei(d, obj.(*GlBlendFuncSeparatei))
 }
-func (*binaryClassGlBlendFuncSeparatei) Schema() *schema.Class { return schemaGlBlendFuncSeparatei }
+func (*binaryClassGlBlendFuncSeparatei) Schema() *schema.Entity { return schemaGlBlendFuncSeparatei }
 
-var schemaGlBlendFuncSeparatei = &schema.Class{
+var schemaGlBlendFuncSeparatei = &schema.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparatei,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparatei",
@@ -8950,11 +8950,11 @@ func (*binaryClassGlBlendFuncSeparateiEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendFuncSeparateiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparateiEXT(d, obj.(*GlBlendFuncSeparateiEXT))
 }
-func (*binaryClassGlBlendFuncSeparateiEXT) Schema() *schema.Class {
+func (*binaryClassGlBlendFuncSeparateiEXT) Schema() *schema.Entity {
 	return schemaGlBlendFuncSeparateiEXT
 }
 
-var schemaGlBlendFuncSeparateiEXT = &schema.Class{
+var schemaGlBlendFuncSeparateiEXT = &schema.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparateiEXT,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiEXT",
@@ -9002,11 +9002,11 @@ func (*binaryClassGlBlendFuncSeparateiOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendFuncSeparateiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparateiOES(d, obj.(*GlBlendFuncSeparateiOES))
 }
-func (*binaryClassGlBlendFuncSeparateiOES) Schema() *schema.Class {
+func (*binaryClassGlBlendFuncSeparateiOES) Schema() *schema.Entity {
 	return schemaGlBlendFuncSeparateiOES
 }
 
-var schemaGlBlendFuncSeparateiOES = &schema.Class{
+var schemaGlBlendFuncSeparateiOES = &schema.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparateiOES,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiOES",
@@ -9050,9 +9050,9 @@ func (*binaryClassGlBlendFunci) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunci) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunci(d, obj.(*GlBlendFunci))
 }
-func (*binaryClassGlBlendFunci) Schema() *schema.Class { return schemaGlBlendFunci }
+func (*binaryClassGlBlendFunci) Schema() *schema.Entity { return schemaGlBlendFunci }
 
-var schemaGlBlendFunci = &schema.Class{
+var schemaGlBlendFunci = &schema.Entity{
 	TypeID:  binaryIDGlBlendFunci,
 	Package: "gles",
 	Name:    "GlBlendFunci",
@@ -9094,9 +9094,9 @@ func (*binaryClassGlBlendFunciEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunciEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunciEXT(d, obj.(*GlBlendFunciEXT))
 }
-func (*binaryClassGlBlendFunciEXT) Schema() *schema.Class { return schemaGlBlendFunciEXT }
+func (*binaryClassGlBlendFunciEXT) Schema() *schema.Entity { return schemaGlBlendFunciEXT }
 
-var schemaGlBlendFunciEXT = &schema.Class{
+var schemaGlBlendFunciEXT = &schema.Entity{
 	TypeID:  binaryIDGlBlendFunciEXT,
 	Package: "gles",
 	Name:    "GlBlendFunciEXT",
@@ -9138,9 +9138,9 @@ func (*binaryClassGlBlendFunciOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunciOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunciOES(d, obj.(*GlBlendFunciOES))
 }
-func (*binaryClassGlBlendFunciOES) Schema() *schema.Class { return schemaGlBlendFunciOES }
+func (*binaryClassGlBlendFunciOES) Schema() *schema.Entity { return schemaGlBlendFunciOES }
 
-var schemaGlBlendFunciOES = &schema.Class{
+var schemaGlBlendFunciOES = &schema.Entity{
 	TypeID:  binaryIDGlBlendFunciOES,
 	Package: "gles",
 	Name:    "GlBlendFunciOES",
@@ -9180,9 +9180,9 @@ func (*binaryClassGlBlendParameteriNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendParameteriNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendParameteriNV(d, obj.(*GlBlendParameteriNV))
 }
-func (*binaryClassGlBlendParameteriNV) Schema() *schema.Class { return schemaGlBlendParameteriNV }
+func (*binaryClassGlBlendParameteriNV) Schema() *schema.Entity { return schemaGlBlendParameteriNV }
 
-var schemaGlBlendParameteriNV = &schema.Class{
+var schemaGlBlendParameteriNV = &schema.Entity{
 	TypeID:  binaryIDGlBlendParameteriNV,
 	Package: "gles",
 	Name:    "GlBlendParameteriNV",
@@ -9237,9 +9237,9 @@ func (*binaryClassGlBlitFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlitFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebuffer(d, obj.(*GlBlitFramebuffer))
 }
-func (*binaryClassGlBlitFramebuffer) Schema() *schema.Class { return schemaGlBlitFramebuffer }
+func (*binaryClassGlBlitFramebuffer) Schema() *schema.Entity { return schemaGlBlitFramebuffer }
 
-var schemaGlBlitFramebuffer = &schema.Class{
+var schemaGlBlitFramebuffer = &schema.Entity{
 	TypeID:  binaryIDGlBlitFramebuffer,
 	Package: "gles",
 	Name:    "GlBlitFramebuffer",
@@ -9302,9 +9302,9 @@ func (*binaryClassGlBlitFramebufferANGLE) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlBlitFramebufferANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebufferANGLE(d, obj.(*GlBlitFramebufferANGLE))
 }
-func (*binaryClassGlBlitFramebufferANGLE) Schema() *schema.Class { return schemaGlBlitFramebufferANGLE }
+func (*binaryClassGlBlitFramebufferANGLE) Schema() *schema.Entity { return schemaGlBlitFramebufferANGLE }
 
-var schemaGlBlitFramebufferANGLE = &schema.Class{
+var schemaGlBlitFramebufferANGLE = &schema.Entity{
 	TypeID:  binaryIDGlBlitFramebufferANGLE,
 	Package: "gles",
 	Name:    "GlBlitFramebufferANGLE",
@@ -9367,9 +9367,9 @@ func (*binaryClassGlBlitFramebufferNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlitFramebufferNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebufferNV(d, obj.(*GlBlitFramebufferNV))
 }
-func (*binaryClassGlBlitFramebufferNV) Schema() *schema.Class { return schemaGlBlitFramebufferNV }
+func (*binaryClassGlBlitFramebufferNV) Schema() *schema.Entity { return schemaGlBlitFramebufferNV }
 
-var schemaGlBlitFramebufferNV = &schema.Class{
+var schemaGlBlitFramebufferNV = &schema.Entity{
 	TypeID:  binaryIDGlBlitFramebufferNV,
 	Package: "gles",
 	Name:    "GlBlitFramebufferNV",
@@ -9420,9 +9420,9 @@ func (*binaryClassGlBufferData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferData(d, obj.(*GlBufferData))
 }
-func (*binaryClassGlBufferData) Schema() *schema.Class { return schemaGlBufferData }
+func (*binaryClassGlBufferData) Schema() *schema.Entity { return schemaGlBufferData }
 
-var schemaGlBufferData = &schema.Class{
+var schemaGlBufferData = &schema.Entity{
 	TypeID:  binaryIDGlBufferData,
 	Package: "gles",
 	Name:    "GlBufferData",
@@ -9459,9 +9459,9 @@ func (*binaryClassVoidᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖ(d, obj.(*Voidᶜᵖ))
 }
-func (*binaryClassVoidᶜᵖ) Schema() *schema.Class { return schemaVoidᶜᵖ }
+func (*binaryClassVoidᶜᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖ }
 
-var schemaVoidᶜᵖ = &schema.Class{
+var schemaVoidᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᶜᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖ",
@@ -9502,9 +9502,9 @@ func (*binaryClassGlBufferStorageEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferStorageEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferStorageEXT(d, obj.(*GlBufferStorageEXT))
 }
-func (*binaryClassGlBufferStorageEXT) Schema() *schema.Class { return schemaGlBufferStorageEXT }
+func (*binaryClassGlBufferStorageEXT) Schema() *schema.Entity { return schemaGlBufferStorageEXT }
 
-var schemaGlBufferStorageEXT = &schema.Class{
+var schemaGlBufferStorageEXT = &schema.Entity{
 	TypeID:  binaryIDGlBufferStorageEXT,
 	Package: "gles",
 	Name:    "GlBufferStorageEXT",
@@ -9549,9 +9549,9 @@ func (*binaryClassGlBufferSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferSubData(d, obj.(*GlBufferSubData))
 }
-func (*binaryClassGlBufferSubData) Schema() *schema.Class { return schemaGlBufferSubData }
+func (*binaryClassGlBufferSubData) Schema() *schema.Entity { return schemaGlBufferSubData }
 
-var schemaGlBufferSubData = &schema.Class{
+var schemaGlBufferSubData = &schema.Entity{
 	TypeID:  binaryIDGlBufferSubData,
 	Package: "gles",
 	Name:    "GlBufferSubData",
@@ -9592,11 +9592,11 @@ func (*binaryClassGlCheckFramebufferStatus) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlCheckFramebufferStatus) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCheckFramebufferStatus(d, obj.(*GlCheckFramebufferStatus))
 }
-func (*binaryClassGlCheckFramebufferStatus) Schema() *schema.Class {
+func (*binaryClassGlCheckFramebufferStatus) Schema() *schema.Entity {
 	return schemaGlCheckFramebufferStatus
 }
 
-var schemaGlCheckFramebufferStatus = &schema.Class{
+var schemaGlCheckFramebufferStatus = &schema.Entity{
 	TypeID:  binaryIDGlCheckFramebufferStatus,
 	Package: "gles",
 	Name:    "GlCheckFramebufferStatus",
@@ -9633,9 +9633,9 @@ func (*binaryClassGlClear) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClear) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClear(d, obj.(*GlClear))
 }
-func (*binaryClassGlClear) Schema() *schema.Class { return schemaGlClear }
+func (*binaryClassGlClear) Schema() *schema.Entity { return schemaGlClear }
 
-var schemaGlClear = &schema.Class{
+var schemaGlClear = &schema.Entity{
 	TypeID:  binaryIDGlClear,
 	Package: "gles",
 	Name:    "GlClear",
@@ -9677,9 +9677,9 @@ func (*binaryClassGlClearBufferfi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferfi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferfi(d, obj.(*GlClearBufferfi))
 }
-func (*binaryClassGlClearBufferfi) Schema() *schema.Class { return schemaGlClearBufferfi }
+func (*binaryClassGlClearBufferfi) Schema() *schema.Entity { return schemaGlClearBufferfi }
 
-var schemaGlClearBufferfi = &schema.Class{
+var schemaGlClearBufferfi = &schema.Entity{
 	TypeID:  binaryIDGlClearBufferfi,
 	Package: "gles",
 	Name:    "GlClearBufferfi",
@@ -9722,9 +9722,9 @@ func (*binaryClassGlClearBufferfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferfv(d, obj.(*GlClearBufferfv))
 }
-func (*binaryClassGlClearBufferfv) Schema() *schema.Class { return schemaGlClearBufferfv }
+func (*binaryClassGlClearBufferfv) Schema() *schema.Entity { return schemaGlClearBufferfv }
 
-var schemaGlClearBufferfv = &schema.Class{
+var schemaGlClearBufferfv = &schema.Entity{
 	TypeID:  binaryIDGlClearBufferfv,
 	Package: "gles",
 	Name:    "GlClearBufferfv",
@@ -9766,9 +9766,9 @@ func (*binaryClassGlClearBufferiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferiv(d, obj.(*GlClearBufferiv))
 }
-func (*binaryClassGlClearBufferiv) Schema() *schema.Class { return schemaGlClearBufferiv }
+func (*binaryClassGlClearBufferiv) Schema() *schema.Entity { return schemaGlClearBufferiv }
 
-var schemaGlClearBufferiv = &schema.Class{
+var schemaGlClearBufferiv = &schema.Entity{
 	TypeID:  binaryIDGlClearBufferiv,
 	Package: "gles",
 	Name:    "GlClearBufferiv",
@@ -9810,9 +9810,9 @@ func (*binaryClassGlClearBufferuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferuiv(d, obj.(*GlClearBufferuiv))
 }
-func (*binaryClassGlClearBufferuiv) Schema() *schema.Class { return schemaGlClearBufferuiv }
+func (*binaryClassGlClearBufferuiv) Schema() *schema.Entity { return schemaGlClearBufferuiv }
 
-var schemaGlClearBufferuiv = &schema.Class{
+var schemaGlClearBufferuiv = &schema.Entity{
 	TypeID:  binaryIDGlClearBufferuiv,
 	Package: "gles",
 	Name:    "GlClearBufferuiv",
@@ -9856,9 +9856,9 @@ func (*binaryClassGlClearColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearColor(d, obj.(*GlClearColor))
 }
-func (*binaryClassGlClearColor) Schema() *schema.Class { return schemaGlClearColor }
+func (*binaryClassGlClearColor) Schema() *schema.Entity { return schemaGlClearColor }
 
-var schemaGlClearColor = &schema.Class{
+var schemaGlClearColor = &schema.Entity{
 	TypeID:  binaryIDGlClearColor,
 	Package: "gles",
 	Name:    "GlClearColor",
@@ -9897,9 +9897,9 @@ func (*binaryClassGlClearDepthf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearDepthf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearDepthf(d, obj.(*GlClearDepthf))
 }
-func (*binaryClassGlClearDepthf) Schema() *schema.Class { return schemaGlClearDepthf }
+func (*binaryClassGlClearDepthf) Schema() *schema.Entity { return schemaGlClearDepthf }
 
-var schemaGlClearDepthf = &schema.Class{
+var schemaGlClearDepthf = &schema.Entity{
 	TypeID:  binaryIDGlClearDepthf,
 	Package: "gles",
 	Name:    "GlClearDepthf",
@@ -9935,9 +9935,9 @@ func (*binaryClassGlClearStencil) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearStencil) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearStencil(d, obj.(*GlClearStencil))
 }
-func (*binaryClassGlClearStencil) Schema() *schema.Class { return schemaGlClearStencil }
+func (*binaryClassGlClearStencil) Schema() *schema.Entity { return schemaGlClearStencil }
 
-var schemaGlClearStencil = &schema.Class{
+var schemaGlClearStencil = &schema.Entity{
 	TypeID:  binaryIDGlClearStencil,
 	Package: "gles",
 	Name:    "GlClearStencil",
@@ -9979,9 +9979,9 @@ func (*binaryClassGlClientWaitSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClientWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClientWaitSync(d, obj.(*GlClientWaitSync))
 }
-func (*binaryClassGlClientWaitSync) Schema() *schema.Class { return schemaGlClientWaitSync }
+func (*binaryClassGlClientWaitSync) Schema() *schema.Entity { return schemaGlClientWaitSync }
 
-var schemaGlClientWaitSync = &schema.Class{
+var schemaGlClientWaitSync = &schema.Entity{
 	TypeID:  binaryIDGlClientWaitSync,
 	Package: "gles",
 	Name:    "GlClientWaitSync",
@@ -10026,9 +10026,9 @@ func (*binaryClassGlClientWaitSyncAPPLE) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlClientWaitSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClientWaitSyncAPPLE(d, obj.(*GlClientWaitSyncAPPLE))
 }
-func (*binaryClassGlClientWaitSyncAPPLE) Schema() *schema.Class { return schemaGlClientWaitSyncAPPLE }
+func (*binaryClassGlClientWaitSyncAPPLE) Schema() *schema.Entity { return schemaGlClientWaitSyncAPPLE }
 
-var schemaGlClientWaitSyncAPPLE = &schema.Class{
+var schemaGlClientWaitSyncAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlClientWaitSyncAPPLE,
 	Package: "gles",
 	Name:    "GlClientWaitSyncAPPLE",
@@ -10073,9 +10073,9 @@ func (*binaryClassGlColorMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMask(d, obj.(*GlColorMask))
 }
-func (*binaryClassGlColorMask) Schema() *schema.Class { return schemaGlColorMask }
+func (*binaryClassGlColorMask) Schema() *schema.Entity { return schemaGlColorMask }
 
-var schemaGlColorMask = &schema.Class{
+var schemaGlColorMask = &schema.Entity{
 	TypeID:  binaryIDGlColorMask,
 	Package: "gles",
 	Name:    "GlColorMask",
@@ -10122,9 +10122,9 @@ func (*binaryClassGlColorMaski) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaski) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaski(d, obj.(*GlColorMaski))
 }
-func (*binaryClassGlColorMaski) Schema() *schema.Class { return schemaGlColorMaski }
+func (*binaryClassGlColorMaski) Schema() *schema.Entity { return schemaGlColorMaski }
 
-var schemaGlColorMaski = &schema.Class{
+var schemaGlColorMaski = &schema.Entity{
 	TypeID:  binaryIDGlColorMaski,
 	Package: "gles",
 	Name:    "GlColorMaski",
@@ -10172,9 +10172,9 @@ func (*binaryClassGlColorMaskiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaskiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaskiEXT(d, obj.(*GlColorMaskiEXT))
 }
-func (*binaryClassGlColorMaskiEXT) Schema() *schema.Class { return schemaGlColorMaskiEXT }
+func (*binaryClassGlColorMaskiEXT) Schema() *schema.Entity { return schemaGlColorMaskiEXT }
 
-var schemaGlColorMaskiEXT = &schema.Class{
+var schemaGlColorMaskiEXT = &schema.Entity{
 	TypeID:  binaryIDGlColorMaskiEXT,
 	Package: "gles",
 	Name:    "GlColorMaskiEXT",
@@ -10222,9 +10222,9 @@ func (*binaryClassGlColorMaskiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaskiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaskiOES(d, obj.(*GlColorMaskiOES))
 }
-func (*binaryClassGlColorMaskiOES) Schema() *schema.Class { return schemaGlColorMaskiOES }
+func (*binaryClassGlColorMaskiOES) Schema() *schema.Entity { return schemaGlColorMaskiOES }
 
-var schemaGlColorMaskiOES = &schema.Class{
+var schemaGlColorMaskiOES = &schema.Entity{
 	TypeID:  binaryIDGlColorMaskiOES,
 	Package: "gles",
 	Name:    "GlColorMaskiOES",
@@ -10264,9 +10264,9 @@ func (*binaryClassGlCompileShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCompileShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompileShader(d, obj.(*GlCompileShader))
 }
-func (*binaryClassGlCompileShader) Schema() *schema.Class { return schemaGlCompileShader }
+func (*binaryClassGlCompileShader) Schema() *schema.Entity { return schemaGlCompileShader }
 
-var schemaGlCompileShader = &schema.Class{
+var schemaGlCompileShader = &schema.Entity{
 	TypeID:  binaryIDGlCompileShader,
 	Package: "gles",
 	Name:    "GlCompileShader",
@@ -10300,9 +10300,9 @@ func (*binaryClassTexturePointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexturePointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexturePointer(d, obj.(*TexturePointer))
 }
-func (*binaryClassTexturePointer) Schema() *schema.Class { return schemaTexturePointer }
+func (*binaryClassTexturePointer) Schema() *schema.Entity { return schemaTexturePointer }
 
-var schemaTexturePointer = &schema.Class{
+var schemaTexturePointer = &schema.Entity{
 	TypeID:  binaryIDTexturePointer,
 	Package: "gles",
 	Name:    "TexturePointer",
@@ -10351,9 +10351,9 @@ func (*binaryClassGlCompressedTexImage2D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCompressedTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage2D(d, obj.(*GlCompressedTexImage2D))
 }
-func (*binaryClassGlCompressedTexImage2D) Schema() *schema.Class { return schemaGlCompressedTexImage2D }
+func (*binaryClassGlCompressedTexImage2D) Schema() *schema.Entity { return schemaGlCompressedTexImage2D }
 
-var schemaGlCompressedTexImage2D = &schema.Class{
+var schemaGlCompressedTexImage2D = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexImage2D",
@@ -10412,9 +10412,9 @@ func (*binaryClassGlCompressedTexImage3D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCompressedTexImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage3D(d, obj.(*GlCompressedTexImage3D))
 }
-func (*binaryClassGlCompressedTexImage3D) Schema() *schema.Class { return schemaGlCompressedTexImage3D }
+func (*binaryClassGlCompressedTexImage3D) Schema() *schema.Entity { return schemaGlCompressedTexImage3D }
 
-var schemaGlCompressedTexImage3D = &schema.Class{
+var schemaGlCompressedTexImage3D = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexImage3D,
 	Package: "gles",
 	Name:    "GlCompressedTexImage3D",
@@ -10474,11 +10474,11 @@ func (*binaryClassGlCompressedTexImage3DOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage3DOES(d, obj.(*GlCompressedTexImage3DOES))
 }
-func (*binaryClassGlCompressedTexImage3DOES) Schema() *schema.Class {
+func (*binaryClassGlCompressedTexImage3DOES) Schema() *schema.Entity {
 	return schemaGlCompressedTexImage3DOES
 }
 
-var schemaGlCompressedTexImage3DOES = &schema.Class{
+var schemaGlCompressedTexImage3DOES = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexImage3DOES,
 	Package: "gles",
 	Name:    "GlCompressedTexImage3DOES",
@@ -10538,11 +10538,11 @@ func (*binaryClassGlCompressedTexSubImage2D) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage2D(d, obj.(*GlCompressedTexSubImage2D))
 }
-func (*binaryClassGlCompressedTexSubImage2D) Schema() *schema.Class {
+func (*binaryClassGlCompressedTexSubImage2D) Schema() *schema.Entity {
 	return schemaGlCompressedTexSubImage2D
 }
 
-var schemaGlCompressedTexSubImage2D = &schema.Class{
+var schemaGlCompressedTexSubImage2D = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage2D",
@@ -10606,11 +10606,11 @@ func (*binaryClassGlCompressedTexSubImage3D) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage3D(d, obj.(*GlCompressedTexSubImage3D))
 }
-func (*binaryClassGlCompressedTexSubImage3D) Schema() *schema.Class {
+func (*binaryClassGlCompressedTexSubImage3D) Schema() *schema.Entity {
 	return schemaGlCompressedTexSubImage3D
 }
 
-var schemaGlCompressedTexSubImage3D = &schema.Class{
+var schemaGlCompressedTexSubImage3D = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage3D,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3D",
@@ -10680,11 +10680,11 @@ func (*binaryClassGlCompressedTexSubImage3DOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlCompressedTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage3DOES(d, obj.(*GlCompressedTexSubImage3DOES))
 }
-func (*binaryClassGlCompressedTexSubImage3DOES) Schema() *schema.Class {
+func (*binaryClassGlCompressedTexSubImage3DOES) Schema() *schema.Entity {
 	return schemaGlCompressedTexSubImage3DOES
 }
 
-var schemaGlCompressedTexSubImage3DOES = &schema.Class{
+var schemaGlCompressedTexSubImage3DOES = &schema.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3DOES",
@@ -10738,9 +10738,9 @@ func (*binaryClassGlCopyBufferSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyBufferSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyBufferSubData(d, obj.(*GlCopyBufferSubData))
 }
-func (*binaryClassGlCopyBufferSubData) Schema() *schema.Class { return schemaGlCopyBufferSubData }
+func (*binaryClassGlCopyBufferSubData) Schema() *schema.Entity { return schemaGlCopyBufferSubData }
 
-var schemaGlCopyBufferSubData = &schema.Class{
+var schemaGlCopyBufferSubData = &schema.Entity{
 	TypeID:  binaryIDGlCopyBufferSubData,
 	Package: "gles",
 	Name:    "GlCopyBufferSubData",
@@ -10788,9 +10788,9 @@ func (*binaryClassGlCopyBufferSubDataNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyBufferSubDataNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyBufferSubDataNV(d, obj.(*GlCopyBufferSubDataNV))
 }
-func (*binaryClassGlCopyBufferSubDataNV) Schema() *schema.Class { return schemaGlCopyBufferSubDataNV }
+func (*binaryClassGlCopyBufferSubDataNV) Schema() *schema.Entity { return schemaGlCopyBufferSubDataNV }
 
-var schemaGlCopyBufferSubDataNV = &schema.Class{
+var schemaGlCopyBufferSubDataNV = &schema.Entity{
 	TypeID:  binaryIDGlCopyBufferSubDataNV,
 	Package: "gles",
 	Name:    "GlCopyBufferSubDataNV",
@@ -10858,9 +10858,9 @@ func (*binaryClassGlCopyImageSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyImageSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubData(d, obj.(*GlCopyImageSubData))
 }
-func (*binaryClassGlCopyImageSubData) Schema() *schema.Class { return schemaGlCopyImageSubData }
+func (*binaryClassGlCopyImageSubData) Schema() *schema.Entity { return schemaGlCopyImageSubData }
 
-var schemaGlCopyImageSubData = &schema.Class{
+var schemaGlCopyImageSubData = &schema.Entity{
 	TypeID:  binaryIDGlCopyImageSubData,
 	Package: "gles",
 	Name:    "GlCopyImageSubData",
@@ -10938,9 +10938,9 @@ func (*binaryClassGlCopyImageSubDataEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyImageSubDataEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubDataEXT(d, obj.(*GlCopyImageSubDataEXT))
 }
-func (*binaryClassGlCopyImageSubDataEXT) Schema() *schema.Class { return schemaGlCopyImageSubDataEXT }
+func (*binaryClassGlCopyImageSubDataEXT) Schema() *schema.Entity { return schemaGlCopyImageSubDataEXT }
 
-var schemaGlCopyImageSubDataEXT = &schema.Class{
+var schemaGlCopyImageSubDataEXT = &schema.Entity{
 	TypeID:  binaryIDGlCopyImageSubDataEXT,
 	Package: "gles",
 	Name:    "GlCopyImageSubDataEXT",
@@ -11018,9 +11018,9 @@ func (*binaryClassGlCopyImageSubDataOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyImageSubDataOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubDataOES(d, obj.(*GlCopyImageSubDataOES))
 }
-func (*binaryClassGlCopyImageSubDataOES) Schema() *schema.Class { return schemaGlCopyImageSubDataOES }
+func (*binaryClassGlCopyImageSubDataOES) Schema() *schema.Entity { return schemaGlCopyImageSubDataOES }
 
-var schemaGlCopyImageSubDataOES = &schema.Class{
+var schemaGlCopyImageSubDataOES = &schema.Entity{
 	TypeID:  binaryIDGlCopyImageSubDataOES,
 	Package: "gles",
 	Name:    "GlCopyImageSubDataOES",
@@ -11072,9 +11072,9 @@ func (*binaryClassGlCopyPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyPathNV(d, obj.(*GlCopyPathNV))
 }
-func (*binaryClassGlCopyPathNV) Schema() *schema.Class { return schemaGlCopyPathNV }
+func (*binaryClassGlCopyPathNV) Schema() *schema.Entity { return schemaGlCopyPathNV }
 
-var schemaGlCopyPathNV = &schema.Class{
+var schemaGlCopyPathNV = &schema.Entity{
 	TypeID:  binaryIDGlCopyPathNV,
 	Package: "gles",
 	Name:    "GlCopyPathNV",
@@ -11125,9 +11125,9 @@ func (*binaryClassGlCopyTexImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexImage2D(d, obj.(*GlCopyTexImage2D))
 }
-func (*binaryClassGlCopyTexImage2D) Schema() *schema.Class { return schemaGlCopyTexImage2D }
+func (*binaryClassGlCopyTexImage2D) Schema() *schema.Entity { return schemaGlCopyTexImage2D }
 
-var schemaGlCopyTexImage2D = &schema.Class{
+var schemaGlCopyTexImage2D = &schema.Entity{
 	TypeID:  binaryIDGlCopyTexImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexImage2D",
@@ -11184,9 +11184,9 @@ func (*binaryClassGlCopyTexSubImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage2D(d, obj.(*GlCopyTexSubImage2D))
 }
-func (*binaryClassGlCopyTexSubImage2D) Schema() *schema.Class { return schemaGlCopyTexSubImage2D }
+func (*binaryClassGlCopyTexSubImage2D) Schema() *schema.Entity { return schemaGlCopyTexSubImage2D }
 
-var schemaGlCopyTexSubImage2D = &schema.Class{
+var schemaGlCopyTexSubImage2D = &schema.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage2D",
@@ -11245,9 +11245,9 @@ func (*binaryClassGlCopyTexSubImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage3D(d, obj.(*GlCopyTexSubImage3D))
 }
-func (*binaryClassGlCopyTexSubImage3D) Schema() *schema.Class { return schemaGlCopyTexSubImage3D }
+func (*binaryClassGlCopyTexSubImage3D) Schema() *schema.Entity { return schemaGlCopyTexSubImage3D }
 
-var schemaGlCopyTexSubImage3D = &schema.Class{
+var schemaGlCopyTexSubImage3D = &schema.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage3D,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3D",
@@ -11307,9 +11307,9 @@ func (*binaryClassGlCopyTexSubImage3DOES) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCopyTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage3DOES(d, obj.(*GlCopyTexSubImage3DOES))
 }
-func (*binaryClassGlCopyTexSubImage3DOES) Schema() *schema.Class { return schemaGlCopyTexSubImage3DOES }
+func (*binaryClassGlCopyTexSubImage3DOES) Schema() *schema.Entity { return schemaGlCopyTexSubImage3DOES }
 
-var schemaGlCopyTexSubImage3DOES = &schema.Class{
+var schemaGlCopyTexSubImage3DOES = &schema.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3DOES",
@@ -11359,11 +11359,11 @@ func (*binaryClassGlCopyTextureLevelsAPPLE) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlCopyTextureLevelsAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTextureLevelsAPPLE(d, obj.(*GlCopyTextureLevelsAPPLE))
 }
-func (*binaryClassGlCopyTextureLevelsAPPLE) Schema() *schema.Class {
+func (*binaryClassGlCopyTextureLevelsAPPLE) Schema() *schema.Entity {
 	return schemaGlCopyTextureLevelsAPPLE
 }
 
-var schemaGlCopyTextureLevelsAPPLE = &schema.Class{
+var schemaGlCopyTextureLevelsAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlCopyTextureLevelsAPPLE,
 	Package: "gles",
 	Name:    "GlCopyTextureLevelsAPPLE",
@@ -11418,11 +11418,11 @@ func (*binaryClassGlCoverFillPathInstancedNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlCoverFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverFillPathInstancedNV(d, obj.(*GlCoverFillPathInstancedNV))
 }
-func (*binaryClassGlCoverFillPathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlCoverFillPathInstancedNV) Schema() *schema.Entity {
 	return schemaGlCoverFillPathInstancedNV
 }
 
-var schemaGlCoverFillPathInstancedNV = &schema.Class{
+var schemaGlCoverFillPathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlCoverFillPathInstancedNV",
@@ -11466,9 +11466,9 @@ func (*binaryClassGlCoverFillPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverFillPathNV(d, obj.(*GlCoverFillPathNV))
 }
-func (*binaryClassGlCoverFillPathNV) Schema() *schema.Class { return schemaGlCoverFillPathNV }
+func (*binaryClassGlCoverFillPathNV) Schema() *schema.Entity { return schemaGlCoverFillPathNV }
 
-var schemaGlCoverFillPathNV = &schema.Class{
+var schemaGlCoverFillPathNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverFillPathNV,
 	Package: "gles",
 	Name:    "GlCoverFillPathNV",
@@ -11521,11 +11521,11 @@ func (*binaryClassGlCoverStrokePathInstancedNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlCoverStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverStrokePathInstancedNV(d, obj.(*GlCoverStrokePathInstancedNV))
 }
-func (*binaryClassGlCoverStrokePathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlCoverStrokePathInstancedNV) Schema() *schema.Entity {
 	return schemaGlCoverStrokePathInstancedNV
 }
 
-var schemaGlCoverStrokePathInstancedNV = &schema.Class{
+var schemaGlCoverStrokePathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlCoverStrokePathInstancedNV",
@@ -11569,9 +11569,9 @@ func (*binaryClassGlCoverStrokePathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverStrokePathNV(d, obj.(*GlCoverStrokePathNV))
 }
-func (*binaryClassGlCoverStrokePathNV) Schema() *schema.Class { return schemaGlCoverStrokePathNV }
+func (*binaryClassGlCoverStrokePathNV) Schema() *schema.Entity { return schemaGlCoverStrokePathNV }
 
-var schemaGlCoverStrokePathNV = &schema.Class{
+var schemaGlCoverStrokePathNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverStrokePathNV,
 	Package: "gles",
 	Name:    "GlCoverStrokePathNV",
@@ -11608,9 +11608,9 @@ func (*binaryClassGlCoverageMaskNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverageMaskNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageMaskNV(d, obj.(*GlCoverageMaskNV))
 }
-func (*binaryClassGlCoverageMaskNV) Schema() *schema.Class { return schemaGlCoverageMaskNV }
+func (*binaryClassGlCoverageMaskNV) Schema() *schema.Entity { return schemaGlCoverageMaskNV }
 
-var schemaGlCoverageMaskNV = &schema.Class{
+var schemaGlCoverageMaskNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverageMaskNV,
 	Package: "gles",
 	Name:    "GlCoverageMaskNV",
@@ -11646,9 +11646,9 @@ func (*binaryClassGlCoverageModulationNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCoverageModulationNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageModulationNV(d, obj.(*GlCoverageModulationNV))
 }
-func (*binaryClassGlCoverageModulationNV) Schema() *schema.Class { return schemaGlCoverageModulationNV }
+func (*binaryClassGlCoverageModulationNV) Schema() *schema.Entity { return schemaGlCoverageModulationNV }
 
-var schemaGlCoverageModulationNV = &schema.Class{
+var schemaGlCoverageModulationNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverageModulationNV,
 	Package: "gles",
 	Name:    "GlCoverageModulationNV",
@@ -11690,11 +11690,11 @@ func (*binaryClassGlCoverageModulationTableNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlCoverageModulationTableNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageModulationTableNV(d, obj.(*GlCoverageModulationTableNV))
 }
-func (*binaryClassGlCoverageModulationTableNV) Schema() *schema.Class {
+func (*binaryClassGlCoverageModulationTableNV) Schema() *schema.Entity {
 	return schemaGlCoverageModulationTableNV
 }
 
-var schemaGlCoverageModulationTableNV = &schema.Class{
+var schemaGlCoverageModulationTableNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverageModulationTableNV,
 	Package: "gles",
 	Name:    "GlCoverageModulationTableNV",
@@ -11731,9 +11731,9 @@ func (*binaryClassGlCoverageOperationNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCoverageOperationNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageOperationNV(d, obj.(*GlCoverageOperationNV))
 }
-func (*binaryClassGlCoverageOperationNV) Schema() *schema.Class { return schemaGlCoverageOperationNV }
+func (*binaryClassGlCoverageOperationNV) Schema() *schema.Entity { return schemaGlCoverageOperationNV }
 
-var schemaGlCoverageOperationNV = &schema.Class{
+var schemaGlCoverageOperationNV = &schema.Entity{
 	TypeID:  binaryIDGlCoverageOperationNV,
 	Package: "gles",
 	Name:    "GlCoverageOperationNV",
@@ -11771,9 +11771,9 @@ func (*binaryClassGlCreatePerfQueryINTEL) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCreatePerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreatePerfQueryINTEL(d, obj.(*GlCreatePerfQueryINTEL))
 }
-func (*binaryClassGlCreatePerfQueryINTEL) Schema() *schema.Class { return schemaGlCreatePerfQueryINTEL }
+func (*binaryClassGlCreatePerfQueryINTEL) Schema() *schema.Entity { return schemaGlCreatePerfQueryINTEL }
 
-var schemaGlCreatePerfQueryINTEL = &schema.Class{
+var schemaGlCreatePerfQueryINTEL = &schema.Entity{
 	TypeID:  binaryIDGlCreatePerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlCreatePerfQueryINTEL",
@@ -11810,9 +11810,9 @@ func (*binaryClassGlCreateProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCreateProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateProgram(d, obj.(*GlCreateProgram))
 }
-func (*binaryClassGlCreateProgram) Schema() *schema.Class { return schemaGlCreateProgram }
+func (*binaryClassGlCreateProgram) Schema() *schema.Entity { return schemaGlCreateProgram }
 
-var schemaGlCreateProgram = &schema.Class{
+var schemaGlCreateProgram = &schema.Entity{
 	TypeID:  binaryIDGlCreateProgram,
 	Package: "gles",
 	Name:    "GlCreateProgram",
@@ -11850,9 +11850,9 @@ func (*binaryClassGlCreateShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCreateShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShader(d, obj.(*GlCreateShader))
 }
-func (*binaryClassGlCreateShader) Schema() *schema.Class { return schemaGlCreateShader }
+func (*binaryClassGlCreateShader) Schema() *schema.Entity { return schemaGlCreateShader }
 
-var schemaGlCreateShader = &schema.Class{
+var schemaGlCreateShader = &schema.Entity{
 	TypeID:  binaryIDGlCreateShader,
 	Package: "gles",
 	Name:    "GlCreateShader",
@@ -11895,9 +11895,9 @@ func (*binaryClassGlCreateShaderProgramv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCreateShaderProgramv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShaderProgramv(d, obj.(*GlCreateShaderProgramv))
 }
-func (*binaryClassGlCreateShaderProgramv) Schema() *schema.Class { return schemaGlCreateShaderProgramv }
+func (*binaryClassGlCreateShaderProgramv) Schema() *schema.Entity { return schemaGlCreateShaderProgramv }
 
-var schemaGlCreateShaderProgramv = &schema.Class{
+var schemaGlCreateShaderProgramv = &schema.Entity{
 	TypeID:  binaryIDGlCreateShaderProgramv,
 	Package: "gles",
 	Name:    "GlCreateShaderProgramv",
@@ -11942,11 +11942,11 @@ func (*binaryClassGlCreateShaderProgramvEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCreateShaderProgramvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShaderProgramvEXT(d, obj.(*GlCreateShaderProgramvEXT))
 }
-func (*binaryClassGlCreateShaderProgramvEXT) Schema() *schema.Class {
+func (*binaryClassGlCreateShaderProgramvEXT) Schema() *schema.Entity {
 	return schemaGlCreateShaderProgramvEXT
 }
 
-var schemaGlCreateShaderProgramvEXT = &schema.Class{
+var schemaGlCreateShaderProgramvEXT = &schema.Entity{
 	TypeID:  binaryIDGlCreateShaderProgramvEXT,
 	Package: "gles",
 	Name:    "GlCreateShaderProgramvEXT",
@@ -11985,9 +11985,9 @@ func (*binaryClassGlCullFace) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCullFace) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCullFace(d, obj.(*GlCullFace))
 }
-func (*binaryClassGlCullFace) Schema() *schema.Class { return schemaGlCullFace }
+func (*binaryClassGlCullFace) Schema() *schema.Entity { return schemaGlCullFace }
 
-var schemaGlCullFace = &schema.Class{
+var schemaGlCullFace = &schema.Entity{
 	TypeID:  binaryIDGlCullFace,
 	Package: "gles",
 	Name:    "GlCullFace",
@@ -12025,9 +12025,9 @@ func (*binaryClassGlDebugMessageCallback) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDebugMessageCallback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageCallback(d, obj.(*GlDebugMessageCallback))
 }
-func (*binaryClassGlDebugMessageCallback) Schema() *schema.Class { return schemaGlDebugMessageCallback }
+func (*binaryClassGlDebugMessageCallback) Schema() *schema.Entity { return schemaGlDebugMessageCallback }
 
-var schemaGlDebugMessageCallback = &schema.Class{
+var schemaGlDebugMessageCallback = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageCallback,
 	Package: "gles",
 	Name:    "GlDebugMessageCallback",
@@ -12066,11 +12066,11 @@ func (*binaryClassGlDebugMessageCallbackKHR) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDebugMessageCallbackKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageCallbackKHR(d, obj.(*GlDebugMessageCallbackKHR))
 }
-func (*binaryClassGlDebugMessageCallbackKHR) Schema() *schema.Class {
+func (*binaryClassGlDebugMessageCallbackKHR) Schema() *schema.Entity {
 	return schemaGlDebugMessageCallbackKHR
 }
 
-var schemaGlDebugMessageCallbackKHR = &schema.Class{
+var schemaGlDebugMessageCallbackKHR = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageCallbackKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageCallbackKHR",
@@ -12117,9 +12117,9 @@ func (*binaryClassGlDebugMessageControl) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDebugMessageControl) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageControl(d, obj.(*GlDebugMessageControl))
 }
-func (*binaryClassGlDebugMessageControl) Schema() *schema.Class { return schemaGlDebugMessageControl }
+func (*binaryClassGlDebugMessageControl) Schema() *schema.Entity { return schemaGlDebugMessageControl }
 
-var schemaGlDebugMessageControl = &schema.Class{
+var schemaGlDebugMessageControl = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageControl,
 	Package: "gles",
 	Name:    "GlDebugMessageControl",
@@ -12170,11 +12170,11 @@ func (*binaryClassGlDebugMessageControlKHR) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDebugMessageControlKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageControlKHR(d, obj.(*GlDebugMessageControlKHR))
 }
-func (*binaryClassGlDebugMessageControlKHR) Schema() *schema.Class {
+func (*binaryClassGlDebugMessageControlKHR) Schema() *schema.Entity {
 	return schemaGlDebugMessageControlKHR
 }
 
-var schemaGlDebugMessageControlKHR = &schema.Class{
+var schemaGlDebugMessageControlKHR = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageControlKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageControlKHR",
@@ -12225,9 +12225,9 @@ func (*binaryClassGlDebugMessageInsert) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDebugMessageInsert) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageInsert(d, obj.(*GlDebugMessageInsert))
 }
-func (*binaryClassGlDebugMessageInsert) Schema() *schema.Class { return schemaGlDebugMessageInsert }
+func (*binaryClassGlDebugMessageInsert) Schema() *schema.Entity { return schemaGlDebugMessageInsert }
 
-var schemaGlDebugMessageInsert = &schema.Class{
+var schemaGlDebugMessageInsert = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageInsert,
 	Package: "gles",
 	Name:    "GlDebugMessageInsert",
@@ -12278,11 +12278,11 @@ func (*binaryClassGlDebugMessageInsertKHR) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDebugMessageInsertKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageInsertKHR(d, obj.(*GlDebugMessageInsertKHR))
 }
-func (*binaryClassGlDebugMessageInsertKHR) Schema() *schema.Class {
+func (*binaryClassGlDebugMessageInsertKHR) Schema() *schema.Entity {
 	return schemaGlDebugMessageInsertKHR
 }
 
-var schemaGlDebugMessageInsertKHR = &schema.Class{
+var schemaGlDebugMessageInsertKHR = &schema.Entity{
 	TypeID:  binaryIDGlDebugMessageInsertKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageInsertKHR",
@@ -12325,9 +12325,9 @@ func (*binaryClassGlDeleteBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteBuffers(d, obj.(*GlDeleteBuffers))
 }
-func (*binaryClassGlDeleteBuffers) Schema() *schema.Class { return schemaGlDeleteBuffers }
+func (*binaryClassGlDeleteBuffers) Schema() *schema.Entity { return schemaGlDeleteBuffers }
 
-var schemaGlDeleteBuffers = &schema.Class{
+var schemaGlDeleteBuffers = &schema.Entity{
 	TypeID:  binaryIDGlDeleteBuffers,
 	Package: "gles",
 	Name:    "GlDeleteBuffers",
@@ -12366,9 +12366,9 @@ func (*binaryClassGlDeleteFencesNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteFencesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteFencesNV(d, obj.(*GlDeleteFencesNV))
 }
-func (*binaryClassGlDeleteFencesNV) Schema() *schema.Class { return schemaGlDeleteFencesNV }
+func (*binaryClassGlDeleteFencesNV) Schema() *schema.Entity { return schemaGlDeleteFencesNV }
 
-var schemaGlDeleteFencesNV = &schema.Class{
+var schemaGlDeleteFencesNV = &schema.Entity{
 	TypeID:  binaryIDGlDeleteFencesNV,
 	Package: "gles",
 	Name:    "GlDeleteFencesNV",
@@ -12407,9 +12407,9 @@ func (*binaryClassGlDeleteFramebuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteFramebuffers(d, obj.(*GlDeleteFramebuffers))
 }
-func (*binaryClassGlDeleteFramebuffers) Schema() *schema.Class { return schemaGlDeleteFramebuffers }
+func (*binaryClassGlDeleteFramebuffers) Schema() *schema.Entity { return schemaGlDeleteFramebuffers }
 
-var schemaGlDeleteFramebuffers = &schema.Class{
+var schemaGlDeleteFramebuffers = &schema.Entity{
 	TypeID:  binaryIDGlDeleteFramebuffers,
 	Package: "gles",
 	Name:    "GlDeleteFramebuffers",
@@ -12448,9 +12448,9 @@ func (*binaryClassGlDeletePathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeletePathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePathsNV(d, obj.(*GlDeletePathsNV))
 }
-func (*binaryClassGlDeletePathsNV) Schema() *schema.Class { return schemaGlDeletePathsNV }
+func (*binaryClassGlDeletePathsNV) Schema() *schema.Entity { return schemaGlDeletePathsNV }
 
-var schemaGlDeletePathsNV = &schema.Class{
+var schemaGlDeletePathsNV = &schema.Entity{
 	TypeID:  binaryIDGlDeletePathsNV,
 	Package: "gles",
 	Name:    "GlDeletePathsNV",
@@ -12489,11 +12489,11 @@ func (*binaryClassGlDeletePerfMonitorsAMD) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDeletePerfMonitorsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePerfMonitorsAMD(d, obj.(*GlDeletePerfMonitorsAMD))
 }
-func (*binaryClassGlDeletePerfMonitorsAMD) Schema() *schema.Class {
+func (*binaryClassGlDeletePerfMonitorsAMD) Schema() *schema.Entity {
 	return schemaGlDeletePerfMonitorsAMD
 }
 
-var schemaGlDeletePerfMonitorsAMD = &schema.Class{
+var schemaGlDeletePerfMonitorsAMD = &schema.Entity{
 	TypeID:  binaryIDGlDeletePerfMonitorsAMD,
 	Package: "gles",
 	Name:    "GlDeletePerfMonitorsAMD",
@@ -12530,9 +12530,9 @@ func (*binaryClassGlDeletePerfQueryINTEL) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDeletePerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePerfQueryINTEL(d, obj.(*GlDeletePerfQueryINTEL))
 }
-func (*binaryClassGlDeletePerfQueryINTEL) Schema() *schema.Class { return schemaGlDeletePerfQueryINTEL }
+func (*binaryClassGlDeletePerfQueryINTEL) Schema() *schema.Entity { return schemaGlDeletePerfQueryINTEL }
 
-var schemaGlDeletePerfQueryINTEL = &schema.Class{
+var schemaGlDeletePerfQueryINTEL = &schema.Entity{
 	TypeID:  binaryIDGlDeletePerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlDeletePerfQueryINTEL",
@@ -12568,9 +12568,9 @@ func (*binaryClassGlDeleteProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgram(d, obj.(*GlDeleteProgram))
 }
-func (*binaryClassGlDeleteProgram) Schema() *schema.Class { return schemaGlDeleteProgram }
+func (*binaryClassGlDeleteProgram) Schema() *schema.Entity { return schemaGlDeleteProgram }
 
-var schemaGlDeleteProgram = &schema.Class{
+var schemaGlDeleteProgram = &schema.Entity{
 	TypeID:  binaryIDGlDeleteProgram,
 	Package: "gles",
 	Name:    "GlDeleteProgram",
@@ -12604,9 +12604,9 @@ func (*binaryClassPipelineIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdᶜᵖ(d, obj.(*PipelineIdᶜᵖ))
 }
-func (*binaryClassPipelineIdᶜᵖ) Schema() *schema.Class { return schemaPipelineIdᶜᵖ }
+func (*binaryClassPipelineIdᶜᵖ) Schema() *schema.Entity { return schemaPipelineIdᶜᵖ }
 
-var schemaPipelineIdᶜᵖ = &schema.Class{
+var schemaPipelineIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDPipelineIdᶜᵖ,
 	Package: "gles",
 	Name:    "PipelineIdᶜᵖ",
@@ -12643,11 +12643,11 @@ func (*binaryClassGlDeleteProgramPipelines) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDeleteProgramPipelines) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgramPipelines(d, obj.(*GlDeleteProgramPipelines))
 }
-func (*binaryClassGlDeleteProgramPipelines) Schema() *schema.Class {
+func (*binaryClassGlDeleteProgramPipelines) Schema() *schema.Entity {
 	return schemaGlDeleteProgramPipelines
 }
 
-var schemaGlDeleteProgramPipelines = &schema.Class{
+var schemaGlDeleteProgramPipelines = &schema.Entity{
 	TypeID:  binaryIDGlDeleteProgramPipelines,
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelines",
@@ -12690,11 +12690,11 @@ func (*binaryClassGlDeleteProgramPipelinesEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDeleteProgramPipelinesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgramPipelinesEXT(d, obj.(*GlDeleteProgramPipelinesEXT))
 }
-func (*binaryClassGlDeleteProgramPipelinesEXT) Schema() *schema.Class {
+func (*binaryClassGlDeleteProgramPipelinesEXT) Schema() *schema.Entity {
 	return schemaGlDeleteProgramPipelinesEXT
 }
 
-var schemaGlDeleteProgramPipelinesEXT = &schema.Class{
+var schemaGlDeleteProgramPipelinesEXT = &schema.Entity{
 	TypeID:  binaryIDGlDeleteProgramPipelinesEXT,
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelinesEXT",
@@ -12729,9 +12729,9 @@ func (*binaryClassQueryIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdᶜᵖ(d, obj.(*QueryIdᶜᵖ))
 }
-func (*binaryClassQueryIdᶜᵖ) Schema() *schema.Class { return schemaQueryIdᶜᵖ }
+func (*binaryClassQueryIdᶜᵖ) Schema() *schema.Entity { return schemaQueryIdᶜᵖ }
 
-var schemaQueryIdᶜᵖ = &schema.Class{
+var schemaQueryIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDQueryIdᶜᵖ,
 	Package: "gles",
 	Name:    "QueryIdᶜᵖ",
@@ -12768,9 +12768,9 @@ func (*binaryClassGlDeleteQueries) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteQueries) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteQueries(d, obj.(*GlDeleteQueries))
 }
-func (*binaryClassGlDeleteQueries) Schema() *schema.Class { return schemaGlDeleteQueries }
+func (*binaryClassGlDeleteQueries) Schema() *schema.Entity { return schemaGlDeleteQueries }
 
-var schemaGlDeleteQueries = &schema.Class{
+var schemaGlDeleteQueries = &schema.Entity{
 	TypeID:  binaryIDGlDeleteQueries,
 	Package: "gles",
 	Name:    "GlDeleteQueries",
@@ -12809,9 +12809,9 @@ func (*binaryClassGlDeleteQueriesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteQueriesEXT(d, obj.(*GlDeleteQueriesEXT))
 }
-func (*binaryClassGlDeleteQueriesEXT) Schema() *schema.Class { return schemaGlDeleteQueriesEXT }
+func (*binaryClassGlDeleteQueriesEXT) Schema() *schema.Entity { return schemaGlDeleteQueriesEXT }
 
-var schemaGlDeleteQueriesEXT = &schema.Class{
+var schemaGlDeleteQueriesEXT = &schema.Entity{
 	TypeID:  binaryIDGlDeleteQueriesEXT,
 	Package: "gles",
 	Name:    "GlDeleteQueriesEXT",
@@ -12846,9 +12846,9 @@ func (*binaryClassRenderbufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdᶜᵖ(d, obj.(*RenderbufferIdᶜᵖ))
 }
-func (*binaryClassRenderbufferIdᶜᵖ) Schema() *schema.Class { return schemaRenderbufferIdᶜᵖ }
+func (*binaryClassRenderbufferIdᶜᵖ) Schema() *schema.Entity { return schemaRenderbufferIdᶜᵖ }
 
-var schemaRenderbufferIdᶜᵖ = &schema.Class{
+var schemaRenderbufferIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDRenderbufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "RenderbufferIdᶜᵖ",
@@ -12885,9 +12885,9 @@ func (*binaryClassGlDeleteRenderbuffers) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDeleteRenderbuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteRenderbuffers(d, obj.(*GlDeleteRenderbuffers))
 }
-func (*binaryClassGlDeleteRenderbuffers) Schema() *schema.Class { return schemaGlDeleteRenderbuffers }
+func (*binaryClassGlDeleteRenderbuffers) Schema() *schema.Entity { return schemaGlDeleteRenderbuffers }
 
-var schemaGlDeleteRenderbuffers = &schema.Class{
+var schemaGlDeleteRenderbuffers = &schema.Entity{
 	TypeID:  binaryIDGlDeleteRenderbuffers,
 	Package: "gles",
 	Name:    "GlDeleteRenderbuffers",
@@ -12922,9 +12922,9 @@ func (*binaryClassSamplerIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdᶜᵖ(d, obj.(*SamplerIdᶜᵖ))
 }
-func (*binaryClassSamplerIdᶜᵖ) Schema() *schema.Class { return schemaSamplerIdᶜᵖ }
+func (*binaryClassSamplerIdᶜᵖ) Schema() *schema.Entity { return schemaSamplerIdᶜᵖ }
 
-var schemaSamplerIdᶜᵖ = &schema.Class{
+var schemaSamplerIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDSamplerIdᶜᵖ,
 	Package: "gles",
 	Name:    "SamplerIdᶜᵖ",
@@ -12961,9 +12961,9 @@ func (*binaryClassGlDeleteSamplers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSamplers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSamplers(d, obj.(*GlDeleteSamplers))
 }
-func (*binaryClassGlDeleteSamplers) Schema() *schema.Class { return schemaGlDeleteSamplers }
+func (*binaryClassGlDeleteSamplers) Schema() *schema.Entity { return schemaGlDeleteSamplers }
 
-var schemaGlDeleteSamplers = &schema.Class{
+var schemaGlDeleteSamplers = &schema.Entity{
 	TypeID:  binaryIDGlDeleteSamplers,
 	Package: "gles",
 	Name:    "GlDeleteSamplers",
@@ -13000,9 +13000,9 @@ func (*binaryClassGlDeleteShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteShader(d, obj.(*GlDeleteShader))
 }
-func (*binaryClassGlDeleteShader) Schema() *schema.Class { return schemaGlDeleteShader }
+func (*binaryClassGlDeleteShader) Schema() *schema.Entity { return schemaGlDeleteShader }
 
-var schemaGlDeleteShader = &schema.Class{
+var schemaGlDeleteShader = &schema.Entity{
 	TypeID:  binaryIDGlDeleteShader,
 	Package: "gles",
 	Name:    "GlDeleteShader",
@@ -13038,9 +13038,9 @@ func (*binaryClassGlDeleteSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSync(d, obj.(*GlDeleteSync))
 }
-func (*binaryClassGlDeleteSync) Schema() *schema.Class { return schemaGlDeleteSync }
+func (*binaryClassGlDeleteSync) Schema() *schema.Entity { return schemaGlDeleteSync }
 
-var schemaGlDeleteSync = &schema.Class{
+var schemaGlDeleteSync = &schema.Entity{
 	TypeID:  binaryIDGlDeleteSync,
 	Package: "gles",
 	Name:    "GlDeleteSync",
@@ -13076,9 +13076,9 @@ func (*binaryClassGlDeleteSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSyncAPPLE(d, obj.(*GlDeleteSyncAPPLE))
 }
-func (*binaryClassGlDeleteSyncAPPLE) Schema() *schema.Class { return schemaGlDeleteSyncAPPLE }
+func (*binaryClassGlDeleteSyncAPPLE) Schema() *schema.Entity { return schemaGlDeleteSyncAPPLE }
 
-var schemaGlDeleteSyncAPPLE = &schema.Class{
+var schemaGlDeleteSyncAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlDeleteSyncAPPLE,
 	Package: "gles",
 	Name:    "GlDeleteSyncAPPLE",
@@ -13112,9 +13112,9 @@ func (*binaryClassTextureIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdᶜᵖ(d, obj.(*TextureIdᶜᵖ))
 }
-func (*binaryClassTextureIdᶜᵖ) Schema() *schema.Class { return schemaTextureIdᶜᵖ }
+func (*binaryClassTextureIdᶜᵖ) Schema() *schema.Entity { return schemaTextureIdᶜᵖ }
 
-var schemaTextureIdᶜᵖ = &schema.Class{
+var schemaTextureIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDTextureIdᶜᵖ,
 	Package: "gles",
 	Name:    "TextureIdᶜᵖ",
@@ -13151,9 +13151,9 @@ func (*binaryClassGlDeleteTextures) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteTextures) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteTextures(d, obj.(*GlDeleteTextures))
 }
-func (*binaryClassGlDeleteTextures) Schema() *schema.Class { return schemaGlDeleteTextures }
+func (*binaryClassGlDeleteTextures) Schema() *schema.Entity { return schemaGlDeleteTextures }
 
-var schemaGlDeleteTextures = &schema.Class{
+var schemaGlDeleteTextures = &schema.Entity{
 	TypeID:  binaryIDGlDeleteTextures,
 	Package: "gles",
 	Name:    "GlDeleteTextures",
@@ -13188,11 +13188,11 @@ func (*binaryClassTransformFeedbackIdᶜᵖ) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassTransformFeedbackIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdᶜᵖ(d, obj.(*TransformFeedbackIdᶜᵖ))
 }
-func (*binaryClassTransformFeedbackIdᶜᵖ) Schema() *schema.Class {
+func (*binaryClassTransformFeedbackIdᶜᵖ) Schema() *schema.Entity {
 	return schemaTransformFeedbackIdᶜᵖ
 }
 
-var schemaTransformFeedbackIdᶜᵖ = &schema.Class{
+var schemaTransformFeedbackIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDTransformFeedbackIdᶜᵖ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdᶜᵖ",
@@ -13233,11 +13233,11 @@ func (*binaryClassGlDeleteTransformFeedbacks) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDeleteTransformFeedbacks) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteTransformFeedbacks(d, obj.(*GlDeleteTransformFeedbacks))
 }
-func (*binaryClassGlDeleteTransformFeedbacks) Schema() *schema.Class {
+func (*binaryClassGlDeleteTransformFeedbacks) Schema() *schema.Entity {
 	return schemaGlDeleteTransformFeedbacks
 }
 
-var schemaGlDeleteTransformFeedbacks = &schema.Class{
+var schemaGlDeleteTransformFeedbacks = &schema.Entity{
 	TypeID:  binaryIDGlDeleteTransformFeedbacks,
 	Package: "gles",
 	Name:    "GlDeleteTransformFeedbacks",
@@ -13272,9 +13272,9 @@ func (*binaryClassVertexArrayIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdᶜᵖ(d, obj.(*VertexArrayIdᶜᵖ))
 }
-func (*binaryClassVertexArrayIdᶜᵖ) Schema() *schema.Class { return schemaVertexArrayIdᶜᵖ }
+func (*binaryClassVertexArrayIdᶜᵖ) Schema() *schema.Entity { return schemaVertexArrayIdᶜᵖ }
 
-var schemaVertexArrayIdᶜᵖ = &schema.Class{
+var schemaVertexArrayIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDVertexArrayIdᶜᵖ,
 	Package: "gles",
 	Name:    "VertexArrayIdᶜᵖ",
@@ -13311,9 +13311,9 @@ func (*binaryClassGlDeleteVertexArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteVertexArrays(d, obj.(*GlDeleteVertexArrays))
 }
-func (*binaryClassGlDeleteVertexArrays) Schema() *schema.Class { return schemaGlDeleteVertexArrays }
+func (*binaryClassGlDeleteVertexArrays) Schema() *schema.Entity { return schemaGlDeleteVertexArrays }
 
-var schemaGlDeleteVertexArrays = &schema.Class{
+var schemaGlDeleteVertexArrays = &schema.Entity{
 	TypeID:  binaryIDGlDeleteVertexArrays,
 	Package: "gles",
 	Name:    "GlDeleteVertexArrays",
@@ -13352,11 +13352,11 @@ func (*binaryClassGlDeleteVertexArraysOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDeleteVertexArraysOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteVertexArraysOES(d, obj.(*GlDeleteVertexArraysOES))
 }
-func (*binaryClassGlDeleteVertexArraysOES) Schema() *schema.Class {
+func (*binaryClassGlDeleteVertexArraysOES) Schema() *schema.Entity {
 	return schemaGlDeleteVertexArraysOES
 }
 
-var schemaGlDeleteVertexArraysOES = &schema.Class{
+var schemaGlDeleteVertexArraysOES = &schema.Entity{
 	TypeID:  binaryIDGlDeleteVertexArraysOES,
 	Package: "gles",
 	Name:    "GlDeleteVertexArraysOES",
@@ -13393,9 +13393,9 @@ func (*binaryClassGlDepthFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthFunc(d, obj.(*GlDepthFunc))
 }
-func (*binaryClassGlDepthFunc) Schema() *schema.Class { return schemaGlDepthFunc }
+func (*binaryClassGlDepthFunc) Schema() *schema.Entity { return schemaGlDepthFunc }
 
-var schemaGlDepthFunc = &schema.Class{
+var schemaGlDepthFunc = &schema.Entity{
 	TypeID:  binaryIDGlDepthFunc,
 	Package: "gles",
 	Name:    "GlDepthFunc",
@@ -13431,9 +13431,9 @@ func (*binaryClassGlDepthMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthMask(d, obj.(*GlDepthMask))
 }
-func (*binaryClassGlDepthMask) Schema() *schema.Class { return schemaGlDepthMask }
+func (*binaryClassGlDepthMask) Schema() *schema.Entity { return schemaGlDepthMask }
 
-var schemaGlDepthMask = &schema.Class{
+var schemaGlDepthMask = &schema.Entity{
 	TypeID:  binaryIDGlDepthMask,
 	Package: "gles",
 	Name:    "GlDepthMask",
@@ -13473,9 +13473,9 @@ func (*binaryClassGlDepthRangeArrayfvNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDepthRangeArrayfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangeArrayfvNV(d, obj.(*GlDepthRangeArrayfvNV))
 }
-func (*binaryClassGlDepthRangeArrayfvNV) Schema() *schema.Class { return schemaGlDepthRangeArrayfvNV }
+func (*binaryClassGlDepthRangeArrayfvNV) Schema() *schema.Entity { return schemaGlDepthRangeArrayfvNV }
 
-var schemaGlDepthRangeArrayfvNV = &schema.Class{
+var schemaGlDepthRangeArrayfvNV = &schema.Entity{
 	TypeID:  binaryIDGlDepthRangeArrayfvNV,
 	Package: "gles",
 	Name:    "GlDepthRangeArrayfvNV",
@@ -13517,9 +13517,9 @@ func (*binaryClassGlDepthRangeIndexedfNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDepthRangeIndexedfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangeIndexedfNV(d, obj.(*GlDepthRangeIndexedfNV))
 }
-func (*binaryClassGlDepthRangeIndexedfNV) Schema() *schema.Class { return schemaGlDepthRangeIndexedfNV }
+func (*binaryClassGlDepthRangeIndexedfNV) Schema() *schema.Entity { return schemaGlDepthRangeIndexedfNV }
 
-var schemaGlDepthRangeIndexedfNV = &schema.Class{
+var schemaGlDepthRangeIndexedfNV = &schema.Entity{
 	TypeID:  binaryIDGlDepthRangeIndexedfNV,
 	Package: "gles",
 	Name:    "GlDepthRangeIndexedfNV",
@@ -13559,9 +13559,9 @@ func (*binaryClassGlDepthRangef) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthRangef) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangef(d, obj.(*GlDepthRangef))
 }
-func (*binaryClassGlDepthRangef) Schema() *schema.Class { return schemaGlDepthRangef }
+func (*binaryClassGlDepthRangef) Schema() *schema.Entity { return schemaGlDepthRangef }
 
-var schemaGlDepthRangef = &schema.Class{
+var schemaGlDepthRangef = &schema.Entity{
 	TypeID:  binaryIDGlDepthRangef,
 	Package: "gles",
 	Name:    "GlDepthRangef",
@@ -13600,9 +13600,9 @@ func (*binaryClassGlDetachShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDetachShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDetachShader(d, obj.(*GlDetachShader))
 }
-func (*binaryClassGlDetachShader) Schema() *schema.Class { return schemaGlDetachShader }
+func (*binaryClassGlDetachShader) Schema() *schema.Entity { return schemaGlDetachShader }
 
-var schemaGlDetachShader = &schema.Class{
+var schemaGlDetachShader = &schema.Entity{
 	TypeID:  binaryIDGlDetachShader,
 	Package: "gles",
 	Name:    "GlDetachShader",
@@ -13639,9 +13639,9 @@ func (*binaryClassGlDisable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisable(d, obj.(*GlDisable))
 }
-func (*binaryClassGlDisable) Schema() *schema.Class { return schemaGlDisable }
+func (*binaryClassGlDisable) Schema() *schema.Entity { return schemaGlDisable }
 
-var schemaGlDisable = &schema.Class{
+var schemaGlDisable = &schema.Entity{
 	TypeID:  binaryIDGlDisable,
 	Package: "gles",
 	Name:    "GlDisable",
@@ -13681,11 +13681,11 @@ func (*binaryClassGlDisableDriverControlQCOM) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDisableDriverControlQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableDriverControlQCOM(d, obj.(*GlDisableDriverControlQCOM))
 }
-func (*binaryClassGlDisableDriverControlQCOM) Schema() *schema.Class {
+func (*binaryClassGlDisableDriverControlQCOM) Schema() *schema.Entity {
 	return schemaGlDisableDriverControlQCOM
 }
 
-var schemaGlDisableDriverControlQCOM = &schema.Class{
+var schemaGlDisableDriverControlQCOM = &schema.Entity{
 	TypeID:  binaryIDGlDisableDriverControlQCOM,
 	Package: "gles",
 	Name:    "GlDisableDriverControlQCOM",
@@ -13725,11 +13725,11 @@ func (*binaryClassGlDisableVertexAttribArray) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDisableVertexAttribArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableVertexAttribArray(d, obj.(*GlDisableVertexAttribArray))
 }
-func (*binaryClassGlDisableVertexAttribArray) Schema() *schema.Class {
+func (*binaryClassGlDisableVertexAttribArray) Schema() *schema.Entity {
 	return schemaGlDisableVertexAttribArray
 }
 
-var schemaGlDisableVertexAttribArray = &schema.Class{
+var schemaGlDisableVertexAttribArray = &schema.Entity{
 	TypeID:  binaryIDGlDisableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlDisableVertexAttribArray",
@@ -13767,9 +13767,9 @@ func (*binaryClassGlDisablei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisablei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisablei(d, obj.(*GlDisablei))
 }
-func (*binaryClassGlDisablei) Schema() *schema.Class { return schemaGlDisablei }
+func (*binaryClassGlDisablei) Schema() *schema.Entity { return schemaGlDisablei }
 
-var schemaGlDisablei = &schema.Class{
+var schemaGlDisablei = &schema.Entity{
 	TypeID:  binaryIDGlDisablei,
 	Package: "gles",
 	Name:    "GlDisablei",
@@ -13808,9 +13808,9 @@ func (*binaryClassGlDisableiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiEXT(d, obj.(*GlDisableiEXT))
 }
-func (*binaryClassGlDisableiEXT) Schema() *schema.Class { return schemaGlDisableiEXT }
+func (*binaryClassGlDisableiEXT) Schema() *schema.Entity { return schemaGlDisableiEXT }
 
-var schemaGlDisableiEXT = &schema.Class{
+var schemaGlDisableiEXT = &schema.Entity{
 	TypeID:  binaryIDGlDisableiEXT,
 	Package: "gles",
 	Name:    "GlDisableiEXT",
@@ -13849,9 +13849,9 @@ func (*binaryClassGlDisableiNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiNV(d, obj.(*GlDisableiNV))
 }
-func (*binaryClassGlDisableiNV) Schema() *schema.Class { return schemaGlDisableiNV }
+func (*binaryClassGlDisableiNV) Schema() *schema.Entity { return schemaGlDisableiNV }
 
-var schemaGlDisableiNV = &schema.Class{
+var schemaGlDisableiNV = &schema.Entity{
 	TypeID:  binaryIDGlDisableiNV,
 	Package: "gles",
 	Name:    "GlDisableiNV",
@@ -13890,9 +13890,9 @@ func (*binaryClassGlDisableiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiOES(d, obj.(*GlDisableiOES))
 }
-func (*binaryClassGlDisableiOES) Schema() *schema.Class { return schemaGlDisableiOES }
+func (*binaryClassGlDisableiOES) Schema() *schema.Entity { return schemaGlDisableiOES }
 
-var schemaGlDisableiOES = &schema.Class{
+var schemaGlDisableiOES = &schema.Entity{
 	TypeID:  binaryIDGlDisableiOES,
 	Package: "gles",
 	Name:    "GlDisableiOES",
@@ -13933,11 +13933,11 @@ func (*binaryClassGlDiscardFramebufferEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDiscardFramebufferEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDiscardFramebufferEXT(d, obj.(*GlDiscardFramebufferEXT))
 }
-func (*binaryClassGlDiscardFramebufferEXT) Schema() *schema.Class {
+func (*binaryClassGlDiscardFramebufferEXT) Schema() *schema.Entity {
 	return schemaGlDiscardFramebufferEXT
 }
 
-var schemaGlDiscardFramebufferEXT = &schema.Class{
+var schemaGlDiscardFramebufferEXT = &schema.Entity{
 	TypeID:  binaryIDGlDiscardFramebufferEXT,
 	Package: "gles",
 	Name:    "GlDiscardFramebufferEXT",
@@ -13979,9 +13979,9 @@ func (*binaryClassGlDispatchCompute) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDispatchCompute) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDispatchCompute(d, obj.(*GlDispatchCompute))
 }
-func (*binaryClassGlDispatchCompute) Schema() *schema.Class { return schemaGlDispatchCompute }
+func (*binaryClassGlDispatchCompute) Schema() *schema.Entity { return schemaGlDispatchCompute }
 
-var schemaGlDispatchCompute = &schema.Class{
+var schemaGlDispatchCompute = &schema.Entity{
 	TypeID:  binaryIDGlDispatchCompute,
 	Package: "gles",
 	Name:    "GlDispatchCompute",
@@ -14019,11 +14019,11 @@ func (*binaryClassGlDispatchComputeIndirect) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDispatchComputeIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDispatchComputeIndirect(d, obj.(*GlDispatchComputeIndirect))
 }
-func (*binaryClassGlDispatchComputeIndirect) Schema() *schema.Class {
+func (*binaryClassGlDispatchComputeIndirect) Schema() *schema.Entity {
 	return schemaGlDispatchComputeIndirect
 }
 
-var schemaGlDispatchComputeIndirect = &schema.Class{
+var schemaGlDispatchComputeIndirect = &schema.Entity{
 	TypeID:  binaryIDGlDispatchComputeIndirect,
 	Package: "gles",
 	Name:    "GlDispatchComputeIndirect",
@@ -14063,9 +14063,9 @@ func (*binaryClassGlDrawArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArrays(d, obj.(*GlDrawArrays))
 }
-func (*binaryClassGlDrawArrays) Schema() *schema.Class { return schemaGlDrawArrays }
+func (*binaryClassGlDrawArrays) Schema() *schema.Entity { return schemaGlDrawArrays }
 
-var schemaGlDrawArrays = &schema.Class{
+var schemaGlDrawArrays = &schema.Entity{
 	TypeID:  binaryIDGlDrawArrays,
 	Package: "gles",
 	Name:    "GlDrawArrays",
@@ -14105,9 +14105,9 @@ func (*binaryClassGlDrawArraysIndirect) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawArraysIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysIndirect(d, obj.(*GlDrawArraysIndirect))
 }
-func (*binaryClassGlDrawArraysIndirect) Schema() *schema.Class { return schemaGlDrawArraysIndirect }
+func (*binaryClassGlDrawArraysIndirect) Schema() *schema.Entity { return schemaGlDrawArraysIndirect }
 
-var schemaGlDrawArraysIndirect = &schema.Class{
+var schemaGlDrawArraysIndirect = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysIndirect,
 	Package: "gles",
 	Name:    "GlDrawArraysIndirect",
@@ -14150,9 +14150,9 @@ func (*binaryClassGlDrawArraysInstanced) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDrawArraysInstanced) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstanced(d, obj.(*GlDrawArraysInstanced))
 }
-func (*binaryClassGlDrawArraysInstanced) Schema() *schema.Class { return schemaGlDrawArraysInstanced }
+func (*binaryClassGlDrawArraysInstanced) Schema() *schema.Entity { return schemaGlDrawArraysInstanced }
 
-var schemaGlDrawArraysInstanced = &schema.Class{
+var schemaGlDrawArraysInstanced = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysInstanced,
 	Package: "gles",
 	Name:    "GlDrawArraysInstanced",
@@ -14201,11 +14201,11 @@ func (*binaryClassGlDrawArraysInstancedANGLE) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDrawArraysInstancedANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedANGLE(d, obj.(*GlDrawArraysInstancedANGLE))
 }
-func (*binaryClassGlDrawArraysInstancedANGLE) Schema() *schema.Class {
+func (*binaryClassGlDrawArraysInstancedANGLE) Schema() *schema.Entity {
 	return schemaGlDrawArraysInstancedANGLE
 }
 
-var schemaGlDrawArraysInstancedANGLE = &schema.Class{
+var schemaGlDrawArraysInstancedANGLE = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedANGLE,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedANGLE",
@@ -14256,11 +14256,11 @@ func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Decode(d binary.Decoder)
 func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedBaseInstanceEXT(d, obj.(*GlDrawArraysInstancedBaseInstanceEXT))
 }
-func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Schema() *schema.Entity {
 	return schemaGlDrawArraysInstancedBaseInstanceEXT
 }
 
-var schemaGlDrawArraysInstancedBaseInstanceEXT = &schema.Class{
+var schemaGlDrawArraysInstancedBaseInstanceEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedBaseInstanceEXT",
@@ -14306,11 +14306,11 @@ func (*binaryClassGlDrawArraysInstancedEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDrawArraysInstancedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedEXT(d, obj.(*GlDrawArraysInstancedEXT))
 }
-func (*binaryClassGlDrawArraysInstancedEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawArraysInstancedEXT) Schema() *schema.Entity {
 	return schemaGlDrawArraysInstancedEXT
 }
 
-var schemaGlDrawArraysInstancedEXT = &schema.Class{
+var schemaGlDrawArraysInstancedEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedEXT,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedEXT",
@@ -14355,11 +14355,11 @@ func (*binaryClassGlDrawArraysInstancedNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawArraysInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedNV(d, obj.(*GlDrawArraysInstancedNV))
 }
-func (*binaryClassGlDrawArraysInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlDrawArraysInstancedNV) Schema() *schema.Entity {
 	return schemaGlDrawArraysInstancedNV
 }
 
-var schemaGlDrawArraysInstancedNV = &schema.Class{
+var schemaGlDrawArraysInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedNV,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedNV",
@@ -14400,9 +14400,9 @@ func (*binaryClassGlDrawBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffers(d, obj.(*GlDrawBuffers))
 }
-func (*binaryClassGlDrawBuffers) Schema() *schema.Class { return schemaGlDrawBuffers }
+func (*binaryClassGlDrawBuffers) Schema() *schema.Entity { return schemaGlDrawBuffers }
 
-var schemaGlDrawBuffers = &schema.Class{
+var schemaGlDrawBuffers = &schema.Entity{
 	TypeID:  binaryIDGlDrawBuffers,
 	Package: "gles",
 	Name:    "GlDrawBuffers",
@@ -14441,9 +14441,9 @@ func (*binaryClassGlDrawBuffersEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffersEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersEXT(d, obj.(*GlDrawBuffersEXT))
 }
-func (*binaryClassGlDrawBuffersEXT) Schema() *schema.Class { return schemaGlDrawBuffersEXT }
+func (*binaryClassGlDrawBuffersEXT) Schema() *schema.Entity { return schemaGlDrawBuffersEXT }
 
-var schemaGlDrawBuffersEXT = &schema.Class{
+var schemaGlDrawBuffersEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawBuffersEXT,
 	Package: "gles",
 	Name:    "GlDrawBuffersEXT",
@@ -14484,11 +14484,11 @@ func (*binaryClassGlDrawBuffersIndexedEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawBuffersIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersIndexedEXT(d, obj.(*GlDrawBuffersIndexedEXT))
 }
-func (*binaryClassGlDrawBuffersIndexedEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawBuffersIndexedEXT) Schema() *schema.Entity {
 	return schemaGlDrawBuffersIndexedEXT
 }
 
-var schemaGlDrawBuffersIndexedEXT = &schema.Class{
+var schemaGlDrawBuffersIndexedEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawBuffersIndexedEXT,
 	Package: "gles",
 	Name:    "GlDrawBuffersIndexedEXT",
@@ -14528,9 +14528,9 @@ func (*binaryClassGlDrawBuffersNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffersNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersNV(d, obj.(*GlDrawBuffersNV))
 }
-func (*binaryClassGlDrawBuffersNV) Schema() *schema.Class { return schemaGlDrawBuffersNV }
+func (*binaryClassGlDrawBuffersNV) Schema() *schema.Entity { return schemaGlDrawBuffersNV }
 
-var schemaGlDrawBuffersNV = &schema.Class{
+var schemaGlDrawBuffersNV = &schema.Entity{
 	TypeID:  binaryIDGlDrawBuffersNV,
 	Package: "gles",
 	Name:    "GlDrawBuffersNV",
@@ -14565,9 +14565,9 @@ func (*binaryClassIndicesPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIndicesPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIndicesPointer(d, obj.(*IndicesPointer))
 }
-func (*binaryClassIndicesPointer) Schema() *schema.Class { return schemaIndicesPointer }
+func (*binaryClassIndicesPointer) Schema() *schema.Entity { return schemaIndicesPointer }
 
-var schemaIndicesPointer = &schema.Class{
+var schemaIndicesPointer = &schema.Entity{
 	TypeID:  binaryIDIndicesPointer,
 	Package: "gles",
 	Name:    "IndicesPointer",
@@ -14608,9 +14608,9 @@ func (*binaryClassGlDrawElements) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawElements) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElements(d, obj.(*GlDrawElements))
 }
-func (*binaryClassGlDrawElements) Schema() *schema.Class { return schemaGlDrawElements }
+func (*binaryClassGlDrawElements) Schema() *schema.Entity { return schemaGlDrawElements }
 
-var schemaGlDrawElements = &schema.Class{
+var schemaGlDrawElements = &schema.Entity{
 	TypeID:  binaryIDGlDrawElements,
 	Package: "gles",
 	Name:    "GlDrawElements",
@@ -14657,11 +14657,11 @@ func (*binaryClassGlDrawElementsBaseVertex) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDrawElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertex(d, obj.(*GlDrawElementsBaseVertex))
 }
-func (*binaryClassGlDrawElementsBaseVertex) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsBaseVertex) Schema() *schema.Entity {
 	return schemaGlDrawElementsBaseVertex
 }
 
-var schemaGlDrawElementsBaseVertex = &schema.Class{
+var schemaGlDrawElementsBaseVertex = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertex",
@@ -14713,11 +14713,11 @@ func (*binaryClassGlDrawElementsBaseVertexEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDrawElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertexEXT(d, obj.(*GlDrawElementsBaseVertexEXT))
 }
-func (*binaryClassGlDrawElementsBaseVertexEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsBaseVertexEXT) Schema() *schema.Entity {
 	return schemaGlDrawElementsBaseVertexEXT
 }
 
-var schemaGlDrawElementsBaseVertexEXT = &schema.Class{
+var schemaGlDrawElementsBaseVertexEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexEXT",
@@ -14769,11 +14769,11 @@ func (*binaryClassGlDrawElementsBaseVertexOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDrawElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertexOES(d, obj.(*GlDrawElementsBaseVertexOES))
 }
-func (*binaryClassGlDrawElementsBaseVertexOES) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsBaseVertexOES) Schema() *schema.Entity {
 	return schemaGlDrawElementsBaseVertexOES
 }
 
-var schemaGlDrawElementsBaseVertexOES = &schema.Class{
+var schemaGlDrawElementsBaseVertexOES = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexOES",
@@ -14817,9 +14817,9 @@ func (*binaryClassGlDrawElementsIndirect) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDrawElementsIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsIndirect(d, obj.(*GlDrawElementsIndirect))
 }
-func (*binaryClassGlDrawElementsIndirect) Schema() *schema.Class { return schemaGlDrawElementsIndirect }
+func (*binaryClassGlDrawElementsIndirect) Schema() *schema.Entity { return schemaGlDrawElementsIndirect }
 
-var schemaGlDrawElementsIndirect = &schema.Class{
+var schemaGlDrawElementsIndirect = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsIndirect,
 	Package: "gles",
 	Name:    "GlDrawElementsIndirect",
@@ -14865,11 +14865,11 @@ func (*binaryClassGlDrawElementsInstanced) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawElementsInstanced) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstanced(d, obj.(*GlDrawElementsInstanced))
 }
-func (*binaryClassGlDrawElementsInstanced) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstanced) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstanced
 }
 
-var schemaGlDrawElementsInstanced = &schema.Class{
+var schemaGlDrawElementsInstanced = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstanced,
 	Package: "gles",
 	Name:    "GlDrawElementsInstanced",
@@ -14921,11 +14921,11 @@ func (*binaryClassGlDrawElementsInstancedANGLE) Decode(d binary.Decoder) binary.
 func (*binaryClassGlDrawElementsInstancedANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedANGLE(d, obj.(*GlDrawElementsInstancedANGLE))
 }
-func (*binaryClassGlDrawElementsInstancedANGLE) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedANGLE) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedANGLE
 }
 
-var schemaGlDrawElementsInstancedANGLE = &schema.Class{
+var schemaGlDrawElementsInstancedANGLE = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedANGLE,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedANGLE",
@@ -14979,11 +14979,11 @@ func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Decode(d binary.Decode
 func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseInstanceEXT(d, obj.(*GlDrawElementsInstancedBaseInstanceEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedBaseInstanceEXT
 }
 
-var schemaGlDrawElementsInstancedBaseInstanceEXT = &schema.Class{
+var schemaGlDrawElementsInstancedBaseInstanceEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseInstanceEXT",
@@ -15038,11 +15038,11 @@ func (*binaryClassGlDrawElementsInstancedBaseVertex) Decode(d binary.Decoder) bi
 func (*binaryClassGlDrawElementsInstancedBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertex(d, obj.(*GlDrawElementsInstancedBaseVertex))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedBaseVertex
 }
 
-var schemaGlDrawElementsInstancedBaseVertex = &schema.Class{
+var schemaGlDrawElementsInstancedBaseVertex = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertex",
@@ -15099,11 +15099,11 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Decode(d bin
 func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(d, obj.(*GlDrawElementsInstancedBaseVertexBaseInstanceEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT
 }
 
-var schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT = &schema.Class{
+var schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexBaseInstanceEXT",
@@ -15159,11 +15159,11 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Decode(d binary.Decoder)
 func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexEXT(d, obj.(*GlDrawElementsInstancedBaseVertexEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexEXT
 }
 
-var schemaGlDrawElementsInstancedBaseVertexEXT = &schema.Class{
+var schemaGlDrawElementsInstancedBaseVertexEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexEXT",
@@ -15218,11 +15218,11 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Decode(d binary.Decoder)
 func (*binaryClassGlDrawElementsInstancedBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexOES(d, obj.(*GlDrawElementsInstancedBaseVertexOES))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexOES
 }
 
-var schemaGlDrawElementsInstancedBaseVertexOES = &schema.Class{
+var schemaGlDrawElementsInstancedBaseVertexOES = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexOES",
@@ -15275,11 +15275,11 @@ func (*binaryClassGlDrawElementsInstancedEXT) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDrawElementsInstancedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedEXT(d, obj.(*GlDrawElementsInstancedEXT))
 }
-func (*binaryClassGlDrawElementsInstancedEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedEXT) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedEXT
 }
 
-var schemaGlDrawElementsInstancedEXT = &schema.Class{
+var schemaGlDrawElementsInstancedEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedEXT",
@@ -15327,11 +15327,11 @@ func (*binaryClassGlDrawElementsInstancedNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDrawElementsInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedNV(d, obj.(*GlDrawElementsInstancedNV))
 }
-func (*binaryClassGlDrawElementsInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlDrawElementsInstancedNV) Schema() *schema.Entity {
 	return schemaGlDrawElementsInstancedNV
 }
 
-var schemaGlDrawElementsInstancedNV = &schema.Class{
+var schemaGlDrawElementsInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedNV,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedNV",
@@ -15381,9 +15381,9 @@ func (*binaryClassGlDrawRangeElements) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawRangeElements) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElements(d, obj.(*GlDrawRangeElements))
 }
-func (*binaryClassGlDrawRangeElements) Schema() *schema.Class { return schemaGlDrawRangeElements }
+func (*binaryClassGlDrawRangeElements) Schema() *schema.Entity { return schemaGlDrawRangeElements }
 
-var schemaGlDrawRangeElements = &schema.Class{
+var schemaGlDrawRangeElements = &schema.Entity{
 	TypeID:  binaryIDGlDrawRangeElements,
 	Package: "gles",
 	Name:    "GlDrawRangeElements",
@@ -15440,11 +15440,11 @@ func (*binaryClassGlDrawRangeElementsBaseVertex) Decode(d binary.Decoder) binary
 func (*binaryClassGlDrawRangeElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertex(d, obj.(*GlDrawRangeElementsBaseVertex))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *schema.Class {
+func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *schema.Entity {
 	return schemaGlDrawRangeElementsBaseVertex
 }
 
-var schemaGlDrawRangeElementsBaseVertex = &schema.Class{
+var schemaGlDrawRangeElementsBaseVertex = &schema.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertex",
@@ -15502,11 +15502,11 @@ func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlDrawRangeElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertexEXT(d, obj.(*GlDrawRangeElementsBaseVertexEXT))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Schema() *schema.Class {
+func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Schema() *schema.Entity {
 	return schemaGlDrawRangeElementsBaseVertexEXT
 }
 
-var schemaGlDrawRangeElementsBaseVertexEXT = &schema.Class{
+var schemaGlDrawRangeElementsBaseVertexEXT = &schema.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexEXT",
@@ -15564,11 +15564,11 @@ func (*binaryClassGlDrawRangeElementsBaseVertexOES) Decode(d binary.Decoder) bin
 func (*binaryClassGlDrawRangeElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertexOES(d, obj.(*GlDrawRangeElementsBaseVertexOES))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexOES) Schema() *schema.Class {
+func (*binaryClassGlDrawRangeElementsBaseVertexOES) Schema() *schema.Entity {
 	return schemaGlDrawRangeElementsBaseVertexOES
 }
 
-var schemaGlDrawRangeElementsBaseVertexOES = &schema.Class{
+var schemaGlDrawRangeElementsBaseVertexOES = &schema.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexOES",
@@ -15616,11 +15616,11 @@ func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Decode(d binary.Decode
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEGLImageTargetRenderbufferStorageOES(d, obj.(*GlEGLImageTargetRenderbufferStorageOES))
 }
-func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Schema() *schema.Class {
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Schema() *schema.Entity {
 	return schemaGlEGLImageTargetRenderbufferStorageOES
 }
 
-var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Class{
+var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Entity{
 	TypeID:  binaryIDGlEGLImageTargetRenderbufferStorageOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetRenderbufferStorageOES",
@@ -15663,11 +15663,11 @@ func (*binaryClassGlEGLImageTargetTexture2DOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlEGLImageTargetTexture2DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEGLImageTargetTexture2DOES(d, obj.(*GlEGLImageTargetTexture2DOES))
 }
-func (*binaryClassGlEGLImageTargetTexture2DOES) Schema() *schema.Class {
+func (*binaryClassGlEGLImageTargetTexture2DOES) Schema() *schema.Entity {
 	return schemaGlEGLImageTargetTexture2DOES
 }
 
-var schemaGlEGLImageTargetTexture2DOES = &schema.Class{
+var schemaGlEGLImageTargetTexture2DOES = &schema.Entity{
 	TypeID:  binaryIDGlEGLImageTargetTexture2DOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetTexture2DOES",
@@ -15704,9 +15704,9 @@ func (*binaryClassGlEnable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnable(d, obj.(*GlEnable))
 }
-func (*binaryClassGlEnable) Schema() *schema.Class { return schemaGlEnable }
+func (*binaryClassGlEnable) Schema() *schema.Entity { return schemaGlEnable }
 
-var schemaGlEnable = &schema.Class{
+var schemaGlEnable = &schema.Entity{
 	TypeID:  binaryIDGlEnable,
 	Package: "gles",
 	Name:    "GlEnable",
@@ -15742,11 +15742,11 @@ func (*binaryClassGlEnableDriverControlQCOM) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlEnableDriverControlQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableDriverControlQCOM(d, obj.(*GlEnableDriverControlQCOM))
 }
-func (*binaryClassGlEnableDriverControlQCOM) Schema() *schema.Class {
+func (*binaryClassGlEnableDriverControlQCOM) Schema() *schema.Entity {
 	return schemaGlEnableDriverControlQCOM
 }
 
-var schemaGlEnableDriverControlQCOM = &schema.Class{
+var schemaGlEnableDriverControlQCOM = &schema.Entity{
 	TypeID:  binaryIDGlEnableDriverControlQCOM,
 	Package: "gles",
 	Name:    "GlEnableDriverControlQCOM",
@@ -15782,11 +15782,11 @@ func (*binaryClassGlEnableVertexAttribArray) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlEnableVertexAttribArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableVertexAttribArray(d, obj.(*GlEnableVertexAttribArray))
 }
-func (*binaryClassGlEnableVertexAttribArray) Schema() *schema.Class {
+func (*binaryClassGlEnableVertexAttribArray) Schema() *schema.Entity {
 	return schemaGlEnableVertexAttribArray
 }
 
-var schemaGlEnableVertexAttribArray = &schema.Class{
+var schemaGlEnableVertexAttribArray = &schema.Entity{
 	TypeID:  binaryIDGlEnableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlEnableVertexAttribArray",
@@ -15824,9 +15824,9 @@ func (*binaryClassGlEnablei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnablei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnablei(d, obj.(*GlEnablei))
 }
-func (*binaryClassGlEnablei) Schema() *schema.Class { return schemaGlEnablei }
+func (*binaryClassGlEnablei) Schema() *schema.Entity { return schemaGlEnablei }
 
-var schemaGlEnablei = &schema.Class{
+var schemaGlEnablei = &schema.Entity{
 	TypeID:  binaryIDGlEnablei,
 	Package: "gles",
 	Name:    "GlEnablei",
@@ -15865,9 +15865,9 @@ func (*binaryClassGlEnableiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiEXT(d, obj.(*GlEnableiEXT))
 }
-func (*binaryClassGlEnableiEXT) Schema() *schema.Class { return schemaGlEnableiEXT }
+func (*binaryClassGlEnableiEXT) Schema() *schema.Entity { return schemaGlEnableiEXT }
 
-var schemaGlEnableiEXT = &schema.Class{
+var schemaGlEnableiEXT = &schema.Entity{
 	TypeID:  binaryIDGlEnableiEXT,
 	Package: "gles",
 	Name:    "GlEnableiEXT",
@@ -15906,9 +15906,9 @@ func (*binaryClassGlEnableiNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiNV(d, obj.(*GlEnableiNV))
 }
-func (*binaryClassGlEnableiNV) Schema() *schema.Class { return schemaGlEnableiNV }
+func (*binaryClassGlEnableiNV) Schema() *schema.Entity { return schemaGlEnableiNV }
 
-var schemaGlEnableiNV = &schema.Class{
+var schemaGlEnableiNV = &schema.Entity{
 	TypeID:  binaryIDGlEnableiNV,
 	Package: "gles",
 	Name:    "GlEnableiNV",
@@ -15947,9 +15947,9 @@ func (*binaryClassGlEnableiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiOES(d, obj.(*GlEnableiOES))
 }
-func (*binaryClassGlEnableiOES) Schema() *schema.Class { return schemaGlEnableiOES }
+func (*binaryClassGlEnableiOES) Schema() *schema.Entity { return schemaGlEnableiOES }
 
-var schemaGlEnableiOES = &schema.Class{
+var schemaGlEnableiOES = &schema.Entity{
 	TypeID:  binaryIDGlEnableiOES,
 	Package: "gles",
 	Name:    "GlEnableiOES",
@@ -15984,11 +15984,11 @@ func (*binaryClassGlEndConditionalRenderNV) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlEndConditionalRenderNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndConditionalRenderNV(d, obj.(*GlEndConditionalRenderNV))
 }
-func (*binaryClassGlEndConditionalRenderNV) Schema() *schema.Class {
+func (*binaryClassGlEndConditionalRenderNV) Schema() *schema.Entity {
 	return schemaGlEndConditionalRenderNV
 }
 
-var schemaGlEndConditionalRenderNV = &schema.Class{
+var schemaGlEndConditionalRenderNV = &schema.Entity{
 	TypeID:  binaryIDGlEndConditionalRenderNV,
 	Package: "gles",
 	Name:    "GlEndConditionalRenderNV",
@@ -16023,9 +16023,9 @@ func (*binaryClassGlEndPerfMonitorAMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndPerfMonitorAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndPerfMonitorAMD(d, obj.(*GlEndPerfMonitorAMD))
 }
-func (*binaryClassGlEndPerfMonitorAMD) Schema() *schema.Class { return schemaGlEndPerfMonitorAMD }
+func (*binaryClassGlEndPerfMonitorAMD) Schema() *schema.Entity { return schemaGlEndPerfMonitorAMD }
 
-var schemaGlEndPerfMonitorAMD = &schema.Class{
+var schemaGlEndPerfMonitorAMD = &schema.Entity{
 	TypeID:  binaryIDGlEndPerfMonitorAMD,
 	Package: "gles",
 	Name:    "GlEndPerfMonitorAMD",
@@ -16061,9 +16061,9 @@ func (*binaryClassGlEndPerfQueryINTEL) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndPerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndPerfQueryINTEL(d, obj.(*GlEndPerfQueryINTEL))
 }
-func (*binaryClassGlEndPerfQueryINTEL) Schema() *schema.Class { return schemaGlEndPerfQueryINTEL }
+func (*binaryClassGlEndPerfQueryINTEL) Schema() *schema.Entity { return schemaGlEndPerfQueryINTEL }
 
-var schemaGlEndPerfQueryINTEL = &schema.Class{
+var schemaGlEndPerfQueryINTEL = &schema.Entity{
 	TypeID:  binaryIDGlEndPerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlEndPerfQueryINTEL",
@@ -16099,9 +16099,9 @@ func (*binaryClassGlEndQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndQuery(d, obj.(*GlEndQuery))
 }
-func (*binaryClassGlEndQuery) Schema() *schema.Class { return schemaGlEndQuery }
+func (*binaryClassGlEndQuery) Schema() *schema.Entity { return schemaGlEndQuery }
 
-var schemaGlEndQuery = &schema.Class{
+var schemaGlEndQuery = &schema.Entity{
 	TypeID:  binaryIDGlEndQuery,
 	Package: "gles",
 	Name:    "GlEndQuery",
@@ -16137,9 +16137,9 @@ func (*binaryClassGlEndQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndQueryEXT(d, obj.(*GlEndQueryEXT))
 }
-func (*binaryClassGlEndQueryEXT) Schema() *schema.Class { return schemaGlEndQueryEXT }
+func (*binaryClassGlEndQueryEXT) Schema() *schema.Entity { return schemaGlEndQueryEXT }
 
-var schemaGlEndQueryEXT = &schema.Class{
+var schemaGlEndQueryEXT = &schema.Entity{
 	TypeID:  binaryIDGlEndQueryEXT,
 	Package: "gles",
 	Name:    "GlEndQueryEXT",
@@ -16175,9 +16175,9 @@ func (*binaryClassGlEndTilingQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndTilingQCOM(d, obj.(*GlEndTilingQCOM))
 }
-func (*binaryClassGlEndTilingQCOM) Schema() *schema.Class { return schemaGlEndTilingQCOM }
+func (*binaryClassGlEndTilingQCOM) Schema() *schema.Entity { return schemaGlEndTilingQCOM }
 
-var schemaGlEndTilingQCOM = &schema.Class{
+var schemaGlEndTilingQCOM = &schema.Entity{
 	TypeID:  binaryIDGlEndTilingQCOM,
 	Package: "gles",
 	Name:    "GlEndTilingQCOM",
@@ -16211,9 +16211,9 @@ func (*binaryClassGlEndTransformFeedback) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlEndTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndTransformFeedback(d, obj.(*GlEndTransformFeedback))
 }
-func (*binaryClassGlEndTransformFeedback) Schema() *schema.Class { return schemaGlEndTransformFeedback }
+func (*binaryClassGlEndTransformFeedback) Schema() *schema.Entity { return schemaGlEndTransformFeedback }
 
-var schemaGlEndTransformFeedback = &schema.Class{
+var schemaGlEndTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlEndTransformFeedback,
 	Package: "gles",
 	Name:    "GlEndTransformFeedback",
@@ -16246,9 +16246,9 @@ func (*binaryClassVoidᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖᵖ(d, obj.(*Voidᵖᵖ))
 }
-func (*binaryClassVoidᵖᵖ) Schema() *schema.Class { return schemaVoidᵖᵖ }
+func (*binaryClassVoidᵖᵖ) Schema() *schema.Entity { return schemaVoidᵖᵖ }
 
-var schemaVoidᵖᵖ = &schema.Class{
+var schemaVoidᵖᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᵖᵖ,
 	Package: "gles",
 	Name:    "Voidᵖᵖ",
@@ -16289,11 +16289,11 @@ func (*binaryClassGlExtGetBufferPointervQCOM) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlExtGetBufferPointervQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetBufferPointervQCOM(d, obj.(*GlExtGetBufferPointervQCOM))
 }
-func (*binaryClassGlExtGetBufferPointervQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetBufferPointervQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetBufferPointervQCOM
 }
 
-var schemaGlExtGetBufferPointervQCOM = &schema.Class{
+var schemaGlExtGetBufferPointervQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetBufferPointervQCOM,
 	Package: "gles",
 	Name:    "GlExtGetBufferPointervQCOM",
@@ -16334,9 +16334,9 @@ func (*binaryClassGlExtGetBuffersQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetBuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetBuffersQCOM(d, obj.(*GlExtGetBuffersQCOM))
 }
-func (*binaryClassGlExtGetBuffersQCOM) Schema() *schema.Class { return schemaGlExtGetBuffersQCOM }
+func (*binaryClassGlExtGetBuffersQCOM) Schema() *schema.Entity { return schemaGlExtGetBuffersQCOM }
 
-var schemaGlExtGetBuffersQCOM = &schema.Class{
+var schemaGlExtGetBuffersQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetBuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetBuffersQCOM",
@@ -16378,11 +16378,11 @@ func (*binaryClassGlExtGetFramebuffersQCOM) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlExtGetFramebuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetFramebuffersQCOM(d, obj.(*GlExtGetFramebuffersQCOM))
 }
-func (*binaryClassGlExtGetFramebuffersQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetFramebuffersQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetFramebuffersQCOM
 }
 
-var schemaGlExtGetFramebuffersQCOM = &schema.Class{
+var schemaGlExtGetFramebuffersQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetFramebuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetFramebuffersQCOM",
@@ -16430,11 +16430,11 @@ func (*binaryClassGlExtGetProgramBinarySourceQCOM) Decode(d binary.Decoder) bina
 func (*binaryClassGlExtGetProgramBinarySourceQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetProgramBinarySourceQCOM(d, obj.(*GlExtGetProgramBinarySourceQCOM))
 }
-func (*binaryClassGlExtGetProgramBinarySourceQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetProgramBinarySourceQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetProgramBinarySourceQCOM
 }
 
-var schemaGlExtGetProgramBinarySourceQCOM = &schema.Class{
+var schemaGlExtGetProgramBinarySourceQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetProgramBinarySourceQCOM,
 	Package: "gles",
 	Name:    "GlExtGetProgramBinarySourceQCOM",
@@ -16471,9 +16471,9 @@ func (*binaryClassProgramIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgramIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgramIdᵖ(d, obj.(*ProgramIdᵖ))
 }
-func (*binaryClassProgramIdᵖ) Schema() *schema.Class { return schemaProgramIdᵖ }
+func (*binaryClassProgramIdᵖ) Schema() *schema.Entity { return schemaProgramIdᵖ }
 
-var schemaProgramIdᵖ = &schema.Class{
+var schemaProgramIdᵖ = &schema.Entity{
 	TypeID:  binaryIDProgramIdᵖ,
 	Package: "gles",
 	Name:    "ProgramIdᵖ",
@@ -16512,9 +16512,9 @@ func (*binaryClassGlExtGetProgramsQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetProgramsQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetProgramsQCOM(d, obj.(*GlExtGetProgramsQCOM))
 }
-func (*binaryClassGlExtGetProgramsQCOM) Schema() *schema.Class { return schemaGlExtGetProgramsQCOM }
+func (*binaryClassGlExtGetProgramsQCOM) Schema() *schema.Entity { return schemaGlExtGetProgramsQCOM }
 
-var schemaGlExtGetProgramsQCOM = &schema.Class{
+var schemaGlExtGetProgramsQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetProgramsQCOM,
 	Package: "gles",
 	Name:    "GlExtGetProgramsQCOM",
@@ -16550,9 +16550,9 @@ func (*binaryClassRenderbufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdᵖ(d, obj.(*RenderbufferIdᵖ))
 }
-func (*binaryClassRenderbufferIdᵖ) Schema() *schema.Class { return schemaRenderbufferIdᵖ }
+func (*binaryClassRenderbufferIdᵖ) Schema() *schema.Entity { return schemaRenderbufferIdᵖ }
 
-var schemaRenderbufferIdᵖ = &schema.Class{
+var schemaRenderbufferIdᵖ = &schema.Entity{
 	TypeID:  binaryIDRenderbufferIdᵖ,
 	Package: "gles",
 	Name:    "RenderbufferIdᵖ",
@@ -16591,11 +16591,11 @@ func (*binaryClassGlExtGetRenderbuffersQCOM) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlExtGetRenderbuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetRenderbuffersQCOM(d, obj.(*GlExtGetRenderbuffersQCOM))
 }
-func (*binaryClassGlExtGetRenderbuffersQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetRenderbuffersQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetRenderbuffersQCOM
 }
 
-var schemaGlExtGetRenderbuffersQCOM = &schema.Class{
+var schemaGlExtGetRenderbuffersQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetRenderbuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetRenderbuffersQCOM",
@@ -16631,9 +16631,9 @@ func (*binaryClassShaderIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdᵖ(d, obj.(*ShaderIdᵖ))
 }
-func (*binaryClassShaderIdᵖ) Schema() *schema.Class { return schemaShaderIdᵖ }
+func (*binaryClassShaderIdᵖ) Schema() *schema.Entity { return schemaShaderIdᵖ }
 
-var schemaShaderIdᵖ = &schema.Class{
+var schemaShaderIdᵖ = &schema.Entity{
 	TypeID:  binaryIDShaderIdᵖ,
 	Package: "gles",
 	Name:    "ShaderIdᵖ",
@@ -16672,9 +16672,9 @@ func (*binaryClassGlExtGetShadersQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetShadersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetShadersQCOM(d, obj.(*GlExtGetShadersQCOM))
 }
-func (*binaryClassGlExtGetShadersQCOM) Schema() *schema.Class { return schemaGlExtGetShadersQCOM }
+func (*binaryClassGlExtGetShadersQCOM) Schema() *schema.Entity { return schemaGlExtGetShadersQCOM }
 
-var schemaGlExtGetShadersQCOM = &schema.Class{
+var schemaGlExtGetShadersQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetShadersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetShadersQCOM",
@@ -16724,11 +16724,11 @@ func (*binaryClassGlExtGetTexLevelParameterivQCOM) Decode(d binary.Decoder) bina
 func (*binaryClassGlExtGetTexLevelParameterivQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexLevelParameterivQCOM(d, obj.(*GlExtGetTexLevelParameterivQCOM))
 }
-func (*binaryClassGlExtGetTexLevelParameterivQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetTexLevelParameterivQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetTexLevelParameterivQCOM
 }
 
-var schemaGlExtGetTexLevelParameterivQCOM = &schema.Class{
+var schemaGlExtGetTexLevelParameterivQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetTexLevelParameterivQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexLevelParameterivQCOM",
@@ -16788,11 +16788,11 @@ func (*binaryClassGlExtGetTexSubImageQCOM) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlExtGetTexSubImageQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexSubImageQCOM(d, obj.(*GlExtGetTexSubImageQCOM))
 }
-func (*binaryClassGlExtGetTexSubImageQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtGetTexSubImageQCOM) Schema() *schema.Entity {
 	return schemaGlExtGetTexSubImageQCOM
 }
 
-var schemaGlExtGetTexSubImageQCOM = &schema.Class{
+var schemaGlExtGetTexSubImageQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetTexSubImageQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexSubImageQCOM",
@@ -16836,9 +16836,9 @@ func (*binaryClassTextureIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdᵖ(d, obj.(*TextureIdᵖ))
 }
-func (*binaryClassTextureIdᵖ) Schema() *schema.Class { return schemaTextureIdᵖ }
+func (*binaryClassTextureIdᵖ) Schema() *schema.Entity { return schemaTextureIdᵖ }
 
-var schemaTextureIdᵖ = &schema.Class{
+var schemaTextureIdᵖ = &schema.Entity{
 	TypeID:  binaryIDTextureIdᵖ,
 	Package: "gles",
 	Name:    "TextureIdᵖ",
@@ -16877,9 +16877,9 @@ func (*binaryClassGlExtGetTexturesQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetTexturesQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexturesQCOM(d, obj.(*GlExtGetTexturesQCOM))
 }
-func (*binaryClassGlExtGetTexturesQCOM) Schema() *schema.Class { return schemaGlExtGetTexturesQCOM }
+func (*binaryClassGlExtGetTexturesQCOM) Schema() *schema.Entity { return schemaGlExtGetTexturesQCOM }
 
-var schemaGlExtGetTexturesQCOM = &schema.Class{
+var schemaGlExtGetTexturesQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtGetTexturesQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexturesQCOM",
@@ -16919,11 +16919,11 @@ func (*binaryClassGlExtIsProgramBinaryQCOM) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlExtIsProgramBinaryQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtIsProgramBinaryQCOM(d, obj.(*GlExtIsProgramBinaryQCOM))
 }
-func (*binaryClassGlExtIsProgramBinaryQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtIsProgramBinaryQCOM) Schema() *schema.Entity {
 	return schemaGlExtIsProgramBinaryQCOM
 }
 
-var schemaGlExtIsProgramBinaryQCOM = &schema.Class{
+var schemaGlExtIsProgramBinaryQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtIsProgramBinaryQCOM,
 	Package: "gles",
 	Name:    "GlExtIsProgramBinaryQCOM",
@@ -16968,11 +16968,11 @@ func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Decode(d binary.Decoder) bin
 func (*binaryClassGlExtTexObjectStateOverrideiQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtTexObjectStateOverrideiQCOM(d, obj.(*GlExtTexObjectStateOverrideiQCOM))
 }
-func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Schema() *schema.Class {
+func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Schema() *schema.Entity {
 	return schemaGlExtTexObjectStateOverrideiQCOM
 }
 
-var schemaGlExtTexObjectStateOverrideiQCOM = &schema.Class{
+var schemaGlExtTexObjectStateOverrideiQCOM = &schema.Entity{
 	TypeID:  binaryIDGlExtTexObjectStateOverrideiQCOM,
 	Package: "gles",
 	Name:    "GlExtTexObjectStateOverrideiQCOM",
@@ -17014,9 +17014,9 @@ func (*binaryClassGlFenceSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFenceSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFenceSync(d, obj.(*GlFenceSync))
 }
-func (*binaryClassGlFenceSync) Schema() *schema.Class { return schemaGlFenceSync }
+func (*binaryClassGlFenceSync) Schema() *schema.Entity { return schemaGlFenceSync }
 
-var schemaGlFenceSync = &schema.Class{
+var schemaGlFenceSync = &schema.Entity{
 	TypeID:  binaryIDGlFenceSync,
 	Package: "gles",
 	Name:    "GlFenceSync",
@@ -17058,9 +17058,9 @@ func (*binaryClassGlFenceSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFenceSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFenceSyncAPPLE(d, obj.(*GlFenceSyncAPPLE))
 }
-func (*binaryClassGlFenceSyncAPPLE) Schema() *schema.Class { return schemaGlFenceSyncAPPLE }
+func (*binaryClassGlFenceSyncAPPLE) Schema() *schema.Entity { return schemaGlFenceSyncAPPLE }
 
-var schemaGlFenceSyncAPPLE = &schema.Class{
+var schemaGlFenceSyncAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlFenceSyncAPPLE,
 	Package: "gles",
 	Name:    "GlFenceSyncAPPLE",
@@ -17096,9 +17096,9 @@ func (*binaryClassGlFinish) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFinish) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFinish(d, obj.(*GlFinish))
 }
-func (*binaryClassGlFinish) Schema() *schema.Class { return schemaGlFinish }
+func (*binaryClassGlFinish) Schema() *schema.Entity { return schemaGlFinish }
 
-var schemaGlFinish = &schema.Class{
+var schemaGlFinish = &schema.Entity{
 	TypeID:  binaryIDGlFinish,
 	Package: "gles",
 	Name:    "GlFinish",
@@ -17133,9 +17133,9 @@ func (*binaryClassGlFinishFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFinishFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFinishFenceNV(d, obj.(*GlFinishFenceNV))
 }
-func (*binaryClassGlFinishFenceNV) Schema() *schema.Class { return schemaGlFinishFenceNV }
+func (*binaryClassGlFinishFenceNV) Schema() *schema.Entity { return schemaGlFinishFenceNV }
 
-var schemaGlFinishFenceNV = &schema.Class{
+var schemaGlFinishFenceNV = &schema.Entity{
 	TypeID:  binaryIDGlFinishFenceNV,
 	Package: "gles",
 	Name:    "GlFinishFenceNV",
@@ -17169,9 +17169,9 @@ func (*binaryClassGlFlush) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFlush) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlush(d, obj.(*GlFlush))
 }
-func (*binaryClassGlFlush) Schema() *schema.Class { return schemaGlFlush }
+func (*binaryClassGlFlush) Schema() *schema.Entity { return schemaGlFlush }
 
-var schemaGlFlush = &schema.Class{
+var schemaGlFlush = &schema.Entity{
 	TypeID:  binaryIDGlFlush,
 	Package: "gles",
 	Name:    "GlFlush",
@@ -17210,11 +17210,11 @@ func (*binaryClassGlFlushMappedBufferRange) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlFlushMappedBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlushMappedBufferRange(d, obj.(*GlFlushMappedBufferRange))
 }
-func (*binaryClassGlFlushMappedBufferRange) Schema() *schema.Class {
+func (*binaryClassGlFlushMappedBufferRange) Schema() *schema.Entity {
 	return schemaGlFlushMappedBufferRange
 }
 
-var schemaGlFlushMappedBufferRange = &schema.Class{
+var schemaGlFlushMappedBufferRange = &schema.Entity{
 	TypeID:  binaryIDGlFlushMappedBufferRange,
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRange",
@@ -17260,11 +17260,11 @@ func (*binaryClassGlFlushMappedBufferRangeEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlFlushMappedBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlushMappedBufferRangeEXT(d, obj.(*GlFlushMappedBufferRangeEXT))
 }
-func (*binaryClassGlFlushMappedBufferRangeEXT) Schema() *schema.Class {
+func (*binaryClassGlFlushMappedBufferRangeEXT) Schema() *schema.Entity {
 	return schemaGlFlushMappedBufferRangeEXT
 }
 
-var schemaGlFlushMappedBufferRangeEXT = &schema.Class{
+var schemaGlFlushMappedBufferRangeEXT = &schema.Entity{
 	TypeID:  binaryIDGlFlushMappedBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRangeEXT",
@@ -17302,11 +17302,11 @@ func (*binaryClassGlFragmentCoverageColorNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFragmentCoverageColorNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFragmentCoverageColorNV(d, obj.(*GlFragmentCoverageColorNV))
 }
-func (*binaryClassGlFragmentCoverageColorNV) Schema() *schema.Class {
+func (*binaryClassGlFragmentCoverageColorNV) Schema() *schema.Entity {
 	return schemaGlFragmentCoverageColorNV
 }
 
-var schemaGlFragmentCoverageColorNV = &schema.Class{
+var schemaGlFragmentCoverageColorNV = &schema.Entity{
 	TypeID:  binaryIDGlFragmentCoverageColorNV,
 	Package: "gles",
 	Name:    "GlFragmentCoverageColorNV",
@@ -17346,11 +17346,11 @@ func (*binaryClassGlFramebufferParameteri) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferParameteri(d, obj.(*GlFramebufferParameteri))
 }
-func (*binaryClassGlFramebufferParameteri) Schema() *schema.Class {
+func (*binaryClassGlFramebufferParameteri) Schema() *schema.Entity {
 	return schemaGlFramebufferParameteri
 }
 
-var schemaGlFramebufferParameteri = &schema.Class{
+var schemaGlFramebufferParameteri = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferParameteri,
 	Package: "gles",
 	Name:    "GlFramebufferParameteri",
@@ -17394,11 +17394,11 @@ func (*binaryClassGlFramebufferRenderbuffer) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferRenderbuffer(d, obj.(*GlFramebufferRenderbuffer))
 }
-func (*binaryClassGlFramebufferRenderbuffer) Schema() *schema.Class {
+func (*binaryClassGlFramebufferRenderbuffer) Schema() *schema.Entity {
 	return schemaGlFramebufferRenderbuffer
 }
 
-var schemaGlFramebufferRenderbuffer = &schema.Class{
+var schemaGlFramebufferRenderbuffer = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferRenderbuffer,
 	Package: "gles",
 	Name:    "GlFramebufferRenderbuffer",
@@ -17447,11 +17447,11 @@ func (*binaryClassGlFramebufferSampleLocationsfvNV) Decode(d binary.Decoder) bin
 func (*binaryClassGlFramebufferSampleLocationsfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferSampleLocationsfvNV(d, obj.(*GlFramebufferSampleLocationsfvNV))
 }
-func (*binaryClassGlFramebufferSampleLocationsfvNV) Schema() *schema.Class {
+func (*binaryClassGlFramebufferSampleLocationsfvNV) Schema() *schema.Entity {
 	return schemaGlFramebufferSampleLocationsfvNV
 }
 
-var schemaGlFramebufferSampleLocationsfvNV = &schema.Class{
+var schemaGlFramebufferSampleLocationsfvNV = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferSampleLocationsfvNV,
 	Package: "gles",
 	Name:    "GlFramebufferSampleLocationsfvNV",
@@ -17496,9 +17496,9 @@ func (*binaryClassGlFramebufferTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFramebufferTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture(d, obj.(*GlFramebufferTexture))
 }
-func (*binaryClassGlFramebufferTexture) Schema() *schema.Class { return schemaGlFramebufferTexture }
+func (*binaryClassGlFramebufferTexture) Schema() *schema.Entity { return schemaGlFramebufferTexture }
 
-var schemaGlFramebufferTexture = &schema.Class{
+var schemaGlFramebufferTexture = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTexture,
 	Package: "gles",
 	Name:    "GlFramebufferTexture",
@@ -17545,9 +17545,9 @@ func (*binaryClassGlFramebufferTexture2D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlFramebufferTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2D(d, obj.(*GlFramebufferTexture2D))
 }
-func (*binaryClassGlFramebufferTexture2D) Schema() *schema.Class { return schemaGlFramebufferTexture2D }
+func (*binaryClassGlFramebufferTexture2D) Schema() *schema.Entity { return schemaGlFramebufferTexture2D }
 
-var schemaGlFramebufferTexture2D = &schema.Class{
+var schemaGlFramebufferTexture2D = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2D,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2D",
@@ -17601,11 +17601,11 @@ func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Decode(d binary.Decoder)
 func (*binaryClassGlFramebufferTexture2DMultisampleEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2DMultisampleEXT(d, obj.(*GlFramebufferTexture2DMultisampleEXT))
 }
-func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Schema() *schema.Entity {
 	return schemaGlFramebufferTexture2DMultisampleEXT
 }
 
-var schemaGlFramebufferTexture2DMultisampleEXT = &schema.Class{
+var schemaGlFramebufferTexture2DMultisampleEXT = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2DMultisampleEXT,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleEXT",
@@ -17660,11 +17660,11 @@ func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Decode(d binary.Decoder)
 func (*binaryClassGlFramebufferTexture2DMultisampleIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2DMultisampleIMG(d, obj.(*GlFramebufferTexture2DMultisampleIMG))
 }
-func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Schema() *schema.Entity {
 	return schemaGlFramebufferTexture2DMultisampleIMG
 }
 
-var schemaGlFramebufferTexture2DMultisampleIMG = &schema.Class{
+var schemaGlFramebufferTexture2DMultisampleIMG = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2DMultisampleIMG,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleIMG",
@@ -17715,11 +17715,11 @@ func (*binaryClassGlFramebufferTexture3DOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferTexture3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture3DOES(d, obj.(*GlFramebufferTexture3DOES))
 }
-func (*binaryClassGlFramebufferTexture3DOES) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTexture3DOES) Schema() *schema.Entity {
 	return schemaGlFramebufferTexture3DOES
 }
 
-var schemaGlFramebufferTexture3DOES = &schema.Class{
+var schemaGlFramebufferTexture3DOES = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTexture3DOES,
 	Package: "gles",
 	Name:    "GlFramebufferTexture3DOES",
@@ -17766,11 +17766,11 @@ func (*binaryClassGlFramebufferTextureEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferTextureEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureEXT(d, obj.(*GlFramebufferTextureEXT))
 }
-func (*binaryClassGlFramebufferTextureEXT) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTextureEXT) Schema() *schema.Entity {
 	return schemaGlFramebufferTextureEXT
 }
 
-var schemaGlFramebufferTextureEXT = &schema.Class{
+var schemaGlFramebufferTextureEXT = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTextureEXT,
 	Package: "gles",
 	Name:    "GlFramebufferTextureEXT",
@@ -17817,11 +17817,11 @@ func (*binaryClassGlFramebufferTextureLayer) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferTextureLayer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureLayer(d, obj.(*GlFramebufferTextureLayer))
 }
-func (*binaryClassGlFramebufferTextureLayer) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTextureLayer) Schema() *schema.Entity {
 	return schemaGlFramebufferTextureLayer
 }
 
-var schemaGlFramebufferTextureLayer = &schema.Class{
+var schemaGlFramebufferTextureLayer = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTextureLayer,
 	Package: "gles",
 	Name:    "GlFramebufferTextureLayer",
@@ -17875,11 +17875,11 @@ func (*binaryClassGlFramebufferTextureMultiviewOVR) Decode(d binary.Decoder) bin
 func (*binaryClassGlFramebufferTextureMultiviewOVR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureMultiviewOVR(d, obj.(*GlFramebufferTextureMultiviewOVR))
 }
-func (*binaryClassGlFramebufferTextureMultiviewOVR) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTextureMultiviewOVR) Schema() *schema.Entity {
 	return schemaGlFramebufferTextureMultiviewOVR
 }
 
-var schemaGlFramebufferTextureMultiviewOVR = &schema.Class{
+var schemaGlFramebufferTextureMultiviewOVR = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTextureMultiviewOVR,
 	Package: "gles",
 	Name:    "GlFramebufferTextureMultiviewOVR",
@@ -17926,11 +17926,11 @@ func (*binaryClassGlFramebufferTextureOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferTextureOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureOES(d, obj.(*GlFramebufferTextureOES))
 }
-func (*binaryClassGlFramebufferTextureOES) Schema() *schema.Class {
+func (*binaryClassGlFramebufferTextureOES) Schema() *schema.Entity {
 	return schemaGlFramebufferTextureOES
 }
 
-var schemaGlFramebufferTextureOES = &schema.Class{
+var schemaGlFramebufferTextureOES = &schema.Entity{
 	TypeID:  binaryIDGlFramebufferTextureOES,
 	Package: "gles",
 	Name:    "GlFramebufferTextureOES",
@@ -17969,9 +17969,9 @@ func (*binaryClassGlFrontFace) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFrontFace) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFrontFace(d, obj.(*GlFrontFace))
 }
-func (*binaryClassGlFrontFace) Schema() *schema.Class { return schemaGlFrontFace }
+func (*binaryClassGlFrontFace) Schema() *schema.Entity { return schemaGlFrontFace }
 
-var schemaGlFrontFace = &schema.Class{
+var schemaGlFrontFace = &schema.Entity{
 	TypeID:  binaryIDGlFrontFace,
 	Package: "gles",
 	Name:    "GlFrontFace",
@@ -18009,9 +18009,9 @@ func (*binaryClassGlGenBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenBuffers(d, obj.(*GlGenBuffers))
 }
-func (*binaryClassGlGenBuffers) Schema() *schema.Class { return schemaGlGenBuffers }
+func (*binaryClassGlGenBuffers) Schema() *schema.Entity { return schemaGlGenBuffers }
 
-var schemaGlGenBuffers = &schema.Class{
+var schemaGlGenBuffers = &schema.Entity{
 	TypeID:  binaryIDGlGenBuffers,
 	Package: "gles",
 	Name:    "GlGenBuffers",
@@ -18050,9 +18050,9 @@ func (*binaryClassGlGenFencesNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenFencesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenFencesNV(d, obj.(*GlGenFencesNV))
 }
-func (*binaryClassGlGenFencesNV) Schema() *schema.Class { return schemaGlGenFencesNV }
+func (*binaryClassGlGenFencesNV) Schema() *schema.Entity { return schemaGlGenFencesNV }
 
-var schemaGlGenFencesNV = &schema.Class{
+var schemaGlGenFencesNV = &schema.Entity{
 	TypeID:  binaryIDGlGenFencesNV,
 	Package: "gles",
 	Name:    "GlGenFencesNV",
@@ -18091,9 +18091,9 @@ func (*binaryClassGlGenFramebuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenFramebuffers(d, obj.(*GlGenFramebuffers))
 }
-func (*binaryClassGlGenFramebuffers) Schema() *schema.Class { return schemaGlGenFramebuffers }
+func (*binaryClassGlGenFramebuffers) Schema() *schema.Entity { return schemaGlGenFramebuffers }
 
-var schemaGlGenFramebuffers = &schema.Class{
+var schemaGlGenFramebuffers = &schema.Entity{
 	TypeID:  binaryIDGlGenFramebuffers,
 	Package: "gles",
 	Name:    "GlGenFramebuffers",
@@ -18132,9 +18132,9 @@ func (*binaryClassGlGenPathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenPathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenPathsNV(d, obj.(*GlGenPathsNV))
 }
-func (*binaryClassGlGenPathsNV) Schema() *schema.Class { return schemaGlGenPathsNV }
+func (*binaryClassGlGenPathsNV) Schema() *schema.Entity { return schemaGlGenPathsNV }
 
-var schemaGlGenPathsNV = &schema.Class{
+var schemaGlGenPathsNV = &schema.Entity{
 	TypeID:  binaryIDGlGenPathsNV,
 	Package: "gles",
 	Name:    "GlGenPathsNV",
@@ -18173,9 +18173,9 @@ func (*binaryClassGlGenPerfMonitorsAMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenPerfMonitorsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenPerfMonitorsAMD(d, obj.(*GlGenPerfMonitorsAMD))
 }
-func (*binaryClassGlGenPerfMonitorsAMD) Schema() *schema.Class { return schemaGlGenPerfMonitorsAMD }
+func (*binaryClassGlGenPerfMonitorsAMD) Schema() *schema.Entity { return schemaGlGenPerfMonitorsAMD }
 
-var schemaGlGenPerfMonitorsAMD = &schema.Class{
+var schemaGlGenPerfMonitorsAMD = &schema.Entity{
 	TypeID:  binaryIDGlGenPerfMonitorsAMD,
 	Package: "gles",
 	Name:    "GlGenPerfMonitorsAMD",
@@ -18210,9 +18210,9 @@ func (*binaryClassPipelineIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdᵖ(d, obj.(*PipelineIdᵖ))
 }
-func (*binaryClassPipelineIdᵖ) Schema() *schema.Class { return schemaPipelineIdᵖ }
+func (*binaryClassPipelineIdᵖ) Schema() *schema.Entity { return schemaPipelineIdᵖ }
 
-var schemaPipelineIdᵖ = &schema.Class{
+var schemaPipelineIdᵖ = &schema.Entity{
 	TypeID:  binaryIDPipelineIdᵖ,
 	Package: "gles",
 	Name:    "PipelineIdᵖ",
@@ -18249,9 +18249,9 @@ func (*binaryClassGlGenProgramPipelines) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGenProgramPipelines) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenProgramPipelines(d, obj.(*GlGenProgramPipelines))
 }
-func (*binaryClassGlGenProgramPipelines) Schema() *schema.Class { return schemaGlGenProgramPipelines }
+func (*binaryClassGlGenProgramPipelines) Schema() *schema.Entity { return schemaGlGenProgramPipelines }
 
-var schemaGlGenProgramPipelines = &schema.Class{
+var schemaGlGenProgramPipelines = &schema.Entity{
 	TypeID:  binaryIDGlGenProgramPipelines,
 	Package: "gles",
 	Name:    "GlGenProgramPipelines",
@@ -18290,11 +18290,11 @@ func (*binaryClassGlGenProgramPipelinesEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGenProgramPipelinesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenProgramPipelinesEXT(d, obj.(*GlGenProgramPipelinesEXT))
 }
-func (*binaryClassGlGenProgramPipelinesEXT) Schema() *schema.Class {
+func (*binaryClassGlGenProgramPipelinesEXT) Schema() *schema.Entity {
 	return schemaGlGenProgramPipelinesEXT
 }
 
-var schemaGlGenProgramPipelinesEXT = &schema.Class{
+var schemaGlGenProgramPipelinesEXT = &schema.Entity{
 	TypeID:  binaryIDGlGenProgramPipelinesEXT,
 	Package: "gles",
 	Name:    "GlGenProgramPipelinesEXT",
@@ -18329,9 +18329,9 @@ func (*binaryClassQueryIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdᵖ(d, obj.(*QueryIdᵖ))
 }
-func (*binaryClassQueryIdᵖ) Schema() *schema.Class { return schemaQueryIdᵖ }
+func (*binaryClassQueryIdᵖ) Schema() *schema.Entity { return schemaQueryIdᵖ }
 
-var schemaQueryIdᵖ = &schema.Class{
+var schemaQueryIdᵖ = &schema.Entity{
 	TypeID:  binaryIDQueryIdᵖ,
 	Package: "gles",
 	Name:    "QueryIdᵖ",
@@ -18368,9 +18368,9 @@ func (*binaryClassGlGenQueries) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenQueries) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenQueries(d, obj.(*GlGenQueries))
 }
-func (*binaryClassGlGenQueries) Schema() *schema.Class { return schemaGlGenQueries }
+func (*binaryClassGlGenQueries) Schema() *schema.Entity { return schemaGlGenQueries }
 
-var schemaGlGenQueries = &schema.Class{
+var schemaGlGenQueries = &schema.Entity{
 	TypeID:  binaryIDGlGenQueries,
 	Package: "gles",
 	Name:    "GlGenQueries",
@@ -18409,9 +18409,9 @@ func (*binaryClassGlGenQueriesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenQueriesEXT(d, obj.(*GlGenQueriesEXT))
 }
-func (*binaryClassGlGenQueriesEXT) Schema() *schema.Class { return schemaGlGenQueriesEXT }
+func (*binaryClassGlGenQueriesEXT) Schema() *schema.Entity { return schemaGlGenQueriesEXT }
 
-var schemaGlGenQueriesEXT = &schema.Class{
+var schemaGlGenQueriesEXT = &schema.Entity{
 	TypeID:  binaryIDGlGenQueriesEXT,
 	Package: "gles",
 	Name:    "GlGenQueriesEXT",
@@ -18450,9 +18450,9 @@ func (*binaryClassGlGenRenderbuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenRenderbuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenRenderbuffers(d, obj.(*GlGenRenderbuffers))
 }
-func (*binaryClassGlGenRenderbuffers) Schema() *schema.Class { return schemaGlGenRenderbuffers }
+func (*binaryClassGlGenRenderbuffers) Schema() *schema.Entity { return schemaGlGenRenderbuffers }
 
-var schemaGlGenRenderbuffers = &schema.Class{
+var schemaGlGenRenderbuffers = &schema.Entity{
 	TypeID:  binaryIDGlGenRenderbuffers,
 	Package: "gles",
 	Name:    "GlGenRenderbuffers",
@@ -18487,9 +18487,9 @@ func (*binaryClassSamplerIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdᵖ(d, obj.(*SamplerIdᵖ))
 }
-func (*binaryClassSamplerIdᵖ) Schema() *schema.Class { return schemaSamplerIdᵖ }
+func (*binaryClassSamplerIdᵖ) Schema() *schema.Entity { return schemaSamplerIdᵖ }
 
-var schemaSamplerIdᵖ = &schema.Class{
+var schemaSamplerIdᵖ = &schema.Entity{
 	TypeID:  binaryIDSamplerIdᵖ,
 	Package: "gles",
 	Name:    "SamplerIdᵖ",
@@ -18526,9 +18526,9 @@ func (*binaryClassGlGenSamplers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenSamplers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenSamplers(d, obj.(*GlGenSamplers))
 }
-func (*binaryClassGlGenSamplers) Schema() *schema.Class { return schemaGlGenSamplers }
+func (*binaryClassGlGenSamplers) Schema() *schema.Entity { return schemaGlGenSamplers }
 
-var schemaGlGenSamplers = &schema.Class{
+var schemaGlGenSamplers = &schema.Entity{
 	TypeID:  binaryIDGlGenSamplers,
 	Package: "gles",
 	Name:    "GlGenSamplers",
@@ -18567,9 +18567,9 @@ func (*binaryClassGlGenTextures) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenTextures) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenTextures(d, obj.(*GlGenTextures))
 }
-func (*binaryClassGlGenTextures) Schema() *schema.Class { return schemaGlGenTextures }
+func (*binaryClassGlGenTextures) Schema() *schema.Entity { return schemaGlGenTextures }
 
-var schemaGlGenTextures = &schema.Class{
+var schemaGlGenTextures = &schema.Entity{
 	TypeID:  binaryIDGlGenTextures,
 	Package: "gles",
 	Name:    "GlGenTextures",
@@ -18604,9 +18604,9 @@ func (*binaryClassTransformFeedbackIdᵖ) Decode(d binary.Decoder) binary.Object
 func (*binaryClassTransformFeedbackIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdᵖ(d, obj.(*TransformFeedbackIdᵖ))
 }
-func (*binaryClassTransformFeedbackIdᵖ) Schema() *schema.Class { return schemaTransformFeedbackIdᵖ }
+func (*binaryClassTransformFeedbackIdᵖ) Schema() *schema.Entity { return schemaTransformFeedbackIdᵖ }
 
-var schemaTransformFeedbackIdᵖ = &schema.Class{
+var schemaTransformFeedbackIdᵖ = &schema.Entity{
 	TypeID:  binaryIDTransformFeedbackIdᵖ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdᵖ",
@@ -18643,11 +18643,11 @@ func (*binaryClassGlGenTransformFeedbacks) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGenTransformFeedbacks) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenTransformFeedbacks(d, obj.(*GlGenTransformFeedbacks))
 }
-func (*binaryClassGlGenTransformFeedbacks) Schema() *schema.Class {
+func (*binaryClassGlGenTransformFeedbacks) Schema() *schema.Entity {
 	return schemaGlGenTransformFeedbacks
 }
 
-var schemaGlGenTransformFeedbacks = &schema.Class{
+var schemaGlGenTransformFeedbacks = &schema.Entity{
 	TypeID:  binaryIDGlGenTransformFeedbacks,
 	Package: "gles",
 	Name:    "GlGenTransformFeedbacks",
@@ -18682,9 +18682,9 @@ func (*binaryClassVertexArrayIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdᵖ(d, obj.(*VertexArrayIdᵖ))
 }
-func (*binaryClassVertexArrayIdᵖ) Schema() *schema.Class { return schemaVertexArrayIdᵖ }
+func (*binaryClassVertexArrayIdᵖ) Schema() *schema.Entity { return schemaVertexArrayIdᵖ }
 
-var schemaVertexArrayIdᵖ = &schema.Class{
+var schemaVertexArrayIdᵖ = &schema.Entity{
 	TypeID:  binaryIDVertexArrayIdᵖ,
 	Package: "gles",
 	Name:    "VertexArrayIdᵖ",
@@ -18721,9 +18721,9 @@ func (*binaryClassGlGenVertexArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenVertexArrays(d, obj.(*GlGenVertexArrays))
 }
-func (*binaryClassGlGenVertexArrays) Schema() *schema.Class { return schemaGlGenVertexArrays }
+func (*binaryClassGlGenVertexArrays) Schema() *schema.Entity { return schemaGlGenVertexArrays }
 
-var schemaGlGenVertexArrays = &schema.Class{
+var schemaGlGenVertexArrays = &schema.Entity{
 	TypeID:  binaryIDGlGenVertexArrays,
 	Package: "gles",
 	Name:    "GlGenVertexArrays",
@@ -18762,9 +18762,9 @@ func (*binaryClassGlGenVertexArraysOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenVertexArraysOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenVertexArraysOES(d, obj.(*GlGenVertexArraysOES))
 }
-func (*binaryClassGlGenVertexArraysOES) Schema() *schema.Class { return schemaGlGenVertexArraysOES }
+func (*binaryClassGlGenVertexArraysOES) Schema() *schema.Entity { return schemaGlGenVertexArraysOES }
 
-var schemaGlGenVertexArraysOES = &schema.Class{
+var schemaGlGenVertexArraysOES = &schema.Entity{
 	TypeID:  binaryIDGlGenVertexArraysOES,
 	Package: "gles",
 	Name:    "GlGenVertexArraysOES",
@@ -18801,9 +18801,9 @@ func (*binaryClassGlGenerateMipmap) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenerateMipmap) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenerateMipmap(d, obj.(*GlGenerateMipmap))
 }
-func (*binaryClassGlGenerateMipmap) Schema() *schema.Class { return schemaGlGenerateMipmap }
+func (*binaryClassGlGenerateMipmap) Schema() *schema.Entity { return schemaGlGenerateMipmap }
 
-var schemaGlGenerateMipmap = &schema.Class{
+var schemaGlGenerateMipmap = &schema.Entity{
 	TypeID:  binaryIDGlGenerateMipmap,
 	Package: "gles",
 	Name:    "GlGenerateMipmap",
@@ -18851,9 +18851,9 @@ func (*binaryClassGlGetActiveAttrib) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetActiveAttrib) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveAttrib(d, obj.(*GlGetActiveAttrib))
 }
-func (*binaryClassGlGetActiveAttrib) Schema() *schema.Class { return schemaGlGetActiveAttrib }
+func (*binaryClassGlGetActiveAttrib) Schema() *schema.Entity { return schemaGlGetActiveAttrib }
 
-var schemaGlGetActiveAttrib = &schema.Class{
+var schemaGlGetActiveAttrib = &schema.Entity{
 	TypeID:  binaryIDGlGetActiveAttrib,
 	Package: "gles",
 	Name:    "GlGetActiveAttrib",
@@ -18907,9 +18907,9 @@ func (*binaryClassGlGetActiveUniform) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetActiveUniform) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniform(d, obj.(*GlGetActiveUniform))
 }
-func (*binaryClassGlGetActiveUniform) Schema() *schema.Class { return schemaGlGetActiveUniform }
+func (*binaryClassGlGetActiveUniform) Schema() *schema.Entity { return schemaGlGetActiveUniform }
 
-var schemaGlGetActiveUniform = &schema.Class{
+var schemaGlGetActiveUniform = &schema.Entity{
 	TypeID:  binaryIDGlGetActiveUniform,
 	Package: "gles",
 	Name:    "GlGetActiveUniform",
@@ -18963,11 +18963,11 @@ func (*binaryClassGlGetActiveUniformBlockName) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetActiveUniformBlockName) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformBlockName(d, obj.(*GlGetActiveUniformBlockName))
 }
-func (*binaryClassGlGetActiveUniformBlockName) Schema() *schema.Class {
+func (*binaryClassGlGetActiveUniformBlockName) Schema() *schema.Entity {
 	return schemaGlGetActiveUniformBlockName
 }
 
-var schemaGlGetActiveUniformBlockName = &schema.Class{
+var schemaGlGetActiveUniformBlockName = &schema.Entity{
 	TypeID:  binaryIDGlGetActiveUniformBlockName,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockName",
@@ -19013,11 +19013,11 @@ func (*binaryClassGlGetActiveUniformBlockiv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetActiveUniformBlockiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformBlockiv(d, obj.(*GlGetActiveUniformBlockiv))
 }
-func (*binaryClassGlGetActiveUniformBlockiv) Schema() *schema.Class {
+func (*binaryClassGlGetActiveUniformBlockiv) Schema() *schema.Entity {
 	return schemaGlGetActiveUniformBlockiv
 }
 
-var schemaGlGetActiveUniformBlockiv = &schema.Class{
+var schemaGlGetActiveUniformBlockiv = &schema.Entity{
 	TypeID:  binaryIDGlGetActiveUniformBlockiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockiv",
@@ -19099,9 +19099,9 @@ func (*binaryClassGlGetActiveUniformsiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetActiveUniformsiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformsiv(d, obj.(*GlGetActiveUniformsiv))
 }
-func (*binaryClassGlGetActiveUniformsiv) Schema() *schema.Class { return schemaGlGetActiveUniformsiv }
+func (*binaryClassGlGetActiveUniformsiv) Schema() *schema.Entity { return schemaGlGetActiveUniformsiv }
 
-var schemaGlGetActiveUniformsiv = &schema.Class{
+var schemaGlGetActiveUniformsiv = &schema.Entity{
 	TypeID:  binaryIDGlGetActiveUniformsiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformsiv",
@@ -19147,9 +19147,9 @@ func (*binaryClassGlGetAttachedShaders) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetAttachedShaders) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetAttachedShaders(d, obj.(*GlGetAttachedShaders))
 }
-func (*binaryClassGlGetAttachedShaders) Schema() *schema.Class { return schemaGlGetAttachedShaders }
+func (*binaryClassGlGetAttachedShaders) Schema() *schema.Entity { return schemaGlGetAttachedShaders }
 
-var schemaGlGetAttachedShaders = &schema.Class{
+var schemaGlGetAttachedShaders = &schema.Entity{
 	TypeID:  binaryIDGlGetAttachedShaders,
 	Package: "gles",
 	Name:    "GlGetAttachedShaders",
@@ -19192,9 +19192,9 @@ func (*binaryClassGlGetAttribLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetAttribLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetAttribLocation(d, obj.(*GlGetAttribLocation))
 }
-func (*binaryClassGlGetAttribLocation) Schema() *schema.Class { return schemaGlGetAttribLocation }
+func (*binaryClassGlGetAttribLocation) Schema() *schema.Entity { return schemaGlGetAttribLocation }
 
-var schemaGlGetAttribLocation = &schema.Class{
+var schemaGlGetAttribLocation = &schema.Entity{
 	TypeID:  binaryIDGlGetAttribLocation,
 	Package: "gles",
 	Name:    "GlGetAttribLocation",
@@ -19236,9 +19236,9 @@ func (*binaryClassGlGetBooleani_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBooleani_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBooleani_v(d, obj.(*GlGetBooleani_v))
 }
-func (*binaryClassGlGetBooleani_v) Schema() *schema.Class { return schemaGlGetBooleani_v }
+func (*binaryClassGlGetBooleani_v) Schema() *schema.Entity { return schemaGlGetBooleani_v }
 
-var schemaGlGetBooleani_v = &schema.Class{
+var schemaGlGetBooleani_v = &schema.Entity{
 	TypeID:  binaryIDGlGetBooleani_v,
 	Package: "gles",
 	Name:    "GlGetBooleani_v",
@@ -19278,9 +19278,9 @@ func (*binaryClassGlGetBooleanv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBooleanv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBooleanv(d, obj.(*GlGetBooleanv))
 }
-func (*binaryClassGlGetBooleanv) Schema() *schema.Class { return schemaGlGetBooleanv }
+func (*binaryClassGlGetBooleanv) Schema() *schema.Entity { return schemaGlGetBooleanv }
 
-var schemaGlGetBooleanv = &schema.Class{
+var schemaGlGetBooleanv = &schema.Entity{
 	TypeID:  binaryIDGlGetBooleanv,
 	Package: "gles",
 	Name:    "GlGetBooleanv",
@@ -19321,11 +19321,11 @@ func (*binaryClassGlGetBufferParameteri64v) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetBufferParameteri64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferParameteri64v(d, obj.(*GlGetBufferParameteri64v))
 }
-func (*binaryClassGlGetBufferParameteri64v) Schema() *schema.Class {
+func (*binaryClassGlGetBufferParameteri64v) Schema() *schema.Entity {
 	return schemaGlGetBufferParameteri64v
 }
 
-var schemaGlGetBufferParameteri64v = &schema.Class{
+var schemaGlGetBufferParameteri64v = &schema.Entity{
 	TypeID:  binaryIDGlGetBufferParameteri64v,
 	Package: "gles",
 	Name:    "GlGetBufferParameteri64v",
@@ -19367,9 +19367,9 @@ func (*binaryClassGlGetBufferParameteriv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetBufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferParameteriv(d, obj.(*GlGetBufferParameteriv))
 }
-func (*binaryClassGlGetBufferParameteriv) Schema() *schema.Class { return schemaGlGetBufferParameteriv }
+func (*binaryClassGlGetBufferParameteriv) Schema() *schema.Entity { return schemaGlGetBufferParameteriv }
 
-var schemaGlGetBufferParameteriv = &schema.Class{
+var schemaGlGetBufferParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetBufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetBufferParameteriv",
@@ -19411,9 +19411,9 @@ func (*binaryClassGlGetBufferPointerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBufferPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferPointerv(d, obj.(*GlGetBufferPointerv))
 }
-func (*binaryClassGlGetBufferPointerv) Schema() *schema.Class { return schemaGlGetBufferPointerv }
+func (*binaryClassGlGetBufferPointerv) Schema() *schema.Entity { return schemaGlGetBufferPointerv }
 
-var schemaGlGetBufferPointerv = &schema.Class{
+var schemaGlGetBufferPointerv = &schema.Entity{
 	TypeID:  binaryIDGlGetBufferPointerv,
 	Package: "gles",
 	Name:    "GlGetBufferPointerv",
@@ -19455,9 +19455,9 @@ func (*binaryClassGlGetBufferPointervOES) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetBufferPointervOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferPointervOES(d, obj.(*GlGetBufferPointervOES))
 }
-func (*binaryClassGlGetBufferPointervOES) Schema() *schema.Class { return schemaGlGetBufferPointervOES }
+func (*binaryClassGlGetBufferPointervOES) Schema() *schema.Entity { return schemaGlGetBufferPointervOES }
 
-var schemaGlGetBufferPointervOES = &schema.Class{
+var schemaGlGetBufferPointervOES = &schema.Entity{
 	TypeID:  binaryIDGlGetBufferPointervOES,
 	Package: "gles",
 	Name:    "GlGetBufferPointervOES",
@@ -19501,11 +19501,11 @@ func (*binaryClassGlGetCoverageModulationTableNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetCoverageModulationTableNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetCoverageModulationTableNV(d, obj.(*GlGetCoverageModulationTableNV))
 }
-func (*binaryClassGlGetCoverageModulationTableNV) Schema() *schema.Class {
+func (*binaryClassGlGetCoverageModulationTableNV) Schema() *schema.Entity {
 	return schemaGlGetCoverageModulationTableNV
 }
 
-var schemaGlGetCoverageModulationTableNV = &schema.Class{
+var schemaGlGetCoverageModulationTableNV = &schema.Entity{
 	TypeID:  binaryIDGlGetCoverageModulationTableNV,
 	Package: "gles",
 	Name:    "GlGetCoverageModulationTableNV",
@@ -19558,9 +19558,9 @@ func (*binaryClassGlGetDebugMessageLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetDebugMessageLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDebugMessageLog(d, obj.(*GlGetDebugMessageLog))
 }
-func (*binaryClassGlGetDebugMessageLog) Schema() *schema.Class { return schemaGlGetDebugMessageLog }
+func (*binaryClassGlGetDebugMessageLog) Schema() *schema.Entity { return schemaGlGetDebugMessageLog }
 
-var schemaGlGetDebugMessageLog = &schema.Class{
+var schemaGlGetDebugMessageLog = &schema.Entity{
 	TypeID:  binaryIDGlGetDebugMessageLog,
 	Package: "gles",
 	Name:    "GlGetDebugMessageLog",
@@ -19620,11 +19620,11 @@ func (*binaryClassGlGetDebugMessageLogKHR) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetDebugMessageLogKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDebugMessageLogKHR(d, obj.(*GlGetDebugMessageLogKHR))
 }
-func (*binaryClassGlGetDebugMessageLogKHR) Schema() *schema.Class {
+func (*binaryClassGlGetDebugMessageLogKHR) Schema() *schema.Entity {
 	return schemaGlGetDebugMessageLogKHR
 }
 
-var schemaGlGetDebugMessageLogKHR = &schema.Class{
+var schemaGlGetDebugMessageLogKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetDebugMessageLogKHR,
 	Package: "gles",
 	Name:    "GlGetDebugMessageLogKHR",
@@ -19678,11 +19678,11 @@ func (*binaryClassGlGetDriverControlStringQCOM) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetDriverControlStringQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDriverControlStringQCOM(d, obj.(*GlGetDriverControlStringQCOM))
 }
-func (*binaryClassGlGetDriverControlStringQCOM) Schema() *schema.Class {
+func (*binaryClassGlGetDriverControlStringQCOM) Schema() *schema.Entity {
 	return schemaGlGetDriverControlStringQCOM
 }
 
-var schemaGlGetDriverControlStringQCOM = &schema.Class{
+var schemaGlGetDriverControlStringQCOM = &schema.Entity{
 	TypeID:  binaryIDGlGetDriverControlStringQCOM,
 	Package: "gles",
 	Name:    "GlGetDriverControlStringQCOM",
@@ -19725,11 +19725,11 @@ func (*binaryClassGlGetDriverControlsQCOM) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetDriverControlsQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDriverControlsQCOM(d, obj.(*GlGetDriverControlsQCOM))
 }
-func (*binaryClassGlGetDriverControlsQCOM) Schema() *schema.Class {
+func (*binaryClassGlGetDriverControlsQCOM) Schema() *schema.Entity {
 	return schemaGlGetDriverControlsQCOM
 }
 
-var schemaGlGetDriverControlsQCOM = &schema.Class{
+var schemaGlGetDriverControlsQCOM = &schema.Entity{
 	TypeID:  binaryIDGlGetDriverControlsQCOM,
 	Package: "gles",
 	Name:    "GlGetDriverControlsQCOM",
@@ -19767,9 +19767,9 @@ func (*binaryClassGlGetError) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetError) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetError(d, obj.(*GlGetError))
 }
-func (*binaryClassGlGetError) Schema() *schema.Class { return schemaGlGetError }
+func (*binaryClassGlGetError) Schema() *schema.Entity { return schemaGlGetError }
 
-var schemaGlGetError = &schema.Class{
+var schemaGlGetError = &schema.Entity{
 	TypeID:  binaryIDGlGetError,
 	Package: "gles",
 	Name:    "GlGetError",
@@ -19809,9 +19809,9 @@ func (*binaryClassGlGetFenceivNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFenceivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFenceivNV(d, obj.(*GlGetFenceivNV))
 }
-func (*binaryClassGlGetFenceivNV) Schema() *schema.Class { return schemaGlGetFenceivNV }
+func (*binaryClassGlGetFenceivNV) Schema() *schema.Entity { return schemaGlGetFenceivNV }
 
-var schemaGlGetFenceivNV = &schema.Class{
+var schemaGlGetFenceivNV = &schema.Entity{
 	TypeID:  binaryIDGlGetFenceivNV,
 	Package: "gles",
 	Name:    "GlGetFenceivNV",
@@ -19853,11 +19853,11 @@ func (*binaryClassGlGetFirstPerfQueryIdINTEL) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlGetFirstPerfQueryIdINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFirstPerfQueryIdINTEL(d, obj.(*GlGetFirstPerfQueryIdINTEL))
 }
-func (*binaryClassGlGetFirstPerfQueryIdINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetFirstPerfQueryIdINTEL) Schema() *schema.Entity {
 	return schemaGlGetFirstPerfQueryIdINTEL
 }
 
-var schemaGlGetFirstPerfQueryIdINTEL = &schema.Class{
+var schemaGlGetFirstPerfQueryIdINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetFirstPerfQueryIdINTEL,
 	Package: "gles",
 	Name:    "GlGetFirstPerfQueryIdINTEL",
@@ -19897,9 +19897,9 @@ func (*binaryClassGlGetFloati_vNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFloati_vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFloati_vNV(d, obj.(*GlGetFloati_vNV))
 }
-func (*binaryClassGlGetFloati_vNV) Schema() *schema.Class { return schemaGlGetFloati_vNV }
+func (*binaryClassGlGetFloati_vNV) Schema() *schema.Entity { return schemaGlGetFloati_vNV }
 
-var schemaGlGetFloati_vNV = &schema.Class{
+var schemaGlGetFloati_vNV = &schema.Entity{
 	TypeID:  binaryIDGlGetFloati_vNV,
 	Package: "gles",
 	Name:    "GlGetFloati_vNV",
@@ -19939,9 +19939,9 @@ func (*binaryClassGlGetFloatv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFloatv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFloatv(d, obj.(*GlGetFloatv))
 }
-func (*binaryClassGlGetFloatv) Schema() *schema.Class { return schemaGlGetFloatv }
+func (*binaryClassGlGetFloatv) Schema() *schema.Entity { return schemaGlGetFloatv }
 
-var schemaGlGetFloatv = &schema.Class{
+var schemaGlGetFloatv = &schema.Entity{
 	TypeID:  binaryIDGlGetFloatv,
 	Package: "gles",
 	Name:    "GlGetFloatv",
@@ -19982,9 +19982,9 @@ func (*binaryClassGlGetFragDataIndexEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetFragDataIndexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFragDataIndexEXT(d, obj.(*GlGetFragDataIndexEXT))
 }
-func (*binaryClassGlGetFragDataIndexEXT) Schema() *schema.Class { return schemaGlGetFragDataIndexEXT }
+func (*binaryClassGlGetFragDataIndexEXT) Schema() *schema.Entity { return schemaGlGetFragDataIndexEXT }
 
-var schemaGlGetFragDataIndexEXT = &schema.Class{
+var schemaGlGetFragDataIndexEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetFragDataIndexEXT,
 	Package: "gles",
 	Name:    "GlGetFragDataIndexEXT",
@@ -20026,9 +20026,9 @@ func (*binaryClassGlGetFragDataLocation) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetFragDataLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFragDataLocation(d, obj.(*GlGetFragDataLocation))
 }
-func (*binaryClassGlGetFragDataLocation) Schema() *schema.Class { return schemaGlGetFragDataLocation }
+func (*binaryClassGlGetFragDataLocation) Schema() *schema.Entity { return schemaGlGetFragDataLocation }
 
-var schemaGlGetFragDataLocation = &schema.Class{
+var schemaGlGetFragDataLocation = &schema.Entity{
 	TypeID:  binaryIDGlGetFragDataLocation,
 	Package: "gles",
 	Name:    "GlGetFragDataLocation",
@@ -20076,11 +20076,11 @@ func (*binaryClassGlGetFramebufferAttachmentParameteriv) Decode(d binary.Decoder
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFramebufferAttachmentParameteriv(d, obj.(*GlGetFramebufferAttachmentParameteriv))
 }
-func (*binaryClassGlGetFramebufferAttachmentParameteriv) Schema() *schema.Class {
+func (*binaryClassGlGetFramebufferAttachmentParameteriv) Schema() *schema.Entity {
 	return schemaGlGetFramebufferAttachmentParameteriv
 }
 
-var schemaGlGetFramebufferAttachmentParameteriv = &schema.Class{
+var schemaGlGetFramebufferAttachmentParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetFramebufferAttachmentParameteriv,
 	Package: "gles",
 	Name:    "GlGetFramebufferAttachmentParameteriv",
@@ -20127,11 +20127,11 @@ func (*binaryClassGlGetFramebufferParameteriv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetFramebufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFramebufferParameteriv(d, obj.(*GlGetFramebufferParameteriv))
 }
-func (*binaryClassGlGetFramebufferParameteriv) Schema() *schema.Class {
+func (*binaryClassGlGetFramebufferParameteriv) Schema() *schema.Entity {
 	return schemaGlGetFramebufferParameteriv
 }
 
-var schemaGlGetFramebufferParameteriv = &schema.Class{
+var schemaGlGetFramebufferParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetFramebufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetFramebufferParameteriv",
@@ -20169,11 +20169,11 @@ func (*binaryClassGlGetGraphicsResetStatus) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetGraphicsResetStatus) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatus(d, obj.(*GlGetGraphicsResetStatus))
 }
-func (*binaryClassGlGetGraphicsResetStatus) Schema() *schema.Class {
+func (*binaryClassGlGetGraphicsResetStatus) Schema() *schema.Entity {
 	return schemaGlGetGraphicsResetStatus
 }
 
-var schemaGlGetGraphicsResetStatus = &schema.Class{
+var schemaGlGetGraphicsResetStatus = &schema.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatus,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatus",
@@ -20213,11 +20213,11 @@ func (*binaryClassGlGetGraphicsResetStatusEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetGraphicsResetStatusEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatusEXT(d, obj.(*GlGetGraphicsResetStatusEXT))
 }
-func (*binaryClassGlGetGraphicsResetStatusEXT) Schema() *schema.Class {
+func (*binaryClassGlGetGraphicsResetStatusEXT) Schema() *schema.Entity {
 	return schemaGlGetGraphicsResetStatusEXT
 }
 
-var schemaGlGetGraphicsResetStatusEXT = &schema.Class{
+var schemaGlGetGraphicsResetStatusEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatusEXT,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusEXT",
@@ -20257,11 +20257,11 @@ func (*binaryClassGlGetGraphicsResetStatusKHR) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetGraphicsResetStatusKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatusKHR(d, obj.(*GlGetGraphicsResetStatusKHR))
 }
-func (*binaryClassGlGetGraphicsResetStatusKHR) Schema() *schema.Class {
+func (*binaryClassGlGetGraphicsResetStatusKHR) Schema() *schema.Entity {
 	return schemaGlGetGraphicsResetStatusKHR
 }
 
-var schemaGlGetGraphicsResetStatusKHR = &schema.Class{
+var schemaGlGetGraphicsResetStatusKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatusKHR,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusKHR",
@@ -20307,9 +20307,9 @@ func (*binaryClassGlGetImageHandleNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetImageHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetImageHandleNV(d, obj.(*GlGetImageHandleNV))
 }
-func (*binaryClassGlGetImageHandleNV) Schema() *schema.Class { return schemaGlGetImageHandleNV }
+func (*binaryClassGlGetImageHandleNV) Schema() *schema.Entity { return schemaGlGetImageHandleNV }
 
-var schemaGlGetImageHandleNV = &schema.Class{
+var schemaGlGetImageHandleNV = &schema.Entity{
 	TypeID:  binaryIDGlGetImageHandleNV,
 	Package: "gles",
 	Name:    "GlGetImageHandleNV",
@@ -20354,9 +20354,9 @@ func (*binaryClassGlGetInteger64i_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64i_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64i_v(d, obj.(*GlGetInteger64i_v))
 }
-func (*binaryClassGlGetInteger64i_v) Schema() *schema.Class { return schemaGlGetInteger64i_v }
+func (*binaryClassGlGetInteger64i_v) Schema() *schema.Entity { return schemaGlGetInteger64i_v }
 
-var schemaGlGetInteger64i_v = &schema.Class{
+var schemaGlGetInteger64i_v = &schema.Entity{
 	TypeID:  binaryIDGlGetInteger64i_v,
 	Package: "gles",
 	Name:    "GlGetInteger64i_v",
@@ -20396,9 +20396,9 @@ func (*binaryClassGlGetInteger64v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64v(d, obj.(*GlGetInteger64v))
 }
-func (*binaryClassGlGetInteger64v) Schema() *schema.Class { return schemaGlGetInteger64v }
+func (*binaryClassGlGetInteger64v) Schema() *schema.Entity { return schemaGlGetInteger64v }
 
-var schemaGlGetInteger64v = &schema.Class{
+var schemaGlGetInteger64v = &schema.Entity{
 	TypeID:  binaryIDGlGetInteger64v,
 	Package: "gles",
 	Name:    "GlGetInteger64v",
@@ -20437,9 +20437,9 @@ func (*binaryClassGlGetInteger64vAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64vAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64vAPPLE(d, obj.(*GlGetInteger64vAPPLE))
 }
-func (*binaryClassGlGetInteger64vAPPLE) Schema() *schema.Class { return schemaGlGetInteger64vAPPLE }
+func (*binaryClassGlGetInteger64vAPPLE) Schema() *schema.Entity { return schemaGlGetInteger64vAPPLE }
 
-var schemaGlGetInteger64vAPPLE = &schema.Class{
+var schemaGlGetInteger64vAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlGetInteger64vAPPLE,
 	Package: "gles",
 	Name:    "GlGetInteger64vAPPLE",
@@ -20480,9 +20480,9 @@ func (*binaryClassGlGetIntegeri_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegeri_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegeri_v(d, obj.(*GlGetIntegeri_v))
 }
-func (*binaryClassGlGetIntegeri_v) Schema() *schema.Class { return schemaGlGetIntegeri_v }
+func (*binaryClassGlGetIntegeri_v) Schema() *schema.Entity { return schemaGlGetIntegeri_v }
 
-var schemaGlGetIntegeri_v = &schema.Class{
+var schemaGlGetIntegeri_v = &schema.Entity{
 	TypeID:  binaryIDGlGetIntegeri_v,
 	Package: "gles",
 	Name:    "GlGetIntegeri_v",
@@ -20524,9 +20524,9 @@ func (*binaryClassGlGetIntegeri_vEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegeri_vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegeri_vEXT(d, obj.(*GlGetIntegeri_vEXT))
 }
-func (*binaryClassGlGetIntegeri_vEXT) Schema() *schema.Class { return schemaGlGetIntegeri_vEXT }
+func (*binaryClassGlGetIntegeri_vEXT) Schema() *schema.Entity { return schemaGlGetIntegeri_vEXT }
 
-var schemaGlGetIntegeri_vEXT = &schema.Class{
+var schemaGlGetIntegeri_vEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetIntegeri_vEXT,
 	Package: "gles",
 	Name:    "GlGetIntegeri_vEXT",
@@ -20566,9 +20566,9 @@ func (*binaryClassGlGetIntegerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegerv(d, obj.(*GlGetIntegerv))
 }
-func (*binaryClassGlGetIntegerv) Schema() *schema.Class { return schemaGlGetIntegerv }
+func (*binaryClassGlGetIntegerv) Schema() *schema.Entity { return schemaGlGetIntegerv }
 
-var schemaGlGetIntegerv = &schema.Class{
+var schemaGlGetIntegerv = &schema.Entity{
 	TypeID:  binaryIDGlGetIntegerv,
 	Package: "gles",
 	Name:    "GlGetIntegerv",
@@ -20619,11 +20619,11 @@ func (*binaryClassGlGetInternalformatSampleivNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlGetInternalformatSampleivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInternalformatSampleivNV(d, obj.(*GlGetInternalformatSampleivNV))
 }
-func (*binaryClassGlGetInternalformatSampleivNV) Schema() *schema.Class {
+func (*binaryClassGlGetInternalformatSampleivNV) Schema() *schema.Entity {
 	return schemaGlGetInternalformatSampleivNV
 }
 
-var schemaGlGetInternalformatSampleivNV = &schema.Class{
+var schemaGlGetInternalformatSampleivNV = &schema.Entity{
 	TypeID:  binaryIDGlGetInternalformatSampleivNV,
 	Package: "gles",
 	Name:    "GlGetInternalformatSampleivNV",
@@ -20672,9 +20672,9 @@ func (*binaryClassGlGetInternalformativ) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetInternalformativ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInternalformativ(d, obj.(*GlGetInternalformativ))
 }
-func (*binaryClassGlGetInternalformativ) Schema() *schema.Class { return schemaGlGetInternalformativ }
+func (*binaryClassGlGetInternalformativ) Schema() *schema.Entity { return schemaGlGetInternalformativ }
 
-var schemaGlGetInternalformativ = &schema.Class{
+var schemaGlGetInternalformativ = &schema.Entity{
 	TypeID:  binaryIDGlGetInternalformativ,
 	Package: "gles",
 	Name:    "GlGetInternalformativ",
@@ -20718,9 +20718,9 @@ func (*binaryClassGlGetMultisamplefv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetMultisamplefv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetMultisamplefv(d, obj.(*GlGetMultisamplefv))
 }
-func (*binaryClassGlGetMultisamplefv) Schema() *schema.Class { return schemaGlGetMultisamplefv }
+func (*binaryClassGlGetMultisamplefv) Schema() *schema.Entity { return schemaGlGetMultisamplefv }
 
-var schemaGlGetMultisamplefv = &schema.Class{
+var schemaGlGetMultisamplefv = &schema.Entity{
 	TypeID:  binaryIDGlGetMultisamplefv,
 	Package: "gles",
 	Name:    "GlGetMultisamplefv",
@@ -20760,11 +20760,11 @@ func (*binaryClassGlGetNextPerfQueryIdINTEL) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetNextPerfQueryIdINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetNextPerfQueryIdINTEL(d, obj.(*GlGetNextPerfQueryIdINTEL))
 }
-func (*binaryClassGlGetNextPerfQueryIdINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetNextPerfQueryIdINTEL) Schema() *schema.Entity {
 	return schemaGlGetNextPerfQueryIdINTEL
 }
 
-var schemaGlGetNextPerfQueryIdINTEL = &schema.Class{
+var schemaGlGetNextPerfQueryIdINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetNextPerfQueryIdINTEL,
 	Package: "gles",
 	Name:    "GlGetNextPerfQueryIdINTEL",
@@ -20809,9 +20809,9 @@ func (*binaryClassGlGetObjectLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabel(d, obj.(*GlGetObjectLabel))
 }
-func (*binaryClassGlGetObjectLabel) Schema() *schema.Class { return schemaGlGetObjectLabel }
+func (*binaryClassGlGetObjectLabel) Schema() *schema.Entity { return schemaGlGetObjectLabel }
 
-var schemaGlGetObjectLabel = &schema.Class{
+var schemaGlGetObjectLabel = &schema.Entity{
 	TypeID:  binaryIDGlGetObjectLabel,
 	Package: "gles",
 	Name:    "GlGetObjectLabel",
@@ -20859,9 +20859,9 @@ func (*binaryClassGlGetObjectLabelEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabelEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabelEXT(d, obj.(*GlGetObjectLabelEXT))
 }
-func (*binaryClassGlGetObjectLabelEXT) Schema() *schema.Class { return schemaGlGetObjectLabelEXT }
+func (*binaryClassGlGetObjectLabelEXT) Schema() *schema.Entity { return schemaGlGetObjectLabelEXT }
 
-var schemaGlGetObjectLabelEXT = &schema.Class{
+var schemaGlGetObjectLabelEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetObjectLabelEXT,
 	Package: "gles",
 	Name:    "GlGetObjectLabelEXT",
@@ -20909,9 +20909,9 @@ func (*binaryClassGlGetObjectLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabelKHR(d, obj.(*GlGetObjectLabelKHR))
 }
-func (*binaryClassGlGetObjectLabelKHR) Schema() *schema.Class { return schemaGlGetObjectLabelKHR }
+func (*binaryClassGlGetObjectLabelKHR) Schema() *schema.Entity { return schemaGlGetObjectLabelKHR }
 
-var schemaGlGetObjectLabelKHR = &schema.Class{
+var schemaGlGetObjectLabelKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetObjectLabelKHR,
 	Package: "gles",
 	Name:    "GlGetObjectLabelKHR",
@@ -20957,9 +20957,9 @@ func (*binaryClassGlGetObjectPtrLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectPtrLabel(d, obj.(*GlGetObjectPtrLabel))
 }
-func (*binaryClassGlGetObjectPtrLabel) Schema() *schema.Class { return schemaGlGetObjectPtrLabel }
+func (*binaryClassGlGetObjectPtrLabel) Schema() *schema.Entity { return schemaGlGetObjectPtrLabel }
 
-var schemaGlGetObjectPtrLabel = &schema.Class{
+var schemaGlGetObjectPtrLabel = &schema.Entity{
 	TypeID:  binaryIDGlGetObjectPtrLabel,
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabel",
@@ -21004,9 +21004,9 @@ func (*binaryClassGlGetObjectPtrLabelKHR) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetObjectPtrLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectPtrLabelKHR(d, obj.(*GlGetObjectPtrLabelKHR))
 }
-func (*binaryClassGlGetObjectPtrLabelKHR) Schema() *schema.Class { return schemaGlGetObjectPtrLabelKHR }
+func (*binaryClassGlGetObjectPtrLabelKHR) Schema() *schema.Entity { return schemaGlGetObjectPtrLabelKHR }
 
-var schemaGlGetObjectPtrLabelKHR = &schema.Class{
+var schemaGlGetObjectPtrLabelKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetObjectPtrLabelKHR,
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabelKHR",
@@ -21047,9 +21047,9 @@ func (*binaryClassGlGetPathCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathCommandsNV(d, obj.(*GlGetPathCommandsNV))
 }
-func (*binaryClassGlGetPathCommandsNV) Schema() *schema.Class { return schemaGlGetPathCommandsNV }
+func (*binaryClassGlGetPathCommandsNV) Schema() *schema.Entity { return schemaGlGetPathCommandsNV }
 
-var schemaGlGetPathCommandsNV = &schema.Class{
+var schemaGlGetPathCommandsNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathCommandsNV,
 	Package: "gles",
 	Name:    "GlGetPathCommandsNV",
@@ -21088,9 +21088,9 @@ func (*binaryClassGlGetPathCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathCoordsNV(d, obj.(*GlGetPathCoordsNV))
 }
-func (*binaryClassGlGetPathCoordsNV) Schema() *schema.Class { return schemaGlGetPathCoordsNV }
+func (*binaryClassGlGetPathCoordsNV) Schema() *schema.Entity { return schemaGlGetPathCoordsNV }
 
-var schemaGlGetPathCoordsNV = &schema.Class{
+var schemaGlGetPathCoordsNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathCoordsNV,
 	Package: "gles",
 	Name:    "GlGetPathCoordsNV",
@@ -21129,9 +21129,9 @@ func (*binaryClassGlGetPathDashArrayNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathDashArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathDashArrayNV(d, obj.(*GlGetPathDashArrayNV))
 }
-func (*binaryClassGlGetPathDashArrayNV) Schema() *schema.Class { return schemaGlGetPathDashArrayNV }
+func (*binaryClassGlGetPathDashArrayNV) Schema() *schema.Entity { return schemaGlGetPathDashArrayNV }
 
-var schemaGlGetPathDashArrayNV = &schema.Class{
+var schemaGlGetPathDashArrayNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathDashArrayNV,
 	Package: "gles",
 	Name:    "GlGetPathDashArrayNV",
@@ -21174,9 +21174,9 @@ func (*binaryClassGlGetPathLengthNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathLengthNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathLengthNV(d, obj.(*GlGetPathLengthNV))
 }
-func (*binaryClassGlGetPathLengthNV) Schema() *schema.Class { return schemaGlGetPathLengthNV }
+func (*binaryClassGlGetPathLengthNV) Schema() *schema.Entity { return schemaGlGetPathLengthNV }
 
-var schemaGlGetPathLengthNV = &schema.Class{
+var schemaGlGetPathLengthNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathLengthNV,
 	Package: "gles",
 	Name:    "GlGetPathLengthNV",
@@ -21223,9 +21223,9 @@ func (*binaryClassGlGetPathMetricRangeNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathMetricRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathMetricRangeNV(d, obj.(*GlGetPathMetricRangeNV))
 }
-func (*binaryClassGlGetPathMetricRangeNV) Schema() *schema.Class { return schemaGlGetPathMetricRangeNV }
+func (*binaryClassGlGetPathMetricRangeNV) Schema() *schema.Entity { return schemaGlGetPathMetricRangeNV }
 
-var schemaGlGetPathMetricRangeNV = &schema.Class{
+var schemaGlGetPathMetricRangeNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathMetricRangeNV,
 	Package: "gles",
 	Name:    "GlGetPathMetricRangeNV",
@@ -21277,9 +21277,9 @@ func (*binaryClassGlGetPathMetricsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathMetricsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathMetricsNV(d, obj.(*GlGetPathMetricsNV))
 }
-func (*binaryClassGlGetPathMetricsNV) Schema() *schema.Class { return schemaGlGetPathMetricsNV }
+func (*binaryClassGlGetPathMetricsNV) Schema() *schema.Entity { return schemaGlGetPathMetricsNV }
 
-var schemaGlGetPathMetricsNV = &schema.Class{
+var schemaGlGetPathMetricsNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathMetricsNV,
 	Package: "gles",
 	Name:    "GlGetPathMetricsNV",
@@ -21325,9 +21325,9 @@ func (*binaryClassGlGetPathParameterfvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathParameterfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathParameterfvNV(d, obj.(*GlGetPathParameterfvNV))
 }
-func (*binaryClassGlGetPathParameterfvNV) Schema() *schema.Class { return schemaGlGetPathParameterfvNV }
+func (*binaryClassGlGetPathParameterfvNV) Schema() *schema.Entity { return schemaGlGetPathParameterfvNV }
 
-var schemaGlGetPathParameterfvNV = &schema.Class{
+var schemaGlGetPathParameterfvNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathParameterfvNV,
 	Package: "gles",
 	Name:    "GlGetPathParameterfvNV",
@@ -21369,9 +21369,9 @@ func (*binaryClassGlGetPathParameterivNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathParameterivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathParameterivNV(d, obj.(*GlGetPathParameterivNV))
 }
-func (*binaryClassGlGetPathParameterivNV) Schema() *schema.Class { return schemaGlGetPathParameterivNV }
+func (*binaryClassGlGetPathParameterivNV) Schema() *schema.Entity { return schemaGlGetPathParameterivNV }
 
-var schemaGlGetPathParameterivNV = &schema.Class{
+var schemaGlGetPathParameterivNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathParameterivNV,
 	Package: "gles",
 	Name:    "GlGetPathParameterivNV",
@@ -21425,9 +21425,9 @@ func (*binaryClassGlGetPathSpacingNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathSpacingNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathSpacingNV(d, obj.(*GlGetPathSpacingNV))
 }
-func (*binaryClassGlGetPathSpacingNV) Schema() *schema.Class { return schemaGlGetPathSpacingNV }
+func (*binaryClassGlGetPathSpacingNV) Schema() *schema.Entity { return schemaGlGetPathSpacingNV }
 
-var schemaGlGetPathSpacingNV = &schema.Class{
+var schemaGlGetPathSpacingNV = &schema.Entity{
 	TypeID:  binaryIDGlGetPathSpacingNV,
 	Package: "gles",
 	Name:    "GlGetPathSpacingNV",
@@ -21491,11 +21491,11 @@ func (*binaryClassGlGetPerfCounterInfoINTEL) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetPerfCounterInfoINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfCounterInfoINTEL(d, obj.(*GlGetPerfCounterInfoINTEL))
 }
-func (*binaryClassGlGetPerfCounterInfoINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetPerfCounterInfoINTEL) Schema() *schema.Entity {
 	return schemaGlGetPerfCounterInfoINTEL
 }
 
-var schemaGlGetPerfCounterInfoINTEL = &schema.Class{
+var schemaGlGetPerfCounterInfoINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfCounterInfoINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfCounterInfoINTEL",
@@ -21553,11 +21553,11 @@ func (*binaryClassGlGetPerfMonitorCounterDataAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorCounterDataAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterDataAMD(d, obj.(*GlGetPerfMonitorCounterDataAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterDataAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorCounterDataAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorCounterDataAMD
 }
 
-var schemaGlGetPerfMonitorCounterDataAMD = &schema.Class{
+var schemaGlGetPerfMonitorCounterDataAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterDataAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterDataAMD",
@@ -21607,11 +21607,11 @@ func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorCounterInfoAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterInfoAMD(d, obj.(*GlGetPerfMonitorCounterInfoAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorCounterInfoAMD
 }
 
-var schemaGlGetPerfMonitorCounterInfoAMD = &schema.Class{
+var schemaGlGetPerfMonitorCounterInfoAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterInfoAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterInfoAMD",
@@ -21662,11 +21662,11 @@ func (*binaryClassGlGetPerfMonitorCounterStringAMD) Decode(d binary.Decoder) bin
 func (*binaryClassGlGetPerfMonitorCounterStringAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterStringAMD(d, obj.(*GlGetPerfMonitorCounterStringAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterStringAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorCounterStringAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorCounterStringAMD
 }
 
-var schemaGlGetPerfMonitorCounterStringAMD = &schema.Class{
+var schemaGlGetPerfMonitorCounterStringAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterStringAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterStringAMD",
@@ -21718,11 +21718,11 @@ func (*binaryClassGlGetPerfMonitorCountersAMD) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetPerfMonitorCountersAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCountersAMD(d, obj.(*GlGetPerfMonitorCountersAMD))
 }
-func (*binaryClassGlGetPerfMonitorCountersAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorCountersAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorCountersAMD
 }
 
-var schemaGlGetPerfMonitorCountersAMD = &schema.Class{
+var schemaGlGetPerfMonitorCountersAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCountersAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCountersAMD",
@@ -21772,11 +21772,11 @@ func (*binaryClassGlGetPerfMonitorGroupStringAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorGroupStringAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorGroupStringAMD(d, obj.(*GlGetPerfMonitorGroupStringAMD))
 }
-func (*binaryClassGlGetPerfMonitorGroupStringAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorGroupStringAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorGroupStringAMD
 }
 
-var schemaGlGetPerfMonitorGroupStringAMD = &schema.Class{
+var schemaGlGetPerfMonitorGroupStringAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorGroupStringAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupStringAMD",
@@ -21819,11 +21819,11 @@ func (*binaryClassGlGetPerfMonitorGroupsAMD) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetPerfMonitorGroupsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorGroupsAMD(d, obj.(*GlGetPerfMonitorGroupsAMD))
 }
-func (*binaryClassGlGetPerfMonitorGroupsAMD) Schema() *schema.Class {
+func (*binaryClassGlGetPerfMonitorGroupsAMD) Schema() *schema.Entity {
 	return schemaGlGetPerfMonitorGroupsAMD
 }
 
-var schemaGlGetPerfMonitorGroupsAMD = &schema.Class{
+var schemaGlGetPerfMonitorGroupsAMD = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorGroupsAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupsAMD",
@@ -21869,11 +21869,11 @@ func (*binaryClassGlGetPerfQueryDataINTEL) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetPerfQueryDataINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryDataINTEL(d, obj.(*GlGetPerfQueryDataINTEL))
 }
-func (*binaryClassGlGetPerfQueryDataINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetPerfQueryDataINTEL) Schema() *schema.Entity {
 	return schemaGlGetPerfQueryDataINTEL
 }
 
-var schemaGlGetPerfQueryDataINTEL = &schema.Class{
+var schemaGlGetPerfQueryDataINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfQueryDataINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryDataINTEL",
@@ -21919,11 +21919,11 @@ func (*binaryClassGlGetPerfQueryIdByNameINTEL) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetPerfQueryIdByNameINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryIdByNameINTEL(d, obj.(*GlGetPerfQueryIdByNameINTEL))
 }
-func (*binaryClassGlGetPerfQueryIdByNameINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetPerfQueryIdByNameINTEL) Schema() *schema.Entity {
 	return schemaGlGetPerfQueryIdByNameINTEL
 }
 
-var schemaGlGetPerfQueryIdByNameINTEL = &schema.Class{
+var schemaGlGetPerfQueryIdByNameINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfQueryIdByNameINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryIdByNameINTEL",
@@ -21972,11 +21972,11 @@ func (*binaryClassGlGetPerfQueryInfoINTEL) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetPerfQueryInfoINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryInfoINTEL(d, obj.(*GlGetPerfQueryInfoINTEL))
 }
-func (*binaryClassGlGetPerfQueryInfoINTEL) Schema() *schema.Class {
+func (*binaryClassGlGetPerfQueryInfoINTEL) Schema() *schema.Entity {
 	return schemaGlGetPerfQueryInfoINTEL
 }
 
-var schemaGlGetPerfQueryInfoINTEL = &schema.Class{
+var schemaGlGetPerfQueryInfoINTEL = &schema.Entity{
 	TypeID:  binaryIDGlGetPerfQueryInfoINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryInfoINTEL",
@@ -22020,9 +22020,9 @@ func (*binaryClassGlGetPointerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPointerv(d, obj.(*GlGetPointerv))
 }
-func (*binaryClassGlGetPointerv) Schema() *schema.Class { return schemaGlGetPointerv }
+func (*binaryClassGlGetPointerv) Schema() *schema.Entity { return schemaGlGetPointerv }
 
-var schemaGlGetPointerv = &schema.Class{
+var schemaGlGetPointerv = &schema.Entity{
 	TypeID:  binaryIDGlGetPointerv,
 	Package: "gles",
 	Name:    "GlGetPointerv",
@@ -22061,9 +22061,9 @@ func (*binaryClassGlGetPointervKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPointervKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPointervKHR(d, obj.(*GlGetPointervKHR))
 }
-func (*binaryClassGlGetPointervKHR) Schema() *schema.Class { return schemaGlGetPointervKHR }
+func (*binaryClassGlGetPointervKHR) Schema() *schema.Entity { return schemaGlGetPointervKHR }
 
-var schemaGlGetPointervKHR = &schema.Class{
+var schemaGlGetPointervKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetPointervKHR,
 	Package: "gles",
 	Name:    "GlGetPointervKHR",
@@ -22108,9 +22108,9 @@ func (*binaryClassGlGetProgramBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramBinary(d, obj.(*GlGetProgramBinary))
 }
-func (*binaryClassGlGetProgramBinary) Schema() *schema.Class { return schemaGlGetProgramBinary }
+func (*binaryClassGlGetProgramBinary) Schema() *schema.Entity { return schemaGlGetProgramBinary }
 
-var schemaGlGetProgramBinary = &schema.Class{
+var schemaGlGetProgramBinary = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramBinary,
 	Package: "gles",
 	Name:    "GlGetProgramBinary",
@@ -22158,9 +22158,9 @@ func (*binaryClassGlGetProgramBinaryOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramBinaryOES(d, obj.(*GlGetProgramBinaryOES))
 }
-func (*binaryClassGlGetProgramBinaryOES) Schema() *schema.Class { return schemaGlGetProgramBinaryOES }
+func (*binaryClassGlGetProgramBinaryOES) Schema() *schema.Entity { return schemaGlGetProgramBinaryOES }
 
-var schemaGlGetProgramBinaryOES = &schema.Class{
+var schemaGlGetProgramBinaryOES = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlGetProgramBinaryOES",
@@ -22206,9 +22206,9 @@ func (*binaryClassGlGetProgramInfoLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramInfoLog(d, obj.(*GlGetProgramInfoLog))
 }
-func (*binaryClassGlGetProgramInfoLog) Schema() *schema.Class { return schemaGlGetProgramInfoLog }
+func (*binaryClassGlGetProgramInfoLog) Schema() *schema.Entity { return schemaGlGetProgramInfoLog }
 
-var schemaGlGetProgramInfoLog = &schema.Class{
+var schemaGlGetProgramInfoLog = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramInfoLog,
 	Package: "gles",
 	Name:    "GlGetProgramInfoLog",
@@ -22253,11 +22253,11 @@ func (*binaryClassGlGetProgramInterfaceiv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetProgramInterfaceiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramInterfaceiv(d, obj.(*GlGetProgramInterfaceiv))
 }
-func (*binaryClassGlGetProgramInterfaceiv) Schema() *schema.Class {
+func (*binaryClassGlGetProgramInterfaceiv) Schema() *schema.Entity {
 	return schemaGlGetProgramInterfaceiv
 }
 
-var schemaGlGetProgramInterfaceiv = &schema.Class{
+var schemaGlGetProgramInterfaceiv = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramInterfaceiv,
 	Package: "gles",
 	Name:    "GlGetProgramInterfaceiv",
@@ -22306,11 +22306,11 @@ func (*binaryClassGlGetProgramPipelineInfoLog) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetProgramPipelineInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineInfoLog(d, obj.(*GlGetProgramPipelineInfoLog))
 }
-func (*binaryClassGlGetProgramPipelineInfoLog) Schema() *schema.Class {
+func (*binaryClassGlGetProgramPipelineInfoLog) Schema() *schema.Entity {
 	return schemaGlGetProgramPipelineInfoLog
 }
 
-var schemaGlGetProgramPipelineInfoLog = &schema.Class{
+var schemaGlGetProgramPipelineInfoLog = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineInfoLog,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLog",
@@ -22359,11 +22359,11 @@ func (*binaryClassGlGetProgramPipelineInfoLogEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetProgramPipelineInfoLogEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineInfoLogEXT(d, obj.(*GlGetProgramPipelineInfoLogEXT))
 }
-func (*binaryClassGlGetProgramPipelineInfoLogEXT) Schema() *schema.Class {
+func (*binaryClassGlGetProgramPipelineInfoLogEXT) Schema() *schema.Entity {
 	return schemaGlGetProgramPipelineInfoLogEXT
 }
 
-var schemaGlGetProgramPipelineInfoLogEXT = &schema.Class{
+var schemaGlGetProgramPipelineInfoLogEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineInfoLogEXT,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLogEXT",
@@ -22406,9 +22406,9 @@ func (*binaryClassGlGetProgramPipelineiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetProgramPipelineiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineiv(d, obj.(*GlGetProgramPipelineiv))
 }
-func (*binaryClassGlGetProgramPipelineiv) Schema() *schema.Class { return schemaGlGetProgramPipelineiv }
+func (*binaryClassGlGetProgramPipelineiv) Schema() *schema.Entity { return schemaGlGetProgramPipelineiv }
 
-var schemaGlGetProgramPipelineiv = &schema.Class{
+var schemaGlGetProgramPipelineiv = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineiv,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineiv",
@@ -22450,11 +22450,11 @@ func (*binaryClassGlGetProgramPipelineivEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetProgramPipelineivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineivEXT(d, obj.(*GlGetProgramPipelineivEXT))
 }
-func (*binaryClassGlGetProgramPipelineivEXT) Schema() *schema.Class {
+func (*binaryClassGlGetProgramPipelineivEXT) Schema() *schema.Entity {
 	return schemaGlGetProgramPipelineivEXT
 }
 
-var schemaGlGetProgramPipelineivEXT = &schema.Class{
+var schemaGlGetProgramPipelineivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineivEXT,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineivEXT",
@@ -22498,11 +22498,11 @@ func (*binaryClassGlGetProgramResourceIndex) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetProgramResourceIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceIndex(d, obj.(*GlGetProgramResourceIndex))
 }
-func (*binaryClassGlGetProgramResourceIndex) Schema() *schema.Class {
+func (*binaryClassGlGetProgramResourceIndex) Schema() *schema.Entity {
 	return schemaGlGetProgramResourceIndex
 }
 
-var schemaGlGetProgramResourceIndex = &schema.Class{
+var schemaGlGetProgramResourceIndex = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourceIndex,
 	Package: "gles",
 	Name:    "GlGetProgramResourceIndex",
@@ -22551,11 +22551,11 @@ func (*binaryClassGlGetProgramResourceLocation) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetProgramResourceLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceLocation(d, obj.(*GlGetProgramResourceLocation))
 }
-func (*binaryClassGlGetProgramResourceLocation) Schema() *schema.Class {
+func (*binaryClassGlGetProgramResourceLocation) Schema() *schema.Entity {
 	return schemaGlGetProgramResourceLocation
 }
 
-var schemaGlGetProgramResourceLocation = &schema.Class{
+var schemaGlGetProgramResourceLocation = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourceLocation,
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocation",
@@ -22604,11 +22604,11 @@ func (*binaryClassGlGetProgramResourceLocationIndexEXT) Decode(d binary.Decoder)
 func (*binaryClassGlGetProgramResourceLocationIndexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceLocationIndexEXT(d, obj.(*GlGetProgramResourceLocationIndexEXT))
 }
-func (*binaryClassGlGetProgramResourceLocationIndexEXT) Schema() *schema.Class {
+func (*binaryClassGlGetProgramResourceLocationIndexEXT) Schema() *schema.Entity {
 	return schemaGlGetProgramResourceLocationIndexEXT
 }
 
-var schemaGlGetProgramResourceLocationIndexEXT = &schema.Class{
+var schemaGlGetProgramResourceLocationIndexEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourceLocationIndexEXT,
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocationIndexEXT",
@@ -22657,11 +22657,11 @@ func (*binaryClassGlGetProgramResourceName) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetProgramResourceName) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceName(d, obj.(*GlGetProgramResourceName))
 }
-func (*binaryClassGlGetProgramResourceName) Schema() *schema.Class {
+func (*binaryClassGlGetProgramResourceName) Schema() *schema.Entity {
 	return schemaGlGetProgramResourceName
 }
 
-var schemaGlGetProgramResourceName = &schema.Class{
+var schemaGlGetProgramResourceName = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourceName,
 	Package: "gles",
 	Name:    "GlGetProgramResourceName",
@@ -22716,11 +22716,11 @@ func (*binaryClassGlGetProgramResourcefvNV) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetProgramResourcefvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourcefvNV(d, obj.(*GlGetProgramResourcefvNV))
 }
-func (*binaryClassGlGetProgramResourcefvNV) Schema() *schema.Class {
+func (*binaryClassGlGetProgramResourcefvNV) Schema() *schema.Entity {
 	return schemaGlGetProgramResourcefvNV
 }
 
-var schemaGlGetProgramResourcefvNV = &schema.Class{
+var schemaGlGetProgramResourcefvNV = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourcefvNV,
 	Package: "gles",
 	Name:    "GlGetProgramResourcefvNV",
@@ -22777,9 +22777,9 @@ func (*binaryClassGlGetProgramResourceiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetProgramResourceiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceiv(d, obj.(*GlGetProgramResourceiv))
 }
-func (*binaryClassGlGetProgramResourceiv) Schema() *schema.Class { return schemaGlGetProgramResourceiv }
+func (*binaryClassGlGetProgramResourceiv) Schema() *schema.Entity { return schemaGlGetProgramResourceiv }
 
-var schemaGlGetProgramResourceiv = &schema.Class{
+var schemaGlGetProgramResourceiv = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramResourceiv,
 	Package: "gles",
 	Name:    "GlGetProgramResourceiv",
@@ -22826,9 +22826,9 @@ func (*binaryClassGlGetProgramiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramiv(d, obj.(*GlGetProgramiv))
 }
-func (*binaryClassGlGetProgramiv) Schema() *schema.Class { return schemaGlGetProgramiv }
+func (*binaryClassGlGetProgramiv) Schema() *schema.Entity { return schemaGlGetProgramiv }
 
-var schemaGlGetProgramiv = &schema.Class{
+var schemaGlGetProgramiv = &schema.Entity{
 	TypeID:  binaryIDGlGetProgramiv,
 	Package: "gles",
 	Name:    "GlGetProgramiv",
@@ -22864,9 +22864,9 @@ func (*binaryClassS64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ᵖ(d, obj.(*S64ᵖ))
 }
-func (*binaryClassS64ᵖ) Schema() *schema.Class { return schemaS64ᵖ }
+func (*binaryClassS64ᵖ) Schema() *schema.Entity { return schemaS64ᵖ }
 
-var schemaS64ᵖ = &schema.Class{
+var schemaS64ᵖ = &schema.Entity{
 	TypeID:  binaryIDS64ᵖ,
 	Package: "gles",
 	Name:    "S64ᵖ",
@@ -22905,9 +22905,9 @@ func (*binaryClassGlGetQueryObjecti64v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryObjecti64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjecti64v(d, obj.(*GlGetQueryObjecti64v))
 }
-func (*binaryClassGlGetQueryObjecti64v) Schema() *schema.Class { return schemaGlGetQueryObjecti64v }
+func (*binaryClassGlGetQueryObjecti64v) Schema() *schema.Entity { return schemaGlGetQueryObjecti64v }
 
-var schemaGlGetQueryObjecti64v = &schema.Class{
+var schemaGlGetQueryObjecti64v = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjecti64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64v",
@@ -22949,11 +22949,11 @@ func (*binaryClassGlGetQueryObjecti64vEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetQueryObjecti64vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjecti64vEXT(d, obj.(*GlGetQueryObjecti64vEXT))
 }
-func (*binaryClassGlGetQueryObjecti64vEXT) Schema() *schema.Class {
+func (*binaryClassGlGetQueryObjecti64vEXT) Schema() *schema.Entity {
 	return schemaGlGetQueryObjecti64vEXT
 }
 
-var schemaGlGetQueryObjecti64vEXT = &schema.Class{
+var schemaGlGetQueryObjecti64vEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjecti64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64vEXT",
@@ -22995,9 +22995,9 @@ func (*binaryClassGlGetQueryObjectivEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetQueryObjectivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectivEXT(d, obj.(*GlGetQueryObjectivEXT))
 }
-func (*binaryClassGlGetQueryObjectivEXT) Schema() *schema.Class { return schemaGlGetQueryObjectivEXT }
+func (*binaryClassGlGetQueryObjectivEXT) Schema() *schema.Entity { return schemaGlGetQueryObjectivEXT }
 
-var schemaGlGetQueryObjectivEXT = &schema.Class{
+var schemaGlGetQueryObjectivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjectivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectivEXT",
@@ -23033,9 +23033,9 @@ func (*binaryClassU64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ᵖ(d, obj.(*U64ᵖ))
 }
-func (*binaryClassU64ᵖ) Schema() *schema.Class { return schemaU64ᵖ }
+func (*binaryClassU64ᵖ) Schema() *schema.Entity { return schemaU64ᵖ }
 
-var schemaU64ᵖ = &schema.Class{
+var schemaU64ᵖ = &schema.Entity{
 	TypeID:  binaryIDU64ᵖ,
 	Package: "gles",
 	Name:    "U64ᵖ",
@@ -23074,9 +23074,9 @@ func (*binaryClassGlGetQueryObjectui64v) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetQueryObjectui64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectui64v(d, obj.(*GlGetQueryObjectui64v))
 }
-func (*binaryClassGlGetQueryObjectui64v) Schema() *schema.Class { return schemaGlGetQueryObjectui64v }
+func (*binaryClassGlGetQueryObjectui64v) Schema() *schema.Entity { return schemaGlGetQueryObjectui64v }
 
-var schemaGlGetQueryObjectui64v = &schema.Class{
+var schemaGlGetQueryObjectui64v = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjectui64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64v",
@@ -23118,11 +23118,11 @@ func (*binaryClassGlGetQueryObjectui64vEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetQueryObjectui64vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectui64vEXT(d, obj.(*GlGetQueryObjectui64vEXT))
 }
-func (*binaryClassGlGetQueryObjectui64vEXT) Schema() *schema.Class {
+func (*binaryClassGlGetQueryObjectui64vEXT) Schema() *schema.Entity {
 	return schemaGlGetQueryObjectui64vEXT
 }
 
-var schemaGlGetQueryObjectui64vEXT = &schema.Class{
+var schemaGlGetQueryObjectui64vEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjectui64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64vEXT",
@@ -23164,9 +23164,9 @@ func (*binaryClassGlGetQueryObjectuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryObjectuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectuiv(d, obj.(*GlGetQueryObjectuiv))
 }
-func (*binaryClassGlGetQueryObjectuiv) Schema() *schema.Class { return schemaGlGetQueryObjectuiv }
+func (*binaryClassGlGetQueryObjectuiv) Schema() *schema.Entity { return schemaGlGetQueryObjectuiv }
 
-var schemaGlGetQueryObjectuiv = &schema.Class{
+var schemaGlGetQueryObjectuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjectuiv,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuiv",
@@ -23208,9 +23208,9 @@ func (*binaryClassGlGetQueryObjectuivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetQueryObjectuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectuivEXT(d, obj.(*GlGetQueryObjectuivEXT))
 }
-func (*binaryClassGlGetQueryObjectuivEXT) Schema() *schema.Class { return schemaGlGetQueryObjectuivEXT }
+func (*binaryClassGlGetQueryObjectuivEXT) Schema() *schema.Entity { return schemaGlGetQueryObjectuivEXT }
 
-var schemaGlGetQueryObjectuivEXT = &schema.Class{
+var schemaGlGetQueryObjectuivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryObjectuivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuivEXT",
@@ -23252,9 +23252,9 @@ func (*binaryClassGlGetQueryiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryiv(d, obj.(*GlGetQueryiv))
 }
-func (*binaryClassGlGetQueryiv) Schema() *schema.Class { return schemaGlGetQueryiv }
+func (*binaryClassGlGetQueryiv) Schema() *schema.Entity { return schemaGlGetQueryiv }
 
-var schemaGlGetQueryiv = &schema.Class{
+var schemaGlGetQueryiv = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryiv,
 	Package: "gles",
 	Name:    "GlGetQueryiv",
@@ -23296,9 +23296,9 @@ func (*binaryClassGlGetQueryivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryivEXT(d, obj.(*GlGetQueryivEXT))
 }
-func (*binaryClassGlGetQueryivEXT) Schema() *schema.Class { return schemaGlGetQueryivEXT }
+func (*binaryClassGlGetQueryivEXT) Schema() *schema.Entity { return schemaGlGetQueryivEXT }
 
-var schemaGlGetQueryivEXT = &schema.Class{
+var schemaGlGetQueryivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetQueryivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryivEXT",
@@ -23344,11 +23344,11 @@ func (*binaryClassGlGetRenderbufferParameteriv) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetRenderbufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetRenderbufferParameteriv(d, obj.(*GlGetRenderbufferParameteriv))
 }
-func (*binaryClassGlGetRenderbufferParameteriv) Schema() *schema.Class {
+func (*binaryClassGlGetRenderbufferParameteriv) Schema() *schema.Entity {
 	return schemaGlGetRenderbufferParameteriv
 }
 
-var schemaGlGetRenderbufferParameteriv = &schema.Class{
+var schemaGlGetRenderbufferParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetRenderbufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetRenderbufferParameteriv",
@@ -23390,11 +23390,11 @@ func (*binaryClassGlGetSamplerParameterIiv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIiv(d, obj.(*GlGetSamplerParameterIiv))
 }
-func (*binaryClassGlGetSamplerParameterIiv) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIiv) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIiv
 }
 
-var schemaGlGetSamplerParameterIiv = &schema.Class{
+var schemaGlGetSamplerParameterIiv = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIiv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIiv",
@@ -23440,11 +23440,11 @@ func (*binaryClassGlGetSamplerParameterIivEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetSamplerParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIivEXT(d, obj.(*GlGetSamplerParameterIivEXT))
 }
-func (*binaryClassGlGetSamplerParameterIivEXT) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIivEXT) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIivEXT
 }
 
-var schemaGlGetSamplerParameterIivEXT = &schema.Class{
+var schemaGlGetSamplerParameterIivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIivEXT,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivEXT",
@@ -23490,11 +23490,11 @@ func (*binaryClassGlGetSamplerParameterIivOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetSamplerParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIivOES(d, obj.(*GlGetSamplerParameterIivOES))
 }
-func (*binaryClassGlGetSamplerParameterIivOES) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIivOES) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIivOES
 }
 
-var schemaGlGetSamplerParameterIivOES = &schema.Class{
+var schemaGlGetSamplerParameterIivOES = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIivOES,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivOES",
@@ -23536,11 +23536,11 @@ func (*binaryClassGlGetSamplerParameterIuiv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuiv(d, obj.(*GlGetSamplerParameterIuiv))
 }
-func (*binaryClassGlGetSamplerParameterIuiv) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIuiv) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIuiv
 }
 
-var schemaGlGetSamplerParameterIuiv = &schema.Class{
+var schemaGlGetSamplerParameterIuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuiv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuiv",
@@ -23586,11 +23586,11 @@ func (*binaryClassGlGetSamplerParameterIuivEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetSamplerParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuivEXT(d, obj.(*GlGetSamplerParameterIuivEXT))
 }
-func (*binaryClassGlGetSamplerParameterIuivEXT) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIuivEXT) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIuivEXT
 }
 
-var schemaGlGetSamplerParameterIuivEXT = &schema.Class{
+var schemaGlGetSamplerParameterIuivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivEXT",
@@ -23636,11 +23636,11 @@ func (*binaryClassGlGetSamplerParameterIuivOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetSamplerParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuivOES(d, obj.(*GlGetSamplerParameterIuivOES))
 }
-func (*binaryClassGlGetSamplerParameterIuivOES) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterIuivOES) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterIuivOES
 }
 
-var schemaGlGetSamplerParameterIuivOES = &schema.Class{
+var schemaGlGetSamplerParameterIuivOES = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuivOES,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivOES",
@@ -23682,11 +23682,11 @@ func (*binaryClassGlGetSamplerParameterfv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetSamplerParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterfv(d, obj.(*GlGetSamplerParameterfv))
 }
-func (*binaryClassGlGetSamplerParameterfv) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameterfv) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameterfv
 }
 
-var schemaGlGetSamplerParameterfv = &schema.Class{
+var schemaGlGetSamplerParameterfv = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterfv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterfv",
@@ -23728,11 +23728,11 @@ func (*binaryClassGlGetSamplerParameteriv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetSamplerParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameteriv(d, obj.(*GlGetSamplerParameteriv))
 }
-func (*binaryClassGlGetSamplerParameteriv) Schema() *schema.Class {
+func (*binaryClassGlGetSamplerParameteriv) Schema() *schema.Entity {
 	return schemaGlGetSamplerParameteriv
 }
 
-var schemaGlGetSamplerParameteriv = &schema.Class{
+var schemaGlGetSamplerParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetSamplerParameteriv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameteriv",
@@ -23776,9 +23776,9 @@ func (*binaryClassGlGetShaderInfoLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderInfoLog(d, obj.(*GlGetShaderInfoLog))
 }
-func (*binaryClassGlGetShaderInfoLog) Schema() *schema.Class { return schemaGlGetShaderInfoLog }
+func (*binaryClassGlGetShaderInfoLog) Schema() *schema.Entity { return schemaGlGetShaderInfoLog }
 
-var schemaGlGetShaderInfoLog = &schema.Class{
+var schemaGlGetShaderInfoLog = &schema.Entity{
 	TypeID:  binaryIDGlGetShaderInfoLog,
 	Package: "gles",
 	Name:    "GlGetShaderInfoLog",
@@ -23827,11 +23827,11 @@ func (*binaryClassGlGetShaderPrecisionFormat) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlGetShaderPrecisionFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderPrecisionFormat(d, obj.(*GlGetShaderPrecisionFormat))
 }
-func (*binaryClassGlGetShaderPrecisionFormat) Schema() *schema.Class {
+func (*binaryClassGlGetShaderPrecisionFormat) Schema() *schema.Entity {
 	return schemaGlGetShaderPrecisionFormat
 }
 
-var schemaGlGetShaderPrecisionFormat = &schema.Class{
+var schemaGlGetShaderPrecisionFormat = &schema.Entity{
 	TypeID:  binaryIDGlGetShaderPrecisionFormat,
 	Package: "gles",
 	Name:    "GlGetShaderPrecisionFormat",
@@ -23876,9 +23876,9 @@ func (*binaryClassGlGetShaderSource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderSource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderSource(d, obj.(*GlGetShaderSource))
 }
-func (*binaryClassGlGetShaderSource) Schema() *schema.Class { return schemaGlGetShaderSource }
+func (*binaryClassGlGetShaderSource) Schema() *schema.Entity { return schemaGlGetShaderSource }
 
-var schemaGlGetShaderSource = &schema.Class{
+var schemaGlGetShaderSource = &schema.Entity{
 	TypeID:  binaryIDGlGetShaderSource,
 	Package: "gles",
 	Name:    "GlGetShaderSource",
@@ -23921,9 +23921,9 @@ func (*binaryClassGlGetShaderiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderiv(d, obj.(*GlGetShaderiv))
 }
-func (*binaryClassGlGetShaderiv) Schema() *schema.Class { return schemaGlGetShaderiv }
+func (*binaryClassGlGetShaderiv) Schema() *schema.Entity { return schemaGlGetShaderiv }
 
-var schemaGlGetShaderiv = &schema.Class{
+var schemaGlGetShaderiv = &schema.Entity{
 	TypeID:  binaryIDGlGetShaderiv,
 	Package: "gles",
 	Name:    "GlGetShaderiv",
@@ -23963,9 +23963,9 @@ func (*binaryClassGlGetString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetString(d, obj.(*GlGetString))
 }
-func (*binaryClassGlGetString) Schema() *schema.Class { return schemaGlGetString }
+func (*binaryClassGlGetString) Schema() *schema.Entity { return schemaGlGetString }
 
-var schemaGlGetString = &schema.Class{
+var schemaGlGetString = &schema.Entity{
 	TypeID:  binaryIDGlGetString,
 	Package: "gles",
 	Name:    "GlGetString",
@@ -24006,9 +24006,9 @@ func (*binaryClassGlGetStringi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetStringi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetStringi(d, obj.(*GlGetStringi))
 }
-func (*binaryClassGlGetStringi) Schema() *schema.Class { return schemaGlGetStringi }
+func (*binaryClassGlGetStringi) Schema() *schema.Entity { return schemaGlGetStringi }
 
-var schemaGlGetStringi = &schema.Class{
+var schemaGlGetStringi = &schema.Entity{
 	TypeID:  binaryIDGlGetStringi,
 	Package: "gles",
 	Name:    "GlGetStringi",
@@ -24054,9 +24054,9 @@ func (*binaryClassGlGetSynciv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetSynciv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSynciv(d, obj.(*GlGetSynciv))
 }
-func (*binaryClassGlGetSynciv) Schema() *schema.Class { return schemaGlGetSynciv }
+func (*binaryClassGlGetSynciv) Schema() *schema.Entity { return schemaGlGetSynciv }
 
-var schemaGlGetSynciv = &schema.Class{
+var schemaGlGetSynciv = &schema.Entity{
 	TypeID:  binaryIDGlGetSynciv,
 	Package: "gles",
 	Name:    "GlGetSynciv",
@@ -24104,9 +24104,9 @@ func (*binaryClassGlGetSyncivAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetSyncivAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSyncivAPPLE(d, obj.(*GlGetSyncivAPPLE))
 }
-func (*binaryClassGlGetSyncivAPPLE) Schema() *schema.Class { return schemaGlGetSyncivAPPLE }
+func (*binaryClassGlGetSyncivAPPLE) Schema() *schema.Entity { return schemaGlGetSyncivAPPLE }
 
-var schemaGlGetSyncivAPPLE = &schema.Class{
+var schemaGlGetSyncivAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlGetSyncivAPPLE,
 	Package: "gles",
 	Name:    "GlGetSyncivAPPLE",
@@ -24152,11 +24152,11 @@ func (*binaryClassGlGetTexLevelParameterfv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexLevelParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexLevelParameterfv(d, obj.(*GlGetTexLevelParameterfv))
 }
-func (*binaryClassGlGetTexLevelParameterfv) Schema() *schema.Class {
+func (*binaryClassGlGetTexLevelParameterfv) Schema() *schema.Entity {
 	return schemaGlGetTexLevelParameterfv
 }
 
-var schemaGlGetTexLevelParameterfv = &schema.Class{
+var schemaGlGetTexLevelParameterfv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexLevelParameterfv,
 	Package: "gles",
 	Name:    "GlGetTexLevelParameterfv",
@@ -24201,11 +24201,11 @@ func (*binaryClassGlGetTexLevelParameteriv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexLevelParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexLevelParameteriv(d, obj.(*GlGetTexLevelParameteriv))
 }
-func (*binaryClassGlGetTexLevelParameteriv) Schema() *schema.Class {
+func (*binaryClassGlGetTexLevelParameteriv) Schema() *schema.Entity {
 	return schemaGlGetTexLevelParameteriv
 }
 
-var schemaGlGetTexLevelParameteriv = &schema.Class{
+var schemaGlGetTexLevelParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexLevelParameteriv,
 	Package: "gles",
 	Name:    "GlGetTexLevelParameteriv",
@@ -24248,9 +24248,9 @@ func (*binaryClassGlGetTexParameterIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIiv(d, obj.(*GlGetTexParameterIiv))
 }
-func (*binaryClassGlGetTexParameterIiv) Schema() *schema.Class { return schemaGlGetTexParameterIiv }
+func (*binaryClassGlGetTexParameterIiv) Schema() *schema.Entity { return schemaGlGetTexParameterIiv }
 
-var schemaGlGetTexParameterIiv = &schema.Class{
+var schemaGlGetTexParameterIiv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIiv,
 	Package: "gles",
 	Name:    "GlGetTexParameterIiv",
@@ -24292,11 +24292,11 @@ func (*binaryClassGlGetTexParameterIivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetTexParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIivEXT(d, obj.(*GlGetTexParameterIivEXT))
 }
-func (*binaryClassGlGetTexParameterIivEXT) Schema() *schema.Class {
+func (*binaryClassGlGetTexParameterIivEXT) Schema() *schema.Entity {
 	return schemaGlGetTexParameterIivEXT
 }
 
-var schemaGlGetTexParameterIivEXT = &schema.Class{
+var schemaGlGetTexParameterIivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIivEXT,
 	Package: "gles",
 	Name:    "GlGetTexParameterIivEXT",
@@ -24338,11 +24338,11 @@ func (*binaryClassGlGetTexParameterIivOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetTexParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIivOES(d, obj.(*GlGetTexParameterIivOES))
 }
-func (*binaryClassGlGetTexParameterIivOES) Schema() *schema.Class {
+func (*binaryClassGlGetTexParameterIivOES) Schema() *schema.Entity {
 	return schemaGlGetTexParameterIivOES
 }
 
-var schemaGlGetTexParameterIivOES = &schema.Class{
+var schemaGlGetTexParameterIivOES = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIivOES,
 	Package: "gles",
 	Name:    "GlGetTexParameterIivOES",
@@ -24384,9 +24384,9 @@ func (*binaryClassGlGetTexParameterIuiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuiv(d, obj.(*GlGetTexParameterIuiv))
 }
-func (*binaryClassGlGetTexParameterIuiv) Schema() *schema.Class { return schemaGlGetTexParameterIuiv }
+func (*binaryClassGlGetTexParameterIuiv) Schema() *schema.Entity { return schemaGlGetTexParameterIuiv }
 
-var schemaGlGetTexParameterIuiv = &schema.Class{
+var schemaGlGetTexParameterIuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuiv,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuiv",
@@ -24428,11 +24428,11 @@ func (*binaryClassGlGetTexParameterIuivEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuivEXT(d, obj.(*GlGetTexParameterIuivEXT))
 }
-func (*binaryClassGlGetTexParameterIuivEXT) Schema() *schema.Class {
+func (*binaryClassGlGetTexParameterIuivEXT) Schema() *schema.Entity {
 	return schemaGlGetTexParameterIuivEXT
 }
 
-var schemaGlGetTexParameterIuivEXT = &schema.Class{
+var schemaGlGetTexParameterIuivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivEXT",
@@ -24474,11 +24474,11 @@ func (*binaryClassGlGetTexParameterIuivOES) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuivOES(d, obj.(*GlGetTexParameterIuivOES))
 }
-func (*binaryClassGlGetTexParameterIuivOES) Schema() *schema.Class {
+func (*binaryClassGlGetTexParameterIuivOES) Schema() *schema.Entity {
 	return schemaGlGetTexParameterIuivOES
 }
 
-var schemaGlGetTexParameterIuivOES = &schema.Class{
+var schemaGlGetTexParameterIuivOES = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuivOES,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivOES",
@@ -24520,9 +24520,9 @@ func (*binaryClassGlGetTexParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterfv(d, obj.(*GlGetTexParameterfv))
 }
-func (*binaryClassGlGetTexParameterfv) Schema() *schema.Class { return schemaGlGetTexParameterfv }
+func (*binaryClassGlGetTexParameterfv) Schema() *schema.Entity { return schemaGlGetTexParameterfv }
 
-var schemaGlGetTexParameterfv = &schema.Class{
+var schemaGlGetTexParameterfv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameterfv,
 	Package: "gles",
 	Name:    "GlGetTexParameterfv",
@@ -24564,9 +24564,9 @@ func (*binaryClassGlGetTexParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameteriv(d, obj.(*GlGetTexParameteriv))
 }
-func (*binaryClassGlGetTexParameteriv) Schema() *schema.Class { return schemaGlGetTexParameteriv }
+func (*binaryClassGlGetTexParameteriv) Schema() *schema.Entity { return schemaGlGetTexParameteriv }
 
-var schemaGlGetTexParameteriv = &schema.Class{
+var schemaGlGetTexParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlGetTexParameteriv,
 	Package: "gles",
 	Name:    "GlGetTexParameteriv",
@@ -24606,9 +24606,9 @@ func (*binaryClassGlGetTextureHandleNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTextureHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTextureHandleNV(d, obj.(*GlGetTextureHandleNV))
 }
-func (*binaryClassGlGetTextureHandleNV) Schema() *schema.Class { return schemaGlGetTextureHandleNV }
+func (*binaryClassGlGetTextureHandleNV) Schema() *schema.Entity { return schemaGlGetTextureHandleNV }
 
-var schemaGlGetTextureHandleNV = &schema.Class{
+var schemaGlGetTextureHandleNV = &schema.Entity{
 	TypeID:  binaryIDGlGetTextureHandleNV,
 	Package: "gles",
 	Name:    "GlGetTextureHandleNV",
@@ -24653,11 +24653,11 @@ func (*binaryClassGlGetTextureSamplerHandleNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetTextureSamplerHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTextureSamplerHandleNV(d, obj.(*GlGetTextureSamplerHandleNV))
 }
-func (*binaryClassGlGetTextureSamplerHandleNV) Schema() *schema.Class {
+func (*binaryClassGlGetTextureSamplerHandleNV) Schema() *schema.Entity {
 	return schemaGlGetTextureSamplerHandleNV
 }
 
-var schemaGlGetTextureSamplerHandleNV = &schema.Class{
+var schemaGlGetTextureSamplerHandleNV = &schema.Entity{
 	TypeID:  binaryIDGlGetTextureSamplerHandleNV,
 	Package: "gles",
 	Name:    "GlGetTextureSamplerHandleNV",
@@ -24711,11 +24711,11 @@ func (*binaryClassGlGetTransformFeedbackVarying) Decode(d binary.Decoder) binary
 func (*binaryClassGlGetTransformFeedbackVarying) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTransformFeedbackVarying(d, obj.(*GlGetTransformFeedbackVarying))
 }
-func (*binaryClassGlGetTransformFeedbackVarying) Schema() *schema.Class {
+func (*binaryClassGlGetTransformFeedbackVarying) Schema() *schema.Entity {
 	return schemaGlGetTransformFeedbackVarying
 }
 
-var schemaGlGetTransformFeedbackVarying = &schema.Class{
+var schemaGlGetTransformFeedbackVarying = &schema.Entity{
 	TypeID:  binaryIDGlGetTransformFeedbackVarying,
 	Package: "gles",
 	Name:    "GlGetTransformFeedbackVarying",
@@ -24767,11 +24767,11 @@ func (*binaryClassGlGetTranslatedShaderSourceANGLE) Decode(d binary.Decoder) bin
 func (*binaryClassGlGetTranslatedShaderSourceANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTranslatedShaderSourceANGLE(d, obj.(*GlGetTranslatedShaderSourceANGLE))
 }
-func (*binaryClassGlGetTranslatedShaderSourceANGLE) Schema() *schema.Class {
+func (*binaryClassGlGetTranslatedShaderSourceANGLE) Schema() *schema.Entity {
 	return schemaGlGetTranslatedShaderSourceANGLE
 }
 
-var schemaGlGetTranslatedShaderSourceANGLE = &schema.Class{
+var schemaGlGetTranslatedShaderSourceANGLE = &schema.Entity{
 	TypeID:  binaryIDGlGetTranslatedShaderSourceANGLE,
 	Package: "gles",
 	Name:    "GlGetTranslatedShaderSourceANGLE",
@@ -24814,9 +24814,9 @@ func (*binaryClassGlGetUniformBlockIndex) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetUniformBlockIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformBlockIndex(d, obj.(*GlGetUniformBlockIndex))
 }
-func (*binaryClassGlGetUniformBlockIndex) Schema() *schema.Class { return schemaGlGetUniformBlockIndex }
+func (*binaryClassGlGetUniformBlockIndex) Schema() *schema.Entity { return schemaGlGetUniformBlockIndex }
 
-var schemaGlGetUniformBlockIndex = &schema.Class{
+var schemaGlGetUniformBlockIndex = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformBlockIndex,
 	Package: "gles",
 	Name:    "GlGetUniformBlockIndex",
@@ -24895,9 +24895,9 @@ func (*binaryClassGlGetUniformIndices) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformIndices) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformIndices(d, obj.(*GlGetUniformIndices))
 }
-func (*binaryClassGlGetUniformIndices) Schema() *schema.Class { return schemaGlGetUniformIndices }
+func (*binaryClassGlGetUniformIndices) Schema() *schema.Entity { return schemaGlGetUniformIndices }
 
-var schemaGlGetUniformIndices = &schema.Class{
+var schemaGlGetUniformIndices = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformIndices,
 	Package: "gles",
 	Name:    "GlGetUniformIndices",
@@ -24940,9 +24940,9 @@ func (*binaryClassGlGetUniformLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformLocation(d, obj.(*GlGetUniformLocation))
 }
-func (*binaryClassGlGetUniformLocation) Schema() *schema.Class { return schemaGlGetUniformLocation }
+func (*binaryClassGlGetUniformLocation) Schema() *schema.Entity { return schemaGlGetUniformLocation }
 
-var schemaGlGetUniformLocation = &schema.Class{
+var schemaGlGetUniformLocation = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformLocation,
 	Package: "gles",
 	Name:    "GlGetUniformLocation",
@@ -24984,9 +24984,9 @@ func (*binaryClassGlGetUniformfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformfv(d, obj.(*GlGetUniformfv))
 }
-func (*binaryClassGlGetUniformfv) Schema() *schema.Class { return schemaGlGetUniformfv }
+func (*binaryClassGlGetUniformfv) Schema() *schema.Entity { return schemaGlGetUniformfv }
 
-var schemaGlGetUniformfv = &schema.Class{
+var schemaGlGetUniformfv = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformfv,
 	Package: "gles",
 	Name:    "GlGetUniformfv",
@@ -25028,9 +25028,9 @@ func (*binaryClassGlGetUniformiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformiv(d, obj.(*GlGetUniformiv))
 }
-func (*binaryClassGlGetUniformiv) Schema() *schema.Class { return schemaGlGetUniformiv }
+func (*binaryClassGlGetUniformiv) Schema() *schema.Entity { return schemaGlGetUniformiv }
 
-var schemaGlGetUniformiv = &schema.Class{
+var schemaGlGetUniformiv = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformiv,
 	Package: "gles",
 	Name:    "GlGetUniformiv",
@@ -25072,9 +25072,9 @@ func (*binaryClassGlGetUniformuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformuiv(d, obj.(*GlGetUniformuiv))
 }
-func (*binaryClassGlGetUniformuiv) Schema() *schema.Class { return schemaGlGetUniformuiv }
+func (*binaryClassGlGetUniformuiv) Schema() *schema.Entity { return schemaGlGetUniformuiv }
 
-var schemaGlGetUniformuiv = &schema.Class{
+var schemaGlGetUniformuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetUniformuiv,
 	Package: "gles",
 	Name:    "GlGetUniformuiv",
@@ -25116,9 +25116,9 @@ func (*binaryClassGlGetVertexAttribIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribIiv(d, obj.(*GlGetVertexAttribIiv))
 }
-func (*binaryClassGlGetVertexAttribIiv) Schema() *schema.Class { return schemaGlGetVertexAttribIiv }
+func (*binaryClassGlGetVertexAttribIiv) Schema() *schema.Entity { return schemaGlGetVertexAttribIiv }
 
-var schemaGlGetVertexAttribIiv = &schema.Class{
+var schemaGlGetVertexAttribIiv = &schema.Entity{
 	TypeID:  binaryIDGlGetVertexAttribIiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribIiv",
@@ -25160,9 +25160,9 @@ func (*binaryClassGlGetVertexAttribIuiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetVertexAttribIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribIuiv(d, obj.(*GlGetVertexAttribIuiv))
 }
-func (*binaryClassGlGetVertexAttribIuiv) Schema() *schema.Class { return schemaGlGetVertexAttribIuiv }
+func (*binaryClassGlGetVertexAttribIuiv) Schema() *schema.Entity { return schemaGlGetVertexAttribIuiv }
 
-var schemaGlGetVertexAttribIuiv = &schema.Class{
+var schemaGlGetVertexAttribIuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetVertexAttribIuiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribIuiv",
@@ -25204,11 +25204,11 @@ func (*binaryClassGlGetVertexAttribPointerv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetVertexAttribPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribPointerv(d, obj.(*GlGetVertexAttribPointerv))
 }
-func (*binaryClassGlGetVertexAttribPointerv) Schema() *schema.Class {
+func (*binaryClassGlGetVertexAttribPointerv) Schema() *schema.Entity {
 	return schemaGlGetVertexAttribPointerv
 }
 
-var schemaGlGetVertexAttribPointerv = &schema.Class{
+var schemaGlGetVertexAttribPointerv = &schema.Entity{
 	TypeID:  binaryIDGlGetVertexAttribPointerv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribPointerv",
@@ -25250,9 +25250,9 @@ func (*binaryClassGlGetVertexAttribfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribfv(d, obj.(*GlGetVertexAttribfv))
 }
-func (*binaryClassGlGetVertexAttribfv) Schema() *schema.Class { return schemaGlGetVertexAttribfv }
+func (*binaryClassGlGetVertexAttribfv) Schema() *schema.Entity { return schemaGlGetVertexAttribfv }
 
-var schemaGlGetVertexAttribfv = &schema.Class{
+var schemaGlGetVertexAttribfv = &schema.Entity{
 	TypeID:  binaryIDGlGetVertexAttribfv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribfv",
@@ -25294,9 +25294,9 @@ func (*binaryClassGlGetVertexAttribiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribiv(d, obj.(*GlGetVertexAttribiv))
 }
-func (*binaryClassGlGetVertexAttribiv) Schema() *schema.Class { return schemaGlGetVertexAttribiv }
+func (*binaryClassGlGetVertexAttribiv) Schema() *schema.Entity { return schemaGlGetVertexAttribiv }
 
-var schemaGlGetVertexAttribiv = &schema.Class{
+var schemaGlGetVertexAttribiv = &schema.Entity{
 	TypeID:  binaryIDGlGetVertexAttribiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribiv",
@@ -25340,9 +25340,9 @@ func (*binaryClassGlGetnUniformfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfv(d, obj.(*GlGetnUniformfv))
 }
-func (*binaryClassGlGetnUniformfv) Schema() *schema.Class { return schemaGlGetnUniformfv }
+func (*binaryClassGlGetnUniformfv) Schema() *schema.Entity { return schemaGlGetnUniformfv }
 
-var schemaGlGetnUniformfv = &schema.Class{
+var schemaGlGetnUniformfv = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformfv,
 	Package: "gles",
 	Name:    "GlGetnUniformfv",
@@ -25387,9 +25387,9 @@ func (*binaryClassGlGetnUniformfvEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfvEXT(d, obj.(*GlGetnUniformfvEXT))
 }
-func (*binaryClassGlGetnUniformfvEXT) Schema() *schema.Class { return schemaGlGetnUniformfvEXT }
+func (*binaryClassGlGetnUniformfvEXT) Schema() *schema.Entity { return schemaGlGetnUniformfvEXT }
 
-var schemaGlGetnUniformfvEXT = &schema.Class{
+var schemaGlGetnUniformfvEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformfvEXT,
 	Package: "gles",
 	Name:    "GlGetnUniformfvEXT",
@@ -25434,9 +25434,9 @@ func (*binaryClassGlGetnUniformfvKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfvKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfvKHR(d, obj.(*GlGetnUniformfvKHR))
 }
-func (*binaryClassGlGetnUniformfvKHR) Schema() *schema.Class { return schemaGlGetnUniformfvKHR }
+func (*binaryClassGlGetnUniformfvKHR) Schema() *schema.Entity { return schemaGlGetnUniformfvKHR }
 
-var schemaGlGetnUniformfvKHR = &schema.Class{
+var schemaGlGetnUniformfvKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformfvKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformfvKHR",
@@ -25481,9 +25481,9 @@ func (*binaryClassGlGetnUniformiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformiv(d, obj.(*GlGetnUniformiv))
 }
-func (*binaryClassGlGetnUniformiv) Schema() *schema.Class { return schemaGlGetnUniformiv }
+func (*binaryClassGlGetnUniformiv) Schema() *schema.Entity { return schemaGlGetnUniformiv }
 
-var schemaGlGetnUniformiv = &schema.Class{
+var schemaGlGetnUniformiv = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformiv,
 	Package: "gles",
 	Name:    "GlGetnUniformiv",
@@ -25528,9 +25528,9 @@ func (*binaryClassGlGetnUniformivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformivEXT(d, obj.(*GlGetnUniformivEXT))
 }
-func (*binaryClassGlGetnUniformivEXT) Schema() *schema.Class { return schemaGlGetnUniformivEXT }
+func (*binaryClassGlGetnUniformivEXT) Schema() *schema.Entity { return schemaGlGetnUniformivEXT }
 
-var schemaGlGetnUniformivEXT = &schema.Class{
+var schemaGlGetnUniformivEXT = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformivEXT,
 	Package: "gles",
 	Name:    "GlGetnUniformivEXT",
@@ -25575,9 +25575,9 @@ func (*binaryClassGlGetnUniformivKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformivKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformivKHR(d, obj.(*GlGetnUniformivKHR))
 }
-func (*binaryClassGlGetnUniformivKHR) Schema() *schema.Class { return schemaGlGetnUniformivKHR }
+func (*binaryClassGlGetnUniformivKHR) Schema() *schema.Entity { return schemaGlGetnUniformivKHR }
 
-var schemaGlGetnUniformivKHR = &schema.Class{
+var schemaGlGetnUniformivKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformivKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformivKHR",
@@ -25622,9 +25622,9 @@ func (*binaryClassGlGetnUniformuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformuiv(d, obj.(*GlGetnUniformuiv))
 }
-func (*binaryClassGlGetnUniformuiv) Schema() *schema.Class { return schemaGlGetnUniformuiv }
+func (*binaryClassGlGetnUniformuiv) Schema() *schema.Entity { return schemaGlGetnUniformuiv }
 
-var schemaGlGetnUniformuiv = &schema.Class{
+var schemaGlGetnUniformuiv = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformuiv,
 	Package: "gles",
 	Name:    "GlGetnUniformuiv",
@@ -25669,9 +25669,9 @@ func (*binaryClassGlGetnUniformuivKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformuivKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformuivKHR(d, obj.(*GlGetnUniformuivKHR))
 }
-func (*binaryClassGlGetnUniformuivKHR) Schema() *schema.Class { return schemaGlGetnUniformuivKHR }
+func (*binaryClassGlGetnUniformuivKHR) Schema() *schema.Entity { return schemaGlGetnUniformuivKHR }
 
-var schemaGlGetnUniformuivKHR = &schema.Class{
+var schemaGlGetnUniformuivKHR = &schema.Entity{
 	TypeID:  binaryIDGlGetnUniformuivKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformuivKHR",
@@ -25712,9 +25712,9 @@ func (*binaryClassGlHint) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlHint) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlHint(d, obj.(*GlHint))
 }
-func (*binaryClassGlHint) Schema() *schema.Class { return schemaGlHint }
+func (*binaryClassGlHint) Schema() *schema.Entity { return schemaGlHint }
 
-var schemaGlHint = &schema.Class{
+var schemaGlHint = &schema.Entity{
 	TypeID:  binaryIDGlHint,
 	Package: "gles",
 	Name:    "GlHint",
@@ -25753,9 +25753,9 @@ func (*binaryClassGlInsertEventMarkerEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlInsertEventMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInsertEventMarkerEXT(d, obj.(*GlInsertEventMarkerEXT))
 }
-func (*binaryClassGlInsertEventMarkerEXT) Schema() *schema.Class { return schemaGlInsertEventMarkerEXT }
+func (*binaryClassGlInsertEventMarkerEXT) Schema() *schema.Entity { return schemaGlInsertEventMarkerEXT }
 
-var schemaGlInsertEventMarkerEXT = &schema.Class{
+var schemaGlInsertEventMarkerEXT = &schema.Entity{
 	TypeID:  binaryIDGlInsertEventMarkerEXT,
 	Package: "gles",
 	Name:    "GlInsertEventMarkerEXT",
@@ -25798,9 +25798,9 @@ func (*binaryClassGlInterpolatePathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlInterpolatePathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInterpolatePathsNV(d, obj.(*GlInterpolatePathsNV))
 }
-func (*binaryClassGlInterpolatePathsNV) Schema() *schema.Class { return schemaGlInterpolatePathsNV }
+func (*binaryClassGlInterpolatePathsNV) Schema() *schema.Entity { return schemaGlInterpolatePathsNV }
 
-var schemaGlInterpolatePathsNV = &schema.Class{
+var schemaGlInterpolatePathsNV = &schema.Entity{
 	TypeID:  binaryIDGlInterpolatePathsNV,
 	Package: "gles",
 	Name:    "GlInterpolatePathsNV",
@@ -25843,11 +25843,11 @@ func (*binaryClassGlInvalidateFramebuffer) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlInvalidateFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInvalidateFramebuffer(d, obj.(*GlInvalidateFramebuffer))
 }
-func (*binaryClassGlInvalidateFramebuffer) Schema() *schema.Class {
+func (*binaryClassGlInvalidateFramebuffer) Schema() *schema.Entity {
 	return schemaGlInvalidateFramebuffer
 }
 
-var schemaGlInvalidateFramebuffer = &schema.Class{
+var schemaGlInvalidateFramebuffer = &schema.Entity{
 	TypeID:  binaryIDGlInvalidateFramebuffer,
 	Package: "gles",
 	Name:    "GlInvalidateFramebuffer",
@@ -25901,11 +25901,11 @@ func (*binaryClassGlInvalidateSubFramebuffer) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlInvalidateSubFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInvalidateSubFramebuffer(d, obj.(*GlInvalidateSubFramebuffer))
 }
-func (*binaryClassGlInvalidateSubFramebuffer) Schema() *schema.Class {
+func (*binaryClassGlInvalidateSubFramebuffer) Schema() *schema.Entity {
 	return schemaGlInvalidateSubFramebuffer
 }
 
-var schemaGlInvalidateSubFramebuffer = &schema.Class{
+var schemaGlInvalidateSubFramebuffer = &schema.Entity{
 	TypeID:  binaryIDGlInvalidateSubFramebuffer,
 	Package: "gles",
 	Name:    "GlInvalidateSubFramebuffer",
@@ -25949,9 +25949,9 @@ func (*binaryClassGlIsBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsBuffer(d, obj.(*GlIsBuffer))
 }
-func (*binaryClassGlIsBuffer) Schema() *schema.Class { return schemaGlIsBuffer }
+func (*binaryClassGlIsBuffer) Schema() *schema.Entity { return schemaGlIsBuffer }
 
-var schemaGlIsBuffer = &schema.Class{
+var schemaGlIsBuffer = &schema.Entity{
 	TypeID:  binaryIDGlIsBuffer,
 	Package: "gles",
 	Name:    "GlIsBuffer",
@@ -25990,9 +25990,9 @@ func (*binaryClassGlIsEnabled) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnabled) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnabled(d, obj.(*GlIsEnabled))
 }
-func (*binaryClassGlIsEnabled) Schema() *schema.Class { return schemaGlIsEnabled }
+func (*binaryClassGlIsEnabled) Schema() *schema.Entity { return schemaGlIsEnabled }
 
-var schemaGlIsEnabled = &schema.Class{
+var schemaGlIsEnabled = &schema.Entity{
 	TypeID:  binaryIDGlIsEnabled,
 	Package: "gles",
 	Name:    "GlIsEnabled",
@@ -26033,9 +26033,9 @@ func (*binaryClassGlIsEnabledi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnabledi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnabledi(d, obj.(*GlIsEnabledi))
 }
-func (*binaryClassGlIsEnabledi) Schema() *schema.Class { return schemaGlIsEnabledi }
+func (*binaryClassGlIsEnabledi) Schema() *schema.Entity { return schemaGlIsEnabledi }
 
-var schemaGlIsEnabledi = &schema.Class{
+var schemaGlIsEnabledi = &schema.Entity{
 	TypeID:  binaryIDGlIsEnabledi,
 	Package: "gles",
 	Name:    "GlIsEnabledi",
@@ -26077,9 +26077,9 @@ func (*binaryClassGlIsEnablediEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediEXT(d, obj.(*GlIsEnablediEXT))
 }
-func (*binaryClassGlIsEnablediEXT) Schema() *schema.Class { return schemaGlIsEnablediEXT }
+func (*binaryClassGlIsEnablediEXT) Schema() *schema.Entity { return schemaGlIsEnablediEXT }
 
-var schemaGlIsEnablediEXT = &schema.Class{
+var schemaGlIsEnablediEXT = &schema.Entity{
 	TypeID:  binaryIDGlIsEnablediEXT,
 	Package: "gles",
 	Name:    "GlIsEnablediEXT",
@@ -26121,9 +26121,9 @@ func (*binaryClassGlIsEnablediNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediNV(d, obj.(*GlIsEnablediNV))
 }
-func (*binaryClassGlIsEnablediNV) Schema() *schema.Class { return schemaGlIsEnablediNV }
+func (*binaryClassGlIsEnablediNV) Schema() *schema.Entity { return schemaGlIsEnablediNV }
 
-var schemaGlIsEnablediNV = &schema.Class{
+var schemaGlIsEnablediNV = &schema.Entity{
 	TypeID:  binaryIDGlIsEnablediNV,
 	Package: "gles",
 	Name:    "GlIsEnablediNV",
@@ -26165,9 +26165,9 @@ func (*binaryClassGlIsEnablediOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediOES(d, obj.(*GlIsEnablediOES))
 }
-func (*binaryClassGlIsEnablediOES) Schema() *schema.Class { return schemaGlIsEnablediOES }
+func (*binaryClassGlIsEnablediOES) Schema() *schema.Entity { return schemaGlIsEnablediOES }
 
-var schemaGlIsEnablediOES = &schema.Class{
+var schemaGlIsEnablediOES = &schema.Entity{
 	TypeID:  binaryIDGlIsEnablediOES,
 	Package: "gles",
 	Name:    "GlIsEnablediOES",
@@ -26207,9 +26207,9 @@ func (*binaryClassGlIsFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsFenceNV(d, obj.(*GlIsFenceNV))
 }
-func (*binaryClassGlIsFenceNV) Schema() *schema.Class { return schemaGlIsFenceNV }
+func (*binaryClassGlIsFenceNV) Schema() *schema.Entity { return schemaGlIsFenceNV }
 
-var schemaGlIsFenceNV = &schema.Class{
+var schemaGlIsFenceNV = &schema.Entity{
 	TypeID:  binaryIDGlIsFenceNV,
 	Package: "gles",
 	Name:    "GlIsFenceNV",
@@ -26248,9 +26248,9 @@ func (*binaryClassGlIsFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsFramebuffer(d, obj.(*GlIsFramebuffer))
 }
-func (*binaryClassGlIsFramebuffer) Schema() *schema.Class { return schemaGlIsFramebuffer }
+func (*binaryClassGlIsFramebuffer) Schema() *schema.Entity { return schemaGlIsFramebuffer }
 
-var schemaGlIsFramebuffer = &schema.Class{
+var schemaGlIsFramebuffer = &schema.Entity{
 	TypeID:  binaryIDGlIsFramebuffer,
 	Package: "gles",
 	Name:    "GlIsFramebuffer",
@@ -26289,11 +26289,11 @@ func (*binaryClassGlIsImageHandleResidentNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlIsImageHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsImageHandleResidentNV(d, obj.(*GlIsImageHandleResidentNV))
 }
-func (*binaryClassGlIsImageHandleResidentNV) Schema() *schema.Class {
+func (*binaryClassGlIsImageHandleResidentNV) Schema() *schema.Entity {
 	return schemaGlIsImageHandleResidentNV
 }
 
-var schemaGlIsImageHandleResidentNV = &schema.Class{
+var schemaGlIsImageHandleResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlIsImageHandleResidentNV,
 	Package: "gles",
 	Name:    "GlIsImageHandleResidentNV",
@@ -26332,9 +26332,9 @@ func (*binaryClassGlIsPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPathNV(d, obj.(*GlIsPathNV))
 }
-func (*binaryClassGlIsPathNV) Schema() *schema.Class { return schemaGlIsPathNV }
+func (*binaryClassGlIsPathNV) Schema() *schema.Entity { return schemaGlIsPathNV }
 
-var schemaGlIsPathNV = &schema.Class{
+var schemaGlIsPathNV = &schema.Entity{
 	TypeID:  binaryIDGlIsPathNV,
 	Package: "gles",
 	Name:    "GlIsPathNV",
@@ -26379,9 +26379,9 @@ func (*binaryClassGlIsPointInFillPathNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlIsPointInFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPointInFillPathNV(d, obj.(*GlIsPointInFillPathNV))
 }
-func (*binaryClassGlIsPointInFillPathNV) Schema() *schema.Class { return schemaGlIsPointInFillPathNV }
+func (*binaryClassGlIsPointInFillPathNV) Schema() *schema.Entity { return schemaGlIsPointInFillPathNV }
 
-var schemaGlIsPointInFillPathNV = &schema.Class{
+var schemaGlIsPointInFillPathNV = &schema.Entity{
 	TypeID:  binaryIDGlIsPointInFillPathNV,
 	Package: "gles",
 	Name:    "GlIsPointInFillPathNV",
@@ -26427,11 +26427,11 @@ func (*binaryClassGlIsPointInStrokePathNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlIsPointInStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPointInStrokePathNV(d, obj.(*GlIsPointInStrokePathNV))
 }
-func (*binaryClassGlIsPointInStrokePathNV) Schema() *schema.Class {
+func (*binaryClassGlIsPointInStrokePathNV) Schema() *schema.Entity {
 	return schemaGlIsPointInStrokePathNV
 }
 
-var schemaGlIsPointInStrokePathNV = &schema.Class{
+var schemaGlIsPointInStrokePathNV = &schema.Entity{
 	TypeID:  binaryIDGlIsPointInStrokePathNV,
 	Package: "gles",
 	Name:    "GlIsPointInStrokePathNV",
@@ -26472,9 +26472,9 @@ func (*binaryClassGlIsProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgram(d, obj.(*GlIsProgram))
 }
-func (*binaryClassGlIsProgram) Schema() *schema.Class { return schemaGlIsProgram }
+func (*binaryClassGlIsProgram) Schema() *schema.Entity { return schemaGlIsProgram }
 
-var schemaGlIsProgram = &schema.Class{
+var schemaGlIsProgram = &schema.Entity{
 	TypeID:  binaryIDGlIsProgram,
 	Package: "gles",
 	Name:    "GlIsProgram",
@@ -26513,9 +26513,9 @@ func (*binaryClassGlIsProgramPipeline) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgramPipeline(d, obj.(*GlIsProgramPipeline))
 }
-func (*binaryClassGlIsProgramPipeline) Schema() *schema.Class { return schemaGlIsProgramPipeline }
+func (*binaryClassGlIsProgramPipeline) Schema() *schema.Entity { return schemaGlIsProgramPipeline }
 
-var schemaGlIsProgramPipeline = &schema.Class{
+var schemaGlIsProgramPipeline = &schema.Entity{
 	TypeID:  binaryIDGlIsProgramPipeline,
 	Package: "gles",
 	Name:    "GlIsProgramPipeline",
@@ -26554,9 +26554,9 @@ func (*binaryClassGlIsProgramPipelineEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlIsProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgramPipelineEXT(d, obj.(*GlIsProgramPipelineEXT))
 }
-func (*binaryClassGlIsProgramPipelineEXT) Schema() *schema.Class { return schemaGlIsProgramPipelineEXT }
+func (*binaryClassGlIsProgramPipelineEXT) Schema() *schema.Entity { return schemaGlIsProgramPipelineEXT }
 
-var schemaGlIsProgramPipelineEXT = &schema.Class{
+var schemaGlIsProgramPipelineEXT = &schema.Entity{
 	TypeID:  binaryIDGlIsProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlIsProgramPipelineEXT",
@@ -26595,9 +26595,9 @@ func (*binaryClassGlIsQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsQuery(d, obj.(*GlIsQuery))
 }
-func (*binaryClassGlIsQuery) Schema() *schema.Class { return schemaGlIsQuery }
+func (*binaryClassGlIsQuery) Schema() *schema.Entity { return schemaGlIsQuery }
 
-var schemaGlIsQuery = &schema.Class{
+var schemaGlIsQuery = &schema.Entity{
 	TypeID:  binaryIDGlIsQuery,
 	Package: "gles",
 	Name:    "GlIsQuery",
@@ -26636,9 +26636,9 @@ func (*binaryClassGlIsQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsQueryEXT(d, obj.(*GlIsQueryEXT))
 }
-func (*binaryClassGlIsQueryEXT) Schema() *schema.Class { return schemaGlIsQueryEXT }
+func (*binaryClassGlIsQueryEXT) Schema() *schema.Entity { return schemaGlIsQueryEXT }
 
-var schemaGlIsQueryEXT = &schema.Class{
+var schemaGlIsQueryEXT = &schema.Entity{
 	TypeID:  binaryIDGlIsQueryEXT,
 	Package: "gles",
 	Name:    "GlIsQueryEXT",
@@ -26677,9 +26677,9 @@ func (*binaryClassGlIsRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsRenderbuffer(d, obj.(*GlIsRenderbuffer))
 }
-func (*binaryClassGlIsRenderbuffer) Schema() *schema.Class { return schemaGlIsRenderbuffer }
+func (*binaryClassGlIsRenderbuffer) Schema() *schema.Entity { return schemaGlIsRenderbuffer }
 
-var schemaGlIsRenderbuffer = &schema.Class{
+var schemaGlIsRenderbuffer = &schema.Entity{
 	TypeID:  binaryIDGlIsRenderbuffer,
 	Package: "gles",
 	Name:    "GlIsRenderbuffer",
@@ -26718,9 +26718,9 @@ func (*binaryClassGlIsSampler) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSampler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSampler(d, obj.(*GlIsSampler))
 }
-func (*binaryClassGlIsSampler) Schema() *schema.Class { return schemaGlIsSampler }
+func (*binaryClassGlIsSampler) Schema() *schema.Entity { return schemaGlIsSampler }
 
-var schemaGlIsSampler = &schema.Class{
+var schemaGlIsSampler = &schema.Entity{
 	TypeID:  binaryIDGlIsSampler,
 	Package: "gles",
 	Name:    "GlIsSampler",
@@ -26759,9 +26759,9 @@ func (*binaryClassGlIsShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsShader(d, obj.(*GlIsShader))
 }
-func (*binaryClassGlIsShader) Schema() *schema.Class { return schemaGlIsShader }
+func (*binaryClassGlIsShader) Schema() *schema.Entity { return schemaGlIsShader }
 
-var schemaGlIsShader = &schema.Class{
+var schemaGlIsShader = &schema.Entity{
 	TypeID:  binaryIDGlIsShader,
 	Package: "gles",
 	Name:    "GlIsShader",
@@ -26800,9 +26800,9 @@ func (*binaryClassGlIsSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSync(d, obj.(*GlIsSync))
 }
-func (*binaryClassGlIsSync) Schema() *schema.Class { return schemaGlIsSync }
+func (*binaryClassGlIsSync) Schema() *schema.Entity { return schemaGlIsSync }
 
-var schemaGlIsSync = &schema.Class{
+var schemaGlIsSync = &schema.Entity{
 	TypeID:  binaryIDGlIsSync,
 	Package: "gles",
 	Name:    "GlIsSync",
@@ -26841,9 +26841,9 @@ func (*binaryClassGlIsSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSyncAPPLE(d, obj.(*GlIsSyncAPPLE))
 }
-func (*binaryClassGlIsSyncAPPLE) Schema() *schema.Class { return schemaGlIsSyncAPPLE }
+func (*binaryClassGlIsSyncAPPLE) Schema() *schema.Entity { return schemaGlIsSyncAPPLE }
 
-var schemaGlIsSyncAPPLE = &schema.Class{
+var schemaGlIsSyncAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlIsSyncAPPLE,
 	Package: "gles",
 	Name:    "GlIsSyncAPPLE",
@@ -26882,9 +26882,9 @@ func (*binaryClassGlIsTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTexture(d, obj.(*GlIsTexture))
 }
-func (*binaryClassGlIsTexture) Schema() *schema.Class { return schemaGlIsTexture }
+func (*binaryClassGlIsTexture) Schema() *schema.Entity { return schemaGlIsTexture }
 
-var schemaGlIsTexture = &schema.Class{
+var schemaGlIsTexture = &schema.Entity{
 	TypeID:  binaryIDGlIsTexture,
 	Package: "gles",
 	Name:    "GlIsTexture",
@@ -26927,11 +26927,11 @@ func (*binaryClassGlIsTextureHandleResidentNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlIsTextureHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTextureHandleResidentNV(d, obj.(*GlIsTextureHandleResidentNV))
 }
-func (*binaryClassGlIsTextureHandleResidentNV) Schema() *schema.Class {
+func (*binaryClassGlIsTextureHandleResidentNV) Schema() *schema.Entity {
 	return schemaGlIsTextureHandleResidentNV
 }
 
-var schemaGlIsTextureHandleResidentNV = &schema.Class{
+var schemaGlIsTextureHandleResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlIsTextureHandleResidentNV,
 	Package: "gles",
 	Name:    "GlIsTextureHandleResidentNV",
@@ -26970,9 +26970,9 @@ func (*binaryClassGlIsTransformFeedback) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlIsTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTransformFeedback(d, obj.(*GlIsTransformFeedback))
 }
-func (*binaryClassGlIsTransformFeedback) Schema() *schema.Class { return schemaGlIsTransformFeedback }
+func (*binaryClassGlIsTransformFeedback) Schema() *schema.Entity { return schemaGlIsTransformFeedback }
 
-var schemaGlIsTransformFeedback = &schema.Class{
+var schemaGlIsTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlIsTransformFeedback,
 	Package: "gles",
 	Name:    "GlIsTransformFeedback",
@@ -27011,9 +27011,9 @@ func (*binaryClassGlIsVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsVertexArray(d, obj.(*GlIsVertexArray))
 }
-func (*binaryClassGlIsVertexArray) Schema() *schema.Class { return schemaGlIsVertexArray }
+func (*binaryClassGlIsVertexArray) Schema() *schema.Entity { return schemaGlIsVertexArray }
 
-var schemaGlIsVertexArray = &schema.Class{
+var schemaGlIsVertexArray = &schema.Entity{
 	TypeID:  binaryIDGlIsVertexArray,
 	Package: "gles",
 	Name:    "GlIsVertexArray",
@@ -27052,9 +27052,9 @@ func (*binaryClassGlIsVertexArrayOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsVertexArrayOES(d, obj.(*GlIsVertexArrayOES))
 }
-func (*binaryClassGlIsVertexArrayOES) Schema() *schema.Class { return schemaGlIsVertexArrayOES }
+func (*binaryClassGlIsVertexArrayOES) Schema() *schema.Entity { return schemaGlIsVertexArrayOES }
 
-var schemaGlIsVertexArrayOES = &schema.Class{
+var schemaGlIsVertexArrayOES = &schema.Entity{
 	TypeID:  binaryIDGlIsVertexArrayOES,
 	Package: "gles",
 	Name:    "GlIsVertexArrayOES",
@@ -27097,9 +27097,9 @@ func (*binaryClassGlLabelObjectEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLabelObjectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLabelObjectEXT(d, obj.(*GlLabelObjectEXT))
 }
-func (*binaryClassGlLabelObjectEXT) Schema() *schema.Class { return schemaGlLabelObjectEXT }
+func (*binaryClassGlLabelObjectEXT) Schema() *schema.Entity { return schemaGlLabelObjectEXT }
 
-var schemaGlLabelObjectEXT = &schema.Class{
+var schemaGlLabelObjectEXT = &schema.Entity{
 	TypeID:  binaryIDGlLabelObjectEXT,
 	Package: "gles",
 	Name:    "GlLabelObjectEXT",
@@ -27138,9 +27138,9 @@ func (*binaryClassGlLineWidth) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLineWidth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLineWidth(d, obj.(*GlLineWidth))
 }
-func (*binaryClassGlLineWidth) Schema() *schema.Class { return schemaGlLineWidth }
+func (*binaryClassGlLineWidth) Schema() *schema.Entity { return schemaGlLineWidth }
 
-var schemaGlLineWidth = &schema.Class{
+var schemaGlLineWidth = &schema.Entity{
 	TypeID:  binaryIDGlLineWidth,
 	Package: "gles",
 	Name:    "GlLineWidth",
@@ -27176,9 +27176,9 @@ func (*binaryClassGlLinkProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLinkProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLinkProgram(d, obj.(*GlLinkProgram))
 }
-func (*binaryClassGlLinkProgram) Schema() *schema.Class { return schemaGlLinkProgram }
+func (*binaryClassGlLinkProgram) Schema() *schema.Entity { return schemaGlLinkProgram }
 
-var schemaGlLinkProgram = &schema.Class{
+var schemaGlLinkProgram = &schema.Entity{
 	TypeID:  binaryIDGlLinkProgram,
 	Package: "gles",
 	Name:    "GlLinkProgram",
@@ -27218,11 +27218,11 @@ func (*binaryClassGlMakeImageHandleNonResidentNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlMakeImageHandleNonResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeImageHandleNonResidentNV(d, obj.(*GlMakeImageHandleNonResidentNV))
 }
-func (*binaryClassGlMakeImageHandleNonResidentNV) Schema() *schema.Class {
+func (*binaryClassGlMakeImageHandleNonResidentNV) Schema() *schema.Entity {
 	return schemaGlMakeImageHandleNonResidentNV
 }
 
-var schemaGlMakeImageHandleNonResidentNV = &schema.Class{
+var schemaGlMakeImageHandleNonResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlMakeImageHandleNonResidentNV,
 	Package: "gles",
 	Name:    "GlMakeImageHandleNonResidentNV",
@@ -27264,11 +27264,11 @@ func (*binaryClassGlMakeImageHandleResidentNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMakeImageHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeImageHandleResidentNV(d, obj.(*GlMakeImageHandleResidentNV))
 }
-func (*binaryClassGlMakeImageHandleResidentNV) Schema() *schema.Class {
+func (*binaryClassGlMakeImageHandleResidentNV) Schema() *schema.Entity {
 	return schemaGlMakeImageHandleResidentNV
 }
 
-var schemaGlMakeImageHandleResidentNV = &schema.Class{
+var schemaGlMakeImageHandleResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlMakeImageHandleResidentNV,
 	Package: "gles",
 	Name:    "GlMakeImageHandleResidentNV",
@@ -27309,11 +27309,11 @@ func (*binaryClassGlMakeTextureHandleNonResidentNV) Decode(d binary.Decoder) bin
 func (*binaryClassGlMakeTextureHandleNonResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeTextureHandleNonResidentNV(d, obj.(*GlMakeTextureHandleNonResidentNV))
 }
-func (*binaryClassGlMakeTextureHandleNonResidentNV) Schema() *schema.Class {
+func (*binaryClassGlMakeTextureHandleNonResidentNV) Schema() *schema.Entity {
 	return schemaGlMakeTextureHandleNonResidentNV
 }
 
-var schemaGlMakeTextureHandleNonResidentNV = &schema.Class{
+var schemaGlMakeTextureHandleNonResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlMakeTextureHandleNonResidentNV,
 	Package: "gles",
 	Name:    "GlMakeTextureHandleNonResidentNV",
@@ -27353,11 +27353,11 @@ func (*binaryClassGlMakeTextureHandleResidentNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlMakeTextureHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeTextureHandleResidentNV(d, obj.(*GlMakeTextureHandleResidentNV))
 }
-func (*binaryClassGlMakeTextureHandleResidentNV) Schema() *schema.Class {
+func (*binaryClassGlMakeTextureHandleResidentNV) Schema() *schema.Entity {
 	return schemaGlMakeTextureHandleResidentNV
 }
 
-var schemaGlMakeTextureHandleResidentNV = &schema.Class{
+var schemaGlMakeTextureHandleResidentNV = &schema.Entity{
 	TypeID:  binaryIDGlMakeTextureHandleResidentNV,
 	Package: "gles",
 	Name:    "GlMakeTextureHandleResidentNV",
@@ -27397,9 +27397,9 @@ func (*binaryClassGlMapBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferOES(d, obj.(*GlMapBufferOES))
 }
-func (*binaryClassGlMapBufferOES) Schema() *schema.Class { return schemaGlMapBufferOES }
+func (*binaryClassGlMapBufferOES) Schema() *schema.Entity { return schemaGlMapBufferOES }
 
-var schemaGlMapBufferOES = &schema.Class{
+var schemaGlMapBufferOES = &schema.Entity{
 	TypeID:  binaryIDGlMapBufferOES,
 	Package: "gles",
 	Name:    "GlMapBufferOES",
@@ -27445,9 +27445,9 @@ func (*binaryClassGlMapBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferRange(d, obj.(*GlMapBufferRange))
 }
-func (*binaryClassGlMapBufferRange) Schema() *schema.Class { return schemaGlMapBufferRange }
+func (*binaryClassGlMapBufferRange) Schema() *schema.Entity { return schemaGlMapBufferRange }
 
-var schemaGlMapBufferRange = &schema.Class{
+var schemaGlMapBufferRange = &schema.Entity{
 	TypeID:  binaryIDGlMapBufferRange,
 	Package: "gles",
 	Name:    "GlMapBufferRange",
@@ -27495,9 +27495,9 @@ func (*binaryClassGlMapBufferRangeEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferRangeEXT(d, obj.(*GlMapBufferRangeEXT))
 }
-func (*binaryClassGlMapBufferRangeEXT) Schema() *schema.Class { return schemaGlMapBufferRangeEXT }
+func (*binaryClassGlMapBufferRangeEXT) Schema() *schema.Entity { return schemaGlMapBufferRangeEXT }
 
-var schemaGlMapBufferRangeEXT = &schema.Class{
+var schemaGlMapBufferRangeEXT = &schema.Entity{
 	TypeID:  binaryIDGlMapBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlMapBufferRangeEXT",
@@ -27539,9 +27539,9 @@ func (*binaryClassGlMatrixLoad3x2fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixLoad3x2fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoad3x2fNV(d, obj.(*GlMatrixLoad3x2fNV))
 }
-func (*binaryClassGlMatrixLoad3x2fNV) Schema() *schema.Class { return schemaGlMatrixLoad3x2fNV }
+func (*binaryClassGlMatrixLoad3x2fNV) Schema() *schema.Entity { return schemaGlMatrixLoad3x2fNV }
 
-var schemaGlMatrixLoad3x2fNV = &schema.Class{
+var schemaGlMatrixLoad3x2fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixLoad3x2fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoad3x2fNV",
@@ -27580,9 +27580,9 @@ func (*binaryClassGlMatrixLoad3x3fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixLoad3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoad3x3fNV(d, obj.(*GlMatrixLoad3x3fNV))
 }
-func (*binaryClassGlMatrixLoad3x3fNV) Schema() *schema.Class { return schemaGlMatrixLoad3x3fNV }
+func (*binaryClassGlMatrixLoad3x3fNV) Schema() *schema.Entity { return schemaGlMatrixLoad3x3fNV }
 
-var schemaGlMatrixLoad3x3fNV = &schema.Class{
+var schemaGlMatrixLoad3x3fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixLoad3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoad3x3fNV",
@@ -27625,11 +27625,11 @@ func (*binaryClassGlMatrixLoadTranspose3x3fNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMatrixLoadTranspose3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoadTranspose3x3fNV(d, obj.(*GlMatrixLoadTranspose3x3fNV))
 }
-func (*binaryClassGlMatrixLoadTranspose3x3fNV) Schema() *schema.Class {
+func (*binaryClassGlMatrixLoadTranspose3x3fNV) Schema() *schema.Entity {
 	return schemaGlMatrixLoadTranspose3x3fNV
 }
 
-var schemaGlMatrixLoadTranspose3x3fNV = &schema.Class{
+var schemaGlMatrixLoadTranspose3x3fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixLoadTranspose3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoadTranspose3x3fNV",
@@ -27668,9 +27668,9 @@ func (*binaryClassGlMatrixMult3x2fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixMult3x2fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMult3x2fNV(d, obj.(*GlMatrixMult3x2fNV))
 }
-func (*binaryClassGlMatrixMult3x2fNV) Schema() *schema.Class { return schemaGlMatrixMult3x2fNV }
+func (*binaryClassGlMatrixMult3x2fNV) Schema() *schema.Entity { return schemaGlMatrixMult3x2fNV }
 
-var schemaGlMatrixMult3x2fNV = &schema.Class{
+var schemaGlMatrixMult3x2fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixMult3x2fNV,
 	Package: "gles",
 	Name:    "GlMatrixMult3x2fNV",
@@ -27709,9 +27709,9 @@ func (*binaryClassGlMatrixMult3x3fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixMult3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMult3x3fNV(d, obj.(*GlMatrixMult3x3fNV))
 }
-func (*binaryClassGlMatrixMult3x3fNV) Schema() *schema.Class { return schemaGlMatrixMult3x3fNV }
+func (*binaryClassGlMatrixMult3x3fNV) Schema() *schema.Entity { return schemaGlMatrixMult3x3fNV }
 
-var schemaGlMatrixMult3x3fNV = &schema.Class{
+var schemaGlMatrixMult3x3fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixMult3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixMult3x3fNV",
@@ -27754,11 +27754,11 @@ func (*binaryClassGlMatrixMultTranspose3x3fNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMatrixMultTranspose3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMultTranspose3x3fNV(d, obj.(*GlMatrixMultTranspose3x3fNV))
 }
-func (*binaryClassGlMatrixMultTranspose3x3fNV) Schema() *schema.Class {
+func (*binaryClassGlMatrixMultTranspose3x3fNV) Schema() *schema.Entity {
 	return schemaGlMatrixMultTranspose3x3fNV
 }
 
-var schemaGlMatrixMultTranspose3x3fNV = &schema.Class{
+var schemaGlMatrixMultTranspose3x3fNV = &schema.Entity{
 	TypeID:  binaryIDGlMatrixMultTranspose3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixMultTranspose3x3fNV",
@@ -27795,9 +27795,9 @@ func (*binaryClassGlMemoryBarrier) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMemoryBarrier) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMemoryBarrier(d, obj.(*GlMemoryBarrier))
 }
-func (*binaryClassGlMemoryBarrier) Schema() *schema.Class { return schemaGlMemoryBarrier }
+func (*binaryClassGlMemoryBarrier) Schema() *schema.Entity { return schemaGlMemoryBarrier }
 
-var schemaGlMemoryBarrier = &schema.Class{
+var schemaGlMemoryBarrier = &schema.Entity{
 	TypeID:  binaryIDGlMemoryBarrier,
 	Package: "gles",
 	Name:    "GlMemoryBarrier",
@@ -27833,11 +27833,11 @@ func (*binaryClassGlMemoryBarrierByRegion) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlMemoryBarrierByRegion) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMemoryBarrierByRegion(d, obj.(*GlMemoryBarrierByRegion))
 }
-func (*binaryClassGlMemoryBarrierByRegion) Schema() *schema.Class {
+func (*binaryClassGlMemoryBarrierByRegion) Schema() *schema.Entity {
 	return schemaGlMemoryBarrierByRegion
 }
 
-var schemaGlMemoryBarrierByRegion = &schema.Class{
+var schemaGlMemoryBarrierByRegion = &schema.Entity{
 	TypeID:  binaryIDGlMemoryBarrierByRegion,
 	Package: "gles",
 	Name:    "GlMemoryBarrierByRegion",
@@ -27873,9 +27873,9 @@ func (*binaryClassGlMinSampleShading) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMinSampleShading) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMinSampleShading(d, obj.(*GlMinSampleShading))
 }
-func (*binaryClassGlMinSampleShading) Schema() *schema.Class { return schemaGlMinSampleShading }
+func (*binaryClassGlMinSampleShading) Schema() *schema.Entity { return schemaGlMinSampleShading }
 
-var schemaGlMinSampleShading = &schema.Class{
+var schemaGlMinSampleShading = &schema.Entity{
 	TypeID:  binaryIDGlMinSampleShading,
 	Package: "gles",
 	Name:    "GlMinSampleShading",
@@ -27911,9 +27911,9 @@ func (*binaryClassGlMinSampleShadingOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlMinSampleShadingOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMinSampleShadingOES(d, obj.(*GlMinSampleShadingOES))
 }
-func (*binaryClassGlMinSampleShadingOES) Schema() *schema.Class { return schemaGlMinSampleShadingOES }
+func (*binaryClassGlMinSampleShadingOES) Schema() *schema.Entity { return schemaGlMinSampleShadingOES }
 
-var schemaGlMinSampleShadingOES = &schema.Class{
+var schemaGlMinSampleShadingOES = &schema.Entity{
 	TypeID:  binaryIDGlMinSampleShadingOES,
 	Package: "gles",
 	Name:    "GlMinSampleShadingOES",
@@ -27955,9 +27955,9 @@ func (*binaryClassGlMultiDrawArraysEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMultiDrawArraysEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawArraysEXT(d, obj.(*GlMultiDrawArraysEXT))
 }
-func (*binaryClassGlMultiDrawArraysEXT) Schema() *schema.Class { return schemaGlMultiDrawArraysEXT }
+func (*binaryClassGlMultiDrawArraysEXT) Schema() *schema.Entity { return schemaGlMultiDrawArraysEXT }
 
-var schemaGlMultiDrawArraysEXT = &schema.Class{
+var schemaGlMultiDrawArraysEXT = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawArraysEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawArraysEXT",
@@ -28006,11 +28006,11 @@ func (*binaryClassGlMultiDrawArraysIndirectEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlMultiDrawArraysIndirectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawArraysIndirectEXT(d, obj.(*GlMultiDrawArraysIndirectEXT))
 }
-func (*binaryClassGlMultiDrawArraysIndirectEXT) Schema() *schema.Class {
+func (*binaryClassGlMultiDrawArraysIndirectEXT) Schema() *schema.Entity {
 	return schemaGlMultiDrawArraysIndirectEXT
 }
 
-var schemaGlMultiDrawArraysIndirectEXT = &schema.Class{
+var schemaGlMultiDrawArraysIndirectEXT = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawArraysIndirectEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawArraysIndirectEXT",
@@ -28047,9 +28047,9 @@ func (*binaryClassVoidᶜᵖᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖᶜᵖ(d, obj.(*Voidᶜᵖᶜᵖ))
 }
-func (*binaryClassVoidᶜᵖᶜᵖ) Schema() *schema.Class { return schemaVoidᶜᵖᶜᵖ }
+func (*binaryClassVoidᶜᵖᶜᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖᶜᵖ }
 
-var schemaVoidᶜᵖᶜᵖ = &schema.Class{
+var schemaVoidᶜᵖᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᶜᵖᶜᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖᶜᵖ",
@@ -28098,11 +28098,11 @@ func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlMultiDrawElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsBaseVertexEXT(d, obj.(*GlMultiDrawElementsBaseVertexEXT))
 }
-func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Schema() *schema.Class {
+func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Schema() *schema.Entity {
 	return schemaGlMultiDrawElementsBaseVertexEXT
 }
 
-var schemaGlMultiDrawElementsBaseVertexEXT = &schema.Class{
+var schemaGlMultiDrawElementsBaseVertexEXT = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexEXT",
@@ -28157,11 +28157,11 @@ func (*binaryClassGlMultiDrawElementsBaseVertexOES) Decode(d binary.Decoder) bin
 func (*binaryClassGlMultiDrawElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsBaseVertexOES(d, obj.(*GlMultiDrawElementsBaseVertexOES))
 }
-func (*binaryClassGlMultiDrawElementsBaseVertexOES) Schema() *schema.Class {
+func (*binaryClassGlMultiDrawElementsBaseVertexOES) Schema() *schema.Entity {
 	return schemaGlMultiDrawElementsBaseVertexOES
 }
 
-var schemaGlMultiDrawElementsBaseVertexOES = &schema.Class{
+var schemaGlMultiDrawElementsBaseVertexOES = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexOES",
@@ -28210,9 +28210,9 @@ func (*binaryClassGlMultiDrawElementsEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlMultiDrawElementsEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsEXT(d, obj.(*GlMultiDrawElementsEXT))
 }
-func (*binaryClassGlMultiDrawElementsEXT) Schema() *schema.Class { return schemaGlMultiDrawElementsEXT }
+func (*binaryClassGlMultiDrawElementsEXT) Schema() *schema.Entity { return schemaGlMultiDrawElementsEXT }
 
-var schemaGlMultiDrawElementsEXT = &schema.Class{
+var schemaGlMultiDrawElementsEXT = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsEXT",
@@ -28264,11 +28264,11 @@ func (*binaryClassGlMultiDrawElementsIndirectEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlMultiDrawElementsIndirectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsIndirectEXT(d, obj.(*GlMultiDrawElementsIndirectEXT))
 }
-func (*binaryClassGlMultiDrawElementsIndirectEXT) Schema() *schema.Class {
+func (*binaryClassGlMultiDrawElementsIndirectEXT) Schema() *schema.Entity {
 	return schemaGlMultiDrawElementsIndirectEXT
 }
 
-var schemaGlMultiDrawElementsIndirectEXT = &schema.Class{
+var schemaGlMultiDrawElementsIndirectEXT = &schema.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsIndirectEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsIndirectEXT",
@@ -28318,11 +28318,11 @@ func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Decode(d binary.Decoder
 func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlNamedFramebufferSampleLocationsfvNV(d, obj.(*GlNamedFramebufferSampleLocationsfvNV))
 }
-func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Schema() *schema.Class {
+func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Schema() *schema.Entity {
 	return schemaGlNamedFramebufferSampleLocationsfvNV
 }
 
-var schemaGlNamedFramebufferSampleLocationsfvNV = &schema.Class{
+var schemaGlNamedFramebufferSampleLocationsfvNV = &schema.Entity{
 	TypeID:  binaryIDGlNamedFramebufferSampleLocationsfvNV,
 	Package: "gles",
 	Name:    "GlNamedFramebufferSampleLocationsfvNV",
@@ -28367,9 +28367,9 @@ func (*binaryClassGlObjectLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectLabel(d, obj.(*GlObjectLabel))
 }
-func (*binaryClassGlObjectLabel) Schema() *schema.Class { return schemaGlObjectLabel }
+func (*binaryClassGlObjectLabel) Schema() *schema.Entity { return schemaGlObjectLabel }
 
-var schemaGlObjectLabel = &schema.Class{
+var schemaGlObjectLabel = &schema.Entity{
 	TypeID:  binaryIDGlObjectLabel,
 	Package: "gles",
 	Name:    "GlObjectLabel",
@@ -28414,9 +28414,9 @@ func (*binaryClassGlObjectLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectLabelKHR(d, obj.(*GlObjectLabelKHR))
 }
-func (*binaryClassGlObjectLabelKHR) Schema() *schema.Class { return schemaGlObjectLabelKHR }
+func (*binaryClassGlObjectLabelKHR) Schema() *schema.Entity { return schemaGlObjectLabelKHR }
 
-var schemaGlObjectLabelKHR = &schema.Class{
+var schemaGlObjectLabelKHR = &schema.Entity{
 	TypeID:  binaryIDGlObjectLabelKHR,
 	Package: "gles",
 	Name:    "GlObjectLabelKHR",
@@ -28459,9 +28459,9 @@ func (*binaryClassGlObjectPtrLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectPtrLabel(d, obj.(*GlObjectPtrLabel))
 }
-func (*binaryClassGlObjectPtrLabel) Schema() *schema.Class { return schemaGlObjectPtrLabel }
+func (*binaryClassGlObjectPtrLabel) Schema() *schema.Entity { return schemaGlObjectPtrLabel }
 
-var schemaGlObjectPtrLabel = &schema.Class{
+var schemaGlObjectPtrLabel = &schema.Entity{
 	TypeID:  binaryIDGlObjectPtrLabel,
 	Package: "gles",
 	Name:    "GlObjectPtrLabel",
@@ -28503,9 +28503,9 @@ func (*binaryClassGlObjectPtrLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectPtrLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectPtrLabelKHR(d, obj.(*GlObjectPtrLabelKHR))
 }
-func (*binaryClassGlObjectPtrLabelKHR) Schema() *schema.Class { return schemaGlObjectPtrLabelKHR }
+func (*binaryClassGlObjectPtrLabelKHR) Schema() *schema.Entity { return schemaGlObjectPtrLabelKHR }
 
-var schemaGlObjectPtrLabelKHR = &schema.Class{
+var schemaGlObjectPtrLabelKHR = &schema.Entity{
 	TypeID:  binaryIDGlObjectPtrLabelKHR,
 	Package: "gles",
 	Name:    "GlObjectPtrLabelKHR",
@@ -28545,9 +28545,9 @@ func (*binaryClassGlPatchParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteri(d, obj.(*GlPatchParameteri))
 }
-func (*binaryClassGlPatchParameteri) Schema() *schema.Class { return schemaGlPatchParameteri }
+func (*binaryClassGlPatchParameteri) Schema() *schema.Entity { return schemaGlPatchParameteri }
 
-var schemaGlPatchParameteri = &schema.Class{
+var schemaGlPatchParameteri = &schema.Entity{
 	TypeID:  binaryIDGlPatchParameteri,
 	Package: "gles",
 	Name:    "GlPatchParameteri",
@@ -28586,9 +28586,9 @@ func (*binaryClassGlPatchParameteriEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteriEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteriEXT(d, obj.(*GlPatchParameteriEXT))
 }
-func (*binaryClassGlPatchParameteriEXT) Schema() *schema.Class { return schemaGlPatchParameteriEXT }
+func (*binaryClassGlPatchParameteriEXT) Schema() *schema.Entity { return schemaGlPatchParameteriEXT }
 
-var schemaGlPatchParameteriEXT = &schema.Class{
+var schemaGlPatchParameteriEXT = &schema.Entity{
 	TypeID:  binaryIDGlPatchParameteriEXT,
 	Package: "gles",
 	Name:    "GlPatchParameteriEXT",
@@ -28627,9 +28627,9 @@ func (*binaryClassGlPatchParameteriOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteriOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteriOES(d, obj.(*GlPatchParameteriOES))
 }
-func (*binaryClassGlPatchParameteriOES) Schema() *schema.Class { return schemaGlPatchParameteriOES }
+func (*binaryClassGlPatchParameteriOES) Schema() *schema.Entity { return schemaGlPatchParameteriOES }
 
-var schemaGlPatchParameteriOES = &schema.Class{
+var schemaGlPatchParameteriOES = &schema.Entity{
 	TypeID:  binaryIDGlPatchParameteriOES,
 	Package: "gles",
 	Name:    "GlPatchParameteriOES",
@@ -28676,9 +28676,9 @@ func (*binaryClassGlPathCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCommandsNV(d, obj.(*GlPathCommandsNV))
 }
-func (*binaryClassGlPathCommandsNV) Schema() *schema.Class { return schemaGlPathCommandsNV }
+func (*binaryClassGlPathCommandsNV) Schema() *schema.Entity { return schemaGlPathCommandsNV }
 
-var schemaGlPathCommandsNV = &schema.Class{
+var schemaGlPathCommandsNV = &schema.Entity{
 	TypeID:  binaryIDGlPathCommandsNV,
 	Package: "gles",
 	Name:    "GlPathCommandsNV",
@@ -28725,9 +28725,9 @@ func (*binaryClassGlPathCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCoordsNV(d, obj.(*GlPathCoordsNV))
 }
-func (*binaryClassGlPathCoordsNV) Schema() *schema.Class { return schemaGlPathCoordsNV }
+func (*binaryClassGlPathCoordsNV) Schema() *schema.Entity { return schemaGlPathCoordsNV }
 
-var schemaGlPathCoordsNV = &schema.Class{
+var schemaGlPathCoordsNV = &schema.Entity{
 	TypeID:  binaryIDGlPathCoordsNV,
 	Package: "gles",
 	Name:    "GlPathCoordsNV",
@@ -28766,9 +28766,9 @@ func (*binaryClassGlPathCoverDepthFuncNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlPathCoverDepthFuncNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCoverDepthFuncNV(d, obj.(*GlPathCoverDepthFuncNV))
 }
-func (*binaryClassGlPathCoverDepthFuncNV) Schema() *schema.Class { return schemaGlPathCoverDepthFuncNV }
+func (*binaryClassGlPathCoverDepthFuncNV) Schema() *schema.Entity { return schemaGlPathCoverDepthFuncNV }
 
-var schemaGlPathCoverDepthFuncNV = &schema.Class{
+var schemaGlPathCoverDepthFuncNV = &schema.Entity{
 	TypeID:  binaryIDGlPathCoverDepthFuncNV,
 	Package: "gles",
 	Name:    "GlPathCoverDepthFuncNV",
@@ -28808,9 +28808,9 @@ func (*binaryClassGlPathDashArrayNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathDashArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathDashArrayNV(d, obj.(*GlPathDashArrayNV))
 }
-func (*binaryClassGlPathDashArrayNV) Schema() *schema.Class { return schemaGlPathDashArrayNV }
+func (*binaryClassGlPathDashArrayNV) Schema() *schema.Entity { return schemaGlPathDashArrayNV }
 
-var schemaGlPathDashArrayNV = &schema.Class{
+var schemaGlPathDashArrayNV = &schema.Entity{
 	TypeID:  binaryIDGlPathDashArrayNV,
 	Package: "gles",
 	Name:    "GlPathDashArrayNV",
@@ -28864,11 +28864,11 @@ func (*binaryClassGlPathGlyphIndexArrayNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlPathGlyphIndexArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphIndexArrayNV(d, obj.(*GlPathGlyphIndexArrayNV))
 }
-func (*binaryClassGlPathGlyphIndexArrayNV) Schema() *schema.Class {
+func (*binaryClassGlPathGlyphIndexArrayNV) Schema() *schema.Entity {
 	return schemaGlPathGlyphIndexArrayNV
 }
 
-var schemaGlPathGlyphIndexArrayNV = &schema.Class{
+var schemaGlPathGlyphIndexArrayNV = &schema.Entity{
 	TypeID:  binaryIDGlPathGlyphIndexArrayNV,
 	Package: "gles",
 	Name:    "GlPathGlyphIndexArrayNV",
@@ -28924,11 +28924,11 @@ func (*binaryClassGlPathGlyphIndexRangeNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlPathGlyphIndexRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphIndexRangeNV(d, obj.(*GlPathGlyphIndexRangeNV))
 }
-func (*binaryClassGlPathGlyphIndexRangeNV) Schema() *schema.Class {
+func (*binaryClassGlPathGlyphIndexRangeNV) Schema() *schema.Entity {
 	return schemaGlPathGlyphIndexRangeNV
 }
 
-var schemaGlPathGlyphIndexRangeNV = &schema.Class{
+var schemaGlPathGlyphIndexRangeNV = &schema.Entity{
 	TypeID:  binaryIDGlPathGlyphIndexRangeNV,
 	Package: "gles",
 	Name:    "GlPathGlyphIndexRangeNV",
@@ -28986,9 +28986,9 @@ func (*binaryClassGlPathGlyphRangeNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathGlyphRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphRangeNV(d, obj.(*GlPathGlyphRangeNV))
 }
-func (*binaryClassGlPathGlyphRangeNV) Schema() *schema.Class { return schemaGlPathGlyphRangeNV }
+func (*binaryClassGlPathGlyphRangeNV) Schema() *schema.Entity { return schemaGlPathGlyphRangeNV }
 
-var schemaGlPathGlyphRangeNV = &schema.Class{
+var schemaGlPathGlyphRangeNV = &schema.Entity{
 	TypeID:  binaryIDGlPathGlyphRangeNV,
 	Package: "gles",
 	Name:    "GlPathGlyphRangeNV",
@@ -29050,9 +29050,9 @@ func (*binaryClassGlPathGlyphsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathGlyphsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphsNV(d, obj.(*GlPathGlyphsNV))
 }
-func (*binaryClassGlPathGlyphsNV) Schema() *schema.Class { return schemaGlPathGlyphsNV }
+func (*binaryClassGlPathGlyphsNV) Schema() *schema.Entity { return schemaGlPathGlyphsNV }
 
-var schemaGlPathGlyphsNV = &schema.Class{
+var schemaGlPathGlyphsNV = &schema.Entity{
 	TypeID:  binaryIDGlPathGlyphsNV,
 	Package: "gles",
 	Name:    "GlPathGlyphsNV",
@@ -29119,11 +29119,11 @@ func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlPathMemoryGlyphIndexArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathMemoryGlyphIndexArrayNV(d, obj.(*GlPathMemoryGlyphIndexArrayNV))
 }
-func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Schema() *schema.Class {
+func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Schema() *schema.Entity {
 	return schemaGlPathMemoryGlyphIndexArrayNV
 }
 
-var schemaGlPathMemoryGlyphIndexArrayNV = &schema.Class{
+var schemaGlPathMemoryGlyphIndexArrayNV = &schema.Entity{
 	TypeID:  binaryIDGlPathMemoryGlyphIndexArrayNV,
 	Package: "gles",
 	Name:    "GlPathMemoryGlyphIndexArrayNV",
@@ -29172,9 +29172,9 @@ func (*binaryClassGlPathParameterfNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterfNV(d, obj.(*GlPathParameterfNV))
 }
-func (*binaryClassGlPathParameterfNV) Schema() *schema.Class { return schemaGlPathParameterfNV }
+func (*binaryClassGlPathParameterfNV) Schema() *schema.Entity { return schemaGlPathParameterfNV }
 
-var schemaGlPathParameterfNV = &schema.Class{
+var schemaGlPathParameterfNV = &schema.Entity{
 	TypeID:  binaryIDGlPathParameterfNV,
 	Package: "gles",
 	Name:    "GlPathParameterfNV",
@@ -29216,9 +29216,9 @@ func (*binaryClassGlPathParameterfvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterfvNV(d, obj.(*GlPathParameterfvNV))
 }
-func (*binaryClassGlPathParameterfvNV) Schema() *schema.Class { return schemaGlPathParameterfvNV }
+func (*binaryClassGlPathParameterfvNV) Schema() *schema.Entity { return schemaGlPathParameterfvNV }
 
-var schemaGlPathParameterfvNV = &schema.Class{
+var schemaGlPathParameterfvNV = &schema.Entity{
 	TypeID:  binaryIDGlPathParameterfvNV,
 	Package: "gles",
 	Name:    "GlPathParameterfvNV",
@@ -29260,9 +29260,9 @@ func (*binaryClassGlPathParameteriNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameteriNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameteriNV(d, obj.(*GlPathParameteriNV))
 }
-func (*binaryClassGlPathParameteriNV) Schema() *schema.Class { return schemaGlPathParameteriNV }
+func (*binaryClassGlPathParameteriNV) Schema() *schema.Entity { return schemaGlPathParameteriNV }
 
-var schemaGlPathParameteriNV = &schema.Class{
+var schemaGlPathParameteriNV = &schema.Entity{
 	TypeID:  binaryIDGlPathParameteriNV,
 	Package: "gles",
 	Name:    "GlPathParameteriNV",
@@ -29304,9 +29304,9 @@ func (*binaryClassGlPathParameterivNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterivNV(d, obj.(*GlPathParameterivNV))
 }
-func (*binaryClassGlPathParameterivNV) Schema() *schema.Class { return schemaGlPathParameterivNV }
+func (*binaryClassGlPathParameterivNV) Schema() *schema.Entity { return schemaGlPathParameterivNV }
 
-var schemaGlPathParameterivNV = &schema.Class{
+var schemaGlPathParameterivNV = &schema.Entity{
 	TypeID:  binaryIDGlPathParameterivNV,
 	Package: "gles",
 	Name:    "GlPathParameterivNV",
@@ -29350,11 +29350,11 @@ func (*binaryClassGlPathStencilDepthOffsetNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlPathStencilDepthOffsetNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStencilDepthOffsetNV(d, obj.(*GlPathStencilDepthOffsetNV))
 }
-func (*binaryClassGlPathStencilDepthOffsetNV) Schema() *schema.Class {
+func (*binaryClassGlPathStencilDepthOffsetNV) Schema() *schema.Entity {
 	return schemaGlPathStencilDepthOffsetNV
 }
 
-var schemaGlPathStencilDepthOffsetNV = &schema.Class{
+var schemaGlPathStencilDepthOffsetNV = &schema.Entity{
 	TypeID:  binaryIDGlPathStencilDepthOffsetNV,
 	Package: "gles",
 	Name:    "GlPathStencilDepthOffsetNV",
@@ -29395,9 +29395,9 @@ func (*binaryClassGlPathStencilFuncNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathStencilFuncNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStencilFuncNV(d, obj.(*GlPathStencilFuncNV))
 }
-func (*binaryClassGlPathStencilFuncNV) Schema() *schema.Class { return schemaGlPathStencilFuncNV }
+func (*binaryClassGlPathStencilFuncNV) Schema() *schema.Entity { return schemaGlPathStencilFuncNV }
 
-var schemaGlPathStencilFuncNV = &schema.Class{
+var schemaGlPathStencilFuncNV = &schema.Entity{
 	TypeID:  binaryIDGlPathStencilFuncNV,
 	Package: "gles",
 	Name:    "GlPathStencilFuncNV",
@@ -29441,9 +29441,9 @@ func (*binaryClassGlPathStringNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathStringNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStringNV(d, obj.(*GlPathStringNV))
 }
-func (*binaryClassGlPathStringNV) Schema() *schema.Class { return schemaGlPathStringNV }
+func (*binaryClassGlPathStringNV) Schema() *schema.Entity { return schemaGlPathStringNV }
 
-var schemaGlPathStringNV = &schema.Class{
+var schemaGlPathStringNV = &schema.Entity{
 	TypeID:  binaryIDGlPathStringNV,
 	Package: "gles",
 	Name:    "GlPathStringNV",
@@ -29496,9 +29496,9 @@ func (*binaryClassGlPathSubCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathSubCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathSubCommandsNV(d, obj.(*GlPathSubCommandsNV))
 }
-func (*binaryClassGlPathSubCommandsNV) Schema() *schema.Class { return schemaGlPathSubCommandsNV }
+func (*binaryClassGlPathSubCommandsNV) Schema() *schema.Entity { return schemaGlPathSubCommandsNV }
 
-var schemaGlPathSubCommandsNV = &schema.Class{
+var schemaGlPathSubCommandsNV = &schema.Entity{
 	TypeID:  binaryIDGlPathSubCommandsNV,
 	Package: "gles",
 	Name:    "GlPathSubCommandsNV",
@@ -29549,9 +29549,9 @@ func (*binaryClassGlPathSubCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathSubCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathSubCoordsNV(d, obj.(*GlPathSubCoordsNV))
 }
-func (*binaryClassGlPathSubCoordsNV) Schema() *schema.Class { return schemaGlPathSubCoordsNV }
+func (*binaryClassGlPathSubCoordsNV) Schema() *schema.Entity { return schemaGlPathSubCoordsNV }
 
-var schemaGlPathSubCoordsNV = &schema.Class{
+var schemaGlPathSubCoordsNV = &schema.Entity{
 	TypeID:  binaryIDGlPathSubCoordsNV,
 	Package: "gles",
 	Name:    "GlPathSubCoordsNV",
@@ -29589,11 +29589,11 @@ func (*binaryClassGlPauseTransformFeedback) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlPauseTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPauseTransformFeedback(d, obj.(*GlPauseTransformFeedback))
 }
-func (*binaryClassGlPauseTransformFeedback) Schema() *schema.Class {
+func (*binaryClassGlPauseTransformFeedback) Schema() *schema.Entity {
 	return schemaGlPauseTransformFeedback
 }
 
-var schemaGlPauseTransformFeedback = &schema.Class{
+var schemaGlPauseTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlPauseTransformFeedback,
 	Package: "gles",
 	Name:    "GlPauseTransformFeedback",
@@ -29630,9 +29630,9 @@ func (*binaryClassGlPixelStorei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPixelStorei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPixelStorei(d, obj.(*GlPixelStorei))
 }
-func (*binaryClassGlPixelStorei) Schema() *schema.Class { return schemaGlPixelStorei }
+func (*binaryClassGlPixelStorei) Schema() *schema.Entity { return schemaGlPixelStorei }
 
-var schemaGlPixelStorei = &schema.Class{
+var schemaGlPixelStorei = &schema.Entity{
 	TypeID:  binaryIDGlPixelStorei,
 	Package: "gles",
 	Name:    "GlPixelStorei",
@@ -29685,9 +29685,9 @@ func (*binaryClassGlPointAlongPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPointAlongPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPointAlongPathNV(d, obj.(*GlPointAlongPathNV))
 }
-func (*binaryClassGlPointAlongPathNV) Schema() *schema.Class { return schemaGlPointAlongPathNV }
+func (*binaryClassGlPointAlongPathNV) Schema() *schema.Entity { return schemaGlPointAlongPathNV }
 
-var schemaGlPointAlongPathNV = &schema.Class{
+var schemaGlPointAlongPathNV = &schema.Entity{
 	TypeID:  binaryIDGlPointAlongPathNV,
 	Package: "gles",
 	Name:    "GlPointAlongPathNV",
@@ -29733,9 +29733,9 @@ func (*binaryClassGlPolygonModeNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPolygonModeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPolygonModeNV(d, obj.(*GlPolygonModeNV))
 }
-func (*binaryClassGlPolygonModeNV) Schema() *schema.Class { return schemaGlPolygonModeNV }
+func (*binaryClassGlPolygonModeNV) Schema() *schema.Entity { return schemaGlPolygonModeNV }
 
-var schemaGlPolygonModeNV = &schema.Class{
+var schemaGlPolygonModeNV = &schema.Entity{
 	TypeID:  binaryIDGlPolygonModeNV,
 	Package: "gles",
 	Name:    "GlPolygonModeNV",
@@ -29774,9 +29774,9 @@ func (*binaryClassGlPolygonOffset) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPolygonOffset) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPolygonOffset(d, obj.(*GlPolygonOffset))
 }
-func (*binaryClassGlPolygonOffset) Schema() *schema.Class { return schemaGlPolygonOffset }
+func (*binaryClassGlPolygonOffset) Schema() *schema.Entity { return schemaGlPolygonOffset }
 
-var schemaGlPolygonOffset = &schema.Class{
+var schemaGlPolygonOffset = &schema.Entity{
 	TypeID:  binaryIDGlPolygonOffset,
 	Package: "gles",
 	Name:    "GlPolygonOffset",
@@ -29811,9 +29811,9 @@ func (*binaryClassGlPopDebugGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopDebugGroup(d, obj.(*GlPopDebugGroup))
 }
-func (*binaryClassGlPopDebugGroup) Schema() *schema.Class { return schemaGlPopDebugGroup }
+func (*binaryClassGlPopDebugGroup) Schema() *schema.Entity { return schemaGlPopDebugGroup }
 
-var schemaGlPopDebugGroup = &schema.Class{
+var schemaGlPopDebugGroup = &schema.Entity{
 	TypeID:  binaryIDGlPopDebugGroup,
 	Package: "gles",
 	Name:    "GlPopDebugGroup",
@@ -29846,9 +29846,9 @@ func (*binaryClassGlPopDebugGroupKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopDebugGroupKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopDebugGroupKHR(d, obj.(*GlPopDebugGroupKHR))
 }
-func (*binaryClassGlPopDebugGroupKHR) Schema() *schema.Class { return schemaGlPopDebugGroupKHR }
+func (*binaryClassGlPopDebugGroupKHR) Schema() *schema.Entity { return schemaGlPopDebugGroupKHR }
 
-var schemaGlPopDebugGroupKHR = &schema.Class{
+var schemaGlPopDebugGroupKHR = &schema.Entity{
 	TypeID:  binaryIDGlPopDebugGroupKHR,
 	Package: "gles",
 	Name:    "GlPopDebugGroupKHR",
@@ -29881,9 +29881,9 @@ func (*binaryClassGlPopGroupMarkerEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopGroupMarkerEXT(d, obj.(*GlPopGroupMarkerEXT))
 }
-func (*binaryClassGlPopGroupMarkerEXT) Schema() *schema.Class { return schemaGlPopGroupMarkerEXT }
+func (*binaryClassGlPopGroupMarkerEXT) Schema() *schema.Entity { return schemaGlPopGroupMarkerEXT }
 
-var schemaGlPopGroupMarkerEXT = &schema.Class{
+var schemaGlPopGroupMarkerEXT = &schema.Entity{
 	TypeID:  binaryIDGlPopGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPopGroupMarkerEXT",
@@ -29932,9 +29932,9 @@ func (*binaryClassGlPrimitiveBoundingBox) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlPrimitiveBoundingBox) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBox(d, obj.(*GlPrimitiveBoundingBox))
 }
-func (*binaryClassGlPrimitiveBoundingBox) Schema() *schema.Class { return schemaGlPrimitiveBoundingBox }
+func (*binaryClassGlPrimitiveBoundingBox) Schema() *schema.Entity { return schemaGlPrimitiveBoundingBox }
 
-var schemaGlPrimitiveBoundingBox = &schema.Class{
+var schemaGlPrimitiveBoundingBox = &schema.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBox,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBox",
@@ -29991,11 +29991,11 @@ func (*binaryClassGlPrimitiveBoundingBoxEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlPrimitiveBoundingBoxEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBoxEXT(d, obj.(*GlPrimitiveBoundingBoxEXT))
 }
-func (*binaryClassGlPrimitiveBoundingBoxEXT) Schema() *schema.Class {
+func (*binaryClassGlPrimitiveBoundingBoxEXT) Schema() *schema.Entity {
 	return schemaGlPrimitiveBoundingBoxEXT
 }
 
-var schemaGlPrimitiveBoundingBoxEXT = &schema.Class{
+var schemaGlPrimitiveBoundingBoxEXT = &schema.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBoxEXT,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxEXT",
@@ -30052,11 +30052,11 @@ func (*binaryClassGlPrimitiveBoundingBoxOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlPrimitiveBoundingBoxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBoxOES(d, obj.(*GlPrimitiveBoundingBoxOES))
 }
-func (*binaryClassGlPrimitiveBoundingBoxOES) Schema() *schema.Class {
+func (*binaryClassGlPrimitiveBoundingBoxOES) Schema() *schema.Entity {
 	return schemaGlPrimitiveBoundingBoxOES
 }
 
-var schemaGlPrimitiveBoundingBoxOES = &schema.Class{
+var schemaGlPrimitiveBoundingBoxOES = &schema.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBoxOES,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxOES",
@@ -30105,9 +30105,9 @@ func (*binaryClassGlProgramBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramBinary(d, obj.(*GlProgramBinary))
 }
-func (*binaryClassGlProgramBinary) Schema() *schema.Class { return schemaGlProgramBinary }
+func (*binaryClassGlProgramBinary) Schema() *schema.Entity { return schemaGlProgramBinary }
 
-var schemaGlProgramBinary = &schema.Class{
+var schemaGlProgramBinary = &schema.Entity{
 	TypeID:  binaryIDGlProgramBinary,
 	Package: "gles",
 	Name:    "GlProgramBinary",
@@ -30152,9 +30152,9 @@ func (*binaryClassGlProgramBinaryOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramBinaryOES(d, obj.(*GlProgramBinaryOES))
 }
-func (*binaryClassGlProgramBinaryOES) Schema() *schema.Class { return schemaGlProgramBinaryOES }
+func (*binaryClassGlProgramBinaryOES) Schema() *schema.Entity { return schemaGlProgramBinaryOES }
 
-var schemaGlProgramBinaryOES = &schema.Class{
+var schemaGlProgramBinaryOES = &schema.Entity{
 	TypeID:  binaryIDGlProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlProgramBinaryOES",
@@ -30197,9 +30197,9 @@ func (*binaryClassGlProgramParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramParameteri(d, obj.(*GlProgramParameteri))
 }
-func (*binaryClassGlProgramParameteri) Schema() *schema.Class { return schemaGlProgramParameteri }
+func (*binaryClassGlProgramParameteri) Schema() *schema.Entity { return schemaGlProgramParameteri }
 
-var schemaGlProgramParameteri = &schema.Class{
+var schemaGlProgramParameteri = &schema.Entity{
 	TypeID:  binaryIDGlProgramParameteri,
 	Package: "gles",
 	Name:    "GlProgramParameteri",
@@ -30241,9 +30241,9 @@ func (*binaryClassGlProgramParameteriEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramParameteriEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramParameteriEXT(d, obj.(*GlProgramParameteriEXT))
 }
-func (*binaryClassGlProgramParameteriEXT) Schema() *schema.Class { return schemaGlProgramParameteriEXT }
+func (*binaryClassGlProgramParameteriEXT) Schema() *schema.Entity { return schemaGlProgramParameteriEXT }
 
-var schemaGlProgramParameteriEXT = &schema.Class{
+var schemaGlProgramParameteriEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramParameteriEXT,
 	Package: "gles",
 	Name:    "GlProgramParameteriEXT",
@@ -30293,11 +30293,11 @@ func (*binaryClassGlProgramPathFragmentInputGenNV) Decode(d binary.Decoder) bina
 func (*binaryClassGlProgramPathFragmentInputGenNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramPathFragmentInputGenNV(d, obj.(*GlProgramPathFragmentInputGenNV))
 }
-func (*binaryClassGlProgramPathFragmentInputGenNV) Schema() *schema.Class {
+func (*binaryClassGlProgramPathFragmentInputGenNV) Schema() *schema.Entity {
 	return schemaGlProgramPathFragmentInputGenNV
 }
 
-var schemaGlProgramPathFragmentInputGenNV = &schema.Class{
+var schemaGlProgramPathFragmentInputGenNV = &schema.Entity{
 	TypeID:  binaryIDGlProgramPathFragmentInputGenNV,
 	Package: "gles",
 	Name:    "GlProgramPathFragmentInputGenNV",
@@ -30341,9 +30341,9 @@ func (*binaryClassGlProgramUniform1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1f(d, obj.(*GlProgramUniform1f))
 }
-func (*binaryClassGlProgramUniform1f) Schema() *schema.Class { return schemaGlProgramUniform1f }
+func (*binaryClassGlProgramUniform1f) Schema() *schema.Entity { return schemaGlProgramUniform1f }
 
-var schemaGlProgramUniform1f = &schema.Class{
+var schemaGlProgramUniform1f = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1f,
 	Package: "gles",
 	Name:    "GlProgramUniform1f",
@@ -30385,9 +30385,9 @@ func (*binaryClassGlProgramUniform1fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform1fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fEXT(d, obj.(*GlProgramUniform1fEXT))
 }
-func (*binaryClassGlProgramUniform1fEXT) Schema() *schema.Class { return schemaGlProgramUniform1fEXT }
+func (*binaryClassGlProgramUniform1fEXT) Schema() *schema.Entity { return schemaGlProgramUniform1fEXT }
 
-var schemaGlProgramUniform1fEXT = &schema.Class{
+var schemaGlProgramUniform1fEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1fEXT",
@@ -30431,9 +30431,9 @@ func (*binaryClassGlProgramUniform1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fv(d, obj.(*GlProgramUniform1fv))
 }
-func (*binaryClassGlProgramUniform1fv) Schema() *schema.Class { return schemaGlProgramUniform1fv }
+func (*binaryClassGlProgramUniform1fv) Schema() *schema.Entity { return schemaGlProgramUniform1fv }
 
-var schemaGlProgramUniform1fv = &schema.Class{
+var schemaGlProgramUniform1fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1fv,
 	Package: "gles",
 	Name:    "GlProgramUniform1fv",
@@ -30478,9 +30478,9 @@ func (*binaryClassGlProgramUniform1fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fvEXT(d, obj.(*GlProgramUniform1fvEXT))
 }
-func (*binaryClassGlProgramUniform1fvEXT) Schema() *schema.Class { return schemaGlProgramUniform1fvEXT }
+func (*binaryClassGlProgramUniform1fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform1fvEXT }
 
-var schemaGlProgramUniform1fvEXT = &schema.Class{
+var schemaGlProgramUniform1fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1fvEXT",
@@ -30523,9 +30523,9 @@ func (*binaryClassGlProgramUniform1i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1i(d, obj.(*GlProgramUniform1i))
 }
-func (*binaryClassGlProgramUniform1i) Schema() *schema.Class { return schemaGlProgramUniform1i }
+func (*binaryClassGlProgramUniform1i) Schema() *schema.Entity { return schemaGlProgramUniform1i }
 
-var schemaGlProgramUniform1i = &schema.Class{
+var schemaGlProgramUniform1i = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1i,
 	Package: "gles",
 	Name:    "GlProgramUniform1i",
@@ -30567,9 +30567,9 @@ func (*binaryClassGlProgramUniform1iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform1iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1iEXT(d, obj.(*GlProgramUniform1iEXT))
 }
-func (*binaryClassGlProgramUniform1iEXT) Schema() *schema.Class { return schemaGlProgramUniform1iEXT }
+func (*binaryClassGlProgramUniform1iEXT) Schema() *schema.Entity { return schemaGlProgramUniform1iEXT }
 
-var schemaGlProgramUniform1iEXT = &schema.Class{
+var schemaGlProgramUniform1iEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1iEXT",
@@ -30613,9 +30613,9 @@ func (*binaryClassGlProgramUniform1iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1iv(d, obj.(*GlProgramUniform1iv))
 }
-func (*binaryClassGlProgramUniform1iv) Schema() *schema.Class { return schemaGlProgramUniform1iv }
+func (*binaryClassGlProgramUniform1iv) Schema() *schema.Entity { return schemaGlProgramUniform1iv }
 
-var schemaGlProgramUniform1iv = &schema.Class{
+var schemaGlProgramUniform1iv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1iv,
 	Package: "gles",
 	Name:    "GlProgramUniform1iv",
@@ -30660,9 +30660,9 @@ func (*binaryClassGlProgramUniform1ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1ivEXT(d, obj.(*GlProgramUniform1ivEXT))
 }
-func (*binaryClassGlProgramUniform1ivEXT) Schema() *schema.Class { return schemaGlProgramUniform1ivEXT }
+func (*binaryClassGlProgramUniform1ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform1ivEXT }
 
-var schemaGlProgramUniform1ivEXT = &schema.Class{
+var schemaGlProgramUniform1ivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1ivEXT",
@@ -30705,9 +30705,9 @@ func (*binaryClassGlProgramUniform1ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1ui(d, obj.(*GlProgramUniform1ui))
 }
-func (*binaryClassGlProgramUniform1ui) Schema() *schema.Class { return schemaGlProgramUniform1ui }
+func (*binaryClassGlProgramUniform1ui) Schema() *schema.Entity { return schemaGlProgramUniform1ui }
 
-var schemaGlProgramUniform1ui = &schema.Class{
+var schemaGlProgramUniform1ui = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1ui,
 	Package: "gles",
 	Name:    "GlProgramUniform1ui",
@@ -30749,9 +30749,9 @@ func (*binaryClassGlProgramUniform1uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uiEXT(d, obj.(*GlProgramUniform1uiEXT))
 }
-func (*binaryClassGlProgramUniform1uiEXT) Schema() *schema.Class { return schemaGlProgramUniform1uiEXT }
+func (*binaryClassGlProgramUniform1uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform1uiEXT }
 
-var schemaGlProgramUniform1uiEXT = &schema.Class{
+var schemaGlProgramUniform1uiEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1uiEXT",
@@ -30795,9 +30795,9 @@ func (*binaryClassGlProgramUniform1uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uiv(d, obj.(*GlProgramUniform1uiv))
 }
-func (*binaryClassGlProgramUniform1uiv) Schema() *schema.Class { return schemaGlProgramUniform1uiv }
+func (*binaryClassGlProgramUniform1uiv) Schema() *schema.Entity { return schemaGlProgramUniform1uiv }
 
-var schemaGlProgramUniform1uiv = &schema.Class{
+var schemaGlProgramUniform1uiv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform1uiv",
@@ -30842,11 +30842,11 @@ func (*binaryClassGlProgramUniform1uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform1uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uivEXT(d, obj.(*GlProgramUniform1uivEXT))
 }
-func (*binaryClassGlProgramUniform1uivEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniform1uivEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniform1uivEXT
 }
 
-var schemaGlProgramUniform1uivEXT = &schema.Class{
+var schemaGlProgramUniform1uivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform1uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1uivEXT",
@@ -30891,9 +30891,9 @@ func (*binaryClassGlProgramUniform2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2f(d, obj.(*GlProgramUniform2f))
 }
-func (*binaryClassGlProgramUniform2f) Schema() *schema.Class { return schemaGlProgramUniform2f }
+func (*binaryClassGlProgramUniform2f) Schema() *schema.Entity { return schemaGlProgramUniform2f }
 
-var schemaGlProgramUniform2f = &schema.Class{
+var schemaGlProgramUniform2f = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2f,
 	Package: "gles",
 	Name:    "GlProgramUniform2f",
@@ -30938,9 +30938,9 @@ func (*binaryClassGlProgramUniform2fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform2fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fEXT(d, obj.(*GlProgramUniform2fEXT))
 }
-func (*binaryClassGlProgramUniform2fEXT) Schema() *schema.Class { return schemaGlProgramUniform2fEXT }
+func (*binaryClassGlProgramUniform2fEXT) Schema() *schema.Entity { return schemaGlProgramUniform2fEXT }
 
-var schemaGlProgramUniform2fEXT = &schema.Class{
+var schemaGlProgramUniform2fEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2fEXT",
@@ -30985,9 +30985,9 @@ func (*binaryClassGlProgramUniform2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fv(d, obj.(*GlProgramUniform2fv))
 }
-func (*binaryClassGlProgramUniform2fv) Schema() *schema.Class { return schemaGlProgramUniform2fv }
+func (*binaryClassGlProgramUniform2fv) Schema() *schema.Entity { return schemaGlProgramUniform2fv }
 
-var schemaGlProgramUniform2fv = &schema.Class{
+var schemaGlProgramUniform2fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2fv,
 	Package: "gles",
 	Name:    "GlProgramUniform2fv",
@@ -31032,9 +31032,9 @@ func (*binaryClassGlProgramUniform2fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fvEXT(d, obj.(*GlProgramUniform2fvEXT))
 }
-func (*binaryClassGlProgramUniform2fvEXT) Schema() *schema.Class { return schemaGlProgramUniform2fvEXT }
+func (*binaryClassGlProgramUniform2fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform2fvEXT }
 
-var schemaGlProgramUniform2fvEXT = &schema.Class{
+var schemaGlProgramUniform2fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2fvEXT",
@@ -31079,9 +31079,9 @@ func (*binaryClassGlProgramUniform2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2i(d, obj.(*GlProgramUniform2i))
 }
-func (*binaryClassGlProgramUniform2i) Schema() *schema.Class { return schemaGlProgramUniform2i }
+func (*binaryClassGlProgramUniform2i) Schema() *schema.Entity { return schemaGlProgramUniform2i }
 
-var schemaGlProgramUniform2i = &schema.Class{
+var schemaGlProgramUniform2i = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2i,
 	Package: "gles",
 	Name:    "GlProgramUniform2i",
@@ -31126,9 +31126,9 @@ func (*binaryClassGlProgramUniform2iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform2iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2iEXT(d, obj.(*GlProgramUniform2iEXT))
 }
-func (*binaryClassGlProgramUniform2iEXT) Schema() *schema.Class { return schemaGlProgramUniform2iEXT }
+func (*binaryClassGlProgramUniform2iEXT) Schema() *schema.Entity { return schemaGlProgramUniform2iEXT }
 
-var schemaGlProgramUniform2iEXT = &schema.Class{
+var schemaGlProgramUniform2iEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2iEXT",
@@ -31173,9 +31173,9 @@ func (*binaryClassGlProgramUniform2iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2iv(d, obj.(*GlProgramUniform2iv))
 }
-func (*binaryClassGlProgramUniform2iv) Schema() *schema.Class { return schemaGlProgramUniform2iv }
+func (*binaryClassGlProgramUniform2iv) Schema() *schema.Entity { return schemaGlProgramUniform2iv }
 
-var schemaGlProgramUniform2iv = &schema.Class{
+var schemaGlProgramUniform2iv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2iv,
 	Package: "gles",
 	Name:    "GlProgramUniform2iv",
@@ -31220,9 +31220,9 @@ func (*binaryClassGlProgramUniform2ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2ivEXT(d, obj.(*GlProgramUniform2ivEXT))
 }
-func (*binaryClassGlProgramUniform2ivEXT) Schema() *schema.Class { return schemaGlProgramUniform2ivEXT }
+func (*binaryClassGlProgramUniform2ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform2ivEXT }
 
-var schemaGlProgramUniform2ivEXT = &schema.Class{
+var schemaGlProgramUniform2ivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2ivEXT",
@@ -31267,9 +31267,9 @@ func (*binaryClassGlProgramUniform2ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2ui(d, obj.(*GlProgramUniform2ui))
 }
-func (*binaryClassGlProgramUniform2ui) Schema() *schema.Class { return schemaGlProgramUniform2ui }
+func (*binaryClassGlProgramUniform2ui) Schema() *schema.Entity { return schemaGlProgramUniform2ui }
 
-var schemaGlProgramUniform2ui = &schema.Class{
+var schemaGlProgramUniform2ui = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2ui,
 	Package: "gles",
 	Name:    "GlProgramUniform2ui",
@@ -31314,9 +31314,9 @@ func (*binaryClassGlProgramUniform2uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uiEXT(d, obj.(*GlProgramUniform2uiEXT))
 }
-func (*binaryClassGlProgramUniform2uiEXT) Schema() *schema.Class { return schemaGlProgramUniform2uiEXT }
+func (*binaryClassGlProgramUniform2uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform2uiEXT }
 
-var schemaGlProgramUniform2uiEXT = &schema.Class{
+var schemaGlProgramUniform2uiEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2uiEXT",
@@ -31361,9 +31361,9 @@ func (*binaryClassGlProgramUniform2uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uiv(d, obj.(*GlProgramUniform2uiv))
 }
-func (*binaryClassGlProgramUniform2uiv) Schema() *schema.Class { return schemaGlProgramUniform2uiv }
+func (*binaryClassGlProgramUniform2uiv) Schema() *schema.Entity { return schemaGlProgramUniform2uiv }
 
-var schemaGlProgramUniform2uiv = &schema.Class{
+var schemaGlProgramUniform2uiv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform2uiv",
@@ -31408,11 +31408,11 @@ func (*binaryClassGlProgramUniform2uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform2uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uivEXT(d, obj.(*GlProgramUniform2uivEXT))
 }
-func (*binaryClassGlProgramUniform2uivEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniform2uivEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniform2uivEXT
 }
 
-var schemaGlProgramUniform2uivEXT = &schema.Class{
+var schemaGlProgramUniform2uivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform2uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2uivEXT",
@@ -31459,9 +31459,9 @@ func (*binaryClassGlProgramUniform3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3f(d, obj.(*GlProgramUniform3f))
 }
-func (*binaryClassGlProgramUniform3f) Schema() *schema.Class { return schemaGlProgramUniform3f }
+func (*binaryClassGlProgramUniform3f) Schema() *schema.Entity { return schemaGlProgramUniform3f }
 
-var schemaGlProgramUniform3f = &schema.Class{
+var schemaGlProgramUniform3f = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3f,
 	Package: "gles",
 	Name:    "GlProgramUniform3f",
@@ -31509,9 +31509,9 @@ func (*binaryClassGlProgramUniform3fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform3fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fEXT(d, obj.(*GlProgramUniform3fEXT))
 }
-func (*binaryClassGlProgramUniform3fEXT) Schema() *schema.Class { return schemaGlProgramUniform3fEXT }
+func (*binaryClassGlProgramUniform3fEXT) Schema() *schema.Entity { return schemaGlProgramUniform3fEXT }
 
-var schemaGlProgramUniform3fEXT = &schema.Class{
+var schemaGlProgramUniform3fEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3fEXT",
@@ -31557,9 +31557,9 @@ func (*binaryClassGlProgramUniform3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fv(d, obj.(*GlProgramUniform3fv))
 }
-func (*binaryClassGlProgramUniform3fv) Schema() *schema.Class { return schemaGlProgramUniform3fv }
+func (*binaryClassGlProgramUniform3fv) Schema() *schema.Entity { return schemaGlProgramUniform3fv }
 
-var schemaGlProgramUniform3fv = &schema.Class{
+var schemaGlProgramUniform3fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3fv,
 	Package: "gles",
 	Name:    "GlProgramUniform3fv",
@@ -31604,9 +31604,9 @@ func (*binaryClassGlProgramUniform3fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fvEXT(d, obj.(*GlProgramUniform3fvEXT))
 }
-func (*binaryClassGlProgramUniform3fvEXT) Schema() *schema.Class { return schemaGlProgramUniform3fvEXT }
+func (*binaryClassGlProgramUniform3fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform3fvEXT }
 
-var schemaGlProgramUniform3fvEXT = &schema.Class{
+var schemaGlProgramUniform3fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3fvEXT",
@@ -31653,9 +31653,9 @@ func (*binaryClassGlProgramUniform3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3i(d, obj.(*GlProgramUniform3i))
 }
-func (*binaryClassGlProgramUniform3i) Schema() *schema.Class { return schemaGlProgramUniform3i }
+func (*binaryClassGlProgramUniform3i) Schema() *schema.Entity { return schemaGlProgramUniform3i }
 
-var schemaGlProgramUniform3i = &schema.Class{
+var schemaGlProgramUniform3i = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3i,
 	Package: "gles",
 	Name:    "GlProgramUniform3i",
@@ -31703,9 +31703,9 @@ func (*binaryClassGlProgramUniform3iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform3iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3iEXT(d, obj.(*GlProgramUniform3iEXT))
 }
-func (*binaryClassGlProgramUniform3iEXT) Schema() *schema.Class { return schemaGlProgramUniform3iEXT }
+func (*binaryClassGlProgramUniform3iEXT) Schema() *schema.Entity { return schemaGlProgramUniform3iEXT }
 
-var schemaGlProgramUniform3iEXT = &schema.Class{
+var schemaGlProgramUniform3iEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3iEXT",
@@ -31751,9 +31751,9 @@ func (*binaryClassGlProgramUniform3iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3iv(d, obj.(*GlProgramUniform3iv))
 }
-func (*binaryClassGlProgramUniform3iv) Schema() *schema.Class { return schemaGlProgramUniform3iv }
+func (*binaryClassGlProgramUniform3iv) Schema() *schema.Entity { return schemaGlProgramUniform3iv }
 
-var schemaGlProgramUniform3iv = &schema.Class{
+var schemaGlProgramUniform3iv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3iv,
 	Package: "gles",
 	Name:    "GlProgramUniform3iv",
@@ -31798,9 +31798,9 @@ func (*binaryClassGlProgramUniform3ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3ivEXT(d, obj.(*GlProgramUniform3ivEXT))
 }
-func (*binaryClassGlProgramUniform3ivEXT) Schema() *schema.Class { return schemaGlProgramUniform3ivEXT }
+func (*binaryClassGlProgramUniform3ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform3ivEXT }
 
-var schemaGlProgramUniform3ivEXT = &schema.Class{
+var schemaGlProgramUniform3ivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3ivEXT",
@@ -31847,9 +31847,9 @@ func (*binaryClassGlProgramUniform3ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3ui(d, obj.(*GlProgramUniform3ui))
 }
-func (*binaryClassGlProgramUniform3ui) Schema() *schema.Class { return schemaGlProgramUniform3ui }
+func (*binaryClassGlProgramUniform3ui) Schema() *schema.Entity { return schemaGlProgramUniform3ui }
 
-var schemaGlProgramUniform3ui = &schema.Class{
+var schemaGlProgramUniform3ui = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3ui,
 	Package: "gles",
 	Name:    "GlProgramUniform3ui",
@@ -31897,9 +31897,9 @@ func (*binaryClassGlProgramUniform3uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uiEXT(d, obj.(*GlProgramUniform3uiEXT))
 }
-func (*binaryClassGlProgramUniform3uiEXT) Schema() *schema.Class { return schemaGlProgramUniform3uiEXT }
+func (*binaryClassGlProgramUniform3uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform3uiEXT }
 
-var schemaGlProgramUniform3uiEXT = &schema.Class{
+var schemaGlProgramUniform3uiEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3uiEXT",
@@ -31945,9 +31945,9 @@ func (*binaryClassGlProgramUniform3uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uiv(d, obj.(*GlProgramUniform3uiv))
 }
-func (*binaryClassGlProgramUniform3uiv) Schema() *schema.Class { return schemaGlProgramUniform3uiv }
+func (*binaryClassGlProgramUniform3uiv) Schema() *schema.Entity { return schemaGlProgramUniform3uiv }
 
-var schemaGlProgramUniform3uiv = &schema.Class{
+var schemaGlProgramUniform3uiv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform3uiv",
@@ -31992,11 +31992,11 @@ func (*binaryClassGlProgramUniform3uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform3uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uivEXT(d, obj.(*GlProgramUniform3uivEXT))
 }
-func (*binaryClassGlProgramUniform3uivEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniform3uivEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniform3uivEXT
 }
 
-var schemaGlProgramUniform3uivEXT = &schema.Class{
+var schemaGlProgramUniform3uivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform3uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3uivEXT",
@@ -32045,9 +32045,9 @@ func (*binaryClassGlProgramUniform4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4f(d, obj.(*GlProgramUniform4f))
 }
-func (*binaryClassGlProgramUniform4f) Schema() *schema.Class { return schemaGlProgramUniform4f }
+func (*binaryClassGlProgramUniform4f) Schema() *schema.Entity { return schemaGlProgramUniform4f }
 
-var schemaGlProgramUniform4f = &schema.Class{
+var schemaGlProgramUniform4f = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4f,
 	Package: "gles",
 	Name:    "GlProgramUniform4f",
@@ -32098,9 +32098,9 @@ func (*binaryClassGlProgramUniform4fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform4fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fEXT(d, obj.(*GlProgramUniform4fEXT))
 }
-func (*binaryClassGlProgramUniform4fEXT) Schema() *schema.Class { return schemaGlProgramUniform4fEXT }
+func (*binaryClassGlProgramUniform4fEXT) Schema() *schema.Entity { return schemaGlProgramUniform4fEXT }
 
-var schemaGlProgramUniform4fEXT = &schema.Class{
+var schemaGlProgramUniform4fEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4fEXT",
@@ -32147,9 +32147,9 @@ func (*binaryClassGlProgramUniform4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fv(d, obj.(*GlProgramUniform4fv))
 }
-func (*binaryClassGlProgramUniform4fv) Schema() *schema.Class { return schemaGlProgramUniform4fv }
+func (*binaryClassGlProgramUniform4fv) Schema() *schema.Entity { return schemaGlProgramUniform4fv }
 
-var schemaGlProgramUniform4fv = &schema.Class{
+var schemaGlProgramUniform4fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4fv,
 	Package: "gles",
 	Name:    "GlProgramUniform4fv",
@@ -32194,9 +32194,9 @@ func (*binaryClassGlProgramUniform4fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fvEXT(d, obj.(*GlProgramUniform4fvEXT))
 }
-func (*binaryClassGlProgramUniform4fvEXT) Schema() *schema.Class { return schemaGlProgramUniform4fvEXT }
+func (*binaryClassGlProgramUniform4fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform4fvEXT }
 
-var schemaGlProgramUniform4fvEXT = &schema.Class{
+var schemaGlProgramUniform4fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4fvEXT",
@@ -32245,9 +32245,9 @@ func (*binaryClassGlProgramUniform4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4i(d, obj.(*GlProgramUniform4i))
 }
-func (*binaryClassGlProgramUniform4i) Schema() *schema.Class { return schemaGlProgramUniform4i }
+func (*binaryClassGlProgramUniform4i) Schema() *schema.Entity { return schemaGlProgramUniform4i }
 
-var schemaGlProgramUniform4i = &schema.Class{
+var schemaGlProgramUniform4i = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4i,
 	Package: "gles",
 	Name:    "GlProgramUniform4i",
@@ -32298,9 +32298,9 @@ func (*binaryClassGlProgramUniform4iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform4iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4iEXT(d, obj.(*GlProgramUniform4iEXT))
 }
-func (*binaryClassGlProgramUniform4iEXT) Schema() *schema.Class { return schemaGlProgramUniform4iEXT }
+func (*binaryClassGlProgramUniform4iEXT) Schema() *schema.Entity { return schemaGlProgramUniform4iEXT }
 
-var schemaGlProgramUniform4iEXT = &schema.Class{
+var schemaGlProgramUniform4iEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4iEXT",
@@ -32347,9 +32347,9 @@ func (*binaryClassGlProgramUniform4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4iv(d, obj.(*GlProgramUniform4iv))
 }
-func (*binaryClassGlProgramUniform4iv) Schema() *schema.Class { return schemaGlProgramUniform4iv }
+func (*binaryClassGlProgramUniform4iv) Schema() *schema.Entity { return schemaGlProgramUniform4iv }
 
-var schemaGlProgramUniform4iv = &schema.Class{
+var schemaGlProgramUniform4iv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4iv,
 	Package: "gles",
 	Name:    "GlProgramUniform4iv",
@@ -32394,9 +32394,9 @@ func (*binaryClassGlProgramUniform4ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4ivEXT(d, obj.(*GlProgramUniform4ivEXT))
 }
-func (*binaryClassGlProgramUniform4ivEXT) Schema() *schema.Class { return schemaGlProgramUniform4ivEXT }
+func (*binaryClassGlProgramUniform4ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform4ivEXT }
 
-var schemaGlProgramUniform4ivEXT = &schema.Class{
+var schemaGlProgramUniform4ivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4ivEXT",
@@ -32445,9 +32445,9 @@ func (*binaryClassGlProgramUniform4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4ui(d, obj.(*GlProgramUniform4ui))
 }
-func (*binaryClassGlProgramUniform4ui) Schema() *schema.Class { return schemaGlProgramUniform4ui }
+func (*binaryClassGlProgramUniform4ui) Schema() *schema.Entity { return schemaGlProgramUniform4ui }
 
-var schemaGlProgramUniform4ui = &schema.Class{
+var schemaGlProgramUniform4ui = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4ui,
 	Package: "gles",
 	Name:    "GlProgramUniform4ui",
@@ -32498,9 +32498,9 @@ func (*binaryClassGlProgramUniform4uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uiEXT(d, obj.(*GlProgramUniform4uiEXT))
 }
-func (*binaryClassGlProgramUniform4uiEXT) Schema() *schema.Class { return schemaGlProgramUniform4uiEXT }
+func (*binaryClassGlProgramUniform4uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform4uiEXT }
 
-var schemaGlProgramUniform4uiEXT = &schema.Class{
+var schemaGlProgramUniform4uiEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4uiEXT",
@@ -32547,9 +32547,9 @@ func (*binaryClassGlProgramUniform4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uiv(d, obj.(*GlProgramUniform4uiv))
 }
-func (*binaryClassGlProgramUniform4uiv) Schema() *schema.Class { return schemaGlProgramUniform4uiv }
+func (*binaryClassGlProgramUniform4uiv) Schema() *schema.Entity { return schemaGlProgramUniform4uiv }
 
-var schemaGlProgramUniform4uiv = &schema.Class{
+var schemaGlProgramUniform4uiv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform4uiv",
@@ -32594,11 +32594,11 @@ func (*binaryClassGlProgramUniform4uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform4uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uivEXT(d, obj.(*GlProgramUniform4uivEXT))
 }
-func (*binaryClassGlProgramUniform4uivEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniform4uivEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniform4uivEXT
 }
 
-var schemaGlProgramUniform4uivEXT = &schema.Class{
+var schemaGlProgramUniform4uivEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniform4uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4uivEXT",
@@ -32645,11 +32645,11 @@ func (*binaryClassGlProgramUniformHandleui64NV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformHandleui64NV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformHandleui64NV(d, obj.(*GlProgramUniformHandleui64NV))
 }
-func (*binaryClassGlProgramUniformHandleui64NV) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformHandleui64NV) Schema() *schema.Entity {
 	return schemaGlProgramUniformHandleui64NV
 }
 
-var schemaGlProgramUniformHandleui64NV = &schema.Class{
+var schemaGlProgramUniformHandleui64NV = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformHandleui64NV,
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64NV",
@@ -32697,11 +32697,11 @@ func (*binaryClassGlProgramUniformHandleui64vNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlProgramUniformHandleui64vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformHandleui64vNV(d, obj.(*GlProgramUniformHandleui64vNV))
 }
-func (*binaryClassGlProgramUniformHandleui64vNV) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformHandleui64vNV) Schema() *schema.Entity {
 	return schemaGlProgramUniformHandleui64vNV
 }
 
-var schemaGlProgramUniformHandleui64vNV = &schema.Class{
+var schemaGlProgramUniformHandleui64vNV = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformHandleui64vNV,
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64vNV",
@@ -32748,11 +32748,11 @@ func (*binaryClassGlProgramUniformMatrix2fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2fv(d, obj.(*GlProgramUniformMatrix2fv))
 }
-func (*binaryClassGlProgramUniformMatrix2fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2fv
 }
 
-var schemaGlProgramUniformMatrix2fv = &schema.Class{
+var schemaGlProgramUniformMatrix2fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fv",
@@ -32804,11 +32804,11 @@ func (*binaryClassGlProgramUniformMatrix2fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2fvEXT(d, obj.(*GlProgramUniformMatrix2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2fvEXT
 }
 
-var schemaGlProgramUniformMatrix2fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix2fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fvEXT",
@@ -32860,11 +32860,11 @@ func (*binaryClassGlProgramUniformMatrix2x3fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix2x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x3fv(d, obj.(*GlProgramUniformMatrix2x3fv))
 }
-func (*binaryClassGlProgramUniformMatrix2x3fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2x3fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2x3fv
 }
 
-var schemaGlProgramUniformMatrix2x3fv = &schema.Class{
+var schemaGlProgramUniformMatrix2x3fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fv",
@@ -32916,11 +32916,11 @@ func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix2x3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x3fvEXT(d, obj.(*GlProgramUniformMatrix2x3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2x3fvEXT
 }
 
-var schemaGlProgramUniformMatrix2x3fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix2x3fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fvEXT",
@@ -32972,11 +32972,11 @@ func (*binaryClassGlProgramUniformMatrix2x4fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix2x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x4fv(d, obj.(*GlProgramUniformMatrix2x4fv))
 }
-func (*binaryClassGlProgramUniformMatrix2x4fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2x4fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2x4fv
 }
 
-var schemaGlProgramUniformMatrix2x4fv = &schema.Class{
+var schemaGlProgramUniformMatrix2x4fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fv",
@@ -33028,11 +33028,11 @@ func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix2x4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x4fvEXT(d, obj.(*GlProgramUniformMatrix2x4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix2x4fvEXT
 }
 
-var schemaGlProgramUniformMatrix2x4fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix2x4fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fvEXT",
@@ -33080,11 +33080,11 @@ func (*binaryClassGlProgramUniformMatrix3fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3fv(d, obj.(*GlProgramUniformMatrix3fv))
 }
-func (*binaryClassGlProgramUniformMatrix3fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3fv
 }
 
-var schemaGlProgramUniformMatrix3fv = &schema.Class{
+var schemaGlProgramUniformMatrix3fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fv",
@@ -33136,11 +33136,11 @@ func (*binaryClassGlProgramUniformMatrix3fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3fvEXT(d, obj.(*GlProgramUniformMatrix3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3fvEXT
 }
 
-var schemaGlProgramUniformMatrix3fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix3fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fvEXT",
@@ -33192,11 +33192,11 @@ func (*binaryClassGlProgramUniformMatrix3x2fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix3x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x2fv(d, obj.(*GlProgramUniformMatrix3x2fv))
 }
-func (*binaryClassGlProgramUniformMatrix3x2fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3x2fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3x2fv
 }
 
-var schemaGlProgramUniformMatrix3x2fv = &schema.Class{
+var schemaGlProgramUniformMatrix3x2fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fv",
@@ -33248,11 +33248,11 @@ func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix3x2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x2fvEXT(d, obj.(*GlProgramUniformMatrix3x2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3x2fvEXT
 }
 
-var schemaGlProgramUniformMatrix3x2fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix3x2fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fvEXT",
@@ -33304,11 +33304,11 @@ func (*binaryClassGlProgramUniformMatrix3x4fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix3x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x4fv(d, obj.(*GlProgramUniformMatrix3x4fv))
 }
-func (*binaryClassGlProgramUniformMatrix3x4fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3x4fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3x4fv
 }
 
-var schemaGlProgramUniformMatrix3x4fv = &schema.Class{
+var schemaGlProgramUniformMatrix3x4fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fv",
@@ -33360,11 +33360,11 @@ func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix3x4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x4fvEXT(d, obj.(*GlProgramUniformMatrix3x4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix3x4fvEXT
 }
 
-var schemaGlProgramUniformMatrix3x4fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix3x4fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fvEXT",
@@ -33412,11 +33412,11 @@ func (*binaryClassGlProgramUniformMatrix4fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4fv(d, obj.(*GlProgramUniformMatrix4fv))
 }
-func (*binaryClassGlProgramUniformMatrix4fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4fv
 }
 
-var schemaGlProgramUniformMatrix4fv = &schema.Class{
+var schemaGlProgramUniformMatrix4fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fv",
@@ -33468,11 +33468,11 @@ func (*binaryClassGlProgramUniformMatrix4fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4fvEXT(d, obj.(*GlProgramUniformMatrix4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4fvEXT
 }
 
-var schemaGlProgramUniformMatrix4fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix4fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fvEXT",
@@ -33524,11 +33524,11 @@ func (*binaryClassGlProgramUniformMatrix4x2fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix4x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x2fv(d, obj.(*GlProgramUniformMatrix4x2fv))
 }
-func (*binaryClassGlProgramUniformMatrix4x2fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4x2fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4x2fv
 }
 
-var schemaGlProgramUniformMatrix4x2fv = &schema.Class{
+var schemaGlProgramUniformMatrix4x2fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fv",
@@ -33580,11 +33580,11 @@ func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix4x2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x2fvEXT(d, obj.(*GlProgramUniformMatrix4x2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4x2fvEXT
 }
 
-var schemaGlProgramUniformMatrix4x2fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix4x2fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fvEXT",
@@ -33636,11 +33636,11 @@ func (*binaryClassGlProgramUniformMatrix4x3fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix4x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x3fv(d, obj.(*GlProgramUniformMatrix4x3fv))
 }
-func (*binaryClassGlProgramUniformMatrix4x3fv) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4x3fv) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4x3fv
 }
 
-var schemaGlProgramUniformMatrix4x3fv = &schema.Class{
+var schemaGlProgramUniformMatrix4x3fv = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fv",
@@ -33692,11 +33692,11 @@ func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix4x3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x3fvEXT(d, obj.(*GlProgramUniformMatrix4x3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Schema() *schema.Class {
+func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Schema() *schema.Entity {
 	return schemaGlProgramUniformMatrix4x3fvEXT
 }
 
-var schemaGlProgramUniformMatrix4x3fvEXT = &schema.Class{
+var schemaGlProgramUniformMatrix4x3fvEXT = &schema.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fvEXT",
@@ -33742,9 +33742,9 @@ func (*binaryClassGlPushDebugGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushDebugGroup(d, obj.(*GlPushDebugGroup))
 }
-func (*binaryClassGlPushDebugGroup) Schema() *schema.Class { return schemaGlPushDebugGroup }
+func (*binaryClassGlPushDebugGroup) Schema() *schema.Entity { return schemaGlPushDebugGroup }
 
-var schemaGlPushDebugGroup = &schema.Class{
+var schemaGlPushDebugGroup = &schema.Entity{
 	TypeID:  binaryIDGlPushDebugGroup,
 	Package: "gles",
 	Name:    "GlPushDebugGroup",
@@ -33789,9 +33789,9 @@ func (*binaryClassGlPushDebugGroupKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushDebugGroupKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushDebugGroupKHR(d, obj.(*GlPushDebugGroupKHR))
 }
-func (*binaryClassGlPushDebugGroupKHR) Schema() *schema.Class { return schemaGlPushDebugGroupKHR }
+func (*binaryClassGlPushDebugGroupKHR) Schema() *schema.Entity { return schemaGlPushDebugGroupKHR }
 
-var schemaGlPushDebugGroupKHR = &schema.Class{
+var schemaGlPushDebugGroupKHR = &schema.Entity{
 	TypeID:  binaryIDGlPushDebugGroupKHR,
 	Package: "gles",
 	Name:    "GlPushDebugGroupKHR",
@@ -33832,9 +33832,9 @@ func (*binaryClassGlPushGroupMarkerEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushGroupMarkerEXT(d, obj.(*GlPushGroupMarkerEXT))
 }
-func (*binaryClassGlPushGroupMarkerEXT) Schema() *schema.Class { return schemaGlPushGroupMarkerEXT }
+func (*binaryClassGlPushGroupMarkerEXT) Schema() *schema.Entity { return schemaGlPushGroupMarkerEXT }
 
-var schemaGlPushGroupMarkerEXT = &schema.Class{
+var schemaGlPushGroupMarkerEXT = &schema.Entity{
 	TypeID:  binaryIDGlPushGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPushGroupMarkerEXT",
@@ -33873,9 +33873,9 @@ func (*binaryClassGlQueryCounterEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlQueryCounterEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlQueryCounterEXT(d, obj.(*GlQueryCounterEXT))
 }
-func (*binaryClassGlQueryCounterEXT) Schema() *schema.Class { return schemaGlQueryCounterEXT }
+func (*binaryClassGlQueryCounterEXT) Schema() *schema.Entity { return schemaGlQueryCounterEXT }
 
-var schemaGlQueryCounterEXT = &schema.Class{
+var schemaGlQueryCounterEXT = &schema.Entity{
 	TypeID:  binaryIDGlQueryCounterEXT,
 	Package: "gles",
 	Name:    "GlQueryCounterEXT",
@@ -33914,9 +33914,9 @@ func (*binaryClassGlRasterSamplesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlRasterSamplesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRasterSamplesEXT(d, obj.(*GlRasterSamplesEXT))
 }
-func (*binaryClassGlRasterSamplesEXT) Schema() *schema.Class { return schemaGlRasterSamplesEXT }
+func (*binaryClassGlRasterSamplesEXT) Schema() *schema.Entity { return schemaGlRasterSamplesEXT }
 
-var schemaGlRasterSamplesEXT = &schema.Class{
+var schemaGlRasterSamplesEXT = &schema.Entity{
 	TypeID:  binaryIDGlRasterSamplesEXT,
 	Package: "gles",
 	Name:    "GlRasterSamplesEXT",
@@ -33953,9 +33953,9 @@ func (*binaryClassGlReadBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBuffer(d, obj.(*GlReadBuffer))
 }
-func (*binaryClassGlReadBuffer) Schema() *schema.Class { return schemaGlReadBuffer }
+func (*binaryClassGlReadBuffer) Schema() *schema.Entity { return schemaGlReadBuffer }
 
-var schemaGlReadBuffer = &schema.Class{
+var schemaGlReadBuffer = &schema.Entity{
 	TypeID:  binaryIDGlReadBuffer,
 	Package: "gles",
 	Name:    "GlReadBuffer",
@@ -33993,9 +33993,9 @@ func (*binaryClassGlReadBufferIndexedEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlReadBufferIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBufferIndexedEXT(d, obj.(*GlReadBufferIndexedEXT))
 }
-func (*binaryClassGlReadBufferIndexedEXT) Schema() *schema.Class { return schemaGlReadBufferIndexedEXT }
+func (*binaryClassGlReadBufferIndexedEXT) Schema() *schema.Entity { return schemaGlReadBufferIndexedEXT }
 
-var schemaGlReadBufferIndexedEXT = &schema.Class{
+var schemaGlReadBufferIndexedEXT = &schema.Entity{
 	TypeID:  binaryIDGlReadBufferIndexedEXT,
 	Package: "gles",
 	Name:    "GlReadBufferIndexedEXT",
@@ -34032,9 +34032,9 @@ func (*binaryClassGlReadBufferNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadBufferNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBufferNV(d, obj.(*GlReadBufferNV))
 }
-func (*binaryClassGlReadBufferNV) Schema() *schema.Class { return schemaGlReadBufferNV }
+func (*binaryClassGlReadBufferNV) Schema() *schema.Entity { return schemaGlReadBufferNV }
 
-var schemaGlReadBufferNV = &schema.Class{
+var schemaGlReadBufferNV = &schema.Entity{
 	TypeID:  binaryIDGlReadBufferNV,
 	Package: "gles",
 	Name:    "GlReadBufferNV",
@@ -34082,9 +34082,9 @@ func (*binaryClassGlReadPixels) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadPixels) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadPixels(d, obj.(*GlReadPixels))
 }
-func (*binaryClassGlReadPixels) Schema() *schema.Class { return schemaGlReadPixels }
+func (*binaryClassGlReadPixels) Schema() *schema.Entity { return schemaGlReadPixels }
 
-var schemaGlReadPixels = &schema.Class{
+var schemaGlReadPixels = &schema.Entity{
 	TypeID:  binaryIDGlReadPixels,
 	Package: "gles",
 	Name:    "GlReadPixels",
@@ -34140,9 +34140,9 @@ func (*binaryClassGlReadnPixels) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixels) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixels(d, obj.(*GlReadnPixels))
 }
-func (*binaryClassGlReadnPixels) Schema() *schema.Class { return schemaGlReadnPixels }
+func (*binaryClassGlReadnPixels) Schema() *schema.Entity { return schemaGlReadnPixels }
 
-var schemaGlReadnPixels = &schema.Class{
+var schemaGlReadnPixels = &schema.Entity{
 	TypeID:  binaryIDGlReadnPixels,
 	Package: "gles",
 	Name:    "GlReadnPixels",
@@ -34199,9 +34199,9 @@ func (*binaryClassGlReadnPixelsEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixelsEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixelsEXT(d, obj.(*GlReadnPixelsEXT))
 }
-func (*binaryClassGlReadnPixelsEXT) Schema() *schema.Class { return schemaGlReadnPixelsEXT }
+func (*binaryClassGlReadnPixelsEXT) Schema() *schema.Entity { return schemaGlReadnPixelsEXT }
 
-var schemaGlReadnPixelsEXT = &schema.Class{
+var schemaGlReadnPixelsEXT = &schema.Entity{
 	TypeID:  binaryIDGlReadnPixelsEXT,
 	Package: "gles",
 	Name:    "GlReadnPixelsEXT",
@@ -34258,9 +34258,9 @@ func (*binaryClassGlReadnPixelsKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixelsKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixelsKHR(d, obj.(*GlReadnPixelsKHR))
 }
-func (*binaryClassGlReadnPixelsKHR) Schema() *schema.Class { return schemaGlReadnPixelsKHR }
+func (*binaryClassGlReadnPixelsKHR) Schema() *schema.Entity { return schemaGlReadnPixelsKHR }
 
-var schemaGlReadnPixelsKHR = &schema.Class{
+var schemaGlReadnPixelsKHR = &schema.Entity{
 	TypeID:  binaryIDGlReadnPixelsKHR,
 	Package: "gles",
 	Name:    "GlReadnPixelsKHR",
@@ -34301,11 +34301,11 @@ func (*binaryClassGlReleaseShaderCompiler) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlReleaseShaderCompiler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReleaseShaderCompiler(d, obj.(*GlReleaseShaderCompiler))
 }
-func (*binaryClassGlReleaseShaderCompiler) Schema() *schema.Class {
+func (*binaryClassGlReleaseShaderCompiler) Schema() *schema.Entity {
 	return schemaGlReleaseShaderCompiler
 }
 
-var schemaGlReleaseShaderCompiler = &schema.Class{
+var schemaGlReleaseShaderCompiler = &schema.Entity{
 	TypeID:  binaryIDGlReleaseShaderCompiler,
 	Package: "gles",
 	Name:    "GlReleaseShaderCompiler",
@@ -34346,9 +34346,9 @@ func (*binaryClassGlRenderbufferStorage) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlRenderbufferStorage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorage(d, obj.(*GlRenderbufferStorage))
 }
-func (*binaryClassGlRenderbufferStorage) Schema() *schema.Class { return schemaGlRenderbufferStorage }
+func (*binaryClassGlRenderbufferStorage) Schema() *schema.Entity { return schemaGlRenderbufferStorage }
 
-var schemaGlRenderbufferStorage = &schema.Class{
+var schemaGlRenderbufferStorage = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorage,
 	Package: "gles",
 	Name:    "GlRenderbufferStorage",
@@ -34399,11 +34399,11 @@ func (*binaryClassGlRenderbufferStorageMultisample) Decode(d binary.Decoder) bin
 func (*binaryClassGlRenderbufferStorageMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisample(d, obj.(*GlRenderbufferStorageMultisample))
 }
-func (*binaryClassGlRenderbufferStorageMultisample) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisample) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisample
 }
 
-var schemaGlRenderbufferStorageMultisample = &schema.Class{
+var schemaGlRenderbufferStorageMultisample = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisample,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisample",
@@ -34455,11 +34455,11 @@ func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Decode(d binary.Decoder
 func (*binaryClassGlRenderbufferStorageMultisampleANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleANGLE(d, obj.(*GlRenderbufferStorageMultisampleANGLE))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisampleANGLE
 }
 
-var schemaGlRenderbufferStorageMultisampleANGLE = &schema.Class{
+var schemaGlRenderbufferStorageMultisampleANGLE = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleANGLE,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleANGLE",
@@ -34511,11 +34511,11 @@ func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Decode(d binary.Decoder
 func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleAPPLE(d, obj.(*GlRenderbufferStorageMultisampleAPPLE))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisampleAPPLE
 }
 
-var schemaGlRenderbufferStorageMultisampleAPPLE = &schema.Class{
+var schemaGlRenderbufferStorageMultisampleAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleAPPLE,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleAPPLE",
@@ -34567,11 +34567,11 @@ func (*binaryClassGlRenderbufferStorageMultisampleEXT) Decode(d binary.Decoder) 
 func (*binaryClassGlRenderbufferStorageMultisampleEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleEXT(d, obj.(*GlRenderbufferStorageMultisampleEXT))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleEXT) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisampleEXT) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisampleEXT
 }
 
-var schemaGlRenderbufferStorageMultisampleEXT = &schema.Class{
+var schemaGlRenderbufferStorageMultisampleEXT = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleEXT,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleEXT",
@@ -34623,11 +34623,11 @@ func (*binaryClassGlRenderbufferStorageMultisampleIMG) Decode(d binary.Decoder) 
 func (*binaryClassGlRenderbufferStorageMultisampleIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleIMG(d, obj.(*GlRenderbufferStorageMultisampleIMG))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleIMG) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisampleIMG) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisampleIMG
 }
 
-var schemaGlRenderbufferStorageMultisampleIMG = &schema.Class{
+var schemaGlRenderbufferStorageMultisampleIMG = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleIMG,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleIMG",
@@ -34679,11 +34679,11 @@ func (*binaryClassGlRenderbufferStorageMultisampleNV) Decode(d binary.Decoder) b
 func (*binaryClassGlRenderbufferStorageMultisampleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleNV(d, obj.(*GlRenderbufferStorageMultisampleNV))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleNV) Schema() *schema.Class {
+func (*binaryClassGlRenderbufferStorageMultisampleNV) Schema() *schema.Entity {
 	return schemaGlRenderbufferStorageMultisampleNV
 }
 
-var schemaGlRenderbufferStorageMultisampleNV = &schema.Class{
+var schemaGlRenderbufferStorageMultisampleNV = &schema.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleNV,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleNV",
@@ -34721,9 +34721,9 @@ func (*binaryClassGlResolveDepthValuesNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlResolveDepthValuesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResolveDepthValuesNV(d, obj.(*GlResolveDepthValuesNV))
 }
-func (*binaryClassGlResolveDepthValuesNV) Schema() *schema.Class { return schemaGlResolveDepthValuesNV }
+func (*binaryClassGlResolveDepthValuesNV) Schema() *schema.Entity { return schemaGlResolveDepthValuesNV }
 
-var schemaGlResolveDepthValuesNV = &schema.Class{
+var schemaGlResolveDepthValuesNV = &schema.Entity{
 	TypeID:  binaryIDGlResolveDepthValuesNV,
 	Package: "gles",
 	Name:    "GlResolveDepthValuesNV",
@@ -34760,11 +34760,11 @@ func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Decode(d binary.Decoder)
 func (*binaryClassGlResolveMultisampleFramebufferAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResolveMultisampleFramebufferAPPLE(d, obj.(*GlResolveMultisampleFramebufferAPPLE))
 }
-func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Schema() *schema.Class {
+func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Schema() *schema.Entity {
 	return schemaGlResolveMultisampleFramebufferAPPLE
 }
 
-var schemaGlResolveMultisampleFramebufferAPPLE = &schema.Class{
+var schemaGlResolveMultisampleFramebufferAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlResolveMultisampleFramebufferAPPLE,
 	Package: "gles",
 	Name:    "GlResolveMultisampleFramebufferAPPLE",
@@ -34797,11 +34797,11 @@ func (*binaryClassGlResumeTransformFeedback) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlResumeTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResumeTransformFeedback(d, obj.(*GlResumeTransformFeedback))
 }
-func (*binaryClassGlResumeTransformFeedback) Schema() *schema.Class {
+func (*binaryClassGlResumeTransformFeedback) Schema() *schema.Entity {
 	return schemaGlResumeTransformFeedback
 }
 
-var schemaGlResumeTransformFeedback = &schema.Class{
+var schemaGlResumeTransformFeedback = &schema.Entity{
 	TypeID:  binaryIDGlResumeTransformFeedback,
 	Package: "gles",
 	Name:    "GlResumeTransformFeedback",
@@ -34838,9 +34838,9 @@ func (*binaryClassGlSampleCoverage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSampleCoverage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSampleCoverage(d, obj.(*GlSampleCoverage))
 }
-func (*binaryClassGlSampleCoverage) Schema() *schema.Class { return schemaGlSampleCoverage }
+func (*binaryClassGlSampleCoverage) Schema() *schema.Entity { return schemaGlSampleCoverage }
 
-var schemaGlSampleCoverage = &schema.Class{
+var schemaGlSampleCoverage = &schema.Entity{
 	TypeID:  binaryIDGlSampleCoverage,
 	Package: "gles",
 	Name:    "GlSampleCoverage",
@@ -34879,9 +34879,9 @@ func (*binaryClassGlSampleMaski) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSampleMaski) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSampleMaski(d, obj.(*GlSampleMaski))
 }
-func (*binaryClassGlSampleMaski) Schema() *schema.Class { return schemaGlSampleMaski }
+func (*binaryClassGlSampleMaski) Schema() *schema.Entity { return schemaGlSampleMaski }
 
-var schemaGlSampleMaski = &schema.Class{
+var schemaGlSampleMaski = &schema.Entity{
 	TypeID:  binaryIDGlSampleMaski,
 	Package: "gles",
 	Name:    "GlSampleMaski",
@@ -34922,9 +34922,9 @@ func (*binaryClassGlSamplerParameterIiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIiv(d, obj.(*GlSamplerParameterIiv))
 }
-func (*binaryClassGlSamplerParameterIiv) Schema() *schema.Class { return schemaGlSamplerParameterIiv }
+func (*binaryClassGlSamplerParameterIiv) Schema() *schema.Entity { return schemaGlSamplerParameterIiv }
 
-var schemaGlSamplerParameterIiv = &schema.Class{
+var schemaGlSamplerParameterIiv = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIiv,
 	Package: "gles",
 	Name:    "GlSamplerParameterIiv",
@@ -34966,11 +34966,11 @@ func (*binaryClassGlSamplerParameterIivEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlSamplerParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIivEXT(d, obj.(*GlSamplerParameterIivEXT))
 }
-func (*binaryClassGlSamplerParameterIivEXT) Schema() *schema.Class {
+func (*binaryClassGlSamplerParameterIivEXT) Schema() *schema.Entity {
 	return schemaGlSamplerParameterIivEXT
 }
 
-var schemaGlSamplerParameterIivEXT = &schema.Class{
+var schemaGlSamplerParameterIivEXT = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIivEXT,
 	Package: "gles",
 	Name:    "GlSamplerParameterIivEXT",
@@ -35012,11 +35012,11 @@ func (*binaryClassGlSamplerParameterIivOES) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlSamplerParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIivOES(d, obj.(*GlSamplerParameterIivOES))
 }
-func (*binaryClassGlSamplerParameterIivOES) Schema() *schema.Class {
+func (*binaryClassGlSamplerParameterIivOES) Schema() *schema.Entity {
 	return schemaGlSamplerParameterIivOES
 }
 
-var schemaGlSamplerParameterIivOES = &schema.Class{
+var schemaGlSamplerParameterIivOES = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIivOES,
 	Package: "gles",
 	Name:    "GlSamplerParameterIivOES",
@@ -35058,9 +35058,9 @@ func (*binaryClassGlSamplerParameterIuiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuiv(d, obj.(*GlSamplerParameterIuiv))
 }
-func (*binaryClassGlSamplerParameterIuiv) Schema() *schema.Class { return schemaGlSamplerParameterIuiv }
+func (*binaryClassGlSamplerParameterIuiv) Schema() *schema.Entity { return schemaGlSamplerParameterIuiv }
 
-var schemaGlSamplerParameterIuiv = &schema.Class{
+var schemaGlSamplerParameterIuiv = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuiv,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuiv",
@@ -35102,11 +35102,11 @@ func (*binaryClassGlSamplerParameterIuivEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSamplerParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuivEXT(d, obj.(*GlSamplerParameterIuivEXT))
 }
-func (*binaryClassGlSamplerParameterIuivEXT) Schema() *schema.Class {
+func (*binaryClassGlSamplerParameterIuivEXT) Schema() *schema.Entity {
 	return schemaGlSamplerParameterIuivEXT
 }
 
-var schemaGlSamplerParameterIuivEXT = &schema.Class{
+var schemaGlSamplerParameterIuivEXT = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivEXT",
@@ -35148,11 +35148,11 @@ func (*binaryClassGlSamplerParameterIuivOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSamplerParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuivOES(d, obj.(*GlSamplerParameterIuivOES))
 }
-func (*binaryClassGlSamplerParameterIuivOES) Schema() *schema.Class {
+func (*binaryClassGlSamplerParameterIuivOES) Schema() *schema.Entity {
 	return schemaGlSamplerParameterIuivOES
 }
 
-var schemaGlSamplerParameterIuivOES = &schema.Class{
+var schemaGlSamplerParameterIuivOES = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuivOES,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivOES",
@@ -35194,9 +35194,9 @@ func (*binaryClassGlSamplerParameterf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameterf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterf(d, obj.(*GlSamplerParameterf))
 }
-func (*binaryClassGlSamplerParameterf) Schema() *schema.Class { return schemaGlSamplerParameterf }
+func (*binaryClassGlSamplerParameterf) Schema() *schema.Entity { return schemaGlSamplerParameterf }
 
-var schemaGlSamplerParameterf = &schema.Class{
+var schemaGlSamplerParameterf = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterf,
 	Package: "gles",
 	Name:    "GlSamplerParameterf",
@@ -35238,9 +35238,9 @@ func (*binaryClassGlSamplerParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterfv(d, obj.(*GlSamplerParameterfv))
 }
-func (*binaryClassGlSamplerParameterfv) Schema() *schema.Class { return schemaGlSamplerParameterfv }
+func (*binaryClassGlSamplerParameterfv) Schema() *schema.Entity { return schemaGlSamplerParameterfv }
 
-var schemaGlSamplerParameterfv = &schema.Class{
+var schemaGlSamplerParameterfv = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameterfv,
 	Package: "gles",
 	Name:    "GlSamplerParameterfv",
@@ -35282,9 +35282,9 @@ func (*binaryClassGlSamplerParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameteri(d, obj.(*GlSamplerParameteri))
 }
-func (*binaryClassGlSamplerParameteri) Schema() *schema.Class { return schemaGlSamplerParameteri }
+func (*binaryClassGlSamplerParameteri) Schema() *schema.Entity { return schemaGlSamplerParameteri }
 
-var schemaGlSamplerParameteri = &schema.Class{
+var schemaGlSamplerParameteri = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameteri,
 	Package: "gles",
 	Name:    "GlSamplerParameteri",
@@ -35326,9 +35326,9 @@ func (*binaryClassGlSamplerParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameteriv(d, obj.(*GlSamplerParameteriv))
 }
-func (*binaryClassGlSamplerParameteriv) Schema() *schema.Class { return schemaGlSamplerParameteriv }
+func (*binaryClassGlSamplerParameteriv) Schema() *schema.Entity { return schemaGlSamplerParameteriv }
 
-var schemaGlSamplerParameteriv = &schema.Class{
+var schemaGlSamplerParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlSamplerParameteriv,
 	Package: "gles",
 	Name:    "GlSamplerParameteriv",
@@ -35372,9 +35372,9 @@ func (*binaryClassGlScissor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissor(d, obj.(*GlScissor))
 }
-func (*binaryClassGlScissor) Schema() *schema.Class { return schemaGlScissor }
+func (*binaryClassGlScissor) Schema() *schema.Entity { return schemaGlScissor }
 
-var schemaGlScissor = &schema.Class{
+var schemaGlScissor = &schema.Entity{
 	TypeID:  binaryIDGlScissor,
 	Package: "gles",
 	Name:    "GlScissor",
@@ -35417,9 +35417,9 @@ func (*binaryClassGlScissorArrayvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorArrayvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorArrayvNV(d, obj.(*GlScissorArrayvNV))
 }
-func (*binaryClassGlScissorArrayvNV) Schema() *schema.Class { return schemaGlScissorArrayvNV }
+func (*binaryClassGlScissorArrayvNV) Schema() *schema.Entity { return schemaGlScissorArrayvNV }
 
-var schemaGlScissorArrayvNV = &schema.Class{
+var schemaGlScissorArrayvNV = &schema.Entity{
 	TypeID:  binaryIDGlScissorArrayvNV,
 	Package: "gles",
 	Name:    "GlScissorArrayvNV",
@@ -35465,9 +35465,9 @@ func (*binaryClassGlScissorIndexedNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorIndexedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorIndexedNV(d, obj.(*GlScissorIndexedNV))
 }
-func (*binaryClassGlScissorIndexedNV) Schema() *schema.Class { return schemaGlScissorIndexedNV }
+func (*binaryClassGlScissorIndexedNV) Schema() *schema.Entity { return schemaGlScissorIndexedNV }
 
-var schemaGlScissorIndexedNV = &schema.Class{
+var schemaGlScissorIndexedNV = &schema.Entity{
 	TypeID:  binaryIDGlScissorIndexedNV,
 	Package: "gles",
 	Name:    "GlScissorIndexedNV",
@@ -35509,9 +35509,9 @@ func (*binaryClassGlScissorIndexedvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorIndexedvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorIndexedvNV(d, obj.(*GlScissorIndexedvNV))
 }
-func (*binaryClassGlScissorIndexedvNV) Schema() *schema.Class { return schemaGlScissorIndexedvNV }
+func (*binaryClassGlScissorIndexedvNV) Schema() *schema.Entity { return schemaGlScissorIndexedvNV }
 
-var schemaGlScissorIndexedvNV = &schema.Class{
+var schemaGlScissorIndexedvNV = &schema.Entity{
 	TypeID:  binaryIDGlScissorIndexedvNV,
 	Package: "gles",
 	Name:    "GlScissorIndexedvNV",
@@ -35560,11 +35560,11 @@ func (*binaryClassGlSelectPerfMonitorCountersAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlSelectPerfMonitorCountersAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSelectPerfMonitorCountersAMD(d, obj.(*GlSelectPerfMonitorCountersAMD))
 }
-func (*binaryClassGlSelectPerfMonitorCountersAMD) Schema() *schema.Class {
+func (*binaryClassGlSelectPerfMonitorCountersAMD) Schema() *schema.Entity {
 	return schemaGlSelectPerfMonitorCountersAMD
 }
 
-var schemaGlSelectPerfMonitorCountersAMD = &schema.Class{
+var schemaGlSelectPerfMonitorCountersAMD = &schema.Entity{
 	TypeID:  binaryIDGlSelectPerfMonitorCountersAMD,
 	Package: "gles",
 	Name:    "GlSelectPerfMonitorCountersAMD",
@@ -35606,9 +35606,9 @@ func (*binaryClassGlSetFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSetFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSetFenceNV(d, obj.(*GlSetFenceNV))
 }
-func (*binaryClassGlSetFenceNV) Schema() *schema.Class { return schemaGlSetFenceNV }
+func (*binaryClassGlSetFenceNV) Schema() *schema.Entity { return schemaGlSetFenceNV }
 
-var schemaGlSetFenceNV = &schema.Class{
+var schemaGlSetFenceNV = &schema.Entity{
 	TypeID:  binaryIDGlSetFenceNV,
 	Package: "gles",
 	Name:    "GlSetFenceNV",
@@ -35643,9 +35643,9 @@ func (*binaryClassShaderIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdᶜᵖ(d, obj.(*ShaderIdᶜᵖ))
 }
-func (*binaryClassShaderIdᶜᵖ) Schema() *schema.Class { return schemaShaderIdᶜᵖ }
+func (*binaryClassShaderIdᶜᵖ) Schema() *schema.Entity { return schemaShaderIdᶜᵖ }
 
-var schemaShaderIdᶜᵖ = &schema.Class{
+var schemaShaderIdᶜᵖ = &schema.Entity{
 	TypeID:  binaryIDShaderIdᶜᵖ,
 	Package: "gles",
 	Name:    "ShaderIdᶜᵖ",
@@ -35688,9 +35688,9 @@ func (*binaryClassGlShaderBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlShaderBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlShaderBinary(d, obj.(*GlShaderBinary))
 }
-func (*binaryClassGlShaderBinary) Schema() *schema.Class { return schemaGlShaderBinary }
+func (*binaryClassGlShaderBinary) Schema() *schema.Entity { return schemaGlShaderBinary }
 
-var schemaGlShaderBinary = &schema.Class{
+var schemaGlShaderBinary = &schema.Entity{
 	TypeID:  binaryIDGlShaderBinary,
 	Package: "gles",
 	Name:    "GlShaderBinary",
@@ -35736,9 +35736,9 @@ func (*binaryClassGlShaderSource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlShaderSource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlShaderSource(d, obj.(*GlShaderSource))
 }
-func (*binaryClassGlShaderSource) Schema() *schema.Class { return schemaGlShaderSource }
+func (*binaryClassGlShaderSource) Schema() *schema.Entity { return schemaGlShaderSource }
 
-var schemaGlShaderSource = &schema.Class{
+var schemaGlShaderSource = &schema.Entity{
 	TypeID:  binaryIDGlShaderSource,
 	Package: "gles",
 	Name:    "GlShaderSource",
@@ -35785,9 +35785,9 @@ func (*binaryClassGlStartTilingQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStartTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStartTilingQCOM(d, obj.(*GlStartTilingQCOM))
 }
-func (*binaryClassGlStartTilingQCOM) Schema() *schema.Class { return schemaGlStartTilingQCOM }
+func (*binaryClassGlStartTilingQCOM) Schema() *schema.Entity { return schemaGlStartTilingQCOM }
 
-var schemaGlStartTilingQCOM = &schema.Class{
+var schemaGlStartTilingQCOM = &schema.Entity{
 	TypeID:  binaryIDGlStartTilingQCOM,
 	Package: "gles",
 	Name:    "GlStartTilingQCOM",
@@ -35845,11 +35845,11 @@ func (*binaryClassGlStencilFillPathInstancedNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlStencilFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFillPathInstancedNV(d, obj.(*GlStencilFillPathInstancedNV))
 }
-func (*binaryClassGlStencilFillPathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlStencilFillPathInstancedNV) Schema() *schema.Entity {
 	return schemaGlStencilFillPathInstancedNV
 }
 
-var schemaGlStencilFillPathInstancedNV = &schema.Class{
+var schemaGlStencilFillPathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilFillPathInstancedNV",
@@ -35896,9 +35896,9 @@ func (*binaryClassGlStencilFillPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFillPathNV(d, obj.(*GlStencilFillPathNV))
 }
-func (*binaryClassGlStencilFillPathNV) Schema() *schema.Class { return schemaGlStencilFillPathNV }
+func (*binaryClassGlStencilFillPathNV) Schema() *schema.Entity { return schemaGlStencilFillPathNV }
 
-var schemaGlStencilFillPathNV = &schema.Class{
+var schemaGlStencilFillPathNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilFillPathNV,
 	Package: "gles",
 	Name:    "GlStencilFillPathNV",
@@ -35940,9 +35940,9 @@ func (*binaryClassGlStencilFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFunc(d, obj.(*GlStencilFunc))
 }
-func (*binaryClassGlStencilFunc) Schema() *schema.Class { return schemaGlStencilFunc }
+func (*binaryClassGlStencilFunc) Schema() *schema.Entity { return schemaGlStencilFunc }
 
-var schemaGlStencilFunc = &schema.Class{
+var schemaGlStencilFunc = &schema.Entity{
 	TypeID:  binaryIDGlStencilFunc,
 	Package: "gles",
 	Name:    "GlStencilFunc",
@@ -35986,9 +35986,9 @@ func (*binaryClassGlStencilFuncSeparate) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilFuncSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFuncSeparate(d, obj.(*GlStencilFuncSeparate))
 }
-func (*binaryClassGlStencilFuncSeparate) Schema() *schema.Class { return schemaGlStencilFuncSeparate }
+func (*binaryClassGlStencilFuncSeparate) Schema() *schema.Entity { return schemaGlStencilFuncSeparate }
 
-var schemaGlStencilFuncSeparate = &schema.Class{
+var schemaGlStencilFuncSeparate = &schema.Entity{
 	TypeID:  binaryIDGlStencilFuncSeparate,
 	Package: "gles",
 	Name:    "GlStencilFuncSeparate",
@@ -36027,9 +36027,9 @@ func (*binaryClassGlStencilMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilMask(d, obj.(*GlStencilMask))
 }
-func (*binaryClassGlStencilMask) Schema() *schema.Class { return schemaGlStencilMask }
+func (*binaryClassGlStencilMask) Schema() *schema.Entity { return schemaGlStencilMask }
 
-var schemaGlStencilMask = &schema.Class{
+var schemaGlStencilMask = &schema.Entity{
 	TypeID:  binaryIDGlStencilMask,
 	Package: "gles",
 	Name:    "GlStencilMask",
@@ -36067,9 +36067,9 @@ func (*binaryClassGlStencilMaskSeparate) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilMaskSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilMaskSeparate(d, obj.(*GlStencilMaskSeparate))
 }
-func (*binaryClassGlStencilMaskSeparate) Schema() *schema.Class { return schemaGlStencilMaskSeparate }
+func (*binaryClassGlStencilMaskSeparate) Schema() *schema.Entity { return schemaGlStencilMaskSeparate }
 
-var schemaGlStencilMaskSeparate = &schema.Class{
+var schemaGlStencilMaskSeparate = &schema.Entity{
 	TypeID:  binaryIDGlStencilMaskSeparate,
 	Package: "gles",
 	Name:    "GlStencilMaskSeparate",
@@ -36110,9 +36110,9 @@ func (*binaryClassGlStencilOp) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilOp) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilOp(d, obj.(*GlStencilOp))
 }
-func (*binaryClassGlStencilOp) Schema() *schema.Class { return schemaGlStencilOp }
+func (*binaryClassGlStencilOp) Schema() *schema.Entity { return schemaGlStencilOp }
 
-var schemaGlStencilOp = &schema.Class{
+var schemaGlStencilOp = &schema.Entity{
 	TypeID:  binaryIDGlStencilOp,
 	Package: "gles",
 	Name:    "GlStencilOp",
@@ -36156,9 +36156,9 @@ func (*binaryClassGlStencilOpSeparate) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilOpSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilOpSeparate(d, obj.(*GlStencilOpSeparate))
 }
-func (*binaryClassGlStencilOpSeparate) Schema() *schema.Class { return schemaGlStencilOpSeparate }
+func (*binaryClassGlStencilOpSeparate) Schema() *schema.Entity { return schemaGlStencilOpSeparate }
 
-var schemaGlStencilOpSeparate = &schema.Class{
+var schemaGlStencilOpSeparate = &schema.Entity{
 	TypeID:  binaryIDGlStencilOpSeparate,
 	Package: "gles",
 	Name:    "GlStencilOpSeparate",
@@ -36215,11 +36215,11 @@ func (*binaryClassGlStencilStrokePathInstancedNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlStencilStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilStrokePathInstancedNV(d, obj.(*GlStencilStrokePathInstancedNV))
 }
-func (*binaryClassGlStencilStrokePathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlStencilStrokePathInstancedNV) Schema() *schema.Entity {
 	return schemaGlStencilStrokePathInstancedNV
 }
 
-var schemaGlStencilStrokePathInstancedNV = &schema.Class{
+var schemaGlStencilStrokePathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilStrokePathInstancedNV",
@@ -36266,9 +36266,9 @@ func (*binaryClassGlStencilStrokePathNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilStrokePathNV(d, obj.(*GlStencilStrokePathNV))
 }
-func (*binaryClassGlStencilStrokePathNV) Schema() *schema.Class { return schemaGlStencilStrokePathNV }
+func (*binaryClassGlStencilStrokePathNV) Schema() *schema.Entity { return schemaGlStencilStrokePathNV }
 
-var schemaGlStencilStrokePathNV = &schema.Class{
+var schemaGlStencilStrokePathNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilStrokePathNV,
 	Package: "gles",
 	Name:    "GlStencilStrokePathNV",
@@ -36326,11 +36326,11 @@ func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Decode(d binary.Decoder
 func (*binaryClassGlStencilThenCoverFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverFillPathInstancedNV(d, obj.(*GlStencilThenCoverFillPathInstancedNV))
 }
-func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Schema() *schema.Entity {
 	return schemaGlStencilThenCoverFillPathInstancedNV
 }
 
-var schemaGlStencilThenCoverFillPathInstancedNV = &schema.Class{
+var schemaGlStencilThenCoverFillPathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilThenCoverFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathInstancedNV",
@@ -36384,11 +36384,11 @@ func (*binaryClassGlStencilThenCoverFillPathNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlStencilThenCoverFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverFillPathNV(d, obj.(*GlStencilThenCoverFillPathNV))
 }
-func (*binaryClassGlStencilThenCoverFillPathNV) Schema() *schema.Class {
+func (*binaryClassGlStencilThenCoverFillPathNV) Schema() *schema.Entity {
 	return schemaGlStencilThenCoverFillPathNV
 }
 
-var schemaGlStencilThenCoverFillPathNV = &schema.Class{
+var schemaGlStencilThenCoverFillPathNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilThenCoverFillPathNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathNV",
@@ -36447,11 +36447,11 @@ func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Decode(d binary.Decod
 func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverStrokePathInstancedNV(d, obj.(*GlStencilThenCoverStrokePathInstancedNV))
 }
-func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Schema() *schema.Class {
+func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Schema() *schema.Entity {
 	return schemaGlStencilThenCoverStrokePathInstancedNV
 }
 
-var schemaGlStencilThenCoverStrokePathInstancedNV = &schema.Class{
+var schemaGlStencilThenCoverStrokePathInstancedNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilThenCoverStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathInstancedNV",
@@ -36505,11 +36505,11 @@ func (*binaryClassGlStencilThenCoverStrokePathNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlStencilThenCoverStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverStrokePathNV(d, obj.(*GlStencilThenCoverStrokePathNV))
 }
-func (*binaryClassGlStencilThenCoverStrokePathNV) Schema() *schema.Class {
+func (*binaryClassGlStencilThenCoverStrokePathNV) Schema() *schema.Entity {
 	return schemaGlStencilThenCoverStrokePathNV
 }
 
-var schemaGlStencilThenCoverStrokePathNV = &schema.Class{
+var schemaGlStencilThenCoverStrokePathNV = &schema.Entity{
 	TypeID:  binaryIDGlStencilThenCoverStrokePathNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathNV",
@@ -36550,11 +36550,11 @@ func (*binaryClassGlSubpixelPrecisionBiasNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSubpixelPrecisionBiasNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSubpixelPrecisionBiasNV(d, obj.(*GlSubpixelPrecisionBiasNV))
 }
-func (*binaryClassGlSubpixelPrecisionBiasNV) Schema() *schema.Class {
+func (*binaryClassGlSubpixelPrecisionBiasNV) Schema() *schema.Entity {
 	return schemaGlSubpixelPrecisionBiasNV
 }
 
-var schemaGlSubpixelPrecisionBiasNV = &schema.Class{
+var schemaGlSubpixelPrecisionBiasNV = &schema.Entity{
 	TypeID:  binaryIDGlSubpixelPrecisionBiasNV,
 	Package: "gles",
 	Name:    "GlSubpixelPrecisionBiasNV",
@@ -36593,9 +36593,9 @@ func (*binaryClassGlTestFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTestFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTestFenceNV(d, obj.(*GlTestFenceNV))
 }
-func (*binaryClassGlTestFenceNV) Schema() *schema.Class { return schemaGlTestFenceNV }
+func (*binaryClassGlTestFenceNV) Schema() *schema.Entity { return schemaGlTestFenceNV }
 
-var schemaGlTestFenceNV = &schema.Class{
+var schemaGlTestFenceNV = &schema.Entity{
 	TypeID:  binaryIDGlTestFenceNV,
 	Package: "gles",
 	Name:    "GlTestFenceNV",
@@ -36636,9 +36636,9 @@ func (*binaryClassGlTexBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBuffer(d, obj.(*GlTexBuffer))
 }
-func (*binaryClassGlTexBuffer) Schema() *schema.Class { return schemaGlTexBuffer }
+func (*binaryClassGlTexBuffer) Schema() *schema.Entity { return schemaGlTexBuffer }
 
-var schemaGlTexBuffer = &schema.Class{
+var schemaGlTexBuffer = &schema.Entity{
 	TypeID:  binaryIDGlTexBuffer,
 	Package: "gles",
 	Name:    "GlTexBuffer",
@@ -36680,9 +36680,9 @@ func (*binaryClassGlTexBufferEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferEXT(d, obj.(*GlTexBufferEXT))
 }
-func (*binaryClassGlTexBufferEXT) Schema() *schema.Class { return schemaGlTexBufferEXT }
+func (*binaryClassGlTexBufferEXT) Schema() *schema.Entity { return schemaGlTexBufferEXT }
 
-var schemaGlTexBufferEXT = &schema.Class{
+var schemaGlTexBufferEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexBufferEXT,
 	Package: "gles",
 	Name:    "GlTexBufferEXT",
@@ -36724,9 +36724,9 @@ func (*binaryClassGlTexBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferOES(d, obj.(*GlTexBufferOES))
 }
-func (*binaryClassGlTexBufferOES) Schema() *schema.Class { return schemaGlTexBufferOES }
+func (*binaryClassGlTexBufferOES) Schema() *schema.Entity { return schemaGlTexBufferOES }
 
-var schemaGlTexBufferOES = &schema.Class{
+var schemaGlTexBufferOES = &schema.Entity{
 	TypeID:  binaryIDGlTexBufferOES,
 	Package: "gles",
 	Name:    "GlTexBufferOES",
@@ -36772,9 +36772,9 @@ func (*binaryClassGlTexBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRange(d, obj.(*GlTexBufferRange))
 }
-func (*binaryClassGlTexBufferRange) Schema() *schema.Class { return schemaGlTexBufferRange }
+func (*binaryClassGlTexBufferRange) Schema() *schema.Entity { return schemaGlTexBufferRange }
 
-var schemaGlTexBufferRange = &schema.Class{
+var schemaGlTexBufferRange = &schema.Entity{
 	TypeID:  binaryIDGlTexBufferRange,
 	Package: "gles",
 	Name:    "GlTexBufferRange",
@@ -36822,9 +36822,9 @@ func (*binaryClassGlTexBufferRangeEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRangeEXT(d, obj.(*GlTexBufferRangeEXT))
 }
-func (*binaryClassGlTexBufferRangeEXT) Schema() *schema.Class { return schemaGlTexBufferRangeEXT }
+func (*binaryClassGlTexBufferRangeEXT) Schema() *schema.Entity { return schemaGlTexBufferRangeEXT }
 
-var schemaGlTexBufferRangeEXT = &schema.Class{
+var schemaGlTexBufferRangeEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlTexBufferRangeEXT",
@@ -36872,9 +36872,9 @@ func (*binaryClassGlTexBufferRangeOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRangeOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRangeOES(d, obj.(*GlTexBufferRangeOES))
 }
-func (*binaryClassGlTexBufferRangeOES) Schema() *schema.Class { return schemaGlTexBufferRangeOES }
+func (*binaryClassGlTexBufferRangeOES) Schema() *schema.Entity { return schemaGlTexBufferRangeOES }
 
-var schemaGlTexBufferRangeOES = &schema.Class{
+var schemaGlTexBufferRangeOES = &schema.Entity{
 	TypeID:  binaryIDGlTexBufferRangeOES,
 	Package: "gles",
 	Name:    "GlTexBufferRangeOES",
@@ -36930,9 +36930,9 @@ func (*binaryClassGlTexImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage2D(d, obj.(*GlTexImage2D))
 }
-func (*binaryClassGlTexImage2D) Schema() *schema.Class { return schemaGlTexImage2D }
+func (*binaryClassGlTexImage2D) Schema() *schema.Entity { return schemaGlTexImage2D }
 
-var schemaGlTexImage2D = &schema.Class{
+var schemaGlTexImage2D = &schema.Entity{
 	TypeID:  binaryIDGlTexImage2D,
 	Package: "gles",
 	Name:    "GlTexImage2D",
@@ -36994,9 +36994,9 @@ func (*binaryClassGlTexImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage3D(d, obj.(*GlTexImage3D))
 }
-func (*binaryClassGlTexImage3D) Schema() *schema.Class { return schemaGlTexImage3D }
+func (*binaryClassGlTexImage3D) Schema() *schema.Entity { return schemaGlTexImage3D }
 
-var schemaGlTexImage3D = &schema.Class{
+var schemaGlTexImage3D = &schema.Entity{
 	TypeID:  binaryIDGlTexImage3D,
 	Package: "gles",
 	Name:    "GlTexImage3D",
@@ -37059,9 +37059,9 @@ func (*binaryClassGlTexImage3DOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage3DOES(d, obj.(*GlTexImage3DOES))
 }
-func (*binaryClassGlTexImage3DOES) Schema() *schema.Class { return schemaGlTexImage3DOES }
+func (*binaryClassGlTexImage3DOES) Schema() *schema.Entity { return schemaGlTexImage3DOES }
 
-var schemaGlTexImage3DOES = &schema.Class{
+var schemaGlTexImage3DOES = &schema.Entity{
 	TypeID:  binaryIDGlTexImage3DOES,
 	Package: "gles",
 	Name:    "GlTexImage3DOES",
@@ -37122,9 +37122,9 @@ func (*binaryClassGlTexPageCommitmentEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlTexPageCommitmentEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexPageCommitmentEXT(d, obj.(*GlTexPageCommitmentEXT))
 }
-func (*binaryClassGlTexPageCommitmentEXT) Schema() *schema.Class { return schemaGlTexPageCommitmentEXT }
+func (*binaryClassGlTexPageCommitmentEXT) Schema() *schema.Entity { return schemaGlTexPageCommitmentEXT }
 
-var schemaGlTexPageCommitmentEXT = &schema.Class{
+var schemaGlTexPageCommitmentEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexPageCommitmentEXT,
 	Package: "gles",
 	Name:    "GlTexPageCommitmentEXT",
@@ -37172,9 +37172,9 @@ func (*binaryClassGlTexParameterIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIiv(d, obj.(*GlTexParameterIiv))
 }
-func (*binaryClassGlTexParameterIiv) Schema() *schema.Class { return schemaGlTexParameterIiv }
+func (*binaryClassGlTexParameterIiv) Schema() *schema.Entity { return schemaGlTexParameterIiv }
 
-var schemaGlTexParameterIiv = &schema.Class{
+var schemaGlTexParameterIiv = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIiv,
 	Package: "gles",
 	Name:    "GlTexParameterIiv",
@@ -37216,9 +37216,9 @@ func (*binaryClassGlTexParameterIivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIivEXT(d, obj.(*GlTexParameterIivEXT))
 }
-func (*binaryClassGlTexParameterIivEXT) Schema() *schema.Class { return schemaGlTexParameterIivEXT }
+func (*binaryClassGlTexParameterIivEXT) Schema() *schema.Entity { return schemaGlTexParameterIivEXT }
 
-var schemaGlTexParameterIivEXT = &schema.Class{
+var schemaGlTexParameterIivEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIivEXT,
 	Package: "gles",
 	Name:    "GlTexParameterIivEXT",
@@ -37260,9 +37260,9 @@ func (*binaryClassGlTexParameterIivOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIivOES(d, obj.(*GlTexParameterIivOES))
 }
-func (*binaryClassGlTexParameterIivOES) Schema() *schema.Class { return schemaGlTexParameterIivOES }
+func (*binaryClassGlTexParameterIivOES) Schema() *schema.Entity { return schemaGlTexParameterIivOES }
 
-var schemaGlTexParameterIivOES = &schema.Class{
+var schemaGlTexParameterIivOES = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIivOES,
 	Package: "gles",
 	Name:    "GlTexParameterIivOES",
@@ -37304,9 +37304,9 @@ func (*binaryClassGlTexParameterIuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuiv(d, obj.(*GlTexParameterIuiv))
 }
-func (*binaryClassGlTexParameterIuiv) Schema() *schema.Class { return schemaGlTexParameterIuiv }
+func (*binaryClassGlTexParameterIuiv) Schema() *schema.Entity { return schemaGlTexParameterIuiv }
 
-var schemaGlTexParameterIuiv = &schema.Class{
+var schemaGlTexParameterIuiv = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIuiv,
 	Package: "gles",
 	Name:    "GlTexParameterIuiv",
@@ -37348,9 +37348,9 @@ func (*binaryClassGlTexParameterIuivEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTexParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuivEXT(d, obj.(*GlTexParameterIuivEXT))
 }
-func (*binaryClassGlTexParameterIuivEXT) Schema() *schema.Class { return schemaGlTexParameterIuivEXT }
+func (*binaryClassGlTexParameterIuivEXT) Schema() *schema.Entity { return schemaGlTexParameterIuivEXT }
 
-var schemaGlTexParameterIuivEXT = &schema.Class{
+var schemaGlTexParameterIuivEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlTexParameterIuivEXT",
@@ -37392,9 +37392,9 @@ func (*binaryClassGlTexParameterIuivOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTexParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuivOES(d, obj.(*GlTexParameterIuivOES))
 }
-func (*binaryClassGlTexParameterIuivOES) Schema() *schema.Class { return schemaGlTexParameterIuivOES }
+func (*binaryClassGlTexParameterIuivOES) Schema() *schema.Entity { return schemaGlTexParameterIuivOES }
 
-var schemaGlTexParameterIuivOES = &schema.Class{
+var schemaGlTexParameterIuivOES = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterIuivOES,
 	Package: "gles",
 	Name:    "GlTexParameterIuivOES",
@@ -37436,9 +37436,9 @@ func (*binaryClassGlTexParameterf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterf(d, obj.(*GlTexParameterf))
 }
-func (*binaryClassGlTexParameterf) Schema() *schema.Class { return schemaGlTexParameterf }
+func (*binaryClassGlTexParameterf) Schema() *schema.Entity { return schemaGlTexParameterf }
 
-var schemaGlTexParameterf = &schema.Class{
+var schemaGlTexParameterf = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterf,
 	Package: "gles",
 	Name:    "GlTexParameterf",
@@ -37480,9 +37480,9 @@ func (*binaryClassGlTexParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterfv(d, obj.(*GlTexParameterfv))
 }
-func (*binaryClassGlTexParameterfv) Schema() *schema.Class { return schemaGlTexParameterfv }
+func (*binaryClassGlTexParameterfv) Schema() *schema.Entity { return schemaGlTexParameterfv }
 
-var schemaGlTexParameterfv = &schema.Class{
+var schemaGlTexParameterfv = &schema.Entity{
 	TypeID:  binaryIDGlTexParameterfv,
 	Package: "gles",
 	Name:    "GlTexParameterfv",
@@ -37524,9 +37524,9 @@ func (*binaryClassGlTexParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameteri(d, obj.(*GlTexParameteri))
 }
-func (*binaryClassGlTexParameteri) Schema() *schema.Class { return schemaGlTexParameteri }
+func (*binaryClassGlTexParameteri) Schema() *schema.Entity { return schemaGlTexParameteri }
 
-var schemaGlTexParameteri = &schema.Class{
+var schemaGlTexParameteri = &schema.Entity{
 	TypeID:  binaryIDGlTexParameteri,
 	Package: "gles",
 	Name:    "GlTexParameteri",
@@ -37568,9 +37568,9 @@ func (*binaryClassGlTexParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameteriv(d, obj.(*GlTexParameteriv))
 }
-func (*binaryClassGlTexParameteriv) Schema() *schema.Class { return schemaGlTexParameteriv }
+func (*binaryClassGlTexParameteriv) Schema() *schema.Entity { return schemaGlTexParameteriv }
 
-var schemaGlTexParameteriv = &schema.Class{
+var schemaGlTexParameteriv = &schema.Entity{
 	TypeID:  binaryIDGlTexParameteriv,
 	Package: "gles",
 	Name:    "GlTexParameteriv",
@@ -37614,9 +37614,9 @@ func (*binaryClassGlTexStorage1DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage1DEXT(d, obj.(*GlTexStorage1DEXT))
 }
-func (*binaryClassGlTexStorage1DEXT) Schema() *schema.Class { return schemaGlTexStorage1DEXT }
+func (*binaryClassGlTexStorage1DEXT) Schema() *schema.Entity { return schemaGlTexStorage1DEXT }
 
-var schemaGlTexStorage1DEXT = &schema.Class{
+var schemaGlTexStorage1DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage1DEXT",
@@ -37663,9 +37663,9 @@ func (*binaryClassGlTexStorage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2D(d, obj.(*GlTexStorage2D))
 }
-func (*binaryClassGlTexStorage2D) Schema() *schema.Class { return schemaGlTexStorage2D }
+func (*binaryClassGlTexStorage2D) Schema() *schema.Entity { return schemaGlTexStorage2D }
 
-var schemaGlTexStorage2D = &schema.Class{
+var schemaGlTexStorage2D = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage2D,
 	Package: "gles",
 	Name:    "GlTexStorage2D",
@@ -37713,9 +37713,9 @@ func (*binaryClassGlTexStorage2DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2DEXT(d, obj.(*GlTexStorage2DEXT))
 }
-func (*binaryClassGlTexStorage2DEXT) Schema() *schema.Class { return schemaGlTexStorage2DEXT }
+func (*binaryClassGlTexStorage2DEXT) Schema() *schema.Entity { return schemaGlTexStorage2DEXT }
 
-var schemaGlTexStorage2DEXT = &schema.Class{
+var schemaGlTexStorage2DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage2DEXT",
@@ -37765,11 +37765,11 @@ func (*binaryClassGlTexStorage2DMultisample) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlTexStorage2DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2DMultisample(d, obj.(*GlTexStorage2DMultisample))
 }
-func (*binaryClassGlTexStorage2DMultisample) Schema() *schema.Class {
+func (*binaryClassGlTexStorage2DMultisample) Schema() *schema.Entity {
 	return schemaGlTexStorage2DMultisample
 }
 
-var schemaGlTexStorage2DMultisample = &schema.Class{
+var schemaGlTexStorage2DMultisample = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage2DMultisample,
 	Package: "gles",
 	Name:    "GlTexStorage2DMultisample",
@@ -37820,9 +37820,9 @@ func (*binaryClassGlTexStorage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3D(d, obj.(*GlTexStorage3D))
 }
-func (*binaryClassGlTexStorage3D) Schema() *schema.Class { return schemaGlTexStorage3D }
+func (*binaryClassGlTexStorage3D) Schema() *schema.Entity { return schemaGlTexStorage3D }
 
-var schemaGlTexStorage3D = &schema.Class{
+var schemaGlTexStorage3D = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage3D,
 	Package: "gles",
 	Name:    "GlTexStorage3D",
@@ -37873,9 +37873,9 @@ func (*binaryClassGlTexStorage3DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DEXT(d, obj.(*GlTexStorage3DEXT))
 }
-func (*binaryClassGlTexStorage3DEXT) Schema() *schema.Class { return schemaGlTexStorage3DEXT }
+func (*binaryClassGlTexStorage3DEXT) Schema() *schema.Entity { return schemaGlTexStorage3DEXT }
 
-var schemaGlTexStorage3DEXT = &schema.Class{
+var schemaGlTexStorage3DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage3DEXT",
@@ -37928,11 +37928,11 @@ func (*binaryClassGlTexStorage3DMultisample) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlTexStorage3DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DMultisample(d, obj.(*GlTexStorage3DMultisample))
 }
-func (*binaryClassGlTexStorage3DMultisample) Schema() *schema.Class {
+func (*binaryClassGlTexStorage3DMultisample) Schema() *schema.Entity {
 	return schemaGlTexStorage3DMultisample
 }
 
-var schemaGlTexStorage3DMultisample = &schema.Class{
+var schemaGlTexStorage3DMultisample = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage3DMultisample,
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisample",
@@ -37990,11 +37990,11 @@ func (*binaryClassGlTexStorage3DMultisampleOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlTexStorage3DMultisampleOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DMultisampleOES(d, obj.(*GlTexStorage3DMultisampleOES))
 }
-func (*binaryClassGlTexStorage3DMultisampleOES) Schema() *schema.Class {
+func (*binaryClassGlTexStorage3DMultisampleOES) Schema() *schema.Entity {
 	return schemaGlTexStorage3DMultisampleOES
 }
 
-var schemaGlTexStorage3DMultisampleOES = &schema.Class{
+var schemaGlTexStorage3DMultisampleOES = &schema.Entity{
 	TypeID:  binaryIDGlTexStorage3DMultisampleOES,
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisampleOES",
@@ -38052,9 +38052,9 @@ func (*binaryClassGlTexSubImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage2D(d, obj.(*GlTexSubImage2D))
 }
-func (*binaryClassGlTexSubImage2D) Schema() *schema.Class { return schemaGlTexSubImage2D }
+func (*binaryClassGlTexSubImage2D) Schema() *schema.Entity { return schemaGlTexSubImage2D }
 
-var schemaGlTexSubImage2D = &schema.Class{
+var schemaGlTexSubImage2D = &schema.Entity{
 	TypeID:  binaryIDGlTexSubImage2D,
 	Package: "gles",
 	Name:    "GlTexSubImage2D",
@@ -38118,9 +38118,9 @@ func (*binaryClassGlTexSubImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage3D(d, obj.(*GlTexSubImage3D))
 }
-func (*binaryClassGlTexSubImage3D) Schema() *schema.Class { return schemaGlTexSubImage3D }
+func (*binaryClassGlTexSubImage3D) Schema() *schema.Entity { return schemaGlTexSubImage3D }
 
-var schemaGlTexSubImage3D = &schema.Class{
+var schemaGlTexSubImage3D = &schema.Entity{
 	TypeID:  binaryIDGlTexSubImage3D,
 	Package: "gles",
 	Name:    "GlTexSubImage3D",
@@ -38186,9 +38186,9 @@ func (*binaryClassGlTexSubImage3DOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage3DOES(d, obj.(*GlTexSubImage3DOES))
 }
-func (*binaryClassGlTexSubImage3DOES) Schema() *schema.Class { return schemaGlTexSubImage3DOES }
+func (*binaryClassGlTexSubImage3DOES) Schema() *schema.Entity { return schemaGlTexSubImage3DOES }
 
-var schemaGlTexSubImage3DOES = &schema.Class{
+var schemaGlTexSubImage3DOES = &schema.Entity{
 	TypeID:  binaryIDGlTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlTexSubImage3DOES",
@@ -38242,9 +38242,9 @@ func (*binaryClassGlTextureStorage1DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage1DEXT(d, obj.(*GlTextureStorage1DEXT))
 }
-func (*binaryClassGlTextureStorage1DEXT) Schema() *schema.Class { return schemaGlTextureStorage1DEXT }
+func (*binaryClassGlTextureStorage1DEXT) Schema() *schema.Entity { return schemaGlTextureStorage1DEXT }
 
-var schemaGlTextureStorage1DEXT = &schema.Class{
+var schemaGlTextureStorage1DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTextureStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage1DEXT",
@@ -38294,9 +38294,9 @@ func (*binaryClassGlTextureStorage2DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage2DEXT(d, obj.(*GlTextureStorage2DEXT))
 }
-func (*binaryClassGlTextureStorage2DEXT) Schema() *schema.Class { return schemaGlTextureStorage2DEXT }
+func (*binaryClassGlTextureStorage2DEXT) Schema() *schema.Entity { return schemaGlTextureStorage2DEXT }
 
-var schemaGlTextureStorage2DEXT = &schema.Class{
+var schemaGlTextureStorage2DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTextureStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage2DEXT",
@@ -38349,9 +38349,9 @@ func (*binaryClassGlTextureStorage3DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage3DEXT(d, obj.(*GlTextureStorage3DEXT))
 }
-func (*binaryClassGlTextureStorage3DEXT) Schema() *schema.Class { return schemaGlTextureStorage3DEXT }
+func (*binaryClassGlTextureStorage3DEXT) Schema() *schema.Entity { return schemaGlTextureStorage3DEXT }
 
-var schemaGlTextureStorage3DEXT = &schema.Class{
+var schemaGlTextureStorage3DEXT = &schema.Entity{
 	TypeID:  binaryIDGlTextureStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage3DEXT",
@@ -38407,9 +38407,9 @@ func (*binaryClassGlTextureViewEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTextureViewEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureViewEXT(d, obj.(*GlTextureViewEXT))
 }
-func (*binaryClassGlTextureViewEXT) Schema() *schema.Class { return schemaGlTextureViewEXT }
+func (*binaryClassGlTextureViewEXT) Schema() *schema.Entity { return schemaGlTextureViewEXT }
 
-var schemaGlTextureViewEXT = &schema.Class{
+var schemaGlTextureViewEXT = &schema.Entity{
 	TypeID:  binaryIDGlTextureViewEXT,
 	Package: "gles",
 	Name:    "GlTextureViewEXT",
@@ -38466,9 +38466,9 @@ func (*binaryClassGlTextureViewOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTextureViewOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureViewOES(d, obj.(*GlTextureViewOES))
 }
-func (*binaryClassGlTextureViewOES) Schema() *schema.Class { return schemaGlTextureViewOES }
+func (*binaryClassGlTextureViewOES) Schema() *schema.Entity { return schemaGlTextureViewOES }
 
-var schemaGlTextureViewOES = &schema.Class{
+var schemaGlTextureViewOES = &schema.Entity{
 	TypeID:  binaryIDGlTextureViewOES,
 	Package: "gles",
 	Name:    "GlTextureViewOES",
@@ -38521,11 +38521,11 @@ func (*binaryClassGlTransformFeedbackVaryings) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlTransformFeedbackVaryings) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTransformFeedbackVaryings(d, obj.(*GlTransformFeedbackVaryings))
 }
-func (*binaryClassGlTransformFeedbackVaryings) Schema() *schema.Class {
+func (*binaryClassGlTransformFeedbackVaryings) Schema() *schema.Entity {
 	return schemaGlTransformFeedbackVaryings
 }
 
-var schemaGlTransformFeedbackVaryings = &schema.Class{
+var schemaGlTransformFeedbackVaryings = &schema.Entity{
 	TypeID:  binaryIDGlTransformFeedbackVaryings,
 	Package: "gles",
 	Name:    "GlTransformFeedbackVaryings",
@@ -38570,9 +38570,9 @@ func (*binaryClassGlTransformPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTransformPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTransformPathNV(d, obj.(*GlTransformPathNV))
 }
-func (*binaryClassGlTransformPathNV) Schema() *schema.Class { return schemaGlTransformPathNV }
+func (*binaryClassGlTransformPathNV) Schema() *schema.Entity { return schemaGlTransformPathNV }
 
-var schemaGlTransformPathNV = &schema.Class{
+var schemaGlTransformPathNV = &schema.Entity{
 	TypeID:  binaryIDGlTransformPathNV,
 	Package: "gles",
 	Name:    "GlTransformPathNV",
@@ -38613,9 +38613,9 @@ func (*binaryClassGlUniform1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1f(d, obj.(*GlUniform1f))
 }
-func (*binaryClassGlUniform1f) Schema() *schema.Class { return schemaGlUniform1f }
+func (*binaryClassGlUniform1f) Schema() *schema.Entity { return schemaGlUniform1f }
 
-var schemaGlUniform1f = &schema.Class{
+var schemaGlUniform1f = &schema.Entity{
 	TypeID:  binaryIDGlUniform1f,
 	Package: "gles",
 	Name:    "GlUniform1f",
@@ -38656,9 +38656,9 @@ func (*binaryClassGlUniform1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1fv(d, obj.(*GlUniform1fv))
 }
-func (*binaryClassGlUniform1fv) Schema() *schema.Class { return schemaGlUniform1fv }
+func (*binaryClassGlUniform1fv) Schema() *schema.Entity { return schemaGlUniform1fv }
 
-var schemaGlUniform1fv = &schema.Class{
+var schemaGlUniform1fv = &schema.Entity{
 	TypeID:  binaryIDGlUniform1fv,
 	Package: "gles",
 	Name:    "GlUniform1fv",
@@ -38698,9 +38698,9 @@ func (*binaryClassGlUniform1i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1i(d, obj.(*GlUniform1i))
 }
-func (*binaryClassGlUniform1i) Schema() *schema.Class { return schemaGlUniform1i }
+func (*binaryClassGlUniform1i) Schema() *schema.Entity { return schemaGlUniform1i }
 
-var schemaGlUniform1i = &schema.Class{
+var schemaGlUniform1i = &schema.Entity{
 	TypeID:  binaryIDGlUniform1i,
 	Package: "gles",
 	Name:    "GlUniform1i",
@@ -38741,9 +38741,9 @@ func (*binaryClassGlUniform1iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1iv(d, obj.(*GlUniform1iv))
 }
-func (*binaryClassGlUniform1iv) Schema() *schema.Class { return schemaGlUniform1iv }
+func (*binaryClassGlUniform1iv) Schema() *schema.Entity { return schemaGlUniform1iv }
 
-var schemaGlUniform1iv = &schema.Class{
+var schemaGlUniform1iv = &schema.Entity{
 	TypeID:  binaryIDGlUniform1iv,
 	Package: "gles",
 	Name:    "GlUniform1iv",
@@ -38783,9 +38783,9 @@ func (*binaryClassGlUniform1ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1ui(d, obj.(*GlUniform1ui))
 }
-func (*binaryClassGlUniform1ui) Schema() *schema.Class { return schemaGlUniform1ui }
+func (*binaryClassGlUniform1ui) Schema() *schema.Entity { return schemaGlUniform1ui }
 
-var schemaGlUniform1ui = &schema.Class{
+var schemaGlUniform1ui = &schema.Entity{
 	TypeID:  binaryIDGlUniform1ui,
 	Package: "gles",
 	Name:    "GlUniform1ui",
@@ -38826,9 +38826,9 @@ func (*binaryClassGlUniform1uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1uiv(d, obj.(*GlUniform1uiv))
 }
-func (*binaryClassGlUniform1uiv) Schema() *schema.Class { return schemaGlUniform1uiv }
+func (*binaryClassGlUniform1uiv) Schema() *schema.Entity { return schemaGlUniform1uiv }
 
-var schemaGlUniform1uiv = &schema.Class{
+var schemaGlUniform1uiv = &schema.Entity{
 	TypeID:  binaryIDGlUniform1uiv,
 	Package: "gles",
 	Name:    "GlUniform1uiv",
@@ -38870,9 +38870,9 @@ func (*binaryClassGlUniform2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2f(d, obj.(*GlUniform2f))
 }
-func (*binaryClassGlUniform2f) Schema() *schema.Class { return schemaGlUniform2f }
+func (*binaryClassGlUniform2f) Schema() *schema.Entity { return schemaGlUniform2f }
 
-var schemaGlUniform2f = &schema.Class{
+var schemaGlUniform2f = &schema.Entity{
 	TypeID:  binaryIDGlUniform2f,
 	Package: "gles",
 	Name:    "GlUniform2f",
@@ -38914,9 +38914,9 @@ func (*binaryClassGlUniform2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2fv(d, obj.(*GlUniform2fv))
 }
-func (*binaryClassGlUniform2fv) Schema() *schema.Class { return schemaGlUniform2fv }
+func (*binaryClassGlUniform2fv) Schema() *schema.Entity { return schemaGlUniform2fv }
 
-var schemaGlUniform2fv = &schema.Class{
+var schemaGlUniform2fv = &schema.Entity{
 	TypeID:  binaryIDGlUniform2fv,
 	Package: "gles",
 	Name:    "GlUniform2fv",
@@ -38958,9 +38958,9 @@ func (*binaryClassGlUniform2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2i(d, obj.(*GlUniform2i))
 }
-func (*binaryClassGlUniform2i) Schema() *schema.Class { return schemaGlUniform2i }
+func (*binaryClassGlUniform2i) Schema() *schema.Entity { return schemaGlUniform2i }
 
-var schemaGlUniform2i = &schema.Class{
+var schemaGlUniform2i = &schema.Entity{
 	TypeID:  binaryIDGlUniform2i,
 	Package: "gles",
 	Name:    "GlUniform2i",
@@ -39002,9 +39002,9 @@ func (*binaryClassGlUniform2iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2iv(d, obj.(*GlUniform2iv))
 }
-func (*binaryClassGlUniform2iv) Schema() *schema.Class { return schemaGlUniform2iv }
+func (*binaryClassGlUniform2iv) Schema() *schema.Entity { return schemaGlUniform2iv }
 
-var schemaGlUniform2iv = &schema.Class{
+var schemaGlUniform2iv = &schema.Entity{
 	TypeID:  binaryIDGlUniform2iv,
 	Package: "gles",
 	Name:    "GlUniform2iv",
@@ -39046,9 +39046,9 @@ func (*binaryClassGlUniform2ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2ui(d, obj.(*GlUniform2ui))
 }
-func (*binaryClassGlUniform2ui) Schema() *schema.Class { return schemaGlUniform2ui }
+func (*binaryClassGlUniform2ui) Schema() *schema.Entity { return schemaGlUniform2ui }
 
-var schemaGlUniform2ui = &schema.Class{
+var schemaGlUniform2ui = &schema.Entity{
 	TypeID:  binaryIDGlUniform2ui,
 	Package: "gles",
 	Name:    "GlUniform2ui",
@@ -39090,9 +39090,9 @@ func (*binaryClassGlUniform2uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2uiv(d, obj.(*GlUniform2uiv))
 }
-func (*binaryClassGlUniform2uiv) Schema() *schema.Class { return schemaGlUniform2uiv }
+func (*binaryClassGlUniform2uiv) Schema() *schema.Entity { return schemaGlUniform2uiv }
 
-var schemaGlUniform2uiv = &schema.Class{
+var schemaGlUniform2uiv = &schema.Entity{
 	TypeID:  binaryIDGlUniform2uiv,
 	Package: "gles",
 	Name:    "GlUniform2uiv",
@@ -39136,9 +39136,9 @@ func (*binaryClassGlUniform3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3f(d, obj.(*GlUniform3f))
 }
-func (*binaryClassGlUniform3f) Schema() *schema.Class { return schemaGlUniform3f }
+func (*binaryClassGlUniform3f) Schema() *schema.Entity { return schemaGlUniform3f }
 
-var schemaGlUniform3f = &schema.Class{
+var schemaGlUniform3f = &schema.Entity{
 	TypeID:  binaryIDGlUniform3f,
 	Package: "gles",
 	Name:    "GlUniform3f",
@@ -39181,9 +39181,9 @@ func (*binaryClassGlUniform3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3fv(d, obj.(*GlUniform3fv))
 }
-func (*binaryClassGlUniform3fv) Schema() *schema.Class { return schemaGlUniform3fv }
+func (*binaryClassGlUniform3fv) Schema() *schema.Entity { return schemaGlUniform3fv }
 
-var schemaGlUniform3fv = &schema.Class{
+var schemaGlUniform3fv = &schema.Entity{
 	TypeID:  binaryIDGlUniform3fv,
 	Package: "gles",
 	Name:    "GlUniform3fv",
@@ -39227,9 +39227,9 @@ func (*binaryClassGlUniform3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3i(d, obj.(*GlUniform3i))
 }
-func (*binaryClassGlUniform3i) Schema() *schema.Class { return schemaGlUniform3i }
+func (*binaryClassGlUniform3i) Schema() *schema.Entity { return schemaGlUniform3i }
 
-var schemaGlUniform3i = &schema.Class{
+var schemaGlUniform3i = &schema.Entity{
 	TypeID:  binaryIDGlUniform3i,
 	Package: "gles",
 	Name:    "GlUniform3i",
@@ -39272,9 +39272,9 @@ func (*binaryClassGlUniform3iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3iv(d, obj.(*GlUniform3iv))
 }
-func (*binaryClassGlUniform3iv) Schema() *schema.Class { return schemaGlUniform3iv }
+func (*binaryClassGlUniform3iv) Schema() *schema.Entity { return schemaGlUniform3iv }
 
-var schemaGlUniform3iv = &schema.Class{
+var schemaGlUniform3iv = &schema.Entity{
 	TypeID:  binaryIDGlUniform3iv,
 	Package: "gles",
 	Name:    "GlUniform3iv",
@@ -39318,9 +39318,9 @@ func (*binaryClassGlUniform3ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3ui(d, obj.(*GlUniform3ui))
 }
-func (*binaryClassGlUniform3ui) Schema() *schema.Class { return schemaGlUniform3ui }
+func (*binaryClassGlUniform3ui) Schema() *schema.Entity { return schemaGlUniform3ui }
 
-var schemaGlUniform3ui = &schema.Class{
+var schemaGlUniform3ui = &schema.Entity{
 	TypeID:  binaryIDGlUniform3ui,
 	Package: "gles",
 	Name:    "GlUniform3ui",
@@ -39363,9 +39363,9 @@ func (*binaryClassGlUniform3uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3uiv(d, obj.(*GlUniform3uiv))
 }
-func (*binaryClassGlUniform3uiv) Schema() *schema.Class { return schemaGlUniform3uiv }
+func (*binaryClassGlUniform3uiv) Schema() *schema.Entity { return schemaGlUniform3uiv }
 
-var schemaGlUniform3uiv = &schema.Class{
+var schemaGlUniform3uiv = &schema.Entity{
 	TypeID:  binaryIDGlUniform3uiv,
 	Package: "gles",
 	Name:    "GlUniform3uiv",
@@ -39411,9 +39411,9 @@ func (*binaryClassGlUniform4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4f(d, obj.(*GlUniform4f))
 }
-func (*binaryClassGlUniform4f) Schema() *schema.Class { return schemaGlUniform4f }
+func (*binaryClassGlUniform4f) Schema() *schema.Entity { return schemaGlUniform4f }
 
-var schemaGlUniform4f = &schema.Class{
+var schemaGlUniform4f = &schema.Entity{
 	TypeID:  binaryIDGlUniform4f,
 	Package: "gles",
 	Name:    "GlUniform4f",
@@ -39457,9 +39457,9 @@ func (*binaryClassGlUniform4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4fv(d, obj.(*GlUniform4fv))
 }
-func (*binaryClassGlUniform4fv) Schema() *schema.Class { return schemaGlUniform4fv }
+func (*binaryClassGlUniform4fv) Schema() *schema.Entity { return schemaGlUniform4fv }
 
-var schemaGlUniform4fv = &schema.Class{
+var schemaGlUniform4fv = &schema.Entity{
 	TypeID:  binaryIDGlUniform4fv,
 	Package: "gles",
 	Name:    "GlUniform4fv",
@@ -39505,9 +39505,9 @@ func (*binaryClassGlUniform4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4i(d, obj.(*GlUniform4i))
 }
-func (*binaryClassGlUniform4i) Schema() *schema.Class { return schemaGlUniform4i }
+func (*binaryClassGlUniform4i) Schema() *schema.Entity { return schemaGlUniform4i }
 
-var schemaGlUniform4i = &schema.Class{
+var schemaGlUniform4i = &schema.Entity{
 	TypeID:  binaryIDGlUniform4i,
 	Package: "gles",
 	Name:    "GlUniform4i",
@@ -39551,9 +39551,9 @@ func (*binaryClassGlUniform4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4iv(d, obj.(*GlUniform4iv))
 }
-func (*binaryClassGlUniform4iv) Schema() *schema.Class { return schemaGlUniform4iv }
+func (*binaryClassGlUniform4iv) Schema() *schema.Entity { return schemaGlUniform4iv }
 
-var schemaGlUniform4iv = &schema.Class{
+var schemaGlUniform4iv = &schema.Entity{
 	TypeID:  binaryIDGlUniform4iv,
 	Package: "gles",
 	Name:    "GlUniform4iv",
@@ -39599,9 +39599,9 @@ func (*binaryClassGlUniform4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4ui(d, obj.(*GlUniform4ui))
 }
-func (*binaryClassGlUniform4ui) Schema() *schema.Class { return schemaGlUniform4ui }
+func (*binaryClassGlUniform4ui) Schema() *schema.Entity { return schemaGlUniform4ui }
 
-var schemaGlUniform4ui = &schema.Class{
+var schemaGlUniform4ui = &schema.Entity{
 	TypeID:  binaryIDGlUniform4ui,
 	Package: "gles",
 	Name:    "GlUniform4ui",
@@ -39645,9 +39645,9 @@ func (*binaryClassGlUniform4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4uiv(d, obj.(*GlUniform4uiv))
 }
-func (*binaryClassGlUniform4uiv) Schema() *schema.Class { return schemaGlUniform4uiv }
+func (*binaryClassGlUniform4uiv) Schema() *schema.Entity { return schemaGlUniform4uiv }
 
-var schemaGlUniform4uiv = &schema.Class{
+var schemaGlUniform4uiv = &schema.Entity{
 	TypeID:  binaryIDGlUniform4uiv,
 	Package: "gles",
 	Name:    "GlUniform4uiv",
@@ -39689,9 +39689,9 @@ func (*binaryClassGlUniformBlockBinding) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUniformBlockBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformBlockBinding(d, obj.(*GlUniformBlockBinding))
 }
-func (*binaryClassGlUniformBlockBinding) Schema() *schema.Class { return schemaGlUniformBlockBinding }
+func (*binaryClassGlUniformBlockBinding) Schema() *schema.Entity { return schemaGlUniformBlockBinding }
 
-var schemaGlUniformBlockBinding = &schema.Class{
+var schemaGlUniformBlockBinding = &schema.Entity{
 	TypeID:  binaryIDGlUniformBlockBinding,
 	Package: "gles",
 	Name:    "GlUniformBlockBinding",
@@ -39731,9 +39731,9 @@ func (*binaryClassGlUniformHandleui64NV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUniformHandleui64NV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformHandleui64NV(d, obj.(*GlUniformHandleui64NV))
 }
-func (*binaryClassGlUniformHandleui64NV) Schema() *schema.Class { return schemaGlUniformHandleui64NV }
+func (*binaryClassGlUniformHandleui64NV) Schema() *schema.Entity { return schemaGlUniformHandleui64NV }
 
-var schemaGlUniformHandleui64NV = &schema.Class{
+var schemaGlUniformHandleui64NV = &schema.Entity{
 	TypeID:  binaryIDGlUniformHandleui64NV,
 	Package: "gles",
 	Name:    "GlUniformHandleui64NV",
@@ -39774,9 +39774,9 @@ func (*binaryClassGlUniformHandleui64vNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformHandleui64vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformHandleui64vNV(d, obj.(*GlUniformHandleui64vNV))
 }
-func (*binaryClassGlUniformHandleui64vNV) Schema() *schema.Class { return schemaGlUniformHandleui64vNV }
+func (*binaryClassGlUniformHandleui64vNV) Schema() *schema.Entity { return schemaGlUniformHandleui64vNV }
 
-var schemaGlUniformHandleui64vNV = &schema.Class{
+var schemaGlUniformHandleui64vNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformHandleui64vNV,
 	Package: "gles",
 	Name:    "GlUniformHandleui64vNV",
@@ -39820,9 +39820,9 @@ func (*binaryClassGlUniformMatrix2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2fv(d, obj.(*GlUniformMatrix2fv))
 }
-func (*binaryClassGlUniformMatrix2fv) Schema() *schema.Class { return schemaGlUniformMatrix2fv }
+func (*binaryClassGlUniformMatrix2fv) Schema() *schema.Entity { return schemaGlUniformMatrix2fv }
 
-var schemaGlUniformMatrix2fv = &schema.Class{
+var schemaGlUniformMatrix2fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2fv",
@@ -39867,9 +39867,9 @@ func (*binaryClassGlUniformMatrix2x3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x3fv(d, obj.(*GlUniformMatrix2x3fv))
 }
-func (*binaryClassGlUniformMatrix2x3fv) Schema() *schema.Class { return schemaGlUniformMatrix2x3fv }
+func (*binaryClassGlUniformMatrix2x3fv) Schema() *schema.Entity { return schemaGlUniformMatrix2x3fv }
 
-var schemaGlUniformMatrix2x3fv = &schema.Class{
+var schemaGlUniformMatrix2x3fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fv",
@@ -39914,9 +39914,9 @@ func (*binaryClassGlUniformMatrix2x3fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix2x3fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x3fvNV(d, obj.(*GlUniformMatrix2x3fvNV))
 }
-func (*binaryClassGlUniformMatrix2x3fvNV) Schema() *schema.Class { return schemaGlUniformMatrix2x3fvNV }
+func (*binaryClassGlUniformMatrix2x3fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix2x3fvNV }
 
-var schemaGlUniformMatrix2x3fvNV = &schema.Class{
+var schemaGlUniformMatrix2x3fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x3fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fvNV",
@@ -39961,9 +39961,9 @@ func (*binaryClassGlUniformMatrix2x4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x4fv(d, obj.(*GlUniformMatrix2x4fv))
 }
-func (*binaryClassGlUniformMatrix2x4fv) Schema() *schema.Class { return schemaGlUniformMatrix2x4fv }
+func (*binaryClassGlUniformMatrix2x4fv) Schema() *schema.Entity { return schemaGlUniformMatrix2x4fv }
 
-var schemaGlUniformMatrix2x4fv = &schema.Class{
+var schemaGlUniformMatrix2x4fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fv",
@@ -40008,9 +40008,9 @@ func (*binaryClassGlUniformMatrix2x4fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix2x4fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x4fvNV(d, obj.(*GlUniformMatrix2x4fvNV))
 }
-func (*binaryClassGlUniformMatrix2x4fvNV) Schema() *schema.Class { return schemaGlUniformMatrix2x4fvNV }
+func (*binaryClassGlUniformMatrix2x4fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix2x4fvNV }
 
-var schemaGlUniformMatrix2x4fvNV = &schema.Class{
+var schemaGlUniformMatrix2x4fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x4fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fvNV",
@@ -40055,9 +40055,9 @@ func (*binaryClassGlUniformMatrix3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3fv(d, obj.(*GlUniformMatrix3fv))
 }
-func (*binaryClassGlUniformMatrix3fv) Schema() *schema.Class { return schemaGlUniformMatrix3fv }
+func (*binaryClassGlUniformMatrix3fv) Schema() *schema.Entity { return schemaGlUniformMatrix3fv }
 
-var schemaGlUniformMatrix3fv = &schema.Class{
+var schemaGlUniformMatrix3fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3fv",
@@ -40102,9 +40102,9 @@ func (*binaryClassGlUniformMatrix3x2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x2fv(d, obj.(*GlUniformMatrix3x2fv))
 }
-func (*binaryClassGlUniformMatrix3x2fv) Schema() *schema.Class { return schemaGlUniformMatrix3x2fv }
+func (*binaryClassGlUniformMatrix3x2fv) Schema() *schema.Entity { return schemaGlUniformMatrix3x2fv }
 
-var schemaGlUniformMatrix3x2fv = &schema.Class{
+var schemaGlUniformMatrix3x2fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fv",
@@ -40149,9 +40149,9 @@ func (*binaryClassGlUniformMatrix3x2fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix3x2fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x2fvNV(d, obj.(*GlUniformMatrix3x2fvNV))
 }
-func (*binaryClassGlUniformMatrix3x2fvNV) Schema() *schema.Class { return schemaGlUniformMatrix3x2fvNV }
+func (*binaryClassGlUniformMatrix3x2fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix3x2fvNV }
 
-var schemaGlUniformMatrix3x2fvNV = &schema.Class{
+var schemaGlUniformMatrix3x2fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x2fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fvNV",
@@ -40196,9 +40196,9 @@ func (*binaryClassGlUniformMatrix3x4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x4fv(d, obj.(*GlUniformMatrix3x4fv))
 }
-func (*binaryClassGlUniformMatrix3x4fv) Schema() *schema.Class { return schemaGlUniformMatrix3x4fv }
+func (*binaryClassGlUniformMatrix3x4fv) Schema() *schema.Entity { return schemaGlUniformMatrix3x4fv }
 
-var schemaGlUniformMatrix3x4fv = &schema.Class{
+var schemaGlUniformMatrix3x4fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fv",
@@ -40243,9 +40243,9 @@ func (*binaryClassGlUniformMatrix3x4fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix3x4fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x4fvNV(d, obj.(*GlUniformMatrix3x4fvNV))
 }
-func (*binaryClassGlUniformMatrix3x4fvNV) Schema() *schema.Class { return schemaGlUniformMatrix3x4fvNV }
+func (*binaryClassGlUniformMatrix3x4fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix3x4fvNV }
 
-var schemaGlUniformMatrix3x4fvNV = &schema.Class{
+var schemaGlUniformMatrix3x4fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x4fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fvNV",
@@ -40290,9 +40290,9 @@ func (*binaryClassGlUniformMatrix4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4fv(d, obj.(*GlUniformMatrix4fv))
 }
-func (*binaryClassGlUniformMatrix4fv) Schema() *schema.Class { return schemaGlUniformMatrix4fv }
+func (*binaryClassGlUniformMatrix4fv) Schema() *schema.Entity { return schemaGlUniformMatrix4fv }
 
-var schemaGlUniformMatrix4fv = &schema.Class{
+var schemaGlUniformMatrix4fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4fv",
@@ -40337,9 +40337,9 @@ func (*binaryClassGlUniformMatrix4x2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x2fv(d, obj.(*GlUniformMatrix4x2fv))
 }
-func (*binaryClassGlUniformMatrix4x2fv) Schema() *schema.Class { return schemaGlUniformMatrix4x2fv }
+func (*binaryClassGlUniformMatrix4x2fv) Schema() *schema.Entity { return schemaGlUniformMatrix4x2fv }
 
-var schemaGlUniformMatrix4x2fv = &schema.Class{
+var schemaGlUniformMatrix4x2fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fv",
@@ -40384,9 +40384,9 @@ func (*binaryClassGlUniformMatrix4x2fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix4x2fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x2fvNV(d, obj.(*GlUniformMatrix4x2fvNV))
 }
-func (*binaryClassGlUniformMatrix4x2fvNV) Schema() *schema.Class { return schemaGlUniformMatrix4x2fvNV }
+func (*binaryClassGlUniformMatrix4x2fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix4x2fvNV }
 
-var schemaGlUniformMatrix4x2fvNV = &schema.Class{
+var schemaGlUniformMatrix4x2fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x2fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fvNV",
@@ -40431,9 +40431,9 @@ func (*binaryClassGlUniformMatrix4x3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x3fv(d, obj.(*GlUniformMatrix4x3fv))
 }
-func (*binaryClassGlUniformMatrix4x3fv) Schema() *schema.Class { return schemaGlUniformMatrix4x3fv }
+func (*binaryClassGlUniformMatrix4x3fv) Schema() *schema.Entity { return schemaGlUniformMatrix4x3fv }
 
-var schemaGlUniformMatrix4x3fv = &schema.Class{
+var schemaGlUniformMatrix4x3fv = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fv",
@@ -40478,9 +40478,9 @@ func (*binaryClassGlUniformMatrix4x3fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix4x3fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x3fvNV(d, obj.(*GlUniformMatrix4x3fvNV))
 }
-func (*binaryClassGlUniformMatrix4x3fvNV) Schema() *schema.Class { return schemaGlUniformMatrix4x3fvNV }
+func (*binaryClassGlUniformMatrix4x3fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix4x3fvNV }
 
-var schemaGlUniformMatrix4x3fvNV = &schema.Class{
+var schemaGlUniformMatrix4x3fvNV = &schema.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x3fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fvNV",
@@ -40521,9 +40521,9 @@ func (*binaryClassGlUnmapBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUnmapBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUnmapBuffer(d, obj.(*GlUnmapBuffer))
 }
-func (*binaryClassGlUnmapBuffer) Schema() *schema.Class { return schemaGlUnmapBuffer }
+func (*binaryClassGlUnmapBuffer) Schema() *schema.Entity { return schemaGlUnmapBuffer }
 
-var schemaGlUnmapBuffer = &schema.Class{
+var schemaGlUnmapBuffer = &schema.Entity{
 	TypeID:  binaryIDGlUnmapBuffer,
 	Package: "gles",
 	Name:    "GlUnmapBuffer",
@@ -40562,9 +40562,9 @@ func (*binaryClassGlUnmapBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUnmapBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUnmapBufferOES(d, obj.(*GlUnmapBufferOES))
 }
-func (*binaryClassGlUnmapBufferOES) Schema() *schema.Class { return schemaGlUnmapBufferOES }
+func (*binaryClassGlUnmapBufferOES) Schema() *schema.Entity { return schemaGlUnmapBufferOES }
 
-var schemaGlUnmapBufferOES = &schema.Class{
+var schemaGlUnmapBufferOES = &schema.Entity{
 	TypeID:  binaryIDGlUnmapBufferOES,
 	Package: "gles",
 	Name:    "GlUnmapBufferOES",
@@ -40601,9 +40601,9 @@ func (*binaryClassGlUseProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUseProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgram(d, obj.(*GlUseProgram))
 }
-func (*binaryClassGlUseProgram) Schema() *schema.Class { return schemaGlUseProgram }
+func (*binaryClassGlUseProgram) Schema() *schema.Entity { return schemaGlUseProgram }
 
-var schemaGlUseProgram = &schema.Class{
+var schemaGlUseProgram = &schema.Entity{
 	TypeID:  binaryIDGlUseProgram,
 	Package: "gles",
 	Name:    "GlUseProgram",
@@ -40643,9 +40643,9 @@ func (*binaryClassGlUseProgramStages) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUseProgramStages) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgramStages(d, obj.(*GlUseProgramStages))
 }
-func (*binaryClassGlUseProgramStages) Schema() *schema.Class { return schemaGlUseProgramStages }
+func (*binaryClassGlUseProgramStages) Schema() *schema.Entity { return schemaGlUseProgramStages }
 
-var schemaGlUseProgramStages = &schema.Class{
+var schemaGlUseProgramStages = &schema.Entity{
 	TypeID:  binaryIDGlUseProgramStages,
 	Package: "gles",
 	Name:    "GlUseProgramStages",
@@ -40687,9 +40687,9 @@ func (*binaryClassGlUseProgramStagesEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUseProgramStagesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgramStagesEXT(d, obj.(*GlUseProgramStagesEXT))
 }
-func (*binaryClassGlUseProgramStagesEXT) Schema() *schema.Class { return schemaGlUseProgramStagesEXT }
+func (*binaryClassGlUseProgramStagesEXT) Schema() *schema.Entity { return schemaGlUseProgramStagesEXT }
 
-var schemaGlUseProgramStagesEXT = &schema.Class{
+var schemaGlUseProgramStagesEXT = &schema.Entity{
 	TypeID:  binaryIDGlUseProgramStagesEXT,
 	Package: "gles",
 	Name:    "GlUseProgramStagesEXT",
@@ -40727,9 +40727,9 @@ func (*binaryClassGlValidateProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlValidateProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgram(d, obj.(*GlValidateProgram))
 }
-func (*binaryClassGlValidateProgram) Schema() *schema.Class { return schemaGlValidateProgram }
+func (*binaryClassGlValidateProgram) Schema() *schema.Entity { return schemaGlValidateProgram }
 
-var schemaGlValidateProgram = &schema.Class{
+var schemaGlValidateProgram = &schema.Entity{
 	TypeID:  binaryIDGlValidateProgram,
 	Package: "gles",
 	Name:    "GlValidateProgram",
@@ -40765,11 +40765,11 @@ func (*binaryClassGlValidateProgramPipeline) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlValidateProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgramPipeline(d, obj.(*GlValidateProgramPipeline))
 }
-func (*binaryClassGlValidateProgramPipeline) Schema() *schema.Class {
+func (*binaryClassGlValidateProgramPipeline) Schema() *schema.Entity {
 	return schemaGlValidateProgramPipeline
 }
 
-var schemaGlValidateProgramPipeline = &schema.Class{
+var schemaGlValidateProgramPipeline = &schema.Entity{
 	TypeID:  binaryIDGlValidateProgramPipeline,
 	Package: "gles",
 	Name:    "GlValidateProgramPipeline",
@@ -40809,11 +40809,11 @@ func (*binaryClassGlValidateProgramPipelineEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlValidateProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgramPipelineEXT(d, obj.(*GlValidateProgramPipelineEXT))
 }
-func (*binaryClassGlValidateProgramPipelineEXT) Schema() *schema.Class {
+func (*binaryClassGlValidateProgramPipelineEXT) Schema() *schema.Entity {
 	return schemaGlValidateProgramPipelineEXT
 }
 
-var schemaGlValidateProgramPipelineEXT = &schema.Class{
+var schemaGlValidateProgramPipelineEXT = &schema.Entity{
 	TypeID:  binaryIDGlValidateProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlValidateProgramPipelineEXT",
@@ -40851,9 +40851,9 @@ func (*binaryClassGlVertexAttrib1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib1f(d, obj.(*GlVertexAttrib1f))
 }
-func (*binaryClassGlVertexAttrib1f) Schema() *schema.Class { return schemaGlVertexAttrib1f }
+func (*binaryClassGlVertexAttrib1f) Schema() *schema.Entity { return schemaGlVertexAttrib1f }
 
-var schemaGlVertexAttrib1f = &schema.Class{
+var schemaGlVertexAttrib1f = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib1f,
 	Package: "gles",
 	Name:    "GlVertexAttrib1f",
@@ -40892,9 +40892,9 @@ func (*binaryClassGlVertexAttrib1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib1fv(d, obj.(*GlVertexAttrib1fv))
 }
-func (*binaryClassGlVertexAttrib1fv) Schema() *schema.Class { return schemaGlVertexAttrib1fv }
+func (*binaryClassGlVertexAttrib1fv) Schema() *schema.Entity { return schemaGlVertexAttrib1fv }
 
-var schemaGlVertexAttrib1fv = &schema.Class{
+var schemaGlVertexAttrib1fv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib1fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib1fv",
@@ -40935,9 +40935,9 @@ func (*binaryClassGlVertexAttrib2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib2f(d, obj.(*GlVertexAttrib2f))
 }
-func (*binaryClassGlVertexAttrib2f) Schema() *schema.Class { return schemaGlVertexAttrib2f }
+func (*binaryClassGlVertexAttrib2f) Schema() *schema.Entity { return schemaGlVertexAttrib2f }
 
-var schemaGlVertexAttrib2f = &schema.Class{
+var schemaGlVertexAttrib2f = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib2f,
 	Package: "gles",
 	Name:    "GlVertexAttrib2f",
@@ -40977,9 +40977,9 @@ func (*binaryClassGlVertexAttrib2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib2fv(d, obj.(*GlVertexAttrib2fv))
 }
-func (*binaryClassGlVertexAttrib2fv) Schema() *schema.Class { return schemaGlVertexAttrib2fv }
+func (*binaryClassGlVertexAttrib2fv) Schema() *schema.Entity { return schemaGlVertexAttrib2fv }
 
-var schemaGlVertexAttrib2fv = &schema.Class{
+var schemaGlVertexAttrib2fv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib2fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib2fv",
@@ -41022,9 +41022,9 @@ func (*binaryClassGlVertexAttrib3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib3f(d, obj.(*GlVertexAttrib3f))
 }
-func (*binaryClassGlVertexAttrib3f) Schema() *schema.Class { return schemaGlVertexAttrib3f }
+func (*binaryClassGlVertexAttrib3f) Schema() *schema.Entity { return schemaGlVertexAttrib3f }
 
-var schemaGlVertexAttrib3f = &schema.Class{
+var schemaGlVertexAttrib3f = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib3f,
 	Package: "gles",
 	Name:    "GlVertexAttrib3f",
@@ -41065,9 +41065,9 @@ func (*binaryClassGlVertexAttrib3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib3fv(d, obj.(*GlVertexAttrib3fv))
 }
-func (*binaryClassGlVertexAttrib3fv) Schema() *schema.Class { return schemaGlVertexAttrib3fv }
+func (*binaryClassGlVertexAttrib3fv) Schema() *schema.Entity { return schemaGlVertexAttrib3fv }
 
-var schemaGlVertexAttrib3fv = &schema.Class{
+var schemaGlVertexAttrib3fv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib3fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib3fv",
@@ -41112,9 +41112,9 @@ func (*binaryClassGlVertexAttrib4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib4f(d, obj.(*GlVertexAttrib4f))
 }
-func (*binaryClassGlVertexAttrib4f) Schema() *schema.Class { return schemaGlVertexAttrib4f }
+func (*binaryClassGlVertexAttrib4f) Schema() *schema.Entity { return schemaGlVertexAttrib4f }
 
-var schemaGlVertexAttrib4f = &schema.Class{
+var schemaGlVertexAttrib4f = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib4f,
 	Package: "gles",
 	Name:    "GlVertexAttrib4f",
@@ -41156,9 +41156,9 @@ func (*binaryClassGlVertexAttrib4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib4fv(d, obj.(*GlVertexAttrib4fv))
 }
-func (*binaryClassGlVertexAttrib4fv) Schema() *schema.Class { return schemaGlVertexAttrib4fv }
+func (*binaryClassGlVertexAttrib4fv) Schema() *schema.Entity { return schemaGlVertexAttrib4fv }
 
-var schemaGlVertexAttrib4fv = &schema.Class{
+var schemaGlVertexAttrib4fv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttrib4fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib4fv",
@@ -41197,9 +41197,9 @@ func (*binaryClassGlVertexAttribBinding) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribBinding(d, obj.(*GlVertexAttribBinding))
 }
-func (*binaryClassGlVertexAttribBinding) Schema() *schema.Class { return schemaGlVertexAttribBinding }
+func (*binaryClassGlVertexAttribBinding) Schema() *schema.Entity { return schemaGlVertexAttribBinding }
 
-var schemaGlVertexAttribBinding = &schema.Class{
+var schemaGlVertexAttribBinding = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribBinding,
 	Package: "gles",
 	Name:    "GlVertexAttribBinding",
@@ -41238,9 +41238,9 @@ func (*binaryClassGlVertexAttribDivisor) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribDivisor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisor(d, obj.(*GlVertexAttribDivisor))
 }
-func (*binaryClassGlVertexAttribDivisor) Schema() *schema.Class { return schemaGlVertexAttribDivisor }
+func (*binaryClassGlVertexAttribDivisor) Schema() *schema.Entity { return schemaGlVertexAttribDivisor }
 
-var schemaGlVertexAttribDivisor = &schema.Class{
+var schemaGlVertexAttribDivisor = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisor,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisor",
@@ -41283,11 +41283,11 @@ func (*binaryClassGlVertexAttribDivisorANGLE) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlVertexAttribDivisorANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorANGLE(d, obj.(*GlVertexAttribDivisorANGLE))
 }
-func (*binaryClassGlVertexAttribDivisorANGLE) Schema() *schema.Class {
+func (*binaryClassGlVertexAttribDivisorANGLE) Schema() *schema.Entity {
 	return schemaGlVertexAttribDivisorANGLE
 }
 
-var schemaGlVertexAttribDivisorANGLE = &schema.Class{
+var schemaGlVertexAttribDivisorANGLE = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorANGLE,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorANGLE",
@@ -41326,11 +41326,11 @@ func (*binaryClassGlVertexAttribDivisorEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlVertexAttribDivisorEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorEXT(d, obj.(*GlVertexAttribDivisorEXT))
 }
-func (*binaryClassGlVertexAttribDivisorEXT) Schema() *schema.Class {
+func (*binaryClassGlVertexAttribDivisorEXT) Schema() *schema.Entity {
 	return schemaGlVertexAttribDivisorEXT
 }
 
-var schemaGlVertexAttribDivisorEXT = &schema.Class{
+var schemaGlVertexAttribDivisorEXT = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorEXT,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorEXT",
@@ -41369,11 +41369,11 @@ func (*binaryClassGlVertexAttribDivisorNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlVertexAttribDivisorNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorNV(d, obj.(*GlVertexAttribDivisorNV))
 }
-func (*binaryClassGlVertexAttribDivisorNV) Schema() *schema.Class {
+func (*binaryClassGlVertexAttribDivisorNV) Schema() *schema.Entity {
 	return schemaGlVertexAttribDivisorNV
 }
 
-var schemaGlVertexAttribDivisorNV = &schema.Class{
+var schemaGlVertexAttribDivisorNV = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorNV,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorNV",
@@ -41418,9 +41418,9 @@ func (*binaryClassGlVertexAttribFormat) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribFormat(d, obj.(*GlVertexAttribFormat))
 }
-func (*binaryClassGlVertexAttribFormat) Schema() *schema.Class { return schemaGlVertexAttribFormat }
+func (*binaryClassGlVertexAttribFormat) Schema() *schema.Entity { return schemaGlVertexAttribFormat }
 
-var schemaGlVertexAttribFormat = &schema.Class{
+var schemaGlVertexAttribFormat = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribFormat,
 	Package: "gles",
 	Name:    "GlVertexAttribFormat",
@@ -41468,9 +41468,9 @@ func (*binaryClassGlVertexAttribI4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4i(d, obj.(*GlVertexAttribI4i))
 }
-func (*binaryClassGlVertexAttribI4i) Schema() *schema.Class { return schemaGlVertexAttribI4i }
+func (*binaryClassGlVertexAttribI4i) Schema() *schema.Entity { return schemaGlVertexAttribI4i }
 
-var schemaGlVertexAttribI4i = &schema.Class{
+var schemaGlVertexAttribI4i = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribI4i,
 	Package: "gles",
 	Name:    "GlVertexAttribI4i",
@@ -41512,9 +41512,9 @@ func (*binaryClassGlVertexAttribI4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4iv(d, obj.(*GlVertexAttribI4iv))
 }
-func (*binaryClassGlVertexAttribI4iv) Schema() *schema.Class { return schemaGlVertexAttribI4iv }
+func (*binaryClassGlVertexAttribI4iv) Schema() *schema.Entity { return schemaGlVertexAttribI4iv }
 
-var schemaGlVertexAttribI4iv = &schema.Class{
+var schemaGlVertexAttribI4iv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribI4iv,
 	Package: "gles",
 	Name:    "GlVertexAttribI4iv",
@@ -41559,9 +41559,9 @@ func (*binaryClassGlVertexAttribI4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4ui(d, obj.(*GlVertexAttribI4ui))
 }
-func (*binaryClassGlVertexAttribI4ui) Schema() *schema.Class { return schemaGlVertexAttribI4ui }
+func (*binaryClassGlVertexAttribI4ui) Schema() *schema.Entity { return schemaGlVertexAttribI4ui }
 
-var schemaGlVertexAttribI4ui = &schema.Class{
+var schemaGlVertexAttribI4ui = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribI4ui,
 	Package: "gles",
 	Name:    "GlVertexAttribI4ui",
@@ -41603,9 +41603,9 @@ func (*binaryClassGlVertexAttribI4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4uiv(d, obj.(*GlVertexAttribI4uiv))
 }
-func (*binaryClassGlVertexAttribI4uiv) Schema() *schema.Class { return schemaGlVertexAttribI4uiv }
+func (*binaryClassGlVertexAttribI4uiv) Schema() *schema.Entity { return schemaGlVertexAttribI4uiv }
 
-var schemaGlVertexAttribI4uiv = &schema.Class{
+var schemaGlVertexAttribI4uiv = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribI4uiv,
 	Package: "gles",
 	Name:    "GlVertexAttribI4uiv",
@@ -41648,9 +41648,9 @@ func (*binaryClassGlVertexAttribIFormat) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribIFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribIFormat(d, obj.(*GlVertexAttribIFormat))
 }
-func (*binaryClassGlVertexAttribIFormat) Schema() *schema.Class { return schemaGlVertexAttribIFormat }
+func (*binaryClassGlVertexAttribIFormat) Schema() *schema.Entity { return schemaGlVertexAttribIFormat }
 
-var schemaGlVertexAttribIFormat = &schema.Class{
+var schemaGlVertexAttribIFormat = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribIFormat,
 	Package: "gles",
 	Name:    "GlVertexAttribIFormat",
@@ -41697,9 +41697,9 @@ func (*binaryClassGlVertexAttribIPointer) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlVertexAttribIPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribIPointer(d, obj.(*GlVertexAttribIPointer))
 }
-func (*binaryClassGlVertexAttribIPointer) Schema() *schema.Class { return schemaGlVertexAttribIPointer }
+func (*binaryClassGlVertexAttribIPointer) Schema() *schema.Entity { return schemaGlVertexAttribIPointer }
 
-var schemaGlVertexAttribIPointer = &schema.Class{
+var schemaGlVertexAttribIPointer = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribIPointer,
 	Package: "gles",
 	Name:    "GlVertexAttribIPointer",
@@ -41749,9 +41749,9 @@ func (*binaryClassGlVertexAttribPointer) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribPointer(d, obj.(*GlVertexAttribPointer))
 }
-func (*binaryClassGlVertexAttribPointer) Schema() *schema.Class { return schemaGlVertexAttribPointer }
+func (*binaryClassGlVertexAttribPointer) Schema() *schema.Entity { return schemaGlVertexAttribPointer }
 
-var schemaGlVertexAttribPointer = &schema.Class{
+var schemaGlVertexAttribPointer = &schema.Entity{
 	TypeID:  binaryIDGlVertexAttribPointer,
 	Package: "gles",
 	Name:    "GlVertexAttribPointer",
@@ -41794,9 +41794,9 @@ func (*binaryClassGlVertexBindingDivisor) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlVertexBindingDivisor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexBindingDivisor(d, obj.(*GlVertexBindingDivisor))
 }
-func (*binaryClassGlVertexBindingDivisor) Schema() *schema.Class { return schemaGlVertexBindingDivisor }
+func (*binaryClassGlVertexBindingDivisor) Schema() *schema.Entity { return schemaGlVertexBindingDivisor }
 
-var schemaGlVertexBindingDivisor = &schema.Class{
+var schemaGlVertexBindingDivisor = &schema.Entity{
 	TypeID:  binaryIDGlVertexBindingDivisor,
 	Package: "gles",
 	Name:    "GlVertexBindingDivisor",
@@ -41839,9 +41839,9 @@ func (*binaryClassGlViewport) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewport(d, obj.(*GlViewport))
 }
-func (*binaryClassGlViewport) Schema() *schema.Class { return schemaGlViewport }
+func (*binaryClassGlViewport) Schema() *schema.Entity { return schemaGlViewport }
 
-var schemaGlViewport = &schema.Class{
+var schemaGlViewport = &schema.Entity{
 	TypeID:  binaryIDGlViewport,
 	Package: "gles",
 	Name:    "GlViewport",
@@ -41884,9 +41884,9 @@ func (*binaryClassGlViewportArrayvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewportArrayvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportArrayvNV(d, obj.(*GlViewportArrayvNV))
 }
-func (*binaryClassGlViewportArrayvNV) Schema() *schema.Class { return schemaGlViewportArrayvNV }
+func (*binaryClassGlViewportArrayvNV) Schema() *schema.Entity { return schemaGlViewportArrayvNV }
 
-var schemaGlViewportArrayvNV = &schema.Class{
+var schemaGlViewportArrayvNV = &schema.Entity{
 	TypeID:  binaryIDGlViewportArrayvNV,
 	Package: "gles",
 	Name:    "GlViewportArrayvNV",
@@ -41932,9 +41932,9 @@ func (*binaryClassGlViewportIndexedfNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewportIndexedfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportIndexedfNV(d, obj.(*GlViewportIndexedfNV))
 }
-func (*binaryClassGlViewportIndexedfNV) Schema() *schema.Class { return schemaGlViewportIndexedfNV }
+func (*binaryClassGlViewportIndexedfNV) Schema() *schema.Entity { return schemaGlViewportIndexedfNV }
 
-var schemaGlViewportIndexedfNV = &schema.Class{
+var schemaGlViewportIndexedfNV = &schema.Entity{
 	TypeID:  binaryIDGlViewportIndexedfNV,
 	Package: "gles",
 	Name:    "GlViewportIndexedfNV",
@@ -41976,9 +41976,9 @@ func (*binaryClassGlViewportIndexedfvNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlViewportIndexedfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportIndexedfvNV(d, obj.(*GlViewportIndexedfvNV))
 }
-func (*binaryClassGlViewportIndexedfvNV) Schema() *schema.Class { return schemaGlViewportIndexedfvNV }
+func (*binaryClassGlViewportIndexedfvNV) Schema() *schema.Entity { return schemaGlViewportIndexedfvNV }
 
-var schemaGlViewportIndexedfvNV = &schema.Class{
+var schemaGlViewportIndexedfvNV = &schema.Entity{
 	TypeID:  binaryIDGlViewportIndexedfvNV,
 	Package: "gles",
 	Name:    "GlViewportIndexedfvNV",
@@ -42019,9 +42019,9 @@ func (*binaryClassGlWaitSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWaitSync(d, obj.(*GlWaitSync))
 }
-func (*binaryClassGlWaitSync) Schema() *schema.Class { return schemaGlWaitSync }
+func (*binaryClassGlWaitSync) Schema() *schema.Entity { return schemaGlWaitSync }
 
-var schemaGlWaitSync = &schema.Class{
+var schemaGlWaitSync = &schema.Entity{
 	TypeID:  binaryIDGlWaitSync,
 	Package: "gles",
 	Name:    "GlWaitSync",
@@ -42063,9 +42063,9 @@ func (*binaryClassGlWaitSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWaitSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWaitSyncAPPLE(d, obj.(*GlWaitSyncAPPLE))
 }
-func (*binaryClassGlWaitSyncAPPLE) Schema() *schema.Class { return schemaGlWaitSyncAPPLE }
+func (*binaryClassGlWaitSyncAPPLE) Schema() *schema.Entity { return schemaGlWaitSyncAPPLE }
 
-var schemaGlWaitSyncAPPLE = &schema.Class{
+var schemaGlWaitSyncAPPLE = &schema.Entity{
 	TypeID:  binaryIDGlWaitSyncAPPLE,
 	Package: "gles",
 	Name:    "GlWaitSyncAPPLE",
@@ -42109,9 +42109,9 @@ func (*binaryClassGlWeightPathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWeightPathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWeightPathsNV(d, obj.(*GlWeightPathsNV))
 }
-func (*binaryClassGlWeightPathsNV) Schema() *schema.Class { return schemaGlWeightPathsNV }
+func (*binaryClassGlWeightPathsNV) Schema() *schema.Entity { return schemaGlWeightPathsNV }
 
-var schemaGlWeightPathsNV = &schema.Class{
+var schemaGlWeightPathsNV = &schema.Entity{
 	TypeID:  binaryIDGlWeightPathsNV,
 	Package: "gles",
 	Name:    "GlWeightPathsNV",
@@ -42158,9 +42158,9 @@ func (*binaryClassGlXCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXCreateContext(d, obj.(*GlXCreateContext))
 }
-func (*binaryClassGlXCreateContext) Schema() *schema.Class { return schemaGlXCreateContext }
+func (*binaryClassGlXCreateContext) Schema() *schema.Entity { return schemaGlXCreateContext }
 
-var schemaGlXCreateContext = &schema.Class{
+var schemaGlXCreateContext = &schema.Entity{
 	TypeID:  binaryIDGlXCreateContext,
 	Package: "gles",
 	Name:    "GlXCreateContext",
@@ -42210,9 +42210,9 @@ func (*binaryClassGlXCreateNewContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXCreateNewContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXCreateNewContext(d, obj.(*GlXCreateNewContext))
 }
-func (*binaryClassGlXCreateNewContext) Schema() *schema.Class { return schemaGlXCreateNewContext }
+func (*binaryClassGlXCreateNewContext) Schema() *schema.Entity { return schemaGlXCreateNewContext }
 
-var schemaGlXCreateNewContext = &schema.Class{
+var schemaGlXCreateNewContext = &schema.Entity{
 	TypeID:  binaryIDGlXCreateNewContext,
 	Package: "gles",
 	Name:    "GlXCreateNewContext",
@@ -42261,9 +42261,9 @@ func (*binaryClassGlXMakeContextCurrent) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlXMakeContextCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXMakeContextCurrent(d, obj.(*GlXMakeContextCurrent))
 }
-func (*binaryClassGlXMakeContextCurrent) Schema() *schema.Class { return schemaGlXMakeContextCurrent }
+func (*binaryClassGlXMakeContextCurrent) Schema() *schema.Entity { return schemaGlXMakeContextCurrent }
 
-var schemaGlXMakeContextCurrent = &schema.Class{
+var schemaGlXMakeContextCurrent = &schema.Entity{
 	TypeID:  binaryIDGlXMakeContextCurrent,
 	Package: "gles",
 	Name:    "GlXMakeContextCurrent",
@@ -42309,9 +42309,9 @@ func (*binaryClassGlXMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXMakeCurrent(d, obj.(*GlXMakeCurrent))
 }
-func (*binaryClassGlXMakeCurrent) Schema() *schema.Class { return schemaGlXMakeCurrent }
+func (*binaryClassGlXMakeCurrent) Schema() *schema.Entity { return schemaGlXMakeCurrent }
 
-var schemaGlXMakeCurrent = &schema.Class{
+var schemaGlXMakeCurrent = &schema.Entity{
 	TypeID:  binaryIDGlXMakeCurrent,
 	Package: "gles",
 	Name:    "GlXMakeCurrent",
@@ -42348,9 +42348,9 @@ func (*binaryClassIntᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntᵖ(d, obj.(*Intᵖ))
 }
-func (*binaryClassIntᵖ) Schema() *schema.Class { return schemaIntᵖ }
+func (*binaryClassIntᵖ) Schema() *schema.Entity { return schemaIntᵖ }
 
-var schemaIntᵖ = &schema.Class{
+var schemaIntᵖ = &schema.Entity{
 	TypeID:  binaryIDIntᵖ,
 	Package: "gles",
 	Name:    "Intᵖ",
@@ -42393,9 +42393,9 @@ func (*binaryClassGlXQueryDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXQueryDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXQueryDrawable(d, obj.(*GlXQueryDrawable))
 }
-func (*binaryClassGlXQueryDrawable) Schema() *schema.Class { return schemaGlXQueryDrawable }
+func (*binaryClassGlXQueryDrawable) Schema() *schema.Entity { return schemaGlXQueryDrawable }
 
-var schemaGlXQueryDrawable = &schema.Class{
+var schemaGlXQueryDrawable = &schema.Entity{
 	TypeID:  binaryIDGlXQueryDrawable,
 	Package: "gles",
 	Name:    "GlXQueryDrawable",
@@ -42437,9 +42437,9 @@ func (*binaryClassGlXSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXSwapBuffers(d, obj.(*GlXSwapBuffers))
 }
-func (*binaryClassGlXSwapBuffers) Schema() *schema.Class { return schemaGlXSwapBuffers }
+func (*binaryClassGlXSwapBuffers) Schema() *schema.Entity { return schemaGlXSwapBuffers }
 
-var schemaGlXSwapBuffers = &schema.Class{
+var schemaGlXSwapBuffers = &schema.Entity{
 	TypeID:  binaryIDGlXSwapBuffers,
 	Package: "gles",
 	Name:    "GlXSwapBuffers",
@@ -42474,9 +42474,9 @@ func (*binaryClassHDC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassHDC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHDC(d, obj.(*HDC))
 }
-func (*binaryClassHDC) Schema() *schema.Class { return schemaHDC }
+func (*binaryClassHDC) Schema() *schema.Entity { return schemaHDC }
 
-var schemaHDC = &schema.Class{
+var schemaHDC = &schema.Entity{
 	TypeID:  binaryIDHDC,
 	Package: "gles",
 	Name:    "HDC",
@@ -42509,9 +42509,9 @@ func (*binaryClassHGLRC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassHGLRC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHGLRC(d, obj.(*HGLRC))
 }
-func (*binaryClassHGLRC) Schema() *schema.Class { return schemaHGLRC }
+func (*binaryClassHGLRC) Schema() *schema.Entity { return schemaHGLRC }
 
-var schemaHGLRC = &schema.Class{
+var schemaHGLRC = &schema.Entity{
 	TypeID:  binaryIDHGLRC,
 	Package: "gles",
 	Name:    "HGLRC",
@@ -42544,9 +42544,9 @@ func (*binaryClassIntˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntˢ(d, obj.(*Intˢ))
 }
-func (*binaryClassIntˢ) Schema() *schema.Class { return schemaIntˢ }
+func (*binaryClassIntˢ) Schema() *schema.Entity { return schemaIntˢ }
 
-var schemaIntˢ = &schema.Class{
+var schemaIntˢ = &schema.Entity{
 	TypeID:  binaryIDIntˢ,
 	Package: "gles",
 	Name:    "Intˢ",
@@ -42583,9 +42583,9 @@ func (*binaryClassVec2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2f(d, obj.(*Vec2f))
 }
-func (*binaryClassVec2f) Schema() *schema.Class { return schemaVec2f }
+func (*binaryClassVec2f) Schema() *schema.Entity { return schemaVec2f }
 
-var schemaVec2f = &schema.Class{
+var schemaVec2f = &schema.Entity{
 	TypeID:  binaryIDVec2f,
 	Package: "gles",
 	Name:    "Vec2f",
@@ -42622,9 +42622,9 @@ func (*binaryClassMat2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2f(d, obj.(*Mat2f))
 }
-func (*binaryClassMat2f) Schema() *schema.Class { return schemaMat2f }
+func (*binaryClassMat2f) Schema() *schema.Entity { return schemaMat2f }
 
-var schemaMat2f = &schema.Class{
+var schemaMat2f = &schema.Entity{
 	TypeID:  binaryIDMat2f,
 	Package: "gles",
 	Name:    "Mat2f",
@@ -42657,9 +42657,9 @@ func (*binaryClassMat2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2fˢ(d, obj.(*Mat2fˢ))
 }
-func (*binaryClassMat2fˢ) Schema() *schema.Class { return schemaMat2fˢ }
+func (*binaryClassMat2fˢ) Schema() *schema.Entity { return schemaMat2fˢ }
 
-var schemaMat2fˢ = &schema.Class{
+var schemaMat2fˢ = &schema.Entity{
 	TypeID:  binaryIDMat2fˢ,
 	Package: "gles",
 	Name:    "Mat2fˢ",
@@ -42692,9 +42692,9 @@ func (*binaryClassMat2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2fᵖ(d, obj.(*Mat2fᵖ))
 }
-func (*binaryClassMat2fᵖ) Schema() *schema.Class { return schemaMat2fᵖ }
+func (*binaryClassMat2fᵖ) Schema() *schema.Entity { return schemaMat2fᵖ }
 
-var schemaMat2fᵖ = &schema.Class{
+var schemaMat2fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat2fᵖ,
 	Package: "gles",
 	Name:    "Mat2fᵖ",
@@ -42731,9 +42731,9 @@ func (*binaryClassVec3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3f(d, obj.(*Vec3f))
 }
-func (*binaryClassVec3f) Schema() *schema.Class { return schemaVec3f }
+func (*binaryClassVec3f) Schema() *schema.Entity { return schemaVec3f }
 
-var schemaVec3f = &schema.Class{
+var schemaVec3f = &schema.Entity{
 	TypeID:  binaryIDVec3f,
 	Package: "gles",
 	Name:    "Vec3f",
@@ -42770,9 +42770,9 @@ func (*binaryClassMat2x3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3f(d, obj.(*Mat2x3f))
 }
-func (*binaryClassMat2x3f) Schema() *schema.Class { return schemaMat2x3f }
+func (*binaryClassMat2x3f) Schema() *schema.Entity { return schemaMat2x3f }
 
-var schemaMat2x3f = &schema.Class{
+var schemaMat2x3f = &schema.Entity{
 	TypeID:  binaryIDMat2x3f,
 	Package: "gles",
 	Name:    "Mat2x3f",
@@ -42805,9 +42805,9 @@ func (*binaryClassMat2x3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3fˢ(d, obj.(*Mat2x3fˢ))
 }
-func (*binaryClassMat2x3fˢ) Schema() *schema.Class { return schemaMat2x3fˢ }
+func (*binaryClassMat2x3fˢ) Schema() *schema.Entity { return schemaMat2x3fˢ }
 
-var schemaMat2x3fˢ = &schema.Class{
+var schemaMat2x3fˢ = &schema.Entity{
 	TypeID:  binaryIDMat2x3fˢ,
 	Package: "gles",
 	Name:    "Mat2x3fˢ",
@@ -42840,9 +42840,9 @@ func (*binaryClassMat2x3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3fᵖ(d, obj.(*Mat2x3fᵖ))
 }
-func (*binaryClassMat2x3fᵖ) Schema() *schema.Class { return schemaMat2x3fᵖ }
+func (*binaryClassMat2x3fᵖ) Schema() *schema.Entity { return schemaMat2x3fᵖ }
 
-var schemaMat2x3fᵖ = &schema.Class{
+var schemaMat2x3fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat2x3fᵖ,
 	Package: "gles",
 	Name:    "Mat2x3fᵖ",
@@ -42879,9 +42879,9 @@ func (*binaryClassVec4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4f(d, obj.(*Vec4f))
 }
-func (*binaryClassVec4f) Schema() *schema.Class { return schemaVec4f }
+func (*binaryClassVec4f) Schema() *schema.Entity { return schemaVec4f }
 
-var schemaVec4f = &schema.Class{
+var schemaVec4f = &schema.Entity{
 	TypeID:  binaryIDVec4f,
 	Package: "gles",
 	Name:    "Vec4f",
@@ -42918,9 +42918,9 @@ func (*binaryClassMat2x4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4f(d, obj.(*Mat2x4f))
 }
-func (*binaryClassMat2x4f) Schema() *schema.Class { return schemaMat2x4f }
+func (*binaryClassMat2x4f) Schema() *schema.Entity { return schemaMat2x4f }
 
-var schemaMat2x4f = &schema.Class{
+var schemaMat2x4f = &schema.Entity{
 	TypeID:  binaryIDMat2x4f,
 	Package: "gles",
 	Name:    "Mat2x4f",
@@ -42953,9 +42953,9 @@ func (*binaryClassMat2x4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4fˢ(d, obj.(*Mat2x4fˢ))
 }
-func (*binaryClassMat2x4fˢ) Schema() *schema.Class { return schemaMat2x4fˢ }
+func (*binaryClassMat2x4fˢ) Schema() *schema.Entity { return schemaMat2x4fˢ }
 
-var schemaMat2x4fˢ = &schema.Class{
+var schemaMat2x4fˢ = &schema.Entity{
 	TypeID:  binaryIDMat2x4fˢ,
 	Package: "gles",
 	Name:    "Mat2x4fˢ",
@@ -42988,9 +42988,9 @@ func (*binaryClassMat2x4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4fᵖ(d, obj.(*Mat2x4fᵖ))
 }
-func (*binaryClassMat2x4fᵖ) Schema() *schema.Class { return schemaMat2x4fᵖ }
+func (*binaryClassMat2x4fᵖ) Schema() *schema.Entity { return schemaMat2x4fᵖ }
 
-var schemaMat2x4fᵖ = &schema.Class{
+var schemaMat2x4fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat2x4fᵖ,
 	Package: "gles",
 	Name:    "Mat2x4fᵖ",
@@ -43027,9 +43027,9 @@ func (*binaryClassMat3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3f(d, obj.(*Mat3f))
 }
-func (*binaryClassMat3f) Schema() *schema.Class { return schemaMat3f }
+func (*binaryClassMat3f) Schema() *schema.Entity { return schemaMat3f }
 
-var schemaMat3f = &schema.Class{
+var schemaMat3f = &schema.Entity{
 	TypeID:  binaryIDMat3f,
 	Package: "gles",
 	Name:    "Mat3f",
@@ -43062,9 +43062,9 @@ func (*binaryClassMat3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3fˢ(d, obj.(*Mat3fˢ))
 }
-func (*binaryClassMat3fˢ) Schema() *schema.Class { return schemaMat3fˢ }
+func (*binaryClassMat3fˢ) Schema() *schema.Entity { return schemaMat3fˢ }
 
-var schemaMat3fˢ = &schema.Class{
+var schemaMat3fˢ = &schema.Entity{
 	TypeID:  binaryIDMat3fˢ,
 	Package: "gles",
 	Name:    "Mat3fˢ",
@@ -43097,9 +43097,9 @@ func (*binaryClassMat3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3fᵖ(d, obj.(*Mat3fᵖ))
 }
-func (*binaryClassMat3fᵖ) Schema() *schema.Class { return schemaMat3fᵖ }
+func (*binaryClassMat3fᵖ) Schema() *schema.Entity { return schemaMat3fᵖ }
 
-var schemaMat3fᵖ = &schema.Class{
+var schemaMat3fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat3fᵖ,
 	Package: "gles",
 	Name:    "Mat3fᵖ",
@@ -43136,9 +43136,9 @@ func (*binaryClassMat3x2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2f(d, obj.(*Mat3x2f))
 }
-func (*binaryClassMat3x2f) Schema() *schema.Class { return schemaMat3x2f }
+func (*binaryClassMat3x2f) Schema() *schema.Entity { return schemaMat3x2f }
 
-var schemaMat3x2f = &schema.Class{
+var schemaMat3x2f = &schema.Entity{
 	TypeID:  binaryIDMat3x2f,
 	Package: "gles",
 	Name:    "Mat3x2f",
@@ -43171,9 +43171,9 @@ func (*binaryClassMat3x2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2fˢ(d, obj.(*Mat3x2fˢ))
 }
-func (*binaryClassMat3x2fˢ) Schema() *schema.Class { return schemaMat3x2fˢ }
+func (*binaryClassMat3x2fˢ) Schema() *schema.Entity { return schemaMat3x2fˢ }
 
-var schemaMat3x2fˢ = &schema.Class{
+var schemaMat3x2fˢ = &schema.Entity{
 	TypeID:  binaryIDMat3x2fˢ,
 	Package: "gles",
 	Name:    "Mat3x2fˢ",
@@ -43206,9 +43206,9 @@ func (*binaryClassMat3x2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2fᵖ(d, obj.(*Mat3x2fᵖ))
 }
-func (*binaryClassMat3x2fᵖ) Schema() *schema.Class { return schemaMat3x2fᵖ }
+func (*binaryClassMat3x2fᵖ) Schema() *schema.Entity { return schemaMat3x2fᵖ }
 
-var schemaMat3x2fᵖ = &schema.Class{
+var schemaMat3x2fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat3x2fᵖ,
 	Package: "gles",
 	Name:    "Mat3x2fᵖ",
@@ -43245,9 +43245,9 @@ func (*binaryClassMat3x4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4f(d, obj.(*Mat3x4f))
 }
-func (*binaryClassMat3x4f) Schema() *schema.Class { return schemaMat3x4f }
+func (*binaryClassMat3x4f) Schema() *schema.Entity { return schemaMat3x4f }
 
-var schemaMat3x4f = &schema.Class{
+var schemaMat3x4f = &schema.Entity{
 	TypeID:  binaryIDMat3x4f,
 	Package: "gles",
 	Name:    "Mat3x4f",
@@ -43280,9 +43280,9 @@ func (*binaryClassMat3x4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4fˢ(d, obj.(*Mat3x4fˢ))
 }
-func (*binaryClassMat3x4fˢ) Schema() *schema.Class { return schemaMat3x4fˢ }
+func (*binaryClassMat3x4fˢ) Schema() *schema.Entity { return schemaMat3x4fˢ }
 
-var schemaMat3x4fˢ = &schema.Class{
+var schemaMat3x4fˢ = &schema.Entity{
 	TypeID:  binaryIDMat3x4fˢ,
 	Package: "gles",
 	Name:    "Mat3x4fˢ",
@@ -43315,9 +43315,9 @@ func (*binaryClassMat3x4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4fᵖ(d, obj.(*Mat3x4fᵖ))
 }
-func (*binaryClassMat3x4fᵖ) Schema() *schema.Class { return schemaMat3x4fᵖ }
+func (*binaryClassMat3x4fᵖ) Schema() *schema.Entity { return schemaMat3x4fᵖ }
 
-var schemaMat3x4fᵖ = &schema.Class{
+var schemaMat3x4fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat3x4fᵖ,
 	Package: "gles",
 	Name:    "Mat3x4fᵖ",
@@ -43354,9 +43354,9 @@ func (*binaryClassMat4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4f(d, obj.(*Mat4f))
 }
-func (*binaryClassMat4f) Schema() *schema.Class { return schemaMat4f }
+func (*binaryClassMat4f) Schema() *schema.Entity { return schemaMat4f }
 
-var schemaMat4f = &schema.Class{
+var schemaMat4f = &schema.Entity{
 	TypeID:  binaryIDMat4f,
 	Package: "gles",
 	Name:    "Mat4f",
@@ -43389,9 +43389,9 @@ func (*binaryClassMat4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4fˢ(d, obj.(*Mat4fˢ))
 }
-func (*binaryClassMat4fˢ) Schema() *schema.Class { return schemaMat4fˢ }
+func (*binaryClassMat4fˢ) Schema() *schema.Entity { return schemaMat4fˢ }
 
-var schemaMat4fˢ = &schema.Class{
+var schemaMat4fˢ = &schema.Entity{
 	TypeID:  binaryIDMat4fˢ,
 	Package: "gles",
 	Name:    "Mat4fˢ",
@@ -43424,9 +43424,9 @@ func (*binaryClassMat4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4fᵖ(d, obj.(*Mat4fᵖ))
 }
-func (*binaryClassMat4fᵖ) Schema() *schema.Class { return schemaMat4fᵖ }
+func (*binaryClassMat4fᵖ) Schema() *schema.Entity { return schemaMat4fᵖ }
 
-var schemaMat4fᵖ = &schema.Class{
+var schemaMat4fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat4fᵖ,
 	Package: "gles",
 	Name:    "Mat4fᵖ",
@@ -43463,9 +43463,9 @@ func (*binaryClassMat4x2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2f(d, obj.(*Mat4x2f))
 }
-func (*binaryClassMat4x2f) Schema() *schema.Class { return schemaMat4x2f }
+func (*binaryClassMat4x2f) Schema() *schema.Entity { return schemaMat4x2f }
 
-var schemaMat4x2f = &schema.Class{
+var schemaMat4x2f = &schema.Entity{
 	TypeID:  binaryIDMat4x2f,
 	Package: "gles",
 	Name:    "Mat4x2f",
@@ -43498,9 +43498,9 @@ func (*binaryClassMat4x2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2fˢ(d, obj.(*Mat4x2fˢ))
 }
-func (*binaryClassMat4x2fˢ) Schema() *schema.Class { return schemaMat4x2fˢ }
+func (*binaryClassMat4x2fˢ) Schema() *schema.Entity { return schemaMat4x2fˢ }
 
-var schemaMat4x2fˢ = &schema.Class{
+var schemaMat4x2fˢ = &schema.Entity{
 	TypeID:  binaryIDMat4x2fˢ,
 	Package: "gles",
 	Name:    "Mat4x2fˢ",
@@ -43533,9 +43533,9 @@ func (*binaryClassMat4x2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2fᵖ(d, obj.(*Mat4x2fᵖ))
 }
-func (*binaryClassMat4x2fᵖ) Schema() *schema.Class { return schemaMat4x2fᵖ }
+func (*binaryClassMat4x2fᵖ) Schema() *schema.Entity { return schemaMat4x2fᵖ }
 
-var schemaMat4x2fᵖ = &schema.Class{
+var schemaMat4x2fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat4x2fᵖ,
 	Package: "gles",
 	Name:    "Mat4x2fᵖ",
@@ -43572,9 +43572,9 @@ func (*binaryClassMat4x3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3f(d, obj.(*Mat4x3f))
 }
-func (*binaryClassMat4x3f) Schema() *schema.Class { return schemaMat4x3f }
+func (*binaryClassMat4x3f) Schema() *schema.Entity { return schemaMat4x3f }
 
-var schemaMat4x3f = &schema.Class{
+var schemaMat4x3f = &schema.Entity{
 	TypeID:  binaryIDMat4x3f,
 	Package: "gles",
 	Name:    "Mat4x3f",
@@ -43607,9 +43607,9 @@ func (*binaryClassMat4x3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3fˢ(d, obj.(*Mat4x3fˢ))
 }
-func (*binaryClassMat4x3fˢ) Schema() *schema.Class { return schemaMat4x3fˢ }
+func (*binaryClassMat4x3fˢ) Schema() *schema.Entity { return schemaMat4x3fˢ }
 
-var schemaMat4x3fˢ = &schema.Class{
+var schemaMat4x3fˢ = &schema.Entity{
 	TypeID:  binaryIDMat4x3fˢ,
 	Package: "gles",
 	Name:    "Mat4x3fˢ",
@@ -43642,9 +43642,9 @@ func (*binaryClassMat4x3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3fᵖ(d, obj.(*Mat4x3fᵖ))
 }
-func (*binaryClassMat4x3fᵖ) Schema() *schema.Class { return schemaMat4x3fᵖ }
+func (*binaryClassMat4x3fᵖ) Schema() *schema.Entity { return schemaMat4x3fᵖ }
 
-var schemaMat4x3fᵖ = &schema.Class{
+var schemaMat4x3fᵖ = &schema.Entity{
 	TypeID:  binaryIDMat4x3fᵖ,
 	Package: "gles",
 	Name:    "Mat4x3fᵖ",
@@ -43677,9 +43677,9 @@ func (*binaryClassPipelineIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdˢ(d, obj.(*PipelineIdˢ))
 }
-func (*binaryClassPipelineIdˢ) Schema() *schema.Class { return schemaPipelineIdˢ }
+func (*binaryClassPipelineIdˢ) Schema() *schema.Entity { return schemaPipelineIdˢ }
 
-var schemaPipelineIdˢ = &schema.Class{
+var schemaPipelineIdˢ = &schema.Entity{
 	TypeID:  binaryIDPipelineIdˢ,
 	Package: "gles",
 	Name:    "PipelineIdˢ",
@@ -43712,9 +43712,9 @@ func (*binaryClassProgramIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgramIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgramIdˢ(d, obj.(*ProgramIdˢ))
 }
-func (*binaryClassProgramIdˢ) Schema() *schema.Class { return schemaProgramIdˢ }
+func (*binaryClassProgramIdˢ) Schema() *schema.Entity { return schemaProgramIdˢ }
 
-var schemaProgramIdˢ = &schema.Class{
+var schemaProgramIdˢ = &schema.Entity{
 	TypeID:  binaryIDProgramIdˢ,
 	Package: "gles",
 	Name:    "ProgramIdˢ",
@@ -43747,9 +43747,9 @@ func (*binaryClassQueryIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdˢ(d, obj.(*QueryIdˢ))
 }
-func (*binaryClassQueryIdˢ) Schema() *schema.Class { return schemaQueryIdˢ }
+func (*binaryClassQueryIdˢ) Schema() *schema.Entity { return schemaQueryIdˢ }
 
-var schemaQueryIdˢ = &schema.Class{
+var schemaQueryIdˢ = &schema.Entity{
 	TypeID:  binaryIDQueryIdˢ,
 	Package: "gles",
 	Name:    "QueryIdˢ",
@@ -43782,9 +43782,9 @@ func (*binaryClassRenderbufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdˢ(d, obj.(*RenderbufferIdˢ))
 }
-func (*binaryClassRenderbufferIdˢ) Schema() *schema.Class { return schemaRenderbufferIdˢ }
+func (*binaryClassRenderbufferIdˢ) Schema() *schema.Entity { return schemaRenderbufferIdˢ }
 
-var schemaRenderbufferIdˢ = &schema.Class{
+var schemaRenderbufferIdˢ = &schema.Entity{
 	TypeID:  binaryIDRenderbufferIdˢ,
 	Package: "gles",
 	Name:    "RenderbufferIdˢ",
@@ -43819,9 +43819,9 @@ func (*binaryClassReplayBindRenderer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassReplayBindRenderer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReplayBindRenderer(d, obj.(*ReplayBindRenderer))
 }
-func (*binaryClassReplayBindRenderer) Schema() *schema.Class { return schemaReplayBindRenderer }
+func (*binaryClassReplayBindRenderer) Schema() *schema.Entity { return schemaReplayBindRenderer }
 
-var schemaReplayBindRenderer = &schema.Class{
+var schemaReplayBindRenderer = &schema.Entity{
 	TypeID:  binaryIDReplayBindRenderer,
 	Package: "gles",
 	Name:    "ReplayBindRenderer",
@@ -43857,9 +43857,9 @@ func (*binaryClassReplayCreateRenderer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassReplayCreateRenderer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReplayCreateRenderer(d, obj.(*ReplayCreateRenderer))
 }
-func (*binaryClassReplayCreateRenderer) Schema() *schema.Class { return schemaReplayCreateRenderer }
+func (*binaryClassReplayCreateRenderer) Schema() *schema.Entity { return schemaReplayCreateRenderer }
 
-var schemaReplayCreateRenderer = &schema.Class{
+var schemaReplayCreateRenderer = &schema.Entity{
 	TypeID:  binaryIDReplayCreateRenderer,
 	Package: "gles",
 	Name:    "ReplayCreateRenderer",
@@ -43893,9 +43893,9 @@ func (*binaryClassS64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ˢ(d, obj.(*S64ˢ))
 }
-func (*binaryClassS64ˢ) Schema() *schema.Class { return schemaS64ˢ }
+func (*binaryClassS64ˢ) Schema() *schema.Entity { return schemaS64ˢ }
 
-var schemaS64ˢ = &schema.Class{
+var schemaS64ˢ = &schema.Entity{
 	TypeID:  binaryIDS64ˢ,
 	Package: "gles",
 	Name:    "S64ˢ",
@@ -43928,9 +43928,9 @@ func (*binaryClassSamplerIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdˢ(d, obj.(*SamplerIdˢ))
 }
-func (*binaryClassSamplerIdˢ) Schema() *schema.Class { return schemaSamplerIdˢ }
+func (*binaryClassSamplerIdˢ) Schema() *schema.Entity { return schemaSamplerIdˢ }
 
-var schemaSamplerIdˢ = &schema.Class{
+var schemaSamplerIdˢ = &schema.Entity{
 	TypeID:  binaryIDSamplerIdˢ,
 	Package: "gles",
 	Name:    "SamplerIdˢ",
@@ -43963,9 +43963,9 @@ func (*binaryClassShaderIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdˢ(d, obj.(*ShaderIdˢ))
 }
-func (*binaryClassShaderIdˢ) Schema() *schema.Class { return schemaShaderIdˢ }
+func (*binaryClassShaderIdˢ) Schema() *schema.Entity { return schemaShaderIdˢ }
 
-var schemaShaderIdˢ = &schema.Class{
+var schemaShaderIdˢ = &schema.Entity{
 	TypeID:  binaryIDShaderIdˢ,
 	Package: "gles",
 	Name:    "ShaderIdˢ",
@@ -44000,9 +44000,9 @@ func (*binaryClassStartTimer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassStartTimer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeStartTimer(d, obj.(*StartTimer))
 }
-func (*binaryClassStartTimer) Schema() *schema.Class { return schemaStartTimer }
+func (*binaryClassStartTimer) Schema() *schema.Entity { return schemaStartTimer }
 
-var schemaStartTimer = &schema.Class{
+var schemaStartTimer = &schema.Entity{
 	TypeID:  binaryIDStartTimer,
 	Package: "gles",
 	Name:    "StartTimer",
@@ -44158,9 +44158,9 @@ func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
 }
-func (*binaryClassState) Schema() *schema.Class { return schemaState }
+func (*binaryClassState) Schema() *schema.Entity { return schemaState }
 
-var schemaState = &schema.Class{
+var schemaState = &schema.Entity{
 	TypeID:  binaryIDState,
 	Package: "gles",
 	Name:    "State",
@@ -44203,9 +44203,9 @@ func (*binaryClassStopTimer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassStopTimer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeStopTimer(d, obj.(*StopTimer))
 }
-func (*binaryClassStopTimer) Schema() *schema.Class { return schemaStopTimer }
+func (*binaryClassStopTimer) Schema() *schema.Entity { return schemaStopTimer }
 
-var schemaStopTimer = &schema.Class{
+var schemaStopTimer = &schema.Entity{
 	TypeID:  binaryIDStopTimer,
 	Package: "gles",
 	Name:    "StopTimer",
@@ -44242,9 +44242,9 @@ func (*binaryClassSwitchThread) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSwitchThread) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSwitchThread(d, obj.(*SwitchThread))
 }
-func (*binaryClassSwitchThread) Schema() *schema.Class { return schemaSwitchThread }
+func (*binaryClassSwitchThread) Schema() *schema.Entity { return schemaSwitchThread }
 
-var schemaSwitchThread = &schema.Class{
+var schemaSwitchThread = &schema.Entity{
 	TypeID:  binaryIDSwitchThread,
 	Package: "gles",
 	Name:    "SwitchThread",
@@ -44278,9 +44278,9 @@ func (*binaryClassTextureIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdˢ(d, obj.(*TextureIdˢ))
 }
-func (*binaryClassTextureIdˢ) Schema() *schema.Class { return schemaTextureIdˢ }
+func (*binaryClassTextureIdˢ) Schema() *schema.Entity { return schemaTextureIdˢ }
 
-var schemaTextureIdˢ = &schema.Class{
+var schemaTextureIdˢ = &schema.Entity{
 	TypeID:  binaryIDTextureIdˢ,
 	Package: "gles",
 	Name:    "TextureIdˢ",
@@ -44313,9 +44313,9 @@ func (*binaryClassTransformFeedbackIdˢ) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassTransformFeedbackIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdˢ(d, obj.(*TransformFeedbackIdˢ))
 }
-func (*binaryClassTransformFeedbackIdˢ) Schema() *schema.Class { return schemaTransformFeedbackIdˢ }
+func (*binaryClassTransformFeedbackIdˢ) Schema() *schema.Entity { return schemaTransformFeedbackIdˢ }
 
-var schemaTransformFeedbackIdˢ = &schema.Class{
+var schemaTransformFeedbackIdˢ = &schema.Entity{
 	TypeID:  binaryIDTransformFeedbackIdˢ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdˢ",
@@ -44348,9 +44348,9 @@ func (*binaryClassU16ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ˢ(d, obj.(*U16ˢ))
 }
-func (*binaryClassU16ˢ) Schema() *schema.Class { return schemaU16ˢ }
+func (*binaryClassU16ˢ) Schema() *schema.Entity { return schemaU16ˢ }
 
-var schemaU16ˢ = &schema.Class{
+var schemaU16ˢ = &schema.Entity{
 	TypeID:  binaryIDU16ˢ,
 	Package: "gles",
 	Name:    "U16ˢ",
@@ -44383,9 +44383,9 @@ func (*binaryClassU16ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ᵖ(d, obj.(*U16ᵖ))
 }
-func (*binaryClassU16ᵖ) Schema() *schema.Class { return schemaU16ᵖ }
+func (*binaryClassU16ᵖ) Schema() *schema.Entity { return schemaU16ᵖ }
 
-var schemaU16ᵖ = &schema.Class{
+var schemaU16ᵖ = &schema.Entity{
 	TypeID:  binaryIDU16ᵖ,
 	Package: "gles",
 	Name:    "U16ᵖ",
@@ -44418,9 +44418,9 @@ func (*binaryClassU32ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ˢ(d, obj.(*U32ˢ))
 }
-func (*binaryClassU32ˢ) Schema() *schema.Class { return schemaU32ˢ }
+func (*binaryClassU32ˢ) Schema() *schema.Entity { return schemaU32ˢ }
 
-var schemaU32ˢ = &schema.Class{
+var schemaU32ˢ = &schema.Entity{
 	TypeID:  binaryIDU32ˢ,
 	Package: "gles",
 	Name:    "U32ˢ",
@@ -44453,9 +44453,9 @@ func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
 }
-func (*binaryClassU32ᵖ) Schema() *schema.Class { return schemaU32ᵖ }
+func (*binaryClassU32ᵖ) Schema() *schema.Entity { return schemaU32ᵖ }
 
-var schemaU32ᵖ = &schema.Class{
+var schemaU32ᵖ = &schema.Entity{
 	TypeID:  binaryIDU32ᵖ,
 	Package: "gles",
 	Name:    "U32ᵖ",
@@ -44488,9 +44488,9 @@ func (*binaryClassU64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ˢ(d, obj.(*U64ˢ))
 }
-func (*binaryClassU64ˢ) Schema() *schema.Class { return schemaU64ˢ }
+func (*binaryClassU64ˢ) Schema() *schema.Entity { return schemaU64ˢ }
 
-var schemaU64ˢ = &schema.Class{
+var schemaU64ˢ = &schema.Entity{
 	TypeID:  binaryIDU64ˢ,
 	Package: "gles",
 	Name:    "U64ˢ",
@@ -44523,9 +44523,9 @@ func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
 }
-func (*binaryClassU8ᵖ) Schema() *schema.Class { return schemaU8ᵖ }
+func (*binaryClassU8ᵖ) Schema() *schema.Entity { return schemaU8ᵖ }
 
-var schemaU8ᵖ = &schema.Class{
+var schemaU8ᵖ = &schema.Entity{
 	TypeID:  binaryIDU8ᵖ,
 	Package: "gles",
 	Name:    "U8ᵖ",
@@ -44597,9 +44597,9 @@ func (*binaryClassVec2fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː2ᵃ(d, obj.(*Vec2fː2ᵃ))
 }
-func (*binaryClassVec2fː2ᵃ) Schema() *schema.Class { return schemaVec2fː2ᵃ }
+func (*binaryClassVec2fː2ᵃ) Schema() *schema.Entity { return schemaVec2fː2ᵃ }
 
-var schemaVec2fː2ᵃ = &schema.Class{
+var schemaVec2fː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec2fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː2ᵃ",
@@ -44636,9 +44636,9 @@ func (*binaryClassVec2fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː3ᵃ(d, obj.(*Vec2fː3ᵃ))
 }
-func (*binaryClassVec2fː3ᵃ) Schema() *schema.Class { return schemaVec2fː3ᵃ }
+func (*binaryClassVec2fː3ᵃ) Schema() *schema.Entity { return schemaVec2fː3ᵃ }
 
-var schemaVec2fː3ᵃ = &schema.Class{
+var schemaVec2fː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec2fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː3ᵃ",
@@ -44675,9 +44675,9 @@ func (*binaryClassVec2fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː4ᵃ(d, obj.(*Vec2fː4ᵃ))
 }
-func (*binaryClassVec2fː4ᵃ) Schema() *schema.Class { return schemaVec2fː4ᵃ }
+func (*binaryClassVec2fː4ᵃ) Schema() *schema.Entity { return schemaVec2fː4ᵃ }
 
-var schemaVec2fː4ᵃ = &schema.Class{
+var schemaVec2fː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec2fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː4ᵃ",
@@ -44710,9 +44710,9 @@ func (*binaryClassVec2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fˢ(d, obj.(*Vec2fˢ))
 }
-func (*binaryClassVec2fˢ) Schema() *schema.Class { return schemaVec2fˢ }
+func (*binaryClassVec2fˢ) Schema() *schema.Entity { return schemaVec2fˢ }
 
-var schemaVec2fˢ = &schema.Class{
+var schemaVec2fˢ = &schema.Entity{
 	TypeID:  binaryIDVec2fˢ,
 	Package: "gles",
 	Name:    "Vec2fˢ",
@@ -44745,9 +44745,9 @@ func (*binaryClassVec2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fᵖ(d, obj.(*Vec2fᵖ))
 }
-func (*binaryClassVec2fᵖ) Schema() *schema.Class { return schemaVec2fᵖ }
+func (*binaryClassVec2fᵖ) Schema() *schema.Entity { return schemaVec2fᵖ }
 
-var schemaVec2fᵖ = &schema.Class{
+var schemaVec2fᵖ = &schema.Entity{
 	TypeID:  binaryIDVec2fᵖ,
 	Package: "gles",
 	Name:    "Vec2fᵖ",
@@ -44784,9 +44784,9 @@ func (*binaryClassVec2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2i(d, obj.(*Vec2i))
 }
-func (*binaryClassVec2i) Schema() *schema.Class { return schemaVec2i }
+func (*binaryClassVec2i) Schema() *schema.Entity { return schemaVec2i }
 
-var schemaVec2i = &schema.Class{
+var schemaVec2i = &schema.Entity{
 	TypeID:  binaryIDVec2i,
 	Package: "gles",
 	Name:    "Vec2i",
@@ -44819,9 +44819,9 @@ func (*binaryClassVec2iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2iˢ(d, obj.(*Vec2iˢ))
 }
-func (*binaryClassVec2iˢ) Schema() *schema.Class { return schemaVec2iˢ }
+func (*binaryClassVec2iˢ) Schema() *schema.Entity { return schemaVec2iˢ }
 
-var schemaVec2iˢ = &schema.Class{
+var schemaVec2iˢ = &schema.Entity{
 	TypeID:  binaryIDVec2iˢ,
 	Package: "gles",
 	Name:    "Vec2iˢ",
@@ -44854,9 +44854,9 @@ func (*binaryClassVec2iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2iᵖ(d, obj.(*Vec2iᵖ))
 }
-func (*binaryClassVec2iᵖ) Schema() *schema.Class { return schemaVec2iᵖ }
+func (*binaryClassVec2iᵖ) Schema() *schema.Entity { return schemaVec2iᵖ }
 
-var schemaVec2iᵖ = &schema.Class{
+var schemaVec2iᵖ = &schema.Entity{
 	TypeID:  binaryIDVec2iᵖ,
 	Package: "gles",
 	Name:    "Vec2iᵖ",
@@ -44893,9 +44893,9 @@ func (*binaryClassVec2u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2u(d, obj.(*Vec2u))
 }
-func (*binaryClassVec2u) Schema() *schema.Class { return schemaVec2u }
+func (*binaryClassVec2u) Schema() *schema.Entity { return schemaVec2u }
 
-var schemaVec2u = &schema.Class{
+var schemaVec2u = &schema.Entity{
 	TypeID:  binaryIDVec2u,
 	Package: "gles",
 	Name:    "Vec2u",
@@ -44928,9 +44928,9 @@ func (*binaryClassVec2uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2uˢ(d, obj.(*Vec2uˢ))
 }
-func (*binaryClassVec2uˢ) Schema() *schema.Class { return schemaVec2uˢ }
+func (*binaryClassVec2uˢ) Schema() *schema.Entity { return schemaVec2uˢ }
 
-var schemaVec2uˢ = &schema.Class{
+var schemaVec2uˢ = &schema.Entity{
 	TypeID:  binaryIDVec2uˢ,
 	Package: "gles",
 	Name:    "Vec2uˢ",
@@ -44963,9 +44963,9 @@ func (*binaryClassVec2uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2uᵖ(d, obj.(*Vec2uᵖ))
 }
-func (*binaryClassVec2uᵖ) Schema() *schema.Class { return schemaVec2uᵖ }
+func (*binaryClassVec2uᵖ) Schema() *schema.Entity { return schemaVec2uᵖ }
 
-var schemaVec2uᵖ = &schema.Class{
+var schemaVec2uᵖ = &schema.Entity{
 	TypeID:  binaryIDVec2uᵖ,
 	Package: "gles",
 	Name:    "Vec2uᵖ",
@@ -45002,9 +45002,9 @@ func (*binaryClassVec3fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː2ᵃ(d, obj.(*Vec3fː2ᵃ))
 }
-func (*binaryClassVec3fː2ᵃ) Schema() *schema.Class { return schemaVec3fː2ᵃ }
+func (*binaryClassVec3fː2ᵃ) Schema() *schema.Entity { return schemaVec3fː2ᵃ }
 
-var schemaVec3fː2ᵃ = &schema.Class{
+var schemaVec3fː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec3fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː2ᵃ",
@@ -45041,9 +45041,9 @@ func (*binaryClassVec3fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː3ᵃ(d, obj.(*Vec3fː3ᵃ))
 }
-func (*binaryClassVec3fː3ᵃ) Schema() *schema.Class { return schemaVec3fː3ᵃ }
+func (*binaryClassVec3fː3ᵃ) Schema() *schema.Entity { return schemaVec3fː3ᵃ }
 
-var schemaVec3fː3ᵃ = &schema.Class{
+var schemaVec3fː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec3fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː3ᵃ",
@@ -45080,9 +45080,9 @@ func (*binaryClassVec3fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː4ᵃ(d, obj.(*Vec3fː4ᵃ))
 }
-func (*binaryClassVec3fː4ᵃ) Schema() *schema.Class { return schemaVec3fː4ᵃ }
+func (*binaryClassVec3fː4ᵃ) Schema() *schema.Entity { return schemaVec3fː4ᵃ }
 
-var schemaVec3fː4ᵃ = &schema.Class{
+var schemaVec3fː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec3fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː4ᵃ",
@@ -45115,9 +45115,9 @@ func (*binaryClassVec3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fˢ(d, obj.(*Vec3fˢ))
 }
-func (*binaryClassVec3fˢ) Schema() *schema.Class { return schemaVec3fˢ }
+func (*binaryClassVec3fˢ) Schema() *schema.Entity { return schemaVec3fˢ }
 
-var schemaVec3fˢ = &schema.Class{
+var schemaVec3fˢ = &schema.Entity{
 	TypeID:  binaryIDVec3fˢ,
 	Package: "gles",
 	Name:    "Vec3fˢ",
@@ -45150,9 +45150,9 @@ func (*binaryClassVec3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fᵖ(d, obj.(*Vec3fᵖ))
 }
-func (*binaryClassVec3fᵖ) Schema() *schema.Class { return schemaVec3fᵖ }
+func (*binaryClassVec3fᵖ) Schema() *schema.Entity { return schemaVec3fᵖ }
 
-var schemaVec3fᵖ = &schema.Class{
+var schemaVec3fᵖ = &schema.Entity{
 	TypeID:  binaryIDVec3fᵖ,
 	Package: "gles",
 	Name:    "Vec3fᵖ",
@@ -45189,9 +45189,9 @@ func (*binaryClassVec3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3i(d, obj.(*Vec3i))
 }
-func (*binaryClassVec3i) Schema() *schema.Class { return schemaVec3i }
+func (*binaryClassVec3i) Schema() *schema.Entity { return schemaVec3i }
 
-var schemaVec3i = &schema.Class{
+var schemaVec3i = &schema.Entity{
 	TypeID:  binaryIDVec3i,
 	Package: "gles",
 	Name:    "Vec3i",
@@ -45224,9 +45224,9 @@ func (*binaryClassVec3iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3iˢ(d, obj.(*Vec3iˢ))
 }
-func (*binaryClassVec3iˢ) Schema() *schema.Class { return schemaVec3iˢ }
+func (*binaryClassVec3iˢ) Schema() *schema.Entity { return schemaVec3iˢ }
 
-var schemaVec3iˢ = &schema.Class{
+var schemaVec3iˢ = &schema.Entity{
 	TypeID:  binaryIDVec3iˢ,
 	Package: "gles",
 	Name:    "Vec3iˢ",
@@ -45259,9 +45259,9 @@ func (*binaryClassVec3iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3iᵖ(d, obj.(*Vec3iᵖ))
 }
-func (*binaryClassVec3iᵖ) Schema() *schema.Class { return schemaVec3iᵖ }
+func (*binaryClassVec3iᵖ) Schema() *schema.Entity { return schemaVec3iᵖ }
 
-var schemaVec3iᵖ = &schema.Class{
+var schemaVec3iᵖ = &schema.Entity{
 	TypeID:  binaryIDVec3iᵖ,
 	Package: "gles",
 	Name:    "Vec3iᵖ",
@@ -45298,9 +45298,9 @@ func (*binaryClassVec3u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3u(d, obj.(*Vec3u))
 }
-func (*binaryClassVec3u) Schema() *schema.Class { return schemaVec3u }
+func (*binaryClassVec3u) Schema() *schema.Entity { return schemaVec3u }
 
-var schemaVec3u = &schema.Class{
+var schemaVec3u = &schema.Entity{
 	TypeID:  binaryIDVec3u,
 	Package: "gles",
 	Name:    "Vec3u",
@@ -45333,9 +45333,9 @@ func (*binaryClassVec3uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3uˢ(d, obj.(*Vec3uˢ))
 }
-func (*binaryClassVec3uˢ) Schema() *schema.Class { return schemaVec3uˢ }
+func (*binaryClassVec3uˢ) Schema() *schema.Entity { return schemaVec3uˢ }
 
-var schemaVec3uˢ = &schema.Class{
+var schemaVec3uˢ = &schema.Entity{
 	TypeID:  binaryIDVec3uˢ,
 	Package: "gles",
 	Name:    "Vec3uˢ",
@@ -45368,9 +45368,9 @@ func (*binaryClassVec3uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3uᵖ(d, obj.(*Vec3uᵖ))
 }
-func (*binaryClassVec3uᵖ) Schema() *schema.Class { return schemaVec3uᵖ }
+func (*binaryClassVec3uᵖ) Schema() *schema.Entity { return schemaVec3uᵖ }
 
-var schemaVec3uᵖ = &schema.Class{
+var schemaVec3uᵖ = &schema.Entity{
 	TypeID:  binaryIDVec3uᵖ,
 	Package: "gles",
 	Name:    "Vec3uᵖ",
@@ -45407,9 +45407,9 @@ func (*binaryClassVec4fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː2ᵃ(d, obj.(*Vec4fː2ᵃ))
 }
-func (*binaryClassVec4fː2ᵃ) Schema() *schema.Class { return schemaVec4fː2ᵃ }
+func (*binaryClassVec4fː2ᵃ) Schema() *schema.Entity { return schemaVec4fː2ᵃ }
 
-var schemaVec4fː2ᵃ = &schema.Class{
+var schemaVec4fː2ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec4fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː2ᵃ",
@@ -45446,9 +45446,9 @@ func (*binaryClassVec4fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː3ᵃ(d, obj.(*Vec4fː3ᵃ))
 }
-func (*binaryClassVec4fː3ᵃ) Schema() *schema.Class { return schemaVec4fː3ᵃ }
+func (*binaryClassVec4fː3ᵃ) Schema() *schema.Entity { return schemaVec4fː3ᵃ }
 
-var schemaVec4fː3ᵃ = &schema.Class{
+var schemaVec4fː3ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec4fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː3ᵃ",
@@ -45485,9 +45485,9 @@ func (*binaryClassVec4fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː4ᵃ(d, obj.(*Vec4fː4ᵃ))
 }
-func (*binaryClassVec4fː4ᵃ) Schema() *schema.Class { return schemaVec4fː4ᵃ }
+func (*binaryClassVec4fː4ᵃ) Schema() *schema.Entity { return schemaVec4fː4ᵃ }
 
-var schemaVec4fː4ᵃ = &schema.Class{
+var schemaVec4fː4ᵃ = &schema.Entity{
 	TypeID:  binaryIDVec4fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː4ᵃ",
@@ -45520,9 +45520,9 @@ func (*binaryClassVec4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fˢ(d, obj.(*Vec4fˢ))
 }
-func (*binaryClassVec4fˢ) Schema() *schema.Class { return schemaVec4fˢ }
+func (*binaryClassVec4fˢ) Schema() *schema.Entity { return schemaVec4fˢ }
 
-var schemaVec4fˢ = &schema.Class{
+var schemaVec4fˢ = &schema.Entity{
 	TypeID:  binaryIDVec4fˢ,
 	Package: "gles",
 	Name:    "Vec4fˢ",
@@ -45555,9 +45555,9 @@ func (*binaryClassVec4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fᵖ(d, obj.(*Vec4fᵖ))
 }
-func (*binaryClassVec4fᵖ) Schema() *schema.Class { return schemaVec4fᵖ }
+func (*binaryClassVec4fᵖ) Schema() *schema.Entity { return schemaVec4fᵖ }
 
-var schemaVec4fᵖ = &schema.Class{
+var schemaVec4fᵖ = &schema.Entity{
 	TypeID:  binaryIDVec4fᵖ,
 	Package: "gles",
 	Name:    "Vec4fᵖ",
@@ -45594,9 +45594,9 @@ func (*binaryClassVec4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4i(d, obj.(*Vec4i))
 }
-func (*binaryClassVec4i) Schema() *schema.Class { return schemaVec4i }
+func (*binaryClassVec4i) Schema() *schema.Entity { return schemaVec4i }
 
-var schemaVec4i = &schema.Class{
+var schemaVec4i = &schema.Entity{
 	TypeID:  binaryIDVec4i,
 	Package: "gles",
 	Name:    "Vec4i",
@@ -45629,9 +45629,9 @@ func (*binaryClassVec4iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4iˢ(d, obj.(*Vec4iˢ))
 }
-func (*binaryClassVec4iˢ) Schema() *schema.Class { return schemaVec4iˢ }
+func (*binaryClassVec4iˢ) Schema() *schema.Entity { return schemaVec4iˢ }
 
-var schemaVec4iˢ = &schema.Class{
+var schemaVec4iˢ = &schema.Entity{
 	TypeID:  binaryIDVec4iˢ,
 	Package: "gles",
 	Name:    "Vec4iˢ",
@@ -45664,9 +45664,9 @@ func (*binaryClassVec4iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4iᵖ(d, obj.(*Vec4iᵖ))
 }
-func (*binaryClassVec4iᵖ) Schema() *schema.Class { return schemaVec4iᵖ }
+func (*binaryClassVec4iᵖ) Schema() *schema.Entity { return schemaVec4iᵖ }
 
-var schemaVec4iᵖ = &schema.Class{
+var schemaVec4iᵖ = &schema.Entity{
 	TypeID:  binaryIDVec4iᵖ,
 	Package: "gles",
 	Name:    "Vec4iᵖ",
@@ -45703,9 +45703,9 @@ func (*binaryClassVec4u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4u(d, obj.(*Vec4u))
 }
-func (*binaryClassVec4u) Schema() *schema.Class { return schemaVec4u }
+func (*binaryClassVec4u) Schema() *schema.Entity { return schemaVec4u }
 
-var schemaVec4u = &schema.Class{
+var schemaVec4u = &schema.Entity{
 	TypeID:  binaryIDVec4u,
 	Package: "gles",
 	Name:    "Vec4u",
@@ -45738,9 +45738,9 @@ func (*binaryClassVec4uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4uˢ(d, obj.(*Vec4uˢ))
 }
-func (*binaryClassVec4uˢ) Schema() *schema.Class { return schemaVec4uˢ }
+func (*binaryClassVec4uˢ) Schema() *schema.Entity { return schemaVec4uˢ }
 
-var schemaVec4uˢ = &schema.Class{
+var schemaVec4uˢ = &schema.Entity{
 	TypeID:  binaryIDVec4uˢ,
 	Package: "gles",
 	Name:    "Vec4uˢ",
@@ -45773,9 +45773,9 @@ func (*binaryClassVec4uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4uᵖ(d, obj.(*Vec4uᵖ))
 }
-func (*binaryClassVec4uᵖ) Schema() *schema.Class { return schemaVec4uᵖ }
+func (*binaryClassVec4uᵖ) Schema() *schema.Entity { return schemaVec4uᵖ }
 
-var schemaVec4uᵖ = &schema.Class{
+var schemaVec4uᵖ = &schema.Entity{
 	TypeID:  binaryIDVec4uᵖ,
 	Package: "gles",
 	Name:    "Vec4uᵖ",
@@ -45808,9 +45808,9 @@ func (*binaryClassVertexArrayIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdˢ(d, obj.(*VertexArrayIdˢ))
 }
-func (*binaryClassVertexArrayIdˢ) Schema() *schema.Class { return schemaVertexArrayIdˢ }
+func (*binaryClassVertexArrayIdˢ) Schema() *schema.Entity { return schemaVertexArrayIdˢ }
 
-var schemaVertexArrayIdˢ = &schema.Class{
+var schemaVertexArrayIdˢ = &schema.Entity{
 	TypeID:  binaryIDVertexArrayIdˢ,
 	Package: "gles",
 	Name:    "VertexArrayIdˢ",
@@ -45843,9 +45843,9 @@ func (*binaryClassVoidˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidˢ(d, obj.(*Voidˢ))
 }
-func (*binaryClassVoidˢ) Schema() *schema.Class { return schemaVoidˢ }
+func (*binaryClassVoidˢ) Schema() *schema.Entity { return schemaVoidˢ }
 
-var schemaVoidˢ = &schema.Class{
+var schemaVoidˢ = &schema.Entity{
 	TypeID:  binaryIDVoidˢ,
 	Package: "gles",
 	Name:    "Voidˢ",
@@ -45878,9 +45878,9 @@ func (*binaryClassVoidᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖˢ(d, obj.(*Voidᵖˢ))
 }
-func (*binaryClassVoidᵖˢ) Schema() *schema.Class { return schemaVoidᵖˢ }
+func (*binaryClassVoidᵖˢ) Schema() *schema.Entity { return schemaVoidᵖˢ }
 
-var schemaVoidᵖˢ = &schema.Class{
+var schemaVoidᵖˢ = &schema.Entity{
 	TypeID:  binaryIDVoidᵖˢ,
 	Package: "gles",
 	Name:    "Voidᵖˢ",
@@ -45913,9 +45913,9 @@ func (*binaryClassVoidᶜᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖˢ(d, obj.(*Voidᶜᵖˢ))
 }
-func (*binaryClassVoidᶜᵖˢ) Schema() *schema.Class { return schemaVoidᶜᵖˢ }
+func (*binaryClassVoidᶜᵖˢ) Schema() *schema.Entity { return schemaVoidᶜᵖˢ }
 
-var schemaVoidᶜᵖˢ = &schema.Class{
+var schemaVoidᶜᵖˢ = &schema.Entity{
 	TypeID:  binaryIDVoidᶜᵖˢ,
 	Package: "gles",
 	Name:    "Voidᶜᵖˢ",
@@ -45948,9 +45948,9 @@ func (*binaryClassVoidᶜᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖᵖ(d, obj.(*Voidᶜᵖᵖ))
 }
-func (*binaryClassVoidᶜᵖᵖ) Schema() *schema.Class { return schemaVoidᶜᵖᵖ }
+func (*binaryClassVoidᶜᵖᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖᵖ }
 
-var schemaVoidᶜᵖᵖ = &schema.Class{
+var schemaVoidᶜᵖᵖ = &schema.Entity{
 	TypeID:  binaryIDVoidᶜᵖᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖᵖ",
@@ -45987,9 +45987,9 @@ func (*binaryClassWglCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglCreateContext(d, obj.(*WglCreateContext))
 }
-func (*binaryClassWglCreateContext) Schema() *schema.Class { return schemaWglCreateContext }
+func (*binaryClassWglCreateContext) Schema() *schema.Entity { return schemaWglCreateContext }
 
-var schemaWglCreateContext = &schema.Class{
+var schemaWglCreateContext = &schema.Entity{
 	TypeID:  binaryIDWglCreateContext,
 	Package: "gles",
 	Name:    "WglCreateContext",
@@ -46036,11 +46036,11 @@ func (*binaryClassWglCreateContextAttribsARB) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassWglCreateContextAttribsARB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglCreateContextAttribsARB(d, obj.(*WglCreateContextAttribsARB))
 }
-func (*binaryClassWglCreateContextAttribsARB) Schema() *schema.Class {
+func (*binaryClassWglCreateContextAttribsARB) Schema() *schema.Entity {
 	return schemaWglCreateContextAttribsARB
 }
 
-var schemaWglCreateContextAttribsARB = &schema.Class{
+var schemaWglCreateContextAttribsARB = &schema.Entity{
 	TypeID:  binaryIDWglCreateContextAttribsARB,
 	Package: "gles",
 	Name:    "WglCreateContextAttribsARB",
@@ -46083,9 +46083,9 @@ func (*binaryClassWglMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglMakeCurrent(d, obj.(*WglMakeCurrent))
 }
-func (*binaryClassWglMakeCurrent) Schema() *schema.Class { return schemaWglMakeCurrent }
+func (*binaryClassWglMakeCurrent) Schema() *schema.Entity { return schemaWglMakeCurrent }
 
-var schemaWglMakeCurrent = &schema.Class{
+var schemaWglMakeCurrent = &schema.Entity{
 	TypeID:  binaryIDWglMakeCurrent,
 	Package: "gles",
 	Name:    "WglMakeCurrent",
@@ -46123,9 +46123,9 @@ func (*binaryClassWglSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglSwapBuffers(d, obj.(*WglSwapBuffers))
 }
-func (*binaryClassWglSwapBuffers) Schema() *schema.Class { return schemaWglSwapBuffers }
+func (*binaryClassWglSwapBuffers) Schema() *schema.Entity { return schemaWglSwapBuffers }
 
-var schemaWglSwapBuffers = &schema.Class{
+var schemaWglSwapBuffers = &schema.Entity{
 	TypeID:  binaryIDWglSwapBuffers,
 	Package: "gles",
 	Name:    "WglSwapBuffers",
@@ -46161,9 +46161,9 @@ func (*binaryClassgenerate_types) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassgenerate_types) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodegenerate_types(d, obj.(*generate_types))
 }
-func (*binaryClassgenerate_types) Schema() *schema.Class { return schemagenerate_types }
+func (*binaryClassgenerate_types) Schema() *schema.Entity { return schemagenerate_types }
 
-var schemagenerate_types = &schema.Class{
+var schemagenerate_types = &schema.Entity{
 	TypeID:  binaryIDgenerate_types,
 	Package: "gles",
 	Name:    "generate_types",

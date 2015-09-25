@@ -20,8 +20,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-// Class represents an encodable object type with a type ID.
-type Class struct {
+// Entity represents an encodable object type with a type ID.
+type Entity struct {
 	TypeID   binary.ID       // The unique type identifier for the Object.
 	Package  string          // The package that declared the struct.
 	Name     string          // The simple name of the Object.
@@ -65,32 +65,32 @@ func (l FieldList) Find(name string) int {
 	return -1
 }
 
-func (c *Class) ID() binary.ID {
+func (c *Entity) ID() binary.ID {
 	return c.TypeID
 }
 
-func (c *Class) New() binary.Object { return &Object{Type: c} }
+func (c *Entity) New() binary.Object { return &Object{Type: c} }
 
-func (c *Class) Encode(e binary.Encoder, object binary.Object) {
+func (c *Entity) Encode(e binary.Encoder, object binary.Object) {
 	o := object.(*Object)
 	for i, f := range c.Fields {
 		f.Type.Encode(e, o.Fields[i])
 	}
 }
 
-func (c *Class) doDecode(d binary.Decoder, o *Object) {
+func (c *Entity) doDecode(d binary.Decoder, o *Object) {
 	o.Fields = make([]interface{}, len(c.Fields))
 	for i, f := range c.Fields {
 		o.Fields[i] = f.Type.Decode(d)
 	}
 }
 
-func (c *Class) Decode(d binary.Decoder) binary.Object {
+func (c *Entity) Decode(d binary.Decoder) binary.Object {
 	o := &Object{Type: c}
 	c.doDecode(d, o)
 	return o
 }
 
-func (c *Class) DecodeTo(d binary.Decoder, object binary.Object) {
+func (c *Entity) DecodeTo(d binary.Decoder, object binary.Object) {
 	c.doDecode(d, object.(*Object))
 }

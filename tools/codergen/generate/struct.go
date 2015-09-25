@@ -28,14 +28,14 @@ import (
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	schema.Class
+	schema.Entity
 	Tags      Tags   // The tags associated with the type.
 	Signature string // The full string type signature of the Struct.
 }
 
 func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 	t := n.Type().Underlying().(*types.Struct)
-	s := &Struct{Class: schema.Class{
+	s := &Struct{Entity: schema.Entity{
 		Name:     n.Name(),
 		Package:  m.Source.Types.Name(),
 		Exported: n.Exported(),

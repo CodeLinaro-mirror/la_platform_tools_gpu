@@ -55,9 +55,9 @@ func (*binaryClasstestStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestStruct(d, obj.(*testStruct))
 }
-func (*binaryClasstestStruct) Schema() *schema.Class { return schematestStruct }
+func (*binaryClasstestStruct) Schema() *schema.Entity { return schematestStruct }
 
-var schematestStruct = &schema.Class{
+var schematestStruct = &schema.Entity{
 	TypeID:  binaryIDtestStruct,
 	Package: "builder",
 	Name:    "testStruct",
@@ -131,9 +131,9 @@ func (*binaryClasstestAtom) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestAtom(d, obj.(*testAtom))
 }
-func (*binaryClasstestAtom) Schema() *schema.Class { return schematestAtom }
+func (*binaryClasstestAtom) Schema() *schema.Entity { return schematestAtom }
 
-var schematestAtom = &schema.Class{
+var schematestAtom = &schema.Entity{
 	TypeID:  binaryIDtestAtom,
 	Package: "builder",
 	Name:    "testAtom",

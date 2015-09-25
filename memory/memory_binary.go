@@ -52,9 +52,9 @@ func (*binaryClassPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePointer(d, obj.(*Pointer))
 }
-func (*binaryClassPointer) Schema() *schema.Class { return schemaPointer }
+func (*binaryClassPointer) Schema() *schema.Entity { return schemaPointer }
 
-var schemaPointer = &schema.Class{
+var schemaPointer = &schema.Entity{
 	TypeID:  binaryIDPointer,
 	Package: "memory",
 	Name:    "Pointer",
@@ -90,9 +90,9 @@ func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))
 }
-func (*binaryClassRange) Schema() *schema.Class { return schemaRange }
+func (*binaryClassRange) Schema() *schema.Entity { return schemaRange }
 
-var schemaRange = &schema.Class{
+var schemaRange = &schema.Entity{
 	TypeID:  binaryIDRange,
 	Package: "memory",
 	Name:    "Range",

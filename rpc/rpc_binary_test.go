@@ -46,9 +46,9 @@ func (*binaryClassdelay) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodedelay(d, obj.(*delay))
 }
-func (*binaryClassdelay) Schema() *schema.Class { return schemadelay }
+func (*binaryClassdelay) Schema() *schema.Entity { return schemadelay }
 
-var schemadelay = &schema.Class{
+var schemadelay = &schema.Entity{
 	TypeID:  binaryIDdelay,
 	Package: "rpc",
 	Name:    "delay",
@@ -81,9 +81,9 @@ func (*binaryClassrequest) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderequest(d, obj.(*request))
 }
-func (*binaryClassrequest) Schema() *schema.Class { return schemarequest }
+func (*binaryClassrequest) Schema() *schema.Entity { return schemarequest }
 
-var schemarequest = &schema.Class{
+var schemarequest = &schema.Entity{
 	TypeID:  binaryIDrequest,
 	Package: "rpc",
 	Name:    "request",
@@ -116,9 +116,9 @@ func (*binaryClassresponse) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesponse(d, obj.(*response))
 }
-func (*binaryClassresponse) Schema() *schema.Class { return schemaresponse }
+func (*binaryClassresponse) Schema() *schema.Entity { return schemaresponse }
 
-var schemaresponse = &schema.Class{
+var schemaresponse = &schema.Entity{
 	TypeID:  binaryIDresponse,
 	Package: "rpc",
 	Name:    "response",

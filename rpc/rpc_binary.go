@@ -46,9 +46,9 @@ func (*binaryClassError) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeError(d, obj.(*Error))
 }
-func (*binaryClassError) Schema() *schema.Class { return schemaError }
+func (*binaryClassError) Schema() *schema.Entity { return schemaError }
 
-var schemaError = &schema.Class{
+var schemaError = &schema.Entity{
 	TypeID:  binaryIDError,
 	Package: "rpc",
 	Name:    "Error",

@@ -72,9 +72,9 @@ func (*binaryClassFramebufferObservation) Decode(d binary.Decoder) binary.Object
 func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferObservation(d, obj.(*FramebufferObservation))
 }
-func (*binaryClassFramebufferObservation) Schema() *schema.Class { return schemaFramebufferObservation }
+func (*binaryClassFramebufferObservation) Schema() *schema.Entity { return schemaFramebufferObservation }
 
-var schemaFramebufferObservation = &schema.Class{
+var schemaFramebufferObservation = &schema.Entity{
 	TypeID:  binaryIDFramebufferObservation,
 	Package: "atom",
 	Name:    "FramebufferObservation",
@@ -111,9 +111,9 @@ func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))
 }
-func (*binaryClassRange) Schema() *schema.Class { return schemaRange }
+func (*binaryClassRange) Schema() *schema.Entity { return schemaRange }
 
-var schemaRange = &schema.Class{
+var schemaRange = &schema.Entity{
 	TypeID:  binaryIDRange,
 	Package: "atom",
 	Name:    "Range",
@@ -159,9 +159,9 @@ func (*binaryClassGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGroup(d, obj.(*Group))
 }
-func (*binaryClassGroup) Schema() *schema.Class { return schemaGroup }
+func (*binaryClassGroup) Schema() *schema.Entity { return schemaGroup }
 
-var schemaGroup = &schema.Class{
+var schemaGroup = &schema.Entity{
 	TypeID:  binaryIDGroup,
 	Package: "atom",
 	Name:    "Group",
@@ -208,9 +208,9 @@ func (*binaryClassList) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeList(d, obj.(*List))
 }
-func (*binaryClassList) Schema() *schema.Class { return schemaList }
+func (*binaryClassList) Schema() *schema.Entity { return schemaList }
 
-var schemaList = &schema.Class{
+var schemaList = &schema.Entity{
 	TypeID:  binaryIDList,
 	Package: "atom",
 	Name:    "List",
@@ -251,9 +251,9 @@ func (*binaryClassMetadata) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMetadata(d, obj.(*Metadata))
 }
-func (*binaryClassMetadata) Schema() *schema.Class { return schemaMetadata }
+func (*binaryClassMetadata) Schema() *schema.Entity { return schemaMetadata }
 
-var schemaMetadata = &schema.Class{
+var schemaMetadata = &schema.Entity{
 	TypeID:  binaryIDMetadata,
 	Package: "atom",
 	Name:    "Metadata",
@@ -292,9 +292,9 @@ func (*binaryClassObservation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservation(d, obj.(*Observation))
 }
-func (*binaryClassObservation) Schema() *schema.Class { return schemaObservation }
+func (*binaryClassObservation) Schema() *schema.Entity { return schemaObservation }
 
-var schemaObservation = &schema.Class{
+var schemaObservation = &schema.Entity{
 	TypeID:  binaryIDObservation,
 	Package: "atom",
 	Name:    "Observation",
@@ -346,9 +346,9 @@ func (*binaryClassObservations) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservations(d, obj.(*Observations))
 }
-func (*binaryClassObservations) Schema() *schema.Class { return schemaObservations }
+func (*binaryClassObservations) Schema() *schema.Entity { return schemaObservations }
 
-var schemaObservations = &schema.Class{
+var schemaObservations = &schema.Entity{
 	TypeID:  binaryIDObservations,
 	Package: "atom",
 	Name:    "Observations",
@@ -388,9 +388,9 @@ func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))
 }
-func (*binaryClassResource) Schema() *schema.Class { return schemaResource }
+func (*binaryClassResource) Schema() *schema.Entity { return schemaResource }
 
-var schemaResource = &schema.Class{
+var schemaResource = &schema.Entity{
 	TypeID:  binaryIDResource,
 	Package: "atom",
 	Name:    "Resource",

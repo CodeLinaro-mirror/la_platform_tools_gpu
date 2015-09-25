@@ -112,7 +112,7 @@ func (a *Atom) String() string {
 // atomClass is an implementation of binary.Class used for atoms described by
 // the schema.
 type atomClass struct {
-	base         *schema.Class
+	base         *schema.Entity
 	meta         *atom.Metadata
 	observations int   // index on fields, or -1
 	parameters   []int // indices on fields
@@ -121,7 +121,7 @@ type atomClass struct {
 
 var observationsId = (*atom.Observations)(nil).Class().ID()
 
-func newAtomClass(base *schema.Class, meta *atom.Metadata) *atomClass {
+func newAtomClass(base *schema.Entity, meta *atom.Metadata) *atomClass {
 	class := &atomClass{base: base, meta: meta, observations: -1}
 	// Find the observations, if present
 	for i, f := range base.Fields {
@@ -140,7 +140,7 @@ func newAtomClass(base *schema.Class, meta *atom.Metadata) *atomClass {
 	return class
 }
 
-func (c *atomClass) Schema() *schema.Class {
+func (c *atomClass) Schema() *schema.Entity {
 	return c.base
 }
 

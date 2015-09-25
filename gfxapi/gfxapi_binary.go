@@ -57,9 +57,9 @@ func (*binaryClassTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexture(d, obj.(*Texture))
 }
-func (*binaryClassTexture) Schema() *schema.Class { return schemaTexture }
+func (*binaryClassTexture) Schema() *schema.Entity { return schemaTexture }
 
-var schemaTexture = &schema.Class{
+var schemaTexture = &schema.Entity{
 	TypeID:  binaryIDTexture,
 	Package: "gfxapi",
 	Name:    "Texture",

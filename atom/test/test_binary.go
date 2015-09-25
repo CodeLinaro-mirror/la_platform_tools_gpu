@@ -53,9 +53,9 @@ func (*binaryClassAtomA) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomA(d, obj.(*AtomA))
 }
-func (*binaryClassAtomA) Schema() *schema.Class { return schemaAtomA }
+func (*binaryClassAtomA) Schema() *schema.Entity { return schemaAtomA }
 
-var schemaAtomA = &schema.Class{
+var schemaAtomA = &schema.Entity{
 	TypeID:  AtomAID,
 	Package: "test",
 	Name:    "AtomA",
@@ -91,9 +91,9 @@ func (*binaryClassAtomB) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomB(d, obj.(*AtomB))
 }
-func (*binaryClassAtomB) Schema() *schema.Class { return schemaAtomB }
+func (*binaryClassAtomB) Schema() *schema.Entity { return schemaAtomB }
 
-var schemaAtomB = &schema.Class{
+var schemaAtomB = &schema.Entity{
 	TypeID:  AtomBID,
 	Package: "test",
 	Name:    "AtomB",
@@ -127,9 +127,9 @@ func (*binaryClassAtomC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomC(d, obj.(*AtomC))
 }
-func (*binaryClassAtomC) Schema() *schema.Class { return schemaAtomC }
+func (*binaryClassAtomC) Schema() *schema.Entity { return schemaAtomC }
 
-var schemaAtomC = &schema.Class{
+var schemaAtomC = &schema.Entity{
 	TypeID:  AtomCID,
 	Package: "test",
 	Name:    "AtomC",
