@@ -394,10 +394,6 @@ static void* real__glBindFragDataLocation = nullptr;
 EXPORT void __attribute__((naked)) glBindFragDataLocation() {
     asm("jmp *%%rax" : : "a"(real__glBindFragDataLocation) : );
 }
-static void* real__glBindFragDataLocationEXT = nullptr;
-EXPORT void __attribute__((naked)) glBindFragDataLocationEXT() {
-    asm("jmp *%%rax" : : "a"(real__glBindFragDataLocationEXT) : );
-}
 static void* real__glBindFragDataLocationIndexed = nullptr;
 EXPORT void __attribute__((naked)) glBindFragDataLocationIndexed() {
     asm("jmp *%%rax" : : "a"(real__glBindFragDataLocationIndexed) : );
@@ -4470,7 +4466,6 @@ static void initExports() {
     real__glBindBufferOffsetEXT = gapic::GetGfxProcAddress("glBindBufferOffsetEXT", true);
     real__glBindBufferRangeEXT = gapic::GetGfxProcAddress("glBindBufferRangeEXT", true);
     real__glBindFragDataLocation = gapic::GetGfxProcAddress("glBindFragDataLocation", true);
-    real__glBindFragDataLocationEXT = gapic::GetGfxProcAddress("glBindFragDataLocationEXT", true);
     real__glBindFragDataLocationIndexed = gapic::GetGfxProcAddress("glBindFragDataLocationIndexed", true);
     real__glBindFramebufferEXT = gapic::GetGfxProcAddress("glBindFramebufferEXT", true);
     real__glBindProgramARB = gapic::GetGfxProcAddress("glBindProgramARB", true);

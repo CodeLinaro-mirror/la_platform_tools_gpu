@@ -162,6 +162,9 @@ EXPORT void STDCALL glBeginConditionalRenderNV(uint32_t id, uint32_t mode);
 EXPORT void STDCALL glBeginPerfMonitorAMD(uint32_t monitor);
 EXPORT void STDCALL glBeginPerfQueryINTEL(uint32_t queryHandle);
 EXPORT void STDCALL glBeginQueryEXT(uint32_t target, uint32_t query);
+EXPORT void STDCALL glBindFragDataLocationEXT(uint32_t program, uint32_t color, char* name);
+EXPORT void STDCALL glBindFragDataLocationIndexedEXT(uint32_t program, uint32_t colorNumber,
+                                                     uint32_t index, char* name);
 EXPORT void STDCALL glBindProgramPipelineEXT(uint32_t pipeline);
 EXPORT void STDCALL glBindVertexArrayOES(uint32_t array);
 EXPORT void STDCALL glBlendBarrierNV();
@@ -337,6 +340,7 @@ EXPORT void STDCALL glGetDriverControlsQCOM(int32_t* num, int32_t size, uint32_t
 EXPORT void STDCALL glGetFenceivNV(uint32_t fence, uint32_t pname, int32_t* params);
 EXPORT void STDCALL glGetFirstPerfQueryIdINTEL(uint32_t* queryId);
 EXPORT void STDCALL glGetFloati_vNV(uint32_t target, uint32_t index, float* data);
+EXPORT int32_t STDCALL glGetFragDataIndexEXT(uint32_t program, char* name);
 EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT();
 EXPORT uint32_t STDCALL glGetGraphicsResetStatusKHR();
 EXPORT uint64_t STDCALL glGetImageHandleNV(uint32_t texture, int32_t level, uint8_t layered,
@@ -398,6 +402,8 @@ EXPORT void STDCALL glGetProgramBinaryOES(uint32_t program, int32_t buffer_size,
 EXPORT void STDCALL
 glGetProgramPipelineInfoLogEXT(uint32_t pipeline, int32_t bufSize, int32_t* length, char* infoLog);
 EXPORT void STDCALL glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname, int32_t* params);
+EXPORT int32_t STDCALL
+glGetProgramResourceLocationIndexEXT(uint32_t program, uint32_t programInterface, char* name);
 EXPORT void STDCALL glGetProgramResourcefvNV(uint32_t program, uint32_t programInterface,
                                              uint32_t index, int32_t propCount, uint32_t* props,
                                              int32_t bufSize, int32_t* length, float* params);
@@ -660,7 +666,7 @@ EXPORT void STDCALL glTexBufferRangeOES(uint32_t target, uint32_t internalformat
 EXPORT void STDCALL glTexImage3DOES(uint32_t target, int32_t level, uint32_t internalformat,
                                     int32_t width, int32_t height, int32_t depth, int32_t border,
                                     uint32_t format, uint32_t type, void* pixels);
-EXPORT void STDCALL glTexPageCommitmentARB(uint32_t target, int32_t level, int32_t xoffset,
+EXPORT void STDCALL glTexPageCommitmentEXT(uint32_t target, int32_t level, int32_t xoffset,
                                            int32_t yoffset, int32_t zoffset, int32_t width,
                                            int32_t height, int32_t depth, uint8_t commit);
 EXPORT void STDCALL glTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params);
@@ -1299,6 +1305,9 @@ const Symbol kGLESExports[] = {
         {"glBeginPerfMonitorAMD", reinterpret_cast<void*>(glBeginPerfMonitorAMD)},
         {"glBeginPerfQueryINTEL", reinterpret_cast<void*>(glBeginPerfQueryINTEL)},
         {"glBeginQueryEXT", reinterpret_cast<void*>(glBeginQueryEXT)},
+        {"glBindFragDataLocationEXT", reinterpret_cast<void*>(glBindFragDataLocationEXT)},
+        {"glBindFragDataLocationIndexedEXT",
+         reinterpret_cast<void*>(glBindFragDataLocationIndexedEXT)},
         {"glBindProgramPipelineEXT", reinterpret_cast<void*>(glBindProgramPipelineEXT)},
         {"glBindVertexArrayOES", reinterpret_cast<void*>(glBindVertexArrayOES)},
         {"glBlendBarrierNV", reinterpret_cast<void*>(glBlendBarrierNV)},
@@ -1421,6 +1430,7 @@ const Symbol kGLESExports[] = {
         {"glGetFenceivNV", reinterpret_cast<void*>(glGetFenceivNV)},
         {"glGetFirstPerfQueryIdINTEL", reinterpret_cast<void*>(glGetFirstPerfQueryIdINTEL)},
         {"glGetFloati_vNV", reinterpret_cast<void*>(glGetFloati_vNV)},
+        {"glGetFragDataIndexEXT", reinterpret_cast<void*>(glGetFragDataIndexEXT)},
         {"glGetGraphicsResetStatusEXT", reinterpret_cast<void*>(glGetGraphicsResetStatusEXT)},
         {"glGetGraphicsResetStatusKHR", reinterpret_cast<void*>(glGetGraphicsResetStatusKHR)},
         {"glGetImageHandleNV", reinterpret_cast<void*>(glGetImageHandleNV)},
@@ -1452,6 +1462,8 @@ const Symbol kGLESExports[] = {
         {"glGetProgramBinaryOES", reinterpret_cast<void*>(glGetProgramBinaryOES)},
         {"glGetProgramPipelineInfoLogEXT", reinterpret_cast<void*>(glGetProgramPipelineInfoLogEXT)},
         {"glGetProgramPipelineivEXT", reinterpret_cast<void*>(glGetProgramPipelineivEXT)},
+        {"glGetProgramResourceLocationIndexEXT",
+         reinterpret_cast<void*>(glGetProgramResourceLocationIndexEXT)},
         {"glGetProgramResourcefvNV", reinterpret_cast<void*>(glGetProgramResourcefvNV)},
         {"glGetQueryObjecti64vEXT", reinterpret_cast<void*>(glGetQueryObjecti64vEXT)},
         {"glGetQueryObjectivEXT", reinterpret_cast<void*>(glGetQueryObjectivEXT)},
@@ -1615,7 +1627,7 @@ const Symbol kGLESExports[] = {
         {"glTexBufferOES", reinterpret_cast<void*>(glTexBufferOES)},
         {"glTexBufferRangeOES", reinterpret_cast<void*>(glTexBufferRangeOES)},
         {"glTexImage3DOES", reinterpret_cast<void*>(glTexImage3DOES)},
-        {"glTexPageCommitmentARB", reinterpret_cast<void*>(glTexPageCommitmentARB)},
+        {"glTexPageCommitmentEXT", reinterpret_cast<void*>(glTexPageCommitmentEXT)},
         {"glTexParameterIivOES", reinterpret_cast<void*>(glTexParameterIivOES)},
         {"glTexParameterIuivOES", reinterpret_cast<void*>(glTexParameterIuivOES)},
         {"glTexStorage1DEXT", reinterpret_cast<void*>(glTexStorage1DEXT)},
@@ -2507,6 +2519,17 @@ EXPORT void STDCALL glBeginQueryEXT(uint32_t target, uint32_t query) {
     gapic::Lock<Spy> lock__(s);
     s->glBeginQueryEXT(target, query);
 }
+EXPORT void STDCALL glBindFragDataLocationEXT(uint32_t program, uint32_t color, char* name) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBindFragDataLocationEXT(program, color, name);
+}
+EXPORT void STDCALL glBindFragDataLocationIndexedEXT(uint32_t program, uint32_t colorNumber,
+                                                     uint32_t index, char* name) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBindFragDataLocationIndexedEXT(program, colorNumber, index, name);
+}
 EXPORT void STDCALL glBindProgramPipelineEXT(uint32_t pipeline) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -3124,6 +3147,11 @@ EXPORT void STDCALL glGetFloati_vNV(uint32_t target, uint32_t index, float* data
     gapic::Lock<Spy> lock__(s);
     s->glGetFloati_vNV(target, index, data);
 }
+EXPORT int32_t STDCALL glGetFragDataIndexEXT(uint32_t program, char* name) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glGetFragDataIndexEXT(program, name);
+}
 EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT() {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -3309,6 +3337,12 @@ EXPORT void STDCALL glGetProgramPipelineivEXT(uint32_t pipeline, uint32_t pname,
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetProgramPipelineivEXT(pipeline, pname, params);
+}
+EXPORT int32_t STDCALL
+glGetProgramResourceLocationIndexEXT(uint32_t program, uint32_t programInterface, char* name) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glGetProgramResourceLocationIndexEXT(program, programInterface, name);
 }
 EXPORT void STDCALL glGetProgramResourcefvNV(uint32_t program, uint32_t programInterface,
                                              uint32_t index, int32_t propCount, uint32_t* props,
@@ -4182,12 +4216,12 @@ EXPORT void STDCALL glTexImage3DOES(uint32_t target, int32_t level, uint32_t int
     s->glTexImage3DOES(target, level, internalformat, width, height, depth, border, format, type,
                        pixels);
 }
-EXPORT void STDCALL glTexPageCommitmentARB(uint32_t target, int32_t level, int32_t xoffset,
+EXPORT void STDCALL glTexPageCommitmentEXT(uint32_t target, int32_t level, int32_t xoffset,
                                            int32_t yoffset, int32_t zoffset, int32_t width,
                                            int32_t height, int32_t depth, uint8_t commit) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth,
+    s->glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth,
                               commit);
 }
 EXPORT void STDCALL glTexParameterIivOES(uint32_t target, uint32_t pname, int32_t* params) {

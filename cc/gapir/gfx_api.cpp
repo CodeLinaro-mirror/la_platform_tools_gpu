@@ -1698,6 +1698,45 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlBindFragDataLocationEXT(Stack* stack, bool pushReturn) {
+    char* name = stack->pop<char*>();
+    uint32_t color = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindFragDataLocationEXT(%" PRIu32 ", %" PRIu32 ", %p)", program, color, name);
+        if (glBindFragDataLocationEXT != nullptr) {
+            glBindFragDataLocationEXT(program, color, name);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBindFragDataLocationEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindFragDataLocationEXT");
+        return false;
+    }
+}
+
+bool callGlBindFragDataLocationIndexedEXT(Stack* stack, bool pushReturn) {
+    char* name = stack->pop<char*>();
+    uint32_t index = stack->pop<uint32_t>();
+    uint32_t colorNumber = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindFragDataLocationIndexedEXT(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ", %p)",
+                   program, colorNumber, index, name);
+        if (glBindFragDataLocationIndexedEXT != nullptr) {
+            glBindFragDataLocationIndexedEXT(program, colorNumber, index, name);
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glBindFragDataLocationIndexedEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindFragDataLocationIndexedEXT");
+        return false;
+    }
+}
+
 bool callGlBindProgramPipelineEXT(Stack* stack, bool pushReturn) {
     uint32_t pipeline = stack->pop<uint32_t>();
     if (stack->isValid()) {
@@ -3795,6 +3834,27 @@ bool callGlGetFloatiVNV(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlGetFragDataIndexEXT(Stack* stack, bool pushReturn) {
+    char* name = stack->pop<char*>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetFragDataIndexEXT(%" PRIu32 ", %p)", program, name);
+        if (glGetFragDataIndexEXT != nullptr) {
+            int32_t return_value = glGetFragDataIndexEXT(program, name);
+            GAPID_INFO("Returned: %" PRId32 "", return_value);
+            if (pushReturn) {
+                stack->push<int32_t>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetFragDataIndexEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetFragDataIndexEXT");
+        return false;
+    }
+}
+
 bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glGetGraphicsResetStatusEXT()");
@@ -4409,6 +4469,31 @@ bool callGlGetProgramPipelineivEXT(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glGetProgramPipelineivEXT");
+        return false;
+    }
+}
+
+bool callGlGetProgramResourceLocationIndexEXT(Stack* stack, bool pushReturn) {
+    char* name = stack->pop<char*>();
+    GLenum programInterface = stack->pop<GLenum>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetProgramResourceLocationIndexEXT(%" PRIu32 ", %u, %p)", program,
+                   programInterface, name);
+        if (glGetProgramResourceLocationIndexEXT != nullptr) {
+            int32_t return_value =
+                    glGetProgramResourceLocationIndexEXT(program, programInterface, name);
+            GAPID_INFO("Returned: %" PRId32 "", return_value);
+            if (pushReturn) {
+                stack->push<int32_t>(return_value);
+            }
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glGetProgramResourceLocationIndexEXT");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetProgramResourceLocationIndexEXT");
         return false;
     }
 }
@@ -7466,7 +7551,7 @@ bool callGlTexImage3DOES(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlTexPageCommitmentARB(Stack* stack, bool pushReturn) {
+bool callGlTexPageCommitmentEXT(Stack* stack, bool pushReturn) {
     uint8_t commit = stack->pop<uint8_t>();
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -7477,18 +7562,18 @@ bool callGlTexPageCommitmentARB(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexPageCommitmentARB(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+        GAPID_INFO("glTexPageCommitmentEXT(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRIu8 ")",
                    target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
-        if (glTexPageCommitmentARB != nullptr) {
-            glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth,
+        if (glTexPageCommitmentEXT != nullptr) {
+            glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth,
                                    commit);
         } else {
-            GAPID_WARNING("Attempted to call unsupported function glTexPageCommitmentARB");
+            GAPID_WARNING("Attempted to call unsupported function glTexPageCommitmentEXT");
         }
         return true;
     } else {
-        GAPID_WARNING("Error during calling function glTexPageCommitmentARB");
+        GAPID_WARNING("Error during calling function glTexPageCommitmentEXT");
         return false;
     }
 }
@@ -14714,6 +14799,8 @@ PFNGLBEGINCONDITIONALRENDERNV glBeginConditionalRenderNV = nullptr;
 PFNGLBEGINPERFMONITORAMD glBeginPerfMonitorAMD = nullptr;
 PFNGLBEGINPERFQUERYINTEL glBeginPerfQueryINTEL = nullptr;
 PFNGLBEGINQUERYEXT glBeginQueryEXT = nullptr;
+PFNGLBINDFRAGDATALOCATIONEXT glBindFragDataLocationEXT = nullptr;
+PFNGLBINDFRAGDATALOCATIONINDEXEDEXT glBindFragDataLocationIndexedEXT = nullptr;
 PFNGLBINDPROGRAMPIPELINEEXT glBindProgramPipelineEXT = nullptr;
 PFNGLBINDVERTEXARRAYOES glBindVertexArrayOES = nullptr;
 PFNGLBLENDBARRIERNV glBlendBarrierNV = nullptr;
@@ -14822,6 +14909,7 @@ PFNGLGETDRIVERCONTROLSQCOM glGetDriverControlsQCOM = nullptr;
 PFNGLGETFENCEIVNV glGetFenceivNV = nullptr;
 PFNGLGETFIRSTPERFQUERYIDINTEL glGetFirstPerfQueryIdINTEL = nullptr;
 PFNGLGETFLOATI_VNV glGetFloati_vNV = nullptr;
+PFNGLGETFRAGDATAINDEXEXT glGetFragDataIndexEXT = nullptr;
 PFNGLGETGRAPHICSRESETSTATUSEXT glGetGraphicsResetStatusEXT = nullptr;
 PFNGLGETGRAPHICSRESETSTATUSKHR glGetGraphicsResetStatusKHR = nullptr;
 PFNGLGETIMAGEHANDLENV glGetImageHandleNV = nullptr;
@@ -14852,6 +14940,7 @@ PFNGLGETPERFQUERYINFOINTEL glGetPerfQueryInfoINTEL = nullptr;
 PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES = nullptr;
 PFNGLGETPROGRAMPIPELINEINFOLOGEXT glGetProgramPipelineInfoLogEXT = nullptr;
 PFNGLGETPROGRAMPIPELINEIVEXT glGetProgramPipelineivEXT = nullptr;
+PFNGLGETPROGRAMRESOURCELOCATIONINDEXEXT glGetProgramResourceLocationIndexEXT = nullptr;
 PFNGLGETPROGRAMRESOURCEFVNV glGetProgramResourcefvNV = nullptr;
 PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT = nullptr;
 PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT = nullptr;
@@ -15001,7 +15090,7 @@ PFNGLTESTFENCENV glTestFenceNV = nullptr;
 PFNGLTEXBUFFEROES glTexBufferOES = nullptr;
 PFNGLTEXBUFFERRANGEOES glTexBufferRangeOES = nullptr;
 PFNGLTEXIMAGE3DOES glTexImage3DOES = nullptr;
-PFNGLTEXPAGECOMMITMENTARB glTexPageCommitmentARB = nullptr;
+PFNGLTEXPAGECOMMITMENTEXT glTexPageCommitmentEXT = nullptr;
 PFNGLTEXPARAMETERIIVOES glTexParameterIivOES = nullptr;
 PFNGLTEXPARAMETERIUIVOES glTexParameterIuivOES = nullptr;
 PFNGLTEXSTORAGE1DEXT glTexStorage1DEXT = nullptr;
@@ -15465,6 +15554,9 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlBeginPerfMonitorAMD, callGlBeginPerfMonitorAMD);
     interpreter->registerFunction(Ids::GlBeginPerfQueryINTEL, callGlBeginPerfQueryINTEL);
     interpreter->registerFunction(Ids::GlBeginQueryEXT, callGlBeginQueryEXT);
+    interpreter->registerFunction(Ids::GlBindFragDataLocationEXT, callGlBindFragDataLocationEXT);
+    interpreter->registerFunction(Ids::GlBindFragDataLocationIndexedEXT,
+                                  callGlBindFragDataLocationIndexedEXT);
     interpreter->registerFunction(Ids::GlBindProgramPipelineEXT, callGlBindProgramPipelineEXT);
     interpreter->registerFunction(Ids::GlBindVertexArrayOES, callGlBindVertexArrayOES);
     interpreter->registerFunction(Ids::GlBlendBarrierNV, callGlBlendBarrierNV);
@@ -15599,6 +15691,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetFenceivNV, callGlGetFenceivNV);
     interpreter->registerFunction(Ids::GlGetFirstPerfQueryIdINTEL, callGlGetFirstPerfQueryIdINTEL);
     interpreter->registerFunction(Ids::GlGetFloatiVNV, callGlGetFloatiVNV);
+    interpreter->registerFunction(Ids::GlGetFragDataIndexEXT, callGlGetFragDataIndexEXT);
     interpreter->registerFunction(Ids::GlGetGraphicsResetStatusEXT,
                                   callGlGetGraphicsResetStatusEXT);
     interpreter->registerFunction(Ids::GlGetGraphicsResetStatusKHR,
@@ -15639,6 +15732,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetProgramPipelineInfoLogEXT,
                                   callGlGetProgramPipelineInfoLogEXT);
     interpreter->registerFunction(Ids::GlGetProgramPipelineivEXT, callGlGetProgramPipelineivEXT);
+    interpreter->registerFunction(Ids::GlGetProgramResourceLocationIndexEXT,
+                                  callGlGetProgramResourceLocationIndexEXT);
     interpreter->registerFunction(Ids::GlGetProgramResourcefvNV, callGlGetProgramResourcefvNV);
     interpreter->registerFunction(Ids::GlGetQueryObjecti64vEXT, callGlGetQueryObjecti64vEXT);
     interpreter->registerFunction(Ids::GlGetQueryObjectivEXT, callGlGetQueryObjectivEXT);
@@ -15830,7 +15925,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlTexBufferOES, callGlTexBufferOES);
     interpreter->registerFunction(Ids::GlTexBufferRangeOES, callGlTexBufferRangeOES);
     interpreter->registerFunction(Ids::GlTexImage3DOES, callGlTexImage3DOES);
-    interpreter->registerFunction(Ids::GlTexPageCommitmentARB, callGlTexPageCommitmentARB);
+    interpreter->registerFunction(Ids::GlTexPageCommitmentEXT, callGlTexPageCommitmentEXT);
     interpreter->registerFunction(Ids::GlTexParameterIivOES, callGlTexParameterIivOES);
     interpreter->registerFunction(Ids::GlTexParameterIuivOES, callGlTexParameterIuivOES);
     interpreter->registerFunction(Ids::GlTexStorage1DEXT, callGlTexStorage1DEXT);
@@ -16388,6 +16483,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glBeginPerfQueryINTEL", false));
     glBeginQueryEXT = reinterpret_cast<PFNGLBEGINQUERYEXT>(
             gapic::GetGfxProcAddress("glBeginQueryEXT", false));
+    glBindFragDataLocationEXT = reinterpret_cast<PFNGLBINDFRAGDATALOCATIONEXT>(
+            gapic::GetGfxProcAddress("glBindFragDataLocationEXT", false));
+    glBindFragDataLocationIndexedEXT = reinterpret_cast<PFNGLBINDFRAGDATALOCATIONINDEXEDEXT>(
+            gapic::GetGfxProcAddress("glBindFragDataLocationIndexedEXT", false));
     glBindProgramPipelineEXT = reinterpret_cast<PFNGLBINDPROGRAMPIPELINEEXT>(
             gapic::GetGfxProcAddress("glBindProgramPipelineEXT", false));
     glBindVertexArrayOES = reinterpret_cast<PFNGLBINDVERTEXARRAYOES>(
@@ -16610,6 +16709,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glGetFirstPerfQueryIdINTEL", false));
     glGetFloati_vNV = reinterpret_cast<PFNGLGETFLOATI_VNV>(
             gapic::GetGfxProcAddress("glGetFloati_vNV", false));
+    glGetFragDataIndexEXT = reinterpret_cast<PFNGLGETFRAGDATAINDEXEXT>(
+            gapic::GetGfxProcAddress("glGetFragDataIndexEXT", false));
     glGetGraphicsResetStatusEXT = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSEXT>(
             gapic::GetGfxProcAddress("glGetGraphicsResetStatusEXT", false));
     glGetGraphicsResetStatusKHR = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSKHR>(
@@ -16670,6 +16771,9 @@ void Initialize() {
             gapic::GetGfxProcAddress("glGetProgramPipelineInfoLogEXT", false));
     glGetProgramPipelineivEXT = reinterpret_cast<PFNGLGETPROGRAMPIPELINEIVEXT>(
             gapic::GetGfxProcAddress("glGetProgramPipelineivEXT", false));
+    glGetProgramResourceLocationIndexEXT =
+            reinterpret_cast<PFNGLGETPROGRAMRESOURCELOCATIONINDEXEXT>(
+                    gapic::GetGfxProcAddress("glGetProgramResourceLocationIndexEXT", false));
     glGetProgramResourcefvNV = reinterpret_cast<PFNGLGETPROGRAMRESOURCEFVNV>(
             gapic::GetGfxProcAddress("glGetProgramResourcefvNV", false));
     glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
@@ -16972,8 +17076,8 @@ void Initialize() {
             gapic::GetGfxProcAddress("glTexBufferRangeOES", false));
     glTexImage3DOES = reinterpret_cast<PFNGLTEXIMAGE3DOES>(
             gapic::GetGfxProcAddress("glTexImage3DOES", false));
-    glTexPageCommitmentARB = reinterpret_cast<PFNGLTEXPAGECOMMITMENTARB>(
-            gapic::GetGfxProcAddress("glTexPageCommitmentARB", false));
+    glTexPageCommitmentEXT = reinterpret_cast<PFNGLTEXPAGECOMMITMENTEXT>(
+            gapic::GetGfxProcAddress("glTexPageCommitmentEXT", false));
     glTexParameterIivOES = reinterpret_cast<PFNGLTEXPARAMETERIIVOES>(
             gapic::GetGfxProcAddress("glTexParameterIivOES", false));
     glTexParameterIuivOES = reinterpret_cast<PFNGLTEXPARAMETERIUIVOES>(

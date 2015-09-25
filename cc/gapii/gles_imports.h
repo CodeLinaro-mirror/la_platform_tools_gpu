@@ -186,6 +186,11 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLBEGINPERFMONITORAMD)(uint32_t monitor);
     typedef void(STDCALL *PFNGLBEGINPERFQUERYINTEL)(uint32_t queryHandle);
     typedef void(STDCALL *PFNGLBEGINQUERYEXT)(uint32_t target, uint32_t query);
+    typedef void(STDCALL *PFNGLBINDFRAGDATALOCATIONEXT)(uint32_t program, uint32_t color,
+                                                        char *name);
+    typedef void(STDCALL *PFNGLBINDFRAGDATALOCATIONINDEXEDEXT)(uint32_t program,
+                                                               uint32_t colorNumber, uint32_t index,
+                                                               char *name);
     typedef void(STDCALL *PFNGLBINDPROGRAMPIPELINEEXT)(uint32_t pipeline);
     typedef void(STDCALL *PFNGLBINDVERTEXARRAYOES)(uint32_t array);
     typedef void(STDCALL *PFNGLBLENDBARRIERNV)();
@@ -403,6 +408,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETFENCEIVNV)(uint32_t fence, uint32_t pname, int32_t *params);
     typedef void(STDCALL *PFNGLGETFIRSTPERFQUERYIDINTEL)(uint32_t *queryId);
     typedef void(STDCALL *PFNGLGETFLOATI_VNV)(uint32_t target, uint32_t index, float *data);
+    typedef int32_t(STDCALL *PFNGLGETFRAGDATAINDEXEXT)(uint32_t program, char *name);
     typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
     typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSKHR)();
     typedef uint64_t(STDCALL *PFNGLGETIMAGEHANDLENV)(uint32_t texture, int32_t level,
@@ -470,6 +476,9 @@ struct GlesImports {
                                                              int32_t *length, char *infoLog);
     typedef void(STDCALL *PFNGLGETPROGRAMPIPELINEIVEXT)(uint32_t pipeline, uint32_t pname,
                                                         int32_t *params);
+    typedef int32_t(STDCALL *PFNGLGETPROGRAMRESOURCELOCATIONINDEXEXT)(uint32_t program,
+                                                                      uint32_t programInterface,
+                                                                      char *name);
     typedef void(STDCALL *PFNGLGETPROGRAMRESOURCEFVNV)(uint32_t program, uint32_t programInterface,
                                                        uint32_t index, int32_t propCount,
                                                        uint32_t *props, int32_t bufSize,
@@ -775,7 +784,7 @@ struct GlesImports {
                                               uint32_t internalformat, int32_t width,
                                               int32_t height, int32_t depth, int32_t border,
                                               uint32_t format, uint32_t type, void *pixels);
-    typedef void(STDCALL *PFNGLTEXPAGECOMMITMENTARB)(uint32_t target, int32_t level,
+    typedef void(STDCALL *PFNGLTEXPAGECOMMITMENTEXT)(uint32_t target, int32_t level,
                                                      int32_t xoffset, int32_t yoffset,
                                                      int32_t zoffset, int32_t width, int32_t height,
                                                      int32_t depth, uint8_t commit);
@@ -1495,6 +1504,8 @@ struct GlesImports {
     PFNGLBEGINPERFMONITORAMD glBeginPerfMonitorAMD;
     PFNGLBEGINPERFQUERYINTEL glBeginPerfQueryINTEL;
     PFNGLBEGINQUERYEXT glBeginQueryEXT;
+    PFNGLBINDFRAGDATALOCATIONEXT glBindFragDataLocationEXT;
+    PFNGLBINDFRAGDATALOCATIONINDEXEDEXT glBindFragDataLocationIndexedEXT;
     PFNGLBINDPROGRAMPIPELINEEXT glBindProgramPipelineEXT;
     PFNGLBINDVERTEXARRAYOES glBindVertexArrayOES;
     PFNGLBLENDBARRIERNV glBlendBarrierNV;
@@ -1603,6 +1614,7 @@ struct GlesImports {
     PFNGLGETFENCEIVNV glGetFenceivNV;
     PFNGLGETFIRSTPERFQUERYIDINTEL glGetFirstPerfQueryIdINTEL;
     PFNGLGETFLOATI_VNV glGetFloati_vNV;
+    PFNGLGETFRAGDATAINDEXEXT glGetFragDataIndexEXT;
     PFNGLGETGRAPHICSRESETSTATUSEXT glGetGraphicsResetStatusEXT;
     PFNGLGETGRAPHICSRESETSTATUSKHR glGetGraphicsResetStatusKHR;
     PFNGLGETIMAGEHANDLENV glGetImageHandleNV;
@@ -1633,6 +1645,7 @@ struct GlesImports {
     PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;
     PFNGLGETPROGRAMPIPELINEINFOLOGEXT glGetProgramPipelineInfoLogEXT;
     PFNGLGETPROGRAMPIPELINEIVEXT glGetProgramPipelineivEXT;
+    PFNGLGETPROGRAMRESOURCELOCATIONINDEXEXT glGetProgramResourceLocationIndexEXT;
     PFNGLGETPROGRAMRESOURCEFVNV glGetProgramResourcefvNV;
     PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT;
     PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT;
@@ -1782,7 +1795,7 @@ struct GlesImports {
     PFNGLTEXBUFFEROES glTexBufferOES;
     PFNGLTEXBUFFERRANGEOES glTexBufferRangeOES;
     PFNGLTEXIMAGE3DOES glTexImage3DOES;
-    PFNGLTEXPAGECOMMITMENTARB glTexPageCommitmentARB;
+    PFNGLTEXPAGECOMMITMENTEXT glTexPageCommitmentEXT;
     PFNGLTEXPARAMETERIIVOES glTexParameterIivOES;
     PFNGLTEXPARAMETERIUIVOES glTexParameterIuivOES;
     PFNGLTEXSTORAGE1DEXT glTexStorage1DEXT;
