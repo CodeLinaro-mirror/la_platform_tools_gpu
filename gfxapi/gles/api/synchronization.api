@@ -17,6 +17,10 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glClientWaitSync.xhtml","OpenGL ES 3.2")
 cmd GLenum glClientWaitSync(GLsync sync, GLbitfield syncFlags, GLuint64 timeout) {
   minRequiredVersion(3, 0)
+  return ClientWaitSync(sync, syncFlags, timeout)
+}
+
+macro GLenum ClientWaitSync(GLsync sync, GLbitfield syncFlags, GLuint64 timeout) {
   supportsBits(syncFlags, GL_SYNC_FLUSH_COMMANDS_BIT)
   if (GL_SYNC_FLUSH_COMMANDS_BIT in syncFlags) {
   }
@@ -29,6 +33,10 @@ cmd GLenum glClientWaitSync(GLsync sync, GLbitfield syncFlags, GLuint64 timeout)
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteSync.xhtml","OpenGL ES 3.2")
 cmd void glDeleteSync(GLsync sync) {
   minRequiredVersion(3, 0)
+  DeleteSync(sync)
+}
+
+macro void DeleteSync(GLsync sync) {
 
 }
 
@@ -37,6 +45,10 @@ cmd void glDeleteSync(GLsync sync) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFenceSync.xhtml","OpenGL ES 3.2")
 cmd GLsync glFenceSync(GLenum condition, GLbitfield syncFlags) {
   minRequiredVersion(3, 0)
+  return FenceSync(condition, syncFlags)
+}
+
+macro GLsync FenceSync(GLenum condition, GLbitfield syncFlags) {
   switch (condition) {
     case GL_SYNC_GPU_COMMANDS_COMPLETE: {
       // version 3.0
@@ -54,6 +66,10 @@ cmd GLsync glFenceSync(GLenum condition, GLbitfield syncFlags) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSynciv.xhtml","OpenGL ES 3.2")
 cmd void glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei* length, GLint* values) {
   minRequiredVersion(3, 0)
+  GetSynciv(sync, pname, bufSize, length, values)
+}
+
+macro void GetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei* length, GLint* values) {
   switch (pname) {
     case GL_OBJECT_TYPE, GL_SYNC_CONDITION, GL_SYNC_FLAGS, GL_SYNC_STATUS: {
       // version 3.0
@@ -75,6 +91,10 @@ cmd void glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei* length
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsSync.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsSync(GLsync sync) {
   minRequiredVersion(3, 0)
+  return IsSync(sync)
+}
+
+macro GLboolean IsSync(GLsync sync) {
   // TODO
   return ?
 }
@@ -84,6 +104,10 @@ cmd GLboolean glIsSync(GLsync sync) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glWaitSync.xhtml","OpenGL ES 3.2")
 cmd void glWaitSync(GLsync sync, GLbitfield syncFlags, GLuint64 timeout) {
   minRequiredVersion(3, 0)
+  WaitSync(sync, syncFlags, timeout)
+}
+
+macro void WaitSync(GLsync sync, GLbitfield syncFlags, GLuint64 timeout) {
 
   assert(timeout == 0xFFFFFFFFFFFFFFFF) // GL_TIMEOUT_IGNORED
 }

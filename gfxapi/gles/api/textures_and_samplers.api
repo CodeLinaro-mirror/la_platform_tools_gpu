@@ -217,6 +217,10 @@ cmd void glCompressedTexImage3D(GLenum         target,
                                 GLsizei        image_size,
                                 TexturePointer data) {
   minRequiredVersion(3, 0)
+  CompressedTexImage3D(target, level, internalformat, width, height, depth, border, image_size, data)
+}
+
+macro void CompressedTexImage3D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei image_size, TexturePointer data) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -333,6 +337,10 @@ cmd void glCompressedTexSubImage3D(GLenum         target,
                                    GLsizei        image_size,
                                    TexturePointer data) {
   minRequiredVersion(3, 0)
+  CompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, image_size, data)
+}
+
+macro void CompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei image_size, TexturePointer data) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -394,6 +402,10 @@ cmd void glCopyImageSubData(GLuint  srcName,
                             GLsizei srcHeight,
                             GLsizei srcDepth) {
   minRequiredVersion(3, 2)
+  CopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth)
+}
+
+macro void CopyImageSubData(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth) {
   switch (srcTarget) {
     case GL_RENDERBUFFER, GL_TEXTURE_2D, GL_TEXTURE_2D_ARRAY, GL_TEXTURE_2D_MULTISAMPLE,
         GL_TEXTURE_2D_MULTISAMPLE_ARRAY, GL_TEXTURE_3D, GL_TEXTURE_CUBE_MAP,
@@ -496,6 +508,10 @@ cmd void glCopyTexSubImage3D(GLenum  target,
                              GLsizei width,
                              GLsizei height) {
   minRequiredVersion(3, 0)
+  CopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height)
+}
+
+macro void CopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -602,12 +618,20 @@ macro void GetSamplerParameter(SamplerId sampler, GLenum pname, any params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetSamplerParameterIiv(SamplerId sampler, GLenum pname, GLint* params) {
   minRequiredVersion(3, 2)
+  GetSamplerParameterIiv(sampler, pname, params)
+}
+
+macro void GetSamplerParameterIiv(SamplerId sampler, GLenum pname, GLint* params) {
   GetSamplerParameter(sampler, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetSamplerParameterIuiv(SamplerId sampler, GLenum pname, GLuint* params) {
   minRequiredVersion(3, 2)
+  GetSamplerParameterIuiv(sampler, pname, params)
+}
+
+macro void GetSamplerParameterIuiv(SamplerId sampler, GLenum pname, GLuint* params) {
   GetSamplerParameter(sampler, pname, params)
 }
 
@@ -750,12 +774,20 @@ macro void GetTexParameter(GLenum target, GLenum parameter, any params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetTexParameterIiv(GLenum target, GLenum pname, GLint* params) {
   minRequiredVersion(3, 2)
+  GetTexParameterIiv(target, pname, params)
+}
+
+macro void GetTexParameterIiv(GLenum target, GLenum pname, GLint* params) {
   GetTexParameter(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetTexParameterIuiv(GLenum target, GLenum pname, GLuint* params) {
   minRequiredVersion(3, 2)
+  GetTexParameterIuiv(target, pname, params)
+}
+
+macro void GetTexParameterIuiv(GLenum target, GLenum pname, GLuint* params) {
   GetTexParameter(target, pname, params)
 }
 
@@ -876,12 +908,20 @@ macro void SamplerParameterv(SamplerId sampler, GLenum pname, any params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glSamplerParameterIiv(SamplerId sampler, GLenum pname, const GLint* param) {
   minRequiredVersion(3, 2)
+  SamplerParameterIiv(sampler, pname, param)
+}
+
+macro void SamplerParameterIiv(SamplerId sampler, GLenum pname, const GLint* param) {
   SamplerParameterv(sampler, pname, param)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSamplerParameter.xhtml","OpenGL ES 3.2")
 cmd void glSamplerParameterIuiv(SamplerId sampler, GLenum pname, const GLuint* param) {
   minRequiredVersion(3, 2)
+  SamplerParameterIuiv(sampler, pname, param)
+}
+
+macro void SamplerParameterIuiv(SamplerId sampler, GLenum pname, const GLuint* param) {
   SamplerParameterv(sampler, pname, param)
 }
 
@@ -940,6 +980,10 @@ cmd void glSamplerParameteriv(SamplerId sampler, GLenum pname, const GLint* para
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexBuffer.xhtml","OpenGL ES 3.2")
 cmd void glTexBuffer(GLenum target, GLenum internalformat, BufferId buffer) {
   minRequiredVersion(3, 2)
+  TexBuffer(target, internalformat, buffer)
+}
+
+macro void TexBuffer(GLenum target, GLenum internalformat, BufferId buffer) {
   switch (target) {
     case GL_TEXTURE_BUFFER: {
       // version 3.2
@@ -969,6 +1013,10 @@ cmd void glTexBufferRange(GLenum     target,
                           GLintptr   offset,
                           GLsizeiptr size) {
   minRequiredVersion(3, 2)
+  TexBufferRange(target, internalformat, buffer, offset, size)
+}
+
+macro void TexBufferRange(GLenum target, GLenum internalformat, BufferId buffer, GLintptr offset, GLsizeiptr size) {
   switch (target) {
     case GL_TEXTURE_BUFFER: {
       // version 3.2
@@ -1116,6 +1164,10 @@ cmd void glTexImage3D(GLenum         target,
                       GLenum         type,
                       TexturePointer data) {
   minRequiredVersion(3, 0)
+  TexImage3D(target, level, internalformat, width, height, depth, border, format, type, data)
+}
+
+macro void TexImage3D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, TexturePointer data) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -1207,12 +1259,20 @@ macro void TexParameterv(GLenum target, GLenum pname, any params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterIiv(GLenum target, GLenum pname, const GLint* params) {
   minRequiredVersion(3, 2)
+  TexParameterIiv(target, pname, params)
+}
+
+macro void TexParameterIiv(GLenum target, GLenum pname, const GLint* params) {
   TexParameterv(target, pname, params)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterIuiv(GLenum target, GLenum pname, const GLuint* params) {
   minRequiredVersion(3, 2)
+  TexParameterIuiv(target, pname, params)
+}
+
+macro void TexParameterIuiv(GLenum target, GLenum pname, const GLuint* params) {
   TexParameterv(target, pname, params)
 }
 
@@ -1357,6 +1417,10 @@ cmd void glTexStorage2D(GLenum  target,
                         GLsizei width,
                         GLsizei height) {
   minRequiredVersion(3, 0)
+  TexStorage2D(target, levels, internalformat, width, height)
+}
+
+macro void TexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) {
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
       // version 3.0
@@ -1451,6 +1515,10 @@ cmd void glTexStorage3D(GLenum  target,
                         GLsizei height,
                         GLsizei depth) {
   minRequiredVersion(3, 0)
+  TexStorage3D(target, levels, internalformat, width, height, depth)
+}
+
+macro void TexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -1510,6 +1578,10 @@ cmd void glTexStorage3DMultisample(GLenum    target,
                                    GLsizei   depth,
                                    GLboolean fixedsamplelocations) {
   minRequiredVersion(3, 2)
+  TexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations)
+}
+
+macro void TexStorage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) {
   switch (target) {
     case GL_TEXTURE_2D_MULTISAMPLE_ARRAY: {
       // version 3.2
@@ -1642,6 +1714,10 @@ cmd void glTexSubImage3D(GLenum         target,
                          GLenum         type,
                          TexturePointer data) {
   minRequiredVersion(3, 0)
+  TexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data)
+}
+
+macro void TexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, TexturePointer data) {
   switch (target) {
     case GL_TEXTURE_2D_ARRAY, GL_TEXTURE_3D: {
       // version 3.0
@@ -1683,3 +1759,4 @@ cmd void glTexSubImage3D(GLenum         target,
     read(as!u8*(data)[0:size])
   }
 }
+

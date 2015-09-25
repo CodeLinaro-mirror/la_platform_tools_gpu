@@ -1956,7 +1956,7 @@ bool callGlColorMaskiOES(Stack* stack, bool pushReturn) {
 
 bool callGlCompressedTexImage3DOES(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    int32_t imageSize = stack->pop<int32_t>();
+    int32_t image_size = stack->pop<int32_t>();
     int32_t border = stack->pop<int32_t>();
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -1967,10 +1967,10 @@ bool callGlCompressedTexImage3DOES(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glCompressedTexImage3DOES(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %p)",
-                   target, level, internalformat, width, height, depth, border, imageSize, data);
+                   target, level, internalformat, width, height, depth, border, image_size, data);
         if (glCompressedTexImage3DOES != nullptr) {
             glCompressedTexImage3DOES(target, level, internalformat, width, height, depth, border,
-                                      imageSize, data);
+                                      image_size, data);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexImage3DOES");
         }
@@ -1983,7 +1983,7 @@ bool callGlCompressedTexImage3DOES(Stack* stack, bool pushReturn) {
 
 bool callGlCompressedTexSubImage3DOES(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    int32_t imageSize = stack->pop<int32_t>();
+    int32_t image_size = stack->pop<int32_t>();
     GLenum format = stack->pop<GLenum>();
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -1997,10 +1997,10 @@ bool callGlCompressedTexSubImage3DOES(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCompressedTexSubImage3DOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32
                    ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %" PRId32 ", %p)",
                    target, level, xoffset, yoffset, zoffset, width, height, depth, format,
-                   imageSize, data);
+                   image_size, data);
         if (glCompressedTexSubImage3DOES != nullptr) {
             glCompressedTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height,
-                                         depth, format, imageSize, data);
+                                         depth, format, image_size, data);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCompressedTexSubImage3DOES");
         }

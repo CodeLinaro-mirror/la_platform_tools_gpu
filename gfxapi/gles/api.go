@@ -844,54 +844,112 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLenumᵖ is a pointer to a GLenum element.
-type GLenumᵖ struct {
+// Voidᵖᵖ is a pointer to a Voidᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type Voidᵖᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
-func NewGLenumᵖ(addr uint64) GLenumᵖ {
-	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewVoidᵖᵖ returns a Voidᵖᵖ that points to addr in the application pool.
+func NewVoidᵖᵖ(addr uint64) Voidᵖᵖ {
+	return Voidᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that GLenumᵖ points to.
-func (p GLenumᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
+// ElementSize returns the size in bytes of an element that Voidᵖᵖ points to.
+func (p Voidᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	if p.Pointer.Pool == memory.ApplicationPool {
+		return uint64(ϟs.Architecture.PointerSize)
+	} else {
+		return 12
+	}
 }
 
-// Read reads and returns the GLenum element at the pointer.
-func (p GLenumᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
+// Read reads and returns the Voidᵖ element at the pointer.
+func (p Voidᵖᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
 	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
-// Write writes value to the GLenum element at the pointer.
-func (p GLenumᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+// Write writes value to the Voidᵖ element at the pointer.
+func (p Voidᵖᵖ) Write(value Voidᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Voidᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLenumᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+func (p Voidᵖᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLenumᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+func (p Voidᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p GLenumᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
+func (p Voidᵖᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
-// Slice returns a new GLenumˢ from the pointer using start and end indices.
-func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
+// Slice returns a new Voidᵖˢ from the pointer using start and end indices.
+func (p Voidᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Voidᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLuintᶜᵖ is a pointer to a GLuint element.
+type GLuintᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLuintᶜᵖ returns a GLuintᶜᵖ that points to addr in the application pool.
+func NewGLuintᶜᵖ(addr uint64) GLuintᶜᵖ {
+	return GLuintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLuintᶜᵖ points to.
+func (p GLuintᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLuint element at the pointer.
+func (p GLuintᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLuint element at the pointer.
+func (p GLuintᶜᵖ) Write(value GLuint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLuint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLuintᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLuintᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLuintᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLuintˢ from the pointer using start and end indices.
+func (p GLuintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // GLuintᵖ is a pointer to a GLuint element.
@@ -944,54 +1002,65 @@ func (p GLuintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLsizeiᵖ is a pointer to a GLsizei element.
-type GLsizeiᵖ struct {
+// GLcharᶜᵖ is a pointer to a GLchar element.
+type GLcharᶜᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewGLsizeiᵖ returns a GLsizeiᵖ that points to addr in the application pool.
-func NewGLsizeiᵖ(addr uint64) GLsizeiᵖ {
-	return GLsizeiᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewGLcharᶜᵖ returns a GLcharᶜᵖ that points to addr in the application pool.
+func NewGLcharᶜᵖ(addr uint64) GLcharᶜᵖ {
+	return GLcharᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that GLsizeiᵖ points to.
-func (p GLsizeiᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
+// ElementSize returns the size in bytes of an element that GLcharᶜᵖ points to.
+func (p GLcharᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
 }
 
-// Read reads and returns the GLsizei element at the pointer.
-func (p GLsizeiᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizei {
+// Read reads and returns the GLchar element at the pointer.
+func (p GLcharᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
 	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
-// Write writes value to the GLsizei element at the pointer.
-func (p GLsizeiᵖ) Write(value GLsizei, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLsizei{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+// Write writes value to the GLchar element at the pointer.
+func (p GLcharᶜᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLsizeiᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+func (p GLcharᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLsizeiᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+func (p GLcharᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p GLsizeiᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+func (p GLcharᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
-// Slice returns a new GLsizeiˢ from the pointer using start and end indices.
-func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		i++
+		if b := d.Uint8(); b == 0 {
+			return Charˢ(p.Slice(0, i, ϟs))
+		}
+	}
+}
+
+// Slice returns a new GLcharˢ from the pointer using start and end indices.
+func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // GLcharᵖ is a pointer to a GLchar element.
@@ -1055,65 +1124,504 @@ func (p GLcharᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLcharᶜᵖ is a pointer to a GLchar element.
-type GLcharᶜᵖ struct {
+// GLenumᵖ is a pointer to a GLenum element.
+type GLenumᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewGLcharᶜᵖ returns a GLcharᶜᵖ that points to addr in the application pool.
-func NewGLcharᶜᵖ(addr uint64) GLcharᶜᵖ {
-	return GLcharᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
+func NewGLenumᵖ(addr uint64) GLenumᵖ {
+	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that GLcharᶜᵖ points to.
-func (p GLcharᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
+// ElementSize returns the size in bytes of an element that GLenumᵖ points to.
+func (p GLenumᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
 }
 
-// Read reads and returns the GLchar element at the pointer.
-func (p GLcharᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLchar {
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
 	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
-// Write writes value to the GLchar element at the pointer.
-func (p GLcharᶜᵖ) Write(value GLchar, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLchar{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+func (p GLenumᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+func (p GLenumᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p GLcharᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+func (p GLenumᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᵖ {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
-// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
-func (p GLcharᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
-	for {
-		i++
-		if b := d.Uint8(); b == 0 {
-			return Charˢ(p.Slice(0, i, ϟs))
-		}
-	}
-}
-
-// Slice returns a new GLcharˢ from the pointer using start and end indices.
-func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLsizeiᵖ is a pointer to a GLsizei element.
+type GLsizeiᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLsizeiᵖ returns a GLsizeiᵖ that points to addr in the application pool.
+func NewGLsizeiᵖ(addr uint64) GLsizeiᵖ {
+	return GLsizeiᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLsizeiᵖ points to.
+func (p GLsizeiᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLsizei element at the pointer.
+func (p GLsizeiᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizei {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLsizei element at the pointer.
+func (p GLsizeiᵖ) Write(value GLsizei, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLsizei{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLsizeiᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLsizeiᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLsizeiᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLsizeiᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLsizeiˢ from the pointer using start and end indices.
+func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLenumᶜᵖ is a pointer to a GLenum element.
+type GLenumᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
+func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
+	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
+func (p GLenumᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLenumᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLenumᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLenumᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLintᵖ is a pointer to a GLint element.
+type GLintᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLintᵖ returns a GLintᵖ that points to addr in the application pool.
+func NewGLintᵖ(addr uint64) GLintᵖ {
+	return GLintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLintᵖ points to.
+func (p GLintᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLint element at the pointer.
+func (p GLintᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLint element at the pointer.
+func (p GLintᵖ) Write(value GLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLintᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLintᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLintᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLintˢ from the pointer using start and end indices.
+func (p GLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLfloatᶜᵖ is a pointer to a GLfloat element.
+type GLfloatᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLfloatᶜᵖ returns a GLfloatᶜᵖ that points to addr in the application pool.
+func NewGLfloatᶜᵖ(addr uint64) GLfloatᶜᵖ {
+	return GLfloatᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLfloatᶜᵖ points to.
+func (p GLfloatᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLfloat element at the pointer.
+func (p GLfloatᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloat {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLfloat element at the pointer.
+func (p GLfloatᶜᵖ) Write(value GLfloat, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLfloat{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLfloatᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLfloatᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLfloatᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLfloatˢ from the pointer using start and end indices.
+func (p GLfloatᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLfloatᵖ is a pointer to a GLfloat element.
+type GLfloatᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLfloatᵖ returns a GLfloatᵖ that points to addr in the application pool.
+func NewGLfloatᵖ(addr uint64) GLfloatᵖ {
+	return GLfloatᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLfloatᵖ points to.
+func (p GLfloatᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLfloat element at the pointer.
+func (p GLfloatᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloat {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLfloat element at the pointer.
+func (p GLfloatᵖ) Write(value GLfloat, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLfloat{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLfloatᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLfloatᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLfloatᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLfloatˢ from the pointer using start and end indices.
+func (p GLfloatᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLintᶜᵖ is a pointer to a GLint element.
+type GLintᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLintᶜᵖ returns a GLintᶜᵖ that points to addr in the application pool.
+func NewGLintᶜᵖ(addr uint64) GLintᶜᵖ {
+	return GLintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLintᶜᵖ points to.
+func (p GLintᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLint element at the pointer.
+func (p GLintᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLint element at the pointer.
+func (p GLintᶜᵖ) Write(value GLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLintᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLintᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLintᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLintˢ from the pointer using start and end indices.
+func (p GLintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLint64ᵖ is a pointer to a GLint64 element.
+type GLint64ᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLint64ᵖ returns a GLint64ᵖ that points to addr in the application pool.
+func NewGLint64ᵖ(addr uint64) GLint64ᵖ {
+	return GLint64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLint64ᵖ points to.
+func (p GLint64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(8)
+}
+
+// Read reads and returns the GLint64 element at the pointer.
+func (p GLint64ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLint64 element at the pointer.
+func (p GLint64ᵖ) Write(value GLint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLint64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLint64ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLint64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLint64ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLint64ˢ from the pointer using start and end indices.
+func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
+type VertexArrayIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVertexArrayIdᶜᵖ returns a VertexArrayIdᶜᵖ that points to addr in the application pool.
+func NewVertexArrayIdᶜᵖ(addr uint64) VertexArrayIdᶜᵖ {
+	return VertexArrayIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that VertexArrayIdᶜᵖ points to.
+func (p VertexArrayIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the VertexArrayId element at the pointer.
+func (p VertexArrayIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the VertexArrayId element at the pointer.
+func (p VertexArrayIdᶜᵖ) Write(value VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]VertexArrayId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p VertexArrayIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p VertexArrayIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p VertexArrayIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
+func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// VertexArrayIdᵖ is a pointer to a VertexArrayId element.
+type VertexArrayIdᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVertexArrayIdᵖ returns a VertexArrayIdᵖ that points to addr in the application pool.
+func NewVertexArrayIdᵖ(addr uint64) VertexArrayIdᵖ {
+	return VertexArrayIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that VertexArrayIdᵖ points to.
+func (p VertexArrayIdᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the VertexArrayId element at the pointer.
+func (p VertexArrayIdᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the VertexArrayId element at the pointer.
+func (p VertexArrayIdᵖ) Write(value VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]VertexArrayId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p VertexArrayIdᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p VertexArrayIdᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p VertexArrayIdᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
+func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U8ᵖ is a pointer to a uint8 element.
@@ -1327,214 +1835,6 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLuintᶜᵖ is a pointer to a GLuint element.
-type GLuintᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLuintᶜᵖ returns a GLuintᶜᵖ that points to addr in the application pool.
-func NewGLuintᶜᵖ(addr uint64) GLuintᶜᵖ {
-	return GLuintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLuintᶜᵖ points to.
-func (p GLuintᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLuint element at the pointer.
-func (p GLuintᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLuint element at the pointer.
-func (p GLuintᶜᵖ) Write(value GLuint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLuint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLuintᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLuintᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLuintᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuintᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLuintˢ from the pointer using start and end indices.
-func (p GLuintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// Voidᵖᵖ is a pointer to a Voidᵖ element.
-// Note: Pointers are stored differently between the application pool and internal pools.
-//  * The application pool stores pointers as an address of an architecture-dependant size.
-//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
-//    pool identifier.
-type Voidᵖᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewVoidᵖᵖ returns a Voidᵖᵖ that points to addr in the application pool.
-func NewVoidᵖᵖ(addr uint64) Voidᵖᵖ {
-	return Voidᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that Voidᵖᵖ points to.
-func (p Voidᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
-		return uint64(ϟs.Architecture.PointerSize)
-	} else {
-		return 12
-	}
-}
-
-// Read reads and returns the Voidᵖ element at the pointer.
-func (p Voidᵖᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the Voidᵖ element at the pointer.
-func (p Voidᵖᵖ) Write(value Voidᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]Voidᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Voidᵖᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Voidᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p Voidᵖᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new Voidᵖˢ from the pointer using start and end indices.
-func (p Voidᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᵖˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return Voidᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLintᵖ is a pointer to a GLint element.
-type GLintᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLintᵖ returns a GLintᵖ that points to addr in the application pool.
-func NewGLintᵖ(addr uint64) GLintᵖ {
-	return GLintᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLintᵖ points to.
-func (p GLintᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLint element at the pointer.
-func (p GLintᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLint element at the pointer.
-func (p GLintᵖ) Write(value GLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLintᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLintᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLintᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLintˢ from the pointer using start and end indices.
-func (p GLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLintᶜᵖ is a pointer to a GLint element.
-type GLintᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLintᶜᵖ returns a GLintᶜᵖ that points to addr in the application pool.
-func NewGLintᶜᵖ(addr uint64) GLintᶜᵖ {
-	return GLintᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLintᶜᵖ points to.
-func (p GLintᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLint element at the pointer.
-func (p GLintᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLint element at the pointer.
-func (p GLintᶜᵖ) Write(value GLint, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLint{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLintᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLintᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLintᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLintᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLintˢ from the pointer using start and end indices.
-func (p GLintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // QueryIdᶜᵖ is a pointer to a QueryId element.
 type QueryIdᶜᵖ struct {
 	binary.Generate
@@ -1735,156 +2035,6 @@ func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLint64ᵖ is a pointer to a GLint64 element.
-type GLint64ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLint64ᵖ returns a GLint64ᵖ that points to addr in the application pool.
-func NewGLint64ᵖ(addr uint64) GLint64ᵖ {
-	return GLint64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLint64ᵖ points to.
-func (p GLint64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(8)
-}
-
-// Read reads and returns the GLint64 element at the pointer.
-func (p GLint64ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64 {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLint64 element at the pointer.
-func (p GLint64ᵖ) Write(value GLint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLint64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLint64ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLint64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLint64ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLint64ᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLint64ˢ from the pointer using start and end indices.
-func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLfloatᶜᵖ is a pointer to a GLfloat element.
-type GLfloatᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLfloatᶜᵖ returns a GLfloatᶜᵖ that points to addr in the application pool.
-func NewGLfloatᶜᵖ(addr uint64) GLfloatᶜᵖ {
-	return GLfloatᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLfloatᶜᵖ points to.
-func (p GLfloatᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLfloat element at the pointer.
-func (p GLfloatᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloat {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLfloat element at the pointer.
-func (p GLfloatᶜᵖ) Write(value GLfloat, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLfloat{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLfloatᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLfloatᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLfloatᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLfloatˢ from the pointer using start and end indices.
-func (p GLfloatᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLfloatᵖ is a pointer to a GLfloat element.
-type GLfloatᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLfloatᵖ returns a GLfloatᵖ that points to addr in the application pool.
-func NewGLfloatᵖ(addr uint64) GLfloatᵖ {
-	return GLfloatᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLfloatᵖ points to.
-func (p GLfloatᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLfloat element at the pointer.
-func (p GLfloatᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloat {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLfloat element at the pointer.
-func (p GLfloatᵖ) Write(value GLfloat, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLfloat{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLfloatᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLfloatᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLfloatᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfloatᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLfloatˢ from the pointer using start and end indices.
-func (p GLfloatᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // GLcharᶜᵖᵖ is a pointer to a GLcharᶜᵖ element.
 // Note: Pointers are stored differently between the application pool and internal pools.
 //  * The application pool stores pointers as an address of an architecture-dependant size.
@@ -2041,156 +2191,6 @@ func (p PipelineIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) PipelineIdˢ 
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return PipelineIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
-type VertexArrayIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewVertexArrayIdᶜᵖ returns a VertexArrayIdᶜᵖ that points to addr in the application pool.
-func NewVertexArrayIdᶜᵖ(addr uint64) VertexArrayIdᶜᵖ {
-	return VertexArrayIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that VertexArrayIdᶜᵖ points to.
-func (p VertexArrayIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the VertexArrayId element at the pointer.
-func (p VertexArrayIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the VertexArrayId element at the pointer.
-func (p VertexArrayIdᶜᵖ) Write(value VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]VertexArrayId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p VertexArrayIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p VertexArrayIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p VertexArrayIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
-func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// VertexArrayIdᵖ is a pointer to a VertexArrayId element.
-type VertexArrayIdᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewVertexArrayIdᵖ returns a VertexArrayIdᵖ that points to addr in the application pool.
-func NewVertexArrayIdᵖ(addr uint64) VertexArrayIdᵖ {
-	return VertexArrayIdᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that VertexArrayIdᵖ points to.
-func (p VertexArrayIdᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the VertexArrayId element at the pointer.
-func (p VertexArrayIdᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the VertexArrayId element at the pointer.
-func (p VertexArrayIdᵖ) Write(value VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]VertexArrayId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p VertexArrayIdᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p VertexArrayIdᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p VertexArrayIdᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
-func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLenumᶜᵖ is a pointer to a GLenum element.
-type GLenumᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
-func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
-	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
-func (p GLenumᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the GLenum element at the pointer.
-func (p GLenumᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenum {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLenum element at the pointer.
-func (p GLenumᶜᵖ) Write(value GLenum, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLenumᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLenumᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLenumᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLenumᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLenumˢ from the pointer using start and end indices.
-func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // FramebufferIdᵖ is a pointer to a FramebufferId element.
@@ -2799,214 +2799,6 @@ func (p GLubyteᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLubyteˢ {
 	return GLubyteˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// GLuint64ᶜᵖ is a pointer to a GLuint64 element.
-type GLuint64ᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLuint64ᶜᵖ returns a GLuint64ᶜᵖ that points to addr in the application pool.
-func NewGLuint64ᶜᵖ(addr uint64) GLuint64ᶜᵖ {
-	return GLuint64ᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLuint64ᶜᵖ points to.
-func (p GLuint64ᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(8)
-}
-
-// Read reads and returns the GLuint64 element at the pointer.
-func (p GLuint64ᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64 {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLuint64 element at the pointer.
-func (p GLuint64ᶜᵖ) Write(value GLuint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLuint64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLuint64ᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLuint64ᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLuint64ᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLuint64ˢ from the pointer using start and end indices.
-func (p GLuint64ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
-type FramebufferIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewFramebufferIdᶜᵖ returns a FramebufferIdᶜᵖ that points to addr in the application pool.
-func NewFramebufferIdᶜᵖ(addr uint64) FramebufferIdᶜᵖ {
-	return FramebufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that FramebufferIdᶜᵖ points to.
-func (p FramebufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the FramebufferId element at the pointer.
-func (p FramebufferIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferId {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the FramebufferId element at the pointer.
-func (p FramebufferIdᶜᵖ) Write(value FramebufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]FramebufferId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p FramebufferIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p FramebufferIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p FramebufferIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new FramebufferIdˢ from the pointer using start and end indices.
-func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferIdˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
-type RenderbufferIdᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewRenderbufferIdᶜᵖ returns a RenderbufferIdᶜᵖ that points to addr in the application pool.
-func NewRenderbufferIdᶜᵖ(addr uint64) RenderbufferIdᶜᵖ {
-	return RenderbufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that RenderbufferIdᶜᵖ points to.
-func (p RenderbufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the RenderbufferId element at the pointer.
-func (p RenderbufferIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferId {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the RenderbufferId element at the pointer.
-func (p RenderbufferIdᶜᵖ) Write(value RenderbufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]RenderbufferId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p RenderbufferIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p RenderbufferIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p RenderbufferIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new RenderbufferIdˢ from the pointer using start and end indices.
-func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) RenderbufferIdˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// GLcharᶜᵖᶜᵖ is a pointer to a GLcharᶜᵖ element.
-// Note: Pointers are stored differently between the application pool and internal pools.
-//  * The application pool stores pointers as an address of an architecture-dependant size.
-//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
-//    pool identifier.
-type GLcharᶜᵖᶜᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewGLcharᶜᵖᶜᵖ returns a GLcharᶜᵖᶜᵖ that points to addr in the application pool.
-func NewGLcharᶜᵖᶜᵖ(addr uint64) GLcharᶜᵖᶜᵖ {
-	return GLcharᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that GLcharᶜᵖᶜᵖ points to.
-func (p GLcharᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
-		return uint64(ϟs.Architecture.PointerSize)
-	} else {
-		return 12
-	}
-}
-
-// Read reads and returns the GLcharᶜᵖ element at the pointer.
-func (p GLcharᶜᵖᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the GLcharᶜᵖ element at the pointer.
-func (p GLcharᶜᵖᶜᵖ) Write(value GLcharᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]GLcharᶜᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p GLcharᶜᵖᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p GLcharᶜᵖᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new GLcharᶜᵖˢ from the pointer using start and end indices.
-func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharᶜᵖˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // Vec2fᵖ is a pointer to a Vec2f element.
 type Vec2fᵖ struct {
 	binary.Generate
@@ -3457,6 +3249,56 @@ func (p Vec4uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4uˢ {
 	return Vec4uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// GLuint64ᶜᵖ is a pointer to a GLuint64 element.
+type GLuint64ᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLuint64ᶜᵖ returns a GLuint64ᶜᵖ that points to addr in the application pool.
+func NewGLuint64ᶜᵖ(addr uint64) GLuint64ᶜᵖ {
+	return GLuint64ᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLuint64ᶜᵖ points to.
+func (p GLuint64ᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(8)
+}
+
+// Read reads and returns the GLuint64 element at the pointer.
+func (p GLuint64ᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLuint64 element at the pointer.
+func (p GLuint64ᶜᵖ) Write(value GLuint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLuint64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLuint64ᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLuint64ᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLuint64ᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLuint64ᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLuint64ˢ from the pointer using start and end indices.
+func (p GLuint64ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // Mat2fᵖ is a pointer to a Mat2f element.
 type Mat2fᵖ struct {
 	binary.Generate
@@ -3905,6 +3747,164 @@ func (p Mat4x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x3fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
+type FramebufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewFramebufferIdᶜᵖ returns a FramebufferIdᶜᵖ that points to addr in the application pool.
+func NewFramebufferIdᶜᵖ(addr uint64) FramebufferIdᶜᵖ {
+	return FramebufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that FramebufferIdᶜᵖ points to.
+func (p FramebufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the FramebufferId element at the pointer.
+func (p FramebufferIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferId {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the FramebufferId element at the pointer.
+func (p FramebufferIdᶜᵖ) Write(value FramebufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]FramebufferId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p FramebufferIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p FramebufferIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p FramebufferIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new FramebufferIdˢ from the pointer using start and end indices.
+func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
+type RenderbufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewRenderbufferIdᶜᵖ returns a RenderbufferIdᶜᵖ that points to addr in the application pool.
+func NewRenderbufferIdᶜᵖ(addr uint64) RenderbufferIdᶜᵖ {
+	return RenderbufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that RenderbufferIdᶜᵖ points to.
+func (p RenderbufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the RenderbufferId element at the pointer.
+func (p RenderbufferIdᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferId {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the RenderbufferId element at the pointer.
+func (p RenderbufferIdᶜᵖ) Write(value RenderbufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]RenderbufferId{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p RenderbufferIdᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p RenderbufferIdᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p RenderbufferIdᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new RenderbufferIdˢ from the pointer using start and end indices.
+func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) RenderbufferIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLcharᶜᵖᶜᵖ is a pointer to a GLcharᶜᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type GLcharᶜᵖᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLcharᶜᵖᶜᵖ returns a GLcharᶜᵖᶜᵖ that points to addr in the application pool.
+func NewGLcharᶜᵖᶜᵖ(addr uint64) GLcharᶜᵖᶜᵖ {
+	return GLcharᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLcharᶜᵖᶜᵖ points to.
+func (p GLcharᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	if p.Pointer.Pool == memory.ApplicationPool {
+		return uint64(ϟs.Architecture.PointerSize)
+	} else {
+		return 12
+	}
+}
+
+// Read reads and returns the GLcharᶜᵖ element at the pointer.
+func (p GLcharᶜᵖᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖ {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLcharᶜᵖ element at the pointer.
+func (p GLcharᶜᵖᶜᵖ) Write(value GLcharᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLcharᶜᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLcharᶜᵖᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLcharᶜᵖᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLcharᶜᵖᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLcharᶜᵖᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLcharᶜᵖˢ from the pointer using start and end indices.
+func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharᶜᵖˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // ShaderIdᶜᵖ is a pointer to a ShaderId element.
@@ -17437,7 +17437,7 @@ func (a *GlPatchParameteri) AddWrite(rng memory.Range, id binary.ID) *GlPatchPar
 	return a
 }
 func (c *GlPatchParameteri) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlPatchParameteri) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (c *GlPatchParameteri) Flags() atom.Flags                { return 0 }
 func (a *GlPatchParameteri) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -17476,7 +17476,7 @@ func (a *GlPrimitiveBoundingBox) AddWrite(rng memory.Range, id binary.ID) *GlPri
 	return a
 }
 func (c *GlPrimitiveBoundingBox) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlPrimitiveBoundingBox) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (c *GlPrimitiveBoundingBox) Flags() atom.Flags                { return 0 }
 func (a *GlPrimitiveBoundingBox) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -18175,11 +18175,11 @@ type GlCompressedTexImage3DOES struct {
 	Depth          GLsizei
 	Border         GLint
 	ImageSize      GLsizei
-	Data           Voidᶜᵖ
+	Data           TexturePointer
 }
 
 func (a *GlCompressedTexImage3DOES) String() string {
-	return fmt.Sprintf("glCompressedTexImage3DOES(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, imageSize: %v, data: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.ImageSize, a.Data)
+	return fmt.Sprintf("glCompressedTexImage3DOES(target: %v, level: %v, internalformat: %v, width: %v, height: %v, depth: %v, border: %v, image_size: %v, data: %v)", a.Target, a.Level, a.Internalformat, a.Width, a.Height, a.Depth, a.Border, a.ImageSize, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -18217,11 +18217,11 @@ type GlCompressedTexSubImage3DOES struct {
 	Depth        GLsizei
 	Format       GLenum
 	ImageSize    GLsizei
-	Data         Voidᶜᵖ
+	Data         TexturePointer
 }
 
 func (a *GlCompressedTexSubImage3DOES) String() string {
-	return fmt.Sprintf("glCompressedTexSubImage3DOES(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, imageSize: %v, data: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.ImageSize, a.Data)
+	return fmt.Sprintf("glCompressedTexSubImage3DOES(target: %v, level: %v, xoffset: %v, yoffset: %v, zoffset: %v, width: %v, height: %v, depth: %v, format: %v, image_size: %v, data: %v)", a.Target, a.Level, a.Xoffset, a.Yoffset, a.Zoffset, a.Width, a.Height, a.Depth, a.Format, a.ImageSize, a.Data)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -19407,7 +19407,7 @@ func (a *GlDrawBuffersEXT) AddWrite(rng memory.Range, id binary.ID) *GlDrawBuffe
 	return a
 }
 func (c *GlDrawBuffersEXT) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawBuffersEXT) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (c *GlDrawBuffersEXT) Flags() atom.Flags                { return 0 }
 func (a *GlDrawBuffersEXT) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19441,7 +19441,7 @@ func (a *GlDrawBuffersIndexedEXT) AddWrite(rng memory.Range, id binary.ID) *GlDr
 	return a
 }
 func (c *GlDrawBuffersIndexedEXT) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawBuffersIndexedEXT) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (c *GlDrawBuffersIndexedEXT) Flags() atom.Flags                { return 0 }
 func (a *GlDrawBuffersIndexedEXT) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19474,7 +19474,7 @@ func (a *GlDrawBuffersNV) AddWrite(rng memory.Range, id binary.ID) *GlDrawBuffer
 	return a
 }
 func (c *GlDrawBuffersNV) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawBuffersNV) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (c *GlDrawBuffersNV) Flags() atom.Flags                { return 0 }
 func (a *GlDrawBuffersNV) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19486,7 +19486,7 @@ type GlDrawElementsBaseVertexEXT struct {
 	Mode         GLenum
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Basevertex   GLint
 }
 
@@ -19522,7 +19522,7 @@ type GlDrawElementsBaseVertexOES struct {
 	Mode         GLenum
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Basevertex   GLint
 }
 
@@ -19558,7 +19558,7 @@ type GlDrawElementsInstancedANGLE struct {
 	Mode         GLenum
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Primcount    GLsizei
 }
 
@@ -19675,7 +19675,7 @@ type GlDrawElementsInstancedBaseVertexEXT struct {
 	Mode          GLenum
 	Count         GLsizei
 	Type          GLenum
-	Indices       Voidᶜᵖ
+	Indices       IndicesPointer
 	Instancecount GLsizei
 	Basevertex    GLint
 }
@@ -19714,7 +19714,7 @@ type GlDrawElementsInstancedBaseVertexOES struct {
 	Mode          GLenum
 	Count         GLsizei
 	Type          GLenum
-	Indices       Voidᶜᵖ
+	Indices       IndicesPointer
 	Instancecount GLsizei
 	Basevertex    GLint
 }
@@ -19753,7 +19753,7 @@ type GlDrawElementsInstancedEXT struct {
 	Mode         GLenum
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Primcount    GLsizei
 }
 
@@ -19789,7 +19789,7 @@ type GlDrawElementsInstancedNV struct {
 	Mode         GLenum
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Primcount    GLsizei
 }
 
@@ -19827,7 +19827,7 @@ type GlDrawRangeElementsBaseVertexEXT struct {
 	End          GLuint
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Basevertex   GLint
 }
 
@@ -19865,7 +19865,7 @@ type GlDrawRangeElementsBaseVertexOES struct {
 	End          GLuint
 	Count        GLsizei
 	Type         GLenum
-	Indices      Voidᶜᵖ
+	Indices      IndicesPointer
 	Basevertex   GLint
 }
 
@@ -27684,7 +27684,7 @@ type GlTexImage3DOES struct {
 	Border         GLint
 	Format         GLenum
 	Type           GLenum
-	Pixels         Voidᶜᵖ
+	Pixels         TexturePointer
 }
 
 func (a *GlTexImage3DOES) String() string {
@@ -27942,7 +27942,7 @@ type GlTexSubImage3DOES struct {
 	Depth        GLsizei
 	Format       GLenum
 	Type         GLenum
-	Pixels       Voidᶜᵖ
+	Pixels       TexturePointer
 }
 
 func (a *GlTexSubImage3DOES) String() string {
@@ -47066,11 +47066,11 @@ func NewGlClientWaitSyncAPPLE(Sync GLsync, Flag GLbitfield, Timeout GLuint64, Re
 func NewGlColorMaskiOES(Index GLuint, R GLboolean, G GLboolean, B GLboolean, A GLboolean) *GlColorMaskiOES {
 	return &GlColorMaskiOES{Index: Index, R: R, G: G, B: B, A: A}
 }
-func NewGlCompressedTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, ImageSize GLsizei, Data memory.Pointer) *GlCompressedTexImage3DOES {
-	return &GlCompressedTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: ImageSize, Data: Voidᶜᵖ{Pointer: Data}}
+func NewGlCompressedTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexImage3DOES {
+	return &GlCompressedTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlCompressedTexSubImage3DOES(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, ImageSize GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3DOES {
-	return &GlCompressedTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: ImageSize, Data: Voidᶜᵖ{Pointer: Data}}
+func NewGlCompressedTexSubImage3DOES(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Image_size GLsizei, Data memory.Pointer) *GlCompressedTexSubImage3DOES {
+	return &GlCompressedTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
 func NewGlCopyBufferSubDataNV(ReadTarget GLenum, WriteTarget GLenum, ReadOffset GLintptr, WriteOffset GLintptr, Size GLsizeiptr) *GlCopyBufferSubDataNV {
 	return &GlCopyBufferSubDataNV{ReadTarget: ReadTarget, WriteTarget: WriteTarget, ReadOffset: ReadOffset, WriteOffset: WriteOffset, Size: Size}
@@ -47181,13 +47181,13 @@ func NewGlDrawBuffersNV(N GLsizei, Bufs memory.Pointer) *GlDrawBuffersNV {
 	return &GlDrawBuffersNV{N: N, Bufs: GLenumᶜᵖ{Pointer: Bufs}}
 }
 func NewGlDrawElementsBaseVertexEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawElementsBaseVertexEXT {
-	return &GlDrawElementsBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawElementsBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
 }
 func NewGlDrawElementsBaseVertexOES(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawElementsBaseVertexOES {
-	return &GlDrawElementsBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawElementsBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedANGLE(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedANGLE {
-	return &GlDrawElementsInstancedANGLE{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedANGLE{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
 }
 func NewGlDrawElementsInstancedBaseInstanceEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Baseinstance GLuint) *GlDrawElementsInstancedBaseInstanceEXT {
 	return &GlDrawElementsInstancedBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Baseinstance: Baseinstance}
@@ -47196,22 +47196,22 @@ func NewGlDrawElementsInstancedBaseVertexBaseInstanceEXT(Mode GLenum, Count GLsi
 	return &GlDrawElementsInstancedBaseVertexBaseInstanceEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex, Baseinstance: Baseinstance}
 }
 func NewGlDrawElementsInstancedBaseVertexEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint) *GlDrawElementsInstancedBaseVertexEXT {
-	return &GlDrawElementsInstancedBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
+	return &GlDrawElementsInstancedBaseVertexEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedBaseVertexOES(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Instancecount GLsizei, Basevertex GLint) *GlDrawElementsInstancedBaseVertexOES {
-	return &GlDrawElementsInstancedBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
+	return &GlDrawElementsInstancedBaseVertexOES{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Instancecount: Instancecount, Basevertex: Basevertex}
 }
 func NewGlDrawElementsInstancedEXT(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedEXT {
-	return &GlDrawElementsInstancedEXT{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedEXT{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
 }
 func NewGlDrawElementsInstancedNV(Mode GLenum, Count GLsizei, Type GLenum, Indices memory.Pointer, Primcount GLsizei) *GlDrawElementsInstancedNV {
-	return &GlDrawElementsInstancedNV{Mode: Mode, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Primcount: Primcount}
+	return &GlDrawElementsInstancedNV{Mode: Mode, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Primcount: Primcount}
 }
 func NewGlDrawRangeElementsBaseVertexEXT(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawRangeElementsBaseVertexEXT {
-	return &GlDrawRangeElementsBaseVertexEXT{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawRangeElementsBaseVertexEXT{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
 }
 func NewGlDrawRangeElementsBaseVertexOES(Mode GLenum, Start GLuint, End GLuint, Count GLsizei, Type GLenum, Indices memory.Pointer, Basevertex GLint) *GlDrawRangeElementsBaseVertexOES {
-	return &GlDrawRangeElementsBaseVertexOES{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: Voidᶜᵖ{Pointer: Indices}, Basevertex: Basevertex}
+	return &GlDrawRangeElementsBaseVertexOES{Mode: Mode, Start: Start, End: End, Count: Count, Type: Type, Indices: IndicesPointer{Pointer: Indices}, Basevertex: Basevertex}
 }
 func NewGlEGLImageTargetRenderbufferStorageOES(Target GLenum, Image memory.Pointer) *GlEGLImageTargetRenderbufferStorageOES {
 	return &GlEGLImageTargetRenderbufferStorageOES{Target: Target, Image: GLeglImageOES{Pointer: Image}}
@@ -47883,7 +47883,7 @@ func NewGlTexBufferRangeOES(Target GLenum, Internalformat GLenum, Buffer BufferI
 	return &GlTexBufferRangeOES{Target: Target, Internalformat: Internalformat, Buffer: Buffer, Offset: Offset, Size: Size}
 }
 func NewGlTexImage3DOES(Target GLenum, Level GLint, Internalformat GLenum, Width GLsizei, Height GLsizei, Depth GLsizei, Border GLint, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexImage3DOES {
-	return &GlTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: Voidᶜᵖ{Pointer: Pixels}}
+	return &GlTexImage3DOES{Target: Target, Level: Level, Internalformat: Internalformat, Width: Width, Height: Height, Depth: Depth, Border: Border, Format: Format, Type: Type, Pixels: TexturePointer{Pointer: Pixels}}
 }
 func NewGlTexPageCommitmentARB(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Commit GLboolean) *GlTexPageCommitmentARB {
 	return &GlTexPageCommitmentARB{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Commit: Commit}
@@ -47904,7 +47904,7 @@ func NewGlTexStorage3DEXT(Target GLenum, Levels GLsizei, Format GLenum, Width GL
 	return &GlTexStorage3DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height, Depth: Depth}
 }
 func NewGlTexSubImage3DOES(Target GLenum, Level GLint, Xoffset GLint, Yoffset GLint, Zoffset GLint, Width GLsizei, Height GLsizei, Depth GLsizei, Format GLenum, Type GLenum, Pixels memory.Pointer) *GlTexSubImage3DOES {
-	return &GlTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Pixels: Voidᶜᵖ{Pointer: Pixels}}
+	return &GlTexSubImage3DOES{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Zoffset: Zoffset, Width: Width, Height: Height, Depth: Depth, Format: Format, Type: Type, Pixels: TexturePointer{Pointer: Pixels}}
 }
 func NewGlTextureStorage1DEXT(Texture TextureId, Target GLenum, Levels GLsizei, Format GLenum, Width GLsizei) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{Texture: Texture, Target: Target, Levels: Levels, Format: Format, Width: Width}

@@ -4253,7 +4253,7 @@ namespace gles {
     class GlCompressedTexImage3DOES: public Encodable {
     public:
         GlCompressedTexImage3DOES() = default;
-        GlCompressedTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, Void__CP Data) :
+        GlCompressedTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -4265,7 +4265,7 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa3, 0xa7, 0xe6, 0x12, 0xa7, 0xd5, 0x88, 0x65, 0xd8, 0x46, 0x48, 0xe2, 0x44, 0x1c, 0x4c, 0x79, 0x95, 0x29, 0x66, 0x4b,  } };
+            static gapic::Id ID{ { 0x6b, 0x16, 0x0b, 0x04, 0xb6, 0x79, 0x45, 0xcf, 0xe6, 0x07, 0x4a, 0xcc, 0x6e, 0x9c, 0x2a, 0x70, 0x3e, 0xe1, 0x89, 0x17,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4290,7 +4290,7 @@ namespace gles {
         int32_t mDepth;
         int32_t mBorder;
         int32_t mImageSize;
-        Void__CP mData;
+        TexturePointer mData;
     };
 
     class GlCompressedTexSubImage2D: public Encodable {
@@ -4388,7 +4388,7 @@ namespace gles {
     class GlCompressedTexSubImage3DOES: public Encodable {
     public:
         GlCompressedTexSubImage3DOES() = default;
-        GlCompressedTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, Void__CP Data) :
+        GlCompressedTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -4402,7 +4402,7 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xeb, 0x92, 0x20, 0x2a, 0xf2, 0x7a, 0x0c, 0x41, 0xa1, 0x69, 0x03, 0x9d, 0x60, 0x3a, 0xeb, 0xd1, 0x38, 0x3a, 0x60, 0x01,  } };
+            static gapic::Id ID{ { 0xd6, 0x0f, 0xcf, 0x61, 0xfe, 0xf0, 0x6a, 0xe5, 0x9e, 0xd4, 0x9d, 0xe5, 0xad, 0x82, 0x51, 0x8d, 0x17, 0x0a, 0xcb, 0xda,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4431,7 +4431,7 @@ namespace gles {
         int32_t mDepth;
         uint32_t mFormat;
         int32_t mImageSize;
-        Void__CP mData;
+        TexturePointer mData;
     };
 
     class GlCopyBufferSubData: public Encodable {
@@ -6652,7 +6652,7 @@ namespace gles {
     class GlDrawElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsBaseVertexEXT() = default;
-        GlDrawElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6660,7 +6660,7 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc6, 0x01, 0x2e, 0xdc, 0x7b, 0x58, 0xf2, 0xb8, 0x08, 0x31, 0x59, 0x03, 0xe4, 0x97, 0x8b, 0x6b, 0x18, 0xe8, 0x31, 0xc7,  } };
+            static gapic::Id ID{ { 0x21, 0xdf, 0xc2, 0x20, 0x89, 0x5b, 0xd0, 0xf5, 0xeb, 0xc5, 0x40, 0x61, 0xbf, 0xb8, 0x83, 0x4c, 0x9c, 0xc3, 0x30, 0x06,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6676,14 +6676,14 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mBasevertex;
     };
 
     class GlDrawElementsBaseVertexOES: public Encodable {
     public:
         GlDrawElementsBaseVertexOES() = default;
-        GlDrawElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6691,7 +6691,7 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbe, 0x27, 0x39, 0x73, 0xfa, 0x5b, 0xd9, 0x8b, 0x5e, 0xd7, 0x41, 0x62, 0x63, 0x34, 0xc0, 0x0a, 0x19, 0x33, 0x8a, 0x3d,  } };
+            static gapic::Id ID{ { 0x85, 0x88, 0x8e, 0x1d, 0xda, 0x71, 0xcf, 0x56, 0xe3, 0x54, 0xc7, 0x08, 0xf3, 0xa5, 0x7d, 0x03, 0x33, 0xc3, 0x9a, 0x96,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6707,7 +6707,7 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mBasevertex;
     };
 
@@ -6770,7 +6770,7 @@ namespace gles {
     class GlDrawElementsInstancedANGLE: public Encodable {
     public:
         GlDrawElementsInstancedANGLE() = default;
-        GlDrawElementsInstancedANGLE(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Primcount) :
+        GlDrawElementsInstancedANGLE(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6778,7 +6778,7 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x83, 0x76, 0x1f, 0xd9, 0x3f, 0xed, 0x34, 0x62, 0x16, 0xcf, 0x29, 0x29, 0x19, 0x3c, 0x6c, 0xe3, 0x6c, 0xd3, 0x26, 0xc2,  } };
+            static gapic::Id ID{ { 0xcf, 0x0e, 0xe5, 0x71, 0x93, 0x64, 0xe2, 0x67, 0x6e, 0x47, 0x4a, 0xba, 0xdd, 0x8a, 0x7d, 0x96, 0x9c, 0x8f, 0xb4, 0x65,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6794,7 +6794,7 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mPrimcount;
     };
 
@@ -6906,7 +6906,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexEXT() = default;
-        GlDrawElementsInstancedBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex) :
+        GlDrawElementsInstancedBaseVertexEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6915,7 +6915,7 @@ namespace gles {
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xba, 0xd4, 0x6d, 0x5d, 0xf5, 0x36, 0xe1, 0xe1, 0xd8, 0x3c, 0x37, 0x9b, 0x3c, 0xc0, 0x0a, 0xc5, 0x9b, 0x2d, 0x3f, 0x37,  } };
+            static gapic::Id ID{ { 0xd6, 0xcc, 0x9e, 0x76, 0xf8, 0xfd, 0x00, 0xf7, 0xa4, 0xb5, 0x81, 0x00, 0x3d, 0xac, 0x0a, 0x4d, 0xad, 0xaa, 0x02, 0xd9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6932,7 +6932,7 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mInstancecount;
         int32_t mBasevertex;
     };
@@ -6940,7 +6940,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexOES: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexOES() = default;
-        GlDrawElementsInstancedBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex) :
+        GlDrawElementsInstancedBaseVertexOES(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6949,7 +6949,7 @@ namespace gles {
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x12, 0xc0, 0xab, 0x32, 0x0e, 0xae, 0x13, 0x66, 0xd8, 0xfc, 0x60, 0x52, 0xbc, 0x4c, 0x9e, 0x27, 0xd3, 0xc9, 0x08, 0xc1,  } };
+            static gapic::Id ID{ { 0xbe, 0x4c, 0x36, 0x93, 0x23, 0x1f, 0xee, 0xdf, 0xc1, 0x00, 0xa0, 0x29, 0x81, 0x16, 0xeb, 0x70, 0xc8, 0x91, 0xd4, 0x0d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6966,7 +6966,7 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mInstancecount;
         int32_t mBasevertex;
     };
@@ -6974,7 +6974,7 @@ namespace gles {
     class GlDrawElementsInstancedEXT: public Encodable {
     public:
         GlDrawElementsInstancedEXT() = default;
-        GlDrawElementsInstancedEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Primcount) :
+        GlDrawElementsInstancedEXT(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -6982,7 +6982,7 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x0d, 0x88, 0x26, 0x49, 0xf0, 0x60, 0x4e, 0xb6, 0x87, 0xe0, 0x20, 0xff, 0x37, 0xf7, 0x5e, 0x1c, 0xcc, 0x64, 0xd8, 0x79,  } };
+            static gapic::Id ID{ { 0x7b, 0x48, 0xdb, 0xd0, 0x09, 0x07, 0x2c, 0xc2, 0x95, 0xf7, 0xa6, 0xc9, 0x54, 0x90, 0x79, 0x80, 0x84, 0x5c, 0x68, 0x91,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6998,14 +6998,14 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mPrimcount;
     };
 
     class GlDrawElementsInstancedNV: public Encodable {
     public:
         GlDrawElementsInstancedNV() = default;
-        GlDrawElementsInstancedNV(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Primcount) :
+        GlDrawElementsInstancedNV(atom::Observations observations, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mobservations(observations),
             mMode(Mode),
             mCount(Count),
@@ -7013,7 +7013,7 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x93, 0xc6, 0x5d, 0xbb, 0x00, 0x86, 0xef, 0x5b, 0x74, 0xd3, 0xaf, 0xb0, 0xd0, 0x0b, 0x5d, 0x39, 0x3e, 0x12, 0x83, 0x46,  } };
+            static gapic::Id ID{ { 0xe1, 0x33, 0xa4, 0x3e, 0xff, 0xe1, 0xe6, 0x70, 0xb5, 0x41, 0xc2, 0xc7, 0x2f, 0x71, 0x67, 0x71, 0x6d, 0xbf, 0x1b, 0xf9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7029,7 +7029,7 @@ namespace gles {
         uint32_t mMode;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mPrimcount;
     };
 
@@ -7107,7 +7107,7 @@ namespace gles {
     class GlDrawRangeElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexEXT() = default;
-        GlDrawRangeElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawRangeElementsBaseVertexEXT(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mStart(Start),
@@ -7117,7 +7117,7 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x92, 0x94, 0x02, 0xd3, 0x32, 0xb2, 0x99, 0xa2, 0x4a, 0xff, 0x98, 0x22, 0x13, 0xc7, 0x03, 0x86, 0x09, 0xed, 0x4e, 0xb2,  } };
+            static gapic::Id ID{ { 0x99, 0x8f, 0xde, 0x84, 0x96, 0x5c, 0x39, 0x5b, 0xd5, 0x11, 0x94, 0x42, 0x41, 0x82, 0x59, 0xba, 0xec, 0x9b, 0x0f, 0x1f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7137,14 +7137,14 @@ namespace gles {
         uint32_t mEnd;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mBasevertex;
     };
 
     class GlDrawRangeElementsBaseVertexOES: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexOES() = default;
-        GlDrawRangeElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Basevertex) :
+        GlDrawRangeElementsBaseVertexOES(atom::Observations observations, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mobservations(observations),
             mMode(Mode),
             mStart(Start),
@@ -7154,7 +7154,7 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7c, 0xf8, 0x8a, 0x03, 0x92, 0x54, 0x07, 0xb7, 0x9f, 0xd7, 0x4a, 0x4e, 0x8a, 0x4a, 0xeb, 0xe6, 0x85, 0x22, 0xe5, 0xdb,  } };
+            static gapic::Id ID{ { 0x34, 0x8c, 0x04, 0xdf, 0xa4, 0x92, 0xc1, 0x45, 0x75, 0xc9, 0xa4, 0x86, 0x23, 0x10, 0x19, 0x94, 0x5c, 0x10, 0xab, 0xbc,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7174,7 +7174,7 @@ namespace gles {
         uint32_t mEnd;
         int32_t mCount;
         uint32_t mType;
-        Void__CP mIndices;
+        IndicesPointer mIndices;
         int32_t mBasevertex;
     };
 
@@ -19173,7 +19173,7 @@ namespace gles {
     class GlTexImage3DOES: public Encodable {
     public:
         GlTexImage3DOES() = default;
-        GlTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, Void__CP Pixels) :
+        GlTexImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -19186,7 +19186,7 @@ namespace gles {
             mType(Type),
             mPixels(Pixels) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7d, 0xb5, 0x38, 0xa3, 0x85, 0xaf, 0xdc, 0x8a, 0xd2, 0x72, 0xa0, 0x41, 0x19, 0x9c, 0x4d, 0xfd, 0x41, 0x5d, 0x00, 0x5b,  } };
+            static gapic::Id ID{ { 0xd0, 0x60, 0x39, 0xa7, 0x07, 0x9c, 0xec, 0x90, 0x30, 0x6b, 0xbf, 0x07, 0xb8, 0x12, 0xdf, 0xfa, 0x37, 0x7c, 0x96, 0xbe,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -19213,7 +19213,7 @@ namespace gles {
         int32_t mBorder;
         uint32_t mFormat;
         uint32_t mType;
-        Void__CP mPixels;
+        TexturePointer mPixels;
     };
 
     class GlTexPageCommitmentARB: public Encodable {
@@ -19870,7 +19870,7 @@ namespace gles {
     class GlTexSubImage3DOES: public Encodable {
     public:
         GlTexSubImage3DOES() = default;
-        GlTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, Void__CP Pixels) :
+        GlTexSubImage3DOES(atom::Observations observations, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -19884,7 +19884,7 @@ namespace gles {
             mType(Type),
             mPixels(Pixels) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x49, 0x4e, 0x1c, 0xec, 0x40, 0xa4, 0x72, 0xdc, 0x61, 0x9f, 0x30, 0x18, 0x01, 0x44, 0x63, 0x26, 0xe6, 0xf7, 0x26, 0xf0,  } };
+            static gapic::Id ID{ { 0x8b, 0xe5, 0x92, 0x54, 0x75, 0xa2, 0x56, 0x29, 0x69, 0xb4, 0xb1, 0xae, 0x7f, 0x94, 0x1e, 0xef, 0x21, 0xcd, 0x32, 0xd9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -19913,7 +19913,7 @@ namespace gles {
         int32_t mDepth;
         uint32_t mFormat;
         uint32_t mType;
-        Void__CP mPixels;
+        TexturePointer mPixels;
     };
 
     class GlTextureStorage1DEXT: public Encodable {

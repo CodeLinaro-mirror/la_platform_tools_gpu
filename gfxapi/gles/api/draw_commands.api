@@ -77,6 +77,10 @@ cmd void glDrawArraysIndirect(GLenum draw_mode, const void* indirect) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.2")
 cmd void glDrawArraysInstanced(GLenum draw_mode, GLint first_index, GLsizei indices_count, GLsizei instance_count) {
   minRequiredVersion(3, 0)
+  DrawArraysInstanced(draw_mode, first_index, indices_count, instance_count)
+}
+
+macro void DrawArraysInstanced(GLenum draw_mode, GLint first_index, GLsizei indices_count, GLsizei instance_count) {
   checkPrimitiveType(draw_mode)
   glErrorInvalidValueIf(first_index < 0) // "Recommended behaviour"
   glErrorInvalidValueIf(indices_count < 0)
@@ -147,6 +151,10 @@ cmd void glDrawElementsBaseVertex(GLenum         draw_mode,
                                   IndicesPointer indices,
                                   GLint          base_vertex) {
   minRequiredVersion(3, 2)
+  DrawElementsBaseVertex(draw_mode, indices_count, indices_type, indices, base_vertex)
+}
+
+macro void DrawElementsBaseVertex(GLenum draw_mode, GLsizei indices_count, GLenum indices_type, IndicesPointer indices, GLint base_vertex) {
   ctx := GetContext()
   DrawElements(ctx, draw_mode, indices_count, indices_type, indices, 1, base_vertex)
 }
@@ -177,6 +185,10 @@ cmd void glDrawElementsInstanced(GLenum         draw_mode,
                                  IndicesPointer indices,
                                  GLsizei        instance_count) {
   minRequiredVersion(3, 0)
+  DrawElementsInstanced(draw_mode, indices_count, indices_type, indices, instance_count)
+}
+
+macro void DrawElementsInstanced(GLenum draw_mode, GLsizei indices_count, GLenum indices_type, IndicesPointer indices, GLsizei instance_count) {
   ctx := GetContext()
   DrawElements(ctx, draw_mode, indices_count, indices_type, indices, instance_count, 0)
 }
@@ -190,6 +202,10 @@ cmd void glDrawElementsInstancedBaseVertex(GLenum         draw_mode,
                                            GLsizei        instance_count,
                                            GLint          base_vertex) {
   minRequiredVersion(3, 2)
+  DrawElementsInstancedBaseVertex(draw_mode, indices_count, indices_type, indices, instance_count, base_vertex)
+}
+
+macro void DrawElementsInstancedBaseVertex(GLenum draw_mode, GLsizei indices_count, GLenum indices_type, IndicesPointer indices, GLsizei instance_count, GLint base_vertex) {
   ctx := GetContext()
   DrawElements(ctx, draw_mode, indices_count, indices_type, indices, instance_count, base_vertex)
 }
@@ -220,19 +236,25 @@ cmd void glDrawRangeElementsBaseVertex(GLenum         draw_mode,
                                        IndicesPointer indices,
                                        GLint          base_vertex) {
   minRequiredVersion(3, 2)
+  DrawRangeElementsBaseVertex(draw_mode, start, end, indices_count, indices_type, indices, base_vertex)
+}
+
+macro void DrawRangeElementsBaseVertex(GLenum draw_mode, GLuint start, GLuint end, GLsizei indices_count, GLenum indices_type, IndicesPointer indices, GLint base_vertex) {
   glErrorInvalidValueIf(end < start)
   ctx := GetContext()
   DrawElements(ctx, draw_mode, indices_count, indices_type, indices, 1, base_vertex)
 }
 
-@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPatchParameteri.xhtml","OpenGL ES 3.2")
 cmd void glPatchParameteri(GLenum pname, GLint value) {
   minRequiredVersion(3, 2)
+  PatchParameteri(pname, value)
+}
+
+macro void PatchParameteri(GLenum pname, GLint value) {
   glErrorInvalidEnumIf(pname != GL_PATCH_VERTICES)
 }
 
-@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPrimitiveBoundingBox.xhtml","OpenGL ES 3.2")
 cmd void glPrimitiveBoundingBox(GLfloat minX,
                                 GLfloat minY,
@@ -243,6 +265,10 @@ cmd void glPrimitiveBoundingBox(GLfloat minX,
                                 GLfloat maxZ,
                                 GLfloat maxW) {
   minRequiredVersion(3, 2)
+  PrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW)
+}
+
+macro void PrimitiveBoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW) {
   // TODO
 }
 

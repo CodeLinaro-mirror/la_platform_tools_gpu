@@ -716,7 +716,7 @@ func init() {
 	sc_GlPatchParameteri.Metadata = append(sc_GlPatchParameteri.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glPatchParameteri",
-		DrawCall:         true,
+		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -725,7 +725,7 @@ func init() {
 	sc_GlPrimitiveBoundingBox.Metadata = append(sc_GlPrimitiveBoundingBox.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glPrimitiveBoundingBox",
-		DrawCall:         true,
+		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1229,7 +1229,7 @@ func init() {
 	sc_GlDrawBuffersEXT.Metadata = append(sc_GlDrawBuffersEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersEXT",
-		DrawCall:         true,
+		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1238,7 +1238,7 @@ func init() {
 	sc_GlDrawBuffersIndexedEXT.Metadata = append(sc_GlDrawBuffersIndexedEXT.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersIndexedEXT",
-		DrawCall:         true,
+		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -1247,7 +1247,7 @@ func init() {
 	sc_GlDrawBuffersNV.Metadata = append(sc_GlDrawBuffersNV.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffersNV",
-		DrawCall:         true,
+		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})

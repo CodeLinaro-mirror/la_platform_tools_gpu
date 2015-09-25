@@ -92,6 +92,10 @@ cmd void glLineWidth(GLfloat width) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glMinSampleShading.xhtml","OpenGL ES 3.2")
 cmd void glMinSampleShading(GLfloat value) {
   minRequiredVersion(3, 2)
+  MinSampleShading(value)
+}
+
+macro void MinSampleShading(GLfloat value) {
   // TODO
 }
 
