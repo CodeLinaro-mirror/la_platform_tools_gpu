@@ -111,11 +111,12 @@
   {{else if IsClass       $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
   {{else if IsPointer     $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
   {{else if IsPseudonym   $.Type}}
-    {{$ty := $.Type.To}}
+    {{$ty := $.Type.To | Unpack}}
     {{     if IsStaticArray $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else if IsMap         $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else if IsClass       $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else if IsPointer     $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+    {{else if IsPseudonym   $ty}}{{Template "Go.DecodePOD" "Type" $ty.To "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
     {{else}}{{Template "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
     {{end}}
   {{else}}{{Template "Go.DecodePOD" "Type" $.Type "Name" $.Name "ErrHandler" $.ErrHandler}}

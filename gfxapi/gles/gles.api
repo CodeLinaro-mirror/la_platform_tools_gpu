@@ -479,19 +479,19 @@ class ClearState {
   GLint   ClearStencil
 }
 
-@replay_remap type u32 RenderbufferId
-@replay_remap type u32 TextureId
-@replay_remap type u32 FramebufferId
-@replay_remap type u32 BufferId
-@replay_remap type u32 ShaderId
-@replay_remap type u32 ProgramId
-@replay_remap type u32 VertexArrayId
-@replay_remap type u32 QueryId
-@replay_remap type s32 UniformLocation
-type u32               SamplerId
-type u32               PipelineId
-type u32               UniformBlockId
-type u32               TransformFeedbackId
+@replay_remap type GLuint RenderbufferId
+@replay_remap type GLuint TextureId
+@replay_remap type GLuint FramebufferId
+@replay_remap type GLuint BufferId
+@replay_remap type GLuint ShaderId
+@replay_remap type GLuint ProgramId
+@replay_remap type GLuint VertexArrayId
+@replay_remap type GLuint QueryId
+@replay_remap type GLint  UniformLocation
+type GLuint               SamplerId
+type GLuint               PipelineId
+type GLuint               UniformBlockId
+type GLuint               TransformFeedbackId
 
 @replay_custom_value type const void* IndicesPointer
 @replay_custom_value type const void* VertexPointer
