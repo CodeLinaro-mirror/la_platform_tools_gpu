@@ -20,6 +20,7 @@ import (
 
 type BufferBindingIndex GLuint
 type DrawBufferIndex GLuint
+type UniformIndex GLuint
 type VertexBufferBindingIndex GLuint
 type AttributeLocation GLuint
 type Vec2i GLintː2ᵃ
@@ -3907,6 +3908,106 @@ func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLchar�
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// UniformIndexᶜᵖ is a pointer to a UniformIndex element.
+type UniformIndexᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewUniformIndexᶜᵖ returns a UniformIndexᶜᵖ that points to addr in the application pool.
+func NewUniformIndexᶜᵖ(addr uint64) UniformIndexᶜᵖ {
+	return UniformIndexᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that UniformIndexᶜᵖ points to.
+func (p UniformIndexᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the UniformIndex element at the pointer.
+func (p UniformIndexᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndex {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the UniformIndex element at the pointer.
+func (p UniformIndexᶜᵖ) Write(value UniformIndex, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]UniformIndex{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p UniformIndexᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p UniformIndexᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p UniformIndexᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new UniformIndexˢ from the pointer using start and end indices.
+func (p UniformIndexᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformIndexˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// UniformIndexᵖ is a pointer to a UniformIndex element.
+type UniformIndexᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewUniformIndexᵖ returns a UniformIndexᵖ that points to addr in the application pool.
+func NewUniformIndexᵖ(addr uint64) UniformIndexᵖ {
+	return UniformIndexᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that UniformIndexᵖ points to.
+func (p UniformIndexᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the UniformIndex element at the pointer.
+func (p UniformIndexᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndex {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the UniformIndex element at the pointer.
+func (p UniformIndexᵖ) Write(value UniformIndex, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]UniformIndex{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p UniformIndexᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p UniformIndexᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p UniformIndexᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new UniformIndexˢ from the pointer using start and end indices.
+func (p UniformIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformIndexˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // ShaderIdᶜᵖ is a pointer to a ShaderId element.
@@ -11990,6 +12091,163 @@ func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 // String returns a string description of the U8ˢ slice.
 func (s U8ˢ) String() string {
 	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// UniformIndexˢ is a slice of UniformIndex.
+type UniformIndexˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeUniformIndexˢ returns a UniformIndexˢ backed by a new memory pool.
+func MakeUniformIndexˢ(count uint64, ϟs *gfxapi.State) UniformIndexˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return UniformIndexˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the UniformIndexˢ in a new memory pool.
+func (s UniformIndexˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := UniformIndexˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that UniformIndexˢ points to.
+func (s UniformIndexˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s UniformIndexˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s UniformIndexˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s UniformIndexˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s UniformIndexˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsUniformIndexˢ returns s cast to a UniformIndexˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsUniformIndexˢ(s Slice, ϟs *gfxapi.State) UniformIndexˢ {
+	out := UniformIndexˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the UniformIndex elements in this UniformIndexˢ.
+func (s UniformIndexˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []UniformIndex {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]UniformIndex, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if ϟv := d.Uint32(); d.Error() == nil {
+			res[i] = UniformIndex(ϟv)
+		} else {
+			panic(d.Error())
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s UniformIndexˢ) Write(src []UniformIndex, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst UniformIndexˢ) Copy(src UniformIndexˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s UniformIndexˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s UniformIndexˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s UniformIndexˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s UniformIndexˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) UniformIndexˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a UniformIndexᵖ to the i'th element in this UniformIndexˢ.
+func (s UniformIndexˢ) Index(i uint64, ϟs *gfxapi.State) UniformIndexᵖ {
+	return UniformIndexᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the UniformIndexˢ using start and end indices.
+func (s UniformIndexˢ) Slice(start, end uint64, ϟs *gfxapi.State) UniformIndexˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return UniformIndexˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the UniformIndexˢ slice.
+func (s UniformIndexˢ) String() string {
+	return fmt.Sprintf("UniformIndex(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Vec2fˢ is a slice of Vec2f.
@@ -31789,7 +32047,7 @@ type GlGetActiveUniform struct {
 	binary.Generate
 	observations       atom.Observations
 	Program            ProgramId
-	Location           GLuint
+	Index              UniformIndex
 	BufferSize         GLsizei
 	BufferBytesWritten GLsizeiᵖ
 	VectorCount        GLintᵖ
@@ -31798,7 +32056,7 @@ type GlGetActiveUniform struct {
 }
 
 func (a *GlGetActiveUniform) String() string {
-	return fmt.Sprintf("glGetActiveUniform(program: %v, location: %v, buffer_size: %v, buffer_bytes_written: %v, vector_count: %v, type: %v, name: %v)", a.Program, a.Location, a.BufferSize, a.BufferBytesWritten, a.VectorCount, a.Type, a.Name)
+	return fmt.Sprintf("glGetActiveUniform(program: %v, index: %v, buffer_size: %v, buffer_bytes_written: %v, vector_count: %v, type: %v, name: %v)", a.Program, a.Index, a.BufferSize, a.BufferBytesWritten, a.VectorCount, a.Type, a.Name)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -31899,7 +32157,7 @@ type GlGetActiveUniformsiv struct {
 	observations   atom.Observations
 	Program        ProgramId
 	UniformCount   GLsizei
-	UniformIndices GLuintᶜᵖ
+	UniformIndices UniformIndexᶜᵖ
 	ParameterName  GLenum
 	Parameters     GLintᵖ
 }
@@ -32567,7 +32825,7 @@ type GlGetUniformIndices struct {
 	Program        ProgramId
 	UniformCount   GLsizei
 	UniformNames   GLcharᶜᵖᶜᵖ
-	UniformIndices GLuintᵖ
+	UniformIndices UniformIndexᵖ
 }
 
 func (a *GlGetUniformIndices) String() string {
@@ -48392,8 +48650,8 @@ func NewGlGenProgramPipelines(N GLsizei, Pipelines memory.Pointer) *GlGenProgram
 func NewGlGetActiveAttrib(Program ProgramId, Location AttributeLocation, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveAttrib {
 	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, VectorCount: GLintᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
 }
-func NewGlGetActiveUniform(Program ProgramId, Location GLuint, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
-	return &GlGetActiveUniform{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, VectorCount: GLintᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
+func NewGlGetActiveUniform(Program ProgramId, Index UniformIndex, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
+	return &GlGetActiveUniform{Program: Program, Index: Index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, VectorCount: GLintᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
 }
 func NewGlGetActiveUniformBlockName(Program ProgramId, Uniform_block_index UniformBlockId, Buffer_size GLsizei, Buffer_bytes_written memory.Pointer, Name memory.Pointer) *GlGetActiveUniformBlockName {
 	return &GlGetActiveUniformBlockName{Program: Program, UniformBlockIndex: Uniform_block_index, BufferSize: Buffer_size, BufferBytesWritten: GLsizeiᵖ{Pointer: Buffer_bytes_written}, Name: GLcharᵖ{Pointer: Name}}
@@ -48402,7 +48660,7 @@ func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index Uniform
 	return &GlGetActiveUniformBlockiv{Program: Program, UniformBlockIndex: Uniform_block_index, ParameterName: Parameter_name, Parameters: GLintᵖ{Pointer: Parameters}}
 }
 func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count GLsizei, Uniform_indices memory.Pointer, Parameter_name GLenum, Parameters memory.Pointer) *GlGetActiveUniformsiv {
-	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: GLuintᶜᵖ{Pointer: Uniform_indices}, ParameterName: Parameter_name, Parameters: GLintᵖ{Pointer: Parameters}}
+	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: UniformIndexᶜᵖ{Pointer: Uniform_indices}, ParameterName: Parameter_name, Parameters: GLintᵖ{Pointer: Parameters}}
 }
 func NewGlGetAttachedShaders(Program ProgramId, Buffer_length GLsizei, Shaders_length_written memory.Pointer, Shaders memory.Pointer) *GlGetAttachedShaders {
 	return &GlGetAttachedShaders{Program: Program, BufferLength: Buffer_length, ShadersLengthWritten: GLsizeiᵖ{Pointer: Shaders_length_written}, Shaders: ShaderIdᵖ{Pointer: Shaders}}
@@ -48459,7 +48717,7 @@ func NewGlGetUniformBlockIndex(Program ProgramId, UniformBlockName string, Resul
 	return &GlGetUniformBlockIndex{Program: Program, UniformBlockName: UniformBlockName, Result: Result}
 }
 func NewGlGetUniformIndices(Program ProgramId, UniformCount GLsizei, UniformNames memory.Pointer, UniformIndices memory.Pointer) *GlGetUniformIndices {
-	return &GlGetUniformIndices{Program: Program, UniformCount: UniformCount, UniformNames: GLcharᶜᵖᶜᵖ{Pointer: UniformNames}, UniformIndices: GLuintᵖ{Pointer: UniformIndices}}
+	return &GlGetUniformIndices{Program: Program, UniformCount: UniformCount, UniformNames: GLcharᶜᵖᶜᵖ{Pointer: UniformNames}, UniformIndices: UniformIndexᵖ{Pointer: UniformIndices}}
 }
 func NewGlGetUniformLocation(Program ProgramId, Name string, Result UniformLocation) *GlGetUniformLocation {
 	return &GlGetUniformLocation{Program: Program, Name: Name, Result: Result}

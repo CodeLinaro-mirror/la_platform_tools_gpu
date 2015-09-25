@@ -8975,23 +8975,23 @@ namespace gles {
     class GlGetActiveUniform: public Encodable {
     public:
         GlGetActiveUniform() = default;
-        GlGetActiveUniform(atom::Observations observations, uint32_t Program, uint32_t Location, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
+        GlGetActiveUniform(atom::Observations observations, uint32_t Program, uint32_t Index, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
             mobservations(observations),
             mProgram(Program),
-            mLocation(Location),
+            mIndex(Index),
             mBufferSize(BufferSize),
             mBufferBytesWritten(BufferBytesWritten),
             mVectorCount(VectorCount),
             mType(Type),
             mName(Name) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe4, 0x5e, 0x05, 0xbd, 0xf5, 0xa1, 0x8d, 0x2c, 0x8c, 0xb9, 0x58, 0xf7, 0x52, 0xa4, 0x38, 0x1d, 0x83, 0x18, 0xa1, 0xff,  } };
+            static gapic::Id ID{ { 0x37, 0x75, 0x45, 0x28, 0x7c, 0xe5, 0xee, 0xda, 0x6c, 0x85, 0x9f, 0xa5, 0x31, 0xc4, 0xfc, 0x49, 0x44, 0xa4, 0x28, 0x4a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
-            e->Uint32(this->mLocation);
+            e->Uint32(this->mIndex);
             e->Int32(this->mBufferSize);
             e->Value(this->mBufferBytesWritten);
             e->Value(this->mVectorCount);
@@ -9001,7 +9001,7 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mProgram;
-        uint32_t mLocation;
+        uint32_t mIndex;
         int32_t mBufferSize;
         GLsizei__P mBufferBytesWritten;
         GLint__P mVectorCount;
@@ -9068,10 +9068,26 @@ namespace gles {
         GLint__P mParameters;
     };
 
+    class UniformIndex__CP: public Encodable {
+    public:
+        UniformIndex__CP() = default;
+        UniformIndex__CP(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf7, 0x36, 0x32, 0x86, 0xf9, 0x23, 0xfb, 0x85, 0xbb, 0x99, 0x7e, 0x98, 0xf0, 0x27, 0x0c, 0x4d, 0xa2, 0x4a, 0xff, 0x0d,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
     class GlGetActiveUniformsiv: public Encodable {
     public:
         GlGetActiveUniformsiv() = default;
-        GlGetActiveUniformsiv(atom::Observations observations, uint32_t Program, int32_t UniformCount, GLuint__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
+        GlGetActiveUniformsiv(atom::Observations observations, uint32_t Program, int32_t UniformCount, UniformIndex__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
             mobservations(observations),
             mProgram(Program),
             mUniformCount(UniformCount),
@@ -9079,7 +9095,7 @@ namespace gles {
             mParameterName(ParameterName),
             mParameters(Parameters) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x58, 0x47, 0x7e, 0x47, 0xb2, 0xaa, 0x8b, 0xfd, 0x75, 0x9b, 0x02, 0xd9, 0x54, 0x53, 0x48, 0x9e, 0xc2, 0xf3, 0xe0, 0x7e,  } };
+            static gapic::Id ID{ { 0x70, 0x70, 0xf3, 0xe3, 0x75, 0x48, 0x7e, 0x35, 0x9a, 0xab, 0x13, 0xc7, 0xc5, 0x1c, 0x02, 0xbe, 0x93, 0x0f, 0x39, 0xd4,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -9094,7 +9110,7 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mUniformCount;
-        GLuint__CP mUniformIndices;
+        UniformIndex__CP mUniformIndices;
         uint32_t mParameterName;
         GLint__P mParameters;
     };
@@ -12318,17 +12334,33 @@ namespace gles {
         uint32_t mResult;
     };
 
+    class UniformIndex__P: public Encodable {
+    public:
+        UniformIndex__P() = default;
+        UniformIndex__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xee, 0xec, 0xab, 0x66, 0xf5, 0x5b, 0x0a, 0x2b, 0x4d, 0x0b, 0x3f, 0x5c, 0xf0, 0x77, 0x3a, 0x28, 0x05, 0x0e, 0xec, 0x8b,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
     class GlGetUniformIndices: public Encodable {
     public:
         GlGetUniformIndices() = default;
-        GlGetUniformIndices(atom::Observations observations, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, GLuint__P UniformIndices) :
+        GlGetUniformIndices(atom::Observations observations, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, UniformIndex__P UniformIndices) :
             mobservations(observations),
             mProgram(Program),
             mUniformCount(UniformCount),
             mUniformNames(UniformNames),
             mUniformIndices(UniformIndices) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xeb, 0x5f, 0x9f, 0x55, 0xe6, 0x2e, 0xe9, 0x9a, 0x0d, 0xa4, 0xe4, 0xcd, 0x46, 0x98, 0x1a, 0x82, 0x60, 0xfe, 0x55, 0xa1,  } };
+            static gapic::Id ID{ { 0xe9, 0xaf, 0x9e, 0x0a, 0xe8, 0x93, 0xa6, 0xe8, 0x49, 0xf4, 0xbd, 0x78, 0x1b, 0xfe, 0xc5, 0x63, 0xf4, 0x26, 0x97, 0x87,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -12343,7 +12375,7 @@ namespace gles {
         uint32_t mProgram;
         int32_t mUniformCount;
         GLchar__CP__CP mUniformNames;
-        GLuint__P mUniformIndices;
+        UniformIndex__P mUniformIndices;
     };
 
     class GlGetUniformLocation: public Encodable {
@@ -23407,6 +23439,22 @@ namespace gles {
         }
 
         memory::Pointer mPointer;
+    };
+
+    class UniformIndex__S: public Encodable {
+    public:
+        UniformIndex__S() = default;
+        UniformIndex__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xb4, 0x96, 0xaf, 0x44, 0xc6, 0x7a, 0x70, 0x6c, 0x16, 0x18, 0x66, 0x62, 0x04, 0xc9, 0x8a, 0x4a, 0x72, 0xa2, 0xe7, 0x81,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
     };
 
     class Vec2f__2__A: public Encodable {

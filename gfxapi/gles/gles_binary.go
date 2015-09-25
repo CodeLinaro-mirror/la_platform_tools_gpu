@@ -398,6 +398,7 @@ func init() {
 	Namespace.Add((*GlGetActiveUniform)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformBlockName)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformBlockiv)(nil).Class())
+	Namespace.Add((*UniformIndexᶜᵖ)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformsiv)(nil).Class())
 	Namespace.Add((*GlGetAttachedShaders)(nil).Class())
 	Namespace.Add((*GlGetAttribLocation)(nil).Class())
@@ -519,6 +520,7 @@ func init() {
 	Namespace.Add((*GlGetTransformFeedbackVarying)(nil).Class())
 	Namespace.Add((*GlGetTranslatedShaderSourceANGLE)(nil).Class())
 	Namespace.Add((*GlGetUniformBlockIndex)(nil).Class())
+	Namespace.Add((*UniformIndexᵖ)(nil).Class())
 	Namespace.Add((*GlGetUniformIndices)(nil).Class())
 	Namespace.Add((*GlGetUniformLocation)(nil).Class())
 	Namespace.Add((*GlGetUniformfv)(nil).Class())
@@ -945,6 +947,7 @@ func init() {
 	Namespace.Add((*U32ᵖ)(nil).Class())
 	Namespace.Add((*U64ˢ)(nil).Class())
 	Namespace.Add((*U8ᵖ)(nil).Class())
+	Namespace.Add((*UniformIndexˢ)(nil).Class())
 	Namespace.Add((*Vec2fː2ᵃ)(nil).Class())
 	Namespace.Add((*Vec2fː3ᵃ)(nil).Class())
 	Namespace.Add((*Vec2fː4ᵃ)(nil).Class())
@@ -1367,10 +1370,11 @@ var (
 	binaryIDGlGenVertexArraysOES                             = binary.ID{0xe4, 0x81, 0x31, 0xf5, 0x7b, 0xe5, 0xd8, 0x53, 0x9c, 0x04, 0xc0, 0x55, 0xfe, 0x8f, 0x4c, 0x35, 0xdb, 0x02, 0xe4, 0x68}
 	binaryIDGlGenerateMipmap                                 = binary.ID{0x57, 0x53, 0x3c, 0x04, 0x55, 0x37, 0x78, 0xfa, 0x25, 0x8d, 0x25, 0x02, 0xde, 0x9c, 0x0c, 0xaf, 0x9a, 0xd8, 0x38, 0x31}
 	binaryIDGlGetActiveAttrib                                = binary.ID{0x14, 0x7b, 0x7d, 0x4a, 0xf1, 0x38, 0xea, 0x55, 0x61, 0x75, 0x79, 0x35, 0x4a, 0x80, 0x8f, 0x69, 0xc5, 0x05, 0x62, 0x54}
-	binaryIDGlGetActiveUniform                               = binary.ID{0xe4, 0x5e, 0x05, 0xbd, 0xf5, 0xa1, 0x8d, 0x2c, 0x8c, 0xb9, 0x58, 0xf7, 0x52, 0xa4, 0x38, 0x1d, 0x83, 0x18, 0xa1, 0xff}
+	binaryIDGlGetActiveUniform                               = binary.ID{0x37, 0x75, 0x45, 0x28, 0x7c, 0xe5, 0xee, 0xda, 0x6c, 0x85, 0x9f, 0xa5, 0x31, 0xc4, 0xfc, 0x49, 0x44, 0xa4, 0x28, 0x4a}
 	binaryIDGlGetActiveUniformBlockName                      = binary.ID{0x85, 0x05, 0x73, 0x0d, 0x80, 0xc8, 0x3e, 0xda, 0xb0, 0xbc, 0x1e, 0xea, 0x2a, 0xb6, 0x6d, 0xe5, 0xb9, 0x19, 0x53, 0x2d}
 	binaryIDGlGetActiveUniformBlockiv                        = binary.ID{0x70, 0x1a, 0x53, 0x8b, 0x1a, 0x5b, 0xeb, 0xf2, 0x36, 0x6f, 0xd8, 0xcb, 0xce, 0x92, 0x52, 0x74, 0xe2, 0x16, 0x13, 0xdb}
-	binaryIDGlGetActiveUniformsiv                            = binary.ID{0x58, 0x47, 0x7e, 0x47, 0xb2, 0xaa, 0x8b, 0xfd, 0x75, 0x9b, 0x02, 0xd9, 0x54, 0x53, 0x48, 0x9e, 0xc2, 0xf3, 0xe0, 0x7e}
+	binaryIDUniformIndexᶜᵖ                                   = binary.ID{0xf7, 0x36, 0x32, 0x86, 0xf9, 0x23, 0xfb, 0x85, 0xbb, 0x99, 0x7e, 0x98, 0xf0, 0x27, 0x0c, 0x4d, 0xa2, 0x4a, 0xff, 0x0d}
+	binaryIDGlGetActiveUniformsiv                            = binary.ID{0x70, 0x70, 0xf3, 0xe3, 0x75, 0x48, 0x7e, 0x35, 0x9a, 0xab, 0x13, 0xc7, 0xc5, 0x1c, 0x02, 0xbe, 0x93, 0x0f, 0x39, 0xd4}
 	binaryIDGlGetAttachedShaders                             = binary.ID{0x50, 0x20, 0x01, 0x35, 0xf4, 0x86, 0x57, 0xab, 0xd6, 0x53, 0x6f, 0x7c, 0x7f, 0x84, 0xcb, 0x83, 0x7f, 0x43, 0xf5, 0x04}
 	binaryIDGlGetAttribLocation                              = binary.ID{0x75, 0xe9, 0x55, 0x96, 0x01, 0x85, 0x1d, 0xe7, 0xa7, 0xe9, 0xef, 0x2b, 0xd9, 0x77, 0x06, 0x8f, 0xe8, 0xd1, 0xce, 0x85}
 	binaryIDGlGetBooleani_v                                  = binary.ID{0x72, 0x5d, 0x37, 0x1b, 0xda, 0x0a, 0x9d, 0x64, 0x3c, 0x91, 0x85, 0x15, 0x33, 0x92, 0xd0, 0xf0, 0x45, 0x3f, 0xa1, 0xef}
@@ -1491,7 +1495,8 @@ var (
 	binaryIDGlGetTransformFeedbackVarying                    = binary.ID{0x51, 0x5a, 0x47, 0x61, 0x69, 0x61, 0xcc, 0x0f, 0x14, 0x92, 0x09, 0x2a, 0xe1, 0xa1, 0xac, 0x62, 0x28, 0xc6, 0x50, 0x68}
 	binaryIDGlGetTranslatedShaderSourceANGLE                 = binary.ID{0x40, 0xb4, 0x0d, 0x90, 0x35, 0xa5, 0x0a, 0x70, 0x71, 0x0a, 0x7d, 0x7a, 0xfc, 0x86, 0x91, 0x2a, 0xd0, 0x5d, 0x2a, 0x9f}
 	binaryIDGlGetUniformBlockIndex                           = binary.ID{0x3f, 0x85, 0x43, 0xf6, 0x3c, 0x53, 0xe7, 0x46, 0x89, 0x5b, 0xc2, 0xad, 0xbc, 0xcb, 0x0c, 0xba, 0xf4, 0x36, 0x3a, 0xc6}
-	binaryIDGlGetUniformIndices                              = binary.ID{0xeb, 0x5f, 0x9f, 0x55, 0xe6, 0x2e, 0xe9, 0x9a, 0x0d, 0xa4, 0xe4, 0xcd, 0x46, 0x98, 0x1a, 0x82, 0x60, 0xfe, 0x55, 0xa1}
+	binaryIDUniformIndexᵖ                                    = binary.ID{0xee, 0xec, 0xab, 0x66, 0xf5, 0x5b, 0x0a, 0x2b, 0x4d, 0x0b, 0x3f, 0x5c, 0xf0, 0x77, 0x3a, 0x28, 0x05, 0x0e, 0xec, 0x8b}
+	binaryIDGlGetUniformIndices                              = binary.ID{0xe9, 0xaf, 0x9e, 0x0a, 0xe8, 0x93, 0xa6, 0xe8, 0x49, 0xf4, 0xbd, 0x78, 0x1b, 0xfe, 0xc5, 0x63, 0xf4, 0x26, 0x97, 0x87}
 	binaryIDGlGetUniformLocation                             = binary.ID{0xd9, 0x4d, 0x1e, 0x3c, 0xe5, 0x99, 0xab, 0xf3, 0x3c, 0x4e, 0x27, 0xad, 0xd6, 0xd0, 0x7c, 0x6d, 0xb9, 0x4b, 0x2d, 0xc4}
 	binaryIDGlGetUniformfv                                   = binary.ID{0x7e, 0x7b, 0x0d, 0xdb, 0xd6, 0x1a, 0x07, 0x5f, 0x78, 0x88, 0xff, 0xad, 0x74, 0x97, 0xf4, 0x30, 0x54, 0xd6, 0x6f, 0x89}
 	binaryIDGlGetUniformiv                                   = binary.ID{0x3d, 0xf7, 0x66, 0xe4, 0xf9, 0xee, 0x98, 0x0e, 0xab, 0xf4, 0xe3, 0xec, 0xd2, 0x9e, 0xc4, 0x2d, 0xe4, 0xb6, 0xdd, 0x06}
@@ -1917,6 +1922,7 @@ var (
 	binaryIDU32ᵖ                                             = binary.ID{0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf}
 	binaryIDU64ˢ                                             = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
 	binaryIDU8ᵖ                                              = binary.ID{0xc9, 0x85, 0x15, 0x54, 0xd3, 0x40, 0x31, 0x19, 0x7a, 0xab, 0xf9, 0x64, 0x72, 0x38, 0x96, 0xa9, 0x85, 0xc3, 0xbb, 0x4d}
+	binaryIDUniformIndexˢ                                    = binary.ID{0xb4, 0x96, 0xaf, 0x44, 0xc6, 0x7a, 0x70, 0x6c, 0x16, 0x18, 0x66, 0x62, 0x04, 0xc9, 0x8a, 0x4a, 0x72, 0xa2, 0xe7, 0x81}
 	binaryIDVec2fː2ᵃ                                         = binary.ID{0xf3, 0xfe, 0xa2, 0xa3, 0xb6, 0xdd, 0xd4, 0x15, 0x8c, 0x00, 0x2c, 0x4d, 0x78, 0x65, 0x14, 0x70, 0xe7, 0xcb, 0x7b, 0xe7}
 	binaryIDVec2fː3ᵃ                                         = binary.ID{0xe4, 0x73, 0xf7, 0xc4, 0x84, 0xef, 0x4d, 0x17, 0x79, 0xd4, 0x7a, 0x32, 0x60, 0xec, 0x74, 0x13, 0x67, 0x5c, 0xcf, 0xf9}
 	binaryIDVec2fː4ᵃ                                         = binary.ID{0x5a, 0xc5, 0xe9, 0xe5, 0x4c, 0x48, 0xe1, 0x82, 0xb3, 0x65, 0x71, 0x95, 0x43, 0x31, 0x48, 0xa8, 0xa8, 0x75, 0x8c, 0x8c}
@@ -18871,7 +18877,7 @@ func (*GlGetActiveUniform) Class() binary.Class {
 func doEncodeGlGetActiveUniform(e binary.Encoder, o *GlGetActiveUniform) {
 	e.Value(&o.observations)
 	e.Uint32(uint32(o.Program))
-	e.Uint32(uint32(o.Location))
+	e.Uint32(uint32(o.Index))
 	e.Int32(int32(o.BufferSize))
 	e.Value(&o.BufferBytesWritten)
 	e.Value(&o.VectorCount)
@@ -18881,7 +18887,7 @@ func doEncodeGlGetActiveUniform(e binary.Encoder, o *GlGetActiveUniform) {
 func doDecodeGlGetActiveUniform(d binary.Decoder, o *GlGetActiveUniform) {
 	d.Value(&o.observations)
 	o.Program = ProgramId(d.Uint32())
-	o.Location = GLuint(d.Uint32())
+	o.Index = UniformIndex(d.Uint32())
 	o.BufferSize = GLsizei(d.Int32())
 	d.Value(&o.BufferBytesWritten)
 	d.Value(&o.VectorCount)
@@ -18910,7 +18916,7 @@ var schemaGlGetActiveUniform = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "UniformIndex", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "GLsizeiᵖ", ID: (*GLsizeiᵖ)(nil).Class().ID()}},
 		{Declared: "VectorCount", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
@@ -19024,6 +19030,41 @@ var schemaGlGetActiveUniformBlockiv = &schema.Class{
 	},
 }
 
+type binaryClassUniformIndexᶜᵖ struct{}
+
+func (*UniformIndexᶜᵖ) Class() binary.Class {
+	return (*binaryClassUniformIndexᶜᵖ)(nil)
+}
+func doEncodeUniformIndexᶜᵖ(e binary.Encoder, o *UniformIndexᶜᵖ) {
+	e.Value(&o.Pointer)
+}
+func doDecodeUniformIndexᶜᵖ(d binary.Decoder, o *UniformIndexᶜᵖ) {
+	d.Value(&o.Pointer)
+}
+func (*binaryClassUniformIndexᶜᵖ) ID() binary.ID      { return binaryIDUniformIndexᶜᵖ }
+func (*binaryClassUniformIndexᶜᵖ) New() binary.Object { return &UniformIndexᶜᵖ{} }
+func (*binaryClassUniformIndexᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeUniformIndexᶜᵖ(e, obj.(*UniformIndexᶜᵖ))
+}
+func (*binaryClassUniformIndexᶜᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &UniformIndexᶜᵖ{}
+	doDecodeUniformIndexᶜᵖ(d, obj)
+	return obj
+}
+func (*binaryClassUniformIndexᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeUniformIndexᶜᵖ(d, obj.(*UniformIndexᶜᵖ))
+}
+func (*binaryClassUniformIndexᶜᵖ) Schema() *schema.Class { return schemaUniformIndexᶜᵖ }
+
+var schemaUniformIndexᶜᵖ = &schema.Class{
+	TypeID:  binaryIDUniformIndexᶜᵖ,
+	Package: "gles",
+	Name:    "UniformIndexᶜᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetActiveUniformsiv struct{}
 
 func (*GlGetActiveUniformsiv) Class() binary.Class {
@@ -19068,7 +19109,7 @@ var schemaGlGetActiveUniformsiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "UniformIndices", Type: &schema.Struct{Name: "GLuintᶜᵖ", ID: (*GLuintᶜᵖ)(nil).Class().ID()}},
+		{Declared: "UniformIndices", Type: &schema.Struct{Name: "UniformIndexᶜᵖ", ID: (*UniformIndexᶜᵖ)(nil).Class().ID()}},
 		{Declared: "ParameterName", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameters", Type: &schema.Struct{Name: "GLintᵖ", ID: (*GLintᵖ)(nil).Class().ID()}},
 	},
@@ -24787,6 +24828,41 @@ var schemaGlGetUniformBlockIndex = &schema.Class{
 	},
 }
 
+type binaryClassUniformIndexᵖ struct{}
+
+func (*UniformIndexᵖ) Class() binary.Class {
+	return (*binaryClassUniformIndexᵖ)(nil)
+}
+func doEncodeUniformIndexᵖ(e binary.Encoder, o *UniformIndexᵖ) {
+	e.Value(&o.Pointer)
+}
+func doDecodeUniformIndexᵖ(d binary.Decoder, o *UniformIndexᵖ) {
+	d.Value(&o.Pointer)
+}
+func (*binaryClassUniformIndexᵖ) ID() binary.ID      { return binaryIDUniformIndexᵖ }
+func (*binaryClassUniformIndexᵖ) New() binary.Object { return &UniformIndexᵖ{} }
+func (*binaryClassUniformIndexᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeUniformIndexᵖ(e, obj.(*UniformIndexᵖ))
+}
+func (*binaryClassUniformIndexᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &UniformIndexᵖ{}
+	doDecodeUniformIndexᵖ(d, obj)
+	return obj
+}
+func (*binaryClassUniformIndexᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeUniformIndexᵖ(d, obj.(*UniformIndexᵖ))
+}
+func (*binaryClassUniformIndexᵖ) Schema() *schema.Class { return schemaUniformIndexᵖ }
+
+var schemaUniformIndexᵖ = &schema.Class{
+	TypeID:  binaryIDUniformIndexᵖ,
+	Package: "gles",
+	Name:    "UniformIndexᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGlGetUniformIndices struct{}
 
 func (*GlGetUniformIndices) Class() binary.Class {
@@ -24830,7 +24906,7 @@ var schemaGlGetUniformIndices = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "UniformNames", Type: &schema.Struct{Name: "GLcharᶜᵖᶜᵖ", ID: (*GLcharᶜᵖᶜᵖ)(nil).Class().ID()}},
-		{Declared: "UniformIndices", Type: &schema.Struct{Name: "GLuintᵖ", ID: (*GLuintᵖ)(nil).Class().ID()}},
+		{Declared: "UniformIndices", Type: &schema.Struct{Name: "UniformIndexᵖ", ID: (*UniformIndexᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -44455,6 +44531,41 @@ var schemaU8ᵖ = &schema.Class{
 	Name:    "U8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassUniformIndexˢ struct{}
+
+func (*UniformIndexˢ) Class() binary.Class {
+	return (*binaryClassUniformIndexˢ)(nil)
+}
+func doEncodeUniformIndexˢ(e binary.Encoder, o *UniformIndexˢ) {
+	e.Value(&o.SliceInfo)
+}
+func doDecodeUniformIndexˢ(d binary.Decoder, o *UniformIndexˢ) {
+	d.Value(&o.SliceInfo)
+}
+func (*binaryClassUniformIndexˢ) ID() binary.ID      { return binaryIDUniformIndexˢ }
+func (*binaryClassUniformIndexˢ) New() binary.Object { return &UniformIndexˢ{} }
+func (*binaryClassUniformIndexˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeUniformIndexˢ(e, obj.(*UniformIndexˢ))
+}
+func (*binaryClassUniformIndexˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &UniformIndexˢ{}
+	doDecodeUniformIndexˢ(d, obj)
+	return obj
+}
+func (*binaryClassUniformIndexˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeUniformIndexˢ(d, obj.(*UniformIndexˢ))
+}
+func (*binaryClassUniformIndexˢ) Schema() *schema.Class { return schemaUniformIndexˢ }
+
+var schemaUniformIndexˢ = &schema.Class{
+	TypeID:  binaryIDUniformIndexˢ,
+	Package: "gles",
+	Name:    "UniformIndexˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 

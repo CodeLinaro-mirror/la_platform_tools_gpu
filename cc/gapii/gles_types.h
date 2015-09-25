@@ -5751,6 +5751,8 @@ typedef GLuint BufferBindingIndex;
 
 typedef GLuint DrawBufferIndex;
 
+typedef GLuint UniformIndex;
+
 typedef GLuint VertexBufferBindingIndex;
 
 typedef GLuint AttributeLocation;

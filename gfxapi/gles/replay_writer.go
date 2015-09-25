@@ -791,6 +791,9 @@ func (c BufferBindingIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxa
 func (c DrawBufferIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
+func (c UniformIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return GLuint(c).value(ϟb, ϟa, ϟs)
+}
 func (c VertexBufferBindingIndex) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return GLuint(c).value(ϟb, ϟa, ϟs)
 }
@@ -23316,7 +23319,7 @@ func (ϟa *GlGetActiveUniform) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufferSize.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufferBytesWritten.value())
 	ϟb.Push(ϟa.VectorCount.value())
@@ -44568,6 +44571,20 @@ func (p RenderbufferIdᶜᵖ) value() value.Pointer {
 	}
 }
 func (p GLcharᶜᵖᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p UniformIndexᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p UniformIndexᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {

@@ -974,7 +974,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, uint32_t location,
                                                 int32_t buffer_size, int32_t *buffer_bytes_written,
                                                 int32_t *vector_count, uint32_t *type, char *name);
-    typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, uint32_t location,
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, uint32_t index,
                                                  int32_t buffer_size, int32_t *buffer_bytes_written,
                                                  int32_t *vector_count, uint32_t *type, char *name);
     typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,

@@ -1303,7 +1303,7 @@ public:
                                   int32_t* buffer_bytes_written, int32_t* vector_count,
                                   uint32_t* type, char* name);
     inline bool hasGlGetActiveUniform() const;
-    inline void glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
+    inline void glGetActiveUniform(uint32_t program, uint32_t index, int32_t buffer_size,
                                    int32_t* buffer_bytes_written, int32_t* vector_count,
                                    uint32_t* type, char* name);
     inline bool hasGlGetActiveUniformBlockName() const;
@@ -27429,11 +27429,11 @@ inline bool GlesSpy::hasGlGetActiveUniform() const {
     return mImports.glGetActiveUniform != nullptr;
 }
 
-inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
+inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t index, int32_t buffer_size,
                                         int32_t* buffer_bytes_written, int32_t* vector_count,
                                         uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)", program,
-               location, buffer_size, buffer_bytes_written, vector_count, type, name);
+               index, buffer_size, buffer_bytes_written, vector_count, type, name);
 
     if (!hasGlGetActiveUniform()) {
         GAPID_WARNING("Application called unsupported function glGetActiveUniform");
@@ -27448,8 +27448,8 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
         GLsizei* l_writeString_1952_buffer_bytes_written = buffer_bytes_written;
         GLchar* l_writeString_1952_buffer = name;
         observe(observations.mReads);
-        mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written,
-                                    vector_count, type, name);
+        mImports.glGetActiveUniform(program, index, buffer_size, buffer_bytes_written, vector_count,
+                                    type, name);
         if (l_writeString_1952_buffer != nullptr && l_writeString_1952_buffer_size > (GLsizei)(0)) {
             GLsizei l_buffer_size2 = l_writeString_1952_buffer_size;
             if (l_writeString_1952_buffer_bytes_written != nullptr) {
@@ -27468,7 +27468,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, uint32_t location, int
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetActiveUniform coder(
-            observations, program, location, buffer_size,
+            observations, program, index, buffer_size,
             gapic::coder::gles::GLsizei__P(gapic::coder::memory::Pointer(
                     reinterpret_cast<uintptr_t>(buffer_bytes_written), 0)),
             gapic::coder::gles::GLint__P(
@@ -27613,7 +27613,7 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, int32_t uniform_cou
 
     gapic::coder::gles::GlGetActiveUniformsiv coder(
             observations, program, uniform_count,
-            gapic::coder::gles::GLuint__CP(
+            gapic::coder::gles::UniformIndex__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniform_indices), 0)),
             parameter_name, gapic::coder::gles::GLint__P(gapic::coder::memory::Pointer(
                                     reinterpret_cast<uintptr_t>(parameters), 0)));
@@ -28542,7 +28542,7 @@ inline void GlesSpy::glGetUniformIndices(uint32_t program, int32_t uniformCount,
             observations, program, uniformCount,
             gapic::coder::gles::GLchar__CP__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniformNames), 0)),
-            gapic::coder::gles::GLuint__P(
+            gapic::coder::gles::UniformIndex__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(uniformIndices), 0)));
     mEncoder->Variant(&coder);
 }

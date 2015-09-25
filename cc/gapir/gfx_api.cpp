@@ -9736,13 +9736,13 @@ bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
-    uint32_t location = stack->pop<uint32_t>();
+    uint32_t index = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p, %p, %p)",
-                   program, location, buffer_size, buffer_bytes_written, vector_count, type, name);
+                   program, index, buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveUniform != nullptr) {
-            glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
+            glGetActiveUniform(program, index, buffer_size, buffer_bytes_written, vector_count,
                                type, name);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniform");

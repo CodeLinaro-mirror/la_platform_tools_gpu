@@ -6496,6 +6496,7 @@ enum class TextureKind : uint32_t {
 typedef uint32_t GLuint;
 typedef GLuint BufferBindingIndex;
 typedef GLuint DrawBufferIndex;
+typedef GLuint UniformIndex;
 typedef GLuint VertexBufferBindingIndex;
 typedef GLuint AttributeLocation;
 typedef int32_t GLint;
@@ -7431,9 +7432,9 @@ typedef void(STDCALL *PFNGLGENPROGRAMPIPELINES)(int32_t n, uint32_t *pipelines);
 typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, uint32_t location,
                                             int32_t buffer_size, int32_t *buffer_bytes_written,
                                             int32_t *vector_count, GLenum *type, char *name);
-typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, uint32_t location,
-                                             int32_t buffer_size, int32_t *buffer_bytes_written,
-                                             int32_t *vector_count, GLenum *type, char *name);
+typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, uint32_t index, int32_t buffer_size,
+                                             int32_t *buffer_bytes_written, int32_t *vector_count,
+                                             GLenum *type, char *name);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
                                                       uint32_t uniform_block_index,
                                                       int32_t buffer_size,

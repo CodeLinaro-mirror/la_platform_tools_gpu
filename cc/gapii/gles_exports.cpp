@@ -832,7 +832,7 @@ EXPORT void STDCALL glGenProgramPipelines(int32_t n, uint32_t* pipelines);
 EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
                                       int32_t* buffer_bytes_written, int32_t* vector_count,
                                       uint32_t* type, char* name);
-EXPORT void STDCALL glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
+EXPORT void STDCALL glGetActiveUniform(uint32_t program, uint32_t index, int32_t buffer_size,
                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                        uint32_t* type, char* name);
 EXPORT void STDCALL glGetActiveUniformBlockName(uint32_t program, uint32_t uniform_block_index,
@@ -4849,12 +4849,12 @@ EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32
     s->glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count, type,
                          name);
 }
-EXPORT void STDCALL glGetActiveUniform(uint32_t program, uint32_t location, int32_t buffer_size,
+EXPORT void STDCALL glGetActiveUniform(uint32_t program, uint32_t index, int32_t buffer_size,
                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                        uint32_t* type, char* name) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
-    s->glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count, type,
+    s->glGetActiveUniform(program, index, buffer_size, buffer_bytes_written, vector_count, type,
                           name);
 }
 EXPORT void STDCALL glGetActiveUniformBlockName(uint32_t program, uint32_t uniform_block_index,

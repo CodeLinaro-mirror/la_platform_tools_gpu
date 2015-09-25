@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+type GLuint UniformIndex
+
 macro void readString(GLsizei length, const GLchar* buffer) {
   if buffer != null {
     if length < 0 {
@@ -245,13 +247,13 @@ cmd void glGetActiveAttrib(ProgramId         program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniform.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniform.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniform.xhtml","OpenGL ES 3.2")
-cmd void glGetActiveUniform(ProgramId program,
-                            GLuint    location,
-                            GLsizei   buffer_size,
-                            GLsizei*  buffer_bytes_written,
-                            GLint*    vector_count,
-                            GLenum*   type,
-                            GLchar*   name) {
+cmd void glGetActiveUniform(ProgramId    program,
+                            UniformIndex index,
+                            GLsizei      buffer_size,
+                            GLsizei*     buffer_bytes_written,
+                            GLint*       vector_count,
+                            GLenum*      type,
+                            GLchar*      name) {
   minRequiredVersion(2, 0)
 
   writeString(buffer_size, buffer_bytes_written, name)
@@ -299,11 +301,11 @@ cmd void glGetActiveUniformBlockiv(ProgramId      program,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetActiveUniformsiv.xhtml","OpenGL ES 3.2")
-cmd void glGetActiveUniformsiv(ProgramId     program,
-                               GLsizei       uniform_count,
-                               const GLuint* uniform_indices,
-                               GLenum        parameter_name,
-                               GLint*        parameters) {
+cmd void glGetActiveUniformsiv(ProgramId           program,
+                               GLsizei             uniform_count,
+                               const UniformIndex* uniform_indices,
+                               GLenum              parameter_name,
+                               GLint*              parameters) {
   minRequiredVersion(3, 0)
   switch (parameter_name) {
     case GL_UNIFORM_ARRAY_STRIDE, GL_UNIFORM_BLOCK_INDEX, GL_UNIFORM_IS_ROW_MAJOR,
@@ -689,7 +691,7 @@ cmd UniformBlockId glGetUniformBlockIndex(ProgramId program, string uniformBlock
 cmd void glGetUniformIndices(ProgramId            program,
                              GLsizei              uniformCount,
                              const GLchar* const* uniformNames,
-                             GLuint*              uniformIndices) {
+                             UniformIndex*        uniformIndices) {
   minRequiredVersion(3, 0)
   names := uniformNames[0:uniformCount]
   for i in (0 .. uniformCount) {
