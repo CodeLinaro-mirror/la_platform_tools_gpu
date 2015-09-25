@@ -15,38 +15,12 @@
 // Package any contains Object wrappers for Plain-Old-Data types.
 package any
 
-import (
-	"fmt"
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
-)
-
-// binary: Schema = false
 // binary: java.source = base/rpclib/src/main/java
 // binary: java.package = com.android.tools.rpclib.any
 // binary: java.indent = "    "
 // binary: java.member_prefix = m
-
-// ErrUnboxable is returned when a non-boxable value type is passed to Box.
-type ErrUnboxable struct {
-	Value interface{} // The value that could not be encoded.
-}
-
-// Error returns the error message.
-func (e ErrUnboxable) Error() string {
-	return fmt.Sprintf("Value of type %T is not boxable", e.Value)
-}
-
-// ErrNotBoxedValue is returned when an Object is passed to Unbox that was not
-// previously returned by a call to Box.
-type ErrNotBoxedValue struct {
-	Object binary.Object // The object that is not a boxed value.
-}
-
-// Error returns the error message.
-func (e ErrNotBoxedValue) Error() string {
-	return fmt.Sprintf("Object of type %T was boxed by a call to Box", e.Object)
-}
 
 type object_ struct {
 	binary.Generate `java:"ObjectBox"`
@@ -118,20 +92,20 @@ type string_ struct {
 	value           string
 }
 
-func (v object_) unbox() interface{}  { return v.value }
-func (v bool_) unbox() interface{}    { return v.value }
-func (v uint8_) unbox() interface{}   { return v.value }
-func (v int8_) unbox() interface{}    { return v.value }
-func (v uint16_) unbox() interface{}  { return v.value }
-func (v int16_) unbox() interface{}   { return v.value }
-func (v float32_) unbox() interface{} { return v.value }
-func (v uint32_) unbox() interface{}  { return v.value }
-func (v int32_) unbox() interface{}   { return v.value }
-func (v float64_) unbox() interface{} { return v.value }
-func (v uint64_) unbox() interface{}  { return v.value }
-func (v int64_) unbox() interface{}   { return v.value }
-func (v int_) unbox() interface{}     { return v.value }
-func (v string_) unbox() interface{}  { return v.value }
+func (v object_) Unbox() interface{}  { return v.value }
+func (v bool_) Unbox() interface{}    { return v.value }
+func (v uint8_) Unbox() interface{}   { return v.value }
+func (v int8_) Unbox() interface{}    { return v.value }
+func (v uint16_) Unbox() interface{}  { return v.value }
+func (v int16_) Unbox() interface{}   { return v.value }
+func (v float32_) Unbox() interface{} { return v.value }
+func (v uint32_) Unbox() interface{}  { return v.value }
+func (v int32_) Unbox() interface{}   { return v.value }
+func (v float64_) Unbox() interface{} { return v.value }
+func (v uint64_) Unbox() interface{}  { return v.value }
+func (v int64_) Unbox() interface{}   { return v.value }
+func (v int_) Unbox() interface{}     { return v.value }
+func (v string_) Unbox() interface{}  { return v.value }
 
 type objectSlice struct {
 	binary.Generate
@@ -203,149 +177,85 @@ type stringSlice struct {
 	value []string
 }
 
-func (v objectSlice) unbox() interface{}  { return v.value }
-func (v boolSlice) unbox() interface{}    { return v.value }
-func (v uint8Slice) unbox() interface{}   { return v.value }
-func (v int8Slice) unbox() interface{}    { return v.value }
-func (v uint16Slice) unbox() interface{}  { return v.value }
-func (v int16Slice) unbox() interface{}   { return v.value }
-func (v float32Slice) unbox() interface{} { return v.value }
-func (v uint32Slice) unbox() interface{}  { return v.value }
-func (v int32Slice) unbox() interface{}   { return v.value }
-func (v float64Slice) unbox() interface{} { return v.value }
-func (v uint64Slice) unbox() interface{}  { return v.value }
-func (v int64Slice) unbox() interface{}   { return v.value }
-func (v intSlice) unbox() interface{}     { return v.value }
-func (v stringSlice) unbox() interface{}  { return v.value }
+func (v objectSlice) Unbox() interface{}  { return v.value }
+func (v boolSlice) Unbox() interface{}    { return v.value }
+func (v uint8Slice) Unbox() interface{}   { return v.value }
+func (v int8Slice) Unbox() interface{}    { return v.value }
+func (v uint16Slice) Unbox() interface{}  { return v.value }
+func (v int16Slice) Unbox() interface{}   { return v.value }
+func (v float32Slice) Unbox() interface{} { return v.value }
+func (v uint32Slice) Unbox() interface{}  { return v.value }
+func (v int32Slice) Unbox() interface{}   { return v.value }
+func (v float64Slice) Unbox() interface{} { return v.value }
+func (v uint64Slice) Unbox() interface{}  { return v.value }
+func (v int64Slice) Unbox() interface{}   { return v.value }
+func (v intSlice) Unbox() interface{}     { return v.value }
+func (v stringSlice) Unbox() interface{}  { return v.value }
 
-type any interface {
-	unbox() interface{}
-}
-
-// Box returns v wrapped by a struct implementing binary.Object.
-// If v is not boxable then ErrUnboxable is returned.
-func Box(v interface{}) (binary.Object, error) {
+func boxer(v interface{}) binary.Object {
 	switch v := v.(type) {
-	case nil:
-		return nil, nil
 	case binary.Object:
-		return &object_{value: v}, nil
+		return &object_{value: v}
 	case bool:
-		return &bool_{value: v}, nil
+		return &bool_{value: v}
 	case uint8:
-		return &uint8_{value: v}, nil
+		return &uint8_{value: v}
 	case int8:
-		return &int8_{value: v}, nil
+		return &int8_{value: v}
 	case uint16:
-		return &uint16_{value: v}, nil
+		return &uint16_{value: v}
 	case int16:
-		return &int16_{value: v}, nil
+		return &int16_{value: v}
 	case float32:
-		return &float32_{value: v}, nil
+		return &float32_{value: v}
 	case uint32:
-		return &uint32_{value: v}, nil
+		return &uint32_{value: v}
 	case int32:
-		return &int32_{value: v}, nil
+		return &int32_{value: v}
 	case float64:
-		return &float64_{value: v}, nil
+		return &float64_{value: v}
 	case uint64:
-		return &uint64_{value: v}, nil
+		return &uint64_{value: v}
 	case int64:
-		return &int64_{value: v}, nil
+		return &int64_{value: v}
 	case int:
-		return &int_{value: v}, nil
+		return &int_{value: v}
 	case string:
-		return &string_{value: v}, nil
+		return &string_{value: v}
 
 	case []binary.Object:
-		return &objectSlice{value: v}, nil
+		return &objectSlice{value: v}
 	case []bool:
-		return &boolSlice{value: v}, nil
+		return &boolSlice{value: v}
 	case []uint8:
-		return &uint8Slice{value: v}, nil
+		return &uint8Slice{value: v}
 	case []int8:
-		return &int8Slice{value: v}, nil
+		return &int8Slice{value: v}
 	case []uint16:
-		return &uint16Slice{value: v}, nil
+		return &uint16Slice{value: v}
 	case []int16:
-		return &int16Slice{value: v}, nil
+		return &int16Slice{value: v}
 	case []float32:
-		return &float32Slice{value: v}, nil
+		return &float32Slice{value: v}
 	case []uint32:
-		return &uint32Slice{value: v}, nil
+		return &uint32Slice{value: v}
 	case []int32:
-		return &int32Slice{value: v}, nil
+		return &int32Slice{value: v}
 	case []float64:
-		return &float64Slice{value: v}, nil
+		return &float64Slice{value: v}
 	case []uint64:
-		return &uint64Slice{value: v}, nil
+		return &uint64Slice{value: v}
 	case []int64:
-		return &int64Slice{value: v}, nil
+		return &int64Slice{value: v}
 	case []int:
-		return &intSlice{value: v}, nil
+		return &intSlice{value: v}
 	case []string:
-		return &stringSlice{value: v}, nil
-	}
-
-	return nil, ErrUnboxable{Value: v}
-}
-
-// Unbox returns the value in o wrapped by a call to Box.
-// If o is not a boxed value ErrNotBoxedValue is returned.
-func Unbox(o binary.Object) (interface{}, error) {
-	if o == nil {
-		return nil, nil
-	} else if o, any := o.(any); any {
-		return o.unbox(), nil
-	}
-	return nil, ErrNotBoxedValue{Object: o}
-}
-
-// Any is the schema Type descriptor for a field who's underlying type requires
-// boxing and unboxing. The type is usually declared as an empty interface.
-type Any struct {
-	binary.Generate `java:"AnyType"`
-}
-
-func (i *Any) Basename() string {
-	return "<any>"
-}
-
-func (i *Any) Typename() string {
-	return "<any>"
-}
-
-func (i *Any) String() string {
-	return "<any>"
-}
-
-func Encode(e binary.Encoder, value interface{}) {
-	if boxed, err := Box(value); err != nil {
-		e.SetError(err)
-	} else {
-		e.Variant(boxed)
-	}
-}
-
-func Decode(d binary.Decoder) interface{} {
-	boxed := d.Variant()
-	if d.Error() != nil {
+		return &stringSlice{value: v}
+	default:
 		return nil
 	}
-	if unboxed, err := Unbox(boxed); err != nil {
-		d.SetError(err)
-		return nil
-	} else {
-		return unboxed
-	}
 }
 
-func (i *Any) Encode(e binary.Encoder, value interface{}) {
-	// Note this is calling the non-member function (not itself).
-	Encode(e, value)
-}
-
-func (i *Any) Decode(d binary.Decoder) interface{} {
-	// Note this is calling the non-member function (not itself).
-	return Decode(d)
+func init() {
+	binary.RegisterBoxer(boxer)
 }

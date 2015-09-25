@@ -22,7 +22,6 @@ import (
 
 // Array is the Type descriptor for fixed size buffers of known type.
 type Array struct {
-	binary.Generate
 	Alias     string // The alias this array type was given, if present
 	ValueType Type   // The value type stored in the array
 	Size      uint32 // The fixed size of the array
@@ -31,7 +30,6 @@ type Array struct {
 // Slice is the Type descriptor for dynamically sized buffers of known type,
 // encoded with a preceding count.
 type Slice struct {
-	binary.Generate
 	Alias     string // The alias this array type was given, if present
 	ValueType Type   // The value type stored in the slice.
 }

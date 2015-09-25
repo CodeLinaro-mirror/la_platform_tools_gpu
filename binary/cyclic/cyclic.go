@@ -19,6 +19,9 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+
+	// Force the any package to be included so the boxers are registered.
+	_ "android.googlesource.com/platform/tools/gpu/binary/any"
 )
 
 // Encoder creates a binary.Encoder that writes to the supplied binary.Writer.

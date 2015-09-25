@@ -21,7 +21,6 @@ import (
 	"unicode"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"golang.org/x/tools/go/types"
 )
@@ -85,7 +84,7 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, 
 		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tags, imports, binObj)}
 	case *types.Interface:
 		if binObj != nil && !types.Implements(from, binObj) {
-			return &any.Any{}
+			return &schema.Any{}
 		} else {
 			return &schema.Interface{Name: name}
 		}

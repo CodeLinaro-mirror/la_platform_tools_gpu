@@ -8,13 +8,13 @@ package any
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*Any)(nil).Class())
 	Namespace.Add((*boolSlice)(nil).Class())
 	Namespace.Add((*bool_)(nil).Class())
 	Namespace.Add((*float32Slice)(nil).Class())
@@ -46,7 +46,6 @@ func init() {
 }
 
 var (
-	binaryIDAny          = binary.ID{0xcc, 0x59, 0x22, 0xb9, 0x17, 0x6d, 0x7e, 0xc2, 0xd1, 0x0b, 0xe9, 0x39, 0x1c, 0x5f, 0x03, 0x38, 0xbc, 0x25, 0xc3, 0xda}
 	binaryIDboolSlice    = binary.ID{0xe6, 0xff, 0xf7, 0x4d, 0xb6, 0x6a, 0x7b, 0x06, 0x08, 0xff, 0x1f, 0xf7, 0xed, 0xbf, 0x5d, 0x4e, 0x44, 0x56, 0xbd, 0xf5}
 	binaryIDbool_        = binary.ID{0xd9, 0xf9, 0x39, 0xae, 0x53, 0xf7, 0x4a, 0x48, 0x9a, 0x2d, 0x0c, 0x3a, 0x77, 0x87, 0xdd, 0x8b, 0x27, 0xc5, 0xe9, 0xf3}
 	binaryIDfloat32Slice = binary.ID{0xd4, 0x07, 0x88, 0x92, 0xed, 0x57, 0x6c, 0x21, 0x2f, 0xed, 0xb7, 0x7c, 0x76, 0x28, 0x4b, 0xdc, 0x8e, 0xb6, 0x1d, 0x59}
@@ -76,29 +75,6 @@ var (
 	binaryIDuint8Slice   = binary.ID{0x38, 0x9f, 0xd0, 0xb2, 0x1f, 0x95, 0x04, 0x46, 0xa0, 0x90, 0x05, 0x05, 0x62, 0xeb, 0xbd, 0x88, 0x53, 0x45, 0x1c, 0x90}
 	binaryIDuint8_       = binary.ID{0xdb, 0x01, 0x67, 0x61, 0x0d, 0xd1, 0x1e, 0xef, 0x2f, 0xca, 0x58, 0x3f, 0xc8, 0xdb, 0x2e, 0x17, 0x79, 0x86, 0x98, 0x5f}
 )
-
-type binaryClassAny struct{}
-
-func (*Any) Class() binary.Class {
-	return (*binaryClassAny)(nil)
-}
-func doEncodeAny(e binary.Encoder, o *Any) {
-}
-func doDecodeAny(d binary.Decoder, o *Any) {
-}
-func (*binaryClassAny) ID() binary.ID      { return binaryIDAny }
-func (*binaryClassAny) New() binary.Object { return &Any{} }
-func (*binaryClassAny) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeAny(e, obj.(*Any))
-}
-func (*binaryClassAny) Decode(d binary.Decoder) binary.Object {
-	obj := &Any{}
-	doDecodeAny(d, obj)
-	return obj
-}
-func (*binaryClassAny) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeAny(d, obj.(*Any))
-}
 
 type binaryClassboolSlice struct{}
 
@@ -132,6 +108,16 @@ func (*binaryClassboolSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassboolSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeboolSlice(d, obj.(*boolSlice))
 }
+func (*binaryClassboolSlice) Schema() *schema.Class { return schemaboolSlice }
+
+var schemaboolSlice = &schema.Class{
+	TypeID:  binaryIDboolSlice,
+	Package: "any",
+	Name:    "boolSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+	},
+}
 
 type binaryClassbool_ struct{}
 
@@ -156,6 +142,16 @@ func (*binaryClassbool_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassbool_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodebool_(d, obj.(*bool_))
+}
+func (*binaryClassbool_) Schema() *schema.Class { return schemabool_ }
+
+var schemabool_ = &schema.Class{
+	TypeID:  binaryIDbool_,
+	Package: "any",
+	Name:    "bool_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
 }
 
 type binaryClassfloat32Slice struct{}
@@ -190,6 +186,16 @@ func (*binaryClassfloat32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat32Slice(d, obj.(*float32Slice))
 }
+func (*binaryClassfloat32Slice) Schema() *schema.Class { return schemafloat32Slice }
+
+var schemafloat32Slice = &schema.Class{
+	TypeID:  binaryIDfloat32Slice,
+	Package: "any",
+	Name:    "float32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassfloat32_ struct{}
 
@@ -214,6 +220,16 @@ func (*binaryClassfloat32_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassfloat32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat32_(d, obj.(*float32_))
+}
+func (*binaryClassfloat32_) Schema() *schema.Class { return schemafloat32_ }
+
+var schemafloat32_ = &schema.Class{
+	TypeID:  binaryIDfloat32_,
+	Package: "any",
+	Name:    "float32_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
 }
 
 type binaryClassfloat64Slice struct{}
@@ -248,6 +264,16 @@ func (*binaryClassfloat64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfloat64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat64Slice(d, obj.(*float64Slice))
 }
+func (*binaryClassfloat64Slice) Schema() *schema.Class { return schemafloat64Slice }
+
+var schemafloat64Slice = &schema.Class{
+	TypeID:  binaryIDfloat64Slice,
+	Package: "any",
+	Name:    "float64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float64", Method: schema.Float64}}},
+	},
+}
 
 type binaryClassfloat64_ struct{}
 
@@ -272,6 +298,16 @@ func (*binaryClassfloat64_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassfloat64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefloat64_(d, obj.(*float64_))
+}
+func (*binaryClassfloat64_) Schema() *schema.Class { return schemafloat64_ }
+
+var schemafloat64_ = &schema.Class{
+	TypeID:  binaryIDfloat64_,
+	Package: "any",
+	Name:    "float64_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
 }
 
 type binaryClassint16Slice struct{}
@@ -306,6 +342,16 @@ func (*binaryClassint16Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint16Slice(d, obj.(*int16Slice))
 }
+func (*binaryClassint16Slice) Schema() *schema.Class { return schemaint16Slice }
+
+var schemaint16Slice = &schema.Class{
+	TypeID:  binaryIDint16Slice,
+	Package: "any",
+	Name:    "int16Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int16", Method: schema.Int16}}},
+	},
+}
 
 type binaryClassint16_ struct{}
 
@@ -330,6 +376,16 @@ func (*binaryClassint16_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassint16_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint16_(d, obj.(*int16_))
+}
+func (*binaryClassint16_) Schema() *schema.Class { return schemaint16_ }
+
+var schemaint16_ = &schema.Class{
+	TypeID:  binaryIDint16_,
+	Package: "any",
+	Name:    "int16_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
+	},
 }
 
 type binaryClassint32Slice struct{}
@@ -364,6 +420,16 @@ func (*binaryClassint32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint32Slice(d, obj.(*int32Slice))
 }
+func (*binaryClassint32Slice) Schema() *schema.Class { return schemaint32Slice }
+
+var schemaint32Slice = &schema.Class{
+	TypeID:  binaryIDint32Slice,
+	Package: "any",
+	Name:    "int32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassint32_ struct{}
 
@@ -388,6 +454,16 @@ func (*binaryClassint32_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassint32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint32_(d, obj.(*int32_))
+}
+func (*binaryClassint32_) Schema() *schema.Class { return schemaint32_ }
+
+var schemaint32_ = &schema.Class{
+	TypeID:  binaryIDint32_,
+	Package: "any",
+	Name:    "int32_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
 }
 
 type binaryClassint64Slice struct{}
@@ -422,6 +498,16 @@ func (*binaryClassint64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint64Slice(d, obj.(*int64Slice))
 }
+func (*binaryClassint64Slice) Schema() *schema.Class { return schemaint64Slice }
+
+var schemaint64Slice = &schema.Class{
+	TypeID:  binaryIDint64Slice,
+	Package: "any",
+	Name:    "int64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int64", Method: schema.Int64}}},
+	},
+}
 
 type binaryClassint64_ struct{}
 
@@ -446,6 +532,16 @@ func (*binaryClassint64_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassint64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint64_(d, obj.(*int64_))
+}
+func (*binaryClassint64_) Schema() *schema.Class { return schemaint64_ }
+
+var schemaint64_ = &schema.Class{
+	TypeID:  binaryIDint64_,
+	Package: "any",
+	Name:    "int64_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
 }
 
 type binaryClassint8Slice struct{}
@@ -480,6 +576,16 @@ func (*binaryClassint8Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint8Slice(d, obj.(*int8Slice))
 }
+func (*binaryClassint8Slice) Schema() *schema.Class { return schemaint8Slice }
+
+var schemaint8Slice = &schema.Class{
+	TypeID:  binaryIDint8Slice,
+	Package: "any",
+	Name:    "int8Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int8", Method: schema.Int8}}},
+	},
+}
 
 type binaryClassint8_ struct{}
 
@@ -504,6 +610,16 @@ func (*binaryClassint8_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassint8_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint8_(d, obj.(*int8_))
+}
+func (*binaryClassint8_) Schema() *schema.Class { return schemaint8_ }
+
+var schemaint8_ = &schema.Class{
+	TypeID:  binaryIDint8_,
+	Package: "any",
+	Name:    "int8_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+	},
 }
 
 type binaryClassintSlice struct{}
@@ -538,6 +654,16 @@ func (*binaryClassintSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassintSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeintSlice(d, obj.(*intSlice))
 }
+func (*binaryClassintSlice) Schema() *schema.Class { return schemaintSlice }
+
+var schemaintSlice = &schema.Class{
+	TypeID:  binaryIDintSlice,
+	Package: "any",
+	Name:    "intSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassint_ struct{}
 
@@ -562,6 +688,16 @@ func (*binaryClassint_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassint_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeint_(d, obj.(*int_))
+}
+func (*binaryClassint_) Schema() *schema.Class { return schemaint_ }
+
+var schemaint_ = &schema.Class{
+	TypeID:  binaryIDint_,
+	Package: "any",
+	Name:    "int_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+	},
 }
 
 type binaryClassobjectSlice struct{}
@@ -600,6 +736,16 @@ func (*binaryClassobjectSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassobjectSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeobjectSlice(d, obj.(*objectSlice))
 }
+func (*binaryClassobjectSlice) Schema() *schema.Class { return schemaobjectSlice }
+
+var schemaobjectSlice = &schema.Class{
+	TypeID:  binaryIDobjectSlice,
+	Package: "any",
+	Name:    "objectSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "binary.Object"}}},
+	},
+}
 
 type binaryClassobject_ struct{}
 
@@ -628,6 +774,16 @@ func (*binaryClassobject_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassobject_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeobject_(d, obj.(*object_))
+}
+func (*binaryClassobject_) Schema() *schema.Class { return schemaobject_ }
+
+var schemaobject_ = &schema.Class{
+	TypeID:  binaryIDobject_,
+	Package: "any",
+	Name:    "object_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Interface{Name: "binary.Object"}},
+	},
 }
 
 type binaryClassstringSlice struct{}
@@ -662,6 +818,16 @@ func (*binaryClassstringSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassstringSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodestringSlice(d, obj.(*stringSlice))
 }
+func (*binaryClassstringSlice) Schema() *schema.Class { return schemastringSlice }
+
+var schemastringSlice = &schema.Class{
+	TypeID:  binaryIDstringSlice,
+	Package: "any",
+	Name:    "stringSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+	},
+}
 
 type binaryClassstring_ struct{}
 
@@ -686,6 +852,16 @@ func (*binaryClassstring_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassstring_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodestring_(d, obj.(*string_))
+}
+func (*binaryClassstring_) Schema() *schema.Class { return schemastring_ }
+
+var schemastring_ = &schema.Class{
+	TypeID:  binaryIDstring_,
+	Package: "any",
+	Name:    "string_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
 }
 
 type binaryClassuint16Slice struct{}
@@ -720,6 +896,16 @@ func (*binaryClassuint16Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint16Slice(d, obj.(*uint16Slice))
 }
+func (*binaryClassuint16Slice) Schema() *schema.Class { return schemauint16Slice }
+
+var schemauint16Slice = &schema.Class{
+	TypeID:  binaryIDuint16Slice,
+	Package: "any",
+	Name:    "uint16Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint16", Method: schema.Uint16}}},
+	},
+}
 
 type binaryClassuint16_ struct{}
 
@@ -744,6 +930,16 @@ func (*binaryClassuint16_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassuint16_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint16_(d, obj.(*uint16_))
+}
+func (*binaryClassuint16_) Schema() *schema.Class { return schemauint16_ }
+
+var schemauint16_ = &schema.Class{
+	TypeID:  binaryIDuint16_,
+	Package: "any",
+	Name:    "uint16_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+	},
 }
 
 type binaryClassuint32Slice struct{}
@@ -778,6 +974,16 @@ func (*binaryClassuint32Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint32Slice(d, obj.(*uint32Slice))
 }
+func (*binaryClassuint32Slice) Schema() *schema.Class { return schemauint32Slice }
+
+var schemauint32Slice = &schema.Class{
+	TypeID:  binaryIDuint32Slice,
+	Package: "any",
+	Name:    "uint32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassuint32_ struct{}
 
@@ -802,6 +1008,16 @@ func (*binaryClassuint32_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassuint32_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint32_(d, obj.(*uint32_))
+}
+func (*binaryClassuint32_) Schema() *schema.Class { return schemauint32_ }
+
+var schemauint32_ = &schema.Class{
+	TypeID:  binaryIDuint32_,
+	Package: "any",
+	Name:    "uint32_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassuint64Slice struct{}
@@ -836,6 +1052,16 @@ func (*binaryClassuint64Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint64Slice(d, obj.(*uint64Slice))
 }
+func (*binaryClassuint64Slice) Schema() *schema.Class { return schemauint64Slice }
+
+var schemauint64Slice = &schema.Class{
+	TypeID:  binaryIDuint64Slice,
+	Package: "any",
+	Name:    "uint64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+	},
+}
 
 type binaryClassuint64_ struct{}
 
@@ -860,6 +1086,16 @@ func (*binaryClassuint64_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassuint64_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint64_(d, obj.(*uint64_))
+}
+func (*binaryClassuint64_) Schema() *schema.Class { return schemauint64_ }
+
+var schemauint64_ = &schema.Class{
+	TypeID:  binaryIDuint64_,
+	Package: "any",
+	Name:    "uint64_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
 }
 
 type binaryClassuint8Slice struct{}
@@ -890,6 +1126,16 @@ func (*binaryClassuint8Slice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassuint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint8Slice(d, obj.(*uint8Slice))
 }
+func (*binaryClassuint8Slice) Schema() *schema.Class { return schemauint8Slice }
+
+var schemauint8Slice = &schema.Class{
+	TypeID:  binaryIDuint8Slice,
+	Package: "any",
+	Name:    "uint8Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+	},
+}
 
 type binaryClassuint8_ struct{}
 
@@ -914,4 +1160,14 @@ func (*binaryClassuint8_) Decode(d binary.Decoder) binary.Object {
 }
 func (*binaryClassuint8_) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeuint8_(d, obj.(*uint8_))
+}
+func (*binaryClassuint8_) Schema() *schema.Class { return schemauint8_ }
+
+var schemauint8_ = &schema.Class{
+	TypeID:  binaryIDuint8_,
+	Package: "any",
+	Name:    "uint8_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
 }

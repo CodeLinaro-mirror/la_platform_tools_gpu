@@ -274,7 +274,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Encode.Any"}}
-  any.Encode(e, {{.Name}})¶
+  schema.Any{}.Encode(e, {{.Name}})¶
 {{end}}
 
 {{define "Go.Encode_Length"}}
@@ -340,7 +340,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Any"}}
-  {{.Name}} = any.Decode(d)¶
+  {{.Name}} = schema.Any{}.Decode(d)¶
 {{end}}
 
 {{define "Go.Decode_Length"}}
@@ -387,7 +387,7 @@ const go_binary_tmpl = `{{/*
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}
-{{define "Go.Schema.Any"}}&any.Any{}{{end}}
+{{define "Go.Schema.Any"}}&schema.Any{}{{end}}
 {{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
 {{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}}}{{end}}
 {{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
@@ -433,9 +433,6 @@ const go_binary_tmpl = `{{/*
   {{end}}
 {{end}}
 
-{{define "Go.FindAny"}}{{end}}
-{{define "Go.FindAny.Any"}}{{File.Import "android.googlesource.com/platform/tools/gpu/binary/any"}}{{end}}
-
 {{define "Go.BinaryImports"}}
   {{if len .Structs}}
     {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
@@ -452,7 +449,6 @@ const go_binary_tmpl = `{{/*
   {{range .Structs}}
     {{range .Fields}}
       {{Call "Go.Import" .Type}}
-      {{Call "Go.ImportAny" .Type}}
     {{end}}
   {{end}}
 {{end}}

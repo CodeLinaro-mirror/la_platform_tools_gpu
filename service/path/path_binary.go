@@ -7,7 +7,6 @@ package path
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
@@ -108,7 +107,7 @@ func (*As) Class() binary.Class {
 }
 func doEncodeAs(e binary.Encoder, o *As) {
 	e.Object(o.Object)
-	any.Encode(e, o.Type)
+	schema.Any{}.Encode(e, o.Type)
 }
 func doDecodeAs(d binary.Decoder, o *As) {
 	if obj := d.Object(); obj != nil {
@@ -116,7 +115,7 @@ func doDecodeAs(d binary.Decoder, o *As) {
 	} else {
 		o.Object = nil
 	}
-	o.Type = any.Decode(d)
+	o.Type = schema.Any{}.Decode(d)
 }
 func (*binaryClassAs) ID() binary.ID      { return binaryIDAs }
 func (*binaryClassAs) New() binary.Object { return &As{} }
@@ -139,7 +138,7 @@ var schemaAs = &schema.Class{
 	Name:    "As",
 	Fields: []schema.Field{
 		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
-		{Declared: "Type", Type: &any.Any{}},
+		{Declared: "Type", Type: &schema.Any{}},
 	},
 }
 
@@ -464,7 +463,7 @@ func (*MapIndex) Class() binary.Class {
 }
 func doEncodeMapIndex(e binary.Encoder, o *MapIndex) {
 	e.Object(o.Map)
-	any.Encode(e, o.Key)
+	schema.Any{}.Encode(e, o.Key)
 }
 func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	if obj := d.Object(); obj != nil {
@@ -472,7 +471,7 @@ func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	} else {
 		o.Map = nil
 	}
-	o.Key = any.Decode(d)
+	o.Key = schema.Any{}.Decode(d)
 }
 func (*binaryClassMapIndex) ID() binary.ID      { return binaryIDMapIndex }
 func (*binaryClassMapIndex) New() binary.Object { return &MapIndex{} }
@@ -495,7 +494,7 @@ var schemaMapIndex = &schema.Class{
 	Name:    "MapIndex",
 	Fields: []schema.Field{
 		{Declared: "Map", Type: &schema.Interface{Name: "Path"}},
-		{Declared: "Key", Type: &any.Any{}},
+		{Declared: "Key", Type: &schema.Any{}},
 	},
 }
 

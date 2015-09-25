@@ -18,7 +18,6 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 // Interface is the Type descriptor for a field who's underlying type is dynamic.
 type Interface struct {
-	binary.Generate
 	Name string // The simple name of the type.
 }
 
@@ -48,7 +47,6 @@ func (i *Interface) Decode(d binary.Decoder) interface{} {
 
 // Variant is the Type descriptor for a field who's underlying type is dynamic, but is encoded with Variant not Object.
 type Variant struct {
-	binary.Generate
 	Name string // The simple name of the type.
 }
 

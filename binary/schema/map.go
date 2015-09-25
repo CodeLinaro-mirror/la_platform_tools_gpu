@@ -22,7 +22,6 @@ import (
 
 // Map is the Type descriptor for key/value stores.
 type Map struct {
-	binary.Generate
 	Alias     string // The alias this array type was given, if present
 	KeyType   Type   // The key type used.
 	ValueType Type   // The value type stored in the map.

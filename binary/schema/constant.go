@@ -17,20 +17,16 @@ package schema
 import (
 	"fmt"
 	"reflect"
-
-	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type Constants []ConstantSet
 
 type ConstantSet struct {
-	binary.Generate
 	Type    Type       // The type of the constant.
 	Entries []Constant // The constant values
 }
 
 type Constant struct {
-	binary.Generate
 	Name  string
 	Value interface{}
 }

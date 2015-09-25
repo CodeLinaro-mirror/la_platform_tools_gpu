@@ -23,7 +23,6 @@ import (
 	"strings"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
 )
@@ -143,7 +142,7 @@ func TestInterfaceVsAny(t *testing.T) {
 
 	s := parseStruct(t, "S", source)
 	for _, f := range s.Fields {
-		_, isAny := f.Type.(*any.Any)
+		_, isAny := f.Type.(*schema.Any)
 		_, isInt := f.Type.(*schema.Interface)
 		if strings.HasPrefix(f.Name(), "any") && !isAny {
 			t.Errorf("Field '%s' has unexpected type %T", f.Name(), f.Type)

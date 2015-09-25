@@ -7,7 +7,6 @@ package builder
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
@@ -80,7 +79,7 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 	for i := range o.Sli {
 		e.Bool(o.Sli[i])
 	}
-	any.Encode(e, o.Any)
+	schema.Any{}.Encode(e, o.Any)
 	if o.Ptr != nil {
 		e.Object(o.Ptr)
 	} else {
@@ -101,7 +100,7 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 			o.Sli[i] = bool(d.Bool())
 		}
 	}
-	o.Any = any.Decode(d)
+	o.Any = schema.Any{}.Decode(d)
 	if obj := d.Object(); obj != nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
@@ -142,7 +141,7 @@ var schematestAtom = &schema.Class{
 		{Declared: "api", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Sli", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
-		{Declared: "Any", Type: &any.Any{}},
+		{Declared: "Any", Type: &schema.Any{}},
 		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Name: "testStruct", ID: (*testStruct)(nil).Class().ID()}}},
 		{Declared: "Map", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
 	},

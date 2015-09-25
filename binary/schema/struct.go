@@ -22,7 +22,6 @@ import (
 
 // Struct is the Type descriptor for an binary.Object typed value.
 type Struct struct {
-	binary.Generate
 	Name string    // The simple name of the type.
 	ID   binary.ID // The unique type identifier for the Object.
 }

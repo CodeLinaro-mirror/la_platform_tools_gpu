@@ -22,18 +22,16 @@ import (
 
 // Class represents an encodable object type with a type ID.
 type Class struct {
-	binary.Generate `java:"SchemaClass"`
-	TypeID          binary.ID       // The unique type identifier for the Object.
-	Package         string          // The package that declared the struct.
-	Name            string          // The simple name of the Object.
-	Exported        bool            // Whether the class is exported from it's package
-	Fields          FieldList       // Descriptions of the fields of the Object.
-	Metadata        []binary.Object // The metadata for the class.
+	TypeID   binary.ID       // The unique type identifier for the Object.
+	Package  string          // The package that declared the struct.
+	Name     string          // The simple name of the Object.
+	Exported bool            // Whether the class is exported from it's package
+	Fields   FieldList       // Descriptions of the fields of the Object.
+	Metadata []binary.Object // The metadata for the class.
 }
 
 // Field represents a name/type pair for a field in an Object.
 type Field struct {
-	binary.Generate
 	Declared string // The name of the field.
 	Type     Type   // The type stored in the field.
 }

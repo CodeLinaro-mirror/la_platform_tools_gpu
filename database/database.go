@@ -19,7 +19,6 @@ import (
 	"crypto/sha1"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -72,7 +71,7 @@ func Hash(v interface{}) (binary.ID, error) {
 	id := binary.ID{}
 	h := sha1.New()
 	e := cyclic.Encoder(vle.Writer(h))
-	o, err := any.Box(v)
+	o, err := binary.Box(v)
 	if err != nil {
 		return id, err
 	}

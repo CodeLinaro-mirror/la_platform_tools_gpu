@@ -22,7 +22,6 @@ import (
 
 // Pointer is the Type descriptor for pointers.
 type Pointer struct {
-	binary.Generate
 	Type Type // The pointed to type.
 }
 

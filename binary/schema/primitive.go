@@ -22,9 +22,7 @@ import (
 )
 
 // Method denotes the encoding/decoding method a primitive type will use.
-type Method int
-
-// binary: Method.String = false
+type Method uint8
 
 const (
 	ID Method = iota
@@ -85,7 +83,6 @@ func init() {
 // Primitive is the kind for primitive types with corresponding direct methods on
 // Encoder and Decoder
 type Primitive struct {
-	binary.Generate
 	Name   string // The simple name of the type.
 	Method Method // The enocde/decode method to use.
 }

@@ -8,7 +8,6 @@ package builder
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -700,7 +699,7 @@ func (*Set) Class() binary.Class {
 }
 func doEncodeSet(e binary.Encoder, o *Set) {
 	e.Object(o.Path)
-	any.Encode(e, o.Value)
+	schema.Any{}.Encode(e, o.Value)
 }
 func doDecodeSet(d binary.Decoder, o *Set) {
 	if obj := d.Object(); obj != nil {
@@ -708,7 +707,7 @@ func doDecodeSet(d binary.Decoder, o *Set) {
 	} else {
 		o.Path = nil
 	}
-	o.Value = any.Decode(d)
+	o.Value = schema.Any{}.Decode(d)
 }
 func (*binaryClassSet) ID() binary.ID      { return binaryIDSet }
 func (*binaryClassSet) New() binary.Object { return &Set{} }
@@ -731,7 +730,7 @@ var schemaSet = &schema.Class{
 	Name:    "Set",
 	Fields: []schema.Field{
 		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
-		{Declared: "Value", Type: &any.Any{}},
+		{Declared: "Value", Type: &schema.Any{}},
 	},
 }
 

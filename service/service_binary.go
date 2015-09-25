@@ -9,7 +9,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -1127,7 +1126,7 @@ func (*callSet) Class() binary.Class {
 }
 func doEncodecallSet(e binary.Encoder, o *callSet) {
 	e.Object(o.p)
-	any.Encode(e, o.v)
+	schema.Any{}.Encode(e, o.v)
 }
 func doDecodecallSet(d binary.Decoder, o *callSet) {
 	if obj := d.Object(); obj != nil {
@@ -1135,7 +1134,7 @@ func doDecodecallSet(d binary.Decoder, o *callSet) {
 	} else {
 		o.p = nil
 	}
-	o.v = any.Decode(d)
+	o.v = schema.Any{}.Decode(d)
 }
 func (*binaryClasscallSet) ID() binary.ID      { return binaryIDcallSet }
 func (*binaryClasscallSet) New() binary.Object { return &callSet{} }
@@ -1158,7 +1157,7 @@ var schemacallSet = &schema.Class{
 	Name:    "callSet",
 	Fields: []schema.Field{
 		{Declared: "p", Type: &schema.Interface{Name: "path.Path"}},
-		{Declared: "v", Type: &any.Any{}},
+		{Declared: "v", Type: &schema.Any{}},
 	},
 }
 
@@ -1207,10 +1206,10 @@ func (*resultGet) Class() binary.Class {
 	return (*binaryClassresultGet)(nil)
 }
 func doEncoderesultGet(e binary.Encoder, o *resultGet) {
-	any.Encode(e, o.value)
+	schema.Any{}.Encode(e, o.value)
 }
 func doDecoderesultGet(d binary.Decoder, o *resultGet) {
-	o.value = any.Decode(d)
+	o.value = schema.Any{}.Decode(d)
 }
 func (*binaryClassresultGet) ID() binary.ID      { return binaryIDresultGet }
 func (*binaryClassresultGet) New() binary.Object { return &resultGet{} }
@@ -1232,7 +1231,7 @@ var schemaresultGet = &schema.Class{
 	Package: "service",
 	Name:    "resultGet",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &any.Any{}},
+		{Declared: "value", Type: &schema.Any{}},
 	},
 }
 
