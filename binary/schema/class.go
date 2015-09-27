@@ -101,7 +101,12 @@ func (c *Entity) DecodeTo(d binary.Decoder, object binary.Object) {
 
 func (e *Entity) Signature() string {
 	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Package, ".", e.Identity)
+	fmt.Fprint(b, e.Package, ".")
+	if e.Identity != "" {
+		fmt.Fprint(b, e.Identity)
+	} else {
+		fmt.Fprint(b, e.Name)
+	}
 	if e.Version != "" {
 		fmt.Fprint(b, "@", e.Version)
 	}
