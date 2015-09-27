@@ -83,7 +83,12 @@ func init() {
 		GfxApi("test", "gfxapi_test.api")
 		GfxApi("gles", "gles.api")
 		// The codergen rule
-		Codergen("codergen", "--go", "--java", javabase.Name(), "-cpp", cppcoder.Name(), GPURoot+"/...")
+		Codergen("codergen",
+			"--signatures", gpusrc.Child("signatures.txt").Name(),
+			"--go",
+			"--java", javabase.Name(),
+			"-cpp", cppcoder.Name(),
+			GPURoot+"/...")
 		//
 		graph.List("code").DependsOn("embed", "apic", "codergen")
 		// The native code rules

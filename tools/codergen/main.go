@@ -31,12 +31,13 @@ import (
 )
 
 var (
-	verbose = flag.Bool("v", false, "verbose messages")
-	nowrite = flag.Bool("n", false, "don't write the files")
-	golang  = flag.Bool("go", false, "generate go code")
-	java    = flag.String("java", "", "the path to generate files in")
-	cpp     = flag.String("cpp", "", "the path to generate files in")
-	workers = flag.Int("workers", 15, "The numer of output workers to use")
+	verbose    = flag.Bool("v", false, "verbose messages")
+	nowrite    = flag.Bool("n", false, "don't write the files")
+	golang     = flag.Bool("go", false, "generate go code")
+	java       = flag.String("java", "", "the path to generate files in")
+	cpp        = flag.String("cpp", "", "the path to generate files in")
+	workers    = flag.Int("workers", 15, "The numer of output workers to use")
+	signatures = flag.String("signatures", "", "the signature file to generate")
 )
 
 const usage = `codergen: A tool to generate coders for go structs.
@@ -160,6 +161,14 @@ func run() error {
 			fmt.Print(err)
 		}
 		return errs.list[0]
+	}
+	if *signatures != "" {
+		f, err := os.Create(*signatures)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+		generate.WriteAllSignatures(f, modules)
 	}
 	return nil
 }

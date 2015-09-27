@@ -16,6 +16,9 @@
 package schema
 
 import (
+	"fmt"
+	"io"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
@@ -54,4 +57,35 @@ func Of(class binary.Class) *Entity {
 // If there is no match, it will return nil.
 func Lookup(id binary.ID) *Entity {
 	return Of(registry.Global.Lookup(id))
+}
+
+func printTag(w io.Writer, t Type) {
+	switch t := t.(type) {
+	case *Primitive:
+		fmt.Fprint(w, t.Method)
+	case *Struct:
+		fmt.Fprint(w, "$")
+	case *Pointer:
+		fmt.Fprint(w, "*")
+		printTag(w, t.Type)
+	case *Interface:
+		fmt.Fprint(w, "?", t)
+	case *Variant:
+		fmt.Fprint(w, "&", t)
+	case *Any:
+		fmt.Fprint(w, "~", t)
+	case *Slice:
+		fmt.Fprint(w, "[]")
+		printTag(w, t.ValueType)
+	case *Array:
+		fmt.Fprint(w, "[", t.Size, "]")
+		printTag(w, t.ValueType)
+	case *Map:
+		fmt.Fprint(w, "map[")
+		printTag(w, t.KeyType)
+		fmt.Fprint(w, "]")
+		printTag(w, t.ValueType)
+	default:
+		panic(fmt.Errorf("Unknown type %T generating signature", t))
+	}
 }

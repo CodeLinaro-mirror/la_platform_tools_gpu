@@ -169,6 +169,22 @@ func TestNameAffectsID(t *testing.T) {
 	}
 }
 
+func TestNameOveride(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
+	b := parseStruct(t, "YourStruct", "type YourStruct struct {binary.Generate `identity:\"MyStruct\"`}")
+	if a.TypeID != b.TypeID {
+		t.Errorf("Identity change changed ID")
+	}
+}
+
+func TestVersionOveride(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate `version:\"1\"`}")
+	if a.TypeID == b.TypeID {
+		t.Errorf("Version change did not change ID")
+	}
+}
+
 func TestFieldCountAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
@@ -180,8 +196,8 @@ func TestFieldCountAffectsID(t *testing.T) {
 func TestFieldNameAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; b int}")
-	if a.TypeID == b.TypeID {
-		t.Errorf("Field name did not change ID")
+	if a.TypeID != b.TypeID {
+		t.Errorf("Field name changed ID")
 	}
 }
 

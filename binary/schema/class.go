@@ -15,6 +15,8 @@
 package schema
 
 import (
+	"bytes"
+	"fmt"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -22,17 +24,19 @@ import (
 
 // Entity represents an encodable object type with a type ID.
 type Entity struct {
-	TypeID   binary.ID       // The unique type identifier for the Object.
+	TypeID   binary.ID       // The unique type identifier for the class.
 	Package  string          // The package that declared the struct.
-	Name     string          // The simple name of the Object.
+	Name     string          // The display name of the class, does not affect the signature.
+	Identity string          // The true name of the class.
+	Version  string          // The version string of the class, if set.
 	Exported bool            // Whether the class is exported from it's package
-	Fields   FieldList       // Descriptions of the fields of the Object.
+	Fields   FieldList       // Descriptions of the fields of the class.
 	Metadata []binary.Object // The metadata for the class.
 }
 
 // Field represents a name/type pair for a field in an Object.
 type Field struct {
-	Declared string // The name of the field.
+	Declared string // The name of the field, does not affect the signature.
 	Type     Type   // The type stored in the field.
 }
 
@@ -93,4 +97,21 @@ func (c *Entity) Decode(d binary.Decoder) binary.Object {
 
 func (c *Entity) DecodeTo(d binary.Decoder, object binary.Object) {
 	c.doDecode(d, object.(*Object))
+}
+
+func (e *Entity) Signature() string {
+	b := &bytes.Buffer{}
+	fmt.Fprint(b, e.Package, ".", e.Identity)
+	if e.Version != "" {
+		fmt.Fprint(b, "@", e.Version)
+	}
+	fmt.Fprint(b, "{")
+	for i, f := range e.Fields {
+		if i != 0 {
+			fmt.Fprint(b, ",")
+		}
+		printTag(b, f.Type)
+	}
+	fmt.Fprint(b, "}")
+	return b.String()
 }

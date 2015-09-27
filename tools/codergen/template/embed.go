@@ -232,6 +232,8 @@ const go_binary_tmpl = `{{/*
       TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
       Name:║"{{.Name}}",¶
+      {{if .Identity}}Identity:║"{{.Identity}}",¶{{end}}
+      {{if .Version}}Version:║"{{.Version}}",¶{{end}}
       {{if not (len .Fields)}}
         Fields:║[]schema.Field{},¶
       {{else}}

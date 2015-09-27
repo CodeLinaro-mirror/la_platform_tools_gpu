@@ -15,8 +15,6 @@
 package generate
 
 import (
-	"bytes"
-	"fmt"
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -29,8 +27,7 @@ import (
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
 	schema.Entity
-	Tags      Tags   // The tags associated with the type.
-	Signature string // The full string type signature of the Struct.
+	Tags Tags // The tags associated with the type.
 }
 
 func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
@@ -59,6 +56,8 @@ func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 		s.Fields = append(s.Fields, f)
 	}
 	if tagged {
+		s.Identity = s.Tag("identity", "")
+		s.Version = s.Tag("version", "")
 		s.UpdateID()
 		m.Structs = append(m.Structs, s)
 	}
@@ -91,17 +90,7 @@ func (m *Module) HasStructTag(name string) bool {
 
 // UpdateID recalculates the struct ID from the current signature.
 func (s *Struct) UpdateID() {
-	b := &bytes.Buffer{}
-	fmt.Fprintf(b, "struct %s.%s {", s.Package, s.Name)
-	for i, f := range s.Fields {
-		if i != 0 {
-			fmt.Fprint(b, ",")
-		}
-		fmt.Fprintf(b, " %s:%s", f.Name(), f.Type)
-	}
-	fmt.Fprint(b, " }")
-	s.Signature = b.String()
-	s.TypeID = binary.NewID([]byte(s.Signature))
+	s.TypeID = binary.NewID([]byte(s.Signature()))
 }
 
 type sortEntry struct {

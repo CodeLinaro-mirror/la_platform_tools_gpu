@@ -143,6 +143,8 @@ func encodeClass(e binary.Encoder, c *Entity) {
 	e.ID(c.TypeID)
 	e.String(c.Package)
 	e.String(c.Name)
+	e.String(c.Identity)
+	e.String(c.Version)
 	e.Bool(c.Exported)
 	e.Uint32(uint32(len(c.Fields)))
 	for _, f := range c.Fields {
@@ -159,6 +161,8 @@ func decodeClass(d binary.Decoder, c *Entity) {
 	c.TypeID = d.ID()
 	c.Package = d.String()
 	c.Name = d.String()
+	c.Identity = d.String()
+	c.Version = d.String()
 	c.Exported = d.Bool()
 	c.Fields = make(FieldList, d.Uint32())
 	for i := range c.Fields {
