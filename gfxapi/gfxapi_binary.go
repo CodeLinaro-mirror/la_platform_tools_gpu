@@ -64,7 +64,7 @@ var schemaTexture = &schema.Entity{
 	Package: "gfxapi",
 	Name:    "Texture",
 	Fields: []schema.Field{
-		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "image.Info", ID: (*image.Info)(nil).Class().ID()}}},
+		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}}},
 	},
 }
 

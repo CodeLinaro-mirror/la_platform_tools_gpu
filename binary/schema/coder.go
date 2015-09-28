@@ -58,8 +58,7 @@ func encodeType(e binary.Encoder, t Type) {
 		e.Uint8(uint8(t.Method))
 	case *Struct:
 		e.Uint8(uint8(StructTag))
-		e.String(t.Name)
-		e.ID(t.ID)
+		e.ID(t.Entity.ID())
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
 		encodeType(e, t.Type)
@@ -100,8 +99,7 @@ func decodeType(d binary.Decoder) Type {
 		return t
 	case StructTag:
 		t := &Struct{}
-		t.Name = d.String()
-		t.ID = d.ID()
+		t.Entity = Lookup(d.ID())
 		return t
 	case PointerTag:
 		t := &Pointer{}

@@ -151,7 +151,7 @@ var schemaInfo = &schema.Entity{
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Blob", ID: (*path.Blob)(nil).Class().ID()}}},
+		{Declared: "Data", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Blob)(nil).Class())}}},
 	},
 }
 

@@ -108,8 +108,8 @@ var schemaBuildReport = &schema.Entity{
 	Package: "builder",
 	Name:    "BuildReport",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
 	},
 }
 
@@ -242,9 +242,9 @@ var schemaGetFramebufferColor = &schema.Entity{
 	Package: "builder",
 	Name:    "GetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
-		{Declared: "Settings", Type: &schema.Struct{Name: "service.RenderSettings", ID: (*service.RenderSettings)(nil).Class().ID()}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
+		{Declared: "Settings", Type: &schema.Struct{Entity: schema.Of((*service.RenderSettings)(nil).Class())}},
 	},
 }
 
@@ -297,8 +297,8 @@ var schemaGetFramebufferDepth = &schema.Entity{
 	Package: "builder",
 	Name:    "GetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
 	},
 }
 
@@ -341,7 +341,7 @@ var schemaGetHierarchy = &schema.Entity{
 	Package: "builder",
 	Name:    "GetHierarchy",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 	},
 }
 
@@ -384,7 +384,7 @@ var schemaGetResourceData = &schema.Entity{
 	Package: "builder",
 	Name:    "GetResourceData",
 	Fields: []schema.Field{
-		{Declared: "Path", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Resource", ID: (*path.Resource)(nil).Class().ID()}}},
+		{Declared: "Path", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Resource)(nil).Class())}}},
 	},
 }
 
@@ -427,7 +427,7 @@ var schemaGetResources = &schema.Entity{
 	Package: "builder",
 	Name:    "GetResources",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 	},
 }
 
@@ -470,7 +470,7 @@ var schemaGetState = &schema.Entity{
 	Package: "builder",
 	Name:    "GetState",
 	Fields: []schema.Field{
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
 	},
 }
 
@@ -525,8 +525,8 @@ var schemaGetTimingInfo = &schema.Entity{
 	Package: "builder",
 	Name:    "GetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 		{Declared: "Flags", Type: &schema.Primitive{Name: "service.TimingFlags", Method: schema.Int32}},
 	},
 }
@@ -624,8 +624,8 @@ var schemaRenderFramebufferColor = &schema.Entity{
 	Package: "builder",
 	Name:    "RenderFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "WireframeMode", Type: &schema.Primitive{Name: "service.WireframeMode", Method: schema.Int32}},
@@ -685,8 +685,8 @@ var schemaRenderFramebufferDepth = &schema.Entity{
 	Package: "builder",
 	Name:    "RenderFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
 		{Declared: "FramebufferWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FramebufferHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -866,7 +866,7 @@ var schemacaptureFramebufferDimensions = &schema.Entity{
 	Package: "builder",
 	Name:    "captureFramebufferDimensions",
 	Fields: []schema.Field{
-		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions", ID: (*atomFramebufferDimensions)(nil).Class().ID()}}},
+		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*atomFramebufferDimensions)(nil).Class())}}},
 	},
 }
 
@@ -915,6 +915,6 @@ var schemagetCaptureFramebufferDimensions = &schema.Entity{
 	Package: "builder",
 	Name:    "getCaptureFramebufferDimensions",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 	},
 }

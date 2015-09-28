@@ -63,7 +63,7 @@ var schematestStruct = &schema.Entity{
 	Name:    "testStruct",
 	Fields: []schema.Field{
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Name: "testStruct", ID: (*testStruct)(nil).Class().ID()}}},
+		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*testStruct)(nil).Class())}}},
 	},
 }
 
@@ -142,7 +142,7 @@ var schematestAtom = &schema.Entity{
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Sli", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
 		{Declared: "Any", Type: &schema.Any{}},
-		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Name: "testStruct", ID: (*testStruct)(nil).Class().ID()}}},
+		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*testStruct)(nil).Class())}}},
 		{Declared: "Map", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
 	},
 }

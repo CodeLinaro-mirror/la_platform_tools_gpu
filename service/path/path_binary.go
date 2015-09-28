@@ -216,7 +216,7 @@ var schemaAtoms = &schema.Entity{
 	Package: "path",
 	Name:    "Atoms",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
 
@@ -261,7 +261,7 @@ var schemaAtom = &schema.Entity{
 	Package: "path",
 	Name:    "Atom",
 	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atoms", ID: (*Atoms)(nil).Class().ID()}}},
+		{Declared: "Atoms", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atoms)(nil).Class())}}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -417,7 +417,7 @@ var schemaHierarchy = &schema.Entity{
 	Package: "path",
 	Name:    "Hierarchy",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
 
@@ -543,7 +543,7 @@ var schemaMemoryRange = &schema.Entity{
 	Package: "path",
 	Name:    "MemoryRange",
 	Fields: []schema.Field{
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -599,8 +599,8 @@ var schemaReport = &schema.Entity{
 	Package: "path",
 	Name:    "Report",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
-		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "Device", ID: (*Device)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Device)(nil).Class())}}},
 	},
 }
 
@@ -646,7 +646,7 @@ var schemaResource = &schema.Entity{
 	Name:    "Resource",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 	},
 }
 
@@ -689,7 +689,7 @@ var schemaResources = &schema.Entity{
 	Package: "path",
 	Name:    "Resources",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
 
@@ -777,7 +777,7 @@ var schemaState = &schema.Entity{
 	Package: "path",
 	Name:    "State",
 	Fields: []schema.Field{
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 	},
 }
 

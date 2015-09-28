@@ -349,9 +349,9 @@ var schemaMemoryInfo = &schema.Entity{
 	Name:    "MemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		{Declared: "Reads", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
-		{Declared: "Writes", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
-		{Declared: "Observed", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
+		{Declared: "Reads", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Entity: schema.Of((*memory.Range)(nil).Class())}}},
+		{Declared: "Writes", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Entity: schema.Of((*memory.Range)(nil).Class())}}},
+		{Declared: "Observed", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Entity: schema.Of((*memory.Range)(nil).Class())}}},
 	},
 }
 
@@ -476,7 +476,7 @@ var schemaReport = &schema.Entity{
 	Package: "service",
 	Name:    "Report",
 	Fields: []schema.Field{
-		{Declared: "Items", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ReportItem", ID: (*ReportItem)(nil).Class().ID()}}},
+		{Declared: "Items", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*ReportItem)(nil).Class())}}},
 	},
 }
 
@@ -568,7 +568,7 @@ var schemaResources = &schema.Entity{
 	Package: "service",
 	Name:    "Resources",
 	Fields: []schema.Field{
-		{Declared: "Textures", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo", ID: (*ResourceInfo)(nil).Class().ID()}}},
+		{Declared: "Textures", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*ResourceInfo)(nil).Class())}}},
 	},
 }
 
@@ -629,8 +629,8 @@ var schemaSchema = &schema.Entity{
 	Package: "service",
 	Name:    "Schema",
 	Fields: []schema.Field{
-		{Declared: "Classes", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Entity", ID: (*schema.Entity)(nil).Class().ID()}}}},
-		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "schema.ConstantSet", ID: (*schema.ConstantSet)(nil).Class().ID()}}},
+		{Declared: "Classes", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*schema.Entity)(nil).Class())}}}},
+		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*schema.ConstantSet)(nil).Class())}}},
 	},
 }
 
@@ -693,9 +693,9 @@ var schemaTimingInfo = &schema.Entity{
 	Package: "service",
 	Name:    "TimingInfo",
 	Fields: []schema.Field{
-		{Declared: "PerCommand", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomTimer", ID: (*AtomTimer)(nil).Class().ID()}}},
-		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
-		{Declared: "PerFrame", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
+		{Declared: "PerCommand", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*AtomTimer)(nil).Class())}}},
+		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*AtomRangeTimer)(nil).Class())}}},
+		{Declared: "PerFrame", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*AtomRangeTimer)(nil).Class())}}},
 	},
 }
 
@@ -892,9 +892,9 @@ var schemacallGetFramebufferColor = &schema.Entity{
 	Package: "service",
 	Name:    "callGetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "after", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
-		{Declared: "settings", Type: &schema.Struct{Name: "RenderSettings", ID: (*RenderSettings)(nil).Class().ID()}},
+		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "after", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
+		{Declared: "settings", Type: &schema.Struct{Entity: schema.Of((*RenderSettings)(nil).Class())}},
 	},
 }
 
@@ -949,8 +949,8 @@ var schemacallGetFramebufferDepth = &schema.Entity{
 	Package: "service",
 	Name:    "callGetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "after", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
+		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "after", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Atom)(nil).Class())}}},
 	},
 }
 
@@ -1036,8 +1036,8 @@ var schemacallGetTimingInfo = &schema.Entity{
 	Package: "service",
 	Name:    "callGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
-		{Declared: "capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}},
+		{Declared: "capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 		{Declared: "flags", Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32}},
 	},
 }
@@ -1282,7 +1282,7 @@ var schemaresultGetCaptures = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetCaptures",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}}},
 	},
 }
 
@@ -1333,7 +1333,7 @@ var schemaresultGetDevices = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetDevices",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Device)(nil).Class())}}}},
 	},
 }
 
@@ -1378,7 +1378,7 @@ var schemaresultGetFramebufferColor = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.ImageInfo", ID: (*path.ImageInfo)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.ImageInfo)(nil).Class())}}},
 	},
 }
 
@@ -1423,7 +1423,7 @@ var schemaresultGetFramebufferDepth = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.ImageInfo", ID: (*path.ImageInfo)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.ImageInfo)(nil).Class())}}},
 	},
 }
 
@@ -1458,7 +1458,7 @@ var schemaresultGetSchema = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetSchema",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Schema", ID: (*Schema)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Schema)(nil).Class())}},
 	},
 }
 
@@ -1501,7 +1501,7 @@ var schemaresultGetTimingInfo = &schema.Entity{
 	Package: "service",
 	Name:    "resultGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.TimingInfo", ID: (*path.TimingInfo)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.TimingInfo)(nil).Class())}}},
 	},
 }
 
@@ -1544,7 +1544,7 @@ var schemaresultImportCapture = &schema.Entity{
 	Package: "service",
 	Name:    "resultImportCapture",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 	},
 }
 
@@ -1587,7 +1587,7 @@ var schemaresultLoadCapture = &schema.Entity{
 	Package: "service",
 	Name:    "resultLoadCapture",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*path.Capture)(nil).Class())}}},
 	},
 }
 

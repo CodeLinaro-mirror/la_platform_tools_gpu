@@ -110,7 +110,7 @@ var schemaListNode = &schema.Entity{
 	Name:    "ListNode",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
+		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
 }
 
@@ -492,7 +492,7 @@ var schemacallSetStruct = &schema.Entity{
 	Package: "test",
 	Name:    "callSetStruct",
 	Fields: []schema.Field{
-		{Declared: "s", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
+		{Declared: "s", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
 	},
 }
 
@@ -640,7 +640,7 @@ var schemaresultGetListNodeChain = &schema.Entity{
 	Package: "test",
 	Name:    "resultGetListNodeChain",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
 }
 
@@ -697,7 +697,7 @@ var schemaresultGetListNodeChainArray = &schema.Entity{
 	Package: "test",
 	Name:    "resultGetListNodeChainArray",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}}},
 	},
 }
 
@@ -777,7 +777,7 @@ var schemaresultGetSingleListNode = &schema.Entity{
 	Package: "test",
 	Name:    "resultGetSingleListNode",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
 }
 
@@ -812,7 +812,7 @@ var schemaresultGetStruct = &schema.Entity{
 	Package: "test",
 	Name:    "resultGetStruct",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
 	},
 }
 
@@ -847,7 +847,7 @@ var schemaresultResolveResource = &schema.Entity{
 	Package: "test",
 	Name:    "resultResolveResource",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Resource", ID: (*Resource)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Resource)(nil).Class())}},
 	},
 }
 
