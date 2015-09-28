@@ -57,6 +57,7 @@ type Module struct {
 	Constants  schema.Constants  // All the const declarations and their types.
 	Services   []*Service        // The service interfaces discovered.
 	Imports    Imports           // The set of package imports encountered.
+	binary     *types.Interface  // The binary object interface type.
 }
 
 // Import represents a go import declaration.
@@ -102,7 +103,7 @@ func (m *Module) ModuleAndName(v interface{}) (*Module, string) {
 	case Result:
 		name = v.Struct.Name
 	case *schema.Struct:
-		name = v.Name
+		name = v.Typename()
 	case *schema.Interface:
 		name = v.Name
 	case *schema.Variant:
@@ -210,9 +211,23 @@ func (m *Module) FindImport(name string) *Module {
 	return nil
 }
 
+func fakeStruct(structs map[*types.Struct]*Struct, pkg *types.Package, module string, typename string) {
+	t := findStruct(pkg, module, typename)
+	if t == nil {
+		return
+	}
+	if _, found := structs[t]; found {
+		return
+	}
+	s := &Struct{Entity: schema.Entity{Package: module, Name: typename, Exported: true}}
+	s.UpdateID()
+	structs[t] = s
+}
+
 // From processes scanned source code to produce the module set it represents.
 func From(scanner *scan.Scanner) (Modules, error) {
 	result := Modules{}
+	var m *Module
 	for _, dir := range scanner.Directories {
 		if !dir.Scan {
 			continue
@@ -229,6 +244,31 @@ func From(scanner *scan.Scanner) (Modules, error) {
 			m.Modules = &result
 			result = append(result, m)
 		}
+	}
+	// Now resolve all the cross type depedancies
+	structs := map[*types.Struct]*Struct{}
+	for _, m = range result {
+		for _, s := range m.Structs {
+			structs[s.Raw] = s
+		}
+	}
+	for _, m = range result {
+		fakeStruct(structs, m.Source.Types, schemaPackage, "Entity")
+		fakeStruct(structs, m.Source.Types, schemaPackage, "ConstantSet")
+		for _, s := range m.Structs {
+			for _, u := range s.unresolved {
+				if e, ok := structs[u.t]; ok {
+					u.s.Entity = &e.Entity
+				} else {
+					panic(fmt.Errorf("No match in %s for %s (%T)", s.Name, u.t.String(), u.t))
+				}
+			}
+		}
+	}
+	for _, m = range result {
+		m.finaliseStructs()
+		m.finaliseConstants()
+		m.finaliseServices()
 	}
 	return result, nil
 }
@@ -254,8 +294,8 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		Import:     path.Clean(src.Directory.ImportPath),
 		Directives: directives,
 		IsTest:     isTest,
+		binary:     findInterface(src.Types, binaryPackage, "Object"),
 	}
-	b := findBinaryObject(m.Source.Types)
 	scope := src.Types.Scope()
 	for _, name := range scope.Names() {
 		obj := scope.Lookup(name)
@@ -274,10 +314,10 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		if n, ok := obj.(*types.TypeName); ok {
 			if t, ok := n.Type().(*types.Named); ok {
 				if _, ok := t.Underlying().(*types.Struct); ok {
-					m.addStruct(n, b)
+					m.addStruct(n)
 				}
 				if _, ok := t.Underlying().(*types.Interface); ok {
-					if err := m.addService(n, b); err != nil {
+					if err := m.addService(n); err != nil {
 						return nil, err
 					}
 				}
@@ -293,8 +333,5 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 			}
 		}
 	}
-	m.finaliseStructs()
-	m.finaliseConstants()
-	m.finaliseServices()
 	return m, nil
 }

@@ -28,19 +28,36 @@ import (
 const (
 	binaryPackage  = "android.googlesource.com/platform/tools/gpu/binary"
 	binaryGenerate = binaryPackage + ".Generate"
+	schemaPackage  = "android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 // findBinaryObject looks for the binary.Object type in the imports, returning it
 // if it is found, or nil if it is not.
-func findBinaryObject(pkg *types.Package) *types.Interface {
+func findType(pkg *types.Package, module string, typename string) types.Type {
 	for _, p := range pkg.Imports() {
-		if p.Path() == binaryPackage {
-			if o := p.Scope().Lookup("Object"); o != nil {
-				return o.Type().Underlying().(*types.Interface)
+		if p.Path() == module {
+			if o := p.Scope().Lookup(typename); o != nil {
+				return o.Type().Underlying()
 			}
 		}
 	}
 	return nil
+}
+
+func findInterface(pkg *types.Package, module string, typename string) *types.Interface {
+	t := findType(pkg, module, typename)
+	if t == nil {
+		return nil
+	}
+	return t.(*types.Interface)
+}
+
+func findStruct(pkg *types.Package, module string, typename string) *types.Struct {
+	t := findType(pkg, module, typename)
+	if t == nil {
+		return nil
+	}
+	return t.(*types.Struct)
 }
 
 func spaceToUnderscore(r rune) rune {
@@ -51,7 +68,8 @@ func spaceToUnderscore(r rune) rune {
 }
 
 // fromType creates a appropriate schema.Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, binObj *types.Interface) schema.Type {
+func (m *Module) fromType(from types.Type, s *Struct, tags Tags) schema.Type {
+	pkg := m.Source.Types
 	alias := ""
 	fullname := types.TypeString(from, types.RelativeTo(pkg)) // fully-qualified name including full package path
 	name := strings.Map(spaceToUnderscore, path.Base(fullname))
@@ -60,7 +78,7 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, 
 		from = from.Underlying()
 		p := named.Obj().Pkg()
 		if p != nil && p != pkg {
-			imports.Add(Import{Name: p.Name(), Path: p.Path()})
+			m.Imports.Add(Import{Name: p.Name(), Path: p.Path()})
 		}
 	}
 	gotype := strings.Map(spaceToUnderscore, from.String())
@@ -81,15 +99,15 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, 
 			return &schema.Primitive{Name: name, Method: m}
 		}
 	case *types.Pointer:
-		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tags, imports, binObj)}
+		return &schema.Pointer{Type: m.fromType(from.Elem(), s, tags)}
 	case *types.Interface:
-		if binObj != nil && !types.Implements(from, binObj) {
+		if m.binary != nil && !types.Implements(from, m.binary) {
 			return &schema.Any{}
 		} else {
 			return &schema.Interface{Name: name}
 		}
 	case *types.Slice:
-		vt := fromType(pkg, from.Elem(), "", imports, binObj)
+		vt := m.fromType(from.Elem(), s, "")
 		if tags.Flag("variant") {
 			if it, ok := vt.(*schema.Interface); ok {
 				vt = &schema.Variant{Name: it.Name}
@@ -105,16 +123,20 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, 
 		}
 		return &schema.Array{
 			Alias:     alias,
-			ValueType: fromType(pkg, from.Elem(), "", imports, binObj),
+			ValueType: m.fromType(from.Elem(), s, ""),
 			Size:      length,
 		}
 	case *types.Map:
 		return &schema.Map{
 			Alias:     alias,
-			KeyType:   fromType(pkg, from.Key(), "", imports, binObj),
-			ValueType: fromType(pkg, from.Elem(), "", imports, binObj),
+			KeyType:   m.fromType(from.Key(), s, ""),
+			ValueType: m.fromType(from.Elem(), s, ""),
 		}
+	case *types.Struct:
+		t := &schema.Struct{Relative: name}
+		s.unresolved = append(s.unresolved, unresolved{t, from})
+		return t
 	default:
-		return &schema.Struct{Name: name}
+		panic(fmt.Errorf("fromType found '%v' as  %T\n", from.String(), from))
 	}
 }

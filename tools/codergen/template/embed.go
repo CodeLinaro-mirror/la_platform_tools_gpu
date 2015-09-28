@@ -385,7 +385,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Schema.Primitive"}}&schema.Primitive{Name: "{{.Name}}", Method: schema.{{.Method}}}{{end}}
-{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID: (*{{.Name}})(nil).Class().ID()}{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Entity: schema.Of((*{{.Name}})(nil).Class())}{{end}}
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}

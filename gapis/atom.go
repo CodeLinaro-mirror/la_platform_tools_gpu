@@ -126,7 +126,7 @@ func newAtomClass(base *schema.Entity, meta *atom.Metadata) *atomClass {
 	// Find the observations, if present
 	for i, f := range base.Fields {
 		if s, ok := f.Type.(*schema.Struct); ok {
-			if s.ID == observationsId {
+			if s.Entity.ID() == observationsId {
 				class.observations = i
 				continue
 			}

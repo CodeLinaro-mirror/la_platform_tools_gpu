@@ -29,7 +29,7 @@ import (
 )
 
 func (m *Module) addConst(c *types.Const) {
-	t := fromType(m.Source.Types, c.Type(), "", &m.Imports, nil)
+	t := m.fromType(c.Type(), nil, "")
 	name := c.Name()
 	directive := fmt.Sprintf("%s#%s", t, name)
 	if d, found := m.Directives[directive]; found {

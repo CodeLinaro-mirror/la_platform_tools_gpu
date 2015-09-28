@@ -28,7 +28,7 @@ import (
 )
 
 var (
-	structType = &schema.Struct{Name: "TestObject"}
+	structType = &schema.Struct{Entity: &schema.Entity{Name: "TestObject"}}
 	fields     = []schema.Field{
 		{Declared: "u8", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "u16", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -63,8 +63,7 @@ func parseStructs(source string) []*Struct {
 	fakeFile := fmt.Sprintf(`
 	package fake
 	import "android.googlesource.com/platform/tools/gpu/binary"
-	type TestObject struct{}
-	func (*TestObject) Class() binary.Class { return nil }
+	type TestObject struct{binary.Generate}
 
 	%s`, source)
 	name := fmt.Sprintf("fake_%d.go", testId)
@@ -89,13 +88,13 @@ func parseStructs(source string) []*Struct {
 
 func parseStruct(t *testing.T, name string, source string) *Struct {
 	s := parseStructs(source)
-	if len(s) != 1 {
-		log.Fatalf("Parsed %d structs, expected 1", len(s))
+	for _, entry := range s {
+		if entry.Name == name {
+			return entry
+		}
 	}
-	if s[0].Name != name {
-		t.Errorf("Got struct %s, expected %s", s[0].Name, name)
-	}
-	return s[0]
+	log.Fatalf("Got %d structs, none of which are %q", len(s), name)
+	return nil
 }
 
 func TestEmpty(t *testing.T) {
@@ -107,8 +106,10 @@ func TestEmpty(t *testing.T) {
 
 func TestDisable(t *testing.T) {
 	s := parseStructs("type MyStruct struct {binary.Generate `disable:\"true\"`}")
-	if len(s) != 0 {
-		t.Errorf("Got %d structs, expected none", len(s))
+	for _, entry := range s {
+		if entry.Name == "MyStruct" {
+			t.Errorf("Generated disabled struct")
+		}
 	}
 }
 

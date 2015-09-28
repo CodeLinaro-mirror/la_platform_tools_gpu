@@ -15,6 +15,7 @@
 package generate
 
 import (
+	"fmt"
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -27,17 +28,28 @@ import (
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
 	schema.Entity
-	Tags Tags // The tags associated with the type.
+	Tags       Tags // The tags associated with the type.
+	Raw        *types.Struct
+	unresolved []unresolved // The set of unresolved schema.Struct objects.
 }
 
-func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
+type unresolved struct {
+	s *schema.Struct
+	t *types.Struct
+}
+
+func (m *Module) addStruct(n *types.TypeName) {
 	t := n.Type().Underlying().(*types.Struct)
-	s := &Struct{Entity: schema.Entity{
-		Name:     n.Name(),
-		Package:  m.Source.Types.Name(),
-		Exported: n.Exported(),
-	}}
+	s := &Struct{
+		Entity: schema.Entity{
+			Name:     n.Name(),
+			Package:  m.Source.Types.Name(),
+			Exported: n.Exported(),
+		},
+		Raw: t,
+	}
 	tagged := false
+	var invalidStruct error
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
 		tags := Tags(t.Tag(i))
@@ -52,13 +64,20 @@ func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 		if !decl.Anonymous() {
 			f.Declared = decl.Name()
 		}
-		f.Type = fromType(m.Source.Types, decl.Type(), tags, &m.Imports, b)
+		defer func() {
+			if r := recover(); r != nil && invalidStruct == nil {
+				invalidStruct = fmt.Errorf("Handling %v.%v gave error %v", s.Name, f.Name(), r)
+			}
+		}()
+		f.Type = m.fromType(decl.Type(), s, tags)
 		s.Fields = append(s.Fields, f)
 	}
 	if tagged {
+		if invalidStruct != nil {
+			panic(invalidStruct)
+		}
 		s.Identity = s.Tag("identity", "")
 		s.Version = s.Tag("version", "")
-		s.UpdateID()
 		m.Structs = append(m.Structs, s)
 	}
 }
@@ -102,7 +121,7 @@ func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i 
 	switch t := t.(type) {
 	case *schema.Primitive:
 	case *schema.Struct:
-		i = walkStructs(t.Name, byname, structs, i)
+		i = walkStructs(t.Typename(), byname, structs, i)
 	case *schema.Interface:
 		i = walkStructs(t.Name, byname, structs, i)
 	case *schema.Variant:
@@ -137,6 +156,7 @@ func (m *Module) finaliseStructs() {
 	names := make(sort.StringSlice, len(m.Structs))
 	byname := make(map[string]*sortEntry, len(m.Structs))
 	for i, s := range m.Structs {
+		s.UpdateID()
 		names[i] = s.Name
 		byname[s.Name] = &sortEntry{s, false}
 	}

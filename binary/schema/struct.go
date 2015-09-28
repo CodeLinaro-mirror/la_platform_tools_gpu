@@ -22,20 +22,27 @@ import (
 
 // Struct is the Type descriptor for an binary.Object typed value.
 type Struct struct {
-	Name string    // The simple name of the type.
-	ID   binary.ID // The unique type identifier for the Object.
+	Relative string  // The relative name of the type.
+	Entity   *Entity // The schema entity this is a field of.
+}
+
+func (s *Struct) Name() string {
+	return s.Typename()
 }
 
 func (s *Struct) Basename() string {
-	return s.Name
+	return s.Entity.Name
 }
 
 func (s *Struct) Typename() string {
-	return s.Name
+	if s.Relative != "" {
+		return s.Relative
+	}
+	return s.Entity.Name
 }
 
 func (s *Struct) String() string {
-	return s.Name
+	return s.Entity.Name
 }
 
 func (s *Struct) Encode(e binary.Encoder, value interface{}) {
@@ -43,9 +50,9 @@ func (s *Struct) Encode(e binary.Encoder, value interface{}) {
 }
 
 func (s *Struct) Decode(d binary.Decoder) interface{} {
-	class := d.Lookup(s.ID)
+	class := d.Lookup(s.Entity.ID())
 	if class == nil {
-		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.ID, s))
+		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity.ID(), s))
 	}
 	o := class.New()
 	if o == nil {
