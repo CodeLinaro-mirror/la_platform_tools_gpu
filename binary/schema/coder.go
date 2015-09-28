@@ -50,7 +50,7 @@ const (
 	MapTag
 )
 
-func encodeType(e binary.Encoder, t Type) {
+func EncodeType(e binary.Encoder, t Type) {
 	switch t := t.(type) {
 	case *Primitive:
 		e.Uint8(uint8(PrimitiveTag))
@@ -61,7 +61,7 @@ func encodeType(e binary.Encoder, t Type) {
 		e.ID(t.Entity.ID())
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
-		encodeType(e, t.Type)
+		EncodeType(e, t.Type)
 	case *Interface:
 		e.Uint8(uint8(InterfaceTag))
 		e.String(t.Name)
@@ -73,23 +73,23 @@ func encodeType(e binary.Encoder, t Type) {
 	case *Slice:
 		e.Uint8(uint8(SliceTag))
 		e.String(t.Alias)
-		encodeType(e, t.ValueType)
+		EncodeType(e, t.ValueType)
 	case *Array:
 		e.Uint8(uint8(ArrayTag))
 		e.String(t.Alias)
 		e.Uint32(t.Size)
-		encodeType(e, t.ValueType)
+		EncodeType(e, t.ValueType)
 	case *Map:
 		e.Uint8(uint8(MapTag))
 		e.String(t.Alias)
-		encodeType(e, t.KeyType)
-		encodeType(e, t.ValueType)
+		EncodeType(e, t.KeyType)
+		EncodeType(e, t.ValueType)
 	default:
 		panic(fmt.Errorf("Encode unknown type %T", t))
 	}
 }
 
-func decodeType(d binary.Decoder) Type {
+func DecodeType(d binary.Decoder) Type {
 	tag := TypeTag(d.Uint8())
 	switch tag {
 	case PrimitiveTag:
@@ -103,7 +103,7 @@ func decodeType(d binary.Decoder) Type {
 		return t
 	case PointerTag:
 		t := &Pointer{}
-		t.Type = decodeType(d)
+		t.Type = DecodeType(d)
 		return t
 	case InterfaceTag:
 		t := &Interface{}
@@ -118,26 +118,26 @@ func decodeType(d binary.Decoder) Type {
 	case SliceTag:
 		t := &Slice{}
 		t.Alias = d.String()
-		t.ValueType = decodeType(d)
+		t.ValueType = DecodeType(d)
 		return t
 	case ArrayTag:
 		t := &Array{}
 		t.Alias = d.String()
 		t.Size = d.Uint32()
-		t.ValueType = decodeType(d)
+		t.ValueType = DecodeType(d)
 		return t
 	case MapTag:
 		t := &Map{}
 		t.Alias = d.String()
-		t.KeyType = decodeType(d)
-		t.ValueType = decodeType(d)
+		t.KeyType = DecodeType(d)
+		t.ValueType = DecodeType(d)
 		return t
 	default:
 		panic(fmt.Errorf("Decode unknown type %v", tag))
 	}
 }
 
-func encodeClass(e binary.Encoder, c *Entity) {
+func (c *Entity) EncodeEntity(e binary.Encoder) {
 	e.ID(c.TypeID)
 	e.String(c.Package)
 	e.String(c.Name)
@@ -147,7 +147,7 @@ func encodeClass(e binary.Encoder, c *Entity) {
 	e.Uint32(uint32(len(c.Fields)))
 	for _, f := range c.Fields {
 		e.String(f.Declared)
-		encodeType(e, f.Type)
+		EncodeType(e, f.Type)
 	}
 	e.Uint32(uint32(len(c.Metadata)))
 	for _, m := range c.Metadata {
@@ -155,7 +155,7 @@ func encodeClass(e binary.Encoder, c *Entity) {
 	}
 }
 
-func decodeClass(d binary.Decoder, c *Entity) {
+func (c *Entity) DecodeEntity(d binary.Decoder) {
 	c.TypeID = d.ID()
 	c.Package = d.String()
 	c.Name = d.String()
@@ -165,7 +165,7 @@ func decodeClass(d binary.Decoder, c *Entity) {
 	c.Fields = make(FieldList, d.Uint32())
 	for i := range c.Fields {
 		c.Fields[i].Declared = d.String()
-		c.Fields[i].Type = decodeType(d)
+		c.Fields[i].Type = DecodeType(d)
 	}
 	c.Metadata = make([]binary.Object, d.Uint32())
 	for i := range c.Metadata {
@@ -174,7 +174,7 @@ func decodeClass(d binary.Decoder, c *Entity) {
 }
 
 func encodeConstants(e binary.Encoder, c *ConstantSet) {
-	encodeType(e, c.Type)
+	EncodeType(e, c.Type)
 	e.Uint32(uint32(len(c.Entries)))
 	for _, entry := range c.Entries {
 		e.String(entry.Name)
@@ -183,7 +183,7 @@ func encodeConstants(e binary.Encoder, c *ConstantSet) {
 }
 
 func decodeConstants(d binary.Decoder, c *ConstantSet) {
-	c.Type = decodeType(d)
+	c.Type = DecodeType(d)
 	c.Entries = make([]Constant, d.Uint32())
 	for i := range c.Entries {
 		c.Entries[i].Name = d.String()
@@ -197,15 +197,15 @@ func (*Entity) Class() binary.Class          { return (*binaryClassClass)(nil) }
 func (*binaryClassClass) ID() binary.ID      { return binaryIDClass }
 func (*binaryClassClass) New() binary.Object { return &Entity{} }
 func (*binaryClassClass) Encode(e binary.Encoder, obj binary.Object) {
-	encodeClass(e, obj.(*Entity))
+	obj.(*Entity).EncodeEntity(e)
 }
 func (*binaryClassClass) Decode(d binary.Decoder) binary.Object {
 	c := &Entity{}
-	decodeClass(d, c)
+	c.DecodeEntity(d)
 	return c
 }
 func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) {
-	decodeClass(d, obj.(*Entity))
+	obj.(*Entity).DecodeEntity(d)
 }
 
 type binaryClassConstantSet struct{}

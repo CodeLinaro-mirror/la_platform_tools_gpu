@@ -15,8 +15,13 @@
 package generate
 
 import (
+	"bytes"
 	"fmt"
 	"io"
+
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 
 	"sort"
 )
@@ -33,10 +38,37 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))
+	one := &bytes.Buffer{}
+	all := &bytes.Buffer{}
+	allEnc := cyclic.Encoder(vle.Writer(all))
+	total := 0
+	largest := 0
 	for _, s := range structs {
+		one.Reset()
+		e := cyclic.Encoder(vle.Writer(one))
+		// pre-encode the field types, so we get an accurate measure
+		for _, f := range s.Fields {
+			schema.EncodeType(e, f.Type)
+		}
+		start := one.Len()
+		// now encode the schema itself and measure the difference
+		s.EncodeEntity(e)
+		s.EncodeEntity(allEnc)
+		size := one.Len() - start
+		total += size
+		if largest < size {
+			largest = size
+		}
 		fmt.Fprintln(w)
-		fmt.Fprintln(w, s.Name)
+		fmt.Fprintln(w, s.Name, ": size", size)
 		fmt.Fprintln(w, s.ID())
 		fmt.Fprintln(w, s.Signature())
 	}
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Schema stats:")
+	fmt.Fprintln(w, "Count:", len(structs))
+	fmt.Fprintln(w, "All:", all.Len())
+	fmt.Fprintln(w, "Total:", total)
+	fmt.Fprintln(w, "Average:", total/len(structs))
+	fmt.Fprintln(w, "Largest:", largest)
 }
