@@ -3742,12 +3742,12 @@ func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	GetContext_469_result := context // Contextʳ
 	ctx := GetContext_469_result     // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(BindVertexArray_468_array)) {
-		array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-		for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+		array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+		for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 			array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 		}
 		for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 		}
 		NewVertexArray_471_result := array // VertexArrayʳ
 		ctx.Instances.VertexArrays[BindVertexArray_468_array] = NewVertexArray_471_result
@@ -12157,15 +12157,15 @@ func (ϟa *GlVertexAttribDivisorANGLE) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	}
 	GetContext_1629_result := context                                                                                             // Contextʳ
 	ctx := GetContext_1629_result                                                                                                 // Contextʳ
-	binding_index := BindingIndex(VertexAttribDivisor_1628_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribDivisor_1628_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_1631_ctx := ctx                                                                                           // Contextʳ
 	VertexAttribBinding_1631_index := VertexAttribDivisor_1628_index                                                              // AttributeLocation
-	VertexAttribBinding_1631_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_1631_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_1632_condition := (VertexAttribBinding_1631_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_1632_condition {
 		return
 	}
-	glErrorInvalidValueIf_1633_condition := (VertexAttribBinding_1631_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_1633_condition := (VertexAttribBinding_1631_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_1633_condition {
 		return
 	}
@@ -12192,15 +12192,15 @@ func (ϟa *GlVertexAttribDivisorEXT) Mutate(ϟs *gfxapi.State, ϟd database.Data
 	}
 	GetContext_1636_result := context                                                                                             // Contextʳ
 	ctx := GetContext_1636_result                                                                                                 // Contextʳ
-	binding_index := BindingIndex(VertexAttribDivisor_1635_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribDivisor_1635_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_1638_ctx := ctx                                                                                           // Contextʳ
 	VertexAttribBinding_1638_index := VertexAttribDivisor_1635_index                                                              // AttributeLocation
-	VertexAttribBinding_1638_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_1638_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_1639_condition := (VertexAttribBinding_1638_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_1639_condition {
 		return
 	}
-	glErrorInvalidValueIf_1640_condition := (VertexAttribBinding_1638_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_1640_condition := (VertexAttribBinding_1638_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_1640_condition {
 		return
 	}
@@ -12227,15 +12227,15 @@ func (ϟa *GlVertexAttribDivisorNV) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	GetContext_1643_result := context                                                                                             // Contextʳ
 	ctx := GetContext_1643_result                                                                                                 // Contextʳ
-	binding_index := BindingIndex(VertexAttribDivisor_1642_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribDivisor_1642_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_1645_ctx := ctx                                                                                           // Contextʳ
 	VertexAttribBinding_1645_index := VertexAttribDivisor_1642_index                                                              // AttributeLocation
-	VertexAttribBinding_1645_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_1645_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_1646_condition := (VertexAttribBinding_1645_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_1646_condition {
 		return
 	}
-	glErrorInvalidValueIf_1647_condition := (VertexAttribBinding_1645_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_1647_condition := (VertexAttribBinding_1645_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_1647_condition {
 		return
 	}
@@ -29591,12 +29591,12 @@ func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	GetContext_4566_result := context // Contextʳ
 	ctx := GetContext_4566_result     // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(BindVertexArray_4565_array)) {
-		array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-		for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+		array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+		for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 			array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 		}
 		for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 		}
 		NewVertexArray_4568_result := array // VertexArrayʳ
 		ctx.Instances.VertexArrays[BindVertexArray_4565_array] = NewVertexArray_4568_result
@@ -29625,12 +29625,12 @@ func (ϟa *GlBindVertexBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	if glErrorInvalidOperationIf_4572_condition {
 		return
 	}
-	BindVertexBuffer_4573_ctx := ctx                                                                                                      // Contextʳ
-	BindVertexBuffer_4573_binding_index := ϟa.BindingIndex                                                                                // BindingIndex
-	BindVertexBuffer_4573_buffer := ϟa.Buffer                                                                                             // BufferId
-	BindVertexBuffer_4573_offset := ϟa.Offset                                                                                             // GLintptr
-	BindVertexBuffer_4573_stride := ϟa.Stride                                                                                             // GLsizei
-	glErrorInvalidValueIf_4574_condition := (BindVertexBuffer_4573_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	BindVertexBuffer_4573_ctx := ctx                                                                                                                  // Contextʳ
+	BindVertexBuffer_4573_binding_index := ϟa.BindingIndex                                                                                            // VertexBufferBindingIndex
+	BindVertexBuffer_4573_buffer := ϟa.Buffer                                                                                                         // BufferId
+	BindVertexBuffer_4573_offset := ϟa.Offset                                                                                                         // GLintptr
+	BindVertexBuffer_4573_stride := ϟa.Stride                                                                                                         // GLsizei
+	glErrorInvalidValueIf_4574_condition := (BindVertexBuffer_4573_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4574_condition {
 		return
 	}
@@ -30368,12 +30368,12 @@ func (ϟa *GlVertexAttribBinding) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	VertexAttribBinding_4669_ctx := ctx                                                                                           // Contextʳ
 	VertexAttribBinding_4669_index := ϟa.Index                                                                                    // AttributeLocation
-	VertexAttribBinding_4669_binding_index := ϟa.BindingIndex                                                                     // BindingIndex
+	VertexAttribBinding_4669_binding_index := ϟa.BindingIndex                                                                     // VertexBufferBindingIndex
 	glErrorInvalidValueIf_4670_condition := (VertexAttribBinding_4669_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_4670_condition {
 		return
 	}
-	glErrorInvalidValueIf_4671_condition := (VertexAttribBinding_4669_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_4671_condition := (VertexAttribBinding_4669_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4671_condition {
 		return
 	}
@@ -30399,15 +30399,15 @@ func (ϟa *GlVertexAttribDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	GetContext_4674_result := context                                                                                             // Contextʳ
 	ctx := GetContext_4674_result                                                                                                 // Contextʳ
-	binding_index := BindingIndex(VertexAttribDivisor_4673_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribDivisor_4673_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_4676_ctx := ctx                                                                                           // Contextʳ
 	VertexAttribBinding_4676_index := VertexAttribDivisor_4673_index                                                              // AttributeLocation
-	VertexAttribBinding_4676_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_4676_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_4677_condition := (VertexAttribBinding_4676_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_4677_condition {
 		return
 	}
-	glErrorInvalidValueIf_4678_condition := (VertexAttribBinding_4676_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_4678_condition := (VertexAttribBinding_4676_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4678_condition {
 		return
 	}
@@ -30806,15 +30806,15 @@ func (ϟa *GlVertexAttribIPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	}
 	format.RelativeOffset = VertexAttribFormat_4738_relativeOffset
 	format.Integer = VertexAttribFormat_4738_integer
-	binding_index := BindingIndex(VertexAttribPointer_4734_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribPointer_4734_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_4750_ctx := VertexAttribPointer_4734_ctx                                                                  // Contextʳ
 	VertexAttribBinding_4750_index := VertexAttribPointer_4734_index                                                              // AttributeLocation
-	VertexAttribBinding_4750_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_4750_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_4751_condition := (VertexAttribBinding_4750_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_4751_condition {
 		return
 	}
-	glErrorInvalidValueIf_4752_condition := (VertexAttribBinding_4750_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_4752_condition := (VertexAttribBinding_4750_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4752_condition {
 		return
 	}
@@ -30853,12 +30853,12 @@ func (ϟa *GlVertexAttribIPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	vao6.VertexAttributeArrays.Get(VertexAttribPointer_4734_index).Stride = VertexAttribPointer_4734_stride
 	vao6.VertexAttributeArrays.Get(VertexAttribPointer_4734_index).Pointer = VertexAttribPointer_4734_pointer
 	if ((VertexAttribPointer_4734_ctx.BoundVertexArray) == (VertexArrayId(uint32(0)))) && ((boundArrayBuffer) == (BufferId(uint32(0)))) {
-		BindVertexBuffer_4754_ctx := VertexAttribPointer_4734_ctx                                                                             // Contextʳ
-		BindVertexBuffer_4754_binding_index := binding_index                                                                                  // BindingIndex
-		BindVertexBuffer_4754_buffer := BufferId(uint32(0))                                                                                   // BufferId
-		BindVertexBuffer_4754_offset := GLintptr(int32(0))                                                                                    // GLintptr
-		BindVertexBuffer_4754_stride := effectiveStride                                                                                       // GLsizei
-		glErrorInvalidValueIf_4755_condition := (BindVertexBuffer_4754_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		BindVertexBuffer_4754_ctx := VertexAttribPointer_4734_ctx                                                                                         // Contextʳ
+		BindVertexBuffer_4754_binding_index := binding_index                                                                                              // VertexBufferBindingIndex
+		BindVertexBuffer_4754_buffer := BufferId(uint32(0))                                                                                               // BufferId
+		BindVertexBuffer_4754_offset := GLintptr(int32(0))                                                                                                // GLintptr
+		BindVertexBuffer_4754_stride := effectiveStride                                                                                                   // GLsizei
+		glErrorInvalidValueIf_4755_condition := (BindVertexBuffer_4754_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 		if glErrorInvalidValueIf_4755_condition {
 			return
 		}
@@ -30884,13 +30884,13 @@ func (ϟa *GlVertexAttribIPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		binding.Stride = BindVertexBuffer_4754_stride
 		_, _, _, _, _, _, _, _, _, _, _ = BindVertexBuffer_4754_ctx, BindVertexBuffer_4754_binding_index, BindVertexBuffer_4754_buffer, BindVertexBuffer_4754_offset, BindVertexBuffer_4754_stride, glErrorInvalidValueIf_4755_condition, glErrorInvalidValueIf_4756_condition, glErrorInvalidValueIf_4757_condition, glErrorInvalidValueIf_4758_condition, vao4, binding
 	} else {
-		offset := GLintptr(uint64(VertexAttribPointer_4734_pointer.Address))                                                                  // GLintptr
-		BindVertexBuffer_4759_ctx := VertexAttribPointer_4734_ctx                                                                             // Contextʳ
-		BindVertexBuffer_4759_binding_index := binding_index                                                                                  // BindingIndex
-		BindVertexBuffer_4759_buffer := boundArrayBuffer                                                                                      // BufferId
-		BindVertexBuffer_4759_offset := offset                                                                                                // GLintptr
-		BindVertexBuffer_4759_stride := effectiveStride                                                                                       // GLsizei
-		glErrorInvalidValueIf_4760_condition := (BindVertexBuffer_4759_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		offset := GLintptr(uint64(VertexAttribPointer_4734_pointer.Address))                                                                              // GLintptr
+		BindVertexBuffer_4759_ctx := VertexAttribPointer_4734_ctx                                                                                         // Contextʳ
+		BindVertexBuffer_4759_binding_index := binding_index                                                                                              // VertexBufferBindingIndex
+		BindVertexBuffer_4759_buffer := boundArrayBuffer                                                                                                  // BufferId
+		BindVertexBuffer_4759_offset := offset                                                                                                            // GLintptr
+		BindVertexBuffer_4759_stride := effectiveStride                                                                                                   // GLsizei
+		glErrorInvalidValueIf_4760_condition := (BindVertexBuffer_4759_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 		if glErrorInvalidValueIf_4760_condition {
 			return
 		}
@@ -31021,15 +31021,15 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	format.RelativeOffset = VertexAttribFormat_4771_relativeOffset
 	format.Integer = VertexAttribFormat_4771_integer
-	binding_index := BindingIndex(VertexAttribPointer_4767_index)                                                                 // BindingIndex
+	binding_index := VertexBufferBindingIndex(VertexAttribPointer_4767_index)                                                     // VertexBufferBindingIndex
 	VertexAttribBinding_4783_ctx := VertexAttribPointer_4767_ctx                                                                  // Contextʳ
 	VertexAttribBinding_4783_index := VertexAttribPointer_4767_index                                                              // AttributeLocation
-	VertexAttribBinding_4783_binding_index := binding_index                                                                       // BindingIndex
+	VertexAttribBinding_4783_binding_index := binding_index                                                                       // VertexBufferBindingIndex
 	glErrorInvalidValueIf_4784_condition := (VertexAttribBinding_4783_index) >= (AttributeLocation(Constants_MAX_VERTEX_ATTRIBS)) // bool
 	if glErrorInvalidValueIf_4784_condition {
 		return
 	}
-	glErrorInvalidValueIf_4785_condition := (VertexAttribBinding_4783_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	glErrorInvalidValueIf_4785_condition := (VertexAttribBinding_4783_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4785_condition {
 		return
 	}
@@ -31068,12 +31068,12 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	vao6.VertexAttributeArrays.Get(VertexAttribPointer_4767_index).Stride = VertexAttribPointer_4767_stride
 	vao6.VertexAttributeArrays.Get(VertexAttribPointer_4767_index).Pointer = VertexAttribPointer_4767_pointer
 	if ((VertexAttribPointer_4767_ctx.BoundVertexArray) == (VertexArrayId(uint32(0)))) && ((boundArrayBuffer) == (BufferId(uint32(0)))) {
-		BindVertexBuffer_4787_ctx := VertexAttribPointer_4767_ctx                                                                             // Contextʳ
-		BindVertexBuffer_4787_binding_index := binding_index                                                                                  // BindingIndex
-		BindVertexBuffer_4787_buffer := BufferId(uint32(0))                                                                                   // BufferId
-		BindVertexBuffer_4787_offset := GLintptr(int32(0))                                                                                    // GLintptr
-		BindVertexBuffer_4787_stride := effectiveStride                                                                                       // GLsizei
-		glErrorInvalidValueIf_4788_condition := (BindVertexBuffer_4787_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		BindVertexBuffer_4787_ctx := VertexAttribPointer_4767_ctx                                                                                         // Contextʳ
+		BindVertexBuffer_4787_binding_index := binding_index                                                                                              // VertexBufferBindingIndex
+		BindVertexBuffer_4787_buffer := BufferId(uint32(0))                                                                                               // BufferId
+		BindVertexBuffer_4787_offset := GLintptr(int32(0))                                                                                                // GLintptr
+		BindVertexBuffer_4787_stride := effectiveStride                                                                                                   // GLsizei
+		glErrorInvalidValueIf_4788_condition := (BindVertexBuffer_4787_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 		if glErrorInvalidValueIf_4788_condition {
 			return
 		}
@@ -31099,13 +31099,13 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 		binding.Stride = BindVertexBuffer_4787_stride
 		_, _, _, _, _, _, _, _, _, _, _ = BindVertexBuffer_4787_ctx, BindVertexBuffer_4787_binding_index, BindVertexBuffer_4787_buffer, BindVertexBuffer_4787_offset, BindVertexBuffer_4787_stride, glErrorInvalidValueIf_4788_condition, glErrorInvalidValueIf_4789_condition, glErrorInvalidValueIf_4790_condition, glErrorInvalidValueIf_4791_condition, vao4, binding
 	} else {
-		offset := GLintptr(uint64(VertexAttribPointer_4767_pointer.Address))                                                                  // GLintptr
-		BindVertexBuffer_4792_ctx := VertexAttribPointer_4767_ctx                                                                             // Contextʳ
-		BindVertexBuffer_4792_binding_index := binding_index                                                                                  // BindingIndex
-		BindVertexBuffer_4792_buffer := boundArrayBuffer                                                                                      // BufferId
-		BindVertexBuffer_4792_offset := offset                                                                                                // GLintptr
-		BindVertexBuffer_4792_stride := effectiveStride                                                                                       // GLsizei
-		glErrorInvalidValueIf_4793_condition := (BindVertexBuffer_4792_binding_index) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+		offset := GLintptr(uint64(VertexAttribPointer_4767_pointer.Address))                                                                              // GLintptr
+		BindVertexBuffer_4792_ctx := VertexAttribPointer_4767_ctx                                                                                         // Contextʳ
+		BindVertexBuffer_4792_binding_index := binding_index                                                                                              // VertexBufferBindingIndex
+		BindVertexBuffer_4792_buffer := boundArrayBuffer                                                                                                  // BufferId
+		BindVertexBuffer_4792_offset := offset                                                                                                            // GLintptr
+		BindVertexBuffer_4792_stride := effectiveStride                                                                                                   // GLsizei
+		glErrorInvalidValueIf_4793_condition := (BindVertexBuffer_4792_binding_index) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 		if glErrorInvalidValueIf_4793_condition {
 			return
 		}
@@ -31147,9 +31147,9 @@ func (ϟa *GlVertexBindingDivisor) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 		return
 		_ = error_4799_msg
 	}
-	GetContext_4798_result := context                                                                                 // Contextʳ
-	ctx := GetContext_4798_result                                                                                     // Contextʳ
-	glErrorInvalidValueIf_4800_condition := (ϟa.BindingIndex) >= (BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
+	GetContext_4798_result := context                                                                                             // Contextʳ
+	ctx := GetContext_4798_result                                                                                                 // Contextʳ
+	glErrorInvalidValueIf_4800_condition := (ϟa.BindingIndex) >= (VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS)) // bool
 	if glErrorInvalidValueIf_4800_condition {
 		return
 	}
@@ -31207,12 +31207,12 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4803_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4803_result
@@ -31289,12 +31289,12 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4806_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4806_result
@@ -31343,12 +31343,12 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4808_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4808_result
@@ -31435,12 +31435,12 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4812_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4812_result
@@ -31489,12 +31489,12 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4814_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4814_result
@@ -31561,12 +31561,12 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = GLuint(uint32(4294967295))
 	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = GLint(int32(4))
 	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = GLint(int32(4))
-	array := &VertexArray{VertexBufferBindings: BindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
-	for i := BindingIndex(BindingIndex(uint32(0))); i < BindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
+	array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+	for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < VertexBufferBindingIndex(Constants_MAX_VERTEX_ATTRIB_BINDINGS); i++ {
 		array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
 	}
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < AttributeLocation(Constants_MAX_VERTEX_ATTRIBS); i++ {
-		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: BindingIndex(i)}
+		array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
 	}
 	NewVertexArray_4817_result := array // VertexArrayʳ
 	ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_4817_result

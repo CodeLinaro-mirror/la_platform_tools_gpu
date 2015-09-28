@@ -5751,7 +5751,7 @@ typedef GLuint BufferBindingIndex;
 
 typedef GLuint DrawBufferIndex;
 
-typedef GLuint BindingIndex;
+typedef GLuint VertexBufferBindingIndex;
 
 typedef GLuint AttributeLocation;
 
@@ -5918,7 +5918,7 @@ struct VertexAttributeArray {
           mBinding(0) {}
     inline VertexAttributeArray(bool Enabled, GLint Size, uint32_t Type, GLboolean Normalized,
                                 GLsizei Stride, VertexPointer Pointer, GLuint RelativeOffset,
-                                bool Integer, BindingIndex Binding)
+                                bool Integer, VertexBufferBindingIndex Binding)
         : mEnabled(Enabled),
           mSize(Size),
           mType(Type),
@@ -5937,7 +5937,7 @@ struct VertexAttributeArray {
     VertexPointer mPointer;
     GLuint mRelativeOffset;
     bool mInteger;
-    BindingIndex mBinding;
+    VertexBufferBindingIndex mBinding;
 };
 
 typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>
@@ -5952,21 +5952,6 @@ struct VertexAttributeValue {
 
 typedef std::unordered_map<AttributeLocation, VertexAttributeValue>
         AttributeLocationToVertexAttributeValue;
-
-struct VertexBufferBinding {
-    inline VertexBufferBinding()
-        : mBuffer(0), mOffset((GLintptr)(0)), mStride((GLsizei)(16)), mDivisor((GLuint)(0)) {}
-    inline VertexBufferBinding(BufferId Buffer, GLintptr Offset, GLsizei Stride, GLuint Divisor)
-        : mBuffer(Buffer), mOffset(Offset), mStride(Stride), mDivisor(Divisor) {}
-
-    BufferId mBuffer;
-    GLintptr mOffset;
-    GLsizei mStride;
-    GLuint mDivisor;
-};
-
-typedef std::unordered_map<BindingIndex, std::shared_ptr<VertexBufferBinding>>
-        BindingIndexToVertexBufferBinding__R;
 
 struct Buffer {
     inline Buffer()
@@ -6376,16 +6361,31 @@ struct Program {
 
 typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramIdToProgram__R;
 
+struct VertexBufferBinding {
+    inline VertexBufferBinding()
+        : mBuffer(0), mOffset((GLintptr)(0)), mStride((GLsizei)(16)), mDivisor((GLuint)(0)) {}
+    inline VertexBufferBinding(BufferId Buffer, GLintptr Offset, GLsizei Stride, GLuint Divisor)
+        : mBuffer(Buffer), mOffset(Offset), mStride(Stride), mDivisor(Divisor) {}
+
+    BufferId mBuffer;
+    GLintptr mOffset;
+    GLsizei mStride;
+    GLuint mDivisor;
+};
+
+typedef std::unordered_map<VertexBufferBindingIndex, std::shared_ptr<VertexBufferBinding>>
+        VertexBufferBindingIndexToVertexBufferBinding__R;
+
 struct VertexArray {
     inline VertexArray()
-        : mVertexBufferBindings(BindingIndexToVertexBufferBinding__R()),
+        : mVertexBufferBindings(VertexBufferBindingIndexToVertexBufferBinding__R()),
           mVertexAttributeArrays(AttributeLocationToVertexAttributeArray__R()) {}
-    inline VertexArray(BindingIndexToVertexBufferBinding__R VertexBufferBindings,
+    inline VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R VertexBufferBindings,
                        AttributeLocationToVertexAttributeArray__R VertexAttributeArrays)
         : mVertexBufferBindings(VertexBufferBindings),
           mVertexAttributeArrays(VertexAttributeArrays) {}
 
-    BindingIndexToVertexBufferBinding__R mVertexBufferBindings;
+    VertexBufferBindingIndexToVertexBufferBinding__R mVertexBufferBindings;
     AttributeLocationToVertexAttributeArray__R mVertexAttributeArrays;
 };
 

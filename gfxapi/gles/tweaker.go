@@ -144,7 +144,7 @@ func (t *tweaker) bindOrSaveVertexArray(version *Version, newArray VertexArrayId
 			location := location
 			vao := t.ctx.Instances.VertexArrays[t.ctx.BoundVertexArray]
 			origVertexAttrib := *(vao.VertexAttributeArrays[location])
-			origVertexBinding := *(vao.VertexBufferBindings[BindingIndex(location)])
+			origVertexBinding := *(vao.VertexBufferBindings[VertexBufferBindingIndex(location)])
 			t.undo = append(t.undo, func() {
 				t.out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexBinding.Buffer))
 				if origVertexAttrib.Enabled {

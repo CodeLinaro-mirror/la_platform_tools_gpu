@@ -20,7 +20,7 @@ import (
 
 type BufferBindingIndex GLuint
 type DrawBufferIndex GLuint
-type BindingIndex GLuint
+type VertexBufferBindingIndex GLuint
 type AttributeLocation GLuint
 type Vec2i GLintː2ᵃ
 type Vec3i GLintː3ᵃ
@@ -14098,26 +14098,6 @@ func (m AttributeLocationːVertexAttributeValueᵐ) Range() []VertexAttributeVal
 	return values
 }
 
-type BindingIndexːVertexBufferBindingʳᵐ map[BindingIndex](*VertexBufferBinding)
-
-func (m BindingIndexːVertexBufferBindingʳᵐ) Get(key BindingIndex) *VertexBufferBinding {
-	return m[key]
-}
-func (m BindingIndexːVertexBufferBindingʳᵐ) Contains(key BindingIndex) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m BindingIndexːVertexBufferBindingʳᵐ) Delete(key BindingIndex) {
-	delete(m, key)
-}
-func (m BindingIndexːVertexBufferBindingʳᵐ) Range() [](*VertexBufferBinding) {
-	values := make([](*VertexBufferBinding), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
 type BufferIdːBufferʳᵐ map[BufferId](*Buffer)
 
 func (m BufferIdːBufferʳᵐ) Get(key BufferId) *Buffer {
@@ -14696,6 +14676,26 @@ func (m VertexArrayIdːVertexArrayʳᵐ) Delete(key VertexArrayId) {
 }
 func (m VertexArrayIdːVertexArrayʳᵐ) Range() [](*VertexArray) {
 	values := make([](*VertexArray), 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type VertexBufferBindingIndexːVertexBufferBindingʳᵐ map[VertexBufferBindingIndex](*VertexBufferBinding)
+
+func (m VertexBufferBindingIndexːVertexBufferBindingʳᵐ) Get(key VertexBufferBindingIndex) *VertexBufferBinding {
+	return m[key]
+}
+func (m VertexBufferBindingIndexːVertexBufferBindingʳᵐ) Contains(key VertexBufferBindingIndex) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m VertexBufferBindingIndexːVertexBufferBindingʳᵐ) Delete(key VertexBufferBindingIndex) {
+	delete(m, key)
+}
+func (m VertexBufferBindingIndexːVertexBufferBindingʳᵐ) Range() [](*VertexBufferBinding) {
+	values := make([](*VertexBufferBinding), 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -38765,7 +38765,7 @@ func (a *GlBindVertexArray) Observations() *atom.Observations { return &a.observ
 type GlBindVertexBuffer struct {
 	binary.Generate
 	observations atom.Observations
-	BindingIndex BindingIndex
+	BindingIndex VertexBufferBindingIndex
 	Buffer       BufferId
 	Offset       GLintptr
 	Stride       GLsizei
@@ -39404,7 +39404,7 @@ type GlVertexAttribBinding struct {
 	binary.Generate
 	observations atom.Observations
 	Index        AttributeLocation
-	BindingIndex BindingIndex
+	BindingIndex VertexBufferBindingIndex
 }
 
 func (a *GlVertexAttribBinding) String() string {
@@ -39751,7 +39751,7 @@ func (a *GlVertexAttribPointer) Observations() *atom.Observations { return &a.ob
 type GlVertexBindingDivisor struct {
 	binary.Generate
 	observations atom.Observations
-	BindingIndex BindingIndex
+	BindingIndex VertexBufferBindingIndex
 	Divisor      GLuint
 }
 
@@ -40817,7 +40817,7 @@ func (a *FlushPostBuffer) Observations() *atom.Observations { return &a.observat
 ////////////////////////////////////////////////////////////////////////////////
 type VertexArray struct {
 	binary.Generate
-	VertexBufferBindings  BindingIndexːVertexBufferBindingʳᵐ
+	VertexBufferBindings  VertexBufferBindingIndexːVertexBufferBindingʳᵐ
 	VertexAttributeArrays AttributeLocationːVertexAttributeArrayʳᵐ
 }
 
@@ -40845,7 +40845,7 @@ type VertexAttributeArray struct {
 	Pointer        VertexPointer
 	RelativeOffset GLuint
 	Integer        bool
-	Binding        BindingIndex
+	Binding        VertexBufferBindingIndex
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48995,7 +48995,7 @@ func NewGlTransformFeedbackVaryings(Program ProgramId, Count GLsizei, Varyings m
 func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray {
 	return &GlBindVertexArray{Array: Array}
 }
-func NewGlBindVertexBuffer(Binding_index BindingIndex, Buffer BufferId, Offset GLintptr, Stride GLsizei) *GlBindVertexBuffer {
+func NewGlBindVertexBuffer(Binding_index VertexBufferBindingIndex, Buffer BufferId, Offset GLintptr, Stride GLsizei) *GlBindVertexBuffer {
 	return &GlBindVertexBuffer{BindingIndex: Binding_index, Buffer: Buffer, Offset: Offset, Stride: Stride}
 }
 func NewGlDeleteVertexArrays(Count GLsizei, Arrays memory.Pointer) *GlDeleteVertexArrays {
@@ -49052,7 +49052,7 @@ func NewGlVertexAttrib4f(Location AttributeLocation, Value0 GLfloat, Value1 GLfl
 func NewGlVertexAttrib4fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib4fv {
 	return &GlVertexAttrib4fv{Location: Location, Value: GLfloatᶜᵖ{Pointer: Value}}
 }
-func NewGlVertexAttribBinding(Index AttributeLocation, Binding_index BindingIndex) *GlVertexAttribBinding {
+func NewGlVertexAttribBinding(Index AttributeLocation, Binding_index VertexBufferBindingIndex) *GlVertexAttribBinding {
 	return &GlVertexAttribBinding{Index: Index, BindingIndex: Binding_index}
 }
 func NewGlVertexAttribDivisor(Index AttributeLocation, Divisor GLuint) *GlVertexAttribDivisor {
@@ -49082,7 +49082,7 @@ func NewGlVertexAttribIPointer(Location AttributeLocation, Size GLint, Type GLen
 func NewGlVertexAttribPointer(Location AttributeLocation, Size GLint, Type GLenum, Normalized GLboolean, Stride GLsizei, Data memory.Pointer) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{Location: Location, Size: Size, Type: Type, Normalized: Normalized, Stride: Stride, Data: VertexPointer{Pointer: Data}}
 }
-func NewGlVertexBindingDivisor(Binding_index BindingIndex, Divisor GLuint) *GlVertexBindingDivisor {
+func NewGlVertexBindingDivisor(Binding_index VertexBufferBindingIndex, Divisor GLuint) *GlVertexBindingDivisor {
 	return &GlVertexBindingDivisor{BindingIndex: Binding_index, Divisor: Divisor}
 }
 func NewEglInitialize(Dpy memory.Pointer, Major memory.Pointer, Minor memory.Pointer, Result EGLBoolean) *EglInitialize {

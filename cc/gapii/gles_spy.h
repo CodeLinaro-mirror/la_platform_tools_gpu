@@ -7857,10 +7857,10 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
         std::shared_ptr<Context> l_ctx = l_GetContext_469_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(l_BindVertexArray_468_array) > 0)) {
             std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                    new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                    new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                     AttributeLocationToVertexAttributeArray__R()));
-            for (BindingIndex l_i = (BindingIndex)(0);
-                 l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+                 l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
                 l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                         new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
             }
@@ -7869,7 +7869,7 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
                 l_array->mVertexAttributeArrays[l_i] =
                         std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                                 false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                                nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                                nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
             }
             std::shared_ptr<VertexArray> l_NewVertexArray_471_result = l_array;
             l_ctx->mInstances.mVertexArrays[l_BindVertexArray_468_array] =
@@ -23276,10 +23276,11 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
         }
         std::shared_ptr<Context> l_GetContext_1629_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1629_result;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribDivisor_1628_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribDivisor_1628_index);
         std::shared_ptr<Context> l_VertexAttribBinding_1631_ctx = l_ctx;
         AttributeLocation l_VertexAttribBinding_1631_index = l_VertexAttribDivisor_1628_index;
-        BindingIndex l_VertexAttribBinding_1631_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_1631_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_1632_condition =
                 l_VertexAttribBinding_1631_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -23288,7 +23289,7 @@ inline void GlesSpy::glVertexAttribDivisorANGLE(uint32_t index, uint32_t divisor
         }
         bool l_glErrorInvalidValueIf_1633_condition =
                 l_VertexAttribBinding_1631_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_1633_condition) {
             break;
         }
@@ -23334,10 +23335,11 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
         }
         std::shared_ptr<Context> l_GetContext_1636_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1636_result;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribDivisor_1635_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribDivisor_1635_index);
         std::shared_ptr<Context> l_VertexAttribBinding_1638_ctx = l_ctx;
         AttributeLocation l_VertexAttribBinding_1638_index = l_VertexAttribDivisor_1635_index;
-        BindingIndex l_VertexAttribBinding_1638_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_1638_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_1639_condition =
                 l_VertexAttribBinding_1638_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -23346,7 +23348,7 @@ inline void GlesSpy::glVertexAttribDivisorEXT(uint32_t index, uint32_t divisor) 
         }
         bool l_glErrorInvalidValueIf_1640_condition =
                 l_VertexAttribBinding_1638_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_1640_condition) {
             break;
         }
@@ -23392,10 +23394,11 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
         }
         std::shared_ptr<Context> l_GetContext_1643_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_1643_result;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribDivisor_1642_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribDivisor_1642_index);
         std::shared_ptr<Context> l_VertexAttribBinding_1645_ctx = l_ctx;
         AttributeLocation l_VertexAttribBinding_1645_index = l_VertexAttribDivisor_1642_index;
-        BindingIndex l_VertexAttribBinding_1645_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_1645_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_1646_condition =
                 l_VertexAttribBinding_1645_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -23404,7 +23407,7 @@ inline void GlesSpy::glVertexAttribDivisorNV(uint32_t index, uint32_t divisor) {
         }
         bool l_glErrorInvalidValueIf_1647_condition =
                 l_VertexAttribBinding_1645_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_1647_condition) {
             break;
         }
@@ -49049,10 +49052,10 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
         std::shared_ptr<Context> l_ctx = l_GetContext_4566_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(l_BindVertexArray_4565_array) > 0)) {
             std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                    new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                    new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                     AttributeLocationToVertexAttributeArray__R()));
-            for (BindingIndex l_i = (BindingIndex)(0);
-                 l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+            for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+                 l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
                 l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                         new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
             }
@@ -49061,7 +49064,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
                 l_array->mVertexAttributeArrays[l_i] =
                         std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                                 false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                                nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                                nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
             }
             std::shared_ptr<VertexArray> l_NewVertexArray_4568_result = l_array;
             l_ctx->mInstances.mVertexArrays[l_BindVertexArray_4565_array] =
@@ -49108,13 +49111,13 @@ inline void GlesSpy::glBindVertexBuffer(uint32_t binding_index, uint32_t buffer,
             break;
         }
         std::shared_ptr<Context> l_BindVertexBuffer_4573_ctx = l_ctx;
-        BindingIndex l_BindVertexBuffer_4573_binding_index = binding_index;
+        VertexBufferBindingIndex l_BindVertexBuffer_4573_binding_index = binding_index;
         BufferId l_BindVertexBuffer_4573_buffer = buffer;
         GLintptr l_BindVertexBuffer_4573_offset = offset;
         GLsizei l_BindVertexBuffer_4573_stride = stride;
         bool l_glErrorInvalidValueIf_4574_condition =
                 l_BindVertexBuffer_4573_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4574_condition) {
             break;
         }
@@ -50063,7 +50066,7 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t index, uint32_t binding_inde
         }
         std::shared_ptr<Context> l_VertexAttribBinding_4669_ctx = l_ctx;
         AttributeLocation l_VertexAttribBinding_4669_index = index;
-        BindingIndex l_VertexAttribBinding_4669_binding_index = binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_4669_binding_index = binding_index;
         bool l_glErrorInvalidValueIf_4670_condition =
                 l_VertexAttribBinding_4669_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -50072,7 +50075,7 @@ inline void GlesSpy::glVertexAttribBinding(uint32_t index, uint32_t binding_inde
         }
         bool l_glErrorInvalidValueIf_4671_condition =
                 l_VertexAttribBinding_4669_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4671_condition) {
             break;
         }
@@ -50115,10 +50118,11 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
         }
         std::shared_ptr<Context> l_GetContext_4674_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_4674_result;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribDivisor_4673_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribDivisor_4673_index);
         std::shared_ptr<Context> l_VertexAttribBinding_4676_ctx = l_ctx;
         AttributeLocation l_VertexAttribBinding_4676_index = l_VertexAttribDivisor_4673_index;
-        BindingIndex l_VertexAttribBinding_4676_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_4676_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_4677_condition =
                 l_VertexAttribBinding_4676_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -50127,7 +50131,7 @@ inline void GlesSpy::glVertexAttribDivisor(uint32_t index, uint32_t divisor) {
         }
         bool l_glErrorInvalidValueIf_4678_condition =
                 l_VertexAttribBinding_4676_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4678_condition) {
             break;
         }
@@ -50720,10 +50724,11 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t location, int32_t size, uin
         }
         l_format->mRelativeOffset = l_VertexAttribFormat_4738_relativeOffset;
         l_format->mInteger = l_VertexAttribFormat_4738_integer;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribPointer_4734_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribPointer_4734_index);
         std::shared_ptr<Context> l_VertexAttribBinding_4750_ctx = l_VertexAttribPointer_4734_ctx;
         AttributeLocation l_VertexAttribBinding_4750_index = l_VertexAttribPointer_4734_index;
-        BindingIndex l_VertexAttribBinding_4750_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_4750_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_4751_condition =
                 l_VertexAttribBinding_4750_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -50732,7 +50737,7 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t location, int32_t size, uin
         }
         bool l_glErrorInvalidValueIf_4752_condition =
                 l_VertexAttribBinding_4750_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4752_condition) {
             break;
         }
@@ -50764,13 +50769,13 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t location, int32_t size, uin
         if (l_VertexAttribPointer_4734_ctx->mBoundVertexArray == (VertexArrayId)(0) &&
             l_boundArrayBuffer == (BufferId)(0)) {
             std::shared_ptr<Context> l_BindVertexBuffer_4754_ctx = l_VertexAttribPointer_4734_ctx;
-            BindingIndex l_BindVertexBuffer_4754_binding_index = l_binding_index;
+            VertexBufferBindingIndex l_BindVertexBuffer_4754_binding_index = l_binding_index;
             BufferId l_BindVertexBuffer_4754_buffer = (BufferId)(0);
             GLintptr l_BindVertexBuffer_4754_offset = (GLintptr)(0);
             GLsizei l_BindVertexBuffer_4754_stride = l_effectiveStride;
             bool l_glErrorInvalidValueIf_4755_condition =
                     l_BindVertexBuffer_4754_binding_index >=
-                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                    (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
             if (l_glErrorInvalidValueIf_4755_condition) {
                 break;
             }
@@ -50807,13 +50812,13 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t location, int32_t size, uin
         } else {
             GLintptr l_offset = (GLintptr)((uint64_t)(l_VertexAttribPointer_4734_pointer));
             std::shared_ptr<Context> l_BindVertexBuffer_4759_ctx = l_VertexAttribPointer_4734_ctx;
-            BindingIndex l_BindVertexBuffer_4759_binding_index = l_binding_index;
+            VertexBufferBindingIndex l_BindVertexBuffer_4759_binding_index = l_binding_index;
             BufferId l_BindVertexBuffer_4759_buffer = l_boundArrayBuffer;
             GLintptr l_BindVertexBuffer_4759_offset = l_offset;
             GLsizei l_BindVertexBuffer_4759_stride = l_effectiveStride;
             bool l_glErrorInvalidValueIf_4760_condition =
                     l_BindVertexBuffer_4759_binding_index >=
-                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                    (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
             if (l_glErrorInvalidValueIf_4760_condition) {
                 break;
             }
@@ -50998,10 +51003,11 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
         }
         l_format->mRelativeOffset = l_VertexAttribFormat_4771_relativeOffset;
         l_format->mInteger = l_VertexAttribFormat_4771_integer;
-        BindingIndex l_binding_index = (BindingIndex)(l_VertexAttribPointer_4767_index);
+        VertexBufferBindingIndex l_binding_index =
+                (VertexBufferBindingIndex)(l_VertexAttribPointer_4767_index);
         std::shared_ptr<Context> l_VertexAttribBinding_4783_ctx = l_VertexAttribPointer_4767_ctx;
         AttributeLocation l_VertexAttribBinding_4783_index = l_VertexAttribPointer_4767_index;
-        BindingIndex l_VertexAttribBinding_4783_binding_index = l_binding_index;
+        VertexBufferBindingIndex l_VertexAttribBinding_4783_binding_index = l_binding_index;
         bool l_glErrorInvalidValueIf_4784_condition =
                 l_VertexAttribBinding_4783_index >=
                 (AttributeLocation)(Constants::MAX_VERTEX_ATTRIBS);
@@ -51010,7 +51016,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
         }
         bool l_glErrorInvalidValueIf_4785_condition =
                 l_VertexAttribBinding_4783_binding_index >=
-                (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4785_condition) {
             break;
         }
@@ -51042,13 +51048,13 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
         if (l_VertexAttribPointer_4767_ctx->mBoundVertexArray == (VertexArrayId)(0) &&
             l_boundArrayBuffer == (BufferId)(0)) {
             std::shared_ptr<Context> l_BindVertexBuffer_4787_ctx = l_VertexAttribPointer_4767_ctx;
-            BindingIndex l_BindVertexBuffer_4787_binding_index = l_binding_index;
+            VertexBufferBindingIndex l_BindVertexBuffer_4787_binding_index = l_binding_index;
             BufferId l_BindVertexBuffer_4787_buffer = (BufferId)(0);
             GLintptr l_BindVertexBuffer_4787_offset = (GLintptr)(0);
             GLsizei l_BindVertexBuffer_4787_stride = l_effectiveStride;
             bool l_glErrorInvalidValueIf_4788_condition =
                     l_BindVertexBuffer_4787_binding_index >=
-                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                    (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
             if (l_glErrorInvalidValueIf_4788_condition) {
                 break;
             }
@@ -51085,13 +51091,13 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
         } else {
             GLintptr l_offset = (GLintptr)((uint64_t)(l_VertexAttribPointer_4767_pointer));
             std::shared_ptr<Context> l_BindVertexBuffer_4792_ctx = l_VertexAttribPointer_4767_ctx;
-            BindingIndex l_BindVertexBuffer_4792_binding_index = l_binding_index;
+            VertexBufferBindingIndex l_BindVertexBuffer_4792_binding_index = l_binding_index;
             BufferId l_BindVertexBuffer_4792_buffer = l_boundArrayBuffer;
             GLintptr l_BindVertexBuffer_4792_offset = l_offset;
             GLsizei l_BindVertexBuffer_4792_stride = l_effectiveStride;
             bool l_glErrorInvalidValueIf_4793_condition =
                     l_BindVertexBuffer_4792_binding_index >=
-                    (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                    (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
             if (l_glErrorInvalidValueIf_4793_condition) {
                 break;
             }
@@ -51162,7 +51168,7 @@ inline void GlesSpy::glVertexBindingDivisor(uint32_t binding_index, uint32_t div
         std::shared_ptr<Context> l_GetContext_4798_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_4798_result;
         bool l_glErrorInvalidValueIf_4800_condition =
-                binding_index >= (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
+                binding_index >= (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS);
         if (l_glErrorInvalidValueIf_4800_condition) {
             break;
         }
@@ -51285,10 +51291,10 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -51297,7 +51303,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4803_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4803_result;
@@ -51497,10 +51503,10 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -51509,7 +51515,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4806_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4806_result;
@@ -51609,10 +51615,10 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -51621,7 +51627,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4808_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4808_result;
@@ -51850,10 +51856,10 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -51862,7 +51868,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4812_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4812_result;
@@ -51956,10 +51962,10 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -51968,7 +51974,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4814_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4814_result;
@@ -52120,10 +52126,10 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
         std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(BindingIndexToVertexBufferBinding__R(),
+                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
                                 AttributeLocationToVertexAttributeArray__R()));
-        for (BindingIndex l_i = (BindingIndex)(0);
-             l_i < (BindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
+        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+             l_i < (VertexBufferBindingIndex)(Constants::MAX_VERTEX_ATTRIB_BINDINGS); ++l_i) {
             l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
                     new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
         }
@@ -52132,7 +52138,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
             l_array->mVertexAttributeArrays[l_i] =
                     std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
                             false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (BindingIndex)(l_i)));
+                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
         }
         std::shared_ptr<VertexArray> l_NewVertexArray_4817_result = l_array;
         l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4817_result;
