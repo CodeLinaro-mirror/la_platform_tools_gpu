@@ -247,37 +247,87 @@ inline int stateVariableSize(uint32_t v) {
     }
 }
 
-int imageSize(int width, int height, uint32_t format, uint32_t type) {
+int pixelSize(uint32_t format, uint32_t type) {
+    int num_components = 0;
     switch (format) {
-        // GLenum::GLES1
     case GLenum::GL_ALPHA:
-        return width * height;
+        num_components = 1;
+        break;
     case GLenum::GL_LUMINANCE:
-        return width * height;
+        num_components = 1;
+        break;
     case GLenum::GL_LUMINANCE_ALPHA:
-        return 2 * width * height;
-    case GLenum::GL_RGB:
-        return 3 * width * height;
-    case GLenum::GL_RGBA:
-        return 4 * width * height;
-            // GLenum::GLES3
+        num_components = 2;
+        break;
     case GLenum::GL_RED:
-        return width * height;
+        num_components = 1;
+        break;
     case GLenum::GL_RED_INTEGER:
-        return width * height;
+        num_components = 1;
+        break;
     case GLenum::GL_RG:
-        return width * height * 2;
+        num_components = 2;
+        break;
     case GLenum::GL_RG_INTEGER:
-        return width * height * 2;
+        num_components = 2;
+        break;
+    case GLenum::GL_RGB:
+        num_components = 3;
+        break;
     case GLenum::GL_RGB_INTEGER:
-        return width * height * 3;
+        num_components = 3;
+        break;
+    case GLenum::GL_RGBA:
+        num_components = 4;
+        break;
     case GLenum::GL_RGBA_INTEGER:
-        return width * height * 3;
+        num_components = 4;
+        break;
     case GLenum::GL_DEPTH_COMPONENT:
-        return width * height;
+        num_components = 1;
+        break;
     case GLenum::GL_DEPTH_STENCIL:
-        return width * height;
-    default:
-        return 0; // TODO: Assert?
+        num_components = 2;
+        break;
+    case GLenum::GL_STENCIL_INDEX:
+        num_components = 1;
+        break;
+    }
+
+    switch(type) {
+    case GLenum::GL_UNSIGNED_BYTE:
+        return num_components * 1;
+    case GLenum::GL_BYTE:
+        return num_components * 1;
+    case GLenum::GL_UNSIGNED_SHORT:
+        return num_components * 2;
+    case GLenum::GL_SHORT:
+        return num_components * 2;
+    case GLenum::GL_UNSIGNED_INT:
+        return num_components * 4;
+    case GLenum::GL_INT:
+        return num_components * 4;
+    case GLenum::GL_HALF_FLOAT:
+        return num_components * 2;
+    case GLenum::GL_HALF_FLOAT_OES:
+        return num_components * 2;
+    case GLenum::GL_FLOAT:
+        return num_components * 4;
+    case GLenum::GL_UNSIGNED_SHORT_5_6_5:
+        return 2;
+    case GLenum::GL_UNSIGNED_SHORT_4_4_4_4:
+        return 2;
+    case GLenum::GL_UNSIGNED_SHORT_5_5_5_1:
+        return 2;
+    case GLenum::GL_UNSIGNED_INT_2_10_10_10_REV:
+        return 4;
+    case GLenum::GL_UNSIGNED_INT_10F_11F_11F_REV:
+        return 4;
+    case GLenum::GL_UNSIGNED_INT_5_9_9_9_REV:
+        return 4;
+    case GLenum::GL_UNSIGNED_INT_24_8:
+        return 4;
+    case GLenum::GL_FLOAT_32_UNSIGNED_INT_24_8_REV:
+        return 8;
     }
 }

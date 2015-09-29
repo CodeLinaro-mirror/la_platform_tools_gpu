@@ -20,39 +20,79 @@ import (
 	"android.googlesource.com/platform/tools/gpu/image"
 )
 
-// imageSize returns the image pixel data size in bytes for the given
-// width, height, format and type.
-func imageSize(width, height uint32, f GLenum, ty GLenum) uint32 {
-	// TODO: Consider ty
-	switch f {
+// pixelSize returns the pixel data size in bytes for the given format and type.
+func pixelSize(format GLenum, ty GLenum) uint32 {
+	num_components := uint32(0)
+	switch format {
 	case GLenum_GL_ALPHA:
-		return width * height
+		num_components = 1
 	case GLenum_GL_LUMINANCE:
-		return width * height
+		num_components = 1
 	case GLenum_GL_LUMINANCE_ALPHA:
-		return 2 * width * height
-	case GLenum_GL_RGB:
-		return 3 * width * height
-	case GLenum_GL_RGBA:
-		return 4 * width * height
+		num_components = 2
 	case GLenum_GL_RED:
-		return width * height
+		num_components = 1
 	case GLenum_GL_RED_INTEGER:
-		return width * height
+		num_components = 1
 	case GLenum_GL_RG:
-		return width * height * 2
+		num_components = 2
 	case GLenum_GL_RG_INTEGER:
-		return width * height * 2
+		num_components = 2
+	case GLenum_GL_RGB:
+		num_components = 3
 	case GLenum_GL_RGB_INTEGER:
-		return width * height * 3
+		num_components = 3
+	case GLenum_GL_RGBA:
+		num_components = 4
 	case GLenum_GL_RGBA_INTEGER:
-		return width * height * 3
+		num_components = 4
 	case GLenum_GL_DEPTH_COMPONENT:
-		return width * height
+		num_components = 1
 	case GLenum_GL_DEPTH_STENCIL:
-		return width * height
+		num_components = 2
+	case GLenum_GL_STENCIL_INDEX:
+		num_components = 1
 	default:
-		panic(fmt.Errorf("Unsupported image format: %v", f))
+		panic(fmt.Errorf("Unsupported image format: %v", format))
+	}
+
+	switch ty {
+	case GLenum_GL_UNSIGNED_BYTE:
+		return num_components * 1
+	case GLenum_GL_BYTE:
+		return num_components * 1
+	case GLenum_GL_UNSIGNED_SHORT:
+		return num_components * 2
+	case GLenum_GL_SHORT:
+		return num_components * 2
+	case GLenum_GL_UNSIGNED_INT:
+		return num_components * 4
+	case GLenum_GL_INT:
+		return num_components * 4
+	case GLenum_GL_HALF_FLOAT:
+		return num_components * 2
+	case GLenum_GL_HALF_FLOAT_OES:
+		return num_components * 2
+	case GLenum_GL_FLOAT:
+		return num_components * 4
+	case GLenum_GL_UNSIGNED_SHORT_5_6_5:
+		return 2
+	case GLenum_GL_UNSIGNED_SHORT_4_4_4_4:
+		return 2
+	case GLenum_GL_UNSIGNED_SHORT_5_5_5_1:
+		return 2
+	case GLenum_GL_UNSIGNED_INT_2_10_10_10_REV:
+		return 4
+	case GLenum_GL_UNSIGNED_INT_10F_11F_11F_REV:
+		return 4
+	case GLenum_GL_UNSIGNED_INT_5_9_9_9_REV:
+		return 4
+	case GLenum_GL_UNSIGNED_INT_24_8:
+		return 4
+	case GLenum_GL_FLOAT_32_UNSIGNED_INT_24_8_REV:
+		return 8
+	default:
+		panic(fmt.Errorf("Unsupported image type: %v", ty))
 	}
 }
 

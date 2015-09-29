@@ -80,8 +80,8 @@ func (e externs) substr(str string, start, end int32) string {
 	return str[start:end]
 }
 
-func (e externs) imageSize(width, height uint32, f GLenum, ty GLenum) uint32 {
-	return imageSize(width, height, f, ty)
+func (e externs) pixelSize(f GLenum, ty GLenum) uint32 {
+	return pixelSize(f, ty)
 }
 
 func (e externs) stateVariableSize(v GLenum) int32 {
